@@ -1,7 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 
-public class UISampleWindowView : IWUIWindowView
+public class UISampleWindowView : UIGenericWindowView
 {
     [SerializeField] private RectTransform viewAnchor;
     
@@ -20,6 +20,7 @@ public class UISampleWindowView : IWUIWindowView
     public override void OnViewClose()
     {
         base.OnViewClose();
+
         
         UISampleWindowModel windowModel = Model as UISampleWindowModel;
         
