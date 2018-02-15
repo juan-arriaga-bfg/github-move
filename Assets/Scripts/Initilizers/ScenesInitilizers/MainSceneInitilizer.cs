@@ -23,7 +23,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         IWUIManager.Instance.OnUIInited += () =>
         {
             // close launcher
-            UIService.Get.CloseWindow(UIWindowType.LauncherWindow);
+            UIService.Get.CloseWindow(UIWindowType.LauncherWindow, true);
             
             // get model for window
             var model = UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow);
