@@ -1,0 +1,14 @@
+ManifestFileVersion: 0
+CRC: 2181449855
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: graphicscommon.fhd
+      Dependencies: {}
+    Info_1:
+      Name: scenescommon
+      Dependencies: {}
+    Info_2:
+      Name: res
+      Dependencies:
+        Dependency_0: graphicscommon.fhd
