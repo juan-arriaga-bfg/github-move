@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer>
@@ -34,14 +35,14 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
                 onComplete();
             }
 
-        };
-        
+            InitGameField();
 
-        // test object
-         GameObject testObject = ContentService.Instance.Manager.GetObjectByName(R.SampleCube) as GameObject;
-         if (testObject != null)
-         {
-            GameObject testObjectInstance = GameObject.Instantiate<GameObject>(testObject);
-         }
+        };
+    }
+
+    private void InitGameField()
+    {
+        var sandboxGameController = new GameObject().AddComponent<SandboxGameController>();
+        sandboxGameController.Run();
     }
 }
