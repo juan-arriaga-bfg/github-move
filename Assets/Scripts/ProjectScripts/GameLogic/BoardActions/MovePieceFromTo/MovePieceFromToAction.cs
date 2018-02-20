@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class MovePieceFromToAction : IBoardAction
+﻿public class MovePieceFromToAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -25,6 +21,12 @@ public class MovePieceFromToAction : IBoardAction
 
 		if (state == false)
 		{
+			var abortAnimation = new ResetPiecePositionAnimation
+			{
+				At = From
+			};
+			
+			gameBoardController.RendererContext.AddAnimationToQueue(abortAnimation);
 			
 			return false;
 		}

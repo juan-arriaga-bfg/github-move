@@ -159,9 +159,10 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.NeskinSoft.Sherwood
+    iOS: com.NeskinSoft.SherwoodDev
   buildNumber:
-    iOS: 11
-  AndroidBundleVersionCode: 11
+    iOS: 2
+  AndroidBundleVersionCode: 2
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -267,7 +268,7 @@ PlayerSettings:
   m_TemplateCustomTags: {}
   mobileMTRendering:
     Android: 1
-    iPhone: 1
+    iPhone: 0
     tvOS: 1
   m_BuildTargetGroupLightmapEncodingQuality: []
   wiiUTitleID: 0005000011000000

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Runtime.Remoting.Messaging;
+using UnityEngine;
 using UnityEngine.Profiling;
 using Lean.Touch;
 
@@ -96,15 +97,24 @@ public class BoardManipulatorComponent : ECSEntity, IECSSystem, ILockerComponent
 
     public bool OnDown(Vector2 startPos, Vector2 pos)
     {
-        BoardPosition boardPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
-
-        cachedViewForDrag = context.RendererContext.GetElementAt(new BoardPosition(boardPosition.X, boardPosition.Y, context.BoardDef.PieceLayer));
-
-        if (cachedViewForDrag != null)
+        if (cachedViewForDrag == null)
         {
-            cameraManipulator.CameraMove.Lock(this);
+            BoardPosition boardPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
+
+            cachedViewForDrag =
+                context.RendererContext.GetElementAt(new BoardPosition(boardPosition.X, boardPosition.Y,
+                    context.BoardDef.PieceLayer));
+
+            if (cachedViewForDrag != null)
+            {
+                cachedViewForDrag.SyncRendererLayers(new BoardPosition(context.BoardDef.Width, context.BoardDef.Height,
+                    context.BoardDef.Depth));
+                cameraManipulator.CameraMove.Lock(this);
+            }
+
+            return true;
         }
-        
+
         return false;
     }
 
@@ -125,6 +135,8 @@ public class BoardManipulatorComponent : ECSEntity, IECSSystem, ILockerComponent
             cachedViewForDrag = null;
 
             cameraManipulator.CameraMove.UnLock(this);
+
+            return true;
         }
 
         return false;

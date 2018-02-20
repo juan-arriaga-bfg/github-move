@@ -15,7 +15,7 @@ public class SpawnPieceAtAnimation : BoardAnimation
         boardElement.CachedTransform.localScale = Vector3.zero;
         
         var sequence = DOTween.Sequence().SetId(animationUid);
-        sequence.Append(boardElement.CachedTransform.DOScale(Vector3.one, 1f).SetEase(Ease.OutBack));
+        sequence.Append(boardElement.CachedTransform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack));
 
         sequence.OnComplete(() =>
         {
