@@ -87,6 +87,8 @@ public class BoardManipulatorComponent : ECSEntity, IECSSystem, ILockerComponent
     {
         if (cachedViewForDrag == null) return false;
 
+        if (LeanTouch.Fingers.Count > 1) return false;
+
         cachedViewForDrag.CachedTransform.position = new Vector3(pos.x, pos.y, cachedViewForDrag.CachedTransform.position.z);
         
         return true;

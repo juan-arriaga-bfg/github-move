@@ -235,7 +235,7 @@ public class BoardLogicComponent : IECSComponent
 
         if (fromPiece == null || toPiece != null) return false;
 
-        if (RemovePieceFromBoard(from) && AddPieceToBoard(to.X, to.Y, fromPiece))
+        if (AddPieceToBoard(to.X, to.Y, fromPiece) && RemovePieceFromBoard(from))
         {
             return true;
         }
