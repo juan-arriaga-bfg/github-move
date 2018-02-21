@@ -43,6 +43,11 @@
 		{
 			gameBoardController.BoardLogic.UnlockCell(From, this);
 			gameBoardController.BoardLogic.UnlockCell(To, this);
+			
+			gameBoardController.ActionExecutor.AddAction(new MatchPieceAtAction
+			{
+				At = To
+			});
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

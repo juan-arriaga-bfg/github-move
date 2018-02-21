@@ -79,7 +79,7 @@ public class BoardManipulatorComponent : ECSEntity, IECSSystem, ILockerComponent
             At = boardPosition,
             PieceTypeId = PieceType.A1.Id
         });
-
+        
         return true;
     }
 

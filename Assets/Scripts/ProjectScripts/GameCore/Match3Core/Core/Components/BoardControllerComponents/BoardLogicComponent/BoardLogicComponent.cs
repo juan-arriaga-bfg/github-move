@@ -141,11 +141,27 @@ public class BoardLogicComponent : ECSEntity,
         }
     }
 
+    public virtual void LockCells(List<BoardPosition> boardPositions, object locker)
+    {
+        for (int i = 0; i < boardPositions.Count; i++)
+        {
+            LockCell(boardPositions[i], locker);
+        }
+    }
+
     public virtual void LockCell(BoardPosition boardPosition, object locker)
     {
         if (IsPointValid(boardPosition) == false) return;
 
         boardCells[boardPosition.X, boardPosition.Y, boardPosition.Z].Lock(locker);
+    }
+    
+    public virtual void UnlockCells(List<BoardPosition> boardPositions, object locker)
+    {
+        for (int i = 0; i < boardPositions.Count; i++)
+        {
+            UnlockCell(boardPositions[i], locker);
+        }
     }
 
     public virtual void UnlockCell(BoardPosition boardPosition, object locker)
@@ -484,6 +500,18 @@ public class BoardLogicComponent : ECSEntity,
         }
 
         context.Logger.Log(st.ToString());
+    }
+
+    public virtual bool RemovePiecesAt(List<BoardPosition> positions)
+    {
+        var state = true;
+        
+        for (int i = 0; i < positions.Count; i++)
+        {
+            if (RemovePieceAt(positions[i]) == false) state = false;
+        }
+        
+        return state;
     }
 
     /// <summary>
