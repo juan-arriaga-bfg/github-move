@@ -29,8 +29,26 @@ public class SandboxGameController : MonoBehaviour
             ElementsResourcesDef = new Dictionary<int, string>
             {
                 {PieceType.Generic.Id, R.GenericPiece},
+                
                 {PieceType.A1.Id, R.A1Piece},
-
+                {PieceType.A2.Id, R.A2Piece},
+                {PieceType.A3.Id, R.A3Piece},
+                {PieceType.A4.Id, R.A4Piece},
+                {PieceType.A5.Id, R.A5Piece},
+                {PieceType.A6.Id, R.A6Piece},
+                {PieceType.A7.Id, R.A7Piece},
+                {PieceType.A8.Id, R.A8Piece},
+                {PieceType.A9.Id, R.A9Piece},
+                
+                {PieceType.B1.Id, R.B1Piece},
+                {PieceType.B2.Id, R.B2Piece},
+                {PieceType.B3.Id, R.B3Piece},
+                {PieceType.B4.Id, R.B4Piece},
+                {PieceType.B5.Id, R.B5Piece},
+                {PieceType.B6.Id, R.B6Piece},
+                {PieceType.B7.Id, R.B7Piece},
+                {PieceType.B8.Id, R.B8Piece},
+                {PieceType.B9.Id, R.B9Piece},
             }
         };
 
@@ -38,14 +56,34 @@ public class SandboxGameController : MonoBehaviour
         {
             {PieceType.Generic.Id, new GenericPieceBuilder()},
             {PieceType.Empty.Id, new EmptyPieceBuilder()},
+            
             {PieceType.A1.Id, new A1PieceBuilder()},
+            {PieceType.A2.Id, new A1PieceBuilder()},
+            {PieceType.A3.Id, new A1PieceBuilder()},
+            {PieceType.A4.Id, new A1PieceBuilder()},
+            {PieceType.A5.Id, new A1PieceBuilder()},
+            {PieceType.A6.Id, new A1PieceBuilder()},
+            {PieceType.A7.Id, new A1PieceBuilder()},
+            {PieceType.A8.Id, new A1PieceBuilder()},
+            {PieceType.A9.Id, new A1PieceBuilder()},
+            
+            {PieceType.B1.Id, new A1PieceBuilder()},
+            {PieceType.B2.Id, new A1PieceBuilder()},
+            {PieceType.B3.Id, new A1PieceBuilder()},
+            {PieceType.B4.Id, new A1PieceBuilder()},
+            {PieceType.B5.Id, new A1PieceBuilder()},
+            {PieceType.B6.Id, new A1PieceBuilder()},
+            {PieceType.B7.Id, new A1PieceBuilder()},
+            {PieceType.B8.Id, new A1PieceBuilder()},
+            {PieceType.B9.Id, new A1PieceBuilder()},
         };
 
         boardController.RegisterComponent(new ActionExecuteComponent()
             .RegisterComponent(new ActionHistoryComponent())); // action loop
         boardController.RegisterComponent(new BoardEventsComponent()); // external event system
         boardController.RegisterComponent(new BoardLoggerComponent()); // logger
-        boardController.RegisterComponent(new BoardLogicComponent()); // core logic
+        boardController.RegisterComponent(new BoardLogicComponent()
+            .RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build()))); // core logic
         boardController.RegisterComponent(new BoardRandomComponent()); // random
         boardController.RegisterComponent(new BoardRenderer().Init(gameBoardResourcesDef, gameBoardRendererView.transform)); // renderer context
         boardController.RegisterComponent(new BoardManipulatorComponent()

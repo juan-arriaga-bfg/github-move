@@ -2,11 +2,12 @@
 using UnityEngine;
 using System.Text;
 
-public class BoardLogicComponent : IECSComponent
+public class BoardLogicComponent : ECSEntity,
+    IMatchDefinitionComponent
 {
-    public static int ComponentGuid = ECSManager.GetNextGuid();
+    public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
-    public int Guid { get { return ComponentGuid; } }
+    public override int Guid { get { return ComponentGuid; } }
 
     protected BoardController context;
 
@@ -37,14 +38,26 @@ public class BoardLogicComponent : IECSComponent
     public virtual int CurrentOffsetY { get; set; }
 
     public virtual int Depth { get { return depth; } }
-
-
-    public void OnRegisterEntity(ECSEntity entity)
+    
+    protected MatchDefinitionComponent matchDefinition;
+    public MatchDefinitionComponent MatchDefinition
+    {
+        get
+        {
+            if (matchDefinition == null)
+            {
+                matchDefinition = GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
+            }
+            return matchDefinition;
+        }
+    }
+    
+    public override void OnRegisterEntity(ECSEntity entity)
     {
         this.context = entity as BoardController;
     }
 
-    public void OnUnRegisterEntity(ECSEntity entity) { }
+    public override void OnUnRegisterEntity(ECSEntity entity) { }
     
     public virtual int[,,] GetMatrix()
     {
@@ -722,6 +735,4 @@ public class BoardLogicComponent : IECSComponent
 
         return clasters;
     }
-    
-    
 }
