@@ -96,6 +96,46 @@ public struct BoardPosition : IEquatable<BoardPosition>
         return (this.X.Equals(other.X) && this.Y.Equals(other.Y) && this.Z.Equals(other.Z));
     }
 
+    public BoardPosition UpAtDistance(int distance)
+    {
+        return new BoardPosition(X, Y + distance, Z);
+    }
+
+    public BoardPosition DownAtDistance(int distance)
+    {
+        return new BoardPosition(X, Y - distance, Z);
+    }
+    
+    public BoardPosition LeftAtDistance(int distance)
+    {
+        return new BoardPosition(X - distance, Y, Z);
+    }
+    
+    public BoardPosition RightAtDistance(int distance)
+    {
+        return new BoardPosition(X + distance, Y, Z);
+    }
+    
+    public BoardPosition TopRightAtDistance(int distance)
+    {
+        return new BoardPosition(X + distance, Y + distance, Z);
+    }
+    
+    public BoardPosition BottomRightAtDistance(int distance)
+    {
+        return new BoardPosition(X + distance, Y - distance, Z);
+    }
+    
+    public BoardPosition TopLeftAtDistance(int distance)
+    {
+        return new BoardPosition(X - distance, Y + distance, Z);
+    }
+    
+    public BoardPosition BottomLeftAtDistance(int distance)
+    {
+        return new BoardPosition(X - distance, Y - distance, Z);
+    }
+
     [Newtonsoft.Json.JsonIgnore]
     public BoardPosition Up
     {

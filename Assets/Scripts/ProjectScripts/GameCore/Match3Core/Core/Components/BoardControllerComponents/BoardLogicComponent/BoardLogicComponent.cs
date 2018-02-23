@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Text;
 
 public class BoardLogicComponent : ECSEntity,
-    IMatchDefinitionComponent
+    IMatchDefinitionComponent, IFieldFinderComponent, IEmptyCellsFinderComponent, IMatchActionBuilderComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -52,6 +52,48 @@ public class BoardLogicComponent : ECSEntity,
         }
     }
     
+    protected FieldFinderComponent fieldFinder;
+    public FieldFinderComponent FieldFinder
+    {
+        get
+        {
+            if (fieldFinder == null)
+            {
+                fieldFinder = GetComponent<FieldFinderComponent>(FieldFinderComponent.ComponentGuid);
+            }
+
+            return fieldFinder;
+        }
+    }
+    
+    protected EmptyCellsFinderComponent emptyCellsFinder;
+    public EmptyCellsFinderComponent EmptyCellsFinder
+    {
+        get
+        {
+            if (emptyCellsFinder == null)
+            {
+                emptyCellsFinder = GetComponent<EmptyCellsFinderComponent>(EmptyCellsFinderComponent.ComponentGuid);
+            }
+
+            return emptyCellsFinder;
+        }
+    }
+    
+    protected MatchActionBuilderComponent matchActionBuilder;
+    public MatchActionBuilderComponent MatchActionBuilder
+    {
+        get
+        {
+            if (matchActionBuilder == null)
+            {
+                matchActionBuilder = GetComponent<MatchActionBuilderComponent>(MatchActionBuilderComponent.ComponentGuid);
+            }
+
+            return matchActionBuilder;
+        }
+    }
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
         this.context = entity as BoardController;
@@ -63,17 +105,55 @@ public class BoardLogicComponent : ECSEntity,
     {
         return logicMatrix;
     }
-
+    
+    public virtual bool IsPointValid(BoardPosition pos)
+    {
+        return IsPointValid(pos.X, pos.Y);
+    }
+    
     public virtual bool IsPointValid(int x, int y)
     {
-        int w = width;
-        int h = height;
-
-        if (x < 0 || x >= w || y < 0 || y >= h)
+        if (IsXValid(x) == false || IsYValid(y) == false)
         {
             return false;
         }
+        
+        return true;
+    }
 
+    public virtual bool IsXValid(int x, out int near)
+    {
+        near = Mathf.Clamp(x, 0, width - 1);
+        return IsXValid(x);
+    }
+    
+    public virtual bool IsXValid(int x)
+    {
+        int w = width;
+        
+        if (x < 0 || x >= w)
+        {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public virtual bool IsYValid(int y, out int near)
+    {
+        near = Mathf.Clamp(y, 0, width - 1);
+        return IsXValid(y);
+    }
+
+    public virtual bool IsYValid(int y)
+    {
+        int h = height;
+        
+        if (y < 0 || y >= h)
+        {
+            return false;
+        }
+        
         return true;
     }
 
@@ -109,12 +189,7 @@ public class BoardLogicComponent : ECSEntity,
 
         return point;
     }
-
-    public virtual bool IsPointValid(BoardPosition pos)
-    {
-        return IsPointValid(pos.X, pos.Y);
-    }
-
+    
     public virtual void Init(int width, int height, int depth)
     {
         this.width = width;

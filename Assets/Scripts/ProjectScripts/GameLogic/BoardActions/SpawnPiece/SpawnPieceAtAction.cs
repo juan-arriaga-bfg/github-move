@@ -39,7 +39,7 @@ public class SpawnPieceAtAction : IBoardAction
 		{
 			gameBoardController.BoardLogic.UnlockCell(At, this);
 			
-			gameBoardController.ActionExecutor.AddAction(new MatchPieceAtAction
+			gameBoardController.ActionExecutor.AddAction(new CheckMatchAction
 			{
 				At = At
 			});

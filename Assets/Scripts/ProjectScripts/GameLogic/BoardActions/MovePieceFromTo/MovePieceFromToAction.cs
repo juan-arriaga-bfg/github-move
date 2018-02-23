@@ -44,7 +44,7 @@
 			gameBoardController.BoardLogic.UnlockCell(From, this);
 			gameBoardController.BoardLogic.UnlockCell(To, this);
 			
-			gameBoardController.ActionExecutor.AddAction(new MatchPieceAtAction
+			gameBoardController.ActionExecutor.AddAction(new CheckMatchAction
 			{
 				At = To
 			});

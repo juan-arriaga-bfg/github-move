@@ -1,17 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 
-public class MatchPieceAtAnimation : BoardAnimation 
+public class CollapsePieceToAnimation : BoardAnimation
 {
-	public MatchPieceAtAction Action { get; set; }
-    
-
+	public CollapsePieceToAction Action { get; set; }
+	
 	public override void Animate(BoardRenderer context)
 	{
-		var points = Action.MatchField;
-		var to = context.Context.BoardDef.GetPiecePosition(Action.At.X, Action.At.Y);
+		var points = Action.Positions;
+		var to = context.Context.BoardDef.GetPiecePosition(Action.To.X, Action.To.Y);
 		
 		var sequence = DOTween.Sequence().SetId(animationUid);
 		

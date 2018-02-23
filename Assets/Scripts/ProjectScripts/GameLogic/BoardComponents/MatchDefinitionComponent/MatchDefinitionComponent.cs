@@ -1,49 +1,62 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
-public class MatchDefinitionComponent : IECSComponent
+public class MatchDefinitionComponent : ECSEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
-    public int Guid { get { return ComponentGuid; } }
+    public override int Guid { get { return ComponentGuid; } }
 
-    private Dictionary<int, int> definition;
+    private Dictionary<int, PieceMatchDef> definition;
     
-    public MatchDefinitionComponent(Dictionary<int, int> def)
+    public MatchDefinitionComponent(Dictionary<int, PieceMatchDef> def)
     {
         definition = def;
     }
-    
-    public int GetNext(int current)
+
+    public int GetPieceCountForMatch(int pieceId)
     {
-        int next;
+        PieceMatchDef def;
         
-        return definition.TryGetValue(current, out next) ? next : PieceType.None.Id;
+        return definition.TryGetValue(pieceId, out def) ? def.Count : -1;
+    }
+    
+    public int GetNext(int pieceId)
+    {
+        PieceMatchDef def;
+        
+        return definition.TryGetValue(pieceId, out def) ? def.Next : PieceType.None.Id;
     }
 
-    public List<int> GetChain(int current)
+    public int GetPrevious(int pieceId)
+    {
+        PieceMatchDef def;
+        
+        return definition.TryGetValue(pieceId, out def) ? def.Previous : PieceType.None.Id;
+    }
+
+    public List<int> GetChain(int pieceId)
     {
         var chain = new List<int>();
-        var next = (current / 100) * 100;
 
-        if (next == current) return new List<int> {current};
+        if (pieceId == PieceType.None.Id) return chain;
+        
+        var unit = pieceId;
         
         do
         {
-            chain.Add(next);
-            next = GetNext(next);
+            chain.Insert(0, unit);
+            unit = GetPrevious(unit);
         }
-        while (next != PieceType.None.Id);
+        while (unit != PieceType.None.Id);
         
-        chain.Add(current);
+        unit = GetNext(pieceId);
         
-        return chain[0] == PieceType.None.Id ? new List<int> {current} : chain;
+        while (unit != PieceType.None.Id)
+        {
+            chain.Add(unit);
+            unit = GetNext(unit);
+        }
+        
+        return chain;
     }
-    
-    public void OnRegisterEntity(ECSEntity entity)
-    {
-    }
-
-    public void OnUnRegisterEntity(ECSEntity entity) {}
 }
