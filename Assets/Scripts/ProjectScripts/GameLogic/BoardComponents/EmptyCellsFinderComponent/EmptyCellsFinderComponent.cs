@@ -1,20 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class EmptyCellsFinderComponent: ECSEntity
+public class EmptyCellsFinderComponent: IECSComponent
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-
-	public override int Guid { get { return ComponentGuid; } }
+	
+	public int Guid { get { return ComponentGuid; } }
 	
 	private BoardLogicComponent context;
 	
-	public override void OnRegisterEntity(ECSEntity entity)
+	public void OnRegisterEntity(ECSEntity entity)
 	{
 		this.context = entity as BoardLogicComponent;
 	}
-
+	
+	public void OnUnRegisterEntity(ECSEntity entity)
+	{
+	}
+	
 	public bool FindNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, int radius = 3)
 	{
 		for (int i = 0; i < radius; i++)

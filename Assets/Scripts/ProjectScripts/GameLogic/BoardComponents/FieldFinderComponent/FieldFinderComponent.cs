@@ -1,62 +1,74 @@
 ﻿using System.Collections.Generic;
 
-public class FieldFinderComponent : ECSEntity
+public class FieldFinderComponent : IECSComponent
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-
-	public override int Guid { get { return ComponentGuid; } }
 	
-	public bool Find(BoardController boardController, BoardPosition point, List<BoardPosition> field, out int current)
+	public int Guid
 	{
-		var logic = boardController.BoardLogic;
-		
+		get { return ComponentGuid; }
+	}
+	
+	private BoardLogicComponent context;
+	
+	public void OnRegisterEntity(ECSEntity entity)
+	{
+		this.context = entity as BoardLogicComponent;
+	}
+
+	public void OnUnRegisterEntity(ECSEntity entity)
+	{
+	}
+	
+	public bool Find(BoardPosition point, List<BoardPosition> field, out int current)
+	{
 		current = PieceType.None.Id;
 		
-		if (logic.IsLockedCell(point)) return false;
+		if (context.IsLockedCell(point)) return false;
 		
-		var piece = logic.GetPieceAt(point);
+		var piece = context.GetPieceAt(point);
 		
 		if (piece == null) return false;
 
 		current = piece.PieceType;
 		
-		field = FindField(boardController, piece.PieceType, point, field);
+		field = FindField(piece.PieceType, point, field);
 		
 		return true;
 	}
 	
-	private List<BoardPosition> FindField(BoardController boardController, int type, BoardPosition point, List<BoardPosition> field)
+	private List<BoardPosition> FindField(int type, BoardPosition point, List<BoardPosition> field)
 	{
-		if(field.Contains(point) || boardController.BoardLogic.IsLockedCell(point)) return field;
+		if(field.Contains(point) || context.IsLockedCell(point)) return field;
 		
 		field.Add(point);
 		
-		if (PieceIsCorrect(boardController, type, point.Left))
+		if (PieceIsCorrect(type, point.Left))
 		{
-			FindField(boardController, type, point.Left, field);
+			FindField(type, point.Left, field);
 		}
 		
-		if (PieceIsCorrect(boardController, type, point.Right))
+		if (PieceIsCorrect(type, point.Right))
 		{
-			FindField(boardController, type, point.Right, field);
+			FindField(type, point.Right, field);
 		}
 		
-		if (PieceIsCorrect(boardController, type, point.Up))
+		if (PieceIsCorrect(type, point.Up))
 		{
-			FindField(boardController, type, point.Up, field);
+			FindField(type, point.Up, field);
 		}
 		
-		if (PieceIsCorrect(boardController, type, point.Down))
+		if (PieceIsCorrect(type, point.Down))
 		{
-			FindField(boardController, type, point.Down, field);
+			FindField(type, point.Down, field);
 		}
 		
 		return field;
 	}
 
-	private bool PieceIsCorrect(BoardController gameBoardController, int type, BoardPosition point)
+	private bool PieceIsCorrect(int type, BoardPosition point)
 	{
-		var piece = gameBoardController.BoardLogic.GetPieceAt(point);
+		var piece = context.GetPieceAt(point);
 		
 		return piece != null && piece.PieceType == type;
 	}

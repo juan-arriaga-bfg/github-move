@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.Profiling;
 using Lean.Touch;
 
-public class BoardManipulatorComponent : ECSEntity, IECSSystem, ILockerComponent, ITouchRegionListener
+public class BoardManipulatorComponent : ECSEntity,
+    IECSSystem, ILockerComponent, ITouchRegionListener
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -35,8 +36,6 @@ public class BoardManipulatorComponent : ECSEntity, IECSSystem, ILockerComponent
     public void Execute()
     {
         if (Locker.IsLocked) return;
-
-        
     }
 
     public virtual LockerComponent Locker
@@ -44,7 +43,10 @@ public class BoardManipulatorComponent : ECSEntity, IECSSystem, ILockerComponent
         get
         {
             if (locker == null)
+            {
                 locker = GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
+            }
+            
             return locker;
         }
     }
@@ -54,6 +56,7 @@ public class BoardManipulatorComponent : ECSEntity, IECSSystem, ILockerComponent
         context = entity as BoardController;
 
         cameraManipulator = GameObject.FindObjectOfType<CameraManipulator>();
+        
         if (cameraManipulator != null)
         {
             cameraManipulator.RegisterTouchListener(this);
@@ -70,22 +73,43 @@ public class BoardManipulatorComponent : ECSEntity, IECSSystem, ILockerComponent
 
     public bool OnTap(Vector2 startPos, Vector2 pos, int tapCount)
     {
-        BoardPosition boardPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
-
-        Debug.LogWarning("OnTap: " + boardPosition.ToString());
-        
-        context.ActionExecutor.AddAction(new SpawnPieceAtAction
+        if (cachedViewForDrag != null)
         {
-            At = boardPosition,
-            PieceTypeId = PieceType.A1.Id
-        });
+            cachedViewForDrag = null;
+
+            cameraManipulator.CameraMove.UnLock(this);
+        }
         
-        return true;
+        var boardPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
+
+        boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, context.BoardDef.PieceLayer);
+
+        if (context.BoardLogic.IsEmpty(boardPosition))
+        {
+            context.ActionExecutor.AddAction(new SpawnPieceAtAction
+            {
+                At = boardPosition,
+                PieceTypeId = PieceType.A1.Id
+            });
+            
+            return true;
+        }
+            
+        var piece = context.BoardLogic.GetPieceAt(boardPosition);
+            
+        var touchReaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
+
+        if (touchReaction != null)
+        {
+            return touchReaction.Touch(boardPosition);
+        }
+        
+        return false;
     }
 
     public bool OnSet(Vector2 startPos, Vector2 pos, float duration)
     {
-        if (cachedViewForDrag == null) return false;
+        if ((pos - startPos).sqrMagnitude <= 0.01f || cachedViewForDrag == null) return false;
 
         if (LeanTouch.Fingers.Count > 1) return false;
 
@@ -96,16 +120,17 @@ public class BoardManipulatorComponent : ECSEntity, IECSSystem, ILockerComponent
 
     private BoardElementView cachedViewForDrag = null;
     
-
     public bool OnDown(Vector2 startPos, Vector2 pos)
     {
         if (cachedViewForDrag == null)
         {
-            BoardPosition boardPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
+            var boardPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
 
-            cachedViewForDrag =
-                context.RendererContext.GetElementAt(new BoardPosition(boardPosition.X, boardPosition.Y,
-                    context.BoardDef.PieceLayer));
+            boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, context.BoardDef.PieceLayer);
+
+            if (context.BoardLogic.IsEmpty(boardPosition)) return false;
+            
+            cachedViewForDrag = context.RendererContext.GetElementAt(boardPosition);
 
             if (cachedViewForDrag != null)
             {

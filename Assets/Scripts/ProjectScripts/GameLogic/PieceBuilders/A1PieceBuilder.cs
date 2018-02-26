@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class A1PieceBuilder : IPieceBuilder 
+﻿public class A1PieceBuilder : IPieceBuilder 
 {
     public Piece Build(int pieceType, BoardController context)
     {

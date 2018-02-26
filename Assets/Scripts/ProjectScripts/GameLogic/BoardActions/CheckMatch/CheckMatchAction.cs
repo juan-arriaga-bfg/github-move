@@ -22,7 +22,7 @@ public class CheckMatchAction : IBoardAction
 		
 		int currentId;
 		
-		if (logic.FieldFinder.Find(gameBoardController, At, MatchField, out currentId) == false) return false;
+		if (logic.FieldFinder.Find(At, MatchField, out currentId) == false) return false;
 		
 		var action = logic.MatchActionBuilder.GetMatchAction(MatchField, currentId, At);
 

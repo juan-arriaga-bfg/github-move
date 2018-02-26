@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class SpawnPiecesAction : IBoardAction
 {
@@ -22,6 +20,14 @@ public class SpawnPiecesAction : IBoardAction
 		
 		pieces.Sort();
 		gameBoardController.BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(At, free, Pieces.Count, 5);
+
+		var index = free.IndexOf(At);
+
+		if (index != -1)
+		{
+			free.RemoveAt(index);
+			free.Add(At);
+		}
 
 		for (int i = 0; i < free.Count; i++)
 		{
