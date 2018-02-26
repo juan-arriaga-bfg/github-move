@@ -21,11 +21,13 @@ public class UIMainWindowView : IWUIWindowView
 
     public void ShowSample()
     {
-        // get model for window
-        var model = UIService.Get.GetCachedModel<UISampleWindowModel>(UIWindowType.SampleWindow);
-        // modify model properties
-        model.RandomNumber = UnityEngine.Random.Range(0, 100);
-        // show window
-        UIService.Get.ShowWindow(UIWindowType.SampleWindow);
+//        // get model for window
+//        var model = UIService.Get.GetCachedModel<UISampleWindowModel>(UIWindowType.SampleWindow);
+//        // modify model properties
+//        model.RandomNumber = UnityEngine.Random.Range(0, 100);
+//        // show window
+//        UIService.Get.ShowWindow(UIWindowType.SampleWindow);
+        
+        UIService.Get.ShowWindow(UIWindowType.BankWindow);
     }
 }

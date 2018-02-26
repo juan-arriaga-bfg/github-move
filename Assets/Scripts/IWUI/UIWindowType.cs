@@ -5,4 +5,6 @@
     public const string SampleWindow = "SampleWindow";
     
     public const string MainWindow = "MainWindow";
+    
+    public const string BankWindow = "BankWindow";
 }

@@ -52,9 +52,14 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         
         //init shopmanager
         ShopManager shopManager = new ShopManager();
-        shopManager.InitStorage(new ResourceConfigDataMapper<IEnumerable<ShopItem>>("configs/shopitems.data", NSConfigsSettings.Instance.IsUseEncryption), (shopItems) =>{});
+        shopManager.InitStorage(new ResourceConfigDataMapper<IEnumerable<ShopItem>>("configs/shopitems.data", NSConfigsSettings.Instance.IsUseEncryption),
+        (shopItems) =>
+        {
+            Currency.RegisterCurrency(Currency.Coins);
+            Currency.RegisterCurrency(Currency.Cash);
+        });
         ShopService.Instance.SetManager(shopManager);
-        
+
         // load local profile
         ProfileService.Instance.Manager.LoadCurrentProfile((profile) =>
         {
