@@ -27,13 +27,15 @@ public class SandboxGameController : MonoBehaviour
             ElementsResourcesDef = new Dictionary<int, string>
             {
                 {PieceType.Generic.Id, R.GenericPiece},
+                
                 {PieceType.O1.Id, R.O1Piece},
-
+                {PieceType.C1.Id, R.C1Piece},
+                
                 {PieceType.A1.Id, R.A1Piece},
                 {PieceType.A2.Id, R.A2Piece},
                 {PieceType.A3.Id, R.A3Piece},
                 {PieceType.A4.Id, R.A4Piece},
-
+                
                 {PieceType.B1.Id, R.B1Piece},
                 {PieceType.B2.Id, R.B2Piece},
                 {PieceType.B3.Id, R.B3Piece},
@@ -47,16 +49,17 @@ public class SandboxGameController : MonoBehaviour
             {PieceType.Empty.Id, new EmptyPieceBuilder()},
             
             {PieceType.O1.Id, new ObstaclePieceBuilder()},
-
+            {PieceType.C1.Id, new SimplePieceBuilder()},
+            
             {PieceType.A1.Id, new SimplePieceBuilder()},
             {PieceType.A2.Id, new SimplePieceBuilder()},
-            {PieceType.A3.Id, new SpawnPieceBuilder()},
-            {PieceType.A4.Id, new SimplePieceBuilder()},
-
+            {PieceType.A3.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 1}},
+            {PieceType.A4.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 1}},
+            
             {PieceType.B1.Id, new SimplePieceBuilder()},
             {PieceType.B2.Id, new SimplePieceBuilder()},
-            {PieceType.B3.Id, new SimplePieceBuilder()},
-            {PieceType.B4.Id, new SimplePieceBuilder()},
+            {PieceType.B3.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 1}},
+            {PieceType.B4.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 1}},
         };
         
         boardController.RegisterComponent(new ActionExecuteComponent()

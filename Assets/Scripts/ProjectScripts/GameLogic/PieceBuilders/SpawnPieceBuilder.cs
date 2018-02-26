@@ -1,5 +1,8 @@
-﻿public class SpawnPieceBuilder : IPieceBuilder 
+﻿public class SpawnPieceBuilder : IPieceBuilder
 {
+	public int SpawnPieceType;
+	public int Delay;
+	
 	public Piece Build(int pieceType, BoardController context)
 	{
 		var piece = new Piece(pieceType, context);
@@ -9,8 +12,8 @@
 		piece.RegisterComponent(new PieceBoardObserversComponent());
 
 		piece.RegisterComponent(new TouchReactionComponent()
-			.RegisterComponent(new TouchReactionDefinitionComponent())
-			.RegisterComponent(new TouchReactonConditionDelayComponent{Delay = 1}));
+			.RegisterComponent(new TouchReactionDefinitionSpawnPieceComponent{SpawnPieceType = SpawnPieceType})
+			.RegisterComponent(new TouchReactonConditionDelayComponent{Delay = Delay}));
 
 		return piece;
 	}
