@@ -88,6 +88,7 @@ public class BoardManipulatorComponent : ECSEntity,
         {
             context.ActionExecutor.AddAction(new SpawnPieceAtAction
             {
+                IsCheckMatch = true,
                 At = boardPosition,
                 PieceTypeId = PieceType.A1.Id
             });
@@ -129,6 +130,15 @@ public class BoardManipulatorComponent : ECSEntity,
             boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, context.BoardDef.PieceLayer);
 
             if (context.BoardLogic.IsEmpty(boardPosition)) return false;
+            
+            var piece = context.BoardLogic.GetPieceAt(boardPosition);
+            
+            var draggableComponent = piece.GetComponent<DraggablePieceComponent>(DraggablePieceComponent.ComponentGuid);
+
+            if (draggableComponent == null || draggableComponent.IsDraggable(boardPosition) == false)
+            {
+                return false;
+            }
             
             cachedViewForDrag = context.RendererContext.GetElementAt(boardPosition);
 

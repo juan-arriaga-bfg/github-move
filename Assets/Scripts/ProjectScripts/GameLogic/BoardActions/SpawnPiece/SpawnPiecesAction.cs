@@ -33,6 +33,7 @@ public class SpawnPiecesAction : IBoardAction
 		{
 			gameBoardController.ActionExecutor.AddAction(new SpawnPieceAtAction
 			{
+				IsCheckMatch = true,
 				At = free[i],
 				PieceTypeId = pieces[i]
 			});

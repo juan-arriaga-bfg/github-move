@@ -27,26 +27,17 @@ public class SandboxGameController : MonoBehaviour
             ElementsResourcesDef = new Dictionary<int, string>
             {
                 {PieceType.Generic.Id, R.GenericPiece},
+                {PieceType.O1.Id, R.O1Piece},
 
                 {PieceType.A1.Id, R.A1Piece},
                 {PieceType.A2.Id, R.A2Piece},
                 {PieceType.A3.Id, R.A3Piece},
                 {PieceType.A4.Id, R.A4Piece},
-                {PieceType.A5.Id, R.A5Piece},
-                {PieceType.A6.Id, R.A6Piece},
-                {PieceType.A7.Id, R.A7Piece},
-                {PieceType.A8.Id, R.A8Piece},
-                {PieceType.A9.Id, R.A9Piece},
 
                 {PieceType.B1.Id, R.B1Piece},
                 {PieceType.B2.Id, R.B2Piece},
                 {PieceType.B3.Id, R.B3Piece},
                 {PieceType.B4.Id, R.B4Piece},
-                {PieceType.B5.Id, R.B5Piece},
-                {PieceType.B6.Id, R.B6Piece},
-                {PieceType.B7.Id, R.B7Piece},
-                {PieceType.B8.Id, R.B8Piece},
-                {PieceType.B9.Id, R.B9Piece},
             }
         };
         
@@ -54,26 +45,18 @@ public class SandboxGameController : MonoBehaviour
         {
             {PieceType.Generic.Id, new GenericPieceBuilder()},
             {PieceType.Empty.Id, new EmptyPieceBuilder()},
+            
+            {PieceType.O1.Id, new ObstaclePieceBuilder()},
 
-            {PieceType.A1.Id, new A1PieceBuilder()},
-            {PieceType.A2.Id, new A1PieceBuilder()},
+            {PieceType.A1.Id, new SimplePieceBuilder()},
+            {PieceType.A2.Id, new SimplePieceBuilder()},
             {PieceType.A3.Id, new SpawnPieceBuilder()},
-            {PieceType.A4.Id, new A1PieceBuilder()},
-            {PieceType.A5.Id, new A1PieceBuilder()},
-            {PieceType.A6.Id, new A1PieceBuilder()},
-            {PieceType.A7.Id, new A1PieceBuilder()},
-            {PieceType.A8.Id, new A1PieceBuilder()},
-            {PieceType.A9.Id, new A1PieceBuilder()},
+            {PieceType.A4.Id, new SimplePieceBuilder()},
 
-            {PieceType.B1.Id, new A1PieceBuilder()},
-            {PieceType.B2.Id, new A1PieceBuilder()},
-            {PieceType.B3.Id, new A1PieceBuilder()},
-            {PieceType.B4.Id, new A1PieceBuilder()},
-            {PieceType.B5.Id, new A1PieceBuilder()},
-            {PieceType.B6.Id, new A1PieceBuilder()},
-            {PieceType.B7.Id, new A1PieceBuilder()},
-            {PieceType.B8.Id, new A1PieceBuilder()},
-            {PieceType.B9.Id, new A1PieceBuilder()},
+            {PieceType.B1.Id, new SimplePieceBuilder()},
+            {PieceType.B2.Id, new SimplePieceBuilder()},
+            {PieceType.B3.Id, new SimplePieceBuilder()},
+            {PieceType.B4.Id, new SimplePieceBuilder()},
         };
         
         boardController.RegisterComponent(new ActionExecuteComponent()
@@ -100,8 +83,8 @@ public class SandboxGameController : MonoBehaviour
             UnitSize = 1f,
             GlobalPieceScale = 1f,
             ViewCamera = Camera.main,
-            Width = 10,
-            Height = 10,
+            Width = 30,
+            Height = 30,
             Depth = 3,
             PieceLayer = 1
         }); // board settings
@@ -128,7 +111,16 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
         
-//        boardController.ActionExecutor.PerformAction(new FillBoardAction {LevelConfig = level});
+        var position = new BoardPosition(15, 15, boardController.BoardDef.PieceLayer);
+        var positions = new List<BoardPosition>();
+
+        for (int i = 8; i < 16; i++)
+        {
+            boardController.BoardLogic.EmptyCellsFinder.FindRingWithPointInCenter(position, positions, 1000, i);
+        }
+        
+        boardController.ActionExecutor.PerformAction(new FillBoardAction{Piece = PieceType.O1.Id, Positions = positions});
+        
 //        boardController.ActionExecutor.PerformAction(new StartSessionBoardAction());
     }
 }

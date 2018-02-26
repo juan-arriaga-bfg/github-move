@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465934, g: 0.49642956, b: 0.5748249, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -388,7 +388,7 @@ Camera:
   far clip plane: 200
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -432,10 +432,10 @@ MonoBehaviour:
   IgnoreGuiFingers: 1
   RequiredFingerCount: 0
   WheelSensitivity: 0
-  Zoom: 5
+  Zoom: 10
   ZoomClamp: 1
-  ZoomMin: 2
-  ZoomMax: 20
+  ZoomMin: 3
+  ZoomMax: 10
   cameraManipulator: {fileID: 1931227307}
   Dampening: 10
 --- !u!114 &1931227306
@@ -472,13 +472,13 @@ MonoBehaviour:
     cameraClampRegion:
       serializedVersion: 2
       x: -1
-      y: -6
-      width: 16
-      height: 12
+      y: -13
+      width: 44
+      height: 27
     smoothTime: 0.1
     moveThreshold: 0.001
     sensitive: 1
-    zoomClamp: {x: 2, y: 20}
+    zoomClamp: {x: 3, y: 10}
     zoomSmoothTime: 0.1
     zoomSensitive: 1
     zoomThreshold: 0.001

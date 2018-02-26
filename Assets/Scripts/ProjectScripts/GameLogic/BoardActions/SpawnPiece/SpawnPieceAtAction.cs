@@ -10,8 +10,9 @@ public class SpawnPieceAtAction : IBoardAction
 	{
 		get { return ComponentGuid; }
 	}
-
-
+	
+	public bool IsCheckMatch { get; set; }
+	
 	public BoardPosition At { get; set; }
 	
 	public int PieceTypeId { get; set; }
@@ -38,11 +39,14 @@ public class SpawnPieceAtAction : IBoardAction
 		animation.OnCompleteEvent += (_) =>
 		{
 			gameBoardController.BoardLogic.UnlockCell(At, this);
-			
-			gameBoardController.ActionExecutor.AddAction(new CheckMatchAction
+
+			if (IsCheckMatch)
 			{
-				At = At
-			});
+				gameBoardController.ActionExecutor.AddAction(new CheckMatchAction
+				{
+					At = At
+				});
+			}
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

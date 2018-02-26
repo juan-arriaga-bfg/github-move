@@ -7,7 +7,6 @@ public class SpawnPieceAtAnimation : BoardAnimation
 {
     public SpawnPieceAtAction Action { get; set; }
     
-
     public override void Animate(BoardRenderer context)
     {
         var boardElement = context.CreateElementAt(Action.PieceTypeId, Action.At);
