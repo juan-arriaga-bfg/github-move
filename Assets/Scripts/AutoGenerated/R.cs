@@ -14,4 +14,5 @@ public class R
      public const string C1Piece = "C1Piece";
      public const string M1Piece = "M1Piece";
      public const string S1Piece = "S1Piece";
+     public const string E1Piece = "E1Piece";
 }

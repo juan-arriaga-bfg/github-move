@@ -8,6 +8,7 @@ public class TouchReactionDefinitionSpawnPiece : TouchReactionDefinitionComponen
 	{
 		piece.Context.ActionExecutor.AddAction(new SpawnPiecesAction()
 		{
+			IsCheckMatch = false,
 			At = position,
 			Pieces = new List<int> {SpawnPieceType}
 		});

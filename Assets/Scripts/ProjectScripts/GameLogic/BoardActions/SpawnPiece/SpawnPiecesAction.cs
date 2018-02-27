@@ -9,6 +9,8 @@ public class SpawnPiecesAction : IBoardAction
 		get { return ComponentGuid; }
 	}
 	
+	public bool IsCheckMatch { get; set; }
+	
 	public BoardPosition At { get; set; }
 	
 	public List<int> Pieces { get; set; }
@@ -33,7 +35,7 @@ public class SpawnPiecesAction : IBoardAction
 		{
 			gameBoardController.ActionExecutor.AddAction(new SpawnPieceAtAction
 			{
-				IsCheckMatch = true,
+				IsCheckMatch = IsCheckMatch,
 				At = free[i],
 				PieceTypeId = pieces[i]
 			});

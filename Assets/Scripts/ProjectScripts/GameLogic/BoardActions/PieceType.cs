@@ -12,10 +12,12 @@ public partial class PieceType
     public readonly static PieceTypeDef B3 = new PieceTypeDef{Id = 202, Abbreviations = new List<string>{ "B3" }};
     public readonly static PieceTypeDef B4 = new PieceTypeDef{Id = 203, Abbreviations = new List<string>{ "B4" }};
     
-    public readonly static PieceTypeDef O1 = new PieceTypeDef{Id = 300, Abbreviations = new List<string>{ "O1" }};
+    public readonly static PieceTypeDef C1 = new PieceTypeDef{Id = 300, Abbreviations = new List<string>{ "C1", "coin" }};
     
-    public readonly static PieceTypeDef C1 = new PieceTypeDef{Id = 400, Abbreviations = new List<string>{ "C1", "coin" }};
+    public readonly static PieceTypeDef E1 = new PieceTypeDef{Id = 400, Abbreviations = new List<string>{ "E1" }};
     
-    public readonly static PieceTypeDef M1 = new PieceTypeDef{Id = 501, Abbreviations = new List<string>{ "M1", "mine" }};
-    public readonly static PieceTypeDef S1 = new PieceTypeDef{Id = 601, Abbreviations = new List<string>{ "S1", "saw" }};
+    public readonly static PieceTypeDef O1 = new PieceTypeDef{Id = 500, Abbreviations = new List<string>{ "O1" }};
+    
+    public readonly static PieceTypeDef M1 = new PieceTypeDef{Id = 600, Abbreviations = new List<string>{ "M1", "mine" }};
+    public readonly static PieceTypeDef S1 = new PieceTypeDef{Id = 700, Abbreviations = new List<string>{ "S1", "saw" }};
 }

@@ -24,7 +24,7 @@ public class TouchReactionDefinitionCollectResource : TouchReactionDefinitionCom
             (item, s) =>
             {
                 // on purchase success
-                piece.Context.ActionExecutor.PerformAction(new CollapsePieceToAction
+                piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
                 {
                     To = position,
                     Positions = new List<BoardPosition>{position}

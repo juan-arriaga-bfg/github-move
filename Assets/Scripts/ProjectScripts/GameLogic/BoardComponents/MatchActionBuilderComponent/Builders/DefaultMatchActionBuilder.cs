@@ -29,6 +29,7 @@ public class DefaultMatchActionBuilder : IMatchActionBuilder
         
         var nextAction = new SpawnPiecesAction
         {
+            IsCheckMatch = true,
             At = position,
             Pieces = nextPieces
         };
