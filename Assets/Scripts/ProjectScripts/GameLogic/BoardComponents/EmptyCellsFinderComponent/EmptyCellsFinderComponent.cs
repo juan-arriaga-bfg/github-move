@@ -30,6 +30,8 @@ public class EmptyCellsFinderComponent: IECSComponent
 
 	public bool FindRingWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, int radius)
 	{
+		// TODO: нет проверки на валидность координаты, в результате идет проход даже по ячекам, которые не существуют
+		
 		radius = Mathf.Max(radius, 0);
 
 		if (radius == 0)

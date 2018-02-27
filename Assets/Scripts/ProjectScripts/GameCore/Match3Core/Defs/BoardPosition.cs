@@ -86,6 +86,11 @@ public struct BoardPosition : IEquatable<BoardPosition>
         return new BoardPosition(-1, -1);
     }
 
+    public static BoardPosition Zero()
+    {
+        return new BoardPosition(0, 0);
+    }
+
     public static float SqrMagnitude(BoardPosition from, BoardPosition to)
     {
         return (to.X - from.X) * (to.X - from.X) + (to.Y - from.Y) * (to.Y - from.Y);

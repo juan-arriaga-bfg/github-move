@@ -310,6 +310,20 @@ public class BoardLogicComponent : ECSEntity,
         return logicMatrix[position.X, position.Y, position.Z];
     }
 
+    public virtual bool AddPieceToBoardSilent(int x, int y, Piece piece)
+    {
+        if (piece == null) return false;
+
+        BoardPosition position = new BoardPosition(x, y, piece.Layer.Index);
+
+        if (IsPointValid(position) == false) return false;
+
+        if (IsEmpty(position) == false) return false;
+
+        SetPieceToBoard(x, y, piece);
+        return true;
+    }
+    
     public virtual bool AddPieceToBoard(int x, int y, Piece piece)
     {
         if (piece == null) return false;

@@ -84,26 +84,13 @@ public class BoardManipulatorComponent : ECSEntity,
 
         boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, context.BoardDef.PieceLayer);
 
-        if (context.BoardLogic.IsEmpty(boardPosition))
-        {
-            context.ActionExecutor.AddAction(new SpawnPieceAtAction
-            {
-                IsCheckMatch = true,
-                At = boardPosition,
-                PieceTypeId = PieceType.A1.Id
-            });
-            
-            return true;
-        }
+        if (context.BoardLogic.IsEmpty(boardPosition)) return true;
             
         var piece = context.BoardLogic.GetPieceAt(boardPosition);
             
         var touchReaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
 
-        if (touchReaction != null)
-        {
-            return touchReaction.Touch(boardPosition);
-        }
+        if (touchReaction != null) return touchReaction.Touch(boardPosition);
         
         return false;
     }

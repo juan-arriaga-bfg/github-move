@@ -14,5 +14,8 @@ public partial class PieceType
     
     public readonly static PieceTypeDef O1 = new PieceTypeDef{Id = 300, Abbreviations = new List<string>{ "O1" }};
     
-    public readonly static PieceTypeDef C1 = new PieceTypeDef{Id = 400, Abbreviations = new List<string>{ "C1", "Coin" }};
+    public readonly static PieceTypeDef C1 = new PieceTypeDef{Id = 400, Abbreviations = new List<string>{ "C1", "coin" }};
+    
+    public readonly static PieceTypeDef M1 = new PieceTypeDef{Id = 501, Abbreviations = new List<string>{ "M1", "mine" }};
+    public readonly static PieceTypeDef S1 = new PieceTypeDef{Id = 601, Abbreviations = new List<string>{ "S1", "saw" }};
 }

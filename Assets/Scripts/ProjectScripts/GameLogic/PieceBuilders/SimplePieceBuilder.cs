@@ -1,12 +1,10 @@
-﻿public class SimplePieceBuilder : IPieceBuilder 
+﻿public class SimplePieceBuilder : GenericPieceBuilder 
 {
-    public Piece Build(int pieceType, BoardController context)
+    public override Piece Build(int pieceType, BoardController context)
     {
-        var piece = new Piece(pieceType, context);
-
-        piece.RegisterComponent(new LayerPieceComponent {Index = context.BoardDef.PieceLayer});
+        var piece = base.Build(pieceType, context);
+        
         piece.RegisterComponent(new DraggablePieceComponent());
-        piece.RegisterComponent(new PieceBoardObserversComponent());
 
         return piece;
     }

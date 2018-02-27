@@ -5,10 +5,9 @@
         var piece = new Piece(pieceType, context);
 
         piece.RegisterComponent(new LayerPieceComponent {Index = 1});
-        piece.RegisterComponent(
-            new PieceBoardObserversComponent()
-                .RegisterObserver(new LockCellPieceBoardObserver())
-        );
+        
+        piece.RegisterComponent(new PieceBoardObserversComponent()
+            .RegisterObserver(new LockCellPieceBoardObserver()));
 
         return piece;
     }

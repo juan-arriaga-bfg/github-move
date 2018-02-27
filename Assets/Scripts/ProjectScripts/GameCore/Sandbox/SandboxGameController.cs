@@ -28,6 +28,9 @@ public class SandboxGameController : MonoBehaviour
             {
                 {PieceType.Generic.Id, R.GenericPiece},
                 
+                {PieceType.M1.Id, R.M1Piece},
+                {PieceType.S1.Id, R.S1Piece},
+                
                 {PieceType.O1.Id, R.O1Piece},
                 {PieceType.C1.Id, R.C1Piece},
                 
@@ -48,7 +51,31 @@ public class SandboxGameController : MonoBehaviour
             {PieceType.Generic.Id, new GenericPieceBuilder()},
             {PieceType.Empty.Id, new EmptyPieceBuilder()},
             
-            {PieceType.O1.Id, new ObstaclePieceBuilder()},
+            {PieceType.M1.Id, new MulticellularSpawnPieceBuilder
+                {
+                    Delay = 1,
+                    SpawnPieceType = PieceType.B1.Id,
+                    Mask = new List<BoardPosition>
+                    {
+                        BoardPosition.Zero().Up,
+                        BoardPosition.Zero().Down,
+                    }
+                }
+            },
+            
+            {PieceType.S1.Id, new MulticellularSpawnPieceBuilder
+                {
+                    Delay = 1,
+                    SpawnPieceType = PieceType.A1.Id,
+                    Mask = new List<BoardPosition>
+                    {
+                        BoardPosition.Zero().Up,
+                        BoardPosition.Zero().Down,
+                    }
+                }
+            },
+            
+            {PieceType.O1.Id, new GenericPieceBuilder()},
             {PieceType.C1.Id, new SimplePieceBuilder()},
             
             {PieceType.A1.Id, new SimplePieceBuilder()},
@@ -123,6 +150,18 @@ public class SandboxGameController : MonoBehaviour
         }
         
         boardController.ActionExecutor.PerformAction(new FillBoardAction{Piece = PieceType.O1.Id, Positions = positions});
+        
+        boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
+        {
+            At = new BoardPosition(14, 14),
+            PieceTypeId = PieceType.S1.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
+        {
+            At = new BoardPosition(10, 14),
+            PieceTypeId = PieceType.M1.Id
+        });
         
 //        boardController.ActionExecutor.PerformAction(new StartSessionBoardAction());
     }
