@@ -17,7 +17,25 @@ MonoBehaviour:
   styles:
   - id: 0
     nameId: defaul
-    fontAsset: {fileID: 11400000, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
-    materialPreset: {fileID: 2100000, guid: 83a1b0fe6c3dbac44b66f09c82e1d509, type: 2}
+    fontAsset: {fileID: 11400000, guid: 0dd11aae67b65704c832e47516e733af, type: 2}
+    materialPreset: {fileID: 2100000, guid: dab9bc31d72819443b5dc510fb63c9f3, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
+  - id: 1
+    nameId: windowTitle
+    fontAsset: {fileID: 11400000, guid: 0dd11aae67b65704c832e47516e733af, type: 2}
+    materialPreset: {fileID: 2100000, guid: c746f8b86a16ace4cad13ecef816a2c9, type: 2}
+    mainColor: {r: 1, g: 1, b: 1, a: 1}
+    fontSize: 70
+  - id: 2
+    nameId: windowMessage
+    fontAsset: {fileID: 11400000, guid: 0dd11aae67b65704c832e47516e733af, type: 2}
+    materialPreset: {fileID: 2100000, guid: c746f8b86a16ace4cad13ecef816a2c9, type: 2}
+    mainColor: {r: 1, g: 1, b: 1, a: 1}
+    fontSize: 55
+  - id: 4
+    nameId: windowButton
+    fontAsset: {fileID: 11400000, guid: 0dd11aae67b65704c832e47516e733af, type: 2}
+    materialPreset: {fileID: 2100000, guid: 664789101e076f3498ce01890261ecac, type: 2}
+    mainColor: {r: 1, g: 1, b: 1, a: 1}
+    fontSize: 50

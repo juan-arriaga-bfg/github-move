@@ -7,4 +7,6 @@
     public const string MainWindow = "MainWindow";
     
     public const string BankWindow = "BankWindow";
+    
+    public const string MessageWindow = "MessageWindow";
 }
