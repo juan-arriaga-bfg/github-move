@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class TouchReactonConditionDelayComponent : TouchReactionConditionComponent
+public class TouchReactonConditionDelay : TouchReactionConditionComponent
 {
     public int Delay;
 

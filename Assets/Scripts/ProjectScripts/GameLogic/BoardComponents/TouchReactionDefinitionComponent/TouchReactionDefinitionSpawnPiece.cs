@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public class TouchReactionDefinitionSpawnPieceComponent : TouchReactionDefinitionComponent
+public class TouchReactionDefinitionSpawnPiece : TouchReactionDefinitionComponent
 {
 	public int SpawnPieceType;
     

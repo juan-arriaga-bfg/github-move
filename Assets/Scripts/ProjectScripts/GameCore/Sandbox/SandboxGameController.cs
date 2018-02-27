@@ -76,7 +76,7 @@ public class SandboxGameController : MonoBehaviour
             },
             
             {PieceType.O1.Id, new GenericPieceBuilder()},
-            {PieceType.C1.Id, new SimplePieceBuilder()},
+            {PieceType.C1.Id, new ResourcePieceBuilder{Amount = 10, Currency = Currency.Coins.Name}},
             
             {PieceType.A1.Id, new SimplePieceBuilder()},
             {PieceType.A2.Id, new SimplePieceBuilder()},

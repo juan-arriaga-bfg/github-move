@@ -8,8 +8,8 @@
 		var piece = base.Build(pieceType, context);
 		
 		piece.RegisterComponent(new TouchReactionComponent()
-			.RegisterComponent(new TouchReactionDefinitionSpawnPieceComponent{SpawnPieceType = SpawnPieceType})
-			.RegisterComponent(new TouchReactonConditionDelayComponent{Delay = Delay}));
+			.RegisterComponent(new TouchReactionDefinitionSpawnPiece{SpawnPieceType = this.SpawnPieceType})
+			.RegisterComponent(new TouchReactonConditionDelay{Delay = this.Delay}));
 
 		return piece;
 	}
