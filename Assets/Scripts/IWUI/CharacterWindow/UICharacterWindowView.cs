@@ -1,16 +1,33 @@
 using UnityEngine;
 using DG.Tweening;
 
-public class UICharacterWindowView : IWUIWindowView 
+public class UICharacterWindowView : UIGenericPopupWindowView 
 {
-    [SerializeField] private RectTransform viewAnchor;
+    [SerializeField] private NSText levelLabel;
+    [SerializeField] private NSText buttonLabel;
+    [SerializeField] private NSText progressLabel;
+    [SerializeField] private NSText cardName;
+    [SerializeField] private NSText cardLabel;
+    [SerializeField] private NSText damageLabel;
     
     public override void OnViewShow()
     {
         base.OnViewShow();
         
-        UICharacterWindowModel windowModel = Model as UICharacterWindowModel;
+        var windowModel = Model as UICharacterWindowModel;
         
+        SetTitle(windowModel.Title);
+        SetMessage(windowModel.Message);
+
+        buttonLabel.Text = windowModel.ButtonText;
+        
+        levelLabel.Text = windowModel.LevelText;
+        
+        progressLabel.Text = windowModel.ProgressText;
+        damageLabel.Text = windowModel.DamageText;
+        
+        cardName.Text = windowModel.HeroName;
+        cardLabel.Text = windowModel.CardTupeText;
     }
 
     public override void OnViewClose()
@@ -19,25 +36,5 @@ public class UICharacterWindowView : IWUIWindowView
         
         UICharacterWindowModel windowModel = Model as UICharacterWindowModel;
         
-    }
-    
-    public override void AnimateShow()
-    {
-        base.AnimateShow();
-
-        viewAnchor.anchoredPosition = new Vector2(0f, -Screen.height);
-        
-        DOTween.Kill(viewAnchor);
-        var sequence = DOTween.Sequence().SetId(viewAnchor);
-        sequence.Append(viewAnchor.DOAnchorPos(new Vector2(0f, 0f), 0.5f).SetEase(Ease.OutBack));
-    }
-
-    public override void AnimateClose()
-    {
-        base.AnimateClose();
-
-        DOTween.Kill(viewAnchor);
-        var sequence = DOTween.Sequence().SetId(viewAnchor);
-        sequence.Append(viewAnchor.DOAnchorPos(new Vector2(0f, -Screen.height), 0.5f).SetEase(Ease.InBack));
     }
 }

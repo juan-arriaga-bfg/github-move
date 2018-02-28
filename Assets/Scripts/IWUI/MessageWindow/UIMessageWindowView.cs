@@ -1,18 +1,13 @@
 using UnityEngine;
 using DG.Tweening;
 
-public class UIMessageWindowView : IWUIWindowView
+public class UIMessageWindowView : UIGenericPopupWindowView
 {
-    [SerializeField] private NSText title;
-    [SerializeField] private NSText message;
-    
     [SerializeField] private NSText buttonAcceptLabel;
     [SerializeField] private NSText buttonCancelLabel;
     
     [SerializeField] private GameObject btnAccept;
     [SerializeField] private GameObject btnCancel;
-    
-    [SerializeField] private RectTransform viewAnchor;
     
     private bool isAccept;
     private bool isCancel;
@@ -25,9 +20,9 @@ public class UIMessageWindowView : IWUIWindowView
         
         isAccept = false;
         isCancel = false;
-
-        title.Text = windowModel.Title;
-        message.Text = windowModel.Message;
+        
+        SetTitle(windowModel.Title);
+        SetMessage(windowModel.Message);
         
         buttonAcceptLabel.Text = windowModel.AcceptLabel;
         buttonCancelLabel.Text = windowModel.CancelLabel;
@@ -54,25 +49,5 @@ public class UIMessageWindowView : IWUIWindowView
     public void OnClickCancel()
     {
         isCancel = true;
-    }
-    
-    public override void AnimateShow()
-    {
-        base.AnimateShow();
-
-        viewAnchor.anchoredPosition = new Vector2(0f, -Screen.height);
-        
-        DOTween.Kill(viewAnchor);
-        var sequence = DOTween.Sequence().SetId(viewAnchor);
-        sequence.Append(viewAnchor.DOAnchorPos(new Vector2(0f, 0f), 0.5f).SetEase(Ease.OutBack));
-    }
-
-    public override void AnimateClose()
-    {
-        base.AnimateClose();
-
-        DOTween.Kill(viewAnchor);
-        var sequence = DOTween.Sequence().SetId(viewAnchor);
-        sequence.Append(viewAnchor.DOAnchorPos(new Vector2(0f, -Screen.height), 0.5f).SetEase(Ease.InBack));
     }
 }

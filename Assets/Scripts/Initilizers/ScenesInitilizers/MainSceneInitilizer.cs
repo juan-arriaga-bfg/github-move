@@ -21,6 +21,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.BankWindow,
             UIWindowType.MessageWindow,
             UIWindowType.CharacterWindow,
+            UIWindowType.ChestWindow,
         });
 
         // on cache complete

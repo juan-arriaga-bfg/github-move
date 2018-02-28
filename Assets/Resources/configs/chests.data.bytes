@@ -1,0 +1,44 @@
+[
+    {
+        "Uid" : "Common",
+        "Time" : "60",
+        "Price" : 
+        {
+            "Currency" : "Crystals",
+            "Amount" : 5
+        },
+        "Reward" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 30
+        }
+    },
+    {
+        "Uid" : "Rare",
+        "Time" : "120",
+        "Price" : 
+        {
+            "Currency" : "Crystals",
+            "Amount" : 10
+        },
+        "Reward" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 40
+        }
+    },
+    {
+        "Uid" : "Epic",
+        "Time" : "300",
+        "Price" : 
+        {
+            "Currency" : "Crystals",
+            "Amount" : 25
+        },
+        "Reward" :
+        {
+            "Currency" : "Crystals",
+            "Amount" : 10
+        }
+    },
+]

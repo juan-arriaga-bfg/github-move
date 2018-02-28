@@ -3,6 +3,9 @@ using DG.Tweening;
 
 public class UIGenericPopupWindowView : UIGenericWindowView
 {
+    [SerializeField] private NSText title;
+    [SerializeField] private NSText message;
+    
     [SerializeField] private RectTransform viewAnchor;
 
     public override void OnViewShow()
@@ -38,5 +41,19 @@ public class UIGenericPopupWindowView : UIGenericWindowView
         DOTween.Kill(viewAnchor);
         var sequence = DOTween.Sequence().SetId(viewAnchor);
         sequence.Append(viewAnchor.DOAnchorPos(new Vector2(0f, -Screen.height), 0.5f).SetEase(Ease.InBack));
+    }
+
+    protected void SetTitle(string text)
+    {
+        if(title == null) return;
+        
+        title.Text = text;
+    }
+    
+    protected void SetMessage(string text)
+    {
+        if(message == null) return;
+        
+        message.Text = text;
     }
 }

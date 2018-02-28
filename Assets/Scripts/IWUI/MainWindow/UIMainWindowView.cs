@@ -24,23 +24,24 @@ public class UIMainWindowView : IWUIWindowView
 
     public void ShowSettings()
     {
-        UIMessageWindowController.CreateNotImplementedMessage();
+        var model = UIService.Get.GetCachedModel<UIChestWindowModel>(UIWindowType.ChestWindow);
+
+        model.Chest = GameDataService.Current.Chests[0];
+        model.CurrentChestState = ChestState.Lock;
+        
+        UIService.Get.ShowWindow(UIWindowType.ChestWindow);
+//        UIMessageWindowController.CreateNotImplementedMessage();
     }
     
     public void StartFight()
     {
-        UIMessageWindowController.CreateNotImplementedMessage();
-    }
-    
-    public void ShowSample()
-    {
-//        // get model for window
-//        var model = UIService.Get.GetCachedModel<UISampleWindowModel>(UIWindowType.SampleWindow);
-//        // modify model properties
-//        model.RandomNumber = UnityEngine.Random.Range(0, 100);
-//        // show window
-//        UIService.Get.ShowWindow(UIWindowType.SampleWindow);
+        var model = UIService.Get.GetCachedModel<UICharacterWindowModel>(UIWindowType.CharacterWindow);
+
+        model.HeroDamage = 5;
+        model.TeamDamage = 12;
+        model.CardTupe = CharacterWindowCardTupe.Rare;
         
         UIService.Get.ShowWindow(UIWindowType.CharacterWindow);
+//        UIMessageWindowController.CreateNotImplementedMessage();
     }
 }

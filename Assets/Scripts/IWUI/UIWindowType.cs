@@ -11,4 +11,6 @@
     public const string MessageWindow = "MessageWindow";
     
     public const string CharacterWindow = "CharacterWindow";
+    
+    public const string ChestWindow = "ChestWindow";
 }

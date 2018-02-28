@@ -960,13 +960,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a172100a51ccb5419d3ceb32b2be4ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  viewAnimators: []
+  backLayer: {fileID: 225703816190699478}
   title: {fileID: 114376121549127578}
   message: {fileID: 114180769807118674}
+  viewAnchor: {fileID: 224345941209743760}
   buttonAcceptLabel: {fileID: 114790807798555330}
   buttonCancelLabel: {fileID: 114767126285602168}
   btnAccept: {fileID: 1419907833501312}
   btnCancel: {fileID: 1836613759014210}
-  viewAnchor: {fileID: 224345941209743760}
 --- !u!114 &114644154915426328
 MonoBehaviour:
   m_ObjectHideFlags: 1

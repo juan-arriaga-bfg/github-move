@@ -57,9 +57,14 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         {
             Currency.RegisterCurrency(Currency.Coins);
             Currency.RegisterCurrency(Currency.Cash);
+            Currency.RegisterCurrency(Currency.Crystals);
         });
         ShopService.Instance.SetManager(shopManager);
-
+        
+        GameDataManager dataManager = new GameDataManager();
+        GameDataService.Instance.SetManager(dataManager);
+        dataManager.LoadData(new ResourceConfigDataMapper<List<ChestDef>>("configs/chests.data", NSConfigsSettings.Instance.IsUseEncryption));
+        
         // load local profile
         ProfileService.Instance.Manager.LoadCurrentProfile((profile) =>
         {
