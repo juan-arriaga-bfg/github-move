@@ -9,4 +9,6 @@
     public const string BankWindow = "BankWindow";
     
     public const string MessageWindow = "MessageWindow";
+    
+    public const string CharacterWindow = "CharacterWindow";
 }

@@ -1,14 +1,18 @@
 using UnityEngine;
-using System.Collections;
 
-public class UIMainWindowView : IWUIWindowView 
+public class UIMainWindowView : IWUIWindowView
 {
+    [SerializeField] private NSText settingsLabel;
+    [SerializeField] private NSText fightLabel;
+    
     public override void OnViewShow()
     {
         base.OnViewShow();
         
-        UIMainWindowModel windowModel = Model as UIMainWindowModel;
-        
+        var windowModel = Model as UIMainWindowModel;
+
+        settingsLabel.Text = windowModel.SettingsText;
+        fightLabel.Text = windowModel.FightText;
     }
 
     public override void OnViewClose()
@@ -16,9 +20,18 @@ public class UIMainWindowView : IWUIWindowView
         base.OnViewClose();
         
         UIMainWindowModel windowModel = Model as UIMainWindowModel;
-        
     }
 
+    public void ShowSettings()
+    {
+        UIMessageWindowController.CreateNotImplementedMessage();
+    }
+    
+    public void StartFight()
+    {
+        UIMessageWindowController.CreateNotImplementedMessage();
+    }
+    
     public void ShowSample()
     {
 //        // get model for window
@@ -28,6 +41,6 @@ public class UIMainWindowView : IWUIWindowView
 //        // show window
 //        UIService.Get.ShowWindow(UIWindowType.SampleWindow);
         
-        UIService.Get.ShowWindow(UIWindowType.BankWindow);
+        UIService.Get.ShowWindow(UIWindowType.CharacterWindow);
     }
 }
