@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UIMainWindowView : IWUIWindowView
 {
     [SerializeField] private NSText settingsLabel;
     [SerializeField] private NSText fightLabel;
+    [SerializeField] private List<UIChestSlot> slots;
     
     public override void OnViewShow()
     {
@@ -13,6 +15,13 @@ public class UIMainWindowView : IWUIWindowView
 
         settingsLabel.Text = windowModel.SettingsText;
         fightLabel.Text = windowModel.FightText;
+
+        for (int i = 0; i < slots.Count; i++)
+        {
+            var slot = slots[i];
+            if (i < slots.Count - 1) slot.Initialize((ChestState) (i + 1), GameDataService.Current.Chests[i]);
+            else slot.Initialize(ChestState.None);
+        }
     }
 
     public override void OnViewClose()
@@ -24,13 +33,7 @@ public class UIMainWindowView : IWUIWindowView
 
     public void ShowSettings()
     {
-        var model = UIService.Get.GetCachedModel<UIChestWindowModel>(UIWindowType.ChestWindow);
-
-        model.Chest = GameDataService.Current.Chests[0];
-        model.CurrentChestState = ChestState.Lock;
-        
-        UIService.Get.ShowWindow(UIWindowType.ChestWindow);
-//        UIMessageWindowController.CreateNotImplementedMessage();
+        UIMessageWindowController.CreateNotImplementedMessage();
     }
     
     public void StartFight()
