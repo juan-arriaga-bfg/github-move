@@ -30,8 +30,10 @@ public class UICharacterWindowView : UIGenericPopupWindowView
         
         cardName.Text = windowModel.HeroName;
         cardLabel.Text = windowModel.CardTupeText;
+
+        var lenght = Mathf.Clamp(320 * windowModel.CurrentProgress / (float) windowModel.TotalProgress, 0, 320);
         
-        progress.sizeDelta = new Vector2(320 * windowModel.CurrentProgress/(float)windowModel.TotalProgress, progress.sizeDelta.y);
+        progress.sizeDelta = new Vector2(lenght, progress.sizeDelta.y);
     }
 
     public void OnClick()

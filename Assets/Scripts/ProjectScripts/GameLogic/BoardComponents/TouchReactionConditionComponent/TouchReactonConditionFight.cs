@@ -7,9 +7,12 @@
 		var liveComponent = piece.GetComponent<LivePieceComponent>(LivePieceComponent.ComponentGuid);
 
 		if (liveComponent == null) return false;
+
+		var hero = GameDataService.Current.GetHero("Robin");
+		var level = GameDataService.Current.HeroLevel;
 		
-		liveComponent.HitPoints -= 5;
-        
+		liveComponent.HitPoints -= hero.Damages[level];
+		
 		IsDone = liveComponent.IsLive(position) == false;
         
 		return IsDone;
