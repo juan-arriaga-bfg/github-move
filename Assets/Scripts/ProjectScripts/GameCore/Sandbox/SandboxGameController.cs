@@ -173,5 +173,8 @@ public class SandboxGameController : MonoBehaviour
         });
         
 //        boardController.ActionExecutor.PerformAction(new StartSessionBoardAction());
+        
+        //register board
+        BoardService.Current.RegisterBoard(boardController, 0);
     }
 }

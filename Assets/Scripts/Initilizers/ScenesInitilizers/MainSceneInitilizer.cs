@@ -31,6 +31,8 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             // close launcher
             UIService.Get.CloseWindow(UIWindowType.LauncherWindow);
             
+            InitGameField();
+            
             // get model for window
             var model = UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow);
             UIService.Get.ShowWindow(UIWindowType.MainWindow);
@@ -39,14 +41,14 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             {
                 onComplete();
             }
-
-            InitGameField();
-
         };
     }
 
     private void InitGameField()
     {
+        // create manager
+        BoardService.Instance.SetManager(new BoardManager());
+        
         var sandboxGameController = new GameObject().AddComponent<SandboxGameController>();
         sandboxGameController.Run();
     }
