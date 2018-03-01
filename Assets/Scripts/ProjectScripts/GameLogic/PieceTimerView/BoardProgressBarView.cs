@@ -16,8 +16,8 @@ public class BoardProgressBarView : IWBaseMonoBehaviour
         barView.transform.localPosition = new Vector3
         (
             -barOffset,
-            CachedTransform.localPosition.y,
-            CachedTransform.localPosition.z
+            barView.transform.localPosition.y,
+            barView.transform.localPosition.z
         );
     }
 }
