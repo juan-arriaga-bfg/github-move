@@ -9,6 +9,7 @@ public static partial class PieceType
         RegisterType(A3);
         RegisterType(A4);
         RegisterType(A5);
+        RegisterType(A6);
         
         RegisterType(B1);
         RegisterType(B2);
@@ -33,6 +34,7 @@ public static partial class PieceType
     public readonly static PieceTypeDef A3 = new PieceTypeDef{Id = 102, Abbreviations = new List<string>{ "A3" }};
     public readonly static PieceTypeDef A4 = new PieceTypeDef{Id = 103, Abbreviations = new List<string>{ "A4" }};
     public readonly static PieceTypeDef A5 = new PieceTypeDef{Id = 104, Abbreviations = new List<string>{ "A5" }};
+    public readonly static PieceTypeDef A6 = new PieceTypeDef{Id = 105, Abbreviations = new List<string>{ "A6" }};
     
     public readonly static PieceTypeDef B1 = new PieceTypeDef{Id = 200, Abbreviations = new List<string>{ "B1" }};
     public readonly static PieceTypeDef B2 = new PieceTypeDef{Id = 201, Abbreviations = new List<string>{ "B2" }};

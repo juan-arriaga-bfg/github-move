@@ -6,6 +6,11 @@ public class TouchReactonConditionDelay : TouchReactionConditionComponent
 
     private DateTime startTime;
     
+    public DateTime StartTime
+    {
+        get { return startTime; }
+    }
+
     public override void Recharge()
     {
         startTime = DateTime.Now;

@@ -43,6 +43,7 @@ public class SandboxGameController : MonoBehaviour
                 {PieceType.A3.Id, R.A3Piece},
                 {PieceType.A4.Id, R.A4Piece},
                 {PieceType.A5.Id, R.A5Piece},
+                {PieceType.A6.Id, R.A6Piece},
                 
                 {PieceType.B1.Id, R.B1Piece},
                 {PieceType.B2.Id, R.B2Piece},
@@ -88,15 +89,16 @@ public class SandboxGameController : MonoBehaviour
             
             {PieceType.A1.Id, new SimplePieceBuilder()},
             {PieceType.A2.Id, new SimplePieceBuilder()},
-            {PieceType.A3.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 1}},
-            {PieceType.A4.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 1}},
-            {PieceType.A5.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 1}},
+            {PieceType.A3.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 2}},
+            {PieceType.A4.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 2}},
+            {PieceType.A5.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 2}},
+            {PieceType.A6.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 2}},
             
             {PieceType.B1.Id, new SimplePieceBuilder()},
             {PieceType.B2.Id, new SimplePieceBuilder()},
-            {PieceType.B3.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 1}},
-            {PieceType.B4.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 1}},
-            {PieceType.B5.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 1}},
+            {PieceType.B3.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 3}},
+            {PieceType.B4.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 3}},
+            {PieceType.B5.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 3}},
         };
         
         boardController.RegisterComponent(new ActionExecuteComponent()
@@ -228,6 +230,12 @@ public class SandboxGameController : MonoBehaviour
         {
             At = new BoardPosition(20, 18),
             PieceTypeId = PieceType.A5.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
+        {
+            At = new BoardPosition(21, 19),
+            PieceTypeId = PieceType.A6.Id
         });
         
         boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
