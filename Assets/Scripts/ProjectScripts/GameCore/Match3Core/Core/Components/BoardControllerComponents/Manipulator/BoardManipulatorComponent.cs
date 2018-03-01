@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Lean.Touch;
+using DG.Tweening;
 
 public class BoardManipulatorComponent : ECSEntity,
     IECSSystem, ILockerComponent, ITouchRegionListener
@@ -15,6 +16,15 @@ public class BoardManipulatorComponent : ECSEntity,
     private BoardPosition selectedPoint;
 
     private CameraManipulator cameraManipulator;
+    
+    private BoardPosition lastCachedDragPosition;
+
+    private readonly ViewAnimationUid dragAnimationId = new ViewAnimationUid();
+    
+    
+    private BoardElementView cachedViewForDrag = null;
+    
+    private Vector2 cachedDragDownPos = Vector2.zero;
 
     public CameraManipulator CameraManipulator
     {
@@ -100,37 +110,77 @@ public class BoardManipulatorComponent : ECSEntity,
 
         if (LeanTouch.Fingers.Count > 1) return false;
 
-        cachedViewForDrag.CachedTransform.position = new Vector3(pos.x, pos.y, cachedViewForDrag.CachedTransform.position.z);
+        var targetPos = new Vector3(pos.x, pos.y, cachedViewForDrag.CachedTransform.position.z);
+
+        if (cachedViewForDrag is PieceBoardElementView)
+        {
+            var pieceBoardElementView = cachedViewForDrag as PieceBoardElementView;
+            var boardPos = context.BoardDef.GetSectorPosition(targetPos);
+            
+            pieceBoardElementView.OnDrag(boardPos, pos);
+            
+            if (lastCachedDragPosition.Equals(boardPos) == false)
+            {
+                lastCachedDragPosition = boardPos;
+                bool isPointValid = context.BoardLogic.IsPointValid(boardPos);
+                if (isPointValid)
+                {
+                    var targetCellPos = context.BoardDef.GetPiecePosition(boardPos.X, boardPos.Y);
+                    targetCellPos = new Vector3(targetCellPos.x, targetCellPos.y, 0f);
+                    DOTween.Kill(dragAnimationId);
+                    cachedViewForDrag.CachedTransform.DOLocalMove(targetCellPos, 0.4f).SetEase(Ease.InOutSine).SetId(dragAnimationId);
+                }
+            }
+        }
+        
+       
         
         return true;
     }
 
-    private BoardElementView cachedViewForDrag = null;
     
     public bool OnDown(Vector2 startPos, Vector2 pos)
     {
         if (cachedViewForDrag == null)
         {
             var piece = GetSelectedPiece();
-
+        
             if (piece == null) return false;
-
+            
             var boardPosition = piece.CachedPosition;
+            
+            var selectedView = context.RendererContext.GetElementAt(boardPosition);
             
             var draggableComponent = piece.GetComponent<DraggablePieceComponent>(DraggablePieceComponent.ComponentGuid);
 
             if (draggableComponent == null || draggableComponent.IsDraggable(boardPosition) == false)
             {
+                
+                if (selectedView is PieceBoardElementView)
+                {
+                    var pieceBoardElementView = selectedView as PieceBoardElementView;
+                    var boardPos = context.BoardDef.GetSectorPosition(pos);
+                    pieceBoardElementView.OnDragStart(boardPos, pos);
+                }
+                
                 return false;
             }
-            
-            cachedViewForDrag = context.RendererContext.GetElementAt(boardPosition);
+
+            cachedViewForDrag = selectedView;
+            cachedDragDownPos = pos;
 
             if (cachedViewForDrag != null)
             {
                 cachedViewForDrag.SyncRendererLayers(new BoardPosition(context.BoardDef.Width, context.BoardDef.Height,
                     context.BoardDef.Depth));
                 cameraManipulator.CameraMove.Lock(this);
+                
+                if (selectedView is PieceBoardElementView)
+                {
+                    var pieceBoardElementView = selectedView as PieceBoardElementView;
+                    var boardPos = context.BoardDef.GetSectorPosition(pos);
+                    pieceBoardElementView.OnDragStart(boardPos, pos);
+                }
             }
 
             return true;
@@ -141,18 +191,28 @@ public class BoardManipulatorComponent : ECSEntity,
 
     public bool OnUp(Vector2 startPos, Vector2 pos)
     {
+        
         if (cachedViewForDrag != null)
         {
-            BoardPosition fromPosition = context.RendererContext.GetBoardPosition(cachedViewForDrag);
-            
-            BoardPosition targetPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
-            
-            context.ActionExecutor.AddAction(new MovePieceFromToAction
+            if ((cachedDragDownPos - pos).sqrMagnitude > 0.01f)
             {
-                From = fromPosition,
-                To = targetPosition
-            });
+                BoardPosition fromPosition = context.RendererContext.GetBoardPosition(cachedViewForDrag);
+                BoardPosition targetPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
+
+                context.ActionExecutor.AddAction(new MovePieceFromToAction
+                {
+                    From = fromPosition,
+                    To = targetPosition
+                });
+            }
             
+            if (cachedViewForDrag is PieceBoardElementView)
+            {
+                var pieceBoardElementView = cachedViewForDrag as PieceBoardElementView;
+                var boardPos = context.BoardDef.GetSectorPosition(pos);
+                pieceBoardElementView.OnDragEnd(boardPos, pos);
+            }
+
             cachedViewForDrag = null;
 
             cameraManipulator.CameraMove.UnLock(this);

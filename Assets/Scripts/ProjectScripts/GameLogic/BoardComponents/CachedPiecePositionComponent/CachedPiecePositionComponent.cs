@@ -4,15 +4,15 @@
 	
 	public int Guid { get { return ComponentGuid; } }
 
-	private Piece context;
+	private Piece contextPiece;
 
 	public void OnRegisterEntity(ECSEntity entity)
 	{
-		context = entity as Piece;
+		contextPiece = entity as Piece;
 
-		if (context != null)
+		if (contextPiece != null)
 		{
-			var observer = context.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+			var observer = contextPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
 			if (observer != null)
 			{
 				observer.RegisterObserver(this);
@@ -22,9 +22,9 @@
 	
 	public void OnUnRegisterEntity(ECSEntity entity)
 	{
-		if (context != null)
+		if (contextPiece != null)
 		{
-			var observer = context.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+			var observer = contextPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
 			if (observer != null)
 			{
 				observer.UnRegisterObserver(this);
@@ -34,12 +34,12 @@
 
 	public void OnAddToBoard(BoardPosition position, Piece context = null)
 	{
-		if (context != null) context.CachedPosition = position;
+		if (contextPiece != null) contextPiece.CachedPosition = position;
 	}
 
 	public void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece context = null)
 	{
-		if (context != null) context.CachedPosition = to;
+		if (contextPiece != null) contextPiece.CachedPosition = to;
 	}
 
 	public void OnRemoveFromBoard(BoardPosition position, Piece context = null)

@@ -42,11 +42,13 @@ public class SandboxGameController : MonoBehaviour
                 {PieceType.A2.Id, R.A2Piece},
                 {PieceType.A3.Id, R.A3Piece},
                 {PieceType.A4.Id, R.A4Piece},
+                {PieceType.A5.Id, R.A5Piece},
                 
                 {PieceType.B1.Id, R.B1Piece},
                 {PieceType.B2.Id, R.B2Piece},
                 {PieceType.B3.Id, R.B3Piece},
                 {PieceType.B4.Id, R.B4Piece},
+                {PieceType.B5.Id, R.B5Piece},
             }
         };
         
@@ -62,7 +64,6 @@ public class SandboxGameController : MonoBehaviour
                     Mask = new List<BoardPosition>
                     {
                         BoardPosition.Zero().Up,
-                        BoardPosition.Zero().Down,
                     }
                 }
             },
@@ -73,8 +74,7 @@ public class SandboxGameController : MonoBehaviour
                     SpawnPieceType = PieceType.A1.Id,
                     Mask = new List<BoardPosition>
                     {
-                        BoardPosition.Zero().Up,
-                        BoardPosition.Zero().Down,
+                        BoardPosition.Zero().Right,
                     }
                 }
             },
@@ -90,11 +90,13 @@ public class SandboxGameController : MonoBehaviour
             {PieceType.A2.Id, new SimplePieceBuilder()},
             {PieceType.A3.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 1}},
             {PieceType.A4.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 1}},
+            {PieceType.A5.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 1}},
             
             {PieceType.B1.Id, new SimplePieceBuilder()},
             {PieceType.B2.Id, new SimplePieceBuilder()},
             {PieceType.B3.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 1}},
             {PieceType.B4.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 1}},
+            {PieceType.B5.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 1}},
         };
         
         boardController.RegisterComponent(new ActionExecuteComponent()
@@ -118,7 +120,7 @@ public class SandboxGameController : MonoBehaviour
         {
             CellWidth = 1,
             CellHeight = 1,
-            UnitSize = 1f,
+            UnitSize = 1.8f,
             GlobalPieceScale = 1f,
             ViewCamera = Camera.main,
             Width = 30,
@@ -146,6 +148,34 @@ public class SandboxGameController : MonoBehaviour
                 "tile_grass_2",
                 "tile_grass_3"
             });
+
+        var leftPoint = boardController.BoardDef.GetSectorCenterWorldPosition(0, 0, 0);
+        var rightPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width, boardController.BoardDef.Height, 0);
+        var topPoint = boardController.BoardDef.GetSectorCenterWorldPosition(0, boardController.BoardDef.Height, 0);
+        var bottomPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width, 0, 0);
+
+        var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition
+            (
+                (int)(boardController.BoardDef.Width * 0.5f), 
+                (int)(boardController.BoardDef.Height * 0.5f), 
+                0
+            );
+
+        boardController.Manipulator.CameraManipulator.CurrentCameraSettings.CameraClampRegion = new Rect
+        (
+            leftPoint.x - boardController.BoardDef.UnitSize, 
+            -(topPoint - bottomPoint).magnitude * 0.5f,
+            (leftPoint - rightPoint).magnitude + boardController.BoardDef.UnitSize,
+            (topPoint - bottomPoint).magnitude + boardController.BoardDef.UnitSize * 2f
+        );
+       
+        boardController.Manipulator.CameraManipulator.CachedCameraTransform.localPosition = new Vector3
+        (
+            centerPosition.x,
+            centerPosition.y,
+            boardController.Manipulator.CameraManipulator.CachedCameraTransform.localPosition.z
+        );
+        
         
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
         
@@ -171,13 +201,68 @@ public class SandboxGameController : MonoBehaviour
             PieceTypeId = PieceType.M1.Id
         });
         
+        boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
+        {
+            At = new BoardPosition(16, 14),
+            PieceTypeId = PieceType.A1.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
+        {
+            At = new BoardPosition(17, 15),
+            PieceTypeId = PieceType.A2.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
+        {
+            At = new BoardPosition(18, 16),
+            PieceTypeId = PieceType.A3.Id
+        });
+        boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
+        {
+            At = new BoardPosition(19, 17),
+            PieceTypeId = PieceType.A4.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
+        {
+            At = new BoardPosition(20, 18),
+            PieceTypeId = PieceType.A5.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
+        {
+            At = new BoardPosition(16, 18),
+            PieceTypeId = PieceType.B1.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
+        {
+            At = new BoardPosition(17, 19),
+            PieceTypeId = PieceType.B2.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
+        {
+            At = new BoardPosition(18, 20),
+            PieceTypeId = PieceType.B3.Id
+        });
+        boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
+        {
+            At = new BoardPosition(19, 21),
+            PieceTypeId = PieceType.B4.Id
+        });
+        boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
+        {
+            At = new BoardPosition(20, 22),
+            PieceTypeId = PieceType.B5.Id
+        });
 //        boardController.ActionExecutor.PerformAction(new StartSessionBoardAction());
         
         //register board
         BoardService.Current.RegisterBoard(boardController, 0);
-        
-       
-        
+
+
     }
 
 }

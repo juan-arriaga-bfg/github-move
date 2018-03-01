@@ -388,7 +388,7 @@ Camera:
   far clip plane: 200
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -432,7 +432,7 @@ MonoBehaviour:
   IgnoreGuiFingers: 1
   RequiredFingerCount: 0
   WheelSensitivity: 0
-  Zoom: 10
+  Zoom: 6
   ZoomClamp: 1
   ZoomMin: 3
   ZoomMax: 10
