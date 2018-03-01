@@ -38,13 +38,14 @@ public class UIMainWindowView : IWUIWindowView
     
     public void StartFight()
     {
-        var model = UIService.Get.GetCachedModel<UICharacterWindowModel>(UIWindowType.CharacterWindow);
+        /*var model = UIService.Get.GetCachedModel<UICharacterWindowModel>(UIWindowType.CharacterWindow);
 
         model.HeroDamage = 5;
         model.TeamDamage = 12;
         model.CardTupe = CharacterWindowCardTupe.Rare;
         
-        UIService.Get.ShowWindow(UIWindowType.CharacterWindow);
-//        UIMessageWindowController.CreateNotImplementedMessage();
+        UIService.Get.ShowWindow(UIWindowType.CharacterWindow);*/
+
+        GameDataService.Current.GetEnemy();
     }
 }
