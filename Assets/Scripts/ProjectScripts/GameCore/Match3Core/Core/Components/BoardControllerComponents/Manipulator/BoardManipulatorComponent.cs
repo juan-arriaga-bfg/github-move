@@ -193,9 +193,10 @@ public class BoardManipulatorComponent : ECSEntity,
 
     public bool OnUp(Vector2 startPos, Vector2 pos)
     {
-        
         if (cachedViewForDrag != null)
         {
+            DOTween.Kill(dragAnimationId);
+            
             if ((cachedDragDownPos - pos).sqrMagnitude > 0.01f)
             {
                 BoardPosition fromPosition = context.RendererContext.GetBoardPosition(cachedViewForDrag);
