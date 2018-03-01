@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class MovePieceFromToAnimation : BoardAnimation 
 {
@@ -12,10 +13,17 @@ public class MovePieceFromToAnimation : BoardAnimation
 
         context.MoveElement(Action.From, Action.To);
         
-        context.ResetBoardElement(pieceFromView, Action.To);
-        
-        
-        CompleteAnimation(context);
+        var pos = context.Context.BoardDef.GetPiecePosition(Action.To.X, Action.To.Y);
+        pos = new Vector3(pos.x, pos.y, 0f);
 
+        var sequence = DOTween.Sequence().SetId(pieceFromView.AnimationUid);
+        sequence.Append(pieceFromView.CachedTransform.DOLocalMove(pos, 0.5f).SetEase(Ease.InOutSine));
+        sequence.OnComplete(() =>
+        {
+            context.ResetBoardElement(pieceFromView, Action.To);
+            
+            CompleteAnimation(context);
+        });
+   
     }
 }

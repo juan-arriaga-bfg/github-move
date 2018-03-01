@@ -32,8 +32,8 @@ public class SandboxGameController : MonoBehaviour
                 {PieceType.S1.Id, R.S1Piece},
                 
                 {PieceType.E1.Id, R.E1Piece},
-                {PieceType.E2.Id, R.E1Piece},
-                {PieceType.E3.Id, R.E1Piece},
+                {PieceType.E2.Id, R.E2Piece},
+                {PieceType.E3.Id, R.E3Piece},
                 
                 {PieceType.O1.Id, R.O1Piece},
                 {PieceType.C1.Id, R.C1Piece},
