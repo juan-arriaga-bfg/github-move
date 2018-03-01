@@ -1,0 +1,146 @@
+[
+    {
+        "Uid" : "A3",
+        "Delay" : 10,
+        "SpawnPiece" : "C1",
+        "SpawnAmount" : 1,
+        "Resources" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 20
+        },
+        "CreateReward" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 40
+        },
+    },
+    {
+        "Uid" : "A4",
+        "Delay" : 10,
+        "SpawnPiece" : "C1",
+        "SpawnAmount" : 1,
+        "Resources" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 30
+        },
+        "CreateReward" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 60
+        },
+    },
+    {
+        "Uid" : "A5",
+        "Delay" : 10,
+        "SpawnPiece" : "C1",
+        "SpawnAmount" : 1,
+        "Resources" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 50
+        },
+        "CreateReward" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 100
+        },
+    },
+    {
+        "Uid" : "A6",
+        "Delay" : 10,
+        "SpawnPiece" : "C1",
+        "SpawnAmount" : 1,
+        "Resources" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 80
+        },
+        "CreateReward" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 160
+        },
+    },
+    {
+        "Uid" : "B3",
+        "Delay" : 20,
+        "SpawnPiece" : "C1",
+        "SpawnAmount" : 1,
+        "Resources" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 50
+        },
+        "CreateReward" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 100
+        },
+    },
+    {
+        "Uid" : "B4",
+        "Delay" : 20,
+        "SpawnPiece" : "C1",
+        "SpawnAmount" : 1,
+        "Resources" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 70
+        },
+        "CreateReward" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 150
+        },
+    },
+    {
+        "Uid" : "B5",
+        "Delay" : 20,
+        "SpawnPiece" : "C1",
+        "SpawnAmount" : 1,
+        "Resources" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 100
+        },
+        "CreateReward" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 200
+        },
+    },
+    {
+        "Uid" : "M1",
+        "Delay" : 15,
+        "SpawnPiece" : "B1",
+        "SpawnAmount" : 1,
+        "Resources" :
+        {
+            "Currency" : "PieceB1",
+            "Amount" : 0
+        },
+        "CreateReward" :
+        {
+            "Currency" : "PieceB1",
+            "Amount" : 0
+        },
+    },
+    {
+        "Uid" : "S1",
+        "Delay" : 5,
+        "SpawnPiece" : "A1",
+        "SpawnAmount" : 1,
+        "Resources" :
+        {
+            "Currency" : "PieceB1",
+            "Amount" : 0
+        },
+        "CreateReward" :
+        {
+            "Currency" : "PieceB1",
+            "Amount" : 0
+        },
+    }
+]

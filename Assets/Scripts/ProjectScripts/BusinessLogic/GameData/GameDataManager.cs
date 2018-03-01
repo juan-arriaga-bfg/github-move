@@ -6,6 +6,7 @@ public class GameDataManager
     public List<ChestDef> Chests;
     public List<EnemyDef> Enemies;
     public List<HeroDef> Heroes;
+    public Dictionary<int, PieceDef> Pieces = new Dictionary<int, PieceDef>();
     
     private readonly List<ChestDef> activeChests = new List<ChestDef>();
     private int currentEnemy;
