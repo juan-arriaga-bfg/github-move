@@ -1,5 +1,4 @@
 ﻿using System;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +19,6 @@ public class UIChestSlot : MonoBehaviour
     [SerializeField] private Image btnImage;
     [SerializeField] private Image slotImage;
 
-    private ChestState state;
     private ChestDef chest;
     
     public void Initialize(ChestDef chest = null)
@@ -29,19 +27,17 @@ public class UIChestSlot : MonoBehaviour
         
         slotLabel.Text = string.Format("<color=#FFFEAF>{0}</color>", "CHEST SLOT");
         
-        if (chest == null)
-        {
-            slotImage.color = new Color(74/255f, 74/255f, 74/255f, 1f);
-            button.SetActive(false);
-            icon.gameObject.SetActive(false);
-            timer.SetActive(false);
-            iconOpenTop.gameObject.SetActive(false);
-            iconOpenDown.gameObject.SetActive(false);
-            icon.gameObject.SetActive(false);
-            return;
-        }
+        slotImage.color = chest == null ? new Color(74/255f, 74/255f, 74/255f, 1f) : Color.white;
+        button.SetActive(chest != null);
+        icon.gameObject.SetActive(chest != null);
+        timer.SetActive(chest != null);
+        iconOpenTop.gameObject.SetActive(chest != null);
+        iconOpenDown.gameObject.SetActive(chest != null);
+        icon.gameObject.SetActive(chest != null);
         
-        state = chest.GetState();
+        if (chest == null) return;
+        
+        var state = chest.State;
         
         timer.SetActive(state == ChestState.InProgres);
         currensy.SetActive(state == ChestState.InProgres);
@@ -72,15 +68,29 @@ public class UIChestSlot : MonoBehaviour
         iconOpenDown.sprite = IconService.Current.GetSpriteById(id + "_1");
     }
 
+    private void Update()
+    {
+        if(chest != null && chest.State == ChestState.Open) Initialize(chest);
+        if(chest == null || chest.State != ChestState.InProgres) return;
+        
+        var text = chest.GetCurrentTime();
+        timerLabel.Text = text;
+        btnLabel.Text = string.Format("<size=60>{0}</size> <color=#FFFEAF>OPEN</color>", 5 * (chest.GetCurrentTimeInTimeSpan().Minutes + 1));
+        
+        if (chest.State != ChestState.InProgres) Initialize(chest);
+    }
+
     public void OnClick()
     {
-        if(state == ChestState.None) return;
+        if(chest == null || chest.State == ChestState.None) return;
         
-        if (state == ChestState.Open)
+        if (chest.State == ChestState.Open)
         {
             var chestRewardmodel = UIService.Get.GetCachedModel<UIChestRewardWindowModel>(UIWindowType.ChestRewardWindow);
 
             chestRewardmodel.Chest = chest;
+            GameDataService.Current.RemoveActiveChest(chest);
+            Initialize();
             
             UIService.Get.ShowWindow(UIWindowType.ChestRewardWindow);
             return;

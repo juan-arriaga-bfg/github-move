@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIMainWindowView : IWUIWindowView
+public class UIMainWindowView : IWUIWindowView, IBoardEventListener
 {
     [SerializeField] private NSText settingsLabel;
     [SerializeField] private NSText fightLabel;
@@ -11,24 +11,35 @@ public class UIMainWindowView : IWUIWindowView
     {
         base.OnViewShow();
         
+        BoardService.Current.GetBoardById(0).BoardEvents.AddListener(this, GameEventsCodes.EnemyDeath);
+        
         var windowModel = Model as UIMainWindowModel;
 
         settingsLabel.Text = windowModel.SettingsText;
         fightLabel.Text = windowModel.FightText;
 
-        for (int i = 0; i < slots.Count; i++)
-        {
-            var slot = slots[i];
-            if (i < slots.Count - 1) slot.Initialize(GameDataService.Current.Chests[i]);
-            else slot.Initialize();
-        }
+        UpdateSlots();
     }
-
+    
     public override void OnViewClose()
     {
         base.OnViewClose();
         
+        BoardService.Current.GetBoardById(0).BoardEvents.RemoveListener(this, GameEventsCodes.EnemyDeath);
+        
         UIMainWindowModel windowModel = Model as UIMainWindowModel;
+    }
+
+    public void UpdateSlots()
+    {
+        var chests = GameDataService.Current.GetActiveChests();
+        
+        for (int i = 0; i < slots.Count; i++)
+        {
+            var slot = slots[i];
+            
+            slot.Initialize(i < chests.Count ? chests[i] : null);
+        }
     }
 
     public void ShowSettings()
@@ -63,5 +74,12 @@ public class UIMainWindowView : IWUIWindowView
             At = free[Random.Range(0, free.Count)],
             PieceTypeId = PieceType.Parse(enemy.Skin)
         });
+    }
+
+    public void OnBoardEvent(int code, object context)
+    {
+        GameDataService.Current.AddActiveChest(GameDataService.Current.Chests.Find(def => def.Uid == context.ToString()));
+        
+        UpdateSlots();
     }
 }

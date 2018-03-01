@@ -61,6 +61,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             
             Currency.RegisterCurrency(Currency.RobinCards);
             Currency.RegisterCurrency(Currency.Enemy);
+            Currency.RegisterCurrency(Currency.Chest);
             Currency.RegisterCurrency(Currency.PieceA1);
             Currency.RegisterCurrency(Currency.PieceA2);
             Currency.RegisterCurrency(Currency.PieceA3);

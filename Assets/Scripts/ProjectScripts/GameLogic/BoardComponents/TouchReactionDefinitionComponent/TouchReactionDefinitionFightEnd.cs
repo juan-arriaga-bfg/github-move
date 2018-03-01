@@ -10,6 +10,8 @@ public class TouchReactionDefinitionFightEnd : TouchReactionDefinitionComponent
 			Positions = new List<BoardPosition>{position}
 		});
 		
+		piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.EnemyDeath, GameDataService.Current.GetEnemy(true).Chest);
+		
 		return true;
 	}
 }
