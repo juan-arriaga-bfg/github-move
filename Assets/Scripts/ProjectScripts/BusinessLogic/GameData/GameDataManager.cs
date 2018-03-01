@@ -9,7 +9,8 @@ public class GameDataManager
     public Dictionary<int, PieceDef> Pieces = new Dictionary<int, PieceDef>();
     
     private readonly List<ChestDef> activeChests = new List<ChestDef>();
-    private int currentEnemy;
+    
+    public int EnemyIndex { get; set; }
     
     public int HeroLevel
     {
@@ -50,16 +51,16 @@ public class GameDataManager
     {
         return Heroes.Find(def => def.Uid == uid);
     }
-    
-    public EnemyDef GetEnemy(bool isSilent = false)
+
+    public EnemyDef GetEnemy(int index)
     {
         EnemyDef enemy;
         var max = Enemies.Count - 1;
         
-        if (currentEnemy > max)
+        if (index > max)
         {
             var last = Enemies[max];
-            var factor = currentEnemy - max;
+            var factor = index - max;
             
             enemy = new EnemyDef
             {
@@ -71,10 +72,15 @@ public class GameDataManager
         }
         else
         {
-            enemy = Enemies[currentEnemy];
+            enemy = Enemies[index];
         }
-
-        if (isSilent) return enemy;
+        
+        return enemy;
+    }
+    
+    public EnemyDef GetEnemy()
+    {
+        var enemy = GetEnemy(EnemyIndex);
         
         var shopItem = new ShopItem
         {
@@ -93,7 +99,7 @@ public class GameDataManager
             (item, s) =>
             {
                 // on purchase success
-                currentEnemy++;
+                EnemyIndex++;
             },
             item =>
             {
