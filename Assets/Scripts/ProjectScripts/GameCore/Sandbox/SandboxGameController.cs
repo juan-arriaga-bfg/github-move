@@ -187,7 +187,7 @@ public class SandboxGameController : MonoBehaviour
             boardController.BoardLogic.EmptyCellsFinder.FindRingWithPointInCenter(position, positions, 1000, i);
         }
         
-//        boardController.ActionExecutor.PerformAction(new FillBoardAction{Piece = PieceType.O1.Id, Positions = positions});
+        boardController.ActionExecutor.PerformAction(new FillBoardAction{Piece = PieceType.O1.Id, Positions = positions});
         
         boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
         {

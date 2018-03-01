@@ -117,10 +117,13 @@ public class BoardManipulatorComponent : ECSEntity,
             var pieceBoardElementView = cachedViewForDrag as PieceBoardElementView;
             var boardPos = context.BoardDef.GetSectorPosition(targetPos);
             
+            
+            
             pieceBoardElementView.OnDrag(boardPos, pos);
             
             if (lastCachedDragPosition.Equals(boardPos) == false)
             {
+                cachedViewForDrag.SyncRendererLayers(new BoardPosition(context.BoardDef.Width, context.BoardDef.Height, context.BoardDef.Depth));
                 lastCachedDragPosition = boardPos;
                 bool isPointValid = context.BoardLogic.IsPointValid(boardPos);
                 if (isPointValid)
@@ -171,8 +174,7 @@ public class BoardManipulatorComponent : ECSEntity,
 
             if (cachedViewForDrag != null)
             {
-                cachedViewForDrag.SyncRendererLayers(new BoardPosition(context.BoardDef.Width, context.BoardDef.Height,
-                    context.BoardDef.Depth));
+                
                 cameraManipulator.CameraMove.Lock(this);
                 
                 if (selectedView is PieceBoardElementView)
@@ -211,6 +213,8 @@ public class BoardManipulatorComponent : ECSEntity,
                 var pieceBoardElementView = cachedViewForDrag as PieceBoardElementView;
                 var boardPos = context.BoardDef.GetSectorPosition(pos);
                 pieceBoardElementView.OnDragEnd(boardPos, pos);
+                
+                cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, pieceBoardElementView.Piece.Layer.Index));
             }
 
             cachedViewForDrag = null;
