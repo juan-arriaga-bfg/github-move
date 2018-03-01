@@ -100,39 +100,46 @@ public class UIChestRewardWindowView : UIGenericWindowView
         
         var windowModel = Model as UIChestRewardWindowModel;
         var chest = windowModel.Chest;
+        var board = BoardService.Current.GetBoardById(0);
+        
+        var heroHouse = new BoardPosition(10, 18, board.BoardDef.PieceLayer);
 
-        foreach (var reward in chest.Rewards)
+        for (var index = 0; index < chest.Rewards.Count; index++)
         {
+            if(index > 1 && index != random) continue;
+            
+            var reward = chest.Rewards[index];
+            
             if (reward.Currency != Currency.Coins.Name && reward.Currency != Currency.RobinCards.Name)
             {
-                var board = BoardService.Current.GetBoardById(0);
-        
-                var free = new List<BoardPosition>();
-        
-                board.BoardLogic.EmptyCellsFinder.FindAllWithPointInHome(new BoardPosition(8, 8, board.BoardDef.PieceLayer), 15, 15, free);
-        
-                if(free.Count == 0) continue;
-                
-                board.ActionExecutor.AddAction(new SpawnPieceAtAction
+                var pieces = new List<int>();
+
+                for (int i = 0; i < reward.Amount; i++)
                 {
-                    At = free[Random.Range(0, free.Count)],
-                    PieceTypeId = PieceType.Parse(reward.Currency.Replace("Piece", ""))
+                    pieces.Add(PieceType.Parse(reward.Currency));
+                }
+                
+                board.ActionExecutor.AddAction(new SpawnPiecesAction
+                {
+                    IsCheckMatch = false,
+                    At = heroHouse,
+                    Pieces = pieces
                 });
                 
                 continue;
             }
-            
+
             var shopItem = new ShopItem
             {
-                Uid = string.Format("purchase.test.{0}.10", reward.Currency), 
-                ItemUid = reward.Currency, 
+                Uid = string.Format("purchase.test.{0}.10", reward.Currency),
+                ItemUid = reward.Currency,
                 Amount = reward.Amount,
                 CurrentPrices = new List<Price>
                 {
-                    new Price{Currency = Currency.Cash.Name, DefaultPriceAmount = 0}
+                    new Price {Currency = Currency.Cash.Name, DefaultPriceAmount = 0}
                 }
             };
-        
+
             ShopService.Current.PurchaseItem
             (
                 shopItem,
@@ -145,6 +152,16 @@ public class UIChestRewardWindowView : UIGenericWindowView
                     // on purchase failed (not enough cash)
                 }
             );
+        }
+
+        var hero = GameDataService.Current.GetHero("Robin");
+        var level = GameDataService.Current.HeroLevel;
+
+        if (ProfileService.Current.GetStorageItem(Currency.RobinCards.Name).Amount >= hero.Prices[level].Amount)
+        {
+            var worldPos = board.BoardDef.GetSectorCenterWorldPosition(heroHouse.X, heroHouse.Up.Y, heroHouse.Z);
+        
+            board.Manipulator.CameraManipulator.ZoomTo(0.3f, worldPos);
         }
         
         foreach (var anchor in cardAnchors)
