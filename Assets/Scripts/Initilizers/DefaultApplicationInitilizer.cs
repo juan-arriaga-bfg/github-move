@@ -60,6 +60,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             Currency.RegisterCurrency(Currency.Crystals);
             
             Currency.RegisterCurrency(Currency.RobinCards);
+            Currency.RegisterCurrency(Currency.Enemy);
             Currency.RegisterCurrency(Currency.PieceA1);
             Currency.RegisterCurrency(Currency.PieceA2);
             Currency.RegisterCurrency(Currency.PieceA3);
@@ -69,9 +70,17 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         });
         ShopService.Instance.SetManager(shopManager);
         
+        // gamedata configs
         GameDataManager dataManager = new GameDataManager();
         GameDataService.Instance.SetManager(dataManager);
-        dataManager.LoadData(new ResourceConfigDataMapper<List<ChestDef>>("configs/chests.data", NSConfigsSettings.Instance.IsUseEncryption));
+
+        var chestsLoader = new ResourceConfigDataMapper<List<ChestDef>>("configs/chests.data", NSConfigsSettings.Instance.IsUseEncryption);
+        var enemiesLoader = new ResourceConfigDataMapper<List<EnemyDef>>("configs/enemies.data", NSConfigsSettings.Instance.IsUseEncryption);
+        var heroesLoader = new ResourceConfigDataMapper<List<HeroDef>>("configs/heroes.data", NSConfigsSettings.Instance.IsUseEncryption);
+        
+        chestsLoader.LoadData((defs, s) => dataManager.Chests = defs);
+        enemiesLoader.LoadData((defs, s) => dataManager.Enemies = defs);
+        heroesLoader.LoadData((defs, s) => dataManager.Heroes = defs);
         
         // load local profile
         ProfileService.Instance.Manager.LoadCurrentProfile((profile) =>

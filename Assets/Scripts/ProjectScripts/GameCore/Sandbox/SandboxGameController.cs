@@ -30,7 +30,10 @@ public class SandboxGameController : MonoBehaviour
                 
                 {PieceType.M1.Id, R.M1Piece},
                 {PieceType.S1.Id, R.S1Piece},
+                
                 {PieceType.E1.Id, R.E1Piece},
+                {PieceType.E2.Id, R.E1Piece},
+                {PieceType.E3.Id, R.E1Piece},
                 
                 {PieceType.O1.Id, R.O1Piece},
                 {PieceType.C1.Id, R.C1Piece},
@@ -77,6 +80,8 @@ public class SandboxGameController : MonoBehaviour
             },
             
             {PieceType.E1.Id, new EnemyPieceBuilder{HitPoints = 10}},
+            {PieceType.E2.Id, new EnemyPieceBuilder{HitPoints = 10}},
+            {PieceType.E3.Id, new EnemyPieceBuilder{HitPoints = 10}},
             
             {PieceType.O1.Id, new GenericPieceBuilder()},
             {PieceType.C1.Id, new ResourcePieceBuilder{Amount = 10, Currency = Currency.Coins.Name}},
@@ -164,12 +169,6 @@ public class SandboxGameController : MonoBehaviour
         {
             At = new BoardPosition(10, 14),
             PieceTypeId = PieceType.M1.Id
-        });
-        
-        boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
-        {
-            At = new BoardPosition(10, 10),
-            PieceTypeId = PieceType.E1.Id
         });
         
 //        boardController.ActionExecutor.PerformAction(new StartSessionBoardAction());

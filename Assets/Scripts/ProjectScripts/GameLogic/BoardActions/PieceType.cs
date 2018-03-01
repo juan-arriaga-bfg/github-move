@@ -1,7 +1,30 @@
 ﻿using System.Collections.Generic;
 
-public partial class PieceType 
+public static partial class PieceType 
 {
+    static PieceType()
+    {
+        RegisterType(A1);
+        RegisterType(A2);
+        RegisterType(A3);
+        RegisterType(A4);
+        
+        RegisterType(B1);
+        RegisterType(B2);
+        RegisterType(B3);
+        RegisterType(B4);
+        
+        RegisterType(C1);
+        
+        RegisterType(E1);
+        RegisterType(E2);
+        RegisterType(E3);
+        
+        RegisterType(O1);
+        
+        RegisterType(M1);
+        RegisterType(S1);
+    }
     
     public readonly static PieceTypeDef A1 = new PieceTypeDef{Id = 100, Abbreviations = new List<string>{ "A1" }};
     public readonly static PieceTypeDef A2 = new PieceTypeDef{Id = 101, Abbreviations = new List<string>{ "A2" }};
@@ -16,6 +39,8 @@ public partial class PieceType
     public readonly static PieceTypeDef C1 = new PieceTypeDef{Id = 300, Abbreviations = new List<string>{ "C1", "coin" }};
     
     public readonly static PieceTypeDef E1 = new PieceTypeDef{Id = 400, Abbreviations = new List<string>{ "E1" }};
+    public readonly static PieceTypeDef E2 = new PieceTypeDef{Id = 401, Abbreviations = new List<string>{ "E2" }};
+    public readonly static PieceTypeDef E3 = new PieceTypeDef{Id = 402, Abbreviations = new List<string>{ "E3" }};
     
     public readonly static PieceTypeDef O1 = new PieceTypeDef{Id = 500, Abbreviations = new List<string>{ "O1" }};
     

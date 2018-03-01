@@ -17,7 +17,7 @@ public enum ChestType
     Epic
 }
 
-public class ChestDef 
+public class ChestDef
 {
     public string Uid { get; set; }
     public int Time { get; set; }
