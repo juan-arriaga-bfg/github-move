@@ -19,8 +19,8 @@ public class UIMainWindowView : IWUIWindowView
         for (int i = 0; i < slots.Count; i++)
         {
             var slot = slots[i];
-            if (i < slots.Count - 1) slot.Initialize((ChestState) (i + 1), GameDataService.Current.Chests[i]);
-            else slot.Initialize(ChestState.None);
+            if (i < slots.Count - 1) slot.Initialize(GameDataService.Current.Chests[i]);
+            else slot.Initialize();
         }
     }
 

@@ -25,6 +25,7 @@ public class UIChestWindowView : UIGenericPopupWindowView
         base.OnViewShow();
         
         var windowModel = Model as UIChestWindowModel;
+        var state = windowModel.Chest.GetState();
         
         SetMessage(windowModel.Message);
 
@@ -34,16 +35,16 @@ public class UIChestWindowView : UIGenericPopupWindowView
         btnStartLabel.Text = windowModel.ButtonText;
         timerLengthLabel.Text = windowModel.TimerLength;
         
-        btnOpen.SetActive(windowModel.CurrentChestState == ChestState.Progres);
-        btnStart.SetActive(windowModel.CurrentChestState == ChestState.Lock);
+        btnOpen.SetActive(state == ChestState.InProgres);
+        btnStart.SetActive(state == ChestState.Lock);
         
-        timerLengthLabel.gameObject.SetActive(windowModel.CurrentChestState == ChestState.Lock);
-        timer.SetActive(windowModel.CurrentChestState == ChestState.Progres);
+        timerLengthLabel.gameObject.SetActive(state == ChestState.Lock);
+        timer.SetActive(state == ChestState.InProgres);
 
         chest.sprite = windowModel.ChestImage;
         
-        IconBox.anchoredPosition = new Vector2(IconBox.anchoredPosition.x, windowModel.CurrentChestState == ChestState.Lock ? 48 : 20);
-        NameBox.anchoredPosition = new Vector2(NameBox.anchoredPosition.x, windowModel.CurrentChestState == ChestState.Lock ? -95 : -123);
+        IconBox.anchoredPosition = new Vector2(IconBox.anchoredPosition.x, state == ChestState.Lock ? 48 : 20);
+        NameBox.anchoredPosition = new Vector2(NameBox.anchoredPosition.x, state == ChestState.Lock ? -95 : -123);
     }
 
     public override void OnViewClose()

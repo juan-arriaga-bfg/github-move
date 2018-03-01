@@ -23,10 +23,10 @@ public class UIChestSlot : MonoBehaviour
     private ChestState state;
     private ChestDef chest;
     
-    public void Initialize(ChestState state, ChestDef chest = null)
+    public void Initialize(ChestDef chest = null)
     {
-        this.state = state;
         this.chest = chest;
+        
         slotLabel.Text = string.Format("<color=#FFFEAF>{0}</color>", "CHEST SLOT");
         
         if (chest == null)
@@ -41,8 +41,10 @@ public class UIChestSlot : MonoBehaviour
             return;
         }
         
-        timer.SetActive(state == ChestState.Progres);
-        currensy.SetActive(state == ChestState.Progres);
+        state = chest.GetState();
+        
+        timer.SetActive(state == ChestState.InProgres);
+        currensy.SetActive(state == ChestState.InProgres);
         iconOpenTop.gameObject.SetActive(state == ChestState.Open);
         iconOpenDown.gameObject.SetActive(state == ChestState.Open);
         icon.gameObject.SetActive(state != ChestState.Open);
@@ -53,7 +55,7 @@ public class UIChestSlot : MonoBehaviour
                 btnImage.sprite = IconService.Current.GetSpriteById("btn_orange_norm");
                 btnLabel.Text = string.Format("<color=#FFFEAF>UNLOCK IN</color> <size=60>{0}m</size>", new TimeSpan(0, 0, chest.Time).TotalMinutes);
                 break;
-            case ChestState.Progres:
+            case ChestState.InProgres:
                 btnImage.sprite = IconService.Current.GetSpriteById("btn_blue_norm");
                 btnLabel.Text = string.Format("<size=60>{0}</size> <color=#FFFEAF>OPEN</color>", chest.Price.Amount);
                 break;
@@ -63,20 +65,7 @@ public class UIChestSlot : MonoBehaviour
                 break;
         }
 
-        var id = "chest_3";
-        
-        switch ((ChestType) Enum.Parse(typeof(ChestType), chest.Uid))
-        {
-            case ChestType.Common:
-                id = "chest_1";
-                break;
-            case ChestType.Rare:
-                id = "chest_2";
-                break;
-            case ChestType.Epic:
-                id = "chest_4";
-                break;
-        }
+        var id = chest.GetSkin();
         
         icon.sprite = IconService.Current.GetSpriteById(id);
         iconOpenTop.sprite = IconService.Current.GetSpriteById(id + "_3");
@@ -89,14 +78,17 @@ public class UIChestSlot : MonoBehaviour
         
         if (state == ChestState.Open)
         {
-            UIMessageWindowController.CreateNotImplementedMessage();
+            var chestRewardmodel = UIService.Get.GetCachedModel<UIChestRewardWindowModel>(UIWindowType.ChestRewardWindow);
+
+            chestRewardmodel.Chest = chest;
+            
+            UIService.Get.ShowWindow(UIWindowType.ChestRewardWindow);
             return;
         }
         
-        var model = UIService.Get.GetCachedModel<UIChestWindowModel>(UIWindowType.ChestWindow);
+        var chestWindowmodel = UIService.Get.GetCachedModel<UIChestWindowModel>(UIWindowType.ChestWindow);
 
-        model.Chest = chest;
-        model.CurrentChestState = state;
+        chestWindowmodel.Chest = chest;
         
         UIService.Get.ShowWindow(UIWindowType.ChestWindow);
     }

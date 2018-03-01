@@ -7,11 +7,25 @@
             "Currency" : "Crystals",
             "Amount" : 5
         },
-        "Reward" :
-        {
-            "Currency" : "Coins",
-            "Amount" : 30
-        }
+        "Rewards" :
+        [
+            {
+                "Currency" : "Coins",
+                "Amount" : 40
+            },
+            {
+                "Currency" : "RobinCards",
+                "Amount" : 5
+            },
+            {
+                "Currency" : "PieceA1",
+                "Amount" : 1
+            },
+            {
+                "Currency" : "PieceB1",
+                "Amount" : 2
+            }
+        ]
     },
     {
         "Uid" : "Rare",
@@ -21,11 +35,25 @@
             "Currency" : "Crystals",
             "Amount" : 10
         },
-        "Reward" :
-        {
-            "Currency" : "Coins",
-            "Amount" : 40
-        }
+        "Rewards" :
+        [
+            {
+                "Currency" : "Coins",
+                "Amount" : 110
+            },
+            {
+                "Currency" : "RobinCards",
+                "Amount" : 12
+            },
+            {
+                "Currency" : "PieceA2",
+                "Amount" : 2
+            },
+            {
+                "Currency" : "PieceB2",
+                "Amount" : 1
+            }
+        ]
     },
     {
         "Uid" : "Epic",
@@ -35,10 +63,24 @@
             "Currency" : "Crystals",
             "Amount" : 25
         },
-        "Reward" :
-        {
-            "Currency" : "Crystals",
-            "Amount" : 10
-        }
+        "Rewards" :
+        [
+            {
+                "Currency" : "Coins",
+                "Amount" : 165
+            },
+            {
+                "Currency" : "RobinCards",
+                "Amount" : 22
+            },
+            {
+                "Currency" : "PieceA3",
+                "Amount" : 1
+            },
+            {
+                "Currency" : "PieceB3",
+                "Amount" : 2
+            }
+        ]
     },
 ]
