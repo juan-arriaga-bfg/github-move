@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public enum ChestState
 {
@@ -25,7 +26,7 @@ public class ChestDef
     public CurrencyPair Price { get; set; }
     public List<CurrencyPair> Rewards { get; set; }
 
-    public DateTime StartTime { get; set; }
+    public DateTime? StartTime { get; set; }
     
     private ChestType chestType;
 
@@ -42,16 +43,8 @@ public class ChestDef
         return str;
     }
 
-    public ChestState GetState()
-    {
-        var delay = DateTime.Now - StartTime;
-
-        if (delay.TotalSeconds < 1) return ChestState.Lock;
-        if (delay.TotalSeconds < Time) return ChestState.InProgres;
-        
-        return ChestState.Open;
-    }
-
+    public ChestState State { get; set; }
+    
     public ChestType GetChestType()
     {
         if (chestType != ChestType.None) return chestType;
@@ -77,16 +70,34 @@ public class ChestDef
     {
         var time = new TimeSpan(0, 0, Time);
 
-        if (time.TotalHours > 0) return string.Format("{0}h {1}m", time.Hours, time.Minutes);
+        if ((int)time.TotalHours > 0) return string.Format("{0}h {1}m", time.Hours, time.Minutes);
         
         return string.Format("{0}m", time.Minutes);
     }
 
-    public string getCurrentTime()
+    public TimeSpan GetCurrentTimeInTimeSpan()
     {
-        var time = DateTime.Now - StartTime;
+        var finish = new TimeSpan(0, 0, Time);
+        return finish - (DateTime.Now - StartTime.Value);
+    }
+
+    public string GetCurrentTime()
+    {
+        var time = GetCurrentTimeInTimeSpan();
+        var str = "";
+
+        if ((int) time.TotalHours > 0)
+        {
+            str = string.Format("{0}:{1}", time.Hours, (time.Minutes > 9 ? "" : "0") + time.Minutes);
+        }
+        else
+        {
+            str = string.Format("{0}:{1}", (time.Minutes > 9 ? "" : "0") + time.Minutes,
+                (time.Seconds > 9 ? "" : "0") + time.Seconds);
+        }
+
+        if (str == "00:00") State = ChestState.Open;
         
-        if (time.TotalHours > 0) return string.Format("{0}:{1}", time.Hours, time.Minutes);
-        return string.Format("{0}:{1}", time.Minutes, time.Seconds);
+        return str;
     }
 }

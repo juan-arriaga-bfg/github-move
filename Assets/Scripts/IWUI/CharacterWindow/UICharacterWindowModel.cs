@@ -17,19 +17,20 @@ public enum CharacterWindowCardTupe
 public class UICharacterWindowModel : IWWindowModel
 {
     public CharacterWindowTupe WindowTupe { get; set; }
-    public CharacterWindowCardTupe CardTupe { get; set; }
-    
-    public int CurrentProgress { get; set; }
-    public int TotalProgress { get; set; }
-    
-    public int HeroDamage { get; set; }
-    public int TeamDamage { get; set; }
-    
-    public int HeroLevel { get; set; }
-    
+
+    public int CurrentProgress
+    {
+        get { return ProfileService.Current.GetStorageItem(Currency.RobinCards.Name).Amount; }
+    }
+
+    public int TotalProgress
+    {
+        get { return GameDataService.Current.GetHero("Robin").Prices[GameDataService.Current.HeroLevel].Amount; }
+    }
+
     public bool IsDone
     {
-        get { return CurrentProgress == TotalProgress; }
+        get { return CurrentProgress >= TotalProgress; }
     }
     
     public string Title
@@ -54,12 +55,22 @@ public class UICharacterWindowModel : IWWindowModel
     
     public string DamageText
     {
-        get { return string.Format("{0} <color=#00FF00>+{1}</color>", HeroDamage, TeamDamage); }
+        get
+        {
+            var hero = GameDataService.Current.GetHero("Robin");
+            var level = GameDataService.Current.HeroLevel;
+            var nextDamage = level == hero.Damages.Count - 1 ? 0 : hero.Damages[level + 1];
+            var heroDamage = hero.Damages[level];
+            
+            if(nextDamage == 0) return heroDamage.ToString();
+            
+            return string.Format("{0} <color=#00FF00>+{1}</color>", heroDamage, nextDamage);
+        }
     }
 
     public string LevelText
     {
-        get { return string.Format("Level {0}", HeroLevel); }
+        get { return string.Format("Level {0}", GameDataService.Current.HeroLevel + 1); }
     }
     
     public string HeroName
@@ -72,8 +83,9 @@ public class UICharacterWindowModel : IWWindowModel
         get
         {
             var color = "FFFFFF";
+            var cardTupe = CharacterWindowCardTupe.Rare;
 
-            switch (CardTupe)
+            switch (cardTupe)
             {
                 case CharacterWindowCardTupe.Build:
                     color = "347E13";
@@ -88,7 +100,7 @@ public class UICharacterWindowModel : IWWindowModel
                     throw new ArgumentOutOfRangeException();
             }
             
-            return string.Format("<color=#{0}>{1} card</color>", color, CardTupe);
+            return string.Format("<color=#{0}>{1} card</color>", color, cardTupe);
         }
     }
 }

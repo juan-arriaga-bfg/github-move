@@ -27,7 +27,11 @@ public class UIChestRewardWindowView : UIGenericWindowView
     [SerializeField] private Image iconOpenTop;
     [SerializeField] private Image iconOpenDown;
     
+    [SerializeField] private Image iconPiece;
+    
     [SerializeField] private RectTransform progress;
+
+    private int random;
     
     public override void OnViewShow()
     {
@@ -53,19 +57,24 @@ public class UIChestRewardWindowView : UIGenericWindowView
         resourceAmountLabel.Text = resCard.Amount.ToString();
         
         var heroCard = windowModel.Chest.Rewards.Find(pair => pair.Currency == Currency.RobinCards.Name);
-
+        var hero = GameDataService.Current.GetHero("Robin");
+        var price = hero.Prices[GameDataService.Current.HeroLevel].Amount;
+        
         cardHeroName.Text = heroCard.Currency.Replace("Cards", "");
         heroAmountLabel.Text = "x" + heroCard.Amount;
         
-        heroProgressLabel.Text = string.Format("{0}/{1}", heroCard.Amount, 50);
-        progress.sizeDelta = new Vector2(150*(heroCard.Amount/50f), progress.sizeDelta.y);
+        heroProgressLabel.Text = string.Format("{0}/{1}", heroCard.Amount, price);
+        progress.sizeDelta = new Vector2(Mathf.Clamp(150*(heroCard.Amount/(float)price), 0, 150), progress.sizeDelta.y);
         
-        var index = 2 + Random.Range(0, 2);
-        var amount = windowModel.Chest.Rewards[2 + Random.Range(0, 2)].Amount;
-        var pieceCard = windowModel.Chest.Rewards[index];
+        random = 2 + Random.Range(0, 2);
         
-        cardBuildName.Text = pieceCard.Currency.Replace("Piece", "")[0] == 'A' ? "House" : "Tower";
-        buildAmountLabel.Text = "x" + amount;
+        var pieceCard = windowModel.Chest.Rewards[random];
+        var piece = pieceCard.Currency.Replace("Piece", "");
+        
+        cardBuildName.Text = piece[0] == 'A' ? "House" : "Tower";
+        buildAmountLabel.Text = "x" + pieceCard.Amount;
+        
+        iconPiece.sprite = IconService.Current.GetSpriteById(piece);
     }
     
     public override void AnimateShow()
@@ -84,11 +93,60 @@ public class UIChestRewardWindowView : UIGenericWindowView
             sequence.Append(anchor.DOAnchorPos(position, (i * 0.1f) + 0.5f).SetEase(Ease.OutBack));
         }
     }
-
+    
     public override void AnimateClose()
     {
         base.AnimateClose();
+        
+        var windowModel = Model as UIChestRewardWindowModel;
+        var chest = windowModel.Chest;
 
+        foreach (var reward in chest.Rewards)
+        {
+            if (reward.Currency != Currency.Coins.Name && reward.Currency != Currency.RobinCards.Name)
+            {
+                var board = BoardService.Current.GetBoardById(0);
+        
+                var free = new List<BoardPosition>();
+        
+                board.BoardLogic.EmptyCellsFinder.FindAllWithPointInHome(new BoardPosition(8, 8, board.BoardDef.PieceLayer), 15, 15, free);
+        
+                if(free.Count == 0) continue;
+                
+                board.ActionExecutor.AddAction(new SpawnPieceAtAction
+                {
+                    At = free[Random.Range(0, free.Count)],
+                    PieceTypeId = PieceType.Parse(reward.Currency.Replace("Piece", ""))
+                });
+                
+                continue;
+            }
+            
+            var shopItem = new ShopItem
+            {
+                Uid = string.Format("purchase.test.{0}.10", reward.Currency), 
+                ItemUid = reward.Currency, 
+                Amount = reward.Amount,
+                CurrentPrices = new List<Price>
+                {
+                    new Price{Currency = Currency.Cash.Name, DefaultPriceAmount = 0}
+                }
+            };
+        
+            ShopService.Current.PurchaseItem
+            (
+                shopItem,
+                (item, s) =>
+                {
+                    // on purchase success
+                },
+                item =>
+                {
+                    // on purchase failed (not enough cash)
+                }
+            );
+        }
+        
         foreach (var anchor in cardAnchors)
         {
             DOTween.Kill(anchor);

@@ -12,7 +12,7 @@ public class UIChestWindowModel : IWWindowModel
     
     public string Message
     {
-        get { return Chest.GetState() == ChestState.InProgres ? "Unlocking takes:" : ""; }
+        get { return Chest.State == ChestState.InProgres ? "Unlocking takes:" : ""; }
     }
     
     public string ChestTypeText
@@ -24,7 +24,7 @@ public class UIChestWindowModel : IWWindowModel
     {
         get
         {
-            switch (Chest.GetState())
+            switch (Chest.State)
             {
                 case ChestState.Lock:
                     return "Start unlock";
@@ -53,9 +53,10 @@ public class UIChestWindowModel : IWWindowModel
         }
     }
 
-    private int GetUnlockPrice()
+    public int GetUnlockPrice()
     {
-        // TODO: дописать скудку за прошедшее время
-        return Chest.Price.Amount;
+        var min = Chest.GetCurrentTimeInTimeSpan().Minutes + 1;
+        
+        return 5 * min;
     }
 }

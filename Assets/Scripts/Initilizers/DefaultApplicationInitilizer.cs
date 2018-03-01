@@ -61,12 +61,15 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             
             Currency.RegisterCurrency(Currency.RobinCards);
             Currency.RegisterCurrency(Currency.Enemy);
+            Currency.RegisterCurrency(Currency.Chest);
             Currency.RegisterCurrency(Currency.PieceA1);
             Currency.RegisterCurrency(Currency.PieceA2);
             Currency.RegisterCurrency(Currency.PieceA3);
             Currency.RegisterCurrency(Currency.PieceB1);
             Currency.RegisterCurrency(Currency.PieceB2);
             Currency.RegisterCurrency(Currency.PieceB3);
+            
+            Currency.RegisterCurrency(Currency.Level);
         });
         ShopService.Instance.SetManager(shopManager);
         

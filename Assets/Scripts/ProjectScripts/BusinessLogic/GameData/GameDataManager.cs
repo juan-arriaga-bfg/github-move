@@ -7,16 +7,37 @@ public class GameDataManager
     public List<EnemyDef> Enemies;
     public List<HeroDef> Heroes;
     
-    private List<ChestDef> activeChests;
+    private readonly List<ChestDef> activeChests = new List<ChestDef>();
     private int currentEnemy;
-
+    
+    public int HeroLevel
+    {
+        get
+        {
+            var hero = GetHero("Robin");
+            var level = Mathf.Clamp(ProfileService.Current.GetStorageItem(Currency.Level.Name).Amount, 0, hero.Damages.Count - 1);
+            
+            return level;
+        }
+    }
+    
     public bool AddActiveChest(ChestDef chest)
     {
         if (activeChests.Count == 4) return false;
-        
+
+        chest.State = ChestState.Lock;
         activeChests.Add(chest);
         
         return true;
+    }
+
+    public void RemoveActiveChest(ChestDef chest)
+    {
+        var index = activeChests.IndexOf(chest);
+        
+        if(index == -1) return;
+        
+        activeChests.RemoveAt(index);
     }
     
     public List<ChestDef> GetActiveChests()
@@ -24,7 +45,12 @@ public class GameDataManager
         return activeChests;
     }
 
-    public EnemyDef GetEnemy()
+    public HeroDef GetHero(string uid)
+    {
+        return Heroes.Find(def => def.Uid == uid);
+    }
+    
+    public EnemyDef GetEnemy(bool isSilent = false)
     {
         EnemyDef enemy;
         var max = Enemies.Count - 1;
@@ -46,6 +72,8 @@ public class GameDataManager
         {
             enemy = Enemies[currentEnemy];
         }
+
+        if (isSilent) return enemy;
         
         var shopItem = new ShopItem
         {
