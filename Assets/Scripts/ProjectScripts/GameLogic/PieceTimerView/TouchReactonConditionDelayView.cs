@@ -4,6 +4,8 @@ public class TouchReactonConditionDelayView : MonoBehaviour
 {
 	[SerializeField] private Transform anchorView;
 	
+	[SerializeField] private Vector3 arrowOffset;
+	
 	private PieceBoardElementView context;
 
 	private ResourceGenerationTimerView resourceGenerationTimerView;
@@ -27,7 +29,7 @@ public class TouchReactonConditionDelayView : MonoBehaviour
 		resourceGenerationTimerView.CachedTransform.localRotation = Quaternion.identity;
 		resourceGenerationTimerView.CachedTransform.localScale = Vector3.one;
 		
-		resourceGenerationTimerView.Init(context);
+		resourceGenerationTimerView.Init(context, arrowOffset);
 		
 		context.ClearCacheLayers();
 

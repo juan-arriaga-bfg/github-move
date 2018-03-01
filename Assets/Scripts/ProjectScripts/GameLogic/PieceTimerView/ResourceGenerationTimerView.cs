@@ -7,20 +7,41 @@ public class ResourceGenerationTimerView : IWBaseMonoBehaviour
 	
 	[SerializeField] private NSText boardProgressBarLabel;
 	
-	[SerializeField] private Transform completeView;
+	[SerializeField] private Transform completeViewAnchor;
 	
 	private PieceBoardElementView context;
 
 	private TouchReactonConditionDelay touchReactonConditionDelay;
+	
+	private Vector3 arrowOffset;
 
-	public virtual void Init(PieceBoardElementView context)
+	public virtual void Init(PieceBoardElementView context, Vector3 arrowOffset)
 	{
 		this.context = context;
+		this.arrowOffset = arrowOffset;
+
+		completeViewAnchor.localPosition = completeViewAnchor.localPosition + arrowOffset;
 	}
 
 	private void OnDisable()
 	{
 		touchReactonConditionDelay = null;
+	}
+
+	private void Awake()
+	{
+		foreach (Transform view in completeViewAnchor)
+		{
+			DestroyImmediate(view.gameObject);
+		}
+
+		var go = (GameObject)Instantiate(ContentService.Instance.Manager.GetObjectByName(R.ReadyArrowView));
+		var objComponent = go.GetComponent<Transform>();
+
+		objComponent.SetParent(completeViewAnchor);
+		objComponent.localPosition = Vector3.zero;
+		objComponent.localRotation = Quaternion.identity;
+		objComponent.localScale = Vector3.one;
 	}
 
 	private void Update()
@@ -40,13 +61,13 @@ public class ResourceGenerationTimerView : IWBaseMonoBehaviour
 
 		if (currentSeconds > targetSeconds)
 		{
-			completeView.gameObject.SetActive(true);
+			completeViewAnchor.gameObject.SetActive(true);
 			boardProgressBarView.gameObject.SetActive(false);
 			
 			return;
 		}
 
-		completeView.gameObject.SetActive(false);
+		completeViewAnchor.gameObject.SetActive(false);
 		boardProgressBarView.gameObject.SetActive(true);
 		
 		float progress = currentSeconds / (float) targetSeconds;

@@ -22,5 +22,6 @@ public class R
      public const string A6Piece = "A6Piece";
      public const string ResourceGenerationTimerView = "ResourceGenerationTimerView";
      public const string HitboxView = "HitboxView";
-     public const string H1Piece = "H1Piece";
+     public const string ReadyArrowView = "ReadyArrowView";
+     public const string HitboxDamageView = "HitboxDamageView";
 }

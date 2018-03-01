@@ -51,6 +51,8 @@ public class SandboxGameController : MonoBehaviour
                 {PieceType.B3.Id, R.B3Piece},
                 {PieceType.B4.Id, R.B4Piece},
                 {PieceType.B5.Id, R.B5Piece},
+                
+                {-1000, R.HitboxDamageView}
             }
         };
         
