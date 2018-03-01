@@ -9,7 +9,7 @@ public class SpawnPieceAtAnimation : BoardAnimation
     
     public override void Animate(BoardRenderer context)
     {
-        var boardElement = context.CreateElementAt(Action.PieceTypeId, Action.At);
+        var boardElement = context.CreatePieceAt(Action.CreatedPiece, Action.At);
 
         boardElement.CachedTransform.localScale = Vector3.zero;
         

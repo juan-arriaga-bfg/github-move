@@ -45,6 +45,15 @@ public class PieceBoardObserversComponent : IECSComponent, IPieceBoardObserver
 		}
 	}
 
+	public void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece context = null)
+	{
+		for (int i = 0; i < observers.Count; i++)
+		{
+			var observer = observers[i];
+			observer.OnMovedFromTo(from, to, context);
+		}
+	}
+
 	public virtual void OnRemoveFromBoard(BoardPosition position, Piece targetContext = null)
 	{
 		for (int i = 0; i < observers.Count; i++)

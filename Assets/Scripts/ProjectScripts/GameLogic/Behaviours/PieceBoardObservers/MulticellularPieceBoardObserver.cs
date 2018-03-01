@@ -13,6 +13,11 @@ public class MulticellularPieceBoardObserver : IPieceBoardObserver
 		}
 	}
 
+	public void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece context = null)
+	{
+		
+	}
+
 	public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
 	{
 		for (int i = 0; i < Mask.Count; i++)

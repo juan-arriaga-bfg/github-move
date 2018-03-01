@@ -176,5 +176,9 @@ public class SandboxGameController : MonoBehaviour
         
         //register board
         BoardService.Current.RegisterBoard(boardController, 0);
+        
+       
+        
     }
+
 }

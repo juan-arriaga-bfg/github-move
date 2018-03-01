@@ -1,6 +1,4 @@
-﻿using System.Runtime.Remoting.Messaging;
-using UnityEngine;
-using UnityEngine.Profiling;
+﻿using UnityEngine;
 using Lean.Touch;
 
 public class BoardManipulatorComponent : ECSEntity,
@@ -17,6 +15,11 @@ public class BoardManipulatorComponent : ECSEntity,
     private BoardPosition selectedPoint;
 
     private CameraManipulator cameraManipulator;
+
+    public CameraManipulator CameraManipulator
+    {
+        get { return cameraManipulator; }
+    }
 
     public override int Guid
     {
@@ -79,18 +82,14 @@ public class BoardManipulatorComponent : ECSEntity,
 
             cameraManipulator.CameraMove.UnLock(this);
         }
-        
-        var boardPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
 
-        boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, context.BoardDef.PieceLayer);
+        var piece = GetSelectedPiece();
 
-        if (context.BoardLogic.IsEmpty(boardPosition)) return true;
-            
-        var piece = context.BoardLogic.GetPieceAt(boardPosition);
+        if (piece == null) return false;
             
         var touchReaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
 
-        if (touchReaction != null) return touchReaction.Touch(boardPosition);
+        if (touchReaction != null) return touchReaction.Touch(piece.CachedPosition);
         
         return false;
     }
@@ -112,13 +111,11 @@ public class BoardManipulatorComponent : ECSEntity,
     {
         if (cachedViewForDrag == null)
         {
-            var boardPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
+            var piece = GetSelectedPiece();
 
-            boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, context.BoardDef.PieceLayer);
+            if (piece == null) return false;
 
-            if (context.BoardLogic.IsEmpty(boardPosition)) return false;
-            
-            var piece = context.BoardLogic.GetPieceAt(boardPosition);
+            var boardPosition = piece.CachedPosition;
             
             var draggableComponent = piece.GetComponent<DraggablePieceComponent>(DraggablePieceComponent.ComponentGuid);
 
@@ -164,5 +161,43 @@ public class BoardManipulatorComponent : ECSEntity,
         }
 
         return false;
+    }
+
+    public virtual Piece GetSelectedPiece()
+    {
+        var selectedBoardElementView = GetSelectedBoardElementView();
+
+        if (selectedBoardElementView == null) return null;
+
+        return selectedBoardElementView.Piece;
+    }
+
+    public virtual PieceBoardElementView GetSelectedBoardElementView()
+    {
+        var touchableObjects = cameraManipulator.GetTouchable();
+
+        PieceBoardElementView selectedBoardElement = null;
+
+        int maxCoef = int.MinValue;
+
+        for (int i = 0; i < touchableObjects.size; i++)
+        {
+            var touchableObject = touchableObjects[i].GetContext();
+            if (touchableObject != null && touchableObject is PieceBoardElementView)
+            {
+                var boardElementView = touchableObject as PieceBoardElementView;
+
+                var boardPosition = boardElementView.Piece.CachedPosition;
+
+                var coef = boardPosition.X * context.BoardDef.Width - boardPosition.Y + boardPosition.Z;
+                if (coef > maxCoef)
+                {
+                    maxCoef = coef;
+                    selectedBoardElement = boardElementView;
+                }
+            }
+        }
+
+        return selectedBoardElement;
     }
 }

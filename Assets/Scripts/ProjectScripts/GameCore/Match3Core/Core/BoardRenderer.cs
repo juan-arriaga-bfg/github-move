@@ -767,6 +767,11 @@ public class BoardRenderer : ECSEntity
         return null;
     }
 
+    public virtual PieceBoardElementView CreatePieceAt(Piece piece, BoardPosition at)
+    {
+        return CreatePieceAt(piece, at.X, at.Y);
+    }
+
     public virtual PieceBoardElementView CreatePieceAt(Piece piece, int x, int y)
     {
         var pieceView = CreateElementAt(piece.PieceType, x, y, piece.Layer.Index) as PieceBoardElementView;

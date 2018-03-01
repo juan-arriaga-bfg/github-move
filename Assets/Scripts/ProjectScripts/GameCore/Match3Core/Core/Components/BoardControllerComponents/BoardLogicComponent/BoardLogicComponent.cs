@@ -353,8 +353,13 @@ public class BoardLogicComponent : ECSEntity,
 
         if (fromPiece == null || toPiece != null) return false;
 
-        if (AddPieceToBoard(to.X, to.Y, fromPiece) && RemovePieceFromBoard(from))
+        if (AddPieceToBoardSilent(to.X, to.Y, fromPiece) && RemovePieceFromBoardSilent(from))
         {
+            var observer = fromPiece == null ? null : fromPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+            if (observer != null)
+            {
+                observer.OnMovedFromTo(from, to);
+            }
             return true;
         }
 
@@ -370,11 +375,23 @@ public class BoardLogicComponent : ECSEntity,
 
         if (fromPiece.Layer.Index != toPiece.Layer.Index) return false;
 
-        RemovePieceFromBoard(from);
-        RemovePieceFromBoard(to);
+        RemovePieceFromBoardSilent(from);
+        RemovePieceFromBoardSilent(to);
 
-        AddPieceToBoard(to.X, to.Y, fromPiece);
-        AddPieceToBoard(from.X, from.Y, toPiece);
+        AddPieceToBoardSilent(to.X, to.Y, fromPiece);
+        AddPieceToBoardSilent(from.X, from.Y, toPiece);
+        
+        var observerFrom = fromPiece == null ? null : fromPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+        if (observerFrom != null)
+        {
+            observerFrom.OnMovedFromTo(from, to);
+        }
+        
+        var observerTo = toPiece == null ? null : toPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+        if (observerTo != null)
+        {
+            observerTo.OnMovedFromTo(to, from);
+        }
 
         return true;
     }
@@ -408,7 +425,7 @@ public class BoardLogicComponent : ECSEntity,
         return piece is T;
     }
 
-    protected virtual bool RemovePieceFromBoard(BoardPosition pos)
+    protected virtual bool RemovePieceFromBoardSilent(BoardPosition pos)
     {
         if (pos.IsValid)
         {

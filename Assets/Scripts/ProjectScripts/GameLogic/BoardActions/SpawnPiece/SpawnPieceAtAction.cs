@@ -17,6 +17,8 @@ public class SpawnPieceAtAction : IBoardAction
 	
 	public int PieceTypeId { get; set; }
 
+	public Piece CreatedPiece { get; set; }
+
 	public bool PerformAction(BoardController gameBoardController)
 	{
 		Piece piece = gameBoardController.CreatePieceFromType(PieceTypeId);
@@ -28,6 +30,8 @@ public class SpawnPieceAtAction : IBoardAction
 		if (gameBoardController.BoardLogic.IsLockedCell(At)) return false;
 
 		if (gameBoardController.BoardLogic.AddPieceToBoard(At.X, At.Y, piece) == false) return false;
+
+		this.CreatedPiece = piece;
 		
 		gameBoardController.BoardLogic.LockCell(At, this);
 		

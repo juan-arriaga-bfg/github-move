@@ -8,6 +8,14 @@ public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView
 
     protected PieceBoardElementView actorView;
 
+    protected BoardPosition cachedPosition;
+
+    public BoardPosition CachedPosition
+    {
+        get { return cachedPosition; }
+        set { cachedPosition = value; }
+    }
+
     private LayerPieceComponent layer;
     public virtual LayerPieceComponent Layer
     {

@@ -13,6 +13,8 @@ public class MulticellularPieceBuilder : IPieceBuilder
 		piece.RegisterComponent(new PieceBoardObserversComponent()
 			.RegisterObserver(new MulticellularPieceBoardObserver {Mask = Mask}));
 		
+		piece.RegisterComponent(new CachedPiecePositionComponent());
+		
 		return piece;
 	}
 }
