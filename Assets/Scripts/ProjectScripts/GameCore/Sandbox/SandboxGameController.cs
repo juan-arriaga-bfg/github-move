@@ -76,9 +76,9 @@ public class SandboxGameController : MonoBehaviour
                 }
             },
             
-            {PieceType.E1.Id, new EnemyPieceBuilder{HitPoints = 10}},
-            {PieceType.E2.Id, new EnemyPieceBuilder{HitPoints = 10}},
-            {PieceType.E3.Id, new EnemyPieceBuilder{HitPoints = 10}},
+            {PieceType.E1.Id, new EnemyPieceBuilder()},
+            {PieceType.E2.Id, new EnemyPieceBuilder()},
+            {PieceType.E3.Id, new EnemyPieceBuilder()},
             
             {PieceType.O1.Id, new GenericPieceBuilder()},
             {PieceType.C1.Id, new ResourcePieceBuilder()},
