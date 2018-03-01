@@ -44,25 +44,19 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
 
     public void ShowSettings()
     {
-        UIMessageWindowController.CreateNotImplementedMessage();
+        UIService.Get.ShowWindow(UIWindowType.CharacterWindow);
+        
+//        UIMessageWindowController.CreateNotImplementedMessage();
     }
     
     public void StartFight()
     {
-        /*var model = UIService.Get.GetCachedModel<UICharacterWindowModel>(UIWindowType.CharacterWindow);
-
-        model.HeroDamage = 5;
-        model.TeamDamage = 12;
-        model.CardTupe = CharacterWindowCardTupe.Rare;
-        
-        UIService.Get.ShowWindow(UIWindowType.CharacterWindow);*/
-        
         var enemy = GameDataService.Current.GetEnemy();
         
         if(enemy == null) return;
         
         var board = BoardService.Current.GetBoardById(0);
-
+        
         var free = new List<BoardPosition>();
         
         board.BoardLogic.EmptyCellsFinder.FindAllWithPointInHome(new BoardPosition(8, 8, board.BoardDef.PieceLayer), 15, 15, free);

@@ -12,4 +12,6 @@
     public static readonly CurrencyDef PieceB1 = new CurrencyDef { Id = 9, Name = "PieceB1", IsConsumable = true };
     public static readonly CurrencyDef PieceB2 = new CurrencyDef { Id = 10, Name = "PieceB2", IsConsumable = true };
     public static readonly CurrencyDef PieceB3 = new CurrencyDef { Id = 11, Name = "PieceB3", IsConsumable = true };
+    
+    public static readonly CurrencyDef Level = new CurrencyDef { Id = 12, Name = "Level", IsConsumable = true };
 }

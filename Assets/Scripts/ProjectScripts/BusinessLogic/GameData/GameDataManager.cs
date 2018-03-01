@@ -9,7 +9,18 @@ public class GameDataManager
     
     private readonly List<ChestDef> activeChests = new List<ChestDef>();
     private int currentEnemy;
-
+    
+    public int HeroLevel
+    {
+        get
+        {
+            var hero = GetHero("Robin");
+            var level = Mathf.Clamp(ProfileService.Current.GetStorageItem(Currency.Level.Name).Amount, 0, hero.Damages.Count - 1);
+            
+            return level;
+        }
+    }
+    
     public bool AddActiveChest(ChestDef chest)
     {
         if (activeChests.Count == 4) return false;
@@ -34,6 +45,11 @@ public class GameDataManager
         return activeChests;
     }
 
+    public HeroDef GetHero(string uid)
+    {
+        return Heroes.Find(def => def.Uid == uid);
+    }
+    
     public EnemyDef GetEnemy(bool isSilent = false)
     {
         EnemyDef enemy;
