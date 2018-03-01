@@ -5,6 +5,10 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
 {
     [SerializeField] private NSText settingsLabel;
     [SerializeField] private NSText fightLabel;
+    [SerializeField] private NSText damegeLabel;
+    
+    [SerializeField] private GameObject robin;
+    
     [SerializeField] private List<UIChestSlot> slots;
     
     public override void OnViewShow()
@@ -17,7 +21,9 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
 
         settingsLabel.Text = windowModel.SettingsText;
         fightLabel.Text = windowModel.FightText;
-
+        
+        robin.SetActive(false);
+        
         UpdateSlots();
     }
     
@@ -28,6 +34,17 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
         BoardService.Current.GetBoardById(0).BoardEvents.RemoveListener(this, GameEventsCodes.EnemyDeath);
         
         UIMainWindowModel windowModel = Model as UIMainWindowModel;
+    }
+
+    public override void UpdateView(IWWindowModel model)
+    {
+        base.UpdateView(model);
+        
+        var hero = GameDataService.Current.GetHero("Robin");
+        var level = GameDataService.Current.HeroLevel;
+        var heroDamage = hero.Damages[level];
+        
+        damegeLabel.Text = heroDamage.ToString();
     }
 
     public void UpdateSlots()
@@ -63,6 +80,8 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
         
         if(free.Count == 0) return;
         
+        robin.SetActive(true);
+        
         board.ActionExecutor.AddAction(new SpawnPieceAtAction
         {
             At = free[Random.Range(0, free.Count)],
@@ -75,5 +94,6 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
         GameDataService.Current.AddActiveChest(GameDataService.Current.Chests.Find(def => def.Uid == context.ToString()));
         
         UpdateSlots();
+        robin.SetActive(false);
     }
 }

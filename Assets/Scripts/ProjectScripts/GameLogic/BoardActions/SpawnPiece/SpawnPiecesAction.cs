@@ -15,6 +15,8 @@ public class SpawnPiecesAction : IBoardAction
 	
 	public List<int> Pieces { get; set; }
 	
+	public CurrencyPair Resources { get; set; }
+	
 	public bool PerformAction(BoardController gameBoardController)
 	{
 		var free = new List<BoardPosition>();
@@ -36,6 +38,7 @@ public class SpawnPiecesAction : IBoardAction
 			gameBoardController.ActionExecutor.AddAction(new SpawnPieceAtAction
 			{
 				IsCheckMatch = IsCheckMatch,
+				Resources = Resources,
 				At = free[i],
 				PieceTypeId = pieces[i]
 			});

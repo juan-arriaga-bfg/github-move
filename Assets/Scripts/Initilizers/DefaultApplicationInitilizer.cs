@@ -80,10 +80,20 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         var chestsLoader = new ResourceConfigDataMapper<List<ChestDef>>("configs/chests.data", NSConfigsSettings.Instance.IsUseEncryption);
         var enemiesLoader = new ResourceConfigDataMapper<List<EnemyDef>>("configs/enemies.data", NSConfigsSettings.Instance.IsUseEncryption);
         var heroesLoader = new ResourceConfigDataMapper<List<HeroDef>>("configs/heroes.data", NSConfigsSettings.Instance.IsUseEncryption);
+        var piecesLoader = new ResourceConfigDataMapper<List<PieceDef>>("configs/pieces.data", NSConfigsSettings.Instance.IsUseEncryption);
         
         chestsLoader.LoadData((defs, s) => dataManager.Chests = defs);
         enemiesLoader.LoadData((defs, s) => dataManager.Enemies = defs);
         heroesLoader.LoadData((defs, s) => dataManager.Heroes = defs);
+        piecesLoader.LoadData((defs, s) =>
+        {
+            foreach (var def in defs)
+            {
+                if (dataManager.Pieces.ContainsKey(def.Piece)) continue;
+                
+                dataManager.Pieces.Add(def.Piece, def);
+            }
+        });
         
         // load local profile
         ProfileService.Instance.Manager.LoadCurrentProfile((profile) =>

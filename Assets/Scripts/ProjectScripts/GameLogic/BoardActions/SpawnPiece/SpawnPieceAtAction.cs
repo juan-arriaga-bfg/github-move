@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class SpawnPieceAtAction : IBoardAction
+﻿public class SpawnPieceAtAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -16,12 +12,14 @@ public class SpawnPieceAtAction : IBoardAction
 	public BoardPosition At { get; set; }
 	
 	public int PieceTypeId { get; set; }
+	
+	public CurrencyPair Resources { get; set; }
 
 	public Piece CreatedPiece { get; set; }
 
 	public bool PerformAction(BoardController gameBoardController)
 	{
-		Piece piece = gameBoardController.CreatePieceFromType(PieceTypeId);
+		var piece = gameBoardController.CreatePieceFromType(PieceTypeId);
 
 		At = new BoardPosition(At.X, At.Y, piece.Layer.Index);
 		
@@ -34,6 +32,8 @@ public class SpawnPieceAtAction : IBoardAction
 		this.CreatedPiece = piece;
 		
 		gameBoardController.BoardLogic.LockCell(At, this);
+		
+		AddResourses(piece);
 		
 		var animation = new SpawnPieceAtAnimation
 		{
@@ -56,6 +56,17 @@ public class SpawnPieceAtAction : IBoardAction
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);
 		
 		return true;
+	}
+
+	private void AddResourses(Piece piece)
+	{
+		if (Resources == null) return;
+		
+		var storage = piece.GetComponent<ResourceStorageComponent>(ResourceStorageComponent.ComponentGuid);
+
+		if (storage == null || Resources.Amount == 0) return;
+		
+		storage.Resources = Resources;
 	}
 }
 

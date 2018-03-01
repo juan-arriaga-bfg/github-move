@@ -60,8 +60,6 @@ public class SandboxGameController : MonoBehaviour
             
             {PieceType.M1.Id, new MulticellularSpawnPieceBuilder
                 {
-                    Delay = 1,
-                    SpawnPieceType = PieceType.B1.Id,
                     Mask = new List<BoardPosition>
                     {
                         BoardPosition.Zero().Up,
@@ -71,8 +69,6 @@ public class SandboxGameController : MonoBehaviour
             
             {PieceType.S1.Id, new MulticellularSpawnPieceBuilder
                 {
-                    Delay = 1,
-                    SpawnPieceType = PieceType.A1.Id,
                     Mask = new List<BoardPosition>
                     {
                         BoardPosition.Zero().Right,
@@ -85,20 +81,20 @@ public class SandboxGameController : MonoBehaviour
             {PieceType.E3.Id, new EnemyPieceBuilder{HitPoints = 10}},
             
             {PieceType.O1.Id, new GenericPieceBuilder()},
-            {PieceType.C1.Id, new ResourcePieceBuilder{Amount = 10, Currency = Currency.Coins.Name}},
+            {PieceType.C1.Id, new ResourcePieceBuilder()},
             
             {PieceType.A1.Id, new SimplePieceBuilder()},
             {PieceType.A2.Id, new SimplePieceBuilder()},
-            {PieceType.A3.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 10}},
-            {PieceType.A4.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 2}},
-            {PieceType.A5.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 2}},
-            {PieceType.A6.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 2}},
+            {PieceType.A3.Id, new SpawnPieceBuilder()},
+            {PieceType.A4.Id, new SpawnPieceBuilder()},
+            {PieceType.A5.Id, new SpawnPieceBuilder()},
+            {PieceType.A6.Id, new SpawnPieceBuilder()},
             
             {PieceType.B1.Id, new SimplePieceBuilder()},
             {PieceType.B2.Id, new SimplePieceBuilder()},
-            {PieceType.B3.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 3}},
-            {PieceType.B4.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 3}},
-            {PieceType.B5.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 3}},
+            {PieceType.B3.Id, new SpawnPieceBuilder()},
+            {PieceType.B4.Id, new SpawnPieceBuilder()},
+            {PieceType.B5.Id, new SpawnPieceBuilder()},
         };
         
         boardController.RegisterComponent(new ActionExecuteComponent()
