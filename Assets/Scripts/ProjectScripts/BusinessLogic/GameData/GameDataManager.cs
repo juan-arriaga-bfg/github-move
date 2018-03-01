@@ -27,11 +27,12 @@ public class GameDataManager
     public EnemyDef GetEnemy()
     {
         EnemyDef enemy;
+        var max = Enemies.Count - 1;
         
-        if (currentEnemy > Enemies.Count)
+        if (currentEnemy > max)
         {
-            var last = Enemies[Enemies.Count - 1];
-            var factor = currentEnemy - Enemies.Count - 1;
+            var last = Enemies[max];
+            var factor = currentEnemy - max;
             
             enemy = new EnemyDef
             {

@@ -45,7 +45,23 @@ public class UIMainWindowView : IWUIWindowView
         model.CardTupe = CharacterWindowCardTupe.Rare;
         
         UIService.Get.ShowWindow(UIWindowType.CharacterWindow);*/
+        
+        var enemy = GameDataService.Current.GetEnemy();
+        
+        if(enemy == null) return;
+        
+        var board = BoardService.Current.GetBoardById(0);
 
-        GameDataService.Current.GetEnemy();
+        var free = new List<BoardPosition>();
+        
+        board.BoardLogic.EmptyCellsFinder.FindAllWithPointInHome(new BoardPosition(8, 8, board.BoardDef.PieceLayer), 15, 15, free);
+        
+        if(free.Count == 0) return;
+        
+        board.ActionExecutor.AddAction(new SpawnPieceAtAction
+        {
+            At = free[Random.Range(0, free.Count)],
+            PieceTypeId = PieceType.Parse(enemy.Skin)
+        });
     }
 }

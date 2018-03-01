@@ -10,7 +10,7 @@ public class PieceTypeDef
     public List<string> Abbreviations { get; set; }
 }
 
-public partial class PieceType
+public static partial class PieceType
 {
     public readonly static PieceTypeDef None = new PieceTypeDef {Id = -1, Abbreviations = new List<string>{"None"}};
     
@@ -18,7 +18,6 @@ public partial class PieceType
     
     public readonly static PieceTypeDef Generic = new PieceTypeDef {Id = 1, Abbreviations = new List<string>{"Generic"}};
     
-
     public readonly static Dictionary<string, int> Abbreviations = new Dictionary<string, int>();
 
     public static void RegisterType(PieceTypeDef def)
@@ -26,7 +25,7 @@ public partial class PieceType
         for (int i = 0; i < def.Abbreviations.Count; i++)
         {
             var abbr = def.Abbreviations[i];
-            if (Abbreviations.ContainsKey(abbr))
+            if (Abbreviations.ContainsKey(abbr) == false)
             {
                 Abbreviations.Add(abbr, def.Id);
             }
