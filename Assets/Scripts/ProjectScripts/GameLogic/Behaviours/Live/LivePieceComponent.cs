@@ -8,6 +8,8 @@
 	}
 	
 	public int HitPoints { get; set; }
+	
+	public int MaxHitPoints { get; set; }
     
 	public virtual void OnRegisterEntity(ECSEntity entity)
 	{

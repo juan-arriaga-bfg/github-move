@@ -11,6 +11,11 @@ public class ResetPiecePositionAnimation : BoardAnimation
 
 		var pos = context.Context.BoardDef.GetPiecePosition(At.X, At.Y);
 		pos = new Vector3(pos.x, pos.y, 0f);
+
+		if (pieceFromView == null)
+		{
+			CompleteAnimation(context);
+		}
 		
 		var sequence = DOTween.Sequence().SetId(pieceFromView.AnimationUid);
 		sequence.Append(pieceFromView.CachedTransform.DOLocalMove(pos, 0.4f).SetEase(Ease.InOutSine));

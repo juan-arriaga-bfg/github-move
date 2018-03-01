@@ -81,12 +81,18 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
         if(free.Count == 0) return;
         
         robin.SetActive(true);
+
+        var spawnAt = free[Random.Range(0, free.Count)];
         
         board.ActionExecutor.AddAction(new SpawnPieceAtAction
         {
-            At = free[Random.Range(0, free.Count)],
+            At = spawnAt,
             PieceTypeId = PieceType.Parse(enemy.Skin)
         });
+        
+        // move camera
+        var worldPos = board.BoardDef.GetSectorCenterWorldPosition(spawnAt.X, spawnAt.Y, spawnAt.Z);
+        board.Manipulator.CameraManipulator.ZoomTo(0.3f, worldPos);
     }
 
     public void OnBoardEvent(int code, object context)
