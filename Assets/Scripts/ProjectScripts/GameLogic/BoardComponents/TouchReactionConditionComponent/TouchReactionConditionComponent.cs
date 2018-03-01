@@ -4,7 +4,7 @@
 
 	public override int Guid { get { return ComponentGuid; } }
 
-	protected bool IsDone;
+	public bool IsDone;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{

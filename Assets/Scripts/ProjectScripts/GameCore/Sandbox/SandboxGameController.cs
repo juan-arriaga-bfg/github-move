@@ -89,7 +89,7 @@ public class SandboxGameController : MonoBehaviour
             
             {PieceType.A1.Id, new SimplePieceBuilder()},
             {PieceType.A2.Id, new SimplePieceBuilder()},
-            {PieceType.A3.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 2}},
+            {PieceType.A3.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 10}},
             {PieceType.A4.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 2}},
             {PieceType.A5.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 2}},
             {PieceType.A6.Id, new SpawnPieceBuilder{SpawnPieceType = PieceType.C1.Id, Delay = 2}},

@@ -13,7 +13,7 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
 
     protected ViewAnimationUid animationUid = new ViewAnimationUid();
 
-    private List<RendererLayer> cachedRenderers = new List<RendererLayer>();
+    private BetterList<RendererLayer> cachedRenderers = new BetterList<RendererLayer>();
 
     public bool IsFading;
 
@@ -42,9 +42,32 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
 
     protected virtual void Start()
     {
-        if (cachedRenderers.Count <= 0)
+        if (cachedRenderers.size <= 0)
         {
             CacheLayers();
+        }
+    }
+
+    public virtual void ClearCacheLayers()
+    {
+        cachedRenderers.Clear();
+        
+        var renderers = GetComponentsInChildren<Renderer>(true);
+        foreach (var rend in renderers)
+        {
+            var rendererLayerParams = rend.GetComponent<RendererLayerParams>();
+            if (rendererLayerParams != null && rendererLayerParams.IsIgnoreRenderLayer) continue;
+
+            var rendererLayer = rend.gameObject.GetComponent<RendererLayer>();
+
+            if (rendererLayer == null)
+            {
+                rendererLayer = rend.gameObject.AddComponent<RendererLayer>();
+            }
+            
+            rendererLayer.SortingOrderOffset = rend.sortingOrder;
+
+            cachedRenderers.Add(rendererLayer);
         }
     }
 
@@ -65,17 +88,16 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
 
     public virtual void SyncRendererLayers(BoardPosition boardPosition)
     {
-        if (cachedRenderers.Count <= 0)
+        if (cachedRenderers.size <= 0)
         {
             CacheLayers();
         }
 
-        foreach (var rend in cachedRenderers)
+        for (int i =0; i < cachedRenderers.size; i++)
         {
-            
+            var rend = cachedRenderers[i];
+   
             rend.CachedRenderer.sortingOrder = boardPosition.X * Context.Context.BoardDef.Width - boardPosition.Y + boardPosition.Z + rend.SortingOrderOffset;
-            
-
         }
 
         CachedTransform.localPosition = new Vector3(CachedTransform.localPosition.x, CachedTransform.localPosition.y, -boardPosition.Z * 0.1f);

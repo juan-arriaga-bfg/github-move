@@ -16,7 +16,7 @@ public class TouchReactonConditionDelay : TouchReactionConditionComponent
         startTime = DateTime.Now;
         base.Recharge();
     }
-
+    
     public override bool Check(BoardPosition position, Piece piece)
     {
         if (IsDone) return true;
