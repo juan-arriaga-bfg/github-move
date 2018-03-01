@@ -61,9 +61,7 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
 
     public void ShowSettings()
     {
-        UIService.Get.ShowWindow(UIWindowType.CharacterWindow);
-        
-//        UIMessageWindowController.CreateNotImplementedMessage();
+        UIMessageWindowController.CreateNotImplementedMessage();
     }
     
     public void StartFight()

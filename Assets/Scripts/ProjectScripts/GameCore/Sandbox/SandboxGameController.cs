@@ -30,6 +30,7 @@ public class SandboxGameController : MonoBehaviour
                 
                 {PieceType.M1.Id, R.M1Piece},
                 {PieceType.S1.Id, R.S1Piece},
+                {PieceType.H1.Id, R.H1Piece},
                 
                 {PieceType.E1.Id, R.E1Piece},
                 {PieceType.E2.Id, R.E2Piece},
@@ -72,6 +73,17 @@ public class SandboxGameController : MonoBehaviour
                     Mask = new List<BoardPosition>
                     {
                         BoardPosition.Zero().Right,
+                    }
+                }
+            },
+            
+            {PieceType.H1.Id, new HeroHouseBuilder
+                {
+                    Mask = new List<BoardPosition>
+                    {
+                        BoardPosition.Zero().Up,
+                        BoardPosition.Zero().Right,
+                        BoardPosition.Zero().Right.Up,
                     }
                 }
             },
@@ -186,6 +198,12 @@ public class SandboxGameController : MonoBehaviour
         }
         
         boardController.ActionExecutor.PerformAction(new FillBoardAction{Piece = PieceType.O1.Id, Positions = positions});
+        
+        boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
+        {
+            At = new BoardPosition(10, 18),
+            PieceTypeId = PieceType.H1.Id
+        });
         
         boardController.ActionExecutor.PerformAction(new SpawnPieceAtAction
         {
