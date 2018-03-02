@@ -6,7 +6,7 @@
         
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionOpenCharacterWindow())
-            .RegisterComponent(new TouchReactionConditionHeroLevelUp()));
+            .RegisterComponent(new TouchReactionConditionComponent()));
         
         return piece;
     }

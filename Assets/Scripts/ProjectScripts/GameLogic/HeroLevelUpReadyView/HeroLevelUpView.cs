@@ -10,8 +10,6 @@ public class HeroLevelUpView : IWBaseMonoBehaviour
 
     private Transform arrowTransform;
     
-    private TouchReactionConditionHeroLevelUp touchReactionConditionHeroLevelUp;
-
     private void Awake()
     {
         context = GetComponent<PieceBoardElementView>();
@@ -37,17 +35,12 @@ public class HeroLevelUpView : IWBaseMonoBehaviour
     {
         if (context == null || context.Piece == null) return;
 
-        if (touchReactionConditionHeroLevelUp == null)
-        {
-            var touchReactionComponent = context.Piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
-            touchReactionConditionHeroLevelUp =
-                touchReactionComponent.GetComponent<TouchReactionConditionHeroLevelUp>(TouchReactionConditionHeroLevelUp
-                    .ComponentGuid);
-        }
-		
-        if (touchReactionConditionHeroLevelUp == null) return;
+        var hero = GameDataService.Current.GetHero("Robin");
+        var level = GameDataService.Current.HeroLevel;
+        
+        var isDone = ProfileService.Current.GetStorageItem(Currency.RobinCards.Name).Amount >= hero.Prices[level].Amount;
 
-        if (touchReactionConditionHeroLevelUp.Check(BoardPosition.Default(), context.Piece))
+        if (isDone)
         {
             arrowTransform.gameObject.SetActive(true);
         }

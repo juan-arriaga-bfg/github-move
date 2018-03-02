@@ -5,11 +5,12 @@ using DG.Tweening;
 
 public class SpawnPieceAtAnimation : BoardAnimation 
 {
-    public SpawnPieceAtAction Action { get; set; }
+    public Piece CreatedPiece;
+    public BoardPosition At;
     
     public override void Animate(BoardRenderer context)
     {
-        var boardElement = context.CreatePieceAt(Action.CreatedPiece, Action.At);
+        var boardElement = context.CreatePieceAt(CreatedPiece, At);
 
         boardElement.CachedTransform.localScale = Vector3.zero;
         

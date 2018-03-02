@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class SpawnPieceAtAction : IBoardAction
 {
@@ -16,9 +17,7 @@ public class SpawnPieceAtAction : IBoardAction
 	public int PieceTypeId { get; set; }
 	
 	public CurrencyPair Resources { get; set; }
-
-	public Piece CreatedPiece { get; set; }
-
+	
 	public Action<SpawnPieceAtAction> OnFailedAction { get; set; }
 
 	public bool PerformAction(BoardController gameBoardController)
@@ -53,16 +52,16 @@ public class SpawnPieceAtAction : IBoardAction
 			}
 			return false;
 		}
-
-		this.CreatedPiece = piece;
 		
 		gameBoardController.BoardLogic.LockCell(At, this);
 		
 		AddResourses(piece);
+		SpawnReward(gameBoardController);
 		
 		var animation = new SpawnPieceAtAnimation
 		{
-			Action = this
+			CreatedPiece = piece,
+			At = At
 		};
 
 		animation.OnCompleteEvent += (_) =>
@@ -93,5 +92,18 @@ public class SpawnPieceAtAction : IBoardAction
 		
 		storage.Resources = Resources;
 	}
-}
 
+	private void SpawnReward(BoardController boardController)
+	{
+		PieceDef def;
+		
+		if(GameDataService.Current.Pieces.TryGetValue(PieceTypeId, out def) == false) return;
+		
+		boardController.ActionExecutor.AddAction(new SpawnPiecesAction()
+		{
+			Resources = def.CreateReward,
+			At = At,
+			Pieces = new List<int>{PieceType.Parse(def.CreateReward.Currency)}
+		});
+	}
+}
