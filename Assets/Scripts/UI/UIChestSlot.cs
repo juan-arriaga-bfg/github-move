@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class UIChestSlot : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class UIChestSlot : MonoBehaviour
         this.chest = chest;
         
         slotLabel.Text = string.Format("<color=#FFFEAF>{0}</color>", "CHEST SLOT");
+
+        bool chestIconState = icon.gameObject.activeSelf;
         
         slotImage.color = chest == null ? new Color(74/255f, 74/255f, 74/255f, 1f) : Color.white;
         button.SetActive(chest != null);
@@ -44,6 +47,13 @@ public class UIChestSlot : MonoBehaviour
         iconOpenTop.gameObject.SetActive(state == ChestState.Open);
         iconOpenDown.gameObject.SetActive(state == ChestState.Open);
         icon.gameObject.SetActive(state != ChestState.Open);
+
+        if (chestIconState == false && icon.gameObject.activeSelf)
+        {
+            DOTween.Kill(icon);
+            icon.transform.localScale = Vector3.zero;
+            icon.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack).SetId(icon);
+        }
 
         switch (state)
         {

@@ -1,7 +1,23 @@
 [
     {
         "Uid" : "A3",
-        "Delay" : 10,
+        "Delay" : 15,
+        "SpawnPiece" : "C1",
+        "SpawnAmount" : 1,
+        "Resources" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 10
+        },
+        "CreateReward" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 40
+        },
+    },
+    {
+        "Uid" : "A4",
+        "Delay" : 30,
         "SpawnPiece" : "C1",
         "SpawnAmount" : 1,
         "Resources" :
@@ -12,34 +28,18 @@
         "CreateReward" :
         {
             "Currency" : "Coins",
-            "Amount" : 40
-        },
-    },
-    {
-        "Uid" : "A4",
-        "Delay" : 10,
-        "SpawnPiece" : "C1",
-        "SpawnAmount" : 1,
-        "Resources" :
-        {
-            "Currency" : "Coins",
-            "Amount" : 30
-        },
-        "CreateReward" :
-        {
-            "Currency" : "Coins",
             "Amount" : 60
         },
     },
     {
         "Uid" : "A5",
-        "Delay" : 10,
+        "Delay" : 60,
         "SpawnPiece" : "C1",
         "SpawnAmount" : 1,
         "Resources" :
         {
             "Currency" : "Coins",
-            "Amount" : 50
+            "Amount" : 40
         },
         "CreateReward" :
         {
@@ -49,7 +49,7 @@
     },
     {
         "Uid" : "A6",
-        "Delay" : 10,
+        "Delay" : 90,
         "SpawnPiece" : "C1",
         "SpawnAmount" : 1,
         "Resources" :
@@ -65,13 +65,13 @@
     },
     {
         "Uid" : "B3",
-        "Delay" : 20,
+        "Delay" : 30,
         "SpawnPiece" : "C1",
         "SpawnAmount" : 1,
         "Resources" :
         {
             "Currency" : "Coins",
-            "Amount" : 50
+            "Amount" : 30
         },
         "CreateReward" :
         {
@@ -81,13 +81,13 @@
     },
     {
         "Uid" : "B4",
-        "Delay" : 20,
+        "Delay" : 60,
         "SpawnPiece" : "C1",
         "SpawnAmount" : 1,
         "Resources" :
         {
             "Currency" : "Coins",
-            "Amount" : 70
+            "Amount" : 60
         },
         "CreateReward" :
         {
@@ -97,13 +97,13 @@
     },
     {
         "Uid" : "B5",
-        "Delay" : 20,
+        "Delay" : 120,
         "SpawnPiece" : "C1",
         "SpawnAmount" : 1,
         "Resources" :
         {
             "Currency" : "Coins",
-            "Amount" : 100
+            "Amount" : 120
         },
         "CreateReward" :
         {

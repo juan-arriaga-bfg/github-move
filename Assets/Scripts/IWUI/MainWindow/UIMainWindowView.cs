@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIMainWindowView : IWUIWindowView, IBoardEventListener
 {
     [SerializeField] private NSText settingsLabel;
     [SerializeField] private NSText fightLabel;
+    [SerializeField] private NSText fightPriceLabel;
+    [SerializeField] private Image fightPriceIcon;
     [SerializeField] private NSText damegeLabel;
     
     [SerializeField] private GameObject robin;
@@ -23,6 +26,10 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
 
         settingsLabel.Text = windowModel.SettingsText;
         fightLabel.Text = windowModel.FightText;
+        
+
+        fightPriceLabel.Text = windowModel.GetPriceLabelForFight();
+        fightPriceIcon.gameObject.SetActive(windowModel.GetPriceForFight() > 0);
         
         robin.SetActive(false);
         
@@ -68,13 +75,15 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
     
     public void StartFight()
     {
+        var windowModel = Model as UIMainWindowModel;
+        
         if (GameDataService.Current.GetActiveChests().Count >= 4)
         {
             UIMessageWindowController.CreateDefaultMessage("No free slots for chest!");
             return;
         }
         
-        var enemy = GameDataService.Current.GetEnemy();
+        var enemy = GameDataService.Current.FightEnemy();
 
         if (enemy == null)
         {
@@ -94,6 +103,10 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
         }
         
         robin.SetActive(true);
+        
+        // update price label
+        fightPriceLabel.Text = windowModel.GetPriceLabelForFight();
+        fightPriceIcon.gameObject.SetActive(windowModel.GetPriceForFight() > 0);
 
         spawnAt = free[Random.Range(0, free.Count)];
         
@@ -104,6 +117,18 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
             OnFailedAction = (action =>
             {
                 robin.SetActive(false);
+                
+                var fallBackShopItem = new ShopItem
+                {
+                    Uid = string.Format("purchase.test.enemy.fallback"), 
+                    ItemUid = enemy.Price.Currency, 
+                    Amount = enemy.Price.Amount,
+                    CurrentPrices = new List<Price>
+                    {
+                        new Price{Currency = Currency.Cash.Name, DefaultPriceAmount = 0}
+                    }
+                };
+                ShopService.Current.PurchaseItem(fallBackShopItem);
             }) 
         });
         
@@ -123,6 +148,13 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
     public void SelectEnemy()
     {
         var board = BoardService.Current.GetBoardById(0);
+
+        var enemmyPiece = board.BoardLogic.GetPieceAt(new BoardPosition(spawnAt.X, spawnAt.Y, board.BoardDef.PieceLayer));
+
+        if (enemmyPiece == null || enemmyPiece.PieceType < PieceType.E1.Id || enemmyPiece.PieceType >= (PieceType.E1.Id + 100))
+        {
+            robin.SetActive(false);
+        }
         
         // move camera
         var worldPos = board.BoardDef.GetSectorCenterWorldPosition(spawnAt.X, spawnAt.Y, spawnAt.Z);

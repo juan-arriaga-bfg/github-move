@@ -65,7 +65,7 @@ public class GameDataManager
             enemy = new EnemyDef
             {
                 Skin = string.Format("E{0}", Random.Range(0, 4)),
-                HP = last.HP + 50 * factor,
+                HP = last.HP + 30 * factor,
                 Price = new CurrencyPair{Currency = last.Price.Currency, Amount = last.Price.Amount + 10 * factor},
                 Chest = Chests[Random.Range(0, Chests.Count)].Uid
             };
@@ -77,8 +77,27 @@ public class GameDataManager
         
         return enemy;
     }
-    
-    public EnemyDef GetEnemy()
+
+    public EnemyDef GetCurrentEnemy()
+    {
+        var enemy = GetEnemy(EnemyIndex);
+
+        return enemy;
+    }
+
+    public bool IsCanEnterBattle()
+    {
+        var enemy = GetEnemy(EnemyIndex);
+
+        bool isCanPurchase = ShopService.Current.IsCanPurchase(new List<Price>
+        {
+            new Price {Currency = enemy.Price.Currency, DefaultPriceAmount = enemy.Price.Amount}
+        });
+
+        return isCanPurchase;
+    }
+
+    public EnemyDef FightEnemy()
     {
         var enemy = GetEnemy(EnemyIndex);
         

@@ -20,6 +20,12 @@ public class BoardManipulatorComponent : ECSEntity,
     private BoardPosition lastCachedDragPosition;
 
     private readonly ViewAnimationUid dragAnimationId = new ViewAnimationUid();
+
+    private float dragDuration = 0.25f;
+
+    private Vector2 prevDragPos;
+
+    private bool isDragLip = false;
     
     
     private BoardElementView cachedViewForDrag = null;
@@ -118,24 +124,51 @@ public class BoardManipulatorComponent : ECSEntity,
         {
             var pieceBoardElementView = cachedViewForDrag as PieceBoardElementView;
             var boardPos = context.BoardDef.GetSectorPosition(targetPos);
-            
-            
-            
+
             pieceBoardElementView.OnDrag(boardPos, pos);
+
+            if ((prevDragPos - pos).sqrMagnitude > 0.01f)
+            {
+                DOTween.Kill(dragAnimationId);
+                cachedViewForDrag.CachedTransform.localPosition = pos;
+
+                isDragLip = false;
+            }
+            
+            prevDragPos = pos;
+            
+            var targetCellPos = context.BoardDef.GetPiecePosition(boardPos.X, boardPos.Y);
+            targetCellPos = new Vector3(targetCellPos.x, targetCellPos.y, 0f);
             
             if (lastCachedDragPosition.Equals(boardPos) == false)
             {
-                cachedViewForDrag.SyncRendererLayers(new BoardPosition(context.BoardDef.Width, context.BoardDef.Height, context.BoardDef.Depth));
+                cachedViewForDrag.SyncRendererLayers(new BoardPosition(context.BoardDef.Width,context.BoardDef.Height, context.BoardDef.Depth));
                 lastCachedDragPosition = boardPos;
-                bool isPointValid = context.BoardLogic.IsPointValid(boardPos);
-                if (isPointValid)
-                {
-                    var targetCellPos = context.BoardDef.GetPiecePosition(boardPos.X, boardPos.Y);
-                    targetCellPos = new Vector3(targetCellPos.x, targetCellPos.y, 0f);
-                    DOTween.Kill(dragAnimationId);
-                    cachedViewForDrag.CachedTransform.DOLocalMove(targetCellPos, 0.4f).SetEase(Ease.InOutSine).SetId(dragAnimationId);
-                }
+                
+                isDragLip = false;
             }
+            
+            bool isPointValid = context.BoardLogic.IsPointValid(boardPos);
+            if (isPointValid && isDragLip == false && (targetCellPos - cachedViewForDrag.CachedTransform.localPosition).sqrMagnitude > 0.01f)
+            {
+                isDragLip = true;
+                DOTween.Kill(dragAnimationId);
+                var sequence = DOTween.Sequence().SetId(dragAnimationId);
+//                sequence.AppendInterval(0.05f);
+                sequence.Append(cachedViewForDrag.CachedTransform.DOLocalMove(targetCellPos, dragDuration).SetEase(Ease.Linear));
+            }
+
+            
+//            }
+//            else
+//            {
+//                prevDragPos = pos;
+//                
+////                var targetCellPos = context.BoardDef.GetPiecePosition(boardPos.X, boardPos.Y);
+////                targetCellPos = new Vector3(targetCellPos.x, targetCellPos.y, 0f);
+//                DOTween.Kill(dragAnimationId);
+//                cachedViewForDrag.CachedTransform.localPosition = pos;
+//            }
         }
         
        
