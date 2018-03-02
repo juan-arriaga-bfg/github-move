@@ -85,7 +85,12 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
         board.ActionExecutor.AddAction(new SpawnPieceAtAction
         {
             At = spawnAt,
-            PieceTypeId = PieceType.Parse(enemy.Skin)
+            PieceTypeId = PieceType.Parse(enemy.Skin),
+            OnFailedAction = (action =>
+            {
+                robin.SetActive(false);
+            }) 
+
         });
         
         // move camera

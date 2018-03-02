@@ -1,4 +1,6 @@
-﻿public class SpawnPieceAtAction : IBoardAction
+﻿using System;
+
+public class SpawnPieceAtAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -17,17 +19,40 @@
 
 	public Piece CreatedPiece { get; set; }
 
+	public Action<SpawnPieceAtAction> OnFailedAction { get; set; }
+
 	public bool PerformAction(BoardController gameBoardController)
 	{
 		var piece = gameBoardController.CreatePieceFromType(PieceTypeId);
 
 		At = new BoardPosition(At.X, At.Y, piece.Layer.Index);
-		
-		if (At.IsValid == false) return false;
-		
-		if (gameBoardController.BoardLogic.IsLockedCell(At)) return false;
 
-		if (gameBoardController.BoardLogic.AddPieceToBoard(At.X, At.Y, piece) == false) return false;
+		if (At.IsValid == false)
+		{
+			if (OnFailedAction != null)
+			{
+				OnFailedAction(this);
+			}
+			return false;
+		}
+
+		if (gameBoardController.BoardLogic.IsLockedCell(At))
+		{
+			if (OnFailedAction != null)
+			{
+				OnFailedAction(this);
+			}
+			return false;
+		}
+
+		if (gameBoardController.BoardLogic.AddPieceToBoard(At.X, At.Y, piece) == false)
+		{
+			if (OnFailedAction != null)
+			{
+				OnFailedAction(this);
+			}
+			return false;
+		}
 
 		this.CreatedPiece = piece;
 		
