@@ -3,7 +3,8 @@
     "Hashes": {
       "tile_grass_2": "d2be00740d2c585dbe9c1110c147812c",
       "tile_grass_1": "e3602ed41398173dcee3ebfc02de50a0",
-      "tile_grass_3": "c96495022bd058c2cac721ac4caff228"
+      "tile_grass_3": "c96495022bd058c2cac721ac4caff228",
+      "tile_selection": "1cd8e17957d4cd692850f590128ebabe"
     },
     "IsAllowAlphaSplitting": false,
     "SpriteSheetName": "tiles",
@@ -68,7 +69,13 @@
       "progressBar1_LineGreen": "930ad5cc32e0b5e3f61a568ea6244ced",
       "card_border_stoneBlue": "e35d39d30a475f962a6e2ac3109ddf3c",
       "card_border_Lvl_Hero": "883af873f48f64ac495c765502c8ff9a",
-      "card_border_Lvl_Build": "3ed2b49e7433c90ddfdded673454adba"
+      "card_border_Lvl_Build": "3ed2b49e7433c90ddfdded673454adba",
+      "card_border_object_red": "5052f8bfc660758cd2a030f4d2fd5da3",
+      "icon_card_coins": "bf52e34eaaef169fb30bb9f3354762f1",
+      "card_island": "214ed7494899cef4b3707576c39c5e2a",
+      "icon_heart": "be463f7d288b7c9d5b23d6d06ef2566b",
+      "coin_arrow": "6646ac386aa61a3f29dbf59b113edcd8",
+      "progressBar1_LineYellow": "03d0b3307ae8bebd535ad7d680756512"
     },
     "IsAllowAlphaSplitting": false,
     "SpriteSheetName": "uicommon",
@@ -79,6 +86,38 @@
       "Assets/Content/SourceContent/UI/Windows",
       "Assets/Content/SourceContent/UI/Chests",
       "Assets/Content/SourceContent/UI/Shine"
+    ],
+    "PathToProcessedPack": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Hashes": {
+      "H1": "8ee1d6d85b28f13bf29a6e77fff0f123",
+      "A6": "361a551955a181a44ac803b01617ff45",
+      "M1": "6e139e8265a086219071a7d14f4176c4",
+      "E3": "ed858c85253ec6cca4d70df70a3b83b2",
+      "A5": "99d4c644197661987022911063f7f764",
+      "S1": "9bcfe9b1aec3b251cafc6702e77b265e",
+      "B5": "4da328cb27da42f96829a7a63d649fd7",
+      "A4": "453c87f97409332d7f298f2017e26746",
+      "B4": "365323262c39507104f91f0c94685758",
+      "O1": "d534e57b9a9aa01dd309ea4a11b2ba87",
+      "A3": "f7abdf3ba2e896c9f4439bf178b1d1ab",
+      "E2": "e7aae059c7cc5b8bdd390910f0611e33",
+      "B3": "85f5f1f725aa7db35443395e65d30ad2",
+      "E1": "38f4c738c5f468097a43f4b302bd9908",
+      "A2": "9f851b8894ab85263564673c2ee7619d",
+      "B2": "82f24c6567323284e16a62480147119f",
+      "GBOX1": "dffb373c8d7260fc99199254a809b47c",
+      "C1": "e501b0504e623cd55e4c13ebb517b08b",
+      "A1": "5db5ebd899bb56278c87242fd056072d",
+      "B1": "cb63201b04923462d9087e40ba3beba7",
+      "C1_shadow": "8662683cf17cd1b807f486c877ba6827"
+    },
+    "IsAllowAlphaSplitting": false,
+    "SpriteSheetName": "gamefield",
+    "PathToSpriteSheetSettings": "Assets/Content/SpriteSheetSettings",
+    "PathesToSource": [
+      "Assets/Content/SourceContent/Textures/Pieces"
     ],
     "PathToProcessedPack": "Assets/Content/ProcessedContent"
   }

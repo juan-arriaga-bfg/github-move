@@ -1,7 +1,12 @@
 ﻿[
   {
-    "AssetName": "Shine",
-    "TextureName": "shine_1",
+    "AssetName": "RobinFight",
+    "TextureName": "card_border_1",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Icon",
+    "TextureName": "card_border_object_red",
     "ShaderName": "UI/Default"
   },
   {
@@ -11,62 +16,72 @@
   },
   {
     "AssetName": "Icon",
-    "TextureName": "face_Robin",
+    "TextureName": "icon_card_coins",
     "ShaderName": "UI/Default"
   },
   {
     "AssetName": "Icon",
-    "TextureName": "face_Robin",
+    "TextureName": "card_island",
     "ShaderName": "UI/Default"
   },
   {
     "AssetName": "Image",
-    "TextureName": "shine_2",
+    "TextureName": "icon_Fight",
     "ShaderName": "UI/Default"
   },
   {
-    "AssetName": "Icon",
-    "TextureName": "icon_Coins",
-    "ShaderName": "UI/Default"
+    "AssetName": "icon",
+    "TextureName": "icon_TimeChest",
+    "ShaderName": "Sprites/Default"
   },
   {
-    "AssetName": "Border",
-    "TextureName": "progressBar1_2",
-    "ShaderName": "UI/Default"
+    "AssetName": "icon",
+    "TextureName": "icon_heart",
+    "ShaderName": "Sprites/Default"
   },
   {
-    "AssetName": "Chest",
-    "TextureName": "chest_1_1",
-    "ShaderName": "UI/Default"
+    "AssetName": "icon",
+    "TextureName": "icon_heart",
+    "ShaderName": "Sprites/Default"
   },
   {
-    "AssetName": "Amount",
-    "TextureName": "card_border_Lvl_Hero",
-    "ShaderName": "UI/Default"
+    "AssetName": "view",
+    "TextureName": "coin_arrow",
+    "ShaderName": "Sprites/Default"
   },
   {
-    "AssetName": "Amount",
-    "TextureName": "card_border_Lvl_Build",
-    "ShaderName": "UI/Default"
+    "AssetName": "icon",
+    "TextureName": "icon_TimeChest",
+    "ShaderName": "Sprites/Default"
   },
   {
-    "AssetName": "Image",
-    "TextureName": "chest_1_3",
-    "ShaderName": "UI/Default"
+    "AssetName": "icon",
+    "TextureName": "icon_TimeChest",
+    "ShaderName": "Sprites/Default"
   },
   {
-    "AssetName": "Arrow",
-    "TextureName": "arrow",
-    "ShaderName": "UI/Default"
+    "AssetName": "icon",
+    "TextureName": "icon_TimeChest",
+    "ShaderName": "Sprites/Default"
   },
   {
-    "AssetName": "Back",
-    "TextureName": "progressBar1_1",
-    "ShaderName": "UI/Default"
+    "AssetName": "icon",
+    "TextureName": "icon_heart",
+    "ShaderName": "Sprites/Default"
   },
   {
-    "AssetName": "Progress",
-    "TextureName": "progressBar1_LineGreen",
-    "ShaderName": "UI/Default"
+    "AssetName": "view",
+    "TextureName": "coin_arrow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "view",
+    "TextureName": "coin_arrow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "view",
+    "TextureName": "coin_arrow",
+    "ShaderName": "Sprites/Default"
   }
 ]
