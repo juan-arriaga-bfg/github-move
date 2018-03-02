@@ -15,6 +15,7 @@ public class ResetPiecePositionAnimation : BoardAnimation
 		if (pieceFromView == null)
 		{
 			CompleteAnimation(context);
+			return;
 		}
 		
 		var sequence = DOTween.Sequence().SetId(pieceFromView.AnimationUid);
