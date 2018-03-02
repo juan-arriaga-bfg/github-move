@@ -7,6 +7,8 @@
         var enemy = GameDataService.Current.GetEnemy(GameDataService.Current.EnemyIndex - 1);
         
         piece.RegisterComponent(new LivePieceComponent {HitPoints = enemy.HP, MaxHitPoints = enemy.HP});
+
+        piece.RegisterComponent(new EnemySpawnGboxObserver());
         
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionFightEnd())

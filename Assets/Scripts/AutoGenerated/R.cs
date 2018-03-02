@@ -25,4 +25,5 @@ public class R
      public const string ReadyArrowView = "ReadyArrowView";
      public const string HitboxDamageView = "HitboxDamageView";
      public const string H1Piece = "H1Piece";
+     public const string GBox1Piece = "GBox1Piece";
 }

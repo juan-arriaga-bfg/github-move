@@ -52,6 +52,8 @@ public class SandboxGameController : MonoBehaviour
                 {PieceType.B4.Id, R.B4Piece},
                 {PieceType.B5.Id, R.B5Piece},
                 
+                {PieceType.Gbox1.Id, R.GBox1Piece},
+                
                 {-1000, R.HitboxDamageView}
             }
         };
@@ -109,6 +111,8 @@ public class SandboxGameController : MonoBehaviour
             {PieceType.B3.Id, new SpawnPieceBuilder()},
             {PieceType.B4.Id, new SpawnPieceBuilder()},
             {PieceType.B5.Id, new SpawnPieceBuilder()},
+            
+            {PieceType.Gbox1.Id, new GBoxPieceBuilder()},
         };
         
         boardController.RegisterComponent(new ActionExecuteComponent()

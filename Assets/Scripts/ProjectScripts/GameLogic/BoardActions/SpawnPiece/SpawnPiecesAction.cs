@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public class SpawnPiecesAction : IBoardAction
 {
@@ -16,7 +17,9 @@ public class SpawnPiecesAction : IBoardAction
 	public List<int> Pieces { get; set; }
 	
 	public CurrencyPair Resources { get; set; }
-	
+
+	public Action<List<BoardPosition>> OnSuccessEvent { get; set; }
+
 	public bool PerformAction(BoardController gameBoardController)
 	{
 		var free = new List<BoardPosition>();
@@ -42,6 +45,11 @@ public class SpawnPiecesAction : IBoardAction
 				At = free[i],
 				PieceTypeId = pieces[i]
 			});
+		}
+
+		if (OnSuccessEvent != null)
+		{
+			OnSuccessEvent(free);
 		}
 		
 		return true;
