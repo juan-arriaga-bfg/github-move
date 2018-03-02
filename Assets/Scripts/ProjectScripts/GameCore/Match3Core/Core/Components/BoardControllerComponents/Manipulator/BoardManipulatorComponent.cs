@@ -172,7 +172,7 @@ public class BoardManipulatorComponent : ECSEntity,
             }
 
             cachedViewForDrag = selectedView;
-            cachedDragDownPos = pos;
+            cachedDragDownPos = pos + Vector2.up * 0.5f;
 
             if (cachedViewForDrag != null)
             {
@@ -198,7 +198,7 @@ public class BoardManipulatorComponent : ECSEntity,
         if (cachedViewForDrag != null)
         {
             pos = pos + Vector2.up * 0.5f;
-            
+
             DOTween.Kill(dragAnimationId);
             
             if ((cachedDragDownPos - pos).sqrMagnitude > 0.01f)
@@ -212,6 +212,8 @@ public class BoardManipulatorComponent : ECSEntity,
                     To = targetPosition
                 });
             }
+            
+            
             
             if (cachedViewForDrag is PieceBoardElementView)
             {
