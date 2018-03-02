@@ -110,6 +110,8 @@ public class BoardManipulatorComponent : ECSEntity,
 
         if (LeanTouch.Fingers.Count > 1) return false;
 
+        pos = pos + Vector2.up * 0.5f;
+
         var targetPos = new Vector3(pos.x, pos.y, cachedViewForDrag.CachedTransform.position.z);
 
         if (cachedViewForDrag is PieceBoardElementView)
@@ -195,6 +197,8 @@ public class BoardManipulatorComponent : ECSEntity,
     {
         if (cachedViewForDrag != null)
         {
+            pos = pos + Vector2.up * 0.5f;
+            
             DOTween.Kill(dragAnimationId);
             
             if ((cachedDragDownPos - pos).sqrMagnitude > 0.01f)
