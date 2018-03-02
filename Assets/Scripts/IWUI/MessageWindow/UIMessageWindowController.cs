@@ -27,4 +27,17 @@ public class UIMessageWindowController : IWWindowController {
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
+    
+    public static void CreateDefaultMessage(string message)
+    {
+        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+        model.Title = "Message";
+        model.Message = message;
+        model.AcceptLabel = "Ok";
+        
+        model.OnAccept = () => {};
+        
+        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+    }
 }

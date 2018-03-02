@@ -11,6 +11,8 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
     
     [SerializeField] private List<UIChestSlot> slots;
     
+    private BoardPosition spawnAt;
+    
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -66,21 +68,34 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
     
     public void StartFight()
     {
+        if (GameDataService.Current.GetActiveChests().Count >= 4)
+        {
+            UIMessageWindowController.CreateDefaultMessage("No free slots for chest!");
+            return;
+        }
+        
         var enemy = GameDataService.Current.GetEnemy();
-        
-        if(enemy == null) return;
-        
-        var board = BoardService.Current.GetBoardById(0);
+
+        if (enemy == null)
+        {
+            UIMessageWindowController.CreateDefaultMessage("Not enough coins to enter the battle!");
+            return;
+        }
         
         var free = new List<BoardPosition>();
+        var board = BoardService.Current.GetBoardById(0);
         
         board.BoardLogic.EmptyCellsFinder.FindAllWithPointInHome(new BoardPosition(8, 8, board.BoardDef.PieceLayer), 15, 15, free);
-        
-        if(free.Count == 0) return;
+
+        if (free.Count == 0)
+        {
+            UIMessageWindowController.CreateDefaultMessage("No free cells on the field to enter the battle!");
+            return;
+        }
         
         robin.SetActive(true);
 
-        var spawnAt = free[Random.Range(0, free.Count)];
+        spawnAt = free[Random.Range(0, free.Count)];
         
         board.ActionExecutor.AddAction(new SpawnPieceAtAction
         {
@@ -90,7 +105,6 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
             {
                 robin.SetActive(false);
             }) 
-
         });
         
         // move camera
@@ -104,5 +118,14 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
         
         UpdateSlots();
         robin.SetActive(false);
+    }
+
+    public void SelectEnemy()
+    {
+        var board = BoardService.Current.GetBoardById(0);
+        
+        // move camera
+        var worldPos = board.BoardDef.GetSectorCenterWorldPosition(spawnAt.X, spawnAt.Y, spawnAt.Z);
+        board.Manipulator.CameraManipulator.ZoomTo(0.3f, worldPos);
     }
 }

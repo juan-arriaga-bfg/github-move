@@ -118,6 +118,7 @@ public class UIChestWindowView : UIGenericPopupWindowView
             item =>
             {
                 // on purchase failed (not enough cash)
+                UIMessageWindowController.CreateDefaultMessage("Not enough crystals!");
             }
         );
     }
