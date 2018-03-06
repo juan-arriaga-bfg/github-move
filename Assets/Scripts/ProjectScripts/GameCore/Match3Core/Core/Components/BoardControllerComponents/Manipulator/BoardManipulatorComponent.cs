@@ -154,28 +154,12 @@ public class BoardManipulatorComponent : ECSEntity,
                 isDragLip = true;
                 DOTween.Kill(dragAnimationId);
                 var sequence = DOTween.Sequence().SetId(dragAnimationId);
-//                sequence.AppendInterval(0.05f);
                 sequence.Append(cachedViewForDrag.CachedTransform.DOLocalMove(targetCellPos, dragDuration).SetEase(Ease.Linear));
             }
-
-            
-//            }
-//            else
-//            {
-//                prevDragPos = pos;
-//                
-////                var targetCellPos = context.BoardDef.GetPiecePosition(boardPos.X, boardPos.Y);
-////                targetCellPos = new Vector3(targetCellPos.x, targetCellPos.y, 0f);
-//                DOTween.Kill(dragAnimationId);
-//                cachedViewForDrag.CachedTransform.localPosition = pos;
-//            }
         }
-        
-       
         
         return true;
     }
-
     
     public bool OnDown(Vector2 startPos, Vector2 pos)
     {
@@ -209,7 +193,6 @@ public class BoardManipulatorComponent : ECSEntity,
 
             if (cachedViewForDrag != null)
             {
-                
                 cameraManipulator.CameraMove.Lock(this);
                 
                 if (selectedView is PieceBoardElementView)
@@ -239,14 +222,12 @@ public class BoardManipulatorComponent : ECSEntity,
                 BoardPosition fromPosition = context.RendererContext.GetBoardPosition(cachedViewForDrag);
                 BoardPosition targetPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
 
-                context.ActionExecutor.AddAction(new MovePieceFromToAction
+                context.ActionExecutor.AddAction(new MoveFromToAndCheckCoverMatchAction
                 {
                     From = fromPosition,
                     To = targetPosition
                 });
             }
-            
-            
             
             if (cachedViewForDrag is PieceBoardElementView)
             {

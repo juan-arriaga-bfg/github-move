@@ -13,11 +13,11 @@ public class CheckMatchAction : IBoardAction
 	
 	public BoardPosition At { get; set; }
 
-	public List<BoardPosition> MatchField { get; private set; }
+	public List<BoardPosition> MatchField { get; set; }
 	
 	public bool PerformAction(BoardController gameBoardController)
 	{
-		MatchField = new List<BoardPosition>();
+		MatchField = MatchField ?? new List<BoardPosition>();
 		var logic = gameBoardController.BoardLogic;
 		
 		int currentId;

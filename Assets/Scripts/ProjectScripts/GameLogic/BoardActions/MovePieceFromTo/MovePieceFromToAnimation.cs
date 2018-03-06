@@ -1,29 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using DG.Tweening;
 
 public class MovePieceFromToAnimation : BoardAnimation 
 {
-    public MovePieceFromToAction Action { get; set; }
+    public BoardPosition From { get; set; }
+	
+    public BoardPosition To { get; set; }
 
     public override void Animate(BoardRenderer context)
     {
-        var pieceFromView = context.GetElementAt(Action.From);
+        var pieceFromView = context.GetElementAt(From);
 
-        context.MoveElement(Action.From, Action.To);
+        context.MoveElement(From, To);
         
-        var pos = context.Context.BoardDef.GetPiecePosition(Action.To.X, Action.To.Y);
+        var pos = context.Context.BoardDef.GetPiecePosition(To.X, To.Y);
         pos = new Vector3(pos.x, pos.y, 0f);
 
         var sequence = DOTween.Sequence().SetId(pieceFromView.AnimationUid);
         sequence.Append(pieceFromView.CachedTransform.DOLocalMove(pos, 0.4f).SetEase(Ease.InOutSine));
         sequence.OnComplete(() =>
         {
-            context.ResetBoardElement(pieceFromView, Action.To);
+            context.ResetBoardElement(pieceFromView, To);
             
             CompleteAnimation(context);
         });
-   
     }
 }

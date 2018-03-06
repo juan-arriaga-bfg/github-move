@@ -1,4 +1,6 @@
-﻿public class MovePieceFromToAction : IBoardAction
+﻿using System.Collections.Generic;
+
+public class MoveFromToAndCheckCoverMatchAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -13,13 +15,19 @@
 	
 	public bool PerformAction(BoardController gameBoardController)
 	{
+		var logic = gameBoardController.BoardLogic;
+		
 		To = new BoardPosition(To.X, To.Y, From.Z);
 		
-		bool state = (gameBoardController.BoardLogic.IsLockedCell(To) == false)
-		             && (gameBoardController.BoardLogic.IsEmpty(To))
-		             && (gameBoardController.BoardLogic.MovePieceFromTo(From, To));
+		var pieceFrom = logic.GetPieceAt(From);
+		int pieceTo;
+		var matchField = new List<BoardPosition>();
+		
+		logic.FieldFinder.Find(To, matchField, out pieceTo);
 
-		if (state == false)
+		matchField.Remove(From);
+		
+		if (logic.IsLockedCell(To) || (pieceTo != PieceType.None.Id && pieceFrom.PieceType != pieceTo) || matchField.Count == 1)
 		{
 			var abortAnimation = new ResetPiecePositionAnimation
 			{
@@ -31,23 +39,35 @@
 			return false;
 		}
 		
-		gameBoardController.BoardLogic.LockCell(From, this);
-		gameBoardController.BoardLogic.LockCell(To, this);
+		matchField = null;
+
+		if (pieceTo == PieceType.None.Id)
+		{
+			logic.MovePieceFromTo(From, To);
+		}
+		else
+		{
+			matchField = new List<BoardPosition> {From};
+		}
+		
+		logic.LockCell(From, this);
+		logic.LockCell(To, this);
 		
 		var animation = new MovePieceFromToAnimation
 		{
 			From = From,
 			To = To
 		};
-
+		
 		animation.OnCompleteEvent += (_) =>
 		{
-			gameBoardController.BoardLogic.UnlockCell(From, this);
-			gameBoardController.BoardLogic.UnlockCell(To, this);
+			logic.UnlockCell(From, this);
+			logic.UnlockCell(To, this);
 			
 			gameBoardController.ActionExecutor.AddAction(new CheckMatchAction
 			{
-				At = To
+				At = To,
+				MatchField = matchField
 			});
 		};
 		
@@ -56,4 +76,3 @@
 		return true;
 	}
 }
-
