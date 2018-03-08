@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
@@ -13,12 +12,14 @@ public class MovePiecesFromToAnimation : BoardAnimation
 	{
 		if (From == null || To == null || From.Count != To.Count)
 		{
+#if UNITY_EDITOR
+			Debug.LogError("Error: list From or To == null, or From.Count != To.Count");
+#endif
 			return;
 		}
 
 		var sequence = DOTween.Sequence().SetId(animationUid);
-		sequence.OnComplete(() => CompleteAnimation(context));
-
+		
 		for (int i = 0; i < From.Count; i++)
 		{
 			var from = From[i];
@@ -34,5 +35,7 @@ public class MovePiecesFromToAnimation : BoardAnimation
 			sequence.Insert(0, pieceFromView.CachedTransform.DOLocalMove(pos, 0.4f).SetEase(Ease.InOutSine));
 			sequence.InsertCallback(0.4f, () => context.ResetBoardElement(pieceFromView, to));
 		}
+		
+		sequence.OnComplete(() => CompleteAnimation(context));
 	}
 }

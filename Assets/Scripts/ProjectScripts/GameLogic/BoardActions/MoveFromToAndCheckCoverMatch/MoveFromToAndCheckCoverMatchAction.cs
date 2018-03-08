@@ -40,7 +40,7 @@ public class MoveFromToAndCheckCoverMatchAction : IBoardAction
 		}
 		
 		logic.MovePieceFromTo(From, To);
-		Move(board, From, To, () => CheckMatch(board, null));
+		MovePiece(board, From, To, () => CheckMatch(board, null));
 		return true;
 	}
 
@@ -67,25 +67,91 @@ public class MoveFromToAndCheckCoverMatchAction : IBoardAction
 			return false;
 		}
 		
-		Move(board, From, To, () => CheckMatch(board, new List<BoardPosition> {From}));
+		MovePiece(board, From, To, () => CheckMatch(board, new List<BoardPosition> {From}));
 		return true;
 	}
 
 	private bool CheckMove(BoardController board)
 	{
-		var logic = board.BoardLogic;
-		
-		var pieceTo = logic.GetPieceAt(To);
+		var pieceTo = board.BoardLogic.GetPieceAt(To);
 		var draggable = pieceTo.GetComponent<DraggablePieceComponent>(DraggablePieceComponent.ComponentGuid);
 
 		if (draggable == null || draggable.IsDraggable(To) == false)
 		{
 			return false;
 		}
+
+		if (SwapPieces(board))
+		{
+			return true;
+		}
+		
+		return MovePieces(board);
+	}
+
+	private void MovePiece(BoardController board, BoardPosition from, BoardPosition to, Action onComplete)
+	{
+		var logic = board.BoardLogic;
+		
+		logic.LockCell(from, this);
+		logic.LockCell(to, this);
+
+		var animation = new MovePieceFromToAnimation
+		{
+			From = from,
+			To = to
+		};
+
+		animation.OnCompleteEvent += (_) =>
+		{
+			logic.UnlockCell(from, this);
+			logic.UnlockCell(to, this);
+
+			if (onComplete != null) onComplete();
+		};
+
+		board.RendererContext.AddAnimationToQueue(animation);
+	}
+
+	private bool SwapPieces(BoardController board)
+	{
+		if (To.IsNeighbor(From) == false)
+		{
+			return false;
+		}
+		
+		var logic = board.BoardLogic;
+		
+		logic.SwapPieces(From, To);
+		
+		logic.LockCell(From, this);
+		logic.LockCell(To, this);
+
+		var animation = new SwapPiecesAnimation
+		{
+			PointA = From,
+			PointB = To
+		};
+
+		animation.OnCompleteEvent += (_) =>
+		{
+			logic.UnlockCell(From, this);
+			logic.UnlockCell(To, this);
+			
+			CheckMatch(board, null);
+		};
+
+		board.RendererContext.AddAnimationToQueue(animation);
+		return true;
+	}
+
+	private bool MovePieces(BoardController board)
+	{
+		var logic = board.BoardLogic;
 		
 		var points = new List<BoardPosition>();
 			
-		if(logic.EmptyCellsFinder.FindNearWithPointInCenter(To, points, 1) == false)
+		if(logic.EmptyCellsFinder.FindRandomNearWithPointInCenter(To, points, 1) == false)
 		{
 			return false;
 		}
@@ -116,30 +182,6 @@ public class MoveFromToAndCheckCoverMatchAction : IBoardAction
 
 		board.RendererContext.AddAnimationToQueue(animation);
 		return true;
-	}
-
-	private void Move(BoardController board, BoardPosition from, BoardPosition to, Action onComplete)
-	{
-		var logic = board.BoardLogic;
-		
-		logic.LockCell(from, this);
-		logic.LockCell(to, this);
-
-		var animation = new MovePieceFromToAnimation
-		{
-			From = from,
-			To = to
-		};
-
-		animation.OnCompleteEvent += (_) =>
-		{
-			logic.UnlockCell(from, this);
-			logic.UnlockCell(to, this);
-
-			if (onComplete != null) onComplete();
-		};
-
-		board.RendererContext.AddAnimationToQueue(animation);
 	}
 
 	private void Reset(BoardRenderer renderer)

@@ -32,8 +32,15 @@ public struct BoardPosition : IEquatable<BoardPosition>
         {
             return true;
         }
-
+        
         return false;
+    }
+
+    public bool IsNeighbor(BoardPosition other)
+    {
+        if (Equals(other)) return false;
+        
+        return other.X >= X - 1 && other.X <= X + 1 && other.Y >= Y - 1 && other.Y <= Y + 1;
     }
 
     public BoardPosition NextTo(BoardPosition to)

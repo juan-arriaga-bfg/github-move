@@ -17,6 +17,30 @@ public class EmptyCellsFinderComponent: IECSComponent
 	public void OnUnRegisterEntity(ECSEntity entity)
 	{
 	}
+
+	public bool FindRandomNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, int radius = 3)
+	{
+		for (int i = 1; i < radius; i++)
+		{
+			FindRingWithPointInCenter(point, field, (i * 2) * 4, i);
+			
+			if (field.Count >= count) break;
+		}
+
+		if (field.Count == 0)
+		{
+			return false;
+		}
+
+		field.Shuffle();
+		
+		if (field.Count > count)
+		{
+			field.RemoveRange(count, field.Count - count);
+		}
+
+		return field.Count != 0;
+	}
 	
 	public bool FindNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, int radius = 3)
 	{
@@ -25,9 +49,19 @@ public class EmptyCellsFinderComponent: IECSComponent
 			if (FindRingWithPointInCenter(point, field, count, i)) return true;
 		}
 		
-		return field.Count != 0;;
+		return field.Count != 0;
 	}
-
+	
+	public bool FindNearRingWithPointInCenter(BoardPosition point, List<BoardPosition> field, int radius = 3)
+	{
+		for (int i = 1; i < radius; i++)
+		{
+			if (FindRingWithPointInCenter(point, field, (i*2)*4, i)) return true;
+		}
+		
+		return field.Count != 0;
+	}
+	
 	public bool FindRingWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, int radius)
 	{
 		// TODO: нет проверки на валидность координаты, в результате идет проход даже по ячекам, которые не существуют
