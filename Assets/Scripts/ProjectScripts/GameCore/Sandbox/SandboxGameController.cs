@@ -223,17 +223,17 @@ public class SandboxGameController : MonoBehaviour
             PieceTypeId = PieceType.M1.Id
         });
         
-//        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-//        {
-//            At = new BoardPosition(16, 14),
-//            PieceTypeId = PieceType.A1.Id
-//        });
-//        
-//        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-//        {
-//            At = new BoardPosition(17, 15),
-//            PieceTypeId = PieceType.A2.Id
-//        });
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(16, 14),
+            PieceTypeId = PieceType.A1.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(17, 15),
+            PieceTypeId = PieceType.A1.Id
+        });
 //        
 //        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
 //        {

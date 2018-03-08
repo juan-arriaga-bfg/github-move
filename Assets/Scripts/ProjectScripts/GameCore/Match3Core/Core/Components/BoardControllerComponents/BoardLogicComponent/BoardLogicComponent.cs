@@ -355,7 +355,7 @@ public class BoardLogicComponent : ECSEntity,
 
         if (AddPieceToBoardSilent(to.X, to.Y, fromPiece) && RemovePieceFromBoardSilent(from))
         {
-            var observer = fromPiece == null ? null : fromPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+            var observer = fromPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
             if (observer != null)
             {
                 observer.OnMovedFromTo(from, to);
@@ -381,13 +381,13 @@ public class BoardLogicComponent : ECSEntity,
         AddPieceToBoardSilent(to.X, to.Y, fromPiece);
         AddPieceToBoardSilent(from.X, from.Y, toPiece);
         
-        var observerFrom = fromPiece == null ? null : fromPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+        var observerFrom = fromPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
         if (observerFrom != null)
         {
             observerFrom.OnMovedFromTo(from, to);
         }
         
-        var observerTo = toPiece == null ? null : toPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+        var observerTo = toPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
         if (observerTo != null)
         {
             observerTo.OnMovedFromTo(to, from);

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class MoveFromToAndCheckCoverMatchAction : IBoardAction
 {
@@ -10,69 +12,152 @@ public class MoveFromToAndCheckCoverMatchAction : IBoardAction
 	}
 
 	public BoardPosition From { get; set; }
-	
 	public BoardPosition To { get; set; }
-	
+
 	public bool PerformAction(BoardController gameBoardController)
 	{
-		var logic = gameBoardController.BoardLogic;
-		
 		To = new BoardPosition(To.X, To.Y, From.Z);
 		
-		var pieceFrom = logic.GetPieceAt(From);
-		int pieceTo;
-		var matchField = new List<BoardPosition>();
-		
-		logic.FieldFinder.Find(To, matchField, out pieceTo);
-
-		matchField.Remove(From);
-		
-		if (logic.IsLockedCell(To) || (pieceTo != PieceType.None.Id && pieceFrom.PieceType != pieceTo) || matchField.Count == 1)
+		if (From.Equals(To)
+			|| CheckFreeCell(gameBoardController) == false
+		    && CheckCurrentPieceType(gameBoardController) == false
+		    && CheckMove(gameBoardController) == false)
 		{
-			var abortAnimation = new ResetPiecePositionAnimation
-			{
-				At = From
-			};
-			
-			gameBoardController.RendererContext.AddAnimationToQueue(abortAnimation);
-			
+			Reset(gameBoardController.RendererContext);
 			return false;
 		}
 		
-		matchField = null;
+		return true;
+	}
 
-		if (pieceTo == PieceType.None.Id)
+	private bool CheckFreeCell(BoardController board)
+	{
+		var logic = board.BoardLogic;
+		
+		if (logic.IsLockedCell(To) || logic.IsEmpty(To) == false)
 		{
-			logic.MovePieceFromTo(From, To);
+			return false;
 		}
-		else
+		
+		logic.MovePieceFromTo(From, To);
+		Move(board, From, To, () => CheckMatch(board, null));
+		return true;
+	}
+
+	private bool CheckCurrentPieceType(BoardController board)
+	{
+		var logic = board.BoardLogic;
+		
+		var pieceFrom = logic.GetPieceAt(From);
+		var pieceTo = logic.GetPieceAt(To);
+		
+		if (pieceFrom.PieceType != pieceTo.PieceType)
 		{
-			matchField = new List<BoardPosition> {From};
+			return false;
 		}
+		
+		int pieceType;
+		var matchField = new List<BoardPosition>();
+		
+		logic.FieldFinder.Find(To, matchField, out pieceType);
+		matchField.Remove(From);
+		
+		if (matchField.Count == 1)
+		{
+			return false;
+		}
+		
+		Move(board, From, To, () => CheckMatch(board, new List<BoardPosition> {From}));
+		return true;
+	}
+
+	private bool CheckMove(BoardController board)
+	{
+		var logic = board.BoardLogic;
+		
+		var pieceTo = logic.GetPieceAt(To);
+		var draggable = pieceTo.GetComponent<DraggablePieceComponent>(DraggablePieceComponent.ComponentGuid);
+
+		if (draggable == null || draggable.IsDraggable(To) == false)
+		{
+			return false;
+		}
+		
+		var points = new List<BoardPosition>();
+			
+		if(logic.EmptyCellsFinder.FindNearWithPointInCenter(To, points, 1) == false)
+		{
+			return false;
+		}
+		
+		var free = points[0];
+		
+		logic.MovePieceFromTo(To, free);
+		logic.MovePieceFromTo(From, To);
 		
 		logic.LockCell(From, this);
 		logic.LockCell(To, this);
-		
-		var animation = new MovePieceFromToAnimation
+		logic.LockCell(free, this);
+
+		var animation = new MovePiecesFromToAnimation
 		{
-			From = From,
-			To = To
+			From = new List<BoardPosition> { To, From },
+			To = new List<BoardPosition> { free, To }
 		};
-		
+
 		animation.OnCompleteEvent += (_) =>
 		{
 			logic.UnlockCell(From, this);
 			logic.UnlockCell(To, this);
+			logic.UnlockCell(free, this);
 			
-			gameBoardController.ActionExecutor.AddAction(new CheckMatchAction
-			{
-				At = To,
-				MatchField = matchField
-			});
+			CheckMatch(board, null);
+		};
+
+		board.RendererContext.AddAnimationToQueue(animation);
+		return true;
+	}
+
+	private void Move(BoardController board, BoardPosition from, BoardPosition to, Action onComplete)
+	{
+		var logic = board.BoardLogic;
+		
+		logic.LockCell(from, this);
+		logic.LockCell(to, this);
+
+		var animation = new MovePieceFromToAnimation
+		{
+			From = from,
+			To = to
+		};
+
+		animation.OnCompleteEvent += (_) =>
+		{
+			logic.UnlockCell(from, this);
+			logic.UnlockCell(to, this);
+
+			if (onComplete != null) onComplete();
+		};
+
+		board.RendererContext.AddAnimationToQueue(animation);
+	}
+
+	private void Reset(BoardRenderer renderer)
+	{
+		var abortAnimation = new ResetPiecePositionAnimation
+		{
+			At = From
 		};
 		
-		gameBoardController.RendererContext.AddAnimationToQueue(animation);
-		
-		return true;
+		renderer.AddAnimationToQueue(abortAnimation);
+	}
+
+	private void CheckMatch(BoardController board, List<BoardPosition> matchList)
+	{
+		board.ActionExecutor.AddAction(new CheckMatchAction
+		{
+			At = To,
+			MatchField = matchList
+		});
 	}
 }
