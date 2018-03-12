@@ -49,8 +49,8 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
     {
         base.UpdateView(model);
         
-        var hero = GameDataService.Current.GetHero("Robin");
-        var level = GameDataService.Current.HeroLevel;
+        var hero = GameDataService.Current.HeroesManager.GetHero("Robin");
+        var level = GameDataService.Current.HeroesManager.HeroLevel;
         var heroDamage = hero.Damages[level];
         
         damegeLabel.Text = heroDamage.ToString();
@@ -58,7 +58,7 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
 
     public void UpdateSlots()
     {
-        var chests = GameDataService.Current.GetActiveChests();
+        var chests = GameDataService.Current.ChestsManager.GetActiveChests();
         
         for (int i = 0; i < slots.Count; i++)
         {
@@ -77,13 +77,13 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
     {
         var windowModel = Model as UIMainWindowModel;
         
-        if (GameDataService.Current.GetActiveChests().Count >= 4)
+        if (GameDataService.Current.ChestsManager.GetActiveChests().Count >= 4)
         {
             UIMessageWindowController.CreateDefaultMessage("No free slots for chest!");
             return;
         }
         
-        var enemy = GameDataService.Current.FightEnemy();
+        var enemy = GameDataService.Current.EnemiesManager.FightEnemy();
 
         if (enemy == null)
         {
@@ -139,7 +139,7 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
 
     public void OnBoardEvent(int code, object context)
     {
-        GameDataService.Current.AddActiveChest(GameDataService.Current.Chests.Find(def => def.Uid == context.ToString()));
+        GameDataService.Current.ChestsManager.AddActiveChest(GameDataService.Current.ChestsManager.Chests.Find(def => def.Uid == context.ToString()));
         
         UpdateSlots();
         robin.SetActive(false);

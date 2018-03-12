@@ -1,36 +1,44 @@
-﻿using System;
+﻿
+using System.Collections.Generic;
 
-public class SpawnPieceAtAction : IBoardAction
+public class SpawnResourcePieceAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-
+	
 	public virtual int Guid
 	{
 		get { return ComponentGuid; }
 	}
 	
-	public bool IsCheckMatch { get; set; }
-	
 	public BoardPosition At { get; set; }
 	
-	public int PieceTypeId { get; set; }
+	public Piece Resource { get; set; }
 	
-	public Action<SpawnPieceAtAction> OnFailedAction { get; set; }
-
 	public bool PerformAction(BoardController gameBoardController)
 	{
-		var piece = gameBoardController.CreatePieceFromType(PieceTypeId);
+		var free = new List<BoardPosition>();
 
-		At = new BoardPosition(At.X, At.Y, piece.Layer.Index);
+		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(At, free, 1, 5) == false)
+		{
+			return false;
+		}
 
+		var index = free.IndexOf(At);
+
+		if (index != -1)
+		{
+			free.RemoveAt(index);
+			free.Add(At);
+		}
+
+		At = free[0];
+		
+		At = new BoardPosition(At.X, At.Y, Resource.Layer.Index);
+		
 		if (At.IsValid == false
 		    || gameBoardController.BoardLogic.IsLockedCell(At)
-		    || gameBoardController.BoardLogic.AddPieceToBoard(At.X, At.Y, piece) == false)
+		    || gameBoardController.BoardLogic.AddPieceToBoard(At.X, At.Y, Resource) == false)
 		{
-			if (OnFailedAction != null)
-			{
-				OnFailedAction(this);
-			}
 			return false;
 		}
 		
@@ -38,21 +46,13 @@ public class SpawnPieceAtAction : IBoardAction
 		
 		var animation = new SpawnPieceAtAnimation
 		{
-			CreatedPiece = piece,
+			CreatedPiece = Resource,
 			At = At
 		};
 
 		animation.OnCompleteEvent += (_) =>
 		{
 			gameBoardController.BoardLogic.UnlockCell(At, this);
-
-			if (IsCheckMatch)
-			{
-				gameBoardController.ActionExecutor.AddAction(new CheckMatchAction
-				{
-					At = At
-				});
-			}
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

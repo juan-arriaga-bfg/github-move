@@ -110,7 +110,7 @@ public class UIChestWindowView : UIGenericPopupWindowView
                 def.State = ChestState.Open;
                 chestRewardmodel.Chest = def;
                 UIService.Get.ShowWindow(UIWindowType.ChestRewardWindow);
-                GameDataService.Current.RemoveActiveChest(def);
+                GameDataService.Current.ChestsManager.RemoveActiveChest(def);
         
                 (UIService.Get.GetShowedWindowByName(UIWindowType.MainWindow).CurrentView as UIMainWindowView).UpdateSlots();
                 Controller.CloseCurrentWindow();

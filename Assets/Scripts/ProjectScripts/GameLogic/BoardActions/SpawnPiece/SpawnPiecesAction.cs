@@ -15,8 +15,6 @@ public class SpawnPiecesAction : IBoardAction
 	public BoardPosition At { get; set; }
 	
 	public List<int> Pieces { get; set; }
-	
-	public CurrencyPair Resources { get; set; }
 
 	public Action<List<BoardPosition>> OnSuccessEvent { get; set; }
 
@@ -26,7 +24,11 @@ public class SpawnPiecesAction : IBoardAction
 		var pieces = Pieces;
 		
 		pieces.Sort();
-		gameBoardController.BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(At, free, Pieces.Count, 5);
+
+		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(At, free, Pieces.Count, 5) == false)
+		{
+			return false;
+		}
 
 		var index = free.IndexOf(At);
 
@@ -41,7 +43,6 @@ public class SpawnPiecesAction : IBoardAction
 			gameBoardController.ActionExecutor.AddAction(new SpawnPieceAtAction
 			{
 				IsCheckMatch = IsCheckMatch,
-				Resources = Resources,
 				At = free[i],
 				PieceTypeId = pieces[i]
 			});

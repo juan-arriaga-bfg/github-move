@@ -57,8 +57,8 @@ public class UIChestRewardWindowView : UIGenericWindowView
         resourceAmountLabel.Text = resCard.Amount.ToString();
         
         var heroCard = windowModel.Chest.Rewards.Find(pair => pair.Currency == Currency.RobinCards.Name);
-        var hero = GameDataService.Current.GetHero("Robin");
-        var price = hero.Prices[GameDataService.Current.HeroLevel].Amount;
+        var hero = GameDataService.Current.HeroesManager.GetHero("Robin");
+        var price = hero.Prices[GameDataService.Current.HeroesManager.HeroLevel].Amount;
         
         cardHeroName.Text = heroCard.Currency.Replace("Cards", "");
         heroAmountLabel.Text = "x" + heroCard.Amount;
@@ -154,8 +154,8 @@ public class UIChestRewardWindowView : UIGenericWindowView
             );
         }
 
-        var hero = GameDataService.Current.GetHero("Robin");
-        var level = GameDataService.Current.HeroLevel;
+        var hero = GameDataService.Current.HeroesManager.GetHero("Robin");
+        var level = GameDataService.Current.HeroesManager.HeroLevel;
 
         if (ProfileService.Current.GetStorageItem(Currency.RobinCards.Name).Amount >= hero.Prices[level].Amount)
         {

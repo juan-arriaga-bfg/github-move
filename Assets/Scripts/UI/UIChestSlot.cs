@@ -99,7 +99,7 @@ public class UIChestSlot : MonoBehaviour
             var chestRewardmodel = UIService.Get.GetCachedModel<UIChestRewardWindowModel>(UIWindowType.ChestRewardWindow);
 
             chestRewardmodel.Chest = chest;
-            GameDataService.Current.RemoveActiveChest(chest);
+            GameDataService.Current.ChestsManager.RemoveActiveChest(chest);
             Initialize();
             
             UIService.Get.ShowWindow(UIWindowType.ChestRewardWindow);

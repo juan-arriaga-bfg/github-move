@@ -35,8 +35,8 @@ public class HeroLevelUpView : IWBaseMonoBehaviour
     {
         if (context == null || context.Piece == null) return;
 
-        var hero = GameDataService.Current.GetHero("Robin");
-        var level = GameDataService.Current.HeroLevel;
+        var hero = GameDataService.Current.HeroesManager.GetHero("Robin");
+        var level = GameDataService.Current.HeroesManager.HeroLevel;
         
         var isDone = ProfileService.Current.GetStorageItem(Currency.RobinCards.Name).Amount >= hero.Prices[level].Amount;
 

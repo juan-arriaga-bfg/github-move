@@ -8,8 +8,8 @@
 
 		if (liveComponent == null) return false;
 
-		var hero = GameDataService.Current.GetHero("Robin");
-		var level = GameDataService.Current.HeroLevel;
+		var hero = GameDataService.Current.HeroesManager.GetHero("Robin");
+		var level = GameDataService.Current.HeroesManager.HeroLevel;
 		
 		liveComponent.HitPoints -= hero.Damages[level];
 		

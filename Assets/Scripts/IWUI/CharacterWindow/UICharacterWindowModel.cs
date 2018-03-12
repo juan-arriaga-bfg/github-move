@@ -25,7 +25,7 @@ public class UICharacterWindowModel : IWWindowModel
 
     public int TotalProgress
     {
-        get { return GameDataService.Current.GetHero("Robin").Prices[GameDataService.Current.HeroLevel].Amount; }
+        get { return GameDataService.Current.HeroesManager.GetHero("Robin").Prices[GameDataService.Current.HeroesManager.HeroLevel].Amount; }
     }
 
     public bool IsDone
@@ -57,8 +57,8 @@ public class UICharacterWindowModel : IWWindowModel
     {
         get
         {
-            var hero = GameDataService.Current.GetHero("Robin");
-            var level = GameDataService.Current.HeroLevel;
+            var hero = GameDataService.Current.HeroesManager.GetHero("Robin");
+            var level = GameDataService.Current.HeroesManager.HeroLevel;
             var nextDamage = level == hero.Damages.Count - 1 ? 0 : hero.Damages[level + 1];
             var heroDamage = hero.Damages[level];
             
@@ -70,7 +70,7 @@ public class UICharacterWindowModel : IWWindowModel
 
     public string LevelText
     {
-        get { return string.Format("Level {0}", GameDataService.Current.HeroLevel + 1); }
+        get { return string.Format("Level {0}", GameDataService.Current.HeroesManager.HeroLevel + 1); }
     }
     
     public string HeroName

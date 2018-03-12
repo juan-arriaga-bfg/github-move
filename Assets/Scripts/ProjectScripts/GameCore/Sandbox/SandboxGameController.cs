@@ -232,7 +232,7 @@ public class SandboxGameController : MonoBehaviour
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(17, 15),
-            PieceTypeId = PieceType.A1.Id
+            PieceTypeId = PieceType.A3.Id
         });
 //        
 //        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction

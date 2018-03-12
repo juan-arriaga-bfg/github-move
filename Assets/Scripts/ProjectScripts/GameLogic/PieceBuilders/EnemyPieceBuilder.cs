@@ -4,7 +4,7 @@
     {
         var piece = base.Build(pieceType, context);
 
-        var enemy = GameDataService.Current.GetEnemy(GameDataService.Current.EnemyIndex - 1);
+        var enemy = GameDataService.Current.EnemiesManager.GetEnemy(GameDataService.Current.EnemiesManager.EnemyIndex - 1);
         
         piece.RegisterComponent(new LivePieceComponent {HitPoints = enemy.HP, MaxHitPoints = enemy.HP});
 
