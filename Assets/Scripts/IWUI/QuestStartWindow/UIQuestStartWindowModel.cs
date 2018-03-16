@@ -20,6 +20,11 @@ public class UIQuestStartWindowModel : IWWindowModel
         get { return "Save the Sinking Peasant"; }
     }
     
+    public string ButtonText
+    {
+        get { return string.Format("{0} Start", Obstacle.Def.StartPrice.Amount); }
+    }
+    
     public string TimeText
     {
         get

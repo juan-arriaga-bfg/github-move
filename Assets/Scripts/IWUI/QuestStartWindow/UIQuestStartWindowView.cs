@@ -6,6 +6,7 @@ public class UIQuestStartWindowView : UIGenericPopupWindowView
 {
     [SerializeField] private NSText subTitle;
     [SerializeField] private NSText timeLabel;
+    [SerializeField] private NSText buttonLabel;
     
     [SerializeField] private Image chest;
     [SerializeField] private Image cap;
@@ -22,8 +23,10 @@ public class UIQuestStartWindowView : UIGenericPopupWindowView
         
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
+        
         subTitle.Text = windowModel.SubTitle;
         timeLabel.Text = windowModel.TimeText;
+        buttonLabel.Text = windowModel.ButtonText;
         
         var id = windowModel.GetChestSkin();
         
@@ -54,8 +57,34 @@ public class UIQuestStartWindowView : UIGenericPopupWindowView
     {
         var windowModel = Model as UIQuestStartWindowModel;
         
-        windowModel.Obstacle.State = ObstacleState.InProgres;
-        Controller.CloseCurrentWindow();
+        var price = windowModel.Obstacle.Def.StartPrice;
+        
+        var shopItem = new ShopItem
+        {
+            Uid = string.Format("purchase.test.{0}.10", Currency.Quest.Name), 
+            ItemUid = Currency.Quest.Name, 
+            Amount = 1,
+            CurrentPrices = new List<Price>
+            {
+                new Price{Currency = price.Currency, DefaultPriceAmount = price.Amount}
+            }
+        };
+
+        ShopService.Current.PurchaseItem
+        (
+            shopItem,
+            (item, s) =>
+            {
+                // on purchase success
+                windowModel.Obstacle.State = ObstacleState.InProgres;
+                Controller.CloseCurrentWindow();
+            },
+            item =>
+            {
+                // on purchase failed (not enough cash)
+                UIMessageWindowController.CreateDefaultMessage("Not enough coins!");
+            }
+        );
     }
 
     public void OnClickToogle()

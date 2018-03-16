@@ -56,7 +56,7 @@ public class TouchReactionDefinitionObstacle : TouchReactionDefinitionComponent
                         item =>
                         {
                             // on purchase failed (not enough cash)
-                            UIMessageWindowController.CreateDefaultMessage("Not enough crystals to buy!");
+                            UIMessageWindowController.CreateDefaultMessage("Not enough crystals!");
                         }
                     );
                 };

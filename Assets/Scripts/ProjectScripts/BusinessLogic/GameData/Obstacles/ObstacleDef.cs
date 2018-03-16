@@ -8,6 +8,7 @@ public class ObstacleDef
     public List<IObstacleCondition> OpenConditions { get; set; }
     public ChestType Reward { get; set; }
     public CurrencyPair Price { get; set; }
+    public CurrencyPair StartPrice { get; set; }
     
     public List<T> GetOpenConditions<T>() where T : class, IObstacleCondition
     {
