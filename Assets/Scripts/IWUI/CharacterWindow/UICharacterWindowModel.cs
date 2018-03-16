@@ -20,7 +20,7 @@ public class UICharacterWindowModel : IWWindowModel
     
     public string Title
     {
-        get { return string.Format("{0} Caracter:", HeroName); }
+        get { return string.Format("{0} Character:", HeroName); }
     }
     
     public string Message

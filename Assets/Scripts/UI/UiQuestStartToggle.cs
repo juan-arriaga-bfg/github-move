@@ -47,6 +47,13 @@ public class UiQuestStartToggle : MonoBehaviour
         
         hero.InAdventure = toggle.isOn ? uid : -1;
     }
+
+    public void HeroInHome()
+    {
+        var hero = GameDataService.Current.HeroesManager.GetHero(heroName);
+
+        if (hero != null && hero.InAdventure == uid) hero.InAdventure = -1;
+    }
     
     public bool InAdventure()
     {

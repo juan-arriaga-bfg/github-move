@@ -15,11 +15,15 @@ public class UIQuestStartWindowView : UIGenericPopupWindowView
     
     [SerializeField] private Button StartButton;
 
+    private bool InAdventure;
+
     public override void OnViewShow()
     {
         base.OnViewShow();
         
         var windowModel = Model as UIQuestStartWindowModel;
+
+        InAdventure = false;
         
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
@@ -51,6 +55,13 @@ public class UIQuestStartWindowView : UIGenericPopupWindowView
         base.OnViewClose();
         
         var windowModel = Model as UIQuestStartWindowModel;
+        
+        if(InAdventure) return;
+
+        foreach (var obj in toggles)
+        {
+            obj.HeroInHome();
+        }
     }
 
     public void OnClick()
@@ -76,6 +87,7 @@ public class UIQuestStartWindowView : UIGenericPopupWindowView
             (item, s) =>
             {
                 // on purchase success
+                InAdventure = true;
                 windowModel.Obstacle.State = ObstacleState.InProgres;
                 Controller.CloseCurrentWindow();
             },
