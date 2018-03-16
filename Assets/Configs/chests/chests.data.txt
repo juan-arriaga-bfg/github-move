@@ -14,16 +14,27 @@
                 "Amount" : 50
             },
             {
-                "Currency" : "RobinCards",
+                "Currency" : "RobinCard",
                 "Amount" : 5
             },
             {
-                "Currency" : "PieceA1",
+                "Currency" : "PieceA2",
                 "Amount" : 1
+            }
+        ],
+        "RewardsAlternative" :
+        [
+            {
+                "Currency" : "Coins",
+                "Amount" : 50
             },
             {
-                "Currency" : "PieceB1",
-                "Amount" : 2
+                "Currency" : "JohnCard",
+                "Amount" : 5
+            },
+            {
+                "Currency" : "PieceA2",
+                "Amount" : 1
             }
         ]
     },
@@ -39,19 +50,30 @@
         [
             {
                 "Currency" : "Coins",
-                "Amount" : 80
+                "Amount" : 70
             },
             {
-                "Currency" : "RobinCards",
+                "Currency" : "RobinCard",
                 "Amount" : 10
             },
             {
                 "Currency" : "PieceA2",
                 "Amount" : 2
+            }
+        ],
+        "RewardsAlternative" :
+        [
+            {
+                "Currency" : "Coins",
+                "Amount" : 70
+            },
+            {
+                "Currency" : "JohnCard",
+                "Amount" : 10
             },
             {
                 "Currency" : "PieceB2",
-                "Amount" : 1
+                "Amount" : 2
             }
         ]
     },
@@ -67,18 +89,29 @@
         [
             {
                 "Currency" : "Coins",
-                "Amount" : 110
+                "Amount" : 100
             },
             {
-                "Currency" : "RobinCards",
+                "Currency" : "RobinCard",
                 "Amount" : 20
             },
             {
                 "Currency" : "PieceA3",
                 "Amount" : 1
+            }
+        ],
+        "RewardsAlternative" :
+        [
+            {
+                "Currency" : "Coins",
+                "Amount" : 100
             },
             {
-                "Currency" : "PieceA3",
+                "Currency" : "JohnCard",
+                "Amount" : 20
+            },
+            {
+                "Currency" : "PieceB3",
                 "Amount" : 1
             }
         ]

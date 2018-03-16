@@ -1,14 +1,18 @@
-﻿public class TouchReactionConditionComponent : ECSEntity
+﻿public class TouchReactionConditionComponent : IECSComponent
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-
-	public override int Guid { get { return ComponentGuid; } }
+	
+	public int Guid { get { return ComponentGuid; } }
 
 	public bool IsDone;
 	
-	public override void OnRegisterEntity(ECSEntity entity)
+	public virtual void OnRegisterEntity(ECSEntity entity)
 	{
 		Recharge();
+	}
+	
+	public void OnUnRegisterEntity(ECSEntity entity)
+	{
 	}
 	
 	public virtual void Recharge()

@@ -28,10 +28,9 @@ public class UIChestRewardWindowView : UIGenericWindowView
     [SerializeField] private Image iconOpenDown;
     
     [SerializeField] private Image iconPiece;
+    [SerializeField] private Image iconHero;
     
     [SerializeField] private RectTransform progress;
-
-    private int random;
     
     public override void OnViewShow()
     {
@@ -48,33 +47,33 @@ public class UIChestRewardWindowView : UIGenericWindowView
         
         var id = windowModel.Chest.GetSkin();
         
-        iconOpenTop.sprite = IconService.Current.GetSpriteById(id + "_3");
+        iconOpenTop.sprite = IconService.Current.GetSpriteById(id + "_2");
         iconOpenDown.sprite = IconService.Current.GetSpriteById(id + "_1");
 
-        var resCard = windowModel.Chest.Rewards.Find(pair => pair.Currency == Currency.Coins.Name);
+        var rewards = windowModel.GetRewards();
+
+        var resCard = rewards[0];
 
         cardResourceName.Text = resCard.Currency;
         resourceAmountLabel.Text = resCard.Amount.ToString();
+
+        var heroCard = rewards[1];
+        var hero = GameDataService.Current.HeroesManager.GetHeroByCurrency(heroCard.Currency);
         
-        var heroCard = windowModel.Chest.Rewards.Find(pair => pair.Currency == Currency.RobinCards.Name);
-        var hero = GameDataService.Current.HeroesManager.GetHero("Robin");
-        var price = hero.Prices[GameDataService.Current.HeroesManager.HeroLevel].Amount;
-        
-        cardHeroName.Text = heroCard.Currency.Replace("Cards", "");
+        cardHeroName.Text = hero.Def.Uid;
         heroAmountLabel.Text = "x" + heroCard.Amount;
         
-        heroProgressLabel.Text = string.Format("{0}/{1}", heroCard.Amount, price);
-        progress.sizeDelta = new Vector2(Mathf.Clamp(150*(heroCard.Amount/(float)price), 0, 150), progress.sizeDelta.y);
+        heroProgressLabel.Text = string.Format("{0}/{1}", heroCard.Amount, hero.TotalProgress);
+        progress.sizeDelta = new Vector2(Mathf.Clamp(150*(heroCard.Amount/(float)hero.TotalProgress), 0, 150), progress.sizeDelta.y);
         
-        random = 2 + Random.Range(0, 2);
-        
-        var pieceCard = windowModel.Chest.Rewards[random];
+        var pieceCard = rewards[2];
         var piece = pieceCard.Currency.Replace("Piece", "");
         
         cardBuildName.Text = piece[0] == 'A' ? "House" : "Tower";
         buildAmountLabel.Text = "x" + pieceCard.Amount;
         
         iconPiece.sprite = IconService.Current.GetSpriteById(piece);
+        iconHero.sprite = IconService.Current.GetSpriteById("face_" + hero.Def.Uid);
     }
     
     public override void AnimateShow()
@@ -99,18 +98,15 @@ public class UIChestRewardWindowView : UIGenericWindowView
         base.AnimateClose();
         
         var windowModel = Model as UIChestRewardWindowModel;
-        var chest = windowModel.Chest;
-        var board = BoardService.Current.GetBoardById(0);
         
-        var heroHouse = new BoardPosition(10, 18, board.BoardDef.PieceLayer);
-
-        for (var index = 0; index < chest.Rewards.Count; index++)
+        var rewards = windowModel.GetRewards();
+        var board = BoardService.Current.GetBoardById(0);
+        var hero = GameDataService.Current.HeroesManager.GetHeroByCurrency(rewards[1].Currency);
+        
+        foreach (var reward in rewards)
         {
-            if(index > 1 && index != random) continue;
-            
-            var reward = chest.Rewards[index];
-            
-            if (reward.Currency != Currency.Coins.Name && reward.Currency != Currency.RobinCards.Name)
+            if (reward.Currency != Currency.Coins.Name 
+                && reward.Currency != hero.CardCurrencyDef.Name)
             {
                 var pieces = new List<int>();
 
@@ -122,7 +118,7 @@ public class UIChestRewardWindowView : UIGenericWindowView
                 board.ActionExecutor.AddAction(new SpawnPiecesAction
                 {
                     IsCheckMatch = false,
-                    At = heroHouse,
+                    At = hero.HousePosition,
                     Pieces = pieces
                 });
                 
@@ -153,16 +149,10 @@ public class UIChestRewardWindowView : UIGenericWindowView
                 }
             );
         }
-
-        var hero = GameDataService.Current.HeroesManager.GetHero("Robin");
-        var level = GameDataService.Current.HeroesManager.HeroLevel;
-
-        if (ProfileService.Current.GetStorageItem(Currency.RobinCards.Name).Amount >= hero.Prices[level].Amount)
-        {
-            var worldPos = board.BoardDef.GetSectorCenterWorldPosition(heroHouse.X, heroHouse.Up.Y, heroHouse.Z);
         
-            board.Manipulator.CameraManipulator.ZoomTo(0.3f, worldPos);
-        }
+        var worldPos = board.BoardDef.GetSectorCenterWorldPosition(hero.HousePosition.X, hero.HousePosition.Up.Y, hero.HousePosition.Z);
+        
+        board.Manipulator.CameraManipulator.ZoomTo(0.3f, worldPos);
         
         foreach (var anchor in cardAnchors)
         {

@@ -3,15 +3,20 @@ using UnityEngine;
 
 public class HeroesDataManager : IDataLoader<List<HeroDef>>
 {
-    public List<HeroDef> Heroes;
+    public List<Hero> Heroes;
     
     public void LoadData(IDataMapper<List<HeroDef>> dataMapper)
     {
         dataMapper.LoadData((data, error)=> 
         {
+            Heroes = new List<Hero>();
+            
             if (string.IsNullOrEmpty(error))
             {
-                Heroes = data;
+                foreach (var def in data)
+                {
+                    Heroes.Add(new Hero(def));
+                }
             }
             else
             {
@@ -20,19 +25,13 @@ public class HeroesDataManager : IDataLoader<List<HeroDef>>
         });
     }
     
-    public int HeroLevel
+    public Hero GetHero(string uid)
     {
-        get
-        {
-            var hero = GetHero("Robin");
-            var level = Mathf.Clamp(ProfileService.Current.GetStorageItem(Currency.Level.Name).Amount, 0, hero.Damages.Count - 1);
-            
-            return level;
-        }
+        return Heroes.Find(hero => hero.Def.Uid == uid);
     }
-    
-    public HeroDef GetHero(string uid)
+
+    public Hero GetHeroByCurrency(string currensy)
     {
-        return Heroes.Find(def => def.Uid == uid);
+        return Heroes.Find(h => h.CardCurrencyDef.Name == currensy);
     }
 }

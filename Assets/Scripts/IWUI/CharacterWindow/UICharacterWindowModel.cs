@@ -1,10 +1,5 @@
 using System;
-
-public enum CharacterWindowTupe
-{
-    Robin,
-    John
-}
+using UnityEngine;
 
 // TODO: как придет время и будет заведены типы карточек переписать на них
 public enum CharacterWindowCardTupe
@@ -16,31 +11,24 @@ public enum CharacterWindowCardTupe
 
 public class UICharacterWindowModel : IWWindowModel
 {
-    public CharacterWindowTupe WindowTupe { get; set; }
-
-    public int CurrentProgress
-    {
-        get { return ProfileService.Current.GetStorageItem(Currency.RobinCards.Name).Amount; }
-    }
-
-    public int TotalProgress
-    {
-        get { return GameDataService.Current.HeroesManager.GetHero("Robin").Prices[GameDataService.Current.HeroesManager.HeroLevel].Amount; }
-    }
-
+    public Hero Hero { get; set; }
+    
     public bool IsDone
     {
-        get { return CurrentProgress >= TotalProgress; }
+        get { return Hero.CurrentProgress >= Hero.TotalProgress; }
     }
     
     public string Title
     {
-        get { return string.Format("{0} Caracter:", WindowTupe); }
+        get { return string.Format("{0} Caracter:", HeroName); }
     }
     
     public string Message
     {
-        get { return "Next Level:"; }
+        get
+        {
+            return string.Format("Quest time: <color=#00FF00>-{0}</color> min", Hero.CurrentTimeBonus);
+        }
     }
 
     public string ButtonText
@@ -50,32 +38,30 @@ public class UICharacterWindowModel : IWWindowModel
 
     public string ProgressText
     {
-        get { return string.Format("{0}/{1}", CurrentProgress, TotalProgress); }
-    }
-    
-    public string DamageText
-    {
-        get
-        {
-            var hero = GameDataService.Current.HeroesManager.GetHero("Robin");
-            var level = GameDataService.Current.HeroesManager.HeroLevel;
-            var nextDamage = level == hero.Damages.Count - 1 ? 0 : hero.Damages[level + 1];
-            var heroDamage = hero.Damages[level];
-            
-            if(nextDamage == 0) return heroDamage.ToString();
-            
-            return string.Format("{0} <color=#00FF00>+{1}</color>", heroDamage, nextDamage);
-        }
+        get { return string.Format("{0}/{1}", Hero.CurrentProgress, Hero.TotalProgress); }
     }
 
+    public float ProgressLenght
+    {
+        get { return Mathf.Clamp(320 * Hero.CurrentProgress / (float) Hero.TotalProgress, 0, 320); }
+    }
+    
     public string LevelText
     {
-        get { return string.Format("Level {0}", GameDataService.Current.HeroesManager.HeroLevel + 1); }
+        get { return string.Format("Level {0}", Hero.Level + 1); }
     }
     
     public string HeroName
     {
-        get { return WindowTupe.ToString(); }
+        get { return Hero.Def.Uid; }
+    }
+
+    public Sprite IconSprite
+    {
+        get
+        {
+            return IconService.Current.GetSpriteById("face_" + HeroName);
+        }
     }
     
     public string CardTupeText

@@ -1,0 +1,432 @@
+[
+  {
+    "Uid" : 1,
+    "Position" :
+    {
+      "X" : 7,
+      "Y" : 22
+    },
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "Robin"
+      },
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "John"
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 180
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 20
+    },
+    "Reward" : "Common"
+  },
+  {
+    "Uid" : 2,
+    "Position" :
+    {
+      "X" : 7,
+      "Y" : 21
+    },
+    "UnlockConditions" :
+    [
+      {
+        "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
+        "OtherUid" : 1,
+        "State" : "Finish"
+      }
+    ],
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "Robin"
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 180
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 20
+    },
+    "Reward" : "Rare"
+  },
+  {
+    "Uid" : 3,
+    "Position" :
+    {
+      "X" : 7,
+      "Y" : 20
+    },
+    "UnlockConditions" :
+    [
+      {
+        "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
+        "OtherUid" : 2,
+        "State" : "Finish"
+      }
+    ],
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "Robin"
+      },
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "John"
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 300
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 20
+    },
+    "Reward" : "Common"
+  },
+  {
+    "Uid" : 4,
+    "Position" :
+    {
+      "X" : 7,
+      "Y" : 19
+    },
+    "UnlockConditions" :
+    [
+      {
+        "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
+        "OtherUid" : 3,
+        "State" : "Finish"
+      }
+    ],
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "Robin"
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 300
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 20
+    },
+    "Reward" : "Rare"
+  },
+  {
+    "Uid" : 5,
+    "Position" :
+    {
+      "X" : 6,
+      "Y" : 19
+    },
+    "UnlockConditions" :
+    [
+      {
+        "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
+        "OtherUid" : 4,
+        "State" : "Finish"
+      }
+    ],
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "Robin"
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 600
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 20
+    },
+    "Reward" : "Common"
+  },
+  {
+    "Uid" : 6,
+    "Position" :
+    {
+      "X" : 6,
+      "Y" : 20
+    },
+    "UnlockConditions" :
+    [
+      {
+        "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
+        "OtherUid" : 5,
+        "State" : "Finish"
+      }
+    ],
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "Robin"
+      },
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "John"
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 600
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 20
+    },
+    "Reward" : "Epic"
+  },
+  {
+    "Uid" : 7,
+    "Position" :
+    {
+      "X" : 6,
+      "Y" : 21
+    },
+    "UnlockConditions" :
+    [
+      {
+        "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
+        "OtherUid" : 6,
+        "State" : "Finish"
+      }
+    ],
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "Robin"
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 900
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 20
+    },
+    "Reward" : "Common"
+  },
+  {
+    "Uid" : 8,
+    "Position" :
+    {
+      "X" : 6,
+      "Y" : 22
+    },
+    "UnlockConditions" :
+    [
+      {
+        "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
+        "OtherUid" : 7,
+        "State" : "Finish"
+      }
+    ],
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "Robin"
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 900
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 20
+    },
+    "Reward" : "Rare"
+  },
+  {
+    "Uid" : 9,
+    "Position" :
+    {
+      "X" : 5,
+      "Y" : 22
+    },
+    "UnlockConditions" :
+    [
+      {
+        "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
+        "OtherUid" : 8,
+        "State" : "Finish"
+      }
+    ],
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "Robin"
+      },
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "John"
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 1200
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 20
+    },
+    "Reward" : "Epic"
+  },
+  {
+    "Uid" : 10,
+    "Position" :
+    {
+      "X" : 7,
+      "Y" : 12
+    },
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "John"
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 180
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 20
+    },
+    "Reward" : "Common"
+  },
+  {
+    "Uid" : 11,
+    "Position" :
+    {
+      "X" : 7,
+      "Y" : 14
+    },
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "John"
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 300
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 20
+    },
+    "Reward" : "Rare"
+  },
+  {
+    "Uid" : 12,
+    "Position" :
+    {
+      "X" : 7,
+      "Y" : 16
+    },
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "John"
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 300
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 20
+    },
+    "Reward" : "Common"
+  },
+  {
+    "Uid" : 13,
+    "Position" :
+    {
+      "X" : 9,
+      "Y" : 7
+    },
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "John"
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 600
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 20
+    },
+    "Reward" : "Rare"
+  },
+  {
+    "Uid" : 14,
+    "Position" :
+    {
+      "X" : 11,
+      "Y" : 7
+    },
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "Hero" : "John"
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 900
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 20
+    },
+    "Reward" : "Common"
+  }
+]

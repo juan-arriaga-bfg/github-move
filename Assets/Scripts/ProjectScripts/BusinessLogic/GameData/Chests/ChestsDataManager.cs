@@ -45,4 +45,9 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
     {
         return activeChests;
     }
+
+    public ChestDef GetChest(ChestType type)
+    {
+        return Chests.Find(def => def.GetChestType() == type);
+    }
 }

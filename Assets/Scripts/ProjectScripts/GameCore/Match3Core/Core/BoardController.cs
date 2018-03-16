@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BoardController : ECSEntity,
     IActionExecuteComponent, IBoardEventsComponent, IBoardLoggerComponent, IBoardLogicComponent, IBoardDefinitionComponent, IBoardStatesComponent, ISessionBoardStateComponent,
-    IBoardSystemProcessor, IBoardRendererComponent, IBoardManipulatorComponent, IBoardRandomComponent
+    IBoardSystemProcessor, IBoardRendererComponent, IBoardManipulatorComponent, IBoardRandomComponent, IObstaclesLogicComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -134,6 +134,19 @@ public class BoardController : ECSEntity,
         }
     }
 
+    protected ObstaclesLogicComponent obstaclesLogic;
+    public ObstaclesLogicComponent ObstaclesLogic
+    {
+        get
+        {
+            if (obstaclesLogic == null)
+            {
+                obstaclesLogic = GetComponent<ObstaclesLogicComponent>(ObstaclesLogicComponent.ComponentGuid);
+            }
+            return obstaclesLogic;
+        }
+    }
+
     private Dictionary<int, IPieceBuilder> pieceBuilderDef;
 
     public virtual void Init(Dictionary<int, IPieceBuilder> pieceBuilderDef)
@@ -144,6 +157,7 @@ public class BoardController : ECSEntity,
     public virtual void CreateBoard()
     {
         BoardLogic.Init(BoardDef.Width, BoardDef.Height, BoardDef.Depth);
+        ObstaclesLogic.Init();
 
         if (Logger.IsLoggingEnabled == false) return;
 

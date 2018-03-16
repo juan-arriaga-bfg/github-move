@@ -59,7 +59,9 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             Currency.RegisterCurrency(Currency.Cash);
             Currency.RegisterCurrency(Currency.Crystals);
             
-            Currency.RegisterCurrency(Currency.RobinCards);
+            Currency.RegisterCurrency(Currency.RobinCard);
+            Currency.RegisterCurrency(Currency.JohnCard);
+            
             Currency.RegisterCurrency(Currency.Enemy);
             Currency.RegisterCurrency(Currency.Chest);
             Currency.RegisterCurrency(Currency.PieceA1);
@@ -69,7 +71,10 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             Currency.RegisterCurrency(Currency.PieceB2);
             Currency.RegisterCurrency(Currency.PieceB3);
             
-            Currency.RegisterCurrency(Currency.Level);
+            Currency.RegisterCurrency(Currency.LevelRobin);
+            Currency.RegisterCurrency(Currency.LevelJohn);
+            
+            Currency.RegisterCurrency(Currency.Quest);
         });
         ShopService.Instance.SetManager(shopManager);
         
@@ -81,6 +86,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         dataManager.EnemiesManager.LoadData(new ResourceConfigDataMapper<List<EnemyDef>>("configs/enemies.data", NSConfigsSettings.Instance.IsUseEncryption));
         dataManager.HeroesManager.LoadData(new ResourceConfigDataMapper<List<HeroDef>>("configs/heroes.data", NSConfigsSettings.Instance.IsUseEncryption));
         dataManager.PiecesManager.LoadData(new ResourceConfigDataMapper<List<PieceDef>>("configs/pieces.data", NSConfigsSettings.Instance.IsUseEncryption));
+        dataManager.ObstaclesManager.LoadData(new ResourceConfigDataMapper<List<ObstacleDef>>("configs/obstacles.data", NSConfigsSettings.Instance.IsUseEncryption));
         
         // load local profile
         ProfileService.Instance.Manager.LoadCurrentProfile((profile) =>

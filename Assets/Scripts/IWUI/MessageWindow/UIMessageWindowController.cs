@@ -24,6 +24,7 @@ public class UIMessageWindowController : IWWindowController {
         model.AcceptLabel = "Ok";
         
         model.OnAccept = () => {};
+        model.OnCancel = null;
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
@@ -37,6 +38,7 @@ public class UIMessageWindowController : IWWindowController {
         model.AcceptLabel = "Ok";
         
         model.OnAccept = () => {};
+        model.OnCancel = null;
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }

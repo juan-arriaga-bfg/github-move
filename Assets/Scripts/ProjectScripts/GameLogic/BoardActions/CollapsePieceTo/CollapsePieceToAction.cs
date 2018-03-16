@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CollapsePieceToAction : IBoardAction
@@ -15,6 +16,8 @@ public class CollapsePieceToAction : IBoardAction
 	public List<BoardPosition> Positions { get; set; }
 	
 	public IBoardAction OnCompleteAction;
+
+	public Action OnComplete;
 	
 	public bool PerformAction(BoardController gameBoardController)
 	{
@@ -33,6 +36,7 @@ public class CollapsePieceToAction : IBoardAction
 		{
 			gameBoardController.BoardLogic.UnlockCells(Positions, this);
 			if (OnCompleteAction != null) gameBoardController.ActionExecutor.AddAction(OnCompleteAction);
+			if (OnComplete != null) OnComplete();
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

@@ -23,6 +23,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.CharacterWindow,
             UIWindowType.ChestWindow,
             UIWindowType.ChestRewardWindow,
+            UIWindowType.QuestStartWindow,
         });
 
         // on cache complete

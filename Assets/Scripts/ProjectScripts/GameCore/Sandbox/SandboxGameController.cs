@@ -31,6 +31,7 @@ public class SandboxGameController : MonoBehaviour
                 {PieceType.M1.Id, R.M1Piece},
                 {PieceType.S1.Id, R.S1Piece},
                 {PieceType.H1.Id, R.H1Piece},
+                {PieceType.H2.Id, R.H2Piece},
                 
                 {PieceType.E1.Id, R.E1Piece},
                 {PieceType.E2.Id, R.E2Piece},
@@ -92,11 +93,22 @@ public class SandboxGameController : MonoBehaviour
                 }
             },
             
+            {PieceType.H2.Id, new HeroHouseBuilder
+                {
+                    Mask = new List<BoardPosition>
+                    {
+                        BoardPosition.Zero().Up,
+                        BoardPosition.Zero().Right,
+                        BoardPosition.Zero().Right.Up,
+                    }
+                }
+            },
+            
             {PieceType.E1.Id, new EnemyPieceBuilder()},
             {PieceType.E2.Id, new EnemyPieceBuilder()},
             {PieceType.E3.Id, new EnemyPieceBuilder()},
             
-            {PieceType.O1.Id, new GenericPieceBuilder()},
+            {PieceType.O1.Id, new ObstaclePieceBuilder()},
             {PieceType.C1.Id, new ResourcePieceBuilder()},
             
             {PieceType.A1.Id, new SimplePieceBuilder()},
@@ -128,6 +140,7 @@ public class SandboxGameController : MonoBehaviour
             .RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build()))); 
         
         boardController.RegisterComponent(new BoardRandomComponent()); // random
+        boardController.RegisterComponent(new ObstaclesLogicComponent());
         boardController.RegisterComponent(new BoardRenderer().Init(gameBoardResourcesDef,
             gameBoardRendererView.transform)); // renderer context
         boardController.RegisterComponent(new BoardManipulatorComponent()
@@ -203,7 +216,7 @@ public class SandboxGameController : MonoBehaviour
             boardController.BoardLogic.EmptyCellsFinder.FindRingWithPointInCenter(position, positions, 1000, i);
         }
         
-        boardController.ActionExecutor.PerformAction(new FillBoardAction{Piece = PieceType.O1.Id, Positions = positions});
+//        boardController.ActionExecutor.PerformAction(new FillBoardAction{Piece = PieceType.O1.Id, Positions = positions});
         
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
@@ -219,14 +232,8 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(10, 14),
-            PieceTypeId = PieceType.M1.Id
-        });
-        
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-        {
             At = new BoardPosition(16, 14),
-            PieceTypeId = PieceType.A1.Id
+            PieceTypeId = PieceType.H2.Id
         });
         
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction

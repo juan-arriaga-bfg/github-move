@@ -1,5 +1,10 @@
-public class UIChestRewardWindowModel : IWWindowModel 
+using System.Collections.Generic;
+
+public class UIChestRewardWindowModel : IWWindowModel
 {
+    private ChestDef chest;
+    private List<CurrencyPair> rewards;
+    
     public string Title
     {
         get { return "You Got:"; }
@@ -24,6 +29,19 @@ public class UIChestRewardWindowModel : IWWindowModel
     {
         get { return "<color=#D75100>Resources card</color>"; }
     }
-    
-    public ChestDef Chest { get; set; }
+
+    public ChestDef Chest
+    {
+        get { return chest; }
+        set
+        {
+            chest = value;
+            rewards = null;
+        }
+    }
+
+    public List<CurrencyPair> GetRewards()
+    {
+        return rewards ?? (rewards = Chest.GetRewards());
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum ChestState
 {
@@ -25,23 +26,13 @@ public class ChestDef
     
     public CurrencyPair Price { get; set; }
     public List<CurrencyPair> Rewards { get; set; }
+    public List<CurrencyPair> RewardsAlternative { get; set; }
 
     public DateTime? StartTime { get; set; }
     
     private ChestType chestType;
-
-    public override string ToString()
-    {
-        var str = string.Format("Uid {0}, Time {1}, Price: {2} - {3}", Uid, Time, Price.Currency, Price.Amount);
-
-        for (var index = 0; index < Rewards.Count; index++)
-        {
-            var reward = Rewards[index];
-            str += string.Format(" Reward {0}: {1} - {2}", index + 1, reward.Currency, reward.Amount);
-        }
-
-        return str;
-    }
+    
+    
 
     public ChestState State { get; set; }
     
@@ -66,6 +57,20 @@ public class ChestDef
         }
     }
 
+    public List<CurrencyPair> GetRewards()
+    {
+        var rewards = new List<CurrencyPair>();
+
+        for (var i = 0; i < Rewards.Count; i++)
+        {
+            var random = Random.Range(0, 2);
+            
+            rewards.Add(random == 0 ? Rewards[i] : RewardsAlternative[i]);
+        }
+        
+        return rewards;
+    }
+    
     public string GetOpenTime()
     {
         var time = new TimeSpan(0, 0, Time);
@@ -98,6 +103,19 @@ public class ChestDef
 
         if (str == "00:00") State = ChestState.Open;
         
+        return str;
+    }
+    
+    public override string ToString()
+    {
+        var str = string.Format("Uid {0}, Time {1}, Price: {2} - {3}", Uid, Time, Price.Currency, Price.Amount);
+
+        for (var index = 0; index < Rewards.Count; index++)
+        {
+            var reward = Rewards[index];
+            str += string.Format(" Reward {0}: {1} - {2}", index + 1, reward.Currency, reward.Amount);
+        }
+
         return str;
     }
 }

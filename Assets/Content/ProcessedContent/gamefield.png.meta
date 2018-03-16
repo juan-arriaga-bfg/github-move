@@ -25,6 +25,7 @@ TextureImporter:
     21300036: A1
     21300038: B1
     21300040: C1_shadow
+    21300042: H2
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -105,11 +106,25 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: A6
+      name: H2
       rect:
         serializedVersion: 2
         x: 0
         y: 271
+        width: 256
+        height: 235
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: A6
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 0
         width: 209
         height: 242
       alignment: 9
@@ -123,7 +138,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 514
+        y: 507
         width: 220
         height: 205
       alignment: 9
@@ -136,8 +151,8 @@ TextureImporter:
       name: E3
       rect:
         serializedVersion: 2
-        x: 210
-        y: 271
+        x: 0
+        y: 713
         width: 198
         height: 223
       alignment: 9
@@ -150,8 +165,8 @@ TextureImporter:
       name: A5
       rect:
         serializedVersion: 2
-        x: 241
-        y: 0
+        x: 199
+        y: 713
         width: 199
         height: 216
       alignment: 9
@@ -164,8 +179,8 @@ TextureImporter:
       name: S1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 720
+        x: 257
+        y: 243
         width: 202
         height: 208
       alignment: 9
@@ -178,8 +193,8 @@ TextureImporter:
       name: B5
       rect:
         serializedVersion: 2
-        x: 203
-        y: 720
+        x: 451
+        y: 0
         width: 169
         height: 222
       alignment: 9
@@ -193,7 +208,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 221
-        y: 495
+        y: 507
         width: 185
         height: 202
       alignment: 9
@@ -206,8 +221,8 @@ TextureImporter:
       name: B4
       rect:
         serializedVersion: 2
-        x: 373
-        y: 698
+        x: 399
+        y: 710
         width: 169
         height: 220
       alignment: 9
@@ -220,8 +235,8 @@ TextureImporter:
       name: O1
       rect:
         serializedVersion: 2
-        x: 409
-        y: 217
+        x: 407
+        y: 452
         width: 156
         height: 226
       alignment: 9
@@ -234,8 +249,8 @@ TextureImporter:
       name: A3
       rect:
         serializedVersion: 2
-        x: 407
-        y: 495
+        x: 460
+        y: 223
         width: 169
         height: 186
       alignment: 9
@@ -248,7 +263,7 @@ TextureImporter:
       name: E2
       rect:
         serializedVersion: 2
-        x: 441
+        x: 621
         y: 0
         width: 150
         height: 206
@@ -262,8 +277,8 @@ TextureImporter:
       name: B3
       rect:
         serializedVersion: 2
-        x: 566
-        y: 207
+        x: 564
+        y: 410
         width: 158
         height: 194
       alignment: 9
@@ -276,8 +291,8 @@ TextureImporter:
       name: E1
       rect:
         serializedVersion: 2
-        x: 592
-        y: 0
+        x: 630
+        y: 207
         width: 138
         height: 199
       alignment: 9
@@ -290,8 +305,8 @@ TextureImporter:
       name: A2
       rect:
         serializedVersion: 2
-        x: 543
-        y: 682
+        x: 723
+        y: 407
         width: 147
         height: 125
       alignment: 9
@@ -304,8 +319,8 @@ TextureImporter:
       name: B2
       rect:
         serializedVersion: 2
-        x: 543
-        y: 808
+        x: 769
+        y: 207
         width: 134
         height: 130
       alignment: 9
@@ -318,8 +333,8 @@ TextureImporter:
       name: GBOX1
       rect:
         serializedVersion: 2
-        x: 678
-        y: 808
+        x: 772
+        y: 0
         width: 108
         height: 128
       alignment: 9
@@ -332,8 +347,8 @@ TextureImporter:
       name: C1
       rect:
         serializedVersion: 2
-        x: 577
-        y: 402
+        x: 881
+        y: 0
         width: 88
         height: 106
       alignment: 9
@@ -346,8 +361,8 @@ TextureImporter:
       name: A1
       rect:
         serializedVersion: 2
-        x: 373
-        y: 919
+        x: 881
+        y: 107
         width: 104
         height: 86
       alignment: 9
@@ -360,8 +375,8 @@ TextureImporter:
       name: B1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 929
+        x: 199
+        y: 930
         width: 95
         height: 82
       alignment: 9
@@ -374,8 +389,8 @@ TextureImporter:
       name: C1_shadow
       rect:
         serializedVersion: 2
-        x: 96
-        y: 929
+        x: 257
+        y: 452
         width: 72
         height: 54
       alignment: 9
