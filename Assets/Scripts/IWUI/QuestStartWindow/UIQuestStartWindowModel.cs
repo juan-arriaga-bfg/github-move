@@ -17,7 +17,7 @@ public class UIQuestStartWindowModel : IWWindowModel
     
     public string Message
     {
-        get { return "Save the Sinking Peasant"; }
+        get { return Obstacle.Def.Message; }
     }
     
     public string ButtonText

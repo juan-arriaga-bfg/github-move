@@ -1,6 +1,7 @@
 [
   {
     "Uid" : 1,
+    "Message" : "The Sheriff's soldiers are robbing the village! Let's run them off!",
     "Position" :
     {
       "X" : 7,
@@ -35,6 +36,7 @@
   },
   {
     "Uid" : 2,
+    "Message" : "The robberies of the Sheriff will never stop! Let's relocate the peasants to your new camp!",
     "Position" :
     {
       "X" : 7,
@@ -73,6 +75,7 @@
   },
   {
     "Uid" : 3,
+    "Message" : "Sheriff found out about your camp and sent a soldier here. It is necessary to arrange for them an ambush!",
     "Position" :
     {
       "X" : 7,
@@ -115,6 +118,7 @@
   },
   {
     "Uid" : 4,
+    "Message" : "We found a map of the Sheriff's treasury after ambush! Let's visit the Sheriff!",
     "Position" :
     {
       "X" : 7,
@@ -153,6 +157,7 @@
   },
   {
     "Uid" : 5,
+    "Message" : "There was a lot of money in the Sheriff's treasury! Let's give them to the needy!",
     "Position" :
     {
       "X" : 6,
@@ -191,6 +196,7 @@
   },
   {
     "Uid" : 6,
+    "Message" : "Sheriff's treasury is well guarded! Let's try to deflect the guards!",
     "Position" :
     {
       "X" : 6,
@@ -233,6 +239,7 @@
   },
   {
     "Uid" : 7,
+    "Message" : "And here are the treasures of the Sheriff! Take them and go back to the camp!",
     "Position" :
     {
       "X" : 6,
@@ -271,6 +278,7 @@
   },
   {
     "Uid" : 8,
+    "Message" : "There was a lot of money in the Sheriff's treasury! Let's give them to the needy!",
     "Position" :
     {
       "X" : 6,
@@ -309,6 +317,7 @@
   },
   {
     "Uid" : 9,
+    "Message" : "You punished the Sheriff. Now you can start building your base!",
     "Position" :
     {
       "X" : 5,
@@ -351,10 +360,11 @@
   },
   {
     "Uid" : 10,
+    "Message" : "The peasants need houses! You need to collect a lot of wood for their construction!",
     "Position" :
     {
       "X" : 7,
-      "Y" : 12
+      "Y" : 17
     },
     "UnlockConditions" :
     [
@@ -389,10 +399,11 @@
   },
   {
     "Uid" : 11,
+    "Message" : "Nearby the peasants saw Sheriff's tax collector. Let's run him off!",
     "Position" :
     {
       "X" : 7,
-      "Y" : 14
+      "Y" : 15
     },
     "UnlockConditions" :
     [
@@ -427,10 +438,11 @@
   },
   {
     "Uid" : 12,
+    "Message" : "Let's take the bread from Sheriff's barn!",
     "Position" :
     {
-      "X" : 7,
-      "Y" : 16
+      "X" : 8,
+      "Y" : 23
     },
     "UnlockConditions" :
     [
@@ -465,10 +477,11 @@
   },
   {
     "Uid" : 13,
+    "Message" : "Nearby the peasants saw Sheriff's tax collector. Let's run him off!",
     "Position" :
     {
-      "X" : 9,
-      "Y" : 7
+      "X" : 10,
+      "Y" : 23
     },
     "UnlockConditions" :
     [
@@ -503,10 +516,11 @@
   },
   {
     "Uid" : 14,
+    "Message" : "Let's take the bread from Sheriff's barn!",
     "Position" :
     {
-      "X" : 11,
-      "Y" : 7
+      "X" : 12,
+      "Y" : 23
     },
     "UnlockConditions" :
     [

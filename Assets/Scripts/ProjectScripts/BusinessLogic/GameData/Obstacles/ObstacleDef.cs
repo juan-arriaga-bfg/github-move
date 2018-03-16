@@ -3,6 +3,7 @@
 public class ObstacleDef
 {
     public int Uid { get; set; }
+    public string Message { get; set; }
     public BoardPosition Position { get; set; }
     public List<IObstacleCondition> UnlockConditions { get; set; }
     public List<IObstacleCondition> OpenConditions { get; set; }
