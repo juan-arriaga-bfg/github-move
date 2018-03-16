@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 public class ObstaclesLogicComponent : IECSComponent, IECSSystem
 {
@@ -45,6 +44,15 @@ public class ObstaclesLogicComponent : IECSComponent, IECSSystem
             Piece = PieceType.O2.Id,
             Positions = positions
         });
+        
+        var position = new BoardPosition(15, 15, context.BoardDef.PieceLayer);
+
+        for (int i = 8; i < 16; i++)
+        {
+            context.BoardLogic.EmptyCellsFinder.FindRingWithPointInCenter(position, positions, 1000, i);
+        }
+        
+        context.ActionExecutor.PerformAction(new FillBoardAction{Piece = PieceType.O1.Id, Positions = positions});
     }
     
     public void Execute()
@@ -99,7 +107,7 @@ public class ObstaclesLogicComponent : IECSComponent, IECSSystem
         obstaclesUidKey.Remove(obstacle.GetUid());
         return true;
     }
-
+    
     public bool IsPersistence
     {
         get { return false; }

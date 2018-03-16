@@ -65,8 +65,8 @@ public class ChangeObstacleStateView : IWBaseMonoBehaviour
         if (condition == null) return;
 
         var currentSeconds = (float)(DateTime.Now - condition.StartTime).TotalSeconds;
-        var targetSeconds = condition.Delay;
-
+        var targetSeconds = condition.Delay - condition.Bonus;
+        
         if (currentSeconds > targetSeconds)
         {
             message.Text = "00:00";

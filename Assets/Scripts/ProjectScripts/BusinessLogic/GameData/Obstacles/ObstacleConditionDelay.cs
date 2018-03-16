@@ -3,6 +3,7 @@
 public class ObstacleConditionDelay : IObstacleCondition
 {
     public int Delay { get; set; }
+    public int Bonus { get; set; }
 
     public DateTime StartTime;
 
@@ -17,6 +18,7 @@ public class ObstacleConditionDelay : IObstacleCondition
     public bool Check(ObstaclesLogicComponent context)
     {
         if (IsInitialized == false) return false;
-        return (DateTime.Now - StartTime).TotalSeconds >= Delay;
+        
+        return (DateTime.Now - StartTime).TotalSeconds >= Delay - Bonus;
     }
 }

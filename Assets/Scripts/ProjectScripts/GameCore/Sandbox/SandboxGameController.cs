@@ -208,18 +208,7 @@ public class SandboxGameController : MonoBehaviour
             boardController.Manipulator.CameraManipulator.CachedCameraTransform.localPosition.z
         );
         
-        
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
-        
-        var position = new BoardPosition(15, 15, boardController.BoardDef.PieceLayer);
-        var positions = new List<BoardPosition>();
-
-        for (int i = 8; i < 16; i++)
-        {
-            boardController.BoardLogic.EmptyCellsFinder.FindRingWithPointInCenter(position, positions, 1000, i);
-        }
-        
-//        boardController.ActionExecutor.PerformAction(new FillBoardAction{Piece = PieceType.O1.Id, Positions = positions});
         
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
@@ -239,12 +228,6 @@ public class SandboxGameController : MonoBehaviour
             PieceTypeId = PieceType.H2.Id
         });
         
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(17, 15),
-            PieceTypeId = PieceType.A3.Id
-        });
-//        
 //        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
 //        {
 //            At = new BoardPosition(18, 16),

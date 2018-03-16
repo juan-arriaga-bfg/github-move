@@ -75,7 +75,7 @@ public class Obstacle
     {
         return GameDataService.Current.ChestsManager.GetChest(def.Reward);
     }
-
+    
     public int GetUid()
     {
         return def.Uid;
@@ -115,6 +115,7 @@ public class Obstacle
 
         if (current.IsInitialized == false)
         {
+            SetBonus(current as ObstacleConditionDelay);
             current.Init();
         }
         
@@ -126,5 +127,25 @@ public class Obstacle
         }
         
         return isDone;
+    }
+
+    private void SetBonus(ObstacleConditionDelay current)
+    {
+        if (current == null) return;
+        
+        var conditionsHero = def.GetOpenConditions<ObstacleConditionHero>();
+            
+        var bonus = 0;
+            
+        for (var i = 0; i < conditionsHero.Count; i++)
+        {
+            var hero = GameDataService.Current.HeroesManager.GetHero(conditionsHero[i].Hero);
+                
+            if(hero.InAdventure != GetUid()) continue;
+
+            bonus += hero.CurrentTimeBonus;
+        }
+        
+        current.Bonus = bonus*60;
     }
 }
