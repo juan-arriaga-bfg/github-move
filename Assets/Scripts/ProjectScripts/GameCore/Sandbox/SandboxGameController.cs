@@ -186,12 +186,7 @@ public class SandboxGameController : MonoBehaviour
         var topPoint = boardController.BoardDef.GetSectorCenterWorldPosition(0, boardController.BoardDef.Height, 0);
         var bottomPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width, 0, 0);
 
-        var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition
-            (
-                (int)(boardController.BoardDef.Width * 0.5f), 
-                (int)(boardController.BoardDef.Height * 0.5f), 
-                0
-            );
+        var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition(10, 20, boardController.BoardDef.PieceLayer);
 
         boardController.Manipulator.CameraManipulator.CurrentCameraSettings.CameraClampRegion = new Rect
         (
@@ -212,19 +207,19 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(10, 18),
+            At = new BoardPosition(10, 20),
             PieceTypeId = PieceType.H1.Id
         });
         
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(14, 14),
+            At = new BoardPosition(9, 17),
             PieceTypeId = PieceType.S1.Id
         });
         
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(16, 14),
+            At = new BoardPosition(13, 20),
             PieceTypeId = PieceType.H2.Id
         });
         
