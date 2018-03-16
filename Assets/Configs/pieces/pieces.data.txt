@@ -64,6 +64,20 @@
         },
     },
     {
+        "Uid" : "A7",
+        "Delay" : 180,
+        "SpawnResources" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 100
+        },
+        "CreateReward" :
+        {
+            "Currency" : "Coins",
+            "Amount" : 300
+        },
+    },
+    {
         "Uid" : "B3",
         "Delay" : 30,
         "SpawnResources" :

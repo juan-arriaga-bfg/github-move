@@ -35,6 +35,7 @@ TextureImporter:
     21300056: tree_1
     21300058: tree_3
     21300060: tree_5
+    21300062: A7
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -129,25 +130,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: A6
+      name: M1
       rect:
         serializedVersion: 2
         x: 241
         y: 0
-        width: 209
-        height: 242
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: M1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 507
         width: 220
         height: 205
       alignment: 9
@@ -161,23 +148,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 713
+        y: 507
         width: 198
         height: 223
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: A5
-      rect:
-        serializedVersion: 2
-        x: 199
-        y: 713
-        width: 199
-        height: 216
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,10 +161,24 @@ TextureImporter:
       name: S1
       rect:
         serializedVersion: 2
-        x: 257
-        y: 243
+        x: 0
+        y: 731
         width: 202
         height: 208
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: A7
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 507
+        width: 189
+        height: 201
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,24 +189,10 @@ TextureImporter:
       name: B5
       rect:
         serializedVersion: 2
-        x: 451
-        y: 0
+        x: 257
+        y: 206
         width: 169
         height: 222
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: A4
-      rect:
-        serializedVersion: 2
-        x: 221
-        y: 507
-        width: 185
-        height: 202
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -230,8 +203,8 @@ TextureImporter:
       name: B4
       rect:
         serializedVersion: 2
-        x: 399
-        y: 710
+        x: 203
+        y: 709
         width: 169
         height: 220
       alignment: 9
@@ -244,52 +217,10 @@ TextureImporter:
       name: O1
       rect:
         serializedVersion: 2
-        x: 407
-        y: 452
+        x: 373
+        y: 709
         width: 156
         height: 226
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: tree_1
-      rect:
-        serializedVersion: 2
-        x: 460
-        y: 223
-        width: 180
-        height: 180
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: tree_2
-      rect:
-        serializedVersion: 2
-        x: 621
-        y: 0
-        width: 180
-        height: 180
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: tree_3
-      rect:
-        serializedVersion: 2
-        x: 564
-        y: 404
-        width: 180
-        height: 180
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -300,22 +231,8 @@ TextureImporter:
       name: tree_4
       rect:
         serializedVersion: 2
-        x: 641
-        y: 181
-        width: 180
-        height: 180
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: tree_6
-      rect:
-        serializedVersion: 2
-        x: 802
-        y: 0
+        x: 389
+        y: 429
         width: 180
         height: 180
       alignment: 9
@@ -328,8 +245,8 @@ TextureImporter:
       name: tree_5
       rect:
         serializedVersion: 2
-        x: 569
-        y: 585
+        x: 427
+        y: 206
         width: 180
         height: 180
       alignment: 9
@@ -342,8 +259,8 @@ TextureImporter:
       name: tree_7
       rect:
         serializedVersion: 2
-        x: 745
-        y: 362
+        x: 462
+        y: 0
         width: 180
         height: 180
       alignment: 9
@@ -353,13 +270,69 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: A3
+      name: tree_1
       rect:
         serializedVersion: 2
-        x: 569
-        y: 766
-        width: 169
-        height: 186
+        x: 530
+        y: 610
+        width: 180
+        height: 180
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tree_6
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 387
+        width: 180
+        height: 180
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tree_3
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 181
+        width: 180
+        height: 180
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tree_2
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 0
+        width: 180
+        height: 180
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: A5
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 791
+        width: 172
+        height: 184
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -370,10 +343,38 @@ TextureImporter:
       name: E2
       rect:
         serializedVersion: 2
-        x: 739
-        y: 766
+        x: 703
+        y: 791
         width: 150
         height: 206
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: A4
+      rect:
+        serializedVersion: 2
+        x: 711
+        y: 568
+        width: 199
+        height: 155
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: A6
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 362
+        width: 166
+        height: 185
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -384,10 +385,24 @@ TextureImporter:
       name: B3
       rect:
         serializedVersion: 2
-        x: 750
-        y: 543
+        x: 854
+        y: 724
         width: 158
         height: 194
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: A3
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 548
+        width: 181
+        height: 156
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -398,8 +413,8 @@ TextureImporter:
       name: E1
       rect:
         serializedVersion: 2
-        x: 890
-        y: 738
+        x: 1013
+        y: 705
         width: 138
         height: 199
       alignment: 9
@@ -412,7 +427,7 @@ TextureImporter:
       name: A2
       rect:
         serializedVersion: 2
-        x: 822
+        x: 789
         y: 181
         width: 147
         height: 125
@@ -426,8 +441,8 @@ TextureImporter:
       name: B2
       rect:
         serializedVersion: 2
-        x: 909
-        y: 543
+        x: 824
+        y: 0
         width: 134
         height: 130
       alignment: 9
@@ -440,7 +455,7 @@ TextureImporter:
       name: GBOX1
       rect:
         serializedVersion: 2
-        x: 926
+        x: 918
         y: 307
         width: 108
         height: 128
@@ -454,8 +469,8 @@ TextureImporter:
       name: C1
       rect:
         serializedVersion: 2
-        x: 926
-        y: 436
+        x: 1013
+        y: 905
         width: 88
         height: 106
       alignment: 9
@@ -468,8 +483,8 @@ TextureImporter:
       name: A1
       rect:
         serializedVersion: 2
-        x: 199
-        y: 930
+        x: 389
+        y: 610
         width: 104
         height: 86
       alignment: 9
@@ -482,8 +497,8 @@ TextureImporter:
       name: B1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 937
+        x: 203
+        y: 930
         width: 95
         height: 82
       alignment: 9
@@ -496,8 +511,8 @@ TextureImporter:
       name: C1_shadow
       rect:
         serializedVersion: 2
-        x: 822
-        y: 307
+        x: 299
+        y: 930
         width: 72
         height: 54
       alignment: 9

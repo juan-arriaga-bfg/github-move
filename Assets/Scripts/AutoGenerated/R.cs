@@ -29,4 +29,5 @@ public class R
      public const string ChangeObstacleStateView = "ChangeObstacleStateView";
      public const string H2Piece = "H2Piece";
      public const string O2Piece = "O2Piece";
+     public const string A7Piece = "A7Piece";
 }
