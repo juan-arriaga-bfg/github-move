@@ -28,4 +28,5 @@ public class R
      public const string GBox1Piece = "GBox1Piece";
      public const string ChangeObstacleStateView = "ChangeObstacleStateView";
      public const string H2Piece = "H2Piece";
+     public const string O2Piece = "O2Piece";
 }

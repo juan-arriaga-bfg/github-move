@@ -38,6 +38,8 @@ public class SandboxGameController : MonoBehaviour
                 {PieceType.E3.Id, R.E3Piece},
                 
                 {PieceType.O1.Id, R.O1Piece},
+                {PieceType.O2.Id, R.O2Piece},
+                
                 {PieceType.C1.Id, R.C1Piece},
                 
                 {PieceType.A1.Id, R.A1Piece},
@@ -108,7 +110,8 @@ public class SandboxGameController : MonoBehaviour
             {PieceType.E2.Id, new EnemyPieceBuilder()},
             {PieceType.E3.Id, new EnemyPieceBuilder()},
             
-            {PieceType.O1.Id, new ObstaclePieceBuilder()},
+            {PieceType.O1.Id, new GenericPieceBuilder()},
+            {PieceType.O2.Id, new ObstaclePieceBuilder()},
             {PieceType.C1.Id, new ResourcePieceBuilder()},
             
             {PieceType.A1.Id, new SimplePieceBuilder()},

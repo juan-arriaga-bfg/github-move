@@ -24,6 +24,7 @@ public static partial class PieceType
         RegisterType(E3);
         
         RegisterType(O1);
+        RegisterType(O2);
         
         RegisterType(M1);
         RegisterType(S1);
@@ -54,6 +55,7 @@ public static partial class PieceType
     public readonly static PieceTypeDef E3 = new PieceTypeDef{Id = 402, Abbreviations = new List<string>{ "E3" }};
     
     public readonly static PieceTypeDef O1 = new PieceTypeDef{Id = 500, Abbreviations = new List<string>{ "O1" }};
+    public readonly static PieceTypeDef O2 = new PieceTypeDef{Id = 501, Abbreviations = new List<string>{ "O2" }};
     
     public readonly static PieceTypeDef M1 = new PieceTypeDef{Id = 600, Abbreviations = new List<string>{ "M1", "mine" }};
     public readonly static PieceTypeDef S1 = new PieceTypeDef{Id = 700, Abbreviations = new List<string>{ "S1", "saw" }};

@@ -42,7 +42,7 @@ public class ObstaclesLogicComponent : IECSComponent, IECSSystem
         
         context.ActionExecutor.PerformAction(new FillBoardAction
         {
-            Piece = PieceType.O1.Id,
+            Piece = PieceType.O2.Id,
             Positions = positions
         });
     }
