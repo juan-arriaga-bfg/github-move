@@ -30,4 +30,10 @@ public class R
      public const string H2Piece = "H2Piece";
      public const string O2Piece = "O2Piece";
      public const string A7Piece = "A7Piece";
+     public const string S3Piece = "S3Piece";
+     public const string S2Piece = "S2Piece";
+     public const string S4Piece = "S4Piece";
+     public const string S5Piece = "S5Piece";
+     public const string S6Piece = "S6Piece";
+     public const string S7Piece = "S7Piece";
 }

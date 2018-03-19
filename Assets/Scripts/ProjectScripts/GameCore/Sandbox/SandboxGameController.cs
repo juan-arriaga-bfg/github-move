@@ -29,7 +29,15 @@ public class SandboxGameController : MonoBehaviour
                 {PieceType.Generic.Id, R.GenericPiece},
                 
                 {PieceType.M1.Id, R.M1Piece},
+                
                 {PieceType.S1.Id, R.S1Piece},
+                {PieceType.S2.Id, R.S2Piece},
+                {PieceType.S3.Id, R.S3Piece},
+                {PieceType.S4.Id, R.S4Piece},
+                {PieceType.S5.Id, R.S5Piece},
+                {PieceType.S6.Id, R.S6Piece},
+                {PieceType.S7.Id, R.S7Piece},
+                
                 {PieceType.H1.Id, R.H1Piece},
                 {PieceType.H2.Id, R.H2Piece},
                 
@@ -77,6 +85,60 @@ public class SandboxGameController : MonoBehaviour
             },
             
             {PieceType.S1.Id, new MulticellularSpawnPieceBuilder
+                {
+                    Mask = new List<BoardPosition>
+                    {
+                        BoardPosition.Zero().Right,
+                    }
+                }
+            },
+            
+            {PieceType.S2.Id, new MulticellularSpawnPieceBuilder
+                {
+                    Mask = new List<BoardPosition>
+                    {
+                        BoardPosition.Zero().Right,
+                    }
+                }
+            },
+            
+            {PieceType.S3.Id, new MulticellularSpawnPieceBuilder
+                {
+                    Mask = new List<BoardPosition>
+                    {
+                        BoardPosition.Zero().Right,
+                    }
+                }
+            },
+            
+            {PieceType.S4.Id, new MulticellularSpawnPieceBuilder
+                {
+                    Mask = new List<BoardPosition>
+                    {
+                        BoardPosition.Zero().Right,
+                    }
+                }
+            },
+            
+            {PieceType.S5.Id, new MulticellularSpawnPieceBuilder
+                {
+                    Mask = new List<BoardPosition>
+                    {
+                        BoardPosition.Zero().Right,
+                    }
+                }
+            },
+            
+            {PieceType.S6.Id, new MulticellularSpawnPieceBuilder
+                {
+                    Mask = new List<BoardPosition>
+                    {
+                        BoardPosition.Zero().Right,
+                    }
+                }
+            },
+            
+            {PieceType.S7.Id, new MulticellularSpawnPieceBuilder
                 {
                     Mask = new List<BoardPosition>
                     {
