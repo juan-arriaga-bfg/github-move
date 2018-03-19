@@ -36,4 +36,22 @@ public class R
      public const string S5Piece = "S5Piece";
      public const string S6Piece = "S6Piece";
      public const string S7Piece = "S7Piece";
+     public const string Castle1Piece = "Castle1Piece";
+     public const string Castle2Piece = "Castle2Piece";
+     public const string Castle3Piece = "Castle3Piece";
+     public const string Castle4Piece = "Castle4Piece";
+     public const string Castle5Piece = "Castle5Piece";
+     public const string Castle6Piece = "Castle6Piece";
+     public const string Castle7Piece = "Castle7Piece";
+     public const string Castle8Piece = "Castle8Piece";
+     public const string Castle9Piece = "Castle9Piece";
+     public const string Tavern1Piece = "Tavern1Piece";
+     public const string Tavern2Piece = "Tavern2Piece";
+     public const string Tavern3Piece = "Tavern3Piece";
+     public const string Tavern4Piece = "Tavern4Piece";
+     public const string Tavern5Piece = "Tavern5Piece";
+     public const string Tavern6Piece = "Tavern6Piece";
+     public const string Tavern7Piece = "Tavern7Piece";
+     public const string Tavern8Piece = "Tavern8Piece";
+     public const string Tavern9Piece = "Tavern9Piece";
 }

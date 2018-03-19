@@ -75,7 +75,11 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             Currency.RegisterCurrency(Currency.LevelJohn);
             
             Currency.RegisterCurrency(Currency.Quest);
+            
+            Currency.RegisterCurrency(Currency.LevelCastle);
+            Currency.RegisterCurrency(Currency.LevelTavern);
         });
+        
         ShopService.Instance.SetManager(shopManager);
         
         // gamedata configs

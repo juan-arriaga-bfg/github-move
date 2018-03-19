@@ -19,4 +19,7 @@
     public static readonly CurrencyDef LevelJohn = new CurrencyDef { Id = 14, Name = "LevelJohn", IsConsumable = true };
     
     public static readonly CurrencyDef Quest = new CurrencyDef { Id = 15, Name = "Quest", IsConsumable = true };
+    
+    public static readonly CurrencyDef LevelCastle = new CurrencyDef { Id = 16, Name = "LevelCastle", IsConsumable = true };
+    public static readonly CurrencyDef LevelTavern = new CurrencyDef { Id = 17, Name = "LevelTavern", IsConsumable = true };
 }

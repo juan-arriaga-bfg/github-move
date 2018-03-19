@@ -172,7 +172,87 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddCastlePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict.Add(PieceType.Castle1.Id, new HeroHouseBuilder
+        dict.Add(PieceType.Castle1.Id, new UpgradePieceBuilder
+        {
+            Mask = new List<BoardPosition>
+            {
+                BoardPosition.Zero().Up,
+                BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
+            }
+        });
+        
+        dict.Add(PieceType.Castle2.Id, new UpgradePieceBuilder
+        {
+            Mask = new List<BoardPosition>
+            {
+                BoardPosition.Zero().Up,
+                BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
+            }
+        });
+        
+        dict.Add(PieceType.Castle3.Id, new UpgradePieceBuilder
+        {
+            Mask = new List<BoardPosition>
+            {
+                BoardPosition.Zero().Up,
+                BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
+            }
+        });
+        
+        dict.Add(PieceType.Castle4.Id, new UpgradePieceBuilder
+        {
+            Mask = new List<BoardPosition>
+            {
+                BoardPosition.Zero().Up,
+                BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
+            }
+        });
+        
+        dict.Add(PieceType.Castle5.Id, new UpgradePieceBuilder
+        {
+            Mask = new List<BoardPosition>
+            {
+                BoardPosition.Zero().Up,
+                BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
+            }
+        });
+        
+        dict.Add(PieceType.Castle6.Id, new UpgradePieceBuilder
+        {
+            Mask = new List<BoardPosition>
+            {
+                BoardPosition.Zero().Up,
+                BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
+            }
+        });
+        
+        dict.Add(PieceType.Castle7.Id, new UpgradePieceBuilder
+        {
+            Mask = new List<BoardPosition>
+            {
+                BoardPosition.Zero().Up,
+                BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
+            }
+        });
+        
+        dict.Add(PieceType.Castle8.Id, new UpgradePieceBuilder
+        {
+            Mask = new List<BoardPosition>
+            {
+                BoardPosition.Zero().Up,
+                BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
+            }
+        });
+        
+        dict.Add(PieceType.Castle9.Id, new UpgradePieceBuilder
         {
             Mask = new List<BoardPosition>
             {
@@ -187,7 +267,87 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddTavernPiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict.Add(PieceType.Tavern1.Id, new HeroHouseBuilder
+        dict.Add(PieceType.Tavern1.Id, new UpgradePieceBuilder
+        {
+            Mask = new List<BoardPosition>
+            {
+                BoardPosition.Zero().Up,
+                BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
+            }
+        });
+        
+        dict.Add(PieceType.Tavern2.Id, new UpgradePieceBuilder
+        {
+            Mask = new List<BoardPosition>
+            {
+                BoardPosition.Zero().Up,
+                BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
+            }
+        });
+        
+        dict.Add(PieceType.Tavern3.Id, new UpgradePieceBuilder
+        {
+            Mask = new List<BoardPosition>
+            {
+                BoardPosition.Zero().Up,
+                BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
+            }
+        });
+        
+        dict.Add(PieceType.Tavern4.Id, new UpgradePieceBuilder
+        {
+            Mask = new List<BoardPosition>
+            {
+                BoardPosition.Zero().Up,
+                BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
+            }
+        });
+        
+        dict.Add(PieceType.Tavern5.Id, new UpgradePieceBuilder
+        {
+            Mask = new List<BoardPosition>
+            {
+                BoardPosition.Zero().Up,
+                BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
+            }
+        });
+        
+        dict.Add(PieceType.Tavern6.Id, new UpgradePieceBuilder
+        {
+            Mask = new List<BoardPosition>
+            {
+                BoardPosition.Zero().Up,
+                BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
+            }
+        });
+        
+        dict.Add(PieceType.Tavern7.Id, new UpgradePieceBuilder
+        {
+            Mask = new List<BoardPosition>
+            {
+                BoardPosition.Zero().Up,
+                BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
+            }
+        });
+        
+        dict.Add(PieceType.Tavern8.Id, new UpgradePieceBuilder
+        {
+            Mask = new List<BoardPosition>
+            {
+                BoardPosition.Zero().Up,
+                BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
+            }
+        });
+        
+        dict.Add(PieceType.Tavern9.Id, new UpgradePieceBuilder
         {
             Mask = new List<BoardPosition>
             {

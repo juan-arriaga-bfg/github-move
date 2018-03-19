@@ -8,6 +8,9 @@
     
     public CurrencyPair SpawnResources { get; set; }
     public CurrencyPair CreateReward { get; set; }
+    public CurrencyPair UpgradePrice { get; set; }
+    
+    private CurrencyDef levelCurrencyDef;
     
     public int Piece
     {
@@ -17,6 +20,11 @@
     public int SpawnPieceType
     {
         get { return PieceType.Parse(SpawnPiece); }
+    }
+
+    public CurrencyDef UpgradeCurrency
+    {
+        get {return levelCurrencyDef ?? (levelCurrencyDef = Currency.GetCurrencyDef(string.Format("Level{0}", Uid.Substring(0, Uid.Length - 1))));}
     }
 
     public override string ToString()
