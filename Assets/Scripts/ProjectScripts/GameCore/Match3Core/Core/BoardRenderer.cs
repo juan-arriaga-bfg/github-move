@@ -1069,12 +1069,13 @@ public class BoardRenderer : ECSEntity
             {
                 // get world positon for sector
 
-                var fullTile = IconService.Current.GetSpriteById(tiles[UnityEngine.Random.Range(0, tiles.Count)]);
+                var fullTile = IconService.Current.GetSpriteById(tiles[0]);
+//                var fullTile = IconService.Current.GetSpriteById(tiles[UnityEngine.Random.Range(0, tiles.Count)]);
 
-                //if ((x + y) % 2 == 0)
-                //{
-                //    fullTile = IconService.Current.GetSpriteById(tiles[1]);
-                //}
+                if ((x + y) % 2 == 0)
+                {
+                    fullTile = IconService.Current.GetSpriteById(tiles[1]);
+                }
 
                 vertices.Add(new Vector3(x * borderWidth, (y + 1) * borderWidth, 0));
                 vertices.Add(new Vector3((x + 1) * borderWidth, (y + 1) * borderWidth, 0));

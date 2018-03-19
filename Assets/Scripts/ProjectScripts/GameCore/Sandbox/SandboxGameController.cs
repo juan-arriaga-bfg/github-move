@@ -179,13 +179,7 @@ public class SandboxGameController : MonoBehaviour
             new List<string>
             {
                 "tile_grass_1",
-                "tile_grass_2",
-                "tile_grass_3",
-                "tile_grass_4",
-                "tile_grass_5",
-                "tile_grass_6",
-                "tile_grass_7",
-                "tile_grass_8"
+                "tile_grass_2"
             });
 
         var leftPoint = boardController.BoardDef.GetSectorCenterWorldPosition(0, 0, 0);
