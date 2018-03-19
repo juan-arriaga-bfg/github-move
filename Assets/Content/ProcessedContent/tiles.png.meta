@@ -8,6 +8,11 @@ TextureImporter:
     21300002: tile_grass_1
     21300004: tile_grass_3
     21300006: tile_selection
+    21300008: tile_grass_6
+    21300010: tile_grass_5
+    21300012: tile_grass_8
+    21300014: tile_grass_7
+    21300016: tile_grass_4
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -114,7 +119,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tile_grass_3
+      name: tile_grass_6
       rect:
         serializedVersion: 2
         x: 0
@@ -128,7 +133,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: tile_grass_2
+      name: tile_grass_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 136
+        width: 132
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tile_grass_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 272
+        width: 132
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tile_grass_7
       rect:
         serializedVersion: 2
         x: 136
@@ -142,11 +175,53 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: tile_grass_1
+      name: tile_grass_2
       rect:
         serializedVersion: 2
         x: 272
         y: 0
+        width: 132
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tile_grass_1
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 136
+        width: 132
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tile_grass_4
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 272
+        width: 132
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tile_grass_3
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 136
         width: 132
         height: 132
       alignment: 9
