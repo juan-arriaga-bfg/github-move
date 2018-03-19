@@ -117,17 +117,17 @@ public class SandboxGameController : MonoBehaviour
             
             {PieceType.A1.Id, new SimplePieceBuilder()},
             {PieceType.A2.Id, new SimplePieceBuilder()},
-            {PieceType.A3.Id, new SpawnPieceBuilder()},
-            {PieceType.A4.Id, new SpawnPieceBuilder()},
-            {PieceType.A5.Id, new SpawnPieceBuilder()},
-            {PieceType.A6.Id, new SpawnPieceBuilder()},
-            {PieceType.A7.Id, new SpawnPieceBuilder()},
+            {PieceType.A3.Id, new SimplePieceBuilder()},
+            {PieceType.A4.Id, new SimplePieceBuilder()},
+            {PieceType.A5.Id, new SimplePieceBuilder()},
+            {PieceType.A6.Id, new SimplePieceBuilder()},
+            {PieceType.A7.Id, new SimplePieceBuilder()},
             
             {PieceType.B1.Id, new SimplePieceBuilder()},
             {PieceType.B2.Id, new SimplePieceBuilder()},
-            {PieceType.B3.Id, new SpawnPieceBuilder()},
-            {PieceType.B4.Id, new SpawnPieceBuilder()},
-            {PieceType.B5.Id, new SpawnPieceBuilder()},
+            {PieceType.B3.Id, new SimplePieceBuilder()},
+            {PieceType.B4.Id, new SimplePieceBuilder()},
+            {PieceType.B5.Id, new SimplePieceBuilder()},
             
             {PieceType.Gbox1.Id, new GBoxPieceBuilder()},
         };

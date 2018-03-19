@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4924213720674212}
   - component: {fileID: 114154012225628988}
   - component: {fileID: 114915371257863050}
-  - component: {fileID: 114522326465710038}
   m_Layer: 0
   m_Name: A5Piece
   m_TagString: Untagged
@@ -206,19 +205,6 @@ MonoBehaviour:
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 4130300065425406}
---- !u!114 &114522326465710038
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1348128489035432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6f11b2b00c584bffa83479976d5229b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorView: {fileID: 4358417945672564}
-  arrowOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &114915371257863050
 MonoBehaviour:
   m_ObjectHideFlags: 1

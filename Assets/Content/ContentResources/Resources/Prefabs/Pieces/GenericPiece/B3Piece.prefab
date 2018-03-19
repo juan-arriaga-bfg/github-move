@@ -99,7 +99,6 @@ GameObject:
   - component: {fileID: 4542807987214320}
   - component: {fileID: 114243331302908096}
   - component: {fileID: 114005589484427906}
-  - component: {fileID: 114827218753314362}
   m_Layer: 0
   m_Name: B3Piece
   m_TagString: Untagged
@@ -219,19 +218,6 @@ MonoBehaviour:
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 4401887258396680}
---- !u!114 &114827218753314362
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1924086398574114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6f11b2b00c584bffa83479976d5229b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorView: {fileID: 4073427342269240}
-  arrowOffset: {x: 0, y: 0, z: 0}
 --- !u!212 &212098488264484104
 SpriteRenderer:
   m_ObjectHideFlags: 1
