@@ -1,11 +1,17 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class MulticellularPieceBoardObserver : IPieceBoardObserver
 {
 	public List<BoardPosition> Mask;
+	private BoardPosition realPosition;
 	
 	public void OnAddToBoard(BoardPosition position, Piece context = null)
 	{
+		if(context == null) return;
+		
+		realPosition = position;
+		
 		for (int i = 0; i < Mask.Count; i++)
 		{
 			var point = GetPointInMask(position, Mask[i]);
@@ -20,9 +26,12 @@ public class MulticellularPieceBoardObserver : IPieceBoardObserver
 
 	public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
 	{
+		if(context == null || realPosition.Equals(position) == false) return;
+		
 		for (int i = 0; i < Mask.Count; i++)
 		{
 			var point = GetPointInMask(position, Mask[i]);
+			context.Context.BoardLogic.RemovePieceFromBoardSilent(point);
 		}
 	}
 

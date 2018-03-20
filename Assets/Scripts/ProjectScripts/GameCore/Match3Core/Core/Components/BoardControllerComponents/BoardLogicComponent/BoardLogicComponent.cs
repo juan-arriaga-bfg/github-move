@@ -425,7 +425,7 @@ public class BoardLogicComponent : ECSEntity,
         return piece is T;
     }
 
-    protected virtual bool RemovePieceFromBoardSilent(BoardPosition pos)
+    public virtual bool RemovePieceFromBoardSilent(BoardPosition pos)
     {
         if (pos.IsValid)
         {

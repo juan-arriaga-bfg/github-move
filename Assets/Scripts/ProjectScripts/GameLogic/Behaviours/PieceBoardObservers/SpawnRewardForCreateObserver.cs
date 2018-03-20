@@ -1,4 +1,6 @@
-﻿public class SpawnRewardForCreateObserver : IECSComponent, IPieceBoardObserver
+﻿using UnityEngine;
+
+public class SpawnRewardForCreateObserver : IECSComponent, IPieceBoardObserver
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -51,8 +53,6 @@
         if (contextPiece == null) return;
 
         CreateResource(contextPiece.Context, position, reward);
-
-//        contextPiece.UnRegisterComponent(this);
     }
 
     public void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)
@@ -69,29 +69,10 @@
         {
             return false;
         }
-		
-        var id = PieceType.Parse(resources.Currency);
-        var piece = gameBoard.CreatePieceFromType(id);
-
-        if (piece == null)
-        {
-            return false;
-        }
-		
-        var storage = piece.GetComponent<ResourceStorageComponent>(ResourceStorageComponent.ComponentGuid);
-
-        if (storage == null || resources.Amount <= 0)
-        {
-            return false;
-        }
-		
-        storage.Resources = resources;
-		
-        gameBoard.ActionExecutor.AddAction(new SpawnResourcePieceAction()
-        {
-            At = position,
-            Resource = piece
-        });
+        
+        var view = gameBoard.RendererContext.CreateBoardElementAt<AddResourceView>(R.AddResourceView, new BoardPosition(100,100,3));
+        view.CachedTransform.position = gameBoard.BoardDef.GetSectorCenterWorldPosition(position.X, position.Y, position.Z) + Vector3.up;
+        view.AddResource(resources, view.CachedTransform.position + Vector3.up);
 		
         return true;
     }

@@ -36,6 +36,11 @@ public class TouchReactionDefinitionUpgrade : TouchReactionDefinitionComponent
 				(item, s) =>
 				{
 					// on purchase success
+					
+					piece.Context.ActionExecutor.AddAction(new CheckMatchAction
+					{
+						At = position
+					});
 				},
 				item =>
 				{

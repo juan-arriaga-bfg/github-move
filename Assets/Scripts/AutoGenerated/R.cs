@@ -54,4 +54,5 @@ public class R
      public const string Tavern7Piece = "Tavern7Piece";
      public const string Tavern8Piece = "Tavern8Piece";
      public const string Tavern9Piece = "Tavern9Piece";
+     public const string AddResourceView = "AddResourceView";
 }

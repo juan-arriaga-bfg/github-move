@@ -36,7 +36,8 @@ public class SandboxGameController : MonoBehaviour
             .RegisterComponent(new FieldFinderComponent())
             .RegisterComponent(new EmptyCellsFinderComponent()) // finds empty cells
             .RegisterComponent(new MatchActionBuilderComponent() // creates match action
-                .RegisterDefaultBuilder(new DefaultMatchActionBuilder())) // creates default match action
+                .RegisterDefaultBuilder(new DefaultMatchActionBuilder()) // creates default match action
+                .RegisterBuilder(new MulticellularPieceMatchActionBuilder())) // creates match action for
             .RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build()))); 
         
         boardController.RegisterComponent(new BoardRandomComponent()); // random
@@ -105,7 +106,7 @@ public class SandboxGameController : MonoBehaviour
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(10, 20),
-            PieceTypeId = PieceType.H1.Id
+            PieceTypeId = PieceType.Tavern1.Id
         });
         
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
@@ -117,55 +118,8 @@ public class SandboxGameController : MonoBehaviour
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(13, 20),
-            PieceTypeId = PieceType.H2.Id
+            PieceTypeId = PieceType.Castle1.Id
         });
-        
-//        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-//        {
-//            At = new BoardPosition(19, 17),
-//            PieceTypeId = PieceType.A4.Id
-//        });
-//        
-//        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-//        {
-//            At = new BoardPosition(20, 18),
-//            PieceTypeId = PieceType.A5.Id
-//        });
-//        
-//        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-//        {
-//            At = new BoardPosition(21, 19),
-//            PieceTypeId = PieceType.A6.Id
-//        });
-        
-//        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-//        {
-//            At = new BoardPosition(16, 18),
-//            PieceTypeId = PieceType.B1.Id
-//        });
-//        
-//        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-//        {
-//            At = new BoardPosition(17, 19),
-//            PieceTypeId = PieceType.B2.Id
-//        });
-//        
-//        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-//        {
-//            At = new BoardPosition(18, 20),
-//            PieceTypeId = PieceType.B3.Id
-//        });
-//        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-//        {
-//            At = new BoardPosition(19, 21),
-//            PieceTypeId = PieceType.B4.Id
-//        });
-//        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-//        {
-//            At = new BoardPosition(20, 22),
-//            PieceTypeId = PieceType.B5.Id
-//        });
-//        boardController.ActionExecutor.PerformAction(new StartSessionBoardAction());
         
         //register board
         BoardService.Current.RegisterBoard(boardController, 0);

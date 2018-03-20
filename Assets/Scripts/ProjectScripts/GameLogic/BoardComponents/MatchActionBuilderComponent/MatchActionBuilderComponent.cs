@@ -22,11 +22,17 @@ public class MatchActionBuilderComponent : ECSEntity
         return this;
     }
 
-    public MatchActionBuilderComponent RegisterBuilder(int pieceType, IMatchActionBuilder builder)
+    public MatchActionBuilderComponent RegisterBuilder(IMatchActionBuilder builder)
     {
-        if(builders.ContainsKey(pieceType)) return this;
+        var keys = builder.GetKeys();
+
+        foreach (var key in keys)
+        {
+            if(builders.ContainsKey(key)) continue;
         
-        builders.Add(pieceType, builder);
+            builders.Add(key, builder);
+        }
+        
         return this;
     }
     

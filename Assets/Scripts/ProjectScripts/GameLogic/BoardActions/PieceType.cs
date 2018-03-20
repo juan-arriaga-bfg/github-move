@@ -34,6 +34,26 @@ public static partial class PieceType
         RegisterType(H2);
         
         RegisterType(Gbox1);
+        
+        RegisterType(Castle1);
+        RegisterType(Castle2);
+        RegisterType(Castle3);
+        RegisterType(Castle4);
+        RegisterType(Castle5);
+        RegisterType(Castle6);
+        RegisterType(Castle7);
+        RegisterType(Castle8);
+        RegisterType(Castle9);
+        
+        RegisterType(Tavern1);
+        RegisterType(Tavern2);
+        RegisterType(Tavern3);
+        RegisterType(Tavern4);
+        RegisterType(Tavern5);
+        RegisterType(Tavern6);
+        RegisterType(Tavern7);
+        RegisterType(Tavern8);
+        RegisterType(Tavern9);
     }
     
     public readonly static PieceTypeDef A1 = new PieceTypeDef{Id = 100, Abbreviations = new List<string>{ "A1", "PieceA1" }};

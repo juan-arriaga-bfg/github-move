@@ -47,8 +47,29 @@ public class ElementsResourcesBuilder
             {PieceType.B5.Id, R.B5Piece},
 
             {PieceType.Gbox1.Id, R.GBox1Piece},
+            
+            {PieceType.Castle1.Id, R.Castle1Piece},
+            {PieceType.Castle2.Id, R.Castle2Piece},
+            {PieceType.Castle3.Id, R.Castle3Piece},
+            {PieceType.Castle4.Id, R.Castle4Piece},
+            {PieceType.Castle5.Id, R.Castle5Piece},
+            {PieceType.Castle6.Id, R.Castle6Piece},
+            {PieceType.Castle7.Id, R.Castle7Piece},
+            {PieceType.Castle8.Id, R.Castle8Piece},
+            {PieceType.Castle9.Id, R.Castle9Piece},
 
-            {-1000, R.HitboxDamageView}
+            {PieceType.Tavern1.Id, R.Tavern1Piece},
+            {PieceType.Tavern2.Id, R.Tavern2Piece},
+            {PieceType.Tavern3.Id, R.Tavern3Piece},
+            {PieceType.Tavern4.Id, R.Tavern4Piece},
+            {PieceType.Tavern5.Id, R.Tavern5Piece},
+            {PieceType.Tavern6.Id, R.Tavern6Piece},
+            {PieceType.Tavern7.Id, R.Tavern7Piece},
+            {PieceType.Tavern8.Id, R.Tavern8Piece},
+            {PieceType.Tavern9.Id, R.Tavern9Piece},
+
+            {-1000, R.HitboxDamageView},
+            {-1100, R.AddResourceView}
         };
         
         return dict;
