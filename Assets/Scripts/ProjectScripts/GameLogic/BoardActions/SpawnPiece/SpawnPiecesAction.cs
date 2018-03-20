@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class SpawnPiecesAction : IBoardAction
 {
@@ -37,6 +38,8 @@ public class SpawnPiecesAction : IBoardAction
 			free.RemoveAt(index);
 			free.Add(At);
 		}
+		
+		Debug.LogError("free: " + free.Count);
 
 		for (int i = 0; i < free.Count; i++)
 		{

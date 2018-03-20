@@ -7,7 +7,7 @@
 		
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionSpawnPiece())
-			.RegisterComponent(new TouchReactonConditionDelay{Delay = def.Delay}));
+			.RegisterComponent(new TouchReactionConditionDelay{Delay = def.Delay}));
 
 		return piece;
 	}

@@ -31,10 +31,6 @@ public class TouchReactonConditionDelayView : MonoBehaviour
 		
 		resourceGenerationTimerView.Init(context, arrowOffset);
 		
-		context.ClearCacheLayers();
-
-		
+		context.ClearCacheLayers();	
 	}
-
-
 }

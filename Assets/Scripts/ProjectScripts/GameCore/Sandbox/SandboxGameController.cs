@@ -111,7 +111,7 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(9, 17),
+            At = new BoardPosition(12, 17),
             PieceTypeId = PieceType.S1.Id
         });
         

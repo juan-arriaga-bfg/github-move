@@ -46,7 +46,9 @@ public class EmptyCellsFinderComponent: IECSComponent
 	{
 		for (int i = 0; i < radius; i++)
 		{
-			if (FindRingWithPointInCenter(point, field, count, i)) return true;
+			FindRingWithPointInCenter(point, field, count, i);
+				
+			if (field.Count >= count) return true;
 		}
 		
 		return field.Count != 0;
@@ -56,7 +58,7 @@ public class EmptyCellsFinderComponent: IECSComponent
 	{
 		for (int i = 1; i < radius; i++)
 		{
-			if (FindRingWithPointInCenter(point, field, (i*2)*4, i)) return true;
+			FindRingWithPointInCenter(point, field, (i*2)*4, i);
 		}
 		
 		return field.Count != 0;

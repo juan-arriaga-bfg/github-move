@@ -5,6 +5,7 @@
     
     public string SpawnPiece { get; set; }
     public int SpawnAmount { get; set; }
+    public int SpawnCapacity { get; set; }
     
     public CurrencyPair SpawnResources { get; set; }
     public CurrencyPair CreateReward { get; set; }

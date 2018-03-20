@@ -18,12 +18,23 @@ public class AddResourceView : BoardElementView
 		
 		var sequence = DOTween.Sequence().SetId(animationUid);
 		
-		sequence.Append(CachedTransform.DOMove(targetPos, duration));
-		sequence.Append(icon.DOFade(0f, duration));
-		sequence.Append(amountLabel.TextLabel.DOFade(0f, duration));
+		sequence.Insert(0, CachedTransform.DOMove(targetPos, duration));
+		sequence.Insert(duration*0.5f, icon.DOFade(0f, duration));
+		sequence.Insert(duration*0.5f, amountLabel.TextLabel.DOFade(0f, duration));
 		sequence.InsertCallback(duration*0.5f, () => { Add(resource); });
 		
 		DestroyOnBoard(duration);
+	}
+
+	public override void ResetViewOnDestroy()
+	{
+		base.ResetViewOnDestroy();
+		
+		icon.color = Color.white;
+
+		var tColor = amountLabel.TextLabel.color;
+		
+		amountLabel.TextLabel.color = new Color(tColor.r, tColor.g, tColor.b, 1);
 	}
 
 	private void Add(CurrencyPair resource)

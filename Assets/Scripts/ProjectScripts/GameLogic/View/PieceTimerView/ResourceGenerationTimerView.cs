@@ -11,7 +11,7 @@ public class ResourceGenerationTimerView : IWBaseMonoBehaviour
 	
 	private PieceBoardElementView context;
 
-	private TouchReactonConditionDelay touchReactonConditionDelay;
+	private TouchReactionConditionDelay _touchReactionConditionDelay;
 	
 	private Vector3 arrowOffset;
 
@@ -25,7 +25,7 @@ public class ResourceGenerationTimerView : IWBaseMonoBehaviour
 
 	private void OnDisable()
 	{
-		touchReactonConditionDelay = null;
+		_touchReactionConditionDelay = null;
 	}
 
 	private void Awake()
@@ -48,16 +48,16 @@ public class ResourceGenerationTimerView : IWBaseMonoBehaviour
 	{
 		if (context == null || context.Piece == null) return;
 
-		if (touchReactonConditionDelay == null)
+		if (_touchReactionConditionDelay == null)
 		{
 			var touchReactionComponent = context.Piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
-			touchReactonConditionDelay = touchReactionComponent.GetComponent<TouchReactonConditionDelay>(TouchReactonConditionDelay.ComponentGuid);
+			_touchReactionConditionDelay = touchReactionComponent.GetComponent<TouchReactionConditionDelay>(TouchReactionConditionDelay.ComponentGuid);
 		}
 		
-		if (touchReactonConditionDelay == null) return;
+		if (_touchReactionConditionDelay == null) return;
 
-		var currentSeconds = (float)(DateTime.Now - touchReactonConditionDelay.StartTime).TotalSeconds;
-		var targetSeconds = touchReactonConditionDelay.Delay;
+		var currentSeconds = (float)(DateTime.Now - _touchReactionConditionDelay.StartTime).TotalSeconds;
+		var targetSeconds = _touchReactionConditionDelay.Delay;
 
 		if (currentSeconds > targetSeconds)
 		{
