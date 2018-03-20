@@ -38,12 +38,10 @@ public class StorageComponent : IECSComponent, IECSSystem
     {
         var time = DateTime.Now - startTime;
         
-        Debug.LogError("!!!!!!!!! " + filling);
-        
         if(time.TotalSeconds < Delay) return;
         
         startTime = DateTime.Now;
-        filling = Mathf.Min(filling + 10, Capacity);
+        filling = Mathf.Min(filling + 1, Capacity);
     }
 
     public bool IsPersistence

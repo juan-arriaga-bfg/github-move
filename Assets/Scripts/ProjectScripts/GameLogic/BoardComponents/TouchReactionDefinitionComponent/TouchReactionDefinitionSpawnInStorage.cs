@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComponent
 {
@@ -24,8 +23,6 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
             pieces.Add(id);
         }
         
-        Debug.LogError(pieces.Count);
-		
         piece.Context.ActionExecutor.AddAction(new SpawnPiecesAction()
         {
             IsCheckMatch = false,

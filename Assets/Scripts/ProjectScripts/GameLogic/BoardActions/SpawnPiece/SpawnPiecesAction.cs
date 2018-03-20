@@ -39,8 +39,6 @@ public class SpawnPiecesAction : IBoardAction
 			free.Add(At);
 		}
 		
-		Debug.LogError("free: " + free.Count);
-
 		for (int i = 0; i < free.Count; i++)
 		{
 			gameBoardController.ActionExecutor.AddAction(new SpawnPieceAtAction
