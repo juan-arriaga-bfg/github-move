@@ -40,7 +40,7 @@
         {
             Uid = PieceType.None.Abbreviations[0],
             Delay = 1,
-            SpawnResources = new CurrencyPair{Currency = PieceType.C1.Abbreviations[0], Amount = 1}
+            SpawnResources = new CurrencyPair{Currency = PieceType.Chest1.Abbreviations[0], Amount = 1}
         };
     }
 }

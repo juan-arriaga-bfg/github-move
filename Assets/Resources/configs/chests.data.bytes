@@ -1,119 +1,321 @@
 [
-    {
-        "Uid" : "Common",
-        "Time" : "60",
-        "Price" : 
-        {
-            "Currency" : "Crystals",
-            "Amount" : 5
-        },
-        "Rewards" :
-        [
-            {
-                "Currency" : "Coins",
-                "Amount" : 50
-            },
-            {
-                "Currency" : "RobinCard",
-                "Amount" : 5
-            },
-            {
-                "Currency" : "PieceA2",
-                "Amount" : 1
-            }
-        ],
-        "RewardsAlternative" :
-        [
-            {
-                "Currency" : "Coins",
-                "Amount" : 50
-            },
-            {
-                "Currency" : "JohnCard",
-                "Amount" : 5
-            },
-            {
-                "Currency" : "PieceA2",
-                "Amount" : 1
-            }
-        ]
+  {
+    "Uid": "Common",
+    "Time": "60",
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 5
     },
+    "Rewards": 
     {
-        "Uid" : "Rare",
-        "Time" : "120",
-        "Price" : 
+      "1" :
+      [
         {
-            "Currency" : "Crystals",
-            "Amount" : 10
+          "Currency": "PieceA1",
+          "Amount": 10
         },
-        "Rewards" :
-        [
-            {
-                "Currency" : "Coins",
-                "Amount" : 70
-            },
-            {
-                "Currency" : "RobinCard",
-                "Amount" : 10
-            },
-            {
-                "Currency" : "PieceA2",
-                "Amount" : 2
-            }
-        ],
-        "RewardsAlternative" :
-        [
-            {
-                "Currency" : "Coins",
-                "Amount" : 70
-            },
-            {
-                "Currency" : "JohnCard",
-                "Amount" : 10
-            },
-            {
-                "Currency" : "PieceB2",
-                "Amount" : 2
-            }
-        ]
+        {
+          "Currency": "PieceA1",
+          "Amount": 10
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 5
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 5
+        }
+      ],
+      "2" :
+      [
+        {
+          "Currency": "PieceA2",
+          "Amount": 10
+        },
+        {
+          "Currency": "PieceA2",
+          "Amount": 10
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 7
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 5
+        }
+      ],
+      "3" :
+      [
+        {
+          "Currency": "PieceA3",
+          "Amount": 10
+        },
+        {
+          "Currency": "PieceB1",
+          "Amount": 10
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 10
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 7
+        }
+      ],
+      "4" :
+      [
+        {
+          "Currency": "PieceA4",
+          "Amount": 10
+        },
+        {
+          "Currency": "PieceB2",
+          "Amount": 10
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 12
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 10
+        }
+      ],
+      "5" :
+      [
+        {
+          "Currency": "PieceA5",
+          "Amount": 10
+        },
+        {
+          "Currency": "PieceB3",
+          "Amount": 10
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 15
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 12
+        }
+      ]
+    }
+  },
+  {
+    "Uid": "Rare",
+    "Time": "120",
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 10
     },
+    "Rewards":
     {
-        "Uid" : "Epic",
-        "Time" : "300",
-        "Price" : 
+      "1":
+      [
         {
-            "Currency" : "Crystals",
-            "Amount" : 25
+          "Currency": "PieceA2",
+          "Amount": 15
         },
-        "Rewards" :
-        [
-            {
-                "Currency" : "Coins",
-                "Amount" : 100
-            },
-            {
-                "Currency" : "RobinCard",
-                "Amount" : 20
-            },
-            {
-                "Currency" : "PieceA3",
-                "Amount" : 1
-            }
-        ],
-        "RewardsAlternative" :
-        [
-            {
-                "Currency" : "Coins",
-                "Amount" : 100
-            },
-            {
-                "Currency" : "JohnCard",
-                "Amount" : 20
-            },
-            {
-                "Currency" : "PieceB3",
-                "Amount" : 1
-            }
-        ]
+        {
+          "Currency": "PieceA2",
+          "Amount": 15
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 7
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 7
+        }
+      ],
+      "2":
+      [
+        {
+          "Currency": "PieceA3",
+          "Amount": 15
+        },
+        {
+          "Currency": "PieceA3",
+          "Amount": 15
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 10
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 7
+        }
+      ],
+      "3":
+      [
+        {
+          "Currency": "PieceA4",
+          "Amount": 15
+        },
+        {
+          "Currency": "PieceB2",
+          "Amount": 15
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 12
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 10
+        }
+      ],
+      "4":
+      [
+        {
+          "Currency": "PieceA5",
+          "Amount": 15
+        },
+        {
+          "Currency": "PieceB3",
+          "Amount": 15
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 15
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 12
+        }
+      ],
+      "5":
+      [
+        {
+          "Currency": "PieceA6",
+          "Amount": 15
+        },
+        {
+          "Currency": "PieceB4",
+          "Amount": 15
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 20
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 15
+        }
+      ]
+      
+    }
+  },
+  {
+    "Uid": "Epic",
+    "Time": "300",
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 25
     },
+    "Rewards": 
+    {
+      "1":
+      [
+        {
+          "Currency": "PieceA3",
+          "Amount": 20
+        },
+        {
+          "Currency": "PieceA3",
+          "Amount": 20
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 10
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 10
+        }
+      ],
+      "2":
+      [
+        {
+          "Currency": "PieceA4",
+          "Amount": 20
+        },
+        {
+          "Currency": "PieceA4",
+          "Amount": 20
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 12
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 10
+        }
+      ],
+      "3":
+      [
+        {
+          "Currency": "PieceA5",
+          "Amount": 20
+        },
+        {
+          "Currency": "PieceB3",
+          "Amount": 20
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 15
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 12
+        }
+      ],
+      "4":
+      [
+        {
+          "Currency": "PieceA6",
+          "Amount": 20
+        },
+        {
+          "Currency": "PieceB4",
+          "Amount": 20
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 20
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 15
+        }
+      ],
+      "5":
+      [
+        {
+          "Currency": "PieceA7",
+          "Amount": 20
+        },
+        {
+          "Currency": "PieceB5",
+          "Amount": 20
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 25
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 20
+        }
+      ]
+    }
+  }
 ]

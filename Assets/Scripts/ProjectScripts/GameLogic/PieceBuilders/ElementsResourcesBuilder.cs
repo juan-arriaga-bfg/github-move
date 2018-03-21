@@ -29,9 +29,7 @@ public class ElementsResourcesBuilder
 
             {PieceType.O1.Id, R.O1Piece},
             {PieceType.O2.Id, R.O2Piece},
-
-            {PieceType.C1.Id, R.C1Piece},
-
+            
             {PieceType.A1.Id, R.A1Piece},
             {PieceType.A2.Id, R.A2Piece},
             {PieceType.A3.Id, R.A3Piece},

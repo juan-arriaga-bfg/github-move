@@ -82,11 +82,12 @@ public class TouchReactionDefinitionObstacle : TouchReactionDefinitionComponent
                     Positions = new List<BoardPosition>{position},
                     OnComplete = () =>
                     {
-                        var chestRewardmodel = UIService.Get.GetCachedModel<UIChestRewardWindowModel>(UIWindowType.ChestRewardWindow);
-                
-                        chestRewardmodel.Chest = obstacle.GetReward();
-                
-                        UIService.Get.ShowWindow(UIWindowType.ChestRewardWindow);
+                        piece.Context.ActionExecutor.AddAction(new SpawnPiecesAction()
+                        {
+                            IsCheckMatch = false,
+                            At = position,
+                            Pieces = new List<int>{obstacle.GetReward().Piece}
+                        });
                     }
                 });
                 break;

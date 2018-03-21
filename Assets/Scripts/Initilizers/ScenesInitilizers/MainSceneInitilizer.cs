@@ -21,7 +21,6 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.BankWindow,
             UIWindowType.MessageWindow,
             UIWindowType.CharacterWindow,
-            UIWindowType.ChestWindow,
             UIWindowType.ChestRewardWindow,
             UIWindowType.QuestStartWindow,
         });

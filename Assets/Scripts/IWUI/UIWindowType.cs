@@ -12,8 +12,6 @@
     
     public const string CharacterWindow = "CharacterWindow";
     
-    public const string ChestWindow = "ChestWindow";
-    
     public const string ChestRewardWindow = "ChestRewardWindow";
     
     public const string QuestStartWindow = "QuestStartWindow";

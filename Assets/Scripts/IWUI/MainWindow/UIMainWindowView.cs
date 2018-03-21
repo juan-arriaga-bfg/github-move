@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UIMainWindowView : IWUIWindowView, IBoardEventListener
+public class UIMainWindowView : IWUIWindowView
 {
     [SerializeField] private NSText settingsLabel;
     
@@ -10,39 +10,14 @@ public class UIMainWindowView : IWUIWindowView, IBoardEventListener
     {
         base.OnViewShow();
         
-        BoardService.Current.GetBoardById(0).BoardEvents.AddListener(this, GameEventsCodes.EnemyDeath);
-        
         var windowModel = Model as UIMainWindowModel;
 
         settingsLabel.Text = windowModel.SettingsText;
-        
-        UpdateSlots();
     }
     
-    public override void OnViewClose()
-    {
-        base.OnViewClose();
-        
-        BoardService.Current.GetBoardById(0).BoardEvents.RemoveListener(this, GameEventsCodes.EnemyDeath);
-        
-        UIMainWindowModel windowModel = Model as UIMainWindowModel;
-    }
-    
-    public void UpdateSlots()
-    {
-        var chests = GameDataService.Current.ChestsManager.GetActiveChests();
-    }
-
     public void ShowSettings()
     {
         UIMessageWindowController.CreateNotImplementedMessage();
-    }
-
-    public void OnBoardEvent(int code, object context)
-    {
-        GameDataService.Current.ChestsManager.AddActiveChest(GameDataService.Current.ChestsManager.Chests.Find(def => def.Uid == context.ToString()));
-        
-        UpdateSlots();
     }
 
     public void SelectEnemy()

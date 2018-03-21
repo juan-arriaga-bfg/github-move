@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class ChestsDataManager : IDataLoader<List<ChestDef>>
 {
-    public List<ChestDef> Chests;
-    
-    private readonly List<ChestDef> activeChests = new List<ChestDef>();
+    public List<Chest> Chests;
     
     public void LoadData(IDataMapper<List<ChestDef>> dataMapper)
     {
         dataMapper.LoadData((data, error)=> 
         {
+            Chests = new List<Chest>();
+            
             if (string.IsNullOrEmpty(error))
             {
-                Chests = data;
+                foreach (var def in data)
+                {
+                    Chests.Add(new Chest(def));
+                }
             }
             else
             {
@@ -22,37 +25,13 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
             }
         });
     }
-    
-    public bool AddActiveChest(ChestDef chest)
-    {
-        if (activeChests.Count == 4) return false;
 
-        chest.State = ChestState.Lock;
-        activeChests.Add(chest);
-        
-        return true;
+    public Chest GetChest(ChestType type)
+    {
+        return Chests.Find(chest => chest.ChestType == type);
     }
 
-    public void RemoveActiveChest(ChestDef chest)
-    {
-        var index = activeChests.IndexOf(chest);
-        
-        if(index == -1) return;
-        
-        activeChests.RemoveAt(index);
-    }
-    
-    public List<ChestDef> GetActiveChests()
-    {
-        return activeChests;
-    }
-
-    public ChestDef GetChest(ChestType type)
-    {
-        return Chests.Find(def => def.GetChestType() == type);
-    }
-
-    public ChestDef GetChest(int pieceType)
+    public Chest GetChest(int pieceType)
     {
         foreach (ChestType chest in Enum.GetValues(typeof(ChestType)))
         {

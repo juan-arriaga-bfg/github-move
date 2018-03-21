@@ -11,7 +11,6 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece(dict);
         dict = AddEnemyPiece(dict);
         dict = AddObstaclePiece(dict);
-        dict = AddResourcePiece(dict);
         dict = AddOtherPiece(dict);
         dict = AddSawmillPiece(dict);
         dict = AddMinePiece(dict);
@@ -52,13 +51,6 @@ public class PieceBuildersBuilder
     {
         dict.Add(PieceType.O1.Id, new GenericPieceBuilder());
         dict.Add(PieceType.O2.Id, new ObstaclePieceBuilder());
-        
-        return dict;
-    }
-    
-    private Dictionary<int, IPieceBuilder> AddResourcePiece(Dictionary<int, IPieceBuilder> dict)
-    {
-        dict.Add(PieceType.C1.Id, new ResourcePieceBuilder());
         
         return dict;
     }

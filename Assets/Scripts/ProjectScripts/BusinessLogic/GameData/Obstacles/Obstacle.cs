@@ -71,7 +71,7 @@ public class Obstacle
         return State != ObstacleState.Lock;
     }
 
-    public ChestDef GetReward()
+    public Chest GetReward()
     {
         return GameDataService.Current.ChestsManager.GetChest(def.Reward);
     }

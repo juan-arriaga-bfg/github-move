@@ -1,9 +1,7 @@
-using System.Collections.Generic;
-
 public class UIChestRewardWindowModel : IWWindowModel
 {
-    private ChestDef chest;
-    private List<CurrencyPair> rewards;
+    private Chest chest;
+    private CurrencyPair reward;
     
     public string Title
     {
@@ -30,18 +28,18 @@ public class UIChestRewardWindowModel : IWWindowModel
         get { return "<color=#D75100>Resources card</color>"; }
     }
 
-    public ChestDef Chest
+    public Chest Chest
     {
         get { return chest; }
         set
         {
             chest = value;
-            rewards = null;
+            reward = null;
         }
     }
 
-    public List<CurrencyPair> GetRewards()
+    public CurrencyPair GetReward()
     {
-        return rewards ?? (rewards = Chest.GetRewards());
+        return reward ?? (reward = Chest.GetReward(ProfileService.Current.GetStorageItem(Currency.LevelCastle.Name).Amount));
     }
 }
