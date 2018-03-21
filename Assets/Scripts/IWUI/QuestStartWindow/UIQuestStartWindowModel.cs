@@ -40,7 +40,7 @@ public class UIQuestStartWindowModel : IWWindowModel
                 
                 if(hero.InAdventure != Obstacle.GetUid()) continue;
 
-                bonus += hero.CurrentTimeBonus;
+                bonus += hero.CurrentAbilityValue;
             }
             
             return string.Format("Total quest time: {0} min", conditionsDelay.Count == 0 ? 0 : new TimeSpan(0, 0, conditionsDelay[0].Delay).TotalMinutes - bonus);

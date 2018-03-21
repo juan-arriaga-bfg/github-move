@@ -13,6 +13,7 @@ public class UICharacterWindowView : UIGenericPopupWindowView
     [SerializeField] private Image smallIcon;
 
     [SerializeField] private RectTransform progress;
+    [SerializeField] private Button button;
     
     public override void OnViewShow()
     {
@@ -36,6 +37,8 @@ public class UICharacterWindowView : UIGenericPopupWindowView
         
         bigIcon.sprite = windowModel.IconSprite;
         smallIcon.sprite = windowModel.IconSprite;
+
+        button.interactable = windowModel.IsDone;
     }
 
     public void OnClick()

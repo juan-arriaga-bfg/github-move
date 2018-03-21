@@ -1,80 +1,254 @@
 [
-    {
-        "Uid" : "Robin",
-        "TimeBonuses" :
+  {
+    "Uid" : "Robin",
+    "Levels" :
+    [
+      {
+        "Abilities" :
         [
-            0,
-            2,
-            4,
-            6,
-            8,
-            10
+          {
+            "Ability" : "Dexterity",
+            "Value" : 0
+          }
         ],
         "Prices" :
         [
-            {
-                "Currency" : "RobinCard",
-                "Amount" : 5
-            },
-            {
-                "Currency" : "RobinCard",
-                "Amount" : 20
-            },
-            {
-                "Currency" : "RobinCard",
-                "Amount" : 50
-            },
-            {
-                "Currency" : "RobinCard",
-                "Amount" : 100
-            },
-            {
-                "Currency" : "RobinCard",
-                "Amount" : 200
-            },
-            {
-                "Currency" : "RobinCard",
-                "Amount" : 300
-            },
+          {
+            "Currency": "Coins",
+            "Amount": 5
+          },
+          {
+            "Currency": "RobinCard",
+            "Amount": 5
+          }
         ]
-    },
-    {
-        "Uid" : "John",
-        "TimeBonuses" :
+      },
+      {
+        "Abilities" :
         [
-            0,
-            2,
-            4,
-            6,
-            8,
-            10
+          {
+            "Ability" : "Dexterity",
+            "Value" : 2
+          }
         ],
         "Prices" :
         [
-            {
-                "Currency" : "JohnCard",
-                "Amount" : 5
-            },
-            {
-                "Currency" : "JohnCard",
-                "Amount" : 20
-            },
-            {
-                "Currency" : "JohnCard",
-                "Amount" : 50
-            },
-            {
-                "Currency" : "JohnCard",
-                "Amount" : 100
-            },
-            {
-                "Currency" : "JohnCard",
-                "Amount" : 200
-            },
-            {
-                "Currency" : "JohnCard",
-                "Amount" : 300
-            },
+          {
+            "Currency": "Coins",
+            "Amount": 20
+          },
+          {
+            "Currency": "RobinCard",
+            "Amount": 20
+          }
         ]
-    },
+      },
+      {
+        "Abilities" :
+        [
+          {
+            "Ability" : "Dexterity",
+            "Value" : 4
+          }
+        ],
+        "Prices" :
+        [
+          {
+            "Currency": "Coins",
+            "Amount": 50
+          },
+          {
+            "Currency": "RobinCard",
+            "Amount": 50
+          }
+        ]
+      },
+      {
+        "Abilities" :
+        [
+          {
+            "Ability" : "Dexterity",
+            "Value" : 6
+          }
+        ],
+        "Prices" :
+        [
+          {
+            "Currency": "Coins",
+            "Amount": 100
+          },
+          {
+            "Currency": "RobinCard",
+            "Amount": 100
+          }
+        ]
+      },
+      {
+        "Abilities" :
+        [
+          {
+            "Ability" : "Dexterity",
+            "Value" : 8
+          }
+        ],
+        "Prices" :
+        [
+          {
+            "Currency": "Coins",
+            "Amount": 200
+          },
+          {
+            "Currency": "RobinCard",
+            "Amount": 200
+          }
+        ]
+      },
+      {
+        "Abilities" :
+        [
+          {
+            "Ability" : "Dexterity",
+            "Value" : 10
+          }
+        ],
+        "Prices" :
+        [
+          {
+            "Currency": "Coins",
+            "Amount": 300
+          },
+          {
+            "Currency": "RobinCard",
+            "Amount": 300
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Uid" : "John",
+    "Levels" :
+    [
+      {
+        "Abilities" :
+        [
+          {
+            "Ability" : "Strength",
+            "Value" : 0
+          }
+        ],
+        "Prices" :
+        [
+          {
+            "Currency": "Coins",
+            "Amount": 5
+          },
+          {
+            "Currency": "RobinCard",
+            "Amount": 5
+          }
+        ]
+      },
+      {
+        "Abilities" :
+        [
+          {
+            "Ability" : "Strength",
+            "Value" : 2
+          }
+        ],
+        "Prices" :
+        [
+          {
+            "Currency": "Coins",
+            "Amount": 20
+          },
+          {
+            "Currency": "RobinCard",
+            "Amount": 20
+          }
+        ]
+      },
+      {
+        "Abilities" :
+        [
+          {
+            "Ability" : "Strength",
+            "Value" : 4
+          }
+        ],
+        "Prices" :
+        [
+          {
+            "Currency": "Coins",
+            "Amount": 50
+          },
+          {
+            "Currency": "RobinCard",
+            "Amount": 50
+          }
+        ]
+      },
+      {
+        "Abilities" :
+        [
+          {
+            "Ability" : "Strength",
+            "Value" : 6
+          }
+        ],
+        "Prices" :
+        [
+          {
+            "Currency": "Coins",
+            "Amount": 100
+          },
+          {
+            "Currency": "RobinCard",
+            "Amount": 100
+          }
+        ]
+      },
+      {
+        "Abilities" :
+        [
+          {
+            "Ability" : "Strength",
+            "Value" : 8
+          }
+        ],
+        "Prices" :
+        [
+          {
+            "Currency": "Coins",
+            "Amount": 200
+          },
+          {
+            "Currency": "RobinCard",
+            "Amount": 200
+          }
+        ]
+      },
+      {
+        "Abilities" :
+        [
+          {
+            "Ability" : "Strength",
+            "Value" : 10
+          }
+        ],
+        "Prices" :
+        [
+          {
+            "Currency": "Coins",
+            "Amount": 300
+          },
+          {
+            "Currency": "RobinCard",
+            "Amount": 300
+          }
+        ]
+      }
+    ]
+  }
 ]

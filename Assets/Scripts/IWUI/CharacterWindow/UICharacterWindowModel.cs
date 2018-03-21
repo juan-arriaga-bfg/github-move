@@ -27,13 +27,13 @@ public class UICharacterWindowModel : IWWindowModel
     {
         get
         {
-            return string.Format("Quest time: <color=#00FF00>-{0}</color> min", Hero.CurrentTimeBonus);
+            return string.Format("Quest time: <color=#00FF00>-{0}</color> min", Hero.CurrentAbilityValue);
         }
     }
 
     public string ButtonText
     {
-        get { return IsDone ? "Evolve" : "Ok"; }
+        get { return string.Format("{0}", Hero.Price); }
     }
 
     public string ProgressText

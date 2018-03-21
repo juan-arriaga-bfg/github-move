@@ -143,7 +143,7 @@ public class Obstacle
                 
             if(hero.InAdventure != GetUid()) continue;
 
-            bonus += hero.CurrentTimeBonus;
+            bonus += hero.CurrentAbilityValue;
         }
         
         current.Bonus = bonus*60;

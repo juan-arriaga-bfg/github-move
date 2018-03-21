@@ -3,15 +3,13 @@
 public class Hero
 {
     private HeroDef def;
-    public HeroDef Def
-    {
-        get { return def; }
-    }
-
+    
     public BoardPosition HousePosition { get; set; }
 
     public readonly CurrencyDef LevelCurrencyDef;
     public readonly CurrencyDef CardCurrencyDef;
+    
+    private int inAdventure = -1;
 
     public int Level
     {
@@ -20,20 +18,23 @@ public class Hero
             return LevelCurrencyDef == null ? 0 : (int)ProfileService.Current.GetStorageItem(LevelCurrencyDef.Name).Amount;
         }
     }
-
-    private int inAdventure = -1;
-
-    public int InAdventure
-    {
-        get { return inAdventure; }
-        set { inAdventure = value; }
-    }
-
+    
     public Hero(HeroDef def)
     {
         this.def = def;
         LevelCurrencyDef = Currency.GetCurrencyDef(string.Format("Level{0}", def.Uid));
         CardCurrencyDef = Currency.GetCurrencyDef(string.Format("{0}Card", def.Uid));
+    }
+    
+    public HeroDef Def
+    {
+        get { return def; }
+    }
+    
+    public int InAdventure
+    {
+        get { return inAdventure; }
+        set { inAdventure = value; }
     }
     
     public int CurrentProgress
@@ -43,36 +44,55 @@ public class Hero
 
     public int TotalProgress
     {
-        get { return def.Prices[Level].Amount; }
-    }
-
-    public int CurrentTimeBonus
-    {
-        get { return def.TimeBonuses[Level]; }
+        get
+        {
+            var price = def.Levels[Level].Prices.Find(pair => pair.Currency == CardCurrencyDef.Name);
+            
+            return price == null ? 0 : price.Amount;
+        }
     }
     
-    public int NextTimeBonus
+    public int Price
+    {
+        get
+        {
+            var price = def.Levels[Level].Prices.Find(pair => pair.Currency == Currency.Coins.Name);
+            
+            return price == null ? 0 : price.Amount;
+        }
+    }
+
+    public int CurrentAbilityValue
+    {
+        get { return def.Levels[Level].Abilities[0].Value; }
+    }
+    
+    public int NextAbilityValue
     {
         get
         {
             var level = Level;
-            return level == def.TimeBonuses.Count - 1 ? 0 : def.TimeBonuses[level + 1];;
+            return level == def.Levels.Count - 1 ? 0 : def.Levels[level + 1].Abilities[0].Value;
         }
     }
     
     public bool LevelUp()
     {
-        var price = def.Prices[Level];
+        var prices = def.Levels[Level].Prices;
+        var currentPrices = new List<Price>();
+
+        foreach (var price in prices)
+        {
+            currentPrices.Add(new Price{Currency = price.Currency, DefaultPriceAmount = price.Amount});
+        }
+        
         
         var shopItem = new ShopItem
         {
             Uid = string.Format("purchase.test.{0}.10", LevelCurrencyDef.Name), 
             ItemUid = LevelCurrencyDef.Name, 
             Amount = 1,
-            CurrentPrices = new List<Price>
-            {
-                new Price{Currency = price.Currency, DefaultPriceAmount = price.Amount}
-            }
+            CurrentPrices = currentPrices
         };
 
         var isSuccess = false;
