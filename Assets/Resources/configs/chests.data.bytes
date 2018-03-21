@@ -6,9 +6,8 @@
       "Currency": "Crystals",
       "Amount": 5
     },
-    "Rewards": 
-    {
-      "1" :
+    "Rewards":
+    [
       [
         {
           "Currency": "PieceA1",
@@ -27,7 +26,6 @@
           "Amount": 5
         }
       ],
-      "2" :
       [
         {
           "Currency": "PieceA2",
@@ -46,7 +44,6 @@
           "Amount": 5
         }
       ],
-      "3" :
       [
         {
           "Currency": "PieceA3",
@@ -65,7 +62,6 @@
           "Amount": 7
         }
       ],
-      "4" :
       [
         {
           "Currency": "PieceA4",
@@ -84,7 +80,6 @@
           "Amount": 10
         }
       ],
-      "5" :
       [
         {
           "Currency": "PieceA5",
@@ -103,7 +98,7 @@
           "Amount": 12
         }
       ]
-    }
+    ]
   },
   {
     "Uid": "Rare",
@@ -113,8 +108,7 @@
       "Amount": 10
     },
     "Rewards":
-    {
-      "1":
+    [
       [
         {
           "Currency": "PieceA2",
@@ -133,7 +127,6 @@
           "Amount": 7
         }
       ],
-      "2":
       [
         {
           "Currency": "PieceA3",
@@ -152,7 +145,6 @@
           "Amount": 7
         }
       ],
-      "3":
       [
         {
           "Currency": "PieceA4",
@@ -171,7 +163,6 @@
           "Amount": 10
         }
       ],
-      "4":
       [
         {
           "Currency": "PieceA5",
@@ -190,7 +181,6 @@
           "Amount": 12
         }
       ],
-      "5":
       [
         {
           "Currency": "PieceA6",
@@ -209,8 +199,7 @@
           "Amount": 15
         }
       ]
-      
-    }
+    ]
   },
   {
     "Uid": "Epic",
@@ -219,9 +208,8 @@
       "Currency": "Crystals",
       "Amount": 25
     },
-    "Rewards": 
-    {
-      "1":
+    "Rewards":
+    [
       [
         {
           "Currency": "PieceA3",
@@ -240,7 +228,6 @@
           "Amount": 10
         }
       ],
-      "2":
       [
         {
           "Currency": "PieceA4",
@@ -259,7 +246,6 @@
           "Amount": 10
         }
       ],
-      "3":
       [
         {
           "Currency": "PieceA5",
@@ -278,7 +264,6 @@
           "Amount": 12
         }
       ],
-      "4":
       [
         {
           "Currency": "PieceA6",
@@ -297,7 +282,6 @@
           "Amount": 15
         }
       ],
-      "5":
       [
         {
           "Currency": "PieceA7",
@@ -316,6 +300,6 @@
           "Amount": 20
         }
       ]
-    }
+    ]
   }
 ]

@@ -57,15 +57,19 @@ public class UIChestRewardWindowView : UIGenericWindowView
 
         var reward = windowModel.GetReward();
         
+        Debug.LogError(string.Format("c: {0}, a: {1}", reward.Currency, reward.Amount));
+        
         var hero = GameDataService.Current.HeroesManager.GetHeroByCurrency(reward.Currency);
 
         if (hero != null)
         {
             cardHeroName.Text = hero.Def.Uid;
             heroAmountLabel.Text = "x" + reward.Amount;
-        
-            heroProgressLabel.Text = string.Format("{0}/{1}", reward.Amount, hero.TotalProgress);
-            progress.sizeDelta = new Vector2(Mathf.Clamp(150*(reward.Amount/(float)hero.TotalProgress), 0, 150), progress.sizeDelta.y);
+
+            var current = hero.CurrentProgress + reward.Amount;
+            
+            heroProgressLabel.Text = string.Format("{0}/{1}", current, hero.TotalProgress);
+            progress.sizeDelta = new Vector2(Mathf.Clamp(150*(current/(float)hero.TotalProgress), 0, 150), progress.sizeDelta.y);
             iconHero.sprite = IconService.Current.GetSpriteById("face_" + hero.Def.Uid);
             cardAnchors[0].gameObject.SetActive(true);
             return;
@@ -95,8 +99,6 @@ public class UIChestRewardWindowView : UIGenericWindowView
         for (var i = 0; i < cardAnchors.Count; i++)
         {
             var anchor = cardAnchors[i];
-            
-            if(anchor.gameObject.activeSelf == false) continue;
             
             var position = new Vector2(0, 130f);
             
@@ -129,9 +131,9 @@ public class UIChestRewardWindowView : UIGenericWindowView
         var reward = windowModel.GetReward();
         var board = BoardService.Current.GetBoardById(0);
         
-        var hero = GameDataService.Current.HeroesManager.GetHeroByCurrency(reward.Currency);
+        var hero = GameDataService.Current.HeroesManager.GetHero("Robin");
         
-        if (reward.Currency != Currency.Coins.Name && hero == null)
+        if (reward.Currency != Currency.Coins.Name && reward.Currency != hero.CardCurrencyDef.Name)
         {
             var pieces = new List<int>();
 

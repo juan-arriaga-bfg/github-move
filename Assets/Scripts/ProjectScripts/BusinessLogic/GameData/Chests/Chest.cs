@@ -26,9 +26,9 @@ public class Chest
 
         Rewards = new List<List<CurrencyPair>>();
 
-        foreach (var pair in def.Rewards)
+        for (int i = 0; i < def.Rewards.Count; i++)
         {
-            Rewards.Add(InitReward(pair.Key));
+            Rewards.Add(InitReward(i));
         }
     }
     
