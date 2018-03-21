@@ -67,6 +67,10 @@ public class ElementsResourcesBuilder
             {PieceType.Tavern7.Id, R.Tavern7Piece},
             {PieceType.Tavern8.Id, R.Tavern8Piece},
             {PieceType.Tavern9.Id, R.Tavern9Piece},
+            
+            {PieceType.Chest1.Id, R.Chest1Piece},
+            {PieceType.Chest2.Id, R.Chest2Piece},
+            {PieceType.Chest3.Id, R.Chest3Piece},
 
             {-1000, R.HitboxDamageView},
             {-1100, R.AddResourceView}

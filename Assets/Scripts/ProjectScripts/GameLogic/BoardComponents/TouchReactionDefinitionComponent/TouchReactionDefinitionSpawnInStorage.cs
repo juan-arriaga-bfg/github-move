@@ -8,10 +8,9 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
 
         if (storage == null) return false;
 
-        int id;
         int amount;
 
-        if (storage.Scatter(out id, out amount) == false)
+        if (storage.Scatter(out amount) == false)
         {
             return false;
         }
@@ -20,7 +19,7 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
 
         for (int i = 0; i < amount; i++)
         {
-            pieces.Add(id);
+            pieces.Add(storage.SpawnPiece);
         }
         
         piece.Context.ActionExecutor.AddAction(new SpawnPiecesAction()

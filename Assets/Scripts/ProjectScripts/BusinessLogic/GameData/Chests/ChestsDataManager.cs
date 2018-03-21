@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ChestsDataManager : IDataLoader<List<ChestDef>>
@@ -49,5 +50,17 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
     public ChestDef GetChest(ChestType type)
     {
         return Chests.Find(def => def.GetChestType() == type);
+    }
+
+    public ChestDef GetChest(int pieceType)
+    {
+        foreach (ChestType chest in Enum.GetValues(typeof(ChestType)))
+        {
+            if(PieceType.Parse(chest.ToString()) != pieceType) continue;
+            
+            return GetChest(chest);
+        }
+        
+        return null;
     }
 }

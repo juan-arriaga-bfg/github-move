@@ -35,6 +35,10 @@ public static partial class PieceType
         
         RegisterType(Gbox1);
         
+        RegisterType(Chest1);
+        RegisterType(Chest2);
+        RegisterType(Chest3);
+        
         RegisterType(Castle1);
         RegisterType(Castle2);
         RegisterType(Castle3);
@@ -93,6 +97,10 @@ public static partial class PieceType
     public readonly static PieceTypeDef H2 = new PieceTypeDef{Id = 801, Abbreviations = new List<string>{ "H2" }};
     
     public readonly static PieceTypeDef Gbox1 = new PieceTypeDef{Id = 1000, Abbreviations = new List<string>{ "GBOX1" }};
+    
+    public readonly static PieceTypeDef Chest1 = new PieceTypeDef{Id = 1001, Abbreviations = new List<string>{ "ChestCommon", "Chest1", "Common" }};
+    public readonly static PieceTypeDef Chest2 = new PieceTypeDef{Id = 1002, Abbreviations = new List<string>{ "ChestRare", "Chest2", "Rare" }};
+    public readonly static PieceTypeDef Chest3 = new PieceTypeDef{Id = 1003, Abbreviations = new List<string>{ "ChestEpic", "Chest3", "Epic" }};
     
     public readonly static PieceTypeDef Castle1 = new PieceTypeDef{Id = 1100, Abbreviations = new List<string>{ "Castle1" }};
     public readonly static PieceTypeDef Castle2 = new PieceTypeDef{Id = 1101, Abbreviations = new List<string>{ "Castle2" }};

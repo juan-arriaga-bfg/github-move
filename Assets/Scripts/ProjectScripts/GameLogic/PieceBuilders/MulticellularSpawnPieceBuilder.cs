@@ -5,11 +5,15 @@
         var piece = base.Build(pieceType, context);
         var def = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(pieceType);
 
+        piece.RegisterComponent(new TimerComponent
+        {
+            Delay = def.Delay
+        });
+        
         piece.RegisterComponent(new StorageComponent
         {
             SpawnPiece = def.SpawnPieceType,
-            Capacity = def.SpawnCapacity,
-            Delay = def.Delay
+            Capacity = def.SpawnCapacity
         });
         
         piece.RegisterComponent(new TouchReactionComponent()

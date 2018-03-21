@@ -26,7 +26,9 @@ public class ChangeStorageStateView : IWBaseMonoBehaviour
 
             icon.sprite = IconService.Current.GetSpriteById(PieceType.Parse(storage.SpawnPiece));
         }
+
+        var isShow = storage.Filling / (float) storage.Capacity > 0.2;
         
-        iconGo.SetActive(storage.Filling > 2);
+        iconGo.SetActive(isShow);
     }
 }

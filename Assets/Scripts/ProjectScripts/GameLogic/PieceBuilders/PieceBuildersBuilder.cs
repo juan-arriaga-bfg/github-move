@@ -18,6 +18,7 @@ public class PieceBuildersBuilder
         dict = AddHeroPiece(dict);
         dict = AddCastlePiece(dict);
         dict = AddTavernPiece(dict);
+        dict = AddChestPiece(dict);
 
         return dict;
     }
@@ -77,7 +78,9 @@ public class PieceBuildersBuilder
         {
             Mask = new List<BoardPosition>
             {
+                BoardPosition.Zero().Up,
                 BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
             }
         });
         
@@ -85,7 +88,9 @@ public class PieceBuildersBuilder
         {
             Mask = new List<BoardPosition>
             {
+                BoardPosition.Zero().Up,
                 BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
             }
         });
         
@@ -93,7 +98,9 @@ public class PieceBuildersBuilder
         {
             Mask = new List<BoardPosition>
             {
+                BoardPosition.Zero().Up,
                 BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
             }
         });
         
@@ -101,7 +108,9 @@ public class PieceBuildersBuilder
         {
             Mask = new List<BoardPosition>
             {
+                BoardPosition.Zero().Up,
                 BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
             }
         });
         
@@ -109,7 +118,9 @@ public class PieceBuildersBuilder
         {
             Mask = new List<BoardPosition>
             {
+                BoardPosition.Zero().Up,
                 BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
             }
         });
         
@@ -117,7 +128,9 @@ public class PieceBuildersBuilder
         {
             Mask = new List<BoardPosition>
             {
+                BoardPosition.Zero().Up,
                 BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
             }
         });
         
@@ -125,7 +138,9 @@ public class PieceBuildersBuilder
         {
             Mask = new List<BoardPosition>
             {
+                BoardPosition.Zero().Up,
                 BoardPosition.Zero().Right,
+                BoardPosition.Zero().Right.Up,
             }
         });
         
@@ -172,7 +187,7 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddCastlePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict.Add(PieceType.Castle1.Id, new UpgradePieceBuilder
+        dict.Add(PieceType.Castle1.Id, new MulticellularSpawnPieceBuilder
         {
             Mask = new List<BoardPosition>
             {
@@ -356,6 +371,15 @@ public class PieceBuildersBuilder
                 BoardPosition.Zero().Right.Up,
             }
         });
+        
+        return dict;
+    }
+    
+    private Dictionary<int, IPieceBuilder> AddChestPiece(Dictionary<int, IPieceBuilder> dict)
+    {
+        dict.Add(PieceType.Chest1.Id, new ChestPieceBuilder());
+        dict.Add(PieceType.Chest2.Id, new ChestPieceBuilder());
+        dict.Add(PieceType.Chest3.Id, new ChestPieceBuilder());
         
         return dict;
     }

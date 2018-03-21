@@ -56,4 +56,8 @@ public class R
      public const string Tavern9Piece = "Tavern9Piece";
      public const string AddResourceView = "AddResourceView";
      public const string ChangeStorageStateView = "ChangeStorageStateView";
+     public const string Chest1Piece = "Chest1Piece";
+     public const string Chest2Piece = "Chest2Piece";
+     public const string Chest3Piece = "Chest3Piece";
+     public const string BoardTimerView = "BoardTimerView";
 }

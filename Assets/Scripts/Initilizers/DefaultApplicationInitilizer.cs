@@ -63,7 +63,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             Currency.RegisterCurrency(Currency.JohnCard);
             
             Currency.RegisterCurrency(Currency.Enemy);
-            Currency.RegisterCurrency(Currency.Chest);
+            
             Currency.RegisterCurrency(Currency.PieceA1);
             Currency.RegisterCurrency(Currency.PieceA2);
             Currency.RegisterCurrency(Currency.PieceA3);
@@ -73,11 +73,14 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             
             Currency.RegisterCurrency(Currency.LevelRobin);
             Currency.RegisterCurrency(Currency.LevelJohn);
+            Currency.RegisterCurrency(Currency.LevelCastle);
+            Currency.RegisterCurrency(Currency.LevelTavern);
             
             Currency.RegisterCurrency(Currency.Quest);
             
-            Currency.RegisterCurrency(Currency.LevelCastle);
-            Currency.RegisterCurrency(Currency.LevelTavern);
+            Currency.RegisterCurrency(Currency.ChestCommon);
+            Currency.RegisterCurrency(Currency.ChestRare);
+            Currency.RegisterCurrency(Currency.ChestEpic);
         });
         
         ShopService.Instance.SetManager(shopManager);

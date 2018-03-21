@@ -90,8 +90,8 @@ public class UIChestWindowView : UIGenericPopupWindowView
         
         var shopItem = new ShopItem
         {
-            Uid = string.Format("purchase.test.{0}.10", Currency.Chest.Name), 
-            ItemUid = Currency.Chest.Name, 
+            Uid = string.Format("purchase.test.{0}.10", Currency.ChestCommon.Name), 
+            ItemUid = Currency.ChestCommon.Name, 
             Amount = 1,
             CurrentPrices = new List<Price>
             {

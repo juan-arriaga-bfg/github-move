@@ -3,6 +3,8 @@
 public class PieceStorageView : MonoBehaviour
 {
     [SerializeField] private Transform anchorView;
+    [SerializeField] private bool isShowTimer;
+    [SerializeField] private Vector2 timerViewOfset;
     
     private void Awake()
     {
@@ -12,16 +14,29 @@ public class PieceStorageView : MonoBehaviour
         {
             DestroyImmediate(view.gameObject);
         }
-
-        var go = (GameObject)Instantiate(ContentService.Instance.Manager.GetObjectByName(R.ChangeStorageStateView));
-        var stateView = go.GetComponent<ChangeStorageStateView>();
-
-        stateView.CachedTransform.SetParent(anchorView);
-        stateView.CachedTransform.localPosition = Vector3.zero;
-        stateView.CachedTransform.localRotation = Quaternion.identity;
-        stateView.CachedTransform.localScale = Vector3.one;
+        
+        var stateView = CreateObject<ChangeStorageStateView>(R.ChangeStorageStateView, Vector3.zero);
         stateView.Init(context);
+
+        if (isShowTimer)
+        {
+            var timer = CreateObject<BoardTimerView>(R.BoardTimerView, timerViewOfset);
+            timer.Init(context);
+        }
 		
         context.ClearCacheLayers();
+    }
+
+    private T CreateObject<T>(string prefab, Vector2 ofset) where T : IWBaseMonoBehaviour
+    {
+        var go = (GameObject)Instantiate(ContentService.Instance.Manager.GetObjectByName(prefab));
+        var view = go.GetComponent<T>();
+
+        view.CachedTransform.SetParent(anchorView);
+        view.CachedTransform.localPosition = ofset;
+        view.CachedTransform.localRotation = Quaternion.identity;
+        view.CachedTransform.localScale = Vector3.one;
+        
+        return view;
     }
 }
