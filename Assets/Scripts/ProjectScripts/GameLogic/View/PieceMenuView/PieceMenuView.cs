@@ -13,6 +13,13 @@ public class PieceMenuView : MonoBehaviour, IBoardEventListener
 
     private List<Transform> buttons;
     
+    private void Awake()
+    {
+        var context = GetComponent<PieceBoardElementView>();
+        
+        context.ClearCacheLayers();
+    }
+    
     private void OnEnable()
     {
         if (BoardService.Current.GetBoardById(0) == null) return;

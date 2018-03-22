@@ -60,6 +60,11 @@ public class Hero
         }
     }
 
+    public AbilityType CurrentAbility
+    {
+        get { return def.Levels[Level].Abilities[0].Ability; }
+    }
+
     public int CurrentAbilityValue
     {
         get { return def.Levels[Level].Abilities[0].Value; }

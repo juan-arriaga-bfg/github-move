@@ -15,4 +15,6 @@
     public const string ChestRewardWindow = "ChestRewardWindow";
     
     public const string QuestStartWindow = "QuestStartWindow";
+    
+    public const string TavernWindow = "TavernWindow";
 }

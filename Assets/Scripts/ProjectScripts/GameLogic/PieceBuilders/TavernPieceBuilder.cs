@@ -6,7 +6,7 @@
 		
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu()
-				.RegisterDefinition(new TouchReactionDefinitionOpenCharacterWindow(), "face_Robin")
+				.RegisterDefinition(new TouchReactionDefinitionOpenTavernWindow(), "face_Robin")
 				.RegisterDefinition(new TouchReactionDefinitionUpgrade(), "arrow"))
 			.RegisterComponent(new TouchReactionConditionComponent()));
         
