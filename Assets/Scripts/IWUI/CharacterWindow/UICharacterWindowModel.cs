@@ -20,14 +20,19 @@ public class UICharacterWindowModel : IWWindowModel
     
     public string Title
     {
-        get { return string.Format("{0} Character:", HeroName); }
+        get { return string.Format("{0} Character:", Hero.Def.Uid); }
     }
     
     public string Message
     {
+        get { return "Next level:"; }
+    }
+
+    public string AbilityValue
+    {
         get
         {
-            return string.Format("Quest time: <color=#00FF00>-{0}</color> min", Hero.CurrentAbilityValue);
+            return string.Format("{0} <color=#00FF00>+{1}</color>", Hero.CurrentAbilityValue, Hero.NextAbilityValue - Hero.CurrentAbilityValue);
         }
     }
 
@@ -48,20 +53,17 @@ public class UICharacterWindowModel : IWWindowModel
     
     public string LevelText
     {
-        get { return string.Format("Level {0}", Hero.Level + 1); }
+        get { return string.Format("<size=45>{0}</size> <size=35>Lvl</size>", Hero.Level + 1); }
     }
     
-    public string HeroName
-    {
-        get { return Hero.Def.Uid; }
-    }
-
     public Sprite IconSprite
     {
-        get
-        {
-            return IconService.Current.GetSpriteById("face_" + HeroName);
-        }
+        get { return IconService.Current.GetSpriteById("face_" + Hero.Def.Uid); }
+    }
+    
+    public Sprite SkillSprite
+    {
+        get { return IconService.Current.GetSpriteById(Hero.CurrentAbility.ToString()); }
     }
     
     public string CardTupeText

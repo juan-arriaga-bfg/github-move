@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,13 +11,15 @@ public class UIQuestStartWindowView : UIGenericPopupWindowView
     
     [SerializeField] private Image chest;
     [SerializeField] private Image cap;
-
-    [SerializeField] private List<UiQuestStartToggle> toggles;
     
     [SerializeField] private Button StartButton;
+    
+    [SerializeField] private GameObject itemTemplate;
 
     private bool InAdventure;
 
+    private List<UiQuestStartItem> items;
+    
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -55,9 +58,9 @@ public class UIQuestStartWindowView : UIGenericPopupWindowView
         
         if(InAdventure) return;
 
-        foreach (var obj in toggles)
+        foreach (var item in items)
         {
-            obj.HeroInHome();
+            item.HeroGoHome();
         }
     }
 
@@ -99,24 +102,37 @@ public class UIQuestStartWindowView : UIGenericPopupWindowView
     private void UpdateItems(UIQuestStartWindowModel model)
     {
         var conditions = model.GetConditionHeroes();
-        
-        foreach (var toggle in toggles)
+
+        if (items == null)
         {
-            var isActive = conditions.Find(hero => hero.Hero == toggle.heroName) != null;
+            for (var i = 1; i < conditions.Count; i++)
+            {
+                var go = Instantiate(itemTemplate, itemTemplate.transform.parent);
+            }
+
+            items = itemTemplate.transform.parent.GetComponentsInChildren<UiQuestStartItem>().ToList();
+        }
+        
+        for (var i = 0; i < items.Count; i++)
+        {
+            if (i >= conditions.Count)
+            {
+                items[i].gameObject.SetActive(false);
+                continue;
+            }
             
-            toggle.Init(model.Obstacle);
-            toggle.gameObject.SetActive(isActive);
+            items[i].gameObject.SetActive(true);
+            items[i].Init(model.Obstacle, conditions[i].HeroAbility);
         }
         
         StartButton.interactable = true;
         
-        foreach (var obj in toggles)
+        foreach (var item in items)
         {
-            if (obj.InAdventure() == false)
-            {
-                StartButton.interactable = false;
-                break;
-            }
+            if (item.InAdventure()) continue;
+            
+            StartButton.interactable = false;
+            return;
         }
     }
 }

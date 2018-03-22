@@ -1171,7 +1171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 55
+    m_Left: 45
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
@@ -2338,7 +2338,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: -95
+    m_Top: -200
     m_Bottom: 0
   m_ChildAlignment: 4
   m_Spacing: 0
@@ -3258,7 +3258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3637,6 +3637,8 @@ MonoBehaviour:
   message: {fileID: 114378566598348450}
   viewAnchor: {fileID: 224752991131886492}
   subTitle: {fileID: 114241192008329496}
+  labelAbility: {fileID: 114423736968542562}
+  abilityIcon: {fileID: 114196371809322564}
   heroParent: {fileID: 224146880262346918}
   heroTemplate: {fileID: 1608618598245190}
 --- !u!114 &114790870778108486
@@ -3692,7 +3694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3898,7 +3900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameLabel: {fileID: 114790870778108486}
   levelLabel: {fileID: 114687684739090086}
-  mesageLabel: {fileID: 114230065388743258}
+  messageLabel: {fileID: 114230065388743258}
   progressLabel: {fileID: 114305162057989726}
   skillLabel: {fileID: 114486862685860646}
   cardLabel: {fileID: 114542800476022428}
@@ -4566,8 +4568,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0000038146973, y: -39.999992}
-  m_SizeDelta: {x: -190, y: -380}
+  m_AnchoredPosition: {x: -0.0000038146973, y: -77.5}
+  m_SizeDelta: {x: -190, y: -255}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224152735925574652
 RectTransform:
@@ -4734,7 +4736,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -60}
+  m_AnchoredPosition: {x: 0, y: -170}
   m_SizeDelta: {x: 300, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224326943268835648
@@ -5136,7 +5138,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 150, y: 0}
+  m_AnchoredPosition: {x: 140, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224619523437486860
@@ -5210,7 +5212,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -62.8}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224745040564474222
@@ -5252,7 +5254,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -15}
-  m_SizeDelta: {x: 1470, y: 960}
+  m_SizeDelta: {x: 1470, y: 970}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224772165059391980
 RectTransform:

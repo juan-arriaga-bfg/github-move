@@ -65,7 +65,7 @@ public class ChangeObstacleStateView : IWBaseMonoBehaviour
         if (condition == null) return;
 
         var currentSeconds = (float)(DateTime.Now - condition.StartTime).TotalSeconds;
-        var targetSeconds = condition.Delay - condition.Bonus;
+        var targetSeconds = condition.Delay;
         
         if (currentSeconds > targetSeconds)
         {

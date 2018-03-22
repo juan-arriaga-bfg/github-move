@@ -36,7 +36,7 @@ public class UIQuestStartWindowModel : IWWindowModel
             
             for (var i = 0; i < conditionsHero.Count; i++)
             {
-                var hero = GameDataService.Current.HeroesManager.GetHero(conditionsHero[i].Hero);
+                var hero = GameDataService.Current.HeroesManager.GetHero(conditionsHero[i].HeroAbility.Ability);
                 
                 if(hero.InAdventure != Obstacle.GetUid()) continue;
 

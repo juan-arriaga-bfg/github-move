@@ -8,7 +8,7 @@
 
 		if (liveComponent == null) return false;
 
-		var hero = GameDataService.Current.HeroesManager.GetHero("Robin");
+//		var hero = GameDataService.Current.HeroesManager.GetHero("Robin");
 		
 //		liveComponent.HitPoints -= hero.Def.TimeBonuses[hero.Level];
 		

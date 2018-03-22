@@ -3,7 +3,6 @@
 public class ObstacleConditionDelay : IObstacleCondition
 {
     public int Delay { get; set; }
-    public int Bonus { get; set; }
 
     public DateTime StartTime;
 
@@ -19,6 +18,6 @@ public class ObstacleConditionDelay : IObstacleCondition
     {
         if (IsInitialized == false) return false;
         
-        return (DateTime.Now - StartTime).TotalSeconds >= Delay - Bonus;
+        return (DateTime.Now - StartTime).TotalSeconds >= Delay;
     }
 }

@@ -1,6 +1,6 @@
 ﻿public class ObstacleConditionHero : IObstacleCondition
 {
-    public string Hero { get; set; }
+    public HeroAbility HeroAbility { get; set; }
     
     public bool IsInitialized { get; set; }
 

@@ -3,14 +3,15 @@ using UnityEngine.UI;
 
 public class UICharacterWindowView : UIGenericPopupWindowView 
 {
+    [SerializeField] private NSText abilityLabel;
     [SerializeField] private NSText levelLabel;
-    [SerializeField] private NSText buttonLabel;
-    [SerializeField] private NSText progressLabel;
-    [SerializeField] private NSText cardName;
     [SerializeField] private NSText cardLabel;
+    [SerializeField] private NSText progressLabel;
+    [SerializeField] private NSText buttonLabel;
     
     [SerializeField] private Image bigIcon;
     [SerializeField] private Image smallIcon;
+    [SerializeField] private Image skillIcon;
 
     [SerializeField] private RectTransform progress;
     [SerializeField] private Button button;
@@ -24,20 +25,18 @@ public class UICharacterWindowView : UIGenericPopupWindowView
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
 
-        buttonLabel.Text = windowModel.ButtonText;
-        
+        abilityLabel.Text = windowModel.AbilityValue;
         levelLabel.Text = windowModel.LevelText;
-        
-        progressLabel.Text = windowModel.ProgressText;
-        
-        cardName.Text = windowModel.HeroName;
         cardLabel.Text = windowModel.CardTupeText;
-        
-        progress.sizeDelta = new Vector2(windowModel.ProgressLenght, progress.sizeDelta.y);
+        progressLabel.Text = windowModel.ProgressText;
+        buttonLabel.Text = windowModel.ButtonText;
         
         bigIcon.sprite = windowModel.IconSprite;
         smallIcon.sprite = windowModel.IconSprite;
-
+        skillIcon.sprite = windowModel.SkillSprite;
+        
+        progress.sizeDelta = new Vector2(windowModel.ProgressLenght, progress.sizeDelta.y);
+        
         button.interactable = windowModel.IsDone;
     }
 

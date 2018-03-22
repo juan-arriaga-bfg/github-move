@@ -1,10 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI;
 
 public class UITavernWindowView : UIGenericPopupWindowView 
 {
     [SerializeField] private NSText subTitle;
+    [SerializeField] private NSText labelAbility;
+    
+    [SerializeField] private Image abilityIcon;
     
     [SerializeField] private Transform heroParent;
     [SerializeField] private GameObject heroTemplate;
@@ -21,6 +25,20 @@ public class UITavernWindowView : UIGenericPopupWindowView
         SetMessage(windowModel.Message);
         
         subTitle.Text = windowModel.SubTitle;
+
+        if (windowModel.CurrentAbility == null)
+        {
+            labelAbility.gameObject.SetActive(false);
+            abilityIcon.gameObject.SetActive(false);
+        }
+        else
+        {
+            labelAbility.gameObject.SetActive(true);
+            abilityIcon.gameObject.SetActive(true);
+
+            labelAbility.Text = windowModel.CurrentAbility.Value.ToString();
+            abilityIcon.sprite = IconService.Current.GetSpriteById(windowModel.CurrentAbility.Ability.ToString());
+        }
         
         UpdateItems(windowModel);
     }
@@ -45,7 +63,7 @@ public class UITavernWindowView : UIGenericPopupWindowView
 
         if (items == null)
         {
-            for (var i = 1; i < heroes.Count; i++)
+            for (var i = 1; i < heroes.Count + 2; i++)
             {
                 CreateItem(heroParent, heroTemplate);
             }
@@ -53,9 +71,11 @@ public class UITavernWindowView : UIGenericPopupWindowView
             items = heroParent.GetComponentsInChildren<UiHeroItem>().ToList();
         }
         
-        for (var i = 0; i < heroes.Count; i++)
+        for (var i = 0; i < items.Count; i++)
         {
-            items[i].Init(heroes[i], model.Obstacle);
+            var hero = i < heroes.Count ? heroes[i] : null;
+            
+            items[i].Init(hero, model.Obstacle, model.CurrentAbility);
         }
     }
 

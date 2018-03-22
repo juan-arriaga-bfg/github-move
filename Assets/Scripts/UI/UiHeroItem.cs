@@ -6,7 +6,7 @@ public class UiHeroItem : MonoBehaviour
 {
     [SerializeField] private NSText nameLabel;
     [SerializeField] private NSText levelLabel;
-    [SerializeField] private NSText mesageLabel;
+    [SerializeField] private NSText messageLabel;
     [SerializeField] private NSText progressLabel;
     [SerializeField] private NSText skillLabel;
     [SerializeField] private NSText cardLabel;
@@ -24,47 +24,51 @@ public class UiHeroItem : MonoBehaviour
 
     private Hero hero;
     private Obstacle obstacle;
+    private HeroAbility ability;
 
     private bool isInit;
+    private bool isReady;
     
-    public void Init(Hero hero, Obstacle obstacle)
+    public void Init(Hero hero, Obstacle obstacle, HeroAbility ability)
     {
         this.hero = hero;
         this.obstacle = obstacle;
-
+        this.ability = ability;
+        
         isInit = true;
-
-        var isWaiting = hero.CurrentProgress >= hero.TotalProgress;
-        
-        var message = hero.InAdventure == -1 ? (isWaiting ? "Ready" : "Skill too Low") : "In Mission";
-        var color = hero.InAdventure == -1 && isWaiting ? "00FF00" : "FF0000";
-        
-        var iconHero = IconService.Current.GetSpriteById("face_" + hero.Def.Uid);
-
-        nameLabel.Text = hero.Def.Uid;
-        mesageLabel.Text = string.Format("<color=#{0}>{1}</color>", color, message);
-        levelLabel.Text = string.Format("<size=45>{0}</size> <size=35>Lvl</size>", hero.Level + 1);
-        skillLabel.Text = string.Format("<color=#{0}>{1}</color>", color, hero.CurrentAbilityValue);
         
         cardLabel.Text = string.Format("<color=#3D7AA4>{0}</color>", CharacterWindowCardTupe.Rare);
+
+        if (hero == null)
+        {
+            InitFake();
+            skillIcon.gameObject.SetActive(false);
+            return;
+        }
         
-        progressLabel.Text = string.Format("{0}/{1}", hero.CurrentProgress, hero.TotalProgress);
-        progress.sizeDelta = new Vector2(Mathf.Clamp(190 * hero.CurrentProgress / (float) hero.TotalProgress, 0, 190), progress.sizeDelta.y);
+        var iconHero = IconService.Current.GetSpriteById("face_" + hero.Def.Uid);
         
         heroIcon.sprite = iconHero;
         heroSmallIcon.sprite = iconHero;
         
         skillIcon.sprite = IconService.Current.GetSpriteById(hero.CurrentAbility.ToString());
         
-        progressGo.SetActive(!isWaiting);
-        buttonGo.SetActive(isWaiting);
-
-        if (obstacle == null || hero.InAdventure != -1 && hero.InAdventure != obstacle.GetUid())
-        {
-            toggle.interactable = false;
-        }
+        nameLabel.Text = hero.Def.Uid;
+        levelLabel.Text = string.Format("<size=45>{0}</size> <size=35>Lvl</size>", hero.Level + 1);
         
-        toggle.isOn = obstacle != null && hero.InAdventure == obstacle.GetUid();
+        progressLabel.Text = string.Format("{0}/{1}", hero.CurrentProgress, hero.TotalProgress);
+        progress.sizeDelta = new Vector2(Mathf.Clamp(190 * hero.CurrentProgress / (float) hero.TotalProgress, 0, 190), progress.sizeDelta.y);
+        
+        skillIcon.gameObject.SetActive(true);
+
+        if (obstacle == null)
+        {
+            InitForTavern();
+        }
+        else
+        {
+            InitForQuest();
+        }
         
         isInit = false;
     }
@@ -83,5 +87,76 @@ public class UiHeroItem : MonoBehaviour
         if(isInit) return;
         
         hero.InAdventure = toggle.isOn ? obstacle.GetUid() : -1;
+        InitForQuest();
+        if(toggle.isOn) UIService.Get.CloseWindow(UIWindowType.TavernWindow, true);
+    }
+    
+    private void InitForTavern()
+    {
+        var inAdventure = hero.InAdventure == -1;
+        
+        var message = inAdventure ? "Ready" : "In Mission";
+        var color = inAdventure ? "00FF00" : "FF0000";
+        
+        messageLabel.Text = string.Format("<color=#{0}>{1}</color>", color, message);
+        skillLabel.Text = string.Format("<color=#{0}>{1}</color>", color, hero.CurrentAbilityValue);
+        
+        progressGo.SetActive(true);
+        buttonGo.SetActive(true);
+
+        toggle.interactable = false;
+        toggle.isOn = false;
+    }
+
+    private void InitForQuest()
+    {
+        var message = "";
+        var color = "";
+        var skillMessage = "";
+        
+        buttonGo.SetActive(false);
+        progressGo.SetActive(true);
+        
+        if (ability.Ability == hero.CurrentAbility)
+        {
+            var isWaiting = hero.CurrentAbilityValue >= ability.Value;
+            
+            message = hero.InAdventure == -1 ? (isWaiting ? "Ready" : "Skill to Low") : "In Mission";
+            color = hero.InAdventure == -1 && isWaiting ? "00FF00" : "FF0000";
+            skillMessage = string.Format("{0}/{1}", hero.CurrentAbilityValue, ability.Value);
+            
+            toggle.interactable = true;
+            toggle.isOn = hero.InAdventure == obstacle.GetUid();
+        }
+        else
+        {
+            message = hero.InAdventure == -1 ? "Skill to Low" : "In Mission";
+            color = "FF0000";
+            skillMessage = hero.CurrentAbilityValue.ToString();
+            toggle.interactable = false;
+            toggle.isOn = false;
+        }
+        
+        messageLabel.Text = string.Format("<color=#{0}>{1}</color>", color, message);
+        skillLabel.Text = string.Format("<color=#{0}>{1}</color>", color, skillMessage);
+    }
+
+    private void InitFake()
+    {
+        nameLabel.Text = "";
+        levelLabel.Text = "";
+        messageLabel.Text = "Not Available";
+        progressLabel.Text = "";
+        skillLabel.Text = "";
+        
+        var iconHero = IconService.Current.GetSpriteById("face_Unknown");
+        
+        heroIcon.sprite = iconHero;
+        heroSmallIcon.sprite = iconHero;
+        
+        progressGo.SetActive(false);
+        buttonGo.SetActive(false);
+        
+        toggle.interactable = false;
     }
 }
