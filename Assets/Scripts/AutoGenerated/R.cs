@@ -13,7 +13,6 @@ public class R
      public const string O1Piece = "O1Piece";
      public const string C1Piece = "C1Piece";
      public const string M1Piece = "M1Piece";
-     public const string S1Piece = "S1Piece";
      public const string E1Piece = "E1Piece";
      public const string A5Piece = "A5Piece";
      public const string B5Piece = "B5Piece";
@@ -24,18 +23,10 @@ public class R
      public const string HitboxView = "HitboxView";
      public const string ReadyArrowView = "ReadyArrowView";
      public const string HitboxDamageView = "HitboxDamageView";
-     public const string H1Piece = "H1Piece";
      public const string GBox1Piece = "GBox1Piece";
      public const string ChangeObstacleStateView = "ChangeObstacleStateView";
-     public const string H2Piece = "H2Piece";
      public const string O2Piece = "O2Piece";
      public const string A7Piece = "A7Piece";
-     public const string S3Piece = "S3Piece";
-     public const string S2Piece = "S2Piece";
-     public const string S4Piece = "S4Piece";
-     public const string S5Piece = "S5Piece";
-     public const string S6Piece = "S6Piece";
-     public const string S7Piece = "S7Piece";
      public const string Castle1Piece = "Castle1Piece";
      public const string Castle2Piece = "Castle2Piece";
      public const string Castle3Piece = "Castle3Piece";
@@ -60,4 +51,12 @@ public class R
      public const string Chest2Piece = "Chest2Piece";
      public const string Chest3Piece = "Chest3Piece";
      public const string BoardTimerView = "BoardTimerView";
+     public const string BoardButtonView = "BoardButtonView";
+     public const string Sawmill1Piece = "Sawmill1Piece";
+     public const string Sawmill2Piece = "Sawmill2Piece";
+     public const string Sawmill3Piece = "Sawmill3Piece";
+     public const string Sawmill4Piece = "Sawmill4Piece";
+     public const string Sawmill5Piece = "Sawmill5Piece";
+     public const string Sawmill6Piece = "Sawmill6Piece";
+     public const string Sawmill7Piece = "Sawmill7Piece";
 }

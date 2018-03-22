@@ -26,10 +26,14 @@ public static partial class PieceType
         RegisterType(O2);
         
         RegisterType(M1);
-        RegisterType(S1);
         
-        RegisterType(H1);
-        RegisterType(H2);
+        RegisterType(Sawmill1);
+        RegisterType(Sawmill2);
+        RegisterType(Sawmill3);
+        RegisterType(Sawmill4);
+        RegisterType(Sawmill5);
+        RegisterType(Sawmill6);
+        RegisterType(Sawmill7);
         
         RegisterType(Gbox1);
         
@@ -81,16 +85,13 @@ public static partial class PieceType
     
     public readonly static PieceTypeDef M1 = new PieceTypeDef{Id = 600, Abbreviations = new List<string>{ "M1", "mine" }};
     
-    public readonly static PieceTypeDef S1 = new PieceTypeDef{Id = 700, Abbreviations = new List<string>{ "S1" }};
-    public readonly static PieceTypeDef S2 = new PieceTypeDef{Id = 701, Abbreviations = new List<string>{ "S2" }};
-    public readonly static PieceTypeDef S3 = new PieceTypeDef{Id = 702, Abbreviations = new List<string>{ "S3" }};
-    public readonly static PieceTypeDef S4 = new PieceTypeDef{Id = 703, Abbreviations = new List<string>{ "S4" }};
-    public readonly static PieceTypeDef S5 = new PieceTypeDef{Id = 704, Abbreviations = new List<string>{ "S5" }};
-    public readonly static PieceTypeDef S6 = new PieceTypeDef{Id = 705, Abbreviations = new List<string>{ "S6" }};
-    public readonly static PieceTypeDef S7 = new PieceTypeDef{Id = 706, Abbreviations = new List<string>{ "S7" }};
-    
-    public readonly static PieceTypeDef H1 = new PieceTypeDef{Id = 800, Abbreviations = new List<string>{ "H1" }};
-    public readonly static PieceTypeDef H2 = new PieceTypeDef{Id = 801, Abbreviations = new List<string>{ "H2" }};
+    public readonly static PieceTypeDef Sawmill1 = new PieceTypeDef{Id = 700, Abbreviations = new List<string>{ "Sawmill1" }};
+    public readonly static PieceTypeDef Sawmill2 = new PieceTypeDef{Id = 701, Abbreviations = new List<string>{ "Sawmill2" }};
+    public readonly static PieceTypeDef Sawmill3 = new PieceTypeDef{Id = 702, Abbreviations = new List<string>{ "Sawmill3" }};
+    public readonly static PieceTypeDef Sawmill4 = new PieceTypeDef{Id = 703, Abbreviations = new List<string>{ "Sawmill4" }};
+    public readonly static PieceTypeDef Sawmill5 = new PieceTypeDef{Id = 704, Abbreviations = new List<string>{ "Sawmill5" }};
+    public readonly static PieceTypeDef Sawmill6 = new PieceTypeDef{Id = 705, Abbreviations = new List<string>{ "Sawmill6" }};
+    public readonly static PieceTypeDef Sawmill7 = new PieceTypeDef{Id = 706, Abbreviations = new List<string>{ "Sawmill7" }};
     
     public readonly static PieceTypeDef Gbox1 = new PieceTypeDef{Id = 1000, Abbreviations = new List<string>{ "GBOX1" }};
     

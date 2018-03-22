@@ -17,7 +17,9 @@
         });
         
         piece.RegisterComponent(new TouchReactionComponent()
-            .RegisterComponent(new TouchReactionDefinitionSpawnInStorage())
+            .RegisterComponent(new TouchReactionDefinitionMenu()
+                .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage(), PieceType.Parse(def.SpawnPieceType))
+                .RegisterDefinition(new TouchReactionDefinitionUpgrade(), "arrow"))
             .RegisterComponent(new TouchReactionConditionComponent()));
         
         return piece;

@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 4542807987214320}
   - component: {fileID: 114243331302908096}
   - component: {fileID: 114915778010107768}
+  - component: {fileID: 114987664555431850}
   m_Layer: 0
   m_Name: Tavern5Piece
   m_TagString: Untagged
@@ -392,6 +393,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   touchRegions:
   - {fileID: 224620311117105546}
+--- !u!114 &114987664555431850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1924086398574114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a47b6d7608abd48418ab3344c5e092be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorView: {fileID: 4385028659145798}
 --- !u!114 &114997897857856936
 MonoBehaviour:
   m_ObjectHideFlags: 1

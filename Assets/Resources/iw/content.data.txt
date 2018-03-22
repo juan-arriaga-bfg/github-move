@@ -65,11 +65,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "S1Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/S1Piece",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "E1Piece",
     "ResourcePath": "Prefabs/Pieces/GenericPiece/E1Piece",
     "IsGenerateAutoName": true
@@ -120,11 +115,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "H1Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/H1Piece",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "GBox1Piece",
     "ResourcePath": "Prefabs/Pieces/GenericPiece/GBox1Piece",
     "IsGenerateAutoName": true
@@ -135,11 +125,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "H2Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/H2Piece",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "O2Piece",
     "ResourcePath": "Prefabs/Pieces/GenericPiece/O2Piece",
     "IsGenerateAutoName": true
@@ -147,36 +132,6 @@
   {
     "Uid": "A7Piece",
     "ResourcePath": "Prefabs/Pieces/GenericPiece/A7Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "S3Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/S3Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "S2Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/S2Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "S4Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/S4Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "S5Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/S5Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "S6Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/S6Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "S7Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/S7Piece",
     "IsGenerateAutoName": true
   },
   {
@@ -297,6 +252,46 @@
   {
     "Uid": "BoardTimerView",
     "ResourcePath": "Prefabs/BoardTimerView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BoardButtonView",
+    "ResourcePath": "Prefabs/BoardButtonView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sawmill1Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sawmill1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sawmill2Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sawmill2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sawmill3Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sawmill3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sawmill4Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sawmill4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sawmill5Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sawmill5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sawmill6Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sawmill6Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sawmill7Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sawmill7Piece",
     "IsGenerateAutoName": true
   }
 ]

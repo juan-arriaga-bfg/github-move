@@ -16,7 +16,7 @@ public class PieceTouchRegion : IWBaseMonoBehaviour, ITouchableListener
         cameraManipulator = GameObject.FindObjectOfType<CameraManipulator>();
     }
 
-    public bool IsTouchableAt(Vector2 pos)
+    public virtual bool IsTouchableAt(Vector2 pos)
     {
         for (int i = 0; i < touchRegions.Count; i++)
         {

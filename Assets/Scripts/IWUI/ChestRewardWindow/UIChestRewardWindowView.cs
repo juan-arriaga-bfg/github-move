@@ -57,8 +57,6 @@ public class UIChestRewardWindowView : UIGenericWindowView
 
         var reward = windowModel.GetReward();
         
-        Debug.LogError(string.Format("c: {0}, a: {1}", reward.Currency, reward.Amount));
-        
         var hero = GameDataService.Current.HeroesManager.GetHeroByCurrency(reward.Currency);
 
         if (hero != null)
@@ -130,10 +128,12 @@ public class UIChestRewardWindowView : UIGenericWindowView
         
         var reward = windowModel.GetReward();
         var board = BoardService.Current.GetBoardById(0);
+        var house = GameDataService.Current.HeroesManager.HousePosition;
+        var worldPos = board.BoardDef.GetSectorCenterWorldPosition(house.X, house.Up.Y, house.Z);
         
-        var hero = GameDataService.Current.HeroesManager.GetHero("Robin");
+        board.Manipulator.CameraManipulator.ZoomTo(0.3f, worldPos);
         
-        if (reward.Currency != Currency.Coins.Name && reward.Currency != hero.CardCurrencyDef.Name)
+        if (reward.Currency != Currency.Coins.Name && GameDataService.Current.HeroesManager.GetHeroByCurrency(reward.Currency) == null)
         {
             var pieces = new List<int>();
 
@@ -145,7 +145,7 @@ public class UIChestRewardWindowView : UIGenericWindowView
             board.ActionExecutor.AddAction(new SpawnPiecesAction
             {
                 IsCheckMatch = false,
-                At = hero.HousePosition,
+                At = house,
                 Pieces = pieces
             });
             
@@ -175,9 +175,5 @@ public class UIChestRewardWindowView : UIGenericWindowView
                 // on purchase failed (not enough cash)
             }
         );
-        
-        var worldPos = board.BoardDef.GetSectorCenterWorldPosition(hero.HousePosition.X, hero.HousePosition.Up.Y, hero.HousePosition.Z);
-        
-        board.Manipulator.CameraManipulator.ZoomTo(0.3f, worldPos);
     }
 }

@@ -4,6 +4,8 @@
     public int Delay { get; set; }
     
     public string SpawnPiece { get; set; }
+    public string UpgradeTargetPiece { get; set; }
+    
     public int SpawnAmount { get; set; }
     public int SpawnCapacity { get; set; }
     
@@ -12,6 +14,7 @@
     public CurrencyPair UpgradePrice { get; set; }
     
     private CurrencyDef levelCurrencyDef;
+    private CurrencyDef upgradeTargetCurrencyDef;
     
     public int Piece
     {
@@ -22,10 +25,30 @@
     {
         get { return PieceType.Parse(SpawnPiece); }
     }
-
+    
     public CurrencyDef UpgradeCurrency
     {
         get {return levelCurrencyDef ?? (levelCurrencyDef = Currency.GetCurrencyDef(string.Format("Level{0}", Uid.Substring(0, Uid.Length - 1))));}
+    }
+
+    public CurrencyDef UpgradeTargetCurrency
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(UpgradeTargetPiece)) return null;
+            
+            return upgradeTargetCurrencyDef ?? (upgradeTargetCurrencyDef = Currency.GetCurrencyDef(string.Format("Level{0}", UpgradeTargetPiece)));
+        }
+    }
+
+    public bool IsMaxLevel()
+    {
+        if (UpgradeTargetCurrency == null) return false;
+        
+        var level = ProfileService.Current.GetStorageItem(UpgradeCurrency.Name).Amount;
+        var targetLevel = ProfileService.Current.GetStorageItem(UpgradeTargetCurrency.Name).Amount;
+        
+        return level + 1 > targetLevel;
     }
 
     public override string ToString()

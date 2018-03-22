@@ -4,11 +4,11 @@
     
     public int Guid { get { return ComponentGuid; } }
     
-    public void OnRegisterEntity(ECSEntity entity)
+    public virtual void OnRegisterEntity(ECSEntity entity)
     {
     }
 
-    public void OnUnRegisterEntity(ECSEntity entity)
+    public virtual void OnUnRegisterEntity(ECSEntity entity)
     {
     }
     

@@ -78,11 +78,95 @@
     "SpawnAmount" : 1
   },
   {
-    "Uid" : "S1",
+    "Uid" : "Sawmill1",
     "Delay" : 5,
     "SpawnPiece" : "A1",
+    "UpgradeTargetPiece" : "Castle",
     "SpawnAmount" : 1,
-    "SpawnCapacity" : 10
+    "SpawnCapacity" : 10,
+    "UpgradePrice" :
+    {
+      "Currency" : "Coins",
+      "Amount" : 100
+    }
+  },
+  {
+    "Uid" : "Sawmill2",
+    "Delay" : 5,
+    "SpawnPiece" : "A1",
+    "UpgradeTargetPiece" : "Castle",
+    "SpawnAmount" : 1,
+    "SpawnCapacity" : 10,
+    "UpgradePrice" :
+    {
+      "Currency" : "Coins",
+      "Amount" : 100
+    }
+  },
+  {
+    "Uid" : "Sawmill3",
+    "Delay" : 5,
+    "SpawnPiece" : "A1",
+    "UpgradeTargetPiece" : "Castle",
+    "SpawnAmount" : 1,
+    "SpawnCapacity" : 10,
+    "UpgradePrice" :
+    {
+      "Currency" : "Coins",
+      "Amount" : 100
+    }
+  },
+  {
+    "Uid" : "Sawmill4",
+    "Delay" : 5,
+    "SpawnPiece" : "A1",
+    "UpgradeTargetPiece" : "Castle",
+    "SpawnAmount" : 1,
+    "SpawnCapacity" : 10,
+    "UpgradePrice" :
+    {
+      "Currency" : "Coins",
+      "Amount" : 100
+    }
+  },
+  {
+    "Uid" : "Sawmill5",
+    "Delay" : 5,
+    "SpawnPiece" : "A1",
+    "UpgradeTargetPiece" : "Castle",
+    "SpawnAmount" : 1,
+    "SpawnCapacity" : 10,
+    "UpgradePrice" :
+    {
+      "Currency" : "Coins",
+      "Amount" : 100
+    }
+  },
+  {
+    "Uid" : "Sawmill6",
+    "Delay" : 5,
+    "SpawnPiece" : "A1",
+    "UpgradeTargetPiece" : "Castle",
+    "SpawnAmount" : 1,
+    "SpawnCapacity" : 10,
+    "UpgradePrice" :
+    {
+      "Currency" : "Coins",
+      "Amount" : 100
+    }
+  },
+  {
+    "Uid" : "Sawmill7",
+    "Delay" : 5,
+    "SpawnPiece" : "A1",
+    "UpgradeTargetPiece" : "Castle",
+    "SpawnAmount" : 1,
+    "SpawnCapacity" : 10,
+    "UpgradePrice" :
+    {
+      "Currency" : "Coins",
+      "Amount" : 100
+    }
   },
   {
     "Uid" : "Castle1",
@@ -194,6 +278,7 @@
   },
   {
     "Uid" : "Tavern1",
+    "UpgradeTargetPiece" : "Castle",
     "UpgradePrice" :
     {
       "Currency" : "Coins",
@@ -202,6 +287,7 @@
   },
   {
     "Uid" : "Tavern2",
+    "UpgradeTargetPiece" : "Castle",
     "UpgradePrice" :
     {
       "Currency" : "Coins",
@@ -210,6 +296,7 @@
   },
   {
     "Uid" : "Tavern3",
+    "UpgradeTargetPiece" : "Castle",
     "UpgradePrice" :
     {
       "Currency" : "Coins",
@@ -218,6 +305,7 @@
   },
   {
     "Uid" : "Tavern4",
+    "UpgradeTargetPiece" : "Castle",
     "UpgradePrice" :
     {
       "Currency" : "Coins",
@@ -226,6 +314,7 @@
   },
   {
     "Uid" : "Tavern5",
+    "UpgradeTargetPiece" : "Castle",
     "UpgradePrice" :
     {
       "Currency" : "Coins",
@@ -234,6 +323,7 @@
   },
   {
     "Uid" : "Tavern6",
+    "UpgradeTargetPiece" : "Castle",
     "UpgradePrice" :
     {
       "Currency" : "Coins",
@@ -242,6 +332,7 @@
   },
   {
     "Uid" : "Tavern7",
+    "UpgradeTargetPiece" : "Castle",
     "UpgradePrice" :
     {
       "Currency" : "Coins",
@@ -250,6 +341,7 @@
   },
   {
     "Uid" : "Tavern8",
+    "UpgradeTargetPiece" : "Castle",
     "UpgradePrice" :
     {
       "Currency" : "Coins",
@@ -258,6 +350,7 @@
   },
   {
     "Uid" : "Tavern9",
+    "UpgradeTargetPiece" : "Castle",
     "UpgradePrice" :
     {
       "Currency" : "Coins",

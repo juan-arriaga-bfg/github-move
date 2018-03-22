@@ -44,6 +44,12 @@ public class UICharacterWindowView : UIGenericPopupWindowView
     public void OnClick()
     {
         var windowModel = Model as UICharacterWindowModel;
+
+        if (windowModel.Hero.IsLevelMax())
+        {
+            UIMessageWindowController.CreateDefaultMessage("tavern level is not high enough!");
+            return;
+        }
         
         windowModel.Hero.LevelUp();
         

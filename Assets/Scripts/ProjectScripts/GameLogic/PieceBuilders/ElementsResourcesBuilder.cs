@@ -12,17 +12,14 @@ public class ElementsResourcesBuilder
 
             {PieceType.M1.Id, R.M1Piece},
 
-            {PieceType.S1.Id, R.S1Piece},
-            {PieceType.S2.Id, R.S2Piece},
-            {PieceType.S3.Id, R.S3Piece},
-            {PieceType.S4.Id, R.S4Piece},
-            {PieceType.S5.Id, R.S5Piece},
-            {PieceType.S6.Id, R.S6Piece},
-            {PieceType.S7.Id, R.S7Piece},
-
-            {PieceType.H1.Id, R.H1Piece},
-            {PieceType.H2.Id, R.H2Piece},
-
+            {PieceType.Sawmill1.Id, R.Sawmill1Piece},
+            {PieceType.Sawmill2.Id, R.Sawmill2Piece},
+            {PieceType.Sawmill3.Id, R.Sawmill3Piece},
+            {PieceType.Sawmill4.Id, R.Sawmill4Piece},
+            {PieceType.Sawmill5.Id, R.Sawmill5Piece},
+            {PieceType.Sawmill6.Id, R.Sawmill6Piece},
+            {PieceType.Sawmill7.Id, R.Sawmill7Piece},
+            
             {PieceType.E1.Id, R.E1Piece},
             {PieceType.E2.Id, R.E2Piece},
             {PieceType.E3.Id, R.E3Piece},

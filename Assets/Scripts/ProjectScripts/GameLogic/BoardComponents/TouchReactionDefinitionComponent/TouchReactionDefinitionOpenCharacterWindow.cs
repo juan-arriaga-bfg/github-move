@@ -3,8 +3,8 @@
     public override bool Make(BoardPosition position, Piece piece)
     {
         var model = UIService.Get.GetCachedModel<UICharacterWindowModel>(UIWindowType.CharacterWindow);
-
-        model.Hero = GameDataService.Current.HeroesManager.GetHero(piece.PieceType == PieceType.H1.Id ? "Robin" : "John"); 
+        
+        model.Hero = GameDataService.Current.HeroesManager.GetHero("Robin"); 
         
         UIService.Get.ShowWindow(UIWindowType.CharacterWindow);
         return true;

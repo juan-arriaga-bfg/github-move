@@ -75,6 +75,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             Currency.RegisterCurrency(Currency.LevelJohn);
             Currency.RegisterCurrency(Currency.LevelCastle);
             Currency.RegisterCurrency(Currency.LevelTavern);
+            Currency.RegisterCurrency(Currency.LevelSawmill);
             
             Currency.RegisterCurrency(Currency.Quest);
             

@@ -4,8 +4,6 @@ public class Hero
 {
     private HeroDef def;
     
-    public BoardPosition HousePosition { get; set; }
-
     public readonly CurrencyDef LevelCurrencyDef;
     public readonly CurrencyDef CardCurrencyDef;
     
@@ -75,6 +73,13 @@ public class Hero
             return level == def.Levels.Count - 1 ? 0 : def.Levels[level + 1].Abilities[0].Value;
         }
     }
+
+    public bool IsLevelMax()
+    {
+        var tavernLevel = ProfileService.Current.GetStorageItem(Currency.LevelTavern.Name).Amount;
+
+        return Level + 1 > tavernLevel;
+    }
     
     public bool LevelUp()
     {
@@ -85,7 +90,6 @@ public class Hero
         {
             currentPrices.Add(new Price{Currency = price.Currency, DefaultPriceAmount = price.Amount});
         }
-        
         
         var shopItem = new ShopItem
         {

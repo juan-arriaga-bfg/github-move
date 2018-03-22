@@ -6,6 +6,14 @@ public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
     {
         return new List<int>
         {
+            PieceType.Sawmill1.Id,
+            PieceType.Sawmill2.Id,
+            PieceType.Sawmill3.Id,
+            PieceType.Sawmill4.Id,
+            PieceType.Sawmill5.Id,
+            PieceType.Sawmill6.Id,
+            PieceType.Sawmill7.Id,
+            
             PieceType.Castle1.Id,
             PieceType.Castle2.Id,
             PieceType.Castle3.Id,
@@ -52,15 +60,5 @@ public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
             Positions = new List<BoardPosition>{position},
             OnCompleteAction = nextAction
         };
-    }
-
-    private List<int> Add(int count, int piece, List<int> pieces)
-    {
-        for (int i = 0; i < count; i++)
-        {
-            pieces.Add(piece);
-        }
-        
-        return pieces;
     }
 }

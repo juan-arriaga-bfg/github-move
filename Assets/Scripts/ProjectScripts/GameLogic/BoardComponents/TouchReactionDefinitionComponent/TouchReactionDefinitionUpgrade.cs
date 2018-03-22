@@ -7,7 +7,24 @@ public class TouchReactionDefinitionUpgrade : TouchReactionDefinitionComponent
 		var def = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(piece.PieceType);
 
 		if (def == null) return false;
+
+		if (def.IsMaxLevel())
+		{
+			MaxLevelMessage(def);
+			return true;
+		}
 		
+		UpgradeMessage(def, position, piece);
+		return true;
+	}
+
+	private void MaxLevelMessage(PieceDef def)
+	{
+		UIMessageWindowController.CreateDefaultMessage(string.Format("You need to improve the level of the {0}", def.UpgradeTargetPiece));
+	}
+
+	private void UpgradeMessage(PieceDef def, BoardPosition position, Piece piece)
+	{
 		var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
 
 		model.Title = "Upgrade";
@@ -51,6 +68,5 @@ public class TouchReactionDefinitionUpgrade : TouchReactionDefinitionComponent
 		};
 		
 		UIService.Get.ShowWindow(UIWindowType.MessageWindow);
-		return true;
 	}
 }

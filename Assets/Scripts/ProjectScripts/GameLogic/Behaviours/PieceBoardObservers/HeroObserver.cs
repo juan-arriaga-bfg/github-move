@@ -20,9 +20,7 @@
     {
         if(context == null) return;
         
-        var hero = GameDataService.Current.HeroesManager.GetHero(context.PieceType == PieceType.H1.Id ? "Robin" : "John");
-
-        hero.HousePosition = position;
+        GameDataService.Current.HeroesManager.HousePosition = position;
     }
 
     public void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece context = null)

@@ -5,7 +5,7 @@
 
     public override int Guid { get { return ComponentGuid; } }
     
-    protected Piece context;
+    private Piece context;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {

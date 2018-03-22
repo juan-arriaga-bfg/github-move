@@ -18,10 +18,11 @@
     public static readonly CurrencyDef LevelJohn = new CurrencyDef { Id = 13, Name = "LevelJohn", IsConsumable = true };
     public static readonly CurrencyDef LevelCastle = new CurrencyDef { Id = 14, Name = "LevelCastle", IsConsumable = true };
     public static readonly CurrencyDef LevelTavern = new CurrencyDef { Id = 15, Name = "LevelTavern", IsConsumable = true };
+    public static readonly CurrencyDef LevelSawmill = new CurrencyDef { Id = 16, Name = "LevelSawmill", IsConsumable = true };
     
-    public static readonly CurrencyDef Quest = new CurrencyDef { Id = 16, Name = "Quest", IsConsumable = true };
+    public static readonly CurrencyDef Quest = new CurrencyDef { Id = 17, Name = "Quest", IsConsumable = true };
     
-    public static readonly CurrencyDef ChestCommon = new CurrencyDef { Id = 17, Name = "ChestCommon", IsConsumable = true };
-    public static readonly CurrencyDef ChestRare = new CurrencyDef { Id = 18, Name = "ChestRare", IsConsumable = true };
-    public static readonly CurrencyDef ChestEpic = new CurrencyDef { Id = 19, Name = "ChestEpic", IsConsumable = true };
+    public static readonly CurrencyDef ChestCommon = new CurrencyDef { Id = 18, Name = "ChestCommon", IsConsumable = true };
+    public static readonly CurrencyDef ChestRare = new CurrencyDef { Id = 19, Name = "ChestRare", IsConsumable = true };
+    public static readonly CurrencyDef ChestEpic = new CurrencyDef { Id = 20, Name = "ChestEpic", IsConsumable = true };
 }
