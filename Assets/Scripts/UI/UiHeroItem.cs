@@ -19,12 +19,20 @@ public class UiHeroItem : MonoBehaviour
     
     [SerializeField] private GameObject progressGo;
     [SerializeField] private GameObject buttonGo;
+    
+    [SerializeField] private Toggle toggle;
 
     private Hero hero;
+    private Obstacle obstacle;
+
+    private bool isInit;
     
-    public void Init(Hero hero)
+    public void Init(Hero hero, Obstacle obstacle)
     {
         this.hero = hero;
+        this.obstacle = obstacle;
+
+        isInit = true;
 
         var isWaiting = hero.CurrentProgress >= hero.TotalProgress;
         
@@ -42,8 +50,7 @@ public class UiHeroItem : MonoBehaviour
         
         progressLabel.Text = string.Format("{0}/{1}", hero.CurrentProgress, hero.TotalProgress);
         progress.sizeDelta = new Vector2(Mathf.Clamp(190 * hero.CurrentProgress / (float) hero.TotalProgress, 0, 190), progress.sizeDelta.y);
-
-
+        
         heroIcon.sprite = iconHero;
         heroSmallIcon.sprite = iconHero;
         
@@ -51,6 +58,15 @@ public class UiHeroItem : MonoBehaviour
         
         progressGo.SetActive(!isWaiting);
         buttonGo.SetActive(isWaiting);
+
+        if (obstacle == null || hero.InAdventure != -1 && hero.InAdventure != obstacle.GetUid())
+        {
+            toggle.interactable = false;
+        }
+        
+        toggle.isOn = obstacle != null && hero.InAdventure == obstacle.GetUid();
+        
+        isInit = false;
     }
 
     public void OnClick()
@@ -64,6 +80,8 @@ public class UiHeroItem : MonoBehaviour
 
     public void OnSelect()
     {
+        if(isInit) return;
         
+        hero.InAdventure = toggle.isOn ? obstacle.GetUid() : -1;
     }
 }

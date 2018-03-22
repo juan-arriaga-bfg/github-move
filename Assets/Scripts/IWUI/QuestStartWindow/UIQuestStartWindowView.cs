@@ -37,17 +37,14 @@ public class UIQuestStartWindowView : UIGenericPopupWindowView
         chest.sprite = IconService.Current.GetSpriteById(id + "_1");
         cap.sprite = IconService.Current.GetSpriteById(id + "_2");
 
-        var conditions = windowModel.GetConditionHeroes();
-        
-        foreach (var toggle in toggles)
-        {
-            var isActive = conditions.Find(hero => hero.Hero == toggle.heroName) != null;
-            
-            toggle.Init(windowModel.Obstacle.GetUid());
-            toggle.gameObject.SetActive(isActive);
-        }
-        
-        StartButton.interactable = false;
+        UpdateItems(windowModel);
+    }
+    
+    public override void UpdateView(IWWindowModel model)
+    {
+        base.UpdateView(model);
+
+        UpdateItems(model as UIQuestStartWindowModel);
     }
 
     public override void OnViewClose()
@@ -99,9 +96,17 @@ public class UIQuestStartWindowView : UIGenericPopupWindowView
         );
     }
 
-    public void OnClickToogle()
+    private void UpdateItems(UIQuestStartWindowModel model)
     {
-        var windowModel = Model as UIQuestStartWindowModel;
+        var conditions = model.GetConditionHeroes();
+        
+        foreach (var toggle in toggles)
+        {
+            var isActive = conditions.Find(hero => hero.Hero == toggle.heroName) != null;
+            
+            toggle.Init(model.Obstacle);
+            toggle.gameObject.SetActive(isActive);
+        }
         
         StartButton.interactable = true;
         
@@ -113,7 +118,5 @@ public class UIQuestStartWindowView : UIGenericPopupWindowView
                 break;
             }
         }
-        
-        timeLabel.Text = windowModel.TimeText;
     }
 }

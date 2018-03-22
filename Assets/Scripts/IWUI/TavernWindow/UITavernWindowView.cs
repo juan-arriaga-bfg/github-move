@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -38,7 +37,6 @@ public class UITavernWindowView : UIGenericPopupWindowView
         base.OnViewClose();
         
         UITavernWindowModel windowModel = Model as UITavernWindowModel;
-        
     }
 
     private void UpdateItems(UITavernWindowModel model)
@@ -57,7 +55,7 @@ public class UITavernWindowView : UIGenericPopupWindowView
         
         for (var i = 0; i < heroes.Count; i++)
         {
-            items[i].Init(heroes[i]);
+            items[i].Init(heroes[i], model.Obstacle);
         }
     }
 

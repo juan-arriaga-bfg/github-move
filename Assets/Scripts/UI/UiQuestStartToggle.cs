@@ -8,51 +8,38 @@ public class UiQuestStartToggle : MonoBehaviour
     [SerializeField] private GameObject button;
     
     public string heroName;
-
-    private int uid;
-    private bool isInit;
     
-    public void Init(int uid)
+    private Obstacle obstacle;
+    
+    public void Init(Obstacle obstacle)
     {
-        this.uid = uid;
+        this.obstacle = obstacle;
         
-        isInit = true;
+        var hero = GameDataService.Current.HeroesManager.GetHero(heroName);
         
-        icon.SetActive(true);
-        iconHero.SetActive(false);
-        button.SetActive(true);
-
-        GetComponent<Toggle>().isOn = false;
+        if(hero == null) return;
         
-        isInit = false;
+        var InAdventure = hero.InAdventure == obstacle.GetUid();
+        
+        icon.SetActive(!InAdventure);
+        iconHero.SetActive(InAdventure);
+        button.SetActive(!InAdventure);
     }
 
-    public void Onclick(Toggle toggle)
+    public void OnClick()
     {
-        var hero = GameDataService.Current.HeroesManager.GetHero(heroName);
+        var model = UIService.Get.GetCachedModel<UITavernWindowModel>(UIWindowType.TavernWindow);
 
-        if (hero == null || (hero.InAdventure != -1 && hero.InAdventure != uid))
-        {
-            if (isInit == false)
-            {
-                UIMessageWindowController.CreateDefaultMessage("This hero is busy on another quest. Complete that quest to use the hero.");
-            }
-            
-            return;
-        }
+        model.Obstacle = obstacle;
         
-        icon.SetActive(!toggle.isOn);
-        iconHero.SetActive(toggle.isOn);
-        button.SetActive(!toggle.isOn);
-        
-        hero.InAdventure = toggle.isOn ? uid : -1;
+        UIService.Get.ShowWindow(UIWindowType.TavernWindow);
     }
 
     public void HeroInHome()
     {
         var hero = GameDataService.Current.HeroesManager.GetHero(heroName);
 
-        if (hero != null && hero.InAdventure == uid) hero.InAdventure = -1;
+        if (hero != null && hero.InAdventure == obstacle.GetUid()) hero.InAdventure = -1;
     }
     
     public bool InAdventure()
