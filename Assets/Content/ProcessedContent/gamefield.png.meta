@@ -36,6 +36,14 @@ TextureImporter:
     21300058: tree_3
     21300060: tree_5
     21300062: A7
+    21300064: Chest_field_4_1
+    21300066: Chest_field_1_1
+    21300068: Chest_field_3_1
+    21300070: Chest_field_2_1
+    21300072: Chest_field_4_2
+    21300074: Chest_field_3_2
+    21300076: Chest_field_1_2
+    21300078: Chest_field_2_2
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -228,7 +236,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: tree_3
+      name: tree_7
       rect:
         serializedVersion: 2
         x: 389
@@ -242,7 +250,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: tree_4
+      name: tree_9
       rect:
         serializedVersion: 2
         x: 427
@@ -256,7 +264,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: tree_7
+      name: tree_8
       rect:
         serializedVersion: 2
         x: 462
@@ -270,7 +278,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: tree_8
+      name: tree_3
       rect:
         serializedVersion: 2
         x: 530
@@ -284,7 +292,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: tree_9
+      name: tree_2
       rect:
         serializedVersion: 2
         x: 570
@@ -298,7 +306,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: tree_2
+      name: tree_4
       rect:
         serializedVersion: 2
         x: 608
@@ -480,13 +488,125 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: GBOX1
+      name: Chest_field_4_1
       rect:
         serializedVersion: 2
         x: 1003
         y: 705
+        width: 124
+        height: 122
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Chest_field_1_1
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 828
+        width: 124
+        height: 120
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Chest_field_3_1
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 498
+        width: 124
+        height: 120
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Chest_field_2_1
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 279
+        width: 124
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: GBOX1
+      rect:
+        serializedVersion: 2
+        x: 1076
+        y: 131
         width: 108
         height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Chest_field_4_2
+      rect:
+        serializedVersion: 2
+        x: 1149
+        y: 0
+        width: 119
+        height: 105
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Chest_field_3_2
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 610
+        width: 118
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Chest_field_1_2
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 922
+        width: 117
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Chest_field_2_2
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 399
+        width: 117
+        height: 95
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -497,8 +617,8 @@ TextureImporter:
       name: C1
       rect:
         serializedVersion: 2
-        x: 1003
-        y: 834
+        x: 1185
+        y: 106
         width: 88
         height: 106
       alignment: 9
@@ -511,8 +631,8 @@ TextureImporter:
       name: A1
       rect:
         serializedVersion: 2
-        x: 389
-        y: 610
+        x: 203
+        y: 930
         width: 104
         height: 86
       alignment: 9
@@ -525,8 +645,8 @@ TextureImporter:
       name: B1
       rect:
         serializedVersion: 2
-        x: 848
-        y: 922
+        x: 0
+        y: 940
         width: 95
         height: 82
       alignment: 9
