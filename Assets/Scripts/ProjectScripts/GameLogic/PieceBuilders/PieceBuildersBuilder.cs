@@ -153,94 +153,61 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddCastlePiece(Dictionary<int, IPieceBuilder> dict)
     {
+        var mask = new List<BoardPosition>
+        {
+            BoardPosition.Zero().Up,
+            BoardPosition.Zero().Up.Up,
+            BoardPosition.Zero().Right,
+            BoardPosition.Zero().Right.Up,
+            BoardPosition.Zero().Right.Up.Up,
+            BoardPosition.Zero().Right.Right,
+            BoardPosition.Zero().Right.Right.Up,
+            BoardPosition.Zero().Right.Right.Up.Up,
+        };
+        
         dict.Add(PieceType.Castle1.Id, new MulticellularSpawnPieceBuilder
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
+            Mask = mask
         });
         
         dict.Add(PieceType.Castle2.Id, new MulticellularSpawnPieceBuilder
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
+            Mask = mask
         });
         
         dict.Add(PieceType.Castle3.Id, new MulticellularSpawnPieceBuilder
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
+            Mask = mask
         });
         
         dict.Add(PieceType.Castle4.Id, new MulticellularSpawnPieceBuilder
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
+            Mask = mask
         });
         
         dict.Add(PieceType.Castle5.Id, new MulticellularSpawnPieceBuilder
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
+            Mask = mask
         });
         
         dict.Add(PieceType.Castle6.Id, new MulticellularSpawnPieceBuilder
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
+            Mask = mask
         });
         
         dict.Add(PieceType.Castle7.Id, new MulticellularSpawnPieceBuilder
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
+            Mask = mask
         });
         
         dict.Add(PieceType.Castle8.Id, new MulticellularSpawnPieceBuilder
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
+            Mask = mask
         });
-        
+
         dict.Add(PieceType.Castle9.Id, new MulticellularSpawnPieceBuilder
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
+            Mask = mask
         });
         
         return dict;
