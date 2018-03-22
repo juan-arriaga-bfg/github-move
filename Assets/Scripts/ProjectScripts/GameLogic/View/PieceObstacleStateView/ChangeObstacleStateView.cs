@@ -63,33 +63,16 @@ public class ChangeObstacleStateView : IWBaseMonoBehaviour
         }
 		
         if (condition == null) return;
-
-        var currentSeconds = (float)(DateTime.Now - condition.StartTime).TotalSeconds;
-        var targetSeconds = condition.Delay;
         
-        if (currentSeconds > targetSeconds)
-        {
-            message.Text = "00:00";
-            return;
-        }
-        
-        message.Text = GetFormattedTime(TimeSpan.FromSeconds(targetSeconds - currentSeconds));
+        message.Text = TimeFormat(condition.CompleteTime - DateTime.Now);
     }
     
-    public string GetFormattedTime(TimeSpan time)
+    private string TimeFormat(TimeSpan time)
     {
-        var str = "";
-
-        if ((int) time.TotalHours > 0)
-        {
-            str = string.Format("{0}:{1}", time.Hours, (time.Minutes > 9 ? "" : "0") + time.Minutes);
-        }
-        else
-        {
-            str = string.Format("{0}:{1}", (time.Minutes > 9 ? "" : "0") + time.Minutes,
-                (time.Seconds > 9 ? "" : "0") + time.Seconds);
-        }
-
-        return str;
+        if ((int) time.TotalSeconds == 0) return "00:00";
+        
+        return (int) time.TotalHours > 0
+            ? string.Format("{0:00}:{1:00}:{2:00}", time.Hours, time.Minutes, time.Seconds) 
+            : string.Format("{0:00}:{1:00}", time.Minutes, time.Seconds);
     }
 }

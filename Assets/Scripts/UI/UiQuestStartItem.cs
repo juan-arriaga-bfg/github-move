@@ -23,14 +23,8 @@ public class UiQuestStartItem : MonoBehaviour
         
         background.sprite = IconService.Current.GetSpriteById(string.Format("back_{0}", ability.Ability));
         icon.sprite = IconService.Current.GetSpriteById(ability.Ability.ToString());
-        
-        hero = GameDataService.Current.HeroesManager.GetHeroes(ability.Ability).Find(h =>
-        {
-            Debug.LogError(string.Format("{0} : {1}", h.InAdventure, this.obstacle.GetUid()));
-            
-            
-            return h.InAdventure == this.obstacle.GetUid();
-        });
+
+        hero = GameDataService.Current.HeroesManager.GetHeroes(ability.Ability).Find(h => h.InAdventure == this.obstacle.GetUid());
         
         var currentValue = hero == null ? 0 : hero.CurrentAbilityValue;
         

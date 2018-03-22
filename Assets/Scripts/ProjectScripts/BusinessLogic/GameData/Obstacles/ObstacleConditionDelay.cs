@@ -5,6 +5,7 @@ public class ObstacleConditionDelay : IObstacleCondition
     public int Delay { get; set; }
 
     public DateTime StartTime;
+    public DateTime CompleteTime;
 
     public bool IsInitialized { get; set; }
 
@@ -12,6 +13,7 @@ public class ObstacleConditionDelay : IObstacleCondition
     {
         IsInitialized = true;
         StartTime = DateTime.Now;
+        CompleteTime = StartTime.AddSeconds(Delay);
     }
 
     public bool Check(ObstaclesLogicComponent context)

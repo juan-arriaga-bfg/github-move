@@ -36,6 +36,6 @@ public class BoardTimerView : IWBaseMonoBehaviour
         if(timer.IsExecuteable() == false) return;
         
         progressBar.SetProgress((float)timer.GetTime().TotalSeconds / timer.Delay);
-        label.Text = timer.GetTimeText(null);
+        label.Text = timer.GetTimeLeftText(null);
     }
 }
