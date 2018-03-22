@@ -67,9 +67,16 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             Currency.RegisterCurrency(Currency.PieceA1);
             Currency.RegisterCurrency(Currency.PieceA2);
             Currency.RegisterCurrency(Currency.PieceA3);
+            Currency.RegisterCurrency(Currency.PieceA4);
+            Currency.RegisterCurrency(Currency.PieceA5);
+            Currency.RegisterCurrency(Currency.PieceA6);
+            Currency.RegisterCurrency(Currency.PieceA7);
+            
             Currency.RegisterCurrency(Currency.PieceB1);
             Currency.RegisterCurrency(Currency.PieceB2);
             Currency.RegisterCurrency(Currency.PieceB3);
+            Currency.RegisterCurrency(Currency.PieceB4);
+            Currency.RegisterCurrency(Currency.PieceB5);
             
             Currency.RegisterCurrency(Currency.LevelRobin);
             Currency.RegisterCurrency(Currency.LevelJohn);

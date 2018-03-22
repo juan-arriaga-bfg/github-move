@@ -228,7 +228,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: tree_4
+      name: tree_3
       rect:
         serializedVersion: 2
         x: 389
@@ -242,7 +242,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: tree_5
+      name: tree_4
       rect:
         serializedVersion: 2
         x: 427
@@ -270,7 +270,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: tree_1
+      name: tree_8
       rect:
         serializedVersion: 2
         x: 530
@@ -284,7 +284,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: tree_6
+      name: tree_9
       rect:
         serializedVersion: 2
         x: 570
@@ -298,7 +298,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: tree_3
+      name: tree_2
       rect:
         serializedVersion: 2
         x: 608
@@ -312,27 +312,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: tree_2
+      name: A4
       rect:
         serializedVersion: 2
         x: 643
         y: 0
-        width: 180
-        height: 180
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: A5
-      rect:
-        serializedVersion: 2
-        x: 530
-        y: 791
-        width: 172
-        height: 184
+        width: 201
+        height: 155
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -343,7 +329,7 @@ TextureImporter:
       name: E2
       rect:
         serializedVersion: 2
-        x: 703
+        x: 530
         y: 791
         width: 150
         height: 206
@@ -354,25 +340,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: A4
-      rect:
-        serializedVersion: 2
-        x: 711
-        y: 568
-        width: 199
-        height: 155
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
       name: A6
       rect:
         serializedVersion: 2
-        x: 751
-        y: 362
+        x: 681
+        y: 791
         width: 166
         height: 185
       alignment: 9
@@ -385,8 +357,8 @@ TextureImporter:
       name: B3
       rect:
         serializedVersion: 2
-        x: 854
-        y: 724
+        x: 711
+        y: 568
         width: 158
         height: 194
       alignment: 9
@@ -396,13 +368,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: A3
+      name: A5
       rect:
         serializedVersion: 2
-        x: 911
-        y: 548
-        width: 181
-        height: 156
+        x: 751
+        y: 362
+        width: 152
+        height: 187
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -413,10 +385,66 @@ TextureImporter:
       name: E1
       rect:
         serializedVersion: 2
-        x: 1013
-        y: 705
+        x: 789
+        y: 156
         width: 138
         height: 199
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: A3
+      rect:
+        serializedVersion: 2
+        x: 845
+        y: 0
+        width: 168
+        height: 152
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tree_6
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 763
+        width: 154
+        height: 158
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tree_1
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 550
+        width: 155
+        height: 154
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tree_5
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 356
+        width: 166
+        height: 141
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -427,8 +455,8 @@ TextureImporter:
       name: A2
       rect:
         serializedVersion: 2
-        x: 789
-        y: 181
+        x: 928
+        y: 153
         width: 147
         height: 125
       alignment: 9
@@ -441,7 +469,7 @@ TextureImporter:
       name: B2
       rect:
         serializedVersion: 2
-        x: 824
+        x: 1014
         y: 0
         width: 134
         height: 130
@@ -455,8 +483,8 @@ TextureImporter:
       name: GBOX1
       rect:
         serializedVersion: 2
-        x: 918
-        y: 307
+        x: 1003
+        y: 705
         width: 108
         height: 128
       alignment: 9
@@ -469,8 +497,8 @@ TextureImporter:
       name: C1
       rect:
         serializedVersion: 2
-        x: 1013
-        y: 905
+        x: 1003
+        y: 834
         width: 88
         height: 106
       alignment: 9
@@ -497,8 +525,8 @@ TextureImporter:
       name: B1
       rect:
         serializedVersion: 2
-        x: 203
-        y: 930
+        x: 848
+        y: 922
         width: 95
         height: 82
       alignment: 9
@@ -511,8 +539,8 @@ TextureImporter:
       name: C1_shadow
       rect:
         serializedVersion: 2
-        x: 299
-        y: 930
+        x: 870
+        y: 705
         width: 72
         height: 54
       alignment: 9
