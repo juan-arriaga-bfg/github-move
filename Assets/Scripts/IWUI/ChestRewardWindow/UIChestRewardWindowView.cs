@@ -77,7 +77,7 @@ public class UIChestRewardWindowView : UIGenericWindowView
 
         if (piece != PieceType.None.Id)
         {
-            cardBuildName.Text = "House";
+            cardBuildName.Text = "Pieces";
             buildAmountLabel.Text = "x" + reward.Amount;
         
             iconPiece.sprite = IconService.Current.GetSpriteById(PieceType.Parse(piece));
