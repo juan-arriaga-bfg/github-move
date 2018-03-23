@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 
@@ -29,7 +30,7 @@ public class UIMessageWindowController : IWWindowController {
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
     
-    public static void CreateDefaultMessage(string message)
+    public static void CreateDefaultMessage(string message, Action OnAccept = null)
     {
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
@@ -37,7 +38,7 @@ public class UIMessageWindowController : IWWindowController {
         model.Message = message;
         model.AcceptLabel = "Ok";
         
-        model.OnAccept = () => {};
+        model.OnAccept = OnAccept ?? (() => {});
         model.OnCancel = null;
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);

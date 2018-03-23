@@ -60,4 +60,5 @@ public class R
      public const string Sawmill7Piece = "Sawmill7Piece";
      public const string A8Piece = "A8Piece";
      public const string B5Piece = "B5Piece";
+     public const string HintArrow = "HintArrow";
 }

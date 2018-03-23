@@ -5,8 +5,6 @@ public class HeroesDataManager : IDataLoader<List<HeroDef>>
 {
     public List<Hero> Heroes;
     
-    public BoardPosition HousePosition { get; set; }
-    
     public void LoadData(IDataMapper<List<HeroDef>> dataMapper)
     {
         dataMapper.LoadData((data, error)=> 

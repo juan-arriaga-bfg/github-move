@@ -69,7 +69,8 @@ public class ElementsResourcesBuilder
             {PieceType.Chest3.Id, R.Chest3Piece},
 
             {-1000, R.HitboxDamageView},
-            {-1100, R.AddResourceView}
+            {-1100, R.AddResourceView},
+            {-1200, R.HintArrow}
         };
         
         return dict;

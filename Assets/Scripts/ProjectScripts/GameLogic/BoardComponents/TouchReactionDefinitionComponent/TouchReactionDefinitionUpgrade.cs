@@ -20,7 +20,16 @@ public class TouchReactionDefinitionUpgrade : TouchReactionDefinitionComponent
 
 	private void MaxLevelMessage(PieceDef def)
 	{
-		UIMessageWindowController.CreateDefaultMessage(string.Format("You need to improve the level of the {0}", def.UpgradeTargetPiece));
+		var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+		model.Title = "Message";
+		model.Message = string.Format("You need to improve the level of the {0}", def.UpgradeTargetPiece);
+		model.AcceptLabel = string.Format("Go to {0}", def.UpgradeTargetPiece);;
+        
+		model.OnAccept = () => { HintArrowView.AddHint(GameDataService.Current.PiecesManager.CastlePosition); };
+		model.OnCancel = null;
+        
+		UIService.Get.ShowWindow(UIWindowType.MessageWindow);
 	}
 
 	private void UpgradeMessage(PieceDef def, BoardPosition position, Piece piece)

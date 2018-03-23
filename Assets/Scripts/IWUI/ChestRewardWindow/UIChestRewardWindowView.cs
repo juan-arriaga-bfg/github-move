@@ -128,7 +128,7 @@ public class UIChestRewardWindowView : UIGenericWindowView
         
         var reward = windowModel.GetReward();
         var board = BoardService.Current.GetBoardById(0);
-        var house = GameDataService.Current.HeroesManager.HousePosition;
+        var house = GetHousePosition(reward.Currency);
         var worldPos = board.BoardDef.GetSectorCenterWorldPosition(house.X, house.Up.Y, house.Z);
         
         board.Manipulator.CameraManipulator.ZoomTo(0.3f, worldPos);
@@ -176,5 +176,15 @@ public class UIChestRewardWindowView : UIGenericWindowView
                 // on purchase failed (not enough cash)
             }
         );
+    }
+
+    private BoardPosition GetHousePosition(string currency)
+    {
+        if (GameDataService.Current.HeroesManager.GetHeroByCurrency(currency) != null)
+        {
+            return GameDataService.Current.PiecesManager.TavernPosition;
+        }
+        
+        return GameDataService.Current.PiecesManager.CastlePosition;
     }
 }

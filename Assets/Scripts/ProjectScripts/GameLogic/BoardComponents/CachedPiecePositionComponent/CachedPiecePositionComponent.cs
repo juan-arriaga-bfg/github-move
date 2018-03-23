@@ -34,7 +34,10 @@
 
 	public void OnAddToBoard(BoardPosition position, Piece context = null)
 	{
-		if (contextPiece != null) contextPiece.CachedPosition = position;
+		if (contextPiece == null) return;
+		
+		contextPiece.CachedPosition = position;
+		GameDataService.Current.PiecesManager.CachedPosition(context, position);
 	}
 
 	public void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece context = null)
