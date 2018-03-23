@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class DefaultMatchActionBuilder : IMatchActionBuilder
 {
@@ -36,7 +37,14 @@ public class DefaultMatchActionBuilder : IMatchActionBuilder
         {
             IsCheckMatch = true,
             At = position,
-            Pieces = nextPieces
+            Pieces = nextPieces,
+            OnSuccessEvent = list =>
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    SpawnReward(definition.Context.Context, list[i], nextPieces[i]);
+                }
+            }
         };
         
         return new CollapsePieceToAction
@@ -55,5 +63,16 @@ public class DefaultMatchActionBuilder : IMatchActionBuilder
         }
         
         return pieces;
+    }
+
+    private void SpawnReward(BoardController gameBoard, BoardPosition position, int pieceType)
+    {
+        var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType);
+        
+        if(def == null) return;
+        
+        var view = gameBoard.RendererContext.CreateBoardElementAt<AddResourceView>(R.AddResourceView, new BoardPosition(100,100,3));
+        view.CachedTransform.position = gameBoard.BoardDef.GetSectorCenterWorldPosition(position.X, position.Y, position.Z) + Vector3.up;
+        view.AddResource(def.CreateReward, view.CachedTransform.position + Vector3.up);
     }
 }

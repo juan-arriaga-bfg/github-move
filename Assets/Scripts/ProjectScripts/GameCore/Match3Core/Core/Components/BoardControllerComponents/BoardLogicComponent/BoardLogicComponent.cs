@@ -10,6 +10,11 @@ public class BoardLogicComponent : ECSEntity,
     public override int Guid { get { return ComponentGuid; } }
 
     protected BoardController context;
+    
+    public BoardController Context
+    {
+        get { return context; }
+    }
 
     private int width;
 

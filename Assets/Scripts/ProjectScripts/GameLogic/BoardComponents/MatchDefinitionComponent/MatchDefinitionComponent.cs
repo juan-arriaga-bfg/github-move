@@ -7,10 +7,17 @@ public class MatchDefinitionComponent : ECSEntity
     public override int Guid { get { return ComponentGuid; } }
 
     private Dictionary<int, PieceMatchDef> definition;
+
+    public BoardLogicComponent Context;
     
     public MatchDefinitionComponent(Dictionary<int, PieceMatchDef> def)
     {
         definition = def;
+    }
+
+    public override void OnRegisterEntity(ECSEntity entity)
+    {
+        Context = entity as BoardLogicComponent;
     }
 
     public int GetPieceCountForMatch(int pieceId)
