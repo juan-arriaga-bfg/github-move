@@ -3904,6 +3904,7 @@ MonoBehaviour:
   progressLabel: {fileID: 114305162057989726}
   skillLabel: {fileID: 114486862685860646}
   cardLabel: {fileID: 114542800476022428}
+  buttonLabel: {fileID: 114636046481625204}
   heroIcon: {fileID: 114937482822136102}
   heroSmallIcon: {fileID: 114492026698978110}
   skillIcon: {fileID: 114350472480592092}
@@ -4681,7 +4682,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1009.9, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224276998150653070
@@ -5271,7 +5272,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 36.010002, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224795258151618410

@@ -25,7 +25,7 @@ public class UITavernWindowModel : IWWindowModel
         {
             return Obstacle == null
                 ? "Your Heroes"
-                : string.Format("Defiance {0} Requirements:", CurrentAbility.Ability);
+                : string.Format("{0} Requirements:", CurrentAbility.Ability);
         }
     }
     

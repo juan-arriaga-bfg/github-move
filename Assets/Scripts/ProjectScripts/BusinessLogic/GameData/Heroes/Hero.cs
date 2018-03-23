@@ -75,6 +75,13 @@ public class Hero
     {
         get { return def.Levels[Level].Abilities[0].Value; }
     }
+
+    public int GetAbilityValue(AbilityType ability)
+    {
+        var heroAbility = def.Levels[Level].Abilities.Find(pair => pair.Ability == ability);
+        
+        return heroAbility == null ? 0 : heroAbility.Value;
+    }
     
     public int NextAbilityValue
     {

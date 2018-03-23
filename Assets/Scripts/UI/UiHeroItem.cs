@@ -10,6 +10,7 @@ public class UiHeroItem : MonoBehaviour
     [SerializeField] private NSText progressLabel;
     [SerializeField] private NSText skillLabel;
     [SerializeField] private NSText cardLabel;
+    [SerializeField] private NSText buttonLabel;
     
     [SerializeField] private Image heroIcon;
     [SerializeField] private Image heroSmallIcon;
@@ -51,8 +52,6 @@ public class UiHeroItem : MonoBehaviour
         heroIcon.sprite = iconHero;
         heroSmallIcon.sprite = iconHero;
         
-        skillIcon.sprite = IconService.Current.GetSpriteById(hero.CurrentAbility.ToString());
-        
         nameLabel.Text = hero.Def.Uid;
         levelLabel.Text = string.Format("<size=45>{0}</size> <size=35>Lvl</size>", hero.Level + 1);
         
@@ -75,16 +74,28 @@ public class UiHeroItem : MonoBehaviour
 
     public void OnClick()
     {
+        if (obstacle != null)
+        {
+            toggle.isOn = !toggle.isOn;
+            return;
+        }
+        
         var model = UIService.Get.GetCachedModel<UICharacterWindowModel>(UIWindowType.CharacterWindow);
 
         model.Hero = hero;
         
         UIService.Get.ShowWindow(UIWindowType.CharacterWindow);
     }
-
+    
     public void OnSelect()
     {
         if(isInit) return;
+
+        if (obstacle == null)
+        {
+            OnClick();
+            return;
+        }
         
         hero.InAdventure = toggle.isOn ? obstacle.GetUid() : -1;
         InitForQuest();
@@ -98,47 +109,47 @@ public class UiHeroItem : MonoBehaviour
         var message = inAdventure ? "Ready" : "In Mission";
         var color = inAdventure ? "00FF00" : "FF0000";
         
+        buttonLabel.Text = "Up";
         messageLabel.Text = string.Format("<color=#{0}>{1}</color>", color, message);
         skillLabel.Text = string.Format("<color=#{0}>{1}</color>", color, hero.CurrentAbilityValue);
         
         progressGo.SetActive(true);
-        buttonGo.SetActive(true);
+        buttonGo.SetActive(hero.CurrentProgress >= hero.TotalProgress);
 
-        toggle.interactable = false;
+        toggle.interactable = hero.CurrentProgress >= hero.TotalProgress;
         toggle.isOn = false;
+        
+        skillIcon.sprite = IconService.Current.GetSpriteById(hero.CurrentAbility.ToString());
     }
 
     private void InitForQuest()
     {
-        var message = "";
-        var color = "";
-        var skillMessage = "";
+        var isWaiting = hero.GetAbilityValue(ability.Ability) >= ability.Value;
         
-        buttonGo.SetActive(false);
+        var message = hero.InAdventure == -1 ? (isWaiting ? "Ready" : "Skill to Low") : "In Mission";
+        var color = hero.InAdventure == -1 && isWaiting ? "00FF00" : "FF0000";
+        var skillMessage = string.Format("{0}/{1}", hero.GetAbilityValue(ability.Ability), ability.Value);
+        
+        buttonLabel.Text = "Send";
+        messageLabel.Text = string.Format("<color=#{0}>{1}</color>", color, message);
+        skillLabel.Text = string.Format("<color=#{0}>{1}</color>", color, skillMessage);
+        
         progressGo.SetActive(true);
+        
+        skillIcon.sprite = IconService.Current.GetSpriteById(ability.Ability.ToString());
         
         if (ability.Ability == hero.CurrentAbility)
         {
-            var isWaiting = hero.CurrentAbilityValue >= ability.Value;
-            
-            message = hero.InAdventure == -1 ? (isWaiting ? "Ready" : "Skill to Low") : "In Mission";
-            color = hero.InAdventure == -1 && isWaiting ? "00FF00" : "FF0000";
-            skillMessage = string.Format("{0}/{1}", hero.CurrentAbilityValue, ability.Value);
-            
             toggle.interactable = true;
             toggle.isOn = hero.InAdventure == obstacle.GetUid();
+            buttonGo.SetActive(!toggle.isOn);
         }
         else
         {
-            message = hero.InAdventure == -1 ? "Skill to Low" : "In Mission";
-            color = "FF0000";
-            skillMessage = hero.CurrentAbilityValue.ToString();
             toggle.interactable = false;
             toggle.isOn = false;
+            buttonGo.SetActive(false);
         }
-        
-        messageLabel.Text = string.Format("<color=#{0}>{1}</color>", color, message);
-        skillLabel.Text = string.Format("<color=#{0}>{1}</color>", color, skillMessage);
     }
 
     private void InitFake()

@@ -55,6 +55,8 @@ public class UITavernWindowView : UIGenericPopupWindowView
         base.OnViewClose();
         
         UITavernWindowModel windowModel = Model as UITavernWindowModel;
+        windowModel.Obstacle = null;
+        windowModel.CurrentAbility = null;
     }
 
     private void UpdateItems(UITavernWindowModel model)
