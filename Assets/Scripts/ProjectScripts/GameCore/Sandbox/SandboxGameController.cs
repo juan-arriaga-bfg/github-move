@@ -102,7 +102,7 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
         
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        /*boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(10, 20),
             PieceTypeId = PieceType.Tavern1.Id
@@ -118,12 +118,82 @@ public class SandboxGameController : MonoBehaviour
         {
             At = new BoardPosition(13, 20),
             PieceTypeId = PieceType.Castle1.Id
+        });*/
+        
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(10, 10),
+            PieceTypeId = PieceType.A1.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(10, 11),
+            PieceTypeId = PieceType.A2.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(10, 12),
+            PieceTypeId = PieceType.A3.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(10, 13),
+            PieceTypeId = PieceType.A4.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(10, 14),
+            PieceTypeId = PieceType.A5.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(10, 15),
+            PieceTypeId = PieceType.A6.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(10, 16),
+            PieceTypeId = PieceType.A7.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(10, 17),
+            PieceTypeId = PieceType.A8.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(13, 10),
+            PieceTypeId = PieceType.B1.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(13, 11),
+            PieceTypeId = PieceType.B2.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(13, 12),
+            PieceTypeId = PieceType.B3.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(13, 13),
+            PieceTypeId = PieceType.B4.Id
         });
         
         //register board
         BoardService.Current.RegisterBoard(boardController, 0);
-
-
     }
 
 }

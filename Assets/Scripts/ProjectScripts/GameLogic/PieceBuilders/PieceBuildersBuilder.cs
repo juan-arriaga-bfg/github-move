@@ -30,9 +30,12 @@ public class PieceBuildersBuilder
         dict.Add(PieceType.A5.Id, new SimplePieceBuilder());
         dict.Add(PieceType.A6.Id, new SimplePieceBuilder());
         dict.Add(PieceType.A7.Id, new SimplePieceBuilder());
+        dict.Add(PieceType.A8.Id, new SimplePieceBuilder());
         
         dict.Add(PieceType.B1.Id, new SimplePieceBuilder());
         dict.Add(PieceType.B2.Id, new SimplePieceBuilder());
+        dict.Add(PieceType.B3.Id, new SimplePieceBuilder());
+        dict.Add(PieceType.B4.Id, new SimplePieceBuilder());
         
         return dict;
     }

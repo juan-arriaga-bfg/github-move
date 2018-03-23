@@ -15,7 +15,6 @@ public class R
      public const string M1Piece = "M1Piece";
      public const string E1Piece = "E1Piece";
      public const string A5Piece = "A5Piece";
-     public const string B5Piece = "B5Piece";
      public const string E2Piece = "E2Piece";
      public const string E3Piece = "E3Piece";
      public const string A6Piece = "A6Piece";
@@ -59,4 +58,5 @@ public class R
      public const string Sawmill5Piece = "Sawmill5Piece";
      public const string Sawmill6Piece = "Sawmill6Piece";
      public const string Sawmill7Piece = "Sawmill7Piece";
+     public const string A8Piece = "A8Piece";
 }

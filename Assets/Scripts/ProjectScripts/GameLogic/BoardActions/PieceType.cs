@@ -11,12 +11,12 @@ public static partial class PieceType
         RegisterType(A5);
         RegisterType(A6);
         RegisterType(A7);
+        RegisterType(A8);
         
         RegisterType(B1);
         RegisterType(B2);
         RegisterType(B3);
         RegisterType(B4);
-        RegisterType(B5);
         
         RegisterType(E1);
         RegisterType(E2);
@@ -69,12 +69,12 @@ public static partial class PieceType
     public readonly static PieceTypeDef A5 = new PieceTypeDef{Id = 104, Abbreviations = new List<string>{ "A5", "PieceA5" }};
     public readonly static PieceTypeDef A6 = new PieceTypeDef{Id = 105, Abbreviations = new List<string>{ "A6", "PieceA6" }};
     public readonly static PieceTypeDef A7 = new PieceTypeDef{Id = 106, Abbreviations = new List<string>{ "A7", "PieceA7" }};
+    public readonly static PieceTypeDef A8 = new PieceTypeDef{Id = 107, Abbreviations = new List<string>{ "A8", "PieceA8" }};
     
     public readonly static PieceTypeDef B1 = new PieceTypeDef{Id = 200, Abbreviations = new List<string>{ "B1", "PieceB1" }};
     public readonly static PieceTypeDef B2 = new PieceTypeDef{Id = 201, Abbreviations = new List<string>{ "B2", "PieceB2" }};
     public readonly static PieceTypeDef B3 = new PieceTypeDef{Id = 202, Abbreviations = new List<string>{ "B3", "PieceB3" }};
     public readonly static PieceTypeDef B4 = new PieceTypeDef{Id = 203, Abbreviations = new List<string>{ "B4", "PieceB4" }};
-    public readonly static PieceTypeDef B5 = new PieceTypeDef{Id = 204, Abbreviations = new List<string>{ "B5", "PieceB5" }};
     
     public readonly static PieceTypeDef E1 = new PieceTypeDef{Id = 400, Abbreviations = new List<string>{ "E1" }};
     public readonly static PieceTypeDef E2 = new PieceTypeDef{Id = 401, Abbreviations = new List<string>{ "E2" }};
@@ -118,5 +118,4 @@ public static partial class PieceType
     public readonly static PieceTypeDef Tavern7 = new PieceTypeDef{Id = 1206, Abbreviations = new List<string>{ "Tavern7" }};
     public readonly static PieceTypeDef Tavern8 = new PieceTypeDef{Id = 1207, Abbreviations = new List<string>{ "Tavern8" }};
     public readonly static PieceTypeDef Tavern9 = new PieceTypeDef{Id = 1208, Abbreviations = new List<string>{ "Tavern9" }};
-    
 }

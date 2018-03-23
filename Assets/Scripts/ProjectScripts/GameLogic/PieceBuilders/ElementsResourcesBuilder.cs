@@ -34,12 +34,12 @@ public class ElementsResourcesBuilder
             {PieceType.A5.Id, R.A5Piece},
             {PieceType.A6.Id, R.A6Piece},
             {PieceType.A7.Id, R.A7Piece},
+            {PieceType.A8.Id, R.A8Piece},
 
             {PieceType.B1.Id, R.B1Piece},
             {PieceType.B2.Id, R.B2Piece},
             {PieceType.B3.Id, R.B3Piece},
             {PieceType.B4.Id, R.B4Piece},
-            {PieceType.B5.Id, R.B5Piece},
 
             {PieceType.Gbox1.Id, R.GBox1Piece},
             
