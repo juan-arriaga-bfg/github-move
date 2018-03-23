@@ -1,10 +1,12 @@
 using UnityEngine;
-using DG.Tweening;
+using UnityEngine.UI;
 
 public class UIMessageWindowView : UIGenericPopupWindowView
 {
     [SerializeField] private NSText buttonAcceptLabel;
     [SerializeField] private NSText buttonCancelLabel;
+    
+    [SerializeField] private Image imageMessage;
     
     [SerializeField] private GameObject btnAccept;
     [SerializeField] private GameObject btnCancel;
@@ -17,6 +19,14 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         base.OnViewShow();
         
         var windowModel = Model as UIMessageWindowModel;
+        
+        imageMessage.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Image));
+        message.gameObject.SetActive(string.IsNullOrEmpty(windowModel.Image));
+
+        if (!string.IsNullOrEmpty(windowModel.Image))
+        {
+            imageMessage.sprite = IconService.Current.GetSpriteById(windowModel.Image);
+        }
         
         isAccept = false;
         isCancel = false;
@@ -36,6 +46,8 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         base.OnViewCloseCompleted();
         
         var windowModel = Model as UIMessageWindowModel;
+
+        windowModel.Image = null;
 
         if (isAccept && windowModel.OnAccept != null) windowModel.OnAccept();
         if (isCancel && windowModel.OnCancel != null) windowModel.OnCancel();

@@ -62,6 +62,6 @@ public class UiQuestStartItem : MonoBehaviour
     
     public bool InAdventure()
     {
-        return hero != null && hero.InAdventure == obstacle.GetUid() && hero.CurrentAbilityValue >= ability.Value;
+        return !gameObject.activeSelf || hero != null && hero.InAdventure == obstacle.GetUid() && hero.CurrentAbilityValue >= ability.Value;
     }
 }

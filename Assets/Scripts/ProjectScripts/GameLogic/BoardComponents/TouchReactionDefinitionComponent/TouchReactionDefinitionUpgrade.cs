@@ -71,7 +71,17 @@ public class TouchReactionDefinitionUpgrade : TouchReactionDefinitionComponent
 				item =>
 				{
 					// on purchase failed (not enough cash)
-					UIMessageWindowController.CreateDefaultMessage("Not enough coins!");
+					var model2= UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+					model2.Title = "Need coins?";
+					model2.Message = null;
+					model2.Image = "tutorial_TextBlock_1";
+					model2.AcceptLabel = "Ok";
+        
+					model2.OnAccept = () => {};
+					model2.OnCancel = null;
+        
+					UIService.Get.ShowWindow(UIWindowType.MessageWindow);
 				}
 			);
 		};

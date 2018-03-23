@@ -76,12 +76,12 @@ public class UIQuestStartWindowView : UIGenericPopupWindowView
     private void UpdateItems(UIQuestStartWindowModel model)
     {
         var conditions = model.GetConditionHeroes();
-
+        
         if (items == null)
         {
-            for (var i = 1; i < conditions.Count; i++)
+            for (var i = 1; i < 3; i++)
             {
-                var go = Instantiate(itemTemplate, itemTemplate.transform.parent);
+                Instantiate(itemTemplate, itemTemplate.transform.parent);
             }
 
             items = itemTemplate.transform.parent.GetComponentsInChildren<UiQuestStartItem>().ToList();

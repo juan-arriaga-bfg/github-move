@@ -17,6 +17,7 @@ public class ChangeObstacleStateView : IWBaseMonoBehaviour
     private ObstacleConditionDelay condition;
 
     private ObstacleState cachedState;
+    private Action OnComplete;
     
     public void Init(PieceBoardElementView context)
     {
@@ -35,6 +36,8 @@ public class ChangeObstacleStateView : IWBaseMonoBehaviour
         {
             obstacle = context.Piece.Context.ObstaclesLogic.GetObstacle(context.Piece.CachedPosition);
             if (obstacle == null) return;
+            
+            OnComplete = () => HintArrowView.AddHint(context.Piece.CachedPosition);
         }
 
         if (cachedState == ObstacleState.InProgres)
@@ -53,6 +56,12 @@ public class ChangeObstacleStateView : IWBaseMonoBehaviour
         
         message.Text = cachedState == ObstacleState.Unlock ? "Help" : (cachedState == ObstacleState.Open ? "Complete" : "");
         price.Text = obstacle.Def.Price.Amount.ToString();
+
+        if (cachedState == ObstacleState.Open && OnComplete != null)
+        {
+            OnComplete();
+            OnComplete = null;
+        }
     }
 
     private void UpdateTimer()

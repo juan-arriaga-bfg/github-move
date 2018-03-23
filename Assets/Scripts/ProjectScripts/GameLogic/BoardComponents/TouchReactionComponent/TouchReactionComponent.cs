@@ -42,6 +42,9 @@
     {
         if (ReactionCondition == null || ReactionDefinition == null) return false;
         
+        var worldPos = context.Context.BoardDef.GetSectorCenterWorldPosition(position.X, position.Up.Y, position.Z);
+        context.Context.Manipulator.CameraManipulator.MoveTo(worldPos);
+        
         if (ReactionCondition.Check(position, context) == false) return false;
         
         ReactionCondition.Recharge();

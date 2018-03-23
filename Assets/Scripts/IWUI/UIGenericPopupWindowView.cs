@@ -4,7 +4,7 @@ using DG.Tweening;
 public class UIGenericPopupWindowView : UIGenericWindowView
 {
     [SerializeField] private NSText title;
-    [SerializeField] private NSText message;
+    [SerializeField] protected NSText message;
     
     [SerializeField] private RectTransform viewAnchor;
 
