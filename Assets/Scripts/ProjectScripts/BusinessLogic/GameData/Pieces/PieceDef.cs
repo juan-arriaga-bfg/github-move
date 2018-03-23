@@ -8,6 +8,7 @@
     
     public int SpawnAmount { get; set; }
     public int SpawnCapacity { get; set; }
+    public bool IsFilledInStart { get; set; }
     
     public CurrencyPair SpawnResources { get; set; }
     public CurrencyPair CreateReward { get; set; }

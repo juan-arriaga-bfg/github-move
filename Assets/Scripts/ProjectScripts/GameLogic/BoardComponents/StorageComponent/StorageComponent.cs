@@ -8,21 +8,14 @@ public class StorageComponent : IECSComponent, ITimerComponent
 
     public int SpawnPiece;
     public int Capacity;
-    
-    private int filling;
-    
-    public int Filling
-    {
-        get { return filling; }
-    }
-    
+    public int Filling;
+
     public TimerComponent Timer { get; private set; }
     
     public void OnRegisterEntity(ECSEntity entity)
     {
         var piece = entity as Piece;
         
-        filling = 0;
         Timer = piece.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
         
         if(Timer == null) return;
@@ -40,18 +33,18 @@ public class StorageComponent : IECSComponent, ITimerComponent
 
     private void Update()
     {
-        filling = Mathf.Min(filling + 1, Capacity);
+        Filling = Mathf.Min(Filling + 1, Capacity);
         
-        if(filling < Capacity) Timer.Start();
+        if(Filling < Capacity) Timer.Start();
     }
     
     public bool Scatter(out int amount)
     {
-        amount = filling;
+        amount = Filling;
         
-        if (filling == 0) return false;
+        if (Filling == 0) return false;
 
-        filling = 0;
+        Filling = 0;
         Timer.Start();
         
         return true;

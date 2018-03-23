@@ -13,7 +13,8 @@
         piece.RegisterComponent(new StorageComponent
         {
             SpawnPiece = def.SpawnPieceType,
-            Capacity = def.SpawnCapacity
+            Capacity = def.SpawnCapacity,
+            Filling = def.IsFilledInStart ? def.SpawnCapacity : 0
         });
         
         piece.RegisterComponent(new TouchReactionComponent()

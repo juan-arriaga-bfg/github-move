@@ -79,6 +79,7 @@
     "Uid": "Castle1",
     "Delay": 7200,
     "SpawnPiece": "ChestCommon",
+    "IsFilledInStart":"true",
     "SpawnAmount": 1,
     "SpawnCapacity": 2,
     "UpgradePrice": {
@@ -263,6 +264,7 @@
     "Delay": 2,
     "SpawnPiece": "A1",
     "UpgradeTargetPiece": "Castle",
+    "IsFilledInStart":"true",
     "SpawnAmount": 1,
     "SpawnCapacity": 10,
     "UpgradePrice": {
