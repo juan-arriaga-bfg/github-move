@@ -40,6 +40,7 @@ public class ElementsResourcesBuilder
             {PieceType.B2.Id, R.B2Piece},
             {PieceType.B3.Id, R.B3Piece},
             {PieceType.B4.Id, R.B4Piece},
+            {PieceType.B5.Id, R.B5Piece},
 
             {PieceType.Gbox1.Id, R.GBox1Piece},
             
