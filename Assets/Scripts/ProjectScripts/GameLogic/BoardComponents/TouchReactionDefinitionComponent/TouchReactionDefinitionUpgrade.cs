@@ -37,7 +37,7 @@ public class TouchReactionDefinitionUpgrade : TouchReactionDefinitionComponent
 		var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
 
 		model.Title = "Upgrade";
-		model.Message = string.Format("upgrade to {0} level, for {1} coins?", def.Uid[def.Uid.Length - 1], def.UpgradePrice.Amount);
+		model.Message = string.Format("Upgrade to {0} level, for {1} coins?", def.Uid[def.Uid.Length - 1], def.UpgradePrice.Amount);
 
 		model.AcceptLabel = "Upgrade";
 		model.CancelLabel = "Cancel";

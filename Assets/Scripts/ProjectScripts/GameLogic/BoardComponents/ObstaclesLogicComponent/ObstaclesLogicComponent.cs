@@ -43,13 +43,13 @@ public class ObstaclesLogicComponent : IECSComponent, IECSSystem
         
         context.ActionExecutor.PerformAction(new FillBoardAction
         {
-            Piece = PieceType.O2.Id,
+            Piece = PieceType.O4.Id,
             Positions = positions
         });
         
-        var position = new BoardPosition(15, 15, context.BoardDef.PieceLayer);
+        var position = new BoardPosition(13, 13, context.BoardDef.PieceLayer);
 
-        for (int i = 8; i < 16; i++)
+        for (int i = 7; i < 15; i++)
         {
             context.BoardLogic.EmptyCellsFinder.FindRingWithPointInCenter(position, positions, 1000, i);
         }

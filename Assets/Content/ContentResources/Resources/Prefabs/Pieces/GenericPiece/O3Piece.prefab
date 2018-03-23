@@ -52,7 +52,7 @@ GameObject:
   - component: {fileID: 4542807987214320}
   - component: {fileID: 114713224829700432}
   m_Layer: 0
-  m_Name: O2Piece
+  m_Name: O3Piece
   m_TagString: Untagged
   m_Icon: {fileID: 4660412927644837186, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -64,9 +64,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1559396244818626}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.4266001, y: -0.17670357, z: 0.33944443, w: -0.81949115}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children: []
   m_Father: {fileID: 4837408307622380}
   m_RootOrder: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
   FadeValue: 0
   selectionView: {fileID: 0}
   skin: {fileID: 212929880325280430}
-  defaultSkinName: lake
+  defaultSkinName: road
   minIndex: 1
   maxIndex: 1
 --- !u!212 &212929880325280430

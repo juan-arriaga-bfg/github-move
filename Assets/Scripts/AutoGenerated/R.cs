@@ -61,4 +61,6 @@ public class R
      public const string A8Piece = "A8Piece";
      public const string B5Piece = "B5Piece";
      public const string HintArrow = "HintArrow";
+     public const string O3Piece = "O3Piece";
+     public const string O4Piece = "O4Piece";
 }
