@@ -76,6 +76,10 @@ TextureImporter:
     21300138: dialog_back_4
     21300140: card_border_shine
     21300142: face_Unknown
+    21300144: tutorial_TextBlock_2
+    21300146: tutorial_TextBlock_1
+    21300148: card_border_Lvl_other
+    21300150: arrow_orange
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -156,11 +160,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: dialog_back_1
+      name: tutorial_TextBlock_2
       rect:
         serializedVersion: 2
         x: 0
         y: 321
+        width: 533
+        height: 202
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tutorial_TextBlock_1
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 0
+        width: 553
+        height: 194
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dialog_back_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 524
         width: 264
         height: 263
       alignment: 9
@@ -174,7 +206,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 585
+        y: 788
         width: 216
         height: 224
       alignment: 9
@@ -187,8 +219,8 @@ TextureImporter:
       name: card_border_object_orange
       rect:
         serializedVersion: 2
-        x: 0
-        y: 810
+        x: 217
+        y: 788
         width: 200
         height: 200
       alignment: 9
@@ -201,8 +233,8 @@ TextureImporter:
       name: card_border_object_green
       rect:
         serializedVersion: 2
-        x: 201
-        y: 810
+        x: 265
+        y: 524
         width: 200
         height: 200
       alignment: 9
@@ -215,50 +247,8 @@ TextureImporter:
       name: card_border_object_blue
       rect:
         serializedVersion: 2
-        x: 217
-        y: 585
-        width: 200
-        height: 200
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: dialog_back_4
-      rect:
-        serializedVersion: 2
-        x: 402
-        y: 786
-        width: 200
-        height: 200
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 100, y: 100, z: 100, w: 100}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: dialog_back_3
-      rect:
-        serializedVersion: 2
-        x: 265
-        y: 321
-        width: 200
-        height: 200
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 100, y: 100, z: 100, w: 100}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: card_border_object_red
-      rect:
-        serializedVersion: 2
         x: 418
-        y: 522
+        y: 725
         width: 200
         height: 200
       alignment: 9
@@ -272,7 +262,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 466
-        y: 321
+        y: 524
         width: 200
         height: 200
       alignment: 9
@@ -282,11 +272,53 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: dialog_back_3
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 725
+        width: 200
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 100, y: 100, z: 100, w: 100}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: card_border_object_red
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 195
+        width: 200
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dialog_back_4
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 396
+        width: 200
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 100, y: 100, z: 100, w: 100}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: face_John
       rect:
         serializedVersion: 2
-        x: 603
-        y: 723
+        x: 735
+        y: 195
         width: 156
         height: 180
       alignment: 9
@@ -299,8 +331,8 @@ TextureImporter:
       name: card_border_shine
       rect:
         serializedVersion: 2
-        x: 619
-        y: 522
+        x: 820
+        y: 597
         width: 168
         height: 166
       alignment: 9
@@ -313,8 +345,8 @@ TextureImporter:
       name: face_Robin
       rect:
         serializedVersion: 2
-        x: 760
-        y: 689
+        x: 868
+        y: 376
         width: 156
         height: 171
       alignment: 9
@@ -327,8 +359,8 @@ TextureImporter:
       name: face_Unknown
       rect:
         serializedVersion: 2
-        x: 760
-        y: 861
+        x: 892
+        y: 195
         width: 143
         height: 158
       alignment: 9
@@ -341,8 +373,8 @@ TextureImporter:
       name: chest_4_1
       rect:
         serializedVersion: 2
-        x: 904
-        y: 861
+        x: 1035
+        y: 0
         width: 173
         height: 117
       alignment: 9
@@ -355,8 +387,8 @@ TextureImporter:
       name: chest_4_2
       rect:
         serializedVersion: 2
-        x: 481
-        y: 0
+        x: 820
+        y: 764
         width: 174
         height: 116
       alignment: 9
@@ -369,8 +401,8 @@ TextureImporter:
       name: chest_2_1
       rect:
         serializedVersion: 2
-        x: 481
-        y: 117
+        x: 820
+        y: 881
         width: 172
         height: 114
       alignment: 9
@@ -383,8 +415,8 @@ TextureImporter:
       name: chest_2_2
       rect:
         serializedVersion: 2
-        x: 654
-        y: 117
+        x: 993
+        y: 881
         width: 177
         height: 103
       alignment: 9
@@ -397,8 +429,8 @@ TextureImporter:
       name: chest_1_1
       rect:
         serializedVersion: 2
-        x: 656
-        y: 0
+        x: 989
+        y: 548
         width: 170
         height: 107
       alignment: 9
@@ -411,8 +443,8 @@ TextureImporter:
       name: chest_1_2
       rect:
         serializedVersion: 2
-        x: 827
-        y: 0
+        x: 989
+        y: 656
         width: 173
         height: 105
       alignment: 9
@@ -425,8 +457,8 @@ TextureImporter:
       name: chest_3_1
       rect:
         serializedVersion: 2
-        x: 667
-        y: 221
+        x: 995
+        y: 762
         width: 168
         height: 106
       alignment: 9
@@ -439,8 +471,8 @@ TextureImporter:
       name: card_border_2
       rect:
         serializedVersion: 2
-        x: 832
-        y: 106
+        x: 418
+        y: 926
         width: 185
         height: 96
       alignment: 9
@@ -453,8 +485,8 @@ TextureImporter:
       name: chest_3_2
       rect:
         serializedVersion: 2
-        x: 1001
-        y: 0
+        x: 1025
+        y: 354
         width: 173
         height: 102
       alignment: 9
@@ -467,8 +499,8 @@ TextureImporter:
       name: header_1
       rect:
         serializedVersion: 2
-        x: 667
-        y: 328
+        x: 1025
+        y: 457
         width: 220
         height: 78
       alignment: 9
@@ -481,8 +513,8 @@ TextureImporter:
       name: icon_card_coins
       rect:
         serializedVersion: 2
-        x: 788
-        y: 407
+        x: 1163
+        y: 536
         width: 128
         height: 128
       alignment: 9
@@ -492,11 +524,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: btn_orange_norm
+      name: btn_green_norm
       rect:
         serializedVersion: 2
-        x: 788
-        y: 536
+        x: 1164
+        y: 665
         width: 128
         height: 128
       alignment: 9
@@ -506,11 +538,25 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: btn_green_norm
+      name: btn_orange_norm
       rect:
         serializedVersion: 2
-        x: 888
-        y: 203
+        x: 1171
+        y: 794
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 64, y: 64, z: 64, w: 64}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: btn_blue_norm
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 118
         width: 128
         height: 128
       alignment: 9
@@ -523,8 +569,8 @@ TextureImporter:
       name: shine_2
       rect:
         serializedVersion: 2
-        x: 917
-        y: 332
+        x: 1165
+        y: 118
         width: 128
         height: 128
       alignment: 9
@@ -534,25 +580,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: btn_blue_norm
-      rect:
-        serializedVersion: 2
-        x: 1017
-        y: 203
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 64, y: 64, z: 64, w: 64}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
       name: header_2
       rect:
         serializedVersion: 2
-        x: 1018
-        y: 103
+        x: 1171
+        y: 923
         width: 220
         height: 72
       alignment: 9
@@ -565,8 +597,8 @@ TextureImporter:
       name: card_island
       rect:
         serializedVersion: 2
-        x: 603
-        y: 904
+        x: 667
+        y: 597
         width: 133
         height: 115
       alignment: 9
@@ -579,8 +611,8 @@ TextureImporter:
       name: icon_settings
       rect:
         serializedVersion: 2
-        x: 917
-        y: 461
+        x: 534
+        y: 396
         width: 121
         height: 115
       alignment: 9
@@ -593,8 +625,8 @@ TextureImporter:
       name: icon_Fight
       rect:
         serializedVersion: 2
-        x: 667
-        y: 407
+        x: 1209
+        y: 0
         width: 120
         height: 113
       alignment: 9
@@ -607,24 +639,10 @@ TextureImporter:
       name: icon_Bow
       rect:
         serializedVersion: 2
-        x: 917
-        y: 577
+        x: 1199
+        y: 247
         width: 105
         height: 126
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: icon_back_green
-      rect:
-        serializedVersion: 2
-        x: 917
-        y: 704
-        width: 110
-        height: 109
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -635,8 +653,22 @@ TextureImporter:
       name: icon_back_blue
       rect:
         serializedVersion: 2
-        x: 1023
-        y: 577
+        x: 1294
+        y: 114
+        width: 110
+        height: 109
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: icon_back_green
+      rect:
+        serializedVersion: 2
+        x: 1330
+        y: 0
         width: 110
         height: 109
       alignment: 9
@@ -649,8 +681,8 @@ TextureImporter:
       name: icon_Shield
       rect:
         serializedVersion: 2
-        x: 1039
-        y: 461
+        x: 1246
+        y: 374
         width: 100
         height: 114
       alignment: 9
@@ -663,8 +695,8 @@ TextureImporter:
       name: res_desk
       rect:
         serializedVersion: 2
-        x: 418
-        y: 723
+        x: 1036
+        y: 247
         width: 154
         height: 48
       alignment: 9
@@ -677,8 +709,8 @@ TextureImporter:
       name: icon_Crystals
       rect:
         serializedVersion: 2
-        x: 481
-        y: 232
+        x: 604
+        y: 926
         width: 93
         height: 64
       alignment: 9
@@ -691,8 +723,8 @@ TextureImporter:
       name: icon_Coins
       rect:
         serializedVersion: 2
-        x: 575
-        y: 232
+        x: 698
+        y: 926
         width: 90
         height: 64
       alignment: 9
@@ -706,7 +738,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 265
-        y: 522
+        y: 725
         width: 95
         height: 58
       alignment: 9
@@ -719,8 +751,8 @@ TextureImporter:
       name: card_border_Lvl_Build
       rect:
         serializedVersion: 2
-        x: 1175
-        y: 0
+        x: 1305
+        y: 224
         width: 72
         height: 72
       alignment: 9
@@ -733,8 +765,8 @@ TextureImporter:
       name: card_border_Lvl_Hero
       rect:
         serializedVersion: 2
-        x: 1046
-        y: 332
+        x: 1305
+        y: 297
         width: 72
         height: 72
       alignment: 9
@@ -747,8 +779,8 @@ TextureImporter:
       name: icon_desk
       rect:
         serializedVersion: 2
-        x: 904
-        y: 979
+        x: 993
+        y: 985
         width: 133
         height: 38
       alignment: 9
@@ -758,11 +790,25 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: card_border_Lvl_other
+      rect:
+        serializedVersion: 2
+        x: 1292
+        y: 489
+        width: 71
+        height: 71
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: icon_btn_buy
       rect:
         serializedVersion: 2
-        x: 1119
-        y: 332
+        x: 1292
+        y: 561
         width: 66
         height: 66
       alignment: 9
@@ -775,8 +821,8 @@ TextureImporter:
       name: icon_Alarm
       rect:
         serializedVersion: 2
-        x: 1146
-        y: 176
+        x: 1347
+        y: 370
         width: 66
         height: 66
       alignment: 9
@@ -789,8 +835,8 @@ TextureImporter:
       name: icon_TimeChest
       rect:
         serializedVersion: 2
-        x: 1146
-        y: 243
+        x: 1378
+        y: 224
         width: 57
         height: 62
       alignment: 9
@@ -803,10 +849,24 @@ TextureImporter:
       name: icon_heart
       rect:
         serializedVersion: 2
-        x: 1046
-        y: 405
+        x: 1036
+        y: 296
         width: 63
         height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: arrow_orange
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 725
+        width: 48
+        height: 56
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -817,8 +877,8 @@ TextureImporter:
       name: arrow
       rect:
         serializedVersion: 2
-        x: 361
-        y: 522
+        x: 1100
+        y: 296
         width: 48
         height: 56
       alignment: 9
@@ -831,8 +891,8 @@ TextureImporter:
       name: coin_arrow
       rect:
         serializedVersion: 2
-        x: 836
-        y: 203
+        x: 1149
+        y: 296
         width: 46
         height: 48
       alignment: 9
@@ -845,8 +905,8 @@ TextureImporter:
       name: progressBar1_1
       rect:
         serializedVersion: 2
-        x: 836
-        y: 252
+        x: 868
+        y: 548
         width: 49
         height: 41
       alignment: 9
@@ -859,8 +919,8 @@ TextureImporter:
       name: btn_x
       rect:
         serializedVersion: 2
-        x: 1038
-        y: 979
+        x: 1246
+        y: 489
         width: 38
         height: 41
       alignment: 9
@@ -873,8 +933,8 @@ TextureImporter:
       name: icon_TimeBar
       rect:
         serializedVersion: 2
-        x: 836
-        y: 294
+        x: 1127
+        y: 985
         width: 35
         height: 31
       alignment: 9
@@ -884,25 +944,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: progressBar1_LineYellow
-      rect:
-        serializedVersion: 2
-        x: 573
-        y: 723
-        width: 25
-        height: 41
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 8, y: 10, z: 8, w: 9}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
       name: progressBar1_LineGreen
       rect:
         serializedVersion: 2
-        x: 888
-        y: 332
+        x: 789
+        y: 926
         width: 25
         height: 41
       alignment: 9
@@ -912,11 +958,25 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: progressBar1_LineYellow
+      rect:
+        serializedVersion: 2
+        x: 789
+        y: 968
+        width: 25
+        height: 41
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 8, y: 10, z: 8, w: 9}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: icon_SpeedBuy
       rect:
         serializedVersion: 2
-        x: 619
-        y: 689
+        x: 918
+        y: 548
         width: 33
         height: 30
       alignment: 9
@@ -929,8 +989,8 @@ TextureImporter:
       name: back_shadow_1
       rect:
         serializedVersion: 2
-        x: 1028
-        y: 687
+        x: 1293
+        y: 628
         width: 4
         height: 151
       alignment: 9
@@ -943,8 +1003,8 @@ TextureImporter:
       name: card_border_stoneBlue
       rect:
         serializedVersion: 2
-        x: 573
-        y: 765
+        x: 952
+        y: 548
         width: 16
         height: 20
       alignment: 9
