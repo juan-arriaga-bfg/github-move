@@ -128,10 +128,15 @@ public class UIChestRewardWindowView : UIGenericWindowView
         
         var reward = windowModel.GetReward();
         var board = BoardService.Current.GetBoardById(0);
-        var house = GetHousePosition(reward.Currency);
-        var worldPos = board.BoardDef.GetSectorCenterWorldPosition(house.X, house.Up.Y, house.Z);
         
-        board.Manipulator.CameraManipulator.ZoomTo(0.3f, worldPos);
+        var position = GetHousePosition(reward.Currency);
+
+        if (position != null)
+        {
+            var house = position.Value;
+            var worldPos = board.BoardDef.GetSectorCenterWorldPosition(house.X, house.Up.Y, house.Z);
+            board.Manipulator.CameraManipulator.ZoomTo(0.3f, worldPos);
+        }
         
         if (reward.Currency != Currency.Coins.Name && GameDataService.Current.HeroesManager.GetHeroByCurrency(reward.Currency) == null)
         {
@@ -146,7 +151,7 @@ public class UIChestRewardWindowView : UIGenericWindowView
             {
                 IsCheckMatch = false,
                 IsShuffle = true,
-                At = house,
+                At = position.Value,
                 Pieces = pieces
             });
             
@@ -178,11 +183,16 @@ public class UIChestRewardWindowView : UIGenericWindowView
         );
     }
 
-    private BoardPosition GetHousePosition(string currency)
+    private BoardPosition? GetHousePosition(string currency)
     {
         if (GameDataService.Current.HeroesManager.GetHeroByCurrency(currency) != null)
         {
             return GameDataService.Current.PiecesManager.TavernPosition;
+        }
+
+        if (currency == Currency.Coins.Name)
+        {
+            return null;
         }
         
         return GameDataService.Current.PiecesManager.CastlePosition;
