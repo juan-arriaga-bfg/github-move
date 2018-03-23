@@ -22,7 +22,7 @@ public class UIQuestStartWindowModel : IWWindowModel
     
     public string ButtonText
     {
-        get { return string.Format("{0} Start", Obstacle.Def.StartPrice.Amount); }
+        get { return "Start"; }
     }
     
     public string TimeText

@@ -68,35 +68,9 @@ public class UIQuestStartWindowView : UIGenericPopupWindowView
     {
         var windowModel = Model as UIQuestStartWindowModel;
         
-        var price = windowModel.Obstacle.Def.StartPrice;
-        
-        var shopItem = new ShopItem
-        {
-            Uid = string.Format("purchase.test.{0}.10", Currency.Quest.Name), 
-            ItemUid = Currency.Quest.Name, 
-            Amount = 1,
-            CurrentPrices = new List<Price>
-            {
-                new Price{Currency = price.Currency, DefaultPriceAmount = price.Amount}
-            }
-        };
-
-        ShopService.Current.PurchaseItem
-        (
-            shopItem,
-            (item, s) =>
-            {
-                // on purchase success
-                InAdventure = true;
-                windowModel.Obstacle.State = ObstacleState.InProgres;
-                Controller.CloseCurrentWindow();
-            },
-            item =>
-            {
-                // on purchase failed (not enough cash)
-                UIMessageWindowController.CreateDefaultMessage("Not enough coins!");
-            }
-        );
+        InAdventure = true;
+        windowModel.Obstacle.State = ObstacleState.InProgres;
+        Controller.CloseCurrentWindow();
     }
 
     private void UpdateItems(UIQuestStartWindowModel model)
