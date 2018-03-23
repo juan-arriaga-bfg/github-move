@@ -130,6 +130,7 @@ public class UIChestRewardWindowView : UIGenericWindowView
         var board = BoardService.Current.GetBoardById(0);
         
         var position = GetHousePosition(reward.Currency);
+        var isCard = GameDataService.Current.HeroesManager.GetHeroByCurrency(reward.Currency) != null;
 
         if (position != null)
         {
@@ -138,7 +139,7 @@ public class UIChestRewardWindowView : UIGenericWindowView
             board.Manipulator.CameraManipulator.ZoomTo(0.3f, worldPos);
         }
         
-        if (reward.Currency != Currency.Coins.Name && GameDataService.Current.HeroesManager.GetHeroByCurrency(reward.Currency) == null)
+        if (reward.Currency != Currency.Coins.Name && !isCard)
         {
             var pieces = new List<int>();
 
@@ -175,6 +176,8 @@ public class UIChestRewardWindowView : UIGenericWindowView
             (item, s) =>
             {
                 // on purchase success
+                
+                if(isCard) AddCardsView.AddCard(position.Value, reward.Currency);
             },
             item =>
             {

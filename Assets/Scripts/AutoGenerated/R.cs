@@ -63,4 +63,5 @@ public class R
      public const string HintArrow = "HintArrow";
      public const string O3Piece = "O3Piece";
      public const string O4Piece = "O4Piece";
+     public const string AddCards = "AddCards";
 }

@@ -72,7 +72,8 @@ public class ElementsResourcesBuilder
 
             {-1000, R.HitboxDamageView},
             {-1100, R.AddResourceView},
-            {-1200, R.HintArrow}
+            {-1200, R.HintArrow},
+            {-1300, R.AddCards}
         };
         
         return dict;
