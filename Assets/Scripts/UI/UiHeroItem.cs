@@ -74,7 +74,7 @@ public class UiHeroItem : MonoBehaviour
 
     public void OnClick()
     {
-        if (obstacle != null)
+        if (obstacle != null && hero.GetAbilityValue(ability.Ability) >= ability.Value)
         {
             toggle.isOn = !toggle.isOn;
             return;
@@ -91,7 +91,7 @@ public class UiHeroItem : MonoBehaviour
     {
         if(isInit) return;
 
-        if (obstacle == null)
+        if (obstacle == null || hero.GetAbilityValue(ability.Ability) < ability.Value)
         {
             OnClick();
             return;
@@ -125,9 +125,10 @@ public class UiHeroItem : MonoBehaviour
     private void InitForQuest()
     {
         var isWaiting = hero.GetAbilityValue(ability.Ability) >= ability.Value;
+        var inMission = hero.InAdventure != -1;
         
-        var message = hero.InAdventure == -1 ? (isWaiting ? "Ready" : "Skill to Low") : "In Mission";
-        var color = hero.InAdventure == -1 && isWaiting ? "00FF00" : "FF0000";
+        var message = !inMission ? (isWaiting ? "Ready" : "Skill to Low") : "In Mission";
+        var color = !inMission && isWaiting ? "00FF00" : "FF0000";
         var skillMessage = string.Format("{0}/{1}", hero.GetAbilityValue(ability.Ability), ability.Value);
         
         buttonLabel.Text = "Send";
@@ -138,17 +139,27 @@ public class UiHeroItem : MonoBehaviour
         
         skillIcon.sprite = IconService.Current.GetSpriteById(ability.Ability.ToString());
         
+        
         if (ability.Ability == hero.CurrentAbility)
         {
-            toggle.interactable = true;
+            toggle.interactable = !inMission || hero.InAdventure == obstacle.GetUid();
+            
             toggle.isOn = hero.InAdventure == obstacle.GetUid();
-            buttonGo.SetActive(!toggle.isOn);
+            buttonGo.SetActive(!inMission && !toggle.isOn);
+            
+            if (!isWaiting && hero.CurrentProgress >= hero.TotalProgress)
+            {
+                buttonLabel.Text = "Level UP";
+                buttonGo.SetActive(true);
+            }
         }
         else
         {
-            toggle.interactable = false;
+            toggle.interactable = !inMission;
+            
+            buttonLabel.Text = "Level UP";
             toggle.isOn = false;
-            buttonGo.SetActive(false);
+            buttonGo.SetActive(!inMission && hero.CurrentProgress >= hero.TotalProgress);
         }
     }
 

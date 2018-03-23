@@ -56,7 +56,8 @@ public class UICharacterWindowView : UIGenericPopupWindowView
             model.OnCancel = null;
         
             UIService.Get.ShowWindow(UIWindowType.MessageWindow);
-            IWUIManager.Instance.CloseWindow(UIWindowType.TavernWindow);
+            UIService.Get.CloseWindow(UIWindowType.TavernWindow, true);
+            UIService.Get.CloseWindow(UIWindowType.QuestStartWindow, true);
             return;
         }
 
@@ -72,7 +73,8 @@ public class UICharacterWindowView : UIGenericPopupWindowView
             model.OnCancel = null;
         
             UIService.Get.ShowWindow(UIWindowType.MessageWindow);
-            IWUIManager.Instance.CloseWindow(UIWindowType.TavernWindow);
+            UIService.Get.CloseWindow(UIWindowType.TavernWindow, true);
+            UIService.Get.CloseWindow(UIWindowType.QuestStartWindow, true);
             return;
         }
         
