@@ -1,147 +1,225 @@
 ﻿[
   {
-    "Uid" : "Robin",
-    "Levels" :
-    [
+    "Uid": "Robin",
+    "Levels": [
       {
-        "Abilities" :
-        [
+        "Abilities": [
           {
-            "Ability" : "Dexterity",
-            "Value" : 5
-          }
-        ],
-        "Prices" :
-        [
-          {
-            "Currency": "Coins",
-            "Amount": 5
+            "Ability": "Dexterity",
+            "Value": 5
           },
           {
-            "Currency": "RobinCard",
-            "Amount": 5
-          }
-        ]
-      },
-      {
-        "Abilities" :
-        [
-          {
-            "Ability" : "Dexterity",
-            "Value" : 2
+            "Ability": "Strength",
+            "Value": 0
           }
         ],
-        "Prices" :
-        [
+        "Prices": [
           {
             "Currency": "Coins",
             "Amount": 20
           },
           {
             "Currency": "RobinCard",
+            "Amount": 5
+          }
+        ]
+      },
+      {
+        "Abilities": [
+          {
+            "Ability": "Dexterity",
+            "Value": 10
+          },
+          {
+            "Ability": "Strength",
+            "Value": 0
+          }
+        ],
+        "Prices": [
+          {
+            "Currency": "Coins",
+            "Amount": 40
+          },
+          {
+            "Currency": "RobinCard",
             "Amount": 20
           }
         ]
       },
       {
-        "Abilities" :
-        [
+        "Abilities": [
           {
-            "Ability" : "Dexterity",
-            "Value" : 4
+            "Ability": "Dexterity",
+            "Value": 15
+          },
+          {
+            "Ability": "Strength",
+            "Value": 0
           }
         ],
-        "Prices" :
-        [
+        "Prices": [
           {
             "Currency": "Coins",
+            "Amount": 80
+          },
+          {
+            "Currency": "RobinCard",
+            "Amount": 35
+          }
+        ]
+      },
+      {
+        "Abilities": [
+          {
+            "Ability": "Dexterity",
+            "Value": 20
+          },
+          {
+            "Ability": "Strength",
+            "Value": 0
+          }
+        ],
+        "Prices": [
+          {
+            "Currency": "Coins",
+            "Amount": 160
+          },
+          {
+            "Currency": "RobinCard",
             "Amount": 50
-          },
-          {
-            "Currency": "RobinCard",
-            "Amount": 50
           }
         ]
       },
       {
-        "Abilities" :
-        [
+        "Abilities": [
           {
-            "Ability" : "Dexterity",
-            "Value" : 6
+            "Ability": "Dexterity",
+            "Value": 25
+          },
+          {
+            "Ability": "Strength",
+            "Value": 0
           }
         ],
-        "Prices" :
-        [
+        "Prices": [
           {
             "Currency": "Coins",
-            "Amount": 100
+            "Amount": 320
           },
           {
             "Currency": "RobinCard",
-            "Amount": 100
+            "Amount": 65
           }
         ]
       },
       {
-        "Abilities" :
-        [
+        "Abilities": [
           {
-            "Ability" : "Dexterity",
-            "Value" : 8
+            "Ability": "Dexterity",
+            "Value": 30
+          },
+          {
+            "Ability": "Strength",
+            "Value": 0
           }
         ],
-        "Prices" :
-        [
+        "Prices": [
           {
             "Currency": "Coins",
-            "Amount": 200
+            "Amount": 640
           },
           {
             "Currency": "RobinCard",
-            "Amount": 200
+            "Amount": 80
           }
         ]
       },
       {
-        "Abilities" :
-        [
+        "Abilities": [
           {
-            "Ability" : "Dexterity",
-            "Value" : 10
+            "Ability": "Dexterity",
+            "Value": 35
+          },
+          {
+            "Ability": "Strength",
+            "Value": 0
           }
         ],
-        "Prices" :
-        [
+        "Prices": [
           {
             "Currency": "Coins",
-            "Amount": 300
+            "Amount": 1280
           },
           {
             "Currency": "RobinCard",
-            "Amount": 300
+            "Amount": 95
+          }
+        ]
+      },
+      {
+        "Abilities": [
+          {
+            "Ability": "Dexterity",
+            "Value": 40
+          },
+          {
+            "Ability": "Strength",
+            "Value": 0
+          }
+        ],
+        "Prices": [
+          {
+            "Currency": "Coins",
+            "Amount": 2560
+          },
+          {
+            "Currency": "RobinCard",
+            "Amount": 110
+          }
+        ]
+      },
+      {
+        "Abilities": [
+          {
+            "Ability": "Dexterity",
+            "Value": 45
+          },
+          {
+            "Ability": "Strength",
+            "Value": 0
+          }
+        ],
+        "Prices": [
+          {
+            "Currency": "Coins",
+            "Amount": 5120
+          },
+          {
+            "Currency": "RobinCard",
+            "Amount": 125
           }
         ]
       }
     ]
   },
   {
-    "Uid" : "John",
-    "Levels" :
-    [
+    "Uid": "John",
+    "Levels": [
       {
-        "Abilities" :
-        [
+        "Abilities": [
           {
-            "Ability" : "Strength",
-            "Value" : 5
+            "Ability": "Dexterity",
+            "Value": 0
+          },
+          {
+            "Ability": "Strength",
+            "Value": 5
           }
         ],
-        "Prices" :
-        [
+        "Prices": [
           {
             "Currency": "Coins",
-            "Amount": 5
+            "Amount": 30
           },
           {
             "Currency": "JohnCard",
@@ -150,18 +228,20 @@
         ]
       },
       {
-        "Abilities" :
-        [
+        "Abilities": [
           {
-            "Ability" : "Strength",
-            "Value" : 2
+            "Ability": "Dexterity",
+            "Value": 0
+          },
+          {
+            "Ability": "Strength",
+            "Value": 10
           }
         ],
-        "Prices" :
-        [
+        "Prices": [
           {
             "Currency": "Coins",
-            "Amount": 20
+            "Amount": 60
           },
           {
             "Currency": "JohnCard",
@@ -170,82 +250,156 @@
         ]
       },
       {
-        "Abilities" :
-        [
+        "Abilities": [
           {
-            "Ability" : "Strength",
-            "Value" : 4
+            "Ability": "Dexterity",
+            "Value": 0
+          },
+          {
+            "Ability": "Strength",
+            "Value": 15
           }
         ],
-        "Prices" :
-        [
+        "Prices": [
           {
             "Currency": "Coins",
+            "Amount": 120
+          },
+          {
+            "Currency": "JohnCard",
+            "Amount": 35
+          }
+        ]
+      },
+      {
+        "Abilities": [
+          {
+            "Ability": "Dexterity",
+            "Value": 0
+          },
+          {
+            "Ability": "Strength",
+            "Value": 20
+          }
+        ],
+        "Prices": [
+          {
+            "Currency": "Coins",
+            "Amount": 240
+          },
+          {
+            "Currency": "JohnCard",
             "Amount": 50
-          },
-          {
-            "Currency": "JohnCard",
-            "Amount": 50
           }
         ]
       },
       {
-        "Abilities" :
-        [
+        "Abilities": [
           {
-            "Ability" : "Strength",
-            "Value" : 6
+            "Ability": "Dexterity",
+            "Value": 0
+          },
+          {
+            "Ability": "Strength",
+            "Value": 25
           }
         ],
-        "Prices" :
-        [
+        "Prices": [
           {
             "Currency": "Coins",
-            "Amount": 100
+            "Amount": 480
           },
           {
             "Currency": "JohnCard",
-            "Amount": 100
+            "Amount": 65
           }
         ]
       },
       {
-        "Abilities" :
-        [
+        "Abilities": [
           {
-            "Ability" : "Strength",
-            "Value" : 8
+            "Ability": "Dexterity",
+            "Value": 0
+          },
+          {
+            "Ability": "Strength",
+            "Value": 30
           }
         ],
-        "Prices" :
-        [
+        "Prices": [
           {
             "Currency": "Coins",
-            "Amount": 200
+            "Amount": 960
           },
           {
             "Currency": "JohnCard",
-            "Amount": 200
+            "Amount": 80
           }
         ]
       },
       {
-        "Abilities" :
-        [
+        "Abilities": [
           {
-            "Ability" : "Strength",
-            "Value" : 10
+            "Ability": "Dexterity",
+            "Value": 0
+          },
+          {
+            "Ability": "Strength",
+            "Value": 35
           }
         ],
-        "Prices" :
-        [
+        "Prices": [
           {
             "Currency": "Coins",
-            "Amount": 300
+            "Amount": 1920
           },
           {
             "Currency": "JohnCard",
-            "Amount": 300
+            "Amount": 95
+          }
+        ]
+      },
+      {
+        "Abilities": [
+          {
+            "Ability": "Dexterity",
+            "Value": 0
+          },
+          {
+            "Ability": "Strength",
+            "Value": 40
+          }
+        ],
+        "Prices": [
+          {
+            "Currency": "Coins",
+            "Amount": 3840
+          },
+          {
+            "Currency": "JohnCard",
+            "Amount": 110
+          }
+        ]
+      },
+      {
+        "Abilities": [
+          {
+            "Ability": "Dexterity",
+            "Value": 0
+          },
+          {
+            "Ability": "Strength",
+            "Value": 45
+          }
+        ],
+        "Prices": [
+          {
+            "Currency": "Coins",
+            "Amount": 7680
+          },
+          {
+            "Currency": "JohnCard",
+            "Amount": 125
           }
         ]
       }

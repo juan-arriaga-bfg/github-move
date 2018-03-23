@@ -6,34 +6,37 @@
       "Currency": "Crystals",
       "Amount": 5
     },
-    "Rewards":
-    [
+    "Rewards": [
       [
         {
           "Currency": "PieceA1",
-          "Amount": 10
+          "Amount": 8
         },
         {
-          "Currency": "PieceA1",
-          "Amount": 10
-        },
-        {
-          "Currency": "RobinCard",
-          "Amount": 5
+          "Currency": "Coins",
+          "Amount": 15
         },
         {
           "Currency": "RobinCard",
           "Amount": 5
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 25
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 20
         }
       ],
       [
         {
-          "Currency": "PieceA2",
-          "Amount": 10
+          "Currency": "PieceA1",
+          "Amount": 11
         },
         {
-          "Currency": "PieceA2",
-          "Amount": 10
+          "Currency": "Coins",
+          "Amount": 50
         },
         {
           "Currency": "RobinCard",
@@ -42,16 +45,20 @@
         {
           "Currency": "JohnCard",
           "Amount": 5
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 50
         }
       ],
       [
         {
-          "Currency": "PieceA3",
-          "Amount": 10
+          "Currency": "PieceA1",
+          "Amount": 14
         },
         {
           "Currency": "PieceB1",
-          "Amount": 10
+          "Amount": 8
         },
         {
           "Currency": "RobinCard",
@@ -60,16 +67,20 @@
         {
           "Currency": "JohnCard",
           "Amount": 7
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 100
         }
       ],
       [
         {
-          "Currency": "PieceA4",
-          "Amount": 10
+          "Currency": "PieceA2",
+          "Amount": 8
         },
         {
-          "Currency": "PieceB2",
-          "Amount": 10
+          "Currency": "PieceB1",
+          "Amount": 11
         },
         {
           "Currency": "RobinCard",
@@ -78,16 +89,20 @@
         {
           "Currency": "JohnCard",
           "Amount": 10
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 150
         }
       ],
       [
         {
-          "Currency": "PieceA5",
-          "Amount": 10
+          "Currency": "PieceA2",
+          "Amount": 11
         },
         {
-          "Currency": "PieceB3",
-          "Amount": 10
+          "Currency": "PieceB1",
+          "Amount": 14
         },
         {
           "Currency": "RobinCard",
@@ -96,6 +111,98 @@
         {
           "Currency": "JohnCard",
           "Amount": 12
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 200
+        }
+      ],
+      [
+        {
+          "Currency": "PieceA3",
+          "Amount": 8
+        },
+        {
+          "Currency": "PieceB2",
+          "Amount": 8
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 18
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 15
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 250
+        }
+      ],
+      [
+        {
+          "Currency": "PieceA3",
+          "Amount": 11
+        },
+        {
+          "Currency": "PieceB2",
+          "Amount": 11
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 20
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 18
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 350
+        }
+      ],
+      [
+        {
+          "Currency": "PieceA4",
+          "Amount": 8
+        },
+        {
+          "Currency": "PieceB3",
+          "Amount": 8
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 22
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 20
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 500
+        }
+      ],
+      [
+        {
+          "Currency": "PieceA4",
+          "Amount": 11
+        },
+        {
+          "Currency": "PieceB3",
+          "Amount": 11
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 25
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 22
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 750
         }
       ]
     ]
@@ -107,34 +214,37 @@
       "Currency": "Crystals",
       "Amount": 10
     },
-    "Rewards":
-    [
+    "Rewards": [
       [
         {
-          "Currency": "PieceA2",
-          "Amount": 15
+          "Currency": "PieceA1",
+          "Amount": 14
         },
         {
-          "Currency": "PieceA2",
-          "Amount": 15
-        },
-        {
-          "Currency": "RobinCard",
-          "Amount": 7
+          "Currency": "Coins",
+          "Amount": 30
         },
         {
           "Currency": "RobinCard",
           "Amount": 7
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 70
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 50
         }
       ],
       [
         {
-          "Currency": "PieceA3",
-          "Amount": 15
+          "Currency": "PieceA2",
+          "Amount": 8
         },
         {
-          "Currency": "PieceA3",
-          "Amount": 15
+          "Currency": "Coins",
+          "Amount": 100
         },
         {
           "Currency": "RobinCard",
@@ -143,52 +253,86 @@
         {
           "Currency": "JohnCard",
           "Amount": 7
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 100
+        }
+      ],
+      [
+        {
+          "Currency": "PieceA2",
+          "Amount": 11
+        },
+        {
+          "Currency": "PieceB1",
+          "Amount": 14
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 12
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 10
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 150
+        }
+      ],
+      [
+        {
+          "Currency": "PieceA3",
+          "Amount": 8
+        },
+        {
+          "Currency": "PieceB1",
+          "Amount": 17
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 15
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 12
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 200
+        }
+      ],
+      [
+        {
+          "Currency": "PieceA3",
+          "Amount": 11
+        },
+        {
+          "Currency": "PieceB2",
+          "Amount": 8
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 18
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 15
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 250
         }
       ],
       [
         {
           "Currency": "PieceA4",
-          "Amount": 15
+          "Amount": 8
         },
         {
           "Currency": "PieceB2",
-          "Amount": 15
-        },
-        {
-          "Currency": "RobinCard",
-          "Amount": 12
-        },
-        {
-          "Currency": "JohnCard",
-          "Amount": 10
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA5",
-          "Amount": 15
-        },
-        {
-          "Currency": "PieceB3",
-          "Amount": 15
-        },
-        {
-          "Currency": "RobinCard",
-          "Amount": 15
-        },
-        {
-          "Currency": "JohnCard",
-          "Amount": 12
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA6",
-          "Amount": 15
-        },
-        {
-          "Currency": "PieceB4",
-          "Amount": 15
+          "Amount": 11
         },
         {
           "Currency": "RobinCard",
@@ -196,7 +340,77 @@
         },
         {
           "Currency": "JohnCard",
-          "Amount": 15
+          "Amount": 18
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 350
+        }
+      ],
+      [
+        {
+          "Currency": "PieceA4",
+          "Amount": 11
+        },
+        {
+          "Currency": "PieceB3",
+          "Amount": 8
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 22
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 20
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 500
+        }
+      ],
+      [
+        {
+          "Currency": "PieceA5",
+          "Amount": 8
+        },
+        {
+          "Currency": "PieceB3",
+          "Amount": 11
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 25
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 22
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 750
+        }
+      ],
+      [
+        {
+          "Currency": "PieceA5",
+          "Amount": 11
+        },
+        {
+          "Currency": "PieceB4",
+          "Amount": 8
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 27
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 25
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 1000
         }
       ]
     ]
@@ -208,34 +422,37 @@
       "Currency": "Crystals",
       "Amount": 25
     },
-    "Rewards":
-    [
+    "Rewards": [
       [
         {
-          "Currency": "PieceA3",
-          "Amount": 20
+          "Currency": "PieceA1",
+          "Amount": 17
         },
         {
-          "Currency": "PieceA3",
-          "Amount": 20
-        },
-        {
-          "Currency": "RobinCard",
-          "Amount": 10
+          "Currency": "Coins",
+          "Amount": 75
         },
         {
           "Currency": "RobinCard",
           "Amount": 10
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 125
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 100
         }
       ],
       [
         {
-          "Currency": "PieceA4",
-          "Amount": 20
+          "Currency": "PieceA2",
+          "Amount": 11
         },
         {
-          "Currency": "PieceA4",
-          "Amount": 20
+          "Currency": "Coins",
+          "Amount": 200
         },
         {
           "Currency": "RobinCard",
@@ -244,52 +461,108 @@
         {
           "Currency": "JohnCard",
           "Amount": 10
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 150
+        }
+      ],
+      [
+        {
+          "Currency": "PieceA3",
+          "Amount": 11
+        },
+        {
+          "Currency": "PieceB1",
+          "Amount": 17
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 15
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 12
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 200
+        }
+      ],
+      [
+        {
+          "Currency": "PieceA3",
+          "Amount": 14
+        },
+        {
+          "Currency": "PieceB2",
+          "Amount": 8
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 18
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 15
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 250
+        }
+      ],
+      [
+        {
+          "Currency": "PieceA4",
+          "Amount": 11
+        },
+        {
+          "Currency": "PieceB2",
+          "Amount": 11
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 20
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 18
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 350
+        }
+      ],
+      [
+        {
+          "Currency": "PieceA4",
+          "Amount": 14
+        },
+        {
+          "Currency": "PieceB3",
+          "Amount": 11
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 22
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 20
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 500
         }
       ],
       [
         {
           "Currency": "PieceA5",
-          "Amount": 20
+          "Amount": 8
         },
         {
           "Currency": "PieceB3",
-          "Amount": 20
-        },
-        {
-          "Currency": "RobinCard",
-          "Amount": 15
-        },
-        {
-          "Currency": "JohnCard",
-          "Amount": 12
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA6",
-          "Amount": 20
-        },
-        {
-          "Currency": "PieceB4",
-          "Amount": 20
-        },
-        {
-          "Currency": "RobinCard",
-          "Amount": 20
-        },
-        {
-          "Currency": "JohnCard",
-          "Amount": 15
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA7",
-          "Amount": 20
-        },
-        {
-          "Currency": "PieceB5",
-          "Amount": 20
+          "Amount": 14
         },
         {
           "Currency": "RobinCard",
@@ -297,7 +570,55 @@
         },
         {
           "Currency": "JohnCard",
-          "Amount": 20
+          "Amount": 22
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 750
+        }
+      ],
+      [
+        {
+          "Currency": "PieceA5",
+          "Amount": 11
+        },
+        {
+          "Currency": "PieceB4",
+          "Amount": 11
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 27
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 25
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 1000
+        }
+      ],
+      [
+        {
+          "Currency": "PieceA6",
+          "Amount": 8
+        },
+        {
+          "Currency": "PieceB5",
+          "Amount": 8
+        },
+        {
+          "Currency": "RobinCard",
+          "Amount": 30
+        },
+        {
+          "Currency": "JohnCard",
+          "Amount": 28
+        },
+        {
+          "Currency": "Coins",
+          "Amount": 1500
         }
       ]
     ]

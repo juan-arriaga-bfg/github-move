@@ -18,27 +18,19 @@
         }
       },
       {
-        "$type": "ObstacleConditionHero, Assembly-CSharp",
-        "HeroAbility" :
-        {
-          "Ability" : "Strength",
-          "Value" : 5
-        }
-      },
-      {
         "$type": "ObstacleConditionDelay, Assembly-CSharp",
-        "Delay" : 180
+        "Delay" : 60
       }
     ],
     "Price" :
     {
       "Currency" : "Crystals",
-      "Amount" : 20
+      "Amount" : 1
     },
     "StartPrice" :
     {
       "Currency" : "Coins",
-      "Amount" : 50
+      "Amount" : 0
     },
     "Reward" : "Common"
   },
@@ -64,26 +56,26 @@
         "$type": "ObstacleConditionHero, Assembly-CSharp",
         "HeroAbility" :
         {
-          "Ability" : "Dexterity",
+          "Ability" : "Strength",
           "Value" : 5
         }
       },
       {
         "$type": "ObstacleConditionDelay, Assembly-CSharp",
-        "Delay" : 180
+        "Delay" : 60
       }
     ],
     "Price" :
     {
       "Currency" : "Crystals",
-      "Amount" : 20
+      "Amount" : 1
     },
     "StartPrice" :
     {
       "Currency" : "Coins",
-      "Amount" : 70
+      "Amount" : 0
     },
-    "Reward" : "Rare"
+    "Reward" : "Common"
   },
   {
     "Uid" : 3,
@@ -121,20 +113,20 @@
       },
       {
         "$type": "ObstacleConditionDelay, Assembly-CSharp",
-        "Delay" : 300
+        "Delay" : 60
       }
     ],
     "Price" :
     {
       "Currency" : "Crystals",
-      "Amount" : 20
+      "Amount" : 1
     },
     "StartPrice" :
     {
       "Currency" : "Coins",
-      "Amount" : 100
+      "Amount" : 0
     },
-    "Reward" : "Common"
+    "Reward" : "Rare"
   },
   {
     "Uid" : 4,
@@ -164,20 +156,20 @@
       },
       {
         "$type": "ObstacleConditionDelay, Assembly-CSharp",
-        "Delay" : 300
+        "Delay" : 60
       }
     ],
     "Price" :
     {
       "Currency" : "Crystals",
-      "Amount" : 20
+      "Amount" : 1
     },
     "StartPrice" :
     {
       "Currency" : "Coins",
-      "Amount" : 120
+      "Amount" : 0
     },
-    "Reward" : "Rare"
+    "Reward" : "Common"
   },
   {
     "Uid" : 5,
@@ -201,24 +193,24 @@
         "$type": "ObstacleConditionHero, Assembly-CSharp",
         "HeroAbility" :
         {
-          "Ability" : "Dexterity",
+          "Ability" : "Strength",
           "Value" : 5
         }
       },
       {
         "$type": "ObstacleConditionDelay, Assembly-CSharp",
-        "Delay" : 600
+        "Delay" : 60
       }
     ],
     "Price" :
     {
       "Currency" : "Crystals",
-      "Amount" : 20
+      "Amount" : 1
     },
     "StartPrice" :
     {
       "Currency" : "Coins",
-      "Amount" : 150
+      "Amount" : 0
     },
     "Reward" : "Common"
   },
@@ -229,6 +221,143 @@
     {
       "X" : 6,
       "Y" : 20
+    },
+    "UnlockConditions" :
+    [
+      {
+        "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
+        "OtherUid" : 5,
+        "State" : "Finish"
+      }
+    ],
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "HeroAbility" :
+        {
+          "Ability" : "Dexterity",
+          "Value" : 10
+        }
+      },
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "HeroAbility" :
+        {
+          "Ability" : "Strength",
+          "Value" : 5
+        }
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 60
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 1
+    },
+    "StartPrice" :
+    {
+      "Currency" : "Coins",
+      "Amount" : 0
+    },
+    "Reward" : "Epic"
+  },
+  {
+    "Uid" : 7,
+    "Message" : "And here are the treasures of the Sheriff! Take them and go back to the camp!",
+    "Position" :
+    {
+      "X" : 6,
+      "Y" : 21
+    },
+    "UnlockConditions" :
+    [
+      {
+        "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
+        "OtherUid" : 5,
+        "State" : "Finish"
+      }
+    ],
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "HeroAbility" :
+        {
+          "Ability" : "Strength",
+          "Value" : 10
+        }
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 60
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 1
+    },
+    "StartPrice" :
+    {
+      "Currency" : "Coins",
+      "Amount" : 0
+    },
+    "Reward" : "Common"
+  },
+  {
+    "Uid" : 8,
+    "Message" : "There was a lot of money in the Sheriff's treasury! Let's give them to the needy!",
+    "Position" :
+    {
+      "X" : 6,
+      "Y" : 22
+    },
+    "UnlockConditions" :
+    [
+      {
+        "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
+        "OtherUid" : 5,
+        "State" : "Finish"
+      }
+    ],
+    "OpenConditions" :
+    [
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "HeroAbility" :
+        {
+          "Ability" : "Dexterity",
+          "Value" : 5
+        }
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 60
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 1
+    },
+    "StartPrice" :
+    {
+      "Currency" : "Coins",
+      "Amount" : 0
+    },
+    "Reward" : "Common"
+  },
+  {
+    "Uid" : 9,
+    "Message" : "You punished the Sheriff. Now you can start building your base!",
+    "Position" :
+    {
+      "X" : 5,
+      "Y" : 22
     },
     "UnlockConditions" :
     [
@@ -258,157 +387,20 @@
       },
       {
         "$type": "ObstacleConditionDelay, Assembly-CSharp",
-        "Delay" : 600
+        "Delay" : 60
       }
     ],
     "Price" :
     {
       "Currency" : "Crystals",
-      "Amount" : 20
+      "Amount" : 1
     },
     "StartPrice" :
     {
       "Currency" : "Coins",
-      "Amount" : 170
-    },
-    "Reward" : "Epic"
-  },
-  {
-    "Uid" : 7,
-    "Message" : "And here are the treasures of the Sheriff! Take them and go back to the camp!",
-    "Position" :
-    {
-      "X" : 6,
-      "Y" : 21
-    },
-    "UnlockConditions" :
-    [
-      {
-        "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
-        "OtherUid" : 6,
-        "State" : "Finish"
-      }
-    ],
-    "OpenConditions" :
-    [
-      {
-        "$type": "ObstacleConditionHero, Assembly-CSharp",
-        "HeroAbility" :
-        {
-          "Ability" : "Dexterity",
-          "Value" : 5
-        }
-      },
-      {
-        "$type": "ObstacleConditionDelay, Assembly-CSharp",
-        "Delay" : 900
-      }
-    ],
-    "Price" :
-    {
-      "Currency" : "Crystals",
-      "Amount" : 20
-    },
-    "StartPrice" :
-    {
-      "Currency" : "Coins",
-      "Amount" : 200
-    },
-    "Reward" : "Common"
-  },
-  {
-    "Uid" : 8,
-    "Message" : "There was a lot of money in the Sheriff's treasury! Let's give them to the needy!",
-    "Position" :
-    {
-      "X" : 6,
-      "Y" : 22
-    },
-    "UnlockConditions" :
-    [
-      {
-        "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
-        "OtherUid" : 7,
-        "State" : "Finish"
-      }
-    ],
-    "OpenConditions" :
-    [
-      {
-        "$type": "ObstacleConditionHero, Assembly-CSharp",
-        "HeroAbility" :
-        {
-          "Ability" : "Dexterity",
-          "Value" : 5
-        }
-      },
-      {
-        "$type": "ObstacleConditionDelay, Assembly-CSharp",
-        "Delay" : 900
-      }
-    ],
-    "Price" :
-    {
-      "Currency" : "Crystals",
-      "Amount" : 20
-    },
-    "StartPrice" :
-    {
-      "Currency" : "Coins",
-      "Amount" : 250
+      "Amount" : 0
     },
     "Reward" : "Rare"
-  },
-  {
-    "Uid" : 9,
-    "Message" : "You punished the Sheriff. Now you can start building your base!",
-    "Position" :
-    {
-      "X" : 5,
-      "Y" : 22
-    },
-    "UnlockConditions" :
-    [
-      {
-        "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
-        "OtherUid" : 8,
-        "State" : "Finish"
-      }
-    ],
-    "OpenConditions" :
-    [
-      {
-        "$type": "ObstacleConditionHero, Assembly-CSharp",
-        "HeroAbility" :
-        {
-          "Ability" : "Dexterity",
-          "Value" : 5
-        }
-      },
-      {
-        "$type": "ObstacleConditionHero, Assembly-CSharp",
-        "HeroAbility" :
-        {
-          "Ability" : "Strength",
-          "Value" : 5
-        }
-      },
-      {
-        "$type": "ObstacleConditionDelay, Assembly-CSharp",
-        "Delay" : 1200
-      }
-    ],
-    "Price" :
-    {
-      "Currency" : "Crystals",
-      "Amount" : 20
-    },
-    "StartPrice" :
-    {
-      "Currency" : "Coins",
-      "Amount" : 300
-    },
-    "Reward" : "Epic"
   },
   {
     "Uid" : 10,
@@ -433,23 +425,23 @@
         "HeroAbility" :
         {
           "Ability" : "Strength",
-          "Value" : 5
+          "Value" : 10
         }
       },
       {
         "$type": "ObstacleConditionDelay, Assembly-CSharp",
-        "Delay" : 180
+        "Delay" : 3600
       }
     ],
     "Price" :
     {
       "Currency" : "Crystals",
-      "Amount" : 20
+      "Amount" : 30
     },
     "StartPrice" :
     {
       "Currency" : "Coins",
-      "Amount" : 70
+      "Amount" : 0
     },
     "Reward" : "Common"
   },
@@ -475,26 +467,26 @@
         "$type": "ObstacleConditionHero, Assembly-CSharp",
         "HeroAbility" :
         {
-          "Ability" : "Strength",
-          "Value" : 5
+          "Ability" : "Dexterity",
+          "Value" : 10
         }
       },
       {
         "$type": "ObstacleConditionDelay, Assembly-CSharp",
-        "Delay" : 300
+        "Delay" : 3600
       }
     ],
     "Price" :
     {
       "Currency" : "Crystals",
-      "Amount" : 20
+      "Amount" : 30
     },
     "StartPrice" :
     {
       "Currency" : "Coins",
-      "Amount" : 100
+      "Amount" : 0
     },
-    "Reward" : "Rare"
+    "Reward" : "Common"
   },
   {
     "Uid" : 12,
@@ -519,23 +511,23 @@
         "HeroAbility" :
         {
           "Ability" : "Strength",
-          "Value" : 5
+          "Value" : 10
         }
       },
       {
         "$type": "ObstacleConditionDelay, Assembly-CSharp",
-        "Delay" : 300
+        "Delay" : 7200
       }
     ],
     "Price" :
     {
       "Currency" : "Crystals",
-      "Amount" : 20
+      "Amount" : 50
     },
     "StartPrice" :
     {
       "Currency" : "Coins",
-      "Amount" : 120
+      "Amount" : 0
     },
     "Reward" : "Common"
   },
@@ -561,26 +553,26 @@
         "$type": "ObstacleConditionHero, Assembly-CSharp",
         "HeroAbility" :
         {
-          "Ability" : "Strength",
-          "Value" : 5
+          "Ability" : "Dexterity",
+          "Value" : 10
         }
       },
       {
         "$type": "ObstacleConditionDelay, Assembly-CSharp",
-        "Delay" : 600
+        "Delay" : 7200
       }
     ],
     "Price" :
     {
       "Currency" : "Crystals",
-      "Amount" : 20
+      "Amount" : 50
     },
     "StartPrice" :
     {
       "Currency" : "Coins",
-      "Amount" : 150
+      "Amount" : 0
     },
-    "Reward" : "Rare"
+    "Reward" : "Common"
   },
   {
     "Uid" : 14,
@@ -605,24 +597,24 @@
         "HeroAbility" :
         {
           "Ability" : "Strength",
-          "Value" : 5
+          "Value" : 15
         }
       },
       {
         "$type": "ObstacleConditionDelay, Assembly-CSharp",
-        "Delay" : 900
+        "Delay" : 14400
       }
     ],
     "Price" :
     {
       "Currency" : "Crystals",
-      "Amount" : 20
+      "Amount" : 75
     },
     "StartPrice" :
     {
       "Currency" : "Coins",
-      "Amount" : 170
+      "Amount" : 0
     },
-    "Reward" : "Common"
+    "Reward" : "Rare"
   }
 ]
