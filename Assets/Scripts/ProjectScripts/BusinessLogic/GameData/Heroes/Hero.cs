@@ -20,8 +20,14 @@ public class Hero
     public Hero(HeroDef def)
     {
         this.def = def;
+        
         LevelCurrencyDef = Currency.GetCurrencyDef(string.Format("Level{0}", def.Uid));
         CardCurrencyDef = Currency.GetCurrencyDef(string.Format("{0}Card", def.Uid));
+
+        foreach (var level in def.Levels)
+        {
+            level.Abilities.Sort((a, b) => -a.Value.CompareTo(b.Value));
+        }
     }
     
     public HeroDef Def
@@ -62,7 +68,7 @@ public class Hero
 
     public AbilityType CurrentAbility
     {
-        get { return def.Levels[Level].Abilities[0].Ability; }
+        get {return def.Levels[Level].Abilities[0].Ability; }
     }
 
     public int CurrentAbilityValue
