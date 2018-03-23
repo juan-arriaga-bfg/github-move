@@ -47,11 +47,11 @@ public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
         
         if (countForMatch < countForMatchDefault) return null;
         
-        var nextAction = new SpawnPiecesAction
+        var nextAction = new SpawnPieceAtAction
         {
             IsCheckMatch = false,
             At = position,
-            Pieces = new List<int> {nextType}
+            PieceTypeId = nextType
         };
         
         return new CollapsePieceToAction

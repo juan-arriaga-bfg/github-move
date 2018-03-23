@@ -82,11 +82,11 @@ public class TouchReactionDefinitionObstacle : TouchReactionDefinitionComponent
                     Positions = new List<BoardPosition>{position},
                     OnComplete = () =>
                     {
-                        piece.Context.ActionExecutor.AddAction(new SpawnPiecesAction()
+                        piece.Context.ActionExecutor.AddAction(new SpawnPieceAtAction()
                         {
                             IsCheckMatch = false,
                             At = position,
-                            Pieces = new List<int>{obstacle.GetReward().Piece}
+                            PieceTypeId = obstacle.GetReward().Piece
                         });
                     }
                 });

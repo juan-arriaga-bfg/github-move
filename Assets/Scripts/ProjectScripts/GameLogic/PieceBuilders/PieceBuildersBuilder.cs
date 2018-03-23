@@ -168,47 +168,47 @@ public class PieceBuildersBuilder
             BoardPosition.Zero().Right.Right.Up.Up,
         };
         
-        dict.Add(PieceType.Castle1.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle1.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
         
-        dict.Add(PieceType.Castle2.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle2.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
         
-        dict.Add(PieceType.Castle3.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle3.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
         
-        dict.Add(PieceType.Castle4.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle4.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
         
-        dict.Add(PieceType.Castle5.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle5.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
         
-        dict.Add(PieceType.Castle6.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle6.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
         
-        dict.Add(PieceType.Castle7.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle7.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
         
-        dict.Add(PieceType.Castle8.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle8.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
 
-        dict.Add(PieceType.Castle9.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle9.Id, new CastlePieceBuilder
         {
             Mask = mask
         });

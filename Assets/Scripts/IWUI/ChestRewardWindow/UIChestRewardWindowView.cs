@@ -145,6 +145,7 @@ public class UIChestRewardWindowView : UIGenericWindowView
             board.ActionExecutor.AddAction(new SpawnPiecesAction
             {
                 IsCheckMatch = false,
+                IsShuffle = true,
                 At = house,
                 Pieces = pieces
             });

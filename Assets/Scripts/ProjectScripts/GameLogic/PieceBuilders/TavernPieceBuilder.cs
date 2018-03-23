@@ -10,13 +10,6 @@
 				.RegisterDefinition(new TouchReactionDefinitionUpgrade(), "arrow"))
 			.RegisterComponent(new TouchReactionConditionComponent()));
         
-		var observer = piece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
-
-		if (observer != null)
-		{
-			observer.RegisterObserver(new HeroObserver());
-		}
-		
 		return piece;
 	}
 }

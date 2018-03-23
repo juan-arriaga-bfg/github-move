@@ -25,6 +25,7 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
         piece.Context.ActionExecutor.AddAction(new SpawnPiecesAction()
         {
             IsCheckMatch = false,
+            IsShuffle = true,
             At = position,
             Pieces = pieces
         });

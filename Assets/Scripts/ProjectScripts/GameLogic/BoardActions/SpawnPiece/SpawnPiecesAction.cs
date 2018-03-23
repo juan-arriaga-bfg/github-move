@@ -12,6 +12,7 @@ public class SpawnPiecesAction : IBoardAction
 	}
 	
 	public bool IsCheckMatch { get; set; }
+	public bool IsShuffle { get; set; }
 	
 	public BoardPosition At { get; set; }
 	
@@ -26,16 +27,26 @@ public class SpawnPiecesAction : IBoardAction
 		
 		pieces.Sort();
 
-		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(At, free, Pieces.Count, 5) == false)
+		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(At, free, Pieces.Count * (IsShuffle ? 5 : 1), 7) == false)
 		{
 			return false;
 		}
-
+		
 		var index = free.IndexOf(At);
 
 		if (index != -1)
 		{
 			free.RemoveAt(index);
+		}
+
+		if (IsShuffle)
+		{
+			free.Shuffle();
+			free.RemoveRange(Pieces.Count - 2, free.Count - Pieces.Count);
+		}
+		
+		if (index != -1)
+		{
 			free.Add(At);
 		}
 		
