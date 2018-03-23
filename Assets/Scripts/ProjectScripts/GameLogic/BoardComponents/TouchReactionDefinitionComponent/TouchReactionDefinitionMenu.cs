@@ -24,6 +24,19 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent, IBo
 
     public override bool Make(BoardPosition position, Piece piece)
     {
+        if (isOpen)
+        {
+            eventBus.RaiseEvent(GameEventsCodes.ClosePieceMenu, "");
+            return false;
+        }
+
+        foreach (var value in Definitions.Values)
+        {
+            if((value is TouchReactionDefinitionSpawnInStorage) == false) continue;
+
+            if ((value as TouchReactionDefinitionSpawnInStorage).Make(position, piece)) return false;
+        }
+        
         if (eventBus == null)
         {
             eventBus = piece.Context.BoardEvents;
@@ -31,8 +44,6 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent, IBo
             eventBus.AddListener(this, GameEventsCodes.OpenPieceMenu);
         }
         
-        if (isOpen) return false;
-
         cachedPiece = piece;
         eventBus.RaiseEvent(GameEventsCodes.OpenPieceMenu, piece);
         isOpen = true;

@@ -14,12 +14,14 @@ public class AddCardsView : BoardElementView
 		DOTween.Kill(animationUid);
         
 		var sequence = DOTween.Sequence().SetId(animationUid);
+		
 
 		for (int i = 0; i < icons.Count; i++)
 		{
 			var icon = icons[i];
 
 			icon.sprite = sprite;
+			icon.transform.localPosition = Vector3.zero;
 			
 			delay = 0.1f * i;
 

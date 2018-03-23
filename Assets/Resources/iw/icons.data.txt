@@ -32,38 +32,6 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "chest_1",
-    "SpriteName": "chest_1",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "uicommon",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "chest_2",
-    "SpriteName": "chest_2",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "uicommon",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "chest_3",
-    "SpriteName": "chest_3",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "uicommon",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "chest_4",
-    "SpriteName": "chest_4",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "uicommon",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
     "Uid": "btn_blue_norm",
     "SpriteName": "btn_blue_norm",
     "BundleName": "graphicscommon",
@@ -360,43 +328,59 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "tutorial_TextBlock_2",
-    "SpriteName": "tutorial_TextBlock_2",
+    "Uid": "road_1",
+    "SpriteName": "road_1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "lake_1",
+    "SpriteName": "lake_1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "RobinCard",
+    "SpriteName": "RobinCard",
     "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/ProcessedContent",
     "SpriteSheetName": "uicommon",
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "road_1",
-    "SpriteName": "road_1",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "road_1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
-  },
-  {
-    "Uid": "lake_1",
-    "SpriteName": "lake_1",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "lake_1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
-  },
-  {
-    "Uid": "RobinCard",
-    "SpriteName": "RobinCard",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "RobinCard",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
-  },
-  {
     "Uid": "JohnCard",
     "SpriteName": "JohnCard",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "JohnCard",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "card_border_Lvl_other",
+    "SpriteName": "card_border_Lvl_other",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "card_border_Lvl_Hero",
+    "SpriteName": "card_border_Lvl_Hero",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "card_border_Lvl_Build",
+    "SpriteName": "card_border_Lvl_Build",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   }
 ]

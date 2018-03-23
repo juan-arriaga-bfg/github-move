@@ -89,10 +89,12 @@ public class PieceMenuView : MonoBehaviour, IBoardEventListener
 
         for (int i = 0; i < keys.Count; i++)
         {
-            var position = new Vector2(Mathf.Cos(angle  * i), Mathf.Sin(angle * i));
+            var position = new Vector2(Mathf.Cos(angle  * i), 0.5f + Mathf.Sin(angle * i));
             var button = CreateObject<BoardButtonView>(R.BoardButtonView, position);
+            var key = keys[i];
+            var color = BoardButtonView.GetColor(menuDef.Definitions[key]);
             
-            button.Init(keys[i]);
+            button.Init(key, color);
             buttons.Add(button.transform);
         }
     }
