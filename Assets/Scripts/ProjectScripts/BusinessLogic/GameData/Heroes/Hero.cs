@@ -99,7 +99,7 @@ public class Hero
         return Level + 1 > tavernLevel;
     }
     
-    public bool LevelUp()
+    public void LevelUp()
     {
         var prices = def.Levels[Level].Prices;
         var currentPrices = new List<Price>();
@@ -116,8 +116,6 @@ public class Hero
             Amount = 1,
             CurrentPrices = currentPrices
         };
-
-        var isSuccess = false;
         
         ShopService.Current.PurchaseItem
         (
@@ -125,15 +123,22 @@ public class Hero
             (item, s) =>
             {
                 // on purchase success
-                isSuccess = true;
             },
             item =>
             {
                 // on purchase failed (not enough cash)
-                isSuccess = false;
+                var model2= UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+                model2.Title = "Need coins?";
+                model2.Message = null;
+                model2.Image = "tutorial_TextBlock_1";
+                model2.AcceptLabel = "Ok";
+        
+                model2.OnAccept = () => {};
+                model2.OnCancel = null;
+        
+                UIService.Get.ShowWindow(UIWindowType.MessageWindow);
             }
         );
-        
-        return isSuccess;
     }
 }

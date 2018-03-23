@@ -36,8 +36,6 @@ public class UICharacterWindowView : UIGenericPopupWindowView
         skillIcon.sprite = windowModel.SkillSprite;
         
         progress.sizeDelta = new Vector2(windowModel.ProgressLenght, progress.sizeDelta.y);
-        
-        button.interactable = windowModel.IsDone;
     }
 
     public void OnClick()
@@ -55,6 +53,22 @@ public class UICharacterWindowView : UIGenericPopupWindowView
             model.AcceptLabel = "Go to Tavern";
         
             model.OnAccept = () => { HintArrowView.AddHint(GameDataService.Current.PiecesManager.TavernPosition); };
+            model.OnCancel = null;
+        
+            UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+            IWUIManager.Instance.CloseWindow(UIWindowType.TavernWindow);
+            return;
+        }
+
+        if (windowModel.IsDone == false)
+        {
+            var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+            model.Title = "Message";
+            model.Message = "Not enought cards!";
+            model.AcceptLabel = "Go to mission";
+        
+            model.OnAccept = () => { HintArrowView.AddHint(BoardService.Current.GetBoardById(0).ObstaclesLogic.GetPositionCurrentObstacle()); };
             model.OnCancel = null;
         
             UIService.Get.ShowWindow(UIWindowType.MessageWindow);

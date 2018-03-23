@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class ObstaclesLogicComponent : IECSComponent, IECSSystem
 {
@@ -106,6 +108,21 @@ public class ObstaclesLogicComponent : IECSComponent, IECSSystem
         obstaclesPositionKey.Remove(position);
         obstaclesUidKey.Remove(obstacle.GetUid());
         return true;
+    }
+
+    public BoardPosition GetPositionCurrentObstacle()
+    {
+        var min = int.MaxValue;
+
+        foreach (var pair in obstaclesUidKey)
+        {
+            min = Mathf.Min(min, pair.Key);
+        }
+
+        var current = obstaclesUidKey[min];
+        var obstacle = obstaclesPositionKey.First(p => p.Value == current);
+
+        return obstacle.Value == null ? BoardPosition.Default() : obstacle.Key;
     }
     
     public bool IsPersistence

@@ -109,14 +109,14 @@ public class UiHeroItem : MonoBehaviour
         var message = inAdventure ? "Ready" : "In Mission";
         var color = inAdventure ? "00FF00" : "FF0000";
         
-        buttonLabel.Text = "Up";
+        buttonLabel.Text = "Level UP";
         messageLabel.Text = string.Format("<color=#{0}>{1}</color>", color, message);
         skillLabel.Text = string.Format("<color=#{0}>{1}</color>", color, hero.CurrentAbilityValue);
         
         progressGo.SetActive(true);
         buttonGo.SetActive(hero.CurrentProgress >= hero.TotalProgress);
 
-        toggle.interactable = hero.CurrentProgress >= hero.TotalProgress;
+        toggle.interactable = true;
         toggle.isOn = false;
         
         skillIcon.sprite = IconService.Current.GetSpriteById(hero.CurrentAbility.ToString());

@@ -67,7 +67,7 @@ public class UITavernWindowView : UIGenericPopupWindowView
         {
             for (var i = 1; i < heroes.Count + 2; i++)
             {
-                CreateItem(heroParent, heroTemplate);
+                Instantiate(heroTemplate, heroParent);
             }
 
             items = heroParent.GetComponentsInChildren<UiHeroItem>().ToList();
@@ -79,11 +79,5 @@ public class UITavernWindowView : UIGenericPopupWindowView
             
             items[i].Init(hero, model.Obstacle, model.CurrentAbility);
         }
-    }
-
-    private void CreateItem(Transform parent, GameObject template)
-    {
-        var go = Instantiate(template, parent);
-        go.transform.localScale = Vector3.one;
     }
 }
