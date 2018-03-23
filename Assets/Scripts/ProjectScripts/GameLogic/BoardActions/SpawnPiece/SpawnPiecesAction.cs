@@ -38,11 +38,12 @@ public class SpawnPiecesAction : IBoardAction
 		{
 			free.RemoveAt(index);
 		}
-
+		
 		if (IsShuffle)
 		{
 			free.Shuffle();
-			free.RemoveRange(Pieces.Count - 2, free.Count - Pieces.Count);
+			
+			free.RemoveRange(Mathf.Max(Pieces.Count - 2, 0), free.Count - Pieces.Count);
 		}
 		
 		if (index != -1)
