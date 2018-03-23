@@ -247,7 +247,7 @@
     [
       {
         "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
-        "OtherUid" : 5,
+        "OtherUid" : 6,
         "State" : "Finish"
       }
     ],
@@ -285,7 +285,7 @@
     [
       {
         "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
-        "OtherUid" : 5,
+        "OtherUid" : 7,
         "State" : "Finish"
       }
     ],
@@ -296,7 +296,7 @@
         "HeroAbility" :
         {
           "Ability" : "Dexterity",
-          "Value" : 5
+          "Value" : 10
         }
       },
       {
@@ -323,7 +323,7 @@
     [
       {
         "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
-        "OtherUid" : 5,
+        "OtherUid" : 8,
         "State" : "Finish"
       }
     ],
@@ -334,9 +334,47 @@
         "HeroAbility" :
         {
           "Ability" : "Dexterity",
-          "Value" : 5
+          "Value" : 15
         }
       },
+      {
+        "$type": "ObstacleConditionHero, Assembly-CSharp",
+        "HeroAbility" :
+        {
+          "Ability" : "Strength",
+          "Value" : 15
+        }
+      },
+      {
+        "$type": "ObstacleConditionDelay, Assembly-CSharp",
+        "Delay" : 14400
+      }
+    ],
+    "Price" :
+    {
+      "Currency" : "Crystals",
+      "Amount" : 1
+    },
+    "Reward" : "Epic"
+  },
+  {
+    "Uid" : 10,
+    "Message" : "The peasants need houses! You need to collect a lot of wood for their construction!",
+    "Position" :
+    {
+      "X" : 7,
+      "Y" : 17
+    },
+    "UnlockConditions" :
+    [
+      {
+        "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
+        "OtherUid" : 3,
+        "State" : "Finish"
+      }
+    ],
+    "OpenConditions" :
+    [
       {
         "$type": "ObstacleConditionHero, Assembly-CSharp",
         "HeroAbility" :
@@ -355,44 +393,6 @@
       "Currency" : "Crystals",
       "Amount" : 1
     },
-    "Reward" : "Rare"
-  },
-  {
-    "Uid" : 10,
-    "Message" : "The peasants need houses! You need to collect a lot of wood for their construction!",
-    "Position" :
-    {
-      "X" : 7,
-      "Y" : 17
-    },
-    "UnlockConditions" :
-    [
-      {
-        "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
-        "OtherUid" : 1,
-        "State" : "Finish"
-      }
-    ],
-    "OpenConditions" :
-    [
-      {
-        "$type": "ObstacleConditionHero, Assembly-CSharp",
-        "HeroAbility" :
-        {
-          "Ability" : "Strength",
-          "Value" : 10
-        }
-      },
-      {
-        "$type": "ObstacleConditionDelay, Assembly-CSharp",
-        "Delay" : 3600
-      }
-    ],
-    "Price" :
-    {
-      "Currency" : "Crystals",
-      "Amount" : 30
-    },
     "Reward" : "Common"
   },
   {
@@ -407,7 +407,7 @@
     [
       {
         "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
-        "OtherUid" : 3,
+        "OtherUid" : 5,
         "State" : "Finish"
       }
     ],
@@ -445,7 +445,7 @@
     [
       {
         "$type": "ObstacleConditionOtherObstacle, Assembly-CSharp",
-        "OtherUid" : 4,
+        "OtherUid" : 5,
         "State" : "Finish"
       }
     ],
@@ -461,13 +461,13 @@
       },
       {
         "$type": "ObstacleConditionDelay, Assembly-CSharp",
-        "Delay" : 7200
+        "Delay" : 3600
       }
     ],
     "Price" :
     {
       "Currency" : "Crystals",
-      "Amount" : 50
+      "Amount" : 30
     },
     "Reward" : "Common"
   },
@@ -532,7 +532,7 @@
         "HeroAbility" :
         {
           "Ability" : "Strength",
-          "Value" : 15
+          "Value" : 10
         }
       },
       {
