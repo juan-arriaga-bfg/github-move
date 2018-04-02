@@ -42,7 +42,7 @@ public class DefaultMatchActionBuilder : IMatchActionBuilder
             {
                 for (int i = 0; i < list.Count; i++)
                 {
-                    SpawnReward(definition.Context.Context, list[i], nextPieces[i]);
+                    SpawnReward(list[i], nextPieces[i]);
                 }
             }
         };
@@ -65,14 +65,12 @@ public class DefaultMatchActionBuilder : IMatchActionBuilder
         return pieces;
     }
 
-    private void SpawnReward(BoardController gameBoard, BoardPosition position, int pieceType)
+    private void SpawnReward(BoardPosition position, int pieceType)
     {
         var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType);
         
         if(def == null) return;
         
-        var view = gameBoard.RendererContext.CreateBoardElementAt<AddResourceView>(R.AddResourceView, new BoardPosition(100,100,3));
-        view.CachedTransform.position = gameBoard.BoardDef.GetSectorCenterWorldPosition(position.X, position.Y, position.Z) + Vector3.up;
-        view.AddResource(def.CreateReward, view.CachedTransform.position + Vector3.up);
+        AddResourceView.Show(position, def.CreateReward);
     }
 }

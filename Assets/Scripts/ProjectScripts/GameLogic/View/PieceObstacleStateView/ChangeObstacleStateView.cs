@@ -37,7 +37,7 @@ public class ChangeObstacleStateView : IWBaseMonoBehaviour
             obstacle = context.Piece.Context.ObstaclesLogic.GetObstacle(context.Piece.CachedPosition);
             if (obstacle == null) return;
             
-            OnComplete = () => HintArrowView.AddHint(context.Piece.CachedPosition);
+            OnComplete = () => HintArrowView.Show(context.Piece.CachedPosition);
         }
 
         if (cachedState == ObstacleState.InProgres)

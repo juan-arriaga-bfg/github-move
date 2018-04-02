@@ -1,37 +1,28 @@
 ﻿using UnityEngine;
 
-public class BoardTimerView : IWBaseMonoBehaviour
+public class BoardTimerView : UIBoardView
 {
-    [SerializeField] private GameObject timerGo;
     [SerializeField] private NSText label;
     [SerializeField] private BoardProgressBarView progressBar;
     
-    private PieceBoardElementView context;
     private TimerComponent timer;
     
-    public void Init(PieceBoardElementView context)
+    protected override void SetOfset()
     {
-        this.context = context;
-        timerGo.SetActive(false);
+        CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Ofset;
     }
     
-    private void OnDisable()
+    public override void Init(Piece piece)
     {
-        timer = null;
+        base.Init(piece);
+        timer = piece.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
     }
     
     private void Update()
     {
-        if (context == null || context.Piece == null) return;
-
-        if (timer == null)
-        {
-            timer = context.Piece.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-            
-            if (timer == null) return;
-        }
+        if(timer == null) return;
         
-        timerGo.SetActive(timer.IsStarted);
+        Change(timer.IsStarted);
         
         if(timer.IsExecuteable() == false) return;
         

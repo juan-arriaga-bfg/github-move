@@ -4,7 +4,7 @@
     {
         var piece = base.Build(pieceType, context);
         var def = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(pieceType);
-
+        
         piece.RegisterComponent(new TimerComponent
         {
             Delay = def.Delay
@@ -22,6 +22,10 @@
                 .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage(), PieceType.Parse(def.SpawnPieceType))
                 .RegisterDefinition(new TouchReactionDefinitionUpgrade(), "arrow"))
             .RegisterComponent(new TouchReactionConditionComponent()));
+        
+        AddView(piece, ViewType.StorageState);
+        AddView(piece, ViewType.LevelLabel);
+        AddView(piece, ViewType.Menu);
         
         return piece;
     }

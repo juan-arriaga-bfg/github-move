@@ -1,11 +1,26 @@
 ﻿using System.Collections.Generic;
 
-public class MulticellularPieceBoardObserver : IPieceBoardObserver
+public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserver
 {
+	public static int ComponentGuid = ECSManager.GetNextGuid();
+    
+	public int Guid
+	{
+		get { return ComponentGuid; }
+	}
+	
 	public List<BoardPosition> Mask;
 	private BoardPosition realPosition;
 	
-	public void OnAddToBoard(BoardPosition position, Piece context = null)
+	public void OnRegisterEntity(ECSEntity entity)
+	{
+	}
+
+	public void OnUnRegisterEntity(ECSEntity entity)
+	{
+	}
+	
+	public virtual void OnAddToBoard(BoardPosition position, Piece context = null)
 	{
 		if(context == null) return;
 		
@@ -23,7 +38,7 @@ public class MulticellularPieceBoardObserver : IPieceBoardObserver
 		
 	}
 
-	public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
+	public virtual void OnRemoveFromBoard(BoardPosition position, Piece context = null)
 	{
 		if(context == null || realPosition.Equals(position) == false) return;
 		
@@ -34,7 +49,7 @@ public class MulticellularPieceBoardObserver : IPieceBoardObserver
 		}
 	}
 
-	private BoardPosition GetPointInMask(BoardPosition position, BoardPosition mask)
+	protected BoardPosition GetPointInMask(BoardPosition position, BoardPosition mask)
 	{
 		return new BoardPosition(position.X + mask.X, position.Y + mask.Y, position.Z);
 	}

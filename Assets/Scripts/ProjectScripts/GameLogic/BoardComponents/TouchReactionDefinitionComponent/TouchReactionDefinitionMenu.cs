@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
 
-public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent, IBoardEventListener
+public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
 {
     public readonly Dictionary<string, TouchReactionDefinitionComponent> Definitions = new Dictionary<string, TouchReactionDefinitionComponent>();
 
-    private bool isOpen;
-    
-    private BoardEventsComponent eventBus;
-    private Piece cachedPiece;
+    public Action OnClick;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -16,37 +13,13 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent, IBo
 
     public override void OnUnRegisterEntity(ECSEntity entity)
     {
-        eventBus.RemoveListener(this, GameEventsCodes.OpenPieceMenu);
-        eventBus.RemoveListener(this, GameEventsCodes.ClosePieceMenu);
-        eventBus = null;
-        cachedPiece = null;
     }
 
     public override bool Make(BoardPosition position, Piece piece)
     {
-        if (isOpen)
-        {
-            eventBus.RaiseEvent(GameEventsCodes.ClosePieceMenu, "");
-            return false;
-        }
-
-        foreach (var value in Definitions.Values)
-        {
-            if((value is TouchReactionDefinitionSpawnInStorage) == false) continue;
-
-            if ((value as TouchReactionDefinitionSpawnInStorage).Make(position, piece)) return false;
-        }
+        if (OnClick == null) return false;
         
-        if (eventBus == null)
-        {
-            eventBus = piece.Context.BoardEvents;
-            eventBus.AddListener(this, GameEventsCodes.ClosePieceMenu);
-            eventBus.AddListener(this, GameEventsCodes.OpenPieceMenu);
-        }
-        
-        cachedPiece = piece;
-        eventBus.RaiseEvent(GameEventsCodes.OpenPieceMenu, piece);
-        isOpen = true;
+        OnClick();
         return true;
     }
 
@@ -57,36 +30,13 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent, IBo
         Definitions.Add(image, definition);
         return this;
     }
-
-    public void OnBoardEvent(int code, object context)
-    {
-        if(code == GameEventsCodes.ClosePieceMenu && isOpen == false
-            || code == GameEventsCodes.OpenPieceMenu && isOpen) return;
-
-        if (code == GameEventsCodes.OpenPieceMenu)
-        {
-            OpenMenu(context as Piece);
-            return;
-        }
-        
-        CloseMenu(context as string);
-    }
     
-    private void OpenMenu(Piece piece)
+    public BoardButtonView.Color GetColor(TouchReactionDefinitionComponent definition)
     {
-        if(piece.CachedPosition.Equals(cachedPiece.CachedPosition)) return;
-            
-        isOpen = false;
-    }
-
-    private void CloseMenu(string key)
-    {
-        isOpen = false;
+        if (definition is TouchReactionDefinitionUpgrade) return BoardButtonView.Color.Blue;
         
-        TouchReactionDefinitionComponent definition;
+        if (definition is TouchReactionDefinitionOpenTavernWindow) return BoardButtonView.Color.Orange;
         
-        if (Definitions.TryGetValue(key, out definition) == false) return;
-        
-        definition.Make(cachedPiece.CachedPosition, cachedPiece);
+        return BoardButtonView.Color.Green;
     }
 }

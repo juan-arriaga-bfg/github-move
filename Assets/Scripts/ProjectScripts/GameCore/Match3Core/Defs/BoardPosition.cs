@@ -107,7 +107,7 @@ public struct BoardPosition : IEquatable<BoardPosition>
     {
         return (this.X.Equals(other.X) && this.Y.Equals(other.Y) && this.Z.Equals(other.Z));
     }
-
+    
     public BoardPosition UpAtDistance(int distance)
     {
         return new BoardPosition(X, Y + distance, Z);

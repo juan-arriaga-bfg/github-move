@@ -8,6 +8,7 @@ public class TimerComponent : IECSComponent, IECSSystem
     
     public int Delay;
     public Action OnComplete;
+    public Action OnStart;
     
     private DateTime startTime;
     private DateTime completeTime;
@@ -29,6 +30,7 @@ public class TimerComponent : IECSComponent, IECSSystem
         IsPaused = false;
         startTime = DateTime.Now;
         completeTime = startTime.AddSeconds(Delay);
+        if(OnStart != null) OnStart();
     }
     
     public void Stop()

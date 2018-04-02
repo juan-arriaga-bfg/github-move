@@ -97,7 +97,7 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         {
             var rend = cachedRenderers[i];
    
-            rend.CachedRenderer.sortingOrder = boardPosition.X * Context.Context.BoardDef.Width - boardPosition.Y + boardPosition.Z + rend.SortingOrderOffset;
+            rend.CachedRenderer.sortingOrder = boardPosition.X * Context.Context.BoardDef.Width - boardPosition.Y + boardPosition.Z * 100 + rend.SortingOrderOffset;
         }
 
         CachedTransform.localPosition = new Vector3(CachedTransform.localPosition.x, CachedTransform.localPosition.y, -boardPosition.Z * 0.1f);

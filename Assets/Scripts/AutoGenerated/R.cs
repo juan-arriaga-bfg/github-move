@@ -64,4 +64,7 @@ public class R
      public const string O3Piece = "O3Piece";
      public const string O4Piece = "O4Piece";
      public const string AddCards = "AddCards";
+     public const string PieceLevelView = "PieceLevelView";
+     public const string MenuView = "MenuView";
+     public const string FogPiece = "FogPiece";
 }

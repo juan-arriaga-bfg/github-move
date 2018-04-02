@@ -3,7 +3,8 @@
 public enum AbilityType
 {
     Strength,
-    Dexterity
+    Dexterity,
+    Power
 }
 
 public class HeroAbility

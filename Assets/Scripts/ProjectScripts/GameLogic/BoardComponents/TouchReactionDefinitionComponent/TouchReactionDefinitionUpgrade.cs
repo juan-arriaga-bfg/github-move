@@ -26,7 +26,7 @@ public class TouchReactionDefinitionUpgrade : TouchReactionDefinitionComponent
 		model.Message = string.Format("You need to improve the level of the {0}", def.UpgradeTargetPiece);
 		model.AcceptLabel = string.Format("Go to {0}", def.UpgradeTargetPiece);;
         
-		model.OnAccept = () => { HintArrowView.AddHint(GameDataService.Current.PiecesManager.CastlePosition); };
+		model.OnAccept = () => { HintArrowView.Show(GameDataService.Current.PiecesManager.CastlePosition); };
 		model.OnCancel = null;
         
 		UIService.Get.ShowWindow(UIWindowType.MessageWindow);

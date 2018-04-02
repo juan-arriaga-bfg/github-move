@@ -57,6 +57,22 @@ public class PieceBuildersBuilder
         dict.Add(PieceType.O3.Id, new GenericPieceBuilder());
         dict.Add(PieceType.O4.Id, new ObstaclePieceBuilder());
         
+        var mask = new List<BoardPosition>();
+        var dot = BoardPosition.Zero();
+        
+        mask.AddRange(GetLine(dot, 5));
+
+        for (int i = 1; i < 5; i++)
+        {
+            dot = dot.Right;
+            mask.AddRange(GetLine(dot, 5));
+        }
+        
+        dict.Add(PieceType.Fog.Id, new FogPieceBuilder
+        {
+            Mask = mask
+        });
+        
         return dict;
     }
     
@@ -171,47 +187,47 @@ public class PieceBuildersBuilder
             BoardPosition.Zero().Right.Right.Up.Up,
         };
         
-        dict.Add(PieceType.Castle1.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle1.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
         
-        dict.Add(PieceType.Castle2.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle2.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
         
-        dict.Add(PieceType.Castle3.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle3.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
         
-        dict.Add(PieceType.Castle4.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle4.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
         
-        dict.Add(PieceType.Castle5.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle5.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
         
-        dict.Add(PieceType.Castle6.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle6.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
         
-        dict.Add(PieceType.Castle7.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle7.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
         
-        dict.Add(PieceType.Castle8.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle8.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
 
-        dict.Add(PieceType.Castle9.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Castle9.Id, new CastlePieceBuilder
         {
             Mask = mask
         });
@@ -321,5 +337,19 @@ public class PieceBuildersBuilder
         dict.Add(PieceType.Chest3.Id, new ChestPieceBuilder());
         
         return dict;
+    }
+
+    private List<BoardPosition> GetLine(BoardPosition dot, int length)
+    {
+        var line = new List<BoardPosition> {dot};
+        
+        for (int i = 1; i < length; i++)
+        {
+            dot = dot.Up;
+            
+            line.Add(dot);
+        }
+
+        return line;
     }
 }

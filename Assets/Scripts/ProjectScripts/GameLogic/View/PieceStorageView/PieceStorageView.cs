@@ -1,42 +1,37 @@
 ﻿using UnityEngine;
 
-public class PieceStorageView : MonoBehaviour
+public class PieceStorageView : UIBoardView
 {
-    [SerializeField] private Transform anchorView;
-    [SerializeField] private bool isShowTimer;
-    [SerializeField] private Vector2 timerViewOfset;
+    [SerializeField] private SpriteRenderer icon;
     
-    private void Awake()
+    private StorageComponent storage;
+
+    public override Vector3 Ofset
     {
-        var context = GetComponent<PieceBoardElementView>();
-
-        foreach (Transform view in anchorView)
-        {
-            DestroyImmediate(view.gameObject);
-        }
-        
-        var stateView = CreateObject<ChangeStorageStateView>(R.ChangeStorageStateView, Vector3.zero);
-        stateView.Init(context);
-
-        if (isShowTimer)
-        {
-            var timer = CreateObject<BoardTimerView>(R.BoardTimerView, timerViewOfset);
-            timer.Init(context);
-        }
-		
-        context.ClearCacheLayers();
+        get { return new Vector3(0, 0.7f); }
     }
 
-    private T CreateObject<T>(string prefab, Vector2 ofset) where T : IWBaseMonoBehaviour
+    protected override void SetOfset()
     {
-        var go = (GameObject)Instantiate(ContentService.Instance.Manager.GetObjectByName(prefab));
-        var view = go.GetComponent<T>();
+        CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Ofset;
+    }
 
-        view.CachedTransform.SetParent(anchorView);
-        view.CachedTransform.localPosition = ofset;
-        view.CachedTransform.localRotation = Quaternion.identity;
-        view.CachedTransform.localScale = Vector3.one;
+    public override void Init(Piece piece)
+    {
+        base.Init(piece);
+        storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
         
-        return view;
+        if (storage == null) return;
+        
+        icon.sprite = IconService.Current.GetSpriteById(PieceType.Parse(storage.SpawnPiece));
+        storage.Timer.OnComplete += UpdateView;
+        storage.Timer.OnStart += UpdateView;
+        UpdateView();
+    }
+    
+    private void UpdateView()
+    {
+        if (storage == null) return;
+        Change(storage.Filling / (float) storage.Capacity > 0.2);
     }
 }

@@ -54,7 +54,7 @@ public class ObstaclesLogicComponent : IECSComponent, IECSSystem
             context.BoardLogic.EmptyCellsFinder.FindRingWithPointInCenter(position, positions, 1000, i);
         }
         
-        context.ActionExecutor.PerformAction(new FillBoardAction{Piece = PieceType.O1.Id, Positions = positions});
+//        context.ActionExecutor.PerformAction(new FillBoardAction{Piece = PieceType.O1.Id, Positions = positions});
     }
     
     public void Execute()

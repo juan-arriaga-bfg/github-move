@@ -1,126 +1,131 @@
 ﻿using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 
-public class PieceMenuView : MonoBehaviour, IBoardEventListener
+public class PieceMenuView : UIBoardView, IBoardEventListener
 {
-    [SerializeField] private Transform anchorView;
+    private Dictionary<BoardButtonView, TouchReactionDefinitionComponent> buttons = new Dictionary<BoardButtonView, TouchReactionDefinitionComponent>();
 
-    private Piece cachedPiece;
-    
-    private BoardEventsComponent eventBus;
-    private TouchReactionDefinitionMenu menuDef;
+    private BoardButtonView spawnButton;
 
-    private List<Transform> buttons;
-    
-    private void Awake()
+    private bool isOpen;
+
+    public override int Priority
     {
-        var context = GetComponent<PieceBoardElementView>();
-        
-        context.ClearCacheLayers();
+        get { return 1; }
     }
     
-    private void OnEnable()
+    public override Vector3 Ofset
     {
-        if (BoardService.Current.GetBoardById(0) == null) return;
-        
-        eventBus = BoardService.Current.GetBoardById(0).BoardEvents;
+        get { return new Vector3(0, 0.7f); }
     }
 
-    private void OnDisable()
+    protected override void SetOfset()
     {
-        if(eventBus == null) return;
-        
-        eventBus.RemoveListener(this, GameEventsCodes.OpenPieceMenu);
-        eventBus.RemoveListener(this, GameEventsCodes.ClosePieceMenu);
+        CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Ofset;
     }
 
-    private void Update()
+    public override void Init(Piece piece)
     {
-        var context = GetComponent<PieceBoardElementView>();
+        base.Init(piece);
         
-        if (context == null || context.Piece == null) return;
-
-        if (menuDef != null) return;
-
-        cachedPiece = context.Piece;
-        
-        var touchReaction = context.Piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
+        var touchReaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
         
         if(touchReaction == null) return;
         
-        menuDef = touchReaction.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
+        var menuDef = touchReaction.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
         
         if(menuDef == null) return;
+
+        menuDef.OnClick = OnClick;
+        Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceMenu);
+        
+        foreach (var pair in menuDef.Definitions)
+        {
+            var element = piece.Context.RendererContext.CreateElement((int)ViewType.MenuButton);
             
-        eventBus.AddListener(this, GameEventsCodes.ClosePieceMenu);
-        eventBus.AddListener(this, GameEventsCodes.OpenPieceMenu);
+            
+            var btn = element.GetComponent<BoardButtonView>();
+            
+            element.parent = viewGo.transform;
+            element.localPosition = Vector3.zero;
+            element.localScale = Vector3.one;
+            
+            btn.Init(pair.Key, menuDef.GetColor(pair.Value), view => OnButtonClick(view));
+            buttons.Add(btn, pair.Value);
+
+            if (pair.Value is TouchReactionDefinitionSpawnInStorage) spawnButton = btn;
+        }
+    }
+
+    public override void ResetViewOnDestroy()
+    {
+        base.ResetViewOnDestroy();
+
+        foreach (var buttonsKey in buttons.Keys)
+        {
+            Context.Context.RendererContext.DestroyElement(buttonsKey.gameObject);
+        }
+        
+        buttons = new Dictionary<BoardButtonView, TouchReactionDefinitionComponent>();
+    }
+
+    private void OnClick()
+    {
+        if (isOpen == false && spawnButton != null && OnButtonClick(spawnButton))
+        {
+            return;
+        }
+        
+        Context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
+        
+        isOpen = !isOpen;
+
+        if (isOpen) OpenMenu();
+        else CloseMenu();
+    }
+
+    private void OpenMenu()
+    {
+        Change(true);
+
+        var index = 0;
+        var angle = (360 / (float) buttons.Count) * (Mathf.PI/180);
+        
+        foreach (var pair in buttons)
+        {
+            index++;
+            var position = new Vector2(Mathf.Cos(angle  * index), 0.5f + Mathf.Sin(angle * index));
+            pair.Key.CachedTransform.localPosition = position;
+        }
+    }
+
+    private void CloseMenu()
+    {
+        Change(false);
+        
+        foreach (var pair in buttons)
+        {
+            pair.Key.CachedTransform.localPosition = Vector3.zero;
+        }
+    }
+
+    private bool OnButtonClick(BoardButtonView btn)
+    {
+        TouchReactionDefinitionComponent definition;
+        if(buttons.TryGetValue(btn, out definition) == false) return false;
+        
+        isOpen = false;
+        CloseMenu();
+        
+        return definition.Make(Context.CachedPosition, Context);
     }
 
     public void OnBoardEvent(int code, object context)
     {
-        if (code == GameEventsCodes.OpenPieceMenu)
-        {
-            OpenMenu(context as Piece);
-            return;
-        }
+        if (code != GameEventsCodes.ClosePieceMenu) return;
+        if(isOpen == false) return;
 
-        CloseMenu(context as string);
-    }
-
-    private void OpenMenu(Piece piece)
-    {
-        if (piece.CachedPosition.Equals(cachedPiece.CachedPosition) == false)
-        {
-            CloseMenu("");
-            return;
-        }
-
-        var angle = (360 / (float) menuDef.Definitions.Count) * (Mathf.PI/180);
-        
-        buttons = new List<Transform>();
-
-        var keys = new List<string>();
-
-        foreach (var pair in menuDef.Definitions)
-        {
-            keys.Add(pair.Key);
-        }
-
-        for (int i = 0; i < keys.Count; i++)
-        {
-            var position = new Vector2(Mathf.Cos(angle  * i), 0.5f + Mathf.Sin(angle * i));
-            var button = CreateObject<BoardButtonView>(R.BoardButtonView, position);
-            var key = keys[i];
-            var color = BoardButtonView.GetColor(menuDef.Definitions[key]);
-            
-            button.Init(key, color);
-            buttons.Add(button.transform);
-        }
-    }
-
-    private void CloseMenu(string key)
-    {
-        if(buttons == null) return;
-        
-        foreach (var button in buttons)
-        {
-            Destroy(button.gameObject, 0.1f);
-        }
-        
-        buttons = new List<Transform>();
-    }
-    
-    private T CreateObject<T>(string prefab, Vector2 ofset) where T : IWBaseMonoBehaviour
-    {
-        var go = (GameObject)Instantiate(ContentService.Instance.Manager.GetObjectByName(prefab));
-        var view = go.GetComponent<T>();
-
-        view.CachedTransform.SetParent(anchorView);
-        view.CachedTransform.localPosition = ofset;
-        view.CachedTransform.localRotation = Quaternion.identity;
-        view.CachedTransform.localScale = Vector3.one;
-        
-        return view;
+        isOpen = false;
+        CloseMenu();
     }
 }

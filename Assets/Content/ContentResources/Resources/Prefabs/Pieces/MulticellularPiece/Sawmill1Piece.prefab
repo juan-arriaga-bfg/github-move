@@ -549,8 +549,6 @@ GameObject:
   - component: {fileID: 4542807987214320}
   - component: {fileID: 114243331302908096}
   - component: {fileID: 114915778010107768}
-  - component: {fileID: 114709023267400584}
-  - component: {fileID: 114751571518217792}
   m_Layer: 0
   m_Name: Sawmill1Piece
   m_TagString: Untagged
@@ -1326,32 +1324,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_maskType: 0
---- !u!114 &114709023267400584
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1924086398574114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc4efb79507363645bff69d6f43ae756, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorView: {fileID: 4188393077744306}
-  isShowTimer: 0
-  timerViewOfset: {x: 0, y: 0}
---- !u!114 &114751571518217792
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1924086398574114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a47b6d7608abd48418ab3344c5e092be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorView: {fileID: 4188393077744306}
 --- !u!114 &114857269532650826
 MonoBehaviour:
   m_ObjectHideFlags: 1

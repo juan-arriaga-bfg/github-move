@@ -5,7 +5,7 @@ public class PieceTouchRegion : IWBaseMonoBehaviour, ITouchableListener
 {
     [SerializeField] private List<RectTransform> touchRegions = new List<RectTransform>();
     
-    private PieceBoardElementView context;
+    protected PieceBoardElementView context;
 
     private CameraManipulator cameraManipulator;
     

@@ -141,7 +141,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fee499539ccc6a43ab41f6097e87115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconGo: {fileID: 1306859104452190}
+  IsFading: 0
+  FadeValue: 0
+  viewGo: {fileID: 1306859104452190}
   icon: {fileID: 212830666192073086}
 --- !u!212 &212032060219483040
 SpriteRenderer:

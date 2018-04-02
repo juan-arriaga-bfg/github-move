@@ -10,6 +10,9 @@
 				.RegisterDefinition(new TouchReactionDefinitionUpgrade(), "arrow"))
 			.RegisterComponent(new TouchReactionConditionComponent()));
         
+		AddView(piece, ViewType.LevelLabel);
+		AddView(piece, ViewType.Menu);
+		
 		return piece;
 	}
 }

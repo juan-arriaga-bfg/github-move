@@ -5,8 +5,8 @@ using UnityEngine;
 public class AddCardsView : BoardElementView
 {
 	[SerializeField] private List<SpriteRenderer> icons;
-    
-	public void Show(Sprite sprite)
+
+	private void Show(Sprite sprite)
 	{
 		const float duration = 1.5f;
 		var delay = 0f;
@@ -15,7 +15,6 @@ public class AddCardsView : BoardElementView
         
 		var sequence = DOTween.Sequence().SetId(animationUid);
 		
-
 		for (int i = 0; i < icons.Count; i++)
 		{
 			var icon = icons[i];
@@ -33,7 +32,7 @@ public class AddCardsView : BoardElementView
 		DestroyOnBoard(delay + duration);
 	}
 
-	public static void AddCard(BoardPosition position, string card)
+	public static void Show(BoardPosition position, string card)
 	{
 		var board = BoardService.Current.GetBoardById(0);
 		var worldPos = board.BoardDef.GetSectorCenterWorldPosition(position.X, position.Up.Y, position.Z);

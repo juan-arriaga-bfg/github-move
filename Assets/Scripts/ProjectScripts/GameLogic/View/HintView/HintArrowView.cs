@@ -4,8 +4,8 @@ using UnityEngine;
 public class HintArrowView : BoardElementView
 {
     [SerializeField] private SpriteRenderer icon;
-    
-    public void Show()
+
+    private void Show()
     {
         float duration = 5f;
         
@@ -18,7 +18,7 @@ public class HintArrowView : BoardElementView
         DestroyOnBoard(duration);
     }
 
-    public static void AddHint(BoardPosition position)
+    public static void Show(BoardPosition position)
     {
         var board = BoardService.Current.GetBoardById(0);
         var worldPos = board.BoardDef.GetSectorCenterWorldPosition(position.X, position.Up.Y, position.Z);

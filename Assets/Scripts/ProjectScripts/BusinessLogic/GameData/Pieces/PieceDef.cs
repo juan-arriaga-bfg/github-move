@@ -42,14 +42,18 @@
         }
     }
 
+    public int CurrentLevel()
+    {
+        return ProfileService.Current.GetStorageItem(UpgradeCurrency.Name).Amount + 1;
+    }
+
     public bool IsMaxLevel()
     {
         if (UpgradeTargetCurrency == null) return false;
         
-        var level = ProfileService.Current.GetStorageItem(UpgradeCurrency.Name).Amount;
         var targetLevel = ProfileService.Current.GetStorageItem(UpgradeTargetCurrency.Name).Amount;
         
-        return level + 1 > targetLevel;
+        return CurrentLevel() > targetLevel;
     }
 
     public override string ToString()

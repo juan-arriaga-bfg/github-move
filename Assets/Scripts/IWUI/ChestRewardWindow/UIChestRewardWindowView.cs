@@ -177,7 +177,7 @@ public class UIChestRewardWindowView : UIGenericWindowView
             {
                 // on purchase success
                 
-                if(isCard) AddCardsView.AddCard(position.Value, reward.Currency);
+                if(isCard) AddCardsView.Show(position.Value, reward.Currency);
             },
             item =>
             {

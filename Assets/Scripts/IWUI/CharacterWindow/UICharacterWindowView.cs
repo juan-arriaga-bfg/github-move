@@ -52,7 +52,7 @@ public class UICharacterWindowView : UIGenericPopupWindowView
             model.Message = "Tavern level is not high enough!";
             model.AcceptLabel = "Go to Tavern";
         
-            model.OnAccept = () => { HintArrowView.AddHint(GameDataService.Current.PiecesManager.TavernPosition); };
+            model.OnAccept = () => { HintArrowView.Show(GameDataService.Current.PiecesManager.TavernPosition); };
             model.OnCancel = null;
         
             UIService.Get.ShowWindow(UIWindowType.MessageWindow);
@@ -69,7 +69,7 @@ public class UICharacterWindowView : UIGenericPopupWindowView
             model.Message = "Not enought cards!";
             model.AcceptLabel = "Go to mission";
         
-            model.OnAccept = () => { HintArrowView.AddHint(BoardService.Current.GetBoardById(0).ObstaclesLogic.GetPositionCurrentObstacle()); };
+            model.OnAccept = () => { HintArrowView.Show(BoardService.Current.GetBoardById(0).ObstaclesLogic.GetPositionCurrentObstacle()); };
             model.OnCancel = null;
         
             UIService.Get.ShowWindow(UIWindowType.MessageWindow);

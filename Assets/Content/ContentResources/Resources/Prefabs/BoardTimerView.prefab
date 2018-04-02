@@ -289,7 +289,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab788134c1180c4db68410c87501e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerGo: {fileID: 1738465272905252}
+  IsFading: 0
+  FadeValue: 0
+  viewGo: {fileID: 1738465272905252}
   label: {fileID: 114397832288155328}
   progressBar: {fileID: 114476424157391952}
 --- !u!114 &114577053301562320

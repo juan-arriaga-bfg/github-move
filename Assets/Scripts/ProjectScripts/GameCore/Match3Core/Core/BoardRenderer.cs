@@ -862,14 +862,7 @@ public class BoardRenderer : ECSEntity
 
         return RemoveElementAt(boardPosition, isDestroy);
     }
-
-    public virtual void DestroyElement(BoardElementView elementView)
-    {
-        if (elementView == null) return;
-
-        pool.Return(elementView.gameObject);
-    }
-
+    
     public virtual BoardElementView RemoveElementAt(BoardPosition boardPosition, bool isDestroy = true)
     {
         BoardElementView elementView;
@@ -887,7 +880,21 @@ public class BoardRenderer : ECSEntity
 
         return null;
     }
+    
+    public virtual void DestroyElement(BoardElementView elementView)
+    {
+        if (elementView == null) return;
 
+        pool.Return(elementView.gameObject);
+    }
+    
+    public virtual void DestroyElement(GameObject element)
+    {
+        if (element == null) return;
+        
+        pool.Return(element);
+    }
+    
     public virtual BoardElementView CreateElementAt(int elementType, BoardPosition pos)
     {
         return CreateElementAt(elementType, pos.X, pos.Y, pos.Z);
