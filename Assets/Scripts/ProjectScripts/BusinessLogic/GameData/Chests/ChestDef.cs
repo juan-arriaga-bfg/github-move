@@ -8,6 +8,4 @@ public class ChestDef
     
     public CurrencyPair Price { get; set; }
     public List<List<CurrencyPair>> Rewards { get; set; }
-
-    public DateTime? StartTime { get; set; }
 }

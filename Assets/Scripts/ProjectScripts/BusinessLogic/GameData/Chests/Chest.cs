@@ -11,12 +11,23 @@ public enum ChestType
     Epic
 }
 
+public enum ChestState
+{
+    Close,
+    InProgress,
+    Open,
+    Finished
+}
+
 public class Chest
 {
     private ChestDef def;
     private ChestType chestType;
+    private ChestState chestState;
     
     private List<List<CurrencyPair>> Rewards;
+    
+    public DateTime? StartTime { get; set; }
     
     public Chest(ChestDef def)
     {
@@ -45,6 +56,28 @@ public class Chest
     public int Piece
     {
         get { return PieceType.Parse(def.Uid); }
+    }
+    
+    public ChestState State
+    {
+        get
+        {
+            if (StartTime != null && (int) (DateTime.Now - StartTime.Value).TotalSeconds >= def.Time)
+            {
+                chestState = ChestState.Open;
+            }
+            
+            return chestState;
+        }
+        set
+        {
+            if (value == ChestState.InProgress)
+            {
+                StartTime = DateTime.Now;
+            }
+            
+            chestState = value;
+        }
     }
 
     public CurrencyPair GetReward(int level)
