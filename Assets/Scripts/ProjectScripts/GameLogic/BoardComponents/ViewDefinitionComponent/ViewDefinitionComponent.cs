@@ -108,7 +108,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
     public Vector3 GetViewPositionBottom(int size)
     {
-        return context.Context.BoardDef.GetSectorWorldPosition(Position.X + size - 1, Position.Y + 1, Position.Z);
+        return context.Context.BoardDef.GetSectorWorldPosition(Position.X + size - 1, Position.Y + (size == 0 ? 2 : 1), Position.Z);
     }
     
     public Vector3 GetViewPositionTop(int size)

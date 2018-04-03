@@ -9,6 +9,8 @@ public class ObstaclesDataManager : IDataLoader<List<ObstacleDef>>
         get { return obstacles; }
     }
     
+    public CurrencyPair SimpleObstaclePrice;
+    
     public void LoadData(IDataMapper<List<ObstacleDef>> dataMapper)
     {
         dataMapper.LoadData((data, error)=> 
@@ -16,6 +18,7 @@ public class ObstaclesDataManager : IDataLoader<List<ObstacleDef>>
             if (string.IsNullOrEmpty(error))
             {
                 obstacles = data;
+                SimpleObstaclePrice = new CurrencyPair {Currency = Currency.Coins.Name, Amount = 100};
             }
             else
             {

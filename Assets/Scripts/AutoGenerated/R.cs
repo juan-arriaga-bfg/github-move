@@ -84,4 +84,5 @@ public class R
      public const string C3Piece = "C3Piece";
      public const string C4Piece = "C4Piece";
      public const string C5Piece = "C5Piece";
+     public const string ChangeSimpleObstacleStateView = "ChangeSimpleObstacleStateView";
 }

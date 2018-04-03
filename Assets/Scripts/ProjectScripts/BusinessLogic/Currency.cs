@@ -31,8 +31,9 @@
     public static readonly CurrencyDef LevelSheepfold = new CurrencyDef { Id = 24, Name = "LevelSheepfold", IsConsumable = true };
     
     public static readonly CurrencyDef Quest = new CurrencyDef { Id = 25, Name = "Quest", IsConsumable = true };
+    public static readonly CurrencyDef Obstacle = new CurrencyDef { Id = 26, Name = "Obstacle", IsConsumable = true };
     
-    public static readonly CurrencyDef ChestCommon = new CurrencyDef { Id = 26, Name = "ChestCommon", IsConsumable = true };
-    public static readonly CurrencyDef ChestRare = new CurrencyDef { Id = 27, Name = "ChestRare", IsConsumable = true };
-    public static readonly CurrencyDef ChestEpic = new CurrencyDef { Id = 28, Name = "ChestEpic", IsConsumable = true };
+    public static readonly CurrencyDef ChestCommon = new CurrencyDef { Id = 27, Name = "ChestCommon", IsConsumable = true };
+    public static readonly CurrencyDef ChestRare = new CurrencyDef { Id = 28, Name = "ChestRare", IsConsumable = true };
+    public static readonly CurrencyDef ChestEpic = new CurrencyDef { Id = 29, Name = "ChestEpic", IsConsumable = true };
 }

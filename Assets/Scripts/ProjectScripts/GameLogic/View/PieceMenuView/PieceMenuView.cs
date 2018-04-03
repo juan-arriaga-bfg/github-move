@@ -67,6 +67,7 @@ public class PieceMenuView : UIBoardView, IBoardEventListener
         }
         
         buttons = new Dictionary<BoardButtonView, TouchReactionDefinitionComponent>();
+        Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceMenu);
     }
 
     private void OnClick()

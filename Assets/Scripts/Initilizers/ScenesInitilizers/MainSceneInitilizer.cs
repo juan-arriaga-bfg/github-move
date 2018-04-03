@@ -52,5 +52,6 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         
         var sandboxGameController = new GameObject().AddComponent<SandboxGameController>();
         sandboxGameController.Run();
+        sandboxGameController.name = "SandboxGameController";
     }
 }

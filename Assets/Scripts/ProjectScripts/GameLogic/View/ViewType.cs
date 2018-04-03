@@ -9,4 +9,5 @@
     LevelLabel = -1006,
     Menu = -1007,
     MenuButton = -1008,
+    SimpleObstacle = -1009,
 }

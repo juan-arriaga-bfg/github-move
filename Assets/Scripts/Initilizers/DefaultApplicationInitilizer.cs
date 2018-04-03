@@ -88,6 +88,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             Currency.RegisterCurrency(Currency.LevelSheepfold);
             
             Currency.RegisterCurrency(Currency.Quest);
+            Currency.RegisterCurrency(Currency.Obstacle);
             
             Currency.RegisterCurrency(Currency.ChestCommon);
             Currency.RegisterCurrency(Currency.ChestRare);
