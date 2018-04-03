@@ -39,6 +39,12 @@ public class PieceBuildersBuilder
         dict.Add(PieceType.B4.Id, new SimplePieceBuilder());
         dict.Add(PieceType.B5.Id, new SimplePieceBuilder());
         
+        dict.Add(PieceType.C1.Id, new SimplePieceBuilder());
+        dict.Add(PieceType.C2.Id, new SimplePieceBuilder());
+        dict.Add(PieceType.C3.Id, new SimplePieceBuilder());
+        dict.Add(PieceType.C4.Id, new SimplePieceBuilder());
+        dict.Add(PieceType.C5.Id, new SimplePieceBuilder());
+        
         return dict;
     }
     

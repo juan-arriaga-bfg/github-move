@@ -43,6 +43,12 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.B4.Id, R.B4Piece);
         dict.Add(PieceType.B5.Id, R.B5Piece);
 
+        dict.Add(PieceType.C1.Id, R.C1Piece);
+        dict.Add(PieceType.C2.Id, R.C2Piece);
+        dict.Add(PieceType.C3.Id, R.C3Piece);
+        dict.Add(PieceType.C4.Id, R.C4Piece);
+        dict.Add(PieceType.C5.Id, R.C5Piece);
+        
         dict.Add(PieceType.Gbox1.Id, R.GBox1Piece);
         
         dict.Add(PieceType.Chest1.Id, R.Chest1Piece);

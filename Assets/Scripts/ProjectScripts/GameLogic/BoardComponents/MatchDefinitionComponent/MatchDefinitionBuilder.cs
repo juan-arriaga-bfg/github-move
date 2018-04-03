@@ -28,6 +28,12 @@ public class MatchDefinitionBuilder
             {PieceType.B4.Id, new PieceMatchDef {Next = PieceType.B5.Id, Previous = PieceType.B3.Id, Count = 3}},
             {PieceType.B5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.B4.Id, Count = 3}},
             
+            {PieceType.C1.Id, new PieceMatchDef {Next = PieceType.C2.Id, Previous = PieceType.None.Id, Count = 3}},
+            {PieceType.C2.Id, new PieceMatchDef {Next = PieceType.C3.Id, Previous = PieceType.C1.Id, Count = 3}},
+            {PieceType.C3.Id, new PieceMatchDef {Next = PieceType.C4.Id, Previous = PieceType.C2.Id, Count = 3}},
+            {PieceType.C4.Id, new PieceMatchDef {Next = PieceType.C5.Id, Previous = PieceType.C3.Id, Count = 3}},
+            {PieceType.C5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.C4.Id, Count = 3}},
+            
             {PieceType.Mine1.Id, new PieceMatchDef {Next = PieceType.Mine2.Id, Previous = PieceType.None.Id, Count = 1}},
             {PieceType.Mine2.Id, new PieceMatchDef {Next = PieceType.Mine3.Id, Previous = PieceType.Mine1.Id, Count = 1}},
             {PieceType.Mine3.Id, new PieceMatchDef {Next = PieceType.Mine4.Id, Previous = PieceType.Mine2.Id, Count = 1}},

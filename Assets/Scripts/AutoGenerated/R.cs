@@ -11,7 +11,6 @@ public class R
      public const string B3Piece = "B3Piece";
      public const string B4Piece = "B4Piece";
      public const string O1Piece = "O1Piece";
-     public const string C1Piece = "C1Piece";
      public const string E1Piece = "E1Piece";
      public const string A5Piece = "A5Piece";
      public const string E2Piece = "E2Piece";
@@ -80,4 +79,9 @@ public class R
      public const string Sheepfold5Piece = "Sheepfold5Piece";
      public const string Sheepfold6Piece = "Sheepfold6Piece";
      public const string Sheepfold7Piece = "Sheepfold7Piece";
+     public const string C1Piece = "C1Piece";
+     public const string C2Piece = "C2Piece";
+     public const string C3Piece = "C3Piece";
+     public const string C4Piece = "C4Piece";
+     public const string C5Piece = "C5Piece";
 }

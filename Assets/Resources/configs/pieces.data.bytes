@@ -70,9 +70,37 @@
     }
   },
   {
+    "Uid": "C2",
+    "CreateReward": {
+      "Currency": "Coins",
+      "Amount": 5
+    }
+  },
+  {
+    "Uid": "C3",
+    "CreateReward": {
+      "Currency": "Coins",
+      "Amount": 10
+    }
+  },
+  {
+    "Uid": "C4",
+    "CreateReward": {
+      "Currency": "Coins",
+      "Amount": 25
+    }
+  },
+  {
+    "Uid": "C5",
+    "CreateReward": {
+      "Currency": "Coins",
+      "Amount": 50
+    }
+  },
+  {
     "Uid": "Mine1",
     "Delay": 3,
-    "SpawnPiece": "B1",
+    "SpawnPiece": "C1",
     "UpgradeTargetPiece": "Castle",
     "IsFilledInStart":"true",
     "SpawnAmount": 1,
@@ -85,7 +113,7 @@
   {
     "Uid": "Mine2",
     "Delay": 3,
-    "SpawnPiece": "B1",
+    "SpawnPiece": "C1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
     "SpawnCapacity": 8,
@@ -97,7 +125,7 @@
   {
     "Uid": "Mine3",
     "Delay": 3,
-    "SpawnPiece": "B1",
+    "SpawnPiece": "C1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
     "SpawnCapacity": 8,
@@ -109,7 +137,7 @@
   {
     "Uid": "Mine4",
     "Delay": 3,
-    "SpawnPiece": "B1",
+    "SpawnPiece": "C1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
     "SpawnCapacity": 8,
@@ -121,7 +149,7 @@
   {
     "Uid": "Mine5",
     "Delay": 3,
-    "SpawnPiece": "B1",
+    "SpawnPiece": "C1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
     "SpawnCapacity": 8,
@@ -133,7 +161,7 @@
   {
     "Uid": "Mine6",
     "Delay": 3,
-    "SpawnPiece": "B1",
+    "SpawnPiece": "C1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
     "SpawnCapacity": 8,
@@ -145,7 +173,7 @@
   {
     "Uid": "Mine7",
     "Delay": 3,
-    "SpawnPiece": "B1",
+    "SpawnPiece": "C1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
     "SpawnCapacity": 8,
@@ -242,7 +270,7 @@
   {
     "Uid": "Sheepfold1",
     "Delay": 3,
-    "SpawnPiece": "C1",
+    "SpawnPiece": "B1",
     "UpgradeTargetPiece": "Castle",
     "IsFilledInStart":"true",
     "SpawnAmount": 1,
@@ -255,7 +283,7 @@
   {
     "Uid": "Sheepfold2",
     "Delay": 3,
-    "SpawnPiece": "C1",
+    "SpawnPiece": "B1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
     "SpawnCapacity": 8,
@@ -267,7 +295,7 @@
   {
     "Uid": "Sheepfold3",
     "Delay": 3,
-    "SpawnPiece": "C1",
+    "SpawnPiece": "B1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
     "SpawnCapacity": 8,
@@ -279,7 +307,7 @@
   {
     "Uid": "Sheepfold4",
     "Delay": 3,
-    "SpawnPiece": "C1",
+    "SpawnPiece": "B1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
     "SpawnCapacity": 8,
@@ -291,7 +319,7 @@
   {
     "Uid": "Sheepfold5",
     "Delay": 3,
-    "SpawnPiece": "C1",
+    "SpawnPiece": "B1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
     "SpawnCapacity": 8,
@@ -303,7 +331,7 @@
   {
     "Uid": "Sheepfold6",
     "Delay": 3,
-    "SpawnPiece": "C1",
+    "SpawnPiece": "B1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
     "SpawnCapacity": 8,
@@ -315,7 +343,7 @@
   {
     "Uid": "Sheepfold7",
     "Delay": 3,
-    "SpawnPiece": "C1",
+    "SpawnPiece": "B1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
     "SpawnCapacity": 8,
