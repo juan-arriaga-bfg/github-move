@@ -45,6 +45,18 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
         return null;
     }
 
+    public ChestType PieceToChest(int pieceType)
+    {
+        foreach (ChestType chest in Enum.GetValues(typeof(ChestType)))
+        {
+            if(PieceType.Parse(chest.ToString()) != pieceType) continue;
+            
+            return chest;
+        }
+
+        return ChestType.None;
+    }
+
     public bool AddActiveChest(ChestType type)
     {
         if (ActiveChests.Count == Max) return false;

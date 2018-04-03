@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class PieceBuildersBuilder
 {
@@ -12,8 +10,11 @@ public class PieceBuildersBuilder
         dict = AddEnemyPiece(dict);
         dict = AddObstaclePiece(dict);
         dict = AddOtherPiece(dict);
-        dict = AddSawmillPiece(dict);
+        
         dict = AddMinePiece(dict);
+        dict = AddSawmillPiece(dict);
+        dict = AddSheepfoldPiece(dict);
+        
         dict = AddCastlePiece(dict);
         dict = AddTavernPiece(dict);
         dict = AddChestPiece(dict);
@@ -85,89 +86,142 @@ public class PieceBuildersBuilder
         return dict;
     }
     
-    private Dictionary<int, IPieceBuilder> AddSawmillPiece(Dictionary<int, IPieceBuilder> dict)
+    private Dictionary<int, IPieceBuilder> AddMinePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict.Add(PieceType.Sawmill1.Id, new MulticellularSpawnPieceBuilder
+        var mask = new List<BoardPosition>
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
+            BoardPosition.Zero().Up,
+            BoardPosition.Zero().Right,
+            BoardPosition.Zero().Right.Up,
+        };
+        
+        dict.Add(PieceType.Mine1.Id, new MulticellularSpawnPieceBuilder
+        {
+            Mask = mask
         });
         
-        dict.Add(PieceType.Sawmill2.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Mine2.Id, new MulticellularSpawnPieceBuilder
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
+            Mask = mask
         });
         
-        dict.Add(PieceType.Sawmill3.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Mine3.Id, new MulticellularSpawnPieceBuilder
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
+            Mask = mask
         });
         
-        dict.Add(PieceType.Sawmill4.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Mine4.Id, new MulticellularSpawnPieceBuilder
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
+            Mask = mask
         });
         
-        dict.Add(PieceType.Sawmill5.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Mine5.Id, new MulticellularSpawnPieceBuilder
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
+            Mask = mask
         });
         
-        dict.Add(PieceType.Sawmill6.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Mine6.Id, new MulticellularSpawnPieceBuilder
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
+            Mask = mask
         });
         
-        dict.Add(PieceType.Sawmill7.Id, new MulticellularSpawnPieceBuilder
+        dict.Add(PieceType.Mine7.Id, new MulticellularSpawnPieceBuilder
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
+            Mask = mask
         });
         
         return dict;
     }
     
-    private Dictionary<int, IPieceBuilder> AddMinePiece(Dictionary<int, IPieceBuilder> dict)
+    private Dictionary<int, IPieceBuilder> AddSawmillPiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict.Add(PieceType.M1.Id, new MulticellularSpawnPieceBuilder
+        var mask = new List<BoardPosition>
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-            }
+            BoardPosition.Zero().Up,
+            BoardPosition.Zero().Right,
+            BoardPosition.Zero().Right.Up,
+        };
+        
+        dict.Add(PieceType.Sawmill1.Id, new MulticellularSpawnPieceBuilder
+        {
+            Mask = mask
+        });
+        
+        dict.Add(PieceType.Sawmill2.Id, new MulticellularSpawnPieceBuilder
+        {
+            Mask = mask
+        });
+        
+        dict.Add(PieceType.Sawmill3.Id, new MulticellularSpawnPieceBuilder
+        {
+            Mask = mask
+        });
+        
+        dict.Add(PieceType.Sawmill4.Id, new MulticellularSpawnPieceBuilder
+        {
+            Mask = mask
+        });
+        
+        dict.Add(PieceType.Sawmill5.Id, new MulticellularSpawnPieceBuilder
+        {
+            Mask = mask
+        });
+        
+        dict.Add(PieceType.Sawmill6.Id, new MulticellularSpawnPieceBuilder
+        {
+            Mask = mask
+        });
+        
+        dict.Add(PieceType.Sawmill7.Id, new MulticellularSpawnPieceBuilder
+        {
+            Mask = mask
+        });
+        
+        return dict;
+    }
+    
+    private Dictionary<int, IPieceBuilder> AddSheepfoldPiece(Dictionary<int, IPieceBuilder> dict)
+    {
+        var mask = new List<BoardPosition>
+        {
+            BoardPosition.Zero().Up,
+            BoardPosition.Zero().Right,
+            BoardPosition.Zero().Right.Up,
+        };
+        
+        dict.Add(PieceType.Sheepfold1.Id, new MulticellularSpawnPieceBuilder
+        {
+            Mask = mask
+        });
+        
+        dict.Add(PieceType.Sheepfold2.Id, new MulticellularSpawnPieceBuilder
+        {
+            Mask = mask
+        });
+        
+        dict.Add(PieceType.Sheepfold3.Id, new MulticellularSpawnPieceBuilder
+        {
+            Mask = mask
+        });
+        
+        dict.Add(PieceType.Sheepfold4.Id, new MulticellularSpawnPieceBuilder
+        {
+            Mask = mask
+        });
+        
+        dict.Add(PieceType.Sheepfold5.Id, new MulticellularSpawnPieceBuilder
+        {
+            Mask = mask
+        });
+        
+        dict.Add(PieceType.Sheepfold6.Id, new MulticellularSpawnPieceBuilder
+        {
+            Mask = mask
+        });
+        
+        dict.Add(PieceType.Sheepfold7.Id, new MulticellularSpawnPieceBuilder
+        {
+            Mask = mask
         });
         
         return dict;

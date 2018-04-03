@@ -28,6 +28,14 @@ public class MatchDefinitionBuilder
             {PieceType.B4.Id, new PieceMatchDef {Next = PieceType.B5.Id, Previous = PieceType.B3.Id, Count = 3}},
             {PieceType.B5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.B4.Id, Count = 3}},
             
+            {PieceType.Mine1.Id, new PieceMatchDef {Next = PieceType.Mine2.Id, Previous = PieceType.None.Id, Count = 1}},
+            {PieceType.Mine2.Id, new PieceMatchDef {Next = PieceType.Mine3.Id, Previous = PieceType.Mine1.Id, Count = 1}},
+            {PieceType.Mine3.Id, new PieceMatchDef {Next = PieceType.Mine4.Id, Previous = PieceType.Mine2.Id, Count = 1}},
+            {PieceType.Mine4.Id, new PieceMatchDef {Next = PieceType.Mine5.Id, Previous = PieceType.Mine3.Id, Count = 1}},
+            {PieceType.Mine5.Id, new PieceMatchDef {Next = PieceType.Mine6.Id, Previous = PieceType.Mine4.Id, Count = 1}},
+            {PieceType.Mine6.Id, new PieceMatchDef {Next = PieceType.Mine7.Id, Previous = PieceType.Mine5.Id, Count = 1}},
+            {PieceType.Mine7.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Mine6.Id, Count = 1}},
+            
             {PieceType.Sawmill1.Id, new PieceMatchDef {Next = PieceType.Sawmill2.Id, Previous = PieceType.None.Id, Count = 1}},
             {PieceType.Sawmill2.Id, new PieceMatchDef {Next = PieceType.Sawmill3.Id, Previous = PieceType.Sawmill1.Id, Count = 1}},
             {PieceType.Sawmill3.Id, new PieceMatchDef {Next = PieceType.Sawmill4.Id, Previous = PieceType.Sawmill2.Id, Count = 1}},
@@ -35,6 +43,14 @@ public class MatchDefinitionBuilder
             {PieceType.Sawmill5.Id, new PieceMatchDef {Next = PieceType.Sawmill6.Id, Previous = PieceType.Sawmill4.Id, Count = 1}},
             {PieceType.Sawmill6.Id, new PieceMatchDef {Next = PieceType.Sawmill7.Id, Previous = PieceType.Sawmill5.Id, Count = 1}},
             {PieceType.Sawmill7.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Sawmill6.Id, Count = 1}},
+            
+            {PieceType.Sheepfold1.Id, new PieceMatchDef {Next = PieceType.Sheepfold2.Id, Previous = PieceType.None.Id, Count = 1}},
+            {PieceType.Sheepfold2.Id, new PieceMatchDef {Next = PieceType.Sheepfold3.Id, Previous = PieceType.Sheepfold1.Id, Count = 1}},
+            {PieceType.Sheepfold3.Id, new PieceMatchDef {Next = PieceType.Sheepfold4.Id, Previous = PieceType.Sheepfold2.Id, Count = 1}},
+            {PieceType.Sheepfold4.Id, new PieceMatchDef {Next = PieceType.Sheepfold5.Id, Previous = PieceType.Sheepfold3.Id, Count = 1}},
+            {PieceType.Sheepfold5.Id, new PieceMatchDef {Next = PieceType.Sheepfold6.Id, Previous = PieceType.Sheepfold4.Id, Count = 1}},
+            {PieceType.Sheepfold6.Id, new PieceMatchDef {Next = PieceType.Sheepfold7.Id, Previous = PieceType.Sheepfold5.Id, Count = 1}},
+            {PieceType.Sheepfold7.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Sheepfold6.Id, Count = 1}},
             
             {PieceType.Castle1.Id, new PieceMatchDef {Next = PieceType.Castle2.Id, Previous = PieceType.None.Id, Count = 1}},
             {PieceType.Castle2.Id, new PieceMatchDef {Next = PieceType.Castle3.Id, Previous = PieceType.Castle1.Id, Count = 1}},

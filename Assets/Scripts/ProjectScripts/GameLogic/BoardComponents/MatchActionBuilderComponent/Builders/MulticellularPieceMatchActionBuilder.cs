@@ -6,6 +6,14 @@ public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
     {
         return new List<int>
         {
+            PieceType.Mine1.Id,
+            PieceType.Mine2.Id,
+            PieceType.Mine3.Id,
+            PieceType.Mine4.Id,
+            PieceType.Mine5.Id,
+            PieceType.Mine6.Id,
+            PieceType.Mine7.Id,
+            
             PieceType.Sawmill1.Id,
             PieceType.Sawmill2.Id,
             PieceType.Sawmill3.Id,
@@ -13,6 +21,14 @@ public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
             PieceType.Sawmill5.Id,
             PieceType.Sawmill6.Id,
             PieceType.Sawmill7.Id,
+            
+            PieceType.Sheepfold1.Id,
+            PieceType.Sheepfold2.Id,
+            PieceType.Sheepfold3.Id,
+            PieceType.Sheepfold4.Id,
+            PieceType.Sheepfold5.Id,
+            PieceType.Sheepfold6.Id,
+            PieceType.Sheepfold7.Id,
             
             PieceType.Castle1.Id,
             PieceType.Castle2.Id,

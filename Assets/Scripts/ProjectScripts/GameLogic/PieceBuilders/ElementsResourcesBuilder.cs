@@ -7,6 +7,7 @@ public class ElementsResourcesBuilder
         var dict = new Dictionary<int, string>();
         
         dict = AddPiece(dict);
+        dict = AddMulticellularPiece(dict);
         dict = AddView(dict);
         
         return dict;
@@ -15,15 +16,6 @@ public class ElementsResourcesBuilder
     private Dictionary<int, string> AddPiece(Dictionary<int, string> dict)
     {
         dict.Add(PieceType.Generic.Id, R.GenericPiece);
-        dict.Add(PieceType.M1.Id, R.M1Piece);
-
-        dict.Add(PieceType.Sawmill1.Id, R.Sawmill1Piece);
-        dict.Add(PieceType.Sawmill2.Id, R.Sawmill2Piece);
-        dict.Add(PieceType.Sawmill3.Id, R.Sawmill3Piece);
-        dict.Add(PieceType.Sawmill4.Id, R.Sawmill4Piece);
-        dict.Add(PieceType.Sawmill5.Id, R.Sawmill5Piece);
-        dict.Add(PieceType.Sawmill6.Id, R.Sawmill6Piece);
-        dict.Add(PieceType.Sawmill7.Id, R.Sawmill7Piece);
         
         dict.Add(PieceType.E1.Id, R.E1Piece);
         dict.Add(PieceType.E2.Id, R.E2Piece);
@@ -52,7 +44,40 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.B5.Id, R.B5Piece);
 
         dict.Add(PieceType.Gbox1.Id, R.GBox1Piece);
-            
+        
+        dict.Add(PieceType.Chest1.Id, R.Chest1Piece);
+        dict.Add(PieceType.Chest2.Id, R.Chest2Piece);
+        dict.Add(PieceType.Chest3.Id, R.Chest3Piece);
+        
+        return dict;
+    }
+
+    private Dictionary<int, string> AddMulticellularPiece(Dictionary<int, string> dict)
+    {
+        dict.Add(PieceType.Mine1.Id, R.Mine1Piece);
+        dict.Add(PieceType.Mine2.Id, R.Mine2Piece);
+        dict.Add(PieceType.Mine3.Id, R.Mine3Piece);
+        dict.Add(PieceType.Mine4.Id, R.Mine4Piece);
+        dict.Add(PieceType.Mine5.Id, R.Mine5Piece);
+        dict.Add(PieceType.Mine6.Id, R.Mine6Piece);
+        dict.Add(PieceType.Mine7.Id, R.Mine7Piece);
+        
+        dict.Add(PieceType.Sawmill1.Id, R.Sawmill1Piece);
+        dict.Add(PieceType.Sawmill2.Id, R.Sawmill2Piece);
+        dict.Add(PieceType.Sawmill3.Id, R.Sawmill3Piece);
+        dict.Add(PieceType.Sawmill4.Id, R.Sawmill4Piece);
+        dict.Add(PieceType.Sawmill5.Id, R.Sawmill5Piece);
+        dict.Add(PieceType.Sawmill6.Id, R.Sawmill6Piece);
+        dict.Add(PieceType.Sawmill7.Id, R.Sawmill7Piece);
+        
+        dict.Add(PieceType.Sheepfold1.Id, R.Sheepfold1Piece);
+        dict.Add(PieceType.Sheepfold2.Id, R.Sheepfold2Piece);
+        dict.Add(PieceType.Sheepfold3.Id, R.Sheepfold3Piece);
+        dict.Add(PieceType.Sheepfold4.Id, R.Sheepfold4Piece);
+        dict.Add(PieceType.Sheepfold5.Id, R.Sheepfold5Piece);
+        dict.Add(PieceType.Sheepfold6.Id, R.Sheepfold6Piece);
+        dict.Add(PieceType.Sheepfold7.Id, R.Sheepfold7Piece);
+        
         dict.Add(PieceType.Castle1.Id, R.Castle1Piece);
         dict.Add(PieceType.Castle2.Id, R.Castle2Piece);
         dict.Add(PieceType.Castle3.Id, R.Castle3Piece);
@@ -72,14 +97,10 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Tavern7.Id, R.Tavern7Piece);
         dict.Add(PieceType.Tavern8.Id, R.Tavern8Piece);
         dict.Add(PieceType.Tavern9.Id, R.Tavern9Piece);
-            
-        dict.Add(PieceType.Chest1.Id, R.Chest1Piece);
-        dict.Add(PieceType.Chest2.Id, R.Chest2Piece);
-        dict.Add(PieceType.Chest3.Id, R.Chest3Piece);
-        
+
         return dict;
     }
-
+    
     private Dictionary<int, string> AddView(Dictionary<int, string> dict)
     {
         dict.Add((int)ViewType.HitboxDamage, R.HitboxDamageView);

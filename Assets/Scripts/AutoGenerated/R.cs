@@ -12,7 +12,6 @@ public class R
      public const string B4Piece = "B4Piece";
      public const string O1Piece = "O1Piece";
      public const string C1Piece = "C1Piece";
-     public const string M1Piece = "M1Piece";
      public const string E1Piece = "E1Piece";
      public const string A5Piece = "A5Piece";
      public const string E2Piece = "E2Piece";
@@ -67,4 +66,18 @@ public class R
      public const string PieceLevelView = "PieceLevelView";
      public const string MenuView = "MenuView";
      public const string FogPiece = "FogPiece";
+     public const string Mine1Piece = "Mine1Piece";
+     public const string Mine2Piece = "Mine2Piece";
+     public const string Mine3Piece = "Mine3Piece";
+     public const string Mine4Piece = "Mine4Piece";
+     public const string Mine5Piece = "Mine5Piece";
+     public const string Mine6Piece = "Mine6Piece";
+     public const string Mine7Piece = "Mine7Piece";
+     public const string Sheepfold1Piece = "Sheepfold1Piece";
+     public const string Sheepfold2Piece = "Sheepfold2Piece";
+     public const string Sheepfold3Piece = "Sheepfold3Piece";
+     public const string Sheepfold4Piece = "Sheepfold4Piece";
+     public const string Sheepfold5Piece = "Sheepfold5Piece";
+     public const string Sheepfold6Piece = "Sheepfold6Piece";
+     public const string Sheepfold7Piece = "Sheepfold7Piece";
 }

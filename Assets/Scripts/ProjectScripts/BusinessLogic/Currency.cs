@@ -23,13 +23,16 @@
     
     public static readonly CurrencyDef LevelRobin = new CurrencyDef { Id = 18, Name = "LevelRobin", IsConsumable = true };
     public static readonly CurrencyDef LevelJohn = new CurrencyDef { Id = 19, Name = "LevelJohn", IsConsumable = true };
+    
     public static readonly CurrencyDef LevelCastle = new CurrencyDef { Id = 20, Name = "LevelCastle", IsConsumable = true };
     public static readonly CurrencyDef LevelTavern = new CurrencyDef { Id = 21, Name = "LevelTavern", IsConsumable = true };
-    public static readonly CurrencyDef LevelSawmill = new CurrencyDef { Id = 22, Name = "LevelSawmill", IsConsumable = true };
+    public static readonly CurrencyDef LevelMine = new CurrencyDef { Id = 22, Name = "LevelMine", IsConsumable = true };
+    public static readonly CurrencyDef LevelSawmill = new CurrencyDef { Id = 23, Name = "LevelSawmill", IsConsumable = true };
+    public static readonly CurrencyDef LevelSheepfold = new CurrencyDef { Id = 24, Name = "LevelSheepfold", IsConsumable = true };
     
-    public static readonly CurrencyDef Quest = new CurrencyDef { Id = 23, Name = "Quest", IsConsumable = true };
+    public static readonly CurrencyDef Quest = new CurrencyDef { Id = 25, Name = "Quest", IsConsumable = true };
     
-    public static readonly CurrencyDef ChestCommon = new CurrencyDef { Id = 24, Name = "ChestCommon", IsConsumable = true };
-    public static readonly CurrencyDef ChestRare = new CurrencyDef { Id = 25, Name = "ChestRare", IsConsumable = true };
-    public static readonly CurrencyDef ChestEpic = new CurrencyDef { Id = 26, Name = "ChestEpic", IsConsumable = true };
+    public static readonly CurrencyDef ChestCommon = new CurrencyDef { Id = 26, Name = "ChestCommon", IsConsumable = true };
+    public static readonly CurrencyDef ChestRare = new CurrencyDef { Id = 27, Name = "ChestRare", IsConsumable = true };
+    public static readonly CurrencyDef ChestEpic = new CurrencyDef { Id = 28, Name = "ChestEpic", IsConsumable = true };
 }

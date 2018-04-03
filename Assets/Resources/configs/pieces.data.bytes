@@ -70,10 +70,259 @@
     }
   },
   {
-    "Uid": "M1",
-    "Delay": 15,
+    "Uid": "Mine1",
+    "Delay": 3,
     "SpawnPiece": "B1",
-    "SpawnAmount": 1
+    "UpgradeTargetPiece": "Castle",
+    "IsFilledInStart":"true",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 100
+    }
+  },
+  {
+    "Uid": "Mine2",
+    "Delay": 3,
+    "SpawnPiece": "B1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 250
+    }
+  },
+  {
+    "Uid": "Mine3",
+    "Delay": 3,
+    "SpawnPiece": "B1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 500
+    }
+  },
+  {
+    "Uid": "Mine4",
+    "Delay": 3,
+    "SpawnPiece": "B1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 1000
+    }
+  },
+  {
+    "Uid": "Mine5",
+    "Delay": 3,
+    "SpawnPiece": "B1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 2500
+    }
+  },
+  {
+    "Uid": "Mine6",
+    "Delay": 3,
+    "SpawnPiece": "B1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 5000
+    }
+  },
+  {
+    "Uid": "Mine7",
+    "Delay": 3,
+    "SpawnPiece": "B1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 7500
+    }
+  },
+  {
+    "Uid": "Sawmill1",
+    "Delay": 3,
+    "SpawnPiece": "A1",
+    "UpgradeTargetPiece": "Castle",
+    "IsFilledInStart":"true",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 100
+    }
+  },
+  {
+    "Uid": "Sawmill2",
+    "Delay": 3,
+    "SpawnPiece": "A1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 250
+    }
+  },
+  {
+    "Uid": "Sawmill3",
+    "Delay": 3,
+    "SpawnPiece": "A1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 500
+    }
+  },
+  {
+    "Uid": "Sawmill4",
+    "Delay": 3,
+    "SpawnPiece": "A1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 1000
+    }
+  },
+  {
+    "Uid": "Sawmill5",
+    "Delay": 3,
+    "SpawnPiece": "A1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 2500
+    }
+  },
+  {
+    "Uid": "Sawmill6",
+    "Delay": 3,
+    "SpawnPiece": "A1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 5000
+    }
+  },
+  {
+    "Uid": "Sawmill7",
+    "Delay": 3,
+    "SpawnPiece": "A1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 7500
+    }
+  },
+  {
+    "Uid": "Sheepfold1",
+    "Delay": 3,
+    "SpawnPiece": "C1",
+    "UpgradeTargetPiece": "Castle",
+    "IsFilledInStart":"true",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 100
+    }
+  },
+  {
+    "Uid": "Sheepfold2",
+    "Delay": 3,
+    "SpawnPiece": "C1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 250
+    }
+  },
+  {
+    "Uid": "Sheepfold3",
+    "Delay": 3,
+    "SpawnPiece": "C1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 500
+    }
+  },
+  {
+    "Uid": "Sheepfold4",
+    "Delay": 3,
+    "SpawnPiece": "C1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 1000
+    }
+  },
+  {
+    "Uid": "Sheepfold5",
+    "Delay": 3,
+    "SpawnPiece": "C1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 2500
+    }
+  },
+  {
+    "Uid": "Sheepfold6",
+    "Delay": 3,
+    "SpawnPiece": "C1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 5000
+    }
+  },
+  {
+    "Uid": "Sheepfold7",
+    "Delay": 3,
+    "SpawnPiece": "C1",
+    "UpgradeTargetPiece": "Castle",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 8,
+    "UpgradePrice": {
+      "Currency": "Coins",
+      "Amount": 7500
+    }
   },
   {
     "Uid": "Castle1",
@@ -242,115 +491,6 @@
   {
     "Uid": "Tavern9",
     "UpgradeTargetPiece": "Castle",
-    "UpgradePrice": {
-      "Currency": "Coins",
-      "Amount": 15000
-    }
-  },
-  {
-    "Uid": "Sawmill1",
-    "Delay": 3,
-    "SpawnPiece": "A1",
-    "UpgradeTargetPiece": "Castle",
-    "IsFilledInStart":"true",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 8,
-    "UpgradePrice": {
-      "Currency": "Coins",
-      "Amount": 100
-    }
-  },
-  {
-    "Uid": "Sawmill2",
-    "Delay": 3,
-    "SpawnPiece": "A1",
-    "UpgradeTargetPiece": "Castle",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 8,
-    "UpgradePrice": {
-      "Currency": "Coins",
-      "Amount": 250
-    }
-  },
-  {
-    "Uid": "Sawmill3",
-    "Delay": 3,
-    "SpawnPiece": "A1",
-    "UpgradeTargetPiece": "Castle",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 8,
-    "UpgradePrice": {
-      "Currency": "Coins",
-      "Amount": 500
-    }
-  },
-  {
-    "Uid": "Sawmill4",
-    "Delay": 3,
-    "SpawnPiece": "A1",
-    "UpgradeTargetPiece": "Castle",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 8,
-    "UpgradePrice": {
-      "Currency": "Coins",
-      "Amount": 1000
-    }
-  },
-  {
-    "Uid": "Sawmill5",
-    "Delay": 3,
-    "SpawnPiece": "A1",
-    "UpgradeTargetPiece": "Castle",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 8,
-    "UpgradePrice": {
-      "Currency": "Coins",
-      "Amount": 2500
-    }
-  },
-  {
-    "Uid": "Sawmill6",
-    "Delay": 3,
-    "SpawnPiece": "A1",
-    "UpgradeTargetPiece": "Castle",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 8,
-    "UpgradePrice": {
-      "Currency": "Coins",
-      "Amount": 5000
-    }
-  },
-  {
-    "Uid": "Sawmill7",
-    "Delay": 3,
-    "SpawnPiece": "A1",
-    "UpgradeTargetPiece": "Castle",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 8,
-    "UpgradePrice": {
-      "Currency": "Coins",
-      "Amount": 7500
-    }
-  },
-  {
-    "Uid": "Sawmill8",
-    "Delay": 3,
-    "SpawnPiece": "A1",
-    "UpgradeTargetPiece": "Castle",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 8,
-    "UpgradePrice": {
-      "Currency": "Coins",
-      "Amount": 10000
-    }
-  },
-  {
-    "Uid": "Sawmill9",
-    "Delay": 3,
-    "SpawnPiece": "A1",
-    "UpgradeTargetPiece": "Castle",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 8,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 15000

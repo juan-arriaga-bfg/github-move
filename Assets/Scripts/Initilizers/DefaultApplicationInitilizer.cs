@@ -80,9 +80,12 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             
             Currency.RegisterCurrency(Currency.LevelRobin);
             Currency.RegisterCurrency(Currency.LevelJohn);
+            
             Currency.RegisterCurrency(Currency.LevelCastle);
             Currency.RegisterCurrency(Currency.LevelTavern);
+            Currency.RegisterCurrency(Currency.LevelMine);
             Currency.RegisterCurrency(Currency.LevelSawmill);
+            Currency.RegisterCurrency(Currency.LevelSheepfold);
             
             Currency.RegisterCurrency(Currency.Quest);
             
