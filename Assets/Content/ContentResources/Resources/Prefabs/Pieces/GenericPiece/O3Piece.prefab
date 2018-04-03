@@ -50,7 +50,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4542807987214320}
-  - component: {fileID: 114713224829700432}
+  - component: {fileID: 114351643696665346}
   m_Layer: 0
   m_Name: O3Piece
   m_TagString: Untagged
@@ -99,7 +99,7 @@ Transform:
   m_Father: {fileID: 4542807987214320}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114713224829700432
+--- !u!114 &114351643696665346
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -107,16 +107,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1924086398574114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a17e7b17168371f41b3684aae74c1160, type: 3}
+  m_Script: {fileID: 11500000, guid: b5e94db1dff9a4341a9922139f675b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 0}
-  skin: {fileID: 212929880325280430}
-  defaultSkinName: road
-  minIndex: 1
-  maxIndex: 1
 --- !u!212 &212929880325280430
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -151,7 +147,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300056, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  m_Sprite: {fileID: 21300154, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

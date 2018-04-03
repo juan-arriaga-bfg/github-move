@@ -120,23 +120,43 @@ public class SandboxGameController : MonoBehaviour
             PieceTypeId = PieceType.Castle1.Id
         });
         
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        boardController.ActionExecutor.PerformAction(new FillBoardAction{Piece = PieceType.O2.Id, Positions = new List<BoardPosition>
         {
-            At = new BoardPosition(12, 10),
-            PieceTypeId = PieceType.O1.Id
-        });
+            new BoardPosition(12, 10),
+            new BoardPosition(12, 11),
+            new BoardPosition(12, 12),
+            new BoardPosition(12, 13),
+            new BoardPosition(12, 14),
+            new BoardPosition(12, 15),
+            new BoardPosition(13, 10),
+            new BoardPosition(13, 11),
+            new BoardPosition(13, 12),
+            new BoardPosition(13, 13),
+            new BoardPosition(13, 14),
+            new BoardPosition(13, 15),
+            new BoardPosition(14, 10),
+            new BoardPosition(14, 11),
+            new BoardPosition(14, 12),
+            new BoardPosition(14, 13),
+            new BoardPosition(14, 14),
+            new BoardPosition(14, 15),
+            new BoardPosition(15, 10),
+            new BoardPosition(15, 11),
+            new BoardPosition(15, 12),
+            new BoardPosition(15, 13),
+            new BoardPosition(15, 14),
+            new BoardPosition(15, 15),
+        }});
         
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        boardController.ActionExecutor.PerformAction(new FillBoardAction{Piece = PieceType.O1.Id, Positions = new List<BoardPosition>
         {
-            At = new BoardPosition(12, 12),
-            PieceTypeId = PieceType.O2.Id
-        });
-        
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(12, 14),
-            PieceTypeId = PieceType.O3.Id
-        });
+            new BoardPosition(16, 10),
+            new BoardPosition(16, 11),
+            new BoardPosition(16, 12),
+            new BoardPosition(16, 13),
+            new BoardPosition(16, 14),
+            new BoardPosition(16, 15),
+        }});
         
         /*boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {

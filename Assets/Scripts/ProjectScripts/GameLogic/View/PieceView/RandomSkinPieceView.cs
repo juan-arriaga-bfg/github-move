@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class RandomSkinPieceBoardElementView : PieceBoardElementView
+public class RandomSkinPieceView : PieceBoardElementView
 {
     [SerializeField] private SpriteRenderer skin;
 
