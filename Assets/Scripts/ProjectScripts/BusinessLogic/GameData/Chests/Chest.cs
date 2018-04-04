@@ -28,6 +28,7 @@ public class Chest
     private List<List<CurrencyPair>> Rewards;
     
     public DateTime? StartTime { get; set; }
+    private DateTime completeTime;
     
     public Chest(ChestDef def)
     {
@@ -52,6 +53,11 @@ public class Chest
     {
         get { return chestType; }
     }
+    
+    public string Currency
+    {
+        get { return string.Format("Chest{0}", def.Uid); }
+    }
 
     public int Piece
     {
@@ -74,6 +80,7 @@ public class Chest
             if (value == ChestState.InProgress)
             {
                 StartTime = DateTime.Now;
+                completeTime = DateTime.Now.AddSeconds(def.Time);
             }
             
             chestState = value;
@@ -125,5 +132,27 @@ public class Chest
         rewards = arr.ToList();
 
         return rewards;
+    }
+
+    public string GetTimeText()
+    {
+        var time = new TimeSpan(0, 0, def.Time);
+
+        if ((int)time.TotalHours > 0)
+        {
+            return (int) time.TotalHours + "h";
+        }
+        
+        return (int) time.TotalMinutes + "m";
+    }
+    
+    public string GetTimeLeftText()
+    {
+        return TimeFormat(completeTime - DateTime.Now);
+    }
+
+    private string TimeFormat(TimeSpan time)
+    {
+        return (int) time.TotalHours > 0 ? string.Format("{0:00}:{1:00}:{2:00}", time.Hours, time.Minutes, time.Seconds) : string.Format("{0:00}:{1:00}", time.Minutes, time.Seconds);
     }
 }
