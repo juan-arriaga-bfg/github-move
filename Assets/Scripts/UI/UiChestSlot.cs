@@ -113,7 +113,7 @@ public class UiChestSlot : MonoBehaviour
                 var modelMessage2 = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
                 modelMessage2.Title = "Message";
-                modelMessage2.Message = string.Format("Are you sure you want to spend {0} crystals to Speed Up the chest?", 1);
+                modelMessage2.Message = string.Format("Are you sure you want to spend {0} crystals to Speed Up the chest?", chest.Def.Price.Amount);
                 modelMessage2.AcceptLabel = "Ok";
                 modelMessage2.CancelLabel = "Cancel";
 
