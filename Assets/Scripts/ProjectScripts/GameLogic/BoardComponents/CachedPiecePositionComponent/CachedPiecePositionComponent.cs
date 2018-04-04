@@ -38,15 +38,26 @@
 		
 		contextPiece.CachedPosition = position;
 		GameDataService.Current.PiecesManager.CachedPosition(context, position);
+		
+		if(context == null) return; 
+		
+		context.Context.BoardLogic.PositionsCache.AddPosition(context.PieceType, position);
 	}
 
 	public void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece context = null)
 	{
 		if (contextPiece != null) contextPiece.CachedPosition = to;
+		
+		if(context == null) return; 
+		
+		context.Context.BoardLogic.PositionsCache.RemovePosition(context.PieceType, from);
+		context.Context.BoardLogic.PositionsCache.AddPosition(context.PieceType, to);
 	}
 
 	public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
 	{
+		if(context == null) return; 
 		
+		context.Context.BoardLogic.PositionsCache.RemovePosition(context.PieceType, position);
 	}
 }

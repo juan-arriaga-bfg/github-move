@@ -33,6 +33,7 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new BoardLoggerComponent()); // logger
         
         boardController.RegisterComponent(new BoardLogicComponent() // core logic
+            .RegisterComponent(new PiecePositionsCacheComponent())
             .RegisterComponent(new FieldFinderComponent())
             .RegisterComponent(new EmptyCellsFinderComponent()) // finds empty cells
             .RegisterComponent(new MatchActionBuilderComponent() // creates match action

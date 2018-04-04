@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UIMainWindowView : IWUIWindowView
 {
     [SerializeField] private NSText settingsLabel;
     [SerializeField] private List<UiChestSlot> slots;
+    
+    private List<UiQuestButton> quests;
     
     private BoardPosition spawnAt;
     
@@ -17,6 +20,7 @@ public class UIMainWindowView : IWUIWindowView
         settingsLabel.Text = windowModel.SettingsText;
         
         UpdateSlots();
+        UpdateQuest();
     }
     
     public void ShowSettings()
@@ -34,7 +38,7 @@ public class UIMainWindowView : IWUIWindowView
         var worldPos = board.BoardDef.GetSectorCenterWorldPosition(spawnAt.X, spawnAt.Y, spawnAt.Z);
         board.Manipulator.CameraManipulator.ZoomTo(0.3f, worldPos);
     }
-
+    
     public void UpdateSlots()
     {
         for (var i = 0; i < slots.Count; i++)
@@ -47,6 +51,17 @@ public class UIMainWindowView : IWUIWindowView
             }
             
             slots[i].Init(chest);
+        }
+    }
+
+    public void UpdateQuest()
+    {
+        var active = GameDataService.Current.QuestsManager.ActiveQuests;
+        quests = GetComponentsInChildren<UiQuestButton>().ToList();
+        
+        for (int i = 0; i < active.Count; i++)
+        {
+            quests[i].Init(active[i]);
         }
     }
 }

@@ -16,5 +16,7 @@
     
     public const string QuestStartWindow = "QuestStartWindow";
     
+    public const string SimpleQuestStartWindow = "SimpleQuestStartWindow";
+    
     public const string TavernWindow = "TavernWindow";
 }

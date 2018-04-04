@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Text;
 
 public class BoardLogicComponent : ECSEntity,
-    IMatchDefinitionComponent, IFieldFinderComponent, IEmptyCellsFinderComponent, IMatchActionBuilderComponent
+    IMatchDefinitionComponent, IFieldFinderComponent, IEmptyCellsFinderComponent, IMatchActionBuilderComponent, IPiecePositionsCacheComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -68,6 +68,20 @@ public class BoardLogicComponent : ECSEntity,
             }
 
             return fieldFinder;
+        }
+    }
+    
+    protected PiecePositionsCacheComponent positionsCache;
+    public PiecePositionsCacheComponent PositionsCache
+    {
+        get
+        {
+            if (positionsCache == null)
+            {
+                positionsCache = GetComponent<PiecePositionsCacheComponent>(PiecePositionsCacheComponent.ComponentGuid);
+            }
+
+            return positionsCache;
         }
     }
     
