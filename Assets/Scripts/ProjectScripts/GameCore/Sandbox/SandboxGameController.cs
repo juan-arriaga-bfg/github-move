@@ -171,13 +171,13 @@ public class SandboxGameController : MonoBehaviour
             new BoardPosition(16, 15),
         }});
         
-        /*boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(0, 0),
             PieceTypeId = PieceType.Fog.Id
         });
         
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        /*boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(5, 0),
             PieceTypeId = PieceType.Fog.Id

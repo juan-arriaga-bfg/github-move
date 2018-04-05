@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PieceBuildersBuilder
 {
@@ -24,37 +25,18 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddSimplePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict.Add(PieceType.A1.Id, new SimplePieceBuilder());
-        dict.Add(PieceType.A2.Id, new SimplePieceBuilder());
-        dict.Add(PieceType.A3.Id, new SimplePieceBuilder());
-        dict.Add(PieceType.A4.Id, new SimplePieceBuilder());
-        dict.Add(PieceType.A5.Id, new SimplePieceBuilder());
-        dict.Add(PieceType.A6.Id, new SimplePieceBuilder());
-        dict.Add(PieceType.A7.Id, new SimplePieceBuilder());
-        dict.Add(PieceType.A8.Id, new SimplePieceBuilder());
-        
-        dict.Add(PieceType.B1.Id, new SimplePieceBuilder());
-        dict.Add(PieceType.B2.Id, new SimplePieceBuilder());
-        dict.Add(PieceType.B3.Id, new SimplePieceBuilder());
-        dict.Add(PieceType.B4.Id, new SimplePieceBuilder());
-        dict.Add(PieceType.B5.Id, new SimplePieceBuilder());
-        
-        dict.Add(PieceType.C1.Id, new SimplePieceBuilder());
-        dict.Add(PieceType.C2.Id, new SimplePieceBuilder());
-        dict.Add(PieceType.C3.Id, new SimplePieceBuilder());
-        dict.Add(PieceType.C4.Id, new SimplePieceBuilder());
-        dict.Add(PieceType.C5.Id, new SimplePieceBuilder());
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.A1.Id, PieceType.A8.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.B1.Id, PieceType.B5.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.C1.Id, PieceType.C8.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.D1.Id, PieceType.D5.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.E1.Id, PieceType.E5.Id, dict);
         
         return dict;
     }
     
     private Dictionary<int, IPieceBuilder> AddEnemyPiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict.Add(PieceType.E1.Id, new EnemyPieceBuilder());
-        dict.Add(PieceType.E2.Id, new EnemyPieceBuilder());
-        dict.Add(PieceType.E3.Id, new EnemyPieceBuilder());
-        
-        return dict;
+        return AddSimplePiece<EnemyPieceBuilder>(PieceType.Enemy1.Id, PieceType.Enemy3.Id, dict);
     }
     
     private Dictionary<int, IPieceBuilder> AddObstaclePiece(Dictionary<int, IPieceBuilder> dict)
@@ -64,20 +46,9 @@ public class PieceBuildersBuilder
         dict.Add(PieceType.O3.Id, new GenericPieceBuilder());
         dict.Add(PieceType.O4.Id, new ObstaclePieceBuilder());
         
-        var mask = new List<BoardPosition>();
-        var dot = BoardPosition.Zero();
-        
-        mask.AddRange(GetLine(dot, 5));
-
-        for (int i = 1; i < 5; i++)
-        {
-            dot = dot.Right;
-            mask.AddRange(GetLine(dot, 5));
-        }
-        
         dict.Add(PieceType.Fog.Id, new FogPieceBuilder
         {
-            Mask = mask
+            Mask = GetRect(5, 5)
         });
         
         return dict;
@@ -101,42 +72,7 @@ public class PieceBuildersBuilder
             BoardPosition.Zero().Right.Up,
         };
         
-        dict.Add(PieceType.Mine1.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Mine2.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Mine3.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Mine4.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Mine5.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Mine6.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Mine7.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        return dict;
+        return AddMulticellularPiece<MulticellularSpawnPieceBuilder>(PieceType.Mine1.Id, PieceType.Mine7.Id, mask, dict);
     }
     
     private Dictionary<int, IPieceBuilder> AddSawmillPiece(Dictionary<int, IPieceBuilder> dict)
@@ -148,42 +84,7 @@ public class PieceBuildersBuilder
             BoardPosition.Zero().Right.Up,
         };
         
-        dict.Add(PieceType.Sawmill1.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Sawmill2.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Sawmill3.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Sawmill4.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Sawmill5.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Sawmill6.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Sawmill7.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        return dict;
+        return AddMulticellularPiece<MulticellularSpawnPieceBuilder>(PieceType.Sawmill1.Id, PieceType.Sawmill7.Id, mask, dict);
     }
     
     private Dictionary<int, IPieceBuilder> AddSheepfoldPiece(Dictionary<int, IPieceBuilder> dict)
@@ -195,206 +96,49 @@ public class PieceBuildersBuilder
             BoardPosition.Zero().Right.Up,
         };
         
-        dict.Add(PieceType.Sheepfold1.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Sheepfold2.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Sheepfold3.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Sheepfold4.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Sheepfold5.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Sheepfold6.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Sheepfold7.Id, new MulticellularSpawnPieceBuilder
-        {
-            Mask = mask
-        });
-        
-        return dict;
+        return AddMulticellularPiece<MulticellularSpawnPieceBuilder>(PieceType.Sheepfold1.Id, PieceType.Sheepfold7.Id, mask, dict);
     }
     
     private Dictionary<int, IPieceBuilder> AddCastlePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        var mask = new List<BoardPosition>
-        {
-            BoardPosition.Zero().Up,
-            BoardPosition.Zero().Up.Up,
-            BoardPosition.Zero().Right,
-            BoardPosition.Zero().Right.Up,
-            BoardPosition.Zero().Right.Up.Up,
-            BoardPosition.Zero().Right.Right,
-            BoardPosition.Zero().Right.Right.Up,
-            BoardPosition.Zero().Right.Right.Up.Up,
-        };
+        var mask = GetRect(3, 3);
         
-        dict.Add(PieceType.Castle1.Id, new CastlePieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Castle2.Id, new CastlePieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Castle3.Id, new CastlePieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Castle4.Id, new CastlePieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Castle5.Id, new CastlePieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Castle6.Id, new CastlePieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Castle7.Id, new CastlePieceBuilder
-        {
-            Mask = mask
-        });
-        
-        dict.Add(PieceType.Castle8.Id, new CastlePieceBuilder
-        {
-            Mask = mask
-        });
-
-        dict.Add(PieceType.Castle9.Id, new CastlePieceBuilder
-        {
-            Mask = mask
-        });
-        
-        return dict;
+        return AddMulticellularPiece<CastlePieceBuilder>(PieceType.Castle1.Id, PieceType.Castle9.Id, mask, dict);
     }
     
     private Dictionary<int, IPieceBuilder> AddTavernPiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict.Add(PieceType.Tavern1.Id, new TavernPieceBuilder
+        var mask = new List<BoardPosition>
         {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
-        });
+            BoardPosition.Zero().Up,
+            BoardPosition.Zero().Right,
+            BoardPosition.Zero().Right.Up,
+        };
         
-        dict.Add(PieceType.Tavern2.Id, new TavernPieceBuilder
-        {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
-        });
-        
-        dict.Add(PieceType.Tavern3.Id, new TavernPieceBuilder
-        {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
-        });
-        
-        dict.Add(PieceType.Tavern4.Id, new TavernPieceBuilder
-        {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
-        });
-        
-        dict.Add(PieceType.Tavern5.Id, new TavernPieceBuilder
-        {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
-        });
-        
-        dict.Add(PieceType.Tavern6.Id, new TavernPieceBuilder
-        {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
-        });
-        
-        dict.Add(PieceType.Tavern7.Id, new TavernPieceBuilder
-        {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
-        });
-        
-        dict.Add(PieceType.Tavern8.Id, new TavernPieceBuilder
-        {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
-        });
-        
-        dict.Add(PieceType.Tavern9.Id, new TavernPieceBuilder
-        {
-            Mask = new List<BoardPosition>
-            {
-                BoardPosition.Zero().Up,
-                BoardPosition.Zero().Right,
-                BoardPosition.Zero().Right.Up,
-            }
-        });
-        
-        return dict;
+        return AddMulticellularPiece<TavernPieceBuilder>(PieceType.Tavern1.Id, PieceType.Tavern9.Id, mask, dict);
     }
     
     private Dictionary<int, IPieceBuilder> AddChestPiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict.Add(PieceType.Chest1.Id, new ChestPieceBuilder());
-        dict.Add(PieceType.Chest2.Id, new ChestPieceBuilder());
-        dict.Add(PieceType.Chest3.Id, new ChestPieceBuilder());
+        return AddSimplePiece<ChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest3.Id, dict);
+    }
+
+    private Dictionary<int, IPieceBuilder> AddSimplePiece<T>(int idMin, int idMax, Dictionary<int, IPieceBuilder> dict) where T : IPieceBuilder, new()
+    {
+        for (var id = idMin; id < idMax + 1; id++)
+        {
+            dict.Add(id, new T());
+        }
+        
+        return dict;
+    }
+
+    private Dictionary<int, IPieceBuilder> AddMulticellularPiece<T>(int idMin, int idMax, List<BoardPosition> mask, Dictionary<int, IPieceBuilder> dict) where T : MulticellularPieceBuilder, new()
+    {
+        for (var id = idMin; id < idMax + 1; id++)
+        {
+            dict.Add(id, new T {Mask = mask});
+        }
         
         return dict;
     }
@@ -411,5 +155,21 @@ public class PieceBuildersBuilder
         }
 
         return line;
+    }
+
+    private List<BoardPosition> GetRect(int width, int height)
+    {
+        var mask = new List<BoardPosition>();
+        var dot = BoardPosition.Zero();
+        
+        mask.AddRange(GetLine(dot, width));
+
+        for (int i = 1; i < height; i++)
+        {
+            dot = dot.Right;
+            mask.AddRange(GetLine(dot, width));
+        }
+
+        return mask;
     }
 }

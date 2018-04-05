@@ -17,10 +17,6 @@ public class ElementsResourcesBuilder
     {
         dict.Add(PieceType.Generic.Id, R.GenericPiece);
         
-        dict.Add(PieceType.E1.Id, R.E1Piece);
-        dict.Add(PieceType.E2.Id, R.E2Piece);
-        dict.Add(PieceType.E3.Id, R.E3Piece);
-
         dict.Add(PieceType.O1.Id, R.O1Piece);
         dict.Add(PieceType.O2.Id, R.O2Piece);
         dict.Add(PieceType.O3.Id, R.O3Piece);
@@ -36,24 +32,45 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.A6.Id, R.A6Piece);
         dict.Add(PieceType.A7.Id, R.A7Piece);
         dict.Add(PieceType.A8.Id, R.A8Piece);
-
+        dict.Add(PieceType.A9.Id, R.A9Piece);
+        
         dict.Add(PieceType.B1.Id, R.B1Piece);
         dict.Add(PieceType.B2.Id, R.B2Piece);
         dict.Add(PieceType.B3.Id, R.B3Piece);
         dict.Add(PieceType.B4.Id, R.B4Piece);
         dict.Add(PieceType.B5.Id, R.B5Piece);
-
+        
         dict.Add(PieceType.C1.Id, R.C1Piece);
         dict.Add(PieceType.C2.Id, R.C2Piece);
         dict.Add(PieceType.C3.Id, R.C3Piece);
         dict.Add(PieceType.C4.Id, R.C4Piece);
         dict.Add(PieceType.C5.Id, R.C5Piece);
+        dict.Add(PieceType.C6.Id, R.C6Piece);
+        dict.Add(PieceType.C7.Id, R.C7Piece);
+        dict.Add(PieceType.C8.Id, R.C8Piece);
+        dict.Add(PieceType.C9.Id, R.C9Piece);
+        
+        dict.Add(PieceType.D1.Id, R.D1Piece);
+        dict.Add(PieceType.D2.Id, R.D2Piece);
+        dict.Add(PieceType.D3.Id, R.D3Piece);
+        dict.Add(PieceType.D4.Id, R.D4Piece);
+        dict.Add(PieceType.D5.Id, R.D5Piece);
+        
+        dict.Add(PieceType.E1.Id, R.E1Piece);
+        dict.Add(PieceType.E2.Id, R.E2Piece);
+        dict.Add(PieceType.E3.Id, R.E3Piece);
+        dict.Add(PieceType.E4.Id, R.E4Piece);
+        dict.Add(PieceType.E5.Id, R.E5Piece);
         
         dict.Add(PieceType.Gbox1.Id, R.GBox1Piece);
         
         dict.Add(PieceType.Chest1.Id, R.Chest1Piece);
         dict.Add(PieceType.Chest2.Id, R.Chest2Piece);
         dict.Add(PieceType.Chest3.Id, R.Chest3Piece);
+        
+        dict.Add(PieceType.Enemy1.Id, R.Enemy1Piece);
+        dict.Add(PieceType.Enemy2.Id, R.Enemy2Piece);
+        dict.Add(PieceType.Enemy3.Id, R.Enemy3Piece);
         
         return dict;
     }

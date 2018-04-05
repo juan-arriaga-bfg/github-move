@@ -64,6 +64,13 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             
             Currency.RegisterCurrency(Currency.Enemy);
             
+            Currency.RegisterCurrency(Currency.Quest);
+            Currency.RegisterCurrency(Currency.Obstacle);
+            
+            Currency.RegisterCurrency(Currency.ChestCommon);
+            Currency.RegisterCurrency(Currency.ChestRare);
+            Currency.RegisterCurrency(Currency.ChestEpic);
+            
             Currency.RegisterCurrency(Currency.PieceA1);
             Currency.RegisterCurrency(Currency.PieceA2);
             Currency.RegisterCurrency(Currency.PieceA3);
@@ -71,12 +78,36 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             Currency.RegisterCurrency(Currency.PieceA5);
             Currency.RegisterCurrency(Currency.PieceA6);
             Currency.RegisterCurrency(Currency.PieceA7);
+            Currency.RegisterCurrency(Currency.PieceA8);
+            Currency.RegisterCurrency(Currency.PieceA9);
             
             Currency.RegisterCurrency(Currency.PieceB1);
             Currency.RegisterCurrency(Currency.PieceB2);
             Currency.RegisterCurrency(Currency.PieceB3);
             Currency.RegisterCurrency(Currency.PieceB4);
             Currency.RegisterCurrency(Currency.PieceB5);
+            
+            Currency.RegisterCurrency(Currency.PieceC1);
+            Currency.RegisterCurrency(Currency.PieceC2);
+            Currency.RegisterCurrency(Currency.PieceC3);
+            Currency.RegisterCurrency(Currency.PieceC4);
+            Currency.RegisterCurrency(Currency.PieceC5);
+            Currency.RegisterCurrency(Currency.PieceC6);
+            Currency.RegisterCurrency(Currency.PieceC7);
+            Currency.RegisterCurrency(Currency.PieceC8);
+            Currency.RegisterCurrency(Currency.PieceC9);
+            
+            Currency.RegisterCurrency(Currency.PieceD1);
+            Currency.RegisterCurrency(Currency.PieceD2);
+            Currency.RegisterCurrency(Currency.PieceD3);
+            Currency.RegisterCurrency(Currency.PieceD4);
+            Currency.RegisterCurrency(Currency.PieceD5);
+            
+            Currency.RegisterCurrency(Currency.PieceE1);
+            Currency.RegisterCurrency(Currency.PieceE2);
+            Currency.RegisterCurrency(Currency.PieceE3);
+            Currency.RegisterCurrency(Currency.PieceE4);
+            Currency.RegisterCurrency(Currency.PieceE5);
             
             Currency.RegisterCurrency(Currency.LevelRobin);
             Currency.RegisterCurrency(Currency.LevelJohn);
@@ -86,13 +117,6 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             Currency.RegisterCurrency(Currency.LevelMine);
             Currency.RegisterCurrency(Currency.LevelSawmill);
             Currency.RegisterCurrency(Currency.LevelSheepfold);
-            
-            Currency.RegisterCurrency(Currency.Quest);
-            Currency.RegisterCurrency(Currency.Obstacle);
-            
-            Currency.RegisterCurrency(Currency.ChestCommon);
-            Currency.RegisterCurrency(Currency.ChestRare);
-            Currency.RegisterCurrency(Currency.ChestEpic);
         });
         
         ShopService.Instance.SetManager(shopManager);
