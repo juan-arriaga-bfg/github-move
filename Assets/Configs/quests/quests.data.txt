@@ -1,82 +1,74 @@
 ﻿[
   {
-    "Uid" : 1,
-    "Message" : "Peasants from a neighboring village are asked to give them some logs.",
-    "Price" :
-    {
-      "Currency" : "PieceA1",
-      "Amount" : 4
+    "Uid": 1,
+    "Message": "Peasants from a neighboring village are asked to give them some logs.",
+    "Price": {
+      "Currency": "PieceA1",
+      "Amount": 4
     },
-    "Reward" : "Common"
+    "Reward": "Common"
   },
   {
-    "Uid" : 2,
-    "Message" : "The mayor of a small town asks to give him several stones.",
-    "Price" :
-    {
-      "Currency" : "PieceC1",
-      "Amount" : 5
+    "Uid": 2,
+    "Message": "The mayor of a small town asks to give him several stones.",
+    "Price": {
+      "Currency": "PieceC1",
+      "Amount": 5
     },
-    "Reward" : "Common"
+    "Reward": "Common"
   },
   {
-    "Uid" : 3,
-    "Message" : "A young family wants to build a house. They will need a lot of building materials.",
-    "Price" :
-    {
-      "Currency" : "PieceA2",
-      "Amount" : 3
+    "Uid": 3,
+    "Message": "A young family wants to build a house. They will need a lot of building materials.",
+    "Price": {
+      "Currency": "PieceA2",
+      "Amount": 3
     },
-    "Reward" : "Common"
+    "Reward": "Common"
   },
   {
-    "Uid" : 4,
-    "Message" : "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks.",
-    "Price" :
-    {
-      "Currency" : "PieceC2",
-      "Amount" : 4
+    "Uid": 4,
+    "Message": "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks.",
+    "Price": {
+      "Currency": "PieceC2",
+      "Amount": 4
     },
-    "Reward" : "Common"
+    "Reward": "Common"
   },
   {
-    "Uid" : 5,
-    "Message" : "The miller is ready to thanks well for a good batch of sheaves",
-    "Price" :
-    {
-      "Currency" : "PieceB3",
-      "Amount" : 4
+    "Uid": 5,
+    "Message": "The miller is ready to thanks well for a good batch of sheaves",
+    "Price": {
+      "Currency": "PieceB3",
+      "Amount": 4
     },
-    "Reward" : "Rare"
-  }
+    "Reward": "Rare"
+  },
   {
-    "Uid" : 6,
-    "Message" : "Peasant women are asked to give them little wool for knitting",
-    "Price" :
-    {
-      "Currency" : "PieceD4",
-      "Amount" : 1
+    "Uid": 6,
+    "Message": "Peasant women are asked to give them little wool for knitting",
+    "Price": {
+      "Currency": "PieceD4",
+      "Amount": 1
     },
-    "Reward" : "Common"
-  }
+    "Reward": "Common"
+  },
   {
-    "Uid" : 7,
-    "Message" : "The cook promises to bake a pie if you give him some apples",
-    "Price" :
-    {
-      "Currency" : "PieceE5",
-      "Amount" : 2
+    "Uid": 7,
+    "Message": "The cook promises to bake a pie if you give him some apples",
+    "Price": {
+      "Currency": "PieceE5",
+      "Amount": 2
     },
-    "Reward" : "Rare"
-  }
+    "Reward": "Rare"
+  },
   {
-    "Uid" : 8,
-    "Message" : "The merchant is ready to pay good for a batch of quality cloth",
-    "Price" :
-    {
-      "Currency" : "PieceD5",
-      "Amount" : 5
+    "Uid": 8,
+    "Message": "The merchant is ready to pay good for a batch of quality cloth",
+    "Price": {
+      "Currency": "PieceD5",
+      "Amount": 5
     },
-    "Reward" : "Epic"
+    "Reward": "Epic"
   }
 ]
