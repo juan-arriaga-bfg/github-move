@@ -4,12 +4,12 @@ public class UISimpleQuestStartWindowModel : IWWindowModel
     
     public string Title
     {
-        get { return "Sherwood Quest"; }
+        get { return "Peasant's quest"; }
     }
     
     public string SubTitle
     {
-        get { return "Choose party for the quest:"; }
+        get { return "Collect pieces for quest complete"; }
     }
     
     public string Message
