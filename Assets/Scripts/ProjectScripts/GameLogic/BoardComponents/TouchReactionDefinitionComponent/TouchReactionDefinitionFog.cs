@@ -2,16 +2,33 @@
 
 public class TouchReactionDefinitionFog : TouchReactionDefinitionComponent
 {
+    private FogDef def;
+    
     public override bool Make(BoardPosition position, Piece piece)
     {
-        UIMessageWindowController.CreateDefaultMessage("Fog go home!", () =>
+        if (def == null)
         {
-            piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+            var pos = new BoardPosition(position.X, position.Y);
+            
+            if (GameDataService.Current.FogsManager.Fogs.TryGetValue(pos, out def) == false) return false;
+        }
+
+        if (GameDataService.Current.HeroesManager.CurrentPower() >= def.Condition.Value)
+        {
+            UIMessageWindowController.CreateDefaultMessage("Fog go home!", () =>
             {
-                To = position,
-                Positions = new List<BoardPosition>{position}
+                piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+                {
+                    To = position,
+                    Positions = new List<BoardPosition>{position}
+                });
             });
-        });
+            
+            return true;
+        }
+
+        UIMessageWindowController.CreateDefaultMessage("Not enough power!");
+        
         return true;
     }
 }

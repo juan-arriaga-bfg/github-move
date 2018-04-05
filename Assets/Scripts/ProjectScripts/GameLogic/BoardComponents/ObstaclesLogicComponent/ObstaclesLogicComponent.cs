@@ -27,6 +27,8 @@ public class ObstaclesLogicComponent : IECSComponent, IECSSystem
 
     public void Init()
     {
+        CreateFog();
+        
         var data = GameDataService.Current.ObstaclesManager.Obstacles;
         var positions = new List<BoardPosition>();
 
@@ -41,20 +43,32 @@ public class ObstaclesLogicComponent : IECSComponent, IECSSystem
             positions.Add(def.Position);
         }
         
-        context.ActionExecutor.PerformAction(new FillBoardAction
+        /*context.ActionExecutor.PerformAction(new FillBoardAction
         {
             Piece = PieceType.O4.Id,
             Positions = positions
-        });
-        
-        var position = new BoardPosition(13, 13, context.BoardDef.PieceLayer);
+        });*/
+    }
 
-        for (int i = 7; i < 15; i++)
+    private void CreateFog()
+    {
+        var data = GameDataService.Current.FogsManager.Fogs;
+        var positions = new List<BoardPosition>();
+
+        foreach (var fog in data)
         {
-            context.BoardLogic.EmptyCellsFinder.FindRingWithPointInCenter(position, positions, 1000, i);
+            var pos = fog.Key;
+            
+            pos.Z = context.BoardDef.PieceLayer;
+            
+            positions.Add(pos);
         }
         
-//        context.ActionExecutor.PerformAction(new FillBoardAction{Piece = PieceType.O1.Id, Positions = positions});
+        context.ActionExecutor.PerformAction(new FillBoardAction
+        {
+            Piece = PieceType.Fog.Id,
+            Positions = positions
+        });
     }
     
     public void Execute()

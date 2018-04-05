@@ -6,7 +6,7 @@
         
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionFog())
-            .RegisterComponent(new TouchReactionConditionFog()));
+            .RegisterComponent(new TouchReactionConditionComponent()));
         
         return piece;
     }

@@ -10,7 +10,7 @@ public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserve
 	}
 	
 	public List<BoardPosition> Mask;
-	private BoardPosition realPosition;
+	protected BoardPosition realPosition;
 	
 	public void OnRegisterEntity(ECSEntity entity)
 	{

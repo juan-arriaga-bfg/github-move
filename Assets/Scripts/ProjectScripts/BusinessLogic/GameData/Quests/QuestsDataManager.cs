@@ -19,7 +19,7 @@ public class QuestsDataManager : IDataLoader<List<QuestDef>>
 			}
 			else
 			{
-				Debug.LogWarning("[ObstaclesDataManager]: obstacles config not loaded");
+				Debug.LogWarning("[QuestsDataManager]: quests config not loaded");
 			}
 		});
 	}

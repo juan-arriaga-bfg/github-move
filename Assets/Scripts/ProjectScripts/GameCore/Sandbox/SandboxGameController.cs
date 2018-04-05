@@ -54,8 +54,8 @@ public class SandboxGameController : MonoBehaviour
             UnitSize = 1.8f,
             GlobalPieceScale = 1f,
             ViewCamera = Camera.main,
-            Width = 28,
-            Height = 28,
+            Width = 30,
+            Height = 30,
             Depth = 3,
             PieceLayer = 1
         }); // board settings
@@ -103,7 +103,7 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
         
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        /*boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(8, 9),
             PieceTypeId = PieceType.Mine1.Id
@@ -131,68 +131,6 @@ public class SandboxGameController : MonoBehaviour
         {
             At = new BoardPosition(16, 17),
             PieceTypeId = PieceType.Sheepfold1.Id
-        });
-        
-        boardController.ActionExecutor.PerformAction(new FillBoardAction{Piece = PieceType.O2.Id, Positions = new List<BoardPosition>
-        {
-            new BoardPosition(12, 10),
-            new BoardPosition(12, 11),
-            new BoardPosition(12, 12),
-            new BoardPosition(12, 13),
-            new BoardPosition(12, 14),
-            new BoardPosition(12, 15),
-            new BoardPosition(13, 10),
-            new BoardPosition(13, 11),
-            new BoardPosition(13, 12),
-            new BoardPosition(13, 13),
-            new BoardPosition(13, 14),
-            new BoardPosition(13, 15),
-            new BoardPosition(14, 10),
-            new BoardPosition(14, 11),
-            new BoardPosition(14, 12),
-            new BoardPosition(14, 13),
-            new BoardPosition(14, 14),
-            new BoardPosition(14, 15),
-            new BoardPosition(15, 10),
-            new BoardPosition(15, 11),
-            new BoardPosition(15, 12),
-            new BoardPosition(15, 13),
-            new BoardPosition(15, 14),
-            new BoardPosition(15, 15),
-        }});
-        
-        boardController.ActionExecutor.PerformAction(new FillBoardAction{Piece = PieceType.O1.Id, Positions = new List<BoardPosition>
-        {
-            new BoardPosition(16, 10),
-            new BoardPosition(16, 11),
-            new BoardPosition(16, 12),
-            new BoardPosition(16, 13),
-            new BoardPosition(16, 14),
-            new BoardPosition(16, 15),
-        }});
-        
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(0, 0),
-            PieceTypeId = PieceType.Fog.Id
-        });
-        
-        /*boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(5, 0),
-            PieceTypeId = PieceType.Fog.Id
-        });
-        
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(5, 5),
-            PieceTypeId = PieceType.Fog.Id
-        });
-        
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(0, 5),
-            PieceTypeId = PieceType.Fog.Id
         });*/
         
         /*boardController.ActionExecutor.PerformAction(new CreatePieceAtAction

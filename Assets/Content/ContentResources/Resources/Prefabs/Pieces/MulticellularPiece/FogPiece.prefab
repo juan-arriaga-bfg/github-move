@@ -494,7 +494,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4749410587524778}
   - component: {fileID: 114960356551813092}
-  - component: {fileID: 114583637391046056}
+  - component: {fileID: 114118877674220308}
   m_Layer: 0
   m_Name: FogPiece
   m_TagString: Untagged
@@ -1004,7 +1004,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114583637391046056
+--- !u!114 &114118877674220308
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1012,7 +1012,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1950718353490134}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd8a645eed9afa54aa8a1795e9df33de, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d3fe39ba6f7c4e7fb9ee788ca937c79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   touchRegions:
