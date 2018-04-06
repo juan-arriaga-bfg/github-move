@@ -1,4 +1,6 @@
-﻿public class PieceDef
+﻿using System.Collections.Generic;
+
+public class PieceDef
 {
     public string Uid { get; set; }
     public int Delay { get; set; }
@@ -11,7 +13,7 @@
     public bool IsFilledInStart { get; set; }
     
     public CurrencyPair SpawnResources { get; set; }
-    public CurrencyPair CreateReward { get; set; }
+    public List<CurrencyPair> CreateRewards { get; set; }
     public CurrencyPair UpgradePrice { get; set; }
     
     private CurrencyDef levelCurrencyDef;
@@ -54,12 +56,6 @@
         var targetLevel = ProfileService.Current.GetStorageItem(UpgradeTargetCurrency.Name).Amount;
         
         return CurrentLevel() > targetLevel;
-    }
-
-    public override string ToString()
-    {
-        return string.Format("Uid: {0}, SpawnPiece {1}, SpawnAmount {2}, Delay {3}, SpawnResources: {4} - {5}, CreateReward: {6} - {7}", Uid, SpawnPiece, SpawnAmount, Delay,
-            SpawnResources.Currency, SpawnResources.Amount, CreateReward.Currency, CreateReward.Amount);
     }
 
     public static PieceDef Default()

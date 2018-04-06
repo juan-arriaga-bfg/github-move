@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class DefaultMatchActionBuilder : IMatchActionBuilder
@@ -70,7 +71,13 @@ public class DefaultMatchActionBuilder : IMatchActionBuilder
         var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType);
         
         if(def == null) return;
+
+        var sequence = DOTween.Sequence();
         
-        AddResourceView.Show(position, def.CreateReward);
+        for (var i = 0; i < def.CreateRewards.Count; i++)
+        {
+            var reward = def.CreateRewards[i];
+            sequence.InsertCallback(0.2f*i, () => AddResourceView.Show(position, reward));
+        }
     }
 }
