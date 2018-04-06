@@ -41,6 +41,12 @@ public class MatchDefinitionComponent : ECSEntity
         return definition.TryGetValue(pieceId, out def) ? def.Previous : PieceType.None.Id;
     }
 
+    public int GetFirst(int pieceId)
+    {
+        var chain = GetChain(pieceId);
+        return chain.Count == 0 ? PieceType.None.Id : chain[0];
+    }
+
     public List<int> GetChain(int pieceId)
     {
         var chain = new List<int>();

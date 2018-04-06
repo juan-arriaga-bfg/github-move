@@ -6,6 +6,8 @@ public class PiecesDataManager : IDataLoader<List<PieceDef>>
     public BoardPosition CastlePosition { get; set; }
     public BoardPosition TavernPosition { get; set; }
     public BoardPosition SawmillPosition { get; set; }
+    public BoardPosition MinePosition { get; set; }
+    public BoardPosition SheepfoldPosition { get; set; }
     
     private Dictionary<int, PieceDef> pieces;
     
@@ -47,21 +49,37 @@ public class PiecesDataManager : IDataLoader<List<PieceDef>>
 
     public void CachedPosition(Piece piece, BoardPosition position)
     {
-        if (piece.PieceType >= PieceType.Tavern1.Id && piece.PieceType <= PieceType.Tavern9.Id)
+        var first = piece.Context.BoardLogic.MatchDefinition.GetFirst(piece.PieceType);
+        
+        if(first == PieceType.None.Id) return;
+        
+        if (first == PieceType.Tavern1.Id)
         {
             TavernPosition = position.Right;
             return;
         }
         
-        if (piece.PieceType >= PieceType.Castle1.Id && piece.PieceType <= PieceType.Castle9.Id)
+        if (first == PieceType.Castle1.Id)
         {
             CastlePosition = position.Up.Right;
             return;
         }
         
-        if (piece.PieceType >= PieceType.Sawmill1.Id && piece.PieceType <= PieceType.Sawmill7.Id)
+        if (first == PieceType.Sawmill1.Id)
         {
             SawmillPosition = position;
+            return;
+        }
+        
+        if (first == PieceType.Mine1.Id)
+        {
+            MinePosition = position;
+            return;
+        }
+        
+        if (first == PieceType.Sheepfold1.Id)
+        {
+            SheepfoldPosition = position;
             return;
         }
     }
