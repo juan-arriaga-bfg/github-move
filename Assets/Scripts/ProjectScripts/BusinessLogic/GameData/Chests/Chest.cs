@@ -63,6 +63,11 @@ public class Chest
     {
         get { return PieceType.Parse(def.Uid); }
     }
+
+    public int MergePoints
+    {
+        get { return def.MergePoints; }
+    }
     
     public ChestState State
     {

@@ -9,6 +9,8 @@
     
     public static readonly CurrencyDef Quest = new CurrencyDef { Id = 6, Name = "Quest", IsConsumable = true };
     public static readonly CurrencyDef Obstacle = new CurrencyDef { Id = 7, Name = "Obstacle", IsConsumable = true };
+    public static readonly CurrencyDef Power = new CurrencyDef { Id = 8, Name = "Power", IsConsumable = true };
+    public static readonly CurrencyDef Merge = new CurrencyDef { Id = 9, Name = "Merge", IsConsumable = true };
     
     public static readonly CurrencyDef ChestCommon = new CurrencyDef { Id = 101, Name = "ChestCommon", IsConsumable = true };
     public static readonly CurrencyDef ChestRare = new CurrencyDef { Id = 102, Name = "ChestRare", IsConsumable = true };

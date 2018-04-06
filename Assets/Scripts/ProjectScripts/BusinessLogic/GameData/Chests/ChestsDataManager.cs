@@ -5,6 +5,8 @@ using UnityEngine;
 public class ChestsDataManager : IDataLoader<List<ChestDef>>
 {
     public const int Max = 4;
+
+    private int index = -1;
     
     public List<ChestDef> Chests;
     public List<Chest> ActiveChests = new List<Chest>();
@@ -77,5 +79,24 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
         }
         
         return false;
+    }
+
+    public void NextFreeChest()
+    {
+        index++;
+
+        if (index == Chests.Count)
+        {
+            index = 0;
+        }
+    }
+
+    public Chest GetFreeChest()
+    {
+        if (index == -1) index = 0;
+        
+        var type = (ChestType) Enum.Parse(typeof(ChestType), Chests[index].Uid);
+        
+        return GetChest(type);
     }
 }

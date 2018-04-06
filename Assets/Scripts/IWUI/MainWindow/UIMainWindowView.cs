@@ -5,6 +5,7 @@ using UnityEngine;
 public class UIMainWindowView : IWUIWindowView
 {
     [SerializeField] private NSText settingsLabel;
+    
     [SerializeField] private List<UiChestSlot> slots;
     
     private List<UiQuestButton> quests;
