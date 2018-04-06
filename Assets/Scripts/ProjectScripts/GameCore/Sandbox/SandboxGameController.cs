@@ -84,7 +84,7 @@ public class SandboxGameController : MonoBehaviour
         var topPoint = boardController.BoardDef.GetSectorCenterWorldPosition(0, boardController.BoardDef.Height, 0);
         var bottomPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width, 0, 0);
 
-        var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition(10, 20, boardController.BoardDef.PieceLayer);
+        var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition(12, 17, boardController.BoardDef.PieceLayer);
 
         boardController.Manipulator.CameraManipulator.CurrentCameraSettings.CameraClampRegion = new Rect
         (
@@ -313,28 +313,6 @@ public class SandboxGameController : MonoBehaviour
         ShopService.Current.PurchaseItem
         (
             shopItem2,
-            (item, s) =>
-            {
-                // on purchase success
-                
-            },
-            item =>
-            {
-                // on purchase failed (not enough cash)
-            }
-        );
-        
-        var shopItem3 = new ShopItem
-        {
-            Uid = string.Format("purchase.test.{0}.10", "Crystals"), 
-            ItemUid = Currency.RobinCard.Name, 
-            Amount = 50,
-            CurrentPrices = new List<Price>{new Price{Currency = Currency.Cash.Name, DefaultPriceAmount = 0}}
-        };
-        
-        ShopService.Current.PurchaseItem
-        (
-            shopItem3,
             (item, s) =>
             {
                 // on purchase success
