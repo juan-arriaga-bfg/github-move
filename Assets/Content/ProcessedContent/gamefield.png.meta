@@ -95,6 +95,81 @@ TextureImporter:
     21300176: house_2
     21300178: stones_1
     21300180: hill_1
+    21300182: border
+    21300184: C9
+    21300186: Enemy3
+    21300188: C8
+    21300190: stones_broken3
+    21300192: quarry_base_stone
+    21300194: A9
+    21300196: Enemy2
+    21300198: Enemy1
+    21300200: E5
+    21300202: C7
+    21300204: E4
+    21300206: D3
+    21300208: C6
+    21300210: border_shadow
+    21300212: D4
+    21300214: D5
+    21300216: D2
+    21300218: stone3_broken
+    21300220: stone3
+    21300222: worker_body_1
+    21300224: worker_shadow
+    21300226: border_3
+    21300228: stone2
+    21300230: stone2_broken
+    21300232: border_4
+    21300234: worker_head
+    21300236: D1
+    21300238: sheep_body_3
+    21300240: sheep_shadow
+    21300242: scot_peasant_body_2
+    21300244: E6
+    21300246: stone1
+    21300248: sheep_body_2
+    21300250: worker_body_2
+    21300252: herdsman_staff
+    21300254: herdsman_head
+    21300256: pick_top
+    21300258: sheep_head
+    21300260: herdsman_body_1
+    21300262: herdsman_hat
+    21300264: sheep_body_1
+    21300266: sheep_body_4
+    21300268: pick_handle
+    21300270: worker_hand_close_2
+    21300272: border_1
+    21300274: worker_hand_far_2
+    21300276: worker_hand_far_1
+    21300278: worker_hand_close_3
+    21300280: border_2
+    21300282: herdsman_vest_left
+    21300284: worker_hand_far_3
+    21300286: scot_peasant_hand_close_2
+    21300288: herdsman_vest_right
+    21300290: worker_hand_close_1
+    21300292: worker_leg_far
+    21300294: scot_peasant_hand_far_2
+    21300296: worker_leg_close
+    21300298: worker_hand_far_3_1
+    21300300: scot_peasant_hand_far_1
+    21300302: scot_peasant_hand_close_1
+    21300304: scot_peasant_leg_close_3
+    21300306: scot_peasant_leg_far_3
+    21300308: scot_peasant_leg_close_2
+    21300310: scot_peasant_leg_far_2
+    21300312: scot_peasant_leg_1
+    21300314: herdsman_hand_fist_2
+    21300316: sheep_leg_right
+    21300318: sheep_leg_left
+    21300320: scot_peasant_eye_close
+    21300322: sheep_lips
+    21300324: sheep_ear_close
+    21300326: sheep_ear_far
+    21300328: herdsman_happy_lips
+    21300330: herdsman_sad_lips
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -203,27 +278,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: H1
+      name: C9
       rect:
         serializedVersion: 2
         x: 615
         y: 237
-        width: 240
-        height: 270
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: H2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 395
-        width: 256
-        height: 235
+        width: 269
+        height: 204
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,7 +295,7 @@ TextureImporter:
       name: mill
       rect:
         serializedVersion: 2
-        x: 257
+        x: 0
         y: 395
         width: 210
         height: 231
@@ -245,55 +306,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: M1
+      name: Enemy3
       rect:
         serializedVersion: 2
-        x: 1351
-        y: 0
-        width: 220
-        height: 205
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: E3
-      rect:
-        serializedVersion: 2
-        x: 1572
-        y: 0
+        x: 211
+        y: 395
         width: 198
         height: 223
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: B4
-      rect:
-        serializedVersion: 2
-        x: 1351
-        y: 206
-        width: 207
-        height: 211
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: A8
-      rect:
-        serializedVersion: 2
-        x: 1771
-        y: 0
-        width: 203
-        height: 213
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -304,24 +323,10 @@ TextureImporter:
       name: S1_wood
       rect:
         serializedVersion: 2
-        x: 1771
-        y: 214
+        x: 1351
+        y: 0
         width: 219
         height: 194
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: S1
-      rect:
-        serializedVersion: 2
-        x: 1559
-        y: 224
-        width: 202
-        height: 208
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -332,8 +337,8 @@ TextureImporter:
       name: bush_1
       rect:
         serializedVersion: 2
-        x: 1762
-        y: 409
+        x: 1571
+        y: 0
         width: 254
         height: 164
       alignment: 9
@@ -343,13 +348,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: C5
+      name: C8
       rect:
         serializedVersion: 2
-        x: 856
-        y: 249
-        width: 169
-        height: 222
+        x: 1826
+        y: 0
+        width: 218
+        height: 189
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -357,13 +362,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: A7
+      name: stones_broken3
       rect:
         serializedVersion: 2
-        x: 1026
-        y: 249
-        width: 192
+        x: 410
+        y: 395
+        width: 186
         height: 194
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: quarry_base_stone
+      rect:
+        serializedVersion: 2
+        x: 1571
+        y: 165
+        width: 197
+        height: 175
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: A9
+      rect:
+        serializedVersion: 2
+        x: 1351
+        y: 195
+        width: 179
+        height: 192
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -374,8 +407,8 @@ TextureImporter:
       name: tree_1
       rect:
         serializedVersion: 2
-        x: 1219
-        y: 418
+        x: 1769
+        y: 190
         width: 180
         height: 180
       alignment: 9
@@ -385,27 +418,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: A4
+      name: D3
       rect:
         serializedVersion: 2
-        x: 856
-        y: 472
-        width: 201
-        height: 161
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: A6
-      rect:
-        serializedVersion: 2
-        x: 1400
-        y: 433
-        width: 172
-        height: 185
+        x: 1531
+        y: 341
+        width: 212
+        height: 152
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -416,8 +435,8 @@ TextureImporter:
       name: Fog_1
       rect:
         serializedVersion: 2
-        x: 1573
-        y: 433
+        x: 1744
+        y: 371
         width: 187
         height: 166
       alignment: 9
@@ -427,41 +446,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: E2
+      name: A8
       rect:
         serializedVersion: 2
-        x: 1058
-        y: 444
+        x: 885
+        y: 249
+        width: 178
+        height: 174
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Enemy2
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 249
         width: 150
         height: 206
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: C4
-      rect:
-        serializedVersion: 2
-        x: 1209
-        y: 599
-        width: 155
-        height: 198
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: A5
-      rect:
-        serializedVersion: 2
-        x: 1761
-        y: 574
-        width: 153
-        height: 195
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -472,52 +477,10 @@ TextureImporter:
       name: tree_7
       rect:
         serializedVersion: 2
-        x: 1573
-        y: 600
+        x: 885
+        y: 424
         width: 172
         height: 172
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: m_3
-      rect:
-        serializedVersion: 2
-        x: 1365
-        y: 619
-        width: 159
-        height: 173
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: m_6
-      rect:
-        serializedVersion: 2
-        x: 1746
-        y: 770
-        width: 159
-        height: 173
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: m_5
-      rect:
-        serializedVersion: 2
-        x: 1525
-        y: 773
-        width: 159
-        height: 173
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -528,8 +491,8 @@ TextureImporter:
       name: m_2
       rect:
         serializedVersion: 2
-        x: 1365
-        y: 793
+        x: 597
+        y: 442
         width: 159
         height: 173
       alignment: 9
@@ -542,8 +505,36 @@ TextureImporter:
       name: m_1
       rect:
         serializedVersion: 2
-        x: 1685
-        y: 944
+        x: 410
+        y: 590
+        width: 159
+        height: 173
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: m_5
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 619
+        width: 159
+        height: 173
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: m_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 627
         width: 159
         height: 173
       alignment: 9
@@ -556,8 +547,8 @@ TextureImporter:
       name: m_4
       rect:
         serializedVersion: 2
-        x: 1525
-        y: 947
+        x: 1215
+        y: 388
         width: 159
         height: 173
       alignment: 9
@@ -567,13 +558,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: E1
+      name: m_6
       rect:
         serializedVersion: 2
-        x: 1906
-        y: 770
-        width: 138
-        height: 199
+        x: 1375
+        y: 494
+        width: 159
+        height: 173
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -581,13 +572,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: B2
+      name: Enemy1
       rect:
         serializedVersion: 2
-        x: 1845
-        y: 970
-        width: 188
-        height: 146
+        x: 1058
+        y: 456
+        width: 138
+        height: 199
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -598,24 +589,10 @@ TextureImporter:
       name: tree_9
       rect:
         serializedVersion: 2
-        x: 1845
-        y: 1117
+        x: 1197
+        y: 562
         width: 153
         height: 179
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: B3
-      rect:
-        serializedVersion: 2
-        x: 468
-        y: 508
-        width: 166
-        height: 162
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -626,9 +603,23 @@ TextureImporter:
       name: tree_8
       rect:
         serializedVersion: 2
-        x: 1685
-        y: 1118
+        x: 1535
+        y: 494
         width: 158
+        height: 162
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: E6
+      rect:
+        serializedVersion: 2
+        x: 757
+        y: 597
+        width: 157
         height: 162
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
@@ -640,8 +631,8 @@ TextureImporter:
       name: tree_4
       rect:
         serializedVersion: 2
-        x: 257
-        y: 627
+        x: 570
+        y: 616
         width: 159
         height: 159
       alignment: 9
@@ -651,13 +642,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: A3
+      name: E5
       rect:
         serializedVersion: 2
-        x: 635
-        y: 508
-        width: 168
-        height: 148
+        x: 371
+        y: 764
+        width: 156
+        height: 159
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: C7
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 793
+        width: 156
+        height: 159
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -668,8 +673,8 @@ TextureImporter:
       name: tree_6
       rect:
         serializedVersion: 2
-        x: 804
-        y: 634
+        x: 0
+        y: 801
         width: 154
         height: 158
       alignment: 9
@@ -682,8 +687,8 @@ TextureImporter:
       name: house_1
       rect:
         serializedVersion: 2
-        x: 959
-        y: 651
+        x: 915
+        y: 656
         width: 172
         height: 139
       alignment: 9
@@ -696,8 +701,8 @@ TextureImporter:
       name: tree_3
       rect:
         serializedVersion: 2
-        x: 635
-        y: 657
+        x: 730
+        y: 760
         width: 153
         height: 155
       alignment: 9
@@ -710,8 +715,8 @@ TextureImporter:
       name: tree_5
       rect:
         serializedVersion: 2
-        x: 417
-        y: 671
+        x: 528
+        y: 776
         width: 166
         height: 141
       alignment: 9
@@ -721,13 +726,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: C3
+      name: B4
       rect:
         serializedVersion: 2
-        x: 959
-        y: 791
-        width: 139
-        height: 168
+        x: 1694
+        y: 538
+        width: 150
+        height: 153
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: A7
+      rect:
+        serializedVersion: 2
+        x: 1535
+        y: 657
+        width: 150
+        height: 149
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -738,8 +757,8 @@ TextureImporter:
       name: tree_2
       rect:
         serializedVersion: 2
-        x: 789
-        y: 793
+        x: 1351
+        y: 668
         width: 156
         height: 143
       alignment: 9
@@ -752,8 +771,8 @@ TextureImporter:
       name: lake_1
       rect:
         serializedVersion: 2
-        x: 1099
-        y: 798
+        x: 1845
+        y: 538
         width: 171
         height: 118
       alignment: 9
@@ -766,8 +785,8 @@ TextureImporter:
       name: house_2
       rect:
         serializedVersion: 2
-        x: 1099
-        y: 917
+        x: 1845
+        y: 657
         width: 170
         height: 118
       alignment: 9
@@ -777,13 +796,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: A2
+      name: C6
       rect:
         serializedVersion: 2
-        x: 1270
-        y: 967
+        x: 1686
+        y: 692
         width: 147
-        height: 122
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: B2
+      rect:
+        serializedVersion: 2
+        x: 1508
+        y: 807
+        width: 155
+        height: 120
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -794,8 +827,8 @@ TextureImporter:
       name: road_1
       rect:
         serializedVersion: 2
-        x: 1915
-        y: 574
+        x: 1215
+        y: 249
         width: 132
         height: 132
       alignment: 9
@@ -805,13 +838,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: C2
+      name: border_shadow
       rect:
         serializedVersion: 2
-        x: 0
-        y: 631
-        width: 134
-        height: 130
+        x: 1088
+        y: 742
+        width: 238
+        height: 71
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -819,13 +852,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: B1
+      name: C4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 762
-        width: 137
-        height: 127
+        x: 1327
+        y: 812
+        width: 139
+        height: 118
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -836,10 +869,38 @@ TextureImporter:
       name: stones_1
       rect:
         serializedVersion: 2
-        x: 138
-        y: 787
+        x: 1375
+        y: 388
         width: 155
         height: 105
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: A6
+      rect:
+        serializedVersion: 2
+        x: 757
+        y: 442
+        width: 125
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: A4
+      rect:
+        serializedVersion: 2
+        x: 884
+        y: 796
+        width: 132
+        height: 119
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -850,8 +911,8 @@ TextureImporter:
       name: Chest_field_4_1
       rect:
         serializedVersion: 2
-        x: 1219
-        y: 249
+        x: 1834
+        y: 776
         width: 124
         height: 122
       alignment: 9
@@ -864,8 +925,8 @@ TextureImporter:
       name: Chest_field_1_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 890
+        x: 1664
+        y: 822
         width: 124
         height: 120
       alignment: 9
@@ -878,8 +939,8 @@ TextureImporter:
       name: Chest_field_3_1
       rect:
         serializedVersion: 2
-        x: 294
-        y: 813
+        x: 1467
+        y: 928
         width: 124
         height: 120
       alignment: 9
@@ -892,10 +953,38 @@ TextureImporter:
       name: Chest_field_2_1
       rect:
         serializedVersion: 2
-        x: 125
-        y: 893
+        x: 1789
+        y: 899
         width: 124
         height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: A5
+      rect:
+        serializedVersion: 2
+        x: 1914
+        y: 899
+        width: 118
+        height: 124
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: C5
+      rect:
+        serializedVersion: 2
+        x: 1592
+        y: 943
+        width: 119
+        height: 122
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -906,10 +995,38 @@ TextureImporter:
       name: GBOX1
       rect:
         serializedVersion: 2
-        x: 135
-        y: 631
+        x: 1932
+        y: 371
         width: 108
         height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: C3
+      rect:
+        serializedVersion: 2
+        x: 1712
+        y: 1019
+        width: 129
+        height: 107
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: B3
+      rect:
+        serializedVersion: 2
+        x: 1842
+        y: 1024
+        width: 117
+        height: 115
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -920,10 +1037,24 @@ TextureImporter:
       name: hill_1
       rect:
         serializedVersion: 2
-        x: 468
-        y: 395
+        x: 1017
+        y: 814
         width: 140
         height: 95
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: D5
+      rect:
+        serializedVersion: 2
+        x: 1158
+        y: 814
+        width: 136
+        height: 97
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -934,10 +1065,38 @@ TextureImporter:
       name: Chest_field_4_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1011
+        x: 1017
+        y: 910
         width: 119
         height: 105
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: A3
+      rect:
+        serializedVersion: 2
+        x: 1137
+        y: 912
+        width: 110
+        height: 110
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: D4
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 931
+        width: 107
+        height: 111
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -948,8 +1107,8 @@ TextureImporter:
       name: woodman_body_1
       rect:
         serializedVersion: 2
-        x: 1418
-        y: 967
+        x: 1356
+        y: 931
         width: 98
         height: 117
       alignment: 9
@@ -962,10 +1121,24 @@ TextureImporter:
       name: S1_wood_staff2
       rect:
         serializedVersion: 2
-        x: 419
-        y: 813
+        x: 695
+        y: 916
         width: 110
         height: 104
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: D2
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 918
+        width: 98
+        height: 116
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -976,9 +1149,37 @@ TextureImporter:
       name: Chest_field_3_2
       rect:
         serializedVersion: 2
-        x: 530
-        y: 813
+        x: 317
+        y: 924
         width: 118
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: E4
+      rect:
+        serializedVersion: 2
+        x: 1950
+        y: 190
+        width: 89
+        height: 125
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Chest_field_1_2
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 953
+        width: 117
         height: 95
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
@@ -990,22 +1191,8 @@ TextureImporter:
       name: Chest_field_2_2
       rect:
         serializedVersion: 2
-        x: 649
-        y: 813
-        width: 117
-        height: 95
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: Chest_field_1_2
-      rect:
-        serializedVersion: 2
-        x: 530
-        y: 909
+        x: 0
+        y: 960
         width: 117
         height: 95
       alignment: 9
@@ -1018,8 +1205,8 @@ TextureImporter:
       name: S1_wood_staff1
       rect:
         serializedVersion: 2
-        x: 648
-        y: 909
+        x: 806
+        y: 916
         width: 111
         height: 91
       alignment: 9
@@ -1032,8 +1219,8 @@ TextureImporter:
       name: woodman_shadow
       rect:
         serializedVersion: 2
-        x: 760
-        y: 937
+        x: 806
+        y: 1008
         width: 138
         height: 72
       alignment: 9
@@ -1046,10 +1233,234 @@ TextureImporter:
       name: Coin
       rect:
         serializedVersion: 2
-        x: 1271
-        y: 798
+        x: 1959
+        y: 776
         width: 88
         height: 106
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: B1
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 1021
+        width: 98
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: A2
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 1016
+        width: 103
+        height: 86
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: C2
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 656
+        width: 108
+        height: 82
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: E3
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 1021
+        width: 75
+        height: 114
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stone3
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 1081
+        width: 111
+        height: 77
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stone3_broken
+      rect:
+        serializedVersion: 2
+        x: 1049
+        y: 1023
+        width: 111
+        height: 77
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: worker_body_1
+      rect:
+        serializedVersion: 2
+        x: 1960
+        y: 1024
+        width: 87
+        height: 92
+      alignment: 9
+      pivot: {x: 0.41425908, y: 0.5435435}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: woodman_head
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 916
+        width: 89
+        height: 89
+      alignment: 9
+      pivot: {x: 0.62612617, y: 0.25525516}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: worker_shadow
+      rect:
+        serializedVersion: 2
+        x: 1161
+        y: 1043
+        width: 116
+        height: 60
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: D1
+      rect:
+        serializedVersion: 2
+        x: 1278
+        y: 1043
+        width: 77
+        height: 83
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: border_3
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 1103
+        width: 192
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stone2_broken
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 1104
+        width: 92
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stone2
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 1135
+        width: 92
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: border_4
+      rect:
+        serializedVersion: 2
+        x: 1356
+        y: 1049
+        width: 181
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: worker_head
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 1104
+        width: 70
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5823681, y: 0.21771766}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: E2
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 918
+        width: 67
+        height: 81
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1060,38 +1471,10 @@ TextureImporter:
       name: A1
       rect:
         serializedVersion: 2
-        x: 1418
-        y: 1085
-        width: 104
-        height: 86
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: woodman_head
-      rect:
-        serializedVersion: 2
-        x: 648
-        y: 1001
-        width: 89
-        height: 89
-      alignment: 9
-      pivot: {x: 0.62612617, y: 0.25525516}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: C1
-      rect:
-        serializedVersion: 2
-        x: 419
-        y: 918
-        width: 95
-        height: 80
+        x: 1960
+        y: 1117
+        width: 79
+        height: 65
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1102,8 +1485,8 @@ TextureImporter:
       name: woodman_axe_top2
       rect:
         serializedVersion: 2
-        x: 1523
-        y: 1121
+        x: 1007
+        y: 1135
         width: 79
         height: 64
       alignment: 9
@@ -1113,11 +1496,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: sheep_body_3
+      rect:
+        serializedVersion: 2
+        x: 1712
+        y: 943
+        width: 75
+        height: 67
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: C1
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 1168
+        width: 83
+        height: 60
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: woodman_body_2
       rect:
         serializedVersion: 2
-        x: 1271
-        y: 905
+        x: 436
+        y: 924
         width: 83
         height: 59
       alignment: 9
@@ -1127,13 +1538,167 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: sheep_shadow
+      rect:
+        serializedVersion: 2
+        x: 915
+        y: 597
+        width: 87
+        height: 55
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: scot_peasant_body_2
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 984
+        width: 79
+        height: 57
+      alignment: 9
+      pivot: {x: 0.50407, y: 0.6372615}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: E1
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 1035
+        width: 60
+        height: 75
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stone1
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 1020
+        width: 71
+        height: 61
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: sheep_body_2
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 1020
+        width: 64
+        height: 65
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: worker_body_2
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 1042
+        width: 66
+        height: 60
+      alignment: 9
+      pivot: {x: 0.4727, y: 0.8078078}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: Coin_shadow
       rect:
         serializedVersion: 2
-        x: 1915
-        y: 707
+        x: 1950
+        y: 316
         width: 72
         height: 54
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: herdsman_staff
+      rect:
+        serializedVersion: 2
+        x: 1467
+        y: 812
+        width: 34
+        height: 106
+      alignment: 9
+      pivot: {x: 0.7761879, y: 0.46246246}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: herdsman_head
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 1049
+        width: 57
+        height: 63
+      alignment: 9
+      pivot: {x: 0.40706497, y: 0.29879874}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: pick_top
+      rect:
+        serializedVersion: 2
+        x: 1932
+        y: 500
+        width: 93
+        height: 37
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: sheep_head
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 1049
+        width: 58
+        height: 52
+      alignment: 9
+      pivot: {x: 0.62074345, y: 0.6952037}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: herdsman_body_1
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 793
+        width: 45
+        height: 59
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1144,8 +1709,8 @@ TextureImporter:
       name: woodman_hand_close_1
       rect:
         serializedVersion: 2
-        x: 1988
-        y: 707
+        x: 1003
+        y: 597
         width: 54
         height: 48
       alignment: 9
@@ -1155,11 +1720,25 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: herdsman_hat
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 1082
+        width: 56
+        height: 43
+      alignment: 9
+      pivot: {x: 0.5298468, y: 0.4717308}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: woodman_wood
       rect:
         serializedVersion: 2
-        x: 804
-        y: 508
+        x: 317
+        y: 853
         width: 49
         height: 48
       alignment: 9
@@ -1169,25 +1748,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: woodman_leg_far
-      rect:
-        serializedVersion: 2
-        x: 804
-        y: 557
-        width: 33
-        height: 70
-      alignment: 9
-      pivot: {x: 0.65606517, y: 0.8633633}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
       name: woodman_leg_close
       rect:
         serializedVersion: 2
-        x: 584
-        y: 671
+        x: 118
+        y: 960
         width: 33
         height: 70
       alignment: 9
@@ -1197,11 +1762,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: woodman_leg_far
+      rect:
+        serializedVersion: 2
+        x: 1789
+        y: 822
+        width: 33
+        height: 70
+      alignment: 9
+      pivot: {x: 0.65606517, y: 0.8633633}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: sheep_body_1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 627
+        width: 49
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: sheep_body_4
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 675
+        width: 49
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: pick_handle
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 1086
+        width: 88
+        height: 26
+      alignment: 9
+      pivot: {x: 0.51356655, y: 0.58265245}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: woodman_head_axe
       rect:
         serializedVersion: 2
-        x: 1219
-        y: 372
+        x: 176
+        y: 1102
         width: 54
         height: 41
       alignment: 9
@@ -1211,11 +1832,53 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: worker_hand_close_2
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 723
+        width: 50
+        height: 37
+      alignment: 9
+      pivot: {x: 0.91107047, y: 0.7328336}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: border_1
+      rect:
+        serializedVersion: 2
+        x: 1295
+        y: 814
+        width: 25
+        height: 67
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: worker_hand_far_2
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 953
+        width: 31
+        height: 52
+      alignment: 9
+      pivot: {x: 0.3186574, y: 0.90690696}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: woodman_hand_close_2
       rect:
         serializedVersion: 2
-        x: 417
-        y: 627
+        x: 1694
+        y: 494
         width: 47
         height: 33
       alignment: 9
@@ -1228,8 +1891,8 @@ TextureImporter:
       name: woodman_hand_far_1
       rect:
         serializedVersion: 2
-        x: 1274
-        y: 372
+        x: 577
+        y: 1035
         width: 48
         height: 32
       alignment: 9
@@ -1239,11 +1902,25 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: worker_hand_far_1
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 776
+        width: 33
+        height: 44
+      alignment: 9
+      pivot: {x: 0.7422423, y: 0.8213213}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: woodman_hand_far_2
       rect:
         serializedVersion: 2
-        x: 584
-        y: 742
+        x: 1531
+        y: 195
         width: 39
         height: 37
       alignment: 9
@@ -1253,11 +1930,109 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: worker_hand_close_3
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 1068
+        width: 45
+        height: 32
+      alignment: 9
+      pivot: {x: 0.70892686, y: 0.3111263}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: border_2
+      rect:
+        serializedVersion: 2
+        x: 1327
+        y: 742
+        width: 23
+        height: 60
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: herdsman_vest_left
+      rect:
+        serializedVersion: 2
+        x: 1295
+        y: 882
+        width: 30
+        height: 45
+      alignment: 9
+      pivot: {x: 0.6126126, y: 0.51201195}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: worker_hand_far_3
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 821
+        width: 31
+        height: 43
+      alignment: 9
+      pivot: {x: 0.42502177, y: 0.8048049}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: scot_peasant_hand_close_2
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 865
+        width: 26
+        height: 50
+      alignment: 9
+      pivot: {x: 0.70212525, y: 0.89489496}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: herdsman_vest_right
+      rect:
+        serializedVersion: 2
+        x: 2016
+        y: 657
+        width: 27
+        height: 46
+      alignment: 9
+      pivot: {x: 0.37209433, y: 0.49549547}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: woodman_hand_far_3_open
+      rect:
+        serializedVersion: 2
+        x: 1531
+        y: 233
+        width: 32
+        height: 37
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: woodman_hand_close_3
       rect:
         serializedVersion: 2
-        x: 1525
-        y: 619
+        x: 1531
+        y: 271
         width: 32
         height: 37
       alignment: 9
@@ -1267,15 +2042,15 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: woodman_hand_far_3_open
+      name: worker_hand_close_1
       rect:
         serializedVersion: 2
-        x: 1525
-        y: 657
-        width: 32
-        height: 37
+        x: 2016
+        y: 704
+        width: 27
+        height: 42
       alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0.7405739, y: 0.8663664}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1284,8 +2059,8 @@ TextureImporter:
       name: woodman_axe_top
       rect:
         serializedVersion: 2
-        x: 1323
-        y: 372
+        x: 2017
+        y: 538
         width: 27
         height: 41
       alignment: 9
@@ -1295,11 +2070,95 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: worker_leg_far
+      rect:
+        serializedVersion: 2
+        x: 2017
+        y: 580
+        width: 26
+        height: 42
+      alignment: 9
+      pivot: {x: 0.6746362, y: 0.8933934}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: scot_peasant_hand_far_2
+      rect:
+        serializedVersion: 2
+        x: 2023
+        y: 316
+        width: 23
+        height: 47
+      alignment: 9
+      pivot: {x: 0.3128345, y: 0.9594593}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: worker_leg_close
+      rect:
+        serializedVersion: 2
+        x: 1508
+        y: 668
+        width: 25
+        height: 42
+      alignment: 9
+      pivot: {x: 0.33099097, y: 0.8558558}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: worker_hand_far_3_1
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 1049
+        width: 31
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: scot_peasant_hand_far_1
+      rect:
+        serializedVersion: 2
+        x: 1351
+        y: 562
+        width: 23
+        height: 42
+      alignment: 9
+      pivot: {x: 0.75773597, y: 0.89789796}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: scot_peasant_hand_close_1
+      rect:
+        serializedVersion: 2
+        x: 1351
+        y: 605
+        width: 22
+        height: 42
+      alignment: 9
+      pivot: {x: 0.3681409, y: 0.8498498}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: w5_peasant_hand_3_open
       rect:
         serializedVersion: 2
-        x: 584
-        y: 780
+        x: 1531
+        y: 309
         width: 32
         height: 28
       alignment: 9
@@ -1309,11 +2168,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: scot_peasant_leg_close_3
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 761
+        width: 32
+        height: 28
+      alignment: 9
+      pivot: {x: 0.32363316, y: 0.7945907}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: scot_peasant_leg_far_3
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 619
+        width: 34
+        height: 26
+      alignment: 9
+      pivot: {x: 0.26800978, y: 0.8335317}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: woodman_hand_far_3
       rect:
         serializedVersion: 2
-        x: 1525
-        y: 695
+        x: 2017
+        y: 623
         width: 27
         height: 32
       alignment: 9
@@ -1323,11 +2210,25 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: scot_peasant_leg_close_2
+      rect:
+        serializedVersion: 2
+        x: 1508
+        y: 711
+        width: 22
+        height: 36
+      alignment: 9
+      pivot: {x: 0.7137591, y: 0.88888884}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: woodman_axe_handle
       rect:
         serializedVersion: 2
-        x: 1026
-        y: 444
+        x: 2016
+        y: 747
         width: 31
         height: 23
       alignment: 9
@@ -1337,11 +2238,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: scot_peasant_leg_far_2
+      rect:
+        serializedVersion: 2
+        x: 2026
+        y: 500
+        width: 21
+        height: 33
+      alignment: 9
+      pivot: {x: 0.6344916, y: 0.9024023}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: scot_peasant_leg_1
+      rect:
+        serializedVersion: 2
+        x: 1744
+        y: 341
+        width: 23
+        height: 28
+      alignment: 9
+      pivot: {x: 0.62064236, y: 0.8498498}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: herdsman_hand_fist_2
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 902
+        width: 33
+        height: 19
+      alignment: 9
+      pivot: {x: 0.8649437, y: 0.29500026}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: sheep_leg_right
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 395
+        width: 15
+        height: 37
+      alignment: 9
+      pivot: {x: 0.5407408, y: 0.8708709}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: w5_peasant_hand_3_fist
       rect:
         serializedVersion: 2
-        x: 760
-        y: 909
+        x: 570
+        y: 590
         width: 24
         height: 22
       alignment: 9
@@ -1351,11 +2308,25 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: sheep_leg_left
+      rect:
+        serializedVersion: 2
+        x: 884
+        y: 760
+        width: 15
+        height: 35
+      alignment: 9
+      pivot: {x: 0.4649649, y: 0.8678679}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: woodman_head_eye
       rect:
         serializedVersion: 2
-        x: 1845
-        y: 944
+        x: 1248
+        y: 912
         width: 37
         height: 14
       alignment: 9
@@ -1368,10 +2339,94 @@ TextureImporter:
       name: mill_cup
       rect:
         serializedVersion: 2
-        x: 1883
-        y: 944
+        x: 1087
+        y: 1135
         width: 19
         height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: scot_peasant_eye_close
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 764
+        width: 38
+        height: 11
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: sheep_lips
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 902
+        width: 18
+        height: 19
+      alignment: 9
+      pivot: {x: 0.66958624, y: 0.86036044}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: sheep_ear_close
+      rect:
+        serializedVersion: 2
+        x: 1351
+        y: 648
+        width: 17
+        height: 19
+      alignment: 9
+      pivot: {x: 0.22981806, y: 0.7477477}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: sheep_ear_far
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 807
+        width: 16
+        height: 14
+      alignment: 9
+      pivot: {x: 0.8500001, y: 0.79047614}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: herdsman_happy_lips
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 1158
+        width: 16
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: herdsman_sad_lips
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 433
+        width: 10
+        height: 8
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

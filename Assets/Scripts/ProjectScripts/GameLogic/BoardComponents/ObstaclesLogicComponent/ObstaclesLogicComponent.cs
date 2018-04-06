@@ -64,11 +64,11 @@ public class ObstaclesLogicComponent : IECSComponent, IECSSystem
             positions.Add(pos);
         }
         
-        context.ActionExecutor.PerformAction(new FillBoardAction
+        /*context.ActionExecutor.PerformAction(new FillBoardAction
         {
             Piece = PieceType.Fog.Id,
             Positions = positions
-        });
+        });*/
     }
     
     public void Execute()

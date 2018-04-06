@@ -100,4 +100,5 @@ public class R
      public const string E3Piece = "E3Piece";
      public const string E4Piece = "E4Piece";
      public const string E5Piece = "E5Piece";
+     public const string E6Piece = "E6Piece";
 }

@@ -108,6 +108,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             Currency.RegisterCurrency(Currency.PieceE3);
             Currency.RegisterCurrency(Currency.PieceE4);
             Currency.RegisterCurrency(Currency.PieceE5);
+            Currency.RegisterCurrency(Currency.PieceE6);
             
             Currency.RegisterCurrency(Currency.LevelRobin);
             Currency.RegisterCurrency(Currency.LevelJohn);

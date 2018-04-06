@@ -57,7 +57,8 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.E2.Id, new PieceMatchDef {Next = PieceType.E3.Id, Previous = PieceType.E1.Id, Count = 3});
         dict.Add(PieceType.E3.Id, new PieceMatchDef {Next = PieceType.E4.Id, Previous = PieceType.E2.Id, Count = 3});
         dict.Add(PieceType.E4.Id, new PieceMatchDef {Next = PieceType.E5.Id, Previous = PieceType.E3.Id, Count = 3});
-        dict.Add(PieceType.E5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.E4.Id, Count = 3});
+        dict.Add(PieceType.E5.Id, new PieceMatchDef {Next = PieceType.E6.Id, Previous = PieceType.E4.Id, Count = 3});
+        dict.Add(PieceType.E6.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.E5.Id, Count = 3});
 
         return dict;
     }

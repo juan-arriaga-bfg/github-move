@@ -61,6 +61,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.E3.Id, R.E3Piece);
         dict.Add(PieceType.E4.Id, R.E4Piece);
         dict.Add(PieceType.E5.Id, R.E5Piece);
+        dict.Add(PieceType.E6.Id, R.E6Piece);
         
         dict.Add(PieceType.Gbox1.Id, R.GBox1Piece);
         
