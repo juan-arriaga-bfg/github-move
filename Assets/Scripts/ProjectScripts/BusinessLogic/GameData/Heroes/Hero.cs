@@ -123,6 +123,7 @@ public class Hero
             (item, s) =>
             {
                 // on purchase success
+                AddPower();
             },
             item =>
             {
@@ -138,6 +139,31 @@ public class Hero
                 model2.OnCancel = null;
         
                 UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+            }
+        );
+    }
+
+    private void AddPower()
+    {
+        var shopItem = new ShopItem
+        {
+            Uid = string.Format("purchase.test.{0}.10", Currency.Power.Name), 
+            ItemUid = Currency.Power.Name, 
+            Amount = GetAbilityValue(AbilityType.Power),
+            CurrentPrices = new List<Price>{new Price{Currency = Currency.Cash.Name, DefaultPriceAmount = 0}}
+        };
+        
+        ShopService.Current.PurchaseItem
+        (
+            shopItem,
+            (item, s) =>
+            {
+                // on purchase success
+                
+            },
+            item =>
+            {
+                // on purchase failed (not enough cash)
             }
         );
     }

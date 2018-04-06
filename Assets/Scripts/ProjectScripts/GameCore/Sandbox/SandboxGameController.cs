@@ -253,42 +253,6 @@ public class SandboxGameController : MonoBehaviour
             PieceTypeId = PieceType.O2.Id
         });
         
-        /*boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(8, 9),
-            PieceTypeId = PieceType.Mine1.Id
-        });
-        
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(8, 13),
-            PieceTypeId = PieceType.Tavern1.Id
-        });
-        
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(8, 17),
-            PieceTypeId = PieceType.Sawmill1.Id
-        });
-        
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(12, 17),
-            PieceTypeId = PieceType.Castle1.Id
-        });
-        
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(16, 17),
-            PieceTypeId = PieceType.Sheepfold1.Id
-        });
-        
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(12, 14),
-            PieceTypeId = PieceType.O2.Id
-        });*/
-        
         /*AddPieces(new BoardPosition(10, 10), PieceType.A1.Id, PieceType.A9.Id, boardController);
         AddPieces(new BoardPosition(12, 10), PieceType.C1.Id, PieceType.C9.Id, boardController);
         AddPieces(new BoardPosition(14, 10), PieceType.B1.Id, PieceType.B5.Id, boardController);
@@ -297,6 +261,7 @@ public class SandboxGameController : MonoBehaviour
         
         //register board
         BoardService.Current.RegisterBoard(boardController, 0);
+        AddStartResources();
     }
 
     private void AddPieces(BoardPosition position, int first, int last, BoardController board)
@@ -311,6 +276,75 @@ public class SandboxGameController : MonoBehaviour
             
             position = position.Up;
         }
+    }
+
+    private void AddStartResources()
+    {
+        var shopItem = new ShopItem
+        {
+            Uid = string.Format("purchase.test.{0}.10", "strtCoins"), 
+            ItemUid = Currency.Coins.Name, 
+            Amount = 500,
+            CurrentPrices = new List<Price>{new Price{Currency = Currency.Cash.Name, DefaultPriceAmount = 0}}
+        };
+        
+        ShopService.Current.PurchaseItem
+        (
+            shopItem,
+            (item, s) =>
+            {
+                // on purchase success
+                
+            },
+            item =>
+            {
+                // on purchase failed (not enough cash)
+            }
+        );
+        
+        var shopItem2 = new ShopItem
+        {
+            Uid = string.Format("purchase.test.{0}.10", "Crystals"), 
+            ItemUid = Currency.Crystals.Name, 
+            Amount = 50,
+            CurrentPrices = new List<Price>{new Price{Currency = Currency.Cash.Name, DefaultPriceAmount = 0}}
+        };
+        
+        ShopService.Current.PurchaseItem
+        (
+            shopItem2,
+            (item, s) =>
+            {
+                // on purchase success
+                
+            },
+            item =>
+            {
+                // on purchase failed (not enough cash)
+            }
+        );
+        
+        var shopItem3 = new ShopItem
+        {
+            Uid = string.Format("purchase.test.{0}.10", "Crystals"), 
+            ItemUid = Currency.RobinCard.Name, 
+            Amount = 50,
+            CurrentPrices = new List<Price>{new Price{Currency = Currency.Cash.Name, DefaultPriceAmount = 0}}
+        };
+        
+        ShopService.Current.PurchaseItem
+        (
+            shopItem3,
+            (item, s) =>
+            {
+                // on purchase success
+                
+            },
+            item =>
+            {
+                // on purchase failed (not enough cash)
+            }
+        );
     }
 
 }

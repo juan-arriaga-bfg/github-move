@@ -3,15 +3,21 @@
 public class TouchReactionDefinitionFog : TouchReactionDefinitionComponent
 {
     private FogDef def;
+
+    public bool IsOpen;
     
     public override bool Make(BoardPosition position, Piece piece)
     {
+        piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
+        
         if (def == null)
         {
             var pos = new BoardPosition(position.X, position.Y);
             
             if (GameDataService.Current.FogsManager.Fogs.TryGetValue(pos, out def) == false) return false;
         }
+        
+        IsOpen = !IsOpen;
 
         if (GameDataService.Current.HeroesManager.CurrentPower() >= def.Condition.Value)
         {
@@ -26,8 +32,6 @@ public class TouchReactionDefinitionFog : TouchReactionDefinitionComponent
             
             return true;
         }
-
-        UIMessageWindowController.CreateDefaultMessage("Not enough power!");
         
         return true;
     }

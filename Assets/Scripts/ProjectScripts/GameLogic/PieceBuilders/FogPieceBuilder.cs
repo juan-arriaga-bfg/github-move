@@ -8,6 +8,8 @@
             .RegisterComponent(new TouchReactionDefinitionFog())
             .RegisterComponent(new TouchReactionConditionComponent()));
         
+        AddView(piece, ViewType.FogState);
+        
         return piece;
     }
 

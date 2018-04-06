@@ -5,7 +5,7 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
 {
     public bool isOpen;
     private bool isClear;
-
+    
     public Action OnClick { get; set; }
     
     public override bool Make(BoardPosition position, Piece piece)

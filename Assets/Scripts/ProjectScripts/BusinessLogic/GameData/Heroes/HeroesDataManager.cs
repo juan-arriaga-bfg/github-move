@@ -47,13 +47,6 @@ public class HeroesDataManager : IDataLoader<List<HeroDef>>
 
     public int CurrentPower()
     {
-        var power = 0;
-
-        foreach (var hero in Heroes)
-        {
-            power += hero.GetAbilityValue(AbilityType.Power);
-        }
-        
-        return power;
+        return ProfileService.Current.GetStorageItem(Currency.Power.Name).Amount;
     }
 }

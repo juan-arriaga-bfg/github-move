@@ -137,6 +137,7 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.Menu, R.MenuView);
         dict.Add((int)ViewType.MenuButton, R.BoardButtonView);
         dict.Add((int)ViewType.SimpleObstacle, R.ChangeSimpleObstacleStateView);
+        dict.Add((int)ViewType.FogState, R.ChangeFogStateView);
 
         return dict;
     }
