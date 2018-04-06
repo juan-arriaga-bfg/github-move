@@ -88,37 +88,56 @@ public class UiChestSlot : MonoBehaviour
         timerLabel.Text = chest.GetTimeLeftText();
         isTimerWork = true;
     }
-
+    
     public void OnClick()
     {
+        if (chest == null)
+        {
+            var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+            model.Title = "Need chests?";
+            model.Message = null;
+            model.Image = "tutorial_TextBlock_1";
+            model.AcceptLabel = "Ok";
+            
+            model.OnCancel = null;
+            model.OnAccept = () =>
+            {
+                var cache = BoardService.Current.GetBoardById(0).BoardLogic.PositionsCache;
+                var pos = cache.GetRandomPositions(PieceType.O1.Id, 1);
+
+                if (pos.Count == 0)
+                {
+                    pos = cache.GetRandomPositions(PieceType.O2.Id, 1);
+                }
+
+                if (pos.Count == 0)
+                {
+                    return;
+                }
+                
+                HintArrowView.Show(pos[0]);
+            };
+        
+            UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+            return;
+        }
+        
         switch (chest.State)
         {
             case ChestState.Close:
-                var modelMessage1 = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
-        
-                modelMessage1.Title = "Message";
-                modelMessage1.Message = "Start the chest?";
-                modelMessage1.AcceptLabel = "Ok";
-                
-                modelMessage1.OnAccept = () =>
-                {
-                    chest.State = ChestState.InProgress;
-                    Init(chest);
-                };
-        
-                UIService.Get.ShowWindow(UIWindowType.MessageWindow);
-                
+                StartTimer();
                 break;
             case ChestState.InProgress:
-                var modelMessage2 = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+                var model2 = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
-                modelMessage2.Title = "Message";
-                modelMessage2.Message = string.Format("Are you sure you want to spend {0} crystals to Speed Up the chest?", chest.Def.Price.Amount);
-                modelMessage2.AcceptLabel = "Ok";
-                modelMessage2.CancelLabel = "Cancel";
+                model2.Title = "Message";
+                model2.Message = string.Format("Are you sure you want to spend {0} crystals to Speed Up the chest?", chest.Def.Price.Amount);
+                model2.AcceptLabel = "Ok";
+                model2.CancelLabel = "Cancel";
 
-                modelMessage2.OnCancel = () => {};
-                modelMessage2.OnAccept = () =>
+                model2.OnCancel = () => {};
+                model2.OnAccept = () =>
                 {
                     var shopItem = new ShopItem
                     {
@@ -167,5 +186,39 @@ public class UiChestSlot : MonoBehaviour
             case ChestState.Finished:
                 break;
         }
+    }
+
+    private void StartTimer()
+    {
+        foreach (var def in GameDataService.Current.ChestsManager.ActiveChests)
+        {
+            if (def.State != ChestState.InProgress) continue;
+            
+            var model1 = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+            model1.Title = "Another chest unlocking";
+            model1.Message = "Finish unlock another chest first";
+            model1.AcceptLabel = "Ok";
+                
+            model1.OnAccept = () => {};
+        
+            UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+            
+            return;
+        }
+        
+        var model2 = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+        model2.Title = string.Format("{0} chest", chest.ChestType);
+        model2.Message = string.Format("Unlock time: {0}", chest.GetTimeText());
+        model2.AcceptLabel = "Start unlock";
+                
+        model2.OnAccept = () =>
+        {
+            chest.State = ChestState.InProgress;
+            Init(chest);
+        };
+        
+        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
 }

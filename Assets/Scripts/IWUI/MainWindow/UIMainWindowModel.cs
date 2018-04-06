@@ -16,5 +16,4 @@ public class UIMainWindowModel : IWWindowModel
 
         return currentPrice;
     }
-
 }
