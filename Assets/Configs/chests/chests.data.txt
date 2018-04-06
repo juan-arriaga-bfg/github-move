@@ -1,8 +1,8 @@
 ﻿[
   {
     "Uid": "Common",
-    "Time": 60,
-    "MergePoints" : 100,
+    "Time": "60",
+    "MergePoints": 100,
     "Price": {
       "Currency": "Crystals",
       "Amount": 1
@@ -26,7 +26,7 @@
           "Amount": 2
         },
         {
-          "Currency": "PieceE1",
+          "Currency": "PieceE2",
           "Amount": 2
         }
       ],
@@ -48,7 +48,7 @@
           "Amount": 4
         },
         {
-          "Currency": "PieceE1",
+          "Currency": "PieceE2",
           "Amount": 4
         }
       ],
@@ -70,7 +70,7 @@
           "Amount": 7
         },
         {
-          "Currency": "PieceE1",
+          "Currency": "PieceE2",
           "Amount": 7
         }
       ],
@@ -92,7 +92,7 @@
           "Amount": 2
         },
         {
-          "Currency": "PieceE2",
+          "Currency": "PieceE3",
           "Amount": 2
         }
       ],
@@ -114,7 +114,7 @@
           "Amount": 4
         },
         {
-          "Currency": "PieceE2",
+          "Currency": "PieceE3",
           "Amount": 4
         }
       ],
@@ -136,7 +136,7 @@
           "Amount": 7
         },
         {
-          "Currency": "PieceE2",
+          "Currency": "PieceE3",
           "Amount": 7
         }
       ],
@@ -158,7 +158,7 @@
           "Amount": 2
         },
         {
-          "Currency": "PieceE3",
+          "Currency": "PieceE4",
           "Amount": 2
         }
       ],
@@ -180,7 +180,7 @@
           "Amount": 4
         },
         {
-          "Currency": "PieceE3",
+          "Currency": "PieceE4",
           "Amount": 4
         }
       ],
@@ -202,7 +202,7 @@
           "Amount": 7
         },
         {
-          "Currency": "PieceE3",
+          "Currency": "PieceE4",
           "Amount": 7
         }
       ]
@@ -210,8 +210,8 @@
   },
   {
     "Uid": "Rare",
-    "Time": 3600,
-    "MergePoints" : 300,
+    "Time": "3600",
+    "MergePoints": 300,
     "Price": {
       "Currency": "Crystals",
       "Amount": 30
@@ -419,8 +419,8 @@
   },
   {
     "Uid": "Epic",
-    "Time": 14400,
-    "MergePoints" : 1000,
+    "Time": "14400",
+    "MergePoints": 1000,
     "Price": {
       "Currency": "Crystals",
       "Amount": 60
