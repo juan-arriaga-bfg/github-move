@@ -8,11 +8,17 @@ public class PieceStorageView : UIBoardView
 
     public override Vector3 Ofset
     {
-        get { return new Vector3(0, 0.7f); }
+        get { return new Vector3(0, (multiSize == 0 ?  -0.3f : 0.7f)); }
     }
 
     protected override void SetOfset()
     {
+        if (multiSize == 0)
+        {
+            base.SetOfset();
+            return;
+        }
+        
         CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Ofset;
     }
 

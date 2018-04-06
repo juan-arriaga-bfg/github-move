@@ -9,7 +9,7 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
     
     public override Vector3 Ofset
     {
-        get { return new Vector3(0, 0.3f); }
+        get { return new Vector3(0, -0.5f); }
     }
 
     public override void Init(Piece piece)

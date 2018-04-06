@@ -196,6 +196,18 @@
     }
   },
   {
+    "Uid": "E6",
+    "Delay": 100,
+    "SpawnPiece": "E1",
+    "IsFilledInStart":"true",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 1,
+    "CreateReward": {
+      "Currency": "Coins",
+      "Amount": 100
+    }
+  },
+  {
     "Uid": "Mine1",
     "Delay": 3,
     "SpawnPiece": "C1",
