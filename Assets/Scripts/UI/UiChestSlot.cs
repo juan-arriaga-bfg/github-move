@@ -97,7 +97,7 @@ public class UiChestSlot : MonoBehaviour
         
             model.Title = "Need chests?";
             model.Message = null;
-            model.Image = "tutorial_TextBlock_1";
+            model.Image = "Chest_UI";
             model.AcceptLabel = "Ok";
             
             model.OnCancel = null;

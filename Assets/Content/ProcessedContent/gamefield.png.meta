@@ -1454,20 +1454,6 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: E2
-      rect:
-        serializedVersion: 2
-        x: 627
-        y: 918
-        width: 67
-        height: 81
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
       name: A1
       rect:
         serializedVersion: 2
@@ -1510,11 +1496,25 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: C1
+      name: E2
       rect:
         serializedVersion: 2
         x: 1087
         y: 1168
+        width: 76
+        height: 66
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: C1
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 924
         width: 83
         height: 60
       alignment: 9
@@ -1528,7 +1528,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 436
-        y: 924
+        y: 985
         width: 83
         height: 59
       alignment: 9
@@ -1555,8 +1555,8 @@ TextureImporter:
       name: scot_peasant_body_2
       rect:
         serializedVersion: 2
-        x: 436
-        y: 984
+        x: 520
+        y: 1035
         width: 79
         height: 57
       alignment: 9
@@ -1569,8 +1569,8 @@ TextureImporter:
       name: E1
       rect:
         serializedVersion: 2
-        x: 516
-        y: 1035
+        x: 627
+        y: 918
         width: 60
         height: 75
       alignment: 9
@@ -1612,7 +1612,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 410
-        y: 1042
+        y: 1045
         width: 66
         height: 60
       alignment: 9
@@ -1653,8 +1653,8 @@ TextureImporter:
       name: herdsman_head
       rect:
         serializedVersion: 2
-        x: 118
-        y: 1049
+        x: 477
+        y: 1093
         width: 57
         height: 63
       alignment: 9
@@ -1681,8 +1681,8 @@ TextureImporter:
       name: sheep_head
       rect:
         serializedVersion: 2
-        x: 176
-        y: 1049
+        x: 535
+        y: 1093
         width: 58
         height: 52
       alignment: 9
@@ -1723,8 +1723,8 @@ TextureImporter:
       name: herdsman_hat
       rect:
         serializedVersion: 2
-        x: 235
-        y: 1082
+        x: 594
+        y: 1114
         width: 56
         height: 43
       alignment: 9
@@ -1751,8 +1751,8 @@ TextureImporter:
       name: woodman_leg_close
       rect:
         serializedVersion: 2
-        x: 118
-        y: 960
+        x: 1789
+        y: 822
         width: 33
         height: 70
       alignment: 9
@@ -1765,8 +1765,8 @@ TextureImporter:
       name: woodman_leg_far
       rect:
         serializedVersion: 2
-        x: 1789
-        y: 822
+        x: 695
+        y: 776
         width: 33
         height: 70
       alignment: 9
@@ -1807,8 +1807,8 @@ TextureImporter:
       name: pick_handle
       rect:
         serializedVersion: 2
-        x: 292
-        y: 1086
+        x: 651
+        y: 1136
         width: 88
         height: 26
       alignment: 9
@@ -1821,8 +1821,8 @@ TextureImporter:
       name: woodman_head_axe
       rect:
         serializedVersion: 2
-        x: 176
-        y: 1102
+        x: 535
+        y: 1146
         width: 54
         height: 41
       alignment: 9
@@ -1849,8 +1849,8 @@ TextureImporter:
       name: border_1
       rect:
         serializedVersion: 2
-        x: 1295
-        y: 814
+        x: 600
+        y: 1035
         width: 25
         height: 67
       alignment: 9
@@ -1863,8 +1863,8 @@ TextureImporter:
       name: worker_hand_far_2
       rect:
         serializedVersion: 2
-        x: 273
-        y: 953
+        x: 695
+        y: 847
         width: 31
         height: 52
       alignment: 9
@@ -1891,8 +1891,8 @@ TextureImporter:
       name: woodman_hand_far_1
       rect:
         serializedVersion: 2
-        x: 577
-        y: 1035
+        x: 1538
+        y: 1049
         width: 48
         height: 32
       alignment: 9
@@ -1905,8 +1905,8 @@ TextureImporter:
       name: worker_hand_far_1
       rect:
         serializedVersion: 2
-        x: 695
-        y: 776
+        x: 477
+        y: 1045
         width: 33
         height: 44
       alignment: 9
@@ -1919,8 +1919,8 @@ TextureImporter:
       name: woodman_hand_far_2
       rect:
         serializedVersion: 2
-        x: 1531
-        y: 195
+        x: 273
+        y: 953
         width: 39
         height: 37
       alignment: 9
@@ -1933,8 +1933,8 @@ TextureImporter:
       name: worker_hand_close_3
       rect:
         serializedVersion: 2
-        x: 577
-        y: 1068
+        x: 590
+        y: 1158
         width: 45
         height: 32
       alignment: 9
@@ -1962,7 +1962,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1295
-        y: 882
+        y: 814
         width: 30
         height: 45
       alignment: 9
@@ -1975,8 +1975,8 @@ TextureImporter:
       name: worker_hand_far_3
       rect:
         serializedVersion: 2
-        x: 695
-        y: 821
+        x: 1295
+        y: 860
         width: 31
         height: 43
       alignment: 9
@@ -1989,8 +1989,8 @@ TextureImporter:
       name: scot_peasant_hand_close_2
       rect:
         serializedVersion: 2
-        x: 695
-        y: 865
+        x: 1508
+        y: 668
         width: 26
         height: 50
       alignment: 9
@@ -2017,8 +2017,8 @@ TextureImporter:
       name: woodman_hand_far_3_open
       rect:
         serializedVersion: 2
-        x: 1531
-        y: 233
+        x: 371
+        y: 619
         width: 32
         height: 37
       alignment: 9
@@ -2031,8 +2031,8 @@ TextureImporter:
       name: woodman_hand_close_3
       rect:
         serializedVersion: 2
-        x: 1531
-        y: 271
+        x: 371
+        y: 657
         width: 32
         height: 37
       alignment: 9
@@ -2059,8 +2059,8 @@ TextureImporter:
       name: woodman_axe_top
       rect:
         serializedVersion: 2
-        x: 2017
-        y: 538
+        x: 371
+        y: 695
         width: 27
         height: 41
       alignment: 9
@@ -2073,8 +2073,8 @@ TextureImporter:
       name: worker_leg_far
       rect:
         serializedVersion: 2
-        x: 2017
-        y: 580
+        x: 1508
+        y: 719
         width: 26
         height: 42
       alignment: 9
@@ -2102,7 +2102,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1508
-        y: 668
+        y: 762
         width: 25
         height: 42
       alignment: 9
@@ -2115,8 +2115,8 @@ TextureImporter:
       name: worker_hand_far_3_1
       rect:
         serializedVersion: 2
-        x: 235
-        y: 1049
+        x: 1531
+        y: 195
         width: 31
         height: 32
       alignment: 9
@@ -2157,8 +2157,8 @@ TextureImporter:
       name: w5_peasant_hand_3_open
       rect:
         serializedVersion: 2
-        x: 1531
-        y: 309
+        x: 273
+        y: 991
         width: 32
         height: 28
       alignment: 9
@@ -2186,7 +2186,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 371
-        y: 619
+        y: 737
         width: 34
         height: 26
       alignment: 9
@@ -2199,8 +2199,8 @@ TextureImporter:
       name: woodman_hand_far_3
       rect:
         serializedVersion: 2
-        x: 2017
-        y: 623
+        x: 884
+        y: 760
         width: 27
         height: 32
       alignment: 9
@@ -2213,8 +2213,8 @@ TextureImporter:
       name: scot_peasant_leg_close_2
       rect:
         serializedVersion: 2
-        x: 1508
-        y: 711
+        x: 2017
+        y: 538
         width: 22
         height: 36
       alignment: 9
@@ -2227,8 +2227,8 @@ TextureImporter:
       name: woodman_axe_handle
       rect:
         serializedVersion: 2
-        x: 2016
-        y: 747
+        x: 1295
+        y: 904
         width: 31
         height: 23
       alignment: 9
@@ -2297,8 +2297,8 @@ TextureImporter:
       name: w5_peasant_hand_3_fist
       rect:
         serializedVersion: 2
-        x: 570
-        y: 590
+        x: 410
+        y: 1020
         width: 24
         height: 22
       alignment: 9
@@ -2311,8 +2311,8 @@ TextureImporter:
       name: sheep_leg_left
       rect:
         serializedVersion: 2
-        x: 884
-        y: 760
+        x: 1197
+        y: 456
         width: 15
         height: 35
       alignment: 9
