@@ -45,6 +45,7 @@ public class UiChestSlot : MonoBehaviour
         cachedHintArrow.CachedTransform.SetParentAndReset(transform);
         // set arrow offset
         cachedHintArrow.CachedTransform.localPosition = new Vector3(0f, 56.9f, 0f);
+        cachedHintArrow.FadeInOut(state);
     }
     
     public void Init(Chest chest)
