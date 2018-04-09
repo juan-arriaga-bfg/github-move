@@ -548,7 +548,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: btn_green_norm
+      name: shine_2
       rect:
         serializedVersion: 2
         x: 1151
@@ -557,7 +557,7 @@ TextureImporter:
         height: 128
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 64, y: 64, z: 64, w: 64}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -576,11 +576,25 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: icon_card_coins
+      name: btn_green_norm
       rect:
         serializedVersion: 2
         x: 879
         y: 826
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 64, y: 64, z: 64, w: 64}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: icon_card_coins
+      rect:
+        serializedVersion: 2
+        x: 1008
+        y: 572
         width: 128
         height: 128
       alignment: 9
@@ -593,27 +607,13 @@ TextureImporter:
       name: btn_blue_norm
       rect:
         serializedVersion: 2
-        x: 1008
-        y: 572
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 64, y: 64, z: 64, w: 64}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: shine_2
-      rect:
-        serializedVersion: 2
         x: 1091
         y: 302
         width: 128
         height: 128
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 64, y: 64, z: 64, w: 64}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -926,7 +926,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: icon_btn_buy
+      name: icon_Alarm
       rect:
         serializedVersion: 2
         x: 1011
@@ -940,7 +940,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: icon_Alarm
+      name: icon_btn_buy
       rect:
         serializedVersion: 2
         x: 1159
@@ -1066,7 +1066,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: progressBar1_LineGreen
+      name: progressBar1_LineYellow
       rect:
         serializedVersion: 2
         x: 573
@@ -1075,12 +1075,12 @@ TextureImporter:
         height: 41
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 12, y: 0, z: 12, w: 0}
+      border: {x: 8, y: 10, z: 8, w: 9}
       outline: []
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: progressBar1_LineYellow
+      name: progressBar1_LineGreen
       rect:
         serializedVersion: 2
         x: 811
@@ -1089,7 +1089,7 @@ TextureImporter:
         height: 41
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 8, y: 10, z: 8, w: 9}
+      border: {x: 12, y: 0, z: 12, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
