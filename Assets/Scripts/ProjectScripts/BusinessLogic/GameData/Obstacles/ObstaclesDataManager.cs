@@ -26,4 +26,39 @@ public class ObstaclesDataManager : IDataLoader<List<ObstacleDef>>
             }
         });
     }
+
+    public int GetChestBySmpleObstacle(int obstacle)
+    {
+        var common = 0;
+        var rare = 0;
+        var epic = 0;
+        
+        var randomValue = Random.Range(0, 100 + 1);
+        
+        if (obstacle == PieceType.O1.Id)
+        {
+            rare = 20;
+            epic = 5;
+        }
+
+        if (obstacle == PieceType.O2.Id)
+        {
+            rare = 50;
+            epic = 10;
+        }
+
+        common = (100 - rare) - epic;
+
+        if (randomValue < epic)
+        {
+            return PieceType.Chest3.Id;
+        }
+        
+        if (randomValue < rare)
+        {
+            return PieceType.Chest2.Id;
+        }
+        
+        return PieceType.Chest1.Id;
+    }
 }

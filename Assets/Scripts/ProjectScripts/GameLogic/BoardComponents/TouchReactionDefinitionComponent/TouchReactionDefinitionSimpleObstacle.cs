@@ -47,6 +47,8 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
                 // on purchase success
                 
                 isClear = true;
+
+                var chest = GameDataService.Current.ObstaclesManager.GetChestBySmpleObstacle(piece.PieceType);
                 
                 piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
                 {
@@ -58,7 +60,7 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
                         {
                             IsCheckMatch = false,
                             At = position,
-                            PieceTypeId = PieceType.Chest1.Id
+                            PieceTypeId = chest
                         });
                     }
                 });
