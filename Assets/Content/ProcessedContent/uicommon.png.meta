@@ -198,7 +198,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: shine_1
+      name: card_border_object_red
       rect:
         serializedVersion: 2
         x: 0
@@ -212,7 +212,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: dialog_back_4
+      name: dialog_back_3
       rect:
         serializedVersion: 2
         x: 201
@@ -226,7 +226,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: card_border_object_red
+      name: dialog_back_4
       rect:
         serializedVersion: 2
         x: 217
@@ -235,7 +235,7 @@ TextureImporter:
         height: 200
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 100, y: 100, z: 100, w: 100}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -254,7 +254,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: dialog_back_3
+      name: card_border_object_green
       rect:
         serializedVersion: 2
         x: 265
@@ -263,7 +263,7 @@ TextureImporter:
         height: 200
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 100, y: 100, z: 100, w: 100}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -282,7 +282,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: card_border_object_green
+      name: shine_1
       rect:
         serializedVersion: 2
         x: 466
@@ -296,7 +296,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: Yellow_lenta
+      name: green_lenta
       rect:
         serializedVersion: 2
         x: 603
@@ -310,7 +310,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: green_lenta
+      name: Yellow_lenta
       rect:
         serializedVersion: 2
         x: 603
@@ -422,7 +422,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: RobinCard
+      name: JohnCard
       rect:
         serializedVersion: 2
         x: 811
@@ -436,7 +436,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: JohnCard
+      name: RobinCard
       rect:
         serializedVersion: 2
         x: 776
@@ -548,7 +548,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: btn_orange_norm
+      name: btn_green_norm
       rect:
         serializedVersion: 2
         x: 1151
@@ -562,7 +562,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: btn_green_norm
+      name: btn_orange_norm
       rect:
         serializedVersion: 2
         x: 879
@@ -576,11 +576,25 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: btn_blue_norm
+      name: icon_card_coins
       rect:
         serializedVersion: 2
         x: 879
         y: 826
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: btn_blue_norm
+      rect:
+        serializedVersion: 2
+        x: 1008
+        y: 572
         width: 128
         height: 128
       alignment: 9
@@ -591,20 +605,6 @@ TextureImporter:
       tessellationDetail: -1
     - serializedVersion: 2
       name: shine_2
-      rect:
-        serializedVersion: 2
-        x: 1008
-        y: 572
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: icon_card_coins
       rect:
         serializedVersion: 2
         x: 1091
@@ -702,7 +702,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: icon_back_blue
+      name: icon_back_purple
       rect:
         serializedVersion: 2
         x: 1137
@@ -716,7 +716,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: icon_back_purple
+      name: icon_back_green
       rect:
         serializedVersion: 2
         x: 1213
@@ -730,7 +730,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: icon_back_green
+      name: icon_back_blue
       rect:
         serializedVersion: 2
         x: 1220
@@ -751,6 +751,20 @@ TextureImporter:
         y: 828
         width: 100
         height: 114
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: arrow_light
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 828
+        width: 96
+        height: 112
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -845,8 +859,8 @@ TextureImporter:
       name: icon_Chest
       rect:
         serializedVersion: 2
-        x: 1328
-        y: 202
+        x: 1230
+        y: 941
         width: 78
         height: 70
       alignment: 9
@@ -859,8 +873,8 @@ TextureImporter:
       name: card_border_Lvl_Hero
       rect:
         serializedVersion: 2
-        x: 1335
-        y: 116
+        x: 1086
+        y: 943
         width: 72
         height: 72
       alignment: 9
@@ -873,8 +887,8 @@ TextureImporter:
       name: card_border_Lvl_Build
       rect:
         serializedVersion: 2
-        x: 1086
-        y: 943
+        x: 1309
+        y: 941
         width: 72
         height: 72
       alignment: 9
@@ -901,8 +915,8 @@ TextureImporter:
       name: card_border_Lvl_other
       rect:
         serializedVersion: 2
-        x: 1159
-        y: 943
+        x: 1328
+        y: 202
         width: 71
         height: 71
       alignment: 9
@@ -912,7 +926,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: icon_Alarm
+      name: icon_btn_buy
       rect:
         serializedVersion: 2
         x: 1011
@@ -926,26 +940,12 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: icon_btn_buy
+      name: icon_Alarm
       rect:
         serializedVersion: 2
-        x: 1248
-        y: 541
+        x: 1159
+        y: 943
         width: 66
-        height: 66
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: arrow_light
-      rect:
-        serializedVersion: 2
-        x: 840
-        y: 372
-        width: 57
         height: 66
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
@@ -957,8 +957,8 @@ TextureImporter:
       name: icon_TimeChest
       rect:
         serializedVersion: 2
-        x: 1230
-        y: 828
+        x: 840
+        y: 372
         width: 57
         height: 62
       alignment: 9
@@ -971,8 +971,8 @@ TextureImporter:
       name: icon_heart
       rect:
         serializedVersion: 2
-        x: 1235
-        y: 696
+        x: 1335
+        y: 116
         width: 63
         height: 53
       alignment: 9
@@ -1027,8 +1027,8 @@ TextureImporter:
       name: progressBar1_1
       rect:
         serializedVersion: 2
-        x: 1248
-        y: 608
+        x: 1399
+        y: 116
         width: 49
         height: 41
       alignment: 9
@@ -1041,8 +1041,8 @@ TextureImporter:
       name: btn_x
       rect:
         serializedVersion: 2
-        x: 1271
-        y: 650
+        x: 1399
+        y: 158
         width: 38
         height: 41
       alignment: 9
@@ -1055,8 +1055,8 @@ TextureImporter:
       name: icon_TimeBar
       rect:
         serializedVersion: 2
-        x: 970
-        y: 955
+        x: 1335
+        y: 170
         width: 35
         height: 31
       alignment: 9
@@ -1066,25 +1066,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: progressBar1_LineYellow
+      name: progressBar1_LineGreen
       rect:
         serializedVersion: 2
         x: 573
         y: 723
-        width: 25
-        height: 41
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 8, y: 10, z: 8, w: 9}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: progressBar1_LineGreen
-      rect:
-        serializedVersion: 2
-        x: 811
-        y: 264
         width: 25
         height: 41
       alignment: 9
@@ -1094,11 +1080,25 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: progressBar1_LineYellow
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 264
+        width: 25
+        height: 41
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 8, y: 10, z: 8, w: 9}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: icon_SpeedBuy
       rect:
         serializedVersion: 2
         x: 970
-        y: 987
+        y: 955
         width: 33
         height: 30
       alignment: 9
@@ -1111,8 +1111,8 @@ TextureImporter:
       name: back_shadow_1
       rect:
         serializedVersion: 2
-        x: 1288
-        y: 750
+        x: 1271
+        y: 541
         width: 4
         height: 151
       alignment: 9
