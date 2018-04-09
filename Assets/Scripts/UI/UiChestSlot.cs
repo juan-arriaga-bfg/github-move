@@ -17,10 +17,35 @@ public class UiChestSlot : MonoBehaviour
     [SerializeField] private GameObject chestGo;
     [SerializeField] private GameObject buttonGo;
     [SerializeField] private GameObject shineGo;
-
+    
     private Chest chest;
 
     private bool isTimerWork;
+
+    private UIHintArrowViewController cachedHintArrow;
+    
+    public Action<UiChestSlot, ChestState> OnChestStateChanged { get; set; }
+
+    public Chest Chest
+    {
+        get { return chest; }
+        set { chest = value; }
+    }
+
+    public virtual void ToggleHintArrow(bool state)
+    {
+        if (cachedHintArrow != null)
+        {
+            UIService.Get.ReturnCachedObject(cachedHintArrow.gameObject);
+        }
+        
+        if (state == false) return;
+        
+        cachedHintArrow= UIService.Get.GetCachedObject<UIHintArrowViewController>(R.UIHintArrow);
+        cachedHintArrow.CachedTransform.SetParentAndReset(transform);
+        // set arrow offset
+        cachedHintArrow.CachedTransform.localPosition = new Vector3(0f, 56.9f, 0f);
+    }
     
     public void Init(Chest chest)
     {
@@ -38,6 +63,11 @@ public class UiChestSlot : MonoBehaviour
         this.chest = chest;
         
         var state = chest.State;
+        
+        if (OnChestStateChanged != null)
+        {
+            OnChestStateChanged(this, chest.State);
+        }
         
         chestGo.SetActive(true);
         timerGo.SetActive(state == ChestState.InProgress);
@@ -171,6 +201,10 @@ public class UiChestSlot : MonoBehaviour
                 break;
             case ChestState.Open:
                 chest.State = ChestState.Finished;
+                if (OnChestStateChanged != null)
+                {
+                    OnChestStateChanged(this, chest.State);
+                }
                 GameDataService.Current.ChestsManager.RemoveActiveChest(chest);
                 
                 var model = UIService.Get.GetCachedModel<UIChestRewardWindowModel>(UIWindowType.ChestRewardWindow);

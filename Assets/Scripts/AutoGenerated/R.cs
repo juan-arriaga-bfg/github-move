@@ -102,4 +102,5 @@ public class R
      public const string E5Piece = "E5Piece";
      public const string E6Piece = "E6Piece";
      public const string ChangeFogStateView = "ChangeFogStateView";
+     public const string UIHintArrow = "UIHintArrow";
 }
