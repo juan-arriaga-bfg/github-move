@@ -21,14 +21,24 @@ public class TouchReactionDefinitionFog : TouchReactionDefinitionComponent
 
         if (GameDataService.Current.HeroesManager.CurrentPower() >= def.Condition.Value)
         {
-            UIMessageWindowController.CreateDefaultMessage("Fog go home!", () =>
+            var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+            model.Title = "Clear fog area!";
+            model.Message = "Your Band Power are enough for opening new part of Sherwood forest";
+            model.AcceptLabel = "Clear";
+        
+            model.OnAccept = () =>
             {
                 piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
                 {
                     To = position,
                     Positions = new List<BoardPosition>{position}
                 });
-            });
+            };
+            
+            model.OnCancel = null;
+        
+            UIService.Get.ShowWindow(UIWindowType.MessageWindow);
             
             return true;
         }

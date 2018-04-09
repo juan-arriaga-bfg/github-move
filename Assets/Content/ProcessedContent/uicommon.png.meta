@@ -940,11 +940,25 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: icon_TimeChest
+      name: arrow_light
       rect:
         serializedVersion: 2
         x: 840
         y: 372
+        width: 57
+        height: 66
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: icon_TimeChest
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 828
         width: 57
         height: 62
       alignment: 9
@@ -957,8 +971,8 @@ TextureImporter:
       name: icon_heart
       rect:
         serializedVersion: 2
-        x: 1230
-        y: 828
+        x: 1235
+        y: 696
         width: 63
         height: 53
       alignment: 9
@@ -1024,25 +1038,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: arrow_light
-      rect:
-        serializedVersion: 2
-        x: 970
-        y: 955
-        width: 37
-        height: 43
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
       name: btn_x
       rect:
         serializedVersion: 2
-        x: 1230
-        y: 882
+        x: 1271
+        y: 650
         width: 38
         height: 41
       alignment: 9
@@ -1055,8 +1055,8 @@ TextureImporter:
       name: icon_TimeBar
       rect:
         serializedVersion: 2
-        x: 940
-        y: 223
+        x: 970
+        y: 955
         width: 35
         height: 31
       alignment: 9
@@ -1097,8 +1097,8 @@ TextureImporter:
       name: icon_SpeedBuy
       rect:
         serializedVersion: 2
-        x: 976
-        y: 223
+        x: 970
+        y: 987
         width: 33
         height: 30
       alignment: 9
@@ -1111,8 +1111,8 @@ TextureImporter:
       name: back_shadow_1
       rect:
         serializedVersion: 2
-        x: 1271
-        y: 650
+        x: 1288
+        y: 750
         width: 4
         height: 151
       alignment: 9
