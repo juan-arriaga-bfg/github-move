@@ -18,7 +18,7 @@ public class UIMainWindowView : IWUIWindowView
     
     private string chestHintArrowDelayFinished = "chestHintArrowDelayFinished";
 
-    private const float delayBeforeChestHint = 5f;
+    private const float delayBeforeChestHint = 15f;
     
     public override void OnViewShow()
     {

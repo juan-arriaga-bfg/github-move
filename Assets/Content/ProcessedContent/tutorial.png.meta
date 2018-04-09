@@ -11,6 +11,9 @@ TextureImporter:
     21300008: sheeps_UI
     21300010: stone_UI
     21300012: Chest_UI
+    21300014: Sheeps_UI
+    21300016: Stone_UI
+    21300018: Wood_UI
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -133,7 +136,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: wood_UI
+      name: Sheeps_UI
       rect:
         serializedVersion: 2
         x: 554
@@ -147,7 +150,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: sheeps_UI
+      name: Stone_UI
       rect:
         serializedVersion: 2
         x: 1108
@@ -161,7 +164,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: stone_UI
+      name: Wood_UI
       rect:
         serializedVersion: 2
         x: 0

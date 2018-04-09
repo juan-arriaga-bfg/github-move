@@ -15,6 +15,6 @@ public class UIHintArrowViewController : IWUIWindowViewController
         }
         DOTween.Kill(viewCanvasGroup);
         var sequence = DOTween.Sequence().SetId(viewCanvasGroup);
-        sequence.Insert(0, viewCanvasGroup.DOFade(state ? 1f : 0f, 1f));
+        sequence.Insert(0, viewCanvasGroup.DOFade(state ? 1f : 0f, 0.35f));
     }
 }
