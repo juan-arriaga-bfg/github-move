@@ -706,25 +706,33 @@
   {
     "Uid": "icon_Power",
     "SpriteName": "icon_Power",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "icon_Power",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
     "Uid": "icon_gameboard_Merge",
     "SpriteName": "icon_Merge",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "icon_Merge",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
     "Uid": "icon_Merge",
     "SpriteName": "icon_Merge",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "icon_Merge",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "arrow_light",
+    "SpriteName": "arrow_light",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   }
 ]

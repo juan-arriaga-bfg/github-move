@@ -85,6 +85,7 @@ public class UiSimpleQuestStartItem : MonoBehaviour
         {
             if (position == null || position.Value.X == 0 && position.Value.Y == 0) return;
             HintArrowView.Show(position.Value);
+            UIService.Get.CloseWindow(UIWindowType.SimpleQuestStartWindow, true);
         };
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
