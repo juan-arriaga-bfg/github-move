@@ -11,6 +11,14 @@ public class UiQuestButton : MonoBehaviour, IBoardEventListener
     [SerializeField] private CanvasGroup newHint;
     [SerializeField] private CanvasGroup completeHint;
 
+    [SerializeField] private Transform sendItemsView;
+    
+    [SerializeField] private Image iconForSendButton;
+    
+    [SerializeField] private NSText sendItemsAmountLabel;
+
+    [SerializeField] private UIProgressBarVIewController progressBar;
+
     private Quest quest;
     
     public void Init(Quest quest)
@@ -34,6 +42,27 @@ public class UiQuestButton : MonoBehaviour, IBoardEventListener
                 Animate(completeHint, false);
                 break;
         }
+
+        int canClaimFull = quest.GetPiecesAmountOnBoard();
+
+        int canClaim = Mathf.Clamp(canClaimFull, 0, quest.TargetAmount - quest.CurrentAmount);
+        
+        Debug.LogWarning("canClaim: " + canClaim.ToString());
+        
+        if (quest.CurrentAmount < quest.TargetAmount && canClaim > 0)
+        {
+            sendItemsView.gameObject.SetActive(true);
+        }
+        else
+        {
+            sendItemsView.gameObject.SetActive(false);
+        }
+
+        progressBar.SetProgress(quest.CurrentAmount, quest.TargetAmount);
+        
+        sendItemsAmountLabel.Text = canClaim.ToString();
+        
+        iconForSendButton.sprite = IconService.Current.GetSpriteById(quest.WantedIcon);
     }
 
     private void OnEnable()
@@ -52,6 +81,18 @@ public class UiQuestButton : MonoBehaviour, IBoardEventListener
         var board = BoardService.Current.GetBoardById(0);
         
         board.BoardEvents.RemoveListener(this, GameEventsCodes.ChangePiecePosition);
+    }
+
+    public void SendItems()
+    {
+        if (quest == null) return;
+        
+        int canClaimFull = quest.GetPiecesAmountOnBoard();
+        int canClaim = Mathf.Clamp(canClaimFull, 0, quest.TargetAmount - quest.CurrentAmount);
+        
+        quest.SendToQuest(canClaim);
+        
+        Init(quest);
     }
 
     public void OnClick()

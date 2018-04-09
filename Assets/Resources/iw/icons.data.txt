@@ -704,7 +704,7 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "icon_Power",
+    "Uid": "Power",
     "SpriteName": "icon_Power",
     "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/ProcessedContent",
@@ -734,5 +734,13 @@
     "AssetPath": "Assets/Content/ProcessedContent",
     "SpriteSheetName": "uicommon",
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "icon_Power",
+    "SpriteName": "icon_Power",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
+    "SpriteSheetName": "icon_Power",
+    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
   }
 ]

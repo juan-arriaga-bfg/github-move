@@ -32,6 +32,15 @@ public class PiecePositionsCacheComponent : IECSComponent
 
 		return list.Count;
 	}
+	
+	public List<BoardPosition>  GetPiecePositionsByType(int pieceType)
+	{
+		List<BoardPosition> list;
+
+		if (cache.TryGetValue(pieceType, out list) == false) return new List<BoardPosition>();
+
+		return list;
+	}
 
 	public List<BoardPosition> GetRandomPositions(int pieceType, int count)
 	{

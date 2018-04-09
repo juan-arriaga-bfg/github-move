@@ -23,11 +23,13 @@ public class Hero
         
         LevelCurrencyDef = Currency.GetCurrencyDef(string.Format("Level{0}", def.Uid));
         CardCurrencyDef = Currency.GetCurrencyDef(string.Format("{0}Card", def.Uid));
-
+        
         foreach (var level in def.Levels)
         {
             level.Abilities.Sort((a, b) => -a.Value.CompareTo(b.Value));
         }
+        
+        
     }
     
     public HeroDef Def
@@ -145,11 +147,19 @@ public class Hero
 
     private void AddPower()
     {
+        var heroAbility = def.Levels[Level - 1].Abilities.Find(pair => pair.Ability == AbilityType.Power);
+
+        int powerOffset = 0;
+        if (heroAbility != null)
+        {
+            powerOffset = heroAbility.Value;
+        }
+        
         var shopItem = new ShopItem
         {
             Uid = string.Format("purchase.test.{0}.10", Currency.Power.Name), 
             ItemUid = Currency.Power.Name, 
-            Amount = GetAbilityValue(AbilityType.Power),
+            Amount = GetAbilityValue(AbilityType.Power) - powerOffset,
             CurrentPrices = new List<Price>{new Price{Currency = Currency.Cash.Name, DefaultPriceAmount = 0}}
         };
         

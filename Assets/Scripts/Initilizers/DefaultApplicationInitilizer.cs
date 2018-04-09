@@ -142,6 +142,21 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             ProfileService.Current.StorageItems.Clear();
             ProfileService.Instance.Manager.CheckMigration();
 
+            // set start power
+            foreach (var hero in dataManager.HeroesManager.Heroes)
+            {
+                if (hero.Def.Levels.Count > 0)
+                {
+                    var heroStartAbility = hero.Def.Levels[0].Abilities.Find(pair => pair.Ability == AbilityType.Power);
+
+                    if (heroStartAbility != null)
+                    {
+                        profile.GetStorageItem(Currency.Power.Name).Amount += heroStartAbility.Value;
+                    }
+                }
+            }
+            
+
 #if UNITY_EDITOR
             ProfileService.Instance.Manager.SaveLocalProfile();
 #endif

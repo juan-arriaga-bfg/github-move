@@ -42,8 +42,15 @@ public class SpawnPiecesAction : IBoardAction
 		if (IsShuffle)
 		{
 			free.Shuffle();
-			
-			free.RemoveRange(Mathf.Max(Pieces.Count - 2, 0), free.Count - Pieces.Count);
+			try
+			{
+				free.RemoveRange(Mathf.Max(Pieces.Count - 2, 0), free.Count - Pieces.Count);
+			}
+			catch (Exception e)
+			{
+				Debug.LogError(e);
+				throw;
+			}
 		}
 		
 		if (index != -1)

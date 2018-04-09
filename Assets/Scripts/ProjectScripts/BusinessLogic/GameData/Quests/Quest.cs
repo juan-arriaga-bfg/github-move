@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public enum QuestState
 {
@@ -13,6 +14,8 @@ public class Quest
     private QuestDef def;
 
     private QuestState state;
+
+    private int cachedCurrentAmount;
     
     public Quest(QuestDef def)
     {
@@ -59,11 +62,52 @@ public class Quest
     {
         get
         {
-            var board = BoardService.Current.GetBoardById(0);
-        
-            if(board == null) return 0;
+//            var board = BoardService.Current.GetBoardById(0);
+//        
+//            if(board == null) return 0;
+//
+//            return board.BoardLogic.PositionsCache.GetCountByType(WantedPiece);
 
-            return board.BoardLogic.PositionsCache.GetCountByType(WantedPiece);
+            return cachedCurrentAmount;
+        }
+    }
+
+    public int GetPiecesAmountOnBoard()
+    {
+        var board = BoardService.Current.GetBoardById(0);
+        
+        if(board == null) return 0;
+
+        return board.BoardLogic.PositionsCache.GetCountByType(WantedPiece);
+    }
+
+    public void SendToQuest(int amount)
+    {   
+        cachedCurrentAmount += amount;
+
+        cachedCurrentAmount = Mathf.Clamp(cachedCurrentAmount, 0, TargetAmount);
+        
+        var board = BoardService.Current.GetBoardById(0);
+        
+        if(board == null) return;
+
+        var piecePositions = board.BoardLogic.PositionsCache.GetPiecePositionsByType(WantedPiece);
+        
+        if (piecePositions.Count <= 0) return;
+        
+        piecePositions.Shuffle();
+
+        for (int i = 0; i < amount; i++)
+        {
+            if (i >= piecePositions.Count) continue;
+
+            var position = piecePositions[i];
+            
+            board.ActionExecutor.AddAction(new CollapsePieceToAction
+            {
+                To = position,
+                Positions = new List<BoardPosition>{position}
+            });
         }
     }
     
