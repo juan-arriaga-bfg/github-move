@@ -46,8 +46,9 @@ public class ReproductionPieceComponent : IECSComponent, IPieceBoardObserver
             return;
         }
         
-        contextPiece.Context.ActionExecutor.AddAction(new FillBoardAction()
+        contextPiece.Context.ActionExecutor.AddAction(new ReproductionPieceAction()
         {
+            From = contextPiece.CachedPosition,
             Piece = PieceType.Parse(Child.Currency),
             Positions = field
         });
