@@ -28,13 +28,13 @@ public class UIMainWindowView : IWUIWindowView
 
         settingsLabel.Text = windowModel.SettingsText;
 
-        for (var i = 0; i < slots.Count; i++)
+        /*for (var i = 0; i < slots.Count; i++)
         {
             var chestView = slots[i];
             chestView.OnChestStateChanged = OnChestStateChanged;
         }
 
-        UpdateSlots();
+        UpdateSlots();*/
         UpdateQuest();
     }
 

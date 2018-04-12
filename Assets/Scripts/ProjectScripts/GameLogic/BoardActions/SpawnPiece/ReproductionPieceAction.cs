@@ -15,37 +15,39 @@ public class ReproductionPieceAction : IBoardAction
 
 	public bool PerformAction(BoardController gameBoardController)
 	{
-		var pieces = new List<Piece>();
+		var pieces = new Dictionary<BoardPosition, Piece>();
 		
-		for (var i = Positions.Count - 1; i >= 0; i--)
+		foreach (var pos in Positions)
 		{
-			var pos = Positions[i];
 			var piece = gameBoardController.CreatePieceFromType(Piece);
-			
-			if (pos.IsValid
-			    && gameBoardController.BoardLogic.IsLockedCell(pos) == false
-			    && gameBoardController.BoardLogic.AddPieceToBoard(pos.X, pos.Y, piece))
+
+			if (pos.IsValid == false
+			    || gameBoardController.BoardLogic.IsLockedCell(pos)
+			    || gameBoardController.BoardLogic.AddPieceToBoard(pos.X, pos.Y, piece) == false)
 			{
-				pieces.Add(piece);
 				continue;
 			}
 			
-			Positions.Remove(pos);
+			pieces.Add(pos, piece);
+			gameBoardController.BoardLogic.LockCell(pos, this);
 		}
 		
 		gameBoardController.BoardLogic.LockCell(From, this);
-		gameBoardController.BoardLogic.LockCells(Positions, this);
 		
 		var animation = new ReproductionPieceAnimation
 		{
-			Action = this,
+			From = From,
 			Pieces = pieces
 		};
 
 		animation.OnCompleteEvent += (_) =>
 		{
 			gameBoardController.BoardLogic.UnlockCell(From, this);
-			gameBoardController.BoardLogic.UnlockCells(Positions, this);
+
+			foreach (var pair in pieces)
+			{
+				gameBoardController.BoardLogic.UnlockCell(pair.Key, this);
+			}
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

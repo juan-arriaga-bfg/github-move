@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public enum ChestType
@@ -25,7 +26,7 @@ public class Chest
     private ChestType chestType;
     private ChestState chestState;
     
-    private List<List<CurrencyPair>> Rewards;
+//    private List<List<CurrencyPair>> Rewards;
     
     public DateTime? StartTime { get; set; }
     private DateTime completeTime;
@@ -36,12 +37,12 @@ public class Chest
         
         chestType = (ChestType) Enum.Parse(typeof(ChestType), def.Uid);
 
-        Rewards = new List<List<CurrencyPair>>();
+        /*Rewards = new List<List<CurrencyPair>>();
 
         for (int i = 0; i < def.Rewards.Count; i++)
         {
             Rewards.Add(InitReward(i));
-        }
+        }*/
     }
     
     public ChestDef Def
@@ -92,9 +93,34 @@ public class Chest
         }
     }
 
+    public List<CurrencyPair> GetRewards(int level)
+    {
+        var max = def.RewardAmounts[level];
+        var uids = GameDataService.Current.PiecesManager.GetPiecesForLevel(level);
+        var result = new List<CurrencyPair>();
+        
+        while (max > 0)
+        {
+            var random = Mathf.Min(Random.Range(def.Min, def.Max + 1), max);
+            var currency = uids[Random.Range(0, uids.Count)];
+            var currencyPair = result.Find(cpair => cpair.Currency == currency);
+            
+            if (currencyPair == null)
+            {
+                currencyPair = new CurrencyPair {Currency = currency, Amount = 0};
+                result.Add(currencyPair);
+            }
+            
+            currencyPair.Amount += random;
+            max -= random;
+        }
+
+        return result;
+    }
+    
     public CurrencyPair GetReward(int level)
     {
-        if (Rewards.Count < level) return null;
+        /*if (Rewards.Count < level) return null;
 
         var rewards = Rewards[level];
         
@@ -109,7 +135,9 @@ public class Chest
         
         rewards.RemoveAt(index);
         
-        return reward;
+        return reward;*/
+        
+        return new CurrencyPair();
     }
     
     public string GetSkin()
@@ -127,7 +155,7 @@ public class Chest
         }
     }
 
-    private List<CurrencyPair> InitReward(int level)
+   /* private List<CurrencyPair> InitReward(int level)
     {
         var rewards = def.Rewards[level];
             
@@ -135,9 +163,9 @@ public class Chest
             
         rewards.CopyTo(arr);
         rewards = arr.ToList();
-
+        
         return rewards;
-    }
+    }*/
 
     public string GetTimeText()
     {

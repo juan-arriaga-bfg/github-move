@@ -14,6 +14,7 @@ public class PiecesDataManager : IDataLoader<List<PieceDef>>
     public BoardPosition SheepfoldPosition { get; set; }
     
     private Dictionary<int, PieceDef> pieces;
+    private Dictionary<int, List<string>> chestRewards;
     
     public void LoadData(IDataMapper<List<PieceDef>> dataMapper)
     {
@@ -22,12 +23,23 @@ public class PiecesDataManager : IDataLoader<List<PieceDef>>
             if (string.IsNullOrEmpty(error))
             {
                 pieces = new Dictionary<int, PieceDef>();
+                chestRewards = new Dictionary<int, List<string>>();
                 
                 foreach (var def in data)
                 {
                     if (pieces.ContainsKey(def.Piece)) continue;
                 
                     pieces.Add(def.Piece, def);
+                    
+                    List<string> uids;
+
+                    if (chestRewards.TryGetValue(def.ChestLevel, out uids) == false)
+                    {
+                        uids = new List<string>();
+                        chestRewards.Add(def.ChestLevel, uids);
+                    }
+                    
+                    uids.Add(def.Uid);
                 }
             }
             else
@@ -86,5 +98,19 @@ public class PiecesDataManager : IDataLoader<List<PieceDef>>
             SheepfoldPosition = position;
             return;
         }
+    }
+
+    public List<string> GetPiecesForLevel(int level)
+    {
+        List<string> uids;
+        return chestRewards.TryGetValue(level, out uids) == false ? new List<string>() : uids;
+    }
+    
+    public List<string> GetPiecesForCurrentLevel()
+    {
+        var level = ProfileService.Current.GetStorageItem(Currency.LevelCastle.Name).Amount + 1;
+        List<string> uids;
+
+        return chestRewards.TryGetValue(level, out uids) == false ? new List<string>() : uids;
     }
 }

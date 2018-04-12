@@ -3,627 +3,72 @@
     "Uid": "Common",
     "Time": "60",
     "MergePoints": 100,
+    "Min": 1,
+    "Max": 2,
     "Price": {
       "Currency": "Crystals",
       "Amount": 1
     },
-    "Rewards": [
-      [
-        {
-          "Currency": "PieceA3",
-          "Amount": 2
-        },
-        {
-          "Currency": "PieceC3",
-          "Amount": 2
-        },
-        {
-          "Currency": "PieceB1",
-          "Amount": 2
-        },
-        {
-          "Currency": "PieceD3",
-          "Amount": 2
-        },
-        {
-          "Currency": "PieceE2",
-          "Amount": 2
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA3",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceC3",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceB1",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceD3",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceE2",
-          "Amount": 4
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA3",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceC3",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceB1",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceD3",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceE2",
-          "Amount": 7
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA4",
-          "Amount": 2
-        },
-        {
-          "Currency": "PieceC4",
-          "Amount": 2
-        },
-        {
-          "Currency": "PieceB2",
-          "Amount": 2
-        },
-        {
-          "Currency": "PieceD4",
-          "Amount": 2
-        },
-        {
-          "Currency": "PieceE3",
-          "Amount": 2
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA4",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceC4",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceB2",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceD4",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceE3",
-          "Amount": 4
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA4",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceC4",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceB2",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceD4",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceE3",
-          "Amount": 7
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA5",
-          "Amount": 2
-        },
-        {
-          "Currency": "PieceC5",
-          "Amount": 2
-        },
-        {
-          "Currency": "PieceB3",
-          "Amount": 2
-        },
-        {
-          "Currency": "PieceD5",
-          "Amount": 2
-        },
-        {
-          "Currency": "PieceE4",
-          "Amount": 2
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA5",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceC5",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceB3",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceD5",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceE4",
-          "Amount": 4
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA5",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceC5",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceB3",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceD5",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceE4",
-          "Amount": 7
-        }
-      ]
+    "RewardAmounts" :
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
     ]
   },
   {
     "Uid": "Rare",
     "Time": "3600",
     "MergePoints": 300,
+    "Min": 1,
+    "Max": 3,
     "Price": {
       "Currency": "Crystals",
       "Amount": 30
     },
-    "Rewards": [
-      [
-        {
-          "Currency": "PieceA3",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceC3",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceB1",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceD3",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceC3",
-          "Amount": 4
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA3",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceC3",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceB1",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceD3",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceC3",
-          "Amount": 7
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA3",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceC3",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceB1",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceD3",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceC3",
-          "Amount": 11
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA4",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceC4",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceB2",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceD4",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceC4",
-          "Amount": 4
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA4",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceC4",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceB2",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceD4",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceC4",
-          "Amount": 7
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA4",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceC4",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceB2",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceD4",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceC4",
-          "Amount": 11
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA5",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceC5",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceB3",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceD5",
-          "Amount": 4
-        },
-        {
-          "Currency": "PieceC5",
-          "Amount": 4
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA5",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceC5",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceB3",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceD5",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceC5",
-          "Amount": 7
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA5",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceC5",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceB3",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceD5",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceC5",
-          "Amount": 11
-        }
-      ]
+    "RewardAmounts" :
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
     ]
   },
   {
     "Uid": "Epic",
     "Time": "14400",
     "MergePoints": 1000,
+    "Min": 2,
+    "Max": 4,
     "Price": {
       "Currency": "Crystals",
       "Amount": 60
     },
-    "Rewards": [
-      [
-        {
-          "Currency": "PieceA3",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceC3",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceB1",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceD3",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceC3",
-          "Amount": 7
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA3",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceC3",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceB1",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceD3",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceC3",
-          "Amount": 11
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA3",
-          "Amount": 14
-        },
-        {
-          "Currency": "PieceC3",
-          "Amount": 14
-        },
-        {
-          "Currency": "PieceB1",
-          "Amount": 14
-        },
-        {
-          "Currency": "PieceD3",
-          "Amount": 14
-        },
-        {
-          "Currency": "PieceC3",
-          "Amount": 14
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA4",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceC4",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceB2",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceD4",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceC4",
-          "Amount": 7
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA4",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceC4",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceB2",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceD4",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceC4",
-          "Amount": 11
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA4",
-          "Amount": 14
-        },
-        {
-          "Currency": "PieceC4",
-          "Amount": 14
-        },
-        {
-          "Currency": "PieceB2",
-          "Amount": 14
-        },
-        {
-          "Currency": "PieceD4",
-          "Amount": 14
-        },
-        {
-          "Currency": "PieceC4",
-          "Amount": 14
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA5",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceC5",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceB3",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceD5",
-          "Amount": 7
-        },
-        {
-          "Currency": "PieceC5",
-          "Amount": 7
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA5",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceC5",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceB3",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceD5",
-          "Amount": 11
-        },
-        {
-          "Currency": "PieceC5",
-          "Amount": 11
-        }
-      ],
-      [
-        {
-          "Currency": "PieceA5",
-          "Amount": 14
-        },
-        {
-          "Currency": "PieceC5",
-          "Amount": 14
-        },
-        {
-          "Currency": "PieceB3",
-          "Amount": 14
-        },
-        {
-          "Currency": "PieceD5",
-          "Amount": 14
-        },
-        {
-          "Currency": "PieceC5",
-          "Amount": 14
-        }
-      ]
+    "RewardAmounts" :
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
     ]
   }
 ]

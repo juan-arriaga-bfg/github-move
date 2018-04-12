@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ReproductionPieceAnimation : BoardAnimation 
 {
-    public ReproductionPieceAction Action;
-    public List<Piece> Pieces;
+    public BoardPosition From;
+    public Dictionary<BoardPosition, Piece> Pieces;
     
     public override void Animate(BoardRenderer context)
     {
-        var boardElement = context.GetElementAt(Action.From);
-        var startPosition = context.Context.BoardDef.GetPiecePosition(Action.From.X, Action.From.Y);
+        var boardElement = context.GetElementAt(From);
+        var startPosition = context.Context.BoardDef.GetPiecePosition(From.X, From.Y);
         
         var sequence = DOTween.Sequence().SetId(animationUid);
         
@@ -18,12 +18,14 @@ public class ReproductionPieceAnimation : BoardAnimation
         sequence.Append(boardElement.CachedTransform.DOScale(new Vector3(0.7f, 1.2f, 1f), 0.1f));
         sequence.Append(boardElement.CachedTransform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack));
 
-        for (var i = 0; i < Action.Positions.Count; i++)
+        var index = 0;
+        
+        foreach (var pair in Pieces)
         {
-            var position = Action.Positions[i];
+            var position = pair.Key;
             var to = context.Context.BoardDef.GetPiecePosition(position.X, position.Y);
-            var element = context.CreatePieceAt(Pieces[i], position);
-            var delay = 0.1f + i * 0.02f;
+            var element = context.CreatePieceAt(pair.Value, position);
+            var delay = 0.1f + index * 0.02f;
             
             element.CachedTransform.localScale = Vector3.zero;
             element.CachedTransform.localPosition = startPosition;
@@ -33,8 +35,10 @@ public class ReproductionPieceAnimation : BoardAnimation
             sequence.Insert(delay + 0.2f, element.CachedTransform.DOScale(Vector3.one, 0.2f));
             
             sequence.Insert(delay + 0.4f, element.CachedTransform.DOScale(new Vector3(1f, 0.8f, 1f), 0.1f));
-            sequence.Insert(delay + 0.4f, element.CachedTransform.DOScale(new Vector3(0.9f, 1.1f, 1f), 0.1f));
-            sequence.Insert(delay + 0.4f, element.CachedTransform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack));
+            sequence.Insert(delay + 0.5f, element.CachedTransform.DOScale(new Vector3(0.9f, 1.1f, 1f), 0.1f));
+            sequence.Insert(delay + 0.6f, element.CachedTransform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack));
+            
+            index++;
         }
 
         sequence.OnComplete(() =>
