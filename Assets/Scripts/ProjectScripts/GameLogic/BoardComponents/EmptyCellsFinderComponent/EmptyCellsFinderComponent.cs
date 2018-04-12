@@ -41,6 +41,12 @@ public class EmptyCellsFinderComponent: IECSComponent
 
 		return field.Count != 0;
 	}
+
+	public bool CheckWithPointInCenter(BoardPosition point, int radius = 3)
+	{
+		var field = new List<BoardPosition>();
+		return FindNearWithPointInCenter(point, field, 1, radius);
+	}
 	
 	public bool FindNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, int radius = 3)
 	{

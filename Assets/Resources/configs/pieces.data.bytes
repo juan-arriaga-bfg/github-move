@@ -1,7 +1,7 @@
 [
   {
     "Uid": "A2",
-    "CreateRewards": 
+    "CreateRewards":
     [
       {
         "Currency": "Coins",
@@ -295,6 +295,11 @@
   },
   {
     "Uid": "D3",
+    "Reproduction" :
+    {
+      "Currency": "D1",
+      "Amount": 1
+    },
     "CreateRewards":
     [
       {
@@ -379,6 +384,11 @@
   },
   {
     "Uid": "E5",
+    "Reproduction" :
+    {
+      "Currency": "E2",
+      "Amount": 1
+    },
     "CreateRewards":
     [
       {
@@ -683,7 +693,7 @@
     "Uid": "Castle2",
     "Delay": 120,
     "SpawnPiece": "ChestCommon",
-	"IsFilledInStart":"true",
+    "IsFilledInStart":"true",
     "SpawnAmount": 1,
     "SpawnCapacity": 2,
     "UpgradePrice": {

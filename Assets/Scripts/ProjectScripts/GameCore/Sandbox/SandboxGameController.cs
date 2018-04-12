@@ -43,6 +43,7 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.RegisterComponent(new BoardRandomComponent()); // random
         boardController.RegisterComponent(new ObstaclesLogicComponent());
+        boardController.RegisterComponent(new ReproductionLogicComponent());
         boardController.RegisterComponent(new BoardRenderer().Init(gameBoardResourcesDef,
             gameBoardRendererView.transform)); // renderer context
         boardController.RegisterComponent(new BoardManipulatorComponent()
@@ -104,6 +105,24 @@ public class SandboxGameController : MonoBehaviour
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
         
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(10, 13),
+            PieceTypeId = PieceType.E5.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(12, 17),
+            PieceTypeId = PieceType.E5.Id
+        });
+        
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(18, 14),
+            PieceTypeId = PieceType.D3.Id
+        });
+        
+        /*boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(10, 13),
             PieceTypeId = PieceType.Sawmill1.Id
@@ -251,7 +270,7 @@ public class SandboxGameController : MonoBehaviour
         {
             At = new BoardPosition(14, 11),
             PieceTypeId = PieceType.O2.Id
-        });
+        });*/
         
         /*AddPieces(new BoardPosition(10, 10), PieceType.A1.Id, PieceType.A9.Id, boardController);
         AddPieces(new BoardPosition(12, 10), PieceType.C1.Id, PieceType.C9.Id, boardController);

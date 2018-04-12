@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class PiecesDataManager : IDataLoader<List<PieceDef>>
 {
+    public const int ReproductionDelay = 5;
+    public const int ReproductionStepDelay = 2;
+    public const int ReproductionChance = 25;
+    
     public BoardPosition CastlePosition { get; set; }
     public BoardPosition TavernPosition { get; set; }
     public BoardPosition SawmillPosition { get; set; }
@@ -36,7 +40,7 @@ public class PiecesDataManager : IDataLoader<List<PieceDef>>
     public PieceDef GetPieceDef(int id)
     {
         PieceDef def;
-
+        
         return pieces.TryGetValue(id, out def) ? def : null;
     }
 

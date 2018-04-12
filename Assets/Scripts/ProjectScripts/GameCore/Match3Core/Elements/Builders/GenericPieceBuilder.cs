@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class GenericPieceBuilder : IPieceBuilder
 {
@@ -24,7 +25,7 @@ public class GenericPieceBuilder : IPieceBuilder
 
         return view;
     }
-
+    
     protected void AddObserver(Piece piece, IPieceBoardObserver observer)
     {
         var observers = piece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);

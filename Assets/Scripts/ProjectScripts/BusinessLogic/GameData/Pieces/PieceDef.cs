@@ -12,6 +12,7 @@ public class PieceDef
     public int SpawnCapacity { get; set; }
     public bool IsFilledInStart { get; set; }
     
+    public CurrencyPair Reproduction { get; set; }
     public CurrencyPair SpawnResources { get; set; }
     public List<CurrencyPair> CreateRewards { get; set; }
     public CurrencyPair UpgradePrice { get; set; }

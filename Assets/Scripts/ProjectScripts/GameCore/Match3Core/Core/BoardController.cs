@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BoardController : ECSEntity,
     IActionExecuteComponent, IBoardEventsComponent, IBoardLoggerComponent, IBoardLogicComponent, IBoardDefinitionComponent, IBoardStatesComponent, ISessionBoardStateComponent,
-    IBoardSystemProcessor, IBoardRendererComponent, IBoardManipulatorComponent, IBoardRandomComponent, IObstaclesLogicComponent
+    IBoardSystemProcessor, IBoardRendererComponent, IBoardManipulatorComponent, IBoardRandomComponent, IObstaclesLogicComponent, IReproductionLogicComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -146,7 +146,20 @@ public class BoardController : ECSEntity,
             return obstaclesLogic;
         }
     }
-
+    
+    protected ReproductionLogicComponent reproductionLogic;
+    public ReproductionLogicComponent ReproductionLogic
+    {
+        get
+        {
+            if (reproductionLogic == null)
+            {
+                reproductionLogic = GetComponent<ReproductionLogicComponent>(ReproductionLogicComponent.ComponentGuid);
+            }
+            return reproductionLogic;
+        }
+    }
+    
     private Dictionary<int, IPieceBuilder> pieceBuilderDef;
 
     public virtual void Init(Dictionary<int, IPieceBuilder> pieceBuilderDef)
