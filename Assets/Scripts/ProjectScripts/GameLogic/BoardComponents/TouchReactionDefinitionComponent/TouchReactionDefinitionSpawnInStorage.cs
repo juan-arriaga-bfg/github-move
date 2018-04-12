@@ -15,19 +15,26 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
             return false;
         }
         
-        var pieces = new List<int>();
+        var free = new List<BoardPosition>();
+        var positions = new List<BoardPosition>();
 
-        for (int i = 0; i < amount; i++)
+        if (piece.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(position, free, amount * 5, 7) == false)
         {
-            pieces.Add(storage.SpawnPiece);
+            return false;
         }
         
-        piece.Context.ActionExecutor.AddAction(new SpawnPiecesAction()
+        foreach (var pos in free)
         {
-            IsCheckMatch = false,
-            IsShuffle = true,
-            At = position,
-            Pieces = pieces
+            positions.Add(pos);
+            
+            if(positions.Count == amount) break;
+        }
+        
+        piece.Context.ActionExecutor.AddAction(new ReproductionPieceAction
+        {
+            From = position,
+            Piece = storage.SpawnPiece,
+            Positions = positions
         });
         
         return true;
