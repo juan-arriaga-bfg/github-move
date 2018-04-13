@@ -5,7 +5,7 @@
   },
   {
     "Uid": "A2",
-    "ChestLevel" : 2,
+    "ChestLevel" : 1,
     "CreateRewards":
     [
       {
@@ -20,7 +20,7 @@
   },
   {
     "Uid": "A3",
-    "ChestLevel" : 3,
+    "ChestLevel" : 2,
     "CreateRewards":
     [
       {
@@ -35,7 +35,7 @@
   },
   {
     "Uid": "A4",
-    "ChestLevel" : 4,
+    "ChestLevel" : 3,
     "CreateRewards":
     [
       {
@@ -50,7 +50,7 @@
   },
   {
     "Uid": "A5",
-    "ChestLevel" : 5,
+    "ChestLevel" : 4,
     "CreateRewards":
     [
       {
@@ -65,7 +65,7 @@
   },
   {
     "Uid": "A6",
-    "ChestLevel" : 6,
+    "ChestLevel" : 5,
     "CreateRewards":
     [
       {
@@ -80,7 +80,7 @@
   },
   {
     "Uid": "A7",
-    "ChestLevel" : 7,
+    "ChestLevel" : 6,
     "CreateRewards":
     [
       {
@@ -95,7 +95,7 @@
   },
   {
     "Uid": "A8",
-    "ChestLevel" : 8,
+    "ChestLevel" : 7,
     "CreateRewards":
     [
       {
@@ -110,7 +110,7 @@
   },
   {
     "Uid": "A9",
-    "ChestLevel" : 9,
+    "ChestLevel" : 8,
     "CreateRewards":
     [
       {
@@ -129,7 +129,7 @@
   },
   {
     "Uid": "B2",
-    "ChestLevel" : 2,
+    "ChestLevel" : 1,
     "CreateRewards":
     [
       {
@@ -159,7 +159,7 @@
   },
   {
     "Uid": "B4",
-    "ChestLevel" : 4,
+    "ChestLevel" : 5,
     "CreateRewards":
     [
       {
@@ -174,7 +174,7 @@
   },
   {
     "Uid": "B5",
-    "ChestLevel" : 5,
+    "ChestLevel" : 7,
     "CreateRewards":
     [
       {
@@ -193,7 +193,7 @@
   },
   {
     "Uid": "C2",
-    "ChestLevel" : 2,
+    "ChestLevel" : 1,
     "CreateRewards":
     [
       {
@@ -317,7 +317,7 @@
   },
   {
     "Uid": "D2",
-    "ChestLevel" : 2,
+    "ChestLevel" : 1,
     "CreateRewards":
     [
       {
@@ -332,7 +332,7 @@
   },
   {
     "Uid": "D3",
-    "ChestLevel" : 3,
+    "ChestLevel" : 2,
     "Reproduction" :
     {
       "Currency": "D1",
@@ -352,7 +352,7 @@
   },
   {
     "Uid": "D4",
-    "ChestLevel" : 4,
+    "ChestLevel" : 3,
     "CreateRewards":
     [
       {
@@ -386,7 +386,7 @@
   },
   {
     "Uid": "E2",
-    "ChestLevel" : 2,
+    "ChestLevel" : 1,
     "CreateRewards":
     [
       {
@@ -401,7 +401,7 @@
   },
   {
     "Uid": "E3",
-    "ChestLevel" : 3,
+    "ChestLevel" : 2,
     "CreateRewards":
     [
       {
@@ -431,11 +431,11 @@
   },
   {
     "Uid": "E5",
-    "ChestLevel" : 5,
+    "ChestLevel" : 6,
     "Reproduction" :
     {
       "Currency": "E2",
-      "Amount": 2
+      "Amount": 1
     },
     "CreateRewards":
     [
@@ -556,12 +556,12 @@
   },
   {
     "Uid": "Sawmill1",
-    "Delay": 10,
+    "Delay": 60,
     "SpawnPiece": "A1",
     "UpgradeTargetPiece": "Castle",
     "IsFilledInStart":"true",
     "SpawnAmount": 1,
-    "SpawnCapacity": 8,
+    "SpawnCapacity": 4,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 100
@@ -569,11 +569,11 @@
   },
   {
     "Uid": "Sawmill2",
-    "Delay": 10,
+    "Delay": 60,
     "SpawnPiece": "A1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
-    "SpawnCapacity": 8,
+    "SpawnCapacity": 4,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 250
@@ -581,11 +581,11 @@
   },
   {
     "Uid": "Sawmill3",
-    "Delay": 10,
+    "Delay": 60,
     "SpawnPiece": "A1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
-    "SpawnCapacity": 8,
+    "SpawnCapacity": 4,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 500
@@ -593,11 +593,11 @@
   },
   {
     "Uid": "Sawmill4",
-    "Delay": 10,
+    "Delay": 60,
     "SpawnPiece": "A1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
-    "SpawnCapacity": 8,
+    "SpawnCapacity": 4,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 1000
@@ -605,11 +605,11 @@
   },
   {
     "Uid": "Sawmill5",
-    "Delay": 10,
+    "Delay": 60,
     "SpawnPiece": "A1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
-    "SpawnCapacity": 8,
+    "SpawnCapacity": 4,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 2500
@@ -617,11 +617,11 @@
   },
   {
     "Uid": "Sawmill6",
-    "Delay": 10,
+    "Delay": 60,
     "SpawnPiece": "A1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
-    "SpawnCapacity": 8,
+    "SpawnCapacity": 4,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 5000
@@ -629,11 +629,11 @@
   },
   {
     "Uid": "Sawmill7",
-    "Delay": 10,
+    "Delay": 60,
     "SpawnPiece": "A1",
     "UpgradeTargetPiece": "Castle",
     "SpawnAmount": 1,
-    "SpawnCapacity": 8,
+    "SpawnCapacity": 4,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 7500
@@ -727,11 +727,11 @@
   },
   {
     "Uid": "Castle1",
-    "Delay": 120,
-    "SpawnPiece": "ChestCommon",
+    "Delay": 1200,
+    "SpawnPiece": "ChestEpic",
     "IsFilledInStart":"true",
     "SpawnAmount": 1,
-    "SpawnCapacity": 2,
+    "SpawnCapacity": 1,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 100
@@ -739,11 +739,11 @@
   },
   {
     "Uid": "Castle2",
-    "Delay": 120,
-    "SpawnPiece": "ChestCommon",
+    "Delay": 1200,
+    "SpawnPiece": "ChestEpic",
     "IsFilledInStart":"true",
     "SpawnAmount": 1,
-    "SpawnCapacity": 2,
+    "SpawnCapacity": 1,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 400
@@ -751,10 +751,10 @@
   },
   {
     "Uid": "Castle3",
-    "Delay": 120,
-    "SpawnPiece": "ChestCommon",
+    "Delay": 1200,
+    "SpawnPiece": "ChestEpic",
     "SpawnAmount": 1,
-    "SpawnCapacity": 2,
+    "SpawnCapacity": 1,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 1000
@@ -762,10 +762,10 @@
   },
   {
     "Uid": "Castle4",
-    "Delay": 120,
-    "SpawnPiece": "ChestCommon",
+    "Delay": 1200,
+    "SpawnPiece": "ChestEpic",
     "SpawnAmount": 1,
-    "SpawnCapacity": 2,
+    "SpawnCapacity": 1,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 2500
@@ -773,10 +773,10 @@
   },
   {
     "Uid": "Castle5",
-    "Delay": 120,
-    "SpawnPiece": "ChestCommon",
+    "Delay": 1200,
+    "SpawnPiece": "ChestEpic",
     "SpawnAmount": 1,
-    "SpawnCapacity": 2,
+    "SpawnCapacity": 1,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 5000
@@ -784,10 +784,10 @@
   },
   {
     "Uid": "Castle6",
-    "Delay": 120,
-    "SpawnPiece": "ChestCommon",
+    "Delay": 1200,
+    "SpawnPiece": "ChestEpic",
     "SpawnAmount": 1,
-    "SpawnCapacity": 2,
+    "SpawnCapacity": 1,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 10000
@@ -795,10 +795,10 @@
   },
   {
     "Uid": "Castle7",
-    "Delay": 120,
-    "SpawnPiece": "ChestCommon",
+    "Delay": 1200,
+    "SpawnPiece": "ChestEpic",
     "SpawnAmount": 1,
-    "SpawnCapacity": 2,
+    "SpawnCapacity": 1,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 20000
@@ -806,10 +806,10 @@
   },
   {
     "Uid": "Castle8",
-    "Delay": 120,
-    "SpawnPiece": "ChestCommon",
+    "Delay": 1200,
+    "SpawnPiece": "ChestEpic",
     "SpawnAmount": 1,
-    "SpawnCapacity": 2,
+    "SpawnCapacity": 1,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 35000
@@ -817,10 +817,10 @@
   },
   {
     "Uid": "Castle9",
-    "Delay": 120,
-    "SpawnPiece": "ChestCommon",
+    "Delay": 1200,
+    "SpawnPiece": "ChestEpic",
     "SpawnAmount": 1,
-    "SpawnCapacity": 2,
+    "SpawnCapacity": 1,
     "UpgradePrice": {
       "Currency": "Coins",
       "Amount": 50000
