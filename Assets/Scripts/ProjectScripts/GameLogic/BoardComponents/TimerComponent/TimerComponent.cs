@@ -7,8 +7,10 @@ public class TimerComponent : IECSComponent, IECSSystem
     public int Guid { get { return ComponentGuid; } }
     
     public int Delay;
-    public Action OnComplete;
+    
     public Action OnStart;
+    public Action OnExecute;
+    public Action OnComplete;
     
     private DateTime startTime;
     private DateTime completeTime;
@@ -45,6 +47,8 @@ public class TimerComponent : IECSComponent, IECSSystem
 
     public void Execute()
     {
+        if (OnExecute != null) OnExecute();
+        
         var time = GetTime();
         
         if(time.TotalSeconds < Delay) return;

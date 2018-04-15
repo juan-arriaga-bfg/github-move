@@ -21,7 +21,7 @@ public class StorageComponent : IECSComponent, ITimerComponent
         if(Timer == null) return;
 
         Timer.OnComplete += Update;
-        if(Filling < Capacity) Timer.Start();
+        Timer.Start();
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)
