@@ -120,12 +120,6 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(20, 0),
-            PieceTypeId = PieceType.Tavern1.Id
-        });
-        
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-        {
             At = new BoardPosition(21, 6),
             PieceTypeId = PieceType.O1.Id
         });

@@ -17,7 +17,7 @@ public class PieceBuildersBuilder
         dict = AddSheepfoldPiece(dict);
         
         dict = AddCastlePiece(dict);
-        dict = AddTavernPiece(dict);
+//        dict = AddTavernPiece(dict);
         dict = AddChestPiece(dict);
 
         return dict;
