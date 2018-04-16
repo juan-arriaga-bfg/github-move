@@ -21,6 +21,8 @@ public class PieceDef
     
     private CurrencyDef levelCurrencyDef;
     private CurrencyDef upgradeTargetCurrencyDef;
+
+    private int upgradeTargetLevel;
     
     public int Piece
     {
@@ -42,8 +44,14 @@ public class PieceDef
         get
         {
             if (string.IsNullOrEmpty(UpgradeTargetPiece)) return null;
+
+            if (upgradeTargetCurrencyDef != null) return upgradeTargetCurrencyDef;
             
-            return upgradeTargetCurrencyDef ?? (upgradeTargetCurrencyDef = Currency.GetCurrencyDef(string.Format("Level{0}", UpgradeTargetPiece)));
+            upgradeTargetCurrencyDef = Currency.GetCurrencyDef(string.Format("Level{0}", UpgradeTargetPiece.Substring(0, UpgradeTargetPiece.Length - 1)));
+            
+            upgradeTargetLevel = int.Parse(UpgradeTargetPiece.Substring(Uid.Length - 2, 1));
+            
+            return upgradeTargetCurrencyDef;
         }
     }
 
@@ -56,9 +64,9 @@ public class PieceDef
     {
         if (UpgradeTargetCurrency == null) return false;
         
-        var targetLevel = ProfileService.Current.GetStorageItem(UpgradeTargetCurrency.Name).Amount;
+        var targetLevel = ProfileService.Current.GetStorageItem(UpgradeTargetCurrency.Name).Amount + 1;
         
-        return CurrentLevel() > targetLevel;
+        return upgradeTargetLevel > targetLevel;
     }
 
     public static PieceDef Default()

@@ -8,6 +8,12 @@ public class TouchReactionDefinitionUpgrade : TouchReactionDefinitionComponent
 
 		if (def == null) return false;
 
+		if (piece.Context.BoardLogic.MatchDefinition.GetNext(piece.PieceType) == PieceType.None.Id)
+		{
+			UIMessageWindowController.CreateDefaultMessage("Building can not be improved!");
+			return true;
+		}
+
 		if (def.IsMaxLevel())
 		{
 			MaxLevelMessage(def);
@@ -20,11 +26,12 @@ public class TouchReactionDefinitionUpgrade : TouchReactionDefinitionComponent
 
 	private void MaxLevelMessage(PieceDef def)
 	{
+		var pieceName = def.UpgradeTargetCurrency.Name.Replace("Level", "");
 		var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
 		model.Title = "Message";
-		model.Message = string.Format("You need to improve the level of the {0}", def.UpgradeTargetPiece);
-		model.AcceptLabel = string.Format("Go to {0}", def.UpgradeTargetPiece);;
+		model.Message = string.Format("You need to improve the level of the {0}", pieceName);
+		model.AcceptLabel = string.Format("Go to {0}", pieceName);
         
 		model.OnAccept = () => { HintArrowView.Show(GameDataService.Current.PiecesManager.CastlePosition); };
 		model.OnCancel = null;
@@ -37,7 +44,7 @@ public class TouchReactionDefinitionUpgrade : TouchReactionDefinitionComponent
 		var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
 
 		model.Title = "Upgrade";
-		model.Message = string.Format("Upgrade to {0} level, for {1} coins?", def.Uid[def.Uid.Length - 1], def.UpgradePrice.Amount);
+		model.Message = string.Format("Upgrade to {0} level, for {1} coins?", def.CurrentLevel() + 1, def.UpgradePrice.Amount);
 
 		model.AcceptLabel = "Upgrade";
 		model.CancelLabel = "Cancel";

@@ -47,6 +47,15 @@ public class MatchDefinitionComponent : ECSEntity
         return chain.Count == 0 ? PieceType.None.Id : chain[0];
     }
 
+    public int GetIndexInChain(int pieceId)
+    {
+        var chain = GetChain(pieceId);
+        
+        if(chain.Count == 0) return -1;
+        
+        return chain.IndexOf(pieceId);
+    }
+
     public List<int> GetChain(int pieceId)
     {
         var chain = new List<int>();
