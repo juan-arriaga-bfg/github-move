@@ -156,6 +156,9 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
                 }
             }
             
+            // set start money
+            profile.GetStorageItem(Currency.Coins.Name).Amount += 500;
+            profile.GetStorageItem(Currency.Crystals.Name).Amount += 50;
 
 #if UNITY_EDITOR
             ProfileService.Instance.Manager.SaveLocalProfile();

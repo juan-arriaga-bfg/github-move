@@ -174,7 +174,6 @@ public class SandboxGameController : MonoBehaviour
         
         //register board
         BoardService.Current.RegisterBoard(boardController, 0);
-        AddStartResources();
     }
 
     private void AddPieces(BoardPosition position, int first, int last, BoardController board)
@@ -190,52 +189,4 @@ public class SandboxGameController : MonoBehaviour
             position = position.Up;
         }
     }
-
-    private void AddStartResources()
-    {
-        var shopItem = new ShopItem
-        {
-            Uid = string.Format("purchase.test.{0}.10", "strtCoins"), 
-            ItemUid = Currency.Coins.Name, 
-            Amount = 500,
-            CurrentPrices = new List<Price>{new Price{Currency = Currency.Cash.Name, DefaultPriceAmount = 0}}
-        };
-        
-        ShopService.Current.PurchaseItem
-        (
-            shopItem,
-            (item, s) =>
-            {
-                // on purchase success
-                
-            },
-            item =>
-            {
-                // on purchase failed (not enough cash)
-            }
-        );
-        
-        var shopItem2 = new ShopItem
-        {
-            Uid = string.Format("purchase.test.{0}.10", "Crystals"), 
-            ItemUid = Currency.Crystals.Name, 
-            Amount = 50,
-            CurrentPrices = new List<Price>{new Price{Currency = Currency.Cash.Name, DefaultPriceAmount = 0}}
-        };
-        
-        ShopService.Current.PurchaseItem
-        (
-            shopItem2,
-            (item, s) =>
-            {
-                // on purchase success
-                
-            },
-            item =>
-            {
-                // on purchase failed (not enough cash)
-            }
-        );
-    }
-
 }
