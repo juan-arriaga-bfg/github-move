@@ -7,8 +7,10 @@
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionSimpleObstacle())
 			.RegisterComponent(new TouchReactionConditionComponent()));
+
+		var isMultiple = context.BoardLogic.MatchDefinition.GetPrevious(pieceType) != PieceType.None.Id;
 		
-		AddView(piece, ViewType.SimpleObstacle);
+		AddView(piece, isMultiple ? ViewType.SimpleMultipleObstacle : ViewType.SimpleObstacle);
 		
 		return piece;
 	}

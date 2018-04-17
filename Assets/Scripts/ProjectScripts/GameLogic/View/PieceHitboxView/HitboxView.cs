@@ -42,10 +42,8 @@ public class HitboxView : IWBaseMonoBehaviour
 		if (prevHealth != -1)
 		{
 			int damageAmount = Mathf.Abs(prevHealth - livePieceComponent.HitPoints);
-
-			var hitboxDamageView = context.Context.CreateBoardElementAt<HitboxDamageView>(R.HitboxDamageView, new BoardPosition(100,100,3));
-			hitboxDamageView.CachedTransform.position = CachedTransform.position;
-			hitboxDamageView.ApplyDamage(damageAmount, CachedTransform.position + Vector3.up);
+			
+			HitboxDamageView.Show(context.Piece.CachedPosition, damageAmount);
 		}
 
 		prevHealth = livePieceComponent.HitPoints;

@@ -10,5 +10,6 @@
     Menu = -1007,
     MenuButton = -1008,
     SimpleObstacle = -1009,
-    FogState = -1010,
+    SimpleMultipleObstacle = -1010,
+    FogState = -1011,
 }

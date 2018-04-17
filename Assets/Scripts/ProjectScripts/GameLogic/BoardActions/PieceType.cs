@@ -47,6 +47,15 @@ public static partial class PieceType
         RegisterType(O2);
         RegisterType(O3);
         RegisterType(O4);
+        RegisterType(O5);
+        
+        RegisterType(OX1);
+        RegisterType(OX2);
+        RegisterType(OX3);
+        RegisterType(OX4);
+        RegisterType(OX5);
+        
+        RegisterType(Quest);
         RegisterType(Fog);
         
         RegisterType(Mine1);
@@ -147,8 +156,17 @@ public static partial class PieceType
     public static readonly PieceTypeDef O2 = new PieceTypeDef{Id = 601, Abbreviations = new List<string>{ "O2" }};
     public static readonly PieceTypeDef O3 = new PieceTypeDef{Id = 602, Abbreviations = new List<string>{ "O3" }};
     public static readonly PieceTypeDef O4 = new PieceTypeDef{Id = 603, Abbreviations = new List<string>{ "O4" }};
+    public static readonly PieceTypeDef O5 = new PieceTypeDef{Id = 604, Abbreviations = new List<string>{ "O5" }};
     
-    public static readonly PieceTypeDef Fog = new PieceTypeDef{Id = 604, Abbreviations = new List<string>{ "Fog" }};
+    public static readonly PieceTypeDef OX1 = new PieceTypeDef{Id = 700, Abbreviations = new List<string>{ "OX1" }};
+    public static readonly PieceTypeDef OX2 = new PieceTypeDef{Id = 701, Abbreviations = new List<string>{ "OX2" }};
+    public static readonly PieceTypeDef OX3 = new PieceTypeDef{Id = 702, Abbreviations = new List<string>{ "OX3" }};
+    public static readonly PieceTypeDef OX4 = new PieceTypeDef{Id = 703, Abbreviations = new List<string>{ "OX4" }};
+    public static readonly PieceTypeDef OX5 = new PieceTypeDef{Id = 704, Abbreviations = new List<string>{ "OX5" }};
+    
+    public static readonly PieceTypeDef Quest = new PieceTypeDef{Id = 801, Abbreviations = new List<string>{ "Quest" }};
+    
+    public static readonly PieceTypeDef Fog = new PieceTypeDef{Id = 901, Abbreviations = new List<string>{ "Fog" }};
     
     public static readonly PieceTypeDef Mine1 = new PieceTypeDef{Id = 10000, Abbreviations = new List<string>{ "Mine1" }};
     public static readonly PieceTypeDef Mine2 = new PieceTypeDef{Id = 10001, Abbreviations = new List<string>{ "Mine2" }};

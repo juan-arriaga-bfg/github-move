@@ -1,15 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComponent
 {
     public bool isOpen;
     private bool isClear;
     
+    private int max;
+    private int current = -1;
+    
+    public float GetProgress
+    {
+        get { return 1 - current/(float)max; }
+    }
+    
+    public string GetProgressText
+    {
+        get { return string.Format("{0}/{1}", current, max); }
+    }
+    
     public Action OnClick { get; set; }
     
     public override bool Make(BoardPosition position, Piece piece)
     {
+        if (current == -1) Init(piece);
+        
         if (isClear) return false;
         
         if (isOpen)
@@ -46,6 +62,11 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
             {
                 // on purchase success
                 
+                current++;
+                HitboxDamageView.Show(position, 1);
+                
+                if (current != max) return;
+                
                 isClear = true;
 
                 var chest = GameDataService.Current.ObstaclesManager.GetChestBySmpleObstacle(piece.PieceType);
@@ -71,5 +92,11 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
                 UIMessageWindowController.CreateDefaultMessage("Not enough coins!");
             }
         );
+    }
+
+    private void Init(Piece piece)
+    {
+        max = piece.Context.BoardLogic.MatchDefinition.GetIndexInChain(piece.PieceType) + 1;
+        current = 0;
     }
 }

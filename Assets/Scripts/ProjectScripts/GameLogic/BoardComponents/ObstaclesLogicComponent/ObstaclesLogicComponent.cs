@@ -45,7 +45,7 @@ public class ObstaclesLogicComponent : IECSComponent, IECSSystem
         
         /*context.ActionExecutor.PerformAction(new FillBoardAction
         {
-            Piece = PieceType.O4.Id,
+            Piece = PieceType.Quest.Id,
             Positions = positions
         });*/
     }

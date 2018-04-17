@@ -43,10 +43,6 @@ public class R
      public const string Chest1Piece = "Chest1Piece";
      public const string Chest2Piece = "Chest2Piece";
      public const string Chest3Piece = "Chest3Piece";
-     public const string O1Piece = "O1Piece";
-     public const string O2Piece = "O2Piece";
-     public const string O3Piece = "O3Piece";
-     public const string O4Piece = "O4Piece";
      public const string Enemy1Piece = "Enemy1Piece";
      public const string Enemy2Piece = "Enemy2Piece";
      public const string Enemy3Piece = "Enemy3Piece";
@@ -103,4 +99,16 @@ public class R
      public const string E6Piece = "E6Piece";
      public const string ChangeFogStateView = "ChangeFogStateView";
      public const string UIHintArrow = "UIHintArrow";
+     public const string QuestPiece = "QuestPiece";
+     public const string O1Piece = "O1Piece";
+     public const string O2Piece = "O2Piece";
+     public const string O3Piece = "O3Piece";
+     public const string O4Piece = "O4Piece";
+     public const string O5Piece = "O5Piece";
+     public const string OX1Piece = "OX1Piece";
+     public const string OX2Piece = "OX2Piece";
+     public const string OX3Piece = "OX3Piece";
+     public const string OX4Piece = "OX4Piece";
+     public const string OX5Piece = "OX5Piece";
+     public const string ChangeSimpleMultipleObstacleStateView = "ChangeSimpleMultipleObstacleStateView";
 }

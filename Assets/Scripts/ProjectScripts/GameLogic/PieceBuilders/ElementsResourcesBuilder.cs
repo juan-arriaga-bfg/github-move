@@ -21,7 +21,15 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.O2.Id, R.O2Piece);
         dict.Add(PieceType.O3.Id, R.O3Piece);
         dict.Add(PieceType.O4.Id, R.O4Piece);
+        dict.Add(PieceType.O5.Id, R.O5Piece);
         
+        dict.Add(PieceType.OX1.Id, R.OX1Piece);
+        dict.Add(PieceType.OX2.Id, R.OX2Piece);
+        dict.Add(PieceType.OX3.Id, R.OX3Piece);
+        dict.Add(PieceType.OX4.Id, R.OX4Piece);
+        dict.Add(PieceType.OX5.Id, R.OX5Piece);
+        
+        dict.Add(PieceType.Quest.Id, R.QuestPiece);
         dict.Add(PieceType.Fog.Id, R.FogPiece);
         
         dict.Add(PieceType.A1.Id, R.A1Piece);
@@ -137,6 +145,7 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.Menu, R.MenuView);
         dict.Add((int)ViewType.MenuButton, R.BoardButtonView);
         dict.Add((int)ViewType.SimpleObstacle, R.ChangeSimpleObstacleStateView);
+        dict.Add((int)ViewType.SimpleMultipleObstacle, R.ChangeSimpleMultipleObstacleStateView);
         dict.Add((int)ViewType.FogState, R.ChangeFogStateView);
 
         return dict;

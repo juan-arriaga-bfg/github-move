@@ -18,7 +18,7 @@ public class DefaultMatchActionBuilder : IMatchActionBuilder
         var countForMatch = matchField.Count;
         var countForMatchDefault = definition.GetPieceCountForMatch(pieceType);
         
-        if (countForMatch < countForMatchDefault) return null;
+        if (countForMatchDefault == -1 || countForMatch < countForMatchDefault) return null;
 
         var countForMatchBonus = countForMatchDefault * 2 - 1;
 

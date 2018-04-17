@@ -61,7 +61,7 @@ public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
         var countForMatch = 1;
         var countForMatchDefault = definition.GetPieceCountForMatch(pieceType);
         
-        if (countForMatch < countForMatchDefault) return null;
+        if (countForMatchDefault == -1 || countForMatch < countForMatchDefault) return null;
         
         var nextAction = new SpawnPieceAtAction
         {

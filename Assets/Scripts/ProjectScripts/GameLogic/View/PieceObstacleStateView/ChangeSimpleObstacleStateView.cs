@@ -4,6 +4,9 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
 {
     [SerializeField] private NSText message;
     [SerializeField] private NSText amount;
+    [SerializeField] private NSText progress;
+    
+    [SerializeField] private BoardProgressBarView progressBar;
 
     private TouchReactionDefinitionSimpleObstacle simpleObstacle;
     
@@ -25,7 +28,7 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
         simpleObstacle = touchReaction.GetComponent<TouchReactionDefinitionSimpleObstacle>(TouchReactionDefinitionSimpleObstacle.ComponentGuid);
         
         if(simpleObstacle == null) return;
-
+        
         simpleObstacle.OnClick = OnClick;
         
         Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceMenu);
@@ -42,6 +45,7 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
     {
         Context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
 
+        SetProgress();
         simpleObstacle.isOpen = true;
 
         Change(true);
@@ -54,5 +58,11 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
 
         simpleObstacle.isOpen = false;
         Change(false);
+    }
+
+    private void SetProgress()
+    {
+        if (progress != null) progress.Text = simpleObstacle.GetProgressText;
+        if (progressBar != null) progressBar.SetProgress(simpleObstacle.GetProgress);
     }
 }

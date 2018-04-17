@@ -42,10 +42,13 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddObstaclePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict.Add(PieceType.O1.Id, new SimpleObstaclePieceBuilder());
-        dict.Add(PieceType.O2.Id, new SimpleObstaclePieceBuilder());
-        dict.Add(PieceType.O3.Id, new GenericPieceBuilder());
-        dict.Add(PieceType.O4.Id, new ObstaclePieceBuilder());
+        dict = AddSimplePiece<SimpleObstaclePieceBuilder>(PieceType.O1.Id, PieceType.O5.Id, dict);
+        dict = AddSimplePiece<SimpleObstaclePieceBuilder>(PieceType.OX1.Id, PieceType.OX5.Id, dict);
+        
+//        dict.Add(PieceType.O3.Id, new GenericPieceBuilder());
+        
+        
+        dict.Add(PieceType.Quest.Id, new ObstaclePieceBuilder());
         
         dict.Add(PieceType.Fog.Id, new FogPieceBuilder
         {
