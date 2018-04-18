@@ -1,4 +1,4 @@
-﻿public abstract class MatchablePieceComponent : IECSComponent, IMatchableCopy
+﻿public abstract class MatchableCorePieceComponent : IECSComponent, IMatchableCopy
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
 

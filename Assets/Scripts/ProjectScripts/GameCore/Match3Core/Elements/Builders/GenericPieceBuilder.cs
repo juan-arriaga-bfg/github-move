@@ -13,6 +13,8 @@ public class GenericPieceBuilder : IPieceBuilder
         piece.RegisterComponent(new PieceBoardObserversComponent());
         piece.RegisterComponent(new CachedPiecePositionComponent());
 
+        AddMatchableComponent(piece);
+
         return piece;
     }
 
@@ -24,6 +26,11 @@ public class GenericPieceBuilder : IPieceBuilder
         AddObserver(piece, view);
 
         return view;
+    }
+
+    protected virtual void AddMatchableComponent(Piece piece)
+    {
+        piece.RegisterComponent(new MatchablePieceComponent());
     }
     
     protected void AddObserver(Piece piece, IPieceBoardObserver observer)

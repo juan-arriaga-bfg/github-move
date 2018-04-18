@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class FieldFinderComponent : IECSComponent
 {
@@ -27,9 +28,9 @@ public class FieldFinderComponent : IECSComponent
 		if (context.IsLockedCell(point)) return false;
 		
 		var piece = context.GetPieceAt(point);
-		
-		if (piece == null) return false;
 
+		if (piece == null) return false;
+		
 		current = piece.PieceType;
 		
 		field = FindField(piece.PieceType, point, field);
@@ -69,7 +70,13 @@ public class FieldFinderComponent : IECSComponent
 	private bool PieceIsCorrect(int type, BoardPosition point)
 	{
 		var piece = context.GetPieceAt(point);
+
+		if (piece == null) return false;
 		
-		return piece != null && piece.PieceType == type;
+		var macheble = piece.GetComponent<MatchablePieceComponent>(MatchablePieceComponent.ComponentGuid);
+		
+		if (macheble == null || macheble.IsMatchable() == false) return false;
+		
+		return piece.PieceType == type;
 	}
 }

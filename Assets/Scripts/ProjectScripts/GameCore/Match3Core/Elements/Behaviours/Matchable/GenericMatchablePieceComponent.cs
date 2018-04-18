@@ -1,4 +1,4 @@
-﻿public class GenericMatchablePieceComponent : MatchablePieceComponent
+﻿public class GenericMatchablePieceComponent : MatchableCorePieceComponent
 {
     public override bool IsMatchable(BoardPosition at)
     {

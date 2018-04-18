@@ -11,6 +11,8 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
     public List<ChestDef> Chests;
     public List<Chest> ActiveChests = new List<Chest>();
     
+    public readonly Dictionary<BoardPosition, Chest> ChestsOnBoard = new Dictionary<BoardPosition, Chest>();
+    
     public void LoadData(IDataMapper<List<ChestDef>> dataMapper)
     {
         dataMapper.LoadData((data, error)=> 
@@ -59,6 +61,47 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
         return ChestType.None;
     }
 
+    public bool AddToBoard(BoardPosition position, ChestType type, bool isOpen = false)
+    {
+        if (ChestsOnBoard.ContainsKey(position)) return false;
+
+        var chest = GetChest(type);
+
+        if (isOpen) chest.State = ChestState.Open;
+        
+        ChestsOnBoard.Add(position, chest);
+        
+        return true;
+    }
+
+    public bool MovedFromToBoard(BoardPosition from, BoardPosition to)
+    {
+        Chest chest;
+
+        if (ChestsOnBoard.TryGetValue(from, out chest) == false || ChestsOnBoard.ContainsKey(to)) return false;
+        
+        ChestsOnBoard.Remove(from);
+        ChestsOnBoard.Add(to, chest);
+        
+        return true;
+    }
+    
+    public Chest GetFromBoard(BoardPosition position)
+    {
+        Chest chest;
+        
+        return ChestsOnBoard.TryGetValue(position, out chest) == false ? null : chest;
+    }
+
+    public bool RemoveFromBoard(BoardPosition position)
+    {
+        if (ChestsOnBoard.ContainsKey(position) == false) return false;
+
+        ChestsOnBoard.Remove(position);
+        
+        return true;
+    }
+
     public bool AddActiveChest(ChestType type)
     {
         if (ActiveChests.Count == Max) return false;
@@ -90,7 +133,7 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
             index = 0;
         }
     }
-
+    
     public Chest GetFreeChest()
     {
         if (index == -1) index = 0;

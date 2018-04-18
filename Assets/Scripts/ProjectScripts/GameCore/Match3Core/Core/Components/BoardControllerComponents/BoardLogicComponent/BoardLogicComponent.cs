@@ -684,7 +684,7 @@ public class BoardLogicComponent : ECSEntity,
     public virtual bool IsMatchableAt(BoardPosition point)
     {
         var piece = GetPieceAt(point);
-        var matchablePiece = piece == null ? null : piece.GetComponent<MatchablePieceComponent>(MatchablePieceComponent.ComponentGuid);
+        var matchablePiece = piece == null ? null : piece.GetComponent<MatchableCorePieceComponent>(MatchableCorePieceComponent.ComponentGuid);
 
         if (piece == null
             || this.IsLockedCell(point)

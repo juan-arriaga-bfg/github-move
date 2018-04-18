@@ -38,7 +38,7 @@ public class SandboxGameController : MonoBehaviour
             .RegisterComponent(new EmptyCellsFinderComponent()) // finds empty cells
             .RegisterComponent(new MatchActionBuilderComponent() // creates match action
                 .RegisterDefaultBuilder(new DefaultMatchActionBuilder()) // creates default match action
-                .RegisterBuilder(new MulticellularPieceMatchActionBuilder())) // creates match action for
+                .RegisterBuilder(new MulticellularPieceMatchActionBuilder())) // creates match action for Multicellular
             .RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build()))); 
         
         boardController.RegisterComponent(new BoardRandomComponent()); // random
@@ -104,8 +104,21 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
         
-        AddPieces(new BoardPosition(25, 0), PieceType.O1.Id, PieceType.O5.Id, boardController);
-        AddPieces(new BoardPosition(27, 0), PieceType.OX1.Id, PieceType.OX5.Id, boardController);
+//        AddPieces(new BoardPosition(20, 0), PieceType.O1.Id, PieceType.O5.Id, boardController);
+//        AddPieces(new BoardPosition(21, 0), PieceType.OX1.Id, PieceType.OX5.Id, boardController);
+        AddPieces(new BoardPosition(20, 0), PieceType.Chest1.Id, PieceType.Chest3.Id, boardController);
+        AddPieces(new BoardPosition(21, 0), PieceType.Chest1.Id, PieceType.Chest3.Id, boardController);
+        AddPieces(new BoardPosition(22, 0), PieceType.Chest1.Id, PieceType.Chest3.Id, boardController);
+        
+        AddPieces(new BoardPosition(20, 5), PieceType.Chest1.Id, PieceType.Chest3.Id, boardController);
+        AddPieces(new BoardPosition(21, 5), PieceType.Chest1.Id, PieceType.Chest3.Id, boardController);
+        AddPieces(new BoardPosition(22, 5), PieceType.Chest1.Id, PieceType.Chest3.Id, boardController);
+        
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(26, 1),
+            PieceTypeId = PieceType.Castle1.Id
+        });
         
         /*boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {

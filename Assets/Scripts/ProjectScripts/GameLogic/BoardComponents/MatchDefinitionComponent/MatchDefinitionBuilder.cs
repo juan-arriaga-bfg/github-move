@@ -72,6 +72,10 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.OX4.Id, new PieceMatchDef {Next = PieceType.OX5.Id, Previous = PieceType.OX3.Id, Count = -1});
         dict.Add(PieceType.OX5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.OX4.Id, Count = -1});
 
+        dict.Add(PieceType.Chest1.Id, new PieceMatchDef {Next = PieceType.Chest2.Id, Previous = PieceType.None.Id, Count = 3});
+        dict.Add(PieceType.Chest2.Id, new PieceMatchDef {Next = PieceType.Chest3.Id, Previous = PieceType.Chest1.Id, Count = 3});
+        dict.Add(PieceType.Chest3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Chest2.Id, Count = 3});
+
         return dict;
     }
 
