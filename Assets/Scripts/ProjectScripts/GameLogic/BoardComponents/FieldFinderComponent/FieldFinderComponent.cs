@@ -14,7 +14,7 @@ public class FieldFinderComponent : IECSComponent
 	
 	public void OnRegisterEntity(ECSEntity entity)
 	{
-		this.context = entity as BoardLogicComponent;
+		context = entity as BoardLogicComponent;
 	}
 
 	public void OnUnRegisterEntity(ECSEntity entity)
@@ -29,7 +29,7 @@ public class FieldFinderComponent : IECSComponent
 		
 		var piece = context.GetPieceAt(point);
 
-		if (piece == null) return false;
+		if (piece == null || PieceIsCorrect(piece.PieceType, point) == false) return false;
 		
 		current = piece.PieceType;
 		
@@ -71,11 +71,7 @@ public class FieldFinderComponent : IECSComponent
 	{
 		var piece = context.GetPieceAt(point);
 
-		if (piece == null) return false;
-		
-		var macheble = piece.GetComponent<MatchablePieceComponent>(MatchablePieceComponent.ComponentGuid);
-		
-		if (macheble == null || macheble.IsMatchable() == false) return false;
+		if (piece == null || piece.Matchable.IsMatchable() == false) return false;
 		
 		return piece.PieceType == type;
 	}

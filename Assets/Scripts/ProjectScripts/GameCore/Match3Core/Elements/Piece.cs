@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView
+public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchablePiece
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -42,6 +42,19 @@ public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView
             return states;
         }
     }
+
+    private MatchablePieceComponent matchable;
+    public MatchablePieceComponent Matchable
+    {
+        get
+        {
+            if (matchable == null)
+            {
+                matchable = GetComponent<MatchablePieceComponent>(MatchablePieceComponent.ComponentGuid);
+            }
+            return matchable;
+        }
+    }
     
     public PieceBoardElementView ActorView
     {
@@ -77,6 +90,4 @@ public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView
 
         return true;
     }
-
-
 }

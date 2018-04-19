@@ -51,7 +51,7 @@ public class MoveFromToAndCheckCoverMatchAction : IBoardAction
 		var pieceFrom = logic.GetPieceAt(From);
 		var pieceTo = logic.GetPieceAt(To);
 		
-		if (pieceFrom.PieceType != pieceTo.PieceType)
+		if (pieceFrom.PieceType != pieceTo.PieceType || pieceFrom.Matchable.IsMatchable() == false || pieceTo.Matchable.IsMatchable() == false)
 		{
 			return false;
 		}
