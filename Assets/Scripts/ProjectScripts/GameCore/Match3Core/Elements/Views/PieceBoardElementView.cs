@@ -74,4 +74,7 @@ public class PieceBoardElementView : BoardElementView
 
     }
 
+    public virtual void UpdateView()
+    {
+    }
 }

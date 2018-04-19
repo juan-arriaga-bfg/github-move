@@ -6,8 +6,10 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
     public const int Max = 4;
 
     private int index = -1;
-    
+
+    public Chest ActiveChest;
     public List<ChestDef> Chests;
+    
     public List<Chest> ActiveChests = new List<Chest>();
     
     public readonly Dictionary<BoardPosition, Chest> ChestsOnBoard = new Dictionary<BoardPosition, Chest>();
@@ -55,35 +57,20 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
         
         return true;
     }
-
-    public bool MovedFromToBoard(BoardPosition from, BoardPosition to)
+    
+    public Chest GetFromBoard(BoardPosition position, int pieceType)
     {
         Chest chest;
 
-        if (ChestsOnBoard.TryGetValue(from, out chest) == false || ChestsOnBoard.ContainsKey(to)) return false;
+        if (ChestsOnBoard.TryGetValue(position, out chest))
+        {
+            ChestsOnBoard.Remove(position);
+            return chest;
+        }
         
-        ChestsOnBoard.Remove(from);
-        ChestsOnBoard.Add(to, chest);
-        
-        return true;
+        return GetChest(pieceType);
     }
     
-    public Chest GetFromBoard(BoardPosition position)
-    {
-        Chest chest;
-        
-        return ChestsOnBoard.TryGetValue(position, out chest) == false ? null : chest;
-    }
-
-    public bool RemoveFromBoard(BoardPosition position)
-    {
-        if (ChestsOnBoard.ContainsKey(position) == false) return false;
-
-        ChestsOnBoard.Remove(position);
-        
-        return true;
-    }
-
     public bool AddActiveChest(int pieceType)
     {
         if (ActiveChests.Count == Max) return false;
