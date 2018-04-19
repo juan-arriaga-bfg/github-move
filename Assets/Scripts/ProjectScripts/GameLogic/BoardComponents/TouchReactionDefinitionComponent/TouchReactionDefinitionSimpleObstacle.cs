@@ -19,6 +19,8 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
     {
         get { return string.Format("{0}/{1}", current, max); }
     }
+
+    public CurrencyPair Price { get; private set; }
     
     public Action OnClick { get; set; }
     
@@ -27,6 +29,8 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
         if (current == -1) Init(piece);
         
         if (isClear) return false;
+        
+        Price = GameDataService.Current.SimpleObstaclesManager.PriceForPiece(piece, current);
         
         if (isOpen)
         {
@@ -42,8 +46,6 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
     {
         piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
         
-        var price = GameDataService.Current.ObstaclesManager.SimpleObstaclePrice;
-        
         var shopItem = new ShopItem
         {
             Uid = string.Format("purchase.test.{0}.10", Currency.Obstacle.Name), 
@@ -51,7 +53,7 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
             Amount = 1,
             CurrentPrices = new List<Price>
             {
-                new Price{Currency = price.Currency, DefaultPriceAmount = price.Amount}
+                new Price{Currency = Price.Currency, DefaultPriceAmount = Price.Amount}
             }
         };
         
@@ -69,7 +71,9 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
                 
                 isClear = true;
 
-                var chest = GameDataService.Current.ObstaclesManager.GetChestBySmpleObstacle(piece.PieceType);
+                var chest = GameDataService.Current.SimpleObstaclesManager.RewardForPiece(piece.PieceType);
+                
+                if(chest == PieceType.None.Id) return;
                 
                 piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
                 {
@@ -96,7 +100,7 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
 
     private void Init(Piece piece)
     {
-        max = piece.Context.BoardLogic.MatchDefinition.GetIndexInChain(piece.PieceType) + 1;
+        max = piece.Context.BoardLogic.MatchDefinition.GetIndexInChain(piece.PieceType);
         current = 0;
     }
 }

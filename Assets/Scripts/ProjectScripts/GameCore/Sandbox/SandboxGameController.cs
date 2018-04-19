@@ -104,15 +104,8 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
         
-//        AddPieces(new BoardPosition(20, 0), PieceType.O1.Id, PieceType.O5.Id, boardController);
-//        AddPieces(new BoardPosition(21, 0), PieceType.OX1.Id, PieceType.OX5.Id, boardController);
-        AddPieces(new BoardPosition(20, 0), PieceType.Chest1.Id, PieceType.Chest3.Id, boardController);
-        AddPieces(new BoardPosition(21, 0), PieceType.Chest1.Id, PieceType.Chest3.Id, boardController);
-        AddPieces(new BoardPosition(22, 0), PieceType.Chest1.Id, PieceType.Chest3.Id, boardController);
-        
-        AddPieces(new BoardPosition(20, 5), PieceType.Chest1.Id, PieceType.Chest3.Id, boardController);
-        AddPieces(new BoardPosition(21, 5), PieceType.Chest1.Id, PieceType.Chest3.Id, boardController);
-        AddPieces(new BoardPosition(22, 5), PieceType.Chest1.Id, PieceType.Chest3.Id, boardController);
+        AddPieces(new BoardPosition(20, 0), PieceType.O1.Id, PieceType.O5.Id, boardController);
+        AddPieces(new BoardPosition(21, 0), PieceType.OX1.Id, PieceType.OX5.Id, boardController);
         
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {

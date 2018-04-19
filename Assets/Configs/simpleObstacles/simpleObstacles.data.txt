@@ -1,0 +1,144 @@
+﻿[
+  {
+    "Uid" : "O1",
+    "Weights" :
+    [
+      {
+        "Uid": "Chest1",
+        "Weight" : 100
+      },
+      {
+        "Uid": "Chest2",
+        "Weight" : 20
+      }
+    ]
+  },
+  {
+    "Uid" : "O2",
+    "Weights" :
+    [
+      {
+        "Uid": "Chest2",
+        "Weight" : 100,
+        "Override" : "true"
+      },
+      {
+        "Uid": "Chest3",
+        "Weight" : 20
+      }
+    ]
+  },
+  {
+    "Uid" : "O3",
+    "Weights" :
+    [
+      {
+        "Uid": "Chest2",
+        "Weight" : 20
+      },
+      {
+        "Uid": "Chest3",
+        "Weight" : 20
+      }
+    ]
+  },
+  {
+    "Uid" : "O4",
+    "Weights" :
+    [
+      {
+        "Uid": "Chest2",
+        "Weight" : 20
+      },
+      {
+        "Uid": "Chest3",
+        "Weight" : 20
+      }
+    ]
+  },
+  {
+    "Uid" : "O5",
+    "Weights" :
+    [
+      {
+        "Uid": "Chest2",
+        "Weight" : 20
+      },
+      {
+        "Uid": "Chest3",
+        "Weight" : 20
+      }
+    ]
+  },
+  {
+    "Uid" : "OX1",
+    "Weights" :
+    [
+      {
+        "Uid": "Chest1",
+        "Weight" : 100
+      },
+      {
+        "Uid": "Chest2",
+        "Weight" : 20
+      }
+    ]
+  },
+  {
+    "Uid" : "OX2",
+    "Weights" :
+    [
+      {
+        "Uid": "Chest2",
+        "Weight" : 100,
+        "Override" : "true"
+      },
+      {
+        "Uid": "Chest3",
+        "Weight" : 20
+      }
+    ]
+  },
+  {
+    "Uid" : "OX3",
+    "Weights" :
+    [
+      {
+        "Uid": "Chest2",
+        "Weight" : 20
+      },
+      {
+        "Uid": "Chest3",
+        "Weight" : 20
+      }
+    ]
+  },
+  {
+    "Uid" : "OX4",
+    "Weights" :
+    [
+      {
+        "Uid": "Chest2",
+        "Weight" : 20
+      },
+      {
+        "Uid": "Chest3",
+        "Weight" : 20
+      }
+    ]
+  },
+  {
+    "Uid" : "OX5",
+    "Weights" :
+    [
+      {
+        "Uid": "Chest2",
+        "Weight" : 20
+      },
+      {
+        "Uid": "Chest3",
+        "Weight" : 20
+      }
+    ]
+  }
+]

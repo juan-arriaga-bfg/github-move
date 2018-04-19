@@ -53,7 +53,7 @@ public class MatchDefinitionComponent : ECSEntity
         
         if(chain.Count == 0) return -1;
         
-        return chain.IndexOf(pieceId);
+        return chain.IndexOf(pieceId) + 1;
     }
 
     public List<int> GetChain(int pieceId)

@@ -70,7 +70,7 @@ public class DefaultMatchActionBuilder : IMatchActionBuilder
     {
         var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType);
         
-        if(def == null) return;
+        if(def == null || def.CreateRewards == null) return;
 
         var sequence = DOTween.Sequence();
         

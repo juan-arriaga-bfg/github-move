@@ -19,8 +19,6 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
     {
         base.Init(piece);
         
-        amount.Text = GameDataService.Current.ObstaclesManager.SimpleObstaclePrice.Amount.ToString();
-        
         var touchReaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
         
         if(touchReaction == null) return;
@@ -47,6 +45,7 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
 
         SetProgress();
         simpleObstacle.isOpen = true;
+        amount.Text = simpleObstacle.Price.Amount.ToString();
 
         Change(true);
     }
