@@ -117,4 +117,9 @@ public class R
      public const string Chest7Piece = "Chest7Piece";
      public const string Chest8Piece = "Chest8Piece";
      public const string Chest9Piece = "Chest9Piece";
+     public const string Coin1Piece = "Coin1Piece";
+     public const string Coin2Piece = "Coin2Piece";
+     public const string Coin3Piece = "Coin3Piece";
+     public const string Coin4Piece = "Coin4Piece";
+     public const string Coin5Piece = "Coin5Piece";
 }

@@ -41,7 +41,7 @@ public class TouchReactionDefinitionSpawnPiece : TouchReactionDefinitionComponen
 			return false;
 		}
 		
-		storage.Resources = resources;
+//		storage.Resources = resources;
 		
 		gameBoard.ActionExecutor.AddAction(new SpawnResourcePieceAction()
 		{

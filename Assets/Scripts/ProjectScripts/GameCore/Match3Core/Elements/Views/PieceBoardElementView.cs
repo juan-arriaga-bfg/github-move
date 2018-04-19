@@ -1,5 +1,4 @@
-﻿using System.Xml;
-using UnityEngine;
+﻿using UnityEngine;
 using DG.Tweening;
 
 public class PieceBoardElementView : BoardElementView

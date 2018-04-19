@@ -305,6 +305,161 @@
     ]
   },
   {
+    "Uid": "Chest2",
+    "CreateRewards":
+    [
+      {
+        "Currency": "Merge",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "Chest3",
+    "CreateRewards":
+    [
+      {
+        "Currency": "Merge",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "Chest4",
+    "CreateRewards":
+    [
+      {
+        "Currency": "Merge",
+        "Amount": 10
+      }
+    ]
+  },
+  {
+    "Uid": "Chest5",
+    "CreateRewards":
+    [
+      {
+        "Currency": "Merge",
+        "Amount": 25
+      }
+    ]
+  },
+  {
+    "Uid": "Chest6",
+    "CreateRewards":
+    [
+      {
+        "Currency": "Merge",
+        "Amount": 50
+      }
+    ]
+  },
+  {
+    "Uid": "Chest7",
+    "CreateRewards":
+    [
+      {
+        "Currency": "Merge",
+        "Amount": 100
+      }
+    ]
+  },
+  {
+    "Uid": "Chest8",
+    "CreateRewards":
+    [
+      {
+        "Currency": "Merge",
+        "Amount": 200
+      }
+    ]
+  },
+  {
+    "Uid": "Chest9",
+    "CreateRewards":
+    [
+      {
+        "Currency": "Merge",
+        "Amount": 400
+      }
+    ]
+  },
+  {
+    "Uid": "Coin1",
+    "SpawnResources" :
+    {
+      "Currency" : "Coins",
+      "Amount" : 10
+    },
+    "CreateRewards":
+    [
+      {
+        "Currency": "Merge",
+        "Amount": 10
+      }
+    ]
+  },
+  {
+    "Uid": "Coin2",
+    "SpawnResources" :
+    {
+      "Currency" : "Coins",
+      "Amount" : 30
+    },
+    "CreateRewards":
+    [
+      {
+        "Currency": "Merge",
+        "Amount": 20
+      }
+    ]
+  },
+  {
+    "Uid": "Coin3",
+    "SpawnResources" :
+    {
+      "Currency" : "Coins",
+      "Amount" : 90
+    },
+    "CreateRewards":
+    [
+      {
+        "Currency": "Merge",
+        "Amount": 30
+      }
+    ]
+  },
+  {
+    "Uid": "Coin4",
+    "SpawnResources" :
+    {
+      "Currency" : "Coins",
+      "Amount" : 270
+    },
+    "CreateRewards":
+    [
+      {
+        "Currency": "Merge",
+        "Amount": 40
+      }
+    ]
+  },
+  {
+    "Uid": "Coin5",
+    "SpawnResources" :
+    {
+      "Currency" : "Coins",
+      "Amount" : 810
+    },
+    "CreateRewards":
+    [
+      {
+        "Currency": "Merge",
+        "Amount": 50
+      }
+    ]
+  },
+  {
     "Uid": "Mine1",
     "Delay": 15,
     "SpawnPiece": "C1",

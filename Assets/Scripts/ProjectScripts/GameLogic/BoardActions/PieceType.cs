@@ -58,6 +58,12 @@ public static partial class PieceType
         RegisterType(Quest);
         RegisterType(Fog);
         
+        RegisterType(Coin1);
+        RegisterType(Coin2);
+        RegisterType(Coin3);
+        RegisterType(Coin4);
+        RegisterType(Coin5);
+        
         RegisterType(Mine1);
         RegisterType(Mine2);
         RegisterType(Mine3);
@@ -173,6 +179,12 @@ public static partial class PieceType
     public static readonly PieceTypeDef Quest = new PieceTypeDef{Id = 801, Abbreviations = new List<string>{ "Quest" }};
     
     public static readonly PieceTypeDef Fog = new PieceTypeDef{Id = 901, Abbreviations = new List<string>{ "Fog" }};
+    
+    public static readonly PieceTypeDef Coin1 = new PieceTypeDef{Id = 1000, Abbreviations = new List<string>{ "Coin1" }};
+    public static readonly PieceTypeDef Coin2 = new PieceTypeDef{Id = 1001, Abbreviations = new List<string>{ "Coin2" }};
+    public static readonly PieceTypeDef Coin3 = new PieceTypeDef{Id = 1002, Abbreviations = new List<string>{ "Coin3" }}; 
+    public static readonly PieceTypeDef Coin4 = new PieceTypeDef{Id = 1003, Abbreviations = new List<string>{ "Coin4" }};
+    public static readonly PieceTypeDef Coin5 = new PieceTypeDef{Id = 1004, Abbreviations = new List<string>{ "Coin5" }};
     
     public static readonly PieceTypeDef Mine1 = new PieceTypeDef{Id = 10000, Abbreviations = new List<string>{ "Mine1" }};
     public static readonly PieceTypeDef Mine2 = new PieceTypeDef{Id = 10001, Abbreviations = new List<string>{ "Mine2" }};
