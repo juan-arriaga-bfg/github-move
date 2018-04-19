@@ -73,7 +73,7 @@ public class Obstacle
 
     public Chest GetReward()
     {
-        return GameDataService.Current.ChestsManager.GetChest(def.Reward);
+        return GameDataService.Current.ChestsManager.GetChest(PieceType.Parse(def.Reward));
     }
     
     public int GetUid()

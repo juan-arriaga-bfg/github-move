@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ChestsDataManager : IDataLoader<List<ChestDef>>
@@ -17,11 +16,18 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
     {
         dataMapper.LoadData((data, error)=> 
         {
-            Chests = new List<ChestDef>();
-            
             if (string.IsNullOrEmpty(error))
             {
-                Chests = data;
+                Chests = new List<ChestDef> {data[0]};
+                
+                for (var i = 1; i < data.Count; i++)
+                {
+                    var def = data[i - 1];
+                    var defNext = data[i];
+                    
+                    defNext.Weights = PieceWeight.ReplaseWeights(def.Weights, defNext.Weights);
+                    Chests.Add(defNext);
+                }
             }
             else
             {
@@ -29,43 +35,19 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
             }
         });
     }
-
-    public Chest GetChest(ChestType type)
-    {
-        var chest = Chests.Find(def => def.Uid == type.ToString());
-        
-        return new Chest(chest);
-    }
-
+    
     public Chest GetChest(int pieceType)
     {
-        foreach (ChestType chest in Enum.GetValues(typeof(ChestType)))
-        {
-            if(PieceType.Parse(chest.ToString()) != pieceType) continue;
-            
-            return GetChest(chest);
-        }
+        var chestDef = Chests.Find(def => def.Piece == pieceType);
         
-        return null;
+        return chestDef == null ? null : new Chest(chestDef);
     }
-
-    public ChestType PieceToChest(int pieceType)
-    {
-        foreach (ChestType chest in Enum.GetValues(typeof(ChestType)))
-        {
-            if(PieceType.Parse(chest.ToString()) != pieceType) continue;
-            
-            return chest;
-        }
-
-        return ChestType.None;
-    }
-
-    public bool AddToBoard(BoardPosition position, ChestType type, bool isOpen = false)
+    
+    public bool AddToBoard(BoardPosition position, int pieceType, bool isOpen = false)
     {
         if (ChestsOnBoard.ContainsKey(position)) return false;
 
-        var chest = GetChest(type);
+        var chest = GetChest(pieceType);
 
         if (isOpen) chest.State = ChestState.Open;
         
@@ -102,11 +84,11 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
         return true;
     }
 
-    public bool AddActiveChest(ChestType type)
+    public bool AddActiveChest(int pieceType)
     {
         if (ActiveChests.Count == Max) return false;
         
-        ActiveChests.Add(GetChest(type));
+        ActiveChests.Add(GetChest(pieceType));
         
         return true;
     }
@@ -122,24 +104,5 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
         }
         
         return false;
-    }
-
-    public void NextFreeChest()
-    {
-        index++;
-
-        if (index == Chests.Count)
-        {
-            index = 0;
-        }
-    }
-    
-    public Chest GetFreeChest()
-    {
-        if (index == -1) index = 0;
-        
-        var type = (ChestType) Enum.Parse(typeof(ChestType), Chests[index].Uid);
-        
-        return GetChest(type);
     }
 }

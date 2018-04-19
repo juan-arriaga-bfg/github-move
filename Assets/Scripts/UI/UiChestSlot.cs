@@ -78,7 +78,7 @@ public class UiChestSlot : MonoBehaviour
         
         top.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, state == ChestState.Open ? 45 : 15);
         
-        var id = chest.GetSkin();
+        var id = "";
         var color = "FAF9ADFF";
         
         top.sprite = IconService.Current.GetSpriteById(id + "_2");
@@ -210,7 +210,7 @@ public class UiChestSlot : MonoBehaviour
                 
                 var model = UIService.Get.GetCachedModel<UIChestRewardWindowModel>(UIWindowType.ChestRewardWindow);
 
-                model.Chest = GameDataService.Current.ChestsManager.GetChest(chest.ChestType);
+                model.Chest = GameDataService.Current.ChestsManager.GetChest(chest.Piece);
         
                 UIService.Get.ShowWindow(UIWindowType.ChestRewardWindow);
                 
@@ -244,7 +244,7 @@ public class UiChestSlot : MonoBehaviour
         
         var model2 = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
-        model2.Title = string.Format("{0} chest", chest.ChestType);
+        model2.Title = string.Format("{0} chest", chest.Currency);
         model2.Message = string.Format("Unlock time: {0}", chest.GetTimeText());
         model2.AcceptLabel = "Start unlock";
                 

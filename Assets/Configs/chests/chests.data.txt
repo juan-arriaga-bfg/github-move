@@ -1,10 +1,8 @@
 ﻿[
   {
-    "Uid": "Common",
-    "Time": "60",
+    "Uid": "Chest1",
+    "Time": 60,
     "MergePoints": 100,
-    "Min": 1,
-    "Max": 2,
     "Price": {
       "Currency": "Crystals",
       "Amount": 1
@@ -21,14 +19,23 @@
       12,
       12,
       13
+    ],
+    "Weights" :
+    [
+      {
+        "Uid": "A1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "A2",
+        "Weight" : 20
+      }
     ]
   },
   {
-    "Uid": "Rare",
-    "Time": "3600",
+    "Uid": "Chest2",
+    "Time": 3600,
     "MergePoints": 300,
-    "Min": 1,
-    "Max": 3,
     "Price": {
       "Currency": "Crystals",
       "Amount": 30
@@ -45,14 +52,23 @@
       22,
       22,
       23
+    ],
+    "Weights" :
+    [
+      {
+        "Uid": "B1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "B2",
+        "Weight" : 20
+      }
     ]
   },
   {
-    "Uid": "Epic",
+    "Uid": "Chest3",
     "Time": "14400",
     "MergePoints": 1000,
-    "Min": 2,
-    "Max": 4,
     "Price": {
       "Currency": "Crystals",
       "Amount": 60
@@ -69,6 +85,83 @@
       32,
       32,
       33
+    ],
+    "Weights" :
+    [
+      {
+        "Uid": "C1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "C2",
+        "Weight" : 20
+      }
+    ]
+  },
+  {
+    "Uid": "Chest4",
+    "Time": "14400",
+    "MergePoints": 1000,
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 60
+    },
+    "RewardAmounts" :
+    [
+      30,
+      30,
+      30,
+      31,
+      31,
+      31,
+      32,
+      32,
+      32,
+      33
+    ],
+    "Weights" :
+    [
+      {
+        "Uid": "D1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "D2",
+        "Weight" : 20
+      }
+    ]
+  },
+  {
+    "Uid": "Chest5",
+    "Time": "14400",
+    "MergePoints": 1000,
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 60
+    },
+    "RewardAmounts" :
+    [
+      30,
+      30,
+      30,
+      31,
+      31,
+      31,
+      32,
+      32,
+      32,
+      33
+    ],
+    "Weights" :
+    [
+      {
+        "Uid": "E1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "E2",
+        "Weight" : 20
+      }
     ]
   }
 ]

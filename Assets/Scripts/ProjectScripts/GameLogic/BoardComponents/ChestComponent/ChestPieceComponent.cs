@@ -23,7 +23,7 @@
         if (Chest != null) return;
         
         Chest = GameDataService.Current.ChestsManager.GetChest(contextPiece.PieceType);
-        GameDataService.Current.ChestsManager.AddToBoard(position, Chest.ChestType);
+        GameDataService.Current.ChestsManager.AddToBoard(position, contextPiece.PieceType);
     }
 
     public void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)

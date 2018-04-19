@@ -50,8 +50,7 @@ public class UIQuestStartWindowModel : IWWindowModel
 
     public string GetChestSkin()
     {
-        var chest = GameDataService.Current.ChestsManager.GetChest(Obstacle.Def.Reward);
-        return chest.GetSkin();
+        return "";
     }
 
     public List<ObstacleConditionHero> GetConditionHeroes()

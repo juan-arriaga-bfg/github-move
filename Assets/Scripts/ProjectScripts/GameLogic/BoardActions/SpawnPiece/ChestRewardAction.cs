@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 public class ChestRewardAction : IBoardAction
 {
@@ -12,14 +11,14 @@ public class ChestRewardAction : IBoardAction
 	}
 	
 	public BoardPosition From { get; set; }
-	public List<CurrencyPair> Rewards;
+	public Dictionary<int, int> Rewards;
 	public IBoardAction OnComplete;
 
 	public bool PerformAction(BoardController gameBoardController)
 	{
 		var pieces = new Dictionary<BoardPosition, Piece>();
 		var free = new List<BoardPosition>();
-		var count = Rewards.Sum(pair => pair.Amount);
+		var count = Rewards.Sum(pair => pair.Value);
 		
 		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From, free, count, 5) == false)
 		{
@@ -30,9 +29,9 @@ public class ChestRewardAction : IBoardAction
 		{
 			if(free.Count == 0) break;
 
-			var pieceType = PieceType.Parse(reward.Currency);
+			var pieceType = reward.Key;
 			
-			for (var i = 0; i < reward.Amount; i++)
+			for (var i = 0; i < reward.Value; i++)
 			{
 				if(free.Count == 0) break;
 				

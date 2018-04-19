@@ -31,8 +31,7 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
             
             if (isChest)
             {
-                var chestType = GameDataService.Current.ChestsManager.PieceToChest(storage.SpawnPiece);
-                GameDataService.Current.ChestsManager.AddToBoard(pos, chestType, true);
+                GameDataService.Current.ChestsManager.AddToBoard(pos, storage.SpawnPiece, true);
             }
             
             if(positions.Count == amount) break;

@@ -7,7 +7,7 @@ public class ObstacleDef
     public BoardPosition Position { get; set; }
     public List<IObstacleCondition> UnlockConditions { get; set; }
     public List<IObstacleCondition> OpenConditions { get; set; }
-    public ChestType Reward { get; set; }
+    public string Reward { get; set; }
     public CurrencyPair Price { get; set; }
     
     public List<T> GetOpenConditions<T>() where T : class, IObstacleCondition

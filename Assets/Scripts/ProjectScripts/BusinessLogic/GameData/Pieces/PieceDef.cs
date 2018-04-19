@@ -8,8 +8,6 @@ public class PieceDef
     public string SpawnPiece { get; set; }
     public string UpgradeTargetPiece { get; set; }
     
-    public int ChestLevel { get; set; }
-    
     public int SpawnAmount { get; set; }
     public int SpawnCapacity { get; set; }
     public bool IsFilledInStart { get; set; }

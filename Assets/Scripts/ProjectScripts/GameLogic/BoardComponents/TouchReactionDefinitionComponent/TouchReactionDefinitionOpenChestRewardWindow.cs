@@ -8,7 +8,7 @@ public class TouchReactionDefinitionOpenChestRewardWindow : TouchReactionDefinit
 	{
 		if (isComplete) return false;
 		
-		var chest = GameDataService.Current.ChestsManager.GetChest(piece.PieceType);
+		var chest = GameDataService.Current.ChestsManager.GetFromBoard(position);
 
 		if (chest == null) return false;
 

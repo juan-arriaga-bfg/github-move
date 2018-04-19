@@ -4,14 +4,6 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public enum ChestType
-{
-    None,
-    Common,
-    Rare,
-    Epic
-}
-
 public enum ChestState
 {
     Close,
@@ -23,7 +15,6 @@ public enum ChestState
 public class Chest
 {
     private ChestDef def;
-    private ChestType chestType;
     private ChestState chestState;
     
 //    private List<List<CurrencyPair>> Rewards;
@@ -35,8 +26,6 @@ public class Chest
     {
         this.def = def;
         
-        chestType = (ChestType) Enum.Parse(typeof(ChestType), def.Uid);
-
         /*Rewards = new List<List<CurrencyPair>>();
 
         for (int i = 0; i < def.Rewards.Count; i++)
@@ -50,19 +39,14 @@ public class Chest
         get { return def; }
     }
     
-    public ChestType ChestType
-    {
-        get { return chestType; }
-    }
-    
     public string Currency
     {
-        get { return string.Format("Chest{0}", def.Uid); }
+        get { return def.Uid; }
     }
 
     public int Piece
     {
-        get { return PieceType.Parse(def.Uid); }
+        get { return def.Piece; }
     }
 
     public int MergePoints
@@ -93,28 +77,24 @@ public class Chest
         }
     }
 
-    public List<CurrencyPair> GetRewards(int level)
+    public Dictionary<int, int> GetRewards(int level)
     {
         var max = def.RewardAmounts[level];
-        var uids = GameDataService.Current.PiecesManager.GetPiecesForLevel(level);
-        var result = new List<CurrencyPair>();
-        
-        while (max > 0)
+        var result = new Dictionary<int, int>();
+
+        for (var i = 0; i < max; i++)
         {
-            var random = Mathf.Min(Random.Range(def.Min, def.Max + 1), max);
-            var currency = uids[Random.Range(0, uids.Count)];
-            var currencyPair = result.Find(cpair => cpair.Currency == currency);
-            
-            if (currencyPair == null)
+            var random = PieceWeight.GetRandomPiece(def.Weights);
+
+            if (result.ContainsKey(random))
             {
-                currencyPair = new CurrencyPair {Currency = currency, Amount = 0};
-                result.Add(currencyPair);
+                result[random] += 1;
+                continue;
             }
             
-            currencyPair.Amount += random;
-            max -= random;
+            result.Add(random, 1);
         }
-
+        
         return result;
     }
     
@@ -140,21 +120,6 @@ public class Chest
         return new CurrencyPair();
     }
     
-    public string GetSkin()
-    {
-        switch (chestType)
-        {
-            case ChestType.Common:
-                return "chest_1";
-            case ChestType.Rare:
-                return "chest_2";
-            case ChestType.Epic:
-                return "chest_4";
-            default:
-                return "chest_3";
-        }
-    }
-
    /* private List<CurrencyPair> InitReward(int level)
     {
         var rewards = def.Rewards[level];

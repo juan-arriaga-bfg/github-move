@@ -10,54 +10,23 @@ public class SimpleObstaclesDataManager : IDataLoader<List<SimpleObstaclesDef>>
         dataMapper.LoadData((data, error)=> 
         {
             Obstacles = new Dictionary<int, SimpleObstaclesDef>();
+            var matchDefinition = new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
             
             if (string.IsNullOrEmpty(error))
             {
                 data.Sort((a, b) => a.Piece.CompareTo(b.Piece));
-                
-                Obstacles.Add(data[0].Piece, data[0]);
-                
-                for (var i = 1; i < data.Count; i++)
+
+                foreach (var next in data)
                 {
-                    var def = data[i - 1];
-                    var defNext = data[i];
-                    var weights = new List<PieceWeight>();
+                    var previousType = matchDefinition.GetPrevious(next.Piece);
 
-                    foreach (var weight in def.Weights)
+                    if (previousType != PieceType.None.Id)
                     {
-                        var next = defNext.Weights.Find(w => w.Piece == weight.Piece);
-
-                        if (next == null)
-                        {
-                            weights.Add(weight.Copy());
-                            continue;
-                        }
-                        
-                        if (next.Override)
-                        {
-                            weights.Add(next.Copy());
-                            continue;
-                        }
-                        
-                        var newWeight = weight.Copy();
-
-                        newWeight.Weight += next.Weight;
-
-                        weights.Add(newWeight);
+                        var previous = data.Find(def => def.Piece == previousType);
+                        next.Weights = PieceWeight.ReplaseWeights(previous.Weights, next.Weights);
                     }
                     
-                    // add values 
-                    foreach (var weight in defNext.Weights)
-                    {
-                        var old = def.Weights.Find(w => w.Piece == weight.Piece);
-                        
-                        if(old != null) continue;
-                        
-                        weights.Add(weight.Copy());
-                    }
-
-                    defNext.Weights = weights;
-                    Obstacles.Add(defNext.Piece, defNext);
+                    Obstacles.Add(next.Piece, next);
                 }
             }
             else
@@ -71,7 +40,7 @@ public class SimpleObstaclesDataManager : IDataLoader<List<SimpleObstaclesDef>>
     {
         SimpleObstaclesDef def;
 
-        return Obstacles.TryGetValue(piece, out def) == false ? PieceType.None.Id : def.GetReward();
+        return Obstacles.TryGetValue(piece, out def) == false ? PieceType.None.Id : PieceWeight.GetRandomPiece(def.Weights);
     }
 
     public CurrencyPair PriceForPiece(Piece piece, int step)

@@ -24,7 +24,6 @@ public class UISimpleQuestStartWindowModel : IWWindowModel
     
     public string GetChestSkin()
     {
-        var chest = GameDataService.Current.ChestsManager.GetChest(Quest.Reward);
-        return chest.GetSkin();
+        return "";
     }
 }

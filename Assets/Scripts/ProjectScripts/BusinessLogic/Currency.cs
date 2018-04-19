@@ -12,9 +12,9 @@
     public static readonly CurrencyDef Power = new CurrencyDef { Id = 8, Name = "Power", IsConsumable = true };
     public static readonly CurrencyDef Merge = new CurrencyDef { Id = 9, Name = "Merge", IsConsumable = true };
     
-    public static readonly CurrencyDef ChestCommon = new CurrencyDef { Id = 101, Name = "ChestCommon", IsConsumable = true };
-    public static readonly CurrencyDef ChestRare = new CurrencyDef { Id = 102, Name = "ChestRare", IsConsumable = true };
-    public static readonly CurrencyDef ChestEpic = new CurrencyDef { Id = 103, Name = "ChestEpic", IsConsumable = true };
+    public static readonly CurrencyDef ChestCommon = new CurrencyDef { Id = 101, Name = "Chest1", IsConsumable = true };
+    public static readonly CurrencyDef ChestRare = new CurrencyDef { Id = 102, Name = "Chest2", IsConsumable = true };
+    public static readonly CurrencyDef ChestEpic = new CurrencyDef { Id = 103, Name = "Chest3", IsConsumable = true };
     
     public static readonly CurrencyDef PieceA1 = new CurrencyDef { Id = 1001, Name = "PieceA1", IsConsumable = true };
     public static readonly CurrencyDef PieceA2 = new CurrencyDef { Id = 1002, Name = "PieceA2", IsConsumable = true };

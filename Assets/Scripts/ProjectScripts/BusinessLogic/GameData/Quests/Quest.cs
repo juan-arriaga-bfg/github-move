@@ -111,9 +111,9 @@ public class Quest
         }
     }
     
-    public ChestType Reward
+    public int Reward
     {
-        get { return def.Reward; }
+        get { return PieceType.Parse(def.Reward); }
     }
 
     public bool Check()

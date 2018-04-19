@@ -50,7 +50,7 @@ public class UIChestRewardWindowView : UIGenericWindowView
         cardBuildLabel.Text = windowModel.CardBuildText;
         cardResourceLabel.Text = windowModel.CardResourceText;
         
-        var id = windowModel.Chest.GetSkin();
+        var id = "";
         
         iconOpenTop.sprite = IconService.Current.GetSpriteById(id + "_2");
         iconOpenDown.sprite = IconService.Current.GetSpriteById(id + "_1");

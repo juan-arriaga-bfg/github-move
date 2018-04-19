@@ -39,6 +39,7 @@ public class UIResourcePanelMergeController : UIGenericResourcePanelViewControll
 
     public override void UpdateView()
     {
+        return;
         if (storageItem == null) return;
 
         currentValue = storageItem.Amount;
@@ -54,6 +55,7 @@ public class UIResourcePanelMergeController : UIGenericResourcePanelViewControll
 
     private void ChestSetActive(bool isComplete)
     {
+        return;
         if (isComplete && isAnimate == false)
         {
             isAnimate = true;
@@ -72,6 +74,7 @@ public class UIResourcePanelMergeController : UIGenericResourcePanelViewControll
 
     public void OnClick()
     {
+        return;
         var shopItem = new ShopItem
         {
             Uid = string.Format("purchase.test.{0}.10", chest.Currency), 
@@ -89,7 +92,6 @@ public class UIResourcePanelMergeController : UIGenericResourcePanelViewControll
             (item, s) =>
             {
                 // on purchase success
-                GameDataService.Current.ChestsManager.NextFreeChest();
                 InitChestView();
                 
                 var model = UIService.Get.GetCachedModel<UIChestRewardWindowModel>(UIWindowType.ChestRewardWindow);
@@ -107,9 +109,9 @@ public class UIResourcePanelMergeController : UIGenericResourcePanelViewControll
 
     private void InitChestView()
     {
-        chest = GameDataService.Current.ChestsManager.GetFreeChest();
+        return;
 
-        var skin = chest.GetSkin();
+        var skin = "";
         
         top.sprite = IconService.Current.GetSpriteById(skin + "_2");
         bottom.sprite = IconService.Current.GetSpriteById(skin + "_1");
