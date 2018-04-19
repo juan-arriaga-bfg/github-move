@@ -40,9 +40,6 @@ public class R
      public const string C7Piece = "C7Piece";
      public const string C8Piece = "C8Piece";
      public const string C9Piece = "C9Piece";
-     public const string Chest1Piece = "Chest1Piece";
-     public const string Chest2Piece = "Chest2Piece";
-     public const string Chest3Piece = "Chest3Piece";
      public const string Enemy1Piece = "Enemy1Piece";
      public const string Enemy2Piece = "Enemy2Piece";
      public const string Enemy3Piece = "Enemy3Piece";
@@ -111,4 +108,13 @@ public class R
      public const string OX4Piece = "OX4Piece";
      public const string OX5Piece = "OX5Piece";
      public const string ChangeSimpleMultipleObstacleStateView = "ChangeSimpleMultipleObstacleStateView";
+     public const string Chest1Piece = "Chest1Piece";
+     public const string Chest2Piece = "Chest2Piece";
+     public const string Chest3Piece = "Chest3Piece";
+     public const string Chest4Piece = "Chest4Piece";
+     public const string Chest5Piece = "Chest5Piece";
+     public const string Chest6Piece = "Chest6Piece";
+     public const string Chest7Piece = "Chest7Piece";
+     public const string Chest8Piece = "Chest8Piece";
+     public const string Chest9Piece = "Chest9Piece";
 }

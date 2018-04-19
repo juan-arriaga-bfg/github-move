@@ -208,14 +208,6 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "ChestCommon",
-    "SpriteName": "GBOX1",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
     "Uid": "arrow",
     "SpriteName": "arrow",
     "BundleName": "graphicscommon",
@@ -741,6 +733,14 @@
     "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/ProcessedContent",
     "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Chest",
+    "SpriteName": "GBOX1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   }
 ]

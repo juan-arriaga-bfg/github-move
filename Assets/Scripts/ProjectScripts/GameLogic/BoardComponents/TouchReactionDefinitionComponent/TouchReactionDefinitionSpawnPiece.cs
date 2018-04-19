@@ -71,7 +71,6 @@ public class TouchReactionDefinitionSpawnPiece : TouchReactionDefinitionComponen
 		gameBoard.ActionExecutor.AddAction(new SpawnPiecesAction()
 		{
 			IsCheckMatch = false,
-			IsShuffle = true,
 			At = position,
 			Pieces = pieces
 		});

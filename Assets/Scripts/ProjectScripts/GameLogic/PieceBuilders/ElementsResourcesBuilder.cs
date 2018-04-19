@@ -76,6 +76,12 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Chest1.Id, R.Chest1Piece);
         dict.Add(PieceType.Chest2.Id, R.Chest2Piece);
         dict.Add(PieceType.Chest3.Id, R.Chest3Piece);
+        dict.Add(PieceType.Chest4.Id, R.Chest4Piece);
+        dict.Add(PieceType.Chest5.Id, R.Chest5Piece);
+        dict.Add(PieceType.Chest6.Id, R.Chest6Piece);
+        dict.Add(PieceType.Chest7.Id, R.Chest7Piece);
+        dict.Add(PieceType.Chest8.Id, R.Chest8Piece);
+        dict.Add(PieceType.Chest9.Id, R.Chest9Piece);
         
         dict.Add(PieceType.Enemy1.Id, R.Enemy1Piece);
         dict.Add(PieceType.Enemy2.Id, R.Enemy2Piece);

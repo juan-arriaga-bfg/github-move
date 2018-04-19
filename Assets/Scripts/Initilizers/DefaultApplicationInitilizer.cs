@@ -69,9 +69,15 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             Currency.RegisterCurrency(Currency.Power);
             Currency.RegisterCurrency(Currency.Merge);
             
-            Currency.RegisterCurrency(Currency.ChestCommon);
-            Currency.RegisterCurrency(Currency.ChestRare);
-            Currency.RegisterCurrency(Currency.ChestEpic);
+            Currency.RegisterCurrency(Currency.Chest1);
+            Currency.RegisterCurrency(Currency.Chest2);
+            Currency.RegisterCurrency(Currency.Chest3);
+            Currency.RegisterCurrency(Currency.Chest4);
+            Currency.RegisterCurrency(Currency.Chest5);
+            Currency.RegisterCurrency(Currency.Chest6);
+            Currency.RegisterCurrency(Currency.Chest7);
+            Currency.RegisterCurrency(Currency.Chest8);
+            Currency.RegisterCurrency(Currency.Chest9);
             
             Currency.RegisterCurrency(Currency.PieceA1);
             Currency.RegisterCurrency(Currency.PieceA2);

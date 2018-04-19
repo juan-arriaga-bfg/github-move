@@ -30,8 +30,10 @@ public class PieceStorageView : UIBoardView
         storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
         
         if (storage == null) return;
+
+        var isChest = Context.Context.BoardLogic.MatchDefinition.GetFirst(storage.SpawnPiece) == PieceType.Chest1.Id;
         
-        icon.sprite = IconService.Current.GetSpriteById(PieceType.Parse(storage.SpawnPiece));
+        icon.sprite = IconService.Current.GetSpriteById(isChest ? "Chest" : PieceType.Parse(storage.SpawnPiece));
         storage.Timer.OnStart += UpdateView;
         storage.Timer.OnExecute += FindStartState;
         storage.Timer.OnComplete += UpdateView;

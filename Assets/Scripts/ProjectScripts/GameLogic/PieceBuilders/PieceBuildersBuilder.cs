@@ -124,7 +124,7 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddChestPiece(Dictionary<int, IPieceBuilder> dict)
     {
-        return AddSimplePiece<ChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest3.Id, dict);
+        return AddSimplePiece<ChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest9.Id, dict);
     }
 
     private Dictionary<int, IPieceBuilder> AddSimplePiece<T>(int idMin, int idMax, Dictionary<int, IPieceBuilder> dict) where T : IPieceBuilder, new()

@@ -87,6 +87,12 @@ public static partial class PieceType
         RegisterType(Chest1);
         RegisterType(Chest2);
         RegisterType(Chest3);
+        RegisterType(Chest4);
+        RegisterType(Chest5);
+        RegisterType(Chest6);
+        RegisterType(Chest7);
+        RegisterType(Chest8);
+        RegisterType(Chest9);
         
         RegisterType(Castle1);
         RegisterType(Castle2);
@@ -194,9 +200,15 @@ public static partial class PieceType
     
     public static readonly PieceTypeDef Gbox1 = new PieceTypeDef{Id = 13000, Abbreviations = new List<string>{ "GBOX1" }};
     
-    public static readonly PieceTypeDef Chest1 = new PieceTypeDef{Id = 13001, Abbreviations = new List<string>{ "ChestCommon", "Chest1", "Common" }};
-    public static readonly PieceTypeDef Chest2 = new PieceTypeDef{Id = 13002, Abbreviations = new List<string>{ "ChestRare", "Chest2", "Rare" }};
-    public static readonly PieceTypeDef Chest3 = new PieceTypeDef{Id = 13003, Abbreviations = new List<string>{ "ChestEpic", "Chest3", "Epic" }};
+    public static readonly PieceTypeDef Chest1 = new PieceTypeDef{Id = 13001, Abbreviations = new List<string>{ "Chest1" }};
+    public static readonly PieceTypeDef Chest2 = new PieceTypeDef{Id = 13002, Abbreviations = new List<string>{ "Chest2" }};
+    public static readonly PieceTypeDef Chest3 = new PieceTypeDef{Id = 13003, Abbreviations = new List<string>{ "Chest3" }};
+    public static readonly PieceTypeDef Chest4 = new PieceTypeDef{Id = 13004, Abbreviations = new List<string>{ "Chest4" }};
+    public static readonly PieceTypeDef Chest5 = new PieceTypeDef{Id = 13005, Abbreviations = new List<string>{ "Chest5" }};
+    public static readonly PieceTypeDef Chest6 = new PieceTypeDef{Id = 13006, Abbreviations = new List<string>{ "Chest6" }};
+    public static readonly PieceTypeDef Chest7 = new PieceTypeDef{Id = 13007, Abbreviations = new List<string>{ "Chest7" }};
+    public static readonly PieceTypeDef Chest8 = new PieceTypeDef{Id = 13008, Abbreviations = new List<string>{ "Chest8" }};
+    public static readonly PieceTypeDef Chest9 = new PieceTypeDef{Id = 13009, Abbreviations = new List<string>{ "Chest9" }};
     
     public static readonly PieceTypeDef Castle1 = new PieceTypeDef{Id = 14000, Abbreviations = new List<string>{ "Castle1" }};
     public static readonly PieceTypeDef Castle2 = new PieceTypeDef{Id = 14001, Abbreviations = new List<string>{ "Castle2" }};

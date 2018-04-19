@@ -12,7 +12,6 @@ public class SpawnPiecesAction : IBoardAction
 	}
 	
 	public bool IsCheckMatch { get; set; }
-	public bool IsShuffle { get; set; }
 	
 	public BoardPosition At { get; set; }
 	
@@ -26,39 +25,18 @@ public class SpawnPiecesAction : IBoardAction
 		var pieces = Pieces;
 		
 		pieces.Sort();
-
-		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(At, free, Pieces.Count * (IsShuffle ? 5 : 1), 7) == false)
+		
+		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(At, free, Pieces.Count) == false)
 		{
 			return false;
 		}
 		
 		var index = free.IndexOf(At);
 
-		if (index != -1)
-		{
-			free.RemoveAt(index);
-		}
+		free.RemoveAt(index != -1 ? index : 0);
+		free.Add(At);
 		
-		if (IsShuffle)
-		{
-			free.Shuffle();
-			try
-			{
-				free.RemoveRange(Mathf.Max(Pieces.Count - 2, 0), free.Count - Pieces.Count);
-			}
-			catch (Exception e)
-			{
-				Debug.LogError(e);
-				throw;
-			}
-		}
-		
-		if (index != -1)
-		{
-			free.Add(At);
-		}
-		
-		for (int i = 0; i < free.Count; i++)
+		for (int i = 0; i < pieces.Count; i++)
 		{
 			gameBoardController.ActionExecutor.AddAction(new SpawnPieceAtAction
 			{

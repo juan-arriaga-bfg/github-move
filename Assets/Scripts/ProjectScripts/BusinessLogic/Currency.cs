@@ -12,9 +12,15 @@
     public static readonly CurrencyDef Power = new CurrencyDef { Id = 8, Name = "Power", IsConsumable = true };
     public static readonly CurrencyDef Merge = new CurrencyDef { Id = 9, Name = "Merge", IsConsumable = true };
     
-    public static readonly CurrencyDef ChestCommon = new CurrencyDef { Id = 101, Name = "Chest1", IsConsumable = true };
-    public static readonly CurrencyDef ChestRare = new CurrencyDef { Id = 102, Name = "Chest2", IsConsumable = true };
-    public static readonly CurrencyDef ChestEpic = new CurrencyDef { Id = 103, Name = "Chest3", IsConsumable = true };
+    public static readonly CurrencyDef Chest1 = new CurrencyDef { Id = 101, Name = "Chest1", IsConsumable = true };
+    public static readonly CurrencyDef Chest2 = new CurrencyDef { Id = 102, Name = "Chest2", IsConsumable = true };
+    public static readonly CurrencyDef Chest3 = new CurrencyDef { Id = 103, Name = "Chest3", IsConsumable = true };
+    public static readonly CurrencyDef Chest4 = new CurrencyDef { Id = 104, Name = "Chest4", IsConsumable = true };
+    public static readonly CurrencyDef Chest5 = new CurrencyDef { Id = 105, Name = "Chest5", IsConsumable = true };
+    public static readonly CurrencyDef Chest6 = new CurrencyDef { Id = 106, Name = "Chest6", IsConsumable = true };
+    public static readonly CurrencyDef Chest7 = new CurrencyDef { Id = 107, Name = "Chest7", IsConsumable = true };
+    public static readonly CurrencyDef Chest8 = new CurrencyDef { Id = 108, Name = "Chest8", IsConsumable = true };
+    public static readonly CurrencyDef Chest9 = new CurrencyDef { Id = 109, Name = "Chest9", IsConsumable = true };
     
     public static readonly CurrencyDef PieceA1 = new CurrencyDef { Id = 1001, Name = "PieceA1", IsConsumable = true };
     public static readonly CurrencyDef PieceA2 = new CurrencyDef { Id = 1002, Name = "PieceA2", IsConsumable = true };

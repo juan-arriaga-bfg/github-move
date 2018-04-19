@@ -20,6 +20,6 @@ public class ChestPieceView : PieceBoardElementView
         
         shine.SetActive(isOpen);
         
-        cap.localPosition = new Vector3(cap.localPosition.x, isOpen ? 0.4f : 0.26f);
+        cap.localPosition = new Vector3(cap.localPosition.x, isOpen ? 0.66f : 0.53f);
     }
 }

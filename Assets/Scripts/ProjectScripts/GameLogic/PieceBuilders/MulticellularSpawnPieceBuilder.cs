@@ -19,7 +19,7 @@
         
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionMenu()
-                .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage(), PieceType.Parse(def.SpawnPieceType))
+                .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage(), this is CastlePieceBuilder ? "Chest" : PieceType.Parse(def.SpawnPieceType))
                 .RegisterDefinition(new TouchReactionDefinitionUpgrade(), "arrow_light"))
             .RegisterComponent(new TouchReactionConditionComponent()));
         

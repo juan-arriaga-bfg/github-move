@@ -67,7 +67,7 @@
   },
   {
     "Uid": "Chest3",
-    "Time": "14400",
+    "Time": 14400,
     "MergePoints": 1000,
     "Price": {
       "Currency": "Crystals",
@@ -100,7 +100,7 @@
   },
   {
     "Uid": "Chest4",
-    "Time": "14400",
+    "Time": 14400,
     "MergePoints": 1000,
     "Price": {
       "Currency": "Crystals",
@@ -133,7 +133,139 @@
   },
   {
     "Uid": "Chest5",
-    "Time": "14400",
+    "Time": 14400,
+    "MergePoints": 1000,
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 60
+    },
+    "RewardAmounts" :
+    [
+      30,
+      30,
+      30,
+      31,
+      31,
+      31,
+      32,
+      32,
+      32,
+      33
+    ],
+    "Weights" :
+    [
+      {
+        "Uid": "E1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "E2",
+        "Weight" : 20
+      }
+    ]
+  },
+  {
+    "Uid": "Chest6",
+    "Time": 14400,
+    "MergePoints": 1000,
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 60
+    },
+    "RewardAmounts" :
+    [
+      30,
+      30,
+      30,
+      31,
+      31,
+      31,
+      32,
+      32,
+      32,
+      33
+    ],
+    "Weights" :
+    [
+      {
+        "Uid": "E1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "E2",
+        "Weight" : 20
+      }
+    ]
+  },
+  {
+    "Uid": "Chest7",
+    "Time": 14400,
+    "MergePoints": 1000,
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 60
+    },
+    "RewardAmounts" :
+    [
+      30,
+      30,
+      30,
+      31,
+      31,
+      31,
+      32,
+      32,
+      32,
+      33
+    ],
+    "Weights" :
+    [
+      {
+        "Uid": "E1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "E2",
+        "Weight" : 20
+      }
+    ]
+  },
+  {
+    "Uid": "Chest8",
+    "Time": 14400,
+    "MergePoints": 1000,
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 60
+    },
+    "RewardAmounts" :
+    [
+      30,
+      30,
+      30,
+      31,
+      31,
+      31,
+      32,
+      32,
+      32,
+      33
+    ],
+    "Weights" :
+    [
+      {
+        "Uid": "E1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "E2",
+        "Weight" : 20
+      }
+    ]
+  },
+  {
+    "Uid": "Chest9",
+    "Time": 14400,
     "MergePoints": 1000,
     "Price": {
       "Currency": "Crystals",
