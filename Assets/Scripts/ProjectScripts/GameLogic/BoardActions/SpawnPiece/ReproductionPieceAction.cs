@@ -21,9 +21,7 @@ public class ReproductionPieceAction : IBoardAction
 		{
 			var piece = gameBoardController.CreatePieceFromType(Piece);
 
-			if (pos.IsValid == false
-			    || gameBoardController.BoardLogic.IsLockedCell(pos)
-			    || gameBoardController.BoardLogic.AddPieceToBoard(pos.X, pos.Y, piece) == false)
+			if (gameBoardController.BoardLogic.AddPieceToBoard(pos.X, pos.Y, piece) == false)
 			{
 				continue;
 			}

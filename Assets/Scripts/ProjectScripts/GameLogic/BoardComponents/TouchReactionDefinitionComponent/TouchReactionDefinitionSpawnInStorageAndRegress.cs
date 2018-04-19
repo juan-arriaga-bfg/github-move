@@ -17,7 +17,7 @@ public class TouchReactionDefinitionSpawnInStorageAndRegress : TouchReactionDefi
         
         var free = new List<BoardPosition>();
 
-        if (piece.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(position, free, amount * 5, 7) == false)
+        if (piece.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(position, free, amount) == false)
         {
             return false;
         }

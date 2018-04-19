@@ -20,11 +20,11 @@ public class ChestRewardAction : IBoardAction
 		var free = new List<BoardPosition>();
 		var count = Rewards.Sum(pair => pair.Value);
 		
-		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From, free, count, 5) == false)
+		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From, free, count) == false)
 		{
 			return false;
 		}
-
+		
 		foreach (var reward in Rewards)
 		{
 			if(free.Count == 0) break;
@@ -40,9 +40,7 @@ public class ChestRewardAction : IBoardAction
 				
 				free.RemoveAt(0);
 
-				if (pos.IsValid == false 
-				    || gameBoardController.BoardLogic.IsLockedCell(pos)
-				    || gameBoardController.BoardLogic.AddPieceToBoard(pos.X, pos.Y, piece) == false)
+				if (gameBoardController.BoardLogic.AddPieceToBoard(pos.X, pos.Y, piece) == false)
 				{
 					continue;
 				}

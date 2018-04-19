@@ -18,13 +18,14 @@ public class EmptyCellsFinderComponent: IECSComponent
 	{
 	}
 
-	public bool FindRandomNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, int radius = 3)
+	public bool FindRandomNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count)
 	{
-		for (int i = 1; i < radius; i++)
+		var index = 0;
+
+		while (field.Count < count && index < 10)
 		{
-			FindRingWithPointInCenter(point, field, (i * 2) * 4, i);
-			
-			if (field.Count >= count) break;
+			index++;
+			FindRingWithPointInCenter(point, field, (index * 2) * 4, index);
 		}
 
 		if (field.Count == 0)
@@ -50,7 +51,7 @@ public class EmptyCellsFinderComponent: IECSComponent
 	
 	public bool FindNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, int radius = 3)
 	{
-		for (int i = 0; i < radius; i++)
+		for (var i = 0; i < radius; i++)
 		{
 			FindRingWithPointInCenter(point, field, count, i);
 				
@@ -62,7 +63,7 @@ public class EmptyCellsFinderComponent: IECSComponent
 	
 	public bool FindNearRingWithPointInCenter(BoardPosition point, List<BoardPosition> field, int radius = 3)
 	{
-		for (int i = 1; i < radius; i++)
+		for (var i = 1; i < radius; i++)
 		{
 			FindRingWithPointInCenter(point, field, (i*2)*4, i);
 		}
@@ -70,7 +71,7 @@ public class EmptyCellsFinderComponent: IECSComponent
 		return field.Count != 0;
 	}
 	
-	public bool FindRingWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, int radius)
+	public bool FindRingWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, int radius, bool chechCount = false)
 	{
 		// TODO: нет проверки на валидность координаты, в результате идет проход даже по ячекам, которые не существуют
 		
@@ -86,23 +87,23 @@ public class EmptyCellsFinderComponent: IECSComponent
 		var topRight = point.TopRightAtDistance(radius);
 		var bottomRight = point.BottomRightAtDistance(radius);
 			
-		for (int j = radius * 2 - 1; j >= 0; j--)
+		for (var j = radius * 2 - 1; j >= 0; j--)
 		{
 			bottomLeft = bottomLeft.Up;
 				
-			if (AddIsEmpty(bottomLeft, field, count)) return true;
+			if (AddIsEmpty(bottomLeft, field, count) && chechCount) return true;
 				
 			topLeft = topLeft.Right;
 				
-			if (AddIsEmpty(topLeft, field, count)) return true;
+			if (AddIsEmpty(topLeft, field, count) && chechCount) return true;
 				
 			topRight = topRight.Down;
 				
-			if (AddIsEmpty(topRight, field, count)) return true;
+			if (AddIsEmpty(topRight, field, count) && chechCount) return true;
 				
 			bottomRight = bottomRight.Left;
 				
-			if (AddIsEmpty(bottomRight, field, count)) return true;
+			if (AddIsEmpty(bottomRight, field, count) && chechCount) return true;
 		}
 
 		return field.Count != 0;
@@ -129,9 +130,9 @@ public class EmptyCellsFinderComponent: IECSComponent
 		context.IsYValid(point.Y, out yMin);
 		context.IsYValid(point.Y + height - 1, out yMax);
 		
-		for (int i = xMin; i <= xMax; i++)
+		for (var i = xMin; i <= xMax; i++)
 		{
-			for (int j = yMin; j <= yMax; j++)
+			for (var j = yMin; j <= yMax; j++)
 			{
 				var empty = new BoardPosition(i, j);
 
@@ -154,7 +155,7 @@ public class EmptyCellsFinderComponent: IECSComponent
 
 	private bool AddIsEmpty(BoardPosition point, List<BoardPosition> field, int count)
 	{
-		if (context.IsEmpty(point)) field.Add(point);
+		if (point.IsValid && context.IsLockedCell(point) == false && context.IsEmpty(point)) field.Add(point);
 		
 		return field.Count == count;
 	}
