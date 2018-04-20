@@ -56,23 +56,6 @@ public class UIChestRewardWindowView : UIGenericWindowView
         iconOpenDown.sprite = IconService.Current.GetSpriteById(id + "_1");
 
         var reward = windowModel.GetReward();
-        
-        var hero = GameDataService.Current.HeroesManager.GetHeroByCurrency(reward.Currency);
-
-        if (hero != null)
-        {
-            cardHeroName.Text = hero.Def.Uid;
-            heroAmountLabel.Text = "x" + reward.Amount;
-
-            var current = hero.CurrentProgress + reward.Amount;
-            
-            heroProgressLabel.Text = string.Format("{0}/{1}", current, hero.TotalProgress);
-            progress.sizeDelta = new Vector2(Mathf.Clamp(150*(current/(float)hero.TotalProgress), 0, 150), progress.sizeDelta.y);
-            iconHero.sprite = IconService.Current.GetSpriteById("face_" + hero.Def.Uid);
-            cardAnchors[0].gameObject.SetActive(true);
-            return;
-        }
-
         var piece = PieceType.Parse(reward.Currency);
 
         if (piece != PieceType.None.Id)
@@ -130,7 +113,6 @@ public class UIChestRewardWindowView : UIGenericWindowView
         var board = BoardService.Current.GetBoardById(0);
         
         var position = GetHousePosition(reward.Currency);
-        var isCard = GameDataService.Current.HeroesManager.GetHeroByCurrency(reward.Currency) != null;
 
         if (position != null)
         {
@@ -139,7 +121,7 @@ public class UIChestRewardWindowView : UIGenericWindowView
             board.Manipulator.CameraManipulator.ZoomTo(0.3f, worldPos);
         }
         
-        if (reward.Currency != Currency.Coins.Name && !isCard)
+        if (reward.Currency != Currency.Coins.Name)
         {
             var pieces = new List<int>();
 
@@ -176,7 +158,6 @@ public class UIChestRewardWindowView : UIGenericWindowView
             {
                 // on purchase success
                 
-                if(isCard) AddCardsView.Show(position.Value, reward.Currency);
             },
             item =>
             {
@@ -187,11 +168,6 @@ public class UIChestRewardWindowView : UIGenericWindowView
 
     private BoardPosition? GetHousePosition(string currency)
     {
-        if (GameDataService.Current.HeroesManager.GetHeroByCurrency(currency) != null)
-        {
-            return GameDataService.Current.PiecesManager.TavernPosition;
-        }
-
         if (currency == Currency.Coins.Name)
         {
             return null;

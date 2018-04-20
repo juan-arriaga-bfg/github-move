@@ -54,7 +54,7 @@ public class PieceBuildersBuilder
         
         dict.Add(PieceType.Fog.Id, new FogPieceBuilder
         {
-            Mask = GetRect(5, 5)
+            Mask = BoardPosition.GetRect(BoardPosition.Zero(), 5, 5)
         });
         
         return dict;
@@ -107,7 +107,7 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddCastlePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        var mask = GetRect(3, 3);
+        var mask = BoardPosition.GetRect(BoardPosition.Zero(), 3, 3);
         
         return AddMulticellularPiece<CastlePieceBuilder>(PieceType.Castle1.Id, PieceType.Castle9.Id, mask, dict);
     }
@@ -147,35 +147,5 @@ public class PieceBuildersBuilder
         }
         
         return dict;
-    }
-
-    private List<BoardPosition> GetLine(BoardPosition dot, int length)
-    {
-        var line = new List<BoardPosition> {dot};
-        
-        for (int i = 1; i < length; i++)
-        {
-            dot = dot.Up;
-            
-            line.Add(dot);
-        }
-
-        return line;
-    }
-
-    private List<BoardPosition> GetRect(int width, int height)
-    {
-        var mask = new List<BoardPosition>();
-        var dot = BoardPosition.Zero();
-        
-        mask.AddRange(GetLine(dot, width));
-
-        for (int i = 1; i < height; i++)
-        {
-            dot = dot.Right;
-            mask.AddRange(GetLine(dot, width));
-        }
-
-        return mask;
     }
 }

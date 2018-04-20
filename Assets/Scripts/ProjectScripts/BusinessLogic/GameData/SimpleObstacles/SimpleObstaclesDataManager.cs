@@ -23,7 +23,7 @@ public class SimpleObstaclesDataManager : IDataLoader<List<SimpleObstaclesDef>>
                     if (previousType != PieceType.None.Id)
                     {
                         var previous = data.Find(def => def.Piece == previousType);
-                        next.Weights = PieceWeight.ReplaseWeights(previous.Weights, next.Weights);
+                        next.Weights = ItemWeight.ReplaseWeights(previous.Weights, next.Weights);
                     }
                     
                     Obstacles.Add(next.Piece, next);
@@ -40,7 +40,11 @@ public class SimpleObstaclesDataManager : IDataLoader<List<SimpleObstaclesDef>>
     {
         SimpleObstaclesDef def;
 
-        return Obstacles.TryGetValue(piece, out def) == false ? PieceType.None.Id : PieceWeight.GetRandomPiece(def.Weights);
+        if (Obstacles.TryGetValue(piece, out def) == false) return PieceType.None.Id;
+        
+        var item = ItemWeight.GetRandomItem(def.Weights);
+        
+        return item != null ? item.Piece : PieceType.None.Id;
     }
 
     public CurrencyPair PriceForPiece(Piece piece, int step)

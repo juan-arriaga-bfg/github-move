@@ -29,21 +29,6 @@ public class HeroesDataManager : IDataLoader<List<HeroDef>>
     {
         return Heroes.Find(hero => hero.Def.Uid == uid);
     }
-    
-    public Hero GetHero(AbilityType ability)
-    {
-        return Heroes.Find(hero => hero.CurrentAbility == ability);
-    }
-    
-    public List<Hero> GetHeroes(AbilityType ability)
-    {
-        return Heroes.FindAll(hero => hero.CurrentAbility == ability);
-    }
-    
-    public Hero GetHeroByCurrency(string currensy)
-    {
-        return Heroes.Find(h => h.CardCurrencyDef.Name == currensy);
-    }
 
     public int CurrentPower()
     {

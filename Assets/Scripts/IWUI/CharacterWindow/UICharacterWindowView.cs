@@ -43,23 +43,6 @@ public class UICharacterWindowView : UIGenericPopupWindowView
         var windowModel = Model as UICharacterWindowModel;
         
         Controller.CloseCurrentWindow();
-        
-        if (windowModel.Hero.IsLevelMax())
-        {
-            var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
-        
-            model.Title = "Message";
-            model.Message = "Tavern level is not high enough!";
-            model.AcceptLabel = "Go to Tavern";
-        
-            model.OnAccept = () => { HintArrowView.Show(GameDataService.Current.PiecesManager.TavernPosition); };
-            model.OnCancel = null;
-        
-            UIService.Get.ShowWindow(UIWindowType.MessageWindow);
-            UIService.Get.CloseWindow(UIWindowType.TavernWindow, true);
-            UIService.Get.CloseWindow(UIWindowType.QuestStartWindow, true);
-            return;
-        }
 
         if (windowModel.IsDone == false)
         {

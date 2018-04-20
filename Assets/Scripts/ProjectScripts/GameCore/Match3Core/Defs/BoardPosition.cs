@@ -97,7 +97,67 @@ public struct BoardPosition : IEquatable<BoardPosition>
     {
         return new BoardPosition(0, 0);
     }
+    
+    public static List<BoardPosition> GetLine(BoardPosition dot, int length)
+    {
+        var line = new List<BoardPosition> {dot};
+        
+        for (var i = 1; i < length; i++)
+        {
+            dot = dot.Up;
+            line.Add(dot);
+        }
 
+        return line;
+    }
+    
+    public static List<BoardPosition> GetLineInCenter(BoardPosition dot, int length)
+    {
+        dot = dot.DownAtDistance((int) (length * 0.5f));
+        
+        var line = new List<BoardPosition> {dot};
+        
+        for (var i = 1; i < length; i++)
+        {
+            dot = dot.Up;
+            line.Add(dot);
+        }
+
+        return line;
+    }
+
+    public static List<BoardPosition> GetRect(BoardPosition dot, int width, int height)
+    {
+        var rect = new List<BoardPosition>();
+        
+        rect.AddRange(GetLine(dot, width));
+
+        for (var i = 1; i < height; i++)
+        {
+            dot = dot.Right;
+            rect.AddRange(GetLine(dot, width));
+        }
+
+        return rect;
+    }
+    
+    public static List<BoardPosition> GetRectInCenter(BoardPosition dot, int width, int height)
+    {
+        var rect = new List<BoardPosition>();
+
+        dot = dot.LeftAtDistance((int) (height * 0.5f));
+        
+        rect.AddRange(GetLineInCenter(dot, width));
+
+        for (var i = 1; i < height; i++)
+        {
+            dot = dot.Right;
+            rect.AddRange(GetLineInCenter(dot, width));
+        }
+
+        return rect;
+    }
+    
     public static float SqrMagnitude(BoardPosition from, BoardPosition to)
     {
         return (to.X - from.X) * (to.X - from.X) + (to.Y - from.Y) * (to.Y - from.Y);

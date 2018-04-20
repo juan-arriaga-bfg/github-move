@@ -8,8 +8,10 @@ public class ChestDef
     public int Time { get; set; }
     public int MergePoints { get; set; }
     public CurrencyPair Price { get; set; }
-    public List<int> RewardAmounts { get; set; }
-    public List<PieceWeight> Weights;
+    public List<int> PieceAmounts { get; set; }
+    public List<int> ChargerAmounts { get; set; }
+    public List<ItemWeight> PieceWeights;
+    public List<ItemWeight> ChargerWeights;
     
     public int Piece
     {

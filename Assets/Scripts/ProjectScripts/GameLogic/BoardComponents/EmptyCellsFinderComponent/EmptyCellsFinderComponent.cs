@@ -17,7 +17,7 @@ public class EmptyCellsFinderComponent: IECSComponent
 	public void OnUnRegisterEntity(ECSEntity entity)
 	{
 	}
-
+	
 	public bool FindRandomNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count)
 	{
 		var index = 0;

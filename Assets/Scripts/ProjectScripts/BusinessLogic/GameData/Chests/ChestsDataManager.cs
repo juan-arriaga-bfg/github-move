@@ -27,7 +27,8 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
                     var def = data[i - 1];
                     var defNext = data[i];
                     
-                    defNext.Weights = PieceWeight.ReplaseWeights(def.Weights, defNext.Weights);
+                    defNext.PieceWeights = ItemWeight.ReplaseWeights(def.PieceWeights, defNext.PieceWeights);
+                    defNext.ChargerWeights = ItemWeight.ReplaseWeights(def.ChargerWeights, defNext.ChargerWeights);
                     Chests.Add(defNext);
                 }
             }

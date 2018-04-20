@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class BoardButtonView : PieceTouchRegion, ITouchRegionListener
+public class BoardButtonView : TouchRegion, ITouchRegionListener
 {
     public enum Color
     {

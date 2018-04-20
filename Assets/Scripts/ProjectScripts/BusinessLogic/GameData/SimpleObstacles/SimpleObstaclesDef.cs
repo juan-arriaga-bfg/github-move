@@ -6,7 +6,7 @@ public class SimpleObstaclesDef
     
     public string Uid { get; set; }
 
-    public List<PieceWeight> Weights;
+    public List<ItemWeight> Weights;
     
     public int Piece
     {

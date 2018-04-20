@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PieceTouchRegion : IWBaseMonoBehaviour, ITouchableListener
+public class TouchRegion : IWBaseMonoBehaviour, ITouchableListener
 {
     [SerializeField] private List<RectTransform> touchRegions = new List<RectTransform>();
     
-    protected PieceBoardElementView context;
+    protected BoardElementView context;
 
     private CameraManipulator cameraManipulator;
     
     protected virtual void Awake()
     {
-        context = GetComponent<PieceBoardElementView>();
+        context = GetComponent<BoardElementView>();
 
         cameraManipulator = GameObject.FindObjectOfType<CameraManipulator>();
     }

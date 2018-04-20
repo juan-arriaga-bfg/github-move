@@ -66,63 +66,21 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             Currency.RegisterCurrency(Currency.Power);
             Currency.RegisterCurrency(Currency.Merge);
             
-            Currency.RegisterCurrency(Currency.Chest1);
-            Currency.RegisterCurrency(Currency.Chest2);
-            Currency.RegisterCurrency(Currency.Chest3);
-            Currency.RegisterCurrency(Currency.Chest4);
-            Currency.RegisterCurrency(Currency.Chest5);
-            Currency.RegisterCurrency(Currency.Chest6);
-            Currency.RegisterCurrency(Currency.Chest7);
-            Currency.RegisterCurrency(Currency.Chest8);
-            Currency.RegisterCurrency(Currency.Chest9);
-            
-            Currency.RegisterCurrency(Currency.PieceA1);
-            Currency.RegisterCurrency(Currency.PieceA2);
-            Currency.RegisterCurrency(Currency.PieceA3);
-            Currency.RegisterCurrency(Currency.PieceA4);
-            Currency.RegisterCurrency(Currency.PieceA5);
-            Currency.RegisterCurrency(Currency.PieceA6);
-            Currency.RegisterCurrency(Currency.PieceA7);
-            Currency.RegisterCurrency(Currency.PieceA8);
-            Currency.RegisterCurrency(Currency.PieceA9);
-            
-            Currency.RegisterCurrency(Currency.PieceB1);
-            Currency.RegisterCurrency(Currency.PieceB2);
-            Currency.RegisterCurrency(Currency.PieceB3);
-            Currency.RegisterCurrency(Currency.PieceB4);
-            Currency.RegisterCurrency(Currency.PieceB5);
-            
-            Currency.RegisterCurrency(Currency.PieceC1);
-            Currency.RegisterCurrency(Currency.PieceC2);
-            Currency.RegisterCurrency(Currency.PieceC3);
-            Currency.RegisterCurrency(Currency.PieceC4);
-            Currency.RegisterCurrency(Currency.PieceC5);
-            Currency.RegisterCurrency(Currency.PieceC6);
-            Currency.RegisterCurrency(Currency.PieceC7);
-            Currency.RegisterCurrency(Currency.PieceC8);
-            Currency.RegisterCurrency(Currency.PieceC9);
-            
-            Currency.RegisterCurrency(Currency.PieceD1);
-            Currency.RegisterCurrency(Currency.PieceD2);
-            Currency.RegisterCurrency(Currency.PieceD3);
-            Currency.RegisterCurrency(Currency.PieceD4);
-            Currency.RegisterCurrency(Currency.PieceD5);
-            
-            Currency.RegisterCurrency(Currency.PieceE1);
-            Currency.RegisterCurrency(Currency.PieceE2);
-            Currency.RegisterCurrency(Currency.PieceE3);
-            Currency.RegisterCurrency(Currency.PieceE4);
-            Currency.RegisterCurrency(Currency.PieceE5);
-            Currency.RegisterCurrency(Currency.PieceE6);
-            
-            Currency.RegisterCurrency(Currency.LevelRobin);
-            Currency.RegisterCurrency(Currency.LevelJohn);
-            
             Currency.RegisterCurrency(Currency.LevelCastle);
             Currency.RegisterCurrency(Currency.LevelTavern);
             Currency.RegisterCurrency(Currency.LevelMine);
             Currency.RegisterCurrency(Currency.LevelSawmill);
             Currency.RegisterCurrency(Currency.LevelSheepfold);
+            
+            Currency.RegisterCurrency(Currency.Charger1);
+            Currency.RegisterCurrency(Currency.Charger2);
+            Currency.RegisterCurrency(Currency.Charger3);
+            Currency.RegisterCurrency(Currency.Charger4);
+            Currency.RegisterCurrency(Currency.Charger5);
+            Currency.RegisterCurrency(Currency.Charger6);
+            Currency.RegisterCurrency(Currency.Charger7);
+            Currency.RegisterCurrency(Currency.Charger8);
+            Currency.RegisterCurrency(Currency.Charger9);
         });
         
         ShopService.Instance.SetManager(shopManager);

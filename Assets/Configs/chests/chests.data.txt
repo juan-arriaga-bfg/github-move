@@ -7,7 +7,7 @@
       "Currency": "Crystals",
       "Amount": 1
     },
-    "RewardAmounts" :
+    "PieceAmounts" :
     [
       10,
       10,
@@ -17,10 +17,21 @@
       11,
       12,
       12,
-      12,
-      13
+      12
     ],
-    "Weights" :
+    "ChargerAmounts" :
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "PieceWeights" :
     [
       {
         "Uid": "A1",
@@ -28,6 +39,17 @@
       },
       {
         "Uid": "A2",
+        "Weight" : 20
+      }
+    ],
+    "ChargerWeights" :
+    [
+      {
+        "Uid": "Charger1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "Charger9",
         "Weight" : 20
       }
     ]
@@ -40,7 +62,7 @@
       "Currency": "Crystals",
       "Amount": 30
     },
-    "RewardAmounts" :
+    "PieceAmounts" :
     [
       20,
       20,
@@ -53,7 +75,19 @@
       22,
       23
     ],
-    "Weights" :
+    "ChargerAmounts" :
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "PieceWeights" :
     [
       {
         "Uid": "B1",
@@ -61,6 +95,17 @@
       },
       {
         "Uid": "B2",
+        "Weight" : 20
+      }
+    ],
+    "ChargerWeights" :
+    [
+      {
+        "Uid": "Charger1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "Charger9",
         "Weight" : 20
       }
     ]
@@ -73,7 +118,7 @@
       "Currency": "Crystals",
       "Amount": 60
     },
-    "RewardAmounts" :
+    "PieceAmounts" :
     [
       30,
       30,
@@ -86,7 +131,19 @@
       32,
       33
     ],
-    "Weights" :
+    "ChargerAmounts" :
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "PieceWeights" :
     [
       {
         "Uid": "C1",
@@ -94,6 +151,17 @@
       },
       {
         "Uid": "C2",
+        "Weight" : 20
+      }
+    ],
+    "ChargerWeights" :
+    [
+      {
+        "Uid": "Charger1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "Charger9",
         "Weight" : 20
       }
     ]
@@ -106,7 +174,7 @@
       "Currency": "Crystals",
       "Amount": 60
     },
-    "RewardAmounts" :
+    "PieceAmounts" :
     [
       30,
       30,
@@ -119,7 +187,19 @@
       32,
       33
     ],
-    "Weights" :
+    "ChargerAmounts" :
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "PieceWeights" :
     [
       {
         "Uid": "D1",
@@ -127,6 +207,17 @@
       },
       {
         "Uid": "D2",
+        "Weight" : 20
+      }
+    ],
+    "ChargerWeights" :
+    [
+      {
+        "Uid": "Charger1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "Charger9",
         "Weight" : 20
       }
     ]
@@ -139,7 +230,7 @@
       "Currency": "Crystals",
       "Amount": 60
     },
-    "RewardAmounts" :
+    "PieceAmounts" :
     [
       30,
       30,
@@ -152,7 +243,19 @@
       32,
       33
     ],
-    "Weights" :
+    "ChargerAmounts" :
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "PieceWeights" :
     [
       {
         "Uid": "E1",
@@ -160,6 +263,17 @@
       },
       {
         "Uid": "E2",
+        "Weight" : 20
+      }
+    ],
+    "ChargerWeights" :
+    [
+      {
+        "Uid": "Charger1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "Charger9",
         "Weight" : 20
       }
     ]
@@ -172,7 +286,7 @@
       "Currency": "Crystals",
       "Amount": 60
     },
-    "RewardAmounts" :
+    "PieceAmounts" :
     [
       30,
       30,
@@ -185,7 +299,19 @@
       32,
       33
     ],
-    "Weights" :
+    "ChargerAmounts" :
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "PieceWeights" :
     [
       {
         "Uid": "E1",
@@ -193,6 +319,17 @@
       },
       {
         "Uid": "E2",
+        "Weight" : 20
+      }
+    ],
+    "ChargerWeights" :
+    [
+      {
+        "Uid": "Charger1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "Charger9",
         "Weight" : 20
       }
     ]
@@ -205,7 +342,7 @@
       "Currency": "Crystals",
       "Amount": 60
     },
-    "RewardAmounts" :
+    "PieceAmounts" :
     [
       30,
       30,
@@ -218,7 +355,19 @@
       32,
       33
     ],
-    "Weights" :
+    "ChargerAmounts" :
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "PieceWeights" :
     [
       {
         "Uid": "E1",
@@ -226,6 +375,17 @@
       },
       {
         "Uid": "E2",
+        "Weight" : 20
+      }
+    ],
+    "ChargerWeights" :
+    [
+      {
+        "Uid": "Charger1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "Charger9",
         "Weight" : 20
       }
     ]
@@ -238,7 +398,7 @@
       "Currency": "Crystals",
       "Amount": 60
     },
-    "RewardAmounts" :
+    "PieceAmounts" :
     [
       30,
       30,
@@ -251,7 +411,19 @@
       32,
       33
     ],
-    "Weights" :
+    "ChargerAmounts" :
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "PieceWeights" :
     [
       {
         "Uid": "E1",
@@ -259,6 +431,17 @@
       },
       {
         "Uid": "E2",
+        "Weight" : 20
+      }
+    ],
+    "ChargerWeights" :
+    [
+      {
+        "Uid": "Charger1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "Charger9",
         "Weight" : 20
       }
     ]
@@ -271,7 +454,7 @@
       "Currency": "Crystals",
       "Amount": 60
     },
-    "RewardAmounts" :
+    "PieceAmounts" :
     [
       30,
       30,
@@ -284,7 +467,19 @@
       32,
       33
     ],
-    "Weights" :
+    "ChargerAmounts" :
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "PieceWeights" :
     [
       {
         "Uid": "E1",
@@ -292,6 +487,17 @@
       },
       {
         "Uid": "E2",
+        "Weight" : 20
+      }
+    ],
+    "ChargerWeights" :
+    [
+      {
+        "Uid": "Charger1",
+        "Weight" : 20
+      },
+      {
+        "Uid": "Charger9",
         "Weight" : 20
       }
     ]

@@ -77,14 +77,35 @@ public class Chest
         }
     }
 
-    public Dictionary<int, int> GetRewards(int level)
+    public Dictionary<int, int> GetRewardPieces(int level)
     {
-        var max = def.RewardAmounts[level];
+        var max = def.PieceAmounts[level];
         var result = new Dictionary<int, int>();
 
         for (var i = 0; i < max; i++)
         {
-            var random = PieceWeight.GetRandomPiece(def.Weights);
+            var random = ItemWeight.GetRandomItem(def.PieceWeights).Piece;
+
+            if (result.ContainsKey(random))
+            {
+                result[random] += 1;
+                continue;
+            }
+            
+            result.Add(random, 1);
+        }
+        
+        return result;
+    }
+    
+    public Dictionary<string, int> GetRewardChargers(int level)
+    {
+        var max = def.ChargerAmounts[level];
+        var result = new Dictionary<string, int>();
+
+        for (var i = 0; i < max; i++)
+        {
+            var random = ItemWeight.GetRandomItem(def.PieceWeights).Uid;
 
             if (result.ContainsKey(random))
             {

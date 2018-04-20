@@ -15,7 +15,7 @@ public class UICharacterWindowModel : IWWindowModel
     
     public bool IsDone
     {
-        get { return Hero.CurrentProgress >= Hero.TotalProgress; }
+        get { return Hero.IsCollect; }
     }
     
     public string Title
@@ -32,7 +32,7 @@ public class UICharacterWindowModel : IWWindowModel
     {
         get
         {
-            return string.Format("{0} <color=#00FF00>+{1}</color>", Hero.CurrentAbilityValue, Hero.NextAbilityValue - Hero.CurrentAbilityValue);
+            return string.Format("{0} <color=#00FF00>+{1}</color>", 0, Hero.GetAbilityValue(AbilityType.Power));
         }
     }
 
@@ -43,17 +43,17 @@ public class UICharacterWindowModel : IWWindowModel
 
     public string ProgressText
     {
-        get { return string.Format("{0}/{1}", Hero.CurrentProgress, Hero.TotalProgress); }
+        get { return string.Format("{0}/{1}", 50, 100); }
     }
 
     public float ProgressLenght
     {
-        get { return Mathf.Clamp(320 * Hero.CurrentProgress / (float) Hero.TotalProgress, 0, 320); }
+        get { return Mathf.Clamp(320 * 50 / (float) 100, 0, 320); }
     }
     
     public string LevelText
     {
-        get { return string.Format("<size=45>{0}</size> <size=35>Lvl</size>", Hero.Level + 1); }
+        get { return string.Format("<size=45>{0}</size> <size=35>Lvl</size>", 1); }
     }
     
     public Sprite IconSprite
@@ -63,7 +63,7 @@ public class UICharacterWindowModel : IWWindowModel
     
     public Sprite SkillSprite
     {
-        get { return IconService.Current.GetSpriteById(Hero.CurrentAbility.ToString()); }
+        get { return IconService.Current.GetSpriteById(Hero.Def.Abilities[0].Ability.ToString()); }
     }
     
     public string CardTupeText

@@ -53,10 +53,10 @@ public class UiHeroItem : MonoBehaviour
         heroSmallIcon.sprite = iconHero;
         
         nameLabel.Text = hero.Def.Uid;
-        levelLabel.Text = string.Format("<size=45>{0}</size> <size=35>Lvl</size>", hero.Level + 1);
+        levelLabel.Text = string.Format("<size=45>{0}</size> <size=35>Lvl</size>", 1);
         
-        progressLabel.Text = string.Format("{0}/{1}", hero.CurrentProgress, hero.TotalProgress);
-        progress.sizeDelta = new Vector2(Mathf.Clamp(190 * hero.CurrentProgress / (float) hero.TotalProgress, 0, 190), progress.sizeDelta.y);
+        progressLabel.Text = string.Format("{0}/{1}", 50, 100);
+        progress.sizeDelta = new Vector2(Mathf.Clamp(190 * 50 / (float) 100, 0, 190), progress.sizeDelta.y);
         
         skillIcon.gameObject.SetActive(true);
 
@@ -111,15 +111,15 @@ public class UiHeroItem : MonoBehaviour
         
         buttonLabel.Text = "Level UP";
         messageLabel.Text = string.Format("<color=#{0}>{1}</color>", color, message);
-        skillLabel.Text = string.Format("<color=#{0}>{1}</color>", color, hero.CurrentAbilityValue);
+        skillLabel.Text = string.Format("<color=#{0}>{1}</color>", color, hero.GetAbilityValue(AbilityType.Power));
         
         progressGo.SetActive(true);
-        buttonGo.SetActive(hero.CurrentProgress >= hero.TotalProgress);
+        buttonGo.SetActive(50 >= 100);
 
         toggle.interactable = true;
         toggle.isOn = false;
         
-        skillIcon.sprite = IconService.Current.GetSpriteById(hero.CurrentAbility.ToString());
+        skillIcon.sprite = IconService.Current.GetSpriteById(hero.GetAbilityValue(AbilityType.Power).ToString());
     }
 
     private void InitForQuest()
@@ -140,14 +140,14 @@ public class UiHeroItem : MonoBehaviour
         skillIcon.sprite = IconService.Current.GetSpriteById(ability.Ability.ToString());
         
         
-        if (ability.Ability == hero.CurrentAbility)
+        if (ability.Ability == AbilityType.Power)
         {
             toggle.interactable = !inMission || hero.InAdventure == obstacle.GetUid();
             
             toggle.isOn = hero.InAdventure == obstacle.GetUid();
             buttonGo.SetActive(!inMission && !toggle.isOn);
             
-            if (!isWaiting && hero.CurrentProgress >= hero.TotalProgress)
+            if (!isWaiting && 50 >= 100)
             {
                 buttonLabel.Text = "Level UP";
                 buttonGo.SetActive(true);
@@ -159,7 +159,7 @@ public class UiHeroItem : MonoBehaviour
             
             buttonLabel.Text = "Level UP";
             toggle.isOn = false;
-            buttonGo.SetActive(!inMission && hero.CurrentProgress >= hero.TotalProgress);
+            buttonGo.SetActive(!inMission && 50 >= 100);
         }
     }
 

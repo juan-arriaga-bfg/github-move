@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class PieceWeight
+public class ItemWeight
 {
     private int pieceType = -1;
     
@@ -23,9 +23,9 @@ public class PieceWeight
         }
     }
 
-    public PieceWeight Copy()
+    public ItemWeight Copy()
     {
-        return new PieceWeight{Uid = this.Uid, Weight = this.Weight};
+        return new ItemWeight{Uid = this.Uid, Weight = this.Weight};
     }
 
     public override string ToString()
@@ -33,7 +33,7 @@ public class PieceWeight
         return string.Format("Uid: {0} - Weight: {1} - Override: {2}", Uid, Weight, Override);
     }
 
-    public static int GetRandomPiece(List<PieceWeight> weights)
+    public static ItemWeight GetRandomItem(List<ItemWeight> weights)
     {
         var sum = weights.Sum(w => w.Weight);
         var current = 0;
@@ -47,15 +47,15 @@ public class PieceWeight
             
             if (current < random) continue;
             
-            return item.Piece;
+            return item;
         }
         
-        return PieceType.None.Id;
+        return null;
     }
 
-    public static List<PieceWeight> ReplaseWeights(List<PieceWeight> oldWeights, List<PieceWeight> nextWeights)
+    public static List<ItemWeight> ReplaseWeights(List<ItemWeight> oldWeights, List<ItemWeight> nextWeights)
     {
-        var weights = new List<PieceWeight>();
+        var weights = new List<ItemWeight>();
 
         foreach (var weight in oldWeights)
         {

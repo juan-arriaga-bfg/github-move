@@ -31,20 +31,8 @@ public class UIQuestStartWindowModel : IWWindowModel
         get
         {
             var conditionsDelay = Obstacle.GetOpenConditions<ObstacleConditionDelay>();
-            var conditionsHero = Obstacle.GetOpenConditions<ObstacleConditionHero>();
             
-            var bonus = 0;
-            
-            for (var i = 0; i < conditionsHero.Count; i++)
-            {
-                var hero = GameDataService.Current.HeroesManager.GetHero(conditionsHero[i].HeroAbility.Ability);
-                
-                if(hero.InAdventure != Obstacle.GetUid()) continue;
-
-                bonus += hero.CurrentAbilityValue;
-            }
-            
-            return string.Format("Total quest time: {0} min", conditionsDelay.Count == 0 ? 0 : new TimeSpan(0, 0, conditionsDelay[0].Delay).TotalMinutes - bonus);
+            return string.Format("Total quest time: {0} min", conditionsDelay.Count == 0 ? 0 : new TimeSpan(0, 0, conditionsDelay[0].Delay).TotalMinutes );
         }
     }
 
