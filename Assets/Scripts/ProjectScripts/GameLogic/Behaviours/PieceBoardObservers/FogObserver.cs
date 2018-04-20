@@ -2,6 +2,9 @@
 
 public class FogObserver : MulticellularPieceBoardObserver
 {
+    private int Free = 10;
+    private int Uniq = 10;
+    
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
         base.OnRemoveFromBoard(position, context);
@@ -24,14 +27,14 @@ public class FogObserver : MulticellularPieceBoardObserver
         for (int i = 0; i < Mask.Count; i++)
         {
             var point = GetPointInMask(position, Mask[i]);
-            var index = Random.Range(0, 10);
+            var index = Random.Range(0, 101);
             
-            if(index == 0) continue;
+            if(index < Free) continue;
             
             context.Context.ActionExecutor.AddAction(new CreatePieceAtAction
             {
                 At = point,
-                PieceTypeId = index == 1 ? PieceType.O2.Id : PieceType.O1.Id
+                PieceTypeId = index < (Free + Uniq) ? PieceType.OX1.Id : PieceType.O1.Id
             });
         }
     }
