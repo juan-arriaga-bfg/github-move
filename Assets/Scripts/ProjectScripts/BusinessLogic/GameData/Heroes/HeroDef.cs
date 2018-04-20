@@ -13,14 +13,10 @@ public class HeroAbility
     public AbilityType Ability { get; set; }
 }
 
-public class HeroLevelDef
-{
-    public List<HeroAbility> Abilities{ get; set; }
-    public List<CurrencyPair> Prices { get; set; }
-}
-
 public class HeroDef
 {
     public string Uid { get; set; }
-    public List<HeroLevelDef> Levels { get; set; }
+    public List<HeroAbility> Abilities { get; set; }
+    public List<CurrencyPair> Collection { get; set; }
+    public List<CurrencyPair> Price { get; set; }
 }

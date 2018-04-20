@@ -4,6 +4,92 @@ public class Hero
 {
     private HeroDef def;
     
+    public Hero(HeroDef def)
+    {
+        this.def = def;
+    }
+    
+    public void Collect()
+    {
+        var prices = new List<CurrencyPair>();
+        
+        prices.AddRange(def.Price);
+        prices.AddRange(def.Collection);
+        
+        CurrencyHellper.Purchase(def.Uid, 1, prices, success =>
+        {
+            if (success)
+            {
+                CurrencyHellper.Purchase(Currency.Power.Name, GetAbilityValue(AbilityType.Power));
+                return;
+            }
+            
+            var model2= UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+            model2.Title = "Need coins?";
+            model2.Message = null;
+            model2.Image = "tutorial_TextBlock_1";
+            model2.AcceptLabel = "Ok";
+        
+            model2.OnAccept = () => {};
+            model2.OnCancel = null;
+        
+            UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+        });
+    }
+    
+    public int GetAbilityValue(AbilityType ability)
+    {
+        var heroAbility = def.Abilities.Find(pair => pair.Ability == ability);
+        
+        return heroAbility == null ? 0 : heroAbility.Value;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public readonly CurrencyDef LevelCurrencyDef;
     public readonly CurrencyDef CardCurrencyDef;
     
@@ -17,20 +103,7 @@ public class Hero
         }
     }
     
-    public Hero(HeroDef def)
-    {
-        this.def = def;
-        
-        LevelCurrencyDef = Currency.GetCurrencyDef(string.Format("Level{0}", def.Uid));
-        CardCurrencyDef = Currency.GetCurrencyDef(string.Format("{0}Card", def.Uid));
-        
-        foreach (var level in def.Levels)
-        {
-            level.Abilities.Sort((a, b) => -a.Value.CompareTo(b.Value));
-        }
-        
-        
-    }
+    
     
     public HeroDef Def
     {
@@ -52,9 +125,10 @@ public class Hero
     {
         get
         {
-            var price = def.Levels[Level].Prices.Find(pair => pair.Currency == CardCurrencyDef.Name);
+            return 0;
+           /* var price = def.Levels[Level].Prices.Find(pair => pair.Currency == CardCurrencyDef.Name);
             
-            return price == null ? 0 : price.Amount;
+            return price == null ? 0 : price.Amount;*/
         }
     }
     
@@ -62,35 +136,38 @@ public class Hero
     {
         get
         {
-            var price = def.Levels[Level].Prices.Find(pair => pair.Currency == Currency.Coins.Name);
+            return 0;
+            /*var price = def.Levels[Level].Prices.Find(pair => pair.Currency == Currency.Coins.Name);
             
-            return price == null ? 0 : price.Amount;
+            return price == null ? 0 : price.Amount;*/
         }
     }
 
     public AbilityType CurrentAbility
     {
-        get {return def.Levels[Level].Abilities[0].Ability; }
+        get
+        {
+            return 0;
+//            return def.Levels[Level].Abilities[0].Ability;
+        }
     }
 
     public int CurrentAbilityValue
     {
-        get { return def.Levels[Level].Abilities[0].Value; }
-    }
-
-    public int GetAbilityValue(AbilityType ability)
-    {
-        var heroAbility = def.Levels[Level].Abilities.Find(pair => pair.Ability == ability);
-        
-        return heroAbility == null ? 0 : heroAbility.Value;
+        get
+        {
+            return 0;
+//            return def.Levels[Level].Abilities[0].Value;
+        }
     }
     
     public int NextAbilityValue
     {
         get
         {
-            var level = Level;
-            return level == def.Levels.Count - 1 ? 0 : def.Levels[level + 1].Abilities[0].Value;
+            return 0;
+//            var level = Level;
+//            return level == def.Levels.Count - 1 ? 0 : def.Levels[level + 1].Abilities[0].Value;
         }
     }
 
@@ -101,80 +178,5 @@ public class Hero
         return Level + 1 > tavernLevel;
     }
     
-    public void LevelUp()
-    {
-        var prices = def.Levels[Level].Prices;
-        var currentPrices = new List<Price>();
-
-        foreach (var price in prices)
-        {
-            currentPrices.Add(new Price{Currency = price.Currency, DefaultPriceAmount = price.Amount});
-        }
-        
-        var shopItem = new ShopItem
-        {
-            Uid = string.Format("purchase.test.{0}.10", LevelCurrencyDef.Name), 
-            ItemUid = LevelCurrencyDef.Name, 
-            Amount = 1,
-            CurrentPrices = currentPrices
-        };
-        
-        ShopService.Current.PurchaseItem
-        (
-            shopItem,
-            (item, s) =>
-            {
-                // on purchase success
-                AddPower();
-            },
-            item =>
-            {
-                // on purchase failed (not enough cash)
-                var model2= UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
-        
-                model2.Title = "Need coins?";
-                model2.Message = null;
-                model2.Image = "tutorial_TextBlock_1";
-                model2.AcceptLabel = "Ok";
-        
-                model2.OnAccept = () => {};
-                model2.OnCancel = null;
-        
-                UIService.Get.ShowWindow(UIWindowType.MessageWindow);
-            }
-        );
-    }
-
-    private void AddPower()
-    {
-        var heroAbility = def.Levels[Level - 1].Abilities.Find(pair => pair.Ability == AbilityType.Power);
-
-        int powerOffset = 0;
-        if (heroAbility != null)
-        {
-            powerOffset = heroAbility.Value;
-        }
-        
-        var shopItem = new ShopItem
-        {
-            Uid = string.Format("purchase.test.{0}.10", Currency.Power.Name), 
-            ItemUid = Currency.Power.Name, 
-            Amount = GetAbilityValue(AbilityType.Power) - powerOffset,
-            CurrentPrices = new List<Price>{new Price{Currency = Currency.Cash.Name, DefaultPriceAmount = 0}}
-        };
-        
-        ShopService.Current.PurchaseItem
-        (
-            shopItem,
-            (item, s) =>
-            {
-                // on purchase success
-                
-            },
-            item =>
-            {
-                // on purchase failed (not enough cash)
-            }
-        );
-    }
+    
 }

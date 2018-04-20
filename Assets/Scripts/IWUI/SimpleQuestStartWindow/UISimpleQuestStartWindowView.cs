@@ -60,14 +60,7 @@ public class UISimpleQuestStartWindowView : UIGenericPopupWindowView
 				
         main.UpdateQuest();
         
-        quest.Complete(() =>
-        {
-            var model = UIService.Get.GetCachedModel<UIChestRewardWindowModel>(UIWindowType.ChestRewardWindow);
-
-            model.Chest = GameDataService.Current.ChestsManager.GetChest(quest.Reward);
-        
-            UIService.Get.ShowWindow(UIWindowType.ChestRewardWindow);
-        });
+        quest.Complete(() => { CurrencyHellper.Purchase(quest.Reward); });
     }
     
     private void UpdateItems(UISimpleQuestStartWindowModel model)

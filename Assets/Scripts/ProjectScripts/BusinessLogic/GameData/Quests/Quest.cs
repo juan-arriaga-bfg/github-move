@@ -111,9 +111,9 @@ public class Quest
         }
     }
     
-    public int Reward
+    public CurrencyPair Reward
     {
-        get { return PieceType.Parse(def.Reward); }
+        get { return def.Reward; }
     }
 
     public bool Check()

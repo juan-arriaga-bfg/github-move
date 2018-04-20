@@ -78,6 +78,6 @@ public class UICharacterWindowView : UIGenericPopupWindowView
             return;
         }
         
-        windowModel.Hero.LevelUp();
+        windowModel.Hero.Collect();
     }
 }

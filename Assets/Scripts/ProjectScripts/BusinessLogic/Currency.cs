@@ -1,16 +1,12 @@
 ﻿public static partial class Currency
 {
     public static readonly CurrencyDef Crystals = new CurrencyDef { Id = 2, Name = "Crystals", IsConsumable = true };
+    public static readonly CurrencyDef Merge = new CurrencyDef { Id = 3, Name = "Merge", IsConsumable = true };
     
-    public static readonly CurrencyDef RobinCard = new CurrencyDef { Id = 3, Name = "RobinCard", IsConsumable = true };
-    public static readonly CurrencyDef JohnCard = new CurrencyDef { Id = 4, Name = "JohnCard", IsConsumable = true };
+    public static readonly CurrencyDef Enemy = new CurrencyDef { Id = 4, Name = "Enemy", IsConsumable = true };
     
-    public static readonly CurrencyDef Enemy = new CurrencyDef { Id = 5, Name = "Enemy", IsConsumable = true };
-    
-    public static readonly CurrencyDef Quest = new CurrencyDef { Id = 6, Name = "Quest", IsConsumable = true };
-    public static readonly CurrencyDef Obstacle = new CurrencyDef { Id = 7, Name = "Obstacle", IsConsumable = true };
-    public static readonly CurrencyDef Power = new CurrencyDef { Id = 8, Name = "Power", IsConsumable = true };
-    public static readonly CurrencyDef Merge = new CurrencyDef { Id = 9, Name = "Merge", IsConsumable = true };
+    public static readonly CurrencyDef Quest = new CurrencyDef { Id = 5, Name = "Quest", IsConsumable = true };
+    public static readonly CurrencyDef Obstacle = new CurrencyDef { Id = 6, Name = "Obstacle", IsConsumable = true };
     
     public static readonly CurrencyDef Chest1 = new CurrencyDef { Id = 101, Name = "Chest1", IsConsumable = true };
     public static readonly CurrencyDef Chest2 = new CurrencyDef { Id = 102, Name = "Chest2", IsConsumable = true };
@@ -60,6 +56,8 @@
     public static readonly CurrencyDef PieceE4 = new CurrencyDef { Id = 1404, Name = "PieceE4", IsConsumable = true };
     public static readonly CurrencyDef PieceE5 = new CurrencyDef { Id = 1405, Name = "PieceE5", IsConsumable = true };
     public static readonly CurrencyDef PieceE6 = new CurrencyDef { Id = 1406, Name = "PieceE6", IsConsumable = true };
+    
+    public static readonly CurrencyDef Power = new CurrencyDef { Id = 10000, Name = "Power", IsConsumable = true };
     
     public static readonly CurrencyDef LevelRobin = new CurrencyDef { Id = 10001, Name = "LevelRobin", IsConsumable = true };
     public static readonly CurrencyDef LevelJohn = new CurrencyDef { Id = 10002, Name = "LevelJohn", IsConsumable = true };
