@@ -11,7 +11,7 @@ public class DefaultMatchActionBuilder : IMatchActionBuilder
 
     public IBoardAction Build(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position)
     {
-        var nextType = definition.GetNext(pieceType);
+        var nextType = definition.GetNext(pieceType, false);
 
         if (nextType == PieceType.None.Id) return null;
 

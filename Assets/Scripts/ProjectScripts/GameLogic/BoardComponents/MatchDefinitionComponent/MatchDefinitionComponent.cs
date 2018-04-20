@@ -27,11 +27,15 @@ public class MatchDefinitionComponent : ECSEntity
         return definition.TryGetValue(pieceId, out def) ? def.Count : -1;
     }
     
-    public int GetNext(int pieceId)
+    public int GetNext(int pieceId, bool checkIgnore = true)
     {
         PieceMatchDef def;
         
-        return definition.TryGetValue(pieceId, out def) ? def.Next : PieceType.None.Id;
+        if(definition.TryGetValue(pieceId, out def) == false) return PieceType.None.Id;
+        
+        if(checkIgnore && def.IsIgnore) return PieceType.None.Id;
+        
+        return def.Next;
     }
 
     public int GetPrevious(int pieceId)
