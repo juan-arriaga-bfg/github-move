@@ -17,43 +17,31 @@ MonoBehaviour:
   styles:
   - id: 0
     nameId: defaul
-    fontAsset: {fileID: 11400000, guid: 0dd11aae67b65704c832e47516e733af, type: 2}
-    materialPreset: {fileID: 2100000, guid: dab9bc31d72819443b5dc510fb63c9f3, type: 2}
+    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
+    materialPreset: {fileID: 2100000, guid: c89a26b8f9bca2a4db04463316012bc1, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
   - id: 1
-    nameId: windowTitle
-    fontAsset: {fileID: 11400000, guid: 0dd11aae67b65704c832e47516e733af, type: 2}
-    materialPreset: {fileID: 2100000, guid: c746f8b86a16ace4cad13ecef816a2c9, type: 2}
+    nameId: Outline_8b5024
+    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
+    materialPreset: {fileID: 2100000, guid: 40af28b5e35bf9e4d95ed2641a26f305, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: 70
+    fontSize: -1
   - id: 2
-    nameId: windowMessage
-    fontAsset: {fileID: 11400000, guid: 0dd11aae67b65704c832e47516e733af, type: 2}
-    materialPreset: {fileID: 2100000, guid: c746f8b86a16ace4cad13ecef816a2c9, type: 2}
+    nameId: Outline_771821
+    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
+    materialPreset: {fileID: 2100000, guid: 6b81a29e1d360e04a8894ecbca906792, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: 55
+    fontSize: -1
+  - id: 3
+    nameId: Outline_567d02
+    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
+    materialPreset: {fileID: 2100000, guid: 0513568949590124ab6122ab0015a16e, type: 2}
+    mainColor: {r: 1, g: 1, b: 1, a: 1}
+    fontSize: -1
   - id: 4
-    nameId: windowButton
-    fontAsset: {fileID: 11400000, guid: 0dd11aae67b65704c832e47516e733af, type: 2}
-    materialPreset: {fileID: 2100000, guid: 664789101e076f3498ce01890261ecac, type: 2}
+    nameId: Outline_ac7c3d
+    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
+    materialPreset: {fileID: 2100000, guid: 971c9320aef681a47afb074c8dc1b434, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: 50
-  - id: 5
-    nameId: grayShadow
-    fontAsset: {fileID: 11400000, guid: 0dd11aae67b65704c832e47516e733af, type: 2}
-    materialPreset: {fileID: 2100000, guid: 6e3aa5e5f8755914fba021f201865501, type: 2}
-    mainColor: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: 70
-  - id: 6
-    nameId: cardLabel
-    fontAsset: {fileID: 11400000, guid: 0dd11aae67b65704c832e47516e733af, type: 2}
-    materialPreset: {fileID: 2100000, guid: 86f745e66a221714e9626e216e56d78b, type: 2}
-    mainColor: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: 50
-  - id: 7
-    nameId: whiteTitle
-    fontAsset: {fileID: 11400000, guid: 0dd11aae67b65704c832e47516e733af, type: 2}
-    materialPreset: {fileID: 2100000, guid: 664789101e076f3498ce01890261ecac, type: 2}
-    mainColor: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: 70
+    fontSize: -1
