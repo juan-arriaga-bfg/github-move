@@ -104,13 +104,13 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
         
-        /*boardController.ActionExecutor.AddAction(new CreatePieceAtAction
+        boardController.ActionExecutor.AddAction(new CreatePieceAtAction
         {
             At = new BoardPosition(26, 1),
             PieceTypeId = PieceType.Castle1.Id
         });
         
-        boardController.ActionExecutor.AddAction(new CreatePieceAtAction
+        /*boardController.ActionExecutor.AddAction(new CreatePieceAtAction
         {
             At = new BoardPosition(21, 6),
             PieceTypeId = PieceType.O1.Id
@@ -157,8 +157,7 @@ public class SandboxGameController : MonoBehaviour
             At = new BoardPosition(23, 8),
             PieceTypeId = PieceType.D3.Id
         });*/
-
-        AddPieces(new BoardPosition(23, 0), PieceType.Chest1.Id, PieceType.Chest9.Id, boardController);
+        
 //        AddPieces(new BoardPosition(10, 10), PieceType.A1.Id, PieceType.A9.Id, boardController);
 //        AddPieces(new BoardPosition(12, 10), PieceType.C1.Id, PieceType.C9.Id, boardController);
 //        AddPieces(new BoardPosition(14, 10), PieceType.B1.Id, PieceType.B5.Id, boardController);

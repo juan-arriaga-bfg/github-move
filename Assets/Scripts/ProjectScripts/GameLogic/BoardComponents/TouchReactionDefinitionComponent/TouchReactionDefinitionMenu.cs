@@ -35,7 +35,7 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
     {
         if (definition is TouchReactionDefinitionUpgrade) return BoardButtonView.Color.Blue;
         
-        if (definition is TouchReactionDefinitionOpenTavernWindow) return BoardButtonView.Color.Orange;
+        if (definition is TouchReactionDefinitionOpenHeroesWindow) return BoardButtonView.Color.Orange;
         
         return BoardButtonView.Color.Green;
     }

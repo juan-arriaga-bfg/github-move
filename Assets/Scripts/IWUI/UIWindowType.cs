@@ -13,4 +13,6 @@
     public const string SimpleQuestStartWindow = "SimpleQuestStartWindow";
     
     public const string ChestMessage = "ChestMessageWindow";
+    
+    public const string HeroesWindow = "HeroesWindow";
 }

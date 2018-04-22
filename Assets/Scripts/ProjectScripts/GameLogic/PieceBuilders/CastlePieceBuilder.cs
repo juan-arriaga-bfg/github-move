@@ -12,7 +12,7 @@
 
             if (touchMenu != null)
             {
-                touchMenu.RegisterDefinition(new TouchReactionDefinitionOpenTavernWindow(), "face_Robin");
+                touchMenu.RegisterDefinition(new TouchReactionDefinitionOpenHeroesWindow(), "face_Robin");
             }
         }
         

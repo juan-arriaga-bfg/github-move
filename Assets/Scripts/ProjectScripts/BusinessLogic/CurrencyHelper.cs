@@ -97,4 +97,26 @@ public static class CurrencyHellper
         
         return isSuccess;
     }
+
+    public static bool IsCanPurchase(string price, int amount)
+    {
+        return ShopService.Current.IsCanPurchase(new Price{Currency = price, DefaultPriceAmount = amount});
+    }
+
+    public static bool IsCanPurchase(CurrencyPair price)
+    {
+        return ShopService.Current.IsCanPurchase(new Price{Currency = price.Currency, DefaultPriceAmount = price.Amount});
+    }
+
+    public static bool IsCanPurchase(List<CurrencyPair> prices)
+    {
+        var currentPrices = new List<Price>();
+
+        foreach (var price in prices)
+        {
+            currentPrices.Add(new Price{Currency = price.Currency, DefaultPriceAmount = price.Amount});
+        }
+
+        return ShopService.Current.IsCanPurchase(currentPrices);
+    }
 }

@@ -8,7 +8,8 @@
     public static readonly CurrencyDef Quest = new CurrencyDef { Id = 5, Name = "Quest", IsConsumable = true };
     public static readonly CurrencyDef Obstacle = new CurrencyDef { Id = 6, Name = "Obstacle", IsConsumable = true };
     
-    public static readonly CurrencyDef Power = new CurrencyDef { Id = 10000, Name = "Power", IsConsumable = true };
+    public static readonly CurrencyDef Power = new CurrencyDef { Id = 100, Name = "Power", IsConsumable = true };
+    public static readonly CurrencyDef Level = new CurrencyDef { Id = 200, Name = "Level", IsConsumable = true };
     
     public static readonly CurrencyDef LevelCastle = new CurrencyDef { Id = 10003, Name = "LevelCastle", IsConsumable = true };
     public static readonly CurrencyDef LevelTavern = new CurrencyDef { Id = 10004, Name = "LevelTavern", IsConsumable = true };
