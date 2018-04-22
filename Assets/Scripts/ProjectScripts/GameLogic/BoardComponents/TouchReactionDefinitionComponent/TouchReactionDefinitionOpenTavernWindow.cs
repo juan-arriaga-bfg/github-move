@@ -2,11 +2,11 @@
 {
     public override bool Make(BoardPosition position, Piece piece)
     {
-        var model = UIService.Get.GetCachedModel<UITavernWindowModel>(UIWindowType.TavernWindow);
+       /* var model = UIService.Get.GetCachedModel<UITavernWindowModel>(UIWindowType.TavernWindow);
 
         model.Obstacle = null;
         
-        UIService.Get.ShowWindow(UIWindowType.TavernWindow);
+        UIService.Get.ShowWindow(UIWindowType.TavernWindow);*/
         return true;
     }
 }

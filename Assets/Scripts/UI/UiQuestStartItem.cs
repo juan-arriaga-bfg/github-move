@@ -47,12 +47,7 @@ public class UiQuestStartItem : MonoBehaviour
 
     public void OnClick()
     {
-        var model = UIService.Get.GetCachedModel<UITavernWindowModel>(UIWindowType.TavernWindow);
         
-        model.Obstacle = obstacle;
-        model.CurrentAbility = ability;
-        
-        UIService.Get.ShowWindow(UIWindowType.TavernWindow);
     }
 
     public void HeroGoHome()

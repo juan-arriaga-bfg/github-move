@@ -21,7 +21,6 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.MessageWindow,
             UIWindowType.QuestStartWindow,
             UIWindowType.SimpleQuestStartWindow,
-            UIWindowType.TavernWindow,
             UIWindowType.ChestMessage,
         });
 
