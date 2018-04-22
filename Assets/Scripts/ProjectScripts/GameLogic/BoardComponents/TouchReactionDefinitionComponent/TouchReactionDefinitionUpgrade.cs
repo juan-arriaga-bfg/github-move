@@ -52,45 +52,15 @@ public class TouchReactionDefinitionUpgrade : TouchReactionDefinitionComponent
 		model.OnCancel = () => { };
 		model.OnAccept = () =>
 		{
-			var shopItem = new ShopItem
+			CurrencyHellper.Purchase(def.UpgradeCurrency.Name, 1, def.UpgradePrice, success =>
 			{
-				Uid = string.Format("purchase.test.{0}.10", def.UpgradeCurrency.Name), 
-				ItemUid = def.UpgradeCurrency.Name, 
-				Amount = 1,
-				CurrentPrices = new List<Price>
+				if (!success) return;
+				
+				piece.Context.ActionExecutor.AddAction(new CheckMatchAction
 				{
-					new Price{Currency = def.UpgradePrice.Currency, DefaultPriceAmount = def.UpgradePrice.Amount}
-				}
-			};
-        
-			ShopService.Current.PurchaseItem
-			(
-				shopItem,
-				(item, s) =>
-				{
-					// on purchase success
-					
-					piece.Context.ActionExecutor.AddAction(new CheckMatchAction
-					{
-						At = position
-					});
-				},
-				item =>
-				{
-					// on purchase failed (not enough cash)
-					var model2= UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
-        
-					model2.Title = "Not enought coins!";
-					model2.Message = null;
-					model2.Image = "tutorial_TextBlock_1";
-					model2.AcceptLabel = "Ok";
-        
-					model2.OnAccept = () => {};
-					model2.OnCancel = null;
-        
-					UIService.Get.ShowWindow(UIWindowType.MessageWindow);
-				}
-			);
+					At = position
+				});
+			});
 		};
 		
 		UIService.Get.ShowWindow(UIWindowType.MessageWindow);

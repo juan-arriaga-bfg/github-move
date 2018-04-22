@@ -17,21 +17,12 @@ public class Chest
     private ChestDef def;
     private ChestState chestState;
     
-//    private List<List<CurrencyPair>> Rewards;
-    
     public DateTime? StartTime { get; set; }
     private DateTime completeTime;
     
     public Chest(ChestDef def)
     {
         this.def = def;
-        
-        /*Rewards = new List<List<CurrencyPair>>();
-
-        for (int i = 0; i < def.Rewards.Count; i++)
-        {
-            Rewards.Add(InitReward(i));
-        }*/
     }
     
     public ChestDef Def
@@ -119,50 +110,22 @@ public class Chest
         return result;
     }
     
-    public CurrencyPair GetReward(int level)
-    {
-        /*if (Rewards.Count < level) return null;
-
-        var rewards = Rewards[level];
-        
-        if (rewards.Count == 0)
-        {
-            rewards = InitReward(level);
-            Rewards[level] = rewards;
-        }
-        
-        var index = Random.Range(0, rewards.Count);
-        var reward = rewards[index];
-        
-        rewards.RemoveAt(index);
-        
-        return reward;*/
-        
-        return new CurrencyPair();
-    }
-    
-   /* private List<CurrencyPair> InitReward(int level)
-    {
-        var rewards = def.Rewards[level];
-            
-        var arr = new CurrencyPair[rewards.Count];
-            
-        rewards.CopyTo(arr);
-        rewards = arr.ToList();
-        
-        return rewards;
-    }*/
-
     public string GetTimeText()
     {
         var time = new TimeSpan(0, 0, def.Time);
+        var str = "";
 
-        if ((int)time.TotalHours > 0)
+        if (time.Hours > 0)
         {
-            return (int) time.TotalHours + "h";
+            str += string.Format("{0}h", time.Hours);
+        }
+
+        if (time.Minutes > 0)
+        {
+            str += string.Format("{0}{1}m", string.IsNullOrEmpty(str) ? "" : " ", time.Minutes);
         }
         
-        return (int) time.TotalMinutes + "m";
+        return str;
     }
     
     public string GetTimeLeftText()

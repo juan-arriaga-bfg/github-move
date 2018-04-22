@@ -104,12 +104,6 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
         
-        boardController.ActionExecutor.AddAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(23, 3),
-            PieceTypeId = PieceType.Chest1.Id
-        });
-        
         /*boardController.ActionExecutor.AddAction(new CreatePieceAtAction
         {
             At = new BoardPosition(26, 1),
@@ -163,13 +157,14 @@ public class SandboxGameController : MonoBehaviour
             At = new BoardPosition(23, 8),
             PieceTypeId = PieceType.D3.Id
         });*/
-        
-         /*AddPieces(new BoardPosition(10, 10), PieceType.A1.Id, PieceType.A9.Id, boardController);
-       AddPieces(new BoardPosition(12, 10), PieceType.C1.Id, PieceType.C9.Id, boardController);
-        AddPieces(new BoardPosition(14, 10), PieceType.B1.Id, PieceType.B5.Id, boardController);
-        AddPieces(new BoardPosition(16, 10), PieceType.D1.Id, PieceType.D5.Id, boardController);
-        AddPieces(new BoardPosition(18, 10), PieceType.E1.Id, PieceType.E6.Id, boardController);*/
-        AddPieces(new BoardPosition(19, 10), PieceType.Coin1.Id, PieceType.Coin5.Id, boardController);
+
+        AddPieces(new BoardPosition(23, 0), PieceType.Chest1.Id, PieceType.Chest9.Id, boardController);
+//        AddPieces(new BoardPosition(10, 10), PieceType.A1.Id, PieceType.A9.Id, boardController);
+//        AddPieces(new BoardPosition(12, 10), PieceType.C1.Id, PieceType.C9.Id, boardController);
+//        AddPieces(new BoardPosition(14, 10), PieceType.B1.Id, PieceType.B5.Id, boardController);
+//        AddPieces(new BoardPosition(16, 10), PieceType.D1.Id, PieceType.D5.Id, boardController);
+//        AddPieces(new BoardPosition(18, 10), PieceType.E1.Id, PieceType.E6.Id, boardController);
+//        AddPieces(new BoardPosition(19, 10), PieceType.Coin1.Id, PieceType.Coin5.Id, boardController);
         
         //register board
         BoardService.Current.RegisterBoard(boardController, 0);

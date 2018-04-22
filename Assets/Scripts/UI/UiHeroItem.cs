@@ -38,7 +38,7 @@ public class UiHeroItem : MonoBehaviour
         
         isInit = true;
         
-        cardLabel.Text = string.Format("<color=#3D7AA4>{0}</color>", CharacterWindowCardTupe.Rare);
+        cardLabel.Text = string.Format("<color=#3D7AA4>{0}</color>", "Rare");
 
         if (hero == null)
         {
@@ -79,12 +79,6 @@ public class UiHeroItem : MonoBehaviour
             toggle.isOn = !toggle.isOn;
             return;
         }
-        
-        var model = UIService.Get.GetCachedModel<UICharacterWindowModel>(UIWindowType.CharacterWindow);
-
-        model.Hero = hero;
-        
-        UIService.Get.ShowWindow(UIWindowType.CharacterWindow);
     }
     
     public void OnSelect()

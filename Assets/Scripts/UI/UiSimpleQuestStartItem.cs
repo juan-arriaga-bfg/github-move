@@ -46,47 +46,45 @@ public class UiSimpleQuestStartItem : MonoBehaviour
         if(piece == PieceType.None.Id) return;
         
         BoardPosition? position = null;
-        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
-        
-        model.Message = null;
-        model.OnCancel = null;
-        model.AcceptLabel = "Ok";
+
+        var title = "";
+        var image = "";
         
         if(piece == PieceType.A1.Id)
         {
-            model.Title = "Need wooden pieces?";
-            model.Image = "wood_UI";
+            title = "Need wooden pieces?";
+            image = "wood_UI";
             position = GameDataService.Current.PiecesManager.SawmillPosition;
         }
         else if(piece == PieceType.B1.Id)
         {
-            model.Title = "Need wheat pieces?";
-            model.Image = "hay_UI";
+            title = "Need wheat pieces?";
+            image = "hay_UI";
         }
         else if(piece == PieceType.C1.Id)
         {
-            model.Title = "Need stone pieces?";
-            model.Image = "stone_UI";
+            title = "Need stone pieces?";
+            image = "stone_UI";
             position = GameDataService.Current.PiecesManager.MinePosition;
         }
         else if(piece == PieceType.D1.Id)
         {
-            model.Title = "Need sheep pieces?";
-            model.Image = "sheeps_UI";
+            title = "Need sheep pieces?";
+            image = "sheeps_UI";
             position = GameDataService.Current.PiecesManager.SheepfoldPosition;
         }
         else if(piece == PieceType.E1.Id)
         {
-            model.Title = "Need apple pieces?";
-            model.Image = "apple_UI";
+            title = "Need apple pieces?";
+            image = "apple_UI";
         }
         
-        model.OnAccept = () =>
+        UIMessageWindowController.CreateImageMessage(title, image, () =>
         {
             if (position == null || position.Value.X == 0 && position.Value.Y == 0) return;
             HintArrowView.Show(position.Value);
             UIService.Get.CloseWindow(UIWindowType.SimpleQuestStartWindow, true);
-        };
+        });
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }

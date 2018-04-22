@@ -1,6 +1,4 @@
 using System;
-using UnityEngine;
-using System.Collections;
 
 public class UIMessageWindowController : IWWindowController {
 
@@ -39,6 +37,50 @@ public class UIMessageWindowController : IWWindowController {
         model.AcceptLabel = "Ok";
         
         model.OnAccept = OnAccept ?? (() => {});
+        model.OnCancel = null;
+        
+        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+    }
+
+    public static void CreateImageMessage(string title, string image, Action onAccept)
+    {
+        var model= UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+        model.Title = title;
+        model.Message = null;
+        model.Image = image;
+        model.AcceptLabel = "Ok";
+        
+        model.OnAccept = onAccept;
+        model.OnCancel = null;
+        
+        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+    }
+    
+    public static void CreateNeedCoinsMessage()
+    {
+        var model= UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+        model.Title = "Need coins?";
+        model.Message = null;
+        model.Image = "tutorial_TextBlock_1";
+        model.AcceptLabel = "Ok";
+        
+        model.OnAccept = () => {};
+        model.OnCancel = null;
+        
+        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+    }
+    
+    public static void CreateNeedCurrencyMessage(string currency)
+    {
+        var model= UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+        model.Title = string.Format("Need {0}?", currency.ToLower());
+        model.Message = string.Format("You do not have enough <sprite name={0}>!", currency);;
+        model.AcceptLabel = "Ok";
+        
+        model.OnAccept = () => {};
         model.OnCancel = null;
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);

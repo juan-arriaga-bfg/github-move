@@ -18,13 +18,11 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         {
             UIWindowType.MainWindow,
             UIWindowType.SampleWindow,
-            UIWindowType.BankWindow,
             UIWindowType.MessageWindow,
-            UIWindowType.CharacterWindow,
-            UIWindowType.ChestRewardWindow,
             UIWindowType.QuestStartWindow,
             UIWindowType.SimpleQuestStartWindow,
             UIWindowType.TavernWindow,
+            UIWindowType.ChestMessage,
         });
 
         // on cache complete

@@ -75,36 +75,6 @@ public class UIResourcePanelMergeController : UIGenericResourcePanelViewControll
     public void OnClick()
     {
         return;
-        var shopItem = new ShopItem
-        {
-            Uid = string.Format("purchase.test.{0}.10", chest.Currency), 
-            ItemUid = chest.Currency, 
-            Amount = 10,
-            CurrentPrices = new List<Price>
-            {
-                new Price{Currency = Currency.Merge.Name, DefaultPriceAmount = chest.MergePoints}
-            }
-        };
-        
-        ShopService.Current.PurchaseItem
-        (
-            shopItem,
-            (item, s) =>
-            {
-                // on purchase success
-                InitChestView();
-                
-                var model = UIService.Get.GetCachedModel<UIChestRewardWindowModel>(UIWindowType.ChestRewardWindow);
-
-                model.Chest = chest;
-        
-                UIService.Get.ShowWindow(UIWindowType.ChestRewardWindow);
-            },
-            item =>
-            {
-                // on purchase failed (not enough cash)
-            }
-        );
     }
 
     private void InitChestView()

@@ -8,6 +8,11 @@ public static class CurrencyHellper
         return Purchase(product, amount, Currency.Cash.Name, 0, onSuccess);
     }
     
+    public static bool Purchase(string product, int amount, CurrencyPair price, Action<bool> onSuccess = null)
+    {
+        return Purchase(product, amount, price.Currency, price.Amount, onSuccess);
+    }
+    
     public static bool Purchase(CurrencyPair product, Action<bool> onSuccess = null)
     {
         return Purchase(product, new CurrencyPair{Currency = Currency.Cash.Name, Amount = 0}, onSuccess);
@@ -43,6 +48,8 @@ public static class CurrencyHellper
             {
                 // on purchase failed (not enough cash)
                 if (onSuccess != null) onSuccess(false);
+                if(price == Currency.Coins.Name) UIMessageWindowController.CreateNeedCoinsMessage();
+                else UIMessageWindowController.CreateNeedCurrencyMessage(price);
             }
         );
 

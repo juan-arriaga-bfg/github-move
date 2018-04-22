@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class UIBankWindowController : IWWindowController {
+public class UIChestMessageWindowController : IWWindowController {
 
     public override IWWindowModel CreateModel()
     {
-        UIBankWindowModel windowModel = new UIBankWindowModel();
+        UIChestMessageWindowModel windowModel = new UIChestMessageWindowModel();
 
 
 

@@ -6,17 +6,13 @@
     
     public const string MainWindow = "MainWindow";
     
-    public const string BankWindow = "BankWindow";
-    
     public const string MessageWindow = "MessageWindow";
-    
-    public const string CharacterWindow = "CharacterWindow";
-    
-    public const string ChestRewardWindow = "ChestRewardWindow";
     
     public const string QuestStartWindow = "QuestStartWindow";
     
     public const string SimpleQuestStartWindow = "SimpleQuestStartWindow";
     
     public const string TavernWindow = "TavernWindow";
+    
+    public const string ChestMessage = "ChestMessageWindow";
 }
