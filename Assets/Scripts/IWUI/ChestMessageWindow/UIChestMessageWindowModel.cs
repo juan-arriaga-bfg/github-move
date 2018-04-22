@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 public class UIChestMessageWindowModel : IWWindowModel 
 {
@@ -40,8 +41,30 @@ public class UIChestMessageWindowModel : IWWindowModel
         get { return string.Format("Unlock in {0}", Chest.GetTimeText()); }
     }
     
+    public string ChanceText
+    {
+        get { return "May contain:"; }
+    }
+    
     public bool IsShowSlowButton
     {
         get { return GameDataService.Current.ChestsManager.ActiveChest == null; }
+    }
+
+    public List<string> Icons()
+    {
+        var icons = new List<string>();
+
+        foreach (var piece in Chest.Def.PieceWeights)
+        {
+            icons.Add(piece.Uid);
+        }
+        
+        foreach (var charger in Chest.Def.ChargerWeights)
+        {
+            icons.Add(charger.Uid);
+        }
+        
+        return icons;
     }
 }

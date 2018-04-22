@@ -1,11 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIChestMessageWindowView : UIGenericPopupWindowView
 {
     [SerializeField] private NSText btnFastLabel;
     [SerializeField] private NSText btnSlowLabel;
+    [SerializeField] private NSText chanceLabel;
     
     [SerializeField] private GameObject btnSlow;
+    [SerializeField] private Image item;
+
+    private List<Image> icons = new List<Image>();
 
     private bool isFast;
     private bool isSlow;
@@ -23,8 +29,18 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         
         btnFastLabel.Text = windowModel.FastButtonText;
         btnSlowLabel.Text = windowModel.SlowButtonText;
+        chanceLabel.Text = windowModel.ChanceText;
         
         btnSlow.SetActive(windowModel.IsShowSlowButton);
+
+        var sprites = windowModel.Icons();
+        
+        item.sprite = IconService.Current.GetSpriteById(sprites[0]);
+        
+        for (var i = 1; i < sprites.Count; i++)
+        {
+            CreateIcon(sprites[i]);
+        }
     }
 
     public override void OnViewClose()
@@ -33,7 +49,7 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         
         var windowModel = Model as UIChestMessageWindowModel;
         windowModel.Chest = null;
-
+        
         if (isFast && windowModel.OnBoost != null)
         {
             windowModel.OnBoost();
@@ -42,8 +58,17 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         
         if (isSlow && windowModel.OnStart != null) windowModel.OnStart();
     }
-    
-    
+
+    public override void OnViewCloseCompleted()
+    {
+        foreach (var image in icons)
+        {
+            Destroy(image.gameObject);
+        }
+        
+        icons = new List<Image>();
+    }
+
     public void FastClick()
     {
         var windowModel = Model as UIChestMessageWindowModel;
@@ -60,5 +85,13 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
     {
         isSlow = true;
         Controller.CloseCurrentWindow();
+    }
+
+    private void CreateIcon(string icon)
+    {
+        var image = Instantiate(item, item.transform.parent).GetComponent<Image>();
+
+        image.sprite = IconService.Current.GetSpriteById(icon);
+        icons.Add(image);
     }
 }
