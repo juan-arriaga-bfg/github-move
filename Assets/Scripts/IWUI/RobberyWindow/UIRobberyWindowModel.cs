@@ -1,6 +1,3 @@
-using UnityEngine;
-using System.Collections;
-
 public class UIRobberyWindowModel : IWWindowModel 
 {
     public string Title
