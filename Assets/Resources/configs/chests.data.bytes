@@ -168,19 +168,19 @@
   },
   {
     "Uid": "Chest4",
-    "Time": 14400,
+    "Time": 60,
     "MergePoints": 1000,
     "Price": {
       "Currency": "Crystals",
-      "Amount": 60
+      "Amount":1
     },
     "PieceAmounts" :
     [
-      30,
-      30,
-      30,
-      31,
-      31,
+      12,
+      12,
+      12,
+      12,
+      12,
       31,
       32,
       32,
@@ -189,25 +189,27 @@
     ],
     "ChargerAmounts" :
     [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
     ],
     "PieceWeights" :
     [
       {
-        "Uid": "D1",
-        "Weight" : 20
+        "Uid": "A1",
+        "Weight" : 20,
+		"Override" : "true"
       },
       {
-        "Uid": "D2",
-        "Weight" : 20
+        "Uid": "B1",
+        "Weight" : 20,
+		"Override" : "true"
       }
     ],
     "ChargerWeights" :
@@ -224,19 +226,19 @@
   },
   {
     "Uid": "Chest5",
-    "Time": 14400,
+    "Time": 600,
     "MergePoints": 1000,
     "Price": {
       "Currency": "Crystals",
-      "Amount": 60
+      "Amount": 3
     },
     "PieceAmounts" :
     [
-      30,
-      30,
-      30,
-      31,
-      31,
+      0,
+      0,
+      0,
+      0,
+      0,
       31,
       32,
       32,
@@ -245,12 +247,12 @@
     ],
     "ChargerAmounts" :
     [
-      1,
-      2,
-      3,
-      4,
       5,
-      6,
+      5,
+      5,
+      5,
+      5,
+      8,
       7,
       8,
       9
@@ -270,11 +272,13 @@
     [
       {
         "Uid": "Charger1",
-        "Weight" : 20
+        "Weight" : 20,
+		"Override" : "true"
       },
       {
-        "Uid": "Charger9",
-        "Weight" : 20
+        "Uid": "Charger2",
+        "Weight" : 20,
+		"Override" : "true"
       }
     ]
   },
