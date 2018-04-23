@@ -31,14 +31,16 @@ public class UIHeroItem : MonoBehaviour
 
         for (var i = 0; i < hero.Collection.Count; i++)
         {
-            if(i >= collection.Count) break;
-            
             collection[i].Decoration(hero.Collection[i].Currency, isUnlock);
         }
         
-        for (var i = 0; i < hero.Price.Count; i++)
+        for (var i = 0; i < chargers.Count; i++)
         {
-            if(i >= chargers.Count) break;
+            if (i >= hero.Price.Count)
+            {
+                chargers[i].Decoration(null, isUnlock, isCollect);
+                continue;
+            }
             
             chargers[i].Decoration(hero.Price[i], isUnlock, isCollect);
         }
