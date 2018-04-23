@@ -31,10 +31,6 @@ public class CollectionDataManager : IDataLoader<CollectionDataManager>
 
 	public string GetRandomItem()
 	{
-		var random = Random.Range(0, 101);
-
-//		if (random < Chance) return null;
-
 		var level = ProfileService.Current.GetStorageItem(Currency.Level.Name).Amount;
 		var hot = new List<ItemWeight>();
 		var top = new List<ItemWeight>();
@@ -44,10 +40,12 @@ public class CollectionDataManager : IDataLoader<CollectionDataManager>
 			if (ProfileService.Current.GetStorageItem(def.Uid).Amount > 0)
 			{
 				continue;
-			} 
+			}
 			
 			if (def.MaxLevel <= level)
 			{
+				if (def.Ignore) return def.Uid;
+				
 				hot.Add(def.GetItemWeight());
 				continue;
 			}
@@ -57,7 +55,11 @@ public class CollectionDataManager : IDataLoader<CollectionDataManager>
 				top.Add(def.GetItemWeight());
 			}
 		}
+		
+		var random = Random.Range(0, 101);
 
+		if (random < Chance) return null;
+		
 		if (hot.Count != 0) return ItemWeight.GetRandomItem(hot).Uid;
 		if (top.Count != 0) return ItemWeight.GetRandomItem(top).Uid;
 		

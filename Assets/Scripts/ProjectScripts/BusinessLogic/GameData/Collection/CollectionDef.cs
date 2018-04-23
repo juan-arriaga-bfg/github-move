@@ -4,6 +4,7 @@
     public int MinLevel { get; set; }
     public int MaxLevel { get; set; }
     public int Weight { get; set; }
+    public bool Ignore { get; set; }
 
     public ItemWeight GetItemWeight()
     {
