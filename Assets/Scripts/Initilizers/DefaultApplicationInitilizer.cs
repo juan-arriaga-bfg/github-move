@@ -98,6 +98,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         dataManager.SimpleObstaclesManager.LoadData(new ResourceConfigDataMapper<List<SimpleObstaclesDef>>("configs/simpleObstacles.data", NSConfigsSettings.Instance.IsUseEncryption));
         dataManager.QuestsManager.LoadData(new ResourceConfigDataMapper<List<QuestDef>>("configs/quests.data", NSConfigsSettings.Instance.IsUseEncryption));
         dataManager.FogsManager.LoadData(new ResourceConfigDataMapper<List<FogDef>>("configs/fogs.data", NSConfigsSettings.Instance.IsUseEncryption));
+        dataManager.CollectionManager.LoadData(new ResourceConfigDataMapper<CollectionDataManager>("configs/collection.data", NSConfigsSettings.Instance.IsUseEncryption));
         
         // load local profile
         ProfileService.Instance.Manager.LoadCurrentProfile((profile) =>

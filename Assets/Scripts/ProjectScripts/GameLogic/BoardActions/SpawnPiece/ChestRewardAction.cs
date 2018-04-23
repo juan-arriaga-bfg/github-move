@@ -27,19 +27,19 @@ public class ChestRewardAction : IBoardAction
 			return false;
 		}
 		
-		var rect = BoardPosition.GetRectInCenter(From, 4, 4);
-		
-		rect.Shuffle();
-		
 		foreach (var reward in Chargers)
 		{
 			for (var i = 0; i < reward.Value; i++)
 			{
-				var position = rect[0];
-				
-				rect.RemoveAt(0);
-				ResourceView.Show(From, position, new CurrencyPair{Currency = reward.Key, Amount = 1});
+				ResourceView.Show(From, new CurrencyPair{Currency = reward.Key, Amount = 1});
 			}
+		}
+
+		var collection = GameDataService.Current.CollectionManager.GetRandomItem();
+
+		if (string.IsNullOrEmpty(collection) == false)
+		{
+			ResourceView.Show(From, new CurrencyPair{Currency = collection, Amount = 1});
 		}
 		
 		foreach (var reward in Pieces)

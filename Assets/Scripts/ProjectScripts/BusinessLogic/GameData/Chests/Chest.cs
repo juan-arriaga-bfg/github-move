@@ -96,7 +96,7 @@ public class Chest
 
         for (var i = 0; i < max; i++)
         {
-            var random = ItemWeight.GetRandomItem(def.PieceWeights).Uid;
+            var random = ItemWeight.GetRandomItem(def.ChargerWeights).Uid;
 
             if (result.ContainsKey(random))
             {

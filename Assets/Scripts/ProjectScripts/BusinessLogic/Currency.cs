@@ -17,7 +17,6 @@
     public static readonly CurrencyDef LevelSawmill = new CurrencyDef { Id = 10006, Name = "LevelSawmill", IsConsumable = true };
     public static readonly CurrencyDef LevelSheepfold = new CurrencyDef { Id = 10007, Name = "LevelSheepfold", IsConsumable = true };
     
-    
     public static readonly CurrencyDef Charger1 = new CurrencyDef { Id = 1001, Name = "Charger1", IsConsumable = true };
     public static readonly CurrencyDef Charger2 = new CurrencyDef { Id = 1002, Name = "Charger2", IsConsumable = true };
     public static readonly CurrencyDef Charger3 = new CurrencyDef { Id = 1003, Name = "Charger3", IsConsumable = true };

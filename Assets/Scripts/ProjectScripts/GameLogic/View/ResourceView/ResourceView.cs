@@ -49,15 +49,26 @@ public class ResourceView : BoardElementView
         icon.color = Color.white;
     }
     
-    public static void Show(BoardPosition @from, BoardPosition traget, CurrencyPair resource)
+    public static void Show(BoardPosition at, CurrencyPair resource)
     {
         const float duration = 0.1f;
+        const int distance = 3;
         
         var board = BoardService.Current.GetBoardById(0);
-        var to = board.BoardDef.GetPiecePosition(traget.X, traget.Y);
-        var view = board.RendererContext.CreateBoardElementAt<ResourceView>(R.ResourceView, @from);
-
-        to = new Vector3(to.x + Random.Range(-0.5f, 0.5f), to.y + Random.Range(-0.5f, 0.5f), to.z);
+        
+        var left = at.LeftAtDistance(distance);
+        var right = at.RightAtDistance(distance);
+        var up = at.UpAtDistance(distance);
+        var down = at.DownAtDistance(distance);
+        
+        var leftPos = board.BoardDef.GetPiecePosition(left.X, left.Y);
+        var rightPos = board.BoardDef.GetPiecePosition(right.X, right.Y);
+        
+        var upPos = board.BoardDef.GetPiecePosition(up.X, up.Y);
+        var downPos = board.BoardDef.GetPiecePosition(down.X, down.Y);
+        
+        var to = new Vector3(Random.Range(leftPos.x, rightPos.x), Random.Range(upPos.y, downPos.y), leftPos.z);
+        var view = board.RendererContext.CreateBoardElementAt<ResourceView>(R.ResourceView, at);
         
         var sequence = DOTween.Sequence().SetId(view);
         sequence.Insert(duration, view.CachedTransform.DOJump(new Vector3(to.x, to.y, view.CachedTransform.position.z), 1, 1, 0.4f).SetEase(Ease.InOutSine));

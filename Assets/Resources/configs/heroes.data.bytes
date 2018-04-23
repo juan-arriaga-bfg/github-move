@@ -1,6 +1,7 @@
 [
   {
     "Uid" : "Robin",
+    "Level" : 1,
     "Abilities" :
     [
       {
@@ -11,20 +12,45 @@
     "Collection" :
     [
       {
-        "Currency" : "Coins",
-        "Amount" : 20
+        "Currency" : "RobinItem1",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "RobinItem2",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "RobinItem3",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "RobinItem4",
+        "Amount" : 1
       }
     ],
     "Prices" :
     [
       {
-        "Currency" : "Coins",
-        "Amount" : 20
+        "Currency" : "Charger1",
+        "Amount" : 2
+      },
+      {
+        "Currency" : "Charger2",
+        "Amount" : 2
+      },
+      {
+        "Currency" : "Charger3",
+        "Amount" : 2
+      },
+      {
+        "Currency" : "Charger4",
+        "Amount" : 2
       }
     ]
   },
   {
     "Uid": "John",
+    "Level" : 2,
     "Abilities" :
     [
       {
@@ -35,15 +61,39 @@
     "Collection" :
     [
       {
-        "Currency" : "Coins",
-        "Amount" : 20
+        "Currency" : "JohnItem1",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "JohnItem2",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "JohnItem3",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "JohnItem4",
+        "Amount" : 1
       }
     ],
     "Prices" :
     [
       {
-        "Currency" : "Coins",
-        "Amount" : 20
+        "Currency" : "Charger5",
+        "Amount" : 2
+      },
+      {
+        "Currency" : "Charger6",
+        "Amount" : 2
+      },
+      {
+        "Currency" : "Charger7",
+        "Amount" : 2
+      },
+      {
+        "Currency" : "Charger8",
+        "Amount" : 2
       }
     ]
   }

@@ -104,4 +104,5 @@ public class GameDataManager
     public readonly SimpleObstaclesDataManager SimpleObstaclesManager = new SimpleObstaclesDataManager();
     public readonly QuestsDataManager QuestsManager = new QuestsDataManager();
     public readonly FogsDataManager FogsManager = new FogsDataManager();
+    public readonly CollectionDataManager CollectionManager = new CollectionDataManager();
 }
