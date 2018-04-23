@@ -15,4 +15,6 @@
     public const string ChestMessage = "ChestMessageWindow";
     
     public const string HeroesWindow = "HeroesWindow";
+    
+    public const string CollectionWindow = "CollectionWindow";
 }

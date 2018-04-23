@@ -15,7 +15,7 @@ public class ResourceView : BoardElementView
     {
         this.resource = resource;
         
-        DOTween.Kill(this);
+        DOTween.Kill(body);
         
         const float duration = 1f;
         var sequence = DOTween.Sequence().SetId(AnimationId).SetLoops(int.MaxValue);
@@ -32,20 +32,37 @@ public class ResourceView : BoardElementView
         
         const float duration = 0.3f;
         
-        DOTween.Kill(this);
+        DOTween.Kill(body);
         DOTween.Kill(AnimationId);
 
-        body.DOScale(Vector3.zero, duration).SetEase(Ease.OutBack);
-        CurrencyHellper.Purchase(resource);
+        body.DOScale(Vector3.zero, duration).SetId(body).SetEase(Ease.OutBack);
         DestroyOnBoard(duration);
+
+        if (GameDataService.Current.CollectionManager.Contains(resource.Currency))
+        {
+            var model = UIService.Get.GetCachedModel<UICollectionWindowModel>(UIWindowType.CollectionWindow);
+
+            model.Element = resource.Currency;
+            model.OnOpen = () => CurrencyHellper.Purchase(resource);
+            
+            UIService.Get.ShowWindow(UIWindowType.CollectionWindow);
+            
+            return;
+        }
+        
+        CurrencyHellper.Purchase(resource);
     }
     
     public override void ResetViewOnDestroy()
     {
         base.ResetViewOnDestroy();
-
+        
+        DOTween.Kill(body);
+        DOTween.Kill(AnimationId);
+        
         isCollect = false;
-        body.localScale = Vector3.one;
+        body.localScale = Vector3.one * 1.5f;
+        body.localPosition = Vector3.zero;
         icon.color = Color.white;
     }
     
@@ -70,7 +87,7 @@ public class ResourceView : BoardElementView
         var to = new Vector3(Random.Range(leftPos.x, rightPos.x), Random.Range(upPos.y, downPos.y), leftPos.z);
         var view = board.RendererContext.CreateBoardElementAt<ResourceView>(R.ResourceView, at);
         
-        var sequence = DOTween.Sequence().SetId(view);
+        var sequence = DOTween.Sequence().SetId(view.body);
         sequence.Insert(duration, view.CachedTransform.DOJump(new Vector3(to.x, to.y, view.CachedTransform.position.z), 1, 1, 0.4f).SetEase(Ease.InOutSine));
         sequence.Insert(duration, view.CachedTransform.DOScale(Vector3.one * 1.3f, 0.2f));
         sequence.Insert(duration + 0.2f, view.CachedTransform.DOScale(Vector3.one, 0.2f));

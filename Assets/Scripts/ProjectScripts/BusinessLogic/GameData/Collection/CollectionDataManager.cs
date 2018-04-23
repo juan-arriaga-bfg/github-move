@@ -21,12 +21,19 @@ public class CollectionDataManager : IDataLoader<CollectionDataManager>
 			}
 		});
 	}
+	
+	public bool Contains(string name)
+	{
+		var item = Collection.Find(def => def.Uid == name);
+
+		return item != null;
+	}
 
 	public string GetRandomItem()
 	{
 		var random = Random.Range(0, 101);
 
-		if (random < Chance) return null;
+//		if (random < Chance) return null;
 
 		var level = ProfileService.Current.GetStorageItem(Currency.Level.Name).Amount;
 		var hot = new List<ItemWeight>();
@@ -34,6 +41,11 @@ public class CollectionDataManager : IDataLoader<CollectionDataManager>
 
 		foreach (var def in Collection)
 		{
+			if (ProfileService.Current.GetStorageItem(def.Uid).Amount > 0)
+			{
+				continue;
+			} 
+			
 			if (def.MaxLevel <= level)
 			{
 				hot.Add(def.GetItemWeight());

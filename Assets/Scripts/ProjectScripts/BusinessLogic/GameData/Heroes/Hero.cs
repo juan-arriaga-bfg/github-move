@@ -42,7 +42,7 @@ public class Hero
     {
         get
         {
-            return ProfileService.Current.GetStorageItem(Currency.Level.Name).Amount >= def.Level;
+            return (ProfileService.Current.GetStorageItem(Currency.Level.Name).Amount + 1) >= def.Level;
         }
     }
 
@@ -64,6 +64,11 @@ public class Hero
         get { return CurrencyHellper.IsCanPurchase(def.Prices); }
     }
 
+    public bool IsCollectCollections
+    {
+        get { return CurrencyHellper.IsCanPurchase(def.Collection); }
+    }
+
     public int ChargersPrice
     {
         get
@@ -76,6 +81,13 @@ public class Hero
             
             return price;
         }
+    }
+
+    public bool IsElementOfHero(string element)
+    {
+        var item = def.Collection.Find(pair => pair.Currency == element);
+        
+        return item != null;
     }
 
     public void PurchaseChargers()
