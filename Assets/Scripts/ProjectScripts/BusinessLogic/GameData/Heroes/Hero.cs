@@ -42,7 +42,7 @@ public class Hero
     {
         get
         {
-            return (ProfileService.Current.GetStorageItem(Currency.Level.Name).Amount + 1) >= def.Level;
+            return GameDataService.Current.LevelsManager.Level >= def.Level;
         }
     }
 

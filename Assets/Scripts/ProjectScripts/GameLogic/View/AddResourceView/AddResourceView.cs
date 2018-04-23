@@ -9,7 +9,7 @@ public class AddResourceView : BoardElementView
 	private void Show(CurrencyPair resource)
 	{
 		icon.sprite = IconService.Current.GetSpriteById(string.Format("icon_gameboard_{0}" , resource.Currency));
-		amountLabel.Text = string.Format("+{0}", resource.Amount);
+		amountLabel.Text = string.Format("<color=#EE4444>+{0}</color>", resource.Amount);
 		
 		float duration = 1f;
 		

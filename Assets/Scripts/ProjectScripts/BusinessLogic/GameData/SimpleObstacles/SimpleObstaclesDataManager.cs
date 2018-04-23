@@ -31,7 +31,7 @@ public class SimpleObstaclesDataManager : IDataLoader<List<SimpleObstaclesDef>>
             }
             else
             {
-                Debug.LogWarning("[HeroesDataManager]: heroes config not loaded");
+                Debug.LogWarning("[SimpleObstaclesDataManager]: simple obstacles config not loaded");
             }
         });
     }

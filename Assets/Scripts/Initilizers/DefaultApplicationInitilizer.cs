@@ -65,7 +65,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             Currency.RegisterCurrency(Currency.Obstacle);
             Currency.RegisterCurrency(Currency.Power);
             Currency.RegisterCurrency(Currency.Level);
-            Currency.RegisterCurrency(Currency.Merge);
+            Currency.RegisterCurrency(Currency.Energy);
             
             Currency.RegisterCurrency(Currency.LevelCastle);
             Currency.RegisterCurrency(Currency.LevelTavern);
@@ -99,6 +99,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         dataManager.QuestsManager.LoadData(new ResourceConfigDataMapper<List<QuestDef>>("configs/quests.data", NSConfigsSettings.Instance.IsUseEncryption));
         dataManager.FogsManager.LoadData(new ResourceConfigDataMapper<List<FogDef>>("configs/fogs.data", NSConfigsSettings.Instance.IsUseEncryption));
         dataManager.CollectionManager.LoadData(new ResourceConfigDataMapper<CollectionDataManager>("configs/collection.data", NSConfigsSettings.Instance.IsUseEncryption));
+        dataManager.LevelsManager.LoadData(new ResourceConfigDataMapper<List<LevelsDef>>("configs/levels.data", NSConfigsSettings.Instance.IsUseEncryption));
         
         // load local profile
         ProfileService.Instance.Manager.LoadCurrentProfile((profile) =>
@@ -112,6 +113,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             // set start money
             profile.GetStorageItem(Currency.Coins.Name).Amount += 500;
             profile.GetStorageItem(Currency.Crystals.Name).Amount += 50;
+            profile.GetStorageItem(Currency.Level.Name).Amount += 1;
 
 #if UNITY_EDITOR
             ProfileService.Instance.Manager.SaveLocalProfile();

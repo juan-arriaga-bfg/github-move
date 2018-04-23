@@ -1,7 +1,6 @@
 ﻿public static partial class Currency
 {
     public static readonly CurrencyDef Crystals = new CurrencyDef { Id = 2, Name = "Crystals", IsConsumable = true };
-    public static readonly CurrencyDef Merge = new CurrencyDef { Id = 3, Name = "Merge", IsConsumable = true };
     
     public static readonly CurrencyDef Enemy = new CurrencyDef { Id = 4, Name = "Enemy", IsConsumable = true };
     
@@ -10,6 +9,7 @@
     
     public static readonly CurrencyDef Power = new CurrencyDef { Id = 100, Name = "Power", IsConsumable = true };
     public static readonly CurrencyDef Level = new CurrencyDef { Id = 200, Name = "Level", IsConsumable = true };
+    public static readonly CurrencyDef Energy = new CurrencyDef { Id = 300, Name = "Energy", IsConsumable = true };
     
     public static readonly CurrencyDef LevelCastle = new CurrencyDef { Id = 10003, Name = "LevelCastle", IsConsumable = true };
     public static readonly CurrencyDef LevelTavern = new CurrencyDef { Id = 10004, Name = "LevelTavern", IsConsumable = true };

@@ -17,7 +17,7 @@ public class CollectionDataManager : IDataLoader<CollectionDataManager>
 			}
 			else
 			{
-				Debug.LogWarning("[FogsDataManager]: fogs config not loaded");
+				Debug.LogWarning("[CollectionDataManager]: collection config not loaded");
 			}
 		});
 	}
