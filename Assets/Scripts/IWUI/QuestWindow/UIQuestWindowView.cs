@@ -1,45 +1,57 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class UiSimpleQuestStartItem : MonoBehaviour
+public class UIQuestWindowView : UIGenericPopupWindowView
 {
-    [SerializeField] private Image icon;
-    [SerializeField] private Image background;
+    [SerializeField] private Image targetIcon;
     
-    [SerializeField] private NSText progressLabel;
+    [SerializeField] private NSText descriptionLabel;
+    [SerializeField] private NSText rewardLabel;
+    [SerializeField] private NSText amountLabel;
+    [SerializeField] private NSText buttonLabel;
     
-    [SerializeField] private RectTransform progress;
-    
-    [SerializeField] private GameObject btn;
-    [SerializeField] private GameObject check;
-
-    private Quest quest;
-    
-    private bool isComplete;
-    
-    
-    public void Init(Quest quest)
+    public override void OnViewShow()
     {
-        this.quest = quest;
+        base.OnViewShow();
         
-        var current = quest.CurrentAmount;
-        var target = quest.TargetAmount;
+        var windowModel = Model as UIQuestWindowModel;
         
-        isComplete = quest.Check();
+        SetTitle(windowModel.Title);
+        SetMessage(windowModel.Message);
+
+        descriptionLabel.Text = windowModel.Description;
+        rewardLabel.Text = windowModel.RewardText;
+        amountLabel.Text = windowModel.AmountText;
+        buttonLabel.Text = windowModel.ButtonText;
+
+        targetIcon.sprite = windowModel.Icon;
+    }
+
+    public override void OnViewClose()
+    {
+        base.OnViewClose();
         
-        background.sprite = IconService.Current.GetSpriteById(string.Format("back_is_{0}", isComplete.ToString().ToLower()));
-        icon.sprite = IconService.Current.GetSpriteById(quest.WantedIcon);
-        
-        progressLabel.Text = string.Format("{0}/{1}", current, target);
-        progress.sizeDelta = new Vector2(Mathf.Clamp(145 * current / (float) target, 0, 145), progress.sizeDelta.y);
-        
-        btn.SetActive(!isComplete);
-        check.SetActive(isComplete);
+        var windowModel = Model as UIQuestWindowModel;
     }
 
     public void OnClick()
     {
-        if(isComplete) return;
+        var windowModel = Model as UIQuestWindowModel;
+        var quest = windowModel.Quest;
+
+        if (quest.Check())
+        {
+            GameDataService.Current.QuestsManager.RemoveActiveQuest(quest);
+            GameDataService.Current.QuestsManager.AddActiveQuest();
+            
+            var main = UIService.Get.GetShowedWindowByName(UIWindowType.MainWindow).CurrentView as UIMainWindowView;
+				
+            main.UpdateQuest();
+        
+            quest.Complete(() => { CurrencyHellper.Purchase(quest.Reward); });
+            
+            return;
+        }
 
         var piece = BoardService.Current.GetBoardById(0).BoardLogic.MatchDefinition.GetFirst(quest.WantedPiece);
         
@@ -83,7 +95,6 @@ public class UiSimpleQuestStartItem : MonoBehaviour
         {
             if (position == null || position.Value.X == 0 && position.Value.Y == 0) return;
             HintArrowView.Show(position.Value);
-            UIService.Get.CloseWindow(UIWindowType.SimpleQuestStartWindow, true);
         });
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);

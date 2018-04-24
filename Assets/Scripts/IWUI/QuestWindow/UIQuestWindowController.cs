@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class UISimpleQuestStartWindowController : IWWindowController {
+public class UIQuestWindowController : IWWindowController {
 
     public override IWWindowModel CreateModel()
     {
-        UISimpleQuestStartWindowModel windowModel = new UISimpleQuestStartWindowModel();
+        UIQuestWindowModel windowModel = new UIQuestWindowModel();
 
 
 

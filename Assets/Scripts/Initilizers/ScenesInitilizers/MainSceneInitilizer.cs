@@ -20,10 +20,10 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.SampleWindow,
             UIWindowType.MessageWindow,
             UIWindowType.QuestStartWindow,
-            UIWindowType.SimpleQuestStartWindow,
             UIWindowType.ChestMessage,
             UIWindowType.HeroesWindow,
             UIWindowType.CollectionWindow,
+            UIWindowType.QuestWindow,
         });
 
         // on cache complete

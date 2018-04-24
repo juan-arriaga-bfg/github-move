@@ -97,11 +97,11 @@ public class UiQuestButton : MonoBehaviour, IBoardEventListener
 
     public void OnClick()
     {
-        var model = UIService.Get.GetCachedModel<UISimpleQuestStartWindowModel>(UIWindowType.SimpleQuestStartWindow);
+        var model = UIService.Get.GetCachedModel<UIQuestWindowModel>(UIWindowType.QuestWindow);
         
         model.Quest = quest;
         
-        UIService.Get.ShowWindow(UIWindowType.SimpleQuestStartWindow);
+        UIService.Get.ShowWindow(UIWindowType.QuestWindow);
 
         if (quest.State != QuestState.New) return;
         

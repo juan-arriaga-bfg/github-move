@@ -10,11 +10,11 @@
     
     public const string QuestStartWindow = "QuestStartWindow";
     
-    public const string SimpleQuestStartWindow = "SimpleQuestStartWindow";
-    
     public const string ChestMessage = "ChestMessageWindow";
     
     public const string HeroesWindow = "HeroesWindow";
     
     public const string CollectionWindow = "CollectionWindow";
+    
+    public const string QuestWindow = "QuestWindow";
 }
