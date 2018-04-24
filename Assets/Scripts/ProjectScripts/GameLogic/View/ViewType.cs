@@ -12,4 +12,5 @@
     SimpleObstacle = -1009,
     SimpleMultipleObstacle = -1010,
     FogState = -1011,
+    CastleUpgrade = -1012
 }

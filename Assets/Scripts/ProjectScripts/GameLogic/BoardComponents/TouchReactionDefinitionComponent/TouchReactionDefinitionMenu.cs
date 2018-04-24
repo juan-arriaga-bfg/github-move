@@ -39,4 +39,14 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
         
         return BoardButtonView.Color.Green;
     }
+
+    public T GetDefinition<T>() where T : TouchReactionDefinitionComponent
+    {
+        foreach (var definition in Definitions.Values)
+        {
+            if (definition is T) return definition as T;
+        }
+        
+        return null;
+    }
 }

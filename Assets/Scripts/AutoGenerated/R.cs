@@ -122,4 +122,5 @@ public class R
      public const string Coin4Piece = "Coin4Piece";
      public const string Coin5Piece = "Coin5Piece";
      public const string ResourceView = "ResourceView";
+     public const string CastleUpgradeView = "CastleUpgradeView";
 }

@@ -15,7 +15,7 @@ public class PieceDef
     public CurrencyPair Reproduction { get; set; }
     public CurrencyPair SpawnResources { get; set; }
     public List<CurrencyPair> CreateRewards { get; set; }
-    public CurrencyPair UpgradePrice { get; set; }
+    public List<CurrencyPair> UpgradePrices { get; set; }
     
     private CurrencyDef levelCurrencyDef;
     private CurrencyDef upgradeTargetCurrencyDef;

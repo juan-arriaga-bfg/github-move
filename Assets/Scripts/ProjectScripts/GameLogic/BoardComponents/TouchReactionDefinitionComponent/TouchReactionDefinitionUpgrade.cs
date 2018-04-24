@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-public class TouchReactionDefinitionUpgrade : TouchReactionDefinitionComponent
+﻿public class TouchReactionDefinitionUpgrade : TouchReactionDefinitionComponent
 {
 	public override bool Make(BoardPosition position, Piece piece)
 	{
@@ -44,7 +42,7 @@ public class TouchReactionDefinitionUpgrade : TouchReactionDefinitionComponent
 		var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
 
 		model.Title = "Upgrade";
-		model.Message = string.Format("Upgrade to {0} level, for {1} coins?", def.CurrentLevel() + 1, def.UpgradePrice.Amount);
+		model.Message = string.Format("Upgrade to {0} level, for {1} coins?", def.CurrentLevel() + 1, def.UpgradePrices[0].Amount);
 
 		model.AcceptLabel = "Upgrade";
 		model.CancelLabel = "Cancel";
@@ -52,7 +50,7 @@ public class TouchReactionDefinitionUpgrade : TouchReactionDefinitionComponent
 		model.OnCancel = () => { };
 		model.OnAccept = () =>
 		{
-			CurrencyHellper.Purchase(def.UpgradeCurrency.Name, 1, def.UpgradePrice, success =>
+			CurrencyHellper.Purchase(def.UpgradeCurrency.Name, 1, def.UpgradePrices[0], success =>
 			{
 				if (!success) return;
 				
