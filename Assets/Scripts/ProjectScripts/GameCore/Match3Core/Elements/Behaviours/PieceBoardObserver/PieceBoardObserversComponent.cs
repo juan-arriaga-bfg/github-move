@@ -38,6 +38,8 @@ public class PieceBoardObserversComponent : IECSComponent, IPieceBoardObserver
 
 	public virtual void OnAddToBoard(BoardPosition position, Piece targetContext = null)
 	{
+		
+		
 		for (int i = 0; i < observers.Count; i++)
 		{
 			var observer = observers[i];

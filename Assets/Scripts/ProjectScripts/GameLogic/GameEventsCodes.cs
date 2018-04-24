@@ -2,4 +2,5 @@
 {
     public const int ClosePieceMenu = 100;
     public const int ChangePiecePosition = 101;
+    public const int CreatePiece = 102;
 }

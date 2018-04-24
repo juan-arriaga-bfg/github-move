@@ -2,7 +2,6 @@ public class R
 {
      public const string SampleCube = "SampleCube";
      public const string GenericPiece = "GenericPiece";
-     public const string ResourceGenerationTimerView = "ResourceGenerationTimerView";
      public const string HitboxView = "HitboxView";
      public const string ReadyArrowView = "ReadyArrowView";
      public const string HitboxDamageView = "HitboxDamageView";

@@ -14,16 +14,27 @@ public class UIEnergyPanelViewController : UIGenericResourcePanelViewController
             UpdateProgress(currentValueAnimated);
         }
     }
-
+    
     public override void UpdateView()
     {
         if (storageItem == null) return;
         
         currentValue = storageItem.Amount;
-
+        
         UpdateProgress(currentValue);
     }
-    
+
+    public override void UpdateResource(int offset)
+    {
+        if (offset == 0) return;
+        
+        currentValueAnimated = offset < 0 ? 0 : currentValue;
+
+        this.currentValue += offset;
+
+        UpdateLabel(currentValue);
+    }
+
     private void UpdateProgress(float value)
     {
         var manager = GameDataService.Current.LevelsManager;

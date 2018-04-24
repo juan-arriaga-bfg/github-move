@@ -355,13 +355,15 @@ public class BoardLogicComponent : ECSEntity,
 
         SetPieceToBoard(x, y, piece);
 
-        var observer = piece == null ? null : piece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+        var observer = piece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
 
         if (observer != null)
         {
             observer.OnAddToBoard(position, piece);
         }
-
+        
+        Context.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, piece.PieceType);
+        
         return true;
     }
 
