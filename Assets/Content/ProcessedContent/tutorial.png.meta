@@ -14,6 +14,7 @@ TextureImporter:
     21300014: Sheeps_UI
     21300016: Stone_UI
     21300018: Wood_UI
+    21300020: collection_UI
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -85,8 +86,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 536
-        height: 202
+        width: 672
+        height: 256
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -97,38 +98,10 @@ TextureImporter:
       name: apple_UI
       rect:
         serializedVersion: 2
-        x: 537
+        x: 673
         y: 0
-        width: 536
-        height: 202
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: Chest_UI
-      rect:
-        serializedVersion: 2
-        x: 1074
-        y: 0
-        width: 533
-        height: 202
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: tutorial_TextBlock_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 203
-        width: 553
-        height: 194
+        width: 672
+        height: 256
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,24 +112,10 @@ TextureImporter:
       name: wood_UI
       rect:
         serializedVersion: 2
-        x: 554
-        y: 203
-        width: 553
-        height: 194
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: sheeps_UI
-      rect:
-        serializedVersion: 2
-        x: 1108
-        y: 203
-        width: 553
-        height: 194
+        x: 1346
+        y: 0
+        width: 671
+        height: 256
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,7 +127,63 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 398
+        y: 257
+        width: 667
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: sheeps_UI
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 514
+        width: 667
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Chest_UI
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 257
+        width: 667
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: collection_UI
+      rect:
+        serializedVersion: 2
+        x: 1336
+        y: 257
+        width: 667
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tutorial_TextBlock_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 771
         width: 553
         height: 194
       alignment: 9

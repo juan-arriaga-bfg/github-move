@@ -1594,7 +1594,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f21a908ed83b8e4c8209465118d7137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anchorView: {fileID: 0}
+  amountLabel: {fileID: 0}
   icon: {fileID: 114761753804135796}
+  itemUid: 
+  back: {fileID: 0}
 --- !u!114 &114761753804135796
 MonoBehaviour:
   m_ObjectHideFlags: 1
