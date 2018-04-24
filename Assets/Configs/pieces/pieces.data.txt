@@ -5,7 +5,9 @@
     [
       {
         "Currency": "Energy",
-        "Amount": 1
+        "Amount": 5,
+        "Currency": "Coins",
+        "Amount": 1		
       }
     ]
   },
@@ -15,7 +17,9 @@
     [
       {
         "Currency": "Energy",
-        "Amount": 3
+        "Amount": 10,
+		"Currency": "Coins",
+        "Amount": 2		
       }
     ]
   },
@@ -25,7 +29,9 @@
     [
       {
         "Currency": "Energy",
-        "Amount": 10
+        "Amount": 15,
+		"Currency": "Coins",
+        "Amount": 3	
       }
     ]
   },
@@ -35,7 +41,9 @@
     [
       {
         "Currency": "Energy",
-        "Amount": 25
+        "Amount": 25,
+		"Currency": "Coins",
+        "Amount": 5	
       }
     ]
   },
@@ -45,7 +53,9 @@
     [
       {
         "Currency": "Energy",
-        "Amount": 50
+        "Amount": 50,
+		"Currency": "Coins",
+        "Amount": 10	
       }
     ]
   },
@@ -55,7 +65,9 @@
     [
       {
         "Currency": "Energy",
-        "Amount": 100
+        "Amount": 100,
+		"Currency": "Coins",
+        "Amount": 20	
       }
     ]
   },
@@ -65,7 +77,9 @@
     [
       {
         "Currency": "Energy",
-        "Amount": 200
+        "Amount": 200,
+		"Currency": "Coins",
+        "Amount": 40
       }
     ]
   },
@@ -75,7 +89,9 @@
     [
       {
         "Currency": "Energy",
-        "Amount": 400
+        "Amount": 400,
+		"Currency": "Coins",
+        "Amount": 80
       }
     ]
   },
@@ -85,7 +101,9 @@
     [
       {
         "Currency": "Energy",
-        "Amount": 5
+        "Amount": 10,
+		"Currency": "Coins",
+        "Amount": 2	
       }
     ]
   },
@@ -95,7 +113,9 @@
     [
       {
         "Currency": "Energy",
-        "Amount": 10
+        "Amount": 25,
+		"Currency": "Coins",
+        "Amount": 5	
       }
     ]
   },
@@ -105,7 +125,9 @@
     [
       {
         "Currency": "Energy",
-        "Amount": 25
+        "Amount": 50,
+		"Currency": "Coins",
+        "Amount": 10	
       }
     ]
   },
@@ -115,7 +137,9 @@
     [
       {
         "Currency": "Energy",
-        "Amount": 50
+        "Amount": 100,
+		"Currency": "Coins",
+        "Amount": 20	
       }
     ]
   },
@@ -552,10 +576,10 @@
     "UpgradeTargetPiece": "Castle2",
     "IsFilledInStart":"true",
     "SpawnAmount": 1,
-    "SpawnCapacity": 4,
+    "SpawnCapacity": 0,
     "UpgradePrice": {
       "Currency": "Coins",
-      "Amount": 100
+      "Amount": 0
     }
   },
   {

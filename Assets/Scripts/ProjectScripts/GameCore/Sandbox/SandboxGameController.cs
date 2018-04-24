@@ -109,57 +109,98 @@ public class SandboxGameController : MonoBehaviour
             At = new BoardPosition(26, 1),
             PieceTypeId = PieceType.Castle1.Id
         });
-        
-        boardController.ActionExecutor.AddAction(new CreatePieceAtAction
+		boardController.ActionExecutor.AddAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(21, 6),
+            At = new BoardPosition(27, 4),
+            PieceTypeId = PieceType.Sawmill1.Id
+        });
+		
+		boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(24, 1),
             PieceTypeId = PieceType.O1.Id
         });
-        
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+		
+		boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(20, 8),
+            At = new BoardPosition(22, 3),
             PieceTypeId = PieceType.O1.Id
         });
+		
+		boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(27, 8),
+            PieceTypeId = PieceType.O3.Id
+        });
         
+ 
+		       boardController.ActionExecutor.AddAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(26, 4),
+            PieceTypeId = PieceType.A1.Id
+        });
+				       boardController.ActionExecutor.AddAction(new CreatePieceAtAction
+		        {
+            At = new BoardPosition(26, 5),
+            PieceTypeId = PieceType.A1.Id
+        });
+				       boardController.ActionExecutor.AddAction(new CreatePieceAtAction
+		        {
+            At = new BoardPosition(27, 7),
+            PieceTypeId = PieceType.A1.Id
+        });
+  
+				       boardController.ActionExecutor.AddAction(new CreatePieceAtAction
+		        {
+            At = new BoardPosition(25, 2),
+            PieceTypeId = PieceType.A1.Id
+        });
+						       boardController.ActionExecutor.AddAction(new CreatePieceAtAction
+		        {
+            At = new BoardPosition(24, 3),
+            PieceTypeId = PieceType.A1.Id
+        });
+  
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(27, 9),
-            PieceTypeId = PieceType.O1.Id
+            PieceTypeId = PieceType.A1.Id
         });
         
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(25, 7),
-            PieceTypeId = PieceType.O1.Id
+            PieceTypeId = PieceType.A1.Id
         });       
         
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(28, 7),
-            PieceTypeId = PieceType.O1.Id
+            PieceTypeId = PieceType.A1.Id
         });  
         
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(25, 8),
-            PieceTypeId = PieceType.O1.Id
+            PieceTypeId = PieceType.A1.Id
         });  
+		
+
         
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+      /*  boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(27, 5),
-            PieceTypeId = PieceType.E5.Id
+            At = new BoardPosition(27, 5),      // дерево, которое генерит ростки
+            PieceTypeId = PieceType.A5.Id
         });
-        
+      
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(23, 8),
-            PieceTypeId = PieceType.D3.Id
+            PieceTypeId = PieceType.D3.Id      // загон, который генерит барашков
         });
-        
+     */     
         AddPieces(new BoardPosition(10, 10), PieceType.A1.Id, PieceType.A9.Id, boardController);
-        
+  
        AddPieces(new BoardPosition(12, 10), PieceType.C1.Id, PieceType.C9.Id, boardController);
        AddPieces(new BoardPosition(14, 10), PieceType.B1.Id, PieceType.B5.Id, boardController);
       AddPieces(new BoardPosition(16, 10), PieceType.D1.Id, PieceType.D5.Id, boardController);
