@@ -6,7 +6,7 @@
     [
       {
         "Ability" : "Power",
-        "Value" : 5
+        "Value" : 10
       }
     ],
     "Collection" :
@@ -32,19 +32,19 @@
     [
       {
         "Currency" : "Charger1",
-        "Amount" : 2
+        "Amount" : 1
       },
       {
         "Currency" : "Charger2",
-        "Amount" : 2
+        "Amount" : 1
       },
       {
         "Currency" : "Charger3",
-        "Amount" : 2
+        "Amount" : 0
       },
       {
         "Currency" : "Charger4",
-        "Amount" : 2
+        "Amount" : 0
       }
     ]
   },
@@ -80,19 +80,19 @@
     "Prices" :
     [
       {
+        "Currency" : "Charger2",
+        "Amount" : 2
+      },
+      {
+        "Currency" : "Charger3",
+        "Amount" : 2
+      },
+      {
+        "Currency" : "Charger4",
+        "Amount" : 2
+      },
+      {
         "Currency" : "Charger5",
-        "Amount" : 2
-      },
-      {
-        "Currency" : "Charger6",
-        "Amount" : 2
-      },
-      {
-        "Currency" : "Charger7",
-        "Amount" : 2
-      },
-      {
-        "Currency" : "Charger8",
         "Amount" : 2
       }
     ]
@@ -129,19 +129,19 @@
     "Prices" :
     [
       {
+        "Currency" : "Charger1",
+        "Amount" : 2
+      },
+      {
+        "Currency" : "Charger2",
+        "Amount" : 2
+      },
+      {
         "Currency" : "Charger5",
         "Amount" : 2
       },
       {
         "Currency" : "Charger6",
-        "Amount" : 2
-      },
-      {
-        "Currency" : "Charger7",
-        "Amount" : 2
-      },
-      {
-        "Currency" : "Charger8",
         "Amount" : 2
       }
     ]

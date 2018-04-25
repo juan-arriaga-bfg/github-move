@@ -187,7 +187,7 @@ public class SandboxGameController : MonoBehaviour
 		
 
         
-      /*  boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+      boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(27, 5),      // дерево, которое генерит ростки
             PieceTypeId = PieceType.A5.Id
@@ -198,7 +198,7 @@ public class SandboxGameController : MonoBehaviour
             At = new BoardPosition(23, 8),
             PieceTypeId = PieceType.D3.Id      // загон, который генерит барашков
         });
-     */     
+          
         AddPieces(new BoardPosition(10, 10), PieceType.A1.Id, PieceType.A9.Id, boardController);
   
        AddPieces(new BoardPosition(12, 10), PieceType.C1.Id, PieceType.C9.Id, boardController);

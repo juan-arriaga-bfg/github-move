@@ -1,30 +1,30 @@
 [
   {
     "Uid" : 1,
-    "Message" : "Peasants from a neighboring village are asked to give them some logs.",
+    "Message" : "The Sheriff destroyed the village during my absence. It's time to start its restoration!",
     "Price" :
     {
-      "Currency" : "PieceA3",
-      "Amount" : 1
-    },
-    "Reward" :
-    {
-      "Currency" : "Coins",
-      "Amount" : 100
-    }
-  },
-  {
-    "Uid" : 2,
-    "Message" : "The mayor of a small town asks to give him several stones.",
-    "Price" :
-    {
-      "Currency" : "PieceC1",
+      "Currency" : "PieceA2",
       "Amount" : 2
     },
     "Reward" :
     {
       "Currency" : "Coins",
-      "Amount" : 100
+      "Amount" : 150
+    }
+  },
+  {
+    "Uid" : 2,
+    "Message" : "Now we can clean up the area from obstacles and build Houses!",
+    "Price" :
+    {
+      "Currency" : "PieceA3",
+      "Amount" : 2
+    },
+    "Reward" :
+    {
+	  "Currency" : "Crystals",
+      "Amount" : 5
     }
   },
   {

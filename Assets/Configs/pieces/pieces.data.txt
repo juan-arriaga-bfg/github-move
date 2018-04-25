@@ -626,7 +626,7 @@
     [
       {
         "Currency": "Coins",
-        "Amount": 100
+        "Amount": 0
       }
     ]
   },
@@ -836,12 +836,8 @@
     "UpgradePrices":
     [
       {
-        "Currency": "A1",
-        "Amount": 10
-      },
-      {
-        "Currency": "A2",
-        "Amount": 10
+        "Currency": "A3",
+        "Amount": 1
       }
     ]
   },
@@ -855,12 +851,12 @@
     "UpgradePrices":
     [
       {
-        "Currency": "A1",
-        "Amount": 10
+        "Currency": "A3",
+        "Amount": 3
       },
       {
-        "Currency": "A2",
-        "Amount": 10
+        "Currency": "B3",
+        "Amount": 1
       }
     ]
   },
