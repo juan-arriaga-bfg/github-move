@@ -52,6 +52,6 @@ public class SimpleObstaclesDataManager : IDataLoader<List<SimpleObstaclesDef>>
         const int stepPrice = 50;
 //        var max = piece.Context.BoardLogic.MatchDefinition.GetIndexInChain(piece.PieceType);
 
-        return new CurrencyPair {Currency = Currency.Coins.Name, Amount = (step + 1) * stepPrice};
+        return new CurrencyPair {Currency = Currency.Coins.Name, Amount =stepPrice + (stepPrice/2) *step};
     }
 }

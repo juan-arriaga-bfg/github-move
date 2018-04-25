@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PiecesDataManager : IDataLoader<List<PieceDef>>
 {
-    public const int ReproductionDelay = 5;
-    public const int ReproductionStepDelay = 3;
+    public const int ReproductionDelay = 7;
+    public const int ReproductionStepDelay = 5;
     public const int ReproductionChance = 25;
     
     public BoardPosition CastlePosition { get; set; }
