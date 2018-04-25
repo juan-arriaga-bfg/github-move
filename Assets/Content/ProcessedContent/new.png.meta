@@ -1,0 +1,1067 @@
+fileFormatVersion: 2
+guid: 021e05bd7c3023f43a52f48e138b1d58
+timeCreated: 1524687723
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: forest_window_back
+    21300002: round_active
+    21300004: round_not_active
+    21300006: soldier_img
+    21300008: shine_upgrade
+    21300010: ramka_player
+    21300012: pers_quest
+    21300014: progress_player
+    21300016: quest_messege
+    21300018: Chest_active
+    21300020: unlockpers
+    21300022: John_head
+    21300024: Greenarrow_head
+    21300026: Robin_head
+    21300028: Chest_not_active
+    21300030: ramka_minicollect
+    21300032: PinWarrior_ramka
+    21300034: icon_Fight
+    21300036: RobinItem4
+    21300038: RobinItem2
+    21300040: JohnItem1
+    21300042: bubble_quest
+    21300044: GreenarrowItem4
+    21300046: RobinItem3
+    21300048: RobinItem1
+    21300050: JohnItem2
+    21300052: JohnItem4
+    21300054: progressbar
+    21300056: JohnItem3
+    21300058: GreenarrowItem3
+    21300060: GreenarrowItem1
+    21300062: GreenarrowItem2
+    21300064: Hero_ramka_not_active
+    21300066: button_upgrade
+    21300068: heroes_info
+    21300070: Hero_ramka_active
+    21300072: bttnAdd
+    21300074: header_front
+    21300076: back_upUI
+    21300078: progressbar_ramka
+    21300080: x_button
+    21300082: minibubble
+    21300084: red_button
+    21300086: icon_TimeChest
+    21300088: question_button
+    21300090: header_back
+    21300092: progressbar_back
+    21300094: progressbar_chest
+    21300096: green_button
+    21300098: collect_done
+    21300100: orange_button
+    21300102: ramka_item_not_active_back_not_active
+    21300104: back_active
+    21300106: blue_button
+    21300108: progress_line
+    21300110: Charger5
+    21300112: ramka_item_active
+    21300114: ramka_item_active_back_not_active
+    21300116: minibubble_arrow
+    21300118: Charger2
+    21300120: Charger3
+    21300122: back_not_active
+    21300124: Charger1
+    21300126: Charger6
+    21300128: Charger4
+    21300130: progress
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 4096
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 4
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: forest_window_back
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 568
+        height: 343
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: round_active
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 0
+        width: 291
+        height: 291
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: round_not_active
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 292
+        width: 273
+        height: 273
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: soldier_img
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 344
+        width: 227
+        height: 270
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: shine_upgrade
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 344
+        width: 185
+        height: 185
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: ramka_player
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 530
+        width: 182
+        height: 183
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: pers_quest
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 615
+        width: 171
+        height: 188
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: progress_player
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 292
+        width: 166
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: quest_messege
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 0
+        width: 155
+        height: 155
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Chest_active
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 530
+        width: 150
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: unlockpers
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 344
+        width: 142
+        height: 152
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: John_head
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 459
+        width: 129
+        height: 156
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Greenarrow_head
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 566
+        width: 131
+        height: 153
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Robin_head
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 681
+        width: 130
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Chest_not_active
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 156
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: ramka_minicollect
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 566
+        width: 88
+        height: 173
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 41, y: 86, z: 41, w: 86}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: PinWarrior_ramka
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 720
+        width: 116
+        height: 127
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: icon_Fight
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 714
+        width: 120
+        height: 113
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: RobinItem4
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 714
+        width: 111
+        height: 110
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: RobinItem2
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 825
+        width: 97
+        height: 117
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: JohnItem1
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 832
+        width: 103
+        height: 109
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: bubble_quest
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 804
+        width: 126
+        height: 89
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 83, y: 48, z: 35, w: 39}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: GreenarrowItem4
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 828
+        width: 118
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: RobinItem3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 894
+        width: 115
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: RobinItem1
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 848
+        width: 84
+        height: 120
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: JohnItem2
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 848
+        width: 87
+        height: 106
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: JohnItem4
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 924
+        width: 105
+        height: 87
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: progressbar
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 943
+        width: 200
+        height: 42
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: JohnItem3
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 740
+        width: 112
+        height: 74
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: GreenarrowItem3
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 740
+        width: 91
+        height: 88
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: GreenarrowItem1
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 616
+        width: 107
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: GreenarrowItem2
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 815
+        width: 80
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Hero_ramka_not_active
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 911
+        width: 80
+        height: 89
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 39, y: 44, z: 39, w: 44}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: button_upgrade
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 690
+        width: 77
+        height: 88
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: heroes_info
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 616
+        width: 78
+        height: 82
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 38, y: 0, z: 38, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Hero_ramka_active
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 699
+        width: 76
+        height: 79
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 37, y: 39, z: 37, w: 39}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: bttnAdd
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 779
+        width: 75
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: header_front
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 779
+        width: 60
+        height: 89
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 29, y: 50, z: 29, w: 38}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: back_upUI
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 829
+        width: 74
+        height: 71
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 36, y: 35, z: 36, w: 35}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: progressbar_ramka
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 955
+        width: 80
+        height: 65
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 39, y: 36, z: 39, w: 28}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: x_button
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 942
+        width: 67
+        height: 72
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: minibubble
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 860
+        width: 68
+        height: 66
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 33, y: 32, z: 33, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: red_button
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 901
+        width: 59
+        height: 72
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 29, y: 0, z: 29, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: icon_TimeChest
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 986
+        width: 106
+        height: 35
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: question_button
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 869
+        width: 58
+        height: 63
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: header_back
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 828
+        width: 44
+        height: 83
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 21, y: 44, z: 21, w: 38}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: progressbar_back
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 969
+        width: 82
+        height: 42
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 40, y: 20, z: 40, w: 20}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: progressbar_chest
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 927
+        width: 61
+        height: 55
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: green_button
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 616
+        width: 46
+        height: 72
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 22, y: 0, z: 23, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: collect_done
+      rect:
+        serializedVersion: 2
+        x: 952
+        y: 869
+        width: 57
+        height: 57
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: orange_button
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 615
+        width: 38
+        height: 74
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 18, y: 0, z: 18, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: ramka_item_not_active_back_not_active
+      rect:
+        serializedVersion: 2
+        x: 952
+        y: 927
+        width: 50
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 24, y: 26, z: 24, w: 26}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: back_active
+      rect:
+        serializedVersion: 2
+        x: 871
+        y: 933
+        width: 50
+        height: 52
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 24, y: 25, z: 24, w: 25}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: blue_button
+      rect:
+        serializedVersion: 2
+        x: 973
+        y: 459
+        width: 39
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 19, y: 30, z: 19, w: 30}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: progress_line
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 991
+        width: 113
+        height: 20
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Charger5
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 566
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: ramka_item_active
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 974
+        width: 48
+        height: 40
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 23, y: 19, z: 23, w: 19}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: ramka_item_active_back_not_active
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 690
+        width: 44
+        height: 41
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 21, y: 20, z: 21, w: 20}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: minibubble_arrow
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 983
+        width: 46
+        height: 39
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Charger2
+      rect:
+        serializedVersion: 2
+        x: 973
+        y: 522
+        width: 39
+        height: 46
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Charger3
+      rect:
+        serializedVersion: 2
+        x: 973
+        y: 569
+        width: 42
+        height: 42
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: back_not_active
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 986
+        width: 47
+        height: 37
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 23, y: 18, z: 23, w: 18}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Charger1
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 981
+        width: 39
+        height: 39
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Charger6
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 981
+        width: 39
+        height: 39
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Charger4
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 690
+        width: 35
+        height: 38
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: progress
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 829
+        width: 32
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 15, y: 0, z: 15, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
