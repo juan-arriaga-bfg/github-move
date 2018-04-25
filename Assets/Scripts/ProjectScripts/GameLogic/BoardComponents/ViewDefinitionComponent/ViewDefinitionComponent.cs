@@ -101,7 +101,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         
         foreach (var view in shown)
         {
-            if(view.Priority != shownViewPriority) continue;
+            if(view.Priority != shownViewPriority || view.IsShow == false) continue;
             view.UpdateVisibility(true);
         }
     }

@@ -22,7 +22,7 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 	
 	public override int Priority
 	{
-		get { return 5; }
+		get { return 1; }
 	}
 	
 	protected override void SetOfset()
@@ -37,15 +37,6 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 		label.Text = "Upgrade";
 		isComplete = false;
 		
-		def = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(piece.PieceType);
-		
-		foreach (var item in def.UpgradePrices)
-		{
-			items.Add(CreateItem(item));
-		}
-		
-		patern.SetActive(false);
-		
 		var touchReaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
         
 		if(touchReaction == null) return;
@@ -59,10 +50,18 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 		if(reaction == null) return;
 		
 		reaction.OnClick = OnClick;
-        
+		
 		Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceMenu);
 		Context.Context.BoardEvents.AddListener(this, GameEventsCodes.CreatePiece);
+        
+		def = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(piece.PieceType);
 		
+		foreach (var item in def.UpgradePrices)
+		{
+			items.Add(CreateItem(item));
+		}
+		
+		patern.SetActive(false);
 	}
 
 	public override void UpdateVisibility(bool isVisible)
@@ -75,7 +74,7 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 	public override void ResetViewOnDestroy()
 	{
 		base.ResetViewOnDestroy();
-
+		
 		foreach (var item in items)
 		{
 			Destroy(item.gameObject);
@@ -100,6 +99,8 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 	public void Upgrade()
 	{
 		reaction.Upgrade(def, Context);
+		reaction.isOpen = false;
+		Change(false);
 	}
 	
 	public void OnBoardEvent(int code, object context)
@@ -107,19 +108,19 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 		switch (code)
 		{
 			case GameEventsCodes.ClosePieceMenu:
-				if((context as CastleUpgradeView) == this || reaction.isOpen == false) return;
+				if ((context as CastleUpgradeView) == this || reaction.isOpen == false) return;
 
 				reaction.isOpen = false;
 				Change(false);
 				break;
 			case GameEventsCodes.CreatePiece:
-				
-				if(reaction.isOpen) return;
-				
+
 				foreach (var item in items)
 				{
-					if(item.IsComplete == false) return;
+					if (item.IsComplete == false) return;
 				}
+
+				if (isComplete) return;
 
 				isComplete = true;
 				OnClick();

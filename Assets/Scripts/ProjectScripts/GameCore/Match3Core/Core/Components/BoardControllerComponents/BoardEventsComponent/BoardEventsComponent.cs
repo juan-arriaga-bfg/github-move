@@ -50,7 +50,7 @@ public class BoardEventsComponent : IECSComponent
 
         if (registeredListeners.TryGetValue(eventCode, out listeners))
         {
-            for (int i = 0; i < listeners.Count; i++)
+            for (int i = listeners.Count - 1; i >= 0; i--)
             {
                 listeners[i].OnBoardEvent(eventCode, context);
             }
