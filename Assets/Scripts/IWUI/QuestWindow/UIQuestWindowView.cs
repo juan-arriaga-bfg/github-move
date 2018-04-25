@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,12 +10,16 @@ public class UIQuestWindowView : UIGenericPopupWindowView
     [SerializeField] private NSText rewardLabel;
     [SerializeField] private NSText amountLabel;
     [SerializeField] private NSText buttonLabel;
+
+    private bool isComplete;
     
     public override void OnViewShow()
     {
         base.OnViewShow();
         
         var windowModel = Model as UIQuestWindowModel;
+
+        isComplete = false;
         
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
@@ -34,11 +39,24 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIQuestWindowModel;
     }
 
+    public override void OnViewCloseCompleted()
+    {
+        if(isComplete == false) return;
+        
+        var windowModel = Model as UIQuestWindowModel;
+        
+        BoardService.Current.GetBoardById(0).ActionExecutor.AddAction(new EjectionPieceAction
+        {
+            From = GameDataService.Current.PiecesManager.KingPosition,
+            Pieces = windowModel.Quest.Rewards
+        });
+    }
+
     public void OnClick()
     {
         var windowModel = Model as UIQuestWindowModel;
         var quest = windowModel.Quest;
-
+        
         if (quest.Check())
         {
             GameDataService.Current.QuestsManager.RemoveActiveQuest(quest);
@@ -47,9 +65,8 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             var main = UIService.Get.GetShowedWindowByName(UIWindowType.MainWindow).CurrentView as UIMainWindowView;
 				
             main.UpdateQuest();
-        
-            quest.Complete(() => { CurrencyHellper.Purchase(quest.Reward); });
-            
+
+            isComplete = true;
             return;
         }
 

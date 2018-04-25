@@ -7,11 +7,13 @@
       "Currency" : "PieceA2",
       "Amount" : 2
     },
-    "Reward" :
-    {
-      "Currency" : "Coins",
-      "Amount" : 150
-    }
+    "Rewards" :
+    [
+      {
+        "Currency" : "Coin2",
+        "Amount" : 5
+      }
+    ]
   },
   {
     "Uid" : 2,
@@ -21,11 +23,13 @@
       "Currency" : "PieceA3",
       "Amount" : 2
     },
-    "Reward" :
-    {
-	  "Currency" : "Crystals",
-      "Amount" : 15
-    }
+    "Rewards" :
+    [
+      {
+        "Currency" : "Coin2",
+        "Amount" : 5
+      }
+    ]
   },
   {
     "Uid" : 3,
@@ -35,11 +39,17 @@
       "Currency" : "PieceA2",
       "Amount" : 2
     },
-    "Reward" :
-    {
-      "Currency" : "Coins",
-      "Amount" : 100
-    }
+    "Rewards" :
+    [
+      {
+        "Currency" : "Coin1",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "Coin2",
+        "Amount" : 5
+      }
+    ]
   },
   {
     "Uid" : 4,
@@ -49,11 +59,17 @@
       "Currency" : "PieceC2",
       "Amount" : 2
     },
-    "Reward" :
-    {
-      "Currency" : "Coins",
-      "Amount" : 100
-    }
+    "Rewards" :
+    [
+      {
+        "Currency" : "Coin1",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "Coin2",
+        "Amount" : 5
+      }
+    ]
   },
   {
     "Uid" : 5,
@@ -63,11 +79,17 @@
       "Currency" : "PieceB3",
       "Amount" : 2
     },
-    "Reward" :
-    {
-      "Currency" : "Coins",
-      "Amount" : 100
-    }
+    "Rewards" :
+    [
+      {
+        "Currency" : "Coin1",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "Coin2",
+        "Amount" : 5
+      }
+    ]
   },
   {
     "Uid" : 6,
@@ -77,11 +99,17 @@
       "Currency" : "PieceD4",
       "Amount" : 1
     },
-    "Reward" :
-    {
-      "Currency" : "Coins",
-      "Amount" : 100
-    }
+    "Rewards" :
+    [
+      {
+        "Currency" : "Coin1",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "Coin2",
+        "Amount" : 5
+      }
+    ]
   },
   {
     "Uid" : 7,
@@ -91,11 +119,17 @@
       "Currency" : "PieceD5",
       "Amount" : 2
     },
-    "Reward" :
-    {
-      "Currency" : "Coins",
-      "Amount" : 100
-    }
+    "Rewards" :
+    [
+      {
+        "Currency" : "Coin1",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "Coin2",
+        "Amount" : 5
+      }
+    ]
   },
   {
     "Uid" : 8,
@@ -105,10 +139,16 @@
       "Currency" : "PieceE6",
       "Amount" : 2
     },
-    "Reward" :
-    {
-      "Currency" : "Coins",
-      "Amount" : 100
-    }
+    "Rewards" :
+    [
+      {
+        "Currency" : "Coin1",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "Coin2",
+        "Amount" : 5
+      }
+    ]
   }
 ]

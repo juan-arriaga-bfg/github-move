@@ -29,6 +29,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.OX4.Id, R.OX4Piece);
         dict.Add(PieceType.OX5.Id, R.OX5Piece);
         
+        dict.Add(PieceType.King.Id, R.KingPiece);
+        
         dict.Add(PieceType.Quest.Id, R.QuestPiece);
         dict.Add(PieceType.Fog.Id, R.FogPiece);
         

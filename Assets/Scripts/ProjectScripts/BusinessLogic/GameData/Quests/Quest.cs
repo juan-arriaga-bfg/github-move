@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Quest
@@ -36,18 +36,23 @@ public class Quest
         set { currentAmount = Mathf.Min(value, def.Price.Amount); }
     }
 
-    public CurrencyPair Reward
+    public Dictionary<int, int> Rewards
     {
-        get { return def.Reward; }
+        get
+        {
+            var dict = new Dictionary<int, int>();
+
+            foreach (var pair in def.Rewards)
+            {
+                dict.Add(PieceType.Parse(pair.Currency), pair.Amount);
+            }
+            
+            return dict;
+        }
     }
 
     public bool Check()
     {
         return CurrentAmount >= TargetAmount;
-    }
-
-    public void Complete(Action onComplete)
-    {
-        if(onComplete != null) onComplete();
     }
 }

@@ -32,7 +32,23 @@ public class UIQuestWindowModel : IWWindowModel
 
     public string RewardText
     {
-        get { return string.Format("<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>Reward:</color></font> <size=50>{0} <sprite name={1}></size>", Quest.Reward.Amount, Quest.Reward.Currency); }
+        get
+        {
+            var amount = 0;
+
+            foreach (var reward in Quest.Rewards)
+            {
+                var def = GameDataService.Current.PiecesManager.GetPieceDef(reward.Key);
+                
+                if(def == null) continue;
+
+                amount += def.SpawnResources.Amount * reward.Value;
+            }
+            
+            return string.Format(
+                "<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>Reward:</color></font> <size=50>{0} <sprite name={1}></size>",
+                amount, Currency.Coins.Name);
+        }
     }
 
     public Sprite Icon
