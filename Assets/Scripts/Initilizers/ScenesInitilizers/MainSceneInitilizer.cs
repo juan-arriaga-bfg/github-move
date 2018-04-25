@@ -22,6 +22,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.QuestStartWindow,
             UIWindowType.ChestMessage,
             UIWindowType.HeroesWindow,
+            UIWindowType.CharactersWindow,
             UIWindowType.CollectionWindow,
             UIWindowType.QuestWindow,
         });
@@ -37,6 +38,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             // get model for window
             var model = UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow);
             UIService.Get.ShowWindow(UIWindowType.MainWindow);
+            UIService.Get.ShowWindow(UIWindowType.CharactersWindow);
             
             if (onComplete != null)
             {

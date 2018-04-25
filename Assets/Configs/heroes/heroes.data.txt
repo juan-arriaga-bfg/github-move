@@ -96,5 +96,54 @@
         "Amount" : 2
       }
     ]
+  },
+  {
+    "Uid": "Greenarrow",
+    "Level" : 3,
+    "Abilities" :
+    [
+      {
+        "Ability" : "Power",
+        "Value" : 5
+      }
+    ],
+    "Collection" :
+    [
+      {
+        "Currency" : "GreenarrowItem1",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "GreenarrowItem2",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "GreenarrowItem3",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "GreenarrowItem4",
+        "Amount" : 1
+      }
+    ],
+    "Prices" :
+    [
+      {
+        "Currency" : "Charger5",
+        "Amount" : 2
+      },
+      {
+        "Currency" : "Charger6",
+        "Amount" : 2
+      },
+      {
+        "Currency" : "Charger7",
+        "Amount" : 2
+      },
+      {
+        "Currency" : "Charger8",
+        "Amount" : 2
+      }
+    ]
   }
 ]

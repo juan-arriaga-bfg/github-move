@@ -3,22 +3,14 @@ using UnityEngine;
 
 public class ChangeFogStateView : UIBoardView, IBoardEventListener
 {
-	[SerializeField] private GameObject bubble;
-	[SerializeField] private GameObject arrow;
-	
 	[SerializeField] private NSText label;
 	
-	[SerializeField] private BoardProgressBarView progressBar;
+	[SerializeField] private RectTransform line;
 	
 	private FogDef def;
 
 	private TouchReactionDefinitionFog definition;
-
-	public override int Priority
-	{
-		get { return -1; }
-	}
-
+	
 	public override Vector3 Ofset
 	{
 		get { return new Vector3(0, 4f); }
@@ -57,11 +49,11 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 		var power = GameDataService.Current.HeroesManager.CurrentPower();
 		var isComplete = power >= def.Condition.Value;
 		
-		bubble.SetActive(definition.IsOpen && !isComplete);
-		arrow.SetActive(isComplete);
-
+		Change(definition.IsOpen || isComplete);
+		
 		label.Text = string.Format("{0}/{1}", power, def.Condition.Value);
-		progressBar.SetProgress((float) power / def.Condition.Value);
+
+		line.sizeDelta = new Vector2(Mathf.Clamp(163 * (float) power / def.Condition.Value, 10, 163), line.sizeDelta.y);
 	}
 	
 	public void OnBoardEvent(int code, object context)

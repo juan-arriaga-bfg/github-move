@@ -14,6 +14,8 @@
     
     public const string HeroesWindow = "HeroesWindow";
     
+    public const string CharactersWindow = "CharactersWindow";
+    
     public const string CollectionWindow = "CollectionWindow";
     
     public const string QuestWindow = "QuestWindow";

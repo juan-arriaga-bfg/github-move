@@ -42,7 +42,7 @@ public class ChestPieceView : PieceBoardElementView
 
     private void UpdateProgress()
     {
-        timerLabel.Text = chestComponent.Timer.GetTimeLeftText(null);
-        progressBar.SetProgress((float)chestComponent.Timer.GetTime().TotalSeconds / chestComponent.Timer.Delay);
+        timerLabel.Text = string.Format("<mspace=3em>{0}</mspace>", chestComponent.Timer.GetTimeLeftText(null));
+        if(progressBar != null) progressBar.SetProgress((float)chestComponent.Timer.GetTime().TotalSeconds / chestComponent.Timer.Delay);
     }
 }

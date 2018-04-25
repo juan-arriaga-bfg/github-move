@@ -106,13 +106,8 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         {
             ProfileService.Current.StorageItems.Clear();
             ProfileService.Instance.Manager.CheckMigration();
-
-            // set start power
-            profile.GetStorageItem(Currency.Power.Name).Amount += 15;
             
-            // set start money
-            profile.GetStorageItem(Currency.Coins.Name).Amount += 500;
-            profile.GetStorageItem(Currency.Crystals.Name).Amount += 50;
+            // set start Currency
             profile.GetStorageItem(Currency.Level.Name).Amount += 1;
 
 #if UNITY_EDITOR

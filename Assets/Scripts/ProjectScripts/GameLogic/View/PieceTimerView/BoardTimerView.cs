@@ -26,7 +26,7 @@ public class BoardTimerView : UIBoardView
         
         if(timer.IsExecuteable() == false) return;
         
-        progressBar.SetProgress((float)timer.GetTime().TotalSeconds / timer.Delay);
-        label.Text = timer.GetTimeLeftText(null);
+        if(progressBar != null) progressBar.SetProgress((float)timer.GetTime().TotalSeconds / timer.Delay);
+        label.Text = string.Format("<mspace=3em>{0}</mspace>", timer.GetTimeLeftText(null));
     }
 }

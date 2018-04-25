@@ -17,6 +17,5 @@
 
     public void SetDefaultSettings(UserProfile profile)
     {
-        profile.GetStorageItem(Currency.Power.Name).Amount = 15;
     }
 }

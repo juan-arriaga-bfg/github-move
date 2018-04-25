@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class Hero
 {
@@ -31,6 +32,11 @@ public class Hero
     public Hero(HeroDef def)
     {
         this.def = def;
+    }
+
+    public bool IsSleep
+    {
+        get { return Random.Range(0, 2) == 0; }
     }
 
     public bool IsCollect
@@ -82,7 +88,7 @@ public class Hero
             return price;
         }
     }
-
+    
     public bool IsElementOfHero(string element)
     {
         var item = def.Collection.Find(pair => pair.Currency == element);
@@ -121,6 +127,11 @@ public class Hero
             
             CurrencyHellper.Purchase(Currency.Power.Name, GetAbilityValue(AbilityType.Power));
         });
+    }
+
+    public void WakeUp()
+    {
+        
     }
     
     public int GetAbilityValue(AbilityType ability)
