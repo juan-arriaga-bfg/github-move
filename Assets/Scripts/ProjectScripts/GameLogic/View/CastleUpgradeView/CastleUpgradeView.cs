@@ -93,8 +93,8 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 	{
 		Context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
 		
-		reaction.isOpen = true;
-		Change(true);
+		reaction.isOpen = !reaction.isOpen;
+		Change(reaction.isOpen);
 	}
 	
 	public void Upgrade()
@@ -107,7 +107,7 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 		switch (code)
 		{
 			case GameEventsCodes.ClosePieceMenu:
-				if(reaction.isOpen == false) return;
+				if((context as CastleUpgradeView) == this || reaction.isOpen == false) return;
 
 				reaction.isOpen = false;
 				Change(false);

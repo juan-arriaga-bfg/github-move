@@ -19,8 +19,8 @@
         
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionMenu()
-                .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage(), PieceType.Parse(def.SpawnPieceType))
-                .RegisterDefinition(new TouchReactionDefinitionUpgrade(), "arrow_light"))
+                .RegisterDefinition(new TouchReactionDefinitionUpgrade {Icon = "arrow_light"})
+                .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{Icon = PieceType.Parse(def.SpawnPieceType)}))
             .RegisterComponent(new TouchReactionConditionComponent()));
         
         AddView(piece, ViewType.StorageState);

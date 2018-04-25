@@ -19,9 +19,9 @@
         
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionMenu()
-                .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage(), "Chest")
-                .RegisterDefinition(new TouchReactionDefinitionUpgradeCastle(), "arrow_light")
-                .RegisterDefinition(new TouchReactionDefinitionOpenHeroesWindow(), "face_Robin"))
+                .RegisterDefinition(new TouchReactionDefinitionUpgradeCastle{Icon = "arrow_light"})
+                .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{Icon = "Chest"})
+                .RegisterDefinition(new TouchReactionDefinitionOpenHeroesWindow{Icon = "face_Robin"}))
             .RegisterComponent(new TouchReactionConditionComponent()));
         
         AddView(piece, ViewType.StorageState);

@@ -6,8 +6,8 @@
 		
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu()
-				.RegisterDefinition(new TouchReactionDefinitionOpenHeroesWindow(), "face_Robin")
-				.RegisterDefinition(new TouchReactionDefinitionUpgrade(), "arrow"))
+				.RegisterDefinition(new TouchReactionDefinitionOpenHeroesWindow{Icon = "face_Robin"})
+				.RegisterDefinition(new TouchReactionDefinitionUpgrade{Icon = "arrow"}))
 			.RegisterComponent(new TouchReactionConditionComponent()));
         
 		AddView(piece, ViewType.LevelLabel);

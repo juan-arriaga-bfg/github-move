@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class PieceMenuView : UIBoardView, IBoardEventListener
 {
-    private Dictionary<BoardButtonView, TouchReactionDefinitionComponent> buttons = new Dictionary<BoardButtonView, TouchReactionDefinitionComponent>();
-
-    private BoardButtonView spawnButton;
-
+    [SerializeField] private GameObject pattern;
+    
+    private List<GameObject> btns = new List<GameObject>();
+    
     private bool isOpen;
 
     public override int Priority
@@ -39,94 +39,48 @@ public class PieceMenuView : UIBoardView, IBoardEventListener
         menuDef.OnClick = OnClick;
         Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceMenu);
         
-        foreach (var pair in menuDef.Definitions)
+        foreach (var def in menuDef.Definitions)
         {
-            var element = piece.Context.RendererContext.CreateElement((int)ViewType.MenuButton);
+            var btn = Instantiate(pattern, pattern.transform.parent);
             
-            
-            var btn = element.GetComponent<BoardButtonView>();
-            
-            element.parent = viewGo.transform;
-            element.localPosition = Vector3.zero;
-            element.localScale = Vector3.one;
-            
-            btn.Init(pair.Key, menuDef.GetColor(pair.Value), view => OnButtonClick(view));
-            buttons.Add(btn, pair.Value);
-
-            if (pair.Value is TouchReactionDefinitionSpawnInStorage) spawnButton = btn;
+            btn.GetComponent<PieceMenuItem>().Decoration(def, Context);
+            btns.Add(btn);
         }
+        
+        pattern.SetActive(false);
     }
 
     public override void ResetViewOnDestroy()
     {
         base.ResetViewOnDestroy();
+        
+        Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceMenu);
 
-        foreach (var buttonsKey in buttons.Keys)
+        foreach (var btn in btns)
         {
-            Context.Context.RendererContext.DestroyElement(buttonsKey.gameObject);
+            Destroy(btn);
         }
         
-        buttons = new Dictionary<BoardButtonView, TouchReactionDefinitionComponent>();
-        Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceMenu);
+        btns = new List<GameObject>();
+        
+        pattern.SetActive(true);
     }
 
     private void OnClick()
     {
-        if (isOpen == false && spawnButton != null && OnButtonClick(spawnButton))
-        {
-            return;
-        }
-        
         Context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
         
         isOpen = !isOpen;
-
-        if (isOpen) OpenMenu();
-        else CloseMenu();
-    }
-
-    private void OpenMenu()
-    {
-        Change(true);
-
-        var index = 0;
-        var angle = (360 / (float) buttons.Count) * (Mathf.PI/180);
         
-        foreach (var pair in buttons)
-        {
-            index++;
-            var position = new Vector2(Mathf.Cos(angle  * index), 0.5f + Mathf.Sin(angle * index));
-            pair.Key.CachedTransform.localPosition = position;
-        }
+        Change(isOpen);
     }
-
-    private void CloseMenu()
-    {
-        Change(false);
-        
-        foreach (var pair in buttons)
-        {
-            pair.Key.CachedTransform.localPosition = Vector3.zero;
-        }
-    }
-
-    private bool OnButtonClick(BoardButtonView btn)
-    {
-        TouchReactionDefinitionComponent definition;
-        if(buttons.TryGetValue(btn, out definition) == false) return false;
-        
-        isOpen = false;
-        CloseMenu();
-        
-        return definition.Make(Context.CachedPosition, Context);
-    }
-
+    
     public void OnBoardEvent(int code, object context)
     {
-        if (code != GameEventsCodes.ClosePieceMenu) return;
+        if (code != GameEventsCodes.ClosePieceMenu || (context as PieceMenuView) == this) return;
         if(isOpen == false) return;
 
         isOpen = false;
-        CloseMenu();
+        Change(false);
     }
 }

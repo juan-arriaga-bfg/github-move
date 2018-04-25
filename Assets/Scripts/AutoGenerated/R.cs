@@ -10,7 +10,6 @@ public class R
      public const string AddResourceView = "AddResourceView";
      public const string ChangeStorageStateView = "ChangeStorageStateView";
      public const string BoardTimerView = "BoardTimerView";
-     public const string BoardButtonView = "BoardButtonView";
      public const string HintArrow = "HintArrow";
      public const string AddCards = "AddCards";
      public const string PieceLevelView = "PieceLevelView";

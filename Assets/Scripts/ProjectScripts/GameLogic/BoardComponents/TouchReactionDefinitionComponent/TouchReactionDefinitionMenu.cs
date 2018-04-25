@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
 {
-    public readonly Dictionary<string, TouchReactionDefinitionComponent> Definitions = new Dictionary<string, TouchReactionDefinitionComponent>();
+    public readonly List<TouchReactionDefinitionComponent> Definitions = new List<TouchReactionDefinitionComponent>();
 
     public Action OnClick;
     
@@ -23,26 +23,15 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
         return true;
     }
 
-    public TouchReactionDefinitionMenu RegisterDefinition(TouchReactionDefinitionComponent definition, string image)
+    public TouchReactionDefinitionMenu RegisterDefinition(TouchReactionDefinitionComponent definition)
     {
-        if (Definitions.ContainsKey(image)) return this;
-        
-        Definitions.Add(image, definition);
+        Definitions.Add(definition);
         return this;
     }
     
-    public BoardButtonView.Color GetColor(TouchReactionDefinitionComponent definition)
-    {
-        if (definition is TouchReactionDefinitionUpgrade) return BoardButtonView.Color.Blue;
-        
-        if (definition is TouchReactionDefinitionOpenHeroesWindow) return BoardButtonView.Color.Orange;
-        
-        return BoardButtonView.Color.Green;
-    }
-
     public T GetDefinition<T>() where T : TouchReactionDefinitionComponent
     {
-        foreach (var definition in Definitions.Values)
+        foreach (var definition in Definitions)
         {
             if (definition is T) return definition as T;
         }

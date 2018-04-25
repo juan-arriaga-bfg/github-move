@@ -72,12 +72,10 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
         Context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
         simpleObstacle.isOpen = !simpleObstacle.isOpen;
         
-        if(simpleObstacle.isOpen == false) return;
-        
         SetProgress();
         price.Text = string.Format("<sprite name={0}> {1}", simpleObstacle.Price.Currency, simpleObstacle.Price.Amount);
 
-        Change(true);
+        Change(simpleObstacle.isOpen);
     }
 
     public void Clear()
@@ -87,7 +85,7 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
     
     public void OnBoardEvent(int code, object context)
     {
-        if (code != GameEventsCodes.ClosePieceMenu) return;
+        if (code != GameEventsCodes.ClosePieceMenu|| (context as ChangeSimpleObstacleStateView) == this) return;
         if(simpleObstacle.isOpen == false) return;
 
         simpleObstacle.isOpen = false;

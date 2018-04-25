@@ -1,5 +1,7 @@
 ﻿public class TouchReactionDefinitionComponent : IECSComponent
 {
+    public string Icon { get; set; }
+    
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     
     public int Guid { get { return ComponentGuid; } }

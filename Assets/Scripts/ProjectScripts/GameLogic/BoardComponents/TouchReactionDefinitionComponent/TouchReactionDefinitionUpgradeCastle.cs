@@ -16,12 +16,6 @@ public class TouchReactionDefinitionUpgradeCastle : TouchReactionDefinitionCompo
 			UIMessageWindowController.CreateDefaultMessage("Building can not be improved!");
 			return true;
 		}
-		
-		if (isOpen)
-		{
-			piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
-			return true;
-		}
         
 		if (OnClick != null) OnClick();
 		return true;

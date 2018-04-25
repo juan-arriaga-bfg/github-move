@@ -8,9 +8,7 @@
     BoardTimer = -1005,
     LevelLabel = -1006,
     Menu = -1007,
-    MenuButton = -1008,
-    SimpleObstacle = -1009,
-    SimpleMultipleObstacle = -1010,
-    FogState = -1011,
-    CastleUpgrade = -1012
+    SimpleObstacle = -1008,
+    FogState = -1009,
+    CastleUpgrade = -1010
 }
