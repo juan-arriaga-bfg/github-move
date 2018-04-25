@@ -58,7 +58,7 @@ public class CollectionDataManager : IDataLoader<CollectionDataManager>
 		
 		var random = Random.Range(0, 101);
 
-		if (random < Chance) return null;
+		if (random > Chance) return null;
 		
 		if (hot.Count != 0) return ItemWeight.GetRandomItem(hot).Uid;
 		if (top.Count != 0) return ItemWeight.GetRandomItem(top).Uid;
