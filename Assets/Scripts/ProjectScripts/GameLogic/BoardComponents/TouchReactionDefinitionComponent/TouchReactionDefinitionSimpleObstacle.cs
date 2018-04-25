@@ -46,12 +46,21 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
             
             current++;
             HitboxDamageView.Show(position, 1);
-            
-            if (current != Steps) return;
+
+            if (current != Steps)
+            {
+                piece.Context.ActionExecutor.AddAction(new EjectionPieceAction()
+                {
+                    From = position,
+                    Pieces = GameDataService.Current.SimpleObstaclesManager.RewardForPiece(piece.PieceType, current)
+                });
+                
+                return;
+            }
                 
             isClear = true;
 
-            var chest = GameDataService.Current.SimpleObstaclesManager.RewardForPiece(piece.PieceType);
+            var chest = GameDataService.Current.SimpleObstaclesManager.ChestForPiece(piece.PieceType);
                 
             if(chest == PieceType.None.Id) return;
                 

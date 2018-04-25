@@ -1,7 +1,7 @@
 [
   {
     "Uid" : "O1",
-    "Weights" :
+    "ChestWeights" :
     [
       {
         "Uid": "Chest1",
@@ -15,7 +15,21 @@
   },
   {
     "Uid" : "O2",
-    "Weights" :
+    "PieceAmounts" :
+    [
+      2
+    ],
+    "PieceWeights" :
+    {
+      "1" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        }
+      ]
+    },
+    "ChestWeights" :
     [
       {
         "Uid": "Chest2",
@@ -30,7 +44,33 @@
   },
   {
     "Uid" : "O3",
-    "Weights" :
+    "PieceAmounts" :
+    [
+      2,
+      3
+    ],
+    "PieceWeights" :
+    {
+      "1" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        }
+      ],
+      "2" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "B1",
+          "Weight" : 100
+        }
+      ]
+    },
+    "ChestWeights" :
     [
       {
         "Uid": "Chest2",
@@ -44,7 +84,49 @@
   },
   {
     "Uid" : "O4",
-    "Weights" :
+    "PieceAmounts" :
+    [
+      2,
+      3,
+      4
+    ],
+    "PieceWeights" :
+    {
+      "1" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        }
+      ],
+      "2" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "B1",
+          "Weight" : 100
+        }
+      ],
+      "3" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "B1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "C1",
+          "Weight" : 100
+        }
+      ]
+    },
+    "ChestWeights" :
     [
       {
         "Uid": "Chest2",
@@ -58,7 +140,65 @@
   },
   {
     "Uid" : "O5",
-    "Weights" :
+    "PieceAmounts" :
+    [
+      2,
+      3,
+      4,
+      5
+    ],
+    "PieceWeights" :
+    {
+      "1" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        }
+      ],
+      "2" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "B1",
+          "Weight" : 100
+        }
+      ],
+      "3" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "B1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "C1",
+          "Weight" : 100
+        }
+      ],
+      "4" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "B1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "C1",
+          "Weight" : 100
+        }
+      ]
+    },
+    "ChestWeights" :
     [
       {
         "Uid": "Chest2",
@@ -72,7 +212,7 @@
   },
   {
     "Uid" : "OX1",
-    "Weights" :
+    "ChestWeights" :
     [
       {
         "Uid": "Chest1",
@@ -86,7 +226,21 @@
   },
   {
     "Uid" : "OX2",
-    "Weights" :
+    "PieceAmounts" :
+    [
+      2
+    ],
+    "PieceWeights" :
+    {
+      "1" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        }
+      ]
+    },
+    "ChestWeights" :
     [
       {
         "Uid": "Chest2",
@@ -101,7 +255,33 @@
   },
   {
     "Uid" : "OX3",
-    "Weights" :
+    "PieceAmounts" :
+    [
+      2,
+      3
+    ],
+    "PieceWeights" :
+    {
+      "1" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        }
+      ],
+      "2" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "B1",
+          "Weight" : 100
+        }
+      ]
+    },
+    "ChestWeights" :
     [
       {
         "Uid": "Chest2",
@@ -115,7 +295,49 @@
   },
   {
     "Uid" : "OX4",
-    "Weights" :
+    "PieceAmounts" :
+    [
+      2,
+      3,
+      4
+    ],
+    "PieceWeights" :
+    {
+      "1" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        }
+      ],
+      "2" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "B1",
+          "Weight" : 100
+        }
+      ],
+      "3" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "B1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "C1",
+          "Weight" : 100
+        }
+      ]
+    },
+    "ChestWeights" :
     [
       {
         "Uid": "Chest2",
@@ -129,7 +351,65 @@
   },
   {
     "Uid" : "OX5",
-    "Weights" :
+    "PieceAmounts" :
+    [
+      2,
+      3,
+      4,
+      5
+    ],
+    "PieceWeights" :
+    {
+      "1" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        }
+      ],
+      "2" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "B1",
+          "Weight" : 100
+        }
+      ],
+      "3" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "B1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "C1",
+          "Weight" : 100
+        }
+      ],
+      "4" :
+      [
+        {
+          "Uid": "A1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "B1",
+          "Weight" : 100
+        },
+        {
+          "Uid": "C1",
+          "Weight" : 100
+        }
+      ]
+    },
+    "ChestWeights" :
     [
       {
         "Uid": "Chest2",

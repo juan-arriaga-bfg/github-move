@@ -23,7 +23,7 @@ public class SimpleObstaclesDataManager : IDataLoader<List<SimpleObstaclesDef>>
                     if (previousType != PieceType.None.Id)
                     {
                         var previous = data.Find(def => def.Piece == previousType);
-                        next.Weights = ItemWeight.ReplaseWeights(previous.Weights, next.Weights);
+                        next.ChestWeights = ItemWeight.ReplaseWeights(previous.ChestWeights, next.ChestWeights);
                     }
                     
                     Obstacles.Add(next.Piece, next);
@@ -36,15 +36,41 @@ public class SimpleObstaclesDataManager : IDataLoader<List<SimpleObstaclesDef>>
         });
     }
 
-    public int RewardForPiece(int piece)
+    public int ChestForPiece(int piece)
     {
         SimpleObstaclesDef def;
 
         if (Obstacles.TryGetValue(piece, out def) == false) return PieceType.None.Id;
         
-        var item = ItemWeight.GetRandomItem(def.Weights);
+        var item = ItemWeight.GetRandomItem(def.ChestWeights);
         
         return item != null ? item.Piece : PieceType.None.Id;
+    }
+
+    public Dictionary<int, int> RewardForPiece(int piece, int step)
+    {
+        SimpleObstaclesDef def;
+        
+        var result = new Dictionary<int, int>();
+
+        if (Obstacles.TryGetValue(piece, out def) == false) return result;
+        
+        for (var i = def.PieceAmounts[step - 1] - 1; i >= 0; i--)
+        {
+            var item = ItemWeight.GetRandomItem(def.PieceWeights[step]);
+            
+            if(item == null) continue;
+
+            if (result.ContainsKey(item.Piece) == false)
+            {
+                result.Add(item.Piece, 1);
+                continue;
+            }
+            
+            result[item.Piece]++;
+        }
+        
+        return result;
     }
 
     public CurrencyPair PriceForPiece(Piece piece, int step)
@@ -52,6 +78,6 @@ public class SimpleObstaclesDataManager : IDataLoader<List<SimpleObstaclesDef>>
         const int stepPrice = 50;
 //        var max = piece.Context.BoardLogic.MatchDefinition.GetIndexInChain(piece.PieceType);
 
-        return new CurrencyPair {Currency = Currency.Coins.Name, Amount =stepPrice + (stepPrice/2) *step};
+        return new CurrencyPair {Currency = Currency.Coins.Name, Amount = stepPrice + (stepPrice / 2) * step};
     }
 }

@@ -6,7 +6,9 @@ public class SimpleObstaclesDef
     
     public string Uid { get; set; }
 
-    public List<ItemWeight> Weights;
+    public List<int> PieceAmounts { get; set; }
+    public Dictionary<int, List<ItemWeight>> PieceWeights { get; set; }
+    public List<ItemWeight> ChestWeights { get; set; }
     
     public int Piece
     {
@@ -25,7 +27,7 @@ public class SimpleObstaclesDef
     {
         var str = string.Format("Uid: {0}, Piece: {1}", Uid, Piece);
 
-        foreach (var weight in Weights)
+        foreach (var weight in ChestWeights)
         {
             str += string.Format("\n{0}", weight);
         }
