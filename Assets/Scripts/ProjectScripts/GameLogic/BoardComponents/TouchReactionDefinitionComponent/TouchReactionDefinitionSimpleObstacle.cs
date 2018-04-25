@@ -7,17 +7,17 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
     public bool isOpen;
     private bool isClear;
     
-    private int max;
-    private int current = -1;
+    public int Steps { get; set; }
+    private int current;
     
     public float GetProgress
     {
-        get { return 1 - current/(float)max; }
+        get { return 1 - current/(float)Steps; }
     }
     
     public string GetProgressText
     {
-        get { return string.Format("{0}/{1}", current, max); }
+        get { return string.Format("{0}/{1}", current, Steps); }
     }
 
     public CurrencyPair Price { get; private set; }
@@ -26,81 +26,49 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
     
     public override bool Make(BoardPosition position, Piece piece)
     {
-        if (current == -1) Init(piece);
-        
         if (isClear) return false;
         
         Price = GameDataService.Current.SimpleObstaclesManager.PriceForPiece(piece, current);
-        
-        if (isOpen)
-        {
-            Clear(position, piece);
-            return true;
-        }
         
         if (OnClick != null) OnClick();
         return true;
     }
     
-    private void Clear(BoardPosition position, Piece piece)
+    public void Clear(Piece piece)
     {
         piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
-        
-        var shopItem = new ShopItem
+
+        CurrencyHellper.Purchase(Currency.Obstacle.Name, 1, Price, success =>
         {
-            Uid = string.Format("purchase.test.{0}.10", Currency.Obstacle.Name), 
-            ItemUid = Currency.Obstacle.Name, 
-            Amount = 1,
-            CurrentPrices = new List<Price>
-            {
-                new Price{Currency = Price.Currency, DefaultPriceAmount = Price.Amount}
-            }
-        };
-        
-        ShopService.Current.PurchaseItem
-        (
-            shopItem,
-            (item, s) =>
-            {
-                // on purchase success
-                
-                current++;
-                HitboxDamageView.Show(position, 1);
-                
-                if (current != max) return;
-                
-                isClear = true;
+            if(success == false) return;
 
-                var chest = GameDataService.Current.SimpleObstaclesManager.RewardForPiece(piece.PieceType);
+            var position = piece.CachedPosition;
+            
+            current++;
+            HitboxDamageView.Show(position, 1);
+            
+            if (current != Steps) return;
                 
-                if(chest == PieceType.None.Id) return;
+            isClear = true;
+
+            var chest = GameDataService.Current.SimpleObstaclesManager.RewardForPiece(piece.PieceType);
                 
-                piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+            if(chest == PieceType.None.Id) return;
+                
+            piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+            {
+                To = position,
+                Positions = new List<BoardPosition>{position},
+                OnComplete = () =>
                 {
-                    To = position,
-                    Positions = new List<BoardPosition>{position},
-                    OnComplete = () =>
+                    piece.Context.ActionExecutor.AddAction(new SpawnPieceAtAction()
                     {
-                        piece.Context.ActionExecutor.AddAction(new SpawnPieceAtAction()
-                        {
-                            IsCheckMatch = false,
-                            At = position,
-                            PieceTypeId = chest
-                        });
-                    }
-                });
-            },
-            item =>
-            {
-                // on purchase failed (not enough cash)
-                UIMessageWindowController.CreateDefaultMessage("Not enough coins!");
-            }
-        );
-    }
-
-    private void Init(Piece piece)
-    {
-        max = piece.Context.BoardLogic.MatchDefinition.GetIndexInChain(piece.PieceType);
-        current = 0;
+                        IsCheckMatch = false,
+                        At = position,
+                        PieceTypeId = chest
+                    });
+                }
+            });
+        });
     }
 }

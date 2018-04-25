@@ -106,7 +106,6 @@ public class R
      public const string OX3Piece = "OX3Piece";
      public const string OX4Piece = "OX4Piece";
      public const string OX5Piece = "OX5Piece";
-     public const string ChangeSimpleMultipleObstacleStateView = "ChangeSimpleMultipleObstacleStateView";
      public const string Chest1Piece = "Chest1Piece";
      public const string Chest2Piece = "Chest2Piece";
      public const string Chest3Piece = "Chest3Piece";
