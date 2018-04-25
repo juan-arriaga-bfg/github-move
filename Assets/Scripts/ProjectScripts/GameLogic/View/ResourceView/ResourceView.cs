@@ -14,7 +14,14 @@ public class ResourceView : BoardElementView
     private void Show(CurrencyPair resource)
     {
         this.resource = resource;
-        
+
+        icon.sprite = IconService.Current.GetSpriteById(this.resource.Currency);
+
+        icon.transform.localScale = Vector3.one * (Currency.GetCurrencyDef(this.resource.Currency) == null ? 0.9f : 2f);
+    }
+
+    private void StartAnimation()
+    {
         DOTween.Kill(body);
         
         const float duration = 1f;
@@ -61,7 +68,7 @@ public class ResourceView : BoardElementView
         DOTween.Kill(AnimationId);
         
         isCollect = false;
-        body.localScale = Vector3.one * 1.5f;
+        body.localScale = Vector3.one;
         body.localPosition = Vector3.zero;
         icon.color = Color.white;
     }
@@ -88,6 +95,8 @@ public class ResourceView : BoardElementView
         var view = board.RendererContext.CreateBoardElementAt<ResourceView>(R.ResourceView, at);
         
         var sequence = DOTween.Sequence().SetId(view.body);
+        
+        sequence.InsertCallback(0, () => view.Show(resource));
         sequence.Insert(duration, view.CachedTransform.DOJump(new Vector3(to.x, to.y, view.CachedTransform.position.z), 1, 1, 0.4f).SetEase(Ease.InOutSine));
         sequence.Insert(duration, view.CachedTransform.DOScale(Vector3.one * 1.3f, 0.2f));
         sequence.Insert(duration + 0.2f, view.CachedTransform.DOScale(Vector3.one, 0.2f));
@@ -95,6 +104,6 @@ public class ResourceView : BoardElementView
         sequence.Insert(duration + 0.4f, view.CachedTransform.DOScale(new Vector3(1f, 0.8f, 1f), 0.1f));
         sequence.Insert(duration + 0.5f, view.CachedTransform.DOScale(new Vector3(0.9f, 1.1f, 1f), 0.1f));
         sequence.Insert(duration + 0.6f, view.CachedTransform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack));
-        sequence.InsertCallback(duration + 0.7f, () => view.Show(resource));
+        sequence.InsertCallback(duration + 0.7f, () => view.StartAnimation());
     }
 }

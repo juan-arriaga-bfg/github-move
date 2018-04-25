@@ -22,6 +22,8 @@ public class UIHeroChargerItem : MonoBehaviour
 		
 		icon.gameObject.SetActive(true);
 		icon.sprite = IconService.Current.GetSpriteById(charger.Currency);
+		icon.color = new Color(1, 1, 1, isUnlock ? 1 : 0.3f);
+		
 		back.sprite = IconService.Current.GetSpriteById(string.Format("ramka_item{0}", isUnlock ? "_active" : ""));
 		
 		label.Text = string.Format("{0}/{1}", color, charger.Amount);

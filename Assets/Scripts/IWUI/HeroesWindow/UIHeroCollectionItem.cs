@@ -14,6 +14,7 @@ public class UIHeroCollectionItem : MonoBehaviour
 	public void Decoration(string currency, bool isUnlock)
 	{
 		icon.sprite = IconService.Current.GetSpriteById(currency);
+		icon.color = new Color(1, 1, 1, isUnlock ? 1 : 0.3f);
 		
 		isCollect = ProfileService.Current.GetStorageItem(currency).Amount > 0;
 		

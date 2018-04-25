@@ -31,7 +31,7 @@ public class ChestRewardAction : IBoardAction
 		{
 			for (var i = 0; i < reward.Value; i++)
 			{
-				ResourceView.Show(From, new CurrencyPair{Currency = reward.Key, Amount = 1});
+				ResourceView.Show(new BoardPosition(From.X, From.Y, From.Z + i + 1), new CurrencyPair{Currency = reward.Key, Amount = 1});
 			}
 		}
 
