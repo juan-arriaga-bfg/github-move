@@ -620,13 +620,13 @@
     "SpawnPiece": "A1",
     "UpgradeTargetPiece": "Castle2",
     "IsFilledInStart":"true",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 0,
+    "SpawnAmount": 2,
+    "SpawnCapacity": 4,
     "UpgradePrices":
     [
       {
         "Currency": "Coins",
-        "Amount": 0
+        "Amount": 50
       }
     ]
   },
@@ -635,13 +635,13 @@
     "Delay": 60,
     "SpawnPiece": "A1",
     "UpgradeTargetPiece": "Castle3",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 4,
+    "SpawnAmount": 3,
+    "SpawnCapacity": 9,
     "UpgradePrices":
     [
       {
         "Currency": "Coins",
-        "Amount": 250
+        "Amount": 150
       }
     ]
   },
@@ -650,73 +650,73 @@
     "Delay": 60,
     "SpawnPiece": "A1",
     "UpgradeTargetPiece": "Castle4",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 4,
+    "SpawnAmount": 4,
+    "SpawnCapacity": 12,
     "UpgradePrices":
     [
       {
         "Currency": "Coins",
-        "Amount": 500
+        "Amount": 300
       }
     ]
   },
   {
     "Uid": "Sawmill4",
     "Delay": 60,
-    "SpawnPiece": "A1",
+    "SpawnPiece": "A2",
     "UpgradeTargetPiece": "Castle5",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 4,
+    "SpawnAmount": 2,
+    "SpawnCapacity": 6,
     "UpgradePrices":
     [
       {
         "Currency": "Coins",
-        "Amount": 1000
+        "Amount": 450
       }
     ]
   },
   {
     "Uid": "Sawmill5",
     "Delay": 60,
-    "SpawnPiece": "A1",
+    "SpawnPiece": "A2",
     "UpgradeTargetPiece": "Castle6",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 4,
+    "SpawnAmount": 3,
+    "SpawnCapacity": 9,
     "UpgradePrices":
     [
       {
         "Currency": "Coins",
-        "Amount": 2500
+        "Amount": 750
       }
     ]
   },
   {
     "Uid": "Sawmill6",
     "Delay": 60,
-    "SpawnPiece": "A1",
+    "SpawnPiece": "A2",
     "UpgradeTargetPiece": "Castle7",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 4,
+    "SpawnAmount": 4,
+    "SpawnCapacity": 12,
     "UpgradePrices":
     [
       {
         "Currency": "Coins",
-        "Amount": 5000
+        "Amount": 1200
       }
     ]
   },
   {
     "Uid": "Sawmill7",
     "Delay": 60,
-    "SpawnPiece": "A1",
+    "SpawnPiece": "A2",
     "UpgradeTargetPiece": "Castle8",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 4,
+    "SpawnAmount": 5,
+    "SpawnCapacity": 15,
     "UpgradePrices":
     [
       {
         "Currency": "Coins",
-        "Amount": 7500
+        "Amount": 2000
       }
     ]
   },
@@ -732,7 +732,7 @@
     [
       {
         "Currency": "Coins",
-        "Amount": 100
+        "Amount": 300
       }
     ]
   },
@@ -831,8 +831,8 @@
     "Uid": "Castle1",
     "Delay": 1200,
     "SpawnPiece": "Chest1",
-    "SpawnAmount": 0,
-    "SpawnCapacity": 0,
+    "SpawnAmount": 1,
+    "SpawnCapacity": 1,
     "UpgradePrices":
     [
       {
