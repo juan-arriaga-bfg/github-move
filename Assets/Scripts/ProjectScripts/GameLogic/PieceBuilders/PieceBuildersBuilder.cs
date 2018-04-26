@@ -53,10 +53,7 @@ public class PieceBuildersBuilder
         
         dict.Add(PieceType.Quest.Id, new ObstaclePieceBuilder());
         
-        dict.Add(PieceType.Fog.Id, new FogPieceBuilder
-        {
-            Mask = BoardPosition.GetRect(BoardPosition.Zero(), 5, 5)
-        });
+        dict.Add(PieceType.Fog.Id, new FogPieceBuilder());
         
         return dict;
     }

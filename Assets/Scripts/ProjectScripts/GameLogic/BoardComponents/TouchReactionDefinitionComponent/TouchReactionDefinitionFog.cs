@@ -13,8 +13,9 @@ public class TouchReactionDefinitionFog : TouchReactionDefinitionComponent
         if (def == null)
         {
             var pos = new BoardPosition(position.X, position.Y);
-            
-            if (GameDataService.Current.FogsManager.Fogs.TryGetValue(pos, out def) == false) return false;
+            def = GameDataService.Current.FogsManager.GetDef(pos);
+
+            if (def == null) return false;
         }
         
         IsOpen = !IsOpen;

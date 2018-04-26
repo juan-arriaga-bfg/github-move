@@ -13,7 +13,7 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 	
 	public override Vector3 Ofset
 	{
-		get { return new Vector3(0, 4f); }
+		get { return new Vector3(0, 1.5f); }
 	}
 	public override void Init(Piece piece)
 	{
@@ -29,7 +29,23 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 		
 		Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceMenu);
 	}
-	
+
+	protected override void SetOfset()
+	{
+		var def = GameDataService.Current.FogsManager.GetDef(new BoardPosition(Context.CachedPosition.X,
+			Context.CachedPosition.Y));
+		
+		if(def == null) return;
+
+		var max = new BoardPosition(Context.CachedPosition.RightAtDistance(def.Size.X - 1).X,
+			Context.CachedPosition.UpAtDistance(def.Size.Y - 1).Y);
+		
+		var minPos = Context.Context.BoardDef.GetSectorCenterWorldPosition(Context.CachedPosition.X, Context.CachedPosition.Y, 0);
+		var maxPos = Context.Context.BoardDef.GetSectorCenterWorldPosition(max.X, max.Y, 0);
+
+		CachedTransform.position = (maxPos + minPos) / 2 + Ofset;
+	}
+
 	public override void ResetViewOnDestroy()
 	{
 		base.ResetViewOnDestroy();
@@ -42,8 +58,9 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 		if (def == null)
 		{
 			var pos = new BoardPosition(Context.CachedPosition.X, Context.CachedPosition.Y);
-            
-			if (GameDataService.Current.FogsManager.Fogs.TryGetValue(pos, out def) == false) return;
+			def = GameDataService.Current.FogsManager.GetDef(pos);
+			
+			if (def == null) return;
 		}
 
 		var power = GameDataService.Current.HeroesManager.CurrentPower();

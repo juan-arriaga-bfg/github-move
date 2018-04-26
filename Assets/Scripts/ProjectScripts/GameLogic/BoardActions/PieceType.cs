@@ -4,6 +4,8 @@ public static partial class PieceType
 {
     static PieceType()
     {
+        RegisterType(Empty);
+        
         RegisterType(A1);
         RegisterType(A2);
         RegisterType(A3);

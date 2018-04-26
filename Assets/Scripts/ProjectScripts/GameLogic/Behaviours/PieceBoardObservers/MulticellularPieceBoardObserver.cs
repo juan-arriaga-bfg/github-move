@@ -60,7 +60,7 @@ public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserve
 		}
 	}
 
-	protected BoardPosition GetPointInMask(BoardPosition position, BoardPosition mask)
+	public BoardPosition GetPointInMask(BoardPosition position, BoardPosition mask)
 	{
 		return new BoardPosition(position.X + mask.X, position.Y + mask.Y, position.Z);
 	}

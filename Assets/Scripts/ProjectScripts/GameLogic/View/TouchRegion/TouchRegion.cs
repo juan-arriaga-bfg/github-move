@@ -60,6 +60,16 @@ public class TouchRegion : IWBaseMonoBehaviour, ITouchableListener
 
         return worldRect;
     }
+
+    public void AddTouchRegion(RectTransform region)
+    {
+        touchRegions.Add(region);
+    }
+
+    public void ClearTouchRegion()
+    {
+        touchRegions = new List<RectTransform>();
+    }
     
     private void OnDrawGizmos()
     {

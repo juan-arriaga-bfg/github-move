@@ -130,12 +130,12 @@ public struct BoardPosition : IEquatable<BoardPosition>
     {
         var rect = new List<BoardPosition>();
         
-        rect.AddRange(GetLine(dot, width));
+        rect.AddRange(GetLine(dot, height));
 
-        for (var i = 1; i < height; i++)
+        for (var i = 1; i < width; i++)
         {
             dot = dot.Right;
-            rect.AddRange(GetLine(dot, width));
+            rect.AddRange(GetLine(dot, height));
         }
 
         return rect;
@@ -145,14 +145,14 @@ public struct BoardPosition : IEquatable<BoardPosition>
     {
         var rect = new List<BoardPosition>();
 
-        dot = dot.LeftAtDistance((int) (height * 0.5f));
+        dot = dot.LeftAtDistance((int) (width * 0.5f));
         
-        rect.AddRange(GetLineInCenter(dot, width));
+        rect.AddRange(GetLineInCenter(dot, height));
 
-        for (var i = 1; i < height; i++)
+        for (var i = 1; i < width; i++)
         {
             dot = dot.Right;
-            rect.AddRange(GetLineInCenter(dot, width));
+            rect.AddRange(GetLineInCenter(dot, height));
         }
 
         return rect;

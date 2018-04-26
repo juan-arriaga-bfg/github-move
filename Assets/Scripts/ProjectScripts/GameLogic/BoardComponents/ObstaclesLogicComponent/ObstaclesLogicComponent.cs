@@ -57,10 +57,9 @@ public class ObstaclesLogicComponent : IECSComponent, IECSSystem
 
         foreach (var fog in data)
         {
-            var pos = fog.Key;
+            var pos = fog.Position;
             
             pos.Z = context.BoardDef.PieceLayer;
-            
             positions.Add(pos);
         }
         

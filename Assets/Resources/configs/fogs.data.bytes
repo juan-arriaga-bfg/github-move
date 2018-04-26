@@ -1,450 +1,642 @@
-[
-  {
-    "Uid": 1,
-    "Position" :
+{
+  "DefaultPieceWeights" :
+  [
     {
-      "X" : 0,
-      "Y" : 0
+      "Uid": "Empty",
+      "Weight" : 10
     },
-    "Condition" :
     {
-      "Ability" : "Power",
-      "Value" : 320
+      "Uid": "O1",
+      "Weight" : 80
+    },
+    {
+      "Uid": "OX1",
+      "Weight" : 10
     }
-  },
-  {
-    "Uid": 2,
-    "Position" :
+  ],
+  "Fogs":
+  [
     {
-      "X" : 0,
-      "Y" : 5
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 310
-    }
-  },
-  {
-    "Uid": 3,
-    "Position" :
-    {
-      "X" : 0,
-      "Y" : 10
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 300
-    }
-  },
-  {
-    "Uid": 4,
-    "Position" :
-    {
-      "X" : 0,
-      "Y" : 15
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 290
-    }
-  },
-  {
-    "Uid": 5,
-    "Position" :
-    {
-      "X" : 0,
-      "Y" : 20
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 280
-    }
-  },
-  {
-    "Uid": 6,
-    "Position" :
-    {
-      "X" : 0,
-      "Y" : 25
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 270
-    }
-  },
-  {
-    "Uid": 7,
-    "Position" :
-    {
-      "X" : 5,
-      "Y" : 0
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 260
-    }
-  },
-  {
-    "Uid": 8,
-    "Position" :
-    {
-      "X" : 5,
-      "Y" : 5
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 100
-    }
-  },
-  {
-    "Uid": 9,
-    "Position" :
-    {
-      "X" : 5,
-      "Y" : 10
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 100
-    }
-  },
-  {
-    "Uid": 10,
-    "Position" :
-    {
-      "X" : 5,
-      "Y" : 15
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 100
-    },
-  },
-  {
-    "Uid": 11,
-    "Position" :
-    {
-      "X" : 5,
-      "Y" : 20
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 100
-    }
-  },
-  {
-    "Uid": 12,
-    "Position" :
-    {
-      "X" : 5,
-      "Y" : 25
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 260
-    }
-  },
-  {
-    "Uid": 13,
-    "Position" :
-    {
-      "X" : 10,
-      "Y" : 0
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 250
-    }
-  },
-  {
-    "Uid": 14,
-    "Position" :
-    {
-      "X" : 10,
-      "Y" : 5
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 100
-    }
-  },
-  {
-    "Uid": 15,
-    "Position" :
-    {
-      "X" : 10,
-      "Y" : 20
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 100
-    }
-  },
-  {
-    "Uid": 16,
-    "Position" :
-    {
-      "X" : 10,
-      "Y" : 25
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 240
-    }
-  },
-  {
-    "Uid": 17,
-    "Position" :
-    {
-      "X" : 15,
-      "Y" : 0
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 20
-    },
-	    "Pieces":
-    {
-      "D3" :
-      {
-        "X" : 2,
-        "Y" : 2
-      },
-	   "D2" :
-      {
-        "X" : 1,
-        "Y" : 3
-      },
-	   "D2" :
-      {
-        "X" : 1,
-        "Y" : 1
-      },
-	   "D1" :
+      "Uid": 1,
+      "Size" :
       {
         "X" : 3,
         "Y" : 3
       },
-	  
-    }
-  },
-  {
-    "Uid": 18,
-    "Position" :
-    {
-      "X" : 15,
-      "Y" : 5
+      "Position" :
+      {
+        "X" : 0,
+        "Y" : 0
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 320
+      },
+      "PieceWeights" :
+      [
+        {
+          "Uid": "Empty",
+          "Weight" : 50
+        },
+        {
+          "Uid": "O2",
+          "Weight" : 20
+        },
+        {
+          "Uid": "OX2",
+          "Weight" : 20
+        }
+      ]
     },
-    "Condition" :
     {
-      "Ability" : "Power",
-      "Value" : 40
-    },
-	    "Pieces":
-    {
-      "E5" :
+      "Uid": 2,
+      "Size" :
       {
         "X" : 2,
-        "Y" : 2
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 0,
+        "Y" : 5
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 310
+      },
+      "PieceWeights" :
+      [
+        {
+          "Uid": "Empty",
+          "Weight" : 10
+        },
+        {
+          "Uid": "O1",
+          "Weight" : 80
+        },
+        {
+          "Uid": "OX1",
+          "Weight" : 10
+        }
+      ]
+    },
+    {
+      "Uid": 3,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 0,
+        "Y" : 10
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 300
+      }
+    },
+    {
+      "Uid": 4,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 0,
+        "Y" : 15
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 290
+      }
+    },
+    {
+      "Uid": 5,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 0,
+        "Y" : 20
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 280
+      }
+    },
+    {
+      "Uid": 6,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 0,
+        "Y" : 25
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 270
+      }
+    },
+    {
+      "Uid": 7,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 5,
+        "Y" : 0
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 260
+      }
+    },
+    {
+      "Uid": 8,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 100
+      }
+    },
+    {
+      "Uid": 9,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 5,
+        "Y" : 10
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 100
+      }
+    },
+    {
+      "Uid": 10,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 5,
+        "Y" : 15
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 100
+      },
+    },
+    {
+      "Uid": 11,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 5,
+        "Y" : 20
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 100
+      }
+    },
+    {
+      "Uid": 12,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 5,
+        "Y" : 25
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 260
+      }
+    },
+    {
+      "Uid": 13,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 10,
+        "Y" : 0
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 250
+      }
+    },
+    {
+      "Uid": 14,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 10,
+        "Y" : 5
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 100
+      }
+    },
+    {
+      "Uid": 15,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 10,
+        "Y" : 20
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 100
+      }
+    },
+    {
+      "Uid": 16,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 10,
+        "Y" : 25
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 240
+      }
+    },
+    {
+      "Uid": 17,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 15,
+        "Y" : 0
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 20
+      },
+      "Pieces":
+      {
+        "D3" :
+        {
+          "X" : 2,
+          "Y" : 2
+        }
+      }
+    },
+    {
+      "Uid": 18,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 15,
+        "Y" : 5
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 40
+      },
+      "Pieces":
+      {
+        "E5" :
+        {
+          "X" : 2,
+          "Y" : 2
+        }
+      }
+    },
+    {
+      "Uid": 19,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 15,
+        "Y" : 20
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 90
+      }
+    },
+    {
+      "Uid": 20,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 15,
+        "Y" : 25
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 220
+      }
+    },
+    {
+      "Uid": 21,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 15,
+        "Y" : 15
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 210
+      }
+    },
+    {
+      "Uid": 22,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 10,
+        "Y" : 15
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 100
+      }
+    },
+    {
+      "Uid": 23,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 20,
+        "Y" : 10
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 60
+      }
+    },
+    {
+      "Uid": 24,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 20,
+        "Y" : 15
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 200
+      }
+    },
+    {
+      "Uid": 25,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 20,
+        "Y" : 20
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 190
+      }
+    },
+    {
+      "Uid": 26,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 20,
+        "Y" : 25
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 120
+      }
+    },
+    {
+      "Uid": 27,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 10,
+        "Y" : 10
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 170
+      }
+    },
+    {
+      "Uid": 28,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 15,
+        "Y" : 10
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 140
+      }
+    },
+    {
+      "Uid": 29,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 25,
+        "Y" : 10
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 150
+      }
+    },
+    {
+      "Uid": 30,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 25,
+        "Y" : 15
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 130
+      }
+    },
+    {
+      "Uid": 31,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 25,
+        "Y" : 20
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 160
+      }
+    },
+    {
+      "Uid": 32,
+      "Size" :
+      {
+        "X" : 5,
+        "Y" : 5
+      },
+      "Position" :
+      {
+        "X" : 25,
+        "Y" : 25
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 180
       }
     }
-  },
-  {
-    "Uid": 19,
-    "Position" :
-    {
-      "X" : 15,
-      "Y" : 20
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 90
-    }
-  },
-  {
-    "Uid": 20,
-    "Position" :
-    {
-      "X" : 15,
-      "Y" : 25
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 220
-    }
-  },
-  {
-    "Uid": 21,
-    "Position" :
-    {
-      "X" : 15,
-      "Y" : 15
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 210
-    }
-  },
-  {
-    "Uid": 22,
-    "Position" :
-    {
-      "X" : 10,
-      "Y" : 15
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 100
-    }
-  },
-  {
-    "Uid": 23,
-    "Position" :
-    {
-      "X" : 20,
-      "Y" : 10
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 60
-    }
-  },
-  {
-    "Uid": 24,
-    "Position" :
-    {
-      "X" : 20,
-      "Y" : 15
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 200
-    }
-  },
-  {
-    "Uid": 25,
-    "Position" :
-    {
-      "X" : 20,
-      "Y" : 20
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 190
-    }
-  },
-  {
-    "Uid": 26,
-    "Position" :
-    {
-      "X" : 20,
-      "Y" : 25
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 120
-    }
-  },
-  {
-    "Uid": 27,
-    "Position" :
-    {
-      "X" : 10,
-      "Y" : 10
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 170
-    }
-  },
-  {
-    "Uid": 28,
-    "Position" :
-    {
-      "X" : 15,
-      "Y" : 10
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 140
-    }
-  },
-  {
-    "Uid": 29,
-    "Position" :
-    {
-      "X" : 25,
-      "Y" : 10
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 150
-    }
-  },
-  {
-    "Uid": 30,
-    "Position" :
-    {
-      "X" : 25,
-      "Y" : 15
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 130
-    }
-  },
-  {
-    "Uid": 31,
-    "Position" :
-    {
-      "X" : 25,
-      "Y" : 20
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 160
-    }
-  },
-  {
-    "Uid": 32,
-    "Position" :
-    {
-      "X" : 25,
-      "Y" : 25
-    },
-    "Condition" :
-    {
-      "Ability" : "Power",
-      "Value" : 180
-    }
-  }
-]
+  ]
+}

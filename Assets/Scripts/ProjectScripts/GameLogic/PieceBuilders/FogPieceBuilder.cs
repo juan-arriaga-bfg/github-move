@@ -15,6 +15,6 @@
 
     protected override MulticellularPieceBoardObserver CreateMultiObserver()
     {
-        return new FogObserver {Mask = Mask};
+        return new FogObserver();
     }
 }
