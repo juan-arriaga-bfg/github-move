@@ -16,6 +16,7 @@ public class SpawnPieceAtAction : IBoardAction
 	public int PieceTypeId { get; set; }
 	
 	public Action<SpawnPieceAtAction> OnFailedAction { get; set; }
+	public Action<BoardPosition> OnSuccessEvent { get; set; }
 
 	public bool PerformAction(BoardController gameBoardController)
 	{
@@ -52,6 +53,13 @@ public class SpawnPieceAtAction : IBoardAction
 				{
 					At = At
 				});
+			}
+
+			if (OnSuccessEvent != null)
+			{
+				var observer = piece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
+				
+				OnSuccessEvent(observer == null ? At : observer.GetTopPosition);
 			}
 		};
 		

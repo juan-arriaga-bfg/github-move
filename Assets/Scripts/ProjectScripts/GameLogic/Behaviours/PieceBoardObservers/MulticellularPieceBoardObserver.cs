@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserver
 {
@@ -10,6 +11,16 @@ public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserve
 	}
 	
 	public List<BoardPosition> Mask;
+
+	public BoardPosition GetTopPosition
+	{
+		get
+		{
+			var size = (int)Mathf.Sqrt(Mask.Count);
+			return realPosition.UpAtDistance(size - 1);
+		}
+	}
+	
 	protected BoardPosition realPosition;
 	
 	public void OnRegisterEntity(ECSEntity entity)

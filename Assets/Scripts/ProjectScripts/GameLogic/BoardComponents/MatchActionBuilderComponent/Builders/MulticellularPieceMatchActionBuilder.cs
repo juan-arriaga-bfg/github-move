@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 
 public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
 {
@@ -67,7 +68,8 @@ public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
         {
             IsCheckMatch = false,
             At = position,
-            PieceTypeId = nextType
+            PieceTypeId = nextType,
+            OnSuccessEvent = pos => SpawnReward(pos, nextType)
         };
         
         return new CollapsePieceToAction
@@ -76,5 +78,20 @@ public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
             Positions = new List<BoardPosition>{position},
             OnCompleteAction = nextAction
         };
+    }
+    
+    private void SpawnReward(BoardPosition position, int pieceType)
+    {
+        var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType);
+        
+        if(def == null || def.CreateRewards == null) return;
+
+        var sequence = DOTween.Sequence();
+        
+        for (var i = 0; i < def.CreateRewards.Count; i++)
+        {
+            var reward = def.CreateRewards[i];
+            sequence.InsertCallback(0.2f*i, () => AddResourceView.Show(position, reward));
+        }
     }
 }
