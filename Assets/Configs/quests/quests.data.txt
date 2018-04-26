@@ -5,13 +5,19 @@
     "Price" :
     {
       "Currency" : "PieceA2",
-      "Amount" : 2
+      "Amount" : 4
     },
     "Rewards" :
     [
-      {
+      
+	        {
+        "Currency" : "Coin1",
+        "Amount" : 4
+      }
+	  ,
+	  {
         "Currency" : "Coin2",
-        "Amount" : 5
+        "Amount" : 2
       }
     ]
   },
@@ -21,58 +27,24 @@
     "Price" :
     {
       "Currency" : "PieceA3",
-      "Amount" : 2
+      "Amount" : 3
     },
     "Rewards" :
     [
-      {
-        "Currency" : "Coin2",
+      
+	        {
+        "Currency" : "Coin1",
         "Amount" : 5
+      }
+	  ,
+	  {
+        "Currency" : "Coin2",
+        "Amount" : 2
       }
     ]
   },
   {
     "Uid" : 3,
-    "Message" : "A young family wants to build a house. They will need a lot of building materials.",
-    "Price" :
-    {
-      "Currency" : "PieceA2",
-      "Amount" : 2
-    },
-    "Rewards" :
-    [
-      {
-        "Currency" : "Coin1",
-        "Amount" : 1
-      },
-      {
-        "Currency" : "Coin2",
-        "Amount" : 5
-      }
-    ]
-  },
-  {
-    "Uid" : 4,
-    "Message" : "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks.",
-    "Price" :
-    {
-      "Currency" : "PieceC2",
-      "Amount" : 2
-    },
-    "Rewards" :
-    [
-      {
-        "Currency" : "Coin1",
-        "Amount" : 1
-      },
-      {
-        "Currency" : "Coin2",
-        "Amount" : 5
-      }
-    ]
-  },
-  {
-    "Uid" : 5,
     "Message" : "The miller is ready to thanks well for a good batch of sheaves",
     "Price" :
     {
@@ -81,13 +53,57 @@
     },
     "Rewards" :
     [
+      
+	        {
+        "Currency" : "Coin1",
+        "Amount" : 3
+      }
+	  ,
+	  {
+        "Currency" : "Coin2",
+        "Amount" : 3
+      }
+    ]
+  },
+  
+  	//A young family wants to build a house. They will need a lot of building materials.
+  {
+    "Uid" : 4,
+    "Message" : "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks.",
+    "Price" :
+    {
+      "Currency" : "PieceC2",
+      "Amount" : 4
+    },
+    "Rewards" :
+    [
       {
         "Currency" : "Coin1",
-        "Amount" : 1
+        "Amount" : 4
       },
       {
         "Currency" : "Coin2",
+        "Amount" : 3
+      }
+    ]
+  },
+  {
+    "Uid" : 5,
+    "Message" : "Peasant women are asked to give them little wool for knitting",
+    "Price" :
+    {
+      "Currency" : "PieceD3",
+      "Amount" : 3
+    },
+    "Rewards" :
+    [
+      {
+        "Currency" : "Coin1",
         "Amount" : 5
+      },
+      {
+        "Currency" : "Coin2",
+        "Amount" : 3
       }
     ]
   },
@@ -103,11 +119,11 @@
     [
       {
         "Currency" : "Coin1",
-        "Amount" : 1
+        "Amount" : 3
       },
       {
         "Currency" : "Coin2",
-        "Amount" : 5
+        "Amount" : 4
       }
     ]
   },
@@ -123,11 +139,11 @@
     [
       {
         "Currency" : "Coin1",
-        "Amount" : 1
+        "Amount" : 4
       },
       {
         "Currency" : "Coin2",
-        "Amount" : 5
+        "Amount" : 4
       }
     ]
   },
@@ -143,11 +159,11 @@
     [
       {
         "Currency" : "Coin1",
-        "Amount" : 1
+        "Amount" : 5
       },
       {
         "Currency" : "Coin2",
-        "Amount" : 5
+        "Amount" : 4
       }
     ]
   }

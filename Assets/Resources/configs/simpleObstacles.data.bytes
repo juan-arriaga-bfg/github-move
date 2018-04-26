@@ -17,14 +17,14 @@
     "Uid" : "O2",
     "PieceAmounts" :
     [
-      2
+      3
     ],
     "PieceWeights" :
     {
       "1" :
       [
         {
-          "Uid": "A1",
+          "Uid": "B1",
           "Weight" : 100
         }
       ]
@@ -54,18 +54,18 @@
       "1" :
       [
         {
-          "Uid": "A1",
+          "Uid": "B1",
           "Weight" : 100
         }
       ],
       "2" :
       [
         {
-          "Uid": "A1",
+          "Uid": "B2",
           "Weight" : 100
         },
         {
-          "Uid": "B1",
+          "Uid": "C1",
           "Weight" : 100
         }
       ]
@@ -95,29 +95,29 @@
       "1" :
       [
         {
-          "Uid": "A1",
+          "Uid": "B1",
           "Weight" : 100
         }
       ],
       "2" :
       [
         {
-          "Uid": "A1",
+          "Uid": "B2",
           "Weight" : 100
         },
         {
-          "Uid": "B1",
+          "Uid": "C1",
           "Weight" : 100
         }
       ],
       "3" :
       [
         {
-          "Uid": "A1",
+          "Uid": "B1",
           "Weight" : 100
         },
         {
-          "Uid": "B1",
+          "Uid": "B2",
           "Weight" : 100
         },
         {

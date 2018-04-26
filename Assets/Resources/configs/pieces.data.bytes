@@ -452,7 +452,7 @@
     "SpawnResources" :
     {
       "Currency" : "Coins",
-      "Amount" : 30
+      "Amount" : 40
     },
     "CreateRewards":
     [
@@ -467,7 +467,7 @@
     "SpawnResources" :
     {
       "Currency" : "Coins",
-      "Amount" : 90
+      "Amount" : 150
     },
     "CreateRewards":
     [
@@ -482,7 +482,7 @@
     "SpawnResources" :
     {
       "Currency" : "Coins",
-      "Amount" : 270
+      "Amount" : 600
     },
     "CreateRewards":
     [
@@ -497,7 +497,7 @@
     "SpawnResources" :
     {
       "Currency" : "Coins",
-      "Amount" : 810
+      "Amount" : 2000
     },
     "CreateRewards":
     [
@@ -851,11 +851,11 @@
     "UpgradePrices":
     [
       {
-        "Currency": "A3",
-        "Amount": 3
+        "Currency": "A4",
+        "Amount": 1
       },
       {
-        "Currency": "B3",
+        "Currency": "B4",
         "Amount": 1
       }
     ]
@@ -864,11 +864,11 @@
             [
               {
                 "Currency": "Energy",
-                "Amount": 5
+                "Amount": 1000
               },
               {
                 "Currency": "Crystals",
-                "Amount": 1
+                "Amount": 10
               }
             ]
   },
@@ -881,14 +881,26 @@
     "UpgradePrices":
     [
       {
-        "Currency": "A1",
-        "Amount": 10
+        "Currency": "A5",
+        "Amount": 1
       },
       {
-        "Currency": "A2",
-        "Amount": 10
+        "Currency": "C3",
+        "Amount": 1
       }
     ]
+	,
+        "CreateRewards":
+            [
+              {
+                "Currency": "Energy",
+                "Amount": 1500
+              },
+              {
+                "Currency": "Crystals",
+                "Amount": 15
+              }
+            ]
   },
   {
     "Uid": "Castle4",
@@ -899,14 +911,26 @@
     "UpgradePrices":
     [
       {
-        "Currency": "A1",
-        "Amount": 10
+        "Currency": "B4",
+        "Amount": 1
       },
       {
-        "Currency": "A2",
-        "Amount": 10
+        "Currency": "D3",
+        "Amount": 3
       }
     ]
+	,
+        "CreateRewards":
+            [
+              {
+                "Currency": "Energy",
+                "Amount": 1500
+              },
+              {
+                "Currency": "Crystals",
+                "Amount": 25
+              }
+            ]
   },
   {
     "Uid": "Castle5",
@@ -917,14 +941,26 @@
     "UpgradePrices":
     [
       {
-        "Currency": "A1",
-        "Amount": 10
+        "Currency": "A6",
+        "Amount": 1
       },
       {
-        "Currency": "A2",
-        "Amount": 10
+        "Currency": "E4",
+        "Amount": 2
       }
     ]
+	,
+        "CreateRewards":
+            [
+              {
+                "Currency": "Energy",
+                "Amount": 2500
+              },
+              {
+                "Currency": "Crystals",
+                "Amount": 40
+              }
+            ]
   },
   {
     "Uid": "Castle6",
@@ -935,14 +971,26 @@
     "UpgradePrices":
     [
       {
-        "Currency": "A1",
-        "Amount": 10
+        "Currency": "B5",
+        "Amount": 2
       },
       {
-        "Currency": "A2",
-        "Amount": 10
+        "Currency": "D5",
+        "Amount": 2
       }
     ]
+	,
+        "CreateRewards":
+            [
+              {
+                "Currency": "Energy",
+                "Amount": 4000
+              },
+              {
+                "Currency": "Crystals",
+                "Amount": 60
+              }
+            ]
   },
   {
     "Uid": "Castle7",
@@ -953,14 +1001,26 @@
     "UpgradePrices":
     [
       {
-        "Currency": "A1",
-        "Amount": 10
+        "Currency": "A7",
+        "Amount": 1
       },
       {
-        "Currency": "A2",
-        "Amount": 10
+        "Currency": "E5",
+        "Amount": 3
       }
     ]
+	,
+        "CreateRewards":
+            [
+              {
+                "Currency": "Energy",
+                "Amount": 6500
+              },
+              {
+                "Currency": "Crystals",
+                "Amount": 100
+              }
+            ]
   },
   {
     "Uid": "Castle8",
@@ -971,14 +1031,26 @@
     "UpgradePrices":
     [
       {
-        "Currency": "A1",
-        "Amount": 10
+        "Currency": "B6",
+        "Amount": 1
       },
       {
-        "Currency": "A2",
-        "Amount": 10
+        "Currency": "C5",
+        "Amount": 4
       }
     ]
+	,
+        "CreateRewards":
+            [
+              {
+                "Currency": "Energy",
+                "Amount": 10000
+              },
+              {
+                "Currency": "Crystals",
+                "Amount": 150
+              }
+            ]
   },
   {
     "Uid": "Castle9",
@@ -989,14 +1061,38 @@
     "UpgradePrices":
     [
       {
-        "Currency": "A1",
-        "Amount": 10
+        "Currency": "A8",
+        "Amount": 1
       },
       {
-        "Currency": "A2",
-        "Amount": 10
+        "Currency": "D6",
+        "Amount": 2
       }
     ]
+	,
+        "CreateRewards":
+            [
+              {
+                "Currency": "Energy",
+                "Amount": 17000
+              },
+              {
+                "Currency": "Crystals",
+                "Amount": 250
+              }
+            ]
+			,
+        "CreateRewards":
+            [
+              {
+                "Currency": "Energy",
+                "Amount": 25000
+              },
+              {
+                "Currency": "Crystals",
+                "Amount": 400
+              }
+            ]
   },
   {
     "Uid": "Tavern1",
