@@ -155,7 +155,7 @@ public class EmptyCellsFinderComponent: IECSComponent
 
 	private bool AddIsEmpty(BoardPosition point, List<BoardPosition> field, int count)
 	{
-		if (point.IsValid && context.IsLockedCell(point) == false && context.IsEmpty(point)) field.Add(point);
+		if (point.IsValidFor(context.Context.BoardDef.Width, context.Context.BoardDef.Height) && context.IsLockedCell(point) == false && context.IsEmpty(point)) field.Add(point);
 		
 		return field.Count == count;
 	}
