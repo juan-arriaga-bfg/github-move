@@ -7,7 +7,7 @@ public class UIQuestWindowModel : IWWindowModel
     
     public string Title
     {
-        get { return "Peasant's Quest"; }
+        get { return string.Format("Quest {0}", Quest.Def.Uid); }
     }
 
     public string Message
