@@ -1,122 +1,40 @@
 [
-    {
-        "Skin" : "E1",
-        "HP" : "30",
-        "Chest" : "Common",
-        "Price" : 
-        {
-            "Currency" : "Coins",
-            "Amount" : 0
-        },
-    },
-    {
-        "Skin" : "E1",
-        "HP" : "40",
-        "Chest" : "Common",
-        "Price" : 
-        {
-            "Currency" : "Coins",
-            "Amount" : 110
-        },
-    },
-    {
-        "Skin" : "E2",
-        "HP" : "70",
-        "Chest" : "Rare",
-        "Price" : 
-        {
-            "Currency" : "Coins",
-            "Amount" : 120
-        },
-    },
-    {
-        "Skin" : "E1",
-        "HP" : "80",
-        "Chest" : "Common",
-        "Price" : 
-        {
-            "Currency" : "Coins",
-            "Amount" : 130
-        },
-    },
-    {
-        "Skin" : "E3",
-        "HP" : "120",
-        "Chest" : "Epic",
-        "Price" : 
-        {
-            "Currency" : "Coins",
-            "Amount" : 140
-        },
-    },
-    {
-        "Skin" : "E2",
-        "HP" : "160",
-        "Chest" : "Rare",
-        "Price" : 
-        {
-            "Currency" : "Coins",
-            "Amount" : 150
-        },
-    },
-    {
-        "Skin" : "E1",
-        "HP" : "200",
-        "Chest" : "Common",
-        "Price" : 
-        {
-            "Currency" : "Coins",
-            "Amount" : 160
-        },
-    },
-    {
-        "Skin" : "E1",
-        "HP" : "250",
-        "Chest" : "Common",
-        "Price" : 
-        {
-            "Currency" : "Coins",
-            "Amount" : 170
-        },
-    },
-    {
-        "Skin" : "E2",
-        "HP" : "300",
-        "Chest" : "Rare",
-        "Price" : 
-        {
-            "Currency" : "Coins",
-            "Amount" : 180
-        },
-    },
-    {
-        "Skin" : "E1",
-        "HP" : "330",
-        "Chest" : "Common",
-        "Price" : 
-        {
-            "Currency" : "Coins",
-            "Amount" : 190
-        },
-    },
-    {
-        "Skin" : "E2",
-        "HP" : "360",
-        "Chest" : "Rare",
-        "Price" : 
-        {
-            "Currency" : "Coins",
-            "Amount" : 200
-        },
-    },
-    {
-        "Skin" : "E3",
-        "HP" : "390",
-        "Chest" : "Epic",
-        "Price" : 
-        {
-            "Currency" : "Coins",
-            "Amount" : 210
-        },
-    },
+  {
+    "Uid" : "1",
+    "Level" : 1,
+    "Steps" :
+    [
+      {
+        "Currency" : "Chest1",
+        "Amount" : 10
+      },
+      {
+        "Currency" : "Chest1",
+        "Amount" : 20
+      },
+      {
+       "Currency" : "Chest3",
+       "Amount" : 30
+      }
+    ]
+  },
+  {
+    "Uid" : "2",
+    "Level" : 2,
+    "Steps" :
+    [
+      {
+        "Currency" : "Chest1",
+        "Amount" : 10
+      },
+      {
+        "Currency" : "Chest2",
+        "Amount" : 20
+      },
+      {
+        "Currency" : "Chest3",
+        "Amount" : 30
+      }
+    ]
+  }
 ]

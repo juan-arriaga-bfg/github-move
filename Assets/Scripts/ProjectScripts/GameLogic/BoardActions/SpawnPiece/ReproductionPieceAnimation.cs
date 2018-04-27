@@ -2,14 +2,15 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class ReproductionPieceAnimation : BoardAnimation 
+public class ReproductionPieceAnimation : BoardAnimation
 {
+    public BoardElementView BoardElement;
     public BoardPosition From;
     public Dictionary<BoardPosition, Piece> Pieces;
     
     public override void Animate(BoardRenderer context)
     {
-        var boardElement = context.GetElementAt(From);
+        var boardElement = BoardElement ?? context.GetElementAt(From);
         var startPosition = context.Context.BoardDef.GetPiecePosition(From.X, From.Y);
         
         var sequence = DOTween.Sequence().SetId(animationUid);

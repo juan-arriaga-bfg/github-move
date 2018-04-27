@@ -5,7 +5,6 @@ public class R
      public const string HitboxView = "HitboxView";
      public const string ReadyArrowView = "ReadyArrowView";
      public const string HitboxDamageView = "HitboxDamageView";
-     public const string GBox1Piece = "GBox1Piece";
      public const string ChangeObstacleStateView = "ChangeObstacleStateView";
      public const string AddResourceView = "AddResourceView";
      public const string ChangeStorageStateView = "ChangeStorageStateView";
@@ -38,9 +37,6 @@ public class R
      public const string C7Piece = "C7Piece";
      public const string C8Piece = "C8Piece";
      public const string C9Piece = "C9Piece";
-     public const string Enemy1Piece = "Enemy1Piece";
-     public const string Enemy2Piece = "Enemy2Piece";
-     public const string Enemy3Piece = "Enemy3Piece";
      public const string FogPiece = "FogPiece";
      public const string Castle1Piece = "Castle1Piece";
      public const string Castle2Piece = "Castle2Piece";
@@ -122,4 +118,5 @@ public class R
      public const string ResourceView = "ResourceView";
      public const string CastleUpgradeView = "CastleUpgradeView";
      public const string KingPiece = "KingPiece";
+     public const string EnemyView = "EnemyView";
 }

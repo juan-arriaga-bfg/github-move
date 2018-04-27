@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public class ReproductionPieceAction : IBoardAction
 {
@@ -9,9 +10,11 @@ public class ReproductionPieceAction : IBoardAction
 		get { return ComponentGuid; }
 	}
 	
+	public BoardElementView BoardElement;
 	public BoardPosition From { get; set; }
 	public int Piece { get; set; }
 	public List<BoardPosition> Positions { get; set; }
+	public Action OnComplete;
 
 	public bool PerformAction(BoardController gameBoardController)
 	{
@@ -34,6 +37,7 @@ public class ReproductionPieceAction : IBoardAction
 		
 		var animation = new ReproductionPieceAnimation
 		{
+			BoardElement = BoardElement,
 			From = From,
 			Pieces = pieces
 		};
@@ -46,6 +50,8 @@ public class ReproductionPieceAction : IBoardAction
 			{
 				gameBoardController.BoardLogic.UnlockCell(pair.Key, this);
 			}
+
+			if (OnComplete != null) OnComplete();
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

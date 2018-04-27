@@ -1,5 +1,8 @@
 public class UIRobberyWindowModel : IWWindowModel 
 {
+    public Enemy Enemy { get; set; }
+    public EnemyView View { get; set; }
+    
     public string Title
     {
         get { return "Stolen Treasures"; }
@@ -20,6 +23,4 @@ public class UIRobberyWindowModel : IWWindowModel
     {
         get { return "Claim Reward"; }
     }
-    
-    
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BoardController : ECSEntity,
     IActionExecuteComponent, IBoardEventsComponent, IBoardLoggerComponent, IBoardLogicComponent, IBoardDefinitionComponent, IBoardStatesComponent, ISessionBoardStateComponent,
-    IBoardSystemProcessor, IBoardRendererComponent, IBoardManipulatorComponent, IBoardRandomComponent, IObstaclesLogicComponent, IReproductionLogicComponent
+    IBoardSystemProcessor, IBoardRendererComponent, IBoardManipulatorComponent, IBoardRandomComponent, IObstaclesLogicComponent, IReproductionLogicComponent, IEnemiesLogicComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -157,6 +157,19 @@ public class BoardController : ECSEntity,
                 reproductionLogic = GetComponent<ReproductionLogicComponent>(ReproductionLogicComponent.ComponentGuid);
             }
             return reproductionLogic;
+        }
+    }
+    
+    protected EnemiesLogicComponent enemiesLogic;
+    public EnemiesLogicComponent EnemiesLogic
+    {
+        get
+        {
+            if (enemiesLogic == null)
+            {
+                enemiesLogic = GetComponent<EnemiesLogicComponent>(EnemiesLogicComponent.ComponentGuid);
+            }
+            return enemiesLogic;
         }
     }
     

@@ -73,8 +73,6 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.E5.Id, R.E5Piece);
         dict.Add(PieceType.E6.Id, R.E6Piece);
         
-        dict.Add(PieceType.Gbox1.Id, R.GBox1Piece);
-        
         dict.Add(PieceType.Chest1.Id, R.Chest1Piece);
         dict.Add(PieceType.Chest2.Id, R.Chest2Piece);
         dict.Add(PieceType.Chest3.Id, R.Chest3Piece);
@@ -90,10 +88,6 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Coin3.Id, R.Coin3Piece);
         dict.Add(PieceType.Coin4.Id, R.Coin4Piece);
         dict.Add(PieceType.Coin5.Id, R.Coin5Piece);
-        
-        dict.Add(PieceType.Enemy1.Id, R.Enemy1Piece);
-        dict.Add(PieceType.Enemy2.Id, R.Enemy2Piece);
-        dict.Add(PieceType.Enemy3.Id, R.Enemy3Piece);
         
         return dict;
     }

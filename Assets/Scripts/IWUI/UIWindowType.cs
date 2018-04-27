@@ -19,4 +19,6 @@
     public const string CollectionWindow = "CollectionWindow";
     
     public const string QuestWindow = "QuestWindow";
+    
+    public const string RobberyWindow = "RobberyWindow";
 }

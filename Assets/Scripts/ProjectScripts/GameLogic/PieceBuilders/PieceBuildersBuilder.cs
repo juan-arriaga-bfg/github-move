@@ -8,7 +8,6 @@ public class PieceBuildersBuilder
         var dict = new Dictionary<int, IPieceBuilder>();
 
         dict = AddSimplePiece(dict);
-        dict = AddEnemyPiece(dict);
         dict = AddObstaclePiece(dict);
         dict = AddOtherPiece(dict);
         
@@ -38,11 +37,6 @@ public class PieceBuildersBuilder
         return dict;
     }
     
-    private Dictionary<int, IPieceBuilder> AddEnemyPiece(Dictionary<int, IPieceBuilder> dict)
-    {
-        return AddSimplePiece<EnemyPieceBuilder>(PieceType.Enemy1.Id, PieceType.Enemy3.Id, dict);
-    }
-    
     private Dictionary<int, IPieceBuilder> AddObstaclePiece(Dictionary<int, IPieceBuilder> dict)
     {
         dict = AddSimplePiece<SimpleObstaclePieceBuilder>(PieceType.O1.Id, PieceType.O5.Id, dict);
@@ -62,7 +56,6 @@ public class PieceBuildersBuilder
     {
         dict.Add(PieceType.Generic.Id, new GenericPieceBuilder());
         dict.Add(PieceType.Empty.Id, new EmptyPieceBuilder());
-        dict.Add(PieceType.Gbox1.Id, new GBoxPieceBuilder());
         
         return dict;
     }

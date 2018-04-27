@@ -70,7 +70,7 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 		
 		label.Text = string.Format("{0}/{1}", power, def.Condition.Value);
 
-		line.sizeDelta = new Vector2(Mathf.Clamp(163 * (float) power / def.Condition.Value, 10, 163), line.sizeDelta.y);
+		line.sizeDelta = new Vector2(Mathf.Clamp(10 + 153 * (float) power / def.Condition.Value, 10, 163), line.sizeDelta.y);
 	}
 	
 	public void OnBoardEvent(int code, object context)

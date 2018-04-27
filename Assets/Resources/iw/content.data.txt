@@ -25,11 +25,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "GBox1Piece",
-    "ResourcePath": "Prefabs/Pieces/GenericPiece/GBox1Piece",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "ChangeObstacleStateView",
     "ResourcePath": "Prefabs/ChangeObstacleStateView",
     "IsGenerateAutoName": true
@@ -187,21 +182,6 @@
   {
     "Uid": "C9Piece",
     "ResourcePath": "Prefabs/Pieces/GenericPiece/C/C9Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "Enemy1Piece",
-    "ResourcePath": "Prefabs/Pieces/GenericPiece/Enemy1Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "Enemy2Piece",
-    "ResourcePath": "Prefabs/Pieces/GenericPiece/Enemy2Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "Enemy3Piece",
-    "ResourcePath": "Prefabs/Pieces/GenericPiece/Enemy3Piece",
     "IsGenerateAutoName": true
   },
   {
@@ -607,6 +587,11 @@
   {
     "Uid": "KingPiece",
     "ResourcePath": "Prefabs/Pieces/GenericPiece/QuestGiver/KingPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "EnemyView",
+    "ResourcePath": "Prefabs/EnemyView",
     "IsGenerateAutoName": true
   }
 ]
