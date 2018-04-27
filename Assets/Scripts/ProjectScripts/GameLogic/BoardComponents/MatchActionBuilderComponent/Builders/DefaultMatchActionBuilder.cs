@@ -77,7 +77,7 @@ public class DefaultMatchActionBuilder : IMatchActionBuilder
         for (var i = 0; i < def.CreateRewards.Count; i++)
         {
             var reward = def.CreateRewards[i];
-            sequence.InsertCallback(0.2f*i, () => AddResourceView.Show(position, reward));
+            sequence.InsertCallback(0.5f*i, () => AddResourceView.Show(position, reward));
         }
     }
 }

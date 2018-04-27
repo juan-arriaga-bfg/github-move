@@ -8,7 +8,7 @@ public class HitboxDamageView : BoardElementView
 
     private void Show(int damage)
     {
-        damageLabel.Text = string.Format("-{0}", damage);
+        damageLabel.Text = string.Format("<color=#EE4444>-{0}</color>", damage);
 
         float duration = 1f;
 		

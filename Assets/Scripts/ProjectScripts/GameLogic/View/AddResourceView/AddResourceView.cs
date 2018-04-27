@@ -8,8 +8,18 @@ public class AddResourceView : BoardElementView
 
 	private void Show(CurrencyPair resource)
 	{
-		icon.sprite = IconService.Current.GetSpriteById(string.Format("icon_gameboard_{0}" , resource.Currency));
-		amountLabel.Text = string.Format("<color=#EE4444>+{0}</color>", resource.Amount);
+		if (resource.Currency != Currency.Energy.Name)
+		{
+			icon.sprite = IconService.Current.GetSpriteById(string.Format("icon_gameboard_{0}" , resource.Currency));
+			
+			icon.gameObject.SetActive(true);
+			amountLabel.Text = string.Format("<color=#FFFFFF>+{0}</color>", resource.Amount);
+		}
+		else
+		{
+			icon.gameObject.SetActive(false);
+			amountLabel.Text = string.Format("<color=#FFFFFF>+{0} EXP</color>", resource.Amount);
+		}
 		
 		float duration = 1f;
 		
