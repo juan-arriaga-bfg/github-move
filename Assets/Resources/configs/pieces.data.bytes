@@ -93,7 +93,7 @@
       },
       {
         "Currency": "Coins",
-        "Amount": 40
+        "Amount": 30
       }
     ]
   },
@@ -107,7 +107,7 @@
       },
       {
         "Currency": "Coins",
-        "Amount": 80
+        "Amount": 50
       }
     ]
   },
@@ -121,7 +121,7 @@
       },
       {
         "Currency": "Coins",
-        "Amount": 2
+        "Amount": 3
       }
     ]
   },
@@ -149,7 +149,7 @@
       },
       {
         "Currency": "Coins",
-        "Amount": 10
+        "Amount": 8
       }
     ]
   },
@@ -163,7 +163,7 @@
       },
       {
         "Currency": "Coins",
-        "Amount": 20
+        "Amount": 15
       }
     ]
   },
@@ -174,6 +174,11 @@
       {
         "Currency": "Energy",
         "Amount": 1
+      },
+	  ,
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -184,6 +189,11 @@
       {
         "Currency": "Energy",
         "Amount": 3
+      },
+	  ,
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -194,6 +204,11 @@
       {
         "Currency": "Energy",
         "Amount": 10
+      },
+	  ,
+      {
+        "Currency": "Coins",
+        "Amount": 8
       }
     ]
   },
@@ -204,6 +219,11 @@
       {
         "Currency": "Energy",
         "Amount": 25
+      },
+	  ,
+      {
+        "Currency": "Coins",
+        "Amount": 15
       }
     ]
   },
@@ -214,6 +234,11 @@
       {
         "Currency": "Energy",
         "Amount": 50
+      },
+	  ,
+      {
+        "Currency": "Coins",
+        "Amount": 20
       }
     ]
   },
@@ -224,6 +249,11 @@
       {
         "Currency": "Energy",
         "Amount": 100
+      },
+	  ,
+      {
+        "Currency": "Coins",
+        "Amount": 30
       }
     ]
   },
@@ -234,6 +264,10 @@
       {
         "Currency": "Energy",
         "Amount": 200
+      },
+	        {
+        "Currency": "Coins",
+        "Amount": 40
       }
     ]
   },
@@ -244,6 +278,10 @@
       {
         "Currency": "Energy",
         "Amount": 400
+      },
+	        {
+        "Currency": "Coins",
+        "Amount": 50
       }
     ]
   },
@@ -254,6 +292,11 @@
       {
         "Currency": "Energy",
         "Amount": 5
+      },
+	  ,
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -269,6 +312,11 @@
       {
         "Currency": "Energy",
         "Amount": 10
+      },
+	  ,
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -279,6 +327,11 @@
       {
         "Currency": "Energy",
         "Amount": 25
+      },
+	  ,
+      {
+        "Currency": "Coins",
+        "Amount": 8
       }
     ]
   },
@@ -289,6 +342,11 @@
       {
         "Currency": "Energy",
         "Amount": 50
+      },
+	  ,
+      {
+        "Currency": "Coins",
+        "Amount": 15
       }
     ]
   },
@@ -299,6 +357,11 @@
       {
         "Currency": "Energy",
         "Amount": 100
+      },
+	  ,
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -309,6 +372,11 @@
       {
         "Currency": "Energy",
         "Amount": 10
+      },
+	  ,
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -319,6 +387,11 @@
       {
         "Currency": "Energy",
         "Amount": 25
+      },
+	  ,
+      {
+        "Currency": "Coins",
+        "Amount": 8
       }
     ]
   },
@@ -334,6 +407,11 @@
       {
         "Currency": "Energy",
         "Amount": 50
+      },
+	  ,
+      {
+        "Currency": "Coins",
+        "Amount": 15
       }
     ]
   },
@@ -359,6 +437,11 @@
       {
         "Currency": "Energy",
         "Amount": 1
+      },
+	  ,
+      {
+        "Currency": "Coins",
+        "Amount": 25
       }
     ]
   },
@@ -616,12 +699,12 @@
   },
   {
     "Uid": "Sawmill1",
-    "Delay": 60,
+    "Delay": 90,
     "SpawnPiece": "A1",
     "UpgradeTargetPiece": "Castle2",
     "IsFilledInStart":"true",
-    "SpawnAmount": 2,
-    "SpawnCapacity": 4,
+    "SpawnAmount": 5,
+    "SpawnCapacity": 10,
     "UpgradePrices":
     [
       {
@@ -632,11 +715,11 @@
   },
   {
     "Uid": "Sawmill2",
-    "Delay": 60,
+    "Delay": 90,
     "SpawnPiece": "A1",
     "UpgradeTargetPiece": "Castle3",
-    "SpawnAmount": 3,
-    "SpawnCapacity": 9,
+    "SpawnAmount": 7,
+    "SpawnCapacity": 14,
     "UpgradePrices":
     [
       {
@@ -647,8 +730,8 @@
   },
   {
     "Uid": "Sawmill3",
-    "Delay": 60,
-    "SpawnPiece": "A1",
+    "Delay": 90,
+    "SpawnPiece": "A2",
     "UpgradeTargetPiece": "Castle4",
     "SpawnAmount": 4,
     "SpawnCapacity": 12,
@@ -662,11 +745,11 @@
   },
   {
     "Uid": "Sawmill4",
-    "Delay": 60,
+    "Delay": 90,
     "SpawnPiece": "A2",
     "UpgradeTargetPiece": "Castle5",
-    "SpawnAmount": 2,
-    "SpawnCapacity": 6,
+    "SpawnAmount": 6,
+    "SpawnCapacity": 18,
     "UpgradePrices":
     [
       {
@@ -677,11 +760,11 @@
   },
   {
     "Uid": "Sawmill5",
-    "Delay": 60,
+    "Delay": 90,
     "SpawnPiece": "A2",
     "UpgradeTargetPiece": "Castle6",
-    "SpawnAmount": 3,
-    "SpawnCapacity": 9,
+    "SpawnAmount": 7,
+    "SpawnCapacity": 21,
     "UpgradePrices":
     [
       {
@@ -692,11 +775,11 @@
   },
   {
     "Uid": "Sawmill6",
-    "Delay": 60,
+    "Delay": 90,
     "SpawnPiece": "A2",
     "UpgradeTargetPiece": "Castle7",
-    "SpawnAmount": 4,
-    "SpawnCapacity": 12,
+    "SpawnAmount": 8,
+    "SpawnCapacity": 24,
     "UpgradePrices":
     [
       {
@@ -707,11 +790,11 @@
   },
   {
     "Uid": "Sawmill7",
-    "Delay": 60,
+    "Delay": 90,
     "SpawnPiece": "A2",
     "UpgradeTargetPiece": "Castle8",
-    "SpawnAmount": 5,
-    "SpawnCapacity": 15,
+    "SpawnAmount": 9,
+    "SpawnCapacity": 29,
     "UpgradePrices":
     [
       {
@@ -868,7 +951,7 @@
               },
               {
                 "Currency": "Crystals",
-                "Amount": 10
+                "Amount": 15
               }
             ]
   },
@@ -898,7 +981,7 @@
               },
               {
                 "Currency": "Crystals",
-                "Amount": 15
+                "Amount": 25
               }
             ]
   },
@@ -928,7 +1011,7 @@
               },
               {
                 "Currency": "Crystals",
-                "Amount": 25
+                "Amount": 35
               }
             ]
   },
@@ -958,7 +1041,7 @@
               },
               {
                 "Currency": "Crystals",
-                "Amount": 40
+                "Amount": 45
               }
             ]
   },

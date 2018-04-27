@@ -100,6 +100,10 @@
       {
         "Uid": "B2",
         "Weight" : 20
+      },
+	        {
+        "Uid": "D1",
+        "Weight" : 20
       }
     ],
     "ChargerWeights" :
@@ -150,11 +154,15 @@
     "PieceWeights" :
     [
       {
-        "Uid": "D1",
+        "Uid": "E1",
         "Weight" : 20
       },
       {
         "Uid": "C2",
+        "Weight" : 20
+      },
+	        {
+        "Uid": "D2",
         "Weight" : 20
       }
     ],
@@ -206,12 +214,12 @@
     "PieceWeights" :
     [
       {
-        "Uid": "D2",
+        "Uid": "A3",
         "Weight" : 20,
 		"Override" : "true"
       },
       {
-        "Uid": "E1",
+        "Uid": "E2",
         "Weight" : 20,
 		"Override" : "true"
       }
