@@ -41,7 +41,6 @@ public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserve
 		{
 			var point = GetPointInMask(position, Mask[i]);
 			context.Context.BoardLogic.AddPieceToBoardSilent(point.X, point.Y, context);
-			context.Context.BoardLogic.LockCell(point, this);
 		}
 	}
 
@@ -58,7 +57,6 @@ public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserve
 		{
 			var point = GetPointInMask(position, Mask[i]);
 			context.Context.BoardLogic.RemovePieceFromBoardSilent(point);
-			context.Context.BoardLogic.UnlockCell(point, this);
 		}
 	}
 
