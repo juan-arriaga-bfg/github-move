@@ -59,36 +59,36 @@ public class ItemWeight
 
         foreach (var weight in oldWeights)
         {
-            var next = nextWeights.Find(w => w.Piece == weight.Piece);
+            var next = nextWeights.Find(w => w.Uid == weight.Uid);
 
             if (next == null)
             {
                 weights.Add(weight.Copy());
                 continue;
             }
-                        
+            
             if (next.Override)
             {
                 weights.Add(next.Copy());
                 continue;
             }
-                        
+            
             var newWeight = weight.Copy();
 
             newWeight.Weight += next.Weight;
 
             weights.Add(newWeight);
         }
-                    
+        
         foreach (var weight in nextWeights)
         {
-            var old = oldWeights.Find(w => w.Piece == weight.Piece);
-                        
+            var old = oldWeights.Find(w => w.Uid == weight.Uid);
+            
             if(old != null) continue;
-                        
+            
             weights.Add(weight.Copy());
         }
-
+        
         return weights;
     }
 }
