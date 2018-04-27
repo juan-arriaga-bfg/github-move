@@ -41,10 +41,10 @@ public class ResourceView : BoardElementView
         
         DOTween.Kill(body);
         DOTween.Kill(AnimationId);
-
-        body.DOScale(Vector3.zero, duration).SetId(body).SetEase(Ease.OutBack);
+        
+        
         DestroyOnBoard(duration);
-
+        
         if (GameDataService.Current.CollectionManager.Contains(resource.Currency))
         {
             var model = UIService.Get.GetCachedModel<UICollectionWindowModel>(UIWindowType.CollectionWindow);
@@ -54,8 +54,15 @@ public class ResourceView : BoardElementView
             
             UIService.Get.ShowWindow(UIWindowType.CollectionWindow);
             
+            body.DOScale(Vector3.zero, duration).SetId(body).SetEase(Ease.OutBack);
             return;
         }
+
+        var position = GameDataService.Current.PiecesManager.CastlePosition;
+        var target = BoardService.Current.GetBoardById(0).BoardDef.GetPiecePosition(position.X, position.Y);
+        
+        body.DOScale(Vector3.one * 0.5f, duration).SetId(body).SetEase(Ease.OutBack);
+        body.DOMove(target, duration).SetId(body);
         
         CurrencyHellper.Purchase(resource);
     }
