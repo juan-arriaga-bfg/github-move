@@ -25,11 +25,14 @@
         {
             foreach (var piece in def.Pieces)
             {
-                context.Context.ActionExecutor.AddAction(new CreatePieceAtAction
+                foreach (var pos in piece.Value)
                 {
-                    At = GetPointInMask(realPosition, piece.Value),
-                    PieceTypeId = PieceType.Parse(piece.Key)
-                });
+                    context.Context.ActionExecutor.AddAction(new CreatePieceAtAction
+                    {
+                        At = GetPointInMask(realPosition, pos),
+                        PieceTypeId = PieceType.Parse(piece.Key)
+                    });
+                }
             }
         }
 

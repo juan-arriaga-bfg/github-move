@@ -6,18 +6,6 @@ public class FogDef
     public BoardPosition Position { get; set; }
     public HeroAbility Condition { get; set; }
     public BoardPosition Size { get; set; }
-    public Dictionary<string, BoardPosition> Pieces { get; set; }
+    public Dictionary<string, List<BoardPosition>> Pieces { get; set; }
     public List<ItemWeight> PieceWeights { get; set; }
-
-    public override string ToString()
-    {
-        var str = string.Format("Uid: {0}, Position: {1}\nPieces: ", Uid, Position);
-
-        foreach (var piece in Pieces)
-        {
-            str += string.Format("id: {0}, Position: {1}\n", piece.Key, piece.Value);
-        }
-        
-        return str;
-    }
 }
