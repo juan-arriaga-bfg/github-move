@@ -69,7 +69,13 @@ public class UICollectionWindowView : UIGenericPopupWindowView
 
     public void OnClick()
     {
-        UIService.Get.ShowWindow(UIWindowType.HeroesWindow);
+        var windowModel = Model as UICollectionWindowModel;
+
+        if (windowModel.IsCollectAll)
+        {
+            UIService.Get.ShowWindow(UIWindowType.HeroesWindow);
+        }
+        
         Controller.CloseCurrentWindow();
     }
 }

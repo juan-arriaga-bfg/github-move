@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class HintCooldownComponent : ECSEntity
 {
-	private const int MinDelay = 10;
-	private const int MaxDelay = 15;
+	private const int MinDelay = 30;
+	private const int MaxDelay = 60;
 	
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	
@@ -34,6 +34,8 @@ public class HintCooldownComponent : ECSEntity
 	private void Hint()
 	{
 		Step();
+		
+		if(UIService.Get.ShowedWindows.Count > 2) return;
 		
 		var open = new List<BoardPosition>();
 		var close = new List<BoardPosition>();
