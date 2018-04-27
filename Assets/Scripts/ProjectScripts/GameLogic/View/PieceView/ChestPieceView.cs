@@ -38,6 +38,11 @@ public class ChestPieceView : PieceBoardElementView
         chestComponent.Timer.OnComplete -= UpdateView;
         chestComponent.Timer.OnExecute -= UpdateProgress;
         chestComponent.Timer.Stop();
+        
+        if(GameDataService.Current.ChestsManager.ActiveChest == chestComponent.Chest)
+        {
+            GameDataService.Current.ChestsManager.ActiveChest = null;
+        }
     }
 
     private void UpdateProgress()

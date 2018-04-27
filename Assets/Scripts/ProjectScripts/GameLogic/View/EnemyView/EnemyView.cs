@@ -21,7 +21,7 @@ public class EnemyView : BoardElementView
 
         back.fillAmount = Mathf.Clamp(start + (1 - start) * (1 - enemy.Progress), start, 1f);
     }
-
+    
     public void SpawnReward(int reward)
     {
         var positions = new List<BoardPosition>();
