@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +20,10 @@ public class EnemyView : BoardElementView
     {
         if(enemy == null) return;
 
-        back.fillAmount = Mathf.Clamp(start + (1 - start) * (1 - enemy.Progress), start, 1f);
+        DOTween.Kill(back);
+        
+        var value = Mathf.Clamp(start + (1 - start) * (1 - enemy.Progress), start, 1f);
+        DOTween.To(() => back.fillAmount, (v) => { back.fillAmount = v; }, value, 0.5f).SetId(back);
     }
     
     public void SpawnReward(int reward)
@@ -29,12 +33,12 @@ public class EnemyView : BoardElementView
         
         from.Z = Context.Context.BoardDef.PieceLayer;
 
-        if (!Context.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(@from, positions, 1)) return;
+        if (!Context.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(from, positions, 1)) return;
         
         Context.Context.ActionExecutor.AddAction(new ReproductionPieceAction
         {
             BoardElement = this,
-            From = @from,
+            From = from,
             Piece = reward,
             Positions = positions,
             OnComplete = () =>
@@ -45,7 +49,7 @@ public class EnemyView : BoardElementView
             }
         });
     }
-
+    
     public void OnClick()
     {
         var model = UIService.Get.GetCachedModel<UIRobberyWindowModel>(UIWindowType.RobberyWindow);

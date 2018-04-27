@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -57,6 +58,7 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
         dot.SetActive(false);
 
         items = GetComponentsInChildren<UIRobberyItem>().ToList();
+        line.sizeDelta = new Vector2(Mathf.Clamp(455 * windowModel.Enemy.Progress, 0, 455), line.sizeDelta.y);
         
         Decoration();
     }
@@ -65,8 +67,12 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
     {
         var windowModel = Model as UIRobberyWindowModel;
         
-        line.sizeDelta = new Vector2(Mathf.Clamp(455 * windowModel.Enemy.Progress, 0, 455), line.sizeDelta.y);
-
+        DOTween.Kill(line);
+        
+        var max = windowModel.Enemy.IsComplete ? 530 : 455;
+        var value = Mathf.Clamp(max * windowModel.Enemy.Progress, 0, max);
+        DOTween.To(() => line.sizeDelta.x, (v) => { line.sizeDelta = new Vector2(v, line.sizeDelta.y); }, value, 0.5f).SetId(line);
+        
         reward = windowModel.Enemy.GetReward();
 
         var isNone = reward == PieceType.None.Id;
