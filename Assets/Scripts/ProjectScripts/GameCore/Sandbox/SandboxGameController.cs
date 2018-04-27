@@ -105,7 +105,7 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
         
-        /*boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(24, 2),
             PieceTypeId = PieceType.King.Id
@@ -205,10 +205,9 @@ public class SandboxGameController : MonoBehaviour
             At = new BoardPosition(25, 6),
             PieceTypeId = PieceType.A1.Id
         });  
-		*/
 
-        AddPieces(new BoardPosition(19, 10), PieceType.Chest1.Id, PieceType.Chest6.Id, boardController);
-        AddPieces(new BoardPosition(21, 10), PieceType.Coin1.Id, PieceType.Coin5.Id, boardController);
+        /*AddPieces(new BoardPosition(19, 10), PieceType.Chest1.Id, PieceType.Chest6.Id, boardController);
+        AddPieces(new BoardPosition(21, 10), PieceType.Coin1.Id, PieceType.Coin5.Id, boardController);*/
         
         //register board
         BoardService.Current.RegisterBoard(boardController, 0);
