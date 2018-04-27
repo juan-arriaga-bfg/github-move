@@ -12,11 +12,11 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
     [SerializeField] private Button btnSend;
     [SerializeField] private Button btnClaim;
     
-    [SerializeField] private GameObject round;
     [SerializeField] private GameObject dot;
     
     [SerializeField] private UIRobberyItem mainChest;
     
+    [SerializeField] private Image round;
     [SerializeField] private Image chest;
     
     [SerializeField] private RectTransform line;
@@ -59,6 +59,7 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
 
         items = GetComponentsInChildren<UIRobberyItem>().ToList();
         line.sizeDelta = new Vector2(Mathf.Clamp(455 * windowModel.Enemy.Progress, 0, 455), line.sizeDelta.y);
+        round.color = new Color(1, 1, 1, 0);
         
         Decoration();
     }
@@ -80,7 +81,7 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
         btnSend.interactable = isNone;
         btnClaim.interactable = !isNone;
         
-        round.SetActive(windowModel.Enemy.IsComplete);
+        
         chest.sprite = IconService.Current.GetSpriteById(string.Format("Chest_{0}active", windowModel.Enemy.IsComplete ? "" : "not_"));
         
         foreach (var item in items)
@@ -91,6 +92,8 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
     
     public override void OnViewCloseCompleted()
     {
+        DOTween.Kill(round);
+        
         if(isClaimReward == false) return;
 
         isClaimReward = false;
@@ -119,6 +122,15 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
         
         windowModel.Enemy.SetDamage(3);
         windowModel.View.UpdateFill();
+        round.color = windowModel.Enemy.IsComplete ? new Color(1, 1, 1, 0) : new Color(1, 0, 0, 0);;
+
+        DOTween.Kill(round);
+
+        DOTween.Sequence().SetId(round)
+            .Append(round.DOFade(1, 0.4f))
+            .Append(round.DOFade(0, 0.15f))
+            .SetLoops(windowModel.Enemy.IsComplete ? int.MaxValue : 2);
+        
         Decoration();
     }
     
