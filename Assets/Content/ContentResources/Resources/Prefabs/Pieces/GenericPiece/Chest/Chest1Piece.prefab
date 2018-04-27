@@ -182,8 +182,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1408639666537704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.66, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.55, z: 0}
+  m_LocalScale: {x: 1.65, y: 1.65, z: 1}
   m_Children: []
   m_Father: {fileID: 4286159990744390}
   m_RootOrder: 2
@@ -269,7 +269,7 @@ Transform:
   m_GameObject: {fileID: 1848324577118648}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.17, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.65, y: 1.65, z: 1}
   m_Children: []
   m_Father: {fileID: 4286159990744390}
   m_RootOrder: 0
@@ -501,6 +501,8 @@ MonoBehaviour:
   timerGo: {fileID: 1638017188548958}
   timerLabel: {fileID: 114677852641865572}
   progressBar: {fileID: 0}
+  open: 0.66
+  close: 0.55
 --- !u!212 &212172039078319322
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -105,7 +105,7 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
         
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        /*boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(24, 2),
             PieceTypeId = PieceType.King.Id
@@ -205,24 +205,10 @@ public class SandboxGameController : MonoBehaviour
             At = new BoardPosition(25, 6),
             PieceTypeId = PieceType.A1.Id
         });  
-		
+		*/
 
-        
-
-      
-    /*    boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(23, 8),
-            PieceTypeId = PieceType.D3.Id      // загон, который генерит барашков
-        });
-       */       
-        AddPieces(new BoardPosition(10, 10), PieceType.A1.Id, PieceType.A9.Id, boardController);
-  
-       AddPieces(new BoardPosition(12, 10), PieceType.C1.Id, PieceType.C9.Id, boardController);
-       AddPieces(new BoardPosition(14, 10), PieceType.B1.Id, PieceType.B5.Id, boardController);
-      AddPieces(new BoardPosition(16, 10), PieceType.D1.Id, PieceType.D5.Id, boardController);
-       AddPieces(new BoardPosition(18, 10), PieceType.E1.Id, PieceType.E6.Id, boardController);
-       AddPieces(new BoardPosition(19, 10), PieceType.Coin1.Id, PieceType.Coin5.Id, boardController);
+        AddPieces(new BoardPosition(19, 10), PieceType.Chest1.Id, PieceType.Chest6.Id, boardController);
+        AddPieces(new BoardPosition(21, 10), PieceType.Coin1.Id, PieceType.Coin5.Id, boardController);
         
         //register board
         BoardService.Current.RegisterBoard(boardController, 0);

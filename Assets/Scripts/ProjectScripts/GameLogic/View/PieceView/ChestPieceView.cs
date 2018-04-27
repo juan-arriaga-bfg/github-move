@@ -10,6 +10,9 @@ public class ChestPieceView : PieceBoardElementView
     [SerializeField] private NSText timerLabel;
     [SerializeField] private BoardProgressBarView progressBar;
     
+    [SerializeField] private float open;
+    [SerializeField] private float close;
+    
     private ChestPieceComponent chestComponent;
 
     public override void Init(BoardRenderer context, Piece piece)
@@ -31,7 +34,7 @@ public class ChestPieceView : PieceBoardElementView
         shine.SetActive(isOpen);
         timerGo.SetActive(chestComponent.Chest.State == ChestState.InProgress);
         
-        cap.localPosition = new Vector3(cap.localPosition.x, isOpen ? 0.66f : 0.53f);
+        cap.localPosition = new Vector3(cap.localPosition.x, isOpen ? open : close);
         
         if(isOpen == false) return;
         

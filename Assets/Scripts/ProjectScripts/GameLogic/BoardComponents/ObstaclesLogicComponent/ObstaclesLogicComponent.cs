@@ -62,7 +62,7 @@ public class ObstaclesLogicComponent : IECSComponent, IECSSystem
             pos.Z = context.BoardDef.PieceLayer;
             positions.Add(pos);
         }
-        
+        return;
         context.ActionExecutor.PerformAction(new FillBoardAction
         {
             Piece = PieceType.Fog.Id,
