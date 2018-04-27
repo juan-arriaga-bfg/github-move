@@ -24,7 +24,7 @@ public class ChestPieceView : PieceBoardElementView
         chestComponent.Timer.OnComplete += UpdateView;
         chestComponent.Timer.OnExecute += UpdateProgress;
     }
-
+    
     public override void UpdateView()
     {
         if(chestComponent == null || chestComponent.Chest == null) return;

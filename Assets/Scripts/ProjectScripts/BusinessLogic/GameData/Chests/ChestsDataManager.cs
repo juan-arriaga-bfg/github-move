@@ -3,14 +3,8 @@ using UnityEngine;
 
 public class ChestsDataManager : IDataLoader<List<ChestDef>>
 {
-    public const int Max = 4;
-
-    private int index = -1;
-
     public Chest ActiveChest;
     public List<ChestDef> Chests;
-    
-    public List<Chest> ActiveChests = new List<Chest>();
     
     public readonly Dictionary<BoardPosition, Chest> ChestsOnBoard = new Dictionary<BoardPosition, Chest>();
     
@@ -71,27 +65,5 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
         }
         
         return GetChest(pieceType);
-    }
-    
-    public bool AddActiveChest(int pieceType)
-    {
-        if (ActiveChests.Count == Max) return false;
-        
-        ActiveChests.Add(GetChest(pieceType));
-        
-        return true;
-    }
-
-    public bool RemoveActiveChest(Chest chest)
-    {
-        for (var i = ActiveChests.Count - 1; i >= 0; i--)
-        {
-            if(ActiveChests[i] != chest) continue;
-            
-            ActiveChests.RemoveAt(i);
-            return true;
-        }
-        
-        return false;
     }
 }
