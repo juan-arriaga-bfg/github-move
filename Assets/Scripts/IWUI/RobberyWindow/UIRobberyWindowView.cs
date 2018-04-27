@@ -20,9 +20,7 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
     [SerializeField] private Image chest;
     
     [SerializeField] private RectTransform line;
-
-    private int reward;
-
+    
     private bool isClaimReward;
 
     private List<UIRobberyItem> items;
@@ -30,6 +28,9 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
     public override void OnViewShow()
     {
         base.OnViewShow();
+        
+        UIService.Get.CloseWindow(UIWindowType.CharactersWindow);
+        UIService.Get.ShowWindow(UIWindowType.CharactersWindow);
 
         isClaimReward = false;
         
@@ -62,9 +63,17 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
         round.color = new Color(1, 1, 1, 0);
         
         Decoration();
+        
+        UIService.Get.OnCloseWindowEvent += OnCloseOthers;
     }
     
-    private void Decoration()
+    public void OnCloseOthers(IWUIWindow window)
+    {
+        if (!(window.CurrentView is UIHeroesWindowView)) return;
+        Decoration();
+    }
+    
+    public void Decoration()
     {
         var windowModel = Model as UIRobberyWindowModel;
         
@@ -74,11 +83,9 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
         var value = Mathf.Clamp(max * windowModel.Enemy.Progress, 0, max);
         DOTween.To(() => line.sizeDelta.x, (v) => { line.sizeDelta = new Vector2(v, line.sizeDelta.y); }, value, 0.5f).SetId(line);
         
-        reward = windowModel.Enemy.GetReward();
+        var isNone = windowModel.Enemy.ActiveReward == PieceType.None.Id;
 
-        var isNone = reward == PieceType.None.Id;
-
-        btnSend.interactable = isNone;
+        btnSend.interactable = isNone && windowModel.Attack() != null;
         btnClaim.interactable = !isNone;
         
         
@@ -100,7 +107,7 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
         
         var windowModel = Model as UIRobberyWindowModel;
         
-        windowModel.View.SpawnReward(reward);
+        windowModel.View.SpawnReward();
         
         windowModel.Enemy = null;
 
@@ -119,11 +126,23 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
     public void OnClickSend()
     {
         var windowModel = Model as UIRobberyWindowModel;
+
+        Attack(windowModel.Attack());
+    }
+
+    public void Attack(Hero hero)
+    {
+        if(hero == null) return;
         
-        windowModel.Enemy.SetDamage(3);
+        var windowModel = Model as UIRobberyWindowModel;
+        
+        windowModel.Enemy.SetDamage(hero.GetAbilityValue(AbilityType.Power));
+        windowModel.Enemy.ActivateReward();
         windowModel.View.UpdateFill();
         round.color = windowModel.Enemy.IsComplete ? new Color(1, 1, 1, 0) : new Color(1, 0, 0, 0);;
-
+        
+        hero.Sleep();
+        
         DOTween.Kill(round);
 
         DOTween.Sequence().SetId(round)
@@ -132,10 +151,18 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
             .SetLoops(windowModel.Enemy.IsComplete ? int.MaxValue : 2);
         
         Decoration();
+        
+        var window = UIService.Get.GetTopWindow().CurrentView as UICharactersWindowView;
+        
+        window.UpdateDecoration();
     }
     
     public void OnClickClaim()
     {
+        var windowModel = Model as UIRobberyWindowModel;
+        
+        if(windowModel.Enemy.ActiveReward == PieceType.None.Id) return;
+        
         isClaimReward = true;
         Controller.CloseCurrentWindow();
     }

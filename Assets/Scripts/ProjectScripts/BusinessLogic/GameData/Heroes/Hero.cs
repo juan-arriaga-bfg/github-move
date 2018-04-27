@@ -1,24 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class Hero
 {
     private HeroDef def;
+    private DateTime? sleepTime;
 
     public HeroDef Def
     {
         get { return def; }
     }
-
-    private int inAdventure = -1;
-
-    public int InAdventure
-    {
-        get { return inAdventure; }
-        set { inAdventure = value; }
-    }
-
+    
     public List<CurrencyPair> Price
     {
         get { return def.Prices; }
@@ -36,7 +30,12 @@ public class Hero
 
     public bool IsSleep
     {
-        get { return Random.Range(0, 2) == 0; }
+        get
+        {
+            if (IsUnlock == false || IsCollect == false) return true;
+            
+            return sleepTime != null && (int) (DateTime.Now - sleepTime.Value).TotalSeconds < def.Cooldown;
+        }
     }
 
     public bool IsCollect
@@ -131,7 +130,12 @@ public class Hero
 
     public void WakeUp()
     {
-        
+        sleepTime = null;
+    }
+
+    public void Sleep()
+    {
+        sleepTime = DateTime.Now;
     }
     
     public int GetAbilityValue(AbilityType ability)

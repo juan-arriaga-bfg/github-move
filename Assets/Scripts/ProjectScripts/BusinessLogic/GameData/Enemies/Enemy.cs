@@ -15,13 +15,15 @@ public class Enemy
 
     private int step;
     private int reward;
+    
+    public int ActiveReward { get; set; }
 
     public Enemy(EnemyDef def)
     {
         this.def = def;
 
         life = def.Steps[def.Steps.Count - 1].Amount;
-        reward = PieceType.None.Id;
+        ActiveReward = reward = PieceType.None.Id;
     }
     
     public float Progress
@@ -39,12 +41,10 @@ public class Enemy
         step++;
     }
 
-    public int GetReward()
+    public void ActivateReward()
     {
-        var current = reward;
+        ActiveReward = reward;
         reward = PieceType.None.Id;
-        
-        return current;
     }
 
     public int Damage

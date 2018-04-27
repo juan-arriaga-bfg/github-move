@@ -24,8 +24,6 @@ public class UiQuestStartItem : MonoBehaviour
         background.sprite = IconService.Current.GetSpriteById(string.Format("back_{0}", ability.Ability));
         icon.sprite = IconService.Current.GetSpriteById(ability.Ability.ToString());
 
-        hero = GameDataService.Current.HeroesManager.Heroes.Find(h => h.InAdventure == this.obstacle.GetUid());
-        
         var currentValue = hero == null ? 0 : hero.GetAbilityValue(AbilityType.Power);
         
         btnLabel.Text = string.Format("<size=65>{0}</size>", hero == null ? "+" : "v");
@@ -52,11 +50,10 @@ public class UiQuestStartItem : MonoBehaviour
 
     public void HeroGoHome()
     {
-        if (hero != null && hero.InAdventure == obstacle.GetUid()) hero.InAdventure = -1;
     }
     
     public bool InAdventure()
     {
-        return !gameObject.activeSelf || hero != null && hero.InAdventure == obstacle.GetUid() && hero.GetAbilityValue(AbilityType.Power) >= ability.Value;
+        return !gameObject.activeSelf || hero != null && hero.GetAbilityValue(AbilityType.Power) >= ability.Value;
     }
 }

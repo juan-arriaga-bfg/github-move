@@ -26,7 +26,7 @@ public class EnemyView : BoardElementView
         DOTween.To(() => back.fillAmount, (v) => { back.fillAmount = v; }, value, 0.5f).SetId(back);
     }
     
-    public void SpawnReward(int reward)
+    public void SpawnReward()
     {
         var positions = new List<BoardPosition>();
         var from = Context.Context.BoardDef.GetSectorPosition(CachedTransform.position);
@@ -39,7 +39,7 @@ public class EnemyView : BoardElementView
         {
             BoardElement = this,
             From = from,
-            Piece = reward,
+            Piece = enemy.ActiveReward,
             Positions = positions,
             OnComplete = () =>
             {
@@ -48,6 +48,8 @@ public class EnemyView : BoardElementView
                 DestroyOnBoard();
             }
         });
+
+        enemy.ActiveReward = PieceType.None.Id;
     }
     
     public void OnClick()

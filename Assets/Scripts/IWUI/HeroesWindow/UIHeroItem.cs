@@ -78,6 +78,7 @@ public class UIHeroItem : MonoBehaviour
         {
             hero.PurchaseChargers();
             Decoration(hero);
+            
             return;
         }
         

@@ -69,13 +69,6 @@ public class TouchReactionDefinitionObstacle : TouchReactionDefinitionComponent
 
                 var heroes = GameDataService.Current.HeroesManager.Heroes;
 
-                foreach (var hero in heroes)
-                {
-                    if(hero.InAdventure != obstacle.GetUid()) continue;
-
-                    hero.InAdventure = -1;
-                }
-                
                 piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
                 {
                     To = position,

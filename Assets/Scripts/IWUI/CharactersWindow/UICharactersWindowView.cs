@@ -12,13 +12,16 @@ public class UICharactersWindowView : IWUIWindowView
     [SerializeField] private RectTransform body;
 
     private bool isOpen;
-    private List<UICharactersItem> items;
+    private List<UICharactersItem> items = new List<UICharactersItem>();
     
     public override void OnViewShow()
     {
         base.OnViewShow();
         
         body.DOAnchorPosY(-690, 0f).SetId(body);
+
+        UIService.Get.OnShowWindowEvent += OnShowOthers;
+        UIService.Get.OnCloseWindowEvent += OnCloseOthers;
     }
     
     public override void OnViewClose()
@@ -26,18 +29,56 @@ public class UICharactersWindowView : IWUIWindowView
         base.OnViewClose();
         
         var windowModel = Model as UICharactersWindowModel;
+        UIService.Get.OnShowWindowEvent -= OnShowOthers;
     }
 
+    public void OnShowOthers(IWUIWindow window)
+    {
+        if (window.CurrentView is UIRobberyWindowView)
+        {
+            if (isOpen)
+            {
+                body.DOAnchorPosY(-465, 0f).SetId(body);
+            }
+            else
+            {
+                OnClick();
+            }
+            return;
+        }
+        
+        if(isOpen) OnClick();
+    }
+
+    public void OnCloseOthers(IWUIWindow window)
+    {
+        if (window.CurrentView is UIHeroesWindowView)
+        {
+            UpdateDecoration();
+        }
+        
+        if (!(window.CurrentView is UIRobberyWindowView)) return;
+        if(isOpen) OnClick();
+    }
+
+    public void UpdateDecoration()
+    {
+        Clear();
+        Decoration();
+    }
+    
     private void Decoration()
     {
         var windowModel = Model as UICharactersWindowModel;
         wakeUpLabel.Text = windowModel.WakeUpText;
 
         var heroes = windowModel.Heroes;
-
+        var isSleep = false;
+        
         if (heroes.Count == 0)
         {
             pattern.GetComponent<UICharactersItem>().Decoration(null);
+            wakeUp.interactable = false;
             return;
         }
 
@@ -46,9 +87,13 @@ public class UICharactersWindowView : IWUIWindowView
             var item = Instantiate(pattern, pattern.transform.parent).GetComponent<UICharactersItem>();
             
             item.Decoration(hero);
+            items.Add(item);
+
+            if (hero.IsSleep) isSleep = true;
         }
         
         pattern.SetActive(false);
+        wakeUp.interactable = isSleep;
     }
 
     private void Clear()
@@ -60,11 +105,15 @@ public class UICharactersWindowView : IWUIWindowView
             Destroy(item.gameObject);
         }
         
+        items = new List<UICharactersItem>();
+        
         pattern.SetActive(true);
     }
 
     public void OnClick()
     {
+        if(isOpen && UIService.Get.GetShowedWindowByName(UIWindowType.RobberyWindow) != null) return;
+        
         DOTween.Kill(body, true);
         
         isOpen = !isOpen;
@@ -84,6 +133,25 @@ public class UICharactersWindowView : IWUIWindowView
     public void OnClickWakeUp()
     {
         if(isOpen == false) return;
+        
+        var windowModel = Model as UICharactersWindowModel;
+
+        CurrencyHellper.Purchase("WakeUp", 1, windowModel.WakeUpPrice, succees =>
+        {
+            if(succees == false) return;
+            
+            var heroes = windowModel.Heroes.FindAll(hero => hero.IsSleep);
+
+            foreach (var hero in heroes)
+            {
+                hero.WakeUp();
+            }
+
+            var window = UIService.Get.GetShowedWindowByName(UIWindowType.RobberyWindow);
+
+            UpdateDecoration();
+            if (window != null) (window.CurrentView as UIRobberyWindowView).Decoration();
+        });
     }
     
     public void OnClickNeedMore()
@@ -91,6 +159,5 @@ public class UICharactersWindowView : IWUIWindowView
         if(isOpen == false) return;
         
         UIService.Get.ShowWindow(UIWindowType.HeroesWindow);
-        OnClick();
     }
 }
