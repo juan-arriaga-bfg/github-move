@@ -1643,12 +1643,12 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300014, guid: 021e05bd7c3023f43a52f48e138b1d58, type: 3}
   m_Type: 3
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
-  m_FillClockwise: 0
-  m_FillOrigin: 3
+  m_FillClockwise: 1
+  m_FillOrigin: 2
 --- !u!114 &114371371316572656
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -271,6 +271,8 @@ public class BoardManipulatorComponent : ECSEntity,
 
                 var position = view.Piece.CachedPosition;
                 
+                if(view.Piece.Context.BoardLogic.IsLockedCell(position)) continue;
+                
                 coef = position.X * context.BoardDef.Width - position.Y + position.Z;
             }
 

@@ -18,7 +18,8 @@ public class MoveFromToAndCheckCoverMatchAction : IBoardAction
 	{
 		To = new BoardPosition(To.X, To.Y, From.Z);
 		
-		if (From.Equals(To)
+		if (To.IsValidFor(gameBoardController.BoardDef.Width, gameBoardController.BoardDef.Height) == false
+		    || From.Equals(To)
 			|| CheckFreeCell(gameBoardController) == false
 		    && CheckCurrentPieceType(gameBoardController) == false
 		    && CheckMove(gameBoardController) == false)
