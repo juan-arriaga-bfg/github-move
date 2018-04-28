@@ -13,7 +13,7 @@ public class UiQuestButton : MonoBehaviour, IBoardEventListener
         this.quest = quest;
         icon.sprite = IconService.Current.GetSpriteById(quest.WantedIcon);
         
-        progressLabel.Text = string.Format("<color=#{0}><size=45>{1}</size></color>/{2}", quest.Check() ? "FFFFFF" : "FE4704", quest.CurrentAmount, quest.TargetAmount);
+        progressLabel.Text = string.Format("<color=#{0}><size=40>{1}</size></color>/{2}", quest.Check() ? "FFFFFF" : "FE4704", quest.CurrentAmount, quest.TargetAmount);
     }
 
     private void OnEnable()
@@ -41,6 +41,13 @@ public class UiQuestButton : MonoBehaviour, IBoardEventListener
         model.Quest = quest;
         
         UIService.Get.ShowWindow(UIWindowType.QuestWindow);
+        
+        var board = BoardService.Current.GetBoardById(0);
+        var kingPos = GameDataService.Current.PiecesManager.KingPosition;
+        
+        var position = board.BoardDef.GetSectorCenterWorldPosition(kingPos.X, kingPos.Y, kingPos.Z);
+        
+        board.Manipulator.CameraManipulator.ZoomTo(0.3f, position);
     }
     
     public void OnBoardEvent(int code, object context)

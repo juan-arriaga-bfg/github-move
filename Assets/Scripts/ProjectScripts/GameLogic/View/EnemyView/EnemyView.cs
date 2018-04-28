@@ -50,6 +50,8 @@ public class EnemyView : BoardElementView
         });
 
         enemy.ActiveReward = PieceType.None.Id;
+        
+        Context.Context.Manipulator.CameraManipulator.ZoomTo(0.3f, CachedTransform.position);
     }
     
     public void OnClick()
