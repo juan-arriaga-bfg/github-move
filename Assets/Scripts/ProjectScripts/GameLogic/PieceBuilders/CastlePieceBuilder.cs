@@ -14,7 +14,8 @@
         {
             SpawnPiece = def.SpawnPieceType,
             Capacity = def.SpawnCapacity,
-            Filling = def.IsFilledInStart ? def.SpawnCapacity : 0
+            Filling = def.IsFilledInStart ? def.SpawnCapacity : 0,
+            Amount =  def.SpawnAmount
         });
         
         piece.RegisterComponent(new TouchReactionComponent()

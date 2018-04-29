@@ -7,6 +7,8 @@ public class StorageComponent : IECSComponent, ITimerComponent
     public int Guid { get { return ComponentGuid; } }
 
     public int SpawnPiece;
+    
+    public int Amount;
     public int Capacity;
     public int Filling;
 
@@ -33,7 +35,7 @@ public class StorageComponent : IECSComponent, ITimerComponent
 
     private void Update()
     {
-        Filling = Mathf.Min(Filling + 1, Capacity);
+        Filling = Mathf.Min(Filling + Amount, Capacity);
         
         if(Filling < Capacity) Timer.Start();
     }
