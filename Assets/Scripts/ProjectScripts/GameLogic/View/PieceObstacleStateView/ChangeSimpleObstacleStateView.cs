@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
     [SerializeField] private NSText price;
     
     [SerializeField] private Image progress;
+    [SerializeField] private Image light;
     [SerializeField] private HorizontalLayoutGroup group;
     [SerializeField] private GameObject dot;
     [SerializeField] private GameObject progressbar;
@@ -50,11 +52,17 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
         progressbar.SetActive(simpleObstacle.Steps > 1);
         
         dot.SetActive(false);
+
+        DOTween.Sequence().SetId(light).SetLoops(int.MaxValue)
+            .Append(light.DOFade(0.5f, 0.3f))
+            .Append(light.DOFade(1f, 0.3f));
     }
     
     public override void ResetViewOnDestroy()
     {
         base.ResetViewOnDestroy();
+
+        DOTween.Kill(light);
         
         Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceMenu);
 
@@ -94,6 +102,9 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
 
     private void SetProgress()
     {
-        if (progress != null) progress.fillAmount = simpleObstacle.GetProgress;
+        if (progress == null) return;
+        
+        progress.fillAmount = simpleObstacle.GetProgressFake;
+        light.fillAmount = simpleObstacle.GetProgress;
     }
 }

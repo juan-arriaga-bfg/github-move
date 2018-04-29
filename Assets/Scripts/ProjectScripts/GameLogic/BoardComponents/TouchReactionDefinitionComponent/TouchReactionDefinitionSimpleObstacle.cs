@@ -15,6 +15,11 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
         get { return 1 - current/(float)Steps; }
     }
     
+    public float GetProgressFake
+    {
+        get { return 1 - (current+1)/(float)Steps; }
+    }
+    
     public string GetProgressText
     {
         get { return string.Format("{0}/{1}", current, Steps); }

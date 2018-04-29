@@ -100,8 +100,12 @@ public class BoardManipulatorComponent : ECSEntity,
         }
 
         var selectedView = GetSelectedBoardElementView();
-            
-        if (selectedView == null) return false;
+
+        if (selectedView == null)
+        {
+            context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
+            return false;
+        }
 
         if (selectedView is PieceBoardElementView)
         {
@@ -111,6 +115,7 @@ public class BoardManipulatorComponent : ECSEntity,
             if (touchReaction != null) return touchReaction.Touch(pieceView.Piece.CachedPosition);
         }
         
+        context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
         return false;
     }
 
