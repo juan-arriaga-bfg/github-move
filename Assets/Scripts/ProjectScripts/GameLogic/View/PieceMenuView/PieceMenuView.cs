@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class PieceMenuView : UIBoardView, IBoardEventListener
@@ -71,8 +72,10 @@ public class PieceMenuView : UIBoardView, IBoardEventListener
         Context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
         
         isOpen = !isOpen;
-        
-        Change(isOpen);
+
+        DOTween.Sequence()
+            .AppendInterval(0.01f)
+            .AppendCallback(() => Change(isOpen));
     }
     
     public void OnBoardEvent(int code, object context)
@@ -81,6 +84,8 @@ public class PieceMenuView : UIBoardView, IBoardEventListener
         if(isOpen == false) return;
 
         isOpen = false;
-        Change(false);
+        DOTween.Sequence()
+            .AppendInterval(0.01f)
+            .AppendCallback(() => Change(isOpen));
     }
 }

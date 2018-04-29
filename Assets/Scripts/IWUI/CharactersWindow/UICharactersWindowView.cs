@@ -10,9 +10,9 @@ public class UICharactersWindowView : IWUIWindowView
     [SerializeField] private Button wakeUp;
     
     [SerializeField] private RectTransform body;
+    [SerializeField] private UICharactersFlyingItem flyItem;
 
     private bool isOpen;
-    private List<UICharactersItem> items = new List<UICharactersItem>();
     
     public override void OnViewShow()
     {
@@ -87,7 +87,7 @@ public class UICharactersWindowView : IWUIWindowView
             var item = Instantiate(pattern, pattern.transform.parent).GetComponent<UICharactersItem>();
             
             item.Decoration(hero);
-            items.Add(item);
+            windowModel.Items.Add(item);
 
             if (hero.IsSleep) isSleep = true;
         }
@@ -98,14 +98,16 @@ public class UICharactersWindowView : IWUIWindowView
 
     private void Clear()
     {
-        if(items == null) return;
+        var windowModel = Model as UICharactersWindowModel;
+        
+        if(windowModel.Items == null) return;
 
-        foreach (var item in items)
+        foreach (var item in windowModel.Items)
         {
             Destroy(item.gameObject);
         }
         
-        items = new List<UICharactersItem>();
+        windowModel.Items = new List<UICharactersItem>();
         
         pattern.SetActive(true);
     }
@@ -128,6 +130,11 @@ public class UICharactersWindowView : IWUIWindowView
                     Clear();
                 }
             });
+    }
+
+    public void Fly(Hero hero)
+    {
+        flyItem.Fly(hero);
     }
     
     public void OnClickWakeUp()

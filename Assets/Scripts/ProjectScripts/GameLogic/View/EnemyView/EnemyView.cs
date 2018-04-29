@@ -108,6 +108,10 @@ public class EnemyView : BoardElementView
         var start = new BoardPosition(nearest.Position.X + Random.Range(0, nearest.Size.X), nearest.Position.Y + Random.Range(0, nearest.Size.Y));
         var view = board.RendererContext.CreateBoardElementAt<EnemyView>(R.EnemyView, start);
         
+        var position = board.BoardDef.GetSectorCenterWorldPosition(start.X, start.Y, start.Z);
+        
+        board.Manipulator.CameraManipulator.ZoomTo(0.3f, position);
+        
         view.target = start;
         view.enemy = enemy;
         view.Go(nearest);

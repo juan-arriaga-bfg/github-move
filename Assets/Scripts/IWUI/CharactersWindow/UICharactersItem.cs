@@ -14,14 +14,14 @@ public class UICharactersItem : MonoBehaviour
     [SerializeField] private GameObject buttonWakeUp;
     [SerializeField] private GameObject buttonSend;
 
-    private Hero character;
+    public Hero Hero;
     private CurrencyPair price = new CurrencyPair {Currency = "Crystals", Amount = 1};
     
-    public void Decoration(Hero hero)
+    public void Decoration(Hero character)
     {
-        character = hero;
+        Hero = character;
         
-        if (character == null)
+        if (Hero == null)
         {
             back.SetActive(false);
             buttonWakeUp.SetActive(false);
@@ -32,31 +32,31 @@ public class UICharactersItem : MonoBehaviour
         }
         
         var model = UIService.Get.GetCachedModel<UIRobberyWindowModel>(UIWindowType.RobberyWindow);
-        
-        var isSleep = character.IsSleep;
+        var isSleep = Hero.IsSleep;
+        var isActiveEnemy = model.Enemy != null;
         
         back.SetActive(!isSleep);
         
-        nameLabel.gameObject.SetActive(!isSleep && model.Enemy.ActiveReward != PieceType.None.Id);
-        buttonSend.SetActive(!isSleep && model.Enemy.ActiveReward == PieceType.None.Id);
-        buttonWakeUp.SetActive(isSleep);
+        nameLabel.gameObject.SetActive(!isActiveEnemy || !isSleep && model.Enemy.ActiveReward != PieceType.None.Id);
+        buttonSend.SetActive(isActiveEnemy && !isSleep && model.Enemy.ActiveReward == PieceType.None.Id);
+        buttonWakeUp.SetActive(isActiveEnemy && isSleep);
 
-        icon.sprite = IconService.Current.GetSpriteById(string.Format("{0}_head", hero.Def.Uid));
+        icon.sprite = IconService.Current.GetSpriteById(string.Format("{0}_head", Hero.Def.Uid));
         icon.color = new Color(1, 1, 1, isSleep ? 0.5f : 1);
 
-        nameLabel.Text = character.Def.Uid;
+        nameLabel.Text = Hero.Def.Uid;
         buttonLabel.Text = string.Format("Wake Up {0}<sprite name={1}>", price.Amount, price.Currency);
-        powerLabel.Text = hero.GetAbilityValue(AbilityType.Power).ToString();
+        powerLabel.Text = Hero.GetAbilityValue(AbilityType.Power).ToString();
     }
     
     public void OnClickWakeUp()
     {
-        if(character == null) return;
+        if(Hero == null) return;
 
         CurrencyHellper.Purchase("WakeUp", 1, price, succees =>
         {
             if (succees == false) return;
-            character.WakeUp();
+            Hero.WakeUp();
             
             var robbery = UIService.Get.GetShowedWindowByName(UIWindowType.RobberyWindow);
             if (robbery != null) (robbery.CurrentView as UIRobberyWindowView).Decoration();
@@ -68,9 +68,16 @@ public class UICharactersItem : MonoBehaviour
     
     public void OnClickSend()
     {
-        if(character == null) return;
+        if(Hero == null) return;
+        
+        var model = UIService.Get.GetCachedModel<UIRobberyWindowModel>(UIWindowType.RobberyWindow);
+
+        model.From = GetComponent<RectTransform>().position;
         
         var robbery = UIService.Get.GetShowedWindowByName(UIWindowType.RobberyWindow);
-        if (robbery != null) (robbery.CurrentView as UIRobberyWindowView).Attack(character);
+        if (robbery != null) (robbery.CurrentView as UIRobberyWindowView).Attack(Hero);
+        
+        var characters = UIService.Get.GetShowedWindowByName(UIWindowType.CharactersWindow);
+        if (characters != null) (characters.CurrentView as UICharactersWindowView).Fly(Hero);
     }
 }

@@ -82,8 +82,10 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
         
         SetProgress();
         price.Text = string.Format("<sprite name={0}> {1}", simpleObstacle.Price.Currency, simpleObstacle.Price.Amount);
-
-        Change(simpleObstacle.isOpen);
+        
+        DOTween.Sequence()
+            .AppendInterval(0.01f)
+            .AppendCallback(() => Change(simpleObstacle.isOpen));
     }
 
     public void Clear()
@@ -97,7 +99,9 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
         if(simpleObstacle.isOpen == false) return;
 
         simpleObstacle.isOpen = false;
-        Change(false);
+        DOTween.Sequence()
+            .AppendInterval(0.01f)
+            .AppendCallback(() => Change(simpleObstacle.isOpen));
     }
 
     private void SetProgress()

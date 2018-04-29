@@ -2,6 +2,8 @@ using System.Collections.Generic;
 
 public class UICharactersWindowModel : IWWindowModel 
 {
+    public List<UICharactersItem> Items = new List<UICharactersItem>();
+    
     public string WakeUpText
     {
         get

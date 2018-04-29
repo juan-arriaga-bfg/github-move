@@ -36,6 +36,8 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
         
         var windowModel = Model as UIRobberyWindowModel;
         var steps = windowModel.Enemy.Def.Steps;
+
+        windowModel.To = round.GetComponent<RectTransform>().anchoredPosition;
         
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
@@ -85,9 +87,8 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
         
         var isNone = windowModel.Enemy.ActiveReward == PieceType.None.Id;
 
-        btnSend.interactable = isNone && windowModel.Attack() != null;
+        btnSend.interactable = isNone && windowModel.IsAllSleep == false;
         btnClaim.interactable = !isNone;
-        
         
         chest.sprite = IconService.Current.GetSpriteById(string.Format("Chest_{0}active", windowModel.Enemy.IsComplete ? "" : "not_"));
         
@@ -127,7 +128,7 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
     {
         var windowModel = Model as UIRobberyWindowModel;
 
-        Attack(windowModel.Attack());
+        windowModel.Attack();
     }
 
     public void Attack(Hero hero)
