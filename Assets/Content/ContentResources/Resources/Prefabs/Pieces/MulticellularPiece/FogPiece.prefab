@@ -67,7 +67,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4620800765124122}
   - component: {fileID: 212494637992879162}
-  - component: {fileID: 114710135561696582}
   m_Layer: 0
   m_Name: FogItem
   m_TagString: Untagged
@@ -250,19 +249,6 @@ MonoBehaviour:
   fogItem: {fileID: 1499244833156538}
   touchItem: {fileID: 1404382654399780}
   touchRegion: {fileID: 114118877674220308}
---- !u!114 &114710135561696582
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1499244833156538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c52489d105baf4ce9b54380fbc38458b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsFading: 0
-  FadeValue: 0
 --- !u!212 &212007422551683962
 SpriteRenderer:
   m_ObjectHideFlags: 1

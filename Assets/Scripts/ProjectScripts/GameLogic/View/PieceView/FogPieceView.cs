@@ -25,13 +25,10 @@ public class FogPieceView : PieceBoardElementView
 		{
 			var fog = Instantiate(fogItem, fogItem.transform.parent);
 			var touch = Instantiate(touchItem, touchItem.transform.parent);
+			var pos = observer.GetPointInMask(piece.CachedPosition, position);
 			var sprite = fog.GetComponent<SpriteRenderer>();
-			var view = fog.GetComponent<BoardElementView>();
 
-			//sprite.sortingOrder = (position.X + size) - position.Y;
-			
-			view.Init(context);
-			view.SyncRendererLayers(observer.GetPointInMask(piece.CachedPosition, position));
+			sprite.sortingOrder = pos.X * Context.Context.BoardDef.Width - pos.Y + pos.Z * 100 + (pos.X + size) - pos.Y;
 			
 			fog.transform.localPosition = touch.transform.localPosition = piece.Context.BoardDef.GetSectorCenterWorldPosition(position.X, position.Y, 0);
 			

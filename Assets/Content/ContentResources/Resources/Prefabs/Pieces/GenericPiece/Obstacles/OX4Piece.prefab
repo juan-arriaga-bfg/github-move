@@ -133,9 +133,9 @@ MonoBehaviour:
   image: {fileID: 212749282012894596}
   skins:
   - Weight: 20
-    Name: lake_1
-    Offset: {x: -0.06, y: -0.03}
-    Scale: 1
+    Name: bush_1
+    Offset: {x: 0.07, y: 0.02}
+    Scale: 0.8
   - Weight: 10
     Name: house_1
     Offset: {x: 0, y: 0.18}
@@ -147,14 +147,6 @@ MonoBehaviour:
   - Weight: 20
     Name: stones_1
     Offset: {x: 0, y: 0.08}
-    Scale: 1.2
-  - Weight: 20
-    Name: bush_1
-    Offset: {x: 0.07, y: 0.02}
-    Scale: 0.8
-  - Weight: 5
-    Name: hill_1
-    Offset: {x: 0.02, y: 0.06}
     Scale: 1.2
 --- !u!114 &114607854138475680
 MonoBehaviour:
@@ -211,7 +203,7 @@ SpriteRenderer:
   m_Size: {x: 1.28, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!224 &224618157898909490
 RectTransform:

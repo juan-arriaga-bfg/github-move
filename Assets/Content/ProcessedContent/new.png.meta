@@ -74,6 +74,7 @@ TextureImporter:
     21300134: purple_round
     21300136: attack_back
     21300138: attack_back_arrow
+    21300140: quest_back
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -840,11 +841,25 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: green_button
+      name: quest_back
       rect:
         serializedVersion: 2
         x: 1077
         y: 273
+        width: 54
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 26, y: 36, z: 26, w: 25}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: green_button
+      rect:
+        serializedVersion: 2
+        x: 1078
+        y: 173
         width: 46
         height: 72
       alignment: 9
@@ -857,8 +872,8 @@ TextureImporter:
       name: collect_done
       rect:
         serializedVersion: 2
-        x: 1078
-        y: 173
+        x: 1093
+        y: 73
         width: 57
         height: 57
       alignment: 9
@@ -871,8 +886,8 @@ TextureImporter:
       name: orange_button
       rect:
         serializedVersion: 2
-        x: 1093
-        y: 73
+        x: 916
+        y: 705
         width: 38
         height: 74
       alignment: 9
@@ -885,8 +900,8 @@ TextureImporter:
       name: ramka_item_not_active_back_not_active
       rect:
         serializedVersion: 2
-        x: 1132
-        y: 73
+        x: 1135
+        y: 0
         width: 50
         height: 53
       alignment: 9
@@ -899,8 +914,8 @@ TextureImporter:
       name: back_active
       rect:
         serializedVersion: 2
-        x: 1135
-        y: 0
+        x: 933
+        y: 621
         width: 50
         height: 52
       alignment: 9
@@ -913,8 +928,8 @@ TextureImporter:
       name: blue_button
       rect:
         serializedVersion: 2
-        x: 916
-        y: 705
+        x: 957
+        y: 554
         width: 39
         height: 62
       alignment: 9
@@ -969,8 +984,8 @@ TextureImporter:
       name: ramka_item_active_back_not_active
       rect:
         serializedVersion: 2
-        x: 1078
-        y: 231
+        x: 1093
+        y: 131
         width: 44
         height: 41
       alignment: 9
@@ -983,8 +998,8 @@ TextureImporter:
       name: minibubble_arrow
       rect:
         serializedVersion: 2
-        x: 1123
-        y: 231
+        x: 1125
+        y: 173
         width: 46
         height: 39
       alignment: 9
@@ -997,8 +1012,8 @@ TextureImporter:
       name: Charger2
       rect:
         serializedVersion: 2
-        x: 916
-        y: 768
+        x: 1125
+        y: 213
         width: 39
         height: 46
       alignment: 9
@@ -1011,8 +1026,8 @@ TextureImporter:
       name: Charger3
       rect:
         serializedVersion: 2
-        x: 1132
-        y: 127
+        x: 1151
+        y: 54
         width: 42
         height: 42
       alignment: 9
@@ -1025,8 +1040,8 @@ TextureImporter:
       name: back_not_active
       rect:
         serializedVersion: 2
-        x: 1136
-        y: 170
+        x: 1138
+        y: 131
         width: 47
         height: 37
       alignment: 9
@@ -1036,11 +1051,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: Charger6
+      name: Charger1
       rect:
         serializedVersion: 2
-        x: 1175
-        y: 127
+        x: 1186
+        y: 0
         width: 39
         height: 39
       alignment: 9
@@ -1050,11 +1065,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: Charger1
+      name: Charger6
       rect:
         serializedVersion: 2
-        x: 1183
-        y: 53
+        x: 955
+        y: 674
         width: 39
         height: 39
       alignment: 9
@@ -1067,8 +1082,8 @@ TextureImporter:
       name: Charger4
       rect:
         serializedVersion: 2
-        x: 1186
-        y: 0
+        x: 984
+        y: 617
         width: 35
         height: 38
       alignment: 9
@@ -1095,8 +1110,8 @@ TextureImporter:
       name: progress
       rect:
         serializedVersion: 2
-        x: 1093
-        y: 148
+        x: 679
+        y: 502
         width: 32
         height: 24
       alignment: 9
@@ -1109,8 +1124,8 @@ TextureImporter:
       name: attack_back_arrow
       rect:
         serializedVersion: 2
-        x: 888
-        y: 705
+        x: 933
+        y: 674
         width: 21
         height: 21
       alignment: 9

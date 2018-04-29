@@ -138,7 +138,7 @@ public class SandboxGameController : MonoBehaviour
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(24, 1),
-            PieceTypeId = PieceType.O3.Id
+            PieceTypeId = PieceType.O1.Id
         });
         boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
@@ -148,7 +148,7 @@ public class SandboxGameController : MonoBehaviour
 		        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(24, 6),
-            PieceTypeId = PieceType.O2.Id
+            PieceTypeId = PieceType.O1.Id
         });
 		        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
