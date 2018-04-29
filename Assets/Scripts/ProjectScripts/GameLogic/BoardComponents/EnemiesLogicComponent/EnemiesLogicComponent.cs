@@ -9,10 +9,10 @@
 
 	private int index;
 	private Enemy enemy;
+
 	
 	public void OnRegisterEntity(ECSEntity entity)
 	{
-		
 	}
 
 	public void OnUnRegisterEntity(ECSEntity entity)
@@ -29,7 +29,7 @@
 			index = 0;
 		}
 		
-		EnemyView.Show(new BoardPosition(25, 10), enemy);
+		EnemyView.Show(enemy);
 	}
 
 	public bool IsPersistence

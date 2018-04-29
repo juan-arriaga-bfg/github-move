@@ -36,14 +36,8 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 			Context.CachedPosition.Y));
 		
 		if(def == null) return;
-
-		var max = new BoardPosition(Context.CachedPosition.RightAtDistance(def.Size.X - 1).X,
-			Context.CachedPosition.UpAtDistance(def.Size.Y - 1).Y);
 		
-		var minPos = Context.Context.BoardDef.GetSectorCenterWorldPosition(Context.CachedPosition.X, Context.CachedPosition.Y, 0);
-		var maxPos = Context.Context.BoardDef.GetSectorCenterWorldPosition(max.X, max.Y, 0);
-
-		CachedTransform.position = (maxPos + minPos) / 2 + Ofset;
+		CachedTransform.position = def.GetCenter(Context.Context) + Ofset;
 	}
 
 	public override void ResetViewOnDestroy()

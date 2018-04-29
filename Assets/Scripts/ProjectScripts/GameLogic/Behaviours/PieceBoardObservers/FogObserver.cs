@@ -21,6 +21,8 @@
         
         if(def == null) return;
         
+        GameDataService.Current.FogsManager.RemoveFog(key);
+        
         if(def.Pieces != null)
         {
             foreach (var piece in def.Pieces)

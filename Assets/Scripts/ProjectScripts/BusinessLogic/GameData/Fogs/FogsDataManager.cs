@@ -6,13 +6,13 @@ public class FogsDataManager : IDataLoader<FogsDataManager>
     public List<ItemWeight> DefaultPieceWeights { get; set; }
     public List<FogDef> Fogs { get; set; }
     
-    public Dictionary<BoardPosition, FogDef> fogs;
+    public Dictionary<BoardPosition, FogDef> FogPositions;
     
     public void LoadData(IDataMapper<FogsDataManager> dataMapper)
     {
         dataMapper.LoadData((data, error)=> 
         {
-            fogs = new Dictionary<BoardPosition, FogDef>();
+            FogPositions = new Dictionary<BoardPosition, FogDef>();
             
             if (string.IsNullOrEmpty(error))
             {
@@ -21,7 +21,7 @@ public class FogsDataManager : IDataLoader<FogsDataManager>
                 
                 foreach (var def in data.Fogs)
                 {
-                    fogs.Add(def.Position, def);
+                    FogPositions.Add(def.Position, def);
                 }
             }
             else
@@ -34,6 +34,13 @@ public class FogsDataManager : IDataLoader<FogsDataManager>
     public FogDef GetDef(BoardPosition key)
     {
         FogDef def;
-        return fogs.TryGetValue(key, out def) == false ? null : def;
+        return FogPositions.TryGetValue(key, out def) == false ? null : def;
+    }
+
+    public void RemoveFog(BoardPosition key)
+    {
+        if(FogPositions.ContainsKey(key) == false) return;
+
+        FogPositions.Remove(key);
     }
 }
