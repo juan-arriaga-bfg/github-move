@@ -9,10 +9,16 @@
     },
     "Rewards" :
     [
-      
-	        {
+      {
         "Currency" : "Coin1",
         "Amount" : 5
+      }
+    ],
+    "Conditions" :
+    [
+      {
+      "$type": "QuestConditionLevel, Assembly-CSharp",
+      "UserLevel" : 1
       }
     ]
   },
@@ -26,10 +32,20 @@
     },
     "Rewards" :
     [
-      
-	        {
+      {
         "Currency" : "Coin1",
         "Amount" : 4
+      }
+    ],
+    "Conditions" :
+    [
+      {
+        "$type": "QuestConditionLevel, Assembly-CSharp",
+        "UserLevel" : 1
+      },
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid" : 1
       }
     ]
   },
@@ -43,15 +59,23 @@
     },
     "Rewards" :
     [
-      
-	        {
+      {
         "Currency" : "Coin1",
         "Amount" : 5
       }
+    ],
+    "Conditions" :
+    [
+      {
+      "$type": "QuestConditionLevel, Assembly-CSharp",
+      "UserLevel" : 1
+      },
+      {
+      "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+      "OtherUid" : 1
+      }
     ]
   },
-  
-  	//A young family wants to build a house. They will need a lot of building materials.
   {
     "Uid" : 4,
     "Message" : "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks.",
@@ -69,6 +93,13 @@
       {
         "Currency" : "Coin2",
         "Amount" : 1
+      }
+    ],
+    "Conditions" :
+    [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid" : 3
       }
     ]
   },
@@ -90,6 +121,13 @@
         "Currency" : "Coin2",
         "Amount" : 1
       }
+    ],
+    "Conditions" :
+    [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid" : 4
+      }
     ]
   },
   {
@@ -109,6 +147,13 @@
       {
         "Currency" : "Coin2",
         "Amount" : 1
+      }
+    ],
+    "Conditions" :
+    [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid" : 5
       }
     ]
   },
@@ -130,6 +175,13 @@
         "Currency" : "Coin2",
         "Amount" : 2
       }
+    ],
+    "Conditions" :
+    [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid" : 6
+      }
     ]
   },
   {
@@ -149,6 +201,13 @@
       {
         "Currency" : "Coin2",
         "Amount" : 2
+      }
+    ],
+    "Conditions" :
+    [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid" : 7
       }
     ]
   }

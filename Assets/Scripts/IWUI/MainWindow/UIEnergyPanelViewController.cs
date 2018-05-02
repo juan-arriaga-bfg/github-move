@@ -44,5 +44,6 @@ public class UIEnergyPanelViewController : UIGenericResourcePanelViewController
         if(CurrencyHellper.IsCanPurchase(itemUid, manager.Price) == false) return;
 
         CurrencyHellper.Purchase(Currency.Level.Name, 1, itemUid, manager.Price);
+        GameDataService.Current.QuestsManager.UpdateActiveQuest();
     }
 }

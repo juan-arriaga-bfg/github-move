@@ -60,12 +60,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         if (quest.Check())
         {
             GameDataService.Current.QuestsManager.RemoveActiveQuest(quest);
-            GameDataService.Current.QuestsManager.AddActiveQuest();
             
-            var main = UIService.Get.GetShowedWindowByName(UIWindowType.MainWindow).CurrentView as UIMainWindowView;
-				
-            main.UpdateQuest();
-
             isComplete = true;
             return;
         }

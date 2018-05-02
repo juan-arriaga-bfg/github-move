@@ -6,4 +6,5 @@ public class QuestDef
     public string Message { get; set; }
     public List<CurrencyPair> Rewards { get; set; }
     public CurrencyPair Price { get; set; }
+    public List<IQuestCondition> Conditions { get; set; }
 }

@@ -55,4 +55,9 @@ public class Quest
     {
         return CurrentAmount >= TargetAmount;
     }
+
+    public bool IsActive()
+    {
+        return def.Conditions.Find(condition => condition.Check() == false) == null;
+    }
 }

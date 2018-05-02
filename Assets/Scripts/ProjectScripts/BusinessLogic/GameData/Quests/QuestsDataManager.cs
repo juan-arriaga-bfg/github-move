@@ -1,13 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestsDataManager : IDataLoader<List<QuestDef>>
 {
 	private List<QuestDef> quests;
-	public readonly List<Quest> ActiveQuests = new List<Quest>();
+	
+	public List<Quest> ActiveQuests = new List<Quest>();
 
-	private int current = -1;
-    
+	private List<Quest> stack = new List<Quest>();
+	private readonly Dictionary<int, bool> completed = new Dictionary<int, bool>();
+
+	public Action OnUpdateActiveQuests;
+	
 	public void LoadData(IDataMapper<List<QuestDef>> dataMapper)
 	{
 		dataMapper.LoadData((data, error)=> 
@@ -15,7 +20,7 @@ public class QuestsDataManager : IDataLoader<List<QuestDef>>
 			if (string.IsNullOrEmpty(error))
 			{
 				quests = data;
-				AddActiveQuest();
+				UpdateActiveQuest();
 			}
 			else
 			{
@@ -23,24 +28,35 @@ public class QuestsDataManager : IDataLoader<List<QuestDef>>
 			}
 		});
 	}
-
-	public int GetNextIndex()
+	
+	public void UpdateActiveQuest()
 	{
-		current++;
-
-		if (current == quests.Count)
+		if (stack.Count == 0)
 		{
-			current = 0;
+			foreach (var def in quests)
+			{
+				stack.Add(new Quest(def));
+			}
 		}
 		
-		return current;
-	}
+		ActiveQuests = new List<Quest>();
 
-	public void AddActiveQuest()
-	{
-		var index = GetNextIndex();
+		for (var i = stack.Count - 1; i >= 0; i--)
+		{
+			var quest = stack[i];
+			
+			if (IsCompleted(quest.Def.Uid))
+			{
+				stack.RemoveAt(i);
+				continue;
+			}
+			
+			if(quest.IsActive() == false) continue;
+			
+			ActiveQuests.Add(quest);
+		}
 		
-		ActiveQuests.Add(new Quest(quests[index]));
+		if (OnUpdateActiveQuests != null) OnUpdateActiveQuests();
 	}
 
 	public bool RemoveActiveQuest(Quest quest)
@@ -50,9 +66,16 @@ public class QuestsDataManager : IDataLoader<List<QuestDef>>
 			if(ActiveQuests[i] != quest) continue;
             
 			ActiveQuests.RemoveAt(i);
+			completed.Add(quest.Def.Uid, true);
+			UpdateActiveQuest();
 			return true;
 		}
         
 		return false;
+	}
+
+	public bool IsCompleted(int uid)
+	{
+		return completed.ContainsKey(uid);
 	}
 }
