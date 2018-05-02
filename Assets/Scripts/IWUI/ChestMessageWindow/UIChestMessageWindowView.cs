@@ -12,7 +12,6 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
     [SerializeField] private NSText timerLabel;
     
     [SerializeField] private GameObject btnSlow;
-    [SerializeField] private GameObject btnStop;
     [SerializeField] private GameObject timer;
     [SerializeField] private Image item;
 
@@ -39,7 +38,6 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         chanceLabel.Text = windowModel.ChanceText;
         
         btnSlow.SetActive(windowModel.IsShowSlowButton);
-        btnStop.SetActive(windowModel.IsCurrentActive);
         timer.SetActive(windowModel.IsCurrentActive);
 
         var sprites = windowModel.Icons();

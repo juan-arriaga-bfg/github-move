@@ -26,10 +26,10 @@ public class UIChestMessageWindowModel : IWWindowModel
                         : "Another chest is unlocking. Do you want to unlock this chest immediately?";
                 case ChestState.InProgress:
                     return IsCurrentActive
-                        ? "Chest unlocks now. Do you want to unlock this chest immediately?"
+                        ? "Chest is unlocking. Do you want to unlock chest immediately?"
                         : "This chest is unlocked. Do you want to unlock this chest immediately?";
             }
-
+            
             return "Error!";
         }
     }
@@ -46,7 +46,7 @@ public class UIChestMessageWindowModel : IWWindowModel
     
     public string StopButtonText
     {
-        get { return "Stop unlock"; }
+        get { return "Cancel"; }
     }
     
     public string ChanceText
