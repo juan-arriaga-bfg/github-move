@@ -23,6 +23,12 @@ public class ChestPieceView : PieceBoardElementView
         UpdateView();
         chestComponent.Timer.OnComplete += UpdateView;
         chestComponent.Timer.OnExecute += UpdateProgress;
+        
+        var hint = Context.Context.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
+        
+        if(hint == null) return;
+        
+        hint.Step(HintType.CloseChest);
     }
     
     public override void UpdateView()
@@ -46,6 +52,12 @@ public class ChestPieceView : PieceBoardElementView
         {
             GameDataService.Current.ChestsManager.ActiveChest = null;
         }
+
+        var hint = Context.Context.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
+        
+        if(hint == null) return;
+        
+        hint.Step(HintType.OpenChest);
     }
 
     private void UpdateProgress()

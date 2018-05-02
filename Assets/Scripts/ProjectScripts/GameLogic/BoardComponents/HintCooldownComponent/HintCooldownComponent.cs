@@ -1,6 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+public enum HintType
+{
+	OpenChest,
+	CloseChest,
+	Obstacle
+}
+
 public class HintCooldownComponent : ECSEntity
 {
 	private const int MinDelay = 30;
@@ -21,11 +28,14 @@ public class HintCooldownComponent : ECSEntity
 	{
 		context = entity as BoardController;
 		RegisterComponent(timer);
-		Step();
+		
+		Step(HintType.Obstacle);
 	}
-	
-	private void Step()
+
+	public void Step(HintType type)
 	{
+		if(type != HintType.OpenChest && timer.IsStarted) return;
+		
 		timer.Delay = Random.Range(MinDelay, MaxDelay);
 		timer.OnComplete = Hint;
 		timer.Start();
@@ -33,8 +43,6 @@ public class HintCooldownComponent : ECSEntity
 	
 	private void Hint()
 	{
-		Step();
-		
 		if(UIService.Get.ShowedWindows.Count > 2) return;
 		
 		var open = new List<BoardPosition>();
@@ -68,6 +76,7 @@ public class HintCooldownComponent : ECSEntity
 		{
 			open.Shuffle();
 			HintArrowView.Show(open[0], 0, -0.5f);
+			Step(HintType.OpenChest);
 			return;
 		}
 

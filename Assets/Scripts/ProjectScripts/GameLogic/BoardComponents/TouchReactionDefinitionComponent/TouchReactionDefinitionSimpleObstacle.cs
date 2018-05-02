@@ -36,6 +36,13 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
         Price = GameDataService.Current.SimpleObstaclesManager.PriceForPiece(piece, current);
         
         if (OnClick != null) OnClick();
+        
+        var hint = piece.Context.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
+        
+        if(hint == null) return true;
+        
+        hint.Step(HintType.Obstacle);
+        
         return true;
     }
     

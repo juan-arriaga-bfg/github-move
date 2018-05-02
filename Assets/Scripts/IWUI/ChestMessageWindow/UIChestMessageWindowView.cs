@@ -70,9 +70,9 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
 
     private void Update()
     {
-        if(timer.activeSelf == false) return;
-        
         var windowModel = Model as UIChestMessageWindowModel;
+        
+        if(timer.activeSelf == false || windowModel.Chest == null) return;
         
         timerLabel.Text = windowModel.Chest.GetTimeLeftText();
         
