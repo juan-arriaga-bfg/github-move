@@ -51,4 +51,9 @@ public class StorageComponent : IECSComponent, ITimerComponent
         
         return true;
     }
+
+    public bool IsShow
+    {
+        get { return Filling / (float) Capacity > 0.2f; }
+    }
 }

@@ -17,6 +17,8 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
 
     public override bool Make(BoardPosition position, Piece piece)
     {
+        if (StorageClick(position, piece)) return true;
+        
         if (OnClick == null) return false;
         
         OnClick();
@@ -37,5 +39,20 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
         }
         
         return null;
+    }
+
+    private bool StorageClick(BoardPosition position, Piece piece)
+    {
+        var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
+
+        if (storage == null) return false;
+
+        var definition = GetDefinition<TouchReactionDefinitionSpawnInStorage>();
+        
+        if (definition == null || storage.IsShow == false) return false;
+
+        definition.Make(position, piece);
+        
+        return true;
     }
 }

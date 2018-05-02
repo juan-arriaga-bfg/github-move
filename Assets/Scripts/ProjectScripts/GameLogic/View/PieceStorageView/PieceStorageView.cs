@@ -43,7 +43,7 @@ public class PieceStorageView : UIBoardView
     private void UpdateView()
     {
         if (storage == null) return;
-        Change(storage.Filling / (float) storage.Capacity > 0.2);
+        Change(storage.IsShow);
         UpdateAnimation(storage.Filling != storage.Capacity);
     }
     
