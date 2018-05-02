@@ -923,8 +923,8 @@
         "Amount": 1
       },
       {
-        "Currency": "D4",
-        "Amount": 1
+        "Currency": "C3",
+        "Amount": 2
       }
     ]
   ,
@@ -936,13 +936,17 @@
       },
       {
         "Currency": "Crystals",
-        "Amount": 15
+        "Amount": 5
+      },
+	        {
+        "Currency": "Coin1",
+        "Amount": 2
       }
     ]
   },
   {
     "Uid": "Castle3",
-    "Delay": 1200,
+    "Delay": 1500,
     "SpawnPiece": "Chest3",
     "SpawnAmount": 1,
     "SpawnCapacity": 1,
@@ -953,8 +957,8 @@
         "Amount": 1
       },
       {
-        "Currency": "B4",
-        "Amount": 1
+        "Currency": "B3",
+        "Amount": 3
       }
     ]
   ,
@@ -962,11 +966,11 @@
     [
       {
         "Currency": "Energy",
-        "Amount": 1500
+        "Amount": 1800
       },
       {
         "Currency": "Crystals",
-        "Amount": 25
+        "Amount": 10
       }
     ]
   },
@@ -979,12 +983,12 @@
     "UpgradePrices":
     [
       {
-        "Currency": "E4",
+        "Currency": "D4",
         "Amount": 1
       },
       {
-        "Currency": "C3",
-        "Amount": 3
+        "Currency": "C4",
+        "Amount": 1
       }
     ]
   ,
@@ -992,11 +996,11 @@
     [
       {
         "Currency": "Energy",
-        "Amount": 1500
+        "Amount": 2700
       },
       {
         "Currency": "Crystals",
-        "Amount": 35
+        "Amount": 15
       }
     ]
   },
@@ -1022,11 +1026,11 @@
     [
       {
         "Currency": "Energy",
-        "Amount": 2500
+        "Amount": 3600
       },
       {
         "Currency": "Crystals",
-        "Amount": 45
+        "Amount": 25
       }
     ]
   },
@@ -1039,7 +1043,7 @@
     "UpgradePrices":
     [
       {
-        "Currency": "B5",
+        "Currency": "C5",
         "Amount": 2
       },
       {
@@ -1056,7 +1060,7 @@
       },
       {
         "Currency": "Crystals",
-        "Amount": 60
+        "Amount": 40
       }
     ]
   },
@@ -1086,7 +1090,7 @@
       },
       {
         "Currency": "Crystals",
-        "Amount": 100
+        "Amount": 60
       }
     ]
   },
@@ -1116,7 +1120,7 @@
       },
       {
         "Currency": "Crystals",
-        "Amount": 150
+        "Amount": 100
       }
     ]
   },
@@ -1145,7 +1149,7 @@
       },
       {
         "Currency": "Crystals",
-        "Amount": 250
+        "Amount": 150
       }
     ]
   },
