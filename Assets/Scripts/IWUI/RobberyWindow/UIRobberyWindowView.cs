@@ -81,6 +81,8 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
         
         DOTween.Kill(line);
         
+        if(windowModel.Enemy == null) return;
+        
         var max = windowModel.Enemy.IsComplete ? 530 : 455;
         var value = Mathf.Clamp(max * windowModel.Enemy.Progress, 0, max);
         DOTween.To(() => line.sizeDelta.x, (v) => { line.sizeDelta = new Vector2(v, line.sizeDelta.y); }, value, 0.5f).SetId(line);
@@ -102,16 +104,16 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
     {
         DOTween.Kill(round);
         
+        var windowModel = Model as UIRobberyWindowModel;
+        
+        windowModel.Enemy = null;
+        
         if(isClaimReward == false) return;
 
         isClaimReward = false;
         
-        var windowModel = Model as UIRobberyWindowModel;
-        
         windowModel.View.SpawnReward();
         
-        windowModel.Enemy = null;
-
         foreach (var item in items)
         {
             if(item.gameObject == dot || item == mainChest) continue;

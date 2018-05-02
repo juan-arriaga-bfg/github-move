@@ -8,6 +8,7 @@ public class UICharactersItem : MonoBehaviour
     [SerializeField] private NSText nameLabel;
     [SerializeField] private NSText powerLabel;
     [SerializeField] private NSText buttonLabel;
+    [SerializeField] private NSText timerLabel;
     
     [SerializeField] private GameObject back;
     
@@ -65,7 +66,22 @@ public class UICharactersItem : MonoBehaviour
             if (characters != null) (characters.CurrentView as UICharactersWindowView).UpdateDecoration();
         });
     }
-    
+
+    private void Update()
+    {
+        if(Hero == null || timerLabel.gameObject.activeInHierarchy == false) return;
+        
+        timerLabel.Text = string.Format("<mspace=2.5em>Zzz\n{0}</mspace>", Hero.GetSlepTime());
+        
+        if(Hero.IsSleep) return;
+        
+        var robbery = UIService.Get.GetShowedWindowByName(UIWindowType.RobberyWindow);
+        if (robbery != null) (robbery.CurrentView as UIRobberyWindowView).Decoration();
+            
+        var characters = UIService.Get.GetShowedWindowByName(UIWindowType.CharactersWindow);
+        if (characters != null) (characters.CurrentView as UICharactersWindowView).UpdateDecoration();
+    }
+
     public void OnClickSend()
     {
         if(Hero == null) return;

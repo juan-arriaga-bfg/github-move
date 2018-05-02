@@ -39,6 +39,7 @@ public class UICharactersWindowView : IWUIWindowView
             if (isOpen)
             {
                 body.DOAnchorPosY(-465, 0f).SetId(body);
+                UpdateDecoration();
             }
             else
             {

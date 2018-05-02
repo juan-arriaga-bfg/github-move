@@ -7,6 +7,7 @@ public class Hero
 {
     private HeroDef def;
     private DateTime? sleepTime;
+    private DateTime? completeTime;
 
     public HeroDef Def
     {
@@ -136,6 +137,15 @@ public class Hero
     public void Sleep()
     {
         sleepTime = DateTime.Now;
+        completeTime = DateTime.Now.AddSeconds(def.Cooldown);
+    }
+
+    public string GetSlepTime()
+    {
+        if (completeTime == null) return "00:00";
+        
+        var time = completeTime.Value - DateTime.Now;
+        return string.Format("{0:00}:{1:00}", time.Minutes, time.Seconds);
     }
     
     public int GetAbilityValue(AbilityType ability)
