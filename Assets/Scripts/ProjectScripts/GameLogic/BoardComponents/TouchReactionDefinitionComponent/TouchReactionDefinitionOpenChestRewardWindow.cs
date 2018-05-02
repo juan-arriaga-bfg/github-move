@@ -22,6 +22,7 @@ public class TouchReactionDefinitionOpenChestRewardWindow : TouchReactionDefinit
 				model.Chest = chestComponent.Chest;
 				model.OnStart = () => Start(piece);
 				model.OnBoost = () => Boost(piece);
+				model.OnStop = () => Stop(piece);
 				
 				UIService.Get.ShowWindow(UIWindowType.ChestMessage);
 				
@@ -53,6 +54,14 @@ public class TouchReactionDefinitionOpenChestRewardWindow : TouchReactionDefinit
 			GameDataService.Current.ChestsManager.ActiveChest = null;
 		}
 		
+		piece.ActorView.UpdateView();
+	}
+	
+	private void Stop(Piece piece)
+	{
+		chestComponent.Timer.Stop();
+		chestComponent.Chest.State = ChestState.Close;
+		GameDataService.Current.ChestsManager.ActiveChest = null;
 		piece.ActorView.UpdateView();
 	}
 

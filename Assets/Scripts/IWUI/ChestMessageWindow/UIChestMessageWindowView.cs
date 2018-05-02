@@ -6,9 +6,14 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
 {
     [SerializeField] private NSText btnFastLabel;
     [SerializeField] private NSText btnSlowLabel;
+    [SerializeField] private NSText btnStopLabel;
+    
     [SerializeField] private NSText chanceLabel;
+    [SerializeField] private NSText timerLabel;
     
     [SerializeField] private GameObject btnSlow;
+    [SerializeField] private GameObject btnStop;
+    [SerializeField] private GameObject timer;
     [SerializeField] private Image item;
 
     private List<Image> icons = new List<Image>();
@@ -29,9 +34,13 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         
         btnFastLabel.Text = windowModel.FastButtonText;
         btnSlowLabel.Text = windowModel.SlowButtonText;
+        btnStopLabel.Text = windowModel.StopButtonText;
+        
         chanceLabel.Text = windowModel.ChanceText;
         
         btnSlow.SetActive(windowModel.IsShowSlowButton);
+        btnStop.SetActive(windowModel.IsCurrentActive);
+        timer.SetActive(windowModel.IsCurrentActive);
 
         var sprites = windowModel.Icons();
         
@@ -59,6 +68,19 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         if (isSlow && windowModel.OnStart != null) windowModel.OnStart();
     }
 
+    private void Update()
+    {
+        if(timer.activeSelf == false) return;
+        
+        var windowModel = Model as UIChestMessageWindowModel;
+        
+        timerLabel.Text = windowModel.Chest.GetTimeLeftText();
+        
+        if(windowModel.Chest.State != ChestState.Open) return;
+        
+        Controller.CloseCurrentWindow();
+    }
+
     public override void OnViewCloseCompleted()
     {
         foreach (var image in icons)
@@ -84,6 +106,15 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
     public void SlowClick()
     {
         isSlow = true;
+        Controller.CloseCurrentWindow();
+    }
+
+    public void StopClick()
+    {
+        var windowModel = Model as UIChestMessageWindowModel;
+
+        if (windowModel.OnStop != null) windowModel.OnStop();
+        
         Controller.CloseCurrentWindow();
     }
 

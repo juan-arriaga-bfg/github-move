@@ -58,12 +58,17 @@ public class Chest
         }
         set
         {
-            if (value == ChestState.InProgress)
+            switch (value)
             {
-                StartTime = DateTime.Now;
-                completeTime = DateTime.Now.AddSeconds(def.Time);
+                case ChestState.Close:
+                    StartTime = null;
+                    break;
+                case ChestState.InProgress:
+                    StartTime = DateTime.Now;
+                    completeTime = DateTime.Now.AddSeconds(def.Time);
+                    break;
             }
-            
+
             chestState = value;
         }
     }
@@ -124,6 +129,11 @@ public class Chest
         {
             str += string.Format("{0}{1}m", string.IsNullOrEmpty(str) ? "" : " ", time.Minutes);
         }
+
+        if (time.Seconds > 0)
+        {
+            str += string.Format("{0}{1}s", string.IsNullOrEmpty(str) ? "" : " ", time.Seconds);
+        }
         
         return str;
     }
@@ -135,6 +145,8 @@ public class Chest
 
     private string TimeFormat(TimeSpan time)
     {
-        return (int) time.TotalHours > 0 ? string.Format("{0:00}:{1:00}:{2:00}", time.Hours, time.Minutes, time.Seconds) : string.Format("{0:00}:{1:00}", time.Minutes, time.Seconds);
+        if ((int) time.TotalSeconds < 0) return "00:00";
+        
+        return (int) time.TotalHours > 0 ? string.Format("<mspace=2.75em>{0:00}:{1:00}:{2:00}</mspace>", time.Hours, time.Minutes, time.Seconds) : string.Format("<mspace=2.75em>{0:00}:{1:00}</mspace>", time.Minutes, time.Seconds);
     }
 }

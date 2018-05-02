@@ -7,10 +7,11 @@ public class UIChestMessageWindowModel : IWWindowModel
 
     public Action OnStart;
     public Action OnBoost;
+    public Action OnStop;
     
     public string Title
     {
-        get { return "Unlock chest!"; }
+        get { return IsCurrentActive ? "Chest unlocking!" : "Unlock chest!"; }
     }
     
     public string Message
@@ -24,7 +25,9 @@ public class UIChestMessageWindowModel : IWWindowModel
                         ? "Do you want to unlock this chest?"
                         : "Another chest is unlocking. Do you want to unlock this chest immediately?";
                 case ChestState.InProgress:
-                    return "This chest is unlocked. Do you want to unlock this chest immediately?";
+                    return IsCurrentActive
+                        ? "Chest unlocks now. Do you want to unlock this chest immediately?"
+                        : "This chest is unlocked. Do you want to unlock this chest immediately?";
             }
 
             return "Error!";
@@ -41,6 +44,11 @@ public class UIChestMessageWindowModel : IWWindowModel
         get { return string.Format("Unlock in {0}", Chest.GetTimeText()); }
     }
     
+    public string StopButtonText
+    {
+        get { return "Stop unlock"; }
+    }
+    
     public string ChanceText
     {
         get { return "May contain:"; }
@@ -49,6 +57,11 @@ public class UIChestMessageWindowModel : IWWindowModel
     public bool IsShowSlowButton
     {
         get { return GameDataService.Current.ChestsManager.ActiveChest == null; }
+    }
+
+    public bool IsCurrentActive
+    {
+        get { return GameDataService.Current.ChestsManager.ActiveChest == Chest; }
     }
 
     public List<string> Icons()
