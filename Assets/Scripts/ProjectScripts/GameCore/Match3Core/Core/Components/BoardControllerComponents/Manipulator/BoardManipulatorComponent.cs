@@ -225,10 +225,10 @@ public class BoardManipulatorComponent : ECSEntity,
                     BoardPosition fromPosition = context.RendererContext.GetBoardPosition(cachedViewForDrag);
                     BoardPosition targetPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
     
-                    context.ActionExecutor.AddAction(new MoveFromToAndCheckCoverMatchAction
+                    context.ActionExecutor.AddAction(new DragAndCheckMatchAction
                     {
                         From = fromPosition,
-                        To = targetPosition
+                        To = new BoardPosition(targetPosition.X, targetPosition.Y, fromPosition.Z)
                     });
                 }
                 
