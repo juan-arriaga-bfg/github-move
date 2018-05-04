@@ -36,7 +36,7 @@ public class UIChestMessageWindowModel : IWWindowModel
     
     public string FastButtonText
     {
-        get { return string.Format("Unlock Now\n{0}<sprite name={1}>", Chest.Def.Price.Amount, Chest.Def.Price.Currency); }
+        get { return string.Format("Unlock Now\n{0}<sprite name={1}>", Chest.Price.Amount, Chest.Price.Currency); }
     }
     
     public string SlowButtonText

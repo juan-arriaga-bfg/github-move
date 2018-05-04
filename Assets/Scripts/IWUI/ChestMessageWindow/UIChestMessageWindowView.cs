@@ -73,6 +73,7 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         if(timer.activeSelf == false || windowModel.Chest == null) return;
         
         timerLabel.Text = windowModel.Chest.GetTimeLeftText();
+        btnFastLabel.Text = windowModel.FastButtonText;
         
         if(windowModel.Chest.State != ChestState.Open) return;
         
@@ -93,7 +94,7 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
     {
         var windowModel = Model as UIChestMessageWindowModel;
 
-        CurrencyHellper.Purchase(windowModel.Chest.Currency, 1, windowModel.Chest.Def.Price, success =>
+        CurrencyHellper.Purchase(windowModel.Chest.Currency, 1, windowModel.Chest.Price, success =>
         {
             if (!success) return;
             isFast = true;

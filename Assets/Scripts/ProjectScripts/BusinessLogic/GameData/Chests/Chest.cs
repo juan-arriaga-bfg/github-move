@@ -19,10 +19,13 @@ public class Chest
     
     public DateTime? StartTime { get; set; }
     private DateTime completeTime;
+
+    private CurrencyPair price;
     
     public Chest(ChestDef def)
     {
         this.def = def;
+        price = new CurrencyPair {Currency = this.def.Price.Currency, Amount = this.def.Price.Amount};
     }
     
     public ChestDef Def
@@ -33,6 +36,16 @@ public class Chest
     public string Currency
     {
         get { return def.Uid; }
+    }
+
+    public CurrencyPair Price
+    {
+        get
+        {
+            price.Amount = Mathf.Clamp((int) (def.Price.Amount * GetTimerProgress()), 1, def.Price.Amount);
+            
+            return price;
+        }
     }
 
     public int Piece
@@ -113,6 +126,11 @@ public class Chest
         }
         
         return result;
+    }
+
+    public float GetTimerProgress()
+    {
+        return StartTime == null ? 1 : Mathf.Clamp01((int)(completeTime - DateTime.Now).TotalSeconds/(float)def.Time);
     }
     
     public string GetTimeText()
