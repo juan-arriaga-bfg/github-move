@@ -1,12 +1,36 @@
-﻿public class FogObserver : MulticellularPieceBoardObserver
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 {
+    private HeroAbility condition;
+    private StorageItem storageItem;
+    private ViewDefinitionComponent viewDef;
+    
+    public Camera RenderCamera
+    {
+        get { return thisContext.Context.BoardDef.ViewCamera; }
+    }
+    
+    public List<ResourceCarrier> Carriers { get; private set; }
+    
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
         var key = new BoardPosition(position.X, position.Y);
         var def = GameDataService.Current.FogsManager.GetDef(key);
         
         if(def == null) return;
+        
+        viewDef = context.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
 
+        if (viewDef != null)
+        {
+            condition = def.Condition;
+            storageItem = ProfileService.Current.GetStorageItem(GetResourceId());
+        
+            ResourcesViewManager.Instance.RegisterView(this);
+        }
+        
         Mask = BoardPosition.GetRect(BoardPosition.Zero(), def.Size.X, def.Size.Y);
         
         base.OnAddToBoard(position, context);
@@ -15,6 +39,8 @@
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
         base.OnRemoveFromBoard(position, context);
+        
+        ResourcesViewManager.Instance.UnRegisterView(this);
         
         var key = new BoardPosition(position.X, position.Y);
         var def = GameDataService.Current.FogsManager.GetDef(key);
@@ -55,5 +81,36 @@
                 PieceTypeId = piece
             });
         }
+    }
+    
+    public void RegisterCarrier(ResourceCarrier carrier)
+    {
+    }
+    
+    public void UnRegisterCarrier(ResourceCarrier carrier)
+    {
+    }
+    
+    public void UpdateResource(int offset)
+    {
+        if(storageItem.Amount < condition.Value) return;
+        
+        var view = viewDef.AddView(ViewType.FogState);
+
+        view.Priority = -1;
+        view.Change(true);
+    }
+    
+    public string GetResourceId()
+    {
+        return condition.Ability.ToString();
+    }
+    
+    public Vector2 GetScreenPosition()
+    {
+        return thisContext.Context.BoardDef.GetSectorCenterWorldPosition(
+            thisContext.CachedPosition.X,
+            thisContext.CachedPosition.Y,
+            thisContext.CachedPosition.Z);
     }
 }

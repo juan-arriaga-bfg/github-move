@@ -6,22 +6,26 @@ public class AddResourceView : BoardElementView
 	[SerializeField] private SpriteRenderer icon;
 	[SerializeField] private NSText amountLabel;
 
+	private const float duration = 1f;
+
 	private void Show(CurrencyPair resource)
 	{
+		var color = resource.Amount < 0 ? "EE4444" : "FFFFFF";
+		var value = string.Format("{0}{1}", resource.Amount < 0 ? "" : "+", resource.Amount);
+		
+		icon.gameObject.SetActive(resource.Currency != Currency.Energy.Name);
+		
 		if (resource.Currency != Currency.Energy.Name)
 		{
 			icon.sprite = IconService.Current.GetSpriteById(string.Format("icon_gameboard_{0}" , resource.Currency));
-			
-			icon.gameObject.SetActive(true);
-			amountLabel.Text = string.Format("<color=#FFFFFF>+{0}</color>", resource.Amount);
+			icon.transform.localScale = Vector3.one * (1.5f - icon.sprite.rect.height / 106f);
 		}
 		else
 		{
-			icon.gameObject.SetActive(false);
-			amountLabel.Text = string.Format("<color=#FFFFFF>+{0} EXP</color>", resource.Amount);
+			value += " EXP";
 		}
 		
-		float duration = 1f;
+		amountLabel.Text = string.Format("<color=#{0}>{1}</color>", color, value);
 		
 		DOTween.Kill(animationUid);
 		

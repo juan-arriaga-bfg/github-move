@@ -14,15 +14,15 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
     private int shownViewPriority;
     private BoardPosition Position;
-    private List<UIBoardView> views = new List<UIBoardView>();
+    private List<KeyValuePair<ViewType, UIBoardView>> views = new List<KeyValuePair<ViewType, UIBoardView>>();
 
-    private Piece context;
+    private Piece thisContext;
     
     private const int Layer = 3;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
-        context = entity as Piece;
+        thisContext = entity as Piece;
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)
@@ -33,26 +33,22 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     {
         if(context == null || ViewIds == null) return;
 
-        var pos = Position = position;
+        Position = position;
         
-        for (var i = 0; i < ViewIds.Count; i++)
+        foreach (var id in ViewIds)
         {
-            pos.Z = position.Z + (i + Layer + 1);
-            
-            var element = context.Context.RendererContext.CreateElementAt((int)ViewIds[i], pos) as UIBoardView;
-            element.Init(context);
-            views.Add(element);
+            AddView(id);
         }
     }
     
     public void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)
     {
-        if(context == null || ViewIds == null) return;
+        if(context == null) return;
         
         var f = from;
         var t = Position = to;
         
-        for (var i = 0; i < ViewIds.Count; i++)
+        for (var i = 0; i < views.Count; i++)
         {
             f.Z = t.Z = from.Z + (i + Layer + 1);
             
@@ -62,15 +58,11 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
-        if(context == null || ViewIds == null) return;
+        if(context == null) return;
         
-        var pos = position;
-        
-        for (var i = 0; i < ViewIds.Count; i++)
+        foreach (var pair in views)
         {
-            pos.Z = position.Z + (i + Layer + 1);
-            var element = context.Context.RendererContext.RemoveElementAt(pos) as UIBoardView;
-            views.Remove(element);
+            RemoveView(pair.Key);
         }
     }
 
@@ -82,9 +74,9 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
         foreach (var view in views)
         {
-            if (view.Priority >= shownViewPriority || !view.IsShow) continue;
+            if (view.Value.Priority >= shownViewPriority || !view.Value.IsShow) continue;
             
-            view.UpdateVisibility(false);
+            view.Value.UpdateVisibility(false);
         }
         
         return true;
@@ -92,27 +84,60 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     
     public void HideView()
     {
-        var shown = views.FindAll(view => view.IsShow);
+        ///TODO: нахера двойная проверка на IsShow?
+        
+        var shown = views.FindAll(pair => pair.Value.IsShow);
         
         if(shown.Count == 0) return;
         
-        shown.Sort((a, b) => -a.Priority.CompareTo(b.Priority));
-        shownViewPriority = shown[0].Priority;
+        shown.Sort((a, b) => -a.Value.Priority.CompareTo(b.Value.Priority));
+        shownViewPriority = shown[0].Value.Priority;
         
         foreach (var view in shown)
         {
-            if(view.Priority != shownViewPriority || view.IsShow == false) continue;
-            view.UpdateVisibility(true);
+            if(view.Value.Priority != shownViewPriority || view.Value.IsShow == false) continue;
+            view.Value.UpdateVisibility(true);
         }
+    }
+
+    public UIBoardView AddView(ViewType id)
+    {
+        var index = views.FindIndex(pair => pair.Key == id);
+        
+        if(index != -1) return views[index].Value;
+        
+        var pos = Position;
+        pos.Z += views.Count + Layer + 1;
+            
+        var element = thisContext.Context.RendererContext.CreateElementAt((int)id, pos) as UIBoardView;
+        element.Init(thisContext);
+        
+        views.Add(new KeyValuePair<ViewType, UIBoardView>(id, element));
+        views.Sort((a, b) => -a.Value.Priority.CompareTo(b.Value.Priority));
+        
+        return element;
+    }
+
+    public void RemoveView(ViewType id)
+    {
+        var index = views.FindIndex(pair => pair.Key == id);
+        
+        if(index == -1) return;
+        
+        var pos = Position;
+        
+        pos.Z += index + Layer + 1;
+        thisContext.Context.RendererContext.RemoveElementAt(pos);
+        views.RemoveAt(index);
     }
 
     public Vector3 GetViewPositionBottom(int size)
     {
-        return context.Context.BoardDef.GetSectorWorldPosition(Position.X + size - 1, Position.Y + (size == 0 ? 2 : 1), Position.Z);
+        return thisContext.Context.BoardDef.GetSectorWorldPosition(Position.X + size - 1, Position.Y + (size == 0 ? 2 : 1), Position.Z);
     }
     
     public Vector3 GetViewPositionTop(int size)
     {
-        return context.Context.BoardDef.GetSectorWorldPosition(Position.X, Position.Y + size, Position.Z);
+        return thisContext.Context.BoardDef.GetSectorWorldPosition(Position.X, Position.Y + size, Position.Z);
     }
 }

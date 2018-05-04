@@ -18,7 +18,7 @@ public class GenericPieceBuilder : IPieceBuilder
         return piece;
     }
 
-    private ViewDefinitionComponent CreateViewComponent(Piece piece)
+    protected ViewDefinitionComponent CreateViewComponent(Piece piece)
     {
         var view = new ViewDefinitionComponent();
         

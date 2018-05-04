@@ -1,14 +1,12 @@
 ﻿public enum ViewType
 {
-    HitboxDamage = -1000,
-    AddResource = -1001,
-    HintArrow = -1002,
-    AddCards = -1003,
-    StorageState = -1004,
-    BoardTimer = -1005,
-    LevelLabel = -1006,
-    Menu = -1007,
-    SimpleObstacle = -1008,
-    FogState = -1009,
-    CastleUpgrade = -1010
+    AddResource = -1000,
+    HintArrow = -1001,
+    StorageState = -1002,
+    BoardTimer = -1003,
+    LevelLabel = -1004,
+    Menu = -1005,
+    SimpleObstacle = -1006,
+    FogState = -1007,
+    CastleUpgrade = -1008
 }

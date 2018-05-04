@@ -57,7 +57,7 @@ public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComp
             var position = piece.CachedPosition;
             
             current++;
-            HitboxDamageView.Show(position, 1);
+            AddResourceView.Show(position, new CurrencyPair{Currency = "Life", Amount = -1});
 
             if (current != Steps)
             {

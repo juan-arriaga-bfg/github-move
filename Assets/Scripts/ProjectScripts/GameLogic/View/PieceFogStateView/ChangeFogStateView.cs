@@ -1,5 +1,4 @@
-﻿using DG.Tweening;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ChangeFogStateView : UIBoardView, IBoardEventListener
 {
@@ -15,6 +14,7 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 	{
 		get { return new Vector3(0, 1.5f); }
 	}
+	
 	public override void Init(Piece piece)
 	{
 		base.Init(piece);
@@ -32,7 +32,7 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 
 	protected override void SetOfset()
 	{
-		var def = GameDataService.Current.FogsManager.GetDef(new BoardPosition(Context.CachedPosition.X,
+		def = GameDataService.Current.FogsManager.GetDef(new BoardPosition(Context.CachedPosition.X,
 			Context.CachedPosition.Y));
 		
 		if(def == null) return;
@@ -46,21 +46,14 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
         
 		Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceMenu);
 	}
-	
-	private void Update()
-	{
-		if (def == null)
-		{
-			var pos = new BoardPosition(Context.CachedPosition.X, Context.CachedPosition.Y);
-			def = GameDataService.Current.FogsManager.GetDef(pos);
-			
-			if (def == null) return;
-		}
 
-		var power = GameDataService.Current.HeroesManager.CurrentPower();
-		var isComplete = power >= def.Condition.Value;
+	public override void UpdateVisibility(bool isVisible)
+	{
+		base.UpdateVisibility(isVisible);
 		
-		Change(definition.IsOpen || isComplete);
+		if(IsShow == false) return;
+		
+		var power = GameDataService.Current.HeroesManager.CurrentPower();
 		
 		label.Text = string.Format("{0}/{1}", power, def.Condition.Value);
 

@@ -10,10 +10,13 @@ public class UIBoardView : BoardElementView
     protected int multiSize;
     
     public bool IsShow { get; set; }
-
+    
+    private int priority = 0;
+    
     public virtual int Priority
     {
-        get { return 0; }
+        get { return priority; }
+        set { priority = value; }
     }
 
     public virtual Vector3 Ofset
@@ -35,7 +38,7 @@ public class UIBoardView : BoardElementView
         CachedTransform.localPosition = controller.GetViewPositionBottom(multiSize) + Ofset;
     }
 
-    protected void Change(bool isShow)
+    public void Change(bool isShow)
     {
         if(controller == null) return;
         

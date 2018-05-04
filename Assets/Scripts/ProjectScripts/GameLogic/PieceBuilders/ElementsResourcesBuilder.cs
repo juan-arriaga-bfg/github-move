@@ -31,7 +31,6 @@ public class ElementsResourcesBuilder
         
         dict.Add(PieceType.King.Id, R.KingPiece);
         
-        dict.Add(PieceType.Quest.Id, R.QuestPiece);
         dict.Add(PieceType.Fog.Id, R.FogPiece);
         
         dict.Add(PieceType.A1.Id, R.A1Piece);
@@ -143,10 +142,8 @@ public class ElementsResourcesBuilder
     
     private Dictionary<int, string> AddView(Dictionary<int, string> dict)
     {
-        dict.Add((int)ViewType.HitboxDamage, R.HitboxDamageView);
         dict.Add((int)ViewType.AddResource, R.AddResourceView);
         dict.Add((int)ViewType.HintArrow, R.HintArrow);
-        dict.Add((int)ViewType.AddCards, R.AddCards);
         dict.Add((int)ViewType.StorageState, R.ChangeStorageStateView);
         dict.Add((int)ViewType.BoardTimer, R.BoardTimerView);
         dict.Add((int)ViewType.LevelLabel, R.PieceLevelView);

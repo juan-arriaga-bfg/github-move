@@ -3,6 +3,7 @@
 public class TouchReactionDefinitionFog : TouchReactionDefinitionComponent
 {
     private FogDef def;
+    private UIBoardView view;
 
     public bool IsOpen;
     
@@ -17,8 +18,17 @@ public class TouchReactionDefinitionFog : TouchReactionDefinitionComponent
 
             if (def == null) return false;
         }
+
+        if (view == null)
+        {
+            var viewDef = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
+            
+            if(viewDef == null) return false;
+            
+            view = viewDef.AddView(ViewType.FogState);
+        }
         
-        IsOpen = !IsOpen;
+        view.Change(!view.IsShow);
 
         if (GameDataService.Current.HeroesManager.CurrentPower() >= def.Condition.Value)
         {

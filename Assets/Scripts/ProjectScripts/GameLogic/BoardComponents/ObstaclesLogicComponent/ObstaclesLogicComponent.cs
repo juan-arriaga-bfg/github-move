@@ -55,14 +55,15 @@ public class ObstaclesLogicComponent : IECSComponent, IECSSystem
         var data = GameDataService.Current.FogsManager.Fogs;
         var positions = new List<BoardPosition>();
 
-        foreach (var fog in data)
+        for (var index = 0; index < 1; index++)
         {
+            var fog = data[index];
             var pos = fog.Position;
-            
+
             pos.Z = context.BoardDef.PieceLayer;
             positions.Add(pos);
         }
-        
+
         context.ActionExecutor.PerformAction(new FillBoardAction
         {
             Piece = PieceType.Fog.Id,

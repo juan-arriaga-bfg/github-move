@@ -106,7 +106,7 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
         
-        boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
+        /*boardController.ActionExecutor.PerformAction(new CreatePieceAtAction
         {
             At = new BoardPosition(24, 0),
             PieceTypeId = PieceType.King.Id
@@ -205,10 +205,18 @@ public class SandboxGameController : MonoBehaviour
         {
             At = new BoardPosition(25, 6),
             PieceTypeId = PieceType.A1.Id
-        });  
+        });  */
 
-        /*AddPieces(new BoardPosition(19, 10), PieceType.Chest1.Id, PieceType.Chest6.Id, boardController);
-        AddPieces(new BoardPosition(21, 10), PieceType.Coin1.Id, PieceType.Coin5.Id, boardController);*/
+        AddPieces(new BoardPosition(10, 10), PieceType.A1.Id, PieceType.A9.Id, boardController);
+        AddPieces(new BoardPosition(12, 10), PieceType.B1.Id, PieceType.B5.Id, boardController);
+        AddPieces(new BoardPosition(14, 10), PieceType.C1.Id, PieceType.C9.Id, boardController);
+        AddPieces(new BoardPosition(16, 10), PieceType.D1.Id, PieceType.D5.Id, boardController);
+        AddPieces(new BoardPosition(18, 10), PieceType.E1.Id, PieceType.E6.Id, boardController);
+        AddPieces(new BoardPosition(20, 10), PieceType.O1.Id, PieceType.O5.Id, boardController);
+        AddPieces(new BoardPosition(22, 10), PieceType.OX1.Id, PieceType.OX5.Id, boardController);
+        
+        AddPieces(new BoardPosition(24, 10), PieceType.Chest1.Id, PieceType.Chest6.Id, boardController);
+        AddPieces(new BoardPosition(26, 10), PieceType.Coin1.Id, PieceType.Coin5.Id, boardController);
         
         //register board
         BoardService.Current.RegisterBoard(boardController, 0);

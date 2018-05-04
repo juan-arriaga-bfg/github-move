@@ -59,7 +59,6 @@ public static partial class PieceType
         
         RegisterType(King);
         
-        RegisterType(Quest);
         RegisterType(Fog);
         
         RegisterType(Coin1);
@@ -177,8 +176,6 @@ public static partial class PieceType
     public static readonly PieceTypeDef Fog = new PieceTypeDef{Id = 801, Abbreviations = new List<string>{ "Fog" }};
     
     public static readonly PieceTypeDef King = new PieceTypeDef{Id = 901, Abbreviations = new List<string>{ "King" }};
-    
-    public static readonly PieceTypeDef Quest = new PieceTypeDef{Id = 1001, Abbreviations = new List<string>{ "Quest" }};
     
     public static readonly PieceTypeDef Coin1 = new PieceTypeDef{Id = 1100, Abbreviations = new List<string>{ "Coin1" }};
     public static readonly PieceTypeDef Coin2 = new PieceTypeDef{Id = 1101, Abbreviations = new List<string>{ "Coin2" }};

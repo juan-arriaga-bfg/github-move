@@ -2,15 +2,11 @@ public class R
 {
      public const string SampleCube = "SampleCube";
      public const string GenericPiece = "GenericPiece";
-     public const string HitboxView = "HitboxView";
      public const string ReadyArrowView = "ReadyArrowView";
-     public const string HitboxDamageView = "HitboxDamageView";
-     public const string ChangeObstacleStateView = "ChangeObstacleStateView";
      public const string AddResourceView = "AddResourceView";
      public const string ChangeStorageStateView = "ChangeStorageStateView";
      public const string BoardTimerView = "BoardTimerView";
      public const string HintArrow = "HintArrow";
-     public const string AddCards = "AddCards";
      public const string PieceLevelView = "PieceLevelView";
      public const string MenuView = "MenuView";
      public const string ChangeSimpleObstacleStateView = "ChangeSimpleObstacleStateView";
@@ -89,8 +85,6 @@ public class R
      public const string E5Piece = "E5Piece";
      public const string E6Piece = "E6Piece";
      public const string ChangeFogStateView = "ChangeFogStateView";
-     public const string UIHintArrow = "UIHintArrow";
-     public const string QuestPiece = "QuestPiece";
      public const string O1Piece = "O1Piece";
      public const string O2Piece = "O2Piece";
      public const string O3Piece = "O3Piece";

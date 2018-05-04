@@ -16,7 +16,6 @@ public class PieceBuildersBuilder
         dict = AddSheepfoldPiece(dict);
         
         dict = AddCastlePiece(dict);
-//        dict = AddTavernPiece(dict);
         dict = AddChestPiece(dict);
 
         return dict;
@@ -41,11 +40,6 @@ public class PieceBuildersBuilder
     {
         dict = AddSimplePiece<SimpleObstaclePieceBuilder>(PieceType.O1.Id, PieceType.O5.Id, dict);
         dict = AddSimplePiece<SimpleObstaclePieceBuilder>(PieceType.OX1.Id, PieceType.OX5.Id, dict);
-        
-//        dict.Add(PieceType.O3.Id, new GenericPieceBuilder());
-        
-        
-        dict.Add(PieceType.Quest.Id, new ObstaclePieceBuilder());
         
         dict.Add(PieceType.Fog.Id, new FogPieceBuilder());
         

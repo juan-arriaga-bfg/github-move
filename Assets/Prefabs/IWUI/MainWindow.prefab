@@ -57,7 +57,6 @@ GameObject:
   - component: {fileID: 224301009394176732}
   - component: {fileID: 114824055546702410}
   - component: {fileID: 114664704947251026}
-  - component: {fileID: 114567299806523412}
   - component: {fileID: 114215427106205600}
   m_Layer: 31
   m_Name: ResourcePanelCrystals
@@ -177,7 +176,6 @@ GameObject:
   - component: {fileID: 224296010694357314}
   - component: {fileID: 114198858953966554}
   - component: {fileID: 114328593715584918}
-  - component: {fileID: 114986087832968002}
   - component: {fileID: 114217802309735196}
   m_Layer: 31
   m_Name: ResourcePanelCoins
@@ -610,7 +608,6 @@ GameObject:
   - component: {fileID: 224775197428160528}
   - component: {fileID: 114064013835080410}
   - component: {fileID: 114619658046619492}
-  - component: {fileID: 114268589716350080}
   - component: {fileID: 114873186108468448}
   m_Layer: 31
   m_Name: ResourcePanelPower
@@ -1435,19 +1432,6 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &114268589716350080
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1922121713216934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
-  m_VerticalFit: 0
 --- !u!114 &114304185946876926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1971,19 +1955,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowSwitching: 1
   styleId: 0
---- !u!114 &114567299806523412
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1047742977560102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
-  m_VerticalFit: 0
 --- !u!114 &114584725121341314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2928,19 +2899,6 @@ MonoBehaviour:
   layers:
   - {fileID: 114138460340360344}
   windowName: MainWindow
---- !u!114 &114986087832968002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1198351112218162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
-  m_VerticalFit: 0
 --- !u!222 &222020425258273758
 CanvasRenderer:
   m_ObjectHideFlags: 1
