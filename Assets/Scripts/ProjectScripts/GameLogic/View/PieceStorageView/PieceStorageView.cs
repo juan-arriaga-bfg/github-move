@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PieceStorageView : UIBoardView
 {
-    [SerializeField] private SpriteRenderer icon;
+    [SerializeField] private Image icon;
 
     private StorageComponent storage;
     private Animator clip;

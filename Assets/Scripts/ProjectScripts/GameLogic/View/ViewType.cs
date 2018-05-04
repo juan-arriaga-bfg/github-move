@@ -1,5 +1,6 @@
 ﻿public enum ViewType
 {
+    None = 0,
     AddResource = -1000,
     HintArrow = -1001,
     StorageState = -1002,

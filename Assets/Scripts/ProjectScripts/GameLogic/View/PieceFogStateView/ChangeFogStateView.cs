@@ -12,7 +12,12 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 	{
 		get { return new Vector3(0, 1.5f); }
 	}
-	
+
+	protected override ViewType Id
+	{
+		get { return ViewType.FogState; }
+	}
+
 	public override void Init(Piece piece)
 	{
 		base.Init(piece);
@@ -32,16 +37,14 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 
 	public override void ResetViewOnDestroy()
 	{
-		base.ResetViewOnDestroy();
-        
 		Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceMenu);
+		
+		base.ResetViewOnDestroy();
 	}
 
-	public override void UpdateVisibility(bool isVisible)
+	protected override void UpdateView()
 	{
-		base.UpdateVisibility(isVisible);
-		
-		if(IsShow == false || def == null) return;
+		if(def == null) return;
 		
 		var power = GameDataService.Current.HeroesManager.CurrentPower();
 		

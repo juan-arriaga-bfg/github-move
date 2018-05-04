@@ -10,11 +10,11 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
     
     [SerializeField] private Image progress;
     [SerializeField] private Image light;
-    [SerializeField] private HorizontalLayoutGroup group;
+    [SerializeField] private HorizontalLayoutGroup layoutGroup;
     [SerializeField] private GameObject dot;
     [SerializeField] private GameObject progressbar;
-    
-    private TouchReactionDefinitionSimpleObstacle simpleObstacle;
+
+    private ObstacleLifeComponent life;
     
     private List<GameObject> dots = new List<GameObject>();
     
@@ -22,36 +22,35 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
     {
         get { return new Vector3(0, -0.5f); }
     }
-
+    
+    protected override ViewType Id
+    {
+        get { return ViewType.SimpleObstacle; }
+    }
+    
     public override void Init(Piece piece)
     {
         base.Init(piece);
         
-        var touchReaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
+        life = piece.GetComponent<ObstacleLifeComponent>(ObstacleLifeComponent.ComponentGuid);
         
-        if(touchReaction == null) return;
-        
-        simpleObstacle = touchReaction.GetComponent<TouchReactionDefinitionSimpleObstacle>(TouchReactionDefinitionSimpleObstacle.ComponentGuid);
-        
-        if(simpleObstacle == null) return;
-        
-        simpleObstacle.OnClick = OnClick;
+        if(life == null) return;
         
         Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceMenu);
         
-        simpleObstacle.Steps = piece.Context.BoardLogic.MatchDefinition.GetIndexInChain(piece.PieceType);
-
-        for (var i = 1; i < simpleObstacle.Steps; i++)
+        for (var i = 1; i < life.HP; i++)
         {
             var dt = Instantiate(dot, dot.transform.parent);
             dots.Add(dt);
         }
 
-        group.spacing = 110 / simpleObstacle.Steps;
+        layoutGroup.spacing = 110 / life.HP;
         
-        progressbar.SetActive(simpleObstacle.Steps > 1);
+        progressbar.SetActive(life.HP > 1);
         
         dot.SetActive(false);
+        
+        DOTween.Kill(light);
 
         DOTween.Sequence().SetId(light).SetLoops(int.MaxValue)
             .Append(light.DOFade(0.5f, 0.3f))
@@ -60,9 +59,9 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
     
     public override void ResetViewOnDestroy()
     {
-        base.ResetViewOnDestroy();
-
         DOTween.Kill(light);
+
+        light.DOFade(1f, 0f);
         
         Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceMenu);
 
@@ -73,42 +72,34 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
         
         dots = new List<GameObject>();
         dot.SetActive(true);
-    }
-    
-    private void OnClick()
-    {
-        Context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
-        simpleObstacle.isOpen = !simpleObstacle.isOpen;
         
-        SetProgress();
-        price.Text = string.Format("<sprite name={0}> {1}", simpleObstacle.Price.Currency, simpleObstacle.Price.Amount);
-        
-        DOTween.Sequence()
-            .AppendInterval(0.01f)
-            .AppendCallback(() => Change(simpleObstacle.isOpen));
+        base.ResetViewOnDestroy();
     }
 
+    public override void UpdateVisibility(bool isVisible)
+    {
+        base.UpdateVisibility(isVisible);
+
+        if (IsShow == false) return;
+        
+        price.Text = life.Price.ToStringIcon();
+        
+        progress.fillAmount = life.GetProgressNext;
+        light.fillAmount = life.GetProgress;
+    }
+    
     public void Clear()
     {
-        simpleObstacle.Clear(Context);
+        if (life.Damage())
+        {
+            Change(false);
+        }
     }
     
     public void OnBoardEvent(int code, object context)
     {
-        if (code != GameEventsCodes.ClosePieceMenu|| (context as ChangeSimpleObstacleStateView) == this) return;
-        if(simpleObstacle.isOpen == false) return;
-
-        simpleObstacle.isOpen = false;
-        DOTween.Sequence()
-            .AppendInterval(0.01f)
-            .AppendCallback(() => Change(simpleObstacle.isOpen));
-    }
-
-    private void SetProgress()
-    {
-        if (progress == null) return;
-        
-        progress.fillAmount = simpleObstacle.GetProgressFake;
-        light.fillAmount = simpleObstacle.GetProgress;
+        if (code != GameEventsCodes.ClosePieceMenu || context is BoardPosition && ((BoardPosition) context).Equals(Context.CachedPosition)) return;
+		
+        Change(false);
     }
 }

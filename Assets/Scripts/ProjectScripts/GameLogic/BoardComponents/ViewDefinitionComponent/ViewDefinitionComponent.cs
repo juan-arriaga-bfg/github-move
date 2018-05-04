@@ -61,9 +61,10 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
         if(context == null) return;
-        
-        foreach (var pair in views)
+
+        for (var i = views.Count - 1; i >= 0; i--)
         {
+            var pair = views[i];
             RemoveView(pair.Key);
         }
     }

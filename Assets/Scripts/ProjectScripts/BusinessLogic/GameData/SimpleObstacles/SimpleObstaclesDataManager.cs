@@ -73,7 +73,7 @@ public class SimpleObstaclesDataManager : IDataLoader<List<SimpleObstaclesDef>>
         return result;
     }
 
-    public CurrencyPair PriceForPiece(Piece piece, int step)
+    public CurrencyPair PriceForPiece(int piece, int step)
     {
         const int stepPrice = 50;
 //        var max = piece.Context.BoardLogic.MatchDefinition.GetIndexInChain(piece.PieceType);

@@ -604,12 +604,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsFading: 0
   FadeValue: 0
-  viewGo: {fileID: 1977950546659902}
+  viewTransform: {fileID: 224820751436738834}
+  group: {fileID: 225879918826164384}
   message: {fileID: 114338106244282586}
   price: {fileID: 114436730818668246}
   progress: {fileID: 114735683732298082}
   light: {fileID: 114425726294402596}
-  group: {fileID: 114481185425239730}
+  layoutGroup: {fileID: 114481185425239730}
   dot: {fileID: 1252498847557428}
   progressbar: {fileID: 1386454448781642}
 --- !u!114 &114417837352850728

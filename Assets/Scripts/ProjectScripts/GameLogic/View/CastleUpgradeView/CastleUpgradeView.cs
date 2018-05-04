@@ -66,7 +66,7 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 
 	public override void UpdateVisibility(bool isVisible)
 	{
-		viewGo.SetActive(Priority < 0 || isVisible);
+//		viewGo.SetActive(Priority < 0 || isVisible);
 		target.SetActive((Priority < 0 || isVisible) && !isComplete);
 		button.SetActive((Priority < 0 || isVisible) && isComplete);
 	}
