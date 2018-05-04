@@ -31,9 +31,11 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        if(context == null || ViewIds == null) return;
-
+        if(thisContext == null) return;
+        
         Position = position;
+        
+        if(ViewIds == null) return;
         
         foreach (var id in ViewIds)
         {

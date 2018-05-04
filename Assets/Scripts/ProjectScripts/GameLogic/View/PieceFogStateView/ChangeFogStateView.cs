@@ -7,8 +7,6 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 	[SerializeField] private RectTransform line;
 	
 	private FogDef def;
-
-	private TouchReactionDefinitionFog definition;
 	
 	public override Vector3 Ofset
 	{
@@ -18,14 +16,6 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 	public override void Init(Piece piece)
 	{
 		base.Init(piece);
-
-		var reaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
-		
-		if(reaction == null) return;
-		
-		definition = reaction.GetComponent<TouchReactionDefinitionFog>(TouchReactionDefinitionFog.ComponentGuid);
-		
-		if(definition == null) return;
 		
 		Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceMenu);
 	}
@@ -51,7 +41,7 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 	{
 		base.UpdateVisibility(isVisible);
 		
-		if(IsShow == false) return;
+		if(IsShow == false || def == null) return;
 		
 		var power = GameDataService.Current.HeroesManager.CurrentPower();
 		
@@ -62,10 +52,8 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 	
 	public void OnBoardEvent(int code, object context)
 	{
-		if (code != GameEventsCodes.ClosePieceMenu) return;
+		if (code != GameEventsCodes.ClosePieceMenu || context is FogDef && ((FogDef) context).Uid == def.Uid) return;
 		
-		if(definition == null || definition == context) return;
-		
-		definition.IsOpen = false;
+		Change(false);
 	}
 }

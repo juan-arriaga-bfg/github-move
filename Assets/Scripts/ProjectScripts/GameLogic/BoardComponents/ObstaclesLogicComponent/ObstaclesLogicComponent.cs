@@ -55,7 +55,7 @@ public class ObstaclesLogicComponent : IECSComponent, IECSSystem
         var data = GameDataService.Current.FogsManager.Fogs;
         var positions = new List<BoardPosition>();
 
-        for (var index = 0; index < 1; index++)
+        for (var index = 0; index < 2; index++)
         {
             var fog = data[index];
             var pos = fog.Position;
