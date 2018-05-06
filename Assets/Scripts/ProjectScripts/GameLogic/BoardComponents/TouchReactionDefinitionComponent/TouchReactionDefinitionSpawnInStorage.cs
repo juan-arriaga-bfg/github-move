@@ -9,7 +9,7 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
         if (storage == null) return false;
 
         int amount;
-
+        
         if (storage.Scatter(out amount) == false)
         {
             return false;

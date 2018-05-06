@@ -9,9 +9,6 @@
 				.RegisterDefinition(new TouchReactionDefinitionOpenHeroesWindow{Icon = "face_Robin"})
 				.RegisterDefinition(new TouchReactionDefinitionUpgrade{Icon = "arrow"}))
 			.RegisterComponent(new TouchReactionConditionComponent()));
-        
-		AddView(piece, ViewType.LevelLabel);
-		AddView(piece, ViewType.Menu);
 		
 		return piece;
 	}

@@ -512,7 +512,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4542807987214320}
-  - component: {fileID: 114243331302908096}
+  - component: {fileID: 114886808379967760}
   - component: {fileID: 114915778010107768}
   m_Layer: 0
   m_Name: Sawmill4Piece
@@ -1107,7 +1107,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114243331302908096
+--- !u!114 &114886808379967760
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1115,12 +1115,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1924086398574114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e94db1dff9a4341a9922139f675b17, type: 3}
+  m_Script: {fileID: 11500000, guid: 59bd85d12facb4444b487057d92a88fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 4584034517607328}
+  animator: {fileID: 95246998306972200}
 --- !u!114 &114915778010107768
 MonoBehaviour:
   m_ObjectHideFlags: 1

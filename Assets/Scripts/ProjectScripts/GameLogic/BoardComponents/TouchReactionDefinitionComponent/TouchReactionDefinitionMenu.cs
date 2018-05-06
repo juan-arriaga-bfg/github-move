@@ -49,7 +49,7 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
 
         var definition = GetDefinition<TouchReactionDefinitionSpawnInStorage>();
         
-        if (definition == null || storage.IsShow == false) return false;
+        if (definition == null) return false;
 
         definition.Make(position, piece);
         
