@@ -20,7 +20,7 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
     
     public override Vector3 Ofset
     {
-        get { return new Vector3(0, -0.5f); }
+        get { return new Vector3(0, 1.5f); }
     }
     
     protected override ViewType Id

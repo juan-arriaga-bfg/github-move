@@ -9,6 +9,12 @@ public class BoardTimerView : UIBoardView
     
     protected override void SetOfset()
     {
+        if (multiSize == 1)
+        {
+            base.SetOfset();
+            return;
+        }
+        
         CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Ofset;
     }
     
@@ -16,17 +22,19 @@ public class BoardTimerView : UIBoardView
     {
         base.Init(piece);
         timer = piece.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
+
+        timer.OnExecute += UpdateView;
     }
-    
-    private void Update()
+
+    public override void ResetViewOnDestroy()
     {
-        if(timer == null) return;
-        
-        Change(timer.IsStarted);
-        
-        if(timer.IsExecuteable() == false) return;
-        
+        timer.OnExecute -= UpdateView;
+        base.ResetViewOnDestroy();
+    }
+
+    protected override void UpdateView()
+    {
         if(progressBar != null) progressBar.SetProgress((float)timer.GetTime().TotalSeconds / timer.Delay);
-        label.Text = string.Format("<mspace=3em>{0}</mspace>", timer.GetTimeLeftText(null));
+        label.Text = timer.GetTimeLeftText(null);
     }
 }

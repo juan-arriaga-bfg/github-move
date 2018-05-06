@@ -164,7 +164,9 @@ public class Chest
     private string TimeFormat(TimeSpan time)
     {
         if ((int) time.TotalSeconds < 0) return "00:00";
-        
-        return (int) time.TotalHours > 0 ? string.Format("<mspace=2.75em>{0:00}:{1:00}:{2:00}</mspace>", time.Hours, time.Minutes, time.Seconds) : string.Format("<mspace=2.75em>{0:00}:{1:00}</mspace>", time.Minutes, time.Seconds);
+
+        return (int) time.TotalHours > 0
+            ? string.Format("<mspace=2.75em>{0:00}:{1:00}:{2:00}</mspace>", time.Hours, time.Minutes, time.Seconds)
+            : string.Format("<mspace=2.75em>{0:00}:{1:00}</mspace>", time.Minutes, time.Seconds);
     }
 }

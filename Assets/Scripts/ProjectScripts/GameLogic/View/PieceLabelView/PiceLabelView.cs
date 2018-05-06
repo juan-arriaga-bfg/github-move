@@ -8,12 +8,7 @@ public class PiceLabelView : UIBoardView
     {
         get { return -1; }
     }
-
-    public override Vector3 Ofset
-    {
-        get { return new Vector3(0, -0.3f); }
-    }
-
+    
     public override void Init(Piece piece)
     {
         base.Init(piece);

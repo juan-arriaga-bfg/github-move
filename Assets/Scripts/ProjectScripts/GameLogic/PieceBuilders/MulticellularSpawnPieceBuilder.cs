@@ -31,9 +31,7 @@
         
         AddView(piece, ViewType.LevelLabel);
         
-        /*AddView(piece, ViewType.StorageState);
-        
-        AddView(piece, ViewType.Menu);*/
+        /* AddView(piece, ViewType.Menu);*/
         
         return piece;
     }

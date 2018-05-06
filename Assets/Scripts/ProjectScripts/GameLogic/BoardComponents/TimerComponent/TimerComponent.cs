@@ -11,6 +11,7 @@ public class TimerComponent : IECSComponent, IECSSystem
     public Action OnStart;
     public Action OnExecute;
     public Action OnComplete;
+    public Action OnStop;
     
     private DateTime startTime;
     private DateTime completeTime;
@@ -38,6 +39,7 @@ public class TimerComponent : IECSComponent, IECSSystem
     public void Stop()
     {
         IsStarted = false;
+        if(OnStop != null) OnStop();
     }
     
     public bool IsExecuteable()
@@ -87,7 +89,9 @@ public class TimerComponent : IECSComponent, IECSSystem
     {
         if (string.IsNullOrEmpty(format))
         {
-            return (int) time.TotalHours > 0 ? string.Format("{0:00}:{1:00}:{2:00}", time.Hours, time.Minutes, time.Seconds) : string.Format("{0:00}:{1:00}", time.Minutes, time.Seconds);
+            return (int) time.TotalHours > 0
+                ? string.Format("<mspace=3em>{0:00}:{1:00}:{2:00}</mspace>", time.Hours, time.Minutes, time.Seconds)
+                : string.Format("<mspace=3em>{0:00}:{1:00}</mspace>", time.Minutes, time.Seconds);
         }
         
         return string.Format(format, time.Hours, time.Minutes, time.Seconds);

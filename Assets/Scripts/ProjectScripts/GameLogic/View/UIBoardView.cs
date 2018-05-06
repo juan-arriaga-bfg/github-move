@@ -25,7 +25,7 @@ public class UIBoardView : BoardElementView
 
     public virtual Vector3 Ofset
     {
-        get { return Vector2.zero; }
+        get { return new Vector2(0, 0.5f); }
     }
     
     public virtual void Init(Piece piece)
@@ -102,7 +102,7 @@ public class UIBoardView : BoardElementView
     {
         var multi = piece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
 
-        if (multi == null) return 0;
+        if (multi == null) return 1;
         
         return (int)Mathf.Sqrt(multi.Mask.Count + 1);
     }

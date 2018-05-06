@@ -20,9 +20,9 @@ public class TouchReactionDefinitionOpenChestRewardWindow : TouchReactionDefinit
 				var model = UIService.Get.GetCachedModel<UIChestMessageWindowModel>(UIWindowType.ChestMessage);
 
 				model.Chest = chestComponent.Chest;
-				model.OnStart = () => Start(piece);
-				model.OnBoost = () => Boost(piece);
-				model.OnStop = () => Stop(piece);
+				model.OnStart = Start;
+				model.OnBoost = Boost;
+				model.OnStop = Stop;
 				
 				UIService.Get.ShowWindow(UIWindowType.ChestMessage);
 				
@@ -37,32 +37,31 @@ public class TouchReactionDefinitionOpenChestRewardWindow : TouchReactionDefinit
 		return true;
 	}
 
-	private void Start(Piece piece)
+	private void Start()
 	{
-		chestComponent.Timer.Start();
 		chestComponent.Chest.State = ChestState.InProgress;
+		chestComponent.Timer.Start();
+		
 		GameDataService.Current.ChestsManager.ActiveChest = chestComponent.Chest;
-		piece.ActorView.UpdateView();
 	}
 	
-	private void Boost(Piece piece)
+	private void Boost()
 	{
 		chestComponent.Chest.State = ChestState.Open;
+		chestComponent.Timer.Stop();
 		
 		if(GameDataService.Current.ChestsManager.ActiveChest == chestComponent.Chest)
 		{
 			GameDataService.Current.ChestsManager.ActiveChest = null;
 		}
-		
-		piece.ActorView.UpdateView();
 	}
 	
-	private void Stop(Piece piece)
+	private void Stop()
 	{
-		chestComponent.Timer.Stop();
 		chestComponent.Chest.State = ChestState.Close;
+		chestComponent.Timer.Stop();
+		
 		GameDataService.Current.ChestsManager.ActiveChest = null;
-		piece.ActorView.UpdateView();
 	}
 
 	private void Open(BoardPosition position, Piece piece)

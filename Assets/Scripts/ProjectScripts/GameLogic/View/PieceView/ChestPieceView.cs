@@ -5,10 +5,6 @@ public class ChestPieceView : PieceBoardElementView
     [SerializeField] private Transform cap;
     
     [SerializeField] private GameObject shine;
-    [SerializeField] private GameObject timerGo;
-    
-    [SerializeField] private NSText timerLabel;
-    [SerializeField] private BoardProgressBarView progressBar;
     
     [SerializeField] private float open;
     [SerializeField] private float close;
@@ -20,9 +16,10 @@ public class ChestPieceView : PieceBoardElementView
         base.Init(context, piece);
 
         chestComponent = piece.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
-        UpdateView();
+        chestComponent.Timer.OnStop += UpdateView;
         chestComponent.Timer.OnComplete += UpdateView;
-        chestComponent.Timer.OnExecute += UpdateProgress;
+        
+        UpdateView();
         
         var hint = Context.Context.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
         
@@ -30,7 +27,14 @@ public class ChestPieceView : PieceBoardElementView
         
         hint.Step(HintType.CloseChest);
     }
-    
+
+    public override void ResetViewOnDestroy()
+    {
+        chestComponent.Timer.OnStop -= UpdateView;
+        chestComponent.Timer.OnComplete -= UpdateView;
+        base.ResetViewOnDestroy();
+    }
+
     public override void UpdateView()
     {
         if(chestComponent == null || chestComponent.Chest == null) return;
@@ -38,31 +42,7 @@ public class ChestPieceView : PieceBoardElementView
         var isOpen = chestComponent.Chest.State == ChestState.Open;
         
         shine.SetActive(isOpen);
-        timerGo.SetActive(chestComponent.Chest.State == ChestState.InProgress);
         
         cap.localPosition = new Vector3(cap.localPosition.x, isOpen ? open : close);
-        
-        if(isOpen == false) return;
-        
-        chestComponent.Timer.OnComplete -= UpdateView;
-        chestComponent.Timer.OnExecute -= UpdateProgress;
-        chestComponent.Timer.Stop();
-        
-        if(GameDataService.Current.ChestsManager.ActiveChest == chestComponent.Chest)
-        {
-            GameDataService.Current.ChestsManager.ActiveChest = null;
-        }
-
-        var hint = Context.Context.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
-        
-        if(hint == null) return;
-        
-        hint.Step(HintType.OpenChest);
-    }
-
-    private void UpdateProgress()
-    {
-        timerLabel.Text = string.Format("<mspace=3em>{0}</mspace>", chestComponent.Timer.GetTimeLeftText(null));
-        if(progressBar != null) progressBar.SetProgress((float)chestComponent.Timer.GetTime().TotalSeconds / chestComponent.Timer.Delay);
     }
 }

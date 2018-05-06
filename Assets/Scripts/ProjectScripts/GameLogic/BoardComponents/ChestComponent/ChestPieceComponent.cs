@@ -8,6 +8,12 @@
 
     private TimerComponent timer;
     private Piece contextPiece;
+    private ViewDefinitionComponent viewDef;
+    
+    public TimerComponent Timer
+    {
+        get { return timer; }
+    }
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -15,6 +21,7 @@
         
         timer = new TimerComponent();
         contextPiece.RegisterComponent(timer);
+        viewDef = contextPiece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)
@@ -27,6 +34,9 @@
         
         Chest = GameDataService.Current.ChestsManager.GetFromBoard(position, contextPiece.PieceType);
         timer.Delay = Chest.Def.Time;
+        timer.OnStart += OnStart;
+        timer.OnStop += OnComplete;
+        timer.OnComplete += OnComplete;
     }
 
     public void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)
@@ -35,10 +45,38 @@
 
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
+        timer.OnStart -= OnStart;
+        timer.OnComplete -= OnComplete;
     }
 
-    public TimerComponent Timer
+    private void OnStart()
     {
-        get { return timer; }
+        if(viewDef == null) return;
+        
+        var view = viewDef.AddView(ViewType.BoardTimer);
+        
+        view.Change(true);
+    }
+    
+    private void OnComplete()
+    {
+        if(viewDef == null) return;
+        
+        var view = viewDef.AddView(ViewType.BoardTimer);
+        
+        view.Change(false);
+        
+        if(Chest.State != ChestState.Open) return;
+        
+        if(GameDataService.Current.ChestsManager.ActiveChest == Chest)
+        {
+            GameDataService.Current.ChestsManager.ActiveChest = null;
+        }
+        
+        var hint = contextPiece.Context.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
+        
+        if(hint == null) return;
+        
+        hint.Step(HintType.OpenChest);
     }
 }
