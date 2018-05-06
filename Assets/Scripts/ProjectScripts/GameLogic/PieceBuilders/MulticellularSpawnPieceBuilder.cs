@@ -5,13 +5,13 @@
         var piece = base.Build(pieceType, context);
         var def = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(pieceType);
 
-        CreateViewComponent(piece);
+        AddView(piece, ViewType.LevelLabel);
         
         piece.RegisterComponent(new TimerComponent
         {
             Delay = def.Delay
         });
-
+        
         var storage = new StorageComponent
         {
             SpawnPiece = def.SpawnPieceType,
@@ -28,8 +28,6 @@
                 .RegisterDefinition(new TouchReactionDefinitionUpgrade {Icon = "arrow_light"})
                 .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{Icon = PieceType.Parse(def.SpawnPieceType)}))
             .RegisterComponent(new TouchReactionConditionComponent()));
-        
-        AddView(piece, ViewType.LevelLabel);
         
         /* AddView(piece, ViewType.Menu);*/
         

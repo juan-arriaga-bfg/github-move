@@ -3,15 +3,17 @@
 public class PiceLabelView : UIBoardView
 {
     [SerializeField] private NSText label;
-
-    public override int Priority
+    
+    protected override ViewType Id
     {
-        get { return -1; }
+        get { return ViewType.LevelLabel; }
     }
     
     public override void Init(Piece piece)
     {
         base.Init(piece);
+
+        priority = -1;
         
         var def = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(piece.PieceType);
 

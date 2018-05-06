@@ -5,7 +5,7 @@
         var piece = base.Build(pieceType, context);
         var def = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(pieceType);
         
-        CreateViewComponent(piece);
+        AddView(piece, ViewType.LevelLabel);
         
         piece.RegisterComponent(new TimerComponent
         {
@@ -17,7 +17,8 @@
             SpawnPiece = def.SpawnPieceType,
             Capacity = def.SpawnCapacity,
             Filling = def.IsFilledInStart ? def.SpawnCapacity : 0,
-            Amount =  def.SpawnAmount
+            Amount =  def.SpawnAmount,
+            ShowTimer = true
         };
         
         piece.RegisterComponent(storage);
@@ -30,10 +31,7 @@
                 .RegisterDefinition(new TouchReactionDefinitionOpenHeroesWindow{Icon = "face_Robin"}))
             .RegisterComponent(new TouchReactionConditionComponent()));
         
-       /*
-        AddView(piece, ViewType.LevelLabel);
-        AddView(piece, ViewType.Menu);
-        AddView(piece, ViewType.BoardTimer);
+       /*AddView(piece, ViewType.Menu);
         AddView(piece, ViewType.CastleUpgrade);*/
         
         return piece;

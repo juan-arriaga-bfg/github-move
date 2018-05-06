@@ -20,11 +20,6 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 		get { return new Vector3(0, 0.7f); }
 	}
 	
-	public override int Priority
-	{
-		get { return 1; }
-	}
-	
 	protected override void SetOfset()
 	{
 		CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Ofset;

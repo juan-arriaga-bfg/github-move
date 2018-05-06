@@ -13,12 +13,17 @@ public class UIBoardView : BoardElementView
     
     public bool IsShow { get; set; }
     
-    private int priority = 0;
+    protected int priority = 0;
     
-    public virtual int Priority
+    public int Priority
+    {
+        get { return priority == -1 ? priority : priority / 10; }
+        set { priority = value; }
+    }
+    
+    public int Layer
     {
         get { return priority; }
-        set { priority = value; }
     }
     
     protected virtual ViewType Id { get; set; }
@@ -68,7 +73,6 @@ public class UIBoardView : BoardElementView
         
         if (isShow == false)
         {
-            controller.HideView();
             UpdateVisibility(false);
             return;
         }
@@ -95,7 +99,7 @@ public class UIBoardView : BoardElementView
         
         sequence.Insert(0f, group.DOFade(0, 0.2f));
         sequence.Insert(0f, viewTransform.DOScale(Vector3.zero, 0.2f));
-        sequence.InsertCallback(0.2f, () => Cash());
+        sequence.InsertCallback(0.2f, Cash);
     }
 
     private int GetMultiSize(Piece piece)

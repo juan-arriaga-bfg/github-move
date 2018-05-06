@@ -11,6 +11,8 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     public int Amount;
     public int Capacity;
     public int Filling;
+
+    public bool ShowTimer;
     
     private ViewDefinitionComponent viewDef;
     
@@ -33,6 +35,13 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         if(Timer == null) return;
         
         Timer.OnComplete += Update;
+
+        if (ShowTimer)
+        {
+            Timer.OnStart += OnShowTimer;
+            Timer.OnComplete += OnHideTimer;
+        }
+        
         if(Filling != Capacity) Timer.Start();
         
         UpdateView();
@@ -47,7 +56,13 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         if(Timer == null) return;
         
         Timer.Stop();
+        
         Timer.OnComplete -= Update;
+        
+        if(ShowTimer == false) return;
+
+        Timer.OnStart -= OnShowTimer;
+        Timer.OnComplete -= OnHideTimer;
     }
 
     private void Update()
@@ -79,5 +94,23 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         UpdateView();
         
         return true;
+    }
+
+    private void OnShowTimer()
+    {
+        if(viewDef == null) return;
+        
+        var view = viewDef.AddView(ViewType.BoardTimer);
+        
+        view.Change(true);
+    }
+    
+    private void OnHideTimer()
+    {
+        if(viewDef == null) return;
+        
+        var view = viewDef.AddView(ViewType.BoardTimer);
+        
+        view.Change(Filling < Capacity);
     }
 }

@@ -7,20 +7,21 @@ public class BoardTimerView : UIBoardView
     
     private TimerComponent timer;
     
-    protected override void SetOfset()
+    protected override ViewType Id
     {
-        if (multiSize == 1)
-        {
-            base.SetOfset();
-            return;
-        }
-        
-        CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Ofset;
+        get { return ViewType.BoardTimer; }
+    }
+    
+    public override Vector3 Ofset
+    {
+        get { return multiSize == 1 ? base.Ofset : new Vector3(0, 1.3f); }
     }
     
     public override void Init(Piece piece)
     {
         base.Init(piece);
+
+        priority = 10;
         timer = piece.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
 
         timer.OnExecute += UpdateView;

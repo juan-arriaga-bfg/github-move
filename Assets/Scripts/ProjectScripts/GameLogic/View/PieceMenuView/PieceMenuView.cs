@@ -9,11 +9,6 @@ public class PieceMenuView : UIBoardView, IBoardEventListener
     private List<GameObject> btns = new List<GameObject>();
     
     private bool isOpen;
-
-    public override int Priority
-    {
-        get { return 1; }
-    }
     
     public override Vector3 Ofset
     {
