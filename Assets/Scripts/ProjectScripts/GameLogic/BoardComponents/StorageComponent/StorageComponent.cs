@@ -75,7 +75,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
 
         UpdateView();
     }
-
+    
     private void UpdateView()
     {
         if(viewDef == null) return;

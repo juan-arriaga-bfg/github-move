@@ -17,6 +17,7 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
         
         if (storage.Scatter(out amount) == false)
         {
+            UIErrorWindowController.AddError("Production of the resource is not complete!");
             return false;
         }
         

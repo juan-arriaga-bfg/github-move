@@ -19,7 +19,7 @@
 			var view = viewDef.AddView(ViewType.CastleUpgrade);
         
 			view.Change(!view.IsShow);
-			return true;
+			return false;
 		}
 
 		CurrencyHellper.Purchase(def.UpgradeCurrency.Name, 1, success =>

@@ -26,6 +26,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.CollectionWindow,
             UIWindowType.QuestWindow,
             UIWindowType.RobberyWindow,
+            UIWindowType.ErrorWindow,
         });
 
         // on cache complete

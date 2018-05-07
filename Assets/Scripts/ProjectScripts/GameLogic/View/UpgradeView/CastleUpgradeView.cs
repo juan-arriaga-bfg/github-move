@@ -77,13 +77,12 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 		var definition = Context.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
 
 		if (definition == null) return;
-        
-		definition.Touch(Context.CachedPosition);
+		if(definition.Touch(Context.CachedPosition)) UIErrorWindowController.AddError("Not enough resources to build!");
 	}
 	
 	public void OnBoardEvent(int code, object context)
 	{
-		if(code != GameEventsCodes.ClosePieceMenu || context is Piece && (Piece)context == Context) return;
+		if(code != GameEventsCodes.ClosePieceMenu || upgrade.Check() || context is Piece && (Piece)context == Context) return;
 		
 		Change(false);
 	}

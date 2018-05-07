@@ -21,4 +21,6 @@
     public const string QuestWindow = "QuestWindow";
     
     public const string RobberyWindow = "RobberyWindow";
+    
+    public const string ErrorWindow = "ErrorWindow";
 }
