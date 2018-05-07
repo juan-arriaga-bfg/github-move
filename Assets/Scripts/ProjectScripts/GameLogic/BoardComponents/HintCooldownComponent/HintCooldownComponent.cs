@@ -3,6 +3,7 @@ using UnityEngine;
 
 public enum HintType
 {
+	HighPriority,
 	OpenChest,
 	CloseChest,
 	Obstacle
@@ -32,10 +33,17 @@ public class HintCooldownComponent : ECSEntity
 		Step(HintType.Obstacle);
 	}
 
+	public void Step(BoardPosition position, float offsetX = 0, float offsetY = 0)
+	{
+		HintArrowView.Show(position, offsetX, offsetY);
+		Step(HintType.HighPriority);
+	}
+
 	public void Step(HintType type)
 	{
-		if(type != HintType.OpenChest && timer.IsStarted) return;
+		if(type != HintType.HighPriority && type != HintType.OpenChest && timer.IsStarted) return;
 		
+		timer.Stop();
 		timer.Delay = Random.Range(MinDelay, MaxDelay);
 		timer.OnComplete = Hint;
 		timer.Start();

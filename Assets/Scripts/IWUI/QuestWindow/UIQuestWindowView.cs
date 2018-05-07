@@ -65,7 +65,8 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             return;
         }
 
-        var piece = BoardService.Current.GetBoardById(0).BoardLogic.MatchDefinition.GetFirst(quest.WantedPiece);
+        var board = BoardService.Current.GetBoardById(0);
+        var piece = board.BoardLogic.MatchDefinition.GetFirst(quest.WantedPiece);
         
         if(piece == PieceType.None.Id) return;
         
@@ -106,7 +107,12 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         UIMessageWindowController.CreateImageMessage(title, image, () =>
         {
             if (position == null || position.Value.X == 0 && position.Value.Y == 0) return;
-            HintArrowView.Show(position.Value);
+            
+            var hint = board.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
+        
+            if(hint == null) return;
+        
+            hint.Step(position.Value);
         });
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);

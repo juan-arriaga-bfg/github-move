@@ -70,7 +70,7 @@ public class PiecesDataManager : IDataLoader<List<PieceDef>>
         
         if (first == PieceType.Sawmill1.Id)
         {
-            SawmillPosition = position;
+            SawmillPosition = position.Right;
             return;
         }
         

@@ -19,7 +19,7 @@
 
 		if (def.IsMaxLevel())
 		{
-			MaxLevelMessage(def);
+			MaxLevelMessage(def, piece.Context);
 			return true;
 		}
 		
@@ -27,7 +27,7 @@
 		return true;
 	}
 
-	private void MaxLevelMessage(PieceDef def)
+	private void MaxLevelMessage(PieceDef def, BoardController board)
 	{
 		var pieceName = def.UpgradeTargetCurrency.Name.Replace("Level", "");
 		var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
@@ -36,7 +36,14 @@
 		model.Message = string.Format("You need to improve the level of the {0}", pieceName);
 		model.AcceptLabel = string.Format("Go to {0}", pieceName);
         
-		model.OnAccept = () => { HintArrowView.Show(GameDataService.Current.PiecesManager.CastlePosition); };
+		model.OnAccept = () =>
+		{
+			var hint = board.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
+        
+			if(hint == null) return;
+        
+			hint.Step(GameDataService.Current.PiecesManager.CastlePosition);
+		};
 		model.OnCancel = null;
         
 		UIService.Get.ShowWindow(UIWindowType.MessageWindow);
