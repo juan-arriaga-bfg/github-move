@@ -106,7 +106,8 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         if(viewDef == null) return;
         
         var view = viewDef.AddView(ViewType.BoardTimer);
-        
+
+        view.Priority = -1;
         view.Change(true);
     }
     
@@ -115,7 +116,9 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         if(viewDef == null) return;
         
         var view = viewDef.AddView(ViewType.BoardTimer);
+        var isShow = Filling < Capacity;
         
-        view.Change(Filling < Capacity);
+        if(isShow == false) view.Priority = 10;
+        view.Change(isShow);
     }
 }

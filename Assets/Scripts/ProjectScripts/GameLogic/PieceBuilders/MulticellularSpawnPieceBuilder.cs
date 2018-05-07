@@ -30,8 +30,8 @@
         
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionMenu()
-                .RegisterDefinition(new TouchReactionDefinitionUpgrade {Icon = "arrow_light"})
-                .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{Icon = PieceType.Parse(def.SpawnPieceType)}))
+                .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{Icon = PieceType.Parse(def.SpawnPieceType)})
+                .RegisterDefinition(new TouchReactionDefinitionUpgrade {Icon = "arrow_light"}))
             .RegisterComponent(new TouchReactionConditionComponent()));
         
         return piece;

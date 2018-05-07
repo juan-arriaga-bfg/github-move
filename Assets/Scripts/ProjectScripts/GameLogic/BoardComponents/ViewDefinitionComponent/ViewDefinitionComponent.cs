@@ -116,19 +116,22 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         UIBoardView view;
 
         if (views.TryGetValue(id, out view) == false) return;
-        
-        var currentPos = Position;
-        currentPos.Z += Layer + view.Layer;
-        
-        thisContext.Context.RendererContext.RemoveElementAt(currentPos);
 
-        views.Remove(id);
+        if (view.IsShow == false)
+        {
+            var currentPos = Position;
+            currentPos.Z += Layer + view.Layer;
+        
+            thisContext.Context.RendererContext.RemoveElementAt(currentPos);
 
+            views.Remove(id);
+        }
+        
         shownViewPriority = -1;
 
         foreach (var element in views.Values)
         {
-            if(element.Priority <= shownViewPriority) continue;
+            if(element.Priority <= shownViewPriority || element.IsShow == false) continue;
 
             shownViewPriority = element.Priority;
         }
@@ -136,7 +139,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         foreach (var element in views.Values)
         {
             if(element.Priority != shownViewPriority || element.IsShow == false) continue;
-            view.UpdateVisibility(true);
+            element.UpdateVisibility(true);
         }
     }
 
