@@ -2,6 +2,7 @@
 
 public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
 {
+    public int MainReactionIndex = -1;
     public readonly List<TouchReactionDefinitionComponent> Definitions = new List<TouchReactionDefinitionComponent>();
     
     public override void OnRegisterEntity(ECSEntity entity)
@@ -14,7 +15,7 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
 
     public override bool Make(BoardPosition position, Piece piece)
     {
-        piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
+        piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, piece);
         
         var viewDefinition = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
         
@@ -26,6 +27,12 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
             return true;
         }
 
+        if (MainReactionIndex != -1)
+        {
+            Definitions[MainReactionIndex].Make(position, piece);
+            return true;
+        }
+        
         var view = viewDefinition.AddView(ViewType.Menu);
         
         view.Change(!view.IsShow);

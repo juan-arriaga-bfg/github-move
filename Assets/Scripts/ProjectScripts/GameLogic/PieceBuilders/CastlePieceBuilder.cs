@@ -21,18 +21,19 @@
             ShowTimer = true
         };
         
+        var upgrade = new CastleUpgradeComponent();
+        
         piece.RegisterComponent(storage);
         AddObserver(piece, storage);
         
-        piece.RegisterComponent(new TouchReactionComponent()
-            .RegisterComponent(new TouchReactionDefinitionMenu()
-                .RegisterDefinition(new TouchReactionDefinitionUpgradeCastle{Icon = "arrow_light"})
-                .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{Icon = "Chest"})
-                .RegisterDefinition(new TouchReactionDefinitionOpenHeroesWindow{Icon = "face_Robin"}))
-            .RegisterComponent(new TouchReactionConditionComponent()));
+        piece.RegisterComponent(upgrade);
+        AddObserver(piece, upgrade);
         
-       /*AddView(piece, ViewType.Menu);
-        AddView(piece, ViewType.CastleUpgrade);*/
+        piece.RegisterComponent(new TouchReactionComponent()
+            .RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 1}
+                .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{Icon = "Chest"})
+                .RegisterDefinition(new TouchReactionDefinitionUpgradeCastle{Icon = "arrow_light"}))
+            .RegisterComponent(new TouchReactionConditionComponent()));
         
         return piece;
     }

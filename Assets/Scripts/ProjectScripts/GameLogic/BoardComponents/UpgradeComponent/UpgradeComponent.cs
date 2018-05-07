@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class UpgradeComponent : ECSEntity, IPieceBoardObserver, IResourceCarrierView
+public class UpgradeComponent : IECSComponent, IPieceBoardObserver, IResourceCarrierView
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-    
-    public override int Guid { get { return ComponentGuid; } }
+    public int Guid { get { return ComponentGuid; } }
     
     public Camera RenderCamera { get; private set; }
     public List<ResourceCarrier> Carriers { get; private set; }
@@ -15,7 +14,7 @@ public class UpgradeComponent : ECSEntity, IPieceBoardObserver, IResourceCarrier
     private StorageItem storageItem;
     private ViewDefinitionComponent viewDef;
     
-    public override void OnRegisterEntity(ECSEntity entity)
+    public void OnRegisterEntity(ECSEntity entity)
     {
         thisContext = entity as Piece;
         
@@ -32,6 +31,10 @@ public class UpgradeComponent : ECSEntity, IPieceBoardObserver, IResourceCarrier
         if (viewDef == null) return;
         
         storageItem = ProfileService.Current.GetStorageItem(GetResourceId());
+    }
+    
+    public void OnUnRegisterEntity(ECSEntity entity)
+    {
     }
     
     public void OnAddToBoard(BoardPosition position, Piece context = null)

@@ -10,14 +10,11 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 	
 	private List<CastleUpgradeItem> items = new List<CastleUpgradeItem>();
 
-	private TouchReactionDefinitionUpgradeCastle reaction;
-
-	private PieceDef def;
-	private bool isComplete;
-
+	private CastleUpgradeComponent upgrade;
+	
 	public override Vector3 Ofset
 	{
-		get { return new Vector3(0, 0.7f); }
+		get { return new Vector3(0, 1.5f); }
 	}
 	
 	protected override void SetOfset()
@@ -28,42 +25,30 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 	public override void Init(Piece piece)
 	{
 		base.Init(piece);
-
+		
+		priority = 2;
 		label.Text = "Upgrade";
-		isComplete = false;
 		
-		var touchReaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
-        
-		if(touchReaction == null) return;
-
-		var menu = touchReaction.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
+		upgrade = piece.GetComponent<CastleUpgradeComponent>(CastleUpgradeComponent.ComponentGuid);
 		
-		if(menu == null) return;
-        
-		reaction = menu.GetDefinition<TouchReactionDefinitionUpgradeCastle>();
-		
-		if(reaction == null) return;
-		
-		reaction.OnClick = OnClick;
+		if(upgrade == null) return;
 		
 		Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceMenu);
-		Context.Context.BoardEvents.AddListener(this, GameEventsCodes.CreatePiece);
-        
-		def = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(piece.PieceType);
 		
-		foreach (var item in def.UpgradePrices)
+		foreach (var quest in upgrade.Prices)
 		{
-			items.Add(CreateItem(item));
+			items.Add(CreateItem(quest));
 		}
 		
 		patern.SetActive(false);
 	}
 
-	public override void UpdateVisibility(bool isVisible)
+	protected override void UpdateView()
 	{
-//		viewGo.SetActive(Priority < 0 || isVisible);
-		target.SetActive((Priority < 0 || isVisible) && !isComplete);
-		button.SetActive((Priority < 0 || isVisible) && isComplete);
+		var isComplete = upgrade.Check();
+		
+		target.SetActive(!isComplete);
+		button.SetActive(isComplete);
 	}
 
 	public override void ResetViewOnDestroy()
@@ -80,55 +65,30 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 		patern.SetActive(true);
 		
 		Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceMenu);
-		Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.CreatePiece);
-	}
-	
-	private void OnClick()
-	{
-		Context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
-		
-		reaction.isOpen = !reaction.isOpen;
-		Change(reaction.isOpen);
 	}
 	
 	public void Upgrade()
 	{
-		reaction.Upgrade(def, Context);
-		reaction.isOpen = false;
-		Change(false);
+		var definition = Context.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
+
+		if (definition == null) return;
+        
+		definition.Touch(Context.CachedPosition);
 	}
 	
 	public void OnBoardEvent(int code, object context)
 	{
-		switch (code)
-		{
-			case GameEventsCodes.ClosePieceMenu:
-				if ((context as CastleUpgradeView) == this || reaction.isOpen == false) return;
-
-				reaction.isOpen = false;
-				Change(false);
-				break;
-			case GameEventsCodes.CreatePiece:
-
-				foreach (var item in items)
-				{
-					if (item.IsComplete == false) return;
-				}
-
-				if (isComplete) return;
-
-				isComplete = true;
-				OnClick();
-				break;
-		}
+		if(code != GameEventsCodes.ClosePieceMenu || context is Piece && (Piece)context == Context) return;
+		
+		Change(false);
 	}
 
-	private CastleUpgradeItem CreateItem(CurrencyPair price)
+	private CastleUpgradeItem CreateItem(Quest quest)
 	{
 		var go = Instantiate(patern, patern.transform.parent);
 		var item = go.GetComponent<CastleUpgradeItem>();
 		
-		item.Init(price);
+		item.Init(quest);
 		return item;
 	}
 }

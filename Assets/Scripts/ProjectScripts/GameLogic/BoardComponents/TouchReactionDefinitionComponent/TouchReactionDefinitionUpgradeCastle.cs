@@ -1,28 +1,27 @@
-﻿using System;
-
-public class TouchReactionDefinitionUpgradeCastle : TouchReactionDefinitionComponent
+﻿public class TouchReactionDefinitionUpgradeCastle : TouchReactionDefinitionComponent
 {
-	public bool isOpen;
-	public Action OnClick { get; set; }
-	
 	public override bool Make(BoardPosition position, Piece piece)
 	{
 		var def = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(piece.PieceType);
-
+		var upgrade = piece.GetComponent<CastleUpgradeComponent>(CastleUpgradeComponent.ComponentGuid);
+		
 		if (def == null) return false;
 
-		if (piece.Context.BoardLogic.MatchDefinition.GetNext(piece.PieceType) == PieceType.None.Id)
+		if (upgrade.Prices.Count == 0)
 		{
 			UIMessageWindowController.CreateDefaultMessage("Building can not be improved!");
 			return true;
 		}
-        
-		if (OnClick != null) OnClick();
-		return true;
-	}
 
-	public void Upgrade(PieceDef def, Piece piece)
-	{
+		if (upgrade.Check() == false)
+		{
+			var viewDef = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
+			var view = viewDef.AddView(ViewType.CastleUpgrade);
+        
+			view.Change(!view.IsShow);
+			return true;
+		}
+
 		CurrencyHellper.Purchase(def.UpgradeCurrency.Name, 1, success =>
 		{
 			if (!success) return;
@@ -32,5 +31,7 @@ public class TouchReactionDefinitionUpgradeCastle : TouchReactionDefinitionCompo
 				At = piece.CachedPosition
 			});
 		});
+		
+		return true;
 	}
 }

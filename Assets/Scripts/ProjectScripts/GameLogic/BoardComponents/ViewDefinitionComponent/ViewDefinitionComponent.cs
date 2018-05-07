@@ -65,7 +65,12 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
         foreach (var key in keys)
         {
-            RemoveView(key);
+            var view = views[key];
+            var currentPos = Position;
+            
+            currentPos.Z += Layer + view.Layer;
+            thisContext.Context.RendererContext.RemoveElementAt(currentPos);
+            views.Remove(key);
         }
     }
 
@@ -142,7 +147,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
             element.UpdateVisibility(true);
         }
     }
-
+    
     public Vector3 GetViewPositionBottom(int size)
     {
         return thisContext.Context.BoardDef.GetSectorCenterWorldPosition(Position.X + (size - 1), Position.Y, Position.Z);

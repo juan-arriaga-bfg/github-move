@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class CastleUpgradeItem : MonoBehaviour, IBoardEventListener
+public class CastleUpgradeItem : MonoBehaviour
 {
     [SerializeField] private Image icon;
     [SerializeField] private NSText progress;
@@ -9,14 +9,12 @@ public class CastleUpgradeItem : MonoBehaviour, IBoardEventListener
 
     private Quest quest;
 
-    public void Init(CurrencyPair price)
+    public void Init(Quest quest)
     {
-        quest = new Quest(new QuestDef{Price = price});
+        this.quest = quest;
         icon.sprite = IconService.Current.GetSpriteById(quest.WantedIcon);
         check.SetActive(false);
         
-        var board = BoardService.Current.GetBoardById(0);
-        board.BoardEvents.AddListener(this, GameEventsCodes.CreatePiece);
         Decoration();
     }
     
@@ -24,9 +22,6 @@ public class CastleUpgradeItem : MonoBehaviour, IBoardEventListener
     {
         if (quest.Check())
         {
-            var board = BoardService.Current.GetBoardById(0);
-            board.BoardEvents.RemoveListener(this, GameEventsCodes.CreatePiece);
-            
             check.SetActive(true);
             progress.gameObject.SetActive(false);
             icon.gameObject.SetActive(false);
@@ -36,18 +31,6 @@ public class CastleUpgradeItem : MonoBehaviour, IBoardEventListener
         progress.Text = string.Format("<color=#FE4704><size=40>{0}</size></color>/{1}", quest.CurrentAmount, quest.TargetAmount);
     }
     
-    public void OnBoardEvent(int code, object context)
-    {
-        if (code != GameEventsCodes.CreatePiece) return;
-
-        var piece = (int)context;
-        
-        if(piece != quest.WantedPiece) return;
-
-        quest.CurrentAmount++;
-        Decoration();
-    }
-
     public bool IsComplete
     {
         get { return quest.Check(); }

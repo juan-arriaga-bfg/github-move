@@ -67,7 +67,7 @@ public class PieceMenuView : UIBoardView, IBoardEventListener
     
     public void OnBoardEvent(int code, object context)
     {
-        if (code != GameEventsCodes.ClosePieceMenu) return;
+        if (code != GameEventsCodes.ClosePieceMenu || context is Piece && (Piece)context == Context) return;
         
         Change(false);
     }
