@@ -113,4 +113,5 @@ public class R
      public const string CastleUpgradeView = "CastleUpgradeView";
      public const string KingPiece = "KingPiece";
      public const string EnemyView = "EnemyView";
+     public const string SimpleUpgradeView = "SimpleUpgradeView";
 }

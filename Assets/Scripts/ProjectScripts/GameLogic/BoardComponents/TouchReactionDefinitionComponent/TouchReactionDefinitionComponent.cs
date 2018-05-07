@@ -5,6 +5,11 @@
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     
     public int Guid { get { return ComponentGuid; } }
+
+    public virtual bool IsViewShow(ViewDefinitionComponent viewDefinition)
+    {
+        return false;
+    }
     
     public virtual void OnRegisterEntity(ECSEntity entity)
     {

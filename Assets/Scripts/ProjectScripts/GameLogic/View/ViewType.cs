@@ -9,5 +9,6 @@
     Menu = -1005,
     SimpleObstacle = -1006,
     FogState = -1007,
-    CastleUpgrade = -1008
+    CastleUpgrade = -1008,
+    SimpleUpgrade = -1009
 }

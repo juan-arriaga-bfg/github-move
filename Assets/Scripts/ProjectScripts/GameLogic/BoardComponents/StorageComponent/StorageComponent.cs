@@ -17,13 +17,15 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     private ViewDefinitionComponent viewDef;
     
     public TimerComponent Timer { get; private set; }
+
+    private Piece pieceContext;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
-        var piece = entity as Piece;
+        pieceContext = entity as Piece;
         
-        Timer = piece.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-        viewDef = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
+        Timer = pieceContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
+        viewDef = pieceContext.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)
@@ -79,8 +81,11 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         if(viewDef == null) return;
         
         var view = viewDef.AddView(ViewType.StorageState);
+        var isShow = Filling / (float) Capacity > 0.2f;
         
-        view.Change(Filling / (float) Capacity > 0.2f);
+        view.Change(isShow);
+        
+        if(isShow) pieceContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
     }
 
     public bool Scatter(out int amount)

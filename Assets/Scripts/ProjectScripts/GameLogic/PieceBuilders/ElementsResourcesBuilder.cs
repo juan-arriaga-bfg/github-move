@@ -151,6 +151,7 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.SimpleObstacle, R.ChangeSimpleObstacleStateView);
         dict.Add((int)ViewType.FogState, R.ChangeFogStateView);
         dict.Add((int)ViewType.CastleUpgrade, R.CastleUpgradeView);
+        dict.Add((int)ViewType.SimpleUpgrade, R.SimpleUpgradeView);
 
         return dict;
     }

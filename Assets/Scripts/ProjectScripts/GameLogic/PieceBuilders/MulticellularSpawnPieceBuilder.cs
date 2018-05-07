@@ -19,17 +19,20 @@
             Filling = def.IsFilledInStart ? def.SpawnCapacity : 0,
             Amount = def.SpawnAmount
         };
+
+        var upgrade = new UpgradeComponent();
         
         piece.RegisterComponent(storage);
         AddObserver(piece, storage);
+        
+        piece.RegisterComponent(upgrade);
+        AddObserver(piece, upgrade);
         
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionMenu()
                 .RegisterDefinition(new TouchReactionDefinitionUpgrade {Icon = "arrow_light"})
                 .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{Icon = PieceType.Parse(def.SpawnPieceType)}))
             .RegisterComponent(new TouchReactionConditionComponent()));
-        
-        /* AddView(piece, ViewType.Menu);*/
         
         return piece;
     }

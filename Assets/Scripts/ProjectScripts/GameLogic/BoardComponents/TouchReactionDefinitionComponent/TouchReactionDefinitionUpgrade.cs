@@ -1,5 +1,10 @@
 ﻿public class TouchReactionDefinitionUpgrade : TouchReactionDefinitionComponent
 {
+	public override bool IsViewShow(ViewDefinitionComponent viewDefinition)
+	{
+		return viewDefinition != null && viewDefinition.AddView(ViewType.SimpleUpgrade).IsShow;
+	}
+
 	public override bool Make(BoardPosition position, Piece piece)
 	{
 		var def = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(piece.PieceType);

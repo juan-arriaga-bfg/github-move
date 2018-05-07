@@ -2,6 +2,11 @@
 
 public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComponent
 {
+    public override bool IsViewShow(ViewDefinitionComponent viewDefinition)
+    {
+        return viewDefinition != null && viewDefinition.AddView(ViewType.StorageState).IsShow;
+    }
+    
     public override bool Make(BoardPosition position, Piece piece)
     {
         var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);

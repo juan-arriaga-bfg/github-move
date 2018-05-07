@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
 {
     public readonly List<TouchReactionDefinitionComponent> Definitions = new List<TouchReactionDefinitionComponent>();
-
-    public Action OnClick;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -17,11 +14,21 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
 
     public override bool Make(BoardPosition position, Piece piece)
     {
-        if (StorageClick(position, piece)) return true;
+        piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
         
-        if (OnClick == null) return false;
+        var viewDefinition = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
         
-        OnClick();
+        foreach (var def in Definitions)
+        {
+            if(def.IsViewShow(viewDefinition) == false) continue;
+
+            def.Make(position, piece);
+            return true;
+        }
+
+        var view = viewDefinition.AddView(ViewType.Menu);
+        
+        view.Change(!view.IsShow);
         return true;
     }
 
@@ -39,20 +46,5 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
         }
         
         return null;
-    }
-
-    private bool StorageClick(BoardPosition position, Piece piece)
-    {
-        var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
-
-        if (storage == null) return false;
-
-        var definition = GetDefinition<TouchReactionDefinitionSpawnInStorage>();
-        
-        if (definition == null) return false;
-
-        definition.Make(position, piece);
-        
-        return true;
     }
 }
