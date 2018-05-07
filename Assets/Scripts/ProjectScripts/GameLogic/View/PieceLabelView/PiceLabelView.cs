@@ -13,7 +13,7 @@ public class PiceLabelView : UIBoardView
     {
         base.Init(piece);
 
-        priority = -1;
+        Priority = defaultPriority = -1;
         
         var def = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(piece.PieceType);
 

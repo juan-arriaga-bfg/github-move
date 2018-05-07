@@ -21,7 +21,7 @@ public class SimpleUpgradeView : UIBoardView
     {
         base.Init(piece);
         
-        priority = 2;
+        Priority = defaultPriority = 2;
     }
     
     public void OnClick()

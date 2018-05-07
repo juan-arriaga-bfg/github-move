@@ -24,7 +24,7 @@ public class ChangeStorageStateView : UIBoardView
     {
         base.Init(piece);
         
-        priority = 11;
+        Priority = defaultPriority = 11;
         
         var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
         

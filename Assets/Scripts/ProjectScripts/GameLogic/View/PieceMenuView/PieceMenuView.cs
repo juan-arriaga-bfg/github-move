@@ -26,7 +26,7 @@ public class PieceMenuView : UIBoardView, IBoardEventListener
     {
         base.Init(piece);
 
-        priority = 20;
+        Priority = defaultPriority = 20;
         
         var touchReaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
         

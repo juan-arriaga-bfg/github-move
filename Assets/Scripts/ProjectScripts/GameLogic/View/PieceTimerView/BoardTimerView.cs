@@ -21,7 +21,7 @@ public class BoardTimerView : UIBoardView
     {
         base.Init(piece);
 
-        priority = 10;
+        Priority = defaultPriority = 10;
         timer = piece.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
 
         timer.OnExecute += UpdateView;

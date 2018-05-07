@@ -13,7 +13,9 @@ public class UIBoardView : BoardElementView
     
     public bool IsShow { get; set; }
     
-    protected int priority = 0;
+    private int priority = 0;
+
+    protected int defaultPriority;
     
     public int Priority
     {
@@ -23,7 +25,7 @@ public class UIBoardView : BoardElementView
     
     public int Layer
     {
-        get { return priority; }
+        get { return defaultPriority; }
     }
     
     protected virtual ViewType Id { get; set; }
@@ -45,6 +47,7 @@ public class UIBoardView : BoardElementView
 
     public override void ResetViewOnDestroy()
     {
+        IsShow = false;
         ResetAnimation();
         
         base.ResetViewOnDestroy();

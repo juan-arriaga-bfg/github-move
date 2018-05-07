@@ -12,6 +12,11 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 
 	private CastleUpgradeComponent upgrade;
 	
+	protected override ViewType Id
+	{
+		get { return ViewType.CastleUpgrade; }
+	}
+	
 	public override Vector3 Ofset
 	{
 		get { return new Vector3(0, 1.5f); }
@@ -26,7 +31,7 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 	{
 		base.Init(piece);
 		
-		priority = 2;
+		Priority = defaultPriority = 2;
 		label.Text = "Upgrade";
 		
 		upgrade = piece.GetComponent<CastleUpgradeComponent>(CastleUpgradeComponent.ComponentGuid);
