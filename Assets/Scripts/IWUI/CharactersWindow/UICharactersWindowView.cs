@@ -75,22 +75,17 @@ public class UICharactersWindowView : IWUIWindowView
 
         var heroes = windowModel.Heroes;
         var isSleep = false;
+        var count = Mathf.Max(3, heroes.Count);
         
-        if (heroes.Count == 0)
+        for (var i = 0; i < count; i++)
         {
-            pattern.GetComponent<UICharactersItem>().Decoration(null);
-            wakeUp.interactable = false;
-            return;
-        }
-
-        foreach (var hero in heroes)
-        {
+            var hero = i >= heroes.Count ? null : heroes[i];
             var item = Instantiate(pattern, pattern.transform.parent).GetComponent<UICharactersItem>();
-            
+
             item.Decoration(hero);
             windowModel.Items.Add(item);
-
-            if (hero.IsSleep) isSleep = true;
+            
+            if (hero != null && hero.IsSleep) isSleep = true;
         }
         
         pattern.SetActive(false);
