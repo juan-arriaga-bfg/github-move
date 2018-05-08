@@ -75,6 +75,12 @@ TextureImporter:
     21300136: attack_back
     21300138: attack_back_arrow
     21300140: quest_back
+    21300142: disable_button
+    21300144: shadow_button
+    21300146: red_button_push
+    21300148: blue_button_push
+    21300150: orange_button_push
+    21300152: green_button_push
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -762,8 +768,8 @@ TextureImporter:
         serializedVersion: 2
         x: 918
         y: 445
-        width: 59
-        height: 72
+        width: 48
+        height: 92
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 29, y: 0, z: 29, w: 0}
@@ -771,11 +777,123 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: red_button_push
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 621
+        width: 48
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 23, y: 45, z: 23, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: blue_button_push
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 714
+        width: 48
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 23, y: 45, z: 23, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: blue_button
+      rect:
+        serializedVersion: 2
+        x: 937
+        y: 621
+        width: 48
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 19, y: 30, z: 19, w: 30}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: orange_button
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 714
+        width: 48
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 18, y: 0, z: 18, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: orange_button_push
+      rect:
+        serializedVersion: 2
+        x: 967
+        y: 807
+        width: 48
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 23, y: 45, z: 23, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: green_button_push
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 900
+        width: 48
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 23, y: 45, z: 23, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: green_button
+      rect:
+        serializedVersion: 2
+        x: 967
+        y: 445
+        width: 48
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 22, y: 0, z: 23, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: disable_button
+      rect:
+        serializedVersion: 2
+        x: 986
+        y: 538
+        width: 48
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 23, y: 45, z: 23, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: icon_TimeChest
       rect:
         serializedVersion: 2
-        x: 918
-        y: 518
+        x: 986
+        y: 631
         width: 106
         height: 35
       alignment: 9
@@ -802,8 +920,8 @@ TextureImporter:
       name: header_back
       rect:
         serializedVersion: 2
-        x: 888
-        y: 621
+        x: 1016
+        y: 445
         width: 44
         height: 83
       alignment: 9
@@ -816,8 +934,8 @@ TextureImporter:
       name: progressbar_back
       rect:
         serializedVersion: 2
-        x: 978
-        y: 445
+        x: 986
+        y: 667
         width: 82
         height: 42
       alignment: 9
@@ -855,25 +973,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: green_button
+      name: collect_done
       rect:
         serializedVersion: 2
         x: 1078
         y: 173
-        width: 46
-        height: 72
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 22, y: 0, z: 23, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: collect_done
-      rect:
-        serializedVersion: 2
-        x: 1093
-        y: 73
         width: 57
         height: 57
       alignment: 9
@@ -883,25 +987,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: orange_button
-      rect:
-        serializedVersion: 2
-        x: 916
-        y: 705
-        width: 38
-        height: 74
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 18, y: 0, z: 18, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
       name: ramka_item_not_active_back_not_active
       rect:
         serializedVersion: 2
-        x: 1135
-        y: 0
+        x: 1093
+        y: 73
         width: 50
         height: 53
       alignment: 9
@@ -914,27 +1004,13 @@ TextureImporter:
       name: back_active
       rect:
         serializedVersion: 2
-        x: 933
-        y: 621
+        x: 1135
+        y: 0
         width: 50
         height: 52
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 24, y: 25, z: 24, w: 25}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: blue_button
-      rect:
-        serializedVersion: 2
-        x: 957
-        y: 554
-        width: 39
-        height: 62
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 19, y: 30, z: 19, w: 30}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -984,8 +1060,8 @@ TextureImporter:
       name: ramka_item_active_back_not_active
       rect:
         serializedVersion: 2
-        x: 1093
-        y: 131
+        x: 1078
+        y: 231
         width: 44
         height: 41
       alignment: 9
@@ -995,13 +1071,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: minibubble_arrow
+      name: Charger2
       rect:
         serializedVersion: 2
-        x: 1125
-        y: 173
-        width: 46
-        height: 39
+        x: 1014
+        y: 710
+        width: 39
+        height: 46
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1009,13 +1085,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: Charger2
+      name: minibubble_arrow
       rect:
         serializedVersion: 2
-        x: 1125
-        y: 213
-        width: 39
-        height: 46
+        x: 1123
+        y: 231
+        width: 46
+        height: 39
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1026,8 +1102,8 @@ TextureImporter:
       name: Charger3
       rect:
         serializedVersion: 2
-        x: 1151
-        y: 54
+        x: 1093
+        y: 127
         width: 42
         height: 42
       alignment: 9
@@ -1040,8 +1116,8 @@ TextureImporter:
       name: back_not_active
       rect:
         serializedVersion: 2
-        x: 1138
-        y: 131
+        x: 1014
+        y: 757
         width: 47
         height: 37
       alignment: 9
@@ -1054,8 +1130,8 @@ TextureImporter:
       name: Charger1
       rect:
         serializedVersion: 2
-        x: 1186
-        y: 0
+        x: 1054
+        y: 710
         width: 39
         height: 39
       alignment: 9
@@ -1068,8 +1144,8 @@ TextureImporter:
       name: Charger6
       rect:
         serializedVersion: 2
-        x: 955
-        y: 674
+        x: 1069
+        y: 667
         width: 39
         height: 39
       alignment: 9
@@ -1082,8 +1158,8 @@ TextureImporter:
       name: Charger4
       rect:
         serializedVersion: 2
-        x: 984
-        y: 617
+        x: 1136
+        y: 127
         width: 35
         height: 38
       alignment: 9
@@ -1107,6 +1183,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: shadow_button
+      rect:
+        serializedVersion: 2
+        x: 1136
+        y: 166
+        width: 30
+        height: 41
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 14, y: 20, z: 14, w: 20}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: progress
       rect:
         serializedVersion: 2
@@ -1124,8 +1214,8 @@ TextureImporter:
       name: attack_back_arrow
       rect:
         serializedVersion: 2
-        x: 933
-        y: 674
+        x: 888
+        y: 714
         width: 21
         height: 21
       alignment: 9
