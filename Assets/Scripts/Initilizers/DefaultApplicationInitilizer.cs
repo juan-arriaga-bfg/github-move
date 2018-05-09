@@ -70,9 +70,6 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             //ProfileService.Current.Purchases.StorageItems.Clear();
             ProfileService.Instance.Manager.CheckMigration();
             
-            // set start Currency
-            profile.GetStorageItem(Currency.Level.Name).Amount = 1;
-
 #if UNITY_EDITOR
             ProfileService.Instance.Manager.SaveLocalProfile();
 #endif
@@ -90,7 +87,6 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
                 ProfileService.Current.Settings.Language = SystemLanguage.English.ToString();
                 localizationManager.SwitchLocalization(ProfileService.Current.Settings.Language);
             }
-            
         });
         
         // gamedata configs
@@ -107,7 +103,6 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         dataManager.FogsManager.LoadData(new ResourceConfigDataMapper<FogsDataManager>("configs/fogs.data", NSConfigsSettings.Instance.IsUseEncryption));
         dataManager.CollectionManager.LoadData(new ResourceConfigDataMapper<CollectionDataManager>("configs/collection.data", NSConfigsSettings.Instance.IsUseEncryption));
         dataManager.LevelsManager.LoadData(new ResourceConfigDataMapper<List<LevelsDef>>("configs/levels.data", NSConfigsSettings.Instance.IsUseEncryption));
-
     }
     
     void OnApplicationPause(bool pauseStatus)

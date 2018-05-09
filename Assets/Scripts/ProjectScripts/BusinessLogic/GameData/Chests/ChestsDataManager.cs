@@ -26,6 +26,22 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
                     
                     Chests.Add(defNext);
                 }
+
+                var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+                
+                if(save == null || save.Chests == null || save.Chests.Count == 0) return;
+
+                foreach (var item in save.Chests)
+                {
+                    var chest = GetChest(item.Id);
+                    
+                    chest.State = item.State;
+                    chest.SetStartTime(item.StartTime);
+                    
+                    ChestsOnBoard.Add(item.Position, chest);
+
+                    if (chest.State == ChestState.InProgress) ActiveChest = chest;
+                }
             }
             else
             {

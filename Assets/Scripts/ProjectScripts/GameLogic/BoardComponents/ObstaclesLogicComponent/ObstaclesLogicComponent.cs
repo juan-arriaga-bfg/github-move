@@ -27,8 +27,6 @@ public class ObstaclesLogicComponent : IECSComponent, IECSSystem
 
     public void Init()
     {
-        CreateFog();
-        
         var data = GameDataService.Current.ObstaclesManager.Obstacles;
         var positions = new List<BoardPosition>();
 
@@ -48,26 +46,6 @@ public class ObstaclesLogicComponent : IECSComponent, IECSSystem
             Piece = PieceType.Quest.Id,
             Positions = positions
         });*/
-    }
-
-    private void CreateFog()
-    {
-        var data = GameDataService.Current.FogsManager.Fogs;
-        var positions = new List<BoardPosition>();
-
-        foreach (var fog in data)
-        {
-            var pos = fog.Position;
-
-            pos.Z = context.BoardDef.PieceLayer;
-            positions.Add(pos);
-        }
-
-        context.ActionExecutor.PerformAction(new FillBoardAction
-        {
-            Piece = PieceType.Fog.Id,
-            Positions = positions
-        });
     }
     
     public void Execute()

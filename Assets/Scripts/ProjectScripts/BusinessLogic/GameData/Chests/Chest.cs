@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public enum ChestState
 {
-    Close,
+    Close = 0,
     InProgress,
     Open,
     Finished
@@ -77,13 +77,18 @@ public class Chest
                     StartTime = null;
                     break;
                 case ChestState.InProgress:
-                    StartTime = DateTime.Now;
-                    completeTime = DateTime.Now.AddSeconds(def.Time);
+                    SetStartTime(DateTime.Now);
                     break;
             }
 
             chestState = value;
         }
+    }
+
+    public void SetStartTime(DateTime time)
+    {
+        StartTime = time;
+        completeTime = time.AddSeconds(def.Time);
     }
 
     public Dictionary<int, int> GetRewardPieces(int level)

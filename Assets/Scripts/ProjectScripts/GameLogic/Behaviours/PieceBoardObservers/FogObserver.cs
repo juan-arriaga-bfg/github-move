@@ -27,7 +27,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         {
             condition = def.Condition;
             storageItem = ProfileService.Current.GetStorageItem(GetResourceId());
-        
+            
             ResourcesViewManager.Instance.RegisterView(this);
         }
         

@@ -33,10 +33,13 @@
         if(Chest != null) return;
         
         Chest = GameDataService.Current.ChestsManager.GetFromBoard(position, contextPiece.PieceType);
+        
         timer.Delay = Chest.Def.Time;
         timer.OnStart += OnStart;
         timer.OnStop += OnComplete;
         timer.OnComplete += OnComplete;
+
+        if (Chest.StartTime != null) timer.Start(Chest.StartTime.Value);
     }
 
     public void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)

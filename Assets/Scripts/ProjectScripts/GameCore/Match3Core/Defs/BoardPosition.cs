@@ -88,6 +88,11 @@ public struct BoardPosition : IEquatable<BoardPosition>
         return string.Format("[{0},{1},{2}]", X, Y, Z);
     }
 
+    public string ToSaveString()
+    {
+        return string.Format("{0},{1},{2}", X, Y, Z);
+    }
+
     public static BoardPosition Default()
     {
         return new BoardPosition(-1, -1);
@@ -96,6 +101,25 @@ public struct BoardPosition : IEquatable<BoardPosition>
     public static BoardPosition Zero()
     {
         return new BoardPosition(0, 0);
+    }
+
+    public static BoardPosition Parse(string value)
+    {
+        var valueArray = value.Split(new string[] {","}, StringSplitOptions.RemoveEmptyEntries);
+        var result = new int[] {0, 0, 0};
+
+        for (var i = 0; i < result.Length; i++)
+        {
+            if(i == valueArray.Length) break;
+            
+            int j;
+            
+            if(int.TryParse(valueArray[i], out j) == false) break;
+
+            result[i] = j;
+        }
+        
+        return new BoardPosition(result[0], result[1], result[2]);
     }
     
     public static List<BoardPosition> GetLine(BoardPosition dot, int length)

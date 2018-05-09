@@ -27,6 +27,15 @@ public class TimerComponent : IECSComponent, IECSSystem
     {
     }
 
+    public void Start(DateTime start)
+    {
+        IsStarted = true;
+        IsPaused = false;
+        startTime = start;
+        completeTime = startTime.AddSeconds(Delay);
+        if(OnStart != null) OnStart();
+    }
+    
     public void Start()
     {
         IsStarted = true;

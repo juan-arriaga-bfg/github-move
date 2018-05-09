@@ -7,6 +7,11 @@ public class PiecePositionsCacheComponent : IECSComponent
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
 	private Dictionary<int, List<BoardPosition>> cache = new Dictionary<int, List<BoardPosition>>();
+	
+	public Dictionary<int, List<BoardPosition>> Cache
+	{
+		get { return cache; }
+	}
 
 	private BoardLogicComponent context;
 	

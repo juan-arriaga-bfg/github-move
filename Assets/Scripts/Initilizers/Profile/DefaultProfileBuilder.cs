@@ -19,5 +19,6 @@
 
     public void SetDefaultSettings(UserProfile profile)
     {
+        profile.GetStorageItem(Currency.Level.Name).Amount = 1;
     }
 }
