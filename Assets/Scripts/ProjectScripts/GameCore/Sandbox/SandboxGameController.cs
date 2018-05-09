@@ -227,6 +227,9 @@ public class SandboxGameController : MonoBehaviour
         
         //register board
         BoardService.Current.RegisterBoard(boardController, 0);
+
+        var fieldDef = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+        Debug.LogWarning(Newtonsoft.Json.JsonConvert.SerializeObject(fieldDef.FieldSave));
     }
 
     private void AddPieces(BoardPosition position, int first, int last, BoardController board)

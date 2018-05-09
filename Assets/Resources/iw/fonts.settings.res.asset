@@ -22,80 +22,44 @@ MonoBehaviour:
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
   - id: 1
-    nameId: Outline_8b5024
+    nameId: level
     fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 40af28b5e35bf9e4d95ed2641a26f305, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
-  - id: 2
-    nameId: Outline_771821
+  - id: 7
+    nameId: messageHard
     fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-    materialPreset: {fileID: 2100000, guid: 6b81a29e1d360e04a8894ecbca906792, type: 2}
-    mainColor: {r: 1, g: 1, b: 1, a: 1}
+    materialPreset: {fileID: 2100000, guid: c89a26b8f9bca2a4db04463316012bc1, type: 2}
+    mainColor: {r: 0.5764706, g: 0.24313726, b: 0, a: 1}
     fontSize: -1
   - id: 3
-    nameId: Outline_567d02
+    nameId: error
     fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-    materialPreset: {fileID: 2100000, guid: 0513568949590124ab6122ab0015a16e, type: 2}
-    mainColor: {r: 1, g: 1, b: 1, a: 1}
+    materialPreset: {fileID: 2100000, guid: fae4c013b7c9fd246a636db668c8c6fd, type: 2}
+    mainColor: {r: 0.90588236, g: 0.02745098, b: 0.02745098, a: 0}
     fontSize: -1
   - id: 4
-    nameId: Outline_ac7c3d
+    nameId: message
     fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 971c9320aef681a47afb074c8dc1b434, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
   - id: 5
-    nameId: Outline_1261ad
+    nameId: titleAndButton
     fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-    materialPreset: {fileID: 2100000, guid: 2fbf36510faba3e49af80633ffc0bcc1, type: 2}
+    materialPreset: {fileID: 2100000, guid: 3e59aa505c1fd16488e087d3149c642d, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
   - id: 6
-    nameId: Outline_9a844c
+    nameId: messageLock
     fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 2dfda0c8933f63b4e88da583b6fa0fe3, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
-  - id: 7
-    nameId: Color_933E00
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-    materialPreset: {fileID: 2100000, guid: c89a26b8f9bca2a4db04463316012bc1, type: 2}
-    mainColor: {r: 0.5764706, g: 0.24313727, b: 0, a: 1}
-    fontSize: -1
-  - id: 8
-    nameId: Outline_000000
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-    materialPreset: {fileID: 2100000, guid: b1d5292113929d54ebfc43d3d2cc2c75, type: 2}
-    mainColor: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: -1
-  - id: 9
-    nameId: Outline_77581a
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-    materialPreset: {fileID: 2100000, guid: d920d059421c6d14bac289ba15a956e0, type: 2}
-    mainColor: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: -1
   - id: 10
-    nameId: Outline_7d5902
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-    materialPreset: {fileID: 2100000, guid: 752e45c2ea841b146a0675023cfd18ed, type: 2}
-    mainColor: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: -1
-  - id: 11
-    nameId: Outline_3d2900
+    nameId: Number
     fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 892318b211b69834e92a7156f87083b9, type: 2}
-    mainColor: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: -1
-  - id: 12
-    nameId: redAndWhiteOutline
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-    materialPreset: {fileID: 2100000, guid: fae4c013b7c9fd246a636db668c8c6fd, type: 2}
-    mainColor: {r: 0.90588236, g: 0.02745098, b: 0.02745098, a: 0}
-    fontSize: -1
-  - id: 13
-    nameId: OutlineAlpha
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-    materialPreset: {fileID: 2100000, guid: 3e59aa505c1fd16488e087d3149c642d, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1

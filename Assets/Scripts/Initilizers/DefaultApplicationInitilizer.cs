@@ -30,7 +30,11 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         
         //init profile 
         var profileManager = new ProfileManager<UserProfile> { SystemVersion = 1 };
+#if UNITY_EDITOR
+        profileManager.Init(new ResourceConfigDataMapper<UserProfile>("configs/profile.data", false), new DefaultProfileBuilder(), new DefaultProfileMigration());
+#else
         profileManager.Init(new StoragePlayerPrefsDataMapper<UserProfile>("user.profile"), new DefaultProfileBuilder(), new DefaultProfileMigration());
+#endif
         ProfileService.Instance.SetManager(profileManager);
         
         //init assetbundle
@@ -52,48 +56,22 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         
         //init shopmanager
         ShopManager shopManager = new ShopManager();
-        shopManager.InitStorage(new ResourceConfigDataMapper<IEnumerable<ShopItem>>("configs/shopitems.data", NSConfigsSettings.Instance.IsUseEncryption),
-        (shopItems) =>
-        {
-            Currency.RegisterCurrency(Currency.Coins);
-            Currency.RegisterCurrency(Currency.Cash);
-            Currency.RegisterCurrency(Currency.Crystals);
-            
-            Currency.RegisterCurrency(Currency.Enemy);
-            
-            Currency.RegisterCurrency(Currency.Quest);
-            Currency.RegisterCurrency(Currency.Obstacle);
-            Currency.RegisterCurrency(Currency.Power);
-            Currency.RegisterCurrency(Currency.Level);
-            Currency.RegisterCurrency(Currency.Energy);
-            
-            Currency.RegisterCurrency(Currency.LevelCastle);
-            Currency.RegisterCurrency(Currency.LevelTavern);
-            Currency.RegisterCurrency(Currency.LevelMine);
-            Currency.RegisterCurrency(Currency.LevelSawmill);
-            Currency.RegisterCurrency(Currency.LevelSheepfold);
-            
-            Currency.RegisterCurrency(Currency.Charger1);
-            Currency.RegisterCurrency(Currency.Charger2);
-            Currency.RegisterCurrency(Currency.Charger3);
-            Currency.RegisterCurrency(Currency.Charger4);
-            Currency.RegisterCurrency(Currency.Charger5);
-            Currency.RegisterCurrency(Currency.Charger6);
-            Currency.RegisterCurrency(Currency.Charger7);
-            Currency.RegisterCurrency(Currency.Charger8);
-            Currency.RegisterCurrency(Currency.Charger9);
-        });
+        shopManager.InitStorage(
+            new ResourceConfigDataMapper<IEnumerable<ShopItem>>("configs/shopitems.data",
+                NSConfigsSettings.Instance.IsUseEncryption),
+            (shopItems) => { });
         
         ShopService.Instance.SetManager(shopManager);
         
         // load local profile
         ProfileService.Instance.Manager.LoadCurrentProfile((profile) =>
         {
-            ProfileService.Current.StorageItems.Clear();
+            new DefaultProfileBuilder().SetupComponents(profile);
+            //ProfileService.Current.Purchases.StorageItems.Clear();
             ProfileService.Instance.Manager.CheckMigration();
             
             // set start Currency
-            profile.GetStorageItem(Currency.Level.Name).Amount += 1;
+            profile.GetStorageItem(Currency.Level.Name).Amount = 1;
 
 #if UNITY_EDITOR
             ProfileService.Instance.Manager.SaveLocalProfile();
@@ -103,14 +81,14 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             LocalizationService.Instance.SetManager(localizationManager);
             localizationManager.SupportedLanguages = NSLocalizationSettings.Instance.SupportedLanguages;
 
-            if (localizationManager.IsLanguageSupported(ProfileService.Current.UserSettings.Language))
+            if (localizationManager.IsLanguageSupported(ProfileService.Current.Settings.Language))
             {
-                localizationManager.SwitchLocalization(ProfileService.Current.UserSettings.Language);
+                localizationManager.SwitchLocalization(ProfileService.Current.Settings.Language);
             }
             else
             {
-                ProfileService.Current.UserSettings.Language = SystemLanguage.English.ToString();
-                localizationManager.SwitchLocalization(ProfileService.Current.UserSettings.Language);
+                ProfileService.Current.Settings.Language = SystemLanguage.English.ToString();
+                localizationManager.SwitchLocalization(ProfileService.Current.Settings.Language);
             }
             
         });

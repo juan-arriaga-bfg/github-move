@@ -12,7 +12,9 @@
 
     public void SetupComponents(UserProfile profile)
     {
-//        profile.RegisterComponent(new LevelProgress());
+        profile.RegisterComponent(new UserPurchasesComponent());
+        profile.RegisterComponent(new UserSettingsComponent());
+        profile.RegisterComponent(new FieldDefComponent());
     }
 
     public void SetDefaultSettings(UserProfile profile)
