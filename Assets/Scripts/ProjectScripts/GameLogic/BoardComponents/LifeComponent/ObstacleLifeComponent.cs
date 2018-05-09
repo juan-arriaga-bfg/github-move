@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public class ObstacleLifeComponent : LifeComponent
+public class ObstacleLifeComponent : LifeComponent, IPieceBoardObserver
 {
     public CurrencyPair Price
     {
@@ -20,6 +20,19 @@ public class ObstacleLifeComponent : LifeComponent
         base.OnRegisterEntity(entity);
         
         HP = context.Context.BoardLogic.MatchDefinition.GetIndexInChain(context.PieceType);
+    }
+    
+    public void OnAddToBoard(BoardPosition position, Piece context = null)
+    {
+        current = GameDataService.Current.SimpleObstaclesManager.GetSaveStep(position);
+    }
+
+    public void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)
+    {
+    }
+
+    public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
+    {
     }
 
     public bool Damage()

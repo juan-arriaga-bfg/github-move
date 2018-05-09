@@ -4,6 +4,8 @@ using UnityEngine;
 public class SimpleObstaclesDataManager : IDataLoader<List<SimpleObstaclesDef>>
 {
     public Dictionary<int, SimpleObstaclesDef> Obstacles;
+
+    private Dictionary<BoardPosition, int> saveObstacles;
     
     public void LoadData(IDataMapper<List<SimpleObstaclesDef>> dataMapper)
     {
@@ -27,6 +29,17 @@ public class SimpleObstaclesDataManager : IDataLoader<List<SimpleObstaclesDef>>
                     }
                     
                     Obstacles.Add(next.Piece, next);
+                }
+                
+                var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+                
+                if(save == null || save.Obstacles == null) return;
+                
+                saveObstacles = new Dictionary<BoardPosition, int>();
+
+                foreach (var item in save.Obstacles)
+                {
+                    saveObstacles.Add(item.Position, item.Step);
                 }
             }
             else
@@ -79,5 +92,18 @@ public class SimpleObstaclesDataManager : IDataLoader<List<SimpleObstaclesDef>>
 //        var max = piece.Context.BoardLogic.MatchDefinition.GetIndexInChain(piece.PieceType);
 
         return new CurrencyPair {Currency = Currency.Coins.Name, Amount = stepPrice + (stepPrice / 2) * step};
+    }
+
+    public int GetSaveStep(BoardPosition position)
+    {
+        if (saveObstacles == null || saveObstacles.Count == 0) return 0;
+        
+        int step;
+        
+        if (saveObstacles.TryGetValue(position, out step) == false) return 0;
+        
+        saveObstacles.Remove(position);
+        
+        return step;
     }
 }

@@ -15,6 +15,11 @@ public class LifeComponent : IECSComponent
     
     protected int current;
     
+    public int Current
+    {
+        get { return current; }
+    }
+    
     public float GetProgress
     {
         get { return 1 - current/(float)HP; }

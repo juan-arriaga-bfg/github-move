@@ -4,7 +4,10 @@
 	{
 		var piece = base.Build(pieceType, context);
 
-		piece.RegisterComponent(new ObstacleLifeComponent());
+		var life = new ObstacleLifeComponent();
+
+		piece.RegisterComponent(life);
+		AddObserver(piece, life);
 		
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionSimpleObstacle())

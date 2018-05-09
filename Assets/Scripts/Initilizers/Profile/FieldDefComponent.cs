@@ -12,6 +12,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 
 	private List<PieceSaveItem> pieces;
 	private List<ChestSaveItem> chests;
+	private List<ObstacleSaveItem> obstacles;
 
 	[JsonProperty]
 	public List<PieceSaveItem> Pieces
@@ -27,6 +28,13 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		set { chests = value; }
 	}
 	
+	[JsonProperty]
+	public List<ObstacleSaveItem> Obstacles
+	{
+		get { return obstacles; }
+		set { obstacles = value; }
+	}
+	
 	[OnSerializing]
 	internal void OnSerialization(StreamingContext context)
 	{
@@ -40,6 +48,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		
 		pieces = new List<PieceSaveItem>();
 		chests = new List<ChestSaveItem>();
+		obstacles = new List<ObstacleSaveItem>();
 		
 		foreach (var item in cash)
 		{
@@ -47,9 +56,18 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			
 			pieces.Add(GetPieceSave(item.Key, item.Value));
 
-			if (match.GetFirst(item.Key) == PieceType.Chest1.Id)
+			var id = match.GetFirst(item.Key);
+
+			if (id == PieceType.Chest1.Id)
 			{
 				chests.AddRange(GetChestsSave(board.BoardLogic, item.Value));
+				continue;
+			}
+
+			if (id == PieceType.O1.Id || id == PieceType.OX1.Id)
+			{
+				obstacles.AddRange(GetObstacleSave(board.BoardLogic, item.Value));
+				continue;
 			}
 		}
 		
@@ -102,6 +120,27 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			items.Add(item);
 		}
 		
+		return items;
+	}
+
+	private List<ObstacleSaveItem> GetObstacleSave(BoardLogicComponent logic, List<BoardPosition> positions)
+	{
+		var items = new List<ObstacleSaveItem>();
+		
+		foreach (var position in positions)
+		{
+			var piece = logic.GetPieceAt(position);
+			
+			if (piece == null) continue;
+			
+			var component = piece.GetComponent<ObstacleLifeComponent>(ObstacleLifeComponent.ComponentGuid);
+			
+			if(component == null || component.Current == 0) continue;
+			
+			var item = new ObstacleSaveItem{Step = component.Current, Position = position};
+			
+			items.Add(item);
+		}
 		
 		return items;
 	}

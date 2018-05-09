@@ -29,7 +29,7 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
 
                 var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
                 
-                if(save == null || save.Chests == null || save.Chests.Count == 0) return;
+                if(save == null || save.Chests == null) return;
 
                 foreach (var item in save.Chests)
                 {
