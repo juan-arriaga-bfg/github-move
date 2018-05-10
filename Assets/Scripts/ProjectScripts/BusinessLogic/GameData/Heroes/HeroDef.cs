@@ -1,10 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public enum AbilityType
 {
     Strength,
     Dexterity,
     Power
+}
+
+public enum HeroType
+{
+    Robin = 0,
+    John,
+    Greenarrow
 }
 
 public class HeroAbility
@@ -21,4 +29,11 @@ public class HeroDef
     public List<HeroAbility> Abilities { get; set; }
     public List<CurrencyPair> Collection { get; set; }
     public List<CurrencyPair> Prices { get; set; }
+
+    public int SaveIndex()
+    {
+        var type = (HeroType)Enum.Parse(typeof(HeroType), Uid);
+        
+        return (int)type;
+    }
 }

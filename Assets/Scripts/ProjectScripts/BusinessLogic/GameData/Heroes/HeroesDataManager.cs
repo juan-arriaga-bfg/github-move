@@ -13,9 +13,21 @@ public class HeroesDataManager : IDataLoader<List<HeroDef>>
             
             if (string.IsNullOrEmpty(error))
             {
+                var save = ProfileService.Current.GetComponent<CharacterSaveComponent>(CharacterSaveComponent.ComponentGuid);
+                
                 foreach (var def in data)
                 {
-                    Heroes.Add(new Hero(def));
+                    var hero = new Hero(def);
+                    
+                    Heroes.Add(hero);
+
+                    if (save == null || save.Heroes == null) continue;
+                    
+                    var item = save.Heroes.Find(h => h.Id == def.SaveIndex());
+                    
+                    if(item == null) continue;
+                    
+                    hero.Sleep(item.StartTime);
                 }
             }
             else

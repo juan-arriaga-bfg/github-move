@@ -16,6 +16,7 @@
         profile.RegisterComponent(new UserSettingsComponent());
         profile.RegisterComponent(new FieldDefComponent());
         profile.RegisterComponent(new QuestSaveComponent());
+        profile.RegisterComponent(new CharacterSaveComponent());
     }
     
     public void SetDefaultSettings(UserProfile profile)

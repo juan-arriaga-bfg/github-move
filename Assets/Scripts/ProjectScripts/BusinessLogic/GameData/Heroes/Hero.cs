@@ -14,6 +14,11 @@ public class Hero
         get { return def; }
     }
     
+    public DateTime? SleepTime
+    {
+        get { return sleepTime; }
+    }
+    
     public List<CurrencyPair> Price
     {
         get { return def.Prices; }
@@ -133,11 +138,16 @@ public class Hero
     {
         sleepTime = null;
     }
-
+    
+    public void Sleep(DateTime then)
+    {
+        sleepTime = then;
+        completeTime = sleepTime.Value.AddSeconds(def.Cooldown);
+    }
+    
     public void Sleep()
     {
-        sleepTime = DateTime.UtcNow;
-        completeTime = DateTime.UtcNow.AddSeconds(def.Cooldown);
+        Sleep(DateTime.UtcNow);
     }
 
     public string GetSlepTime()
