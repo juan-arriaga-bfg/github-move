@@ -58,14 +58,14 @@ public class DragAndCheckMatchAction : IBoardAction
 		
 		logic.MovePieceFromTo(From, To);
 		
-		IBoardAction action;
+		/*IBoardAction action;
 		
 		if (CheckMatch(board, null, out action))
 		{
 			board.RendererContext.MoveElement(From, To);
 			board.ActionExecutor.PerformAction(action);
 			return true;
-		}
+		}*/
 		
 		MovePiece(board, From, To);
 		return true;

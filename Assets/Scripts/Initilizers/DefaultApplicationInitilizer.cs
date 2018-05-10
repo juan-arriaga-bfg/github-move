@@ -67,7 +67,6 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         ProfileService.Instance.Manager.LoadCurrentProfile((profile) =>
         {
             new DefaultProfileBuilder().SetupComponents(profile);
-            //ProfileService.Current.Purchases.StorageItems.Clear();
             ProfileService.Instance.Manager.CheckMigration();
             
 #if UNITY_EDITOR

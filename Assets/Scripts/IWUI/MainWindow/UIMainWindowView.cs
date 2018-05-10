@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIMainWindowView : IWUIWindowView
 {
@@ -62,5 +63,10 @@ public class UIMainWindowView : IWUIWindowView
                 Destroy(item.gameObject);
             }
         }
+    }
+
+    public void OnClickReset()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
