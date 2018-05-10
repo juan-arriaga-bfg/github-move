@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class FieldControllerComponent : IECSComponent
 {

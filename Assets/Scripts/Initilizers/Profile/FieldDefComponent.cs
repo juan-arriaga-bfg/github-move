@@ -74,19 +74,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		pieces.Sort((a, b) => a.Id.CompareTo(b.Id));
 	}
 	
-	[OnDeserialized]
-	internal void OnDeserialized(StreamingContext context)
-	{
-		if(GameDataService.Current == null) return;
-		
-		var chestsManager = GameDataService.Current.ChestsManager;
-
-		foreach (var item in Chests)
-		{
-			chestsManager.AddToBoard(item.Position, item.Id, true);
-		}
-	}
-
 	private PieceSaveItem GetPieceSave(int id, List<BoardPosition> positions)
 	{
 		var item = new PieceSaveItem {Id = id, Positions = new List<BoardPosition>()};
@@ -143,5 +130,14 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		}
 		
 		return items;
+	}
+
+	public int GetSavePieceCountById(int id)
+	{
+		if (Pieces == null || pieces.Count == 0) return 0;
+
+		var save = Pieces.Find(item => item.Id == id);
+
+		return save == null ? 0 : save.Positions.Count;
 	}
 }

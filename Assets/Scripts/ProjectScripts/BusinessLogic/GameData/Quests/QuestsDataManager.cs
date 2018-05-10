@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class QuestsDataManager : IDataLoader<List<QuestDef>>
@@ -20,6 +21,41 @@ public class QuestsDataManager : IDataLoader<List<QuestDef>>
 			if (string.IsNullOrEmpty(error))
 			{
 				quests = data;
+				
+				var questSave = ProfileService.Current.GetComponent<QuestSaveComponent>(QuestSaveComponent.ComponentGuid);
+
+				if (questSave != null)
+				{
+					if (questSave.Completed != null)
+					{
+						foreach (var uid in questSave.Completed)
+						{
+							completed.Add(uid, true);
+						}
+					}
+					
+					UpdateActiveQuest();
+
+					if (questSave.Active != null)
+					{
+						var fieldSave = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+						
+						foreach (var quest in stack)
+						{
+							if (questSave.Active.Count == 0) break;
+
+							var active = questSave.Active.Find(item => item.Uid == quest.Def.Uid);
+							
+							if(active == null) continue;
+
+							var count = fieldSave == null ? 0 : fieldSave.GetSavePieceCountById(active.Uid);
+
+							quest.CurrentAmount = Mathf.Max(0, active.Progress - count);
+							questSave.Active.Remove(active);
+						}
+					}
+				}
+				
 				UpdateActiveQuest();
 			}
 			else
@@ -77,5 +113,10 @@ public class QuestsDataManager : IDataLoader<List<QuestDef>>
 	public bool IsCompleted(int uid)
 	{
 		return completed.ContainsKey(uid);
+	}
+
+	public List<int> SaveCompleted()
+	{
+		return completed.Keys.ToList();
 	}
 }
