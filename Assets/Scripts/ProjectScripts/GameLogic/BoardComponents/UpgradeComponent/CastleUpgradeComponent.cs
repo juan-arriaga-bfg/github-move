@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CastleUpgradeComponent : IECSComponent, IPieceBoardObserver, IBoardEventListener
 {
@@ -20,10 +21,23 @@ public class CastleUpgradeComponent : IECSComponent, IPieceBoardObserver, IBoard
         if (def == null || isLast) return;
         
         var up = def.UpgradePrices;
+        var questSave = ProfileService.Current.GetComponent<QuestSaveComponent>(QuestSaveComponent.ComponentGuid);
 
         foreach (var pair in up)
         {
-            Prices.Add(new Quest(new QuestDef{Price = pair}));
+            var quest = new Quest(new QuestDef {Uid = PieceType.Parse(pair.Currency), Price = pair});
+            
+            if (questSave != null && questSave.Castle != null && questSave.Castle.Count != 0)
+            {
+                var save = questSave.Castle.Find(item => item.Uid == quest.Def.Uid);
+
+                if (save != null)
+                {
+                    quest.CurrentAmount = save.Progress;
+                }
+            }
+            
+            Prices.Add(quest);
         }
         
         viewDef = thisContext.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);

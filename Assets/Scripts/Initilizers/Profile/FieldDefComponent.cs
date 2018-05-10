@@ -71,7 +71,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			}
 		}
 		
-		pieces.Sort((a, b) => a.Id.CompareTo(b.Id));
+		pieces.Sort((a, b) => -a.Id.CompareTo(b.Id));
 	}
 	
 	private PieceSaveItem GetPieceSave(int id, List<BoardPosition> positions)
@@ -130,14 +130,5 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		}
 		
 		return items;
-	}
-
-	public int GetSavePieceCountById(int id)
-	{
-		if (Pieces == null || pieces.Count == 0) return 0;
-
-		var save = Pieces.Find(item => item.Id == id);
-
-		return save == null ? 0 : save.Positions.Count;
 	}
 }

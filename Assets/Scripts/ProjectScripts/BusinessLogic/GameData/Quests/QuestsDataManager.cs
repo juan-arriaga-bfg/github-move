@@ -38,19 +38,15 @@ public class QuestsDataManager : IDataLoader<List<QuestDef>>
 
 					if (questSave.Active != null)
 					{
-						var fieldSave = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
-						
 						foreach (var quest in stack)
 						{
 							if (questSave.Active.Count == 0) break;
-
+							
 							var active = questSave.Active.Find(item => item.Uid == quest.Def.Uid);
 							
 							if(active == null) continue;
-
-							var count = fieldSave == null ? 0 : fieldSave.GetSavePieceCountById(active.Uid);
-
-							quest.CurrentAmount = Mathf.Max(0, active.Progress - count);
+							
+							quest.CurrentAmount = active.Progress;
 							questSave.Active.Remove(active);
 						}
 					}
