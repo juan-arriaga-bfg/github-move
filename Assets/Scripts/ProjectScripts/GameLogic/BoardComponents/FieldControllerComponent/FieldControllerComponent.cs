@@ -33,6 +33,16 @@ public class FieldControllerComponent : IECSComponent
                 Positions = item.Positions
             });
         }
+        
+        if(fieldDef.Resources == null) return;
+        
+        foreach (var item in fieldDef.Resources)
+        {
+            foreach (var pair in item.Resources)
+            {
+                GameDataService.Current.CollectionManager.CastResourceOnBoard(item.Position, pair);
+            }
+        }
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)

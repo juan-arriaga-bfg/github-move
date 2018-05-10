@@ -26,4 +26,19 @@
     public static readonly CurrencyDef Charger7 = new CurrencyDef { Id = 1007, Name = "Charger7", IsConsumable = true };
     public static readonly CurrencyDef Charger8 = new CurrencyDef { Id = 1008, Name = "Charger8", IsConsumable = true };
     public static readonly CurrencyDef Charger9 = new CurrencyDef { Id = 1009, Name = "Charger9", IsConsumable = true };
+    
+    public static readonly CurrencyDef RobinItem1 = new CurrencyDef { Id = 11001, Name = "RobinItem1", IsConsumable = true };
+    public static readonly CurrencyDef RobinItem2 = new CurrencyDef { Id = 11002, Name = "RobinItem2", IsConsumable = true };
+    public static readonly CurrencyDef RobinItem3 = new CurrencyDef { Id = 11003, Name = "RobinItem3", IsConsumable = true };
+    public static readonly CurrencyDef RobinItem4 = new CurrencyDef { Id = 11004, Name = "RobinItem4", IsConsumable = true };
+    
+    public static readonly CurrencyDef JohnItem1 = new CurrencyDef { Id = 12001, Name = "JohnItem1", IsConsumable = true };
+    public static readonly CurrencyDef JohnItem2 = new CurrencyDef { Id = 12002, Name = "JohnItem2", IsConsumable = true };
+    public static readonly CurrencyDef JohnItem3 = new CurrencyDef { Id = 12003, Name = "JohnItem3", IsConsumable = true };
+    public static readonly CurrencyDef JohnItem4 = new CurrencyDef { Id = 12004, Name = "JohnItem4", IsConsumable = true };
+    
+    public static readonly CurrencyDef GreenarrowItem1 = new CurrencyDef { Id = 13001, Name = "GreenarrowItem1", IsConsumable = true };
+    public static readonly CurrencyDef GreenarrowItem2 = new CurrencyDef { Id = 13002, Name = "GreenarrowItem2", IsConsumable = true };
+    public static readonly CurrencyDef GreenarrowItem3 = new CurrencyDef { Id = 13003, Name = "GreenarrowItem3", IsConsumable = true };
+    public static readonly CurrencyDef GreenarrowItem4 = new CurrencyDef { Id = 13004, Name = "GreenarrowItem4", IsConsumable = true };
 }

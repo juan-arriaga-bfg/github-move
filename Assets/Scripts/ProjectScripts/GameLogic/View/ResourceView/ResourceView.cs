@@ -1,5 +1,7 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ResourceView : BoardElementView
 {
@@ -7,6 +9,7 @@ public class ResourceView : BoardElementView
     [SerializeField] private SpriteRenderer icon;
 
     private CurrencyPair resource;
+    private BoardPosition pos;
     
     private readonly ViewAnimationUid AnimationId = new ViewAnimationUid();
     private bool isCollect;
@@ -17,7 +20,7 @@ public class ResourceView : BoardElementView
 
         icon.sprite = IconService.Current.GetSpriteById(this.resource.Currency);
 
-        icon.transform.localScale = Vector3.one * (Currency.GetCurrencyDef(this.resource.Currency) == null ? 0.9f : 2f);
+        icon.transform.localScale = Vector3.one * (this.resource.Currency.IndexOf("Charger", StringComparison.Ordinal) == -1 ? 0.9f : 2f);
     }
 
     private void StartAnimation()
@@ -42,7 +45,6 @@ public class ResourceView : BoardElementView
         DOTween.Kill(body);
         DOTween.Kill(AnimationId);
         
-        
         DestroyOnBoard(duration);
         
         if (GameDataService.Current.CollectionManager.Contains(resource.Currency))
@@ -50,7 +52,7 @@ public class ResourceView : BoardElementView
             var model = UIService.Get.GetCachedModel<UICollectionWindowModel>(UIWindowType.CollectionWindow);
 
             model.Element = resource.Currency;
-            model.OnOpen = () => CurrencyHellper.Purchase(resource);
+            model.OnOpen = () => GameDataService.Current.CollectionManager.CollectResourceFromBoard(pos, resource);
             
             UIService.Get.ShowWindow(UIWindowType.CollectionWindow);
             
@@ -64,7 +66,7 @@ public class ResourceView : BoardElementView
         body.DOScale(Vector3.one * 0.5f, duration).SetId(body).SetEase(Ease.OutBack);
         body.DOMove(target, duration).SetId(body);
         
-        CurrencyHellper.Purchase(resource);
+        GameDataService.Current.CollectionManager.CollectResourceFromBoard(pos, resource);
     }
     
     public override void ResetViewOnDestroy()
@@ -102,6 +104,8 @@ public class ResourceView : BoardElementView
         var view = board.RendererContext.CreateBoardElementAt<ResourceView>(R.ResourceView, at);
         
         var sequence = DOTween.Sequence().SetId(view.body);
+
+        view.pos = at;
         
         sequence.InsertCallback(0, () => view.Show(resource));
         sequence.Insert(duration, view.CachedTransform.DOJump(new Vector3(to.x, to.y, view.CachedTransform.position.z), 1, 1, 0.4f).SetEase(Ease.InOutSine));

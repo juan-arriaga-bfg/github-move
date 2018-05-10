@@ -14,6 +14,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	private List<ChestSaveItem> chests;
 	private List<ObstacleSaveItem> obstacles;
 	private List<StorageSaveItem> storages;
+	private List<ResourceSaveItem> resources;
 	
 	[JsonProperty]
 	public List<PieceSaveItem> Pieces
@@ -42,7 +43,14 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		get { return storages; }
 		set { storages = value; }
 	}
-
+	
+	[JsonProperty]
+	public List<ResourceSaveItem> Resources
+	{
+		get { return resources; }
+		set { resources = value; }
+	}
+	
 	public Dictionary<BoardPosition, StorageSaveItem> StorageSave;
 	
 	[OnSerializing]
@@ -60,6 +68,8 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		chests = new List<ChestSaveItem>();
 		obstacles = new List<ObstacleSaveItem>();
 		storages = new List<StorageSaveItem>();
+		
+		resources = GetResourceSave();
 		
 		foreach (var item in cash)
 		{
@@ -173,6 +183,22 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			var item = new StorageSaveItem{Position = position, Filling = component.Filling, StartTime = component.Timer.StartTime};
 			
 			items.Add(item);
+		}
+		
+		return items;
+	}
+
+	private List<ResourceSaveItem> GetResourceSave()
+	{
+		var items = new List<ResourceSaveItem>();
+		
+		if(GameDataService.Current == null) return items;
+
+		var onBoard = GameDataService.Current.CollectionManager.ResourcesOnBoard;
+
+		foreach (var item in onBoard)
+		{
+			items.Add(new ResourceSaveItem{Position = item.Key, Resources = item.Value});
 		}
 		
 		return items;

@@ -31,7 +31,9 @@ public class ChestRewardAction : IBoardAction
 		{
 			for (var i = 0; i < reward.Value; i++)
 			{
-				ResourceView.Show(new BoardPosition(From.X, From.Y, From.Z + i + 1), new CurrencyPair{Currency = reward.Key, Amount = 1});
+				GameDataService.Current.CollectionManager.CastResourceOnBoard(
+					new BoardPosition(From.X, From.Y, From.Z + i + 1),
+					new CurrencyPair{Currency = reward.Key, Amount = 1});
 			}
 		}
 
@@ -39,7 +41,8 @@ public class ChestRewardAction : IBoardAction
 
 		if (string.IsNullOrEmpty(collection) == false)
 		{
-			ResourceView.Show(From, new CurrencyPair{Currency = collection, Amount = 1});
+			GameDataService.Current.CollectionManager.CastResourceOnBoard(From,
+				new CurrencyPair{Currency = collection, Amount = 1});
 		}
 		
 		foreach (var reward in Pieces)
