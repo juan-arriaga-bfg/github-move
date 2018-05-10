@@ -34,6 +34,7 @@ public class CastleUpgradeComponent : IECSComponent, IPieceBoardObserver, IBoard
                 if (save != null)
                 {
                     quest.CurrentAmount = save.Progress;
+                    questSave.Castle.Remove(save);
                 }
             }
             

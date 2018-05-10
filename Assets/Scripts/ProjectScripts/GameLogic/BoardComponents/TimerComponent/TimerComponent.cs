@@ -26,21 +26,22 @@ public class TimerComponent : IECSComponent, IECSSystem
     public void OnUnRegisterEntity(ECSEntity entity)
     {
     }
+    
+    public void Start()
+    {
+        Start(DateTime.UtcNow);
+    }
 
+    public void Start(long start)
+    {
+        Start(DateTimeExtension.UnixTimeToDateTime(start));
+    }
+    
     public void Start(DateTime start)
     {
         IsStarted = true;
         IsPaused = false;
         startTime = start;
-        completeTime = startTime.AddSeconds(Delay);
-        if(OnStart != null) OnStart();
-    }
-    
-    public void Start()
-    {
-        IsStarted = true;
-        IsPaused = false;
-        startTime = DateTime.Now;
         completeTime = startTime.AddSeconds(Delay);
         if(OnStart != null) OnStart();
     }
@@ -74,14 +75,19 @@ public class TimerComponent : IECSComponent, IECSSystem
         get { return false; }
     }
     
+    public long StartTime
+    {
+        get { return startTime.ConvertToUnixTime(); }
+    }
+    
     public TimeSpan GetTime()
     {
-        return DateTime.Now - startTime;
+        return DateTime.UtcNow - startTime;
     }
 
     public TimeSpan GetTimeLeft()
     {
-        return completeTime - DateTime.Now;
+        return completeTime - DateTime.UtcNow;
     }
 
     public string GetTimeText(string format)
@@ -92,6 +98,26 @@ public class TimerComponent : IECSComponent, IECSSystem
     public string GetTimeLeftText(string format)
     {
         return TimeFormat(GetTimeLeft(), format);
+    }
+
+    public int CountOfStepsPassedWhenAppWasInBackground(long then, out long now)
+    {
+        DateTime nowTime;
+        var count = CountOfStepsPassedWhenAppWasInBackground(DateTimeExtension.UnixTimeToDateTime(then), out nowTime);
+        
+        now = nowTime.ConvertToUnixTime();
+        return count;
+    }
+    
+    public int CountOfStepsPassedWhenAppWasInBackground(DateTime then, out DateTime now)
+    {
+        var elapsedTime = DateTime.UtcNow - then;
+        var count = (int) elapsedTime.TotalSeconds / Delay;
+        var remainder = (int) elapsedTime.TotalSeconds % Delay;
+        
+        now = DateTime.UtcNow.AddSeconds(-remainder);
+        
+        return count;
     }
 
     private string TimeFormat(TimeSpan time, string format)
@@ -105,5 +131,4 @@ public class TimerComponent : IECSComponent, IECSSystem
         
         return string.Format(format, time.Hours, time.Minutes, time.Seconds);
     }
-    
 }

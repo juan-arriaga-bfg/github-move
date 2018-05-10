@@ -13,7 +13,8 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	private List<PieceSaveItem> pieces;
 	private List<ChestSaveItem> chests;
 	private List<ObstacleSaveItem> obstacles;
-
+	private List<StorageSaveItem> storages;
+	
 	[JsonProperty]
 	public List<PieceSaveItem> Pieces
 	{
@@ -35,6 +36,15 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		set { obstacles = value; }
 	}
 	
+	[JsonProperty]
+	public List<StorageSaveItem> Storages
+	{
+		get { return storages; }
+		set { storages = value; }
+	}
+
+	public Dictionary<BoardPosition, StorageSaveItem> StorageSave;
+	
 	[OnSerializing]
 	internal void OnSerialization(StreamingContext context)
 	{
@@ -49,6 +59,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		pieces = new List<PieceSaveItem>();
 		chests = new List<ChestSaveItem>();
 		obstacles = new List<ObstacleSaveItem>();
+		storages = new List<StorageSaveItem>();
 		
 		foreach (var item in cash)
 		{
@@ -57,6 +68,8 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			pieces.Add(GetPieceSave(item.Key, item.Value));
 
 			var id = match.GetFirst(item.Key);
+			
+			storages.AddRange(GetStorageSave(board.BoardLogic, item.Value));
 
 			if (id == PieceType.Chest1.Id)
 			{
@@ -72,6 +85,17 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		}
 		
 		pieces.Sort((a, b) => -a.Id.CompareTo(b.Id));
+	}
+
+	[OnDeserialized]
+	internal void OnDeserialized(StreamingContext context)
+	{
+		StorageSave = new Dictionary<BoardPosition, StorageSaveItem>();
+
+		foreach (var storage in storages)
+		{
+			StorageSave.Add(storage.Position, storage);
+		}
 	}
 	
 	private PieceSaveItem GetPieceSave(int id, List<BoardPosition> positions)
@@ -125,6 +149,28 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			if(component == null || component.Current == 0) continue;
 			
 			var item = new ObstacleSaveItem{Step = component.Current, Position = position};
+			
+			items.Add(item);
+		}
+		
+		return items;
+	}
+
+	private List<StorageSaveItem> GetStorageSave(BoardLogicComponent logic, List<BoardPosition> positions)
+	{
+		var items = new List<StorageSaveItem>();
+		
+		foreach (var position in positions)
+		{
+			var piece = logic.GetPieceAt(position);
+			
+			if (piece == null) continue;
+			
+			var component = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
+			
+			if(component == null) continue;
+			
+			var item = new StorageSaveItem{Position = position, Filling = component.Filling, StartTime = component.Timer.StartTime};
 			
 			items.Add(item);
 		}

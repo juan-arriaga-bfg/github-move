@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObserver
 {
@@ -17,7 +18,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     private ViewDefinitionComponent viewDef;
     
     public TimerComponent Timer { get; private set; }
-
+    
     private Piece pieceContext;
     
     public void OnRegisterEntity(ECSEntity entity)
@@ -43,10 +44,36 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
             Timer.OnStart += OnShowTimer;
             Timer.OnComplete += OnHideTimer;
         }
-        
-        if(Filling != Capacity) Timer.Start();
+
+        if (InitInSave(position) == false && Filling != Capacity)
+        {
+            Timer.Start();
+        }
         
         UpdateView();
+    }
+
+    private bool InitInSave(BoardPosition position)
+    {
+        StorageSaveItem item;
+        var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+        
+        if (save == null || save.StorageSave == null || save.StorageSave.TryGetValue(position, out item) == false) return false;
+        
+        long now;
+        var steps = Timer.CountOfStepsPassedWhenAppWasInBackground(item.StartTime, out now);
+        
+        Filling = Mathf.Min(item.Filling + steps, Capacity);
+        item.StartTime = now;
+        
+        if (Filling != Capacity)
+        {
+            Timer.Start(item.StartTime);
+        }
+
+        save.StorageSave.Remove(position);
+
+        return true;
     }
 
     public void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece context = null)

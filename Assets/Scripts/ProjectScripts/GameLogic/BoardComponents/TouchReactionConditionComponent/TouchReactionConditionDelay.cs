@@ -13,7 +13,7 @@ public class TouchReactionConditionDelay : TouchReactionConditionComponent
 
     public override void Recharge()
     {
-        startTime = DateTime.Now;
+        startTime = DateTime.UtcNow;
         base.Recharge();
     }
     
@@ -21,7 +21,7 @@ public class TouchReactionConditionDelay : TouchReactionConditionComponent
     {
         if (IsDone) return true;
         
-        IsDone = (DateTime.Now - startTime).TotalSeconds >= Delay;
+        IsDone = (DateTime.UtcNow - startTime).TotalSeconds >= Delay;
         
         return IsDone;
     }

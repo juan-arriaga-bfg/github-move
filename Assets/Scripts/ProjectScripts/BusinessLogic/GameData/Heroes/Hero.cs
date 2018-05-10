@@ -35,7 +35,7 @@ public class Hero
         {
             if (IsUnlock == false || IsCollect == false) return true;
             
-            return sleepTime != null && (int) (DateTime.Now - sleepTime.Value).TotalSeconds < def.Cooldown;
+            return sleepTime != null && (int) (DateTime.UtcNow - sleepTime.Value).TotalSeconds < def.Cooldown;
         }
     }
 
@@ -136,15 +136,15 @@ public class Hero
 
     public void Sleep()
     {
-        sleepTime = DateTime.Now;
-        completeTime = DateTime.Now.AddSeconds(def.Cooldown);
+        sleepTime = DateTime.UtcNow;
+        completeTime = DateTime.UtcNow.AddSeconds(def.Cooldown);
     }
 
     public string GetSlepTime()
     {
         if (completeTime == null) return "00:00";
         
-        var time = completeTime.Value - DateTime.Now;
+        var time = completeTime.Value - DateTime.UtcNow;
         return string.Format("{0:00}:{1:00}", time.Minutes, time.Seconds);
     }
     

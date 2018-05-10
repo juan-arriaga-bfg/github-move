@@ -12,7 +12,7 @@ public class ObstacleConditionDelay : IObstacleCondition
     public void Init()
     {
         IsInitialized = true;
-        StartTime = DateTime.Now;
+        StartTime = DateTime.UtcNow;
         CompleteTime = StartTime.AddSeconds(Delay);
     }
 
@@ -20,6 +20,6 @@ public class ObstacleConditionDelay : IObstacleCondition
     {
         if (IsInitialized == false) return false;
         
-        return (DateTime.Now - StartTime).TotalSeconds >= Delay;
+        return (DateTime.UtcNow - StartTime).TotalSeconds >= Delay;
     }
 }

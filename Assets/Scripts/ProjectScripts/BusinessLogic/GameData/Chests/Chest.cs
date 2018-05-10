@@ -62,7 +62,7 @@ public class Chest
     {
         get
         {
-            if (StartTime != null && (int) (DateTime.Now - StartTime.Value).TotalSeconds >= def.Time)
+            if (StartTime != null && (int) (DateTime.UtcNow - StartTime.Value).TotalSeconds >= def.Time)
             {
                 chestState = ChestState.Open;
             }
@@ -77,7 +77,7 @@ public class Chest
                     StartTime = null;
                     break;
                 case ChestState.InProgress:
-                    SetStartTime(DateTime.Now);
+                    SetStartTime(DateTime.UtcNow);
                     break;
             }
 
@@ -135,7 +135,7 @@ public class Chest
 
     public float GetTimerProgress()
     {
-        return StartTime == null ? 1 : Mathf.Clamp01((int)(completeTime - DateTime.Now).TotalSeconds/(float)def.Time);
+        return StartTime == null ? 1 : Mathf.Clamp01((int)(completeTime - DateTime.UtcNow).TotalSeconds/(float)def.Time);
     }
     
     public string GetTimeText()
@@ -163,7 +163,7 @@ public class Chest
     
     public string GetTimeLeftText()
     {
-        return TimeFormat(completeTime - DateTime.Now);
+        return TimeFormat(completeTime - DateTime.UtcNow);
     }
 
     private string TimeFormat(TimeSpan time)
