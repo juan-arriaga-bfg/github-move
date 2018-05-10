@@ -14,7 +14,7 @@
 	public void OnRegisterEntity(ECSEntity entity)
 	{
 	}
-
+	
 	public void OnUnRegisterEntity(ECSEntity entity)
 	{
 	}

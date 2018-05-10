@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using UnityEngine;
 
 [JsonObject(MemberSerialization.OptIn)]
 public class FieldDefComponent : ECSEntity, IECSSerializeable 

@@ -95,13 +95,13 @@ public class DragAndCheckMatchAction : IBoardAction
 		BoardPosition free;
 		var isSwap = CheckSwapLogic(board, out free);
 
-		if (CheckMatch(board, null, out action))
+		/*if (CheckMatch(board, null, out action))
 		{
 			board.RendererContext.SwapElements(From, To);
 			board.ActionExecutor.PerformAction(action);
 			MovePiece(board, From, isSwap ? From : free);
 			return;
-		}
+		}*/
 		
 		if (isSwap)
 		{

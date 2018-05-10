@@ -10,6 +10,7 @@ public class CharacterSaveComponent : ECSEntity, IECSSerializeable
     public override int Guid { get { return ComponentGuid; } }
 
     private List<HeroSaveItem> heroes;
+    private List<HeroSaveItem> enemies;
     
     [JsonProperty]
     public List<HeroSaveItem> Heroes
@@ -18,6 +19,12 @@ public class CharacterSaveComponent : ECSEntity, IECSSerializeable
         set { heroes = value; }
     }
 
+    public List<HeroSaveItem> Enemies
+    {
+        get { return enemies; }
+        set { enemies = value; }
+    }
+    
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
