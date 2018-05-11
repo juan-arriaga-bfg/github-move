@@ -70,11 +70,15 @@ public class UIChestMessageWindowModel : IWWindowModel
 
         foreach (var piece in Chest.Def.PieceWeights)
         {
+            if(piece.Weight == 0) continue;
+            
             icons.Add(piece.Uid);
         }
         
         foreach (var charger in Chest.Def.ChargerWeights)
         {
+            if(charger.Weight == 0) continue;
+            
             icons.Add(charger.Uid);
         }
         
