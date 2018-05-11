@@ -182,7 +182,7 @@ public class BoardManipulatorComponent : ECSEntity,
             {
                 var resourceView = selectedView as ResourceView;
                 resourceView.Collect();
-                return false;
+                return true;
             }
             
             if (selectedView is PieceBoardElementView)

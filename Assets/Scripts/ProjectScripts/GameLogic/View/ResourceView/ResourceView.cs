@@ -89,10 +89,10 @@ public class ResourceView : BoardElementView
         
         var board = BoardService.Current.GetBoardById(0);
         
-        var left = at.LeftAtDistance(distance);
-        var right = at.RightAtDistance(distance);
-        var up = at.UpAtDistance(distance);
-        var down = at.DownAtDistance(distance);
+        var left = NormalizePosition(board, at.LeftAtDistance(distance));
+        var right = NormalizePosition(board, at.RightAtDistance(distance));
+        var up = NormalizePosition(board, at.UpAtDistance(distance));
+        var down = NormalizePosition(board, at.DownAtDistance(distance));
         
         var leftPos = board.BoardDef.GetPiecePosition(left.X, left.Y);
         var rightPos = board.BoardDef.GetPiecePosition(right.X, right.Y);
@@ -116,5 +116,13 @@ public class ResourceView : BoardElementView
         sequence.Insert(duration + 0.5f, view.CachedTransform.DOScale(new Vector3(0.9f, 1.1f, 1f), 0.1f));
         sequence.Insert(duration + 0.6f, view.CachedTransform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack));
         sequence.InsertCallback(duration + 0.7f, () => view.StartAnimation());
+    }
+
+    private static BoardPosition NormalizePosition(BoardController board, BoardPosition position)
+    {
+        position.X = Mathf.Clamp(position.X, 1, board.BoardDef.Width);
+        position.Y = Mathf.Clamp(position.Y, 1, board.BoardDef.Height);
+        
+        return position;
     }
 }
