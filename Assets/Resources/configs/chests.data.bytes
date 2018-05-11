@@ -35,15 +35,15 @@
     [
       {
         "Uid": "A1",
-        "Weight" : 20
+        "Weight" : 25
       },
       {
         "Uid": "B1",
-        "Weight" : 20
+        "Weight" : 25
       },
 	        {
         "Uid": "C1",
-        "Weight" : 20
+        "Weight" : 25
       }
     ],
     "ChargerWeights" :
@@ -93,6 +93,11 @@
     ],
     "PieceWeights" :
     [
+	 {
+        "Uid": "A1",
+        "Weight" : 0,
+		"Override" : "true"
+      },
       {
         "Uid": "A2",
         "Weight" : 25
@@ -103,7 +108,11 @@
       },
 	        {
         "Uid": "D1",
-        "Weight" : 20
+        "Weight" : 25
+      },
+	  	        {
+        "Uid": "E1",
+        "Weight" : 25
       }
     ],
     "ChargerWeights" :
@@ -153,9 +162,15 @@
     ],
     "PieceWeights" :
     [
+		 {
+        "Uid": "B1",
+        "Weight" : 0,
+		"Override" : "true"
+      },
+
       {
-        "Uid": "E1",
-        "Weight" : 25
+        "Uid": "E2",
+        "Weight" : 20
       },
       {
         "Uid": "C2",
@@ -219,7 +234,7 @@
 		"Override" : "true"
       },
       {
-        "Uid": "E2",
+        "Uid": "B3",
         "Weight" : 20,
 		"Override" : "true"
       }
@@ -271,12 +286,41 @@
     ],
     "PieceWeights" :
     [
+		 {
+        "Uid": "A2",
+        "Weight" : 0,
+		"Override" : "true"
+      },
+	  	 {
+        "Uid": "B2",
+        "Weight" : 0,
+		"Override" : "true"
+      },
+	  	 {
+        "Uid": "C1",
+        "Weight" : 0,
+		"Override" : "true"
+      },
+	  	 {
+        "Uid": "D1",
+        "Weight" : 0,
+		"Override" : "true"
+      },
+	  	 {
+        "Uid": "E1",
+        "Weight" : 0,
+		"Override" : "true"
+      },
       {
-        "Uid": "A3",
+        "Uid": "C3",
         "Weight" : 20
       },
       {
-        "Uid": "E2",
+        "Uid": "D3",
+        "Weight" : 20
+      },
+      {
+        "Uid": "E3",
         "Weight" : 20
       }
     ],
@@ -330,12 +374,12 @@
     "PieceWeights" :
     [
       {
-        "Uid": "B3",
-        "Weight" : 20
+        "Uid": "A4",
+        "Weight" : 15
       },
       {
-        "Uid": "C3",
-        "Weight" : 20
+        "Uid": "B4",
+        "Weight" : 15
       }
     ],
     "ChargerWeights" :
@@ -386,12 +430,12 @@
     "PieceWeights" :
     [
       {
-        "Uid": "D3",
-        "Weight" : 20
+        "Uid": "D4",
+        "Weight" : 15
       },
       {
-        "Uid": "E3",
-        "Weight" : 20
+        "Uid": "E4",
+        "Weight" : 15
       }
     ],
     "ChargerWeights" :
@@ -442,12 +486,12 @@
     "PieceWeights" :
     [
       {
-        "Uid": "A4",
-        "Weight" : 20
+        "Uid": "C4",
+        "Weight" : 15
       },
       {
-        "Uid": "B4",
-        "Weight" : 20
+        "Uid": "A5",
+        "Weight" : 15
       }
     ],
     "ChargerWeights" :
@@ -498,11 +542,11 @@
     "PieceWeights" :
     [
       {
-        "Uid": "C4",
+        "Uid": "B5",
         "Weight" : 20
       },
       {
-        "Uid": "D4",
+        "Uid": "C5",
         "Weight" : 20
       }
     ],
