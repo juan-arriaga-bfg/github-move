@@ -30,7 +30,7 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.E1.Id, PieceType.E5.Id, dict);
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Coin1.Id, PieceType.Coin5.Id, dict);
         
-        dict.Add(PieceType.E6.Id, new SpawnPieceBuilder());
+//        dict.Add(PieceType.E6.Id, new SpawnPieceBuilder());
         dict.Add(PieceType.King.Id, new QuestGiverPieceBuilder());
         
         return dict;

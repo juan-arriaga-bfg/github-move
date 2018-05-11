@@ -59,7 +59,7 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.E3.Id, new PieceMatchDef {Next = PieceType.E4.Id, Previous = PieceType.E2.Id, Count = 3});
         dict.Add(PieceType.E4.Id, new PieceMatchDef {Next = PieceType.E5.Id, Previous = PieceType.E3.Id, Count = 3});
         dict.Add(PieceType.E5.Id, new PieceMatchDef {Next = PieceType.Coin4.Id, Previous = PieceType.E4.Id, Count = 3});
-        //dict.Add(PieceType.E6.Id, new PieceMatchDef {Next = PieceType.Coin4.Id, Previous = PieceType.E5.Id, Count = 3});
+//        dict.Add(PieceType.E6.Id, new PieceMatchDef {Next = PieceType.Coin4.Id, Previous = PieceType.E5.Id, Count = 3});
 
         dict.Add(PieceType.O1.Id, new PieceMatchDef {Next = PieceType.O2.Id, Previous = PieceType.None.Id, Count = -1});
         dict.Add(PieceType.O2.Id, new PieceMatchDef {Next = PieceType.O3.Id, Previous = PieceType.O1.Id, Count = -1});

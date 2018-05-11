@@ -158,7 +158,7 @@ public class FieldControllerComponent : IECSComponent
             At = new BoardPosition(28, 7),
             PieceTypeId = PieceType.A1.Id
         });
-
+        
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
             At = new BoardPosition(25, 6),
