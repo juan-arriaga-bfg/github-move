@@ -126,7 +126,14 @@ public class DragAndCheckMatchAction : IBoardAction
 		
 		action = logic.MatchActionBuilder.GetMatchAction(matchField, currentId, To);
 
-		return action != null;
+		var isMatch = action != null;
+
+		if (isMatch)
+		{
+			board.ReproductionLogic.Restart();
+		}
+
+		return isMatch;
 	}
 
 	private bool CheckSwapLogic(BoardController board, out BoardPosition free)

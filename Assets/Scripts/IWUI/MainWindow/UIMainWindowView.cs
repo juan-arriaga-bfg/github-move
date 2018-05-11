@@ -85,6 +85,6 @@ public class UIMainWindowView : IWUIWindowView
         dataManager.CollectionManager.LoadData(new ResourceConfigDataMapper<CollectionDataManager>("configs/collection.data", NSConfigsSettings.Instance.IsUseEncryption));
         dataManager.LevelsManager.LoadData(new ResourceConfigDataMapper<List<LevelsDef>>("configs/levels.data", NSConfigsSettings.Instance.IsUseEncryption));
         
-        Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
 }

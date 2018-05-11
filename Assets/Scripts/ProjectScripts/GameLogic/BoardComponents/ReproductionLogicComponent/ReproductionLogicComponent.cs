@@ -12,6 +12,7 @@ public class ReproductionLogicComponent : ECSEntity
     
     private TimerComponent timer = new TimerComponent();
     private readonly HashSet<ReproductionPieceComponent> items = new HashSet<ReproductionPieceComponent>();
+    private HashSet<ReproductionPieceComponent> stack = new HashSet<ReproductionPieceComponent>();
 
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -33,6 +34,18 @@ public class ReproductionLogicComponent : ECSEntity
         timer.Start();
     }
 
+    public void Restart()
+    {
+        stack = new HashSet<ReproductionPieceComponent>();
+
+        foreach (var item in items)
+        {
+            stack.Add(item);
+        }
+        
+        Waiting();
+    }
+
     private void Reproduction()
     {
         if (Random.Range(0, 101) > PiecesDataManager.ReproductionChance)
@@ -43,7 +56,7 @@ public class ReproductionLogicComponent : ECSEntity
         
         var free = new List<ReproductionPieceComponent>();
 
-        foreach (var item in items)
+        foreach (var item in stack)
         {
             if(item.CheckFreePosition() == false) continue;
             
@@ -56,19 +69,24 @@ public class ReproductionLogicComponent : ECSEntity
             return;
         }
         
-        free[Random.Range(0, free.Count)].Reproduction();
+        var index = Random.Range(0, free.Count);
+        free[index].Reproduction();
+
+        stack.Remove(free[index]);
         Waiting();
     }
     
     public void Add(ReproductionPieceComponent item)
     {
         items.Add(item);
+        stack.Add(item);
         timer.IsPaused = items.Count == 0;
     }
 
     public void Remove(ReproductionPieceComponent item)
     {
         items.Remove(item);
+        stack.Remove(item);
         timer.IsPaused = items.Count == 0;
     }
 }
