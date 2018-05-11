@@ -13,6 +13,8 @@ public class UpgradeComponent : IECSComponent, IPieceBoardObserver, IResourceCar
     private CurrencyPair price;
     private StorageItem storageItem;
     private ViewDefinitionComponent viewDef;
+
+    private bool isShow;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -73,13 +75,19 @@ public class UpgradeComponent : IECSComponent, IPieceBoardObserver, IResourceCar
     
     public void UpdateResource(int offset)
     {
-        if(storageItem.Amount < price.Amount) return;
+        if (storageItem.Amount < price.Amount)
+        {
+            if (!isShow) return;
+            
+            viewDef.AddView(ViewType.SimpleUpgrade).Change(false);
+            isShow = false;
+            
+            return;
+        }
         
         thisContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
-
-        var view = viewDef.AddView(ViewType.SimpleUpgrade);
-        
-        view.Change(true);
+        viewDef.AddView(ViewType.SimpleUpgrade).Change(true);
+        isShow = true;
     }
     
     public string GetResourceId()
