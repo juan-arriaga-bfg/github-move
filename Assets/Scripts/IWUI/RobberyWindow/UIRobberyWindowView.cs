@@ -46,12 +46,20 @@ public class UIRobberyWindowView : UIGenericPopupWindowView
         btnClaimLabel.Text = windowModel.ClaimText;
 
         var max = steps[steps.Count - 1].Amount;
+        var isNone = windowModel.Enemy.ActiveReward == PieceType.None.Id;
         
         mainChest.Decoration(max, max);
 
         for (var i = 0; i < steps.Count - 1; i++)
         {
-            if(steps[i].Amount <= windowModel.Enemy.Damage) continue;
+            if (isNone)
+            {
+                if(steps[i].Amount <= windowModel.Enemy.Damage) continue;
+            }
+            else
+            {
+                if (i < windowModel.Enemy.Step - 1) continue;
+            }
             
             var item = Instantiate(dot, dot.transform.parent);
             

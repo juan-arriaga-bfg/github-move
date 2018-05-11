@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy
 {
@@ -15,6 +14,11 @@ public class Enemy
 
     private int step;
     private int reward;
+
+    public int Step
+    {
+        get { return step; }
+    }
     
     public int ActiveReward { get; set; }
 
@@ -24,6 +28,13 @@ public class Enemy
 
         life = def.Steps[def.Steps.Count - 1].Amount;
         ActiveReward = reward = PieceType.None.Id;
+    }
+
+    public void Init(EnemySaveItem save)
+    {
+        damage = save.Damage;
+        step = save.Step;
+        ActiveReward = reward = save.Reward;
     }
     
     public float Progress

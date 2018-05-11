@@ -56,6 +56,11 @@ public class EnemyView : BoardElementView
         from.Z = Context.Context.BoardDef.PieceLayer;
 
         if (!Context.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(from, positions, 1)) return;
+
+        if (enemy.IsComplete)
+        {
+            GameDataService.Current.EnemiesManager.Kill(enemy.Def.Uid);
+        }
         
         Context.Context.ActionExecutor.AddAction(new ReproductionPieceAction
         {
