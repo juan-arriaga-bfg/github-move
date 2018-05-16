@@ -5,6 +5,7 @@ public class UiQuestButton : MonoBehaviour, IBoardEventListener
 {
     [SerializeField] private Image icon;
     [SerializeField] private NSText progressLabel;
+    [SerializeField] private GameObject shine;
     
     private Quest quest;
     
@@ -12,8 +13,11 @@ public class UiQuestButton : MonoBehaviour, IBoardEventListener
     {
         this.quest = quest;
         icon.sprite = IconService.Current.GetSpriteById(quest.WantedIcon);
+
+        var isComplete = quest.Check();
         
-        progressLabel.Text = string.Format("<color=#{0}><size=40>{1}</size></color>/{2}", quest.Check() ? "FFFFFF" : "FE4704", quest.CurrentAmount, quest.TargetAmount);
+        progressLabel.Text = string.Format("<color=#{0}><size=40>{1}</size></color>/{2}", isComplete ? "FFFFFF" : "FE4704", quest.CurrentAmount, quest.TargetAmount);
+        shine.SetActive(isComplete);
     }
 
     private void OnEnable()
