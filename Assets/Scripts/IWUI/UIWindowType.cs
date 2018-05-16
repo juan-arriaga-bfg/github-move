@@ -23,4 +23,6 @@
     public const string RobberyWindow = "RobberyWindow";
     
     public const string ErrorWindow = "ErrorWindow";
+    
+    public const string StorageWindow = "StorageWindow";
 }
