@@ -32,7 +32,7 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 		base.Init(piece);
 		
 		Priority = defaultPriority = 2;
-		label.Text = "Upgrade";
+		label.Text = "Next Level";
 		
 		upgrade = piece.GetComponent<CastleUpgradeComponent>(CastleUpgradeComponent.ComponentGuid);
 		

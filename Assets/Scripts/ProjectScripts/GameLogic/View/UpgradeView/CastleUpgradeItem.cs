@@ -23,12 +23,11 @@ public class CastleUpgradeItem : MonoBehaviour
         if (quest.Check())
         {
             check.SetActive(true);
-            progress.gameObject.SetActive(false);
-            icon.gameObject.SetActive(false);
+            progress.transform.parent.gameObject.SetActive(false);
             return;
         }
         
-        progress.Text = string.Format("<color=#FE4704><size=40>{0}</size></color>/{1}", quest.CurrentAmount, quest.TargetAmount);
+        progress.Text = string.Format("<color=#FE4704>{0}</color>/{1}", quest.CurrentAmount, quest.TargetAmount);
     }
     
     public bool IsComplete

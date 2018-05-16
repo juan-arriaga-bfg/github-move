@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json;
 
 [JsonObject(MemberSerialization.OptIn)]
@@ -14,7 +16,8 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	private List<ObstacleSaveItem> obstacles;
 	private List<StorageSaveItem> storages;
 	private List<ResourceSaveItem> resources;
-	
+	private string completeFog;
+
 	[JsonProperty]
 	public List<PieceSaveItem> Pieces
 	{
@@ -49,6 +52,15 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		get { return resources; }
 		set { resources = value; }
 	}
+	
+	[JsonProperty]
+	public string CompleteFog
+	{
+		get { return completeFog; }
+		set { completeFog = value; }
+	}
+
+	public List<BoardPosition> CompleteFogPositions;
 	
 	public Dictionary<BoardPosition, StorageSaveItem> StorageSave;
 	
@@ -94,16 +106,26 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		}
 		
 		pieces.Sort((a, b) => -a.Id.CompareTo(b.Id));
+
+		completeFog = GetCompleteFog();
 	}
 
 	[OnDeserialized]
 	internal void OnDeserialized(StreamingContext context)
 	{
 		StorageSave = new Dictionary<BoardPosition, StorageSaveItem>();
+		CompleteFogPositions = new List<BoardPosition>();
 
 		foreach (var storage in storages)
 		{
 			StorageSave.Add(storage.Position, storage);
+		}
+		
+		var fogData = completeFog.Split(new string[] {";"}, StringSplitOptions.RemoveEmptyEntries);
+
+		foreach (var str in fogData)
+		{
+			CompleteFogPositions.Add(BoardPosition.Parse(str));
 		}
 	}
 	
@@ -201,5 +223,21 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		}
 		
 		return items;
+	}
+
+	private string GetCompleteFog()
+	{
+		if (GameDataService.Current == null) return null;
+
+		var complete = GameDataService.Current.FogsManager.Completed;
+		var str = new StringBuilder();
+
+		foreach (var position in complete)
+		{
+			str.Append(position.ToSaveString());
+			str.Append(";");
+		}
+		
+		return str.ToString();
 	}
 }

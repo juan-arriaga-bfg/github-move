@@ -13,22 +13,52 @@ public class EnemyView : BoardElementView
     private FogDef fog;
     private BoardPosition target;
     
-    public void Go(FogDef fog)
+    public void Go(FogDef fog, bool isFast = false)
     {
+        DOTween.Kill(CachedTransform);
+        
         this.fog = fog;
         
         var next = new BoardPosition(fog.Position.X + Random.Range(0, fog.Size.X), fog.Position.Y + Random.Range(0, fog.Size.Y));
+
+        if (target.Equals(next))
+        {
+            Go(this.fog);
+            return;
+        }
+        
         var position = Context.Context.BoardDef.GetSectorCenterWorldPosition(next.X, next.Y, 0);
-        var duration = BoardPosition.SqrMagnitude(target, next) * 2;
+        var duration = isFast ? 0.2f : BoardPosition.SqrMagnitude(target, next) * 2;
         
         target = next;
-        
-        DOTween.Kill(CachedTransform);
         
         var sequence = DOTween.Sequence().SetId(CachedTransform).SetEase(Ease.Linear);
 
         sequence.Append(CachedTransform.DOMove(position, duration));
+        sequence.OnUpdate(GoOther);
         sequence.InsertCallback(duration - 0.1f, () => Go(this.fog));
+    }
+
+    private void GoOther()
+    {
+        if (GameDataService.Current.FogsManager.GetDef(fog.Position) != null)
+        {
+            return;
+        }
+        
+        var board = BoardService.Current.GetBoardById(0);
+        var position = Context.Context.BoardDef.GetSectorCenterWorldPosition(target.X, target.Y, 0);
+        
+        var distances = new List<KeyValuePair<float, FogDef>>();
+
+        foreach (var def in GameDataService.Current.FogsManager.FogPositions.Values)
+        {
+            distances.Add(new KeyValuePair<float, FogDef>(Vector2.Distance(position, def.GetCenter(board)), def));
+        }
+
+        distances.Sort((a, b) => a.Key.CompareTo(b.Key));
+        
+        Go(distances[0].Value, true);
     }
 
     public override void ResetViewOnDestroy()
@@ -95,14 +125,14 @@ public class EnemyView : BoardElementView
     {
         var board = BoardService.Current.GetBoardById(0);
         
-        var kingPosition = GameDataService.Current.PiecesManager.KingPosition;
-        var kingWorldPos = board.BoardDef.GetSectorCenterWorldPosition(kingPosition.X, kingPosition.Y, 0);
-		
+        var castlePosition = GameDataService.Current.PiecesManager.CastlePosition;
+        var castleWorldPos = board.BoardDef.GetSectorCenterWorldPosition(castlePosition.X, castlePosition.Y, 0);
+        
         var distances = new List<KeyValuePair<float, FogDef>>();
 
         foreach (var def in GameDataService.Current.FogsManager.FogPositions.Values)
         {
-            distances.Add(new KeyValuePair<float, FogDef>(Vector2.Distance(kingWorldPos, def.GetCenter(board)), def));
+            distances.Add(new KeyValuePair<float, FogDef>(Vector2.Distance(castleWorldPos, def.GetCenter(board)), def));
         }
 
         distances.Sort((a, b) => a.Key.CompareTo(b.Key));

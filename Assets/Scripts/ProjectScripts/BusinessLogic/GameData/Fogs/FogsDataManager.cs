@@ -7,6 +7,7 @@ public class FogsDataManager : IDataLoader<FogsDataManager>
     public List<FogDef> Fogs { get; set; }
     
     public Dictionary<BoardPosition, FogDef> FogPositions;
+    public List<BoardPosition> Completed = new List<BoardPosition>();
     
     public void LoadData(IDataMapper<FogsDataManager> dataMapper)
     {
@@ -19,8 +20,17 @@ public class FogsDataManager : IDataLoader<FogsDataManager>
                 DefaultPieceWeights = data.DefaultPieceWeights;
                 Fogs = data.Fogs;
                 
+                var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+
+                if (save != null && save.CompleteFogPositions != null)
+                {
+                    Completed = save.CompleteFogPositions;
+                }
+                
                 foreach (var def in data.Fogs)
                 {
+                    if(Completed.FindIndex(position => position.Equals(def.Position)) != -1) continue;
+                    
                     FogPositions.Add(def.Position, def);
                 }
             }
@@ -40,7 +50,8 @@ public class FogsDataManager : IDataLoader<FogsDataManager>
     public void RemoveFog(BoardPosition key)
     {
         if(FogPositions.ContainsKey(key) == false) return;
-
+        
+        Completed.Add(key);
         FogPositions.Remove(key);
     }
 }

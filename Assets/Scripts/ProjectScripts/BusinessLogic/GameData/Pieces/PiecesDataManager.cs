@@ -7,12 +7,12 @@ public class PiecesDataManager : IDataLoader<List<PieceDef>>
     public const int ReproductionStepDelay = 5;
     public const int ReproductionChance = 25;
     
-    public BoardPosition CastlePosition { get; set; }
-    public BoardPosition TavernPosition { get; set; }
-    public BoardPosition SawmillPosition { get; set; }
-    public BoardPosition MinePosition { get; set; }
-    public BoardPosition SheepfoldPosition { get; set; }
-    public BoardPosition KingPosition { get; set; }
+    public BoardPosition CastlePosition = BoardPosition.Default();
+    public BoardPosition TavernPosition = BoardPosition.Default();
+    public BoardPosition SawmillPosition = BoardPosition.Default();
+    public BoardPosition MinePosition = BoardPosition.Default();
+    public BoardPosition SheepfoldPosition = BoardPosition.Default();
+    public BoardPosition KingPosition = BoardPosition.Default();
     
     private Dictionary<int, PieceDef> pieces;
     

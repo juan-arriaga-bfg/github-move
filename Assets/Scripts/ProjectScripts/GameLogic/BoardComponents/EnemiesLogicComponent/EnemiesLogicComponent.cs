@@ -38,7 +38,8 @@
 
 	public bool IsExecuteable()
 	{
-		return enemy != GameDataService.Current.EnemiesManager.CurrentEnemy
+		return GameDataService.Current.PiecesManager.CastlePosition.IsValid
+			&& enemy != GameDataService.Current.EnemiesManager.CurrentEnemy
 		       && GameDataService.Current.LevelsManager.Level >= GameDataService.Current.EnemiesManager.CurrentEnemy.Def.Level;
 	}
 }
