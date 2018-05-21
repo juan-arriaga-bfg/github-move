@@ -9,6 +9,7 @@ public class PiecesDataManager : IDataLoader<List<PieceDef>>
     
     public BoardPosition CastlePosition = BoardPosition.Default();
     public BoardPosition TavernPosition = BoardPosition.Default();
+    public BoardPosition StoragePosition = BoardPosition.Default();
     public BoardPosition SawmillPosition = BoardPosition.Default();
     public BoardPosition MinePosition = BoardPosition.Default();
     public BoardPosition SheepfoldPosition = BoardPosition.Default();
@@ -56,9 +57,15 @@ public class PiecesDataManager : IDataLoader<List<PieceDef>>
     {
         var first = piece.Context.BoardLogic.MatchDefinition.GetFirst(piece.PieceType);
         
-        if (first == PieceType.Tavern1.Id)
+        if (first == PieceType.Market1.Id)
         {
             TavernPosition = position.Right;
+            return;
+        }
+        
+        if (first == PieceType.Storage1.Id)
+        {
+            StoragePosition = position.Right;
             return;
         }
         

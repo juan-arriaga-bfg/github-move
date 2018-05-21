@@ -1,0 +1,80 @@
+﻿{
+  "Delay" : 15,
+  "Counts" :
+  [
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20
+  ],
+  "Defs" :
+  [
+    {
+      "Uid" : 1,
+      "Message" : "Message",
+      "Result" :
+      {
+        "Currency" : "A1",
+        "Amount" :5
+      },
+      "Prices" :
+      [
+        {
+          "Currency" : "C1",
+          "Amount" : 2
+        },
+        {
+          "Currency" : "D1",
+          "Amount" : 5
+        }
+      ],
+      "Rewards" :
+      [
+        {
+          "Currency" : "Coins",
+          "Amount" : 200
+        },
+        {
+          "Currency" : "Energy",
+          "Amount" : 200
+        }
+      ]
+    },
+    {
+      "Uid" : 2,
+      "Message" : "Message",
+      "Result" :
+      {
+        "Currency" : "A1",
+        "Amount" :5
+      },
+      "Prices" :
+      [
+        {
+          "Currency" : "C1",
+          "Amount" : 5
+        },
+        {
+          "Currency" : "D1",
+          "Amount" : 8
+        }
+      ],
+      "Rewards" :
+      [
+        {
+          "Currency" : "Coins",
+          "Amount" : 200
+        },
+        {
+          "Currency" : "Energy",
+          "Amount" : 200
+        }
+      ]
+    }
+  ]
+}

@@ -16,12 +16,12 @@ public class QuestsDataManager : IDataLoader<List<QuestDef>>
 	
 	public void LoadData(IDataMapper<List<QuestDef>> dataMapper)
 	{
-		dataMapper.LoadData((data, error)=> 
+		dataMapper.LoadData((data, error) =>
 		{
 			if (string.IsNullOrEmpty(error))
 			{
 				quests = data;
-				
+
 				var questSave = ProfileService.Current.GetComponent<QuestSaveComponent>(QuestSaveComponent.ComponentGuid);
 
 				if (questSave != null)
@@ -33,7 +33,7 @@ public class QuestsDataManager : IDataLoader<List<QuestDef>>
 							completed.Add(uid, true);
 						}
 					}
-					
+
 					UpdateActiveQuest();
 
 					if (questSave.Active != null)
@@ -41,17 +41,17 @@ public class QuestsDataManager : IDataLoader<List<QuestDef>>
 						foreach (var quest in stack)
 						{
 							if (questSave.Active.Count == 0) break;
-							
+
 							var active = questSave.Active.Find(item => item.Uid == quest.Def.Uid);
-							
-							if(active == null) continue;
-							
+
+							if (active == null) continue;
+
 							quest.CurrentAmount = active.Progress;
 							questSave.Active.Remove(active);
 						}
 					}
 				}
-				
+
 				UpdateActiveQuest();
 			}
 			else

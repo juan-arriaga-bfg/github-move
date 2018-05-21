@@ -128,15 +128,25 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.Castle8.Id, new PieceMatchDef {Next = PieceType.Castle9.Id, Previous = PieceType.Castle7.Id, Count = 1});
         dict.Add(PieceType.Castle9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Castle8.Id, Count = 1});
         
-        dict.Add(PieceType.Tavern1.Id, new PieceMatchDef {Next = PieceType.Tavern2.Id, Previous = PieceType.None.Id, Count = 1});
-        dict.Add(PieceType.Tavern2.Id, new PieceMatchDef {Next = PieceType.Tavern3.Id, Previous = PieceType.Tavern1.Id, Count = 1});
-        dict.Add(PieceType.Tavern3.Id, new PieceMatchDef {Next = PieceType.Tavern4.Id, Previous = PieceType.Tavern2.Id, Count = 1});
-        dict.Add(PieceType.Tavern4.Id, new PieceMatchDef {Next = PieceType.Tavern5.Id, Previous = PieceType.Tavern3.Id, Count = 1});
-        dict.Add(PieceType.Tavern5.Id, new PieceMatchDef {Next = PieceType.Tavern6.Id, Previous = PieceType.Tavern4.Id, Count = 1});
-        dict.Add(PieceType.Tavern6.Id, new PieceMatchDef {Next = PieceType.Tavern7.Id, Previous = PieceType.Tavern5.Id, Count = 1});
-        dict.Add(PieceType.Tavern7.Id, new PieceMatchDef {Next = PieceType.Tavern8.Id, Previous = PieceType.Tavern6.Id, Count = 1});
-        dict.Add(PieceType.Tavern8.Id, new PieceMatchDef {Next = PieceType.Tavern9.Id, Previous = PieceType.Tavern7.Id, Count = 1});
-        dict.Add(PieceType.Tavern9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Tavern8.Id, Count = 1});
+        dict.Add(PieceType.Market1.Id, new PieceMatchDef {Next = PieceType.Market2.Id, Previous = PieceType.None.Id, Count = 1});
+        dict.Add(PieceType.Market2.Id, new PieceMatchDef {Next = PieceType.Market3.Id, Previous = PieceType.Market1.Id, Count = 1});
+        dict.Add(PieceType.Market3.Id, new PieceMatchDef {Next = PieceType.Market4.Id, Previous = PieceType.Market2.Id, Count = 1});
+        dict.Add(PieceType.Market4.Id, new PieceMatchDef {Next = PieceType.Market5.Id, Previous = PieceType.Market3.Id, Count = 1});
+        dict.Add(PieceType.Market5.Id, new PieceMatchDef {Next = PieceType.Market6.Id, Previous = PieceType.Market4.Id, Count = 1});
+        dict.Add(PieceType.Market6.Id, new PieceMatchDef {Next = PieceType.Market7.Id, Previous = PieceType.Market5.Id, Count = 1});
+        dict.Add(PieceType.Market7.Id, new PieceMatchDef {Next = PieceType.Market8.Id, Previous = PieceType.Market6.Id, Count = 1});
+        dict.Add(PieceType.Market8.Id, new PieceMatchDef {Next = PieceType.Market9.Id, Previous = PieceType.Market7.Id, Count = 1});
+        dict.Add(PieceType.Market9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Market8.Id, Count = 1});
+        
+        dict.Add(PieceType.Storage1.Id, new PieceMatchDef {Next = PieceType.Storage2.Id, Previous = PieceType.None.Id, Count = 1});
+        dict.Add(PieceType.Storage2.Id, new PieceMatchDef {Next = PieceType.Storage3.Id, Previous = PieceType.Storage1.Id, Count = 1});
+        dict.Add(PieceType.Storage3.Id, new PieceMatchDef {Next = PieceType.Storage4.Id, Previous = PieceType.Storage2.Id, Count = 1});
+        dict.Add(PieceType.Storage4.Id, new PieceMatchDef {Next = PieceType.Storage5.Id, Previous = PieceType.Storage3.Id, Count = 1});
+        dict.Add(PieceType.Storage5.Id, new PieceMatchDef {Next = PieceType.Storage6.Id, Previous = PieceType.Storage4.Id, Count = 1});
+        dict.Add(PieceType.Storage6.Id, new PieceMatchDef {Next = PieceType.Storage7.Id, Previous = PieceType.Storage5.Id, Count = 1});
+        dict.Add(PieceType.Storage7.Id, new PieceMatchDef {Next = PieceType.Storage8.Id, Previous = PieceType.Storage6.Id, Count = 1});
+        dict.Add(PieceType.Storage8.Id, new PieceMatchDef {Next = PieceType.Storage9.Id, Previous = PieceType.Storage7.Id, Count = 1});
+        dict.Add(PieceType.Storage9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Storage8.Id, Count = 1});
         
         return dict;
     }

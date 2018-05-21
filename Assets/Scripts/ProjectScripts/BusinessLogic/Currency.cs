@@ -1,4 +1,19 @@
-﻿public static partial class Currency
+﻿using System.Collections.Generic;
+
+public enum CurrencyTag
+{
+    All,
+    Food,
+    Build,
+    LevelUp
+}
+
+public partial class CurrencyDef
+{
+    public List<CurrencyTag> Tags;
+}
+
+public static partial class Currency
 {
     public static readonly CurrencyDef Crystals = new CurrencyDef { Id = 2, Name = "Crystals", IsConsumable = true };
     
@@ -20,6 +35,7 @@
     public static readonly CurrencyDef LevelMine = new CurrencyDef { Id = 10005, Name = "LevelMine", IsConsumable = true };
     public static readonly CurrencyDef LevelSawmill = new CurrencyDef { Id = 10006, Name = "LevelSawmill", IsConsumable = true };
     public static readonly CurrencyDef LevelSheepfold = new CurrencyDef { Id = 10007, Name = "LevelSheepfold", IsConsumable = true };
+    public static readonly CurrencyDef LevelStorage = new CurrencyDef { Id = 10008, Name = "LevelStorage", IsConsumable = true };
     
     public static readonly CurrencyDef Charger1 = new CurrencyDef { Id = 1001, Name = "Charger1", IsConsumable = true };
     public static readonly CurrencyDef Charger2 = new CurrencyDef { Id = 1002, Name = "Charger2", IsConsumable = true };
@@ -30,6 +46,14 @@
     public static readonly CurrencyDef Charger7 = new CurrencyDef { Id = 1007, Name = "Charger7", IsConsumable = true };
     public static readonly CurrencyDef Charger8 = new CurrencyDef { Id = 1008, Name = "Charger8", IsConsumable = true };
     public static readonly CurrencyDef Charger9 = new CurrencyDef { Id = 1009, Name = "Charger9", IsConsumable = true };
+    
+    public static readonly CurrencyDef Resource1 = new CurrencyDef { Id = 1101, Name = "Resource1", IsConsumable = false, Tags = new List<CurrencyTag>()};
+    public static readonly CurrencyDef Resource2 = new CurrencyDef { Id = 1102, Name = "Resource2", IsConsumable = false, Tags = new List<CurrencyTag>()};
+    public static readonly CurrencyDef Resource3 = new CurrencyDef { Id = 1103, Name = "Resource3", IsConsumable = false, Tags = new List<CurrencyTag>()};
+    public static readonly CurrencyDef Resource4 = new CurrencyDef { Id = 1104, Name = "Resource4", IsConsumable = false, Tags = new List<CurrencyTag>()};
+    public static readonly CurrencyDef Resource5 = new CurrencyDef { Id = 1105, Name = "Resource5", IsConsumable = false, Tags = new List<CurrencyTag>()};
+    public static readonly CurrencyDef Resource6 = new CurrencyDef { Id = 1106, Name = "Resource6", IsConsumable = false, Tags = new List<CurrencyTag>()};
+    public static readonly CurrencyDef Resource7 = new CurrencyDef { Id = 1107, Name = "Resource7", IsConsumable = false, Tags = new List<CurrencyTag>()};
     
     public static readonly CurrencyDef RobinItem1 = new CurrencyDef { Id = 11001, Name = "RobinItem1", IsConsumable = false };
     public static readonly CurrencyDef RobinItem2 = new CurrencyDef { Id = 11002, Name = "RobinItem2", IsConsumable = false };
@@ -45,4 +69,18 @@
     public static readonly CurrencyDef GreenarrowItem2 = new CurrencyDef { Id = 13002, Name = "GreenarrowItem2", IsConsumable = false };
     public static readonly CurrencyDef GreenarrowItem3 = new CurrencyDef { Id = 13003, Name = "GreenarrowItem3", IsConsumable = false };
     public static readonly CurrencyDef GreenarrowItem4 = new CurrencyDef { Id = 13004, Name = "GreenarrowItem4", IsConsumable = false };
+    
+    public static List<CurrencyDef> GetCurrencyDefs(CurrencyTag tag)
+    {
+        var result = new List<CurrencyDef>();
+
+        foreach (var def in cachedCurrencyIdsDefs.Values)
+        {
+            if(def.Tags == null || tag != CurrencyTag.All && def.Tags.IndexOf(tag) == -1) continue;
+            
+            result.Add(def);
+        }
+        
+        return result;
+    }
 }

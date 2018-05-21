@@ -25,4 +25,6 @@
     public const string ErrorWindow = "ErrorWindow";
     
     public const string StorageWindow = "StorageWindow";
+    
+    public const string TavernWindow = "TavernWindow";
 }

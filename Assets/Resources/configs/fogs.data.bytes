@@ -30,7 +30,7 @@
       "Position" :
       {
         "X" : 19,
-        "Y" : 0
+        "Y" : 3
       },
       "Condition" :
       {
@@ -57,11 +57,11 @@
             "Y": 1
           }
         ],
-		"E5" :
+        "E5" :
         [
           {
             "X" : 0,
-            "Y" : 0
+            "Y" : 1
           }
         ],
         "D1":
@@ -82,12 +82,12 @@
       "Size" :
       {
         "X" : 4,
-        "Y" : 4
+        "Y" : 3
       },
       "Position" :
       {
         "X" : 19,
-        "Y" : 4
+        "Y" : 0
       },
       "Condition" :
       {
@@ -99,37 +99,37 @@
         "E4":
         [
           {
-            "X": 2,
-            "Y": 2
+            "X": 1,
+            "Y": 1
           }
         ],
         "E3":
         [
           {
-            "X": 3,
-            "Y": 1
+            "X": 2,
+            "Y": 0
           },
           {
-            "X": 3,
-            "Y": 2
+            "X": 2,
+            "Y": 1
           }
         ],
         "D2":
         [
           {
-            "X": 1,
-            "Y": 3
+            "X": 0,
+            "Y": 2
           },
           {
-            "X": 1,
+            "X": 0,
             "Y": 1
           }
         ],
         "D3":
         [
           {
-            "X": 3,
-            "Y": 3
+            "X": 2,
+            "Y": 2
           }
         ]
       }
@@ -138,20 +138,19 @@
       "Uid": 3,
       "Size" :
       {
-        "X" : 8,
-        "Y" : 2
+        "X" : 4,
+        "Y" : 4
       },
       "Position" :
       {
-        "X" : 19,
-        "Y" : 8
+        "X" : 23,
+        "Y" : 7
       },
       "Condition" :
       {
         "Ability" : "Power",
         "Value" : 60
       },
-
       "Pieces":
       {
         "E4":
@@ -165,26 +164,26 @@
         [
           {
             "X": 1,
-            "Y": 1
-          },
-          {
-            "X": 5,
             "Y": 0
           },
           {
             "X": 3,
             "Y": 1
+          },
+          {
+            "X": 3,
+            "Y": 3
           }
         ],
         "D3":
         [
           {
-            "X": 7,
-            "Y": 1
+            "X": 0,
+            "Y": 3
           }
         ]
       }
-    } ,
+    },
     {
       "Uid": 4,
       "Size" :
@@ -195,34 +194,32 @@
       "Position" :
       {
         "X" : 27,
-        "Y" : 8
+        "Y" : 7
       },
       "Condition" :
       {
         "Ability" : "Power",
         "Value" : 90
       }
-
-    } ,
+    },
     {
       "Uid": 5,
       "Size" :
       {
-        "X" : 8,
-        "Y" : 2
+        "X" : 4,
+        "Y" : 3
       },
       "Position" :
       {
-        "X" : 19,
-        "Y" : 10
+        "X" : 15,
+        "Y" : 4
       },
       "Condition" :
       {
         "Ability" : "Power",
         "Value" : 120
       }
-
-    } ,
+    },
     {
       "Uid": 6,
       "Size" :
@@ -238,29 +235,27 @@
       "Condition" :
       {
         "Ability" : "Power",
-        "Value" : 140
+        "Value" : 150
       }
-
-    } ,
+    },
     {
       "Uid": 7,
       "Size" :
       {
-        "X" : 4,
+        "X" : 3,
         "Y" : 4
       },
       "Position" :
       {
-        "X" : 15,
-        "Y" : 4
+        "X" : 23,
+        "Y" : 11
       },
       "Condition" :
       {
         "Ability" : "Power",
-        "Value" : 140
+        "Value" : 180
       }
-
-    } ,
+    },
     {
       "Uid": 8,
       "Size" :
@@ -270,35 +265,33 @@
       },
       "Position" :
       {
-        "X" : 15,
-        "Y" : 8
+        "X" : 26,
+        "Y" : 11
       },
       "Condition" :
       {
         "Ability" : "Power",
-        "Value" : 160
+        "Value" : 210
       }
-
-    } ,
+    },
     {
       "Uid": 9,
       "Size" :
       {
         "X" : 4,
-        "Y" : 4
+        "Y" : 3
       },
       "Position" :
       {
-        "X" : 15,
-        "Y" : 12
+        "X" : 11,
+        "Y" : 0
       },
       "Condition" :
       {
         "Ability" : "Power",
-        "Value" : 180
+        "Value" : 240
       }
-
-    } ,
+    },
     {
       "Uid": 10,
       "Size" :
@@ -308,59 +301,201 @@
       },
       "Position" :
       {
-        "X" : 19,
-        "Y" : 12
+        "X" : 11,
+        "Y" : 3
       },
       "Condition" :
       {
         "Ability" : "Power",
-        "Value" : 250
+        "Value" : 270
       }
-
-    } ,
+    },
     {
       "Uid": 11,
       "Size" :
       {
-        "X" : 7,
+        "X" : 4,
         "Y" : 4
       },
       "Position" :
       {
         "X" : 23,
-        "Y" : 12
+        "Y" : 15
       },
       "Condition" :
       {
         "Ability" : "Power",
-        "Value" : 250
+        "Value" : 300
       }
-
-    } ,
+    },
     {
       "Uid": 12,
       "Size" :
       {
-        "X" : 15,
-        "Y" : 14
+        "X" : 3,
+        "Y" : 4
       },
       "Position" :
       {
-        "X" : 15,
-        "Y" : 16
+        "X" : 27,
+        "Y" : 15
       },
       "Condition" :
       {
         "Ability" : "Power",
-        "Value" : 1000
+        "Value" : 330
       }
-    } ,
+    },
     {
       "Uid": 13,
       "Size" :
       {
-        "X" : 15,
-        "Y" : 30
+        "X" : 4,
+        "Y" : 4
+      },
+      "Position" :
+      {
+        "X" : 7,
+        "Y" : 0
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 360
+      }
+    },
+    {
+      "Uid": 14,
+      "Size" :
+      {
+        "X" : 4,
+        "Y" : 3
+      },
+      "Position" :
+      {
+        "X" : 7,
+        "Y" : 4
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 390
+      }
+    },
+    {
+      "Uid": 15,
+      "Size" :
+      {
+        "X" : 3,
+        "Y" : 4
+      },
+      "Position" :
+      {
+        "X" : 23,
+        "Y" : 19
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 420
+      }
+    },
+    {
+      "Uid": 16,
+      "Size" :
+      {
+        "X" : 4,
+        "Y" : 4
+      },
+      "Position" :
+      {
+        "X" : 26,
+        "Y" : 19
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 450
+      }
+    },
+    {
+      "Uid": 17,
+      "Size" :
+      {
+        "X" : 4,
+        "Y" : 3
+      },
+      "Position" :
+      {
+        "X" : 3,
+        "Y" : 0
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 480
+      }
+    },
+    {
+      "Uid": 18,
+      "Size" :
+      {
+        "X" : 4,
+        "Y" : 4
+      },
+      "Position" :
+      {
+        "X" : 3,
+        "Y" : 3
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 510
+      }
+    },
+    {
+      "Uid": 19,
+      "Size" :
+      {
+        "X" : 4,
+        "Y" : 4
+      },
+      "Position" :
+      {
+        "X" : 23,
+        "Y" : 23
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 540
+      }
+    },
+    {
+      "Uid": 20,
+      "Size" :
+      {
+        "X" : 3,
+        "Y" : 4
+      },
+      "Position" :
+      {
+        "X" : 27,
+        "Y" : 23
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 570
+      }
+    },
+    {
+      "Uid": 21,
+      "Size" :
+      {
+        "X" : 3,
+        "Y" : 4
       },
       "Position" :
       {
@@ -370,9 +505,62 @@
       "Condition" :
       {
         "Ability" : "Power",
-        "Value" : 5000
+        "Value" : 600
       }
-
-    } ,
+    },
+    {
+      "Uid": 22,
+      "Size" :
+      {
+        "X" : 3,
+        "Y" : 3
+      },
+      "Position" :
+      {
+        "X" : 0,
+        "Y" : 4
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 630
+      }
+    },
+    {
+      "Uid": 23,
+      "Size" :
+      {
+        "X" : 3,
+        "Y" : 3
+      },
+      "Position" :
+      {
+        "X" : 23,
+        "Y" : 27
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 660
+      }
+    },
+    {
+      "Uid": 24,
+      "Size" :
+      {
+        "X" : 4,
+        "Y" : 3
+      },
+      "Position" :
+      {
+        "X" : 26,
+        "Y" : 27
+      },
+      "Condition" :
+      {
+        "Ability" : "Power",
+        "Value" : 690
+      }
+    }
   ]
 }

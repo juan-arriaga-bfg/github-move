@@ -320,51 +320,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "Tavern1Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Tavern/Tavern1Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "Tavern2Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Tavern/Tavern2Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "Tavern3Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Tavern/Tavern3Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "Tavern4Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Tavern/Tavern4Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "Tavern5Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Tavern/Tavern5Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "Tavern6Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Tavern/Tavern6Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "Tavern7Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Tavern/Tavern7Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "Tavern8Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Tavern/Tavern8Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "Tavern9Piece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Tavern/Tavern9Piece",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "D1Piece",
     "ResourcePath": "Prefabs/Pieces/GenericPiece/D/D1Piece",
     "IsGenerateAutoName": true
@@ -567,6 +522,156 @@
   {
     "Uid": "SimpleUpgradeView",
     "ResourcePath": "Prefabs/SimpleUpgradeView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "RiverAngle",
+    "ResourcePath": "Prefabs/Town/RiverAngle",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "RiverLeft",
+    "ResourcePath": "Prefabs/Town/RiverLeft",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "RiverRight",
+    "ResourcePath": "Prefabs/Town/RiverRight",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "RoadLeft",
+    "ResourcePath": "Prefabs/Town/RoadLeft",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "RoadRight",
+    "ResourcePath": "Prefabs/Town/RoadRight",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage1Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage2Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage3Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage4Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage5Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage6Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage6Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage7Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage7Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage8Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage8Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage9Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage9Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "House",
+    "ResourcePath": "Prefabs/Town/House",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "DebugCell",
+    "ResourcePath": "Prefabs/DebugCell",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BushLeft",
+    "ResourcePath": "Prefabs/Town/BushLeft",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BushRight",
+    "ResourcePath": "Prefabs/Town/BushRight",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Tree",
+    "ResourcePath": "Prefabs/Town/Tree",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BrigeLeft",
+    "ResourcePath": "Prefabs/Town/BrigeLeft",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BrigeRight",
+    "ResourcePath": "Prefabs/Town/BrigeRight",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market1Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market2Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market3Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market4Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market5Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market6Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market6Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market7Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market7Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market8Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market8Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market9Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market9Piece",
     "IsGenerateAutoName": true
   }
 ]

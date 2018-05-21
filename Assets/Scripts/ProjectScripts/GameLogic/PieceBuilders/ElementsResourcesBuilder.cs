@@ -127,16 +127,26 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Castle8.Id, R.Castle8Piece);
         dict.Add(PieceType.Castle9.Id, R.Castle9Piece);
 
-        dict.Add(PieceType.Tavern1.Id, R.Tavern1Piece);
-        dict.Add(PieceType.Tavern2.Id, R.Tavern2Piece);
-        dict.Add(PieceType.Tavern3.Id, R.Tavern3Piece);
-        dict.Add(PieceType.Tavern4.Id, R.Tavern4Piece);
-        dict.Add(PieceType.Tavern5.Id, R.Tavern5Piece);
-        dict.Add(PieceType.Tavern6.Id, R.Tavern6Piece);
-        dict.Add(PieceType.Tavern7.Id, R.Tavern7Piece);
-        dict.Add(PieceType.Tavern8.Id, R.Tavern8Piece);
-        dict.Add(PieceType.Tavern9.Id, R.Tavern9Piece);
-
+        dict.Add(PieceType.Market1.Id, R.Market1Piece);
+        dict.Add(PieceType.Market2.Id, R.Market2Piece);
+        dict.Add(PieceType.Market3.Id, R.Market3Piece);
+        dict.Add(PieceType.Market4.Id, R.Market4Piece);
+        dict.Add(PieceType.Market5.Id, R.Market5Piece);
+        dict.Add(PieceType.Market6.Id, R.Market6Piece);
+        dict.Add(PieceType.Market7.Id, R.Market7Piece);
+        dict.Add(PieceType.Market8.Id, R.Market8Piece);
+        dict.Add(PieceType.Market9.Id, R.Market9Piece);
+        
+        dict.Add(PieceType.Storage1.Id, R.Storage1Piece);
+        dict.Add(PieceType.Storage2.Id, R.Storage2Piece);
+        dict.Add(PieceType.Storage3.Id, R.Storage3Piece);
+        dict.Add(PieceType.Storage4.Id, R.Storage4Piece);
+        dict.Add(PieceType.Storage5.Id, R.Storage5Piece);
+        dict.Add(PieceType.Storage6.Id, R.Storage6Piece);
+        dict.Add(PieceType.Storage7.Id, R.Storage7Piece);
+        dict.Add(PieceType.Storage8.Id, R.Storage8Piece);
+        dict.Add(PieceType.Storage9.Id, R.Storage9Piece);
+        
         return dict;
     }
     

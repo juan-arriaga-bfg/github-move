@@ -106,4 +106,5 @@ public class GameDataManager
     public readonly FogsDataManager FogsManager = new FogsDataManager();
     public readonly CollectionDataManager CollectionManager = new CollectionDataManager();
     public readonly LevelsDataManager LevelsManager = new LevelsDataManager();
+    public readonly TasksDataManager TasksManager = new TasksDataManager();
 }

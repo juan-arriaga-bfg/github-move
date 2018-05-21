@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public static class CurrencyHellper
 {
@@ -118,5 +119,13 @@ public static class CurrencyHellper
         }
 
         return ShopService.Current.IsCanPurchase(currentPrices);
+    }
+
+    public static int GetCountByTag(CurrencyTag tag)
+    {
+        var defs = Currency.GetCurrencyDefs(tag);
+
+        var count = defs.Sum(def => ProfileService.Current.GetStorageItem(def.Name).Amount);
+        return count;
     }
 }
