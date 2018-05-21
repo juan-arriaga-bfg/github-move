@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public class UITavernWindowModel : IWWindowModel 
+public class UIMarketWindowModel : IWWindowModel 
 {
     public int SelectIndex { get; set; }
     

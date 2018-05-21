@@ -4,9 +4,18 @@
 	{
 		var piece = base.Build(pieceType, context);
 		
-		/*piece.RegisterComponent(new TouchReactionComponent()
-			.RegisterComponent(new TouchReactionDefinitionOpenWindow{Icon = "face_Robin", WindowType = UIWindowType.StorageWindow})
-			.RegisterComponent(new TouchReactionConditionComponent()));*/
+		AddView(piece, ViewType.LevelLabel);
+		
+		var upgrade = new UpgradeComponent();
+		
+		piece.RegisterComponent(upgrade);
+		AddObserver(piece, upgrade);
+		
+		piece.RegisterComponent(new TouchReactionComponent()
+			.RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
+				.RegisterDefinition(new TouchReactionDefinitionOpenWindow{WindowType = UIWindowType.MarketWindow})
+				.RegisterDefinition(new TouchReactionDefinitionUpgrade {Icon = "arrow_light"}))
+			.RegisterComponent(new TouchReactionConditionComponent()));
 		
 		return piece;
 	}

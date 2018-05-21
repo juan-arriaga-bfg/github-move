@@ -3,7 +3,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UITavernTaskItem : MonoBehaviour
+public class UIMarketTaskItem : MonoBehaviour
 {
     [SerializeField] private Image icon;
     [SerializeField] private NSText reward;

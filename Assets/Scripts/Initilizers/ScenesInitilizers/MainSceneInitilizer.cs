@@ -28,7 +28,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.RobberyWindow,
             UIWindowType.ErrorWindow,
             UIWindowType.StorageWindow,
-            UIWindowType.TavernWindow,
+            UIWindowType.MarketWindow,
         });
 
         // on cache complete

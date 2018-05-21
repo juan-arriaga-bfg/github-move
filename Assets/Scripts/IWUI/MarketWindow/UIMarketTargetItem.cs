@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UITavernTargetItem : MonoBehaviour
+public class UIMarketTargetItem : MonoBehaviour
 {
     [SerializeField] private Image icon;
     [SerializeField] private NSText target;

@@ -2,26 +2,26 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class UITavernWindowView : UIGenericPopupWindowView
+public class UIMarketWindowView : UIGenericPopupWindowView
 {
     [SerializeField] private NSText buttonLabel;
     [SerializeField] private GameObject taskPattern;
-    [SerializeField] private List<UITavernTargetItem> targets;
+    [SerializeField] private List<UIMarketTargetItem> targets;
     
-    private List<UITavernTaskItem> taskItems = new List<UITavernTaskItem>();
+    private List<UIMarketTaskItem> taskItems = new List<UIMarketTaskItem>();
     
     public override void OnViewShow()
     {
         base.OnViewShow();
         
-        var windowModel = Model as UITavernWindowModel;
+        var windowModel = Model as UIMarketWindowModel;
         Toggle toggle = null;
         
         SetTitle(windowModel.Title);
         
         foreach (var task in windowModel.Tasks)
         {
-            var item = Instantiate(taskPattern, taskPattern.transform.parent).GetComponent<UITavernTaskItem>();
+            var item = Instantiate(taskPattern, taskPattern.transform.parent).GetComponent<UIMarketTaskItem>();
 
             if (toggle == null) toggle = item.gameObject.GetComponent<Toggle>();
             
@@ -37,14 +37,14 @@ public class UITavernWindowView : UIGenericPopupWindowView
     {
         base.OnViewClose();
         
-        var windowModel = Model as UITavernWindowModel;
+        var windowModel = Model as UIMarketWindowModel;
         
         taskPattern.SetActive(true);
     }
     
     public void OnSelect(Transform toggle)
     {
-        var windowModel = Model as UITavernWindowModel;
+        var windowModel = Model as UIMarketWindowModel;
         
         windowModel.SelectIndex = toggle.GetSiblingIndex();
 
