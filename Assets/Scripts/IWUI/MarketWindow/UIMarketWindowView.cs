@@ -7,6 +7,9 @@ public class UIMarketWindowView : UIGenericPopupWindowView
     [SerializeField] private NSText buttonLabel;
     [SerializeField] private GameObject taskPattern;
     [SerializeField] private List<UIMarketTargetItem> targets;
+    [SerializeField] private Image icon;
+    [SerializeField] private NSText reward;
+    [SerializeField] private NSText rewardAll;
     
     private List<UIMarketTaskItem> taskItems = new List<UIMarketTaskItem>();
     
@@ -30,24 +33,31 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         }
         
         taskPattern.SetActive(false);
-        toggle.Select();
+        toggle.isOn = true;
     }
-    
-    public override void OnViewClose()
+
+    public override void OnViewCloseCompleted()
     {
-        base.OnViewClose();
+        base.OnViewCloseCompleted();
+
+        foreach (var item in taskItems)
+        {
+            Destroy(item.gameObject);
+        }
         
-        var windowModel = Model as UIMarketWindowModel;
+        taskItems = new List<UIMarketTaskItem>();
         
         taskPattern.SetActive(true);
     }
     
-    public void OnSelect(Transform toggle)
+    public void OnSelect(Toggle toggle)
     {
+        if(toggle.isOn == false) return;
+        
         var windowModel = Model as UIMarketWindowModel;
         
-        windowModel.SelectIndex = toggle.GetSiblingIndex();
-
+        windowModel.SelectIndex = toggle.transform.GetSiblingIndex() - 1;
+        
         var selected = windowModel.Selected.Def;
         
         SetMessage(selected.Message);
@@ -61,6 +71,11 @@ public class UIMarketWindowView : UIGenericPopupWindowView
             
             if(isActive) target.Init(selected.Prices[i]);
         }
+
+        icon.sprite = IconService.Current.GetSpriteById(selected.Result.Currency);
+        
+        reward.Text = string.Format("x{0}", selected.Result.Amount);
+        rewardAll.Text = string.Format("Reward: {0}", taskItems[windowModel.SelectIndex].GetString());
     }
 
     public void OnClick()

@@ -15,16 +15,16 @@ public class UIMarketTaskItem : MonoBehaviour
         for (var i = 0; i < rewards.Count; i++)
         {
             var pair = rewards[i];
-            
-            var spriteStr = pair.Currency == Currency.Energy.Name
-                ? "Exp"
-                : string.Format("<sprite name={0}>", pair.Currency);
-
             var lastStr = i < rewards.Count ? "\n" : "";
 
-            str.Append(string.Format("+{0}{1}{2}", pair.Amount, spriteStr, lastStr));
+            str.Append(string.Format("+{0}{1}", pair.ToStringIcon(false), lastStr));
         }
 
         reward.Text = str.ToString();
+    }
+
+    public string GetString()
+    {
+        return reward.Text.Replace("\n", " ");
     }
 }

@@ -26,5 +26,5 @@
     
     public const string StorageWindow = "StorageWindow";
     
-    public const string MarketWindow = "TavernWindow";
+    public const string MarketWindow = "MarketWindow";
 }

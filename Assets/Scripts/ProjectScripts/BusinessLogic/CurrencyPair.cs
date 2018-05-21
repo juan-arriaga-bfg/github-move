@@ -17,9 +17,11 @@ public class CurrencyPair
         return def == null ? null : string.Format("{0},{1}", def.Id, Amount);
     }
 
-    public string ToStringIcon()
+    public string ToStringIcon(bool isLeft = true)
     {
-        return string.Format("<sprite name={0}> {1}", Currency, Amount);
+        var icon = Currency == global::Currency.Energy.Name ? "Exp" : string.Format("<sprite name={0}>", Currency);
+
+        return isLeft ? string.Format("{0} {1}", icon, Amount) : string.Format("{0} {1}", Amount, icon);
     }
 
     public static CurrencyPair Parse(string value)

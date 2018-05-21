@@ -31,7 +31,7 @@ public static partial class Currency
     public static readonly CurrencyDef Greenarrow = new CurrencyDef { Id = 402, Name = "Greenarrow", IsConsumable = false };
     
     public static readonly CurrencyDef LevelCastle = new CurrencyDef { Id = 10003, Name = "LevelCastle", IsConsumable = true };
-    public static readonly CurrencyDef LevelTavern = new CurrencyDef { Id = 10004, Name = "LevelTavern", IsConsumable = true };
+    public static readonly CurrencyDef LevelMarket = new CurrencyDef { Id = 10004, Name = "LevelMarket", IsConsumable = true };
     public static readonly CurrencyDef LevelMine = new CurrencyDef { Id = 10005, Name = "LevelMine", IsConsumable = true };
     public static readonly CurrencyDef LevelSawmill = new CurrencyDef { Id = 10006, Name = "LevelSawmill", IsConsumable = true };
     public static readonly CurrencyDef LevelSheepfold = new CurrencyDef { Id = 10007, Name = "LevelSheepfold", IsConsumable = true };

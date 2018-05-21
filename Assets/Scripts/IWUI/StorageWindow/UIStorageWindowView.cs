@@ -65,6 +65,8 @@ public class UIStorageWindowView : UIGenericPopupWindowView
         {
             Destroy(item);
         }
+        
+        items = new List<GameObject>();
     }
 
     public override void OnViewClose()

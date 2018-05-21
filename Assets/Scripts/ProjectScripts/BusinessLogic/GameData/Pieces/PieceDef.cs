@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PieceDef
 {
@@ -47,7 +48,7 @@ public class PieceDef
             
             upgradeTargetCurrencyDef = Currency.GetCurrencyDef(string.Format("Level{0}", UpgradeTargetPiece.Substring(0, UpgradeTargetPiece.Length - 1)));
             
-            upgradeTargetLevel = int.Parse(UpgradeTargetPiece.Substring(Uid.Length - 2, 1));
+            upgradeTargetLevel = int.Parse(UpgradeTargetPiece.Substring(UpgradeTargetPiece.Length - 1, 1));
             
             return upgradeTargetCurrencyDef;
         }

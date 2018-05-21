@@ -8,7 +8,7 @@ public class PiecesDataManager : IDataLoader<List<PieceDef>>
     public const int ReproductionChance = 25;
     
     public BoardPosition CastlePosition = BoardPosition.Default();
-    public BoardPosition TavernPosition = BoardPosition.Default();
+    public BoardPosition MatketPosition = BoardPosition.Default();
     public BoardPosition StoragePosition = BoardPosition.Default();
     public BoardPosition SawmillPosition = BoardPosition.Default();
     public BoardPosition MinePosition = BoardPosition.Default();
@@ -59,7 +59,7 @@ public class PiecesDataManager : IDataLoader<List<PieceDef>>
         
         if (first == PieceType.Market1.Id)
         {
-            TavernPosition = position.Right;
+            MatketPosition = position.Right;
             return;
         }
         
