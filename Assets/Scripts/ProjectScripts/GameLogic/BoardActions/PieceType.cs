@@ -1,135 +1,22 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 
 public static partial class PieceType 
 {
     static PieceType()
     {
-        RegisterType(Empty);
+        var t = typeof(PieceType);
+        var fieldInfos = t.GetFields(BindingFlags.Public | BindingFlags.Static);
         
-        RegisterType(A1);
-        RegisterType(A2);
-        RegisterType(A3);
-        RegisterType(A4);
-        RegisterType(A5);
-        RegisterType(A6);
-        RegisterType(A7);
-        RegisterType(A8);
-        RegisterType(A9);
-        
-        RegisterType(B1);
-        RegisterType(B2);
-        RegisterType(B3);
-        RegisterType(B4);
-        RegisterType(B5);
-        
-        RegisterType(C1);
-        RegisterType(C2);
-        RegisterType(C3);
-        RegisterType(C4);
-        RegisterType(C5);
-        RegisterType(C6);
-        RegisterType(C7);
-        RegisterType(C8);
-        RegisterType(C9);
-        
-        RegisterType(D1);
-        RegisterType(D2);
-        RegisterType(D3);
-        RegisterType(D4);
-        RegisterType(D5);
-        
-        RegisterType(E1);
-        RegisterType(E2);
-        RegisterType(E3);
-        RegisterType(E4);
-        RegisterType(E5);
-        RegisterType(E6);
-        
-        RegisterType(O1);
-        RegisterType(O2);
-        RegisterType(O3);
-        RegisterType(O4);
-        RegisterType(O5);
-        
-        RegisterType(OX1);
-        RegisterType(OX2);
-        RegisterType(OX3);
-        RegisterType(OX4);
-        RegisterType(OX5);
-        
-        RegisterType(King);
-        
-        RegisterType(Fog);
-        
-        RegisterType(Coin1);
-        RegisterType(Coin2);
-        RegisterType(Coin3);
-        RegisterType(Coin4);
-        RegisterType(Coin5);
-        
-        RegisterType(Mine1);
-        RegisterType(Mine2);
-        RegisterType(Mine3);
-        RegisterType(Mine4);
-        RegisterType(Mine5);
-        RegisterType(Mine6);
-        RegisterType(Mine7);
-        
-        RegisterType(Sawmill1);
-        RegisterType(Sawmill2);
-        RegisterType(Sawmill3);
-        RegisterType(Sawmill4);
-        RegisterType(Sawmill5);
-        RegisterType(Sawmill6);
-        RegisterType(Sawmill7);
-        
-        RegisterType(Sheepfold1);
-        RegisterType(Sheepfold2);
-        RegisterType(Sheepfold3);
-        RegisterType(Sheepfold4);
-        RegisterType(Sheepfold5);
-        RegisterType(Sheepfold6);
-        RegisterType(Sheepfold7);
-        
-        RegisterType(Chest1);
-        RegisterType(Chest2);
-        RegisterType(Chest3);
-        RegisterType(Chest4);
-        RegisterType(Chest5);
-        RegisterType(Chest6);
-        RegisterType(Chest7);
-        RegisterType(Chest8);
-        RegisterType(Chest9);
-        
-        RegisterType(Castle1);
-        RegisterType(Castle2);
-        RegisterType(Castle3);
-        RegisterType(Castle4);
-        RegisterType(Castle5);
-        RegisterType(Castle6);
-        RegisterType(Castle7);
-        RegisterType(Castle8);
-        RegisterType(Castle9);
-        
-        RegisterType(Market1);
-        RegisterType(Market2);
-        RegisterType(Market3);
-        RegisterType(Market4);
-        RegisterType(Market5);
-        RegisterType(Market6);
-        RegisterType(Market7);
-        RegisterType(Market8);
-        RegisterType(Market9);
-        
-        RegisterType(Storage1);
-        RegisterType(Storage2);
-        RegisterType(Storage3);
-        RegisterType(Storage4);
-        RegisterType(Storage5);
-        RegisterType(Storage6);
-        RegisterType(Storage7);
-        RegisterType(Storage8);
-        RegisterType(Storage9);
+        for (int i = 0; i < fieldInfos.Length; i++)
+        {
+            var fieldInfo = fieldInfos[i];
+            if (fieldInfo.FieldType != typeof(PieceTypeDef)) continue;
+            
+            var fieldValue = (PieceTypeDef)fieldInfo.GetValue(null);
+            
+            RegisterType(fieldValue);
+        }
     }
     
     public static readonly PieceTypeDef A1 = new PieceTypeDef{Id = 100, Abbreviations = new List<string>{ "A1", "PieceA1" }};
@@ -171,27 +58,51 @@ public static partial class PieceType
     public static readonly PieceTypeDef E5 = new PieceTypeDef{Id = 504, Abbreviations = new List<string>{ "E5", "PieceE5" }};
     public static readonly PieceTypeDef E6 = new PieceTypeDef{Id = 505, Abbreviations = new List<string>{ "E6", "PieceE6" }};
     
-    public static readonly PieceTypeDef O1 = new PieceTypeDef{Id = 600, Abbreviations = new List<string>{ "O1" }};
-    public static readonly PieceTypeDef O2 = new PieceTypeDef{Id = 601, Abbreviations = new List<string>{ "O2" }};
-    public static readonly PieceTypeDef O3 = new PieceTypeDef{Id = 602, Abbreviations = new List<string>{ "O3" }};
-    public static readonly PieceTypeDef O4 = new PieceTypeDef{Id = 603, Abbreviations = new List<string>{ "O4" }};
-    public static readonly PieceTypeDef O5 = new PieceTypeDef{Id = 604, Abbreviations = new List<string>{ "O5" }};
+    public static readonly PieceTypeDef F1 = new PieceTypeDef{Id = 600, Abbreviations = new List<string>{ "F1", "PieceF1" }};
+    public static readonly PieceTypeDef F2 = new PieceTypeDef{Id = 601, Abbreviations = new List<string>{ "F2", "PieceF2" }};
+    public static readonly PieceTypeDef F3 = new PieceTypeDef{Id = 602, Abbreviations = new List<string>{ "F3", "PieceF3" }};
+    public static readonly PieceTypeDef F4 = new PieceTypeDef{Id = 603, Abbreviations = new List<string>{ "F4", "PieceF4" }};
+    public static readonly PieceTypeDef F5 = new PieceTypeDef{Id = 604, Abbreviations = new List<string>{ "F5", "PieceF5" }};
     
-    public static readonly PieceTypeDef OX1 = new PieceTypeDef{Id = 700, Abbreviations = new List<string>{ "OX1" }};
-    public static readonly PieceTypeDef OX2 = new PieceTypeDef{Id = 701, Abbreviations = new List<string>{ "OX2" }};
-    public static readonly PieceTypeDef OX3 = new PieceTypeDef{Id = 702, Abbreviations = new List<string>{ "OX3" }};
-    public static readonly PieceTypeDef OX4 = new PieceTypeDef{Id = 703, Abbreviations = new List<string>{ "OX4" }};
-    public static readonly PieceTypeDef OX5 = new PieceTypeDef{Id = 704, Abbreviations = new List<string>{ "OX5" }};
+    public static readonly PieceTypeDef G1 = new PieceTypeDef{Id = 700, Abbreviations = new List<string>{ "G1", "PieceG1" }};
+    public static readonly PieceTypeDef G2 = new PieceTypeDef{Id = 701, Abbreviations = new List<string>{ "G2", "PieceG2" }};
+    public static readonly PieceTypeDef G3 = new PieceTypeDef{Id = 702, Abbreviations = new List<string>{ "G3", "PieceG3" }};
+    public static readonly PieceTypeDef G4 = new PieceTypeDef{Id = 703, Abbreviations = new List<string>{ "G4", "PieceG4" }};
+    public static readonly PieceTypeDef G5 = new PieceTypeDef{Id = 704, Abbreviations = new List<string>{ "G5", "PieceG5" }};
     
-    public static readonly PieceTypeDef Fog = new PieceTypeDef{Id = 801, Abbreviations = new List<string>{ "Fog" }};
+    public static readonly PieceTypeDef H1 = new PieceTypeDef{Id = 800, Abbreviations = new List<string>{ "H1", "PieceH1" }};
+    public static readonly PieceTypeDef H2 = new PieceTypeDef{Id = 801, Abbreviations = new List<string>{ "H2", "PieceH2" }};
+    public static readonly PieceTypeDef H3 = new PieceTypeDef{Id = 802, Abbreviations = new List<string>{ "H3", "PieceH3" }};
+    public static readonly PieceTypeDef H4 = new PieceTypeDef{Id = 803, Abbreviations = new List<string>{ "H4", "PieceH4" }};
+    public static readonly PieceTypeDef H5 = new PieceTypeDef{Id = 804, Abbreviations = new List<string>{ "H5", "PieceH5" }};
     
-    public static readonly PieceTypeDef King = new PieceTypeDef{Id = 901, Abbreviations = new List<string>{ "King" }};
+    public static readonly PieceTypeDef I1 = new PieceTypeDef{Id = 900, Abbreviations = new List<string>{ "I1", "PieceI1" }};
+    public static readonly PieceTypeDef I2 = new PieceTypeDef{Id = 901, Abbreviations = new List<string>{ "I2", "PieceI2" }};
+    public static readonly PieceTypeDef I3 = new PieceTypeDef{Id = 902, Abbreviations = new List<string>{ "I3", "PieceI3" }};
+    public static readonly PieceTypeDef I4 = new PieceTypeDef{Id = 903, Abbreviations = new List<string>{ "I4", "PieceI4" }};
+    public static readonly PieceTypeDef I5 = new PieceTypeDef{Id = 904, Abbreviations = new List<string>{ "I5", "PieceI5" }};
     
-    public static readonly PieceTypeDef Coin1 = new PieceTypeDef{Id = 1100, Abbreviations = new List<string>{ "Coin1" }};
-    public static readonly PieceTypeDef Coin2 = new PieceTypeDef{Id = 1101, Abbreviations = new List<string>{ "Coin2" }};
-    public static readonly PieceTypeDef Coin3 = new PieceTypeDef{Id = 1102, Abbreviations = new List<string>{ "Coin3" }}; 
-    public static readonly PieceTypeDef Coin4 = new PieceTypeDef{Id = 1103, Abbreviations = new List<string>{ "Coin4" }};
-    public static readonly PieceTypeDef Coin5 = new PieceTypeDef{Id = 1104, Abbreviations = new List<string>{ "Coin5" }};
+    public static readonly PieceTypeDef O1 = new PieceTypeDef{Id = 1000, Abbreviations = new List<string>{ "O1" }};
+    public static readonly PieceTypeDef O2 = new PieceTypeDef{Id = 1001, Abbreviations = new List<string>{ "O2" }};
+    public static readonly PieceTypeDef O3 = new PieceTypeDef{Id = 1002, Abbreviations = new List<string>{ "O3" }};
+    public static readonly PieceTypeDef O4 = new PieceTypeDef{Id = 1003, Abbreviations = new List<string>{ "O4" }};
+    public static readonly PieceTypeDef O5 = new PieceTypeDef{Id = 1004, Abbreviations = new List<string>{ "O5" }};
+    
+    public static readonly PieceTypeDef OX1 = new PieceTypeDef{Id = 1100, Abbreviations = new List<string>{ "OX1" }};
+    public static readonly PieceTypeDef OX2 = new PieceTypeDef{Id = 1101, Abbreviations = new List<string>{ "OX2" }};
+    public static readonly PieceTypeDef OX3 = new PieceTypeDef{Id = 1102, Abbreviations = new List<string>{ "OX3" }};
+    public static readonly PieceTypeDef OX4 = new PieceTypeDef{Id = 1103, Abbreviations = new List<string>{ "OX4" }};
+    public static readonly PieceTypeDef OX5 = new PieceTypeDef{Id = 1104, Abbreviations = new List<string>{ "OX5" }};
+    
+    public static readonly PieceTypeDef Fog = new PieceTypeDef{Id = 1201, Abbreviations = new List<string>{ "Fog" }};
+    
+    public static readonly PieceTypeDef King = new PieceTypeDef{Id = 1301, Abbreviations = new List<string>{ "King" }};
+    
+    public static readonly PieceTypeDef Coin1 = new PieceTypeDef{Id = 1400, Abbreviations = new List<string>{ "Coin1" }};
+    public static readonly PieceTypeDef Coin2 = new PieceTypeDef{Id = 1401, Abbreviations = new List<string>{ "Coin2" }};
+    public static readonly PieceTypeDef Coin3 = new PieceTypeDef{Id = 1402, Abbreviations = new List<string>{ "Coin3" }}; 
+    public static readonly PieceTypeDef Coin4 = new PieceTypeDef{Id = 1403, Abbreviations = new List<string>{ "Coin4" }};
+    public static readonly PieceTypeDef Coin5 = new PieceTypeDef{Id = 1404, Abbreviations = new List<string>{ "Coin5" }};
     
     public static readonly PieceTypeDef Mine1 = new PieceTypeDef{Id = 10000, Abbreviations = new List<string>{ "Mine1" }};
     public static readonly PieceTypeDef Mine2 = new PieceTypeDef{Id = 10001, Abbreviations = new List<string>{ "Mine2" }};

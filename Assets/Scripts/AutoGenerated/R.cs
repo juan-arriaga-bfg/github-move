@@ -135,4 +135,24 @@ public class R
      public const string Market7Piece = "Market7Piece";
      public const string Market8Piece = "Market8Piece";
      public const string Market9Piece = "Market9Piece";
+     public const string F1Piece = "F1Piece";
+     public const string F2Piece = "F2Piece";
+     public const string F3Piece = "F3Piece";
+     public const string F4Piece = "F4Piece";
+     public const string F5Piece = "F5Piece";
+     public const string G1Piece = "G1Piece";
+     public const string G2Piece = "G2Piece";
+     public const string G3Piece = "G3Piece";
+     public const string G4Piece = "G4Piece";
+     public const string G5Piece = "G5Piece";
+     public const string H1Piece = "H1Piece";
+     public const string H2Piece = "H2Piece";
+     public const string H3Piece = "H3Piece";
+     public const string H4Piece = "H4Piece";
+     public const string H5Piece = "H5Piece";
+     public const string I1Piece = "I1Piece";
+     public const string I2Piece = "I2Piece";
+     public const string I3Piece = "I3Piece";
+     public const string I4Piece = "I4Piece";
+     public const string I5Piece = "I5Piece";
 }

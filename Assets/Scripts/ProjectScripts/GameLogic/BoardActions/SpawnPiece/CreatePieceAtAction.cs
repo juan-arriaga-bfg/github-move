@@ -1,4 +1,6 @@
-﻿public class CreatePieceAtAction : IBoardAction
+﻿using UnityEngine;
+
+public class CreatePieceAtAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -14,7 +16,7 @@
 	public bool PerformAction(BoardController gameBoardController)
 	{
 		var piece = gameBoardController.CreatePieceFromType(PieceTypeId);
-
+		
 		At = new BoardPosition(At.X, At.Y, piece.Layer.Index);
 		
 		if (At.IsValid == false) return false;

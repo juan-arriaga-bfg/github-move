@@ -72,6 +72,30 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.E5.Id, R.E5Piece);
         dict.Add(PieceType.E6.Id, R.E6Piece);
         
+        dict.Add(PieceType.F1.Id, R.F1Piece);
+        dict.Add(PieceType.F2.Id, R.F2Piece);
+        dict.Add(PieceType.F3.Id, R.F3Piece);
+        dict.Add(PieceType.F4.Id, R.F4Piece);
+        dict.Add(PieceType.F5.Id, R.F5Piece);
+        
+        dict.Add(PieceType.G1.Id, R.G1Piece);
+        dict.Add(PieceType.G2.Id, R.G2Piece);
+        dict.Add(PieceType.G3.Id, R.G3Piece);
+        dict.Add(PieceType.G4.Id, R.G4Piece);
+        dict.Add(PieceType.G5.Id, R.G5Piece);
+        
+        dict.Add(PieceType.H1.Id, R.H1Piece);
+        dict.Add(PieceType.H2.Id, R.H2Piece);
+        dict.Add(PieceType.H3.Id, R.H3Piece);
+        dict.Add(PieceType.H4.Id, R.H4Piece);
+        dict.Add(PieceType.H5.Id, R.H5Piece);
+        
+        dict.Add(PieceType.I1.Id, R.I1Piece);
+        dict.Add(PieceType.I2.Id, R.I2Piece);
+        dict.Add(PieceType.I3.Id, R.I3Piece);
+        dict.Add(PieceType.I4.Id, R.I4Piece);
+        dict.Add(PieceType.I5.Id, R.I5Piece);
+        
         dict.Add(PieceType.Chest1.Id, R.Chest1Piece);
         dict.Add(PieceType.Chest2.Id, R.Chest2Piece);
         dict.Add(PieceType.Chest3.Id, R.Chest3Piece);

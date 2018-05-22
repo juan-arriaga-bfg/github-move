@@ -22,13 +22,13 @@ public class FieldControllerComponent : IECSComponent
         CreateDebug();
 #endif
         
-        CreateTown();
+//        CreateTown();
 
 //        if (fieldDef.Pieces == null)
         {
-            StartField();
-//            TestField();
-            CreateFog();
+//            StartField();
+            TestField();
+//            CreateFog();
             return;
         }
         
@@ -124,16 +124,21 @@ public class FieldControllerComponent : IECSComponent
 
     private void TestField()
     {
+        AddPieces(new BoardPosition(6, 10), PieceType.O1.Id, PieceType.O5.Id);
+        AddPieces(new BoardPosition(8, 10), PieceType.OX1.Id, PieceType.OX5.Id);
+        
         AddPieces(new BoardPosition(10, 10), PieceType.A1.Id, PieceType.A9.Id);
         AddPieces(new BoardPosition(12, 10), PieceType.B1.Id, PieceType.B5.Id);
         AddPieces(new BoardPosition(14, 10), PieceType.C1.Id, PieceType.C9.Id);
         AddPieces(new BoardPosition(16, 10), PieceType.D1.Id, PieceType.D5.Id);
-        AddPieces(new BoardPosition(18, 10), PieceType.E1.Id, PieceType.E6.Id);
-        AddPieces(new BoardPosition(20, 10), PieceType.O1.Id, PieceType.O5.Id);
-        AddPieces(new BoardPosition(22, 10), PieceType.OX1.Id, PieceType.OX5.Id);
+        AddPieces(new BoardPosition(18, 10), PieceType.E1.Id, PieceType.E5.Id);
+        AddPieces(new BoardPosition(20, 10), PieceType.F1.Id, PieceType.F5.Id);
+        AddPieces(new BoardPosition(22, 10), PieceType.G1.Id, PieceType.G5.Id);
+        AddPieces(new BoardPosition(24, 10), PieceType.H1.Id, PieceType.H5.Id);
+        AddPieces(new BoardPosition(26, 10), PieceType.I1.Id, PieceType.I5.Id);
         
-        AddPieces(new BoardPosition(24, 10), PieceType.Chest1.Id, PieceType.Chest6.Id);
-        AddPieces(new BoardPosition(26, 10), PieceType.Coin1.Id, PieceType.Coin5.Id);
+        AddPieces(new BoardPosition(28, 10), PieceType.Chest1.Id, PieceType.Chest6.Id);
+        AddPieces(new BoardPosition(29, 10), PieceType.Coin1.Id, PieceType.Coin5.Id);
     }
     
     private void CreateFog()
