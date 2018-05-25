@@ -12,7 +12,7 @@ public class SimpleUpgradeView : UIBoardView
         get { return new Vector3(0, 1.5f); }
     }
 
-    protected override void SetOfset()
+    public override void SetOfset()
     {
         CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Ofset;
     }

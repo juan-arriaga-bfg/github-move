@@ -60,6 +60,16 @@ public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
             PieceType.Storage7.Id,
             PieceType.Storage8.Id,
             PieceType.Storage9.Id,
+            
+            PieceType.Factory1.Id,
+            PieceType.Factory2.Id,
+            PieceType.Factory3.Id,
+            PieceType.Factory4.Id,
+            PieceType.Factory5.Id,
+            PieceType.Factory6.Id,
+            PieceType.Factory7.Id,
+            PieceType.Factory8.Id,
+            PieceType.Factory9.Id,
         };
     }
 

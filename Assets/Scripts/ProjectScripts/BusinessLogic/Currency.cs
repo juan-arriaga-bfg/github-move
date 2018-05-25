@@ -36,6 +36,7 @@ public static partial class Currency
     public static readonly CurrencyDef LevelSawmill = new CurrencyDef { Id = 10006, Name = "LevelSawmill", IsConsumable = true };
     public static readonly CurrencyDef LevelSheepfold = new CurrencyDef { Id = 10007, Name = "LevelSheepfold", IsConsumable = true };
     public static readonly CurrencyDef LevelStorage = new CurrencyDef { Id = 10008, Name = "LevelStorage", IsConsumable = true };
+    public static readonly CurrencyDef LevelFactory = new CurrencyDef { Id = 10009, Name = "LevelFactory", IsConsumable = true };
     
     public static readonly CurrencyDef Charger1 = new CurrencyDef { Id = 1001, Name = "Charger1", IsConsumable = true };
     public static readonly CurrencyDef Charger2 = new CurrencyDef { Id = 1002, Name = "Charger2", IsConsumable = true };
@@ -47,13 +48,13 @@ public static partial class Currency
     public static readonly CurrencyDef Charger8 = new CurrencyDef { Id = 1008, Name = "Charger8", IsConsumable = true };
     public static readonly CurrencyDef Charger9 = new CurrencyDef { Id = 1009, Name = "Charger9", IsConsumable = true };
     
-    public static readonly CurrencyDef Resource1 = new CurrencyDef { Id = 1101, Name = "Resource1", IsConsumable = false, Tags = new List<CurrencyTag>()};
-    public static readonly CurrencyDef Resource2 = new CurrencyDef { Id = 1102, Name = "Resource2", IsConsumable = false, Tags = new List<CurrencyTag>()};
-    public static readonly CurrencyDef Resource3 = new CurrencyDef { Id = 1103, Name = "Resource3", IsConsumable = false, Tags = new List<CurrencyTag>()};
-    public static readonly CurrencyDef Resource4 = new CurrencyDef { Id = 1104, Name = "Resource4", IsConsumable = false, Tags = new List<CurrencyTag>()};
-    public static readonly CurrencyDef Resource5 = new CurrencyDef { Id = 1105, Name = "Resource5", IsConsumable = false, Tags = new List<CurrencyTag>()};
-    public static readonly CurrencyDef Resource6 = new CurrencyDef { Id = 1106, Name = "Resource6", IsConsumable = false, Tags = new List<CurrencyTag>()};
-    public static readonly CurrencyDef Resource7 = new CurrencyDef { Id = 1107, Name = "Resource7", IsConsumable = false, Tags = new List<CurrencyTag>()};
+    public static readonly CurrencyDef Resource1 = new CurrencyDef { Id = 1101, Name = "Resource1", IsConsumable = true, Tags = new List<CurrencyTag>()};
+    public static readonly CurrencyDef Resource2 = new CurrencyDef { Id = 1102, Name = "Resource2", IsConsumable = true, Tags = new List<CurrencyTag>()};
+    public static readonly CurrencyDef Resource3 = new CurrencyDef { Id = 1103, Name = "Resource3", IsConsumable = true, Tags = new List<CurrencyTag>()};
+    public static readonly CurrencyDef Resource4 = new CurrencyDef { Id = 1104, Name = "Resource4", IsConsumable = true, Tags = new List<CurrencyTag>()};
+    public static readonly CurrencyDef Resource5 = new CurrencyDef { Id = 1105, Name = "Resource5", IsConsumable = true, Tags = new List<CurrencyTag>()};
+    public static readonly CurrencyDef Resource6 = new CurrencyDef { Id = 1106, Name = "Resource6", IsConsumable = true, Tags = new List<CurrencyTag>()};
+    public static readonly CurrencyDef Resource7 = new CurrencyDef { Id = 1107, Name = "Resource7", IsConsumable = true, Tags = new List<CurrencyTag>()};
     
     public static readonly CurrencyDef RobinItem1 = new CurrencyDef { Id = 11001, Name = "RobinItem1", IsConsumable = false };
     public static readonly CurrencyDef RobinItem2 = new CurrencyDef { Id = 11002, Name = "RobinItem2", IsConsumable = false };

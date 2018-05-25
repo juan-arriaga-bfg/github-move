@@ -26,7 +26,7 @@ public class FieldControllerComponent : IECSComponent
 
 //        if (fieldDef.Pieces == null)
         {
-//            StartField();
+            StartField();
             TestField();
 //            CreateFog();
             return;
@@ -74,6 +74,18 @@ public class FieldControllerComponent : IECSComponent
         {
             At = new BoardPosition(16, 10),
             PieceTypeId = PieceType.Storage1.Id
+        });
+        
+        context.ActionExecutor.AddAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(26, 3),
+            PieceTypeId = PieceType.Factory1.Id
+        });
+        
+        context.ActionExecutor.AddAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(14, 10),
+            PieceTypeId = PieceType.Factory1.Id
         });
         
         //----------------------------------------
@@ -124,6 +136,56 @@ public class FieldControllerComponent : IECSComponent
 
     private void TestField()
     {
+        context.ActionExecutor.AddAction(new FillBoardAction
+        {
+            Piece = PieceType.F4.Id,
+            Positions = new List<BoardPosition>
+            {
+                new BoardPosition(6, 10),
+                new BoardPosition(6, 11),
+                new BoardPosition(6, 12),
+                new BoardPosition(6, 13),
+            }
+        });
+        
+        context.ActionExecutor.AddAction(new FillBoardAction
+        {
+            Piece = PieceType.G4.Id,
+            Positions = new List<BoardPosition>
+            {
+                new BoardPosition(8, 10),
+                new BoardPosition(8, 11),
+                new BoardPosition(8, 12),
+                new BoardPosition(8, 13),
+            }
+        });
+        
+        context.ActionExecutor.AddAction(new FillBoardAction
+        {
+            Piece = PieceType.H4.Id,
+            Positions = new List<BoardPosition>
+            {
+                new BoardPosition(10, 10),
+                new BoardPosition(10, 11),
+                new BoardPosition(10, 12),
+                new BoardPosition(10, 13),
+            }
+        });
+        
+        context.ActionExecutor.AddAction(new FillBoardAction
+        {
+            Piece = PieceType.I4.Id,
+            Positions = new List<BoardPosition>
+            {
+                new BoardPosition(12, 10),
+                new BoardPosition(12, 11),
+                new BoardPosition(12, 12),
+                new BoardPosition(12, 13),
+            }
+        });
+        
+        return;
+        
         AddPieces(new BoardPosition(6, 10), PieceType.O1.Id, PieceType.O5.Id);
         AddPieces(new BoardPosition(8, 10), PieceType.OX1.Id, PieceType.OX5.Id);
         
@@ -132,10 +194,10 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(14, 10), PieceType.C1.Id, PieceType.C9.Id);
         AddPieces(new BoardPosition(16, 10), PieceType.D1.Id, PieceType.D5.Id);
         AddPieces(new BoardPosition(18, 10), PieceType.E1.Id, PieceType.E5.Id);
-        AddPieces(new BoardPosition(20, 10), PieceType.F1.Id, PieceType.F5.Id);
-        AddPieces(new BoardPosition(22, 10), PieceType.G1.Id, PieceType.G5.Id);
-        AddPieces(new BoardPosition(24, 10), PieceType.H1.Id, PieceType.H5.Id);
-        AddPieces(new BoardPosition(26, 10), PieceType.I1.Id, PieceType.I5.Id);
+        AddPieces(new BoardPosition(20, 10), PieceType.F1.Id, PieceType.F4.Id);
+        AddPieces(new BoardPosition(22, 10), PieceType.G1.Id, PieceType.G4.Id);
+        AddPieces(new BoardPosition(24, 10), PieceType.H1.Id, PieceType.H4.Id);
+        AddPieces(new BoardPosition(26, 10), PieceType.I1.Id, PieceType.I4.Id);
         
         AddPieces(new BoardPosition(28, 10), PieceType.Chest1.Id, PieceType.Chest6.Id);
         AddPieces(new BoardPosition(29, 10), PieceType.Coin1.Id, PieceType.Coin5.Id);
@@ -225,8 +287,6 @@ public class FieldControllerComponent : IECSComponent
         context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(20, 16));
         context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(21, 16));
         
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.House, new BoardPosition(14, 8, 1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.House, new BoardPosition(14, 10, 1));
         context.RendererContext.CreateBoardElementAt<BoardElementView>(R.House, new BoardPosition(16, 12, 1));
         context.RendererContext.CreateBoardElementAt<BoardElementView>(R.House, new BoardPosition(18, 12, 1));
         context.RendererContext.CreateBoardElementAt<BoardElementView>(R.House, new BoardPosition(20, 12, 1));

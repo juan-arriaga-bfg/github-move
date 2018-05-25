@@ -695,11 +695,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "F5Piece",
-    "ResourcePath": "Prefabs/Pieces/GenericPiece/F/F5Piece",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "G1Piece",
     "ResourcePath": "Prefabs/Pieces/GenericPiece/G/G1Piece",
     "IsGenerateAutoName": true
@@ -717,11 +712,6 @@
   {
     "Uid": "G4Piece",
     "ResourcePath": "Prefabs/Pieces/GenericPiece/G/G4Piece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "G5Piece",
-    "ResourcePath": "Prefabs/Pieces/GenericPiece/G/G5Piece",
     "IsGenerateAutoName": true
   },
   {
@@ -745,11 +735,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "H5Piece",
-    "ResourcePath": "Prefabs/Pieces/GenericPiece/H/H5Piece",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "I1Piece",
     "ResourcePath": "Prefabs/Pieces/GenericPiece/I/I1Piece",
     "IsGenerateAutoName": true
@@ -770,8 +755,58 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "I5Piece",
-    "ResourcePath": "Prefabs/Pieces/GenericPiece/I/I5Piece",
+    "Uid": "ProductionView",
+    "ResourcePath": "Prefabs/ProductionView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory1Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory2Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory3Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory4Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory5Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory6Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory6Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory7Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory7Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory8Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory8Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory9Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory9Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ProductionWarningView",
+    "ResourcePath": "Prefabs/ProductionWarningView",
     "IsGenerateAutoName": true
   }
 ]

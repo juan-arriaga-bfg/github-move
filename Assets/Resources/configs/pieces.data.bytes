@@ -446,20 +446,11 @@
   },
   {
     "Uid": "F4",
-    "CreateRewards":
-    [
-      {
-        "Currency": "Energy",
-        "Amount": 50
-      },
-      {
-        "Currency": "Coins",
-        "Amount": 8
-      }
-    ]
-  },
-  {
-    "Uid": "F5",
+    "SpawnResources" :
+    {
+      "Currency" : "Resource1",
+      "Amount" : 1
+    },
     "CreateRewards":
     [
       {
@@ -502,20 +493,11 @@
   },
   {
     "Uid": "G4",
-    "CreateRewards":
-    [
-      {
-        "Currency": "Energy",
-        "Amount": 50
-      },
-      {
-        "Currency": "Coins",
-        "Amount": 8
-      }
-    ]
-  },
-  {
-    "Uid": "G5",
+    "SpawnResources" :
+    {
+      "Currency" : "Resource2",
+      "Amount" : 1
+    },
     "CreateRewards":
     [
       {
@@ -558,20 +540,11 @@
   },
   {
     "Uid": "H4",
-    "CreateRewards":
-    [
-      {
-        "Currency": "Energy",
-        "Amount": 50
-      },
-      {
-        "Currency": "Coins",
-        "Amount": 8
-      }
-    ]
-  },
-  {
-    "Uid": "H5",
+    "SpawnResources" :
+    {
+      "Currency" : "Resource3",
+      "Amount" : 1
+    },
     "CreateRewards":
     [
       {
@@ -614,20 +587,11 @@
   },
   {
     "Uid": "I4",
-    "CreateRewards":
-    [
-      {
-        "Currency": "Energy",
-        "Amount": 50
-      },
-      {
-        "Currency": "Coins",
-        "Amount": 8
-      }
-    ]
-  },
-  {
-    "Uid": "I5",
+    "SpawnResources" :
+    {
+      "Currency" : "Resource4",
+      "Amount" : 1
+    },
     "CreateRewards":
     [
       {
@@ -1562,6 +1526,105 @@
   },
   {
     "Uid": "Storage9",
+    "UpgradeTargetPiece": "Castle9",
+    "UpgradePrices":
+    [
+      {
+        "Currency": "Coins",
+        "Amount": 15000
+      }
+    ]
+  },
+  {
+    "Uid": "Factory1",
+    "UpgradeTargetPiece": "Castle1",
+    "UpgradePrices":
+    [
+      {
+        "Currency": "Coins",
+        "Amount": 50
+      }
+    ]
+  },
+  {
+    "Uid": "Factory2",
+    "UpgradeTargetPiece": "Castle2",
+    "UpgradePrices":
+    [
+      {
+        "Currency": "Coins",
+        "Amount": 200
+      }
+    ]
+  },
+  {
+    "Uid": "Factory3",
+    "UpgradeTargetPiece": "Castle3",
+    "UpgradePrices":
+    [
+      {
+        "Currency": "Coins",
+        "Amount": 500
+      }
+    ]
+  },
+  {
+    "Uid": "Factory4",
+    "UpgradeTargetPiece": "Castle4",
+    "UpgradePrices":
+    [
+      {
+        "Currency": "Coins",
+        "Amount": 1000
+      }
+    ]
+  },
+  {
+    "Uid": "Factory5",
+    "UpgradeTargetPiece": "Castle5",
+    "UpgradePrices":
+    [
+      {
+        "Currency": "Coins",
+        "Amount": 2500
+      }
+    ]
+  },
+  {
+    "Uid": "Factory6",
+    "UpgradeTargetPiece": "Castle6",
+    "UpgradePrices":
+    [
+      {
+        "Currency": "Coins",
+        "Amount": 5000
+      }
+    ]
+  },
+  {
+    "Uid": "Factory7",
+    "UpgradeTargetPiece": "Castle7",
+    "UpgradePrices":
+    [
+      {
+        "Currency": "Coins",
+        "Amount": 7500
+      }
+    ]
+  },
+  {
+    "Uid": "Factory8",
+    "UpgradeTargetPiece": "Castle8",
+    "UpgradePrices":
+    [
+      {
+        "Currency": "Coins",
+        "Amount": 10000
+      }
+    ]
+  },
+  {
+    "Uid": "Factory9",
     "UpgradeTargetPiece": "Castle9",
     "UpgradePrices":
     [

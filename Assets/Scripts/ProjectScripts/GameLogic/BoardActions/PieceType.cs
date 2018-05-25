@@ -62,25 +62,21 @@ public static partial class PieceType
     public static readonly PieceTypeDef F2 = new PieceTypeDef{Id = 601, Abbreviations = new List<string>{ "F2", "PieceF2" }};
     public static readonly PieceTypeDef F3 = new PieceTypeDef{Id = 602, Abbreviations = new List<string>{ "F3", "PieceF3" }};
     public static readonly PieceTypeDef F4 = new PieceTypeDef{Id = 603, Abbreviations = new List<string>{ "F4", "PieceF4" }};
-    public static readonly PieceTypeDef F5 = new PieceTypeDef{Id = 604, Abbreviations = new List<string>{ "F5", "PieceF5" }};
     
     public static readonly PieceTypeDef G1 = new PieceTypeDef{Id = 700, Abbreviations = new List<string>{ "G1", "PieceG1" }};
     public static readonly PieceTypeDef G2 = new PieceTypeDef{Id = 701, Abbreviations = new List<string>{ "G2", "PieceG2" }};
     public static readonly PieceTypeDef G3 = new PieceTypeDef{Id = 702, Abbreviations = new List<string>{ "G3", "PieceG3" }};
     public static readonly PieceTypeDef G4 = new PieceTypeDef{Id = 703, Abbreviations = new List<string>{ "G4", "PieceG4" }};
-    public static readonly PieceTypeDef G5 = new PieceTypeDef{Id = 704, Abbreviations = new List<string>{ "G5", "PieceG5" }};
     
     public static readonly PieceTypeDef H1 = new PieceTypeDef{Id = 800, Abbreviations = new List<string>{ "H1", "PieceH1" }};
     public static readonly PieceTypeDef H2 = new PieceTypeDef{Id = 801, Abbreviations = new List<string>{ "H2", "PieceH2" }};
     public static readonly PieceTypeDef H3 = new PieceTypeDef{Id = 802, Abbreviations = new List<string>{ "H3", "PieceH3" }};
     public static readonly PieceTypeDef H4 = new PieceTypeDef{Id = 803, Abbreviations = new List<string>{ "H4", "PieceH4" }};
-    public static readonly PieceTypeDef H5 = new PieceTypeDef{Id = 804, Abbreviations = new List<string>{ "H5", "PieceH5" }};
     
     public static readonly PieceTypeDef I1 = new PieceTypeDef{Id = 900, Abbreviations = new List<string>{ "I1", "PieceI1" }};
     public static readonly PieceTypeDef I2 = new PieceTypeDef{Id = 901, Abbreviations = new List<string>{ "I2", "PieceI2" }};
     public static readonly PieceTypeDef I3 = new PieceTypeDef{Id = 902, Abbreviations = new List<string>{ "I3", "PieceI3" }};
     public static readonly PieceTypeDef I4 = new PieceTypeDef{Id = 903, Abbreviations = new List<string>{ "I4", "PieceI4" }};
-    public static readonly PieceTypeDef I5 = new PieceTypeDef{Id = 904, Abbreviations = new List<string>{ "I5", "PieceI5" }};
     
     public static readonly PieceTypeDef O1 = new PieceTypeDef{Id = 1000, Abbreviations = new List<string>{ "O1" }};
     public static readonly PieceTypeDef O2 = new PieceTypeDef{Id = 1001, Abbreviations = new List<string>{ "O2" }};
@@ -167,4 +163,14 @@ public static partial class PieceType
     public static readonly PieceTypeDef Storage7 = new PieceTypeDef{Id = 16006, Abbreviations = new List<string>{ "Storage7" }};
     public static readonly PieceTypeDef Storage8 = new PieceTypeDef{Id = 16007, Abbreviations = new List<string>{ "Storage8" }};
     public static readonly PieceTypeDef Storage9 = new PieceTypeDef{Id = 16008, Abbreviations = new List<string>{ "Storage9" }};
+    
+    public static readonly PieceTypeDef Factory1 = new PieceTypeDef{Id = 17000, Abbreviations = new List<string>{ "Factory1" }};
+    public static readonly PieceTypeDef Factory2 = new PieceTypeDef{Id = 17001, Abbreviations = new List<string>{ "Factory2" }};
+    public static readonly PieceTypeDef Factory3 = new PieceTypeDef{Id = 17002, Abbreviations = new List<string>{ "Factory3" }};
+    public static readonly PieceTypeDef Factory4 = new PieceTypeDef{Id = 17003, Abbreviations = new List<string>{ "Factory4" }};
+    public static readonly PieceTypeDef Factory5 = new PieceTypeDef{Id = 17004, Abbreviations = new List<string>{ "Factory5" }};
+    public static readonly PieceTypeDef Factory6 = new PieceTypeDef{Id = 17005, Abbreviations = new List<string>{ "Factory6" }};
+    public static readonly PieceTypeDef Factory7 = new PieceTypeDef{Id = 17006, Abbreviations = new List<string>{ "Factory7" }};
+    public static readonly PieceTypeDef Factory8 = new PieceTypeDef{Id = 17007, Abbreviations = new List<string>{ "Factory8" }};
+    public static readonly PieceTypeDef Factory9 = new PieceTypeDef{Id = 17008, Abbreviations = new List<string>{ "Factory9" }};
 }

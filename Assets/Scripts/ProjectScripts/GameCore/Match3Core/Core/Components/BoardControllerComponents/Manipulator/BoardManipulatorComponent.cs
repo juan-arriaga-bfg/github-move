@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Lean.Touch;
 using DG.Tweening;
 
@@ -100,12 +101,10 @@ public class BoardManipulatorComponent : ECSEntity,
         }
 
         var selectedView = GetSelectedBoardElementView();
+        
+        context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
 
-        if (selectedView == null)
-        {
-            context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
-            return false;
-        }
+        if (selectedView == null) return false;
 
         if (selectedView is PieceBoardElementView)
         {
@@ -115,7 +114,6 @@ public class BoardManipulatorComponent : ECSEntity,
             if (touchReaction != null) return touchReaction.Touch(pieceView.Piece.CachedPosition);
         }
         
-        context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
         return false;
     }
 
@@ -142,6 +140,10 @@ public class BoardManipulatorComponent : ECSEntity,
                 cachedViewForDrag.CachedTransform.localPosition = pos;
 
                 isDragLip = false;
+            }
+            else
+            {
+                context.ProductionLogic.Check(pieceView.Piece.PieceType);
             }
             
             prevDragPos = pos;
@@ -177,7 +179,7 @@ public class BoardManipulatorComponent : ECSEntity,
             var selectedView = GetSelectedBoardElementView();
             
             if (selectedView == null) return false;
-
+            
             if (selectedView is ResourceView)
             {
                 var resourceView = selectedView as ResourceView;
@@ -220,19 +222,32 @@ public class BoardManipulatorComponent : ECSEntity,
             
             if (cachedViewForDrag is PieceBoardElementView)
             {
+                var pieceView = cachedViewForDrag as PieceBoardElementView;
+                
                 if ((cachedDragDownPos - pos).sqrMagnitude > 0.01f)
                 {
                     BoardPosition fromPosition = context.RendererContext.GetBoardPosition(cachedViewForDrag);
                     BoardPosition targetPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
-    
-                    context.ActionExecutor.AddAction(new DragAndCheckMatchAction
+                    BoardPosition toPosition = new BoardPosition(targetPosition.X, targetPosition.Y, fromPosition.Z);
+                    
+                    if (context.ProductionLogic.Hide(pieceView.Piece.PieceType, toPosition))
                     {
-                        From = fromPosition,
-                        To = new BoardPosition(targetPosition.X, targetPosition.Y, fromPosition.Z)
-                    });
+                        context.ActionExecutor.AddAction(new CollapsePieceToAction
+                        {
+                            To = toPosition,
+                            Positions = new List<BoardPosition>{fromPosition}
+                        });
+                    }
+                    else
+                    {
+                        context.ActionExecutor.AddAction(new DragAndCheckMatchAction
+                        {
+                            From = fromPosition,
+                            To = toPosition
+                        });
+                    }
                 }
                 
-                var pieceView = cachedViewForDrag as PieceBoardElementView;
                 var boardPos = context.BoardDef.GetSectorPosition(pos);
                 pieceView.OnDragEnd(boardPos, pos);
                 

@@ -132,7 +132,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
             views.Remove(id);
         }
         
-        shownViewPriority = -1;
+        shownViewPriority = -100;
 
         foreach (var element in views.Values)
         {

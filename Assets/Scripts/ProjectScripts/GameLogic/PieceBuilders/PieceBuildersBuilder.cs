@@ -26,10 +26,15 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.C1.Id, PieceType.C9.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.D1.Id, PieceType.D5.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.E1.Id, PieceType.E5.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.F1.Id, PieceType.F5.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.G1.Id, PieceType.G5.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.H1.Id, PieceType.H5.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.I1.Id, PieceType.I5.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.F1.Id, PieceType.F3.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.G1.Id, PieceType.G3.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.H1.Id, PieceType.H3.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.I1.Id, PieceType.I3.Id, dict);
+        
+        dict.Add(PieceType.F4.Id, new ResourcePieceBuilder());
+        dict.Add(PieceType.G4.Id, new ResourcePieceBuilder());
+        dict.Add(PieceType.H4.Id, new ResourcePieceBuilder());
+        dict.Add(PieceType.I4.Id, new ResourcePieceBuilder());
         
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Coin1.Id, PieceType.Coin5.Id, dict);
         
@@ -66,6 +71,7 @@ public class PieceBuildersBuilder
         dict = AddMulticellularPiece<MulticellularSpawnPieceBuilder>(PieceType.Sheepfold1.Id, PieceType.Sheepfold7.Id, mask, dict);
         dict = AddMulticellularPiece<MarketPieceBuilder>(PieceType.Market1.Id, PieceType.Market9.Id, mask, dict);
         dict = AddMulticellularPiece<StoragePieceBuilder>(PieceType.Storage1.Id, PieceType.Storage9.Id, mask, dict);
+        dict = AddMulticellularPiece<ProductionPieceBuilder>(PieceType.Factory1.Id, PieceType.Factory9.Id, mask, dict);
         
         return dict;
     }

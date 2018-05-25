@@ -17,7 +17,7 @@ public class PieceMenuView : UIBoardView, IBoardEventListener
         get { return new Vector3(0, 0.7f); }
     }
 
-    protected override void SetOfset()
+    public override void SetOfset()
     {
         CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Ofset;
     }

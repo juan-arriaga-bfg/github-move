@@ -27,7 +27,7 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 		Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceMenu);
 	}
 
-	protected override void SetOfset()
+	public override void SetOfset()
 	{
 		def = GameDataService.Current.FogsManager.GetDef(new BoardPosition(Context.CachedPosition.X,
 			Context.CachedPosition.Y));

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine.UI;
 
 public class UIMarketWindowView : UIGenericPopupWindowView
@@ -18,22 +19,21 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         base.OnViewShow();
         
         var windowModel = Model as UIMarketWindowModel;
-        Toggle toggle = null;
         
         SetTitle(windowModel.Title);
         
         foreach (var task in windowModel.Tasks)
         {
             var item = Instantiate(taskPattern, taskPattern.transform.parent).GetComponent<UIMarketTaskItem>();
-
-            if (toggle == null) toggle = item.gameObject.GetComponent<Toggle>();
             
             item.Init(task.Def.Rewards);
             taskItems.Add(item);
         }
         
         taskPattern.SetActive(false);
+        var toggle = taskItems[0].gameObject.GetComponent<Toggle>();
         toggle.isOn = true;
+        GameDataService.Current.TasksManager.Timer.OnComplete += AddTask;
     }
 
     public override void OnViewCloseCompleted()
@@ -48,6 +48,20 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         taskItems = new List<UIMarketTaskItem>();
         
         taskPattern.SetActive(true);
+        GameDataService.Current.TasksManager.Timer.OnComplete -= AddTask;
+    }
+
+    private void AddTask()
+    {
+        var windowModel = Model as UIMarketWindowModel;
+        
+        if(taskItems.Count == windowModel.Tasks.Count) return;
+        
+        var item = Instantiate(taskPattern, taskPattern.transform.parent).GetComponent<UIMarketTaskItem>();
+        
+        item.Init(windowModel.Tasks[windowModel.Tasks.Count - 1].Def.Rewards);
+        taskItems.Add(item);
+        item.gameObject.SetActive(true);
     }
     
     public void OnSelect(Toggle toggle)
@@ -56,12 +70,12 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         
         var windowModel = Model as UIMarketWindowModel;
         
-        windowModel.SelectIndex = toggle.transform.GetSiblingIndex() - 1;
+        windowModel.SelectIndex = taskItems.FindIndex(item => item.gameObject.GetComponent<Toggle>() == toggle);
         
         var selected = windowModel.Selected.Def;
         
         SetMessage(selected.Message);
-
+        
         for (var i = 0; i < targets.Count; i++)
         {
             var target = targets[i];
@@ -76,10 +90,31 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         
         reward.Text = string.Format("x{0}", selected.Result.Amount);
         rewardAll.Text = string.Format("Reward: {0}", taskItems[windowModel.SelectIndex].GetString());
+        buttonLabel.Text = windowModel.Selected.IsComplete ? "Get" : string.Format("Get now {0}", windowModel.Selected.GetHardPrice().ToStringIcon(false));
     }
 
     public void OnClick()
     {
+        var windowModel = Model as UIMarketWindowModel;
+
+        if (!windowModel.Selected.Exchange()) return;
         
+        var item = taskItems[windowModel.SelectIndex];
+        
+        windowModel.Tasks.RemoveAt(windowModel.SelectIndex);
+        
+        GameDataService.Current.TasksManager.Update();
+
+        taskItems.Remove(item);
+        Destroy(item.gameObject);
+        
+        if (taskItems.Count == 0)
+        {
+            Controller.CloseCurrentWindow();
+            return;
+        }
+
+        var toggle = taskItems[0].gameObject.GetComponent<Toggle>();
+        toggle.isOn = true;
     }
 }

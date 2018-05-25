@@ -14,12 +14,13 @@ public class UIBoardView : BoardElementView
     public bool IsShow { get; set; }
     
     private int priority = 0;
-
+    private Vector3 offset = new Vector3(0, 0.5f);
+    
     protected int defaultPriority;
     
     public int Priority
     {
-        get { return priority == -1 ? priority : priority / 10; }
+        get { return priority < 0 ? priority : priority / 10; }
         set { priority = value; }
     }
     
@@ -29,10 +30,11 @@ public class UIBoardView : BoardElementView
     }
     
     protected virtual ViewType Id { get; set; }
-
+    
     public virtual Vector3 Ofset
     {
-        get { return new Vector2(0, 0.5f); }
+        get { return offset; }
+        set { offset = value; }
     }
     
     public virtual void Init(Piece piece)
@@ -61,7 +63,7 @@ public class UIBoardView : BoardElementView
         group.alpha = 0;
     }
 
-    protected virtual void SetOfset()
+    public virtual void SetOfset()
     {
         CachedTransform.localPosition = controller.GetViewPositionBottom(multiSize) + Ofset;
     }

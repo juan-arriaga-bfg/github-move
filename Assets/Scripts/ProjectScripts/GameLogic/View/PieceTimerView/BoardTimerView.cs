@@ -12,13 +12,9 @@ public class BoardTimerView : UIBoardView
         get { return ViewType.BoardTimer; }
     }
     
-    public override Vector3 Ofset
-    {
-        get { return multiSize == 1 ? base.Ofset : new Vector3(0, 1.3f); }
-    }
-    
     public override void Init(Piece piece)
     {
+        Ofset = multiSize == 1 ? base.Ofset : new Vector3(0, 1.3f);
         base.Init(piece);
 
         Priority = defaultPriority = 10;

@@ -17,7 +17,7 @@ public class AddResourceView : BoardElementView
 		
 		if (resource.Currency != Currency.Energy.Name)
 		{
-			icon.sprite = IconService.Current.GetSpriteById(string.Format("icon_gameboard_{0}" , resource.Currency));
+			icon.sprite = IconService.Current.GetSpriteById(resource.Currency);
 			icon.transform.localScale = Vector3.one * (1.5f - icon.sprite.rect.height / 106f);
 		}
 		else

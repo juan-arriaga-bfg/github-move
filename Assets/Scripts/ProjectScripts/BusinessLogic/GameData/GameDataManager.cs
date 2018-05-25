@@ -107,4 +107,5 @@ public class GameDataManager
     public readonly CollectionDataManager CollectionManager = new CollectionDataManager();
     public readonly LevelsDataManager LevelsManager = new LevelsDataManager();
     public readonly TasksDataManager TasksManager = new TasksDataManager();
+    public readonly ProductionDataManager ProductionManager = new ProductionDataManager();
 }

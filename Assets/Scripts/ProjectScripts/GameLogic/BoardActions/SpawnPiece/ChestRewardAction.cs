@@ -12,9 +12,11 @@ public class ChestRewardAction : IBoardAction
 	}
 	
 	public BoardPosition From { get; set; }
-	public Dictionary<int, int> Pieces;
-	public Dictionary<string, int> Chargers;
+	public Dictionary<int, int> Pieces = new Dictionary<int, int>();
+	public Dictionary<string, int> Chargers = new Dictionary<string, int>();
 	public IBoardAction OnComplete;
+
+	public bool IsAddCollection = true;
 
 	public bool PerformAction(BoardController gameBoardController)
 	{
@@ -37,12 +39,15 @@ public class ChestRewardAction : IBoardAction
 			}
 		}
 
-		var collection = GameDataService.Current.CollectionManager.GetRandomItem();
-
-		if (string.IsNullOrEmpty(collection) == false)
+		if (IsAddCollection)
 		{
-			GameDataService.Current.CollectionManager.CastResourceOnBoard(From,
-				new CurrencyPair{Currency = collection, Amount = 1});
+			var collection = GameDataService.Current.CollectionManager.GetRandomItem();
+
+			if (string.IsNullOrEmpty(collection) == false)
+			{
+				GameDataService.Current.CollectionManager.CastResourceOnBoard(From,
+					new CurrencyPair{Currency = collection, Amount = 1});
+			}
 		}
 		
 		foreach (var reward in Pieces)

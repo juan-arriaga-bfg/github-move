@@ -2,66 +2,144 @@
   "Delay" : 15,
   "Counts" :
   [
+    3,
     4,
+    5,
     6,
+    7,
     8,
-    10,
-    12,
-    14,
-    16,
-    18,
-    20
+    8,
+    8,
+    8
   ],
   "Defs" :
   [
     {
       "Uid" : 1,
-      "Message" : "Message",
+      "Message" : "Raid 1",
       "Result" :
       {
-        "Currency" : "A1",
-        "Amount" :5
+        "Currency" : "Resource5",
+        "Amount" : 1
       },
       "Prices" :
       [
         {
-          "Currency" : "C1",
-          "Amount" : 2
+          "Currency" : "Resource1",
+          "Amount" : 1
         },
         {
-          "Currency" : "D1",
-          "Amount" : 5
+          "Currency" : "Resource2",
+          "Amount" : 2
         }
       ],
       "Rewards" :
       [
         {
           "Currency" : "Coins",
-          "Amount" : 200
+          "Amount" : 100
         },
         {
           "Currency" : "Energy",
-          "Amount" : 200
+          "Amount" : 20
         }
       ]
     },
     {
       "Uid" : 2,
-      "Message" : "Message",
+      "Message" : "Raid 2",
       "Result" :
       {
-        "Currency" : "A1",
-        "Amount" :5
+        "Currency" : "Resource6",
+        "Amount" : 1
       },
       "Prices" :
       [
         {
-          "Currency" : "C1",
-          "Amount" : 5
+          "Currency" : "Resource1",
+          "Amount" : 1
         },
         {
-          "Currency" : "D1",
-          "Amount" : 8
+          "Currency" : "Resource3",
+          "Amount" : 1
+        },
+        {
+          "Currency" : "Resource4",
+          "Amount" : 2
+        }
+      ],
+      "Rewards" :
+      [
+        {
+          "Currency" : "Coins",
+          "Amount" : 150
+        },
+        {
+          "Currency" : "Energy",
+          "Amount" : 25
+        }
+      ]
+    },
+    {
+      "Uid" : 3,
+      "Message" : "Raid 3",
+      "Result" :
+      {
+        "Currency" : "Resource5",
+        "Amount" : 1
+      },
+      "Prices" :
+      [
+        {
+          "Currency" : "Resource1",
+          "Amount" : 1
+        },
+        {
+          "Currency" : "Resource2",
+          "Amount" : 3
+        },
+        {
+          "Currency" : "Resource3",
+          "Amount" : 1
+        },
+        {
+          "Currency" : "Resource4",
+          "Amount" : 2
+        }
+      ],
+      "Rewards" :
+      [
+        {
+          "Currency" : "Coins",
+          "Amount" : 250
+        },
+        {
+          "Currency" : "Energy",
+          "Amount" : 35
+        }
+      ]
+    },
+    {
+      "Uid" : 4,
+      "Message" : "Raid 4",
+      "Result" :
+      {
+        "Currency" : "Resource6",
+        "Amount" : 1
+      },
+      "Prices" :
+      [
+        {
+          "Currency" : "Resource1",
+          "Amount" : 1
+        },
+        {
+          "Currency" : "Resource2",
+          "Amount" : 3
+        },
+        {
+          "Currency" : "Resource3",
+          "Amount" : 1
         }
       ],
       "Rewards" :
@@ -72,7 +150,7 @@
         },
         {
           "Currency" : "Energy",
-          "Amount" : 200
+          "Amount" : 30
         }
       ]
     }

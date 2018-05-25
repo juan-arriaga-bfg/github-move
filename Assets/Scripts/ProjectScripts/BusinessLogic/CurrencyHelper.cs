@@ -99,6 +99,46 @@ public static class CurrencyHellper
         return isSuccess;
     }
 
+    public static bool IsCanPurchase(List<CurrencyPair> prices, out List<CurrencyPair> diffs)
+    {
+        diffs = new List<CurrencyPair>();
+        
+        foreach (var price in prices)
+        {
+            int diff = 0;
+            
+            if(IsCanPurchase(price, out diff)) continue;
+            
+            diffs.Add(new CurrencyPair{Currency = price.Currency, Amount = diff});
+        }
+        
+        return diffs.Count == 0;
+    }
+
+    public static bool IsCanPurchase(CurrencyPair price, out int diff)
+    {
+        return IsCanPurchase(price.Currency, price.Amount, out diff);
+    }
+
+    public static bool IsCanPurchase(string price, int amount, out int diff)
+    {
+        diff = 0;
+        
+        if (price == null) return false;
+
+        if (price == Currency.Cash.Name) return true;
+        
+        var storageItem = ProfileService.Current.Purchases.GetStorageItem(price);
+
+        if (storageItem.Amount >= amount)
+        {
+            return true;
+        }
+
+        diff = amount - storageItem.Amount;
+        return false;
+    }
+    
     public static bool IsCanPurchase(string price, int amount)
     {
         return ShopService.Current.IsCanPurchase(new Price{Currency = price, DefaultPriceAmount = amount});

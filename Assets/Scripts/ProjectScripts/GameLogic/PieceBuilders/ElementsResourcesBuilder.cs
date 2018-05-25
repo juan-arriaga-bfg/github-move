@@ -76,25 +76,21 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.F2.Id, R.F2Piece);
         dict.Add(PieceType.F3.Id, R.F3Piece);
         dict.Add(PieceType.F4.Id, R.F4Piece);
-        dict.Add(PieceType.F5.Id, R.F5Piece);
         
         dict.Add(PieceType.G1.Id, R.G1Piece);
         dict.Add(PieceType.G2.Id, R.G2Piece);
         dict.Add(PieceType.G3.Id, R.G3Piece);
         dict.Add(PieceType.G4.Id, R.G4Piece);
-        dict.Add(PieceType.G5.Id, R.G5Piece);
         
         dict.Add(PieceType.H1.Id, R.H1Piece);
         dict.Add(PieceType.H2.Id, R.H2Piece);
         dict.Add(PieceType.H3.Id, R.H3Piece);
         dict.Add(PieceType.H4.Id, R.H4Piece);
-        dict.Add(PieceType.H5.Id, R.H5Piece);
         
         dict.Add(PieceType.I1.Id, R.I1Piece);
         dict.Add(PieceType.I2.Id, R.I2Piece);
         dict.Add(PieceType.I3.Id, R.I3Piece);
         dict.Add(PieceType.I4.Id, R.I4Piece);
-        dict.Add(PieceType.I5.Id, R.I5Piece);
         
         dict.Add(PieceType.Chest1.Id, R.Chest1Piece);
         dict.Add(PieceType.Chest2.Id, R.Chest2Piece);
@@ -171,6 +167,16 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Storage8.Id, R.Storage8Piece);
         dict.Add(PieceType.Storage9.Id, R.Storage9Piece);
         
+        dict.Add(PieceType.Factory1.Id, R.Factory1Piece);
+        dict.Add(PieceType.Factory2.Id, R.Factory2Piece);
+        dict.Add(PieceType.Factory3.Id, R.Factory3Piece);
+        dict.Add(PieceType.Factory4.Id, R.Factory4Piece);
+        dict.Add(PieceType.Factory5.Id, R.Factory5Piece);
+        dict.Add(PieceType.Factory6.Id, R.Factory6Piece);
+        dict.Add(PieceType.Factory7.Id, R.Factory7Piece);
+        dict.Add(PieceType.Factory8.Id, R.Factory8Piece);
+        dict.Add(PieceType.Factory9.Id, R.Factory9Piece);
+        
         return dict;
     }
     
@@ -186,6 +192,8 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.FogState, R.ChangeFogStateView);
         dict.Add((int)ViewType.CastleUpgrade, R.CastleUpgradeView);
         dict.Add((int)ViewType.SimpleUpgrade, R.SimpleUpgradeView);
+        dict.Add((int)ViewType.Production, R.ProductionView);
+        dict.Add((int)ViewType.ProductionWarning, R.ProductionWarningView);
 
         return dict;
     }
