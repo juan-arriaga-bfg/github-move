@@ -19,7 +19,7 @@ public class TouchReactionDefinitionProduction : TouchReactionDefinitionComponen
         switch (Production.State)
         {
             case ProductionState.Waiting:
-                UIMessageWindowController.CreateDefaultMessage("!!!!!!!!!!!");
+//                UIMessageWindowController.CreateDefaultMessage("!!!!!!!!!!!");
                 break;
             case ProductionState.Completed:
                 Production.Complete();
