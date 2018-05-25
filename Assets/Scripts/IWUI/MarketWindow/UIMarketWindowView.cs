@@ -26,7 +26,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         {
             var item = Instantiate(taskPattern, taskPattern.transform.parent).GetComponent<UIMarketTaskItem>();
             
-            item.Init(task.Def.Rewards);
+            item.Init(task.Def.Rewards, task.IsComplete);
             taskItems.Add(item);
         }
         
@@ -58,8 +58,9 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         if(taskItems.Count == windowModel.Tasks.Count) return;
         
         var item = Instantiate(taskPattern, taskPattern.transform.parent).GetComponent<UIMarketTaskItem>();
+        var task = windowModel.Tasks[windowModel.Tasks.Count - 1];
         
-        item.Init(windowModel.Tasks[windowModel.Tasks.Count - 1].Def.Rewards);
+        item.Init(task.Def.Rewards, task.IsComplete);
         taskItems.Add(item);
         item.gameObject.SetActive(true);
     }
@@ -104,6 +105,14 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         windowModel.Tasks.RemoveAt(windowModel.SelectIndex);
         
         GameDataService.Current.TasksManager.Update();
+
+        var index = 0;
+
+        foreach (var task in windowModel.Tasks)
+        {
+            taskItems[index].Init(task.Def.Rewards, task.IsComplete);
+            index++;
+        }
 
         taskItems.Remove(item);
         Destroy(item.gameObject);

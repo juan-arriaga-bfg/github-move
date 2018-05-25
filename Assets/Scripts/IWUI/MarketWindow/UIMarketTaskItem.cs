@@ -7,8 +7,9 @@ public class UIMarketTaskItem : MonoBehaviour
 {
     [SerializeField] private Image icon;
     [SerializeField] private NSText reward;
+    [SerializeField] private GameObject check;
 
-    public void Init(List<CurrencyPair> rewards)
+    public void Init(List<CurrencyPair> rewards, bool isComplete)
     {
         var str = new StringBuilder();
         
@@ -21,6 +22,7 @@ public class UIMarketTaskItem : MonoBehaviour
         }
 
         reward.Text = str.ToString();
+        check.SetActive(isComplete);
     }
 
     public string GetString()
