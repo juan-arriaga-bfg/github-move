@@ -3,23 +3,16 @@ using System.Linq;
 
 public class Task
 {
-    private TaskDef def;
-
-    public TaskDef Def
-    {
-        get { return def; }
-    }
+    public string Character { get; set; }
+    public CurrencyPair Result { get; set; }
+    public List<CurrencyPair> Prices { get; set; }
+    public Dictionary<int, int> Rewards { get; set; }
     
-    public Task(TaskDef def)
-    {
-        this.def = def;
-    }
-
     public CurrencyPair GetHardPrice()
     {
         List<CurrencyPair> diff;
 
-        if (CurrencyHellper.IsCanPurchase(def.Prices, out diff)) return null;
+        if (CurrencyHellper.IsCanPurchase(Prices, out diff)) return null;
         
         var amount = diff.Sum(pair => pair.Amount);
         
@@ -28,7 +21,7 @@ public class Task
 
     public bool IsComplete
     {
-        get { return CurrencyHellper.IsCanPurchase(def.Prices); }
+        get { return CurrencyHellper.IsCanPurchase(Prices); }
     }
     
     public bool Exchange()
@@ -36,17 +29,11 @@ public class Task
         var isSuccess = false;
         List<CurrencyPair> diff;
         
-        if (CurrencyHellper.IsCanPurchase(def.Prices, out diff))
+        if (CurrencyHellper.IsCanPurchase(Prices, out diff))
         {
-            CurrencyHellper.Purchase(def.Result, def.Prices, success =>
+            CurrencyHellper.Purchase(Currency.Task.Name, 1, Prices, success =>
             {
                 isSuccess = success;
-                if(success == false) return;
-
-                foreach (var reward in def.Rewards)
-                {
-                    CurrencyHellper.Purchase(reward);
-                }
             });
             
             return isSuccess;
@@ -54,7 +41,7 @@ public class Task
 
         var amount = diff.Sum(pair => pair.Amount);
         
-        CurrencyHellper.Purchase(def.Result, new CurrencyPair{Currency = Currency.Crystals.Name, Amount = amount}, success =>
+        CurrencyHellper.Purchase(Currency.Task.Name, 1, new CurrencyPair{Currency = Currency.Crystals.Name, Amount = amount}, success =>
         {
             isSuccess = success;
             if(success == false) return;
@@ -64,15 +51,18 @@ public class Task
                 CurrencyHellper.Purchase(pair);
             }
             
-            CurrencyHellper.Purchase(def.Rewards[0], def.Prices);
-
-            for (var i = 1; i < def.Rewards.Count; i++)
-            {
-                var reward = def.Rewards[i];
-                CurrencyHellper.Purchase(reward);
-            }
+            CurrencyHellper.Purchase(Currency.Task.Name, 1, Prices);
         });
         
         return isSuccess;
+    }
+
+    public void Ejection()
+    {
+        BoardService.Current.GetBoardById(0).ActionExecutor.AddAction(new EjectionPieceAction
+        {
+            From = GameDataService.Current.PiecesManager.MatketPosition,
+            Pieces = Rewards
+        });
     }
 }

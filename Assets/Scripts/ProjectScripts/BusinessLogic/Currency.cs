@@ -21,6 +21,7 @@ public static partial class Currency
     
     public static readonly CurrencyDef Quest = new CurrencyDef { Id = 5, Name = "Quest", IsConsumable = true };
     public static readonly CurrencyDef Obstacle = new CurrencyDef { Id = 6, Name = "Obstacle", IsConsumable = true };
+    public static readonly CurrencyDef Task = new CurrencyDef { Id = 7, Name = "Task", IsConsumable = true };
     
     public static readonly CurrencyDef Power = new CurrencyDef { Id = 100, Name = "Power", IsConsumable = true };
     public static readonly CurrencyDef Level = new CurrencyDef { Id = 200, Name = "Level", IsConsumable = true };
@@ -55,6 +56,8 @@ public static partial class Currency
     public static readonly CurrencyDef Resource5 = new CurrencyDef { Id = 1105, Name = "Resource5", IsConsumable = true, Tags = new List<CurrencyTag>()};
     public static readonly CurrencyDef Resource6 = new CurrencyDef { Id = 1106, Name = "Resource6", IsConsumable = true, Tags = new List<CurrencyTag>()};
     public static readonly CurrencyDef Resource7 = new CurrencyDef { Id = 1107, Name = "Resource7", IsConsumable = true, Tags = new List<CurrencyTag>()};
+    public static readonly CurrencyDef Resource8 = new CurrencyDef { Id = 1108, Name = "Resource8", IsConsumable = true, Tags = new List<CurrencyTag>()};
+    public static readonly CurrencyDef Resource9 = new CurrencyDef { Id = 1109, Name = "Resource9", IsConsumable = true, Tags = new List<CurrencyTag>()};
     
     public static readonly CurrencyDef RobinItem1 = new CurrencyDef { Id = 11001, Name = "RobinItem1", IsConsumable = false };
     public static readonly CurrencyDef RobinItem2 = new CurrencyDef { Id = 11002, Name = "RobinItem2", IsConsumable = false };

@@ -36,12 +36,22 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
         get { return def.Target; }
     }
 
+    public int Level
+    {
+        get { return def.Level; }
+    }
+    
     public Dictionary<int, KeyValuePair<int, int>> Storage
     {
         get { return storage; }
     }
     
     public ProductionState State { get; set; }
+    
+    public bool IsActive
+    {
+        get { return def.Level <= GameDataService.Current.LevelsManager.Level; }
+    }
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -78,6 +88,8 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
 
     public bool Check(int resource)
     {
+        if (IsActive == false) return false;
+        
         KeyValuePair<int, int> value;
         
         var isReacts = storage.TryGetValue(resource, out value) && value.Key != value.Value;
@@ -131,8 +143,8 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
                 break;
         }
     }
-    
-    public void Change(bool isShow, int priority = 0)
+
+    private void Change(bool isShow, int priority = 0)
     {
         var view = viewDef.AddView(ViewType.Production);
 
@@ -146,6 +158,8 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
     
     public bool Add(int resource)
     {
+        if (IsActive == false) return false;
+        
         KeyValuePair<int, int> value;
         
         if (storage.TryGetValue(resource, out value) == false || value.Key == value.Value) return false;
@@ -237,7 +251,7 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
         context.Context.ProductionLogic.Add(this);
     }
 
-    public void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece context = null)
+    public void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)
     {
     }
 

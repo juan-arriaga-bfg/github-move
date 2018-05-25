@@ -1,145 +1,162 @@
 ﻿[
   {
     "Uid" : "Factory1",
-    "Delay" : 10,
-    "Target" : "A3",
+    "Delay" : 15,
+    "Level" : 1,
+    "Target" : "Resource1",
     "Prices" :
     [
       {
-        "Currency": "A1",
-        "Amount": 5
-      },
-      {
         "Currency": "A2",
-        "Amount": 1
+        "Amount": 5
       }
     ]
   },
   {
     "Uid" : "Factory2",
-    "Delay" : 10,
-    "Target" : "A3",
+    "Delay" : 30,
+    "Level" : 1,
+    "Target" : "Resource2",
     "Prices" :
     [
       {
-        "Currency": "A1",
-        "Amount": 5
-      },
-      {
         "Currency": "A2",
         "Amount": 1
+      },
+      {
+        "Currency": "C2",
+        "Amount": 2
       }
     ]
   },
   {
     "Uid" : "Factory3",
-    "Delay" : 10,
-    "Target" : "A3",
+    "Delay" : 45,
+    "Level" : 1,
+    "Target" : "Resource3",
     "Prices" :
     [
       {
-        "Currency": "A1",
-        "Amount": 5
+        "Currency": "A2",
+        "Amount": 3
       },
       {
-        "Currency": "A2",
+        "Currency": "B1",
         "Amount": 1
       }
     ]
   },
   {
     "Uid" : "Factory4",
-    "Delay" : 10,
-    "Target" : "A3",
+    "Delay" : 90,
+    "Level" : 2,
+    "Target" : "Resource4",
     "Prices" :
     [
       {
-        "Currency": "A1",
-        "Amount": 5
+        "Currency": "C2",
+        "Amount": 1
       },
       {
-        "Currency": "A2",
-        "Amount": 1
+        "Currency": "E1",
+        "Amount": 2
       }
     ]
   },
   {
     "Uid" : "Factory5",
-    "Delay" : 10,
-    "Target" : "A3",
+    "Delay" : 150,
+    "Level" : 2,
+    "Target" : "Resource5",
     "Prices" :
     [
       {
-        "Currency": "A1",
-        "Amount": 5
+        "Currency": "B1",
+        "Amount": 1
       },
       {
-        "Currency": "A2",
+        "Currency": "D4",
         "Amount": 1
       }
     ]
   },
   {
     "Uid" : "Factory6",
-    "Delay" : 10,
-    "Target" : "A3",
+    "Delay" : 180,
+    "Level" : 3,
+    "Target" : "Resource6",
     "Prices" :
     [
       {
-        "Currency": "A1",
-        "Amount": 5
+        "Currency": "D4",
+        "Amount": 2
       },
       {
-        "Currency": "A2",
-        "Amount": 1
+        "Currency": "C2",
+        "Amount": 2
       }
     ]
   },
   {
     "Uid" : "Factory7",
-    "Delay" : 10,
-    "Target" : "A3",
+    "Delay" : 240,
+    "Level" : 3,
+    "Target" : "Resource7",
     "Prices" :
     [
       {
-        "Currency": "A1",
-        "Amount": 5
+        "Currency": "D4",
+        "Amount": 1
       },
       {
-        "Currency": "A2",
+        "Currency": "F4",
         "Amount": 1
+      },
+      {
+        "Currency": "C2",
+        "Amount": 2
       }
     ]
   },
   {
     "Uid" : "Factory8",
-    "Delay" : 10,
-    "Target" : "A3",
+    "Delay" : 300,
+    "Level" : 3,
+    "Target" : "Resource8",
     "Prices" :
     [
       {
-        "Currency": "A1",
-        "Amount": 5
+        "Currency": "D4",
+        "Amount": 3
       },
       {
-        "Currency": "A2",
+        "Currency": "B1",
+        "Amount": 1
+      },
+      {
+        "Currency": "C2",
         "Amount": 1
       }
     ]
   },
   {
     "Uid" : "Factory9",
-    "Delay" : 10,
-    "Target" : "A3",
+    "Delay" : 600,
+    "Level" : 3,
+    "Target" : "Resource9",
     "Prices" :
     [
       {
-        "Currency": "A1",
-        "Amount": 5
+        "Currency": "F4",
+        "Amount": 2
       },
       {
-        "Currency": "A2",
-        "Amount": 1
+        "Currency": "D4",
+        "Amount": 2
+      },
+      {
+        "Currency": "E1",
+        "Amount": 3
       }
     ]
   }

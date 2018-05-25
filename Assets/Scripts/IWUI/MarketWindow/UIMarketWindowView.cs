@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -9,10 +10,12 @@ public class UIMarketWindowView : UIGenericPopupWindowView
     [SerializeField] private GameObject taskPattern;
     [SerializeField] private List<UIMarketTargetItem> targets;
     [SerializeField] private Image icon;
+    [SerializeField] private Image hero;
     [SerializeField] private NSText reward;
     [SerializeField] private NSText rewardAll;
     
     private List<UIMarketTaskItem> taskItems = new List<UIMarketTaskItem>();
+    private Task CompleteTask;
     
     public override void OnViewShow()
     {
@@ -21,12 +24,13 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIMarketWindowModel;
         
         SetTitle(windowModel.Title);
+        SetMessage(windowModel.Message);
         
         foreach (var task in windowModel.Tasks)
         {
             var item = Instantiate(taskPattern, taskPattern.transform.parent).GetComponent<UIMarketTaskItem>();
             
-            item.Init(task.Def.Rewards, task.IsComplete);
+            item.Init(task.Character, task.Rewards, task.IsComplete);
             taskItems.Add(item);
         }
         
@@ -38,6 +42,12 @@ public class UIMarketWindowView : UIGenericPopupWindowView
 
     public override void OnViewCloseCompleted()
     {
+        if (CompleteTask != null)
+        {
+            CompleteTask.Ejection();
+            CompleteTask = null;
+        }
+        
         base.OnViewCloseCompleted();
 
         foreach (var item in taskItems)
@@ -60,7 +70,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         var item = Instantiate(taskPattern, taskPattern.transform.parent).GetComponent<UIMarketTaskItem>();
         var task = windowModel.Tasks[windowModel.Tasks.Count - 1];
         
-        item.Init(task.Def.Rewards, task.IsComplete);
+        item.Init(task.Character, task.Rewards, task.IsComplete);
         taskItems.Add(item);
         item.gameObject.SetActive(true);
     }
@@ -73,9 +83,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         
         windowModel.SelectIndex = taskItems.FindIndex(item => item.gameObject.GetComponent<Toggle>() == toggle);
         
-        var selected = windowModel.Selected.Def;
-        
-        SetMessage(selected.Message);
+        var selected = windowModel.Selected;
         
         for (var i = 0; i < targets.Count; i++)
         {
@@ -87,6 +95,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
             if(isActive) target.Init(selected.Prices[i]);
         }
 
+        hero.sprite = IconService.Current.GetSpriteById(selected.Character);
         icon.sprite = IconService.Current.GetSpriteById(selected.Result.Currency);
         
         reward.Text = string.Format("x{0}", selected.Result.Amount);
@@ -98,7 +107,11 @@ public class UIMarketWindowView : UIGenericPopupWindowView
     {
         var windowModel = Model as UIMarketWindowModel;
 
-        if (!windowModel.Selected.Exchange()) return;
+        var isComplete = windowModel.Selected.Exchange();
+        
+        if (isComplete == false) return;
+        
+        CompleteTask = windowModel.Selected;
         
         var item = taskItems[windowModel.SelectIndex];
         
@@ -110,20 +123,27 @@ public class UIMarketWindowView : UIGenericPopupWindowView
 
         foreach (var task in windowModel.Tasks)
         {
-            taskItems[index].Init(task.Def.Rewards, task.IsComplete);
+            taskItems[index].Init(task.Character, task.Rewards, task.IsComplete);
             index++;
         }
 
         taskItems.Remove(item);
         Destroy(item.gameObject);
+        Controller.CloseCurrentWindow();
         
-        if (taskItems.Count == 0)
-        {
-            Controller.CloseCurrentWindow();
-            return;
-        }
+        if (taskItems.Count == 0) return;
 
         var toggle = taskItems[0].gameObject.GetComponent<Toggle>();
         toggle.isOn = true;
+    }
+
+    public void Upgrade()
+    {
+        var windowModel = Model as UIMarketWindowModel;
+        
+        if (windowModel.Upgrade())
+        {
+            Controller.CloseCurrentWindow();
+        }
     }
 }

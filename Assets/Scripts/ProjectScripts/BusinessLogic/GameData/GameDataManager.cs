@@ -33,7 +33,7 @@ public class ItemWeight
         return string.Format("Uid: {0} - Weight: {1} - Override: {2}", Uid, Weight, Override);
     }
 
-    public static ItemWeight GetRandomItem(List<ItemWeight> weights)
+    public static ItemWeight GetRandomItem(List<ItemWeight> weights, bool isExclude = false)
     {
         var sum = weights.Sum(w => w.Weight);
         var current = 0;
@@ -46,6 +46,8 @@ public class ItemWeight
             current += item.Weight;
             
             if (current < random) continue;
+
+            if (isExclude) weights.Remove(item);
             
             return item;
         }

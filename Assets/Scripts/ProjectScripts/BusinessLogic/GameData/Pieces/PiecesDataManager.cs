@@ -59,7 +59,7 @@ public class PiecesDataManager : IDataLoader<List<PieceDef>>
         
         if (first == PieceType.Market1.Id)
         {
-            MatketPosition = position.Right;
+            MatketPosition = position;
             return;
         }
         

@@ -6,11 +6,6 @@
 		
 		AddView(piece, ViewType.LevelLabel);
 		
-		var upgrade = new UpgradeComponent();
-		
-		piece.RegisterComponent(upgrade);
-		AddObserver(piece, upgrade);
-		
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
 				.RegisterDefinition(new TouchReactionDefinitionOpenWindow{WindowType = UIWindowType.MarketWindow})

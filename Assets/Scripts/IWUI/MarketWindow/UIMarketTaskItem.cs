@@ -9,24 +9,26 @@ public class UIMarketTaskItem : MonoBehaviour
     [SerializeField] private NSText reward;
     [SerializeField] private GameObject check;
 
-    public void Init(List<CurrencyPair> rewards, bool isComplete)
+    public void Init(string character, Dictionary<int, int> result, bool isComplete)
     {
-        var str = new StringBuilder();
-        
-        for (var i = 0; i < rewards.Count; i++)
+        var amount = 0;
+
+        foreach (var pair in result)
         {
-            var pair = rewards[i];
-            var lastStr = i < rewards.Count ? "\n" : "";
+            var def = GameDataService.Current.PiecesManager.GetPieceDef(pair.Key);
+                
+            if(def == null) continue;
 
-            str.Append(string.Format("+{0}{1}", pair.ToStringIcon(false), lastStr));
+            amount += def.SpawnResources.Amount * pair.Value;
         }
-
-        reward.Text = str.ToString();
+        
+        icon.sprite = IconService.Current.GetSpriteById(character);
+        reward.Text = string.Format("+{0}<sprite name={1}>", amount, Currency.Coins.Name);
         check.SetActive(isComplete);
     }
 
     public string GetString()
     {
-        return reward.Text.Replace("\n", " ");
+        return reward.Text;
     }
 }

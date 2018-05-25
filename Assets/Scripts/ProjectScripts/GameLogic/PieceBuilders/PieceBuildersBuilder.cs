@@ -26,15 +26,10 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.C1.Id, PieceType.C9.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.D1.Id, PieceType.D5.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.E1.Id, PieceType.E5.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.F1.Id, PieceType.F3.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.G1.Id, PieceType.G3.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.H1.Id, PieceType.H3.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.I1.Id, PieceType.I3.Id, dict);
-        
-        dict.Add(PieceType.F4.Id, new ResourcePieceBuilder());
-        dict.Add(PieceType.G4.Id, new ResourcePieceBuilder());
-        dict.Add(PieceType.H4.Id, new ResourcePieceBuilder());
-        dict.Add(PieceType.I4.Id, new ResourcePieceBuilder());
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.F1.Id, PieceType.F4.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.G1.Id, PieceType.G4.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.H1.Id, PieceType.H4.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.I1.Id, PieceType.I4.Id, dict);
         
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Coin1.Id, PieceType.Coin5.Id, dict);
         

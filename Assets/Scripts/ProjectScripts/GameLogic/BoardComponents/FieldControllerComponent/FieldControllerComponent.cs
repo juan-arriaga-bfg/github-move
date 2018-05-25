@@ -22,19 +22,18 @@ public class FieldControllerComponent : IECSComponent
         CreateDebug();
 #endif
         
-//        CreateTown();
-
-//        if (fieldDef.Pieces == null)
+        if (fieldDef.Pieces == null)
         {
             StartField();
-            TestField();
-//            CreateFog();
+//            TestField();
+            CreateFog();
+            CreateTown();
             return;
         }
         
         foreach (var item in fieldDef.Pieces)
         {
-            context.ActionExecutor.AddAction(new FillBoardAction
+            context.ActionExecutor.PerformAction(new FillBoardAction
             {
                 Piece = item.Id,
                 Positions = item.Positions
@@ -50,6 +49,8 @@ public class FieldControllerComponent : IECSComponent
                 GameDataService.Current.CollectionManager.CastResourceOnBoard(item.Position, pair);
             }
         }
+        
+        CreateTown();
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)
@@ -78,14 +79,44 @@ public class FieldControllerComponent : IECSComponent
         
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(26, 3),
+            At = new BoardPosition(14, 8),
             PieceTypeId = PieceType.Factory1.Id
         });
         
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
             At = new BoardPosition(14, 10),
-            PieceTypeId = PieceType.Factory1.Id
+            PieceTypeId = PieceType.Factory2.Id
+        });
+        
+        context.ActionExecutor.AddAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(16, 12),
+            PieceTypeId = PieceType.Factory3.Id
+        });
+        
+        context.ActionExecutor.AddAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(18, 12),
+            PieceTypeId = PieceType.Factory4.Id
+        });
+        
+        context.ActionExecutor.AddAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(20, 12),
+            PieceTypeId = PieceType.Factory5.Id
+        });
+        
+        context.ActionExecutor.AddAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(18, 14),
+            PieceTypeId = PieceType.Factory6.Id
+        });
+        
+        context.ActionExecutor.AddAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(20, 14),
+            PieceTypeId = PieceType.Factory7.Id
         });
         
         //----------------------------------------
@@ -225,6 +256,22 @@ public class FieldControllerComponent : IECSComponent
 
     private void CreateTown()
     {
+        var positions = new List<BoardPosition>();
+
+        for (int i = 0; i < 23; i++)
+        {
+            for (int j = 7; j < context.BoardDef.Height; j++)
+            {
+                positions.Add(new BoardPosition(i, j, context.BoardDef.PieceLayer));
+            }
+        }
+        
+        context.ActionExecutor.AddAction(new LockCellAction
+        {
+            Locker = this,
+            Positions = positions
+        });
+        
         for (int i = 0; i < 22; i++)
         {
             context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverLeft, new BoardPosition(i, 7));
@@ -287,12 +334,6 @@ public class FieldControllerComponent : IECSComponent
         context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(20, 16));
         context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(21, 16));
         
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.House, new BoardPosition(16, 12, 1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.House, new BoardPosition(18, 12, 1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.House, new BoardPosition(20, 12, 1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.House, new BoardPosition(18, 14, 1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.House, new BoardPosition(20, 14, 1));
-
         AddBoardElement(R.BushLeft, new BoardPosition(14, 10, 2), new Vector3(0.5f, 0.3f));
         AddBoardElement(R.BushLeft, new BoardPosition(16, 10, 2), new Vector3(0.5f, 0.5f));
         AddBoardElement(R.BushRight, new BoardPosition(17, 13, 2), new Vector3(-0.8f, 0.4f));
@@ -317,7 +358,6 @@ public class FieldControllerComponent : IECSComponent
         
         AddBoardElement(R.BrigeLeft, new BoardPosition(19, 7, 1), new Vector3(0.6f, -0.25f));
         AddBoardElement(R.BrigeRight, new BoardPosition(22, 10, 1), new Vector3(-0.6f, -0.25f));
-        
     }
 
     private void CreateDebug()

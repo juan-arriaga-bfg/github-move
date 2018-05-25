@@ -168,16 +168,6 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.Storage8.Id, new PieceMatchDef {Next = PieceType.Storage9.Id, Previous = PieceType.Storage7.Id, Count = 1});
         dict.Add(PieceType.Storage9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Storage8.Id, Count = 1});
         
-        dict.Add(PieceType.Factory1.Id, new PieceMatchDef {Next = PieceType.Factory2.Id, Previous = PieceType.None.Id, Count = 1});
-        dict.Add(PieceType.Factory2.Id, new PieceMatchDef {Next = PieceType.Factory3.Id, Previous = PieceType.Factory1.Id, Count = 1});
-        dict.Add(PieceType.Factory3.Id, new PieceMatchDef {Next = PieceType.Factory4.Id, Previous = PieceType.Factory2.Id, Count = 1});
-        dict.Add(PieceType.Factory4.Id, new PieceMatchDef {Next = PieceType.Factory5.Id, Previous = PieceType.Factory3.Id, Count = 1});
-        dict.Add(PieceType.Factory5.Id, new PieceMatchDef {Next = PieceType.Factory6.Id, Previous = PieceType.Factory4.Id, Count = 1});
-        dict.Add(PieceType.Factory6.Id, new PieceMatchDef {Next = PieceType.Factory7.Id, Previous = PieceType.Factory5.Id, Count = 1});
-        dict.Add(PieceType.Factory7.Id, new PieceMatchDef {Next = PieceType.Factory8.Id, Previous = PieceType.Factory6.Id, Count = 1});
-        dict.Add(PieceType.Factory8.Id, new PieceMatchDef {Next = PieceType.Factory9.Id, Previous = PieceType.Factory7.Id, Count = 1});
-        dict.Add(PieceType.Factory9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Factory8.Id, Count = 1});
-        
         return dict;
     }
 }
