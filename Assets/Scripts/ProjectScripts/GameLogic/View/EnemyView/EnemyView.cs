@@ -108,7 +108,7 @@ public class EnemyView : BoardElementView
 
         enemy.ActiveReward = PieceType.None.Id;
         
-        Context.Context.Manipulator.CameraManipulator.ZoomTo(0.3f, CachedTransform.position);
+        Context.Context.Manipulator.CameraManipulator.ZoomTo(0f, CachedTransform.position);
     }
     
     public void OnClick()
@@ -145,7 +145,7 @@ public class EnemyView : BoardElementView
         
         var position = board.BoardDef.GetSectorCenterWorldPosition(start.X, start.Y, start.Z);
         
-        board.Manipulator.CameraManipulator.ZoomTo(0.3f, position);
+        board.Manipulator.CameraManipulator.ZoomTo(0f, position);
         
         view.target = start;
         view.enemy = enemy;

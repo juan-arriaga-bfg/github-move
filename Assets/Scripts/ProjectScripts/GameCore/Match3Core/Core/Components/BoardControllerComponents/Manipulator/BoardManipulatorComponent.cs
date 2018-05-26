@@ -133,7 +133,7 @@ public class BoardManipulatorComponent : ECSEntity,
             var boardPos = context.BoardDef.GetSectorPosition(targetPos);
 
             pieceView.OnDrag(boardPos, pos);
-
+            
             if ((prevDragPos - pos).sqrMagnitude > 0.01f)
             {
                 DOTween.Kill(dragAnimationId);
@@ -144,6 +144,7 @@ public class BoardManipulatorComponent : ECSEntity,
             else
             {
                 context.ProductionLogic.Check(pieceView.Piece.PieceType);
+                CameraMove();
             }
             
             prevDragPos = pos;
@@ -304,5 +305,10 @@ public class BoardManipulatorComponent : ECSEntity,
         }
 
         return selectedBoardElement;
+    }
+
+    private void CameraMove()
+    {
+//        cameraManipulator.CameraMove.UnLock(this);
     }
 }

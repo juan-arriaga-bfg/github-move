@@ -73,7 +73,7 @@ public class FieldControllerComponent : IECSComponent
         
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(16, 10),
+            At = new BoardPosition(20, 12),
             PieceTypeId = PieceType.Storage1.Id
         });
         
@@ -91,32 +91,44 @@ public class FieldControllerComponent : IECSComponent
         
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(16, 12),
+            At = new BoardPosition(16, 10),
             PieceTypeId = PieceType.Factory3.Id
         });
         
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(18, 12),
+            At = new BoardPosition(14, 12),
             PieceTypeId = PieceType.Factory4.Id
         });
         
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(20, 12),
+            At = new BoardPosition(16, 12),
             PieceTypeId = PieceType.Factory5.Id
         });
         
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(18, 14),
+            At = new BoardPosition(18, 12),
             PieceTypeId = PieceType.Factory6.Id
         });
         
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(20, 14),
+            At = new BoardPosition(16, 14),
             PieceTypeId = PieceType.Factory7.Id
+        });
+        
+        context.ActionExecutor.AddAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(18, 14),
+            PieceTypeId = PieceType.Factory8.Id
+        });
+        
+        context.ActionExecutor.AddAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(20, 14),
+            PieceTypeId = PieceType.Factory9.Id
         });
         
         //----------------------------------------
@@ -347,8 +359,8 @@ public class FieldControllerComponent : IECSComponent
         AddBoardElement(R.Tree, new BoardPosition(12, 9, 2), new Vector3(0f, 0.1f));
         AddBoardElement(R.Tree, new BoardPosition(13, 9, 2), new Vector3(0f, 0.1f));
         AddBoardElement(R.Tree, new BoardPosition(13, 10, 2), new Vector3(0f, 0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(15, 12, 2), new Vector3(0f, 0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(17, 14, 2), new Vector3(0f, 0.1f));
+        AddBoardElement(R.Tree, new BoardPosition(13, 12, 2), new Vector3(0f, 0.1f));
+        AddBoardElement(R.Tree, new BoardPosition(15, 14, 2), new Vector3(0f, 0.1f));
         AddBoardElement(R.Tree, new BoardPosition(19, 15, 2), new Vector3(0.3f, 0.2f));
         AddBoardElement(R.Tree, new BoardPosition(20, 16, 2), new Vector3(0f, 0.1f));
         AddBoardElement(R.Tree, new BoardPosition(21, 16, 2), new Vector3(0f, 0.1f));

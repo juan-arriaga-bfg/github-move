@@ -51,7 +51,7 @@ public class UiQuestButton : MonoBehaviour, IBoardEventListener
         
         var position = board.BoardDef.GetSectorCenterWorldPosition(kingPos.X, kingPos.Y, kingPos.Z);
         
-        board.Manipulator.CameraManipulator.ZoomTo(0.3f, position);
+        board.Manipulator.CameraManipulator.ZoomTo(0f, position);
     }
     
     public void OnBoardEvent(int code, object context)

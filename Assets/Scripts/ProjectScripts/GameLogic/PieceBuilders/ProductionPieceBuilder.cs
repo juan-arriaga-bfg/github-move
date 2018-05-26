@@ -4,7 +4,7 @@
 	{
 		var piece = base.Build(pieceType, context);
 		
-		AddView(piece, ViewType.LevelLabel);
+		CreateViewComponent(piece);
 		
 		var production = new ProductionComponent();
 		
