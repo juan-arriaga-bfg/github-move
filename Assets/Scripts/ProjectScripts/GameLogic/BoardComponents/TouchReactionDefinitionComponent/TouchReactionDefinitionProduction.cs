@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class TouchReactionDefinitionProduction : TouchReactionDefinitionComponent
+﻿public class TouchReactionDefinitionProduction : TouchReactionDefinitionComponent
 {
     public ProductionComponent Production { get; set; }
 
@@ -19,7 +17,19 @@ public class TouchReactionDefinitionProduction : TouchReactionDefinitionComponen
         switch (Production.State)
         {
             case ProductionState.Waiting:
-//                UIMessageWindowController.CreateDefaultMessage("!!!!!!!!!!!");
+
+                var timer = piece.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
+                
+                UIMessageWindowController.CreateTimerCompleteMessage(
+                    "Complete now!",
+                    "Would you like to build the item right now for crystals?",
+                    "Complete now ",
+                    timer,
+                    () => CurrencyHellper.Purchase(Currency.Product.Name, 1, timer.GetPrise(), success =>
+                    {
+                        if(success == false) return;
+                        Production.Fast();
+                    }));
                 break;
             case ProductionState.Completed:
                 Production.Complete();

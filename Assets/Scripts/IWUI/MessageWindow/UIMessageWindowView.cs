@@ -5,11 +5,13 @@ public class UIMessageWindowView : UIGenericPopupWindowView
 {
     [SerializeField] private NSText buttonAcceptLabel;
     [SerializeField] private NSText buttonCancelLabel;
+    [SerializeField] private NSText timerLabel;
     
     [SerializeField] private Image imageMessage;
     
     [SerializeField] private GameObject btnAccept;
     [SerializeField] private GameObject btnCancel;
+    [SerializeField] private GameObject timer;
     
     private bool isAccept;
     private bool isCancel;
@@ -39,6 +41,12 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         
         btnAccept.SetActive(windowModel.OnAccept != null);
         btnCancel.SetActive(windowModel.OnCancel != null);
+        timer.SetActive(windowModel.Timer != null);
+        
+        if (windowModel.Timer == null) return;
+        
+        windowModel.Timer.OnExecute += UpdateTimer;
+        windowModel.Timer.OnComplete += CompleteTimer;
     }
 
     public override void OnViewCloseCompleted()
@@ -48,7 +56,14 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIMessageWindowModel;
 
         windowModel.Image = null;
-
+        
+        if(windowModel.Timer != null)
+        {
+            windowModel.Timer.OnExecute -= UpdateTimer;
+            windowModel.Timer.OnComplete -= CompleteTimer;
+            windowModel.Timer = null;
+        }
+        
         if (isAccept && windowModel.OnAccept != null) windowModel.OnAccept();
         if (isCancel && windowModel.OnCancel != null) windowModel.OnCancel();
     }
@@ -61,5 +76,18 @@ public class UIMessageWindowView : UIGenericPopupWindowView
     public void OnClickCancel()
     {
         isCancel = true;
+    }
+
+    private void UpdateTimer()
+    {
+        var windowModel = Model as UIMessageWindowModel;
+
+        timerLabel.Text = windowModel.Timer.GetTimeLeftText(null);
+        buttonAcceptLabel.Text = windowModel.AcceptLabel + windowModel.Timer.GetPrise().ToStringIcon(false);
+    }
+
+    private void CompleteTimer()
+    {
+        Controller.CloseCurrentWindow();
     }
 }

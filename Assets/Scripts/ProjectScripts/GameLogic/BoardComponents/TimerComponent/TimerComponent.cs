@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class TimerComponent : IECSComponent, IECSSystem
 {
@@ -7,6 +8,7 @@ public class TimerComponent : IECSComponent, IECSSystem
     public int Guid { get { return ComponentGuid; } }
     
     public int Delay;
+    public CurrencyPair Price;
     
     public Action OnStart;
     public Action OnExecute;
@@ -100,6 +102,20 @@ public class TimerComponent : IECSComponent, IECSSystem
         return TimeFormat(GetTimeLeft(), format);
     }
 
+    public float GetProgress()
+    {
+        return (int)GetTime().TotalSeconds / (float)Delay;
+    }
+    
+    public CurrencyPair GetPrise()
+    {
+        if (Price == null) return null;
+
+        var amount = Mathf.Max(1, (int) (Price.Amount * (1 - GetProgress())));
+        
+        return  new CurrencyPair {Currency = Price.Currency, Amount = amount};
+    }
+
     public int CountOfStepsPassedWhenAppWasInBackground(long then, out long now)
     {
         DateTime nowTime;
@@ -119,7 +135,7 @@ public class TimerComponent : IECSComponent, IECSSystem
         
         return count;
     }
-
+    
     private string TimeFormat(TimeSpan time, string format)
     {
         if (string.IsNullOrEmpty(format))

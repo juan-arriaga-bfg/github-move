@@ -6,5 +6,6 @@ public class ProductionDef
     public int Delay { get; set; }
     public int Level { get; set; }
     public string Target { get; set; }
+    public CurrencyPair FastPrice { get; set; }
     public List<CurrencyPair> Prices { get; set; }
 }

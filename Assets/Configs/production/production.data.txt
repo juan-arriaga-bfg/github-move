@@ -4,6 +4,11 @@
     "Delay" : 15,
     "Level" : 1,
     "Target" : "Resource1",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 5
+    },
     "Prices" :
     [
       {
@@ -17,6 +22,11 @@
     "Delay" : 30,
     "Level" : 1,
     "Target" : "Resource2",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 7
+    },
     "Prices" :
     [
       {
@@ -34,6 +44,11 @@
     "Delay" : 45,
     "Level" : 1,
     "Target" : "Resource3",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 10
+    },
     "Prices" :
     [
       {
@@ -51,6 +66,11 @@
     "Delay" : 90,
     "Level" : 2,
     "Target" : "Resource4",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 15
+    },
     "Prices" :
     [
       {
@@ -68,6 +88,11 @@
     "Delay" : 150,
     "Level" : 2,
     "Target" : "Resource5",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 30
+    },
     "Prices" :
     [
       {
@@ -85,6 +110,11 @@
     "Delay" : 180,
     "Level" : 3,
     "Target" : "Resource6",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 45
+    },
     "Prices" :
     [
       {
@@ -102,6 +132,11 @@
     "Delay" : 240,
     "Level" : 3,
     "Target" : "Resource7",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 60
+    },
     "Prices" :
     [
       {
@@ -123,6 +158,11 @@
     "Delay" : 300,
     "Level" : 3,
     "Target" : "Resource8",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 80
+    },
     "Prices" :
     [
       {
@@ -144,6 +184,11 @@
     "Delay" : 600,
     "Level" : 3,
     "Target" : "Resource9",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 100
+    },
     "Prices" :
     [
       {

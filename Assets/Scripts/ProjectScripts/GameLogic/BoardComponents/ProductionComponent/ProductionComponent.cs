@@ -60,8 +60,15 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
         def = GameDataService.Current.ProductionManager.GetProduction(context.PieceType);
         
         if(def == null) return;
+
+        timer = new TimerComponent
+        {
+            Delay = def.Delay,
+            Price = def.FastPrice,
+            OnStart = OnStart,
+            OnComplete = OnComplete
+        };
         
-        timer = new TimerComponent {Delay = def.Delay, OnStart = OnStart, OnComplete = OnComplete};
         context.RegisterComponent(timer);
         viewDef = context.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
 
