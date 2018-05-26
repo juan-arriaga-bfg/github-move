@@ -89,8 +89,13 @@ public class TasksDataManager : IDataLoader<TasksDataManager>
 
     private Task CreateTask()
     {
+        var task = CreateFromSave();
+
+        if (task != null) return task;
+        
+        task = new Task();
+        
         var level = GameDataService.Current.LevelsManager.Level;
-        var task = new Task();
         var pricesCount = Ranges[level].GetValue();
         var weights = GetWeights(level);
         var count = 0;
@@ -128,6 +133,27 @@ public class TasksDataManager : IDataLoader<TasksDataManager>
         }
         
         task.Result = new CurrencyPair{ Currency = PieceType.Parse(PieceType.Coin5.Id), Amount = count};
+        
+        return task;
+    }
+
+    private Task CreateFromSave()
+    {
+        var data = ProfileService.Current.GetComponent<QuestSaveComponent>(QuestSaveComponent.ComponentGuid);
+
+        if (data.Market == null || data.Market.Count == 0) return null;
+
+        var save = data.Market[0];
+        
+        data.Market.RemoveAt(0);
+        
+        var task = new Task
+        {
+            Character = Characters[Random.Range(0, Characters.Count)],
+            Prices = save.Prices,
+            Rewards = save.Rewards,
+            Result = new CurrencyPair {Currency = PieceType.Parse(PieceType.Coin5.Id), Amount = save.Result}
+        };
         
         return task;
     }

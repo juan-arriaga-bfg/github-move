@@ -249,6 +249,25 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
         context.Context.ProductionLogic.Add(this);
+        
+        var profile = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+        
+        if(profile.Productions == null) return;
+        
+        var save = profile.Productions.Find(item => item.Position.Equals(position) && item.Id == context.PieceType);
+        
+        if(save == null) return;
+        
+        State = save.State;
+        if(State == ProductionState.Waiting) timer.Start(save.StartTime);
+        
+        foreach (var item in save.Storage)
+        {
+            KeyValuePair<int, int> value;
+            if(storage.TryGetValue(item.Key, out value) == false) continue;
+            
+            storage[item.Key] = new KeyValuePair<int, int>(value.Key, item.Value);
+        }
     }
 
     public void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)

@@ -16,6 +16,8 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	private List<ObstacleSaveItem> obstacles;
 	private List<StorageSaveItem> storages;
 	private List<ResourceSaveItem> resources;
+	private List<ProductionSaveItem> productions;
+	
 	private string completeFog;
 
 	[JsonProperty]
@@ -59,6 +61,13 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		get { return completeFog; }
 		set { completeFog = value; }
 	}
+	
+	[JsonProperty]
+	public List<ProductionSaveItem> Productions
+	{
+		get { return productions; }
+		set { productions = value; }
+	}
 
 	public List<BoardPosition> CompleteFogPositions;
 	
@@ -79,6 +88,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		chests = new List<ChestSaveItem>();
 		obstacles = new List<ObstacleSaveItem>();
 		storages = new List<StorageSaveItem>();
+		productions = new List<ProductionSaveItem>();
 		
 		resources = GetResourceSave();
 		
@@ -103,6 +113,8 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 				obstacles.AddRange(GetObstacleSave(board.BoardLogic, item.Value));
 				continue;
 			}
+			
+			productions.AddRange(GetProductionSave(board.BoardLogic, item.Value));
 		}
 		
 		pieces.Sort((a, b) => -a.Id.CompareTo(b.Id));
@@ -239,5 +251,44 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		}
 		
 		return str.ToString();
+	}
+
+	private List<ProductionSaveItem> GetProductionSave(BoardLogicComponent logic, List<BoardPosition> positions)
+	{
+		var items = new List<ProductionSaveItem>();
+		
+		foreach (var position in positions)
+		{
+			var piece = logic.GetPieceAt(position);
+			
+			if (piece == null) continue;
+			
+			var component = piece.GetComponent<ProductionComponent>(ProductionComponent.ComponentGuid);
+			
+			if(component == null) continue;
+			
+			var storage = new Dictionary<int, int>();
+			
+			foreach (var pair in component.Storage)
+			{
+				if(pair.Value.Value == 0) continue;
+				
+				storage.Add(pair.Key, pair.Value.Value);
+			}
+			
+			if(storage.Count == 0) continue;
+			
+			var item = new ProductionSaveItem{
+				Id = piece.PieceType,
+				Position = position,
+				State = component.State,
+				StartTime = component.Timer.StartTime,
+				Storage = storage
+			};
+			
+			items.Add(item);
+		}
+		
+		return items;
 	}
 }

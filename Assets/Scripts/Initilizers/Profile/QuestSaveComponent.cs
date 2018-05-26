@@ -15,6 +15,9 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
 
     private List<QuestSaveItem> castle;
     private List<QuestSaveItem> active;
+    
+    private List<TaskSaveItem> market;
+    
     private List<int> completed;
     
     [JsonProperty]
@@ -32,6 +35,13 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
     }
     
     [JsonProperty]
+    public List<TaskSaveItem> Market
+    {
+        get { return market; }
+        set { market = value; }
+    }
+    
+    [JsonProperty]
     public List<int> Completed
     {
         get { return completed; }
@@ -45,6 +55,7 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
         
         SaveQuest();
         SaveCastle();
+        SaveMarket();
     }
     
     private void SaveQuest()
@@ -80,6 +91,18 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
         foreach (var price in upgrade.Prices)
         {
             castle.Add(new QuestSaveItem{Uid = price.Def.Uid, Progress = GetSaveCount(price.WantedPiece, price.CurrentAmount)});
+        }
+    }
+
+    private void SaveMarket()
+    {
+        var manager = GameDataService.Current.TasksManager;
+        
+        market = new List<TaskSaveItem>();
+
+        foreach (var task in manager.Tasks)
+        {
+            market.Add(new TaskSaveItem{Result = task.Result.Amount, Prices = task.Prices, Rewards = task.Rewards});
         }
     }
 
