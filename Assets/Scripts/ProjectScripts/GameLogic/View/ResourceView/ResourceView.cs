@@ -67,7 +67,6 @@ public class ResourceView : BoardElementView
         if (index >= Currency.Charger1.Id && index <= Currency.Charger9.Id)
         {
             position = GameDataService.Current.PiecesManager.CastlePosition;
-            Debug.LogError(resource.Currency);
         }
         else
         {

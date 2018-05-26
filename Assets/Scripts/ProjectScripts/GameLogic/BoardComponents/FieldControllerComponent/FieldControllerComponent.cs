@@ -135,13 +135,13 @@ public class FieldControllerComponent : IECSComponent
         
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(28, 4),
+            At = new BoardPosition(21, 4),
             PieceTypeId = PieceType.Sawmill1.Id
         });
         
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(24, 0),
+            At = new BoardPosition(17, 0),
             PieceTypeId = PieceType.King.Id
         });
         
@@ -150,12 +150,12 @@ public class FieldControllerComponent : IECSComponent
             Piece = PieceType.O1.Id,
             Positions = new List<BoardPosition>
             {
-                new BoardPosition(24, 1),
-                new BoardPosition(24, 3),
-                new BoardPosition(24, 6),
-                new BoardPosition(25, 0),
-                new BoardPosition(26, 1),
-                new BoardPosition(29, 6)
+                new BoardPosition(17, 1),
+                new BoardPosition(17, 3),
+                new BoardPosition(17, 6),
+                new BoardPosition(18, 0),
+                new BoardPosition(19, 1),
+                new BoardPosition(22, 6)
             }
         });
         
@@ -164,15 +164,15 @@ public class FieldControllerComponent : IECSComponent
             Piece = PieceType.A1.Id,
             Positions = new List<BoardPosition>
             {
-                new BoardPosition(23, 5),
-                new BoardPosition(23, 6),
-                new BoardPosition(25, 1),
-                new BoardPosition(25, 2),
-                new BoardPosition(26, 6),
-                new BoardPosition(27, 0),
-                new BoardPosition(27, 5),
-                new BoardPosition(28, 2),
-                new BoardPosition(29, 1),
+                new BoardPosition(16, 5),
+                new BoardPosition(16, 6),
+                new BoardPosition(18, 1),
+                new BoardPosition(18, 2),
+                new BoardPosition(19, 6),
+                new BoardPosition(20, 0),
+                new BoardPosition(20, 5),
+                new BoardPosition(21, 2),
+                new BoardPosition(22, 1),
             }
         });
     }
