@@ -102,9 +102,11 @@ public class BoardManipulatorComponent : ECSEntity,
 
         var selectedView = GetSelectedBoardElementView();
         
-        context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
-
-        if (selectedView == null) return false;
+        if (selectedView == null)
+        {
+            context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
+            return false;
+        }
 
         if (selectedView is PieceBoardElementView)
         {
@@ -112,6 +114,8 @@ public class BoardManipulatorComponent : ECSEntity,
             var touchReaction = pieceView.Piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
 
             if (touchReaction != null) return touchReaction.Touch(pieceView.Piece.CachedPosition);
+            
+            context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
         }
         
         return false;

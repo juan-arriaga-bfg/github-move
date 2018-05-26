@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -80,8 +81,11 @@ public class ProductionView : UIBoardView, IBoardEventListener
 
 	public void OnClick()
 	{
-		Priority = defaultPriority;
-		production.Start();
+		DOTween.Sequence().AppendInterval(0.1f).OnComplete(() =>
+		{
+			Priority = defaultPriority;
+			production.Start();
+		});
 	}
 
 	public void OnBoardEvent(int code, object context)

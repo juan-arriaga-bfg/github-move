@@ -60,7 +60,20 @@ public class ResourceView : BoardElementView
             return;
         }
 
-        var position = GameDataService.Current.PiecesManager.CastlePosition;
+        var index = Currency.GetCurrencyDef(resource.Currency).Id;
+
+        BoardPosition position;
+
+        if (index >= Currency.Charger1.Id && index <= Currency.Charger9.Id)
+        {
+            position = GameDataService.Current.PiecesManager.CastlePosition;
+            Debug.LogError(resource.Currency);
+        }
+        else
+        {
+            position = GameDataService.Current.PiecesManager.StoragePosition;
+        }
+        
         var target = BoardService.Current.GetBoardById(0).BoardDef.GetPiecePosition(position.X, position.Y);
         
         body.DOScale(Vector3.one * 0.5f, duration).SetId(body).SetEase(Ease.OutBack);

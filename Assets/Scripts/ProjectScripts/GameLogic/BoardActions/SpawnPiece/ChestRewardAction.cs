@@ -24,7 +24,7 @@ public class ChestRewardAction : IBoardAction
 		var free = new List<BoardPosition>();
 		var count = Pieces.Sum(pair => pair.Value);
 		
-		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From, free, count) == false)
+		if (Pieces.Count != 0 && gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From, free, count) == false)
 		{
 			return false;
 		}
