@@ -31,7 +31,7 @@
     [
       {
         "Currency": "B1",
-        "Amount": 3
+        "Amount": 2
       },
       {
         "Currency": "A2",
@@ -52,11 +52,11 @@
     "Prices" :
     [
       {
-        "Currency": "C1",
-        "Amount": 4
+        "Currency": "A2",
+        "Amount": 3
       },
       {
-        "Currency": "D2",
+        "Currency": "E2",
         "Amount": 1
       }
     ]
@@ -73,13 +73,13 @@
     },
     "Prices" :
     [
-      {
-        "Currency": "A2",
-        "Amount": 3
+	     {
+        "Currency": "C1",
+        "Amount": 2
       },
       {
-        "Currency": "C2",
-        "Amount": 1
+        "Currency": "D2",
+        "Amount": 2
       }
     ]
   },
@@ -118,8 +118,8 @@
     "Prices" :
     [
       {
-        "Currency": "D3",
-        "Amount": 2
+        "Currency": "F3",
+        "Amount": 1
       },
       {
         "Currency": "C2",
