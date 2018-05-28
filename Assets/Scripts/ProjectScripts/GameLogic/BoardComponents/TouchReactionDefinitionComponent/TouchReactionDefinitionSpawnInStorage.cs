@@ -28,18 +28,10 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
         {
             return false;
         }
-
-        var isChest = piece.Context.BoardLogic.MatchDefinition.GetFirst(storage.SpawnPiece) == PieceType.Chest1.Id;
         
         foreach (var pos in free)
         {
             positions.Add(pos);
-            
-            if (isChest)
-            {
-                GameDataService.Current.ChestsManager.AddToBoard(pos, storage.SpawnPiece, true);
-            }
-            
             if(positions.Count == amount) break;
         }
         
