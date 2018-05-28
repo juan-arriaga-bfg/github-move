@@ -388,7 +388,7 @@ Camera:
   far clip plane: 200
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -432,9 +432,9 @@ MonoBehaviour:
   IgnoreGuiFingers: 1
   RequiredFingerCount: 0
   WheelSensitivity: 0
-  Zoom: 6
+  Zoom: 8
   ZoomClamp: 1
-  ZoomMin: 3
+  ZoomMin: 5
   ZoomMax: 10
   cameraManipulator: {fileID: 1931227307}
   Dampening: 10
@@ -478,7 +478,7 @@ MonoBehaviour:
     smoothTime: 0.05
     moveThreshold: 0.001
     sensitive: 1
-    zoomClamp: {x: 3, y: 10}
+    zoomClamp: {x: 5, y: 10}
     zoomSmoothTime: 0.1
     zoomSensitive: 1
     zoomThreshold: 0.001

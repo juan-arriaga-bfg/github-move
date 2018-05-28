@@ -25,6 +25,17 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
     private int waitingCount;
 
     private Piece context;
+    private ProductionPieceView view;
+
+    private ProductionPieceView View
+    {
+        get
+        {
+            if(view == null) view = context.ActorView as ProductionPieceView;
+            
+            return view;
+        }
+    }
     
     public TimerComponent Timer
     {
@@ -56,7 +67,7 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
     public void OnRegisterEntity(ECSEntity entity)
     {
         context = entity as Piece;
-
+        
         def = GameDataService.Current.ProductionManager.GetProduction(context.PieceType);
         
         if(def == null) return;
@@ -104,6 +115,11 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
         if (isReacts)
         {
             Change(true);
+
+            if (View != null)
+            {
+                View.ChangeOutline(true);
+            }
         }
         
         return isReacts;
@@ -112,6 +128,11 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
     public void Hide()
     {
         Change(false);
+        
+        if (View != null)
+        {
+            View.ChangeOutline(false);
+        }
     }
     
     public void Change()

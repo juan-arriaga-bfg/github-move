@@ -27,6 +27,6 @@ public class HintArrowView : BoardElementView
         arrowView.CachedTransform.localPosition = arrowView.CachedTransform.localPosition + (Vector3.up * 2) + new Vector3(offsetX, offsetY);
         arrowView.Show();
         
-        board.Manipulator.CameraManipulator.ZoomTo(0f, worldPos);
+        board.Manipulator.CameraManipulator.ZoomTo(0.6f, worldPos);
     }
 }
