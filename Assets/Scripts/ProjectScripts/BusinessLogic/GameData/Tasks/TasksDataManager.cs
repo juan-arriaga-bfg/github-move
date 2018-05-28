@@ -95,7 +95,7 @@ public class TasksDataManager : IDataLoader<TasksDataManager>
         
         task = new Task();
         
-        var level = GameDataService.Current.LevelsManager.Level;
+        var level = GameDataService.Current.LevelsManager.Level - 1;
         var pricesCount = Ranges[level].GetValue();
         var weights = GetWeights(level);
         var count = 0;
@@ -164,7 +164,7 @@ public class TasksDataManager : IDataLoader<TasksDataManager>
 
         foreach (var def in Defs)
         {
-            if(def.Level > level) continue;
+            if(def.Level > level + 1) continue;
             
             weights.Add(def.GetItemWeight());
         }
