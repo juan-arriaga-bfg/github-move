@@ -13,6 +13,8 @@ public class TasksDataManager : IDataLoader<TasksDataManager>
 
     public TimerComponent Timer;
     private int updateAmount;
+
+    private bool isStart;
     
     public void LoadData(IDataMapper<TasksDataManager> dataMapper)
     {
@@ -32,8 +34,10 @@ public class TasksDataManager : IDataLoader<TasksDataManager>
                 ProfileService.Current.RegisterComponent(Timer);
                 
                 Tasks = new List<Task>();
-                
+
+                isStart = true;
                 NextLevel();
+                isStart = false;
             }
             else
             {
@@ -89,8 +93,9 @@ public class TasksDataManager : IDataLoader<TasksDataManager>
 
     private Task CreateTask()
     {
-        var task = CreateFromSave();
-
+        Task task = null;
+        
+        if (isStart) task = CreateFromSave();
         if (task != null) return task;
         
         task = new Task();
