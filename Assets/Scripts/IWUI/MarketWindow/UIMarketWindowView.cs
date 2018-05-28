@@ -35,8 +35,10 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         }
         
         taskPattern.SetActive(false);
+        
         var toggle = taskItems[0].gameObject.GetComponent<Toggle>();
         toggle.isOn = true;
+        
         GameDataService.Current.TasksManager.Timer.OnComplete += AddTask;
     }
 
@@ -130,11 +132,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         taskItems.Remove(item);
         Destroy(item.gameObject);
         Controller.CloseCurrentWindow();
-        
-        if (taskItems.Count == 0) return;
-
-        var toggle = taskItems[0].gameObject.GetComponent<Toggle>();
-        toggle.isOn = true;
+        GameDataService.Current.TasksManager.CheckLast();
     }
 
     public void Upgrade()

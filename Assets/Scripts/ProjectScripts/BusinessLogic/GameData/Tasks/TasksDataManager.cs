@@ -90,6 +90,13 @@ public class TasksDataManager : IDataLoader<TasksDataManager>
         
         if(updateAmount != 0) Timer.Start();
     }
+    
+    public void CheckLast()
+    {
+        if(Tasks.Count != 0) return;
+        
+        Tasks.Add(CreateTask());
+    }
 
     private Task CreateTask()
     {
