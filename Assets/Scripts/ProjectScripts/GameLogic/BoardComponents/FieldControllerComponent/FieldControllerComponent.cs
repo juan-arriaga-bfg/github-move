@@ -61,7 +61,7 @@ public class FieldControllerComponent : IECSComponent
     {
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(19, 8),
+            At = new BoardPosition(18, 8),
             PieceTypeId = PieceType.Castle1.Id
         });
         
