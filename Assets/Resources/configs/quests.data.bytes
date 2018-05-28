@@ -34,7 +34,11 @@
     [
       {
         "Currency" : "Coin1",
-        "Amount" : 5
+        "Amount" : 4
+      },
+      {
+        "Currency" : "Coin2",
+        "Amount" : 1
       }
     ],
     "Conditions" :
@@ -50,14 +54,18 @@
     "Message" : "The miller is ready to thanks well for a good batch of sheaves",
     "Price" :
     {
-      "Currency" : "PieceB3",
+      "Currency" : "PieceA5",
       "Amount" : 2
     },
     "Rewards" :
     [
-      {
+            {
         "Currency" : "Coin1",
-        "Amount" : 6
+        "Amount" : 5
+      },
+      {
+        "Currency" : "Coin2",
+        "Amount" : 1
       }
     ],
     "Conditions" :
@@ -73,18 +81,18 @@
     "Message" : "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks.",
     "Price" :
     {
-      "Currency" : "PieceC2",
-      "Amount" : 4
+      "Currency" : "PieceC5",
+      "Amount" : 1
     },
     "Rewards" :
     [
       {
         "Currency" : "Coin1",
-        "Amount" : 3
+        "Amount" : 2
       },
       {
         "Currency" : "Coin2",
-        "Amount" : 1
+        "Amount" : 2
       }
     ],
     "Conditions" :
@@ -107,11 +115,11 @@
     [
       {
         "Currency" : "Coin1",
-        "Amount" : 4
+        "Amount" : 3
       },
       {
         "Currency" : "Coin2",
-        "Amount" : 1
+        "Amount" : 2
       }
     ],
     "Conditions" :

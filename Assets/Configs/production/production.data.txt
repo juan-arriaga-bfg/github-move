@@ -12,37 +12,37 @@
     "Prices" :
     [
       {
-        "Currency": "A2",
-        "Amount": 5
+        "Currency": "E1",
+        "Amount": 3
       }
     ]
   },
   {
     "Uid" : "Factory2",
-    "Delay" : 30,
+    "Delay" : 25,
     "Level" : 1,
     "Target" : "Resource2",
     "FastPrice" :
     {
       "Currency": "Crystals",
-      "Amount": 7
+      "Amount": 5
     },
     "Prices" :
     [
       {
-        "Currency": "A2",
-        "Amount": 1
+        "Currency": "B1",
+        "Amount": 3
       },
       {
-        "Currency": "C2",
-        "Amount": 2
+        "Currency": "A2",
+        "Amount": 1
       }
     ]
   },
   {
     "Uid" : "Factory3",
     "Delay" : 45,
-    "Level" : 1,
+    "Level" : 2,
     "Target" : "Resource3",
     "FastPrice" :
     {
@@ -52,11 +52,11 @@
     "Prices" :
     [
       {
-        "Currency": "A2",
-        "Amount": 3
+        "Currency": "C1",
+        "Amount": 4
       },
       {
-        "Currency": "B1",
+        "Currency": "E2",
         "Amount": 1
       }
     ]
@@ -74,19 +74,19 @@
     "Prices" :
     [
       {
-        "Currency": "C2",
-        "Amount": 1
+        "Currency": "A2",
+        "Amount": 3
       },
       {
-        "Currency": "E1",
-        "Amount": 2
+        "Currency": "C2",
+        "Amount": 1
       }
     ]
   },
   {
     "Uid" : "Factory5",
     "Delay" : 150,
-    "Level" : 2,
+    "Level" : 3,
     "Target" : "Resource5",
     "FastPrice" :
     {
@@ -96,7 +96,7 @@
     "Prices" :
     [
       {
-        "Currency": "B1",
+        "Currency": "B2",
         "Amount": 1
       },
       {
@@ -156,7 +156,7 @@
   {
     "Uid" : "Factory8",
     "Delay" : 300,
-    "Level" : 3,
+    "Level" : 4,
     "Target" : "Resource8",
     "FastPrice" :
     {
@@ -182,7 +182,7 @@
   {
     "Uid" : "Factory9",
     "Delay" : 600,
-    "Level" : 3,
+    "Level" : 4,
     "Target" : "Resource9",
     "FastPrice" :
     {
