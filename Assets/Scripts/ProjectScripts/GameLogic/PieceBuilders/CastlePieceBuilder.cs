@@ -31,7 +31,7 @@
         
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 1}
-                .RegisterDefinition(new TouchReactionDefinitionSpawnInCastle{Icon = "Chest"})
+                .RegisterDefinition(new TouchReactionDefinitionSpawnCastle{Icon = "Chest"})
                 .RegisterDefinition(new TouchReactionDefinitionUpgradeCastle{Icon = "arrow_light"}))
             .RegisterComponent(new TouchReactionConditionComponent()));
         
