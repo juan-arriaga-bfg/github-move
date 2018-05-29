@@ -62,7 +62,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         long now;
         var steps = Timer.CountOfStepsPassedWhenAppWasInBackground(item.StartTime, out now);
         
-        Filling = Mathf.Min(item.Filling + steps, Capacity);
+        Filling = Mathf.Min(item.Filling + Mathf.Max(steps, 0), Capacity);
         item.StartTime = now;
         
         if (Filling != Capacity)
