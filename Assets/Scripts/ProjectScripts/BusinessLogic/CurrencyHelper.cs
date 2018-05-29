@@ -168,4 +168,46 @@ public static class CurrencyHellper
         var count = defs.Sum(def => ProfileService.Current.GetStorageItem(def.Name).Amount);
         return count;
     }
+
+    public static int CoinPieceToCurrence(Dictionary<int, int> dict)
+    {
+        var amount = 0;
+        
+        foreach (var pair in dict)
+        {
+            var def = GameDataService.Current.PiecesManager.GetPieceDef(pair.Key);
+            
+            if(def == null) continue;
+            
+            amount += pair.Value * def.SpawnResources.Amount;
+        }
+        
+        return amount;
+    }
+    
+    public static Dictionary<int, int> CurrencyToCoinPieces(int amount)
+    {
+        var dict = new Dictionary<int, int>();
+        
+        for (var id = PieceType.Coin5.Id; id >= PieceType.Coin1.Id && amount > 0; id--)
+        {
+            var def = GameDataService.Current.PiecesManager.GetPieceDef(id);
+            
+            if(def == null) continue;
+            
+            var count = amount / def.SpawnResources.Amount;
+            
+            if(count == 0) continue;
+            
+            amount -= count * def.SpawnResources.Amount;
+            dict.Add(id, count);
+        }
+        
+        return dict;
+    }
+
+    public static Dictionary<int, int> MinimizeCoinPieces(Dictionary<int, int> dict)
+    {
+        return CurrencyToCoinPieces(CoinPieceToCurrence(dict));
+    }
 }

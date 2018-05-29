@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TasksDataManager : IDataLoader<TasksDataManager>
@@ -110,7 +111,6 @@ public class TasksDataManager : IDataLoader<TasksDataManager>
         var level = GameDataService.Current.LevelsManager.Level - 1;
         var pricesCount = Ranges[level].GetValue();
         var weights = GetWeights(level);
-        var count = 0;
         
         task.Character = Characters[Random.Range(0, Characters.Count)];
         task.Prices = new List<CurrencyPair>();
@@ -132,19 +132,18 @@ public class TasksDataManager : IDataLoader<TasksDataManager>
                 if (task.Rewards.TryGetValue(key, out value) == false)
                 {
                     value = pair.Amount * amount;
-                    count += value;
                     task.Rewards.Add(key, value);
                     continue;
                 }
 
                 value += pair.Amount * amount;
-                count += value;
                 
                 task.Rewards[key] = value;
             }
         }
-        
-        task.Result = new CurrencyPair{ Currency = PieceType.Parse(PieceType.Coin5.Id), Amount = count};
+
+        task.Rewards = CurrencyHellper.MinimizeCoinPieces(task.Rewards);
+        task.Result = new CurrencyPair{ Currency = PieceType.Parse(PieceType.Coin5.Id), Amount = task.Rewards.Sum(pair => pair.Value)};
         
         return task;
     }
