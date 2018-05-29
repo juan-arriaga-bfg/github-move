@@ -2,5 +2,5 @@ using System.Collections.Generic;
 
 public class UIErrorWindowModel : IWWindowModel 
 {
-    public readonly Dictionary<string, string> Messages = new Dictionary<string, string>();
+    public readonly List<string> Messages = new List<string>();
 }

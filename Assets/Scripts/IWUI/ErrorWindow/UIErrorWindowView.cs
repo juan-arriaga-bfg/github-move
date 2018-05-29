@@ -6,51 +6,25 @@ public class UIErrorWindowView : IWUIWindowView
 {
     [SerializeField] private GameObject pattern;
 
-    private bool isAnimated;
     private float duration = 2f;
+    private int index;
     
     public override void OnViewShow()
     {
         base.OnViewShow();
         
-        var windowModel = Model as UIErrorWindowModel;
-        
-        if(isAnimated) return;
-        
-        isAnimated = true;
-        
         Next();
     }
-
-    public override void OnViewClose()
-    {
-        base.OnViewClose();
-        
-        var windowModel = Model as UIErrorWindowModel;
-        
-    }
-
-    private void Next()
+    
+    public void Next()
     {
         var windowModel = Model as UIErrorWindowModel;
 
-        if (windowModel.Messages.Count == 0)
-        {
-            isAnimated = false;
-            Controller.CloseCurrentWindow();
-            return;
-        }
-
-        var str = "";
+        var str = windowModel.Messages[0];
         var item = Instantiate(pattern, pattern.transform.parent);
-
-        foreach (var key in windowModel.Messages.Keys)
-        {
-            str = key;
-            break;
-        }
         
-        windowModel.Messages.Remove(str);
+        index++;
+        windowModel.Messages.RemoveAt(0);
         
         item.SetActive(true);
         item.GetComponent<NSText>().Text = str;
@@ -64,8 +38,11 @@ public class UIErrorWindowView : IWUIWindowView
         sequence.Insert((duration/3)*2, message.DOFade(0, duration/3));
         sequence.InsertCallback(duration, () =>
         {
+            index--;
             Destroy(item);
-            Next();
+            
+            if (index != 0) return;
+            Controller.CloseCurrentWindow();
         });
     }
 }

@@ -16,10 +16,17 @@ public class UIErrorWindowController : IWWindowController {
     {
         var model = UIService.Get.GetCachedModel<UIErrorWindowModel>(UIWindowType.ErrorWindow);
         
-        if(model.Messages.ContainsKey(message)) return;
+        model.Messages.Add(message);
 
-        model.Messages.Add(message, message);
+        var window = UIService.Get.GetShowedWindowByName(UIWindowType.ErrorWindow);
+
+        if (window == null)
+        {
+            UIService.Get.ShowWindow(UIWindowType.ErrorWindow);
+            return;
+        }
         
-        UIService.Get.ShowWindow(UIWindowType.ErrorWindow);
+        var view = window.CurrentView as UIErrorWindowView;
+        view.Next();
     }
 }
