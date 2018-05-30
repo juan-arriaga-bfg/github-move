@@ -49,13 +49,40 @@
       }
     ]
   },
+    {
+    "Uid" : 3,
+    "Message" : "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks.",
+    "Price" :
+    {
+      "Currency" : "PieceC3",
+      "Amount" : 2
+    },
+    "Rewards" :
+    [
+      {
+        "Currency" : "Coin1",
+        "Amount" : 4
+      },
+      {
+        "Currency" : "Coin2",
+        "Amount" : 1
+      }
+    ],
+    "Conditions" :
+    [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid" : 2
+      }
+    ]
+  },
   {
     "Uid" : 4,
     "Message" : "The miller is ready to thanks well for a good batch of sheaves",
     "Price" :
     {
-      "Currency" : "PieceA5",
-      "Amount" : 2
+      "Currency" : "PieceB4",
+      "Amount" : 1
     },
     "Rewards" :
     [
@@ -76,40 +103,14 @@
       }
     ]
   },
-  {
-    "Uid" : 3,
-    "Message" : "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks.",
-    "Price" :
-    {
-      "Currency" : "PieceC5",
-      "Amount" : 1
-    },
-    "Rewards" :
-    [
-      {
-        "Currency" : "Coin1",
-        "Amount" : 2
-      },
-      {
-        "Currency" : "Coin2",
-        "Amount" : 2
-      }
-    ],
-    "Conditions" :
-    [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid" : 2
-      }
-    ]
-  },
+
   {
     "Uid" : 5,
     "Message" : "Peasant women are asked to give them little wool for knitting",
     "Price" :
     {
-      "Currency" : "PieceD3",
-      "Amount" : 3
+      "Currency" : "PieceA4",
+      "Amount" : 2
     },
     "Rewards" :
     [
@@ -135,18 +136,18 @@
     "Message" : "The miller is ready to thanks well for a good batch of sheaves",
     "Price" :
     {
-      "Currency" : "PieceB4",
+      "Currency" : "PieceC4",
       "Amount" : 2
     },
     "Rewards" :
     [
       {
         "Currency" : "Coin1",
-        "Amount" : 5
+        "Amount" : 1
       },
       {
         "Currency" : "Coin2",
-        "Amount" : 1
+        "Amount" : 2
       }
     ],
     "Conditions" :
@@ -162,7 +163,7 @@
     "Message" : "The merchant is ready to pay good for a batch of quality cloth",
     "Price" :
     {
-      "Currency" : "PieceD5",
+      "Currency" : "PieceB5",
       "Amount" : 1
     },
     "Rewards" :
@@ -189,8 +190,8 @@
     "Message" : "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks.",
     "Price" :
     {
-      "Currency" : "PieceC4",
-      "Amount" : 2
+      "Currency" : "PieceA6",
+      "Amount" : 1
     },
     "Rewards" :
     [
@@ -216,7 +217,7 @@
     "Message" : "Now we can clean up the area from obstacles and build Houses!",
     "Price" :
     {
-      "Currency" : "PieceA6",
+      "Currency" : "PieceC5",
       "Amount" : 2
     },
     "Rewards" :
@@ -243,8 +244,8 @@
     "Message" : "The cook promises to bake a pie if you give him some apples",
     "Price" :
     {
-      "Currency" : "PieceE5",
-      "Amount" : 2
+      "Currency" : "PieceB6",
+      "Amount" : 1
     },
     "Rewards" :
     [
@@ -270,8 +271,8 @@
     "Message" : "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks.",
     "Price" :
     {
-      "Currency" : "PieceC5",
-      "Amount" : 2
+      "Currency" : "PieceA7",
+      "Amount" : 1
     },
     "Rewards" :
     [

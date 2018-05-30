@@ -48,6 +48,10 @@
       {
         "Uid": "E1",
         "Weight" : 25
+      },
+      {
+        "Uid": "D1",
+        "Weight" : 20
       }
     ],
     "ChargerWeights" :
@@ -103,7 +107,7 @@
       },
       {
         "Uid": "A2",
-        "Weight" : 25
+        "Weight" : 20
       },
       {
         "Uid": "B2",
@@ -111,10 +115,14 @@
       },
       {
         "Uid": "D1",
-        "Weight" : 25
+        "Weight" : 5
       },
       {
         "Uid": "F1",
+        "Weight" : 25
+      },
+      {
+        "Uid": "G1",
         "Weight" : 25
       }
     ],
@@ -185,7 +193,17 @@
       {
         "Uid": "F2",
         "Weight" : 20
-      }
+      },
+	  {
+        "Uid": "B2",
+        "Weight" : 10,
+        "Override" : "true"
+      },
+	  {
+        "Uid": "G2",
+        "Weight" : 20,
+        "Override" : "true"
+      },
     ],
     "ChargerWeights" :
     [
@@ -233,9 +251,29 @@
     ],
     "PieceWeights" :
     [
+	{
+        "Uid": "A2",
+        "Weight" : 0,
+        "Override" : "true"
+      },
+	  	{
+        "Uid": "B2",
+        "Weight" : 0,
+        "Override" : "true"
+      },
+	  	{
+        "Uid": "C1",
+        "Weight" : 0,
+        "Override" : "true"
+      },
       {
         "Uid": "A3",
         "Weight" : 20,
+        "Override" : "true"
+      },
+	        {
+        "Uid": "C2",
+        "Weight" : 5,
         "Override" : "true"
       },
       {
@@ -301,7 +339,7 @@
         "Override" : "true"
       },
       {
-        "Uid": "C1",
+        "Uid": "E1",
         "Weight" : 0,
         "Override" : "true"
       },
@@ -316,7 +354,7 @@
         "Override" : "true"
       },
       {
-        "Uid": "E1",
+        "Uid": "G1",
         "Weight" : 0,
         "Override" : "true"
       },
@@ -330,7 +368,11 @@
       },
       {
         "Uid": "F3",
-        "Weight" : 20
+        "Weight" : 15
+      },
+	        {
+        "Uid": "G3",
+        "Weight" : 15
       },
       {
         "Uid": "E3",

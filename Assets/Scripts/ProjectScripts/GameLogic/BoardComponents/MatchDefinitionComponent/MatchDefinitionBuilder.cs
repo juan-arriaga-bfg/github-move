@@ -64,12 +64,12 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.F1.Id, new PieceMatchDef {Next = PieceType.F2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.F2.Id, new PieceMatchDef {Next = PieceType.F3.Id, Previous = PieceType.F1.Id, Count = 3});
         dict.Add(PieceType.F3.Id, new PieceMatchDef {Next = PieceType.F4.Id, Previous = PieceType.F2.Id, Count = 3});
-        dict.Add(PieceType.F4.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.F3.Id, Count = 3});
+        dict.Add(PieceType.F4.Id, new PieceMatchDef {Next = PieceType.Coin3.Id, Previous = PieceType.F3.Id, Count = 3});
 
         dict.Add(PieceType.G1.Id, new PieceMatchDef {Next = PieceType.G2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.G2.Id, new PieceMatchDef {Next = PieceType.G3.Id, Previous = PieceType.G1.Id, Count = 3});
         dict.Add(PieceType.G3.Id, new PieceMatchDef {Next = PieceType.G4.Id, Previous = PieceType.G2.Id, Count = 3});
-        dict.Add(PieceType.G4.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.G3.Id, Count = 3});
+        dict.Add(PieceType.G4.Id, new PieceMatchDef {Next = PieceType.Coin3.Id, Previous = PieceType.G3.Id, Count = 3});
 
         dict.Add(PieceType.H1.Id, new PieceMatchDef {Next = PieceType.H2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.H2.Id, new PieceMatchDef {Next = PieceType.H3.Id, Previous = PieceType.H1.Id, Count = 3});

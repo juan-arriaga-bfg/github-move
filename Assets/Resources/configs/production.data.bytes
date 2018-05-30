@@ -30,11 +30,11 @@
     "Prices" :
     [
       {
-        "Currency": "B1",
-        "Amount": 2
+        "Currency": "D1",
+        "Amount": 3
       },
       {
-        "Currency": "A2",
+        "Currency": "A1",
         "Amount": 1
       }
     ]
@@ -52,11 +52,11 @@
     "Prices" :
     [
       {
-        "Currency": "A2",
-        "Amount": 3
+        "Currency": "F1",
+        "Amount": 2
       },
       {
-        "Currency": "E2",
+        "Currency": "C1",
         "Amount": 1
       }
     ]
@@ -74,12 +74,12 @@
     "Prices" :
     [
 	     {
-        "Currency": "C1",
-        "Amount": 2
+        "Currency": "G1",
+        "Amount": 3
       },
       {
-        "Currency": "D2",
-        "Amount": 2
+        "Currency": "B2",
+        "Amount": 1
       }
     ]
   },
@@ -96,11 +96,11 @@
     "Prices" :
     [
       {
-        "Currency": "B2",
-        "Amount": 1
+        "Currency": "F2",
+        "Amount": 2
       },
       {
-        "Currency": "D3",
+        "Currency": "A2",
         "Amount": 1
       }
     ]
@@ -118,12 +118,12 @@
     "Prices" :
     [
       {
-        "Currency": "F3",
+        "Currency": "E3",
         "Amount": 1
       },
       {
-        "Currency": "C2",
-        "Amount": 2
+        "Currency": "G2",
+        "Amount": 1
       }
     ]
   },
@@ -140,16 +140,16 @@
     "Prices" :
     [
       {
-        "Currency": "D4",
-        "Amount": 1
-      },
-      {
         "Currency": "F4",
         "Amount": 1
       },
       {
-        "Currency": "C2",
+        "Currency": "D3",
         "Amount": 2
+      },
+      {
+        "Currency": "C2",
+        "Amount": 1
       }
     ]
   },
@@ -166,16 +166,16 @@
     "Prices" :
     [
       {
-        "Currency": "D4",
-        "Amount": 3
+        "Currency": "G4",
+        "Amount": 1
       },
       {
-        "Currency": "B2",
+        "Currency": "E3",
         "Amount": 2
       },
       {
-        "Currency": "C2",
-        "Amount": 2
+        "Currency": "A3",
+        "Amount": 1
       }
     ]
   },
@@ -192,16 +192,16 @@
     "Prices" :
     [
       {
-        "Currency": "F4",
-        "Amount": 2
+        "Currency": "E5",
+        "Amount": 1
       },
       {
-        "Currency": "D4",
-        "Amount": 2
+        "Currency": "D5",
+        "Amount": 1
       },
       {
-        "Currency": "E2",
-        "Amount": 3
+        "Currency": "F3",
+        "Amount": 1
       }
     ]
   }
