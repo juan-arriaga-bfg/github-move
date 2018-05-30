@@ -128,10 +128,15 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		StorageSave = new Dictionary<BoardPosition, StorageSaveItem>();
 		CompleteFogPositions = new List<BoardPosition>();
 
-		foreach (var storage in storages)
+		if (storages != null)
 		{
-			StorageSave.Add(storage.Position, storage);
+			foreach (var storage in storages)
+			{
+				StorageSave.Add(storage.Position, storage);
+			}
 		}
+
+		if (string.IsNullOrEmpty(completeFog)) return; 
 		
 		var fogData = completeFog.Split(new string[] {";"}, StringSplitOptions.RemoveEmptyEntries);
 

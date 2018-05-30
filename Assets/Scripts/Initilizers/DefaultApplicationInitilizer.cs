@@ -29,7 +29,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         ecsManager.AddSystemProcessor(ecsSystemProcessor);
         
         //init profile 
-        var profileManager = new ProfileManager<UserProfile> { SystemVersion = 1 };
+        var profileManager = new ProfileManager<UserProfile> { SystemVersion = IWVersion.Get.BuildNumber };
 #if UNITY_EDITOR
         profileManager.Init(new ResourceConfigDataMapper<UserProfile>("configs/profile.data", false), new DefaultProfileBuilder(), new DefaultProfileMigration());
 #else
@@ -67,8 +67,14 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         ProfileService.Instance.Manager.LoadCurrentProfile((profile) =>
         {
             new DefaultProfileBuilder().SetupComponents(profile);
-            ProfileService.Instance.Manager.CheckMigration();
+
+            if (profileManager.SystemVersion > profile.SystemVersion)
+            {
+                var profileBuilder = new DefaultProfileBuilder();
+                ProfileService.Instance.Manager.ReplaceProfile(profileBuilder.Create());
+            }
             
+            ProfileService.Instance.Manager.CheckMigration();
 #if UNITY_EDITOR
             ProfileService.Instance.Manager.SaveLocalProfile();
 #endif
@@ -92,18 +98,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         GameDataManager dataManager = new GameDataManager();
         GameDataService.Instance.SetManager(dataManager);
         
-        dataManager.ChestsManager.LoadData(new ResourceConfigDataMapper<List<ChestDef>>("configs/chests.data", NSConfigsSettings.Instance.IsUseEncryption));
-        dataManager.EnemiesManager.LoadData(new ResourceConfigDataMapper<List<EnemyDef>>("configs/enemies.data", NSConfigsSettings.Instance.IsUseEncryption));
-        dataManager.HeroesManager.LoadData(new ResourceConfigDataMapper<List<HeroDef>>("configs/heroes.data", NSConfigsSettings.Instance.IsUseEncryption));
-        dataManager.PiecesManager.LoadData(new ResourceConfigDataMapper<List<PieceDef>>("configs/pieces.data", NSConfigsSettings.Instance.IsUseEncryption));
-        dataManager.ObstaclesManager.LoadData(new ResourceConfigDataMapper<List<ObstacleDef>>("configs/obstacles.data", NSConfigsSettings.Instance.IsUseEncryption));
-        dataManager.SimpleObstaclesManager.LoadData(new ResourceConfigDataMapper<List<SimpleObstaclesDef>>("configs/simpleObstacles.data", NSConfigsSettings.Instance.IsUseEncryption));
-        dataManager.QuestsManager.LoadData(new ResourceConfigDataMapper<List<QuestDef>>("configs/quests.data", NSConfigsSettings.Instance.IsUseEncryption));
-        dataManager.FogsManager.LoadData(new ResourceConfigDataMapper<FogsDataManager>("configs/fogs.data", NSConfigsSettings.Instance.IsUseEncryption));
-        dataManager.CollectionManager.LoadData(new ResourceConfigDataMapper<CollectionDataManager>("configs/collection.data", NSConfigsSettings.Instance.IsUseEncryption));
-        dataManager.LevelsManager.LoadData(new ResourceConfigDataMapper<List<LevelsDef>>("configs/levels.data", NSConfigsSettings.Instance.IsUseEncryption));
-        dataManager.TasksManager.LoadData(new ResourceConfigDataMapper<TasksDataManager>("configs/tasks.data", NSConfigsSettings.Instance.IsUseEncryption));
-        dataManager.ProductionManager.LoadData(new ResourceConfigDataMapper<List<ProductionDef>>("configs/production.data", NSConfigsSettings.Instance.IsUseEncryption));
+        dataManager.Load();
     }
     
     void OnApplicationPause(bool pauseStatus)
