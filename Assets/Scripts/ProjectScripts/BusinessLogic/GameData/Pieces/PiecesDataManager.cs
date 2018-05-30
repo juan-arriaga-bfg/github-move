@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PiecesDataManager : IDataLoader<List<PieceDef>>
 {
-    public const int ReproductionDelay = 30;
+    public const int ReproductionDelay = 20;
     public const int ReproductionStepDelay = 5;
     public const int ReproductionChance = 50;
     
