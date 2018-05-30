@@ -5,8 +5,14 @@ public class CameraScroll : MonoBehaviour
 {
     [SerializeField] private CameraManipulator cameraManipulator;
     
-    public int Border = 200;
-    
+    private int border;
+    private float speed = 40f;
+
+    private void Awake()
+    {
+        border = (int)(200 * (Screen.height / 1080f));
+    }
+
     private void LateUpdate()
     {
         if (cameraManipulator.CameraMove.IsLocked == false) return;
@@ -16,26 +22,29 @@ public class CameraScroll : MonoBehaviour
         if(fingers == null) return;
         
         var finger = fingers[0];
+        var currentSpeed = speed * 0.5f;
         
-        // Get t value
-        var factor = LeanTouch.GetDampenFactor(20, Time.deltaTime);
+        var factor = LeanTouch.GetDampenFactor(speed, Time.deltaTime);
+        var next = Vector3.zero;
         
-        if (finger.ScreenPosition.x < Border)
+        if (finger.ScreenPosition.x < border)
         {
-            cameraManipulator.MoveTo(Vector3.Lerp(cameraManipulator.CameraPosition, cameraManipulator.CameraPosition + Vector3.left, factor), false);
+            next += Vector3.left;
         }
-        else if (finger.ScreenPosition.x > Screen.width - Border)
+        else if (finger.ScreenPosition.x > Screen.width - border)
         {
-            cameraManipulator.MoveTo(Vector3.Lerp(cameraManipulator.CameraPosition, cameraManipulator.CameraPosition + Vector3.right, factor), false);
+            next += Vector3.right;
         }
 
-        if (finger.ScreenPosition.y < Border)
+        if (finger.ScreenPosition.y < border)
         {
-            cameraManipulator.MoveTo(Vector3.Lerp(cameraManipulator.CameraPosition, cameraManipulator.CameraPosition + Vector3.down, factor), false);
+            next += Vector3.down;
         }
-        else if (finger.ScreenPosition.y > Screen.height - Border)
+        else if (finger.ScreenPosition.y > Screen.height - border)
         {
-            cameraManipulator.MoveTo(Vector3.Lerp(cameraManipulator.CameraPosition, cameraManipulator.CameraPosition + Vector3.up, factor), false);
+            next += Vector3.up;
         }
+        
+        cameraManipulator.MoveTo(Vector3.Lerp(cameraManipulator.CameraPosition, cameraManipulator.CameraPosition + next, factor), false);
     }
 }
