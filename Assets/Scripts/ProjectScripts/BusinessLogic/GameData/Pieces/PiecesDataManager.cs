@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class PiecesDataManager : IDataLoader<List<PieceDef>>
 {
-    public const int ReproductionDelay = 7;
+    public const int ReproductionDelay = 30;
     public const int ReproductionStepDelay = 5;
-    public const int ReproductionChance = 25;
+    public const int ReproductionChance = 50;
     
     public BoardPosition CastlePosition = BoardPosition.Default();
     public BoardPosition MatketPosition = BoardPosition.Default();
