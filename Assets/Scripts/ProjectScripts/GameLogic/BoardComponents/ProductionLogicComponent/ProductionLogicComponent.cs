@@ -42,7 +42,20 @@ public class ProductionLogicComponent : IECSComponent
         if(isDrag) return;
 
         isDrag = true;
-        select = productions.FindAll(production => production.Check(resource));
+        select = new List<ProductionComponent>();
+
+        foreach (var production in productions)
+        {
+            if (production.Check(resource))
+            {
+                select.Add(production);
+                continue;
+            }
+            
+            if(production.IsShow() == false) continue;
+            
+            production.Hide();
+        }
     }
 
     public bool Hide(int resource, BoardPosition position)

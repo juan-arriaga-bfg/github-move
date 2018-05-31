@@ -134,6 +134,11 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
             View.ChangeOutline(false);
         }
     }
+
+    public bool IsShow()
+    {
+        return viewDef.AddView(ViewType.Production).IsShow;
+    }
     
     public void Change()
     {
@@ -152,6 +157,7 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
                 prod.Change(!prod.IsShow);
                 break;
             case ProductionState.Full:
+                prod.Priority = prod.Layer;
                 prod.Change(!prod.IsShow);
                 warning = viewDef.AddView(ViewType.ProductionWarning);
                 warning.Priority = warning.Layer;
@@ -288,6 +294,8 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
         
         State = save.State;
         if(State == ProductionState.Waiting) timer.Start(save.StartTime);
+        if(State == ProductionState.Full) viewDef.AddView(ViewType.ProductionWarning).Change(true);
+        if(State == ProductionState.Completed) viewDef.AddView(ViewType.ProductionWarning).Change(true);
         
         foreach (var item in save.Storage)
         {
