@@ -2,12 +2,7 @@
 
 public class CastlePieceView : PieceBoardElementView
 {
-    [SerializeField] private Transform cap;
-    [SerializeField] private GameObject shine;
-    
-    [SerializeField] private float open;
-    [SerializeField] private float close;
-
+    [SerializeField] private GameObject chest;
     private StorageComponent storage;
     
     public override void Init(BoardRenderer context, Piece piece)
@@ -36,9 +31,11 @@ public class CastlePieceView : PieceBoardElementView
 
     private void Change()
     {
-        var isOpen = storage.Filling > 0;
-        
-        shine.SetActive(isOpen);
-        cap.localPosition = new Vector3(cap.localPosition.x, isOpen ? open : close);
+        chest.SetActive(storage.Filling > 0);
+    }
+
+    public Vector3 GetSpawnPosition()
+    {
+        return chest.transform.position;
     }
 }

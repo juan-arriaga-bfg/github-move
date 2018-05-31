@@ -14,7 +14,6 @@ public class PieceBuildersBuilder
         dict = AddMulticellularPiece2x2(dict);
         
         dict = AddCastlePiece(dict);
-        dict = AddChestPiece(dict);
 
         return dict;
     }
@@ -32,6 +31,7 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.I1.Id, PieceType.I4.Id, dict);
         
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Coin1.Id, PieceType.Coin5.Id, dict);
+        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest9.Id, dict);
         
 //        dict.Add(PieceType.E6.Id, new SpawnPieceBuilder());
         dict.Add(PieceType.King.Id, new QuestGiverPieceBuilder());
@@ -78,11 +78,6 @@ public class PieceBuildersBuilder
         return AddMulticellularPiece<CastlePieceBuilder>(PieceType.Castle1.Id, PieceType.Castle9.Id, mask, dict);
     }
     
-    private Dictionary<int, IPieceBuilder> AddChestPiece(Dictionary<int, IPieceBuilder> dict)
-    {
-        return AddSimplePiece<ChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest9.Id, dict);
-    }
-
     private Dictionary<int, IPieceBuilder> AddSimplePiece<T>(int idMin, int idMax, Dictionary<int, IPieceBuilder> dict) where T : IPieceBuilder, new()
     {
         for (var id = idMin; id < idMax + 1; id++)
