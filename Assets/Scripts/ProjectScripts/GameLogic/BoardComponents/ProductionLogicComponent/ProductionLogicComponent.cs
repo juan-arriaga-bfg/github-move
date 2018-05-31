@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +18,8 @@ public class ProductionLogicComponent : IECSComponent
     }
 
     private BoardController context;
+
+    public Action OnUpdate;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -25,6 +28,13 @@ public class ProductionLogicComponent : IECSComponent
 
     public void OnUnRegisterEntity(ECSEntity entity)
     {
+    }
+
+    public void Update()
+    {
+        if(OnUpdate == null) return;
+
+        OnUpdate();
     }
 
     public void Check(int resource)

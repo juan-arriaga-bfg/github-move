@@ -67,15 +67,29 @@ public class UIMainWindowView : IWUIWindowView
 
     public void OnClickReset()
     {
-        var profileBuilder = new DefaultProfileBuilder();
-        ProfileService.Instance.Manager.ReplaceProfile(profileBuilder.Create());
+        var model= UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
-        // gamedata configs
-        GameDataManager dataManager = new GameDataManager();
-        GameDataService.Instance.SetManager(dataManager);
+        model.Title = "Reset the progress";
+        model.Message = "Do you want to reset the progress and start playing from the beginning?";
+        model.AcceptLabel = "<size=30>Reset progress!</size>";
+        model.CancelLabel = "No!";
         
-        dataManager.Load();
+        model.OnAccept = () =>
+        {
+            var profileBuilder = new DefaultProfileBuilder();
+            ProfileService.Instance.Manager.ReplaceProfile(profileBuilder.Create());
         
-        SceneManager.LoadScene("Main", LoadSceneMode.Single);
+            // gamedata configs
+            GameDataManager dataManager = new GameDataManager();
+            GameDataService.Instance.SetManager(dataManager);
+        
+            dataManager.Load();
+        
+            SceneManager.LoadScene("Main", LoadSceneMode.Single);
+        };
+        
+        model.OnCancel = () => {};
+        
+        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
 }

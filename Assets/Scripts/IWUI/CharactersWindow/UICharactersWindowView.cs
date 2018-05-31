@@ -12,13 +12,16 @@ public class UICharactersWindowView : IWUIWindowView
     [SerializeField] private RectTransform body;
     [SerializeField] private UICharactersFlyingItem flyItem;
 
+    private const int open = 80;
+    private const int close = -150;
+
     private bool isOpen;
     
     public override void OnViewShow()
     {
         base.OnViewShow();
         
-        body.DOAnchorPosY(-690, 0f).SetId(body);
+        body.DOAnchorPosY(close, 0f).SetId(body);
 
         UIService.Get.OnShowWindowEvent += OnShowOthers;
         UIService.Get.OnCloseWindowEvent += OnCloseOthers;
@@ -38,7 +41,7 @@ public class UICharactersWindowView : IWUIWindowView
         {
             if (isOpen)
             {
-                body.DOAnchorPosY(-465, 0f).SetId(body);
+                body.DOAnchorPosY(open, 0f).SetId(body);
                 UpdateDecoration();
             }
             else
@@ -118,7 +121,7 @@ public class UICharactersWindowView : IWUIWindowView
         
         if(isOpen) Decoration();
         
-        body.DOAnchorPosY(isOpen ? -465 : -690, 0.3f).SetId(body).SetEase(Ease.OutBack)
+        body.DOAnchorPosY(isOpen ? open : close, 0.3f).SetId(body).SetEase(Ease.OutBack)
             .OnComplete(() =>
             {
                 if (isOpen == false)

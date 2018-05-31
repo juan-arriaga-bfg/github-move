@@ -93,6 +93,7 @@ public class CollectionDataManager : IDataLoader<CollectionDataManager>
 		if (item == null) return;
 		
 		CurrencyHellper.Purchase(resource);
+		BoardService.Current.GetBoardById(0).ProductionLogic.Update();
 
 		resources.Remove(item);
 		
