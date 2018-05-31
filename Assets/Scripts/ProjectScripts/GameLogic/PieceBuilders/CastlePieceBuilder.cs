@@ -1,4 +1,6 @@
-﻿public class CastlePieceBuilder : MulticellularPieceBuilder
+﻿using UnityEngine;
+
+public class CastlePieceBuilder : MulticellularPieceBuilder
 {
     public override Piece Build(int pieceType, BoardController context)
     {
@@ -18,7 +20,8 @@
             Capacity = def.SpawnCapacity,
             Filling = def.IsFilledInStart ? def.SpawnCapacity : 0,
             Amount =  def.SpawnAmount,
-            ShowTimer = true
+            ShowTimer = true,
+            TimerOffset = new Vector2(-0.5f, 2.8f)
         };
         
         var upgrade = new CastleUpgradeComponent();

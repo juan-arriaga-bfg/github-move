@@ -17,6 +17,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     private ViewDefinitionComponent viewDef;
     
     public TimerComponent Timer { get; private set; }
+    public Vector2 TimerOffset = Vector2.zero;
     
     private Piece pieceContext;
     
@@ -134,6 +135,8 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         var view = viewDef.AddView(ViewType.BoardTimer);
 
         view.Priority = -1;
+        view.Ofset = TimerOffset;
+        view.SetOfset();
         view.Change(true);
     }
     
