@@ -142,6 +142,8 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
     
     public void Change()
     {
+        if (IsActive == false) return;
+        
         var prod = viewDef.AddView(ViewType.Production);
         UIBoardView warning;
         

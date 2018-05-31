@@ -93,6 +93,13 @@ public class ProductionView : UIBoardView, IBoardEventListener
 		if (code != GameEventsCodes.ClosePieceMenu || context is ProductionComponent && ((ProductionComponent) context) == production) return;
 		
 		Priority = defaultPriority;
+
+		if (production.State == ProductionState.InProgress)
+		{
+			Change(false);
+			return;
+		}
+		
 		production.Change();
 	}
 }
