@@ -14,12 +14,10 @@ public class PiceLabelView : UIBoardView
         base.Init(piece);
 
         Priority = defaultPriority = -1;
+
+        var uid = PieceType.Parse(piece.PieceType);
         
-        var def = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(piece.PieceType);
-
-        if (def == null) return;
-
-        label.Text = string.Format("{0} Level {1}", def.Uid.Substring(0, def.Uid.Length - 1), def.CurrentLevel());
+        label.Text = string.Format("{0} Level {1}", uid.Substring(0, uid.Length - 1), uid.Substring(uid.Length - 1, 1));
         Change(true);
     }
 }
