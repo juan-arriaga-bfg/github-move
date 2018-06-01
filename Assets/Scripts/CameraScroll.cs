@@ -6,11 +6,14 @@ public class CameraScroll : MonoBehaviour
     [SerializeField] private CameraManipulator cameraManipulator;
     
     private int border;
-    private float speed = 40f;
+    private float speed = 60f;
+    
+    private Vector2 half;
 
     private void Awake()
     {
         border = (int)(200 * (Screen.height / 1080f));
+        half = new Vector2(Screen.width, Screen.height) * 0.5f;
     }
 
     private void LateUpdate()
@@ -18,32 +21,46 @@ public class CameraScroll : MonoBehaviour
         if (cameraManipulator.CameraMove.IsLocked == false) return;
         
         var fingers = LeanTouch.GetFingers(true, 1);
-         
+        
         if(fingers == null) return;
         
         var finger = fingers[0];
-        var currentSpeed = speed * 0.5f;
+        var speedFactorX = 1f;
+        var speedFactorY = 1f;
         
-        var factor = LeanTouch.GetDampenFactor(speed, Time.deltaTime);
-        var next = Vector3.zero;
-        
+        var ignoreX = false;
+        var ignoreY = false;
+
         if (finger.ScreenPosition.x < border)
         {
-            next += Vector3.left;
+            speedFactorX = 1 - Mathf.Clamp01(finger.ScreenPosition.x / border);
         }
         else if (finger.ScreenPosition.x > Screen.width - border)
         {
-            next += Vector3.right;
+            speedFactorX = 1 - Mathf.Clamp01((Screen.width - finger.ScreenPosition.x) / border);
         }
-
+        else
+        {
+            ignoreX = true;
+        }
+        
         if (finger.ScreenPosition.y < border)
         {
-            next += Vector3.down;
+            speedFactorY = 1 - Mathf.Clamp01(finger.ScreenPosition.y / border);
         }
         else if (finger.ScreenPosition.y > Screen.height - border)
         {
-            next += Vector3.up;
+            speedFactorY = 1 - Mathf.Clamp01((Screen.height - finger.ScreenPosition.y) / border);
         }
+        else
+        {
+            ignoreY = true;
+        }
+        
+        if (ignoreX && ignoreY) return;
+        
+        Vector3 next = (finger.ScreenPosition - half).normalized;
+        var factor = LeanTouch.GetDampenFactor(speed * Mathf.Min(speedFactorX, speedFactorY), Time.deltaTime);
         
         cameraManipulator.MoveTo(Vector3.Lerp(cameraManipulator.CameraPosition, cameraManipulator.CameraPosition + next, factor), false);
     }
