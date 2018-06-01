@@ -17,8 +17,8 @@
     "Conditions" :
     [
       {
-      "$type": "QuestConditionLevel, Assembly-CSharp",
-      "UserLevel" : 1
+        "$type": "QuestConditionLevel, Assembly-CSharp",
+        "UserLevel" : 1
       }
     ]
   },
@@ -49,7 +49,7 @@
       }
     ]
   },
-    {
+  {
     "Uid" : 3,
     "Message" : "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks.",
     "Price" :
@@ -86,7 +86,7 @@
     },
     "Rewards" :
     [
-            {
+      {
         "Currency" : "Coin1",
         "Amount" : 5
       },
@@ -98,12 +98,11 @@
     "Conditions" :
     [
       {
-      "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-      "OtherUid" : 2
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid" : 2
       }
     ]
   },
-
   {
     "Uid" : 5,
     "Message" : "Peasant women are asked to give them little wool for knitting",
@@ -163,8 +162,8 @@
     "Message" : "The merchant is ready to pay good for a batch of quality cloth",
     "Price" :
     {
-      "Currency" : "PieceB4",
-      "Amount" : 3
+      "Currency" : "PieceB5",
+      "Amount" : 1
     },
     "Rewards" :
     [
@@ -185,7 +184,7 @@
       }
     ]
   },
-    {
+  {
     "Uid" : 8,
     "Message" : "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks.",
     "Price" :
@@ -212,7 +211,7 @@
       }
     ]
   },
-      {
+  {
     "Uid" : 9,
     "Message" : "Now we can clean up the area from obstacles and build Houses!",
     "Price" :
@@ -239,12 +238,12 @@
       }
     ]
   },
-      {
+  {
     "Uid" : 10,
     "Message" : "The cook promises to bake a pie if you give him some apples",
     "Price" :
     {
-      "Currency" : "PieceB6",
+      "Currency" : "PieceA7",
       "Amount" : 1
     },
     "Rewards" :
@@ -271,7 +270,7 @@
     "Message" : "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks.",
     "Price" :
     {
-      "Currency" : "PieceA7",
+      "Currency" : "PieceC6",
       "Amount" : 1
     },
     "Rewards" :

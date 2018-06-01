@@ -105,8 +105,10 @@ public class BoardManipulatorComponent : ECSEntity,
         if (selectedView == null)
         {
             context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
-            return false;
+            return true;
         }
+
+        if (selectedView is ResourceView) return true;
 
         if (selectedView is PieceBoardElementView)
         {
