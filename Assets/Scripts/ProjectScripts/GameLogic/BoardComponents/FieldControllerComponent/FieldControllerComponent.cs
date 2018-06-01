@@ -19,15 +19,15 @@ public class FieldControllerComponent : IECSComponent
         var fieldDef = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
 
 #if UNITY_EDITOR
-        CreateDebug();
+//        CreateDebug();
 #endif
         
-        if (fieldDef.Pieces == null)
+//        if (fieldDef.Pieces == null)
         {
-            StartField();
-//            TestField();
-            CreateFog();
-            CreateTown();
+//            StartField();
+            TestField();
+//            CreateFog();
+//            CreateTown();
             return;
         }
         
@@ -179,56 +179,6 @@ public class FieldControllerComponent : IECSComponent
 
     private void TestField()
     {
-        context.ActionExecutor.AddAction(new FillBoardAction
-        {
-            Piece = PieceType.F4.Id,
-            Positions = new List<BoardPosition>
-            {
-                new BoardPosition(6, 10),
-                new BoardPosition(6, 11),
-                new BoardPosition(6, 12),
-                new BoardPosition(6, 13),
-            }
-        });
-        
-        context.ActionExecutor.AddAction(new FillBoardAction
-        {
-            Piece = PieceType.G4.Id,
-            Positions = new List<BoardPosition>
-            {
-                new BoardPosition(8, 10),
-                new BoardPosition(8, 11),
-                new BoardPosition(8, 12),
-                new BoardPosition(8, 13),
-            }
-        });
-        
-        context.ActionExecutor.AddAction(new FillBoardAction
-        {
-            Piece = PieceType.H4.Id,
-            Positions = new List<BoardPosition>
-            {
-                new BoardPosition(10, 10),
-                new BoardPosition(10, 11),
-                new BoardPosition(10, 12),
-                new BoardPosition(10, 13),
-            }
-        });
-        
-        context.ActionExecutor.AddAction(new FillBoardAction
-        {
-            Piece = PieceType.I4.Id,
-            Positions = new List<BoardPosition>
-            {
-                new BoardPosition(12, 10),
-                new BoardPosition(12, 11),
-                new BoardPosition(12, 12),
-                new BoardPosition(12, 13),
-            }
-        });
-        
-        return;
-        
         AddPieces(new BoardPosition(6, 10), PieceType.O1.Id, PieceType.O5.Id);
         AddPieces(new BoardPosition(8, 10), PieceType.OX1.Id, PieceType.OX5.Id);
         
