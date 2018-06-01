@@ -40,12 +40,8 @@ public class ResourceView : BoardElementView
 
         isCollect = true;
         
-        const float duration = 0.3f;
-        
         DOTween.Kill(body);
         DOTween.Kill(AnimationId);
-        
-        DestroyOnBoard(duration);
         
         if (GameDataService.Current.CollectionManager.Contains(resource.Currency))
         {
@@ -56,7 +52,8 @@ public class ResourceView : BoardElementView
             
             UIService.Get.ShowWindow(UIWindowType.CollectionWindow);
             
-            body.DOScale(Vector3.zero, duration).SetId(body).SetEase(Ease.OutBack);
+            body.DOScale(Vector3.zero, 0.3f).SetId(body).SetEase(Ease.OutBack);
+            DestroyOnBoard(0.3f);
             return;
         }
 
@@ -74,9 +71,14 @@ public class ResourceView : BoardElementView
         }
         
         var target = BoardService.Current.GetBoardById(0).BoardDef.GetPiecePosition(position.X, position.Y);
+        var duration = Vector3.Distance(body.position, target) / 20f;
         
-        body.DOScale(Vector3.one * 0.5f, duration).SetId(body).SetEase(Ease.OutBack);
-        body.DOMove(target, duration).SetId(body);
+        var sequence = DOTween.Sequence().SetId(body);
+        sequence.Insert(0, body.DOJump(target, 1, 1, duration).SetEase(Ease.Linear));
+        sequence.Insert(0, body.DOScale(Vector3.one * 1.3f, duration*0.5f));
+        sequence.Insert(duration*0.5f, body.DOScale(Vector3.one * 0.2f, duration*0.5f));
+        
+        DestroyOnBoard(duration);
         
         GameDataService.Current.CollectionManager.CollectResourceFromBoard(pos, resource);
     }
