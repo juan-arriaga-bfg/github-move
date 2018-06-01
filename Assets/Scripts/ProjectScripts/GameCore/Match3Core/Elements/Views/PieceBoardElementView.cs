@@ -48,12 +48,8 @@ public class PieceBoardElementView : BoardElementView
         }
     }
     
-    public void OnDragStart(BoardPosition boardPos, Vector2 worldPos)
+    public virtual void OnDragStart(BoardPosition boardPos, Vector2 worldPos)
     {
-//        if (selectionView == null) return;
-//        
-//        selectionView.gameObject.SetActive(true);
-
         DOTween.Kill(selectedAnimationId);
         var sequence = DOTween.Sequence().SetId(selectedAnimationId);
         sequence.Append(CachedTransform.DOScale(new Vector3(1.1f, 0.9f, 1f), 0.1f));
@@ -61,7 +57,7 @@ public class PieceBoardElementView : BoardElementView
         sequence.Append(CachedTransform.DOScale(new Vector3(1f, 1f, 1f), 0.1f));
     }
 
-    public void OnDragEnd(BoardPosition boardPos, Vector2 worldPos)
+    public virtual void OnDragEnd(BoardPosition boardPos, Vector2 worldPos)
     {
         if (selectionView == null) return;
         
@@ -70,7 +66,6 @@ public class PieceBoardElementView : BoardElementView
 
     public void OnTap(BoardPosition boardPos, Vector2 worldPos)
     {
-
     }
 
     public virtual void UpdateView()

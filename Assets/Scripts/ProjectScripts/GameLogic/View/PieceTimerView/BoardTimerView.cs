@@ -14,8 +14,10 @@ public class BoardTimerView : UIBoardView
     
     public override void Init(Piece piece)
     {
-        Ofset = multiSize == 1 ? base.Ofset : new Vector3(0, 1.3f);
         base.Init(piece);
+        
+        Ofset = multiSize == 1 ? Ofset : new Vector3(0, 1.3f);
+        SetOfset();
 
         Priority = defaultPriority = 10;
         timer = piece.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);

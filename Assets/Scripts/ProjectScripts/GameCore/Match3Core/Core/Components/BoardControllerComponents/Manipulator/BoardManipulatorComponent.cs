@@ -148,7 +148,6 @@ public class BoardManipulatorComponent : ECSEntity,
             else
             {
                 context.ProductionLogic.Check(pieceView.Piece.PieceType);
-                CameraMove();
             }
             
             prevDragPos = pos;
@@ -309,10 +308,5 @@ public class BoardManipulatorComponent : ECSEntity,
         }
 
         return selectedBoardElement;
-    }
-
-    private void CameraMove()
-    {
-//        cameraManipulator.CameraMove.UnLock(this);
     }
 }

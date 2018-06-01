@@ -54,6 +54,10 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
             f.Z = t.Z += Layer + view.Layer;
             
             thisContext.Context.RendererContext.MoveElement(f, t);
+            
+            if(view.IsShow == false) continue;
+            
+            view.SetOfset();
         }
     }
     

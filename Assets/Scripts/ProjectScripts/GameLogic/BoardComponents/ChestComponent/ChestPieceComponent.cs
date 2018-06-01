@@ -60,6 +60,17 @@
         
         view.Change(true);
     }
+
+    public void TimerViewChange(bool isShow)
+    {
+        if(viewDef == null || timer.IsStarted == false) return;
+
+        timer.IsPaused = !isShow;
+        
+        var view = viewDef.AddView(ViewType.BoardTimer);
+        
+        view.Change(isShow);
+    }
     
     private void OnComplete()
     {

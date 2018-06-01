@@ -35,6 +35,18 @@ public class ChestPieceView : PieceBoardElementView
         base.ResetViewOnDestroy();
     }
 
+    public override void OnDragStart(BoardPosition boardPos, Vector2 worldPos)
+    {
+        base.OnDragStart(boardPos, worldPos);
+        chestComponent.TimerViewChange(false);
+    }
+
+    public override void OnDragEnd(BoardPosition boardPos, Vector2 worldPos)
+    {
+        base.OnDragEnd(boardPos, worldPos);
+        chestComponent.TimerViewChange(true);
+    }
+
     public override void UpdateView()
     {
         if(chestComponent == null || chestComponent.Chest == null) return;

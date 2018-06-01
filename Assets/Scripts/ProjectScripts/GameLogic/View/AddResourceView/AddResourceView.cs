@@ -46,7 +46,7 @@ public class AddResourceView : BoardElementView
 		DOTween.Kill(animationUid);
 		
 		icon.color = Color.white;
-
+		
 		var tColor = amountLabel.TextLabel.color;
 		
 		amountLabel.TextLabel.color = new Color(tColor.r, tColor.g, tColor.b, 1);
@@ -54,12 +54,7 @@ public class AddResourceView : BoardElementView
 
 	public static void Show(BoardPosition position, CurrencyPair resource)
 	{
-		if (resource == null)
-		{
-			Debug.LogError("!!!!!!!!!!");
-			
-			return;
-		}
+		if (resource == null) return;
 		
 		var board = BoardService.Current.GetBoardById(0);
 		var view = board.RendererContext.CreateBoardElementAt<AddResourceView>(R.AddResourceView, position);
