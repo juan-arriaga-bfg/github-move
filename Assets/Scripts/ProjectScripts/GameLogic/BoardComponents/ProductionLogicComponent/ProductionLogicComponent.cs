@@ -18,14 +18,19 @@ public class ProductionLogicComponent : IECSComponent
     }
 
     private BoardController context;
-
+    
     public Action OnUpdate;
+    
+    public List<ProductionComponent> Productions
+    {
+        get { return select ?? productions; }
+    }
     
     public void OnRegisterEntity(ECSEntity entity)
     {
         context = entity as BoardController;
     }
-
+    
     public void OnUnRegisterEntity(ECSEntity entity)
     {
     }
@@ -68,9 +73,11 @@ public class ProductionLogicComponent : IECSComponent
         {
             item.Hide();
         }
-
+        
+        select = null;
+        
         var piece = context.BoardLogic.GetPieceAt(position);
-
+        
         if (piece == null) return false;
         
         var production = piece.GetComponent<ProductionComponent>(ProductionComponent.ComponentGuid);

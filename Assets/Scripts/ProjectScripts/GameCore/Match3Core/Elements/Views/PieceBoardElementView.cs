@@ -55,6 +55,10 @@ public class PieceBoardElementView : BoardElementView
         sequence.Append(CachedTransform.DOScale(new Vector3(1.1f, 0.9f, 1f), 0.1f));
         sequence.Append(CachedTransform.DOScale(new Vector3(0.9f, 1.1f, 1f), 0.1f));
         sequence.Append(CachedTransform.DOScale(new Vector3(1f, 1f, 1f), 0.1f));
+
+        var window = UIService.Get.GetShowedWindowByName(UIWindowType.ProductionWindow).CurrentView as UIProductionWindowView;
+
+//        window.SetPieceToUI(CachedTransform);
     }
 
     public virtual void OnDragEnd(BoardPosition boardPos, Vector2 worldPos)

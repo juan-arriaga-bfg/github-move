@@ -7,13 +7,13 @@ public class ProductionViewItem : MonoBehaviour
     [SerializeField] private NSText amount;
     [SerializeField] private GameObject check;
     
-    public void Init(int piece, int current, int target)
+    public void Init(int piece, int current, int target, int size = 40)
     {
         var isComplete = current == target;
         
         icon.sprite = IconService.Current.GetSpriteById(PieceType.Parse(piece));
         
-        amount.Text = string.Format("<color=#{0}><size=40>{1}</size></color>/{2}", isComplete ? "FFFFFF" : "FE4704", current, target);
+        amount.Text = string.Format("<color=#{0}><size={1}>{2}</size></color>/{3}", isComplete ? "FFFFFF" : "FE4704", size, current, target);
         
         amount.gameObject.SetActive(!isComplete);
         check.SetActive(isComplete);

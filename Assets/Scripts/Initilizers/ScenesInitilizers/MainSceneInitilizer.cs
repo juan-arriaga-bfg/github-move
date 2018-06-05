@@ -29,6 +29,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.ErrorWindow,
             UIWindowType.StorageWindow,
             UIWindowType.MarketWindow,
+            UIWindowType.ProductionWindow,
         });
 
         // on cache complete
@@ -43,6 +44,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             var model = UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow);
             UIService.Get.ShowWindow(UIWindowType.MainWindow);
             UIService.Get.ShowWindow(UIWindowType.CharactersWindow);
+            UIService.Get.ShowWindow(UIWindowType.ProductionWindow);
             
             if (onComplete != null)
             {

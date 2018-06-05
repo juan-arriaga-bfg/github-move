@@ -27,4 +27,6 @@
     public const string StorageWindow = "StorageWindow";
     
     public const string MarketWindow = "MarketWindow";
+
+    public const string ProductionWindow = "ProductionWindow";
 }
