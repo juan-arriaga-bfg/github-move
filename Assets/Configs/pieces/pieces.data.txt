@@ -455,11 +455,6 @@
   },
   {
     "Uid": "F4",
-    "SpawnResources" :
-    {
-      "Currency" : "Resource1",
-      "Amount" : 1
-    },
     "CreateRewards":
     [
       {
@@ -469,6 +464,20 @@
       {
         "Currency": "Coins",
         "Amount": 10
+      }
+    ]
+  },
+  {
+    "Uid": "F5",
+    "CreateRewards":
+    [
+      {
+        "Currency": "Energy",
+        "Amount": 75
+      },
+      {
+        "Currency": "Coins",
+        "Amount": 15
       }
     ]
   },
@@ -488,7 +497,7 @@
   },
   {
     "Uid": "G3",
-	 "Reproduction" :
+    "Reproduction" :
     {
       "Currency": "G1",
       "Amount": 1
@@ -507,11 +516,6 @@
   },
   {
     "Uid": "G4",
-    "SpawnResources" :
-    {
-      "Currency" : "Resource2",
-      "Amount" : 1
-    },
     "CreateRewards":
     [
       {
@@ -601,10 +605,10 @@
   },
   {
     "Uid": "I4",
-    "SpawnResources" :
+    "Reproduction" :
     {
-      "Currency" : "Resource4",
-      "Amount" : 1
+      "Currency": "I1",
+      "Amount": 1
     },
     "CreateRewards":
     [
@@ -619,13 +623,27 @@
     ]
   },
   {
+    "Uid": "I5",
+    "CreateRewards":
+    [
+      {
+        "Currency": "Energy",
+        "Amount": 75
+      },
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
+  },
+  {
     "Uid": "Chest2",
     "CreateRewards":
     [
       {
         "Currency": "Energy",
         "Amount": 1
-      },
+      }
     ]
   },
   {

@@ -62,6 +62,7 @@ public static partial class PieceType
     public static readonly PieceTypeDef F2 = new PieceTypeDef{Id = 601, Abbreviations = new List<string>{ "F2", "PieceF2" }};
     public static readonly PieceTypeDef F3 = new PieceTypeDef{Id = 602, Abbreviations = new List<string>{ "F3", "PieceF3" }};
     public static readonly PieceTypeDef F4 = new PieceTypeDef{Id = 603, Abbreviations = new List<string>{ "F4", "PieceF4" }};
+    public static readonly PieceTypeDef F5 = new PieceTypeDef{Id = 604, Abbreviations = new List<string>{ "F5", "PieceF5" }};
     
     public static readonly PieceTypeDef G1 = new PieceTypeDef{Id = 700, Abbreviations = new List<string>{ "G1", "PieceG1" }};
     public static readonly PieceTypeDef G2 = new PieceTypeDef{Id = 701, Abbreviations = new List<string>{ "G2", "PieceG2" }};
@@ -77,6 +78,7 @@ public static partial class PieceType
     public static readonly PieceTypeDef I2 = new PieceTypeDef{Id = 901, Abbreviations = new List<string>{ "I2", "PieceI2" }};
     public static readonly PieceTypeDef I3 = new PieceTypeDef{Id = 902, Abbreviations = new List<string>{ "I3", "PieceI3" }};
     public static readonly PieceTypeDef I4 = new PieceTypeDef{Id = 903, Abbreviations = new List<string>{ "I4", "PieceI4" }};
+    public static readonly PieceTypeDef I5 = new PieceTypeDef{Id = 904, Abbreviations = new List<string>{ "I5", "PieceI5" }};
     
     public static readonly PieceTypeDef O1 = new PieceTypeDef{Id = 1000, Abbreviations = new List<string>{ "O1" }};
     public static readonly PieceTypeDef O2 = new PieceTypeDef{Id = 1001, Abbreviations = new List<string>{ "O2" }};

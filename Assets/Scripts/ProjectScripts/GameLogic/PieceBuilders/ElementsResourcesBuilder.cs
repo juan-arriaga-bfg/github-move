@@ -76,6 +76,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.F2.Id, R.F2Piece);
         dict.Add(PieceType.F3.Id, R.F3Piece);
         dict.Add(PieceType.F4.Id, R.F4Piece);
+        dict.Add(PieceType.F5.Id, R.F5Piece);
         
         dict.Add(PieceType.G1.Id, R.G1Piece);
         dict.Add(PieceType.G2.Id, R.G2Piece);
@@ -91,6 +92,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.I2.Id, R.I2Piece);
         dict.Add(PieceType.I3.Id, R.I3Piece);
         dict.Add(PieceType.I4.Id, R.I4Piece);
+        dict.Add(PieceType.I5.Id, R.I5Piece);
         
         dict.Add(PieceType.Chest1.Id, R.Chest1Piece);
         dict.Add(PieceType.Chest2.Id, R.Chest2Piece);

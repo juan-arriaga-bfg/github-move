@@ -162,4 +162,6 @@ public class R
      public const string Factory8Piece = "Factory8Piece";
      public const string Factory9Piece = "Factory9Piece";
      public const string ProductionWarningView = "ProductionWarningView";
+     public const string I5Piece = "I5Piece";
+     public const string F5Piece = "F5Piece";
 }
