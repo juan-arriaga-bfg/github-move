@@ -80,27 +80,33 @@ public static partial class PieceType
     public static readonly PieceTypeDef I4 = new PieceTypeDef{Id = 903, Abbreviations = new List<string>{ "I4", "PieceI4" }};
     public static readonly PieceTypeDef I5 = new PieceTypeDef{Id = 904, Abbreviations = new List<string>{ "I5", "PieceI5" }};
     
-    public static readonly PieceTypeDef O1 = new PieceTypeDef{Id = 1000, Abbreviations = new List<string>{ "O1" }};
-    public static readonly PieceTypeDef O2 = new PieceTypeDef{Id = 1001, Abbreviations = new List<string>{ "O2" }};
-    public static readonly PieceTypeDef O3 = new PieceTypeDef{Id = 1002, Abbreviations = new List<string>{ "O3" }};
-    public static readonly PieceTypeDef O4 = new PieceTypeDef{Id = 1003, Abbreviations = new List<string>{ "O4" }};
-    public static readonly PieceTypeDef O5 = new PieceTypeDef{Id = 1004, Abbreviations = new List<string>{ "O5" }};
+    public static readonly PieceTypeDef J1 = new PieceTypeDef{Id = 1000, Abbreviations = new List<string>{ "J1", "PieceJ1" }};
+    public static readonly PieceTypeDef J2 = new PieceTypeDef{Id = 1001, Abbreviations = new List<string>{ "J2", "PieceJ2" }};
+    public static readonly PieceTypeDef J3 = new PieceTypeDef{Id = 1002, Abbreviations = new List<string>{ "J3", "PieceJ3" }};
+    public static readonly PieceTypeDef J4 = new PieceTypeDef{Id = 1003, Abbreviations = new List<string>{ "J4", "PieceJ4" }};
+    public static readonly PieceTypeDef J5 = new PieceTypeDef{Id = 1004, Abbreviations = new List<string>{ "J5", "PieceJ5" }};
     
-    public static readonly PieceTypeDef OX1 = new PieceTypeDef{Id = 1100, Abbreviations = new List<string>{ "OX1" }};
-    public static readonly PieceTypeDef OX2 = new PieceTypeDef{Id = 1101, Abbreviations = new List<string>{ "OX2" }};
-    public static readonly PieceTypeDef OX3 = new PieceTypeDef{Id = 1102, Abbreviations = new List<string>{ "OX3" }};
-    public static readonly PieceTypeDef OX4 = new PieceTypeDef{Id = 1103, Abbreviations = new List<string>{ "OX4" }};
-    public static readonly PieceTypeDef OX5 = new PieceTypeDef{Id = 1104, Abbreviations = new List<string>{ "OX5" }};
+    public static readonly PieceTypeDef O1 = new PieceTypeDef{Id = 5000, Abbreviations = new List<string>{ "O1" }};
+    public static readonly PieceTypeDef O2 = new PieceTypeDef{Id = 5001, Abbreviations = new List<string>{ "O2" }};
+    public static readonly PieceTypeDef O3 = new PieceTypeDef{Id = 5002, Abbreviations = new List<string>{ "O3" }};
+    public static readonly PieceTypeDef O4 = new PieceTypeDef{Id = 5003, Abbreviations = new List<string>{ "O4" }};
+    public static readonly PieceTypeDef O5 = new PieceTypeDef{Id = 5004, Abbreviations = new List<string>{ "O5" }};
     
-    public static readonly PieceTypeDef Fog = new PieceTypeDef{Id = 1201, Abbreviations = new List<string>{ "Fog" }};
+    public static readonly PieceTypeDef OX1 = new PieceTypeDef{Id = 5100, Abbreviations = new List<string>{ "OX1" }};
+    public static readonly PieceTypeDef OX2 = new PieceTypeDef{Id = 5101, Abbreviations = new List<string>{ "OX2" }};
+    public static readonly PieceTypeDef OX3 = new PieceTypeDef{Id = 5102, Abbreviations = new List<string>{ "OX3" }};
+    public static readonly PieceTypeDef OX4 = new PieceTypeDef{Id = 5103, Abbreviations = new List<string>{ "OX4" }};
+    public static readonly PieceTypeDef OX5 = new PieceTypeDef{Id = 5104, Abbreviations = new List<string>{ "OX5" }};
     
-    public static readonly PieceTypeDef King = new PieceTypeDef{Id = 1301, Abbreviations = new List<string>{ "King" }};
+    public static readonly PieceTypeDef Fog = new PieceTypeDef{Id = 5201, Abbreviations = new List<string>{ "Fog" }};
     
-    public static readonly PieceTypeDef Coin1 = new PieceTypeDef{Id = 1400, Abbreviations = new List<string>{ "Coin1" }};
-    public static readonly PieceTypeDef Coin2 = new PieceTypeDef{Id = 1401, Abbreviations = new List<string>{ "Coin2" }};
-    public static readonly PieceTypeDef Coin3 = new PieceTypeDef{Id = 1402, Abbreviations = new List<string>{ "Coin3" }}; 
-    public static readonly PieceTypeDef Coin4 = new PieceTypeDef{Id = 1403, Abbreviations = new List<string>{ "Coin4" }};
-    public static readonly PieceTypeDef Coin5 = new PieceTypeDef{Id = 1404, Abbreviations = new List<string>{ "Coin5" }};
+    public static readonly PieceTypeDef King = new PieceTypeDef{Id = 5301, Abbreviations = new List<string>{ "King" }};
+    
+    public static readonly PieceTypeDef Coin1 = new PieceTypeDef{Id = 5400, Abbreviations = new List<string>{ "Coin1" }};
+    public static readonly PieceTypeDef Coin2 = new PieceTypeDef{Id = 5401, Abbreviations = new List<string>{ "Coin2" }};
+    public static readonly PieceTypeDef Coin3 = new PieceTypeDef{Id = 5402, Abbreviations = new List<string>{ "Coin3" }}; 
+    public static readonly PieceTypeDef Coin4 = new PieceTypeDef{Id = 5403, Abbreviations = new List<string>{ "Coin4" }};
+    public static readonly PieceTypeDef Coin5 = new PieceTypeDef{Id = 5404, Abbreviations = new List<string>{ "Coin5" }};
     
     public static readonly PieceTypeDef Mine1 = new PieceTypeDef{Id = 10000, Abbreviations = new List<string>{ "Mine1" }};
     public static readonly PieceTypeDef Mine2 = new PieceTypeDef{Id = 10001, Abbreviations = new List<string>{ "Mine2" }};

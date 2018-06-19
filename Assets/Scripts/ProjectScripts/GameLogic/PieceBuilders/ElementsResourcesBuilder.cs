@@ -94,6 +94,12 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.I4.Id, R.I4Piece);
         dict.Add(PieceType.I5.Id, R.I5Piece);
         
+        dict.Add(PieceType.J1.Id, R.J1Piece);
+        dict.Add(PieceType.J2.Id, R.J2Piece);
+        dict.Add(PieceType.J3.Id, R.J3Piece);
+        dict.Add(PieceType.J4.Id, R.J4Piece);
+        dict.Add(PieceType.J5.Id, R.J5Piece);
+        
         dict.Add(PieceType.Chest1.Id, R.Chest1Piece);
         dict.Add(PieceType.Chest2.Id, R.Chest2Piece);
         dict.Add(PieceType.Chest3.Id, R.Chest3Piece);

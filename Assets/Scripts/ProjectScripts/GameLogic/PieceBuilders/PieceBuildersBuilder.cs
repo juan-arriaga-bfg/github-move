@@ -29,6 +29,7 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.G1.Id, PieceType.G4.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.H1.Id, PieceType.H4.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.I1.Id, PieceType.I5.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.J1.Id, PieceType.J5.Id, dict);
         
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Coin1.Id, PieceType.Coin5.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest9.Id, dict);

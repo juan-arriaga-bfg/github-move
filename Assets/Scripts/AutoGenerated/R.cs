@@ -164,4 +164,9 @@ public class R
      public const string ProductionWarningView = "ProductionWarningView";
      public const string I5Piece = "I5Piece";
      public const string F5Piece = "F5Piece";
+     public const string J1Piece = "J1Piece";
+     public const string J2Piece = "J2Piece";
+     public const string J3Piece = "J3Piece";
+     public const string J4Piece = "J4Piece";
+     public const string J5Piece = "J5Piece";
 }
