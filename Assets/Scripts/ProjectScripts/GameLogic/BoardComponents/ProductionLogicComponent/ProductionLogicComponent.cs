@@ -61,6 +61,8 @@ public class ProductionLogicComponent : IECSComponent
             
             production.Hide();
         }
+
+        UIService.Get.GetShowedView<UIProductionWindowView>(UIWindowType.ProductionWindow).Change(select.Count > 0);
     }
 
     public bool Hide(int resource, BoardPosition position)
@@ -75,6 +77,8 @@ public class ProductionLogicComponent : IECSComponent
         }
         
         select = null;
+        
+        UIService.Get.GetShowedView<UIProductionWindowView>(UIWindowType.ProductionWindow).Change(false);
         
         var piece = context.BoardLogic.GetPieceAt(position);
         

@@ -169,4 +169,8 @@ public class R
      public const string J3Piece = "J3Piece";
      public const string J4Piece = "J4Piece";
      public const string J5Piece = "J5Piece";
+     public const string RiverAngleBottom = "RiverAngleBottom";
+     public const string RiverAngleLeft = "RiverAngleLeft";
+     public const string RiverAngleRight = "RiverAngleRight";
+     public const string RiverAngleTop = "RiverAngleTop";
 }

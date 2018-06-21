@@ -64,9 +64,14 @@ public class UIProductionWindowView : IWUIWindowView
     
     public void OnClick()
     {
+        Change(!isOpen);
+    }
+
+    public void Change(bool isShow)
+    {
         DOTween.Kill(body, true);
         
-        isOpen = !isOpen;
+        isOpen = isShow;
         
         if(isOpen) UpdateList();
 
