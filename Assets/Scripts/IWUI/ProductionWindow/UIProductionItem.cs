@@ -22,6 +22,7 @@ public class UIProductionItem : MonoBehaviour
         
         icon.sprite = IconService.Current.GetSpriteById(production.Target);
         button.SetActive(production.State == ProductionState.Full);
+        shine.SetActive(production.State == ProductionState.Full);
         
         while (items.Count > production.Storage.Count)
         {
@@ -63,6 +64,12 @@ public class UIProductionItem : MonoBehaviour
 
     public void OnClick()
     {
+        if (production.State == ProductionState.Completed)
+        {
+            production.CompleteViaUI();
+            return;
+        }
+        
         if(production.State != ProductionState.Full) return;
         
         production.Change();

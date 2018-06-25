@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public enum ProductionState
@@ -230,6 +231,12 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
     {
         timer.Stop();
         timer.OnComplete();
+    }
+
+    public void CompleteViaUI()
+    {
+        var position = context.Context.BoardDef.GetSectorCenterWorldPosition(context.CachedPosition.X, context.CachedPosition.Y, context.CachedPosition.Z);
+        context.Context.Manipulator.CameraManipulator.ZoomTo(0.6f, position, true, 1f, Ease.InOutSine, Complete);
     }
 
     public void Complete()

@@ -19,15 +19,15 @@ public class FieldControllerComponent : IECSComponent
         var fieldDef = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
 
 #if UNITY_EDITOR
-//        CreateDebug();
+        CreateDebug();
 #endif
         
-//        if (fieldDef.Pieces == null)
+        if (fieldDef.Pieces == null)
         {
-//            StartField();
-            TestField();
-//            CreateFog();
-//            CreateTown();
+            StartField();
+//            TestField();
+            CreateFog();
+            CreateTown();
             return;
         }
         
