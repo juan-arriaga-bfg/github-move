@@ -9,11 +9,13 @@ public class CameraScroll : MonoBehaviour
     private float speed = 60f;
     
     private Vector2 half;
-
+    private LayerMask defaultMask;
+    
     private void Awake()
     {
         border = (int)(200 * (Screen.height / 1080f));
         half = new Vector2(Screen.width, Screen.height) * 0.5f;
+        defaultMask = LeanTouch.Instance.GuiLayers;
     }
 
     private void LateUpdate()
@@ -25,12 +27,15 @@ public class CameraScroll : MonoBehaviour
         if(fingers == null) return;
         
         var finger = fingers[0];
+        
+        if(LeanTouch.RaycastGui(finger.ScreenPosition, defaultMask).Count > 0) return;
+        
         var speedFactorX = 1f;
         var speedFactorY = 1f;
         
         var ignoreX = false;
         var ignoreY = false;
-
+        
         if (finger.ScreenPosition.x < border)
         {
             speedFactorX = 1 - Mathf.Clamp01(finger.ScreenPosition.x / border);

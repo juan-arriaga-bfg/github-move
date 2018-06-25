@@ -135,6 +135,11 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
         }
     }
 
+    public bool AddViaUI(int resource)
+    {
+        return context.Context.ProductionLogic.AddResource(resource, context.CachedPosition);
+    }
+    
     public bool IsShow()
     {
         return viewDef.AddView(ViewType.Production).IsShow;

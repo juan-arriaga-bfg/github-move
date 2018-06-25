@@ -77,28 +77,22 @@ public class UIProductionWindowView : IWUIWindowView
 
         body.DOAnchorPosX(isOpen ? open : close, 0.3f).SetId(body).SetEase(Ease.OutBack);
     }
-    
-    public void SetPieceToUI(Transform pieceView)
+
+    public bool Drop(int resource, Vector3 pos)
     {
-        var boardDef = BoardService.Current.GetBoardById(0).BoardDef;
-        var boardCamera = boardDef.ViewCamera;
+        var v = new Vector3[4];
+        body.GetWorldCorners(v);
         
-        var uiLayer = Controller.Window.Layers[0];
-        var uiCamera = uiLayer.ViewCamera;
+        var rect = new Rect(v[0], v[2]-v[0]);
         
-        // get screen position
-        var screenPos = boardCamera.WorldToScreenPoint(pieceView.position);
+        if(rect.Contains(pos) == false) return false;
         
-        // get world position in UI space
-        var worldUIPos = uiCamera.ScreenToWorldPoint(screenPos);
+        foreach (var item in items)
+        {
+            if(item.Check(resource, pos)) return true;
+        }
         
-        // set parent and position
-        pieceView.SetParent(transform);
-        pieceView.position = worldUIPos;
-        pieceView.localPosition = new Vector3(pieceView.localPosition.x, pieceView.localPosition.y, 0f);
-        
-        // set layer
-        pieceView.SetLayerRecursive(uiLayer.CurrentLayer);
+        return false;
     }
 }
 

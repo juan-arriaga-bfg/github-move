@@ -12,8 +12,14 @@ public class UIProductionItem : MonoBehaviour
 
     private List<ProductionViewItem> items = new List<ProductionViewItem>();
 
+    private RectTransform body;
+    private ProductionComponent production;
+
     public void Init(ProductionComponent production)
     {
+        this.production = production;
+        body = GetComponent<RectTransform>();
+        
         icon.sprite = IconService.Current.GetSpriteById(production.Target);
         button.SetActive(production.State == ProductionState.Full);
         
@@ -43,5 +49,23 @@ public class UIProductionItem : MonoBehaviour
         
         pattern.SetActive(false);
         group.spacing = items.Count == 2 ? 20 : 5;
+    }
+
+    public bool Check(int resource, Vector3 pos)
+    {
+        var v = new Vector3[4];
+        body.GetWorldCorners(v);
+        
+        var rect = new Rect(v[0], v[2]-v[0]);
+        
+        return rect.Contains(pos) && production.AddViaUI(resource);
+    }
+
+    public void OnClick()
+    {
+        if(production.State != ProductionState.Full) return;
+        
+        production.Change();
+        production.Start();
     }
 }
