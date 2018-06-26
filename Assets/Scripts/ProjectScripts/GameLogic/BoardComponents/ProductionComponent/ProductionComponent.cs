@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ public enum ProductionState
     Completed
 }
 
-public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardObserver
+public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardObserver, IComparable
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid { get { return ComponentGuid; } }
@@ -328,5 +329,22 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
     {
         timer.Stop();
         context.Context.ProductionLogic.Remove(this);
+    }
+
+    public int CompareTo(object obj)
+    {
+        var other = obj as ProductionComponent;
+        
+        if (other == null) return 1;
+
+        if (State == other.State && State == ProductionState.InProgress)
+        {
+            var thisCount = storage.Sum(pair => pair.Value.Value);
+            var otherCount = other.Storage.Sum(pair => pair.Value.Value);
+            
+            return thisCount.CompareTo(otherCount);
+        }
+
+        return State.CompareTo(other.State);
     }
 }

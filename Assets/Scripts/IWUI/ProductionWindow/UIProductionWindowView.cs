@@ -37,6 +37,8 @@ public class UIProductionWindowView : IWUIWindowView
 
         var productions = windowModel.Productions;
         
+        productions.Sort((a, b) => -a.CompareTo(b));
+        
         while (items.Count > productions.Count)
         {
             var i = items.Count - 1;
