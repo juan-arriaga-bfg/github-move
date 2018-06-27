@@ -99,7 +99,7 @@ public class BoardManipulatorComponent : ECSEntity,
 
             cameraManipulator.CameraMove.UnLock(this);
         }
-
+        
         var selectedView = GetSelectedBoardElementView();
         
         if (selectedView == null)
