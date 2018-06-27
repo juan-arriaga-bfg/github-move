@@ -139,7 +139,7 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
 
     public bool AddViaUI(int resource)
     {
-        return context.Context.ProductionLogic.AddResource(resource, context.CachedPosition);
+        return context.Context.ProductionLogic.Hide(resource, context.CachedPosition);
     }
     
     public bool IsShow()

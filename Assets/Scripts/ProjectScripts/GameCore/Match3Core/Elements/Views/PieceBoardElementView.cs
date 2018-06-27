@@ -90,7 +90,6 @@ public class PieceBoardElementView : BoardElementView
         isDragStart = false;
         
         ResetSate(boardPos);
-        Drop(worldPos);
         
         if (selectionView == null) return;
         
@@ -123,21 +122,23 @@ public class PieceBoardElementView : BoardElementView
         
         saveParent = null;
     }
-
+    
     public virtual void UpdateView()
     {
     }
 
-    private void Drop(Vector2 worldPos)
+    public bool Drop(Vector2 worldPos)
     {
         var window = UIService.Get.GetShowedWindowByName(UIWindowType.ProductionWindow);
         var uiCamera = window.Layers[0].ViewCamera;
         var screenPos = Piece.Context.BoardDef.ViewCamera.WorldToScreenPoint(worldPos);
         var view = window.CurrentView as UIProductionWindowView;
 
-        if (view.Drop(Piece.PieceType, uiCamera.ScreenToWorldPoint(screenPos)) == false) return;
+        if (view.Drop(Piece.PieceType, uiCamera.ScreenToWorldPoint(screenPos)) == false) return false;
         
         Piece.Context.RendererContext.RemoveElementAt(Piece.CachedPosition);
         Piece.Context.BoardLogic.RemovePieceAt(Piece.CachedPosition);
+
+        return true;
     }
 }

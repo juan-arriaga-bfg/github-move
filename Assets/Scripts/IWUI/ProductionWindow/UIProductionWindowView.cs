@@ -71,8 +71,6 @@ public class UIProductionWindowView : IWUIWindowView
 
     public void Change(bool isShow)
     {
-        if(isOpen == isShow  && isShow == false) return;
-        
         DOTween.Kill(body);
         
         isOpen = isShow;

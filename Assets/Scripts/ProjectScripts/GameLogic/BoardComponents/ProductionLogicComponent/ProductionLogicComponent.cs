@@ -77,13 +77,6 @@ public class ProductionLogicComponent : IECSComponent
         }
         
         select = null;
-
-        return AddResource(resource, position);
-    }
-
-    public bool AddResource(int resource, BoardPosition position)
-    {
-        UIService.Get.GetShowedView<UIProductionWindowView>(UIWindowType.ProductionWindow).Change(false);
         
         var piece = context.BoardLogic.GetPieceAt(position);
         

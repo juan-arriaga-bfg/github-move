@@ -5,9 +5,15 @@ using UnityEngine.UI;
 public class UIProductionItem : MonoBehaviour
 {
     [SerializeField] private Image icon;
+    [SerializeField] private NSText timerLabel;
+    
     [SerializeField] private GameObject shine;
     [SerializeField] private GameObject button;
+    [SerializeField] private GameObject buttonClaim;
+    [SerializeField] private GameObject timer;
+    [SerializeField] private GameObject targets;
     [SerializeField] private GameObject pattern;
+    
     [SerializeField] private HorizontalLayoutGroup group;
 
     private List<ProductionViewItem> items = new List<ProductionViewItem>();
@@ -15,14 +21,23 @@ public class UIProductionItem : MonoBehaviour
     private RectTransform body;
     private ProductionComponent production;
 
-    public void Init(ProductionComponent production)
+    public void Init(ProductionComponent data)
     {
-        this.production = production;
+        RemoveTimerAction();
+        
+        production = data;
         body = GetComponent<RectTransform>();
+        
+        production.Timer.OnExecute += UpdateTimer;
+        production.Timer.OnStart += Decoration;
+        production.Timer.OnComplete += Decoration;
         
         icon.sprite = IconService.Current.GetSpriteById(production.Target);
         button.SetActive(production.State == ProductionState.Full);
-        shine.SetActive(production.State == ProductionState.Full);
+        timer.SetActive(production.State == ProductionState.Waiting);
+        shine.SetActive(production.State == ProductionState.Completed);
+        buttonClaim.SetActive(production.State == ProductionState.Completed);
+        targets.SetActive(production.State != ProductionState.Waiting && production.State != ProductionState.Completed);
         
         while (items.Count > production.Storage.Count)
         {
@@ -52,20 +67,57 @@ public class UIProductionItem : MonoBehaviour
         group.spacing = items.Count == 2 ? 20 : 5;
     }
 
+    private void OnDestroy()
+    {
+        RemoveTimerAction();
+    }
+
+    private void UpdateTimer()
+    {
+        timerLabel.Text = production.Timer.GetTimeLeftText(null);
+    }
+
+    private void Decoration()
+    {
+        if(production == null) return;
+        
+        Init(production);
+    }
+
+    private void RemoveTimerAction()
+    {
+        if(production == null) return;
+
+        production.Timer.OnExecute -= UpdateTimer;
+        production.Timer.OnStart -= Decoration;
+        production.Timer.OnComplete -= Decoration;
+    }
+
     public bool Check(int resource, Vector3 pos)
     {
         var v = new Vector3[4];
         body.GetWorldCorners(v);
         
         var rect = new Rect(v[0], v[2]-v[0]);
+        var isAdd = rect.Contains(pos) && production.AddViaUI(resource);
+
+        if (isAdd && production.State != ProductionState.Full)
+        {
+            UIService.Get.GetShowedView<UIProductionWindowView>(UIWindowType.ProductionWindow).Change(false);
+        }
+        else
+        {
+            Decoration();
+        }
         
-        return rect.Contains(pos) && production.AddViaUI(resource);
+        return isAdd;
     }
 
     public void OnClick()
     {
         if (production.State == ProductionState.Completed)
         {
+            UIService.Get.GetShowedView<UIProductionWindowView>(UIWindowType.ProductionWindow).Change(false);
             production.CompleteViaUI();
             return;
         }

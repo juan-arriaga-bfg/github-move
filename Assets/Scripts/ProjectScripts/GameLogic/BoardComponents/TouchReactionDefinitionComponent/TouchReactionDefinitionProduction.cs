@@ -32,6 +32,7 @@
                     }));
                 break;
             case ProductionState.Completed:
+                UIService.Get.GetShowedView<UIProductionWindowView>(UIWindowType.ProductionWindow).Change(false);
                 Production.Complete();
                 break;
             default:
