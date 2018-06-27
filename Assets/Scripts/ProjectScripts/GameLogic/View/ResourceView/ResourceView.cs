@@ -74,9 +74,9 @@ public class ResourceView : BoardElementView
         var duration = Vector3.Distance(body.position, target) / 20f;
         
         var sequence = DOTween.Sequence().SetId(body);
-        sequence.Insert(0, body.DOJump(target, 1, 1, duration).SetEase(Ease.Linear));
-        sequence.Insert(0, body.DOScale(Vector3.one * 1.3f, duration*0.5f));
-        sequence.Insert(duration*0.5f, body.DOScale(Vector3.one * 0.2f, duration*0.5f));
+        sequence.Insert(0.1f, body.DOJump(target, 1, 1, duration).SetEase(Ease.Linear));
+        sequence.Insert(0.1f, body.DOScale(Vector3.one * 1.3f, duration*0.5f));
+        sequence.Insert(0.1f + duration*0.5f, body.DOScale(Vector3.one * 0.2f, duration*0.5f));
         
         DestroyOnBoard(duration);
         
