@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -115,16 +116,30 @@ public class UIProductionItem : MonoBehaviour
 
     public void OnClick()
     {
-        if (production.State == ProductionState.Completed)
+        switch (production.State)
         {
-            UIService.Get.GetShowedView<UIProductionWindowView>(UIWindowType.ProductionWindow).Change(false);
-            production.CompleteViaUI();
-            return;
+            case ProductionState.Full:
+                production.Change();
+                production.Start();
+                break;
+            case ProductionState.Waiting:
+                UIMessageWindowController.CreateTimerCompleteMessage(
+                    "Complete now!",
+                    "Would you like to build the item right now for crystals?",
+                    "Complete now ",
+                    production.Timer,
+                    () => CurrencyHellper.Purchase(Currency.Product.Name, 1, production.Timer.GetPrise(), success =>
+                    {
+                        if(success == false) return;
+                        production.Fast();
+                    }));
+                break;
+            case ProductionState.Completed:
+                UIService.Get.GetShowedView<UIProductionWindowView>(UIWindowType.ProductionWindow).Change(false);
+                production.CompleteViaUI();
+                break;
+            default:
+                return;
         }
-        
-        if(production.State != ProductionState.Full) return;
-        
-        production.Change();
-        production.Start();
     }
 }

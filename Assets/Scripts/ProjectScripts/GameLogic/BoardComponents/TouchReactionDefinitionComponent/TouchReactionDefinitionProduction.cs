@@ -17,15 +17,12 @@
         switch (Production.State)
         {
             case ProductionState.Waiting:
-
-                var timer = piece.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-                
                 UIMessageWindowController.CreateTimerCompleteMessage(
                     "Complete now!",
                     "Would you like to build the item right now for crystals?",
                     "Complete now ",
-                    timer,
-                    () => CurrencyHellper.Purchase(Currency.Product.Name, 1, timer.GetPrise(), success =>
+                    Production.Timer,
+                    () => CurrencyHellper.Purchase(Currency.Product.Name, 1, Production.Timer.GetPrise(), success =>
                     {
                         if(success == false) return;
                         Production.Fast();
