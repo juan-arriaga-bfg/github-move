@@ -344,8 +344,8 @@ TextureImporter:
         serializedVersion: 2
         x: 1045
         y: 237
-        width: 305
-        height: 278
+        width: 306
+        height: 280
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -370,7 +370,7 @@ TextureImporter:
       name: house
       rect:
         serializedVersion: 2
-        x: 1351
+        x: 1352
         y: 249
         width: 277
         height: 233
@@ -384,7 +384,7 @@ TextureImporter:
       name: market
       rect:
         serializedVersion: 2
-        x: 1629
+        x: 1630
         y: 249
         width: 284
         height: 226
@@ -398,7 +398,7 @@ TextureImporter:
       name: storage
       rect:
         serializedVersion: 2
-        x: 1629
+        x: 1630
         y: 476
         width: 277
         height: 219
@@ -412,7 +412,7 @@ TextureImporter:
       name: C9
       rect:
         serializedVersion: 2
-        x: 1351
+        x: 1352
         y: 483
         width: 269
         height: 204
@@ -441,7 +441,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1043
-        y: 516
+        y: 518
         width: 210
         height: 231
       alignment: 9
@@ -563,53 +563,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: Fog_1
+      name: river5
       rect:
         serializedVersion: 2
         x: 384
         y: 521
-        width: 187
-        height: 166
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: river5
-      rect:
-        serializedVersion: 2
-        x: 179
-        y: 688
-        width: 229
-        height: 134
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: river4
-      rect:
-        serializedVersion: 2
-        x: 409
-        y: 688
-        width: 229
-        height: 134
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: river6
-      rect:
-        serializedVersion: 2
-        x: 639
-        y: 715
         width: 229
         height: 134
       alignment: 9
@@ -622,8 +580,36 @@ TextureImporter:
       name: river3
       rect:
         serializedVersion: 2
-        x: 869
-        y: 748
+        x: 384
+        y: 656
+        width: 229
+        height: 134
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: river6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 700
+        width: 229
+        height: 134
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: river4
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 715
         width: 229
         height: 134
       alignment: 9
@@ -636,8 +622,8 @@ TextureImporter:
       name: river1
       rect:
         serializedVersion: 2
-        x: 1099
-        y: 882
+        x: 230
+        y: 791
         width: 229
         height: 134
       alignment: 9
@@ -650,8 +636,8 @@ TextureImporter:
       name: river2
       rect:
         serializedVersion: 2
-        x: 1329
-        y: 891
+        x: 0
+        y: 835
         width: 229
         height: 134
       alignment: 9
@@ -664,8 +650,8 @@ TextureImporter:
       name: D3
       rect:
         serializedVersion: 2
-        x: 1559
-        y: 892
+        x: 844
+        y: 750
         width: 206
         height: 148
       alignment: 9
@@ -675,13 +661,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: m_6
+      name: Fog_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 700
-        width: 159
-        height: 173
+        x: 1051
+        y: 750
+        width: 176
+        height: 157
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -692,8 +678,22 @@ TextureImporter:
       name: m_4
       rect:
         serializedVersion: 2
-        x: 160
-        y: 823
+        x: 1228
+        y: 882
+        width: 159
+        height: 173
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: m_6
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 891
         width: 159
         height: 173
       alignment: 9
@@ -706,8 +706,8 @@ TextureImporter:
       name: m_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 874
+        x: 1548
+        y: 892
         width: 159
         height: 173
       alignment: 9
@@ -720,8 +720,8 @@ TextureImporter:
       name: m_2
       rect:
         serializedVersion: 2
-        x: 320
-        y: 823
+        x: 1708
+        y: 1041
         width: 159
         height: 173
       alignment: 9
@@ -734,8 +734,8 @@ TextureImporter:
       name: m_1
       rect:
         serializedVersion: 2
-        x: 480
-        y: 850
+        x: 1868
+        y: 1041
         width: 159
         height: 173
       alignment: 9
@@ -748,7 +748,7 @@ TextureImporter:
       name: m_3
       rect:
         serializedVersion: 2
-        x: 640
+        x: 460
         y: 850
         width: 159
         height: 173
@@ -759,11 +759,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: E6
+      name: E5
       rect:
         serializedVersion: 2
-        x: 572
-        y: 521
+        x: 230
+        y: 926
         width: 160
         height: 158
       alignment: 9
@@ -773,11 +773,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: E5
+      name: E6
       rect:
         serializedVersion: 2
-        x: 160
-        y: 997
+        x: 0
+        y: 970
         width: 160
         height: 158
       alignment: 9
@@ -790,8 +790,8 @@ TextureImporter:
       name: C7
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1048
+        x: 620
+        y: 850
         width: 156
         height: 159
       alignment: 9
@@ -804,8 +804,8 @@ TextureImporter:
       name: G3
       rect:
         serializedVersion: 2
-        x: 800
-        y: 883
+        x: 777
+        y: 899
         width: 196
         height: 123
       alignment: 9
@@ -818,8 +818,8 @@ TextureImporter:
       name: B2
       rect:
         serializedVersion: 2
-        x: 800
-        y: 1007
+        x: 974
+        y: 908
         width: 182
         height: 129
       alignment: 9
@@ -832,8 +832,8 @@ TextureImporter:
       name: A7
       rect:
         serializedVersion: 2
-        x: 321
-        y: 997
+        x: 620
+        y: 1010
         width: 150
         height: 151
       alignment: 9
@@ -846,8 +846,8 @@ TextureImporter:
       name: coin5
       rect:
         serializedVersion: 2
-        x: 472
-        y: 1024
+        x: 771
+        y: 1023
         width: 146
         height: 153
       alignment: 9
@@ -860,7 +860,7 @@ TextureImporter:
       name: H3
       rect:
         serializedVersion: 2
-        x: 619
+        x: 391
         y: 1024
         width: 171
         height: 123
@@ -874,8 +874,8 @@ TextureImporter:
       name: F4
       rect:
         serializedVersion: 2
-        x: 157
-        y: 1156
+        x: 161
+        y: 1085
         width: 156
         height: 129
       alignment: 9
@@ -888,7 +888,7 @@ TextureImporter:
       name: coin6
       rect:
         serializedVersion: 2
-        x: 1907
+        x: 1908
         y: 476
         width: 137
         height: 146
@@ -902,8 +902,8 @@ TextureImporter:
       name: brige
       rect:
         serializedVersion: 2
-        x: 983
-        y: 1017
+        x: 318
+        y: 1148
         width: 195
         height: 102
       alignment: 9
@@ -916,8 +916,8 @@ TextureImporter:
       name: C6
       rect:
         serializedVersion: 2
-        x: 1099
-        y: 748
+        x: 0
+        y: 1129
         width: 149
         height: 131
       alignment: 9
@@ -930,8 +930,8 @@ TextureImporter:
       name: J4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1208
+        x: 150
+        y: 1215
         width: 140
         height: 136
       alignment: 9
@@ -944,8 +944,8 @@ TextureImporter:
       name: stones_1
       rect:
         serializedVersion: 2
-        x: 1179
-        y: 1026
+        x: 514
+        y: 1162
         width: 175
         height: 103
       alignment: 9
@@ -958,7 +958,7 @@ TextureImporter:
       name: road_1
       rect:
         serializedVersion: 2
-        x: 1914
+        x: 1915
         y: 232
         width: 132
         height: 132
@@ -972,8 +972,8 @@ TextureImporter:
       name: bush_1
       rect:
         serializedVersion: 2
-        x: 983
-        y: 1120
+        x: 291
+        y: 1251
         width: 165
         height: 105
       alignment: 9
@@ -986,8 +986,8 @@ TextureImporter:
       name: B3
       rect:
         serializedVersion: 2
-        x: 321
-        y: 1149
+        x: 0
+        y: 1261
         width: 148
         height: 116
       alignment: 9
@@ -1000,8 +1000,8 @@ TextureImporter:
       name: A6
       rect:
         serializedVersion: 2
-        x: 791
-        y: 1137
+        x: 149
+        y: 1352
         width: 131
         height: 130
       alignment: 9
@@ -1014,8 +1014,8 @@ TextureImporter:
       name: border_shadow
       rect:
         serializedVersion: 2
-        x: 470
-        y: 1178
+        x: 918
+        y: 1038
         width: 238
         height: 71
       alignment: 9
@@ -1028,8 +1028,8 @@ TextureImporter:
       name: C4
       rect:
         serializedVersion: 2
-        x: 1355
-        y: 1026
+        x: 0
+        y: 1378
         width: 139
         height: 120
       alignment: 9
@@ -1042,8 +1042,8 @@ TextureImporter:
       name: I4
       rect:
         serializedVersion: 2
-        x: 1149
-        y: 1130
+        x: 1708
+        y: 892
         width: 129
         height: 129
       alignment: 9
@@ -1056,8 +1056,8 @@ TextureImporter:
       name: coin4
       rect:
         serializedVersion: 2
-        x: 923
-        y: 1226
+        x: 614
+        y: 521
         width: 124
         height: 133
       alignment: 9
@@ -1070,8 +1070,8 @@ TextureImporter:
       name: I5
       rect:
         serializedVersion: 2
-        x: 470
-        y: 1250
+        x: 230
+        y: 675
         width: 142
         height: 109
       alignment: 9
@@ -1084,8 +1084,8 @@ TextureImporter:
       name: A5
       rect:
         serializedVersion: 2
-        x: 314
-        y: 1266
+        x: 1157
+        y: 1056
         width: 118
         height: 127
       alignment: 9
@@ -1098,8 +1098,8 @@ TextureImporter:
       name: C5
       rect:
         serializedVersion: 2
-        x: 141
-        y: 1286
+        x: 918
+        y: 1110
         width: 121
         height: 123
       alignment: 9
@@ -1112,8 +1112,8 @@ TextureImporter:
       name: A4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1345
+        x: 690
+        y: 1177
         width: 119
         height: 122
       alignment: 9
@@ -1126,8 +1126,8 @@ TextureImporter:
       name: J3
       rect:
         serializedVersion: 2
-        x: 1048
-        y: 1226
+        x: 810
+        y: 1177
         width: 100
         height: 141
       alignment: 9
@@ -1140,7 +1140,7 @@ TextureImporter:
       name: C3
       rect:
         serializedVersion: 2
-        x: 1914
+        x: 1915
         y: 365
         width: 129
         height: 108
@@ -1154,8 +1154,8 @@ TextureImporter:
       name: GBOX1
       rect:
         serializedVersion: 2
-        x: 613
-        y: 1250
+        x: 1040
+        y: 1110
         width: 108
         height: 128
       alignment: 9
@@ -1168,8 +1168,8 @@ TextureImporter:
       name: I3
       rect:
         serializedVersion: 2
-        x: 433
-        y: 1360
+        x: 911
+        y: 1234
         width: 118
         height: 117
       alignment: 9
@@ -1182,8 +1182,8 @@ TextureImporter:
       name: D2
       rect:
         serializedVersion: 2
-        x: 263
-        y: 1394
+        x: 457
+        y: 1266
         width: 112
         height: 119
       alignment: 9
@@ -1196,8 +1196,8 @@ TextureImporter:
       name: E4
       rect:
         serializedVersion: 2
-        x: 997
-        y: 883
+        x: 570
+        y: 1266
         width: 100
         height: 132
       alignment: 9
@@ -1210,8 +1210,8 @@ TextureImporter:
       name: D5
       rect:
         serializedVersion: 2
-        x: 120
-        y: 1410
+        x: 671
+        y: 1300
         width: 136
         height: 97
       alignment: 9
@@ -1224,8 +1224,8 @@ TextureImporter:
       name: G2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1468
+        x: 1276
+        y: 1056
         width: 106
         height: 122
       alignment: 9
@@ -1238,8 +1238,8 @@ TextureImporter:
       name: A3
       rect:
         serializedVersion: 2
-        x: 107
-        y: 1508
+        x: 281
+        y: 1357
         width: 110
         height: 107
       alignment: 9
@@ -1252,8 +1252,8 @@ TextureImporter:
       name: B1
       rect:
         serializedVersion: 2
-        x: 722
-        y: 1268
+        x: 392
+        y: 1386
         width: 109
         height: 107
       alignment: 9
@@ -1266,8 +1266,8 @@ TextureImporter:
       name: woodman_body_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1591
+        x: 281
+        y: 1465
         width: 98
         height: 117
       alignment: 9
@@ -1280,8 +1280,8 @@ TextureImporter:
       name: S1_wood_staff2
       rect:
         serializedVersion: 2
-        x: 832
-        y: 1360
+        x: 140
+        y: 1483
         width: 110
         height: 104
       alignment: 9
@@ -1294,8 +1294,8 @@ TextureImporter:
       name: D4
       rect:
         serializedVersion: 2
-        x: 943
-        y: 1360
+        x: 808
+        y: 1319
         width: 100
         height: 107
       alignment: 9
@@ -1308,8 +1308,8 @@ TextureImporter:
       name: S1_wood_staff1
       rect:
         serializedVersion: 2
-        x: 552
-        y: 1379
+        x: 0
+        y: 1499
         width: 111
         height: 91
       alignment: 9
@@ -1322,7 +1322,7 @@ TextureImporter:
       name: woodman_shadow
       rect:
         serializedVersion: 2
-        x: 1907
+        x: 1908
         y: 623
         width: 138
         height: 72
@@ -1337,7 +1337,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1254
-        y: 516
+        y: 518
         width: 92
         height: 104
       alignment: 9
@@ -1350,8 +1350,8 @@ TextureImporter:
       name: A2
       rect:
         serializedVersion: 2
-        x: 664
-        y: 1379
+        x: 671
+        y: 1398
         width: 111
         height: 86
       alignment: 9
@@ -1364,8 +1364,8 @@ TextureImporter:
       name: Coin
       rect:
         serializedVersion: 2
-        x: 776
-        y: 1465
+        x: 502
+        y: 1399
         width: 88
         height: 106
       alignment: 9
@@ -1378,8 +1378,8 @@ TextureImporter:
       name: C2
       rect:
         serializedVersion: 2
-        x: 664
-        y: 1466
+        x: 380
+        y: 1494
         width: 109
         height: 85
       alignment: 9
@@ -1392,8 +1392,8 @@ TextureImporter:
       name: F5
       rect:
         serializedVersion: 2
-        x: 552
-        y: 1471
+        x: 1383
+        y: 1065
         width: 107
         height: 85
       alignment: 9
@@ -1406,8 +1406,8 @@ TextureImporter:
       name: Chest_field_6_1
       rect:
         serializedVersion: 2
-        x: 660
-        y: 1552
+        x: 1491
+        y: 1066
         width: 96
         height: 94
       alignment: 9
@@ -1420,8 +1420,8 @@ TextureImporter:
       name: Chest_field_4_1
       rect:
         serializedVersion: 2
-        x: 376
-        y: 1478
+        x: 1383
+        y: 1151
         width: 96
         height: 93
       alignment: 9
@@ -1434,8 +1434,8 @@ TextureImporter:
       name: G1
       rect:
         serializedVersion: 2
-        x: 218
-        y: 1514
+        x: 1276
+        y: 1179
         width: 103
         height: 86
       alignment: 9
@@ -1448,8 +1448,8 @@ TextureImporter:
       name: coin3
       rect:
         serializedVersion: 2
-        x: 473
-        y: 1557
+        x: 1149
+        y: 1184
         width: 89
         height: 99
       alignment: 9
@@ -1462,8 +1462,8 @@ TextureImporter:
       name: road
       rect:
         serializedVersion: 2
-        x: 322
-        y: 1572
+        x: 1030
+        y: 1239
         width: 118
         height: 74
       alignment: 9
@@ -1476,8 +1476,8 @@ TextureImporter:
       name: H4
       rect:
         serializedVersion: 2
-        x: 218
-        y: 1601
+        x: 1588
+        y: 1066
         width: 103
         height: 84
       alignment: 9
@@ -1504,8 +1504,8 @@ TextureImporter:
       name: stone3
       rect:
         serializedVersion: 2
-        x: 99
-        y: 1616
+        x: 1588
+        y: 1151
         width: 111
         height: 77
       alignment: 9
@@ -1518,8 +1518,8 @@ TextureImporter:
       name: stone3_broken
       rect:
         serializedVersion: 2
-        x: 322
-        y: 1647
+        x: 1700
+        y: 1215
         width: 111
         height: 77
       alignment: 9
@@ -1532,8 +1532,8 @@ TextureImporter:
       name: J5
       rect:
         serializedVersion: 2
-        x: 211
-        y: 1686
+        x: 1480
+        y: 1161
         width: 90
         height: 94
       alignment: 9
@@ -1546,8 +1546,8 @@ TextureImporter:
       name: Chest_field_5_1
       rect:
         serializedVersion: 2
-        x: 99
-        y: 1694
+        x: 1380
+        y: 1245
         width: 92
         height: 91
       alignment: 9
@@ -1560,8 +1560,8 @@ TextureImporter:
       name: Chest_field_3_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1709
+        x: 1571
+        y: 1229
         width: 92
         height: 90
       alignment: 9
@@ -1588,8 +1588,8 @@ TextureImporter:
       name: Chest_field_2_1
       rect:
         serializedVersion: 2
-        x: 563
-        y: 1557
+        x: 1473
+        y: 1256
         width: 91
         height: 89
       alignment: 9
@@ -1602,8 +1602,8 @@ TextureImporter:
       name: worker_body_1
       rect:
         serializedVersion: 2
-        x: 192
-        y: 1781
+        x: 1239
+        y: 1266
         width: 87
         height: 92
       alignment: 9
@@ -1616,8 +1616,8 @@ TextureImporter:
       name: woodman_head
       rect:
         serializedVersion: 2
-        x: 832
-        y: 1268
+        x: 1149
+        y: 1284
         width: 89
         height: 89
       alignment: 9
@@ -1630,8 +1630,8 @@ TextureImporter:
       name: Chest_field_5_2
       rect:
         serializedVersion: 2
-        x: 93
-        y: 1786
+        x: 1030
+        y: 1314
         width: 91
         height: 87
       alignment: 9
@@ -1644,8 +1644,8 @@ TextureImporter:
       name: J2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1800
+        x: 909
+        y: 1352
         width: 83
         height: 95
       alignment: 9
@@ -1658,8 +1658,8 @@ TextureImporter:
       name: G4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1896
+        x: 783
+        y: 1427
         width: 83
         height: 92
       alignment: 9
@@ -1672,8 +1672,8 @@ TextureImporter:
       name: F2
       rect:
         serializedVersion: 2
-        x: 865
-        y: 1465
+        x: 1157
+        y: 908
         width: 62
         height: 123
       alignment: 9
@@ -1686,8 +1686,8 @@ TextureImporter:
       name: Chest_field_1_1
       rect:
         serializedVersion: 2
-        x: 757
-        y: 1572
+        x: 1327
+        y: 1337
         width: 88
         height: 85
       alignment: 9
@@ -1700,8 +1700,8 @@ TextureImporter:
       name: Chest_field_6_2
       rect:
         serializedVersion: 2
-        x: 563
-        y: 1647
+        x: 591
+        y: 1485
         width: 91
         height: 81
       alignment: 9
@@ -1714,8 +1714,8 @@ TextureImporter:
       name: worker_shadow
       rect:
         serializedVersion: 2
-        x: 434
-        y: 1657
+        x: 1122
+        y: 1374
         width: 116
         height: 60
       alignment: 9
@@ -1728,8 +1728,8 @@ TextureImporter:
       name: king
       rect:
         serializedVersion: 2
-        x: 722
-        y: 1148
+        x: 161
+        y: 970
         width: 65
         height: 107
       alignment: 9
@@ -1742,8 +1742,8 @@ TextureImporter:
       name: E2
       rect:
         serializedVersion: 2
-        x: 655
-        y: 1647
+        x: 490
+        y: 1506
         width: 94
         height: 72
       alignment: 9
@@ -1756,8 +1756,8 @@ TextureImporter:
       name: Chest_field_4_2
       rect:
         serializedVersion: 2
-        x: 434
-        y: 1718
+        x: 683
+        y: 1485
         width: 91
         height: 74
       alignment: 9
@@ -1770,8 +1770,8 @@ TextureImporter:
       name: Chest_field_3_2
       rect:
         serializedVersion: 2
-        x: 280
-        y: 1781
+        x: 993
+        y: 1402
         width: 88
         height: 72
       alignment: 9
@@ -1784,8 +1784,8 @@ TextureImporter:
       name: coin2
       rect:
         serializedVersion: 2
-        x: 1279
-        y: 1130
+        x: 591
+        y: 1399
         width: 75
         height: 83
       alignment: 9
@@ -1798,8 +1798,8 @@ TextureImporter:
       name: E1
       rect:
         serializedVersion: 2
-        x: 84
-        y: 1874
+        x: 1239
+        y: 1359
         width: 81
         height: 76
       alignment: 9
@@ -1812,8 +1812,8 @@ TextureImporter:
       name: Chest_field_2_2
       rect:
         serializedVersion: 2
-        x: 84
-        y: 1951
+        x: 867
+        y: 1448
         width: 87
         height: 70
       alignment: 9
@@ -1827,7 +1827,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1254
-        y: 621
+        y: 623
         width: 95
         height: 64
       alignment: 9
@@ -1840,8 +1840,8 @@ TextureImporter:
       name: border_3
       rect:
         serializedVersion: 2
-        x: 166
-        y: 1874
+        x: 1812
+        y: 1215
         width: 192
         height: 31
       alignment: 9
@@ -1854,8 +1854,8 @@ TextureImporter:
       name: Chest_field_1_2
       rect:
         serializedVersion: 2
-        x: 172
-        y: 1906
+        x: 1082
+        y: 1435
         width: 85
         height: 69
       alignment: 9
@@ -1868,8 +1868,8 @@ TextureImporter:
       name: stone2_broken
       rect:
         serializedVersion: 2
-        x: 172
-        y: 1976
+        x: 955
+        y: 1475
         width: 92
         height: 63
       alignment: 9
@@ -1882,8 +1882,8 @@ TextureImporter:
       name: stone2
       rect:
         serializedVersion: 2
-        x: 258
-        y: 1906
+        x: 775
+        y: 1520
         width: 92
         height: 63
       alignment: 9
@@ -1896,8 +1896,8 @@ TextureImporter:
       name: D1
       rect:
         serializedVersion: 2
-        x: 473
-        y: 1478
+        x: 683
+        y: 1560
         width: 74
         height: 77
       alignment: 9
@@ -1910,8 +1910,8 @@ TextureImporter:
       name: border_4
       rect:
         serializedVersion: 2
-        x: 265
-        y: 1970
+        x: 490
+        y: 1579
         width: 181
         height: 31
       alignment: 9
@@ -1924,8 +1924,8 @@ TextureImporter:
       name: worker_head
       rect:
         serializedVersion: 2
-        x: 1766
-        y: 892
+        x: 1168
+        y: 1435
         width: 70
         height: 80
       alignment: 9
@@ -1938,8 +1938,8 @@ TextureImporter:
       name: I1
       rect:
         serializedVersion: 2
-        x: 1766
-        y: 973
+        x: 868
+        y: 1519
         width: 69
         height: 80
       alignment: 9
@@ -1952,8 +1952,8 @@ TextureImporter:
       name: F1
       rect:
         serializedVersion: 2
-        x: 359
-        y: 1854
+        x: 391
+        y: 926
         width: 66
         height: 77
       alignment: 9
@@ -1966,8 +1966,8 @@ TextureImporter:
       name: woodman_axe_top2
       rect:
         serializedVersion: 2
-        x: 1836
-        y: 1041
+        x: 758
+        y: 1584
         width: 79
         height: 64
       alignment: 9
@@ -1980,8 +1980,8 @@ TextureImporter:
       name: C1
       rect:
         serializedVersion: 2
-        x: 369
-        y: 1793
+        x: 380
+        y: 1580
         width: 84
         height: 60
       alignment: 9
@@ -1994,8 +1994,8 @@ TextureImporter:
       name: sheep_body_3
       rect:
         serializedVersion: 2
-        x: 1916
-        y: 1041
+        x: 251
+        y: 1583
         width: 75
         height: 67
       alignment: 9
@@ -2008,8 +2008,8 @@ TextureImporter:
       name: woodman_body_2
       rect:
         serializedVersion: 2
-        x: 426
-        y: 1854
+        x: 614
+        y: 655
         width: 83
         height: 59
       alignment: 9
@@ -2022,8 +2022,8 @@ TextureImporter:
       name: coin1
       rect:
         serializedVersion: 2
-        x: 447
-        y: 1914
+        x: 112
+        y: 1588
         width: 68
         height: 72
       alignment: 9
@@ -2036,8 +2036,8 @@ TextureImporter:
       name: tree1
       rect:
         serializedVersion: 2
-        x: 1992
-        y: 0
+        x: 563
+        y: 1024
         width: 55
         height: 89
       alignment: 9
@@ -2050,8 +2050,8 @@ TextureImporter:
       name: sheep_shadow
       rect:
         serializedVersion: 2
-        x: 302
-        y: 1725
+        x: 460
+        y: 791
         width: 87
         height: 55
       alignment: 9
@@ -2065,7 +2065,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1989
+        y: 1591
         width: 79
         height: 57
       alignment: 9
@@ -2078,8 +2078,8 @@ TextureImporter:
       name: stone1
       rect:
         serializedVersion: 2
-        x: 510
-        y: 1793
+        x: 318
+        y: 1085
         width: 71
         height: 61
       alignment: 9
@@ -2092,8 +2092,8 @@ TextureImporter:
       name: sheep_body_2
       rect:
         serializedVersion: 2
-        x: 1495
-        y: 1041
+        x: 181
+        y: 1588
         width: 64
         height: 65
       alignment: 9
@@ -2106,8 +2106,8 @@ TextureImporter:
       name: worker_body_2
       rect:
         serializedVersion: 2
-        x: 526
-        y: 1729
+        x: 0
+        y: 1649
         width: 66
         height: 60
       alignment: 9
@@ -2120,8 +2120,8 @@ TextureImporter:
       name: Coin_shadow
       rect:
         serializedVersion: 2
-        x: 510
-        y: 1855
+        x: 1048
+        y: 1505
         width: 72
         height: 54
       alignment: 9
@@ -2134,8 +2134,8 @@ TextureImporter:
       name: J1
       rect:
         serializedVersion: 2
-        x: 582
-        y: 1790
+        x: 548
+        y: 791
         width: 63
         height: 58
       alignment: 9
@@ -2148,8 +2148,8 @@ TextureImporter:
       name: herdsman_staff
       rect:
         serializedVersion: 2
-        x: 263
-        y: 1286
+        x: 1992
+        y: 0
         width: 34
         height: 106
       alignment: 9
@@ -2162,8 +2162,8 @@ TextureImporter:
       name: herdsman_head
       rect:
         serializedVersion: 2
-        x: 923
-        y: 1137
+        x: 938
+        y: 1539
         width: 57
         height: 63
       alignment: 9
@@ -2176,8 +2176,8 @@ TextureImporter:
       name: pick_top
       rect:
         serializedVersion: 2
-        x: 351
-        y: 1932
+        x: 838
+        y: 1600
         width: 93
         height: 37
       alignment: 9
@@ -2190,8 +2190,8 @@ TextureImporter:
       name: H1
       rect:
         serializedVersion: 2
-        x: 376
-        y: 1394
+        x: 1992
+        y: 107
         width: 53
         height: 64
       alignment: 9
@@ -2204,8 +2204,8 @@ TextureImporter:
       name: sheep_head
       rect:
         serializedVersion: 2
-        x: 593
-        y: 1729
+        x: 465
+        y: 1611
         width: 58
         height: 52
       alignment: 9
@@ -2218,8 +2218,8 @@ TextureImporter:
       name: herdsman_body_1
       rect:
         serializedVersion: 2
-        x: 454
-        y: 1793
+        x: 1992
+        y: 172
         width: 45
         height: 59
       alignment: 9
@@ -2232,8 +2232,8 @@ TextureImporter:
       name: woodman_hand_close_1
       rect:
         serializedVersion: 2
-        x: 776
-        y: 1376
+        x: 777
+        y: 850
         width: 54
         height: 48
       alignment: 9
@@ -2246,8 +2246,8 @@ TextureImporter:
       name: herdsman_hat
       rect:
         serializedVersion: 2
-        x: 265
-        y: 2002
+        x: 563
+        y: 1114
         width: 56
         height: 43
       alignment: 9
@@ -2260,8 +2260,8 @@ TextureImporter:
       name: woodman_wood
       rect:
         serializedVersion: 2
-        x: 322
-        y: 1514
+        x: 1327
+        y: 1266
         width: 49
         height: 48
       alignment: 9
@@ -2274,8 +2274,8 @@ TextureImporter:
       name: woodman_leg_far
       rect:
         serializedVersion: 2
-        x: 433
-        y: 1266
+        x: 1239
+        y: 1184
         width: 33
         height: 70
       alignment: 9
@@ -2288,8 +2288,8 @@ TextureImporter:
       name: woodman_leg_close
       rect:
         serializedVersion: 2
-        x: 1992
-        y: 90
+        x: 67
+        y: 1649
         width: 33
         height: 70
       alignment: 9
@@ -2302,8 +2302,8 @@ TextureImporter:
       name: sheep_body_1
       rect:
         serializedVersion: 2
-        x: 1992
-        y: 161
+        x: 0
+        y: 1710
         width: 49
         height: 47
       alignment: 9
@@ -2316,8 +2316,8 @@ TextureImporter:
       name: sheep_body_4
       rect:
         serializedVersion: 2
-        x: 1992
-        y: 1041
+        x: 327
+        y: 1583
         width: 49
         height: 47
       alignment: 9
@@ -2330,7 +2330,7 @@ TextureImporter:
       name: pick_handle
       rect:
         serializedVersion: 2
-        x: 869
+        x: 844
         y: 715
         width: 88
         height: 26
@@ -2344,8 +2344,8 @@ TextureImporter:
       name: woodman_head_axe
       rect:
         serializedVersion: 2
-        x: 1992
-        y: 1089
+        x: 1416
+        y: 1337
         width: 54
         height: 41
       alignment: 9
@@ -2358,8 +2358,8 @@ TextureImporter:
       name: worker_hand_close_2
       rect:
         serializedVersion: 2
-        x: 776
-        y: 1425
+        x: 327
+        y: 1631
         width: 50
         height: 37
       alignment: 9
@@ -2372,8 +2372,8 @@ TextureImporter:
       name: border_1
       rect:
         serializedVersion: 2
-        x: 441
-        y: 1572
+        x: 112
+        y: 1499
         width: 25
         height: 67
       alignment: 9
@@ -2386,8 +2386,8 @@ TextureImporter:
       name: worker_hand_far_2
       rect:
         serializedVersion: 2
-        x: 390
-        y: 1725
+        x: 80
+        y: 1591
         width: 31
         height: 52
       alignment: 9
@@ -2400,8 +2400,8 @@ TextureImporter:
       name: Bush1
       rect:
         serializedVersion: 2
-        x: 322
-        y: 2002
+        x: 1121
+        y: 1505
         width: 41
         height: 38
       alignment: 9
@@ -2414,8 +2414,8 @@ TextureImporter:
       name: woodman_hand_close_2
       rect:
         serializedVersion: 2
-        x: 639
-        y: 680
+        x: 996
+        y: 1539
         width: 47
         height: 33
       alignment: 9
@@ -2428,8 +2428,8 @@ TextureImporter:
       name: woodman_hand_far_1
       rect:
         serializedVersion: 2
-        x: 687
-        y: 680
+        x: 246
+        y: 1651
         width: 48
         height: 32
       alignment: 9
@@ -2442,8 +2442,8 @@ TextureImporter:
       name: worker_hand_far_1
       rect:
         serializedVersion: 2
-        x: 364
-        y: 2002
+        x: 993
+        y: 1352
         width: 33
         height: 44
       alignment: 9
@@ -2456,8 +2456,8 @@ TextureImporter:
       name: woodman_hand_far_2
       rect:
         serializedVersion: 2
-        x: 398
-        y: 2002
+        x: 698
+        y: 655
         width: 39
         height: 37
       alignment: 9
@@ -2470,8 +2470,8 @@ TextureImporter:
       name: worker_hand_close_3
       rect:
         serializedVersion: 2
-        x: 800
-        y: 850
+        x: 181
+        y: 1654
         width: 45
         height: 32
       alignment: 9
@@ -2484,8 +2484,8 @@ TextureImporter:
       name: border_2
       rect:
         serializedVersion: 2
-        x: 447
-        y: 1987
+        x: 251
+        y: 1483
         width: 23
         height: 60
       alignment: 9
@@ -2498,8 +2498,8 @@ TextureImporter:
       name: herdsman_vest_left
       rect:
         serializedVersion: 2
-        x: 471
-        y: 1987
+        x: 295
+        y: 1651
         width: 30
         height: 45
       alignment: 9
@@ -2512,8 +2512,8 @@ TextureImporter:
       name: worker_hand_far_3
       rect:
         serializedVersion: 2
-        x: 502
-        y: 1987
+        x: 227
+        y: 1684
         width: 31
         height: 43
       alignment: 9
@@ -2526,8 +2526,8 @@ TextureImporter:
       name: scot_peasant_hand_close_2
       rect:
         serializedVersion: 2
-        x: 516
-        y: 1910
+        x: 1122
+        y: 1314
         width: 26
         height: 50
       alignment: 9
@@ -2540,8 +2540,8 @@ TextureImporter:
       name: herdsman_vest_right
       rect:
         serializedVersion: 2
-        x: 534
-        y: 1961
+        x: 259
+        y: 1684
         width: 27
         height: 46
       alignment: 9
@@ -2554,8 +2554,8 @@ TextureImporter:
       name: coins_shadow
       rect:
         serializedVersion: 2
-        x: 923
-        y: 1201
+        x: 1157
+        y: 1032
         width: 57
         height: 21
       alignment: 9
@@ -2568,8 +2568,8 @@ TextureImporter:
       name: woodman_hand_close_3
       rect:
         serializedVersion: 2
-        x: 534
-        y: 2008
+        x: 1664
+        y: 1229
         width: 32
         height: 37
       alignment: 9
@@ -2582,8 +2582,8 @@ TextureImporter:
       name: woodman_hand_far_3_open
       rect:
         serializedVersion: 2
-        x: 543
-        y: 1910
+        x: 1664
+        y: 1267
         width: 32
         height: 37
       alignment: 9
@@ -2596,8 +2596,8 @@ TextureImporter:
       name: worker_hand_close_1
       rect:
         serializedVersion: 2
-        x: 562
-        y: 1948
+        x: 101
+        y: 1661
         width: 27
         height: 42
       alignment: 9
@@ -2610,8 +2610,8 @@ TextureImporter:
       name: woodman_axe_top
       rect:
         serializedVersion: 2
-        x: 567
-        y: 1991
+        x: 129
+        y: 1661
         width: 27
         height: 41
       alignment: 9
@@ -2624,8 +2624,8 @@ TextureImporter:
       name: worker_leg_far
       rect:
         serializedVersion: 2
-        x: 583
-        y: 1849
+        x: 157
+        y: 1687
         width: 26
         height: 42
       alignment: 9
@@ -2638,8 +2638,8 @@ TextureImporter:
       name: scot_peasant_hand_far_2
       rect:
         serializedVersion: 2
-        x: 583
-        y: 1892
+        x: 1228
+        y: 750
         width: 23
         height: 47
       alignment: 9
@@ -2652,8 +2652,8 @@ TextureImporter:
       name: worker_leg_close
       rect:
         serializedVersion: 2
-        x: 590
-        y: 1940
+        x: 1228
+        y: 798
         width: 25
         height: 42
       alignment: 9
@@ -2666,8 +2666,8 @@ TextureImporter:
       name: worker_hand_far_3_1
       rect:
         serializedVersion: 2
-        x: 607
-        y: 1892
+        x: 1082
+        y: 1402
         width: 31
         height: 32
       alignment: 9
@@ -2680,8 +2680,8 @@ TextureImporter:
       name: scot_peasant_hand_far_1
       rect:
         serializedVersion: 2
-        x: 610
-        y: 1849
+        x: 129
+        y: 1703
         width: 23
         height: 42
       alignment: 9
@@ -2694,8 +2694,8 @@ TextureImporter:
       name: scot_peasant_hand_close_1
       rect:
         serializedVersion: 2
-        x: 634
-        y: 1849
+        x: 101
+        y: 1704
         width: 22
         height: 42
       alignment: 9
@@ -2708,8 +2708,8 @@ TextureImporter:
       name: w5_peasant_hand_3_open
       rect:
         serializedVersion: 2
-        x: 619
-        y: 1148
+        x: 1048
+        y: 1475
         width: 32
         height: 28
       alignment: 9
@@ -2722,8 +2722,8 @@ TextureImporter:
       name: scot_peasant_leg_close_3
       rect:
         serializedVersion: 2
-        x: 652
-        y: 1148
+        x: 392
+        y: 1357
         width: 32
         height: 28
       alignment: 9
@@ -2736,8 +2736,8 @@ TextureImporter:
       name: scot_peasant_leg_far_3
       rect:
         serializedVersion: 2
-        x: 685
-        y: 1148
+        x: 955
+        y: 1448
         width: 34
         height: 26
       alignment: 9
@@ -2750,8 +2750,8 @@ TextureImporter:
       name: woodman_hand_far_3
       rect:
         serializedVersion: 2
-        x: 646
-        y: 1782
+        x: 251
+        y: 1544
         width: 27
         height: 32
       alignment: 9
@@ -2764,8 +2764,8 @@ TextureImporter:
       name: scot_peasant_leg_close_2
       rect:
         serializedVersion: 2
-        x: 652
-        y: 1729
+        x: 1228
+        y: 841
         width: 22
         height: 36
       alignment: 9
@@ -2778,8 +2778,8 @@ TextureImporter:
       name: woodman_axe_handle
       rect:
         serializedVersion: 2
-        x: 80
-        y: 2022
+        x: 425
+        y: 1357
         width: 31
         height: 23
       alignment: 9
@@ -2792,8 +2792,8 @@ TextureImporter:
       name: scot_peasant_leg_far_2
       rect:
         serializedVersion: 2
-        x: 2026
-        y: 90
+        x: 933
+        y: 715
         width: 21
         height: 33
       alignment: 9
@@ -2806,8 +2806,8 @@ TextureImporter:
       name: scot_peasant_leg_1
       rect:
         serializedVersion: 2
-        x: 646
-        y: 1815
+        x: 783
+        y: 1398
         width: 23
         height: 28
       alignment: 9
@@ -2820,8 +2820,8 @@ TextureImporter:
       name: herdsman_hand_fist_2
       rect:
         serializedVersion: 2
-        x: 433
-        y: 1337
+        x: 867
+        y: 1427
         width: 33
         height: 19
       alignment: 9
@@ -2834,8 +2834,8 @@ TextureImporter:
       name: sheep_leg_right
       rect:
         serializedVersion: 2
-        x: 302
-        y: 1686
+        x: 1571
+        y: 1161
         width: 15
         height: 37
       alignment: 9
@@ -2848,8 +2848,8 @@ TextureImporter:
       name: w5_peasant_hand_3_fist
       rect:
         serializedVersion: 2
-        x: 1992
-        y: 209
+        x: 465
+        y: 1580
         width: 24
         height: 22
       alignment: 9
@@ -2862,8 +2862,8 @@ TextureImporter:
       name: sheep_leg_left
       rect:
         serializedVersion: 2
-        x: 2026
-        y: 124
+        x: 291
+        y: 1215
         width: 15
         height: 35
       alignment: 9
@@ -2876,8 +2876,8 @@ TextureImporter:
       name: woodman_head_eye
       rect:
         serializedVersion: 2
-        x: 390
-        y: 1778
+        x: 918
+        y: 1023
         width: 37
         height: 14
       alignment: 9
@@ -2890,8 +2890,8 @@ TextureImporter:
       name: mill_cup
       rect:
         serializedVersion: 2
-        x: 2017
-        y: 209
+        x: 157
+        y: 1661
         width: 19
         height: 22
       alignment: 9
@@ -2904,8 +2904,8 @@ TextureImporter:
       name: scot_peasant_eye_close
       rect:
         serializedVersion: 2
-        x: 722
-        y: 1256
+        x: 514
+        y: 1148
         width: 38
         height: 11
       alignment: 9
@@ -2918,8 +2918,8 @@ TextureImporter:
       name: sheep_lips
       rect:
         serializedVersion: 2
-        x: 757
-        y: 1552
+        x: 227
+        y: 1654
         width: 18
         height: 19
       alignment: 9
@@ -2932,8 +2932,8 @@ TextureImporter:
       name: sheep_ear_close
       rect:
         serializedVersion: 2
-        x: 516
-        y: 1961
+        x: 112
+        y: 1567
         width: 17
         height: 19
       alignment: 9
@@ -2946,8 +2946,8 @@ TextureImporter:
       name: sheep_ear_far
       rect:
         serializedVersion: 2
-        x: 426
-        y: 1914
+        x: 956
+        y: 1023
         width: 16
         height: 14
       alignment: 9
@@ -2960,8 +2960,8 @@ TextureImporter:
       name: herdsman_happy_lips
       rect:
         serializedVersion: 2
-        x: 543
-        y: 1948
+        x: 227
+        y: 1674
         width: 16
         height: 9
       alignment: 9
@@ -2974,8 +2974,8 @@ TextureImporter:
       name: herdsman_sad_lips
       rect:
         serializedVersion: 2
-        x: 983
-        y: 1007
+        x: 1480
+        y: 1151
         width: 10
         height: 8
       alignment: 9
