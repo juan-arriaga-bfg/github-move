@@ -24,7 +24,6 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
     private ProductionDef def;
 
     private Dictionary<int, KeyValuePair<int, int>> storage;
-    private int waitingCount;
 
     private Piece context;
     private ProductionPieceView view;
@@ -102,8 +101,6 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
             var key = PieceType.Parse(price.Currency);
             storage.Add(key, new KeyValuePair<int, int>(price.Amount, 0));
         }
-
-        waitingCount = storage.Count;
     }
 
     public bool Check(int resource)
@@ -209,8 +206,13 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
 
         value = new KeyValuePair<int, int>(value.Key, value.Value + 1);
         storage[resource] = value;
-        
-        if (value.Key == value.Value) waitingCount--;
+
+        var waitingCount = 0;
+
+        foreach (var item in storage.Values)
+        {
+            if (item.Key != item.Value) waitingCount++;
+        }
         
         if (waitingCount == 0)
         {
@@ -308,6 +310,7 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
         if(save == null) return;
         
         State = save.State;
+        
         if(State == ProductionState.Waiting) timer.Start(save.StartTime);
         if(State == ProductionState.Full) viewDef.AddView(ViewType.ProductionWarning).Change(true);
         if(State == ProductionState.Completed) viewDef.AddView(ViewType.ProductionWarning).Change(true);
