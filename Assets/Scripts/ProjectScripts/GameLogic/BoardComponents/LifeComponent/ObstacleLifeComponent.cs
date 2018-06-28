@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public class ObstacleLifeComponent : LifeComponent, IPieceBoardObserver
 {
@@ -35,7 +36,7 @@ public class ObstacleLifeComponent : LifeComponent, IPieceBoardObserver
     {
     }
 
-    public bool Damage()
+    public bool Damage(Action onComplete)
     {
         if (current == HP) return false;
 
@@ -48,14 +49,15 @@ public class ObstacleLifeComponent : LifeComponent, IPieceBoardObserver
             isSuccess = true;
 
             var position = context.CachedPosition;
-
+            
             Damage(1);
 
             if (current != HP)
             {
-                context.Context.ActionExecutor.AddAction(new EjectionPieceAction()
+                context.Context.ActionExecutor.AddAction(new EjectionPieceAction
                 {
                     From = position,
+                    OnComplete = onComplete,
                     Pieces = GameDataService.Current.SimpleObstaclesManager.RewardForPiece(context.PieceType, current)
                 });
                 

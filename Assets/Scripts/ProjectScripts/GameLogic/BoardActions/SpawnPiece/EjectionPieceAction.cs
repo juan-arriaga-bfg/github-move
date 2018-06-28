@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public class EjectionPieceAction : IBoardAction
 {
@@ -12,6 +13,8 @@ public class EjectionPieceAction : IBoardAction
 	public BoardPosition From { get; set; }
 	
 	public Dictionary<int, int> Pieces { get; set; }
+	
+	public Action OnComplete { get; set; }
 	
 	public bool PerformAction(BoardController gameBoardController)
 	{
@@ -56,6 +59,8 @@ public class EjectionPieceAction : IBoardAction
 			{
 				gameBoardController.BoardLogic.UnlockCell(pair.Key, this);
 			}
+
+			if (OnComplete != null) OnComplete();
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

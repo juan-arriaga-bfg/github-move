@@ -226,7 +226,7 @@ public class BoardManipulatorComponent : ECSEntity,
         if (cachedViewForDrag != null)
         {
 //            pos = pos + Vector2.up * 0.5f;
-
+            
             DOTween.Kill(dragAnimationId);
             
             if (cachedViewForDrag is PieceBoardElementView)

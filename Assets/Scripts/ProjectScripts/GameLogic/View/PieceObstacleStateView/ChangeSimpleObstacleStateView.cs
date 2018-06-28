@@ -90,7 +90,7 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
     
     public void Clear()
     {
-        if (life.Damage())
+        if (life.Damage(Reopen))
         {
             Change(false);
         }
@@ -101,5 +101,16 @@ public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
         if (code != GameEventsCodes.ClosePieceMenu || context is BoardPosition && ((BoardPosition) context).Equals(Context.CachedPosition)) return;
 		
         Change(false);
+    }
+
+    private void Reopen()
+    {
+        var viewDef = Context.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
+            
+        if (viewDef == null) return;
+        
+        var view = viewDef.AddView(ViewType.SimpleObstacle);
+        
+        view.Change(true);
     }
 }
