@@ -78,6 +78,7 @@ public class UIBoardView : BoardElementView
         
         if (isShow == false)
         {
+            IsShow = Priority < 0;
             UpdateVisibility(false);
             return;
         }

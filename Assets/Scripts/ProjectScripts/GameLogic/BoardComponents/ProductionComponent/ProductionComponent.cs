@@ -113,7 +113,7 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
 
         if (isReacts)
         {
-            Change(true);
+            Change();
 
             if (View != null)
             {
@@ -126,7 +126,7 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
     
     public void Hide()
     {
-        Change(false);
+        Change();
         
         if (View != null)
         {
