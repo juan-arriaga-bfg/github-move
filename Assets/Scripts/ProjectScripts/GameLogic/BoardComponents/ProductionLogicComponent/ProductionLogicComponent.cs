@@ -87,10 +87,8 @@ public class ProductionLogicComponent : IECSComponent
 
         if (isAdd)
         {
-            context.RendererContext.AddAnimationToQueue(new BouncePieceAnimation
-            {
-                BoardElement = piece.ActorView
-            });
+            var animation = new BouncePieceAnimation {BoardElement = piece.ActorView};
+            animation.Animate(context.RendererContext);
         }
         
         return isAdd;
