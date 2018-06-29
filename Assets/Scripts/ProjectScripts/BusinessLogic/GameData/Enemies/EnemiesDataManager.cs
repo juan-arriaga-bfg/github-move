@@ -1,12 +1,33 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemiesDataManager : IDataLoader<List<EnemyDef>>
+public class EnemiesDataManager : IECSComponent, IDataManager, IDataLoader<List<EnemyDef>>
 {
+    public static int ComponentGuid = ECSManager.GetNextGuid();
+
+    public int Guid { get { return ComponentGuid; } }
+	
+    public void OnRegisterEntity(ECSEntity entity)
+    {
+        Reload();
+    }
+
+    public void OnUnRegisterEntity(ECSEntity entity)
+    {
+    }
+    
     public List<EnemyDef> Enemies;
     public List<int> DeadEnemies = new List<int>();
 
     public Enemy CurrentEnemy;
+    
+    public void Reload()
+    {
+        Enemies = null;
+        DeadEnemies = new List<int>();
+        CurrentEnemy = null;
+        LoadData(new ResourceConfigDataMapper<List<EnemyDef>>("configs/enemies.data", NSConfigsSettings.Instance.IsUseEncryption));
+    }
     
     public void LoadData(IDataMapper<List<EnemyDef>> dataMapper)
     {
@@ -34,7 +55,7 @@ public class EnemiesDataManager : IDataLoader<List<EnemyDef>>
             }
             else
             {
-                Debug.LogWarning("[EnemiesDataManager]: enemies config not loaded");
+                Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
             }
         });
     }

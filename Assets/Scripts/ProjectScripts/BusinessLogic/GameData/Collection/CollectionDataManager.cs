@@ -1,12 +1,32 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectionDataManager : IDataLoader<CollectionDataManager>
+public class CollectionDataManager : IECSComponent, IDataManager, IDataLoader<CollectionDataManager>
 {
+	public static int ComponentGuid = ECSManager.GetNextGuid();
+
+	public int Guid { get { return ComponentGuid; } }
+	
+	public void OnRegisterEntity(ECSEntity entity)
+	{
+		Reload();
+	}
+
+	public void OnUnRegisterEntity(ECSEntity entity)
+	{
+	}
+	
 	public int Chance;
 	public List<CollectionDef> Collection;
 	
 	public Dictionary<BoardPosition, List<CurrencyPair>> ResourcesOnBoard = new Dictionary<BoardPosition, List<CurrencyPair>>();
+	
+	public void Reload()
+	{
+		Collection = null;
+		ResourcesOnBoard = new Dictionary<BoardPosition, List<CurrencyPair>>();
+		LoadData(new ResourceConfigDataMapper<CollectionDataManager>("configs/collection.data", NSConfigsSettings.Instance.IsUseEncryption));
+	}
     
 	public void LoadData(IDataMapper<CollectionDataManager> dataMapper)
 	{
@@ -19,7 +39,7 @@ public class CollectionDataManager : IDataLoader<CollectionDataManager>
 			}
 			else
 			{
-				Debug.LogWarning("[CollectionDataManager]: collection config not loaded");
+				Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
 			}
 		});
 	}

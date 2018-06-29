@@ -3,16 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class QuestsDataManager : IDataLoader<List<QuestDef>>
+public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<QuestDef>>
 {
+	public static int ComponentGuid = ECSManager.GetNextGuid();
+
+	public int Guid { get { return ComponentGuid; } }
+	
+	public void OnRegisterEntity(ECSEntity entity)
+	{
+		Reload();
+	}
+	
+	public void OnUnRegisterEntity(ECSEntity entity)
+	{
+	}
+	
 	private List<QuestDef> quests;
 	
 	public List<Quest> ActiveQuests = new List<Quest>();
 
 	private List<Quest> stack = new List<Quest>();
-	private readonly Dictionary<int, bool> completed = new Dictionary<int, bool>();
+	private Dictionary<int, bool> completed = new Dictionary<int, bool>();
 
 	public Action OnUpdateActiveQuests;
+	
+	public void Reload()
+	{
+		quests = null;
+		ActiveQuests = new List<Quest>();
+		stack = new List<Quest>();
+		completed = new Dictionary<int, bool>();
+		OnUpdateActiveQuests = null;
+		
+		LoadData(new ResourceConfigDataMapper<List<QuestDef>>("configs/quests.data", NSConfigsSettings.Instance.IsUseEncryption));
+	}
 	
 	public void LoadData(IDataMapper<List<QuestDef>> dataMapper)
 	{
@@ -56,7 +80,7 @@ public class QuestsDataManager : IDataLoader<List<QuestDef>>
 			}
 			else
 			{
-				Debug.LogWarning("[QuestsDataManager]: quests config not loaded");
+				Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
 			}
 		});
 	}

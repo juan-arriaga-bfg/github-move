@@ -1,8 +1,21 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PiecesDataManager : IDataLoader<List<PieceDef>>
+public class PiecesDataManager : IECSComponent, IDataManager, IDataLoader<List<PieceDef>>
 {
+    public static int ComponentGuid = ECSManager.GetNextGuid();
+
+    public int Guid { get { return ComponentGuid; } }
+	
+    public void OnRegisterEntity(ECSEntity entity)
+    {
+        Reload();
+    }
+
+    public void OnUnRegisterEntity(ECSEntity entity)
+    {
+    }
+    
     public const int ReproductionDelay = 20;
     public const int ReproductionStepDelay = 5;
     public const int ReproductionChance = 50;
@@ -16,6 +29,21 @@ public class PiecesDataManager : IDataLoader<List<PieceDef>>
     public BoardPosition KingPosition = BoardPosition.Default();
     
     private Dictionary<int, PieceDef> pieces;
+    
+    public void Reload()
+    {
+        CastlePosition = BoardPosition.Default();
+        MatketPosition = BoardPosition.Default();
+        StoragePosition = BoardPosition.Default();
+        SawmillPosition = BoardPosition.Default();
+        MinePosition = BoardPosition.Default();
+        SheepfoldPosition = BoardPosition.Default();
+        KingPosition = BoardPosition.Default();
+
+        pieces = null;
+        
+        LoadData(new ResourceConfigDataMapper<List<PieceDef>>("configs/pieces.data", NSConfigsSettings.Instance.IsUseEncryption));
+    }
     
     public void LoadData(IDataMapper<List<PieceDef>> dataMapper)
     {
@@ -34,7 +62,7 @@ public class PiecesDataManager : IDataLoader<List<PieceDef>>
             }
             else
             {
-                Debug.LogWarning("[PiecesDataManager]: pieces config not loaded");
+                Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
             }
         });
     }

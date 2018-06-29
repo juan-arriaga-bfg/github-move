@@ -1,11 +1,31 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleObstaclesDataManager : IDataLoader<List<SimpleObstaclesDef>>
+public class SimpleObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<List<SimpleObstaclesDef>>
 {
-    public Dictionary<int, SimpleObstaclesDef> Obstacles;
+    public static int ComponentGuid = ECSManager.GetNextGuid();
 
+    public int Guid { get { return ComponentGuid; } }
+	
+    public void OnRegisterEntity(ECSEntity entity)
+    {
+        Reload();
+    }
+    
+    public void OnUnRegisterEntity(ECSEntity entity)
+    {
+    }
+    
+    public Dictionary<int, SimpleObstaclesDef> Obstacles;
+    
     private Dictionary<BoardPosition, int> saveObstacles;
+    
+    public void Reload()
+    {
+        Obstacles = null;
+        saveObstacles = null;
+        LoadData(new ResourceConfigDataMapper<List<SimpleObstaclesDef>>("configs/simpleObstacles.data", NSConfigsSettings.Instance.IsUseEncryption));
+    }
     
     public void LoadData(IDataMapper<List<SimpleObstaclesDef>> dataMapper)
     {
@@ -44,7 +64,7 @@ public class SimpleObstaclesDataManager : IDataLoader<List<SimpleObstaclesDef>>
             }
             else
             {
-                Debug.LogWarning("[SimpleObstaclesDataManager]: simple obstacles config not loaded");
+                Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
             }
         });
     }

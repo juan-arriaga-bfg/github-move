@@ -78,12 +78,8 @@ public class UIMainWindowView : IWUIWindowView
         {
             var profileBuilder = new DefaultProfileBuilder();
             ProfileService.Instance.Manager.ReplaceProfile(profileBuilder.Create());
-        
-            // gamedata configs
-            GameDataManager dataManager = new GameDataManager();
-            GameDataService.Instance.SetManager(dataManager);
-        
-            dataManager.Load();
+            
+            GameDataService.Current.Reload();
         
             SceneManager.LoadScene("Main", LoadSceneMode.Single);
         };

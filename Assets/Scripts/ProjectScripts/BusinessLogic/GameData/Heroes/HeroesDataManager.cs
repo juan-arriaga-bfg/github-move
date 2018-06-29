@@ -1,9 +1,28 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroesDataManager : IDataLoader<List<HeroDef>>
+public class HeroesDataManager : IECSComponent, IDataManager, IDataLoader<List<HeroDef>>
 {
+    public static int ComponentGuid = ECSManager.GetNextGuid();
+
+    public int Guid { get { return ComponentGuid; } }
+	
+    public void OnRegisterEntity(ECSEntity entity)
+    {
+        Reload();
+    }
+
+    public void OnUnRegisterEntity(ECSEntity entity)
+    {
+    }
+    
     public List<Hero> Heroes;
+    
+    public void Reload()
+    {
+        Heroes = null;
+        LoadData(new ResourceConfigDataMapper<List<HeroDef>>("configs/heroes.data", NSConfigsSettings.Instance.IsUseEncryption));
+    }
     
     public void LoadData(IDataMapper<List<HeroDef>> dataMapper)
     {
@@ -32,7 +51,7 @@ public class HeroesDataManager : IDataLoader<List<HeroDef>>
             }
             else
             {
-                Debug.LogWarning("[HeroesDataManager]: heroes config not loaded");
+                Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
             }
         });
     }

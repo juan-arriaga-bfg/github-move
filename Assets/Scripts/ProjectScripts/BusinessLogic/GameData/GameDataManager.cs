@@ -96,34 +96,149 @@ public class ItemWeight
 }
 
 
-public class GameDataManager
+public class GameDataManager : ECSEntity,
+    IChestsDataManager, IEnemiesDataManager, IHeroesDataManager, IPiecesDataManager, IFogsDataManager, IObstaclesDataManager,
+    IQuestsDataManager, ISimpleObstaclesDataManager, ICollectionDataManager, ILevelsDataManager, ITasksDataManager, IProductionDataManager
 {
-    public readonly ChestsDataManager ChestsManager = new ChestsDataManager();
-    public readonly EnemiesDataManager EnemiesManager = new EnemiesDataManager();
-    public readonly HeroesDataManager HeroesManager = new HeroesDataManager();
-    public readonly PiecesDataManager PiecesManager = new PiecesDataManager();
-    public readonly ObstaclesDataManager ObstaclesManager = new ObstaclesDataManager();
-    public readonly SimpleObstaclesDataManager SimpleObstaclesManager = new SimpleObstaclesDataManager();
-    public readonly QuestsDataManager QuestsManager = new QuestsDataManager();
-    public readonly FogsDataManager FogsManager = new FogsDataManager();
-    public readonly CollectionDataManager CollectionManager = new CollectionDataManager();
-    public readonly LevelsDataManager LevelsManager = new LevelsDataManager();
-    public readonly TasksDataManager TasksManager = new TasksDataManager();
-    public readonly ProductionDataManager ProductionManager = new ProductionDataManager();
+    public static int ComponentGuid = ECSManager.GetNextGuid();
 
-    public void Load()
+    public override int Guid
     {
-        ChestsManager.LoadData(new ResourceConfigDataMapper<List<ChestDef>>("configs/chests.data", NSConfigsSettings.Instance.IsUseEncryption));
-        EnemiesManager.LoadData(new ResourceConfigDataMapper<List<EnemyDef>>("configs/enemies.data", NSConfigsSettings.Instance.IsUseEncryption));
-        HeroesManager.LoadData(new ResourceConfigDataMapper<List<HeroDef>>("configs/heroes.data", NSConfigsSettings.Instance.IsUseEncryption));
-        PiecesManager.LoadData(new ResourceConfigDataMapper<List<PieceDef>>("configs/pieces.data", NSConfigsSettings.Instance.IsUseEncryption));
-        ObstaclesManager.LoadData(new ResourceConfigDataMapper<List<ObstacleDef>>("configs/obstacles.data", NSConfigsSettings.Instance.IsUseEncryption));
-        SimpleObstaclesManager.LoadData(new ResourceConfigDataMapper<List<SimpleObstaclesDef>>("configs/simpleObstacles.data", NSConfigsSettings.Instance.IsUseEncryption));
-        QuestsManager.LoadData(new ResourceConfigDataMapper<List<QuestDef>>("configs/quests.data", NSConfigsSettings.Instance.IsUseEncryption));
-        FogsManager.LoadData(new ResourceConfigDataMapper<FogsDataManager>("configs/fogs.data", NSConfigsSettings.Instance.IsUseEncryption));
-        CollectionManager.LoadData(new ResourceConfigDataMapper<CollectionDataManager>("configs/collection.data", NSConfigsSettings.Instance.IsUseEncryption));
-        LevelsManager.LoadData(new ResourceConfigDataMapper<List<LevelsDef>>("configs/levels.data", NSConfigsSettings.Instance.IsUseEncryption));
-        TasksManager.LoadData(new ResourceConfigDataMapper<TasksDataManager>("configs/tasks.data", NSConfigsSettings.Instance.IsUseEncryption));
-        ProductionManager.LoadData(new ResourceConfigDataMapper<List<ProductionDef>>("configs/production.data", NSConfigsSettings.Instance.IsUseEncryption));
+        get { return ComponentGuid; }
+    }
+    
+    private ChestsDataManager chestsManager;
+    public ChestsDataManager ChestsManager
+    {
+        get
+        {
+            return chestsManager ?? (chestsManager = GetComponent<ChestsDataManager>(ChestsDataManager.ComponentGuid));
+        }
+    }
+
+    private EnemiesDataManager enemiesManager;
+    public EnemiesDataManager EnemiesManager
+    {
+        get
+        {
+            return enemiesManager ??
+                   (enemiesManager = GetComponent<EnemiesDataManager>(EnemiesDataManager.ComponentGuid));
+        }
+    }
+
+    private HeroesDataManager heroesManager;
+    public HeroesDataManager HeroesManager
+    {
+        get
+        {
+            return heroesManager ?? (heroesManager = GetComponent<HeroesDataManager>(HeroesDataManager.ComponentGuid));
+        }
+    }
+
+    private PiecesDataManager piecesManager;
+    public PiecesDataManager PiecesManager
+    {
+        get
+        {
+            return piecesManager ?? (piecesManager = GetComponent<PiecesDataManager>(PiecesDataManager.ComponentGuid));
+        }
+    }
+
+    private CollectionDataManager collectionManager;
+    public CollectionDataManager CollectionManager
+    {
+        get
+        {
+            return collectionManager ?? (collectionManager =
+                       GetComponent<CollectionDataManager>(CollectionDataManager.ComponentGuid));
+        }
+    }
+
+    private LevelsDataManager levelsManager;
+    public LevelsDataManager LevelsManager
+    {
+        get
+        {
+            return levelsManager ?? (levelsManager = GetComponent<LevelsDataManager>(LevelsDataManager.ComponentGuid));
+        }
+    }
+
+    private TasksDataManager tasksManager;
+    public TasksDataManager TasksManager
+    {
+        get { return tasksManager ?? (tasksManager = GetComponent<TasksDataManager>(TasksDataManager.ComponentGuid)); }
+    }
+
+    private ProductionDataManager productionManager;
+    public ProductionDataManager ProductionManager
+    {
+        get
+        {
+            return productionManager ?? (productionManager = GetComponent<ProductionDataManager>(ProductionDataManager.ComponentGuid));
+        }
+    }
+    
+    private FogsDataManager fogsManager;
+    public FogsDataManager FogsManager
+    {
+        get
+        {
+            return fogsManager ?? (fogsManager = GetComponent<FogsDataManager>(FogsDataManager.ComponentGuid));
+        }
+    }
+    
+    private ObstaclesDataManager obstaclesManager;
+    public ObstaclesDataManager ObstaclesManager
+    {
+        get
+        {
+            return obstaclesManager ?? (obstaclesManager = GetComponent<ObstaclesDataManager>(ObstaclesDataManager.ComponentGuid));
+        }
+    }
+    
+    private QuestsDataManager questsManager;
+    public QuestsDataManager QuestsManager
+    {
+        get
+        {
+            return questsManager ?? (questsManager = GetComponent<QuestsDataManager>(QuestsDataManager.ComponentGuid));
+        }
+    }
+    
+    private SimpleObstaclesDataManager simpleObstaclesManager;
+    public SimpleObstaclesDataManager SimpleObstaclesManager
+    {
+        get
+        {
+            return simpleObstaclesManager ?? (simpleObstaclesManager = GetComponent<SimpleObstaclesDataManager>(SimpleObstaclesDataManager.ComponentGuid));
+        }
+    }
+    
+    public void SetupComponents()
+    {
+        RegisterComponent(new ChestsDataManager());
+        RegisterComponent(new EnemiesDataManager());
+        RegisterComponent(new HeroesDataManager());
+        RegisterComponent(new PiecesDataManager());
+        RegisterComponent(new ObstaclesDataManager());
+        RegisterComponent(new SimpleObstaclesDataManager());
+        RegisterComponent(new QuestsDataManager());
+        RegisterComponent(new FogsDataManager());
+        RegisterComponent(new CollectionDataManager());
+        RegisterComponent(new LevelsDataManager());
+        RegisterComponent(new TasksDataManager());
+        RegisterComponent(new ProductionDataManager());
+    }
+
+    public void Reload()
+    {
+        foreach (var component in componentsCache.Values)
+        {
+            var manager = component as IDataManager;
+
+            if (manager == null) continue;
+
+            manager.Reload();
+        }
     }
 }

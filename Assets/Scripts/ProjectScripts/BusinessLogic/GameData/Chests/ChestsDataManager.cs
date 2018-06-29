@@ -1,12 +1,33 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ChestsDataManager : IDataLoader<List<ChestDef>>
+public class ChestsDataManager : IECSComponent, IDataManager, IDataLoader<List<ChestDef>>
 {
+    public static int ComponentGuid = ECSManager.GetNextGuid();
+
+    public int Guid { get { return ComponentGuid; } }
+	
+    public void OnRegisterEntity(ECSEntity entity)
+    {
+        Reload();
+    }
+
+    public void OnUnRegisterEntity(ECSEntity entity)
+    {
+    }
+    
     public Chest ActiveChest;
     public List<ChestDef> Chests;
     
-    public readonly Dictionary<BoardPosition, Chest> ChestsOnBoard = new Dictionary<BoardPosition, Chest>();
+    public Dictionary<BoardPosition, Chest> ChestsOnBoard = new Dictionary<BoardPosition, Chest>();
+    
+    public void Reload()
+    {
+        ActiveChest = null;
+        Chests = null;
+        ChestsOnBoard = new Dictionary<BoardPosition, Chest>();
+        LoadData(new ResourceConfigDataMapper<List<ChestDef>>("configs/chests.data", NSConfigsSettings.Instance.IsUseEncryption));
+    }
     
     public void LoadData(IDataMapper<List<ChestDef>> dataMapper)
     {
@@ -45,7 +66,7 @@ public class ChestsDataManager : IDataLoader<List<ChestDef>>
             }
             else
             {
-                Debug.LogWarning("[ChestsDataManager]: chests config not loaded");
+                Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
             }
         });
     }

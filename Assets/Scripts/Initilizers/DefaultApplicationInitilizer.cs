@@ -98,7 +98,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         GameDataManager dataManager = new GameDataManager();
         GameDataService.Instance.SetManager(dataManager);
         
-        dataManager.Load();
+        dataManager.SetupComponents();
     }
     
     void OnApplicationPause(bool pauseStatus)

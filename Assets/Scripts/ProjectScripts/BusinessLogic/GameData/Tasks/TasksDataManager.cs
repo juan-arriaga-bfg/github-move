@@ -2,8 +2,17 @@
 using System.Linq;
 using UnityEngine;
 
-public class TasksDataManager : IDataLoader<TasksDataManager>
+public class TasksDataManager : ECSEntity, IDataManager, IDataLoader<TasksDataManager>
 {
+    public static int ComponentGuid = ECSManager.GetNextGuid();
+
+    public override int Guid { get { return ComponentGuid; } }
+	
+    public override void OnRegisterEntity(ECSEntity entity)
+    {
+        Reload();
+    }
+    
     public int Delay { get; set; }
     public List<int> TaskCounts { get; set; }
     public List<ItemRange> Ranges { get; set; }
@@ -16,6 +25,24 @@ public class TasksDataManager : IDataLoader<TasksDataManager>
     private int updateAmount;
 
     private bool isStart;
+
+    public void Reload()
+    {
+        TaskCounts = null;
+        Ranges = null;
+        Characters = null;
+        Defs = null;
+        Tasks = null;
+        
+        if (Timer != null)
+        {
+            Timer.Stop();
+            UnRegisterComponent(Timer);
+            Timer = null;
+        }
+        
+        LoadData(new ResourceConfigDataMapper<TasksDataManager>("configs/tasks.data", NSConfigsSettings.Instance.IsUseEncryption));
+    }
     
     public void LoadData(IDataMapper<TasksDataManager> dataMapper)
     {
@@ -31,8 +58,7 @@ public class TasksDataManager : IDataLoader<TasksDataManager>
                 
                 Timer = new TimerComponent{Delay = data.Delay};
                 Timer.OnComplete += Refresh;
-                
-                ProfileService.Current.RegisterComponent(Timer);
+                RegisterComponent(Timer);
                 
                 Tasks = new List<Task>();
 
@@ -42,7 +68,7 @@ public class TasksDataManager : IDataLoader<TasksDataManager>
             }
             else
             {
-                Debug.LogWarning("[TasksDataManager]: tasks config not loaded");
+                Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
             }
         });
     }

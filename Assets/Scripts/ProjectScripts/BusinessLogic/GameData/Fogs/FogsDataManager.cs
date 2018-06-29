@@ -1,13 +1,35 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class FogsDataManager : IDataLoader<FogsDataManager>
+public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsDataManager>
 {
+    public static int ComponentGuid = ECSManager.GetNextGuid();
+
+    public int Guid { get { return ComponentGuid; } }
+	
+    public void OnRegisterEntity(ECSEntity entity)
+    {
+        Reload();
+    }
+
+    public void OnUnRegisterEntity(ECSEntity entity)
+    {
+    }
+    
     public List<ItemWeight> DefaultPieceWeights { get; set; }
     public List<FogDef> Fogs { get; set; }
     
     public Dictionary<BoardPosition, FogDef> FogPositions;
     public List<BoardPosition> Completed = new List<BoardPosition>();
+    
+    public void Reload()
+    {
+        DefaultPieceWeights = null;
+        Fogs = null;
+        FogPositions = null;
+        Completed = new List<BoardPosition>();
+        LoadData(new ResourceConfigDataMapper<FogsDataManager>("configs/fogs.data", NSConfigsSettings.Instance.IsUseEncryption));
+    }
     
     public void LoadData(IDataMapper<FogsDataManager> dataMapper)
     {
@@ -36,7 +58,7 @@ public class FogsDataManager : IDataLoader<FogsDataManager>
             }
             else
             {
-                Debug.LogWarning("[FogsDataManager]: fogs config not loaded");
+                Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
             }
         });
     }

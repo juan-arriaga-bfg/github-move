@@ -1,10 +1,29 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelsDataManager : IDataLoader<List<LevelsDef>>
+public class LevelsDataManager : IECSComponent, IDataManager, IDataLoader<List<LevelsDef>>
 {
-	public List<LevelsDef> Levels;
+	public static int ComponentGuid = ECSManager.GetNextGuid();
 
+	public int Guid { get { return ComponentGuid; } }
+	
+	public void OnRegisterEntity(ECSEntity entity)
+	{
+		Reload();
+	}
+	
+	public void OnUnRegisterEntity(ECSEntity entity)
+	{
+	}
+	
+	public List<LevelsDef> Levels;
+	
+	public void Reload()
+	{
+		Levels = null;
+		LoadData(new ResourceConfigDataMapper<List<LevelsDef>>("configs/levels.data", NSConfigsSettings.Instance.IsUseEncryption));
+	}
+	
 	public void LoadData(IDataMapper<List<LevelsDef>> dataMapper)
 	{
 		dataMapper.LoadData((data, error) =>
@@ -15,7 +34,7 @@ public class LevelsDataManager : IDataLoader<List<LevelsDef>>
 			}
 			else
 			{
-				Debug.LogWarning("[LevelsDataManager]: levels config not loaded");
+				Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
 			}
 		});
 	}

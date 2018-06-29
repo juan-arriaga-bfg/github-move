@@ -1,9 +1,28 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ProductionDataManager : IDataLoader<List<ProductionDef>>
+public class ProductionDataManager : IECSComponent, IDataManager, IDataLoader<List<ProductionDef>>
 {
+	public static int ComponentGuid = ECSManager.GetNextGuid();
+
+	public int Guid { get { return ComponentGuid; } }
+	
+	public void OnRegisterEntity(ECSEntity entity)
+	{
+		Reload();
+	}
+
+	public void OnUnRegisterEntity(ECSEntity entity)
+	{
+	}
+	
 	public Dictionary<int, ProductionDef> Production;
+	
+	public void Reload()
+	{
+		Production = null;
+		LoadData(new ResourceConfigDataMapper<List<ProductionDef>>("configs/production.data", NSConfigsSettings.Instance.IsUseEncryption));
+	}
 
 	public void LoadData(IDataMapper<List<ProductionDef>> dataMapper)
 	{
@@ -20,7 +39,7 @@ public class ProductionDataManager : IDataLoader<List<ProductionDef>>
 			}
 			else
 			{
-				Debug.LogWarning("[ProductionDataManager]: production config not loaded");
+				Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
 			}
 		});
 	}
