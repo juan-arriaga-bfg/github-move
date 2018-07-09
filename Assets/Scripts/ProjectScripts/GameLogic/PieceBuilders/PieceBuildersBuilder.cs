@@ -42,8 +42,8 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddObstaclePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict = AddSimplePiece<SimpleObstaclePieceBuilder>(PieceType.O1.Id, PieceType.O5.Id, dict);
-        dict = AddSimplePiece<SimpleObstaclePieceBuilder>(PieceType.OX1.Id, PieceType.OX5.Id, dict);
+        dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.O1.Id, PieceType.O5.Id, dict);
+        dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OX1.Id, PieceType.OX5.Id, dict);
         
         dict.Add(PieceType.Fog.Id, new FogPieceBuilder());
         

@@ -7,7 +7,7 @@ public class ObstacleLifeComponent : LifeComponent, IPieceBoardObserver
     {
         get
         {
-            return GameDataService.Current.SimpleObstaclesManager.PriceForPiece(context.PieceType, current);
+            return GameDataService.Current.ObstaclesManager.PriceForPiece(context.PieceType, current);
         }
     }
 
@@ -25,7 +25,7 @@ public class ObstacleLifeComponent : LifeComponent, IPieceBoardObserver
     
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        current = GameDataService.Current.SimpleObstaclesManager.GetSaveStep(position);
+        current = GameDataService.Current.ObstaclesManager.GetSaveStep(position);
     }
 
     public void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)
@@ -58,13 +58,13 @@ public class ObstacleLifeComponent : LifeComponent, IPieceBoardObserver
                 {
                     From = position,
                     OnComplete = onComplete,
-                    Pieces = GameDataService.Current.SimpleObstaclesManager.RewardForPiece(context.PieceType, current)
+                    Pieces = GameDataService.Current.ObstaclesManager.RewardForPiece(context.PieceType, current)
                 });
                 
                 return;
             }
 
-            var chest = GameDataService.Current.SimpleObstaclesManager.ChestForPiece(context.PieceType);
+            var chest = GameDataService.Current.ObstaclesManager.ChestForPiece(context.PieceType);
                 
             if(chest == PieceType.None.Id) return;
                 

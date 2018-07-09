@@ -1,4 +1,4 @@
-﻿public class TouchReactionDefinitionSimpleObstacle : TouchReactionDefinitionComponent
+﻿public class TouchReactionDefinitionObstacle : TouchReactionDefinitionComponent
 {
     private ViewDefinitionComponent viewDef;
     

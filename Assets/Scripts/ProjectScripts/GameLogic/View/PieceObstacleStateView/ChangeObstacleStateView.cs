@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChangeSimpleObstacleStateView : UIBoardView, IBoardEventListener
+public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
 {
     [SerializeField] private NSText message;
     [SerializeField] private NSText price;

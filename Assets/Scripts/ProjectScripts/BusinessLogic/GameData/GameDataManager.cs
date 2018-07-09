@@ -196,12 +196,12 @@ public class GameDataManager : ECSEntity,
         }
     }
     
-    private SimpleObstaclesDataManager simpleObstaclesManager;
-    public SimpleObstaclesDataManager SimpleObstaclesManager
+    private ObstaclesDataManager obstaclesManager;
+    public ObstaclesDataManager ObstaclesManager
     {
         get
         {
-            return simpleObstaclesManager ?? (simpleObstaclesManager = GetComponent<SimpleObstaclesDataManager>(SimpleObstaclesDataManager.ComponentGuid));
+            return obstaclesManager ?? (obstaclesManager = GetComponent<ObstaclesDataManager>(ObstaclesDataManager.ComponentGuid));
         }
     }
     
@@ -211,7 +211,7 @@ public class GameDataManager : ECSEntity,
 //        RegisterComponent(new EnemiesDataManager());
 //        RegisterComponent(new HeroesDataManager());
         RegisterComponent(new PiecesDataManager());
-        RegisterComponent(new SimpleObstaclesDataManager());
+        RegisterComponent(new ObstaclesDataManager());
         RegisterComponent(new QuestsDataManager());
         RegisterComponent(new FogsDataManager());
         RegisterComponent(new CollectionDataManager());

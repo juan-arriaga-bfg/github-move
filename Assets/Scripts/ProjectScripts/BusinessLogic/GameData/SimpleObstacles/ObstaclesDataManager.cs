@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<List<SimpleObstaclesDef>>
+public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<List<ObstaclesDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -16,7 +16,7 @@ public class SimpleObstaclesDataManager : IECSComponent, IDataManager, IDataLoad
     {
     }
     
-    public Dictionary<int, SimpleObstaclesDef> Obstacles;
+    public Dictionary<int, ObstaclesDef> Obstacles;
     
     private Dictionary<BoardPosition, int> saveObstacles;
     
@@ -24,14 +24,14 @@ public class SimpleObstaclesDataManager : IECSComponent, IDataManager, IDataLoad
     {
         Obstacles = null;
         saveObstacles = null;
-        LoadData(new ResourceConfigDataMapper<List<SimpleObstaclesDef>>("configs/simpleObstacles.data", NSConfigsSettings.Instance.IsUseEncryption));
+        LoadData(new ResourceConfigDataMapper<List<ObstaclesDef>>("configs/obstacles.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
     
-    public void LoadData(IDataMapper<List<SimpleObstaclesDef>> dataMapper)
+    public void LoadData(IDataMapper<List<ObstaclesDef>> dataMapper)
     {
         dataMapper.LoadData((data, error)=> 
         {
-            Obstacles = new Dictionary<int, SimpleObstaclesDef>();
+            Obstacles = new Dictionary<int, ObstaclesDef>();
             var matchDefinition = new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
             
             if (string.IsNullOrEmpty(error))
@@ -71,7 +71,7 @@ public class SimpleObstaclesDataManager : IECSComponent, IDataManager, IDataLoad
 
     public int ChestForPiece(int piece)
     {
-        SimpleObstaclesDef def;
+        ObstaclesDef def;
 
         if (Obstacles.TryGetValue(piece, out def) == false) return PieceType.None.Id;
         
@@ -82,7 +82,7 @@ public class SimpleObstaclesDataManager : IECSComponent, IDataManager, IDataLoad
 
     public Dictionary<int, int> RewardForPiece(int piece, int step)
     {
-        SimpleObstaclesDef def;
+        ObstaclesDef def;
         
         var result = new Dictionary<int, int>();
 

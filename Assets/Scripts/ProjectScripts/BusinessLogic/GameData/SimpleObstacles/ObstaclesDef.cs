@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public class SimpleObstaclesDef
+public class ObstaclesDef
 { 
     private int pieceType = -1;
     

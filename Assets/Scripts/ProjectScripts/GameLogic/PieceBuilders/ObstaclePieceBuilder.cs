@@ -1,4 +1,4 @@
-﻿public class SimpleObstaclePieceBuilder : GenericPieceBuilder
+﻿public class ObstaclePieceBuilder : GenericPieceBuilder
 {
 	public override Piece Build(int pieceType, BoardController context)
 	{
@@ -10,7 +10,7 @@
 		AddObserver(piece, life);
 		
 		piece.RegisterComponent(new TouchReactionComponent()
-			.RegisterComponent(new TouchReactionDefinitionSimpleObstacle())
+			.RegisterComponent(new TouchReactionDefinitionObstacle())
 			.RegisterComponent(new TouchReactionConditionComponent()));
 
 		CreateViewComponent(piece);
