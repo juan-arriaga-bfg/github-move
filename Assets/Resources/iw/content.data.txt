@@ -45,11 +45,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "ChangeSimpleObstacleStateView",
-    "ResourcePath": "Prefabs/ChangeSimpleObstacleStateView",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "A1Piece",
     "ResourcePath": "Prefabs/Pieces/GenericPiece/A/A1Piece",
     "IsGenerateAutoName": true
@@ -862,6 +857,11 @@
   {
     "Uid": "RiverAngleTop",
     "ResourcePath": "Prefabs/Town/RiverAngleTop",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ChangeObstacleStateView",
+    "ResourcePath": "Prefabs/ChangeObstacleStateView",
     "IsGenerateAutoName": true
   }
 ]

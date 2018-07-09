@@ -13,7 +13,7 @@
             if (viewDef == null) return false;
         }
         
-        var view = viewDef.AddView(ViewType.SimpleObstacle);
+        var view = viewDef.AddView(ViewType.Obstacle);
         
         view.Change(!view.IsShow);
         

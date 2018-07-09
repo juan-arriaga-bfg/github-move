@@ -25,7 +25,7 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
     
     protected override ViewType Id
     {
-        get { return ViewType.SimpleObstacle; }
+        get { return ViewType.Obstacle; }
     }
     
     public override void Init(Piece piece)
@@ -109,7 +109,7 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
             
         if (viewDef == null) return;
         
-        var view = viewDef.AddView(ViewType.SimpleObstacle);
+        var view = viewDef.AddView(ViewType.Obstacle);
         
         view.Change(true);
     }

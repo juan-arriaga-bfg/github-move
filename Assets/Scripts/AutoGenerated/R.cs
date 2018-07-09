@@ -9,7 +9,6 @@ public class R
      public const string HintArrow = "HintArrow";
      public const string PieceLevelView = "PieceLevelView";
      public const string MenuView = "MenuView";
-     public const string ChangeSimpleObstacleStateView = "ChangeSimpleObstacleStateView";
      public const string A1Piece = "A1Piece";
      public const string A2Piece = "A2Piece";
      public const string A3Piece = "A3Piece";
@@ -173,4 +172,5 @@ public class R
      public const string RiverAngleLeft = "RiverAngleLeft";
      public const string RiverAngleRight = "RiverAngleRight";
      public const string RiverAngleTop = "RiverAngleTop";
+     public const string ChangeObstacleStateView = "ChangeObstacleStateView";
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 {
-    private HeroAbility condition;
+    private CurrencyPair condition;
     private StorageItem storageItem;
     private ViewDefinitionComponent viewDef;
     
@@ -93,7 +93,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void UpdateResource(int offset)
     {
-        if(storageItem.Amount < condition.Value) return;
+        if(storageItem.Amount < condition.Amount) return;
         
         var view = viewDef.AddView(ViewType.FogState);
 
@@ -103,7 +103,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public string GetResourceId()
     {
-        return condition.Ability.ToString();
+        return condition.Currency;
     }
     
     public Vector2 GetScreenPosition()
