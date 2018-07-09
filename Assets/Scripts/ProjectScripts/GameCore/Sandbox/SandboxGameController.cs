@@ -45,7 +45,6 @@ public class SandboxGameController : MonoBehaviour
             .RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build()))); 
         
         boardController.RegisterComponent(new BoardRandomComponent()); // random
-        boardController.RegisterComponent(new ObstaclesLogicComponent());
 //        boardController.RegisterComponent(new ProductionLogicComponent());
 //        boardController.RegisterComponent(new EnemiesLogicComponent());
         boardController.RegisterComponent(new ReproductionLogicComponent());
