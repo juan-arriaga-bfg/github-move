@@ -55,7 +55,7 @@ public class Chest
 
     public int MergePoints
     {
-        get { return def.MergePoints; }
+        get { return 100; }
     }
     
     public ChestState State
@@ -91,9 +91,9 @@ public class Chest
         completeTime = time.AddSeconds(def.Time);
     }
 
-    public Dictionary<int, int> GetRewardPieces(int level)
+    public Dictionary<int, int> GetRewardPieces()
     {
-        var max = def.PieceAmounts[level];
+        var max = def.PieceAmount;
         var result = new Dictionary<int, int>();
 
         for (var i = 0; i < max; i++)
@@ -112,9 +112,9 @@ public class Chest
         return result;
     }
     
-    public Dictionary<string, int> GetRewardChargers(int level)
+    public Dictionary<string, int> GetRewardChargers()
     {
-        var max = def.ChargerAmounts[level];
+        var max = def.ChargerAmount;
         var result = new Dictionary<string, int>();
 
         for (var i = 0; i < max; i++)

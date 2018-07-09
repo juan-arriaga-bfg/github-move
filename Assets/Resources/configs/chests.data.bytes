@@ -7,30 +7,8 @@
       "Currency": "Crystals",
       "Amount": 1
     },
-    "PieceAmounts" :
-    [
-      12,
-      12,
-      13,
-      13,
-      13,
-      14,
-      14,
-      15,
-      15
-    ],
-    "ChargerAmounts" :
-    [
-      1,
-      2,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8
-    ],
+    "PieceAmount" : 12,
+    "ChargerAmount" : 1,
     "PieceWeights" :
     [
       {
@@ -74,30 +52,8 @@
       "Currency": "Crystals",
       "Amount": 5
     },
-    "PieceAmounts" :
-    [
-      15,
-      16,
-      16,
-      17,
-      17,
-      17,
-      18,
-      18,
-      18
-    ],
-    "ChargerAmounts" :
-    [
-      2,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9
-    ],
+    "PieceAmount" : 15,
+    "ChargerAmount" : 2,
     "PieceWeights" :
     [
       {
@@ -146,30 +102,8 @@
       "Currency": "Crystals",
       "Amount": 20
     },
-    "PieceAmounts" :
-    [
-      22,
-      23,
-      23,
-      24,
-      24,
-      24,
-      25,
-      25,
-      25
-    ],
-    "ChargerAmounts" :
-    [
-      2,
-      3,
-      4,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9
-    ],
+    "PieceAmount" : 22,
+    "ChargerAmount" : 2,
     "PieceWeights" :
     [
       {
@@ -194,16 +128,16 @@
         "Uid": "F2",
         "Weight" : 20
       },
-	  {
+      {
         "Uid": "B2",
         "Weight" : 10,
         "Override" : "true"
       },
-	  {
+      {
         "Uid": "G2",
         "Weight" : 20,
         "Override" : "true"
-      },
+      }
     ],
     "ChargerWeights" :
     [
@@ -225,43 +159,21 @@
       "Currency": "Crystals",
       "Amount":40
     },
-    "PieceAmounts" :
-    [
-      22,
-      23,
-      23,
-      24,
-      24,
-      24,
-      25,
-      25,
-      25
-    ],
-    "ChargerAmounts" :
-    [
-      3,
-      4,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-    ],
+    "PieceAmount" : 22,
+    "ChargerAmount" : 3,
     "PieceWeights" :
     [
-	{
+      {
         "Uid": "A2",
         "Weight" : 0,
         "Override" : "true"
       },
-	  	{
+      {
         "Uid": "B2",
         "Weight" : 0,
         "Override" : "true"
       },
-	  	{
+      {
         "Uid": "C1",
         "Weight" : 0,
         "Override" : "true"
@@ -271,7 +183,7 @@
         "Weight" : 20,
         "Override" : "true"
       },
-	        {
+      {
         "Uid": "C2",
         "Weight" : 5,
         "Override" : "true"
@@ -302,30 +214,8 @@
       "Currency": "Crystals",
       "Amount": 60
     },
-    "PieceAmounts" :
-    [
-      22,
-      23,
-      23,
-      24,
-      24,
-      24,
-      25,
-      25,
-      25
-    ],
-    "ChargerAmounts" :
-    [
-      4,
-      4,
-      5,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-    ],
+    "PieceAmount" : 22,
+    "ChargerAmount" : 4,
     "PieceWeights" :
     [
       {
@@ -370,7 +260,7 @@
         "Uid": "F3",
         "Weight" : 15
       },
-	        {
+      {
         "Uid": "G3",
         "Weight" : 15
       },
@@ -401,31 +291,8 @@
       "Currency": "Crystals",
       "Amount": 80
     },
-    "PieceAmounts" :
-    [
-      22,
-      23,
-      23,
-      24,
-      24,
-      24,
-      25,
-      25,
-      25,
-      26
-    ],
-    "ChargerAmounts" :
-    [
-      4,
-      4,
-      5,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-    ],
+    "PieceAmount" : 22,
+    "ChargerAmount" : 4,
     "PieceWeights" :
     [
       {
@@ -457,31 +324,8 @@
       "Currency": "Crystals",
       "Amount": 100
     },
-    "PieceAmounts" :
-    [
-      22,
-      23,
-      23,
-      24,
-      24,
-      24,
-      25,
-      25,
-      25,
-      26
-    ],
-    "ChargerAmounts" :
-    [
-      4,
-      4,
-      5,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-    ],
+    "PieceAmount" : 22,
+    "ChargerAmount" : 4,
     "PieceWeights" :
     [
       {
@@ -517,31 +361,8 @@
       "Currency": "Crystals",
       "Amount": 120
     },
-    "PieceAmounts" :
-    [
-      22,
-      23,
-      23,
-      24,
-      24,
-      24,
-      25,
-      25,
-      25,
-      26
-    ],
-    "ChargerAmounts" :
-    [
-      4,
-      5,
-      5,
-      6,
-      6,
-      7,
-      8,
-      9,
-      10
-    ],
+    "PieceAmount" : 22,
+    "ChargerAmount" : 4,
     "PieceWeights" :
     [
       {
@@ -573,31 +394,8 @@
       "Currency": "Crystals",
       "Amount": 140
     },
-    "PieceAmounts" :
-    [
-      22,
-      23,
-      23,
-      24,
-      24,
-      24,
-      25,
-      25,
-      25,
-      26
-    ],
-    "ChargerAmounts" :
-    [
-      5,
-      5,
-      5,
-      6,
-      6,
-      7,
-      8,
-      9,
-      10
-    ],
+    "PieceAmount" : 22,
+    "ChargerAmount" : 5,
     "PieceWeights" :
     [
       {

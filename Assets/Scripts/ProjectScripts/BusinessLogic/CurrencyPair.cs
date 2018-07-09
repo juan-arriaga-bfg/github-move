@@ -19,7 +19,7 @@ public class CurrencyPair
 
     public string ToStringIcon(bool isLeft = true)
     {
-        var icon = Currency == global::Currency.Energy.Name ? "Exp" : string.Format("<sprite name={0}>", Currency);
+        var icon = Currency == global::Currency.Experience.Name ? "Exp" : string.Format("<sprite name={0}>", Currency);
 
         return isLeft ? string.Format("{0} {1}", icon, Amount) : string.Format("{0} {1}", Amount, icon);
     }

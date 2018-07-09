@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public class ChestDef
 {
@@ -7,10 +6,9 @@ public class ChestDef
     
     public string Uid { get; set; }
     public int Time { get; set; }
-    public int MergePoints { get; set; }
     public CurrencyPair Price { get; set; }
-    public List<int> PieceAmounts { get; set; }
-    public List<int> ChargerAmounts { get; set; }
+    public int PieceAmount { get; set; }
+    public int ChargerAmount { get; set; }
     public List<ItemWeight> PieceWeights;
     public List<ItemWeight> ChargerWeights;
     

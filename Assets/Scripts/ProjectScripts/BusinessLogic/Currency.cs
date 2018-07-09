@@ -26,7 +26,7 @@ public static partial class Currency
     
     public static readonly CurrencyDef Power = new CurrencyDef { Id = 100, Name = "Power", IsConsumable = true };
     public static readonly CurrencyDef Level = new CurrencyDef { Id = 200, Name = "Level", IsConsumable = true };
-    public static readonly CurrencyDef Energy = new CurrencyDef { Id = 300, Name = "Energy", IsConsumable = true };
+    public static readonly CurrencyDef Experience = new CurrencyDef { Id = 300, Name = "Experience", IsConsumable = true };
     
     public static readonly CurrencyDef Robin = new CurrencyDef { Id = 400, Name = "Robin", IsConsumable = false };
     public static readonly CurrencyDef John = new CurrencyDef { Id = 401, Name = "John", IsConsumable = false };

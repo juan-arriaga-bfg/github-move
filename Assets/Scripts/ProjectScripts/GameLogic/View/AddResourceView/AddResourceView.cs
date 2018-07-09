@@ -13,9 +13,9 @@ public class AddResourceView : BoardElementView
 		var color = resource.Amount < 0 ? "EE4444" : "FFFFFF";
 		var value = string.Format("{0}{1}", resource.Amount < 0 ? "" : "+", resource.Amount);
 		
-		icon.gameObject.SetActive(resource.Currency != Currency.Energy.Name);
+		icon.gameObject.SetActive(resource.Currency != Currency.Experience.Name);
 		
-		if (resource.Currency != Currency.Energy.Name)
+		if (resource.Currency != Currency.Experience.Name)
 		{
 			icon.sprite = IconService.Current.GetSpriteById(resource.Currency);
 			icon.transform.localScale = Vector3.one * (1.5f - icon.sprite.rect.height / 106f);

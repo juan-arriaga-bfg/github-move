@@ -66,14 +66,13 @@ public class TouchReactionDefinitionOpenChestRewardWindow : TouchReactionDefinit
 
 	private void Open(BoardPosition position, Piece piece)
 	{
-		var level = ProfileService.Current.GetStorageItem(Currency.LevelCastle.Name).Amount;
 		isComplete = true;
 
 		piece.Context.ActionExecutor.AddAction(new ChestRewardAction
 		{
 			From = position,
-			Pieces = chestComponent.Chest.GetRewardPieces(level),
-			Chargers = chestComponent.Chest.GetRewardChargers(level),
+			Pieces = chestComponent.Chest.GetRewardPieces(),
+			Chargers = chestComponent.Chest.GetRewardChargers(),
 			OnComplete = new CollapsePieceToAction
 			{
 				To = position,
