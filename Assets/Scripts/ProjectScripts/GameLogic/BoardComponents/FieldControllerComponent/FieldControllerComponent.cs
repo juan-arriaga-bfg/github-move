@@ -22,12 +22,12 @@ public class FieldControllerComponent : IECSComponent
         CreateDebug();
 #endif
         
-        if (fieldDef.Pieces == null)
+//        if (fieldDef.Pieces == null)
         {
-            StartField();
-//            TestField();
-            CreateFog();
-            CreateTown();
+//            StartField();
+            TestField();
+//            CreateFog();
+//            CreateTown();
             return;
         }
         
@@ -137,7 +137,10 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(24, 10), PieceType.I1.Id, PieceType.I5.Id);
         AddPieces(new BoardPosition(26, 10), PieceType.J1.Id, PieceType.J5.Id);
         
-        AddPieces(new BoardPosition(28, 10), PieceType.Chest1.Id, PieceType.Chest6.Id);
+        AddPieces(new BoardPosition(28, 10), PieceType.ChestA1.Id, PieceType.ChestA3.Id);
+        AddPieces(new BoardPosition(28, 14), PieceType.ChestB1.Id, PieceType.ChestB3.Id);
+        AddPieces(new BoardPosition(28, 18), PieceType.ChestC1.Id, PieceType.ChestC3.Id);
+        
         AddPieces(new BoardPosition(29, 10), PieceType.Coin1.Id, PieceType.Coin5.Id);
     }
     

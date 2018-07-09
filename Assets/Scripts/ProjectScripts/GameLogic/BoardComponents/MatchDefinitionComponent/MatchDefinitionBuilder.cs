@@ -101,6 +101,18 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.OX4.Id, new PieceMatchDef {Next = PieceType.OX5.Id, Previous = PieceType.OX3.Id, Count = -1});
         dict.Add(PieceType.OX5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.OX4.Id, Count = -1});
         
+        dict.Add(PieceType.ChestA1.Id, new PieceMatchDef {Next = PieceType.ChestA2.Id, Previous = PieceType.None.Id, Count = 3});
+        dict.Add(PieceType.ChestA2.Id, new PieceMatchDef {Next = PieceType.ChestA3.Id, Previous = PieceType.ChestA1.Id, Count = 3});
+        dict.Add(PieceType.ChestA3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.ChestA2.Id, Count = 3});
+        
+        dict.Add(PieceType.ChestB1.Id, new PieceMatchDef {Next = PieceType.ChestB2.Id, Previous = PieceType.None.Id, Count = 3});
+        dict.Add(PieceType.ChestB2.Id, new PieceMatchDef {Next = PieceType.ChestB3.Id, Previous = PieceType.ChestB1.Id, Count = 3});
+        dict.Add(PieceType.ChestB3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.ChestB2.Id, Count = 3});
+        
+        dict.Add(PieceType.ChestC1.Id, new PieceMatchDef {Next = PieceType.ChestC2.Id, Previous = PieceType.None.Id, Count = 3});
+        dict.Add(PieceType.ChestC2.Id, new PieceMatchDef {Next = PieceType.ChestC3.Id, Previous = PieceType.ChestC1.Id, Count = 3});
+        dict.Add(PieceType.ChestC3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.ChestC2.Id, Count = 3});
+        
         dict.Add(PieceType.Chest1.Id, new PieceMatchDef {Next = PieceType.Chest2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.Chest2.Id, new PieceMatchDef {Next = PieceType.Chest3.Id, Previous = PieceType.Chest1.Id, Count = 3});
         dict.Add(PieceType.Chest3.Id, new PieceMatchDef {Next = PieceType.Chest4.Id, Previous = PieceType.Chest2.Id, Count = 3});

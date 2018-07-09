@@ -100,6 +100,18 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.J4.Id, R.J4Piece);
         dict.Add(PieceType.J5.Id, R.J5Piece);
         
+        dict.Add(PieceType.ChestA1.Id, R.ChestA1Piece);
+        dict.Add(PieceType.ChestA2.Id, R.ChestA2Piece);
+        dict.Add(PieceType.ChestA3.Id, R.ChestA3Piece);
+        
+        dict.Add(PieceType.ChestB1.Id, R.ChestB1Piece);
+        dict.Add(PieceType.ChestB2.Id, R.ChestB2Piece);
+        dict.Add(PieceType.ChestB3.Id, R.ChestB3Piece);
+        
+        dict.Add(PieceType.ChestC1.Id, R.ChestC1Piece);
+        dict.Add(PieceType.ChestC2.Id, R.ChestC2Piece);
+        dict.Add(PieceType.ChestC3.Id, R.ChestC3Piece);
+        
         dict.Add(PieceType.Chest1.Id, R.Chest1Piece);
         dict.Add(PieceType.Chest2.Id, R.Chest2Piece);
         dict.Add(PieceType.Chest3.Id, R.Chest3Piece);

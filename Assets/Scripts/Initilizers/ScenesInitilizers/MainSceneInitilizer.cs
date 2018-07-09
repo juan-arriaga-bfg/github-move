@@ -19,6 +19,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.MainWindow,
             UIWindowType.SampleWindow,
             UIWindowType.MessageWindow,
+            UIWindowType.OldChestMessage,
             UIWindowType.ChestMessage,
 //            UIWindowType.HeroesWindow,
 //            UIWindowType.CharactersWindow,

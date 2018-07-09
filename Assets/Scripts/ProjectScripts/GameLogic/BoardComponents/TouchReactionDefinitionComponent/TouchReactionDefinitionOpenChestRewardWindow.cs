@@ -17,14 +17,14 @@ public class TouchReactionDefinitionOpenChestRewardWindow : TouchReactionDefinit
 		{
 			case ChestState.Close:
 			case ChestState.InProgress:
-				var model = UIService.Get.GetCachedModel<UIChestMessageWindowModel>(UIWindowType.ChestMessage);
+				var model = UIService.Get.GetCachedModel<UIOldChestMessageWindowModel>(UIWindowType.OldChestMessage);
 
 				model.Chest = chestComponent.Chest;
 				model.OnStart = Start;
 				model.OnBoost = Boost;
 				model.OnStop = Stop;
 				
-				UIService.Get.ShowWindow(UIWindowType.ChestMessage);
+				UIService.Get.ShowWindow(UIWindowType.OldChestMessage);
 				
 				break;
 			case ChestState.Open:

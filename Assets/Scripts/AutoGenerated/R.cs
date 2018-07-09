@@ -173,4 +173,13 @@ public class R
      public const string RiverAngleRight = "RiverAngleRight";
      public const string RiverAngleTop = "RiverAngleTop";
      public const string ChangeObstacleStateView = "ChangeObstacleStateView";
+     public const string ChestA1Piece = "ChestA1Piece";
+     public const string ChestA2Piece = "ChestA2Piece";
+     public const string ChestA3Piece = "ChestA3Piece";
+     public const string ChestB1Piece = "ChestB1Piece";
+     public const string ChestB2Piece = "ChestB2Piece";
+     public const string ChestB3Piece = "ChestB3Piece";
+     public const string ChestC1Piece = "ChestC1Piece";
+     public const string ChestC2Piece = "ChestC2Piece";
+     public const string ChestC3Piece = "ChestC3Piece";
 }

@@ -10,6 +10,8 @@
     
     public const string ChestMessage = "ChestMessageWindow";
     
+    public const string OldChestMessage = "OldChestMessageWindow";
+    
     public const string HeroesWindow = "HeroesWindow";
     
     public const string CharactersWindow = "CharactersWindow";
