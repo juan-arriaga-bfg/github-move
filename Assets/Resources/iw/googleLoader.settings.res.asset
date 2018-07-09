@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8beeef0f8df5e3a4b9b27d49ce3fa7da, type: 3}
+  m_Name: googleLoader.settings.res
+  m_EditorClassIdentifier: 
+  configLinks:
+  - Key: chests
+    Link: 1SnYRNQBmFgpeb5BJmQ5rwUWKHYBwPFNrFHzeW4OxWXs
+  - Key: collection
+    Link: 1GPhPZMMpEsusvqgMGeN-KJpy3DPZPfXTNOaX3Pq4w00
+  - Key: obstacles
+    Link: 16Q9fxlFX40VRx6u1kwfMvWm1GuvK8MaGs117g5Pkd2g
+  - Key: pieces
+    Link: 15C96r0vcgzzhJ6Fo_OQXBcCoIkSogZnTZg8Jc6MKDH8
+  - Key: quests
+    Link: 1jaDy9GfzL7SMM9wR1HHHD1kYRj1tjPZrnBw5ZLIT1tk
+  - Key: tasks
+    Link: 1qYf1P3yoeUkxMyd1tQHX58fDCZk_UXx7XTyldiD2bi4
