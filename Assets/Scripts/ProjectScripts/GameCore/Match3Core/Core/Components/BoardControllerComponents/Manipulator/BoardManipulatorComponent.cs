@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Lean.Touch;
 using DG.Tweening;
 
@@ -99,30 +98,24 @@ public class BoardManipulatorComponent : ECSEntity,
 
             cameraManipulator.CameraMove.UnLock(this);
         }
-        
+
         var selectedView = GetSelectedBoardElementView();
-        
+
         if (selectedView == null)
         {
             context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
-            return true;
+            return false;
         }
-
-        if (selectedView is ResourceView) return true;
 
         if (selectedView is PieceBoardElementView)
         {
             var pieceView = selectedView as PieceBoardElementView;
             var touchReaction = pieceView.Piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
-            
-            var boardPos = context.BoardDef.GetSectorPosition(pos);
-            pieceView.OnTap(boardPos, pos);
 
             if (touchReaction != null) return touchReaction.Touch(pieceView.Piece.CachedPosition);
-            
-            context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
         }
         
+        context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
         return false;
     }
 
@@ -142,22 +135,18 @@ public class BoardManipulatorComponent : ECSEntity,
             var boardPos = context.BoardDef.GetSectorPosition(targetPos);
 
             pieceView.OnDrag(boardPos, pos);
-            
+
             if ((prevDragPos - pos).sqrMagnitude > 0.01f)
             {
-//                DOTween.Kill(dragAnimationId);
-//                cachedViewForDrag.CachedTransform.localPosition = pos;
-//
-//                isDragLip = false;
-            }
-            else
-            {
-                context.ProductionLogic.Check(pieceView.Piece.PieceType);
+                DOTween.Kill(dragAnimationId);
+                cachedViewForDrag.CachedTransform.localPosition = pos;
+
+                isDragLip = false;
             }
             
             prevDragPos = pos;
             
-            /*var targetCellPos = context.BoardDef.GetPiecePosition(boardPos.X, boardPos.Y);
+            var targetCellPos = context.BoardDef.GetPiecePosition(boardPos.X, boardPos.Y);
             targetCellPos = new Vector3(targetCellPos.x, targetCellPos.y, 0f);
             
             if (lastCachedDragPosition.Equals(boardPos) == false)
@@ -175,7 +164,7 @@ public class BoardManipulatorComponent : ECSEntity,
                 DOTween.Kill(dragAnimationId);
                 var sequence = DOTween.Sequence().SetId(dragAnimationId);
                 sequence.Append(cachedViewForDrag.CachedTransform.DOLocalMove(targetCellPos, dragDuration).SetEase(Ease.Linear));
-            }*/
+            }
         }
         
         return true;
@@ -188,12 +177,12 @@ public class BoardManipulatorComponent : ECSEntity,
             var selectedView = GetSelectedBoardElementView();
             
             if (selectedView == null) return false;
-            
+
             if (selectedView is ResourceView)
             {
                 var resourceView = selectedView as ResourceView;
                 resourceView.Collect();
-                return true;
+                return false;
             }
             
             if (selectedView is PieceBoardElementView)
@@ -201,13 +190,13 @@ public class BoardManipulatorComponent : ECSEntity,
                 var pieceView = selectedView as PieceBoardElementView;
                 var draggableComponent = pieceView.Piece.GetComponent<DraggablePieceComponent>(DraggablePieceComponent.ComponentGuid);
                 
+                var boardPos = context.BoardDef.GetSectorPosition(pos);
+                pieceView.OnDragStart(boardPos, pos);
+
                 if (draggableComponent == null || draggableComponent.IsDraggable(pieceView.Piece.CachedPosition) == false)
                 {
                     return false;
                 }
-                
-                var boardPos = context.BoardDef.GetSectorPosition(pos);
-                pieceView.OnDragStart(boardPos, pos);
             }
             
             cachedViewForDrag = selectedView;
@@ -225,47 +214,29 @@ public class BoardManipulatorComponent : ECSEntity,
     {
         if (cachedViewForDrag != null)
         {
-//            pos = pos + Vector2.up * 0.5f;
-            
+            pos = pos + Vector2.up * 0.5f;
+
             DOTween.Kill(dragAnimationId);
             
             if (cachedViewForDrag is PieceBoardElementView)
             {
-                var pieceView = cachedViewForDrag as PieceBoardElementView;
+                if ((cachedDragDownPos - pos).sqrMagnitude > 0.01f)
+                {
+                    BoardPosition fromPosition = context.RendererContext.GetBoardPosition(cachedViewForDrag);
+                    BoardPosition targetPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
+    
+                    context.ActionExecutor.AddAction(new DragAndCheckMatchAction
+                    {
+                        From = fromPosition,
+                        To = new BoardPosition(targetPosition.X, targetPosition.Y, fromPosition.Z)
+                    });
+                }
                 
+                var pieceView = cachedViewForDrag as PieceBoardElementView;
                 var boardPos = context.BoardDef.GetSectorPosition(pos);
                 pieceView.OnDragEnd(boardPos, pos);
-
-                if (pieceView.Drop(pos) == false)
-                {
-                    if ((cachedDragDownPos - pos).sqrMagnitude > 0.01f)
-                    {
-                        BoardPosition fromPosition = context.RendererContext.GetBoardPosition(cachedViewForDrag);
-                        BoardPosition targetPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
-                        BoardPosition toPosition = new BoardPosition(targetPosition.X, targetPosition.Y, fromPosition.Z);
-                    
-                        if (context.ProductionLogic.Hide(pieceView.Piece.PieceType, toPosition))
-                        {
-                            context.ActionExecutor.AddAction(new CollapsePieceToAction
-                            {
-                                To = toPosition,
-                                Positions = new List<BoardPosition>{fromPosition}
-                            });
-                        }
-                        else
-                        {
-                            context.ActionExecutor.AddAction(new DragAndCheckMatchAction
-                            {
-                                From = fromPosition,
-                                To = toPosition
-                            });
-                        }
-                        
-                        UIService.Get.GetShowedView<UIProductionWindowView>(UIWindowType.ProductionWindow).Change(false);
-                    }
                 
-                    cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, pieceView.Piece.Layer.Index));
-                }
+                cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, pieceView.Piece.Layer.Index));
             }
 
             cachedViewForDrag = null;

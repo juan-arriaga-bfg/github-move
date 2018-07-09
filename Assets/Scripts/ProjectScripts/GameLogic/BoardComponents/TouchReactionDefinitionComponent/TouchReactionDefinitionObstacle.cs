@@ -66,9 +66,7 @@ public class TouchReactionDefinitionObstacle : TouchReactionDefinitionComponent
             case ObstacleState.Open:
                 obstacle.State = ObstacleState.Finish;
                 piece.Context.ObstaclesLogic.RemoveObstacle(position);
-
-                var heroes = GameDataService.Current.HeroesManager.Heroes;
-
+                
                 piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
                 {
                     To = position,

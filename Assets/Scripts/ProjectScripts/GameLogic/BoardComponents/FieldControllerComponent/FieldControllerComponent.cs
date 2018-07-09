@@ -79,60 +79,6 @@ public class FieldControllerComponent : IECSComponent
         
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(13, 7),
-            PieceTypeId = PieceType.Factory1.Id
-        });
-        
-        context.ActionExecutor.AddAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(13, 9),
-            PieceTypeId = PieceType.Factory2.Id
-        });
-        
-        context.ActionExecutor.AddAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(15, 9),
-            PieceTypeId = PieceType.Factory3.Id
-        });
-        
-        context.ActionExecutor.AddAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(13, 11),
-            PieceTypeId = PieceType.Factory4.Id
-        });
-        
-        context.ActionExecutor.AddAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(15, 11),
-            PieceTypeId = PieceType.Factory5.Id
-        });
-        
-        context.ActionExecutor.AddAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(17, 13),
-            PieceTypeId = PieceType.Factory6.Id
-        });
-        
-        context.ActionExecutor.AddAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(15, 13),
-            PieceTypeId = PieceType.Factory7.Id
-        });
-        
-        context.ActionExecutor.AddAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(17, 15),
-            PieceTypeId = PieceType.Factory8.Id
-        });
-        
-        context.ActionExecutor.AddAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(19, 15),
-            PieceTypeId = PieceType.Factory9.Id
-        });
-        
-        context.ActionExecutor.AddAction(new CreatePieceAtAction
-        {
             At = new BoardPosition(21, 4),
             PieceTypeId = PieceType.Sawmill1.Id
         });

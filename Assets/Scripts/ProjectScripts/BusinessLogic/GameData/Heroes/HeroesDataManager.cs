@@ -55,11 +55,6 @@ public class HeroesDataManager : IECSComponent, IDataManager, IDataLoader<List<H
             }
         });
     }
-    
-    public Hero GetHero(string uid)
-    {
-        return Heroes.Find(hero => hero.Def.Uid == uid);
-    }
 
     public int CurrentPower()
     {

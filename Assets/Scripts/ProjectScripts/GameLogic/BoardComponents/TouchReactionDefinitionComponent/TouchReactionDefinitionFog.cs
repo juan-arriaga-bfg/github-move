@@ -28,7 +28,7 @@ public class TouchReactionDefinitionFog : TouchReactionDefinitionComponent
         
         view.Change(!view.IsShow);
         
-        if (GameDataService.Current.HeroesManager.CurrentPower() < def.Condition.Value) return true;
+        if (ProfileService.Current.GetStorageItem(Currency.Coins.Name).Amount < def.Condition.Value) return true;
         
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         

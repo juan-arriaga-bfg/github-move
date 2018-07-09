@@ -21,15 +21,15 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.MessageWindow,
             UIWindowType.QuestStartWindow,
             UIWindowType.ChestMessage,
-            UIWindowType.HeroesWindow,
-            UIWindowType.CharactersWindow,
-            UIWindowType.CollectionWindow,
+//            UIWindowType.HeroesWindow,
+//            UIWindowType.CharactersWindow,
+//            UIWindowType.CollectionWindow,
             UIWindowType.QuestWindow,
-            UIWindowType.RobberyWindow,
+//            UIWindowType.RobberyWindow,
             UIWindowType.ErrorWindow,
             UIWindowType.StorageWindow,
             UIWindowType.MarketWindow,
-            UIWindowType.ProductionWindow,
+//            UIWindowType.ProductionWindow,
         });
         
         IWUIManager.Instance.CachedTransform.localPosition = new Vector3(0, 100, 0);
@@ -45,8 +45,8 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             // get model for window
             var model = UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow);
             UIService.Get.ShowWindow(UIWindowType.MainWindow);
-            UIService.Get.ShowWindow(UIWindowType.CharactersWindow);
-            UIService.Get.ShowWindow(UIWindowType.ProductionWindow);
+//            UIService.Get.ShowWindow(UIWindowType.CharactersWindow);
+//            UIService.Get.ShowWindow(UIWindowType.ProductionWindow);
             
             if (onComplete != null)
             {

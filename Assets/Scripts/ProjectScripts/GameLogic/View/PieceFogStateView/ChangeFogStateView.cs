@@ -48,11 +48,11 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 	{
 		if(def == null) return;
 		
-		var power = GameDataService.Current.HeroesManager.CurrentPower();
+		var price = ProfileService.Current.GetStorageItem(Currency.Coins.Name).Amount;
 		
-		label.Text = string.Format("{0}/{1}", power, def.Condition.Value);
+		label.Text = string.Format("{0}/{1}", price, def.Condition.Value);
 
-		line.sizeDelta = new Vector2(Mathf.Clamp(10 + 153 * (float) power / def.Condition.Value, 10, 163), line.sizeDelta.y);
+		line.sizeDelta = new Vector2(Mathf.Clamp(10 + 153 * (float) price / def.Condition.Value, 10, 163), line.sizeDelta.y);
 	}
 	
 	public void OnBoardEvent(int code, object context)

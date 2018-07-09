@@ -43,7 +43,7 @@ public class ResourceView : BoardElementView
         DOTween.Kill(body);
         DOTween.Kill(AnimationId);
         
-        if (GameDataService.Current.CollectionManager.Contains(resource.Currency))
+        /*if (GameDataService.Current.CollectionManager.Contains(resource.Currency))
         {
             var model = UIService.Get.GetCachedModel<UICollectionWindowModel>(UIWindowType.CollectionWindow);
 
@@ -55,7 +55,7 @@ public class ResourceView : BoardElementView
             body.DOScale(Vector3.zero, 0.3f).SetId(body).SetEase(Ease.OutBack);
             DestroyOnBoard(0.3f);
             return;
-        }
+        }*/
 
         var index = Currency.GetCurrencyDef(resource.Currency).Id;
 

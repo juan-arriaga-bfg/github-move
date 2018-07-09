@@ -10,7 +10,7 @@ public class MarketPieceView : PieceBoardElementView
     {
         base.Init(context, piece);
 
-        Piece.Context.ProductionLogic.OnUpdate += UpdateView;
+//        Piece.Context.ProductionLogic.OnUpdate += UpdateView;
         UpdateView();
     }
 
@@ -18,7 +18,7 @@ public class MarketPieceView : PieceBoardElementView
     {
         base.ResetViewOnDestroy();
         
-        Piece.Context.ProductionLogic.OnUpdate -= UpdateView;
+//        Piece.Context.ProductionLogic.OnUpdate -= UpdateView;
     }
 
     public override void UpdateView()

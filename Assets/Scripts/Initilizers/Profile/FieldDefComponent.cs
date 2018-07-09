@@ -62,7 +62,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		set { completeFog = value; }
 	}
 	
-	[JsonProperty]
+//	[JsonProperty]
 	public List<ProductionSaveItem> Productions
 	{
 		get { return productions; }
@@ -114,7 +114,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 				continue;
 			}
 			
-			productions.AddRange(GetProductionSave(board.BoardLogic, item.Value));
+//			productions.AddRange(GetProductionSave(board.BoardLogic, item.Value));
 		}
 		
 		pieces.Sort((a, b) => -a.Id.CompareTo(b.Id));

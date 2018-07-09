@@ -217,8 +217,8 @@ public class GameDataManager : ECSEntity,
     public void SetupComponents()
     {
         RegisterComponent(new ChestsDataManager());
-        RegisterComponent(new EnemiesDataManager());
-        RegisterComponent(new HeroesDataManager());
+//        RegisterComponent(new EnemiesDataManager());
+//        RegisterComponent(new HeroesDataManager());
         RegisterComponent(new PiecesDataManager());
         RegisterComponent(new ObstaclesDataManager());
         RegisterComponent(new SimpleObstaclesDataManager());
@@ -227,7 +227,7 @@ public class GameDataManager : ECSEntity,
         RegisterComponent(new CollectionDataManager());
         RegisterComponent(new LevelsDataManager());
         RegisterComponent(new TasksDataManager());
-        RegisterComponent(new ProductionDataManager());
+//        RegisterComponent(new ProductionDataManager());
     }
 
     public void Reload()
