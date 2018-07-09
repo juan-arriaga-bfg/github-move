@@ -8,8 +8,6 @@
     
     public const string MessageWindow = "MessageWindow";
     
-    public const string QuestStartWindow = "QuestStartWindow";
-    
     public const string ChestMessage = "ChestMessageWindow";
     
     public const string HeroesWindow = "HeroesWindow";
