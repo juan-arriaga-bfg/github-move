@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UIEnergyPanelViewController : UIGenericResourcePanelViewController
+public class UIExperiencePanelViewController : UIGenericResourcePanelViewController
 {
     [SerializeField] private Image progress;
     

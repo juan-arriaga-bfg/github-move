@@ -24,9 +24,13 @@ public static partial class Currency
     public static readonly CurrencyDef Task = new CurrencyDef { Id = 7, Name = "Task", IsConsumable = true };
     public static readonly CurrencyDef Product = new CurrencyDef { Id = 8, Name = "Product", IsConsumable = true };
     
-    public static readonly CurrencyDef Power = new CurrencyDef { Id = 100, Name = "Power", IsConsumable = true };
-    public static readonly CurrencyDef Level = new CurrencyDef { Id = 200, Name = "Level", IsConsumable = true };
-    public static readonly CurrencyDef Experience = new CurrencyDef { Id = 300, Name = "Experience", IsConsumable = true };
+    public static readonly CurrencyDef Power = new CurrencyDef { Id = 20, Name = "Power", IsConsumable = true };
+    public static readonly CurrencyDef Level = new CurrencyDef { Id = 30, Name = "Level", IsConsumable = true };
+    public static readonly CurrencyDef Experience = new CurrencyDef { Id = 40, Name = "Experience", IsConsumable = true };
+    public static readonly CurrencyDef Energy = new CurrencyDef { Id = 50, Name = "Energy", IsConsumable = true };
+    public static readonly CurrencyDef EnergyLimit = new CurrencyDef { Id = 51, Name = "EnergyLimit", IsConsumable = true };
+    public static readonly CurrencyDef Worker = new CurrencyDef { Id = 60, Name = "Worker", IsConsumable = true };
+    public static readonly CurrencyDef WorkerLimit = new CurrencyDef { Id = 61, Name = "WorkerLimit", IsConsumable = true };
     
     public static readonly CurrencyDef Robin = new CurrencyDef { Id = 400, Name = "Robin", IsConsumable = false };
     public static readonly CurrencyDef John = new CurrencyDef { Id = 401, Name = "John", IsConsumable = false };

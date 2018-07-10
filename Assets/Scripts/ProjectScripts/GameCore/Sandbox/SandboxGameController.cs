@@ -30,12 +30,18 @@ public class SandboxGameController : MonoBehaviour
             ElementsResourcesDef = new ElementsResourcesBuilder().Build()
         };
         
-        boardController.RegisterComponent(new ActionExecuteComponent()
+        boardController
+            .RegisterComponent(new ActionExecuteComponent()
             .RegisterComponent(new ActionHistoryComponent())); // action loop
+        
         boardController.RegisterComponent(new BoardEventsComponent()); // external event system
         boardController.RegisterComponent(new BoardLoggerComponent()); // logger
         
-        boardController.RegisterComponent(new BoardLogicComponent() // core logic
+        boardController.RegisterComponent(new WorkerCurrencyLogicComponent());
+        boardController.RegisterComponent(new EnergyCurrencyLogicComponent{Delay = 100});
+        
+        boardController
+            .RegisterComponent(new BoardLogicComponent() // core logic
             .RegisterComponent(new PiecePositionsCacheComponent())
             .RegisterComponent(new FieldFinderComponent())
             .RegisterComponent(new EmptyCellsFinderComponent()) // finds empty cells
@@ -51,8 +57,11 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new HintCooldownComponent());
         boardController.RegisterComponent(new BoardRenderer().Init(gameBoardResourcesDef,
             gameBoardRendererView.transform)); // renderer context
-        boardController.RegisterComponent(new BoardManipulatorComponent()
+        
+        boardController
+            .RegisterComponent(new BoardManipulatorComponent()
             .RegisterComponent(new LockerComponent())); // user manipualtor
+        
         boardController.RegisterComponent(new BoardDefinitionComponent
         {
             CellWidth = 1,

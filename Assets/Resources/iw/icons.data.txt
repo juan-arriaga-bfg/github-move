@@ -96,7 +96,7 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "face_John",
+    "Uid": "icon_Worker",
     "SpriteName": "face_John",
     "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/ProcessedContent",
@@ -624,7 +624,7 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "Energy",
+    "Uid": "icon_Energy",
     "SpriteName": "icon_Merge",
     "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/ProcessedContent",
@@ -1181,6 +1181,14 @@
     "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/ProcessedContent",
     "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "face_John",
+    "SpriteName": "face_John",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   }
 ]
