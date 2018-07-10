@@ -1,4 +1,4 @@
-﻿public interface ISimpleObstaclesDataManager
+﻿public interface IObstaclesDataManager
 {
     ObstaclesDataManager ObstaclesManager { get; }
 }

@@ -26,7 +26,7 @@ public class FieldControllerComponent : IECSComponent
         {
 //            StartField();
             TestField();
-//            CreateFog();
+            CreateFog();
 //            CreateTown();
             return;
         }

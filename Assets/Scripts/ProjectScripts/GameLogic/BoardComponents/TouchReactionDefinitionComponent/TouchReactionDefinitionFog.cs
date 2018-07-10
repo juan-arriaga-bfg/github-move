@@ -33,7 +33,7 @@ public class TouchReactionDefinitionFog : TouchReactionDefinitionComponent
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
         model.Title = "Clear fog area!";
-        model.Message = "Your Band Power are enough for opening new part of Sherwood forest";
+        model.Message = "Your Coins are enough for opening new part of Sherwood forest";
         model.AcceptLabel = "Clear";
         
         model.OnAccept = () =>
