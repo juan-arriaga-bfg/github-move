@@ -20,18 +20,11 @@
             Amount = def.SpawnAmount
         };
 
-        var upgrade = new UpgradeComponent();
-        
         piece.RegisterComponent(storage);
         AddObserver(piece, storage);
         
-        piece.RegisterComponent(upgrade);
-        AddObserver(piece, upgrade);
-        
         piece.RegisterComponent(new TouchReactionComponent()
-            .RegisterComponent(new TouchReactionDefinitionMenu()
-                .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{Icon = PieceType.Parse(def.SpawnPieceType)})
-                .RegisterDefinition(new TouchReactionDefinitionUpgrade {Icon = "arrow_light"}))
+            .RegisterComponent(new TouchReactionDefinitionSpawnInStorage{Icon = PieceType.Parse(def.SpawnPieceType)})
             .RegisterComponent(new TouchReactionConditionComponent()));
         
         return piece;

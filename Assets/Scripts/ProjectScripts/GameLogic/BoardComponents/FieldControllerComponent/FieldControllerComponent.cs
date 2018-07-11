@@ -22,12 +22,12 @@ public class FieldControllerComponent : IECSComponent
         CreateDebug();
 #endif
         
-//        if (fieldDef.Pieces == null)
+        if (fieldDef.Pieces == null)
         {
-//            StartField();
-            TestField();
+            StartField();
+//            TestField();
             CreateFog();
-//            CreateTown();
+            CreateTown();
             return;
         }
         
@@ -63,18 +63,6 @@ public class FieldControllerComponent : IECSComponent
         {
             At = new BoardPosition(18, 8),
             PieceTypeId = PieceType.Castle1.Id
-        });
-        
-        context.ActionExecutor.AddAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(15, 7),
-            PieceTypeId = PieceType.Market1.Id
-        });
-        
-        context.ActionExecutor.AddAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(19, 13),
-            PieceTypeId = PieceType.Storage1.Id
         });
         
         context.ActionExecutor.AddAction(new CreatePieceAtAction

@@ -7,30 +7,6 @@ public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
     {
         return new List<int>
         {
-            PieceType.Mine1.Id,
-            PieceType.Mine2.Id,
-            PieceType.Mine3.Id,
-            PieceType.Mine4.Id,
-            PieceType.Mine5.Id,
-            PieceType.Mine6.Id,
-            PieceType.Mine7.Id,
-            
-            PieceType.Sawmill1.Id,
-            PieceType.Sawmill2.Id,
-            PieceType.Sawmill3.Id,
-            PieceType.Sawmill4.Id,
-            PieceType.Sawmill5.Id,
-            PieceType.Sawmill6.Id,
-            PieceType.Sawmill7.Id,
-            
-            PieceType.Sheepfold1.Id,
-            PieceType.Sheepfold2.Id,
-            PieceType.Sheepfold3.Id,
-            PieceType.Sheepfold4.Id,
-            PieceType.Sheepfold5.Id,
-            PieceType.Sheepfold6.Id,
-            PieceType.Sheepfold7.Id,
-            
             PieceType.Castle1.Id,
             PieceType.Castle2.Id,
             PieceType.Castle3.Id,
@@ -39,27 +15,7 @@ public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
             PieceType.Castle6.Id,
             PieceType.Castle7.Id,
             PieceType.Castle8.Id,
-            PieceType.Castle9.Id,
-            
-            PieceType.Market1.Id,
-            PieceType.Market2.Id,
-            PieceType.Market3.Id,
-            PieceType.Market4.Id,
-            PieceType.Market5.Id,
-            PieceType.Market6.Id,
-            PieceType.Market7.Id,
-            PieceType.Market8.Id,
-            PieceType.Market9.Id,
-            
-            PieceType.Storage1.Id,
-            PieceType.Storage2.Id,
-            PieceType.Storage3.Id,
-            PieceType.Storage4.Id,
-            PieceType.Storage5.Id,
-            PieceType.Storage6.Id,
-            PieceType.Storage7.Id,
-            PieceType.Storage8.Id,
-            PieceType.Storage9.Id
+            PieceType.Castle9.Id
         };
     }
 
