@@ -133,6 +133,10 @@ public class ElementsResourcesBuilder
 
     private Dictionary<int, string> AddMulticellularPiece(Dictionary<int, string> dict)
     {
+        dict.Add(PieceType.MineA.Id, R.Mine1Piece);
+        dict.Add(PieceType.MineB.Id, R.Sawmill1Piece);
+        dict.Add(PieceType.MineC.Id, R.Sheepfold1Piece);
+        
         dict.Add(PieceType.Mine1.Id, R.Mine1Piece);
         dict.Add(PieceType.Mine2.Id, R.Mine2Piece);
         dict.Add(PieceType.Mine3.Id, R.Mine3Piece);
@@ -214,6 +218,7 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.SimpleUpgrade, R.SimpleUpgradeView);
         dict.Add((int)ViewType.Production, R.ProductionView);
         dict.Add((int)ViewType.ProductionWarning, R.ProductionWarningView);
+        dict.Add((int)ViewType.MineState, R.ChangeMineStateView);
 
         return dict;
     }

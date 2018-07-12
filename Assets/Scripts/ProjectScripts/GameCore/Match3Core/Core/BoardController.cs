@@ -4,7 +4,7 @@ using UnityEngine;
 public class BoardController : ECSEntity,
     IActionExecuteComponent, IBoardEventsComponent, IBoardLoggerComponent, IBoardLogicComponent, IBoardDefinitionComponent, IBoardStatesComponent, ISessionBoardStateComponent,
     IBoardSystemProcessor, IBoardRendererComponent, IBoardManipulatorComponent, IBoardRandomComponent, IReproductionLogicComponent, IEnemiesLogicComponent,
-    IProductionLogicComponent
+    IProductionLogicComponent, IWorkerCurrencyLogicComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -171,6 +171,19 @@ public class BoardController : ECSEntity,
                 productionLogic = GetComponent<ProductionLogicComponent>(ProductionLogicComponent.ComponentGuid);
             }
             return productionLogic;
+        }
+    }
+    
+    protected WorkerCurrencyLogicComponent workerLogic;
+    public WorkerCurrencyLogicComponent WorkerLogic
+    {
+        get
+        {
+            if (workerLogic == null)
+            {
+                workerLogic = GetComponent<WorkerCurrencyLogicComponent>(WorkerCurrencyLogicComponent.ComponentGuid);
+            }
+            return workerLogic;
         }
     }
     

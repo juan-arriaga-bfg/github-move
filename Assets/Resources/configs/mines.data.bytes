@@ -1,0 +1,80 @@
+[
+  {
+    "Uid": "MineA",
+    "Delay": 5,
+    "Size": 2,
+    "Position" :
+    {
+      "X" : 5,
+      "Y" : 5
+    },
+    "Reward" :
+    {
+      "Currency" : "ChestA1",
+      "Amount" : 1
+    },
+    "Conditions" :
+    [
+      {
+        "Currency" : "Worker",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "Energy",
+        "Amount" : 10
+      }
+    ]
+  },
+  {
+    "Uid": "MineB",
+    "Delay": 5,
+    "Size": 2,
+    "Position" :
+    {
+      "X" : 10,
+      "Y" : 5
+    },
+    "Reward" :
+    {
+      "Currency" : "ChestB1",
+      "Amount" : 1
+    },
+    "Conditions" :
+    [
+      {
+        "Currency" : "Worker",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "Energy",
+        "Amount" : 10
+      }
+    ]
+  },
+  {
+    "Uid": "MineC",
+    "Delay": 5,
+    "Size": 2,
+    "Position" :
+    {
+      "X" : 15,
+      "Y" : 5
+    },
+    "Reward" :
+    {
+      "Currency" : "ChestC1",
+      "Amount" : 1
+    },
+    "Conditions" :
+    [
+      {
+        "Currency" : "Worker",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "Energy",
+        "Amount" : 10
+      }
+    ]
+  }
+]

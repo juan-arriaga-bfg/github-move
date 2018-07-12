@@ -10,7 +10,6 @@ public class MulticellularPieceBuilder : GenericPieceBuilder
 		var multi = CreateMultiObserver();
 		
 		piece.RegisterComponent(multi);
-		
 		AddObserver(piece, multi);
 		
 		return piece;

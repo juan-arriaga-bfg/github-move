@@ -4,7 +4,6 @@ public class PieceStorageView : PieceBoardElementView
 {
     [SerializeField] private Animator animator;
     
-    private bool clipIsPlay = true;
     private StorageComponent storage;
 
     public override void Init(BoardRenderer context, Piece piece)
@@ -31,13 +30,7 @@ public class PieceStorageView : PieceBoardElementView
 
     private void UpdateAnimation()
     {
-        var isPlay = storage.Filling != storage.Capacity;
-        
-        if(clipIsPlay == isPlay) return;
-        
-        clipIsPlay = isPlay;
-
-        animator.speed = clipIsPlay ? 1 : 0;
+        animator.speed = storage.Timer.IsExecuteable() ? 1 : 0;
         animator.Play(animator.GetCurrentAnimatorStateInfo(0).fullPathHash, 0, 0);
     }
 }

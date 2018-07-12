@@ -6,6 +6,8 @@ TextureImporter:
   fileIDToRecycleName:
     21300000: Coin
     21300002: Crystals
+    21300004: Energy
+    21300006: Worker
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -72,12 +74,40 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Coin
+      name: Worker
       rect:
         serializedVersion: 2
         x: 0
         y: 0
+        width: 156
+        height: 180
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Coin
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 0
         width: 88
+        height: 106
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Energy
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 107
+        width: 66
         height: 106
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
@@ -89,8 +119,8 @@ TextureImporter:
       name: Crystals
       rect:
         serializedVersion: 2
-        x: 89
-        y: 0
+        x: 0
+        y: 181
         width: 93
         height: 64
       alignment: 9

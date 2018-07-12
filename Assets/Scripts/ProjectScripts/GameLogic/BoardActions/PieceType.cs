@@ -108,6 +108,10 @@ public static partial class PieceType
     public static readonly PieceTypeDef Coin4 = new PieceTypeDef{Id = 5403, Abbreviations = new List<string>{ "Coin4" }};
     public static readonly PieceTypeDef Coin5 = new PieceTypeDef{Id = 5404, Abbreviations = new List<string>{ "Coin5" }};
     
+    public static readonly PieceTypeDef MineA = new PieceTypeDef{Id = 5500, Abbreviations = new List<string>{ "MineA" }};
+    public static readonly PieceTypeDef MineB = new PieceTypeDef{Id = 5501, Abbreviations = new List<string>{ "MineB" }};
+    public static readonly PieceTypeDef MineC = new PieceTypeDef{Id = 5502, Abbreviations = new List<string>{ "MineC" }};
+    
     public static readonly PieceTypeDef Mine1 = new PieceTypeDef{Id = 10000, Abbreviations = new List<string>{ "Mine1" }};
     public static readonly PieceTypeDef Mine2 = new PieceTypeDef{Id = 10001, Abbreviations = new List<string>{ "Mine2" }};
     public static readonly PieceTypeDef Mine3 = new PieceTypeDef{Id = 10002, Abbreviations = new List<string>{ "Mine3" }};

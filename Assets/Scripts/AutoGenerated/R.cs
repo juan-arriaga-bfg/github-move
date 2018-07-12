@@ -182,4 +182,5 @@ public class R
      public const string ChestC1Piece = "ChestC1Piece";
      public const string ChestC2Piece = "ChestC2Piece";
      public const string ChestC3Piece = "ChestC3Piece";
+     public const string ChangeMineStateView = "ChangeMineStateView";
 }

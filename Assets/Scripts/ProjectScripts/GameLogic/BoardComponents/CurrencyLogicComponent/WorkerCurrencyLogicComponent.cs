@@ -46,7 +46,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
     {
         var isSuccess = false;
         
-        CurrencyHellper.Purchase(id, 1, targetItem.Currency, 1, success =>
+        CurrencyHellper.Purchase(Currency.Mine.Name, 1, targetItem.Currency, 1, success =>
         {
             isSuccess = success;
 

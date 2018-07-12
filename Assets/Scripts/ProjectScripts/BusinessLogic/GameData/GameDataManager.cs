@@ -97,7 +97,7 @@ public class ItemWeight
 
 
 public class GameDataManager : ECSEntity,
-    IChestsDataManager, IEnemiesDataManager, IHeroesDataManager, IPiecesDataManager, IFogsDataManager,
+    IChestsDataManager, IEnemiesDataManager, IHeroesDataManager, IPiecesDataManager, IFogsDataManager, IMinesDataManager,
     IQuestsDataManager, IObstaclesDataManager, ICollectionDataManager, ILevelsDataManager, ITasksDataManager, IProductionDataManager
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
@@ -149,8 +149,7 @@ public class GameDataManager : ECSEntity,
     {
         get
         {
-            return collectionManager ?? (collectionManager =
-                       GetComponent<CollectionDataManager>(CollectionDataManager.ComponentGuid));
+            return collectionManager ?? (collectionManager = GetComponent<CollectionDataManager>(CollectionDataManager.ComponentGuid));
         }
     }
 
@@ -205,6 +204,15 @@ public class GameDataManager : ECSEntity,
         }
     }
     
+    private MinesDataManager minesManager;
+    public MinesDataManager MinesManager
+    {
+        get
+        {
+            return minesManager ?? (minesManager = GetComponent<MinesDataManager>(MinesDataManager.ComponentGuid));
+        }
+    }
+    
     public void SetupComponents()
     {
         RegisterComponent(new ChestsDataManager());
@@ -217,6 +225,7 @@ public class GameDataManager : ECSEntity,
         RegisterComponent(new CollectionDataManager());
         RegisterComponent(new LevelsDataManager());
         RegisterComponent(new TasksDataManager());
+        RegisterComponent(new MinesDataManager());
 //        RegisterComponent(new ProductionDataManager());
     }
 

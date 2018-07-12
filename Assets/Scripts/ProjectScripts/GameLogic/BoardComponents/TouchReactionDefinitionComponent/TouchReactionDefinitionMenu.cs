@@ -5,6 +5,8 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
     public int MainReactionIndex = -1;
     public readonly List<TouchReactionDefinitionComponent> Definitions = new List<TouchReactionDefinitionComponent>();
     
+    private ViewDefinitionComponent viewDef;
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
     }
@@ -17,11 +19,16 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
     {
         piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, piece);
         
-        var viewDefinition = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
+        if (viewDef == null)
+        {
+            viewDef = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
+            
+            if (viewDef == null) return false;
+        }
         
         foreach (var def in Definitions)
         {
-            if(def.IsViewShow(viewDefinition) == false) continue;
+            if(def.IsViewShow(viewDef) == false) continue;
 
             def.Make(position, piece);
             return true;
@@ -33,7 +40,7 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
             return true;
         }
         
-        var view = viewDefinition.AddView(ViewType.Menu);
+        var view = viewDef.AddView(ViewType.Menu);
         
         view.Change(!view.IsShow);
         return true;

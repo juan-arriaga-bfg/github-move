@@ -1,0 +1,10 @@
+﻿using System.Collections.Generic;
+
+public class MineDef
+{
+    public int Delay { get; set; }
+    public int Size { get; set; }
+    public BoardPosition Position { get; set; }
+    public CurrencyPair Reward { get; set; }
+    public List<CurrencyPair> Conditions { get; set; }
+}

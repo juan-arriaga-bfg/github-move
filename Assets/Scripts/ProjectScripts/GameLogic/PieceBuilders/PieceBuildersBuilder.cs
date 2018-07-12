@@ -37,7 +37,7 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestB1.Id, PieceType.ChestB3.Id, dict);
         dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestC1.Id, PieceType.ChestC3.Id, dict);
         
-//        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest9.Id, dict);
+        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest9.Id, dict);
         
 //        dict.Add(PieceType.E6.Id, new SpawnPieceBuilder());
         dict.Add(PieceType.King.Id, new QuestGiverPieceBuilder());
@@ -66,10 +66,9 @@ public class PieceBuildersBuilder
     private Dictionary<int, IPieceBuilder> AddMulticellularPiece2x2(Dictionary<int, IPieceBuilder> dict)
     {
         var mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2);
-
-        dict.Add(PieceType.Mine1.Id, new MulticellularSpawnPieceBuilder {Mask = mask});
-        dict.Add(PieceType.Sawmill1.Id, new MulticellularSpawnPieceBuilder {Mask = mask});
-        dict.Add(PieceType.Sheepfold1.Id, new MulticellularSpawnPieceBuilder {Mask = mask});
+        
+        dict = AddMulticellularPiece<MinePieceBuilder>(PieceType.MineA.Id, PieceType.MineC.Id, mask, dict);
+        
 //        dict = AddMulticellularPiece<MarketPieceBuilder>(PieceType.Market1.Id, PieceType.Market9.Id, mask, dict);
 //        dict = AddMulticellularPiece<StoragePieceBuilder>(PieceType.Storage1.Id, PieceType.Storage9.Id, mask, dict);
 //        dict = AddMulticellularPiece<ProductionPieceBuilder>(PieceType.Factory1.Id, PieceType.Factory9.Id, mask, dict);

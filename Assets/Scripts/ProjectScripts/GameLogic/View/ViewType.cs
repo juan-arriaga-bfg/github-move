@@ -13,4 +13,5 @@
     SimpleUpgrade = -1009,
     Production = -1010,
     ProductionWarning = -1011,
+    MineState = -1012,
 }

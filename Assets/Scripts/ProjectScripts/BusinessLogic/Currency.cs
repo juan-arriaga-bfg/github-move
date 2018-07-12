@@ -20,9 +20,11 @@ public static partial class Currency
     public static readonly CurrencyDef Enemy = new CurrencyDef { Id = 4, Name = "Enemy", IsConsumable = true };
     
     public static readonly CurrencyDef Quest = new CurrencyDef { Id = 5, Name = "Quest", IsConsumable = true };
-    public static readonly CurrencyDef Obstacle = new CurrencyDef { Id = 6, Name = "Obstacle", IsConsumable = true };
+    public static readonly CurrencyDef Damage = new CurrencyDef { Id = 6, Name = "Damage", IsConsumable = true };
     public static readonly CurrencyDef Task = new CurrencyDef { Id = 7, Name = "Task", IsConsumable = true };
     public static readonly CurrencyDef Product = new CurrencyDef { Id = 8, Name = "Product", IsConsumable = true };
+    public static readonly CurrencyDef Life = new CurrencyDef { Id = 9, Name = "Life", IsConsumable = true };
+    public static readonly CurrencyDef Mine = new CurrencyDef { Id = 11, Name = "Mine", IsConsumable = true };
     
     public static readonly CurrencyDef Power = new CurrencyDef { Id = 20, Name = "Power", IsConsumable = true };
     public static readonly CurrencyDef Level = new CurrencyDef { Id = 30, Name = "Level", IsConsumable = true };

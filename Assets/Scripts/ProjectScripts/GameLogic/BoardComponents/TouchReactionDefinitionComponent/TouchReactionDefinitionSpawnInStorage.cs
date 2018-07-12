@@ -2,6 +2,8 @@
 
 public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComponent
 {
+    public bool IsAutoStart = true;
+    
     public override bool IsViewShow(ViewDefinitionComponent viewDefinition)
     {
         return viewDefinition != null && viewDefinition.AddView(ViewType.StorageState).IsShow;
@@ -15,7 +17,7 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
 
         int amount;
         
-        if (storage.Scatter(out amount) == false)
+        if (storage.Scatter(out amount, IsAutoStart) == false)
         {
             UIErrorWindowController.AddError("Production of the resource is not complete!");
             return false;

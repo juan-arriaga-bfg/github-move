@@ -20,7 +20,7 @@ public class CastlePieceBuilder : MulticellularPieceBuilder
             Capacity = def.SpawnCapacity,
             Filling = def.IsFilledInStart ? def.SpawnCapacity : 0,
             Amount =  def.SpawnAmount,
-            ShowTimer = true,
+            IsTimerShow = true,
             TimerOffset = new Vector2(-0.5f, 2.8f)
         };
         

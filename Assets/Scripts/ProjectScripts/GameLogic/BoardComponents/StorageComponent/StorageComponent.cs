@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObserver
 {
@@ -12,21 +13,21 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     public int Capacity;
     public int Filling;
 
-    public bool ShowTimer;
+    public bool IsTimerShow;
+    public bool IsAutoStart = true;
     
     private ViewDefinitionComponent viewDef;
     
     public TimerComponent Timer { get; private set; }
     public Vector2 TimerOffset = Vector2.zero;
+
+    public Action OnScatter;
     
     private Piece pieceContext;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
         pieceContext = entity as Piece;
-        
-        Timer = pieceContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-        viewDef = pieceContext.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)
@@ -35,17 +36,20 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
+        Timer = pieceContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
+        viewDef = pieceContext.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
+        
         if(Timer == null) return;
         
         Timer.OnComplete += Update;
 
-        if (ShowTimer)
+        if (IsTimerShow)
         {
             Timer.OnStart += OnShowTimer;
             Timer.OnComplete += OnHideTimer;
         }
 
-        if (InitInSave(position) == false && Filling != Capacity)
+        if (InitInSave(position) == false && IsAutoStart && Filling != Capacity)
         {
             Timer.Start();
         }
@@ -88,7 +92,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         
         Timer.OnComplete -= Update;
         
-        if(ShowTimer == false) return;
+        if(IsTimerShow == false) return;
 
         Timer.OnStart -= OnShowTimer;
         Timer.OnComplete -= OnHideTimer;
@@ -115,15 +119,16 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         if(isShow) pieceContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
     }
 
-    public bool Scatter(out int amount)
+    public bool Scatter(out int amount, bool isStartNext = true)
     {
         amount = Filling;
         
         if (Filling == 0) return false;
         
         Filling = 0;
-        Timer.Start();
+        if(isStartNext) Timer.Start();
         UpdateView();
+        if (OnScatter != null) OnScatter();
         
         return true;
     }

@@ -916,47 +916,37 @@
     "Uid": "Mine1",
     "Delay": 15,
     "SpawnPiece": "C1",
-    "UpgradeTargetPiece": "Castle2",
     "IsFilledInStart":"False",
     "SpawnAmount": 1,
-    "SpawnCapacity": 0,
-    "UpgradePrices" :
-    [
-      {
-        "Currency": "Coins",
-        "Amount": 100
-      }
-    ]
+    "SpawnCapacity": 0
   },
   {
     "Uid": "Sawmill1",
     "Delay": 90,
-    "SpawnPiece": "A1",
-    "UpgradeTargetPiece": "Castle3",
+    "SpawnPiece": "ChestA1",
     "IsFilledInStart":"True",
-    "SpawnAmount": 5,
-    "SpawnCapacity": 7,
-    "UpgradePrices":
-    [
-      {
-        "Currency": "Coins",
-        "Amount": 100
-      }
-    ]
+    "SpawnAmount": 1,
+    "SpawnCapacity": 1
   },
   {
     "Uid": "Sheepfold1",
     "Delay": 30,
     "SpawnPiece": "D1",
-    "UpgradeTargetPiece": "Castle2",
     "IsFilledInStart":"False",
     "SpawnAmount": 1,
-    "SpawnCapacity": 0,
+    "SpawnCapacity": 0
+  },
+  {
+    "Uid": "Castle1",
+    "Delay": 1200,
+    "SpawnPiece": "Chest1",
+    "SpawnAmount": 1,
+    "SpawnCapacity": 1,
     "UpgradePrices":
     [
       {
-        "Currency": "Coins",
-        "Amount": 300
+        "Currency": "A3",
+        "Amount": 1
       }
     ]
   },

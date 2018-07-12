@@ -7,7 +7,7 @@ public class ObstacleLifeComponent : LifeComponent, IPieceBoardObserver
     {
         get
         {
-            return GameDataService.Current.ObstaclesManager.PriceForPiece(context.PieceType, current);
+            return GameDataService.Current.ObstaclesManager.PriceForPiece(thisContext.PieceType, current);
         }
     }
 
@@ -20,7 +20,7 @@ public class ObstacleLifeComponent : LifeComponent, IPieceBoardObserver
     {
         base.OnRegisterEntity(entity);
         
-        HP = context.Context.BoardLogic.MatchDefinition.GetIndexInChain(context.PieceType);
+        HP = thisContext.Context.BoardLogic.MatchDefinition.GetIndexInChain(thisContext.PieceType);
     }
     
     public void OnAddToBoard(BoardPosition position, Piece context = null)
@@ -42,39 +42,39 @@ public class ObstacleLifeComponent : LifeComponent, IPieceBoardObserver
 
         var isSuccess = false;
         
-        CurrencyHellper.Purchase(Currency.Obstacle.Name, 1, Price, success =>
+        CurrencyHellper.Purchase(Currency.Damage.Name, 1, Price, success =>
         {
             if(success == false) return;
 
             isSuccess = true;
 
-            var position = context.CachedPosition;
+            var position = thisContext.CachedPosition;
             
             Damage(1);
 
             if (current != HP)
             {
-                context.Context.ActionExecutor.AddAction(new EjectionPieceAction
+                thisContext.Context.ActionExecutor.AddAction(new EjectionPieceAction
                 {
                     From = position,
                     OnComplete = onComplete,
-                    Pieces = GameDataService.Current.ObstaclesManager.RewardForPiece(context.PieceType, current)
+                    Pieces = GameDataService.Current.ObstaclesManager.RewardForPiece(thisContext.PieceType, current)
                 });
                 
                 return;
             }
 
-            var chest = GameDataService.Current.ObstaclesManager.ChestForPiece(context.PieceType);
+            var chest = GameDataService.Current.ObstaclesManager.ChestForPiece(thisContext.PieceType);
                 
             if(chest == PieceType.None.Id) return;
                 
-            context.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+            thisContext.Context.ActionExecutor.AddAction(new CollapsePieceToAction
             {
                 To = position,
                 Positions = new List<BoardPosition>{position},
                 OnComplete = () =>
                 {
-                    context.Context.ActionExecutor.AddAction(new SpawnPieceAtAction()
+                    thisContext.Context.ActionExecutor.AddAction(new SpawnPieceAtAction()
                     {
                         IsCheckMatch = false,
                         At = position,

@@ -109,7 +109,7 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
             
         if (viewDef == null) return;
         
-        var view = viewDef.AddView(ViewType.Obstacle);
+        var view = viewDef.AddView(Id);
         
         view.Change(true);
     }

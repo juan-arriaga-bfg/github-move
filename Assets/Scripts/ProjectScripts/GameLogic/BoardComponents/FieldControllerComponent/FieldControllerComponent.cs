@@ -27,7 +27,7 @@ public class FieldControllerComponent : IECSComponent
             StartField();
 //            TestField();
             CreateFog();
-            CreateTown();
+//            CreateTown();
             return;
         }
         
@@ -67,8 +67,8 @@ public class FieldControllerComponent : IECSComponent
         
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(21, 4),
-            PieceTypeId = PieceType.Sawmill1.Id
+            At = new BoardPosition(5, 5),
+            PieceTypeId = PieceType.MineA.Id
         });
         
         context.ActionExecutor.AddAction(new CreatePieceAtAction

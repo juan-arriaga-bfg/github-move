@@ -9,7 +9,7 @@ public class LifeComponent : IECSComponent
         get { return ComponentGuid; }
     }
 
-    protected Piece context;
+    protected Piece thisContext;
     
     public int HP { get; set; }
     
@@ -27,7 +27,7 @@ public class LifeComponent : IECSComponent
     
     public virtual void OnRegisterEntity(ECSEntity entity)
     {
-        context = entity as Piece;
+        thisContext = entity as Piece;
     }
 
     public void OnUnRegisterEntity(ECSEntity entity)
@@ -39,6 +39,6 @@ public class LifeComponent : IECSComponent
         if (current == HP) return;
         
         current = Mathf.Clamp(current + damage, 0, HP);
-        AddResourceView.Show(context.CachedPosition, new CurrencyPair{Currency = "Life", Amount = -damage});
+        AddResourceView.Show(thisContext.CachedPosition, new CurrencyPair{Currency = Currency.Life.Name, Amount = -damage});
     }
 }
