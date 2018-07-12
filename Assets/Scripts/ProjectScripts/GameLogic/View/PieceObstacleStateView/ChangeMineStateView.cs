@@ -54,10 +54,7 @@ public class ChangeMineStateView : UIBoardView, IBoardEventListener
     
     public void Clear()
     {
-        if (life.Damage(Reopen))
-        {
-            Change(false);
-        }
+        if (life.Damage()) Change(false);
     }
     
     public void OnBoardEvent(int code, object context)
@@ -65,16 +62,5 @@ public class ChangeMineStateView : UIBoardView, IBoardEventListener
         if (code != GameEventsCodes.ClosePieceMenu || context is BoardPosition && ((BoardPosition) context).Equals(Context.CachedPosition)) return;
 		
         Change(false);
-    }
-
-    private void Reopen()
-    {
-        var viewDef = Context.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
-            
-        if (viewDef == null) return;
-        
-        var view = viewDef.AddView(Id);
-        
-        view.Change(true);
     }
 }

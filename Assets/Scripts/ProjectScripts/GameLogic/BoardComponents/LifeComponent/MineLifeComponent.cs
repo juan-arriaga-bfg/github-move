@@ -54,26 +54,9 @@ public class MineLifeComponent : LifeComponent, IPieceBoardObserver
 
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
-        var multi = thisContext.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
-        
-        if(multi == null) return;
-
-        var mask = multi.Mask;
-        
-        foreach (var maskPoint in mask)
-        {
-            var point = multi.GetPointInMask(position, maskPoint);
-            
-            thisContext.Context.ActionExecutor.AddAction(new SpawnPieceAtAction()
-            {
-                IsCheckMatch = false,
-                At = point,
-                PieceTypeId = PieceType.OX1.Id
-            });
-        }
     }
-
-    public bool Damage(Action onComplete)
+    
+    public bool Damage()
     {
         if (current == HP) return false;
 
@@ -103,12 +86,34 @@ public class MineLifeComponent : LifeComponent, IPieceBoardObserver
                     thisContext.Context.ActionExecutor.AddAction(new CollapsePieceToAction
                     {
                         To = position,
-                        Positions = new List<BoardPosition> {position}
+                        Positions = new List<BoardPosition> {position},
+                        OnComplete = OnRemove
                     });
                 };
             }
         });
         
         return isSuccess;
+    }
+    
+    private void OnRemove()
+    {
+        var multi = thisContext.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
+        
+        if(multi == null) return;
+
+        var mask = multi.Mask;
+        
+        foreach (var maskPoint in mask)
+        {
+            var point = multi.GetPointInMask(thisContext.CachedPosition, maskPoint);
+            
+            thisContext.Context.ActionExecutor.AddAction(new SpawnPieceAtAction()
+            {
+                IsCheckMatch = false,
+                At = point,
+                PieceTypeId = PieceType.OX1.Id
+            });
+        }
     }
 }

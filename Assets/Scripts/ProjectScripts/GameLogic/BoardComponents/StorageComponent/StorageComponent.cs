@@ -128,7 +128,6 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         Filling = 0;
         if(isStartNext) Timer.Start();
         UpdateView();
-        if (OnScatter != null) OnScatter();
         
         return true;
     }
