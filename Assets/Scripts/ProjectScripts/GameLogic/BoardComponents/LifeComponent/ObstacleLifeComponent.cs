@@ -31,7 +31,7 @@ public class ObstacleLifeComponent : StorageLifeComponent
             return string.Format("{0}_{1}", thisContext.PieceType, thisContext.CachedPosition);
         }
     }
-
+    
     public float GetProgressNext
     {
         get { return 1 - (current+1)/(float)HP; }
@@ -45,7 +45,6 @@ public class ObstacleLifeComponent : StorageLifeComponent
         
         timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current);
         
-        storage.SpawnPiece = PieceType.None.Id;
         storage.Capacity = storage.Amount = 1;
         
         current = GameDataService.Current.ObstaclesManager.GetSaveStep(position);
@@ -54,15 +53,24 @@ public class ObstacleLifeComponent : StorageLifeComponent
 
     protected override void Success()
     {
+        storage.Timer.Price = GameDataService.Current.ObstaclesManager.GetFastPriceByStep(thisContext.PieceType, current);
         storage.Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current);
     }
     
     protected override void OnStep()
     {
+        var reward = GameDataService.Current.ObstaclesManager.GetRewardByStep(thisContext.PieceType, current);
+        
+        foreach (var key in reward.Keys)
+        {
+            storage.SpawnPiece = key;
+            break;
+        }
+        
         storage.SpawnAction = new EjectionPieceAction
         {
             From = thisContext.CachedPosition,
-            Pieces = GameDataService.Current.ObstaclesManager.GetRewardByStep(thisContext.PieceType, current),
+            Pieces = reward,
             OnComplete = () =>
             {
                 var hint = thisContext.Context.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
@@ -75,6 +83,8 @@ public class ObstacleLifeComponent : StorageLifeComponent
     protected override void OnComplete()
     {
         var position = thisContext.CachedPosition;
+        
+        storage.SpawnPiece = PieceType.Chest1.Id;
         
         storage.SpawnAction = new CollapsePieceToAction
         {

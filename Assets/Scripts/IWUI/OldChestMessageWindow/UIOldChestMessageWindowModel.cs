@@ -75,13 +75,6 @@ public class UIOldChestMessageWindowModel : IWWindowModel
             icons.Add(piece.Uid);
         }
         
-        foreach (var charger in Chest.Def.ChargerWeights)
-        {
-            if(charger.Weight == 0) continue;
-            
-            icons.Add(charger.Uid);
-        }
-        
         return icons;
     }
 }

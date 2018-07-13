@@ -43,7 +43,7 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
         
         var isSuccess = false;
 
-        if (CurrencyHellper.IsCanPurchase(Conditions) == false) return false;
+        if (CurrencyHellper.IsCanPurchase(Conditions, true) == false) return false;
         
         Success();
         thisContext.Context.WorkerLogic.Get(Key, storage.Timer.Delay);

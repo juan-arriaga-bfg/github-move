@@ -72,7 +72,6 @@ public class TouchReactionDefinitionOpenChestRewardWindow : TouchReactionDefinit
 		{
 			From = position,
 			Pieces = chestComponent.Chest.GetRewardPieces(),
-			Chargers = chestComponent.Chest.GetRewardChargers(),
 			OnComplete = new CollapsePieceToAction
 			{
 				To = position,

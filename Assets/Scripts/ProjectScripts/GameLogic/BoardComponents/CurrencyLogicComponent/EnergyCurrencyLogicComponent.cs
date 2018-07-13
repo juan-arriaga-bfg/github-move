@@ -7,7 +7,6 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
     
     public int Delay { get; set; }
     
-    private float step;
     private DateTime then;
 
     public override void OnRegisterEntity(ECSEntity entity)
@@ -15,7 +14,6 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         targetItem = ProfileService.Current.Purchases.GetStorageItem(Currency.Energy.Name);
         limitItem = ProfileService.Current.Purchases.GetStorageItem(Currency.EnergyLimit.Name);
         
-        step = Delay / (float)limitItem.Amount;
         then = DateTime.UtcNow;
     }
     
@@ -23,7 +21,7 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
     {
         var now = DateTime.UtcNow;
         
-        if ((now - then).TotalSeconds < step) return;
+        if ((now - then).TotalSeconds < Delay) return;
         
         then = now;
         Add(1);

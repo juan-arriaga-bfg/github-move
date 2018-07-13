@@ -42,6 +42,8 @@ public class MineLifeComponent : StorageLifeComponent
         var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
         
         timer.Delay = def.Delay;
+        timer.Price = def.FastPrice;
+        
         storage.SpawnPiece = PieceType.Parse(def.Reward.Currency);
         storage.Capacity = storage.Amount = def.Reward.Amount;
         

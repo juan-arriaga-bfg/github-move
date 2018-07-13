@@ -13,10 +13,9 @@ public class ChestRewardAction : IBoardAction
 	
 	public BoardPosition From { get; set; }
 	public Dictionary<int, int> Pieces = new Dictionary<int, int>();
-	public Dictionary<string, int> Chargers = new Dictionary<string, int>();
 	public IBoardAction OnComplete;
 
-	public bool IsAddCollection = true;
+	public bool IsAddCollection = false;
 
 	public bool PerformAction(BoardController gameBoardController)
 	{
@@ -27,16 +26,6 @@ public class ChestRewardAction : IBoardAction
 		if (Pieces.Count != 0 && gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From, free, count) == false)
 		{
 			return false;
-		}
-		
-		foreach (var reward in Chargers)
-		{
-			for (var i = 0; i < reward.Value; i++)
-			{
-				GameDataService.Current.CollectionManager.CastResourceOnBoard(
-					new BoardPosition(From.X, From.Y, From.Z + i + 1),
-					new CurrencyPair{Currency = reward.Key, Amount = 1});
-			}
 		}
 
 		if (IsAddCollection)

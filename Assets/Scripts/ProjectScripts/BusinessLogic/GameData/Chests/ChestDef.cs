@@ -8,9 +8,7 @@ public class ChestDef
     public int Time { get; set; }
     public CurrencyPair Price { get; set; }
     public int PieceAmount { get; set; }
-    public int ChargerAmount { get; set; }
     public List<ItemWeight> PieceWeights;
-    public List<ItemWeight> ChargerWeights;
     
     public int Piece
     {

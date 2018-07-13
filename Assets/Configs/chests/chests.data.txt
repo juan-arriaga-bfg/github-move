@@ -2,43 +2,20 @@
   {
     "Uid": "ChestA1",
     "Time": 30,
-    "Price": {
+    "Price":
+    {
       "Currency": "Crystals",
       "Amount": 1
     },
-    "PieceAmount" : 12,
-    "ChargerAmount" : 1,
+    "PieceAmount" : 8,
     "PieceWeights" :
     [
       {
         "Uid": "A1",
-        "Weight" : 25
+        "Weight" : 35
       },
       {
-        "Uid": "B1",
-        "Weight" : 25
-      },
-      {
-        "Uid": "C1",
-        "Weight" : 25
-      },
-      {
-        "Uid": "E1",
-        "Weight" : 25
-      },
-      {
-        "Uid": "D1",
-        "Weight" : 20
-      }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger1",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger2",
+        "Uid": "A2",
         "Weight" : 20
       }
     ]
@@ -46,48 +23,20 @@
   {
     "Uid": "ChestA2",
     "Time": 60,
-    "Price": {
+    "Price":
+    {
       "Currency": "Crystals",
       "Amount": 5
     },
-    "PieceAmount" : 15,
-    "ChargerAmount" : 2,
+    "PieceAmount" : 14,
     "PieceWeights" :
     [
       {
-        "Uid": "A1",
-        "Weight" : 0,
-        "Override" : "true"
-      },
-      {
         "Uid": "A2",
-        "Weight" : 20
-      },
-      {
-        "Uid": "B2",
-        "Weight" : 15
-      },
-      {
-        "Uid": "D1",
         "Weight" : 5
       },
       {
-        "Uid": "F1",
-        "Weight" : 25
-      },
-      {
-        "Uid": "G1",
-        "Weight" : 25
-      }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger3",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger4",
+        "Uid": "A3",
         "Weight" : 20
       }
     ]
@@ -95,56 +44,17 @@
   {
     "Uid": "ChestA3",
     "Time": 120,
-    "Price": {
+    "Price":
+    {
       "Currency": "Crystals",
       "Amount": 20
     },
     "PieceAmount" : 22,
-    "ChargerAmount" : 2,
     "PieceWeights" :
     [
       {
-        "Uid": "B1",
-        "Weight" : 0,
-        "Override" : "true"
-      },
-
-      {
-        "Uid": "E2",
-        "Weight" : 20
-      },
-      {
-        "Uid": "C2",
-        "Weight" : 20
-      },
-      {
-        "Uid": "D2",
-        "Weight" : 20
-      },
-      {
-        "Uid": "F2",
-        "Weight" : 20
-      },
-      {
-        "Uid": "B2",
-        "Weight" : 10,
-        "Override" : "true"
-      },
-      {
-        "Uid": "G2",
-        "Weight" : 20,
-        "Override" : "true"
-      }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger5",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger6",
-        "Weight" : 20
+        "Uid": "A4",
+        "Weight" : 10
       }
     ]
   },
@@ -155,39 +65,15 @@
       "Currency": "Crystals",
       "Amount": 1
     },
-    "PieceAmount" : 12,
-    "ChargerAmount" : 1,
+    "PieceAmount" : 8,
     "PieceWeights" :
     [
       {
-        "Uid": "A1",
-        "Weight" : 25
+        "Uid": "X1",
+        "Weight" : 35
       },
       {
-        "Uid": "B1",
-        "Weight" : 25
-      },
-      {
-        "Uid": "C1",
-        "Weight" : 25
-      },
-      {
-        "Uid": "E1",
-        "Weight" : 25
-      },
-      {
-        "Uid": "D1",
-        "Weight" : 20
-      }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger1",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger2",
+        "Uid": "X2",
         "Weight" : 20
       }
     ]
@@ -199,44 +85,15 @@
       "Currency": "Crystals",
       "Amount": 5
     },
-    "PieceAmount" : 15,
-    "ChargerAmount" : 2,
+    "PieceAmount" : 14,
     "PieceWeights" :
     [
       {
-        "Uid": "A1",
-        "Weight" : 0,
-        "Override" : "true"
-      },
-      {
-        "Uid": "A2",
-        "Weight" : 20
-      },
-      {
-        "Uid": "B2",
-        "Weight" : 15
-      },
-      {
-        "Uid": "D1",
+        "Uid": "X2",
         "Weight" : 5
       },
       {
-        "Uid": "F1",
-        "Weight" : 25
-      },
-      {
-        "Uid": "G1",
-        "Weight" : 25
-      }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger3",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger4",
+        "Uid": "X3",
         "Weight" : 20
       }
     ]
@@ -249,51 +106,11 @@
       "Amount": 20
     },
     "PieceAmount" : 22,
-    "ChargerAmount" : 2,
     "PieceWeights" :
     [
       {
-        "Uid": "B1",
-        "Weight" : 0,
-        "Override" : "true"
-      },
-
-      {
-        "Uid": "E2",
-        "Weight" : 20
-      },
-      {
-        "Uid": "C2",
-        "Weight" : 20
-      },
-      {
-        "Uid": "D2",
-        "Weight" : 20
-      },
-      {
-        "Uid": "F2",
-        "Weight" : 20
-      },
-      {
-        "Uid": "B2",
-        "Weight" : 10,
-        "Override" : "true"
-      },
-      {
-        "Uid": "G2",
-        "Weight" : 20,
-        "Override" : "true"
-      }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger5",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger6",
-        "Weight" : 20
+        "Uid": "X4",
+        "Weight" : 10
       }
     ]
   },
@@ -304,39 +121,15 @@
       "Currency": "Crystals",
       "Amount": 1
     },
-    "PieceAmount" : 12,
-    "ChargerAmount" : 1,
+    "PieceAmount" : 8,
     "PieceWeights" :
     [
       {
-        "Uid": "A1",
-        "Weight" : 25
-      },
-      {
-        "Uid": "B1",
-        "Weight" : 25
-      },
-      {
         "Uid": "C1",
-        "Weight" : 25
+        "Weight" : 35
       },
       {
-        "Uid": "E1",
-        "Weight" : 25
-      },
-      {
-        "Uid": "D1",
-        "Weight" : 20
-      }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger1",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger2",
+        "Uid": "C2",
         "Weight" : 20
       }
     ]
@@ -348,44 +141,15 @@
       "Currency": "Crystals",
       "Amount": 5
     },
-    "PieceAmount" : 15,
-    "ChargerAmount" : 2,
+    "PieceAmount" : 14,
     "PieceWeights" :
     [
       {
-        "Uid": "A1",
-        "Weight" : 0,
-        "Override" : "true"
-      },
-      {
-        "Uid": "A2",
-        "Weight" : 20
-      },
-      {
-        "Uid": "B2",
-        "Weight" : 15
-      },
-      {
-        "Uid": "D1",
+        "Uid": "C2",
         "Weight" : 5
       },
       {
-        "Uid": "F1",
-        "Weight" : 25
-      },
-      {
-        "Uid": "G1",
-        "Weight" : 25
-      }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger3",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger4",
+        "Uid": "C3",
         "Weight" : 20
       }
     ]
@@ -398,51 +162,11 @@
       "Amount": 20
     },
     "PieceAmount" : 22,
-    "ChargerAmount" : 2,
     "PieceWeights" :
     [
       {
-        "Uid": "B1",
-        "Weight" : 0,
-        "Override" : "true"
-      },
-
-      {
-        "Uid": "E2",
-        "Weight" : 20
-      },
-      {
-        "Uid": "C2",
-        "Weight" : 20
-      },
-      {
-        "Uid": "D2",
-        "Weight" : 20
-      },
-      {
-        "Uid": "F2",
-        "Weight" : 20
-      },
-      {
-        "Uid": "B2",
-        "Weight" : 10,
-        "Override" : "true"
-      },
-      {
-        "Uid": "G2",
-        "Weight" : 20,
-        "Override" : "true"
-      }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger5",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger6",
-        "Weight" : 20
+        "Uid": "C4",
+        "Weight" : 10
       }
     ]
   },
@@ -454,7 +178,6 @@
       "Amount": 1
     },
     "PieceAmount" : 12,
-    "ChargerAmount" : 1,
     "PieceWeights" :
     [
       {
@@ -477,17 +200,6 @@
         "Uid": "D1",
         "Weight" : 20
       }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger1",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger2",
-        "Weight" : 20
-      }
     ]
   },
   {
@@ -498,7 +210,6 @@
       "Amount": 5
     },
     "PieceAmount" : 15,
-    "ChargerAmount" : 2,
     "PieceWeights" :
     [
       {
@@ -526,17 +237,6 @@
         "Uid": "G1",
         "Weight" : 25
       }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger3",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger4",
-        "Weight" : 20
-      }
     ]
   },
   {
@@ -547,7 +247,6 @@
       "Amount": 20
     },
     "PieceAmount" : 22,
-    "ChargerAmount" : 2,
     "PieceWeights" :
     [
       {
@@ -582,17 +281,6 @@
         "Weight" : 20,
         "Override" : "true"
       }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger5",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger6",
-        "Weight" : 20
-      }
     ]
   },
   {
@@ -603,7 +291,6 @@
       "Amount":40
     },
     "PieceAmount" : 22,
-    "ChargerAmount" : 3,
     "PieceWeights" :
     [
       {
@@ -636,17 +323,6 @@
         "Weight" : 20,
         "Override" : "true"
       }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger1",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger3",
-        "Weight" : 20
-      }
     ]
   },
   {
@@ -657,7 +333,6 @@
       "Amount": 60
     },
     "PieceAmount" : 22,
-    "ChargerAmount" : 4,
     "PieceWeights" :
     [
       {
@@ -710,19 +385,6 @@
         "Uid": "E3",
         "Weight" : 20
       }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger4",
-        "Weight" : 20,
-        "Override" : "true"
-      },
-      {
-        "Uid": "Charger2",
-        "Weight" : 20,
-        "Override" : "true"
-      }
     ]
   },
   {
@@ -733,7 +395,6 @@
       "Amount": 80
     },
     "PieceAmount" : 22,
-    "ChargerAmount" : 4,
     "PieceWeights" :
     [
       {
@@ -743,17 +404,6 @@
       {
         "Uid": "B4",
         "Weight" : 15
-      }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger1",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger9",
-        "Weight" : 20
       }
     ]
   },
@@ -765,7 +415,6 @@
       "Amount": 100
     },
     "PieceAmount" : 22,
-    "ChargerAmount" : 4,
     "PieceWeights" :
     [
       {
@@ -780,17 +429,6 @@
         "Uid": "E4",
         "Weight" : 15
       }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger3",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger4",
-        "Weight" : 20
-      }
     ]
   },
   {
@@ -801,7 +439,6 @@
       "Amount": 120
     },
     "PieceAmount" : 22,
-    "ChargerAmount" : 4,
     "PieceWeights" :
     [
       {
@@ -811,17 +448,6 @@
       {
         "Uid": "A5",
         "Weight" : 15
-      }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger5",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger6",
-        "Weight" : 20
       }
     ]
   },
@@ -833,7 +459,6 @@
       "Amount": 140
     },
     "PieceAmount" : 22,
-    "ChargerAmount" : 5,
     "PieceWeights" :
     [
       {
@@ -842,17 +467,6 @@
       },
       {
         "Uid": "C5",
-        "Weight" : 20
-      }
-    ],
-    "ChargerWeights" :
-    [
-      {
-        "Uid": "Charger3",
-        "Weight" : 20
-      },
-      {
-        "Uid": "Charger4",
         "Weight" : 20
       }
     ]

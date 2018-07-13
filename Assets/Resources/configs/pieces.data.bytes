@@ -314,6 +314,11 @@
   },
   {
     "Uid": "D4",
+    "SpawnResources" :
+    {
+      "Currency" : "Energy",
+      "Amount" : 20
+    },
     "CreateRewards":
     [
       {
@@ -339,6 +344,14 @@
         "Amount": 15
       }
     ]
+  },
+  {
+    "Uid": "E1",
+    "SpawnResources" :
+    {
+      "Currency" : "Energy",
+      "Amount" : 10
+    }
   },
   {
     "Uid": "E2",
@@ -469,6 +482,11 @@
   },
   {
     "Uid": "F5",
+    "SpawnResources" :
+    {
+      "Currency" : "Energy",
+      "Amount" : 15
+    },
     "CreateRewards":
     [
       {
@@ -516,6 +534,11 @@
   },
   {
     "Uid": "G4",
+    "SpawnResources" :
+    {
+      "Currency" : "Energy",
+      "Amount" : 20
+    },
     "CreateRewards":
     [
       {
@@ -560,8 +583,8 @@
     "Uid": "H4",
     "SpawnResources" :
     {
-      "Currency" : "Resource3",
-      "Amount" : 1
+      "Currency" : "Energy",
+      "Amount" : 25
     },
     "CreateRewards":
     [
@@ -624,6 +647,11 @@
   },
   {
     "Uid": "I5",
+    "SpawnResources" :
+    {
+      "Currency" : "Energy",
+      "Amount" : 30
+    },
     "CreateRewards":
     [
       {
@@ -652,6 +680,11 @@
   },
   {
     "Uid": "J3",
+    "Reproduction" :
+    {
+      "Currency": "J1",
+      "Amount": 1
+    },
     "CreateRewards":
     [
       {
@@ -666,10 +699,10 @@
   },
   {
     "Uid": "J4",
-    "Reproduction" :
+    "SpawnResources" :
     {
-      "Currency": "I1",
-      "Amount": 1
+      "Currency" : "Energy",
+      "Amount" : 25
     },
     "CreateRewards":
     [
@@ -685,6 +718,67 @@
   },
   {
     "Uid": "J5",
+    "SpawnResources" :
+    {
+      "Currency" : "Energy",
+      "Amount" : 30
+    },
+    "CreateRewards":
+    [
+      {
+        "Currency": "Experience",
+        "Amount": 75
+      },
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
+  },
+  {
+    "Uid": "X2",
+    "CreateRewards":
+    [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "X3",
+    "CreateRewards":
+    [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      },
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "X4",
+    "CreateRewards":
+    [
+      {
+        "Currency": "Experience",
+        "Amount": 100
+      },
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
+  },
+  {
+    "Uid": "X5",
     "CreateRewards":
     [
       {

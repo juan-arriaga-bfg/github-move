@@ -12,7 +12,22 @@
 		
 		if (IsDone == false)
 		{
-			UIErrorWindowController.AddError("Work is not complete!");
+			UIMessageWindowController.CreateTimerCompleteMessage(
+				"Complete now!",
+				"Would you like to build the item right now for crystals?",
+				"Complete now ",
+				storage.Timer,
+				() => CurrencyHellper.Purchase(Currency.Mine.Name, 1, storage.Timer.GetPrise(), success =>
+				{
+					if(success == false) return;
+					
+					storage.Timer.Stop();
+					storage.Timer.OnComplete();
+					
+					var life = piece.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
+					
+					piece.Context.WorkerLogic.Return(life.Key);
+				}));
 		}
         
 		return IsDone;

@@ -38,7 +38,7 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new BoardLoggerComponent()); // logger
         
         boardController.RegisterComponent(new WorkerCurrencyLogicComponent());
-        boardController.RegisterComponent(new EnergyCurrencyLogicComponent{Delay = 2000});
+        boardController.RegisterComponent(new EnergyCurrencyLogicComponent{Delay = 60});
         
         boardController
             .RegisterComponent(new BoardLogicComponent() // core logic

@@ -139,26 +139,45 @@ public static class CurrencyHellper
         return false;
     }
     
-    public static bool IsCanPurchase(string price, int amount)
+    public static bool IsCanPurchase(string price, int amount, bool isMessageShow = false)
     {
-        return ShopService.Current.IsCanPurchase(new Price{Currency = price, DefaultPriceAmount = amount});
+        var isCan = ShopService.Current.IsCanPurchase(new Price{Currency = price, DefaultPriceAmount = amount});
+
+        if (isCan == false && isMessageShow)
+        {
+            if(price == Currency.Coins.Name) UIMessageWindowController.CreateNeedCoinsMessage();
+            else UIMessageWindowController.CreateNeedCurrencyMessage(price);
+        }
+        
+        return isCan;
     }
 
-    public static bool IsCanPurchase(CurrencyPair price)
+    public static bool IsCanPurchase(CurrencyPair price, bool isMessageShow = false)
     {
-        return ShopService.Current.IsCanPurchase(new Price{Currency = price.Currency, DefaultPriceAmount = price.Amount});
+        var isCan = ShopService.Current.IsCanPurchase(new Price{Currency = price.Currency, DefaultPriceAmount = price.Amount});
+        
+        if (isCan == false && isMessageShow)
+        {
+            if(price.Currency == Currency.Coins.Name) UIMessageWindowController.CreateNeedCoinsMessage();
+            else UIMessageWindowController.CreateNeedCurrencyMessage(price.Currency);
+        }
+        
+        return isCan;
     }
 
-    public static bool IsCanPurchase(List<CurrencyPair> prices)
+    public static bool IsCanPurchase(List<CurrencyPair> prices, bool isMessageShow = false)
     {
-        var currentPrices = new List<Price>();
-
+        var isCan = true;
+        
         foreach (var price in prices)
         {
-            currentPrices.Add(new Price{Currency = price.Currency, DefaultPriceAmount = price.Amount});
+            if (IsCanPurchase(price, isMessageShow)) continue;
+            
+            isCan = false;
+            break;
         }
 
-        return ShopService.Current.IsCanPurchase(currentPrices);
+        return isCan;
     }
 
     public static int GetCountByTag(CurrencyTag tag)

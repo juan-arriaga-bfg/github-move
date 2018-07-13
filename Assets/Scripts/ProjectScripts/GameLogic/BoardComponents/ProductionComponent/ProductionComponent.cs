@@ -267,11 +267,7 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
         context.Context.ActionExecutor.AddAction(new ChestRewardAction
         {
             IsAddCollection = false,
-            From = context.CachedPosition,
-            Chargers = new Dictionary<string, int>
-            {
-                {def.Target, 1}
-            }
+            From = context.CachedPosition
         });
     }
     

@@ -111,27 +111,6 @@ public class Chest
         
         return result;
     }
-    
-    public Dictionary<string, int> GetRewardChargers()
-    {
-        var max = def.ChargerAmount;
-        var result = new Dictionary<string, int>();
-
-        for (var i = 0; i < max; i++)
-        {
-            var random = ItemWeight.GetRandomItem(def.ChargerWeights).Uid;
-
-            if (result.ContainsKey(random))
-            {
-                result[random] += 1;
-                continue;
-            }
-            
-            result.Add(random, 1);
-        }
-        
-        return result;
-    }
 
     public float GetTimerProgress()
     {
