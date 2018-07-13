@@ -38,4 +38,9 @@ public class UILimitPanelViewController : UIGenericResourcePanelViewController
     {
         return string.Format("{0}/{1}", value, storageItemLimit.Amount);
     }
+    
+    public void DebugCurrentResources()
+    {
+        CurrencyHellper.Purchase(itemUid, storageItemLimit.Amount - storageItem.Amount);
+    }
 }

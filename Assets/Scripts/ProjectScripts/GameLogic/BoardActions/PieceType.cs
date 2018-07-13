@@ -86,6 +86,12 @@ public static partial class PieceType
     public static readonly PieceTypeDef J4 = new PieceTypeDef{Id = 1003, Abbreviations = new List<string>{ "J4" }};
     public static readonly PieceTypeDef J5 = new PieceTypeDef{Id = 1004, Abbreviations = new List<string>{ "J5" }};
     
+    public static readonly PieceTypeDef X1 = new PieceTypeDef{Id = 1100, Abbreviations = new List<string>{ "X1" }};
+    public static readonly PieceTypeDef X2 = new PieceTypeDef{Id = 1101, Abbreviations = new List<string>{ "X2" }};
+    public static readonly PieceTypeDef X3 = new PieceTypeDef{Id = 1102, Abbreviations = new List<string>{ "X3" }};
+    public static readonly PieceTypeDef X4 = new PieceTypeDef{Id = 1103, Abbreviations = new List<string>{ "X4" }};
+    public static readonly PieceTypeDef X5 = new PieceTypeDef{Id = 1104, Abbreviations = new List<string>{ "X5" }};
+    
     public static readonly PieceTypeDef O1 = new PieceTypeDef{Id = 5000, Abbreviations = new List<string>{ "O1" }};
     public static readonly PieceTypeDef O2 = new PieceTypeDef{Id = 5001, Abbreviations = new List<string>{ "O2" }};
     public static readonly PieceTypeDef O3 = new PieceTypeDef{Id = 5002, Abbreviations = new List<string>{ "O3" }};
@@ -109,8 +115,8 @@ public static partial class PieceType
     public static readonly PieceTypeDef Coin5 = new PieceTypeDef{Id = 5404, Abbreviations = new List<string>{ "Coin5" }};
     
     public static readonly PieceTypeDef MineA = new PieceTypeDef{Id = 5500, Abbreviations = new List<string>{ "MineA" }};
-    public static readonly PieceTypeDef MineB = new PieceTypeDef{Id = 5501, Abbreviations = new List<string>{ "MineB" }};
-    public static readonly PieceTypeDef MineC = new PieceTypeDef{Id = 5502, Abbreviations = new List<string>{ "MineC" }};
+    public static readonly PieceTypeDef MineC = new PieceTypeDef{Id = 5501, Abbreviations = new List<string>{ "MineC" }};
+    public static readonly PieceTypeDef MineX = new PieceTypeDef{Id = 5502, Abbreviations = new List<string>{ "MineX" }};
     
     public static readonly PieceTypeDef Mine1 = new PieceTypeDef{Id = 10000, Abbreviations = new List<string>{ "Mine1" }};
     public static readonly PieceTypeDef Mine2 = new PieceTypeDef{Id = 10001, Abbreviations = new List<string>{ "Mine2" }};
@@ -140,9 +146,9 @@ public static partial class PieceType
     public static readonly PieceTypeDef ChestA2 = new PieceTypeDef{Id = 13102, Abbreviations = new List<string>{ "ChestA2" }};
     public static readonly PieceTypeDef ChestA3 = new PieceTypeDef{Id = 13103, Abbreviations = new List<string>{ "ChestA3" }};
     
-    public static readonly PieceTypeDef ChestB1 = new PieceTypeDef{Id = 13201, Abbreviations = new List<string>{ "ChestB1" }};
-    public static readonly PieceTypeDef ChestB2 = new PieceTypeDef{Id = 13202, Abbreviations = new List<string>{ "ChestB2" }};
-    public static readonly PieceTypeDef ChestB3 = new PieceTypeDef{Id = 13203, Abbreviations = new List<string>{ "ChestB3" }};
+    public static readonly PieceTypeDef ChestX1 = new PieceTypeDef{Id = 13201, Abbreviations = new List<string>{ "ChestX1" }};
+    public static readonly PieceTypeDef ChestX2 = new PieceTypeDef{Id = 13202, Abbreviations = new List<string>{ "ChestX2" }};
+    public static readonly PieceTypeDef ChestX3 = new PieceTypeDef{Id = 13203, Abbreviations = new List<string>{ "ChestX3" }};
     
     public static readonly PieceTypeDef ChestC1 = new PieceTypeDef{Id = 13301, Abbreviations = new List<string>{ "ChestC1" }};
     public static readonly PieceTypeDef ChestC2 = new PieceTypeDef{Id = 13302, Abbreviations = new List<string>{ "ChestC2" }};

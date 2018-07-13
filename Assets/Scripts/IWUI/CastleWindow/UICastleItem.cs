@@ -106,7 +106,7 @@ public class UICastleItem : MonoBehaviour
 			return "2";
 		}
 		
-		if (key == PieceType.ChestB3.Id)
+		if (key == PieceType.ChestX3.Id)
 		{
 			return "3";
 		}

@@ -68,7 +68,7 @@ public class FieldControllerComponent : IECSComponent
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
             At = new BoardPosition(21, 4),
-            PieceTypeId = PieceType.MineB.Id
+            PieceTypeId = PieceType.MineX.Id
         });
         
         context.ActionExecutor.AddAction(new CreatePieceAtAction
@@ -120,7 +120,7 @@ public class FieldControllerComponent : IECSComponent
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
             At = new BoardPosition(21, 4),
-            PieceTypeId = PieceType.MineB.Id
+            PieceTypeId = PieceType.MineX.Id
         });
         
         AddPieces(new BoardPosition(4, 10), PieceType.O1.Id, PieceType.O5.Id);
@@ -138,7 +138,7 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(26, 10), PieceType.J1.Id, PieceType.J5.Id);
         
         AddPieces(new BoardPosition(28, 10), PieceType.ChestA1.Id, PieceType.ChestA3.Id);
-        AddPieces(new BoardPosition(28, 14), PieceType.ChestB1.Id, PieceType.ChestB3.Id);
+        AddPieces(new BoardPosition(28, 14), PieceType.ChestX1.Id, PieceType.ChestX3.Id);
         AddPieces(new BoardPosition(28, 18), PieceType.ChestC1.Id, PieceType.ChestC3.Id);
         
         AddPieces(new BoardPosition(29, 10), PieceType.Coin1.Id, PieceType.Coin5.Id);

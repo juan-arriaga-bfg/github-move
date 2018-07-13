@@ -30,11 +30,12 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.H1.Id, PieceType.H4.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.I1.Id, PieceType.I5.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.J1.Id, PieceType.J5.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.X1.Id, PieceType.X5.Id, dict);
         
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Coin1.Id, PieceType.Coin5.Id, dict);
         
         dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestA1.Id, PieceType.ChestA3.Id, dict);
-        dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestB1.Id, PieceType.ChestB3.Id, dict);
+        dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestX1.Id, PieceType.ChestX3.Id, dict);
         dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestC1.Id, PieceType.ChestC3.Id, dict);
         
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest9.Id, dict);
@@ -67,7 +68,7 @@ public class PieceBuildersBuilder
     {
         var mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2);
         
-        dict = AddMulticellularPiece<MinePieceBuilder>(PieceType.MineA.Id, PieceType.MineC.Id, mask, dict);
+        dict = AddMulticellularPiece<MinePieceBuilder>(PieceType.MineA.Id, PieceType.MineX.Id, mask, dict);
         
 //        dict = AddMulticellularPiece<MarketPieceBuilder>(PieceType.Market1.Id, PieceType.Market9.Id, mask, dict);
 //        dict = AddMulticellularPiece<StoragePieceBuilder>(PieceType.Storage1.Id, PieceType.Storage9.Id, mask, dict);

@@ -53,8 +53,8 @@ public class ChestPieceView : PieceBoardElementView
         
         var isOpen = chestComponent.Chest.State == ChestState.Open;
         
-        shine.SetActive(isOpen);
+        if(shine != null) shine.SetActive(isOpen);
         
-        cap.localPosition = new Vector3(cap.localPosition.x, isOpen ? open : close);
+        if(cap != null) cap.localPosition = new Vector3(cap.localPosition.x, isOpen ? open : close);
     }
 }

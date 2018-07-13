@@ -3,6 +3,7 @@
 public class ChangeMineStateView : UIBoardView, IBoardEventListener
 {
     [SerializeField] private NSText message;
+    [SerializeField] private NSText progress;
     [SerializeField] private NSText price;
     
     private MineLifeComponent life;
@@ -50,6 +51,7 @@ public class ChangeMineStateView : UIBoardView, IBoardEventListener
 
         message.Text = "Clear mine " + life.Energy.ToStringIcon();
         price.Text = string.Format("Send<sprite name={0}>", life.Worker.Currency);
+        progress.Text = string.Format("Attempts: {0}", life.HP - life.Current);
     }
     
     public void Clear()

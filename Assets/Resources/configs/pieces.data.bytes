@@ -718,7 +718,7 @@
     ]
   },
   {
-    "Uid": "ChestB2",
+    "Uid": "ChestX2",
     "CreateRewards":
     [
       {
@@ -728,7 +728,7 @@
     ]
   },
   {
-    "Uid": "ChestB3",
+    "Uid": "ChestX3",
     "CreateRewards":
     [
       {
@@ -911,30 +911,6 @@
         "Amount": 80
       }
     ]
-  },
-  {
-    "Uid": "Mine1",
-    "Delay": 15,
-    "SpawnPiece": "C1",
-    "IsFilledInStart":"False",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 0
-  },
-  {
-    "Uid": "Sawmill1",
-    "Delay": 90,
-    "SpawnPiece": "ChestA1",
-    "IsFilledInStart":"True",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 1
-  },
-  {
-    "Uid": "Sheepfold1",
-    "Delay": 30,
-    "SpawnPiece": "D1",
-    "IsFilledInStart":"False",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 0
   },
   {
     "Uid": "Castle1",

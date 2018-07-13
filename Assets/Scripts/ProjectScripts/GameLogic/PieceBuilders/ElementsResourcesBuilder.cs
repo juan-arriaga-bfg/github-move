@@ -100,13 +100,19 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.J4.Id, R.J4Piece);
         dict.Add(PieceType.J5.Id, R.J5Piece);
         
+        dict.Add(PieceType.X1.Id, R.X1Piece);
+        dict.Add(PieceType.X2.Id, R.X2Piece);
+        dict.Add(PieceType.X3.Id, R.X3Piece);
+        dict.Add(PieceType.X4.Id, R.X4Piece);
+        dict.Add(PieceType.X5.Id, R.X5Piece);
+        
         dict.Add(PieceType.ChestA1.Id, R.ChestA1Piece);
         dict.Add(PieceType.ChestA2.Id, R.ChestA2Piece);
         dict.Add(PieceType.ChestA3.Id, R.ChestA3Piece);
         
-        dict.Add(PieceType.ChestB1.Id, R.ChestB1Piece);
-        dict.Add(PieceType.ChestB2.Id, R.ChestB2Piece);
-        dict.Add(PieceType.ChestB3.Id, R.ChestB3Piece);
+        dict.Add(PieceType.ChestX1.Id, R.ChestX1Piece);
+        dict.Add(PieceType.ChestX2.Id, R.ChestX2Piece);
+        dict.Add(PieceType.ChestX3.Id, R.ChestX3Piece);
         
         dict.Add(PieceType.ChestC1.Id, R.ChestC1Piece);
         dict.Add(PieceType.ChestC2.Id, R.ChestC2Piece);
@@ -133,9 +139,9 @@ public class ElementsResourcesBuilder
 
     private Dictionary<int, string> AddMulticellularPiece(Dictionary<int, string> dict)
     {
-        dict.Add(PieceType.MineA.Id, R.Mine1Piece);
-        dict.Add(PieceType.MineB.Id, R.Sawmill1Piece);
-        dict.Add(PieceType.MineC.Id, R.Sheepfold1Piece);
+        dict.Add(PieceType.MineA.Id, R.MineAPiece);
+        dict.Add(PieceType.MineX.Id, R.MineXPiece);
+        dict.Add(PieceType.MineC.Id, R.MineCPiece);
         
         dict.Add(PieceType.Mine1.Id, R.Mine1Piece);
         dict.Add(PieceType.Mine2.Id, R.Mine2Piece);
