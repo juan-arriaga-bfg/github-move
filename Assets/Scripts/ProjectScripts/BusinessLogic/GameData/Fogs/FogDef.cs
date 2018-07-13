@@ -4,6 +4,7 @@ using UnityEngine;
 public class FogDef
 {
     public int Uid { get; set; }
+    public int Level { get; set; }
     public BoardPosition Position { get; set; }
     public CurrencyPair Condition { get; set; }
     public BoardPosition Size { get; set; }

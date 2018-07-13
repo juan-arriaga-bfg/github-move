@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 {
-    private CurrencyPair condition;
+    private int level;
     private StorageItem storageItem;
     private ViewDefinitionComponent viewDef;
     
@@ -25,7 +25,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
         if (viewDef != null)
         {
-            condition = def.Condition;
+            level = def.Level;
             storageItem = ProfileService.Current.GetStorageItem(GetResourceId());
             
             ResourcesViewManager.Instance.RegisterView(this);
@@ -63,7 +63,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                 }
             }
         }
-
+        
         var weights = def.PieceWeights == null || def.PieceWeights.Count == 0
             ? GameDataService.Current.FogsManager.DefaultPieceWeights
             : def.PieceWeights;
@@ -93,17 +93,17 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void UpdateResource(int offset)
     {
-        if(storageItem.Amount < condition.Amount) return;
+        if(storageItem.Amount < level) return;
         
         var view = viewDef.AddView(ViewType.FogState);
-
+        
         view.Priority = -1;
         view.Change(true);
     }
     
     public string GetResourceId()
     {
-        return condition.Currency;
+        return Currency.Level.Name;
     }
     
     public Vector2 GetScreenPosition()

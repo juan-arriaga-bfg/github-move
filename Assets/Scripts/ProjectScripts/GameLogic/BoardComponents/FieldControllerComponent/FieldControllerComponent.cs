@@ -22,12 +22,12 @@ public class FieldControllerComponent : IECSComponent
         CreateDebug();
 #endif
         
-//        if (fieldDef.Pieces == null)
+        if (fieldDef.Pieces == null)
         {
-//            StartField();
-            TestField();
-//            CreateFog();
-//            CreateTown();
+            StartField();
+//            TestField();
+            CreateFog();
+            CreateTown();
             return;
         }
         

@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ChangeFogStateView : UIBoardView, IBoardEventListener
 {
-	[SerializeField] private NSText label;
-	
-	[SerializeField] private RectTransform line;
+	[SerializeField] private NSText message;
+	[SerializeField] private NSText price;
 	
 	private FogDef def;
 	
@@ -48,11 +48,8 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 	{
 		if(def == null) return;
 		
-		var price = ProfileService.Current.GetStorageItem(Currency.Coins.Name).Amount;
-		
-		label.Text = string.Format("{0}/{1}", price, def.Condition.Amount);
-
-		line.sizeDelta = new Vector2(Mathf.Clamp(10 + 153 * (float) price / def.Condition.Amount, 10, 163), line.sizeDelta.y);
+		message.Text = "Clear fog";
+		price.Text = def.Condition.ToStringIcon();
 	}
 	
 	public void OnBoardEvent(int code, object context)
@@ -60,5 +57,19 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 		if (code != GameEventsCodes.ClosePieceMenu || context is FogDef && ((FogDef) context).Uid == def.Uid) return;
 		
 		Change(false);
+	}
+	
+	public void Clear()
+	{
+		CurrencyHellper.Purchase(Currency.Fog.Name, 1, def.Condition, success =>
+		{
+			if (success == false) return;
+                
+			Context.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+			{
+				To = Context.CachedPosition,
+				Positions = new List<BoardPosition>{Context.CachedPosition}
+			});
+		});
 	}
 }

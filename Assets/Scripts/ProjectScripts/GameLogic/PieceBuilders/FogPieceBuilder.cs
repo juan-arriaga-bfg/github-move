@@ -5,9 +5,9 @@
         var piece = base.Build(pieceType, context);
         
         piece.RegisterComponent(new TouchReactionComponent()
-            .RegisterComponent(new TouchReactionDefinitionFog())
-            .RegisterComponent(new TouchReactionConditionComponent()));
-
+            .RegisterComponent(new TouchReactionDefinitionComponent())
+            .RegisterComponent(new TouchReactionConditionFog()));
+        
         CreateViewComponent(piece);
         
         return piece;
