@@ -57,6 +57,8 @@ public class ItemWeight
 
     public static List<ItemWeight> ReplaseWeights(List<ItemWeight> oldWeights, List<ItemWeight> nextWeights)
     {
+        if (oldWeights == null) return nextWeights;
+        
         var weights = new List<ItemWeight>();
 
         foreach (var weight in oldWeights)

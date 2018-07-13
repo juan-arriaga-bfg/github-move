@@ -1,13 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class ObstacleLifeComponent : LifeComponent, IPieceBoardObserver
+public class ObstacleLifeComponent : StorageLifeComponent
 {
-    public CurrencyPair Price
+    public override CurrencyPair Energy
     {
         get
         {
-            return GameDataService.Current.ObstaclesManager.PriceForPiece(thisContext.PieceType, current);
+            return GameDataService.Current.ObstaclesManager.GetPriceByStep(thisContext.PieceType, current);
+        }
+    }
+    
+    public override CurrencyPair Worker
+    {
+        get
+        {
+            return new CurrencyPair {Currency = Currency.Worker.Name, Amount = 1};
+        }
+    }
+    
+    public override List<CurrencyPair> Conditions
+    {
+        get { return new List<CurrencyPair> {Energy, Worker}; }
+    }
+    
+    public override string Key
+    {
+        get
+        {
+            return string.Format("{0}_{1}", thisContext.PieceType, thisContext.CachedPosition);
         }
     }
 
@@ -15,75 +36,56 @@ public class ObstacleLifeComponent : LifeComponent, IPieceBoardObserver
     {
         get { return 1 - (current+1)/(float)HP; }
     }
-
-    public override void OnRegisterEntity(ECSEntity entity)
+    
+    public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        base.OnRegisterEntity(entity);
+        base.OnAddToBoard(position, context);
         
+        var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
+        
+        timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current);
+        
+        storage.SpawnPiece = PieceType.None.Id;
+        storage.Capacity = storage.Amount = 1;
+        
+        current = GameDataService.Current.ObstaclesManager.GetSaveStep(position);
         HP = thisContext.Context.BoardLogic.MatchDefinition.GetIndexInChain(thisContext.PieceType);
     }
+
+    protected override void Success()
+    {
+        storage.Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current);
+    }
     
-    public void OnAddToBoard(BoardPosition position, Piece context = null)
+    protected override void OnStep()
     {
-        current = GameDataService.Current.ObstaclesManager.GetSaveStep(position);
-    }
-
-    public void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)
-    {
-    }
-
-    public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
-    {
-    }
-
-    public bool Damage(Action onComplete)
-    {
-        if (current == HP) return false;
-
-        var isSuccess = false;
-        
-        CurrencyHellper.Purchase(Currency.Damage.Name, 1, Price, success =>
+        storage.SpawnAction = new EjectionPieceAction
         {
-            if(success == false) return;
-
-            isSuccess = true;
-
-            var position = thisContext.CachedPosition;
-            
-            Damage(1);
-
-            if (current != HP)
+            From = thisContext.CachedPosition,
+            Pieces = GameDataService.Current.ObstaclesManager.GetRewardByStep(thisContext.PieceType, current),
+            OnComplete = () =>
             {
-                thisContext.Context.ActionExecutor.AddAction(new EjectionPieceAction
-                {
-                    From = position,
-                    OnComplete = onComplete,
-                    Pieces = GameDataService.Current.ObstaclesManager.RewardForPiece(thisContext.PieceType, current)
-                });
-                
-                return;
+                var hint = thisContext.Context.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
+
+                if (hint != null) hint.Step(HintType.Obstacle);
             }
+        };
+    }
 
-            var chest = GameDataService.Current.ObstaclesManager.ChestForPiece(thisContext.PieceType);
-                
-            if(chest == PieceType.None.Id) return;
-                
-            thisContext.Context.ActionExecutor.AddAction(new CollapsePieceToAction
-            {
-                To = position,
-                Positions = new List<BoardPosition>{position},
-                OnComplete = () =>
-                {
-                    thisContext.Context.ActionExecutor.AddAction(new SpawnPieceAtAction()
-                    {
-                        IsCheckMatch = false,
-                        At = position,
-                        PieceTypeId = chest
-                    });
-                }
-            });
-        });
+    protected override void OnComplete()
+    {
+        var position = thisContext.CachedPosition;
         
-        return isSuccess;
+        storage.SpawnAction = new CollapsePieceToAction
+        {
+            To = position,
+            Positions = new List<BoardPosition> {position},
+            OnCompleteAction = new SpawnPieceAtAction()
+            {
+                IsCheckMatch = false,
+                At = thisContext.CachedPosition,
+                PieceTypeId = GameDataService.Current.ObstaclesManager.GetReward(thisContext.PieceType)
+            }
+        };
     }
 }

@@ -37,6 +37,13 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
             if(positions.Count == amount) break;
         }
         
+        if (storage.SpawnAction != null)
+        {
+            piece.Context.ActionExecutor.AddAction(storage.SpawnAction);
+            storage.SpawnAction = null;
+            return true;
+        }
+        
         piece.Context.ActionExecutor.AddAction(new ReproductionPieceAction
         {
             From = position,

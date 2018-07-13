@@ -212,7 +212,7 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.BoardTimer, R.BoardTimerView);
         dict.Add((int)ViewType.LevelLabel, R.PieceLevelView);
         dict.Add((int)ViewType.Menu, R.MenuView);
-        dict.Add((int)ViewType.Obstacle, R.ChangeObstacleStateView);
+        dict.Add((int)ViewType.ObstacleState, R.ChangeObstacleStateView);
         dict.Add((int)ViewType.FogState, R.ChangeFogStateView);
         dict.Add((int)ViewType.CastleUpgrade, R.CastleUpgradeView);
         dict.Add((int)ViewType.SimpleUpgrade, R.SimpleUpgradeView);

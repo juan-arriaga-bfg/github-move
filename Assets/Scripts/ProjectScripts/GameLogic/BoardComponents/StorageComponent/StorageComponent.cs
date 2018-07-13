@@ -7,6 +7,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     
     public int Guid { get { return ComponentGuid; } }
 
+    public IBoardAction SpawnAction;
     public int SpawnPiece;
     
     public int Amount;

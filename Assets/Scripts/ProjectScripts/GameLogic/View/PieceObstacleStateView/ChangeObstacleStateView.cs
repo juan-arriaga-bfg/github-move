@@ -25,7 +25,7 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
     
     protected override ViewType Id
     {
-        get { return ViewType.Obstacle; }
+        get { return ViewType.ObstacleState; }
     }
     
     public override void Init(Piece piece)
@@ -82,7 +82,8 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
 
         if (IsShow == false) return;
         
-        price.Text = life.Price.ToStringIcon();
+        message.Text = "Clear Up " + life.Energy.ToStringIcon();
+        price.Text = string.Format("Send<sprite name={0}>", life.Worker.Currency);
         
         progress.fillAmount = life.GetProgressNext;
         light.fillAmount = life.GetProgress;
@@ -90,10 +91,7 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
     
     public void Clear()
     {
-        if (life.Damage(Reopen))
-        {
-            Change(false);
-        }
+        if (life.Damage()) Change(false);
     }
     
     public void OnBoardEvent(int code, object context)
@@ -101,16 +99,5 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
         if (code != GameEventsCodes.ClosePieceMenu || context is BoardPosition && ((BoardPosition) context).Equals(Context.CachedPosition)) return;
 		
         Change(false);
-    }
-
-    private void Reopen()
-    {
-        var viewDef = Context.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
-            
-        if (viewDef == null) return;
-        
-        var view = viewDef.AddView(Id);
-        
-        view.Change(true);
     }
 }

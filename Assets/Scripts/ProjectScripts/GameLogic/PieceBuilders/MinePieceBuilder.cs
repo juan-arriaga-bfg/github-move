@@ -20,8 +20,8 @@
 		
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
-				.RegisterDefinition(new TouchReactionDefinitionMine())
-				.RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{IsAutoStart = false, Icon = "Chest"}))
+				.RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.MineState})
+				.RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{IsAutoStart = false}))
 			.RegisterComponent(new TouchReactionConditionComponent()));
         
 		return piece;

@@ -1,10 +1,12 @@
-﻿public class TouchReactionDefinitionMine : TouchReactionDefinitionComponent
+﻿public class TouchReactionDefinitionOpenBubble : TouchReactionDefinitionComponent
 {
+	public ViewType ViewId;
+	
 	private ViewDefinitionComponent viewDef;
 	
 	public override bool IsViewShow(ViewDefinitionComponent viewDefinition)
 	{
-		return viewDefinition != null && viewDefinition.AddView(ViewType.MineState).IsShow;
+		return viewDefinition != null && viewDefinition.AddView(ViewId).IsShow;
 	}
     
 	public override bool Make(BoardPosition position, Piece piece)
@@ -18,7 +20,7 @@
 			if (viewDef == null) return false;
 		}
         
-		var view = viewDef.AddView(ViewType.MineState);
+		var view = viewDef.AddView(ViewId);
         
 		view.Change(!view.IsShow);
         

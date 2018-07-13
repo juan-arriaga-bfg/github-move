@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
-public class MineLifeComponent : LifeComponent, IPieceBoardObserver
+public class MineLifeComponent : StorageLifeComponent
 {
-    private StorageComponent storage;
     private MineDef def;
     
-    public CurrencyPair Energy
+    public override CurrencyPair Energy
     {
         get
         {
@@ -15,21 +12,28 @@ public class MineLifeComponent : LifeComponent, IPieceBoardObserver
         }
     }
     
-    public CurrencyPair Worker
+    public override CurrencyPair Worker
     {
         get
         {
             return  def.Conditions.Find(pair => pair.Currency == Currency.Worker.Name);
         }
     }
-    
-    public string Key
+
+    public override List<CurrencyPair> Conditions
+    {
+        get { return def.Conditions; }
+    }
+
+    public override string Key
     {
         get { return string.Format("{0}_{1}", thisContext.PieceType, def.Position); }
     }
-    
-    public void OnAddToBoard(BoardPosition position, Piece context = null)
+
+    public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
+        base.OnAddToBoard(position, context);
+        
         var key = new BoardPosition(position.X, position.Y);
         def = GameDataService.Current.MinesManager.GetDef(key);
         
@@ -38,9 +42,6 @@ public class MineLifeComponent : LifeComponent, IPieceBoardObserver
         var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
         
         timer.Delay = def.Delay;
-        
-        if(storage == null) storage = thisContext.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
-        
         storage.SpawnPiece = PieceType.Parse(def.Reward.Currency);
         storage.Capacity = storage.Amount = def.Reward.Amount;
         
@@ -48,54 +49,22 @@ public class MineLifeComponent : LifeComponent, IPieceBoardObserver
         current = 0;//GameDataService.Current.ObstaclesManager.GetSaveStep(position);
     }
 
-    public void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)
+    protected override void OnComplete()
     {
-    }
-
-    public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
-    {
-    }
-    
-    public bool Damage()
-    {
-        if (current == HP) return false;
-
-        var isSuccess = false;
-
-        if (CurrencyHellper.IsCanPurchase(def.Conditions) == false) return false;
-
-        thisContext.Context.WorkerLogic.Get(Key, storage.Timer.Delay);
-        
-        CurrencyHellper.Purchase(Currency.Damage.Name, 1, Energy, success =>
+        var position = thisContext.CachedPosition;
+                
+        storage.OnScatter = () =>
         {
-            if(success == false) return;
-            
-            isSuccess = true;
-            
-            var position = thisContext.CachedPosition;
-            
-            Damage(Worker == null ? 1 : Worker.Amount);
-            
-            storage.Timer.Start();
-            
-            if (current == HP)
+            storage.OnScatter = null;
+            thisContext.Context.ActionExecutor.AddAction(new CollapsePieceToAction
             {
-                storage.OnScatter = () =>
-                {
-                    storage.OnScatter = null;
-                    thisContext.Context.ActionExecutor.AddAction(new CollapsePieceToAction
-                    {
-                        To = position,
-                        Positions = new List<BoardPosition> {position},
-                        OnComplete = OnRemove
-                    });
-                };
-            }
-        });
-        
-        return isSuccess;
+                To = position,
+                Positions = new List<BoardPosition> {position},
+                OnComplete = OnRemove
+            });
+        };
     }
-    
+
     private void OnRemove()
     {
         var multi = thisContext.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
