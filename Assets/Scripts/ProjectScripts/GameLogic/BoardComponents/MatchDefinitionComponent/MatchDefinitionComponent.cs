@@ -51,6 +51,12 @@ public class MatchDefinitionComponent : ECSEntity
         return chain.Count == 0 ? PieceType.None.Id : chain[0];
     }
 
+    public int GetLast(int pieceId, bool checkIgnore = true)
+    {
+        var chain = GetChain(pieceId, checkIgnore);
+        return chain.Count == 0 ? PieceType.None.Id : chain[chain.Count - 1];
+    }
+    
     public int GetIndexInChain(int pieceId)
     {
         var chain = GetChain(pieceId);
@@ -60,7 +66,7 @@ public class MatchDefinitionComponent : ECSEntity
         return chain.IndexOf(pieceId) + 1;
     }
 
-    public List<int> GetChain(int pieceId)
+    public List<int> GetChain(int pieceId, bool checkIgnore = true)
     {
         var chain = new List<int>();
 
@@ -75,12 +81,12 @@ public class MatchDefinitionComponent : ECSEntity
         }
         while (unit != PieceType.None.Id);
         
-        unit = GetNext(pieceId);
+        unit = GetNext(pieceId, checkIgnore);
         
         while (unit != PieceType.None.Id)
         {
             chain.Add(unit);
-            unit = GetNext(unit);
+            unit = GetNext(unit, checkIgnore);
         }
         
         return chain;

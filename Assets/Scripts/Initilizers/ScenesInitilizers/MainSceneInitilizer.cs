@@ -14,7 +14,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         IWUISettings.Instance.SetResourceManager(new DefaultUIResourceManager());
 
         // cache windows
-        IWUIManager.Instance.Init(new string[]
+        IWUIManager.Instance.Init(new[]
         {
             UIWindowType.MainWindow,
             UIWindowType.SampleWindow,
@@ -27,6 +27,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.QuestWindow,
 //            UIWindowType.RobberyWindow,
             UIWindowType.ErrorWindow,
+            UIWindowType.CastleWindow,
 //            UIWindowType.StorageWindow,
 //            UIWindowType.MarketWindow,
 //            UIWindowType.ProductionWindow,

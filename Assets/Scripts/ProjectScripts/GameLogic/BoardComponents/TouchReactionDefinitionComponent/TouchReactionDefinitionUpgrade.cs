@@ -54,7 +54,7 @@
 		var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
 
 		model.Title = "Upgrade";
-		model.Message = string.Format("Upgrade to {0} level, for {1} coins?", def.CurrentLevel() + 1, def.UpgradePrices[0].Amount);
+		model.Message = string.Format("Upgrade to {0} level, for {1}?", def.CurrentLevel() + 1, def.UpgradePrices[0].ToStringIcon(false));
 
 		model.AcceptLabel = "Upgrade";
 		model.CancelLabel = "Cancel";

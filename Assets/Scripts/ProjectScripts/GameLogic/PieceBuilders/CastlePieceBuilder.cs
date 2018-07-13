@@ -33,9 +33,9 @@ public class CastlePieceBuilder : MulticellularPieceBuilder
         AddObserver(piece, upgrade);
         
         piece.RegisterComponent(new TouchReactionComponent()
-            .RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 1}
-                .RegisterDefinition(new TouchReactionDefinitionSpawnCastle{Icon = "Chest"})
-                .RegisterDefinition(new TouchReactionDefinitionUpgradeCastle{Icon = "arrow_light"}))
+            .RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
+                .RegisterDefinition(new TouchReactionDefinitionOpenWindow{WindowType = UIWindowType.CastleWindow})
+                .RegisterDefinition(new TouchReactionDefinitionUpgrade()))
             .RegisterComponent(new TouchReactionConditionComponent()));
         
         return piece;
