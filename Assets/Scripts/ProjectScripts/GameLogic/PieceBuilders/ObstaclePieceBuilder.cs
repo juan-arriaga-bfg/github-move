@@ -1,4 +1,6 @@
-﻿public class ObstaclePieceBuilder : GenericPieceBuilder
+﻿using UnityEngine;
+
+public class ObstaclePieceBuilder : GenericPieceBuilder
 {
 	public override Piece Build(int pieceType, BoardController context)
 	{
@@ -13,7 +15,12 @@
 		piece.RegisterComponent(life);
 		AddObserver(piece, life);
 		
-		var storage = new StorageComponent{IsAutoStart = false};
+		var storage = new StorageComponent
+		{
+			IsAutoStart = false,
+			IsTimerShow = true,
+			TimerOffset = new Vector2(0f, 0.5f)
+		};
 		
 		piece.RegisterComponent(storage);
 		AddObserver(piece, storage);
@@ -22,7 +29,7 @@
 			.RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
 				.RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.ObstacleState})
 				.RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{IsAutoStart = false}))
-			.RegisterComponent(new TouchReactionConditionComponent()));
+			.RegisterComponent(new TouchReactionConditionStorage()));
 		
 		return piece;
 	}
