@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ChestDef
 {
@@ -9,6 +10,7 @@ public class ChestDef
     public CurrencyPair Price { get; set; }
     public int PieceAmount { get; set; }
     public List<ItemWeight> PieceWeights;
+    public List<string> RandomPieces;
     
     public int Piece
     {
@@ -21,5 +23,14 @@ public class ChestDef
             
             return pieceType;
         }
+    }
+
+    public int GetRandomPiece()
+    {
+        if (RandomPieces == null || RandomPieces.Count == 0) return PieceType.None.Id;
+
+        var id = RandomPieces[Random.Range(0, RandomPieces.Count)];
+
+        return PieceType.Parse(id);
     }
 }

@@ -33,7 +33,7 @@ public class UIChestMessageWindowModel : IWWindowModel
 
         foreach (var piece in Chest.Def.PieceWeights)
         {
-            if(piece.Weight == 0) continue;
+            if(piece.Piece == PieceType.Empty.Id || piece.Weight == 0) continue;
             
             icons.Add(piece.Uid);
         }

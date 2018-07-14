@@ -95,10 +95,17 @@ public class Chest
     {
         var max = def.PieceAmount;
         var result = new Dictionary<int, int>();
-
+        
         for (var i = 0; i < max; i++)
         {
             var random = ItemWeight.GetRandomItem(def.PieceWeights).Piece;
+
+            if (random == PieceType.Empty.Id)
+            {
+                random = def.GetRandomPiece();
+            }
+            
+            if(random == PieceType.None.Id) continue;
 
             if (result.ContainsKey(random))
             {
