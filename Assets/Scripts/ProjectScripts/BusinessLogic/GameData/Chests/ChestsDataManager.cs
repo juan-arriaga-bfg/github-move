@@ -35,16 +35,23 @@ public class ChestsDataManager : IECSComponent, IDataManager, IDataLoader<List<C
         {
             if (string.IsNullOrEmpty(error))
             {
-                Chests = new List<ChestDef> {data[0]};
+                var matchDefinition = new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
+                data.Sort((a, b) => a.Piece.CompareTo(b.Piece));
+
+                Chests = new List<ChestDef>();
                 
-                for (var i = 1; i < data.Count; i++)
+                foreach (var next in data)
                 {
-                    var def = data[i - 1];
-                    var defNext = data[i];
+                    var previousType = matchDefinition.GetPrevious(next.Piece);
                     
-                    defNext.PieceWeights = ItemWeight.ReplaseWeights(def.PieceWeights, defNext.PieceWeights);
+                    if (previousType != PieceType.None.Id)
+                    {
+                        var previous = data.Find(def => def.Piece == previousType);
+                        
+                        next.PieceWeights = ItemWeight.ReplaseWeights(previous.PieceWeights, next.PieceWeights);
+                    }
                     
-                    Chests.Add(defNext);
+                    Chests.Add(next);
                 }
 
                 var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
