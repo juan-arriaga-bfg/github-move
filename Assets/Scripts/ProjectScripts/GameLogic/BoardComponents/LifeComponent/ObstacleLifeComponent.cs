@@ -47,7 +47,6 @@ public class ObstacleLifeComponent : StorageLifeComponent
         
         storage.Capacity = storage.Amount = 1;
         
-        current = GameDataService.Current.ObstaclesManager.GetSaveStep(position);
         HP = thisContext.Context.BoardLogic.MatchDefinition.GetIndexInChain(thisContext.PieceType);
     }
 

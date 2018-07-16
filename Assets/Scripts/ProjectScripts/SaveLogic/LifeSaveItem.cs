@@ -1,16 +1,16 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-public class ObstacleSaveItemJsonConverter : JsonConverter
+public class LifeSaveItemJsonConverter : JsonConverter
 {
     public override bool CanConvert(Type objectType)
     {
-        return objectType == typeof (ObstacleSaveItem);
+        return objectType == typeof (LifeSaveItem);
     }
     
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
     {
-        var targetValue = (ObstacleSaveItem) value;
+        var targetValue = (LifeSaveItem) value;
         
         serializer.TypeNameHandling = TypeNameHandling.None;
 
@@ -22,9 +22,9 @@ public class ObstacleSaveItemJsonConverter : JsonConverter
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
         var data = serializer.Deserialize<string>(reader);
-        var dataArray = data.Split(new string[] {","}, StringSplitOptions.RemoveEmptyEntries);
+        var dataArray = data.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
         
-        var targetValue = new ObstacleSaveItem
+        var targetValue = new LifeSaveItem
         {
             Step = int.Parse(dataArray[0]),
             Position = new BoardPosition(int.Parse(dataArray[1]), int.Parse(dataArray[2]), int.Parse(dataArray[3]))
@@ -34,8 +34,8 @@ public class ObstacleSaveItemJsonConverter : JsonConverter
     }
 }
 
-[JsonConverter(typeof(ObstacleSaveItemJsonConverter))]
-public class ObstacleSaveItem
+[JsonConverter(typeof(LifeSaveItemJsonConverter))]
+public class LifeSaveItem
 {
     private int step;
     private BoardPosition position;

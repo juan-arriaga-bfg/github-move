@@ -48,7 +48,6 @@ public class MineLifeComponent : StorageLifeComponent
         storage.Capacity = storage.Amount = def.Reward.Amount;
         
         HP = def.Size;
-        current = 0;//GameDataService.Current.ObstaclesManager.GetSaveStep(position);
     }
 
     protected override void OnComplete()

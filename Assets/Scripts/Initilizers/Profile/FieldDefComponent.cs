@@ -13,7 +13,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 
 	private List<PieceSaveItem> pieces;
 	private List<ChestSaveItem> chests;
-	private List<ObstacleSaveItem> obstacles;
+	private List<LifeSaveItem> lifes;
 	private List<StorageSaveItem> storages;
 	private List<ResourceSaveItem> resources;
 	private List<ProductionSaveItem> productions;
@@ -35,10 +35,10 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	}
 	
 	[JsonProperty]
-	public List<ObstacleSaveItem> Obstacles
+	public List<LifeSaveItem> Lifes
 	{
-		get { return obstacles; }
-		set { obstacles = value; }
+		get { return lifes; }
+		set { lifes = value; }
 	}
 	
 	[JsonProperty]
@@ -71,7 +71,8 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 
 	public List<BoardPosition> CompleteFogPositions;
 	
-	public Dictionary<BoardPosition, StorageSaveItem> StorageSave;
+	private Dictionary<BoardPosition, StorageSaveItem> storageSave;
+	private Dictionary<BoardPosition, LifeSaveItem> lifeSave;
 	
 	[OnSerializing]
 	internal void OnSerialization(StreamingContext context)
@@ -86,7 +87,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		
 		pieces = new List<PieceSaveItem>();
 		chests = new List<ChestSaveItem>();
-		obstacles = new List<ObstacleSaveItem>();
+		lifes = new List<LifeSaveItem>();
 		storages = new List<StorageSaveItem>();
 		productions = new List<ProductionSaveItem>();
 		
@@ -107,12 +108,8 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 				chests.AddRange(GetChestsSave(board.BoardLogic, item.Value));
 				continue;
 			}
-
-			if (id == PieceType.O1.Id || id == PieceType.OX1.Id)
-			{
-				obstacles.AddRange(GetObstacleSave(board.BoardLogic, item.Value));
-				continue;
-			}
+			
+			lifes.AddRange(GetLifeSave(board.BoardLogic, item.Value));
 			
 //			productions.AddRange(GetProductionSave(board.BoardLogic, item.Value));
 		}
@@ -125,25 +122,62 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	[OnDeserialized]
 	internal void OnDeserialized(StreamingContext context)
 	{
-		StorageSave = new Dictionary<BoardPosition, StorageSaveItem>();
+		storageSave = new Dictionary<BoardPosition, StorageSaveItem>();
+		lifeSave = new Dictionary<BoardPosition, LifeSaveItem>();
 		CompleteFogPositions = new List<BoardPosition>();
 
 		if (storages != null)
 		{
 			foreach (var storage in storages)
 			{
-				StorageSave.Add(storage.Position, storage);
+				storageSave.Add(storage.Position, storage);
+			}
+		}
+		
+		if (lifes != null)
+		{
+			foreach (var life in lifes)
+			{
+				lifeSave.Add(life.Position, life);
 			}
 		}
 
 		if (string.IsNullOrEmpty(completeFog)) return; 
 		
-		var fogData = completeFog.Split(new string[] {";"}, StringSplitOptions.RemoveEmptyEntries);
+		var fogData = completeFog.Split(new[] {";"}, StringSplitOptions.RemoveEmptyEntries);
 
 		foreach (var str in fogData)
 		{
 			CompleteFogPositions.Add(BoardPosition.Parse(str));
 		}
+	}
+
+	public StorageSaveItem GetStorageSave(BoardPosition position)
+	{
+		StorageSaveItem item;
+		
+		if (storageSave == null || storageSave.TryGetValue(position, out item) == false)
+		{
+			return null;
+		}
+
+		storageSave.Remove(position);
+		
+		return item;
+	}
+	
+	public LifeSaveItem GetLifeSave(BoardPosition position)
+	{
+		LifeSaveItem item;
+		
+		if (lifeSave == null || lifeSave.TryGetValue(position, out item) == false)
+		{
+			return null;
+		}
+
+		lifeSave.Remove(position);
+		
+		return item;
 	}
 	
 	private PieceSaveItem GetPieceSave(int id, List<BoardPosition> positions)
@@ -182,9 +216,9 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		return items;
 	}
 
-	private List<ObstacleSaveItem> GetObstacleSave(BoardLogicComponent logic, List<BoardPosition> positions)
+	private List<LifeSaveItem> GetLifeSave(BoardLogicComponent logic, List<BoardPosition> positions)
 	{
-		var items = new List<ObstacleSaveItem>();
+		var items = new List<LifeSaveItem>();
 		
 		foreach (var position in positions)
 		{
@@ -192,11 +226,11 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			
 			if (piece == null) continue;
 			
-			var component = piece.GetComponent<ObstacleLifeComponent>(ObstacleLifeComponent.ComponentGuid);
+			var component = piece.GetComponent<LifeComponent>(LifeComponent.ComponentGuid);
 			
 			if(component == null || component.Current == 0) continue;
 			
-			var item = new ObstacleSaveItem{Step = component.Current, Position = position};
+			var item = new LifeSaveItem{Step = component.Current, Position = position};
 			
 			items.Add(item);
 		}
@@ -217,8 +251,14 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			var component = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
 			
 			if(component == null) continue;
-			
-			var item = new StorageSaveItem{Position = position, Filling = component.Filling, StartTime = component.Timer.StartTime};
+
+			var item = new StorageSaveItem
+			{
+				Position = position,
+				Filling = component.Filling,
+				IsStart = component.Timer.IsExecuteable(),
+				StartTime = component.Timer.StartTime
+			};
 			
 			items.Add(item);
 		}

@@ -21,14 +21,11 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     private ObstacleDef defaultDef;
     private Dictionary<int, List<ObstacleDef>> branches;
     
-    private Dictionary<BoardPosition, int> saveObstacles;
-
     private MatchDefinitionComponent matchDefinition;
     
     public void Reload()
     {
         Obstacles = null;
-        saveObstacles = null;
         LoadData(new ResourceConfigDataMapper<List<ObstacleDef>>("configs/obstacles.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
     
@@ -60,17 +57,6 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
                     
                     Obstacles.Add(next.Piece, next);
                     AddToBranch(matchDefinition.GetFirst(next.Piece), next);
-                }
-                
-                var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
-                
-                if(save == null || save.Obstacles == null) return;
-                
-                saveObstacles = new Dictionary<BoardPosition, int>();
-
-                foreach (var item in save.Obstacles)
-                {
-                    saveObstacles.Add(item.Position, item.Step);
                 }
             }
             else
@@ -163,18 +149,5 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
         var def = GetStep(piece, step);
         
         return def.FastPrice;
-    }
-
-    public int GetSaveStep(BoardPosition position)
-    {
-        if (saveObstacles == null || saveObstacles.Count == 0) return 0;
-        
-        int step;
-        
-        if (saveObstacles.TryGetValue(position, out step) == false) return 0;
-        
-        saveObstacles.Remove(position);
-        
-        return step;
     }
 }
