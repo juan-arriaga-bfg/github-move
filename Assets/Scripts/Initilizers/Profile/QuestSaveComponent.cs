@@ -54,8 +54,8 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
         if(GameDataService.Current == null || BoardService.Current == null) return;
         
         SaveQuest();
-        SaveCastle();
-        SaveMarket();
+//        SaveCastle();
+//        SaveMarket();
     }
     
     private void SaveQuest()

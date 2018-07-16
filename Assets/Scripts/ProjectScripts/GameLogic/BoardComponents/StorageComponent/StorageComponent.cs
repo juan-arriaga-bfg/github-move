@@ -73,11 +73,11 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
             item.StartTime = DateTime.UtcNow.ConvertToUnixTime();
         }
         
-        long now;
-        var steps = Timer.CountOfStepsPassedWhenAppWasInBackground(item.StartTime, out now);
+        DateTime now;
+        var steps = DateTimeExtension.CountOfStepsPassedWhenAppWasInBackground(item.StartTime, Timer.Delay, out now);
         
         Filling = Mathf.Min(item.Filling + Mathf.Max(steps, 0), Capacity);
-        item.StartTime = now;
+        item.StartTime = now.ConvertToUnixTime();
         
         if (item.IsStart && Filling != Capacity)
         {

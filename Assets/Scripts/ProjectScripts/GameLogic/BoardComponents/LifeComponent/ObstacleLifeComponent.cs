@@ -39,15 +39,16 @@ public class ObstacleLifeComponent : StorageLifeComponent
     
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
+        HP = thisContext.Context.BoardLogic.MatchDefinition.GetIndexInChain(thisContext.PieceType);
+        
         base.OnAddToBoard(position, context);
         
         var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
         
-        timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current);
+        timer.Price = GameDataService.Current.ObstaclesManager.GetFastPriceByStep(thisContext.PieceType, current - 1);
+        timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current - 1);
         
         storage.Capacity = storage.Amount = 1;
-        
-        HP = thisContext.Context.BoardLogic.MatchDefinition.GetIndexInChain(thisContext.PieceType);
     }
 
     protected override void Success()

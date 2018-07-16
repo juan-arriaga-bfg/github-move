@@ -115,26 +115,6 @@ public class TimerComponent : IECSComponent, IECSSystem
         
         return  new CurrencyPair {Currency = Price.Currency, Amount = amount};
     }
-
-    public int CountOfStepsPassedWhenAppWasInBackground(long then, out long now)
-    {
-        DateTime nowTime;
-        var count = CountOfStepsPassedWhenAppWasInBackground(DateTimeExtension.UnixTimeToDateTime(then), out nowTime);
-        
-        now = nowTime.ConvertToUnixTime();
-        return count;
-    }
-    
-    public int CountOfStepsPassedWhenAppWasInBackground(DateTime then, out DateTime now)
-    {
-        var elapsedTime = DateTime.UtcNow - then;
-        var count = (int) elapsedTime.TotalSeconds / Delay;
-        var remainder = (int) elapsedTime.TotalSeconds % Delay;
-        
-        now = DateTime.UtcNow.AddSeconds(-remainder);
-        
-        return count;
-    }
     
     private string TimeFormat(TimeSpan time, string format)
     {

@@ -9,12 +9,17 @@ public class LimitCurrencyLogicComponent : IECSComponent
     
     public virtual void OnRegisterEntity(ECSEntity entity)
     {
+        InitInSave();
     }
 
     public virtual void OnUnRegisterEntity(ECSEntity entity)
     {
         targetItem = null;
         limitItem = null;
+    }
+
+    protected virtual void InitInSave()
+    {
     }
     
     public virtual void UpLimit(int amount)
