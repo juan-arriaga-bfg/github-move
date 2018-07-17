@@ -8,23 +8,10 @@ public class MineLifeComponent : StorageLifeComponent
     {
         get
         {
-            return def.Conditions.Find(pair => pair.Currency == Currency.Energy.Name);
+            return def.Price;
         }
     }
     
-    public override CurrencyPair Worker
-    {
-        get
-        {
-            return  def.Conditions.Find(pair => pair.Currency == Currency.Worker.Name);
-        }
-    }
-
-    public override List<CurrencyPair> Conditions
-    {
-        get { return def.Conditions; }
-    }
-
     public override string Key
     {
         get { return string.Format("{0}_{1}", thisContext.PieceType, def.Position); }

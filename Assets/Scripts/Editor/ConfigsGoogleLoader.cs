@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
+﻿using System.IO;
 using System.Text;
-using BestHTTP;
+using Dws;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -32,50 +29,41 @@ public class ConfigsGoogleLoader
 
             var gLink = GoogleLoaderSettings.Instance.ConfigLinks.Find(link => link.Key == key);
 
-            if (gLink == null) continue;
+            if (gLink == null || gLink.Key != "pieces") continue;
+
+            var linkTest = GetUrl(gLink.Link, gLink.Pattern);
             
-            GoogleDriveDownloader.Get(GetUrl(gLink.Link), (state, data) =>
+            var req = new WebRequestData(linkTest);
+
+            WebHelper.MakeRequest(req, (response) =>
             {
-                if (state == HTTPRequestStates.Finished)
+                if (response.IsOk == false)
                 {
-                    string text = data;
-                    Parse(key, text);
-                    /*Debug.LogWarningFormat("TSV table downloaded: {0} bytes", text.Length);
-                    File.WriteAllText(Application.dataPath + relativePath, text, Encoding.UTF8);*/
+                    Debug.LogErrorFormat("Can't load data {0}. response.IsOk = {1}", gLink.Key, response.IsOk);
+                    return;
                 }
-                else
+
+                if (string.IsNullOrEmpty(response.Error) == false)
                 {
-                    Debug.LogErrorFormat("Can't load data: {0}", data ?? "Unknown error");
+                    Debug.LogErrorFormat("Can't load data {0}. Request Error: {1}", gLink.Key, response.Error);
+                    return;
                 }
+                
+                var root = JObject.Parse(response.Result);
+                var result = root["result"];
+                
+                File.WriteAllText(Application.dataPath + relativePath, JsonConvert.SerializeObject(result, Formatting.Indented), Encoding.UTF8);
             });
         }
+        
+        //
+        
+        //{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestWeights":[{"Uid":"","Weight":0,"":"","Override":true}]}
+//        NSConfigEncription.EncryptConfigs();
     }
     
-    private static string GetUrl(string id)
+    private static string GetUrl(string id, string json)
     {
-        return string.Format("https://docs.google.com/spreadsheets/d/{0}/export?format=tsv", id);
-    }
-
-    private static void Parse(string key, string text)
-    {
-        var name = string.Format("{0}{1}ConfigParser", key.Substring(0, 1).ToUpper(), key.Substring(1));
-        
-        var parserType = Type.GetType(name, false, true);
- 
-        //если класс не найден
-        if (parserType != null)
-        {
-            //получаем конструктор
-            var constructor = parserType.GetConstructor(new Type[] { });
- 
-            //вызываем конструтор
-            var parser = constructor.Invoke(new object[] { }) as IConfigParser;
-
-            parser.Parse(text);
-        }
-        else
-        {
-            Debug.LogError("Класс не найден");
-        }
+        return string.Format("https://script.google.com/macros/s/AKfycbz82MTaf-dECcAPhCIveDy9R0OPApWfWUx6aLScGaWQKsIK6D4/exec?route={0}&spreadsheetId={1}&pattern={2}", "parse", id, json);
     }
 }

@@ -7,6 +7,7 @@ public class GoogleLink
 {
     public string Key;
     public string Link;
+    public string Pattern;
 }
 
 public class GoogleLoaderSettings : IWEditorSettings<GoogleLoaderSettings>
