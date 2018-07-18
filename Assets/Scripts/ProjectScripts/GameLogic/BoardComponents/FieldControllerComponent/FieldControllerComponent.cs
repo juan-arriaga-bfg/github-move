@@ -59,54 +59,16 @@ public class FieldControllerComponent : IECSComponent
 
     private void StartField()
     {
-        context.ActionExecutor.AddAction(new CreatePieceAtAction
+        var pieces = GameDataService.Current.FieldManager.Pieces;
+
+        foreach (var piece in pieces)
         {
-            At = new BoardPosition(18, 8),
-            PieceTypeId = PieceType.Castle1.Id
-        });
-        
-        context.ActionExecutor.AddAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(21, 4),
-            PieceTypeId = PieceType.MineA.Id
-        });
-        
-        context.ActionExecutor.AddAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(19, 7),
-            PieceTypeId = PieceType.King.Id
-        });
-        
-        context.ActionExecutor.AddAction(new FillBoardAction
-        {
-            Piece = PieceType.O1.Id,
-            Positions = new List<BoardPosition>
+            context.ActionExecutor.AddAction(new FillBoardAction
             {
-                new BoardPosition(17, 1),
-                new BoardPosition(17, 3),
-                new BoardPosition(17, 6),
-                new BoardPosition(18, 0),
-                new BoardPosition(19, 1),
-                new BoardPosition(22, 6)
-            }
-        });
-        
-        context.ActionExecutor.AddAction(new FillBoardAction
-        {
-            Piece = PieceType.A1.Id,
-            Positions = new List<BoardPosition>
-            {
-                new BoardPosition(16, 5),
-                new BoardPosition(16, 6),
-                new BoardPosition(18, 1),
-                new BoardPosition(18, 2),
-                new BoardPosition(19, 6),
-                new BoardPosition(20, 0),
-                new BoardPosition(20, 5),
-                new BoardPosition(21, 2),
-                new BoardPosition(22, 1),
-            }
-        });
+                Piece = piece.Key,
+                Positions = piece.Value
+            });
+        }
     }
 
     private void TestField()

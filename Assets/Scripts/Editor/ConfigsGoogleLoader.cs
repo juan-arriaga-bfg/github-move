@@ -54,7 +54,7 @@ public class ConfigsGoogleLoader
             return;
         }
 
-        var linkTest = GetUrl(gLink.Link, gLink.Pattern);
+        var linkTest = GetUrl(gLink.Link, gLink.Route, gLink.Pattern);
             
         var req = new WebRequestData(linkTest);
 
@@ -76,10 +76,8 @@ public class ConfigsGoogleLoader
         });
     }
     
-    
-    
-    private static string GetUrl(string id, string json)
+    private static string GetUrl(string id, string route, string json)
     {
-        return string.Format("https://script.google.com/macros/s/AKfycbz82MTaf-dECcAPhCIveDy9R0OPApWfWUx6aLScGaWQKsIK6D4/exec?route={0}&spreadsheetId={1}&pattern={2}", "parse", id, json);
+        return string.Format("https://script.google.com/macros/s/AKfycbz82MTaf-dECcAPhCIveDy9R0OPApWfWUx6aLScGaWQKsIK6D4/exec?route={0}&spreadsheetId={1}&pattern={2}", route, id, json);
     }
 }

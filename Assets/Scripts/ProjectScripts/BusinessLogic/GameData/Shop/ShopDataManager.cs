@@ -20,6 +20,7 @@ public class ShopDataManager : IECSComponent, IDataManager, IDataLoader<List<Sho
 	
 	public void Reload()
 	{
+		Products = new List<ShopDef>();
 		LoadData(new ResourceConfigDataMapper<List<ShopDef>>("configs/shop.data", NSConfigsSettings.Instance.IsUseEncryption));
 	}
     
