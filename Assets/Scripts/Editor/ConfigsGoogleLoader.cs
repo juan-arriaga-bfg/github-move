@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class ConfigsGoogleLoader
 {
+    private static int index;
+    
     [MenuItem("Tools/Configs/GenerateLinkSettings")]
     public static void GenerateLinkSettings()
     {
@@ -22,44 +24,54 @@ public class ConfigsGoogleLoader
     [MenuItem("Tools/Configs/Update with Google")]
     public static void UpdateWithGoogle()
     {
-        foreach (string relativePath in NSConfigsSettings.Instance.ConfigNames)
+        index = NSConfigsSettings.Instance.ConfigNames.Length;
+
+        Load();
+    }
+
+    private static void Load()
+    {
+        index--;
+
+        var relativePath = NSConfigsSettings.Instance.ConfigNames[index];
+        var key = relativePath.Substring(relativePath.LastIndexOf("/") + 1);
+        key = key.Substring(0, key.IndexOf("."));
+
+        var gLink = GoogleLoaderSettings.Instance.ConfigLinks.Find(link => link.Key == key);
+
+        if (gLink == null || gLink.Key == "tasks")
         {
-            var key = relativePath.Substring(relativePath.LastIndexOf("/") + 1);
-            key = key.Substring(0, key.IndexOf("."));
-
-            var gLink = GoogleLoaderSettings.Instance.ConfigLinks.Find(link => link.Key == key);
-
-            if (gLink == null || gLink.Key != "pieces") continue;
-
-            var linkTest = GetUrl(gLink.Link, gLink.Pattern);
-            
-            var req = new WebRequestData(linkTest);
-
-            WebHelper.MakeRequest(req, (response) =>
-            {
-                if (response.IsOk == false)
-                {
-                    Debug.LogErrorFormat("Can't load data {0}. response.IsOk = {1}", gLink.Key, response.IsOk);
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(response.Error) == false)
-                {
-                    Debug.LogErrorFormat("Can't load data {0}. Request Error: {1}", gLink.Key, response.Error);
-                    return;
-                }
-                
-                var root = JObject.Parse(response.Result);
-                var result = root["result"];
-                
-                File.WriteAllText(Application.dataPath + relativePath, JsonConvert.SerializeObject(result, Formatting.Indented), Encoding.UTF8);
-            });
+            Load();
+            return;
         }
-        
-        //
-        
-        //{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestWeights":[{"Uid":"","Weight":0,"":"","Override":true}]}
-//        NSConfigEncription.EncryptConfigs();
+
+        var linkTest = GetUrl(gLink.Link, gLink.Pattern);
+            
+        var req = new WebRequestData(linkTest);
+
+        WebHelper.MakeRequest(req, (response) =>
+        {
+            if (response.IsOk == false || string.IsNullOrEmpty(response.Error) == false )
+            {
+                Debug.LogErrorFormat("Can't load data {0}. response.IsOk = {1}. Error: {2}", gLink.Key, response.IsOk, response.Error);
+                Load();
+                return;
+            }
+                
+            var root = JObject.Parse(response.Result);
+            var result = root["result"];
+                
+            File.WriteAllText(Application.dataPath + relativePath, JsonConvert.SerializeObject(result, Formatting.Indented), Encoding.UTF8);
+            
+            if (index != 0)
+            {
+                Load();
+                return;
+            }
+            
+            Debug.LogWarning("Configs load data complete!");
+            NSConfigEncription.EncryptConfigs();
+        });
     }
     
     private static string GetUrl(string id, string json)
