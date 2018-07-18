@@ -47,7 +47,7 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestX1.Id, PieceType.ChestX3.Id, dict);
         dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestC1.Id, PieceType.ChestC3.Id, dict);
         
-        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest9.Id, dict);
+        dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest9.Id, dict);
         
 //        dict.Add(PieceType.E6.Id, new SpawnPieceBuilder());
         dict.Add(PieceType.King.Id, new QuestGiverPieceBuilder());
