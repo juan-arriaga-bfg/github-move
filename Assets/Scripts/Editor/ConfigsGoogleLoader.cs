@@ -40,11 +40,11 @@ public class ConfigsGoogleLoader
             return;
         }
         
-        Debug.LogWarningFormat("Configs progress {0}/{1}!", NSConfigsSettings.Instance.ConfigNames.Length - index, NSConfigsSettings.Instance.ConfigNames.Length);
-
         var relativePath = NSConfigsSettings.Instance.ConfigNames[index];
         var key = relativePath.Substring(relativePath.LastIndexOf("/") + 1);
         key = key.Substring(0, key.IndexOf("."));
+        
+        Debug.LogWarningFormat("Configs {0} progress: {1}/{2}!", key, NSConfigsSettings.Instance.ConfigNames.Length - index, NSConfigsSettings.Instance.ConfigNames.Length);
 
         var gLink = GoogleLoaderSettings.Instance.ConfigLinks.Find(link => link.Key == key);
 

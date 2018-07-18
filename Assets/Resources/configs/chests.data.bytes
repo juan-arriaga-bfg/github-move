@@ -14,11 +14,11 @@
         "Override": false
       },
       {
-        "Uid": "B1",
+        "Uid": "A2",
         "Weight": 25
       },
       {
-        "Uid": "C1",
+        "Uid": "B1",
         "Weight": 25
       },
       {
@@ -26,7 +26,7 @@
         "Weight": 25
       },
       {
-        "Uid": "D1",
+        "Uid": "F1",
         "Weight": 20
       }
     ]
@@ -297,7 +297,7 @@
       "Currency": "Crystals",
       "Amount": 1
     },
-    "PieceAmount": 8,
+    "PieceAmount": 6,
     "PieceWeights": [
       {
         "Uid": "Empty",
@@ -314,14 +314,8 @@
     ],
     "RandomPieces": [
       "B1",
-      "B2",
-      "C1",
-      "C2",
       "E1",
-      "E2",
-      "F1",
-      "F2",
-      "J5"
+      "F1"
     ]
   },
   {

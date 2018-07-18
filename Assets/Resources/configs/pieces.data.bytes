@@ -328,7 +328,11 @@
     ]
   },
   {
-    "Uid": "E1"
+    "Uid": "E1",
+    "SpawnResources": {
+      "Currency": "Energy",
+      "Amount": 1
+    }
   },
   {
     "Uid": "E2",
@@ -774,11 +778,10 @@
   },
   {
     "Uid": "Coin1",
-    "CreateRewards": [
-      {
-        "Currency": "Experience"
-      }
-    ]
+    "SpawnResources": {
+      "Currency": "Coins",
+      "Amount": 10
+    }
   },
   {
     "Uid": "Coin2",
@@ -787,7 +790,11 @@
         "Currency": "Experience",
         "Amount": 10
       }
-    ]
+    ],
+    "SpawnResources": {
+      "Currency": "Coins",
+      "Amount": 35
+    }
   },
   {
     "Uid": "Coin3",
@@ -796,7 +803,11 @@
         "Currency": "Experience",
         "Amount": 20
       }
-    ]
+    ],
+    "SpawnResources": {
+      "Currency": "Coins",
+      "Amount": 110
+    }
   },
   {
     "Uid": "Coin4",
@@ -805,7 +816,11 @@
         "Currency": "Experience",
         "Amount": 30
       }
-    ]
+    ],
+    "SpawnResources": {
+      "Currency": "Coins",
+      "Amount": 350
+    }
   },
   {
     "Uid": "Coin5",
@@ -814,7 +829,11 @@
         "Currency": "Experience",
         "Amount": 40
       }
-    ]
+    ],
+    "SpawnResources": {
+      "Currency": "Coins",
+      "Amount": 1100
+    }
   },
   {
     "Uid": "Empty"
@@ -853,7 +872,8 @@
     "Delay": 1200,
     "SpawnPiece": "Chest2",
     "SpawnAmount": 1,
-    "SpawnCapacity": 1
+    "SpawnCapacity": 1,
+    "IsFilledInStart": false
   },
   {
     "Uid": "Castle3",
