@@ -166,7 +166,7 @@ public class FieldControllerComponent : IECSComponent
 
     private void CreateTown()
     {
-        var positions = new List<BoardPosition>();
+        /*var positions = new List<BoardPosition>();
 
         for (int i = 0; i < 23; i++)
         {
@@ -181,7 +181,7 @@ public class FieldControllerComponent : IECSComponent
             Locker = this,
             Positions = positions
         });
-        
+        */
         context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleBottom, new BoardPosition(22, 7, -1));
         context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleLeft, new BoardPosition(17, 7, -1));
         context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleRight, new BoardPosition(22, 12, -1));
