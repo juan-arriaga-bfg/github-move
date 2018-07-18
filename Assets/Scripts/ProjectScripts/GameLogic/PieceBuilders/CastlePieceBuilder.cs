@@ -21,7 +21,7 @@ public class CastlePieceBuilder : MulticellularPieceBuilder
             Filling = def.IsFilledInStart ? def.SpawnCapacity : 0,
             Amount =  def.SpawnAmount,
             IsTimerShow = true,
-            TimerOffset = new Vector2(-0.5f, 2.8f)
+            TimerOffset = new Vector2(-0.9f, 2.5f)
         };
         
         var upgrade = new CastleUpgradeComponent();

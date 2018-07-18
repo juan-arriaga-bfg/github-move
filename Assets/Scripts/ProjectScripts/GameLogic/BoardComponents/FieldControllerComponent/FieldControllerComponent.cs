@@ -73,7 +73,7 @@ public class FieldControllerComponent : IECSComponent
         
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
-            At = new BoardPosition(17, 0),
+            At = new BoardPosition(19, 7),
             PieceTypeId = PieceType.King.Id
         });
         
@@ -210,109 +210,16 @@ public class FieldControllerComponent : IECSComponent
         AddBoardElement(R.BrigeLeft, new BoardPosition(19, 7, 1), new Vector3(0.8f, -0.4f));
         AddBoardElement(R.BrigeRight, new BoardPosition(22, 10, 1), new Vector3(-0.7f, -0.4f));
         
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(12, 7));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(12, 8));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(12, 9));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(12, 10));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(12, 11));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(12, 12));
+//        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(12, 7));
+//        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(11, 7));
         
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(14, 7));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(14, 8));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(14, 9));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(14, 10));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(14, 11));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(14, 12));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(14, 13));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(14, 14));
+//        AddBoardElement(R.BushRight, new BoardPosition(16, 14, 2), new Vector3(-0.8f, 0.4f));
+//        AddBoardElement(R.BushLeft, new BoardPosition(17, 11, 2), new Vector3(-0.1f, 0.5f));
         
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(16, 7));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(16, 8));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(16, 9));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(16, 10));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(16, 11));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(16, 12));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(16, 13));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(16, 14));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(16, 15));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(16, 16));
-        
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(18, 13));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(18, 14));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(18, 15));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(18, 16));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(18, 17));
-        
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(20, 13));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(20, 14));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(20, 15));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(20, 16));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(20, 17));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(20, 18));
-        
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(11, 7));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(12, 7));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(13, 7));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(14, 7));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(15, 7));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(16, 7));
-        
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(12, 9));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(13, 9));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(14, 9));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(15, 9));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(16, 9));
-        
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(13, 11));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(14, 11));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(15, 11));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(16, 11));
-        
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(13, 13));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(14, 13));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(15, 13));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(16, 13));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(17, 13));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(18, 13));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(19, 13));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(20, 13));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(21, 13));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(22, 13));
-        
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(15, 15));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(16, 15));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(17, 15));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(18, 15));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(19, 15));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(20, 15));
-        
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(17, 17));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(18, 17));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(19, 17));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(20, 17));
-        
-        AddBoardElement(R.BushLeft, new BoardPosition(13, 11, 2), new Vector3(0.5f, 0.3f));
-        AddBoardElement(R.BushLeft, new BoardPosition(15, 13, 2), new Vector3(0.5f, 0.5f));
-        
-        AddBoardElement(R.BushRight, new BoardPosition(16, 14, 2), new Vector3(-0.8f, 0.4f));
-        AddBoardElement(R.BushLeft, new BoardPosition(17, 11, 2), new Vector3(-0.1f, 0.5f));
-        AddBoardElement(R.BushLeft, new BoardPosition(17, 15, 2), new Vector3(0.5f, 0.3f));
-        
-        AddBoardElement(R.Tree, new BoardPosition(10, 7, 2), new Vector3(0f, 0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(11, 7, 2), new Vector3(0f, 0.1f));
+        /*AddBoardElement(R.Tree, new BoardPosition(19, 7, 2), new Vector3(0f, 0.1f));
+        AddBoardElement(R.Tree, new BoardPosition(20, 7, 2), new Vector3(-0.6f, -0.1f));
         AddBoardElement(R.Tree, new BoardPosition(12, 7, 2), new Vector3(0f, 0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(10, 8, 2), new Vector3(0f, 0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(11, 8, 2), new Vector3(0f, 0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(12, 8, 2), new Vector3(0f, 0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(12, 9, 2), new Vector3(0f, 0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(12, 11, 2), new Vector3(0f, 0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(14, 13, 2), new Vector3(0f, 0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(18, 16, 2), new Vector3(0.3f, 0.2f));
-        AddBoardElement(R.Tree, new BoardPosition(19, 17, 2), new Vector3(0f, 0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(20, 17, 2), new Vector3(0f, 0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(19, 18, 2), new Vector3(0f, 0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(20, 18, 2), new Vector3(0f, 0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(20, 14, 2), new Vector3(0.4f, 0.2f));
+        AddBoardElement(R.Tree, new BoardPosition(10, 8, 2), new Vector3(0f, 0.1f));*/
     }
 
     private void CreateDebug()
