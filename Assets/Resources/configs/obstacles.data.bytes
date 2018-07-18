@@ -1,383 +1,345 @@
 [
   {
-    "Uid" : "O1",
-    "Delay" : 10,
-    "Price" :
-    {
+    "Uid": "O1",
+    "Delay": 10,
+    "Price": {
       "Currency": "Energy",
       "Amount": 10
     },
-    "FastPrice" :
-    {
+    "FastPrice": {
       "Currency": "Crystals",
       "Amount": 1
     },
-    "ChestWeights" :
-    [
+    "ChestWeights": [
       {
         "Uid": "Chest1",
-        "Weight" : 100
+        "Weight": 100
       },
       {
         "Uid": "Chest2",
-        "Weight" : 30
+        "Weight": 30,
+        "Override": true
       }
     ]
   },
   {
-    "Uid" : "O2",
-    "Delay" : 20,
-    "PieceAmount" : 2,
-    "Price" :
-    {
+    "Uid": "O2",
+    "Delay": 20,
+    "Price": {
       "Currency": "Energy",
       "Amount": 20
     },
-    "FastPrice" :
-    {
+    "FastPrice": {
       "Currency": "Crystals",
       "Amount": 5
     },
-    "PieceWeights" :
-    [
+    "PieceAmount": 2,
+    "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight" : 100
+        "Weight": 100
       }
     ],
-    "ChestWeights" :
-    [
+    "ChestWeights": [
       {
         "Uid": "Chest1",
-        "Weight" : 0,
-        "Override" : "true"
+        "Weight": 0,
+        "Override": true
       },
       {
         "Uid": "Chest2",
-        "Weight" : 100,
-        "Override" : "true"
+        "Weight": 100,
+        "Override": true
       },
       {
         "Uid": "Chest3",
-        "Weight" : 30
+        "Weight": 30
       }
     ]
   },
   {
-    "Uid" : "O3",
-    "Delay" : 30,
-    "PieceAmount" : 3,
-    "Price" :
-    {
+    "Uid": "O3",
+    "Delay": 30,
+    "Price": {
       "Currency": "Energy",
       "Amount": 30
     },
-    "FastPrice" :
-    {
+    "FastPrice": {
       "Currency": "Crystals",
       "Amount": 10
     },
-    "PieceWeights" :
-    [
+    "PieceAmount": 3,
+    "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight" : 100
+        "Weight": 100
       },
       {
         "Uid": "A2",
-        "Weight" : 100
+        "Weight": 100
       }
     ],
-    "ChestWeights" :
-    [
+    "ChestWeights": [
       {
         "Uid": "Chest3",
-        "Weight" : 100,
-        "Override" : "true"
+        "Weight": 100,
+        "Override": true
       },
       {
         "Uid": "Chest4",
-        "Weight" : 30
+        "Weight": 30
       }
     ]
   },
   {
-    "Uid" : "O4",
-    "Delay" : 40,
-    "PieceAmount" : 4,
-    "Price" :
-    {
+    "Uid": "O4",
+    "Delay": 40,
+    "Price": {
       "Currency": "Energy",
       "Amount": 40
     },
-    "FastPrice" :
-    {
+    "FastPrice": {
       "Currency": "Crystals",
       "Amount": 15
     },
-    "PieceWeights" :
-    [
+    "PieceAmount": 4,
+    "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight" : 100
+        "Weight": 100
       },
       {
         "Uid": "A2",
-        "Weight" : 100
+        "Weight": 100
       },
       {
         "Uid": "E2",
-        "Weight" : 100
+        "Weight": 100
       }
     ],
-    "ChestWeights" :
-    [
+    "ChestWeights": [
       {
         "Uid": "Chest2",
-        "Weight" : 0,
-        "Override" : "true"
+        "Weight": 0,
+        "Override": true
       },
       {
         "Uid": "Chest4",
-        "Weight" : 100,
-        "Override" : "true"
+        "Weight": 100,
+        "Override": true
       },
       {
         "Uid": "Chest5",
-        "Weight" : 30
+        "Weight": 30
       }
     ]
   },
   {
-    "Uid" : "O5",
-    "Delay" : 50,
-    "PieceAmount" : 5,
-    "Price" :
-    {
+    "Uid": "O5",
+    "Delay": 50,
+    "Price": {
       "Currency": "Energy",
       "Amount": 50
     },
-    "FastPrice" :
-    {
+    "FastPrice": {
       "Currency": "Crystals",
       "Amount": 20
     },
-    "PieceWeights" :
-    [
+    "PieceAmount": 5,
+    "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight" : 100
+        "Weight": 100
       },
       {
         "Uid": "A2",
-        "Weight" : 100
+        "Weight": 100
       },
       {
         "Uid": "E2",
-        "Weight" : 100
+        "Weight": 100
       }
     ],
-    "ChestWeights" :
-    [
+    "ChestWeights": [
       {
         "Uid": "Chest3",
-        "Weight" : 0,
-        "Override" : "true"
+        "Weight": 0,
+        "Override": true
       },
       {
         "Uid": "Chest5",
-        "Weight" : 100,
-        "Override" : "true"
+        "Weight": 100,
+        "Override": true
       },
       {
         "Uid": "Chest6",
-        "Weight" : 30
+        "Weight": 30
       }
     ]
   },
   {
-    "Uid" : "OX1",
-    "Delay" : 10,
-    "Price" :
-    {
+    "Uid": "OX1",
+    "Delay": 10,
+    "Price": {
       "Currency": "Energy",
       "Amount": 20
     },
-    "FastPrice" :
-    {
+    "FastPrice": {
       "Currency": "Crystals",
       "Amount": 2
     },
-    "ChestWeights" :
-    [
+    "ChestWeights": [
       {
         "Uid": "Chest2",
-        "Weight" : 100
+        "Weight": 100
       },
       {
         "Uid": "Chest3",
-        "Weight" : 20
+        "Weight": 20
       }
     ]
   },
   {
-    "Uid" : "OX2",
-    "Delay" : 20,
-    "PieceAmount" : 2,
-    "Price" :
-    {
+    "Uid": "OX2",
+    "Delay": 20,
+    "Price": {
       "Currency": "Energy",
       "Amount": 30
     },
-    "FastPrice" :
-    {
+    "FastPrice": {
       "Currency": "Crystals",
       "Amount": 10
     },
-    "PieceWeights" :
-    [
+    "PieceAmount": 2,
+    "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight" : 100
+        "Weight": 100
       }
     ],
-    "ChestWeights" :
-    [
+    "ChestWeights": [
       {
         "Uid": "Chest3",
-        "Weight" : 100,
-        "Override" : "true"
+        "Weight": 100,
+        "Override": true
       },
       {
         "Uid": "Chest4",
-        "Weight" : 20
+        "Weight": 20
       }
     ]
   },
   {
-    "Uid" : "OX3",
-    "Delay" : 30,
-    "PieceAmount" : 3,
-    "Price" :
-    {
+    "Uid": "OX3",
+    "Price": {
       "Currency": "Energy",
       "Amount": 40
     },
-    "FastPrice" :
-    {
+    "FastPrice": {
       "Currency": "Crystals",
       "Amount": 20
     },
-    "PieceWeights" :
-    [
+    "PieceAmount": 3,
+    "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight" : 100
+        "Weight": 100
       },
       {
         "Uid": "A2",
-        "Weight" : 100
+        "Weight": 100
       }
     ],
-    "ChestWeights" :
-    [
+    "ChestWeights": [
       {
         "Uid": "Chest2",
-        "Weight" : 0,
-        "Override" : "true"
+        "Weight": 0,
+        "Override": true
       },
       {
         "Uid": "Chest4",
-        "Weight" : 100,
-        "Override" : "true"
+        "Weight": 100,
+        "Override": true
       },
       {
         "Uid": "Chest5",
-        "Weight" : 20
+        "Weight": 20
       }
     ]
   },
   {
-    "Uid" : "OX4",
-    "Delay" : 40,
-    "PieceAmount" : 4,
-    "Price" :
-    {
+    "Uid": "OX4",
+    "Delay": 40,
+    "Price": {
       "Currency": "Energy",
       "Amount": 50
     },
-    "FastPrice" :
-    {
+    "FastPrice": {
       "Currency": "Crystals",
       "Amount": 30
     },
-    "PieceWeights" :
-    [
+    "PieceAmount": 4,
+    "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight" : 100
+        "Weight": 100
       },
       {
         "Uid": "A2",
-        "Weight" : 100
+        "Weight": 100
       },
       {
         "Uid": "E2",
-        "Weight" : 100
+        "Weight": 100
       }
     ],
-    "ChestWeights" :
-    [
+    "ChestWeights": [
       {
         "Uid": "Chest5",
-        "Weight" : 100,
-        "Override" : "true"
+        "Weight": 100,
+        "Override": true
       },
       {
         "Uid": "Chest6",
-        "Weight" : 20
+        "Weight": 20
       }
     ]
   },
   {
-    "Uid" : "OX5",
-    "Delay" : 50,
-    "PieceAmounts" : 5,
-    "Price" :
-    {
+    "Uid": "OX5",
+    "Delay": 50,
+    "Price": {
       "Currency": "Energy",
       "Amount": 60
     },
-    "FastPrice" :
-    {
+    "FastPrice": {
       "Currency": "Crystals",
       "Amount": 40
     },
-    "PieceWeights" :
-    [
+    "PieceAmount": 5,
+    "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight" : 100
+        "Weight": 100
       },
       {
         "Uid": "A2",
-        "Weight" : 100
+        "Weight": 100
       },
       {
         "Uid": "E2",
-        "Weight" : 100
+        "Weight": 100
       }
     ],
-    "ChestWeights" :
-    [
+    "ChestWeights": [
       {
         "Uid": "Chest6",
-        "Weight" : 100,
-        "Override" : "true"
+        "Weight": 100,
+        "Override": true
       },
       {
         "Uid": "Chest7",
-        "Weight" : 20
+        "Weight": 20
       }
     ]
   }

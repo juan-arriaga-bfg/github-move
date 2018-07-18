@@ -3,93 +3,63 @@
     "Uid": "MineA",
     "Delay": 30,
     "Size": 25,
-    "Position" :
-    {
-      "X" : 21,
-      "Y" : 4
+    "Position": {
+      "X": 21,
+      "Y": 4
     },
-    "FastPrice" :
-    {
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 15
+    },
+    "FastPrice": {
       "Currency": "Crystals",
       "Amount": 1
     },
-    "Reward" :
-    {
-      "Currency" : "ChestA1",
-      "Amount" : 1
-    },
-    "Conditions" :
-    [
-      {
-        "Currency" : "Worker",
-        "Amount" : 1
-      },
-      {
-        "Currency" : "Energy",
-        "Amount" : 15
-      }
-    ]
-  },
-  {
-    "Uid": "MineX",
-    "Delay": 420,
-    "Size": 25,
-    "Position" :
-    {
-      "X" : 14,
-      "Y" : 0
-    },
-    "FastPrice" :
-    {
-      "Currency": "Crystals",
-      "Amount": 9
-    },
-    "Reward" :
-    {
-      "Currency" : "ChestX1",
-      "Amount" : 1
-    },
-    "Conditions" :
-    [
-      {
-        "Currency" : "Worker",
-        "Amount" : 1
-      },
-      {
-        "Currency" : "Energy",
-        "Amount" : 30
-      }
-    ]
+    "Reward": {
+      "Currency": "ChestA1",
+      "Amount": 1
+    }
   },
   {
     "Uid": "MineC",
     "Delay": 120,
     "Size": 25,
-    "Position" :
-    {
-      "X" : 14,
-      "Y" : 3
+    "Position": {
+      "X": 14,
+      "Y": 3
     },
-    "FastPrice" :
-    {
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 25
+    },
+    "FastPrice": {
       "Currency": "Crystals",
       "Amount": 3
     },
-    "Reward" :
-    {
-      "Currency" : "ChestC1",
-      "Amount" : 1
+    "Reward": {
+      "Currency": "ChestC1",
+      "Amount": 1
+    }
+  },
+  {
+    "Uid": "MineX",
+    "Delay": 420,
+    "Size": 25,
+    "Position": {
+      "X": 14,
+      "Y": 0
     },
-    "Conditions" :
-    [
-      {
-        "Currency" : "Worker",
-        "Amount" : 1
-      },
-      {
-        "Currency" : "Energy",
-        "Amount" : 25
-      }
-    ]
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 30
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 9
+    },
+    "Reward": {
+      "Currency": "ChestX1",
+      "Amount": 1
+    }
   }
 ]

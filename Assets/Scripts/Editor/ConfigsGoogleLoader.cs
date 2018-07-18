@@ -33,13 +33,22 @@ public class ConfigsGoogleLoader
     {
         index--;
 
+        if (index < 0)
+        {
+            Debug.LogWarning("Configs load data complete!");
+            NSConfigEncription.EncryptConfigs();
+            return;
+        }
+        
+        Debug.LogWarningFormat("Configs progress {0}/{1}!", NSConfigsSettings.Instance.ConfigNames.Length - index, NSConfigsSettings.Instance.ConfigNames.Length);
+
         var relativePath = NSConfigsSettings.Instance.ConfigNames[index];
         var key = relativePath.Substring(relativePath.LastIndexOf("/") + 1);
         key = key.Substring(0, key.IndexOf("."));
 
         var gLink = GoogleLoaderSettings.Instance.ConfigLinks.Find(link => link.Key == key);
 
-        if (gLink == null || gLink.Key == "tasks")
+        if (gLink == null)
         {
             Load();
             return;
@@ -63,16 +72,11 @@ public class ConfigsGoogleLoader
                 
             File.WriteAllText(Application.dataPath + relativePath, JsonConvert.SerializeObject(result, Formatting.Indented), Encoding.UTF8);
             
-            if (index != 0)
-            {
-                Load();
-                return;
-            }
-            
-            Debug.LogWarning("Configs load data complete!");
-            NSConfigEncription.EncryptConfigs();
+            Load();
         });
     }
+    
+    
     
     private static string GetUrl(string id, string json)
     {
