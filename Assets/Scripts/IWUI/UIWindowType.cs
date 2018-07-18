@@ -31,4 +31,6 @@
     public const string ProductionWindow = "ProductionWindow";
     
     public const string CastleWindow = "CastleWindow";
+    
+    public const string EnergyShopWindow = "EnergyShopWindow";
 }

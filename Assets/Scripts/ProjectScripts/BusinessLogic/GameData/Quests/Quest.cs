@@ -40,7 +40,6 @@ public class Quest
     {
         get
         {
-            //[{"Uid":"","CreateRewards":[{"Currency":"","Amount":0}],"Reproduction":{"Currency":"","Amount":0},"SpawnResources":{"Currency":"","Amount":0}},{"Uid":"","UpgradeTargetPiece":"","CreateRewards":[{"Currency":"","Amount":0}],"UpgradePrices":[{"Currency":"","Amount":0}],"Delay":0,"SpawnPiece":"","SpawnAmount":0,"SpawnCapacity":0,"IsFilledInStart":false}]
             var reward = def.Rewards.Find(pair => pair.Currency == Currency.Coins.Name);
 
             return reward == null ? new Dictionary<int, int>() : CurrencyHellper.CurrencyToCoinPieces(reward.Amount);

@@ -65,6 +65,4 @@ public class UICastleWindowView : UIGenericPopupWindowView
             Controller.CloseCurrentWindow();
         }
     }
-    
-    
 }

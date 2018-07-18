@@ -41,6 +41,6 @@ public class UILimitPanelViewController : UIGenericResourcePanelViewController
     
     public void DebugCurrentResources()
     {
-        CurrencyHellper.Purchase(itemUid, storageItemLimit.Amount - storageItem.Amount);
+        UIService.Get.ShowWindow(UIWindowType.EnergyShopWindow);
     }
 }

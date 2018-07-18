@@ -28,6 +28,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
 //            UIWindowType.RobberyWindow,
             UIWindowType.ErrorWindow,
             UIWindowType.CastleWindow,
+            UIWindowType.EnergyShopWindow,
 //            UIWindowType.StorageWindow,
 //            UIWindowType.MarketWindow,
 //            UIWindowType.ProductionWindow,
