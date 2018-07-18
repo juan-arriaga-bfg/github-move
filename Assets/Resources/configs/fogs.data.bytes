@@ -3,19 +3,31 @@
   [
     {
       "Uid": "Empty",
-      "Weight" : 25
+      "Weight" : 15
     },
     {
       "Uid": "O1",
-      "Weight" : 35
-    },
-    {
-      "Uid": "O2",
       "Weight" : 20
     },
     {
+      "Uid": "O2",
+      "Weight" : 10
+    },
+    {
       "Uid": "O3",
-      "Weight" : 15
+      "Weight" : 10
+    },
+    {
+      "Uid": "E1",
+      "Weight" : 10
+    },
+    {
+      "Uid": "F1",
+      "Weight" : 10
+    },
+    {
+      "Uid": "B1",
+      "Weight" : 10
     }
   ],
   "Fogs":
@@ -36,7 +48,7 @@
       "Condition" :
       {
         "Currency" : "Coins",
-        "Amount" : 130
+        "Amount" : 155
       },
       "Pieces":
       {
