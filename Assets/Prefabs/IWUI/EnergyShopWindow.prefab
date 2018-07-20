@@ -1230,7 +1230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding:
     m_Left: 40
-    m_Right: 0
+    m_Right: 40
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
@@ -1417,6 +1417,7 @@ MonoBehaviour:
   message: {fileID: 0}
   viewAnchor: {fileID: 224571544256658574}
   itemPattern: {fileID: 1106074384404072}
+  scroll: {fileID: 114343055903407806}
 --- !u!114 &114637278255347138
 MonoBehaviour:
   m_ObjectHideFlags: 1

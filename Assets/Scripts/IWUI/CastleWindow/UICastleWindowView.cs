@@ -1,10 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class UICastleWindowView : UIGenericPopupWindowView 
 {
     [SerializeField] private GameObject itemPattern;
     [SerializeField] private NSText upgrade;
+    [SerializeField] private ScrollRect scroll;
     
     private List<GameObject> items = new List<GameObject>();
     
@@ -29,6 +32,21 @@ public class UICastleWindowView : UIGenericPopupWindowView
         }
         
         itemPattern.SetActive(false);
+        
+        scroll.DOHorizontalNormalizedPos(1f, 0f);
+    }
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+
+        DOTween.Kill(scroll);
+
+        var sequence = DOTween.Sequence();
+
+        sequence.SetId(scroll);
+        sequence.Append(scroll.DOHorizontalNormalizedPos(1f, 0.5f));
+        sequence.Append(scroll.DOHorizontalNormalizedPos(0f, 2.5f).SetEase(Ease.InOutBack));
     }
 
     public override void OnViewClose()
@@ -36,6 +54,8 @@ public class UICastleWindowView : UIGenericPopupWindowView
         base.OnViewClose();
         
         var windowModel = Model as UICastleWindowModel;
+        
+        DOTween.Kill(scroll);
     }
     
     public override void OnViewCloseCompleted()

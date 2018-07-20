@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class UIEnergyShopWindowView : UIGenericPopupWindowView 
 {
     [SerializeField] private GameObject itemPattern;
+    [SerializeField] private ScrollRect scroll;
     
     private List<GameObject> items = new List<GameObject>();
     
@@ -25,6 +28,20 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
         }
         
         itemPattern.SetActive(false);
+        scroll.DOHorizontalNormalizedPos(1f, 0f);
+    }
+    
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+
+        DOTween.Kill(scroll);
+
+        var sequence = DOTween.Sequence();
+
+        sequence.SetId(scroll);
+        sequence.Append(scroll.DOHorizontalNormalizedPos(1f, 0.5f));
+        sequence.Append(scroll.DOHorizontalNormalizedPos(0f, 2.5f).SetEase(Ease.InOutBack));
     }
 
     public override void OnViewClose()
@@ -32,6 +49,7 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
         base.OnViewClose();
         
         var windowModel = Model as UIEnergyShopWindowModel;
+        DOTween.Kill(scroll);
     }
     
     public override void OnViewCloseCompleted()
