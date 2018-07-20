@@ -45,7 +45,6 @@ public class UICastleWindowView : UIGenericPopupWindowView
         var sequence = DOTween.Sequence();
 
         sequence.SetId(scroll);
-        sequence.Append(scroll.DOHorizontalNormalizedPos(1f, 0.5f));
         sequence.Append(scroll.DOHorizontalNormalizedPos(0f, 2.5f).SetEase(Ease.InOutBack));
     }
 
