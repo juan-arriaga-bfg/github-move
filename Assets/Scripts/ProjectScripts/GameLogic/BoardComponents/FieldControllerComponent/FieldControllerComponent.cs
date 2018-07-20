@@ -128,14 +128,43 @@ public class FieldControllerComponent : IECSComponent
 
     private void CreateTown()
     {
-        /*var positions = new List<BoardPosition>();
+        var positions = new List<BoardPosition>();
+        
+        var left = new BoardPosition(17, 7, -1);
+        var top = new BoardPosition(17, 12, -1);
+        var right = new BoardPosition(22, 12, -1);
+        var bottom = new BoardPosition(22, 7, -1);
 
-        for (int i = 0; i < 23; i++)
+        var ignore = new BoardPosition(19, 7, -1);
+        
+        for (int i = 0; i <= 5; i++)
         {
-            for (int j = 7; j < context.BoardDef.Height; j++)
+            positions.Add(left);
+            positions.Add(top);
+            positions.Add(right);
+            
+            if(bottom.Equals(ignore) == false) positions.Add(bottom);
+
+            if (i == 5) break;
+            
+            if (i == 0)
             {
-                positions.Add(new BoardPosition(i, j, context.BoardDef.PieceLayer));
+                context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleLeft, left);
+                context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleTop, top);
+                context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleRight, right);
+                context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleBottom, bottom);
+                continue;
             }
+            
+            left = left.Up;
+            top = top.Right;
+            right = right.Down;
+            bottom = bottom.Left;
+            
+            context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverRight, left);
+            context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverLeft, top);
+            context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverRight, right);
+            context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverLeft, bottom);
         }
         
         context.ActionExecutor.AddAction(new LockCellAction
@@ -143,31 +172,6 @@ public class FieldControllerComponent : IECSComponent
             Locker = this,
             Positions = positions
         });
-        */
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleBottom, new BoardPosition(22, 7, -1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleLeft, new BoardPosition(17, 7, -1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleRight, new BoardPosition(22, 12, -1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleTop, new BoardPosition(17, 12, -1));
-        
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverLeft, new BoardPosition(18, 12, -1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverLeft, new BoardPosition(19, 12, -1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverLeft, new BoardPosition(20, 12, -1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverLeft, new BoardPosition(21, 12, -1));
-        
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverLeft, new BoardPosition(18, 7, -1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverLeft, new BoardPosition(19, 7, -1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverLeft, new BoardPosition(20, 7, -1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverLeft, new BoardPosition(21, 7, -1));
-        
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverRight, new BoardPosition(17, 8, -1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverRight, new BoardPosition(17, 9, -1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverRight, new BoardPosition(17, 10, -1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverRight, new BoardPosition(17, 11, -1));
-        
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverRight, new BoardPosition(22, 8, -1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverRight, new BoardPosition(22, 9, -1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverRight, new BoardPosition(22, 10, -1));
-        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverRight, new BoardPosition(22, 11, -1));
         
         AddBoardElement(R.BrigeLeft, new BoardPosition(19, 7, 1), new Vector3(0.8f, -0.4f));
         AddBoardElement(R.BrigeRight, new BoardPosition(22, 10, 1), new Vector3(-0.7f, -0.4f));

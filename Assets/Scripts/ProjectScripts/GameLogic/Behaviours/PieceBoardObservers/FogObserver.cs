@@ -41,8 +41,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         base.OnRemoveFromBoard(position, context);
         
         ResourcesViewManager.Instance.UnRegisterView(this);
-        
-        var key = new BoardPosition(position.X, position.Y);
+    }
+
+    public void Clear()
+    {
+        var key = new BoardPosition(realPosition.X, realPosition.Y);
         var def = GameDataService.Current.FogsManager.GetDef(key);
         
         if(def == null) return;
@@ -55,7 +58,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             {
                 foreach (var pos in piece.Value)
                 {
-                    context.Context.ActionExecutor.AddAction(new CreatePieceAtAction
+                    thisContext.Context.ActionExecutor.AddAction(new CreatePieceAtAction
                     {
                         At = GetPointInMask(realPosition, pos),
                         PieceTypeId = PieceType.Parse(piece.Key)
@@ -75,7 +78,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             
             if(piece == PieceType.Empty.Id) continue;
             
-            context.Context.ActionExecutor.AddAction(new CreatePieceAtAction
+            thisContext.Context.ActionExecutor.AddAction(new CreatePieceAtAction
             {
                 At = point,
                 PieceTypeId = piece

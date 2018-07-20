@@ -9,12 +9,13 @@ public class FogPieceView : PieceBoardElementView
 	[SerializeField] private TouchRegion touchRegion;
 	
 	private List<GameObject> views = new List<GameObject>();
-
+	private FogObserver observer;
+	
 	public override void Init(BoardRenderer context, Piece piece)
 	{
 		base.Init(context, piece);
 
-		var observer = piece.GetComponent<FogObserver>(FogObserver.ComponentGuid);
+		observer = piece.GetComponent<FogObserver>(FogObserver.ComponentGuid);
 		
 		if(observer == null) return;
 
@@ -58,5 +59,7 @@ public class FogPieceView : PieceBoardElementView
 		
 		fogItem.SetActive(true);
 		touchItem.SetActive(true);
+		
+		observer.Clear();
 	}
 }
