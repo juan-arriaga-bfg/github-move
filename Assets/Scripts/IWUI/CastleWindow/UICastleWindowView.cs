@@ -8,6 +8,7 @@ public class UICastleWindowView : UIGenericPopupWindowView
     [SerializeField] private GameObject itemPattern;
     [SerializeField] private NSText upgrade;
     [SerializeField] private ScrollRect scroll;
+    [SerializeField] private RectTransform content;
     
     private List<GameObject> items = new List<GameObject>();
     
@@ -33,19 +34,22 @@ public class UICastleWindowView : UIGenericPopupWindowView
         
         itemPattern.SetActive(false);
         
-        scroll.DOHorizontalNormalizedPos(1f, 0f);
+        content.anchoredPosition = new Vector2(-375, 0);
+        scroll.enabled = false;
     }
 
     public override void OnViewShowCompleted()
     {
         base.OnViewShowCompleted();
 
-        DOTween.Kill(scroll);
-
-        var sequence = DOTween.Sequence();
-
-        sequence.SetId(scroll);
-        sequence.Append(scroll.DOHorizontalNormalizedPos(0f, 2.5f).SetEase(Ease.InOutBack));
+        DOTween.Kill(content);
+        content.DOAnchorPosX(0, 2.5f)
+            .SetEase(Ease.InOutBack)
+            .SetId(content)
+            .OnComplete(() =>
+            {
+                scroll.enabled = true;
+            });
     }
 
     public override void OnViewClose()

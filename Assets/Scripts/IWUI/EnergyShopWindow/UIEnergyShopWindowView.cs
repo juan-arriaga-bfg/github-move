@@ -7,6 +7,7 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
 {
     [SerializeField] private GameObject itemPattern;
     [SerializeField] private ScrollRect scroll;
+    [SerializeField] private RectTransform content;
     
     private List<GameObject> items = new List<GameObject>();
     
@@ -28,19 +29,22 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
         }
         
         itemPattern.SetActive(false);
-        scroll.DOHorizontalNormalizedPos(1f, 0f);
+        content.anchoredPosition = new Vector2(-375, 0);
+        scroll.enabled = false;
     }
     
     public override void OnViewShowCompleted()
     {
         base.OnViewShowCompleted();
 
-        DOTween.Kill(scroll);
-
-        var sequence = DOTween.Sequence();
-
-        sequence.SetId(scroll);
-        sequence.Append(scroll.DOHorizontalNormalizedPos(0f, 2.5f).SetEase(Ease.InOutBack));
+        DOTween.Kill(content);
+        content.DOAnchorPosX(0, 2.5f)
+            .SetEase(Ease.InOutBack)
+            .SetId(content)
+            .OnComplete(() =>
+            {
+                scroll.enabled = true;
+            });
     }
 
     public override void OnViewClose()
@@ -48,7 +52,7 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
         base.OnViewClose();
         
         var windowModel = Model as UIEnergyShopWindowModel;
-        DOTween.Kill(scroll);
+        DOTween.Kill(content);
     }
     
     public override void OnViewCloseCompleted()
