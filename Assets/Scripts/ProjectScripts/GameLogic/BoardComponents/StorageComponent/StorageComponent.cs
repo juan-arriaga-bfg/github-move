@@ -126,8 +126,14 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         if(isShow) pieceContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
     }
 
-    public bool Scatter(out int amount, bool isStartNext = true)
-    {
+    public bool Scatter(out int amount, bool isStartNext = true, bool checkSpace = true)
+    {   
+        if(!pieceContext.Context.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pieceContext.CachedPosition, Filling))
+        {
+            amount = 0;
+            return false;
+        }
+        
         amount = Filling;
         
         if (Filling == 0) return false;
