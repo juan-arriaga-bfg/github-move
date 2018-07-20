@@ -7,7 +7,7 @@ public class TouchReactionDefinitionOpenChestWindow : TouchReactionDefinitionCom
 	
 	public override bool Make(BoardPosition position, Piece piece)
 	{
-		if (isComplete) return false;
+		//if (isComplete) return false;
 		
 		chestComponent = piece.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
 		

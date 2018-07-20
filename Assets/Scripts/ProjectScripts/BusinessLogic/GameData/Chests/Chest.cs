@@ -21,6 +21,8 @@ public class Chest
     private DateTime completeTime;
 
     private CurrencyPair price;
+
+    private Dictionary<int, int> reward;
     
     public Chest(ChestDef def)
     {
@@ -71,7 +73,7 @@ public class Chest
         }
         set
         {
-            switch (value)
+            /* (value)
             {
                 case ChestState.Close:
                     StartTime = null;
@@ -79,9 +81,9 @@ public class Chest
                 case ChestState.InProgress:
                     SetStartTime(DateTime.UtcNow);
                     break;
-            }
+            }*/
 
-            chestState = value;
+            chestState = ChestState.Open;
         }
     }
 
@@ -93,6 +95,9 @@ public class Chest
 
     public Dictionary<int, int> GetRewardPieces()
     {
+        if (reward != null)
+            return reward;
+        
         var max = def.PieceAmount;
         var result = new Dictionary<int, int>();
         
@@ -115,7 +120,8 @@ public class Chest
             
             result.Add(random, 1);
         }
-        
+
+        reward = result;
         return result;
     }
 
