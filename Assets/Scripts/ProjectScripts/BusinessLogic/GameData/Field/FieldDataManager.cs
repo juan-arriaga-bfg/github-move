@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class FieldDataManager : IECSComponent, IDataManager, IDataLoader<List<FieldDef>>
+public class FieldDataManager : IECSComponent, IDataManager, IDataLoader<Dictionary<string, List<BoardPosition>>>
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -24,26 +24,18 @@ public class FieldDataManager : IECSComponent, IDataManager, IDataLoader<List<Fi
 	public void Reload()
 	{
 		Pieces = new Dictionary<int, List<BoardPosition>>();
-		LoadData(new ResourceConfigDataMapper<List<FieldDef>>("configs/field.data", NSConfigsSettings.Instance.IsUseEncryption));
+		LoadData(new ResourceConfigDataMapper<Dictionary<string, List<BoardPosition>>>("configs/field.data", NSConfigsSettings.Instance.IsUseEncryption));
 	}
 	
-	public void LoadData(IDataMapper<List<FieldDef>> dataMapper)
+	public void LoadData(IDataMapper<Dictionary<string, List<BoardPosition>>> dataMapper)
 	{
 		dataMapper.LoadData((data, error)=> 
 		{
 			if (string.IsNullOrEmpty(error))
 			{
-				foreach (var def in data)
+				foreach (var pair in data)
 				{
-					List<BoardPosition> list;
-
-					if (Pieces.TryGetValue(def.Id, out list) == false)
-					{
-						list = new List<BoardPosition>();
-						Pieces.Add(def.Id, list);
-					}
-					
-					list.Add(def.Position);
+					Pieces.Add(PieceType.Parse(pair.Key), pair.Value);
 				}
 			}
 			else

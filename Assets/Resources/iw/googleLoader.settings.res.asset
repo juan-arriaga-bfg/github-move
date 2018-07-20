@@ -44,3 +44,7 @@ MonoBehaviour:
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseField
     Pattern: '{"Uid":"","Position":{"X":0,"Y":0}}'
+  - Key: fogs
+    Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
+    Route: parseFogs
+    Pattern: '{"Uid":"","Level":0,"Condition":{"Currency":"","Amount":0}}'

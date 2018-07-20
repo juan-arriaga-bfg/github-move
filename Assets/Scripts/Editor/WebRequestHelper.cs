@@ -86,7 +86,7 @@ namespace Dws
                 {
                     HttpWebRequest request = (HttpWebRequest) WebRequest.Create(requestData.Url);
                     request.Method = requestData.Method;
-                    request.Timeout = 30000;
+                    request.Timeout = 60000;
                     request.AllowAutoRedirect = false; // Automatic redirects not working with google!
 
                     if (requestData.Headers != null && requestData.Headers.Length > 0)
