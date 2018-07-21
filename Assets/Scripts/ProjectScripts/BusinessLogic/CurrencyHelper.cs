@@ -188,7 +188,7 @@ public static class CurrencyHellper
         return count;
     }
 
-    public static int CoinPieceToCurrence(Dictionary<int, int> dict)
+    public static CurrencyPair CoinPieceToCurrence(Dictionary<int, int> dict)
     {
         var amount = 0;
         
@@ -201,7 +201,7 @@ public static class CurrencyHellper
             amount += pair.Value * def.SpawnResources.Amount;
         }
         
-        return amount;
+        return new CurrencyPair{Currency = Currency.Coins.Name, Amount = amount};
     }
     
     public static Dictionary<int, int> CurrencyToCoinPieces(int amount)
@@ -227,6 +227,6 @@ public static class CurrencyHellper
 
     public static Dictionary<int, int> MinimizeCoinPieces(Dictionary<int, int> dict)
     {
-        return CurrencyToCoinPieces(CoinPieceToCurrence(dict));
+        return CurrencyToCoinPieces(CoinPieceToCurrence(dict).Amount);
     }
 }

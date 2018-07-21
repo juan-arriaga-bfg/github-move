@@ -40,9 +40,22 @@ public class Quest
     {
         get
         {
-            var reward = def.Rewards.Find(pair => pair.Currency == Currency.Coins.Name);
+            var rewards = new Dictionary<int, int>();
 
-            return reward == null ? new Dictionary<int, int>() : CurrencyHellper.CurrencyToCoinPieces(reward.Amount);
+            foreach (var reward in def.Rewards)
+            {
+                var id = PieceType.Parse(reward.Currency);
+
+                if (rewards.ContainsKey(id))
+                {
+                    rewards[id] += reward.Amount;
+                    continue;
+                }
+                
+                rewards.Add(id, reward.Amount);
+            }
+            
+            return rewards;
         }
     }
 

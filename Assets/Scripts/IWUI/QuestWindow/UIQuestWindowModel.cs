@@ -35,16 +35,10 @@ public class UIQuestWindowModel : IWWindowModel
     {
         get
         {
-            var str = new StringBuilder();
-
-            foreach (var reward in Quest.Def.Rewards)
-            {
-                str.AppendFormat(
-                    "<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>Reward:</color></font> <size=50>{0} <sprite name={1}></size>",
-                    reward.Amount, reward.Currency);
-            }
+            var reward = CurrencyHellper.CoinPieceToCurrence(Quest.Rewards);
             
-            return str.ToString();
+            return string.Format("<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>Reward:</color></font> <size=50>{0} <sprite name={1}></size>",
+                reward.Amount, reward.Currency);
         }
     }
 
