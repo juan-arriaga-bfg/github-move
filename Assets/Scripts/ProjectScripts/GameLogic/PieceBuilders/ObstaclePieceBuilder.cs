@@ -28,7 +28,7 @@ public class ObstaclePieceBuilder : GenericPieceBuilder
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
 				.RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.ObstacleState})
-				.RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{IsAutoStart = false}))
+				.RegisterDefinition(new ObstacleTouchReactionDefinitionComponent{IsAutoStart = false}))
 			.RegisterComponent(new TouchReactionConditionStorage()));
 		
 		return piece;

@@ -13,7 +13,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     public int Amount;
     public int Capacity;
     public int Filling;
-
+    
     public bool IsTimerShow;
     public bool IsAutoStart = true;
     
@@ -126,14 +126,8 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         if(isShow) pieceContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
     }
 
-    public bool Scatter(out int amount, bool isStartNext = true, bool checkSpace = true)
+    public bool Scatter(out int amount, bool isStartNext = true)
     {   
-        if(!pieceContext.Context.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pieceContext.CachedPosition, Filling))
-        {
-            amount = 0;
-            return false;
-        }
-        
         amount = Filling;
         
         if (Filling == 0) return false;
