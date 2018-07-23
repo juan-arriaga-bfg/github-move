@@ -15,6 +15,7 @@ public class TouchReactionDefinitionCollectResource : TouchReactionDefinitionCom
             To = position,
             Positions = new List<BoardPosition>{position}
         });
+        
         return true;
     }
 }

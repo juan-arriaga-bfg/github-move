@@ -312,26 +312,17 @@
         "Currency": "Experience",
         "Amount": 40
       }
-    ]
-  },
-  {
-    "Uid": "D5",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 15
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 75
-      }
-    ]
+    ],
+    "SpawnResources": {
+      "Currency": "Energy",
+      "Amount": 20
+    }
   },
   {
     "Uid": "E1",
     "SpawnResources": {
       "Currency": "Energy",
-      "Amount": 1
+      "Amount": 10
     }
   },
   {
@@ -434,7 +425,11 @@
         "Currency": "Experience",
         "Amount": 40
       }
-    ]
+    ],
+    "SpawnResources": {
+      "Currency": "Energy",
+      "Amount": 10
+    }
   },
   {
     "Uid": "F5",
@@ -447,7 +442,11 @@
         "Currency": "Experience",
         "Amount": 75
       }
-    ]
+    ],
+    "SpawnResources": {
+      "Currency": "Energy",
+      "Amount": 15
+    }
   },
   {
     "Uid": "G1"
@@ -493,7 +492,11 @@
         "Currency": "Experience",
         "Amount": 40
       }
-    ]
+    ],
+    "SpawnResources": {
+      "Currency": "Energy",
+      "Amount": 20
+    }
   },
   {
     "Uid": "H1"
@@ -539,7 +542,11 @@
         "Currency": "Experience",
         "Amount": 40
       }
-    ]
+    ],
+    "SpawnResources": {
+      "Currency": "Energy",
+      "Amount": 25
+    }
   },
   {
     "Uid": "I1"
@@ -598,7 +605,11 @@
         "Currency": "Experience",
         "Amount": 75
       }
-    ]
+    ],
+    "SpawnResources": {
+      "Currency": "Energy",
+      "Amount": 30
+    }
   },
   {
     "Uid": "J1"
@@ -644,6 +655,10 @@
     "Reproduction": {
       "Currency": "J1",
       "Amount": 1
+    },
+    "SpawnResources": {
+      "Currency": "Energy",
+      "Amount": 25
     }
   },
   {
@@ -657,7 +672,11 @@
         "Currency": "Experience",
         "Amount": 75
       }
-    ]
+    ],
+    "SpawnResources": {
+      "Currency": "Energy",
+      "Amount": 30
+    }
   },
   {
     "Uid": "X1"
