@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 
 public class MineLifeComponent : StorageLifeComponent
 {
@@ -35,6 +36,14 @@ public class MineLifeComponent : StorageLifeComponent
         storage.Capacity = storage.Amount = def.Reward.Amount;
         
         HP = def.Size;
+    }
+
+    protected override void Success()
+    {
+        base.Success();
+        
+        var sequence = DOTween.Sequence();
+        sequence.InsertCallback(0.5f, () => AddResourceView.Show(StartPosition(), def.StepReward));
     }
 
     protected override void OnComplete()

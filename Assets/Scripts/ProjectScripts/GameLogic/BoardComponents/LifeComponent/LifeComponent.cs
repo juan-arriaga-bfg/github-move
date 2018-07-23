@@ -39,6 +39,13 @@ public class LifeComponent : IECSComponent
         if (current == HP) return;
         
         current = Mathf.Clamp(current + damage, 0, HP);
-        AddResourceView.Show(thisContext.CachedPosition, new CurrencyPair{Currency = Currency.Life.Name, Amount = -damage});
+        AddResourceView.Show(StartPosition(), new CurrencyPair{Currency = Currency.Life.Name, Amount = -damage});
+    }
+
+    protected BoardPosition StartPosition()
+    {
+        var multi = thisContext.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
+
+        return multi != null ? multi.GetTopPosition : thisContext.CachedPosition;
     }
 }

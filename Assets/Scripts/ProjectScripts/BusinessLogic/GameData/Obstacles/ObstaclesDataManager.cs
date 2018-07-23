@@ -114,7 +114,14 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
         return def.Delay;
     }
 
-    public Dictionary<int, int> GetRewardByStep(int piece, int step)
+    public List<CurrencyPair> GetRewardByStep(int piece, int step)
+    {
+        var def = GetStep(piece, step);
+        
+        return def.StepRewards;
+    }
+
+    public Dictionary<int, int> GetPiecesByStep(int piece, int step)
     {
         var result = new Dictionary<int, int>();
         var def = GetStep(piece, step);

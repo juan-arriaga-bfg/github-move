@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class ObstacleLifeComponent : StorageLifeComponent
@@ -42,11 +43,21 @@ public class ObstacleLifeComponent : StorageLifeComponent
     {
         storage.Timer.Price = GameDataService.Current.ObstaclesManager.GetFastPriceByStep(thisContext.PieceType, current);
         storage.Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current);
+        
+        var rewards = GameDataService.Current.ObstaclesManager.GetRewardByStep(thisContext.PieceType, current);
+        
+        var sequence = DOTween.Sequence();
+        
+        for (var i = 0; i < rewards.Count; i++)
+        {
+            var reward = rewards[i];
+            sequence.InsertCallback(0.5f * (i + 1), () => AddResourceView.Show(StartPosition(), reward));
+        }
     }
     
     protected override void OnStep()
     {
-        var reward = GameDataService.Current.ObstaclesManager.GetRewardByStep(thisContext.PieceType, current);
+        var reward = GameDataService.Current.ObstaclesManager.GetPiecesByStep(thisContext.PieceType, current);
         
         foreach (var key in reward.Keys)
         {

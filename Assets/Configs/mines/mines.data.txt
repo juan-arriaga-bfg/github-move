@@ -18,6 +18,10 @@
     "Reward": {
       "Currency": "ChestA1",
       "Amount": 1
+    },
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 10
     }
   },
   {
@@ -39,6 +43,10 @@
     "Reward": {
       "Currency": "ChestC1",
       "Amount": 1
+    },
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 20
     }
   },
   {
@@ -60,6 +68,10 @@
     "Reward": {
       "Currency": "ChestX1",
       "Amount": 1
+    },
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 30
     }
   }
 ]
