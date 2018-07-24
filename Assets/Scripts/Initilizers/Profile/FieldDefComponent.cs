@@ -103,9 +103,10 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			
 			storages.AddRange(GetStorageSave(board.BoardLogic, item.Value));
 
-			if (id == PieceType.Chest1.Id)
+			var chestSave = GetChestsSave(board.BoardLogic, item.Value);
+			if (chestSave.Count > 0)
 			{
-				chests.AddRange(GetChestsSave(board.BoardLogic, item.Value));
+				chests.AddRange(chestSave);
 				continue;
 			}
 			
@@ -204,9 +205,9 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 
 			var component = piece.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
 			
-			if(component == null || component.Chest.State != ChestState.InProgress && component.Chest.State != ChestState.Open) continue;
+			if(component == null) continue;
 
-			var item = new ChestSaveItem {Id = piece.PieceType, State = component.Chest.State, Position = position};
+			var item = new ChestSaveItem {Id = piece.PieceType, State = component.Chest.State, Position = position, Reward = component.Chest.Reward};
 			
 			if (component.Chest.State == ChestState.InProgress && component.Chest.StartTime != null) item.StartTime = component.Chest.StartTime.Value;
 			
