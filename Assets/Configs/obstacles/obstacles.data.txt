@@ -1,0 +1,406 @@
+﻿[
+  {
+    "Uid": "O1",
+    "Delay": 10,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 3
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 1
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "ChestWeights": [
+      {
+        "Uid": "Chest1",
+        "Weight": 100
+      },
+      {
+        "Uid": "Chest2",
+        "Weight": 30,
+        "Override": true
+      }
+    ]
+  },
+  {
+    "Uid": "O2",
+    "Delay": 20,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 5
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 5
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 20
+      }
+    ],
+    "PieceAmount": 2,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 100
+      }
+    ],
+    "ChestWeights": [
+      {
+        "Uid": "Chest1",
+        "Weight": 0,
+        "Override": true
+      },
+      {
+        "Uid": "Chest2",
+        "Weight": 100,
+        "Override": true
+      },
+      {
+        "Uid": "Chest3",
+        "Weight": 30
+      }
+    ]
+  },
+  {
+    "Uid": "O3",
+    "Delay": 30,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 10
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 10
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 30
+      }
+    ],
+    "PieceAmount": 3,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 100
+      },
+      {
+        "Uid": "A2",
+        "Weight": 100
+      }
+    ],
+    "ChestWeights": [
+      {
+        "Uid": "Chest3",
+        "Weight": 100,
+        "Override": true
+      },
+      {
+        "Uid": "Chest4",
+        "Weight": 30
+      }
+    ]
+  },
+  {
+    "Uid": "O4",
+    "Delay": 40,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 15
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 15
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 40
+      }
+    ],
+    "PieceAmount": 4,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 100
+      },
+      {
+        "Uid": "A2",
+        "Weight": 100
+      },
+      {
+        "Uid": "E2",
+        "Weight": 100
+      }
+    ],
+    "ChestWeights": [
+      {
+        "Uid": "Chest2",
+        "Weight": 0,
+        "Override": true
+      },
+      {
+        "Uid": "Chest4",
+        "Weight": 100,
+        "Override": true
+      },
+      {
+        "Uid": "Chest5",
+        "Weight": 30
+      }
+    ]
+  },
+  {
+    "Uid": "O5",
+    "Delay": 50,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 20
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 20
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      }
+    ],
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 100
+      },
+      {
+        "Uid": "A2",
+        "Weight": 100
+      },
+      {
+        "Uid": "E2",
+        "Weight": 100
+      }
+    ],
+    "ChestWeights": [
+      {
+        "Uid": "Chest3",
+        "Weight": 0,
+        "Override": true
+      },
+      {
+        "Uid": "Chest5",
+        "Weight": 100,
+        "Override": true
+      },
+      {
+        "Uid": "Chest6",
+        "Weight": 30
+      }
+    ]
+  },
+  {
+    "Uid": "OX1",
+    "Delay": 10,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 20
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 2
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 20
+      }
+    ],
+    "ChestWeights": [
+      {
+        "Uid": "Chest2",
+        "Weight": 100
+      },
+      {
+        "Uid": "Chest3",
+        "Weight": 20
+      }
+    ]
+  },
+  {
+    "Uid": "OX2",
+    "Delay": 20,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 30
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 10
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 40
+      }
+    ],
+    "PieceAmount": 2,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 100
+      }
+    ],
+    "ChestWeights": [
+      {
+        "Uid": "Chest3",
+        "Weight": 100,
+        "Override": true
+      },
+      {
+        "Uid": "Chest4",
+        "Weight": 20
+      }
+    ]
+  },
+  {
+    "Uid": "OX3",
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 40
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 20
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 80
+      }
+    ],
+    "PieceAmount": 3,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 100
+      },
+      {
+        "Uid": "A2",
+        "Weight": 100
+      }
+    ],
+    "ChestWeights": [
+      {
+        "Uid": "Chest2",
+        "Weight": 0,
+        "Override": true
+      },
+      {
+        "Uid": "Chest4",
+        "Weight": 100,
+        "Override": true
+      },
+      {
+        "Uid": "Chest5",
+        "Weight": 20
+      }
+    ]
+  },
+  {
+    "Uid": "OX4",
+    "Delay": 40,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 50
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 30
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 160
+      }
+    ],
+    "PieceAmount": 4,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 100
+      },
+      {
+        "Uid": "A2",
+        "Weight": 100
+      },
+      {
+        "Uid": "E2",
+        "Weight": 100
+      }
+    ],
+    "ChestWeights": [
+      {
+        "Uid": "Chest5",
+        "Weight": 100,
+        "Override": true
+      },
+      {
+        "Uid": "Chest6",
+        "Weight": 20
+      }
+    ]
+  },
+  {
+    "Uid": "OX5",
+    "Delay": 50,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 60
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 40
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 320
+      }
+    ],
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 100
+      },
+      {
+        "Uid": "A2",
+        "Weight": 100
+      },
+      {
+        "Uid": "E2",
+        "Weight": 100
+      }
+    ],
+    "ChestWeights": [
+      {
+        "Uid": "Chest6",
+        "Weight": 100,
+        "Override": true
+      },
+      {
+        "Uid": "Chest7",
+        "Weight": 20
+      }
+    ]
+  }
+]

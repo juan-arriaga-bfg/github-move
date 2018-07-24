@@ -1,0 +1,208 @@
+﻿[
+  {
+    "Uid" : "Factory1",
+    "Delay" : 15,
+    "Level" : 1,
+    "Target" : "Resource1",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 5
+    },
+    "Prices" :
+    [
+      {
+        "Currency": "E1",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid" : "Factory2",
+    "Delay" : 25,
+    "Level" : 1,
+    "Target" : "Resource2",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 5
+    },
+    "Prices" :
+    [
+      {
+        "Currency": "D1",
+        "Amount": 3
+      },
+      {
+        "Currency": "A1",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid" : "Factory3",
+    "Delay" : 45,
+    "Level" : 2,
+    "Target" : "Resource3",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 10
+    },
+    "Prices" :
+    [
+      {
+        "Currency": "F1",
+        "Amount": 2
+      },
+      {
+        "Currency": "C1",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid" : "Factory4",
+    "Delay" : 90,
+    "Level" : 2,
+    "Target" : "Resource4",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 15
+    },
+    "Prices" :
+    [
+	     {
+        "Currency": "G1",
+        "Amount": 3
+      },
+      {
+        "Currency": "B2",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid" : "Factory5",
+    "Delay" : 150,
+    "Level" : 3,
+    "Target" : "Resource5",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 30
+    },
+    "Prices" :
+    [
+      {
+        "Currency": "F2",
+        "Amount": 2
+      },
+      {
+        "Currency": "A2",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid" : "Factory6",
+    "Delay" : 180,
+    "Level" : 3,
+    "Target" : "Resource6",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 45
+    },
+    "Prices" :
+    [
+      {
+        "Currency": "E3",
+        "Amount": 1
+      },
+      {
+        "Currency": "G2",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid" : "Factory7",
+    "Delay" : 240,
+    "Level" : 3,
+    "Target" : "Resource7",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 60
+    },
+    "Prices" :
+    [
+      {
+        "Currency": "F4",
+        "Amount": 1
+      },
+      {
+        "Currency": "D3",
+        "Amount": 2
+      },
+      {
+        "Currency": "C2",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid" : "Factory8",
+    "Delay" : 300,
+    "Level" : 4,
+    "Target" : "Resource8",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 80
+    },
+    "Prices" :
+    [
+      {
+        "Currency": "G4",
+        "Amount": 1
+      },
+      {
+        "Currency": "E3",
+        "Amount": 2
+      },
+      {
+        "Currency": "A3",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid" : "Factory9",
+    "Delay" : 600,
+    "Level" : 4,
+    "Target" : "Resource9",
+    "FastPrice" :
+    {
+      "Currency": "Crystals",
+      "Amount": 100
+    },
+    "Prices" :
+    [
+      {
+        "Currency": "E5",
+        "Amount": 1
+      },
+      {
+        "Currency": "D5",
+        "Amount": 1
+      },
+      {
+        "Currency": "F3",
+        "Amount": 1
+      }
+    ]
+  }
+]

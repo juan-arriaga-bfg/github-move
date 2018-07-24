@@ -1,2 +1,1282 @@
 ﻿[
+  {
+    "Uid": "tile_grass_1",
+    "SpriteName": "tile_grass_1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "tiles",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "tile_grass_2",
+    "SpriteName": "tile_grass_2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "tiles",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "icon_Coins",
+    "SpriteName": "icon_Coins",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "icon_Crystals",
+    "SpriteName": "icon_Crystals",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "btn_blue_norm",
+    "SpriteName": "btn_blue_norm",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "btn_green_norm",
+    "SpriteName": "btn_green_norm",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "btn_orange_norm",
+    "SpriteName": "btn_orange_norm",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "chest_1_1",
+    "SpriteName": "chest_1_1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "chest_2_1",
+    "SpriteName": "chest_2_1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "chest_3_1",
+    "SpriteName": "chest_3_1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "chest_4_1",
+    "SpriteName": "chest_4_1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "face_Robin",
+    "SpriteName": "face_Robin",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "icon_Worker",
+    "SpriteName": "face_John",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "chest_4_2",
+    "SpriteName": "chest_4_2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "chest_3_2",
+    "SpriteName": "chest_3_2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "chest_2_2",
+    "SpriteName": "chest_2_2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "chest_1_2",
+    "SpriteName": "chest_1_2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "tree_1",
+    "SpriteName": "tree_1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "tree_2",
+    "SpriteName": "tree_2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "tree_3",
+    "SpriteName": "tree_3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "arrow",
+    "SpriteName": "arrow",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Strength",
+    "SpriteName": "icon_Shield",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Dexterity",
+    "SpriteName": "icon_Bow",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "back_Dexterity",
+    "SpriteName": "card_border_object_orange",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "back_Strength",
+    "SpriteName": "card_border_object_blue",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "face_Unknown",
+    "SpriteName": "face_Unknown",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "tutorial_TextBlock_1",
+    "SpriteName": "tutorial_TextBlock_1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "tutorial",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "road_1",
+    "SpriteName": "road_1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "RobinCard",
+    "SpriteName": "RobinCard",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "JohnCard",
+    "SpriteName": "JohnCard",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "card_border_Lvl_other",
+    "SpriteName": "card_border_Lvl_other",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "card_border_Lvl_Hero",
+    "SpriteName": "card_border_Lvl_Hero",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "card_border_Lvl_Build",
+    "SpriteName": "card_border_Lvl_Build",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Coins",
+    "SpriteName": "Coin",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "stones_1",
+    "SpriteName": "stones_1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "bush_1",
+    "SpriteName": "bush_1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "back_is_false",
+    "SpriteName": "card_border_object_blue",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "back_is_true",
+    "SpriteName": "card_border_object_green",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "apple_UI",
+    "SpriteName": "apple_UI",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "tutorial",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "hay_UI",
+    "SpriteName": "hay_UI",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "tutorial",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "sheeps_UI",
+    "SpriteName": "sheeps_UI",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "tutorial",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "stone_UI",
+    "SpriteName": "stone_UI",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "tutorial",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "wood_UI",
+    "SpriteName": "wood_UI",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "tutorial",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "A1",
+    "SpriteName": "A1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "A2",
+    "SpriteName": "A2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "A3",
+    "SpriteName": "A3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "A4",
+    "SpriteName": "A4",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "A5",
+    "SpriteName": "A5",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "A6",
+    "SpriteName": "A6",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "A7",
+    "SpriteName": "A7",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "A8",
+    "SpriteName": "A8",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "A9",
+    "SpriteName": "A9",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "B1",
+    "SpriteName": "B1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "B2",
+    "SpriteName": "B2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "B3",
+    "SpriteName": "B3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "B4",
+    "SpriteName": "B4",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "C1",
+    "SpriteName": "C1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "C2",
+    "SpriteName": "C2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "C3",
+    "SpriteName": "C3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "C4",
+    "SpriteName": "C4",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "C5",
+    "SpriteName": "C5",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "C6",
+    "SpriteName": "C6",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "C7",
+    "SpriteName": "C7",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "C8",
+    "SpriteName": "C8",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "C9",
+    "SpriteName": "C9",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "D1",
+    "SpriteName": "D1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "D2",
+    "SpriteName": "D2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "D3",
+    "SpriteName": "D3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "D4",
+    "SpriteName": "D4",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "D5",
+    "SpriteName": "D5",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "E1",
+    "SpriteName": "E1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "E2",
+    "SpriteName": "E2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "E3",
+    "SpriteName": "E3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "E4",
+    "SpriteName": "E4",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "E5",
+    "SpriteName": "E5",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "E6",
+    "SpriteName": "E6",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Chest_UI",
+    "SpriteName": "Chest_UI",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "tutorial",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Power",
+    "SpriteName": "icon_Power",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "arrow_light",
+    "SpriteName": "arrow_light",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "icon_Power",
+    "SpriteName": "icon_Power",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Chest",
+    "SpriteName": "GBOX1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "ramka_item_active",
+    "SpriteName": "ramka_item_active",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "ramka_item_not_active",
+    "SpriteName": "ramka_item_not_active_back_not_active",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "back_not_active",
+    "SpriteName": "back_not_active",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "back_active",
+    "SpriteName": "back_active",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Robin_head",
+    "SpriteName": "Robin_head",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "ramka_item",
+    "SpriteName": "ramka_item_active_back_not_active",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "John_head",
+    "SpriteName": "John_head",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Greenarrow_head",
+    "SpriteName": "Greenarrow_head",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "JohnItem1",
+    "SpriteName": "JohnItem1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "JohnItem2",
+    "SpriteName": "JohnItem2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "JohnItem3",
+    "SpriteName": "JohnItem3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "JohnItem4",
+    "SpriteName": "JohnItem4",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "RobinItem1",
+    "SpriteName": "RobinItem1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "RobinItem2",
+    "SpriteName": "RobinItem2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "RobinItem3",
+    "SpriteName": "RobinItem3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "RobinItem4",
+    "SpriteName": "RobinItem4",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "GreenarrowItem1",
+    "SpriteName": "GreenarrowItem1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "GreenarrowItem2",
+    "SpriteName": "GreenarrowItem2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "GreenarrowItem3",
+    "SpriteName": "GreenarrowItem3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "GreenarrowItem4",
+    "SpriteName": "GreenarrowItem4",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Charger1",
+    "SpriteName": "Charger1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Charger2",
+    "SpriteName": "Charger2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Charger3",
+    "SpriteName": "Charger3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Charger4",
+    "SpriteName": "Charger4",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Charger5",
+    "SpriteName": "Charger5",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Charger6",
+    "SpriteName": "Charger6",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Crystals",
+    "SpriteName": "icon_Crystals",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Chest_not_active",
+    "SpriteName": "Chest_not_active",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Chest_active",
+    "SpriteName": "Chest_active",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Life",
+    "SpriteName": "icon_heart",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "F1",
+    "SpriteName": "F1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "F4",
+    "SpriteName": "F4",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "F2",
+    "SpriteName": "F2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "F3",
+    "SpriteName": "F3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "G1",
+    "SpriteName": "G1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "G2",
+    "SpriteName": "G2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "G3",
+    "SpriteName": "G3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "G4",
+    "SpriteName": "G4",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "H1",
+    "SpriteName": "H1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "H2",
+    "SpriteName": "H2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "H3",
+    "SpriteName": "H3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "H4",
+    "SpriteName": "H4",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "I1",
+    "SpriteName": "I1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "I2",
+    "SpriteName": "I2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "I3",
+    "SpriteName": "I3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "I4",
+    "SpriteName": "I4",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Coin5",
+    "SpriteName": "coin3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "pers_1",
+    "SpriteName": "pers_1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "pers_2",
+    "SpriteName": "pers_2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "pers_3",
+    "SpriteName": "pers_3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "pers_4",
+    "SpriteName": "pers_4",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "pers_5",
+    "SpriteName": "pers_5",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "pers_6",
+    "SpriteName": "pers_6",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Resource1",
+    "SpriteName": "Resource1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Resource2",
+    "SpriteName": "Resource2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Resource3",
+    "SpriteName": "Resource3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Resource4",
+    "SpriteName": "Resource4",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Resource5",
+    "SpriteName": "Resource5",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Resource6",
+    "SpriteName": "Resource6",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Resource7",
+    "SpriteName": "Resource7",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Resource8",
+    "SpriteName": "Resource8",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Resource9",
+    "SpriteName": "Resource9",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "B5",
+    "SpriteName": "B5",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "F5",
+    "SpriteName": "F5",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "I5",
+    "SpriteName": "I5",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "face_John",
+    "SpriteName": "face_John",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Energy",
+    "SpriteName": "Icon_Energy",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "icon_Energy",
+    "SpriteName": "Icon_Energy",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "ChestA1",
+    "SpriteName": "ChestA1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "ChestC1",
+    "SpriteName": "ChestC1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "ChestX1",
+    "SpriteName": "ChestX1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "X1",
+    "SpriteName": "X1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "X2",
+    "SpriteName": "X2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "X3",
+    "SpriteName": "X3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "X4",
+    "SpriteName": "X4",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "X5",
+    "SpriteName": "X5",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "basket1",
+    "SpriteName": "basket1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "basket2",
+    "SpriteName": "basket2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "basket3",
+    "SpriteName": "basket3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  }
 ]
