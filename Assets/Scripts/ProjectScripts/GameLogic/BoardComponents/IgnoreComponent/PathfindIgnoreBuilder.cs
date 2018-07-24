@@ -32,16 +32,6 @@ public static class PathfindIgnoreBuilder
    {
       var obstacleIgnorePices = GetReverseSet(new HashSet<int>
       {
-         PieceType.Mine1.Id,
-         PieceType.Mine2.Id,
-         PieceType.Mine3.Id,
-         PieceType.Mine4.Id,
-         PieceType.Mine5.Id,
-         PieceType.Mine6.Id,
-         PieceType.Mine7.Id,
-         PieceType.MineA.Id,
-         PieceType.MineC.Id,
-         PieceType.MineX.Id,
          PieceType.O1.Id,
          PieceType.O2.Id,
          PieceType.O3.Id,
@@ -71,16 +61,6 @@ public static class PathfindIgnoreBuilder
    {
       var mineIgnorePieces = GetReverseSet(new HashSet<int>
       {
-         PieceType.Mine1.Id,
-         PieceType.Mine2.Id,
-         PieceType.Mine3.Id,
-         PieceType.Mine4.Id,
-         PieceType.Mine5.Id,
-         PieceType.Mine6.Id,
-         PieceType.Mine7.Id,
-         PieceType.MineA.Id,
-         PieceType.MineC.Id,
-         PieceType.MineX.Id,
          PieceType.O1.Id,
          PieceType.O2.Id,
          PieceType.O3.Id,
