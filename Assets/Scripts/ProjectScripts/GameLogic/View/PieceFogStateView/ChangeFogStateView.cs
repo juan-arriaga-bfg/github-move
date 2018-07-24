@@ -15,7 +15,7 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 	
 	public override Vector3 Ofset
 	{
-		get { return new Vector3(0, 1.5f); }
+		get { return new Vector3(0, 0.1f); }
 	}
 	
 	public override void Init(Piece piece)
