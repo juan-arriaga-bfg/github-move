@@ -44,7 +44,6 @@ public class AddResourceView : BoardElementView
 				(
 					resource.Currency,
 					resource.Amount,
-					null,
 					view.GetAnchorRect(),
 					Context.Context.BoardDef.ViewCamera.WorldToScreenPoint(CachedTransform.position),
 					R.ResourceCarrier
