@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SandboxGameController : MonoBehaviour
 {
-    protected virtual void OnDestroy()
+    /*protected virtual void OnDestroy()
     {
         List<IECSSystem> ecsSystems = new List<IECSSystem>(ECSService.Current.SystemProcessor.RegisteredSystems);
 
@@ -14,7 +14,7 @@ public class SandboxGameController : MonoBehaviour
                 ECSService.Current.SystemProcessor.UnRegisterSystem(ecsSystems[i]);
             }
         }
-    }
+    }*/
     
     public virtual void Run()
     {

@@ -45,11 +45,14 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         then = now;
         Add(1);
     }
-    
+
+    public object GetDependency()
+    {
+        return null;
+    }
+
     public bool IsExecuteable()
     {
         return targetItem.Amount < limitItem.Amount;
     }
-    
-    public bool IsPersistence { get{ return false; } }
 }

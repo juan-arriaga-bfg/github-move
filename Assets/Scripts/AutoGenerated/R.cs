@@ -191,4 +191,5 @@ public class R
      public const string X3Piece = "X3Piece";
      public const string X4Piece = "X4Piece";
      public const string X5Piece = "X5Piece";
+     public const string ResourceCarrier = "ResourceCarrier";
 }

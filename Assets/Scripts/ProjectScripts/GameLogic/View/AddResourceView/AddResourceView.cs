@@ -34,7 +34,23 @@ public class AddResourceView : BoardElementView
 		sequence.Insert(0, CachedTransform.DOMove(CachedTransform.position + Vector3.up, duration));
 		sequence.Insert(duration*0.5f, icon.DOFade(0f, duration));
 		sequence.Insert(duration*0.5f, amountLabel.TextLabel.DOFade(0f, duration));
-		sequence.InsertCallback(duration*0.5f, () => { CurrencyHellper.Purchase(resource); });
+		sequence.InsertCallback(duration*0.5f, () =>
+		{
+			CurrencyHellper.Purchase(resource, success =>
+			{
+				var view = ResourcesViewManager.Instance.GetFirstViewById(resource.Currency);
+				
+				ResourcesViewManager.DeliverResource<ResourceCarrier>
+				(
+					resource.Currency,
+					resource.Amount,
+					null,
+					view.GetAnchorRect(),
+					Context.Context.BoardDef.ViewCamera.WorldToScreenPoint(CachedTransform.position),
+					R.ResourceCarrier
+				);
+			});
+		});
 		
 		DestroyOnBoard(duration);
 	}

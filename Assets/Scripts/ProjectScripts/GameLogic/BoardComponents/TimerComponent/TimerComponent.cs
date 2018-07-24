@@ -72,9 +72,9 @@ public class TimerComponent : IECSComponent, IECSSystem
         if(OnComplete != null) OnComplete();
     }
 
-    public bool IsPersistence
+    public object GetDependency()
     {
-        get { return false; }
+        return null;
     }
     
     public long StartTime
