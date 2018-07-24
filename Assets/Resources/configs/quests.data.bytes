@@ -1,0 +1,258 @@
+[
+  {
+    "Uid": "1",
+    "Price": {
+      "Currency": "A2",
+      "Amount": 4
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 6
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionLevel, Assembly-CSharp",
+        "UserLevel": 1
+      }
+    ],
+    "Message": "The Sheriff destroyed the village during my absence. It's time to start its restoration!"
+  },
+  {
+    "Uid": "2",
+    "Price": {
+      "Currency": "A3",
+      "Amount": 3
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 4
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 1
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionLevel, Assembly-CSharp",
+        "UserLevel": 1
+      }
+    ],
+    "Message": "Now we can clean up the area from obstacles and build Houses!"
+  },
+  {
+    "Uid": "3",
+    "Price": {
+      "Currency": "C3",
+      "Amount": 2
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 4
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 1
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 2
+      }
+    ],
+    "Message": "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks."
+  },
+  {
+    "Uid": "4",
+    "Price": {
+      "Currency": "B4",
+      "Amount": 1
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 5
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 1
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 2
+      }
+    ],
+    "Message": "The miller is ready to thanks well for a good batch of sheaves"
+  },
+  {
+    "Uid": "5",
+    "Price": {
+      "Currency": "A4",
+      "Amount": 2
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 3
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 2
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 3
+      }
+    ],
+    "Message": "Peasant women are asked to give them little wool for knitting"
+  },
+  {
+    "Uid": "6",
+    "Price": {
+      "Currency": "C4",
+      "Amount": 2
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 1
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 2
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 4
+      }
+    ],
+    "Message": "The miller is ready to thanks well for a good batch of sheaves"
+  },
+  {
+    "Uid": "7",
+    "Price": {
+      "Currency": "B5",
+      "Amount": 1
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 2
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 2
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 5
+      }
+    ],
+    "Message": "The merchant is ready to pay good for a batch of quality cloth"
+  },
+  {
+    "Uid": "8",
+    "Price": {
+      "Currency": "A6",
+      "Amount": 1
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 3
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 2
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 5
+      }
+    ],
+    "Message": "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks."
+  },
+  {
+    "Uid": "9",
+    "Price": {
+      "Currency": "C5",
+      "Amount": 2
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin3",
+        "Amount": 1
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 7
+      }
+    ],
+    "Message": "Now we can clean up the area from obstacles and build Houses!"
+  },
+  {
+    "Uid": "10",
+    "Price": {
+      "Currency": "A7",
+      "Amount": 1
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 1
+      },
+      {
+        "Currency": "Coin3",
+        "Amount": 1
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 7
+      }
+    ],
+    "Message": "The cook promises to bake a pie if you give him some apples"
+  },
+  {
+    "Uid": "11",
+    "Price": {
+      "Currency": "C6",
+      "Amount": 1
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 1
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 3
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 8
+      }
+    ],
+    "Message": "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks."
+  }
+]

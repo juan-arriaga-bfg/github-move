@@ -1,0 +1,238 @@
+﻿{
+  "Delay" : 15,
+  "Characters" :
+  [
+    "pers_1",
+    "pers_2",
+    "pers_3",
+    "pers_4",
+    "pers_5",
+    "pers_6"
+  ],
+  "TaskCounts" :
+  [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    8,
+    8
+  ],
+  "Ranges" :
+  [
+    {
+      "Min" : 1,
+      "Max" : 1
+    },
+    {
+      "Min" : 1,
+      "Max" : 2
+    },
+    {
+      "Min" : 2,
+      "Max" : 3
+    },
+    {
+      "Min" : 2,
+      "Max" : 4
+    },
+    {
+      "Min" : 2,
+      "Max" : 4
+    },
+    {
+      "Min" : 2,
+      "Max" : 4
+    },
+    {
+      "Min" : 2,
+      "Max" : 4
+    },
+    {
+      "Min" : 3,
+      "Max" : 4
+    },
+    {
+      "Min" : 3,
+      "Max" : 4
+    },
+    {
+      "Min" : 3,
+      "Max" : 4
+    }
+  ],
+  "Defs" :
+  [
+    {
+      "Resource" : "Resource1",
+      "Level" : 1,
+      "Range" :
+      {
+        "Min" : 1,
+        "Max" : 2
+      },
+      "Weight" : 50,
+      "Rewards" :
+      [
+        {
+          "Currency" : "Coin1",
+          "Amount" : 2
+        }
+      ]
+    },
+    {
+      "Resource" : "Resource2",
+      "Level" : 1,
+      "Range" :
+      {
+        "Min" : 1,
+        "Max" : 2
+      },
+      "Weight" : 30,
+      "Rewards" :
+      [
+        {
+          "Currency" : "Coin1",
+          "Amount" : 3
+        }
+      ]
+    },
+    {
+      "Resource" : "Resource3",
+      "Level" : 2,
+      "Range" :
+      {
+        "Min" : 1,
+        "Max" : 3
+      },
+      "Weight" : 20,
+      "Rewards" :
+      [
+        {
+          "Currency" : "Coin1",
+          "Amount" : 4
+        }
+      ]
+    },
+    {
+      "Resource" : "Resource4",
+      "Level" : 2,
+      "Range" :
+      {
+        "Min" : 1,
+        "Max" : 3
+      },
+      "Weight" : 25,
+      "Rewards" :
+      [
+      {
+          "Currency" : "Coin1",
+          "Amount" : 5
+        }
+      ]
+    },
+    {
+      "Resource" : "Resource5",
+      "Level" : 3,
+      "Range" :
+      {
+        "Min" : 1,
+        "Max" : 2
+      },
+      "Weight" : 20,
+      "Rewards" :
+      [
+        {
+          "Currency" : "Coin1",
+          "Amount" : 1
+        },{
+          "Currency" : "Coin2",
+          "Amount" : 2
+        }
+      ]
+    },
+    {
+      "Resource" : "Resource6",
+      "Level" : 3,
+      "Range" :
+      {
+        "Min" : 1,
+        "Max" : 2
+      },
+      "Weight" : 20,
+      "Rewards" :
+      [
+        {
+          "Currency" : "Coin1",
+          "Amount" : 3
+        },{
+          "Currency" : "Coin2",
+          "Amount" : 2
+        }
+      ]
+    },
+    {
+      "Resource" : "Resource7",
+      "Level" : 4,
+      "Range" :
+      {
+        "Min" : 1,
+        "Max" : 1
+      },
+      "Weight" : 20,
+      "Rewards" :
+      [
+        {
+          "Currency" : "Coin1",
+          "Amount" : 4
+        },{
+          "Currency" : "Coin3",
+          "Amount" : 1
+        }
+      ]
+    },
+    {
+      "Resource" : "Resource8",
+      "Level" : 4,
+      "Range" :
+      {
+        "Min" : 1,
+        "Max" : 1
+      },
+      "Weight" : 10,
+      "Rewards" :
+      [
+        {
+          "Currency" : "Coin1",
+          "Amount" : 3
+        },{
+          "Currency" : "Coin3",
+          "Amount" : 2
+        }
+      ]
+    },
+    {
+      "Resource" : "Resource9",
+      "Level" : 4,
+      "Range" :
+      {
+        "Min" : 1,
+        "Max" : 1
+      },
+      "Weight" : 10,
+      "Rewards" :
+      [
+        {
+          "Currency" : "Coin1",
+          "Amount" : 2
+        },{
+          "Currency" : "Coin3",
+          "Amount" : 3
+        }
+      ]
+    }
+  ]
+}

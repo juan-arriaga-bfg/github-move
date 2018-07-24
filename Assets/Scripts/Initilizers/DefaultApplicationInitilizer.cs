@@ -29,8 +29,12 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         ecsManager.AddSystemProcessor(ecsSystemProcessor);
         
         //init profile 
-        var profileManager = new ProfileManager<UserProfile> { SystemVersion = 1 };
+        var profileManager = new ProfileManager<UserProfile> { SystemVersion = IWVersion.Get.BuildNumber };
+#if UNITY_EDITOR
+        profileManager.Init(new ResourceConfigDataMapper<UserProfile>("configs/profile.data", false), new DefaultProfileBuilder(), new DefaultProfileMigration());
+#else
         profileManager.Init(new StoragePlayerPrefsDataMapper<UserProfile>("user.profile"), new DefaultProfileBuilder(), new DefaultProfileMigration());
+#endif
         ProfileService.Instance.SetManager(profileManager);
         
         //init assetbundle
@@ -52,14 +56,25 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         
         //init shopmanager
         ShopManager shopManager = new ShopManager();
-        shopManager.InitStorage(new ResourceConfigDataMapper<IEnumerable<ShopItem>>("configs/shopitems.data", NSConfigsSettings.Instance.IsUseEncryption), (shopItems) =>{});
+        shopManager.InitStorage(
+            new ResourceConfigDataMapper<IEnumerable<ShopItem>>("configs/shopitems.data",
+                NSConfigsSettings.Instance.IsUseEncryption),
+            (shopItems) => { });
+        
         ShopService.Instance.SetManager(shopManager);
         
         // load local profile
         ProfileService.Instance.Manager.LoadCurrentProfile((profile) =>
         {
-            ProfileService.Instance.Manager.CheckMigration();
+            new DefaultProfileBuilder().SetupComponents(profile);
 
+            if (profileManager.SystemVersion > profile.SystemVersion)
+            {
+                var profileBuilder = new DefaultProfileBuilder();
+                ProfileService.Instance.Manager.ReplaceProfile(profileBuilder.Create());
+            }
+            
+            ProfileService.Instance.Manager.CheckMigration();
 #if UNITY_EDITOR
             ProfileService.Instance.Manager.SaveLocalProfile();
 #endif
@@ -68,18 +83,22 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             LocalizationService.Instance.SetManager(localizationManager);
             localizationManager.SupportedLanguages = NSLocalizationSettings.Instance.SupportedLanguages;
 
-            if (localizationManager.IsLanguageSupported(ProfileService.Current.UserSettings.Language))
+            if (localizationManager.IsLanguageSupported(ProfileService.Current.Settings.Language))
             {
-                localizationManager.SwitchLocalization(ProfileService.Current.UserSettings.Language);
+                localizationManager.SwitchLocalization(ProfileService.Current.Settings.Language);
             }
             else
             {
-                ProfileService.Current.UserSettings.Language = SystemLanguage.English.ToString();
-                localizationManager.SwitchLocalization(ProfileService.Current.UserSettings.Language);
+                ProfileService.Current.Settings.Language = SystemLanguage.English.ToString();
+                localizationManager.SwitchLocalization(ProfileService.Current.Settings.Language);
             }
-            
         });
-
+        
+        // gamedata configs
+        GameDataManager dataManager = new GameDataManager();
+        GameDataService.Instance.SetManager(dataManager);
+        
+        dataManager.SetupComponents();
     }
     
     void OnApplicationPause(bool pauseStatus)

@@ -12,11 +12,20 @@
 
     public void SetupComponents(UserProfile profile)
     {
-//        profile.RegisterComponent(new LevelProgress());
+        profile.RegisterComponent(new UserPurchasesComponent());
+        profile.RegisterComponent(new UserSettingsComponent());
+        profile.RegisterComponent(new FieldDefComponent());
+        profile.RegisterComponent(new QuestSaveComponent());
+        profile.RegisterComponent(new CurrencySaveComponent());
+//        profile.RegisterComponent(new CharacterSaveComponent());
     }
-
+    
     public void SetDefaultSettings(UserProfile profile)
     {
-//        profile.GetStorageItem(Currency.Coins).Amount = 60;
+        profile.GetStorageItem(Currency.Level.Name).Amount = 1;
+        profile.GetStorageItem(Currency.Worker.Name).Amount = 2;
+        profile.GetStorageItem(Currency.WorkerLimit.Name).Amount = 2;
+        profile.GetStorageItem(Currency.Energy.Name).Amount = 80;
+        profile.GetStorageItem(Currency.EnergyLimit.Name).Amount = 80;
     }
 }

@@ -3,5 +3,960 @@
     "Uid": "SampleCube",
     "ResourcePath": "Prefabs/SampleCube/SampleCube",
     "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "GenericPiece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/GenericPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ReadyArrowView",
+    "ResourcePath": "Prefabs/ReadyArrowView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "AddResourceView",
+    "ResourcePath": "Prefabs/AddResourceView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ChangeStorageStateView",
+    "ResourcePath": "Prefabs/ChangeStorageStateView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BoardTimerView",
+    "ResourcePath": "Prefabs/BoardTimerView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "HintArrow",
+    "ResourcePath": "Prefabs/HintArrow",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "PieceLevelView",
+    "ResourcePath": "Prefabs/PieceLevelView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MenuView",
+    "ResourcePath": "Prefabs/MenuView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "A1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/A/A1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "A2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/A/A2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "A3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/A/A3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "A4Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/A/A4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "A5Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/A/A5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "A6Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/A/A6Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "A7Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/A/A7Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "A8Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/A/A8Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "A9Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/A/A9Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "B1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/B/B1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "B2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/B/B2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "B3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/B/B3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "B4Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/B/B4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "B5Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/B/B5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "C1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/C/C1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "C2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/C/C2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "C3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/C/C3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "C4Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/C/C4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "C5Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/C/C5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "C6Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/C/C6Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "C7Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/C/C7Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "C8Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/C/C8Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "C9Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/C/C9Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "FogPiece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/FogPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Castle1Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Castle/Castle1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Castle2Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Castle/Castle2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Castle3Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Castle/Castle3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Castle4Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Castle/Castle4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Castle5Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Castle/Castle5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Castle6Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Castle/Castle6Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Castle7Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Castle/Castle7Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Castle8Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Castle/Castle8Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Castle9Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Castle/Castle9Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Mine1Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Mine/Mine1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Mine2Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Mine/Mine2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Mine3Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Mine/Mine3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Mine4Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Mine/Mine4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Mine5Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Mine/Mine5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Mine6Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Mine/Mine6Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Mine7Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Mine/Mine7Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sawmill1Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sawmill/Sawmill1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sawmill2Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sawmill/Sawmill2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sawmill3Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sawmill/Sawmill3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sawmill4Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sawmill/Sawmill4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sawmill5Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sawmill/Sawmill5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sawmill6Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sawmill/Sawmill6Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sawmill7Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sawmill/Sawmill7Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sheepfold1Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sheepfold/Sheepfold1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sheepfold2Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sheepfold/Sheepfold2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sheepfold3Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sheepfold/Sheepfold3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sheepfold4Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sheepfold/Sheepfold4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sheepfold5Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sheepfold/Sheepfold5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sheepfold6Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sheepfold/Sheepfold6Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Sheepfold7Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Sheepfold/Sheepfold7Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "D1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/D/D1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "D2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/D/D2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "D3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/D/D3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "D4Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/D/D4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "D5Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/D/D5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "E1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/E/E1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "E2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/E/E2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "E3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/E/E3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "E4Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/E/E4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "E5Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/E/E5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "E6Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/E/E6Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ChangeFogStateView",
+    "ResourcePath": "Prefabs/ChangeFogStateView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "O1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Obstacles/O1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "O2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Obstacles/O2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "O3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Obstacles/O3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "O4Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Obstacles/O4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "O5Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Obstacles/O5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "OX1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Obstacles/OX1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "OX2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Obstacles/OX2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "OX3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Obstacles/OX3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "OX4Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Obstacles/OX4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "OX5Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Obstacles/OX5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Chest1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Chest/Chest1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Chest2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Chest/Chest2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Chest3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Chest/Chest3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Chest4Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Chest/Chest4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Chest5Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Chest/Chest5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Chest6Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Chest/Chest6Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Chest7Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Chest/Chest7Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Chest8Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Chest/Chest8Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Chest9Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Chest/Chest9Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Coin1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Coin/Coin1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Coin2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Coin/Coin2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Coin3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Coin/Coin3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Coin4Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Coin/Coin4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Coin5Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/Coin/Coin5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ResourceView",
+    "ResourcePath": "Prefabs/ResourceView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "CastleUpgradeView",
+    "ResourcePath": "Prefabs/CastleUpgradeView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "KingPiece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/QuestGiver/KingPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "EnemyView",
+    "ResourcePath": "Prefabs/EnemyView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "SimpleUpgradeView",
+    "ResourcePath": "Prefabs/SimpleUpgradeView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "RiverAngle",
+    "ResourcePath": "Prefabs/Town/RiverAngle",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "RiverLeft",
+    "ResourcePath": "Prefabs/Town/RiverLeft",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "RiverRight",
+    "ResourcePath": "Prefabs/Town/RiverRight",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "RoadLeft",
+    "ResourcePath": "Prefabs/Town/RoadLeft",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "RoadRight",
+    "ResourcePath": "Prefabs/Town/RoadRight",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage1Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage2Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage3Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage4Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage5Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage6Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage6Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage7Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage7Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage8Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage8Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Storage9Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Storage/Storage9Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "House",
+    "ResourcePath": "Prefabs/Town/House",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "DebugCell",
+    "ResourcePath": "Prefabs/DebugCell",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BushLeft",
+    "ResourcePath": "Prefabs/Town/BushLeft",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BushRight",
+    "ResourcePath": "Prefabs/Town/BushRight",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Tree",
+    "ResourcePath": "Prefabs/Town/Tree",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BrigeLeft",
+    "ResourcePath": "Prefabs/Town/BrigeLeft",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BrigeRight",
+    "ResourcePath": "Prefabs/Town/BrigeRight",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market1Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market2Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market3Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market4Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market5Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market6Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market6Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market7Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market7Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market8Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market8Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Market9Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Market/Market9Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "F1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/F/F1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "F2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/F/F2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "F3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/F/F3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "F4Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/F/F4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "G1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/G/G1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "G2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/G/G2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "G3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/G/G3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "G4Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/G/G4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "H1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/H/H1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "H2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/H/H2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "H3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/H/H3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "H4Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/H/H4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "I1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/I/I1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "I2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/I/I2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "I3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/I/I3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "I4Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/I/I4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ProductionView",
+    "ResourcePath": "Prefabs/ProductionView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory1Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory2Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory3Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory4Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory5Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory6Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory6Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory7Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory7Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory8Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory8Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Factory9Piece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Factory/Factory9Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ProductionWarningView",
+    "ResourcePath": "Prefabs/ProductionWarningView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "I5Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/I/I5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "F5Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/F/F5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "J1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/J/J1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "J2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/J/J2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "J3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/J/J3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "J4Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/J/J4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "J5Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/J/J5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "RiverAngleBottom",
+    "ResourcePath": "Prefabs/Town/RiverAngleBottom",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "RiverAngleLeft",
+    "ResourcePath": "Prefabs/Town/RiverAngleLeft",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "RiverAngleRight",
+    "ResourcePath": "Prefabs/Town/RiverAngleRight",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "RiverAngleTop",
+    "ResourcePath": "Prefabs/Town/RiverAngleTop",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ChangeObstacleStateView",
+    "ResourcePath": "Prefabs/ChangeObstacleStateView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ChestA1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/MineChest/ChestA1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ChestA2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/MineChest/ChestA2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ChestA3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/MineChest/ChestA3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ChestC1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/MineChest/ChestC1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ChestC2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/MineChest/ChestC2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ChestC3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/MineChest/ChestC3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ChangeMineStateView",
+    "ResourcePath": "Prefabs/ChangeMineStateView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ChestX1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/MineChest/ChestX1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ChestX2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/MineChest/ChestX2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ChestX3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/MineChest/ChestX3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MineAPiece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Mine/MineAPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MineCPiece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Mine/MineCPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MineXPiece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Mine/MineXPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "X1Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/X/X1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "X2Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/X/X2Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "X3Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/X/X3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "X4Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/X/X4Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "X5Piece",
+    "ResourcePath": "Prefabs/Pieces/GenericPiece/X/X5Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ResourceCarrier",
+    "ResourcePath": "Prefabs/UI/ResourceCarrier",
+    "IsGenerateAutoName": true
   }
 ]

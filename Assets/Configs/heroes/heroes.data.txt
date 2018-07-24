@@ -1,0 +1,144 @@
+﻿[
+  {
+    "Uid" : "Robin",
+    "Level" : 1,
+    "Cooldown" : 60,
+    "Abilities" :
+    [
+      {
+        "Ability" : "Power",
+        "Value" : 10
+      }
+    ],
+    "Collection" :
+    [
+      {
+        "Currency" : "RobinItem1",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "RobinItem2",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "RobinItem3",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "RobinItem4",
+        "Amount" : 1
+      }
+    ],
+    "Prices" :
+    [
+      {
+        "Currency" : "Charger1",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "Charger2",
+        "Amount" : 1
+      }
+    ]
+  },
+  {
+    "Uid": "John",
+    "Level" : 2,
+    "Cooldown" : 60,
+    "Abilities" :
+    [
+      {
+        "Ability" : "Power",
+        "Value" : 20
+      }
+    ],
+    "Collection" :
+    [
+      {
+        "Currency" : "JohnItem1",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "JohnItem2",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "JohnItem3",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "JohnItem4",
+        "Amount" : 1
+      }
+    ],
+    "Prices" :
+    [
+      {
+        "Currency" : "Charger1",
+        "Amount" : 4
+      },
+      {
+        "Currency" : "Charger2",
+        "Amount" : 4
+      },
+      {
+        "Currency" : "Charger3",
+        "Amount" : 3
+      },
+      {
+        "Currency" : "Charger4",
+        "Amount" : 3
+      }
+    ]
+  },
+  {
+    "Uid": "Greenarrow",
+    "Level" : 3,
+    "Cooldown" : 60,
+    "Abilities" :
+    [
+      {
+        "Ability" : "Power",
+        "Value" : 30
+      }
+    ],
+    "Collection" :
+    [
+      {
+        "Currency" : "GreenarrowItem1",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "GreenarrowItem2",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "GreenarrowItem3",
+        "Amount" : 1
+      },
+      {
+        "Currency" : "GreenarrowItem4",
+        "Amount" : 1
+      }
+    ],
+    "Prices" :
+    [
+      {
+        "Currency" : "Charger2",
+        "Amount" : 5
+      },
+      {
+        "Currency" : "Charger4",
+        "Amount" : 5
+      },
+      {
+        "Currency" : "Charger5",
+        "Amount" : 6
+      },
+      {
+        "Currency" : "Charger6",
+        "Amount" : 6
+      }
+    ]
+  }
+]

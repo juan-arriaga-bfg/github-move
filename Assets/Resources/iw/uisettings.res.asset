@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -17,6 +17,20 @@ MonoBehaviour:
   - SampleWindow
   - MainWindow
   - LauncherWindow
+  - MessageWindow
+  - ChestMessageWindow
+  - HeroesWindow
+  - RobberyWindow
+  - CollectionWindow
+  - CharactersWindow
+  - QuestWindow
+  - ErrorWindow
+  - StorageWindow
+  - MarketWindow
+  - ProductionWindow
+  - OldChestMessageWindow
+  - CastleWindow
+  - EnergyShopWindow
   uiSystemType: 2
   nativeScreenWidth: 1920
   nativeScreenHeight: 1080

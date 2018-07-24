@@ -12,4 +12,18 @@ MonoBehaviour:
   m_Name: configs.settings.res
   m_EditorClassIdentifier: 
   isUseEncryption: 0
-  configNames: []
+  configNames:
+  - /Configs/chests/chests.data.txt
+  - /Configs/enemies/enemies.data.txt
+  - /Configs/heroes/heroes.data.txt
+  - /Configs/pieces/pieces.data.txt
+  - /Configs/production/production.data.txt
+  - /Configs/quests/quests.data.txt
+  - /Configs/fogs/fogs.data.txt
+  - /Configs/obstacles/obstacles.data.txt
+  - /Configs/collection/collection.data.txt
+  - /Configs/levels/levels.data.txt
+  - /Configs/tasks/tasks.data.txt
+  - /Configs/mines/mines.data.txt
+  - /Configs/shop/shop.data.txt
+  - /Configs/field/field.data.txt
