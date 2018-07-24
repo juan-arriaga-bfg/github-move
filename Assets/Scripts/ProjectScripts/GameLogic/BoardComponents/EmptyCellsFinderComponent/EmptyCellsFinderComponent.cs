@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.XR.WSA;
 
 public class EmptyCellsFinderComponent: IECSComponent
 {
