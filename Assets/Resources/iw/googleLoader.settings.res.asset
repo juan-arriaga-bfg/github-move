@@ -23,7 +23,7 @@ MonoBehaviour:
   - Key: obstacles
     Link: 16Q9fxlFX40VRx6u1kwfMvWm1GuvK8MaGs117g5Pkd2g
     Route: parse
-    Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestWeights":[{"Uid":"","Weight":0,"":"","Override":true}]}]'
+    Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestWeights":[{"Uid":"","Weight":0,"":"","Override":true}]}]'
   - Key: pieces
     Link: 15C96r0vcgzzhJ6Fo_OQXBcCoIkSogZnTZg8Jc6MKDH8
     Route: parse
@@ -35,7 +35,7 @@ MonoBehaviour:
   - Key: mines
     Link: 15gc0Y9eeE_bZPEJ_jm7bY1U4Sf3bD7WNa165RzbE9Zw
     Route: parse
-    Pattern: '[{"Uid":"","Delay":0,"Size":0,"Position":{"X":0,"Y":0},"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0}}]'
+    Pattern: '[{"Uid":"","Delay":0,"Size":0,"Position":{"X":0,"Y":0},"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"StepReward":{"Currency":"","Amount":0}}]'
   - Key: shop
     Link: 15hj4e6i2F9UkK_p-lSEvp8d1MJW0KNj3PmEL_1rQU_4
     Route: parse
