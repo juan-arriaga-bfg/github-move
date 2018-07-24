@@ -117,6 +117,9 @@ TextureImporter:
     21300220: list
     21300222: galka
     21300224: Icon_Energy
+    21300226: basket3
+    21300228: basket2
+    21300230: basket1
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -197,13 +200,55 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: round_active
+      name: basket3
       rect:
         serializedVersion: 2
         x: 0
         y: 344
+        width: 427
+        height: 450
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: basket2
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 344
+        width: 329
+        height: 376
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: round_active
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 0
         width: 309
         height: 309
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: basket1
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 310
+        width: 264
+        height: 320
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,8 +259,8 @@ TextureImporter:
       name: soldier_img
       rect:
         serializedVersion: 2
-        x: 0
-        y: 654
+        x: 879
+        y: 0
         width: 279
         height: 295
       alignment: 9
@@ -228,8 +273,8 @@ TextureImporter:
       name: round_not_active
       rect:
         serializedVersion: 2
-        x: 280
-        y: 654
+        x: 428
+        y: 721
         width: 273
         height: 273
       alignment: 9
@@ -242,8 +287,8 @@ TextureImporter:
       name: list_not_active
       rect:
         serializedVersion: 2
-        x: 310
-        y: 344
+        x: 0
+        y: 795
         width: 189
         height: 185
       alignment: 9
@@ -256,8 +301,8 @@ TextureImporter:
       name: shine_upgrade
       rect:
         serializedVersion: 2
-        x: 500
-        y: 344
+        x: 190
+        y: 795
         width: 185
         height: 185
       alignment: 9
@@ -270,8 +315,8 @@ TextureImporter:
       name: ramka_player
       rect:
         serializedVersion: 2
-        x: 569
-        y: 0
+        x: 702
+        y: 721
         width: 182
         height: 183
       alignment: 9
@@ -284,8 +329,8 @@ TextureImporter:
       name: pers_quest
       rect:
         serializedVersion: 2
-        x: 554
-        y: 530
+        x: 885
+        y: 631
         width: 171
         height: 188
       alignment: 9
@@ -298,8 +343,8 @@ TextureImporter:
       name: list_active
       rect:
         serializedVersion: 2
-        x: 554
-        y: 719
+        x: 885
+        y: 820
         width: 175
         height: 171
       alignment: 9
@@ -312,8 +357,8 @@ TextureImporter:
       name: progress_player
       rect:
         serializedVersion: 2
-        x: 686
-        y: 184
+        x: 1023
+        y: 296
         width: 166
         height: 166
       alignment: 9
@@ -326,8 +371,8 @@ TextureImporter:
       name: big_ramka
       rect:
         serializedVersion: 2
-        x: 752
-        y: 0
+        x: 1023
+        y: 463
         width: 158
         height: 164
       alignment: 9
@@ -340,8 +385,8 @@ TextureImporter:
       name: quest_messege
       rect:
         serializedVersion: 2
-        x: 686
-        y: 351
+        x: 1057
+        y: 628
         width: 155
         height: 155
       alignment: 9
@@ -354,8 +399,8 @@ TextureImporter:
       name: unlockpers
       rect:
         serializedVersion: 2
-        x: 726
-        y: 507
+        x: 1182
+        y: 463
         width: 142
         height: 152
       alignment: 9
@@ -368,8 +413,8 @@ TextureImporter:
       name: John_head
       rect:
         serializedVersion: 2
-        x: 853
-        y: 165
+        x: 1061
+        y: 784
         width: 129
         height: 156
       alignment: 9
@@ -382,8 +427,8 @@ TextureImporter:
       name: Greenarrow_head
       rect:
         serializedVersion: 2
-        x: 911
-        y: 0
+        x: 1191
+        y: 784
         width: 131
         height: 153
       alignment: 9
@@ -396,8 +441,8 @@ TextureImporter:
       name: Robin_head
       rect:
         serializedVersion: 2
-        x: 842
-        y: 351
+        x: 1213
+        y: 616
         width: 130
         height: 150
       alignment: 9
@@ -410,8 +455,8 @@ TextureImporter:
       name: pers_4
       rect:
         serializedVersion: 2
-        x: 730
-        y: 660
+        x: 1323
+        y: 767
         width: 133
         height: 143
       alignment: 9
@@ -424,8 +469,8 @@ TextureImporter:
       name: pers_5
       rect:
         serializedVersion: 2
-        x: 554
-        y: 891
+        x: 1159
+        y: 0
         width: 125
         height: 130
       alignment: 9
@@ -438,8 +483,8 @@ TextureImporter:
       name: pers_6
       rect:
         serializedVersion: 2
-        x: 680
-        y: 891
+        x: 1159
+        y: 131
         width: 125
         height: 129
       alignment: 9
@@ -452,8 +497,8 @@ TextureImporter:
       name: pers_3
       rect:
         serializedVersion: 2
-        x: 569
-        y: 184
+        x: 1190
+        y: 261
         width: 108
         height: 144
       alignment: 9
@@ -466,8 +511,8 @@ TextureImporter:
       name: ramka_minicollect
       rect:
         serializedVersion: 2
-        x: 806
-        y: 804
+        x: 1285
+        y: 0
         width: 88
         height: 173
       alignment: 9
@@ -480,8 +525,8 @@ TextureImporter:
       name: icon_round
       rect:
         serializedVersion: 2
-        x: 310
-        y: 530
+        x: 1299
+        y: 174
         width: 123
         height: 123
       alignment: 9
@@ -494,8 +539,8 @@ TextureImporter:
       name: PinWarrior_ramka
       rect:
         serializedVersion: 2
-        x: 864
-        y: 660
+        x: 1374
+        y: 0
         width: 116
         height: 127
       alignment: 9
@@ -508,8 +553,8 @@ TextureImporter:
       name: Chest_active
       rect:
         serializedVersion: 2
-        x: 869
-        y: 502
+        x: 1299
+        y: 298
         width: 120
         height: 120
       alignment: 9
@@ -522,8 +567,8 @@ TextureImporter:
       name: pers_1
       rect:
         serializedVersion: 2
-        x: 973
-        y: 322
+        x: 1325
+        y: 419
         width: 105
         height: 134
       alignment: 9
@@ -536,8 +581,8 @@ TextureImporter:
       name: icon_Fight
       rect:
         serializedVersion: 2
-        x: 983
-        y: 154
+        x: 702
+        y: 905
         width: 120
         height: 113
       alignment: 9
@@ -550,8 +595,8 @@ TextureImporter:
       name: pers_2
       rect:
         serializedVersion: 2
-        x: 1043
-        y: 0
+        x: 1344
+        y: 554
         width: 101
         height: 127
       alignment: 9
@@ -564,8 +609,8 @@ TextureImporter:
       name: PinWarrior_head
       rect:
         serializedVersion: 2
-        x: 434
-        y: 530
+        x: 1420
+        y: 298
         width: 102
         height: 120
       alignment: 9
@@ -578,8 +623,8 @@ TextureImporter:
       name: RobinItem4
       rect:
         serializedVersion: 2
-        x: 895
-        y: 788
+        x: 1323
+        y: 911
         width: 111
         height: 110
       alignment: 9
@@ -592,8 +637,8 @@ TextureImporter:
       name: RobinItem2
       rect:
         serializedVersion: 2
-        x: 895
-        y: 899
+        x: 1431
+        y: 419
         width: 97
         height: 117
       alignment: 9
@@ -606,8 +651,8 @@ TextureImporter:
       name: JohnItem1
       rect:
         serializedVersion: 2
-        x: 993
-        y: 899
+        x: 1435
+        y: 911
         width: 103
         height: 109
       alignment: 9
@@ -620,8 +665,8 @@ TextureImporter:
       name: bubble_quest
       rect:
         serializedVersion: 2
-        x: 280
-        y: 928
+        x: 758
+        y: 631
         width: 126
         height: 89
       alignment: 9
@@ -634,8 +679,8 @@ TextureImporter:
       name: GreenarrowItem4
       rect:
         serializedVersion: 2
-        x: 407
-        y: 928
+        x: 1423
+        y: 128
         width: 118
         height: 95
       alignment: 9
@@ -648,8 +693,8 @@ TextureImporter:
       name: RobinItem3
       rect:
         serializedVersion: 2
-        x: 981
-        y: 623
+        x: 1491
+        y: 0
         width: 115
         height: 96
       alignment: 9
@@ -662,8 +707,8 @@ TextureImporter:
       name: purple_round
       rect:
         serializedVersion: 2
-        x: 990
-        y: 457
+        x: 1523
+        y: 224
         width: 103
         height: 102
       alignment: 9
@@ -676,8 +721,8 @@ TextureImporter:
       name: RobinItem1
       rect:
         serializedVersion: 2
-        x: 1079
-        y: 268
+        x: 1542
+        y: 97
         width: 84
         height: 120
       alignment: 9
@@ -690,8 +735,8 @@ TextureImporter:
       name: Chest_not_active
       rect:
         serializedVersion: 2
-        x: 1104
-        y: 128
+        x: 1446
+        y: 537
         width: 98
         height: 98
       alignment: 9
@@ -704,8 +749,8 @@ TextureImporter:
       name: JohnItem2
       rect:
         serializedVersion: 2
-        x: 1145
-        y: 0
+        x: 1446
+        y: 636
         width: 87
         height: 106
       alignment: 9
@@ -718,8 +763,8 @@ TextureImporter:
       name: JohnItem4
       rect:
         serializedVersion: 2
-        x: 1007
-        y: 720
+        x: 1607
+        y: 0
         width: 105
         height: 87
       alignment: 9
@@ -733,7 +778,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 950
+        y: 981
         width: 200
         height: 42
       alignment: 9
@@ -746,8 +791,8 @@ TextureImporter:
       name: JohnItem3
       rect:
         serializedVersion: 2
-        x: 1007
-        y: 808
+        x: 1191
+        y: 938
         width: 112
         height: 74
       alignment: 9
@@ -760,8 +805,8 @@ TextureImporter:
       name: GreenarrowItem3
       rect:
         serializedVersion: 2
-        x: 1097
-        y: 883
+        x: 1523
+        y: 327
         width: 91
         height: 88
       alignment: 9
@@ -774,8 +819,8 @@ TextureImporter:
       name: GreenarrowItem1
       rect:
         serializedVersion: 2
-        x: 1094
-        y: 389
+        x: 1061
+        y: 941
         width: 107
         height: 73
       alignment: 9
@@ -788,8 +833,8 @@ TextureImporter:
       name: GreenarrowItem2
       rect:
         serializedVersion: 2
-        x: 1164
-        y: 227
+        x: 1529
+        y: 416
         width: 80
         height: 95
       alignment: 9
@@ -802,8 +847,8 @@ TextureImporter:
       name: round_mini
       rect:
         serializedVersion: 2
-        x: 1203
-        y: 107
+        x: 1457
+        y: 743
         width: 85
         height: 85
       alignment: 9
@@ -816,8 +861,8 @@ TextureImporter:
       name: Hero_ramka_not_active
       rect:
         serializedVersion: 2
-        x: 1233
-        y: 0
+        x: 1534
+        y: 636
         width: 80
         height: 89
       alignment: 9
@@ -830,8 +875,8 @@ TextureImporter:
       name: Icon_Energy
       rect:
         serializedVersion: 2
-        x: 1094
-        y: 463
+        x: 1545
+        y: 512
         width: 66
         height: 106
       alignment: 9
@@ -844,8 +889,8 @@ TextureImporter:
       name: button_upgrade
       rect:
         serializedVersion: 2
-        x: 1097
-        y: 570
+        x: 1610
+        y: 416
         width: 77
         height: 88
       alignment: 9
@@ -858,8 +903,8 @@ TextureImporter:
       name: green_round
       rect:
         serializedVersion: 2
-        x: 1161
-        y: 463
+        x: 1615
+        y: 327
         width: 77
         height: 88
       alignment: 9
@@ -872,8 +917,8 @@ TextureImporter:
       name: Resource1
       rect:
         serializedVersion: 2
-        x: 1202
-        y: 323
+        x: 1344
+        y: 682
         width: 83
         height: 81
       alignment: 9
@@ -886,8 +931,8 @@ TextureImporter:
       name: Resource9
       rect:
         serializedVersion: 2
-        x: 1245
-        y: 193
+        x: 1612
+        y: 505
         width: 75
         height: 87
       alignment: 9
@@ -900,8 +945,8 @@ TextureImporter:
       name: bubble
       rect:
         serializedVersion: 2
-        x: 1289
-        y: 90
+        x: 1457
+        y: 829
         width: 80
         height: 80
       alignment: 9
@@ -914,8 +959,8 @@ TextureImporter:
       name: heroes_info
       rect:
         serializedVersion: 2
-        x: 1314
-        y: 0
+        x: 1539
+        y: 829
         width: 78
         height: 82
       alignment: 9
@@ -928,8 +973,8 @@ TextureImporter:
       name: Hero_ramka_active
       rect:
         serializedVersion: 2
-        x: 1113
-        y: 659
+        x: 1543
+        y: 726
         width: 76
         height: 79
       alignment: 9
@@ -942,8 +987,8 @@ TextureImporter:
       name: bttnAdd
       rect:
         serializedVersion: 2
-        x: 730
-        y: 804
+        x: 1539
+        y: 912
         width: 75
         height: 80
       alignment: 9
@@ -956,8 +1001,8 @@ TextureImporter:
       name: icon_castle_round
       rect:
         serializedVersion: 2
-        x: 1175
-        y: 552
+        x: 1615
+        y: 912
         width: 75
         height: 75
       alignment: 9
@@ -970,8 +1015,8 @@ TextureImporter:
       name: Resource7
       rect:
         serializedVersion: 2
-        x: 201
-        y: 950
+        x: 1423
+        y: 224
         width: 76
         height: 73
       alignment: 9
@@ -984,8 +1029,8 @@ TextureImporter:
       name: header_front
       rect:
         serializedVersion: 2
-        x: 1239
-        y: 405
+        x: 823
+        y: 905
         width: 60
         height: 89
       alignment: 9
@@ -998,8 +1043,8 @@ TextureImporter:
       name: back_upUI
       rect:
         serializedVersion: 2
-        x: 1286
-        y: 281
+        x: 1618
+        y: 806
         width: 74
         height: 71
       alignment: 9
@@ -1012,8 +1057,8 @@ TextureImporter:
       name: progressbar_ramka
       rect:
         serializedVersion: 2
-        x: 1113
-        y: 739
+        x: 1691
+        y: 878
         width: 80
         height: 65
       alignment: 9
@@ -1026,8 +1071,8 @@ TextureImporter:
       name: Resource6
       rect:
         serializedVersion: 2
-        x: 1120
-        y: 805
+        x: 1691
+        y: 944
         width: 72
         height: 72
       alignment: 9
@@ -1040,8 +1085,8 @@ TextureImporter:
       name: Resource5
       rect:
         serializedVersion: 2
-        x: 1321
-        y: 171
+        x: 1764
+        y: 944
         width: 77
         height: 66
       alignment: 9
@@ -1054,8 +1099,8 @@ TextureImporter:
       name: Resource8
       rect:
         serializedVersion: 2
-        x: 1370
-        y: 83
+        x: 1615
+        y: 593
         width: 63
         height: 78
       alignment: 9
@@ -1068,8 +1113,8 @@ TextureImporter:
       name: x_button
       rect:
         serializedVersion: 2
-        x: 1393
-        y: 0
+        x: 1620
+        y: 672
         width: 67
         height: 72
       alignment: 9
@@ -1082,8 +1127,8 @@ TextureImporter:
       name: Resource4
       rect:
         serializedVersion: 2
-        x: 1190
-        y: 628
+        x: 1679
+        y: 593
         width: 75
         height: 64
       alignment: 9
@@ -1096,8 +1141,8 @@ TextureImporter:
       name: Resource2
       rect:
         serializedVersion: 2
-        x: 1251
-        y: 495
+        x: 1688
+        y: 658
         width: 70
         height: 68
       alignment: 9
@@ -1110,8 +1155,8 @@ TextureImporter:
       name: minibubble
       rect:
         serializedVersion: 2
-        x: 1300
-        y: 353
+        x: 1688
+        y: 727
         width: 68
         height: 66
       alignment: 9
@@ -1124,8 +1169,8 @@ TextureImporter:
       name: Resource3
       rect:
         serializedVersion: 2
-        x: 1251
-        y: 564
+        x: 1693
+        y: 794
         width: 59
         height: 63
       alignment: 9
@@ -1138,8 +1183,8 @@ TextureImporter:
       name: icon_TimeChest
       rect:
         serializedVersion: 2
-        x: 869
-        y: 623
+        x: 1190
+        y: 419
         width: 106
         height: 35
       alignment: 9
@@ -1152,8 +1197,8 @@ TextureImporter:
       name: question_button
       rect:
         serializedVersion: 2
-        x: 1300
-        y: 420
+        x: 1753
+        y: 794
         width: 58
         height: 63
       alignment: 9
@@ -1166,8 +1211,8 @@ TextureImporter:
       name: header_back
       rect:
         serializedVersion: 2
-        x: 1361
-        y: 238
+        x: 376
+        y: 795
         width: 44
         height: 83
       alignment: 9
@@ -1180,8 +1225,8 @@ TextureImporter:
       name: progressbar_back
       rect:
         serializedVersion: 2
-        x: 806
-        y: 978
+        x: 201
+        y: 981
         width: 82
         height: 42
       alignment: 9
@@ -1194,8 +1239,8 @@ TextureImporter:
       name: progressbar_chest
       rect:
         serializedVersion: 2
-        x: 990
-        y: 560
+        x: 1620
+        y: 745
         width: 61
         height: 55
       alignment: 9
@@ -1208,8 +1253,8 @@ TextureImporter:
       name: quest_back
       rect:
         serializedVersion: 2
-        x: 1399
-        y: 162
+        x: 1757
+        y: 727
         width: 54
         height: 62
       alignment: 9
@@ -1222,8 +1267,8 @@ TextureImporter:
       name: collect_done
       rect:
         serializedVersion: 2
-        x: 1434
-        y: 73
+        x: 1772
+        y: 858
         width: 57
         height: 57
       alignment: 9
@@ -1236,8 +1281,8 @@ TextureImporter:
       name: bubbleArrow
       rect:
         serializedVersion: 2
-        x: 1461
-        y: 0
+        x: 376
+        y: 879
         width: 49
         height: 66
       alignment: 9
@@ -1250,8 +1295,8 @@ TextureImporter:
       name: ramka_item_not_active_back_not_active
       rect:
         serializedVersion: 2
-        x: 983
-        y: 268
+        x: 376
+        y: 946
         width: 50
         height: 53
       alignment: 9
@@ -1264,8 +1309,8 @@ TextureImporter:
       name: back_active
       rect:
         serializedVersion: 2
-        x: 1189
-        y: 878
+        x: 1688
+        y: 416
         width: 50
         height: 52
       alignment: 9
@@ -1275,11 +1320,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: red_button_push
+      name: disable_button
       rect:
         serializedVersion: 2
-        x: 1193
-        y: 805
+        x: 1688
+        y: 469
         width: 48
         height: 53
       alignment: 9
@@ -1292,8 +1337,22 @@ TextureImporter:
       name: red_button
       rect:
         serializedVersion: 2
-        x: 1189
-        y: 931
+        x: 1688
+        y: 523
+        width: 48
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 23, y: 30, z: 23, w: 21}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: red_button_push
+      rect:
+        serializedVersion: 2
+        x: 1737
+        y: 469
         width: 48
         height: 53
       alignment: 9
@@ -1306,22 +1365,8 @@ TextureImporter:
       name: blue_button
       rect:
         serializedVersion: 2
-        x: 1238
-        y: 931
-        width: 48
-        height: 53
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 23, y: 30, z: 23, w: 21}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: orange_button_push
-      rect:
-        serializedVersion: 2
-        x: 1240
-        y: 859
+        x: 1737
+        y: 523
         width: 48
         height: 53
       alignment: 9
@@ -1334,8 +1379,8 @@ TextureImporter:
       name: green_button
       rect:
         serializedVersion: 2
-        x: 1287
-        y: 913
+        x: 1755
+        y: 577
         width: 48
         height: 53
       alignment: 9
@@ -1348,8 +1393,22 @@ TextureImporter:
       name: green_button_push
       rect:
         serializedVersion: 2
-        x: 1287
-        y: 967
+        x: 1759
+        y: 631
+        width: 48
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 23, y: 30, z: 23, w: 21}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: orange_button_push
+      rect:
+        serializedVersion: 2
+        x: 1627
+        y: 88
         width: 48
         height: 53
       alignment: 9
@@ -1362,22 +1421,8 @@ TextureImporter:
       name: orange_button
       rect:
         serializedVersion: 2
-        x: 1194
-        y: 693
-        width: 48
-        height: 53
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 23, y: 30, z: 23, w: 21}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: disable_button
-      rect:
-        serializedVersion: 2
-        x: 1194
-        y: 747
+        x: 1627
+        y: 142
         width: 48
         height: 53
       alignment: 9
@@ -1390,8 +1435,8 @@ TextureImporter:
       name: blue_button_push
       rect:
         serializedVersion: 2
-        x: 1242
-        y: 801
+        x: 1627
+        y: 196
         width: 48
         height: 53
       alignment: 9
@@ -1404,8 +1449,8 @@ TextureImporter:
       name: '!'
       rect:
         serializedVersion: 2
-        x: 1097
-        y: 972
+        x: 1627
+        y: 250
         width: 48
         height: 48
       alignment: 9
@@ -1418,8 +1463,8 @@ TextureImporter:
       name: progress_line
       rect:
         serializedVersion: 2
-        x: 853
-        y: 322
+        x: 1539
+        y: 993
         width: 113
         height: 20
       alignment: 9
@@ -1432,8 +1477,8 @@ TextureImporter:
       name: Charger5
       rect:
         serializedVersion: 2
-        x: 1052
-        y: 570
+        x: 1676
+        y: 88
         width: 43
         height: 47
       alignment: 9
@@ -1446,8 +1491,8 @@ TextureImporter:
       name: green_arrow
       rect:
         serializedVersion: 2
-        x: 1146
-        y: 972
+        x: 1713
+        y: 0
         width: 42
         height: 48
       alignment: 9
@@ -1460,8 +1505,8 @@ TextureImporter:
       name: ramka_item_active
       rect:
         serializedVersion: 2
-        x: 1104
-        y: 227
+        x: 1374
+        y: 128
         width: 48
         height: 40
       alignment: 9
@@ -1474,8 +1519,8 @@ TextureImporter:
       name: ramka_item_active_back_not_active
       rect:
         serializedVersion: 2
-        x: 1034
-        y: 268
+        x: 284
+        y: 981
         width: 44
         height: 41
       alignment: 9
@@ -1485,13 +1530,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: Charger2
+      name: minibubble_arrow
       rect:
         serializedVersion: 2
-        x: 1289
-        y: 855
-        width: 39
-        height: 46
+        x: 329
+        y: 981
+        width: 46
+        height: 39
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1499,13 +1544,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: minibubble_arrow
+      name: Charger2
       rect:
         serializedVersion: 2
-        x: 1243
-        y: 693
-        width: 46
-        height: 39
+        x: 1676
+        y: 136
+        width: 39
+        height: 46
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1516,8 +1561,8 @@ TextureImporter:
       name: Charger3
       rect:
         serializedVersion: 2
-        x: 1266
-        y: 628
+        x: 1676
+        y: 183
         width: 42
         height: 42
       alignment: 9
@@ -1530,8 +1575,8 @@ TextureImporter:
       name: mol
       rect:
         serializedVersion: 2
-        x: 1243
-        y: 733
+        x: 1759
+        y: 685
         width: 43
         height: 41
       alignment: 9
@@ -1544,8 +1589,8 @@ TextureImporter:
       name: back_not_active
       rect:
         serializedVersion: 2
-        x: 1189
-        y: 985
+        x: 1803
+        y: 685
         width: 47
         height: 37
       alignment: 9
@@ -1555,11 +1600,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: Charger6
+      name: Charger1
       rect:
         serializedVersion: 2
-        x: 1321
-        y: 238
+        x: 1716
+        y: 136
         width: 39
         height: 39
       alignment: 9
@@ -1569,11 +1614,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: Charger1
+      name: Charger6
       rect:
         serializedVersion: 2
-        x: 1245
-        y: 281
+        x: 1720
+        y: 49
         width: 39
         height: 39
       alignment: 9
@@ -1586,8 +1631,8 @@ TextureImporter:
       name: Charger4
       rect:
         serializedVersion: 2
-        x: 1237
-        y: 985
+        x: 1756
+        y: 0
         width: 35
         height: 38
       alignment: 9
@@ -1600,8 +1645,8 @@ TextureImporter:
       name: attack_back
       rect:
         serializedVersion: 2
-        x: 1202
-        y: 405
+        x: 1653
+        y: 988
         width: 36
         height: 35
       alignment: 9
@@ -1614,8 +1659,8 @@ TextureImporter:
       name: shadow_button
       rect:
         serializedVersion: 2
-        x: 1164
-        y: 323
+        x: 1720
+        y: 89
         width: 30
         height: 41
       alignment: 9
@@ -1628,8 +1673,8 @@ TextureImporter:
       name: icon_castle_round_items
       rect:
         serializedVersion: 2
-        x: 1203
-        y: 193
+        x: 1491
+        y: 97
         width: 38
         height: 28
       alignment: 9
@@ -1642,8 +1687,8 @@ TextureImporter:
       name: arr
       rect:
         serializedVersion: 2
-        x: 1287
-        y: 733
+        x: 1751
+        y: 89
         width: 31
         height: 34
       alignment: 9
@@ -1656,8 +1701,8 @@ TextureImporter:
       name: done_line
       rect:
         serializedVersion: 2
-        x: 0
-        y: 993
+        x: 1618
+        y: 878
         width: 32
         height: 26
       alignment: 9
@@ -1670,8 +1715,8 @@ TextureImporter:
       name: forward_tap
       rect:
         serializedVersion: 2
-        x: 1164
-        y: 365
+        x: 1651
+        y: 878
         width: 34
         height: 23
       alignment: 9
@@ -1684,8 +1729,8 @@ TextureImporter:
       name: progress
       rect:
         serializedVersion: 2
-        x: 1043
-        y: 128
+        x: 884
+        y: 992
         width: 32
         height: 24
       alignment: 9
@@ -1698,8 +1743,8 @@ TextureImporter:
       name: back_tap
       rect:
         serializedVersion: 2
-        x: 33
-        y: 993
+        x: 823
+        y: 995
         width: 33
         height: 23
       alignment: 9
@@ -1712,8 +1757,8 @@ TextureImporter:
       name: list
       rect:
         serializedVersion: 2
-        x: 981
-        y: 720
+        x: 1159
+        y: 261
         width: 18
         height: 31
       alignment: 9
@@ -1726,8 +1771,8 @@ TextureImporter:
       name: attack_back_arrow
       rect:
         serializedVersion: 2
-        x: 1289
-        y: 171
+        x: 1428
+        y: 743
         width: 21
         height: 21
       alignment: 9
@@ -1740,8 +1785,8 @@ TextureImporter:
       name: forward_back
       rect:
         serializedVersion: 2
-        x: 1076
-        y: 128
+        x: 1529
+        y: 512
         width: 15
         height: 23
       alignment: 9
@@ -1754,8 +1799,8 @@ TextureImporter:
       name: galka
       rect:
         serializedVersion: 2
-        x: 1161
-        y: 552
+        x: 1431
+        y: 537
         width: 10
         height: 12
       alignment: 9
