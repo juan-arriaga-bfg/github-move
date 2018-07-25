@@ -6,7 +6,7 @@
     public override bool IsMatchable()
     {
         if (base.IsMatchable() == false) return false;
-        if (chest != null) return chest.State == ChestState.Close;
+        if (chest != null) return !chest.CheckStorage();
         
         chestPiece = Context.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
 
@@ -16,6 +16,6 @@
             
         if (chest == null) return false;
 
-        return chest.State == ChestState.Close;
+        return !chest.CheckStorage();
     }
 }

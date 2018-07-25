@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum ChestState
@@ -88,6 +89,12 @@ public class Chest
 
             chestState = value;
         }
+    }
+
+    public bool CheckStorage()
+    {
+        var rewardCount = Reward.Values.Sum();
+        return rewardCount < def.PieceAmount;
     }
 
     public void SetStartTime(DateTime time)

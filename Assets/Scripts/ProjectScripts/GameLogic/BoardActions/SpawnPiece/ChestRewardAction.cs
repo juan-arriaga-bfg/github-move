@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class ChestRewardAction : IBoardAction
 	public BoardPosition From { get; set; }
 	public Dictionary<int, int> Pieces = new Dictionary<int, int>();
 	public IBoardAction OnComplete;
+	public Action OnCompleteAction;
 	
 	public bool IsAddCollection = false;
 
@@ -47,13 +49,11 @@ public class ChestRewardAction : IBoardAction
 
 			var pieceType = rewardKey;
 			
-			//for (var i = 0; i < reward.Value; i++)
 			while(Pieces[rewardKey] > 0)
 			{
 				if(free.Count == 0) break;
 				
 				Pieces[rewardKey]--;
-				count--;
 				
 				var pos = free[0];
 				var piece = gameBoardController.CreatePieceFromType(pieceType);
@@ -87,12 +87,13 @@ public class ChestRewardAction : IBoardAction
 			{
 				gameBoardController.BoardLogic.UnlockCell(pair.Key, this);
 			}
-			
-			if(count == 0)
-				if(OnComplete != null) gameBoardController.ActionExecutor.AddAction(OnComplete);
+
+			if (OnCompleteAction != null) OnCompleteAction();
+			if (OnComplete != null) gameBoardController.ActionExecutor.AddAction(OnComplete);
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);
+		
 		
 		return true;
 	}
