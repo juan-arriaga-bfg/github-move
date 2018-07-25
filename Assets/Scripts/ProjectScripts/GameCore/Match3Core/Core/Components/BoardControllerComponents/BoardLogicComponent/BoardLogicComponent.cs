@@ -367,6 +367,20 @@ public class BoardLogicComponent : ECSEntity,
         return true;
     }
 
+    private void RevertMulticellularMove(Piece piece, List<BoardPosition> mask, BoardPosition from, BoardPosition to,
+        int currentElement)
+    {
+        for (int i = currentElement-1; i > 0; i--)
+        {
+            var maskPos = mask[i];
+            var targetPos = maskPos + to;
+            var sourcePos = maskPos + from;
+
+            RemovePieceFromBoardSilent(targetPos);
+            AddPieceToBoardSilent(sourcePos.X, sourcePos.Y, piece);
+        }
+    }
+
     public virtual bool MovePieceFromTo(BoardPosition from, BoardPosition to)
     {
         var fromPiece = GetPieceAt(from);
@@ -374,6 +388,32 @@ public class BoardLogicComponent : ECSEntity,
 
         if (fromPiece == null || toPiece != null) return false;
 
+        var multicellular =
+            fromPiece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
+        if (multicellular != null)
+        {
+            for (int i = 0; i < multicellular.Mask.Count; i++)
+            {
+                var maskPos = multicellular.Mask[i];
+                var targetPos = maskPos + to;
+                var sourcePos = maskPos + from;
+
+                if (!AddPieceToBoardSilent(targetPos.X, targetPos.Y, fromPiece) || !RemovePieceFromBoardSilent(sourcePos))
+                {
+                    RevertMulticellularMove(fromPiece, multicellular.Mask, from, to, i);
+                    return false;
+                }
+            }
+            
+            var observer = fromPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+            if (observer != null)
+            {
+                observer.OnMovedFromTo(from, to);
+            }
+
+            return true;
+        }
+        
         if (AddPieceToBoardSilent(to.X, to.Y, fromPiece) && RemovePieceFromBoardSilent(from))
         {
             var observer = fromPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
