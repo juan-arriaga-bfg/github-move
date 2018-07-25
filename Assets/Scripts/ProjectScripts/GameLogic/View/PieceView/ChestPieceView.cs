@@ -71,8 +71,8 @@ public class ChestPieceView : PieceBoardElementView
         if(chestComponent == null || chestComponent.Chest == null) return;
 
         var isStorage = chestComponent.Chest.CheckStorage();
-        SetBackLight(isStorage);
         SetHighlight(isStorage);
+        SetBackLight(isStorage);
         
         var isOpen = chestComponent.Chest.State == ChestState.Open;
         
@@ -83,6 +83,9 @@ public class ChestPieceView : PieceBoardElementView
 
     public void SetBackLight(bool active = true)
     {
+        if (backlight == null && !active)
+            return;
+        
         if (backlight != null || CreateBackLight())
         {
             backlight.gameObject.SetActive(active);
@@ -92,6 +95,9 @@ public class ChestPieceView : PieceBoardElementView
     
     private void SetHighlight(bool active = true)
     {
+        if (backlight == null && !active)
+            return;
+        
         if (hightlight != null || CreateHighlight())
         {
             hightlight.gameObject.SetActive(active);
@@ -137,10 +143,10 @@ public class ChestPieceView : PieceBoardElementView
     {
         if (sprite == null)
             return false;
-
-        var backlightLocal = Instantiate(sprite);
-        backlightLocal.transform.SetParent(sprite.transform);
-        backlightLocal.transform.localPosition = Vector3.zero;
+        
+        var backlightObject = Instantiate(sprite.gameObject, transform);
+        backlightObject.transform.position = sprite.gameObject.transform.position;
+        var backlightLocal = backlightObject.GetComponent<SpriteRenderer>();
         backlightLocal.name = "_backlight";
         if(backlightMaterial != null)
             backlightLocal.material = backlightMaterial;
@@ -155,10 +161,10 @@ public class ChestPieceView : PieceBoardElementView
     {
         if (sprite == null)
             return false;
-
-        var highlightLocal = Instantiate(sprite);
-        highlightLocal.transform.SetParent(sprite.transform);
-        highlightLocal.transform.localPosition = Vector3.zero;
+        
+        var highlightObject = Instantiate(sprite.gameObject, transform);
+        highlightObject.transform.position = sprite.gameObject.transform.position;
+        var highlightLocal = highlightObject.GetComponent<SpriteRenderer>();
         highlightLocal.name = "_highlight";
         if(hightlightMaterial != null)
             highlightLocal.material = hightlightMaterial;
