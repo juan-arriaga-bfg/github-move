@@ -34,9 +34,9 @@ public class HintCooldownComponent : ECSEntity
 		context = entity as BoardController;
 		RegisterComponent(timer);
 
-		chestsId = PieceType.GetIdByFilter(PieceTypeFilter.Chest);
-		minesId = PieceType.GetIdByFilter(PieceTypeFilter.Mine);
-		obstaclesId = PieceType.GetIdByFilter(PieceTypeFilter.Obstacle);
+		chestsId = PieceType.GetIdsByFilter(PieceTypeFilter.Chest);
+		minesId = PieceType.GetIdsByFilter(PieceTypeFilter.Mine);
+		obstaclesId = PieceType.GetIdsByFilter(PieceTypeFilter.Obstacle);
 		
 		Step(HintType.Obstacle);
 	}
