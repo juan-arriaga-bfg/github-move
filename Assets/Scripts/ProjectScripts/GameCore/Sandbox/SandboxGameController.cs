@@ -82,7 +82,7 @@ public class SandboxGameController : MonoBehaviour
         boardController.States.AddState(SessionBoardStateComponent.ComponentGuid);
         
         boardController.Init(new PieceBuildersBuilder().Build());
-        
+
         boardController.BoardDef.SectorsGridView = boardController.RendererContext.GenerateField
         (
             boardController.BoardDef.Width,
