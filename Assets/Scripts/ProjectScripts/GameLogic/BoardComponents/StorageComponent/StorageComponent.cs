@@ -71,6 +71,8 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         if (item.IsStart == false)
         {
             item.StartTime = DateTime.UtcNow.ConvertToUnixTime();
+            Filling = Mathf.Min(item.Filling, Capacity);
+            return true;
         }
         
         DateTime now;
