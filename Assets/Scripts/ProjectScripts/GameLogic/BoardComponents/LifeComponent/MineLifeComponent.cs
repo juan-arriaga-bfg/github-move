@@ -15,7 +15,7 @@ public class MineLifeComponent : StorageLifeComponent
     
     public override string Key
     {
-        get { return string.Format("{0}_{1}", thisContext.PieceType, def.Position); }
+        get { return def.Position.ToSaveString(); }
     }
 
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
