@@ -1,10 +1,13 @@
-﻿public class MatchableChestComponent : MatchablePieceComponent
+﻿using UnityEngine;
+
+public class MatchableChestComponent : MatchablePieceComponent
 {
     private Chest chest;
     private ChestPieceComponent chestPiece;
     
     public override bool IsMatchable()
     {
+        Debug.Log("Check chest matchable");
         if (base.IsMatchable() == false) return false;
         if (chest != null) return !chest.CheckStorage();
         

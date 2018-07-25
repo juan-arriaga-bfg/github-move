@@ -43,11 +43,11 @@ public class ChestPieceView : PieceBoardElementView
     {
         if (backlight != null)
         {
-            Destroy(backlight);
+            Destroy(backlight.gameObject);
             
         }
         if(hightlight != null)
-            Destroy(hightlight);
+            Destroy(hightlight.gameObject);
             
         chestComponent.Timer.OnStop -= UpdateView;
         chestComponent.Timer.OnComplete -= UpdateView;
@@ -138,7 +138,8 @@ public class ChestPieceView : PieceBoardElementView
         if (sprite == null)
             return false;
 
-        var backlightLocal = Instantiate(sprite, sprite.transform);
+        var backlightLocal = Instantiate(sprite);
+        backlightLocal.transform.SetParent(sprite.transform);
         backlightLocal.transform.localPosition = Vector3.zero;
         backlightLocal.name = "_backlight";
         if(backlightMaterial != null)
@@ -155,7 +156,8 @@ public class ChestPieceView : PieceBoardElementView
         if (sprite == null)
             return false;
 
-        var highlightLocal = Instantiate(sprite, sprite.transform);
+        var highlightLocal = Instantiate(sprite);
+        highlightLocal.transform.SetParent(sprite.transform);
         highlightLocal.transform.localPosition = Vector3.zero;
         highlightLocal.name = "_highlight";
         if(hightlightMaterial != null)
