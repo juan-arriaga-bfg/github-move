@@ -120,6 +120,7 @@ public class FieldControllerComponent : IECSComponent
 
     private void CreateTown()
     {
+        return;
         var positions = new List<BoardPosition>();
         
         var left = new BoardPosition(17, 7, -1);
