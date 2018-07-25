@@ -6,7 +6,7 @@
       "Currency": "Crystals",
       "Amount": 1
     },
-    "PieceAmount": 3,
+    "PieceAmount": 4,
     "PieceWeights": [
       {
         "Uid": "A1",
@@ -42,13 +42,13 @@
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 0,
+        "Weight": 5,
         "Override": true
       },
       {
         "Uid": "A2",
         "Weight": 20,
-        "Override": false
+        "Override": true
       },
       {
         "Uid": "B2",
@@ -401,7 +401,7 @@
       },
       {
         "Uid": "C2",
-        "Weight": 20
+        "Weight": 7
       }
     ],
     "RandomPieces": [

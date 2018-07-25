@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FieldControllerComponent : IECSComponent
@@ -22,12 +23,15 @@ public class FieldControllerComponent : IECSComponent
         CreateDebug();
 #endif
         
-//        if (fieldDef.Pieces == null)
+        GenerateBorder();
+        var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
+        CutTriangles(maxEdge / 2, Directions.All);
+        
+        if (fieldDef.Pieces == null)
         {
-//            StartField();
-            TestField();
-//            CreateFog();
-//            CreateTown();
+            StartField();
+            CreateFog();
+            CreateTown();
             return;
         }
         
@@ -72,19 +76,7 @@ public class FieldControllerComponent : IECSComponent
     }
 
     private void TestField()
-    {
-        /*context.ActionExecutor.AddAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(18, 8),
-            PieceTypeId = PieceType.Castle1.Id
-        });
-        
-        context.ActionExecutor.AddAction(new CreatePieceAtAction
-        {
-            At = new BoardPosition(21, 4),
-            PieceTypeId = PieceType.MineX.Id
-        });*/
-        
+    {    
         AddPieces(new BoardPosition(4, 10), PieceType.O1.Id, PieceType.O5.Id);
         AddPieces(new BoardPosition(6, 10), PieceType.OX1.Id, PieceType.OX5.Id);
         
@@ -130,12 +122,12 @@ public class FieldControllerComponent : IECSComponent
     {
         var positions = new List<BoardPosition>();
         
-        var left = new BoardPosition(17, 7, -1);
-        var top = new BoardPosition(17, 12, -1);
-        var right = new BoardPosition(22, 12, -1);
-        var bottom = new BoardPosition(22, 7, -1);
+        var left = new BoardPosition(18, 13, -1);
+        var top = new BoardPosition(18, 18, -1);
+        var right = new BoardPosition(23, 18, -1);
+        var bottom = new BoardPosition(23, 13, -1);
 
-        var ignore = new BoardPosition(19, 7, -1);
+        var ignore = new BoardPosition(20, 13, -1);
         
         for (int i = 0; i <= 5; i++)
         {
@@ -173,19 +165,8 @@ public class FieldControllerComponent : IECSComponent
             Positions = positions
         });
         
-        AddBoardElement(R.BrigeLeft, new BoardPosition(19, 7, 1), new Vector3(0.8f, -0.4f));
-        AddBoardElement(R.BrigeRight, new BoardPosition(22, 10, 1), new Vector3(-0.7f, -0.4f));
-        
-//        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadRight, new BoardPosition(12, 7));
-//        context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RoadLeft, new BoardPosition(11, 7));
-        
-//        AddBoardElement(R.BushRight, new BoardPosition(16, 14, 2), new Vector3(-0.8f, 0.4f));
-//        AddBoardElement(R.BushLeft, new BoardPosition(17, 11, 2), new Vector3(-0.1f, 0.5f));
-        
-        /*AddBoardElement(R.Tree, new BoardPosition(19, 7, 2), new Vector3(0f, 0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(20, 7, 2), new Vector3(-0.6f, -0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(12, 7, 2), new Vector3(0f, 0.1f));
-        AddBoardElement(R.Tree, new BoardPosition(10, 8, 2), new Vector3(0f, 0.1f));*/
+        AddBoardElement(R.BrigeLeft, new BoardPosition(20, 13, 1), new Vector3(0.8f, -0.4f));
+        AddBoardElement(R.BrigeRight, new BoardPosition(23, 16, 1), new Vector3(-0.7f, -0.4f));
     }
 
     private void CreateDebug()
@@ -220,4 +201,95 @@ public class FieldControllerComponent : IECSComponent
 
         view.CachedTransform.localPosition += offset;
     }
+    
+    private void CutTriangles(int count, Directions directions)
+    {
+        var width = context.BoardDef.Width;
+        var height = context.BoardDef.Height;
+
+        for (var i = 0; i < count; i++)
+        {
+            for (var j = 0; j < count - i; j++)
+            {
+                if ((directions & Directions.Left) == Directions.Left) 
+                    BlockCell(new BoardPosition(i, j, context.BoardDef.PieceLayer));
+
+                if ((directions & Directions.Right) == Directions.Right)
+                    BlockCell(new BoardPosition(width - 1 - i, height - 1 - j, context.BoardDef.PieceLayer));
+            
+                if ((directions & Directions.Top) == Directions.Top)
+                    BlockCell(new BoardPosition(i, height - 1 - j, context.BoardDef.PieceLayer));
+            
+                if ((directions & Directions.Bottom) == Directions.Bottom)
+                    BlockCell(new BoardPosition(width - 1 - i, j, context.BoardDef.PieceLayer));
+            }    
+        }
+        
+    }
+
+    private void GenerateBorder()
+    {
+        //TODO fix resource problem
+        
+        var width = context.BoardDef.Width;
+        var height = context.BoardDef.Height;
+
+        var maxEdge = Math.Max(width, height);
+        var minEdge = Math.Min(width, height);
+        var cutSize = maxEdge / 2;
+        
+        var typeBottom = cutSize % 2 == 0 ? R.BorderDark : R.BorderLight;
+        var typeLeft = cutSize % 2 == 0 ? R.BorderLightLeft : R.BorderDarkLeft;
+        var typeRight = cutSize % 2 == 0 ? R.BorderLightRight : R.BorderDarkRight;
+
+        var oddShift = (maxEdge) & 1;
+        
+        for (var i = 0; i < cutSize; i++)
+        {
+            var j = cutSize - i;
+            
+            var bottomPos = new BoardPosition(width - 1 - i, j, -2);
+            var leftPos = new BoardPosition(i, j, -2);
+            var rightPos = new BoardPosition(width - 1 - i, height - 1 - j, -2);
+            
+            if(bottomPos.X > minEdge / 2 - 1 && bottomPos.X < width - 1)
+                context.RendererContext.CreateBoardElementAt<BoardElementView>(typeBottom, bottomPos);
+            if(leftPos.X < minEdge / 2 && leftPos.X > oddShift)
+                context.RendererContext.CreateBoardElementAt<BoardElementView>(typeLeft, leftPos);
+            if(rightPos.X > maxEdge/2 - 1 && rightPos.X < width - 1)
+                context.RendererContext.CreateBoardElementAt<BoardElementView>(typeRight, rightPos);
+        }
+        
+    }
+    
+    private void BlockCell(BoardPosition position)
+    {   
+        context.ActionExecutor.AddAction(new LockCellAction
+        {
+            Locker = this,
+            Positions = new List<BoardPosition> {position}
+        });
+    }
+
+    private void AddPiece(BoardPosition position, int piece)
+    {
+        context.ActionExecutor.AddAction(new CreatePieceAtAction
+        {
+            At = position,
+            PieceTypeId = piece
+        });
+    }
+    
+    [Flags]
+    private enum Directions
+    {
+        Left = 0x01,
+        Right = 0x02,
+        Top = 0x04,
+        Bottom = 0x08,
+        LeftAndRight = Left | Right,
+        TopAndBottom = Top | Bottom,
+        All = LeftAndRight | TopAndBottom
+    }
 }
+

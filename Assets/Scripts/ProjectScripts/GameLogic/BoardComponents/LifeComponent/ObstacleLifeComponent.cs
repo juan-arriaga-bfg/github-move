@@ -12,14 +12,6 @@ public class ObstacleLifeComponent : StorageLifeComponent
         }
     }
     
-    public override string Key
-    {
-        get
-        {
-            return string.Format("{0}_{1}", thisContext.PieceType, thisContext.CachedPosition);
-        }
-    }
-    
     public float GetProgressNext
     {
         get { return 1 - (current+1)/(float)HP; }

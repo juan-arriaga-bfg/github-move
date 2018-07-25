@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSystem
 {
@@ -8,11 +10,14 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
     public override int Guid { get { return ComponentGuid; } }
 
     private Dictionary<string, DateTime> completeTimes = new Dictionary<string, DateTime>();
+    private List<string> completeTimesList = new List<string>();
 
     private DateTime then;
+    private BoardController context;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
+        context = entity as BoardController;
         targetItem = ProfileService.Current.Purchases.GetStorageItem(Currency.Worker.Name);
         limitItem = ProfileService.Current.Purchases.GetStorageItem(Currency.WorkerLimit.Name);
         
@@ -77,6 +82,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         foreach (var key in remove)
         {
             completeTimes.Remove(key);
+            completeTimesList.Remove(key);
         }
         
         Add(remove.Count);
@@ -89,6 +95,19 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
 
     public bool Get(string id, int delay)
     {
+        if (CurrencyHellper.IsCanPurchase(targetItem.Currency, 1) == false)
+        {
+            var str = completeTimesList[Random.Range(0, completeTimesList.Count)];
+            var position = BoardPosition.Parse(str);
+            
+            UIErrorWindowController.AddError("All workers are busy!");
+            
+            var hint = context.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
+        
+            if(hint != null) hint.Step(position);
+            return false;
+        }
+        
         var isSuccess = false;
         
         CurrencyHellper.Purchase(Currency.Mine.Name, 1, targetItem.Currency, 1, success =>
@@ -98,6 +117,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
             if (isSuccess == false) return;
             
             completeTimes.Add(id, DateTime.UtcNow.AddSeconds(delay));
+            completeTimesList.Add(id);
         });
         
         return isSuccess;
@@ -108,6 +128,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         if(completeTimes.ContainsKey(id) == false) return;
         
         completeTimes.Remove(id);
+        completeTimesList.Remove(id);
         Add(1);
     }
     

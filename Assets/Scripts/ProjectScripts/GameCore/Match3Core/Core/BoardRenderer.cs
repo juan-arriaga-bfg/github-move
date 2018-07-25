@@ -1038,10 +1038,8 @@ public class BoardRenderer : ECSEntity
             {
                 return GetEmptyPointUp(point.Up, matrix);
             }
-            else
-            {
-                return point;
-            }
+
+            return point;
         }
 
         return point;
@@ -1053,13 +1051,46 @@ public class BoardRenderer : ECSEntity
         viewRoot.localPosition = new Vector3(52f, 61f, 0f);
     }
     
-    public Transform GenerateField(int width, int height, float size, List<string> tiles)
-     {
+    public Transform GenerateField(int width, int height, float size, List<string> tiles, IList<BoardPosition> ignorablePositions = null)
+    {
         var sectorsContainer = new GameObject("Sectors.Container").transform;
         sectorsContainer.localPosition = new Vector3(0f, 0f, 0f);
         sectorsContainer.localRotation = Quaternion.Euler(54.5f, 0f, -45f);
         sectorsContainer.localScale = Vector3.one;
+
+        var sectorsMesh = GenerateMesh(width, height, size, tiles, ignorablePositions);
         
+        var meshGO = new GameObject("_cells");
+        var meshTransform = meshGO.transform;
+        meshTransform.SetParent(sectorsContainer);
+        meshTransform.localPosition = Vector3.zero;
+        meshTransform.localScale = new Vector3(1f, 1f, 1f);
+        meshTransform.localRotation = Quaternion.identity;
+
+        var meshRenderer = meshGO.AddComponent<MeshRenderer>();
+        var meshFilter = meshGO.AddComponent<MeshFilter>();
+
+        
+
+        meshFilter.mesh = sectorsMesh;
+
+        // apply material 
+        var material = new Material(Shader.Find("Sprites/Default"));
+        material.renderQueue = 2000;
+
+        // load texture
+        var tileSprite = IconService.Current.GetSpriteById(tiles[0]);
+        var tileTexture = tileSprite == null ? null : tileSprite.texture;
+        material.mainTexture = tileTexture;
+
+        meshRenderer.material = material;
+
+         return sectorsContainer.transform;
+     }
+
+    private Mesh GenerateMesh(int width, int height, float size, List<string> tiles, IList<BoardPosition> ignorablePositions = null)
+    {
+        ignorablePositions = ignorablePositions ?? new List<BoardPosition>();
         Mesh sectorsMesh = new Mesh();
         var vertices = new List<Vector3>();
         var tris = new List<int>();
@@ -1074,10 +1105,10 @@ public class BoardRenderer : ECSEntity
         {
             for (int y = 0; y < height; y++)
             {
-                // get world positon for sector
+                if (ignorablePositions.Contains(new BoardPosition(x, y)))
+                    continue;
 
                 var fullTile = IconService.Current.GetSpriteById(tiles[0]);
-//                var fullTile = IconService.Current.GetSpriteById(tiles[UnityEngine.Random.Range(0, tiles.Count)]);
 
                 if ((x + y) % 2 == 0)
                 {
@@ -1115,8 +1146,22 @@ public class BoardRenderer : ECSEntity
         sectorsMesh.colors = colors.ToArray();
 
         sectorsMesh.RecalculateBounds();
+
+        return sectorsMesh;
+    }
+
+    public void GenerateBackground(Vector3 position, int width, int height, float size, string backImage)
+    {
+        var sectorsContainer = new GameObject("Background").transform;
+        sectorsContainer.localPosition = position;
+        sectorsContainer.localRotation = Quaternion.Euler(54.5f, 0f, -45f);
+        sectorsContainer.localScale = Vector3.one;
+
+        var fullTile = IconService.Current.GetSpriteById(backImage);
+
+        var mesh = GenerateMesh(width, height, size, new List<string> {backImage, backImage});
         
-        var meshGO = new GameObject("_cells");
+        var meshGO = new GameObject("_background");
         var meshTransform = meshGO.transform;
         meshTransform.SetParent(sectorsContainer);
         meshTransform.localPosition = Vector3.zero;
@@ -1128,21 +1173,17 @@ public class BoardRenderer : ECSEntity
 
         
 
-        meshFilter.mesh = sectorsMesh;
+        meshFilter.mesh = mesh;
 
         // apply material 
         var material = new Material(Shader.Find("Sprites/Default"));
         material.renderQueue = 2000;
 
         // load texture
-        var tileSprite = IconService.Current.GetSpriteById(tiles[0]);
+        var tileSprite = fullTile;
         var tileTexture = tileSprite == null ? null : tileSprite.texture;
         material.mainTexture = tileTexture;
 
         meshRenderer.material = material;
-
-         return sectorsContainer.transform;
-     }
-
-    
+    }
 }

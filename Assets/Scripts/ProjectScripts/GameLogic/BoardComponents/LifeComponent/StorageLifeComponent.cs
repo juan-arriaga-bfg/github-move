@@ -21,7 +21,7 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
     
     public virtual string Key
     {
-        get { return string.Format("{0}_{1}", thisContext.PieceType, 0); }
+        get { return thisContext.CachedPosition.ToSaveString(); }
     }
     
     public virtual void OnAddToBoard(BoardPosition position, Piece context = null)
@@ -60,10 +60,10 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
         
         var isSuccess = false;
 
-        if (CurrencyHellper.IsCanPurchase(Conditions, true) == false) return false;
+        if (CurrencyHellper.IsCanPurchase(Energy, true) == false
+            || thisContext.Context.WorkerLogic.Get(Key, storage.Timer.Delay) == false) return false;
         
         Success();
-        thisContext.Context.WorkerLogic.Get(Key, storage.Timer.Delay);
         
         CurrencyHellper.Purchase(Currency.Damage.Name, 1, Energy, success =>
         {
