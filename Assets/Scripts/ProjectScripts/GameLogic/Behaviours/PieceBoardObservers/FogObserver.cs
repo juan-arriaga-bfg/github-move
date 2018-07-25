@@ -6,13 +6,23 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     private int level;
     private StorageItem storageItem;
     private ViewDefinitionComponent viewDef;
+
+    public RectTransform GetAnchorRect()
+    {
+        throw new System.NotImplementedException();
+    }
     
+    public Vector3 GetAcnhorPosition()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public Camera RenderCamera
     {
         get { return thisContext.Context.BoardDef.ViewCamera; }
     }
     
-    public List<ResourceCarrier> Carriers { get; private set; }
+    public List<IResourceCarrier> Carriers { get; private set; }
     
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
@@ -86,11 +96,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         }
     }
     
-    public void RegisterCarrier(ResourceCarrier carrier)
+    public void RegisterCarrier(IResourceCarrier carrier)
     {
     }
     
-    public void UnRegisterCarrier(ResourceCarrier carrier)
+    public void UnRegisterCarrier(IResourceCarrier carrier)
     {
     }
     

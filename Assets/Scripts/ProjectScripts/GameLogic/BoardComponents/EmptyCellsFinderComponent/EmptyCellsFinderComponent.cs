@@ -108,6 +108,15 @@ public class EmptyCellsFinderComponent: IECSComponent
 
 		return field.Count != 0;
 	}
+
+	public bool CheckFreeSpaceNearPosition(BoardPosition position, int count)
+	{
+		var free = new List<BoardPosition>();
+		if (!FindRandomNearWithPointInCenter(position, free, count))
+			return false;
+
+		return free.Count >= count;
+	}
 	
 	public bool FindAllWithPointInCenter(BoardPosition point, int width, int height, List<BoardPosition> field)
 	{

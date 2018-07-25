@@ -46,15 +46,15 @@ public class BoardManipulatorComponent : ECSEntity,
     {
         return true;
     }
-    
-    public bool IsPersistence
-    {
-        get { return false; }
-    }
 
     public void Execute()
     {
         if (Locker.IsLocked) return;
+    }
+
+    public object GetDependency()
+    {
+        return null;
     }
 
     public virtual LockerComponent Locker

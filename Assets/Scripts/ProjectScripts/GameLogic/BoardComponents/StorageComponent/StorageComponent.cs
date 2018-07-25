@@ -13,7 +13,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     public int Amount;
     public int Capacity;
     public int Filling;
-
+    
     public bool IsTimerShow;
     public bool IsAutoStart = true;
     
@@ -127,7 +127,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     }
 
     public bool Scatter(out int amount, bool isStartNext = true)
-    {
+    {   
         amount = Filling;
         
         if (Filling == 0) return false;

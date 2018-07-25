@@ -82,6 +82,11 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         Add(remove.Count);
     }
 
+    public object GetDependency()
+    {
+        return null;
+    }
+
     public bool Get(string id, int delay)
     {
         var isSuccess = false;
@@ -110,6 +115,4 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
     {
         return targetItem.Amount < limitItem.Amount;
     }
-    
-    public bool IsPersistence { get{ return false; } }
 }

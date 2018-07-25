@@ -34,8 +34,6 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
 //            UIWindowType.ProductionWindow,
         });
         
-        IWUIManager.Instance.CachedTransform.localPosition = new Vector3(0, 100, 0);
-
         // on cache complete
         IWUIManager.Instance.OnUIInited += () =>
         {

@@ -51,6 +51,11 @@ public class ActionHistoryComponent : IECSComponent, IECSSystem
 //        SaveActions();
     }
 
+    public object GetDependency()
+    {
+        return null;
+    }
+
     protected virtual void SaveActions()
     {
 #if UNITY_EDITOR
@@ -80,10 +85,5 @@ public class ActionHistoryComponent : IECSComponent, IECSSystem
         streamWriter.Write(stringBuilder);
         streamWriter.Close();
 #endif
-    }
-    
-    public bool IsPersistence
-    {
-        get { return false; }
     }
 }

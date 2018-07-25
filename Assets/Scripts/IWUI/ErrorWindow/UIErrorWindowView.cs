@@ -8,7 +8,17 @@ public class UIErrorWindowView : IWUIWindowView
 
     private float duration = 2f;
     private int index;
-    
+
+    public override float DefaultDelayOnShow
+    {
+        get { return 0f; }
+    }
+
+    public override float DefaultDelayOnClose
+    {
+        get { return 0f; }
+    }
+
     public override void OnViewShow()
     {
         base.OnViewShow();

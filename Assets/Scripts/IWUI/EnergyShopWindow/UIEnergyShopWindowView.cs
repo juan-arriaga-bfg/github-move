@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class UIEnergyShopWindowView : UIGenericPopupWindowView 
 {
+    [SerializeField] private NSText secondMessage;
+    [SerializeField] private NSText buttonLabel;
+    
     [SerializeField] private GameObject itemPattern;
-    [SerializeField] private ScrollRect scroll;
-    [SerializeField] private RectTransform content;
     
     private List<GameObject> items = new List<GameObject>();
     
@@ -18,6 +19,9 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIEnergyShopWindowModel;
         
         SetTitle(windowModel.Title);
+        SetMessage(windowModel.Message);
+        secondMessage.Text = windowModel.SecondMessage;
+        buttonLabel.Text = windowModel.ButtonText;
         
         var products = windowModel.Products;
         
@@ -29,22 +33,6 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
         }
         
         itemPattern.SetActive(false);
-        content.anchoredPosition = new Vector2(-375, 0);
-        scroll.enabled = false;
-    }
-    
-    public override void OnViewShowCompleted()
-    {
-        base.OnViewShowCompleted();
-
-        DOTween.Kill(content);
-        content.DOAnchorPosX(0, 2.5f)
-            .SetEase(Ease.InOutBack)
-            .SetId(content)
-            .OnComplete(() =>
-            {
-                scroll.enabled = true;
-            });
     }
 
     public override void OnViewClose()
@@ -52,7 +40,6 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
         base.OnViewClose();
         
         var windowModel = Model as UIEnergyShopWindowModel;
-        DOTween.Kill(content);
     }
     
     public override void OnViewCloseCompleted()
@@ -67,5 +54,10 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
         }
         
         items = new List<GameObject>();
+    }
+
+    public void OnClick()
+    {
+        
     }
 }

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class UIEnergyShopItem : MonoBehaviour
 {
+    [SerializeField] private Image icon;
     [SerializeField] private NSText product;
     [SerializeField] private NSText price;
     
@@ -11,8 +13,11 @@ public class UIEnergyShopItem : MonoBehaviour
     {
         this.def = def;
 
-        product.Text = def.Product.ToStringIcon();
-        price.Text = string.Format("Buy for {0}", def.Price.ToStringIcon());
+        icon.sprite = IconService.Current.GetSpriteById(this.def.Uid);
+        icon.SetNativeSize();
+        
+        product.Text = string.Format("{0}: +{1}", def.Product.Currency, def.Product.ToStringIcon(false));
+        price.Text = string.Format("Buy {0}", def.Price.ToStringIcon(false));
     }
 
     public void OnClick()

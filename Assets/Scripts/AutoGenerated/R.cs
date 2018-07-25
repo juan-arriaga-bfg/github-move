@@ -197,4 +197,5 @@ public class R
      public const string BorderLight = "BorderLight";
      public const string BorderLightLeft = "BorderLightLeft";
      public const string BorderLightRight = "BorderLightRight";
+     public const string ResourceCarrier = "ResourceCarrier";
 }

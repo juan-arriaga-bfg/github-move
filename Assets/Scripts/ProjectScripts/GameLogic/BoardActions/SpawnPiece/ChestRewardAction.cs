@@ -14,7 +14,7 @@ public class ChestRewardAction : IBoardAction
 	public BoardPosition From { get; set; }
 	public Dictionary<int, int> Pieces = new Dictionary<int, int>();
 	public IBoardAction OnComplete;
-
+	
 	public bool IsAddCollection = false;
 
 	public bool PerformAction(BoardController gameBoardController)
@@ -25,6 +25,7 @@ public class ChestRewardAction : IBoardAction
 		
 		if (Pieces.Count != 0 && gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From, free, count) == false)
 		{
+			UIErrorWindowController.AddError("Not found free cells");
 			return false;
 		}
 
@@ -38,16 +39,21 @@ public class ChestRewardAction : IBoardAction
 					new CurrencyPair{Currency = collection, Amount = 1});
 			}
 		}
-		
-		foreach (var reward in Pieces)
+
+		var piecesKeys = Pieces.Keys.ToList();
+		foreach (var rewardKey in piecesKeys)
 		{
 			if(free.Count == 0) break;
 
-			var pieceType = reward.Key;
+			var pieceType = rewardKey;
 			
-			for (var i = 0; i < reward.Value; i++)
+			//for (var i = 0; i < reward.Value; i++)
+			while(Pieces[rewardKey] > 0)
 			{
 				if(free.Count == 0) break;
+				
+				Pieces[rewardKey]--;
+				count--;
 				
 				var pos = free[0];
 				var piece = gameBoardController.CreatePieceFromType(pieceType);
@@ -56,13 +62,14 @@ public class ChestRewardAction : IBoardAction
 
 				if (gameBoardController.BoardLogic.AddPieceToBoard(pos.X, pos.Y, piece) == false)
 				{
-					continue;
+					break;
 				}
 				
 				pieces.Add(pos, piece);
 				gameBoardController.BoardLogic.LockCell(pos, this);
 			}
 		}
+
 		
 		gameBoardController.BoardLogic.LockCell(From, this);
 		
@@ -71,7 +78,7 @@ public class ChestRewardAction : IBoardAction
 			From = From,
 			Pieces = pieces
 		};
-
+		
 		animation.OnCompleteEvent += (_) =>
 		{
 			gameBoardController.BoardLogic.UnlockCell(From, this);
@@ -81,11 +88,12 @@ public class ChestRewardAction : IBoardAction
 				gameBoardController.BoardLogic.UnlockCell(pair.Key, this);
 			}
 			
-			if(OnComplete != null) gameBoardController.ActionExecutor.AddAction(OnComplete);
+			if(count == 0)
+				if(OnComplete != null) gameBoardController.ActionExecutor.AddAction(OnComplete);
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);
-
+		
 		return true;
 	}
 }

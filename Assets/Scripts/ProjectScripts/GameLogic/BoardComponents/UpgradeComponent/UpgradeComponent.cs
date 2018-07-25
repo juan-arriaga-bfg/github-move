@@ -5,9 +5,19 @@ public class UpgradeComponent : IECSComponent, IPieceBoardObserver, IResourceCar
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid { get { return ComponentGuid; } }
+
+    public RectTransform GetAnchorRect()
+    {
+        throw new System.NotImplementedException();
+    }
     
+    public Vector3 GetAcnhorPosition()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public Camera RenderCamera { get; private set; }
-    public List<ResourceCarrier> Carriers { get; private set; }
+    public List<IResourceCarrier> Carriers { get; private set; }
     
     private Piece thisContext;
     private CurrencyPair price;
@@ -65,11 +75,11 @@ public class UpgradeComponent : IECSComponent, IPieceBoardObserver, IResourceCar
             thisContext.CachedPosition.Z);
     }
     
-    public void RegisterCarrier(ResourceCarrier carrier)
+    public void RegisterCarrier(IResourceCarrier carrier)
     {
     }
     
-    public void UnRegisterCarrier(ResourceCarrier carrier)
+    public void UnRegisterCarrier(IResourceCarrier carrier)
     {
     }
     

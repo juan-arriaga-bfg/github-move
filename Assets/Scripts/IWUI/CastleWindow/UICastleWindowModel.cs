@@ -96,7 +96,7 @@ public class UICastleWindowModel : IWWindowModel
         {
             if (storage.Scatter(out amount) == false)
             {
-                UIErrorWindowController.AddError("Production of the resource is not complete!");
+                UIErrorWindowController.AddError("Not found free cells");
                 return;
             }
         }

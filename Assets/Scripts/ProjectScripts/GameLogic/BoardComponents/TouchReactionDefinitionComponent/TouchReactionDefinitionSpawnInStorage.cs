@@ -17,6 +17,13 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
 
         int amount;
         
+        
+        if(!piece.Context.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, storage.Filling))
+        {
+            UIErrorWindowController.AddError("Free space not found");
+            return false;
+        }
+        
         if (storage.Scatter(out amount, IsAutoStart) == false)
         {
             UIErrorWindowController.AddError("Production of the resource is not complete!");
@@ -26,11 +33,11 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
         var free = new List<BoardPosition>();
         var positions = new List<BoardPosition>();
 
-        if (piece.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(position, free, amount) == false)
+        if(!piece.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(position, free, amount))
         {
             return false;
         }
-        
+
         foreach (var pos in free)
         {
             positions.Add(pos);

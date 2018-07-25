@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using NUnit.Framework;
-
-public abstract class IgnoreComponent<TIgnore>:IECSComponent
+﻿public abstract class IgnoreComponent<TIgnore>:IECSComponent
 {
     public void OnRegisterEntity(ECSEntity entity)
     {
