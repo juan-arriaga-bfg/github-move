@@ -127,7 +127,7 @@ public class FieldControllerComponent : IECSComponent
         var right = new BoardPosition(23, 18, -1);
         var bottom = new BoardPosition(23, 13, -1);
 
-        var ignore = new BoardPosition(19, 7, -1);
+        var ignore = new BoardPosition(20, 13, -1);
         
         for (int i = 0; i <= 5; i++)
         {

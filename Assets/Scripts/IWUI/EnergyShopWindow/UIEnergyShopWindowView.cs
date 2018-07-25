@@ -59,5 +59,6 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
     public void OnClick()
     {
         
+        
     }
 }

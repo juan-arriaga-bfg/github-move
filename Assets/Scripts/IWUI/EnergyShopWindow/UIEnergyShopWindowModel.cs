@@ -14,7 +14,7 @@ public class UIEnergyShopWindowModel : IWWindowModel
     
     public string SecondMessage
     {
-        get { return "You can get energy for free from:"; }
+        get { return "Get energy for free from:"; }
     }
 
     public string ButtonText

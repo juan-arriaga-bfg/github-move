@@ -100,8 +100,6 @@ public class SandboxGameController : MonoBehaviour
             },
             GenereateIgnorable(boardController)
         );
-
-        
         
         var widthShift = boardController.BoardDef.Width / 4;
         var heightShift = boardController.BoardDef.Height / 4;
@@ -111,8 +109,7 @@ public class SandboxGameController : MonoBehaviour
         var topPoint = boardController.BoardDef.GetSectorCenterWorldPosition(heightShift, boardController.BoardDef.Height - heightShift, 0);
         var bottomPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - heightShift, heightShift, 0);
         
-        var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width/2, boardController.BoardDef.Height/2, boardController.BoardDef.PieceLayer);
-        
+        var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition(19, 14, boardController.BoardDef.PieceLayer);
         
         boardController.Manipulator.CameraManipulator.CurrentCameraSettings.CameraClampRegion = new Rect
         (
