@@ -12,6 +12,10 @@
 
         if (def.Reproduction != null)
         {
+            var typeDef = PieceType.GetDefById(pieceType);
+
+            typeDef.Filter.Add(PieceTypeFilter.Reproduction);
+            
             var observer = new ReproductionPieceComponent {Child = def.Reproduction};
         
             piece.RegisterComponent(observer);
@@ -20,6 +24,10 @@
 
         if (def.SpawnResources != null)
         {
+            var typeDef = PieceType.GetDefById(pieceType);
+
+            typeDef.Filter.Add(PieceTypeFilter.Resource);
+            
             piece.RegisterComponent(new ResourceStorageComponent{Resources = def.SpawnResources});
 		
             piece.RegisterComponent(new TouchReactionComponent()
