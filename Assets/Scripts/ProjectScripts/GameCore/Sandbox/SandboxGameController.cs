@@ -74,8 +74,8 @@ public class SandboxGameController : MonoBehaviour
             UnitSize = 1.8f,
             GlobalPieceScale = 1f,
             ViewCamera = Camera.main,
-            Width = 30,
-            Height = 30,
+            Width = 40,
+            Height = 40,
             Depth = 3,
             PieceLayer = 1
         }); // board settings
