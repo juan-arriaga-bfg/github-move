@@ -120,13 +120,12 @@ public class FieldControllerComponent : IECSComponent
 
     private void CreateTown()
     {
-        return;
         var positions = new List<BoardPosition>();
         
-        var left = new BoardPosition(17, 7, -1);
-        var top = new BoardPosition(17, 12, -1);
-        var right = new BoardPosition(22, 12, -1);
-        var bottom = new BoardPosition(22, 7, -1);
+        var left = new BoardPosition(18, 13, -1);
+        var top = new BoardPosition(18, 18, -1);
+        var right = new BoardPosition(23, 18, -1);
+        var bottom = new BoardPosition(23, 13, -1);
 
         var ignore = new BoardPosition(19, 7, -1);
         
@@ -166,8 +165,8 @@ public class FieldControllerComponent : IECSComponent
             Positions = positions
         });
         
-        AddBoardElement(R.BrigeLeft, new BoardPosition(19, 7, 1), new Vector3(0.8f, -0.4f));
-        AddBoardElement(R.BrigeRight, new BoardPosition(22, 10, 1), new Vector3(-0.7f, -0.4f));
+        AddBoardElement(R.BrigeLeft, new BoardPosition(20, 13, 1), new Vector3(0.8f, -0.4f));
+        AddBoardElement(R.BrigeRight, new BoardPosition(23, 16, 1), new Vector3(-0.7f, -0.4f));
     }
 
     private void CreateDebug()
