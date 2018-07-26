@@ -26,7 +26,9 @@
         {
             var typeDef = PieceType.GetDefById(pieceType);
 
-            typeDef.Filter.Add(PieceTypeFilter.Resource);
+            typeDef.Filter = typeDef.Filter | PieceTypeFilter.Resource;
+            
+            if(def.SpawnResources.Currency == Currency.Energy.Name) typeDef.Filter = typeDef.Filter | PieceTypeFilter.Energy;
             
             piece.RegisterComponent(new ResourceStorageComponent{Resources = def.SpawnResources});
 		

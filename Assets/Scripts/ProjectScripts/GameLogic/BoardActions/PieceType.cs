@@ -13,7 +13,8 @@ public enum PieceTypeFilter
     Chest = 16,
     Mine = 32,
     Resource = 64,
-    Reproduction = 128
+    Energy = 128,
+    Reproduction = 256
 }
 
 public partial class PieceTypeDef
@@ -47,7 +48,7 @@ public static partial class PieceType
         return defs.ContainsKey(id) == false ? defs[PieceType.None.Id] : defs[id];
     }
 
-    public static List<int> GetIdByFilter(PieceTypeFilter filter)
+    public static List<int> GetIdsByFilter(PieceTypeFilter filter)
     {
         var result = new List<int>();
 

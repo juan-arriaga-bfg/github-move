@@ -2,7 +2,7 @@
 using System.Text;
 using UnityEngine;
 
-public static class EnumExtensions
+public static class EnumExtentions
 {
     //checks to see if an enumerated value contains a type
     public static bool Has<T>(this System.Enum type, T value)

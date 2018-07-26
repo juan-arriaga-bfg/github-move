@@ -64,6 +64,7 @@ public class ChestsDataManager : IECSComponent, IDataManager, IDataLoader<List<C
                     
                     chest.State = item.State;
                     chest.SetStartTime(item.StartTime);
+                    chest.Reward = item.Reward;
                     
                     ChestsOnBoard.Add(item.Position, chest);
 
