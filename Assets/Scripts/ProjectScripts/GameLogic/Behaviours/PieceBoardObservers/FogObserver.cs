@@ -63,6 +63,9 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         AddResourceView.Show(def.GetCenter(thisContext.Context), def.Reward);
         GameDataService.Current.FogsManager.RemoveFog(key);
         
+        var view = viewDef.AddView(ViewType.FogState);
+        thisContext.Context.HintCooldown.RemoweView(view);
+        
         if(def.Pieces != null)
         {
             foreach (var piece in def.Pieces)
@@ -113,6 +116,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         
         view.Priority = -1;
         view.Change(true);
+        thisContext.Context.HintCooldown.AddView(view);
     }
     
     public string GetResourceId()

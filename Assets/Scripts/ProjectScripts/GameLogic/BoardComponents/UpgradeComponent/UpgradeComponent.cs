@@ -95,7 +95,7 @@ public class UpgradeComponent : IECSComponent, IPieceBoardObserver, IResourceCar
             return;
         }
         
-        thisContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
+        thisContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
         viewDef.AddView(ViewType.SimpleUpgrade).Change(true);
         isShow = true;
     }

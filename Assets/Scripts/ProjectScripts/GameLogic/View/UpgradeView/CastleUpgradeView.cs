@@ -38,7 +38,7 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 		
 		if(upgrade == null) return;
 		
-		Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceMenu);
+		Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
 		
 		foreach (var quest in upgrade.Prices)
 		{
@@ -69,7 +69,7 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 		
 		patern.SetActive(true);
 		
-		Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceMenu);
+		Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
 	}
 	
 	public void Upgrade()
@@ -82,7 +82,7 @@ public class CastleUpgradeView : UIBoardView, IBoardEventListener
 	
 	public void OnBoardEvent(int code, object context)
 	{
-		if(code != GameEventsCodes.ClosePieceMenu || upgrade.Check() || context is Piece && (Piece)context == Context) return;
+		if(code != GameEventsCodes.ClosePieceUI || upgrade.Check() || context is Piece && (Piece)context == Context) return;
 		
 		Change(false);
 	}

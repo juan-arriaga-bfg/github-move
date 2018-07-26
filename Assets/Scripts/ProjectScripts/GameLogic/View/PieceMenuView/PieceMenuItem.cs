@@ -18,7 +18,7 @@ public class PieceMenuItem : MonoBehaviour
 
     public void OnClick()
     {
-        piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
+        piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
         definition.Make(piece.CachedPosition, piece);
     }
 }

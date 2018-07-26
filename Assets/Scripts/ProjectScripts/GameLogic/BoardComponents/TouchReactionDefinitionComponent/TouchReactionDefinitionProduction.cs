@@ -6,7 +6,7 @@
     
     public override bool Make(BoardPosition position, Piece piece)
     {
-        piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, Production);
+        piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, Production);
 
         if (Production.IsActive == false)
         {
