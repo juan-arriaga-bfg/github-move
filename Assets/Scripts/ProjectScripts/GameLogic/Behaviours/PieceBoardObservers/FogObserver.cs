@@ -60,6 +60,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         
         if(def == null) return;
         
+        AddResourceView.Show(def.GetCenter(thisContext.Context), def.Reward);
         GameDataService.Current.FogsManager.RemoveFog(key);
         
         if(def.Pieces != null)
