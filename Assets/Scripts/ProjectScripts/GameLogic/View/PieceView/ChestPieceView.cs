@@ -31,12 +31,7 @@ public class ChestPieceView : PieceBoardElementView
         chestComponent.Timer.OnComplete += UpdateView;
         
         UpdateView();
-        
-        var hint = Context.Context.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
-        
-        if(hint == null) return;
-        
-        hint.Step(HintType.CloseChest);
+        Context.Context.HintCooldown.Step(HintType.CloseChest);
     }
 
     public override void ResetViewOnDestroy()

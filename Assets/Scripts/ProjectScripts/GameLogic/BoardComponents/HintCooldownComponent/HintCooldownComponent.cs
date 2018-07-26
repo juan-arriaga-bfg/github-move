@@ -21,7 +21,7 @@ public class HintCooldownComponent : ECSEntity
 		get { return ComponentGuid; }
 	}
 	
-	private TimerComponent timer = new TimerComponent();
+	private readonly TimerComponent timer = new TimerComponent();
 
 	private BoardController context;
 

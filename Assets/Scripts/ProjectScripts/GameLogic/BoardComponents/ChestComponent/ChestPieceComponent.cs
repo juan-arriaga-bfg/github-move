@@ -91,10 +91,6 @@ public class ChestPieceComponent : IECSComponent, IPieceBoardObserver, ITimerCom
             GameDataService.Current.ChestsManager.ActiveChest = null;
         }
         
-        var hint = contextPiece.Context.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
-        
-        if(hint == null) return;
-        
-        hint.Step(HintType.OpenChest);
+        contextPiece.Context.HintCooldown.Step(HintType.OpenChest);
     }
 }

@@ -107,11 +107,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         {
             if (position == null || position.Value.X == 0 && position.Value.Y == 0) return;
             
-            var hint = board.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
-        
-            if(hint == null) return;
-        
-            hint.Step(position.Value);
+            board.HintCooldown.Step(position.Value);
         });
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);

@@ -6,6 +6,7 @@ public class UIBoardView : BoardElementView
     [SerializeField] protected Transform viewTransform;
     [SerializeField] protected CanvasGroup group;
 
+    protected ViewAnimationUid attentionUid = new ViewAnimationUid();
     protected ViewDefinitionComponent controller;
     protected Piece Context;
 
@@ -79,6 +80,7 @@ public class UIBoardView : BoardElementView
         if (isShow == false)
         {
             IsShow = Priority < 0;
+            DOTween.Kill(attentionUid);
             UpdateVisibility(false);
             return;
         }
@@ -88,6 +90,17 @@ public class UIBoardView : BoardElementView
 
     protected virtual void UpdateView()
     {
+    }
+
+    public virtual void Attention()
+    {
+        DOTween.Kill(attentionUid);
+        
+        var sequence = DOTween.Sequence().SetId(attentionUid);
+        
+        sequence.Append(viewTransform.DOScale(new Vector3(1.2f, 0.7f, 1f), 0.1f));
+        sequence.Append(viewTransform.DOScale(new Vector3(0.7f, 1.2f, 1f), 0.1f));
+        sequence.Append(viewTransform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack));
     }
     
     public virtual void UpdateVisibility(bool isVisible)
