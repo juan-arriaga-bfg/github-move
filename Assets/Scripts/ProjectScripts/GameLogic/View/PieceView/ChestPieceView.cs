@@ -65,11 +65,10 @@ public class ChestPieceView : PieceBoardElementView
         base.OnDragEnd(boardPos, worldPos);
         chestComponent.TimerViewChange(true);
     }
-
+    
     public override void UpdateView()
     {   
         if(chestComponent == null || chestComponent.Chest == null) return;
-
         var isStorage = chestComponent.Chest.CheckStorage();
         SetHighlight(isStorage);
         SetBackLight(isStorage);
@@ -103,8 +102,6 @@ public class ChestPieceView : PieceBoardElementView
             hightlight.gameObject.SetActive(active);
             HightlightAnimation(active);
         }
-            
-       
     }
 
     private const float duration = 0.5f;
@@ -147,13 +144,19 @@ public class ChestPieceView : PieceBoardElementView
         var backlightObject = Instantiate(sprite.gameObject, transform);
         backlightObject.transform.position = sprite.gameObject.transform.position;
         var backlightLocal = backlightObject.GetComponent<SpriteRenderer>();
+        
         backlightLocal.name = "_backlight";
         if(backlightMaterial != null)
             backlightLocal.material = backlightMaterial;
 
-        backlightLocal.sortingOrder = 0;
+        backlightLocal.sortingOrder = sprite.sortingOrder - 1;
 
-        this.backlight = backlightLocal;
+        this.backlight = backlightLocal; 
+        
+        AddLayerToCache(backlightLocal);
+        var baclightRendererLayer = backlightObject.GetComponent<RendererLayer>();
+        baclightRendererLayer.SortingOrderOffset = 0;
+        
         return true;
     }
 
@@ -170,7 +173,14 @@ public class ChestPieceView : PieceBoardElementView
             highlightLocal.material = hightlightMaterial;
 
         highlightLocal.sortingOrder = sprite.sortingOrder + 1;
+        
         this.hightlight = highlightLocal;
+
+        AddLayerToCache(highlightLocal);
+        
+        var highlightRendererLayer = highlightObject.GetComponent<RendererLayer>();
+        highlightRendererLayer.SortingOrderOffset = 2;
+        
         return true;
     }
 }

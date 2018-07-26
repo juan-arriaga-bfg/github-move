@@ -7,7 +7,6 @@ public class MatchableChestComponent : MatchablePieceComponent
     
     public override bool IsMatchable()
     {
-        Debug.Log("Check chest matchable");
         if (base.IsMatchable() == false) return false;
         if (chest != null) return !chest.CheckStorage();
         
