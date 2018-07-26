@@ -31,7 +31,7 @@ public class FieldControllerComponent : IECSComponent
         {
             StartField();
             CreateFog();
-            CreateTown();
+            //CreateTown();
 //            TestField();
             return;
         }
@@ -55,7 +55,7 @@ public class FieldControllerComponent : IECSComponent
             }
         }
         
-        CreateTown();
+        //CreateTown();
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)
