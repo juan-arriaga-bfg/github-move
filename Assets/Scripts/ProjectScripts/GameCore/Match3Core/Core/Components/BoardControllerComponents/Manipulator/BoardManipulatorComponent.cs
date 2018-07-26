@@ -234,9 +234,9 @@ public class BoardManipulatorComponent : ECSEntity,
                 
                 var pieceView = cachedViewForDrag as PieceBoardElementView;
                 var boardPos = context.BoardDef.GetSectorPosition(pos);
-                pieceView.OnDragEnd(boardPos, pos);
                 
                 cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, pieceView.Piece.Layer.Index));
+                pieceView.OnDragEnd(boardPos, pos);
             }
 
             cachedViewForDrag = null;

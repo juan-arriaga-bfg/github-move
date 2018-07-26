@@ -40,6 +40,23 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         Context = context;
     }
 
+    protected void AddLayerToCache(Renderer rend)
+    {
+        var rendererLayerParams = rend.GetComponent<RendererLayerParams>();
+        if (rendererLayerParams != null && rendererLayerParams.IsIgnoreRenderLayer) return;
+
+        var rendererLayer = rend.gameObject.GetComponent<RendererLayer>();
+
+        if (rendererLayer == null)
+        {
+            rendererLayer = rend.gameObject.AddComponent<RendererLayer>();
+        }
+            
+        rendererLayer.SortingOrderOffset = rend.sortingOrder;
+
+        cachedRenderers.Add(rendererLayer);
+    }
+
     protected virtual void Start()
     {
         if (cachedRenderers.size <= 0)

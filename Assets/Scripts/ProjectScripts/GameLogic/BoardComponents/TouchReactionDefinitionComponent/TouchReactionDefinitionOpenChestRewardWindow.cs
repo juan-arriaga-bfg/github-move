@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class TouchReactionDefinitionOpenChestRewardWindow : TouchReactionDefinitionComponent
 {
@@ -7,7 +9,7 @@ public class TouchReactionDefinitionOpenChestRewardWindow : TouchReactionDefinit
 	
 	public override bool Make(BoardPosition position, Piece piece)
 	{
-		if (isComplete) return false;
+		//if (isComplete) return false;
 		
 		chestComponent = piece.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
 		
@@ -67,15 +69,28 @@ public class TouchReactionDefinitionOpenChestRewardWindow : TouchReactionDefinit
 	private void Open(BoardPosition position, Piece piece)
 	{
 		isComplete = true;
-
+		var rewardPieces = chestComponent.Chest.GetRewardPieces();
 		piece.Context.ActionExecutor.AddAction(new ChestRewardAction
 		{
 			From = position,
-			Pieces = chestComponent.Chest.GetRewardPieces(),
-			OnComplete = new CollapsePieceToAction
+			Pieces = rewardPieces,
+			OnCompleteAction = () =>
 			{
-				To = position,
-				Positions = new List<BoardPosition> {position}
+				
+				var remaind = rewardPieces.Sum(elem => elem.Value);
+				if (remaind == 0)
+				{
+					piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+					{
+						To = position,
+						Positions = new List<BoardPosition> {position}
+					});
+				}
+				else
+				{
+					//TODO create change chest action
+					//piece.Context.ActionExecutor.AddAction(new);
+				}
 			}
 		});
 	}

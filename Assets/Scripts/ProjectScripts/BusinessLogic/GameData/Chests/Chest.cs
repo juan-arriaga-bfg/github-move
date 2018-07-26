@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public enum ChestState
 {
@@ -21,15 +20,20 @@ public class Chest
     private DateTime completeTime;
 
     private CurrencyPair price;
-
-    private Dictionary<int, int> reward;
+    public Dictionary<int, int> reward = new Dictionary<int, int>();
     
     public Chest(ChestDef def)
     {
         this.def = def;
         price = new CurrencyPair {Currency = this.def.Price.Currency, Amount = this.def.Price.Amount};
     }
-    
+
+    public Dictionary<int, int> Reward
+    {
+        get { return GetRewardPieces(); }
+        set { reward = value; }
+    }
+
     public ChestDef Def
     {
         get { return def; }
@@ -73,7 +77,7 @@ public class Chest
         }
         set
         {
-            /* (value)
+            switch (value)
             {
                 case ChestState.Close:
                     StartTime = null;
@@ -81,10 +85,16 @@ public class Chest
                 case ChestState.InProgress:
                     SetStartTime(DateTime.UtcNow);
                     break;
-            }*/
+            }
 
-            chestState = ChestState.Open;
+            chestState = value;
         }
+    }
+
+    public bool CheckStorage()
+    {
+        var rewardCount = Reward.Values.Sum();
+        return rewardCount < def.PieceAmount;
     }
 
     public void SetStartTime(DateTime time)
@@ -95,7 +105,7 @@ public class Chest
 
     public Dictionary<int, int> GetRewardPieces()
     {
-        if (reward != null)
+        if (reward.Count != 0)
             return reward;
         
         var max = def.PieceAmount;

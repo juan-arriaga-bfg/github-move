@@ -266,6 +266,10 @@ MonoBehaviour:
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 4228895115553148}
+  sprite: {fileID: 212962467916842490}
+  backlightMaterial: {fileID: 2100000, guid: 6e23cb2ec086c463dacfc8e46de765b2, type: 2}
+  backlightScale: 1.1
+  hightlightMaterial: {fileID: 2100000, guid: d55a16b9364b048ba884d5ede8dae221, type: 2}
   cap: {fileID: 4734889333880886}
   shine: {fileID: 1262532516380872}
   open: 0.42
