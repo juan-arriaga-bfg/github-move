@@ -34,22 +34,7 @@ public class AddResourceView : BoardElementView
 		sequence.Insert(0, CachedTransform.DOMove(CachedTransform.position + Vector3.up, duration));
 		sequence.Insert(duration*0.5f, icon.DOFade(0f, duration));
 		sequence.Insert(duration*0.5f, amountLabel.TextLabel.DOFade(0f, duration));
-		sequence.InsertCallback(duration*0.5f, () =>
-		{
-			CurrencyHellper.Purchase(resource, success =>
-			{
-				var view = ResourcesViewManager.Instance.GetFirstViewById(resource.Currency);
-				
-				ResourcesViewManager.DeliverResource<ResourceCarrier>
-				(
-					resource.Currency,
-					resource.Amount,
-					view.GetAnchorRect(),
-					Context.Context.BoardDef.ViewCamera.WorldToScreenPoint(CachedTransform.position),
-					R.ResourceCarrier
-				);
-			});
-		});
+		sequence.InsertCallback(duration * 0.5f, () => { CurrencyHellper.Purchase(resource); });
 		
 		DestroyOnBoard(duration);
 	}
@@ -72,6 +57,28 @@ public class AddResourceView : BoardElementView
 		if (resource == null) return;
 		
 		var board = BoardService.Current.GetBoardById(0);
+		
+		if (resource.Currency == Currency.Coins.Name
+		    || resource.Currency == Currency.Energy.Name
+		    || resource.Currency == Currency.Experience.Name)
+		{
+			CurrencyHellper.Purchase(resource, success =>
+			{
+				var flay = ResourcesViewManager.Instance.GetFirstViewById(resource.Currency);
+				var screenPos = board.BoardDef.GetPiecePosition(position.X, position.Y);
+				
+				ResourcesViewManager.DeliverResource<ResourceCarrier>
+				(
+					resource.Currency,
+					resource.Amount,
+					flay.GetAnchorRect(),
+					board.BoardDef.ViewCamera.WorldToScreenPoint(screenPos),
+					R.ResourceCarrier
+				);
+			});
+			return;
+		}
+		
 		var view = board.RendererContext.CreateBoardElementAt<AddResourceView>(R.AddResourceView, position);
 		
 		view.CachedTransform.localPosition = view.CachedTransform.localPosition + Vector3.up;
