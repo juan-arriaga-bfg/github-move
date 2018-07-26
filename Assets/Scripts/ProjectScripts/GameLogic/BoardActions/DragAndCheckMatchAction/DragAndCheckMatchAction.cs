@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 public class DragAndCheckMatchAction : IBoardAction
@@ -120,87 +120,42 @@ public class DragAndCheckMatchAction : IBoardAction
 	private void CheckCurrentType(BoardController board)
 	{
 		if (fromPositions.Count == 1)
-		{
-			var logic = board.BoardLogic;
-		
-			var pieceFrom = logic.GetPieceAt(From);
-			var pieceTo = logic.GetPieceAt(To);
-		
-			IBoardAction action;
-
-			if (pieceFrom.PieceType == pieceTo.PieceType)
-			{
-				if (CheckMatch(board, new List<BoardPosition> {From}, out action))
-				{
-					board.ActionExecutor.PerformAction(action);
-					return;
-				}
-			
-				MoveCheckAndAnimation(board);
-				return;
-			}
-			
-			BoardPosition free;
-			var isSwap = CheckSwapLogic(board, out free);
-		
-			if (isSwap)
-			{
-				SwapPieces(board);
-				return;
-			}
-		
-			MovePieces(board, free);
-		}
+			StandartPieceDrag(board);
 		else
-		{
-			var targetPieces = new List<Piece>();
-			foreach (var targetPos in targetPositions)
-			{
-				var piece = board.BoardLogic.GetPieceAt(targetPos);
-				if(piece != null)
-					targetPieces.Add(piece);
-			}
-			
-			
-			var free = new List<BoardPosition>();
-			if (!board.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(To, free,
-				targetPieces.Count + targetPositions.Count - 1))
-			{
-				Reset(board.RendererContext);
-				return;
-			}
-				
-
-			if (free.Count < targetPieces.Count + targetPositions.Count - 1)
-			{
-				Reset(board.RendererContext);
-				return;
-			}
-				
-			
 			MoveMutlicellularPieces(board);
-			
-			/*foreach (var piece in targetPieces)
-			{
-				while (free.Count > 0)
-				{
-					if (!targetPositions.Contains(free[0]))
-					{
-						var from = piece.CachedPosition;
-						Debug.LogFormat("Piece move from {0} to: {1}", from, free[0]);
-						board.BoardLogic.MovePieceFromTo(from, free[0]);
-						MovePiece(board, from, free[0]);
-						free.RemoveAt(0);	
-						break;
-					}
-					free.RemoveAt(0);	
-				}
-				
-			}
+	}
 
-			board.BoardLogic.MovePieceFromTo(From, To);
-			MovePiece(board, From, To);*/
+	private void StandartPieceDrag(BoardController board)
+	{
+		var logic = board.BoardLogic;
+		
+		var pieceFrom = logic.GetPieceAt(From);
+		var pieceTo = logic.GetPieceAt(To);
+		
+		IBoardAction action;
+
+		if (pieceFrom.PieceType == pieceTo.PieceType)
+		{
+			if (CheckMatch(board, new List<BoardPosition> {From}, out action))
+			{
+				board.ActionExecutor.PerformAction(action);
+				return;
+			}
+			
+			MoveCheckAndAnimation(board);
+			return;
 		}
+			
+		BoardPosition free;
+		var isSwap = CheckSwapLogic(board, out free);
+		
+		if (isSwap)
+		{
+			SwapPieces(board);
+			return;
+		}
+		
+		MovePieces(board, free);
 	}
 	
 	private bool CheckMatch(BoardController board, List<BoardPosition> matchField, out IBoardAction action)
@@ -320,6 +275,7 @@ public class DragAndCheckMatchAction : IBoardAction
 		board.RendererContext.AddAnimationToQueue(animation);
 	}
 
+	
 	private void SwapPieces(BoardController board)
 	{
 		var logic = board.BoardLogic;
@@ -356,15 +312,25 @@ public class DragAndCheckMatchAction : IBoardAction
 			if(pieceTo != null && !pieceTo.Equals(fromPiece))
 				piecePositions.Add(targetPositions[i]);
 		}
+
+		var targetFreeCount = piecePositions.Count + targetPositions.Count - 1;
+		var emptyFinder = logic.EmptyCellsFinder;
 		
 		var free = new List<BoardPosition>();
-		if (!board.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(To, free,
-			piecePositions.Count + targetPositions.Count - 1))
+		if (!emptyFinder.FindRandomNearWithPointInCenter(To,  free, targetFreeCount))
 		{
 			Reset(board.RendererContext);
 			return;
 		}
 
+		free = free.Distinct().ToList();
+
+		if (free.Count < targetFreeCount)
+		{
+			Reset(board.RendererContext);
+			return;
+		}
+		
 		from.AddRange(piecePositions);
 		from.Add(From);
 		
@@ -384,6 +350,8 @@ public class DragAndCheckMatchAction : IBoardAction
 			free.RemoveAt(0);
 		}
 
+		freeSpace = NormalizeFreeList(freeSpace, piecePositions);
+
 		var to = new List<BoardPosition>();
 		to.AddRange(freeSpace);
 		to.Add(To);
@@ -396,7 +364,6 @@ public class DragAndCheckMatchAction : IBoardAction
 		
 		logic.LockCells(from, this);
 		logic.LockCells(to, this);
-		//logic.LockCells(, this);
 		
 		var animation = new MovePiecesFromToAnimation
 		{
@@ -408,11 +375,35 @@ public class DragAndCheckMatchAction : IBoardAction
 		{
 			logic.UnlockCells(from, this);
 			logic.UnlockCells(to, this);
-			//logic.UnlockCells(free, this);
 		};
 		
 		board.RendererContext.AddAnimationToQueue(animation);
 	}
+
+	private List<BoardPosition> NormalizeFreeList(List<BoardPosition> free, List<BoardPosition> piecesPositions)
+	{
+		var normalized = new List<BoardPosition>();
+		foreach (var piecePos in piecesPositions)
+		{
+			var near = free[0];
+			var value = Math.Abs(free[0].X - piecePos.X) + Math.Abs(free[0].Y - piecePos.Y);
+			for (int i = 1; i < free.Count; i++)
+			{
+				var tmp = Math.Abs(free[i].X - piecePos.X) + Math.Abs(free[i].Y - piecePos.Y);
+				if (tmp < value)
+				{
+					value = tmp;
+					near = free[i];
+				}
+			}
+
+			free.Remove(near);
+			normalized.Add(near);
+		}
+
+		return normalized;
+	}
+	
 	
 	private void MovePieces(BoardController board, BoardPosition free)
 	{
