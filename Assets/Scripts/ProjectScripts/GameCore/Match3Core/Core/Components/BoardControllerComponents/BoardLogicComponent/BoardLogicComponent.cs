@@ -385,24 +385,36 @@ public class BoardLogicComponent : ECSEntity,
     {
         var fromPiece = GetPieceAt(from);
         var toPiece = GetPieceAt(to);
-
-        if (fromPiece == null || toPiece != null) return false;
+        
+        if (fromPiece == null)
+            return false;
+        
 
         var multicellular =
             fromPiece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
+        
         if (multicellular != null)
         {
+            if(fromPiece != toPiece && toPiece != null)
+                return false;
+            
+            var targetPositions = new List<BoardPosition>();
+            var sourcePositions = new List<BoardPosition>();
             for (int i = 0; i < multicellular.Mask.Count; i++)
             {
                 var maskPos = multicellular.Mask[i];
                 var targetPos = maskPos + to;
                 var sourcePos = maskPos + from;
-
-                if (!AddPieceToBoardSilent(targetPos.X, targetPos.Y, fromPiece) || !RemovePieceFromBoardSilent(sourcePos))
-                {
-                    RevertMulticellularMove(fromPiece, multicellular.Mask, from, to, i);
-                    return false;
-                }
+                
+                targetPositions.Add(targetPos);
+                sourcePositions.Add(sourcePos);
+                RemovePieceFromBoardSilent(sourcePos);
+            }
+            
+            for (int i = 0; i < multicellular.Mask.Count; i++)
+            {
+                var targetPos = targetPositions[i];
+                AddPieceToBoardSilent(targetPos.X, targetPos.Y, fromPiece);
             }
             
             var observer = fromPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
@@ -413,6 +425,9 @@ public class BoardLogicComponent : ECSEntity,
 
             return true;
         }
+
+        if (toPiece != null)
+            return false;
         
         if (AddPieceToBoardSilent(to.X, to.Y, fromPiece) && RemovePieceFromBoardSilent(from))
         {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 public class DragAndCheckMatchAction : IBoardAction
@@ -59,17 +60,25 @@ public class DragAndCheckMatchAction : IBoardAction
 	
 	private bool CheckValid(BoardController board)
 	{	
-		if (To.IsValidFor(board.BoardDef.Width, board.BoardDef.Height) == false
-		    || From.Equals(To))
+		if (To.IsValidFor(board.BoardDef.Width, board.BoardDef.Height) == false)
 		{
 			return false;
 		}
+
+		if (targetPositions.Count == 1 && From.Equals(To))
+			return false;
+
+		var pieceFrom = board.BoardLogic.GetPieceAt(From);
 		foreach (var position in targetPositions)
 		{
+			var pieceTo = board.BoardLogic.GetPieceAt(position);
+			if (pieceFrom.Equals(pieceTo))
+				continue;
+			
 			if (board.BoardLogic.IsLockedCell(position))
 				return false;
 			
-			var pieceTo = board.BoardLogic.GetPieceAt(position);
+			
 			if (pieceTo != null)
 			{
 				var draggable = pieceTo.GetComponent<DraggablePieceComponent>(DraggablePieceComponent.ComponentGuid);
@@ -128,6 +137,7 @@ public class DragAndCheckMatchAction : IBoardAction
 				}
 			
 				MoveCheckAndAnimation(board);
+				return;
 			}
 			
 			BoardPosition free;
@@ -153,10 +163,24 @@ public class DragAndCheckMatchAction : IBoardAction
 			
 			
 			var free = new List<BoardPosition>();
-			if (!board.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(To, free, targetPieces.Count+targetPositions.Count-1))
+			if (!board.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(To, free,
+				targetPieces.Count + targetPositions.Count - 1))
+			{
+				Reset(board.RendererContext);
 				return;
+			}
+				
 
-			foreach (var piece in targetPieces)
+			if (free.Count < targetPieces.Count + targetPositions.Count - 1)
+			{
+				Reset(board.RendererContext);
+				return;
+			}
+				
+			
+			MoveMutlicellularPieces(board);
+			
+			/*foreach (var piece in targetPieces)
 			{
 				while (free.Count > 0)
 				{
@@ -175,7 +199,7 @@ public class DragAndCheckMatchAction : IBoardAction
 			}
 
 			board.BoardLogic.MovePieceFromTo(From, To);
-			MovePiece(board, From, To);
+			MovePiece(board, From, To);*/
 		}
 	}
 	
@@ -318,6 +342,78 @@ public class DragAndCheckMatchAction : IBoardAction
 		board.RendererContext.AddAnimationToQueue(animation);
 	}
 
+	private void MoveMutlicellularPieces(BoardController board)
+	{
+		var logic = board.BoardLogic;
+		
+		var from = new List<BoardPosition>();
+		var fromPiece = logic.GetPieceAt(From);		
+
+		var piecePositions = new List<BoardPosition>();
+		for (int i = 0; i < targetPositions.Count; i++)
+		{
+			var pieceTo = logic.GetPieceAt(targetPositions[i]);
+			if(pieceTo != null && !pieceTo.Equals(fromPiece))
+				piecePositions.Add(targetPositions[i]);
+		}
+		
+		var free = new List<BoardPosition>();
+		if (!board.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(To, free,
+			piecePositions.Count + targetPositions.Count - 1))
+		{
+			Reset(board.RendererContext);
+			return;
+		}
+
+		from.AddRange(piecePositions);
+		from.Add(From);
+		
+		var freeSpace = new List<BoardPosition>();
+		while (freeSpace.Count < piecePositions.Count)
+		{
+			if (free.Count == 0)
+				return;
+
+			if (targetPositions.Contains(free[0]))
+			{
+				free.RemoveAt(0);
+				continue;
+			}
+			
+			freeSpace.Add(free[0]);
+			free.RemoveAt(0);
+		}
+
+		var to = new List<BoardPosition>();
+		to.AddRange(freeSpace);
+		to.Add(To);
+		
+		
+		for (int i = 0; i < from.Count; i++)
+		{
+			logic.MovePieceFromTo(from[i], to[i]);	
+		}
+		
+		logic.LockCells(from, this);
+		logic.LockCells(to, this);
+		//logic.LockCells(, this);
+		
+		var animation = new MovePiecesFromToAnimation
+		{
+			From = from,
+			To = to
+		};
+
+		animation.OnCompleteEvent += (_) =>
+		{
+			logic.UnlockCells(from, this);
+			logic.UnlockCells(to, this);
+			//logic.UnlockCells(free, this);
+		};
+		
+		board.RendererContext.AddAnimationToQueue(animation);
+	}
+	
 	private void MovePieces(BoardController board, BoardPosition free)
 	{
 		var logic = board.BoardLogic;
