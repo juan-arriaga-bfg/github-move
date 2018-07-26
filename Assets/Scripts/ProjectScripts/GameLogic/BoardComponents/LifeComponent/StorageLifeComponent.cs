@@ -13,11 +13,6 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
     {
         get { return new CurrencyPair {Currency = Currency.Worker.Name, Amount = 1}; }
     }
-
-    public virtual List<CurrencyPair> Conditions
-    {
-        get { return new List<CurrencyPair> {Energy, Worker}; }
-    }
     
     public virtual string Key
     {

@@ -49,8 +49,8 @@ public static class CurrencyHellper
             {
                 // on purchase failed (not enough cash)
                 if (onSuccess != null) onSuccess(false);
-                if(price == Currency.Coins.Name) UIMessageWindowController.CreateNeedCoinsMessage();
-                else UIMessageWindowController.CreateNeedCurrencyMessage(price);
+                
+                ShowHint(price);
             }
         );
 
@@ -145,8 +145,7 @@ public static class CurrencyHellper
 
         if (isCan == false && isMessageShow)
         {
-            if(price == Currency.Coins.Name) UIMessageWindowController.CreateNeedCoinsMessage();
-            else UIMessageWindowController.CreateNeedCurrencyMessage(price);
+            ShowHint(price);
         }
         
         return isCan;
@@ -158,8 +157,7 @@ public static class CurrencyHellper
         
         if (isCan == false && isMessageShow)
         {
-            if(price.Currency == Currency.Coins.Name) UIMessageWindowController.CreateNeedCoinsMessage();
-            else UIMessageWindowController.CreateNeedCurrencyMessage(price.Currency);
+            ShowHint(price.Currency);
         }
         
         return isCan;
@@ -228,5 +226,27 @@ public static class CurrencyHellper
     public static Dictionary<int, int> MinimizeCoinPieces(Dictionary<int, int> dict)
     {
         return CurrencyToCoinPieces(CoinPieceToCurrence(dict).Amount);
+    }
+
+    private static void ShowHint(string currency)
+    {
+        if (currency == Currency.Worker.Name)
+        {
+            return;
+        }
+        
+        if (currency == Currency.Coins.Name)
+        {
+            UIMessageWindowController.CreateNeedCoinsMessage();
+            return;
+        }
+        
+        if (currency == Currency.Energy.Name)
+        {
+            UIService.Get.ShowWindow(UIWindowType.EnergyShopWindow);
+            return;
+        }
+        
+        UIMessageWindowController.CreateNeedCurrencyMessage(currency);
     }
 }
