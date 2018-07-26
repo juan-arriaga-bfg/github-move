@@ -8,8 +8,6 @@ public class CastlePieceBuilder : MulticellularPieceBuilder
         var def = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(pieceType);
         
         AddView(piece, ViewType.LevelLabel);
-
-        piece.RegisterComponent(new DraggablePieceComponent());
         
         piece.RegisterComponent(new TimerComponent
         {
