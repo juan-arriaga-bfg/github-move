@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: 4b2dc99f2559d4ce99cb264b7312a44d
-timeCreated: 1519140340
-licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
     21300000: tile_grass_2
@@ -13,8 +11,9 @@ TextureImporter:
     21300012: tile_grass_8
     21300014: tile_grass_7
     21300016: tile_grass_4
+    21300018: background_tile
   externalObjects: {}
-  serializedVersion: 4
+  serializedVersion: 6
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -32,6 +31,8 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -42,7 +43,7 @@ TextureImporter:
     serializedVersion: 2
     filterMode: 0
     aniso: 4
-    mipBias: -1
+    mipBias: -100
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -54,18 +55,21 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 0
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
+  singleChannelComponent: 0
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
-  - buildTarget: DefaultTexturePlatform
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
     maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
@@ -75,7 +79,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - buildTarget: Standalone
+  - serializedVersion: 2
+    buildTarget: Standalone
     maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
@@ -85,7 +90,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - buildTarget: iPhone
+  - serializedVersion: 2
+    buildTarget: iPhone
     maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
@@ -95,7 +101,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - buildTarget: Android
+  - serializedVersion: 2
+    buildTarget: Android
     maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
@@ -105,7 +112,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - buildTarget: WebGL
+  - serializedVersion: 2
+    buildTarget: WebGL
     maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
@@ -119,24 +127,30 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tile_grass_2
+      name: background_tile
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 132
-        height: 132
+        width: 174
+        height: 174
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 19c749d8cf155664fba47795065e00e0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
-      name: tile_grass_1
+      name: tile_grass_2
       rect:
         serializedVersion: 2
-        x: 136
+        x: 178
         y: 0
         width: 132
         height: 132
@@ -146,8 +160,40 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 8f4347e772f54f74cbbf53096587760a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_grass_1
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 0
+        width: 132
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4b4a5a55501afe45b9f453a1c87a1ff
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
+    bones: []
+    spriteID: 
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

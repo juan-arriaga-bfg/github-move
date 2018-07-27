@@ -191,4 +191,14 @@ public class R
      public const string X3Piece = "X3Piece";
      public const string X4Piece = "X4Piece";
      public const string X5Piece = "X5Piece";
+     public const string BorderDark = "BorderDark";
+     public const string BorderDarkLeft = "BorderDarkLeft";
+     public const string BorderDarkRight = "BorderDarkRight";
+     public const string BorderLight = "BorderLight";
+     public const string BorderLightLeft = "BorderLightLeft";
+     public const string BorderLightRight = "BorderLightRight";
+     public const string ResourceCarrier = "ResourceCarrier";
+     public const string Basket1Piece = "Basket1Piece";
+     public const string Basket2Piece = "Basket2Piece";
+     public const string Basket3Piece = "Basket3Piece";
 }

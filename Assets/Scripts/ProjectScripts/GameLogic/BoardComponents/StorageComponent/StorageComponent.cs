@@ -13,7 +13,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     public int Amount;
     public int Capacity;
     public int Filling;
-
+    
     public bool IsTimerShow;
     public bool IsAutoStart = true;
     
@@ -49,7 +49,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
             Timer.OnStart += OnShowTimer;
             Timer.OnComplete += OnHideTimer;
         }
-
+        
         if (InitInSave(position) == false && IsAutoStart && Filling != Capacity)
         {
             Timer.Start();
@@ -60,24 +60,32 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
 
     private bool InitInSave(BoardPosition position)
     {
-        StorageSaveItem item;
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+
+        if (save == null) return false;
         
-        if (save == null || save.StorageSave == null || save.StorageSave.TryGetValue(position, out item) == false) return false;
+        var item = save.GetStorageSave(position);
+
+        if (item == null) return false;
+
+        if (item.IsStart == false)
+        {
+            item.StartTime = DateTime.UtcNow.ConvertToUnixTime();
+            Filling = Mathf.Min(item.Filling, Capacity);
+            return true;
+        }
         
-        long now;
-        var steps = Timer.CountOfStepsPassedWhenAppWasInBackground(item.StartTime, out now);
+        DateTime now;
+        var steps = DateTimeExtension.CountOfStepsPassedWhenAppWasInBackground(item.StartTime, Timer.Delay, out now);
         
         Filling = Mathf.Min(item.Filling + Mathf.Max(steps, 0), Capacity);
-        item.StartTime = now;
+        item.StartTime = now.ConvertToUnixTime();
         
-        if (Filling != Capacity)
+        if (item.IsStart && Filling != Capacity)
         {
             Timer.Start(item.StartTime);
         }
-
-        save.StorageSave.Remove(position);
-
+        
         return true;
     }
 
@@ -116,12 +124,19 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         var isShow = Filling / (float) Capacity > 0.2f;
         
         view.Change(isShow);
+
+        if (isShow)
+        {
+            pieceContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
+            pieceContext.Context.HintCooldown.AddView(view);
+            return;
+        }
         
-        if(isShow) pieceContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
+        pieceContext.Context.HintCooldown.RemoweView(view);
     }
 
     public bool Scatter(out int amount, bool isStartNext = true)
-    {
+    {   
         amount = Filling;
         
         if (Filling == 0) return false;

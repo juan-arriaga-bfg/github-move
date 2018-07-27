@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: 021e05bd7c3023f43a52f48e138b1d58
-timeCreated: 1524687723
-licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: forest_window_back
@@ -117,8 +115,12 @@ TextureImporter:
     21300220: list
     21300222: galka
     21300224: Icon_Energy
+    21300226: basket3
+    21300228: basket2
+    21300230: basket1
+    21300232: icon_Experience
   externalObjects: {}
-  serializedVersion: 4
+  serializedVersion: 6
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -136,6 +138,8 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -146,7 +150,7 @@ TextureImporter:
     serializedVersion: 2
     filterMode: 1
     aniso: 4
-    mipBias: -1
+    mipBias: -100
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -158,18 +162,21 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
+  singleChannelComponent: 0
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
-  - buildTarget: DefaultTexturePlatform
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
     maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
@@ -196,6 +203,12 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 14bd156af80e82444b52bbaeac64f701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: round_active
       rect:
@@ -210,11 +223,37 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 21a85e355c542ed4c99f594e683a63fc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: basket3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 654
+        width: 300
+        height: 288
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96ded15c20f3ef945901737e5072d7a0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: soldier_img
       rect:
         serializedVersion: 2
-        x: 0
+        x: 301
         y: 654
         width: 279
         height: 295
@@ -224,12 +263,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 803be0b5d7637aa48bafe5f71d335193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: round_not_active
       rect:
         serializedVersion: 2
-        x: 280
-        y: 654
+        x: 310
+        y: 344
         width: 273
         height: 273
       alignment: 9
@@ -238,12 +283,58 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: f0d4ad182c3006340971399afbe71213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: basket2
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 0
+        width: 242
+        height: 247
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a858aa5889c75074694b2c81c0623ba4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: basket1
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 618
+        width: 188
+        height: 211
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6733f74a31e96e47a5cb46e6e7bc562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: list_not_active
       rect:
         serializedVersion: 2
-        x: 310
-        y: 344
+        x: 581
+        y: 830
         width: 189
         height: 185
       alignment: 9
@@ -252,12 +343,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 4a8584a8f714e0648b93f43a09434e14
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: shine_upgrade
       rect:
         serializedVersion: 2
-        x: 500
-        y: 344
+        x: 584
+        y: 248
         width: 185
         height: 185
       alignment: 9
@@ -266,12 +363,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 0f67c5fca6cc9bf488dc0086f9194973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: ramka_player
       rect:
         serializedVersion: 2
-        x: 569
-        y: 0
+        x: 584
+        y: 434
         width: 182
         height: 183
       alignment: 9
@@ -280,12 +383,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: ff133d4ed0b582f4c97f42ecd7f29017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: pers_quest
       rect:
         serializedVersion: 2
-        x: 554
-        y: 530
+        x: 770
+        y: 248
         width: 171
         height: 188
       alignment: 9
@@ -294,12 +403,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 9267d05b911a4f549bbbe9a6dc93b9b9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: list_active
       rect:
         serializedVersion: 2
-        x: 554
-        y: 719
+        x: 767
+        y: 437
         width: 175
         height: 171
       alignment: 9
@@ -308,12 +423,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: ae6684a07a6627545b55a6c9328de445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: progress_player
       rect:
         serializedVersion: 2
-        x: 686
-        y: 184
+        x: 770
+        y: 609
         width: 166
         height: 166
       alignment: 9
@@ -322,11 +443,17 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 6b1ab2b1ec62d954a9be38e6fc34c408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: big_ramka
       rect:
         serializedVersion: 2
-        x: 752
+        x: 812
         y: 0
         width: 158
         height: 164
@@ -336,12 +463,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 08a870ff7b8269a4c88e2db69e5f60bb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: quest_messege
       rect:
         serializedVersion: 2
-        x: 686
-        y: 351
+        x: 942
+        y: 165
         width: 155
         height: 155
       alignment: 9
@@ -350,12 +483,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 591794a60e1864441ac4cd3e4977965f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: unlockpers
       rect:
         serializedVersion: 2
-        x: 726
-        y: 507
+        x: 971
+        y: 0
         width: 142
         height: 152
       alignment: 9
@@ -364,12 +503,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: dba0d8e812154664faf44c4a2660025e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: John_head
       rect:
         serializedVersion: 2
-        x: 853
-        y: 165
+        x: 771
+        y: 776
         width: 129
         height: 156
       alignment: 9
@@ -378,12 +523,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 7a3df2e76fb2d294abfe2e508dd504f8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Greenarrow_head
       rect:
         serializedVersion: 2
-        x: 911
-        y: 0
+        x: 901
+        y: 776
         width: 131
         height: 153
       alignment: 9
@@ -392,12 +543,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 7139838875f769645bcf5f49737ba1c3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Robin_head
       rect:
         serializedVersion: 2
-        x: 842
-        y: 351
+        x: 937
+        y: 609
         width: 130
         height: 150
       alignment: 9
@@ -406,12 +563,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: eb4eaa845ab7ada4b94cd74324acc11f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: pers_4
       rect:
         serializedVersion: 2
-        x: 730
-        y: 660
+        x: 1033
+        y: 760
         width: 133
         height: 143
       alignment: 9
@@ -420,12 +583,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: da7b1f3f8a36a534db99fe8d45ee6369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: pers_5
       rect:
         serializedVersion: 2
-        x: 554
-        y: 891
+        x: 943
+        y: 321
         width: 125
         height: 130
       alignment: 9
@@ -434,12 +603,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 9e967f668c4ddbb47bbc1c56e75c9ea1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: pers_6
       rect:
         serializedVersion: 2
-        x: 680
-        y: 891
+        x: 943
+        y: 452
         width: 125
         height: 129
       alignment: 9
@@ -448,12 +623,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: a594a8834e304f444bdc42ed45418969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: pers_3
       rect:
         serializedVersion: 2
-        x: 569
-        y: 184
+        x: 1068
+        y: 582
         width: 108
         height: 144
       alignment: 9
@@ -462,12 +643,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 2cc74a7478897ad4b945784964e70d9b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: ramka_minicollect
       rect:
         serializedVersion: 2
-        x: 806
-        y: 804
+        x: 1069
+        y: 321
         width: 88
         height: 173
       alignment: 9
@@ -476,12 +663,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 056db40f37190a648bae7ad06c899d9c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: icon_round
       rect:
         serializedVersion: 2
-        x: 310
-        y: 530
+        x: 1098
+        y: 153
         width: 123
         height: 123
       alignment: 9
@@ -490,12 +683,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 6dae72b7fad8d7447aa52838d9a6815f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: PinWarrior_ramka
       rect:
         serializedVersion: 2
-        x: 864
-        y: 660
+        x: 1114
+        y: 0
         width: 116
         height: 127
       alignment: 9
@@ -504,12 +703,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 8c37bb2a1e8849d4eb43addb2ccc9289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Chest_active
       rect:
         serializedVersion: 2
-        x: 869
-        y: 502
+        x: 1167
+        y: 727
         width: 120
         height: 120
       alignment: 9
@@ -518,12 +723,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 70acdd6fecbc812459fb3a23460d9e27
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: pers_1
       rect:
         serializedVersion: 2
-        x: 973
-        y: 322
+        x: 1167
+        y: 848
         width: 105
         height: 134
       alignment: 9
@@ -532,12 +743,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 6c668be84586fa046a6eaf55f5dcce33
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: icon_Fight
       rect:
         serializedVersion: 2
-        x: 983
-        y: 154
+        x: 1033
+        y: 904
         width: 120
         height: 113
       alignment: 9
@@ -546,12 +763,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 16ce48a326de95f469a11955948aa865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: pers_2
       rect:
         serializedVersion: 2
-        x: 1043
-        y: 0
+        x: 1273
+        y: 848
         width: 101
         height: 127
       alignment: 9
@@ -560,12 +783,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 1b31829268abe184eb7710410ed91127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: PinWarrior_head
       rect:
         serializedVersion: 2
-        x: 434
-        y: 530
+        x: 1158
+        y: 277
         width: 102
         height: 120
       alignment: 9
@@ -574,12 +803,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 79583f6a42ae7ba4b8a698fd427ecbf9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: RobinItem4
       rect:
         serializedVersion: 2
-        x: 895
-        y: 788
+        x: 1222
+        y: 128
         width: 111
         height: 110
       alignment: 9
@@ -588,12 +823,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: b45a742dc6053f342b27fb8f240ae1d7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: RobinItem2
       rect:
         serializedVersion: 2
-        x: 895
-        y: 899
+        x: 1231
+        y: 0
         width: 97
         height: 117
       alignment: 9
@@ -602,12 +843,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 3c0b00ee5d5e580408644d431dd59e90
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: JohnItem1
       rect:
         serializedVersion: 2
-        x: 993
-        y: 899
+        x: 1329
+        y: 0
         width: 103
         height: 109
       alignment: 9
@@ -616,12 +863,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: cc7bf1bf05306ff40a27122f44942f42
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: bubble_quest
       rect:
         serializedVersion: 2
-        x: 280
-        y: 928
+        x: 901
+        y: 930
         width: 126
         height: 89
       alignment: 9
@@ -630,12 +883,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: d6a88299901410b43b26b843ceaa4730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: GreenarrowItem4
       rect:
         serializedVersion: 2
-        x: 407
-        y: 928
+        x: 1158
+        y: 398
         width: 118
         height: 95
       alignment: 9
@@ -644,12 +903,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: e107fa7a4f2c35b4295ff8c18463cab5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: RobinItem3
       rect:
         serializedVersion: 2
-        x: 981
-        y: 623
+        x: 1261
+        y: 239
         width: 115
         height: 96
       alignment: 9
@@ -658,12 +923,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: c7857edf2b5359f499fe95d64ee04da1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: purple_round
       rect:
         serializedVersion: 2
-        x: 990
-        y: 457
+        x: 1334
+        y: 110
         width: 103
         height: 102
       alignment: 9
@@ -672,12 +943,38 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: b1c56dc27a8e0d7429c8c71a0677fb96
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_Experience
+      rect:
+        serializedVersion: 2
+        x: 1433
+        y: 0
+        width: 103
+        height: 101
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 393856a52fd2bfe4287ae9503bae4200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: RobinItem1
       rect:
         serializedVersion: 2
-        x: 1079
-        y: 268
+        x: 1177
+        y: 494
         width: 84
         height: 120
       alignment: 9
@@ -686,12 +983,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 0eacf63b5107548499afe2f3a38cf53d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Chest_not_active
       rect:
         serializedVersion: 2
-        x: 1104
-        y: 128
+        x: 1177
+        y: 615
         width: 98
         height: 98
       alignment: 9
@@ -700,12 +1003,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 176e013aee7d18643b8c5a2696880b3e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: JohnItem2
       rect:
         serializedVersion: 2
-        x: 1145
-        y: 0
+        x: 1262
+        y: 494
         width: 87
         height: 106
       alignment: 9
@@ -714,12 +1023,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: df21410ec0730114d9235b49046ea77a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: JohnItem4
       rect:
         serializedVersion: 2
-        x: 1007
-        y: 720
+        x: 771
+        y: 933
         width: 105
         height: 87
       alignment: 9
@@ -728,12 +1043,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 8e2cacca7dc7dc34cb497d58bfabe042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: progressbar
       rect:
         serializedVersion: 2
         x: 0
-        y: 950
+        y: 943
         width: 200
         height: 42
       alignment: 9
@@ -742,12 +1063,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 2203ef753f797994490f88253b83b789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: JohnItem3
       rect:
         serializedVersion: 2
-        x: 1007
-        y: 808
+        x: 812
+        y: 165
         width: 112
         height: 74
       alignment: 9
@@ -756,12 +1083,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 9147016521bf23f4d8cd2bd74154dfe8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: GreenarrowItem3
       rect:
         serializedVersion: 2
-        x: 1097
-        y: 883
+        x: 1276
+        y: 601
         width: 91
         height: 88
       alignment: 9
@@ -770,12 +1103,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: cf79fabfab2cc3640b6206e01d59f8e8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: GreenarrowItem1
       rect:
         serializedVersion: 2
-        x: 1094
-        y: 389
+        x: 1069
+        y: 495
         width: 107
         height: 73
       alignment: 9
@@ -784,12 +1123,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: fb179034a4895af48862cbf91de138cf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: GreenarrowItem2
       rect:
         serializedVersion: 2
-        x: 1164
-        y: 227
+        x: 1288
+        y: 690
         width: 80
         height: 95
       alignment: 9
@@ -798,12 +1143,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 486216ecf6f5f84408dfea0086a2210c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: round_mini
       rect:
         serializedVersion: 2
-        x: 1203
-        y: 107
+        x: 1277
+        y: 336
         width: 85
         height: 85
       alignment: 9
@@ -812,12 +1163,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: af11ab538ba74c346b4ceba77d414781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Hero_ramka_not_active
       rect:
         serializedVersion: 2
-        x: 1233
-        y: 0
+        x: 1350
+        y: 422
         width: 80
         height: 89
       alignment: 9
@@ -826,12 +1183,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: e31f1aeca0fa23646b16716d88bf7204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Icon_Energy
       rect:
         serializedVersion: 2
-        x: 1094
-        y: 463
+        x: 1368
+        y: 512
         width: 66
         height: 106
       alignment: 9
@@ -840,12 +1203,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 3e599560513e661429fab43bde910b32
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: button_upgrade
       rect:
         serializedVersion: 2
-        x: 1097
-        y: 570
+        x: 1377
+        y: 213
         width: 77
         height: 88
       alignment: 9
@@ -854,12 +1223,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 2a5a8cc27b317ab4da7e303bcf8fd692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: green_round
       rect:
         serializedVersion: 2
-        x: 1161
-        y: 463
+        x: 1438
+        y: 102
         width: 77
         height: 88
       alignment: 9
@@ -868,12 +1243,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: c033878b47f91764faba153e7c9d2f03
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Resource1
       rect:
         serializedVersion: 2
-        x: 1202
-        y: 323
+        x: 1363
+        y: 336
         width: 83
         height: 81
       alignment: 9
@@ -882,12 +1263,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: f8724bba0a17f2a47afd75ca26b20300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Resource9
       rect:
         serializedVersion: 2
-        x: 1245
-        y: 193
+        x: 1431
+        y: 418
         width: 75
         height: 87
       alignment: 9
@@ -896,12 +1283,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: c16dc601e57b67d438ea9b000ad69e9c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: bubble
       rect:
         serializedVersion: 2
-        x: 1289
-        y: 90
+        x: 201
+        y: 943
         width: 80
         height: 80
       alignment: 9
@@ -910,12 +1303,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 47c6bca86e54b1b44856b1d818d5e3cc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: heroes_info
       rect:
         serializedVersion: 2
-        x: 1314
-        y: 0
+        x: 1447
+        y: 302
         width: 78
         height: 82
       alignment: 9
@@ -924,12 +1323,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: b3db73a5548c962409f6a6eaf46a4acf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Hero_ramka_active
       rect:
         serializedVersion: 2
-        x: 1113
-        y: 659
+        x: 1455
+        y: 191
         width: 76
         height: 79
       alignment: 9
@@ -938,12 +1343,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: e6f7fe8dbd41ae44986cd744aa05b4d9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: bttnAdd
       rect:
         serializedVersion: 2
-        x: 730
-        y: 804
+        x: 1516
+        y: 102
         width: 75
         height: 80
       alignment: 9
@@ -952,12 +1363,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 8a122a862aba44b479509db4a84dfca4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: icon_castle_round
       rect:
         serializedVersion: 2
-        x: 1175
-        y: 552
+        x: 1537
+        y: 0
         width: 75
         height: 75
       alignment: 9
@@ -966,11 +1383,17 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 2f02bb4faf49f9949808c3e3500b84e8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Resource7
       rect:
         serializedVersion: 2
-        x: 201
+        x: 282
         y: 950
         width: 76
         height: 73
@@ -980,12 +1403,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 11fc63787fb13fb41a335a91f3146e98
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: header_front
       rect:
         serializedVersion: 2
-        x: 1239
-        y: 405
+        x: 1369
+        y: 619
         width: 60
         height: 89
       alignment: 9
@@ -994,12 +1423,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 9bc8e5e48ef21c543a84d046198100f8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: back_upUI
       rect:
         serializedVersion: 2
-        x: 1286
-        y: 281
+        x: 359
+        y: 950
         width: 74
         height: 71
       alignment: 9
@@ -1008,12 +1443,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: f4adaf2785f0e194ba6c761c61817258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: progressbar_ramka
       rect:
         serializedVersion: 2
-        x: 1113
-        y: 739
+        x: 434
+        y: 950
         width: 80
         height: 65
       alignment: 9
@@ -1022,12 +1463,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: fab0fb0a74de6ba4a82d4acb32cc9dab
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Resource6
       rect:
         serializedVersion: 2
-        x: 1120
-        y: 805
+        x: 1369
+        y: 709
         width: 72
         height: 72
       alignment: 9
@@ -1036,12 +1483,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: ed54d96442227cd47b80357960ad7e22
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Resource5
       rect:
         serializedVersion: 2
-        x: 1321
-        y: 171
+        x: 1430
+        y: 619
         width: 77
         height: 66
       alignment: 9
@@ -1050,12 +1503,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 0217f9935da57224e8b07817fe05eb56
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Resource8
       rect:
         serializedVersion: 2
-        x: 1370
-        y: 83
+        x: 1435
+        y: 506
         width: 63
         height: 78
       alignment: 9
@@ -1064,12 +1523,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 6308e8d4ca764fb46a11710a274615cd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: x_button
       rect:
         serializedVersion: 2
-        x: 1393
-        y: 0
+        x: 1499
+        y: 506
         width: 67
         height: 72
       alignment: 9
@@ -1078,12 +1543,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 6263beac7ee072e438a621d1bbbc85b9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Resource4
       rect:
         serializedVersion: 2
-        x: 1190
-        y: 628
+        x: 1369
+        y: 782
         width: 75
         height: 64
       alignment: 9
@@ -1092,12 +1563,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 932ced46dc7b2db4f87830eff2b1cfd0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Resource2
       rect:
         serializedVersion: 2
-        x: 1251
-        y: 495
+        x: 1277
+        y: 422
         width: 70
         height: 68
       alignment: 9
@@ -1106,12 +1583,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 50ab4ac2f49380a47ae70d7efef6949e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: minibubble
       rect:
         serializedVersion: 2
-        x: 1300
-        y: 353
+        x: 1442
+        y: 686
         width: 68
         height: 66
       alignment: 9
@@ -1120,12 +1603,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 1397025f794989749a2c3c21106ef3a5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Resource3
       rect:
         serializedVersion: 2
-        x: 1251
-        y: 564
+        x: 515
+        y: 950
         width: 59
         height: 63
       alignment: 9
@@ -1134,12 +1623,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: ab8878ff322b13a45adaaac7096c0a73
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: icon_TimeChest
       rect:
         serializedVersion: 2
-        x: 869
-        y: 623
+        x: 0
+        y: 986
         width: 106
         height: 35
       alignment: 9
@@ -1148,12 +1643,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: dc2d681a8818cdc40a7a53209d1b0fa1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: question_button
       rect:
         serializedVersion: 2
-        x: 1300
-        y: 420
+        x: 1508
+        y: 579
         width: 58
         height: 63
       alignment: 9
@@ -1162,12 +1663,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 024fa4d6ceb33f84eae740164d8f6c9e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: header_back
       rect:
         serializedVersion: 2
-        x: 1361
-        y: 238
+        x: 1507
+        y: 385
         width: 44
         height: 83
       alignment: 9
@@ -1176,12 +1683,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: c90a8da4306e97b488bef736d9a0430b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: progressbar_back
       rect:
         serializedVersion: 2
-        x: 806
-        y: 978
+        x: 1508
+        y: 643
         width: 82
         height: 42
       alignment: 9
@@ -1190,12 +1703,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 10318e472639b514a802ebb76833a800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: progressbar_chest
       rect:
         serializedVersion: 2
-        x: 990
-        y: 560
+        x: 1288
+        y: 786
         width: 61
         height: 55
       alignment: 9
@@ -1204,12 +1723,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 6dab5c64307ae904c8bba7fb02c654ab
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: quest_back
       rect:
         serializedVersion: 2
-        x: 1399
-        y: 162
+        x: 1526
+        y: 271
         width: 54
         height: 62
       alignment: 9
@@ -1218,12 +1743,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 110a6897f22c5be40b75e2ac21a539a6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: collect_done
       rect:
         serializedVersion: 2
-        x: 1434
-        y: 73
+        x: 1532
+        y: 183
         width: 57
         height: 57
       alignment: 9
@@ -1232,12 +1763,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 08b92bc808a1b374786ea76335919105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: bubbleArrow
       rect:
         serializedVersion: 2
-        x: 1461
-        y: 0
+        x: 1552
+        y: 334
         width: 49
         height: 66
       alignment: 9
@@ -1246,12 +1783,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 836f9d76919341849aa5418fb7389c92
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: ramka_item_not_active_back_not_active
       rect:
         serializedVersion: 2
-        x: 983
-        y: 268
+        x: 1581
+        y: 241
         width: 50
         height: 53
       alignment: 9
@@ -1260,12 +1803,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 4a4b261ff1401a14a8a4a0e1a7ab110e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: back_active
       rect:
         serializedVersion: 2
-        x: 1189
-        y: 878
+        x: 1590
+        y: 183
         width: 50
         height: 52
       alignment: 9
@@ -1274,110 +1823,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
-    - serializedVersion: 2
-      name: red_button_push
-      rect:
-        serializedVersion: 2
-        x: 1193
-        y: 805
-        width: 48
-        height: 53
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 23, y: 30, z: 23, w: 21}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: red_button
-      rect:
-        serializedVersion: 2
-        x: 1189
-        y: 931
-        width: 48
-        height: 53
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 23, y: 30, z: 23, w: 21}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: blue_button
-      rect:
-        serializedVersion: 2
-        x: 1238
-        y: 931
-        width: 48
-        height: 53
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 23, y: 30, z: 23, w: 21}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: orange_button_push
-      rect:
-        serializedVersion: 2
-        x: 1240
-        y: 859
-        width: 48
-        height: 53
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 23, y: 30, z: 23, w: 21}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: green_button
-      rect:
-        serializedVersion: 2
-        x: 1287
-        y: 913
-        width: 48
-        height: 53
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 23, y: 30, z: 23, w: 21}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: green_button_push
-      rect:
-        serializedVersion: 2
-        x: 1287
-        y: 967
-        width: 48
-        height: 53
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 23, y: 30, z: 23, w: 21}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: orange_button
-      rect:
-        serializedVersion: 2
-        x: 1194
-        y: 693
-        width: 48
-        height: 53
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 23, y: 30, z: 23, w: 21}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      bones: []
+      spriteID: ee0bdbe2db93f184c86cdece0c491763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: disable_button
       rect:
         serializedVersion: 2
-        x: 1194
-        y: 747
+        x: 1592
+        y: 76
         width: 48
         height: 53
       alignment: 9
@@ -1386,12 +1843,158 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 4ecd0802012e22840922e4e824f9b2e7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_button
+      rect:
+        serializedVersion: 2
+        x: 1613
+        y: 0
+        width: 48
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 23, y: 30, z: 23, w: 21}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6ebe017e10ed19479d7abd70b91f8c1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_button_push
+      rect:
+        serializedVersion: 2
+        x: 1552
+        y: 401
+        width: 48
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 23, y: 30, z: 23, w: 21}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 339c20164b94d5448852f08b31af6a12
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_button
+      rect:
+        serializedVersion: 2
+        x: 1567
+        y: 455
+        width: 48
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 23, y: 30, z: 23, w: 21}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99e5c1f267d34d84b84b9836d6ad49e1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_button
+      rect:
+        serializedVersion: 2
+        x: 1601
+        y: 401
+        width: 48
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 23, y: 30, z: 23, w: 21}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ed9e96170dfab24986e98ecfdc30f2c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_button_push
+      rect:
+        serializedVersion: 2
+        x: 1602
+        y: 295
+        width: 48
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 23, y: 30, z: 23, w: 21}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 789672368d8cc3b4cac5e49a723b9d03
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: orange_button_push
+      rect:
+        serializedVersion: 2
+        x: 1632
+        y: 236
+        width: 48
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 23, y: 30, z: 23, w: 21}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 824e2becc346a634cb3c0635e42246d5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: orange_button
+      rect:
+        serializedVersion: 2
+        x: 1567
+        y: 509
+        width: 48
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 23, y: 30, z: 23, w: 21}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14dad4d0541a5994f8161a1e7986e0ab
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: blue_button_push
       rect:
         serializedVersion: 2
-        x: 1242
-        y: 801
+        x: 1567
+        y: 563
         width: 48
         height: 53
       alignment: 9
@@ -1400,12 +2003,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: cb4180de446a07a408dacf6256a5ac18
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: '!'
       rect:
         serializedVersion: 2
-        x: 1097
-        y: 972
+        x: 1602
+        y: 349
         width: 48
         height: 48
       alignment: 9
@@ -1414,12 +2023,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 740ee07a35eb2f74b87bd310551ab344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: progress_line
       rect:
         serializedVersion: 2
-        x: 853
-        y: 322
+        x: 943
+        y: 582
         width: 113
         height: 20
       alignment: 9
@@ -1428,12 +2043,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 61b513d64263eeb418937d6c74e9451a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Charger5
       rect:
         serializedVersion: 2
-        x: 1052
-        y: 570
+        x: 1592
+        y: 130
         width: 43
         height: 47
       alignment: 9
@@ -1442,12 +2063,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: cc97c27867f34004d82176fab95998a8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: green_arrow
       rect:
         serializedVersion: 2
-        x: 1146
-        y: 972
+        x: 1636
+        y: 130
         width: 42
         height: 48
       alignment: 9
@@ -1456,12 +2083,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 65a273bd67a06754eafa887d5d47b986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: ramka_item_active
       rect:
         serializedVersion: 2
-        x: 1104
-        y: 227
+        x: 1098
+        y: 277
         width: 48
         height: 40
       alignment: 9
@@ -1470,12 +2103,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 55b49c0df5952bf45beff285a891b2f7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: ramka_item_active_back_not_active
       rect:
         serializedVersion: 2
-        x: 1034
-        y: 268
+        x: 1641
+        y: 179
         width: 44
         height: 41
       alignment: 9
@@ -1484,26 +2123,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
-    - serializedVersion: 2
-      name: Charger2
-      rect:
-        serializedVersion: 2
-        x: 1289
-        y: 855
-        width: 39
-        height: 46
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      bones: []
+      spriteID: 3e06b827916a76e43a9e2158bd9d8e16
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: minibubble_arrow
       rect:
         serializedVersion: 2
-        x: 1243
-        y: 693
+        x: 1641
+        y: 54
         width: 46
         height: 39
       alignment: 9
@@ -1512,12 +2143,38 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 6c26147817a4a2f43b95bf773c558f22
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charger2
+      rect:
+        serializedVersion: 2
+        x: 1662
+        y: 0
+        width: 39
+        height: 46
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2be55a36f6ff7f458dbaced23858953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Charger3
       rect:
         serializedVersion: 2
-        x: 1266
-        y: 628
+        x: 1679
+        y: 94
         width: 42
         height: 42
       alignment: 9
@@ -1526,12 +2183,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: c969a6f829625814fb5d306ca909475c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: mol
       rect:
         serializedVersion: 2
-        x: 1243
-        y: 733
+        x: 1679
+        y: 137
         width: 43
         height: 41
       alignment: 9
@@ -1540,12 +2203,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 0f5dd56f615fc1c4ba106f123615b045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: back_not_active
       rect:
         serializedVersion: 2
-        x: 1189
-        y: 985
+        x: 107
+        y: 986
         width: 47
         height: 37
       alignment: 9
@@ -1554,26 +2223,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
-    - serializedVersion: 2
-      name: Charger6
-      rect:
-        serializedVersion: 2
-        x: 1321
-        y: 238
-        width: 39
-        height: 39
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      bones: []
+      spriteID: 8f93e57612e5c1e439c4dd21130bd8fb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Charger1
       rect:
         serializedVersion: 2
-        x: 1245
-        y: 281
+        x: 1688
+        y: 47
         width: 39
         height: 39
       alignment: 9
@@ -1582,12 +2243,38 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 7b458c4ece886764b8d8efae35004e5e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charger6
+      rect:
+        serializedVersion: 2
+        x: 1702
+        y: 0
+        width: 39
+        height: 39
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f624c3699126f0843b93562e4e6acf37
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Charger4
       rect:
         serializedVersion: 2
-        x: 1237
-        y: 985
+        x: 1722
+        y: 87
         width: 35
         height: 38
       alignment: 9
@@ -1596,12 +2283,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 0bb5ec60fdf6bf240acf4e8e8a791f4a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: attack_back
       rect:
         serializedVersion: 2
-        x: 1202
-        y: 405
+        x: 1641
+        y: 94
         width: 36
         height: 35
       alignment: 9
@@ -1610,12 +2303,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: d550e65c66b4013479816abe9ff636ef
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: shadow_button
       rect:
         serializedVersion: 2
-        x: 1164
-        y: 323
+        x: 1728
+        y: 40
         width: 30
         height: 41
       alignment: 9
@@ -1624,12 +2323,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 0f4bba0133c724148804c9575bcb2dc2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: icon_castle_round_items
       rect:
         serializedVersion: 2
-        x: 1203
-        y: 193
+        x: 1532
+        y: 241
         width: 38
         height: 28
       alignment: 9
@@ -1638,12 +2343,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 14747d34f3065ff4bb7dadcdc55ca30c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: arr
       rect:
         serializedVersion: 2
-        x: 1287
-        y: 733
+        x: 1222
+        y: 239
         width: 31
         height: 34
       alignment: 9
@@ -1652,12 +2363,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: f90447bb14d689646a23b654d06687c9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: done_line
       rect:
         serializedVersion: 2
-        x: 0
-        y: 993
+        x: 155
+        y: 986
         width: 32
         height: 26
       alignment: 9
@@ -1666,12 +2383,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 89e77ce73179b0f4ca10839eaf133a59
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: forward_tap
       rect:
         serializedVersion: 2
-        x: 1164
-        y: 365
+        x: 1334
+        y: 213
         width: 34
         height: 23
       alignment: 9
@@ -1680,12 +2403,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: f4eae9672abdf104d9f7b9e228d9f434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: progress
       rect:
         serializedVersion: 2
-        x: 1043
-        y: 128
+        x: 1537
+        y: 76
         width: 32
         height: 24
       alignment: 9
@@ -1694,12 +2423,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 1247c8454dc29704baf8c90017552e4c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: back_tap
       rect:
         serializedVersion: 2
-        x: 33
-        y: 993
+        x: 1447
+        y: 385
         width: 33
         height: 23
       alignment: 9
@@ -1708,12 +2443,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: e8bbfabda85c9324b9f2f7f181c373a8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: list
       rect:
         serializedVersion: 2
-        x: 981
-        y: 720
+        x: 1581
+        y: 295
         width: 18
         height: 31
       alignment: 9
@@ -1722,12 +2463,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: e76a780d6e393a0469f8183c8d114d28
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: attack_back_arrow
       rect:
         serializedVersion: 2
-        x: 1289
-        y: 171
+        x: 1570
+        y: 76
         width: 21
         height: 21
       alignment: 9
@@ -1736,12 +2483,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: bea6075700acc094593cfcdaa4f41ae3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: forward_back
       rect:
         serializedVersion: 2
-        x: 1076
-        y: 128
+        x: 1481
+        y: 385
         width: 15
         height: 23
       alignment: 9
@@ -1750,12 +2503,18 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: bb4d30a7828c5624aae1e4ddb1d49a91
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: galka
       rect:
         serializedVersion: 2
-        x: 1161
-        y: 552
+        x: 1262
+        y: 601
         width: 10
         height: 12
       alignment: 9
@@ -1764,8 +2523,20 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 01d3330f1855ecf42a650e094e72c0fd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
+    bones: []
+    spriteID: 
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

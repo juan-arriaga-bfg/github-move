@@ -32,9 +32,9 @@ public class ActionExecuteComponent : ECSEntity, IECSSystem, IActionHistoryCompo
         
     }
 
-    public bool IsPersistence
+    public object GetDependency()
     {
-        get { return false; }
+        return null;
     }
 
     public bool IsExecuteable()

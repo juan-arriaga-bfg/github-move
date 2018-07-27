@@ -28,8 +28,11 @@ public class ObstaclePieceBuilder : GenericPieceBuilder
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
 				.RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.ObstacleState})
-				.RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{IsAutoStart = false}))
-			.RegisterComponent(new TouchReactionConditionStorage()));
+				.RegisterDefinition(new TouchReactionDefinitionObstacleComponent{IsAutoStart = false}))
+			.RegisterComponent(new TouchReactionConditionStorage()))
+			.RegisterComponent(new PathfinderComponent()
+				.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
+					.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType))));
 		
 		return piece;
 	}

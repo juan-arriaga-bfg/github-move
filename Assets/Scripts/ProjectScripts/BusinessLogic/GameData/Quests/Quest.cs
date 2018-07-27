@@ -40,14 +40,22 @@ public class Quest
     {
         get
         {
-            var dict = new Dictionary<int, int>();
+            var rewards = new Dictionary<int, int>();
 
-            foreach (var pair in def.Rewards)
+            foreach (var reward in def.Rewards)
             {
-                dict.Add(PieceType.Parse(pair.Currency), pair.Amount);
+                var id = PieceType.Parse(reward.Currency);
+
+                if (rewards.ContainsKey(id))
+                {
+                    rewards[id] += reward.Amount;
+                    continue;
+                }
+                
+                rewards.Add(id, reward.Amount);
             }
             
-            return dict;
+            return rewards;
         }
     }
 

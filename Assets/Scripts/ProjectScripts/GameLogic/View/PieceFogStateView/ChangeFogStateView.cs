@@ -15,7 +15,7 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 	
 	public override Vector3 Ofset
 	{
-		get { return new Vector3(0, 1.5f); }
+		get { return new Vector3(0, 0.1f); }
 	}
 	
 	public override void Init(Piece piece)
@@ -24,7 +24,7 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 		
 		Priority = defaultPriority = 0;
 		
-		Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceMenu);
+		Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
 	}
 
 	public override void SetOfset()
@@ -39,7 +39,7 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 
 	public override void ResetViewOnDestroy()
 	{
-		Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceMenu);
+		Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
 		
 		base.ResetViewOnDestroy();
 	}
@@ -54,7 +54,7 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 	
 	public void OnBoardEvent(int code, object context)
 	{
-		if (code != GameEventsCodes.ClosePieceMenu || context is FogDef && ((FogDef) context).Uid == def.Uid) return;
+		if (code != GameEventsCodes.ClosePieceUI || context is FogDef && ((FogDef) context).Uid == def.Uid) return;
 		
 		Change(false);
 	}

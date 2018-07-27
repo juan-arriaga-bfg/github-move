@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Text;
 
 public class UIQuestWindowModel : IWWindowModel 
 {
@@ -34,20 +35,10 @@ public class UIQuestWindowModel : IWWindowModel
     {
         get
         {
-            var amount = 0;
-
-            foreach (var reward in Quest.Rewards)
-            {
-                var def = GameDataService.Current.PiecesManager.GetPieceDef(reward.Key);
-                
-                if(def == null) continue;
-
-                amount += def.SpawnResources.Amount * reward.Value;
-            }
+            var reward = CurrencyHellper.ResourcePieceToCurrence(Quest.Rewards, Currency.Coins.Name);
             
-            return string.Format(
-                "<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>Reward:</color></font> <size=50>{0} <sprite name={1}></size>",
-                amount, Currency.Coins.Name);
+            return string.Format("<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>Reward:</color></font> <size=50>{0} <sprite name={1}></size>",
+                reward.Amount, reward.Currency);
         }
     }
 

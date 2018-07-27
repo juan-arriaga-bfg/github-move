@@ -1,4 +1,7 @@
-﻿public class ChestPieceComponent : IECSComponent, IPieceBoardObserver, ITimerComponent
+﻿using System.Linq;
+using UnityEngine;
+
+public class ChestPieceComponent : IECSComponent, IPieceBoardObserver, ITimerComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     
@@ -41,6 +44,7 @@
 
         if (Chest.StartTime != null) timer.Start(Chest.StartTime.Value);
     }
+    
 
     public void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)
     {
@@ -87,10 +91,6 @@
             GameDataService.Current.ChestsManager.ActiveChest = null;
         }
         
-        var hint = contextPiece.Context.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
-        
-        if(hint == null) return;
-        
-        hint.Step(HintType.OpenChest);
+        contextPiece.Context.HintCooldown.Step(HintType.OpenChest);
     }
 }

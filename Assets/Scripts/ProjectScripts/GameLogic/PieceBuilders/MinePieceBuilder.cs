@@ -26,10 +26,13 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 		AddObserver(piece, storage);
 		
 		piece.RegisterComponent(new TouchReactionComponent()
-			.RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
-				.RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.MineState})
-				.RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{IsAutoStart = false}))
-			.RegisterComponent(new TouchReactionConditionStorage()));
+			 .RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
+				 .RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.MineState})
+				 .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{IsAutoStart = false}))
+			 .RegisterComponent(new TouchReactionConditionStorage()))
+			 .RegisterComponent(new PathfinderComponent()
+				 .RegisterComponent(new PiecePathfindBoardCondition(context, piece)
+					 .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType))));
         
 		return piece;
 	}

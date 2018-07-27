@@ -28,13 +28,12 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
 //            UIWindowType.RobberyWindow,
             UIWindowType.ErrorWindow,
             UIWindowType.CastleWindow,
+            UIWindowType.EnergyShopWindow,
 //            UIWindowType.StorageWindow,
 //            UIWindowType.MarketWindow,
 //            UIWindowType.ProductionWindow,
         });
         
-        IWUIManager.Instance.CachedTransform.localPosition = new Vector3(0, 100, 0);
-
         // on cache complete
         IWUIManager.Instance.OnUIInited += () =>
         {

@@ -8,12 +8,33 @@
         
         var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType);
 
-        if (def != null && def.Reproduction != null)
+        if (def == null) return piece;
+
+        if (def.Reproduction != null)
         {
+            var typeDef = PieceType.GetDefById(pieceType);
+
+            typeDef.Filter.Add(PieceTypeFilter.Reproduction);
+            
             var observer = new ReproductionPieceComponent {Child = def.Reproduction};
         
             piece.RegisterComponent(observer);
             AddObserver(piece, observer);
+        }
+
+        if (def.SpawnResources != null)
+        {
+            var typeDef = PieceType.GetDefById(pieceType);
+
+            typeDef.Filter = typeDef.Filter | PieceTypeFilter.Resource;
+            
+            if(def.SpawnResources.Currency == Currency.Energy.Name) typeDef.Filter = typeDef.Filter | PieceTypeFilter.Energy;
+            
+            piece.RegisterComponent(new ResourceStorageComponent{Resources = def.SpawnResources});
+		
+            piece.RegisterComponent(new TouchReactionComponent()
+                .RegisterComponent(new TouchReactionDefinitionCollectResource())
+                .RegisterComponent(new TouchReactionConditionComponent()));
         }
         
         return piece;

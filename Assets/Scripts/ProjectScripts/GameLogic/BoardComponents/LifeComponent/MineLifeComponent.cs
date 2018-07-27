@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 
 public class MineLifeComponent : StorageLifeComponent
 {
@@ -8,26 +9,13 @@ public class MineLifeComponent : StorageLifeComponent
     {
         get
         {
-            return def.Conditions.Find(pair => pair.Currency == Currency.Energy.Name);
+            return def.Price;
         }
     }
     
-    public override CurrencyPair Worker
-    {
-        get
-        {
-            return  def.Conditions.Find(pair => pair.Currency == Currency.Worker.Name);
-        }
-    }
-
-    public override List<CurrencyPair> Conditions
-    {
-        get { return def.Conditions; }
-    }
-
     public override string Key
     {
-        get { return string.Format("{0}_{1}", thisContext.PieceType, def.Position); }
+        get { return def.Position.ToSaveString(); }
     }
 
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
@@ -48,7 +36,14 @@ public class MineLifeComponent : StorageLifeComponent
         storage.Capacity = storage.Amount = def.Reward.Amount;
         
         HP = def.Size;
-        current = 0;//GameDataService.Current.ObstaclesManager.GetSaveStep(position);
+    }
+
+    protected override void Success()
+    {
+        base.Success();
+        
+        var sequence = DOTween.Sequence();
+        sequence.InsertCallback(0.5f, () => AddResourceView.Show(StartPosition(), def.StepReward));
     }
 
     protected override void OnComplete()

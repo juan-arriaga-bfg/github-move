@@ -21,12 +21,25 @@ public class HintArrowView : BoardElementView
     public static void Show(BoardPosition position, float offsetX = 0, float offsetY = 0)
     {
         var board = BoardService.Current.GetBoardById(0);
+        
+        var target = board.BoardLogic.GetPieceAt(position);
+
+        if (target != null)
+        {
+            var multi = target.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
+
+            if (multi != null)
+            {
+                position = multi.GetTopPosition;
+            }
+        }
+        
         var worldPos = board.BoardDef.GetSectorCenterWorldPosition(position.X, position.Up.Y, position.Z);
         var arrowView = board.RendererContext.CreateBoardElementAt<HintArrowView>(R.HintArrow, position);
 
         arrowView.CachedTransform.localPosition = arrowView.CachedTransform.localPosition + (Vector3.up * 2) + new Vector3(offsetX, offsetY);
         arrowView.Show();
         
-        board.Manipulator.CameraManipulator.ZoomTo(0.6f, worldPos);
+        board.Manipulator.CameraManipulator.MoveTo(worldPos);
     }
 }

@@ -36,7 +36,7 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
         
         if(life == null) return;
         
-        Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceMenu);
+        Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
         
         for (var i = 1; i < life.HP; i++)
         {
@@ -63,7 +63,7 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
 
         light.DOFade(1f, 0f);
         
-        Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceMenu);
+        Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
 
         foreach (var dt in dots)
         {
@@ -96,7 +96,7 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
     
     public void OnBoardEvent(int code, object context)
     {
-        if (code != GameEventsCodes.ClosePieceMenu || context is BoardPosition && ((BoardPosition) context).Equals(Context.CachedPosition)) return;
+        if (code != GameEventsCodes.ClosePieceUI || context is BoardPosition && ((BoardPosition) context).Equals(Context.CachedPosition)) return;
 		
         Change(false);
     }

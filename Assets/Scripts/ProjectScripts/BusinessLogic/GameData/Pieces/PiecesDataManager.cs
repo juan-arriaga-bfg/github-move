@@ -93,19 +93,19 @@ public class PiecesDataManager : IECSComponent, IDataManager, IDataLoader<List<P
         
         if (first == PieceType.Storage1.Id)
         {
-            StoragePosition = position.Right;
+            StoragePosition = position;
             return;
         }
         
         if (first == PieceType.Castle1.Id)
         {
-            CastlePosition = position.Up.Right;
+            CastlePosition = position;
             return;
         }
         
         if (first == PieceType.Sawmill1.Id)
         {
-            SawmillPosition = position.Right;
+            SawmillPosition = position;
             return;
         }
         

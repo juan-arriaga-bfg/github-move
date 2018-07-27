@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 public class TouchReactionDefinitionOpenChestWindow : TouchReactionDefinitionComponent
 {
@@ -7,7 +8,7 @@ public class TouchReactionDefinitionOpenChestWindow : TouchReactionDefinitionCom
 	
 	public override bool Make(BoardPosition position, Piece piece)
 	{
-		if (isComplete) return false;
+		//if (isComplete) return false;
 		
 		chestComponent = piece.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
 		
@@ -36,14 +37,27 @@ public class TouchReactionDefinitionOpenChestWindow : TouchReactionDefinitionCom
 	{
 		isComplete = true;
 
+		var rewardPieces = chestComponent.Chest.GetRewardPieces();
 		piece.Context.ActionExecutor.AddAction(new ChestRewardAction
 		{
 			From = position,
-			Pieces = chestComponent.Chest.GetRewardPieces(),
-			OnComplete = new CollapsePieceToAction
+			Pieces = rewardPieces,
+			OnCompleteAction = () =>
 			{
-				To = position,
-				Positions = new List<BoardPosition> {position}
+				var remaind = rewardPieces.Sum(elem => elem.Value);
+				if (remaind == 0)
+				{
+					piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+					{
+						To = position,
+						Positions = new List<BoardPosition> {position}
+					});
+				}
+				else
+				{
+					piece.ActorView.UpdateView();
+					//TODO storage state
+				}
 			}
 		});
 	}

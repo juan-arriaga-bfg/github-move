@@ -36,14 +36,7 @@
 		model.Message = string.Format("You need to improve the level of the {0}", pieceName);
 		model.AcceptLabel = string.Format("Go to {0}", pieceName);
         
-		model.OnAccept = () =>
-		{
-			var hint = board.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
-        
-			if(hint == null) return;
-        
-			hint.Step(GameDataService.Current.PiecesManager.CastlePosition);
-		};
+		model.OnAccept = () => { board.HintCooldown.Step(GameDataService.Current.PiecesManager.CastlePosition); };
 		model.OnCancel = null;
         
 		UIService.Get.ShowWindow(UIWindowType.MessageWindow);

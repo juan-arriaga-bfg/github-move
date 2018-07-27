@@ -11,22 +11,33 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
     
     public virtual CurrencyPair Worker
     {
-        get { return new CurrencyPair(); }
-    }
-
-    public virtual List<CurrencyPair> Conditions
-    {
-        get { return new List<CurrencyPair>(); }
+        get { return new CurrencyPair {Currency = Currency.Worker.Name, Amount = 1}; }
     }
     
     public virtual string Key
     {
-        get { return string.Format("{0}_{1}", thisContext.PieceType, 0); }
+        get { return thisContext.CachedPosition.ToSaveString(); }
     }
     
     public virtual void OnAddToBoard(BoardPosition position, Piece context = null)
     {
         if(storage == null) storage = thisContext.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
+        
+        var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
+
+        if (timer != null) timer.OnStart += OnTimerStart;
+        
+        var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+
+        if (save == null) return;
+        
+        var item = save.GetLifeSave(position);
+        
+        if (item == null) return;
+        
+        current = item.Step;
+        
+        OnTimerStart();
     }
 
     public virtual void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)
@@ -35,6 +46,7 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
 
     public virtual void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
+        storage.Timer.OnStart -= OnTimerStart;
     }
     
     public bool Damage()
@@ -43,10 +55,10 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
         
         var isSuccess = false;
 
-        if (CurrencyHellper.IsCanPurchase(Conditions, true) == false) return false;
+        if (CurrencyHellper.IsCanPurchase(Energy, true) == false
+            || thisContext.Context.WorkerLogic.Get(Key, storage.Timer.Delay) == false) return false;
         
         Success();
-        thisContext.Context.WorkerLogic.Get(Key, storage.Timer.Delay);
         
         CurrencyHellper.Purchase(Currency.Damage.Name, 1, Energy, success =>
         {
@@ -57,14 +69,17 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
             Damage(Worker == null ? 1 : Worker.Amount);
             
             storage.Timer.Start();
-            
-            if (current != HP) OnStep();
-            else OnComplete();
         });
         
         return isSuccess;
     }
 
+    private void OnTimerStart()
+    {
+        if (current != HP) OnStep();
+        else OnComplete();
+    }
+    
     protected virtual void Success()
     {
     }

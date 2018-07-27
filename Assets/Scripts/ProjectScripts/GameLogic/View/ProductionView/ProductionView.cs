@@ -48,12 +48,12 @@ public class ProductionView : UIBoardView, IBoardEventListener
 		icon.sprite = IconService.Current.GetSpriteById(production.Target);
 		
 		pattern.SetActive(false);
-		Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceMenu);
+		Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
 	}
 	
 	public override void ResetViewOnDestroy()
 	{
-		Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceMenu);
+		Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
 		
 		foreach (var item in items)
 		{
@@ -90,7 +90,7 @@ public class ProductionView : UIBoardView, IBoardEventListener
 
 	public void OnBoardEvent(int code, object context)
 	{
-		if (code != GameEventsCodes.ClosePieceMenu || context is ProductionComponent && ((ProductionComponent) context) == production) return;
+		if (code != GameEventsCodes.ClosePieceUI || context is ProductionComponent && ((ProductionComponent) context) == production) return;
 		
 		Priority = defaultPriority;
 

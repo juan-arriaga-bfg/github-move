@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PieceTypeDef
+public partial class PieceTypeDef
 {
     public int Id { get; set; }
 

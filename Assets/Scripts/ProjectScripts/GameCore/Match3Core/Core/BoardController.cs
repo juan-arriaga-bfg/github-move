@@ -4,7 +4,7 @@ using UnityEngine;
 public class BoardController : ECSEntity,
     IActionExecuteComponent, IBoardEventsComponent, IBoardLoggerComponent, IBoardLogicComponent, IBoardDefinitionComponent, IBoardStatesComponent, ISessionBoardStateComponent,
     IBoardSystemProcessor, IBoardRendererComponent, IBoardManipulatorComponent, IBoardRandomComponent, IReproductionLogicComponent, IEnemiesLogicComponent,
-    IProductionLogicComponent, IWorkerCurrencyLogicComponent
+    IProductionLogicComponent, IWorkerCurrencyLogicComponent, IHintCooldownComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -20,171 +20,86 @@ public class BoardController : ECSEntity,
     protected ActionExecuteComponent actionExecutor;
     public virtual ActionExecuteComponent ActionExecutor
     {
-        get
-        {
-            if (actionExecutor == null)
-            {
-                actionExecutor = GetComponent<ActionExecuteComponent>(ActionExecuteComponent.ComponentGuid);
-            }
-            return actionExecutor;
-        }
+        get { return actionExecutor ?? (actionExecutor = GetComponent<ActionExecuteComponent>(ActionExecuteComponent.ComponentGuid)); }
     }
 
     protected BoardEventsComponent boardEvents;
     public virtual BoardEventsComponent BoardEvents
     {
-        get
-        {
-            if (boardEvents == null)
-            {
-                boardEvents = GetComponent<BoardEventsComponent>(BoardEventsComponent.ComponentGuid);
-            }
-            return boardEvents;
-        }
+        get { return boardEvents ?? (boardEvents = GetComponent<BoardEventsComponent>(BoardEventsComponent.ComponentGuid)); }
     }
 
     protected BoardLoggerComponent logger;
     public virtual BoardLoggerComponent Logger
     {
-        get
-        {
-            if (logger == null)
-            {
-                logger = GetComponent<BoardLoggerComponent>(BoardLoggerComponent.ComponentGuid);
-            }
-            return logger;
-        }
+        get { return logger ?? (logger = GetComponent<BoardLoggerComponent>(BoardLoggerComponent.ComponentGuid)); }
     }
 
     protected BoardLogicComponent boardLogic;
     public virtual BoardLogicComponent BoardLogic
     {
-        get
-        {
-            if (boardLogic == null)
-            {
-                boardLogic = GetComponent<BoardLogicComponent>(BoardLogicComponent.ComponentGuid);
-            }
-            return boardLogic;
-        }
+        get { return boardLogic ?? (boardLogic = GetComponent<BoardLogicComponent>(BoardLogicComponent.ComponentGuid)); }
     }
 
     protected BoardDefinitionComponent boardDef;
 
     public virtual BoardDefinitionComponent BoardDef
     {
-        get
-        {
-            if (boardDef == null)
-            {
-                boardDef = GetComponent<BoardDefinitionComponent>(BoardDefinitionComponent.ComponentGuid);
-            }
-            return boardDef;
-        }
+        get { return boardDef ?? (boardDef = GetComponent<BoardDefinitionComponent>(BoardDefinitionComponent.ComponentGuid)); }
     }
 
     protected BoardStatesComponent states;
     public virtual BoardStatesComponent States
     {
-        get
-        {
-            if (states == null)
-            {
-                states = GetComponent<BoardStatesComponent>(BoardStatesComponent.ComponentGuid);
-            }
-            return states;
-        }
+        get { return states ?? (states = GetComponent<BoardStatesComponent>(BoardStatesComponent.ComponentGuid)); }
     }
     
     protected SessionBoardStateComponent session;
     public SessionBoardStateComponent Session
     {
-        get
-        {
-            if (session == null)
-            {
-                session = States.GetState<SessionBoardStateComponent>(SessionBoardStateComponent.ComponentGuid);
-            }
-            return session;
-        }
+        get { return session ?? (session = States.GetState<SessionBoardStateComponent>(SessionBoardStateComponent.ComponentGuid)); }
     }
     
     protected BoardRenderer rendererContext;
     public BoardRenderer RendererContext
     {
-        get
-        {
-            if (rendererContext == null)
-            {
-                rendererContext = GetComponent<BoardRenderer>(BoardRenderer.ComponentGuid);
-            }
-            return rendererContext;
-        }
+        get { return rendererContext ?? (rendererContext = GetComponent<BoardRenderer>(BoardRenderer.ComponentGuid)); }
     }
     
     protected BoardManipulatorComponent manipulator;
     public BoardManipulatorComponent Manipulator
     {
-        get
-        {
-            if (manipulator == null)
-            {
-                manipulator = GetComponent<BoardManipulatorComponent>(BoardManipulatorComponent.ComponentGuid);
-            }
-            return manipulator;
-        }
+        get { return manipulator ?? (manipulator = GetComponent<BoardManipulatorComponent>(BoardManipulatorComponent.ComponentGuid)); }
     }
     
     protected ReproductionLogicComponent reproductionLogic;
     public ReproductionLogicComponent ReproductionLogic
     {
-        get
-        {
-            if (reproductionLogic == null)
-            {
-                reproductionLogic = GetComponent<ReproductionLogicComponent>(ReproductionLogicComponent.ComponentGuid);
-            }
-            return reproductionLogic;
-        }
+        get { return reproductionLogic ?? (reproductionLogic = GetComponent<ReproductionLogicComponent>(ReproductionLogicComponent.ComponentGuid)); }
     }
     
     protected EnemiesLogicComponent enemiesLogic;
     public EnemiesLogicComponent EnemiesLogic
     {
-        get
-        {
-            if (enemiesLogic == null)
-            {
-                enemiesLogic = GetComponent<EnemiesLogicComponent>(EnemiesLogicComponent.ComponentGuid);
-            }
-            return enemiesLogic;
-        }
+        get { return enemiesLogic ?? (enemiesLogic = GetComponent<EnemiesLogicComponent>(EnemiesLogicComponent.ComponentGuid)); }
     }
     
     protected ProductionLogicComponent productionLogic;
     public ProductionLogicComponent ProductionLogic
     {
-        get
-        {
-            if (productionLogic == null)
-            {
-                productionLogic = GetComponent<ProductionLogicComponent>(ProductionLogicComponent.ComponentGuid);
-            }
-            return productionLogic;
-        }
+        get { return productionLogic ?? (productionLogic = GetComponent<ProductionLogicComponent>(ProductionLogicComponent.ComponentGuid)); }
     }
     
     protected WorkerCurrencyLogicComponent workerLogic;
     public WorkerCurrencyLogicComponent WorkerLogic
     {
-        get
-        {
-            if (workerLogic == null)
-            {
-                workerLogic = GetComponent<WorkerCurrencyLogicComponent>(WorkerCurrencyLogicComponent.ComponentGuid);
-            }
-            return workerLogic;
-        }
+        get { return workerLogic ?? (workerLogic = GetComponent<WorkerCurrencyLogicComponent>(WorkerCurrencyLogicComponent.ComponentGuid)); }
+    }
+    
+    protected HintCooldownComponent hintCooldown;
+    public HintCooldownComponent HintCooldown
+    {
+        get { return hintCooldown ?? (hintCooldown = GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid)); }
     }
     
     private Dictionary<int, IPieceBuilder> pieceBuilderDef;

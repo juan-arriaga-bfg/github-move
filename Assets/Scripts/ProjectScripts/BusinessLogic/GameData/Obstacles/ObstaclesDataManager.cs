@@ -21,14 +21,11 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     private ObstacleDef defaultDef;
     private Dictionary<int, List<ObstacleDef>> branches;
     
-    private Dictionary<BoardPosition, int> saveObstacles;
-
     private MatchDefinitionComponent matchDefinition;
     
     public void Reload()
     {
         Obstacles = null;
-        saveObstacles = null;
         LoadData(new ResourceConfigDataMapper<List<ObstacleDef>>("configs/obstacles.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
     
@@ -60,17 +57,6 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
                     
                     Obstacles.Add(next.Piece, next);
                     AddToBranch(matchDefinition.GetFirst(next.Piece), next);
-                }
-                
-                var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
-                
-                if(save == null || save.Obstacles == null) return;
-                
-                saveObstacles = new Dictionary<BoardPosition, int>();
-
-                foreach (var item in save.Obstacles)
-                {
-                    saveObstacles.Add(item.Position, item.Step);
                 }
             }
             else
@@ -128,7 +114,14 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
         return def.Delay;
     }
 
-    public Dictionary<int, int> GetRewardByStep(int piece, int step)
+    public List<CurrencyPair> GetRewardByStep(int piece, int step)
+    {
+        var def = GetStep(piece, step);
+        
+        return def.StepRewards;
+    }
+
+    public Dictionary<int, int> GetPiecesByStep(int piece, int step)
     {
         var result = new Dictionary<int, int>();
         var def = GetStep(piece, step);
@@ -163,18 +156,5 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
         var def = GetStep(piece, step);
         
         return def.FastPrice;
-    }
-
-    public int GetSaveStep(BoardPosition position)
-    {
-        if (saveObstacles == null || saveObstacles.Count == 0) return 0;
-        
-        int step;
-        
-        if (saveObstacles.TryGetValue(position, out step) == false) return 0;
-        
-        saveObstacles.Remove(position);
-        
-        return step;
     }
 }

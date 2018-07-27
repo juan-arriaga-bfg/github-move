@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -21,45 +21,53 @@ MonoBehaviour:
     materialPreset: {fileID: 2100000, guid: c89a26b8f9bca2a4db04463316012bc1, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
+    spriteAsset: {fileID: 11400000, guid: e362c4cfa07f0af4c89825d6567fd32b, type: 2}
   - id: 1
     nameId: level
     fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 40af28b5e35bf9e4d95ed2641a26f305, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
+    spriteAsset: {fileID: 11400000, guid: e362c4cfa07f0af4c89825d6567fd32b, type: 2}
   - id: 7
     nameId: messageHard
     fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: c89a26b8f9bca2a4db04463316012bc1, type: 2}
     mainColor: {r: 0.5764706, g: 0.24313726, b: 0, a: 1}
     fontSize: -1
+    spriteAsset: {fileID: 11400000, guid: e362c4cfa07f0af4c89825d6567fd32b, type: 2}
   - id: 3
     nameId: error
     fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: fae4c013b7c9fd246a636db668c8c6fd, type: 2}
     mainColor: {r: 0.90588236, g: 0.02745098, b: 0.02745098, a: 0}
     fontSize: -1
+    spriteAsset: {fileID: 11400000, guid: e362c4cfa07f0af4c89825d6567fd32b, type: 2}
   - id: 4
     nameId: message
     fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 971c9320aef681a47afb074c8dc1b434, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
+    spriteAsset: {fileID: 11400000, guid: e362c4cfa07f0af4c89825d6567fd32b, type: 2}
   - id: 5
     nameId: titleAndButton
     fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 3e59aa505c1fd16488e087d3149c642d, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
+    spriteAsset: {fileID: 11400000, guid: e362c4cfa07f0af4c89825d6567fd32b, type: 2}
   - id: 6
     nameId: messageLock
     fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 2dfda0c8933f63b4e88da583b6fa0fe3, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
+    spriteAsset: {fileID: 11400000, guid: e362c4cfa07f0af4c89825d6567fd32b, type: 2}
   - id: 10
     nameId: Number
     fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 892318b211b69834e92a7156f87083b9, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
+    spriteAsset: {fileID: 11400000, guid: e362c4cfa07f0af4c89825d6567fd32b, type: 2}

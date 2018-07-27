@@ -41,6 +41,10 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
         
         progress.fillAmount = Mathf.Clamp(value/manager.Price, 0f, 1f);
         
+#if UNITY_EDITOR
+        amountLabel.Text = string.Format("{0}/{1}", value, manager.Price);
+#endif
+        
         if(CurrencyHellper.IsCanPurchase(itemUid, manager.Price) == false) return;
 
         CurrencyHellper.Purchase(Currency.Level.Name, 1, itemUid, manager.Price);

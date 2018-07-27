@@ -25,6 +25,11 @@ public class BoardTimerView : UIBoardView
         timer.OnExecute += UpdateView;
     }
 
+    protected virtual void OnDestroy()
+    {
+        if(timer != null) timer.OnExecute -= UpdateView;
+    }
+
     public override void ResetViewOnDestroy()
     {
         timer.OnExecute -= UpdateView;

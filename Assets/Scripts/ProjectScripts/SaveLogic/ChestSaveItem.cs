@@ -1,8 +1,49 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using Newtonsoft.Json;
+using UnityEngine;
+
+public static class DictionaryStringConverter
+{
+    public static string ToSaveString<TKey, TValue>(this Dictionary<TKey, TValue> target)
+    {
+        StringBuilder strBuilder = new StringBuilder();
+
+        foreach (var elem in target)
+        {
+            strBuilder.Append(elem.Key);
+            strBuilder.Append(",");
+            strBuilder.Append(elem.Value);
+            strBuilder.Append(",");
+            
+            
+        }
+
+        if (target.Count > 0)
+            strBuilder.Remove(strBuilder.Length - 1, 1);
+
+        return strBuilder.ToString();
+    }
+
+    public static Dictionary<TKey, TValue> FromDataArray<TKey, TValue>(string[] dataArray, Func<string, TKey> parseKey, Func<string, TValue> parseValue, 
+                                                                       int beginPosition, int endPosition = -1)
+    {
+        if (endPosition < 0)
+            endPosition = dataArray.Length;
+        Dictionary<TKey, TValue> dict = new Dictionary<TKey, TValue>();
+        for (int i = beginPosition; i < endPosition; i+=2)
+        {
+            dict.Add(parseKey(dataArray[i]), parseValue(dataArray[i+1]));
+        }
+
+        return dict;
+    }
+}
 
 public class ChestSaveItemJsonConverter : JsonConverter
 {
+    
     public override bool CanConvert(Type objectType)
     {
         return objectType == typeof (ChestSaveItem);
@@ -14,11 +55,12 @@ public class ChestSaveItemJsonConverter : JsonConverter
         
         serializer.TypeNameHandling = TypeNameHandling.None;
 
-        serializer.Serialize(writer, string.Format("{0},{1},{2},{3}",
+        serializer.Serialize(writer, string.Format("{0},{1},{2},{3},{4}",
             targetValue.Id,
             (int) targetValue.State,
             targetValue.StartTime.ConvertToUnixTime(),
-            targetValue.Position.ToSaveString()));
+            targetValue.Position.ToSaveString(),
+            targetValue.Reward.ToSaveString()));
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -31,7 +73,8 @@ public class ChestSaveItemJsonConverter : JsonConverter
             Id = int.Parse(dataArray[0]),
             State = (ChestState) int.Parse(dataArray[1]),
             StartTime = DateTimeExtension.UnixTimeToDateTime(long.Parse(dataArray[2])),
-            Position = new BoardPosition(int.Parse(dataArray[3]), int.Parse(dataArray[4]), int.Parse(dataArray[5]))
+            Position = new BoardPosition(int.Parse(dataArray[3]), int.Parse(dataArray[4]), int.Parse(dataArray[5])),
+            Reward = DictionaryStringConverter.FromDataArray(dataArray, int.Parse, int.Parse, 6)
         };
         
         return targetValue;
@@ -45,6 +88,7 @@ public class ChestSaveItem
     private BoardPosition position;
     private ChestState state;
     private DateTime startTime;
+    private Dictionary<int, int> reward;
     
     public int Id
     {
@@ -68,5 +112,11 @@ public class ChestSaveItem
     {
         get { return startTime; }
         set { startTime = value; }
+    }
+
+    public Dictionary<int, int> Reward
+    {
+        get { return reward; }
+        set { reward = value; }
     }
 }

@@ -11,7 +11,8 @@
     
 	public override bool Make(BoardPosition position, Piece piece)
 	{
-		piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, position);
+		
+		piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, position);
         
 		if (viewDef == null)
 		{

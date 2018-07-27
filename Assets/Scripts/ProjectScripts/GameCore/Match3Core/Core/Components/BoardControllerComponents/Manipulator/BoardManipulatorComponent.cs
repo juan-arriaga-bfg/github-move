@@ -46,15 +46,15 @@ public class BoardManipulatorComponent : ECSEntity,
     {
         return true;
     }
-    
-    public bool IsPersistence
-    {
-        get { return false; }
-    }
 
     public void Execute()
     {
         if (Locker.IsLocked) return;
+    }
+
+    public object GetDependency()
+    {
+        return null;
     }
 
     public virtual LockerComponent Locker
@@ -103,7 +103,7 @@ public class BoardManipulatorComponent : ECSEntity,
 
         if (selectedView == null)
         {
-            context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
+            context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
             return false;
         }
 
@@ -115,7 +115,7 @@ public class BoardManipulatorComponent : ECSEntity,
             if (touchReaction != null) return touchReaction.Touch(pieceView.Piece.CachedPosition);
         }
         
-        context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
+        context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
         return false;
     }
 
@@ -234,9 +234,9 @@ public class BoardManipulatorComponent : ECSEntity,
                 
                 var pieceView = cachedViewForDrag as PieceBoardElementView;
                 var boardPos = context.BoardDef.GetSectorPosition(pos);
-                pieceView.OnDragEnd(boardPos, pos);
                 
                 cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, pieceView.Piece.Layer.Index));
+                pieceView.OnDragEnd(boardPos, pos);
             }
 
             cachedViewForDrag = null;

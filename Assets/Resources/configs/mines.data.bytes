@@ -1,95 +1,77 @@
 [
   {
     "Uid": "MineA",
-    "Delay": 30,
-    "Size": 25,
-    "Position" :
-    {
-      "X" : 21,
-      "Y" : 4
+    "Delay": 35,
+    "Size": 35,
+    "Position": {
+      "X": 40,
+      "Y": 40
     },
-    "FastPrice" :
-    {
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 10
+    },
+    "FastPrice": {
       "Currency": "Crystals",
       "Amount": 1
     },
-    "Reward" :
-    {
-      "Currency" : "ChestA1",
-      "Amount" : 1
+    "Reward": {
+      "Currency": "ChestA1",
+      "Amount": 1
     },
-    "Conditions" :
-    [
-      {
-        "Currency" : "Worker",
-        "Amount" : 1
-      },
-      {
-        "Currency" : "Energy",
-        "Amount" : 15
-      }
-    ]
-  },
-  {
-    "Uid": "MineX",
-    "Delay": 420,
-    "Size": 25,
-    "Position" :
-    {
-      "X" : 14,
-      "Y" : 0
-    },
-    "FastPrice" :
-    {
-      "Currency": "Crystals",
-      "Amount": 9
-    },
-    "Reward" :
-    {
-      "Currency" : "ChestX1",
-      "Amount" : 1
-    },
-    "Conditions" :
-    [
-      {
-        "Currency" : "Worker",
-        "Amount" : 1
-      },
-      {
-        "Currency" : "Energy",
-        "Amount" : 30
-      }
-    ]
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 10
+    }
   },
   {
     "Uid": "MineC",
     "Delay": 120,
     "Size": 25,
-    "Position" :
-    {
-      "X" : 14,
-      "Y" : 3
+    "Position": {
+      "X": 15,
+      "Y": 6
     },
-    "FastPrice" :
-    {
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 15
+    },
+    "FastPrice": {
       "Currency": "Crystals",
       "Amount": 3
     },
-    "Reward" :
-    {
-      "Currency" : "ChestC1",
-      "Amount" : 1
+    "Reward": {
+      "Currency": "ChestC1",
+      "Amount": 1
     },
-    "Conditions" :
-    [
-      {
-        "Currency" : "Worker",
-        "Amount" : 1
-      },
-      {
-        "Currency" : "Energy",
-        "Amount" : 25
-      }
-    ]
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 20
+    }
+  },
+  {
+    "Uid": "MineX",
+    "Delay": 30,
+    "Size": 30,
+    "Position": {
+      "X": 100,
+      "Y": 100
+    },
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 35
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 9
+    },
+    "Reward": {
+      "Currency": "ChestX1",
+      "Amount": 1
+    },
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 30
+    }
   }
 ]

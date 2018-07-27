@@ -10,6 +10,7 @@ public class ObstacleDef
     
     public CurrencyPair Price { get; set; }
     public CurrencyPair FastPrice { get; set; }
+    public List<CurrencyPair> StepRewards { get; set; }
     
     public int PieceAmount { get; set; }
     public List<ItemWeight> PieceWeights { get; set; }

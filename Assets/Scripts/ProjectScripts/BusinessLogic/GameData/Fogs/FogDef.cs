@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class FogDef
 {
-    public int Uid { get; set; }
+    public string Uid { get; set; }
     public int Level { get; set; }
     public BoardPosition Position { get; set; }
     public CurrencyPair Condition { get; set; }
+    public CurrencyPair Reward { get; set; }
     public BoardPosition Size { get; set; }
     public Dictionary<string, List<BoardPosition>> Pieces { get; set; }
     public List<ItemWeight> PieceWeights { get; set; }
@@ -17,7 +18,7 @@ public class FogDef
 		
         var minPos = board.BoardDef.GetSectorCenterWorldPosition(Position.X, Position.Y, 0);
         var maxPos = board.BoardDef.GetSectorCenterWorldPosition(max.X, max.Y, 0);
-
+        
         return (maxPos + minPos) / 2;
     }
 }

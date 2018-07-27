@@ -2,23 +2,26 @@
 
 public class TouchReactionDefinitionSpawnCastle : TouchReactionDefinitionComponent
 {
+	public int Reward = -1;
+	
 	public override bool IsViewShow(ViewDefinitionComponent viewDefinition)
 	{
-		return viewDefinition != null && viewDefinition.AddView(ViewType.StorageState).IsShow;
+		return false;
 	}
     
 	public override bool Make(BoardPosition position, Piece piece)
 	{
 		var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
-
-		if (storage == null) return false;
+		
+		var amount = 1;
         
-		int amount;
-        
-		if (storage.Scatter(out amount) == false)
+		if (storage != null && storage.SpawnPiece == Reward)
 		{
-			UIErrorWindowController.AddError("Production of the resource is not complete!");
-			return false;
+			if (storage.Scatter(out amount) == false)
+			{
+				UIErrorWindowController.AddError("Production of the resource is not complete!");
+				return false;
+			}
 		}
         
 		var free = new List<BoardPosition>();
@@ -28,21 +31,24 @@ public class TouchReactionDefinitionSpawnCastle : TouchReactionDefinitionCompone
 		{
 			return false;
 		}
+
+		if (free.Count < amount)
+			return false;
         
 		foreach (var pos in free)
 		{
 			positions.Add(pos);
-			GameDataService.Current.ChestsManager.AddToBoard(pos, storage.SpawnPiece, true);
 			if(positions.Count == amount) break;
 		}
         
 		piece.Context.ActionExecutor.AddAction(new ReproductionPieceAction
 		{
 			From = position,
-			Piece = storage.SpawnPiece,
+			Piece = Reward,
 			Positions = positions
 		});
 		
+		Reward = -1;
 		return true;
 	}
 }

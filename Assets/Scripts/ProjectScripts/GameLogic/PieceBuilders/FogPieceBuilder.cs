@@ -6,7 +6,10 @@
         
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionComponent())
-            .RegisterComponent(new TouchReactionConditionFog()));
+            .RegisterComponent(new TouchReactionConditionFog()))
+            .RegisterComponent(new PathfinderComponent()
+                .RegisterComponent(new PiecePathfindBoardCondition(context, piece)
+                    .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType))));
         
         CreateViewComponent(piece);
         

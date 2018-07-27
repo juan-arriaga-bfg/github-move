@@ -28,6 +28,7 @@ public class TasksDataManager : ECSEntity, IDataManager, IDataLoader<TasksDataMa
 
     public void Reload()
     {
+        return;
         TaskCounts = null;
         Ranges = null;
         Characters = null;
@@ -50,6 +51,7 @@ public class TasksDataManager : ECSEntity, IDataManager, IDataLoader<TasksDataMa
         {
             if (string.IsNullOrEmpty(error))
             {
+                return;
                 Delay = data.Delay;
                 TaskCounts = data.TaskCounts;
                 Ranges = data.Ranges;
@@ -75,6 +77,7 @@ public class TasksDataManager : ECSEntity, IDataManager, IDataLoader<TasksDataMa
 
     private int GetCount()
     {
+        return 0;
         var level = GameDataService.Current.LevelsManager.Level - 1;
         
         return TaskCounts[level];
@@ -82,6 +85,7 @@ public class TasksDataManager : ECSEntity, IDataManager, IDataLoader<TasksDataMa
 
     public void NextLevel()
     {
+        return;
         var count = GetCount();
         
         if(Tasks.Count == count) return;
@@ -94,6 +98,7 @@ public class TasksDataManager : ECSEntity, IDataManager, IDataLoader<TasksDataMa
     
     public void Update()
     {
+        return;
         updateAmount++;
         
         if (Timer.IsStarted) return;
@@ -103,6 +108,7 @@ public class TasksDataManager : ECSEntity, IDataManager, IDataLoader<TasksDataMa
 
     private void Refresh()
     {
+        return;
         updateAmount--;
         
         var count = GetCount();
@@ -120,6 +126,7 @@ public class TasksDataManager : ECSEntity, IDataManager, IDataLoader<TasksDataMa
     
     public void CheckLast()
     {
+        return;
         if(Tasks.Count != 0) return;
         
         Tasks.Add(CreateTask());
@@ -127,6 +134,7 @@ public class TasksDataManager : ECSEntity, IDataManager, IDataLoader<TasksDataMa
 
     private Task CreateTask()
     {
+        return null;
         Task task = null;
         
         if (isStart) task = CreateFromSave();
@@ -168,7 +176,7 @@ public class TasksDataManager : ECSEntity, IDataManager, IDataLoader<TasksDataMa
             }
         }
 
-        task.Rewards = CurrencyHellper.MinimizeCoinPieces(task.Rewards);
+//        task.Rewards = CurrencyHellper.MinimizeCoinPieces(task.Rewards);
         task.Result = new CurrencyPair{ Currency = PieceType.Parse(PieceType.Coin5.Id), Amount = task.Rewards.Sum(pair => pair.Value)};
         
         return task;
@@ -176,6 +184,7 @@ public class TasksDataManager : ECSEntity, IDataManager, IDataLoader<TasksDataMa
 
     private Task CreateFromSave()
     {
+        return null;
         var data = ProfileService.Current.GetComponent<QuestSaveComponent>(QuestSaveComponent.ComponentGuid);
 
         if (data.Market == null || data.Market.Count == 0) return null;
@@ -198,6 +207,8 @@ public class TasksDataManager : ECSEntity, IDataManager, IDataLoader<TasksDataMa
     private List<ItemWeight> GetWeights(int level)
     {
         var weights = new List<ItemWeight>();
+        
+        return weights;
 
         foreach (var def in Defs)
         {
