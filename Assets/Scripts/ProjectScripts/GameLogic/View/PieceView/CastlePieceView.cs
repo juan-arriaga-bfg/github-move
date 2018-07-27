@@ -1,46 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
 using UnityEngine;
-
-[Serializable]
-public class RiverData
-{
-    public GameObject LeftTop;
-    public GameObject Left;
-    public GameObject LeftBottom;
-    public GameObject Bottom;
-    public GameObject RightBottom;
-    public GameObject Right;
-    public GameObject RightTop;
-    public GameObject Top;
-
-    public GameObject BridgeLeft;
-    public GameObject BridgeRight;
-    
-    public GameObject GetRiverPrefabByShift(int xShift, int yShift)
-    {
-        if (xShift < 0 && yShift > 0)
-            return LeftTop;
-        if (xShift < 0 && yShift == 0)
-            return Left;
-        if (xShift < 0 && yShift < 0)
-            return LeftBottom;
-        if (xShift == 0 && yShift < 0)
-            return Bottom;
-        if (xShift > 0 && yShift < 0)
-            return RightBottom;
-        if (xShift > 0 && yShift == 0)
-            return Right;
-        if (xShift > 0 && yShift > 0)
-            return RightTop;
-        if (xShift == 0 && yShift > 0)
-            return Top;
-
-        //only [0;0]
-        return null;
-    }
-}
 
 public class CastlePieceView : PieceBoardElementView
 {   
@@ -52,9 +11,9 @@ public class CastlePieceView : PieceBoardElementView
     [SerializeField] private float open;
     [SerializeField] private float close;
 
-    [SerializeField] private RiverData riverData;    
-
-    private List<GameObject> views = new List<GameObject>();
+    private List<BoardElementView> views = new List<BoardElementView>();
+    private List<BoardPosition> lockedPositions = new List<BoardPosition>();
+    private Piece king;
     
     private StorageComponent storage;
     
@@ -68,7 +27,7 @@ public class CastlePieceView : PieceBoardElementView
         
         storage.Timer.OnStart += OnStart;
         storage.Timer.OnComplete += Change;
-        InitRiver(riverData);
+        InitRiver();
         Change();
     }
 
@@ -97,22 +56,58 @@ public class CastlePieceView : PieceBoardElementView
         
         SpawnRiverElement(maskPosition, observer, xShift, yShift);
     }
+    
+    public BoardElementView CreateRiverElementByShift(BoardController board, BoardPosition targetPosition, int xShift, int yShift)
+    {
+        if (xShift < 0 && yShift > 0)
+            return board.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleTop, targetPosition); //return LeftTop;
+        if (xShift < 0 && yShift == 0)
+            return board.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngle, targetPosition);
+        if (xShift < 0 && yShift < 0)
+            return board.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleLeft, targetPosition);
+        if (xShift == 0 && yShift < 0)
+            return board.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverLeft, targetPosition);
+        if (xShift > 0 && yShift < 0)
+            return board.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleBottom, targetPosition);
+        if (xShift > 0 && yShift == 0)
+            return board.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverRight, targetPosition);
+        if (xShift > 0 && yShift > 0)
+            return board.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleRight, targetPosition);
+        if (xShift == 0 && yShift > 0)
+            return board.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverLeft, targetPosition);
+        return null;
+    }
 
     private void SpawnRiverElement(BoardPosition maskPosition, MulticellularPieceBoardObserver observer,  int xShift, int yShift)
     {
         var targetPoint = observer.GetPointInMask(Piece.CachedPosition, maskPosition);
-
-        var riverPrefab = riverData.GetRiverPrefabByShift(xShift, yShift);
-        if (riverPrefab == null)
+        var riverObject = CreateRiverElementByShift(Context.Context, targetPoint, xShift, yShift);
+        if (riverObject == null)
             return;
         
-        var riverInstanse = Instantiate(riverPrefab, transform);
-        var position = Context.Context.BoardDef.GetSectorCenterWorldPosition(targetPoint.X, targetPoint.Y, 0);
-        riverInstanse.transform.position = position;
-        views.Add(riverInstanse);
+        
+        
+        Context.Context.BoardLogic.LockCell(targetPoint, this);
+        lockedPositions.Add(targetPoint);
+
+        targetPoint.Z = -1;
+        riverObject.SyncRendererLayers(targetPoint);
+        
+        views.Add(riverObject);
+    }
+
+    private BoardElementView CreateCustomElement(string resourceName, BoardPosition position, Vector3 shift)
+    {
+        var view = Context.Context.RendererContext.CreateBoardElementAt<BoardElementView>(resourceName, position);
+        view.transform.localPosition += shift;
+        
+        views.Add(view);
+        view.SyncRendererLayers(position);
+        
+        return view;
     }
     
-    private void InitRiver(RiverData river)
+    private void InitRiver()
     {
         var observer = Piece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
         var mask = observer.Mask;
@@ -125,35 +120,34 @@ public class CastlePieceView : PieceBoardElementView
             SpawnRiverElements(targetMaskPoint, observer, width, height);  
         }
 
-        if (riverData.BridgeLeft != null)
+        var kingPos = observer.GetPointInMask(Piece.CachedPosition, new BoardPosition(width / 2 - 1, -1));
+        if (lockedPositions.Contains(kingPos))
         {
-            var bridgePrefab = riverData.BridgeLeft;
-            var riverInstanse = Instantiate(bridgePrefab, transform);
-            var targetPoint = observer.GetPointInMask(Piece.CachedPosition, new BoardPosition(width / 2, -1));
-            var shift = new Vector3(0.8f, -0.4f);
-            var position = Context.Context.BoardDef.GetSectorCenterWorldPosition(targetPoint.X, targetPoint.Y, 0) + shift;
-            riverInstanse.transform.position = position;
-
-            //var sprite = riverInstanse.GetComponent<BoardElementView>();
-            //sprite.ClearCacheLayers();
-                //sprite.CacheLayers();//= targetPoint.X * Context.Context.BoardDef.Width - targetPoint.Y + targetPoint.Z * 100 + targetPoint.X  - targetPoint.Y;
-            
-            views.Add(riverInstanse);
+            lockedPositions.Remove(kingPos);
+            Context.Context.BoardLogic.UnlockCell(kingPos, this);
         }
 
-        if (riverData.BridgeRight != null)
+        var bridgeLeftPosition = new BoardPosition(width / 2 - 1, -1);
+        var targetPosition = observer.GetPointInMask(Piece.CachedPosition, bridgeLeftPosition);
+        targetPosition.Z = 0;
+        CreateCustomElement(R.BrigeLeft, targetPosition, new Vector3(0.8f, -0.4f));
+        
+        targetPosition.Z = 0;
+        targetPosition = observer.GetPointInMask(Piece.CachedPosition, new BoardPosition(width, height/2));
+        CreateCustomElement(R.BrigeRight, targetPosition, new Vector3(-0.7f, -0.4f));
+
+        var currentKingPos = GameDataService.Instance.Manager.PiecesManager.KingPosition;
+        if (currentKingPos.Equals(BoardPosition.Default()))
         {
-            var bridgePrefab = riverData.BridgeRight;
-            var riverInstanse = Instantiate(bridgePrefab, transform);
-            var targetPoint = observer.GetPointInMask(Piece.CachedPosition, new BoardPosition(width, height / 2));
-            var shift = new Vector3(-0.7f, -0.4f);
-            var position = Context.Context.BoardDef.GetSectorCenterWorldPosition(targetPoint.X, targetPoint.Y, 0) + shift;
-            riverInstanse.transform.position = position;
-            
-            //var sprite = riverInstanse.GetComponent<SpriteRenderer>();
-            //sprite.sortingOrder = targetPoint.X * Context.Context.BoardDef.Width - targetPoint.Y + targetPoint.Z * 100 + targetPoint.X  - targetPoint.Y;
-            
-            views.Add(riverInstanse);
+            Context.Context.ActionExecutor.AddAction(new SpawnPieceAtAction()
+            {
+                At = kingPos,
+                IsCheckMatch = false,
+#if UNITY_EDITOR
+                OnFailedAction = (_) => Debug.LogError("[CastlePieceView] Fail on spawn king"),
+#endif
+                PieceTypeId = PieceType.King.Id
+            });    
         }
     }
 
@@ -169,9 +163,16 @@ public class CastlePieceView : PieceBoardElementView
 
         foreach (var view in views)
         {
-            Destroy(view);
+            Destroy(view.gameObject);
         }
-        views = new List<GameObject>();
+
+        foreach (var lockPos in lockedPositions)
+        {
+            Context.Context.BoardLogic.UnlockCell(lockPos, this);
+        }
+        
+        views = new List<BoardElementView>();
+        lockedPositions = new List<BoardPosition>();
     }
 
     private void OnStart()
