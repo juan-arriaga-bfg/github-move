@@ -36,7 +36,7 @@ public class PieceMenuView : UIBoardView, IBoardEventListener
         
         if(menuDef == null) return;
         
-        Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceMenu);
+        Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
         
         foreach (var def in menuDef.Definitions)
         {
@@ -53,7 +53,7 @@ public class PieceMenuView : UIBoardView, IBoardEventListener
     {
         base.ResetViewOnDestroy();
         
-        Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceMenu);
+        Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
 
         foreach (var btn in btns)
         {
@@ -67,7 +67,7 @@ public class PieceMenuView : UIBoardView, IBoardEventListener
     
     public void OnBoardEvent(int code, object context)
     {
-        if (code != GameEventsCodes.ClosePieceMenu || context is Piece && (Piece)context == Context) return;
+        if (code != GameEventsCodes.ClosePieceUI || context is Piece && (Piece)context == Context) return;
         
         Change(false);
     }

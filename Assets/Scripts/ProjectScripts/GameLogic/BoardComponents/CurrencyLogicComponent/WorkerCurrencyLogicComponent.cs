@@ -101,10 +101,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
             var position = BoardPosition.Parse(str);
             
             UIErrorWindowController.AddError("All workers are busy!");
-            
-            var hint = context.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
-        
-            if(hint != null) hint.Step(position);
+            context.HintCooldown.Step(position);
             return false;
         }
         

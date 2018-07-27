@@ -320,30 +320,6 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "sheeps_UI",
-    "SpriteName": "sheeps_UI",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "tutorial",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "stone_UI",
-    "SpriteName": "stone_UI",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "tutorial",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "wood_UI",
-    "SpriteName": "wood_UI",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "tutorial",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
     "Uid": "A1",
     "SpriteName": "A1",
     "BundleName": "graphicscommon",
@@ -1264,7 +1240,7 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "basket1",
+    "Uid": "Basket1",
     "SpriteName": "basket1",
     "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/ProcessedContent",
@@ -1272,7 +1248,7 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "basket2",
+    "Uid": "Basket2",
     "SpriteName": "basket2",
     "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/ProcessedContent",
@@ -1280,7 +1256,7 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "basket3",
+    "Uid": "Basket3",
     "SpriteName": "basket3",
     "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/ProcessedContent",
@@ -1293,6 +1269,30 @@
     "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/ProcessedContent",
     "SpriteSheetName": "new",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "wood_UI",
+    "SpriteName": "Wood_UI",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "tutorial",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "stone_UI",
+    "SpriteName": "Stone_UI",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "tutorial",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "sheeps_UI",
+    "SpriteName": "Sheeps_UI",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "tutorial",
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   }
 ]

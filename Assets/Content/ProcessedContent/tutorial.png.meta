@@ -92,13 +92,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hay_UI
+      name: Stone_UI
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 672
-        height: 256
+        width: 656
+        height: 245
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -106,19 +106,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 868f7bacdfff76645bf2dd6128ec4d0e
+      spriteID: ca1e6cd447e88904eb7be753217412cb
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: apple_UI
+      name: Sheeps_UI
       rect:
         serializedVersion: 2
-        x: 673
+        x: 657
         y: 0
-        width: 672
-        height: 256
+        width: 656
+        height: 245
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -126,47 +126,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 437196630c799f641a005d75d98bc3c1
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: hay_UI
-      rect:
-        serializedVersion: 2
-        x: 1346
-        y: 0
-        width: 672
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c12833baf88e98e41bc4057158f76cd4
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: apple_UI
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 257
-        width: 672
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 550826c9ae560f34eb13d009279b692e
+      spriteID: 386cecae940a05249867013d2af38d43
       vertices: []
       indices: 
       edges: []
@@ -175,10 +135,10 @@ TextureImporter:
       name: Wood_UI
       rect:
         serializedVersion: 2
-        x: 673
-        y: 257
-        width: 671
-        height: 256
+        x: 1314
+        y: 0
+        width: 656
+        height: 245
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -186,19 +146,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c22480d5455b11a4ba12e0b2de9051f0
+      spriteID: ada2b8c6994c2ca49be87172e8cba502
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wood_UI
+      name: tutorial_TextBlock_1
       rect:
         serializedVersion: 2
-        x: 1345
-        y: 257
-        width: 671
-        height: 256
+        x: 0
+        y: 246
+        width: 656
+        height: 245
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,7 +166,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: afd3b57f19524894b983aa7efeb389e7
+      spriteID: 5b95ece2f35c3174f965cab5bd598135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chest_UI
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 246
+        width: 656
+        height: 245
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bd5ea42ddc3a5141a6d903d9d84fbc2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: apple_UI
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 246
+        width: 656
+        height: 245
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc87176396f090f4bb59678fc4182823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hay_UI
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 492
+        width: 656
+        height: 245
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5990f5225d089b41b13e657a2e84c18
       vertices: []
       indices: 
       edges: []
@@ -216,9 +236,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 514
-        width: 667
-        height: 256
+        y: 738
+        width: 656
+        height: 245
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,187 +246,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: acc1bb7ced157b940aa271ec1ed170c0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Stone_UI
-      rect:
-        serializedVersion: 2
-        x: 668
-        y: 514
-        width: 667
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 12ef174f935622b4289aff7ca8a6900c
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sheeps_UI
-      rect:
-        serializedVersion: 2
-        x: 1336
-        y: 514
-        width: 667
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 97c4a4cd1eac6864ea1affd8d8286d00
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Chest_UI
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 771
-        width: 667
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c4fa5a7b969577446916f3138138403a
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sheeps_UI
-      rect:
-        serializedVersion: 2
-        x: 668
-        y: 771
-        width: 667
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 274a9268ac2e1144bab78451320eb670
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Stone_UI
-      rect:
-        serializedVersion: 2
-        x: 1336
-        y: 771
-        width: 667
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 814c46b0936ec4441b550ab8c172c6df
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: collection_UI
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1028
-        width: 667
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 467f7549b3c680e47aa2bb91534f443e
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Chest_UI
-      rect:
-        serializedVersion: 2
-        x: 668
-        y: 1028
-        width: 667
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 018efcdf8c4264a4386d5209bd09280b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tutorial_TextBlock_1
-      rect:
-        serializedVersion: 2
-        x: 1336
-        y: 1028
-        width: 657
-        height: 246
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7019bb3735ab84244ade90519fa0b9c0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tutorial_TextBlock_1
-      rect:
-        serializedVersion: 2
-        x: 1336
-        y: 1275
-        width: 657
-        height: 246
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8a9a00a853ac29049861cc6aa232d78d
+      spriteID: 3e8f359e49807a04a84df8bb9ec83c21
       vertices: []
       indices: 
       edges: []

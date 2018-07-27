@@ -59,16 +59,7 @@ public class ResourceView : BoardElementView
 
         var index = Currency.GetCurrencyDef(resource.Currency).Id;
 
-        BoardPosition position;
-
-        if (index >= Currency.Charger1.Id && index <= Currency.Charger9.Id)
-        {
-            position = GameDataService.Current.PiecesManager.CastlePosition;
-        }
-        else
-        {
-            position = GameDataService.Current.PiecesManager.StoragePosition;
-        }
+        var position = GameDataService.Current.PiecesManager.CastlePosition;
         
         var target = BoardService.Current.GetBoardById(0).BoardDef.GetPiecePosition(position.X, position.Y);
         var duration = Vector3.Distance(body.position, target) / 20f;

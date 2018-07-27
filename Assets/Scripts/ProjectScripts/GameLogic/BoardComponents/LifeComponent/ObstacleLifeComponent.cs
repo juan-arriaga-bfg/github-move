@@ -61,12 +61,7 @@ public class ObstacleLifeComponent : StorageLifeComponent
         {
             From = thisContext.CachedPosition,
             Pieces = reward,
-            OnComplete = () =>
-            {
-                var hint = thisContext.Context.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
-
-                if (hint != null) hint.Step(HintType.Obstacle);
-            }
+            OnComplete = () => { thisContext.Context.HintCooldown.Step(HintType.Obstacle); }
         };
     }
 

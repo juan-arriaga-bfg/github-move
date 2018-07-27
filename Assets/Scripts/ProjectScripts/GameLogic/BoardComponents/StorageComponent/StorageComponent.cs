@@ -124,8 +124,15 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         var isShow = Filling / (float) Capacity > 0.2f;
         
         view.Change(isShow);
+
+        if (isShow)
+        {
+            pieceContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
+            pieceContext.Context.HintCooldown.AddView(view);
+            return;
+        }
         
-        if(isShow) pieceContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
+        pieceContext.Context.HintCooldown.RemoweView(view);
     }
 
     public bool Scatter(out int amount, bool isStartNext = true)

@@ -77,7 +77,7 @@ public class CastleUpgradeComponent : IECSComponent, IPieceBoardObserver, IBoard
 
         if(Check() == false) return;
         
-        thisContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, this);
+        thisContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
 
         var view = viewDef.AddView(ViewType.CastleUpgrade);
         

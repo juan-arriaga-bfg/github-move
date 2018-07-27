@@ -35,7 +35,7 @@ public class UIQuestWindowModel : IWWindowModel
     {
         get
         {
-            var reward = CurrencyHellper.CoinPieceToCurrence(Quest.Rewards);
+            var reward = CurrencyHellper.ResourcePieceToCurrence(Quest.Rewards, Currency.Coins.Name);
             
             return string.Format("<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>Reward:</color></font> <size=50>{0} <sprite name={1}></size>",
                 reward.Amount, reward.Currency);

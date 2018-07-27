@@ -198,4 +198,7 @@ public class R
      public const string BorderLightLeft = "BorderLightLeft";
      public const string BorderLightRight = "BorderLightRight";
      public const string ResourceCarrier = "ResourceCarrier";
+     public const string Basket1Piece = "Basket1Piece";
+     public const string Basket2Piece = "Basket2Piece";
+     public const string Basket3Piece = "Basket3Piece";
 }

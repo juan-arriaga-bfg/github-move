@@ -1,4 +1,6 @@
-﻿public class DraggablePieceComponent : IECSComponent, IDraggable
+﻿using UnityEngine;
+
+public class DraggablePieceComponent : IECSComponent, IDraggable
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
 

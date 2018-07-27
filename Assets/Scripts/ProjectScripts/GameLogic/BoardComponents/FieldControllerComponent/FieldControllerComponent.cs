@@ -31,7 +31,7 @@ public class FieldControllerComponent : IECSComponent
         {
             StartField();
             CreateFog();
-            CreateTown();
+            //CreateTown();
 //            TestField();
             return;
         }
@@ -55,7 +55,7 @@ public class FieldControllerComponent : IECSComponent
             }
         }
         
-        CreateTown();
+        //CreateTown();
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)
@@ -95,6 +95,7 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(28, 10), PieceType.ChestA1.Id, PieceType.ChestA3.Id);
         AddPieces(new BoardPosition(28, 14), PieceType.ChestX1.Id, PieceType.ChestX3.Id);
         AddPieces(new BoardPosition(28, 18), PieceType.ChestC1.Id, PieceType.ChestC3.Id);
+        AddPieces(new BoardPosition(28, 22), PieceType.Basket1.Id, PieceType.Basket3.Id);
         
         AddPieces(new BoardPosition(29, 10), PieceType.Coin1.Id, PieceType.Coin5.Id);
     }

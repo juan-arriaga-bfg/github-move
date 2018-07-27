@@ -33,12 +33,12 @@ public class ChangeMineStateView : UIBoardView, IBoardEventListener
         
         if(life == null) return;
         
-        Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceMenu);
+        Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
     }
     
     public override void ResetViewOnDestroy()
     {
-        Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceMenu);
+        Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
         
         base.ResetViewOnDestroy();
     }
@@ -61,7 +61,7 @@ public class ChangeMineStateView : UIBoardView, IBoardEventListener
     
     public void OnBoardEvent(int code, object context)
     {
-        if (code != GameEventsCodes.ClosePieceMenu || context is BoardPosition && ((BoardPosition) context).Equals(Context.CachedPosition)) return;
+        if (code != GameEventsCodes.ClosePieceUI || context is BoardPosition && ((BoardPosition) context).Equals(Context.CachedPosition)) return;
 		
         Change(false);
     }

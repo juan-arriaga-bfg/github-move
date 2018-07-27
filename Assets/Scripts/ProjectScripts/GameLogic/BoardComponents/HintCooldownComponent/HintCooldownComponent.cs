@@ -11,8 +11,11 @@ public enum HintType
 
 public class HintCooldownComponent : ECSEntity
 {
-	private const int MinDelay = 30;
-	private const int MaxDelay = 60;
+	private const int MinDelayArrow = 30;
+	private const int MaxDelayArrow = 60;
+	
+	private const int MinDelayBounce = 15;
+	private const int MaxDelayBounce = 30;
 	
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	
@@ -21,7 +24,8 @@ public class HintCooldownComponent : ECSEntity
 		get { return ComponentGuid; }
 	}
 	
-	private TimerComponent timer = new TimerComponent();
+	private readonly TimerComponent timerArrow = new TimerComponent();
+	private readonly TimerComponent timerBounce = new TimerComponent();
 
 	private BoardController context;
 
@@ -29,16 +33,23 @@ public class HintCooldownComponent : ECSEntity
 	private List<int> minesId;
 	private List<int> obstaclesId;
 	
+	private List<UIBoardView> views = new List<UIBoardView>();
+	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
 		context = entity as BoardController;
-		RegisterComponent(timer);
+		RegisterComponent(timerArrow, true);
+		RegisterComponent(timerBounce, true);
 
 		chestsId = PieceType.GetIdsByFilter(PieceTypeFilter.Chest);
 		minesId = PieceType.GetIdsByFilter(PieceTypeFilter.Mine);
 		obstaclesId = PieceType.GetIdsByFilter(PieceTypeFilter.Obstacle);
 		
 		Step(HintType.Obstacle);
+		
+		timerBounce.Delay = Random.Range(MinDelayBounce, MaxDelayBounce);
+		timerBounce.OnComplete = Bounce;
+		timerBounce.Start();
 	}
 
 	public void Step(BoardPosition position, float offsetX = 0, float offsetY = 0)
@@ -49,12 +60,22 @@ public class HintCooldownComponent : ECSEntity
 
 	public void Step(HintType type)
 	{
-		if(type != HintType.HighPriority && type != HintType.OpenChest && timer.IsStarted) return;
+		if(type != HintType.HighPriority && type != HintType.OpenChest && timerArrow.IsStarted) return;
 		
-		timer.Stop();
-		timer.Delay = Random.Range(MinDelay, MaxDelay);
-		timer.OnComplete = Hint;
-		timer.Start();
+		timerArrow.Stop();
+		timerArrow.Delay = Random.Range(MinDelayArrow, MaxDelayArrow);
+		timerArrow.OnComplete = Hint;
+		timerArrow.Start();
+	}
+
+	public void AddView(UIBoardView view)
+	{
+		views.Add(view);
+	}
+	
+	public void RemoweView(UIBoardView view)
+	{
+		views.Remove(view);
 	}
 	
 	private void Hint()
@@ -91,5 +112,14 @@ public class HintCooldownComponent : ECSEntity
 		HintArrowView.Show(positions[0], 0, -0.5f);
 
 		return true;
+	}
+
+	private void Bounce()
+	{
+		timerBounce.Delay = Random.Range(MinDelayBounce, MaxDelayBounce);
+		timerBounce.Start();
+
+		var view = views[Random.Range(0, views.Count)];
+		view.Attention();
 	}
 }

@@ -31,24 +31,20 @@ public class ChestPieceView : PieceBoardElementView
         chestComponent.Timer.OnComplete += UpdateView;
         
         UpdateView();
-        
-        var hint = Context.Context.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
-        
-        if(hint == null) return;
-        
-        hint.Step(HintType.CloseChest);
+        Context.Context.HintCooldown.Step(HintType.CloseChest);
     }
 
     public override void ResetViewOnDestroy()
     {
         if (backlight != null)
-        {
             Destroy(backlight.gameObject);
             
-        }
         if(hightlight != null)
             Destroy(hightlight.gameObject);
             
+        ClearCacheLayers();
+        CacheLayers();
+        
         chestComponent.Timer.OnStop -= UpdateView;
         chestComponent.Timer.OnComplete -= UpdateView;
         base.ResetViewOnDestroy();

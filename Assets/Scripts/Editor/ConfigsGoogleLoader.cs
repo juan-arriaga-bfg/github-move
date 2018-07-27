@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using Dws;
 using Newtonsoft.Json;
@@ -9,6 +10,7 @@ using UnityEngine;
 public class ConfigsGoogleLoader
 {
     private static int index;
+    private static List<KeyValuePair<string, GoogleLink>> update;
     
     [MenuItem("Tools/Configs/GenerateLinkSettings")]
     public static void GenerateLinkSettings()
@@ -24,9 +26,74 @@ public class ConfigsGoogleLoader
     [MenuItem("Tools/Configs/Update with Google")]
     public static void UpdateWithGoogle()
     {
-        index = NSConfigsSettings.Instance.ConfigNames.Length;
+        update = new List<KeyValuePair<string, GoogleLink>>();
 
-        Load();
+        foreach (var path in NSConfigsSettings.Instance.ConfigNames)
+        {
+            var key = path.Substring(path.LastIndexOf("/") + 1);
+            key = key.Substring(0, key.IndexOf("."));
+            
+            var gLink = GoogleLoaderSettings.Instance.ConfigLinks.Find(link => link.Key == key);
+
+            if (gLink == null) continue;
+            
+            update.Add(new KeyValuePair<string, GoogleLink>(path, gLink));
+        }
+        
+        index = update.Count;
+        CheckNeedToUpdate();
+    }
+    
+    private static void CheckNeedToUpdate()
+    {
+        index--;
+
+        if (index < 0)
+        {
+            Debug.LogWarning("check for the need to update the configs completed!");
+            index = update.Count;
+            Load();
+            return;
+        }
+
+        var gLink = update[index].Value;
+        var req = new WebRequestData(GetUrl(gLink.Link, "getLastUpdated", ""));
+
+        WebHelper.MakeRequest(req, (response) =>
+        {
+            if (response.IsOk == false || string.IsNullOrEmpty(response.Error) == false )
+            {
+                Debug.LogErrorFormat("Can't check last updated {0}. response.IsOk = {1}. Error: {2}", gLink.Key, response.IsOk, response.Error);
+                CheckNeedToUpdate();
+                return;
+            }
+                
+            var root = JObject.Parse(response.Result);
+            var result = root["result"];
+            
+            if (EditorPrefs.HasKey(gLink.Key) == false)
+            {
+                EditorPrefs.SetString(gLink.Key, result.ToString());
+                Debug.LogWarningFormat("Config {0} need to update", gLink.Key);
+            }
+            else
+            {
+                var then = long.Parse(EditorPrefs.GetString(gLink.Key));
+                var now = long.Parse(result.ToString());
+                
+                if (then < now)
+                {
+                    EditorPrefs.SetString(gLink.Key, result.ToString());
+                    Debug.LogWarningFormat("Config {0} need to update", gLink.Key);
+                }
+                else
+                {
+                    update.Remove(update[index]);
+                }
+            }
+
+            CheckNeedToUpdate();
+        });
     }
 
     private static void Load()
@@ -36,27 +103,15 @@ public class ConfigsGoogleLoader
         if (index < 0)
         {
             Debug.LogWarning("Configs load data complete!");
-            NSConfigEncription.EncryptConfigs();
+            if(update.Count != 0) NSConfigEncription.EncryptConfigs();
             return;
         }
         
-        var relativePath = NSConfigsSettings.Instance.ConfigNames[index];
-        var key = relativePath.Substring(relativePath.LastIndexOf("/") + 1);
-        key = key.Substring(0, key.IndexOf("."));
+        var gLink = update[index].Value;
         
-        Debug.LogWarningFormat("Configs {0} progress: {1}/{2}!", key, NSConfigsSettings.Instance.ConfigNames.Length - index, NSConfigsSettings.Instance.ConfigNames.Length);
-
-        var gLink = GoogleLoaderSettings.Instance.ConfigLinks.Find(link => link.Key == key);
-
-        if (gLink == null)
-        {
-            Load();
-            return;
-        }
-
-        var linkTest = GetUrl(gLink.Link, gLink.Route, gLink.Pattern);
-            
-        var req = new WebRequestData(linkTest);
+        Debug.LogWarningFormat("Configs {0} progress: {1}/{2}!", gLink.Key, update.Count - index, update.Count);
+        
+        var req = new WebRequestData(GetUrl(gLink.Link, gLink.Route, gLink.Pattern));
 
         WebHelper.MakeRequest(req, (response) =>
         {
@@ -70,7 +125,7 @@ public class ConfigsGoogleLoader
             var root = JObject.Parse(response.Result);
             var result = root["result"];
                 
-            File.WriteAllText(Application.dataPath + relativePath, JsonConvert.SerializeObject(result, Formatting.Indented), Encoding.UTF8);
+            File.WriteAllText(Application.dataPath + update[index].Key, JsonConvert.SerializeObject(result, Formatting.Indented), Encoding.UTF8);
             
             Load();
         });
