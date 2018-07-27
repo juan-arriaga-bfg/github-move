@@ -36,6 +36,21 @@ public struct BoardPosition : IEquatable<BoardPosition>
         return false;
     }
 
+    public static BoardPosition operator +(BoardPosition first, BoardPosition second)
+    {
+        return new BoardPosition(first.X + second.X, first.Y + second.Y, first.Z + second.Z);
+    }
+
+    public static BoardPosition operator -(BoardPosition first, BoardPosition second)
+    {
+        return new BoardPosition(first.X - second.X, first.Y - second.Y, first.Z - second.Z);
+    }
+
+    public static BoardPosition operator *(BoardPosition pos, int multiply)
+    {
+        return new BoardPosition(pos.X * multiply, pos.Y * multiply, pos.Z * multiply);
+    }
+    
     public bool IsNeighbor(BoardPosition other)
     {
         if (Equals(other)) return false;

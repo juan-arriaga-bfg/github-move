@@ -367,13 +367,68 @@ public class BoardLogicComponent : ECSEntity,
         return true;
     }
 
+    private void RevertMulticellularMove(Piece piece, List<BoardPosition> mask, BoardPosition from, BoardPosition to,
+        int currentElement)
+    {
+        for (int i = currentElement-1; i > 0; i--)
+        {
+            var maskPos = mask[i];
+            var targetPos = maskPos + to;
+            var sourcePos = maskPos + from;
+
+            RemovePieceFromBoardSilent(targetPos);
+            AddPieceToBoardSilent(sourcePos.X, sourcePos.Y, piece);
+        }
+    }
+
     public virtual bool MovePieceFromTo(BoardPosition from, BoardPosition to)
     {
         var fromPiece = GetPieceAt(from);
         var toPiece = GetPieceAt(to);
+        
+        if (fromPiece == null)
+            return false;
+        
 
-        if (fromPiece == null || toPiece != null) return false;
+        var multicellular =
+            fromPiece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
+        
+        if (multicellular != null)
+        {
+            if(fromPiece != toPiece && toPiece != null)
+                return false;
+            
+            var targetPositions = new List<BoardPosition>();
+            var sourcePositions = new List<BoardPosition>();
+            for (int i = 0; i < multicellular.Mask.Count; i++)
+            {
+                var maskPos = multicellular.Mask[i];
+                var targetPos = maskPos + to;
+                var sourcePos = maskPos + from;
+                
+                targetPositions.Add(targetPos);
+                sourcePositions.Add(sourcePos);
+                RemovePieceFromBoardSilent(sourcePos);
+            }
+            
+            for (int i = 0; i < multicellular.Mask.Count; i++)
+            {
+                var targetPos = targetPositions[i];
+                AddPieceToBoardSilent(targetPos.X, targetPos.Y, fromPiece);
+            }
+            
+            var observer = fromPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+            if (observer != null)
+            {
+                observer.OnMovedFromTo(from, to);
+            }
 
+            return true;
+        }
+
+        if (toPiece != null)
+            return false;
+        
         if (AddPieceToBoardSilent(to.X, to.Y, fromPiece) && RemovePieceFromBoardSilent(from))
         {
             var observer = fromPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
