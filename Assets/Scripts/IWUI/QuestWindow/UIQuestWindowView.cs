@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,7 +44,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         if(isComplete == false) return;
         
         var windowModel = Model as UIQuestWindowModel;
-        
+         
         BoardService.Current.GetBoardById(0).ActionExecutor.AddAction(new EjectionPieceAction
         {
             From = GameDataService.Current.PiecesManager.KingPosition,
@@ -56,16 +57,25 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIQuestWindowModel;
         var quest = windowModel.Quest;
         
+        var board = BoardService.Current.GetBoardById(0);
         if (quest.Check())
         {
+            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(GameDataService.Current.PiecesManager.KingPosition, quest.Rewards.Values.Sum()))
+            {
+                UIErrorWindowController.AddError("Need more free cells");
+                return;
+            }
+            
             GameDataService.Current.QuestsManager.RemoveActiveQuest(quest);
             
             isComplete = true;
             return;
         }
 
-        var board = BoardService.Current.GetBoardById(0);
+        
         var piece = board.BoardLogic.MatchDefinition.GetFirst(quest.WantedPiece);
+        
+        
         
         if(piece == PieceType.None.Id) return;
         

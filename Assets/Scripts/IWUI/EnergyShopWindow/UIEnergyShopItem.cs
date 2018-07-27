@@ -24,6 +24,13 @@ public class UIEnergyShopItem : MonoBehaviour
 
     public void OnClick()
     {
+        var board = BoardService.Current.GetBoardById(0);
+        if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(GameDataService.Current.PiecesManager.CastlePosition, 1))
+        {
+            UIErrorWindowController.AddError("Free space not found");
+            return;
+        }
+        
         CurrencyHellper.Purchase(Currency.Chest.Name, 1, chest.Price, success =>
         {
             if(success == false) return;
