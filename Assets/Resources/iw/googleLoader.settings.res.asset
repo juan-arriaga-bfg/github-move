@@ -15,7 +15,7 @@ MonoBehaviour:
   - Key: chests
     Link: 1SnYRNQBmFgpeb5BJmQ5rwUWKHYBwPFNrFHzeW4OxWXs
     Route: parse
-    Pattern: '[{"Uid":"","Time":0,"Price":{"Currency":"","Amount":0},"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0,"":"","Override":true}],"RandomPieces":[""],"IsHard":true}]'
+    Pattern: '[{"Uid":"","Time":0,"Price":{"Currency":"","Amount":0},"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0,"":"","Override":true}],"RandomPieces":[""],"HardPieces":[{"Currency":"","Amount":0}]}]'
   - Key: levels
     Link: 1q0Pxo7d7saZDkpj2IXPB94nnAqKviZ0lZK4QvVfG0vE
     Route: parse
