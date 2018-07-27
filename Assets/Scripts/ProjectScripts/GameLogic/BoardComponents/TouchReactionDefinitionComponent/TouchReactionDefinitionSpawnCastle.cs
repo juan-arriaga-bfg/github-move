@@ -19,7 +19,7 @@ public class TouchReactionDefinitionSpawnCastle : TouchReactionDefinitionCompone
 		{
 			if (storage.Scatter(out amount) == false)
 			{
-				UIErrorWindowController.AddError("Not found free cells");
+				UIErrorWindowController.AddError("Production of the resource is not complete!");
 				return false;
 			}
 		}
