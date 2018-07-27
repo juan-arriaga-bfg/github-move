@@ -61,7 +61,7 @@ public class Task
     {
         BoardService.Current.GetBoardById(0).ActionExecutor.AddAction(new EjectionPieceAction
         {
-            From = GameDataService.Current.PiecesManager.MatketPosition,
+            From = GameDataService.Current.PiecesManager.KingPosition,
             Pieces = Rewards
         });
     }

@@ -88,7 +88,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         {
             title = "Need wooden pieces?";
             image = "wood_UI";
-            position = GameDataService.Current.PiecesManager.SawmillPosition;
+//            position = GameDataService.Current.PiecesManager.SawmillPosition;
         }
         else if(piece == PieceType.B1.Id)
         {
@@ -99,13 +99,13 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         {
             title = "Need stone pieces?";
             image = "stone_UI";
-            position = GameDataService.Current.PiecesManager.MinePosition;
+//            position = GameDataService.Current.PiecesManager.MinePosition;
         }
         else if(piece == PieceType.D1.Id)
         {
             title = "Need sheep pieces?";
             image = "sheeps_UI";
-            position = GameDataService.Current.PiecesManager.SheepfoldPosition;
+//            position = GameDataService.Current.PiecesManager.SheepfoldPosition;
         }
         else if(piece == PieceType.E1.Id)
         {

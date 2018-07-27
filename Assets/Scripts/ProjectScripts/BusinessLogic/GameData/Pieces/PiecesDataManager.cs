@@ -21,11 +21,6 @@ public class PiecesDataManager : IECSComponent, IDataManager, IDataLoader<List<P
     public const int ReproductionChance = 50;
     
     public BoardPosition CastlePosition = BoardPosition.Default();
-    public BoardPosition MatketPosition = BoardPosition.Default();
-    public BoardPosition StoragePosition = BoardPosition.Default();
-    public BoardPosition SawmillPosition = BoardPosition.Default();
-    public BoardPosition MinePosition = BoardPosition.Default();
-    public BoardPosition SheepfoldPosition = BoardPosition.Default();
     public BoardPosition KingPosition = BoardPosition.Default();
     
     private Dictionary<int, PieceDef> pieces;
@@ -33,11 +28,6 @@ public class PiecesDataManager : IECSComponent, IDataManager, IDataLoader<List<P
     public void Reload()
     {
         CastlePosition = BoardPosition.Default();
-        MatketPosition = BoardPosition.Default();
-        StoragePosition = BoardPosition.Default();
-        SawmillPosition = BoardPosition.Default();
-        MinePosition = BoardPosition.Default();
-        SheepfoldPosition = BoardPosition.Default();
         KingPosition = BoardPosition.Default();
 
         pieces = null;
@@ -85,39 +75,9 @@ public class PiecesDataManager : IECSComponent, IDataManager, IDataLoader<List<P
     {
         var first = piece.Context.BoardLogic.MatchDefinition.GetFirst(piece.PieceType);
         
-        if (first == PieceType.Market1.Id)
-        {
-            MatketPosition = position;
-            return;
-        }
-        
-        if (first == PieceType.Storage1.Id)
-        {
-            StoragePosition = position;
-            return;
-        }
-        
         if (first == PieceType.Castle1.Id)
         {
             CastlePosition = position;
-            return;
-        }
-        
-        if (first == PieceType.Sawmill1.Id)
-        {
-            SawmillPosition = position;
-            return;
-        }
-        
-        if (first == PieceType.Mine1.Id)
-        {
-            MinePosition = position;
-            return;
-        }
-        
-        if (first == PieceType.Sheepfold1.Id)
-        {
-            SheepfoldPosition = position;
             return;
         }
         
