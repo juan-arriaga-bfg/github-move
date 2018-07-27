@@ -176,7 +176,7 @@ public class TasksDataManager : ECSEntity, IDataManager, IDataLoader<TasksDataMa
             }
         }
 
-        task.Rewards = CurrencyHellper.MinimizeCoinPieces(task.Rewards);
+//        task.Rewards = CurrencyHellper.MinimizeCoinPieces(task.Rewards);
         task.Result = new CurrencyPair{ Currency = PieceType.Parse(PieceType.Coin5.Id), Amount = task.Rewards.Sum(pair => pair.Value)};
         
         return task;

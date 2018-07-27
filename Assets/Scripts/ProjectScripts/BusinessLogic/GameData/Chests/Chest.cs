@@ -109,7 +109,7 @@ public class Chest
             return reward;
         
         var max = def.PieceAmount;
-        var result = new Dictionary<int, int>();
+        var result = def.GetHardPieces();
         
         for (var i = 0; i < max; i++)
         {

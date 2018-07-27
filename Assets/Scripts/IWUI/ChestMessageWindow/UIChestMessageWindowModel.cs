@@ -31,11 +31,22 @@ public class UIChestMessageWindowModel : IWWindowModel
     {
         var icons = new List<string>();
 
-        foreach (var piece in Chest.Def.PieceWeights)
+        if (Chest.Def.HardPieces != null)
         {
-            if(piece.Piece == PieceType.Empty.Id || piece.Weight == 0) continue;
+            foreach (var piece in Chest.Def.HardPieces)
+            {
+                icons.Add(piece.Currency);
+            }
+        }
+
+        if (Chest.Def.PieceWeights != null)
+        {
+            foreach (var piece in Chest.Def.PieceWeights)
+            {
+                if(piece.Piece == PieceType.Empty.Id || piece.Weight == 0) continue;
             
-            icons.Add(piece.Uid);
+                icons.Add(piece.Uid);
+            }
         }
         
         return icons;

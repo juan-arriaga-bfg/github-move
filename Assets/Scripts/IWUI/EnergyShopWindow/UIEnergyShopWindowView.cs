@@ -58,9 +58,25 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
         }
         
         items = new List<GameObject>();
+
+        if (isHint)
+        {
+            Hint();
+            return;
+        }
         
-        if(isHint == false) return;
-        
+        var windowModel = Model as UIEnergyShopWindowModel;
+        windowModel.Spawn();
+    }
+
+    public void OnClick()
+    {
+        isHint = true;
+        Controller.CloseCurrentWindow();
+    }
+
+    private void Hint()
+    {
         var windowModel = Model as UIEnergyShopWindowModel;
         var ids = windowModel.SelectedPieces;
         var positions = new List<BoardPosition>();
@@ -79,11 +95,5 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
         }
         
         HintArrowView.Show(positions[Random.Range(0, positions.Count)], 0, -0.5f);
-    }
-
-    public void OnClick()
-    {
-        isHint = true;
-        Controller.CloseCurrentWindow();
     }
 }
