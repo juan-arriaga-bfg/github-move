@@ -5,6 +5,7 @@ public class UIBoardView : BoardElementView
 {
     [SerializeField] protected Transform viewTransform;
     [SerializeField] protected CanvasGroup group;
+    [SerializeField] protected Canvas canvas;
 
     protected ViewAnimationUid attentionUid = new ViewAnimationUid();
     protected ViewDefinitionComponent controller;
@@ -93,7 +94,16 @@ public class UIBoardView : BoardElementView
     protected virtual void UpdateView()
     {
     }
-    
+
+    public override void SyncRendererLayers(BoardPosition boardPosition)
+    {
+        base.SyncRendererLayers(boardPosition);
+        
+        if(canvas == null || Context == null) return;
+        
+        canvas.sortingOrder = boardPosition.X * Context.Context.BoardDef.Width - boardPosition.Y + 5000;
+    }
+
     public virtual void Attention()
     {
         DOTween.Kill(attentionUid);

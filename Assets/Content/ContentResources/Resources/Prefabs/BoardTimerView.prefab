@@ -189,11 +189,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -222,6 +222,7 @@ MonoBehaviour:
   FadeValue: 0
   viewTransform: {fileID: 224273703096624658}
   group: {fileID: 225971509833133420}
+  canvas: {fileID: 223364553962528992}
   label: {fileID: 114899686898939114}
   progressBar: {fileID: 0}
 --- !u!114 &114656707698751454
