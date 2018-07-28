@@ -1152,6 +1152,7 @@ public class BoardRenderer : ECSEntity
 
     public void GenerateBackground(Vector3 position, int width, int height, float size, string backImage)
     {
+        return;
         var sectorsContainer = new GameObject("Background").transform;
         sectorsContainer.localPosition = position;
         sectorsContainer.localRotation = Quaternion.Euler(54.5f, 0f, -45f);
