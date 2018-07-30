@@ -49,7 +49,6 @@ public class HintCooldownComponent : ECSEntity
 		
 		timerBounce.Delay = Random.Range(MinDelayBounce, MaxDelayBounce);
 		timerBounce.OnComplete = Bounce;
-		timerBounce.Start();
 	}
 
 	public void Step(BoardPosition position, float offsetX = 0, float offsetY = 0)
@@ -71,11 +70,19 @@ public class HintCooldownComponent : ECSEntity
 	public void AddView(UIBoardView view)
 	{
 		views.Add(view);
+
+		if (views.Count > 1) return;
+		
+		timerBounce.Start();
 	}
 	
 	public void RemoweView(UIBoardView view)
 	{
 		views.Remove(view);
+		
+		if(views.Count > 0) return;
+		
+		timerBounce.Stop();
 	}
 	
 	private void Hint()
