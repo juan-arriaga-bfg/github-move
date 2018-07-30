@@ -117,7 +117,11 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         
         UIMessageWindowController.CreateImageMessage(title, image, () =>
         {
-            if (position == null || position.Value.X == 0 && position.Value.Y == 0) return;
+            if (position == null || position.Value.X == 0 && position.Value.Y == 0)
+            {
+                UIService.Get.ShowWindow(UIWindowType.CastleWindow);
+                return;
+            }
             
             board.HintCooldown.Step(position.Value);
         });
