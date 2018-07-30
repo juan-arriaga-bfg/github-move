@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using DG.Tweening;
-using UnityEngine;
+﻿using DG.Tweening;
 
 public class ObstacleLifeComponent : StorageLifeComponent
 {
@@ -35,23 +33,13 @@ public class ObstacleLifeComponent : StorageLifeComponent
     {
         storage.Timer.Price = GameDataService.Current.ObstaclesManager.GetFastPriceByStep(thisContext.PieceType, current);
         storage.Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current);
-        
-        var rewards = GameDataService.Current.ObstaclesManager.GetRewardByStep(thisContext.PieceType, current);
-        
-        var sequence = DOTween.Sequence();
-        
-        for (var i = 0; i < rewards.Count; i++)
-        {
-            var reward = rewards[i];
-            sequence.InsertCallback(0.5f * (i + 1), () => AddResourceView.Show(StartPosition(), reward));
-        }
     }
     
     protected override void OnStep()
     {
-        var reward = GameDataService.Current.ObstaclesManager.GetPiecesByStep(thisContext.PieceType, current);
+        var pieces = GameDataService.Current.ObstaclesManager.GetPiecesByStep(thisContext.PieceType, current);
         
-        foreach (var key in reward.Keys)
+        foreach (var key in pieces.Keys)
         {
             storage.SpawnPiece = key;
             break;
@@ -60,27 +48,38 @@ public class ObstacleLifeComponent : StorageLifeComponent
         storage.SpawnAction = new EjectionPieceAction
         {
             From = thisContext.CachedPosition,
-            Pieces = reward,
-            OnComplete = () => { thisContext.Context.HintCooldown.Step(HintType.Obstacle); }
+            Pieces = pieces,
+            OnComplete = () =>
+            {
+                OnSpawnRewards();
+                thisContext.Context.HintCooldown.Step(HintType.Obstacle);
+            }
         };
     }
 
     protected override void OnComplete()
     {
-        var position = thisContext.CachedPosition;
-        
         storage.SpawnPiece = PieceType.Chest1.Id;
         
-        storage.SpawnAction = new CollapsePieceToAction
+        storage.OnScatter = () =>
         {
-            To = position,
-            Positions = new List<BoardPosition> {position},
-            OnCompleteAction = new SpawnPieceAtAction()
-            {
-                IsCheckMatch = false,
-                At = thisContext.CachedPosition,
-                PieceTypeId = GameDataService.Current.ObstaclesManager.GetReward(thisContext.PieceType)
-            }
+            storage.OnScatter = null;
+            OnSpawnRewards();
         };
+    }
+
+    protected override void OnSpawnRewards()
+    {
+        var rewards = GameDataService.Current.ObstaclesManager.GetRewardByStep(thisContext.PieceType, current);
+        
+        var sequence = DOTween.Sequence();
+        
+        for (var i = 0; i < rewards.Count; i++)
+        {
+            var reward = rewards[i];
+            sequence.InsertCallback(0.5f * i, () => AddResourceView.Show(StartPosition(), reward));
+        }
+                
+        thisContext.Context.HintCooldown.Step(HintType.Obstacle);
     }
 }

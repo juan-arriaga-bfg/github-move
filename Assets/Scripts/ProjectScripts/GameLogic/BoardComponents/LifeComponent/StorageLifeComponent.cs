@@ -91,4 +91,9 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
     protected virtual void OnComplete()
     {
     }
+
+    protected virtual void OnSpawnRewards()
+    {
+        
+    }
 }

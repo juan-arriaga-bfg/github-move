@@ -17,7 +17,6 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
 
         int amount;
         
-        
         if(!piece.Context.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, storage.Filling))
         {
             UIErrorWindowController.AddError("Free space not found");

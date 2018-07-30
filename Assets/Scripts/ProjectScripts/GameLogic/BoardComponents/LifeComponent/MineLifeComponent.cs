@@ -38,12 +38,13 @@ public class MineLifeComponent : StorageLifeComponent
         HP = def.Size;
     }
 
-    protected override void Success()
+    protected override void OnStep()
     {
-        base.Success();
-        
-        var sequence = DOTween.Sequence();
-        sequence.InsertCallback(0.5f, () => AddResourceView.Show(StartPosition(), def.StepReward));
+        storage.OnScatter = () =>
+        {
+            storage.OnScatter = null;
+            OnSpawnRewards();
+        };
     }
 
     protected override void OnComplete()
@@ -53,6 +54,7 @@ public class MineLifeComponent : StorageLifeComponent
         storage.OnScatter = () =>
         {
             storage.OnScatter = null;
+            OnSpawnRewards();
             thisContext.Context.ActionExecutor.AddAction(new CollapsePieceToAction
             {
                 To = position,
@@ -81,5 +83,10 @@ public class MineLifeComponent : StorageLifeComponent
                 PieceTypeId = PieceType.OX1.Id
             });
         }
+    }
+
+    protected override void OnSpawnRewards()
+    {
+        AddResourceView.Show(StartPosition(), def.StepReward);
     }
 }
