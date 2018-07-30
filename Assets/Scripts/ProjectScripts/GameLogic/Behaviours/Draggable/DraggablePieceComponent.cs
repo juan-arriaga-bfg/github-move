@@ -17,7 +17,7 @@ public class DraggablePieceComponent : IECSComponent, IDraggable
     {
     }
     
-    public bool IsDraggable(BoardPosition at)
+    public virtual bool IsDraggable(BoardPosition at)
     {
         return true;
     }

@@ -191,8 +191,8 @@ public class BoardManipulatorComponent : ECSEntity,
                 var draggableComponent = pieceView.Piece.GetComponent<DraggablePieceComponent>(DraggablePieceComponent.ComponentGuid);
                 
                 var boardPos = context.BoardDef.GetSectorPosition(pos);
+                
                 pieceView.OnDragStart(boardPos, pos);
-
                 if (draggableComponent == null || draggableComponent.IsDraggable(pieceView.Piece.CachedPosition) == false)
                 {
                     return false;
