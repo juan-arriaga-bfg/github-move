@@ -23,9 +23,9 @@ public class MineLifeComponent : StorageLifeComponent
         base.OnAddToBoard(position, context);
         
         var key = new BoardPosition(position.X, position.Y);
-        def = GameDataService.Current.MinesManager.GetDef(key);
-        
-        if(def == null) return;
+
+        if (def == null) def = GameDataService.Current.MinesManager.GetDef(key);
+        else GameDataService.Current.MinesManager.Chenge(def.Id, key);
         
         var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
         
@@ -36,6 +36,14 @@ public class MineLifeComponent : StorageLifeComponent
         storage.Capacity = storage.Amount = def.Reward.Amount;
         
         HP = def.Size;
+    }
+
+    public override void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece context = null)
+    {
+        base.OnMovedFromTo(@from, to, context);
+        
+        var key = new BoardPosition(to.X, to.Y);
+        GameDataService.Current.MinesManager.Chenge(def.Id, key);
     }
 
     protected override void OnStep()
@@ -66,6 +74,8 @@ public class MineLifeComponent : StorageLifeComponent
 
     private void OnRemove()
     {
+        GameDataService.Current.MinesManager.Remove(def.Id);
+        
         var multi = thisContext.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
         
         if(multi == null) return;

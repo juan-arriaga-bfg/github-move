@@ -18,7 +18,9 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	private List<ResourceSaveItem> resources;
 	private List<ProductionSaveItem> productions;
 	
-	private string completeFog;
+	private string completeFogs;
+	private string movedMines;
+	private string remowedMines;
 
 	[JsonProperty]
 	public List<PieceSaveItem> Pieces
@@ -56,10 +58,24 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	}
 	
 	[JsonProperty]
-	public string CompleteFog
+	public string CompleteFogs
 	{
-		get { return completeFog; }
-		set { completeFog = value; }
+		get { return completeFogs; }
+		set { completeFogs = value; }
+	}
+	
+	[JsonProperty]
+	public string MovedMines
+	{
+		get { return movedMines; }
+		set { movedMines = value; }
+	}
+	
+	[JsonProperty]
+	public string RemowedMines
+	{
+		get { return remowedMines; }
+		set { remowedMines = value; }
 	}
 	
 //	[JsonProperty]
@@ -70,6 +86,8 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	}
 
 	public List<BoardPosition> CompleteFogPositions;
+	public List<BoardPosition> MovedMinePositions;
+	public List<int> RemovedMinePositions;
 	
 	private Dictionary<BoardPosition, StorageSaveItem> storageSave;
 	private Dictionary<BoardPosition, LifeSaveItem> lifeSave;
@@ -117,7 +135,20 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		
 		pieces.Sort((a, b) => -a.Id.CompareTo(b.Id));
 
-		completeFog = GetCompleteFog();
+		completeFogs = PositionsToString(GameDataService.Current.FogsManager.Completed);
+		movedMines = PositionsToString(GameDataService.Current.MinesManager.Moved);
+
+		if (GameDataService.Current == null) return;
+		
+		var str = new StringBuilder();
+
+		foreach (var id in GameDataService.Current.MinesManager.Removed)
+		{
+			str.Append(id);
+			str.Append(",");
+		}
+		
+		remowedMines = str.ToString();
 	}
 
 	[OnDeserialized]
@@ -125,7 +156,10 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	{
 		storageSave = new Dictionary<BoardPosition, StorageSaveItem>();
 		lifeSave = new Dictionary<BoardPosition, LifeSaveItem>();
-		CompleteFogPositions = new List<BoardPosition>();
+		
+		CompleteFogPositions = StringToPositions(completeFogs);
+		MovedMinePositions = StringToPositions(movedMines);
+		RemovedMinePositions = new List<int>();
 
 		if (storages != null)
 		{
@@ -143,13 +177,14 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			}
 		}
 
-		if (string.IsNullOrEmpty(completeFog)) return; 
-		
-		var fogData = completeFog.Split(new[] {";"}, StringSplitOptions.RemoveEmptyEntries);
-
-		foreach (var str in fogData)
+		if (string.IsNullOrEmpty(remowedMines) == false)
 		{
-			CompleteFogPositions.Add(BoardPosition.Parse(str));
+			var data = remowedMines.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
+
+			foreach (var str in data)
+			{
+				RemovedMinePositions.Add(int.Parse(str));
+			}
 		}
 	}
 
@@ -283,20 +318,35 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		return items;
 	}
 
-	private string GetCompleteFog()
+	private string PositionsToString(List<BoardPosition> positions)
 	{
 		if (GameDataService.Current == null) return null;
-
-		var complete = GameDataService.Current.FogsManager.Completed;
+		
 		var str = new StringBuilder();
 
-		foreach (var position in complete)
+		foreach (var position in positions)
 		{
 			str.Append(position.ToSaveString());
 			str.Append(";");
 		}
 		
 		return str.ToString();
+	}
+
+	private List<BoardPosition> StringToPositions(string value)
+	{
+		var positions = new List<BoardPosition>();
+		
+		if (string.IsNullOrEmpty(value)) return positions;
+		
+		var data = value.Split(new[] {";"}, StringSplitOptions.RemoveEmptyEntries);
+
+		foreach (var str in data)
+		{
+			positions.Add(BoardPosition.Parse(str));
+		}
+		
+		return positions;
 	}
 
 	private List<ProductionSaveItem> GetProductionSave(BoardLogicComponent logic, List<BoardPosition> positions)

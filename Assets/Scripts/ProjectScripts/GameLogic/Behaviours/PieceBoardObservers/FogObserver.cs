@@ -72,10 +72,17 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             {
                 foreach (var pos in piece.Value)
                 {
+                    var pieceId = GameDataService.Current.MinesManager.GetMineById(piece.Key);
+
+                    if (pieceId == PieceType.None.Id)
+                    {
+                        pieceId = PieceType.Parse(piece.Key);
+                    }
+                    
                     thisContext.Context.ActionExecutor.AddAction(new CreatePieceAtAction
                     {
                         At = GetPointInMask(realPosition, pos),
-                        PieceTypeId = PieceType.Parse(piece.Key)
+                        PieceTypeId = pieceId
                     });
                 }
             }
