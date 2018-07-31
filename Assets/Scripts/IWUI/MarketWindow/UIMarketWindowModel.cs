@@ -27,7 +27,7 @@ public class UIMarketWindowModel : IWWindowModel
     public bool Upgrade()
     {
         var board = BoardService.Current.GetBoardById(0);
-        var piece = board.BoardLogic.GetPieceAt(GameDataService.Current.PiecesManager.MatketPosition);
+        var piece = board.BoardLogic.GetPieceAt(GameDataService.Current.PiecesManager.KingPosition);
         var reaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
         
         if(reaction == null) return false;

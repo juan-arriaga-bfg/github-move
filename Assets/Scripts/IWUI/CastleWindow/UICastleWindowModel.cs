@@ -2,6 +2,8 @@ using System.Collections.Generic;
 
 public class UICastleWindowModel : IWWindowModel 
 {
+    public int ChestReward = -1;
+    
     public string Title
     {
         get { return "Shop of Chests"; }
@@ -23,8 +25,6 @@ public class UICastleWindowModel : IWWindowModel
             return string.Format("Upgrade\n{0}", def.UpgradePrices[0].ToStringIcon(false));
         }
     }
-
-    public int ChestReward = -1;
     
     public List<ChestDef> Chests
     {
@@ -42,7 +42,7 @@ public class UICastleWindowModel : IWWindowModel
                 var chest = PieceType.Parse(def.Uid);
                 var next = definition.GetNext(chest);
                 
-                return next == PieceType.None.Id && chest != ignore;
+                return next == PieceType.None.Id && chest != ignore && chest != PieceType.Basket3.Id;
             });
             
             last.Add(GameDataService.Current.ChestsManager.Chests.Find(def => PieceType.Parse(def.Uid) == current));
@@ -81,47 +81,26 @@ public class UICastleWindowModel : IWWindowModel
         return upgrade.Make(piece.CachedPosition, piece);
     }
     
-    public void Spawn()
+    public bool Spawn()
     {
-        if(ChestReward == -1) return;
+        if (ChestReward == -1) return false;
         
         var board = BoardService.Current.GetBoardById(0);
         var piece = board.BoardLogic.GetPieceAt(GameDataService.Current.PiecesManager.CastlePosition);
-        var position = piece.CachedPosition;
-        var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
+        var reaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
         
-        var amount = 1;
+        if(reaction == null) return false;
         
-        if (storage != null && storage.SpawnPiece == ChestReward)
-        {
-            if (storage.Scatter(out amount) == false)
-            {
-                UIErrorWindowController.AddError("Not found free cells");
-                return;
-            }
-        }
+        var menu = reaction.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
         
-        var free = new List<BoardPosition>();
-        var positions = new List<BoardPosition>();
+        if(menu == null) return false;
 
-        if (piece.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(position, free, amount) == false)
-        {
-            return;
-        }
+        var spawn = menu.GetDefinition<TouchReactionDefinitionSpawnCastle>();
         
-        foreach (var pos in free)
-        {
-            positions.Add(pos);
-            if(positions.Count == amount) break;
-        }
-        
-        piece.Context.ActionExecutor.AddAction(new ReproductionPieceAction
-        {
-            From = position,
-            Piece = ChestReward,
-            Positions = positions
-        });
+        if(spawn == null) return false;
 
+        spawn.Reward = ChestReward;
         ChestReward = -1;
+        return spawn.Make(piece.CachedPosition, piece);
     }
 }

@@ -118,6 +118,10 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.ChestC2.Id, R.ChestC2Piece);
         dict.Add(PieceType.ChestC3.Id, R.ChestC3Piece);
         
+        dict.Add(PieceType.Basket1.Id, R.Basket1Piece);
+        dict.Add(PieceType.Basket2.Id, R.Basket2Piece);
+        dict.Add(PieceType.Basket3.Id, R.Basket3Piece);
+        
         dict.Add(PieceType.Chest1.Id, R.Chest1Piece);
         dict.Add(PieceType.Chest2.Id, R.Chest2Piece);
         dict.Add(PieceType.Chest3.Id, R.Chest3Piece);

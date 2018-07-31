@@ -49,8 +49,8 @@ public static class CurrencyHellper
             {
                 // on purchase failed (not enough cash)
                 if (onSuccess != null) onSuccess(false);
-                if(price == Currency.Coins.Name) UIMessageWindowController.CreateNeedCoinsMessage();
-                else UIMessageWindowController.CreateNeedCurrencyMessage(price);
+                
+                ShowHint(price);
             }
         );
 
@@ -145,8 +145,7 @@ public static class CurrencyHellper
 
         if (isCan == false && isMessageShow)
         {
-            if(price == Currency.Coins.Name) UIMessageWindowController.CreateNeedCoinsMessage();
-            else UIMessageWindowController.CreateNeedCurrencyMessage(price);
+            ShowHint(price);
         }
         
         return isCan;
@@ -158,8 +157,7 @@ public static class CurrencyHellper
         
         if (isCan == false && isMessageShow)
         {
-            if(price.Currency == Currency.Coins.Name) UIMessageWindowController.CreateNeedCoinsMessage();
-            else UIMessageWindowController.CreateNeedCurrencyMessage(price.Currency);
+            ShowHint(price.Currency);
         }
         
         return isCan;
@@ -188,7 +186,7 @@ public static class CurrencyHellper
         return count;
     }
 
-    public static CurrencyPair CoinPieceToCurrence(Dictionary<int, int> dict)
+    public static CurrencyPair ResourcePieceToCurrence(Dictionary<int, int> dict, string currensy)
     {
         var amount = 0;
         
@@ -196,37 +194,68 @@ public static class CurrencyHellper
         {
             var def = GameDataService.Current.PiecesManager.GetPieceDef(pair.Key);
             
-            if(def == null) continue;
+            if(def == null
+               || def.SpawnResources == null
+               || def.SpawnResources.Currency != currensy) continue;
             
             amount += pair.Value * def.SpawnResources.Amount;
         }
         
-        return new CurrencyPair{Currency = Currency.Coins.Name, Amount = amount};
+        return new CurrencyPair{Currency = currensy, Amount = amount};
     }
     
-    public static Dictionary<int, int> CurrencyToCoinPieces(int amount)
+    public static Dictionary<int, int> CurrencyToResourcePieces(int amount, string currensy)
     {
         var dict = new Dictionary<int, int>();
-        
-        for (var id = PieceType.Coin5.Id; id >= PieceType.Coin1.Id && amount > 0; id--)
+        var ids = PieceType.GetIdsByFilter(PieceTypeFilter.Resource);
+        var defs = new List<PieceDef>();
+
+        foreach (var id in ids)
         {
             var def = GameDataService.Current.PiecesManager.GetPieceDef(id);
             
-            if(def == null) continue;
+            if(def == null
+               || def.SpawnResources == null
+               || def.SpawnResources.Currency != currensy) continue;
             
+            defs.Add(def);
+        }
+        
+        defs.Sort((a, b) => a.SpawnResources.Amount.CompareTo(b.SpawnResources.Amount));
+
+        for (var i = defs.Count - 1; i >= 0 && amount > 0; i--)
+        {
+            var def = defs[i];
             var count = amount / def.SpawnResources.Amount;
             
             if(count == 0) continue;
             
             amount -= count * def.SpawnResources.Amount;
-            dict.Add(id, count);
+            dict.Add(PieceType.Parse(def.SpawnResources.Currency), count);
         }
         
         return dict;
     }
 
-    public static Dictionary<int, int> MinimizeCoinPieces(Dictionary<int, int> dict)
+    private static void ShowHint(string currency)
     {
-        return CurrencyToCoinPieces(CoinPieceToCurrence(dict).Amount);
+        if (currency == Currency.Worker.Name)
+        {
+            return;
+        }
+        
+        if (currency == Currency.Coins.Name)
+        {
+            UIMessageWindowController.CreateNeedCoinsMessage();
+            return;
+        }
+        
+        if (currency == Currency.Energy.Name)
+        {
+            UIService.Get.ShowWindow(UIWindowType.EnergyShopWindow);
+            return;
+        }
+        
+        UIMessageWindowController.CreateNeedCurrencyMessage(currency);
     }
 }

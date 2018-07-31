@@ -6,6 +6,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     private int level;
     private StorageItem storageItem;
     private ViewDefinitionComponent viewDef;
+    private UIBoardView view;
 
     public RectTransform GetAnchorRect()
     {
@@ -60,7 +61,10 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         
         if(def == null) return;
         
+        AddResourceView.Show(def.GetCenter(thisContext.Context), def.Reward);
         GameDataService.Current.FogsManager.RemoveFog(key);
+        
+        thisContext.Context.HintCooldown.RemoweView(view);
         
         if(def.Pieces != null)
         {
@@ -68,10 +72,17 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             {
                 foreach (var pos in piece.Value)
                 {
+                    var pieceId = GameDataService.Current.MinesManager.GetMineById(piece.Key);
+
+                    if (pieceId == PieceType.None.Id)
+                    {
+                        pieceId = PieceType.Parse(piece.Key);
+                    }
+                    
                     thisContext.Context.ActionExecutor.AddAction(new CreatePieceAtAction
                     {
                         At = GetPointInMask(realPosition, pos),
-                        PieceTypeId = PieceType.Parse(piece.Key)
+                        PieceTypeId = pieceId
                     });
                 }
             }
@@ -108,10 +119,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     {
         if(storageItem.Amount < level) return;
         
-        var view = viewDef.AddView(ViewType.FogState);
+        view = viewDef.AddView(ViewType.FogState);
         
         view.Priority = -1;
         view.Change(true);
+        thisContext.Context.HintCooldown.AddView(view);
     }
     
     public string GetResourceId()

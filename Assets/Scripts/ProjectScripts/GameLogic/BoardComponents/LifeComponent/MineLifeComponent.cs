@@ -15,7 +15,7 @@ public class MineLifeComponent : StorageLifeComponent
     
     public override string Key
     {
-        get { return string.Format("{0}_{1}", thisContext.PieceType, def.Position); }
+        get { return def.Position.ToSaveString(); }
     }
 
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
@@ -23,9 +23,9 @@ public class MineLifeComponent : StorageLifeComponent
         base.OnAddToBoard(position, context);
         
         var key = new BoardPosition(position.X, position.Y);
-        def = GameDataService.Current.MinesManager.GetDef(key);
-        
-        if(def == null) return;
+
+        if (def == null) def = GameDataService.Current.MinesManager.GetDef(key);
+        else GameDataService.Current.MinesManager.Chenge(def.Id, key);
         
         var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
         
@@ -38,12 +38,21 @@ public class MineLifeComponent : StorageLifeComponent
         HP = def.Size;
     }
 
-    protected override void Success()
+    public override void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece context = null)
     {
-        base.Success();
+        base.OnMovedFromTo(@from, to, context);
         
-        var sequence = DOTween.Sequence();
-        sequence.InsertCallback(0.5f, () => AddResourceView.Show(StartPosition(), def.StepReward));
+        var key = new BoardPosition(to.X, to.Y);
+        GameDataService.Current.MinesManager.Chenge(def.Id, key);
+    }
+
+    protected override void OnStep()
+    {
+        storage.OnScatter = () =>
+        {
+            storage.OnScatter = null;
+            OnSpawnRewards();
+        };
     }
 
     protected override void OnComplete()
@@ -53,6 +62,7 @@ public class MineLifeComponent : StorageLifeComponent
         storage.OnScatter = () =>
         {
             storage.OnScatter = null;
+            OnSpawnRewards();
             thisContext.Context.ActionExecutor.AddAction(new CollapsePieceToAction
             {
                 To = position,
@@ -64,6 +74,8 @@ public class MineLifeComponent : StorageLifeComponent
 
     private void OnRemove()
     {
+        GameDataService.Current.MinesManager.Remove(def.Id);
+        
         var multi = thisContext.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
         
         if(multi == null) return;
@@ -81,5 +93,10 @@ public class MineLifeComponent : StorageLifeComponent
                 PieceTypeId = PieceType.OX1.Id
             });
         }
+    }
+
+    protected override void OnSpawnRewards()
+    {
+        AddResourceView.Show(StartPosition(), def.StepReward);
     }
 }

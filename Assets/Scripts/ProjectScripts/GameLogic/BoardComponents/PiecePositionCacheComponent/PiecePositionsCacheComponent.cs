@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PiecePositionsCacheComponent : IECSComponent
@@ -47,6 +46,29 @@ public class PiecePositionsCacheComponent : IECSComponent
 		return list;
 	}
 
+	public List<BoardPosition> GetRandomPositions(PieceTypeFilter filter, int count)
+	{
+		var ids = PieceType.GetIdsByFilter(filter);
+		var list = new List<BoardPosition>();
+		var result = new List<BoardPosition>();
+		
+		foreach (var id in ids)
+		{
+			list.AddRange(GetPiecePositionsByType(id));
+		}
+		
+		list.Shuffle();
+
+		count = Mathf.Min(count, list.Count);
+		
+		for (var i = 0; i < count; i++)
+		{
+			result.Add(list[i]);
+		}
+		
+		return result;
+	}
+
 	public List<BoardPosition> GetRandomPositions(int pieceType, int count)
 	{
 		List<BoardPosition> list;
@@ -61,7 +83,7 @@ public class PiecePositionsCacheComponent : IECSComponent
 
 		count = Mathf.Min(count, list.Count);
 		
-		for (int i = 0; i < count; i++)
+		for (var i = 0; i < count; i++)
 		{
 			result.Add(list[i]);
 		}

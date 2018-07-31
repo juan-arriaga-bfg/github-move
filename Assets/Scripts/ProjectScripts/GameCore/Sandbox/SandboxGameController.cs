@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using DG.Tweening.Plugins.Options;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Crypto.Digests;
 using UnityEngine;
 
 public class SandboxGameController : MonoBehaviour
@@ -15,6 +19,7 @@ public class SandboxGameController : MonoBehaviour
             }
         }
     }*/
+    
     
     public virtual void Run()
     {
@@ -51,8 +56,6 @@ public class SandboxGameController : MonoBehaviour
             .RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build()))); 
         
         boardController.RegisterComponent(new BoardRandomComponent()); // random
-//        boardController.RegisterComponent(new ProductionLogicComponent());
-//        boardController.RegisterComponent(new EnemiesLogicComponent());
         boardController.RegisterComponent(new ReproductionLogicComponent());
         boardController.RegisterComponent(new HintCooldownComponent());
         boardController.RegisterComponent(new BoardRenderer().Init(gameBoardResourcesDef,
@@ -62,6 +65,8 @@ public class SandboxGameController : MonoBehaviour
             .RegisterComponent(new BoardManipulatorComponent()
             .RegisterComponent(new LockerComponent())); // user manipualtor
         
+        
+        
         boardController.RegisterComponent(new BoardDefinitionComponent
         {
             CellWidth = 1,
@@ -69,8 +74,8 @@ public class SandboxGameController : MonoBehaviour
             UnitSize = 1.8f,
             GlobalPieceScale = 1f,
             ViewCamera = Camera.main,
-            Width = 30,
-            Height = 30,
+            Width = 40,
+            Height = 40,
             Depth = 3,
             PieceLayer = 1
         }); // board settings
@@ -92,21 +97,26 @@ public class SandboxGameController : MonoBehaviour
             {
                 "tile_grass_1",
                 "tile_grass_2"
-            });
-
-        var leftPoint = boardController.BoardDef.GetSectorCenterWorldPosition(0, 0, 0);
-        var rightPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width, boardController.BoardDef.Height, 0);
-        var topPoint = boardController.BoardDef.GetSectorCenterWorldPosition(0, boardController.BoardDef.Height, 0);
-        var bottomPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width, 0, 0);
-
-        var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition(17, 8, boardController.BoardDef.PieceLayer);
-
+            },
+            GenereateIgnorable(boardController)
+        );
+        
+        var widthShift = boardController.BoardDef.Width / 4;
+        var heightShift = boardController.BoardDef.Height / 4;
+        
+        var leftPoint = boardController.BoardDef.GetSectorCenterWorldPosition(widthShift, widthShift, 0);
+        var rightPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - widthShift, boardController.BoardDef.Height - widthShift, 0);
+        var topPoint = boardController.BoardDef.GetSectorCenterWorldPosition(heightShift, boardController.BoardDef.Height - heightShift, 0);
+        var bottomPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - heightShift, heightShift, 0);
+        
+        var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition(19, 14, boardController.BoardDef.PieceLayer);
+        
         boardController.Manipulator.CameraManipulator.CurrentCameraSettings.CameraClampRegion = new Rect
         (
             leftPoint.x - boardController.BoardDef.UnitSize, 
-            -(topPoint - bottomPoint).magnitude * 0.5f,
-            (leftPoint - rightPoint).magnitude + boardController.BoardDef.UnitSize,
-            (topPoint - bottomPoint).magnitude + boardController.BoardDef.UnitSize * 2f
+            bottomPoint.y - boardController.BoardDef.UnitSize,
+            Mathf.Abs((leftPoint - rightPoint).x) + boardController.BoardDef.UnitSize,
+            Mathf.Abs((topPoint - bottomPoint).y) + boardController.BoardDef.UnitSize
         );
        
         boardController.Manipulator.CameraManipulator.CachedCameraTransform.localPosition = new Vector3
@@ -115,9 +125,51 @@ public class SandboxGameController : MonoBehaviour
             centerPosition.y,
             boardController.Manipulator.CameraManipulator.CachedCameraTransform.localPosition.z
         );
+
+        var shift = 12;
+        var vectorShift = (shift / 2) * boardController.BoardDef.UnitSize;
+        boardController.RendererContext.GenerateBackground
+        (
+            new Vector3(-vectorShift, 0),
+            boardController.BoardDef.Width + shift,
+            boardController.BoardDef.Height + shift,
+            boardController.BoardDef.UnitSize,
+            "background_tile"
+        );
         
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
 
         boardController.RegisterComponent(new FieldControllerComponent());
+    }
+    
+    private List<BoardPosition> GenereateIgnorable(BoardController board)
+    {
+        var width = board.BoardDef.Width;
+        var height = board.BoardDef.Height;
+        var ignorable = new List<BoardPosition>();
+
+        var maxEdge = Math.Max(width, height);
+        
+        var widthCount = maxEdge / 2;
+        for (int i = 0; i < widthCount ; i++)
+        {
+            for (int j = 0; j < widthCount-i; j++)
+            {
+                ignorable.Add(new BoardPosition(i, j));
+                ignorable.Add(new BoardPosition(width - 1 - i, height - 1 - j));
+            }
+        }
+
+        var heightCount = maxEdge / 2;
+        for (int i = 0; i < heightCount; i++)
+        {
+            for (int j = 0; j < heightCount-i; j++)
+            {
+                ignorable.Add(new BoardPosition(i, height - 1 - j));
+                ignorable.Add(new BoardPosition(width - 1 - i, j));
+            }
+        }
+
+        return ignorable;
     }
 }

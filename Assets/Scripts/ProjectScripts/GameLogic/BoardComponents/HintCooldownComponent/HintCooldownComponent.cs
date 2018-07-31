@@ -11,8 +11,11 @@ public enum HintType
 
 public class HintCooldownComponent : ECSEntity
 {
-	private const int MinDelay = 30;
-	private const int MaxDelay = 60;
+	private const int MinDelayArrow = 30;
+	private const int MaxDelayArrow = 60;
+	
+	private const int MinDelayBounce = 15;
+	private const int MaxDelayBounce = 30;
 	
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	
@@ -20,17 +23,32 @@ public class HintCooldownComponent : ECSEntity
 	{
 		get { return ComponentGuid; }
 	}
-    
-	private TimerComponent timer = new TimerComponent();
+	
+	private readonly TimerComponent timerArrow = new TimerComponent();
+	private readonly TimerComponent timerBounce = new TimerComponent();
 
 	private BoardController context;
+
+	private List<int> chestsId;
+	private List<int> minesId;
+	private List<int> obstaclesId;
+	
+	private List<UIBoardView> views = new List<UIBoardView>();
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
 		context = entity as BoardController;
-		RegisterComponent(timer);
+		RegisterComponent(timerArrow, true);
+		RegisterComponent(timerBounce, true);
+
+		chestsId = PieceType.GetIdsByFilter(PieceTypeFilter.Chest);
+		minesId = PieceType.GetIdsByFilter(PieceTypeFilter.Mine);
+		obstaclesId = PieceType.GetIdsByFilter(PieceTypeFilter.Obstacle);
 		
 		Step(HintType.Obstacle);
+		
+		timerBounce.Delay = Random.Range(MinDelayBounce, MaxDelayBounce);
+		timerBounce.OnComplete = Bounce;
 	}
 
 	public void Step(BoardPosition position, float offsetX = 0, float offsetY = 0)
@@ -41,75 +59,74 @@ public class HintCooldownComponent : ECSEntity
 
 	public void Step(HintType type)
 	{
-		if(type != HintType.HighPriority && type != HintType.OpenChest && timer.IsStarted) return;
+		if(type != HintType.HighPriority && type != HintType.OpenChest && timerArrow.IsStarted) return;
 		
-		timer.Stop();
-		timer.Delay = Random.Range(MinDelay, MaxDelay);
-		timer.OnComplete = Hint;
-		timer.Start();
+		timerArrow.Stop();
+		timerArrow.Delay = Random.Range(MinDelayArrow, MaxDelayArrow);
+		timerArrow.OnComplete = Hint;
+		timerArrow.Start();
+	}
+
+	public void AddView(UIBoardView view)
+	{
+		views.Add(view);
+
+		if (views.Count > 1) return;
+		
+		timerBounce.Start();
+	}
+	
+	public void RemoweView(UIBoardView view)
+	{
+		views.Remove(view);
+		
+		if(views.Count > 0) return;
+		
+		timerBounce.Stop();
 	}
 	
 	private void Hint()
 	{
-		if(UIService.Get.ShowedWindows.Count > 2) return;
+		if(UIService.Get.ShowedWindows.Count > 1) return;
 		
-		var open = new List<BoardPosition>();
-		var close = new List<BoardPosition>();
-		
-		for (var i = PieceType.Chest1.Id; i <= PieceType.Chest9.Id; i++)
+		if (Show(chestsId))
 		{
-			var positions = context.BoardLogic.PositionsCache.GetPiecePositionsByType(i);
-
-			foreach (var position in positions)
-			{
-				var piece = context.BoardLogic.GetPieceAt(position);
-				var chestComponent = piece.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
-				
-				if(chestComponent == null) return;
-
-				if (chestComponent.Chest.State == ChestState.Open)
-				{
-					open.Add(position);
-					continue;
-				}
-
-				if (chestComponent.Chest.State == ChestState.Close)
-				{
-					close.Add(position);
-				}
-			}
-		}
-		
-		if (open.Count > 0)
-		{
-			open.Shuffle();
-			HintArrowView.Show(open[0], 0, -0.5f);
 			Step(HintType.OpenChest);
 			return;
 		}
 
-		if (close.Count > 0)
+		if (Show(minesId) || Show(obstaclesId))
 		{
-			close.Shuffle();
-			HintArrowView.Show(close[0], 0, -0.5f);
-			return;
+			
 		}
-		
-		var obstacle = new List<BoardPosition>();
+	}
 
-		for (var i = PieceType.O1.Id; i <= PieceType.O5.Id; i++)
-		{
-			obstacle.AddRange(context.BoardLogic.PositionsCache.GetPiecePositionsByType(i));
-		}
+	private bool Show(List<int> targets)
+	{
+		if (targets == null) return false;
 		
-		for (var i = PieceType.OX1.Id; i <= PieceType.OX5.Id; i++)
+		var positions = new List<BoardPosition>();
+
+		foreach (var id in targets)
 		{
-			obstacle.AddRange(context.BoardLogic.PositionsCache.GetPiecePositionsByType(i));
+			positions.AddRange(context.BoardLogic.PositionsCache.GetPiecePositionsByType(id));
 		}
 
-		if (obstacle.Count == 0) return;
+		if (positions.Count == 0) return false;
 		
-		obstacle.Shuffle();
-		HintArrowView.Show(obstacle[0], 0, -0.5f);
+		positions.Shuffle();
+		
+		HintArrowView.Show(positions[0], 0, -0.5f);
+
+		return true;
+	}
+
+	private void Bounce()
+	{
+		timerBounce.Delay = Random.Range(MinDelayBounce, MaxDelayBounce);
+		timerBounce.Start();
+
+		var view = views[Random.Range(0, views.Count)];
+		view.Attention();
 	}
 }

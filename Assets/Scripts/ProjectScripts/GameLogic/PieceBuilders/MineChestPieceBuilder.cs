@@ -17,4 +17,9 @@
 
 		return piece;
 	}
+	
+	protected override void AddMatchableComponent(Piece piece)
+	{
+		piece.RegisterComponent(new MatchableChestComponent());
+	}
 }

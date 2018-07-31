@@ -11,12 +11,16 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
     [SerializeField] private GameObject itemPattern;
     
     private List<GameObject> items = new List<GameObject>();
+
+    private bool isHint;
     
     public override void OnViewShow()
     {
         base.OnViewShow();
         
         var windowModel = Model as UIEnergyShopWindowModel;
+
+        isHint = false;
         
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
@@ -54,10 +58,42 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
         }
         
         items = new List<GameObject>();
+
+        if (isHint)
+        {
+            Hint();
+            return;
+        }
+        
+        var windowModel = Model as UIEnergyShopWindowModel;
+        windowModel.Spawn();
     }
 
     public void OnClick()
     {
+        isHint = true;
+        Controller.CloseCurrentWindow();
+    }
+
+    private void Hint()
+    {
+        var windowModel = Model as UIEnergyShopWindowModel;
+        var ids = windowModel.SelectedPieces;
+        var positions = new List<BoardPosition>();
+
+        var board = BoardService.Current.GetBoardById(0);
+
+        foreach (var id in ids)
+        {
+            positions.AddRange(board.BoardLogic.PositionsCache.GetPiecePositionsByType(id));
+        }
+
+        if (positions.Count == 0)
+        {
+            UIErrorWindowController.AddError("You have no pieces to get energy");
+            return;
+        }
         
+        HintArrowView.Show(positions[Random.Range(0, positions.Count)], 0, -0.5f);
     }
 }

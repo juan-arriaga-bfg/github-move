@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,7 +45,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         if(isComplete == false) return;
         
         var windowModel = Model as UIQuestWindowModel;
-        
+         
         BoardService.Current.GetBoardById(0).ActionExecutor.AddAction(new EjectionPieceAction
         {
             From = GameDataService.Current.PiecesManager.KingPosition,
@@ -56,15 +58,21 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIQuestWindowModel;
         var quest = windowModel.Quest;
         
+        var board = BoardService.Current.GetBoardById(0);
         if (quest.Check())
         {
+            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(GameDataService.Current.PiecesManager.KingPosition, quest.Rewards.Values.Sum()))
+            {
+                UIErrorWindowController.AddError("Need more free cells");
+                return;
+            }
+            
             GameDataService.Current.QuestsManager.RemoveActiveQuest(quest);
             
             isComplete = true;
             return;
         }
-
-        var board = BoardService.Current.GetBoardById(0);
+        
         var piece = board.BoardLogic.MatchDefinition.GetFirst(quest.WantedPiece);
         
         if(piece == PieceType.None.Id) return;
@@ -73,12 +81,14 @@ public class UIQuestWindowView : UIGenericPopupWindowView
 
         var title = "";
         var image = "";
+
+        var positions = new List<BoardPosition>();
         
         if(piece == PieceType.A1.Id)
         {
             title = "Need wooden pieces?";
             image = "wood_UI";
-            position = GameDataService.Current.PiecesManager.SawmillPosition;
+            positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Obstacle, 1);
         }
         else if(piece == PieceType.B1.Id)
         {
@@ -89,13 +99,13 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         {
             title = "Need stone pieces?";
             image = "stone_UI";
-            position = GameDataService.Current.PiecesManager.MinePosition;
+            
+            positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.MineC.Id, 1);
         }
         else if(piece == PieceType.D1.Id)
         {
             title = "Need sheep pieces?";
             image = "sheeps_UI";
-            position = GameDataService.Current.PiecesManager.SheepfoldPosition;
         }
         else if(piece == PieceType.E1.Id)
         {
@@ -103,15 +113,17 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             image = "apple_UI";
         }
         
+        if (positions.Count != 0) position = positions[0];
+        
         UIMessageWindowController.CreateImageMessage(title, image, () =>
         {
-            if (position == null || position.Value.X == 0 && position.Value.Y == 0) return;
+            if (position == null || position.Value.X == 0 && position.Value.Y == 0)
+            {
+                UIService.Get.ShowWindow(UIWindowType.CastleWindow);
+                return;
+            }
             
-            var hint = board.GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid);
-        
-            if(hint == null) return;
-        
-            hint.Step(position.Value);
+            board.HintCooldown.Step(position.Value);
         });
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);

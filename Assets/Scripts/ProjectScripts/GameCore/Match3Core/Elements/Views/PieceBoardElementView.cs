@@ -66,8 +66,6 @@ public class PieceBoardElementView : BoardElementView
 
         if (!lastBoardPosition.Equals(boardPos))
         {
-            Debug.LogFormat("Check {0}", boardPos);
-            
             lastBoardPosition = boardPos;
             var duration = 0.2f;
             DOTween.Kill(animationUid);

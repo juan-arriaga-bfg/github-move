@@ -6,7 +6,7 @@
       "Currency": "Crystals",
       "Amount": 1
     },
-    "PieceAmount": 3,
+    "PieceAmount": 4,
     "PieceWeights": [
       {
         "Uid": "A1",
@@ -42,13 +42,13 @@
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 0,
+        "Weight": 5,
         "Override": true
       },
       {
         "Uid": "A2",
         "Weight": 20,
-        "Override": false
+        "Override": true
       },
       {
         "Uid": "B2",
@@ -292,7 +292,6 @@
   },
   {
     "Uid": "ChestA1",
-    "Time": 30,
     "Price": {
       "Currency": "Crystals",
       "Amount": 1
@@ -320,7 +319,6 @@
   },
   {
     "Uid": "ChestA2",
-    "Time": 60,
     "Price": {
       "Currency": "Crystals",
       "Amount": 5
@@ -354,7 +352,6 @@
   },
   {
     "Uid": "ChestA3",
-    "Time": 120,
     "Price": {
       "Currency": "Crystals",
       "Amount": 20
@@ -384,7 +381,6 @@
   },
   {
     "Uid": "ChestC1",
-    "Time": 30,
     "Price": {
       "Currency": "Crystals",
       "Amount": 1
@@ -401,7 +397,7 @@
       },
       {
         "Uid": "C2",
-        "Weight": 20
+        "Weight": 7
       }
     ],
     "RandomPieces": [
@@ -418,7 +414,6 @@
   },
   {
     "Uid": "ChestC2",
-    "Time": 60,
     "Price": {
       "Currency": "Crystals",
       "Amount": 5
@@ -452,7 +447,6 @@
   },
   {
     "Uid": "ChestC3",
-    "Time": 120,
     "Price": {
       "Currency": "Crystals",
       "Amount": 20
@@ -482,7 +476,6 @@
   },
   {
     "Uid": "ChestX1",
-    "Time": 30,
     "Price": {
       "Currency": "Crystals",
       "Amount": 1
@@ -518,7 +511,6 @@
   },
   {
     "Uid": "ChestX2",
-    "Time": 60,
     "Price": {
       "Currency": "Crystals",
       "Amount": 5
@@ -554,7 +546,6 @@
   },
   {
     "Uid": "ChestX3",
-    "Time": 120,
     "Price": {
       "Currency": "Crystals",
       "Amount": 20
@@ -582,6 +573,45 @@
       "F1",
       "F2",
       "J5"
+    ]
+  },
+  {
+    "Uid": "Basket1",
+    "Price": {
+      "Currency": "Coins",
+      "Amount": 30
+    },
+    "HardPieces": [
+      {
+        "Currency": "F4",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "Basket2",
+    "Price": {
+      "Currency": "Coins",
+      "Amount": 80
+    },
+    "HardPieces": [
+      {
+        "Currency": "F4",
+        "Amount": 2
+      }
+    ]
+  },
+  {
+    "Uid": "Basket3",
+    "Price": {
+      "Currency": "Coins",
+      "Amount": 135
+    },
+    "HardPieces": [
+      {
+        "Currency": "F4",
+        "Amount": 3
+      }
     ]
   }
 ]

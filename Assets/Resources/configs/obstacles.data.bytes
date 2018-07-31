@@ -74,7 +74,7 @@
     "Delay": 30,
     "Price": {
       "Currency": "Energy",
-      "Amount": 10
+      "Amount": 7
     },
     "FastPrice": {
       "Currency": "Crystals",
@@ -95,6 +95,10 @@
       {
         "Uid": "A2",
         "Weight": 100
+      },
+      {
+        "Uid": "B1",
+        "Weight": 60
       }
     ],
     "ChestWeights": [
@@ -106,6 +110,10 @@
       {
         "Uid": "Chest4",
         "Weight": 30
+      },
+      {
+        "Uid": "Chest2",
+        "Weight": 40
       }
     ]
   },
@@ -114,7 +122,7 @@
     "Delay": 40,
     "Price": {
       "Currency": "Energy",
-      "Amount": 15
+      "Amount": 10
     },
     "FastPrice": {
       "Currency": "Crystals",
@@ -137,7 +145,7 @@
         "Weight": 100
       },
       {
-        "Uid": "E2",
+        "Uid": "E1",
         "Weight": 100
       }
     ],
@@ -163,7 +171,7 @@
     "Delay": 50,
     "Price": {
       "Currency": "Energy",
-      "Amount": 20
+      "Amount": 12
     },
     "FastPrice": {
       "Currency": "Crystals",

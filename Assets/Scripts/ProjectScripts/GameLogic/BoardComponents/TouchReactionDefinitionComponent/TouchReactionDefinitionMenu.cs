@@ -17,7 +17,7 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
 
     public override bool Make(BoardPosition position, Piece piece)
     {
-        piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceMenu, piece);
+        piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, piece);
         
         if (viewDef == null)
         {

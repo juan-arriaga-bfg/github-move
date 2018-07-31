@@ -9,7 +9,8 @@
       "tile_grass_5": "ba475687dd97e97596075de1da7bdde2",
       "tile_grass_8": "a3ca7af2da1c6611c78754b0f3fac50f",
       "tile_grass_7": "8b988460125307020099b6a64fa07026",
-      "tile_grass_4": "c9a073e35325aa13e6691b1c9b4d2741"
+      "tile_grass_4": "c9a073e35325aa13e6691b1c9b4d2741",
+      "background_tile": "0d0db2d5027ab961bd64e4315c8ff699"
     },
     "IsAllowAlphaSplitting": false,
     "SpriteSheetName": "tiles",
@@ -36,7 +37,7 @@
       "icon_back_green": "d1412bfb923b6b2ef6bf03a2107eeb2d",
       "res_desk": "d432919d0cee02c6388c808bfbf51992",
       "icon_Crystals": "39794884d3bf5c18c19772b56e859078",
-      "icon_Coins": "a5d0dbc88646ec973c3d03e629b257ea",
+      "icon_Coins": "e501b0504e623cd55e4c13ebb517b08b",
       "icon_desk": "09551227fb455a33fc1d0eed6b4a2760",
       "icon_btn_buy": "7aff87dbeee3748b958f77f7e92d862e",
       "arrow": "aa5050556446c56b97a9772e2c698d7d",
@@ -312,7 +313,7 @@
       "G3": "2fac22c8e9d68fc50f733f5d27c2b532",
       "I3": "87b2596139351746633e15bbf14cfda7",
       "H3": "9f032d668b7c66d9855690880f94a625",
-      "F4": "4fea4ecbe1900cf3080b007e18784b6f",
+      "F4": "82da77d94cbd2855ce4586d1f7b1d9d8",
       "G4": "7b7ca5ea607c245d1462112043250f7d",
       "H4": "3deec24aee1a1c951fdfa7346d753811",
       "I4": "f87355278810d4e75c17927b7e391993",
@@ -323,7 +324,7 @@
       "G1": "b987533d4f7fbde84ab84213caa034db",
       "F1": "328555d2ae708393033d24f83272e04a",
       "I5": "2f7990c54f96430e0e44dcd2218524a2",
-      "F5": "82da77d94cbd2855ce4586d1f7b1d9d8",
+      "F5": "4fea4ecbe1900cf3080b007e18784b6f",
       "J4": "370dbc009b4ce4e99713e709929a7b06",
       "J3": "2b94947ccd3aaf54c3c25dfe098e6b54",
       "J5": "7416b3c23728006aa1d8c38954d44cdb",
@@ -345,7 +346,10 @@
       "X3": "73df1e2198629894edaca3b7a306567f",
       "X2": "20cf7a8af8d96cab483fbfda91dd8ead",
       "X1": "4f23e4325f1a2fa8d8ce4c314b20c516",
-      "shadowPiece": "bd5abd7cff51c81fbf11340979fd5330"
+      "shadowPiece": "bd5abd7cff51c81fbf11340979fd5330",
+      "Basket3": "0f9595cee5e5c9477d1f51249a3b89c4",
+      "Basket2": "d4a13fd9099ee2b8080826c179dd4a1b",
+      "Basket1": "622258f6aaaf954fa3ab3e5faabb2919"
     },
     "IsAllowAlphaSplitting": false,
     "SpriteSheetName": "gamefield",
@@ -357,17 +361,17 @@
   },
   {
     "Hashes": {
-      "hay_UI": "8a8881b990fd55aef221d3c47b16c41e",
-      "apple_UI": "5ba2a596a378334d79ff99fdcdd79f86",
-      "tutorial_TextBlock_1": "68608c2f0ee3edf7b66f2bcec0fff00a",
+      "hay_UI": "7faa42b17b22b02a3298d707a8fdb91d",
+      "apple_UI": "8c737a20c9b884b493b117a440baa9b4",
+      "tutorial_TextBlock_1": "04b5862d5858e78cb25505489e7156cb",
       "wood_UI": "8bd883673f891f7d8b15780f6915917c",
       "sheeps_UI": "b8d2bdf4e746bd52ab2cea2c8a5d4b3c",
       "stone_UI": "9814bc15526cb20c8339fc834920c61e",
-      "Chest_UI": "87f5dce5a8759368f17e1a02f6cb7125",
-      "Sheeps_UI": "a6c8c1375ede86350e0d85709c25b209",
-      "Stone_UI": "3a3a0eed49907ac7932c38f45ac3645b",
-      "Wood_UI": "980333e7b9047a147ddcfd202c54b5ad",
-      "collection_UI": "79cff0ea01a1dfe2403436460adc732f"
+      "Chest_UI": "bd13e14a7d56076768b74e961bf17fc8",
+      "Sheeps_UI": "5c1bf3d515ef70a5d2f5e72a42567e03",
+      "Stone_UI": "d641a615e5bb4ac9efc5e38ce8fbdc92",
+      "Wood_UI": "ac9379f5cf5e5d885cbfce44484e5c3e",
+      "collection_UI": "8531542a155335bcb2fe9ca940aa46ac"
     },
     "IsAllowAlphaSplitting": false,
     "SpriteSheetName": "tutorial",
@@ -507,9 +511,10 @@
       "list": "92f001373292657aba3352e136bf9d85",
       "galka": "e58766f17131c7652107c079dd369baa",
       "Icon_Energy": "913ef8b433a096c54095cef9ce0ba5bf",
-      "basket3": "7c7dc95e985e80116e0f753747d56b6f",
-      "basket2": "96a50a55d989af84ef99d9e236123088",
-      "basket1": "c647c1fb298b716904b1c332cd45f4bb"
+      "basket3": "0f9595cee5e5c9477d1f51249a3b89c4",
+      "basket2": "d4a13fd9099ee2b8080826c179dd4a1b",
+      "basket1": "622258f6aaaf954fa3ab3e5faabb2919",
+      "icon_Experience": "45f1a8cb14cc7da4408c963e9cf57969"
     },
     "IsAllowAlphaSplitting": false,
     "SpriteSheetName": "new",

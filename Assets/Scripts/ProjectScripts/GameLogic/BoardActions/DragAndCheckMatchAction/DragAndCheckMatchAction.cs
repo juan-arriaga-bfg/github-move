@@ -282,8 +282,13 @@ public class DragAndCheckMatchAction : IBoardAction
 		
 		if (logic.FieldFinder.Find(To, matchField, out currentId) == false) return false;
 		
+		if (!logic.GetPieceAt(From).Matchable.IsMatchable())
+			return false;
+		
 		action = logic.MatchActionBuilder.GetMatchAction(matchField, currentId, To);
 
+		
+		
 		var isMatch = action != null;
 
 		if (isMatch)

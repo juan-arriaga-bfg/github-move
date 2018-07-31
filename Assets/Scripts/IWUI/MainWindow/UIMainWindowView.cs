@@ -82,6 +82,13 @@ public class UIMainWindowView : IWUIWindowView
             GameDataService.Current.Reload();
         
             SceneManager.LoadScene("Main", LoadSceneMode.Single);
+            
+            var ecsSystems = new List<IECSSystem>(ECSService.Current.SystemProcessor.RegisteredSystems);
+            
+            foreach (var system in ecsSystems)
+            {
+                ECSService.Current.SystemProcessor.UnRegisterSystem(system);
+            }
         };
         
         model.OnCancel = () => {};
