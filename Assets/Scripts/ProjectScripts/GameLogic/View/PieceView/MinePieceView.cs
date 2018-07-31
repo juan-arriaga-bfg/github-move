@@ -16,7 +16,6 @@ public class MinePieceView : PieceBoardElementView
             piece.RegisterComponent(new ViewDefinitionComponent());
         viewDef = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
         labelView = viewDef.AddView(ViewType.LevelLabel) as PiceLabelView;
-        Debug.Log(labelView.IsShow);
     }
 
     public override void OnDragStart(BoardPosition boardPos, Vector2 worldPos)

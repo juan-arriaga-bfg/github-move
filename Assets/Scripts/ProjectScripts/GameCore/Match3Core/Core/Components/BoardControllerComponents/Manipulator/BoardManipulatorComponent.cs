@@ -26,7 +26,9 @@ public class BoardManipulatorComponent : ECSEntity,
     private Vector2 prevDragPos;
 
     private bool isDragLip = false;
-    
+
+
+    private bool isDrag = false;
     
     private BoardElementView cachedViewForDrag = null;
     
@@ -111,7 +113,7 @@ public class BoardManipulatorComponent : ECSEntity,
         {
             var pieceView = selectedView as PieceBoardElementView;
             var touchReaction = pieceView.Piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
-
+            pieceView.OnTap(pieceView.Piece.CachedPosition, pos);
             if (touchReaction != null) return touchReaction.Touch(pieceView.Piece.CachedPosition);
         }
         
@@ -122,9 +124,9 @@ public class BoardManipulatorComponent : ECSEntity,
     public bool OnSet(Vector2 startPos, Vector2 pos, float duration)
     {
         if ((pos - startPos).sqrMagnitude <= 0.01f || cachedViewForDrag == null) return false;
-
+        
         if (LeanTouch.Fingers.Count > 1) return false;
-
+        
         pos = pos + Vector2.up * 0.5f;
 
         var targetPos = new Vector3(pos.x, pos.y, cachedViewForDrag.CachedTransform.position.z);
@@ -133,7 +135,7 @@ public class BoardManipulatorComponent : ECSEntity,
         {
             var pieceView = cachedViewForDrag as PieceBoardElementView;
             var boardPos = context.BoardDef.GetSectorPosition(targetPos);
-
+            boardPos.Z = context.BoardDef.PieceLayer;
             pieceView.OnDrag(boardPos, pos);
 
             if ((prevDragPos - pos).sqrMagnitude > 0.01f)
@@ -148,6 +150,7 @@ public class BoardManipulatorComponent : ECSEntity,
             
             var targetCellPos = context.BoardDef.GetPiecePosition(boardPos.X, boardPos.Y);
             targetCellPos = new Vector3(targetCellPos.x, targetCellPos.y, 0f);
+            
             
             if (lastCachedDragPosition.Equals(boardPos) == false)
             {
@@ -190,13 +193,13 @@ public class BoardManipulatorComponent : ECSEntity,
                 var pieceView = selectedView as PieceBoardElementView;
                 var draggableComponent = pieceView.Piece.GetComponent<DraggablePieceComponent>(DraggablePieceComponent.ComponentGuid);
                 
-                var boardPos = context.BoardDef.GetSectorPosition(pos);
-                
-                pieceView.OnDragStart(boardPos, pos);
                 if (draggableComponent == null || draggableComponent.IsDraggable(pieceView.Piece.CachedPosition) == false)
                 {
                     return false;
                 }
+                
+                var boardPos = context.BoardDef.GetSectorPosition(pos);
+                pieceView.OnDragStart(boardPos, pos);
             }
             
             cachedViewForDrag = selectedView;

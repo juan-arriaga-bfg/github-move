@@ -1,19 +1,16 @@
-﻿using YamlDotNet.Core.Tokens;
-
-public class MineDraggablePieceComponent : DraggablePieceComponent
+﻿public class MineDraggablePieceComponent : DraggablePieceComponent
 {
     private Piece context;
-    private MulticellularPieceBoardObserver multicellular;
+    private PathfinderComponent pathfinder;
 
-    public MulticellularPieceBoardObserver Multicellular
+    public PathfinderComponent Pathfinder
     {
         get
         {
-            return multicellular ?? (multicellular =
-                       context.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver
-                           .ComponentGuid));
+            return pathfinder ??
+                   (pathfinder = context.GetComponent<PathfinderComponent>(PathfinderComponent.ComponentGuid));
         }
-        set { multicellular = value; }
+        set { pathfinder = value; }
     }
     
     public override void OnRegisterEntity(ECSEntity entity)
@@ -27,12 +24,17 @@ public class MineDraggablePieceComponent : DraggablePieceComponent
         if(!base.IsDraggable(at))
             return false;
 
-        foreach (var maskPos in Multicellular.Mask)
-        {
-            if (context.Context.BoardLogic.IsLockedCell(multicellular.GetPointInMask(at, maskPos)))
-                return false;
-        }
-        //return Pathfinder.CanPathToCastle(context);
-        return true;
+        return Pathfinder.CanPathToCastle(context);
+    }
+
+    public override bool IsValidDrag(BoardPosition to)
+    {
+        if (!base.IsValidDrag(to))
+            return false;
+
+        var canPath = Pathfinder.CanPathToCastle(context, to);
+        //if(!canPath)
+            //SUIErrorWindowController.AddError("Place not in reach");
+        return canPath;
     }
 }

@@ -22,11 +22,14 @@ public class PathfinderComponent:ECSEntity
     }
 
     //A* pathfinding algorithm
-    public virtual bool HasPath(BoardPosition from, IList<BoardPosition> to)
+    public virtual bool HasPath(BoardPosition from, HashSet<BoardPosition> to)
     {
+        to = new HashSet<BoardPosition>(to.Where(elem => from.Z == elem.Z));
+        if (to.Count == 0)
+            return false;
         //Init locals
-        var checkedPositions = new List<BoardPosition>();
-        var uncheckedPositions = new List<BoardPosition>();
+        var checkedPositions = new HashSet<BoardPosition>();
+        var uncheckedPositions = new HashSet<BoardPosition>();
         
         var costMap = new Dictionary<BoardPosition, int>();
         var predictionCosts = new Dictionary<BoardPosition, int>();
@@ -35,7 +38,7 @@ public class PathfinderComponent:ECSEntity
         uncheckedPositions.Add(from);
 
         costMap[from] = 0;
-        predictionCosts[from] = Heuristic(from, to[0]);
+        predictionCosts[from] = Heuristic(from, to.First());
 
         //Begin pathfinding
         while (uncheckedPositions.Count > 0)
@@ -60,7 +63,7 @@ public class PathfinderComponent:ECSEntity
                 if (!uncheckedPositions.Contains(currentNeghbour) || tempCost < costMap[currentNeghbour])
                 {
                     costMap[currentNeghbour] = tempCost;
-                    predictionCosts[currentNeghbour] = tempCost + Heuristic(currentNeghbour, to[0]);
+                    predictionCosts[currentNeghbour] = tempCost + Heuristic(currentNeghbour, to.First());
                 }
                 
                 if(!uncheckedPositions.Contains(currentNeghbour))
@@ -73,18 +76,17 @@ public class PathfinderComponent:ECSEntity
     
     public virtual bool HasPath(BoardPosition from, BoardPosition to)
     {
-        return HasPath(from, new List<BoardPosition> {to});
+        return HasPath(from, new HashSet<BoardPosition> {to});
     }
 
     private BoardPosition FindPosWithMinimalCost(Dictionary<BoardPosition, int> costs,
-        IList<BoardPosition> uncheckedPositions)
+        HashSet<BoardPosition> uncheckedPositions)
     {
-        var currentPos = uncheckedPositions[0];
+        var currentPos = uncheckedPositions.First();
         var minimalCost = costs[currentPos];
-        
-        for (var i = 0; i < uncheckedPositions.Count; i++)
+
+        foreach (var position in uncheckedPositions)
         {
-            var position = uncheckedPositions[i];
             if (costs[position] < minimalCost)
             {
                 minimalCost = costs[position];
@@ -100,7 +102,7 @@ public class PathfinderComponent:ECSEntity
         return Math.Abs(from.X - to.X) + Math.Abs(from.Y - to.Y);
     }
     
-    private List<BoardPosition> AvailiablePositions(BoardPosition position, IList<BoardPosition> checkedPositions)
+    private List<BoardPosition> AvailiablePositions(BoardPosition position, HashSet<BoardPosition> checkedPositions)
     {
         var uncheckedNeigbours = new List<BoardPosition>
         {

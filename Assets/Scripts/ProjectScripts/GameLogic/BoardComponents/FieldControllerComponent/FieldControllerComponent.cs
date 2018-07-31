@@ -30,14 +30,7 @@ public class FieldControllerComponent : IECSComponent
 //            TestField();
             CreateFog();
             CreateTown();
-            
-            context.BoardLogic.LockCells(new List<BoardPosition>()
-            {
-                new BoardPosition(21, 4), 
-                new BoardPosition(21, 5),
-                new BoardPosition(22, 4),
-                new BoardPosition(22, 5)
-            }, this);
+
             return;
         }
         
@@ -63,14 +56,6 @@ public class FieldControllerComponent : IECSComponent
         }
         
         CreateTown();
-        
-        context.BoardLogic.LockCells(new List<BoardPosition>()
-        {
-            new BoardPosition(21, 4), 
-            new BoardPosition(21, 5),
-            new BoardPosition(22, 4),
-            new BoardPosition(22, 5)
-        }, this);
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)
