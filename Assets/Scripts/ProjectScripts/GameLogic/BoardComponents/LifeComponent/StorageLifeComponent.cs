@@ -48,6 +48,11 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
     {
         storage.Timer.OnStart -= OnTimerStart;
     }
+
+    public virtual int GetTimerDelay()
+    {
+        return storage.Timer.Delay;
+    }
     
     public bool Damage()
     {
@@ -56,7 +61,7 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
         var isSuccess = false;
 
         if (CurrencyHellper.IsCanPurchase(Energy, true) == false
-            || thisContext.Context.WorkerLogic.Get(Key, storage.Timer.Delay) == false) return false;
+            || thisContext.Context.WorkerLogic.Get(Key, GetTimerDelay()) == false) return false;
         
         Success();
         
