@@ -125,7 +125,5 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             
             board.HintCooldown.Step(position.Value);
         });
-        
-        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
 }
