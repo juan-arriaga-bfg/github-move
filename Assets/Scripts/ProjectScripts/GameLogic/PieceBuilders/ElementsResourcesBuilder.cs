@@ -22,12 +22,20 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.O3.Id, R.O3Piece);
         dict.Add(PieceType.O4.Id, R.O4Piece);
         dict.Add(PieceType.O5.Id, R.O5Piece);
+        dict.Add(PieceType.O6.Id, R.O6Piece);
+        dict.Add(PieceType.O7.Id, R.O7Piece);
+        dict.Add(PieceType.O8.Id, R.O8Piece);
+        dict.Add(PieceType.O9.Id, R.O9Piece);
         
         dict.Add(PieceType.OX1.Id, R.OX1Piece);
         dict.Add(PieceType.OX2.Id, R.OX2Piece);
         dict.Add(PieceType.OX3.Id, R.OX3Piece);
         dict.Add(PieceType.OX4.Id, R.OX4Piece);
         dict.Add(PieceType.OX5.Id, R.OX5Piece);
+        dict.Add(PieceType.OX6.Id, R.OX6Piece);
+        dict.Add(PieceType.OX7.Id, R.OX7Piece);
+        dict.Add(PieceType.OX8.Id, R.OX8Piece);
+        dict.Add(PieceType.OX9.Id, R.OX9Piece);
         
         dict.Add(PieceType.King.Id, R.KingPiece);
         

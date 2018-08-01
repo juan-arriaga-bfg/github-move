@@ -201,4 +201,12 @@ public class R
      public const string Basket1Piece = "Basket1Piece";
      public const string Basket2Piece = "Basket2Piece";
      public const string Basket3Piece = "Basket3Piece";
+     public const string O6Piece = "O6Piece";
+     public const string O7Piece = "O7Piece";
+     public const string O8Piece = "O8Piece";
+     public const string O9Piece = "O9Piece";
+     public const string OX8Piece = "OX8Piece";
+     public const string OX7Piece = "OX7Piece";
+     public const string OX6Piece = "OX6Piece";
+     public const string OX9Piece = "OX9Piece";
 }

@@ -37,11 +37,19 @@ public static class PathfindIgnoreBuilder
          PieceType.O3.Id,
          PieceType.O4.Id,
          PieceType.O5.Id,
+         PieceType.O6.Id,
+         PieceType.O7.Id,
+         PieceType.O8.Id,
+         PieceType.O9.Id,
          PieceType.OX1.Id,
          PieceType.OX2.Id,
          PieceType.OX3.Id,
          PieceType.OX4.Id,
          PieceType.OX5.Id,
+         PieceType.OX6.Id,
+         PieceType.OX7.Id,
+         PieceType.OX8.Id,
+         PieceType.OX9.Id,
          PieceType.Fog.Id
       });
       
@@ -50,11 +58,19 @@ public static class PathfindIgnoreBuilder
       dict.Add(PieceType.O3.Id, obstacleIgnorePices);
       dict.Add(PieceType.O4.Id, obstacleIgnorePices);
       dict.Add(PieceType.O5.Id, obstacleIgnorePices);
+      dict.Add(PieceType.O6.Id, obstacleIgnorePices);
+      dict.Add(PieceType.O7.Id, obstacleIgnorePices);
+      dict.Add(PieceType.O8.Id, obstacleIgnorePices);
+      dict.Add(PieceType.O9.Id, obstacleIgnorePices);
       dict.Add(PieceType.OX1.Id, obstacleIgnorePices);
       dict.Add(PieceType.OX2.Id, obstacleIgnorePices);
       dict.Add(PieceType.OX3.Id, obstacleIgnorePices);
       dict.Add(PieceType.OX4.Id, obstacleIgnorePices);
       dict.Add(PieceType.OX5.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OX6.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OX7.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OX8.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OX9.Id, obstacleIgnorePices);
    }
    
    private static void InitMines(Dictionary<int, HashSet<int>> dict)
@@ -66,11 +82,19 @@ public static class PathfindIgnoreBuilder
          PieceType.O3.Id,
          PieceType.O4.Id,
          PieceType.O5.Id,
+         PieceType.O6.Id,
+         PieceType.O7.Id,
+         PieceType.O8.Id,
+         PieceType.O9.Id,
          PieceType.OX1.Id,
          PieceType.OX2.Id,
          PieceType.OX3.Id,
          PieceType.OX4.Id,
          PieceType.OX5.Id,
+         PieceType.OX6.Id,
+         PieceType.OX7.Id,
+         PieceType.OX8.Id,
+         PieceType.OX9.Id,
          PieceType.Fog.Id
       });
       
