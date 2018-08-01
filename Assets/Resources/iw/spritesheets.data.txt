@@ -349,13 +349,23 @@
       "shadowPiece": "bd5abd7cff51c81fbf11340979fd5330",
       "Basket3": "0f9595cee5e5c9477d1f51249a3b89c4",
       "Basket2": "d4a13fd9099ee2b8080826c179dd4a1b",
-      "Basket1": "622258f6aaaf954fa3ab3e5faabb2919"
+      "Basket1": "622258f6aaaf954fa3ab3e5faabb2919",
+      "r_hand": "8f3894ffda107273584c6c02f83a5258",
+      "shadow": "895473d99f2357d08f1a9f371f92849f",
+      "body": "86d03bc380f013ae876113e39eb9f878",
+      "head": "34cea82f4a0693f6c01a1a593ea9e83d",
+      "l_hand": "fc26cc392214c833d3686669a656c394",
+      "l_leg": "12a743cc72bae3d90b9113fb4414b5fd",
+      "r_arm2": "3ff9ceb6e3f7fc2643024a9003fa9902",
+      "r_leg": "cb093d6dafc43a19bbb3d4284bf671a7",
+      "r_arm1": "75c0b6502fca27054ad7cdbef34dbfab"
     },
     "IsAllowAlphaSplitting": false,
     "SpriteSheetName": "gamefield",
     "PathToSpriteSheetSettings": "Assets/Content/SpriteSheetSettings",
     "PathesToSource": [
-      "Assets/Content/SourceContent/Textures/Pieces"
+      "Assets/Content/SourceContent/Textures/Pieces",
+      "Assets/Content/SourceContent/Textures/Heroes"
     ],
     "PathToProcessedPack": "Assets/Content/ProcessedContent"
   },
