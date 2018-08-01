@@ -31,10 +31,10 @@ public class FieldControllerComponent : IECSComponent
         {
             StartField();
             CreateFog();
-            //CreateTown();
-//            TestField();
             return;
         }
+        
+        
         
         foreach (var item in fieldDef.Pieces)
         {
@@ -54,8 +54,6 @@ public class FieldControllerComponent : IECSComponent
                 GameDataService.Current.CollectionManager.CastResourceOnBoard(item.Position, pair);
             }
         }
-        
-        //CreateTown();
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)
@@ -118,57 +116,6 @@ public class FieldControllerComponent : IECSComponent
             Piece = PieceType.Fog.Id,
             Positions = positions
         });
-    }
-
-    private void CreateTown()
-    {
-        var positions = new List<BoardPosition>();
-        
-        var left = new BoardPosition(18, 13, -1);
-        var top = new BoardPosition(18, 18, -1);
-        var right = new BoardPosition(23, 18, -1);
-        var bottom = new BoardPosition(23, 13, -1);
-
-        var ignore = new BoardPosition(20, 13, -1);
-        
-        for (int i = 0; i <= 5; i++)
-        {
-            positions.Add(left);
-            positions.Add(top);
-            positions.Add(right);
-            
-            if(bottom.Equals(ignore) == false) positions.Add(bottom);
-
-            if (i == 5) break;
-            
-            if (i == 0)
-            {
-                context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleLeft, left);
-                context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleTop, top);
-                context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleRight, right);
-                context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverAngleBottom, bottom);
-                continue;
-            }
-            
-            left = left.Up;
-            top = top.Right;
-            right = right.Down;
-            bottom = bottom.Left;
-            
-            context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverRight, left);
-            context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverLeft, top);
-            context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverRight, right);
-            context.RendererContext.CreateBoardElementAt<BoardElementView>(R.RiverLeft, bottom);
-        }
-        
-        context.ActionExecutor.AddAction(new LockCellAction
-        {
-            Locker = this,
-            Positions = positions
-        });
-        
-        AddBoardElement(R.BrigeLeft, new BoardPosition(20, 13, 1), new Vector3(0.8f, -0.4f));
-        AddBoardElement(R.BrigeRight, new BoardPosition(23, 16, 1), new Vector3(-0.7f, -0.4f));
     }
 
     private void CreateDebug()

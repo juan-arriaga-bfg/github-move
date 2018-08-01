@@ -24,26 +24,27 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     public void OnRegisterEntity(ECSEntity entity)
     {
         thisContext = entity as Piece;
+        ViewIds = new List<ViewType>();
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)
     {
     }
-    
+
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        if(thisContext == null) return;
-        
+        if (thisContext == null) return;
+
         Position = position;
-        
-        if(ViewIds == null) return;
-        
+
+        if (ViewIds == null) return;
+
         foreach (var id in ViewIds)
         {
             AddView(id);
         }
     }
-    
+
     public void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)
     {
         var f = from;
@@ -120,6 +121,11 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         return element;
     }
 
+    public List<UIBoardView> GetViews()
+    {
+        return views.Values.ToList();
+    }
+    
     public void RemoveView(ViewType id)
     {
         UIBoardView view;

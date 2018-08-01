@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CreatePieceAtAction : IBoardAction
 {
@@ -12,6 +13,8 @@ public class CreatePieceAtAction : IBoardAction
 	public BoardPosition At { get; set; }
 	
 	public int PieceTypeId { get; set; }
+	
+	public Action OnComplete;
 	
 	public bool PerformAction(BoardController gameBoardController)
 	{
@@ -36,6 +39,7 @@ public class CreatePieceAtAction : IBoardAction
 		animation.OnCompleteEvent += (_) =>
 		{
 			gameBoardController.BoardLogic.UnlockCell(At, this);
+			if (OnComplete != null) OnComplete();
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

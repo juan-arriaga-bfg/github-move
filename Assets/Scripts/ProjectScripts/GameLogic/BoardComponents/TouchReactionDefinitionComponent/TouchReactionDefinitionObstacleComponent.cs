@@ -1,11 +1,13 @@
-﻿public class TouchReactionDefinitionObstacleComponent:TouchReactionDefinitionSpawnInStorage
+﻿using System.Collections.Generic;
+
+public class TouchReactionDefinitionObstacleComponent : TouchReactionDefinitionSpawnInStorage
 {
     public override bool Make(BoardPosition position, Piece piece)
     {
         var storageLife = piece.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
         var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
-        var health = storageLife.HP;
-        if (health == 1)
+        
+        if (storageLife.Current == storageLife.HP)
         {
             int tmp;
             if (storage.Scatter(out tmp, IsAutoStart) == false)
@@ -14,10 +16,19 @@
                 return false;
             }
             
-            piece.Context.ActionExecutor.AddAction(new ChangePieceAction()
+            piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
             {
-                Position = position,
-                TargetPieceId = storage.SpawnPiece
+                Positions = new List<BoardPosition> {position},
+                To = position,
+                OnCompleteAction = new CreatePieceAtAction
+                {
+                    At = position,
+                    PieceTypeId = GameDataService.Current.ObstaclesManager.GetReward(piece.PieceType),
+                    OnComplete = () =>
+                    {
+                        if (storage.OnScatter != null) storage.OnScatter();
+                    }
+                }
             });
             return true;
         }
