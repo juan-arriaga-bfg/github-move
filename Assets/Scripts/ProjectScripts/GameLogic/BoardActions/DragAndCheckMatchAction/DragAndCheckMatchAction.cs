@@ -140,55 +140,61 @@ public class DragAndCheckMatchAction : IBoardAction
 			MoveMutlicellularPieces(board);
 	}
 
-	private bool LogicMulticellularSwapPieces(BoardController board, out List<Piece> FromPieces, out List<Piece> ToPieces)
+	private bool LogicMulticellularSwapPieces(BoardController board, out Piece MulticellularPiece, out List<BoardPosition> allSpace, out List<Piece> allPieces)
 	{
 		if (fromPositions.Count != targetPositions.Count)
 		{
 			Reset(board.RendererContext);
-			FromPieces = new List<Piece>();
-			ToPieces = new List<Piece>();
+			MulticellularPiece = null;
+			allPieces = new List<Piece>();
+			allSpace = new List<BoardPosition>();
 			return false;
 		}
-			
-		var saveFrom = new List<Piece>();
+		
+		allPieces = new List<Piece>();
+		
 		var saveTarget = new List<Piece>();
 		
 		var logic = board.BoardLogic;
-		
 		var countPositions = fromPositions.Count;
 		
 		var multicellularPiece = logic.GetPieceAt(From);
 		
 		for (int i = 0; i < countPositions; i++)
 		{
-			var fromPiece = logic.GetPieceAt(fromPositions[i]);
 			var toPiece = logic.GetPieceAt(targetPositions[i]);
-			
-			saveFrom.Add(fromPiece);
-			saveTarget.Add(toPiece == multicellularPiece ? null : toPiece);	
-//			saveTarget.Add(toPiece);	
+
+			if (toPiece != null && multicellularPiece != toPiece)
+				saveTarget.Add(toPiece);	
 			logic.RemovePieceFromBoardSilent(fromPositions[i]);
-			if(saveTarget[i] != null)
+			if(toPiece != null)
 				logic.RemovePieceFromBoardSilent(targetPositions[i]);
 		}
 
-		for (int i = 0; i < countPositions; i++)
+		allSpace = targetPositions.Concat(fromPositions).Distinct().ToList();
+		for (int i = 0; i < fromPositions.Count; i++)
 		{
-			var from = fromPositions[i];
 			var to = targetPositions[i];
+			allPieces.Add(multicellularPiece);
+			logic.AddPieceToBoardSilent(to.X, to.Y, multicellularPiece);
+		}
+		
+		for (int i = fromPositions.Count; i < allSpace.Count; i++)
+		{
+			var target = allSpace[i];
+			var index = i - fromPositions.Count;
 
-			logic.AddPieceToBoardSilent(to.X, to.Y, saveFrom[i]);
-			
-			if (saveTarget[i] != null)
-			{
-				logic.AddPieceToBoardSilent(from.X, from.Y, saveTarget[i]);
+			if (index >= saveTarget.Count)
+				break;
+			allPieces.Add(saveTarget[index]);
+			logic.AddPieceToBoardSilent(target.X, target.Y, saveTarget[index]);
 				
-				var observerTo = saveTarget[i].GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
-				if (observerTo != null)
-				{
-					observerTo.OnMovedFromTo(to, from);
-				}
+			var observerTo = saveTarget[index].GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+			if (observerTo != null)
+			{
+				observerTo.OnMovedFromTo(saveTarget[index].CachedPosition, target);
 			}
+
 		}
 		
 		var observerFrom = multicellularPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
@@ -197,27 +203,25 @@ public class DragAndCheckMatchAction : IBoardAction
 			observerFrom.OnMovedFromTo(From, To);
 		}
 
-		FromPieces = saveFrom;
-		ToPieces = saveTarget;
+		MulticellularPiece = multicellularPiece;
 
 		return true;
 	}
 
-	private void ViewMulticellularSwapPieces(BoardController board, List<Piece> fromPieces, List<Piece> targetPieces)
+	private void ViewMulticellularSwapPieces(BoardController board, Piece multicellular, List<BoardPosition> allSpace, List<Piece> allPieces)
 	{
 		var logic = board.BoardLogic;
 		
 		board.BoardLogic.LockCells(fromPositions, this);
 		board.BoardLogic.LockCells(targetPositions, this);
 		
-		var animation = new MulticellularSwapPiecesAnimation()
+		var animation = new MulticellularSwapPiecesAnimation
 		{
-			FromPieces = fromPieces,
-			TargetPieces = targetPieces,
+			MulticellularPiece = multicellular,
+			AllSpace = allSpace,
+			AllPieces = allPieces,
 			FromPositions = fromPositions,
-			TargetPositions = targetPositions,
-			To = To,
-			From = From
+			To = To
 		};
 
 		animation.OnCompleteEvent += (_) =>
@@ -231,10 +235,11 @@ public class DragAndCheckMatchAction : IBoardAction
 
 	private void MulticellularSwapPieces(BoardController board)
 	{
-		List<Piece> fromPieces;
-		List<Piece> targetPieces;
-		if(LogicMulticellularSwapPieces(board, out fromPieces, out targetPieces))
-			ViewMulticellularSwapPieces(board, fromPieces, targetPieces);
+		Piece multicellularPiece;
+		List<Piece> allPieces;
+		List<BoardPosition> allSpace;
+		if(LogicMulticellularSwapPieces(board, out multicellularPiece, out allSpace, out allPieces))
+			ViewMulticellularSwapPieces(board, multicellularPiece, allSpace, allPieces);
 	}
 
 	private void StandartPieceDrag(BoardController board)
