@@ -75,16 +75,6 @@ public class R
      public const string E5Piece = "E5Piece";
      public const string E6Piece = "E6Piece";
      public const string ChangeFogStateView = "ChangeFogStateView";
-     public const string O1Piece = "O1Piece";
-     public const string O2Piece = "O2Piece";
-     public const string O3Piece = "O3Piece";
-     public const string O4Piece = "O4Piece";
-     public const string O5Piece = "O5Piece";
-     public const string OX1Piece = "OX1Piece";
-     public const string OX2Piece = "OX2Piece";
-     public const string OX3Piece = "OX3Piece";
-     public const string OX4Piece = "OX4Piece";
-     public const string OX5Piece = "OX5Piece";
      public const string Chest1Piece = "Chest1Piece";
      public const string Chest2Piece = "Chest2Piece";
      public const string Chest3Piece = "Chest3Piece";
@@ -201,4 +191,6 @@ public class R
      public const string Basket1Piece = "Basket1Piece";
      public const string Basket2Piece = "Basket2Piece";
      public const string Basket3Piece = "Basket3Piece";
+     public const string OPiece = "OPiece";
+     public const string OXPiece = "OXPiece";
 }

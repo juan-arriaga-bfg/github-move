@@ -99,7 +99,6 @@ public class BoardManipulatorComponent : ECSEntity,
             return false;
         
         isDrag = false;
-        isTouch = false;
         
         if (cachedViewForDrag != null)
         {
@@ -265,7 +264,7 @@ public class BoardManipulatorComponent : ECSEntity,
             
             if (cachedViewForDrag is PieceBoardElementView)
             {
-                if ((cachedDragDownPos - pos).sqrMagnitude > 0.01f)
+                if ((cachedDragDownPos - pos).sqrMagnitude > 0.01f && !isTouch)
                 {
                     BoardPosition fromPosition = context.RendererContext.GetBoardPosition(cachedViewForDrag);
                     BoardPosition targetPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
