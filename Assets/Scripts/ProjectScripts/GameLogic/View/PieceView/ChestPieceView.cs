@@ -37,14 +37,18 @@ public class ChestPieceView : PieceBoardElementView
     public override void ResetViewOnDestroy()
     {
         if (backlight != null)
+        {
+            RemoveLayerFromCache(backlight);
             Destroy(backlight.gameObject);
-            
-        if(hightlight != null)
+        }
+
+
+        if (hightlight != null)
+        {
+            RemoveLayerFromCache(hightlight);
             Destroy(hightlight.gameObject);
-            
-        ClearCacheLayers();
-        CacheLayers();
-        
+        }
+          
         chestComponent.Timer.OnStop -= UpdateView;
         chestComponent.Timer.OnComplete -= UpdateView;
         base.ResetViewOnDestroy();
