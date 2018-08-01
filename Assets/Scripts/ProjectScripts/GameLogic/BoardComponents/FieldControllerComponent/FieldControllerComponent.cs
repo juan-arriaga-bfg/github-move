@@ -31,9 +31,10 @@ public class FieldControllerComponent : IECSComponent
         {
             StartField();
             CreateFog();
-//            TestField();
             return;
         }
+        
+        
         
         foreach (var item in fieldDef.Pieces)
         {

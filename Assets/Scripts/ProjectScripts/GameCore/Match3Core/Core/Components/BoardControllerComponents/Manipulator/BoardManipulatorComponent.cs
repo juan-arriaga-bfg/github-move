@@ -120,7 +120,7 @@ public class BoardManipulatorComponent : ECSEntity,
         {
             var pieceView = selectedView as PieceBoardElementView;
             var touchReaction = pieceView.Piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
-
+            pieceView.OnTap(pieceView.Piece.CachedPosition, pos);
             if (touchReaction != null) return touchReaction.Touch(pieceView.Piece.CachedPosition);
         }
         
@@ -194,7 +194,7 @@ public class BoardManipulatorComponent : ECSEntity,
             BeginDrag(startPos, pos);
         
         if ((pos - startPos).sqrMagnitude <= 0.01f || cachedViewForDrag == null) return false;
-
+        
         pos = pos + Vector2.up * 0.5f;
 
         var targetPos = new Vector3(pos.x, pos.y, cachedViewForDrag.CachedTransform.position.z);

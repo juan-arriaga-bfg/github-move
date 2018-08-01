@@ -48,7 +48,7 @@ public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserve
 
 	public void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece context = null)
 	{
-		
+		realPosition = to;
 	}
 
 	public virtual void OnRemoveFromBoard(BoardPosition position, Piece context = null)

@@ -97,8 +97,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4917640192418704}
-  - component: {fileID: 114347045940933514}
   - component: {fileID: 114063663823502868}
+  - component: {fileID: 114042473837920026}
   m_Layer: 0
   m_Name: MineAPiece
   m_TagString: Untagged
@@ -191,6 +191,20 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114042473837920026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1845481465688698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936ad26a54d643842959f4b72d3f2d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsFading: 0
+  FadeValue: 0
+  selectionView: {fileID: 4694842971157414}
 --- !u!114 &114063663823502868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,20 +218,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   touchRegions:
   - {fileID: 224396193459389300}
---- !u!114 &114347045940933514
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1845481465688698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e94db1dff9a4341a9922139f675b17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsFading: 0
-  FadeValue: 0
-  selectionView: {fileID: 4694842971157414}
 --- !u!212 &212120086340662788
 SpriteRenderer:
   m_ObjectHideFlags: 1
