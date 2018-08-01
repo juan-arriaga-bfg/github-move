@@ -1,41 +1,63 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
-public class UiQuestButton : MonoBehaviour, IBoardEventListener
+public class UiQuestButton : UIGenericResourcePanelViewController
 {
-    [SerializeField] private Image icon;
-    [SerializeField] private NSText progressLabel;
     [SerializeField] private GameObject shine;
     
     private Quest quest;
-    
+
+    public override int CurrentValueAnimated
+    {
+        set
+        {
+            currentValueAnimated = value;
+            SetLabelValue(currentValueAnimated);
+        }
+    }
+
     public void Init(Quest quest)
     {
         this.quest = quest;
+
+        itemUid = PieceType.Parse(quest.WantedPiece);
+        ResourcesViewManager.Instance.RegisterView(this);
+        UpdateView();
+    }
+
+    protected override void OnEnable()
+    {
+    }
+
+    private void OnDestroy()
+    {
+        ResourcesViewManager.Instance.UnRegisterView(this);
+    }
+
+    public override void UpdateView()
+    {
+        if(quest == null) return;
+        
+        currentValue = quest.CurrentAmount;
+
+        SetLabelValue(currentValue);
+    }
+
+    public override void UpdateResource(int offset)
+    {
+        base.UpdateResource(offset);
+        quest.CurrentAmount += offset;
+    }
+
+    private void SetLabelValue(int value)
+    {
+        if(quest == null) return;
+        
         icon.sprite = IconService.Current.GetSpriteById(quest.WantedIcon);
 
-        var isComplete = quest.Check();
+        var isComplete = value == quest.TargetAmount;
         
-        progressLabel.Text = string.Format("<color=#{0}><size=40>{1}</size></color>/{2}", isComplete ? "FFFFFF" : "FE4704", quest.CurrentAmount, quest.TargetAmount);
+        amountLabel.Text = string.Format("<color=#{0}><size=40>{1}</size></color>/{2}", isComplete ? "FFFFFF" : "FE4704", value, quest.TargetAmount);
         shine.SetActive(isComplete);
-    }
-
-    private void OnEnable()
-    {
-        if(BoardService.Current == null) return;
-        
-        var board = BoardService.Current.GetBoardById(0);
-        
-        board.BoardEvents.AddListener(this, GameEventsCodes.CreatePiece);
-    }
-
-    private void OnDisable()
-    {
-        if(BoardService.Current == null) return;
-        
-        var board = BoardService.Current.GetBoardById(0);
-        
-        board.BoardEvents.RemoveListener(this, GameEventsCodes.CreatePiece);
     }
     
     public void OnClick()
@@ -52,17 +74,5 @@ public class UiQuestButton : MonoBehaviour, IBoardEventListener
         var position = board.BoardDef.GetSectorCenterWorldPosition(kingPos.X, kingPos.Y, kingPos.Z);
         
         board.Manipulator.CameraManipulator.MoveTo(position);
-    }
-    
-    public void OnBoardEvent(int code, object context)
-    {
-        if (code != GameEventsCodes.CreatePiece) return;
-
-        var piece = (int)context;
-        
-        if(piece != quest.WantedPiece) return;
-
-        quest.CurrentAmount++;
-        Init(quest);
     }
 }

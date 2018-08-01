@@ -361,8 +361,27 @@ public class BoardLogicComponent : ECSEntity,
         {
             observer.OnAddToBoard(position, piece);
         }
+
+        var currency = PieceType.Parse(piece.PieceType);
+        var flay = ResourcesViewManager.Instance.GetFirstViewById(currency);
+
+        if (flay == null) return true;
         
-        Context.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, piece.PieceType);
+        var from = context.BoardDef.GetPiecePosition(x, y);
+        
+        var carriers = ResourcesViewManager.DeliverResource<ResourceCarrier>
+        (
+            currency,
+            1,
+            flay.GetAnchorRect(),
+            context.BoardDef.ViewCamera.WorldToScreenPoint(from),
+            R.ResourceCarrier
+        );
+
+        if (carriers.Count != 0)
+        {
+            carriers[0].RefreshIcon(currency);
+        }
         
         return true;
     }

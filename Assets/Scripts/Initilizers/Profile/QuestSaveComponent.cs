@@ -20,7 +20,7 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
     
     private List<int> completed;
     
-    [JsonProperty]
+//    [JsonProperty]
     public List<QuestSaveItem> Castle
     {
         get { return castle; }
@@ -34,7 +34,7 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
         set { active = value; }
     }
     
-    [JsonProperty]
+//    [JsonProperty]
     public List<TaskSaveItem> Market
     {
         get { return market; }

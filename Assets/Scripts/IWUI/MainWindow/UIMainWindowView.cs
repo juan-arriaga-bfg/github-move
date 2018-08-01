@@ -36,6 +36,8 @@ public class UIMainWindowView : IWUIWindowView
         {
             quests[i].Init(active[i]);
         }
+        
+        InitWindowViewControllers();
     }
 
     private void CheckQuestButtons(List<Quest> active)
