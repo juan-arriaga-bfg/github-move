@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using Dws;
@@ -6,6 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class ConfigsGoogleLoader
 {
@@ -68,7 +70,7 @@ public class ConfigsGoogleLoader
 
         float progress = 1 - (index / (float)filesToCheckCount);
         EditorUtility.DisplayProgressBar("Configs update...", string.Format("[{1}/{2}] Validating '{0}'", update[index].Key, filesToCheckCount - index, filesToCheckCount), progress);
-        
+               
         WebHelper.MakeRequest(req, (response) =>
         {
             if (response.IsOk == false || string.IsNullOrEmpty(response.Error) == false )
@@ -132,8 +134,15 @@ public class ConfigsGoogleLoader
         
         var req = new WebRequestData(GetUrl(gLink.Link, gLink.Route, gLink.Pattern));
 
+        Stopwatch sw = new Stopwatch();
+        sw.Start();
+        
         WebHelper.MakeRequest(req, (response) =>
         {
+            sw.Stop();
+            
+            Debug.LogFormat("Request completed in {0:F}s", sw.Elapsed.TotalSeconds);
+            
             if (response.IsOk == false || string.IsNullOrEmpty(response.Error) == false )
             {
                 Debug.LogErrorFormat("Can't load data {0}. response.IsOk = {1}. Error: {2}", gLink.Key, response.IsOk, response.Error);
