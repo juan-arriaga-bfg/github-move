@@ -195,4 +195,5 @@ public class R
      public const string OXPiece = "OXPiece";
      public const string MergeParticleSystem = "MergeParticleSystem";
      public const string OutMergeParticleSystem = "OutMergeParticleSystem";
+     public const string SmolderingParticles = "SmolderingParticles";
 }

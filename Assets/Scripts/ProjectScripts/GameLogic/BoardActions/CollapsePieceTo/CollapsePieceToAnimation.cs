@@ -44,8 +44,9 @@ public class MatchPieceToAnimation : BoardAnimation
 		var sequence = DOTween.Sequence().SetId(animationUid);
 		var elementOffset = 0.05f;
 		//sequence.timeScale = 0.5f;
-		var particlePosition = new BoardPosition(Action.To.X, Action.To.Y, 0);
+		var particlePosition = new BoardPosition(Action.To.X, Action.To.Y, 2);
 		sequence.timeScale = 1.2f;
+		sequence.InsertCallback(0.0f, () => ParticleView.Show(R.SmolderingParticles, particlePosition));
 		sequence.InsertCallback(0.0f, () => ParticleView.Show(R.MergeParticleSystem, particlePosition));
 		for (int i = 0; i < points.Count; i++)
 		{
