@@ -193,4 +193,5 @@ public class R
      public const string Basket3Piece = "Basket3Piece";
      public const string OPiece = "OPiece";
      public const string OXPiece = "OXPiece";
+     public const string MineYPiece = "MineYPiece";
 }

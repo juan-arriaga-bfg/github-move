@@ -108,6 +108,7 @@ public static class PathfindIgnoreBuilder
       dict.Add(PieceType.MineA.Id, mineIgnorePieces);
       dict.Add(PieceType.MineC.Id, mineIgnorePieces);
       dict.Add(PieceType.MineX.Id, mineIgnorePieces);
+      dict.Add(PieceType.MineY.Id, mineIgnorePieces);
    }
 
    private static void InitFog(Dictionary<int, HashSet<int>> dict)

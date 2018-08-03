@@ -69,7 +69,7 @@ public class PieceBuildersBuilder
     {
         var mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2);
         
-        dict = AddMulticellularPiece<MinePieceBuilder>(PieceType.MineA.Id, PieceType.MineX.Id, mask, dict);
+        dict = AddMulticellularPiece<MinePieceBuilder>(PieceType.MineA.Id, PieceType.MineY.Id, mask, dict);
         
 //        dict = AddMulticellularPiece<MarketPieceBuilder>(PieceType.Market1.Id, PieceType.Market9.Id, mask, dict);
 //        dict = AddMulticellularPiece<StoragePieceBuilder>(PieceType.Storage1.Id, PieceType.Storage9.Id, mask, dict);
