@@ -12,7 +12,7 @@ public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMat
             PieceType.Zord4.Id
         };
     }
-
+    
     public IBoardAction Build(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position)
     {
         var nextType = definition.GetNext(pieceType, false);

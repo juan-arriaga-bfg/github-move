@@ -20,7 +20,8 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddSimplePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.MegaZord.Id, PieceType.Zord4.Id, dict);
+        dict.Add(PieceType.MegaZord.Id, new SimplePieceBuilder());
+        dict = AddSimplePiece<PartPieceBuilder>(PieceType.Zord1.Id, PieceType.Zord4.Id, dict);
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.A1.Id, PieceType.A9.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.B1.Id, PieceType.B5.Id, dict);

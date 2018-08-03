@@ -129,11 +129,6 @@ public class DragAndCheckMatchAction : IBoardAction
 		
 		logic.MovePieceFromTo(From, To);
 		
-		if (CheckСompositeMatch(board))
-		{
-			return true;
-		}
-		
 		MovePiece(board, From, To);
 		return true;
 	}
@@ -307,34 +302,7 @@ public class DragAndCheckMatchAction : IBoardAction
 
 		return isMatch;
 	}
-
-	private bool CheckСompositeMatch(BoardController board)
-	{
-		return false;
-		var logic = board.BoardLogic;
-		var pieceFrom = logic.GetPieceAt(To);
-		IBoardAction action;
-
-		if (!logic.GetPieceAt(To).Matchable.IsMatchable()
-		    || board.BoardLogic.MatchDefinition.GetNext(pieceFrom.PieceType) != PieceType.MegaZord.Id)
-		{
-			return false;
-		}
-		
-		action = logic.MatchActionBuilder.GetMatchAction(null, pieceFrom.PieceType, To);
-		
-		var isMatch = action != null;
-
-		if (isMatch)
-		{
-			board.RendererContext.MoveElement(From, To);
-			board.ReproductionLogic.Restart();
-			board.ActionExecutor.PerformAction(action);
-		}
-		
-		return isMatch;
-	}
-
+	
 	private bool CheckSwapLogic(BoardController board, out BoardPosition free)
 	{
 		var logic = board.BoardLogic;

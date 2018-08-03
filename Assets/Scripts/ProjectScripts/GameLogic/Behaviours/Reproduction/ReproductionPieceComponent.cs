@@ -3,10 +3,7 @@
 public class ReproductionPieceComponent : IECSComponent, IPieceBoardObserver
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-    public int Guid
-    {
-        get { return ComponentGuid; }
-    }
+    public int Guid { get { return ComponentGuid; } }
     
     public CurrencyPair Child { get; set; }
 
