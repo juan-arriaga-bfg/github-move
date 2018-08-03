@@ -31,10 +31,9 @@ public class FieldControllerComponent : IECSComponent
         {
             StartField();
             CreateFog();
+//            TestField();
             return;
         }
-        
-        
         
         foreach (var item in fieldDef.Pieces)
         {
@@ -76,7 +75,7 @@ public class FieldControllerComponent : IECSComponent
 
     private void TestField()
     {    
-        AddPieces(new BoardPosition(4, 10), PieceType.O1.Id, PieceType.O5.Id);
+        /*AddPieces(new BoardPosition(4, 10), PieceType.O1.Id, PieceType.O5.Id);
         AddPieces(new BoardPosition(6, 10), PieceType.OX1.Id, PieceType.OX5.Id);
         
         AddPieces(new BoardPosition(8, 10), PieceType.A1.Id, PieceType.A9.Id);
@@ -88,14 +87,14 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(20, 10), PieceType.G1.Id, PieceType.G4.Id);
         AddPieces(new BoardPosition(22, 10), PieceType.H1.Id, PieceType.H4.Id);
         AddPieces(new BoardPosition(24, 10), PieceType.I1.Id, PieceType.I5.Id);
-        AddPieces(new BoardPosition(26, 10), PieceType.J1.Id, PieceType.J5.Id);
+        AddPieces(new BoardPosition(26, 10), PieceType.J1.Id, PieceType.J5.Id);*/
         
-        AddPieces(new BoardPosition(28, 10), PieceType.ChestA1.Id, PieceType.ChestA3.Id);
-        AddPieces(new BoardPosition(28, 14), PieceType.ChestX1.Id, PieceType.ChestX3.Id);
+        AddPieces(new BoardPosition(28, 10), PieceType.Zord1.Id, PieceType.Zord4.Id);
+        /*AddPieces(new BoardPosition(28, 14), PieceType.ChestX1.Id, PieceType.ChestX3.Id);
         AddPieces(new BoardPosition(28, 18), PieceType.ChestC1.Id, PieceType.ChestC3.Id);
         AddPieces(new BoardPosition(28, 22), PieceType.Basket1.Id, PieceType.Basket3.Id);
         
-        AddPieces(new BoardPosition(29, 10), PieceType.Coin1.Id, PieceType.Coin5.Id);
+        AddPieces(new BoardPosition(29, 10), PieceType.Coin1.Id, PieceType.Coin5.Id);*/
     }
     
     private void CreateFog()

@@ -51,8 +51,9 @@ public class SandboxGameController : MonoBehaviour
             .RegisterComponent(new FieldFinderComponent())
             .RegisterComponent(new EmptyCellsFinderComponent()) // finds empty cells
             .RegisterComponent(new MatchActionBuilderComponent() // creates match action
-                .RegisterDefaultBuilder(new DefaultMatchActionBuilder()) // creates default match action
-                .RegisterBuilder(new MulticellularPieceMatchActionBuilder())) // creates match action for Multicellular
+                .RegisterDefaultBuilder(new SimpleMatchActionBuilder()) // creates default match action
+                .RegisterBuilder(new MulticellularPieceMatchActionBuilder())
+                .RegisterBuilder(new СompositePieceMatchActionBuilder()))
             .RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build()))); 
         
         boardController.RegisterComponent(new BoardRandomComponent()); // random
@@ -64,8 +65,6 @@ public class SandboxGameController : MonoBehaviour
         boardController
             .RegisterComponent(new BoardManipulatorComponent()
             .RegisterComponent(new LockerComponent())); // user manipualtor
-        
-        
         
         boardController.RegisterComponent(new BoardDefinitionComponent
         {

@@ -260,4 +260,10 @@ public static partial class PieceType
     public static readonly PieceTypeDef Factory7 = new PieceTypeDef{Id = 17006, Abbreviations = new List<string>{ "Factory7" }};
     public static readonly PieceTypeDef Factory8 = new PieceTypeDef{Id = 17007, Abbreviations = new List<string>{ "Factory8" }};
     public static readonly PieceTypeDef Factory9 = new PieceTypeDef{Id = 17008, Abbreviations = new List<string>{ "Factory9" }};
+    
+    public static readonly PieceTypeDef Zord1 = new PieceTypeDef{Id = 20001, Abbreviations = new List<string>{ "Zord1" }};
+    public static readonly PieceTypeDef Zord2 = new PieceTypeDef{Id = 20002, Abbreviations = new List<string>{ "Zord2" }};
+    public static readonly PieceTypeDef Zord3 = new PieceTypeDef{Id = 20003, Abbreviations = new List<string>{ "Zord3" }};
+    public static readonly PieceTypeDef Zord4 = new PieceTypeDef{Id = 20004, Abbreviations = new List<string>{ "Zord4" }};
+    public static readonly PieceTypeDef MegaZord = new PieceTypeDef{Id = 20000, Abbreviations = new List<string>{ "MegaZord" }};
 }

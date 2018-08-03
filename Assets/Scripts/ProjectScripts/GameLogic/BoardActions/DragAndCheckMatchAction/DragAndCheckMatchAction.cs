@@ -262,6 +262,15 @@ public class DragAndCheckMatchAction : IBoardAction
 			MoveCheckAndAnimation(board);
 			return;
 		}
+
+		if (board.BoardLogic.MatchDefinition.GetNext(pieceFrom.PieceType) == PieceType.MegaZord.Id)
+		{
+			if (CheckMatch(board, new List<BoardPosition> {From}, out action))
+			{
+				board.ActionExecutor.PerformAction(action);
+				return;
+			}
+		}
 			
 		BoardPosition free;
 		var isSwap = CheckSwapLogic(board, out free);
