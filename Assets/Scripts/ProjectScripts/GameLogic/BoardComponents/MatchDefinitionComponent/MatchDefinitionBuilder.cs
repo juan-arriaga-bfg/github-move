@@ -172,7 +172,7 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.MegaZord.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.None.Id, Pattern = new List<List<int>>
         {
             new List<int> { PieceType.Zord1.Id, PieceType.Zord2.Id },
-            new List<int> { PieceType.Zord2.Id, PieceType.Zord3.Id }
+            new List<int> { PieceType.Zord4.Id, PieceType.Zord3.Id }
         }});
         
         return dict;

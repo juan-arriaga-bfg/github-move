@@ -30,7 +30,7 @@ public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMat
             {
                 if (line[j] != pieceType) continue;
 
-                start = new BoardPosition(position.X - i, position.Y - j);
+                start = new BoardPosition(position.X - i, position.Y - j, position.Z);
                 break;
             }
             
@@ -47,21 +47,26 @@ public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMat
 
             for (var j = 0; j < line.Count; j++)
             {
-                positions.Add(new BoardPosition(start.Value.X + i, start.Value.Y + j, position.Z));
+                var pos = new BoardPosition(start.Value.X + i, start.Value.Y + j, position.Z);
+                var piece = definition.Context.GetPieceAt(pos);
+
+                if (piece == null || piece.PieceType != line[j]) return null;
+                
+                positions.Add(pos);
             }
         }
         
         var nextAction = new SpawnPieceAtAction
         {
             IsCheckMatch = false,
-            At = position,
+            At = start.Value,
             PieceTypeId = nextType,
             OnSuccessEvent = pos => SpawnReward(pos, nextType)
         };
         
         return new CollapsePieceToAction
         {
-            To = position,
+            To = start.Value,
             Positions = positions,
             OnCompleteAction = nextAction
         };

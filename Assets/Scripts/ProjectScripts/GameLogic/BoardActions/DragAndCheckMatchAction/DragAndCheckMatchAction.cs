@@ -128,6 +128,12 @@ public class DragAndCheckMatchAction : IBoardAction
 		}
 		
 		logic.MovePieceFromTo(From, To);
+		
+		if (CheckСompositeMatch(board))
+		{
+			return true;
+		}
+		
 		MovePiece(board, From, To);
 		return true;
 	}
@@ -262,16 +268,7 @@ public class DragAndCheckMatchAction : IBoardAction
 			MoveCheckAndAnimation(board);
 			return;
 		}
-
-		if (board.BoardLogic.MatchDefinition.GetNext(pieceFrom.PieceType) == PieceType.MegaZord.Id)
-		{
-			if (CheckMatch(board, new List<BoardPosition> {From}, out action))
-			{
-				board.ActionExecutor.PerformAction(action);
-				return;
-			}
-		}
-			
+		
 		BoardPosition free;
 		var isSwap = CheckSwapLogic(board, out free);
 		
@@ -300,8 +297,6 @@ public class DragAndCheckMatchAction : IBoardAction
 			return false;
 		
 		action = logic.MatchActionBuilder.GetMatchAction(matchField, currentId, To);
-
-		
 		
 		var isMatch = action != null;
 
@@ -310,6 +305,33 @@ public class DragAndCheckMatchAction : IBoardAction
 			board.ReproductionLogic.Restart();
 		}
 
+		return isMatch;
+	}
+
+	private bool CheckСompositeMatch(BoardController board)
+	{
+		return false;
+		var logic = board.BoardLogic;
+		var pieceFrom = logic.GetPieceAt(To);
+		IBoardAction action;
+
+		if (!logic.GetPieceAt(To).Matchable.IsMatchable()
+		    || board.BoardLogic.MatchDefinition.GetNext(pieceFrom.PieceType) != PieceType.MegaZord.Id)
+		{
+			return false;
+		}
+		
+		action = logic.MatchActionBuilder.GetMatchAction(null, pieceFrom.PieceType, To);
+		
+		var isMatch = action != null;
+
+		if (isMatch)
+		{
+			board.RendererContext.MoveElement(From, To);
+			board.ReproductionLogic.Restart();
+			board.ActionExecutor.PerformAction(action);
+		}
+		
 		return isMatch;
 	}
 
@@ -349,8 +371,6 @@ public class DragAndCheckMatchAction : IBoardAction
 		
 		MovePieces(board, free);
 	}
-
-	
 	
 	private void MovePiece(BoardController board, BoardPosition from, BoardPosition to)
 	{
@@ -389,7 +409,6 @@ public class DragAndCheckMatchAction : IBoardAction
 
 		board.RendererContext.AddAnimationToQueue(animation);
 	}
-
 	
 	private void SwapPieces(BoardController board)
 	{
@@ -513,7 +532,6 @@ public class DragAndCheckMatchAction : IBoardAction
 
 		return normalized;
 	}
-	
 	
 	private void MovePieces(BoardController board, BoardPosition free)
 	{

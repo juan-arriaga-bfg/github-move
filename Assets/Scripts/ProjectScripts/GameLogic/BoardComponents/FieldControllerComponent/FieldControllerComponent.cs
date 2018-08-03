@@ -27,11 +27,11 @@ public class FieldControllerComponent : IECSComponent
         var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
         CutTriangles(maxEdge / 2, Directions.All);
         
-        if (fieldDef.Pieces == null)
+//        if (fieldDef.Pieces == null)
         {
-            StartField();
-            CreateFog();
-//            TestField();
+//            StartField();
+//            CreateFog();
+            TestField();
             return;
         }
         
