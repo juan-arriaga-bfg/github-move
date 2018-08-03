@@ -11,6 +11,7 @@ public class ConfigsGoogleLoader
 {
     private static int index;
     private static List<KeyValuePair<string, GoogleLink>> update;
+    private static int filesToCheckCount;
     
     [MenuItem("Tools/Configs/GenerateLinkSettings")]
     public static void GenerateLinkSettings()
@@ -41,6 +42,8 @@ public class ConfigsGoogleLoader
         }
         
         index = update.Count;
+        filesToCheckCount = index;
+        
         CheckNeedToUpdate();
     }
     
@@ -52,19 +55,29 @@ public class ConfigsGoogleLoader
         {
             Debug.LogWarning("check for the need to update the configs completed!");
             index = update.Count;
+            
+            EditorUtility.ClearProgressBar();
+            
             Load();
+
             return;
         }
 
         var gLink = update[index].Value;
         var req = new WebRequestData(GetUrl(gLink.Link, "getLastUpdated", ""));
 
+        float progress = 1 - (index / (float)filesToCheckCount);
+        EditorUtility.DisplayProgressBar("Configs update...", string.Format("[{1}/{2}] Validating '{0}'", update[index].Key, filesToCheckCount - index, filesToCheckCount), progress);
+        
         WebHelper.MakeRequest(req, (response) =>
         {
             if (response.IsOk == false || string.IsNullOrEmpty(response.Error) == false )
             {
                 Debug.LogErrorFormat("Can't check last updated {0}. response.IsOk = {1}. Error: {2}", gLink.Key, response.IsOk, response.Error);
                 CheckNeedToUpdate();
+                
+                EditorUtility.ClearProgressBar();
+                
                 return;
             }
                 
@@ -104,12 +117,18 @@ public class ConfigsGoogleLoader
         {
             Debug.LogWarning("Configs load data complete!");
             if(update.Count != 0) NSConfigEncription.EncryptConfigs();
+            
+            EditorUtility.ClearProgressBar();
+            
             return;
         }
         
         var gLink = update[index].Value;
-        
-        Debug.LogWarningFormat("Configs {0} progress: {1}/{2}!", gLink.Key, update.Count - index, update.Count);
+
+        string text = string.Format("[{1}/{2}] Downloading: '{0}'", gLink.Key, update.Count - index, update.Count);
+        EditorUtility.DisplayProgressBar("Configs update...", text, 1 - (index / (float)update.Count));
+
+        Debug.LogWarningFormat(text);
         
         var req = new WebRequestData(GetUrl(gLink.Link, gLink.Route, gLink.Pattern));
 
@@ -119,6 +138,9 @@ public class ConfigsGoogleLoader
             {
                 Debug.LogErrorFormat("Can't load data {0}. response.IsOk = {1}. Error: {2}", gLink.Key, response.IsOk, response.Error);
                 Load();
+                
+                EditorUtility.ClearProgressBar();
+                
                 return;
             }
                 

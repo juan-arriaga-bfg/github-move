@@ -154,6 +154,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MineA.Id, R.MineAPiece);
         dict.Add(PieceType.MineX.Id, R.MineXPiece);
         dict.Add(PieceType.MineC.Id, R.MineCPiece);
+        dict.Add(PieceType.MineY.Id, R.MineYPiece);
         
         dict.Add(PieceType.Mine1.Id, R.Mine1Piece);
         dict.Add(PieceType.Mine2.Id, R.Mine2Piece);
