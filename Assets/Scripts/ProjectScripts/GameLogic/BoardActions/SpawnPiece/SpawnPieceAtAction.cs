@@ -10,6 +10,7 @@ public class SpawnPieceAtAction : IBoardAction
 	}
 	
 	public bool IsCheckMatch { get; set; }
+	public bool IsMatch = false;
 	
 	public BoardPosition At { get; set; }
 	
@@ -36,12 +37,24 @@ public class SpawnPieceAtAction : IBoardAction
 		}
 		
 		gameBoardController.BoardLogic.LockCell(At, this);
-		
-		var animation = new SpawnPieceAtAnimation
+
+		BoardAnimation animation;
+		if (IsMatch)
 		{
-			CreatedPiece = piece,
-			At = At
-		};
+			animation = new MatchSpawnPieceAtAnimation
+			{
+				CreatedPiece = piece,
+				At = At
+			};
+		}
+		else
+		{
+			animation = new SpawnPieceAtAnimation
+			{
+				CreatedPiece = piece,
+				At = At
+			};
+		}
 
 		animation.OnCompleteEvent += (_) =>
 		{

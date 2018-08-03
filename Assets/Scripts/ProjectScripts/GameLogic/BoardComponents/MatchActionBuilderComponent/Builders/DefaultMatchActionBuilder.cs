@@ -37,6 +37,7 @@ public class DefaultMatchActionBuilder : IMatchActionBuilder
         var nextAction = new SpawnPiecesAction
         {
             IsCheckMatch = false,
+            IsMatch = true,
             At = position,
             Pieces = nextPieces,
             OnSuccessEvent = list =>
@@ -52,7 +53,8 @@ public class DefaultMatchActionBuilder : IMatchActionBuilder
         {
             To = position,
             Positions = matchField,
-            OnCompleteAction = nextAction
+            OnCompleteAction = nextAction,
+            IsMatch = true
         };
     }
 

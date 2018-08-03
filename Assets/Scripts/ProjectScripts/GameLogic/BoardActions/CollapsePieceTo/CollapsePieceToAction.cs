@@ -18,6 +18,8 @@ public class CollapsePieceToAction : IBoardAction
 	public IBoardAction OnCompleteAction;
 
 	public Action OnComplete;
+
+	public bool IsMatch = false;
 	
 	public bool PerformAction(BoardController gameBoardController)
 	{
@@ -26,11 +28,23 @@ public class CollapsePieceToAction : IBoardAction
 		gameBoardController.BoardLogic.LockCells(Positions, this);
 		
 		gameBoardController.BoardLogic.RemovePiecesAt(Positions);
-		
-		var animation = new CollapsePieceToAnimation
+
+		BoardAnimation animation;
+		if (IsMatch)
 		{
-			Action = this
-		};
+			animation = new MatchPieceToAnimation
+			{
+				Action = this
+			};
+		}
+		else
+		{
+			animation = new CollapsePieceToAnimation
+			{
+				Action = this
+			};
+		}
+		 
 
 		animation.OnCompleteEvent += (_) =>
 		{
