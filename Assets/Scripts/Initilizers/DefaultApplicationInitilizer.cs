@@ -19,6 +19,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
 
     public virtual void LoadConfigsAndManagers()
     {
+        //Time.timeScale = 0.25f;
         // init all project components and managers
         
         // create and register ECS manager

@@ -40,6 +40,7 @@ public class MatchSpawnPieceAtAnimation : BoardAnimation
         boardElement.SyncRendererLayers(new BoardPosition(At.X, At.Y, 5));
         sequence.Insert(0.1f, boardElement.CachedTransform.DOScale(Vector3.one * 1.2f, 0.3f));
         sequence.Insert(0.4f, boardElement.CachedTransform.DOScale(Vector3.one, 0.1f));
+        sequence.Insert(0.1f, boardElement.CachedTransform.DOLocalJump(boardElement.transform.localPosition, 1, 1, 0.3f));
         
         sequence.OnComplete(() =>
         {

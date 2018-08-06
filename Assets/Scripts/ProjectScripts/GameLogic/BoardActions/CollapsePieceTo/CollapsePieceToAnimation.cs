@@ -63,6 +63,8 @@ public class MatchPieceToAnimation : BoardAnimation
 				sequence.Insert(0.15f, boardElement.CachedTransform.DOScale(Vector3.one * 1.2f, 0.20f));
 				//sequence.Insert(0.35f, boardElement.CachedTransform.DOScale(Vector3.zero, 0.1f));
 				sequence.Insert(0.35f + points.Count * elementOffset, boardElement.CachedTransform.DOScale(Vector3.zero, 0.1f));
+				//sequence.Insert(0.35f + points.Count * elementOffset,
+					//boardElement.CachedTransform.DOLocalJump(boardElement.transform.position, -1, 1, 0.1f));
 				boardElement.SyncRendererLayers(new BoardPosition(Action.To.X, Action.To.Y, 4));
 				continue;
 			}
