@@ -9,11 +9,13 @@ public class Tab : MonoBehaviour
     [SerializeField] private GameObject captionActive;
     [SerializeField] private GameObject captionDisabled;
 
-    [SerializeField] public int Index { get; }
+    [SerializeField] private int index;
 
+    private float headerStartPos;
+    
     private void Start()
     {
-        head.anchoredPosition = new Vector2(head.anchoredPosition.x + Index * head.sizeDelta.x, head.anchoredPosition.y);
+        headerStartPos = head.anchoredPosition.x;
     }
 
     public void Toggle(bool enabled)
@@ -21,10 +23,15 @@ public class Tab : MonoBehaviour
         content.SetActive(enabled);
         captionActive.SetActive(enabled);
         captionDisabled.SetActive(!enabled);
+
+        var offsetX = index * head.sizeDelta.x;
+        head.anchoredPosition = new Vector2(headerStartPos + offsetX, head.anchoredPosition.y);
     }
 
     public void OnClick()
     {
-        tabGroup.Click(Index);
+        Debug.Log("Tab click: " + index);
+        
+        tabGroup.Click(index);
     }
 }

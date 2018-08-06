@@ -32,6 +32,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
 //            UIWindowType.StorageWindow,
 //            UIWindowType.MarketWindow,
 //            UIWindowType.ProductionWindow,
+              UIWindowType.CodexWindow,
         });
         
         // on cache complete

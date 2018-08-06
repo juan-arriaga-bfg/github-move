@@ -95,4 +95,11 @@ public class UIMainWindowView : IWUIWindowView
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
+    
+    public void OnClickCodex()
+    {
+        var model = UIService.Get.GetCachedModel<UICodexWindowModel>(UIWindowType.CodexWindow);
+        model.ActiveTabIndex = 0;
+        UIService.Get.ShowWindow(UIWindowType.CodexWindow);
+    }
 }

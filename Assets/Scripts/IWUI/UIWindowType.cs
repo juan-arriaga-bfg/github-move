@@ -33,4 +33,6 @@
     public const string CastleWindow = "CastleWindow";
     
     public const string EnergyShopWindow = "EnergyShopWindow";
+    
+    public const string CodexWindow = "CodexWindow";
 }

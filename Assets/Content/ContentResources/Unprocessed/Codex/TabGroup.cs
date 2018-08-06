@@ -6,14 +6,16 @@ public class TabGroup : MonoBehaviour
 {
     [SerializeField] private List<Tab> tabs;
 
-    private int activeIndex;
-    
-    public void Click(int index)
+    private int activeIndex = - 1;
+
+    public void ActivateTab(int index)
     {
         if (activeIndex == index)
         {
             return;
         }
+
+        activeIndex = index;
         
         for (int i = 0; i < tabs.Count; i++)
         {
@@ -25,5 +27,10 @@ public class TabGroup : MonoBehaviour
             
             tab.Toggle(i == index);
         }
+    }
+    
+    public void Click(int index)
+    {
+         ActivateTab(index);
     }
 }

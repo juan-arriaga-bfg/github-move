@@ -1,13 +1,17 @@
 using UnityEngine;
 using System.Collections;
 
-public class UICodexWindowView : IWUIWindowView 
+public class UICodexWindowView : UIGenericPopupWindowView
 {
+    [SerializeField] private TabGroup tabGroup;
+    
     public override void OnViewShow()
     {
         base.OnViewShow();
         
-        UICodexWindowModel windowModel = Model as UICodexWindowModel;
+        UICodexWindowModel model = Model as UICodexWindowModel;
+        
+        tabGroup.ActivateTab(model.ActiveTabIndex);
         
     }
 
@@ -15,7 +19,7 @@ public class UICodexWindowView : IWUIWindowView
     {
         base.OnViewClose();
         
-        UICodexWindowModel windowModel = Model as UICodexWindowModel;
+        UICodexWindowModel model = Model as UICodexWindowModel;
         
     }
 }

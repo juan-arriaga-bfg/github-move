@@ -39,6 +39,8 @@ public class UICodexWindowModel : IWWindowModel
     public Action OnReward { get; set; }
     public Action OnClose { get; set; }
 
+    public int ActiveTabIndex { get; set; } = 0;
+
     private List<CodexItem> GetCodexItems(List<int> chain)
     {
         List<CodexItem> ret = new List<CodexItem>();
