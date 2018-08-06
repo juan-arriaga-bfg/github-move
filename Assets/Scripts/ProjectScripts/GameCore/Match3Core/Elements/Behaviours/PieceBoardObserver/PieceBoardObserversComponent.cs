@@ -38,8 +38,6 @@ public class PieceBoardObserversComponent : IECSComponent, IPieceBoardObserver
 
 	public virtual void OnAddToBoard(BoardPosition position, Piece targetContext = null)
 	{
-		
-		
 		for (int i = 0; i < observers.Count; i++)
 		{
 			var observer = observers[i];
@@ -47,12 +45,21 @@ public class PieceBoardObserversComponent : IECSComponent, IPieceBoardObserver
 		}
 	}
 
-	public void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece targetContext = null)
+	public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece targetContext = null)
 	{
 		for (int i = 0; i < observers.Count; i++)
 		{
 			var observer = observers[i];
-			observer.OnMovedFromTo(from, to, context);
+			observer.OnMovedFromToStart(from, to, context);
+		}
+	}
+
+	public void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece targetContext = null)
+	{
+		for (int i = 0; i < observers.Count; i++)
+		{
+			var observer = observers[i];
+			observer.OnMovedFromToFinish(from, to, context);
 		}
 	}
 
@@ -64,5 +71,4 @@ public class PieceBoardObserversComponent : IECSComponent, IPieceBoardObserver
 			observer.OnRemoveFromBoard(position, context);
 		}
 	}
-
 }

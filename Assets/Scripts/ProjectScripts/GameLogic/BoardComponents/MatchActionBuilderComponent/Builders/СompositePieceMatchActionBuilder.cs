@@ -12,7 +12,53 @@ public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMat
             PieceType.Zord4.Id
         };
     }
-    
+
+    public bool Check(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position, out int next)
+    {
+        next = definition.GetNext(pieceType, false);
+
+        if (next == PieceType.None.Id) return false;
+
+        var pattern = definition.GetPattern(next);
+        BoardPosition? start = null;
+
+        for (var i = 0; i < pattern.Count; i++)
+        {
+            var line = pattern[i];
+            
+            for (var j = 0; j < line.Count; j++)
+            {
+                if (line[j] != pieceType) continue;
+
+                start = new BoardPosition(position.X - i, position.Y - j, position.Z);
+                break;
+            }
+            
+            if(start != null) break;
+        }
+        
+        if(start == null) return false;
+        
+        matchField.Clear();
+
+        for (var i = 0; i < pattern.Count; i++)
+        {
+            var line = pattern[i];
+
+            for (var j = 0; j < line.Count; j++)
+            {
+                var pos = new BoardPosition(start.Value.X + i, start.Value.Y + j, position.Z);
+                var piece = definition.Context.GetPieceAt(pos);
+
+                if (piece == null || piece.PieceType != line[j]) return false;
+                
+                matchField.Add(pos);
+            }
+        }
+
+        return true;
+    }
+
     public IBoardAction Build(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position)
     {
         var nextType = definition.GetNext(pieceType, false);

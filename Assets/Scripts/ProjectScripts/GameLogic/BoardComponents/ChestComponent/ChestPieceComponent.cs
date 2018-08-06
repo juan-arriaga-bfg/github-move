@@ -44,9 +44,13 @@ public class ChestPieceComponent : IECSComponent, IPieceBoardObserver, ITimerCom
 
         if (Chest.StartTime != null) timer.Start(Chest.StartTime.Value);
     }
-    
 
-    public void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)
+    public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
+    {
+    }
+
+
+    public void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
     }
 

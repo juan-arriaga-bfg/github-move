@@ -38,9 +38,9 @@ public class MineLifeComponent : StorageLifeComponent
         HP = def.Size;
     }
 
-    public override void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece context = null)
+    public override void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
     {
-        base.OnMovedFromTo(@from, to, context);
+        base.OnMovedFromToFinish(@from, to, context);
         
         var key = new BoardPosition(to.X, to.Y);
         GameDataService.Current.MinesManager.Chenge(def.Id, key);

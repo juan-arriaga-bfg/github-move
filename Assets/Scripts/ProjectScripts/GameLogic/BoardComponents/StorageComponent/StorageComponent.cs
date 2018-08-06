@@ -57,7 +57,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         
         UpdateView();
     }
-
+    
     private bool InitInSave(BoardPosition position)
     {
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
@@ -88,8 +88,12 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         
         return true;
     }
+    
+    public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
+    {
+    }
 
-    public void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece context = null)
+    public void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
     {
     }
 

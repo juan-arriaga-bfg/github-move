@@ -59,6 +59,7 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new BoardRandomComponent()); // random
         boardController.RegisterComponent(new ReproductionLogicComponent());
         boardController.RegisterComponent(new HintCooldownComponent());
+        boardController.RegisterComponent(new PartPiecesLogicComponent());
         boardController.RegisterComponent(new BoardRenderer().Init(gameBoardResourcesDef,
             gameBoardRendererView.transform)); // renderer context
         

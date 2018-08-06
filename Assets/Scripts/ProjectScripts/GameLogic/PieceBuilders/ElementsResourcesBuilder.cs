@@ -244,6 +244,7 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.Production, R.ProductionView);
         dict.Add((int)ViewType.ProductionWarning, R.ProductionWarningView);
         dict.Add((int)ViewType.MineState, R.ChangeMineStateView);
+        dict.Add((int)ViewType.Bubble, R.BubbleView);
 
         return dict;
     }

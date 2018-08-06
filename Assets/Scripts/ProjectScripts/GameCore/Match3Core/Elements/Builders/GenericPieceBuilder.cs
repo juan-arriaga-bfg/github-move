@@ -37,9 +37,7 @@ public class GenericPieceBuilder : IPieceBuilder
     {
         var observers = piece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
 
-        if (observers == null) return;
-
-        observers.RegisterObserver(observer);
+        observers?.RegisterObserver(observer);
     }
     
     protected void AddView(Piece piece, ViewType id)

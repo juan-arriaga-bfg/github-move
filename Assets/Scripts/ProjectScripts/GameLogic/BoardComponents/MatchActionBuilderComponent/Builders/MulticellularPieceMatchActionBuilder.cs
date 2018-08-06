@@ -18,16 +18,23 @@ public class MulticellularPieceMatchActionBuilder : DefaultMatchActionBuilder, I
         };
     }
 
-    public IBoardAction Build(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position)
+    public bool Check(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position, out int next)
     {
-        var nextType = definition.GetNext(pieceType, false);
+        next = definition.GetNext(pieceType, false);
+        matchField = new List<BoardPosition>{position};
+        
+        if (next == PieceType.None.Id) return false;
 
-        if (nextType == PieceType.None.Id) return null;
-
-        var countForMatch = 1;
         var countForMatchDefault = definition.GetPieceCountForMatch(pieceType);
         
-        if (countForMatchDefault == -1 || countForMatch < countForMatchDefault) return null;
+        return countForMatchDefault != -1 && 1 >= countForMatchDefault;
+    }
+
+    public IBoardAction Build(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position)
+    {
+        int nextType;
+        
+        if(Check(definition, matchField, pieceType, position, out nextType) == false) return null;
         
         var nextAction = new SpawnPieceAtAction
         {

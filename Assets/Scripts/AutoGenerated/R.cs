@@ -198,4 +198,5 @@ public class R
      public const string Zord2Piece = "Zord2Piece";
      public const string Zord3Piece = "Zord3Piece";
      public const string Zord4Piece = "Zord4Piece";
+     public const string BubbleView = "BubbleView";
 }

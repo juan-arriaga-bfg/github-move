@@ -7,8 +7,18 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         return new List<int>();
     }
 
-    public IBoardAction Build(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType,
-        BoardPosition position)
+    public bool Check(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position, out int next)
+    {
+        next = definition.GetNext(pieceType, false);
+        
+        if (next == PieceType.None.Id) return false;
+        
+        var countForMatchDefault = definition.GetPieceCountForMatch(pieceType);
+        
+        return countForMatchDefault != -1 && matchField.Count >= countForMatchDefault;
+    }
+    
+    public IBoardAction Build(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position)
     {
         var nextType = definition.GetNext(pieceType, false);
 

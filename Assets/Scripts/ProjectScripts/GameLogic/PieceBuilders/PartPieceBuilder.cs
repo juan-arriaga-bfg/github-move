@@ -4,6 +4,8 @@
     {
         var piece = base.Build(pieceType, context);
         
+        CreateViewComponent(piece);
+        
         var observer = new PartPieceBoardObserver();
         
         piece.RegisterComponent(observer);

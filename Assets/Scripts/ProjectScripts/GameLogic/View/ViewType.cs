@@ -14,4 +14,5 @@
     Production = -1010,
     ProductionWarning = -1011,
     MineState = -1012,
+    Bubble = -1013,
 }

@@ -191,18 +191,12 @@ public class DragAndCheckMatchAction : IBoardAction
 			logic.AddPieceToBoardSilent(target.X, target.Y, saveTarget[index]);
 				
 			var observerTo = saveTarget[index].GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
-			if (observerTo != null)
-			{
-				observerTo.OnMovedFromTo(saveTarget[index].CachedPosition, target);
-			}
+			observerTo?.OnMovedFromToFinish(saveTarget[index].CachedPosition, target);
 
 		}
 		
 		var observerFrom = multicellularPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
-		if (observerFrom != null)
-		{
-			observerFrom.OnMovedFromTo(From, To);
-		}
+		observerFrom?.OnMovedFromToFinish(From, To);
 
 		MulticellularPiece = multicellularPiece;
 
