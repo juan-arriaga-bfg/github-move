@@ -8,11 +8,12 @@ public class ParticleView : BoardElementView
         DestroyOnBoard(duration);
     }
 
-    public static void Show(string particleResourceName, BoardPosition position)
+    public static ParticleView Show(string particleResourceName, BoardPosition position)
     {
         var board = BoardService.Current.GetBoardById(0);
         var particleView = board.RendererContext.CreateBoardElementAt<ParticleView>(particleResourceName, position);
 
         particleView.Show();
+        return particleView;
     }
 }

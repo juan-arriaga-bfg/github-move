@@ -35,6 +35,12 @@ public class CollapsePieceToAnimation : BoardAnimation
 public class MatchPieceToAnimation : BoardAnimation
 {
 	public CollapsePieceToAction Action { get; set; }
+
+	private void SetTrailToPiece(BoardElementView pieceView, BoardPosition piecePosition)
+	{
+		var particles = ParticleView.Show(R.TrailMergeParticles, piecePosition);
+		particles.transform.SetParent(pieceView.transform);
+	}
 	
 	public override void Animate(BoardRenderer context)
 	{
@@ -48,6 +54,7 @@ public class MatchPieceToAnimation : BoardAnimation
 		sequence.timeScale = 1.2f;
 		sequence.InsertCallback(0.0f, () => ParticleView.Show(R.SmolderingParticles, particlePosition));
 		sequence.InsertCallback(0.0f, () => ParticleView.Show(R.MergeParticleSystem, particlePosition));
+		
 		for (int i = 0; i < points.Count; i++)
 		{
 			var boardElement = context.GetElementAt(points[i]);
@@ -59,7 +66,7 @@ public class MatchPieceToAnimation : BoardAnimation
 				boardElement.SyncRendererLayers(new BoardPosition(Action.To.X, Action.To.Y, 4));
 				continue;
 			}
-			
+			SetTrailToPiece(boardElement, points[i]);
 			sequence.Insert(0 + elementOffset*i, boardElement.CachedTransform.DOMove(new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.25f));
 			sequence.Insert(0.20f + elementOffset*i, boardElement.CachedTransform.DOScale(Vector3.zero, 0.20f));
 			

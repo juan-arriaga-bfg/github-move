@@ -36,9 +36,10 @@ public class MatchSpawnPieceAtAnimation : BoardAnimation
         var sequence = DOTween.Sequence().SetId(animationUid);
         //sequence.timeScale = 0.5f;
         ParticleView.Show(R.OutMergeParticleSystem, new BoardPosition(At.X, At.Y, 4));
+        ParticleView.Show(R.OutFrontMergeParticleSystem, new BoardPosition(At.X, At.Y, 6));
         boardElement.SyncRendererLayers(new BoardPosition(At.X, At.Y, 5));
-        sequence.Insert(0.0f, boardElement.CachedTransform.DOScale(Vector3.one * 1.3f, 0.3f));
-        sequence.Insert(0.3f, boardElement.CachedTransform.DOScale(Vector3.one, 0.1f));
+        sequence.Insert(0.1f, boardElement.CachedTransform.DOScale(Vector3.one * 1.2f, 0.3f));
+        sequence.Insert(0.4f, boardElement.CachedTransform.DOScale(Vector3.one, 0.1f));
         
         sequence.OnComplete(() =>
         {

@@ -196,4 +196,6 @@ public class R
      public const string MergeParticleSystem = "MergeParticleSystem";
      public const string OutMergeParticleSystem = "OutMergeParticleSystem";
      public const string SmolderingParticles = "SmolderingParticles";
+     public const string TrailMergeParticles = "TrailMergeParticles";
+     public const string OutFrontMergeParticleSystem = "OutFrontMergeParticleSystem";
 }
