@@ -35,8 +35,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1860612068770746}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.6112611, y: 1.2636328, z: 2.0517936}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -63,7 +63,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1860612068770746}
   serializedVersion: 5
-  lengthInSec: 3
+  lengthInSec: 2.01
   simulationSpeed: 1.2
   stopAction: 0
   looping: 0
@@ -679,15 +679,15 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 5
     enabled: 1
-    type: 10
-    angle: 25
+    type: 4
+    angle: 0
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: 54, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 0}
+    m_Rotation: {x: 234, y: 0, z: 0}
+    m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -710,7 +710,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1.3602282
+      value: 0.46101955
       mode: 0
       spread: 0
       speed:
@@ -829,7 +829,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3.9
+      scalar: 2.1
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1607,7 +1607,7 @@ ParticleSystem:
     orbitalX:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -0.63
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1660,7 +1660,7 @@ ParticleSystem:
     orbitalY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -3.13
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1713,7 +1713,7 @@ ParticleSystem:
     orbitalZ:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.27
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1978,7 +1978,7 @@ ParticleSystem:
     speedModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.37
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4626,7 +4626,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
