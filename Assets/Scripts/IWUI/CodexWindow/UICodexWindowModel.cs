@@ -3,28 +3,29 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class CodexItem
+public class CodexItemDef
 {
     public PieceTypeDef PieceTypeDef;
     public bool Unlocked;
     public CurrencyPair PendingReward;
+    public bool IsLast;
 }
 
-public class CodexTab
+public class CodexTabDef
 {
     public string Name;
-    public List<CodexChain> CodexChains;
+    public List<CodexChainDef> ChainDefs;
 }
 
-public class CodexChain
+public class CodexChainDef
 {
     public string Name;
-    public List<CodexItem> CodexItems; 
+    public List<CodexItemDef> ItemDefs; 
 }
 
 public class CodexContent
 {
-    public List<CodexTab> CodexTabs; 
+    public List<CodexTabDef> TabDefs; 
 }
 
 public class UICodexWindowModel : IWWindowModel
@@ -41,18 +42,19 @@ public class UICodexWindowModel : IWWindowModel
 
     public int ActiveTabIndex { get; set; } = 0;
 
-    private List<CodexItem> GetCodexItems(List<int> chain)
+    private List<CodexItemDef> GetCodexItems(List<int> chain)
     {
-        List<CodexItem> ret = new List<CodexItem>();
+        List<CodexItemDef> ret = new List<CodexItemDef>();
 
-        foreach (var i in chain)
+        for (var i = 0; i < chain.Count; i++)
         {
-            CodexItem item = new CodexItem
+            CodexItemDef itemDef = new CodexItemDef
             {
                 PieceTypeDef = PieceType.GetDefById(chain[i]),
+                IsLast = i == chain.Count - 1
             };
-            
-            ret.Add(item);
+
+            ret.Add(itemDef);
         }
 
         return ret;
@@ -67,40 +69,57 @@ public class UICodexWindowModel : IWWindowModel
 
             CodexContent content = new CodexContent
             {
-                CodexTabs = new List<CodexTab>
+                TabDefs = new List<CodexTabDef>
                 {
-                    new CodexTab
+                    new CodexTabDef
                     {
                         Name = "Energy",
-                        CodexChains = new List<CodexChain>
+                        ChainDefs = new List<CodexChainDef>
                         {
-                            new CodexChain
+                            new CodexChainDef
                             {
-                                Name = "Apple",
-                                CodexItems = GetCodexItems(matchDef.GetChain(PieceType.A1.Id))
+                                Name = "Chain 1",
+                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.A1.Id))
                             },
-                            new CodexChain
+                            new CodexChainDef
                             {
-                                Name = "Corn",
-                                CodexItems = GetCodexItems(matchDef.GetChain(PieceType.B1.Id))
+                                Name = "Chain 2",
+                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.B1.Id))
                             },
                         }
                     },
-                    new CodexTab
+                    new CodexTabDef
                     {
                         Name = "Buildings",
-                        CodexChains = new List<CodexChain>
+                        ChainDefs = new List<CodexChainDef>
                         {
-                            new CodexChain
+                            new CodexChainDef
                             {
                                 Name = "BUilding1",
-                                CodexItems = GetCodexItems(matchDef.GetChain(PieceType.A1.Id))
+                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.C1.Id))
                             },
-                            new CodexChain
+                            new CodexChainDef
                             {
                                 Name = "Building2",
-                                CodexItems = GetCodexItems(matchDef.GetChain(PieceType.B1.Id))
+                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.D1.Id))
                             },
+                            new CodexChainDef
+                            {
+                                Name = "Building3",
+                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.E1.Id))
+                            },
+                        }
+                    },
+                    new CodexTabDef
+                    {
+                        Name = "Coins",
+                        ChainDefs = new List<CodexChainDef>
+                        {
+                            new CodexChainDef
+                            {
+                                Name = "Coins 1",
+                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.Coin1.Id))
+                            }
                         }
                     }
                 }

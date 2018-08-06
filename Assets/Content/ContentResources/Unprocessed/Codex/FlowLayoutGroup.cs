@@ -1,173 +1,271 @@
-﻿// https://github.com/Unitarian/Unity-Extensions/blob/master/FlowLayoutGroup/FlowLayoutGroup.cs
+﻿// https://github.com/StompyRobot/SRF/blob/master/Scripts/UI/Layout/FlowLayoutGroup.cs
 
-/*
-*FlowLayoutGroup**
-
-Flow Layout Group is evolved version of Grid Layout Group for Unity UI. It allows to build Tag like element group. Follow the question on StackOverflow : http://stackoverflow.com/questions/38336835/correct-flowlayoutgroup-in-unity3d-as-per-horizontallayoutgroup-etc/38479097#38479097
-
-**How to Use**
-
-1. Attach this script to your panel just like you would use other layout groups like GridViewLayout
-2. Add UI element (Buttons, Images etc) as child of Panel.
-3. Add `ContentSizeFitter` component to children and set `Horizontal Fit` and `Vertical Fit` properties to **Preferred Size** 
-4. Add `Layout Element` component to child and set `Preferred Width` and `Preferred Height` values. These values will control size of UI Element. 
-5. Add as many elements as you want and apply same procedure to get desired size.
- */
-
+using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
-[AddComponentMenu("Layout/Flow Layout Group", 153)]
+/// <summary>
+/// Layout Group controller that arranges children in rows, fitting as many on a line until total width exceeds parent bounds
+/// </summary>
 public class FlowLayoutGroup : LayoutGroup
 {
-	public enum Corner { UpperLeft = 0, UpperRight = 1, LowerLeft = 2, LowerRight = 3 }
-	public enum Constraint { Flexible = 0, FixedColumnCount = 1, FixedRowCount = 2 }
+    public float Spacing = 0f;
 
-	protected Vector2 m_CellSize = new Vector2(100, 100);
-	public Vector2 cellSize { get { return m_CellSize; } set { SetProperty(ref m_CellSize, value); } }
+    public bool ChildForceExpandWidth = false;
+    public bool ChildForceExpandHeight = false;
 
-	[SerializeField] protected Vector2 m_Spacing = Vector2.zero;
-	public Vector2 spacing { get { return m_Spacing; } set { SetProperty(ref m_Spacing, value); } }
+    private float _layoutHeight;
 
-	
-	[SerializeField] protected bool m_Horizontal = true;
-	public bool horizontal { get { return m_Horizontal; } set { SetProperty(ref m_Horizontal, value); } }
+    public override void CalculateLayoutInputHorizontal()
+    {
+        base.CalculateLayoutInputHorizontal();
 
-	protected FlowLayoutGroup()
-	{}
+        var minWidth = GetGreatestMinimumChildWidth() + padding.left + padding.right;
 
-	#if UNITY_EDITOR
-	protected override void OnValidate()
-	{
-		base.OnValidate();
-	}
+        SetLayoutInputForAxis(minWidth, -1, -1, 0);
+    }
 
-	#endif
+    public override void SetLayoutHorizontal()
+    {
+        SetLayout(rectTransform.rect.width, 0, false);
+    }
 
-	public override void CalculateLayoutInputHorizontal()
-	{
-		base.CalculateLayoutInputHorizontal();
+    public override void SetLayoutVertical()
+    {
+        SetLayout(rectTransform.rect.width, 1, false);
+    }
 
-		int minColumns = 0;
-		int preferredColumns = 0;
+    public override void CalculateLayoutInputVertical()
+    {
+        _layoutHeight = SetLayout(rectTransform.rect.width, 1, true);
+    }
+
+    protected bool IsCenterAlign
+    {
+        get
+        {
+            return childAlignment == TextAnchor.LowerCenter || childAlignment == TextAnchor.MiddleCenter ||
+                   childAlignment == TextAnchor.UpperCenter;
+        }
+    }
+
+    protected bool IsRightAlign
+    {
+        get
+        {
+            return childAlignment == TextAnchor.LowerRight || childAlignment == TextAnchor.MiddleRight ||
+                   childAlignment == TextAnchor.UpperRight;
+        }
+    }
+
+    protected bool IsMiddleAlign
+    {
+        get
+        {
+            return childAlignment == TextAnchor.MiddleLeft || childAlignment == TextAnchor.MiddleRight ||
+                   childAlignment == TextAnchor.MiddleCenter;
+        }
+    }
+
+    protected bool IsLowerAlign
+    {
+        get
+        {
+            return childAlignment == TextAnchor.LowerLeft || childAlignment == TextAnchor.LowerRight ||
+                   childAlignment == TextAnchor.LowerCenter;
+        }
+    }
+
+    /// <summary>
+    /// Holds the rects that will make up the current row being processed
+    /// </summary>
+    private readonly IList<RectTransform> _rowList = new List<RectTransform>();
+
+    /// <summary>
+    /// Main layout method
+    /// </summary>
+    /// <param name="width">Width to calculate the layout with</param>
+    /// <param name="axis">0 for horizontal axis, 1 for vertical</param>
+    /// <param name="layoutInput">If true, sets the layout input for the axis. If false, sets child position for axis</param>
+    public float SetLayout(float width, int axis, bool layoutInput)
+    {
+        var groupHeight = rectTransform.rect.height;
+
+        // Width that is available after padding is subtracted
+        var workingWidth = rectTransform.rect.width - padding.left - padding.right;
+
+        // Accumulates the total height of the rows, including spacing and padding.
+        var yOffset = IsLowerAlign ? padding.bottom : (float) padding.top;
+
+        var currentRowWidth  = 0f;
+        var currentRowHeight = 0f;
+
+        for (var i = 0; i < rectChildren.Count; i++)
+        {
+            // LowerAlign works from back to front
+            var index = IsLowerAlign ? rectChildren.Count - 1 - i : i;
+
+            var child = rectChildren[index];
+
+            var childWidth  = LayoutUtility.GetPreferredSize(child, 0);
+            var childHeight = LayoutUtility.GetPreferredSize(child, 1);
+
+            // Max child width is layout group with - padding
+            childWidth = Mathf.Min(childWidth, workingWidth);
+
+            // Apply spacing if not the first element in a row
+            if (_rowList.Count > 0)
+                currentRowWidth += Spacing;
+
+            // If adding this element would exceed the bounds of the row,
+            // go to a new line after processing the current row
+            if (currentRowWidth + childWidth > workingWidth)
+            {
+                // Undo spacing addition if we're moving to a new line (Spacing is not applied on edges)
+                currentRowWidth -= Spacing;
+
+                // Process current row elements positioning
+                if (!layoutInput)
+                {
+                    var h = CalculateRowVerticalOffset(groupHeight, yOffset, currentRowHeight);
+                    LayoutRow(_rowList, currentRowWidth, currentRowHeight, workingWidth, padding.left, h, axis);
+                }
+
+                // Clear existing row
+                _rowList.Clear();
+
+                // Add the current row height to total height accumulator, and reset to 0 for the next row
+                yOffset += currentRowHeight;
+                yOffset += Spacing;
+
+                currentRowHeight = 0;
+                currentRowWidth = 0;
+            }
+
+            currentRowWidth += childWidth;
+            _rowList.Add(child);
+
+            // We need the largest element height to determine the starting position of the next line
+            if (childHeight > currentRowHeight)
+            {
+                currentRowHeight = childHeight;
+            }
+        }
+
+        if (!layoutInput)
+        {
+            var h = CalculateRowVerticalOffset(groupHeight, yOffset, currentRowHeight);
+
+            // Layout the final row
+            LayoutRow(_rowList, currentRowWidth, currentRowHeight, workingWidth, padding.left, h, axis);
+        }
+
+        _rowList.Clear();
+
+        // Add the last rows height to the height accumulator
+        yOffset += currentRowHeight;
+        yOffset += IsLowerAlign ? padding.top : padding.bottom;
+
+        if (layoutInput)
+        {
+            if (axis == 1)
+                SetLayoutInputForAxis(yOffset, yOffset, -1, axis);
+        }
+
+        return yOffset;
+    }
+
+    private float CalculateRowVerticalOffset(float groupHeight, float yOffset, float currentRowHeight)
+    {
+        float h;
+
+        if (IsLowerAlign)
+        {
+            h = groupHeight - yOffset - currentRowHeight;
+        }
+        else if (IsMiddleAlign)
+        {
+            h = groupHeight * 0.5f - _layoutHeight * 0.5f + yOffset;
+        }
+        else
+        {
+            h = yOffset;
+        }
+
+        return h;
+    }
+
+    protected void LayoutRow(IList<RectTransform> contents, float rowWidth, float rowHeight, float maxWidth, float xOffset, float yOffset, int axis)
+    {
+        var xPos = xOffset;
+
+        if (!ChildForceExpandWidth && IsCenterAlign)
+            xPos += (maxWidth - rowWidth) * 0.5f;
+        else if (!ChildForceExpandWidth && IsRightAlign)
+            xPos += (maxWidth - rowWidth);
+
+        var extraWidth = 0f;
+
+        if (ChildForceExpandWidth)
+        {
+            var flexibleChildCount = 0;
+
+            for (var i = 0; i < _rowList.Count; i++)
+            {
+                if (LayoutUtility.GetFlexibleWidth(_rowList[i]) > 0f)
+                    flexibleChildCount++;
+            }
+
+            if (flexibleChildCount > 0)
+                extraWidth = (maxWidth - rowWidth) / flexibleChildCount;
+        }
 
 
-	
-		minColumns = 1;
-		preferredColumns = Mathf.CeilToInt(Mathf.Sqrt(rectChildren.Count));
+        for (var j = 0; j < _rowList.Count; j++)
+        {
+            var index = IsLowerAlign ? _rowList.Count - 1 - j : j;
 
-		SetLayoutInputForAxis(
-			padding.horizontal + (cellSize.x + spacing.x) * minColumns - spacing.x,
-			padding.horizontal + (cellSize.x + spacing.x) * preferredColumns - spacing.x,
-			-1, 0);
-	}
+            var rowChild = _rowList[index];
 
-	public override void CalculateLayoutInputVertical()
-	{
-		int minRows = 0;
+            var rowChildWidth = LayoutUtility.GetPreferredSize(rowChild, 0);
 
-		float width = rectTransform.rect.size.x;
-		int cellCountX = Mathf.Max(1, Mathf.FloorToInt((width - padding.horizontal + spacing.x + 0.001f) / (cellSize.x + spacing.x)));
-//		minRows = Mathf.CeilToInt(rectChildren.Count / (float)cellCountX);
-		minRows = 1;
-		float minSpace = padding.vertical + (cellSize.y + spacing.y) * minRows - spacing.y;
-		SetLayoutInputForAxis(minSpace, minSpace, -1, 1);
-	}
+            if (LayoutUtility.GetFlexibleWidth(rowChild) > 0f)
+                rowChildWidth += extraWidth;
 
-	public override void SetLayoutHorizontal()
-	{
-		SetCellsAlongAxis();
-	}
+            var rowChildHeight = LayoutUtility.GetPreferredSize(rowChild, 1);
 
-	public override void SetLayoutVertical()
-	{
-		SetCellsAlongAxis();
-	}
+            if (ChildForceExpandHeight)
+                rowChildHeight = rowHeight;
 
+            rowChildWidth = Mathf.Min(rowChildWidth, maxWidth);
 
+            var yPos = yOffset;
 
-	int cellsPerMainAxis, actualCellCountX, actualCellCountY;
-	int positionX;
-	int positionY;
-	float totalWidth = 0; 
-	float totalHeight = 0;
+            if (IsMiddleAlign)
+                yPos += (rowHeight - rowChildHeight) * 0.5f;
+            else if (IsLowerAlign)
+                yPos += (rowHeight - rowChildHeight);
 
-	float lastMax = 0;
+            if (axis == 0)
+                SetChildAlongAxis(rowChild, 0, xPos, rowChildWidth);
+            else
+                SetChildAlongAxis(rowChild, 1, yPos, rowChildHeight);
 
-	private void SetCellsAlongAxis(){
-		// Normally a Layout Controller should only set horizontal values when invoked for the horizontal axis
-		// and only vertical values when invoked for the vertical axis.
-		// However, in this case we set both the horizontal and vertical position when invoked for the vertical axis.
-		// Since we only set the horizontal position and not the size, it shouldn't affect children's layout,
-		// and thus shouldn't break the rule that all horizontal layout must be calculated before all vertical layout.
+            xPos += rowChildWidth + Spacing;
+        }
+    }
 
+    public float GetGreatestMinimumChildWidth()
+    {
+        var max = 0f;
 
-		float width = rectTransform.rect.size.x;
-		float height = rectTransform.rect.size.y;
+        for (var i = 0; i < rectChildren.Count; i++)
+        {
+            var w = LayoutUtility.GetMinWidth(rectChildren[i]);
 
-		int cellCountX = 1;
-		int cellCountY = 1;
+            max = Mathf.Max(w, max);
+        }
 
-		if (cellSize.x + spacing.x <= 0)
-			cellCountX = int.MaxValue;
-		else
-			cellCountX = Mathf.Max(1, Mathf.FloorToInt((width - padding.horizontal + spacing.x + 0.001f) / (cellSize.x + spacing.x)));
-
-		if (cellSize.y + spacing.y <= 0)
-			cellCountY = int.MaxValue;
-		else
-			cellCountY = Mathf.Max(1, Mathf.FloorToInt((height - padding.vertical + spacing.y + 0.001f) / (cellSize.y + spacing.y)));
-
-		cellsPerMainAxis = cellCountX;
-		actualCellCountX = Mathf.Clamp(cellCountX, 1, rectChildren.Count);
-		actualCellCountY = Mathf.Clamp(cellCountY, 1, Mathf.CeilToInt(rectChildren.Count / (float)cellsPerMainAxis));
-		
-		Vector2 requiredSpace = new Vector2(
-			actualCellCountX * cellSize.x + (actualCellCountX - 1) * spacing.x,
-			actualCellCountY * cellSize.y + (actualCellCountY - 1) * spacing.y
-		);
-		Vector2 startOffset = new Vector2(
-			GetStartOffset(0, requiredSpace.x),
-			GetStartOffset(1, requiredSpace.y)
-		);
-
-		totalWidth = 0;
-		totalHeight = 0;
-		Vector2 currentSpacing = Vector2.zero;
-		for (int i = 0; i < rectChildren.Count; i++){
-			SetChildAlongAxis(rectChildren[i], 0, startOffset.x + totalWidth /*+ currentSpacing[0]*/, rectChildren[i].rect.size.x);
-			SetChildAlongAxis(rectChildren[i], 1, startOffset.y + totalHeight  /*+ currentSpacing[1]*/, rectChildren[i].rect.size.y);
-
-			currentSpacing = spacing;
-
-			if(horizontal){
-				totalWidth += rectChildren[i].rect.width + currentSpacing[0];
-				if (rectChildren[i].rect.height > lastMax){
-					lastMax = rectChildren[i].rect.height;
-				}
-
-				if (i < rectChildren.Count-1){
-					if (totalWidth + rectChildren[i+1].rect.width + currentSpacing[0] > width -padding.horizontal ){
-						totalWidth = 0;
-						totalHeight += lastMax + currentSpacing[1];
-						lastMax = 0;
-					}
-				}
-			}else{
-				totalHeight += rectChildren[i].rect.height + currentSpacing[1];
-				if (rectChildren[i].rect.width > lastMax){
-					lastMax = rectChildren[i].rect.width;
-				}
-
-				if (i < rectChildren.Count-1){
-					if (totalHeight + rectChildren[i+1].rect.height + currentSpacing[1] > height - padding.vertical){
-						totalHeight = 0;
-						totalWidth += lastMax + currentSpacing[0];
-						lastMax = 0;
-					}
-				}
-			}
-		}
-	}
+        return max;
+    }
 }

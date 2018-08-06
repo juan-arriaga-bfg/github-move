@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class TabGroup : MonoBehaviour
 {
-    [SerializeField] private List<Tab> tabs;
+    [SerializeField] private Transform tabsHost;
+    
+    private List<Tab> tabs = new List<Tab>();
 
     private int activeIndex = - 1;
 
+    public void AddTab(Tab tab, int tabIndex)
+    {       
+        tab.transform.SetParent(tabsHost, false);
+        tabs.Add(tab);
+        tab.Index = tabIndex;
+        tab.TabGroup = this;
+    }
+    
     public void ActivateTab(int index)
     {
         if (activeIndex == index)
@@ -20,11 +30,6 @@ public class TabGroup : MonoBehaviour
         for (int i = 0; i < tabs.Count; i++)
         {
             var tab = tabs[i];
-            if (tab == null)
-            {
-                continue;
-            }
-            
             tab.Toggle(i == index);
         }
     }

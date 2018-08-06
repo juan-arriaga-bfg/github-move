@@ -1,37 +1,36 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class Tab : MonoBehaviour
 {
-    [SerializeField] private TabGroup tabGroup;
-    
     [SerializeField] private RectTransform head;
     [SerializeField] private GameObject content;
-    [SerializeField] private GameObject captionActive;
-    [SerializeField] private GameObject captionDisabled;
+    [SerializeField] private GameObject headActive;
+    [SerializeField] private GameObject headDisabled;
 
-    [SerializeField] private int index;
+    public TabGroup TabGroup;
+    public int Index;
 
-    private float headerStartPos;
-    
     private void Start()
     {
-        headerStartPos = head.anchoredPosition.x;
+        var headerStartPos = head.anchoredPosition.x;
+        var offsetX = Index * head.sizeDelta.x;
+        head.anchoredPosition = new Vector2(headerStartPos + offsetX, head.anchoredPosition.y);
     }
 
     public void Toggle(bool enabled)
     {
+        Debug.Log($"Tab {Index} toggle to {enabled}");
+        
         content.SetActive(enabled);
-        captionActive.SetActive(enabled);
-        captionDisabled.SetActive(!enabled);
-
-        var offsetX = index * head.sizeDelta.x;
-        head.anchoredPosition = new Vector2(headerStartPos + offsetX, head.anchoredPosition.y);
+        headActive.SetActive(enabled);
+        headDisabled.SetActive(!enabled);
     }
 
     public void OnClick()
     {
-        Debug.Log("Tab click: " + index);
+        Debug.Log("Tab click: " + Index);
         
-        tabGroup.Click(index);
+        TabGroup.Click(Index);
     }
 }
