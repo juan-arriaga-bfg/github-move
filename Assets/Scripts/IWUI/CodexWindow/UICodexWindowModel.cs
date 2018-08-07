@@ -23,7 +23,8 @@ public class CodexTabDef
 public class CodexChainDef
 {
     public string Name;
-    public List<CodexItemDef> ItemDefs; 
+    public List<CodexItemDef> ItemDefs;
+    public int UnlockedByDefaultCount;
 }
 
 public class CodexContent
@@ -47,11 +48,15 @@ public class UICodexWindowModel : IWWindowModel
 
     public List<CodexItemDef> items;
 
+    public int PendingRewardAmount;
+
     private List<CodexItemDef> GetCodexItems(List<int> chain)
     {
+        Debug.Log($"Get items: {chain[0]}");
+        
         List<CodexItemDef> ret = new List<CodexItemDef>();
 
-        int locked = Random.Range(0, chain.Count);
+        int locked = 100; //Random.Range(0, chain.Count);
 
         var pieceManager = GameDataService.Current.PiecesManager;
         
@@ -69,7 +74,7 @@ public class UICodexWindowModel : IWWindowModel
                 PendingReward = pieceDef.UnlockBonus,
                 Name = pieceDef.Name
             };
-
+            
             if (i < locked)
             {
                 itemDef.State = itemDef.PendingReward == null ? CodexItemState.PendingReward : CodexItemState.Unlocked;
@@ -82,6 +87,19 @@ public class UICodexWindowModel : IWWindowModel
             {
                 itemDef.State = CodexItemState.FullLock; 
             }
+            
+            if (itemDef.PendingReward != null)
+            {
+                if (itemDef.PendingReward.Count != 1 || itemDef.PendingReward[0].Currency != Currency.Coins.Name)
+                {
+                    Debug.LogError($"Codex supports only Coins as reward. Multiply rewards for one item also not supported. Please check config for pieceId: {pieceId}");
+                }
+                else
+                {
+                    PendingRewardAmount += itemDef.PendingReward[0].Amount;
+                }
+            }
+            
             ret.Add(itemDef);
             items.Add(itemDef);
         }
@@ -93,7 +111,7 @@ public class UICodexWindowModel : IWWindowModel
     {
         get
         {
-            items.Clear();
+            items = new List<CodexItemDef>();
             
             var board    = BoardService.Current.GetBoardById(0);
             var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
@@ -109,14 +127,34 @@ public class UICodexWindowModel : IWWindowModel
                         {
                             new CodexChainDef
                             {
-                                Name = "Chain 1",
-                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.A1.Id))
+                                Name = "Energy 1",
+                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.D1.Id)),
+                                UnlockedByDefaultCount = 2
                             },
                             new CodexChainDef
                             {
-                                Name = "Chain 2",
-                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.B1.Id))
-                            },
+                                Name = "Energy 2",
+                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.E1.Id)),
+                                UnlockedByDefaultCount = 2
+                            },                            
+                            new CodexChainDef
+                            {
+                                Name = "Energy 3",
+                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.F1.Id)),
+                                UnlockedByDefaultCount = 0
+                            },                            
+                            new CodexChainDef
+                            {
+                                Name = "Energy 4",
+                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.G1.Id)),
+                                UnlockedByDefaultCount = 0
+                            },                            
+                            new CodexChainDef
+                            {
+                                Name = "Energy 5",
+                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.H1.Id)),
+                                UnlockedByDefaultCount = 0
+                            },                            
                         }
                     },
                     new CodexTabDef
@@ -126,18 +164,19 @@ public class UICodexWindowModel : IWWindowModel
                         {
                             new CodexChainDef
                             {
-                                Name = "BUilding1",
+                                Name = "Buildings 1",
+                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.A1.Id)),
+                                UnlockedByDefaultCount = 1
+                            },
+                            new CodexChainDef
+                            {
+                                Name = "Buildings 2",
+                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.B1.Id))
+                            },
+                            new CodexChainDef
+                            {
+                                Name = "Buildings 3",
                                 ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.C1.Id))
-                            },
-                            new CodexChainDef
-                            {
-                                Name = "Building2",
-                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.D1.Id))
-                            },
-                            new CodexChainDef
-                            {
-                                Name = "Building3",
-                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.E1.Id))
                             },
                         }
                     },
@@ -149,8 +188,9 @@ public class UICodexWindowModel : IWWindowModel
                             new CodexChainDef
                             {
                                 Name = "Coins 1",
-                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.Coin1.Id))
-                            }
+                                ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.Coin1.Id)),
+                                UnlockedByDefaultCount = 1
+                            },                            
                         }
                     }
                 }

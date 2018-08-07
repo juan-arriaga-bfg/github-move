@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class UICodexWindowView : UIGenericPopupWindowView
 {
@@ -9,6 +10,11 @@ public class UICodexWindowView : UIGenericPopupWindowView
     [SerializeField] private GameObject tabPrefab; 
     [SerializeField] private GameObject chainPrefab; 
     [SerializeField] private GameObject itemPrefab;
+    
+    [Header("Buttons")]
+    [SerializeField] private GameObject btnClose;
+    [SerializeField] private GameObject btnReward;
+    [SerializeField] private TextMeshProUGUI btnRewardText;
 
     private bool isInited;
     
@@ -42,6 +48,18 @@ public class UICodexWindowView : UIGenericPopupWindowView
         itemPrefab.SetActive(false);
         
         CreateTabs(model.CodexContent.TabDefs);
+        ToggleButtons(model);
+    }
+
+    private void ToggleButtons(UICodexWindowModel model)
+    {
+        int reward = model.PendingRewardAmount;
+        bool isRewardAvailable = reward > 0;
+        
+        btnClose.SetActive(!isRewardAvailable);
+        btnReward.SetActive(isRewardAvailable);
+
+        btnRewardText.text = $"Claim Reward <sprite name=\"Coins\"> {reward}";
     }
 
     private void CreateTabs(List<CodexTabDef> tabDefs)

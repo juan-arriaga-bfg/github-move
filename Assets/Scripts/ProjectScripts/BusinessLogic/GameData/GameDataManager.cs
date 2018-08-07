@@ -101,7 +101,7 @@ public class ItemWeight
 public class GameDataManager : ECSEntity,
     IChestsDataManager, IEnemiesDataManager, IHeroesDataManager, IPiecesDataManager, IFogsDataManager, IMinesDataManager,
     IQuestsDataManager, IObstaclesDataManager, ICollectionDataManager, ILevelsDataManager, ITasksDataManager, IProductionDataManager,
-    IShopDataManager, IFieldDataManager
+    IShopDataManager, IFieldDataManager, ICodexDataManager
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -234,6 +234,15 @@ public class GameDataManager : ECSEntity,
         }
     }
     
+    private CodexDataManager codexManager;
+    public CodexDataManager CodexManager
+    {
+        get
+        {
+            return codexManager ?? (codexManager = GetComponent<CodexDataManager>(CodexDataManager.ComponentGuid));
+        }
+    }
+    
     public void SetupComponents()
     {
         RegisterComponent(new ChestsDataManager());
@@ -250,6 +259,7 @@ public class GameDataManager : ECSEntity,
         RegisterComponent(new ShopDataManager());
         RegisterComponent(new FieldDataManager());
 //        RegisterComponent(new ProductionDataManager());
+        RegisterComponent(new CodexDataManager());
     }
 
     public void Reload()
