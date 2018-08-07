@@ -20,18 +20,18 @@ public class FieldControllerComponent : IECSComponent
         var fieldDef = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
 
 #if UNITY_EDITOR
-//        CreateDebug();
+        CreateDebug();
 #endif
         
         GenerateBorder();
         var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
         CutTriangles(maxEdge / 2, Directions.All);
         
-//        if (fieldDef.Pieces == null)
+        if (fieldDef.Pieces == null)
         {
             StartField();
-//            CreateFog();
-            TestField();
+            CreateFog();
+//            TestField();
             return;
         }
         
