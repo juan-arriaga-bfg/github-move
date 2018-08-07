@@ -5,11 +5,7 @@ using UnityEngine;
 public class FieldControllerComponent : IECSComponent
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-
-    public int Guid
-    {
-        get { return ComponentGuid; }
-    }
+    public int Guid => ComponentGuid;
 
     private BoardController context;
     
@@ -27,11 +23,35 @@ public class FieldControllerComponent : IECSComponent
         var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
         CutTriangles(maxEdge / 2, Directions.All);
         
+//        TestField();
+//        return;
+        
+        context.BoardLogic.PieceFlyer.Locker.Lock(context);
+        
         if (fieldDef.Pieces == null)
         {
-            StartField();
-            CreateFog();
-//            TestField();
+            var pieces = new Dictionary<int, List<BoardPosition>>(GameDataService.Current.FieldManager.Pieces)
+                {
+                    {PieceType.Fog.Id, CreateFog()}
+                };
+            
+            foreach (var piece in pieces)
+            {
+                context.ActionExecutor.AddAction(new FillBoardAction
+                {
+                    Piece = piece.Key,
+                    Positions = piece.Value
+                });
+            }
+            
+            context.ActionExecutor.AddAction(new CallbackAction
+            {
+                Callback = controller =>
+                {
+                    controller.BoardLogic.PieceFlyer.Locker.Unlock(controller);
+                }
+            });
+            
             return;
         }
         
@@ -43,6 +63,14 @@ public class FieldControllerComponent : IECSComponent
                 Positions = item.Positions
             });
         }
+        
+        context.ActionExecutor.AddAction(new CallbackAction
+        {
+            Callback = controller =>
+            {
+                controller.BoardLogic.PieceFlyer.Locker.Unlock(controller);
+            }
+        });
         
         if(fieldDef.Resources == null) return;
         
@@ -57,20 +85,6 @@ public class FieldControllerComponent : IECSComponent
     
     public void OnUnRegisterEntity(ECSEntity entity)
     {
-    }
-
-    private void StartField()
-    {
-        var pieces = GameDataService.Current.FieldManager.Pieces;
-
-        foreach (var piece in pieces)
-        {
-            context.ActionExecutor.AddAction(new FillBoardAction
-            {
-                Piece = piece.Key,
-                Positions = piece.Value
-            });
-        }
     }
 
     private void TestField()
@@ -96,7 +110,7 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(29, 10), PieceType.Coin1.Id, PieceType.Coin5.Id);
     }
     
-    private void CreateFog()
+    private List<BoardPosition> CreateFog()
     {
         var data = GameDataService.Current.FogsManager.Fogs;
         var positions = new List<BoardPosition>();
@@ -109,11 +123,7 @@ public class FieldControllerComponent : IECSComponent
             positions.Add(pos);
         }
 
-        context.ActionExecutor.AddAction(new FillBoardAction
-        {
-            Piece = PieceType.Fog.Id,
-            Positions = positions
-        });
+        return positions;
     }
 
     private void CreateDebug()

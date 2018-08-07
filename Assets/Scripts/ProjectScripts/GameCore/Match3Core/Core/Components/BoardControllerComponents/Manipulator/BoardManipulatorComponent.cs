@@ -60,18 +60,7 @@ public class BoardManipulatorComponent : ECSEntity,
         return null;
     }
 
-    public virtual LockerComponent Locker
-    {
-        get
-        {
-            if (locker == null)
-            {
-                locker = GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
-            }
-            
-            return locker;
-        }
-    }
+    public virtual LockerComponent Locker => locker ?? (locker = GetComponent<LockerComponent>(LockerComponent.ComponentGuid));
 
     public override void OnRegisterEntity(ECSEntity entity)
     {

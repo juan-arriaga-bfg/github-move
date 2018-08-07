@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class EmptyCellsFinderComponent: IECSComponent
+public class EmptyCellsFinderComponent : IECSComponent
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-	
-	public int Guid { get { return ComponentGuid; } }
-	
+	public int Guid => ComponentGuid;
+
 	private BoardLogicComponent context;
 	
 	public void OnRegisterEntity(ECSEntity entity)

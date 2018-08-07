@@ -42,10 +42,11 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new WorkerCurrencyLogicComponent());
         boardController.RegisterComponent(new EnergyCurrencyLogicComponent{Delay = 60});
         
-        boardController
-            .RegisterComponent(new BoardLogicComponent() // core logic
+        boardController.RegisterComponent(new BoardLogicComponent() // core logic
             .RegisterComponent(new PiecePositionsCacheComponent())
             .RegisterComponent(new FieldFinderComponent())
+            .RegisterComponent(new PieceFlyerComponent()
+                .RegisterComponent(new LockerComponent()))
             .RegisterComponent(new EmptyCellsFinderComponent()) // finds empty cells
             .RegisterComponent(new MatchActionBuilderComponent() // creates match action
                 .RegisterDefaultBuilder(new DefaultMatchActionBuilder()) // creates default match action
@@ -58,11 +59,8 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new BoardRenderer().Init(gameBoardResourcesDef,
             gameBoardRendererView.transform)); // renderer context
         
-        boardController
-            .RegisterComponent(new BoardManipulatorComponent()
+        boardController.RegisterComponent(new BoardManipulatorComponent()
             .RegisterComponent(new LockerComponent())); // user manipualtor
-        
-        
         
         boardController.RegisterComponent(new BoardDefinitionComponent
         {

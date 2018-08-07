@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IBoardAction  
+﻿public interface IBoardAction  
 {
 	bool PerformAction(BoardController gameBoardController);
 	
