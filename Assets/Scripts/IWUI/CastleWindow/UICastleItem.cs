@@ -115,11 +115,6 @@ public class UICastleItem : MonoBehaviour
 	{
 		var key = chest.Piece;
 		
-		if (key == PieceType.ChestA3.Id)
-		{
-			return "2";
-		}
-		
 		if (key == PieceType.ChestX3.Id)
 		{
 			return "3";

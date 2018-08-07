@@ -89,7 +89,6 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(24, 10), PieceType.I1.Id, PieceType.I5.Id);
         AddPieces(new BoardPosition(26, 10), PieceType.J1.Id, PieceType.J5.Id);
         
-        AddPieces(new BoardPosition(28, 10), PieceType.ChestA1.Id, PieceType.ChestA3.Id);
         AddPieces(new BoardPosition(28, 14), PieceType.ChestX1.Id, PieceType.ChestX3.Id);
         AddPieces(new BoardPosition(28, 18), PieceType.ChestC1.Id, PieceType.ChestC3.Id);
         AddPieces(new BoardPosition(28, 22), PieceType.Basket1.Id, PieceType.Basket3.Id);
