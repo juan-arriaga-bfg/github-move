@@ -67,6 +67,7 @@ public class AddResourceView : BoardElementView
 		var board = BoardService.Current.GetBoardById(0);
 		
 		if (resource.Currency == Currency.Coins.Name
+		    || resource.Currency == Currency.Crystals.Name
 		    || resource.Currency == Currency.Energy.Name
 		    || resource.Currency == Currency.Experience.Name)
 		{
