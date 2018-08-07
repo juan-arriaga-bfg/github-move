@@ -15,7 +15,7 @@
     
     public void Fly(int id, int x, int y)
     {
-        if(Locker.IsLocked) return;
+        if(Locker.IsLocked || GameDataService.Current.QuestsManager.IsNeedToFly(id) == false) return;
         
         var currency = PieceType.Parse(id);
         var flay = ResourcesViewManager.Instance.GetFirstViewById(currency);

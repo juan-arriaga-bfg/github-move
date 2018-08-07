@@ -5,6 +5,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     [SerializeField] private GameObject shine;
     
     private Quest quest;
+    private bool isUp;
 
     public override int CurrentValueAnimated
     {
@@ -19,14 +20,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     {
         this.quest = quest;
 
-        var isComplete = quest.Check();
-        
-        if (isComplete)
-        {
-            transform.SetSiblingIndex(0);
-        }
-        
-        shine.SetActive(isComplete);
+        isUp = false;
         itemUid = PieceType.Parse(quest.WantedPiece);
         ResourcesViewManager.Instance.RegisterView(this);
         UpdateView();
@@ -45,7 +39,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     {
         if(quest == null) return;
         
-        currentValue = quest.CurrentAmount;
+        currentValueAnimated = currentValue = quest.CurrentAmount;
 
         SetLabelValue(currentValue);
     }
@@ -62,9 +56,15 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         
         icon.sprite = IconService.Current.GetSpriteById(quest.WantedIcon);
 
-        var isComplete = value == quest.TargetAmount;
+        var isComplete = quest.Check();
+
+        if (isComplete && isUp == false)
+        {
+            isUp = true;
+            transform.SetSiblingIndex(0);
+        }
         
-        amountLabel.Text = string.Format("<color=#{0}><size=40>{1}</size></color>/{2}", isComplete ? "FFFFFF" : "FE4704", value, quest.TargetAmount);
+        amountLabel.Text = $"<color=#{(isComplete ? "FFFFFF" : "FE4704")}><size=40>{Mathf.Min(value, quest.TargetAmount)}</size></color>/{quest.TargetAmount}";
         shine.SetActive(isComplete);
     }
     

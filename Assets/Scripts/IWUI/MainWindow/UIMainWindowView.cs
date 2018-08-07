@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -55,15 +54,14 @@ public class UIMainWindowView : IWUIWindowView
         
         pattern.SetActive(false);
 
-        if (quests.Count > active.Count)
+        if (quests.Count <= active.Count) return;
+        
+        while (quests.Count != active.Count)
         {
-            while (quests.Count != active.Count)
-            {
-                var item = quests[0];
+            var item = quests[0];
                 
-                quests.RemoveAt(0);
-                Destroy(item.gameObject);
-            }
+            quests.RemoveAt(0);
+            Destroy(item.gameObject);
         }
     }
 
