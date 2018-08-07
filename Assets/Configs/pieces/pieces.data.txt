@@ -1,6 +1,7 @@
 ﻿[
   {
-    "Uid": "A1"
+    "Uid": "A1",
+    "Name": "A1 Piece"
   },
   {
     "Uid": "A2",
@@ -12,6 +13,13 @@
       {
         "Currency": "Experience",
         "Amount": 5
+      }
+    ],
+    "Name": "A2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
       }
     ]
   },
@@ -26,6 +34,13 @@
         "Currency": "Experience",
         "Amount": 10
       }
+    ],
+    "Name": "A3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      }
     ]
   },
   {
@@ -38,6 +53,13 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "Name": "A4 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -52,6 +74,12 @@
         "Currency": "Experience",
         "Amount": 25
       }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
     ]
   },
   {
@@ -64,6 +92,12 @@
       {
         "Currency": "Experience",
         "Amount": 50
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
       }
     ]
   },
@@ -78,6 +112,12 @@
         "Currency": "Experience",
         "Amount": 100
       }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 20
+      }
     ]
   },
   {
@@ -91,6 +131,12 @@
         "Currency": "Experience",
         "Amount": 200
       }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 30
+      }
     ]
   },
   {
@@ -103,6 +149,12 @@
       {
         "Currency": "Experience",
         "Amount": 400
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 50
       }
     ]
   },
@@ -120,6 +172,12 @@
         "Currency": "Experience",
         "Amount": 15
       }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
     ]
   },
   {
@@ -132,6 +190,12 @@
       {
         "Currency": "Experience",
         "Amount": 25
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -146,6 +210,12 @@
         "Currency": "Experience",
         "Amount": 40
       }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
     ]
   },
   {
@@ -158,6 +228,12 @@
       {
         "Currency": "Experience",
         "Amount": 75
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
       }
     ]
   },
@@ -175,6 +251,12 @@
         "Currency": "Experience",
         "Amount": 15
       }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
     ]
   },
   {
@@ -187,6 +269,12 @@
       {
         "Currency": "Experience",
         "Amount": 25
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -201,6 +289,12 @@
         "Currency": "Experience",
         "Amount": 40
       }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
     ]
   },
   {
@@ -213,6 +307,12 @@
       {
         "Currency": "Experience",
         "Amount": 75
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
       }
     ]
   },
@@ -227,6 +327,12 @@
         "Currency": "Experience",
         "Amount": 125
       }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      }
     ]
   },
   {
@@ -239,6 +345,12 @@
       {
         "Currency": "Experience",
         "Amount": 200
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 40
       }
     ]
   },
@@ -253,6 +365,12 @@
         "Currency": "Experience",
         "Amount": 300
       }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 60
+      }
     ]
   },
   {
@@ -265,6 +383,12 @@
       {
         "Currency": "Experience",
         "Amount": 500
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 100
       }
     ]
   },
@@ -281,6 +405,12 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -299,7 +429,13 @@
     "Reproduction": {
       "Currency": "D1",
       "Amount": 1
-    }
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "D4",
@@ -316,7 +452,13 @@
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 20
-    }
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
+    ]
   },
   {
     "Uid": "E1",
@@ -336,6 +478,12 @@
         "Currency": "Experience",
         "Amount": 15
       }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
     ]
   },
   {
@@ -349,6 +497,12 @@
         "Currency": "Experience",
         "Amount": 25
       }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
     ]
   },
   {
@@ -361,6 +515,12 @@
       {
         "Currency": "Experience",
         "Amount": 40
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
       }
     ]
   },
@@ -379,7 +539,13 @@
     "Reproduction": {
       "Currency": "E1",
       "Amount": 1
-    }
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
   },
   {
     "Uid": "F1"
@@ -394,6 +560,12 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -412,7 +584,13 @@
     "Reproduction": {
       "Currency": "F1",
       "Amount": 1
-    }
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "F4",
@@ -429,7 +607,13 @@
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 10
-    }
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
+    ]
   },
   {
     "Uid": "F5",
@@ -446,7 +630,13 @@
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 15
-    }
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
   },
   {
     "Uid": "G1"
@@ -461,6 +651,12 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -479,7 +675,13 @@
     "Reproduction": {
       "Currency": "G1",
       "Amount": 1
-    }
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "G4",
@@ -496,7 +698,13 @@
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 20
-    }
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
+    ]
   },
   {
     "Uid": "H1"
@@ -511,6 +719,12 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -529,7 +743,13 @@
     "Reproduction": {
       "Currency": "H1",
       "Amount": 1
-    }
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "H4",
@@ -546,7 +766,13 @@
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 25
-    }
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
+    ]
   },
   {
     "Uid": "I1"
@@ -562,6 +788,12 @@
         "Currency": "Experience",
         "Amount": 15
       }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
     ]
   },
   {
@@ -574,6 +806,12 @@
       {
         "Currency": "Experience",
         "Amount": 25
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -592,7 +830,13 @@
     "Reproduction": {
       "Currency": "I1",
       "Amount": 1
-    }
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
+    ]
   },
   {
     "Uid": "I5",
@@ -609,7 +853,13 @@
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 30
-    }
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
   },
   {
     "Uid": "J1"
@@ -625,6 +875,12 @@
         "Currency": "Experience",
         "Amount": 15
       }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
     ]
   },
   {
@@ -637,6 +893,12 @@
       {
         "Currency": "Experience",
         "Amount": 25
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -659,7 +921,13 @@
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 25
-    }
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
+    ]
   },
   {
     "Uid": "J5",
@@ -676,7 +944,13 @@
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 30
-    }
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
   },
   {
     "Uid": "X1"
@@ -692,6 +966,12 @@
         "Currency": "Experience",
         "Amount": 10
       }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
     ]
   },
   {
@@ -705,6 +985,12 @@
         "Currency": "Experience",
         "Amount": 25
       }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
     ]
   },
   {
@@ -717,6 +1003,12 @@
       {
         "Currency": "Experience",
         "Amount": 100
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
       }
     ]
   },

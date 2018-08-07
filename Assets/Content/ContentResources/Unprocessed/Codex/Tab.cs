@@ -20,7 +20,7 @@ public class Tab : MonoBehaviour
 
     public void Toggle(bool enabled)
     {
-        Debug.Log($"Tab {Index} toggle to {enabled}");
+        // Debug.Log($"Tab {Index} toggle to {enabled}");
         
         content.SetActive(enabled);
         headActive.SetActive(enabled);
@@ -29,7 +29,7 @@ public class Tab : MonoBehaviour
 
     public void OnClick()
     {
-        Debug.Log("Tab click: " + Index);
+        // Debug.Log("Tab click: " + Index);
         
         TabGroup.Click(Index);
     }

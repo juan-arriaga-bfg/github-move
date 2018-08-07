@@ -992,14 +992,6 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "Coin5",
-    "SpriteName": "coin3",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
     "Uid": "pers_1",
     "SpriteName": "pers_1",
     "BundleName": "graphicscommon",
@@ -1302,5 +1294,45 @@
     "AssetPath": "Assets/Content/ProcessedContent",
     "SpriteSheetName": "tutorial",
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Coin1",
+    "SpriteName": "coin1",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Coins",
+    "SpriteSheetName": "coin1",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Coins"
+  },
+  {
+    "Uid": "Coin2",
+    "SpriteName": "coin2",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Coins",
+    "SpriteSheetName": "coin2",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Coins"
+  },
+  {
+    "Uid": "Coin3",
+    "SpriteName": "coin3",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Coins",
+    "SpriteSheetName": "coin3",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Coins"
+  },
+  {
+    "Uid": "Coin4",
+    "SpriteName": "coin4",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Coins",
+    "SpriteSheetName": "coin4",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Coins"
+  },
+  {
+    "Uid": "Coin5",
+    "SpriteName": "coin5",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Coins",
+    "SpriteSheetName": "coin5",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Coins"
   }
 ]

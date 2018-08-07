@@ -2,13 +2,16 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 public class CodexItemDef
 {
     public PieceTypeDef PieceTypeDef;
     public bool Unlocked;
-    public CurrencyPair PendingReward;
-    public bool IsLast;
+    public List<CurrencyPair> PendingReward;
+    public bool ShowArrow;
+    public CodexItemState State;
+    public string Name;
 }
 
 public class CodexTabDef
@@ -42,19 +45,45 @@ public class UICodexWindowModel : IWWindowModel
 
     public int ActiveTabIndex { get; set; } = 0;
 
+    public List<CodexItemDef> items;
+
     private List<CodexItemDef> GetCodexItems(List<int> chain)
     {
         List<CodexItemDef> ret = new List<CodexItemDef>();
 
+        int locked = Random.Range(0, chain.Count);
+
+        var pieceManager = GameDataService.Current.PiecesManager;
+        
         for (var i = 0; i < chain.Count; i++)
         {
+            int pieceId = chain[i];
+            
+            PieceDef pieceDef = pieceManager.GetPieceDef(pieceId);
+            PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceId);
+            
             CodexItemDef itemDef = new CodexItemDef
             {
-                PieceTypeDef = PieceType.GetDefById(chain[i]),
-                IsLast = i == chain.Count - 1
+                PieceTypeDef = pieceTypeDef,
+                ShowArrow = i != chain.Count - 1,
+                PendingReward = pieceDef.UnlockBonus,
+                Name = pieceDef.Name
             };
 
+            if (i < locked)
+            {
+                itemDef.State = itemDef.PendingReward == null ? CodexItemState.PendingReward : CodexItemState.Unlocked;
+            } 
+            else if (i == locked)
+            {
+                itemDef.State = CodexItemState.PartLock; 
+            } 
+            else if (i > locked)
+            {
+                itemDef.State = CodexItemState.FullLock; 
+            }
             ret.Add(itemDef);
+            items.Add(itemDef);
         }
 
         return ret;
@@ -64,6 +93,8 @@ public class UICodexWindowModel : IWWindowModel
     {
         get
         {
+            items.Clear();
+            
             var board    = BoardService.Current.GetBoardById(0);
             var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
 

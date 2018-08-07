@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -152,13 +153,21 @@ public class ConfigsGoogleLoader
                 
                 return;
             }
-                
-            var root = JObject.Parse(response.Result);
-            var result = root["result"];
-                
-            File.WriteAllText(Application.dataPath + update[index].Key, JsonConvert.SerializeObject(result, Formatting.Indented), Encoding.UTF8);
-            
-            Load();
+
+            try
+            {
+                var root   = JObject.Parse(response.Result);
+                var result = root["result"];
+
+                File.WriteAllText(Application.dataPath + update[index].Key, JsonConvert.SerializeObject(result, Formatting.Indented), Encoding.UTF8);
+
+                Load();
+            }
+            catch (Exception e)
+            {
+                EditorUtility.ClearProgressBar();
+                throw;
+            }
         });
     }
     
