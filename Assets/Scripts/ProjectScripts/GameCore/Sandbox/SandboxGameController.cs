@@ -110,12 +110,14 @@ public class SandboxGameController : MonoBehaviour
         var bottomPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - heightShift, heightShift, 0);
         
         var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition(19, 14, boardController.BoardDef.PieceLayer);
+
+        var interfaceOffsetX = boardController.BoardDef.CellWidth * boardController.BoardDef.UnitSize;
         
         boardController.Manipulator.CameraManipulator.CurrentCameraSettings.CameraClampRegion = new Rect
         (
-            leftPoint.x - boardController.BoardDef.UnitSize, 
+            leftPoint.x - boardController.BoardDef.UnitSize - interfaceOffsetX, 
             bottomPoint.y - boardController.BoardDef.UnitSize,
-            Mathf.Abs((leftPoint - rightPoint).x) + boardController.BoardDef.UnitSize,
+            Mathf.Abs((leftPoint - rightPoint).x) + boardController.BoardDef.UnitSize + interfaceOffsetX,
             Mathf.Abs((topPoint - bottomPoint).y) + boardController.BoardDef.UnitSize
         );
        
