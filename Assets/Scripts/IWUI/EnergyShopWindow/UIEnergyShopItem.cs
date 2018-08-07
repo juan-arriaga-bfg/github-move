@@ -9,9 +9,13 @@ public class UIEnergyShopItem : MonoBehaviour
     
     private ChestDef chest;
     
+    private bool isClick;
+    
     public void Init(ChestDef def)
     {
         chest = def;
+        
+        isClick = false;
         
         icon.sprite = IconService.Current.GetSpriteById(chest.Uid);
         icon.SetNativeSize();
@@ -24,6 +28,10 @@ public class UIEnergyShopItem : MonoBehaviour
 
     public void OnClick()
     {
+        if(isClick) return;
+		
+        isClick = true;
+        
         var board = BoardService.Current.GetBoardById(0);
         if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(GameDataService.Current.PiecesManager.CastlePosition, 1))
         {

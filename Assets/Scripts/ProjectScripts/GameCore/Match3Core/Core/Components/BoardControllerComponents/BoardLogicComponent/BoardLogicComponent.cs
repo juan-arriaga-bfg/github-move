@@ -3,7 +3,8 @@ using UnityEngine;
 using System.Text;
 
 public class BoardLogicComponent : ECSEntity,
-    IMatchDefinitionComponent, IFieldFinderComponent, IEmptyCellsFinderComponent, IMatchActionBuilderComponent, IPiecePositionsCacheComponent
+    IMatchDefinitionComponent, IFieldFinderComponent, IEmptyCellsFinderComponent, IMatchActionBuilderComponent, IPiecePositionsCacheComponent,
+    IPieceFlyerComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -25,7 +26,7 @@ public class BoardLogicComponent : ECSEntity,
     private int[,,] logicMatrix;
 
     private Dictionary<BoardPosition, Piece> boardEntities = new Dictionary<BoardPosition, Piece>();
-
+    
     private BoardCell[,,] boardCells;
 
     protected int[,,] LogicMatrix { get { return logicMatrix; } }
@@ -45,74 +46,23 @@ public class BoardLogicComponent : ECSEntity,
     public virtual int Depth { get { return depth; } }
     
     protected MatchDefinitionComponent matchDefinition;
-    public MatchDefinitionComponent MatchDefinition
-    {
-        get
-        {
-            if (matchDefinition == null)
-            {
-                matchDefinition = GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
-            }
-            return matchDefinition;
-        }
-    }
+    public MatchDefinitionComponent MatchDefinition => matchDefinition ?? (matchDefinition = GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid));
     
     protected FieldFinderComponent fieldFinder;
-    public FieldFinderComponent FieldFinder
-    {
-        get
-        {
-            if (fieldFinder == null)
-            {
-                fieldFinder = GetComponent<FieldFinderComponent>(FieldFinderComponent.ComponentGuid);
-            }
-
-            return fieldFinder;
-        }
-    }
+    public FieldFinderComponent FieldFinder => fieldFinder ?? (fieldFinder = GetComponent<FieldFinderComponent>(FieldFinderComponent.ComponentGuid));
     
     protected PiecePositionsCacheComponent positionsCache;
-    public PiecePositionsCacheComponent PositionsCache
-    {
-        get
-        {
-            if (positionsCache == null)
-            {
-                positionsCache = GetComponent<PiecePositionsCacheComponent>(PiecePositionsCacheComponent.ComponentGuid);
-            }
-
-            return positionsCache;
-        }
-    }
+    public PiecePositionsCacheComponent PositionsCache => positionsCache ?? (positionsCache = GetComponent<PiecePositionsCacheComponent>(PiecePositionsCacheComponent.ComponentGuid));
     
     protected EmptyCellsFinderComponent emptyCellsFinder;
-    public EmptyCellsFinderComponent EmptyCellsFinder
-    {
-        get
-        {
-            if (emptyCellsFinder == null)
-            {
-                emptyCellsFinder = GetComponent<EmptyCellsFinderComponent>(EmptyCellsFinderComponent.ComponentGuid);
-            }
-
-            return emptyCellsFinder;
-        }
-    }
+    public EmptyCellsFinderComponent EmptyCellsFinder => emptyCellsFinder ?? (emptyCellsFinder = GetComponent<EmptyCellsFinderComponent>(EmptyCellsFinderComponent.ComponentGuid));
     
     protected MatchActionBuilderComponent matchActionBuilder;
-    public MatchActionBuilderComponent MatchActionBuilder
-    {
-        get
-        {
-            if (matchActionBuilder == null)
-            {
-                matchActionBuilder = GetComponent<MatchActionBuilderComponent>(MatchActionBuilderComponent.ComponentGuid);
-            }
-
-            return matchActionBuilder;
-        }
-    }
+    public MatchActionBuilderComponent MatchActionBuilder => matchActionBuilder ?? (matchActionBuilder = GetComponent<MatchActionBuilderComponent>(MatchActionBuilderComponent.ComponentGuid));
     
+    protected PieceFlyerComponent pieceFlyer;
+    public PieceFlyerComponent PieceFlyer => pieceFlyer ?? (pieceFlyer = GetComponent<PieceFlyerComponent>(PieceFlyerComponent.ComponentGuid));
+
     public override void OnRegisterEntity(ECSEntity entity)
     {
         this.context = entity as BoardController;
@@ -132,12 +82,7 @@ public class BoardLogicComponent : ECSEntity,
     
     public virtual bool IsPointValid(int x, int y)
     {
-        if (IsXValid(x) == false || IsYValid(y) == false)
-        {
-            return false;
-        }
-        
-        return true;
+        return IsXValid(x) && IsYValid(y);
     }
 
     public virtual bool IsXValid(int x, out int near)
@@ -234,7 +179,7 @@ public class BoardLogicComponent : ECSEntity,
             }
         }
     }
-
+    
     public virtual void LockCells(List<BoardPosition> boardPositions, object locker)
     {
         for (int i = 0; i < boardPositions.Count; i++)
@@ -347,7 +292,7 @@ public class BoardLogicComponent : ECSEntity,
     {
         if (piece == null) return false;
 
-        BoardPosition position = new BoardPosition(x, y, piece.Layer.Index);
+        var position = new BoardPosition(x, y, piece.Layer.Index);
 
         if (IsPointValid(position) == false) return false;
 
@@ -357,12 +302,9 @@ public class BoardLogicComponent : ECSEntity,
 
         var observer = piece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
 
-        if (observer != null)
-        {
-            observer.OnAddToBoard(position, piece);
-        }
+        observer?.OnAddToBoard(position, piece);
         
-        Context.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, piece.PieceType);
+        PieceFlyer.Fly(piece.PieceType, x, y);
         
         return true;
     }

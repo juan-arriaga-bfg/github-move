@@ -114,10 +114,6 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.X4.Id, R.X4Piece);
         dict.Add(PieceType.X5.Id, R.X5Piece);
         
-        dict.Add(PieceType.ChestA1.Id, R.ChestA1Piece);
-        dict.Add(PieceType.ChestA2.Id, R.ChestA2Piece);
-        dict.Add(PieceType.ChestA3.Id, R.ChestA3Piece);
-        
         dict.Add(PieceType.ChestX1.Id, R.ChestX1Piece);
         dict.Add(PieceType.ChestX2.Id, R.ChestX2Piece);
         dict.Add(PieceType.ChestX3.Id, R.ChestX3Piece);
@@ -151,7 +147,6 @@ public class ElementsResourcesBuilder
 
     private Dictionary<int, string> AddMulticellularPiece(Dictionary<int, string> dict)
     {
-        dict.Add(PieceType.MineA.Id, R.MineAPiece);
         dict.Add(PieceType.MineX.Id, R.MineXPiece);
         dict.Add(PieceType.MineC.Id, R.MineCPiece);
         dict.Add(PieceType.MineY.Id, R.MineYPiece);
