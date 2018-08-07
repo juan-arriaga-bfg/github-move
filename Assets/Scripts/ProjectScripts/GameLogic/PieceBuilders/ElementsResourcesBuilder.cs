@@ -17,17 +17,25 @@ public class ElementsResourcesBuilder
     {
         dict.Add(PieceType.Generic.Id, R.GenericPiece);
         
-        dict.Add(PieceType.O1.Id, R.O1Piece);
-        dict.Add(PieceType.O2.Id, R.O2Piece);
-        dict.Add(PieceType.O3.Id, R.O3Piece);
-        dict.Add(PieceType.O4.Id, R.O4Piece);
-        dict.Add(PieceType.O5.Id, R.O5Piece);
+        dict.Add(PieceType.O1.Id, R.OPiece);
+        dict.Add(PieceType.O2.Id, R.OPiece);
+        dict.Add(PieceType.O3.Id, R.OPiece);
+        dict.Add(PieceType.O4.Id, R.OPiece);
+        dict.Add(PieceType.O5.Id, R.OPiece);
+        dict.Add(PieceType.O6.Id, R.OPiece);
+        dict.Add(PieceType.O7.Id, R.OPiece);
+        dict.Add(PieceType.O8.Id, R.OPiece);
+        dict.Add(PieceType.O9.Id, R.OPiece);
         
-        dict.Add(PieceType.OX1.Id, R.OX1Piece);
-        dict.Add(PieceType.OX2.Id, R.OX2Piece);
-        dict.Add(PieceType.OX3.Id, R.OX3Piece);
-        dict.Add(PieceType.OX4.Id, R.OX4Piece);
-        dict.Add(PieceType.OX5.Id, R.OX5Piece);
+        dict.Add(PieceType.OX1.Id, R.OXPiece);
+        dict.Add(PieceType.OX2.Id, R.OXPiece);
+        dict.Add(PieceType.OX3.Id, R.OXPiece);
+        dict.Add(PieceType.OX4.Id, R.OXPiece);
+        dict.Add(PieceType.OX5.Id, R.OXPiece);
+        dict.Add(PieceType.OX6.Id, R.OXPiece);
+        dict.Add(PieceType.OX7.Id, R.OXPiece);
+        dict.Add(PieceType.OX8.Id, R.OXPiece);
+        dict.Add(PieceType.OX9.Id, R.OXPiece);
         
         dict.Add(PieceType.King.Id, R.KingPiece);
         
@@ -106,10 +114,6 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.X4.Id, R.X4Piece);
         dict.Add(PieceType.X5.Id, R.X5Piece);
         
-        dict.Add(PieceType.ChestA1.Id, R.ChestA1Piece);
-        dict.Add(PieceType.ChestA2.Id, R.ChestA2Piece);
-        dict.Add(PieceType.ChestA3.Id, R.ChestA3Piece);
-        
         dict.Add(PieceType.ChestX1.Id, R.ChestX1Piece);
         dict.Add(PieceType.ChestX2.Id, R.ChestX2Piece);
         dict.Add(PieceType.ChestX3.Id, R.ChestX3Piece);
@@ -143,9 +147,9 @@ public class ElementsResourcesBuilder
 
     private Dictionary<int, string> AddMulticellularPiece(Dictionary<int, string> dict)
     {
-        dict.Add(PieceType.MineA.Id, R.MineAPiece);
         dict.Add(PieceType.MineX.Id, R.MineXPiece);
         dict.Add(PieceType.MineC.Id, R.MineCPiece);
+        dict.Add(PieceType.MineY.Id, R.MineYPiece);
         
         dict.Add(PieceType.Mine1.Id, R.Mine1Piece);
         dict.Add(PieceType.Mine2.Id, R.Mine2Piece);

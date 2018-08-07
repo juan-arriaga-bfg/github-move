@@ -3,7 +3,8 @@ using UnityEngine;
 using System.Text;
 
 public class BoardLogicComponent : ECSEntity,
-    IMatchDefinitionComponent, IFieldFinderComponent, IEmptyCellsFinderComponent, IMatchActionBuilderComponent, IPiecePositionsCacheComponent
+    IMatchDefinitionComponent, IFieldFinderComponent, IEmptyCellsFinderComponent, IMatchActionBuilderComponent, IPiecePositionsCacheComponent,
+    IPieceFlyerComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -25,7 +26,7 @@ public class BoardLogicComponent : ECSEntity,
     private int[,,] logicMatrix;
 
     private Dictionary<BoardPosition, Piece> boardEntities = new Dictionary<BoardPosition, Piece>();
-
+    
     private BoardCell[,,] boardCells;
 
     protected int[,,] LogicMatrix { get { return logicMatrix; } }
@@ -45,74 +46,23 @@ public class BoardLogicComponent : ECSEntity,
     public virtual int Depth { get { return depth; } }
     
     protected MatchDefinitionComponent matchDefinition;
-    public MatchDefinitionComponent MatchDefinition
-    {
-        get
-        {
-            if (matchDefinition == null)
-            {
-                matchDefinition = GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
-            }
-            return matchDefinition;
-        }
-    }
+    public MatchDefinitionComponent MatchDefinition => matchDefinition ?? (matchDefinition = GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid));
     
     protected FieldFinderComponent fieldFinder;
-    public FieldFinderComponent FieldFinder
-    {
-        get
-        {
-            if (fieldFinder == null)
-            {
-                fieldFinder = GetComponent<FieldFinderComponent>(FieldFinderComponent.ComponentGuid);
-            }
-
-            return fieldFinder;
-        }
-    }
+    public FieldFinderComponent FieldFinder => fieldFinder ?? (fieldFinder = GetComponent<FieldFinderComponent>(FieldFinderComponent.ComponentGuid));
     
     protected PiecePositionsCacheComponent positionsCache;
-    public PiecePositionsCacheComponent PositionsCache
-    {
-        get
-        {
-            if (positionsCache == null)
-            {
-                positionsCache = GetComponent<PiecePositionsCacheComponent>(PiecePositionsCacheComponent.ComponentGuid);
-            }
-
-            return positionsCache;
-        }
-    }
+    public PiecePositionsCacheComponent PositionsCache => positionsCache ?? (positionsCache = GetComponent<PiecePositionsCacheComponent>(PiecePositionsCacheComponent.ComponentGuid));
     
     protected EmptyCellsFinderComponent emptyCellsFinder;
-    public EmptyCellsFinderComponent EmptyCellsFinder
-    {
-        get
-        {
-            if (emptyCellsFinder == null)
-            {
-                emptyCellsFinder = GetComponent<EmptyCellsFinderComponent>(EmptyCellsFinderComponent.ComponentGuid);
-            }
-
-            return emptyCellsFinder;
-        }
-    }
+    public EmptyCellsFinderComponent EmptyCellsFinder => emptyCellsFinder ?? (emptyCellsFinder = GetComponent<EmptyCellsFinderComponent>(EmptyCellsFinderComponent.ComponentGuid));
     
     protected MatchActionBuilderComponent matchActionBuilder;
-    public MatchActionBuilderComponent MatchActionBuilder
-    {
-        get
-        {
-            if (matchActionBuilder == null)
-            {
-                matchActionBuilder = GetComponent<MatchActionBuilderComponent>(MatchActionBuilderComponent.ComponentGuid);
-            }
-
-            return matchActionBuilder;
-        }
-    }
+    public MatchActionBuilderComponent MatchActionBuilder => matchActionBuilder ?? (matchActionBuilder = GetComponent<MatchActionBuilderComponent>(MatchActionBuilderComponent.ComponentGuid));
     
+    protected PieceFlyerComponent pieceFlyer;
+    public PieceFlyerComponent PieceFlyer => pieceFlyer ?? (pieceFlyer = GetComponent<PieceFlyerComponent>(PieceFlyerComponent.ComponentGuid));
+
     public override void OnRegisterEntity(ECSEntity entity)
     {
         this.context = entity as BoardController;
@@ -132,12 +82,7 @@ public class BoardLogicComponent : ECSEntity,
     
     public virtual bool IsPointValid(int x, int y)
     {
-        if (IsXValid(x) == false || IsYValid(y) == false)
-        {
-            return false;
-        }
-        
-        return true;
+        return IsXValid(x) && IsYValid(y);
     }
 
     public virtual bool IsXValid(int x, out int near)
@@ -234,7 +179,7 @@ public class BoardLogicComponent : ECSEntity,
             }
         }
     }
-
+    
     public virtual void LockCells(List<BoardPosition> boardPositions, object locker)
     {
         for (int i = 0; i < boardPositions.Count; i++)
@@ -347,7 +292,7 @@ public class BoardLogicComponent : ECSEntity,
     {
         if (piece == null) return false;
 
-        BoardPosition position = new BoardPosition(x, y, piece.Layer.Index);
+        var position = new BoardPosition(x, y, piece.Layer.Index);
 
         if (IsPointValid(position) == false) return false;
 
@@ -357,42 +302,75 @@ public class BoardLogicComponent : ECSEntity,
 
         var observer = piece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
 
-        if (observer != null)
-        {
-            observer.OnAddToBoard(position, piece);
-        }
-
-        var currency = PieceType.Parse(piece.PieceType);
-        var flay = ResourcesViewManager.Instance.GetFirstViewById(currency);
-
-        if (flay == null) return true;
+        observer?.OnAddToBoard(position, piece);
         
-        var from = context.BoardDef.GetPiecePosition(x, y);
-        
-        var carriers = ResourcesViewManager.DeliverResource<ResourceCarrier>
-        (
-            currency,
-            1,
-            flay.GetAnchorRect(),
-            context.BoardDef.ViewCamera.WorldToScreenPoint(from),
-            R.ResourceCarrier
-        );
-
-        if (carriers.Count != 0)
-        {
-            carriers[0].RefreshIcon(currency);
-        }
+        PieceFlyer.Fly(piece.PieceType, x, y);
         
         return true;
+    }
+
+    private void RevertMulticellularMove(Piece piece, List<BoardPosition> mask, BoardPosition from, BoardPosition to,
+        int currentElement)
+    {
+        for (int i = currentElement-1; i > 0; i--)
+        {
+            var maskPos = mask[i];
+            var targetPos = maskPos + to;
+            var sourcePos = maskPos + from;
+
+            RemovePieceFromBoardSilent(targetPos);
+            AddPieceToBoardSilent(sourcePos.X, sourcePos.Y, piece);
+        }
     }
 
     public virtual bool MovePieceFromTo(BoardPosition from, BoardPosition to)
     {
         var fromPiece = GetPieceAt(from);
         var toPiece = GetPieceAt(to);
+        
+        if (fromPiece == null)
+            return false;
+        
 
-        if (fromPiece == null || toPiece != null) return false;
+        var multicellular =
+            fromPiece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
+        
+        if (multicellular != null)
+        {
+            if(fromPiece != toPiece && toPiece != null)
+                return false;
+            
+            var targetPositions = new List<BoardPosition>();
+            var sourcePositions = new List<BoardPosition>();
+            for (int i = 0; i < multicellular.Mask.Count; i++)
+            {
+                var maskPos = multicellular.Mask[i];
+                var targetPos = maskPos + to;
+                var sourcePos = maskPos + from;
+                
+                targetPositions.Add(targetPos);
+                sourcePositions.Add(sourcePos);
+                RemovePieceFromBoardSilent(sourcePos);
+            }
+            
+            for (int i = 0; i < multicellular.Mask.Count; i++)
+            {
+                var targetPos = targetPositions[i];
+                AddPieceToBoardSilent(targetPos.X, targetPos.Y, fromPiece);
+            }
+            
+            var observer = fromPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+            if (observer != null)
+            {
+                observer.OnMovedFromTo(from, to);
+            }
 
+            return true;
+        }
+
+        if (toPiece != null)
+            return false;
+        
         if (AddPieceToBoardSilent(to.X, to.Y, fromPiece) && RemovePieceFromBoardSilent(from))
         {
             var observer = fromPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);

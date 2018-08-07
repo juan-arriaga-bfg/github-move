@@ -90,7 +90,7 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
 
         if (positions.Count == 0)
         {
-            UIErrorWindowController.AddError("You have no pieces to get energy");
+            UIMessageWindowController.CreateImageMessage("Need more energy?", "collect_pieces", () => {});
             return;
         }
         

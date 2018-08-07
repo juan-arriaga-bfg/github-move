@@ -34,7 +34,6 @@ public class PieceBuildersBuilder
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Coin1.Id, PieceType.Coin5.Id, dict);
         
-        dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestA1.Id, PieceType.ChestA3.Id, dict);
         dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestX1.Id, PieceType.ChestX3.Id, dict);
         dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestC1.Id, PieceType.ChestC3.Id, dict);
         dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.Basket1.Id, PieceType.Basket3.Id, dict);
@@ -49,8 +48,8 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddObstaclePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.O1.Id, PieceType.O5.Id, dict);
-        dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OX1.Id, PieceType.OX5.Id, dict);
+        dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.O1.Id, PieceType.O9.Id, dict);
+        dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OX1.Id, PieceType.OX9.Id, dict);
         
         dict.Add(PieceType.Fog.Id, new FogPieceBuilder());
         
@@ -69,7 +68,7 @@ public class PieceBuildersBuilder
     {
         var mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2);
         
-        dict = AddMulticellularPiece<MinePieceBuilder>(PieceType.MineA.Id, PieceType.MineX.Id, mask, dict);
+        dict = AddMulticellularPiece<MinePieceBuilder>(PieceType.MineC.Id, PieceType.MineY.Id, mask, dict);
         
 //        dict = AddMulticellularPiece<MarketPieceBuilder>(PieceType.Market1.Id, PieceType.Market9.Id, mask, dict);
 //        dict = AddMulticellularPiece<StoragePieceBuilder>(PieceType.Storage1.Id, PieceType.Storage9.Id, mask, dict);

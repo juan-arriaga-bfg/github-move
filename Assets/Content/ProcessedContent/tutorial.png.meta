@@ -21,8 +21,10 @@ TextureImporter:
     21300032: collection_UI
     21300034: Chest_UI
     21300036: tutorial_TextBlock_1
+    21300038: collect_pieces
+    21300040: collect_pieces
   externalObjects: {}
-  serializedVersion: 6
+  serializedVersion: 7
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -92,13 +94,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Stone_UI
+      name: collect_pieces
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 656
-        height: 245
+        width: 746
+        height: 534
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -106,7 +108,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ca1e6cd447e88904eb7be753217412cb
+      spriteID: 3d575da0efd9d654d82d423544d003d4
       vertices: []
       indices: 
       edges: []
@@ -115,7 +117,7 @@ TextureImporter:
       name: Sheeps_UI
       rect:
         serializedVersion: 2
-        x: 657
+        x: 747
         y: 0
         width: 656
         height: 245
@@ -126,7 +128,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 386cecae940a05249867013d2af38d43
+      spriteID: a9bc03f7cf8cd304b8c18db39bef3b96
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_UI
+      rect:
+        serializedVersion: 2
+        x: 747
+        y: 246
+        width: 656
+        height: 245
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5866b4e26f0c3df49a8e86126b4750b1
       vertices: []
       indices: 
       edges: []
@@ -135,87 +157,7 @@ TextureImporter:
       name: Wood_UI
       rect:
         serializedVersion: 2
-        x: 1314
-        y: 0
-        width: 656
-        height: 245
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ada2b8c6994c2ca49be87172e8cba502
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tutorial_TextBlock_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 246
-        width: 656
-        height: 245
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5b95ece2f35c3174f965cab5bd598135
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Chest_UI
-      rect:
-        serializedVersion: 2
-        x: 657
-        y: 246
-        width: 656
-        height: 245
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8bd5ea42ddc3a5141a6d903d9d84fbc2
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: apple_UI
-      rect:
-        serializedVersion: 2
-        x: 1314
-        y: 246
-        width: 656
-        height: 245
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bc87176396f090f4bb59678fc4182823
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: hay_UI
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 747
         y: 492
         width: 656
         height: 245
@@ -226,16 +168,36 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d5990f5225d089b41b13e657a2e84c18
+      spriteID: 265fbdd2345131e42b39d90e106068fe
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: collection_UI
+      name: tutorial_TextBlock_1
       rect:
         serializedVersion: 2
         x: 0
+        y: 535
+        width: 656
+        height: 245
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77143c8bc22f89a4ebeacaf4b5a0dd5a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chest_UI
+      rect:
+        serializedVersion: 2
+        x: 657
         y: 738
         width: 656
         height: 245
@@ -246,7 +208,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3e8f359e49807a04a84df8bb9ec83c21
+      spriteID: 8d3cdf5f82651604e9c454b412a30453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: apple_UI
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 781
+        width: 656
+        height: 245
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd43222af37a419408bbbffeb49c866f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hay_UI
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 738
+        width: 656
+        height: 245
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b85b024b1c7367e41adfa3fa9e2e9d37
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collection_UI
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 984
+        width: 656
+        height: 245
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c7673885da93e446901d9b02337f9f5
       vertices: []
       indices: 
       edges: []
@@ -260,6 +282,8 @@ TextureImporter:
     edges: []
     weights: []
   spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

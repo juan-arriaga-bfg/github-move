@@ -57,6 +57,21 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         cachedRenderers.Add(rendererLayer);
     }
 
+    protected void RemoveLayerFromCache(Renderer rend)
+    {
+        var rendererLayerParams = rend.GetComponent<RendererLayerParams>();
+        if (rendererLayerParams != null && rendererLayerParams.IsIgnoreRenderLayer) return;
+
+        var rendererLayer = rend.gameObject.GetComponent<RendererLayer>();
+
+        if (rendererLayer == null)
+        {
+            rendererLayer = rend.gameObject.AddComponent<RendererLayer>();
+        }
+        
+        cachedRenderers.Remove(rendererLayer);
+    }
+
     protected virtual void Start()
     {
         if (cachedRenderers.size <= 0)

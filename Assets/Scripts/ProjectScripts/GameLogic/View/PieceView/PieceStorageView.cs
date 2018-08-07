@@ -30,7 +30,7 @@ public class PieceStorageView : PieceBoardElementView
 
     private void UpdateAnimation()
     {
-        animator.speed = storage.Timer.IsExecuteable() ? 1 : 0;
-        animator.Play(animator.GetCurrentAnimatorStateInfo(0).fullPathHash, 0, 0);
+        animator.ResetTrigger(storage.Timer.IsExecuteable() ? "IsStop" : "IsPlay");
+        animator.SetTrigger(storage.Timer.IsExecuteable() ? "IsPlay" : "IsStop");
     }
 }

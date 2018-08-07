@@ -19,6 +19,14 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     {
         this.quest = quest;
 
+        var isComplete = quest.Check();
+        
+        if (isComplete)
+        {
+            transform.SetSiblingIndex(0);
+        }
+        
+        shine.SetActive(isComplete);
         itemUid = PieceType.Parse(quest.WantedPiece);
         ResourcesViewManager.Instance.RegisterView(this);
         UpdateView();
