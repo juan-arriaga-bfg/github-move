@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DG.Tweening.Plugins.Options;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Digests;
 using UnityEngine;
 
 public class SandboxGameController : MonoBehaviour
@@ -98,7 +95,7 @@ public class SandboxGameController : MonoBehaviour
                 "tile_grass_1",
                 "tile_grass_2"
             },
-            GenereateIgnorable(boardController)
+            ignorablePositions:GenereateIgnorable(boardController)
         );
         
         var widthShift = boardController.BoardDef.Width / 4;
@@ -133,14 +130,17 @@ public class SandboxGameController : MonoBehaviour
         );
 
         var shift = 12;
-        var vectorShift = (shift / 2) * boardController.BoardDef.UnitSize;
+        //var vectorShift = (shift / 2) * boardController.BoardDef.UnitSize;
+        var vectorShift = boardController.BoardDef.GetSectorWorldPosition(-shift / 2, -shift / 2, 0);
+        //vectorShift -= new Vector3(boardController.BoardDef.CellWidthInUnit()/2, boardController.BoardDef.CellHeightInUnit()/2);
         boardController.RendererContext.GenerateBackground
         (
-            new Vector3(-vectorShift, 0),
+            vectorShift,
             boardController.BoardDef.Width + shift,
             boardController.BoardDef.Height + shift,
             boardController.BoardDef.UnitSize,
-            "background_tile"
+            "background_tile",
+            GetAllBoardPositions(boardController, pos => pos.RightAtDistance(shift/2).UpAtDistance(shift/2))
         );
         
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
@@ -177,5 +177,29 @@ public class SandboxGameController : MonoBehaviour
         }
 
         return ignorable;
+    }
+
+    private List<BoardPosition> GetAllBoardPositions(BoardController board)
+    {
+        return GetAllBoardPositions(board, pos => pos);
+    }
+    
+    private List<BoardPosition> GetAllBoardPositions(BoardController board, Func<BoardPosition, BoardPosition> modification)
+    {
+        var positions = new List<BoardPosition>();
+        var ignorable = GenereateIgnorable(board);
+        for (int i = 0; i < board.BoardDef.Width; i++)
+        {
+            for (int j = 0; j < board.BoardDef.Height; j++)
+            {
+                var currentPos = new BoardPosition(i, j);
+                if(ignorable.Contains(currentPos))
+                    continue;
+                currentPos = modification(currentPos);
+                positions.Add(currentPos);
+            }
+        }
+
+        return positions;
     }
 }
