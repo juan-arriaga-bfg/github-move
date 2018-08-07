@@ -21,7 +21,10 @@ public class TouchReactionDefinitionObstacleComponent : TouchReactionDefinitionS
                 {
                     At = position,
                     PieceTypeId = GameDataService.Current.ObstaclesManager.GetReward(piece.PieceType),
-                    OnComplete = () => { storage.OnScatter?.Invoke(); }
+                    OnComplete = () =>
+                    {
+                        if(storage.OnScatter != null) storage.OnScatter();
+                    }
                 }
             });
         };

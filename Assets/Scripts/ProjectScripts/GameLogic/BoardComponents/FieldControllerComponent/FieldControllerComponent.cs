@@ -5,8 +5,11 @@ using UnityEngine;
 public class FieldControllerComponent : IECSComponent
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-    
-    public int Guid => ComponentGuid;
+
+    public int Guid
+    {
+        get { return ComponentGuid; }
+    }
 
     private BoardController context;
     

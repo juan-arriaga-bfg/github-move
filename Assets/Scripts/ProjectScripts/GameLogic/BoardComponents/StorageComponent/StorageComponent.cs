@@ -4,7 +4,10 @@ using UnityEngine;
 public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObserver
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-    public int Guid => ComponentGuid;
+    public int Guid
+    {
+        get { return ComponentGuid; }
+    }
 
     public IBoardAction SpawnAction;
     public int SpawnPiece;
@@ -62,7 +65,10 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     private bool InitInSave(BoardPosition position)
     {
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
-        var item = save?.GetStorageSave(position);
+        
+        if(save == null) return false;
+        
+        var item = save.GetStorageSave(position);
 
         if (item == null) return false;
 

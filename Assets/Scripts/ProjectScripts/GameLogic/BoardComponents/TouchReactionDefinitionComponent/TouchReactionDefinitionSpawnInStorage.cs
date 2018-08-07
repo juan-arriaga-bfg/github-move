@@ -65,7 +65,10 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
             From = position,
             Piece = storage.SpawnPiece,
             Positions = positions,
-            OnComplete = () => { storage.OnScatter?.Invoke(); }
+            OnComplete = () =>
+            {
+                if(storage.OnScatter != null) storage.OnScatter();
+            }
         });
     }
 }
