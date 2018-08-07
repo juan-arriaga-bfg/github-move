@@ -33,8 +33,8 @@
 		var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
 		model.Title = "Message";
-		model.Message = string.Format("You need to improve the level of the {0}", pieceName);
-		model.AcceptLabel = string.Format("Go to {0}", pieceName);
+		model.Message = $"You need to improve the level of the {pieceName}";
+		model.AcceptLabel = $"Go to {pieceName}";
         
 		model.OnAccept = () => { board.HintCooldown.Step(GameDataService.Current.PiecesManager.CastlePosition); };
 		model.OnCancel = null;
@@ -47,11 +47,11 @@
 		var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
 
 		model.Title = "Upgrade";
-		model.Message = string.Format("Upgrade to {0} level, for {1}?", def.CurrentLevel() + 1, def.UpgradePrices[0].ToStringIcon(false));
+		model.Message = $"Upgrade to {def.CurrentLevel() + 1} level, for {def.UpgradePrices[0].ToStringIcon(false)}?";
 
 		model.AcceptLabel = "Upgrade";
 		model.CancelLabel = "Cancel";
-		
+
 		model.OnCancel = () => { };
 		model.OnAccept = () =>
 		{

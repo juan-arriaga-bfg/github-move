@@ -24,7 +24,7 @@ public class CastlePieceBuilder : MulticellularPieceBuilder
             TimerOffset = new Vector2(-0.9f, 2.5f)
         };
         
-        var upgrade = new UpgradeComponent();
+        var upgrade = new CastleUpgradeComponent();
         
         piece.RegisterComponent(storage);
         AddObserver(piece, storage);
