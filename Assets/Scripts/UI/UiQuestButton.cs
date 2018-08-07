@@ -16,6 +16,11 @@ public class UiQuestButton : MonoBehaviour, IBoardEventListener
 
         var isComplete = quest.Check();
         
+        if (isComplete)
+        {
+            transform.SetSiblingIndex(0);
+        }
+        
         progressLabel.Text = string.Format("<color=#{0}><size=40>{1}</size></color>/{2}", isComplete ? "FFFFFF" : "FE4704", quest.CurrentAmount, quest.TargetAmount);
         shine.SetActive(isComplete);
     }

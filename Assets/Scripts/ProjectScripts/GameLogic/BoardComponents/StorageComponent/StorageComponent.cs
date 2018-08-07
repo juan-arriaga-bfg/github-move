@@ -4,8 +4,7 @@ using UnityEngine;
 public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObserver
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-    
-    public int Guid { get { return ComponentGuid; } }
+    public int Guid => ComponentGuid;
 
     public IBoardAction SpawnAction;
     public int SpawnPiece;
@@ -16,6 +15,8 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     
     public bool IsTimerShow;
     public bool IsAutoStart = true;
+
+    public Action OnHideBubble;
     
     private ViewDefinitionComponent viewDef;
     
@@ -61,10 +62,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     private bool InitInSave(BoardPosition position)
     {
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
-
-        if (save == null) return false;
-        
-        var item = save.GetStorageSave(position);
+        var item = save?.GetStorageSave(position);
 
         if (item == null) return false;
 
@@ -131,7 +129,8 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
             pieceContext.Context.HintCooldown.AddView(view);
             return;
         }
-        
+
+        view.OnHide = OnHideBubble;
         pieceContext.Context.HintCooldown.RemoweView(view);
     }
 

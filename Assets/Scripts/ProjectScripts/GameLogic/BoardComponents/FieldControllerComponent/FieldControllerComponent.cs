@@ -6,10 +6,7 @@ public class FieldControllerComponent : IECSComponent
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     
-    public int Guid
-    {
-        get { return ComponentGuid; }
-    }
+    public int Guid => ComponentGuid;
 
     private BoardController context;
     
@@ -31,10 +28,9 @@ public class FieldControllerComponent : IECSComponent
         {
             StartField();
             CreateFog();
+//            TestField();
             return;
         }
-        
-        
         
         foreach (var item in fieldDef.Pieces)
         {
@@ -120,9 +116,9 @@ public class FieldControllerComponent : IECSComponent
 
     private void CreateDebug()
     {
-        for (int i = 0; i < context.BoardDef.Width; i++)
+        for (var i = 0; i < context.BoardDef.Width; i++)
         {
-            for (int j = 0; j < context.BoardDef.Height; j++)
+            for (var j = 0; j < context.BoardDef.Height; j++)
             {
                 var cell = context.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell, new BoardPosition(i, j, 20));
                 cell.SetIndex(i, j);
@@ -132,7 +128,7 @@ public class FieldControllerComponent : IECSComponent
     
     private void AddPieces(BoardPosition position, int first, int last)
     {
-        for (int i = first; i < last + 1; i++)
+        for (var i = first; i < last + 1; i++)
         {
             context.ActionExecutor.AddAction(new CreatePieceAtAction
             {

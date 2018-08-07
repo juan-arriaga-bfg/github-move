@@ -15,11 +15,14 @@ public class UICastleItem : MonoBehaviour
 
 	private ChestDef chest;
 	private bool isFree;
+	private bool isClick;
 	private UICastleWindowModel model;
     
 	public void Init(ChestDef def)
 	{
 		chest = def;
+
+		isClick = false;
 		
 		model = UIService.Get.GetCachedModel<UICastleWindowModel>(UIWindowType.CastleWindow);
 
@@ -65,6 +68,10 @@ public class UICastleItem : MonoBehaviour
 
 	public void OnClick()
 	{
+		if(isClick) return;
+		
+		isClick = true;
+		
 		var board = BoardService.Current.GetBoardById(0);
 		if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(GameDataService.Current.PiecesManager.CastlePosition, 1))
 		{

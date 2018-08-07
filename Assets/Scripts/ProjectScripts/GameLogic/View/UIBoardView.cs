@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class UIBoardView : BoardElementView
@@ -11,6 +12,8 @@ public class UIBoardView : BoardElementView
     protected ViewDefinitionComponent controller;
     protected Piece Context;
 
+    public Action OnHide;
+    
     protected int multiSize;
     
     public bool IsShow { get; set; }
@@ -136,8 +139,13 @@ public class UIBoardView : BoardElementView
         sequence.Insert(0f, group.DOFade(0, 0.2f));
         sequence.Insert(0f, viewTransform.DOScale(Vector3.zero, 0.2f));
         sequence.InsertCallback(0.2f, Cash);
+        sequence.InsertCallback(0.15f, () =>
+        {
+            OnHide?.Invoke();
+            OnHide = null;
+        });
     }
-
+    
     private int GetMultiSize(Piece piece)
     {
         var multi = piece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
@@ -152,9 +160,7 @@ public class UIBoardView : BoardElementView
         if(Id == ViewType.None) return;
         
         var viewDef = Context.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
-            
-        if (viewDef == null) return;
-            
-        viewDef.RemoveView(Id);
+
+        viewDef?.RemoveView(Id);
     }
 }
