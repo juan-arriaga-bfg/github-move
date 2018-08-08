@@ -100,6 +100,8 @@ public class UIMainWindowView : IWUIWindowView
     {
         var model = UIService.Get.GetCachedModel<UICodexWindowModel>(UIWindowType.CodexWindow);
         model.ActiveTabIndex = 0;
+        model.CodexContent = GameDataService.Current.CodexManager.GetCodexContent();
+        
         UIService.Get.ShowWindow(UIWindowType.CodexWindow);
     }
 

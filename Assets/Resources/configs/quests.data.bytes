@@ -37,8 +37,8 @@
     ],
     "Conditions": [
       {
-        "$type": "QuestConditionLevel, Assembly-CSharp",
-        "UserLevel": 1
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 1
       }
     ],
     "Message": "Now we can clean up the area from obstacles and build Houses!"
@@ -46,17 +46,17 @@
   {
     "Uid": "3",
     "Price": {
-      "Currency": "C3",
+      "Currency": "A4",
       "Amount": 2
     },
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 4
+        "Amount": 2
       },
       {
         "Currency": "Coin2",
-        "Amount": 1
+        "Amount": 2
       }
     ],
     "Conditions": [
@@ -70,41 +70,17 @@
   {
     "Uid": "4",
     "Price": {
-      "Currency": "B4",
+      "Currency": "C3",
       "Amount": 1
     },
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 5
+        "Amount": 4
       },
       {
         "Currency": "Coin2",
-        "Amount": 1
-      }
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 2
-      }
-    ],
-    "Message": "The miller is ready to thanks well for a good batch of sheaves"
-  },
-  {
-    "Uid": "5",
-    "Price": {
-      "Currency": "A4",
-      "Amount": 2
-    },
-    "Rewards": [
-      {
-        "Currency": "Coin1",
         "Amount": 3
-      },
-      {
-        "Currency": "Coin2",
-        "Amount": 2
       }
     ],
     "Conditions": [
@@ -113,13 +89,37 @@
         "OtherUid": 3
       }
     ],
+    "Message": "The miller is ready to thanks well for a good batch of sheaves"
+  },
+  {
+    "Uid": "5",
+    "Price": {
+      "Currency": "B1",
+      "Amount": 3
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 4
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 3
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 4
+      }
+    ],
     "Message": "Peasant women are asked to give them little wool for knitting"
   },
   {
     "Uid": "6",
     "Price": {
-      "Currency": "C4",
-      "Amount": 2
+      "Currency": "B2",
+      "Amount": 4
     },
     "Rewards": [
       {
@@ -128,7 +128,7 @@
       },
       {
         "Currency": "Coin2",
-        "Amount": 2
+        "Amount": 5
       }
     ],
     "Conditions": [
@@ -142,17 +142,17 @@
   {
     "Uid": "7",
     "Price": {
-      "Currency": "B5",
+      "Currency": "C4",
       "Amount": 1
     },
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 2
+        "Amount": 1
       },
       {
         "Currency": "Coin2",
-        "Amount": 2
+        "Amount": 6
       }
     ],
     "Conditions": [
@@ -166,17 +166,17 @@
   {
     "Uid": "8",
     "Price": {
-      "Currency": "A6",
-      "Amount": 1
+      "Currency": "A5",
+      "Amount": 3
     },
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 3
+        "Amount": 5
       },
       {
         "Currency": "Coin2",
-        "Amount": 2
+        "Amount": 5
       }
     ],
     "Conditions": [
@@ -196,13 +196,13 @@
     "Rewards": [
       {
         "Currency": "Coin3",
-        "Amount": 1
+        "Amount": 2
       }
     ],
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 7
+        "OtherUid": 6
       }
     ],
     "Message": "Now we can clean up the area from obstacles and build Houses!"
@@ -210,23 +210,23 @@
   {
     "Uid": "10",
     "Price": {
-      "Currency": "A7",
-      "Amount": 1
+      "Currency": "A6",
+      "Amount": 2
     },
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 1
+        "Amount": 6
       },
       {
         "Currency": "Coin3",
-        "Amount": 1
+        "Amount": 3
       }
     ],
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 7
+        "OtherUid": 6
       }
     ],
     "Message": "The cook promises to bake a pie if you give him some apples"
@@ -234,23 +234,23 @@
   {
     "Uid": "11",
     "Price": {
-      "Currency": "C6",
-      "Amount": 1
+      "Currency": "E3",
+      "Amount": 3
     },
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 1
+        "Amount": 4
       },
       {
         "Currency": "Coin2",
-        "Amount": 3
+        "Amount": 2
       }
     ],
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 8
+        "OtherUid": 7
       }
     ],
     "Message": "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks."

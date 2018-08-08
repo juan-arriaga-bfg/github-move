@@ -76,7 +76,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             
             ProfileService.Instance.Manager.CheckMigration();
 #if UNITY_EDITOR
-            ProfileService.Instance.Manager.SaveLocalProfile();
+            // ProfileService.Instance.Manager.SaveLocalProfile();
 #endif
             
             LocalizationManager localizationManager = new BaseLocalizationManager();

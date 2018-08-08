@@ -16,7 +16,9 @@ public class UICodexWindowView : UIGenericPopupWindowView
     [SerializeField] private GameObject btnReward;
     [SerializeField] private TextMeshProUGUI btnRewardText;
 
-    private bool isInited;
+    private int lastCodexContentId = -1;
+
+    private List<GameObject> tabs = new List<GameObject>();
     
     public override void OnViewShow()
     {
@@ -38,22 +40,33 @@ public class UICodexWindowView : UIGenericPopupWindowView
     
     private void Init(UICodexWindowModel model)
     {
-        if (isInited)
+        if (model.CodexContent.InstanceId == lastCodexContentId)
         {
             return;
         }
+
+        lastCodexContentId = model.CodexContent.InstanceId;
+        
+        // todo: refresh instead of recreate
+        
        
         tabPrefab.SetActive(false);
         chainPrefab.SetActive(false);
         itemPrefab.SetActive(false);
-        
-        CreateTabs(model.CodexContent.TabDefs);
+
+        for (var i = 0; i < tabs.Count; i++)
+        {
+            var tab = tabs[i];
+            Destroy(tab);
+        }
+
+        tabs = CreateTabs(model.CodexContent.TabDefs);
         ToggleButtons(model);
     }
 
     private void ToggleButtons(UICodexWindowModel model)
     {
-        int reward = model.PendingRewardAmount;
+        int reward = model.CodexContent.PendingRewardAmount;
         bool isRewardAvailable = reward > 0;
         
         btnClose.SetActive(!isRewardAvailable);
@@ -62,8 +75,10 @@ public class UICodexWindowView : UIGenericPopupWindowView
         btnRewardText.text = $"Claim Reward <sprite name=\"Coins\"> {reward}";
     }
 
-    private void CreateTabs(List<CodexTabDef> tabDefs)
+    private List<GameObject> CreateTabs(List<CodexTabDef> tabDefs)
     {
+        var ret = new List<GameObject>();
+        
         for (var i = 0; i < tabDefs.Count; i++)
         {
             var codexTabDef = tabDefs[i];
@@ -77,7 +92,11 @@ public class UICodexWindowView : UIGenericPopupWindowView
             tabGroup.AddTab(tab, i);
 
             CreateChains(tab, codexTabDef);
+            
+            ret.Add(tabGo);
         }
+
+        return ret;
     }
 
     private void CreateChains(CodexTab tab, CodexTabDef tabDef)

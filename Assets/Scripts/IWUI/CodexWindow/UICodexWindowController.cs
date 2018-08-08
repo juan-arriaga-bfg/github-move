@@ -19,7 +19,7 @@ public class UICodexWindowController : IWWindowController
     {
         var model = (UICodexWindowModel)Model;
 
-        CurrencyHellper.Purchase(new CurrencyPair {Currency = Currency.Coins.Name, Amount = model.PendingRewardAmount},
+        CurrencyHellper.Purchase(new CurrencyPair {Currency = Currency.Coins.Name, Amount = GameDataService.Current.CodexManager.GetCodexContent().PendingRewardAmount},
                                  isSuccess =>
                                  {
                                      Save();
@@ -34,5 +34,7 @@ public class UICodexWindowController : IWWindowController
         {
             item.Value.PendingReward.Clear();
         }
+        
+        GameDataService.Current.CodexManager.ClearCodexContentCache();
     }
 }

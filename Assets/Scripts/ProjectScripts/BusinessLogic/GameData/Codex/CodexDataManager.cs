@@ -11,6 +11,8 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
 
     private MatchDefinitionComponent matchDef;
 
+    private CodexContent codexContentCache = null;
+    
     public void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
@@ -24,6 +26,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
     {
         matchDef = null;
         Items = null;
+        ClearCodexContentCache();
 
         LoadData(new ResourceConfigDataMapper<Dictionary<int, CodexChainState>>("configs/codex.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
@@ -81,6 +84,8 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             );
         }
 
+        ClearCodexContentCache();
+        
         return true;
     }
 
@@ -134,5 +139,174 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         }
 
         return false;
+    }
+
+    private List<CodexItemDef> GetCodexItemsForChain(List<int> chain)
+    {
+        // Debug.Log($"Get items: {chain[0]}");
+        
+        List<CodexItemDef> ret = new List<CodexItemDef>();
+
+        var pieceManager = GameDataService.Current.PiecesManager;
+
+        CodexChainState chainState;
+        GameDataService.Current.CodexManager.GetChainState(chain[0], out chainState);
+        
+        for (var i = 0; i < chain.Count; i++)
+        {
+            int pieceId = chain[i];
+
+            bool isUnlocked = chainState?.Unlocked.Contains(pieceId) ?? false;
+            bool isPendingReward = chainState?.PendingReward.Contains(pieceId) ?? false;
+            
+            PieceDef pieceDef = pieceManager.GetPieceDef(pieceId);
+            PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceId);
+            
+            // pieceDef.Reproduction // Create by timer
+            // pieceDef.SpawnResources // Create on consume 
+            
+            CodexItemDef itemDef = new CodexItemDef
+            {
+                PieceTypeDef = pieceTypeDef,
+                ShowArrow = i != chain.Count - 1,
+                PendingReward = isPendingReward ? pieceDef.UnlockBonus : null,
+                Name = pieceDef.Name,
+            };
+            
+            if (isUnlocked)
+            {
+                itemDef.State = isPendingReward ? CodexItemState.PendingReward : CodexItemState.Unlocked;
+            } 
+            // else if (i == locked)
+            // {
+            //     itemDef.State = CodexItemState.PartLock; 
+            // } 
+            else
+            {
+                itemDef.State = CodexItemState.FullLock; 
+            }
+            
+            if (itemDef.PendingReward != null)
+            {
+                if (itemDef.PendingReward.Count != 1 || itemDef.PendingReward[0].Currency != Currency.Coins.Name)
+                {
+                    Debug.LogError($"Codex supports only Coins as reward. Multiply rewards for one item also not supported. Please check config for pieceId: {pieceId}");
+                }
+            }
+            
+            ret.Add(itemDef);
+        }
+
+        return ret;
+    }
+    
+    public CodexContent GetCodexContent()
+    {
+        if (codexContentCache != null)
+        {
+            return codexContentCache;
+        }
+        
+        CodexContent ret = new CodexContent();
+
+        ret.ItemDefs = new List<CodexItemDef>();
+            
+        var board    = BoardService.Current.GetBoardById(0);
+        var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
+
+        // var ids = PieceType.GetIdsByFilter(PieceTypeFilter.Energy);// Energy (exclude chest)
+        // var ids = PieceType.GetIdsByFilter(PieceTypeFilter.Resource);// Coins tab (exclude energy)
+        // Buildings - PieceTypeFilter.Simple (from the rest)
+
+        ret.TabDefs = new List<CodexTabDef>
+        {
+            new CodexTabDef
+            {
+                Name = "Energy",
+                ChainDefs = new List<CodexChainDef>
+                {
+                    new CodexChainDef
+                    {
+                        Name = "Energy 1",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.D1.Id)),
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Energy 2",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.E1.Id)),
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Energy 3",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.F1.Id)),
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Energy 4",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.G1.Id)),
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Energy 5",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.H1.Id)),
+                    },
+                }
+            },
+            new CodexTabDef
+            {
+                Name = "Buildings",
+                ChainDefs = new List<CodexChainDef>
+                {
+                    new CodexChainDef
+                    {
+                        Name = "Buildings 1",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.A1.Id)),
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Buildings 2",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.B1.Id))
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Buildings 3",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.C1.Id))
+                    },
+                }
+            },
+            new CodexTabDef
+            {
+                Name = "Coins",
+                ChainDefs = new List<CodexChainDef>
+                {
+                    new CodexChainDef
+                    {
+                        Name = "Coins 1",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Coin1.Id)),
+                    },
+                }
+            }
+        };
+
+        // todo: optimize
+        foreach (var tabDef in ret.TabDefs)
+        {
+            foreach (var chainDef in tabDef.ChainDefs)
+            {
+                ret.ItemDefs.AddRange(chainDef.ItemDefs);
+                foreach (var itemDef in chainDef.ItemDefs)
+                {
+                    ret.PendingRewardAmount += itemDef.PendingReward?[0].Amount ?? 0;
+                }
+            }
+        }
+
+        codexContentCache = ret;
+        return codexContentCache;
+    }
+
+    public void ClearCodexContentCache()
+    {
+        codexContentCache = null;
     }
 }
