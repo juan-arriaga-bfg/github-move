@@ -49,6 +49,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
             IsCheckMatch = false,
             At = position,
             Pieces = nextPieces,
+            IsMatch = true,
             OnSuccessEvent = list =>
             {
                 for (int i = 0; i < list.Count; i++)
@@ -62,6 +63,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         {
             To = position,
             Positions = matchField,
+            IsMatch = true,
             OnCompleteAction = nextAction
         };
     }

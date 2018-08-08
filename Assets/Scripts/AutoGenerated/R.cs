@@ -199,4 +199,9 @@ public class R
      public const string Zord4Piece = "Zord4Piece";
      public const string BubbleView = "BubbleView";
      public const string MineYPiece = "MineYPiece";
+     public const string MergeParticleSystem = "MergeParticleSystem";
+     public const string OutFrontMergeParticleSystem = "OutFrontMergeParticleSystem";
+     public const string SmolderingParticles = "SmolderingParticles";
+     public const string TrailMergeParticles = "TrailMergeParticles";
+     public const string OutMergeParticleSystem = "OutMergeParticleSystem";
 }
