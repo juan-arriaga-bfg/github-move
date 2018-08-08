@@ -1,7 +1,7 @@
 ﻿[
   {
     "Uid": "O1",
-    "Delay": 10,
+    "Delay": 2,
     "Price": {
       "Currency": "Energy",
       "Amount": 3
@@ -30,7 +30,7 @@
   },
   {
     "Uid": "O2",
-    "Delay": 20,
+    "Delay": 2,
     "Price": {
       "Currency": "Energy",
       "Amount": 5
@@ -45,11 +45,19 @@
         "Amount": 20
       }
     ],
-    "PieceAmount": 2,
+    "PieceAmount": 4,
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 100
+        "Weight": 30
+      },
+      {
+        "Uid": "B1",
+        "Weight": 5
+      },
+      {
+        "Uid": "E1",
+        "Weight": 5
       }
     ],
     "ChestWeights": [
@@ -71,7 +79,7 @@
   },
   {
     "Uid": "O3",
-    "Delay": 30,
+    "Delay": 2,
     "Price": {
       "Currency": "Energy",
       "Amount": 7
@@ -86,19 +94,27 @@
         "Amount": 30
       }
     ],
-    "PieceAmount": 3,
+    "PieceAmount": 5,
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 100
+        "Weight": 30
+      },
+      {
+        "Uid": "E1",
+        "Weight": 5
+      },
+      {
+        "Uid": "E2",
+        "Weight": 5
       },
       {
         "Uid": "A2",
-        "Weight": 100
+        "Weight": 20
       },
       {
         "Uid": "B1",
-        "Weight": 60
+        "Weight": 5
       }
     ],
     "ChestWeights": [
@@ -108,10 +124,6 @@
         "Override": true
       },
       {
-        "Uid": "Chest4",
-        "Weight": 30
-      },
-      {
         "Uid": "Chest2",
         "Weight": 40
       }
@@ -119,7 +131,7 @@
   },
   {
     "Uid": "O4",
-    "Delay": 40,
+    "Delay": 2,
     "Price": {
       "Currency": "Energy",
       "Amount": 10
@@ -168,7 +180,7 @@
   },
   {
     "Uid": "O5",
-    "Delay": 50,
+    "Delay": 2,
     "Price": {
       "Currency": "Energy",
       "Amount": 12
@@ -217,7 +229,7 @@
   },
   {
     "Uid": "OX1",
-    "Delay": 10,
+    "Delay": 2,
     "Price": {
       "Currency": "Energy",
       "Amount": 20
@@ -245,7 +257,7 @@
   },
   {
     "Uid": "OX2",
-    "Delay": 20,
+    "Delay": 2,
     "Price": {
       "Currency": "Energy",
       "Amount": 30
@@ -281,6 +293,7 @@
   },
   {
     "Uid": "OX3",
+    "Delay": 2,
     "Price": {
       "Currency": "Energy",
       "Amount": 40
@@ -325,7 +338,7 @@
   },
   {
     "Uid": "OX4",
-    "Delay": 40,
+    "Delay": 2,
     "Price": {
       "Currency": "Energy",
       "Amount": 50
@@ -369,7 +382,7 @@
   },
   {
     "Uid": "OX5",
-    "Delay": 50,
+    "Delay": 2,
     "Price": {
       "Currency": "Energy",
       "Amount": 60
