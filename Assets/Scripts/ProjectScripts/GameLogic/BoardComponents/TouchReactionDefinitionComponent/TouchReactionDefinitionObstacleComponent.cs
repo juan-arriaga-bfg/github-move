@@ -6,15 +6,12 @@ public class TouchReactionDefinitionObstacleComponent : TouchReactionDefinitionS
     {
         var storageLife = piece.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
         var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
+
+        if (storageLife.Current != storageLife.HP) return base.Make(position, piece);
         
-        if (storageLife.Current == storageLife.HP)
+        storage.OnHideBubble = () =>
         {
-            int tmp;
-            if (storage.Scatter(out tmp, IsAutoStart) == false)
-            {
-                UIErrorWindowController.AddError("Production of the resource is not complete!");
-                return false;
-            }
+            storage.OnHideBubble = null;
             
             piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
             {
@@ -26,13 +23,16 @@ public class TouchReactionDefinitionObstacleComponent : TouchReactionDefinitionS
                     PieceTypeId = GameDataService.Current.ObstaclesManager.GetReward(piece.PieceType),
                     OnComplete = () =>
                     {
-                        if (storage.OnScatter != null) storage.OnScatter();
+                        if(storage.OnScatter != null) storage.OnScatter();
                     }
                 }
             });
-            return true;
-        }
-
-        return base.Make(position, piece);
+        };
+        
+        int tmp;
+        if (storage.Scatter(out tmp, IsAutoStart) != false) return true;
+        
+        UIErrorWindowController.AddError("Production of the resource is not complete!");
+        return false;
     }
 }

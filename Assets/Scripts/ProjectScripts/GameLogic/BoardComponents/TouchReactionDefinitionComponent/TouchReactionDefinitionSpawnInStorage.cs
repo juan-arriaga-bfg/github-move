@@ -3,6 +3,8 @@
 public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComponent
 {
     public bool IsAutoStart = true;
+
+    private int amount;
     
     public override bool IsViewShow(ViewDefinitionComponent viewDefinition)
     {
@@ -14,8 +16,6 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
         var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
 
         if (storage == null) return false;
-
-        int amount;
         
         if(!piece.Context.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, storage.Filling))
         {
@@ -23,33 +23,43 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
             return false;
         }
         
-        if (storage.Scatter(out amount, IsAutoStart) == false)
-        {
-            UIErrorWindowController.AddError("Production of the resource is not complete!");
-            return false;
-        }
+        storage.OnHideBubble = () => { Spawn(position, piece); };
+
+        if (storage.Scatter(out amount, IsAutoStart)) return true;
         
+        UIErrorWindowController.AddError("Production of the resource is not complete!");
+        return false;
+    }
+
+    private void Spawn(BoardPosition position, Piece piece)
+    {
+        var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
+
+        if (storage == null) return;
+        
+        storage.OnHideBubble = null;
+            
         var free = new List<BoardPosition>();
         var positions = new List<BoardPosition>();
 
-        if(!piece.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(position, free, amount))
+        if (piece.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(position, free, amount) == false)
         {
-            return false;
+            return;
         }
 
         foreach (var pos in free)
         {
             positions.Add(pos);
-            if(positions.Count == amount) break;
+            if (positions.Count == amount) break;
         }
-        
+
         if (storage.SpawnAction != null)
         {
             piece.Context.ActionExecutor.AddAction(storage.SpawnAction);
             storage.SpawnAction = null;
-            return true;
+            return;
         }
-        
+
         piece.Context.ActionExecutor.AddAction(new ReproductionPieceAction
         {
             From = position,
@@ -57,10 +67,8 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
             Positions = positions,
             OnComplete = () =>
             {
-                if (storage.OnScatter != null) storage.OnScatter();
+                if(storage.OnScatter != null) storage.OnScatter();
             }
         });
-        
-        return true;
     }
 }

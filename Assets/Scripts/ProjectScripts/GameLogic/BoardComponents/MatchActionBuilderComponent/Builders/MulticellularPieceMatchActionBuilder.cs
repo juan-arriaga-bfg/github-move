@@ -25,7 +25,7 @@ public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
 
         if (nextType == PieceType.None.Id) return null;
 
-        var countForMatch = 1;
+        const int countForMatch = 1;
         var countForMatchDefault = definition.GetPieceCountForMatch(pieceType);
         
         if (countForMatchDefault == -1 || countForMatch < countForMatchDefault) return null;
@@ -50,7 +50,7 @@ public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
     {
         var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType);
         
-        if(def == null || def.CreateRewards == null) return;
+        if(def?.CreateRewards == null) return;
 
         var sequence = DOTween.Sequence();
         

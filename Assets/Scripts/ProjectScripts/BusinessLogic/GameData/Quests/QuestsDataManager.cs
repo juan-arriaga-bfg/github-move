@@ -111,8 +111,8 @@ public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<Q
 			
 			ActiveQuests.Add(quest);
 		}
-		
-		if (OnUpdateActiveQuests != null) OnUpdateActiveQuests();
+
+		OnUpdateActiveQuests?.Invoke();
 	}
 
 	public bool RemoveActiveQuest(Quest quest)
@@ -128,6 +128,11 @@ public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<Q
 		}
         
 		return false;
+	}
+
+	public bool IsNeedToFly(int id)
+	{
+		return ActiveQuests.Find(quest => quest.WantedPiece == id && quest.Check() == false) != null;
 	}
 
 	public bool IsCompleted(int uid)

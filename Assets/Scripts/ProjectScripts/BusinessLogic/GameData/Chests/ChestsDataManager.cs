@@ -56,7 +56,7 @@ public class ChestsDataManager : IECSComponent, IDataManager, IDataLoader<List<C
 
                 var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
                 
-                if(save == null || save.Chests == null) return;
+                if(save?.Chests == null) return;
 
                 foreach (var item in save.Chests)
                 {

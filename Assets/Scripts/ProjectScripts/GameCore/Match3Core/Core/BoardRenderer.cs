@@ -1051,14 +1051,14 @@ public class BoardRenderer : ECSEntity
         viewRoot.localPosition = new Vector3(52f, 61f, 0f);
     }
     
-    public Transform GenerateField(int width, int height, float size, List<string> tiles, IList<BoardPosition> ignorablePositions = null)
+    public Transform GenerateField(int width, int height, float size, List<string> tiles, string backgroundTile = null, IList<BoardPosition> ignorablePositions = null)
     {
         var sectorsContainer = new GameObject("Sectors.Container").transform;
         sectorsContainer.localPosition = new Vector3(0f, 0f, 0f);
         sectorsContainer.localRotation = Quaternion.Euler(54.5f, 0f, -45f);
         sectorsContainer.localScale = Vector3.one;
 
-        var sectorsMesh = GenerateMesh(width, height, size, tiles, ignorablePositions);
+        var sectorsMesh = GenerateMesh(width, height, size, tiles, backgroundTile, ignorablePositions);
         
         var meshGO = new GameObject("_cells");
         var meshTransform = meshGO.transform;
@@ -1088,7 +1088,7 @@ public class BoardRenderer : ECSEntity
          return sectorsContainer.transform;
      }
 
-    private Mesh GenerateMesh(int width, int height, float size, List<string> tiles, IList<BoardPosition> ignorablePositions = null)
+    private Mesh GenerateMesh(int width, int height, float size, List<string> tiles, string ignorableTileName = null, IList<BoardPosition> ignorablePositions = null)
     {
         ignorablePositions = ignorablePositions ?? new List<BoardPosition>();
         Mesh sectorsMesh = new Mesh();
@@ -1105,15 +1105,22 @@ public class BoardRenderer : ECSEntity
         {
             for (int y = 0; y < height; y++)
             {
-                if (ignorablePositions.Contains(new BoardPosition(x, y)))
-                    continue;
-
-                var fullTile = IconService.Current.GetSpriteById(tiles[0]);
-
-                if ((x + y) % 2 == 0)
+                Sprite fullTile;
+                var isIgnorable = ignorablePositions.Contains(new BoardPosition(x, y));
+                if (!string.IsNullOrEmpty(ignorableTileName) && isIgnorable)
                 {
-                    fullTile = IconService.Current.GetSpriteById(tiles[1]);
+                    fullTile = IconService.Current.GetSpriteById(ignorableTileName);
                 }
+                else
+                {
+                    if(isIgnorable)
+                        continue;
+                    if ((x + y) % 2 == 0)
+                        fullTile = IconService.Current.GetSpriteById(tiles[1]);
+                    else
+                        fullTile = IconService.Current.GetSpriteById(tiles[0]);
+                }
+                
 
                 vertices.Add(new Vector3(x * borderWidth, (y + 1) * borderWidth, 0));
                 vertices.Add(new Vector3((x + 1) * borderWidth, (y + 1) * borderWidth, 0));
@@ -1150,7 +1157,7 @@ public class BoardRenderer : ECSEntity
         return sectorsMesh;
     }
 
-    public void GenerateBackground(Vector3 position, int width, int height, float size, string backImage)
+    public void GenerateBackground(Vector3 position, int width, int height, float size, string backImage, IList<BoardPosition> ignorablePositions = null)
     {
         var sectorsContainer = new GameObject("Background").transform;
         sectorsContainer.localPosition = position;
@@ -1159,7 +1166,7 @@ public class BoardRenderer : ECSEntity
 
         var fullTile = IconService.Current.GetSpriteById(backImage);
 
-        var mesh = GenerateMesh(width, height, size, new List<string> {backImage, backImage});
+        var mesh = GenerateMesh(width, height, size, new List<string> {backImage, backImage}, ignorablePositions:ignorablePositions);
         
         var meshGO = new GameObject("_background");
         var meshTransform = meshGO.transform;

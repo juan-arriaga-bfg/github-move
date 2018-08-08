@@ -173,7 +173,6 @@ public class R
      public const string ChestX1Piece = "ChestX1Piece";
      public const string ChestX2Piece = "ChestX2Piece";
      public const string ChestX3Piece = "ChestX3Piece";
-     public const string MineAPiece = "MineAPiece";
      public const string MineCPiece = "MineCPiece";
      public const string MineXPiece = "MineXPiece";
      public const string X1Piece = "X1Piece";

@@ -54,35 +54,10 @@ public class AddResourceView : BoardElementView
 
 	public static void Show(Vector3 position, CurrencyPair resource)
 	{
-		if (resource == null) return;
-		
 		var board = BoardService.Current.GetBoardById(0);
-		
-		if (resource.Currency == Currency.Coins.Name
-		    || resource.Currency == Currency.Energy.Name
-		    || resource.Currency == Currency.Experience.Name)
-		{
-			CurrencyHellper.Purchase(resource, success =>
-			{
-				var flay = ResourcesViewManager.Instance.GetFirstViewById(resource.Currency);
-				
-				ResourcesViewManager.DeliverResource<ResourceCarrier>
-				(
-					resource.Currency,
-					resource.Amount,
-					flay.GetAnchorRect(),
-					board.BoardDef.ViewCamera.WorldToScreenPoint(position),
-					R.ResourceCarrier
-				);
-			});
-			return;
-		}
-
 		var from = board.BoardDef.GetSectorPosition(position);
-		var view = board.RendererContext.CreateBoardElementAt<AddResourceView>(R.AddResourceView, from);
 		
-		view.CachedTransform.localPosition = view.CachedTransform.localPosition + Vector3.up;
-		view.Show(resource);
+		Show(from, resource);
 	}
 
 	public static void Show(BoardPosition position, CurrencyPair resource)
@@ -92,6 +67,7 @@ public class AddResourceView : BoardElementView
 		var board = BoardService.Current.GetBoardById(0);
 		
 		if (resource.Currency == Currency.Coins.Name
+		    || resource.Currency == Currency.Crystals.Name
 		    || resource.Currency == Currency.Energy.Name
 		    || resource.Currency == Currency.Experience.Name)
 		{
