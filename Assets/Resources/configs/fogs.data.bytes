@@ -166,7 +166,7 @@
     },
     {
       "Uid": "Fog 3",
-      "Level": 2,
+      "Level": 3,
       "Condition": {
         "Currency": "Coins",
         "Amount": 450
@@ -252,7 +252,7 @@
     },
     {
       "Uid": "Fog 4",
-      "Level": 3,
+      "Level": 4,
       "Condition": {
         "Currency": "Coins",
         "Amount": 1000
@@ -1469,27 +1469,6 @@
       "Pieces": {}
     },
     {
-      "Uid": "Fog 83",
-      "Level": 10,
-      "Condition": {
-        "Currency": "Coins",
-        "Amount": 1000
-      },
-      "Reward": {
-        "Currency": "Experience",
-        "Amount": 10
-      },
-      "Position": {
-        "X": 17,
-        "Y": 19
-      },
-      "Size": {
-        "X": 8,
-        "Y": 3
-      },
-      "Pieces": {}
-    },
-    {
       "Uid": "Fog 84",
       "Level": 10,
       "Condition": {
@@ -1568,7 +1547,7 @@
         "Y": 22
       },
       "Size": {
-        "X": 9,
+        "X": 5,
         "Y": 2
       },
       "Pieces": {}
@@ -1585,11 +1564,11 @@
         "Amount": 10
       },
       "Position": {
-        "X": 21,
+        "X": 25,
         "Y": 22
       },
       "Size": {
-        "X": 7,
+        "X": 3,
         "Y": 2
       },
       "Pieces": {}
