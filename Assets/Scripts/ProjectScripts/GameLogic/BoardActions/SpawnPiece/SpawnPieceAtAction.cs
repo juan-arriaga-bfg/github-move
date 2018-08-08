@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class SpawnPieceAtAction : IBoardAction
 {
@@ -22,6 +23,11 @@ public class SpawnPieceAtAction : IBoardAction
 	{
 		var piece = gameBoardController.CreatePieceFromType(PieceTypeId);
 
+		if (piece == null)
+		{
+			Debug.LogErrorFormat("Can't create piece with id {0} at {1}", PieceTypeId, At);
+		}
+		
 		At = new BoardPosition(At.X, At.Y, piece.Layer.Index);
 
 		if (At.IsValid == false

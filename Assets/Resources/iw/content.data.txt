@@ -865,11 +865,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "MineAPiece",
-    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Mine/MineAPiece",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "MineCPiece",
     "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Mine/MineCPiece",
     "IsGenerateAutoName": true
@@ -992,6 +987,11 @@
   {
     "Uid": "BubbleView",
     "ResourcePath": "Prefabs/BubbleView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MineYPiece",
+    "ResourcePath": "Prefabs/Pieces/MulticellularPiece/Mine/MineYPiece",
     "IsGenerateAutoName": true
   }
 ]

@@ -30,7 +30,7 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
         
         currentValueAnimated = offset < 0 ? 0 : currentValue;
 
-        this.currentValue += offset;
+        currentValue += offset;
 
         UpdateLabel(currentValue);
     }
@@ -42,7 +42,7 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
         progress.fillAmount = Mathf.Clamp(value/manager.Price, 0f, 1f);
         
 #if UNITY_EDITOR
-        amountLabel.Text = string.Format("{0}/{1}", value, manager.Price);
+        amountLabel.Text = $"{Mathf.Max(0, value)}/{manager.Price}";
 #endif
         
         if(CurrencyHellper.IsCanPurchase(itemUid, manager.Price) == false) return;

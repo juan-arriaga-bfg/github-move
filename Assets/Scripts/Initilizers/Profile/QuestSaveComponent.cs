@@ -20,7 +20,7 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
     
     private List<int> completed;
     
-    [JsonProperty]
+//    [JsonProperty]
     public List<QuestSaveItem> Castle
     {
         get { return castle; }
@@ -34,7 +34,7 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
         set { active = value; }
     }
     
-    [JsonProperty]
+//    [JsonProperty]
     public List<TaskSaveItem> Market
     {
         get { return market; }
@@ -69,7 +69,7 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
         
         foreach (var quest in manager.ActiveQuests)
         {
-            active.Add(new QuestSaveItem{Uid = quest.Def.Uid, Progress = GetSaveCount(quest.WantedPiece, quest.CurrentAmount)});
+            active.Add(new QuestSaveItem{Uid = quest.Def.Uid, Progress = quest.CurrentAmount});
         }
         
         active.Sort((a, b) => a.Uid.CompareTo(b.Uid));

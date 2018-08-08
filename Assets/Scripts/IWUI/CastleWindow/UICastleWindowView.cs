@@ -36,14 +36,9 @@ public class UICastleWindowView : UIGenericPopupWindowView
         
         content.anchoredPosition = new Vector2(-375, 0);
         scroll.enabled = false;
-    }
-
-    public override void OnViewShowCompleted()
-    {
-        base.OnViewShowCompleted();
-
+        
         DOTween.Kill(content);
-        content.DOAnchorPosX(0, 2.5f)
+        content.DOAnchorPosX(0, 1.5f)
             .SetEase(Ease.InOutBack)
             .SetId(content)
             .OnComplete(() =>

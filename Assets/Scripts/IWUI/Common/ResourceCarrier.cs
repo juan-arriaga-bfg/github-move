@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,8 @@ public class ResourceCarrier : IWUIWindowViewController, IResourceCarrier
 	[SerializeField] private Transform iconShadowTransform;
 	
 	[SerializeField] private CanvasGroup iconShadowCanvasGroup;
+
+	public Action Callback;
 
 	protected IResourceCarrierView view;
 
@@ -56,9 +59,16 @@ public class ResourceCarrier : IWUIWindowViewController, IResourceCarrier
 	    this.targetScale = Vector3.one;
 	    this.upScale = 1.6f;
 	    this.isUseFallback = true;
-
-
+	    
 		return this;
+    }
+	
+    public IResourceCarrier RefreshIcon(string id)
+    {
+	    icon.sprite = IconService.Instance.Manager.GetSpriteById(id);
+	    iconShadow.sprite = icon.sprite;
+	    
+	    return this;
     }
 	
     public IResourceCarrier SetTargetScale(Vector3 targetScale)
@@ -199,7 +209,10 @@ public class ResourceCarrier : IWUIWindowViewController, IResourceCarrier
 	
 	protected virtual void OnComplete()
 	{
-	    if (view == null)
+		Callback?.Invoke();
+		Callback = null;
+
+		if (view == null)
 	    {
 		    UIService.Get.ReturnCachedObject(gameObject);
 	        return;

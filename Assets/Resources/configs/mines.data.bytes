@@ -1,8 +1,8 @@
 [
   {
-    "Uid": "Mine 2",
+    "Uid": "Mine 1",
     "Skin": "MineC",
-    "Delay": 120,
+    "Delay": 2,
     "Size": 25,
     "Price": {
       "Currency": "Energy",
@@ -22,7 +22,33 @@
     },
     "Position": {
       "X": 15,
-      "Y": 6
+      "Y": 5
+    }
+  },
+  {
+    "Uid": "Mine2",
+    "Skin": "MineC",
+    "Delay": 2,
+    "Size": 30,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 15
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 9
+    },
+    "Reward": {
+      "Currency": "ChestX1",
+      "Amount": 1
+    },
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 20
+    },
+    "Position": {
+      "X": 18,
+      "Y": 3
     }
   }
 ]

@@ -6,7 +6,8 @@ public class PieceBoardElementView : BoardElementView
     public Piece Piece { get; set; }
 
     [SerializeField] private Transform selectionView;
-
+    [SerializeField] private SpriteRenderer sprite;
+    
     private Animation cachedSelectionAnimation;
 
     private const string selectionActiveAnimationName = "PieceSelectionGrid";
@@ -14,7 +15,7 @@ public class PieceBoardElementView : BoardElementView
     private readonly ViewAnimationUid selectedAnimationId = new ViewAnimationUid();
 
     private DraggablePieceComponent draggable;
-
+    
     public DraggablePieceComponent Draggable
     {
         get
@@ -27,12 +28,19 @@ public class PieceBoardElementView : BoardElementView
     
     private SpriteRenderer selectionSprite;
     private Color baseColor;
-    private Color dragErrorColor = new Color(0.6235294f, 0, 0.05653697f);
+    private Color dragErrorColor = new Color(0.69f, 0.2f, 0.2f);
+    private Color dragSpriteErrorColor = new Color(1f, 0.65f, 0.65f, 0.8f);
     
     public virtual void Init(BoardRenderer context, Piece piece)
     {
         base.Init(context);
 
+        if (sprite == null)
+        {
+            var view = transform.Find("View");
+            sprite = view.GetComponentInChildren<SpriteRenderer>();
+        }
+        
         Piece = piece;
         Piece.ActorView = this;
         
@@ -68,11 +76,23 @@ public class PieceBoardElementView : BoardElementView
         {
             lastBoardPosition = boardPos;
             var duration = 0.2f;
+           
             DOTween.Kill(animationUid);
+            var sequence = DOTween.Sequence().SetId(animationUid);
             if (Draggable.IsValidDrag(boardPos))
-                selectionSprite.DOColor(baseColor, duration).SetId(animationUid);
+            {
+                if (sprite != null)
+                    sequence.Insert(0f, sprite.DOColor(Color.white, duration));
+                sequence.Insert(0f, selectionSprite.DOColor(baseColor, duration));
+            }
             else
-                selectionSprite.DOColor(dragErrorColor, duration).SetId(animationUid);
+            {
+                if (sprite != null)
+                    sequence.Insert(0f, sprite.DOColor(dragSpriteErrorColor, duration));
+                sequence.Insert(0f, selectionSprite.DOColor(dragErrorColor, duration));
+            }
+
+            
         }
         
         selectionView.gameObject.SetActive(true);
@@ -93,7 +113,8 @@ public class PieceBoardElementView : BoardElementView
     
     public virtual void OnDragStart(BoardPosition boardPos, Vector2 worldPos)
     {
-        
+        lastBoardPosition = boardPos;
+        OnDrag(boardPos, worldPos);
     }
 
     public virtual void OnDragEnd(BoardPosition boardPos, Vector2 worldPos)
@@ -102,6 +123,7 @@ public class PieceBoardElementView : BoardElementView
         
         if (selectionView == null) return;
         DOTween.Kill(animationUid);
+        sprite.color = Color.white;
         selectionSprite.color = baseColor;
         selectionView.gameObject.SetActive(false);
     }
