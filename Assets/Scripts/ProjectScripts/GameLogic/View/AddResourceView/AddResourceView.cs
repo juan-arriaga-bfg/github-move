@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class AddResourceView : BoardElementView 
 {
-	[SerializeField] private SpriteRenderer icon;
 	[SerializeField] private NSText amountLabel;
 
 	private const float duration = 1f;
@@ -11,10 +10,7 @@ public class AddResourceView : BoardElementView
 	private void Show(CurrencyPair resource)
 	{
 		var color = resource.Amount < 0 ? "EE4444" : "FFFFFF";
-		var value = $"{(resource.Amount < 0 ? "" : "+")}{resource.Amount}";
-		
-		icon.sprite = IconService.Current.GetSpriteById(resource.Currency);
-		icon.transform.localScale = Vector3.one * (1.5f - icon.sprite.rect.height / 106f);
+		var value = $"{(resource.Amount < 0 ? "" : "+")}{resource.ToStringIcon(false)}";
 		
 		amountLabel.Text = $"<color=#{color}>{value}</color>";
 		
@@ -23,7 +19,6 @@ public class AddResourceView : BoardElementView
 		var sequence = DOTween.Sequence().SetId(animationUid);
 		
 		sequence.Insert(0, CachedTransform.DOMove(CachedTransform.position + Vector3.up, duration));
-		sequence.Insert(duration*0.5f, icon.DOFade(0f, duration));
 		sequence.Insert(duration*0.5f, amountLabel.TextLabel.DOFade(0f, duration));
 		sequence.InsertCallback(duration * 0.5f, () => { CurrencyHellper.Purchase(resource); });
 		
@@ -35,8 +30,6 @@ public class AddResourceView : BoardElementView
 		base.ResetViewOnDestroy();
 		
 		DOTween.Kill(animationUid);
-		
-		icon.color = Color.white;
 		
 		var tColor = amountLabel.TextLabel.color;
 		
