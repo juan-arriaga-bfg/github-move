@@ -167,10 +167,10 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             
             CodexItemDef itemDef = new CodexItemDef
             {
+                PieceDef = pieceDef,
                 PieceTypeDef = pieceTypeDef,
                 ShowArrow = i != chain.Count - 1,
                 PendingReward = isPendingReward ? pieceDef.UnlockBonus : null,
-                Name = pieceDef.Name,
             };
             
             if (isUnlocked)
@@ -296,7 +296,12 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                 ret.ItemDefs.AddRange(chainDef.ItemDefs);
                 foreach (var itemDef in chainDef.ItemDefs)
                 {
-                    ret.PendingRewardAmount += itemDef.PendingReward?[0].Amount ?? 0;
+                    int amount = itemDef.PendingReward?[0].Amount ?? 0;
+                    if (amount > 0)
+                    {
+                        ret.PendingRewardAmount += amount;
+                        tabDef.PendingReward = true;
+                    }
                 }
             }
         }

@@ -10,13 +10,14 @@ public class CodexItemDef
     public List<CurrencyPair> PendingReward;
     public bool ShowArrow;
     public CodexItemState State;
-    public string Name;
+    public PieceDef PieceDef;
 }
 
 public class CodexTabDef
 {
     public string Name;
     public List<CodexChainDef> ChainDefs;
+    public bool PendingReward;
 }
 
 public class CodexChainDef

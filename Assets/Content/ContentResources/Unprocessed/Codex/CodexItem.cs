@@ -20,6 +20,8 @@ public class CodexItem : MonoBehaviour
     [SerializeField] private GameObject questionMark;
     [SerializeField] private GameObject arrow;
     [SerializeField] private GameObject shine;
+    [SerializeField] private CodexItemDropPanel dropPanel;
+    [SerializeField] private GameObject exclamationMark;
 
     private CodexItemState state;
 
@@ -56,6 +58,7 @@ public class CodexItem : MonoBehaviour
                 sprite = GetPieecSprite();
                 captionText = GetCaption();
                 EnableShine();
+                exclamationMark.SetActive(true);
                 break;
             
             case CodexItemState.Unlocked:
@@ -70,6 +73,8 @@ public class CodexItem : MonoBehaviour
         pieceImage.sprite = sprite;
         caption.text = captionText;
         
+        dropPanel.Init(itemDef);
+        
         Debug.Log($"[CodexItem] => Init {itemDef.PieceTypeDef.Abbreviations[0]} as {state}");
     }
 
@@ -77,6 +82,7 @@ public class CodexItem : MonoBehaviour
     {
         questionMark.SetActive(false);
         shine.SetActive(false);
+        exclamationMark.SetActive(false);
 
         pieceImage.gameObject.SetActive(true);
         pieceImage.material = unlokedMaterial;
@@ -101,6 +107,6 @@ public class CodexItem : MonoBehaviour
     
     private string GetCaption()
     {
-        return def.Name;
+        return def.PieceDef.Name;
     }
 }
