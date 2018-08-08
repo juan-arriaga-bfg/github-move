@@ -38,4 +38,10 @@ public class TabGroup : MonoBehaviour
     {
          ActivateTab(index);
     }
+
+    public void RemoveAllTabs()
+    {
+        tabs.Clear();
+        activeIndex = -1;
+    }
 }

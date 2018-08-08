@@ -59,8 +59,11 @@ public class UICodexWindowView : UIGenericPopupWindowView
             var tab = tabs[i];
             Destroy(tab);
         }
+        
+        tabGroup.RemoveAllTabs();
 
-        tabs = CreateTabs(model.CodexContent.TabDefs);
+        tabs = CreateTabs(model.CodexContent.TabDefs);       
+        
         ToggleButtons(model);
     }
 
