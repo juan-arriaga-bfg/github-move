@@ -6,7 +6,7 @@ public class BubbleView : UIBoardView
     [SerializeField] private NSText message;
     [SerializeField] private NSText button;
     
-    protected override ViewType Id => ViewType.FogState;
+    protected override ViewType Id => ViewType.Bubble;
 
     public override Vector3 Ofset => new Vector3(0, 2f);
 
@@ -19,8 +19,8 @@ public class BubbleView : UIBoardView
     
     protected override void UpdateView()
     {
-        message.Text = "collect a megazor";
-        button.Text = "collect";
+        message.Text = "Build Castle?";
+        button.Text = "Sure!";
     }
     
     public void Сollect()
