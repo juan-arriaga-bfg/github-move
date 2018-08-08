@@ -35,7 +35,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1082738765114680}
-  m_LocalRotation: {x: 0.4539906, y: 0, z: 0, w: 0.8910065}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -55,7 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsFading: 0
   FadeValue: 0
-  duration: 3
+  duration: 0
 --- !u!198 &198972873162247172
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -829,7 +829,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 12.99
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4698,7 +4698,7 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 857d563116d969c4db288a3b910e199d, type: 2}
+  - {fileID: 2100000, guid: f6db31877de1cf44482ffcd13d9d2066, type: 2}
   - {fileID: 2100000, guid: 857d563116d969c4db288a3b910e199d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
