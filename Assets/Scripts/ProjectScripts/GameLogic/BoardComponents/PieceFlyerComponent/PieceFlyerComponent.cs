@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class PieceFlyerComponent : ECSEntity, ILockerComponent
+﻿public class PieceFlyerComponent : ECSEntity, ILockerComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
