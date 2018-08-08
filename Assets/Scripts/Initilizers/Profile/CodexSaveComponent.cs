@@ -9,17 +9,18 @@ public class CodexSaveComponent : ECSEntity, IECSSerializeable
 
     public override int Guid => ComponentGuid;
 
-    [JsonProperty]
+    [JsonProperty("Data")]
     public Dictionary<int, CodexChainState> Data;
 
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
-        Data = GameDataService.Current?.CodexManager?.Items ?? new Dictionary<int, CodexChainState>();
+        var items = GameDataService.Current?.CodexManager?.Items ?? new Dictionary<int, CodexChainState>();
+        Data = items;
     }
-
-    [OnDeserialized]
-    internal void OnDeserialized(StreamingContext context)
-    {
-    }
+    //
+    // [OnDeserialized]
+    // internal void OnDeserialized(StreamingContext context)
+    // {
+    // }
 }

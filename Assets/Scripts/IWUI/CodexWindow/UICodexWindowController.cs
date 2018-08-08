@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class UICodexWindowController : IWWindowController 
 {
@@ -31,7 +32,7 @@ public class UICodexWindowController : IWWindowController
         var items = GameDataService.Current.CodexManager.Items;
         foreach (var item in items)
         {
-            item.Value.PendingReward = item.Value.Unlocked;
+            item.Value.PendingReward.Clear();
         }
     }
 }

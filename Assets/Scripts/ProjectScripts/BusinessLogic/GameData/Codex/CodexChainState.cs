@@ -1,5 +1,9 @@
-﻿public class CodexChainState
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+
+[JsonObject]
+public class CodexChainState
 {
-    public int Unlocked;
-    public int PendingReward; 
+    public HashSet<int> Unlocked = new HashSet<int>();
+    public HashSet<int> PendingReward = new HashSet<int>(); 
 }
