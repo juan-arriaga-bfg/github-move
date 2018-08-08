@@ -13,6 +13,8 @@ public class ResourceCarrier : IWUIWindowViewController, IResourceCarrier
 	
 	[SerializeField] private CanvasGroup iconShadowCanvasGroup;
 
+	public Action Callback;
+
 	protected IResourceCarrierView view;
 
 	protected int offset;
@@ -207,7 +209,10 @@ public class ResourceCarrier : IWUIWindowViewController, IResourceCarrier
 	
 	protected virtual void OnComplete()
 	{
-	    if (view == null)
+		Callback?.Invoke();
+		Callback = null;
+
+		if (view == null)
 	    {
 		    UIService.Get.ReturnCachedObject(gameObject);
 	        return;

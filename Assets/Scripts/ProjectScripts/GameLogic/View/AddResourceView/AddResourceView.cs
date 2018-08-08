@@ -11,21 +11,12 @@ public class AddResourceView : BoardElementView
 	private void Show(CurrencyPair resource)
 	{
 		var color = resource.Amount < 0 ? "EE4444" : "FFFFFF";
-		var value = string.Format("{0}{1}", resource.Amount < 0 ? "" : "+", resource.Amount);
+		var value = $"{(resource.Amount < 0 ? "" : "+")}{resource.Amount}";
 		
-		icon.gameObject.SetActive(resource.Currency != Currency.Experience.Name);
+		icon.sprite = IconService.Current.GetSpriteById(resource.Currency);
+		icon.transform.localScale = Vector3.one * (1.5f - icon.sprite.rect.height / 106f);
 		
-		if (resource.Currency != Currency.Experience.Name)
-		{
-			icon.sprite = IconService.Current.GetSpriteById(resource.Currency);
-			icon.transform.localScale = Vector3.one * (1.5f - icon.sprite.rect.height / 106f);
-		}
-		else
-		{
-			value += " EXP";
-		}
-		
-		amountLabel.Text = string.Format("<color=#{0}>{1}</color>", color, value);
+		amountLabel.Text = $"<color=#{color}>{value}</color>";
 		
 		DOTween.Kill(animationUid);
 		
@@ -76,7 +67,7 @@ public class AddResourceView : BoardElementView
 				var flay = ResourcesViewManager.Instance.GetFirstViewById(resource.Currency);
 				var from = board.BoardDef.GetPiecePosition(position.X, position.Y);
 				
-				ResourcesViewManager.DeliverResource<ResourceCarrier>
+				var carriers = ResourcesViewManager.DeliverResource<ResourceCarrier>
 				(
 					resource.Currency,
 					resource.Amount,
@@ -84,13 +75,20 @@ public class AddResourceView : BoardElementView
 					board.BoardDef.ViewCamera.WorldToScreenPoint(from),
 					R.ResourceCarrier
 				);
+
+				carriers[carriers.Count - 1].Callback = () => { ShowCounter(board, position, resource); };
 			});
 			return;
 		}
-		
+
+		ShowCounter(board, position, resource);
+	}
+
+	private static void ShowCounter(BoardController board, BoardPosition position, CurrencyPair resource)
+	{
 		var view = board.RendererContext.CreateBoardElementAt<AddResourceView>(R.AddResourceView, position);
 		
 		view.CachedTransform.localPosition = view.CachedTransform.localPosition + Vector3.up;
 		view.Show(resource);
-	}
+	} 
 }

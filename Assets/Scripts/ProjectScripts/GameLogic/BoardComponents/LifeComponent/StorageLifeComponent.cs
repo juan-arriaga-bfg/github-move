@@ -40,7 +40,11 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
         OnTimerStart();
     }
 
-    public virtual void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)
+    public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
+    {
+    }
+
+    public virtual void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
     }
 
@@ -71,7 +75,7 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
             
             isSuccess = true;
             
-            Damage(Worker == null ? 1 : Worker.Amount);
+            Damage(Worker?.Amount ?? 1);
             
             storage.Timer.Start();
         });

@@ -4,7 +4,7 @@ using UnityEngine;
 public class BoardController : ECSEntity,
     IActionExecuteComponent, IBoardEventsComponent, IBoardLoggerComponent, IBoardLogicComponent, IBoardDefinitionComponent, IBoardStatesComponent, ISessionBoardStateComponent,
     IBoardSystemProcessor, IBoardRendererComponent, IBoardManipulatorComponent, IBoardRandomComponent, IReproductionLogicComponent, IEnemiesLogicComponent,
-    IProductionLogicComponent, IWorkerCurrencyLogicComponent, IHintCooldownComponent
+    IProductionLogicComponent, IWorkerCurrencyLogicComponent, IHintCooldownComponent, IPartPiecesLogicComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -100,6 +100,12 @@ public class BoardController : ECSEntity,
     public HintCooldownComponent HintCooldown
     {
         get { return hintCooldown ?? (hintCooldown = GetComponent<HintCooldownComponent>(HintCooldownComponent.ComponentGuid)); }
+    }
+    
+    protected PartPiecesLogicComponent partPiecesLogic;
+    public PartPiecesLogicComponent PartPiecesLogic
+    {
+        get { return partPiecesLogic ?? (partPiecesLogic = GetComponent<PartPiecesLogicComponent>(PartPiecesLogicComponent.ComponentGuid)); }
     }
     
     private Dictionary<int, IPieceBuilder> pieceBuilderDef;

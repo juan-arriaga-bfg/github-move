@@ -53,7 +53,11 @@ public class CastleUpgradeComponent : IECSComponent, IPieceBoardObserver, IBoard
         thisContext.Context.BoardEvents.AddListener(this, GameEventsCodes.CreatePiece);
     }
 
-    public void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)
+    public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
+    {
+    }
+
+    public void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
     }
 

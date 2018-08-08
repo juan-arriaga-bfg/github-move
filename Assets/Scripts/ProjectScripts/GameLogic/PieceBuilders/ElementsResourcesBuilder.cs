@@ -142,11 +142,18 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Coin4.Id, R.Coin4Piece);
         dict.Add(PieceType.Coin5.Id, R.Coin5Piece);
         
+        dict.Add(PieceType.Zord1.Id, R.Zord1Piece);
+        dict.Add(PieceType.Zord2.Id, R.Zord2Piece);
+        dict.Add(PieceType.Zord3.Id, R.Zord3Piece);
+        dict.Add(PieceType.Zord4.Id, R.Zord4Piece);
+        
         return dict;
     }
 
     private Dictionary<int, string> AddMulticellularPiece(Dictionary<int, string> dict)
     {
+        dict.Add(PieceType.MegaZord.Id, R.MegaZord);
+        
         dict.Add(PieceType.MineX.Id, R.MineXPiece);
         dict.Add(PieceType.MineC.Id, R.MineCPiece);
         dict.Add(PieceType.MineY.Id, R.MineYPiece);
@@ -233,7 +240,8 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.Production, R.ProductionView);
         dict.Add((int)ViewType.ProductionWarning, R.ProductionWarningView);
         dict.Add((int)ViewType.MineState, R.ChangeMineStateView);
-
+        dict.Add((int)ViewType.Bubble, R.BubbleView);
+        dict.Add((int)ViewType.MergeParticle, R.MergeParticleSystem);
         return dict;
     }
 }

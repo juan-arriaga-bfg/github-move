@@ -26,6 +26,13 @@ public class MatchDefinitionComponent : ECSEntity
         
         return definition.TryGetValue(pieceId, out def) ? def.Count : -1;
     }
+
+    public List<List<int>> GetPattern(int pieceId)
+    {
+        PieceMatchDef def;
+        
+        return definition.TryGetValue(pieceId, out def) ? def.Pattern : new List<List<int>>();
+    }
     
     public int GetNext(int pieceId, bool checkIgnore = true)
     {
