@@ -1,6 +1,5 @@
-﻿public class CodexDef
+﻿public class CodexChainState
 {
-    public int ChainId;
     public int Unlocked;
     public int PendingReward; 
 }

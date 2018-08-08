@@ -102,4 +102,19 @@ public class UIMainWindowView : IWUIWindowView
         model.ActiveTabIndex = 0;
         UIService.Get.ShowWindow(UIWindowType.CodexWindow);
     }
+
+    public void Debug1()
+    {
+        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.D2.Id);
+    }
+    
+    public void Debug2()
+    {
+        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.D3.Id);
+    }
+    
+    public void Debug3()
+    {
+        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.D4.Id);
+    }
 }

@@ -31,7 +31,7 @@ public class UICodexWindowController : IWWindowController
         var items = GameDataService.Current.CodexManager.Items;
         foreach (var item in items)
         {
-            item.PendingReward = -1;
+            item.Value.PendingReward = item.Value.Unlocked;
         }
     }
 }

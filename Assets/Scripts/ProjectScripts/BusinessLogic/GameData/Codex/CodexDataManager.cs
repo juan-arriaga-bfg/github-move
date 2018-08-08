@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<List<CodexDef>>
+public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<List<CodexChainState>>
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
     public int Guid => ComponentGuid;
 
-    public List<CodexDef> Items = new List<CodexDef>();
-	
+    public Dictionary<int, CodexChainState> Items = new Dictionary<int, CodexChainState>();
+
+    private MatchDefinitionComponent matchDef; 
+    
     public void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
@@ -20,7 +22,9 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<List<Co
 	
     public void Reload()
     {
-        Items = new List<CodexDef>();
+        matchDef = null;
+        
+        Items = new Dictionary<int, CodexChainState>();
         var save = ProfileService.Current.GetComponent<CodexSaveComponent>(CodexSaveComponent.ComponentGuid);
         if (save != null)
         {
@@ -51,8 +55,44 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<List<Co
     //         });
     // }
     
-    public void LoadData(IDataMapper<List<CodexDef>> dataMapper)
+    public void LoadData(IDataMapper<List<CodexChainState>> dataMapper)
     {
         
+    }
+
+    public void OnPieceBuilded(int id)
+    {
+        if (IsPieceUnlocked(id))
+        {
+            return;
+        }
+        
+        CodexChainState state;
+        if (Items.TryGetValue(id, out state))
+        {
+            state.Unlocked = Mathf.Max(state.Unlocked, id);
+        }
+        
+        Debug.LogWarning($"[CodexDataManager] => OnPieceBuilded({id}) can't find corresponded chain.");
+    }
+
+    public bool IsPieceUnlocked(int id)
+    {
+        if (matchDef == null)
+        {
+            var board = BoardService.Current.GetBoardById(0);
+            matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
+        }
+        
+        int firstInChain = matchDef.GetFirst(id);
+        
+        CodexChainState state;
+        if (Items.TryGetValue(id, out state))
+        {
+            return state.Unlocked <= id;
+        }
+
+        Debug.LogWarning($"[CodexDataManager] => IsPieceUnlocked({id}) can't find corresponded chain.");
+        return true;
     }
 }

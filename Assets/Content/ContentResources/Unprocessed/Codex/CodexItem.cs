@@ -87,7 +87,7 @@ public class CodexItem : MonoBehaviour
 
         DOTween.Kill(shine);
         
-        shine.transform.DOLocalRotate(new Vector3(0, 0, 360), 5.5f, RotateMode.LocalAxisAdd)
+        shine.transform.DORotate(new Vector3(0, 0, 360), 5.5f, RotateMode.LocalAxisAdd)
              .SetId(shine)
              .SetLoops(-1);
     }

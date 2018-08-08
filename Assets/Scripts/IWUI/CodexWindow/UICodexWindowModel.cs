@@ -67,12 +67,16 @@ public class UICodexWindowModel : IWWindowModel
             PieceDef pieceDef = pieceManager.GetPieceDef(pieceId);
             PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceId);
             
+            // pieceDef.Reproduction // Create by timer
+            // pieceDef.SpawnResources // Create on consume 
+            
             CodexItemDef itemDef = new CodexItemDef
             {
                 PieceTypeDef = pieceTypeDef,
                 ShowArrow = i != chain.Count - 1,
                 PendingReward = pieceDef.UnlockBonus,
-                Name = pieceDef.Name
+                Name = pieceDef.Name,
+                
             };
             
             if (i < locked)
@@ -116,6 +120,10 @@ public class UICodexWindowModel : IWWindowModel
             var board    = BoardService.Current.GetBoardById(0);
             var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
 
+            // var ids = PieceType.GetIdsByFilter(PieceTypeFilter.Energy);// Energy (exclude chest)
+            // var ids = PieceType.GetIdsByFilter(PieceTypeFilter.Resource);// Coins tab (exclude energy)
+            // Buildings - PieceTypeFilter.Simple (from the rest)
+            
             CodexContent content = new CodexContent
             {
                 TabDefs = new List<CodexTabDef>
@@ -129,7 +137,7 @@ public class UICodexWindowModel : IWWindowModel
                             {
                                 Name = "Energy 1",
                                 ItemDefs = GetCodexItems(matchDef.GetChain(PieceType.D1.Id)),
-                                UnlockedByDefaultCount = 2
+                                UnlockedByDefaultCount = 1
                             },
                             new CodexChainDef
                             {

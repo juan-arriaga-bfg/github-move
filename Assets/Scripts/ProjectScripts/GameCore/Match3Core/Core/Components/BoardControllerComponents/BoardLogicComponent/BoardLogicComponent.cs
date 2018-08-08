@@ -306,6 +306,8 @@ public class BoardLogicComponent : ECSEntity,
         
         PieceFlyer.Fly(piece.PieceType, x, y);
         
+        GameDataService.Current.CodexManager.OnPieceBuilded(piece.PieceType);
+        
         return true;
     }
 
