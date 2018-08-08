@@ -3,10 +3,7 @@
 public class ReproductionPieceComponent : IECSComponent, IPieceBoardObserver
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-    public int Guid
-    {
-        get { return ComponentGuid; }
-    }
+    public int Guid { get { return ComponentGuid; } }
     
     public CurrencyPair Child { get; set; }
 
@@ -28,7 +25,11 @@ public class ReproductionPieceComponent : IECSComponent, IPieceBoardObserver
         contextPiece.Context.ReproductionLogic.Add(this);
     }
 
-    public void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece context = null)
+    public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
+    {
+    }
+
+    public void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
     {
     }
 

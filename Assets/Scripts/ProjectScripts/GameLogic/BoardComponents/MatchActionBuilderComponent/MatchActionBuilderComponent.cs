@@ -35,6 +35,18 @@ public class MatchActionBuilderComponent : ECSEntity
         
         return this;
     }
+
+    public bool CheckMatch(List<BoardPosition> matchField, int pieceType, BoardPosition position, out int nextType)
+    {
+        IMatchActionBuilder builder;
+
+        if (builders.TryGetValue(pieceType, out builder) == false)
+        {
+            builder = defaultBuilder;
+        }
+        
+        return builder.Check(context.MatchDefinition, matchField, pieceType, position, out nextType);
+    }
     
     public IBoardAction GetMatchAction(List<BoardPosition> matchField, int pieceType, BoardPosition position)
     {

@@ -128,6 +128,7 @@ public class DragAndCheckMatchAction : IBoardAction
 		}
 		
 		logic.MovePieceFromTo(From, To);
+		
 		MovePiece(board, From, To);
 		return true;
 	}
@@ -190,18 +191,12 @@ public class DragAndCheckMatchAction : IBoardAction
 			logic.AddPieceToBoardSilent(target.X, target.Y, saveTarget[index]);
 				
 			var observerTo = saveTarget[index].GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
-			if (observerTo != null)
-			{
-				observerTo.OnMovedFromTo(saveTarget[index].CachedPosition, target);
-			}
+			observerTo?.OnMovedFromToFinish(saveTarget[index].CachedPosition, target);
 
 		}
 		
 		var observerFrom = multicellularPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
-		if (observerFrom != null)
-		{
-			observerFrom.OnMovedFromTo(From, To);
-		}
+		observerFrom?.OnMovedFromToFinish(From, To);
 
 		MulticellularPiece = multicellularPiece;
 
@@ -262,7 +257,7 @@ public class DragAndCheckMatchAction : IBoardAction
 			MoveCheckAndAnimation(board);
 			return;
 		}
-			
+		
 		BoardPosition free;
 		var isSwap = CheckSwapLogic(board, out free);
 		
@@ -291,8 +286,6 @@ public class DragAndCheckMatchAction : IBoardAction
 			return false;
 		
 		action = logic.MatchActionBuilder.GetMatchAction(matchField, currentId, To);
-
-		
 		
 		var isMatch = action != null;
 
@@ -303,7 +296,7 @@ public class DragAndCheckMatchAction : IBoardAction
 
 		return isMatch;
 	}
-
+	
 	private bool CheckSwapLogic(BoardController board, out BoardPosition free)
 	{
 		var logic = board.BoardLogic;
@@ -340,8 +333,6 @@ public class DragAndCheckMatchAction : IBoardAction
 		
 		MovePieces(board, free);
 	}
-
-	
 	
 	private void MovePiece(BoardController board, BoardPosition from, BoardPosition to)
 	{
@@ -380,7 +371,6 @@ public class DragAndCheckMatchAction : IBoardAction
 
 		board.RendererContext.AddAnimationToQueue(animation);
 	}
-
 	
 	private void SwapPieces(BoardController board)
 	{
@@ -504,7 +494,6 @@ public class DragAndCheckMatchAction : IBoardAction
 
 		return normalized;
 	}
-	
 	
 	private void MovePieces(BoardController board, BoardPosition free)
 	{
