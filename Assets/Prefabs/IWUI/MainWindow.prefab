@@ -1074,6 +1074,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224921489929171470}
+  - component: {fileID: 114298216232882342}
   m_Layer: 31
   m_Name: ButtonCodex
   m_TagString: Untagged
@@ -2474,6 +2475,21 @@ MonoBehaviour:
   amountLabel: {fileID: 114672592102896450}
   icon: {fileID: 114321058669917492}
   itemUid: Coins
+--- !u!114 &114298216232882342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1924673964895934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4351a8d6d70db45289cf2ac3f6904d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorView: {fileID: 224148027889782014}
+  amountLabel: {fileID: 0}
+  icon: {fileID: 0}
+  itemUid: Piece
 --- !u!114 &114304185946876926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5352,7 +5368,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: -434.05408}
+  m_SizeDelta: {x: 200, y: -780.0001}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224042703790632506
 RectTransform:
@@ -6297,7 +6313,7 @@ RectTransform:
   m_GameObject: {fileID: 1924673964895934}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9999048, y: 0.9999048, z: 0.9999048}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224777552408450014}
   - {fileID: 224705446686623736}
