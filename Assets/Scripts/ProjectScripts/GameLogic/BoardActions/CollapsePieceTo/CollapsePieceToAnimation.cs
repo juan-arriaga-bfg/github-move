@@ -76,6 +76,7 @@ public class MatchPieceToAnimation : BoardAnimation
 		
 		sequence.OnComplete(() =>
 		{
+			ParticleView.Show(R.ExplosionParticleSystem, particlePosition);
 			for (int i = 0; i < points.Count; i++)
 			{
 				context.RemoveElementAt(points[i]);
