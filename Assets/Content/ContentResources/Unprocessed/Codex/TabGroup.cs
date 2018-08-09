@@ -31,6 +31,11 @@ public class TabGroup : MonoBehaviour
         {
             var tab = tabs[i];
             tab.Toggle(i == index);
+
+            if (i == index)
+            {
+                tab.transform.SetAsLastSibling();
+            }
         }
     }
     

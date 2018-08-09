@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#define FORCE_UNLOCK_ALL
+
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Dictionary<int, CodexChainState>>
@@ -157,6 +159,10 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             int pieceId = chain[i];
 
             bool isUnlocked = chainState?.Unlocked.Contains(pieceId) ?? false;
+            
+#if FORCE_UNLOCK_ALL
+            isUnlocked = true;
+#endif
             bool isPendingReward = chainState?.PendingReward.Contains(pieceId) ?? false;
             
             PieceDef pieceDef = pieceManager.GetPieceDef(pieceId);

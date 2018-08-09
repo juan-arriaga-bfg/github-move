@@ -16,8 +16,12 @@ public class CodexTab : Tab
     {
         captionActive.text = def.Name;
         captionDisabled.text = def.Name;
+
+        if (exclamationMarkActive != null)
+        {
+            exclamationMarkActive.SetActive(def.PendingReward);
+        }
         
-        exclamationMarkActive.SetActive(def.PendingReward);
         exclamationMarkDisabled.SetActive(def.PendingReward);
     }
     

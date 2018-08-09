@@ -27,12 +27,12 @@ public class CodexItem : MonoBehaviour
 
     private CodexItemDef def;
     
-    public void Init(CodexItemDef itemDef)
+    public void Init(CodexItemDef itemDef, bool forceHideArrow)
     {
         def = itemDef;
         state = itemDef.State;
 
-        arrow.SetActive(def.ShowArrow);
+        arrow.SetActive(def.ShowArrow && !forceHideArrow);
         
         Reset();
 
@@ -57,7 +57,7 @@ public class CodexItem : MonoBehaviour
             case CodexItemState.PendingReward:
                 sprite = GetPieecSprite();
                 captionText = GetCaption();
-                EnableShine();
+                shine.SetActive(true);
                 exclamationMark.SetActive(true);
                 break;
             
@@ -87,17 +87,6 @@ public class CodexItem : MonoBehaviour
         pieceImage.gameObject.SetActive(true);
         pieceImage.material = unlokedMaterial;
         pieceImage.color = unlockedColor;
-    }
-
-    private void EnableShine()
-    {
-        shine.SetActive(true);
-
-        DOTween.Kill(shine);
-        
-        shine.transform.DORotate(new Vector3(0, 0, 360), 5.5f, RotateMode.LocalAxisAdd)
-             .SetId(shine)
-             .SetLoops(-1);
     }
 
     private Sprite GetPieecSprite()

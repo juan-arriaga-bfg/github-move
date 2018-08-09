@@ -15,6 +15,9 @@ public class UICodexWindowView : UIGenericPopupWindowView
     [SerializeField] private GameObject btnClose;
     [SerializeField] private GameObject btnReward;
     [SerializeField] private TextMeshProUGUI btnRewardText;
+    
+    // If you change this, also change Grid Layout component settings in Chain prefab
+    private const int ITEMS_IN_ROW_COUNT = 6;
 
     private int lastCodexContentId = -1;
 
@@ -47,9 +50,10 @@ public class UICodexWindowView : UIGenericPopupWindowView
 
         lastCodexContentId = model.CodexContent.InstanceId;
         
-        // todo: refresh instead of recreate
+        SetTitle(model.Title);
         
-       
+        // todo: refresh instead of recreate
+
         tabPrefab.SetActive(false);
         chainPrefab.SetActive(false);
         itemPrefab.SetActive(false);
@@ -134,7 +138,9 @@ public class UICodexWindowView : UIGenericPopupWindowView
             itemGo.SetActive(true);
             
             CodexItem item = itemGo.GetComponent<CodexItem>();
-            item.Init(codexItemDef);
+
+            bool forceHideArrow = (i + 1) % ITEMS_IN_ROW_COUNT == 0;
+            item.Init(codexItemDef, forceHideArrow);
             
             chain.AddItem(item);
         }
