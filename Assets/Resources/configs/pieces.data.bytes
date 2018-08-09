@@ -1436,7 +1436,14 @@
     ]
   },
   {
-    "Uid": "Zord1"
+    "Uid": "Zord1",
+    "Name": "Zord1 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "Zord2",
@@ -1444,6 +1451,13 @@
       {
         "Currency": "Experience",
         "Amount": 10
+      }
+    ],
+    "Name": "Zord2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -1454,6 +1468,13 @@
         "Currency": "Experience",
         "Amount": 20
       }
+    ],
+    "Name": "Zord3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
     ]
   },
   {
@@ -1462,6 +1483,13 @@
       {
         "Currency": "Experience",
         "Amount": 30
+      }
+    ],
+    "Name": "Zord4 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
