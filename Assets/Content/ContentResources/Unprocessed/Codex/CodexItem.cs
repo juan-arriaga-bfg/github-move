@@ -37,7 +37,7 @@ public class CodexItem : MonoBehaviour
         Reset();
 
         Sprite sprite = null;
-        string captionText = string.Empty;
+        string captionText = GetCaption();
 
         switch (state)
         {
@@ -51,7 +51,6 @@ public class CodexItem : MonoBehaviour
             case CodexItemState.PartLock:
                 questionMark.SetActive(true);
                 sprite = GetPieecSprite();
-                captionText = GetCaption();
                 
                 pieceImage.material = lockedMaterial;
                 pieceImage.color = lockedColor;
@@ -60,7 +59,7 @@ public class CodexItem : MonoBehaviour
             
             case CodexItemState.PendingReward:
                 sprite = GetPieecSprite();
-                captionText = GetCaption();
+                // captionText = GetCaption();
                 shine.SetActive(true);
                 exclamationMark.SetActive(true);
                 
@@ -71,7 +70,7 @@ public class CodexItem : MonoBehaviour
             
             case CodexItemState.Unlocked:
                 sprite = GetPieecSprite();
-                captionText = GetCaption();
+                // captionText = GetCaption();
                 
                 dropPanel.gameObject.SetActive(true);
                 dropPanel.Init(itemDef);
@@ -107,6 +106,6 @@ public class CodexItem : MonoBehaviour
     
     private string GetCaption()
     {
-        return def.PieceDef.Name;
+        return def?.PieceDef?.Name;
     }
 }

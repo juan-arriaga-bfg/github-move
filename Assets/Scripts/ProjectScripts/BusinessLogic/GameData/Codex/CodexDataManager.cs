@@ -15,6 +15,9 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
 
     private CodexContent codexContentCache = null;
     
+    public delegate void NewItemUnlocked();
+    public NewItemUnlocked OnNewItemUnlocked;
+    
     public void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
@@ -64,7 +67,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         {
             return false;
         }
-
+        
         int firstInChain = matchDef.GetFirst(id);
 
         CodexChainState state;
@@ -87,12 +90,37 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         }
 
         ClearCodexContentCache();
-        
+
+        OnNewItemUnlocked?.Invoke();
+
         return true;
+    }
+
+    public bool IsHidedFromCodex(int id)
+    {
+        // Ignore obstacles
+        var def = PieceType.GetDefById(id);
+        
+        if (def.Filter.Has(PieceTypeFilter.Obstacle))
+        {
+            return true;
+        }
+        
+        if (def.Filter.Has(PieceTypeFilter.Chest))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public bool IsPieceUnlocked(int id)
     {
+        if (IsHidedFromCodex(id))
+        {
+            return true;
+        }
+
         if (Items == null)
         {
             Debug.LogError($"[CodexDataManager] => IsPieceUnlocked({id}) access to saved data before it actually loaded!");
@@ -113,8 +141,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             return state.Unlocked.Contains(id);
         }
 
-        Debug.LogWarning($"[CodexDataManager] => IsPieceUnlocked({id}) can't find corresponded chain.");
-        return true;
+        return false;
     }
 
     public bool GetChainState(int firstId, out CodexChainState state)
@@ -239,17 +266,17 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     new CodexChainDef
                     {
                         Name = "Energy 1",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.D1.Id)),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.F1.Id)),
                     },
                     new CodexChainDef
                     {
                         Name = "Energy 2",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.E1.Id)),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.D1.Id)),
                     },
                     new CodexChainDef
                     {
                         Name = "Energy 3",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.F1.Id)),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.E1.Id)),
                     },
                     new CodexChainDef
                     {

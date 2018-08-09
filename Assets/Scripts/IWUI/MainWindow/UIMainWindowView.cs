@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 public class UIMainWindowView : IWUIWindowView
 {
     [SerializeField] private GameObject pattern;
+    [SerializeField] private CodexButton codexButton;
     
     private List<UiQuestButton> quests = new List<UiQuestButton>();
-    
+
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -15,6 +16,7 @@ public class UIMainWindowView : IWUIWindowView
         var windowModel = Model as UIMainWindowModel;
 
         GameDataService.Current.QuestsManager.OnUpdateActiveQuests += UpdateQuest;
+        GameDataService.Current.CodexManager.OnNewItemUnlocked += OnNewPieceBuilded;
         
         UpdateQuest();
     }
@@ -22,6 +24,7 @@ public class UIMainWindowView : IWUIWindowView
     public override void OnViewClose()
     {
         GameDataService.Current.QuestsManager.OnUpdateActiveQuests -= UpdateQuest;
+        GameDataService.Current.CodexManager.OnNewItemUnlocked -= OnNewPieceBuilded;
         base.OnViewClose();
     }
 
@@ -98,6 +101,8 @@ public class UIMainWindowView : IWUIWindowView
     
     public void OnClickCodex()
     {
+        codexButton.ToggleShine(false);
+        
         var model = UIService.Get.GetCachedModel<UICodexWindowModel>(UIWindowType.CodexWindow);
         model.ActiveTabIndex = 0;
         model.CodexContent = GameDataService.Current.CodexManager.GetCodexContent();
@@ -105,6 +110,11 @@ public class UIMainWindowView : IWUIWindowView
         UIService.Get.ShowWindow(UIWindowType.CodexWindow);
     }
 
+    private void OnNewPieceBuilded()
+    {
+        codexButton.ToggleShine(true);
+    }
+    
     public void Debug1()
     {
         var board = BoardService.Current.GetBoardById(0);
@@ -120,11 +130,11 @@ public class UIMainWindowView : IWUIWindowView
     
     public void Debug2()
     {
-        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.D3.Id);
+        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.A2.Id);
     }
     
     public void Debug3()
     {
-        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.D4.Id);
+        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.B2.Id);
     }
 }
