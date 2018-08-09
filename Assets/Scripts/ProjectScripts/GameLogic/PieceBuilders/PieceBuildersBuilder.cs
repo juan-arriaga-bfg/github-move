@@ -20,7 +20,6 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddSimplePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict.Add(PieceType.MegaZord.Id, new SimplePieceBuilder());
         dict = AddSimplePiece<PartPieceBuilder>(PieceType.Zord1.Id, PieceType.Zord4.Id, dict);
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.A1.Id, PieceType.A9.Id, dict);
@@ -71,6 +70,7 @@ public class PieceBuildersBuilder
     {
         var mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2);
         
+        dict.Add(PieceType.MegaZord.Id, new MulticellularDraggablePieceBuilder{Mask = mask});
         dict = AddMulticellularPiece<MinePieceBuilder>(PieceType.MineC.Id, PieceType.MineY.Id, mask, dict);
         
 //        dict = AddMulticellularPiece<MarketPieceBuilder>(PieceType.Market1.Id, PieceType.Market9.Id, mask, dict);
