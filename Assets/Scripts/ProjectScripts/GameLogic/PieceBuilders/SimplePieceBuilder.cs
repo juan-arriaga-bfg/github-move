@@ -1,4 +1,6 @@
-﻿public class SimplePieceBuilder : GenericPieceBuilder 
+﻿using UnityEngine;
+
+public class SimplePieceBuilder : GenericPieceBuilder 
 {
     public override Piece Build(int pieceType, BoardController context)
     {
@@ -12,10 +14,6 @@
 
         if (def.Reproduction != null)
         {
-            var typeDef = PieceType.GetDefById(pieceType);
-
-            typeDef.Filter.Add(PieceTypeFilter.Reproduction);
-            
             var observer = new ReproductionPieceComponent {Child = def.Reproduction};
         
             piece.RegisterComponent(observer);
@@ -24,17 +22,11 @@
 
         if (def.SpawnResources != null)
         {
-            var typeDef = PieceType.GetDefById(pieceType);
-
-            typeDef.Filter = typeDef.Filter | PieceTypeFilter.Resource;
-            
-            if(def.SpawnResources.Currency == Currency.Energy.Name) typeDef.Filter = typeDef.Filter | PieceTypeFilter.Energy;
-            
             piece.RegisterComponent(new ResourceStorageComponent{Resources = def.SpawnResources});
 		
             piece.RegisterComponent(new TouchReactionComponent()
-                .RegisterComponent(new TouchReactionDefinitionCollectResource())
-                .RegisterComponent(new TouchReactionConditionComponent()));
+                 .RegisterComponent(new TouchReactionDefinitionCollectResource())
+                 .RegisterComponent(new TouchReactionConditionComponent()));
         }
         
         return piece;

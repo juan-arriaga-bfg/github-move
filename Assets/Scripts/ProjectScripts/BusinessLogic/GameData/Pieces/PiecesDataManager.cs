@@ -45,8 +45,13 @@ public class PiecesDataManager : IECSComponent, IDataManager, IDataLoader<List<P
                 
                 foreach (var def in data)
                 {
-                    if (pieces.ContainsKey(def.Piece)) continue;
-                
+                    if (pieces.ContainsKey(def.Piece))
+                    {
+                        continue;
+                    }
+
+                    AssignFilters(def);
+                    
                     pieces.Add(def.Piece, def);
                 }
             }
@@ -56,7 +61,24 @@ public class PiecesDataManager : IECSComponent, IDataManager, IDataLoader<List<P
             }
         });
     }
-    
+
+    private void AssignFilters(PieceDef pieceDef)
+    {
+        PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceDef.Piece);
+
+        if (pieceDef.Reproduction != null)
+        {
+            pieceTypeDef.Filter = pieceTypeDef.Filter.Add(PieceTypeFilter.Reproduction);
+            Debug.Log($"Add Reproduction filter to {pieceTypeDef.Abbreviations[0]}");
+        }
+        
+        if (pieceDef.SpawnResources != null && pieceDef.SpawnResources.Currency == Currency.Energy.Name)
+        {
+            pieceTypeDef.Filter = pieceTypeDef.Filter.Add(PieceTypeFilter.Energy);
+            Debug.Log($"Add Energy filter to {pieceTypeDef.Abbreviations[0]}");
+        }
+    }
+
     public PieceDef GetPieceDef(int id)
     {
         PieceDef def;
