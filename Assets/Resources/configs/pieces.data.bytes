@@ -1,6 +1,7 @@
 [
   {
-    "Uid": "A1"
+    "Uid": "A1",
+    "Name": "A1 Piece"
   },
   {
     "Uid": "A2",
@@ -12,6 +13,13 @@
       {
         "Currency": "Experience",
         "Amount": 5
+      }
+    ],
+    "Name": "A2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
       }
     ]
   },
@@ -26,6 +34,13 @@
         "Currency": "Experience",
         "Amount": 10
       }
+    ],
+    "Name": "A3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      }
     ]
   },
   {
@@ -38,6 +53,13 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "Name": "A4 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -52,6 +74,13 @@
         "Currency": "Experience",
         "Amount": 25
       }
+    ],
+    "Name": "A5 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
     ]
   },
   {
@@ -64,6 +93,13 @@
       {
         "Currency": "Experience",
         "Amount": 50
+      }
+    ],
+    "Name": "A6 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
       }
     ]
   },
@@ -78,6 +114,13 @@
         "Currency": "Experience",
         "Amount": 100
       }
+    ],
+    "Name": "A7 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 20
+      }
     ]
   },
   {
@@ -90,6 +133,13 @@
       {
         "Currency": "Experience",
         "Amount": 200
+      }
+    ],
+    "Name": "A8 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 30
       }
     ]
   },
@@ -104,10 +154,18 @@
         "Currency": "Experience",
         "Amount": 400
       }
+    ],
+    "Name": "A9 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 50
+      }
     ]
   },
   {
-    "Uid": "B1"
+    "Uid": "B1",
+    "Name": "B1 Piece"
   },
   {
     "Uid": "B2",
@@ -119,6 +177,13 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "Name": "B2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -133,6 +198,13 @@
         "Currency": "Experience",
         "Amount": 25
       }
+    ],
+    "Name": "B3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
     ]
   },
   {
@@ -145,6 +217,13 @@
       {
         "Currency": "Experience",
         "Amount": 40
+      }
+    ],
+    "Name": "B4 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
       }
     ]
   },
@@ -159,10 +238,18 @@
         "Currency": "Experience",
         "Amount": 75
       }
+    ],
+    "Name": "B5 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
     ]
   },
   {
-    "Uid": "C1"
+    "Uid": "C1",
+    "Name": "C1 Piece"
   },
   {
     "Uid": "C2",
@@ -174,6 +261,13 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "Name": "C2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -188,6 +282,13 @@
         "Currency": "Experience",
         "Amount": 25
       }
+    ],
+    "Name": "C3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
     ]
   },
   {
@@ -200,6 +301,13 @@
       {
         "Currency": "Experience",
         "Amount": 40
+      }
+    ],
+    "Name": "C4 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
       }
     ]
   },
@@ -214,6 +322,13 @@
         "Currency": "Experience",
         "Amount": 75
       }
+    ],
+    "Name": "C5 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
     ]
   },
   {
@@ -226,6 +341,13 @@
       {
         "Currency": "Experience",
         "Amount": 125
+      }
+    ],
+    "Name": "C6 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
       }
     ]
   },
@@ -240,6 +362,13 @@
         "Currency": "Experience",
         "Amount": 200
       }
+    ],
+    "Name": "C7 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 40
+      }
     ]
   },
   {
@@ -252,6 +381,13 @@
       {
         "Currency": "Experience",
         "Amount": 300
+      }
+    ],
+    "Name": "C8 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 60
       }
     ]
   },
@@ -266,10 +402,18 @@
         "Currency": "Experience",
         "Amount": 500
       }
+    ],
+    "Name": "C9 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 100
+      }
     ]
   },
   {
-    "Uid": "D1"
+    "Uid": "D1",
+    "Name": "D1 Piece"
   },
   {
     "Uid": "D2",
@@ -281,6 +425,13 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "Name": "D2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -299,7 +450,14 @@
     "Reproduction": {
       "Currency": "D1",
       "Amount": 1
-    }
+    },
+    "Name": "D3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "D4",
@@ -316,14 +474,22 @@
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 20
-    }
+    },
+    "Name": "D4 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
+    ]
   },
   {
     "Uid": "E1",
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 1
-    }
+    },
+    "Name": "E1 Piece"
   },
   {
     "Uid": "E2",
@@ -335,6 +501,13 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "Name": "E2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -349,6 +522,13 @@
         "Currency": "Experience",
         "Amount": 25
       }
+    ],
+    "Name": "E3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
     ]
   },
   {
@@ -361,6 +541,13 @@
       {
         "Currency": "Experience",
         "Amount": 40
+      }
+    ],
+    "Name": "E4 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
       }
     ]
   },
@@ -379,10 +566,18 @@
     "Reproduction": {
       "Currency": "E1",
       "Amount": 1
-    }
+    },
+    "Name": "E5 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
   },
   {
-    "Uid": "F1"
+    "Uid": "F1",
+    "Name": "F1 Piece"
   },
   {
     "Uid": "F2",
@@ -394,6 +589,13 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "Name": "F2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -412,7 +614,14 @@
     "Reproduction": {
       "Currency": "F1",
       "Amount": 1
-    }
+    },
+    "Name": "F3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "F4",
@@ -429,7 +638,14 @@
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 10
-    }
+    },
+    "Name": "F4 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
+    ]
   },
   {
     "Uid": "F5",
@@ -446,10 +662,18 @@
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 15
-    }
+    },
+    "Name": "F5 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
   },
   {
-    "Uid": "G1"
+    "Uid": "G1",
+    "Name": "G1 Piece"
   },
   {
     "Uid": "G2",
@@ -461,6 +685,13 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "Name": "G2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -479,7 +710,14 @@
     "Reproduction": {
       "Currency": "G1",
       "Amount": 1
-    }
+    },
+    "Name": "G3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "G4",
@@ -496,10 +734,18 @@
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 20
-    }
+    },
+    "Name": "G4 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
+    ]
   },
   {
-    "Uid": "H1"
+    "Uid": "H1",
+    "Name": "H1 Piece"
   },
   {
     "Uid": "H2",
@@ -511,6 +757,13 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "Name": "H2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -529,7 +782,14 @@
     "Reproduction": {
       "Currency": "H1",
       "Amount": 1
-    }
+    },
+    "Name": "H3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "H4",
@@ -546,10 +806,18 @@
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 25
-    }
+    },
+    "Name": "H4 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
+    ]
   },
   {
-    "Uid": "I1"
+    "Uid": "I1",
+    "Name": "I1 Piece"
   },
   {
     "Uid": "I2",
@@ -561,6 +829,13 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "Name": "I2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -574,6 +849,13 @@
       {
         "Currency": "Experience",
         "Amount": 25
+      }
+    ],
+    "Name": "I3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -592,7 +874,14 @@
     "Reproduction": {
       "Currency": "I1",
       "Amount": 1
-    }
+    },
+    "Name": "I4 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
+    ]
   },
   {
     "Uid": "I5",
@@ -609,10 +898,18 @@
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 30
-    }
+    },
+    "Name": "I5 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
   },
   {
-    "Uid": "J1"
+    "Uid": "J1",
+    "Name": "J1 Piece"
   },
   {
     "Uid": "J2",
@@ -624,6 +921,13 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "Name": "J2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -637,6 +941,13 @@
       {
         "Currency": "Experience",
         "Amount": 25
+      }
+    ],
+    "Name": "J3  Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -659,7 +970,14 @@
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 25
-    }
+    },
+    "Name": "J4 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
+    ]
   },
   {
     "Uid": "J5",
@@ -676,10 +994,18 @@
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 30
-    }
+    },
+    "Name": "J5 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
   },
   {
-    "Uid": "X1"
+    "Uid": "X1",
+    "Name": "X1 Piece"
   },
   {
     "Uid": "X2",
@@ -691,6 +1017,13 @@
       {
         "Currency": "Experience",
         "Amount": 10
+      }
+    ],
+    "Name": "X2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -705,6 +1038,13 @@
         "Currency": "Experience",
         "Amount": 25
       }
+    ],
+    "Name": "X3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
     ]
   },
   {
@@ -718,10 +1058,24 @@
         "Currency": "Experience",
         "Amount": 100
       }
+    ],
+    "Name": "X4 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
     ]
   },
   {
-    "Uid": "Chest1"
+    "Uid": "Chest1",
+    "Name": "Chest1 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "Chest2",
@@ -729,6 +1083,13 @@
       {
         "Currency": "Experience",
         "Amount": 1
+      }
+    ],
+    "Name": "Chest2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -739,6 +1100,13 @@
         "Currency": "Experience",
         "Amount": 3
       }
+    ],
+    "Name": "Chest3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
     ]
   },
   {
@@ -747,6 +1115,13 @@
       {
         "Currency": "Experience",
         "Amount": 10
+      }
+    ],
+    "Name": "Chest4 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -757,6 +1132,13 @@
         "Currency": "Experience",
         "Amount": 25
       }
+    ],
+    "Name": "Chest5 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
     ]
   },
   {
@@ -765,6 +1147,13 @@
       {
         "Currency": "Experience",
         "Amount": 50
+      }
+    ],
+    "Name": "Chest6 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -775,6 +1164,13 @@
         "Currency": "Experience",
         "Amount": 100
       }
+    ],
+    "Name": "Chest7 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
     ]
   },
   {
@@ -783,6 +1179,13 @@
       {
         "Currency": "Experience",
         "Amount": 200
+      }
+    ],
+    "Name": "Chest8 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -793,6 +1196,13 @@
         "Currency": "Experience",
         "Amount": 400
       }
+    ],
+    "Name": "Chest9 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
     ]
   },
   {
@@ -800,7 +1210,14 @@
     "SpawnResources": {
       "Currency": "Coins",
       "Amount": 10
-    }
+    },
+    "Name": "Coin1 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "Coin2",
@@ -813,7 +1230,14 @@
     "SpawnResources": {
       "Currency": "Coins",
       "Amount": 35
-    }
+    },
+    "Name": "Coin2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "Coin3",
@@ -826,7 +1250,14 @@
     "SpawnResources": {
       "Currency": "Coins",
       "Amount": 110
-    }
+    },
+    "Name": "Coin3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "Coin4",
@@ -839,7 +1270,14 @@
     "SpawnResources": {
       "Currency": "Coins",
       "Amount": 350
-    }
+    },
+    "Name": "Coin4 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "Coin5",
@@ -852,13 +1290,34 @@
     "SpawnResources": {
       "Currency": "Coins",
       "Amount": 1100
-    }
+    },
+    "Name": "Coin5 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
-    "Uid": "Empty"
+    "Uid": "Empty",
+    "Name": "Empty Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
-    "Uid": "ChestC1"
+    "Uid": "ChestC1",
+    "Name": "ChestC1 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "ChestC2",
@@ -866,6 +1325,13 @@
       {
         "Currency": "Experience",
         "Amount": 10
+      }
+    ],
+    "Name": "ChestC2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -876,10 +1342,24 @@
         "Currency": "Experience",
         "Amount": 25
       }
+    ],
+    "Name": "ChestC3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
     ]
   },
   {
-    "Uid": "ChestX1"
+    "Uid": "ChestX1",
+    "Name": "ChestX1 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "ChestX2",
@@ -887,6 +1367,13 @@
       {
         "Currency": "Experience",
         "Amount": 10
+      }
+    ],
+    "Name": "ChestX2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -897,10 +1384,24 @@
         "Currency": "Experience",
         "Amount": 25
       }
+    ],
+    "Name": "ChestX3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
     ]
   },
   {
-    "Uid": "Basket1"
+    "Uid": "Basket1",
+    "Name": "Basket1 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "Basket2",
@@ -908,6 +1409,13 @@
       {
         "Currency": "Experience",
         "Amount": 10
+      }
+    ],
+    "Name": "Basket2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
@@ -917,6 +1425,13 @@
       {
         "Currency": "Experience",
         "Amount": 25
+      }
+    ],
+    "Name": "Basket3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
