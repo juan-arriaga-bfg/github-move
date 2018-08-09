@@ -60,9 +60,9 @@ public class MatchPieceToAnimation : BoardAnimation
 			var boardElement = context.GetElementAt(points[i]);
 			if (points[i].Equals(Action.To))
 			{
-				sequence.Insert(0.20f, boardElement.CachedTransform.DOScale(Vector3.one * 1.2f, 0.15f));
-				//sequence.Insert(0.35f, boardElement.CachedTransform.DOScale(Vector3.zero, 0.1f));
-				sequence.Insert(0.35f + points.Count * elementOffset, boardElement.CachedTransform.DOScale(Vector3.zero, 0.1f));
+				sequence.Insert(0.25f, boardElement.CachedTransform.DOScale(Vector3.one * 1.2f, 0.10f));
+				sequence.Insert(0.35f, boardElement.CachedTransform.DOScale(Vector3.zero, 0.1f));
+				//sequence.Insert(0.35f + points.Count * elementOffset, boardElement.CachedTransform.DOScale(Vector3.zero, 0.1f));
 				//sequence.Insert(0.35f + points.Count * elementOffset,
 					//boardElement.CachedTransform.DOLocalJump(boardElement.transform.position, -1, 1, 0.1f));
 				boardElement.SyncRendererLayers(new BoardPosition(Action.To.X, Action.To.Y, 4));
@@ -73,6 +73,8 @@ public class MatchPieceToAnimation : BoardAnimation
 			sequence.Insert(0.15f + elementOffset*i, boardElement.CachedTransform.DOScale(Vector3.zero, 0.20f));
 			
 		}
+
+		sequence.InsertCallback(0.35f, () => ParticleView.Show(R.ExplosionParticleSystem, particlePosition));
 		
 		sequence.OnComplete(() =>
 		{
@@ -80,7 +82,7 @@ public class MatchPieceToAnimation : BoardAnimation
 			{
 				context.RemoveElementAt(points[i]);
 			}
-			
+
 			CompleteAnimation(context);
 		});
 	}

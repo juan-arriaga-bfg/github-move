@@ -5,7 +5,7 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 	public override Piece Build(int pieceType, BoardController context)
 	{
 		var piece = base.Build(pieceType, context);
-
+		
 		//AddView(piece, ViewType.LevelLabel);
 		CreateViewComponent(piece);
         //piece.RegisterComponent(new ViewDefinitionComponent())
@@ -13,10 +13,10 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 		piece.RegisterComponent(new TimerComponent());
 		
 		var life = new MineLifeComponent();
-
+		
 		piece.RegisterComponent(life);
 		AddObserver(piece, life);
-
+		
 		var storage = new StorageComponent
 		{
 			IsAutoStart = false,

@@ -93,7 +93,30 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
             UIMessageWindowController.CreateImageMessage("Need more energy?", "collect_pieces", () => {});
             return;
         }
+
+        var nearest = BoardPosition.Default();
+        var distance = float.MaxValue;
+
+        for (var i = 0; i < positions.Count; i++)
+        {
+            var value = 0f;
+            
+            for (var j = 0; j < positions.Count; j++)
+            {
+                if(i == j) continue;
+
+                value += BoardPosition.SqrMagnitude(positions[i], positions[j]);
+            }
+            
+            HintArrowView.Show(positions[i], 0, -0.5f, false);
+            
+            if(distance <= value) continue;
+
+            distance = value;
+            nearest = positions[i];
+        }
         
-        HintArrowView.Show(positions[Random.Range(0, positions.Count)], 0, -0.5f);
+        var worldPos = board.BoardDef.GetSectorCenterWorldPosition(nearest.X, nearest.Up.Y, nearest.Z);
+        board.Manipulator.CameraManipulator.MoveTo(worldPos);
     }
 }

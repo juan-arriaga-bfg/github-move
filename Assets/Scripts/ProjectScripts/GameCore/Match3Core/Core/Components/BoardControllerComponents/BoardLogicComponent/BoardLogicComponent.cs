@@ -303,8 +303,11 @@ public class BoardLogicComponent : ECSEntity,
         var observer = piece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
 
         observer?.OnAddToBoard(position, piece);
-
-        PieceFlyer.Fly(piece.PieceType, x, y);
+        
+        if (GameDataService.Current.CodexManager.OnPieceBuilded(piece.PieceType))
+        {
+            PieceFlyer.FlyTo(piece.PieceType, x, y, Currency.Piece.Name);
+        }
         
         return true;
     }
