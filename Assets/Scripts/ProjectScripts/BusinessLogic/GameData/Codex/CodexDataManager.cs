@@ -1,4 +1,4 @@
-﻿#define FORCE_UNLOCK_ALL
+﻿// #define FORCE_UNLOCK_ALL
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -153,6 +153,8 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
 
         CodexChainState chainState;
         GameDataService.Current.CodexManager.GetChainState(chain[0], out chainState);
+
+        bool isPreviousPieceUnlocked = false;
         
         for (var i = 0; i < chain.Count; i++)
         {
@@ -183,10 +185,10 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             {
                 itemDef.State = isPendingReward ? CodexItemState.PendingReward : CodexItemState.Unlocked;
             } 
-            // else if (i == locked)
-            // {
-            //     itemDef.State = CodexItemState.PartLock; 
-            // } 
+            else if (isPreviousPieceUnlocked)
+            {
+                itemDef.State = CodexItemState.PartLock; 
+            } 
             else
             {
                 itemDef.State = CodexItemState.FullLock; 
@@ -199,6 +201,9 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     Debug.LogError($"Codex supports only Coins as reward. Multiply rewards for one item also not supported. Please check config for pieceId: {pieceId}");
                 }
             }
+            
+            // To enable CodexItemState.PartLock for the next item
+            isPreviousPieceUnlocked = isUnlocked;
             
             ret.Add(itemDef);
         }
