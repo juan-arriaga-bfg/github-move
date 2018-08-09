@@ -107,6 +107,14 @@ public class UIMainWindowView : IWUIWindowView
 
     public void Debug1()
     {
+        var board = BoardService.Current.GetBoardById(0);
+        
+        board.ActionExecutor.AddAction(new SpawnPieceAtAction
+        {
+            At = new BoardPosition(20, 20, 1),
+            PieceTypeId = PieceType.D4.Id
+        });
+        
         GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.D2.Id);
     }
     
