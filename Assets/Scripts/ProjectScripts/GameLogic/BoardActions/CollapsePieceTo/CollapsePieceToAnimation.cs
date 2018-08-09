@@ -73,16 +73,18 @@ public class MatchPieceToAnimation : BoardAnimation
 			sequence.Insert(0.15f + elementOffset*i, boardElement.CachedTransform.DOScale(Vector3.zero, 0.20f));
 			
 		}
-		
-		sequence.OnComplete(() =>
+
+		sequence.InsertCallback(0.35f, () =>
 		{
 			ParticleView.Show(R.ExplosionParticleSystem, particlePosition);
 			for (int i = 0; i < points.Count; i++)
 			{
 				context.RemoveElementAt(points[i]);
 			}
-			
+
 			CompleteAnimation(context);
 		});
+		
+		//sequence.OnComplete();
 	}
 }
