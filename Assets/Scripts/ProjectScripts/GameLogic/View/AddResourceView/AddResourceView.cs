@@ -7,6 +7,8 @@ public class AddResourceView : BoardElementView
 
 	private const float duration = 1f;
 
+	private bool isPurchase;
+
 	private void Show(CurrencyPair resource)
 	{
 		var color = resource.Amount < 0 ? "EE4444" : "FFFFFF";
@@ -15,12 +17,17 @@ public class AddResourceView : BoardElementView
 		amountLabel.Text = $"<color=#{color}>{value}</color>";
 		
 		DOTween.Kill(animationUid);
-		
+
+		var position = CachedTransform.position.y;
 		var sequence = DOTween.Sequence().SetId(animationUid);
 		
-		sequence.Insert(0, CachedTransform.DOMove(CachedTransform.position + Vector3.up, duration));
-		sequence.Insert(duration*0.5f, amountLabel.TextLabel.DOFade(0f, duration));
-		sequence.InsertCallback(duration * 0.5f, () => { CurrencyHellper.Purchase(resource); });
+		sequence.Insert(duration * 0f, amountLabel.TextLabel.DOFade(1f, duration * 0.1f));
+		sequence.Insert(duration * 0.9f, amountLabel.TextLabel.DOFade(0f, duration * 0.1f));
+		
+		sequence.Insert(duration * 0f, CachedTransform.DOMoveY(position + 0.5f, duration * 0.5f).SetEase(Ease.OutQuart));
+		sequence.Insert(duration * 0.8f, CachedTransform.DOMoveY(position + 1, duration * 0.2f).SetEase(Ease.InQuart));
+		
+		if(isPurchase) sequence.InsertCallback(duration * 0.5f, () => { CurrencyHellper.Purchase(resource); });
 		
 		DestroyOnBoard(duration);
 	}
@@ -32,8 +39,7 @@ public class AddResourceView : BoardElementView
 		DOTween.Kill(animationUid);
 		
 		var tColor = amountLabel.TextLabel.color;
-		
-		amountLabel.TextLabel.color = new Color(tColor.r, tColor.g, tColor.b, 1);
+		amountLabel.TextLabel.color = new Color(tColor.r, tColor.g, tColor.b, 0);
 	}
 
 	public static void Show(Vector3 position, CurrencyPair resource)
@@ -74,14 +80,15 @@ public class AddResourceView : BoardElementView
 			return;
 		}
 
-		ShowCounter(board, position, resource);
+		ShowCounter(board, position, resource, true);
 	}
 
-	private static void ShowCounter(BoardController board, BoardPosition position, CurrencyPair resource)
+	private static void ShowCounter(BoardController board, BoardPosition position, CurrencyPair resource, bool isPurchase = false)
 	{
 		var view = board.RendererContext.CreateBoardElementAt<AddResourceView>(R.AddResourceView, position);
 		
 		view.CachedTransform.localPosition = view.CachedTransform.localPosition + Vector3.up;
+		view.isPurchase = isPurchase;
 		view.Show(resource);
 	} 
 }
