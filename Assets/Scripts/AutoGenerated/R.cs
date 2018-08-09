@@ -204,4 +204,5 @@ public class R
      public const string SmolderingParticles = "SmolderingParticles";
      public const string TrailMergeParticles = "TrailMergeParticles";
      public const string OutMergeParticleSystem = "OutMergeParticleSystem";
+     public const string ExplosionParticleSystem = "ExplosionParticleSystem";
 }
