@@ -7,27 +7,26 @@ public class CurrencyPair
 
     public override string ToString()
     {
-        return string.Format("{0}: {1}", Currency, Amount);
+        return $"{Currency}: {Amount}";
     }
 
     public string ToSaveString()
     {
         var def = global::Currency.GetCurrencyDef(Currency);
 
-        return def == null ? null : string.Format("{0},{1}", def.Id, Amount);
+        return def == null ? null : $"{def.Id},{Amount}";
     }
 
     public string ToStringIcon(bool isLeft = true)
     {
-        var icon = Currency == global::Currency.Experience.Name ? "Exp" : string.Format("<sprite name={0}>", Currency);
-
-        return isLeft ? string.Format("{0} {1}", icon, Amount) : string.Format("{0} {1}", Amount, icon);
+        var icon = $"<sprite name={Currency}>";
+        return isLeft ? $"{icon} {Amount}" : $"{Amount} {icon}";
     }
 
     public static CurrencyPair Parse(string value)
     {
         var pair = new CurrencyPair();
-        var valueArray = value.Split(new string[] {","}, StringSplitOptions.RemoveEmptyEntries);
+        var valueArray = value.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
         var def = global::Currency.GetCurrencyDef(int.Parse(valueArray[0]));
 
         if (def == null) return null;

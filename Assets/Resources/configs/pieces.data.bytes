@@ -1436,6 +1436,36 @@
     ]
   },
   {
+    "Uid": "Zord1"
+  },
+  {
+    "Uid": "Zord2",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ]
+  },
+  {
+    "Uid": "Zord3",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 20
+      }
+    ]
+  },
+  {
+    "Uid": "Zord4",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 30
+      }
+    ]
+  },
+  {
     "Uid": "Castle1",
     "UpgradePrices": [
       {
@@ -1467,7 +1497,7 @@
       }
     ],
     "Delay": 1200,
-    "SpawnPiece": "Chest2",
+    "SpawnPiece": "Chest8",
     "SpawnAmount": 1,
     "SpawnCapacity": 1,
     "IsFilledInStart": false

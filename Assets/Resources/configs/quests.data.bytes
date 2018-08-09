@@ -70,8 +70,8 @@
   {
     "Uid": "4",
     "Price": {
-      "Currency": "C3",
-      "Amount": 1
+      "Currency": "B2",
+      "Amount": 3
     },
     "Rewards": [
       {
@@ -94,8 +94,8 @@
   {
     "Uid": "5",
     "Price": {
-      "Currency": "B1",
-      "Amount": 3
+      "Currency": "A5",
+      "Amount": 2
     },
     "Rewards": [
       {
@@ -110,7 +110,7 @@
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 4
+        "OtherUid": 3
       }
     ],
     "Message": "Peasant women are asked to give them little wool for knitting"
@@ -118,8 +118,8 @@
   {
     "Uid": "6",
     "Price": {
-      "Currency": "B2",
-      "Amount": 4
+      "Currency": "D3",
+      "Amount": 3
     },
     "Rewards": [
       {
@@ -128,7 +128,7 @@
       },
       {
         "Currency": "Coin2",
-        "Amount": 5
+        "Amount": 4
       }
     ],
     "Conditions": [
@@ -142,23 +142,23 @@
   {
     "Uid": "7",
     "Price": {
-      "Currency": "C4",
-      "Amount": 1
+      "Currency": "C3",
+      "Amount": 2
     },
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 1
+        "Amount": 3
       },
       {
         "Currency": "Coin2",
-        "Amount": 6
+        "Amount": 3
       }
     ],
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 5
+        "OtherUid": 4
       }
     ],
     "Message": "The merchant is ready to pay good for a batch of quality cloth"
@@ -166,7 +166,7 @@
   {
     "Uid": "8",
     "Price": {
-      "Currency": "A5",
+      "Currency": "F3",
       "Amount": 3
     },
     "Rewards": [
@@ -176,7 +176,7 @@
       },
       {
         "Currency": "Coin2",
-        "Amount": 5
+        "Amount": 2
       }
     ],
     "Conditions": [
@@ -190,7 +190,7 @@
   {
     "Uid": "9",
     "Price": {
-      "Currency": "C5",
+      "Currency": "A6",
       "Amount": 2
     },
     "Rewards": [
@@ -210,17 +210,17 @@
   {
     "Uid": "10",
     "Price": {
-      "Currency": "A6",
-      "Amount": 2
+      "Currency": "G3",
+      "Amount": 3
     },
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 6
+        "Amount": 2
       },
       {
         "Currency": "Coin3",
-        "Amount": 3
+        "Amount": 2
       }
     ],
     "Conditions": [
@@ -240,11 +240,11 @@
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 4
+        "Amount": 2
       },
       {
         "Currency": "Coin2",
-        "Amount": 2
+        "Amount": 3
       }
     ],
     "Conditions": [

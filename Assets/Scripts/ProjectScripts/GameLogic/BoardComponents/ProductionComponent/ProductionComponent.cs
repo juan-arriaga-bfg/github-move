@@ -320,7 +320,11 @@ public class ProductionComponent : IECSComponent, ITimerComponent, IPieceBoardOb
         }
     }
 
-    public void OnMovedFromTo(BoardPosition from, BoardPosition to, Piece context = null)
+    public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
+    {
+    }
+
+    public void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
     }
 

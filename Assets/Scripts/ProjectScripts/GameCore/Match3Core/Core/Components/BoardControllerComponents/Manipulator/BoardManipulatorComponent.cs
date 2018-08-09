@@ -22,7 +22,6 @@ public class BoardManipulatorComponent : ECSEntity,
     private readonly ViewAnimationUid dragAnimationId = new ViewAnimationUid();
 
     private float dragDuration = 0.25f;
-    private float dragTrashold = 0.05f;
 
     private Vector2 prevDragPos;
 
@@ -118,7 +117,7 @@ public class BoardManipulatorComponent : ECSEntity,
 
     private bool CheckDrag(float duration)
     {
-        return duration > dragTrashold && cachedViewForDrag == null && isDrag == null;
+        return cachedViewForDrag == null && isDrag == null;
     }
 
     private void BeginDrag(Vector2 startPos, Vector2 pos)

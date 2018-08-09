@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using DG.Tweening;
 
-public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
+public class MulticellularPieceMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBuilder
 {
     public List<int> GetKeys()
     {
@@ -19,16 +18,23 @@ public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
         };
     }
 
-    public IBoardAction Build(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position)
+    public bool Check(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position, out int next)
     {
-        var nextType = definition.GetNext(pieceType);
+        next = definition.GetNext(pieceType, false);
+        matchField = new List<BoardPosition>{position};
+        
+        if (next == PieceType.None.Id) return false;
 
-        if (nextType == PieceType.None.Id) return null;
-
-        const int countForMatch = 1;
         var countForMatchDefault = definition.GetPieceCountForMatch(pieceType);
         
-        if (countForMatchDefault == -1 || countForMatch < countForMatchDefault) return null;
+        return countForMatchDefault != -1 && 1 >= countForMatchDefault;
+    }
+
+    public IBoardAction Build(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position)
+    {
+        int nextType;
+        
+        if(Check(definition, matchField, pieceType, position, out nextType) == false) return null;
         
         var nextAction = new SpawnPieceAtAction
         {
@@ -44,20 +50,5 @@ public class MulticellularPieceMatchActionBuilder : IMatchActionBuilder
             Positions = new List<BoardPosition>{position},
             OnCompleteAction = nextAction
         };
-    }
-    
-    private void SpawnReward(BoardPosition position, int pieceType)
-    {
-        var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType);
-        
-        if(def?.CreateRewards == null) return;
-
-        var sequence = DOTween.Sequence();
-        
-        for (var i = 0; i < def.CreateRewards.Count; i++)
-        {
-            var reward = def.CreateRewards[i];
-            sequence.InsertCallback(0.5f*i, () => AddResourceView.Show(position, reward));
-        }
     }
 }

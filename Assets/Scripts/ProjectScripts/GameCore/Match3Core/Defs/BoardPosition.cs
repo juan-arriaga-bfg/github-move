@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 using System;
@@ -18,13 +17,7 @@ public struct BoardPosition : IEquatable<BoardPosition>
     }
 
     [JsonIgnore]
-    public bool IsValid
-    {
-        get
-        {
-            return X >= 0 && Y >= 0;
-        }
-    }
+    public bool IsValid => X >= 0 && Y >= 0;
 
     public bool IsValidFor(int w, int h)
     {
@@ -98,14 +91,19 @@ public struct BoardPosition : IEquatable<BoardPosition>
         return this.X.GetHashCode() ^ this.Y.GetHashCode() << 2 ^ this.Z.GetHashCode() >> 2;
     }
 
+    public Vector3 ToVector()
+    {
+        return new Vector3(X, Y, Z);
+    }
+
     public override string ToString()
     {
-        return string.Format("[{0},{1},{2}]", X, Y, Z);
+        return $"[{X},{Y},{Z}]";
     }
 
     public string ToSaveString()
     {
-        return string.Format("{0},{1},{2}", X, Y, Z);
+        return $"{X},{Y},{Z}";
     }
 
     public static BoardPosition Default()
@@ -200,6 +198,20 @@ public struct BoardPosition : IEquatable<BoardPosition>
     public static float SqrMagnitude(BoardPosition from, BoardPosition to)
     {
         return (to.X - from.X) * (to.X - from.X) + (to.Y - from.Y) * (to.Y - from.Y);
+    }
+
+    public static BoardPosition GetCenter(List<BoardPosition> positions)
+    {
+        var center = new Vector3(0, 0, 0);
+
+        foreach (var position in positions)
+        {
+            center += position.ToVector();
+        }
+        
+        center = center / positions.Count;
+        
+        return new BoardPosition(Mathf.RoundToInt(center.x), Mathf.RoundToInt(center.y), Mathf.RoundToInt(center.z));
     }
 
     public bool Equals(BoardPosition other)

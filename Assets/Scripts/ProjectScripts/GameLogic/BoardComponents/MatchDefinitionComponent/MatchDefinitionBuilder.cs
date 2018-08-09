@@ -6,6 +6,8 @@ public struct PieceMatchDef
     public int Previous;
     public int Count;
     public bool IsIgnore;
+
+    public List<List<int>> Pattern;
 }
 
 public class MatchDefinitionBuilder
@@ -13,7 +15,7 @@ public class MatchDefinitionBuilder
     public Dictionary<int, PieceMatchDef> Build()
     {
         var dict = new Dictionary<int, PieceMatchDef>();
-
+        
         dict = AddPiece(dict);
         dict = AddMulticellularPiece(dict);
         
@@ -46,7 +48,7 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.C6.Id, new PieceMatchDef {Next = PieceType.C7.Id, Previous = PieceType.C5.Id, Count = 3});
         dict.Add(PieceType.C7.Id, new PieceMatchDef {Next = PieceType.C8.Id, Previous = PieceType.C6.Id, Count = 3});
         dict.Add(PieceType.C8.Id, new PieceMatchDef {Next = PieceType.C9.Id, Previous = PieceType.C7.Id, Count = 3});
-        dict.Add(PieceType.C9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.C8.Id, Count = 3});
+        dict.Add(PieceType.C9.Id, new PieceMatchDef {Next = PieceType.Zord1.Id, Previous = PieceType.C8.Id, Count = 3});
 
         dict.Add(PieceType.D1.Id, new PieceMatchDef {Next = PieceType.D2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.D2.Id, new PieceMatchDef {Next = PieceType.D3.Id, Previous = PieceType.D1.Id, Count = 3});
@@ -143,6 +145,11 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.Coin4.Id, new PieceMatchDef {Next = PieceType.Coin5.Id, Previous = PieceType.Coin3.Id, Count = 3});
         dict.Add(PieceType.Coin5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Coin4.Id, Count = 3});
         
+        dict.Add(PieceType.Zord1.Id, new PieceMatchDef {Next = PieceType.MegaZord.Id, Previous = PieceType.None.Id});
+        dict.Add(PieceType.Zord2.Id, new PieceMatchDef {Next = PieceType.MegaZord.Id, Previous = PieceType.None.Id});
+        dict.Add(PieceType.Zord3.Id, new PieceMatchDef {Next = PieceType.MegaZord.Id, Previous = PieceType.None.Id});
+        dict.Add(PieceType.Zord4.Id, new PieceMatchDef {Next = PieceType.MegaZord.Id, Previous = PieceType.None.Id});
+        
         return dict;
     }
 
@@ -157,6 +164,12 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.Castle7.Id, new PieceMatchDef {Next = PieceType.Castle8.Id, Previous = PieceType.Castle6.Id, Count = 1});
         dict.Add(PieceType.Castle8.Id, new PieceMatchDef {Next = PieceType.Castle9.Id, Previous = PieceType.Castle7.Id, Count = 1});
         dict.Add(PieceType.Castle9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Castle8.Id, Count = 1});
+        
+        dict.Add(PieceType.MegaZord.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.None.Id, Pattern = new List<List<int>>
+        {
+            new List<int> { PieceType.Zord1.Id, PieceType.Zord2.Id },
+            new List<int> { PieceType.Zord4.Id, PieceType.Zord3.Id }
+        }});
         
         return dict;
     }

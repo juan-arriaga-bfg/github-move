@@ -46,7 +46,11 @@ public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserve
 		}
 	}
 
-	public void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece context = null)
+	public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
+	{
+	}
+
+	public void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
 	{
 		realPosition = to;
 	}

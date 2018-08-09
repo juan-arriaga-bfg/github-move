@@ -415,6 +415,7 @@ MonoBehaviour:
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 4875662509409566}
+  sprite: {fileID: 0}
 --- !u!114 &114545210754445574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -609,7 +610,7 @@ SpriteRenderer:
   m_Size: {x: 2.78, y: 1.68}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!212 &212617024635769098

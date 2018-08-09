@@ -35,11 +35,11 @@
       "Level": 1,
       "Condition": {
         "Currency": "Coins",
-        "Amount": 180
+        "Amount": 250
       },
       "Reward": {
         "Currency": "Experience",
-        "Amount": 10
+        "Amount": 150
       },
       "Position": {
         "X": 15,
@@ -50,7 +50,7 @@
         "Y": 2
       },
       "Pieces": {
-        "Mine 2": [
+        "Mine 1": [
           {
             "X": 0,
             "Y": 0
@@ -97,11 +97,11 @@
       "Level": 2,
       "Condition": {
         "Currency": "Coins",
-        "Amount": 210
+        "Amount": 400
       },
       "Reward": {
         "Currency": "Experience",
-        "Amount": 20
+        "Amount": 200
       },
       "Position": {
         "X": 18,
@@ -122,7 +122,7 @@
             "Y": 0
           }
         ],
-        "Mine 2": [
+        "Mine2": [
           {
             "X": 0,
             "Y": 1
@@ -166,14 +166,14 @@
     },
     {
       "Uid": "Fog 3",
-      "Level": 2,
+      "Level": 3,
       "Condition": {
         "Currency": "Coins",
-        "Amount": 250
+        "Amount": 450
       },
       "Reward": {
         "Currency": "Experience",
-        "Amount": 30
+        "Amount": 300
       },
       "Position": {
         "X": 15,
@@ -252,7 +252,7 @@
     },
     {
       "Uid": "Fog 4",
-      "Level": 3,
+      "Level": 4,
       "Condition": {
         "Currency": "Coins",
         "Amount": 1000
@@ -1469,27 +1469,6 @@
       "Pieces": {}
     },
     {
-      "Uid": "Fog 83",
-      "Level": 10,
-      "Condition": {
-        "Currency": "Coins",
-        "Amount": 1000
-      },
-      "Reward": {
-        "Currency": "Experience",
-        "Amount": 10
-      },
-      "Position": {
-        "X": 17,
-        "Y": 19
-      },
-      "Size": {
-        "X": 8,
-        "Y": 3
-      },
-      "Pieces": {}
-    },
-    {
       "Uid": "Fog 84",
       "Level": 10,
       "Condition": {
@@ -1568,7 +1547,7 @@
         "Y": 22
       },
       "Size": {
-        "X": 9,
+        "X": 5,
         "Y": 2
       },
       "Pieces": {}
@@ -1585,11 +1564,11 @@
         "Amount": 10
       },
       "Position": {
-        "X": 21,
+        "X": 25,
         "Y": 22
       },
       "Size": {
-        "X": 7,
+        "X": 3,
         "Y": 2
       },
       "Pieces": {}
@@ -1906,6 +1885,27 @@
       "Size": {
         "X": 3,
         "Y": 2
+      },
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 115",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Position": {
+        "X": 10,
+        "Y": 10
+      },
+      "Size": {
+        "X": 10,
+        "Y": 3
       },
       "Pieces": {}
     }

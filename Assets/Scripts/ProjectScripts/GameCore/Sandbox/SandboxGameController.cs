@@ -49,13 +49,15 @@ public class SandboxGameController : MonoBehaviour
                 .RegisterComponent(new LockerComponent()))
             .RegisterComponent(new EmptyCellsFinderComponent()) // finds empty cells
             .RegisterComponent(new MatchActionBuilderComponent() // creates match action
-                .RegisterDefaultBuilder(new DefaultMatchActionBuilder()) // creates default match action
-                .RegisterBuilder(new MulticellularPieceMatchActionBuilder())) // creates match action for Multicellular
+                .RegisterDefaultBuilder(new SimpleMatchActionBuilder()) // creates default match action
+                .RegisterBuilder(new MulticellularPieceMatchActionBuilder())
+                .RegisterBuilder(new СompositePieceMatchActionBuilder()))
             .RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build()))); 
         
         boardController.RegisterComponent(new BoardRandomComponent()); // random
         boardController.RegisterComponent(new ReproductionLogicComponent());
         boardController.RegisterComponent(new HintCooldownComponent());
+        boardController.RegisterComponent(new PartPiecesLogicComponent());
         boardController.RegisterComponent(new BoardRenderer().Init(gameBoardResourcesDef,
             gameBoardRendererView.transform)); // renderer context
         

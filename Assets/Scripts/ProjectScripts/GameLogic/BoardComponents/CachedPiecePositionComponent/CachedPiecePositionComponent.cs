@@ -10,26 +10,14 @@
 	{
 		contextPiece = entity as Piece;
 
-		if (contextPiece != null)
-		{
-			var observer = contextPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
-			if (observer != null)
-			{
-				observer.RegisterObserver(this);
-			}
-		}
+		var observer = contextPiece?.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+		observer?.RegisterObserver(this);
 	}
 	
 	public void OnUnRegisterEntity(ECSEntity entity)
 	{
-		if (contextPiece != null)
-		{
-			var observer = contextPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
-			if (observer != null)
-			{
-				observer.UnRegisterObserver(this);
-			}
-		}
+		var observer = contextPiece?.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+		observer?.UnRegisterObserver(this);
 	}
 
 	public void OnAddToBoard(BoardPosition position, Piece context = null)
@@ -38,13 +26,15 @@
 		
 		contextPiece.CachedPosition = position;
 		GameDataService.Current.PiecesManager.CachedPosition(context, position);
-		
-		if(context == null) return; 
-		
-		context.Context.BoardLogic.PositionsCache.AddPosition(context.PieceType, position);
+
+		context?.Context.BoardLogic.PositionsCache.AddPosition(context.PieceType, position);
 	}
 
-	public void OnMovedFromTo(BoardPosition @from, BoardPosition to, Piece context = null)
+	public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
+	{
+	}
+
+	public void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
 	{
 		if (contextPiece != null) contextPiece.CachedPosition = to;
 		
@@ -56,8 +46,6 @@
 
 	public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
 	{
-		if(context == null) return; 
-		
-		context.Context.BoardLogic.PositionsCache.RemovePosition(context.PieceType, position);
+		context?.Context.BoardLogic.PositionsCache.RemovePosition(context.PieceType, position);
 	}
 }

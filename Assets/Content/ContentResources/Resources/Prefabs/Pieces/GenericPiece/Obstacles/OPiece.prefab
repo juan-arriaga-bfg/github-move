@@ -480,6 +480,7 @@ MonoBehaviour:
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 0}
+  sprite: {fileID: 0}
   animator: {fileID: 95644728299643484}
 --- !u!114 &114595616929405838
 MonoBehaviour:
@@ -500,11 +501,15 @@ MonoBehaviour:
     Scale: 0.8
   - Weight: 10
     Name: tree_2
-    Offset: {x: 0, y: 0.06}
+    Offset: {x: 0, y: 0.28}
     Scale: 0.8
   - Weight: 10
     Name: tree_3
-    Offset: {x: 0, y: 0.4}
+    Offset: {x: 0, y: 0.28}
+    Scale: 0.8
+  - Weight: 10
+    Name: tree_4
+    Offset: {x: 0, y: 0.28}
     Scale: 0.8
 --- !u!114 &114607854138475680
 MonoBehaviour:

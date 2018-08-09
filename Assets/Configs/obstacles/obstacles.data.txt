@@ -45,11 +45,19 @@
         "Amount": 20
       }
     ],
-    "PieceAmount": 2,
+    "PieceAmount": 4,
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 100
+        "Weight": 30
+      },
+      {
+        "Uid": "B1",
+        "Weight": 5
+      },
+      {
+        "Uid": "E1",
+        "Weight": 5
       }
     ],
     "ChestWeights": [
@@ -86,19 +94,27 @@
         "Amount": 30
       }
     ],
-    "PieceAmount": 3,
+    "PieceAmount": 5,
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 100
+        "Weight": 30
+      },
+      {
+        "Uid": "E1",
+        "Weight": 5
+      },
+      {
+        "Uid": "E2",
+        "Weight": 5
       },
       {
         "Uid": "A2",
-        "Weight": 100
+        "Weight": 20
       },
       {
         "Uid": "B1",
-        "Weight": 60
+        "Weight": 5
       }
     ],
     "ChestWeights": [
@@ -106,10 +122,6 @@
         "Uid": "Chest3",
         "Weight": 100,
         "Override": true
-      },
-      {
-        "Uid": "Chest4",
-        "Weight": 30
       },
       {
         "Uid": "Chest2",
