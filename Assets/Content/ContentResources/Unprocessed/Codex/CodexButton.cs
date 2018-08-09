@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,13 @@ public class CodexButton : MonoBehaviour
     
     public void ToggleShine(bool enabled)
     {
-        shine.SetActive(enabled);
+        try
+        {
+            shine.SetActive(enabled);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.Message);
+        }
     }
 }
