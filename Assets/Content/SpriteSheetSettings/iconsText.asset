@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: iconsText
   m_EditorClassIdentifier: 
   hashCode: 128033944
-  material: {fileID: 21896053165380594}
+  material: {fileID: 21532149827319842}
   materialHashCode: 0
   spriteSheet: {fileID: 2800000, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
   spriteInfoList:
@@ -86,8 +86,22 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -51.5, y: 50.5}
     sprite: {fileID: 21300008, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
+  - id: 5
+    x: 261
+    y: 0
+    width: 63
+    height: 53
+    xOffset: 0
+    yOffset: 42
+    xAdvance: 63
+    scale: 1.3
+    name: Life
+    hashCode: 2687718
+    unicode: 0
+    pivot: {x: -31.5, y: 26.5}
+    sprite: {fileID: 21300012, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
   fallbackSpriteAssets: []
---- !u!21 &21896053165380594
+--- !u!21 &21532149827319842
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 1

@@ -8,6 +8,7 @@ TextureImporter:
     21300006: Worker
     21300008: Experience
     21300010: Coins
+    21300012: Life
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -93,7 +94,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 55773cafa0bb2c24abd5dfb21f76a0b4
+      spriteID: 9f94dfd4fdba61445b655d8969199a5a
       vertices: []
       indices: 
       edges: []
@@ -113,7 +114,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ab7eb1e8791bae349a746067c91529ca
+      spriteID: 810b5eab351c4c944a822074d1c02b0e
       vertices: []
       indices: 
       edges: []
@@ -133,7 +134,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: feb7a736b10e23943ad2be4c433ab3f1
+      spriteID: f6a3b0224132ae34eb205d840d374df3
       vertices: []
       indices: 
       edges: []
@@ -153,7 +154,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 07760b920668bfd42833e100b7d09949
+      spriteID: bc4a0350a3f03124d8be022f4a307ac4
       vertices: []
       indices: 
       edges: []
@@ -173,7 +174,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e5ecc19f433aef94fa9289103516a895
+      spriteID: f39c314e8c54a00428a60f67b4ba7c81
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Life
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 0
+        width: 63
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bad6e33fd444f044aa768a79ed3bb62
       vertices: []
       indices: 
       edges: []
