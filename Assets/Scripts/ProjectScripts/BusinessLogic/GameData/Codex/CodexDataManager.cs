@@ -408,6 +408,12 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                         ret.PendingRewardAmount += amount;
                         tabDef.PendingReward = true;
                     }
+
+                    if (amount <= 0 && itemDef.State == CodexItemState.PendingReward)
+                    {
+                        itemDef.State = CodexItemState.Unlocked;
+                        Debug.LogError($"[CodexDataManager] => No reward specified for item {itemDef.PieceTypeDef.Abbreviations[0]}");
+                    }
                 }
             }
         }
