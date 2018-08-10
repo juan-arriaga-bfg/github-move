@@ -83,7 +83,7 @@ public class CodexItem : MonoBehaviour
         pieceImage.sprite = sprite;
         caption.text = captionText;
         
-        Debug.Log($"[CodexItem] => Init {itemDef.PieceTypeDef.Abbreviations[0]} as {state}");
+        // Debug.Log($"[CodexItem] => Init {itemDef.PieceTypeDef.Abbreviations[0]} as {state}");
     }
 
     private void Reset()

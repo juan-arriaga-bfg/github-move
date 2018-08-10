@@ -115,7 +115,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
     {
         int firstInChain = CachedMatchDef().GetFirst(id);
 
-        Debug.Log($"UnlockPiece: first in chain for {id} is {firstInChain}");
+        // Debug.Log($"UnlockPiece: first in chain for {id} is {firstInChain}");
         
         CodexChainState state;
         if (Items.TryGetValue(firstInChain, out state))
@@ -195,7 +195,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
 
     private List<CodexItemDef> GetCodexItemsForChain(List<int> chain)
     {
-        Debug.Log($"========\nGet items: {chain[0]}");
+        // Debug.Log($"========\nGet items: {chain[0]}");
         
         List<CodexItemDef> ret = new List<CodexItemDef>();
 
@@ -210,7 +210,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         {
             int pieceId = chain[i];
 
-            Debug.Log($"Get items: {pieceId}");
+            // Debug.Log($"Get items: {pieceId}");
             
             bool isUnlocked = chainState?.Unlocked.Contains(pieceId) ?? false;
             

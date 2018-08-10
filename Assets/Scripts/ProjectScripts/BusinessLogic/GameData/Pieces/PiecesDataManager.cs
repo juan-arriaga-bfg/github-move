@@ -69,13 +69,13 @@ public class PiecesDataManager : IECSComponent, IDataManager, IDataLoader<List<P
         if (pieceDef.Reproduction != null)
         {
             pieceTypeDef.Filter = pieceTypeDef.Filter.Add(PieceTypeFilter.Reproduction);
-            Debug.Log($"Add Reproduction filter to {pieceTypeDef.Abbreviations[0]}");
+            // Debug.Log($"Add Reproduction filter to {pieceTypeDef.Abbreviations[0]}");
         }
         
         if (pieceDef.SpawnResources != null && pieceDef.SpawnResources.Currency == Currency.Energy.Name)
         {
             pieceTypeDef.Filter = pieceTypeDef.Filter.Add(PieceTypeFilter.Energy);
-            Debug.Log($"Add Energy filter to {pieceTypeDef.Abbreviations[0]}");
+            // Debug.Log($"Add Energy filter to {pieceTypeDef.Abbreviations[0]}");
         }
     }
 
