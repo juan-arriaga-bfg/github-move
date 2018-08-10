@@ -3,12 +3,13 @@
 	public override bool Check(BoardPosition position, Piece piece)
 	{
 		var pathfinder = piece.GetComponent<PathfinderComponent>(PathfinderComponent.ComponentGuid);
-		if (!pathfinder.CanPathToCastle(piece))
+		
+		if (pathfinder?.CanPathToCastle(piece) == false)
 		{
 			UIErrorWindowController.AddError("Path not found");
 			return false;
 		}
-		
+
 		var key = new BoardPosition(position.X, position.Y);
 		var def = GameDataService.Current.FogsManager.GetDef(key);
 
@@ -20,7 +21,7 @@
 		
 		if (IsDone == false)
 		{
-			UIErrorWindowController.AddError(string.Format("Reach Level {0} to get access to the fog", def.Level));
+			UIErrorWindowController.AddError($"Reach Level {def.Level} to get access to the fog");
 		}
         
 		return IsDone;
