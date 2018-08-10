@@ -283,6 +283,10 @@ MonoBehaviour:
   FadeValue: 0
   selectionView: {fileID: 4209827087923906}
   sprite: {fileID: 0}
+  errorSelectionMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000,
+    type: 0}
+  defaultSelectionMaterial: {fileID: 2100000, guid: d55a16b9364b048ba884d5ede8dae221,
+    type: 2}
 --- !u!212 &212272543990481550
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -363,7 +367,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300902, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.928}
   m_FlipX: 0
