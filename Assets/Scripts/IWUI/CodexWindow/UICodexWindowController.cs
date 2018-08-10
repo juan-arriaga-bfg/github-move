@@ -24,17 +24,22 @@ public class UICodexWindowController : IWWindowController
                                  {
                                      Save();
                                      CloseCurrentWindow();
+                                     
+                                     model.OnClaim?.Invoke();
                                  });
     }
 
     private void Save()
     {
-        var items = GameDataService.Current.CodexManager.Items;
+        var codexManager = GameDataService.Current.CodexManager;
+        
+        var items = codexManager.Items;
         foreach (var item in items)
         {
             item.Value.PendingReward.Clear();
         }
         
-        GameDataService.Current.CodexManager.ClearCodexContentCache();
+        codexManager.ClearCodexContentCache();
+        codexManager.CodexState = CodexState.Normal;
     }
 }

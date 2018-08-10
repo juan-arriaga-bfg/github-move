@@ -49,4 +49,6 @@ public class UICodexWindowModel : IWWindowModel
     public int ActiveTabIndex = 0;
 
     public CodexContent CodexContent;
+
+    public Action OnClaim;
 }

@@ -11,13 +11,25 @@ public class CodexSaveComponent : ECSEntity, IECSSerializeable
 
     [JsonProperty("Data")]
     public Dictionary<int, CodexChainState> Data;
+    
+    [JsonProperty("State")]
+    public CodexState State;
 
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
-        var items = GameDataService.Current?.CodexManager?.Items ?? new Dictionary<int, CodexChainState>();
+        var codexManager = GameDataService.Current?.CodexManager;
+        if (codexManager == null)
+        {
+            return;
+        }
+        
+        var items = codexManager.Items ?? new Dictionary<int, CodexChainState>();
         Data = items;
+
+        State = codexManager.CodexState;
     }
+    
     //
     // [OnDeserialized]
     // internal void OnDeserialized(StreamingContext context)
