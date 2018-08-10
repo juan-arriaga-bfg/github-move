@@ -11,6 +11,8 @@ public class CodexItemDropPanel : MonoBehaviour
 
     public void Init(CodexItemDef itemDef)
     {
+        gameObject.SetActive(true);
+        
         energyPanel.SetActive(false);
         reproductionPanel.SetActive(false);
         
@@ -30,19 +32,21 @@ public class CodexItemDropPanel : MonoBehaviour
 
     private void RenderEnergy(CodexItemDef itemDef)
     {
-        gameObject.SetActive(true);
+        int energyCount = itemDef.PieceDef?.SpawnResources?.Amount ?? 0;
+        if (energyCount <= 0)
+        {
+            Debug.LogError($"[CodexItemDropPanel] => RenderEnergy: energyCount <= 0 for {itemDef.PieceTypeDef.Abbreviations[0]}");
+            return;    
+        }
         
-        energyPanel.SetActive(true);
-
-        int energyCount = itemDef.PieceDef.SpawnResources.Amount;
         countLabel.text = energyCount.ToString();
         countLabel.gameObject.SetActive(true);
+        
+        energyPanel.SetActive(true);
     }
     
     private void RenderReproduction(CodexItemDef itemDef)
     {
-        gameObject.SetActive(true);
-        
         reproductionPanel.gameObject.SetActive(true);
 
         var currency = itemDef.PieceDef.Reproduction.Currency;

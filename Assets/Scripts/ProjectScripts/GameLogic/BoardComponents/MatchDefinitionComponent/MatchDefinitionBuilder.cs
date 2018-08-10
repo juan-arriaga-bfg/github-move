@@ -145,10 +145,10 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.Coin4.Id, new PieceMatchDef {Next = PieceType.Coin5.Id, Previous = PieceType.Coin3.Id, Count = 3});
         dict.Add(PieceType.Coin5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Coin4.Id, Count = 3});
         
-        dict.Add(PieceType.Zord1.Id, new PieceMatchDef {Next = PieceType.MegaZord.Id, Previous = PieceType.None.Id});
-        dict.Add(PieceType.Zord2.Id, new PieceMatchDef {Next = PieceType.MegaZord.Id, Previous = PieceType.None.Id});
-        dict.Add(PieceType.Zord3.Id, new PieceMatchDef {Next = PieceType.MegaZord.Id, Previous = PieceType.None.Id});
-        dict.Add(PieceType.Zord4.Id, new PieceMatchDef {Next = PieceType.MegaZord.Id, Previous = PieceType.None.Id});
+        dict.Add(PieceType.Zord1.Id, new PieceMatchDef {Next = PieceType.MegaZord.Id, Previous = PieceType.C9.Id});
+        dict.Add(PieceType.Zord2.Id, new PieceMatchDef {Next = PieceType.MegaZord.Id, Previous = PieceType.C9.Id});
+        dict.Add(PieceType.Zord3.Id, new PieceMatchDef {Next = PieceType.MegaZord.Id, Previous = PieceType.C9.Id});
+        dict.Add(PieceType.Zord4.Id, new PieceMatchDef {Next = PieceType.MegaZord.Id, Previous = PieceType.C9.Id});
         
         return dict;
     }
@@ -165,7 +165,7 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.Castle8.Id, new PieceMatchDef {Next = PieceType.Castle9.Id, Previous = PieceType.Castle7.Id, Count = 1});
         dict.Add(PieceType.Castle9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Castle8.Id, Count = 1});
         
-        dict.Add(PieceType.MegaZord.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.None.Id, Pattern = new List<List<int>>
+        dict.Add(PieceType.MegaZord.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Zord4.Id, Pattern = new List<List<int>>
         {
             new List<int> { PieceType.Zord1.Id, PieceType.Zord2.Id },
             new List<int> { PieceType.Zord4.Id, PieceType.Zord3.Id }

@@ -11,12 +11,14 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
 
     public Dictionary<int, CodexChainState> Items = new Dictionary<int, CodexChainState>();
 
-    private MatchDefinitionComponent matchDef;
+    private MatchDefinitionComponent cachedMatchDef;
 
     private CodexContent codexContentCache = null;
     
     public delegate void NewItemUnlocked();
     public NewItemUnlocked OnNewItemUnlocked;
+    
+    public CodexState CodexState = CodexState.Normal;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -29,10 +31,12 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
 
     public void Reload()
     {
-        matchDef = null;
+        cachedMatchDef = null;
+               
         Items = null;
         ClearCodexContentCache();
 
+        // Add records to configs/codex.data to unlock any piece in codex at the begining of the game: {"100": {"Unlocked": [100],"PendingReward": []}, ... }
         LoadData(new ResourceConfigDataMapper<Dictionary<int, CodexChainState>>("configs/codex.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 
@@ -43,8 +47,30 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                                 if (string.IsNullOrEmpty(error))
                                 {
                                     var save = ProfileService.Current.GetComponent<CodexSaveComponent>(CodexSaveComponent.ComponentGuid);
+                                    if (save?.Data == null || save.Data.Count == 0)
+                                    {
+                                        Items = data;
+                                        
+                                        // Unlock all pieces on game field...
+                                        var pieces = GameDataService.Current.FieldManager.Pieces;
+                                        foreach (var key in pieces.Keys)
+                                        {
+                                            UnlockPiece(key);    
+                                        }
 
-                                    Items = save?.Data != null && save.Data.Count > 0 ? save.Data : data;
+                                        // ... and do not reward player for them
+                                        foreach (var item in Items)
+                                        {
+                                            item.Value.PendingReward.Clear();
+                                        }
+
+                                        CodexState = CodexState.Normal;
+                                    }
+                                    else
+                                    {
+                                        Items = save.Data;
+                                        CodexState = save.State;
+                                    }
                                 }
                                 else
                                 {
@@ -53,11 +79,19 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                             });
     }
 
-    public void LoadData(IDataMapper<List<CodexChainState>> dataMapper)
+    private MatchDefinitionComponent CachedMatchDef()
     {
+        if (cachedMatchDef != null)
+        {
+            return cachedMatchDef;
+        }
+        
+        cachedMatchDef = BoardService.Current?.GetBoardById(0)?.BoardLogic?.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid) ?? new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
 
+        return cachedMatchDef;
     }
-
+    
+    
     /// <summary>
     /// Returns true if new piece unlocked
     /// </summary>
@@ -68,14 +102,28 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             return false;
         }
         
-        int firstInChain = matchDef.GetFirst(id);
+        UnlockPiece(id);
 
+        ClearCodexContentCache();
+
+        OnNewItemUnlocked?.Invoke();
+
+        return true;
+    }
+
+    private void UnlockPiece(int id)
+    {
+        int firstInChain = CachedMatchDef().GetFirst(id);
+
+        // Debug.Log($"UnlockPiece: first in chain for {id} is {firstInChain}");
+        
         CodexChainState state;
         if (Items.TryGetValue(firstInChain, out state))
         {
             if (state.Unlocked.Add(id))
             {
                 state.PendingReward.Add(id);
+                CodexState = CodexState.NewPiece;
             }
         }
         else
@@ -83,17 +131,12 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             Items.Add(firstInChain,
                       new CodexChainState
                       {
-                          Unlocked = new HashSet<int> {id}, 
+                          Unlocked = new HashSet<int> {id},
                           PendingReward = new HashSet<int> {id}
                       }
             );
+            CodexState = CodexState.NewPiece;
         }
-
-        ClearCodexContentCache();
-
-        OnNewItemUnlocked?.Invoke();
-
-        return true;
     }
 
     public bool IsHidedFromCodex(int id)
@@ -127,13 +170,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             return true;
         }
 
-        if (matchDef == null)
-        {
-            var board = BoardService.Current.GetBoardById(0);
-            matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
-        }
-
-        int firstInChain = matchDef.GetFirst(id);
+        int firstInChain = CachedMatchDef().GetFirst(id);
 
         CodexChainState state;
         if (Items.TryGetValue(firstInChain, out state))
@@ -156,23 +193,9 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         return Items.TryGetValue(firstId, out state);
     }
 
-    // todo: cache it
-    public bool IsAnyPendingReward()
-    {
-        foreach (var item in Items.Values)
-        {
-            if (item.PendingReward.Count > 0)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     private List<CodexItemDef> GetCodexItemsForChain(List<int> chain)
     {
-        // Debug.Log($"Get items: {chain[0]}");
+        // Debug.Log($"========\nGet items: {chain[0]}");
         
         List<CodexItemDef> ret = new List<CodexItemDef>();
 
@@ -187,6 +210,8 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         {
             int pieceId = chain[i];
 
+            // Debug.Log($"Get items: {pieceId}");
+            
             bool isUnlocked = chainState?.Unlocked.Contains(pieceId) ?? false;
             
 #if FORCE_UNLOCK_ALL
@@ -233,6 +258,26 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             isPreviousPieceUnlocked = isUnlocked;
             
             ret.Add(itemDef);
+        }                                                                    
+        
+        // Ensure that no locked items between unlocked
+        bool unlockedFound = false;
+        for (int i = ret.Count - 1; i >= 0; i--)
+        {
+            var item = ret[i];
+            if (!unlockedFound && (item.State == CodexItemState.Unlocked || item.State == CodexItemState.PendingReward))
+            {
+                unlockedFound = true;
+                continue;
+            }
+
+            if (unlockedFound)
+            {
+                if (item.State == CodexItemState.FullLock)
+                {
+                    item.State = CodexItemState.PartLock;
+                }
+            }
         }
 
         return ret;
@@ -265,27 +310,27 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                 {
                     new CodexChainDef
                     {
-                        Name = "Energy 1",
+                        Name = "Corn",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.F1.Id)),
                     },
                     new CodexChainDef
                     {
-                        Name = "Energy 2",
+                        Name = "Wool",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.D1.Id)),
                     },
                     new CodexChainDef
                     {
-                        Name = "Energy 3",
+                        Name = "Apple",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.E1.Id)),
                     },
                     new CodexChainDef
                     {
-                        Name = "Energy 4",
+                        Name = "Milk",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.G1.Id)),
                     },
                     new CodexChainDef
                     {
-                        Name = "Energy 5",
+                        Name = "Egg",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.H1.Id)),
                     },
                 }
@@ -297,19 +342,42 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                 {
                     new CodexChainDef
                     {
-                        Name = "Buildings 1",
+                        Name = "Wood",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.A1.Id)),
                     },
                     new CodexChainDef
                     {
-                        Name = "Buildings 2",
+                        Name = "Farm",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.B1.Id))
                     },
                     new CodexChainDef
                     {
-                        Name = "Buildings 3",
+                        Name = "Stone",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.C1.Id))
                     },
+                }
+            },
+            new CodexTabDef
+            {
+                Name = "Chests",
+                ChainDefs = new List<CodexChainDef>
+                {
+                    new CodexChainDef
+                    {
+                        Name = "Stone",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestC1.Id)),
+                    },                         
+                    // new CodexChainDef
+                    // {
+                    //     Name = "Chests",
+                    //     ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Chest1.Id)),
+                    // },                    
+                    new CodexChainDef
+                    {
+                        Name = "Food",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Basket1.Id)),
+                    },
+                    
                 }
             },
             new CodexTabDef
@@ -319,7 +387,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                 {
                     new CodexChainDef
                     {
-                        Name = "Coins 1",
+                        Name = "Coin",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Coin1.Id)),
                     },
                 }
@@ -339,6 +407,12 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     {
                         ret.PendingRewardAmount += amount;
                         tabDef.PendingReward = true;
+                    }
+
+                    if (amount <= 0 && itemDef.State == CodexItemState.PendingReward)
+                    {
+                        itemDef.State = CodexItemState.Unlocked;
+                        Debug.LogError($"[CodexDataManager] => No reward specified for item {itemDef.PieceTypeDef.Abbreviations[0]}");
                     }
                 }
             }

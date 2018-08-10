@@ -23,6 +23,9 @@ public class CodexItem : MonoBehaviour
     [SerializeField] private CodexItemDropPanel dropPanel;
     [SerializeField] private GameObject exclamationMark;
 
+    private readonly Vector3 DEFAULT_SCALE = Vector3.one;
+    private readonly Vector3 REWARD_SCALE = Vector3.one * 1.1f;
+    
     private CodexItemState state;
 
     private CodexItemDef def;
@@ -65,6 +68,8 @@ public class CodexItem : MonoBehaviour
                 
                 dropPanel.gameObject.SetActive(true);
                 dropPanel.Init(itemDef);
+
+                pieceImage.transform.localScale = REWARD_SCALE;
                 
                 break;
             
@@ -83,7 +88,7 @@ public class CodexItem : MonoBehaviour
         pieceImage.sprite = sprite;
         caption.text = captionText;
         
-        Debug.Log($"[CodexItem] => Init {itemDef.PieceTypeDef.Abbreviations[0]} as {state}");
+        // Debug.Log($"[CodexItem] => Init {itemDef.PieceTypeDef.Abbreviations[0]} as {state}");
     }
 
     private void Reset()
@@ -97,6 +102,8 @@ public class CodexItem : MonoBehaviour
         pieceImage.color = unlockedColor;
         
         dropPanel.gameObject.SetActive(false);
+
+        pieceImage.transform.localScale = DEFAULT_SCALE;
     }
 
     private Sprite GetPieecSprite()

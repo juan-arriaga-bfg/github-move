@@ -8,6 +8,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     private ViewDefinitionComponent viewDef;
     private UIBoardView view;
 
+    private PathfinderComponent pathfinder;
+    
     public RectTransform GetAnchorRect()
     {
         throw new System.NotImplementedException();
@@ -18,11 +20,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         throw new System.NotImplementedException();
     }
 
-    public Camera RenderCamera
-    {
-        get { return thisContext.Context.BoardDef.ViewCamera; }
-    }
-    
+    public Camera RenderCamera => thisContext.Context.BoardDef.ViewCamera;
+
     public List<IResourceCarrier> Carriers { get; private set; }
     
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
@@ -32,7 +31,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         
         if(def == null) return;
         
-        viewDef = context.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
+        viewDef = thisContext.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
 
         if (viewDef != null)
         {
@@ -42,6 +41,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             ResourcesViewManager.Instance.RegisterView(this);
         }
         
+        pathfinder = thisContext.GetComponent<PathfinderComponent>(PathfinderComponent.ComponentGuid);
         Mask = BoardPosition.GetRect(BoardPosition.Zero(), def.Size.X, def.Size.Y);
         
         base.OnAddToBoard(position, context);
@@ -117,7 +117,12 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void UpdateResource(int offset)
     {
-        if(storageItem.Amount < level) return;
+        if (pathfinder.CanPathToCastle(thisContext))
+        {
+            Debug.LogError(thisContext.CachedPosition);
+        }
+        
+        if(pathfinder.CanPathToCastle(thisContext) == false || storageItem.Amount < level) return;
         
         view = viewDef.AddView(ViewType.FogState);
         

@@ -34,15 +34,9 @@ public class BoardManipulatorComponent : ECSEntity,
     
     private Vector2 cachedDragDownPos = Vector2.zero;
 
-    public CameraManipulator CameraManipulator
-    {
-        get { return cameraManipulator; }
-    }
+    public CameraManipulator CameraManipulator => cameraManipulator;
 
-    public override int Guid
-    {
-        get { return ComponentGuid; }
-    }
+    public override int Guid => ComponentGuid;
 
     public bool IsExecuteable()
     {
@@ -209,7 +203,7 @@ public class BoardManipulatorComponent : ECSEntity,
             
             if (lastCachedDragPosition.Equals(boardPos) == false)
             {
-                cachedViewForDrag.SyncRendererLayers(new BoardPosition(context.BoardDef.Width,context.BoardDef.Height, context.BoardDef.Depth));
+                cachedViewForDrag.SyncRendererLayers(new BoardPosition(context.BoardDef.Width, context.BoardDef.Height, context.BoardDef.Depth));
                 lastCachedDragPosition = boardPos;
                 
                 isDragLip = false;
@@ -247,41 +241,50 @@ public class BoardManipulatorComponent : ECSEntity,
             pos = pos + Vector2.up * 0.5f;
 
             DOTween.Kill(dragAnimationId);
-
-                
             
             if (cachedViewForDrag is PieceBoardElementView)
             {
+                var pieceView = cachedViewForDrag as PieceBoardElementView;
+                var boardPos = context.BoardDef.GetSectorPosition(pos);
+                
+                var fromPosition = context.RendererContext.GetBoardPosition(cachedViewForDrag);
+                
+                pieceView.OnDragEnd(boardPos, pos);
+                
                 if ((cachedDragDownPos - pos).sqrMagnitude > 0.01f && !isTouch)
                 {
-                    BoardPosition fromPosition = context.RendererContext.GetBoardPosition(cachedViewForDrag);
-                    BoardPosition targetPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
+                    var targetPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
+                    
                     context.ActionExecutor.AddAction(new DragAndCheckMatchAction
                     {
                         From = fromPosition,
                         To = new BoardPosition(targetPosition.X, targetPosition.Y, fromPosition.Z)
                     });
+                    
+                    cachedViewForDrag = null;
+                    cameraManipulator.CameraMove.UnLock(this);
                 }
                 else
                 {
-                    BoardPosition fromPosition = context.RendererContext.GetBoardPosition(cachedViewForDrag);
+                    var currentPos = pieceView.CachedTransform.localPosition;
                     var targetPos = context.BoardDef.GetSectorCenterWorldPosition(fromPosition.X, fromPosition.Y, 0);
-                    cachedViewForDrag.CachedTransform.DOLocalMove(targetPos, dragDuration).SetId(dragAnimationId);
+                    var distance = Vector2.Distance(currentPos, targetPos);
+
+                    var duration = dragDuration * (distance < 1 ? distance : 1);
+                    
+                    cachedViewForDrag.CachedTransform
+                        .DOLocalMove(targetPos, duration).OnComplete(() =>
+                        {
+                            if (cachedViewForDrag == null) return;
+                            
+                            cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, context.BoardDef.PieceLayer));
+                            cachedViewForDrag = null;
+                            cameraManipulator.CameraMove.UnLock(this);
+                        })
+                        .SetId(dragAnimationId);
                 }
-                
-                
-                var pieceView = cachedViewForDrag as PieceBoardElementView;
-                var boardPos = context.BoardDef.GetSectorPosition(pos);
-                
-                cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, pieceView.Piece.Layer.Index));
-                
-                pieceView.OnDragEnd(boardPos, pos);
             }
-
-            cachedViewForDrag = null;
-
-            cameraManipulator.CameraMove.UnLock(this);
-
+            
             return true;
         }
 

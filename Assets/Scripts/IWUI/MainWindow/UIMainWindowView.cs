@@ -19,12 +19,14 @@ public class UIMainWindowView : IWUIWindowView
         GameDataService.Current.CodexManager.OnNewItemUnlocked += OnNewPieceBuilded;
         
         UpdateQuest();
+        UpdateCodexButton();
     }
 
     public override void OnViewClose()
     {
         GameDataService.Current.QuestsManager.OnUpdateActiveQuests -= UpdateQuest;
         GameDataService.Current.CodexManager.OnNewItemUnlocked -= OnNewPieceBuilded;
+        
         base.OnViewClose();
     }
 
@@ -99,33 +101,60 @@ public class UIMainWindowView : IWUIWindowView
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
     
+    private void UpdateCodexButton()
+    {
+        codexButton.UpdateState();
+    }
+    
     public void OnClickCodex()
     {
-        codexButton.ToggleShine(false);
+        var codexManager = GameDataService.Current.CodexManager;
+        var content = codexManager.GetCodexContent();
+        
+        if (codexManager.CodexState == CodexState.NewPiece)
+        {
+            codexManager.CodexState = content.PendingRewardAmount > 0 ? CodexState.PendingReward : CodexState.Normal;
+        }
+        
+        codexButton.UpdateState();
         
         var model = UIService.Get.GetCachedModel<UICodexWindowModel>(UIWindowType.CodexWindow);
         model.ActiveTabIndex = 0;
-        model.CodexContent = GameDataService.Current.CodexManager.GetCodexContent();
+        model.CodexContent = content;
+        model.OnClaim = UpdateCodexButton;
         
         UIService.Get.ShowWindow(UIWindowType.CodexWindow);
     }
 
     private void OnNewPieceBuilded()
     {
-        codexButton.ToggleShine(true);
+        codexButton.UpdateState();
     }
     
     public void Debug1()
     {
-        var board = BoardService.Current.GetBoardById(0);
+        // var board = BoardService.Current.GetBoardById(0);
+        //
+        // board.ActionExecutor.AddAction(new SpawnPieceAtAction
+        // {
+        //     At = new BoardPosition(20, 20, 1),
+        //     PieceTypeId = PieceType.D4.Id
+        // });
         
-        board.ActionExecutor.AddAction(new SpawnPieceAtAction
-        {
-            At = new BoardPosition(20, 20, 1),
-            PieceTypeId = PieceType.D4.Id
-        });
+        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.F3.Id);
+        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.D3.Id);
+        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.E3.Id);
+        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.G3.Id);
+        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.H3.Id);
         
-        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.D2.Id);
+        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.A3.Id);
+        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.B3.Id);
+        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.C3.Id);
+        
+        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.ChestC3.Id);
+        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.Basket3.Id);
+        
+        GameDataService.Current.CodexManager.OnPieceBuilded(PieceType.Coin3.Id);
     }
     
     public void Debug2()

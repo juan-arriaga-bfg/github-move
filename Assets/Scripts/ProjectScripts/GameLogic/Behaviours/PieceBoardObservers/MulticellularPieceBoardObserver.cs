@@ -4,12 +4,8 @@ using UnityEngine;
 public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserver
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
-    
-	public int Guid
-	{
-		get { return ComponentGuid; }
-	}
-	
+	public int Guid => ComponentGuid;
+
 	public List<BoardPosition> Mask;
 
 	public BoardPosition GetTopPosition
@@ -39,9 +35,9 @@ public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserve
 		
 		realPosition = position;
 		
-		for (int i = 0; i < Mask.Count; i++)
+		foreach (var cell in Mask)
 		{
-			var point = GetPointInMask(position, Mask[i]);
+			var point = GetPointInMask(position, cell);
 			context.Context.BoardLogic.AddPieceToBoardSilent(point.X, point.Y, context);
 		}
 	}
@@ -58,10 +54,10 @@ public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserve
 	public virtual void OnRemoveFromBoard(BoardPosition position, Piece context = null)
 	{
 		if(context == null || realPosition.Equals(position) == false) return;
-		
-		for (int i = 0; i < Mask.Count; i++)
+
+		foreach (var cell in Mask)
 		{
-			var point = GetPointInMask(position, Mask[i]);
+			var point = GetPointInMask(position, cell);
 			context.Context.BoardLogic.RemovePieceFromBoardSilent(point);
 		}
 	}
