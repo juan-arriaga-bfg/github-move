@@ -1,7 +1,13 @@
 ﻿[
   {
     "Uid": "A1",
-    "Name": "A1 Piece"
+    "Name": "Log",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "A2",
@@ -15,7 +21,7 @@
         "Amount": 5
       }
     ],
-    "Name": "A2 Piece",
+    "Name": "Timber",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -35,7 +41,7 @@
         "Amount": 10
       }
     ],
-    "Name": "A3 Piece",
+    "Name": "Wooden house",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -55,7 +61,7 @@
         "Amount": 15
       }
     ],
-    "Name": "A4 Piece",
+    "Name": "Yellow house",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -75,7 +81,7 @@
         "Amount": 25
       }
     ],
-    "Name": "A5 Piece",
+    "Name": "Orange house",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -95,7 +101,7 @@
         "Amount": 50
       }
     ],
-    "Name": "A6 Piece",
+    "Name": "Green house",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -115,7 +121,7 @@
         "Amount": 100
       }
     ],
-    "Name": "A7 Piece",
+    "Name": "Blue house",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -135,7 +141,7 @@
         "Amount": 200
       }
     ],
-    "Name": "A8 Piece",
+    "Name": "Red house",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -155,7 +161,7 @@
         "Amount": 400
       }
     ],
-    "Name": "A9 Piece",
+    "Name": "Purple house",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -165,7 +171,13 @@
   },
   {
     "Uid": "B1",
-    "Name": "B1 Piece"
+    "Name": "Wheat",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "B2",
@@ -179,7 +191,7 @@
         "Amount": 15
       }
     ],
-    "Name": "B2 Piece",
+    "Name": "Field",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -199,7 +211,7 @@
         "Amount": 25
       }
     ],
-    "Name": "B3 Piece",
+    "Name": "Sheaf",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -219,7 +231,7 @@
         "Amount": 40
       }
     ],
-    "Name": "B4 Piece",
+    "Name": "Barn",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -239,7 +251,7 @@
         "Amount": 75
       }
     ],
-    "Name": "B5 Piece",
+    "Name": "Mill",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -249,7 +261,13 @@
   },
   {
     "Uid": "C1",
-    "Name": "C1 Piece"
+    "Name": "Stone",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "C2",
@@ -263,7 +281,7 @@
         "Amount": 15
       }
     ],
-    "Name": "C2 Piece",
+    "Name": "Pile of stones",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -283,7 +301,7 @@
         "Amount": 25
       }
     ],
-    "Name": "C3 Piece",
+    "Name": "Brown house",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -303,7 +321,7 @@
         "Amount": 40
       }
     ],
-    "Name": "C4 Piece",
+    "Name": "Yellow house",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -323,7 +341,7 @@
         "Amount": 75
       }
     ],
-    "Name": "C5 Piece",
+    "Name": "Orange house",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -343,7 +361,7 @@
         "Amount": 125
       }
     ],
-    "Name": "C6 Piece",
+    "Name": "Pink house",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -363,7 +381,7 @@
         "Amount": 200
       }
     ],
-    "Name": "C7 Piece",
+    "Name": "Purple house",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -383,7 +401,7 @@
         "Amount": 300
       }
     ],
-    "Name": "C8 Piece",
+    "Name": "Blue house",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -403,7 +421,7 @@
         "Amount": 500
       }
     ],
-    "Name": "C9 Piece",
+    "Name": "Palace",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -413,7 +431,13 @@
   },
   {
     "Uid": "D1",
-    "Name": "Little sheep"
+    "Name": "Little sheep",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "D2",
@@ -489,7 +513,13 @@
       "Currency": "Energy",
       "Amount": 1
     },
-    "Name": "Apple"
+    "Name": "Apple",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "E2",
@@ -577,7 +607,13 @@
   },
   {
     "Uid": "F1",
-    "Name": "Sprout"
+    "Name": "Sprout",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "F2",
@@ -673,7 +709,13 @@
   },
   {
     "Uid": "G1",
-    "Name": "Calf"
+    "Name": "Calf",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "G2",
@@ -745,7 +787,13 @@
   },
   {
     "Uid": "H1",
-    "Name": "Chick"
+    "Name": "Chick",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "H2",
@@ -817,7 +865,13 @@
   },
   {
     "Uid": "I1",
-    "Name": "I1 Piece"
+    "Name": "I1 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "I2",
@@ -1005,7 +1059,13 @@
   },
   {
     "Uid": "X1",
-    "Name": "X1 Piece"
+    "Name": "X1 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "X2",
