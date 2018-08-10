@@ -193,7 +193,31 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         return Items.TryGetValue(firstId, out state);
     }
 
-    private List<CodexItemDef> GetCodexItemsForChain(List<int> chain)
+    public List<CodexItemDef> GetCodexItemsForChainAndFocus(int targetId)
+    {
+        var board    = BoardService.Current.GetBoardById(0);
+        var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
+
+        var chain = matchDef.GetChain(targetId);
+        var list = GetCodexItemsForChain(chain);
+
+        foreach (var def in list)
+        {
+            if (def.State == CodexItemState.PendingReward)
+            {
+                def.State = CodexItemState.Unlocked;
+            }
+
+            if (def.PieceTypeDef.Id == targetId)
+            {
+                def.State = CodexItemState.Highlighted;
+            }
+        }
+
+        return list;
+    }
+    
+    public List<CodexItemDef> GetCodexItemsForChain(List<int> chain)
     {
         // Debug.Log($"========\nGet items: {chain[0]}");
         

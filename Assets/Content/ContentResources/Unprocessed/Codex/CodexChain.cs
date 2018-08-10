@@ -11,7 +11,10 @@ public class CodexChain : MonoBehaviour
 
     public void Init(CodexChainDef def)
     {
-        caption.text = def.Name;
+        if (caption != null)
+        {
+            caption.text = def.Name;
+        }
     }
     
     public void AddItem(CodexItem item)

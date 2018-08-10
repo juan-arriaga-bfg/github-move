@@ -98,7 +98,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
             
             tabGroup.AddTab(tab, i);
 
-            CreateChains(tab, codexTabDef);
+            CreateChains(tab, codexTabDef, chainPrefab, itemPrefab);
             
             ret.Add(tabGo);
         }
@@ -106,7 +106,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
         return ret;
     }
 
-    private void CreateChains(CodexTab tab, CodexTabDef tabDef)
+    private static void CreateChains(CodexTab tab, CodexTabDef tabDef, GameObject chainPrefab, GameObject itemPrefab)
     {
         var chainDefs = tabDef.ChainDefs;
         
@@ -122,11 +122,11 @@ public class UICodexWindowView : UIGenericPopupWindowView
             
             tab.AddChain(chain);
 
-            CreateItems(chain, codexChainDef);
+            CreateItems(chain, codexChainDef, itemPrefab);
         }
     }
 
-    private void CreateItems(CodexChain chain, CodexChainDef chainDef)
+    public static void CreateItems(CodexChain chain, CodexChainDef chainDef, GameObject itemPrefab)
     {
         var itemDefs = chainDef.ItemDefs;
         
