@@ -64,6 +64,16 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 		CurrencyHellper.Purchase(Currency.Fog.Name, 1, def.Condition, success =>
 		{
 			if (success == false) return;
+			
+			var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
+
+			if (views != null)
+			{
+				foreach (var view in views)
+				{
+					view.UpdateResource(0);
+				}
+			}
                 
 			Context.Context.ActionExecutor.AddAction(new CollapsePieceToAction
 			{
