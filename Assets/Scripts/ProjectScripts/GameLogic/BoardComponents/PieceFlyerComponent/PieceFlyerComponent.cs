@@ -17,7 +17,10 @@
     {
         if(GameDataService.Current.QuestsManager.IsNeedToFly(id) == false) return;
         
-        FlyTo(id, x, y, PieceType.Parse(id));
+        var flay = ResourcesViewManager.Instance.GetFirstViewById(PieceType.Parse(id));
+        flay?.UpdateResource(1);
+        
+//        FlyTo(id, x, y, PieceType.Parse(id));
     }
     
     public void FlyTo(int id, int x, int y, string target)
