@@ -54,7 +54,8 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
             {
                 for (int i = 0; i < list.Count; i++)
                 {
-                    SpawnReward(list[i], nextPieces[i]);
+                    if(nextPieces[i] != pieceType)
+                        SpawnReward(list[i], nextPieces[i]);
                 }
             }
         };
