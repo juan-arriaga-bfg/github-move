@@ -132,6 +132,7 @@ public class PieceBoardElementView : BoardElementView
         lastBoardPosition = Piece.CachedPosition;
         
         if (selectionView == null) return;
+        
         DOTween.Kill(animationUid);
         sprite.color = Color.white;
         selectionSprite.color = baseColor;

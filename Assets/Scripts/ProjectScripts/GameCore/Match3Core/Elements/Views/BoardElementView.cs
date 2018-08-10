@@ -128,7 +128,6 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         for (int i =0; i < cachedRenderers.size; i++)
         {
             var rend = cachedRenderers[i];
-   
             rend.CachedRenderer.sortingOrder = boardPosition.X * Context.Context.BoardDef.Width - boardPosition.Y + boardPosition.Z * 100 + rend.SortingOrderOffset;
         }
 
