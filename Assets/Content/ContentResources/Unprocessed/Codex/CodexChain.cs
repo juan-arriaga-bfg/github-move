@@ -9,9 +9,17 @@ public class CodexChain : MonoBehaviour
     
     private readonly List<CodexItem> codexItems = new List<CodexItem>();
 
+    public Transform ItemsHost
+    {
+        get { return itemsHost; }
+    }
+
     public void Init(CodexChainDef def)
     {
-        caption.text = def.Name;
+        if (caption != null)
+        {
+            caption.text = def.Name;
+        }
     }
     
     public void AddItem(CodexItem item)
