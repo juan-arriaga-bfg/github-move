@@ -16,6 +16,8 @@ public class UIQuestWindowView : UIGenericPopupWindowView
     [SerializeField] private GameObject codexItemPrefab;
 
     private bool isComplete;
+
+    private const int CHAIN_LENGTH = 5;
     
     public override void OnViewShow()
     {
@@ -131,12 +133,12 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             board.HintCooldown.Step(position.Value);
         });
     }
-    
+
     private void CreateChain(UIQuestWindowModel model)
     {
         var targetId = model.Quest.WantedPiece;
-        var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId);
+        var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId, CHAIN_LENGTH);
         CodexChainDef chainDef = new CodexChainDef {ItemDefs = itemDefs};
-        UICodexWindowView.CreateItems(chain, chainDef, codexItemPrefab);
+        UICodexWindowView.CreateItems(chain, chainDef, codexItemPrefab, CHAIN_LENGTH);
     }
 }

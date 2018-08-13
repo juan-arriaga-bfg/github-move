@@ -122,11 +122,11 @@ public class UICodexWindowView : UIGenericPopupWindowView
             
             tab.AddChain(chain);
 
-            CreateItems(chain, codexChainDef, itemPrefab);
+            CreateItems(chain, codexChainDef, itemPrefab, ITEMS_IN_ROW_COUNT);
         }
     }
 
-    public static void CreateItems(CodexChain chain, CodexChainDef chainDef, GameObject itemPrefab)
+    public static void CreateItems(CodexChain chain, CodexChainDef chainDef, GameObject itemPrefab, int rowLength)
     {
         var itemDefs = chainDef.ItemDefs;
         
@@ -139,7 +139,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
             
             CodexItem item = itemGo.GetComponent<CodexItem>();
 
-            bool forceHideArrow = (i + 1) % ITEMS_IN_ROW_COUNT == 0;
+            bool forceHideArrow = (i + 1) % rowLength == 0;
             item.Init(codexItemDef, forceHideArrow);
             
             chain.AddItem(item);

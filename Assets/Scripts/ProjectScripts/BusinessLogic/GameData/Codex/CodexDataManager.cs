@@ -193,7 +193,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         return Items.TryGetValue(firstId, out state);
     }
 
-    public List<CodexItemDef> GetCodexItemsForChainAndFocus(int targetId)
+    public List<CodexItemDef> GetCodexItemsForChainAndFocus(int targetId, int length)
     {
         var board    = BoardService.Current.GetBoardById(0);
         var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
@@ -201,8 +201,11 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         var chain = matchDef.GetChain(targetId);
         var list = GetCodexItemsForChain(chain);
 
-        foreach (var def in list)
+        int highlightedIndex = -1;
+
+        for (var i = 0; i < list.Count; i++)
         {
+            var def = list[i];
             if (def.State == CodexItemState.PendingReward)
             {
                 def.State = CodexItemState.Unlocked;
@@ -211,10 +214,36 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             if (def.PieceTypeDef.Id == targetId)
             {
                 def.State = CodexItemState.Highlighted;
+                highlightedIndex = i;
             }
         }
 
-        return list;
+        // Put HL to almost end of the displayed part of a chain
+        const int ITEMS_TO_SHOW_AFTER_HL = 1;
+
+        int rangeLength;
+        int rangeStart;
+
+        if (length >= list.Count)
+        {
+            rangeLength = list.Count;
+            rangeStart = 0;
+        }
+        else
+        {
+            rangeLength = Mathf.Min(length, list.Count);
+            rangeStart  = Mathf.Max(0, highlightedIndex + 1 - length + ITEMS_TO_SHOW_AFTER_HL);
+
+            if (rangeStart + rangeLength > list.Count)
+            {
+                rangeStart = Mathf.Max(0, list.Count - rangeLength);
+            }
+        }
+
+        // Debug.Log($"GetCodexItemsForChainAndFocus: rangeStart: {rangeStart}, rangeLength: {rangeLength}, list.Count: {list.Count}, highlightedIndex: {highlightedIndex}");
+        
+        List<CodexItemDef> ret = list.GetRange(rangeStart, rangeLength);
+        return ret;
     }
     
     public List<CodexItemDef> GetCodexItemsForChain(List<int> chain)
