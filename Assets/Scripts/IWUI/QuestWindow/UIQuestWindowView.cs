@@ -136,6 +136,11 @@ public class UIQuestWindowView : UIGenericPopupWindowView
 
     private void CreateChain(UIQuestWindowModel model)
     {
+        foreach (Transform child in chain.ItemsHost) 
+        {
+            Destroy(child.gameObject);
+        }
+        
         var targetId = model.Quest.WantedPiece;
         var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId, CHAIN_LENGTH);
         CodexChainDef chainDef = new CodexChainDef {ItemDefs = itemDefs};
