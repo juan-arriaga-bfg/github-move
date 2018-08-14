@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EmptyCellsFinderComponent : IECSComponent
@@ -17,11 +18,13 @@ public class EmptyCellsFinderComponent : IECSComponent
 	{
 	}
 	
-	public bool FindRandomNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count)
+	public bool FindRandomNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, float extraSpacePrecent = 0)
 	{
 		var index = 0;
-
-		while (field.Count < count && index < 10)
+		extraSpacePrecent = Mathf.Clamp(extraSpacePrecent, 0, float.MaxValue);
+		var extra = 1 + extraSpacePrecent;
+		
+		while (field.Count < count*extra && index < 10)
 		{
 			index++;
 			FindRingWithPointInCenter(point, field, (index * 2) * 4, index);
