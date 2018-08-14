@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Lean.Touch;
 
 public class UICodexWindowController : IWWindowController 
 {
@@ -26,7 +28,7 @@ public class UICodexWindowController : IWWindowController
                                      CloseCurrentWindow();
                                      
                                      model.OnClaim?.Invoke();
-                                 });
+                                 }, LeanTouch.Fingers.First()?.LastScreenPosition);
     }
 
     private void Save()

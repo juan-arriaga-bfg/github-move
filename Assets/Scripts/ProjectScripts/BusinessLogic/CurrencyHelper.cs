@@ -1,30 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public static class CurrencyHellper
 {
-    public static bool Purchase(string product, int amount, Action<bool> onSuccess = null)
+    public static bool Purchase(string product, int amount, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
-        return Purchase(product, amount, Currency.Cash.Name, 0, onSuccess);
+        return Purchase(product, amount, Currency.Cash.Name, 0, onSuccess, flyPosition);
     }
     
-    public static bool Purchase(string product, int amount, CurrencyPair price, Action<bool> onSuccess = null)
+    public static bool Purchase(string product, int amount, CurrencyPair price, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
-        return Purchase(product, amount, price.Currency, price.Amount, onSuccess);
+        return Purchase(product, amount, price.Currency, price.Amount, onSuccess, flyPosition);
     }
     
-    public static bool Purchase(CurrencyPair product, Action<bool> onSuccess = null)
+    public static bool Purchase(CurrencyPair product, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
-        return Purchase(product, new CurrencyPair{Currency = Currency.Cash.Name, Amount = 0}, onSuccess);
+        return Purchase(product, new CurrencyPair{Currency = Currency.Cash.Name, Amount = 0}, onSuccess, flyPosition);
     }
     
-    public static bool Purchase(CurrencyPair product, CurrencyPair price, Action<bool> onSuccess = null)
+    public static bool Purchase(CurrencyPair product, CurrencyPair price, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
-        return Purchase(product.Currency, product.Amount, price.Currency, price.Amount, onSuccess);
+        return Purchase(product.Currency, product.Amount, price.Currency, price.Amount, onSuccess, flyPosition);
     }
     
-    public static bool Purchase(string product, int amountProduct, string price, int amountPrice, Action<bool> onSuccess = null)
+    public static bool Purchase(string product, int amountProduct, string price, int amountPrice, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
         var isSuccess = false;
         
@@ -43,7 +44,10 @@ public static class CurrencyHellper
             {
                 // on purchase success
                 isSuccess = true;
+                if (flyPosition != null)
+                    CurrencyFly(flyPosition.Value, new CurrencyPair() {Amount = amountProduct, Currency = product});
                 if (onSuccess != null) onSuccess(true);
+                
             },
             item =>
             {
@@ -55,6 +59,22 @@ public static class CurrencyHellper
         );
 
         return isSuccess;
+    }
+
+    private static void CurrencyFly(Vector3 screenPosition, CurrencyPair resource)
+    {
+        
+        var fly = ResourcesViewManager.Instance.GetFirstViewById(resource.Currency);
+        if (fly == null)
+            return;
+        var carriers = ResourcesViewManager.DeliverResource<ResourceCarrier>
+        (
+            resource.Currency,
+            resource.Amount,
+            fly.GetAnchorRect(),
+            screenPosition,
+            R.ResourceCarrier
+        );
     }
 
     public static bool Purchase(CurrencyPair product, List<CurrencyPair> prices, Action<bool> onSuccess = null)
