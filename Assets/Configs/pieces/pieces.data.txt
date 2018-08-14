@@ -1570,6 +1570,48 @@
     ]
   },
   {
+    "Uid": "ChestZ1",
+    "Name": "ChestZ1 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "ChestZ2",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "Name": "ChestZ2 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "ChestZ3",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "Name": "ChestZ3 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
     "Uid": "Castle1",
     "UpgradePrices": [
       {

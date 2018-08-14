@@ -30,8 +30,7 @@ public class FieldControllerComponent : IECSComponent
         
         if (fieldDef.Pieces == null)
         {
-//            var pieces = new Dictionary<int, List<BoardPosition>>(GameDataService.Current.FieldManager.Pieces)
-            var pieces = new Dictionary<int, List<BoardPosition>>()
+            var pieces = new Dictionary<int, List<BoardPosition>>(GameDataService.Current.FieldManager.Pieces)
                 {
                     {PieceType.Fog.Id, CreateFog()}
                 };

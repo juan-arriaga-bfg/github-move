@@ -43,7 +43,3763 @@
       },
       "Positions": [
         {
+          "X": 15,
+          "Y": 5
+        },
+        {
+          "X": 15,
+          "Y": 6
+        },
+        {
+          "X": 16,
+          "Y": 5
+        },
+        {
+          "X": 16,
+          "Y": 6
+        },
+        {
+          "X": 17,
+          "Y": 5
+        },
+        {
+          "X": 17,
+          "Y": 6
+        },
+        {
+          "X": 18,
+          "Y": 5
+        },
+        {
+          "X": 18,
+          "Y": 6
+        },
+        {
+          "X": 19,
+          "Y": 5
+        },
+        {
+          "X": 19,
+          "Y": 6
+        }
+      ],
+      "Pieces": {
+        "Mine 1": [
+          {
+            "X": 15,
+            "Y": 5
+          }
+        ],
+        "O3": [
+          {
+            "X": 17,
+            "Y": 5
+          }
+        ],
+        "O2": [
+          {
+            "X": 17,
+            "Y": 6
+          },
+          {
+            "X": 18,
+            "Y": 5
+          }
+        ],
+        "O1": [
+          {
+            "X": 18,
+            "Y": 6
+          }
+        ],
+        "D2": [
+          {
+            "X": 19,
+            "Y": 5
+          }
+        ],
+        "O5": [
+          {
+            "X": 19,
+            "Y": 6
+          }
+        ]
+      }
+    },
+    {
+      "Uid": "Fog 2",
+      "Level": 2,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 400
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 200
+      },
+      "Positions": [
+        {
+          "X": 18,
+          "Y": 2
+        },
+        {
+          "X": 18,
+          "Y": 3
+        },
+        {
+          "X": 18,
+          "Y": 4
+        },
+        {
+          "X": 19,
+          "Y": 2
+        },
+        {
+          "X": 19,
+          "Y": 3
+        },
+        {
+          "X": 19,
+          "Y": 4
+        },
+        {
+          "X": 20,
+          "Y": 2
+        },
+        {
+          "X": 20,
+          "Y": 3
+        },
+        {
+          "X": 20,
+          "Y": 4
+        },
+        {
+          "X": 21,
+          "Y": 2
+        },
+        {
+          "X": 21,
+          "Y": 3
+        },
+        {
+          "X": 21,
+          "Y": 4
+        }
+      ],
+      "Pieces": {
+        "B1": [
+          {
+            "X": 18,
+            "Y": 2
+          },
+          {
+            "X": 19,
+            "Y": 2
+          }
+        ],
+        "Mine 2": [
+          {
+            "X": 18,
+            "Y": 3
+          }
+        ],
+        "B2": [
+          {
+            "X": 20,
+            "Y": 2
+          }
+        ],
+        "O5": [
+          {
+            "X": 20,
+            "Y": 3
+          }
+        ],
+        "O1": [
+          {
+            "X": 20,
+            "Y": 4
+          }
+        ],
+        "A3": [
+          {
+            "X": 21,
+            "Y": 2
+          },
+          {
+            "X": 21,
+            "Y": 3
+          }
+        ],
+        "A2": [
+          {
+            "X": 21,
+            "Y": 4
+          }
+        ]
+      }
+    },
+    {
+      "Uid": "Fog 3",
+      "Level": 3,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 450
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 300
+      },
+      "Positions": [
+        {
+          "X": 15,
+          "Y": 7
+        },
+        {
+          "X": 15,
+          "Y": 8
+        },
+        {
+          "X": 15,
+          "Y": 9
+        },
+        {
+          "X": 16,
+          "Y": 7
+        },
+        {
+          "X": 16,
+          "Y": 8
+        },
+        {
+          "X": 16,
+          "Y": 9
+        },
+        {
+          "X": 17,
+          "Y": 7
+        },
+        {
+          "X": 17,
+          "Y": 8
+        },
+        {
+          "X": 17,
+          "Y": 9
+        },
+        {
+          "X": 18,
+          "Y": 7
+        },
+        {
+          "X": 18,
+          "Y": 8
+        },
+        {
+          "X": 18,
+          "Y": 9
+        },
+        {
+          "X": 19,
+          "Y": 7
+        },
+        {
+          "X": 19,
+          "Y": 8
+        },
+        {
+          "X": 19,
+          "Y": 9
+        }
+      ],
+      "Pieces": {
+        "F2": [
+          {
+            "X": 15,
+            "Y": 7
+          }
+        ],
+        "F3": [
+          {
+            "X": 15,
+            "Y": 8
+          }
+        ],
+        "O5": [
+          {
+            "X": 15,
+            "Y": 9
+          },
+          {
+            "X": 16,
+            "Y": 7
+          },
+          {
+            "X": 18,
+            "Y": 9
+          }
+        ],
+        "D1": [
+          {
+            "X": 16,
+            "Y": 8
+          },
+          {
+            "X": 16,
+            "Y": 9
+          }
+        ],
+        "B1": [
+          {
+            "X": 17,
+            "Y": 8
+          },
+          {
+            "X": 17,
+            "Y": 9
+          },
+          {
+            "X": 19,
+            "Y": 9
+          }
+        ],
+        "A1": [
+          {
+            "X": 18,
+            "Y": 7
+          },
+          {
+            "X": 19,
+            "Y": 7
+          },
+          {
+            "X": 19,
+            "Y": 8
+          }
+        ]
+      }
+    },
+    {
+      "Uid": "Fog 4",
+      "Level": 4,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 12,
+          "Y": 8
+        },
+        {
+          "X": 12,
+          "Y": 9
+        },
+        {
+          "X": 13,
+          "Y": 8
+        },
+        {
+          "X": 13,
+          "Y": 9
+        },
+        {
+          "X": 14,
+          "Y": 8
+        },
+        {
+          "X": 14,
+          "Y": 9
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 17",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 19,
+          "Y": 1
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 18",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 20,
+          "Y": 1
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 19",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 17,
+          "Y": 4
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 20",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 17,
+          "Y": 3
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 21",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 16,
+          "Y": 4
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 25",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 14,
+          "Y": 6
+        },
+        {
+          "X": 14,
+          "Y": 7
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 26",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 13,
+          "Y": 7
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 27",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 11,
+          "Y": 9
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 28",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 28,
+          "Y": 9
+        },
+        {
+          "X": 28,
+          "Y": 10
+        },
+        {
+          "X": 28,
+          "Y": 11
+        },
+        {
+          "X": 28,
+          "Y": 12
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 29",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 29,
+          "Y": 10
+        },
+        {
+          "X": 29,
+          "Y": 11
+        },
+        {
+          "X": 29,
+          "Y": 12
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 30",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 30,
+          "Y": 11
+        },
+        {
+          "X": 30,
+          "Y": 12
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 31",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 31,
+          "Y": 12
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 32",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 32,
+          "Y": 13
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 33",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 24,
+          "Y": 13
+        },
+        {
+          "X": 24,
+          "Y": 14
+        },
+        {
+          "X": 24,
+          "Y": 15
+        },
+        {
+          "X": 25,
+          "Y": 13
+        },
+        {
+          "X": 25,
+          "Y": 14
+        },
+        {
+          "X": 25,
+          "Y": 15
+        },
+        {
+          "X": 26,
+          "Y": 13
+        },
+        {
+          "X": 26,
+          "Y": 14
+        },
+        {
+          "X": 26,
+          "Y": 15
+        },
+        {
+          "X": 27,
+          "Y": 13
+        },
+        {
+          "X": 27,
+          "Y": 14
+        },
+        {
+          "X": 27,
+          "Y": 15
+        },
+        {
+          "X": 28,
+          "Y": 13
+        },
+        {
+          "X": 28,
+          "Y": 14
+        },
+        {
+          "X": 28,
+          "Y": 15
+        },
+        {
+          "X": 29,
+          "Y": 13
+        },
+        {
+          "X": 29,
+          "Y": 14
+        },
+        {
+          "X": 29,
+          "Y": 15
+        },
+        {
+          "X": 30,
+          "Y": 13
+        },
+        {
+          "X": 30,
+          "Y": 14
+        },
+        {
+          "X": 30,
+          "Y": 15
+        },
+        {
+          "X": 31,
+          "Y": 13
+        },
+        {
+          "X": 31,
+          "Y": 14
+        },
+        {
+          "X": 31,
+          "Y": 15
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 34",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 32,
+          "Y": 14
+        },
+        {
+          "X": 32,
+          "Y": 15
+        },
+        {
+          "X": 32,
+          "Y": 16
+        },
+        {
+          "X": 32,
+          "Y": 17
+        },
+        {
+          "X": 32,
+          "Y": 18
+        },
+        {
+          "X": 33,
+          "Y": 14
+        },
+        {
+          "X": 33,
+          "Y": 15
+        },
+        {
+          "X": 33,
+          "Y": 16
+        },
+        {
+          "X": 33,
+          "Y": 17
+        },
+        {
+          "X": 33,
+          "Y": 18
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 35",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 34,
+          "Y": 15
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 36",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 34,
+          "Y": 16
+        },
+        {
+          "X": 34,
+          "Y": 17
+        },
+        {
+          "X": 34,
+          "Y": 18
+        },
+        {
+          "X": 35,
+          "Y": 16
+        },
+        {
+          "X": 35,
+          "Y": 17
+        },
+        {
+          "X": 35,
+          "Y": 18
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 37",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 36,
+          "Y": 17
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 38",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 36,
+          "Y": 18
+        },
+        {
+          "X": 36,
+          "Y": 19
+        },
+        {
+          "X": 36,
+          "Y": 20
+        },
+        {
+          "X": 36,
+          "Y": 21
+        },
+        {
+          "X": 37,
+          "Y": 18
+        },
+        {
+          "X": 37,
+          "Y": 19
+        },
+        {
+          "X": 37,
+          "Y": 20
+        },
+        {
+          "X": 37,
+          "Y": 21
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 39",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 38,
+          "Y": 19
+        },
+        {
+          "X": 38,
+          "Y": 20
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 40",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 36,
+          "Y": 22
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 41",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 2,
+          "Y": 19
+        },
+        {
+          "X": 2,
+          "Y": 20
+        },
+        {
+          "X": 2,
+          "Y": 21
+        },
+        {
+          "X": 3,
+          "Y": 19
+        },
+        {
+          "X": 3,
+          "Y": 20
+        },
+        {
+          "X": 3,
+          "Y": 21
+        },
+        {
+          "X": 4,
+          "Y": 19
+        },
+        {
+          "X": 4,
+          "Y": 20
+        },
+        {
+          "X": 4,
+          "Y": 21
+        },
+        {
+          "X": 5,
+          "Y": 19
+        },
+        {
+          "X": 5,
+          "Y": 20
+        },
+        {
+          "X": 5,
+          "Y": 21
+        },
+        {
+          "X": 6,
+          "Y": 19
+        },
+        {
+          "X": 6,
+          "Y": 20
+        },
+        {
+          "X": 6,
+          "Y": 21
+        },
+        {
+          "X": 7,
+          "Y": 19
+        },
+        {
+          "X": 7,
+          "Y": 20
+        },
+        {
+          "X": 7,
+          "Y": 21
+        },
+        {
+          "X": 8,
+          "Y": 19
+        },
+        {
+          "X": 8,
+          "Y": 20
+        },
+        {
+          "X": 8,
+          "Y": 21
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 42",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 1,
+          "Y": 19
+        },
+        {
+          "X": 1,
+          "Y": 20
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 43",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 3,
+          "Y": 17
+        },
+        {
+          "X": 3,
+          "Y": 18
+        },
+        {
+          "X": 4,
+          "Y": 17
+        },
+        {
+          "X": 4,
+          "Y": 18
+        },
+        {
+          "X": 5,
+          "Y": 17
+        },
+        {
+          "X": 5,
+          "Y": 18
+        },
+        {
+          "X": 6,
+          "Y": 17
+        },
+        {
+          "X": 6,
+          "Y": 18
+        },
+        {
+          "X": 7,
+          "Y": 17
+        },
+        {
+          "X": 7,
+          "Y": 18
+        },
+        {
+          "X": 8,
+          "Y": 17
+        },
+        {
+          "X": 8,
+          "Y": 18
+        },
+        {
+          "X": 9,
+          "Y": 17
+        },
+        {
+          "X": 9,
+          "Y": 18
+        },
+        {
           "X": 10,
+          "Y": 17
+        },
+        {
+          "X": 10,
+          "Y": 18
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 44",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 7,
+          "Y": 13
+        },
+        {
+          "X": 7,
+          "Y": 14
+        },
+        {
+          "X": 7,
+          "Y": 15
+        },
+        {
+          "X": 7,
+          "Y": 16
+        },
+        {
+          "X": 8,
+          "Y": 13
+        },
+        {
+          "X": 8,
+          "Y": 14
+        },
+        {
+          "X": 8,
+          "Y": 15
+        },
+        {
+          "X": 8,
+          "Y": 16
+        },
+        {
+          "X": 9,
+          "Y": 13
+        },
+        {
+          "X": 9,
+          "Y": 14
+        },
+        {
+          "X": 9,
+          "Y": 15
+        },
+        {
+          "X": 9,
+          "Y": 16
+        },
+        {
+          "X": 10,
+          "Y": 13
+        },
+        {
+          "X": 10,
+          "Y": 14
+        },
+        {
+          "X": 10,
+          "Y": 15
+        },
+        {
+          "X": 10,
+          "Y": 16
+        },
+        {
+          "X": 11,
+          "Y": 13
+        },
+        {
+          "X": 11,
+          "Y": 14
+        },
+        {
+          "X": 11,
+          "Y": 15
+        },
+        {
+          "X": 11,
+          "Y": 16
+        },
+        {
+          "X": 12,
+          "Y": 13
+        },
+        {
+          "X": 12,
+          "Y": 14
+        },
+        {
+          "X": 12,
+          "Y": 15
+        },
+        {
+          "X": 12,
+          "Y": 16
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 45",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 5,
+          "Y": 15
+        },
+        {
+          "X": 5,
+          "Y": 16
+        },
+        {
+          "X": 6,
+          "Y": 15
+        },
+        {
+          "X": 6,
+          "Y": 16
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 46",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 4,
+          "Y": 16
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 47",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 6,
+          "Y": 14
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 48",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 9,
+          "Y": 11
+        },
+        {
+          "X": 9,
+          "Y": 12
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 49",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 8,
+          "Y": 12
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 54",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 4,
+          "Y": 22
+        },
+        {
+          "X": 4,
+          "Y": 23
+        },
+        {
+          "X": 5,
+          "Y": 22
+        },
+        {
+          "X": 5,
+          "Y": 23
+        },
+        {
+          "X": 6,
+          "Y": 22
+        },
+        {
+          "X": 6,
+          "Y": 23
+        },
+        {
+          "X": 7,
+          "Y": 22
+        },
+        {
+          "X": 7,
+          "Y": 23
+        },
+        {
+          "X": 8,
+          "Y": 22
+        },
+        {
+          "X": 8,
+          "Y": 23
+        },
+        {
+          "X": 9,
+          "Y": 22
+        },
+        {
+          "X": 9,
+          "Y": 23
+        },
+        {
+          "X": 10,
+          "Y": 22
+        },
+        {
+          "X": 10,
+          "Y": 23
+        },
+        {
+          "X": 11,
+          "Y": 22
+        },
+        {
+          "X": 11,
+          "Y": 23
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 55",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 3,
+          "Y": 22
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 56",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 6,
+          "Y": 24
+        },
+        {
+          "X": 6,
+          "Y": 25
+        },
+        {
+          "X": 7,
+          "Y": 24
+        },
+        {
+          "X": 7,
+          "Y": 25
+        },
+        {
+          "X": 8,
+          "Y": 24
+        },
+        {
+          "X": 8,
+          "Y": 25
+        },
+        {
+          "X": 9,
+          "Y": 24
+        },
+        {
+          "X": 9,
+          "Y": 25
+        },
+        {
+          "X": 10,
+          "Y": 24
+        },
+        {
+          "X": 10,
+          "Y": 25
+        },
+        {
+          "X": 11,
+          "Y": 24
+        },
+        {
+          "X": 11,
+          "Y": 25
+        },
+        {
+          "X": 12,
+          "Y": 24
+        },
+        {
+          "X": 12,
+          "Y": 25
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 57",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 5,
+          "Y": 24
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 58",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 34,
+          "Y": 24
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 59",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 8,
+          "Y": 26
+        },
+        {
+          "X": 8,
+          "Y": 27
+        },
+        {
+          "X": 9,
+          "Y": 26
+        },
+        {
+          "X": 9,
+          "Y": 27
+        },
+        {
+          "X": 10,
+          "Y": 26
+        },
+        {
+          "X": 10,
+          "Y": 27
+        },
+        {
+          "X": 11,
+          "Y": 26
+        },
+        {
+          "X": 11,
+          "Y": 27
+        },
+        {
+          "X": 12,
+          "Y": 26
+        },
+        {
+          "X": 12,
+          "Y": 27
+        },
+        {
+          "X": 13,
+          "Y": 26
+        },
+        {
+          "X": 13,
+          "Y": 27
+        },
+        {
+          "X": 14,
+          "Y": 26
+        },
+        {
+          "X": 14,
+          "Y": 27
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 60",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 7,
+          "Y": 26
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 61",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 32,
+          "Y": 26
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 62",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 10,
+          "Y": 28
+        },
+        {
+          "X": 10,
+          "Y": 29
+        },
+        {
+          "X": 11,
+          "Y": 28
+        },
+        {
+          "X": 11,
+          "Y": 29
+        },
+        {
+          "X": 12,
+          "Y": 28
+        },
+        {
+          "X": 12,
+          "Y": 29
+        },
+        {
+          "X": 13,
+          "Y": 28
+        },
+        {
+          "X": 13,
+          "Y": 29
+        },
+        {
+          "X": 14,
+          "Y": 28
+        },
+        {
+          "X": 14,
+          "Y": 29
+        },
+        {
+          "X": 15,
+          "Y": 28
+        },
+        {
+          "X": 15,
+          "Y": 29
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 63",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 9,
+          "Y": 28
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 64",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 30,
+          "Y": 28
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 65",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 12,
+          "Y": 30
+        },
+        {
+          "X": 12,
+          "Y": 31
+        },
+        {
+          "X": 13,
+          "Y": 30
+        },
+        {
+          "X": 13,
+          "Y": 31
+        },
+        {
+          "X": 14,
+          "Y": 30
+        },
+        {
+          "X": 14,
+          "Y": 31
+        },
+        {
+          "X": 15,
+          "Y": 30
+        },
+        {
+          "X": 15,
+          "Y": 31
+        },
+        {
+          "X": 16,
+          "Y": 30
+        },
+        {
+          "X": 16,
+          "Y": 31
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 66",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 11,
+          "Y": 30
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 67",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 28,
+          "Y": 30
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 69",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 13,
+          "Y": 32
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 70",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 26,
+          "Y": 32
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 71",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 16,
+          "Y": 34
+        },
+        {
+          "X": 16,
+          "Y": 35
+        },
+        {
+          "X": 17,
+          "Y": 34
+        },
+        {
+          "X": 17,
+          "Y": 35
+        },
+        {
+          "X": 18,
+          "Y": 34
+        },
+        {
+          "X": 18,
+          "Y": 35
+        },
+        {
+          "X": 19,
+          "Y": 34
+        },
+        {
+          "X": 19,
+          "Y": 35
+        },
+        {
+          "X": 20,
+          "Y": 34
+        },
+        {
+          "X": 20,
+          "Y": 35
+        },
+        {
+          "X": 21,
+          "Y": 34
+        },
+        {
+          "X": 21,
+          "Y": 35
+        },
+        {
+          "X": 22,
+          "Y": 34
+        },
+        {
+          "X": 22,
+          "Y": 35
+        },
+        {
+          "X": 23,
+          "Y": 34
+        },
+        {
+          "X": 23,
+          "Y": 35
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 72",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 15,
+          "Y": 34
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 73",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 24,
+          "Y": 34
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 74",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 18,
+          "Y": 36
+        },
+        {
+          "X": 18,
+          "Y": 37
+        },
+        {
+          "X": 19,
+          "Y": 36
+        },
+        {
+          "X": 19,
+          "Y": 37
+        },
+        {
+          "X": 20,
+          "Y": 36
+        },
+        {
+          "X": 20,
+          "Y": 37
+        },
+        {
+          "X": 21,
+          "Y": 36
+        },
+        {
+          "X": 21,
+          "Y": 37
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 75",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 17,
+          "Y": 36
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 76",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 22,
+          "Y": 36
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 77",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 19,
+          "Y": 38
+        },
+        {
+          "X": 20,
+          "Y": 38
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 78",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 2,
+          "Y": 18
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 80",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 13,
+          "Y": 13
+        },
+        {
+          "X": 13,
+          "Y": 14
+        },
+        {
+          "X": 13,
+          "Y": 15
+        },
+        {
+          "X": 13,
+          "Y": 16
+        },
+        {
+          "X": 14,
+          "Y": 13
+        },
+        {
+          "X": 14,
+          "Y": 14
+        },
+        {
+          "X": 14,
+          "Y": 15
+        },
+        {
+          "X": 14,
+          "Y": 16
+        },
+        {
+          "X": 15,
+          "Y": 13
+        },
+        {
+          "X": 15,
+          "Y": 14
+        },
+        {
+          "X": 15,
+          "Y": 15
+        },
+        {
+          "X": 15,
+          "Y": 16
+        },
+        {
+          "X": 16,
+          "Y": 13
+        },
+        {
+          "X": 16,
+          "Y": 14
+        },
+        {
+          "X": 16,
+          "Y": 15
+        },
+        {
+          "X": 16,
+          "Y": 16
+        },
+        {
+          "X": 17,
+          "Y": 13
+        },
+        {
+          "X": 17,
+          "Y": 14
+        },
+        {
+          "X": 17,
+          "Y": 15
+        },
+        {
+          "X": 17,
+          "Y": 16
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 81",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 11,
+          "Y": 17
+        },
+        {
+          "X": 11,
+          "Y": 18
+        },
+        {
+          "X": 12,
+          "Y": 17
+        },
+        {
+          "X": 12,
+          "Y": 18
+        },
+        {
+          "X": 13,
+          "Y": 17
+        },
+        {
+          "X": 13,
+          "Y": 18
+        },
+        {
+          "X": 14,
+          "Y": 17
+        },
+        {
+          "X": 14,
+          "Y": 18
+        },
+        {
+          "X": 15,
+          "Y": 17
+        },
+        {
+          "X": 15,
+          "Y": 18
+        },
+        {
+          "X": 16,
+          "Y": 17
+        },
+        {
+          "X": 16,
+          "Y": 18
+        },
+        {
+          "X": 17,
+          "Y": 17
+        },
+        {
+          "X": 17,
+          "Y": 18
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 82",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 9,
+          "Y": 19
+        },
+        {
+          "X": 9,
+          "Y": 20
+        },
+        {
+          "X": 9,
+          "Y": 21
+        },
+        {
+          "X": 10,
+          "Y": 19
+        },
+        {
+          "X": 10,
+          "Y": 20
+        },
+        {
+          "X": 10,
+          "Y": 21
+        },
+        {
+          "X": 11,
+          "Y": 19
+        },
+        {
+          "X": 11,
+          "Y": 20
+        },
+        {
+          "X": 11,
+          "Y": 21
+        },
+        {
+          "X": 12,
+          "Y": 19
+        },
+        {
+          "X": 12,
+          "Y": 20
+        },
+        {
+          "X": 12,
+          "Y": 21
+        },
+        {
+          "X": 13,
+          "Y": 19
+        },
+        {
+          "X": 13,
+          "Y": 20
+        },
+        {
+          "X": 13,
+          "Y": 21
+        },
+        {
+          "X": 14,
+          "Y": 19
+        },
+        {
+          "X": 14,
+          "Y": 20
+        },
+        {
+          "X": 14,
+          "Y": 21
+        },
+        {
+          "X": 15,
+          "Y": 19
+        },
+        {
+          "X": 15,
+          "Y": 20
+        },
+        {
+          "X": 15,
+          "Y": 21
+        },
+        {
+          "X": 16,
+          "Y": 19
+        },
+        {
+          "X": 16,
+          "Y": 20
+        },
+        {
+          "X": 16,
+          "Y": 21
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 84",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 25,
+          "Y": 19
+        },
+        {
+          "X": 25,
+          "Y": 20
+        },
+        {
+          "X": 25,
+          "Y": 21
+        },
+        {
+          "X": 26,
+          "Y": 19
+        },
+        {
+          "X": 26,
+          "Y": 20
+        },
+        {
+          "X": 26,
+          "Y": 21
+        },
+        {
+          "X": 27,
+          "Y": 19
+        },
+        {
+          "X": 27,
+          "Y": 20
+        },
+        {
+          "X": 27,
+          "Y": 21
+        },
+        {
+          "X": 28,
+          "Y": 19
+        },
+        {
+          "X": 28,
+          "Y": 20
+        },
+        {
+          "X": 28,
+          "Y": 21
+        },
+        {
+          "X": 29,
+          "Y": 19
+        },
+        {
+          "X": 29,
+          "Y": 20
+        },
+        {
+          "X": 29,
+          "Y": 21
+        },
+        {
+          "X": 30,
+          "Y": 19
+        },
+        {
+          "X": 30,
+          "Y": 20
+        },
+        {
+          "X": 30,
+          "Y": 21
+        },
+        {
+          "X": 31,
+          "Y": 19
+        },
+        {
+          "X": 31,
+          "Y": 20
+        },
+        {
+          "X": 31,
+          "Y": 21
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 85",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 32,
+          "Y": 19
+        },
+        {
+          "X": 32,
+          "Y": 20
+        },
+        {
+          "X": 32,
+          "Y": 21
+        },
+        {
+          "X": 33,
+          "Y": 19
+        },
+        {
+          "X": 33,
+          "Y": 20
+        },
+        {
+          "X": 33,
+          "Y": 21
+        },
+        {
+          "X": 34,
+          "Y": 19
+        },
+        {
+          "X": 34,
+          "Y": 20
+        },
+        {
+          "X": 34,
+          "Y": 21
+        },
+        {
+          "X": 35,
+          "Y": 19
+        },
+        {
+          "X": 35,
+          "Y": 20
+        },
+        {
+          "X": 35,
+          "Y": 21
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 86",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 24,
+          "Y": 16
+        },
+        {
+          "X": 24,
+          "Y": 17
+        },
+        {
+          "X": 24,
+          "Y": 18
+        },
+        {
+          "X": 25,
+          "Y": 16
+        },
+        {
+          "X": 25,
+          "Y": 17
+        },
+        {
+          "X": 25,
+          "Y": 18
+        },
+        {
+          "X": 26,
+          "Y": 16
+        },
+        {
+          "X": 26,
+          "Y": 17
+        },
+        {
+          "X": 26,
+          "Y": 18
+        },
+        {
+          "X": 27,
+          "Y": 16
+        },
+        {
+          "X": 27,
+          "Y": 17
+        },
+        {
+          "X": 27,
+          "Y": 18
+        },
+        {
+          "X": 28,
+          "Y": 16
+        },
+        {
+          "X": 28,
+          "Y": 17
+        },
+        {
+          "X": 28,
+          "Y": 18
+        },
+        {
+          "X": 29,
+          "Y": 16
+        },
+        {
+          "X": 29,
+          "Y": 17
+        },
+        {
+          "X": 29,
+          "Y": 18
+        },
+        {
+          "X": 30,
+          "Y": 16
+        },
+        {
+          "X": 30,
+          "Y": 17
+        },
+        {
+          "X": 30,
+          "Y": 18
+        },
+        {
+          "X": 31,
+          "Y": 16
+        },
+        {
+          "X": 31,
+          "Y": 17
+        },
+        {
+          "X": 31,
+          "Y": 18
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 87",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 12,
+          "Y": 22
+        },
+        {
+          "X": 12,
+          "Y": 23
+        },
+        {
+          "X": 13,
+          "Y": 22
+        },
+        {
+          "X": 13,
+          "Y": 23
+        },
+        {
+          "X": 14,
+          "Y": 22
+        },
+        {
+          "X": 14,
+          "Y": 23
+        },
+        {
+          "X": 15,
+          "Y": 22
+        },
+        {
+          "X": 15,
+          "Y": 23
+        },
+        {
+          "X": 16,
+          "Y": 22
+        },
+        {
+          "X": 16,
+          "Y": 23
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 88",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 25,
+          "Y": 22
+        },
+        {
+          "X": 25,
+          "Y": 23
+        },
+        {
+          "X": 26,
+          "Y": 22
+        },
+        {
+          "X": 26,
+          "Y": 23
+        },
+        {
+          "X": 27,
+          "Y": 22
+        },
+        {
+          "X": 27,
+          "Y": 23
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 89",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 28,
+          "Y": 22
+        },
+        {
+          "X": 28,
+          "Y": 23
+        },
+        {
+          "X": 29,
+          "Y": 22
+        },
+        {
+          "X": 29,
+          "Y": 23
+        },
+        {
+          "X": 30,
+          "Y": 22
+        },
+        {
+          "X": 30,
+          "Y": 23
+        },
+        {
+          "X": 31,
+          "Y": 22
+        },
+        {
+          "X": 31,
+          "Y": 23
+        },
+        {
+          "X": 32,
+          "Y": 22
+        },
+        {
+          "X": 32,
+          "Y": 23
+        },
+        {
+          "X": 33,
+          "Y": 22
+        },
+        {
+          "X": 33,
+          "Y": 23
+        },
+        {
+          "X": 34,
+          "Y": 22
+        },
+        {
+          "X": 34,
+          "Y": 23
+        },
+        {
+          "X": 35,
+          "Y": 22
+        },
+        {
+          "X": 35,
+          "Y": 23
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 90",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 13,
+          "Y": 24
+        },
+        {
+          "X": 13,
+          "Y": 25
+        },
+        {
+          "X": 14,
+          "Y": 24
+        },
+        {
+          "X": 14,
+          "Y": 25
+        },
+        {
+          "X": 15,
+          "Y": 24
+        },
+        {
+          "X": 15,
+          "Y": 25
+        },
+        {
+          "X": 16,
+          "Y": 24
+        },
+        {
+          "X": 16,
+          "Y": 25
+        },
+        {
+          "X": 17,
+          "Y": 24
+        },
+        {
+          "X": 17,
+          "Y": 25
+        },
+        {
+          "X": 18,
+          "Y": 24
+        },
+        {
+          "X": 18,
+          "Y": 25
+        },
+        {
+          "X": 19,
+          "Y": 24
+        },
+        {
+          "X": 19,
+          "Y": 25
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 91",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 20,
+          "Y": 24
+        },
+        {
+          "X": 20,
+          "Y": 25
+        },
+        {
+          "X": 21,
+          "Y": 24
+        },
+        {
+          "X": 21,
+          "Y": 25
+        },
+        {
+          "X": 22,
+          "Y": 24
+        },
+        {
+          "X": 22,
+          "Y": 25
+        },
+        {
+          "X": 23,
+          "Y": 24
+        },
+        {
+          "X": 23,
+          "Y": 25
+        },
+        {
+          "X": 24,
+          "Y": 24
+        },
+        {
+          "X": 24,
+          "Y": 25
+        },
+        {
+          "X": 25,
+          "Y": 24
+        },
+        {
+          "X": 25,
+          "Y": 25
+        },
+        {
+          "X": 26,
+          "Y": 24
+        },
+        {
+          "X": 26,
+          "Y": 25
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 92",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 27,
+          "Y": 24
+        },
+        {
+          "X": 27,
+          "Y": 25
+        },
+        {
+          "X": 28,
+          "Y": 24
+        },
+        {
+          "X": 28,
+          "Y": 25
+        },
+        {
+          "X": 29,
+          "Y": 24
+        },
+        {
+          "X": 29,
+          "Y": 25
+        },
+        {
+          "X": 30,
+          "Y": 24
+        },
+        {
+          "X": 30,
+          "Y": 25
+        },
+        {
+          "X": 31,
+          "Y": 24
+        },
+        {
+          "X": 31,
+          "Y": 25
+        },
+        {
+          "X": 32,
+          "Y": 24
+        },
+        {
+          "X": 32,
+          "Y": 25
+        },
+        {
+          "X": 33,
+          "Y": 24
+        },
+        {
+          "X": 33,
+          "Y": 25
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 93",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 15,
+          "Y": 26
+        },
+        {
+          "X": 15,
+          "Y": 27
+        },
+        {
+          "X": 16,
+          "Y": 26
+        },
+        {
+          "X": 16,
+          "Y": 27
+        },
+        {
+          "X": 17,
+          "Y": 26
+        },
+        {
+          "X": 17,
+          "Y": 27
+        },
+        {
+          "X": 18,
+          "Y": 26
+        },
+        {
+          "X": 18,
+          "Y": 27
+        },
+        {
+          "X": 19,
+          "Y": 26
+        },
+        {
+          "X": 19,
+          "Y": 27
+        },
+        {
+          "X": 20,
+          "Y": 26
+        },
+        {
+          "X": 20,
+          "Y": 27
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 94",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 21,
+          "Y": 26
+        },
+        {
+          "X": 21,
+          "Y": 27
+        },
+        {
+          "X": 22,
+          "Y": 26
+        },
+        {
+          "X": 22,
+          "Y": 27
+        },
+        {
+          "X": 23,
+          "Y": 26
+        },
+        {
+          "X": 23,
+          "Y": 27
+        },
+        {
+          "X": 24,
+          "Y": 26
+        },
+        {
+          "X": 24,
+          "Y": 27
+        },
+        {
+          "X": 25,
+          "Y": 26
+        },
+        {
+          "X": 25,
+          "Y": 27
+        },
+        {
+          "X": 26,
+          "Y": 26
+        },
+        {
+          "X": 26,
+          "Y": 27
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 95",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 27,
+          "Y": 26
+        },
+        {
+          "X": 27,
+          "Y": 27
+        },
+        {
+          "X": 28,
+          "Y": 26
+        },
+        {
+          "X": 28,
+          "Y": 27
+        },
+        {
+          "X": 29,
+          "Y": 26
+        },
+        {
+          "X": 29,
+          "Y": 27
+        },
+        {
+          "X": 30,
+          "Y": 26
+        },
+        {
+          "X": 30,
+          "Y": 27
+        },
+        {
+          "X": 31,
+          "Y": 26
+        },
+        {
+          "X": 31,
+          "Y": 27
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 96",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 16,
+          "Y": 28
+        },
+        {
+          "X": 16,
+          "Y": 29
+        },
+        {
+          "X": 17,
+          "Y": 28
+        },
+        {
+          "X": 17,
+          "Y": 29
+        },
+        {
+          "X": 18,
+          "Y": 28
+        },
+        {
+          "X": 18,
+          "Y": 29
+        },
+        {
+          "X": 19,
+          "Y": 28
+        },
+        {
+          "X": 19,
+          "Y": 29
+        },
+        {
+          "X": 20,
+          "Y": 28
+        },
+        {
+          "X": 20,
+          "Y": 29
+        },
+        {
+          "X": 21,
+          "Y": 28
+        },
+        {
+          "X": 21,
+          "Y": 29
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 97",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 22,
+          "Y": 28
+        },
+        {
+          "X": 22,
+          "Y": 29
+        },
+        {
+          "X": 23,
+          "Y": 28
+        },
+        {
+          "X": 23,
+          "Y": 29
+        },
+        {
+          "X": 24,
+          "Y": 28
+        },
+        {
+          "X": 24,
+          "Y": 29
+        },
+        {
+          "X": 25,
+          "Y": 28
+        },
+        {
+          "X": 25,
+          "Y": 29
+        },
+        {
+          "X": 26,
+          "Y": 28
+        },
+        {
+          "X": 26,
+          "Y": 29
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 98",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 27,
+          "Y": 28
+        },
+        {
+          "X": 27,
+          "Y": 29
+        },
+        {
+          "X": 28,
+          "Y": 28
+        },
+        {
+          "X": 28,
+          "Y": 29
+        },
+        {
+          "X": 29,
+          "Y": 28
+        },
+        {
+          "X": 29,
+          "Y": 29
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 99",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 17,
+          "Y": 30
+        },
+        {
+          "X": 17,
+          "Y": 31
+        },
+        {
+          "X": 18,
+          "Y": 30
+        },
+        {
+          "X": 18,
+          "Y": 31
+        },
+        {
+          "X": 19,
+          "Y": 30
+        },
+        {
+          "X": 19,
+          "Y": 31
+        },
+        {
+          "X": 20,
+          "Y": 30
+        },
+        {
+          "X": 20,
+          "Y": 31
+        },
+        {
+          "X": 21,
+          "Y": 30
+        },
+        {
+          "X": 21,
+          "Y": 31
+        },
+        {
+          "X": 22,
+          "Y": 30
+        },
+        {
+          "X": 22,
+          "Y": 31
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 100",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 23,
+          "Y": 30
+        },
+        {
+          "X": 23,
+          "Y": 31
+        },
+        {
+          "X": 24,
+          "Y": 30
+        },
+        {
+          "X": 24,
+          "Y": 31
+        },
+        {
+          "X": 25,
+          "Y": 30
+        },
+        {
+          "X": 25,
+          "Y": 31
+        },
+        {
+          "X": 26,
+          "Y": 30
+        },
+        {
+          "X": 26,
+          "Y": 31
+        },
+        {
+          "X": 27,
+          "Y": 30
+        },
+        {
+          "X": 27,
+          "Y": 31
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 101",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 14,
+          "Y": 32
+        },
+        {
+          "X": 14,
+          "Y": 33
+        },
+        {
+          "X": 15,
+          "Y": 32
+        },
+        {
+          "X": 15,
+          "Y": 33
+        },
+        {
+          "X": 16,
+          "Y": 32
+        },
+        {
+          "X": 16,
+          "Y": 33
+        },
+        {
+          "X": 17,
+          "Y": 32
+        },
+        {
+          "X": 17,
+          "Y": 33
+        },
+        {
+          "X": 18,
+          "Y": 32
+        },
+        {
+          "X": 18,
+          "Y": 33
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 102",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 19,
+          "Y": 32
+        },
+        {
+          "X": 19,
+          "Y": 33
+        },
+        {
+          "X": 20,
+          "Y": 32
+        },
+        {
+          "X": 20,
+          "Y": 33
+        },
+        {
+          "X": 21,
+          "Y": 32
+        },
+        {
+          "X": 21,
+          "Y": 33
+        },
+        {
+          "X": 22,
+          "Y": 32
+        },
+        {
+          "X": 22,
+          "Y": 33
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 103",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 23,
+          "Y": 32
+        },
+        {
+          "X": 23,
+          "Y": 33
+        },
+        {
+          "X": 24,
+          "Y": 32
+        },
+        {
+          "X": 24,
+          "Y": 33
+        },
+        {
+          "X": 25,
+          "Y": 32
+        },
+        {
+          "X": 25,
+          "Y": 33
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 115",
+      "Level": 10,
+      "Condition": {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      "Positions": [
+        {
+          "X": 10,
+          "Y": 10
+        },
+        {
+          "X": 10,
+          "Y": 11
+        },
+        {
+          "X": 10,
+          "Y": 12
+        },
+        {
+          "X": 11,
           "Y": 10
         },
         {
@@ -51,16 +3807,107 @@
           "Y": 11
         },
         {
+          "X": 11,
+          "Y": 12
+        },
+        {
+          "X": 12,
+          "Y": 10
+        },
+        {
+          "X": 12,
+          "Y": 11
+        },
+        {
           "X": 12,
           "Y": 12
         },
         {
-          "X": 10,
+          "X": 13,
+          "Y": 10
+        },
+        {
+          "X": 13,
+          "Y": 11
+        },
+        {
+          "X": 13,
+          "Y": 12
+        },
+        {
+          "X": 14,
+          "Y": 10
+        },
+        {
+          "X": 14,
+          "Y": 11
+        },
+        {
+          "X": 14,
+          "Y": 12
+        },
+        {
+          "X": 15,
+          "Y": 10
+        },
+        {
+          "X": 15,
+          "Y": 11
+        },
+        {
+          "X": 15,
+          "Y": 12
+        },
+        {
+          "X": 16,
+          "Y": 10
+        },
+        {
+          "X": 16,
+          "Y": 11
+        },
+        {
+          "X": 16,
+          "Y": 12
+        },
+        {
+          "X": 17,
+          "Y": 10
+        },
+        {
+          "X": 17,
+          "Y": 11
+        },
+        {
+          "X": 17,
+          "Y": 12
+        },
+        {
+          "X": 18,
+          "Y": 10
+        },
+        {
+          "X": 18,
+          "Y": 11
+        },
+        {
+          "X": 18,
+          "Y": 12
+        },
+        {
+          "X": 19,
+          "Y": 10
+        },
+        {
+          "X": 19,
+          "Y": 11
+        },
+        {
+          "X": 19,
           "Y": 12
         }
       ],
-      "Pieces": {
-      }
+      "Pieces": {}
     }
   ]
 }
