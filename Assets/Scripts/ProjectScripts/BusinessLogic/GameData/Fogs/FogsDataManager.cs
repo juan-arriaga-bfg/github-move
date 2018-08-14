@@ -5,8 +5,8 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
 
-    public int Guid { get { return ComponentGuid; } }
-	
+    public int Guid => ComponentGuid;
+
     public void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
@@ -44,16 +44,16 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
                 
                 var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
 
-                if (save != null && save.CompleteFogPositions != null)
+                if (save?.CompleteFogPositions != null)
                 {
                     Completed = save.CompleteFogPositions;
                 }
                 
                 foreach (var def in data.Fogs)
                 {
-                    if(Completed.FindIndex(position => position.Equals(def.Position)) != -1) continue;
+                    if(Completed.FindIndex(position => position.Equals(def.GetCenter())) != -1) continue;
                     
-                    FogPositions.Add(def.Position, def);
+                    FogPositions.Add(def.GetCenter(), def);
                 }
             }
             else
