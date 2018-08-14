@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Dws;
 using Newtonsoft.Json;
@@ -26,9 +27,20 @@ public class ConfigsGoogleLoader
             Debug.Log("[GoogleLoaderSettings] -> settings generated");
         }
     }
-    
-    [MenuItem("Tools/Configs/Update with Google")]
-    public static void UpdateWithGoogle()
+
+    [MenuItem("Tools/Configs/Update configs with Google (force)", false, 50)]
+    public static void ForceUpdateWithGoogleClick()
+    {
+        UpdateWithGoogle(true);
+    }
+
+    [MenuItem("Tools/Configs/Update configs with Google", false, 50)]
+    public static void UpdateWithGoogleClick()
+    {
+        UpdateWithGoogle(false);
+    }
+
+    private static void UpdateWithGoogle(bool forceUpdate)
     {
         update = new List<KeyValuePair<string, GoogleLink>>();
 
@@ -47,68 +59,80 @@ public class ConfigsGoogleLoader
         index = update.Count;
         filesToCheckCount = index;
         
-        CheckNeedToUpdate();
+        CheckNeedToUpdate(forceUpdate);
     }
     
-    private static void CheckNeedToUpdate()
+    private static void CheckNeedToUpdate(bool forceUpdate)
     {
-        index--;
+        var idsArray = update.Select(e => e.Value.Link).ToArray();
+        HashSet<string> uniqIds = new HashSet<string>(idsArray);
+        var idsStr = string.Join(",", uniqIds);
 
-        if (index < 0)
-        {
-            Debug.LogWarning("check for the need to update the configs completed!");
-            index = update.Count;
-            
-            EditorUtility.ClearProgressBar();
-            
-            Load();
-
-            return;
-        }
-
-        var gLink = update[index].Value;
-        var req = new WebRequestData(GetUrl(gLink.Link, "getLastUpdated", ""));
-
-        float progress = 1 - (index / (float)filesToCheckCount);
-        EditorUtility.DisplayProgressBar("Configs update...", string.Format("[{1}/{2}] Validating '{0}'", update[index].Key, filesToCheckCount - index, filesToCheckCount), progress);
+        //var gLink = update[index].Value;
+        var req = new WebRequestData(GetUrl("getLastUpdated", "ids=" + idsStr));
+        EditorUtility.DisplayProgressBar("Configs update...", "Validating...", 0);
                
         WebHelper.MakeRequest(req, (response) =>
         {
+            EditorUtility.ClearProgressBar();
+            
             if (response.IsOk == false || string.IsNullOrEmpty(response.Error) == false )
             {
-                Debug.LogErrorFormat("Can't check last updated {0}. response.IsOk = {1}. Error: {2}", gLink.Key, response.IsOk, response.Error);
-                CheckNeedToUpdate();
-                
-                EditorUtility.ClearProgressBar();
-                
+                Debug.LogErrorFormat("Can't check last updated. Response.IsOk = {1}. Error: {2}", response.IsOk, response.Error);
                 return;
             }
                 
             var root = JObject.Parse(response.Result);
             var result = root["result"];
-            
-            if (EditorPrefs.HasKey(gLink.Key) == false)
+
+            Dictionary<string, long> timestamps = new Dictionary<string, long>();
+
+            var timeStamp = result.First;
+            while (timeStamp != null)
             {
-                EditorPrefs.SetString(gLink.Key, result.ToString());
-                Debug.LogWarningFormat("Config {0} need to update", gLink.Key);
+                timestamps.Add(timeStamp["id"].ToString(), timeStamp["date"].Value<long>());
+                timeStamp = timeStamp.Next;
+
             }
-            else
+            
+            for (int i = update.Count - 1; i >= 0; i--)
             {
+                var item = update[i];
+                var gLink = item.Value;
+
+                if (!timestamps.ContainsKey(gLink.Link))
+                {
+                    Debug.LogWarningFormat("Config {0} need to update", gLink.Key);
+                    continue;
+                }
+                
+                if (EditorPrefs.HasKey(gLink.Key) == false)
+                {
+                    Debug.LogWarningFormat("Config {0} need to update", gLink.Key);
+                    continue;
+                }
+
                 var then = long.Parse(EditorPrefs.GetString(gLink.Key));
-                var now = long.Parse(result.ToString());
+                var now = timestamps[gLink.Link];
                 
                 if (then < now)
                 {
-                    EditorPrefs.SetString(gLink.Key, result.ToString());
-                    Debug.LogWarningFormat("Config {0} need to update", gLink.Key);
+                    Debug.LogWarningFormat("Config {0} need to update. then {1} < now {2}", gLink.Key, then, now);
                 }
                 else
                 {
-                    update.Remove(update[index]);
+                    Debug.LogWarningFormat("Config {0} is up to date", gLink.Key);
+                    if (!forceUpdate)
+                    {
+                        update.Remove(update[i]);
+                    }
                 }
             }
 
-            CheckNeedToUpdate();
+            Debug.LogWarning("Check for the need to update the configs completed!");
+            index = update.Count;
+
+            Load();
         });
     }
 
@@ -142,7 +166,7 @@ public class ConfigsGoogleLoader
         {
             sw.Stop();
             
-            Debug.LogFormat("Request completed in {0:F}s", sw.Elapsed.TotalSeconds);
+            Debug.LogFormat($"Request '{gLink.Key}' completed in {sw.Elapsed.TotalSeconds:F}s");
             
             if (response.IsOk == false || string.IsNullOrEmpty(response.Error) == false )
             {
@@ -161,6 +185,8 @@ public class ConfigsGoogleLoader
 
                 File.WriteAllText(Application.dataPath + update[index].Key, JsonConvert.SerializeObject(result, Formatting.Indented), Encoding.UTF8);
 
+                EditorPrefs.SetString(gLink.Key, DateTime.UtcNow.ConvertToUnixTimeMilliseconds().ToString());
+                
                 Load();
             }
             catch (Exception e)
@@ -174,5 +200,10 @@ public class ConfigsGoogleLoader
     private static string GetUrl(string id, string route, string json)
     {
         return string.Format("https://script.google.com/macros/s/AKfycbz82MTaf-dECcAPhCIveDy9R0OPApWfWUx6aLScGaWQKsIK6D4/exec?route={0}&spreadsheetId={1}&pattern={2}", route, id, json);
+    }
+    
+    private static string GetUrl(string route, string prms)
+    {
+        return string.Format("https://script.google.com/macros/s/AKfycbz82MTaf-dECcAPhCIveDy9R0OPApWfWUx6aLScGaWQKsIK6D4/exec?route={0}&{1}", route, prms);
     }
 }

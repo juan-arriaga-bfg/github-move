@@ -4,5 +4,6 @@
     FullLock,
     PartLock,
     PendingReward,
-    Unlocked
+    Unlocked,
+    Highlighted
 }

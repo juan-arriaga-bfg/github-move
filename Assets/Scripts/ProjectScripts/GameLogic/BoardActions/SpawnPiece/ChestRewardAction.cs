@@ -25,7 +25,7 @@ public class ChestRewardAction : IBoardAction
 		var free = new List<BoardPosition>();
 		var count = Pieces.Sum(pair => pair.Value);
 		
-		if (Pieces.Count != 0 && gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From, free, count) == false)
+		if (Pieces.Count != 0 && gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From, free, count, 0.1f) == false)
 		{
 			UIErrorWindowController.AddError("Not found free cells");
 			return false;

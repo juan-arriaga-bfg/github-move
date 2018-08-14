@@ -11,8 +11,13 @@ public class UIQuestWindowView : UIGenericPopupWindowView
     [SerializeField] private NSText rewardLabel;
     [SerializeField] private NSText amountLabel;
     [SerializeField] private NSText buttonLabel;
+    
+    [SerializeField] private CodexChain chain;
+    [SerializeField] private GameObject codexItemPrefab;
 
     private bool isComplete;
+
+    private const int CHAIN_LENGTH = 5;
     
     public override void OnViewShow()
     {
@@ -31,6 +36,8 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         buttonLabel.Text = windowModel.ButtonText;
 
         targetIcon.sprite = windowModel.Icon;
+
+        CreateChain(windowModel);
     }
 
     public override void OnViewClose()
@@ -125,5 +132,18 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             
             board.HintCooldown.Step(position.Value);
         });
+    }
+
+    private void CreateChain(UIQuestWindowModel model)
+    {
+        foreach (Transform child in chain.ItemsHost) 
+        {
+            Destroy(child.gameObject);
+        }
+        
+        var targetId = model.Quest.WantedPiece;
+        var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId, CHAIN_LENGTH);
+        CodexChainDef chainDef = new CodexChainDef {ItemDefs = itemDefs};
+        UICodexWindowView.CreateItems(chain, chainDef, codexItemPrefab, CHAIN_LENGTH);
     }
 }

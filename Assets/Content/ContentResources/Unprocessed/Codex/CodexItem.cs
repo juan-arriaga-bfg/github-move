@@ -81,6 +81,13 @@ public class CodexItem : MonoBehaviour
                 dropPanel.Init(itemDef);
                 break;
             
+            case CodexItemState.Highlighted:
+                sprite = GetPieecSprite();
+                shine.SetActive(true);
+
+                pieceImage.transform.localScale = REWARD_SCALE;
+                break;
+            
             default:
                 throw new ArgumentOutOfRangeException();
         }
