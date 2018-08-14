@@ -113,11 +113,11 @@ public class ConfigsGoogleLoader
                 }
 
                 var then = long.Parse(EditorPrefs.GetString(gLink.Key));
-                var now = Mathf.Round(timestamps[gLink.Link] / 1000.0f);
+                var now = timestamps[gLink.Link];
                 
                 if (then < now)
                 {
-                    Debug.LogWarningFormat("Config {0} need to update", gLink.Key);
+                    Debug.LogWarningFormat("Config {0} need to update. then {1} < now {2}", gLink.Key, then, now);
                 }
                 else
                 {
@@ -185,7 +185,7 @@ public class ConfigsGoogleLoader
 
                 File.WriteAllText(Application.dataPath + update[index].Key, JsonConvert.SerializeObject(result, Formatting.Indented), Encoding.UTF8);
 
-                EditorPrefs.SetString(gLink.Key, DateTime.UtcNow.ConvertToUnixTime().ToString());
+                EditorPrefs.SetString(gLink.Key, DateTime.UtcNow.ConvertToUnixTimeMilliseconds().ToString());
                 
                 Load();
             }
