@@ -4,9 +4,8 @@ using UnityEngine;
 public class LevelsDataManager : IECSComponent, IDataManager, IDataLoader<List<LevelsDef>>
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
+	public int Guid => ComponentGuid;
 
-	public int Guid { get { return ComponentGuid; } }
-	
 	public void OnRegisterEntity(ECSEntity entity)
 	{
 		Reload();
@@ -39,10 +38,7 @@ public class LevelsDataManager : IECSComponent, IDataManager, IDataLoader<List<L
 		});
 	}
 
-	public int Level
-	{
-		get { return ProfileService.Current.GetStorageItem(Currency.Level.Name).Amount; }
-	}
+	public int Level => ProfileService.Current.GetStorageItem(Currency.Level.Name).Amount;
 
 	public int Price
 	{
@@ -52,4 +48,6 @@ public class LevelsDataManager : IECSComponent, IDataManager, IDataLoader<List<L
 			return price.Amount;
 		}
 	}
+
+	public List<CurrencyPair> Rewards => Levels[Level - 1].Rewards;
 }

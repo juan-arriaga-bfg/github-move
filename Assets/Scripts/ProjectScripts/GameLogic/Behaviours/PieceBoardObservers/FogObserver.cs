@@ -42,7 +42,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         }
         
         pathfinder = thisContext.GetComponent<PathfinderComponent>(PathfinderComponent.ComponentGuid);
-        Mask = BoardPosition.GetRect(BoardPosition.Zero(), def.Size.X, def.Size.Y);
+        Mask = def.Positions;
         
         base.OnAddToBoard(position, context);
     }
@@ -52,6 +52,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         base.OnRemoveFromBoard(position, context);
         
         ResourcesViewManager.Instance.UnRegisterView(this);
+    }
+
+    public override BoardPosition GetPointInMask(BoardPosition position, BoardPosition mask)
+    {
+        return new BoardPosition(mask.X, mask.Y, position.Z);
     }
 
     public void Clear()
@@ -81,7 +86,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                     
                     thisContext.Context.ActionExecutor.AddAction(new CreatePieceAtAction
                     {
-                        At = GetPointInMask(realPosition, pos),
+                        At = pos,
                         PieceTypeId = pieceId
                     });
                 }
@@ -92,9 +97,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             ? GameDataService.Current.FogsManager.DefaultPieceWeights
             : def.PieceWeights;
         
-        for (int i = 0; i < Mask.Count; i++)
+        foreach (var point in Mask)
         {
-            var point = GetPointInMask(realPosition, Mask[i]);
             var piece = ItemWeight.GetRandomItem(weights).Piece;
             
             if(piece == PieceType.Empty.Id) continue;
@@ -117,11 +121,6 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void UpdateResource(int offset)
     {
-        if (pathfinder.CanPathToCastle(thisContext))
-        {
-            Debug.LogError(thisContext.CachedPosition);
-        }
-        
         if(pathfinder.CanPathToCastle(thisContext) == false || storageItem.Amount < level) return;
         
         view = viewDef.AddView(ViewType.FogState);

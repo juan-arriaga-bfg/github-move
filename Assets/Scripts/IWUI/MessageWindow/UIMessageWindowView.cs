@@ -64,8 +64,10 @@ public class UIMessageWindowView : UIGenericPopupWindowView
             windowModel.Timer = null;
         }
         
-        if (isAccept && windowModel.OnAccept != null) windowModel.OnAccept();
-        if (isCancel && windowModel.OnCancel != null) windowModel.OnCancel();
+        if (isAccept || windowModel.isHardAccept) windowModel.OnAccept?.Invoke();
+        if (isCancel) windowModel.OnCancel?.Invoke();
+
+        windowModel.isHardAccept = false;
     }
 
     public void OnClickAccept()

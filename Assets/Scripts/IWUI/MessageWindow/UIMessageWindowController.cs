@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class UIMessageWindowController : IWWindowController {
 
@@ -38,6 +39,21 @@ public class UIMessageWindowController : IWWindowController {
         
         model.OnAccept = OnAccept ?? (() => {});
         model.OnCancel = null;
+        
+        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+    }
+
+    public static void CreateMessage(string title, string message, Action OnAccept = null, Action OnCancel = null, bool isHardAccept = false)
+    {
+        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+        model.Title = title;
+        model.Message = message;
+        model.AcceptLabel = "Ok";
+        model.isHardAccept = isHardAccept;
+        
+        model.OnAccept = OnAccept ?? (() => {});
+        model.OnCancel = OnCancel;
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }

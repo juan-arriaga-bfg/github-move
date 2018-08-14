@@ -19,7 +19,8 @@ public class EnemyView : BoardElementView
         
         this.fog = fog;
         
-        var next = new BoardPosition(fog.Position.X + Random.Range(0, fog.Size.X), fog.Position.Y + Random.Range(0, fog.Size.Y));
+        var next = new BoardPosition(0, 0);
+//        var next = new BoardPosition(fog.Position.X + Random.Range(0, fog.Size.X), fog.Position.Y + Random.Range(0, fog.Size.Y));
 
         if (target.Equals(next))
         {
@@ -41,7 +42,7 @@ public class EnemyView : BoardElementView
 
     private void GoOther()
     {
-        if (GameDataService.Current.FogsManager.GetDef(fog.Position) != null)
+        if (GameDataService.Current.FogsManager.GetDef(fog.GetCenter()) != null)
         {
             return;
         }
@@ -140,7 +141,8 @@ public class EnemyView : BoardElementView
         if(distances.Count == 0) return;
 
         var nearest = distances[Random.Range(0, distances.Count < 3 ? distances.Count : 3)].Value;
-        var start = new BoardPosition(nearest.Position.X + Random.Range(0, nearest.Size.X), nearest.Position.Y + Random.Range(0, nearest.Size.Y));
+        var start = nearest.GetCenter();
+//        var start = new BoardPosition(nearest.Position.X + Random.Range(0, nearest.Size.X), nearest.Position.Y + Random.Range(0, nearest.Size.Y));
         var view = board.RendererContext.CreateBoardElementAt<EnemyView>(R.EnemyView, start);
         
         var position = board.BoardDef.GetSectorCenterWorldPosition(start.X, start.Y, start.Z);

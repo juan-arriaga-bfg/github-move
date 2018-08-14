@@ -18,20 +18,16 @@ public class FogPieceView : PieceBoardElementView
 		observer = piece.GetComponent<FogObserver>(FogObserver.ComponentGuid);
 		
 		if(observer == null) return;
-
-		var size = GameDataService.Current.FogsManager
-			.GetDef(new BoardPosition(piece.CachedPosition.X, piece.CachedPosition.Y)).Size.Y;
 		
 		foreach (var position in observer.Mask)
 		{
 			var fog = Instantiate(fogItem, fogItem.transform.parent);
 			var touch = Instantiate(touchItem, touchItem.transform.parent);
-			var pos = observer.GetPointInMask(piece.CachedPosition, position);
 			var sprite = fog.GetComponent<SpriteRenderer>();
-
-			sprite.sortingOrder = pos.X * Context.Context.BoardDef.Width - pos.Y + pos.Z * 100 + (pos.X + size) - pos.Y;
 			
-			fog.transform.localPosition = touch.transform.localPosition = piece.Context.BoardDef.GetSectorCenterWorldPosition(position.X, position.Y, 0);
+			sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + position.Z * 100 + 1;
+			
+			fog.transform.position = touch.transform.position = piece.Context.BoardDef.GetSectorCenterWorldPosition(position.X, position.Y, 0);
 			
 			touchRegion.AddTouchRegion(touch.GetComponent<RectTransform>());
 			

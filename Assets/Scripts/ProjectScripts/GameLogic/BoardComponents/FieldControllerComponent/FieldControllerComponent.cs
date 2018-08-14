@@ -86,7 +86,7 @@ public class FieldControllerComponent : IECSComponent
     public void OnUnRegisterEntity(ECSEntity entity)
     {
     }
-
+    
     private void TestField()
     {    
         AddPieces(new BoardPosition(4, 10), PieceType.O1.Id, PieceType.O5.Id);
@@ -117,7 +117,7 @@ public class FieldControllerComponent : IECSComponent
 
         foreach (var fog in data)
         {
-            var pos = fog.Position;
+            var pos = fog.GetCenter();
 
             pos.Z = context.BoardDef.PieceLayer;
             positions.Add(pos);
