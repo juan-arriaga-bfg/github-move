@@ -38,6 +38,7 @@ public class PieceBuildersBuilder
         
         dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestX1.Id, PieceType.ChestX3.Id, dict);
         dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestC1.Id, PieceType.ChestC3.Id, dict);
+        dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestZ1.Id, PieceType.ChestZ3.Id, dict);
         dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.Basket1.Id, PieceType.Basket3.Id, dict);
         
         dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest9.Id, dict);
@@ -71,7 +72,7 @@ public class PieceBuildersBuilder
         var mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2);
         
         dict.Add(PieceType.MegaZord.Id, new MulticellularDraggablePieceBuilder{Mask = mask});
-        dict = AddMulticellularPiece<MinePieceBuilder>(PieceType.MineC.Id, PieceType.MineY.Id, mask, dict);
+        dict = AddMulticellularPiece<MinePieceBuilder>(PieceType.MineC.Id, PieceType.MineZ.Id, mask, dict);
         
 //        dict = AddMulticellularPiece<MarketPieceBuilder>(PieceType.Market1.Id, PieceType.Market9.Id, mask, dict);
 //        dict = AddMulticellularPiece<StoragePieceBuilder>(PieceType.Storage1.Id, PieceType.Storage9.Id, mask, dict);

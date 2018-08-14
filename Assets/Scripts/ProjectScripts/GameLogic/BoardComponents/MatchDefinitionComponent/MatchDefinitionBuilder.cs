@@ -125,6 +125,10 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.ChestC2.Id, new PieceMatchDef {Next = PieceType.ChestC3.Id, Previous = PieceType.ChestC1.Id, Count = 3});
         dict.Add(PieceType.ChestC3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.ChestC2.Id, Count = 3});
         
+        dict.Add(PieceType.ChestZ1.Id, new PieceMatchDef {Next = PieceType.ChestZ2.Id, Previous = PieceType.None.Id, Count = 3});
+        dict.Add(PieceType.ChestZ2.Id, new PieceMatchDef {Next = PieceType.ChestZ3.Id, Previous = PieceType.ChestZ1.Id, Count = 3});
+        dict.Add(PieceType.ChestZ3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.ChestZ2.Id, Count = 3});
+        
         dict.Add(PieceType.Basket1.Id, new PieceMatchDef {Next = PieceType.Basket2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.Basket2.Id, new PieceMatchDef {Next = PieceType.Basket3.Id, Previous = PieceType.Basket1.Id, Count = 3});
         dict.Add(PieceType.Basket3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Basket2.Id, Count = 3});

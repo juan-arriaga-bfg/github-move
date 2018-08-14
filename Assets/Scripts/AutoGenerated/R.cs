@@ -205,4 +205,8 @@ public class R
      public const string TrailMergeParticles = "TrailMergeParticles";
      public const string OutMergeParticleSystem = "OutMergeParticleSystem";
      public const string ExplosionParticleSystem = "ExplosionParticleSystem";
+     public const string MineZPiece = "MineZPiece";
+     public const string ChestZ1Piece = "ChestZ1Piece";
+     public const string ChestZ2Piece = "ChestZ2Piece";
+     public const string ChestZ3Piece = "ChestZ3Piece";
 }
