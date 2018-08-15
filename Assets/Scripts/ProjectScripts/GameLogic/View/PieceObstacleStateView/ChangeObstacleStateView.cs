@@ -10,29 +10,27 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
     
     [SerializeField] private Image progress;
     [SerializeField] private Image light;
+    
     [SerializeField] private HorizontalLayoutGroup layoutGroup;
+    
     [SerializeField] private GameObject dot;
     [SerializeField] private GameObject progressbar;
+    
+    [SerializeField] private RectTransform sizeTarget;
 
-    private ObstacleLifeComponent life;
+    private StorageLifeComponent life;
     
     private List<GameObject> dots = new List<GameObject>();
     
-    public override Vector3 Ofset
-    {
-        get { return new Vector3(0, 1.5f); }
-    }
-    
-    protected override ViewType Id
-    {
-        get { return ViewType.ObstacleState; }
-    }
-    
+    public override Vector3 Ofset => new Vector3(0, 1.5f);
+
+    protected override ViewType Id => ViewType.ObstacleState;
+
     public override void Init(Piece piece)
     {
         base.Init(piece);
         
-        life = piece.GetComponent<ObstacleLifeComponent>(ObstacleLifeComponent.ComponentGuid);
+        life = piece.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
         
         if(life == null) return;
         
@@ -44,7 +42,7 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
             dots.Add(dt);
         }
 
-        layoutGroup.spacing = 110 / life.HP;
+        layoutGroup.spacing = sizeTarget.sizeDelta.x / life.HP;
         
         progressbar.SetActive(life.HP > 1);
         
@@ -60,7 +58,7 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
     public override void ResetViewOnDestroy()
     {
         DOTween.Kill(light);
-
+        
         light.DOFade(1f, 0f);
         
         Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
@@ -82,8 +80,8 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
 
         if (IsShow == false) return;
         
-        message.Text = "Clear Up " + life.Energy.ToStringIcon();
-        price.Text = string.Format("Send<sprite name={0}>", life.Worker.Currency);
+        message.Text = $"{life.Message}{(life.Energy.Amount == 0 ? "" : " " + life.Energy.ToStringIcon())}";
+        price.Text = $"Send<sprite name={life.Worker.Currency}>";
         
         progress.fillAmount = life.GetProgressNext;
         light.fillAmount = life.GetProgress;

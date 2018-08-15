@@ -3,28 +3,17 @@
 public class LifeComponent : IECSComponent
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-    
-    public int Guid
-    {
-        get { return ComponentGuid; }
-    }
+    public int Guid => ComponentGuid;
 
     protected Piece thisContext;
     
-    public int HP { get; set; }
+    public int HP { get; protected set; }
     
     protected int current;
     
-    public int Current
-    {
-        get { return current; }
-    }
-    
-    public float GetProgress
-    {
-        get { return 1 - current/(float)HP; }
-    }
-    
+    public int Current => current;
+    public float GetProgress => 1 - current/(float)HP;
+
     public virtual void OnRegisterEntity(ECSEntity entity)
     {
         thisContext = entity as Piece;
@@ -46,6 +35,6 @@ public class LifeComponent : IECSComponent
     {
         var multi = thisContext.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
 
-        return multi != null ? multi.GetTopPosition : thisContext.CachedPosition;
+        return multi?.GetTopPosition ?? thisContext.CachedPosition;
     }
 }

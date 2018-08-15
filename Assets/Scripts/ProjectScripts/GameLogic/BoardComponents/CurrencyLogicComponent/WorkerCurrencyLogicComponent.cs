@@ -7,10 +7,10 @@ using Random = UnityEngine.Random;
 public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSystem
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-    public override int Guid { get { return ComponentGuid; } }
+    public override int Guid => ComponentGuid;
 
     private Dictionary<string, DateTime> completeTimes = new Dictionary<string, DateTime>();
-    private List<string> completeTimesList = new List<string>();
+    private readonly List<string> completeTimesList = new List<string>();
 
     private DateTime then;
     private BoardController context;
@@ -118,6 +118,18 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         });
         
         return isSuccess;
+    }
+
+    public void Replase(string oldKey, string newKey)
+    {
+        DateTime value;
+        if(completeTimes.TryGetValue(oldKey, out value) == false) return;
+        
+        completeTimes.Remove(oldKey);
+        completeTimesList.Remove(oldKey);
+        
+        completeTimes.Add(newKey, value);
+        completeTimesList.Add(newKey);
     }
     
     public void Return(string id)

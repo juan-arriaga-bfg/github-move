@@ -647,8 +647,18 @@
         "Amount": 25
       }
     ],
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 5
+    },
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 10
+    },
+    "Limit": 30,
+    "Delay": 2,
     "Reproduction": {
-      "Currency": "F1",
+      "Currency": "F4",
       "Amount": 1
     },
     "Name": "Corn crop",
@@ -675,7 +685,7 @@
       "Currency": "Energy",
       "Amount": 10
     },
-    "Name": "Corncob",
+    "Name": "Corn",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -699,7 +709,7 @@
       "Currency": "Energy",
       "Amount": 15
     },
-    "Name": "Corn",
+    "Name": "Basket of corn",
     "UnlockBonus": [
       {
         "Currency": "Coins",

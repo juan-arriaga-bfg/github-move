@@ -4,9 +4,9 @@ using UnityEngine;
 public class ReproductionLogicComponent : ECSEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-    public override int Guid { get { return ComponentGuid; } }
-    
-    private TimerComponent timer = new TimerComponent();
+    public override int Guid => ComponentGuid;
+
+    private readonly TimerComponent timer = new TimerComponent();
     private readonly HashSet<ReproductionPieceComponent> items = new HashSet<ReproductionPieceComponent>();
     private HashSet<ReproductionPieceComponent> stack = new HashSet<ReproductionPieceComponent>();
 

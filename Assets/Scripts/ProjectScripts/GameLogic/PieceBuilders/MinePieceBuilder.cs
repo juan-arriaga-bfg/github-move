@@ -6,9 +6,8 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 	{
 		var piece = base.Build(pieceType, context);
 		
-		//AddView(piece, ViewType.LevelLabel);
 		CreateViewComponent(piece);
-        //piece.RegisterComponent(new ViewDefinitionComponent())
+		
 		piece.RegisterComponent(new MineDraggablePieceComponent());
 		piece.RegisterComponent(new TimerComponent());
 		
@@ -29,7 +28,7 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 		
 		piece.RegisterComponent(new TouchReactionComponent()
 			 .RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
-				 .RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.MineState})
+				 .RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.ObstacleState})
 				 .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{IsAutoStart = false}))
 			 .RegisterComponent(new TouchReactionConditionStorage()))
 			 .RegisterComponent(new PathfinderComponent()

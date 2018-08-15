@@ -1,23 +1,12 @@
 ﻿using System.Collections.Generic;
-using DG.Tweening;
 
 public class MineLifeComponent : StorageLifeComponent
 {
     private MineDef def;
     
-    public override CurrencyPair Energy
-    {
-        get
-        {
-            return def.Price;
-        }
-    }
+    public override CurrencyPair Energy => def.Price;
+    public override string Message => "Clear mine";
     
-    public override string Key
-    {
-        get { return def.Position.ToSaveString(); }
-    }
-
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
         base.OnAddToBoard(position, context);

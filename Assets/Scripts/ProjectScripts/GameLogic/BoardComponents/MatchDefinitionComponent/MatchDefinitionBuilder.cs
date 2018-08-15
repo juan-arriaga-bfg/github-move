@@ -65,8 +65,9 @@ public class MatchDefinitionBuilder
         
         dict.Add(PieceType.F1.Id, new PieceMatchDef {Next = PieceType.F2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.F2.Id, new PieceMatchDef {Next = PieceType.F3.Id, Previous = PieceType.F1.Id, Count = 3});
-        dict.Add(PieceType.F3.Id, new PieceMatchDef {Next = PieceType.F4.Id, Previous = PieceType.F2.Id, Count = 3});
-        dict.Add(PieceType.F4.Id, new PieceMatchDef {Next = PieceType.F5.Id, Previous = PieceType.F3.Id, Count = 3});
+        dict.Add(PieceType.F3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.F2.Id, Count = 3});
+        
+        dict.Add(PieceType.F4.Id, new PieceMatchDef {Next = PieceType.F5.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.F5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.F4.Id, Count = 3});
 
         dict.Add(PieceType.G1.Id, new PieceMatchDef {Next = PieceType.G2.Id, Previous = PieceType.None.Id, Count = 3});
