@@ -54,7 +54,7 @@ public class ReproductionLogicComponent : ECSEntity
 
         foreach (var item in stack)
         {
-            if(item.CheckFreePosition() == false) continue;
+            if(item.Check() == false) continue;
             
             free.Add(item);
         }

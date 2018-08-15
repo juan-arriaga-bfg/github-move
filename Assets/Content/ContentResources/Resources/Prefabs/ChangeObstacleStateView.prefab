@@ -162,6 +162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4910139775232482}
   - component: {fileID: 114402917023022410}
+  - component: {fileID: 114115951862281664}
   m_Layer: 0
   m_Name: ChangeObstacleStateView
   m_TagString: Untagged
@@ -329,6 +330,25 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &114115951862281664
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1428895824883912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d78292beb3e04eb3c4288333919fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progress: {fileID: 114735683732298082}
+  light: {fileID: 114425726294402596}
+  layoutGroup: {fileID: 114481185425239730}
+  body: {fileID: 1386454448781642}
+  dot: {fileID: 1252498847557428}
+  sizeRect: {fileID: 224677219552939486}
+  illumination: 1
+  dividing: 1
 --- !u!114 &114118641546211920
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -666,12 +686,7 @@ MonoBehaviour:
   canvas: {fileID: 223683639147925892}
   message: {fileID: 114338106244282586}
   price: {fileID: 114436730818668246}
-  progress: {fileID: 114735683732298082}
-  light: {fileID: 114425726294402596}
-  layoutGroup: {fileID: 114481185425239730}
-  dot: {fileID: 1252498847557428}
-  progressbar: {fileID: 1386454448781642}
-  sizeTarget: {fileID: 224677219552939486}
+  bar: {fileID: 114115951862281664}
 --- !u!114 &114417837352850728
 MonoBehaviour:
   m_ObjectHideFlags: 1

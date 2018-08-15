@@ -7,7 +7,7 @@ public class TouchReactionDefinitionObstacleComponent : TouchReactionDefinitionS
         var storageLife = piece.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
         var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
 
-        if (storageLife.Current != storageLife.HP) return base.Make(position, piece);
+        if (storageLife.IsDead == false) return base.Make(position, piece);
         
         storage.OnHideBubble = () =>
         {

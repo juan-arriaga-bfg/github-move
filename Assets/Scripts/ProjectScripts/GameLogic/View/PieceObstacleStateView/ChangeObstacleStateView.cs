@@ -1,30 +1,22 @@
-﻿using System.Collections.Generic;
-using DG.Tweening;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
 {
     [SerializeField] private NSText message;
     [SerializeField] private NSText price;
     
-    [SerializeField] private Image progress;
-    [SerializeField] private Image light;
+    [SerializeField] private BoardProgressbar bar;
     
-    [SerializeField] private HorizontalLayoutGroup layoutGroup;
-    
-    [SerializeField] private GameObject dot;
-    [SerializeField] private GameObject progressbar;
-    
-    [SerializeField] private RectTransform sizeTarget;
-
     private StorageLifeComponent life;
     
-    private List<GameObject> dots = new List<GameObject>();
-    
     public override Vector3 Ofset => new Vector3(0, 1.5f);
-
+    
     protected override ViewType Id => ViewType.ObstacleState;
+    
+    public override void SetOfset()
+    {
+        CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Ofset;
+    }
 
     public override void Init(Piece piece)
     {
@@ -36,41 +28,13 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
         
         Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
         
-        for (var i = 1; i < life.HP; i++)
-        {
-            var dt = Instantiate(dot, dot.transform.parent);
-            dots.Add(dt);
-        }
-
-        layoutGroup.spacing = sizeTarget.sizeDelta.x / life.HP;
-        
-        progressbar.SetActive(life.HP > 1);
-        
-        dot.SetActive(false);
-        
-        DOTween.Kill(light);
-
-        DOTween.Sequence().SetId(light).SetLoops(int.MaxValue)
-            .Append(light.DOFade(0.5f, 0.3f))
-            .Append(light.DOFade(1f, 0.3f));
+        bar.Init(life.HP);
+        bar.IsVisible = life.HP > 1;
     }
     
     public override void ResetViewOnDestroy()
     {
-        DOTween.Kill(light);
-        
-        light.DOFade(1f, 0f);
-        
-        Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
-
-        foreach (var dt in dots)
-        {
-            Destroy(dt);
-        }
-        
-        dots = new List<GameObject>();
-        dot.SetActive(true);
-        
+        bar.Clear();
         base.ResetViewOnDestroy();
     }
 
@@ -83,8 +47,7 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
         message.Text = $"{life.Message}{(life.Energy.Amount == 0 ? "" : " " + life.Energy.ToStringIcon())}";
         price.Text = $"Send<sprite name={life.Worker.Currency}>";
         
-        progress.fillAmount = life.GetProgressNext;
-        light.fillAmount = life.GetProgress;
+        bar.UpdateValue(life.GetProgress, life.GetProgressNext);
     }
     
     public void Clear()

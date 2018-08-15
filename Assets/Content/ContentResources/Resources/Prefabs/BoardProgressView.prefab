@@ -139,6 +139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4011469974879742}
   - component: {fileID: 114156580620373144}
+  - component: {fileID: 114204951651706866}
   m_Layer: 0
   m_Name: BoardProgressView
   m_TagString: Untagged
@@ -230,11 +231,25 @@ MonoBehaviour:
   viewTransform: {fileID: 224758785612758980}
   group: {fileID: 225113092664829674}
   canvas: {fileID: 223930006492536276}
+  bar: {fileID: 114204951651706866}
+--- !u!114 &114204951651706866
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1925974218686120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d78292beb3e04eb3c4288333919fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   progress: {fileID: 114084021454010514}
   light: {fileID: 114782902844385182}
   layoutGroup: {fileID: 114860303533263606}
   dot: {fileID: 1224275679282704}
   sizeRect: {fileID: 224191033361145038}
+  illumination: 1
+  dividing: 1
 --- !u!114 &114544607180000416
 MonoBehaviour:
   m_ObjectHideFlags: 1

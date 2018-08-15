@@ -4,11 +4,8 @@ public class PiceLabelView : UIBoardView
 {
     [SerializeField] private NSText label;
     
-    protected override ViewType Id
-    {
-        get { return ViewType.LevelLabel; }
-    }
-    
+    protected override ViewType Id => ViewType.LevelLabel;
+
     public override void Init(Piece piece)
     {
         base.Init(piece);
@@ -17,7 +14,7 @@ public class PiceLabelView : UIBoardView
 
         var uid = PieceType.Parse(piece.PieceType);
         
-        label.Text = string.Format("{0} Level {1}", uid.Substring(0, uid.Length - 1), uid.Substring(uid.Length - 1, 1));
+        label.Text = $"{uid.Substring(0, uid.Length - 1)} Level {uid.Substring(uid.Length - 1, 1)}";
         Change(true);
     }
 }

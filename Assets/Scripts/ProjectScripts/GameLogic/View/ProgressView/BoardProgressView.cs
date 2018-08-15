@@ -1,60 +1,31 @@
-﻿using System.Collections.Generic;
-using DG.Tweening;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class BoardProgressView : UIBoardView
 {
-    [SerializeField] private Image progress;
-    [SerializeField] private Image light;
+    [SerializeField] private BoardProgressbar bar; 
     
-    [SerializeField] private HorizontalLayoutGroup layoutGroup;
-    
-    [SerializeField] private GameObject dot;
-    [SerializeField] private RectTransform sizeRect;
-
-    private List<GameObject> dots = new List<GameObject>();
-    
-    public override Vector3 Ofset => new Vector3(0, 1.5f);
+    public override Vector3 Ofset => new Vector3(0, 0.3f);
 
     protected override ViewType Id => ViewType.Progress;
-    private StorageLifeComponent data;
-
-    public void SetTarget(StorageLifeComponent target)
+    
+    private StorageLifeComponent life;
+    
+    public override void Init(Piece piece)
     {
-        data = target;
+        base.Init(piece);
         
-        for (var i = 1; i < data.HP; i++)
-        {
-            var dt = Instantiate(dot, dot.transform.parent);
-            dots.Add(dt);
-        }
+        Priority = defaultPriority = -2;
+        
+        life = piece.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
 
-        layoutGroup.spacing = sizeRect.sizeDelta.x / data.HP;
+        if (life == null) return;
         
-        dot.SetActive(false);
-        
-        DOTween.Kill(light);
-
-        DOTween.Sequence().SetId(light).SetLoops(int.MaxValue)
-            .Append(light.DOFade(0.5f, 0.3f))
-            .Append(light.DOFade(1f, 0.3f));
+        bar.Init(life.HP);
     }
     
     public override void ResetViewOnDestroy()
     {
-        DOTween.Kill(light);
-
-        light.DOFade(1f, 0f);
-        
-        foreach (var dt in dots)
-        {
-            Destroy(dt);
-        }
-        
-        dots = new List<GameObject>();
-        dot.SetActive(true);
-        
+        bar.Clear();
         base.ResetViewOnDestroy();
     }
 
@@ -64,7 +35,6 @@ public class BoardProgressView : UIBoardView
 
         if (IsShow == false) return;
         
-        progress.fillAmount = data.GetProgressNext;
-        light.fillAmount = data.GetProgress;
+        bar.UpdateValue(life.GetProgress, life.GetProgressNext);
     }
 }

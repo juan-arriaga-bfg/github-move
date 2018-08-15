@@ -8,7 +8,8 @@ public class LifeComponent : IECSComponent
     protected Piece thisContext;
     
     public int HP { get; protected set; }
-    
+    public bool IsDead => current == HP;
+
     protected int current;
     
     public int Current => current;
@@ -25,7 +26,7 @@ public class LifeComponent : IECSComponent
 
     public void Damage(int damage)
     {
-        if (current == HP) return;
+        if (IsDead) return;
         
         current = Mathf.Clamp(current + damage, 0, HP);
         AddResourceView.Show(StartPosition(), new CurrencyPair{Currency = Currency.Life.Name, Amount = -damage});

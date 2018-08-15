@@ -31,7 +31,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
         
         HP = def.Limit;
     }
-
+    
     protected override void OnStep()
     {
         storage.OnScatter = () =>

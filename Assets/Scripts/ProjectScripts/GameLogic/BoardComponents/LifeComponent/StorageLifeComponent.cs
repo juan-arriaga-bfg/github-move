@@ -51,7 +51,7 @@
     
     public bool Damage()
     {
-        if (current == HP) return false;
+        if (IsDead) return false;
         
         var isSuccess = false;
 
@@ -76,7 +76,7 @@
 
     private void OnTimerStart()
     {
-        if (current != HP) OnStep();
+        if (IsDead == false) OnStep();
         else OnComplete();
     }
     

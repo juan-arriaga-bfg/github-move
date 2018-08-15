@@ -29,11 +29,8 @@ public class UIBoardView : BoardElementView
         set { priority = value; }
     }
     
-    public int Layer
-    {
-        get { return defaultPriority; }
-    }
-    
+    public int Layer => defaultPriority;
+
     protected virtual ViewType Id { get; set; }
     
     public virtual Vector3 Ofset

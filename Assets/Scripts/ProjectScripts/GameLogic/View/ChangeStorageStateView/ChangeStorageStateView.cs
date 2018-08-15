@@ -5,15 +5,9 @@ public class ChangeStorageStateView : UIBoardView
 {
     [SerializeField] private Image icon;
 
-    protected override ViewType Id
-    {
-        get { return ViewType.StorageState; }
-    }
+    protected override ViewType Id => ViewType.StorageState;
 
-    public override Vector3 Ofset
-    {
-        get { return new Vector3(0, 1.5f); }
-    }
+    public override Vector3 Ofset => new Vector3(0, 1.5f);
 
     private bool isClick;
 
@@ -41,9 +35,7 @@ public class ChangeStorageStateView : UIBoardView
     public void OnClick()
     {
         var definition = Context.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
-        
-        if(definition == null) return;
-        
-        definition.Touch(Context.CachedPosition);
+
+        definition?.Touch(Context.CachedPosition);
     }
 }
