@@ -58,10 +58,11 @@ public class ReproductionPieceComponent : IECSComponent, IPieceBoardObserver
             Positions = field
         });
     }
-
+    
     public bool Check()
     {
-        return emptyFinder.CheckWithPointInCenter(contextPiece.CachedPosition) &&
-               (life == null || life.IsDead == false && life.Timer.IsExecuteable() == false);
+        if (emptyFinder.CheckWithPointInCenter(contextPiece.CachedPosition) == false) return false;
+        
+        return life == null || (!life.Timer.IsExecuteable() && life.HP - life.Current > 1);
     }
 }
