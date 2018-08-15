@@ -21,13 +21,11 @@ public class UIMainWindowView : IWUIWindowView
         UpdateQuest();
         UpdateCodexButton();
     }
-
-    public override void OnViewClose()
+    
+    private void OnDestroy()
     {
         GameDataService.Current.QuestsManager.OnUpdateActiveQuests -= UpdateQuest;
         GameDataService.Current.CodexManager.OnNewItemUnlocked -= OnNewPieceBuilded;
-        
-        base.OnViewClose();
     }
 
     public void UpdateQuest()
