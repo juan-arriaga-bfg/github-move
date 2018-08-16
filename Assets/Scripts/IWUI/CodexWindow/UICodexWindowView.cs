@@ -152,7 +152,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
 
                         // Scroll
                         var target = chainDef.ItemDefs[0].PieceTypeDef.Id;
-                        codexTabs[i].ScrollTo(target);
+                        //codexTabs[i].ScrollTo(target);
                         return;
                     }
                 }
