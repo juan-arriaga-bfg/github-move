@@ -62,6 +62,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         {
             isUp = true;
             transform.SetSiblingIndex(0);
+            OnClick();
         }
         
         amountLabel.Text = $"<color=#{(isComplete ? "FFFFFF" : "FE4704")}><size=40>{Mathf.Min(value, quest.TargetAmount)}</size></color>/{quest.TargetAmount}";
