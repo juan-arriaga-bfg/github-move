@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
+using UnityEngine.UI;
 
 public class UICodexWindowView : UIGenericPopupWindowView
 {
@@ -21,7 +23,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
 
     private int lastCodexContentId = -1;
 
-    private List<GameObject> tabs = new List<GameObject>();
+    private List<CodexTab> codexTabs = new List<CodexTab>();
     
     public override void OnViewShow()
     {
@@ -31,7 +33,16 @@ public class UICodexWindowView : UIGenericPopupWindowView
 
         Init(model);
 
-        ActivateTab(model);
+        // Call update after one frame to make sure that layouts are up to date
+        StartCoroutine(UpdateLayout());
+    }
+
+    private IEnumerator UpdateLayout()
+    {
+        yield return new WaitForEndOfFrame();
+        
+        UICodexWindowModel model = Model as UICodexWindowModel;
+        UpdateTabs(model);
     }
 
     public override void OnViewClose()
@@ -58,15 +69,15 @@ public class UICodexWindowView : UIGenericPopupWindowView
         chainPrefab.SetActive(false);
         itemPrefab.SetActive(false);
 
-        for (var i = 0; i < tabs.Count; i++)
+        for (var i = 0; i < codexTabs.Count; i++)
         {
-            var tab = tabs[i];
-            Destroy(tab);
+            var tabGo = codexTabs[i].gameObject;
+            Destroy(tabGo);
         }
         
         tabGroup.RemoveAllTabs();
 
-        tabs = CreateTabs(model.CodexContent.TabDefs);       
+        CreateTabs(model.CodexContent.TabDefs);       
         
         ToggleButtons(model);
     }
@@ -82,10 +93,10 @@ public class UICodexWindowView : UIGenericPopupWindowView
         btnRewardText.text = $"Claim Reward <sprite name=\"Coins\"> {reward}";
     }
 
-    private List<GameObject> CreateTabs(List<CodexTabDef> tabDefs)
+    private void CreateTabs(List<CodexTabDef> tabDefs)
     {
-        var ret = new List<GameObject>();
-        
+        codexTabs = new List<CodexTab>();
+
         for (var i = 0; i < tabDefs.Count; i++)
         {
             var codexTabDef = tabDefs[i];
@@ -99,27 +110,35 @@ public class UICodexWindowView : UIGenericPopupWindowView
             tabGroup.AddTab(tab, i);
 
             CreateChains(tab, codexTabDef, chainPrefab, itemPrefab);
-            
-            ret.Add(tabGo);
-        }
 
-        return ret;
+            codexTabs.Add(tab);
+        }
     }
     
-    private void ActivateTab(UICodexWindowModel model)
+    private void UpdateTabs(UICodexWindowModel model)
     {
+        // All tabs shold be scrolled to top
+        for (var i = 0; i < codexTabs.Count; i++)
+        {
+            var tab = codexTabs[i];
+            tab.ScrollToTop();
+        }
+
+        // some tab forced
         if (model.ActiveTabIndex != -1)
         {
             tabGroup.ActivateTab(model.ActiveTabIndex);
             return;
         }
 
+        // No reward, just open the first one tab
         if (model.CodexContent.PendingRewardAmount <= 0)
         {
             tabGroup.ActivateTab(0);
             return;
         }
 
+        // Scan all tabs to find (!) to focus
         for (var i = 0; i < model.CodexContent.TabDefs.Count; i++)
         {
             var tabDef = model.CodexContent.TabDefs[i];
@@ -133,11 +152,15 @@ public class UICodexWindowView : UIGenericPopupWindowView
 
                         // Scroll
                         var target = chainDef.ItemDefs[0].PieceTypeDef.Id;
-                        tabs[i].GetComponent<CodexTab>().ScrollTo(target);
+                        codexTabs[i].ScrollTo(target);
+                        return;
                     }
                 }
             }
         }
+        
+        // fallback
+        tabGroup.ActivateTab(0);
     }
 
     private static void CreateChains(CodexTab tab, CodexTabDef tabDef, GameObject chainPrefab, GameObject itemPrefab)

@@ -1,4 +1,5 @@
 ﻿using Boo.Lang;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +26,8 @@ public class CodexTab : Tab
         }
         
         exclamationMarkDisabled.SetActive(def.PendingReward);
+
+        ScrollToTop();
     }
     
     public void AddChain(CodexChain codexChain)
@@ -37,6 +40,11 @@ public class CodexTab : Tab
         
         codexChains.Add(codexChain);
         codexChain.transform.SetParent(chainsHost, false);
+    }
+
+    public void ScrollToTop()
+    {
+        scroll.normalizedPosition = new Vector2(0.5f, 1);
     }
 
     public void ScrollTo(int chainId)
@@ -56,7 +64,28 @@ public class CodexTab : Tab
             Debug.LogError($"[CodexTab] => ScrollTo({chainId}): chain not found!");
             return;
         }
-        
-        scroll.normalizedPosition = new Vector2(0.5f, 0.5f);
+
+        DOTween.Sequence()
+               .AppendInterval(0.3f)
+               .AppendCallback(() =>
+                {
+                    // Respect space between top size of the viewport and chain
+                    const float PADDING = 7f;
+
+                    RectTransform chainRect = target.GetComponent<RectTransform>();
+                    float chainY    = chainRect.localPosition.y;
+                    float chainH    = chainRect.sizeDelta.y;
+                    float chainTop  = chainY + chainH / 2 + PADDING;
+
+                    float contentH  = scroll.content.sizeDelta.y;
+
+                    float scrollToY = -chainTop;
+                    float scrollToYNormalized = 1 - scrollToY / contentH;
+
+                    Vector2 targetValue = new Vector2(0.5f, scrollToYNormalized);
+
+                    DOTween.To(() => scroll.normalizedPosition, (pos) => { scroll.normalizedPosition = pos; }, targetValue, 1f)
+                           .SetEase(Ease.InOutBack);
+                });
     }
 }
