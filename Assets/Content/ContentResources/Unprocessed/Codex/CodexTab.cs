@@ -69,6 +69,8 @@ public class CodexTab : Tab
                .AppendInterval(0.3f)
                .AppendCallback(() =>
                 {
+                    Canvas.ForceUpdateCanvases(); // Fix animation on real devices
+                    
                     // Respect space between top size of the viewport and chain
                     const float PADDING = 7f;
 
