@@ -60,7 +60,7 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
             rewards.Append(" ");
             rewards.Append(pair.ToStringIcon());
         }
-
+        
         UIMessageWindowController.CreateMessage("New level", rewards.ToString(), () =>
         {
             isLevelUp = false;

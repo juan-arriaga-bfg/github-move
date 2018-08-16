@@ -26,13 +26,24 @@ public static class CurrencyHellper
         for (var i = 0; i < products.Count; i++)
         {
             var product = products[i];
-            Purchase(product, new CurrencyPair{Currency = Currency.Cash.Name, Amount = 0});
             
-            if (flyPosition == null) continue;
-
-            DOTween.Sequence()
-                .AppendInterval(0.5f * i)
-                .AppendCallback(() => CurrencyFly(flyPosition.Value, new CurrencyPair {Currency = product.Currency, Amount = product.Amount}));
+            var shopItem = new ShopItem
+            {
+                Uid = $"purchase.test.{product.Currency}.10", 
+                ItemUid = product.Currency, 
+                Amount = product.Amount,
+                CurrentPrices = new List<Price>{new Price{Currency = Currency.Cash.Name, DefaultPriceAmount = 0}}
+            };
+        
+            ShopService.Current.PurchaseItem
+            (
+                shopItem,
+                (item, s) =>
+                {
+                    if (flyPosition != null) CurrencyFly(flyPosition.Value, product, 0.5f * i);
+                },
+                item => { }
+            );
         }
     }
     
@@ -60,7 +71,7 @@ public static class CurrencyHellper
             {
                 // on purchase success
                 isSuccess = true;
-                if (flyPosition != null) CurrencyFly(flyPosition.Value, new CurrencyPair{Amount = amountProduct, Currency = product});
+                if (flyPosition != null) CurrencyFly(flyPosition.Value, new CurrencyPair{Currency = product, Amount = amountProduct});
                 onSuccess?.Invoke(true);
 
             },
@@ -75,29 +86,13 @@ public static class CurrencyHellper
 
         return isSuccess;
     }
-
-    private static void CurrencyFly(Vector3 screenPosition, CurrencyPair resource)
+    
+    public static bool Purchase(CurrencyPair product, List<CurrencyPair> prices, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
-        
-        var fly = ResourcesViewManager.Instance.GetFirstViewById(resource.Currency);
-        if (fly == null) return;
-        
-        var carriers = ResourcesViewManager.DeliverResource<ResourceCarrier>
-        (
-            resource.Currency,
-            resource.Amount,
-            fly.GetAnchorRect(),
-            screenPosition,
-            R.ResourceCarrier
-        );
-    }
-
-    public static bool Purchase(CurrencyPair product, List<CurrencyPair> prices, Action<bool> onSuccess = null)
-    {
-        return Purchase(product.Currency, product.Amount, prices, onSuccess);
+        return Purchase(product.Currency, product.Amount, prices, onSuccess, flyPosition);
     }
     
-    public static bool Purchase(string product, int amount, List<CurrencyPair> prices, Action<bool> onSuccess = null)
+    public static bool Purchase(string product, int amount, List<CurrencyPair> prices, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
         var isSuccess = false;
         var currentPrices = new List<Price>();
@@ -122,6 +117,7 @@ public static class CurrencyHellper
             {
                 // on purchase success
                 isSuccess = true;
+                if (flyPosition != null) CurrencyFly(flyPosition.Value, new CurrencyPair{Currency = product, Amount = amount});
                 onSuccess?.Invoke(true);
             },
             item =>
@@ -132,6 +128,23 @@ public static class CurrencyHellper
         );
         
         return isSuccess;
+    }
+    
+    private static void CurrencyFly(Vector3 screenPosition, CurrencyPair resource, float delay = 0)
+    {
+        var fly = ResourcesViewManager.Instance.GetFirstViewById(resource.Currency);
+        
+        if (fly == null) return;
+        
+        var carriers = ResourcesViewManager.DeliverResource<ResourceCarrier>
+        (
+            resource.Currency,
+            resource.Amount,
+            fly.GetAnchorRect(),
+            screenPosition,
+            R.ResourceCarrier,
+            delay
+        );
     }
 
     public static bool IsCanPurchase(List<CurrencyPair> prices, out List<CurrencyPair> diffs)
