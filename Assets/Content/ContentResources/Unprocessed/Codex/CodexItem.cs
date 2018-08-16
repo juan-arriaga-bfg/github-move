@@ -15,16 +15,18 @@ public class CodexItem : MonoBehaviour
     
     [Header("References")]
     [SerializeField] private Transform pieceHost;
-    [SerializeField] private Image pieceImage;
     [SerializeField] private TextMeshProUGUI caption;
     [SerializeField] private GameObject questionMark;
     [SerializeField] private GameObject arrow;
     [SerializeField] private GameObject shine;
     [SerializeField] private CodexItemDropPanel dropPanel;
     [SerializeField] private GameObject exclamationMark;
-
-    private readonly Vector3 DEFAULT_SCALE = Vector3.one;
-    private readonly Vector3 REWARD_SCALE = Vector3.one * 1.1f;
+    
+    [Header("Image")]
+    [SerializeField] private Image pieceImage;
+    [SerializeField] private Vector3 defaultScale;
+    [SerializeField] private Vector3 rewardScale;
+    [SerializeField] private Vector2 maxSize;
     
     private CodexItemState state;
 
@@ -69,7 +71,7 @@ public class CodexItem : MonoBehaviour
                 dropPanel.gameObject.SetActive(true);
                 dropPanel.Init(itemDef);
 
-                pieceImage.transform.localScale = REWARD_SCALE;
+                pieceImage.transform.localScale = rewardScale;
                 
                 break;
             
@@ -85,7 +87,7 @@ public class CodexItem : MonoBehaviour
                 sprite = GetPieecSprite();
                 shine.SetActive(true);
 
-                pieceImage.transform.localScale = REWARD_SCALE;
+                pieceImage.transform.localScale = rewardScale;
                 break;
             
             default:
@@ -94,6 +96,13 @@ public class CodexItem : MonoBehaviour
         
         pieceImage.sprite = sprite;
         caption.text = captionText;
+        
+        pieceImage.SetNativeSize();
+
+        Vector2 size = pieceImage.rectTransform.sizeDelta;
+        size.x = Mathf.Min(maxSize.x, size.x);
+        size.y = Mathf.Min(maxSize.y, size.y);
+        pieceImage.rectTransform.sizeDelta = size;
         
         // Debug.Log($"[CodexItem] => Init {itemDef.PieceTypeDef.Abbreviations[0]} as {state}");
     }
@@ -110,7 +119,7 @@ public class CodexItem : MonoBehaviour
         
         dropPanel.gameObject.SetActive(false);
 
-        pieceImage.transform.localScale = DEFAULT_SCALE;
+        pieceImage.transform.localScale = defaultScale;
     }
 
     private Sprite GetPieecSprite()

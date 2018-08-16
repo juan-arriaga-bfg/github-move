@@ -30,8 +30,8 @@ public class UICodexWindowView : UIGenericPopupWindowView
         UICodexWindowModel model = Model as UICodexWindowModel;
 
         Init(model);
-      
-        tabGroup.ActivateTab(model.ActiveTabIndex);
+
+        ActivateTab(model);
     }
 
     public override void OnViewClose()
@@ -104,6 +104,40 @@ public class UICodexWindowView : UIGenericPopupWindowView
         }
 
         return ret;
+    }
+    
+    private void ActivateTab(UICodexWindowModel model)
+    {
+        if (model.ActiveTabIndex != -1)
+        {
+            tabGroup.ActivateTab(model.ActiveTabIndex);
+            return;
+        }
+
+        if (model.CodexContent.PendingRewardAmount <= 0)
+        {
+            tabGroup.ActivateTab(0);
+            return;
+        }
+
+        for (var i = 0; i < model.CodexContent.TabDefs.Count; i++)
+        {
+            var tabDef = model.CodexContent.TabDefs[i];
+            foreach (var chainDef in tabDef.ChainDefs)
+            {
+                foreach (var itemDef in chainDef.ItemDefs)
+                {
+                    if (itemDef.PendingReward != null)
+                    {
+                        tabGroup.ActivateTab(i);
+
+                        // Scroll
+                        var target = chainDef.ItemDefs[0].PieceTypeDef.Id;
+                        tabs[i].GetComponent<CodexTab>().ScrollTo(target);
+                    }
+                }
+            }
+        }
     }
 
     private static void CreateChains(CodexTab tab, CodexTabDef tabDef, GameObject chainPrefab, GameObject itemPrefab)

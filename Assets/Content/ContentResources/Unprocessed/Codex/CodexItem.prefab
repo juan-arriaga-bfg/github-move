@@ -296,7 +296,6 @@ GameObject:
   - component: {fileID: 224154115852673216}
   - component: {fileID: 114829956297001978}
   - component: {fileID: 114945931976090190}
-  - component: {fileID: 222053728353259396}
   m_Layer: 31
   m_Name: CodexItem
   m_TagString: Untagged
@@ -573,11 +572,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -853,7 +852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1057,11 +1056,11 @@ MonoBehaviour:
     lineCount: 2
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1091,20 +1090,16 @@ MonoBehaviour:
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   lockedColor: {r: 1, g: 1, b: 1, a: 0.49803922}
   pieceHost: {fileID: 224241040289342188}
-  pieceImage: {fileID: 114788492117926910}
   caption: {fileID: 114923242645141848}
   questionMark: {fileID: 1584011339081694}
   arrow: {fileID: 1705586410533200}
   shine: {fileID: 1102572239793760}
   dropPanel: {fileID: 114581023215779540}
   exclamationMark: {fileID: 1026029696319576}
---- !u!222 &222053728353259396
-CanvasRenderer:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1815276886000352}
-  m_CullTransparentMesh: 0
+  pieceImage: {fileID: 114788492117926910}
+  defaultScale: {x: 1, y: 1, z: 1}
+  rewardScale: {x: 1.2, y: 1.2, z: 1.2}
+  maxSize: {x: 170, y: 170}
 --- !u!222 &222064976456950126
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -1298,10 +1293,10 @@ RectTransform:
   m_Father: {fileID: 224241040289342188}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -10, y: -10}
+  m_SizeDelta: {x: 95, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224336298399502424
 RectTransform:

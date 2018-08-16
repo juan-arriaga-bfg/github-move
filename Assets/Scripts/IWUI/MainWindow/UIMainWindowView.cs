@@ -117,7 +117,7 @@ public class UIMainWindowView : IWUIWindowView
         codexButton.UpdateState();
         
         var model = UIService.Get.GetCachedModel<UICodexWindowModel>(UIWindowType.CodexWindow);
-        model.ActiveTabIndex = 0;
+        model.ActiveTabIndex = -1;
         model.CodexContent = content;
         model.OnClaim = UpdateCodexButton;
         
