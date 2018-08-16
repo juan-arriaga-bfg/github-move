@@ -66,7 +66,8 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
             isLevelUp = false;
             CurrencyHellper.Purchase(Currency.Level.Name, 1, itemUid, manager.Price);
             CurrencyHellper.Purchase(Currency.EnergyLimit.Name, 1);
-
+            CurrencyHellper.Purchase(data, new Vector2(Screen.width/2, Screen.height/2));
+            
             GameDataService.Current.QuestsManager.UpdateActiveQuest();
             GameDataService.Current.TasksManager.NextLevel();
         }, null, true);

@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using Lean.Touch;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UIResourcePanelViewController : UIGenericResourcePanelViewController 
 {
