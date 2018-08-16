@@ -40,6 +40,10 @@ public class TouchReactionDefinitionSpawnCastle : TouchReactionDefinitionCompone
 			positions.Add(pos);
 			if(positions.Count == amount) break;
 		}
+
+		var target = positions[0];
+		var worldPos = piece.Context.BoardDef.GetSectorCenterWorldPosition(target.X, target.Y, target.Z);
+		piece.Context.Manipulator.CameraManipulator.MoveTo(worldPos);
         
 		piece.Context.ActionExecutor.AddAction(new ReproductionPieceAction
 		{

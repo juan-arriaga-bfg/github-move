@@ -4,16 +4,9 @@ public class UICastleWindowModel : IWWindowModel
 {
     public int ChestReward = -1;
     
-    public string Title
-    {
-        get { return "Shop of Chests"; }
-    }
-    
-    public string Message
-    {
-        get { return "Upgrade your castle to get new chests!"; }
-    }
-    
+    public string Title => "Shop of Chests";
+    public string Message => "Upgrade your castle to get new chests!";
+
     public string UpgradeMessage
     {
         get
@@ -22,7 +15,7 @@ public class UICastleWindowModel : IWWindowModel
             var piece = board.BoardLogic.GetPieceAt(GameDataService.Current.PiecesManager.CastlePosition);
             var def = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(piece.PieceType);
             
-            return string.Format("Upgrade\n{0}", def.UpgradePrices[0].ToStringIcon(false));
+            return $"Upgrade\n{def.UpgradePrices[0].ToStringIcon(false)}";
         }
     }
     
@@ -67,18 +60,11 @@ public class UICastleWindowModel : IWWindowModel
         var board = BoardService.Current.GetBoardById(0);
         var piece = board.BoardLogic.GetPieceAt(GameDataService.Current.PiecesManager.CastlePosition);
         var reaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
-        
-        if(reaction == null) return false;
-        
-        var menu = reaction.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
-        
-        if(menu == null) return false;
 
-        var upgrade = menu.GetDefinition<TouchReactionDefinitionUpgrade>();
+        var menu = reaction?.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
+        var upgrade = menu?.GetDefinition<TouchReactionDefinitionUpgrade>();
         
-        if(upgrade == null) return false;
-        
-        return upgrade.Make(piece.CachedPosition, piece);
+        return upgrade != null && upgrade.Make(piece.CachedPosition, piece);
     }
     
     public bool Spawn()
@@ -88,14 +74,9 @@ public class UICastleWindowModel : IWWindowModel
         var board = BoardService.Current.GetBoardById(0);
         var piece = board.BoardLogic.GetPieceAt(GameDataService.Current.PiecesManager.CastlePosition);
         var reaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
-        
-        if(reaction == null) return false;
-        
-        var menu = reaction.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
-        
-        if(menu == null) return false;
 
-        var spawn = menu.GetDefinition<TouchReactionDefinitionSpawnCastle>();
+        var menu = reaction?.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
+        var spawn = menu?.GetDefinition<TouchReactionDefinitionSpawnCastle>();
         
         if(spawn == null) return false;
 

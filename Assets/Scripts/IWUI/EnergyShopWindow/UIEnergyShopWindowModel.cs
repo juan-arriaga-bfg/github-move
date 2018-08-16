@@ -7,25 +7,13 @@ public class UIEnergyShopWindowModel : IWWindowModel
     
     public int ChestReward = -1;
     
-    public string Title
-    {
-        get { return "Out of Energy"; }
-    }
-    
-    public string Message
-    {
-        get { return "Need more energy? Make it yourself or buy more."; }
-    }
-    
-    public string SecondMessage
-    {
-        get { return "Get energy for free from:"; }
-    }
+    public string Title => "Out of Energy";
 
-    public string ButtonText
-    {
-        get { return "Show"; }
-    }
+    public string Message => "Need more energy? Make it yourself or buy more.";
+
+    public string SecondMessage => "Get energy for free from:";
+
+    public string ButtonText => "Show";
 
     public List<ChestDef> Products
     {
@@ -51,11 +39,8 @@ public class UIEnergyShopWindowModel : IWWindowModel
         }
     }
 
-    public List<int> SelectedPieces
-    {
-        get { return selectedPieces ?? (selectedPieces = PieceType.GetIdsByFilter(PieceTypeFilter.Energy)); }
-    }
-    
+    public List<int> SelectedPieces => selectedPieces ?? (selectedPieces = PieceType.GetIdsByFilter(PieceTypeFilter.Energy));
+
     public bool Spawn()
     {
         if (ChestReward == -1) return false;
@@ -63,14 +48,9 @@ public class UIEnergyShopWindowModel : IWWindowModel
         var board = BoardService.Current.GetBoardById(0);
         var piece = board.BoardLogic.GetPieceAt(GameDataService.Current.PiecesManager.CastlePosition);
         var reaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
-        
-        if(reaction == null) return false;
-        
-        var menu = reaction.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
-        
-        if(menu == null) return false;
 
-        var spawn = menu.GetDefinition<TouchReactionDefinitionSpawnCastle>();
+        var menu = reaction?.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
+        var spawn = menu?.GetDefinition<TouchReactionDefinitionSpawnCastle>();
         
         if(spawn == null) return false;
 
