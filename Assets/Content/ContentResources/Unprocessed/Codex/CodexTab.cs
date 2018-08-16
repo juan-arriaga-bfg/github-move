@@ -82,6 +82,8 @@ public class CodexTab : Tab
                     float scrollToY = -chainTop;
                     float scrollToYNormalized = 1 - scrollToY / contentH;
 
+                    scrollToYNormalized = Mathf.Clamp(scrollToYNormalized, 0, 1);
+                    
                     Vector2 targetValue = new Vector2(0.5f, scrollToYNormalized);
 
                     DOTween.To(() => scroll.normalizedPosition, (pos) => { scroll.normalizedPosition = pos; }, targetValue, 1f)
