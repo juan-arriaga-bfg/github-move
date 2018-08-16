@@ -3,12 +3,13 @@
 public class ReproductionPieceComponent : IECSComponent, IPieceBoardObserver
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-    public int Guid { get { return ComponentGuid; } }
-    
+    public int Guid => ComponentGuid;
+
     public CurrencyPair Child { get; set; }
 
     private Piece contextPiece;
     private EmptyCellsFinderComponent emptyFinder;
+    private ReproductionLifeComponent life;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -23,6 +24,7 @@ public class ReproductionPieceComponent : IECSComponent, IPieceBoardObserver
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
         contextPiece.Context.ReproductionLogic.Add(this);
+        if (life == null) life = contextPiece.GetComponent<ReproductionLifeComponent>(ReproductionLifeComponent.ComponentGuid);
     }
 
     public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
@@ -47,6 +49,8 @@ public class ReproductionPieceComponent : IECSComponent, IPieceBoardObserver
             return;
         }
         
+        life?.Damage(life.Worker?.Amount ?? 1);
+        
         contextPiece.Context.ActionExecutor.AddAction(new ReproductionPieceAction()
         {
             From = contextPiece.CachedPosition,
@@ -54,9 +58,11 @@ public class ReproductionPieceComponent : IECSComponent, IPieceBoardObserver
             Positions = field
         });
     }
-
-    public bool CheckFreePosition()
+    
+    public bool Check()
     {
-        return emptyFinder.CheckWithPointInCenter(contextPiece.CachedPosition);
+        if (emptyFinder.CheckWithPointInCenter(contextPiece.CachedPosition) == false) return false;
+        
+        return life == null || (!life.Timer.IsExecuteable() && life.HP - life.Current > 1);
     }
 }

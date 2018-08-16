@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 public class PieceDef
 {
@@ -13,7 +12,11 @@ public class PieceDef
     public int SpawnCapacity { get; set; }
     public bool IsFilledInStart { get; set; }
     
+    public int Limit { get; set; }
+    public CurrencyPair StepReward { get; set; }
     public CurrencyPair Reproduction { get; set; }
+    public CurrencyPair FastPrice { get; set; }
+    
     public CurrencyPair SpawnResources { get; set; }
     public List<CurrencyPair> CreateRewards { get; set; }
     public List<CurrencyPair> UpgradePrices { get; set; }
@@ -26,20 +29,10 @@ public class PieceDef
 
     private int upgradeTargetLevel;
     
-    public int Piece
-    {
-        get { return PieceType.Parse(Uid); }
-    }
-    
-    public int SpawnPieceType
-    {
-        get { return PieceType.Parse(SpawnPiece); }
-    }
-    
-    public CurrencyDef UpgradeCurrency
-    {
-        get {return levelCurrencyDef ?? (levelCurrencyDef = Currency.GetCurrencyDef(string.Format("Level{0}", Uid.Substring(0, Uid.Length - 1))));}
-    }
+    public int Piece => PieceType.Parse(Uid);
+    public int SpawnPieceType => PieceType.Parse(SpawnPiece);
+
+    public CurrencyDef UpgradeCurrency => levelCurrencyDef ?? (levelCurrencyDef = Currency.GetCurrencyDef($"Level{Uid.Substring(0, Uid.Length - 1)}"));
 
     public CurrencyDef UpgradeTargetCurrency
     {
@@ -48,8 +41,8 @@ public class PieceDef
             if (string.IsNullOrEmpty(UpgradeTargetPiece)) return null;
 
             if (upgradeTargetCurrencyDef != null) return upgradeTargetCurrencyDef;
-            
-            upgradeTargetCurrencyDef = Currency.GetCurrencyDef(string.Format("Level{0}", UpgradeTargetPiece.Substring(0, UpgradeTargetPiece.Length - 1)));
+
+            upgradeTargetCurrencyDef = Currency.GetCurrencyDef($"Level{UpgradeTargetPiece.Substring(0, UpgradeTargetPiece.Length - 1)}");
             
             upgradeTargetLevel = int.Parse(UpgradeTargetPiece.Substring(UpgradeTargetPiece.Length - 1, 1));
             

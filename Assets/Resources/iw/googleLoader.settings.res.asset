@@ -28,7 +28,7 @@ MonoBehaviour:
   - Key: pieces
     Link: 15C96r0vcgzzhJ6Fo_OQXBcCoIkSogZnTZg8Jc6MKDH8
     Route: parse
-    Pattern: '[{"Uid":"","CreateRewards":[{"Currency":"","Amount":0}],"Reproduction":{"Currency":"","Amount":0},"SpawnResources":{"Currency":"","Amount":0},"Name":"","UnlockBonus":[{"Currency":"","Amount":0}]},{"Uid":"","UpgradeTargetPiece":"","CreateRewards":[{"Currency":"","Amount":0}],"UpgradePrices":[{"Currency":"","Amount":0}],"Delay":0,"SpawnPiece":"","SpawnAmount":0,"SpawnCapacity":0,"IsFilledInStart":false}]'
+    Pattern: '[{"Uid":"","CreateRewards":[{"Currency":"","Amount":0}],"FastPrice":{"Currency":"","Amount":0},"StepReward":{"Currency":"","Amount":0},"Limit":0,"Delay":0,"Reproduction":{"Currency":"","Amount":0},"SpawnResources":{"Currency":"","Amount":0},"Name":"","UnlockBonus":[{"Currency":"","Amount":0}]},{"Uid":"","UpgradeTargetPiece":"","CreateRewards":[{"Currency":"","Amount":0}],"UpgradePrices":[{"Currency":"","Amount":0}],"Delay":0,"SpawnPiece":"","SpawnAmount":0,"SpawnCapacity":0,"IsFilledInStart":false}]'
   - Key: quests
     Link: 1jaDy9GfzL7SMM9wR1HHHD1kYRj1tjPZrnBw5ZLIT1tk
     Route: parse

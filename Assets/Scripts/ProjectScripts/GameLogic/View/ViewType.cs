@@ -13,7 +13,7 @@
     SimpleUpgrade = -1009,
     Production = -1010,
     ProductionWarning = -1011,
-    MineState = -1012,
-    Bubble = -1013,
-    MergeParticle = -1014
+    Bubble = -1012,
+    MergeParticle = -1013,
+    Progress = -1014
 }

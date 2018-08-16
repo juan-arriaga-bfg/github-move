@@ -2,19 +2,9 @@
 
 public class ObstacleLifeComponent : StorageLifeComponent
 {
-    public override CurrencyPair Energy
-    {
-        get
-        {
-            return GameDataService.Current.ObstaclesManager.GetPriceByStep(thisContext.PieceType, current);
-        }
-    }
-    
-    public float GetProgressNext
-    {
-        get { return 1 - (current+1)/(float)HP; }
-    }
-    
+    public override CurrencyPair Energy => GameDataService.Current.ObstaclesManager.GetPriceByStep(thisContext.PieceType, current);
+    public override string Message => "Clear Up";
+
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
         HP = thisContext.Context.BoardLogic.MatchDefinition.GetIndexInChain(thisContext.PieceType);
@@ -35,7 +25,7 @@ public class ObstacleLifeComponent : StorageLifeComponent
         storage.Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current);
     }
 
-    public override int GetTimerDelay()
+    protected override int GetTimerDelay()
     {
         return GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current);
     }

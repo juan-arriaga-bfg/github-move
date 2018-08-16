@@ -4,9 +4,8 @@ using UnityEngine;
 public class TimerComponent : IECSComponent, IECSSystem
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-    
-    public int Guid { get { return ComponentGuid; } }
-    
+    public int Guid => ComponentGuid;
+
     public int Delay;
     public CurrencyPair Price;
     
@@ -45,13 +44,13 @@ public class TimerComponent : IECSComponent, IECSSystem
         IsPaused = false;
         startTime = start;
         completeTime = startTime.AddSeconds(Delay);
-        if(OnStart != null) OnStart();
+        OnStart?.Invoke();
     }
     
     public void Stop()
     {
         IsStarted = false;
-        if(OnStop != null) OnStop();
+        OnStop?.Invoke();
     }
     
     public bool IsExecuteable()
@@ -61,15 +60,15 @@ public class TimerComponent : IECSComponent, IECSSystem
 
     public void Execute()
     {
-        if (OnExecute != null) OnExecute();
-        
+        OnExecute?.Invoke();
+
         var time = GetTime();
         
         if(time.TotalSeconds < Delay) return;
 
         IsStarted = false;
-        
-        if(OnComplete != null) OnComplete();
+
+        OnComplete?.Invoke();
     }
 
     public object GetDependency()
@@ -77,11 +76,8 @@ public class TimerComponent : IECSComponent, IECSSystem
         return null;
     }
     
-    public long StartTime
-    {
-        get { return startTime.ConvertToUnixTime(); }
-    }
-    
+    public long StartTime => startTime.ConvertToUnixTime();
+
     public TimeSpan GetTime()
     {
         return DateTime.UtcNow - startTime;
@@ -121,8 +117,8 @@ public class TimerComponent : IECSComponent, IECSSystem
         if (string.IsNullOrEmpty(format))
         {
             return (int) time.TotalHours > 0
-                ? string.Format("<mspace=3em>{0:00}:{1:00}:{2:00}</mspace>", time.Hours, time.Minutes, time.Seconds)
-                : string.Format("<mspace=3em>{0:00}:{1:00}</mspace>", time.Minutes, time.Seconds);
+                ? $"<mspace=3em>{time.Hours:00}:{time.Minutes:00}:{time.Seconds:00}</mspace>"
+                : $"<mspace=3em>{time.Minutes:00}:{time.Seconds:00}</mspace>";
         }
         
         return string.Format(format, time.Hours, time.Minutes, time.Seconds);

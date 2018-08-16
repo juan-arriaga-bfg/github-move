@@ -169,7 +169,6 @@ public class R
      public const string ChestC1Piece = "ChestC1Piece";
      public const string ChestC2Piece = "ChestC2Piece";
      public const string ChestC3Piece = "ChestC3Piece";
-     public const string ChangeMineStateView = "ChangeMineStateView";
      public const string ChestX1Piece = "ChestX1Piece";
      public const string ChestX2Piece = "ChestX2Piece";
      public const string ChestX3Piece = "ChestX3Piece";
@@ -209,4 +208,5 @@ public class R
      public const string ChestZ1Piece = "ChestZ1Piece";
      public const string ChestZ2Piece = "ChestZ2Piece";
      public const string ChestZ3Piece = "ChestZ3Piece";
+     public const string BoardProgressView = "BoardProgressView";
 }

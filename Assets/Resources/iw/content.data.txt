@@ -845,11 +845,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "ChangeMineStateView",
-    "ResourcePath": "Prefabs/ChangeMineStateView",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "ChestX1Piece",
     "ResourcePath": "Prefabs/Pieces/GenericPiece/MineChest/ChestX1Piece",
     "IsGenerateAutoName": true
@@ -1042,6 +1037,11 @@
   {
     "Uid": "ChestZ3Piece",
     "ResourcePath": "Prefabs\\Pieces\\GenericPiece\\MineChest/ChestZ3Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BoardProgressView",
+    "ResourcePath": "Prefabs/BoardProgressView",
     "IsGenerateAutoName": true
   }
 ]

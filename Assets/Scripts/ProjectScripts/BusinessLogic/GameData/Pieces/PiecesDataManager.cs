@@ -4,9 +4,8 @@ using UnityEngine;
 public class PiecesDataManager : IECSComponent, IDataManager, IDataLoader<List<PieceDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
+    public int Guid => ComponentGuid;
 
-    public int Guid { get { return ComponentGuid; } }
-	
     public void OnRegisterEntity(ECSEntity entity)
     {
         Reload();

@@ -1,24 +1,16 @@
-﻿using System.Collections.Generic;
-
-public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
+﻿public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerComponent
 {
     protected StorageComponent storage;
     
-    public virtual CurrencyPair Energy
-    {
-        get { return new CurrencyPair(); }
-    }
-    
-    public virtual CurrencyPair Worker
-    {
-        get { return new CurrencyPair {Currency = Currency.Worker.Name, Amount = 1}; }
-    }
-    
-    public virtual string Key
-    {
-        get { return thisContext.CachedPosition.ToSaveString(); }
-    }
-    
+    public virtual CurrencyPair Energy => new CurrencyPair {Currency = Currency.Energy.Name, Amount = 0};
+    public virtual CurrencyPair Worker => new CurrencyPair {Currency = Currency.Worker.Name, Amount = 1};
+    public virtual string Message => "";
+
+    public string Key => thisContext.CachedPosition.ToSaveString();
+
+    public TimerComponent Timer => storage.Timer;
+    public float GetProgressNext => 1 - (current+1)/(float)HP;
+
     public virtual void OnAddToBoard(BoardPosition position, Piece context = null)
     {
         if(storage == null) storage = thisContext.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
@@ -29,9 +21,7 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
         
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
 
-        if (save == null) return;
-        
-        var item = save.GetLifeSave(position);
+        var item = save?.GetLifeSave(position);
         
         if (item == null) return;
         
@@ -46,6 +36,7 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
 
     public virtual void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
+        thisContext.Context.WorkerLogic.Replase(from.ToSaveString(), to.ToSaveString());
     }
 
     public virtual void OnRemoveFromBoard(BoardPosition position, Piece context = null)
@@ -53,14 +44,14 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
         storage.Timer.OnStart -= OnTimerStart;
     }
 
-    public virtual int GetTimerDelay()
+    protected virtual int GetTimerDelay()
     {
         return storage.Timer.Delay;
     }
     
     public bool Damage()
     {
-        if (current == HP) return false;
+        if (IsDead) return false;
         
         var isSuccess = false;
 
@@ -85,7 +76,7 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
 
     private void OnTimerStart()
     {
-        if (current != HP) OnStep();
+        if (IsDead == false) OnStep();
         else OnComplete();
     }
     
@@ -103,6 +94,5 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver
 
     protected virtual void OnSpawnRewards()
     {
-        
     }
 }
