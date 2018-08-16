@@ -88,6 +88,11 @@ public class TimerComponent : IECSComponent, IECSSystem
         return completeTime - DateTime.UtcNow;
     }
 
+    public string GetDelayText(string format)
+    {
+        return TimeFormat(DateTime.UtcNow.AddSeconds(Delay) - DateTime.UtcNow, format);
+    }
+
     public string GetTimeText(string format)
     {
         return TimeFormat(GetTime(), format);

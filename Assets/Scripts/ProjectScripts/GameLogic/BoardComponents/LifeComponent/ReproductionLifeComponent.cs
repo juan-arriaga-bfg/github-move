@@ -4,14 +4,22 @@ public class ReproductionLifeComponent : StorageLifeComponent
 {
     private PieceDef def;
     private string childName;
+    private TimerComponent cooldown;
     
     public override string Message => $"Harvest {childName}";
+
+    public override TimerComponent Timer => cooldown;
+
+    public override bool IsUseCooldown => true;
 
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
         
         def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType);
+        
+        cooldown = new TimerComponent{Delay = def.Delay, Price = def.FastPrice};
+        RegisterComponent(cooldown);
         
         var child = GameDataService.Current.PiecesManager.GetPieceDef(PieceType.Parse(def.Reproduction.Currency));
         childName = child?.Name;
@@ -23,15 +31,40 @@ public class ReproductionLifeComponent : StorageLifeComponent
         
         var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
         
-        timer.Delay = def.Delay;
-        timer.Price = def.FastPrice;
+        timer.Delay = 0;
         
         storage.SpawnPiece = PieceType.Parse(def.Reproduction.Currency);
         storage.Capacity = storage.Amount = def.Reproduction.Amount;
         
         HP = def.Limit;
     }
-    
+
+    public override bool Damage()
+    {
+        if (!cooldown.IsExecuteable()) return base.Damage();
+        
+        UIMessageWindowController.CreateTimerCompleteMessage(
+            "Complete now!",
+            "Would you like to build the item right now for crystals?",
+            "Complete now ",
+            cooldown,
+            () => CurrencyHellper.Purchase(Currency.Timer.Name, 1, cooldown.GetPrise(), success =>
+            {
+                if(success == false) return;
+					
+                cooldown.Stop();
+                cooldown.OnComplete();
+            }));
+            
+        return false;
+
+    }
+
+    protected override void Success()
+    {
+        cooldown.Start();
+    }
+
     protected override void OnStep()
     {
         storage.OnScatter = () =>

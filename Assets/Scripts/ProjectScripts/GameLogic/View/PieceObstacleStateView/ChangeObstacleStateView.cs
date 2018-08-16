@@ -29,11 +29,22 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
         Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
         
         bar.Init(life.HP);
+
+        if (life.IsUseCooldown)
+        {
+            life.Timer.OnExecute += UpdateButtonText;
+            life.Timer.OnComplete += UpdateButtonText;
+        }
     }
     
     public override void ResetViewOnDestroy()
     {
         bar.Clear();
+        if (life.IsUseCooldown)
+        {
+            life.Timer.OnExecute -= UpdateButtonText;
+            life.Timer.OnComplete -= UpdateButtonText;
+        }
         base.ResetViewOnDestroy();
     }
 
@@ -43,10 +54,15 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
 
         if (IsShow == false) return;
         
-        message.Text = $"{life.Message}{(life.Energy.Amount == 0 ? "" : " " + life.Energy.ToStringIcon())}";
-        price.Text = $"Send<sprite name={life.Worker.Currency}>";
+        message.Text = life.Message;
+        UpdateButtonText();
         
         bar.UpdateValue(life.GetProgress, life.GetProgressNext);
+    }
+
+    private void UpdateButtonText()
+    {
+        price.Text = life.Timer.IsExecuteable() ? $"Harvest\n{life.Timer.GetTimeLeftText(null)}" : life.Price;
     }
     
     public void Clear()

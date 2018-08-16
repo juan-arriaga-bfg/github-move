@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-public class LifeComponent : IECSComponent
+public class LifeComponent : ECSEntity
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-    public int Guid => ComponentGuid;
+    public override int Guid => ComponentGuid;
 
     protected Piece thisContext;
     
@@ -15,13 +15,9 @@ public class LifeComponent : IECSComponent
     public int Current => current;
     public float GetProgress => 1 - current/(float)HP;
 
-    public virtual void OnRegisterEntity(ECSEntity entity)
+    public override void OnRegisterEntity(ECSEntity entity)
     {
         thisContext = entity as Piece;
-    }
-
-    public void OnUnRegisterEntity(ECSEntity entity)
-    {
     }
 
     public void Damage(int damage)

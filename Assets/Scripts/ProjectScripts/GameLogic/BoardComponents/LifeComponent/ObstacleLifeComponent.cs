@@ -3,7 +3,8 @@
 public class ObstacleLifeComponent : StorageLifeComponent
 {
     public override CurrencyPair Energy => GameDataService.Current.ObstaclesManager.GetPriceByStep(thisContext.PieceType, current);
-    public override string Message => "Clear Up";
+    public override string Message => $"Tree chopping:\n{Timer.GetDelayText(null)}";
+    public override string Price => $"Chop {Energy.ToStringIcon()}";
 
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {

@@ -18,7 +18,7 @@ public class ReproductionPieceBuilder : SimplePieceBuilder
 		var storage = new StorageComponent
 		{
 			IsAutoStart = false,
-			IsTimerShow = true,
+			IsTimerShow = false,
 			TimerOffset = new Vector2(0f, 0.5f)
 		};
 		

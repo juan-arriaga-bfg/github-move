@@ -4,11 +4,15 @@
     
     public virtual CurrencyPair Energy => new CurrencyPair {Currency = Currency.Energy.Name, Amount = 0};
     public virtual CurrencyPair Worker => new CurrencyPair {Currency = Currency.Worker.Name, Amount = 1};
+    
     public virtual string Message => "";
+    public virtual string Price => $"Send<sprite name={Worker.Currency}>";
+    
+    public virtual bool IsUseCooldown => false;
 
     public string Key => thisContext.CachedPosition.ToSaveString();
 
-    public TimerComponent Timer => storage.Timer;
+    public virtual TimerComponent Timer => storage.Timer;
     public float GetProgressNext => 1 - (current+1)/(float)HP;
 
     public virtual void OnAddToBoard(BoardPosition position, Piece context = null)
@@ -49,7 +53,7 @@
         return storage.Timer.Delay;
     }
     
-    public bool Damage()
+    public virtual bool Damage()
     {
         if (IsDead) return false;
         
