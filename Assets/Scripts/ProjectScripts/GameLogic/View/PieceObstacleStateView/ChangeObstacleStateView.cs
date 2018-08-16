@@ -29,7 +29,6 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
         Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
         
         bar.Init(life.HP);
-        bar.IsVisible = life.HP > 1;
     }
     
     public override void ResetViewOnDestroy()
