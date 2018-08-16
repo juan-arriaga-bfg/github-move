@@ -76,11 +76,12 @@ public class UILimitPanelViewController : UIGenericResourcePanelViewController
     
     private string UpdateText(int current, int limit)
     {
-        return string.Format("{0}/{1}", current, limit);
+        return $"{current}/{limit}";
     }
     
     public void DebugCurrentResources()
     {
+        BoardService.Current.GetBoardById(0)?.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
         UIService.Get.ShowWindow(UIWindowType.EnergyShopWindow);
     }
 }

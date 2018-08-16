@@ -83,5 +83,6 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         var position = board.BoardDef.GetSectorCenterWorldPosition(kingPos.X, kingPos.Y, kingPos.Z);
         
         board.Manipulator.CameraManipulator.MoveTo(position);
+        board.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
     }
 }

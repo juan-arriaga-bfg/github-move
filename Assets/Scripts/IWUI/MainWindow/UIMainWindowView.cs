@@ -106,6 +106,8 @@ public class UIMainWindowView : IWUIWindowView
     
     public void OnClickCodex()
     {
+        BoardService.Current.GetBoardById(0)?.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
+        
         var codexManager = GameDataService.Current.CodexManager;
         var content = codexManager.GetCodexContent();
         
