@@ -65,6 +65,8 @@ public class CodexTab : Tab
             return;
         }
 
+        scroll.enabled = false;
+        
         DOTween.Sequence()
                .AppendInterval(0.3f)
                .AppendCallback(() =>
@@ -86,8 +88,17 @@ public class CodexTab : Tab
                     
                     Vector2 targetValue = new Vector2(0.5f, scrollToYNormalized);
 
-                    DOTween.To(() => scroll.normalizedPosition, (pos) => { scroll.normalizedPosition = pos; }, targetValue, 1f)
-                           .SetEase(Ease.InOutBack);
+                    // DOTween.To(() => scroll.normalizedPosition, (pos) => { scroll.normalizedPosition = pos; }, targetValue, 1f)
+                    //        .SetEase(Ease.InOutBack);
+                    
+                    DOTween.Kill(scroll.content);
+                    scroll.content.DOAnchorPosY(scrollToY, 1.0f)
+                           .SetEase(Ease.InOutBack)
+                           .SetId(scroll.content)
+                           .OnComplete(() =>
+                            {
+                                scroll.enabled = true;
+                            });
                 });
     }
 }
