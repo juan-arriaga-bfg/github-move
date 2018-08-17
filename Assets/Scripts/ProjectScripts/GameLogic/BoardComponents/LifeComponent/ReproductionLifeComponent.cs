@@ -32,7 +32,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
         
         var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
         
-        timer.Delay = 0;
+        timer.Delay = 2;
         
         storage.SpawnPiece = PieceType.Parse(def.Reproduction.Currency);
         storage.Capacity = storage.Amount = def.Reproduction.Amount;
