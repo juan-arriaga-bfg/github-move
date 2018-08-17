@@ -62,7 +62,7 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
 
     private void UpdateButtonText()
     {
-        price.Text = life.Timer.IsExecuteable() ? $"Harvest\n{life.Timer.GetTimeLeftText(null)}" : life.Price;
+        price.Text = life.Price;
     }
     
     public void Clear()
