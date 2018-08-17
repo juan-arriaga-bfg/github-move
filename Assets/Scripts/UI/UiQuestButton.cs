@@ -18,10 +18,13 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     public void Init(Quest quest)
     {
+        if(this.quest != null) ResourcesViewManager.Instance.UnRegisterView(this);
+        
         this.quest = quest;
 
         isUp = false;
         itemUid = PieceType.Parse(quest.WantedPiece);
+        
         ResourcesViewManager.Instance.RegisterView(this);
         UpdateView();
     }
