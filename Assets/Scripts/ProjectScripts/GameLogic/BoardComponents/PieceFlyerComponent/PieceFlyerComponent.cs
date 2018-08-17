@@ -15,7 +15,7 @@
     
     public void Fly(int id, int x, int y)
     {
-        if(GameDataService.Current.QuestsManager.IsNeedToFly(id) == false) return;
+        if(Locker.IsLocked || GameDataService.Current.QuestsManager.IsNeedToFly(id) == false) return;
         
         var flay = ResourcesViewManager.Instance.GetFirstViewById(PieceType.Parse(id));
         flay?.UpdateResource(1);

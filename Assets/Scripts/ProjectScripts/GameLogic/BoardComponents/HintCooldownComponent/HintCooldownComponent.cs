@@ -19,11 +19,8 @@ public class HintCooldownComponent : ECSEntity
 	
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	
-	public override int Guid
-	{
-		get { return ComponentGuid; }
-	}
-	
+	public override int Guid => ComponentGuid;
+
 	private readonly TimerComponent timerArrow = new TimerComponent();
 	private readonly TimerComponent timerBounce = new TimerComponent();
 
@@ -33,7 +30,7 @@ public class HintCooldownComponent : ECSEntity
 	private List<int> minesId;
 	private List<int> obstaclesId;
 	
-	private List<UIBoardView> views = new List<UIBoardView>();
+	private readonly List<UIBoardView> views = new List<UIBoardView>();
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
