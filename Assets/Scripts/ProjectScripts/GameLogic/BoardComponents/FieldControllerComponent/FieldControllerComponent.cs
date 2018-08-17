@@ -43,14 +43,8 @@ public class FieldControllerComponent : IECSComponent
                     Positions = piece.Value
                 });
             }
-            
-            context.ActionExecutor.AddAction(new CallbackAction
-            {
-                Callback = controller =>
-                {
-                    controller.BoardLogic.PieceFlyer.Locker.Unlock(controller);
-                }
-            });
+
+            AddLastAction();
             
             return;
         }
@@ -63,14 +57,8 @@ public class FieldControllerComponent : IECSComponent
                 Positions = item.Positions
             });
         }
-        
-        context.ActionExecutor.AddAction(new CallbackAction
-        {
-            Callback = controller =>
-            {
-                controller.BoardLogic.PieceFlyer.Locker.Unlock(controller);
-            }
-        });
+
+        AddLastAction();
         
         if(fieldDef.Resources == null) return;
         
@@ -85,6 +73,26 @@ public class FieldControllerComponent : IECSComponent
     
     public void OnUnRegisterEntity(ECSEntity entity)
     {
+    }
+
+    private void AddLastAction()
+    {
+        context.ActionExecutor.AddAction(new CallbackAction
+        {
+            Callback = controller =>
+            {
+                controller.BoardLogic.PieceFlyer.Locker.Unlock(controller);
+                
+                var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
+
+                if (views == null) return;
+                
+                foreach (var view in views)
+                {
+                    view.UpdateResource(0);
+                }
+            }
+        });
     }
     
     private void TestField()
@@ -172,19 +180,18 @@ public class FieldControllerComponent : IECSComponent
             for (var j = 0; j < count - i; j++)
             {
                 if ((directions & Directions.Left) == Directions.Left) 
-                    BlockCell(new BoardPosition(i, j, context.BoardDef.PieceLayer));
+                    context.BoardLogic.LockCell(new BoardPosition(i, j, context.BoardDef.PieceLayer), this);
 
                 if ((directions & Directions.Right) == Directions.Right)
-                    BlockCell(new BoardPosition(width - 1 - i, height - 1 - j, context.BoardDef.PieceLayer));
+                    context.BoardLogic.LockCell(new BoardPosition(width - 1 - i, height - 1 - j, context.BoardDef.PieceLayer), this);
             
                 if ((directions & Directions.Top) == Directions.Top)
-                    BlockCell(new BoardPosition(i, height - 1 - j, context.BoardDef.PieceLayer));
+                    context.BoardLogic.LockCell(new BoardPosition(i, height - 1 - j, context.BoardDef.PieceLayer), this);
             
                 if ((directions & Directions.Bottom) == Directions.Bottom)
-                    BlockCell(new BoardPosition(width - 1 - i, j, context.BoardDef.PieceLayer));
+                    context.BoardLogic.LockCell(new BoardPosition(width - 1 - i, j, context.BoardDef.PieceLayer), this);
             }    
         }
-        
     }
 
     private void GenerateBorder()
@@ -222,15 +229,6 @@ public class FieldControllerComponent : IECSComponent
         
     }
     
-    private void BlockCell(BoardPosition position)
-    {   
-        context.ActionExecutor.AddAction(new LockCellAction
-        {
-            Locker = this,
-            Positions = new List<BoardPosition> {position}
-        });
-    }
-
     private void AddPiece(BoardPosition position, int piece)
     {
         context.ActionExecutor.AddAction(new CreatePieceAtAction

@@ -7,19 +7,9 @@ public class PathfinderComponent:ECSEntity
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     
     private BoardConditionComponent boardCondition;
-    public BoardConditionComponent BoardCondition
-    {
-        get
-        {
-            return boardCondition ?? 
-                   (boardCondition = GetComponent<BoardConditionComponent>(BoardConditionComponent.ComponentGuid));
-        }
-    }
-    
-    public override int Guid
-    {
-        get { return ComponentGuid; }
-    }
+    public BoardConditionComponent BoardCondition => boardCondition ?? (boardCondition = GetComponent<BoardConditionComponent>(BoardConditionComponent.ComponentGuid));
+
+    public override int Guid => ComponentGuid;
 
     //A* pathfinding algorithm
     public virtual bool HasPath(BoardPosition from, HashSet<BoardPosition> to)

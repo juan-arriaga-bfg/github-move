@@ -31,18 +31,19 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         
         if(def == null) return;
         
+        Mask = def.Positions;
+        
+        pathfinder = thisContext.GetComponent<PathfinderComponent>(PathfinderComponent.ComponentGuid);
         viewDef = thisContext.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
 
         if (viewDef != null)
         {
+            viewDef.OnAddToBoard(position, context);
             level = def.Level;
             storageItem = ProfileService.Current.GetStorageItem(GetResourceId());
             
             ResourcesViewManager.Instance.RegisterView(this);
         }
-        
-        pathfinder = thisContext.GetComponent<PathfinderComponent>(PathfinderComponent.ComponentGuid);
-        Mask = def.Positions;
         
         base.OnAddToBoard(position, context);
     }
@@ -52,6 +53,15 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         base.OnRemoveFromBoard(position, context);
         
         ResourcesViewManager.Instance.UnRegisterView(this);
+        
+        var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
+
+        if (views == null) return;
+        
+        foreach (var view in views)
+        {
+            view.UpdateResource(0);
+        }
     }
 
     public override BoardPosition GetPointInMask(BoardPosition position, BoardPosition mask)
@@ -121,9 +131,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void UpdateResource(int offset)
     {
-        if(/*pathfinder.CanPathToCastle(thisContext) == false || */storageItem.Amount < level) return;
+        if(pathfinder.CanPathToCastle(thisContext) == false || storageItem.Amount < level) return;
         
         view = viewDef.AddView(ViewType.FogState);
+        
+        if(view.IsShow) return;
         
         view.Priority = -1;
         view.Change(true);

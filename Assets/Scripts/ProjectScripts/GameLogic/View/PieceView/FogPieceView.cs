@@ -37,7 +37,6 @@ public class FogPieceView : PieceBoardElementView
 		
 		fogItem.SetActive(false);
 		touchItem.SetActive(false);
-		observer.UpdateResource(0);
 	}
 
 	public override void ResetViewOnDestroy()

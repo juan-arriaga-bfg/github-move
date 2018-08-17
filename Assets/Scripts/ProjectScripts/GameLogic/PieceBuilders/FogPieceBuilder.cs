@@ -8,7 +8,7 @@
             .RegisterComponent(new TouchReactionDefinitionComponent())
             .RegisterComponent(new TouchReactionConditionFog()))
             .RegisterComponent(new PathfinderComponent()
-                .RegisterComponent(new PiecePathfindBoardCondition(context, piece)
+                .RegisterComponent(new FogPathfindBoardCondition(context, piece)
                     .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType))));
         
         CreateViewComponent(piece);

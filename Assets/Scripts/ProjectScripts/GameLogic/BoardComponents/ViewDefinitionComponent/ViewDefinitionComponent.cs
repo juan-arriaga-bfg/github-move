@@ -6,11 +6,8 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     
-    public int Guid
-    {
-        get { return ComponentGuid; }
-    }
-    
+    public int Guid => ComponentGuid;
+
     public List<ViewType> ViewIds { get; set; }
 
     private int shownViewPriority;
@@ -112,7 +109,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         var currentPos = Position;
         
         pos.Z += Layer*10;
-            
+        
         var element = thisContext.Context.RendererContext.CreateElementAt((int)id, pos) as UIBoardView;
         element.Init(thisContext);
 

@@ -1,24 +1,13 @@
-﻿using System.Collections.Generic;
-
-public class PiecePathfindBoardCondition : BoardConditionComponent
+﻿public class PiecePathfindBoardCondition : BoardConditionComponent
 {
     private Piece piece;
-    public Piece Piece
-    {
-        get { return piece; }
-    }
+    public Piece Piece => piece;
 
     private PathfindIgnoreComponent pathfindIgnore;
 
-    public PathfindIgnoreComponent PathfindIgnore
-    {
-        get
-        {
-            return pathfindIgnore
-                   ?? (pathfindIgnore = GetComponent<PathfindIgnoreComponent>(PathfindIgnoreComponent.ComponentGuid))
-                   ?? (pathfindIgnore = PathfindIgnoreComponent.Empty);
-        }
-    }
+    public PathfindIgnoreComponent PathfindIgnore => pathfindIgnore
+                                                     ?? (pathfindIgnore = GetComponent<PathfindIgnoreComponent>(PathfindIgnoreComponent.ComponentGuid))
+                                                     ?? (pathfindIgnore = PathfindIgnoreComponent.Empty);
 
     public PiecePathfindBoardCondition(BoardController context, Piece piece) : base(context)
     {
@@ -27,16 +16,12 @@ public class PiecePathfindBoardCondition : BoardConditionComponent
 
     public override bool Check(BoardPosition position)
     {
-        var limits = CheckMapLimits(position);
-        if (!limits)
-            return false;
-
         var boardLogic = Context.BoardLogic;
         
+        if (!CheckMapLimits(position) || boardLogic.IsLockedCell(position)) return false;
+        
         var pieceInCurrentPos = boardLogic.GetPieceAt(position);
-        if (!boardLogic.IsLockedCell(position) && (pieceInCurrentPos == null || pieceInCurrentPos == Piece || PathfindIgnore.CanIgnore(pieceInCurrentPos)))
-            return true;
-
-        return false;
+        
+        return pieceInCurrentPos == Piece || PathfindIgnore.CanIgnore(pieceInCurrentPos);
     }
 }

@@ -4,12 +4,8 @@ using UnityEngine;
 public class SpawnPieceAtAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
+	public virtual int Guid => ComponentGuid;
 
-	public virtual int Guid
-	{
-		get { return ComponentGuid; }
-	}
-	
 	public bool IsCheckMatch { get; set; }
 	public bool IsMatch = false;
 	
@@ -35,16 +31,14 @@ public class SpawnPieceAtAction : IBoardAction
 		    || gameBoardController.BoardLogic.IsLockedCell(At)
 		    || gameBoardController.BoardLogic.AddPieceToBoard(At.X, At.Y, piece) == false)
 		{
-			if (OnFailedAction != null)
-			{
-				OnFailedAction(this);
-			}
+			OnFailedAction?.Invoke(this);
 			return false;
 		}
 		
 		gameBoardController.BoardLogic.LockCell(At, this);
 
 		BoardAnimation animation;
+		
 		if (IsMatch)
 		{
 			animation = new MatchSpawnPieceAtAnimation
@@ -61,7 +55,7 @@ public class SpawnPieceAtAction : IBoardAction
 				At = At
 			};
 		}
-
+		
 		animation.OnCompleteEvent += (_) =>
 		{
 			gameBoardController.BoardLogic.UnlockCell(At, this);
@@ -74,12 +68,11 @@ public class SpawnPieceAtAction : IBoardAction
 				});
 			}
 
-			if (OnSuccessEvent != null)
-			{
-				var observer = piece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
+			if (OnSuccessEvent == null) return;
+			
+			var observer = piece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
 				
-				OnSuccessEvent(observer == null ? At : observer.GetTopPosition);
-			}
+			OnSuccessEvent(observer?.GetTopPosition ?? At);
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

@@ -8,16 +8,9 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 	
 	private FogDef def;
 	
-	protected override ViewType Id
-	{
-		get { return ViewType.FogState; }
-	}
-	
-	public override Vector3 Ofset
-	{
-		get { return new Vector3(0, 0.1f); }
-	}
-	
+	protected override ViewType Id => ViewType.FogState;
+	public override Vector3 Ofset => new Vector3(0, 0.1f);
+
 	public override void Init(Piece piece)
 	{
 		base.Init(piece);
@@ -65,16 +58,6 @@ public class ChangeFogStateView : UIBoardView, IBoardEventListener
 		{
 			if (success == false) return;
 			
-			var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
-
-			if (views != null)
-			{
-				foreach (var view in views)
-				{
-					view.UpdateResource(0);
-				}
-			}
-                
 			Context.Context.ActionExecutor.AddAction(new CollapsePieceToAction
 			{
 				To = Context.CachedPosition,

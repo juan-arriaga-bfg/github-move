@@ -12,14 +12,17 @@ public class FillBoardAction : IBoardAction
 	{
 		foreach (var at in Positions)
 		{
-			gameBoardController.ActionExecutor.AddAction(new SpawnPieceAtAction
+			var piece = gameBoardController.CreatePieceFromType(Piece);
+			
+			gameBoardController.BoardLogic.AddPieceToBoard(at.X, at.Y, piece);
+			
+			gameBoardController.RendererContext.AddAnimationToQueue(new SpawnPieceAtAnimation
 			{
-				IsCheckMatch = false,
-				At = at,
-				PieceTypeId = Piece
+				CreatedPiece = piece,
+				At = at
 			});
 		}
-
+		
 		return true;
 	}
 }

@@ -2,7 +2,7 @@
 
 public class PathfindIgnoreComponent:IgnoreComponent<Piece>
 {
-    protected HashSet<int> ignorablePieceTypes;
+    protected readonly HashSet<int> ignorablePieceTypes;
 
     protected PathfindIgnoreComponent()
     {
@@ -11,7 +11,7 @@ public class PathfindIgnoreComponent:IgnoreComponent<Piece>
     
     public override bool CanIgnore(Piece item)
     {
-        return ignorablePieceTypes.Contains(item.PieceType);
+        return item == null || ignorablePieceTypes.Contains(item.PieceType);
     }
 
     public PathfindIgnoreComponent(HashSet<int> ignorable)
@@ -20,8 +20,5 @@ public class PathfindIgnoreComponent:IgnoreComponent<Piece>
     }
     
     private static PathfindIgnoreComponent empty = new PathfindIgnoreComponent();
-    public static PathfindIgnoreComponent Empty
-    {
-        get { return empty; }
-    }
+    public static PathfindIgnoreComponent Empty => empty;
 }
