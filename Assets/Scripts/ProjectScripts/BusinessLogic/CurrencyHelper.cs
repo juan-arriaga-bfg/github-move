@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DG.Tweening;
 using UnityEngine;
 
 public static class CurrencyHellper
@@ -21,7 +20,7 @@ public static class CurrencyHellper
         return Purchase(product, new CurrencyPair{Currency = Currency.Cash.Name, Amount = 0}, onSuccess, flyPosition);
     }
     
-    public static void Purchase(List<CurrencyPair> products, Vector3? flyPosition = null)
+    public static void Purchase(List<CurrencyPair> products, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
         for (var i = 0; i < products.Count; i++)
         {
@@ -34,16 +33,10 @@ public static class CurrencyHellper
                 Amount = product.Amount,
                 CurrentPrices = new List<Price>{new Price{Currency = Currency.Cash.Name, DefaultPriceAmount = 0}}
             };
-        
-            ShopService.Current.PurchaseItem
-            (
-                shopItem,
-                (item, s) =>
-                {
-                    if (flyPosition != null) CurrencyFly(flyPosition.Value, product, 0.5f * i);
-                },
-                item => { }
-            );
+
+            var isLast = i == products.Count - 1;
+            
+            PurchaseItem(shopItem, product, isLast ? onSuccess : null, flyPosition, 0.5f * i);
         }
     }
     
@@ -54,8 +47,6 @@ public static class CurrencyHellper
     
     public static bool Purchase(string product, int amountProduct, string price, int amountPrice, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
-        var isSuccess = false;
-        
         var shopItem = new ShopItem
         {
             Uid = $"purchase.test.{product}.10", 
@@ -63,28 +54,8 @@ public static class CurrencyHellper
             Amount = amountProduct,
             CurrentPrices = new List<Price>{new Price{Currency = price, DefaultPriceAmount = amountPrice}}
         };
-        
-        ShopService.Current.PurchaseItem
-        (
-            shopItem,
-            (item, s) =>
-            {
-                // on purchase success
-                isSuccess = true;
-                if (flyPosition != null) CurrencyFly(flyPosition.Value, new CurrencyPair{Currency = product, Amount = amountProduct});
-                onSuccess?.Invoke(true);
 
-            },
-            item =>
-            {
-                // on purchase failed (not enough cash)
-                onSuccess?.Invoke(false);
-
-                ShowHint(price);
-            }
-        );
-
-        return isSuccess;
+        return PurchaseItem(shopItem, new CurrencyPair{Currency = product, Amount = amountProduct}, onSuccess, flyPosition);
     }
     
     public static bool Purchase(CurrencyPair product, List<CurrencyPair> prices, Action<bool> onSuccess = null, Vector3? flyPosition = null)
@@ -94,7 +65,6 @@ public static class CurrencyHellper
     
     public static bool Purchase(string product, int amount, List<CurrencyPair> prices, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
-        var isSuccess = false;
         var currentPrices = new List<Price>();
 
         foreach (var price in prices)
@@ -110,6 +80,13 @@ public static class CurrencyHellper
             CurrentPrices = currentPrices
         };
         
+        return PurchaseItem(shopItem, new CurrencyPair{Currency = product, Amount = amount}, onSuccess, flyPosition);
+    }
+
+    private static bool PurchaseItem(ShopItem shopItem, CurrencyPair product, Action<bool> onSuccess = null, Vector3? flyPosition = null, float delay = 0)
+    {
+        var isSuccess = false;
+        
         ShopService.Current.PurchaseItem
         (
             shopItem,
@@ -117,7 +94,13 @@ public static class CurrencyHellper
             {
                 // on purchase success
                 isSuccess = true;
-                if (flyPosition != null) CurrencyFly(flyPosition.Value, new CurrencyPair{Currency = product, Amount = amount});
+                
+                if (flyPosition != null)
+                {
+                    CurrencyFly(flyPosition.Value, product, onSuccess, delay);
+                    return;
+                }
+                
                 onSuccess?.Invoke(true);
             },
             item =>
@@ -130,7 +113,7 @@ public static class CurrencyHellper
         return isSuccess;
     }
     
-    private static void CurrencyFly(Vector3 screenPosition, CurrencyPair resource, float delay = 0)
+    private static void CurrencyFly(Vector3 screenPosition, CurrencyPair resource, Action<bool> onSuccess = null, float delay = 0)
     {
         var fly = ResourcesViewManager.Instance.GetFirstViewById(resource.Currency);
         
@@ -145,6 +128,8 @@ public static class CurrencyHellper
             R.ResourceCarrier,
             delay
         );
+        
+        carriers[carriers.Count - 1].Callback = () => { onSuccess?.Invoke(true); };
     }
 
     public static bool IsCanPurchase(List<CurrencyPair> prices, out List<CurrencyPair> diffs)

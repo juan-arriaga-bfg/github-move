@@ -61,22 +61,13 @@ public class AddResourceView : BoardElementView
 		    || resource.Currency == Currency.Energy.Name
 		    || resource.Currency == Currency.Experience.Name)
 		{
-			CurrencyHellper.Purchase(resource, success =>
-			{
-				var flay = ResourcesViewManager.Instance.GetFirstViewById(resource.Currency);
-				var from = board.BoardDef.GetPiecePosition(position.X, position.Y);
-				
-				var carriers = ResourcesViewManager.DeliverResource<ResourceCarrier>
-				(
-					resource.Currency,
-					resource.Amount,
-					flay.GetAnchorRect(),
-					board.BoardDef.ViewCamera.WorldToScreenPoint(from),
-					R.ResourceCarrier
-				);
-
-				carriers[carriers.Count - 1].Callback = () => { ShowCounter(board, position, resource); };
-			});
+			var from = board.BoardDef.GetPiecePosition(position.X, position.Y);
+			
+			CurrencyHellper.Purchase(
+				resource,
+				success => { ShowCounter(board, position, resource); },
+				board.BoardDef.ViewCamera.WorldToScreenPoint(from));
+			
 			return;
 		}
 
