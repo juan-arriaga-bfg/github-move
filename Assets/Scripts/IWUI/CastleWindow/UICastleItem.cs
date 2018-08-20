@@ -75,12 +75,14 @@ public class UICastleItem : MonoBehaviour
 		var board = BoardService.Current.GetBoardById(0);
 		if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(GameDataService.Current.PiecesManager.CastlePosition, 1))
 		{
+			isClick = false;
 			UIErrorWindowController.AddError("Free space not found");
 			return;
 		}
 		
 		if (isFree)
 		{
+			isClick = false;
 			OnClickFree();
 			return;
 		}
@@ -104,7 +106,11 @@ public class UICastleItem : MonoBehaviour
 	{
 		CurrencyHellper.Purchase(Currency.Chest.Name, 1, chest.Price, success =>
 		{
-			if(success == false) return;
+			if (success == false)
+			{
+				isClick = false;
+				return;
+			}
 			
 			model.ChestReward = chest.Piece;
 			UIService.Get.CloseWindow(UIWindowType.CastleWindow, true);

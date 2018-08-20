@@ -22,8 +22,8 @@ public class UIEnergyShopItem : MonoBehaviour
         
         var resource = CurrencyHellper.ResourcePieceToCurrence(def.GetHardPieces(), Currency.Energy.Name);
         
-        product.Text = string.Format("{0}: +{1}", Currency.Energy, resource.ToStringIcon(false));
-        price.Text = string.Format("Buy {0}", def.Price.ToStringIcon(false));
+        product.Text = $"{Currency.Energy}: +{resource.ToStringIcon(false)}";
+        price.Text = $"Buy {def.Price.ToStringIcon(false)}";
     }
 
     public void OnClick()
@@ -33,15 +33,21 @@ public class UIEnergyShopItem : MonoBehaviour
         isClick = true;
         
         var board = BoardService.Current.GetBoardById(0);
+        
         if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(GameDataService.Current.PiecesManager.CastlePosition, 1))
         {
+            isClick = false;
             UIErrorWindowController.AddError("Free space not found");
             return;
         }
         
         CurrencyHellper.Purchase(Currency.Chest.Name, 1, chest.Price, success =>
         {
-            if(success == false) return;
+            if (success == false)
+            {
+                isClick = false;
+                return;
+            }
 			
             var model = UIService.Get.GetCachedModel<UIEnergyShopWindowModel>(UIWindowType.EnergyShopWindow);
             model.ChestReward = chest.Piece;

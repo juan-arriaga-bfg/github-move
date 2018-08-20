@@ -46,7 +46,7 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIChestMessageWindowModel;
         windowModel.Chest = null;
         
-        if (isOpen && windowModel.OnOpen != null) windowModel.OnOpen();
+        if (isOpen) windowModel.OnOpen?.Invoke();
     }
 
     public override void OnViewCloseCompleted()
