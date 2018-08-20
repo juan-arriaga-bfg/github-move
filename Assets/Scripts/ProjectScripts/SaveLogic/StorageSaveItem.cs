@@ -13,12 +13,7 @@ public class StorageSaveItemJsonConverter : JsonConverter
         var targetValue = (StorageSaveItem) value;
         
         serializer.TypeNameHandling = TypeNameHandling.None;
-
-        serializer.Serialize(writer, string.Format("{0},{1},{2},{3}",
-            targetValue.StartTime,
-            targetValue.Filling,
-            targetValue.IsStart ? 1 : 0,
-            targetValue.Position.ToSaveString()));
+        serializer.Serialize(writer, $"{targetValue.StartTime},{targetValue.Filling},{(targetValue.IsStart ? 1 : 0)},{targetValue.Position.ToSaveString()}");
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

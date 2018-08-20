@@ -23,15 +23,22 @@
 
         if (timer != null) timer.OnStart += OnTimerStart;
         
+        InitInSave(position);
+    }
+
+    protected virtual LifeSaveItem InitInSave(BoardPosition position)
+    {
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
 
         var item = save?.GetLifeSave(position);
         
-        if (item == null) return;
+        if (item == null) return null;
         
         current = item.Step;
         
         OnTimerStart();
+
+        return item;
     }
 
     public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)

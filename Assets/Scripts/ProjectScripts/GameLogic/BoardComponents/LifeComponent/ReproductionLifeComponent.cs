@@ -40,6 +40,15 @@ public class ReproductionLifeComponent : StorageLifeComponent
         HP = def.Limit;
     }
 
+    protected override LifeSaveItem InitInSave(BoardPosition position)
+    {
+        var item = base.InitInSave(position);
+        
+        if(item != null) cooldown.Start(item.StartTime);
+        
+        return item;
+    }
+
     public override bool Damage()
     {
         if (!cooldown.IsExecuteable()) return base.Damage();

@@ -13,10 +13,7 @@ public class LifeSaveItemJsonConverter : JsonConverter
         var targetValue = (LifeSaveItem) value;
         
         serializer.TypeNameHandling = TypeNameHandling.None;
-
-        serializer.Serialize(writer, string.Format("{0},{1}",
-            targetValue.Step,
-            targetValue.Position.ToSaveString()));
+        serializer.Serialize(writer, $"{targetValue.Step},{targetValue.StartTime},{targetValue.Position.ToSaveString()}");
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -27,7 +24,8 @@ public class LifeSaveItemJsonConverter : JsonConverter
         var targetValue = new LifeSaveItem
         {
             Step = int.Parse(dataArray[0]),
-            Position = new BoardPosition(int.Parse(dataArray[1]), int.Parse(dataArray[2]), int.Parse(dataArray[3]))
+            StartTime = long.Parse(dataArray[1]),
+            Position = new BoardPosition(int.Parse(dataArray[2]), int.Parse(dataArray[3]), int.Parse(dataArray[4]))
         };
         
         return targetValue;
@@ -38,12 +36,19 @@ public class LifeSaveItemJsonConverter : JsonConverter
 public class LifeSaveItem
 {
     private int step;
+    private long startTime;
     private BoardPosition position;
-
+    
     public int Step
     {
         get { return step; }
         set { step = value; }
+    }
+    
+    public long StartTime
+    {
+        get { return startTime; }
+        set { startTime = value; }
     }
     
     public BoardPosition Position

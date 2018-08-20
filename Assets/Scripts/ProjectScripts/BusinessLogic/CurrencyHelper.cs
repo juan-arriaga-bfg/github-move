@@ -36,7 +36,7 @@ public static class CurrencyHellper
 
             var isLast = i == products.Count - 1;
             
-            PurchaseItem(shopItem, product, isLast ? onSuccess : null, flyPosition, 0.5f * i);
+            PurchaseItem(shopItem, product, false, isLast ? onSuccess : null, flyPosition, 0.5f * i);
         }
     }
     
@@ -55,7 +55,7 @@ public static class CurrencyHellper
             CurrentPrices = new List<Price>{new Price{Currency = price, DefaultPriceAmount = amountPrice}}
         };
 
-        return PurchaseItem(shopItem, new CurrencyPair{Currency = product, Amount = amountProduct}, onSuccess, flyPosition);
+        return PurchaseItem(shopItem, new CurrencyPair{Currency = product, Amount = amountProduct}, true, onSuccess, flyPosition);
     }
     
     public static bool Purchase(CurrencyPair product, List<CurrencyPair> prices, Action<bool> onSuccess = null, Vector3? flyPosition = null)
@@ -74,16 +74,16 @@ public static class CurrencyHellper
         
         var shopItem = new ShopItem
         {
-            Uid = $"purchase.test.{product}.10", 
-            ItemUid = product, 
+            Uid = $"purchase.test.{product}.10",
+            ItemUid = product,
             Amount = amount,
             CurrentPrices = currentPrices
         };
         
-        return PurchaseItem(shopItem, new CurrencyPair{Currency = product, Amount = amount}, onSuccess, flyPosition);
+        return PurchaseItem(shopItem, new CurrencyPair{Currency = product, Amount = amount}, false, onSuccess, flyPosition);
     }
 
-    private static bool PurchaseItem(ShopItem shopItem, CurrencyPair product, Action<bool> onSuccess = null, Vector3? flyPosition = null, float delay = 0)
+    private static bool PurchaseItem(ShopItem shopItem, CurrencyPair product, bool isShoowHint, Action<bool> onSuccess = null, Vector3? flyPosition = null, float delay = 0)
     {
         var isSuccess = false;
         
@@ -107,6 +107,7 @@ public static class CurrencyHellper
             {
                 // on purchase failed (not enough cash)
                 onSuccess?.Invoke(false);
+                if(isShoowHint) ShowHint(shopItem.CurrentPrices[0].Currency);
             }
         );
         
@@ -227,9 +228,7 @@ public static class CurrencyHellper
         {
             var def = GameDataService.Current.PiecesManager.GetPieceDef(pair.Key);
             
-            if(def == null
-               || def.SpawnResources == null
-               || def.SpawnResources.Currency != currensy) continue;
+            if(def?.SpawnResources == null || def.SpawnResources.Currency != currensy) continue;
             
             amount += pair.Value * def.SpawnResources.Amount;
         }
@@ -247,9 +246,7 @@ public static class CurrencyHellper
         {
             var def = GameDataService.Current.PiecesManager.GetPieceDef(id);
             
-            if(def == null
-               || def.SpawnResources == null
-               || def.SpawnResources.Currency != currensy) continue;
+            if(def?.SpawnResources == null || def.SpawnResources.Currency != currensy) continue;
             
             defs.Add(def);
         }

@@ -8,8 +8,7 @@ using Newtonsoft.Json;
 public class FieldDefComponent : ECSEntity, IECSSerializeable 
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
-
-	public override int Guid { get { return ComponentGuid; } }
+	public override int Guid => ComponentGuid;
 
 	private List<PieceSaveItem> pieces;
 	private List<ChestSaveItem> chests;
@@ -99,7 +98,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		
 		var board = BoardService.Current.GetBoardById(0);
 		var cash = board.BoardLogic.PositionsCache.Cache;
-		var match = board.BoardLogic.MatchDefinition;
 		
 		if(cash.Count == 0) return;
 		
@@ -116,12 +114,10 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			if(item.Value.Count == 0) continue;
 			
 			pieces.Add(GetPieceSave(item.Key, item.Value));
-
-			var id = match.GetFirst(item.Key);
-			
 			storages.AddRange(GetStorageSave(board.BoardLogic, item.Value));
 
 			var chestSave = GetChestsSave(board.BoardLogic, item.Value);
+			
 			if (chestSave.Count > 0)
 			{
 				chests.AddRange(chestSave);
@@ -235,10 +231,8 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		foreach (var position in positions)
 		{
 			var piece = logic.GetPieceAt(position);
-			
-			if(piece == null) continue;
 
-			var component = piece.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
+			var component = piece?.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
 			
 			if(component == null) continue;
 
@@ -259,14 +253,17 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		foreach (var position in positions)
 		{
 			var piece = logic.GetPieceAt(position);
-			
-			if (piece == null) continue;
-			
-			var component = piece.GetComponent<LifeComponent>(LifeComponent.ComponentGuid);
+
+			var component = piece?.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
 			
 			if(component == null || component.Current == 0) continue;
-			
-			var item = new LifeSaveItem{Step = component.Current, Position = position};
+
+			var item = new LifeSaveItem
+			{
+				Step = component.Current,
+				StartTime = component.Timer.StartTime,
+				Position = position
+			};
 			
 			items.Add(item);
 		}
@@ -281,10 +278,8 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		foreach (var position in positions)
 		{
 			var piece = logic.GetPieceAt(position);
-			
-			if (piece == null) continue;
-			
-			var component = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
+
+			var component = piece?.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
 			
 			if(component == null) continue;
 
@@ -356,10 +351,8 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		foreach (var position in positions)
 		{
 			var piece = logic.GetPieceAt(position);
-			
-			if (piece == null) continue;
-			
-			var component = piece.GetComponent<ProductionComponent>(ProductionComponent.ComponentGuid);
+
+			var component = piece?.GetComponent<ProductionComponent>(ProductionComponent.ComponentGuid);
 			
 			if(component == null) continue;
 			
