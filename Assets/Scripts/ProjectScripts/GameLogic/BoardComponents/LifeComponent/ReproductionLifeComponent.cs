@@ -72,7 +72,6 @@ public class ReproductionLifeComponent : StorageLifeComponent
 
     protected override void Success()
     {
-        cooldown.Start();
     }
 
     protected override void OnStep()
@@ -81,6 +80,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
         {
             storage.OnScatter = null;
             OnSpawnRewards();
+            cooldown.Start();
         };
     }
 

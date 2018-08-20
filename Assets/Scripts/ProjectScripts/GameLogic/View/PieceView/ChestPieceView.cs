@@ -113,6 +113,7 @@ public class ChestPieceView : PieceBoardElementView
             return;
         
         var color = Color.red;
+        
         color.a = 0;
         hightlight.color = color;
 
@@ -126,6 +127,7 @@ public class ChestPieceView : PieceBoardElementView
             return;
         
         var color = Color.red;
+        
         color.a = 0.8f;
         backlight.color = color;
 
