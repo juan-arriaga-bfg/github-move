@@ -25,7 +25,7 @@ public class FogPieceView : PieceBoardElementView
 			var touch = Instantiate(touchItem, touchItem.transform.parent);
 			var sprite = fog.GetComponent<SpriteRenderer>();
 			
-			sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + position.Z * 100 + 1;
+			sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + 101;
 			
 			fog.transform.position = touch.transform.position = piece.Context.BoardDef.GetSectorCenterWorldPosition(position.X, position.Y, 0);
 			
@@ -37,6 +37,11 @@ public class FogPieceView : PieceBoardElementView
 		
 		fogItem.SetActive(false);
 		touchItem.SetActive(false);
+	}
+
+	public override void SyncRendererLayers(BoardPosition boardPosition)
+	{
+		CachedTransform.localPosition = new Vector3(CachedTransform.localPosition.x, CachedTransform.localPosition.y, -boardPosition.Z * 0.1f);
 	}
 
 	public override void ResetViewOnDestroy()
