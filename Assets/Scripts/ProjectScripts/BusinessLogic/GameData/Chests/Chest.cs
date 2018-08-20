@@ -13,14 +13,14 @@ public enum ChestState
 
 public class Chest
 {
-    private ChestDef def;
+    private readonly ChestDef def;
     private ChestState chestState;
     
     public DateTime? StartTime { get; set; }
     private DateTime completeTime;
 
-    private CurrencyPair price;
-    public Dictionary<int, int> reward = new Dictionary<int, int>();
+    private readonly CurrencyPair price;
+    private Dictionary<int, int> reward = new Dictionary<int, int>();
     
     public Chest(ChestDef def)
     {
@@ -34,15 +34,8 @@ public class Chest
         set { reward = value; }
     }
 
-    public ChestDef Def
-    {
-        get { return def; }
-    }
-    
-    public string Currency
-    {
-        get { return def.Uid; }
-    }
+    public ChestDef Def => def;
+    public string Currency => def.Uid;
 
     public CurrencyPair Price
     {
@@ -54,16 +47,10 @@ public class Chest
         }
     }
 
-    public int Piece
-    {
-        get { return def.Piece; }
-    }
+    public int Piece => def.Piece;
 
-    public int MergePoints
-    {
-        get { return 100; }
-    }
-    
+    public int MergePoints => 100;
+
     public ChestState State
     {
         get
@@ -94,7 +81,7 @@ public class Chest
     public bool CheckStorage()
     {
         var rewardCount = Reward.Values.Sum();
-        return rewardCount < def.PieceAmount;
+        return rewardCount < (def.PieceAmount + def.HardPieceAmount);
     }
 
     public void SetStartTime(DateTime time)
@@ -105,12 +92,12 @@ public class Chest
 
     public Dictionary<int, int> GetRewardPieces()
     {
-        if (reward.Count != 0)
-            return reward;
+        if (reward.Count != 0) return reward;
         
         var max = def.PieceAmount;
         var hard = def.GetHardPieces();
-        var result = new Dictionary<int, int>(hard);
+        
+        reward = new Dictionary<int, int>(hard);
         
         for (var i = 0; i < max; i++)
         {
@@ -123,17 +110,16 @@ public class Chest
             
             if(random == PieceType.None.Id) continue;
 
-            if (result.ContainsKey(random))
+            if (reward.ContainsKey(random))
             {
-                result[random] += 1;
+                reward[random] += 1;
                 continue;
             }
             
-            result.Add(random, 1);
+            reward.Add(random, 1);
         }
-
-        reward = result;
-        return result;
+        
+        return reward;
     }
 
     public float GetTimerProgress()
@@ -148,17 +134,17 @@ public class Chest
 
         if (time.Hours > 0)
         {
-            str += string.Format("{0}h", time.Hours);
+            str += $"{time.Hours}h";
         }
 
         if (time.Minutes > 0)
         {
-            str += string.Format("{0}{1}m", string.IsNullOrEmpty(str) ? "" : " ", time.Minutes);
+            str += $"{(string.IsNullOrEmpty(str) ? "" : " ")}{time.Minutes}m";
         }
 
         if (time.Seconds > 0)
         {
-            str += string.Format("{0}{1}s", string.IsNullOrEmpty(str) ? "" : " ", time.Seconds);
+            str += $"{(string.IsNullOrEmpty(str) ? "" : " ")}{time.Seconds}s";
         }
         
         return str;
@@ -174,7 +160,7 @@ public class Chest
         if ((int) time.TotalSeconds < 0) return "00:00";
 
         return (int) time.TotalHours > 0
-            ? string.Format("<mspace=2.75em>{0:00}:{1:00}:{2:00}</mspace>", time.Hours, time.Minutes, time.Seconds)
-            : string.Format("<mspace=2.75em>{0:00}:{1:00}</mspace>", time.Minutes, time.Seconds);
+            ? $"<mspace=2.75em>{time.Hours:00}:{time.Minutes:00}:{time.Seconds:00}</mspace>"
+            : $"<mspace=2.75em>{time.Minutes:00}:{time.Seconds:00}</mspace>";
     }
 }

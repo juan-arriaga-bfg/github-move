@@ -1,6 +1,4 @@
-﻿using System;
-using DG.Tweening;
-using TMPro;
+﻿using DG.Tweening;
 using UnityEngine;
 
 public class ChestPieceView : PieceBoardElementView
@@ -68,8 +66,10 @@ public class ChestPieceView : PieceBoardElementView
     
     public override void UpdateView()
     {   
-        if(chestComponent == null || chestComponent.Chest == null) return;
+        if(chestComponent?.Chest == null) return;
+        
         var isStorage = chestComponent.Chest.CheckStorage();
+        
         SetHighlight(isStorage);
         SetBackLight(isStorage);
         
