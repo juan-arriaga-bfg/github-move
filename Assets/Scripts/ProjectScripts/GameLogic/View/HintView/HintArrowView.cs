@@ -24,7 +24,7 @@ public class HintArrowView : BoardElementView
         var board = BoardService.Current.GetBoardById(0);
         var target = board.BoardLogic.GetPieceAt(position);
 
-        var multi = target?.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
+        var multi = target?.Multicellular;
 
         if (multi != null)
         {
