@@ -37,12 +37,12 @@ public class UICastleItem : MonoBehaviour
 		ChengeButtons();
 		
 		label.Text = chest.Uid;
-		labelBtn.Text = isFree ? "Claim!" : string.Format("Buy for {0}", chest.Price.ToStringIcon(false));
+		labelBtn.Text = isFree ? "Claim!" : $"Buy for {chest.Price.ToStringIcon(false)}";
 		
 		var key = GetChestIcon();
 
-		iconTop.sprite = IconService.Current.GetSpriteById(string.Format("chest_{0}_2", key));
-		iconBottom.sprite = IconService.Current.GetSpriteById(string.Format("chest_{0}_1", key));
+		iconTop.sprite = IconService.Current.GetSpriteById($"chest_{key}_2");
+		iconBottom.sprite = IconService.Current.GetSpriteById($"chest_{key}_1");
 	}
 
 	private void OnDisable()

@@ -1,8 +1,7 @@
 ﻿public class TouchReactionConditionComponent : IECSComponent
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-	
-	public int Guid { get { return ComponentGuid; } }
+	public int Guid => ComponentGuid;
 
 	public bool IsDone;
 	

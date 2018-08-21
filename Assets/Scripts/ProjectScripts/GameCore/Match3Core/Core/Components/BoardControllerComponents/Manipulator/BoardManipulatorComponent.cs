@@ -129,19 +129,19 @@ public class BoardManipulatorComponent : ECSEntity,
             
             if (selectedView == null) return;
 
-            if (selectedView is ResourceView)
+            var resourceView = selectedView as ResourceView;
+            
+            if (resourceView != null)
             {
-                var resourceView = selectedView as ResourceView;
                 resourceView.Collect();
                 return;
             }
+
+            var pieceView = selectedView as PieceBoardElementView;
             
-            if (selectedView is PieceBoardElementView)
+            if (pieceView != null)
             {
-                var pieceView = selectedView as PieceBoardElementView;
-                var draggableComponent = pieceView.Piece.GetComponent<DraggablePieceComponent>(DraggablePieceComponent.ComponentGuid);
-                
-                if (draggableComponent == null || draggableComponent.IsDraggable(pieceView.Piece.CachedPosition) == false)
+                if (pieceView.Piece.Draggable == null || pieceView.Piece.Draggable.IsDraggable(pieceView.Piece.CachedPosition) == false)
                 {
                     return;
                 }
@@ -152,7 +152,6 @@ public class BoardManipulatorComponent : ECSEntity,
             
             cachedViewForDrag = selectedView;
             cachedDragDownPos = pos + Vector2.up * 0.5f;
-
             cameraManipulator.CameraMove.Lock(this);
             isDrag = true;
         }

@@ -50,6 +50,7 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
 
     public override void UpdateVisibility(bool isVisible)
     {
+        Context.Context.HintCooldown.IsPaused = isVisible;
         base.UpdateVisibility(isVisible);
 
         if (IsShow == false) return;

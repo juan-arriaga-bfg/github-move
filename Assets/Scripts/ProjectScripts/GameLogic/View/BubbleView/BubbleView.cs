@@ -22,7 +22,13 @@ public class BubbleView : UIBoardView
         message.Text = "Build Castle?";
         button.Text = "Sure!";
     }
-    
+
+    public override void UpdateVisibility(bool isVisible)
+    {
+        base.UpdateVisibility(isVisible);
+        Context.Context.HintCooldown.IsPaused = isVisible;
+    }
+
     public void Сollect()
     {
         var action = Context.Context.BoardLogic.MatchActionBuilder.GetMatchAction(new List<BoardPosition>(), Context.PieceType, Context.CachedPosition);

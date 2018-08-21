@@ -1,10 +1,9 @@
 ﻿using Newtonsoft.Json;
 
-public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchablePiece
+public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchablePiece, IDraggablePiece, IMulticellularPiece, IPathfinderComponent
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-
-    public override int Guid { get { return ComponentGuid; } }
+    public override int Guid => ComponentGuid;
 
     protected PieceBoardElementView actorView;
 
@@ -17,58 +16,29 @@ public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchab
     }
 
     private LayerPieceComponent layer;
-    public virtual LayerPieceComponent Layer
-    {
-        get
-        {
-            if (layer == null)
-            {
-                layer = GetComponent<LayerPieceComponent>(LayerPieceComponent.ComponentGuid);
-            }
-            
-            return layer;
-        }
-    }
-
+    public virtual LayerPieceComponent Layer => layer ?? (layer = GetComponent<LayerPieceComponent>(LayerPieceComponent.ComponentGuid));
+    
     private BoardStatesComponent states;
-    public virtual BoardStatesComponent States
-    {
-        get
-        {
-            if (states == null)
-            {
-                states = GetComponent<BoardStatesComponent>(BoardStatesComponent.ComponentGuid);
-            }
-            return states;
-        }
-    }
-
+    public virtual BoardStatesComponent States => states ?? (states = GetComponent<BoardStatesComponent>(BoardStatesComponent.ComponentGuid));
+    
     private MatchablePieceComponent matchable;
-    public MatchablePieceComponent Matchable
-    {
-        get
-        {
-            if (matchable == null)
-            {
-                matchable = GetComponent<MatchablePieceComponent>(MatchablePieceComponent.ComponentGuid);
-            }
-            return matchable;
-        }
-    }
+    public MatchablePieceComponent Matchable => matchable ?? (matchable = GetComponent<MatchablePieceComponent>(MatchablePieceComponent.ComponentGuid));
+    
+    private DraggablePieceComponent draggable;
+    public DraggablePieceComponent Draggable => draggable ?? (draggable = GetComponent<DraggablePieceComponent>(DraggablePieceComponent.ComponentGuid));
+    
+    private MulticellularPieceBoardObserver multicellular;
+    public MulticellularPieceBoardObserver Multicellular => multicellular ?? (multicellular = GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid));
+    
+    private PathfinderComponent pathfinder;
+    public PathfinderComponent Pathfinder => pathfinder ?? (pathfinder = GetComponent<PathfinderComponent>(PathfinderComponent.ComponentGuid));
     
     public PieceBoardElementView ActorView
     {
-        get
-        {
-            return actorView;
-        }
-        set
-        {
-            actorView = value;
-        }
+        get { return actorView; }
+        set { actorView = value; }
     }
-
-
+    
     public int PieceType { get; set; }
 
     [JsonIgnore]
@@ -83,11 +53,6 @@ public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchab
     public virtual bool IsValidPieceAt(BoardPosition piecePosition)
     {
         var currentPiece = Context.BoardLogic.GetPieceAt(piecePosition);
-        if (currentPiece != this)
-        {
-            return false;
-        }
-
-        return true;
+        return currentPiece == this;
     }
 }

@@ -138,7 +138,7 @@ public class UIBoardView : BoardElementView
         sequence.InsertCallback(0.2f, Cash);
         sequence.InsertCallback(0.15f, () =>
         {
-            if(OnHide != null) OnHide();
+            OnHide?.Invoke();
             OnHide = null;
         });
     }
@@ -157,9 +157,7 @@ public class UIBoardView : BoardElementView
         if(Id == ViewType.None) return;
         
         var viewDef = Context.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
-        
-        if(viewDef == null) return;
-        
-        viewDef.RemoveView(Id);
+
+        viewDef?.RemoveView(Id);
     }
 }

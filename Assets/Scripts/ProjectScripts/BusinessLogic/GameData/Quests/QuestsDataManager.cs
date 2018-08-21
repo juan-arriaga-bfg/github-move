@@ -129,10 +129,15 @@ public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<Q
         
 		return false;
 	}
-
+	
 	public bool IsNeedToFly(int id)
 	{
 		return ActiveQuests.Find(quest => quest.WantedPiece == id && quest.Check() == false) != null;
+	}
+	
+	public bool IsThirdCompleted()
+	{
+		return quests != null && quests.Count >= 3 && IsCompleted(quests[2].Uid);
 	}
 
 	public bool IsCompleted(int uid)

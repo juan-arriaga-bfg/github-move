@@ -1,22 +1,11 @@
-﻿using UnityEngine;
-
-public class TouchReactionConditionStorage : TouchReactionConditionComponent
+﻿public class TouchReactionConditionStorage : TouchReactionConditionComponent
 {
 	public override bool Check(BoardPosition position, Piece piece)
-	{	
-		var pathfinder = piece.GetComponent<PathfinderComponent>(PathfinderComponent.ComponentGuid);
-		
-		if (pathfinder == null)
+	{
+		if (piece.Pathfinder != null && !piece.Pathfinder.CanPathToCastle(piece))
 		{
-			Debug.LogWarning("[TouchReactionConditionStorage] PathfindComponent not found");
-		}
-		else
-		{
-			if (!pathfinder.CanPathToCastle(piece))
-			{
-				UIErrorWindowController.AddError("Path not found");
-				return false;
-			}
+			UIErrorWindowController.AddError("Path not found");
+			return false;
 		}
 		
 		var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);

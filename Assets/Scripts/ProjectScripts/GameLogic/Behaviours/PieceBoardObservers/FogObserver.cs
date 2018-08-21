@@ -7,8 +7,6 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     private StorageItem storageItem;
     private ViewDefinitionComponent viewDef;
     private UIBoardView view;
-
-    private PathfinderComponent pathfinder;
     
     public RectTransform GetAnchorRect()
     {
@@ -32,8 +30,6 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         if(def == null) return;
         
         Mask = def.Positions;
-        
-        pathfinder = thisContext.GetComponent<PathfinderComponent>(PathfinderComponent.ComponentGuid);
         viewDef = thisContext.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
 
         if (viewDef != null)
@@ -131,7 +127,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void UpdateResource(int offset)
     {
-        if(pathfinder.CanPathToCastle(thisContext) == false || storageItem.Amount < level) return;
+        if(thisContext.Pathfinder.CanPathToCastle(thisContext) == false || storageItem.Amount < level) return;
         
         view = viewDef.AddView(ViewType.FogState);
         

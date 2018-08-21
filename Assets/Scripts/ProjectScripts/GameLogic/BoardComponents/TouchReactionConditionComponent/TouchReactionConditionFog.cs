@@ -2,14 +2,12 @@
 {
 	public override bool Check(BoardPosition position, Piece piece)
 	{
-		var pathfinder = piece.GetComponent<PathfinderComponent>(PathfinderComponent.ComponentGuid);
-		
-		if (pathfinder?.CanPathToCastle(piece) == false)
+		if (piece.Pathfinder != null && piece.Pathfinder.CanPathToCastle(piece) == false)
 		{
 			UIErrorWindowController.AddError("Path not found");
 			return false;
 		}
-
+		
 		var key = new BoardPosition(position.X, position.Y);
 		var def = GameDataService.Current.FogsManager.GetDef(key);
 

@@ -18,8 +18,13 @@ public class HintCooldownComponent : ECSEntity
 	private const int MaxDelayBounce = 30;
 	
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-	
 	public override int Guid => ComponentGuid;
+	
+	public bool IsPaused
+	{
+		get { return timerArrow.IsPaused; }
+		set { timerArrow.IsPaused = value; }
+	}
 
 	private readonly TimerComponent timerArrow = new TimerComponent();
 	private readonly TimerComponent timerBounce = new TimerComponent();
@@ -37,7 +42,7 @@ public class HintCooldownComponent : ECSEntity
 		context = entity as BoardController;
 		RegisterComponent(timerArrow, true);
 		RegisterComponent(timerBounce, true);
-
+		
 		chestsId = PieceType.GetIdsByFilter(PieceTypeFilter.Chest);
 		minesId = PieceType.GetIdsByFilter(PieceTypeFilter.Mine);
 		obstaclesId = PieceType.GetIdsByFilter(PieceTypeFilter.Obstacle);
@@ -47,7 +52,7 @@ public class HintCooldownComponent : ECSEntity
 		timerBounce.Delay = Random.Range(MinDelayBounce, MaxDelayBounce);
 		timerBounce.OnComplete = Bounce;
 	}
-
+	
 	public void Step(BoardPosition position, float offsetX = 0, float offsetY = 0)
 	{
 		HintArrowView.Show(position, offsetX, offsetY);
@@ -56,7 +61,9 @@ public class HintCooldownComponent : ECSEntity
 
 	public void Step(HintType type)
 	{
-		if(type != HintType.HighPriority && type != HintType.OpenChest && timerArrow.IsStarted) return;
+		if(IsPaused
+		   || GameDataService.Current.QuestsManager.IsThirdCompleted()
+		   || type != HintType.HighPriority && type != HintType.OpenChest && timerArrow.IsStarted) return;
 		
 		timerArrow.Stop();
 		timerArrow.Delay = Random.Range(MinDelayArrow, MaxDelayArrow);
@@ -67,7 +74,7 @@ public class HintCooldownComponent : ECSEntity
 	public void AddView(UIBoardView view)
 	{
 		views.Add(view);
-
+		
 		if (views.Count > 1) return;
 		
 		timerBounce.Start();
@@ -109,6 +116,12 @@ public class HintCooldownComponent : ECSEntity
 			positions.AddRange(context.BoardLogic.PositionsCache.GetPiecePositionsByType(id));
 		}
 
+		positions = positions.FindAll(position =>
+		{
+			var piece = context.BoardLogic.GetPieceAt(position);
+			return piece != null && (piece.Pathfinder == null || piece.Pathfinder.CanPathToCastle(piece));
+		});
+		
 		if (positions.Count == 0) return false;
 		
 		positions.Shuffle();

@@ -1,11 +1,7 @@
 ﻿public class MatchablePieceComponent : IECSComponent
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
-
-	public int Guid
-	{
-		get { return ComponentGuid; }
-	}
+	public int Guid => ComponentGuid;
 
 	protected Piece Context;
 	private bool isLast;

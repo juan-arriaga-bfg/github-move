@@ -1,20 +1,15 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
-public class DraggablePieceComponent : IECSComponent, IDraggable
+public class DraggablePieceComponent : IECSComponent
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
+    public int Guid => ComponentGuid;
 
-    public int Guid
-    {
-        get { return ComponentGuid; }
-    }
-
-    private Piece piece;
+    protected Piece context;
     
     public virtual void OnRegisterEntity(ECSEntity entity)
     {
-        piece = entity as Piece;
+        context = entity as Piece;
     }
 
     public virtual void OnUnRegisterEntity(ECSEntity entity)
@@ -25,64 +20,49 @@ public class DraggablePieceComponent : IECSComponent, IDraggable
     {
         return true;
     }
-
+    
     public virtual bool IsValidDrag(BoardPosition to)
     {
+        var board = context.Context;
         
-        var board = piece.Context;
         to.Z = board.BoardDef.PieceLayer;
-        if (piece.CachedPosition.Equals(to))
-            return true;
         
-        if (to.IsValidFor(board.BoardDef.Width, board.BoardDef.Height) == false)
-        {
-            return false;
-        }
+        if (context.CachedPosition.Equals(to)) return true;
+        
+        if (to.IsValidFor(board.BoardDef.Width, board.BoardDef.Height) == false) return false;
 
-        var targetPositions = GetAllPiecePoints(piece, to);
+        var targetPositions = GetAllPiecePoints(context, to);
+        
         foreach (var position in targetPositions)
         {
             var pieceTo = board.BoardLogic.GetPieceAt(position);
-            if (piece.Equals(pieceTo))
+            
+            if (context.Equals(pieceTo))
                 continue;
 			
             if (board.BoardLogic.IsLockedCell(position))
                 return false;
+
+            if (pieceTo == null) continue;
             
-            if (pieceTo != null)
-            {
-                var draggable = pieceTo.GetComponent<DraggablePieceComponent>(DraggablePieceComponent.ComponentGuid);
-                if (draggable == null || !draggable.IsDraggable(position) || IsLargeObject(pieceTo))
-                    return false;
-            }
+            if (pieceTo.Draggable == null || !pieceTo.Draggable.IsDraggable(position) || pieceTo.Multicellular != null)
+                return false;
         }
+        
         return true;
-    }
-    
-    private bool IsLargeObject(Piece piece)
-    {
-        var isMulticellular =
-            piece.IsHasComponent(MulticellularPieceBoardObserver.ComponentGuid);
-        return isMulticellular;
     }
     
     private List<BoardPosition> GetAllPiecePoints(Piece piece, BoardPosition shift)
     {
-        shift.Z = piece.Context.BoardDef.PieceLayer;
-        var multicellular =
-            piece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
-        if (multicellular != null)
+        if (piece.Multicellular == null) return new List<BoardPosition> {shift};
+        
+        var result = new List<BoardPosition>();
+        
+        foreach (var point in piece.Multicellular.Mask)
         {
-            var result = new List<BoardPosition>();
-            for (int i = 0; i < multicellular.Mask.Count; i++)
-            {
-                var targetPos = multicellular.Mask[i] + shift;
-                result.Add(targetPos);
-            }
-
-            return result;
+            result.Add(point + shift);
         }
 
-        return new List<BoardPosition> {shift};
+        return result;
     }
 }

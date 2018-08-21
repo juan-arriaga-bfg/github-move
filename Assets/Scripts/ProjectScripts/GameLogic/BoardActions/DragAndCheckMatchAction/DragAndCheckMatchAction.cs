@@ -98,21 +98,8 @@ public class DragAndCheckMatchAction : IBoardAction
 			return false;
 		
 		var pieceFrom = board.BoardLogic.GetPieceAt(From);
-		var draggableFrom = pieceFrom.GetComponent<DraggablePieceComponent>(DraggablePieceComponent.ComponentGuid);
-		if (!draggableFrom.IsValidDrag(To))
-			return false;
-
-		return true;
-	}
-
-	private bool IsLargeObject(Piece piece)
-	{
-		var multicellular =
-			piece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
-		if (multicellular == null)
-			return false;
-
-		return multicellular.Mask.Count > 1;
+		
+		return pieceFrom.Draggable != null && pieceFrom.Draggable.IsValidDrag(To);
 	}
 	
 	private bool CheckFreeCell(BoardController board)

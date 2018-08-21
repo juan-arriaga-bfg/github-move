@@ -15,18 +15,6 @@ public class PieceBoardElementView : BoardElementView
     private const string selectionActiveAnimationName = "PieceSelectionGrid";
     
     private readonly ViewAnimationUid selectedAnimationId = new ViewAnimationUid();
-
-    private DraggablePieceComponent draggable;
-    
-    public DraggablePieceComponent Draggable
-    {
-        get
-        {
-            return draggable ?? (draggable =
-                       Piece.GetComponent<DraggablePieceComponent>(DraggablePieceComponent.ComponentGuid));
-        }
-        set { draggable = value; }
-    }
     
     private SpriteRenderer selectionSprite;
     
@@ -82,7 +70,7 @@ public class PieceBoardElementView : BoardElementView
             
             var sequence = DOTween.Sequence().SetId(animationUid);
             
-            if (Draggable.IsValidDrag(boardPos))
+            if (Piece.Draggable != null && Piece.Draggable.IsValidDrag(boardPos))
             {
                 if (sprite != null) sequence.Insert(0f, sprite.DOColor(Color.white, duration));
                 
@@ -111,18 +99,19 @@ public class PieceBoardElementView : BoardElementView
 
     public virtual void OnDragToNewPosition(BoardPosition boardPos, Vector2 worldPos)
     {
-        
     }
     
     public virtual void OnDragStart(BoardPosition boardPos, Vector2 worldPos)
     {
         lastBoardPosition = boardPos;
         OnDrag(boardPos, worldPos);
+        Piece.Context.HintCooldown.IsPaused = true;
     }
 
     public virtual void OnDragEnd(BoardPosition boardPos, Vector2 worldPos)
     {
         lastBoardPosition = Piece.CachedPosition;
+        Piece.Context.HintCooldown.IsPaused = false;
         
         if (selectionView == null) return;
         
