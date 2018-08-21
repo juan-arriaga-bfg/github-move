@@ -1,4 +1,5 @@
-﻿using Boo.Lang;
+﻿using System.Collections;
+using Boo.Lang;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -65,29 +66,54 @@ public class CodexTab : Tab
             return;
         }
 
+        RunScrollTween(target);
+    }
+
+    private void RunScrollTween(CodexChain target)
+    {
+        scroll.enabled = false;
+        
         DOTween.Sequence()
+               .SetId(this)
                .AppendInterval(0.3f)
                .AppendCallback(() =>
                 {
-                    // Respect space between top size of the viewport and chain
-                    const float PADDING = 7f;
+                    StartCoroutine(WaitForLayoutAndScroll(target));
+                })
+                ;
+    }
 
-                    RectTransform chainRect = target.GetComponent<RectTransform>();
-                    float chainY    = chainRect.localPosition.y;
-                    float chainH    = chainRect.sizeDelta.y;
-                    float chainTop  = chainY + chainH / 2 + PADDING;
+    private IEnumerator WaitForLayoutAndScroll(CodexChain target)
+    {       
+        yield return new WaitForEndOfFrame();
+        
+        // Respect space between top size of the viewport and chain
+        const float PADDING = 7f;
 
-                    float contentH  = scroll.content.sizeDelta.y;
+        RectTransform chainRect = target.GetComponent<RectTransform>();
+        float chainY   = chainRect.localPosition.y;
+        float chainH   = chainRect.sizeDelta.y;
+        float chainTop = chainY + chainH / 2 + PADDING;
 
-                    float scrollToY = -chainTop;
-                    float scrollToYNormalized = 1 - scrollToY / contentH;
+        float contentH = scroll.content.sizeDelta.y;
 
-                    scrollToYNormalized = Mathf.Clamp(scrollToYNormalized, 0, 1);
-                    
-                    Vector2 targetValue = new Vector2(0.5f, scrollToYNormalized);
+        float scrollToY           = -chainTop;
+        float scrollToYNormalized = 1 - scrollToY / contentH;
 
-                    DOTween.To(() => scroll.normalizedPosition, (pos) => { scroll.normalizedPosition = pos; }, targetValue, 1f)
-                           .SetEase(Ease.InOutBack);
-                });
+        scrollToYNormalized = Mathf.Clamp(scrollToYNormalized, 0, 1);
+
+        // Vector2 targetValue = new Vector2(0.5f, scrollToYNormalized);
+
+        // DOTween.To(() => scroll.normalizedPosition, (pos) => { scroll.normalizedPosition = pos; }, targetValue, 1f)
+        //        .SetEase(Ease.InOutBack);
+
+        // Debug.LogWarning($"[CodexTab] => ScrollTo\nchainY: {chainY}\nchainH: {chainH}\nchainTop: {chainTop}\ncontentH: {contentH}\nscrollToY:{scrollToY}\nscrollToYNormalized:{scrollToYNormalized}\n");
+
+        DOTween.Kill(scroll.content);
+        
+        scroll.content.DOAnchorPosY(scrollToY, 1.0f)
+              .SetEase(Ease.InOutBack)
+              .SetId(scroll.content)
+              .OnComplete(() => { scroll.enabled = true; });
     }
 }
