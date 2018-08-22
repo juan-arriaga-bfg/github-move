@@ -73,7 +73,6 @@ public class R
      public const string E3Piece = "E3Piece";
      public const string E4Piece = "E4Piece";
      public const string E5Piece = "E5Piece";
-     public const string E6Piece = "E6Piece";
      public const string ChangeFogStateView = "ChangeFogStateView";
      public const string Chest1Piece = "Chest1Piece";
      public const string Chest2Piece = "Chest2Piece";
@@ -209,4 +208,6 @@ public class R
      public const string ChestZ2Piece = "ChestZ2Piece";
      public const string ChestZ3Piece = "ChestZ3Piece";
      public const string BoardProgressView = "BoardProgressView";
+     public const string G5Piece = "G5Piece";
+     public const string H5Piece = "H5Piece";
 }

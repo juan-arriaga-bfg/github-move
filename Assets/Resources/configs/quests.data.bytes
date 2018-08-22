@@ -8,15 +8,15 @@
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 3
+        "Amount": 1
       },
       {
         "Currency": "Coin2",
-        "Amount": 2
+        "Amount": 1
       },
       {
         "Currency": "Coin3",
-        "Amount": 1
+        "Amount": 2
       }
     ],
     "Conditions": [
@@ -36,7 +36,7 @@
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 3
+        "Amount": 1
       },
       {
         "Currency": "Coin3",
@@ -64,7 +64,7 @@
       },
       {
         "Currency": "Coin2",
-        "Amount": 4
+        "Amount": 3
       }
     ],
     "Conditions": [
@@ -84,17 +84,17 @@
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 2
+        "Amount": 3
       },
       {
         "Currency": "Coin2",
-        "Amount": 3
+        "Amount": 2
       }
     ],
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 3
+        "OtherUid": 2
       }
     ],
     "Message": "The miller is ready to thanks well for a good batch of sheaves"
@@ -142,7 +142,7 @@
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 4
+        "OtherUid": 5
       }
     ],
     "Message": "The miller is ready to thanks well for a good batch of sheaves"
@@ -166,7 +166,7 @@
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 4
+        "OtherUid": 3
       }
     ],
     "Message": "The merchant is ready to pay good for a batch of quality cloth"
@@ -219,7 +219,7 @@
     "Uid": "10",
     "Price": {
       "Currency": "J3",
-      "Amount": 2
+      "Amount": 1
     },
     "Rewards": [
       {
@@ -234,7 +234,7 @@
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 7
+        "OtherUid": 11
       }
     ],
     "Message": "The cook promises to bake a pie if you give him some apples"
@@ -243,7 +243,7 @@
     "Uid": "11",
     "Price": {
       "Currency": "D3",
-      "Amount": 3
+      "Amount": 2
     },
     "Rewards": [
       {
@@ -277,12 +277,16 @@
       {
         "Currency": "Coin2",
         "Amount": 3
+      },
+      {
+        "Currency": "Coin3",
+        "Amount": 2
       }
     ],
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 10
+        "OtherUid": 8
       }
     ]
   },
@@ -306,6 +310,144 @@
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
         "OtherUid": 8
+      }
+    ]
+  },
+  {
+    "Uid": "14",
+    "Price": {
+      "Currency": "G3",
+      "Amount": 2
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin2",
+        "Amount": 2
+      },
+      {
+        "Currency": "Coin3",
+        "Amount": 2
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 12
+      }
+    ]
+  },
+  {
+    "Uid": "15",
+    "Price": {
+      "Currency": "C6",
+      "Amount": 2
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin2",
+        "Amount": 1
+      },
+      {
+        "Currency": "Coin3",
+        "Amount": 2
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 13
+      }
+    ]
+  },
+  {
+    "Uid": "16",
+    "Price": {
+      "Currency": "E5",
+      "Amount": 3
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin2",
+        "Amount": 2
+      },
+      {
+        "Currency": "Coin3",
+        "Amount": 2
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 10
+      }
+    ]
+  },
+  {
+    "Uid": "17",
+    "Price": {
+      "Currency": "H3",
+      "Amount": 1
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin2",
+        "Amount": 3
+      },
+      {
+        "Currency": "Coin3",
+        "Amount": 1
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 11
+      }
+    ]
+  },
+  {
+    "Uid": "18",
+    "Price": {
+      "Currency": "A7",
+      "Amount": 1
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin2",
+        "Amount": 1
+      },
+      {
+        "Currency": "Coin3",
+        "Amount": 3
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 9
+      }
+    ]
+  },
+  {
+    "Uid": "19",
+    "Price": {
+      "Currency": "C7",
+      "Amount": 2
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin2",
+        "Amount": 2
+      },
+      {
+        "Currency": "Coin3",
+        "Amount": 4
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 15
       }
     ]
   }

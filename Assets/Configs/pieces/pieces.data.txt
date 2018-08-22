@@ -471,8 +471,18 @@
         "Amount": 15
       }
     ],
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 5
+    },
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 10
+    },
+    "Limit": 3,
+    "Delay": 50,
     "Reproduction": {
-      "Currency": "D1",
+      "Currency": "D4",
       "Amount": 1
     },
     "Name": "Flock",
@@ -508,11 +518,31 @@
     ]
   },
   {
-    "Uid": "E1",
+    "Uid": "D5",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      }
+    ],
     "SpawnResources": {
       "Currency": "Energy",
-      "Amount": 1
+      "Amount": 65
     },
+    "Name": "Cloth",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
+  },
+  {
+    "Uid": "E1",
     "Name": "Apple",
     "UnlockBonus": [
       {
@@ -553,7 +583,21 @@
         "Amount": 15
       }
     ],
-    "Name": "Sprout\n",
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 5
+    },
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 10
+    },
+    "Limit": 3,
+    "Delay": 50,
+    "Reproduction": {
+      "Currency": "E4",
+      "Amount": 1
+    },
+    "Name": "Sprout",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -573,7 +617,11 @@
         "Amount": 25
       }
     ],
-    "Name": "Tree\n",
+    "SpawnResources": {
+      "Currency": "Energy",
+      "Amount": 1
+    },
+    "Name": "Tree",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -593,9 +641,9 @@
         "Amount": 50
       }
     ],
-    "Reproduction": {
-      "Currency": "E1",
-      "Amount": 1
+    "SpawnResources": {
+      "Currency": "Energy",
+      "Amount": 5
     },
     "Name": "Blooming tree",
     "UnlockBonus": [
@@ -655,7 +703,7 @@
       "Currency": "Experience",
       "Amount": 10
     },
-    "Limit": 6,
+    "Limit": 3,
     "Delay": 50,
     "Reproduction": {
       "Currency": "F4",
@@ -759,8 +807,18 @@
         "Amount": 10
       }
     ],
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 5
+    },
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 10
+    },
+    "Limit": 3,
+    "Delay": 50,
     "Reproduction": {
-      "Currency": "G1",
+      "Currency": "G4",
       "Amount": 1
     },
     "Name": "Herd",
@@ -792,6 +850,30 @@
       {
         "Currency": "Coins",
         "Amount": 8
+      }
+    ]
+  },
+  {
+    "Uid": "G5",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Energy",
+      "Amount": 10
+    },
+    "Name": "A lot of milk",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
       }
     ]
   },
@@ -837,8 +919,18 @@
         "Amount": 10
       }
     ],
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 5
+    },
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 10
+    },
+    "Limit": 3,
+    "Delay": 50,
     "Reproduction": {
-      "Currency": "H1",
+      "Currency": "H4",
       "Amount": 1
     },
     "Name": "Chiken house",
@@ -870,6 +962,30 @@
       {
         "Currency": "Coins",
         "Amount": 8
+      }
+    ]
+  },
+  {
+    "Uid": "H5",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Energy",
+      "Amount": 8
+    },
+    "Name": "Eggs",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
       }
     ]
   },
@@ -915,6 +1031,20 @@
         "Amount": 10
       }
     ],
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 5
+    },
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 10
+    },
+    "Limit": 3,
+    "Delay": 50,
+    "Reproduction": {
+      "Currency": "I4",
+      "Amount": 1
+    },
     "Name": "I3 Piece",
     "UnlockBonus": [
       {
@@ -935,8 +1065,8 @@
         "Amount": 25
       }
     ],
-    "Reproduction": {
-      "Currency": "I1",
+    "SpawnResources": {
+      "Currency": "Energy",
       "Amount": 1
     },
     "Name": "I4 Piece",
@@ -1007,6 +1137,20 @@
         "Amount": 15
       }
     ],
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 5
+    },
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 10
+    },
+    "Limit": 3,
+    "Delay": 50,
+    "Reproduction": {
+      "Currency": "J4",
+      "Amount": 1
+    },
     "Name": "J3  Piece",
     "UnlockBonus": [
       {
@@ -1027,10 +1171,6 @@
         "Amount": 25
       }
     ],
-    "Reproduction": {
-      "Currency": "J1",
-      "Amount": 1
-    },
     "SpawnResources": {
       "Currency": "Energy",
       "Amount": 3

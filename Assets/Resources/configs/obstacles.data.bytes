@@ -30,7 +30,7 @@
   },
   {
     "Uid": "O2",
-    "Delay": 5,
+    "Delay": 10,
     "Price": {
       "Currency": "Energy",
       "Amount": 15
@@ -75,7 +75,7 @@
   },
   {
     "Uid": "O3",
-    "Delay": 10,
+    "Delay": 15,
     "Price": {
       "Currency": "Energy",
       "Amount": 20
@@ -131,7 +131,7 @@
   },
   {
     "Uid": "O4",
-    "Delay": 15,
+    "Delay": 25,
     "Price": {
       "Currency": "Energy",
       "Amount": 25
@@ -191,7 +191,7 @@
   },
   {
     "Uid": "O5",
-    "Delay": 25,
+    "Delay": 40,
     "Price": {
       "Currency": "Energy",
       "Amount": 30
@@ -225,6 +225,10 @@
         "Weight": 10
       },
       {
+        "Uid": "H1",
+        "Weight": 10
+      },
+      {
         "Uid": "J5",
         "Weight": 10
       },
@@ -251,7 +255,7 @@
   },
   {
     "Uid": "O6",
-    "Delay": 30,
+    "Delay": 50,
     "Price": {
       "Currency": "Energy",
       "Amount": 25
@@ -274,6 +278,18 @@
       },
       {
         "Uid": "A2",
+        "Weight": 10
+      },
+      {
+        "Uid": "H2",
+        "Weight": 10
+      },
+      {
+        "Uid": "I2",
+        "Weight": 10
+      },
+      {
+        "Uid": "I1",
         "Weight": 10
       },
       {
@@ -300,7 +316,7 @@
   },
   {
     "Uid": "O7",
-    "Delay": 45,
+    "Delay": 70,
     "Price": {
       "Currency": "Energy",
       "Amount": 30
@@ -349,7 +365,7 @@
   },
   {
     "Uid": "O8",
-    "Delay": 60,
+    "Delay": 90,
     "Price": {
       "Currency": "Energy",
       "Amount": 35
@@ -398,7 +414,7 @@
   },
   {
     "Uid": "O9",
-    "Delay": 90,
+    "Delay": 120,
     "Price": {
       "Currency": "Energy",
       "Amount": 40
@@ -478,7 +494,7 @@
     "Delay": 5,
     "Price": {
       "Currency": "Energy",
-      "Amount": 30
+      "Amount": 15
     },
     "FastPrice": {
       "Currency": "Crystals",
@@ -500,12 +516,12 @@
     "ChestWeights": [
       {
         "Uid": "Chest3",
-        "Weight": 100,
+        "Weight": 30,
         "Override": true
       },
       {
         "Uid": "Chest4",
-        "Weight": 20
+        "Weight": 100
       }
     ]
   },
@@ -514,7 +530,7 @@
     "Delay": 10,
     "Price": {
       "Currency": "Energy",
-      "Amount": 40
+      "Amount": 25
     },
     "FastPrice": {
       "Currency": "Crystals",
@@ -559,7 +575,7 @@
     "Delay": 15,
     "Price": {
       "Currency": "Energy",
-      "Amount": 50
+      "Amount": 30
     },
     "FastPrice": {
       "Currency": "Crystals",
@@ -603,7 +619,7 @@
     "Delay": 25,
     "Price": {
       "Currency": "Energy",
-      "Amount": 60
+      "Amount": 40
     },
     "FastPrice": {
       "Currency": "Crystals",
@@ -647,7 +663,7 @@
     "Delay": 30,
     "Price": {
       "Currency": "Energy",
-      "Amount": 70
+      "Amount": 60
     },
     "FastPrice": {
       "Currency": "Crystals",
@@ -692,7 +708,7 @@
     "Delay": 45,
     "Price": {
       "Currency": "Energy",
-      "Amount": 75
+      "Amount": 55
     },
     "FastPrice": {
       "Currency": "Crystals",
@@ -737,7 +753,7 @@
     "Delay": 60,
     "Price": {
       "Currency": "Energy",
-      "Amount": 80
+      "Amount": 60
     },
     "FastPrice": {
       "Currency": "Crystals",

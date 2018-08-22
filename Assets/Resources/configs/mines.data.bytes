@@ -50,5 +50,57 @@
       "X": 23,
       "Y": 6
     }
+  },
+  {
+    "Uid": "Mine 3",
+    "Skin": "MineC",
+    "Delay": 40,
+    "Size": 15,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 15
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 3
+    },
+    "Reward": {
+      "Currency": "ChestC1",
+      "Amount": 1
+    },
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 25
+    },
+    "Position": {
+      "X": 11,
+      "Y": 9
+    }
+  },
+  {
+    "Uid": "Mine 4",
+    "Skin": "MineC",
+    "Delay": 40,
+    "Size": 10,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 10
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 10
+    },
+    "Reward": {
+      "Currency": "ChestC1",
+      "Amount": 1
+    },
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 25
+    },
+    "Position": {
+      "X": 20,
+      "Y": 2
+    }
   }
 ]
