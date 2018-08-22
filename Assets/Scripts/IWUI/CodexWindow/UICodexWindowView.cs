@@ -1,9 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using TMPro;
-using UnityEngine.UI;
 
 public class UICodexWindowView : UIGenericPopupWindowView
 {
@@ -24,6 +22,8 @@ public class UICodexWindowView : UIGenericPopupWindowView
     private int lastCodexContentId = -1;
 
     private List<CodexTab> codexTabs = new List<CodexTab>();
+
+    private bool isReward;
     
     public override void OnViewShow()
     {
@@ -32,7 +32,8 @@ public class UICodexWindowView : UIGenericPopupWindowView
         UICodexWindowModel model = Model as UICodexWindowModel;
 
         Init(model);
-
+        isReward = false;
+        
         // Call update after one frame to make sure that layouts are up to date
         StartCoroutine(UpdateLayout());
     }
@@ -50,6 +51,46 @@ public class UICodexWindowView : UIGenericPopupWindowView
         base.OnViewClose();
         
         UICodexWindowModel model = Model as UICodexWindowModel;     
+    }
+    
+    public void OnRewardClick()
+    {
+        isReward = true;
+        Controller.CloseCurrentWindow();
+    }
+
+    public override void OnViewCloseCompleted()
+    {
+        base.OnViewCloseCompleted();
+        
+        if(isReward == false) return;
+
+        var windowModel = Model as UICodexWindowModel;
+        
+        CurrencyHellper.Purchase(
+            Currency.Coins.Name,
+            GameDataService.Current.CodexManager.GetCodexContent().PendingRewardAmount,
+            isSuccess =>
+            {
+                Save();
+                windowModel.OnClaim?.Invoke();
+            },
+            new Vector2(Screen.width/2f, Screen.height/2f));
+    }
+
+    private void Save()
+    {
+        var codexManager = GameDataService.Current.CodexManager;
+        
+        var items = codexManager.Items;
+        
+        foreach (var item in items)
+        {
+            item.Value.PendingReward.Clear();
+        }
+        
+        codexManager.ClearCodexContentCache();
+        codexManager.CodexState = CodexState.Normal;
     }
     
     private void Init(UICodexWindowModel model)
