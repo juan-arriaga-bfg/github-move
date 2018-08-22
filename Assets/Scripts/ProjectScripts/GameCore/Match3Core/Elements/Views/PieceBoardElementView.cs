@@ -106,6 +106,7 @@ public class PieceBoardElementView : BoardElementView
         lastBoardPosition = boardPos;
         OnDrag(boardPos, worldPos);
         Piece.Context.HintCooldown.IsPaused = true;
+        Piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
     }
 
     public virtual void OnDragEnd(BoardPosition boardPos, Vector2 worldPos)
