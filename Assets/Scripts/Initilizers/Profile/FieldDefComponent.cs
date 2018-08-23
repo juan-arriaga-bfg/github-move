@@ -261,7 +261,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			var item = new LifeSaveItem
 			{
 				Step = component.Current,
-				StartTime = component.Timer.StartTime,
+				StartTime = component.Timer.StartTimeLong,
 				Position = position
 			};
 			
@@ -288,7 +288,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 				Position = position,
 				Filling = component.Filling,
 				IsStart = component.Timer.IsExecuteable(),
-				StartTime = component.Timer.StartTime
+				StartTime = component.Timer.StartTimeLong
 			};
 			
 			items.Add(item);
@@ -371,7 +371,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 				Id = piece.PieceType,
 				Position = position,
 				State = component.State,
-				StartTime = component.Timer.StartTime,
+				StartTime = component.Timer.StartTimeLong,
 				Storage = storage
 			};
 			

@@ -187,7 +187,7 @@ public class CastlePieceView : PieceBoardElementView
 
     private void OnExecute()
     {
-        if(storage.Timer.GetTime().TotalSeconds < 3) return;
+        if(storage.Timer.StartTime.GetTime().TotalSeconds < 3) return;
         storage.Timer.OnExecute -= OnExecute;
         Change();
     }

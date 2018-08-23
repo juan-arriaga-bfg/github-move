@@ -75,7 +75,7 @@ public class UIProductionItem : MonoBehaviour
 
     private void UpdateTimer()
     {
-        timerLabel.Text = production.Timer.GetTimeLeftText(null);
+        timerLabel.Text = production.Timer.CompleteTime.GetTimeLeftText(null);
     }
 
     private void Decoration()

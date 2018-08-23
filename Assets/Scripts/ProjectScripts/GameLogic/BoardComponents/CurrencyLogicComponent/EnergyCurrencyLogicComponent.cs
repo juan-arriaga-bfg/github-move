@@ -4,16 +4,16 @@ using UnityEngine;
 public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSystem
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-    public override int Guid { get { return ComponentGuid; } }
-    
+    public override int Guid => ComponentGuid;
+
     public int Delay { get; set; }
     
     private DateTime then;
-
-    public long LastUpdate
-    {
-        get { return then.ConvertToUnixTime(); }
-    }
+    public DateTime Later;
+    
+    public Action OnExecute;
+    
+    public long LastUpdate => then.ConvertToUnixTime();
 
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -21,6 +21,7 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         limitItem = ProfileService.Current.Purchases.GetStorageItem(Currency.EnergyLimit.Name);
         
         then = DateTime.UtcNow;
+        Later = then.AddSeconds(Delay);
         
         base.OnRegisterEntity(entity);
     }
@@ -33,19 +34,23 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         
         var refil = DateTimeExtension.CountOfStepsPassedWhenAppWasInBackground(save.EnergyLastUpdate, Delay, out then);
         
+        Later = then.AddSeconds(Delay);
         targetItem.Amount += Mathf.Min(refil, limitItem.Amount - targetItem.Amount);
     }
 
     public void Execute()
     {
+        OnExecute?.Invoke();
+        
         var now = DateTime.UtcNow;
         
         if ((now - then).TotalSeconds < Delay) return;
         
         then = now;
+        Later = then.AddSeconds(Delay);
         Add(1);
     }
-
+    
     public object GetDependency()
     {
         return null;

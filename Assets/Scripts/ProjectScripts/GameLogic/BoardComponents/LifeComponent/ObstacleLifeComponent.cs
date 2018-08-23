@@ -5,7 +5,7 @@ public class ObstacleLifeComponent : StorageLifeComponent
     public override CurrencyPair Energy => GameDataService.Current.ObstaclesManager.GetPriceByStep(thisContext.PieceType, current);
 
     public override string Message =>
-        $"Tree chopping:\n{TimerComponent.GetDelayText(GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current))}";
+        $"Tree chopping:\n{DateTimeExtension.GetDelayText(GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current))}";
     
     public override string Price => $"Chop {Energy.ToStringIcon()}";
 

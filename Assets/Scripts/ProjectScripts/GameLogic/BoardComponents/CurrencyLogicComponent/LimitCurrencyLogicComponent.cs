@@ -2,7 +2,7 @@
 
 public class LimitCurrencyLogicComponent : IECSComponent
 {
-    public virtual int Guid { get { return 0; } }
+    public virtual int Guid => 0;
 
     protected StorageItem targetItem;
     protected StorageItem limitItem;
@@ -22,14 +22,7 @@ public class LimitCurrencyLogicComponent : IECSComponent
     {
     }
     
-    public virtual void UpLimit(int amount)
-    {
-        if (amount <= 0) return;
-        
-        CurrencyHellper.Purchase(limitItem.Currency, amount);
-    }
-
-    public virtual bool Add(int amount, bool isExtra = false)
+    protected bool Add(int amount, bool isExtra = false)
     {
         if (amount <= 0) return false;
         

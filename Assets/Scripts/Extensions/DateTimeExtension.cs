@@ -41,4 +41,41 @@ public static class DateTimeExtension
         
         return count;
     }
+    
+    public static TimeSpan GetTime(this DateTime datetime)
+    {
+        return DateTime.UtcNow - datetime;
+    }
+
+    public static TimeSpan GetTimeLeft(this DateTime datetime)
+    {
+        return datetime - DateTime.UtcNow;
+    }
+    
+    public static string GetDelayText(int delay, string format = null)
+    {
+        return TimeFormat(DateTime.UtcNow.AddSeconds(delay) - DateTime.UtcNow, format);
+    }
+
+    public static string GetTimeText(this DateTime datetime, string format)
+    {
+        return TimeFormat(datetime.GetTime(), format);
+    }
+    
+    public static string GetTimeLeftText(this DateTime datetime, string format)
+    {
+        return TimeFormat(datetime.GetTimeLeft(), format);
+    }
+    
+    private static string TimeFormat(TimeSpan time, string format)
+    {
+        if (string.IsNullOrEmpty(format))
+        {
+            return (int) time.TotalHours > 0
+                ? $"<mspace=3em>{time.Hours:00}:{time.Minutes:00}:{time.Seconds:00}</mspace>"
+                : $"<mspace=3em>{time.Minutes:00}:{time.Seconds:00}</mspace>";
+        }
+        
+        return string.Format(format, time.Hours, time.Minutes, time.Seconds);
+    }
 }

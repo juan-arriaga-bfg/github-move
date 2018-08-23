@@ -12,7 +12,9 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
 
         // set resource deliverer for UI
         IWUISettings.Instance.SetResourceManager(new DefaultUIResourceManager());
-
+        
+        InitGameField();
+        
         // cache windows
         IWUIManager.Instance.Init(new[]
         {
@@ -40,8 +42,6 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         {
             // close launcher
             UIService.Get.CloseWindow(UIWindowType.LauncherWindow);
-            
-            InitGameField();
             
             // get model for window
             var model = UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow);

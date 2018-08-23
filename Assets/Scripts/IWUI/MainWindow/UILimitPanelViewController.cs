@@ -60,7 +60,7 @@ public class UILimitPanelViewController : UIGenericResourcePanelViewController
         DOTween.Kill(storageItemLimit);
         
         var sequence = DOTween.Sequence().SetId(storageItemLimit);
-        sequence.Insert(0f, DOTween.To(() => { return LimitValueAnimated; }, (v) => { LimitValueAnimated = v; }, currentLimitValue, 0.5f ));
+        sequence.Insert(0f, DOTween.To(() => LimitValueAnimated, (v) => { LimitValueAnimated = v; }, currentLimitValue, 0.5f ));
     }
     
     public override void UpdateView()

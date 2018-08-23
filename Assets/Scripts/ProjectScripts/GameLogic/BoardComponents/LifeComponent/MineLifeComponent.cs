@@ -5,7 +5,7 @@ public class MineLifeComponent : StorageLifeComponent
     private MineDef def;
     
     public override CurrencyPair Energy => def.Price;
-    public override string Message => $"Clear mine:\n{TimerComponent.GetDelayText(def.Delay)}";
+    public override string Message => $"Clear mine:\n{DateTimeExtension.GetDelayText(def.Delay)}";
     public override string Price => $"Clear {Energy.ToStringIcon()}";
     
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
