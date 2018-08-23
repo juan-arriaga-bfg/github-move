@@ -74,8 +74,8 @@ public static class DateTimeExtension
             var str = icon ? $"<sprite name={Currency.Timer.Name}>" : "";
             
             return (int) time.TotalHours > 0
-                ? $"<mspace=3em>{str}{time.Hours:00}:{time.Minutes:00}:{time.Seconds:00}</mspace>"
-                : $"<mspace=3em>{str}{time.Minutes:00}:{time.Seconds:00}</mspace>";
+                ? $"{str} <mspace=3em>{time.Hours:00}:{time.Minutes:00}:{time.Seconds:00}</mspace>"
+                : $"{str} <mspace=3em>{time.Minutes:00}:{time.Seconds:00}</mspace>";
         }
         
         return string.Format(format, time.Hours, time.Minutes, time.Seconds);

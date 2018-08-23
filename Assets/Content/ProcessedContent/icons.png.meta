@@ -95,7 +95,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1bef7eac6f8aba4498e08d7a89d99324
+      spriteID: 95bcb7224e6e3624fbb8960353d3d33c
       vertices: []
       indices: 
       edges: []
@@ -115,7 +115,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4124a53ded6f10642a5632e2a783d4e8
+      spriteID: ffabee3cefd6cda4d8d3fd4259a6efb7
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7ab9b50cd575f8e42b0764a3637fd6d6
+      spriteID: b3028778886fd5043b1e59ba4b7e7466
       vertices: []
       indices: 
       edges: []
@@ -155,7 +155,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a65414e50fd0e0044a1ed98776a70ea7
+      spriteID: ad5c35f149cece54c8a3ab1b7059b1dc
       vertices: []
       indices: 
       edges: []
@@ -175,7 +175,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0162db69cda8ee84589ac5e496041f0c
+      spriteID: eb1e4caf0709f1a42be2e8d21a069886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Timer
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f18b10646f38fd4695e8a58da1b201f
       vertices: []
       indices: 
       edges: []
@@ -184,8 +204,8 @@ TextureImporter:
       name: Life
       rect:
         serializedVersion: 2
-        x: 261
-        y: 0
+        x: 313
+        y: 65
         width: 63
         height: 53
       alignment: 9
@@ -195,27 +215,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4f4674a5dd7ede649b54e9e86a442b6e
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Timer
-      rect:
-        serializedVersion: 2
-        x: 94
-        y: 181
-        width: 24
-        height: 24
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 10ee371a533ad144591b24119bc31555
+      spriteID: c3cc7bf0602d8e0479325bde73f7fcb6
       vertices: []
       indices: 
       edges: []
