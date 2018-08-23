@@ -7,7 +7,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
     private TimerComponent cooldown;
     
     public override string Message => $"Harvest {childName}";
-    public override string Price => Timer.IsExecuteable() ? $"Wait\n{Timer.CompleteTime.GetTimeLeftText(null)}" : base.Price;
+    public override string Price => Timer.IsExecuteable() ? $"Wait\n{Timer.CompleteTime.GetTimeLeftText()}" : base.Price;
 
     public override TimerComponent Timer => cooldown;
 

@@ -9,6 +9,7 @@ TextureImporter:
     21300008: Experience
     21300010: Coins
     21300012: Life
+    21300014: Timer
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -94,7 +95,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9f94dfd4fdba61445b655d8969199a5a
+      spriteID: 1bef7eac6f8aba4498e08d7a89d99324
       vertices: []
       indices: 
       edges: []
@@ -114,7 +115,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 810b5eab351c4c944a822074d1c02b0e
+      spriteID: 4124a53ded6f10642a5632e2a783d4e8
       vertices: []
       indices: 
       edges: []
@@ -134,7 +135,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f6a3b0224132ae34eb205d840d374df3
+      spriteID: 7ab9b50cd575f8e42b0764a3637fd6d6
       vertices: []
       indices: 
       edges: []
@@ -154,7 +155,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bc4a0350a3f03124d8be022f4a307ac4
+      spriteID: a65414e50fd0e0044a1ed98776a70ea7
       vertices: []
       indices: 
       edges: []
@@ -174,7 +175,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f39c314e8c54a00428a60f67b4ba7c81
+      spriteID: 0162db69cda8ee84589ac5e496041f0c
       vertices: []
       indices: 
       edges: []
@@ -194,7 +195,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4bad6e33fd444f044aa768a79ed3bb62
+      spriteID: 4f4674a5dd7ede649b54e9e86a442b6e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Timer
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 181
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10ee371a533ad144591b24119bc31555
       vertices: []
       indices: 
       edges: []

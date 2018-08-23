@@ -84,7 +84,7 @@ public class UIMessageWindowView : UIGenericPopupWindowView
     {
         var windowModel = Model as UIMessageWindowModel;
 
-        timerLabel.Text = windowModel.Timer.CompleteTime.GetTimeLeftText(null);
+        timerLabel.Text = windowModel.Timer.CompleteTime.GetTimeLeftText();
         buttonAcceptLabel.Text = windowModel.AcceptLabel + windowModel.Timer.GetPrise().ToStringIcon(false);
     }
 

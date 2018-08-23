@@ -9,10 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84a92b25f83d49b9bc132d206b370281, type: 3}
-  m_Name: iconsText
+  m_Name: icons
   m_EditorClassIdentifier: 
   hashCode: 128033944
-  material: {fileID: 21532149827319842}
+  material: {fileID: 21379132072081546}
   materialHashCode: 0
   spriteSheet: {fileID: 2800000, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
   spriteInfoList:
@@ -21,87 +21,101 @@ MonoBehaviour:
     y: 181
     width: 93
     height: 64
-    xOffset: -5
-    yOffset: 55
-    xAdvance: 81
-    scale: 1.3
+    xOffset: -46.5
+    yOffset: 32
+    xAdvance: 93
+    scale: 1
     name: Crystals
     hashCode: -1118933007
     unicode: 0
     pivot: {x: -46.5, y: 32}
     sprite: {fileID: 21300002, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
   - id: 1
+    x: 94
+    y: 181
+    width: 24
+    height: 24
+    xOffset: -12
+    yOffset: 12
+    xAdvance: 24
+    scale: 1
+    name: Timer
+    hashCode: 98742919
+    unicode: 0
+    pivot: {x: -12, y: 12}
+    sprite: {fileID: 21300014, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
+  - id: 2
     x: 157
     y: 102
     width: 88
     height: 106
-    xOffset: 0
-    yOffset: 83
+    xOffset: -44
+    yOffset: 53
     xAdvance: 88
-    scale: 1.3
+    scale: 1
     name: Coins
     hashCode: 80886904
     unicode: 0
     pivot: {x: -44, y: 53}
     sprite: {fileID: 21300010, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 2
+  - id: 3
     x: 246
     y: 102
     width: 66
     height: 106
-    xOffset: 0
-    yOffset: 83
-    xAdvance: 61
-    scale: 1.3
+    xOffset: -33
+    yOffset: 53
+    xAdvance: 66
+    scale: 1
     name: Energy
     hashCode: -1704718782
     unicode: 0
     pivot: {x: -33, y: 53}
     sprite: {fileID: 21300004, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 3
+  - id: 4
     x: 0
     y: 0
     width: 156
     height: 180
-    xOffset: 0
-    yOffset: 130
-    xAdvance: 140
-    scale: 1.3
+    xOffset: -78
+    yOffset: 90
+    xAdvance: 156
+    scale: 1
     name: Worker
     hashCode: -852819018
     unicode: 0
     pivot: {x: -78, y: 90}
     sprite: {fileID: 21300006, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 4
+  - id: 5
     x: 157
     y: 0
     width: 103
     height: 101
-    xOffset: 0
-    yOffset: 80
-    xAdvance: 105
-    scale: 1.3
+    xOffset: -51.5
+    yOffset: 50.5
+    xAdvance: 103
+    scale: 1
     name: Experience
     hashCode: -989729378
     unicode: 0
     pivot: {x: -51.5, y: 50.5}
     sprite: {fileID: 21300008, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 5
+  - id: 6
     x: 261
     y: 0
     width: 63
     height: 53
-    xOffset: 0
-    yOffset: 42
+    xOffset: -31.5
+    yOffset: 26.5
     xAdvance: 63
-    scale: 1.3
+    scale: 1
     name: Life
     hashCode: 2687718
     unicode: 0
     pivot: {x: -31.5, y: 26.5}
     sprite: {fileID: 21300012, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
   fallbackSpriteAssets: []
---- !u!21 &21532149827319842
+--- !u!21 &21379132072081546
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 1

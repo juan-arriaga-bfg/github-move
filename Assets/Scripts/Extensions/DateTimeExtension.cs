@@ -52,28 +52,30 @@ public static class DateTimeExtension
         return datetime - DateTime.UtcNow;
     }
     
-    public static string GetDelayText(int delay, string format = null)
+    public static string GetDelayText(int delay, bool icon = false, string format = null)
     {
-        return TimeFormat(DateTime.UtcNow.AddSeconds(delay) - DateTime.UtcNow, format);
+        return TimeFormat(DateTime.UtcNow.AddSeconds(delay) - DateTime.UtcNow, icon, format);
     }
 
-    public static string GetTimeText(this DateTime datetime, string format)
+    public static string GetTimeText(this DateTime datetime, bool icon = false, string format = null)
     {
-        return TimeFormat(datetime.GetTime(), format);
+        return TimeFormat(datetime.GetTime(), icon, format);
     }
     
-    public static string GetTimeLeftText(this DateTime datetime, string format)
+    public static string GetTimeLeftText(this DateTime datetime, bool icon = false, string format = null)
     {
-        return TimeFormat(datetime.GetTimeLeft(), format);
+        return TimeFormat(datetime.GetTimeLeft(), icon, format);
     }
     
-    private static string TimeFormat(TimeSpan time, string format)
+    private static string TimeFormat(TimeSpan time, bool icon, string format)
     {
         if (string.IsNullOrEmpty(format))
         {
+            var str = icon ? $"<sprite name={Currency.Timer.Name}>" : "";
+            
             return (int) time.TotalHours > 0
-                ? $"<mspace=3em>{time.Hours:00}:{time.Minutes:00}:{time.Seconds:00}</mspace>"
-                : $"<mspace=3em>{time.Minutes:00}:{time.Seconds:00}</mspace>";
+                ? $"<mspace=3em>{str}{time.Hours:00}:{time.Minutes:00}:{time.Seconds:00}</mspace>"
+                : $"<mspace=3em>{str}{time.Minutes:00}:{time.Seconds:00}</mspace>";
         }
         
         return string.Format(format, time.Hours, time.Minutes, time.Seconds);

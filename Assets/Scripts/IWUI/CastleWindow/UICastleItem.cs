@@ -55,7 +55,7 @@ public class UICastleItem : MonoBehaviour
 
 	private void UpdateLabel()
 	{
-		labelTimer.Text = model.Storage.Timer.CompleteTime.GetTimeLeftText(null);
+		labelTimer.Text = model.Storage.Timer.CompleteTime.GetTimeLeftText();
 	}
 
 	private void ChengeButtons()
