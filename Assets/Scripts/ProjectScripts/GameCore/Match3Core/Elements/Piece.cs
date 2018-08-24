@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 
-public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchablePiece, IDraggablePiece, IMulticellularPiece, IPathfinderComponent
+public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchablePiece, IDraggablePiece, IMulticellularPiece, IPathfinderComponent,
+    IPieceStateComponent
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -32,6 +33,9 @@ public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchab
     
     private PathfinderComponent pathfinder;
     public PathfinderComponent Pathfinder => pathfinder ?? (pathfinder = GetComponent<PathfinderComponent>(PathfinderComponent.ComponentGuid));
+    
+    private PieceStateComponent pieceState;
+    public PieceStateComponent PieceState => pieceState ?? (pieceState = GetComponent<PieceStateComponent>(PieceStateComponent.ComponentGuid));
     
     public PieceBoardElementView ActorView
     {

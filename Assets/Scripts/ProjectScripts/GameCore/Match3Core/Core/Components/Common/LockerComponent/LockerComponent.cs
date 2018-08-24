@@ -4,32 +4,40 @@ public class LockerComponent : IECSComponent
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	
-	public virtual int Guid { get { return ComponentGuid; } }
-	
-	private List<object> lockers = new List<object>();
+	public virtual int Guid => ComponentGuid;
 
-	public virtual bool IsLocked
-	{
-		get { return lockers.Count > 0; }
-	}
+	private readonly List<object> lockers = new List<object>();
+	public virtual bool IsLocked => lockers.Count > 0;
 
-	public virtual void Lock(object locker)
+	public virtual void Lock(object locker, bool multiple = true)
 	{
+		if (multiple == false && lockers.FindAll(item => item == lockers).Count > 0) return;
+		
 		lockers.Add(locker);
 	}
 
-	public virtual void Unlock(object locker)
+	public virtual void Unlock(object locker, bool all = false)
 	{
+		if (all)
+		{
+			var items = lockers.FindAll(item => item == lockers);
+
+			foreach (var item in items)
+			{
+				lockers.Remove(item);
+			}
+			
+			return;
+		}
+		
 		lockers.Remove(locker);
 	}
 	
 	public virtual void OnRegisterEntity(ECSEntity entity)
 	{
-		
 	}
 
 	public virtual void OnUnRegisterEntity(ECSEntity entity)
 	{
-		
 	}	
 }

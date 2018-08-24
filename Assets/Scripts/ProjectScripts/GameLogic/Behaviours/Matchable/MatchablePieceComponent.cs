@@ -1,23 +1,24 @@
-﻿public class MatchablePieceComponent : IECSComponent
+﻿public class MatchablePieceComponent : ECSEntity, ILockerComponent
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
-	public int Guid => ComponentGuid;
+	public override int Guid => ComponentGuid;
 
-	protected Piece Context;
-	private bool isLast;
-    
-	public virtual void OnRegisterEntity(ECSEntity entity)
-	{
-		Context = entity as Piece;
-		isLast = Context.Context.BoardLogic.MatchDefinition.GetNext(Context.PieceType, false) == PieceType.None.Id;
-	}
+	private LockerComponent locker;
+	public LockerComponent Locker => locker ?? GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
 
-	public virtual void OnUnRegisterEntity(ECSEntity entity)
+	protected Piece context;
+
+	public override void OnRegisterEntity(ECSEntity entity)
 	{
+		context = entity as Piece;
+		
+		if(context.Context.BoardLogic.MatchDefinition.GetNext(context.PieceType, false) == PieceType.None.Id) Locker.Lock(this);
+
+		RegisterComponent(new LockerComponent());
 	}
     
 	public virtual bool IsMatchable()
 	{
-		return !isLast;
+		return !Locker.IsLocked;
 	}
 }

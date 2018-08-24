@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Networking;
 
 public class GenericPieceBuilder : IPieceBuilder
 {
@@ -12,9 +10,10 @@ public class GenericPieceBuilder : IPieceBuilder
         
         piece.RegisterComponent(new PieceBoardObserversComponent());
         piece.RegisterComponent(new CachedPiecePositionComponent());
+        piece.RegisterComponent(new PieceStateComponent());
 
         AddMatchableComponent(piece);
-
+        
         return piece;
     }
 
@@ -42,13 +41,8 @@ public class GenericPieceBuilder : IPieceBuilder
     
     protected void AddView(Piece piece, ViewType id)
     {
-        var view = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
-        
-        if (view == null)
-        {
-            view = CreateViewComponent(piece);
-        }
-		
+        var view = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid) ?? CreateViewComponent(piece);
+
         if(view.ViewIds == null) view.ViewIds = new List<ViewType>();
 		
         view.ViewIds.Add(id);
