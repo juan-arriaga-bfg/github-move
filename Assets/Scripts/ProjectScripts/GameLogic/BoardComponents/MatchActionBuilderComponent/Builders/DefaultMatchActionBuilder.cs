@@ -6,7 +6,7 @@ public class DefaultMatchActionBuilder
     {
         var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType);
         
-        if(def == null || def.CreateRewards == null) return;
+        if(def?.CreateRewards == null) return;
 
         var sequence = DOTween.Sequence();
         
@@ -15,5 +15,14 @@ public class DefaultMatchActionBuilder
             var reward = def.CreateRewards[i];
             sequence.InsertCallback(0.5f*i, () => AddResourceView.Show(position, reward));
         }
+    }
+    
+    
+    protected void StartLock(BoardPosition position)
+    {
+        var logic = BoardService.Current.GetBoardById(0).BoardLogic;
+        var piece = logic.GetPieceAt(position);
+
+        if (piece?.PieceState != null) piece.PieceState.State = PieceLifeState.InProgress;
     }
 }

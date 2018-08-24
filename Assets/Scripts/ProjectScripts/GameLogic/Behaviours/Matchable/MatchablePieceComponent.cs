@@ -11,10 +11,11 @@
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
 		context = entity as Piece;
-		
-		if(context.Context.BoardLogic.MatchDefinition.GetNext(context.PieceType, false) == PieceType.None.Id) Locker.Lock(this);
 
-		RegisterComponent(new LockerComponent());
+		locker = new LockerComponent();
+		RegisterComponent(locker);
+		
+		if(context.Context.BoardLogic.MatchDefinition.GetNext(context.PieceType, false) == PieceType.None.Id) locker.Lock(this);
 	}
     
 	public virtual bool IsMatchable()

@@ -7,11 +7,8 @@ public class BoardTimerView : UIBoardView
     
     private TimerComponent timer;
     
-    protected override ViewType Id
-    {
-        get { return ViewType.BoardTimer; }
-    }
-    
+    protected override ViewType Id => ViewType.BoardTimer;
+
     public override void Init(Piece piece)
     {
         base.Init(piece);
@@ -20,9 +17,16 @@ public class BoardTimerView : UIBoardView
         SetOfset();
 
         Priority = defaultPriority = 10;
-        timer = piece.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-
-        timer.OnExecute += UpdateView;
+        SetTimer(piece.GetComponent<TimerComponent>(TimerComponent.ComponentGuid));
+    }
+    
+    public void SetTimer(TimerComponent timer)
+    {
+        if(timer == null) return;
+        if(this.timer != null) this.timer.OnExecute -= UpdateView;
+        
+        this.timer = timer;
+        this.timer.OnExecute += UpdateView;
     }
 
     protected virtual void OnDestroy()

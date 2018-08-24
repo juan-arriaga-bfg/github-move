@@ -10,26 +10,38 @@ public class GenericPieceBuilder : IPieceBuilder
         
         piece.RegisterComponent(new PieceBoardObserversComponent());
         piece.RegisterComponent(new CachedPiecePositionComponent());
-        piece.RegisterComponent(new PieceStateComponent());
 
+        AddStateComponent(piece);
         AddMatchableComponent(piece);
         
         return piece;
     }
-
+    
     protected ViewDefinitionComponent CreateViewComponent(Piece piece)
     {
-        var view = new ViewDefinitionComponent();
+        var view = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
+
+        if (view != null) return view;
         
+        view = new ViewDefinitionComponent();
         piece.RegisterComponent(view);
         AddObserver(piece, view);
-
+        
         return view;
     }
 
     protected virtual void AddMatchableComponent(Piece piece)
     {
         piece.RegisterComponent(new MatchablePieceComponent());
+    }
+
+    private void AddStateComponent(Piece piece)
+    {
+        if ((piece.PieceType <= PieceType.A2.Id || piece.PieceType > PieceType.A9.Id) &&
+            (piece.PieceType <= PieceType.C2.Id || piece.PieceType > PieceType.C9.Id)) return;
+        
+        CreateViewComponent(piece);
+        piece.RegisterComponent(new PieceStateComponent());
     }
     
     protected void AddObserver(Piece piece, IPieceBoardObserver observer)

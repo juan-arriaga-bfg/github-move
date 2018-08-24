@@ -235,7 +235,7 @@ public class DragAndCheckMatchAction : IBoardAction
 
 		if (pieceFrom.PieceType == pieceTo.PieceType)
 		{
-			if (CheckMatch(board, new List<BoardPosition> {From}, out action))
+			if (pieceFrom.Matchable.IsMatchable() && CheckMatch(board, new List<BoardPosition> {From}, out action))
 			{
 				board.ActionExecutor.PerformAction(action);
 				return;
@@ -269,17 +269,11 @@ public class DragAndCheckMatchAction : IBoardAction
 		
 		if (logic.FieldFinder.Find(To, matchField, out currentId) == false) return false;
 		
-		if (!logic.GetPieceAt(From).Matchable.IsMatchable())
-			return false;
-		
 		action = logic.MatchActionBuilder.GetMatchAction(matchField, currentId, To);
 		
 		var isMatch = action != null;
 
-		if (isMatch)
-		{
-			board.ReproductionLogic.Restart();
-		}
+		if (isMatch) board.ReproductionLogic.Restart();
 
 		return isMatch;
 	}

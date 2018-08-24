@@ -13,6 +13,9 @@ public class DraggablePieceComponent : ECSEntity, ILockerComponent
     public override void OnRegisterEntity(ECSEntity entity)
     {
         context = entity as Piece;
+        
+        locker = new LockerComponent();
+        RegisterComponent(locker);
     }
     
     public virtual bool IsDraggable(BoardPosition at)
