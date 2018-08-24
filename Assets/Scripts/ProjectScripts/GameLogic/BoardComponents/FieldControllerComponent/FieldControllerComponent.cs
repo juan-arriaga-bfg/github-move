@@ -97,28 +97,25 @@ public class FieldControllerComponent : IECSComponent
     
     private void TestField()
     {
-        AddPieces(new BoardPosition(18, 10), PieceType.F1.Id, PieceType.F5.Id);
-        return;
+        AddPieces(new BoardPosition(4, 16), PieceType.O1.Id, PieceType.O5.Id);
+        AddPieces(new BoardPosition(6, 16), PieceType.OX1.Id, PieceType.OX5.Id);
         
-        AddPieces(new BoardPosition(4, 10), PieceType.O1.Id, PieceType.O5.Id);
-        AddPieces(new BoardPosition(6, 10), PieceType.OX1.Id, PieceType.OX5.Id);
-        
-        AddPieces(new BoardPosition(8, 10), PieceType.A1.Id, PieceType.A9.Id);
-        AddPieces(new BoardPosition(10, 10), PieceType.B1.Id, PieceType.B5.Id);
-        AddPieces(new BoardPosition(12, 10), PieceType.C1.Id, PieceType.C9.Id);
-        AddPieces(new BoardPosition(14, 10), PieceType.D1.Id, PieceType.D4.Id);
-        AddPieces(new BoardPosition(16, 10), PieceType.E1.Id, PieceType.E5.Id);
-        AddPieces(new BoardPosition(18, 10), PieceType.F1.Id, PieceType.F5.Id);
-        AddPieces(new BoardPosition(20, 10), PieceType.G1.Id, PieceType.G4.Id);
-        AddPieces(new BoardPosition(22, 10), PieceType.H1.Id, PieceType.H4.Id);
-        AddPieces(new BoardPosition(24, 10), PieceType.I1.Id, PieceType.I5.Id);
-        AddPieces(new BoardPosition(26, 10), PieceType.J1.Id, PieceType.J5.Id);
+        AddPieces(new BoardPosition(8, 16), PieceType.A1.Id, PieceType.A9.Id);
+        AddPieces(new BoardPosition(10, 16), PieceType.B1.Id, PieceType.B5.Id);
+        AddPieces(new BoardPosition(12, 16), PieceType.C1.Id, PieceType.C9.Id);
+        AddPieces(new BoardPosition(14, 16), PieceType.D1.Id, PieceType.D4.Id);
+        AddPieces(new BoardPosition(16, 16), PieceType.E1.Id, PieceType.E5.Id);
+        AddPieces(new BoardPosition(18, 16), PieceType.F1.Id, PieceType.F5.Id);
+        AddPieces(new BoardPosition(20, 16), PieceType.G1.Id, PieceType.G4.Id);
+        AddPieces(new BoardPosition(22, 16), PieceType.H1.Id, PieceType.H4.Id);
+        AddPieces(new BoardPosition(24, 16), PieceType.I1.Id, PieceType.I5.Id);
+        AddPieces(new BoardPosition(26, 16), PieceType.J1.Id, PieceType.J5.Id);
         
         AddPieces(new BoardPosition(28, 14), PieceType.ChestX1.Id, PieceType.ChestX3.Id);
         AddPieces(new BoardPosition(28, 18), PieceType.ChestC1.Id, PieceType.ChestC3.Id);
         AddPieces(new BoardPosition(28, 22), PieceType.Basket1.Id, PieceType.Basket3.Id);
         
-        AddPieces(new BoardPosition(29, 10), PieceType.Coin1.Id, PieceType.Coin5.Id);
+        AddPieces(new BoardPosition(29, 16), PieceType.Coin1.Id, PieceType.Coin5.Id);
     }
     
     private List<BoardPosition> CreateFog()

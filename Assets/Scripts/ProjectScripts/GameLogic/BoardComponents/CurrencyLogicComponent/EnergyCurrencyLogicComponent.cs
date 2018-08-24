@@ -37,7 +37,7 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         Later = then.AddSeconds(Delay);
         targetItem.Amount += Mathf.Min(refil, limitItem.Amount - targetItem.Amount);
     }
-
+    
     public void Execute()
     {
         OnExecute?.Invoke();
@@ -50,7 +50,13 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         Later = then.AddSeconds(Delay);
         Add(1);
     }
-    
+
+    protected override void Add(int amount, bool isExtra = false)
+    {
+        base.Add(amount, isExtra);
+        OnExecute?.Invoke();
+    }
+
     public object GetDependency()
     {
         return null;

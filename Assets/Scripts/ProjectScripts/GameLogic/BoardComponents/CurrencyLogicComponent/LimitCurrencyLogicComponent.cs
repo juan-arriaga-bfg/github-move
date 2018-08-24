@@ -22,22 +22,20 @@ public class LimitCurrencyLogicComponent : IECSComponent
     {
     }
     
-    protected bool Add(int amount, bool isExtra = false)
+    protected virtual void Add(int amount, bool isExtra = false)
     {
-        if (amount <= 0) return false;
+        if (amount <= 0) return;
         
         if (isExtra)
         {
             CurrencyHellper.Purchase(targetItem.Currency, amount);
-            return true;
+            return;
         }
         
-        if (limitItem.Amount <= targetItem.Amount) return false;
+        if (limitItem.Amount <= targetItem.Amount) return;
 
         var possible = Mathf.Min(amount, limitItem.Amount - targetItem.Amount);
 
         CurrencyHellper.Purchase(targetItem.Currency, possible);
-
-        return true;
     }
 }
