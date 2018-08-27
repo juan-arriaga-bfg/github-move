@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class MatchableChestComponent : MatchablePieceComponent
+﻿public class MatchableChestComponent : MatchablePieceComponent
 {
     private Chest chest;
     private ChestPieceComponent chestPiece;
@@ -10,7 +8,7 @@ public class MatchableChestComponent : MatchablePieceComponent
         if (base.IsMatchable() == false) return false;
         if (chest != null) return !chest.CheckStorage();
         
-        chestPiece = Context.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
+        chestPiece = context.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
 
         if (chestPiece == null) return false;
             

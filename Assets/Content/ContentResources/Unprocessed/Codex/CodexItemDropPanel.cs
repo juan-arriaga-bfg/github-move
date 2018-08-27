@@ -49,7 +49,7 @@ public class CodexItemDropPanel : MonoBehaviour
     {
         reproductionPanel.gameObject.SetActive(true);
 
-        var currency = itemDef.PieceDef.Reproduction.Currency;
+        var currency = itemDef.PieceDef.ReproductionDef.Reproduction.Currency;
         Sprite sprite = IconService.Current.GetSpriteById(currency);
         pieceIco.sprite = sprite;
     }

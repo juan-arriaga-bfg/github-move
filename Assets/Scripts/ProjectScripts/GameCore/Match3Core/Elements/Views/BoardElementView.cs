@@ -111,7 +111,13 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             var rendererLayerParams = rend.GetComponent<RendererLayerParams>();
             if (rendererLayerParams != null && rendererLayerParams.IsIgnoreRenderLayer) continue;
 
-            var rendererLayer = rend.gameObject.AddComponent<RendererLayer>();
+            var rendererLayer = rend.gameObject.GetComponent<RendererLayer>();
+
+            if (rendererLayer == null)
+            {
+                rendererLayer = rend.gameObject.AddComponent<RendererLayer>();
+            }
+            
             rendererLayer.SortingOrderOffset = rend.sortingOrder;
 
             cachedRenderers.Add(rendererLayer);

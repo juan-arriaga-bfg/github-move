@@ -1,6 +1,9 @@
-﻿public class TouchReactionDefinitionOpenBubble : TouchReactionDefinitionComponent
+﻿using System;
+
+public class TouchReactionDefinitionOpenBubble : TouchReactionDefinitionComponent
 {
 	public ViewType ViewId;
+	public Action<bool> OnChange;
 	
 	private ViewDefinitionComponent viewDef;
 	
@@ -11,7 +14,6 @@
     
 	public override bool Make(BoardPosition position, Piece piece)
 	{
-		
 		piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, position);
         
 		if (viewDef == null)
@@ -23,8 +25,9 @@
         
 		var view = viewDef.AddView(ViewId);
         
+		OnChange?.Invoke(!view.IsShow);
 		view.Change(!view.IsShow);
-        
+		
 		return true;
 	}
 }

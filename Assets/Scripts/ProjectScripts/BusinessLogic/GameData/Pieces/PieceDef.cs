@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-public class PieceDef
+public class PieceDef : SimplePieceDef
 {
-    public string Uid { get; set; }
-    public int Delay { get; set; }
+    public PiecesReproductionDef ReproductionDef;
+    public PiecesMatchConditionsDef MatchConditionsDef;
     
     public string SpawnPiece { get; set; }
     public string UpgradeTargetPiece { get; set; }
@@ -12,16 +12,11 @@ public class PieceDef
     public int SpawnCapacity { get; set; }
     public bool IsFilledInStart { get; set; }
     
-    public int Limit { get; set; }
-    public CurrencyPair StepReward { get; set; }
-    public CurrencyPair Reproduction { get; set; }
-    public CurrencyPair FastPrice { get; set; }
-    
     public CurrencyPair SpawnResources { get; set; }
     public List<CurrencyPair> CreateRewards { get; set; }
     public List<CurrencyPair> UpgradePrices { get; set; }
     public List<CurrencyPair> UnlockBonus { get; set; }
-
+    
     public string Name { get; set; }
      
     private CurrencyDef levelCurrencyDef;
@@ -29,7 +24,6 @@ public class PieceDef
 
     private int upgradeTargetLevel;
     
-    public int Piece => PieceType.Parse(Uid);
     public int SpawnPieceType => PieceType.Parse(SpawnPiece);
 
     public CurrencyDef UpgradeCurrency => levelCurrencyDef ?? (levelCurrencyDef = Currency.GetCurrencyDef($"Level{Uid.Substring(0, Uid.Length - 1)}"));

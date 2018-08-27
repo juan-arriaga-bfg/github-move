@@ -97,6 +97,12 @@ public class FieldControllerComponent : IECSComponent
     
     private void TestField()
     {
+        AddPieces(new BoardPosition(8, 16), PieceType.A1.Id, PieceType.A9.Id);
+        AddPieces(new BoardPosition(10, 16), PieceType.A1.Id, PieceType.A9.Id);
+        AddPieces(new BoardPosition(11, 16), PieceType.A1.Id, PieceType.A9.Id);
+        AddPieces(new BoardPosition(13, 16), PieceType.F1.Id, PieceType.F5.Id);
+        
+        return;
         AddPieces(new BoardPosition(4, 16), PieceType.O1.Id, PieceType.O5.Id);
         AddPieces(new BoardPosition(6, 16), PieceType.OX1.Id, PieceType.OX5.Id);
         

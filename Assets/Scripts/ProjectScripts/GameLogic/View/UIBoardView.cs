@@ -12,6 +12,7 @@ public class UIBoardView : BoardElementView
     protected ViewDefinitionComponent controller;
     protected Piece Context;
 
+    public Action OnShow;
     public Action OnHide;
     
     protected int multiSize;
@@ -107,7 +108,7 @@ public class UIBoardView : BoardElementView
     public virtual void Attention()
     {
         DOTween.Kill(attentionUid);
-
+        
         var pos = viewTransform.localPosition;
         var sequence = DOTween.Sequence().SetId(attentionUid).SetEase(Ease.InOutSine);
 
@@ -130,6 +131,11 @@ public class UIBoardView : BoardElementView
         {
             sequence.Insert(0f, group.DOFade(1, 0.3f));
             sequence.Insert(0F, viewTransform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack));
+            sequence.InsertCallback(0.25f, () =>
+            {
+                OnShow?.Invoke();
+                OnShow = null;
+            });
             return;
         }
         

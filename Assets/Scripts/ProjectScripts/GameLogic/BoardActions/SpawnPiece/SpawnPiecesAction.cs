@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class SpawnPiecesAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-	
-	public virtual int Guid
-	{
-		get { return ComponentGuid; }
-	}
-	
+	public virtual int Guid => ComponentGuid;
+
 	public bool IsCheckMatch { get; set; }
 	public bool IsMatch = false;
 	public BoardPosition At { get; set; }
@@ -36,20 +31,20 @@ public class SpawnPiecesAction : IBoardAction
 		free.RemoveAt(index != -1 ? index : 0);
 		free.Add(At);
 		
-		for (int i = 0; i < pieces.Count; i++)
+		for (var i = 0; i < pieces.Count; i++)
 		{
+			Action onSuccess = () => { };
+
+			if (i == pieces.Count - 1 ) onSuccess = () => { OnSuccessEvent?.Invoke(free); };
+
 			gameBoardController.ActionExecutor.AddAction(new SpawnPieceAtAction
 			{
 				IsCheckMatch = IsCheckMatch,
 				IsMatch = IsMatch,
 				At = free[i],
-				PieceTypeId = pieces[i]
+				PieceTypeId = pieces[i],
+				OnSuccessEvent = position => { onSuccess(); }
 			});
-		}
-
-		if (OnSuccessEvent != null)
-		{
-			OnSuccessEvent(free);
 		}
 		
 		return true;

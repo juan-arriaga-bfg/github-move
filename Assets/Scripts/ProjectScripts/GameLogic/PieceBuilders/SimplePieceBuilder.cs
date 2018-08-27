@@ -10,9 +10,9 @@
 
         if (def == null) return piece;
 
-        if (def.Reproduction != null)
+        if (def.ReproductionDef?.Reproduction != null)
         {
-            var observer = new ReproductionPieceComponent {Child = def.Reproduction};
+            var observer = new ReproductionPieceComponent {Child = def.ReproductionDef.Reproduction};
         
             piece.RegisterComponent(observer);
             AddObserver(piece, observer);

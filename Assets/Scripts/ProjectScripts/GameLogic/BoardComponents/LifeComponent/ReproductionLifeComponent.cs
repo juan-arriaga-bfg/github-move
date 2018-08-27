@@ -2,7 +2,7 @@
 
 public class ReproductionLifeComponent : StorageLifeComponent
 {
-    private PieceDef def;
+    private PiecesReproductionDef def;
     private string childName;
     private TimerComponent cooldown;
     
@@ -17,7 +17,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
     {
         base.OnRegisterEntity(entity);
         
-        def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType);
+        def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType).ReproductionDef;
         
         cooldown = new TimerComponent{Delay = def.Delay, Price = def.FastPrice};
         RegisterComponent(cooldown);

@@ -1,24 +1,26 @@
 ﻿using System.Collections.Generic;
 
-public class DraggablePieceComponent : IECSComponent
+public class DraggablePieceComponent : ECSEntity, ILockerComponent
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-    public int Guid => ComponentGuid;
+    public override int Guid => ComponentGuid;
 
+    private LockerComponent locker;
+    public LockerComponent Locker => locker ?? GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
+    
     protected Piece context;
     
-    public virtual void OnRegisterEntity(ECSEntity entity)
+    public override void OnRegisterEntity(ECSEntity entity)
     {
         context = entity as Piece;
-    }
-
-    public virtual void OnUnRegisterEntity(ECSEntity entity)
-    {
+        
+        locker = new LockerComponent();
+        RegisterComponent(locker);
     }
     
     public virtual bool IsDraggable(BoardPosition at)
     {
-        return true;
+        return !Locker.IsLocked;
     }
     
     public virtual bool IsValidDrag(BoardPosition to)

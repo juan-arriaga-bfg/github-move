@@ -30,7 +30,6 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         if (countForMatchDefault == -1 || countForMatch < countForMatchDefault) return null;
 
         var countForMatchBonus = countForMatchDefault * 2 - 1;
-
         var nextPieces = new List<int>();
 
         if (countForMatch % countForMatchBonus == 0)
@@ -40,8 +39,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         else
         {
             nextPieces = Add(countForMatch / countForMatchDefault, nextType, nextPieces);
-            nextPieces = Add(countForMatch - (countForMatch / countForMatchDefault) * countForMatchDefault, pieceType,
-                nextPieces);
+            nextPieces = Add(countForMatch - (countForMatch / countForMatchDefault) * countForMatchDefault, pieceType, nextPieces);
         }
 
         var nextAction = new SpawnPiecesAction
@@ -52,10 +50,12 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
             IsMatch = true,
             OnSuccessEvent = list =>
             {
-                for (int i = 0; i < list.Count; i++)
+                for (var i = 0; i < list.Count; i++)
                 {
-                    if(nextPieces[i] != pieceType)
-                        SpawnReward(list[i], nextPieces[i]);
+                    if (nextPieces[i] == pieceType) continue;
+                    
+                    SpawnReward(list[i], nextPieces[i]);
+                    StartLock(list[i]);
                 }
             }
         };
@@ -71,7 +71,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
 
     private List<int> Add(int count, int piece, List<int> pieces)
     {
-        for (int i = 0; i < count; i++)
+        for (var i = 0; i < count; i++)
         {
             pieces.Add(piece);
         }
