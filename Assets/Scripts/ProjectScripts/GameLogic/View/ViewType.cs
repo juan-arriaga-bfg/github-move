@@ -15,5 +15,6 @@
     ProductionWarning = -1011,
     Bubble = -1012,
     MergeParticle = -1013,
-    Progress = -1014
+    Progress = -1014,
+    Warning = -1015
 }

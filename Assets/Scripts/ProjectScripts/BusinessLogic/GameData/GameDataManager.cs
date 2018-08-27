@@ -30,7 +30,7 @@ public class ItemWeight
 
     public override string ToString()
     {
-        return string.Format("Uid: {0} - Weight: {1} - Override: {2}", Uid, Weight, Override);
+        return $"Uid: {Uid} - Weight: {Weight} - Override: {Override}";
     }
 
     public static ItemWeight GetRandomItem(List<ItemWeight> weights, bool isExclude = false)
@@ -104,145 +104,53 @@ public class GameDataManager : ECSEntity,
     IShopDataManager, IFieldDataManager, ICodexDataManager
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
+    public override int Guid => ComponentGuid;
 
-    public override int Guid
-    {
-        get { return ComponentGuid; }
-    }
-    
     private ChestsDataManager chestsManager;
-    public ChestsDataManager ChestsManager
-    {
-        get
-        {
-            return chestsManager ?? (chestsManager = GetComponent<ChestsDataManager>(ChestsDataManager.ComponentGuid));
-        }
-    }
+    public ChestsDataManager ChestsManager => chestsManager ?? (chestsManager = GetComponent<ChestsDataManager>(ChestsDataManager.ComponentGuid));
 
     private EnemiesDataManager enemiesManager;
-    public EnemiesDataManager EnemiesManager
-    {
-        get
-        {
-            return enemiesManager ??
-                   (enemiesManager = GetComponent<EnemiesDataManager>(EnemiesDataManager.ComponentGuid));
-        }
-    }
+    public EnemiesDataManager EnemiesManager => enemiesManager ?? (enemiesManager = GetComponent<EnemiesDataManager>(EnemiesDataManager.ComponentGuid));
 
     private HeroesDataManager heroesManager;
-    public HeroesDataManager HeroesManager
-    {
-        get
-        {
-            return heroesManager ?? (heroesManager = GetComponent<HeroesDataManager>(HeroesDataManager.ComponentGuid));
-        }
-    }
+    public HeroesDataManager HeroesManager => heroesManager ?? (heroesManager = GetComponent<HeroesDataManager>(HeroesDataManager.ComponentGuid));
 
     private PiecesDataManager piecesManager;
-    public PiecesDataManager PiecesManager
-    {
-        get
-        {
-            return piecesManager ?? (piecesManager = GetComponent<PiecesDataManager>(PiecesDataManager.ComponentGuid));
-        }
-    }
+    public PiecesDataManager PiecesManager => piecesManager ?? (piecesManager = GetComponent<PiecesDataManager>(PiecesDataManager.ComponentGuid));
 
     private CollectionDataManager collectionManager;
-    public CollectionDataManager CollectionManager
-    {
-        get
-        {
-            return collectionManager ?? (collectionManager = GetComponent<CollectionDataManager>(CollectionDataManager.ComponentGuid));
-        }
-    }
+    public CollectionDataManager CollectionManager => collectionManager ?? (collectionManager = GetComponent<CollectionDataManager>(CollectionDataManager.ComponentGuid));
 
     private LevelsDataManager levelsManager;
-    public LevelsDataManager LevelsManager
-    {
-        get
-        {
-            return levelsManager ?? (levelsManager = GetComponent<LevelsDataManager>(LevelsDataManager.ComponentGuid));
-        }
-    }
+    public LevelsDataManager LevelsManager => levelsManager ?? (levelsManager = GetComponent<LevelsDataManager>(LevelsDataManager.ComponentGuid));
 
     private TasksDataManager tasksManager;
-    public TasksDataManager TasksManager
-    {
-        get { return tasksManager ?? (tasksManager = GetComponent<TasksDataManager>(TasksDataManager.ComponentGuid)); }
-    }
+    public TasksDataManager TasksManager => tasksManager ?? (tasksManager = GetComponent<TasksDataManager>(TasksDataManager.ComponentGuid));
 
     private ProductionDataManager productionManager;
-    public ProductionDataManager ProductionManager
-    {
-        get
-        {
-            return productionManager ?? (productionManager = GetComponent<ProductionDataManager>(ProductionDataManager.ComponentGuid));
-        }
-    }
-    
+    public ProductionDataManager ProductionManager => productionManager ?? (productionManager = GetComponent<ProductionDataManager>(ProductionDataManager.ComponentGuid));
+
     private FogsDataManager fogsManager;
-    public FogsDataManager FogsManager
-    {
-        get
-        {
-            return fogsManager ?? (fogsManager = GetComponent<FogsDataManager>(FogsDataManager.ComponentGuid));
-        }
-    }
-    
+    public FogsDataManager FogsManager => fogsManager ?? (fogsManager = GetComponent<FogsDataManager>(FogsDataManager.ComponentGuid));
+
     private QuestsDataManager questsManager;
-    public QuestsDataManager QuestsManager
-    {
-        get
-        {
-            return questsManager ?? (questsManager = GetComponent<QuestsDataManager>(QuestsDataManager.ComponentGuid));
-        }
-    }
-    
+    public QuestsDataManager QuestsManager => questsManager ?? (questsManager = GetComponent<QuestsDataManager>(QuestsDataManager.ComponentGuid));
+
     private ObstaclesDataManager obstaclesManager;
-    public ObstaclesDataManager ObstaclesManager
-    {
-        get
-        {
-            return obstaclesManager ?? (obstaclesManager = GetComponent<ObstaclesDataManager>(ObstaclesDataManager.ComponentGuid));
-        }
-    }
-    
+    public ObstaclesDataManager ObstaclesManager => obstaclesManager ?? (obstaclesManager = GetComponent<ObstaclesDataManager>(ObstaclesDataManager.ComponentGuid));
+
     private MinesDataManager minesManager;
-    public MinesDataManager MinesManager
-    {
-        get
-        {
-            return minesManager ?? (minesManager = GetComponent<MinesDataManager>(MinesDataManager.ComponentGuid));
-        }
-    }
-    
+    public MinesDataManager MinesManager => minesManager ?? (minesManager = GetComponent<MinesDataManager>(MinesDataManager.ComponentGuid));
+
     private ShopDataManager shopManager;
-    public ShopDataManager ShopManager
-    {
-        get
-        {
-            return shopManager ?? (shopManager = GetComponent<ShopDataManager>(ShopDataManager.ComponentGuid));
-        }
-    }
-    
+    public ShopDataManager ShopManager => shopManager ?? (shopManager = GetComponent<ShopDataManager>(ShopDataManager.ComponentGuid));
+
     private FieldDataManager fieldManager;
-    public FieldDataManager FieldManager
-    {
-        get
-        {
-            return fieldManager ?? (fieldManager = GetComponent<FieldDataManager>(FieldDataManager.ComponentGuid));
-        }
-    }
-    
+    public FieldDataManager FieldManager => fieldManager ?? (fieldManager = GetComponent<FieldDataManager>(FieldDataManager.ComponentGuid));
+
     private CodexDataManager codexManager;
-    public CodexDataManager CodexManager
-    {
-        get
-        {
-            return codexManager ?? (codexManager = GetComponent<CodexDataManager>(CodexDataManager.ComponentGuid));
-        }
-    }
-    
+    public CodexDataManager CodexManager => codexManager ?? (codexManager = GetComponent<CodexDataManager>(CodexDataManager.ComponentGuid));
+
     public void SetupComponents()
     {
         RegisterComponent(new ChestsDataManager());
@@ -268,9 +176,7 @@ public class GameDataManager : ECSEntity,
         {
             var manager = component as IDataManager;
 
-            if (manager == null) continue;
-
-            manager.Reload();
+            manager?.Reload();
         }
     }
 }

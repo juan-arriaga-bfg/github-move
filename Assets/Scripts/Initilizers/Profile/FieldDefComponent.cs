@@ -16,6 +16,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	private List<StorageSaveItem> storages;
 	private List<ResourceSaveItem> resources;
 	private List<ProductionSaveItem> productions;
+	private List<BuildingSaveItem> buildings;
 	
 	private string completeFogs;
 	private string movedMines;
@@ -83,6 +84,13 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		get { return productions; }
 		set { productions = value; }
 	}
+	
+	[JsonProperty]
+	public List<BuildingSaveItem> Buildings
+	{
+		get { return buildings; }
+		set { buildings = value; }
+	}
 
 	public List<BoardPosition> CompleteFogPositions;
 	public List<BoardPosition> MovedMinePositions;
@@ -90,6 +98,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	
 	private Dictionary<BoardPosition, StorageSaveItem> storageSave;
 	private Dictionary<BoardPosition, LifeSaveItem> lifeSave;
+	private Dictionary<BoardPosition, BuildingSaveItem> buildingSave;
 	
 	[OnSerializing]
 	internal void OnSerialization(StreamingContext context)
@@ -106,6 +115,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		lifes = new List<LifeSaveItem>();
 		storages = new List<StorageSaveItem>();
 		productions = new List<ProductionSaveItem>();
+		buildings = new List<BuildingSaveItem>();
 		
 		resources = GetResourceSave();
 		
@@ -125,6 +135,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			}
 			
 			lifes.AddRange(GetLifeSave(board.BoardLogic, item.Value));
+			buildings.AddRange(GetBuildingSave(board.BoardLogic, item.Value));
 			
 //			productions.AddRange(GetProductionSave(board.BoardLogic, item.Value));
 		}
@@ -152,6 +163,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	{
 		storageSave = new Dictionary<BoardPosition, StorageSaveItem>();
 		lifeSave = new Dictionary<BoardPosition, LifeSaveItem>();
+		buildingSave = new Dictionary<BoardPosition, BuildingSaveItem>();
 		
 		CompleteFogPositions = StringToPositions(completeFogs);
 		MovedMinePositions = StringToPositions(movedMines);
@@ -172,7 +184,15 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 				lifeSave.Add(life.Position, life);
 			}
 		}
-
+		
+		if (buildings != null)
+		{
+			foreach (var building in buildings)
+			{
+				buildingSave.Add(building.Position, building);
+			}
+		}
+		
 		if (string.IsNullOrEmpty(remowedMines) == false)
 		{
 			var data = remowedMines.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
@@ -208,6 +228,20 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		}
 
 		lifeSave.Remove(position);
+		
+		return item;
+	}
+	
+	public BuildingSaveItem GetBuildingSave(BoardPosition position)
+	{
+		BuildingSaveItem item;
+		
+		if (buildingSave == null || buildingSave.TryGetValue(position, out item) == false)
+		{
+			return null;
+		}
+
+		buildingSave.Remove(position);
 		
 		return item;
 	}
@@ -373,6 +407,30 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 				State = component.State,
 				StartTime = component.Timer.StartTimeLong,
 				Storage = storage
+			};
+			
+			items.Add(item);
+		}
+		
+		return items;
+	}
+	
+	private List<BuildingSaveItem> GetBuildingSave(BoardLogicComponent logic, List<BoardPosition> positions)
+	{
+		var items = new List<BuildingSaveItem>();
+		
+		foreach (var position in positions)
+		{
+			var piece = logic.GetPieceAt(position);
+			var component = piece?.GetComponent<PieceStateComponent>(PieceStateComponent.ComponentGuid);
+			
+			if(component == null || component.State == BuildingState.Complete) continue;
+			
+			var item = new BuildingSaveItem{
+				Id = piece.PieceType,
+				Position = position,
+				State = component.State,
+				StartTime = component.Timer.StartTimeLong,
 			};
 			
 			items.Add(item);

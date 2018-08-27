@@ -248,6 +248,7 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.Bubble, R.BubbleView);
         dict.Add((int)ViewType.MergeParticle, R.MergeParticleSystem);
         dict.Add((int)ViewType.Progress, R.BoardProgressView);
+        dict.Add((int)ViewType.Warning, R.Warning);
         return dict;
     }
 }

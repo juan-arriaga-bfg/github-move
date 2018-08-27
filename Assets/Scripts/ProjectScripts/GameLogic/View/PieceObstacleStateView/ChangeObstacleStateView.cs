@@ -12,6 +12,8 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
     public override Vector3 Ofset => new Vector3(0, 1.5f);
     
     protected override ViewType Id => ViewType.ObstacleState;
+
+    private bool isAddListener;
     
     public override void SetOfset()
     {
@@ -26,15 +28,12 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
         
         if(life == null) return;
         
-        Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
-        
         bar.Init(life.HP);
 
-        if (life.IsUseCooldown)
-        {
-            life.Timer.OnExecute += UpdateButtonText;
-            life.Timer.OnComplete += UpdateButtonText;
-        }
+        if (life.IsUseCooldown == false) return;
+        
+        life.Timer.OnExecute += UpdateButtonText;
+        life.Timer.OnComplete += UpdateButtonText;
     }
     
     public override void ResetViewOnDestroy()
@@ -52,7 +51,9 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
     {
         Context.Context.HintCooldown.IsPaused = isVisible;
         base.UpdateVisibility(isVisible);
-
+        
+        UpdateListener(isVisible);
+        
         if (IsShow == false) return;
         
         message.Text = life.Message;
@@ -60,10 +61,20 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
         
         bar.UpdateValue(life.GetProgress, life.GetProgressNext);
     }
-
+    
     private void UpdateButtonText()
     {
         price.Text = life.Price;
+    }
+    
+    private void UpdateListener(bool value)
+    {
+        if(isAddListener == value) return;
+        
+        isAddListener = value;
+        
+        if(isAddListener) Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
+        else Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
     }
     
     public void Clear()

@@ -26,12 +26,16 @@ public class PartPiecesLogicComponent : IECSComponent
         if(bubble.ContainsKey(position)) return;
         
         var piece = context.BoardLogic.GetPieceAt(position);
-        var view = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
+        var viewDef = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
         
-        if(view == null) return;
+        if(viewDef == null) return;
         
-        bubble.Add(position, view);
-        view.AddView(ViewType.Bubble).Change(true);
+        bubble.Add(position, viewDef);
+        
+        var view = viewDef.AddView(ViewType.Bubble) as BubbleView;
+        
+        view.SetData("Build Castle?", "Sure!", OnClick);
+        view.Change(true);
     }
 
     public void Remove(List<BoardPosition> positions)
@@ -45,5 +49,14 @@ public class PartPiecesLogicComponent : IECSComponent
         
         bubble.Remove(position);
         view.AddView(ViewType.Bubble).Change(false);
+    }
+
+    private void OnClick(Piece piece)
+    {
+        var action = piece.Context.BoardLogic.MatchActionBuilder.GetMatchAction(new List<BoardPosition>(), piece.PieceType, piece.CachedPosition);
+        
+        if(action == null) return;
+        
+        piece.Context.ActionExecutor.AddAction(action);
     }
 }

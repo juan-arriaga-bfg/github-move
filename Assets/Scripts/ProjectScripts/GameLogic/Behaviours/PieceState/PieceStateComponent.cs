@@ -1,6 +1,7 @@
 ﻿using System;
+using UnityEngine;
 
-public enum PieceLifeState
+public enum BuildingState
 {
     Waiting,
     Warning,
@@ -8,31 +9,40 @@ public enum PieceLifeState
     Complete
 }
 
-public class PieceStateComponent : ECSEntity
+public class PieceStateComponent : ECSEntity, IPieceBoardObserver
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
     
     public TimerComponent Timer;
-    public Action OnChange;
+    public Action OnChangeState;
     
     private Piece context;
+    private ViewDefinitionComponent viewDef;
     
-    private BoardTimerView view;
+    private string key => context.CachedPosition.ToSaveString();
     
-    private PieceLifeState state;
-    public PieceLifeState State
+    private BuildingState state;
+    public BuildingState State
     {
         get { return state; }
         set
         {
             state = value;
             
-            OnChange?.Invoke();
+            OnChangeState?.Invoke();
+
+            switch (state)
+            {
+                case BuildingState.Waiting:
+                    OnWaiting();
+                    break;
+                case BuildingState.InProgress:
+                    OnStart();
+                    break;
+            }
             
-            if (state == PieceLifeState.InProgress) OnStart();
-            
-            if (state == PieceLifeState.Complete)
+            if (state == BuildingState.Complete)
             {
                 context.Matchable?.Locker.Unlock(this);
                 return;
@@ -45,34 +55,98 @@ public class PieceStateComponent : ECSEntity
     public override void OnRegisterEntity(ECSEntity entity)
     {
         context = entity as Piece;
-        State = PieceLifeState.Complete;
         
-        Timer = new TimerComponent{Delay = 10};
+        var def = GameDataService.Current.PiecesManager.GetPieceDef(context.PieceType);
+        
+        viewDef = context.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
+        State = BuildingState.Complete;
+        
+        Timer = new TimerComponent{Delay = def.MatchConditionsDef.Delay, Price = def.MatchConditionsDef.FastPrice};
         Timer.OnComplete += OnComplete;
         RegisterComponent(Timer);
     }
-
-    private bool InitInitInSave(BoardPosition position)
+    
+    public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        return false;
+        var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+        var item = save?.GetBuildingSave(position);
+        
+        if (item == null) return;
+
+        if (State == BuildingState.InProgress)
+        {
+            Timer.Start(item.StartTime);
+        }
+        
+        State = item.State;
+    }
+
+    public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
+    {
+    }
+
+    public void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
+    {
+    }
+
+    public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
+    {
+    }
+
+    private void OnWaiting()
+    {
+        var view = viewDef.AddView(ViewType.Bubble) as BubbleView;
+        
+        view.OnHide = () => { State = BuildingState.Warning; };
+        view.SetData("Build Piece?", $"Send <sprite name={Currency.Worker.Name}>", piece => OnClick(), true, false);
+        view.Change(true);
+    }
+
+    public void OnChange()
+    {
+        switch (state)
+        {
+            case BuildingState.Waiting:
+                viewDef.AddView(ViewType.Bubble).Change(false);
+                break;
+            case BuildingState.Warning:
+                State = BuildingState.Waiting;
+                break;
+        }
+    }
+
+    private void OnClick()
+    {
+        if(context.Context.WorkerLogic.Get(key, Timer.Delay) == false) return;
+        
+        var view = viewDef.AddView(ViewType.Bubble);
+        
+        view.OnHide = null;
+        view.Change(false);
+        
+        State = BuildingState.InProgress;
     }
 
     private void OnStart()
     {
-        if (view == null)
-        {
-            var viewDef = context.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
-            view = viewDef.AddView(ViewType.BoardTimer) as BoardTimerView;
-        }
+        var view = viewDef.AddView(ViewType.BoardTimer) as BoardTimerView;
         
         view.SetTimer(Timer);
-        Timer.Start();
         view.Change(true);
+        
+        if(Timer.IsStarted == false) Timer.Start();
+    }
+    
+    public void Fast()
+    {
+        Timer.Stop();
+        Timer.OnComplete();
+        context.Context.WorkerLogic.Return(key);
     }
     
     private void OnComplete()
     {
-        view.Change(false);
-        State = PieceLifeState.Complete;
+        viewDef.AddView(ViewType.BoardTimer).Change(false);
+        State = BuildingState.Complete;
     }
 }

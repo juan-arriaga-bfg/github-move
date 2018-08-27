@@ -11,7 +11,7 @@ public class LockerComponent : IECSComponent
 
 	public virtual void Lock(object locker, bool multiple = true)
 	{
-		if (multiple == false && lockers.FindAll(item => item == lockers).Count > 0) return;
+		if (multiple == false && lockers.FindAll(item => item == locker).Count > 0) return;
 		
 		lockers.Add(locker);
 	}
@@ -20,7 +20,7 @@ public class LockerComponent : IECSComponent
 	{
 		if (all)
 		{
-			var items = lockers.FindAll(item => item == lockers);
+			var items = lockers.FindAll(item => item == locker);
 
 			foreach (var item in items)
 			{

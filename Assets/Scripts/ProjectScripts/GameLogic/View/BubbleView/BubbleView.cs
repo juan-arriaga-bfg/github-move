@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
-public class BubbleView : UIBoardView
+public class BubbleView : UIBoardView, IBoardEventListener
 {
     [SerializeField] private NSText message;
     [SerializeField] private NSText button;
@@ -10,31 +10,62 @@ public class BubbleView : UIBoardView
 
     public override Vector3 Ofset => new Vector3(0, 2f);
 
+    private Action<Piece> onClick;
+    
+    private bool isPausedHint;
+    private bool isIgnoreHide;
+    private bool isAddListener;
+
     public override void Init(Piece piece)
     {
         base.Init(piece);
 		
         Priority = defaultPriority = 0;
     }
-    
-    protected override void UpdateView()
-    {
-        message.Text = "Build Castle?";
-        button.Text = "Sure!";
-    }
 
+    public void SetData(string message, string button, Action<Piece> onClick, bool isPausedHint = true, bool isIgnoreHide = true)
+    {
+        this.message.Text = message;
+        this.button.Text = button;
+        this.onClick = onClick;
+
+        this.isPausedHint = isPausedHint;
+        this.isIgnoreHide = isIgnoreHide;
+        
+        Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
+        
+        if (isIgnoreHide) return;
+        
+        Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
+    }
+    
     public override void UpdateVisibility(bool isVisible)
     {
         base.UpdateVisibility(isVisible);
-        Context.Context.HintCooldown.IsPaused = isVisible;
+        
+        if(isPausedHint) Context.Context.HintCooldown.IsPaused = isVisible;
+        if(isIgnoreHide == false) UpdateListener(isVisible);
+    }
+    
+    private void UpdateListener(bool value)
+    {
+        if(isAddListener == value) return;
+        
+        isAddListener = value;
+        
+        if(isAddListener) Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
+        else Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
+    }
+    
+    public void OnBoardEvent(int code, object context)
+    {
+        if (code != GameEventsCodes.ClosePieceUI || context is BoardPosition && ((BoardPosition) context).Equals(Context.CachedPosition)) return;
+		
+        Change(false);
     }
 
     public void Сollect()
     {
-        var action = Context.Context.BoardLogic.MatchActionBuilder.GetMatchAction(new List<BoardPosition>(), Context.PieceType, Context.CachedPosition);
-        
-        if(action == null) return;
-        
-        Context.Context.ActionExecutor.AddAction(action);
+        onClick?.Invoke(Context);
     }
 }

@@ -11,7 +11,6 @@ public class GenericPieceBuilder : IPieceBuilder
         piece.RegisterComponent(new PieceBoardObserversComponent());
         piece.RegisterComponent(new CachedPiecePositionComponent());
 
-        AddStateComponent(piece);
         AddMatchableComponent(piece);
         
         return piece;
@@ -33,15 +32,6 @@ public class GenericPieceBuilder : IPieceBuilder
     protected virtual void AddMatchableComponent(Piece piece)
     {
         piece.RegisterComponent(new MatchablePieceComponent());
-    }
-
-    private void AddStateComponent(Piece piece)
-    {
-        if ((piece.PieceType <= PieceType.A2.Id || piece.PieceType > PieceType.A9.Id) &&
-            (piece.PieceType <= PieceType.C2.Id || piece.PieceType > PieceType.C9.Id)) return;
-        
-        CreateViewComponent(piece);
-        piece.RegisterComponent(new PieceStateComponent());
     }
     
     protected void AddObserver(Piece piece, IPieceBoardObserver observer)

@@ -17,12 +17,11 @@ public class DefaultMatchActionBuilder
         }
     }
     
-    
     protected void StartLock(BoardPosition position)
     {
         var logic = BoardService.Current.GetBoardById(0).BoardLogic;
         var piece = logic.GetPieceAt(position);
 
-        if (piece?.PieceState != null) piece.PieceState.State = PieceLifeState.InProgress;
+        if (piece?.PieceState != null) piece.PieceState.State = BuildingState.Waiting;
     }
 }

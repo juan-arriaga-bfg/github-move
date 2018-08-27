@@ -183,7 +183,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1750098563008886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e94db1dff9a4341a9922139f675b17, type: 3}
+  m_Script: {fileID: 11500000, guid: b417249933ed1444d9155c0a93fc2e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsFading: 0
@@ -194,6 +194,7 @@ MonoBehaviour:
     type: 0}
   defaultSelectionMaterial: {fileID: 2100000, guid: d55a16b9364b048ba884d5ede8dae221,
     type: 2}
+  lockedMaterial: {fileID: 2100000, guid: 1b93d1c97a7697840bb4fb1f9377e698, type: 2}
 --- !u!212 &212255801457870824
 SpriteRenderer:
   m_ObjectHideFlags: 1

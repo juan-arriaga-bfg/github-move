@@ -1,18 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PiecesDataManager : IECSComponent, IDataManager, IDataLoader<List<PieceDef>>
+public class PiecesDataManager : ECSEntity, IDataManager, IDataLoader<List<PieceDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-    public int Guid => ComponentGuid;
+    public override int Guid => ComponentGuid;
 
-    public void OnRegisterEntity(ECSEntity entity)
+    public override void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
-    }
-
-    public void OnUnRegisterEntity(ECSEntity entity)
-    {
+        RegisterComponent(new PiecesMatchConditionsManager());
+        RegisterComponent(new PiecesReproductionDataManager());
     }
     
     public const int ReproductionDelay = 20;
@@ -32,6 +30,12 @@ public class PiecesDataManager : IECSComponent, IDataManager, IDataLoader<List<P
         pieces = null;
         
         LoadData(new ResourceConfigDataMapper<List<PieceDef>>("configs/pieces.data", NSConfigsSettings.Instance.IsUseEncryption));
+        
+        foreach (var component in componentsCache.Values)
+        {
+            var manager = component as IDataManager;
+            manager?.Reload();
+        }
     }
     
     public void LoadData(IDataMapper<List<PieceDef>> dataMapper)
@@ -44,14 +48,10 @@ public class PiecesDataManager : IECSComponent, IDataManager, IDataLoader<List<P
                 
                 foreach (var def in data)
                 {
-                    if (pieces.ContainsKey(def.Piece))
-                    {
-                        continue;
-                    }
+                    if (pieces.ContainsKey(def.Id)) continue;
 
                     AssignFilters(def);
-                    
-                    pieces.Add(def.Piece, def);
+                    pieces.Add(def.Id, def);
                 }
             }
             else
@@ -63,13 +63,7 @@ public class PiecesDataManager : IECSComponent, IDataManager, IDataLoader<List<P
 
     private void AssignFilters(PieceDef pieceDef)
     {
-        PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceDef.Piece);
-
-        if (pieceDef.Reproduction != null)
-        {
-            pieceTypeDef.Filter = pieceTypeDef.Filter.Add(PieceTypeFilter.Reproduction);
-            // Debug.Log($"Add Reproduction filter to {pieceTypeDef.Abbreviations[0]}");
-        }
+        PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceDef.Id);
         
         if (pieceDef.SpawnResources != null && pieceDef.SpawnResources.Currency == Currency.Energy.Name)
         {

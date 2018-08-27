@@ -210,4 +210,5 @@ public class R
      public const string BoardProgressView = "BoardProgressView";
      public const string G5Piece = "G5Piece";
      public const string H5Piece = "H5Piece";
+     public const string Warning = "Warning";
 }
