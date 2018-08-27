@@ -72,11 +72,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         var item = save?.GetBuildingSave(position);
         
         if (item == null) return;
-
-        if (State == BuildingState.InProgress)
-        {
-            Timer.Start(item.StartTime);
-        }
+        if (item.State == BuildingState.InProgress) Timer.Start(item.StartTime);
         
         State = item.State;
     }
@@ -133,8 +129,8 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         
         view.SetTimer(Timer);
         view.Change(true);
-        
-        if(Timer.IsStarted == false) Timer.Start();
+
+        if (Timer.IsStarted == false) Timer.Start();
     }
     
     public void Fast()
