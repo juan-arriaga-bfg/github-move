@@ -7,10 +7,7 @@ public class DragAndCheckMatchAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
-	public virtual int Guid
-	{
-		get { return ComponentGuid; }
-	}
+	public virtual int Guid => ComponentGuid;
 
 	public BoardPosition From { get; set; }
 	public BoardPosition To { get; set; }
@@ -230,11 +227,11 @@ public class DragAndCheckMatchAction : IBoardAction
 		
 		var pieceFrom = logic.GetPieceAt(From);
 		var pieceTo = logic.GetPieceAt(To);
-		
-		IBoardAction action;
 
-		if (pieceFrom.PieceType == pieceTo.PieceType)
+		if (pieceFrom.PieceType == PieceType.Magic.Id || pieceFrom.PieceType == pieceTo.PieceType)
 		{
+			IBoardAction action;
+			
 			if (pieceFrom.Matchable.IsMatchable() && CheckMatch(board, new List<BoardPosition> {From}, out action))
 			{
 				board.ActionExecutor.PerformAction(action);

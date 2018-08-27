@@ -23,6 +23,8 @@ public class PieceBuildersBuilder
     {
         dict = AddSimplePiece<PartPieceBuilder>(PieceType.Zord1.Id, PieceType.Zord4.Id, dict);
         
+        dict.Add(PieceType.Magic.Id, new SimplePieceBuilder());
+        
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.A1.Id, PieceType.A2.Id, dict);
         dict = AddSimplePiece<BuildingPieceBuilder>(PieceType.A3.Id, PieceType.A9.Id, dict);
         

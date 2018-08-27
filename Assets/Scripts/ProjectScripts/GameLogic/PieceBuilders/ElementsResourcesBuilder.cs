@@ -152,6 +152,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Zord3.Id, R.Zord3Piece);
         dict.Add(PieceType.Zord4.Id, R.Zord4Piece);
         
+        dict.Add(PieceType.Magic.Id, R.MagicPiece);
+        
         return dict;
     }
 

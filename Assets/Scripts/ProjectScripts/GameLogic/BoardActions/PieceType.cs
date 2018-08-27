@@ -24,7 +24,7 @@ public partial class PieceTypeDef
 
 public static partial class PieceType 
 {
-    private readonly static Dictionary<int, PieceTypeDef> defs = new Dictionary<int, PieceTypeDef>();
+    private static readonly Dictionary<int, PieceTypeDef> defs = new Dictionary<int, PieceTypeDef>();
     
     static PieceType()
     {
@@ -268,4 +268,6 @@ public static partial class PieceType
     public static readonly PieceTypeDef Zord3 = new PieceTypeDef{Id = 20003, Abbreviations = new List<string>{ "Zord3" }};
     public static readonly PieceTypeDef Zord4 = new PieceTypeDef{Id = 20004, Abbreviations = new List<string>{ "Zord4" }};
     public static readonly PieceTypeDef MegaZord = new PieceTypeDef{Id = 20000, Abbreviations = new List<string>{ "MegaZord" }};
+    
+    public static readonly PieceTypeDef Magic = new PieceTypeDef{Id = 1000000, Abbreviations = new List<string>{ "Magic" }};
 }
