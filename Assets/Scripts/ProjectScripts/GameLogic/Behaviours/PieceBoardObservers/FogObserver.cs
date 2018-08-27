@@ -127,7 +127,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void UpdateResource(int offset)
     {
-        if(thisContext.Pathfinder.CanPathToCastle(thisContext) == false || storageItem.Amount < level) return;
+        if(thisContext.Context.Pathfinder.CanPathToCastle(thisContext) == false || storageItem.Amount < level) return;
         
         view = viewDef.AddView(ViewType.FogState);
         

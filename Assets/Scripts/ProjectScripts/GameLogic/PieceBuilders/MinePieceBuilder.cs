@@ -31,9 +31,8 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 				 .RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.ObstacleState})
 				 .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage{IsAutoStart = false}))
 			 .RegisterComponent(new TouchReactionConditionStorage()))
-			 .RegisterComponent(new PathfinderComponent()
-				 .RegisterComponent(new PiecePathfindBoardCondition(context, piece)
-					 .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType))));
+			 .RegisterComponent(new PiecePathfindBoardCondition(context, piece)
+			 	.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
         
 		return piece;
 	}

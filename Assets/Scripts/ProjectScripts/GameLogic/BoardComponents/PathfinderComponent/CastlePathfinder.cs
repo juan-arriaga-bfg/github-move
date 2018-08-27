@@ -20,6 +20,6 @@ public static class CastlePathfinder
             var height = mask[mask.Count-1].Y + 1;
             var targetPositions = new HashSet<BoardPosition>(BoardPosition.GetRect(castlePosition.DownAtDistance(2).LeftAtDistance(2), width + 4, height + 4));
             
-            return pathfinder.HasPath(from, targetPositions);
+            return pathfinder.HasPath(from, targetPositions, piece);
       }
 }

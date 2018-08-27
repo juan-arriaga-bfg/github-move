@@ -4,7 +4,7 @@ using UnityEngine;
 public class BoardController : ECSEntity,
     IActionExecuteComponent, IBoardEventsComponent, IBoardLoggerComponent, IBoardLogicComponent, IBoardDefinitionComponent, IBoardStatesComponent, ISessionBoardStateComponent,
     IBoardSystemProcessor, IBoardRendererComponent, IBoardManipulatorComponent, IBoardRandomComponent, IReproductionLogicComponent, IEnemiesLogicComponent,
-    IProductionLogicComponent, IWorkerCurrencyLogicComponent, IHintCooldownComponent, IPartPiecesLogicComponent
+    IProductionLogicComponent, IWorkerCurrencyLogicComponent, IHintCooldownComponent, IPartPiecesLogicComponent, IPathfinderComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
@@ -108,6 +108,12 @@ public class BoardController : ECSEntity,
         get { return partPiecesLogic ?? (partPiecesLogic = GetComponent<PartPiecesLogicComponent>(PartPiecesLogicComponent.ComponentGuid)); }
     }
     
+    protected PathfinderComponent pathfinderComponent;
+    public PathfinderComponent Pathfinder
+    {
+        get { return pathfinderComponent ?? (pathfinderComponent = GetComponent<PathfinderComponent>(PathfinderComponent.ComponentGuid)); }
+    }
+    
     private Dictionary<int, IPieceBuilder> pieceBuilderDef;
 
     public virtual void Init(Dictionary<int, IPieceBuilder> pieceBuilderDef)
@@ -164,5 +170,4 @@ public class BoardController : ECSEntity,
             return random;
         }
     }
-
 }

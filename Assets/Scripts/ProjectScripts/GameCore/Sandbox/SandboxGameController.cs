@@ -63,6 +63,8 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.RegisterComponent(new BoardManipulatorComponent()
             .RegisterComponent(new LockerComponent())); // user manipualtor
+
+        boardController.RegisterComponent(new PathfinderComponent());
         
         boardController.RegisterComponent(new BoardDefinitionComponent
         {

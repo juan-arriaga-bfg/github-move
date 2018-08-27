@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchablePiece, IDraggablePiece, IMulticellularPiece, IPathfinderComponent
+public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchablePiece, IDraggablePiece, IMulticellularPiece, IBoardConditionComponent
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -29,9 +29,9 @@ public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchab
     
     private MulticellularPieceBoardObserver multicellular;
     public MulticellularPieceBoardObserver Multicellular => multicellular ?? (multicellular = GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid));
-    
-    private PathfinderComponent pathfinder;
-    public PathfinderComponent Pathfinder => pathfinder ?? (pathfinder = GetComponent<PathfinderComponent>(PathfinderComponent.ComponentGuid));
+
+    private BoardConditionComponent boardCondition;
+    public BoardConditionComponent BoardCondition => boardCondition ?? (boardCondition = GetComponent<BoardConditionComponent>(BoardConditionComponent.ComponentGuid));
     
     public PieceBoardElementView ActorView
     {
@@ -55,4 +55,6 @@ public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchab
         var currentPiece = Context.BoardLogic.GetPieceAt(piecePosition);
         return currentPiece == this;
     }
+
+    
 }

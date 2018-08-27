@@ -5,31 +5,40 @@ using System.Linq;
 public class PathfinderComponent:ECSEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-    
-    private BoardConditionComponent boardCondition;
-    public BoardConditionComponent BoardCondition => boardCondition ?? (boardCondition = GetComponent<BoardConditionComponent>(BoardConditionComponent.ComponentGuid));
-
     public override int Guid => ComponentGuid;
 
-    //A* pathfinding algorithm
-    public virtual bool HasPath(BoardPosition from, HashSet<BoardPosition> to)
+    protected Predicate<BoardPosition> GetCondition(Piece piece)
     {
+        var boardCondition = piece?.BoardCondition;
+        if (boardCondition == null)
+            return (_) => true;
+        return boardCondition.Check;
+    }
+    
+    //A* pathfinding algorithm
+    public virtual bool HasPath(BoardPosition from, HashSet<BoardPosition> to,
+        Piece piece = null)
+    {
+
         to = new HashSet<BoardPosition>(to.Where(elem => from.Z == elem.Z));
         if (to.Count == 0)
             return false;
+        
         //Init locals
         var checkedPositions = new HashSet<BoardPosition>();
         var uncheckedPositions = new HashSet<BoardPosition>();
-        
+
         var costMap = new Dictionary<BoardPosition, int>();
         var predictionCosts = new Dictionary<BoardPosition, int>();
+
+        Predicate<BoardPosition> fieldCondition = GetCondition(piece);
         
         //Init start node data
         uncheckedPositions.Add(from);
 
         costMap[from] = 0;
         predictionCosts[from] = Heuristic(from, to.First());
-
+        
         //Begin pathfinding
         while (uncheckedPositions.Count > 0)
         {
@@ -40,7 +49,7 @@ public class PathfinderComponent:ECSEntity
             uncheckedPositions.Remove(current);
             checkedPositions.Add(current);
 
-            var availiablePositions = AvailiablePositions(current, checkedPositions);
+            var availiablePositions = AvailiablePositions(current, checkedPositions, fieldCondition);
             
             //Init neighbour positions data
             for (int i = 0; i < availiablePositions.Count; i++)
@@ -64,9 +73,9 @@ public class PathfinderComponent:ECSEntity
         return false;
     }
     
-    public virtual bool HasPath(BoardPosition from, BoardPosition to)
+    public virtual bool HasPath(BoardPosition from, BoardPosition to, Piece piece = null)
     {
-        return HasPath(from, new HashSet<BoardPosition> {to});
+        return HasPath(from, new HashSet<BoardPosition> {to}, piece);
     }
 
     private BoardPosition FindPosWithMinimalCost(Dictionary<BoardPosition, int> costs,
@@ -92,14 +101,14 @@ public class PathfinderComponent:ECSEntity
         return Math.Abs(from.X - to.X) + Math.Abs(from.Y - to.Y);
     }
     
-    private List<BoardPosition> AvailiablePositions(BoardPosition position, HashSet<BoardPosition> checkedPositions)
+    private List<BoardPosition> AvailiablePositions(BoardPosition position, HashSet<BoardPosition> checkedPositions, Predicate<BoardPosition> predicate)
     {
         var uncheckedNeigbours = new List<BoardPosition>
         {
-            new BoardPosition(position.X + 1, position.Y, position.Z),
-            new BoardPosition(position.X - 1, position.Y, position.Z),
-            new BoardPosition(position.X, position.Y + 1, position.Z),
-            new BoardPosition(position.X, position.Y - 1, position.Z) 
+            position.Right,
+            position.Up,
+            position.Left,
+            position.Down
         };
         
         var checkedNeigbours = new List<BoardPosition>();
@@ -107,7 +116,7 @@ public class PathfinderComponent:ECSEntity
         for (var i = 0; i < uncheckedNeigbours.Count; i++)
         {
             var currentNeighbour = uncheckedNeigbours[i];
-            if(!checkedPositions.Contains(currentNeighbour) && BoardCondition.Check(currentNeighbour))
+            if(!checkedPositions.Contains(currentNeighbour) && predicate.Invoke(currentNeighbour))
                 checkedNeigbours.Add(currentNeighbour); 
         }
         
