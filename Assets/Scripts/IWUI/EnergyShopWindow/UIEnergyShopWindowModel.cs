@@ -46,7 +46,8 @@ public class UIEnergyShopWindowModel : IWWindowModel
         if (ChestReward == -1) return false;
         
         var board = BoardService.Current.GetBoardById(0);
-        var piece = board.BoardLogic.GetPieceAt(GameDataService.Current.PiecesManager.CastlePosition);
+        var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Hero1.Id, 1)[0];
+        var piece = board.BoardLogic.GetPieceAt(position);
         var reaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
 
         var menu = reaction?.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);

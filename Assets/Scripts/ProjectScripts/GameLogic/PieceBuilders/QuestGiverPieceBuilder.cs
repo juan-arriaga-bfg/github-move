@@ -5,7 +5,7 @@
 		var piece = base.Build(pieceType, context);
 		
 		piece.RegisterComponent(new TouchReactionComponent()
-			.RegisterComponent(new TouchReactionDefinitionOpenQuestWindow())
+			.RegisterComponent(new TouchReactionDefinitionOpenWindow{WindowType = UIWindowType.QuestWindow})
 			.RegisterComponent(new TouchReactionConditionComponent()));
 		
 		return piece;

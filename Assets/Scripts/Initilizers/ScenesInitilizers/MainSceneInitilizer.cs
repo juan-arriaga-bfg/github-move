@@ -21,20 +21,12 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.MainWindow,
             UIWindowType.SampleWindow,
             UIWindowType.MessageWindow,
-            UIWindowType.OldChestMessage,
             UIWindowType.ChestMessage,
-//            UIWindowType.HeroesWindow,
-//            UIWindowType.CharactersWindow,
-//            UIWindowType.CollectionWindow,
             UIWindowType.QuestWindow,
-//            UIWindowType.RobberyWindow,
             UIWindowType.ErrorWindow,
             UIWindowType.CastleWindow,
             UIWindowType.EnergyShopWindow,
-//            UIWindowType.StorageWindow,
-//            UIWindowType.MarketWindow,
-//            UIWindowType.ProductionWindow,
-              UIWindowType.CodexWindow,
+            UIWindowType.CodexWindow,
         });
         
         // on cache complete
@@ -44,15 +36,9 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIService.Get.CloseWindow(UIWindowType.LauncherWindow);
             
             // get model for window
-            var model = UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow);
             UIService.Get.ShowWindow(UIWindowType.MainWindow);
-//            UIService.Get.ShowWindow(UIWindowType.CharactersWindow);
-//            UIService.Get.ShowWindow(UIWindowType.ProductionWindow);
-            
-            if (onComplete != null)
-            {
-                onComplete();
-            }
+
+            onComplete?.Invoke();
         };
     }
 

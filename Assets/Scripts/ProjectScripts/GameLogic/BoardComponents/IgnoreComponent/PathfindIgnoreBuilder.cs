@@ -98,13 +98,6 @@ public static class PathfindIgnoreBuilder
          PieceType.Fog.Id
       });
       
-      dict.Add(PieceType.Mine1.Id, mineIgnorePieces);
-      dict.Add(PieceType.Mine2.Id, mineIgnorePieces);
-      dict.Add(PieceType.Mine3.Id, mineIgnorePieces);
-      dict.Add(PieceType.Mine4.Id, mineIgnorePieces);
-      dict.Add(PieceType.Mine5.Id, mineIgnorePieces);
-      dict.Add(PieceType.Mine6.Id, mineIgnorePieces);
-      dict.Add(PieceType.Mine7.Id, mineIgnorePieces);
       dict.Add(PieceType.MineC.Id, mineIgnorePieces);
       dict.Add(PieceType.MineX.Id, mineIgnorePieces);
       dict.Add(PieceType.MineY.Id, mineIgnorePieces);

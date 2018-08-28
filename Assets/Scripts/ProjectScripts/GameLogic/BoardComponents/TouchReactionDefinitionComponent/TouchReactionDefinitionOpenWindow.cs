@@ -1,6 +1,6 @@
 ﻿public class TouchReactionDefinitionOpenWindow : TouchReactionDefinitionComponent
 {
-    public string WindowType { get; set; }
+    public string WindowType;
     
     public override bool Make(BoardPosition position, Piece piece)
     {

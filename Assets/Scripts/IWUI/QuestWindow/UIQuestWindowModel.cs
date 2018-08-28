@@ -2,34 +2,24 @@ using UnityEngine;
 using System.Collections;
 using System.Text;
 
-public class UIQuestWindowModel : IWWindowModel 
+public class UIQuestWindowModel : IWWindowModel
 {
-    public Quest Quest { get; set; }
-    
-    public string Title
+    private Quest quest;
+    public Quest Quest
     {
-        get { return string.Format("Quest {0}", Quest.Def.Uid); }
+        get { return quest ?? GameDataService.Current.QuestsManager.ActiveQuests[0]; }
+        set { quest = value; }
     }
 
-    public string Message
-    {
-        get { return Quest.Def.Message; }
-    }
-    
-    public string Description
-    {
-        get { return "Collect pieces for quest complete"; }
-    }
-    
-    public string ButtonText
-    {
-        get { return Quest.Check() ? "Claim" : "Find"; }
-    }
-    
-    public string AmountText
-    {
-        get { return string.Format("<color=#{0}><size=55>{1}</size></color>/{2}", Quest.Check() ? "FFFFFF" : "FE4704", Quest.CurrentAmount, Quest.TargetAmount); }
-    }
+    public string Title => $"Quest {Quest.Def.Uid}";
+
+    public string Message => Quest.Def.Message;
+
+    public string Description => "Collect pieces for quest complete";
+
+    public string ButtonText => Quest.Check() ? "Claim" : "Find";
+
+    public string AmountText => $"<color=#{(Quest.Check() ? "FFFFFF" : "FE4704")}><size=55>{Quest.CurrentAmount}</size></color>/{Quest.TargetAmount}";
 
     public string RewardText
     {
@@ -37,13 +27,9 @@ public class UIQuestWindowModel : IWWindowModel
         {
             var reward = CurrencyHellper.ResourcePieceToCurrence(Quest.Rewards, Currency.Coins.Name);
             
-            return string.Format("<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>Reward:</color></font> <size=50>{0} <sprite name={1}></size>",
-                reward.Amount, reward.Currency);
+            return $"<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>Reward:</color></font> <size=50>{reward.Amount} <sprite name={reward.Currency}></size>";
         }
     }
 
-    public Sprite Icon
-    {
-        get { return IconService.Current.GetSpriteById(Quest.WantedIcon); }
-    }
+    public Sprite Icon => IconService.Current.GetSpriteById(Quest.WantedIcon);
 }

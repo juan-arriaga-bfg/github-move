@@ -6,28 +6,16 @@ public class UICastleWindowModel : IWWindowModel
     
     public string Title => "Shop of Chests";
     public string Message => "Upgrade your castle to get new chests!";
+    public string UpgradeMessage => "Improve free chest with higher Kingdom Level";
 
-    public string UpgradeMessage
-    {
-        get
-        {
-            var board = BoardService.Current.GetBoardById(0);
-            var piece = board.BoardLogic.GetPieceAt(GameDataService.Current.PiecesManager.CastlePosition);
-            var def = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(piece.PieceType);
-            
-            return $"Upgrade\n{def.UpgradePrices[0].ToStringIcon(false)}";
-        }
-    }
-    
     public List<ChestDef> Chests
     {
         get
         {
             var board = BoardService.Current.GetBoardById(0);
-            var piece = board.BoardLogic.GetPieceAt(GameDataService.Current.PiecesManager.CastlePosition);
             var definition = board.BoardLogic.MatchDefinition;
             
-            var current = GameDataService.Current.PiecesManager.GetPieceDefOrDefault(piece.PieceType).SpawnPieceType;
+            var current = PieceType.Chest1.Id + GameDataService.Current.LevelsManager.Level - 1;
             var ignore = definition.GetLast(current);
             
             var last = GameDataService.Current.ChestsManager.Chests.FindAll(def =>
@@ -49,22 +37,11 @@ public class UICastleWindowModel : IWWindowModel
         get
         {
             var board = BoardService.Current.GetBoardById(0);
-            var piece = board.BoardLogic.GetPieceAt(GameDataService.Current.PiecesManager.CastlePosition);
+            var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Hero1.Id, 1)[0];
+            var piece = board.BoardLogic.GetPieceAt(position);
             var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
             return storage;
         }
-    }
-    
-    public bool Upgrade()
-    {
-        var board = BoardService.Current.GetBoardById(0);
-        var piece = board.BoardLogic.GetPieceAt(GameDataService.Current.PiecesManager.CastlePosition);
-        var reaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
-
-        var menu = reaction?.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
-        var upgrade = menu?.GetDefinition<TouchReactionDefinitionUpgrade>();
-        
-        return upgrade != null && upgrade.Make(piece.CachedPosition, piece);
     }
     
     public bool Spawn()
@@ -72,7 +49,8 @@ public class UICastleWindowModel : IWWindowModel
         if (ChestReward == -1) return false;
         
         var board = BoardService.Current.GetBoardById(0);
-        var piece = board.BoardLogic.GetPieceAt(GameDataService.Current.PiecesManager.CastlePosition);
+        var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Hero1.Id, 1)[0];
+        var piece = board.BoardLogic.GetPieceAt(position);
         var reaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
 
         var menu = reaction?.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);

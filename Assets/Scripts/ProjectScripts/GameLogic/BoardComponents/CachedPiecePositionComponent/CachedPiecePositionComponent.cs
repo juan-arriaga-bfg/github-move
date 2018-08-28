@@ -1,8 +1,7 @@
 ﻿public class CachedPiecePositionComponent : IECSComponent, IPieceBoardObserver
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-	
-	public int Guid { get { return ComponentGuid; } }
+	public int Guid => ComponentGuid;
 
 	private Piece contextPiece;
 
@@ -25,8 +24,6 @@
 		if (contextPiece == null) return;
 		
 		contextPiece.CachedPosition = position;
-		GameDataService.Current.PiecesManager.CachedPosition(context, position);
-
 		context?.Context.BoardLogic.PositionsCache.AddPosition(context.PieceType, position);
 	}
 

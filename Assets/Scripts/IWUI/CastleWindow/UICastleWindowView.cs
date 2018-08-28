@@ -76,11 +76,6 @@ public class UICastleWindowView : UIGenericPopupWindowView
     
     public void OnClick()
     {
-        var windowModel = Model as UICastleWindowModel;
-
-        if (windowModel.Upgrade())
-        {
-            Controller.CloseCurrentWindow();
-        }
+        Controller.CloseCurrentWindow();
     }
 }

@@ -25,7 +25,7 @@
     
     public void FlyTo(int id, int x, int y, string target)
     {
-        if(Locker.IsLocked || context.Context.BoardLogic.MatchDefinition.GetFirst(id) == PieceType.Castle1.Id) return;
+        if(Locker.IsLocked) return;
         
         var currency = PieceType.Parse(id);
         var flay = ResourcesViewManager.Instance.GetFirstViewById(target);

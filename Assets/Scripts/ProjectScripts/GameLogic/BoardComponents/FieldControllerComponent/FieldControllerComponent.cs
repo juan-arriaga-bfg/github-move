@@ -49,6 +49,8 @@ public class FieldControllerComponent : IECSComponent
             return;
         }
         
+        fieldDef.Pieces.Sort((a, b) => -a.Id.CompareTo(b.Id));
+        
         foreach (var item in fieldDef.Pieces)
         {
             context.ActionExecutor.PerformAction(new FillBoardAction
@@ -59,16 +61,6 @@ public class FieldControllerComponent : IECSComponent
         }
 
         AddLastAction();
-        
-        if(fieldDef.Resources == null) return;
-        
-        foreach (var item in fieldDef.Resources)
-        {
-            foreach (var pair in item.Resources)
-            {
-                GameDataService.Current.CollectionManager.CastResourceOnBoard(item.Position, pair);
-            }
-        }
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)

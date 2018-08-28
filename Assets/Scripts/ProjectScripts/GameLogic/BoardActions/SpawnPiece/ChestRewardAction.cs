@@ -6,19 +6,13 @@ using UnityEngine;
 public class ChestRewardAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
+	public virtual int Guid => ComponentGuid;
 
-	public virtual int Guid
-	{
-		get { return ComponentGuid; }
-	}
-	
 	public BoardPosition From { get; set; }
 	public Dictionary<int, int> Pieces = new Dictionary<int, int>();
 	public IBoardAction OnComplete;
 	public Action OnCompleteAction;
 	
-	public bool IsAddCollection = false;
-
 	public bool PerformAction(BoardController gameBoardController)
 	{
 		var pieces = new Dictionary<BoardPosition, Piece>();
@@ -29,17 +23,6 @@ public class ChestRewardAction : IBoardAction
 		{
 			UIErrorWindowController.AddError("Not found free cells");
 			return false;
-		}
-
-		if (IsAddCollection)
-		{
-			var collection = GameDataService.Current.CollectionManager.GetRandomItem();
-
-			if (string.IsNullOrEmpty(collection) == false)
-			{
-				GameDataService.Current.CollectionManager.CastResourceOnBoard(From,
-					new CurrencyPair{Currency = collection, Amount = 1});
-			}
 		}
 
 		var piecesKeys = Pieces.Keys.ToList();
@@ -88,12 +71,11 @@ public class ChestRewardAction : IBoardAction
 				gameBoardController.BoardLogic.UnlockCell(pair.Key, this);
 			}
 
-			if (OnCompleteAction != null) OnCompleteAction();
+			OnCompleteAction?.Invoke();
 			if (OnComplete != null) gameBoardController.ActionExecutor.AddAction(OnComplete);
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);
-		
 		
 		return true;
 	}

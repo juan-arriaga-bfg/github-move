@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public partial class PieceTypeDef
 {
@@ -12,13 +9,11 @@ public partial class PieceTypeDef
 
 public static partial class PieceType
 {
-    public readonly static PieceTypeDef None = new PieceTypeDef {Id = -1, Abbreviations = new List<string>{"None"}};
+    public static readonly PieceTypeDef None = new PieceTypeDef {Id = -1, Abbreviations = new List<string>{"None"}};
+    public static readonly PieceTypeDef Empty = new PieceTypeDef {Id = 0, Abbreviations = new List<string>{"Empty", "---"}};
+    public static readonly PieceTypeDef Generic = new PieceTypeDef {Id = 1, Abbreviations = new List<string>{"Generic"}};
     
-    public readonly static PieceTypeDef Empty = new PieceTypeDef {Id = 0, Abbreviations = new List<string>{"Empty", "---"}};
-    
-    public readonly static PieceTypeDef Generic = new PieceTypeDef {Id = 1, Abbreviations = new List<string>{"Generic"}};
-    
-    public readonly static Dictionary<string, int> Abbreviations = new Dictionary<string, int>();
+    public static readonly Dictionary<string, int> Abbreviations = new Dictionary<string, int>();
 
     public static void RegisterType(PieceTypeDef def)
     {

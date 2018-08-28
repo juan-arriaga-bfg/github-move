@@ -14,7 +14,8 @@ public enum PieceTypeFilter
     Mine = 32,
     Resource = 64,
     Energy = 128,
-    Reproduction = 256
+    Reproduction = 256,
+    Hero = 512,
 }
 
 public partial class PieceTypeDef
@@ -63,6 +64,8 @@ public static partial class PieceType
         
         return result;
     }
+    
+    public static readonly PieceTypeDef Hero1 = new PieceTypeDef{Id = 10, Abbreviations = new List<string>{ "Hero1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Hero};
     
     public static readonly PieceTypeDef A1 = new PieceTypeDef{Id = 100, Abbreviations = new List<string>{ "A1" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef A2 = new PieceTypeDef{Id = 101, Abbreviations = new List<string>{ "A2" }, Filter = PieceTypeFilter.Simple};
@@ -160,8 +163,6 @@ public static partial class PieceType
     
     public static readonly PieceTypeDef Fog = new PieceTypeDef{Id = 5201, Abbreviations = new List<string>{ "Fog" }, Filter = PieceTypeFilter.Multicellular};
     
-    public static readonly PieceTypeDef King = new PieceTypeDef{Id = 5301, Abbreviations = new List<string>{ "King" }, Filter = PieceTypeFilter.Simple};
-    
     public static readonly PieceTypeDef Coin1 = new PieceTypeDef{Id = 5400, Abbreviations = new List<string>{ "Coin1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     public static readonly PieceTypeDef Coin2 = new PieceTypeDef{Id = 5401, Abbreviations = new List<string>{ "Coin2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     public static readonly PieceTypeDef Coin3 = new PieceTypeDef{Id = 5402, Abbreviations = new List<string>{ "Coin3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource}; 
@@ -172,30 +173,6 @@ public static partial class PieceType
     public static readonly PieceTypeDef MineX = new PieceTypeDef{Id = 5502, Abbreviations = new List<string>{ "MineX" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
     public static readonly PieceTypeDef MineY = new PieceTypeDef{Id = 5503, Abbreviations = new List<string>{ "MineY" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
     public static readonly PieceTypeDef MineZ = new PieceTypeDef{Id = 5504, Abbreviations = new List<string>{ "MineZ" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
-    
-    public static readonly PieceTypeDef Mine1 = new PieceTypeDef{Id = 10000, Abbreviations = new List<string>{ "Mine1" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
-    public static readonly PieceTypeDef Mine2 = new PieceTypeDef{Id = 10001, Abbreviations = new List<string>{ "Mine2" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
-    public static readonly PieceTypeDef Mine3 = new PieceTypeDef{Id = 10002, Abbreviations = new List<string>{ "Mine3" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
-    public static readonly PieceTypeDef Mine4 = new PieceTypeDef{Id = 10003, Abbreviations = new List<string>{ "Mine4" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
-    public static readonly PieceTypeDef Mine5 = new PieceTypeDef{Id = 10004, Abbreviations = new List<string>{ "Mine5" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
-    public static readonly PieceTypeDef Mine6 = new PieceTypeDef{Id = 10005, Abbreviations = new List<string>{ "Mine6" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
-    public static readonly PieceTypeDef Mine7 = new PieceTypeDef{Id = 10006, Abbreviations = new List<string>{ "Mine7" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
-    
-    public static readonly PieceTypeDef Sawmill1 = new PieceTypeDef{Id = 11000, Abbreviations = new List<string>{ "Sawmill1" }};
-    public static readonly PieceTypeDef Sawmill2 = new PieceTypeDef{Id = 11001, Abbreviations = new List<string>{ "Sawmill2" }};
-    public static readonly PieceTypeDef Sawmill3 = new PieceTypeDef{Id = 11002, Abbreviations = new List<string>{ "Sawmill3" }};
-    public static readonly PieceTypeDef Sawmill4 = new PieceTypeDef{Id = 11003, Abbreviations = new List<string>{ "Sawmill4" }};
-    public static readonly PieceTypeDef Sawmill5 = new PieceTypeDef{Id = 11004, Abbreviations = new List<string>{ "Sawmill5" }};
-    public static readonly PieceTypeDef Sawmill6 = new PieceTypeDef{Id = 11005, Abbreviations = new List<string>{ "Sawmill6" }};
-    public static readonly PieceTypeDef Sawmill7 = new PieceTypeDef{Id = 11006, Abbreviations = new List<string>{ "Sawmill7" }};
-    
-    public static readonly PieceTypeDef Sheepfold1 = new PieceTypeDef{Id = 12000, Abbreviations = new List<string>{ "Sheepfold1" }};
-    public static readonly PieceTypeDef Sheepfold2 = new PieceTypeDef{Id = 12001, Abbreviations = new List<string>{ "Sheepfold2" }};
-    public static readonly PieceTypeDef Sheepfold3 = new PieceTypeDef{Id = 12002, Abbreviations = new List<string>{ "Sheepfold3" }};
-    public static readonly PieceTypeDef Sheepfold4 = new PieceTypeDef{Id = 12003, Abbreviations = new List<string>{ "Sheepfold4" }};
-    public static readonly PieceTypeDef Sheepfold5 = new PieceTypeDef{Id = 12004, Abbreviations = new List<string>{ "Sheepfold5" }};
-    public static readonly PieceTypeDef Sheepfold6 = new PieceTypeDef{Id = 12005, Abbreviations = new List<string>{ "Sheepfold6" }};
-    public static readonly PieceTypeDef Sheepfold7 = new PieceTypeDef{Id = 12006, Abbreviations = new List<string>{ "Sheepfold7" }};
     
     public static readonly PieceTypeDef ChestX1 = new PieceTypeDef{Id = 13201, Abbreviations = new List<string>{ "ChestX1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     public static readonly PieceTypeDef ChestX2 = new PieceTypeDef{Id = 13202, Abbreviations = new List<string>{ "ChestX2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
@@ -222,46 +199,6 @@ public static partial class PieceType
     public static readonly PieceTypeDef Chest7 = new PieceTypeDef{Id = 13007, Abbreviations = new List<string>{ "Chest7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     public static readonly PieceTypeDef Chest8 = new PieceTypeDef{Id = 13008, Abbreviations = new List<string>{ "Chest8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     public static readonly PieceTypeDef Chest9 = new PieceTypeDef{Id = 13009, Abbreviations = new List<string>{ "Chest9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
-    
-    public static readonly PieceTypeDef Castle1 = new PieceTypeDef{Id = 14000, Abbreviations = new List<string>{ "Castle1" }, Filter = PieceTypeFilter.Multicellular};
-    public static readonly PieceTypeDef Castle2 = new PieceTypeDef{Id = 14001, Abbreviations = new List<string>{ "Castle2" }, Filter = PieceTypeFilter.Multicellular};
-    public static readonly PieceTypeDef Castle3 = new PieceTypeDef{Id = 14002, Abbreviations = new List<string>{ "Castle3" }, Filter = PieceTypeFilter.Multicellular};
-    public static readonly PieceTypeDef Castle4 = new PieceTypeDef{Id = 14003, Abbreviations = new List<string>{ "Castle4" }, Filter = PieceTypeFilter.Multicellular};
-    public static readonly PieceTypeDef Castle5 = new PieceTypeDef{Id = 14004, Abbreviations = new List<string>{ "Castle5" }, Filter = PieceTypeFilter.Multicellular};
-    public static readonly PieceTypeDef Castle6 = new PieceTypeDef{Id = 14005, Abbreviations = new List<string>{ "Castle6" }, Filter = PieceTypeFilter.Multicellular};
-    public static readonly PieceTypeDef Castle7 = new PieceTypeDef{Id = 14006, Abbreviations = new List<string>{ "Castle7" }, Filter = PieceTypeFilter.Multicellular};
-    public static readonly PieceTypeDef Castle8 = new PieceTypeDef{Id = 14007, Abbreviations = new List<string>{ "Castle8" }, Filter = PieceTypeFilter.Multicellular};
-    public static readonly PieceTypeDef Castle9 = new PieceTypeDef{Id = 14008, Abbreviations = new List<string>{ "Castle9" }, Filter = PieceTypeFilter.Multicellular};
-    
-    public static readonly PieceTypeDef Market1 = new PieceTypeDef{Id = 15000, Abbreviations = new List<string>{ "Market1" }};
-    public static readonly PieceTypeDef Market2 = new PieceTypeDef{Id = 15001, Abbreviations = new List<string>{ "Market2" }};
-    public static readonly PieceTypeDef Market3 = new PieceTypeDef{Id = 15002, Abbreviations = new List<string>{ "Market3" }};
-    public static readonly PieceTypeDef Market4 = new PieceTypeDef{Id = 15003, Abbreviations = new List<string>{ "Market4" }};
-    public static readonly PieceTypeDef Market5 = new PieceTypeDef{Id = 15004, Abbreviations = new List<string>{ "Market5" }};
-    public static readonly PieceTypeDef Market6 = new PieceTypeDef{Id = 15005, Abbreviations = new List<string>{ "Market6" }};
-    public static readonly PieceTypeDef Market7 = new PieceTypeDef{Id = 15006, Abbreviations = new List<string>{ "Market7" }};
-    public static readonly PieceTypeDef Market8 = new PieceTypeDef{Id = 15007, Abbreviations = new List<string>{ "Market8" }};
-    public static readonly PieceTypeDef Market9 = new PieceTypeDef{Id = 15008, Abbreviations = new List<string>{ "Market9" }};
-    
-    public static readonly PieceTypeDef Storage1 = new PieceTypeDef{Id = 16000, Abbreviations = new List<string>{ "Storage1" }};
-    public static readonly PieceTypeDef Storage2 = new PieceTypeDef{Id = 16001, Abbreviations = new List<string>{ "Storage2" }};
-    public static readonly PieceTypeDef Storage3 = new PieceTypeDef{Id = 16002, Abbreviations = new List<string>{ "Storage3" }};
-    public static readonly PieceTypeDef Storage4 = new PieceTypeDef{Id = 16003, Abbreviations = new List<string>{ "Storage4" }};
-    public static readonly PieceTypeDef Storage5 = new PieceTypeDef{Id = 16004, Abbreviations = new List<string>{ "Storage5" }};
-    public static readonly PieceTypeDef Storage6 = new PieceTypeDef{Id = 16005, Abbreviations = new List<string>{ "Storage6" }};
-    public static readonly PieceTypeDef Storage7 = new PieceTypeDef{Id = 16006, Abbreviations = new List<string>{ "Storage7" }};
-    public static readonly PieceTypeDef Storage8 = new PieceTypeDef{Id = 16007, Abbreviations = new List<string>{ "Storage8" }};
-    public static readonly PieceTypeDef Storage9 = new PieceTypeDef{Id = 16008, Abbreviations = new List<string>{ "Storage9" }};
-    
-    public static readonly PieceTypeDef Factory1 = new PieceTypeDef{Id = 17000, Abbreviations = new List<string>{ "Factory1" }};
-    public static readonly PieceTypeDef Factory2 = new PieceTypeDef{Id = 17001, Abbreviations = new List<string>{ "Factory2" }};
-    public static readonly PieceTypeDef Factory3 = new PieceTypeDef{Id = 17002, Abbreviations = new List<string>{ "Factory3" }};
-    public static readonly PieceTypeDef Factory4 = new PieceTypeDef{Id = 17003, Abbreviations = new List<string>{ "Factory4" }};
-    public static readonly PieceTypeDef Factory5 = new PieceTypeDef{Id = 17004, Abbreviations = new List<string>{ "Factory5" }};
-    public static readonly PieceTypeDef Factory6 = new PieceTypeDef{Id = 17005, Abbreviations = new List<string>{ "Factory6" }};
-    public static readonly PieceTypeDef Factory7 = new PieceTypeDef{Id = 17006, Abbreviations = new List<string>{ "Factory7" }};
-    public static readonly PieceTypeDef Factory8 = new PieceTypeDef{Id = 17007, Abbreviations = new List<string>{ "Factory8" }};
-    public static readonly PieceTypeDef Factory9 = new PieceTypeDef{Id = 17008, Abbreviations = new List<string>{ "Factory9" }};
     
     public static readonly PieceTypeDef Zord1 = new PieceTypeDef{Id = 20001, Abbreviations = new List<string>{ "Zord1" }};
     public static readonly PieceTypeDef Zord2 = new PieceTypeDef{Id = 20002, Abbreviations = new List<string>{ "Zord2" }};

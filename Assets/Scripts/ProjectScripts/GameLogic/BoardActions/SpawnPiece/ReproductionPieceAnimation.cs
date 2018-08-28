@@ -11,8 +11,7 @@ public class ReproductionPieceAnimation : BoardAnimation
     public override void Animate(BoardRenderer context)
     {
         var boardElement = BoardElement ?? context.GetElementAt(From);
-        var castle = boardElement as CastlePieceView;
-        var startPosition = castle != null ? castle.GetSpawnPosition() : context.Context.BoardDef.GetPiecePosition(From.X, From.Y);
+        var startPosition = context.Context.BoardDef.GetPiecePosition(From.X, From.Y);
         
         var sequence = DOTween.Sequence().SetId(animationUid);
         

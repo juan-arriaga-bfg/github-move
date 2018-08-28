@@ -17,6 +17,8 @@ public class ElementsResourcesBuilder
     {
         dict.Add(PieceType.Generic.Id, R.GenericPiece);
         
+        dict.Add(PieceType.Hero1.Id, R.Hero1Piece);
+        
         dict.Add(PieceType.O1.Id, R.OPiece);
         dict.Add(PieceType.O2.Id, R.OPiece);
         dict.Add(PieceType.O3.Id, R.OPiece);
@@ -36,8 +38,6 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.OX7.Id, R.OXPiece);
         dict.Add(PieceType.OX8.Id, R.OXPiece);
         dict.Add(PieceType.OX9.Id, R.OXPiece);
-        
-        dict.Add(PieceType.King.Id, R.KingPiece);
         
         dict.Add(PieceType.Fog.Id, R.FogPiece);
         
@@ -166,70 +166,6 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MineY.Id, R.MineYPiece);
         dict.Add(PieceType.MineZ.Id, R.MineZPiece);
         
-        dict.Add(PieceType.Mine1.Id, R.Mine1Piece);
-        dict.Add(PieceType.Mine2.Id, R.Mine2Piece);
-        dict.Add(PieceType.Mine3.Id, R.Mine3Piece);
-        dict.Add(PieceType.Mine4.Id, R.Mine4Piece);
-        dict.Add(PieceType.Mine5.Id, R.Mine5Piece);
-        dict.Add(PieceType.Mine6.Id, R.Mine6Piece);
-        dict.Add(PieceType.Mine7.Id, R.Mine7Piece);
-        
-        dict.Add(PieceType.Sawmill1.Id, R.Sawmill1Piece);
-        dict.Add(PieceType.Sawmill2.Id, R.Sawmill2Piece);
-        dict.Add(PieceType.Sawmill3.Id, R.Sawmill3Piece);
-        dict.Add(PieceType.Sawmill4.Id, R.Sawmill4Piece);
-        dict.Add(PieceType.Sawmill5.Id, R.Sawmill5Piece);
-        dict.Add(PieceType.Sawmill6.Id, R.Sawmill6Piece);
-        dict.Add(PieceType.Sawmill7.Id, R.Sawmill7Piece);
-        
-        dict.Add(PieceType.Sheepfold1.Id, R.Sheepfold1Piece);
-        dict.Add(PieceType.Sheepfold2.Id, R.Sheepfold2Piece);
-        dict.Add(PieceType.Sheepfold3.Id, R.Sheepfold3Piece);
-        dict.Add(PieceType.Sheepfold4.Id, R.Sheepfold4Piece);
-        dict.Add(PieceType.Sheepfold5.Id, R.Sheepfold5Piece);
-        dict.Add(PieceType.Sheepfold6.Id, R.Sheepfold6Piece);
-        dict.Add(PieceType.Sheepfold7.Id, R.Sheepfold7Piece);
-        
-        dict.Add(PieceType.Castle1.Id, R.Castle1Piece);
-        dict.Add(PieceType.Castle2.Id, R.Castle2Piece);
-        dict.Add(PieceType.Castle3.Id, R.Castle3Piece);
-        dict.Add(PieceType.Castle4.Id, R.Castle4Piece);
-        dict.Add(PieceType.Castle5.Id, R.Castle5Piece);
-        dict.Add(PieceType.Castle6.Id, R.Castle6Piece);
-        dict.Add(PieceType.Castle7.Id, R.Castle7Piece);
-        dict.Add(PieceType.Castle8.Id, R.Castle8Piece);
-        dict.Add(PieceType.Castle9.Id, R.Castle9Piece);
-
-        dict.Add(PieceType.Market1.Id, R.Market1Piece);
-        dict.Add(PieceType.Market2.Id, R.Market2Piece);
-        dict.Add(PieceType.Market3.Id, R.Market3Piece);
-        dict.Add(PieceType.Market4.Id, R.Market4Piece);
-        dict.Add(PieceType.Market5.Id, R.Market5Piece);
-        dict.Add(PieceType.Market6.Id, R.Market6Piece);
-        dict.Add(PieceType.Market7.Id, R.Market7Piece);
-        dict.Add(PieceType.Market8.Id, R.Market8Piece);
-        dict.Add(PieceType.Market9.Id, R.Market9Piece);
-        
-        dict.Add(PieceType.Storage1.Id, R.Storage1Piece);
-        dict.Add(PieceType.Storage2.Id, R.Storage2Piece);
-        dict.Add(PieceType.Storage3.Id, R.Storage3Piece);
-        dict.Add(PieceType.Storage4.Id, R.Storage4Piece);
-        dict.Add(PieceType.Storage5.Id, R.Storage5Piece);
-        dict.Add(PieceType.Storage6.Id, R.Storage6Piece);
-        dict.Add(PieceType.Storage7.Id, R.Storage7Piece);
-        dict.Add(PieceType.Storage8.Id, R.Storage8Piece);
-        dict.Add(PieceType.Storage9.Id, R.Storage9Piece);
-        
-        dict.Add(PieceType.Factory1.Id, R.Factory1Piece);
-        dict.Add(PieceType.Factory2.Id, R.Factory2Piece);
-        dict.Add(PieceType.Factory3.Id, R.Factory3Piece);
-        dict.Add(PieceType.Factory4.Id, R.Factory4Piece);
-        dict.Add(PieceType.Factory5.Id, R.Factory5Piece);
-        dict.Add(PieceType.Factory6.Id, R.Factory6Piece);
-        dict.Add(PieceType.Factory7.Id, R.Factory7Piece);
-        dict.Add(PieceType.Factory8.Id, R.Factory8Piece);
-        dict.Add(PieceType.Factory9.Id, R.Factory9Piece);
-        
         return dict;
     }
     
@@ -243,10 +179,6 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.Menu, R.MenuView);
         dict.Add((int)ViewType.ObstacleState, R.ChangeObstacleStateView);
         dict.Add((int)ViewType.FogState, R.ChangeFogStateView);
-        dict.Add((int)ViewType.CastleUpgrade, R.CastleUpgradeView);
-        dict.Add((int)ViewType.SimpleUpgrade, R.SimpleUpgradeView);
-        dict.Add((int)ViewType.Production, R.ProductionView);
-        dict.Add((int)ViewType.ProductionWarning, R.ProductionWarningView);
         dict.Add((int)ViewType.Bubble, R.BubbleView);
         dict.Add((int)ViewType.MergeParticle, R.MergeParticleSystem);
         dict.Add((int)ViewType.Progress, R.BoardProgressView);

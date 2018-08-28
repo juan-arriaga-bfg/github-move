@@ -14,8 +14,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	private List<ChestSaveItem> chests;
 	private List<LifeSaveItem> lifes;
 	private List<StorageSaveItem> storages;
-	private List<ResourceSaveItem> resources;
-	private List<ProductionSaveItem> productions;
 	private List<BuildingSaveItem> buildings;
 	
 	private string completeFogs;
@@ -51,13 +49,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	}
 	
 	[JsonProperty]
-	public List<ResourceSaveItem> Resources
-	{
-		get { return resources; }
-		set { resources = value; }
-	}
-	
-	[JsonProperty]
 	public string CompleteFogs
 	{
 		get { return completeFogs; }
@@ -76,13 +67,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	{
 		get { return remowedMines; }
 		set { remowedMines = value; }
-	}
-	
-//	[JsonProperty]
-	public List<ProductionSaveItem> Productions
-	{
-		get { return productions; }
-		set { productions = value; }
 	}
 	
 	[JsonProperty]
@@ -114,10 +98,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		chests = new List<ChestSaveItem>();
 		lifes = new List<LifeSaveItem>();
 		storages = new List<StorageSaveItem>();
-		productions = new List<ProductionSaveItem>();
 		buildings = new List<BuildingSaveItem>();
-		
-		resources = GetResourceSave();
 		
 		foreach (var item in cash)
 		{
@@ -136,8 +117,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			
 			lifes.AddRange(GetLifeSave(board.BoardLogic, item.Value));
 			buildings.AddRange(GetBuildingSave(board.BoardLogic, item.Value));
-			
-//			productions.AddRange(GetProductionSave(board.BoardLogic, item.Value));
 		}
 		
 		pieces.Sort((a, b) => -a.Id.CompareTo(b.Id));
@@ -331,22 +310,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		return items;
 	}
 
-	private List<ResourceSaveItem> GetResourceSave()
-	{
-		var items = new List<ResourceSaveItem>();
-		
-		if(GameDataService.Current == null) return items;
-
-		var onBoard = GameDataService.Current.CollectionManager.ResourcesOnBoard;
-
-		foreach (var item in onBoard)
-		{
-			items.Add(new ResourceSaveItem{Position = item.Key, Resources = item.Value});
-		}
-		
-		return items;
-	}
-
 	private string PositionsToString(List<BoardPosition> positions)
 	{
 		if (GameDataService.Current == null) return null;
@@ -376,43 +339,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		}
 		
 		return positions;
-	}
-
-	private List<ProductionSaveItem> GetProductionSave(BoardLogicComponent logic, List<BoardPosition> positions)
-	{
-		var items = new List<ProductionSaveItem>();
-		
-		foreach (var position in positions)
-		{
-			var piece = logic.GetPieceAt(position);
-
-			var component = piece?.GetComponent<ProductionComponent>(ProductionComponent.ComponentGuid);
-			
-			if(component == null) continue;
-			
-			var storage = new Dictionary<int, int>();
-			
-			foreach (var pair in component.Storage)
-			{
-				if(pair.Value.Value == 0) continue;
-				
-				storage.Add(pair.Key, pair.Value.Value);
-			}
-			
-			if(storage.Count == 0) continue;
-			
-			var item = new ProductionSaveItem{
-				Id = piece.PieceType,
-				Position = position,
-				State = component.State,
-				StartTime = component.Timer.StartTimeLong,
-				Storage = storage
-			};
-			
-			items.Add(item);
-		}
-		
-		return items;
 	}
 	
 	private List<BuildingSaveItem> GetBuildingSave(BoardLogicComponent logic, List<BoardPosition> positions)

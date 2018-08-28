@@ -81,9 +81,8 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         UIService.Get.ShowWindow(UIWindowType.QuestWindow);
         
         var board = BoardService.Current.GetBoardById(0);
-        var kingPos = GameDataService.Current.PiecesManager.KingPosition;
-        
-        var position = board.BoardDef.GetSectorCenterWorldPosition(kingPos.X, kingPos.Y, kingPos.Z);
+        var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Hero1.Id, 1)[0];
+        var position = board.BoardDef.GetSectorCenterWorldPosition(pos.X, pos.Y, pos.Z);
         
         board.Manipulator.CameraManipulator.MoveTo(position);
         board.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);

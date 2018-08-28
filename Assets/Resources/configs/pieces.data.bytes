@@ -1664,201 +1664,23 @@
     ]
   },
   {
-    "Uid": "Castle1",
-    "UpgradePrices": [
+    "Uid": "Magic",
+    "Name": "Magic",
+    "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 10
+        "Amount": 1
       }
-    ],
-    "Delay": 14400,
-    "SpawnPiece": "Chest9",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 1
+    ]
   },
   {
-    "Uid": "Castle2",
-    "CreateRewards": [
-      {
-        "Currency": "Crystals",
-        "Amount": 5
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 1000
-      }
-    ],
-    "UpgradePrices": [
+    "Uid": "Hero1",
+    "Name": "Dealer",
+    "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 15
+        "Amount": 1
       }
-    ],
-    "Delay": 14400,
-    "SpawnPiece": "Chest8",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 1,
-    "IsFilledInStart": false
-  },
-  {
-    "Uid": "Castle3",
-    "CreateRewards": [
-      {
-        "Currency": "Crystals",
-        "Amount": 10
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 1800
-      }
-    ],
-    "UpgradePrices": [
-      {
-        "Currency": "Coins",
-        "Amount": 30
-      }
-    ],
-    "Delay": 14400,
-    "SpawnPiece": "Chest3",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 1
-  },
-  {
-    "Uid": "Castle4",
-    "CreateRewards": [
-      {
-        "Currency": "Crystals",
-        "Amount": 15
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 2700
-      }
-    ],
-    "UpgradePrices": [
-      {
-        "Currency": "Coins",
-        "Amount": 35
-      }
-    ],
-    "Delay": 14400,
-    "SpawnPiece": "Chest4",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 1
-  },
-  {
-    "Uid": "Castle5",
-    "CreateRewards": [
-      {
-        "Currency": "Crystals",
-        "Amount": 25
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 3600
-      }
-    ],
-    "UpgradePrices": [
-      {
-        "Currency": "Coins",
-        "Amount": 50
-      }
-    ],
-    "Delay": 14400,
-    "SpawnPiece": "Chest5",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 1
-  },
-  {
-    "Uid": "Castle6",
-    "CreateRewards": [
-      {
-        "Currency": "Crystals",
-        "Amount": 40
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 4000
-      }
-    ],
-    "UpgradePrices": [
-      {
-        "Currency": "Coins",
-        "Amount": 75
-      }
-    ],
-    "Delay": 14400,
-    "SpawnPiece": "Chest6",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 1
-  },
-  {
-    "Uid": "Castle7",
-    "CreateRewards": [
-      {
-        "Currency": "Crystals",
-        "Amount": 60
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 6500
-      }
-    ],
-    "UpgradePrices": [
-      {
-        "Currency": "Coins",
-        "Amount": 100
-      }
-    ],
-    "Delay": 14400,
-    "SpawnPiece": "Chest7",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 1
-  },
-  {
-    "Uid": "Castle8",
-    "CreateRewards": [
-      {
-        "Currency": "Crystals",
-        "Amount": 100
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 10000
-      }
-    ],
-    "UpgradePrices": [
-      {
-        "Currency": "Coins",
-        "Amount": 120
-      }
-    ],
-    "Delay": 14400,
-    "SpawnPiece": "Chest8",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 1
-  },
-  {
-    "Uid": "Castle9",
-    "CreateRewards": [
-      {
-        "Currency": "Crystals",
-        "Amount": 150
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 17000
-      }
-    ],
-    "UpgradePrices": [
-      {
-        "Currency": "Coins",
-        "Amount": 150
-      }
-    ],
-    "Delay": 14400,
-    "SpawnPiece": "Chest9",
-    "SpawnAmount": 1,
-    "SpawnCapacity": 1
+    ]
   }
 ]

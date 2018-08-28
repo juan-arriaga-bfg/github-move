@@ -49,14 +49,24 @@ public class UIQuestWindowView : UIGenericPopupWindowView
 
     public override void OnViewCloseCompleted()
     {
-        if(isComplete == false) return;
-        
         var windowModel = Model as UIQuestWindowModel;
-         
-        BoardService.Current.GetBoardById(0).ActionExecutor.AddAction(new EjectionPieceAction
+        
+        if(isComplete == false)
         {
-            From = GameDataService.Current.PiecesManager.KingPosition,
-            Pieces = windowModel.Quest.Rewards
+            windowModel.Quest = null;
+            return;
+        }
+        
+        var pieces = windowModel.Quest.Rewards;
+        var board = BoardService.Current.GetBoardById(0);
+        var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Hero1.Id, 1)[0];
+        
+        windowModel.Quest = null;
+        
+        board.ActionExecutor.AddAction(new EjectionPieceAction
+        {
+            From = position,
+            Pieces = pieces
         });
     }
 
@@ -66,9 +76,12 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         var quest = windowModel.Quest;
         
         var board = BoardService.Current.GetBoardById(0);
+        
         if (quest.Check())
         {
-            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(GameDataService.Current.PiecesManager.KingPosition, quest.Rewards.Values.Sum()))
+            var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Hero1.Id, 1)[0];
+            
+            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, quest.Rewards.Values.Sum()))
             {
                 UIErrorWindowController.AddError("Need more free cells");
                 return;

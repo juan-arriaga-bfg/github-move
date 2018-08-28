@@ -183,16 +183,6 @@ public class MatchDefinitionBuilder
 
     private Dictionary<int, PieceMatchDef> AddMulticellularPiece(Dictionary<int, PieceMatchDef> dict)
     {
-        dict.Add(PieceType.Castle1.Id, new PieceMatchDef {Next = PieceType.Castle2.Id, Previous = PieceType.None.Id, Count = 1});
-        dict.Add(PieceType.Castle2.Id, new PieceMatchDef {Next = PieceType.Castle3.Id, Previous = PieceType.Castle1.Id, Count = 1});
-        dict.Add(PieceType.Castle3.Id, new PieceMatchDef {Next = PieceType.Castle4.Id, Previous = PieceType.Castle2.Id, Count = 1});
-        dict.Add(PieceType.Castle4.Id, new PieceMatchDef {Next = PieceType.Castle5.Id, Previous = PieceType.Castle3.Id, Count = 1});
-        dict.Add(PieceType.Castle5.Id, new PieceMatchDef {Next = PieceType.Castle6.Id, Previous = PieceType.Castle4.Id, Count = 1});
-        dict.Add(PieceType.Castle6.Id, new PieceMatchDef {Next = PieceType.Castle7.Id, Previous = PieceType.Castle5.Id, Count = 1});
-        dict.Add(PieceType.Castle7.Id, new PieceMatchDef {Next = PieceType.Castle8.Id, Previous = PieceType.Castle6.Id, Count = 1});
-        dict.Add(PieceType.Castle8.Id, new PieceMatchDef {Next = PieceType.Castle9.Id, Previous = PieceType.Castle7.Id, Count = 1});
-        dict.Add(PieceType.Castle9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Castle8.Id, Count = 1});
-        
         dict.Add(PieceType.MegaZord.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Zord4.Id, Pattern = new List<List<int>>
         {
             new List<int> { PieceType.Zord1.Id, PieceType.Zord2.Id },

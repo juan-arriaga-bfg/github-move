@@ -7,38 +7,17 @@ using UnityEngine;
 public class QuestSaveComponent : ECSEntity, IECSSerializeable
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
+    public override int Guid => ComponentGuid;
 
-    public override int Guid
-    {
-        get { return ComponentGuid; }
-    }
-
-    private List<QuestSaveItem> castle;
     private List<QuestSaveItem> active;
     
-    private List<TaskSaveItem> market;
-    
     private List<int> completed;
-    
-//    [JsonProperty]
-    public List<QuestSaveItem> Castle
-    {
-        get { return castle; }
-        set { castle = value; }
-    }
     
     [JsonProperty]
     public List<QuestSaveItem> Active
     {
         get { return active; }
         set { active = value; }
-    }
-    
-//    [JsonProperty]
-    public List<TaskSaveItem> Market
-    {
-        get { return market; }
-        set { market = value; }
     }
     
     [JsonProperty]
@@ -54,8 +33,6 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
         if(GameDataService.Current == null || BoardService.Current == null) return;
         
         SaveQuest();
-//        SaveCastle();
-//        SaveMarket();
     }
     
     private void SaveQuest()
@@ -73,37 +50,6 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
         }
         
         active.Sort((a, b) => a.Uid.CompareTo(b.Uid));
-    }
-
-    private void SaveCastle()
-    {
-        var board = BoardService.Current.GetBoardById(0);
-        var piece = board.BoardLogic.GetPieceAt(GameDataService.Current.PiecesManager.CastlePosition);
-        
-        if(piece == null) return;
-
-        var upgrade = piece.GetComponent<CastleUpgradeComponent>(CastleUpgradeComponent.ComponentGuid);
-        
-        if(upgrade == null) return;
-        
-        castle = new List<QuestSaveItem>();
-        
-        foreach (var price in upgrade.Prices)
-        {
-            castle.Add(new QuestSaveItem{Uid = price.Def.Uid, Progress = GetSaveCount(price.WantedPiece, price.CurrentAmount)});
-        }
-    }
-
-    private void SaveMarket()
-    {
-        var manager = GameDataService.Current.TasksManager;
-        
-        market = new List<TaskSaveItem>();
-
-        foreach (var task in manager.Tasks)
-        {
-            market.Add(new TaskSaveItem{Result = task.Result.Amount, Prices = task.Prices, Rewards = task.Rewards});
-        }
     }
 
     private int GetSaveCount(int id, int pogress)

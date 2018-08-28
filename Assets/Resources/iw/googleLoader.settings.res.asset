@@ -19,16 +19,11 @@ MonoBehaviour:
   - Key: levels
     Link: 1q0Pxo7d7saZDkpj2IXPB94nnAqKviZ0lZK4QvVfG0vE
     Route: parse
-    Pattern: '[{"Index":0,"Price":{"Currency": "","Amount":0},"Rewards":[{"Currency":
-      "","Amount":0}]}]'
+    Pattern: '[{"Index":0,"Price":{"Currency": "","Amount":0},"Rewards":[{"Currency":"","Amount":0}]}]'
   - Key: obstacles
     Link: 16Q9fxlFX40VRx6u1kwfMvWm1GuvK8MaGs117g5Pkd2g
     Route: parse
     Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestWeights":[{"Uid":"","Weight":0,"":"","Override":true}]}]'
-  - Key: pieces
-    Link: 15C96r0vcgzzhJ6Fo_OQXBcCoIkSogZnTZg8Jc6MKDH8
-    Route: parse
-    Pattern: '[{"Uid":"","CreateRewards":[{"Currency":"","Amount":0}],"SpawnResources":{"Currency":"","Amount":0},"Name":"","UnlockBonus":[{"Currency":"","Amount":0}]},{"Uid":"","UpgradeTargetPiece":"","CreateRewards":[{"Currency":"","Amount":0}],"UpgradePrices":[{"Currency":"","Amount":0}],"Delay":0,"SpawnPiece":"","SpawnAmount":0,"SpawnCapacity":0,"IsFilledInStart":false}]'
   - Key: quests
     Link: 1jaDy9GfzL7SMM9wR1HHHD1kYRj1tjPZrnBw5ZLIT1tk
     Route: parse
@@ -49,6 +44,10 @@ MonoBehaviour:
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseFogs
     Pattern: '{"Uid":"","Level":0,"Condition":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0}}'
+  - Key: pieces
+    Link: 15C96r0vcgzzhJ6Fo_OQXBcCoIkSogZnTZg8Jc6MKDH8
+    Route: parse
+    Pattern: '[{"Uid":"","CreateRewards":[{"Currency":"","Amount":0}],"SpawnResources":{"Currency":"","Amount":0},"Name":"","UnlockBonus":[{"Currency":"","Amount":0}]}]'
   - Key: piecesMatchConditions
     Link: 1VvIEMGGf-pkdVpJ96nSW8sBkIDX18vr1FAGY4NFLCRQ
     Route: parse

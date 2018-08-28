@@ -73,7 +73,9 @@ public class UICastleItem : MonoBehaviour
 		isClick = true;
 		
 		var board = BoardService.Current.GetBoardById(0);
-		if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(GameDataService.Current.PiecesManager.CastlePosition, 1))
+		var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Hero1.Id, 1)[0];
+		
+		if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, 1))
 		{
 			isClick = false;
 			UIErrorWindowController.AddError("Free space not found");

@@ -9,12 +9,8 @@
     Menu = -1005,
     ObstacleState = -1006,
     FogState = -1007,
-    CastleUpgrade = -1008,
-    SimpleUpgrade = -1009,
-    Production = -1010,
-    ProductionWarning = -1011,
-    Bubble = -1012,
-    MergeParticle = -1013,
-    Progress = -1014,
-    Warning = -1015
+    Bubble = -1008,
+    MergeParticle = -1009,
+    Progress = -1010,
+    Warning = -1011
 }

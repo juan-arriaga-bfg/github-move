@@ -17,16 +17,10 @@ public class PiecesDataManager : ECSEntity, IDataManager, IDataLoader<List<Piece
     public const int ReproductionStepDelay = 5;
     public const int ReproductionChance = 50;
     
-    public BoardPosition CastlePosition = BoardPosition.Default();
-    public BoardPosition KingPosition = BoardPosition.Default();
-    
     private Dictionary<int, PieceDef> pieces;
     
     public void Reload()
     {
-        CastlePosition = BoardPosition.Default();
-        KingPosition = BoardPosition.Default();
-
         pieces = null;
         
         LoadData(new ResourceConfigDataMapper<List<PieceDef>>("configs/pieces.data", NSConfigsSettings.Instance.IsUseEncryption));
@@ -84,22 +78,5 @@ public class PiecesDataManager : ECSEntity, IDataManager, IDataLoader<List<Piece
         PieceDef def;
         
         return pieces.TryGetValue(id, out def) ? def : PieceDef.Default();
-    }
-
-    public void CachedPosition(Piece piece, BoardPosition position)
-    {
-        var first = piece.Context.BoardLogic.MatchDefinition.GetFirst(piece.PieceType);
-        
-        if (first == PieceType.Castle1.Id)
-        {
-            CastlePosition = position;
-            return;
-        }
-        
-        if (first == PieceType.King.Id)
-        {
-            KingPosition = position;
-            return;
-        }
     }
 }

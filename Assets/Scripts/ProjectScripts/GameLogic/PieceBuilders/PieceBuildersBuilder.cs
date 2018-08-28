@@ -14,8 +14,6 @@ public class PieceBuildersBuilder
         
         dict = AddMulticellularPiece2x2(dict);
         
-        dict = AddCastlePiece(dict);
-
         return dict;
     }
     
@@ -37,14 +35,14 @@ public class PieceBuildersBuilder
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Coin1.Id, PieceType.Coin5.Id, dict);
         
-        dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestX1.Id, PieceType.ChestX3.Id, dict);
-        dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestC1.Id, PieceType.ChestC3.Id, dict);
-        dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.ChestZ1.Id, PieceType.ChestZ3.Id, dict);
-        dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.Basket1.Id, PieceType.Basket3.Id, dict);
+        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.ChestX1.Id, PieceType.ChestX3.Id, dict);
+        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.ChestC1.Id, PieceType.ChestC3.Id, dict);
+        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.ChestZ1.Id, PieceType.ChestZ3.Id, dict);
+        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.Basket1.Id, PieceType.Basket3.Id, dict);
         
-        dict = AddSimplePiece<MineChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest9.Id, dict);
+        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest9.Id, dict);
         
-        dict.Add(PieceType.King.Id, new QuestGiverPieceBuilder());
+        dict.Add(PieceType.Hero1.Id, new QuestGiverPieceBuilder());
         
         return dict;
     }
@@ -92,13 +90,6 @@ public class PieceBuildersBuilder
 //        dict = AddMulticellularPiece<ProductionPieceBuilder>(PieceType.Factory1.Id, PieceType.Factory9.Id, mask, dict);
         
         return dict;
-    }
-    
-    private Dictionary<int, IPieceBuilder> AddCastlePiece(Dictionary<int, IPieceBuilder> dict)
-    {
-        var mask = BoardPosition.GetRect(BoardPosition.Zero(), 4, 4);
-        
-        return AddMulticellularPiece<CastlePieceBuilder>(PieceType.Castle1.Id, PieceType.Castle9.Id, mask, dict);
     }
     
     private Dictionary<int, IPieceBuilder> AddSimplePiece<T>(int idMin, int idMax, Dictionary<int, IPieceBuilder> dict) where T : IPieceBuilder, new()

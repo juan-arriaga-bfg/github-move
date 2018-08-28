@@ -43,23 +43,7 @@ public class ResourceView : BoardElementView
         DOTween.Kill(body);
         DOTween.Kill(AnimationId);
         
-        /*if (GameDataService.Current.CollectionManager.Contains(resource.Currency))
-        {
-            var model = UIService.Get.GetCachedModel<UICollectionWindowModel>(UIWindowType.CollectionWindow);
-
-            model.Element = resource.Currency;
-            model.OnOpen = () => GameDataService.Current.CollectionManager.CollectResourceFromBoard(pos, resource);
-            
-            UIService.Get.ShowWindow(UIWindowType.CollectionWindow);
-            
-            body.DOScale(Vector3.zero, 0.3f).SetId(body).SetEase(Ease.OutBack);
-            DestroyOnBoard(0.3f);
-            return;
-        }*/
-
-        var index = Currency.GetCurrencyDef(resource.Currency).Id;
-
-        var position = GameDataService.Current.PiecesManager.CastlePosition;
+        var position = BoardPosition.Default();
         
         var target = BoardService.Current.GetBoardById(0).BoardDef.GetPiecePosition(position.X, position.Y);
         var duration = Vector3.Distance(body.position, target) / 20f;
@@ -70,8 +54,6 @@ public class ResourceView : BoardElementView
         sequence.Insert(0.1f + duration*0.5f, body.DOScale(Vector3.one * 0.2f, duration*0.5f));
         
         DestroyOnBoard(duration);
-        
-        GameDataService.Current.CollectionManager.CollectResourceFromBoard(pos, resource);
     }
     
     public override void ResetViewOnDestroy()
