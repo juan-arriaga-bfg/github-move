@@ -14,8 +14,7 @@ public class UILimitPanelViewController : UIGenericResourcePanelViewController
         set
         {
             currentValueAnimated = value;
-
-            if (amountLabel != null) amountLabel.Text = UpdateText(currentValueAnimated, limitValueAnimated);
+            SetLabelText(currentValueAnimated, limitValueAnimated);
         }
     }
     
@@ -26,8 +25,7 @@ public class UILimitPanelViewController : UIGenericResourcePanelViewController
         set
         {
             limitValueAnimated = value;
-
-            if (amountLabel != null) amountLabel.Text = UpdateText(currentValueAnimated, limitValueAnimated);
+            SetLabelText(currentValueAnimated, limitValueAnimated);
         }
     }
 
@@ -70,13 +68,15 @@ public class UILimitPanelViewController : UIGenericResourcePanelViewController
         currentValueAnimated = currentValue = storageItem.Amount;
         limitValueAnimated = currentLimitValue = storageItemLimit.Amount;
 
-        if (amountLabel != null) amountLabel.Text = UpdateText(storageItem.Amount, storageItemLimit.Amount);
+        SetLabelText(storageItem.Amount, storageItemLimit.Amount);
+        
         if (icon != null) icon.sprite = IconService.Instance.Manager.GetSpriteById(string.Format(IconPattern, storageItem.Currency));
     }
     
-    private string UpdateText(int current, int limit)
+    private void SetLabelText(int current, int limit)
     {
-        return $"{current}/{limit}";
+        if (amountLabel == null) return;
+        amountLabel.Text = $"<mspace=2.7em>{current}/{limit}</mspace>";
     }
     
     public void DebugCurrentResources()
