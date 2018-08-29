@@ -6,22 +6,28 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
+    private TimerComponent timer;
+    public TimerComponent Timer
+    {
+        get { return timer ?? (timer = GetComponent<TimerComponent>(TimerComponent.ComponentGuid)); }
+    }
+    
     public int Delay { get; set; }
     
-    private DateTime then;
-    public DateTime Later;
-    
+//    private DateTime then;
+//    public DateTime Later;
+//    
     public Action OnExecute;
     
-    public long LastUpdate => then.ConvertToUnixTime();
+    public long LastUpdate => Timer.StartTime.ConvertToUnixTime();
 
     public override void OnRegisterEntity(ECSEntity entity)
     {
         targetItem = ProfileService.Current.Purchases.GetStorageItem(Currency.Energy.Name);
         limitItem = ProfileService.Current.Purchases.GetStorageItem(Currency.EnergyLimit.Name);
-        
-        then = DateTime.UtcNow;
-        Later = then.AddSeconds(Delay);
+
+        Timer.Delay = Delay;
+        Timer.OnComplete += StepComplete; 
         
         base.OnRegisterEntity(entity);
     }
@@ -32,29 +38,38 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         
         if(save == null) return;
         
-        var refil = DateTimeExtension.CountOfStepsPassedWhenAppWasInBackground(save.EnergyLastUpdate, Delay, out then);
+        var refil = DateTimeExtension.CountOfStepsPassedWhenAppWasInBackground(save.EnergyLastUpdate, Delay, out Timer.StartTime);
         
-        Later = then.AddSeconds(Delay);
         targetItem.Amount += Mathf.Min(refil, limitItem.Amount - targetItem.Amount);
+        
+        if(IsExecuteable())
+            Execute();
     }
     
     public void Execute()
     {
         OnExecute?.Invoke();
-        
-        var now = DateTime.UtcNow;
-        
-        if ((now - then).TotalSeconds < Delay) return;
-        
-        then = now;
-        Later = then.AddSeconds(Delay);
+
+        if (Timer.IsStarted == false && targetItem.Amount < limitItem.Amount)
+        {
+            Timer.Start();
+        }
+    }
+
+    public void StepComplete()
+    {
         Add(1);
+        if(targetItem.Amount >= limitItem.Amount)
+            Timer.Stop();
+        else
+            Timer.Start();
+        
+        Execute();
     }
 
     protected override void Add(int amount, bool isExtra = false)
     {
         base.Add(amount, isExtra);
-        OnExecute?.Invoke();
     }
 
     public object GetDependency()

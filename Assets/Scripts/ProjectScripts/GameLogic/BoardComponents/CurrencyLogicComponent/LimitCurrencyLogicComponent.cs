@@ -1,19 +1,22 @@
 ﻿using UnityEngine;
 
-public class LimitCurrencyLogicComponent : IECSComponent
+public class LimitCurrencyLogicComponent : ECSEntity
 {
-    public virtual int Guid => 0;
+    public static readonly int ComponentGuid = ECSManager.GetNextGuid();
+    public override int Guid => ComponentGuid;
 
     protected StorageItem targetItem;
     protected StorageItem limitItem;
     
-    public virtual void OnRegisterEntity(ECSEntity entity)
+    public override void OnRegisterEntity(ECSEntity entity)
     {
+        base.OnRegisterEntity(entity);
         InitInSave();
     }
 
-    public virtual void OnUnRegisterEntity(ECSEntity entity)
+    public override void OnUnRegisterEntity(ECSEntity entity)
     {
+        base.OnUnRegisterEntity(entity);
         targetItem = null;
         limitItem = null;
     }
