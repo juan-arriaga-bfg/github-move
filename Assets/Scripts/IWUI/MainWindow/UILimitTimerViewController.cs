@@ -18,15 +18,16 @@ public class UILimitTimerViewController : IWUIWindowViewController
         
         energyLogic = board.GetComponent<EnergyCurrencyLogicComponent>(EnergyCurrencyLogicComponent.ComponentGuid);
         energyLogic.OnExecute += UpdateView;
+        energyLogic.Timer.OnExecute += UpdateView;
     }
 
     private void UpdateView()
     {
         label.Text = energyLogic.Timer.CompleteTime.GetTimeLeftText(true);
-        Chenge(energyLogic.IsExecuteable());
+        Change(energyLogic.CheckIsNeed());
     }
 
-    private void Chenge(bool isShow)
+    private void Change(bool isShow)
     {
         if(this.isShow == isShow) return;
         
