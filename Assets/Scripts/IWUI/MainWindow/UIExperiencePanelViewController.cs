@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System;
+using System.Linq;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +9,7 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
     [SerializeField] private Image progress;
 
     private bool isLevelUp;
+    public Action<int> OnLevelUp;
     
     public override int CurrentValueAnimated
     {
@@ -67,8 +70,17 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
             CurrencyHellper.Purchase(Currency.Level.Name, 1, itemUid, manager.Price);
             CurrencyHellper.Purchase(Currency.EnergyLimit.Name, 1);
             CurrencyHellper.Purchase(data, null, new Vector2(Screen.width/2, Screen.height/2));
-            
+            RefillEnergy();
             GameDataService.Current.QuestsManager.UpdateActiveQuest();
         }, null, true);
+        
+    }
+
+    private void RefillEnergy()
+    {
+        var currentValue = ProfileService.Current.GetStorageItem(Currency.Energy.Name).Amount;
+        var limitValue = ProfileService.Current.GetStorageItem(Currency.EnergyLimit.Name).Amount;
+        if (limitValue - currentValue > 0)
+            CurrencyHellper.Purchase(Currency.Energy.Name, limitValue - currentValue);
     }
 }

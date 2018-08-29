@@ -25,9 +25,9 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
     {
         targetItem = ProfileService.Current.Purchases.GetStorageItem(Currency.Energy.Name);
         limitItem = ProfileService.Current.Purchases.GetStorageItem(Currency.EnergyLimit.Name);
-
+        
         Timer.Delay = Delay;
-        Timer.OnComplete += StepComplete; 
+        Timer.StartTime = DateTime.Now;
         
         base.OnRegisterEntity(entity);
     }
@@ -41,19 +41,28 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         var refil = DateTimeExtension.CountOfStepsPassedWhenAppWasInBackground(save.EnergyLastUpdate, Delay, out Timer.StartTime);
         
         targetItem.Amount += Mathf.Min(refil, limitItem.Amount - targetItem.Amount);
+
+        Timer.OnComplete += StepComplete; 
         
-        if(IsExecuteable())
-            Execute();
+        if(CheckIsNeed())
+            Timer.Start(Timer.StartTime);
+    }
+
+    private bool CheckIsNeed()
+    {
+        return targetItem.Amount < limitItem.Amount;
     }
     
     public void Execute()
     {
-        OnExecute?.Invoke();
+        
 
-        if (Timer.IsStarted == false && targetItem.Amount < limitItem.Amount)
+        if (Timer.IsStarted == false && CheckIsNeed())
         {
             Timer.Start();
         }
+        
+        OnExecute?.Invoke();
     }
 
     public void StepComplete()
@@ -79,6 +88,6 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
 
     public bool IsExecuteable()
     {
-        return targetItem.Amount < limitItem.Amount;
+        return CheckIsNeed();
     }
 }
