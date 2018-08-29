@@ -10,6 +10,7 @@ TextureImporter:
     21300010: Coins
     21300012: Life
     21300014: Timer
+    21300016: Mana
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -95,7 +96,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 95bcb7224e6e3624fbb8960353d3d33c
+      spriteID: 19ea3cfde9be0b8448f4c2219d5b2551
       vertices: []
       indices: 
       edges: []
@@ -115,7 +116,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ffabee3cefd6cda4d8d3fd4259a6efb7
+      spriteID: 1b7115862c0e9f34790473a4b68ac9f5
       vertices: []
       indices: 
       edges: []
@@ -135,7 +136,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b3028778886fd5043b1e59ba4b7e7466
+      spriteID: 9ba76c6d2ba4e2e47ab1c9f8c861b6b3
       vertices: []
       indices: 
       edges: []
@@ -155,7 +156,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ad5c35f149cece54c8a3ab1b7059b1dc
+      spriteID: bcf67c0f1774d6b4b8bc85097a2faead
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mana
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 0
+        width: 75
+        height: 87
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49191853f2b42034f815711a17a748d1
       vertices: []
       indices: 
       edges: []
@@ -175,7 +196,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eb1e4caf0709f1a42be2e8d21a069886
+      spriteID: f97ecbf63a180af42b9803bdacee7b1d
       vertices: []
       indices: 
       edges: []
@@ -184,8 +205,8 @@ TextureImporter:
       name: Timer
       rect:
         serializedVersion: 2
-        x: 261
-        y: 0
+        x: 313
+        y: 88
         width: 64
         height: 64
       alignment: 9
@@ -195,7 +216,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8f18b10646f38fd4695e8a58da1b201f
+      spriteID: 1e32a7583e19d8d45abab01cea28e9b6
       vertices: []
       indices: 
       edges: []
@@ -204,8 +225,8 @@ TextureImporter:
       name: Life
       rect:
         serializedVersion: 2
-        x: 313
-        y: 65
+        x: 337
+        y: 0
         width: 63
         height: 53
       alignment: 9
@@ -215,7 +236,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c3cc7bf0602d8e0479325bde73f7fcb6
+      spriteID: 3607453a81116fe47abcf87d2ccb3812
       vertices: []
       indices: 
       edges: []
