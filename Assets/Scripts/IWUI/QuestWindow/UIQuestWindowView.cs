@@ -59,7 +59,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         
         var pieces = windowModel.Quest.Rewards;
         var board = BoardService.Current.GetBoardById(0);
-        var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Hero1.Id, 1)[0];
+        var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
         
         windowModel.Quest = null;
         
@@ -79,7 +79,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         
         if (quest.Check())
         {
-            var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Hero1.Id, 1)[0];
+            var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
             
             if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, quest.Rewards.Values.Sum()))
             {

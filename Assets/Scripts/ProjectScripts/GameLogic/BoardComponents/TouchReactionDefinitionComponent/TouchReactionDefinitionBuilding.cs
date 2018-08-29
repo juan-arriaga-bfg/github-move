@@ -13,7 +13,7 @@
 				"Would you like to build the item right now for crystals?",
 				"Complete now ",
 				piece.PieceState.Timer,
-				() => CurrencyHellper.Purchase(Currency.Product.Name, 1, piece.PieceState.Timer.GetPrise(), success =>
+				() => CurrencyHellper.Purchase(Currency.Building.Name, 1, piece.PieceState.Timer.GetPrise(), success =>
 				{
 					if(success == false) return;
 					piece.PieceState.Fast();

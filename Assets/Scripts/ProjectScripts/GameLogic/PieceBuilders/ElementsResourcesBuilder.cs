@@ -17,7 +17,15 @@ public class ElementsResourcesBuilder
     {
         dict.Add(PieceType.Generic.Id, R.GenericPiece);
         
-        dict.Add(PieceType.Hero1.Id, R.Hero1Piece);
+        dict.Add(PieceType.Char1.Id, R.Char1Piece);
+        dict.Add(PieceType.Char2.Id, R.Char2Piece);
+        dict.Add(PieceType.Char3.Id, R.Char3Piece);
+        dict.Add(PieceType.Char4.Id, R.Char4Piece);
+        dict.Add(PieceType.Char5.Id, R.Char5Piece);
+        dict.Add(PieceType.Char6.Id, R.Char6Piece);
+        dict.Add(PieceType.Char7.Id, R.Char7Piece);
+        dict.Add(PieceType.Char8.Id, R.Char8Piece);
+        dict.Add(PieceType.Char9.Id, R.Char9Piece);
         
         dict.Add(PieceType.O1.Id, R.OPiece);
         dict.Add(PieceType.O2.Id, R.OPiece);
@@ -114,6 +122,10 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.X3.Id, R.X3Piece);
         dict.Add(PieceType.X4.Id, R.X4Piece);
         dict.Add(PieceType.X5.Id, R.X5Piece);
+        
+        dict.Add(PieceType.ChestA1.Id, R.ChestA1Piece);
+        dict.Add(PieceType.ChestA2.Id, R.ChestA2Piece);
+        dict.Add(PieceType.ChestA3.Id, R.ChestA3Piece);
         
         dict.Add(PieceType.ChestX1.Id, R.ChestX1Piece);
         dict.Add(PieceType.ChestX2.Id, R.ChestX2Piece);

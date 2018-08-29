@@ -212,14 +212,6 @@ public static class CurrencyHellper
         return isCan;
     }
 
-    public static int GetCountByTag(CurrencyTag tag)
-    {
-        var defs = Currency.GetCurrencyDefs(tag);
-
-        var count = defs.Sum(def => ProfileService.Current.GetStorageItem(def.Name).Amount);
-        return count;
-    }
-
     public static CurrencyPair ResourcePieceToCurrence(Dictionary<int, int> dict, string currensy)
     {
         var amount = 0;

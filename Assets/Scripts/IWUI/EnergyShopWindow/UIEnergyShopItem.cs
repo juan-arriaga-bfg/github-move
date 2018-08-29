@@ -33,7 +33,7 @@ public class UIEnergyShopItem : MonoBehaviour
         isClick = true;
         
         var board = BoardService.Current.GetBoardById(0);
-        var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Hero1.Id, 1)[0];
+        var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
         
         if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, 1))
         {

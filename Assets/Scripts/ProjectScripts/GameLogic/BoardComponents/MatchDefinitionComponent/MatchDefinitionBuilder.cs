@@ -141,6 +141,10 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.OX8.Id, new PieceMatchDef {Next = PieceType.OX9.Id, Previous = PieceType.OX7.Id, Count = -1});
         dict.Add(PieceType.OX9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.OX8.Id, Count = -1});
         
+        dict.Add(PieceType.ChestA1.Id, new PieceMatchDef {Next = PieceType.ChestA2.Id, Previous = PieceType.None.Id, Count = 3});
+        dict.Add(PieceType.ChestA2.Id, new PieceMatchDef {Next = PieceType.ChestA3.Id, Previous = PieceType.ChestA1.Id, Count = 3});
+        dict.Add(PieceType.ChestA3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.ChestA2.Id, Count = 3});
+        
         dict.Add(PieceType.ChestX1.Id, new PieceMatchDef {Next = PieceType.ChestX2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.ChestX2.Id, new PieceMatchDef {Next = PieceType.ChestX3.Id, Previous = PieceType.ChestX1.Id, Count = 3});
         dict.Add(PieceType.ChestX3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.ChestX2.Id, Count = 3});

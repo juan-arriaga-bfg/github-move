@@ -134,5 +134,13 @@ public class R
      public const string H5Piece = "H5Piece";
      public const string Warning = "Warning";
      public const string MagicPiece = "MagicPiece";
-     public const string Hero1Piece = "Hero1Piece";
+     public const string Char1Piece = "Char1Piece";
+     public const string Char2Piece = "Char2Piece";
+     public const string Char3Piece = "Char3Piece";
+     public const string Char4Piece = "Char4Piece";
+     public const string Char5Piece = "Char5Piece";
+     public const string Char6Piece = "Char6Piece";
+     public const string Char7Piece = "Char7Piece";
+     public const string Char8Piece = "Char8Piece";
+     public const string Char9Piece = "Char9Piece";
 }
