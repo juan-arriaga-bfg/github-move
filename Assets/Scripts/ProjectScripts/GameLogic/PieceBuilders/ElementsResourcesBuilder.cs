@@ -153,6 +153,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Chest8.Id, R.Chest8Piece);
         dict.Add(PieceType.Chest9.Id, R.Chest9Piece);
         
+        dict.Add(PieceType.Mana1.Id, R.Mana1Piece);
+        
         dict.Add(PieceType.Coin1.Id, R.Coin1Piece);
         dict.Add(PieceType.Coin2.Id, R.Coin2Piece);
         dict.Add(PieceType.Coin3.Id, R.Coin3Piece);

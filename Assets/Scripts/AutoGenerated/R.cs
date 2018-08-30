@@ -143,5 +143,6 @@ public class R
      public const string Char7Piece = "Char7Piece";
      public const string Char8Piece = "Char8Piece";
      public const string Char9Piece = "Char9Piece";
+     public const string Mana1Piece = "Mana1Piece";
      public const string LockView = "LockView";
 }

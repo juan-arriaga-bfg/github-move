@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public class TouchReactionDefinitionSpawnCastle : TouchReactionDefinitionComponent
+public class TouchReactionDefinitionSpawnShop : TouchReactionDefinitionComponent
 {
 	public int Reward = -1;
 	

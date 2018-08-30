@@ -51,7 +51,7 @@ public class UIEnergyShopWindowModel : IWWindowModel
         var reaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
 
         var menu = reaction?.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
-        var spawn = menu?.GetDefinition<TouchReactionDefinitionSpawnCastle>();
+        var spawn = menu?.GetDefinition<TouchReactionDefinitionSpawnShop>();
         
         if(spawn == null) return false;
 

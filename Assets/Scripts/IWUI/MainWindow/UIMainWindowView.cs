@@ -126,6 +126,11 @@ public class UIMainWindowView : IWUIWindowView
         UIService.Get.ShowWindow(UIWindowType.CodexWindow);
     }
 
+    public void OnClickShop()
+    {
+        UIService.Get.ShowWindow(UIWindowType.CastleWindow);
+    }
+
     private void OnNewPieceBuilded()
     {
         codexButton.UpdateState();

@@ -13,6 +13,7 @@ public class PiecesDataManager : ECSEntity, IDataManager, IDataLoader<List<Piece
         RegisterComponent(new PiecesReproductionDataManager());
     }
     
+    public const int CreateManaDelay = 60;
     public const int ReproductionDelay = 20;
     public const int ReproductionStepDelay = 5;
     public const int ReproductionChance = 50;

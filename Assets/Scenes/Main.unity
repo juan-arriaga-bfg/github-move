@@ -461,6 +461,8 @@ MonoBehaviour:
   Distance: 1
   Sensitivity: 1
   cameraManipulator: {fileID: 1931227307}
+  sensitivityOnDampening: 1
+  maxDampening: 6
   Dampening: 10
 --- !u!114 &1931227307
 MonoBehaviour:

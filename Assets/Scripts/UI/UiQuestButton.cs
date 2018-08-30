@@ -68,7 +68,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             OnClick();
         }
         
-        amountLabel.Text = $"<color=#{(isComplete ? "FFFFFF" : "FE4704")}><size=40>{Mathf.Min(value, quest.TargetAmount)}</size></color>/{quest.TargetAmount}";
+        amountLabel.Text = $"<color=#{(isComplete ? "FFFFFF" : "FE4704")}><size=33>{Mathf.Min(value, quest.TargetAmount)}</size></color>/{quest.TargetAmount}";
         shine.SetActive(isComplete);
     }
     

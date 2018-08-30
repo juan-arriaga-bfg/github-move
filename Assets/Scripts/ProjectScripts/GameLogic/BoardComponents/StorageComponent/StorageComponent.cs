@@ -16,6 +16,8 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     public bool IsTimerShow;
     public bool IsAutoStart = true;
 
+    public bool IsFilled => Filling == Capacity;
+    
     public Action OnHideBubble;
     
     private ViewDefinitionComponent viewDef;
@@ -51,7 +53,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
             Timer.OnComplete += OnHideTimer;
         }
         
-        if (InitInSave(position) == false && IsAutoStart && Filling != Capacity)
+        if (InitInSave(position) == false && IsAutoStart && !IsFilled)
         {
             Timer.Start();
         }
@@ -80,10 +82,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         Filling = Mathf.Min(item.Filling + Mathf.Max(steps, 0), Capacity);
         item.StartTime = now.ConvertToUnixTime();
         
-        if (item.IsStart && Filling != Capacity)
-        {
-            Timer.Start(item.StartTime);
-        }
+        if (item.IsStart && !IsFilled) Timer.Start(item.StartTime);
         
         return true;
     }
@@ -114,8 +113,8 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     {
         Filling = Mathf.Min(Filling + Amount, Capacity);
         
-        if(Filling < Capacity) Timer.Start();
-
+        if(!IsFilled) Timer.Start();
+        
         UpdateView();
     }
     
@@ -169,7 +168,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         if(viewDef == null) return;
         
         var view = viewDef.AddView(ViewType.BoardTimer);
-        var isShow = Filling < Capacity;
+        var isShow = !IsFilled;
         
         if(isShow == false) view.Priority = 10;
         view.Change(isShow);

@@ -1,24 +1,32 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class CharactersLogicComponent : IECSComponent
+public class CharactersLogicComponent : ECSEntity
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-	public int Guid => ComponentGuid;
-
+	public override int Guid => ComponentGuid;
+	
 	private BoardLogicComponent context;
-
+	
+	private readonly TimerComponent timer = new TimerComponent();
+	
 	private List<int> ids;
 	
-	public void OnRegisterEntity(ECSEntity entity)
+	public override void OnRegisterEntity(ECSEntity entity)
 	{
 		context = entity as BoardLogicComponent;
 		ids = PieceType.GetIdsByFilter(PieceTypeFilter.Character);
+		RegisterComponent(timer);
+		Waiting();
 	}
-
-	public void OnUnRegisterEntity(ECSEntity entity)
+	
+	private void Waiting()
 	{
+		timer.Delay = PiecesDataManager.CreateManaDelay;
+		timer.OnComplete = CreateMana;
+		timer.Start();
 	}
-
+	
 	public void Step()
 	{
 		foreach (var id in ids)
@@ -30,5 +38,30 @@ public class CharactersLogicComponent : IECSComponent
 				context.Context.ActionExecutor.AddAction(new MoveCharacterAction{From = position});
 			}
 		}
+	}
+
+	private void CreateMana()
+	{
+		var positions = new List<BoardPosition>();
+
+		foreach (var id in ids)
+		{
+			positions.AddRange(context.PositionsCache.GetPiecePositionsByType(id));
+		}
+		
+		positions.Shuffle();
+
+		foreach (var position in positions)
+		{
+			var piece = context.GetPieceAt(position);
+			var storage = piece?.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
+			
+			if(storage == null || storage.IsFilled || storage.Timer.IsStarted) continue;
+			
+			storage.Timer.Start();
+			break;
+		}
+		
+		Waiting();
 	}
 }
