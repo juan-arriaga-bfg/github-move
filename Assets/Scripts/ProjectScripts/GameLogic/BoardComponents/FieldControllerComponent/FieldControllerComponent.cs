@@ -23,8 +23,8 @@ public class FieldControllerComponent : IECSComponent
         var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
         CutTriangles(maxEdge / 2, Directions.All);
         
-        TestField();
-        return;
+//        TestField();
+//        return;
         
         context.BoardLogic.PieceFlyer.Locker.Lock(context);
         
