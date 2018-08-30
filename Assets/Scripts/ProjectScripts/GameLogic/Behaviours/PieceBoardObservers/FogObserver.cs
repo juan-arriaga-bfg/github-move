@@ -4,8 +4,10 @@ using UnityEngine;
 public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 {
     private int level;
+    private FogDef def;
     private StorageItem storageItem;
     private ViewDefinitionComponent viewDef;
+    private LockView lockView;
     private UIBoardView view;
     
     public RectTransform GetAnchorRect()
@@ -26,7 +28,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     {
         var key = new BoardPosition(position.X, position.Y);
         var def = GameDataService.Current.FogsManager.GetDef(key);
-        
+        this.def = def;
         if(def == null) return;
         
         Mask = def.Positions;
@@ -37,7 +39,6 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             viewDef.OnAddToBoard(position, context);
             level = def.Level;
             storageItem = ProfileService.Current.GetStorageItem(GetResourceId());
-            
             ResourcesViewManager.Instance.RegisterView(this);
         }
         
@@ -47,6 +48,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
         base.OnRemoveFromBoard(position, context);
+        
+        viewDef?.RemoveView(ViewType.Lock);
         
         ResourcesViewManager.Instance.UnRegisterView(this);
         
@@ -127,7 +130,26 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void UpdateResource(int offset)
     {
-        if(thisContext.Context.Pathfinder.CanPathToCastle(thisContext) == false || storageItem.Amount < level) return;
+        var canPath = thisContext.Context.Pathfinder.CanPathToCastle(thisContext);
+        if ((canPath ^ storageItem.Amount >= level) && lockView == null)
+        {
+            var lockOffset = new Vector3(0, 0);
+            lockView = viewDef.AddView(ViewType.Lock) as LockView;
+            lockView.Value = level.ToString();
+            lockView.transform.position = def.GetCenter(thisContext.Context) + lockOffset;
+        }
+
+        lockView?.SetGrayscale(!canPath);
+        
+        
+        if(canPath == false || storageItem.Amount < level) return;
+
+        if (lockView != null)
+        {
+            lockView.DestroyOnBoard();
+            viewDef.RemoveView(ViewType.Lock);
+            lockView = null;
+        }
         
         view = viewDef.AddView(ViewType.FogState);
         

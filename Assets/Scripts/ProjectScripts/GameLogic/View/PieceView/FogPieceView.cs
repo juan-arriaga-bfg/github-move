@@ -35,6 +35,8 @@ public class FogPieceView : PieceBoardElementView
 			views.Add(touch);
 		}
 		
+		
+		
 		fogItem.SetActive(false);
 		touchItem.SetActive(false);
 	}

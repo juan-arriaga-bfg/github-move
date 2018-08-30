@@ -12,5 +12,6 @@
     Bubble = -1008,
     MergeParticle = -1009,
     Progress = -1010,
-    Warning = -1011
+    Warning = -1011,
+    Lock = -1012
 }

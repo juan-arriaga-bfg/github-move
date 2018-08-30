@@ -195,6 +195,7 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.MergeParticle, R.MergeParticleSystem);
         dict.Add((int)ViewType.Progress, R.BoardProgressView);
         dict.Add((int)ViewType.Warning, R.Warning);
+        dict.Add((int)ViewType.Lock, R.LockView);
         return dict;
     }
 }
