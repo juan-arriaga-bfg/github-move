@@ -4,18 +4,13 @@ using System.Text;
 
 public class BoardLogicComponent : ECSEntity,
     IMatchDefinitionComponent, IFieldFinderComponent, IEmptyCellsFinderComponent, IMatchActionBuilderComponent, IPiecePositionsCacheComponent,
-    IPieceFlyerComponent
+    IPieceFlyerComponent, ICharactersLogicComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-
-    public override int Guid { get { return ComponentGuid; } }
+    public override int Guid => ComponentGuid;
 
     protected BoardController context;
-    
-    public BoardController Context
-    {
-        get { return context; }
-    }
+    public BoardController Context => context;
 
     private int width;
 
@@ -29,11 +24,11 @@ public class BoardLogicComponent : ECSEntity,
     
     private BoardCell[,,] boardCells;
 
-    protected int[,,] LogicMatrix { get { return logicMatrix; } }
+    protected int[,,] LogicMatrix => logicMatrix;
 
-    public Dictionary<BoardPosition, Piece> BoardEntities { get { return boardEntities; } }
+    public Dictionary<BoardPosition, Piece> BoardEntities => boardEntities;
 
-    public BoardCell[,,] BoardCells { get { return boardCells; } }
+    public BoardCell[,,] BoardCells => boardCells;
 
     public virtual int CurrentWidth { get; set; }
 
@@ -43,8 +38,8 @@ public class BoardLogicComponent : ECSEntity,
 
     public virtual int CurrentOffsetY { get; set; }
 
-    public virtual int Depth { get { return depth; } }
-    
+    public virtual int Depth => depth;
+
     protected MatchDefinitionComponent matchDefinition;
     public MatchDefinitionComponent MatchDefinition => matchDefinition ?? (matchDefinition = GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid));
     
@@ -62,10 +57,13 @@ public class BoardLogicComponent : ECSEntity,
     
     protected PieceFlyerComponent pieceFlyer;
     public PieceFlyerComponent PieceFlyer => pieceFlyer ?? (pieceFlyer = GetComponent<PieceFlyerComponent>(PieceFlyerComponent.ComponentGuid));
+    
+    protected CharactersLogicComponent charactersLogic;
+    public CharactersLogicComponent CharactersLogic => charactersLogic ?? (charactersLogic = GetComponent<CharactersLogicComponent>(CharactersLogicComponent.ComponentGuid));
 
     public override void OnRegisterEntity(ECSEntity entity)
     {
-        this.context = entity as BoardController;
+        context = entity as BoardController;
     }
 
     public override void OnUnRegisterEntity(ECSEntity entity) { }

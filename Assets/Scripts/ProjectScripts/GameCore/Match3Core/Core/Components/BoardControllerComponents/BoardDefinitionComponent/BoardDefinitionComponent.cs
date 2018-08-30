@@ -5,9 +5,8 @@ using UnityEngine;
 public class BoardDefinitionComponent : IECSComponent
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
+    public int Guid => ComponentGuid;
 
-    public int Guid { get { return ComponentGuid; } }
-    
     protected BoardController context;
     
     public void OnRegisterEntity(ECSEntity entity) { this.context = entity as BoardController; }

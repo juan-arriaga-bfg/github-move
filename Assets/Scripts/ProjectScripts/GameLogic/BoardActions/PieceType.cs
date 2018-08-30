@@ -15,7 +15,7 @@ public enum PieceTypeFilter
     Resource = 64,
     Energy = 128,
     Reproduction = 256,
-    Hero = 512,
+    Character = 512,
 }
 
 public partial class PieceTypeDef
@@ -65,15 +65,15 @@ public static partial class PieceType
         return result;
     }
     
-    public static readonly PieceTypeDef Char1 = new PieceTypeDef{Id = 10, Abbreviations = new List<string>{ "Char1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Hero};
-    public static readonly PieceTypeDef Char2 = new PieceTypeDef{Id = 11, Abbreviations = new List<string>{ "Char2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Hero};
-    public static readonly PieceTypeDef Char3 = new PieceTypeDef{Id = 12, Abbreviations = new List<string>{ "Char3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Hero};
-    public static readonly PieceTypeDef Char4 = new PieceTypeDef{Id = 13, Abbreviations = new List<string>{ "Char4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Hero};
-    public static readonly PieceTypeDef Char5 = new PieceTypeDef{Id = 14, Abbreviations = new List<string>{ "Char5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Hero};
-    public static readonly PieceTypeDef Char6 = new PieceTypeDef{Id = 15, Abbreviations = new List<string>{ "Char6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Hero};
-    public static readonly PieceTypeDef Char7 = new PieceTypeDef{Id = 16, Abbreviations = new List<string>{ "Char7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Hero};
-    public static readonly PieceTypeDef Char8 = new PieceTypeDef{Id = 17, Abbreviations = new List<string>{ "Char8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Hero};
-    public static readonly PieceTypeDef Char9 = new PieceTypeDef{Id = 18, Abbreviations = new List<string>{ "Char9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Hero};
+    public static readonly PieceTypeDef Char1 = new PieceTypeDef{Id = 10, Abbreviations = new List<string>{ "Char1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef Char2 = new PieceTypeDef{Id = 11, Abbreviations = new List<string>{ "Char2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef Char3 = new PieceTypeDef{Id = 12, Abbreviations = new List<string>{ "Char3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef Char4 = new PieceTypeDef{Id = 13, Abbreviations = new List<string>{ "Char4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef Char5 = new PieceTypeDef{Id = 14, Abbreviations = new List<string>{ "Char5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef Char6 = new PieceTypeDef{Id = 15, Abbreviations = new List<string>{ "Char6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef Char7 = new PieceTypeDef{Id = 16, Abbreviations = new List<string>{ "Char7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef Char8 = new PieceTypeDef{Id = 17, Abbreviations = new List<string>{ "Char8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef Char9 = new PieceTypeDef{Id = 18, Abbreviations = new List<string>{ "Char9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     
     public static readonly PieceTypeDef A1 = new PieceTypeDef{Id = 100, Abbreviations = new List<string>{ "A1" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef A2 = new PieceTypeDef{Id = 101, Abbreviations = new List<string>{ "A2" }, Filter = PieceTypeFilter.Simple};

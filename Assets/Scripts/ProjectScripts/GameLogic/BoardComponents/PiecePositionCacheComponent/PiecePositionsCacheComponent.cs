@@ -4,20 +4,12 @@ using UnityEngine;
 public class PiecePositionsCacheComponent : IECSComponent
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-
-	private Dictionary<int, List<BoardPosition>> cache = new Dictionary<int, List<BoardPosition>>();
+	public int Guid => ComponentGuid;
 	
-	public Dictionary<int, List<BoardPosition>> Cache
-	{
-		get { return cache; }
-	}
+	private Dictionary<int, List<BoardPosition>> cache = new Dictionary<int, List<BoardPosition>>();
+	public Dictionary<int, List<BoardPosition>> Cache => cache;
 
 	private BoardLogicComponent context;
-	
-	public int Guid
-	{
-		get { return ComponentGuid; }
-	}
 	
 	public void OnRegisterEntity(ECSEntity entity)
 	{

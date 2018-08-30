@@ -1,11 +1,7 @@
 ﻿public class MovePieceFromToAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-
-	public virtual int Guid
-	{
-		get { return ComponentGuid; }
-	}
+	public virtual int Guid => ComponentGuid;
 
 	public BoardPosition From { get; set; }
 	

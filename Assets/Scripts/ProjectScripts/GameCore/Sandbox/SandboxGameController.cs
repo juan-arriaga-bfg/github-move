@@ -40,12 +40,14 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new BoardLoggerComponent()); // logger
         
         boardController.RegisterComponent(new WorkerCurrencyLogicComponent());
+        
         boardController.RegisterComponent(new EnergyCurrencyLogicComponent{Delay = 60}
                             .RegisterComponent(new TimerComponent()));
         
         boardController.RegisterComponent(new BoardLogicComponent() // core logic
             .RegisterComponent(new PiecePositionsCacheComponent())
             .RegisterComponent(new FieldFinderComponent())
+            .RegisterComponent(new CharactersLogicComponent())
             .RegisterComponent(new PieceFlyerComponent()
                 .RegisterComponent(new LockerComponent()))
             .RegisterComponent(new EmptyCellsFinderComponent()) // finds empty cells

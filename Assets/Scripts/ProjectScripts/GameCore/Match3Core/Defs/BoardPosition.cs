@@ -21,12 +21,7 @@ public struct BoardPosition : IEquatable<BoardPosition>
 
     public bool IsValidFor(int w, int h)
     {
-        if (IsValid && X < w && Y < h)
-        {
-            return true;
-        }
-        
-        return false;
+        return IsValid && X < w && Y < h;
     }
 
     public static BoardPosition operator +(BoardPosition first, BoardPosition second)
@@ -80,15 +75,15 @@ public struct BoardPosition : IEquatable<BoardPosition>
         }
         else
         {
-            BoardPosition vector = (BoardPosition)other;
-            result = (this.X.Equals(vector.X) && this.Y.Equals(vector.Y) && this.Z.Equals(vector.Z));
+            var vector = (BoardPosition)other;
+            result = (X.Equals(vector.X) && Y.Equals(vector.Y) && Z.Equals(vector.Z));
         }
         return result;
     }
 
     public override int GetHashCode()
     {
-        return this.X.GetHashCode() ^ this.Y.GetHashCode() << 2 ^ this.Z.GetHashCode() >> 2;
+        return X.GetHashCode() ^ Y.GetHashCode() << 2 ^ Z.GetHashCode() >> 2;
     }
 
     public Vector3 ToVector()
@@ -218,6 +213,39 @@ public struct BoardPosition : IEquatable<BoardPosition>
     {
         return (this.X.Equals(other.X) && this.Y.Equals(other.Y) && this.Z.Equals(other.Z));
     }
+
+    public List<BoardPosition> Neighbors()
+    {
+        return new List<BoardPosition>
+        {
+            Left,
+            Up,
+            Right,
+            Down
+        };
+    }
+    
+    public List<BoardPosition> NeighborsFor(int w, int h)
+    {
+        var neighbors = new List<BoardPosition>();
+        var neighbor = Left;
+        
+        if(neighbor.IsValid) neighbors.Add(neighbor);
+        
+        neighbor = Down;
+        
+        if(neighbor.IsValid) neighbors.Add(neighbor);
+        
+        neighbor = Right;
+        
+        if(neighbor.X < w && neighbor.Y < h) neighbors.Add(neighbor);
+        
+        neighbor = Up;
+        
+        if(neighbor.X < w && neighbor.Y < h) neighbors.Add(neighbor);
+
+        return neighbors;
+    }
     
     public BoardPosition UpAtDistance(int distance)
     {
@@ -260,75 +288,26 @@ public struct BoardPosition : IEquatable<BoardPosition>
     }
 
     [Newtonsoft.Json.JsonIgnore]
-    public BoardPosition Up
-    {
-        get
-        {
-            return new BoardPosition(X, Y + 1, Z);
-        }
-    }
+    public BoardPosition Up => new BoardPosition(X, Y + 1, Z);
 
     [Newtonsoft.Json.JsonIgnore]
-    public BoardPosition Down
-    {
-        get
-        {
-            return new BoardPosition(X, Y - 1, Z);
-        }
-    }
+    public BoardPosition Down => new BoardPosition(X, Y - 1, Z);
 
     [Newtonsoft.Json.JsonIgnore]
-    public BoardPosition Left
-    {
-        get
-        {
-            return new BoardPosition(X - 1, Y, Z);
-        }
-    }
+    public BoardPosition Left => new BoardPosition(X - 1, Y, Z);
 
     [Newtonsoft.Json.JsonIgnore]
-    public BoardPosition Right
-    {
-        get
-        {
-            return new BoardPosition(X + 1, Y, Z);
-        }
-    }
+    public BoardPosition Right => new BoardPosition(X + 1, Y, Z);
 
     [Newtonsoft.Json.JsonIgnore]
-    public BoardPosition TopRight
-    {
-        get
-        {
-            return new BoardPosition(X + 1, Y + 1, Z);
-        }
-    }
+    public BoardPosition TopRight => new BoardPosition(X + 1, Y + 1, Z);
 
     [Newtonsoft.Json.JsonIgnore]
-    public BoardPosition BottomRight
-    {
-        get
-        {
-            return new BoardPosition(X + 1, Y - 1, Z);
-        }
-    }
+    public BoardPosition BottomRight => new BoardPosition(X + 1, Y - 1, Z);
 
     [Newtonsoft.Json.JsonIgnore]
-    public BoardPosition TopLeft
-    {
-        get
-        {
-            return new BoardPosition(X - 1, Y + 1, Z);
-        }
-    }
+    public BoardPosition TopLeft => new BoardPosition(X - 1, Y + 1, Z);
 
     [Newtonsoft.Json.JsonIgnore]
-    public BoardPosition BottomLeft
-    {
-        get
-        {
-            return new BoardPosition(X - 1, Y - 1, Z);
-        }
-    }
-
+    public BoardPosition BottomLeft => new BoardPosition(X - 1, Y - 1, Z);
 }
