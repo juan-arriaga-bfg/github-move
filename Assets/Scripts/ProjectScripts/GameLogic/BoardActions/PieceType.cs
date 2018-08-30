@@ -100,6 +100,7 @@ public static partial class PieceType
     public static readonly PieceTypeDef C7 = new PieceTypeDef{Id = 306, Abbreviations = new List<string>{ "C7" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef C8 = new PieceTypeDef{Id = 307, Abbreviations = new List<string>{ "C8" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef C9 = new PieceTypeDef{Id = 308, Abbreviations = new List<string>{ "C9" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef C10 = new PieceTypeDef{Id = 309, Abbreviations = new List<string>{ "C10" }, Filter = PieceTypeFilter.Multicellular};
     
     public static readonly PieceTypeDef D1 = new PieceTypeDef{Id = 400, Abbreviations = new List<string>{ "D1" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef D2 = new PieceTypeDef{Id = 401, Abbreviations = new List<string>{ "D2" }, Filter = PieceTypeFilter.Simple};
@@ -213,12 +214,6 @@ public static partial class PieceType
     public static readonly PieceTypeDef Chest7 = new PieceTypeDef{Id = 13007, Abbreviations = new List<string>{ "Chest7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     public static readonly PieceTypeDef Chest8 = new PieceTypeDef{Id = 13008, Abbreviations = new List<string>{ "Chest8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     public static readonly PieceTypeDef Chest9 = new PieceTypeDef{Id = 13009, Abbreviations = new List<string>{ "Chest9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
-    
-    public static readonly PieceTypeDef Zord1 = new PieceTypeDef{Id = 20001, Abbreviations = new List<string>{ "Zord1" }};
-    public static readonly PieceTypeDef Zord2 = new PieceTypeDef{Id = 20002, Abbreviations = new List<string>{ "Zord2" }};
-    public static readonly PieceTypeDef Zord3 = new PieceTypeDef{Id = 20003, Abbreviations = new List<string>{ "Zord3" }};
-    public static readonly PieceTypeDef Zord4 = new PieceTypeDef{Id = 20004, Abbreviations = new List<string>{ "Zord4" }};
-    public static readonly PieceTypeDef MegaZord = new PieceTypeDef{Id = 20000, Abbreviations = new List<string>{ "MegaZord" }, Filter = PieceTypeFilter.Multicellular};
     
     public static readonly PieceTypeDef Magic = new PieceTypeDef{Id = 1000000, Abbreviations = new List<string>{ "Magic" }};
 }

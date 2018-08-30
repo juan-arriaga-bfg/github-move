@@ -216,14 +216,6 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "road_1",
-    "SpriteName": "road_1",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
     "Uid": "RobinCard",
     "SpriteName": "RobinCard",
     "BundleName": "graphicscommon",
@@ -570,14 +562,6 @@
   {
     "Uid": "E5",
     "SpriteName": "E5",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "E6",
-    "SpriteName": "E6",
     "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/ProcessedContent",
     "SpriteSheetName": "gamefield",
@@ -1312,46 +1296,6 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "Zord1",
-    "SpriteName": "zord1",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "Zord2",
-    "SpriteName": "zord1",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "Zord3",
-    "SpriteName": "zord1",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "Zord4",
-    "SpriteName": "zord1",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "MegaZord",
-    "SpriteName": "С11",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
     "Uid": "MineZ",
     "SpriteName": "MineZ",
     "BundleName": "graphicscommon",
@@ -1446,5 +1390,13 @@
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Mana",
     "SpriteSheetName": "Mana1",
     "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Mana"
+  },
+  {
+    "Uid": "C10",
+    "SpriteName": "C10",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/C",
+    "SpriteSheetName": "C10",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/C"
   }
 ]

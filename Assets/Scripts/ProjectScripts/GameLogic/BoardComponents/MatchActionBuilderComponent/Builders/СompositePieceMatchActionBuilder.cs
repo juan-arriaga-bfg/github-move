@@ -6,10 +6,7 @@ public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMat
     {
         return new List<int>
         {
-            PieceType.Zord1.Id,
-            PieceType.Zord2.Id,
-            PieceType.Zord3.Id,
-            PieceType.Zord4.Id
+            PieceType.C9.Id
         };
     }
 
@@ -20,43 +17,37 @@ public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMat
         if (next == PieceType.None.Id) return false;
 
         var pattern = definition.GetPattern(next);
-        BoardPosition? start = null;
-
+        var starts = new List<BoardPosition>();
+        
         for (var i = 0; i < pattern.Count; i++)
         {
             var line = pattern[i];
             
             for (var j = 0; j < line.Count; j++)
             {
-                if (line[j] != pieceType) continue;
-
-                start = new BoardPosition(position.X - i, position.Y - j, position.Z);
-                break;
+                var pos = new BoardPosition(position.X - i, position.Y - j, position.Z);
+                
+                if(definition.Context.IsPointValid(pos) == false) continue;
+                
+                starts.Add(pos);
             }
-            
-            if(start != null) break;
         }
         
-        if(start == null) return false;
+        if(starts.Count == 0) return false;
         
         matchField.Clear();
 
-        for (var i = 0; i < pattern.Count; i++)
+        foreach (var start in starts)
         {
-            var line = pattern[i];
+            var positions = CheckMatch(pattern, definition.Context, start);
 
-            for (var j = 0; j < line.Count; j++)
-            {
-                var pos = new BoardPosition(start.Value.X + i, start.Value.Y + j, position.Z);
-                var piece = definition.Context.GetPieceAt(pos);
-
-                if (piece == null || piece.PieceType != line[j]) return false;
-                
-                matchField.Add(pos);
-            }
+            if (positions == null) continue;
+            
+            matchField.AddRange(positions);
+            return true;
         }
-
-        return true;
+        
+        return false;
     }
 
     public IBoardAction Build(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position)
@@ -66,7 +57,7 @@ public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMat
         if (nextType == PieceType.None.Id) return null;
 
         var pattern = definition.GetPattern(nextType);
-        BoardPosition? start = null;
+        var starts = new List<BoardPosition>();
 
         for (var i = 0; i < pattern.Count; i++)
         {
@@ -74,47 +65,63 @@ public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMat
             
             for (var j = 0; j < line.Count; j++)
             {
-                if (line[j] != pieceType) continue;
-
-                start = new BoardPosition(position.X - i, position.Y - j, position.Z);
-                break;
+                var pos = new BoardPosition(position.X - i, position.Y - j, position.Z);
+                
+                if(definition.Context.IsPointValid(pos) == false) continue;
+                
+                starts.Add(pos);
             }
-            
-            if(start != null) break;
         }
         
-        if(start == null) return null;
-
-        var positions = new List<BoardPosition>();
-
-        for (var i = 0; i < pattern.Count; i++)
+        if(starts.Count == 0) return null;
+        
+        var at = BoardPosition.Default();
+        List<BoardPosition> positions = null;
+        
+        foreach (var start in starts)
         {
-            var line = pattern[i];
-
-            for (var j = 0; j < line.Count; j++)
-            {
-                var pos = new BoardPosition(start.Value.X + i, start.Value.Y + j, position.Z);
-                var piece = definition.Context.GetPieceAt(pos);
-
-                if (piece == null || piece.PieceType != line[j]) return null;
-                
-                positions.Add(pos);
-            }
+            positions = CheckMatch(pattern, definition.Context, start);
+            at = start;
+            if(positions != null) break;
         }
+
+        if(positions == null) return null;
         
         var nextAction = new SpawnPieceAtAction
         {
             IsCheckMatch = false,
-            At = start.Value,
+            At = at,
             PieceTypeId = nextType,
             OnSuccessEvent = pos => SpawnReward(pos, nextType)
         };
         
         return new CollapsePieceToAction
         {
-            To = start.Value,
+            To = at,
             Positions = positions,
             OnCompleteAction = nextAction
         };
+    }
+
+    private List<BoardPosition> CheckMatch(List<List<int>> pattern, BoardLogicComponent logic, BoardPosition start)
+    {
+        var positions = new List<BoardPosition>();
+            
+        for (var i = 0; i < pattern.Count; i++)
+        {
+            var line = pattern[i];
+
+            for (var j = 0; j < line.Count; j++)
+            {
+                var pos = new BoardPosition(start.X + i, start.Y + j, start.Z);
+                var piece = logic.GetPieceAt(pos);
+
+                if (piece == null || piece.PieceType != line[j]) return null;
+                
+                positions.Add(pos);
+            }
+        }
+
+        return positions;
     }
 }

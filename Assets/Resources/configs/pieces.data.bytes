@@ -1100,6 +1100,30 @@
     ]
   },
   {
+    "Uid": "C10",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 200
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 1000
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 1000
+      }
+    ],
+    "Name": "Castle",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
     "Uid": "D1",
     "Name": "Little sheep",
     "UnlockBonus": [
@@ -1872,80 +1896,6 @@
       {
         "Currency": "Coins",
         "Amount": 15
-      }
-    ]
-  },
-  {
-    "Uid": "Zord1",
-    "Name": "Castle tower",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
-  },
-  {
-    "Uid": "Zord2",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 10
-      }
-    ],
-    "Name": "Castle tower",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
-  },
-  {
-    "Uid": "Zord3",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 20
-      }
-    ],
-    "Name": "Castle tower",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
-  },
-  {
-    "Uid": "Zord4",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 30
-      }
-    ],
-    "Name": "Castle tower",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
-  },
-  {
-    "Uid": "MegaZord",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 100
-      }
-    ],
-    "Name": "Castle",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
       }
     ]
   }

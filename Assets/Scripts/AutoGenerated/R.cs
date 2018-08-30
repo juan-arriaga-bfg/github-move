@@ -112,11 +112,6 @@ public class R
      public const string Basket3Piece = "Basket3Piece";
      public const string OPiece = "OPiece";
      public const string OXPiece = "OXPiece";
-     public const string MegaZord = "MegaZord";
-     public const string Zord1Piece = "Zord1Piece";
-     public const string Zord2Piece = "Zord2Piece";
-     public const string Zord3Piece = "Zord3Piece";
-     public const string Zord4Piece = "Zord4Piece";
      public const string BubbleView = "BubbleView";
      public const string MineYPiece = "MineYPiece";
      public const string MergeParticleSystem = "MergeParticleSystem";
@@ -145,4 +140,5 @@ public class R
      public const string Char9Piece = "Char9Piece";
      public const string Mana1Piece = "Mana1Piece";
      public const string LockView = "LockView";
+     public const string C10Piece = "C10Piece";
 }

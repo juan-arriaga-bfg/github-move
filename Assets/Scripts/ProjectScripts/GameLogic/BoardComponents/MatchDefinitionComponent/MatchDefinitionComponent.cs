@@ -3,10 +3,9 @@
 public class MatchDefinitionComponent : ECSEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
+    public override int Guid => ComponentGuid;
 
-    public override int Guid { get { return ComponentGuid; } }
-
-    private Dictionary<int, PieceMatchDef> definition;
+    private readonly Dictionary<int, PieceMatchDef> definition;
 
     public BoardLogicComponent Context;
     
