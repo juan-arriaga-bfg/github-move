@@ -12,6 +12,7 @@
 		AddObserver(piece, state);
 		
 		piece.RegisterComponent(new DraggablePieceComponent());
+		
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionBuilding())
 			.RegisterComponent(new TouchReactionConditionComponent()));

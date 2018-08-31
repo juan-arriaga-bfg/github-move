@@ -1,4 +1,4 @@
-﻿public class CharacterPieceBuilder : GenericPieceBuilder
+﻿public class CharacterPieceBuilder : SimplePieceBuilder
 {
 	public override Piece Build(int pieceType, BoardController context)
 	{
@@ -23,7 +23,7 @@
 		
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}
-				.RegisterDefinition(new TouchReactionDefinitionOpenWindow{WindowType = UIWindowType.QuestWindow})
+				.RegisterDefinition(new TouchReactionDefinitionOpenWindow{WindowType = UIWindowType.CastleWindow})
 				.RegisterDefinition(new TouchReactionDefinitionSpawnInStorage {IsAutoStart = false})
 				.RegisterDefinition(new TouchReactionDefinitionSpawnShop()))
 			.RegisterComponent(new TouchReactionConditionComponent()));

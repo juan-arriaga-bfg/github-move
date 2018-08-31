@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UICastleWindowView : UIGenericPopupWindowView 
 {
     [SerializeField] private GameObject itemPattern;
-    [SerializeField] private NSText upgrade;
+    [SerializeField] private NSText buttonShow;
     [SerializeField] private ScrollRect scroll;
     [SerializeField] private RectTransform content;
     
@@ -21,7 +21,7 @@ public class UICastleWindowView : UIGenericPopupWindowView
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
 
-        upgrade.Text = windowModel.UpgradeMessage;
+        buttonShow.Text = windowModel.Button;
         
         var chests = windowModel.Chests;
         

@@ -6,7 +6,7 @@ public class UICastleWindowModel : IWWindowModel
     
     public string Title => "Shop of Chests";
     public string Message => "Upgrade your castle to get new chests!";
-    public string UpgradeMessage => "Improve free chest with higher Kingdom Level";
+    public string Button => "Show";
 
     public List<ChestDef> Chests
     {
