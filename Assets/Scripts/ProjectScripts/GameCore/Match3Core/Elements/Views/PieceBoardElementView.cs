@@ -96,10 +96,6 @@ public class PieceBoardElementView : BoardElementView
             }
         }
     }
-
-    public virtual void OnDragToNewPosition(BoardPosition boardPos, Vector2 worldPos)
-    {
-    }
     
     public virtual void OnDragStart(BoardPosition boardPos, Vector2 worldPos)
     {

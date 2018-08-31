@@ -82,8 +82,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4542807987214320}
-  - component: {fileID: 114243331302908096}
   - component: {fileID: 114101510669842026}
+  - component: {fileID: 114546918099256988}
   m_Layer: 0
   m_Name: MagicPiece
   m_TagString: Untagged
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   touchRegions:
   - {fileID: 224323878452697986}
---- !u!114 &114243331302908096
+--- !u!114 &114546918099256988
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1924086398574114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e94db1dff9a4341a9922139f675b17, type: 3}
+  m_Script: {fileID: 11500000, guid: 31de653b8ae64e748d9f4ab2b8035cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsFading: 0
