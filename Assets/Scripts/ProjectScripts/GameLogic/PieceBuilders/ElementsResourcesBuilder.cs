@@ -192,6 +192,8 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.Progress, R.BoardProgressView);
         dict.Add((int)ViewType.Warning, R.Warning);
         dict.Add((int)ViewType.Lock, R.LockView);
+        dict.Add((int)ViewType.Hourglass, R.Hourglass);
+        
         return dict;
     }
 }

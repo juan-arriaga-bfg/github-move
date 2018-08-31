@@ -141,4 +141,5 @@ public class R
      public const string Mana1Piece = "Mana1Piece";
      public const string LockView = "LockView";
      public const string C10Piece = "C10Piece";
+     public const string Hourglass = "Hourglass";
 }

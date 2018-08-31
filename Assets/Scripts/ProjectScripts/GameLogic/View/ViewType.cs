@@ -13,5 +13,6 @@
     MergeParticle = -1009,
     Progress = -1010,
     Warning = -1011,
-    Lock = -1012
+    Lock = -1012,
+    Hourglass = -1013,
 }

@@ -7,7 +7,9 @@ public class BuildingPieceView : PieceBoardElementView
 	private Material unlockedMaterial;
     
 	private PieceStateComponent state;
+	
 	private GameObject warning;
+	private GameObject hourglass;
     
 	public override void Init(BoardRenderer context, Piece piece)
 	{
@@ -21,16 +23,10 @@ public class BuildingPieceView : PieceBoardElementView
 
 		if (sprite != null) unlockedMaterial = sprite.material;
 
-		if (warning == null)
-		{
-			var icon = Context.CreateElement((int) ViewType.Warning);
-			
-			icon.SetParent(sprite.transform.parent, false);
-			warning = icon.gameObject;
-			
-			AddLayerToCache(icon.GetComponentInChildren<Renderer>());
-			SyncRendererLayers(piece.CachedPosition);
-		}
+		if (warning == null) warning = CreateUi(ViewType.Warning);
+		if (hourglass == null) hourglass = CreateUi(ViewType.Hourglass);
+		
+		SyncRendererLayers(piece.CachedPosition);
 		
 		UpdateSate();
 	}
@@ -47,8 +43,24 @@ public class BuildingPieceView : PieceBoardElementView
 	private void UpdateSate()
 	{
 		if(state == null || sprite == null) return;
-		
+
 		sprite.material = state.State == BuildingState.Complete ? unlockedMaterial : lockedMaterial;
 		warning.SetActive(state.State == BuildingState.Warning);
+		hourglass.SetActive(state.State == BuildingState.InProgress);
+	}
+
+	private GameObject CreateUi(ViewType view)
+	{
+		var go = Context.CreateElement((int) view);
+		var renderers = go.GetComponentsInChildren<Renderer>();
+		
+		go.SetParent(sprite.transform.parent, false);
+
+		foreach (var items in renderers)
+		{
+			AddLayerToCache(items);
+		}
+		
+		return go.gameObject;
 	}
 }
