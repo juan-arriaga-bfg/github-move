@@ -1,4 +1,4 @@
-﻿public class CharacterPieceBuilder : SimplePieceBuilder
+﻿public class CharacterPieceBuilder : GenericPieceBuilder
 {
 	public override Piece Build(int pieceType, BoardController context)
 	{
@@ -20,6 +20,8 @@
 		
 		piece.RegisterComponent(storage);
 		AddObserver(piece, storage);
+		
+		piece.RegisterComponent(new DraggablePieceComponent());
 		
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}

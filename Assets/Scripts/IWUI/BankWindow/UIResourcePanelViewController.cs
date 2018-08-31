@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 public class UIResourcePanelViewController : UIGenericResourcePanelViewController 
 {
@@ -19,6 +20,18 @@ public class UIResourcePanelViewController : UIGenericResourcePanelViewControlle
 
         SetLabelText(storageItem.Amount);
         if (icon != null) icon.sprite = IconService.Instance.Manager.GetSpriteById(string.Format(IconPattern, storageItem.Currency));
+    }
+    
+    public override void UpdateLabel(int value)
+    {
+        if (amountLabel == null) return;
+        
+        DOTween.Kill(amountLabel);
+        
+        var sequence = DOTween.Sequence().SetId(amountLabel);
+        sequence.Insert(0f, DOTween.To(() => CurrentValueAnimated, (v) => { CurrentValueAnimated = v; }, value, 0.5f ));
+        sequence.Insert(0f, icon.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.3f)).SetEase(Ease.InSine);
+        sequence.Insert(0.3f, icon.transform.DOScale(new Vector3(1f, 1f, 1f), 0.3f)).SetEase(Ease.OutSine);
     }
 
     public void DebugCurrentResources()
