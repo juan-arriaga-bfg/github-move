@@ -84,8 +84,6 @@ public class BoardManipulatorComponent : ECSEntity,
         
         if (cachedViewForDrag != null)
         {
-            cachedViewForDrag = null;
-
             cameraManipulator.CameraMove.UnLock(this);
         }
 
