@@ -13,21 +13,21 @@
         context = entity as BoardLogicComponent;
     }
     
-    public void Fly(int id, int x, int y)
+    public void FlyToQuest(Piece piece)
     {
-        if(Locker.IsLocked || GameDataService.Current.QuestsManager.IsNeedToFly(id) == false) return;
+        if (piece.PieceState != null && piece.PieceState.State != BuildingState.Complete
+            || Locker.IsLocked
+            || GameDataService.Current.QuestsManager.IsNeedToFly(piece.PieceType) == false) return;
         
-        var flay = ResourcesViewManager.Instance.GetFirstViewById(PieceType.Parse(id));
+        var flay = ResourcesViewManager.Instance.GetFirstViewById(PieceType.Parse(piece.PieceType));
         flay?.UpdateResource(1);
-        
-//        FlyTo(id, x, y, PieceType.Parse(id));
     }
     
-    public void FlyTo(int id, int x, int y, string target)
+    public void FlyTo(Piece piece, int x, int y, string target)
     {
-        if(Locker.IsLocked) return;
+        if(piece.PieceState != null && piece.PieceState.State != BuildingState.Complete || Locker.IsLocked) return;
         
-        var currency = PieceType.Parse(id);
+        var currency = PieceType.Parse(piece.PieceType);
         var flay = ResourcesViewManager.Instance.GetFirstViewById(target);
         
         if (flay == null) return;

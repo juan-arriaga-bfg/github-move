@@ -44,6 +44,8 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
             
             if (state == BuildingState.Complete)
             {
+                context.Context.BoardLogic.PieceFlyer.FlyToQuest(context);
+                context.Context.BoardLogic.PieceFlyer.FlyTo(context, context.CachedPosition.X, context.CachedPosition.Y, Currency.Piece.Name);
                 context.Matchable?.Locker.Unlock(this);
                 return;
             }
@@ -58,8 +60,8 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         
         var def = GameDataService.Current.PiecesManager.GetPieceDef(context.PieceType);
         
+        state = BuildingState.Complete;
         viewDef = context.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
-        State = BuildingState.Complete;
         
         Timer = new TimerComponent{Delay = def.MatchConditionsDef.Delay, Price = def.MatchConditionsDef.FastPrice};
         Timer.OnComplete += OnComplete;
@@ -70,8 +72,9 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     {
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
         var item = save?.GetBuildingSave(position);
-        
+
         if (item == null) return;
+        
         if (item.State == BuildingState.InProgress) Timer.Start(item.StartTime);
         
         State = item.State;

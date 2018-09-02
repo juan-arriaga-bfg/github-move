@@ -13,7 +13,7 @@ public class BuildingSaveItemJsonConverter : JsonConverter
         var targetValue = (BuildingSaveItem) value;
         
         serializer.TypeNameHandling = TypeNameHandling.None;
-        serializer.Serialize(writer, $"{targetValue.Id},{targetValue.Position.ToSaveString()},{(targetValue.State == BuildingState.InProgress ? 1 : 0)},{targetValue.StartTime}");
+        serializer.Serialize(writer, $"{targetValue.Id},{targetValue.Position.ToSaveString()},{(int)targetValue.State},{targetValue.StartTime}");
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -22,10 +22,11 @@ public class BuildingSaveItemJsonConverter : JsonConverter
 
         var data = serializer.Deserialize<string>(reader);
         var dataArray = data.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
+        var state = (BuildingState) int.Parse(dataArray[4]);
         
         targetValue.Id = int.Parse(dataArray[0]);
         targetValue.Position = new BoardPosition(int.Parse(dataArray[1]), int.Parse(dataArray[2]), int.Parse(dataArray[3]));
-        targetValue.State = int.Parse(dataArray[4]) == 1 ? BuildingState.InProgress : BuildingState.Warning;
+        targetValue.State = state == BuildingState.Waiting ? BuildingState.Warning : state;
         targetValue.StartTime = long.Parse(dataArray[5]);
         
         return targetValue;

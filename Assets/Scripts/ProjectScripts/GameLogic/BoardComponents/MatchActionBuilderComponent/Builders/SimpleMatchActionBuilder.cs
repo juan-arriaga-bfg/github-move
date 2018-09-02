@@ -48,6 +48,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
             At = position,
             Pieces = nextPieces,
             IsMatch = true,
+            OnPerformStep = StartLock,
             OnSuccessEvent = list =>
             {
                 for (var i = 0; i < list.Count; i++)
@@ -55,7 +56,6 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
                     if (nextPieces[i] == pieceType) continue;
                     
                     SpawnReward(list[i], nextPieces[i]);
-                    StartLock(list[i]);
                 }
             }
         };
