@@ -30,11 +30,10 @@ public class FieldControllerComponent : IECSComponent
         
         if (fieldDef.Pieces == null)
         {
-            TestField();
             
             var pieces = new Dictionary<int, List<BoardPosition>>(GameDataService.Current.FieldManager.Pieces)
                 {
-                    //{PieceType.Fog.Id, CreateFog()}
+                    {PieceType.Fog.Id, CreateFog()}
                 };
             
             foreach (var piece in pieces)
@@ -97,6 +96,7 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(24, 14), PieceType.A1.Id, PieceType.A9.Id);
         AddPieces(new BoardPosition(25, 14), PieceType.A1.Id, PieceType.A9.Id);
         AddPieces(new BoardPosition(26, 14), PieceType.A1.Id, PieceType.A9.Id);
+        AddPieces(new BoardPosition(27, 14), PieceType.Magic.Id, PieceType.Magic.Id);
         //AddPieces(new BoardPosition(13, 16), PieceType.C1.Id, PieceType.C9.Id);
         
         return;
