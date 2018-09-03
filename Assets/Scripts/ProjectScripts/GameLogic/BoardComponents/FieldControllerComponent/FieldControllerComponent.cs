@@ -30,6 +30,7 @@ public class FieldControllerComponent : IECSComponent
         
         if (fieldDef.Pieces == null)
         {
+            
             var pieces = new Dictionary<int, List<BoardPosition>>(GameDataService.Current.FieldManager.Pieces)
                 {
                     {PieceType.Fog.Id, CreateFog()}
@@ -89,10 +90,14 @@ public class FieldControllerComponent : IECSComponent
     
     private void TestField()
     {
-        AddPieces(new BoardPosition(8, 16), PieceType.C1.Id, PieceType.C9.Id);
-        AddPieces(new BoardPosition(10, 16), PieceType.C1.Id, PieceType.C9.Id);
-        AddPieces(new BoardPosition(11, 16), PieceType.C1.Id, PieceType.C9.Id);
-        AddPieces(new BoardPosition(13, 16), PieceType.C1.Id, PieceType.C9.Id);
+        AddPieces(new BoardPosition(21, 14), PieceType.C1.Id, PieceType.C11.Id);
+        AddPieces(new BoardPosition(22, 14), PieceType.C1.Id, PieceType.C11.Id);
+        AddPieces(new BoardPosition(23, 14), PieceType.C1.Id, PieceType.C11.Id);
+        AddPieces(new BoardPosition(24, 14), PieceType.A1.Id, PieceType.A9.Id);
+        AddPieces(new BoardPosition(25, 14), PieceType.A1.Id, PieceType.A9.Id);
+        AddPieces(new BoardPosition(26, 14), PieceType.A1.Id, PieceType.A9.Id);
+        AddPieces(new BoardPosition(27, 14), PieceType.Magic.Id, PieceType.Magic.Id);
+        //AddPieces(new BoardPosition(13, 16), PieceType.C1.Id, PieceType.C9.Id);
         
         return;
         AddPieces(new BoardPosition(4, 16), PieceType.O1.Id, PieceType.O5.Id);

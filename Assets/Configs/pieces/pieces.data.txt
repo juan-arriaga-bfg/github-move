@@ -792,6 +792,30 @@
     ]
   },
   {
+    "Uid": "A10",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 50
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 150
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 150
+      }
+    ],
+    "Name": "Purple house 2",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      }
+    ]
+  },
+  {
     "Uid": "B1",
     "Name": "Wheat",
     "UnlockBonus": [
@@ -1115,7 +1139,7 @@
         "Amount": 1000
       }
     ],
-    "Name": "Castle",
+    "Name": "Palace 2",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -1123,6 +1147,54 @@
       }
     ]
   },
+  {
+      "Uid": "C11",
+      "CreateRewards": [
+        {
+          "Currency": "Coins",
+          "Amount": 200
+        },
+        {
+          "Currency": "Experience",
+          "Amount": 1000
+        },
+        {
+          "Currency": "Mana",
+          "Amount": 1000
+        }
+      ],
+      "Name": "Palace 3",
+      "UnlockBonus": [
+        {
+          "Currency": "Coins",
+          "Amount": 5
+        }
+      ]
+    },
+    {
+        "Uid": "C12",
+        "CreateRewards": [
+          {
+            "Currency": "Coins",
+            "Amount": 200
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 1000
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 1000
+          }
+        ],
+        "Name": "Castle",
+        "UnlockBonus": [
+          {
+            "Currency": "Coins",
+            "Amount": 5
+          }
+        ]
+      },
   {
     "Uid": "D1",
     "Name": "Little sheep",

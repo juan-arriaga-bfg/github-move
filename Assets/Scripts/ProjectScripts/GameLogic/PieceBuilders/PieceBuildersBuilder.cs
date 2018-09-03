@@ -24,13 +24,14 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<CharacterPieceBuilder>(PieceType.Char1.Id, PieceType.Char9.Id, dict);
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.A1.Id, PieceType.A2.Id, dict);
-        dict = AddSimplePiece<BuildingPieceBuilder>(PieceType.A3.Id, PieceType.A9.Id, dict);
+        dict = AddSimplePiece<BuildingPieceBuilder>(PieceType.A3.Id, PieceType.A8.Id, dict);
+        dict.Add(PieceType.A9.Id, new PartPieceBuilder());
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.B1.Id, PieceType.B5.Id, dict);
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.C1.Id, PieceType.C2.Id, dict);
-        dict = AddSimplePiece<BuildingPieceBuilder>(PieceType.C3.Id, PieceType.C8.Id, dict);
-        dict.Add(PieceType.C9.Id, new PartPieceBuilder());
+        dict = AddSimplePiece<BuildingPieceBuilder>(PieceType.C3.Id, PieceType.C10.Id, dict);
+        dict.Add(PieceType.C11.Id, new PartPieceBuilder());
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.X1.Id, PieceType.X5.Id, dict);
         
@@ -82,7 +83,8 @@ public class PieceBuildersBuilder
     {
         var mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2);
         
-        dict.Add(PieceType.C10.Id, new MulticellularDraggablePieceBuilder{Mask = mask});
+        dict.Add(PieceType.C12.Id, new MulticellularDraggablePieceBuilder{Mask = mask});
+        dict.Add(PieceType.A10.Id, new MulticellularDraggablePieceBuilder{Mask = mask});
         
         dict = AddMulticellularPiece<MinePieceBuilder>(PieceType.MineC.Id, PieceType.MineZ.Id, mask, dict);
         

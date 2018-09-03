@@ -31,8 +31,10 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.A6.Id, new PieceMatchDef {Next = PieceType.A7.Id, Previous = PieceType.A5.Id, Count = 3});
         dict.Add(PieceType.A7.Id, new PieceMatchDef {Next = PieceType.A8.Id, Previous = PieceType.A6.Id, Count = 3});
         dict.Add(PieceType.A8.Id, new PieceMatchDef {Next = PieceType.A9.Id, Previous = PieceType.A7.Id, Count = 3});
-        dict.Add(PieceType.A9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.A8.Id});
+        dict.Add(PieceType.A9.Id, new PieceMatchDef {Next = PieceType.A10.Id, Previous = PieceType.A8.Id, Count = -1});
 
+        dict = AddMulticellularPiece(dict, PieceType.A10.Id, PieceType.A9.Id);
+        
         dict.Add(PieceType.B1.Id, new PieceMatchDef {Next = PieceType.B2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.B2.Id, new PieceMatchDef {Next = PieceType.B3.Id, Previous = PieceType.B1.Id, Count = 3});
         dict.Add(PieceType.B3.Id, new PieceMatchDef {Next = PieceType.B4.Id, Previous = PieceType.B2.Id, Count = 3});
@@ -47,9 +49,11 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.C6.Id, new PieceMatchDef {Next = PieceType.C7.Id, Previous = PieceType.C5.Id, Count = 3});
         dict.Add(PieceType.C7.Id, new PieceMatchDef {Next = PieceType.C8.Id, Previous = PieceType.C6.Id, Count = 3});
         dict.Add(PieceType.C8.Id, new PieceMatchDef {Next = PieceType.C9.Id, Previous = PieceType.C7.Id, Count = 3});
-        dict.Add(PieceType.C9.Id, new PieceMatchDef {Next = PieceType.C10.Id, Previous = PieceType.C8.Id, Count = -1});
+        dict.Add(PieceType.C9.Id, new PieceMatchDef {Next = PieceType.C10.Id, Previous = PieceType.C8.Id, Count = 3});
+        dict.Add(PieceType.C10.Id, new PieceMatchDef {Next = PieceType.C11.Id, Previous = PieceType.C9.Id, Count = 3});
+        dict.Add(PieceType.C11.Id, new PieceMatchDef {Next = PieceType.C12.Id, Previous = PieceType.C10.Id, Count = -1});
 
-        dict = AddMulticellularPiece(dict, PieceType.C10.Id, PieceType.C9.Id);
+        dict = AddMulticellularPiece(dict, PieceType.C12.Id, PieceType.C11.Id);
         
         // ------------------ D -------------
         
