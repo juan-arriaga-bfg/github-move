@@ -42,29 +42,33 @@
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 15,
+        "Weight": 50,
         "Override": true
       },
       {
         "Uid": "A2",
-        "Weight": 20,
-        "Override": false
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "B1",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       },
       {
         "Uid": "D1",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       },
       {
         "Uid": "F1",
-        "Weight": 15
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "G1",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       }
     ]
   },
@@ -94,32 +98,33 @@
       },
       {
         "Uid": "A1",
-        "Weight": 20,
-        "Override": false
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "H1",
-        "Weight": 10
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "D2",
-        "Weight": 20,
-        "Override": false
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "E2",
-        "Weight": 20,
-        "Override": false
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "F2",
-        "Weight": 20,
-        "Override": false
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "G1",
         "Weight": 10,
-        "Override": false
+        "Override": true
       }
     ]
   },
@@ -134,48 +139,53 @@
     "PieceWeights": [
       {
         "Uid": "A2",
-        "Weight": 20,
-        "Override": false
+        "Weight": 40,
+        "Override": true
       },
       {
         "Uid": "F1",
-        "Weight": 20,
-        "Override": false
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "B1",
-        "Weight": 20,
-        "Override": false
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "H1",
-        "Weight": 10
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "J1",
-        "Weight": 10
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "I1",
-        "Weight": 10
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "E1",
-        "Weight": 10
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "J5",
         "Weight": 10,
-        "Override": false
+        "Override": true
       },
       {
         "Uid": "F4",
-        "Weight": 20,
-        "Override": false
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "C1",
-        "Weight": 20
+        "Weight": 10,
+        "Override": true
       }
     ]
   },
@@ -194,6 +204,10 @@
         "Override": true
       },
       {
+        "Uid": "A2",
+        "Weight": 30
+      },
+      {
         "Uid": "E1",
         "Weight": 10,
         "Override": true
@@ -210,11 +224,13 @@
       },
       {
         "Uid": "I2",
-        "Weight": 10
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "H2",
-        "Weight": 10
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "C1",
@@ -223,22 +239,22 @@
       },
       {
         "Uid": "D1",
-        "Weight": 20,
+        "Weight": 10,
         "Override": true
       },
       {
         "Uid": "G1",
-        "Weight": 20,
+        "Weight": 10,
         "Override": true
       },
       {
         "Uid": "F2",
-        "Weight": 15,
+        "Weight": 10,
         "Override": true
       },
       {
         "Uid": "J5",
-        "Weight": 15,
+        "Weight": 10,
         "Override": true
       }
     ]
@@ -255,12 +271,16 @@
       {
         "Uid": "J5",
         "Weight": 15,
-        "Override": false
+        "Override": true
+      },
+      {
+        "Uid": "A2",
+        "Weight": 30
       },
       {
         "Uid": "F5",
         "Weight": 15,
-        "Override": false
+        "Override": true
       }
     ]
   },
@@ -276,17 +296,17 @@
       {
         "Uid": "D4",
         "Weight": 15,
-        "Override": false
+        "Override": true
       },
       {
         "Uid": "E4",
         "Weight": 15,
-        "Override": false
+        "Override": true
       },
       {
         "Uid": "F4",
         "Weight": 15,
-        "Override": false
+        "Override": true
       }
     ]
   },
@@ -302,32 +322,37 @@
       {
         "Uid": "A2",
         "Weight": 20,
-        "Override": false
+        "Override": true
       },
       {
         "Uid": "C2",
-        "Weight": 20
+        "Weight": 20,
+        "Override": true
       },
       {
         "Uid": "C1",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       },
       {
         "Uid": "A1",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       },
       {
         "Uid": "E1",
-        "Weight": 20
+        "Weight": 20,
+        "Override": true
       },
       {
         "Uid": "Empty",
-        "Weight": 20
+        "Weight": 20,
+        "Override": true
       },
       {
         "Uid": "E2",
         "Weight": 10,
-        "Override": false
+        "Override": true
       }
     ],
     "RandomPieces": [
@@ -352,36 +377,42 @@
       {
         "Uid": "Empty",
         "Weight": 20,
-        "Override": false
+        "Override": true
       },
       {
         "Uid": "A2",
-        "Weight": 20
+        "Weight": 20,
+        "Override": true
       },
       {
         "Uid": "C2",
-        "Weight": 20
+        "Weight": 20,
+        "Override": true
       },
       {
         "Uid": "C1",
-        "Weight": 10
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "A1",
-        "Weight": 10
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "I1",
-        "Weight": 10
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "E1",
-        "Weight": 20
+        "Weight": 20,
+        "Override": true
       },
       {
         "Uid": "E2",
         "Weight": 10,
-        "Override": false
+        "Override": true
       }
     ],
     "RandomPieces": [
@@ -405,15 +436,18 @@
     "PieceWeights": [
       {
         "Uid": "Empty",
-        "Weight": 11
+        "Weight": 11,
+        "Override": true
       },
       {
         "Uid": "A1",
-        "Weight": 35
+        "Weight": 35,
+        "Override": true
       },
       {
         "Uid": "A2",
-        "Weight": 7
+        "Weight": 7,
+        "Override": true
       }
     ],
     "RandomPieces": [
@@ -434,15 +468,18 @@
     "PieceWeights": [
       {
         "Uid": "Empty",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       },
       {
         "Uid": "A3",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       },
       {
         "Uid": "A4",
-        "Weight": 20
+        "Weight": 20,
+        "Override": true
       }
     ],
     "RandomPieces": [
@@ -463,11 +500,13 @@
     "PieceWeights": [
       {
         "Uid": "Empty",
-        "Weight": 2
+        "Weight": 2,
+        "Override": true
       },
       {
         "Uid": "A5",
-        "Weight": 10
+        "Weight": 10,
+        "Override": true
       }
     ],
     "RandomPieces": [
@@ -488,15 +527,18 @@
     "PieceWeights": [
       {
         "Uid": "Empty",
-        "Weight": 11
+        "Weight": 11,
+        "Override": true
       },
       {
         "Uid": "C1",
-        "Weight": 35
+        "Weight": 35,
+        "Override": true
       },
       {
         "Uid": "C2",
-        "Weight": 7
+        "Weight": 7,
+        "Override": true
       }
     ],
     "RandomPieces": [
@@ -521,15 +563,21 @@
     "PieceWeights": [
       {
         "Uid": "Empty",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       },
       {
         "Uid": "C2",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       },
       {
         "Uid": "C3",
-        "Weight": 20
+        "Weight": 20,
+        "Override": true
+      },
+      {
+        "Override": false
       }
     ],
     "RandomPieces": [
@@ -554,11 +602,13 @@
     "PieceWeights": [
       {
         "Uid": "Empty",
-        "Weight": 2
+        "Weight": 2,
+        "Override": true
       },
       {
         "Uid": "C4",
-        "Weight": 10
+        "Weight": 10,
+        "Override": true
       }
     ],
     "RandomPieces": [
@@ -583,15 +633,18 @@
     "PieceWeights": [
       {
         "Uid": "Empty",
-        "Weight": 11
+        "Weight": 11,
+        "Override": true
       },
       {
         "Uid": "X1",
-        "Weight": 35
+        "Weight": 35,
+        "Override": true
       },
       {
         "Uid": "X2",
-        "Weight": 20
+        "Weight": 20,
+        "Override": true
       }
     ],
     "RandomPieces": [
@@ -618,15 +671,18 @@
     "PieceWeights": [
       {
         "Uid": "Empty",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       },
       {
         "Uid": "X2",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       },
       {
         "Uid": "X3",
-        "Weight": 20
+        "Weight": 20,
+        "Override": true
       }
     ],
     "RandomPieces": [
@@ -653,11 +709,13 @@
     "PieceWeights": [
       {
         "Uid": "Empty",
-        "Weight": 2
+        "Weight": 2,
+        "Override": true
       },
       {
         "Uid": "X4",
-        "Weight": 10
+        "Weight": 10,
+        "Override": true
       }
     ],
     "RandomPieces": [
@@ -723,15 +781,18 @@
     "PieceWeights": [
       {
         "Uid": "Empty",
-        "Weight": 11
+        "Weight": 11,
+        "Override": true
       },
       {
         "Uid": "X1",
-        "Weight": 35
+        "Weight": 35,
+        "Override": true
       },
       {
         "Uid": "X2",
-        "Weight": 20
+        "Weight": 20,
+        "Override": true
       }
     ],
     "RandomPieces": [
@@ -758,15 +819,18 @@
     "PieceWeights": [
       {
         "Uid": "Empty",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       },
       {
         "Uid": "X2",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       },
       {
         "Uid": "X3",
-        "Weight": 20
+        "Weight": 20,
+        "Override": true
       }
     ],
     "RandomPieces": [
@@ -793,11 +857,13 @@
     "PieceWeights": [
       {
         "Uid": "Empty",
-        "Weight": 2
+        "Weight": 2,
+        "Override": true
       },
       {
         "Uid": "X4",
-        "Weight": 10
+        "Weight": 10,
+        "Override": true
       }
     ],
     "RandomPieces": [

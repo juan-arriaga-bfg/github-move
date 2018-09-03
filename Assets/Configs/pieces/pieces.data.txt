@@ -9,7 +9,7 @@
     "Uid": "Char1",
     "SpawnResources": {
       "Currency": "Mana1",
-      "Amount": 1
+      "Amount": 2
     }
   },
   {
@@ -612,7 +612,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 5
+        "Amount": 1
       }
     ],
     "Name": "Timber",
@@ -636,7 +636,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 10
+        "Amount": 2
       }
     ],
     "Name": "Wooden house",
@@ -660,7 +660,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 15
+        "Amount": 5
       }
     ],
     "Name": "Yellow house",
@@ -684,7 +684,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 25
+        "Amount": 10
       }
     ],
     "Name": "Orange house",
@@ -708,7 +708,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 50
+        "Amount": 15
       }
     ],
     "Name": "Green house",
@@ -732,7 +732,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 75
+        "Amount": 25
       }
     ],
     "Name": "Blue house",
@@ -756,7 +756,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 100
+        "Amount": 35
       }
     ],
     "Name": "Red house",
@@ -780,34 +780,10 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 150
+        "Amount": 50
       }
     ],
     "Name": "Purple house",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 25
-      }
-    ]
-  },
-  {
-    "Uid": "A10",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 50
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 150
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 150
-      }
-    ],
-    "Name": "Purple house 2",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -838,7 +814,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 5
+        "Amount": 1
       }
     ],
     "Name": "Field",
@@ -862,7 +838,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 15
+        "Amount": 2
       }
     ],
     "Name": "Sheaf",
@@ -886,7 +862,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 25
+        "Amount": 3
       }
     ],
     "Name": "Barn",
@@ -910,7 +886,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 50
+        "Amount": 5
       }
     ],
     "Name": "Mill",
@@ -944,7 +920,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 25
+        "Amount": 1
       }
     ],
     "Name": "Pile of stones",
@@ -968,7 +944,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 50
+        "Amount": 2
       }
     ],
     "Name": "Brown house",
@@ -992,7 +968,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 100
+        "Amount": 5
       }
     ],
     "Name": "Yellow house",
@@ -1016,7 +992,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 150
+        "Amount": 10
       }
     ],
     "Name": "Orange house",
@@ -1040,7 +1016,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 200
+        "Amount": 15
       }
     ],
     "Name": "Pink house",
@@ -1064,7 +1040,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 250
+        "Amount": 25
       }
     ],
     "Name": "Purple house",
@@ -1088,7 +1064,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 300
+        "Amount": 35
       }
     ],
     "Name": "Blue house",
@@ -1112,7 +1088,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 500
+        "Amount": 50
       }
     ],
     "Name": "Palace",
@@ -1136,10 +1112,10 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 1000
+        "Amount": 100
       }
     ],
-    "Name": "Palace 2",
+    "Name": "Castle",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -1147,54 +1123,6 @@
       }
     ]
   },
-  {
-      "Uid": "C11",
-      "CreateRewards": [
-        {
-          "Currency": "Coins",
-          "Amount": 200
-        },
-        {
-          "Currency": "Experience",
-          "Amount": 1000
-        },
-        {
-          "Currency": "Mana",
-          "Amount": 1000
-        }
-      ],
-      "Name": "Palace 3",
-      "UnlockBonus": [
-        {
-          "Currency": "Coins",
-          "Amount": 5
-        }
-      ]
-    },
-    {
-        "Uid": "C12",
-        "CreateRewards": [
-          {
-            "Currency": "Coins",
-            "Amount": 200
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 1000
-          },
-          {
-            "Currency": "Mana",
-            "Amount": 1000
-          }
-        ],
-        "Name": "Castle",
-        "UnlockBonus": [
-          {
-            "Currency": "Coins",
-            "Amount": 5
-          }
-        ]
-      },
   {
     "Uid": "D1",
     "Name": "Little sheep",
@@ -1218,7 +1146,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 5
+        "Amount": 1
       }
     ],
     "Name": "Sheep",
@@ -1242,7 +1170,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 15
+        "Amount": 2
       }
     ],
     "Name": "Flock",
@@ -1257,7 +1185,7 @@
     "Uid": "D4",
     "SpawnResources": {
       "Currency": "Energy",
-      "Amount": 20
+      "Amount": 5
     },
     "Name": "Wool",
     "UnlockBonus": [
@@ -1280,12 +1208,12 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 50
+        "Amount": 5
       }
     ],
     "SpawnResources": {
       "Currency": "Energy",
-      "Amount": 65
+      "Amount": 15
     },
     "Name": "Cloth",
     "UnlockBonus": [
@@ -1318,7 +1246,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 5
+        "Amount": 1
       }
     ],
     "Name": "Tree",
@@ -1342,7 +1270,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 15
+        "Amount": 2
       }
     ],
     "Name": "Blooming tree",
@@ -1380,7 +1308,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 50
+        "Amount": 5
       }
     ],
     "SpawnResources": {
@@ -1418,7 +1346,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 5
+        "Amount": 1
       }
     ],
     "Name": "Blooming sprout",
@@ -1442,7 +1370,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 10
+        "Amount": 2
       }
     ],
     "Name": "Corn crop",
@@ -1480,7 +1408,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 50
+        "Amount": 5
       }
     ],
     "SpawnResources": {
@@ -1518,7 +1446,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 5
+        "Amount": 1
       }
     ],
     "Name": "Cow",
@@ -1542,7 +1470,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 10
+        "Amount": 2
       }
     ],
     "Name": "Herd",
@@ -1580,7 +1508,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 50
+        "Amount": 5
       }
     ],
     "SpawnResources": {
@@ -1618,7 +1546,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 5
+        "Amount": 1
       }
     ],
     "Name": "Chiken",
@@ -1642,7 +1570,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 10
+        "Amount": 2
       }
     ],
     "Name": "Chiken house",
@@ -1680,7 +1608,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 50
+        "Amount": 5
       }
     ],
     "SpawnResources": {
@@ -1718,7 +1646,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 5
+        "Amount": 1
       }
     ],
     "Name": "I2 Piece",
@@ -1742,7 +1670,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 10
+        "Amount": 2
       }
     ],
     "Name": "I3 Piece",
@@ -1780,7 +1708,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 50
+        "Amount": 5
       }
     ],
     "SpawnResources": {
@@ -1812,7 +1740,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 5
+        "Amount": 1
       }
     ],
     "Name": "J2 Piece",
@@ -1836,7 +1764,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 15
+        "Amount": 2
       }
     ],
     "Name": "J3  Piece",
@@ -1874,7 +1802,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 50
+        "Amount": 5
       }
     ],
     "SpawnResources": {
@@ -1912,7 +1840,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 5
+        "Amount": 1
       }
     ],
     "Name": "X2 Piece",
@@ -1936,7 +1864,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 15
+        "Amount": 2
       }
     ],
     "Name": "X3 Piece",
@@ -1960,7 +1888,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 25
+        "Amount": 5
       }
     ],
     "Name": "X4 Piece",
