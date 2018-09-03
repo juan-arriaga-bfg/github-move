@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBuilder
 {
@@ -6,7 +7,8 @@ public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMat
     {
         return new List<int>
         {
-            PieceType.C9.Id
+            PieceType.C11.Id,
+            PieceType.A9.Id
         };
     }
 

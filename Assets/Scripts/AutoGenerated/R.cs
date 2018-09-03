@@ -142,4 +142,7 @@ public class R
      public const string LockView = "LockView";
      public const string C10Piece = "C10Piece";
      public const string Hourglass = "Hourglass";
+     public const string C11Piece = "C11Piece";
+     public const string C12Piece = "C12Piece";
+     public const string A10Piece = "A10Piece";
 }
