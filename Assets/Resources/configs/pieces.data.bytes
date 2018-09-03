@@ -792,6 +792,30 @@
     ]
   },
   {
+    "Uid": "A10",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 80
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 200
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 90
+      }
+    ],
+    "Name": "Mill",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 30
+      }
+    ]
+  },
+  {
     "Uid": "B1",
     "Name": "Wheat",
     "UnlockBonus": [
@@ -1119,7 +1143,55 @@
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 90
+      }
+    ]
+  },
+  {
+    "Uid": "C11",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 100
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 500
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 50
+      }
+    ],
+    "Name": "Castle",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 110
+      }
+    ]
+  },
+  {
+    "Uid": "C12",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 200
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 1000
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 100
+      }
+    ],
+    "Name": "Castle",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 130
       }
     ]
   },

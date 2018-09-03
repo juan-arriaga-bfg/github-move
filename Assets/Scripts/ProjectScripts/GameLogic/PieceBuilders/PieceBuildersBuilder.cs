@@ -27,7 +27,7 @@ public class PieceBuildersBuilder
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.B1.Id, PieceType.B5.Id, dict);
         
-        dict = AddBuildingBranchPiece<SimplePieceBuilder, BuildingPieceBuilder>(dict, PieceType.C1.Id, PieceType.C9.Id);
+        dict = AddBuildingBranchPiece<SimplePieceBuilder, BuildingPieceBuilder>(dict, PieceType.C1.Id, PieceType.C11.Id);
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.X1.Id, PieceType.X5.Id, dict);
         
@@ -79,7 +79,8 @@ public class PieceBuildersBuilder
     {
         var mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2);
         
-        dict.Add(PieceType.C10.Id, new MulticellularDraggablePieceBuilder{Mask = mask});
+        dict.Add(PieceType.A10.Id, new MulticellularDraggablePieceBuilder{Mask = mask});
+        dict.Add(PieceType.C12.Id, new MulticellularDraggablePieceBuilder{Mask = mask});
         
         dict = AddMulticellularPiece<MinePieceBuilder>(PieceType.MineC.Id, PieceType.MineZ.Id, mask, dict);
         
