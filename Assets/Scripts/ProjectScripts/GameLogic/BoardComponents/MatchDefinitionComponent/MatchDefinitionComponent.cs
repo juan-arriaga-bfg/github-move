@@ -38,10 +38,14 @@ public class MatchDefinitionComponent : ECSEntity
         PieceMatchDef def;
         
         if(definition.TryGetValue(pieceId, out def) == false) return PieceType.None.Id;
+
+        if (checkIgnore == false) return def.Next;
         
-        if(checkIgnore && def.IsIgnore) return PieceType.None.Id;
-        
-        return def.Next;
+        PieceMatchDef next;
+            
+        if (definition.TryGetValue(def.Next, out next) == false && def.IsIgnore) return PieceType.None.Id;
+
+        return next.IsIgnore ? GetNext(def.Next) : def.Next;
     }
 
     public int GetPrevious(int pieceId)
@@ -57,9 +61,9 @@ public class MatchDefinitionComponent : ECSEntity
         return chain.Count == 0 ? PieceType.None.Id : chain[0];
     }
 
-    public int GetLast(int pieceId, bool checkIgnore = true)
+    public int GetLast(int pieceId)
     {
-        var chain = GetChain(pieceId, checkIgnore);
+        var chain = GetChain(pieceId);
         return chain.Count == 0 ? PieceType.None.Id : chain[chain.Count - 1];
     }
     
@@ -72,7 +76,7 @@ public class MatchDefinitionComponent : ECSEntity
         return chain.IndexOf(pieceId) + 1;
     }
 
-    public List<int> GetChain(int pieceId, bool checkIgnore = true)
+    public List<int> GetChain(int pieceId)
     {
         var chain = new List<int>();
 
@@ -87,12 +91,12 @@ public class MatchDefinitionComponent : ECSEntity
         }
         while (unit != PieceType.None.Id);
         
-        unit = GetNext(pieceId, checkIgnore);
+        unit = GetNext(pieceId);
         
         while (unit != PieceType.None.Id)
         {
             chain.Add(unit);
-            unit = GetNext(unit, checkIgnore);
+            unit = GetNext(unit);
         }
         
         return chain;

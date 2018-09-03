@@ -144,6 +144,11 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         // Ignore obstacles
         var def = PieceType.GetDefById(id);
         
+        if (def.Filter.Has(PieceTypeFilter.Fake))
+        {
+            return true;
+        }
+        
         if (def.Filter.Has(PieceTypeFilter.Obstacle))
         {
             return true;
