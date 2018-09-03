@@ -99,7 +99,7 @@ public class PieceBoardElementView : BoardElementView
     
     public virtual void OnDragStart(BoardPosition boardPos, Vector2 worldPos)
     {
-        OnDrag(boardPos, worldPos);
+        OnDrag(Piece.CachedPosition, worldPos);
         Piece.Context.HintCooldown.IsPaused = true;
         Piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
     }

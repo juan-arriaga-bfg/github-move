@@ -29,6 +29,7 @@ public class BoardManipulatorComponent : ECSEntity,
 
     private bool isTouch = true;
     private bool? isDrag = false;
+    private bool isFullPass = false;
     
     private BoardElementView cachedViewForDrag = null;
     
@@ -172,7 +173,7 @@ public class BoardManipulatorComponent : ECSEntity,
             BeginDrag(startPos, pos);
         
         if ((pos - startPos).sqrMagnitude <= 0.01f || cachedViewForDrag == null) return false;
-        
+
         pos = pos + Vector2.up * 0.5f;
 
         var targetPos = new Vector3(pos.x, pos.y, cachedViewForDrag.CachedTransform.position.z);
@@ -180,11 +181,12 @@ public class BoardManipulatorComponent : ECSEntity,
         if (cachedViewForDrag is PieceBoardElementView)
         {
             var pieceView = cachedViewForDrag as PieceBoardElementView;
+            
             var boardPos = context.BoardDef.GetSectorPosition(targetPos);
             boardPos.Z = context.BoardDef.PieceLayer;
             pieceView.OnDrag(boardPos, pos);
 
-            if ((prevDragPos - pos).sqrMagnitude > 0.01f)
+            if ((prevDragPos - pos).sqrMagnitude > 0.01f || isFullPass)
             {
                 DOTween.Kill(dragAnimationId);
                 cachedViewForDrag.CachedTransform.localPosition = pos;
@@ -198,7 +200,7 @@ public class BoardManipulatorComponent : ECSEntity,
             targetCellPos = new Vector3(targetCellPos.x, targetCellPos.y, 0f);
             
             
-            if (lastCachedDragPosition.Equals(boardPos) == false)
+            if (lastCachedDragPosition.Equals(boardPos) == false || isFullPass)
             {
                 cachedViewForDrag.SyncRendererLayers(new BoardPosition(context.BoardDef.Width, context.BoardDef.Height, context.BoardDef.Depth));
                 lastCachedDragPosition = boardPos;
@@ -207,13 +209,15 @@ public class BoardManipulatorComponent : ECSEntity,
             }
             
             bool isPointValid = context.BoardLogic.IsPointValid(boardPos);
-            if (isPointValid && isDragLip == false && (targetCellPos - cachedViewForDrag.CachedTransform.localPosition).sqrMagnitude > 0.01f)
+            if (isPointValid && isDragLip == false && (targetCellPos - cachedViewForDrag.CachedTransform.localPosition).sqrMagnitude > 0.01f || isFullPass)
             {
                 isDragLip = true;
                 DOTween.Kill(dragAnimationId);
                 var sequence = DOTween.Sequence().SetId(dragAnimationId);
-                sequence.Append(cachedViewForDrag.CachedTransform.DOLocalMove(targetCellPos, dragDuration).SetEase(Ease.Linear));
+                sequence.Append(cachedViewForDrag.CachedTransform.DOLocalMove(targetCellPos, dragDuration).SetEase(Ease.Linear)); 
             }
+
+            isFullPass = false;
         }
         
         return true;
@@ -225,6 +229,7 @@ public class BoardManipulatorComponent : ECSEntity,
         {
             isDrag = null;
             isTouch = true;
+            isFullPass = true;
             return true;
         }
         
@@ -243,7 +248,6 @@ public class BoardManipulatorComponent : ECSEntity,
             {
                 var pieceView = cachedViewForDrag as PieceBoardElementView;
                 var boardPos = context.BoardDef.GetSectorPosition(pos);
-                
                 var fromPosition = context.RendererContext.GetBoardPosition(cachedViewForDrag);
                 
                 pieceView.OnDragEnd(boardPos, pos);
@@ -283,6 +287,8 @@ public class BoardManipulatorComponent : ECSEntity,
                         .SetId(dragAnimationId);
                 }
             }
+            
+           
             
             return true;
         }
