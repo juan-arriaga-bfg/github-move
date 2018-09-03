@@ -12,7 +12,6 @@ public class SpawnPiecesAction : IBoardAction
 	
 	public List<int> Pieces { get; set; }
 	
-	public Action<BoardPosition> OnPerformStep { get; set; }
 	public Action<List<BoardPosition>> OnSuccessEvent { get; set; }
 
 	public bool PerformAction(BoardController gameBoardController)
@@ -44,7 +43,6 @@ public class SpawnPiecesAction : IBoardAction
 				IsMatch = IsMatch,
 				At = free[i],
 				PieceTypeId = pieces[i],
-				OnPerform = OnPerformStep,
 				OnSuccessEvent = position => { onSuccess(); }
 			});
 		}

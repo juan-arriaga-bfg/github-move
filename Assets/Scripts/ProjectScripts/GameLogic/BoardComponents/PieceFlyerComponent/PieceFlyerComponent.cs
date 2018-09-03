@@ -15,9 +15,7 @@
     
     public void FlyToQuest(Piece piece)
     {
-        if (piece.PieceState != null && piece.PieceState.State != BuildingState.Complete
-            || Locker.IsLocked
-            || GameDataService.Current.QuestsManager.IsNeedToFly(piece.PieceType) == false) return;
+        if (Locker.IsLocked || GameDataService.Current.QuestsManager.IsNeedToFly(piece.PieceType) == false) return;
         
         var flay = ResourcesViewManager.Instance.GetFirstViewById(PieceType.Parse(piece.PieceType));
         flay?.UpdateResource(1);
@@ -25,7 +23,7 @@
     
     public void FlyTo(Piece piece, int x, int y, string target)
     {
-        if(piece.PieceState != null && piece.PieceState.State != BuildingState.Complete || Locker.IsLocked) return;
+        if (Locker.IsLocked || GameDataService.Current.CodexManager.OnPieceBuilded(piece.PieceType) == false) return;
         
         var currency = PieceType.Parse(piece.PieceType);
         var flay = ResourcesViewManager.Instance.GetFirstViewById(target);
@@ -42,7 +40,7 @@
             context.Context.BoardDef.ViewCamera.WorldToScreenPoint(from),
             R.ResourceCarrier
         );
-
+        
         if (carriers.Count != 0) carriers[0].RefreshIcon(currency);
     }
 }

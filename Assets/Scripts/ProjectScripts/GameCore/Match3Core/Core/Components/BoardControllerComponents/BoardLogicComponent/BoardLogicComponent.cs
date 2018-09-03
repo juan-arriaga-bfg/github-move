@@ -303,11 +303,7 @@ public class BoardLogicComponent : ECSEntity,
         observer?.OnAddToBoard(position, piece);
         
         PieceFlyer.FlyToQuest(piece);
-        
-        if (GameDataService.Current.CodexManager.OnPieceBuilded(piece.PieceType))
-        {
-            PieceFlyer.FlyTo(piece, x, y, Currency.Piece.Name);
-        }
+        PieceFlyer.FlyTo(piece, x, y, Currency.Piece.Name);
         
         return true;
     }

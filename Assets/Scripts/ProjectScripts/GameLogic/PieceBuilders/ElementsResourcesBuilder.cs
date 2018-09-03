@@ -51,13 +51,21 @@ public class ElementsResourcesBuilder
         
         dict.Add(PieceType.A1.Id, R.A1Piece);
         dict.Add(PieceType.A2.Id, R.A2Piece);
+        dict.Add(PieceType.A3Fake.Id, R.A3Piece);
         dict.Add(PieceType.A3.Id, R.A3Piece);
+        dict.Add(PieceType.A4Fake.Id, R.A4Piece);
         dict.Add(PieceType.A4.Id, R.A4Piece);
+        dict.Add(PieceType.A5Fake.Id, R.A5Piece);
         dict.Add(PieceType.A5.Id, R.A5Piece);
+        dict.Add(PieceType.A6Fake.Id, R.A6Piece);
         dict.Add(PieceType.A6.Id, R.A6Piece);
+        dict.Add(PieceType.A7Fake.Id, R.A7Piece);
         dict.Add(PieceType.A7.Id, R.A7Piece);
+        dict.Add(PieceType.A8Fake.Id, R.A8Piece);
         dict.Add(PieceType.A8.Id, R.A8Piece);
+        dict.Add(PieceType.A9Fake.Id, R.A9Piece);
         dict.Add(PieceType.A9.Id, R.A9Piece);
+        dict.Add(PieceType.A10Fake.Id, R.A10Piece);
         dict.Add(PieceType.A10.Id, R.A10Piece);
         
         dict.Add(PieceType.B1.Id, R.B1Piece);
@@ -68,15 +76,25 @@ public class ElementsResourcesBuilder
         
         dict.Add(PieceType.C1.Id, R.C1Piece);
         dict.Add(PieceType.C2.Id, R.C2Piece);
+        dict.Add(PieceType.C3Fake.Id, R.C3Piece);
         dict.Add(PieceType.C3.Id, R.C3Piece);
+        dict.Add(PieceType.C4Fake.Id, R.C4Piece);
         dict.Add(PieceType.C4.Id, R.C4Piece);
+        dict.Add(PieceType.C5Fake.Id, R.C5Piece);
         dict.Add(PieceType.C5.Id, R.C5Piece);
+        dict.Add(PieceType.C6Fake.Id, R.C6Piece);
         dict.Add(PieceType.C6.Id, R.C6Piece);
+        dict.Add(PieceType.C7Fake.Id, R.C7Piece);
         dict.Add(PieceType.C7.Id, R.C7Piece);
+        dict.Add(PieceType.C8Fake.Id, R.C8Piece);
         dict.Add(PieceType.C8.Id, R.C8Piece);
+        dict.Add(PieceType.C9Fake.Id, R.C9Piece);
         dict.Add(PieceType.C9.Id, R.C9Piece);
+        dict.Add(PieceType.C10Fake.Id, R.C10Piece);
         dict.Add(PieceType.C10.Id, R.C10Piece);
+        dict.Add(PieceType.C11Fake.Id, R.C11Piece);
         dict.Add(PieceType.C11.Id, R.C11Piece);
+        dict.Add(PieceType.C12Fake.Id, R.C12Piece);
         dict.Add(PieceType.C12.Id, R.C12Piece);
         
         dict.Add(PieceType.D1.Id, R.D1Piece);

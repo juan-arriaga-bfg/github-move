@@ -34,7 +34,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
 
         if (countForMatch % countForMatchBonus == 0)
         {
-            nextPieces = Add((countForMatch / countForMatchBonus) * 2, nextType, nextPieces);
+            nextPieces = Add(countForMatchDefault == 1 ? countForMatch : (countForMatch / countForMatchBonus) * 2, nextType, nextPieces);
         }
         else
         {
@@ -48,7 +48,6 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
             At = position,
             Pieces = nextPieces,
             IsMatch = true,
-            OnPerformStep = StartLock,
             OnSuccessEvent = list =>
             {
                 for (var i = 0; i < list.Count; i++)

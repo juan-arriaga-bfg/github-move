@@ -15,7 +15,6 @@ public class SpawnPieceAtAction : IBoardAction
 	
 	public Action<SpawnPieceAtAction> OnFailedAction { get; set; }
 	public Action<BoardPosition> OnSuccessEvent { get; set; }
-	public Action<BoardPosition> OnPerform { get; set; }
 
 	public bool PerformAction(BoardController gameBoardController)
 	{
@@ -56,8 +55,6 @@ public class SpawnPieceAtAction : IBoardAction
 				At = At
 			};
 		}
-		
-		OnPerform?.Invoke(At);
 		
 		animation.OnCompleteEvent += (_) =>
 		{

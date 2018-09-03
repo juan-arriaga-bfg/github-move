@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum BuildingState
 {
+    Default,
     Waiting,
     Warning,
     InProgress,
@@ -44,9 +46,13 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
             
             if (state == BuildingState.Complete)
             {
-                context.Context.BoardLogic.PieceFlyer.FlyToQuest(context);
-                context.Context.BoardLogic.PieceFlyer.FlyTo(context, context.CachedPosition.X, context.CachedPosition.Y, Currency.Piece.Name);
                 context.Matchable?.Locker.Unlock(this);
+                
+                var action = context.Context.BoardLogic.MatchActionBuilder.GetMatchAction(new List<BoardPosition>{context.CachedPosition}, context.PieceType, context.CachedPosition);
+        
+                if(action == null) return;
+        
+                context.Context.ActionExecutor.AddAction(action);
                 return;
             }
             
@@ -58,9 +64,8 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     {
         context = entity as Piece;
         
-        var def = GameDataService.Current.PiecesManager.GetPieceDef(context.PieceType);
+        var def = GameDataService.Current.PiecesManager.GetPieceDef(context.PieceType + 1);
         
-        state = BuildingState.Complete;
         viewDef = context.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
         
         Timer = new TimerComponent{Delay = def.MatchConditionsDef.Delay, Price = def.MatchConditionsDef.FastPrice};
@@ -73,7 +78,11 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
         var item = save?.GetBuildingSave(position);
 
-        if (item == null) return;
+        if (item == null)
+        {
+            State = BuildingState.Waiting;
+            return;
+        }
         
         if (item.State == BuildingState.InProgress) Timer.Start(item.StartTime);
         

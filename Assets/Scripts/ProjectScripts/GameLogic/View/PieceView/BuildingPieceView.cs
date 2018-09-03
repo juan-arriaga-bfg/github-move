@@ -16,13 +16,17 @@ public class BuildingPieceView : PieceBoardElementView
 		base.Init(context, piece);
 
 		state = Piece.GetComponent<PieceStateComponent>(PieceStateComponent.ComponentGuid);
-        
+
+		if (sprite != null)
+		{
+			unlockedMaterial = sprite.material;
+			sprite.material = state == null ? unlockedMaterial : lockedMaterial;
+		}
+		
 		if(state == null) return;
         
 		state.OnChangeState += UpdateSate;
-
-		if (sprite != null) unlockedMaterial = sprite.material;
-
+		
 		if (warning == null) warning = CreateUi(ViewType.Warning);
 		if (hourglass == null) hourglass = CreateUi(ViewType.Hourglass);
 		
@@ -35,6 +39,8 @@ public class BuildingPieceView : PieceBoardElementView
 	{
 		base.ResetViewOnDestroy();
 		
+		sprite.material = unlockedMaterial;
+		
 		if(state == null) return;
         
 		state.OnChangeState -= UpdateSate;
@@ -42,9 +48,8 @@ public class BuildingPieceView : PieceBoardElementView
     
 	private void UpdateSate()
 	{
-		if(state == null || sprite == null) return;
-
-		sprite.material = state.State == BuildingState.Complete ? unlockedMaterial : lockedMaterial;
+		if(state == null) return;
+		
 		warning.SetActive(state.State == BuildingState.Warning);
 		hourglass.SetActive(state.State == BuildingState.InProgress);
 	}
