@@ -67,11 +67,11 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.C10Fake.Id, new PieceMatchDef {Next = PieceType.C10.Id, Previous = PieceType.C9.Id, Count = 1, IsIgnore = true});
         dict.Add(PieceType.C10.Id, new PieceMatchDef {Next = PieceType.C11Fake.Id, Previous = PieceType.C9.Id, Count = 3});
         dict.Add(PieceType.C11Fake.Id, new PieceMatchDef {Next = PieceType.C11.Id, Previous = PieceType.C10.Id, Count = 1, IsIgnore = true});
-        dict.Add(PieceType.C11.Id, new PieceMatchDef {Next = PieceType.C12Fake.Id, Previous = PieceType.C10.Id, Count = 3});
-        dict.Add(PieceType.C12Fake.Id, new PieceMatchDef {Next = PieceType.C12.Id, Previous = PieceType.C11.Id, Count = 1, IsIgnore = true});
-        dict.Add(PieceType.C12.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.C11.Id, Count = 3});
+        dict.Add(PieceType.C11.Id, new PieceMatchDef {Next = PieceType.C12Fake.Id, Previous = PieceType.C10.Id, Count = 4});
         
-//        dict = AddMulticellularPiece(dict, PieceType.C10.Id, PieceType.C9.Id);
+        dict = AddFakeMulticellularPiece(dict, PieceType.C12Fake.Id, PieceType.C12.Id, PieceType.C11.Id);
+        
+        dict.Add(PieceType.C12.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.C11.Id});
         
         // ------------------ D -------------
         
@@ -205,9 +205,9 @@ public class MatchDefinitionBuilder
         return dict;
     }
 
-    private Dictionary<int, PieceMatchDef> AddMulticellularPiece(Dictionary<int, PieceMatchDef> dict, int id, int previous)
+    private Dictionary<int, PieceMatchDef> AddFakeMulticellularPiece(Dictionary<int, PieceMatchDef> dict, int id, int next, int previous)
     {
-        dict.Add(id, new PieceMatchDef {Next = PieceType.None.Id, Previous = previous, Count = -1, Pattern = new List<List<int>>
+        dict.Add(id, new PieceMatchDef {Next = next, Previous = previous, Count = 1, IsIgnore = true, Pattern = new List<List<int>>
         {
             new List<int> { previous, previous },
             new List<int> { previous, previous }

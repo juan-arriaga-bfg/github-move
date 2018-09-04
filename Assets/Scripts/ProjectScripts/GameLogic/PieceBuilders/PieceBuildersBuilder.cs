@@ -23,11 +23,11 @@ public class PieceBuildersBuilder
         
         dict = AddSimplePiece<CharacterPieceBuilder>(PieceType.Char1.Id, PieceType.Char9.Id, dict);
         
-        dict = AddBuildingBranchPiece<SimplePieceBuilder, BuildingPieceBuilder>(dict, PieceType.A1.Id, PieceType.A9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.A1.Id, PieceType.A10.Id);
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.B1.Id, PieceType.B5.Id, dict);
         
-        dict = AddBuildingBranchPiece<SimplePieceBuilder, BuildingPieceBuilder>(dict, PieceType.C1.Id, PieceType.C11.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.C1.Id, PieceType.C12.Id);
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.X1.Id, PieceType.X5.Id, dict);
         
@@ -79,9 +79,6 @@ public class PieceBuildersBuilder
     {
         var mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2);
         
-        dict.Add(PieceType.A10.Id, new MulticellularDraggablePieceBuilder{Mask = mask});
-        dict.Add(PieceType.C12.Id, new MulticellularDraggablePieceBuilder{Mask = mask});
-        
         dict = AddMulticellularPiece<MinePieceBuilder>(PieceType.MineC.Id, PieceType.MineZ.Id, mask, dict);
         
         return dict;
@@ -107,7 +104,7 @@ public class PieceBuildersBuilder
         return dict;
     }
     
-    private Dictionary<int, IPieceBuilder> AddEnergyBranchPiece<TA,TB>(Dictionary<int, IPieceBuilder> dict, int idMin, int idMax)
+    private Dictionary<int, IPieceBuilder> AddEnergyBranchPiece<TA, TB>(Dictionary<int, IPieceBuilder> dict, int idMin, int idMax)
         where TA : IPieceBuilder, new()
         where TB : IPieceBuilder, new()
     {
@@ -118,17 +115,22 @@ public class PieceBuildersBuilder
         return dict;
     }
     
-    private Dictionary<int, IPieceBuilder> AddBuildingBranchPiece<TA,TB>(Dictionary<int, IPieceBuilder> dict, int idMin, int idMax)
-        where TA : IPieceBuilder, new()
-        where TB : IPieceBuilder, new()
+    private Dictionary<int, IPieceBuilder> AddBuildingBranchPiece(Dictionary<int, IPieceBuilder> dict, int idMin, int idMax)
     {
-        dict.Add(idMin, new TA());
+        dict.Add(idMin, new SimplePieceBuilder());
 
-        for (var i = idMin + 1; i <= idMax; i = i+2)
+        var flag = true;
+
+        for (var i = idMin + 1; i < idMax - 1; i++)
         {
-            dict.Add(i, new TA());
-            dict.Add(i+1, new TB());
+            if (flag) dict.Add(i, new SimplePieceBuilder());
+            else dict.Add(i, new BuildingPieceBuilder());
+            
+            flag = !flag;
         }
+        
+        dict.Add(idMax - 1, new PartPieceBuilder());
+        dict.Add(idMax, new MulticellularDraggablePieceBuilder{Mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2)});
         
         return dict;
     }
