@@ -29,6 +29,7 @@ public class CharactersLogicComponent : ECSEntity
 	
 	public void Step()
 	{
+		return;
 		foreach (var id in ids)
 		{
 			var positions = context.PositionsCache.GetPiecePositionsByType(id);
