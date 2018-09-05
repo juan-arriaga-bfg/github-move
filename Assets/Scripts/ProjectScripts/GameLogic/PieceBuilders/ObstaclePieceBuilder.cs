@@ -31,7 +31,7 @@ public class ObstaclePieceBuilder : GenericPieceBuilder
 				.RegisterDefinition(new TouchReactionDefinitionObstacleComponent{IsAutoStart = false}))
 			.RegisterComponent(new TouchReactionConditionStorage()))
 			.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
-			.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
+				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
 		
 		return piece;
 	}

@@ -28,7 +28,9 @@
 				.RegisterDefinition(new TouchReactionDefinitionOpenWindow{WindowType = UIWindowType.CastleWindow})
 				.RegisterDefinition(new TouchReactionDefinitionSpawnInStorage {IsAutoStart = false})
 				.RegisterDefinition(new TouchReactionDefinitionSpawnShop()))
-			.RegisterComponent(new TouchReactionConditionComponent()));
+			.RegisterComponent(new TouchReactionConditionComponent()))
+			.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
+				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
 		
 		return piece;
 	}

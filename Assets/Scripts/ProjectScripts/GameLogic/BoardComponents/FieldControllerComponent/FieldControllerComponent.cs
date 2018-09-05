@@ -35,7 +35,7 @@ public class FieldControllerComponent : IECSComponent
                 {
                     {PieceType.Fog.Id, CreateFog()}
                 };
-            
+            TestField();
             foreach (var piece in pieces)
             {
                 context.ActionExecutor.AddAction(new FillBoardAction
@@ -90,6 +90,8 @@ public class FieldControllerComponent : IECSComponent
     
     private void TestField()
     {
+        AddPiece(new BoardPosition(23, 10), PieceType.Char2.Id);
+        return;
         AddPieces(new BoardPosition(4, 16), PieceType.O1.Id, PieceType.O5.Id);
         AddPieces(new BoardPosition(6, 16), PieceType.OX1.Id, PieceType.OX5.Id);
         

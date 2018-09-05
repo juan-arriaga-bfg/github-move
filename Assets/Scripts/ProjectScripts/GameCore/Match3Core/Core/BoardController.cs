@@ -55,6 +55,9 @@ public class BoardController : ECSEntity,
     protected PathfinderComponent pathfinderComponent;
     public PathfinderComponent Pathfinder => pathfinderComponent ?? (pathfinderComponent = GetComponent<PathfinderComponent>(PathfinderComponent.ComponentGuid));
     
+    protected PathfindLockerComponent pathfindLockerComponent;
+    public PathfindLockerComponent PathfindLocker => pathfindLockerComponent ?? (pathfindLockerComponent = GetComponent<PathfindLockerComponent>(PathfindLockerComponent.ComponentGuid));
+    
     protected BoardRandomComponent random;
     public BoardRandomComponent Random => random ?? (random = GetComponent<BoardRandomComponent>(BoardRandomComponent.ComponentGuid));
     
