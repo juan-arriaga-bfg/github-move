@@ -20,6 +20,10 @@
 		
 		piece.RegisterComponent(storage);
 		AddObserver(piece, storage);
+
+		var pathfindLockObserver = new PathfindLockObserver() {AutoLock = true}; 
+		AddObserver(piece, pathfindLockObserver);
+		piece.RegisterComponent(pathfindLockObserver);
 		
 		piece.RegisterComponent(new DraggablePieceComponent());
 		

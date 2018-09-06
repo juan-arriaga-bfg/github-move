@@ -262,8 +262,6 @@ public class BoardManipulatorComponent : ECSEntity,
                         To = new BoardPosition(targetPosition.X, targetPosition.Y, fromPosition.Z)
                     });
                     
-                    context.PathfindLocker?.Step();
-                    
                     context.BoardLogic.CharactersLogic.Step();
                     cachedViewForDrag = null;
                     cameraManipulator.CameraMove.UnLock(this);

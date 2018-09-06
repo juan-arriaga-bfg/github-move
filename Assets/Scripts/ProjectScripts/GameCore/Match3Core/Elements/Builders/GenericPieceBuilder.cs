@@ -10,7 +10,7 @@ public class GenericPieceBuilder : IPieceBuilder
         
         piece.RegisterComponent(new PieceBoardObserversComponent());
         piece.RegisterComponent(new CachedPiecePositionComponent());
-
+        
         AddMatchableComponent(piece);
         
         return piece;

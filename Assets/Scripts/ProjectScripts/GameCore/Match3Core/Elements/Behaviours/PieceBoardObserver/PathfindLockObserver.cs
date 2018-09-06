@@ -5,6 +5,8 @@
 
     protected Piece piece;
     protected BoardController board;
+
+    public bool AutoLock = true;
     
     public virtual void OnRegisterEntity(ECSEntity entity)
     {
@@ -18,8 +20,9 @@
 
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        var target = GetTargetPosition();
-       board.PathfindLocker?.RecalcCacheOnPieceAdded(target, position);
+       var target = GetTargetPosition();
+       if(target != null)
+           board.PathfindLocker?.RecalcCacheOnPieceAdded(target.Value, position, AutoLock);
     }
 
     public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
@@ -29,18 +32,26 @@
     public void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
     {
         var target = GetTargetPosition();
-        board.PathfindLocker?.RecalcCacheOnPieceMoved(target, from, to);
+        if(target != null)
+            board.PathfindLocker?.RecalcCacheOnPieceMoved(target.Value, from, to, AutoLock);
     }
 
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
         var target = GetTargetPosition();
-        board.PathfindLocker?.RecalcCacheOnPieceRemoved(target, position, piece);
+        if(target != null)
+            board.PathfindLocker?.RecalcCacheOnPieceRemoved(target.Value, position, piece);
     }
 
-    private BoardPosition GetTargetPosition()
+    private BoardPosition? GetTargetPosition()
     {
-        var target = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
-        return target;
+        var pieces = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1);
+        if (pieces.Count > 0)
+        {
+            var target = pieces[0];
+            return target;    
+        }
+
+        return null;
     }
 }

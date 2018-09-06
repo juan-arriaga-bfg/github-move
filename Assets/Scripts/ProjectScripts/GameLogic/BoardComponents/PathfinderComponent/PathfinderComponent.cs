@@ -66,7 +66,7 @@ public class PathfinderComponent:ECSEntity
             uncheckedPositions.Remove(current);
             checkedPositions.Add(current);
 
-            var availiablePositions = AvailiablePositions(current, checkedPositions, fieldCondition);
+            var availiablePositions = AvailiablePositions(current, checkedPositions, fieldCondition, ref blockagePositions);
             
             //Init neighbour positions data
             for (int i = 0; i < availiablePositions.Count; i++)
@@ -86,7 +86,7 @@ public class PathfinderComponent:ECSEntity
                     uncheckedPositions.Add(currentNeghbour);
             }
         }
-        Debug.Log($"{from} > finish false");
+        
         return false;
     }
     
@@ -118,7 +118,7 @@ public class PathfinderComponent:ECSEntity
         return Math.Abs(from.X - to.X) + Math.Abs(from.Y - to.Y);
     }
     
-    protected List<BoardPosition> AvailiablePositions(BoardPosition position, HashSet<BoardPosition> checkedPositions, Predicate<BoardPosition> predicate)
+    protected List<BoardPosition> AvailiablePositions(BoardPosition position, HashSet<BoardPosition> checkedPositions, Predicate<BoardPosition> predicate, ref List<BoardPosition> unavailiable)
     {
         var uncheckedNeigbours = new List<BoardPosition>
         {
@@ -135,6 +135,8 @@ public class PathfinderComponent:ECSEntity
             var currentNeighbour = uncheckedNeigbours[i];
             if(!checkedPositions.Contains(currentNeighbour) && predicate.Invoke(currentNeighbour))
                 checkedNeigbours.Add(currentNeighbour); 
+            else if(!unavailiable.Contains(currentNeighbour) && board.BoardLogic.GetPieceAt(currentNeighbour) != null)
+                unavailiable.Add(currentNeighbour);
         }
         
         return checkedNeigbours;
@@ -152,9 +154,9 @@ public class PathfindLockerComponent : ECSEntity
     public PathfinderComponent Pathfinder => pathfinder ??
                                              (pathfinder = context?.Pathfinder);
 
-    private Dictionary<Piece, List<BoardPosition>> blockPathPieces;
-    private List<Piece> freePieces;
-    private BoardPosition lastCheckedPosition;
+    private Dictionary<Piece, List<BoardPosition>> blockPathPieces = new Dictionary<Piece, List<BoardPosition>>();
+    private List<Piece> freePieces = new List<Piece>();
+    private BoardPosition lastCheckedPosition = BoardPosition.Default();
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -167,7 +169,7 @@ public class PathfindLockerComponent : ECSEntity
         return !blockPathPieces.ContainsKey(piece) && freePieces.Contains(piece); 
     }
 
-    public virtual void RecalcCacheOnPieceAdded(BoardPosition target, BoardPosition changedPosition)
+    public virtual void RecalcCacheOnPieceAdded(BoardPosition target, BoardPosition changedPosition, bool autoLock)
     {
         lastCheckedPosition = target;
         
@@ -177,17 +179,22 @@ public class PathfindLockerComponent : ECSEntity
         if (addedPiece == null)
             return;
 
-        List<BoardPosition> addPieceBlock;
-        if (Pathfinder.HasPath(addedPiece.CachedPosition, target, out addPieceBlock, addedPiece))
+        if (autoLock)
         {
-            freePieces.Add(addedPiece);
+            RecalcFor(addedPiece, target);
         }
-        else
-        {
-            blockPathPieces.Add(addedPiece, addPieceBlock);
-            addedPiece.Draggable?.Locker?.Lock(this);
-        }
-            
+//        
+//        List<BoardPosition> addPieceBlock;
+//        if (Pathfinder.HasPath(addedPiece.CachedPosition, target, out addPieceBlock, addedPiece))
+//        {
+//            freePieces.Add(addedPiece);
+//        }
+//        else
+//        {
+//            blockPathPieces.Add(addedPiece, addPieceBlock);
+//            addedPiece.Draggable?.Locker?.Lock(this);
+//        }
+//            
     }
 
     private bool RecalcFor(Piece piece, BoardPosition target)
@@ -228,7 +235,7 @@ public class PathfindLockerComponent : ECSEntity
         RecalcBlocked(target, changedPosition);
     }
     
-    public virtual void RecalcCacheOnPieceMoved(BoardPosition target, BoardPosition fromPosition, BoardPosition to)
+    public virtual void RecalcCacheOnPieceMoved(BoardPosition target, BoardPosition fromPosition, BoardPosition to, bool autoLock)
     {
         if (fromPosition.Equals(lastCheckedPosition) || to.Equals(lastCheckedPosition))
         {
@@ -240,10 +247,22 @@ public class PathfindLockerComponent : ECSEntity
         foreach (var pos in changed)
         {
             var pieceOnPos = context.BoardLogic.GetPieceAt(pos);
-            if(pieceOnPos == null)
+            if (pieceOnPos == null)
+            {
                 RecalcBlocked(target, pos);
+            }
             else
+            {
                 RecalcFree(target, pos);
+
+                if (autoLock)
+                {
+                    freePieces.Remove(pieceOnPos);
+                    blockPathPieces.Remove(pieceOnPos);
+                    RecalcFor(pieceOnPos, target);    
+                }
+            }
+                
         }
     }
 

@@ -33,6 +33,10 @@ public class ObstaclePieceBuilder : GenericPieceBuilder
 			.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
 				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
 		
+		var pathfindLockObserver = new PathfindLockObserver() {AutoLock = true}; 
+		AddObserver(piece, pathfindLockObserver);
+		piece.RegisterComponent(pathfindLockObserver);
+		
 		return piece;
 	}
 }

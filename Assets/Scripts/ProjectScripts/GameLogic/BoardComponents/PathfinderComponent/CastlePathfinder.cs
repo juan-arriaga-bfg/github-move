@@ -12,7 +12,8 @@ public static class CastlePathfinder
             var board = piece.Context;
             var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
             var targetPositions = new HashSet<BoardPosition>{position};
-            
-            return pathfinder.HasPath(from, targetPositions, piece);
+
+            List<BoardPosition> tmp;
+            return pathfinder.HasPath(from, targetPositions, out tmp, piece);
       }
 }
