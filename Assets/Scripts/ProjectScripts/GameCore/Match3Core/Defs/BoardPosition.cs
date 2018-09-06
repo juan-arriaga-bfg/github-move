@@ -190,6 +190,72 @@ public struct BoardPosition : IEquatable<BoardPosition>
         return rect;
     }
     
+    public static List<BoardPosition> GetRectInCenter(BoardPosition center, int width, int height, bool includeCenter)
+    {
+        var rect = new List<BoardPosition>();
+
+        var dot = center.LeftAtDistance((int) (width * 0.5f));
+
+        var line = GetLineInCenter(dot, height);
+        for (var i = 0; i < line.Count; i++)
+        {
+            var point = line[i];
+            if (includeCenter || !point.Equals(center))
+            {
+                rect.Add(point);
+            }
+        }
+
+        for (var i = 1; i < width; i++)
+        {
+            dot = dot.Right;
+            line = GetLineInCenter(dot, height);
+            for (var index = 0; index < line.Count; index++)
+            {
+                var point = line[index];
+                if (includeCenter || !point.Equals(center))
+                {
+                    rect.Add(point);
+                }
+            }
+        }
+        
+        return rect;
+    }
+    
+    public static List<BoardPosition> GetRectInCenterForArea(BoardPosition center, int width, int height, int areaW, int areaH, bool includeCenter)
+    {
+        var rect = new List<BoardPosition>();
+
+        var dot = center.LeftAtDistance((int) (width * 0.5f));
+
+        var line = GetLineInCenter(dot, height);
+        for (var i = 0; i < line.Count; i++)
+        {
+            var point = line[i];
+            if (point.IsValidFor(areaW, areaH) && (includeCenter || !point.Equals(center)))
+            {
+                rect.Add(point);
+            }
+        }
+
+        for (var i = 1; i < width; i++)
+        {
+            dot = dot.Right;
+            line = GetLineInCenter(dot, height);
+            for (var index = 0; index < line.Count; index++)
+            {
+                var point = line[index];
+                if (point.IsValidFor(areaW, areaH) && (includeCenter || !point.Equals(center)))
+                {
+                    rect.Add(point);
+                }
+            }
+        }
+        
+        return rect;
+    }
+    
     public static float SqrMagnitude(BoardPosition from, BoardPosition to)
     {
         return (to.X - from.X) * (to.X - from.X) + (to.Y - from.Y) * (to.Y - from.Y);

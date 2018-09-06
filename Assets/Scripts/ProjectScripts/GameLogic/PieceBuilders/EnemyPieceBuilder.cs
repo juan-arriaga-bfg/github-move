@@ -10,7 +10,7 @@
         AddObserver(piece, areaLockComponent);
         piece.RegisterComponent(areaLockComponent)
              .RegisterComponent(new TouchReactionComponent()
-                               .RegisterComponent(new TouchReactionDefinitionOpenEnemyBubble() {ViewId = ViewType.Bubble})
+                               .RegisterComponent(new TouchReactionDefinitionOpenEnemyBubble() {ViewId = ViewType.EnemyBubble})
                                 // .RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}
                                 //                   .RegisterDefinition(new TouchReactionDefinitionOpenBubble {ViewId = ViewType.Bubble})
                                 //                   // .RegisterDefinition(new TouchReactionDefinitionObstacleComponent {IsAutoStart = false}))

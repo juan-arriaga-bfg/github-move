@@ -66,7 +66,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4542807987214320}
   - component: {fileID: 114607854138475680}
-  - component: {fileID: 114308648722968044}
+  - component: {fileID: 114400275348933782}
   m_Layer: 0
   m_Name: Enemy1Piece
   m_TagString: Untagged
@@ -94,7 +94,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1924086398574114}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.31204, y: -9.167103, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4837408307622380}
@@ -116,7 +116,7 @@ Transform:
   m_Father: {fileID: 4542807987214320}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114308648722968044
+--- !u!114 &114400275348933782
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1924086398574114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e94db1dff9a4341a9922139f675b17, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ad5a328c537449ba579522871fd91d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsFading: 0
@@ -135,6 +135,9 @@ MonoBehaviour:
     type: 0}
   defaultSelectionMaterial: {fileID: 2100000, guid: d55a16b9364b048ba884d5ede8dae221,
     type: 2}
+  touchRegion: {fileID: 114607854138475680}
+  lockItem: {fileID: 1331704882841138, guid: 322ca3ff89d0a204a925e5ca67bc5a08, type: 2}
+  touchItem: {fileID: 1798595089072234}
 --- !u!114 &114607854138475680
 MonoBehaviour:
   m_ObjectHideFlags: 1

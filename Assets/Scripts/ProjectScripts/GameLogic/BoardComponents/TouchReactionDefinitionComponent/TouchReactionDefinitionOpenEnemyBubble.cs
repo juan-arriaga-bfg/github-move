@@ -32,7 +32,7 @@ public class TouchReactionDefinitionOpenEnemyBubble : TouchReactionDefinitionCom
         enemyDef = GameDataService.Current.EnemiesManager.GetEnemyDefById(piece.PieceType);
 
         // ReSharper disable once PossibleNullReferenceException
-        view.SetData($"{enemyDef.Name}", $"Erradicate <sprite name={enemyDef.Price.Currency}> {enemyDef.Price.Amount}", OnClick);
+        view.SetData($"{enemyDef.Name}", $"Erradicate <sprite name={enemyDef.Price.Currency}> {enemyDef.Price.Amount}", OnClick, true, false);
 
         OnChange?.Invoke(!view.IsShow);
         view.Change(!view.IsShow);

@@ -15,4 +15,5 @@
     Warning = -1011,
     Lock = -1012,
     Hourglass = -1013,
+    EnemyBubble = -1014,
 }

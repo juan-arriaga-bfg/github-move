@@ -222,6 +222,7 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.Warning, R.Warning);
         dict.Add((int)ViewType.Lock, R.LockView);
         dict.Add((int)ViewType.Hourglass, R.Hourglass);
+        dict.Add((int)ViewType.EnemyBubble, R.EnemyBubbleView);
         
         return dict;
     }
