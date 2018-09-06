@@ -12,6 +12,8 @@ public class PieceBuildersBuilder
         dict = AddOtherPiece(dict);
         
         dict = AddMulticellularPiece2x2(dict);
+
+        dict = AddEnemyPiece(dict);
         
         return dict;
     }
@@ -129,6 +131,15 @@ public class PieceBuildersBuilder
             dict.Add(i, new TA());
             dict.Add(i+1, new TB());
         }
+        
+        return dict;
+    }
+    
+    private Dictionary<int, IPieceBuilder> AddEnemyPiece(Dictionary<int, IPieceBuilder> dict)
+    {
+        dict = AddSimplePiece<EnemyPieceBuilder>(PieceType.Enemy1.Id,  PieceType.Enemy1.Id,  dict);
+        
+        // dict.Add(PieceType.Fog.Id, new FogPieceBuilder());
         
         return dict;
     }

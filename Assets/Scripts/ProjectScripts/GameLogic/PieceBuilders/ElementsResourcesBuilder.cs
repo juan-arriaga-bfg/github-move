@@ -9,10 +9,11 @@ public class ElementsResourcesBuilder
         dict = AddPiece(dict);
         dict = AddMulticellularPiece(dict);
         dict = AddView(dict);
+        dict = AddEnemies(dict);
         
         return dict;
     }
-    
+
     private Dictionary<int, string> AddPiece(Dictionary<int, string> dict)
     {
         dict.Add(PieceType.Generic.Id, R.GenericPiece);
@@ -194,6 +195,13 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MineC.Id, R.MineCPiece);
         dict.Add(PieceType.MineY.Id, R.MineYPiece);
         dict.Add(PieceType.MineZ.Id, R.MineZPiece);
+        
+        return dict;
+    }
+    
+    private Dictionary<int, string> AddEnemies(Dictionary<int, string> dict)
+    {
+        dict.Add(PieceType.Enemy1.Id, R.Enemy1Piece);
         
         return dict;
     }

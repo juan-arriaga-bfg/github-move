@@ -134,19 +134,23 @@ public class GameDataManager : ECSEntity,
     
     private CodexDataManager codexManager;
     public CodexDataManager CodexManager => codexManager ?? (codexManager = GetComponent<CodexDataManager>(CodexDataManager.ComponentGuid));
+   
+    private EnemiesDataManager enemyManager;
+    public EnemiesDataManager EnemiesManager => enemyManager ?? (enemyManager = GetComponent<EnemiesDataManager>(EnemiesDataManager.ComponentGuid));
     
     public void SetupComponents()
     {
         RegisterComponent(new ChestsDataManager());
         RegisterComponent(new PiecesDataManager());
         RegisterComponent(new ObstaclesDataManager());
+        RegisterComponent(new EnemiesDataManager());
         RegisterComponent(new QuestsDataManager());
         RegisterComponent(new FogsDataManager());
         RegisterComponent(new LevelsDataManager());
         RegisterComponent(new MinesDataManager());
         RegisterComponent(new ShopDataManager());
         RegisterComponent(new FieldDataManager());
-        RegisterComponent(new CodexDataManager());
+        RegisterComponent(new CodexDataManager()); // should be the last one
     }
 
     public void Reload()
