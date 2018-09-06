@@ -35,6 +35,12 @@ public class CharactersLogicComponent : ECSEntity
 
 			foreach (var position in positions)
 			{
+			    // Do not move locked chars
+			    if (context.IsLockedCell(position))
+			    {
+			        continue;
+			    }
+
 				context.Context.ActionExecutor.AddAction(new MoveCharacterAction{From = position});
 			}
 		}
