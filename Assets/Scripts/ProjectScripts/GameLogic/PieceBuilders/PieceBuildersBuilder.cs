@@ -12,6 +12,8 @@ public class PieceBuildersBuilder
         dict = AddOtherPiece(dict);
         
         dict = AddMulticellularPiece2x2(dict);
+
+        dict = AddEnemyPiece(dict);
         
         return dict;
     }
@@ -131,6 +133,15 @@ public class PieceBuildersBuilder
         
         dict.Add(idMax - 1, new PartPieceBuilder());
         dict.Add(idMax, new MulticellularDraggablePieceBuilder{Mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2)});
+        
+        return dict;
+    }
+    
+    private Dictionary<int, IPieceBuilder> AddEnemyPiece(Dictionary<int, IPieceBuilder> dict)
+    {
+        dict = AddSimplePiece<EnemyPieceBuilder>(PieceType.Enemy1.Id,  PieceType.Enemy1.Id,  dict);
+        
+        // dict.Add(PieceType.Fog.Id, new FogPieceBuilder());
         
         return dict;
     }

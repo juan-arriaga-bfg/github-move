@@ -56,3 +56,7 @@ MonoBehaviour:
     Link: 1DMxuJpSv3tZUMNKTQXEB2HQ2d7xPCpoLjB5ZEV00kUI
     Route: parse
     Pattern: '[{"Uid":"","Delay":0,"Limit":0,"FastPrice":{"Currency":"","Amount":0},"StepReward":{"Currency":"","Amount":0},"Reproduction":{"Currency":"","Amount":0}}]'
+  - Key: enemies
+    Link: 1ggZRqwYTC5dMe-X53tOAMfxCmgJh-RjGQHv5u2iPYZ0
+    Route: parse
+    Pattern: '[{"Uid":"","Price":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"Name":""}]'

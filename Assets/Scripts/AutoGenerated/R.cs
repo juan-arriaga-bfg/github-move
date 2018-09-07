@@ -145,4 +145,6 @@ public class R
      public const string C11Piece = "C11Piece";
      public const string C12Piece = "C12Piece";
      public const string A10Piece = "A10Piece";
+     public const string Enemy1Piece = "Enemy1Piece";
+     public const string EnemyBubbleView = "EnemyBubbleView";
 }
