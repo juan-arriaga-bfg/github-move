@@ -84,6 +84,8 @@ public class FieldControllerComponent : IECSComponent
                 {
                     view.UpdateResource(0);
                 }
+                
+                PathfindLockObserver.LoadPathfindLock();
             }
         });
     }
