@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class EnemiesDataManager : IECSComponent, IDataManager, IDataLoader<List<EnemyDef>>
 {
-    public static int ComponentGuid = ECSManager.GetNextGuid();
+    public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
-    public int Guid { get { return ComponentGuid; } }
-	
+    public int Guid => ComponentGuid;
+
     public void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
@@ -32,9 +32,9 @@ public class EnemiesDataManager : IECSComponent, IDataManager, IDataLoader<List<
 
             if (string.IsNullOrEmpty(error))
             {
-                foreach (var next in data)
+                foreach (var item in data)
                 {
-                    enemyDefs.Add(next.Piece, next);
+                    enemyDefs.Add(item.Piece, item);
                 }
             }
             else

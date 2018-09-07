@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public class TouchReactionDefinitionOpenEnemyBubble : TouchReactionDefinitionComponent
 {
@@ -57,9 +58,21 @@ public class TouchReactionDefinitionOpenEnemyBubble : TouchReactionDefinitionCom
                     To = piece.CachedPosition,
                     Positions = new List<BoardPosition>{piece.CachedPosition}
                 });
+
+                ProvideReward(piece);
             });
         };
         
         view.Change(false);
+    }
+
+    private void ProvideReward(Piece piece)
+    {
+        DOTween.Sequence()
+               .AppendInterval(0.7f)
+               .AppendCallback(() =>
+                {
+                    AddResourceView.Show(piece.CachedPosition, enemyDef.Reward);
+                });
     }
 }

@@ -5,6 +5,8 @@
     public string Uid;
 
     public CurrencyPair Price;
+    
+    public CurrencyPair Reward;
 
     public string Name;
     
