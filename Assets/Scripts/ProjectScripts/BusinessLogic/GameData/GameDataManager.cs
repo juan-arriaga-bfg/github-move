@@ -100,7 +100,7 @@ public class ItemWeight
 
 public class GameDataManager : ECSEntity,
     IChestsDataManager, IPiecesDataManager, IFogsDataManager, IMinesDataManager, IQuestsDataManager, IObstaclesDataManager, ILevelsDataManager,
-    IShopDataManager, IFieldDataManager, ICodexDataManager
+    IShopDataManager, IFieldDataManager, ICodexDataManager, IEnemiesDataManager
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
