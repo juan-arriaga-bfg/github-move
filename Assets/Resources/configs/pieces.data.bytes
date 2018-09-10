@@ -79,7 +79,282 @@
     "SpawnResources": {
       "Currency": "Mana",
       "Amount": 10
-    }
+    },
+    "Name": "Bronze",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "Mana2",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Mana",
+      "Amount": 35
+    },
+    "Name": "Silver",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "Mana3",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Mana",
+      "Amount": 110
+    },
+    "Name": "Gold",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "Mana4",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Mana",
+      "Amount": 350
+    },
+    "Name": "Ametist",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "Mana5",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Mana",
+      "Amount": 1100
+    },
+    "Name": "Sapphire",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "Experience1",
+    "SpawnResources": {
+      "Currency": "Experience",
+      "Amount": 10
+    },
+    "Name": "Bronze",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "Experience2",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Experience",
+      "Amount": 35
+    },
+    "Name": "Silver",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "Experience3",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Experience",
+      "Amount": 110
+    },
+    "Name": "Gold",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "Experience4",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Experience",
+      "Amount": 350
+    },
+    "Name": "Ametist",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "Experience5",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Experience",
+      "Amount": 1100
+    },
+    "Name": "Sapphire",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "Crystal1",
+    "SpawnResources": {
+      "Currency": "Crystals",
+      "Amount": 10
+    },
+    "Name": "Bronze",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "Crystal2",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Crystals",
+      "Amount": 35
+    },
+    "Name": "Silver",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "Crystal3",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Crystals",
+      "Amount": 110
+    },
+    "Name": "Gold",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "Crystal4",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Crystals",
+      "Amount": 350
+    },
+    "Name": "Ametist",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "Crystal5",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Crystals",
+      "Amount": 1100
+    },
+    "Name": "Sapphire",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "Crystal1",
