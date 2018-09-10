@@ -123,7 +123,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         var view = viewDef.AddView(ViewType.Bubble) as BubbleView;
         
         view.OnHide = () => { State = BuildingState.Warning; };
-        view.SetData("Build Piece?", $"Send <sprite name={Currency.Worker.Name}>", piece => OnClick(), true, false);
+        view.SetData($"Build Piece:\n{DateTimeExtension.GetDelayText(Timer.Delay)}?", $"Send <sprite name={Currency.Worker.Name}>", piece => OnClick(), true, false);
         view.Change(true);
     }
 

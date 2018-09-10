@@ -64,7 +64,7 @@ public class BubbleView : UIBoardView, IBoardEventListener
         Change(false);
     }
 
-    public void Сollect()
+    public void OnClick()
     {
         onClick?.Invoke(Context);
     }
