@@ -6,9 +6,8 @@ using UnityEngine;
 public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<QuestDef>>
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
+	public int Guid => ComponentGuid;
 
-	public int Guid { get { return ComponentGuid; } }
-	
 	public void OnRegisterEntity(ECSEntity entity)
 	{
 		Reload();

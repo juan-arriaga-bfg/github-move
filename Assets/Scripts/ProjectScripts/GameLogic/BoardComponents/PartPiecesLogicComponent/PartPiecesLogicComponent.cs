@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PartPiecesLogicComponent : IECSComponent
 {
@@ -34,7 +35,7 @@ public class PartPiecesLogicComponent : IECSComponent
         
         var view = viewDef.AddView(ViewType.Bubble) as BubbleView;
         
-        view.SetData("Build Castle?", "Sure!", OnClick);
+        view.SetData("Build Castle?", $"Send <sprite name={Currency.Worker.Name}>", OnClick);
         view.Change(true);
     }
 
@@ -53,6 +54,11 @@ public class PartPiecesLogicComponent : IECSComponent
 
     private void OnClick(Piece piece)
     {
+        var key = piece.CachedPosition.ToSaveString();
+        var def = GameDataService.Current.PiecesManager.GetPieceDef(piece.PieceType + 2);
+        
+        if(context.WorkerLogic.Get(key, def.MatchConditionsDef.Delay) == false) return;
+        
         var action = piece.Context.BoardLogic.MatchActionBuilder.GetMatchAction(new List<BoardPosition>(), piece.PieceType, piece.CachedPosition);
         
         if(action == null) return;

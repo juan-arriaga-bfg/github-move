@@ -120,25 +120,29 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         return isSuccess;
     }
 
-    public void Replase(string oldKey, string newKey)
+    public bool Replase(string oldKey, string newKey)
     {
         DateTime value;
-        if(completeTimes.TryGetValue(oldKey, out value) == false) return;
+        if(completeTimes.TryGetValue(oldKey, out value) == false) return false;
         
         completeTimes.Remove(oldKey);
         completeTimesList.Remove(oldKey);
         
         completeTimes.Add(newKey, value);
         completeTimesList.Add(newKey);
+        
+        return true;
     }
     
-    public void Return(string id)
+    public bool Return(string id)
     {
-        if(completeTimes.ContainsKey(id) == false) return;
+        if(completeTimes.ContainsKey(id) == false) return false;
         
         completeTimes.Remove(id);
         completeTimesList.Remove(id);
         Add(1);
+        
+        return true;
     }
     
     public bool IsExecuteable()

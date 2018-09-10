@@ -15,14 +15,16 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
+
+    public BuildingState StartState = BuildingState.Waiting;
     
     public TimerComponent Timer;
     public Action OnChangeState;
     
-    private Piece context;
+    private Piece thisContext;
     private ViewDefinitionComponent viewDef;
     
-    private string key => context.CachedPosition.ToSaveString();
+    private string key => thisContext.CachedPosition.ToSaveString();
     
     private BuildingState state;
     public BuildingState State
@@ -46,27 +48,27 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
             
             if (state == BuildingState.Complete)
             {
-                context.Matchable?.Locker.Unlock(this);
+                thisContext.Matchable?.Locker.Unlock(this);
                 
-                var action = context.Context.BoardLogic.MatchActionBuilder.GetMatchAction(new List<BoardPosition>{context.CachedPosition}, context.PieceType, context.CachedPosition);
+                var action = thisContext.Context.BoardLogic.MatchActionBuilder.GetMatchAction(new List<BoardPosition>{thisContext.CachedPosition}, thisContext.PieceType, thisContext.CachedPosition);
         
                 if(action == null) return;
         
-                context.Context.ActionExecutor.AddAction(action);
+                thisContext.Context.ActionExecutor.AddAction(action);
                 return;
             }
             
-            context.Matchable?.Locker.Lock(this, false);
+            thisContext.Matchable?.Locker.Lock(this, false);
         }
     }
 
     public override void OnRegisterEntity(ECSEntity entity)
     {
-        context = entity as Piece;
+        thisContext = entity as Piece;
         
-        var def = GameDataService.Current.PiecesManager.GetPieceDef(context.PieceType + 1);
+        var def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType + 1);
         
-        viewDef = context.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
+        viewDef = thisContext.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
         
         Timer = new TimerComponent{Delay = def.MatchConditionsDef.Delay, Price = def.MatchConditionsDef.FastPrice};
         Timer.OnComplete += OnComplete;
@@ -80,7 +82,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
 
         if (item == null)
         {
-            State = BuildingState.Waiting;
+            State = StartState;
             return;
         }
         
@@ -93,8 +95,23 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     {
     }
 
-    public void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
+    public void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
+        if (thisContext.Multicellular == null)
+        {
+            thisContext.Context.WorkerLogic.Replase(from.ToSaveString(), to.ToSaveString());
+            return;
+        }
+        
+        foreach (var point in thisContext.Multicellular.Mask)
+        {
+            var posFrom = thisContext.Multicellular.GetPointInMask(from, point);
+            var posTo = thisContext.Multicellular.GetPointInMask(to, point);
+            
+            if(thisContext.Context.WorkerLogic.Replase(posFrom.ToSaveString(), posTo.ToSaveString()) == false) continue;
+            
+            return;
+        }
     }
 
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
@@ -125,7 +142,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
 
     private void OnClick()
     {
-        if(context.Context.WorkerLogic.Get(key, Timer.Delay) == false) return;
+        if(thisContext.Context.WorkerLogic.Get(key, Timer.Delay) == false) return;
         
         var view = viewDef.AddView(ViewType.Bubble);
         
@@ -149,7 +166,21 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     {
         Timer.Stop();
         Timer.OnComplete();
-        context.Context.WorkerLogic.Return(key);
+        
+        if (thisContext.Multicellular == null)
+        {
+            thisContext.Context.WorkerLogic.Return(key);
+            return;
+        }
+
+        foreach (var point in thisContext.Multicellular.Mask)
+        {
+            var position = thisContext.Multicellular.GetPointInMask(thisContext.CachedPosition, point);
+            
+            if(thisContext.Context.WorkerLogic.Return(position.ToSaveString()) == false) continue;
+            
+            return;
+        }
     }
     
     private void OnComplete()

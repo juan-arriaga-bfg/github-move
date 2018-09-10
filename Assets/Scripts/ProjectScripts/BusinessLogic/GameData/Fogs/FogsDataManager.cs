@@ -4,7 +4,6 @@ using UnityEngine;
 public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsDataManager>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-
     public int Guid => ComponentGuid;
 
     public void OnRegisterEntity(ECSEntity entity)

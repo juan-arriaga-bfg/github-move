@@ -5,21 +5,21 @@ public class PiecesDataManager : ECSEntity, IDataManager, IDataLoader<List<Piece
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
-
+    
+    private Dictionary<int, PieceDef> pieces;
+    
+    public const int CreateManaDelay = 300;
+    public const int ReproductionDelay = 20;
+    public const int ReproductionStepDelay = 5;
+    public const int ReproductionChance = 50;
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
         RegisterComponent(new PiecesMatchConditionsManager());
         RegisterComponent(new PiecesReproductionDataManager());
     }
-
-    public const int CreateManaDelay = 300;
-    public const int ReproductionDelay = 20;
-    public const int ReproductionStepDelay = 5;
-    public const int ReproductionChance = 50;
-
-    private Dictionary<int, PieceDef> pieces;
-
+    
     public void Reload()
     {
         pieces = null;

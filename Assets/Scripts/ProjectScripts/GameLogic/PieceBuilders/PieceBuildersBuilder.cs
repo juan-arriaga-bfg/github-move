@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PieceBuildersBuilder
 {
@@ -122,8 +123,9 @@ public class PieceBuildersBuilder
         dict.Add(idMin, new SimplePieceBuilder());
 
         var flag = true;
+        var mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2);
 
-        for (var i = idMin + 1; i < idMax - 1; i++)
+        for (var i = idMin + 1; i < idMax - 2; i++)
         {
             if (flag) dict.Add(i, new SimplePieceBuilder());
             else dict.Add(i, new BuildingPieceBuilder());
@@ -131,8 +133,9 @@ public class PieceBuildersBuilder
             flag = !flag;
         }
         
-        dict.Add(idMax - 1, new PartPieceBuilder());
-        dict.Add(idMax, new MulticellularDraggablePieceBuilder{Mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2)});
+        dict.Add(idMax - 2, new PartPieceBuilder());
+        dict.Add(idMax - 1, new BuildingBigPieceBuilder{Mask = mask});
+        dict.Add(idMax, new MulticellularDraggablePieceBuilder{Mask = mask});
         
         return dict;
     }
