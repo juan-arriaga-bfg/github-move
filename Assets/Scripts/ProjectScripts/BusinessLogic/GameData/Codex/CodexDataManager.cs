@@ -43,40 +43,40 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
     public void LoadData(IDataMapper<Dictionary<int, CodexChainState>> dataMapper)
     {
         dataMapper.LoadData((data, error) =>
-                            {
-                                if (string.IsNullOrEmpty(error))
-                                {
-                                    var save = ProfileService.Current.GetComponent<CodexSaveComponent>(CodexSaveComponent.ComponentGuid);
-                                    if (save?.Data == null || save.Data.Count == 0)
-                                    {
-                                        Items = data;
-                                        
-                                        // Unlock all pieces on game field...
-                                        var pieces = GameDataService.Current.FieldManager.Pieces;
-                                        foreach (var key in pieces.Keys)
-                                        {
-                                            UnlockPiece(key);    
-                                        }
+        {
+            if (string.IsNullOrEmpty(error))
+            {
+                var save = ProfileService.Current.GetComponent<CodexSaveComponent>(CodexSaveComponent.ComponentGuid);
+                if (save?.Data == null || save.Data.Count == 0)
+                {
+                    Items = data;
 
-                                        // ... and do not reward player for them
-                                        foreach (var item in Items)
-                                        {
-                                            item.Value.PendingReward.Clear();
-                                        }
+                    // Unlock all pieces on game field...
+                    var pieces = GameDataService.Current.FieldManager.Pieces;
+                    foreach (var key in pieces.Keys)
+                    {
+                        UnlockPiece(key);
+                    }
 
-                                        CodexState = CodexState.Normal;
-                                    }
-                                    else
-                                    {
-                                        Items = save.Data;
-                                        CodexState = save.State;
-                                    }
-                                }
-                                else
-                                {
-                                    Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
-                                }
-                            });
+                    // ... and do not reward player for them
+                    foreach (var item in Items)
+                    {
+                        item.Value.PendingReward.Clear();
+                    }
+
+                    CodexState = CodexState.Normal;
+                }
+                else
+                {
+                    Items = save.Data;
+                    CodexState = save.State;
+                }
+            }
+            else
+            {
+                Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
+            }
+        });
     }
 
     private MatchDefinitionComponent CachedMatchDef()

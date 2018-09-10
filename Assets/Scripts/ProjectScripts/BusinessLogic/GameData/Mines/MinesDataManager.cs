@@ -4,9 +4,8 @@ using UnityEngine;
 public class MinesDataManager : IECSComponent, IDataManager, IDataLoader<List<MineDef>>
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
+	public int Guid => ComponentGuid;
 
-	public int Guid { get { return ComponentGuid; } }
-	
 	public void OnRegisterEntity(ECSEntity entity)
 	{
 		Reload();

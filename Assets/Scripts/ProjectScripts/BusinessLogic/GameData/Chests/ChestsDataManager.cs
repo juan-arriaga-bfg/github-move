@@ -4,9 +4,8 @@ using UnityEngine;
 public class ChestsDataManager : IECSComponent, IDataManager, IDataLoader<List<ChestDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
+    public int Guid => ComponentGuid;
 
-    public int Guid { get { return ComponentGuid; } }
-	
     public void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
@@ -102,12 +101,9 @@ public class ChestsDataManager : IECSComponent, IDataManager, IDataLoader<List<C
     {
         Chest chest;
 
-        if (ChestsOnBoard.TryGetValue(position, out chest))
-        {
-            ChestsOnBoard.Remove(position);
-            return chest;
-        }
+        if (ChestsOnBoard.TryGetValue(position, out chest) == false) return GetChest(pieceType);
         
-        return GetChest(pieceType);
+        ChestsOnBoard.Remove(position);
+        return chest;
     }
 }

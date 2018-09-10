@@ -59,7 +59,7 @@ public class BuildingPieceView : PieceBoardElementView
 		var go = Context.CreateElement((int) view);
 		var renderers = go.GetComponentsInChildren<Renderer>();
 		
-		go.SetParent(sprite.transform.parent, false);
+		go.SetParent(sprite.transform, false);
 
 		foreach (var items in renderers)
 		{

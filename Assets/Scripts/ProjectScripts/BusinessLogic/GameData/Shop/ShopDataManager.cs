@@ -4,8 +4,7 @@ using UnityEngine;
 public class ShopDataManager : IECSComponent, IDataManager, IDataLoader<List<ShopDef>>
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
-
-	public int Guid { get { return ComponentGuid; } }
+	public int Guid => ComponentGuid;
 
 	public List<ShopDef> Products = new List<ShopDef>();
 	

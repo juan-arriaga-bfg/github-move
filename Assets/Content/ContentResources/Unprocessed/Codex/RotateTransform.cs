@@ -14,6 +14,8 @@ public class RotateTransform : MonoBehaviour
     
     [SerializeField] private float m_delay = -1;
 
+    private Quaternion defaultRotation;
+
     private void OnDestroy()
     {
         DOTween.Kill(this);
@@ -21,6 +23,8 @@ public class RotateTransform : MonoBehaviour
 
     private void OnEnable()
     {
+        defaultRotation = transform.rotation;
+        
         var sequence = DOTween.Sequence();
         
         sequence.SetId(this).SetLoops(m_loopsCount);
@@ -33,5 +37,6 @@ public class RotateTransform : MonoBehaviour
     private void OnDisable()
     {
         DOTween.Kill(this);
+        transform.rotation = defaultRotation;
     }
 }

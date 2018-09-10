@@ -72,21 +72,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1618354223413492
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4351652023333894}
-  m_Layer: 0
-  m_Name: UIAnchor
-  m_TagString: Untagged
-  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1682640464331854
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,8 +80,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4587495429075248}
+  - component: {fileID: 114860005757494984}
   - component: {fileID: 114537450799057740}
-  - component: {fileID: 114914047666658196}
   m_Layer: 0
   m_Name: C12Piece
   m_TagString: Untagged
@@ -206,19 +191,6 @@ Transform:
   m_Father: {fileID: 4587495429075248}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4351652023333894
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1618354223413492}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.55, y: 1.83, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4587495429075248}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4587495429075248
 Transform:
   m_ObjectHideFlags: 1
@@ -232,7 +204,6 @@ Transform:
   - {fileID: 4159140344338722}
   - {fileID: 224580752658521870}
   - {fileID: 4209827087923906}
-  - {fileID: 4351652023333894}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -24.144001, y: 30.092001, z: 0.003}
@@ -268,7 +239,7 @@ MonoBehaviour:
   - {fileID: 224888253602845466}
   - {fileID: 224335362715449362}
   - {fileID: 224711663086783200}
---- !u!114 &114914047666658196
+--- !u!114 &114860005757494984
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -276,7 +247,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1682640464331854}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 936ad26a54d643842959f4b72d3f2d76, type: 3}
+  m_Script: {fileID: 11500000, guid: b417249933ed1444d9155c0a93fc2e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsFading: 0
@@ -287,6 +258,7 @@ MonoBehaviour:
     type: 0}
   defaultSelectionMaterial: {fileID: 2100000, guid: d55a16b9364b048ba884d5ede8dae221,
     type: 2}
+  lockedMaterial: {fileID: 2100000, guid: c7f931e90f2ff8a428774823d5cbce3c, type: 2}
 --- !u!212 &212272543990481550
 SpriteRenderer:
   m_ObjectHideFlags: 1

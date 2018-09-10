@@ -4,9 +4,8 @@ using UnityEngine;
 public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<List<ObstacleDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
+    public int Guid => ComponentGuid;
 
-    public int Guid { get { return ComponentGuid; } }
-	
     public void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
@@ -104,7 +103,7 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
         
         var item = ItemWeight.GetRandomItem(def.ChestWeights);
         
-        return item != null ? item.Piece : PieceType.None.Id;
+        return item?.Piece ?? PieceType.None.Id;
     }
     
     public int GetDelayByStep(int piece, int step)

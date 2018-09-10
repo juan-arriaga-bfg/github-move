@@ -4,11 +4,7 @@ using UnityEngine;
 public class FieldDataManager : IECSComponent, IDataManager, IDataLoader<Dictionary<string, List<BoardPosition>>>
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
-
-	public int Guid
-	{
-		get { return ComponentGuid; }
-	}
+	public int Guid => ComponentGuid;
 
 	public Dictionary<int, List<BoardPosition>> Pieces = new Dictionary<int, List<BoardPosition>>();
 
@@ -16,7 +12,7 @@ public class FieldDataManager : IECSComponent, IDataManager, IDataLoader<Diction
 	{
 		Reload();
 	}
-
+	
 	public void OnUnRegisterEntity(ECSEntity entity)
 	{
 	}
