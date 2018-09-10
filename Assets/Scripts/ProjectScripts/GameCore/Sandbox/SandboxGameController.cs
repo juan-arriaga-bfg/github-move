@@ -55,8 +55,9 @@ public class SandboxGameController : MonoBehaviour
                 .RegisterDefaultBuilder(new SimpleMatchActionBuilder()) // creates default match action
                 .RegisterBuilder(new MulticellularPieceMatchActionBuilder())
                 .RegisterBuilder(new СompositePieceMatchActionBuilder()))
-            .RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build()))); 
-        
+            .RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build())));
+
+        boardController.RegisterComponent(new PathfindLockerComponent());
         boardController.RegisterComponent(new BoardRandomComponent()); // random
         boardController.RegisterComponent(new ReproductionLogicComponent());
         boardController.RegisterComponent(new HintCooldownComponent());

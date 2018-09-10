@@ -36,7 +36,7 @@ public class FieldControllerComponent : IECSComponent
                 {
                     {PieceType.Fog.Id, CreateFog()}
                 };
-            
+
             foreach (var piece in pieces)
             {
                 context.ActionExecutor.AddAction(new FillBoardAction
@@ -85,6 +85,8 @@ public class FieldControllerComponent : IECSComponent
                 {
                     view.UpdateResource(0);
                 }
+                
+                PathfindLockObserver.LoadPathfindLock();
             }
         });
     }

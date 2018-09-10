@@ -16,7 +16,7 @@ public static class PathfindIgnoreBuilder
       InitMines(links);
       InitFog(links);
       InitObstacles(links);
-      
+      InitCharacters(links);
       return links;
    }
 
@@ -102,6 +102,42 @@ public static class PathfindIgnoreBuilder
       dict.Add(PieceType.MineX.Id, mineIgnorePieces);
       dict.Add(PieceType.MineY.Id, mineIgnorePieces);
       dict.Add(PieceType.MineZ.Id, mineIgnorePieces);
+   }
+
+   private static void InitCharacters(Dictionary<int, HashSet<int>> dict)
+   {
+      var charIgnorePieces = GetReverseSet(new HashSet<int>
+      {
+         PieceType.O1.Id,
+         PieceType.O2.Id,
+         PieceType.O3.Id,
+         PieceType.O4.Id,
+         PieceType.O5.Id,
+         PieceType.O6.Id,
+         PieceType.O7.Id,
+         PieceType.O8.Id,
+         PieceType.O9.Id,
+         PieceType.OX1.Id,
+         PieceType.OX2.Id,
+         PieceType.OX3.Id,
+         PieceType.OX4.Id,
+         PieceType.OX5.Id,
+         PieceType.OX6.Id,
+         PieceType.OX7.Id,
+         PieceType.OX8.Id,
+         PieceType.OX9.Id,
+         PieceType.Fog.Id
+      });
+      
+      dict.Add(PieceType.Char1.Id, charIgnorePieces);
+      dict.Add(PieceType.Char2.Id, charIgnorePieces);
+      dict.Add(PieceType.Char3.Id, charIgnorePieces);
+      dict.Add(PieceType.Char4.Id, charIgnorePieces);
+      dict.Add(PieceType.Char5.Id, charIgnorePieces);
+      dict.Add(PieceType.Char6.Id, charIgnorePieces);
+      dict.Add(PieceType.Char7.Id, charIgnorePieces);
+      dict.Add(PieceType.Char8.Id, charIgnorePieces);
+      dict.Add(PieceType.Char9.Id, charIgnorePieces);
    }
 
    private static void InitFog(Dictionary<int, HashSet<int>> dict)

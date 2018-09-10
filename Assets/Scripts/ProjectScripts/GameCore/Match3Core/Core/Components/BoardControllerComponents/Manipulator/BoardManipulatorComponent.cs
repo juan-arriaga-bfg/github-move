@@ -263,7 +263,6 @@ public class BoardManipulatorComponent : ECSEntity,
                     });
                     
                     context.BoardLogic.CharactersLogic.Step();
-                    
                     cachedViewForDrag = null;
                     cameraManipulator.CameraMove.UnLock(this);
                 }
