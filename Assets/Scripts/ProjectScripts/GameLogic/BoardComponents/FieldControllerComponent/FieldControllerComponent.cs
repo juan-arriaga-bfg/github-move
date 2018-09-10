@@ -23,8 +23,9 @@ public class FieldControllerComponent : IECSComponent
         var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
         CutTriangles(maxEdge / 2, Directions.All);
         
-//        TestField();
-//        return;
+        // TestFieldOleg();
+        // TestFieldAlex();
+        // return; 
         
         context.BoardLogic.PieceFlyer.Locker.Lock(context);
         
@@ -87,8 +88,8 @@ public class FieldControllerComponent : IECSComponent
             }
         });
     }
-    
-    private void TestField()
+
+    private void TestFieldOleg()
     {
         AddPieces(new BoardPosition(20, 16), PieceType.C11.Id, PieceType.C11.Id);
         AddPieces(new BoardPosition(22, 16), PieceType.C11.Id, PieceType.C11.Id);
@@ -99,10 +100,10 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(28, 16), PieceType.C3Fake.Id, PieceType.C3Fake.Id);
         return;
         
-        AddPieces(new BoardPosition(4, 16), PieceType.O1.Id, PieceType.O5.Id);
+        AddPieces(new BoardPosition(4, 16), PieceType.O1.Id,  PieceType.O5.Id);
         AddPieces(new BoardPosition(6, 16), PieceType.OX1.Id, PieceType.OX5.Id);
         
-        AddPieces(new BoardPosition(8, 16), PieceType.A1.Id, PieceType.A9.Id);
+        AddPieces(new BoardPosition(8,  16), PieceType.A1.Id, PieceType.A9.Id);
         AddPieces(new BoardPosition(10, 16), PieceType.B1.Id, PieceType.B5.Id);
         AddPieces(new BoardPosition(12, 16), PieceType.C1.Id, PieceType.C9.Id);
         AddPieces(new BoardPosition(14, 16), PieceType.D1.Id, PieceType.D4.Id);
@@ -118,6 +119,23 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(28, 22), PieceType.Basket1.Id, PieceType.Basket3.Id);
         
         AddPieces(new BoardPosition(29, 16), PieceType.Coin1.Id, PieceType.Coin5.Id);
+    }
+    
+    private void TestFieldAlex()
+    {
+        AddPieces(new BoardPosition(19, 16), PieceType.C1.Id, PieceType.C11.Id);
+        AddPieces(new BoardPosition(17, 16), PieceType.C1.Id, PieceType.C11.Id);
+        AddPieces(new BoardPosition(18, 16), PieceType.C1.Id, PieceType.C11.Id);
+        AddPieces(new BoardPosition(16, 16), PieceType.C1.Id, PieceType.C11.Id);
+
+        AddPieces(new BoardPosition(29, 16), PieceType.C11.Id, PieceType.C11.Id);
+        AddPieces(new BoardPosition(29, 17), PieceType.C11.Id, PieceType.C11.Id);
+        AddPieces(new BoardPosition(29, 15), PieceType.C11.Id, PieceType.C11.Id);
+        AddPieces(new BoardPosition(29, 24), PieceType.C11.Id, PieceType.C11.Id);
+
+        AddPieces(new BoardPosition(20, 15), PieceType.MagicGrowing1.Id, PieceType.Magic.Id);
+        AddPieces(new BoardPosition(22, 15), PieceType.MagicGrowing1.Id, PieceType.Magic.Id);
+        AddPieces(new BoardPosition(24, 15), PieceType.MagicGrowing1.Id, PieceType.Magic.Id);
     }
     
     private List<BoardPosition> CreateFog()
@@ -148,10 +166,15 @@ public class FieldControllerComponent : IECSComponent
         }
     }
     
-    private void AddPieces(BoardPosition position, int first, int last)
+    private void AddPieces(BoardPosition position, int first, int last, bool includeFake = false)
     {
         for (var i = first; i < last + 1; i++)
         {
+            if (PieceType.GetDefById(i).Filter.Has(PieceTypeFilter.Fake))
+            {
+                continue;
+            }
+            
             context.ActionExecutor.AddAction(new CreatePieceAtAction
             {
                 At = position,
