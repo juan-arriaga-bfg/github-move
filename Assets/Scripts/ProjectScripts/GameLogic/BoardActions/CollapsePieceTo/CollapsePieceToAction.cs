@@ -28,7 +28,7 @@ public class CollapsePieceToAction : IBoardAction
 		gameBoardController.BoardLogic.LockCells(Positions, this);
 		
 		gameBoardController.BoardLogic.RemovePiecesAt(Positions);
-
+		
 		BoardAnimation animation;
 		if (IsMatch)
 		{

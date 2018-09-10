@@ -38,9 +38,16 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
 
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
+        
+       if (piece == null || board == null)
+       {
+            board = BoardService.Current.GetBoardById(0);
+            piece = board.BoardLogic.GetPieceAt(position);
+       }
+        
        var target = GetTargetPosition();
        if(target != null)
-           board.PathfindLocker?.RecalcCacheOnPieceAdded(target.Value, position, piece, AutoLock);
+           board.PathfindLocker?.RecalcCacheOnPieceAdded(target.Value, piece.CachedPosition, piece, AutoLock);
        else if(AutoLock)
            nonLoaded.Add(this);
     }
@@ -49,7 +56,7 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
     {
     }
 
-    public void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
+    public void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
         var target = GetTargetPosition();
         if(target != null)
@@ -66,7 +73,7 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
     private BoardPosition? GetTargetPosition()
     {
         var pieces = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1);
-        if (pieces.Count > 0)
+        if (pieces != null && pieces.Count > 0)
         {
             var target = pieces[0];
             return target;    

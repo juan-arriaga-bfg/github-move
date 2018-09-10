@@ -16,7 +16,7 @@ public class PathfinderComponent:ECSEntity
         board = entity as BoardController;
     }
 
-    protected Predicate<BoardPosition> GetCondition(Piece piece)
+    public Predicate<BoardPosition> GetCondition(Piece piece)
     {
         var boardCondition = piece?.BoardCondition;
         if (boardCondition == null)
@@ -27,7 +27,7 @@ public class PathfinderComponent:ECSEntity
     
     //A* pathfinding algorithm
     public virtual bool HasPath(BoardPosition from, HashSet<BoardPosition> to, out List<BoardPosition> blockagePositions,
-        Piece piece = null)
+        Piece piece = null, Predicate<BoardPosition> condition = null)
     {
         blockagePositions = new List<BoardPosition>();
         
@@ -45,7 +45,7 @@ public class PathfinderComponent:ECSEntity
         var costMap = new Dictionary<BoardPosition, int>();
         var predictionCosts = new Dictionary<BoardPosition, int>();
 
-        Predicate<BoardPosition> fieldCondition = GetCondition(piece);
+        Predicate<BoardPosition> fieldCondition = condition ?? GetCondition(piece);
         
         //Init start node data
         uncheckedPositions.Add(from);
@@ -87,9 +87,9 @@ public class PathfinderComponent:ECSEntity
         return false;
     }
     
-    public virtual bool HasPath(BoardPosition from, BoardPosition to, out List<BoardPosition> blockagePositions, Piece piece = null)
+    public virtual bool HasPath(BoardPosition from, BoardPosition to, out List<BoardPosition> blockagePositions, Piece piece = null, Predicate<BoardPosition> condition = null)
     {
-        return HasPath(from, new HashSet<BoardPosition> {to}, out blockagePositions, piece);
+        return HasPath(from, new HashSet<BoardPosition> {to}, out blockagePositions, piece, condition);
     }
     
     protected BoardPosition FindPosWithMinimalCost(Dictionary<BoardPosition, int> costs,
@@ -180,10 +180,19 @@ public class PathfindLockerComponent : ECSEntity
         }   
     }
 
-    private bool RecalcFor(Piece piece, BoardPosition target)
+    private bool RecalcFor(Piece piece, BoardPosition target, List<BoardPosition> ignorablePositions = null)
     {
+        if (ignorablePositions == null)
+            ignorablePositions = new List<BoardPosition>();
+        else
+            Debug.LogError($"{string.Join(", ", ignorablePositions)}");
+        
         List<BoardPosition> pieceBlockers;
-        var canPath = Pathfinder.HasPath(piece.CachedPosition, target, out pieceBlockers, piece); 
+        
+        var defaultCondition = Pathfinder.GetCondition(piece);
+        Predicate<BoardPosition> pathCondition = (pos) => ignorablePositions.Contains(pos) || defaultCondition(pos);
+        
+        var canPath = Pathfinder.HasPath(piece.CachedPosition, target, out pieceBlockers, piece, pathCondition);
         if (canPath && !freePieces.Contains(piece))
         {
             blockPathPieces.Remove(piece);
@@ -222,7 +231,7 @@ public class PathfindLockerComponent : ECSEntity
             builder.Append($"\n\t{block.CachedPosition}: {string.Join(",", blockPathPieces[block])}");
         }
         
-        Debug.LogError($"CacheStatus\n\n{builder}\n\n");
+        Debug.LogWarning($"CacheStatus\n\n{builder}\n\n");
 
     }
 #endif
@@ -278,7 +287,7 @@ public class PathfindLockerComponent : ECSEntity
             if (!blockers.Contains(changedPosition))
                 continue;
 
-            RecalcFor(piece, target);
+            RecalcFor(piece, target, new List<BoardPosition>() {target, changedPosition});
         }
     }
 

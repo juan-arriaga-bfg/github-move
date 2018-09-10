@@ -7,8 +7,8 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 		var piece = base.Build(pieceType, context);
 		
 		CreateViewComponent(piece);
-		
-		piece.RegisterComponent(new MineDraggablePieceComponent());
+
+		piece.RegisterComponent(new DraggablePieceComponent());
 		piece.RegisterComponent(new TimerComponent());
 		
 		var life = new MineLifeComponent();
@@ -25,6 +25,8 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 		
 		piece.RegisterComponent(storage);
 		AddObserver(piece, storage);
+		
+		AddObserver(piece, new PathfindLockObserver {AutoLock = true});
 		
 		piece.RegisterComponent(new TouchReactionComponent()
 			 .RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
