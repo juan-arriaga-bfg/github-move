@@ -133,9 +133,9 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(29, 15), PieceType.C11.Id, PieceType.C11.Id);
         AddPieces(new BoardPosition(29, 24), PieceType.C11.Id, PieceType.C11.Id);
 
-        AddPieces(new BoardPosition(20, 15), PieceType.MagicGrowing1.Id, PieceType.Magic.Id);
-        AddPieces(new BoardPosition(22, 15), PieceType.MagicGrowing1.Id, PieceType.Magic.Id);
-        AddPieces(new BoardPosition(24, 15), PieceType.MagicGrowing1.Id, PieceType.Magic.Id);
+        AddPieces(new BoardPosition(20, 15), PieceType.Magic1.Id, PieceType.Magic.Id);
+        AddPieces(new BoardPosition(22, 15), PieceType.Magic1.Id, PieceType.Magic.Id);
+        AddPieces(new BoardPosition(24, 15), PieceType.Magic1.Id, PieceType.Magic.Id);
     }
     
     private List<BoardPosition> CreateFog()
