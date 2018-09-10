@@ -147,6 +147,6 @@ public class R
      public const string Enemy1Piece = "Enemy1Piece";
      public const string EnemyBubbleView = "EnemyBubbleView";
      public const string MagicPiece = "MagicPiece";
-     public const string MagicGrowing1Piece = "MagicGrowing1Piece";
-     public const string MagicGrowing2Piece = "MagicGrowing2Piece";
+     public const string Magic1Piece = "Magic1Piece";
+     public const string Magic2Piece = "Magic2Piece";
 }

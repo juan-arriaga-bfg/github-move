@@ -184,8 +184,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Coin4.Id, R.Coin4Piece);
         dict.Add(PieceType.Coin5.Id, R.Coin5Piece);
         
-        dict.Add(PieceType.MagicGrowing1.Id, R.MagicGrowing1Piece);
-        dict.Add(PieceType.MagicGrowing2.Id, R.MagicGrowing2Piece);
+        dict.Add(PieceType.Magic1.Id, R.Magic1Piece);
+        dict.Add(PieceType.Magic2.Id, R.Magic2Piece);
         dict.Add(PieceType.Magic.Id, R.MagicPiece);
         
         return dict;

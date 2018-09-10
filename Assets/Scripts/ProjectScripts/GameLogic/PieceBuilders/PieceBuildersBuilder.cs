@@ -43,7 +43,7 @@ public class PieceBuildersBuilder
         
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest9.Id, dict);
         
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.MagicGrowing1.Id, PieceType.Magic.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Magic1.Id, PieceType.Magic.Id, dict);
         
         return dict;
     }
