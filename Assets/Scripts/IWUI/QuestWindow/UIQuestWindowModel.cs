@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 
 public class UIQuestWindowModel : IWWindowModel
@@ -25,9 +26,31 @@ public class UIQuestWindowModel : IWWindowModel
     {
         get
         {
-            var reward = CurrencyHellper.ResourcePieceToCurrence(Quest.Rewards, Currency.Coins.Name);
+            var types = new List<string>
+            {
+                Currency.Coins.Name,
+                Currency.Crystals.Name,
+                Currency.Energy.Name,
+                Currency.Mana.Name,
+                Currency.Experience.Name,
+            };
+
+            var rewards = new List<string>();
+            var str = new StringBuilder("<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>Reward:</color></font> <size=50>");
             
-            return $"<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>Reward:</color></font> <size=50>{reward.Amount} <sprite name={reward.Currency}></size>";
+            foreach (var type in types)
+            {
+                var reward = CurrencyHellper.ResourcePieceToCurrence(Quest.Rewards, type);
+                
+                if(reward.Amount == 0) continue;
+                
+                rewards.Add($"{reward.Amount} <sprite name={reward.Currency}>");
+            }
+            
+            str.Append(string.Join(", ", rewards));
+            str.Append("</size>");
+            
+            return str.ToString();
         }
     }
 
