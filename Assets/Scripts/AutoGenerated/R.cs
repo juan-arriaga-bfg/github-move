@@ -128,7 +128,6 @@ public class R
      public const string G5Piece = "G5Piece";
      public const string H5Piece = "H5Piece";
      public const string Warning = "Warning";
-     public const string MagicPiece = "MagicPiece";
      public const string Char1Piece = "Char1Piece";
      public const string Char2Piece = "Char2Piece";
      public const string Char3Piece = "Char3Piece";
@@ -147,4 +146,7 @@ public class R
      public const string A10Piece = "A10Piece";
      public const string Enemy1Piece = "Enemy1Piece";
      public const string EnemyBubbleView = "EnemyBubbleView";
+     public const string MagicPiece = "MagicPiece";
+     public const string MagicGrowing1Piece = "MagicGrowing1Piece";
+     public const string MagicGrowing2Piece = "MagicGrowing2Piece";
 }

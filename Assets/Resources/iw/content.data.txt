@@ -640,11 +640,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "MagicPiece",
-    "ResourcePath": "Prefabs\\Pieces\\GenericPiece/MagicPiece",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "Char1Piece",
     "ResourcePath": "Prefabs\\Pieces\\GenericPiece\\Characters/Char1Piece",
     "IsGenerateAutoName": true
@@ -732,6 +727,21 @@
   {
     "Uid": "EnemyBubbleView",
     "ResourcePath": "Prefabs/EnemyBubbleView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MagicPiece",
+    "ResourcePath": "Prefabs\\Pieces\\GenericPiece\\Magic\\MagicPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MagicGrowing1Piece",
+    "ResourcePath": "Prefabs\\Pieces\\GenericPiece\\Magic\\MagicGrowing1Piece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "MagicGrowing2Piece",
+    "ResourcePath": "Prefabs\\Pieces\\GenericPiece\\Magic\\MagicGrowing2Piece",
     "IsGenerateAutoName": true
   }
 ]

@@ -202,6 +202,10 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.Coin4.Id, new PieceMatchDef {Next = PieceType.Coin5.Id, Previous = PieceType.Coin3.Id, Count = 3});
         dict.Add(PieceType.Coin5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Coin4.Id});
         
+        dict.Add(PieceType.MagicGrowing1.Id, new PieceMatchDef {Next = PieceType.MagicGrowing2.Id, Previous = PieceType.None.Id,          Count = 3});
+        dict.Add(PieceType.MagicGrowing2.Id, new PieceMatchDef {Next = PieceType.Magic.Id,         Previous = PieceType.MagicGrowing1.Id, Count = 3});
+        dict.Add(PieceType.Magic.Id,         new PieceMatchDef {Next = PieceType.None.Id,          Previous = PieceType.MagicGrowing2.Id });
+        
         return dict;
     }
 
