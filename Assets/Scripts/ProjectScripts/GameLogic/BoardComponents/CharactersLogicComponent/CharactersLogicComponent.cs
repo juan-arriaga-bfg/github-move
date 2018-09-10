@@ -22,7 +22,7 @@ public class CharactersLogicComponent : ECSEntity
 	
 	private void Waiting()
 	{
-		timer.Delay = PiecesDataManager.CreateManaDelay;
+		timer.Delay = GameDataService.Current.ConstantsManager.CreateManaDelay;
 		timer.OnComplete = CreateMana;
 		timer.Start();
 	}

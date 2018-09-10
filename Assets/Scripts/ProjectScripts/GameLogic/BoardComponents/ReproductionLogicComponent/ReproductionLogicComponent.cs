@@ -18,14 +18,14 @@ public class ReproductionLogicComponent : ECSEntity
 
     private void Waiting()
     {
-        timer.Delay = PiecesDataManager.ReproductionDelay;
+        timer.Delay = GameDataService.Current.ConstantsManager.ReproductionDelay;
         timer.OnComplete = Reproduction;
         timer.Start();
     }
     
     private void Step()
     {
-        timer.Delay = PiecesDataManager.ReproductionStepDelay;
+        timer.Delay = GameDataService.Current.ConstantsManager.ReproductionStepDelay;
         timer.OnComplete = Reproduction;
         timer.Start();
     }
@@ -44,7 +44,7 @@ public class ReproductionLogicComponent : ECSEntity
 
     private void Reproduction()
     {
-        if (Random.Range(0, 101) > PiecesDataManager.ReproductionChance)
+        if (Random.Range(0, 101) > GameDataService.Current.ConstantsManager.ReproductionChance)
         {
             Step();
             return;

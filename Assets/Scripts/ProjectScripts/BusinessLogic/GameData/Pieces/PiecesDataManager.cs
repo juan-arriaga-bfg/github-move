@@ -8,11 +8,6 @@ public class PiecesDataManager : ECSEntity, IDataManager, IDataLoader<List<Piece
     
     private Dictionary<int, PieceDef> pieces;
     
-    public const int CreateManaDelay = 300;
-    public const int ReproductionDelay = 20;
-    public const int ReproductionStepDelay = 5;
-    public const int ReproductionChance = 50;
-    
     public override void OnRegisterEntity(ECSEntity entity)
     {
         Reload();

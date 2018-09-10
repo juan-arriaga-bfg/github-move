@@ -28,22 +28,17 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
         {
             if (string.IsNullOrEmpty(error))
             {
-//                Debug.LogError("!!!!!!!");
-                
                 var t = typeof(ConstantsDataManager);
-                var fieldInfos = t.GetFields(BindingFlags.Public);
-        
-                for (var i = 0; i < fieldInfos.Length; i++)
-                {
-                    var fieldInfo = fieldInfos[i];
-                    
-                    Debug.LogError(fieldInfo.Name);
-                }
+                var fieldInfos = t.GetFields(BindingFlags.GetField | BindingFlags.Public | BindingFlags.Instance);
                 
-                /*CreateManaDelay = data.CreateManaDelay;
-                ReproductionDelay = data.ReproductionDelay;
-                ReproductionStepDelay = data.ReproductionStepDelay;
-                ReproductionChance = data.ReproductionChance;*/
+                foreach (var info in fieldInfos)
+                {
+                    var item = data.Find(def => def.Key == info.Name);
+                    
+                    if(item == null) continue;
+                    
+                    info.SetValue(this, item.Value);
+                }
             }
             else
             {
