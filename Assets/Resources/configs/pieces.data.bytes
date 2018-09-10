@@ -3,6 +3,12 @@
     "Uid": "Empty"
   },
   {
+    "Uid": "Magic1"
+  },
+  {
+    "Uid": "Magic2"
+  },
+  {
     "Uid": "Magic"
   },
   {
@@ -73,6 +79,41 @@
     "SpawnResources": {
       "Currency": "Mana",
       "Amount": 10
+    }
+  },
+  {
+    "Uid": "Crystal1",
+    "SpawnResources": {
+      "Currency": "Crystals",
+      "Amount": 10
+    }
+  },
+  {
+    "Uid": "Crystal2",
+    "SpawnResources": {
+      "Currency": "Crystals",
+      "Amount": 35
+    }
+  },
+  {
+    "Uid": "Crystal3",
+    "SpawnResources": {
+      "Currency": "Crystals",
+      "Amount": 110
+    }
+  },
+  {
+    "Uid": "Crystal4",
+    "SpawnResources": {
+      "Currency": "Crystals",
+      "Amount": 350
+    }
+  },
+  {
+    "Uid": "Crystal5",
+    "SpawnResources": {
+      "Currency": "Crystals",
+      "Amount": 1100
     }
   },
   {
@@ -1285,7 +1326,7 @@
     ],
     "SpawnResources": {
       "Currency": "Energy",
-      "Amount": 15
+      "Amount": 20
     },
     "Name": "Cloth",
     "UnlockBonus": [
