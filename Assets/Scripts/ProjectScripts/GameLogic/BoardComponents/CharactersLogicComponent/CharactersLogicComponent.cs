@@ -36,6 +36,10 @@ public class CharactersLogicComponent : ECSEntity
 
 			foreach (var position in positions)
 			{
+				var character = context.GetPieceAt(position);
+				if(character == null || character.Draggable?.Locker?.IsLocked == true)
+					continue;
+				
 				context.Context.ActionExecutor.AddAction(new MoveCharacterAction{From = position});
 			}
 		}

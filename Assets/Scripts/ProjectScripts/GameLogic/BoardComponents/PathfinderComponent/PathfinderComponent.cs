@@ -177,19 +177,7 @@ public class PathfindLockerComponent : ECSEntity
         {
             var addedPiece = piece;
             RecalcFor(addedPiece, target);
-        }
-//        
-//        List<BoardPosition> addPieceBlock;
-//        if (Pathfinder.HasPath(addedPiece.CachedPosition, target, out addPieceBlock, addedPiece))
-//        {
-//            freePieces.Add(addedPiece);
-//        }
-//        else
-//        {
-//            blockPathPieces.Add(addedPiece, addPieceBlock);
-//            addedPiece.Draggable?.Locker?.Lock(this);
-//        }
-//            
+        }   
     }
 
     private bool RecalcFor(Piece piece, BoardPosition target)
