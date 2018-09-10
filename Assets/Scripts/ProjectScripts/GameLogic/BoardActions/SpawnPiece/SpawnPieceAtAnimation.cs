@@ -10,6 +10,11 @@ public class SpawnPieceAtAnimation : BoardAnimation
     {
         var boardElement = context.CreatePieceAt(CreatedPiece, At);
 
+        if (boardElement == null)
+        {
+            Debug.LogError($"[SpawnPieceAtAnimation] => Animate: Can't create piece with id {CreatedPiece.PieceType} at {At}");
+        }
+        
         boardElement.CachedTransform.localScale = Vector3.zero;
         
         var sequence = DOTween.Sequence().SetId(animationUid);

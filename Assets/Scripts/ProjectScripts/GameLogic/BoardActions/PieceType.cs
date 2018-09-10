@@ -17,7 +17,8 @@ public enum PieceTypeFilter
     Reproduction = 256,
     Character = 512,
     Fake = 1024,
-    Enemy = 2048
+    Enemy = 2048,
+    Booster = 4096
 }
 
 public partial class PieceTypeDef
@@ -240,5 +241,7 @@ public static partial class PieceType
     
     public static readonly PieceTypeDef Enemy1 = new PieceTypeDef{Id = 20000, Abbreviations = new List<string>{ "Enemy1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Enemy};
     
-    public static readonly PieceTypeDef Magic = new PieceTypeDef{Id = 1000000, Abbreviations = new List<string>{ "Magic" }};
+    public static readonly PieceTypeDef MagicGrowing1 = new PieceTypeDef{Id = 1000001, Abbreviations = new List<string>{ "GrowingMagic1" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef MagicGrowing2 = new PieceTypeDef{Id = 1000002, Abbreviations = new List<string>{ "GrowingMagic2" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Magic         = new PieceTypeDef{Id = 1000003, Abbreviations = new List<string>{ "Magic" },         Filter = PieceTypeFilter.Simple | PieceTypeFilter.Booster};
 }
