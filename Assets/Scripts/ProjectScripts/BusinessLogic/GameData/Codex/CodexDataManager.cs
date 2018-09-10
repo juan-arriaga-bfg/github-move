@@ -472,13 +472,28 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             },*/
             new CodexTabDef
             {
-                Name = "Coins",
+                Name = "Resources",
                 ChainDefs = new List<CodexChainDef>
                 {
                     new CodexChainDef
                     {
                         Name = "Coin",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Coin1.Id)),
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Crystal",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Crystal1.Id)),
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Mana",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Mana1.Id)),
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Experience",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Experience1.Id)),
                     },
                 }
             }

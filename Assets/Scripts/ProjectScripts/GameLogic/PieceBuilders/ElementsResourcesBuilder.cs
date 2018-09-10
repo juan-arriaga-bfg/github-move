@@ -177,12 +177,28 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Chest9.Id, R.Chest9Piece);
         
         dict.Add(PieceType.Mana1.Id, R.Mana1Piece);
+        dict.Add(PieceType.Mana2.Id, R.Mana2Piece);
+        dict.Add(PieceType.Mana3.Id, R.Mana3Piece);
+        dict.Add(PieceType.Mana4.Id, R.Mana4Piece);
+        dict.Add(PieceType.Mana5.Id, R.Mana5Piece);
+        
+        dict.Add(PieceType.Experience1.Id, R.Experience1Piece);
+        dict.Add(PieceType.Experience2.Id, R.Experience2Piece);
+        dict.Add(PieceType.Experience3.Id, R.Experience3Piece);
+        dict.Add(PieceType.Experience4.Id, R.Experience4Piece);
+        dict.Add(PieceType.Experience5.Id, R.Experience5Piece);
         
         dict.Add(PieceType.Coin1.Id, R.Coin1Piece);
         dict.Add(PieceType.Coin2.Id, R.Coin2Piece);
         dict.Add(PieceType.Coin3.Id, R.Coin3Piece);
         dict.Add(PieceType.Coin4.Id, R.Coin4Piece);
         dict.Add(PieceType.Coin5.Id, R.Coin5Piece);
+        
+        dict.Add(PieceType.Crystal1.Id, R.Crystal1Piece);
+        dict.Add(PieceType.Crystal2.Id, R.Crystal2Piece);
+        dict.Add(PieceType.Crystal3.Id, R.Crystal3Piece);
+        dict.Add(PieceType.Crystal4.Id, R.Crystal4Piece);
+        dict.Add(PieceType.Crystal5.Id, R.Crystal5Piece);
         
         dict.Add(PieceType.Magic1.Id, R.Magic1Piece);
         dict.Add(PieceType.Magic2.Id, R.Magic2Piece);

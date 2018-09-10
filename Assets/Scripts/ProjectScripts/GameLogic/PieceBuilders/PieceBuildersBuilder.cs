@@ -21,7 +21,6 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddSimplePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict.Add(PieceType.Mana1.Id, new SimplePieceBuilder());
         
         dict = AddSimplePiece<CharacterPieceBuilder>(PieceType.Char1.Id, PieceType.Char9.Id, dict);
         
@@ -33,7 +32,10 @@ public class PieceBuildersBuilder
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.X1.Id, PieceType.X5.Id, dict);
         
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Experience1.Id, PieceType.Experience5.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Mana1.Id, PieceType.Mana5.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Coin1.Id, PieceType.Coin5.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Crystal1.Id, PieceType.Crystal5.Id, dict);
         
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.ChestA1.Id, PieceType.ChestA3.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.ChestX1.Id, PieceType.ChestX3.Id, dict);

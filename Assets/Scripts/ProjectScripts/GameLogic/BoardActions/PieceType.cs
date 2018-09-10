@@ -174,40 +174,56 @@ public static partial class PieceType
     public static readonly PieceTypeDef X4 = new PieceTypeDef{Id = 1103, Abbreviations = new List<string>{ "X4" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef X5 = new PieceTypeDef{Id = 1104, Abbreviations = new List<string>{ "X5" }, Filter = PieceTypeFilter.Simple};
     
-    public static readonly PieceTypeDef O1 = new PieceTypeDef{Id = 5000, Abbreviations = new List<string>{ "O1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
-    public static readonly PieceTypeDef O2 = new PieceTypeDef{Id = 5001, Abbreviations = new List<string>{ "O2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
-    public static readonly PieceTypeDef O3 = new PieceTypeDef{Id = 5002, Abbreviations = new List<string>{ "O3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
-    public static readonly PieceTypeDef O4 = new PieceTypeDef{Id = 5003, Abbreviations = new List<string>{ "O4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
-    public static readonly PieceTypeDef O5 = new PieceTypeDef{Id = 5004, Abbreviations = new List<string>{ "O5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
-    public static readonly PieceTypeDef O6 = new PieceTypeDef{Id = 5005, Abbreviations = new List<string>{ "O6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
-    public static readonly PieceTypeDef O7 = new PieceTypeDef{Id = 5006, Abbreviations = new List<string>{ "O7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
-    public static readonly PieceTypeDef O8 = new PieceTypeDef{Id = 5007, Abbreviations = new List<string>{ "O8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
-    public static readonly PieceTypeDef O9 = new PieceTypeDef{Id = 5008, Abbreviations = new List<string>{ "O9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef O1 = new PieceTypeDef{Id = 2000, Abbreviations = new List<string>{ "O1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef O2 = new PieceTypeDef{Id = 2001, Abbreviations = new List<string>{ "O2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef O3 = new PieceTypeDef{Id = 2002, Abbreviations = new List<string>{ "O3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef O4 = new PieceTypeDef{Id = 2003, Abbreviations = new List<string>{ "O4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef O5 = new PieceTypeDef{Id = 2004, Abbreviations = new List<string>{ "O5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef O6 = new PieceTypeDef{Id = 2005, Abbreviations = new List<string>{ "O6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef O7 = new PieceTypeDef{Id = 2006, Abbreviations = new List<string>{ "O7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef O8 = new PieceTypeDef{Id = 2007, Abbreviations = new List<string>{ "O8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef O9 = new PieceTypeDef{Id = 2008, Abbreviations = new List<string>{ "O9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
     
-    public static readonly PieceTypeDef OX1 = new PieceTypeDef{Id = 5100, Abbreviations = new List<string>{ "OX1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
-    public static readonly PieceTypeDef OX2 = new PieceTypeDef{Id = 5101, Abbreviations = new List<string>{ "OX2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
-    public static readonly PieceTypeDef OX3 = new PieceTypeDef{Id = 5102, Abbreviations = new List<string>{ "OX3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
-    public static readonly PieceTypeDef OX4 = new PieceTypeDef{Id = 5103, Abbreviations = new List<string>{ "OX4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
-    public static readonly PieceTypeDef OX5 = new PieceTypeDef{Id = 5104, Abbreviations = new List<string>{ "OX5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
-    public static readonly PieceTypeDef OX6 = new PieceTypeDef{Id = 5105, Abbreviations = new List<string>{ "OX6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
-    public static readonly PieceTypeDef OX7 = new PieceTypeDef{Id = 5106, Abbreviations = new List<string>{ "OX7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
-    public static readonly PieceTypeDef OX8 = new PieceTypeDef{Id = 5107, Abbreviations = new List<string>{ "OX8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
-    public static readonly PieceTypeDef OX9 = new PieceTypeDef{Id = 5108, Abbreviations = new List<string>{ "OX9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef OX1 = new PieceTypeDef{Id = 2100, Abbreviations = new List<string>{ "OX1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef OX2 = new PieceTypeDef{Id = 2101, Abbreviations = new List<string>{ "OX2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef OX3 = new PieceTypeDef{Id = 2102, Abbreviations = new List<string>{ "OX3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef OX4 = new PieceTypeDef{Id = 2103, Abbreviations = new List<string>{ "OX4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef OX5 = new PieceTypeDef{Id = 2104, Abbreviations = new List<string>{ "OX5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef OX6 = new PieceTypeDef{Id = 2105, Abbreviations = new List<string>{ "OX6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef OX7 = new PieceTypeDef{Id = 2106, Abbreviations = new List<string>{ "OX7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef OX8 = new PieceTypeDef{Id = 2107, Abbreviations = new List<string>{ "OX8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
+    public static readonly PieceTypeDef OX9 = new PieceTypeDef{Id = 2108, Abbreviations = new List<string>{ "OX9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle};
     
-    public static readonly PieceTypeDef Fog = new PieceTypeDef{Id = 5201, Abbreviations = new List<string>{ "Fog" }, Filter = PieceTypeFilter.Multicellular};
+    public static readonly PieceTypeDef Fog = new PieceTypeDef{Id = 2201, Abbreviations = new List<string>{ "Fog" }, Filter = PieceTypeFilter.Multicellular};
     
-    public static readonly PieceTypeDef Mana1 = new PieceTypeDef{Id = 5300, Abbreviations = new List<string>{ "Mana1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Experience1 = new PieceTypeDef{Id = 3000, Abbreviations = new List<string>{ "Experience1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Experience2 = new PieceTypeDef{Id = 3001, Abbreviations = new List<string>{ "Experience2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Experience3 = new PieceTypeDef{Id = 3002, Abbreviations = new List<string>{ "Experience3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Experience4 = new PieceTypeDef{Id = 3003, Abbreviations = new List<string>{ "Experience4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Experience5 = new PieceTypeDef{Id = 3004, Abbreviations = new List<string>{ "Experience5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     
-    public static readonly PieceTypeDef Coin1 = new PieceTypeDef{Id = 5400, Abbreviations = new List<string>{ "Coin1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
-    public static readonly PieceTypeDef Coin2 = new PieceTypeDef{Id = 5401, Abbreviations = new List<string>{ "Coin2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
-    public static readonly PieceTypeDef Coin3 = new PieceTypeDef{Id = 5402, Abbreviations = new List<string>{ "Coin3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource}; 
-    public static readonly PieceTypeDef Coin4 = new PieceTypeDef{Id = 5403, Abbreviations = new List<string>{ "Coin4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
-    public static readonly PieceTypeDef Coin5 = new PieceTypeDef{Id = 5404, Abbreviations = new List<string>{ "Coin5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Mana1 = new PieceTypeDef{Id = 3100, Abbreviations = new List<string>{ "Mana1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Mana2 = new PieceTypeDef{Id = 3101, Abbreviations = new List<string>{ "Mana2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Mana3 = new PieceTypeDef{Id = 3102, Abbreviations = new List<string>{ "Mana3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Mana4 = new PieceTypeDef{Id = 3103, Abbreviations = new List<string>{ "Mana4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Mana5 = new PieceTypeDef{Id = 3104, Abbreviations = new List<string>{ "Mana5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     
-    public static readonly PieceTypeDef MineC = new PieceTypeDef{Id = 5501, Abbreviations = new List<string>{ "MineC" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
-    public static readonly PieceTypeDef MineX = new PieceTypeDef{Id = 5502, Abbreviations = new List<string>{ "MineX" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
-    public static readonly PieceTypeDef MineY = new PieceTypeDef{Id = 5503, Abbreviations = new List<string>{ "MineY" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
-    public static readonly PieceTypeDef MineZ = new PieceTypeDef{Id = 5504, Abbreviations = new List<string>{ "MineZ" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
+    public static readonly PieceTypeDef Coin1 = new PieceTypeDef{Id = 3200, Abbreviations = new List<string>{ "Coin1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Coin2 = new PieceTypeDef{Id = 3201, Abbreviations = new List<string>{ "Coin2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Coin3 = new PieceTypeDef{Id = 3202, Abbreviations = new List<string>{ "Coin3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource}; 
+    public static readonly PieceTypeDef Coin4 = new PieceTypeDef{Id = 3203, Abbreviations = new List<string>{ "Coin4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Coin5 = new PieceTypeDef{Id = 3204, Abbreviations = new List<string>{ "Coin5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    
+    public static readonly PieceTypeDef Crystal1 = new PieceTypeDef{Id = 3300, Abbreviations = new List<string>{ "Crystal1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Crystal2 = new PieceTypeDef{Id = 3301, Abbreviations = new List<string>{ "Crystal2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Crystal3 = new PieceTypeDef{Id = 3302, Abbreviations = new List<string>{ "Crystal3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource}; 
+    public static readonly PieceTypeDef Crystal4 = new PieceTypeDef{Id = 3303, Abbreviations = new List<string>{ "Crystal4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Crystal5 = new PieceTypeDef{Id = 3304, Abbreviations = new List<string>{ "Crystal5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    
+    public static readonly PieceTypeDef MineC = new PieceTypeDef{Id = 10001, Abbreviations = new List<string>{ "MineC" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
+    public static readonly PieceTypeDef MineX = new PieceTypeDef{Id = 10002, Abbreviations = new List<string>{ "MineX" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
+    public static readonly PieceTypeDef MineY = new PieceTypeDef{Id = 10003, Abbreviations = new List<string>{ "MineY" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
+    public static readonly PieceTypeDef MineZ = new PieceTypeDef{Id = 10004, Abbreviations = new List<string>{ "MineZ" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
     
     public static readonly PieceTypeDef ChestA1 = new PieceTypeDef{Id = 13101, Abbreviations = new List<string>{ "ChestA1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     public static readonly PieceTypeDef ChestA2 = new PieceTypeDef{Id = 13102, Abbreviations = new List<string>{ "ChestA2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};

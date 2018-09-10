@@ -91,13 +91,11 @@ public class FieldControllerComponent : IECSComponent
 
     private void TestFieldOleg()
     {
-        AddPieces(new BoardPosition(20, 16), PieceType.C11.Id, PieceType.C11.Id);
-        AddPieces(new BoardPosition(22, 16), PieceType.C11.Id, PieceType.C11.Id);
-        AddPieces(new BoardPosition(24, 16), PieceType.C11.Id, PieceType.C11.Id);
-        AddPieces(new BoardPosition(26, 16), PieceType.C11.Id, PieceType.C11.Id);
+        AddPieces(new BoardPosition(20, 16), PieceType.Coin1.Id, PieceType.Coin5.Id);
+        AddPieces(new BoardPosition(22, 16), PieceType.Experience1.Id, PieceType.Experience5.Id);
+        AddPieces(new BoardPosition(24, 16), PieceType.Mana1.Id, PieceType.Mana5.Id);
+        AddPieces(new BoardPosition(26, 16), PieceType.Crystal1.Id, PieceType.Crystal5.Id);
         
-        AddPieces(new BoardPosition(28, 14), PieceType.C3Fake.Id, PieceType.C3Fake.Id);
-        AddPieces(new BoardPosition(28, 16), PieceType.C3Fake.Id, PieceType.C3Fake.Id);
         return;
         
         AddPieces(new BoardPosition(4, 16), PieceType.O1.Id,  PieceType.O5.Id);
