@@ -4,7 +4,7 @@
     "Delay": 10,
     "FastPrice": {
       "Currency": "Crystals",
-      "Amount": 5
+      "Amount": 1
     }
   },
   {
@@ -12,55 +12,55 @@
     "Delay": 45,
     "FastPrice": {
       "Currency": "Crystals",
-      "Amount": 10
+      "Amount": 3
     }
   },
   {
     "Uid": "A5",
-    "Delay": 120,
+    "Delay": 180,
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 5
+    }
+  },
+  {
+    "Uid": "A6",
+    "Delay": 300,
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 10
+    }
+  },
+  {
+    "Uid": "A7",
+    "Delay": 900,
     "FastPrice": {
       "Currency": "Crystals",
       "Amount": 15
     }
   },
   {
-    "Uid": "A6",
-    "Delay": 150,
-    "FastPrice": {
-      "Currency": "Crystals",
-      "Amount": 20
-    }
-  },
-  {
-    "Uid": "A7",
-    "Delay": 180,
-    "FastPrice": {
-      "Currency": "Crystals",
-      "Amount": 30
-    }
-  },
-  {
     "Uid": "A8",
-    "Delay": 200,
+    "Delay": 1800,
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 25
+    }
+  },
+  {
+    "Uid": "A9",
+    "Delay": 3600,
     "FastPrice": {
       "Currency": "Crystals",
       "Amount": 50
     }
   },
   {
-    "Uid": "A9",
-    "Delay": 300,
+    "Uid": "A10",
+    "Delay": 10800,
     "FastPrice": {
       "Currency": "Crystals",
       "Amount": 100
-    }
-  },
-  {
-    "Uid": "A10",
-    "Delay": 500,
-    "FastPrice": {
-      "Currency": "Crystals",
-      "Amount": 170
     }
   },
   {
@@ -68,79 +68,79 @@
     "Delay": 10,
     "FastPrice": {
       "Currency": "Crystals",
-      "Amount": 5
+      "Amount": 1
     }
   },
   {
     "Uid": "C4",
-    "Delay": 45,
+    "Delay": 60,
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 3
+    }
+  },
+  {
+    "Uid": "C5",
+    "Delay": 180,
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 5
+    }
+  },
+  {
+    "Uid": "C6",
+    "Delay": 300,
     "FastPrice": {
       "Currency": "Crystals",
       "Amount": 10
     }
   },
   {
-    "Uid": "C5",
-    "Delay": 60,
+    "Uid": "C7",
+    "Delay": 900,
     "FastPrice": {
       "Currency": "Crystals",
       "Amount": 15
     }
   },
   {
-    "Uid": "C6",
-    "Delay": 120,
+    "Uid": "C8",
+    "Delay": 1800,
     "FastPrice": {
       "Currency": "Crystals",
       "Amount": 20
     }
   },
   {
-    "Uid": "C7",
-    "Delay": 180,
+    "Uid": "C9",
+    "Delay": 2400,
     "FastPrice": {
       "Currency": "Crystals",
-      "Amount": 30
+      "Amount": 25
     }
   },
   {
-    "Uid": "C8",
-    "Delay": 300,
+    "Uid": "C10",
+    "Delay": 3600,
     "FastPrice": {
       "Currency": "Crystals",
       "Amount": 50
     }
   },
   {
-    "Uid": "C9",
-    "Delay": 800,
+    "Uid": "C11",
+    "Delay": 7200,
     "FastPrice": {
       "Currency": "Crystals",
       "Amount": 100
     }
   },
   {
-    "Uid": "C10",
-    "Delay": 1200,
-    "FastPrice": {
-      "Currency": "Crystals",
-      "Amount": 230
-    }
-  },
-  {
-    "Uid": "C11",
-    "Delay": 1700,
-    "FastPrice": {
-      "Currency": "Crystals",
-      "Amount": 300
-    }
-  },
-  {
     "Uid": "C12",
-    "Delay": 2200,
+    "Delay": 10800,
     "FastPrice": {
       "Currency": "Crystals",
-      "Amount": 530
+      "Amount": 150
     }
   }
 ]
