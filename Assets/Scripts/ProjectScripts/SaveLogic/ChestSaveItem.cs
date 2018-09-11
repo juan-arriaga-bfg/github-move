@@ -16,8 +16,6 @@ public static class DictionaryStringConverter
             strBuilder.Append(",");
             strBuilder.Append(elem.Value);
             strBuilder.Append(",");
-            
-            
         }
 
         if (target.Count > 0)
@@ -43,7 +41,6 @@ public static class DictionaryStringConverter
 
 public class ChestSaveItemJsonConverter : JsonConverter
 {
-    
     public override bool CanConvert(Type objectType)
     {
         return objectType == typeof (ChestSaveItem);
@@ -54,19 +51,13 @@ public class ChestSaveItemJsonConverter : JsonConverter
         var targetValue = (ChestSaveItem) value;
         
         serializer.TypeNameHandling = TypeNameHandling.None;
-
-        serializer.Serialize(writer, string.Format("{0},{1},{2},{3},{4}",
-            targetValue.Id,
-            (int) targetValue.State,
-            targetValue.StartTime.ConvertToUnixTime(),
-            targetValue.Position.ToSaveString(),
-            targetValue.Reward.ToSaveString()));
+        serializer.Serialize(writer, $"{targetValue.Id},{(int) targetValue.State},{targetValue.StartTime.ConvertToUnixTime()},{targetValue.Position.ToSaveString()},{targetValue.Reward.ToSaveString()}");
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
         var data = serializer.Deserialize<string>(reader);
-        var dataArray = data.Split(new string[] {","}, StringSplitOptions.RemoveEmptyEntries);
+        var dataArray = data.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
         
         var targetValue = new ChestSaveItem
         {
