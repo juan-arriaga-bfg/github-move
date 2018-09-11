@@ -25,6 +25,7 @@ public class FieldControllerComponent : IECSComponent
         
         // TestFieldOleg();
         // TestFieldAlex();
+        // TestFieldQA();
         // return; 
         
         context.BoardLogic.PieceFlyer.Locker.Lock(context);
@@ -136,6 +137,12 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(20, 15), PieceType.Magic1.Id, PieceType.Magic.Id);
         AddPieces(new BoardPosition(22, 15), PieceType.Magic1.Id, PieceType.Magic.Id);
         AddPieces(new BoardPosition(24, 15), PieceType.Magic1.Id, PieceType.Magic.Id);
+    }
+    
+    private void TestFieldQA()
+    {
+        AddPieces(new BoardPosition(19, 16), PieceType.C1.Id, PieceType.C11.Id);
+        AddPiece(10, 20, PieceType.C1.Id);
     }
     
     private List<BoardPosition> CreateFog()
@@ -256,6 +263,15 @@ public class FieldControllerComponent : IECSComponent
         context.ActionExecutor.AddAction(new CreatePieceAtAction
         {
             At = position,
+            PieceTypeId = piece
+        });
+    }
+    
+    private void AddPiece(int x, int y, int piece)
+    {
+        context.ActionExecutor.AddAction(new CreatePieceAtAction
+        {
+            At = new BoardPosition(x, y),
             PieceTypeId = piece
         });
     }
