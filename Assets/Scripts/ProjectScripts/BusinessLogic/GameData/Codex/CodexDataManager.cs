@@ -423,6 +423,24 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                             matchDef.GetChain(PieceType.H4.Id)
                         })
                     },
+                    new CodexChainDef
+                    {
+                        Name = "Flowers",
+                        ItemDefs = GetCodexItemsForChain(new List<List<int>>
+                        {
+                            matchDef.GetChain(PieceType.I1.Id),
+                            matchDef.GetChain(PieceType.I4.Id)
+                        })
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Cherry",
+                        ItemDefs = GetCodexItemsForChain(new List<List<int>>
+                        {
+                            matchDef.GetChain(PieceType.J1.Id),
+                            matchDef.GetChain(PieceType.J4.Id)
+                        })
+                    },
                 }
             },
             new CodexTabDef
