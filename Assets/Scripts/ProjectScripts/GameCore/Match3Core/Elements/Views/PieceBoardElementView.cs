@@ -9,11 +9,10 @@ public class PieceBoardElementView : BoardElementView
     [SerializeField] protected SpriteRenderer sprite;
     [SerializeField] private Material errorSelectionMaterial;
     [SerializeField] private Material defaultSelectionMaterial;
-    
+    [SerializeField] private Material highlightPieceMaterial;
+
     private Animation cachedSelectionAnimation;
 
-    private const string selectionActiveAnimationName = "PieceSelectionGrid";
-    
     private readonly ViewAnimationUid selectedAnimationId = new ViewAnimationUid();
     
     private SpriteRenderer selectionSprite;
@@ -21,6 +20,8 @@ public class PieceBoardElementView : BoardElementView
     private readonly Color baseColor = new Color(0.6f, 0.4f, 0.2f);
     private readonly Color dragErrorColor = new Color(0.7f, 0.1f, 0.1f);
     private readonly Color dragSpriteErrorColor = new Color(1f, 0.44f, 0.44f, 0.9f);
+    
+    public bool IsHighlighted { get; private set; }
     
     public virtual void Init(BoardRenderer context, Piece piece)
     {
@@ -41,6 +42,8 @@ public class PieceBoardElementView : BoardElementView
         }
 
         lastBoardPosition = piece.CachedPosition;
+        
+        
     }
 
     protected virtual void OnEnable()
@@ -64,36 +67,7 @@ public class PieceBoardElementView : BoardElementView
         if (!lastBoardPosition.Equals(boardPos))
         {
             lastBoardPosition = boardPos;
-            var duration = 0.2f;
-           
-            DOTween.Kill(animationUid);
-            
-            var sequence = DOTween.Sequence().SetId(animationUid);
-            
-            if (Piece.Draggable != null && Piece.Draggable.IsValidDrag(boardPos))
-            {
-                if (sprite != null) sequence.Insert(0f, sprite.DOColor(Color.white, duration));
-                
-                sequence.Insert(0f, selectionSprite.DOColor(baseColor, duration));
-                selectionSprite.material = defaultSelectionMaterial;
-            }
-            else
-            {
-                if (sprite != null) sequence.Insert(0f, sprite.DOColor(dragSpriteErrorColor, duration));
-                
-                sequence.Insert(0f, selectionSprite.DOColor(dragErrorColor, duration));
-                selectionSprite.material = errorSelectionMaterial;
-            }
-        }
-        
-        selectionView.gameObject.SetActive(true);
-        
-        if (cachedSelectionAnimation != null)
-        {
-            if (cachedSelectionAnimation.isPlaying == false)
-            {
-                cachedSelectionAnimation.Play(selectionActiveAnimationName);
-            }
+            ToggleSelection(true, Piece.Draggable.IsValidDrag(boardPos));
         }
     }
     
@@ -110,10 +84,7 @@ public class PieceBoardElementView : BoardElementView
         
         if (selectionView == null) return;
         
-        DOTween.Kill(animationUid);
-        sprite.color = Color.white;
-        selectionSprite.color = baseColor;
-        selectionView.gameObject.SetActive(false);
+        ToggleSelection(false);
     }
 
     public virtual void OnTap(BoardPosition boardPos, Vector2 worldPos)
@@ -127,5 +98,85 @@ public class PieceBoardElementView : BoardElementView
 
     public virtual void UpdateView()
     {
+    }
+    
+    public virtual void ToggleHighlight(bool enabled)
+    {
+        if (highlightPieceMaterial == null)
+        {
+            return;
+        }
+
+        if (IsHighlighted == enabled)
+        {
+            return;
+        }
+        
+        if (cachedRenderers == null || cachedRenderers.size <= 0)
+        {
+            CacheLayers();
+        }
+
+        foreach (var rend in cachedRenderers)
+        {
+            if (rend == null) continue;
+            if (rend.CachedRenderer == null) continue;
+            if (rend.CachedRenderer.sharedMaterial == null) continue;
+            if (rend.gameObject == selectionSprite.gameObject) continue;
+            
+            if (!enabled)
+            {
+                rend.ResetDefaultMaterial();
+                IsHighlighted = false;
+            }
+            else
+            {
+                rend.CacheDefaultMaterial();
+                rend.CachedRenderer.material = highlightPieceMaterial;
+                rend.CachedRenderer.material.SetFloat("_HighlightSpeed", 1f);
+                IsHighlighted = true;
+            }
+        }
+    }
+
+    public void ToggleSelection(bool enabled, bool isValid = true)
+    {
+        if (selectionSprite == null)
+        {
+            return;
+        }
+        
+        if (enabled)
+        {
+            var duration = 0.2f;
+
+            DOTween.Kill(animationUid);
+
+            var sequence = DOTween.Sequence().SetId(animationUid);
+
+            if (Piece.Draggable != null && isValid)
+            {
+                if (sprite != null) sequence.Insert(0f, sprite.DOColor(Color.white, duration));
+
+                sequence.Insert(0f, selectionSprite.DOColor(baseColor, duration));
+                selectionSprite.material = defaultSelectionMaterial;
+            }
+            else
+            {
+                if (sprite != null) sequence.Insert(0f, sprite.DOColor(dragSpriteErrorColor, duration));
+
+                sequence.Insert(0f, selectionSprite.DOColor(dragErrorColor, duration));
+                selectionSprite.material = errorSelectionMaterial;
+            }
+
+            selectionView.gameObject.SetActive(true);
+        }
+        else
+        {
+            DOTween.Kill(animationUid);
+            sprite.color = Color.white;
+            selectionSprite.color = baseColor;
+            selectionView.gameObject.SetActive(false);
+        }
     }
 }

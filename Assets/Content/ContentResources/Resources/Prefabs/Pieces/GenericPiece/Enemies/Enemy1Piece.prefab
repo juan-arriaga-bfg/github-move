@@ -131,9 +131,11 @@ MonoBehaviour:
   FadeValue: 0
   selectionView: {fileID: 0}
   sprite: {fileID: 212749282012894596}
-  errorSelectionMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000,
-    type: 0}
-  defaultSelectionMaterial: {fileID: 2100000, guid: d55a16b9364b048ba884d5ede8dae221,
+  errorSelectionMaterial: {fileID: 2100000, guid: 1faf170e9acf1d64f86eefcd318ff557,
+    type: 2}
+  defaultSelectionMaterial: {fileID: 2100000, guid: cbc475da5f4748047a7b2d276ac8a4ff,
+    type: 2}
+  highlightPieceMaterial: {fileID: 2100000, guid: 8df69b780d2d9354c8ffb9b8293c73ad,
     type: 2}
   touchRegion: {fileID: 114607854138475680}
   lockItem: {fileID: 1331704882841138, guid: 322ca3ff89d0a204a925e5ca67bc5a08, type: 2}

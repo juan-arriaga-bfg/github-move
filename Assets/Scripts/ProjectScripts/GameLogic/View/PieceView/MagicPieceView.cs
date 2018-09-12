@@ -42,27 +42,41 @@ public class MagicPieceView : PieceBoardElementView
 
     private void HighlightMatchable(PieceBoardElementView view)
     {
-        var piece = view.Piece;
-        var board = Context.Context;
-        view.OnDragStart(piece.CachedPosition, board.BoardDef.GetSectorCenterWorldPosition(piece.CachedPosition.X, piece.CachedPosition.Y, piece.CachedPosition.Z));
+        view.ToggleHighlight(true);
+        view.ToggleSelection(true);
     }
 
     private void OffHighlightMatchable(PieceBoardElementView view)
     {
-        var piece = view.Piece;
-        var board = Context.Context;
-        view.OnDragEnd(piece.CachedPosition, board.BoardDef.GetSectorCenterWorldPosition(piece.CachedPosition.X, piece.CachedPosition.Y, piece.CachedPosition.Z));
+        view.ToggleHighlight(false);
+        view.ToggleSelection(false);
     }
 
     private List<Piece> FindBestMatches(BoardController board)
     {
+        var currentBestPieces = new List<Piece>();
+        
+        // Uncomment to select all the pieces at the gameboard on CR drag. Usefull for highlight testing for example 
+        // for (int x = 0; x < board.BoardDef.Width; x++)
+        // {
+        //     for (int y = 0; y < board.BoardDef.Height; y++)
+        //     {
+        //         var piece = board.BoardLogic.GetPieceAt(new BoardPosition(x, y, board.BoardDef.PieceLayer));
+        //         if (piece != null)
+        //         {
+        //             currentBestPieces.Add(piece);
+        //         }
+        //     }
+        // }
+        //
+        // return currentBestPieces;
+        
         var entities = board.BoardLogic.BoardEntities;
         if (entities == null)
             return new List<Piece>();
 
         var matchCheckedPositions = new Dictionary<BoardPosition, bool>();
         
-        var currentBestPieces = new List<Piece>();
         float currentBestScore = 0;
         
         foreach (var piece in entities.Values)

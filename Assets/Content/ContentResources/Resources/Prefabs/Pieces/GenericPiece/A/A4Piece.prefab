@@ -36,7 +36,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4798152094798536}
   - component: {fileID: 212741183940897340}
-  - component: {fileID: 111913653246940936}
   m_Layer: 0
   m_Name: selection
   m_TagString: Untagged
@@ -147,21 +146,6 @@ Transform:
   m_Father: {fileID: 4542807987214320}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &111913653246940936
-Animation:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1610605763934172}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: d33d360d5233f4e4ca03273b780e355b, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &114032273210588008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -190,9 +174,11 @@ MonoBehaviour:
   FadeValue: 0
   selectionView: {fileID: 4798152094798536}
   sprite: {fileID: 0}
-  errorSelectionMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000,
-    type: 0}
-  defaultSelectionMaterial: {fileID: 2100000, guid: d55a16b9364b048ba884d5ede8dae221,
+  errorSelectionMaterial: {fileID: 2100000, guid: 1faf170e9acf1d64f86eefcd318ff557,
+    type: 2}
+  defaultSelectionMaterial: {fileID: 2100000, guid: cbc475da5f4748047a7b2d276ac8a4ff,
+    type: 2}
+  highlightPieceMaterial: {fileID: 2100000, guid: 8df69b780d2d9354c8ffb9b8293c73ad,
     type: 2}
   lockedMaterial: {fileID: 2100000, guid: c7f931e90f2ff8a428774823d5cbce3c, type: 2}
 --- !u!212 &212741183940897340
@@ -210,7 +196,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: d55a16b9364b048ba884d5ede8dae221, type: 2}
+  - {fileID: 2100000, guid: cbc475da5f4748047a7b2d276ac8a4ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
