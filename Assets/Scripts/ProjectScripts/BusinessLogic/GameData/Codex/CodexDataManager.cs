@@ -154,11 +154,6 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             return true;
         }
         
-        if (def.Filter.Has(PieceTypeFilter.Chest))
-        {
-            return true;
-        }
-
         if (def.Filter.Has(PieceTypeFilter.Mine))
         {
             return true;
@@ -470,29 +465,43 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     },
                 }
             },
-            /*new CodexTabDef
+            new CodexTabDef
             {
                 Name = "Chests",
                 ChainDefs = new List<CodexChainDef>
                 {
                     new CodexChainDef
                     {
+                        Name = "Free",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Chest1.Id)),
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Wood",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestA1.Id)),
+                    },
+                    new CodexChainDef
+                    {
                         Name = "Stone",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestC1.Id)),
-                    },                         
-                    // new CodexChainDef
-                    // {
-                    //     Name = "Chests",
-                    //     ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Chest1.Id)),
-                    // },                    
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "X",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestX1.Id)),
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Z",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestZ1.Id)),
+                    },
                     new CodexChainDef
                     {
                         Name = "Food",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Basket1.Id)),
                     },
-                    
                 }
-            },*/
+            },
             new CodexTabDef
             {
                 Name = "Resources",

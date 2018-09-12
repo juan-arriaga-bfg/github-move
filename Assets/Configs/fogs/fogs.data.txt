@@ -35,7 +35,7 @@
       "Level": "2",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 30
+        "Amount": 45
       },
       "Reward": {
         "Currency": "Experience",
@@ -120,6 +120,12 @@
             "Y": 9
           }
         ],
+        "Chest3": [
+          {
+            "X": 17,
+            "Y": 7
+          }
+        ],
         "O3": [
           {
             "X": 17,
@@ -138,13 +144,13 @@
             "Y": 8
           }
         ],
-        "J5": [
+        "Magic": [
           {
             "X": 19,
             "Y": 7
           }
         ],
-        "Chest9": [
+        "A3": [
           {
             "X": 19,
             "Y": 8
@@ -157,7 +163,7 @@
       "Level": "3",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 150
+        "Amount": 200
       },
       "Reward": {
         "Currency": "Experience",
@@ -264,7 +270,13 @@
             "Y": 12
           }
         ],
-        "B1": [
+        "Char2": [
+          {
+            "X": 17,
+            "Y": 10
+          }
+        ],
+        "Magic1": [
           {
             "X": 17,
             "Y": 11
@@ -294,10 +306,10 @@
     },
     {
       "Uid": "Fog 3",
-      "Level": "3",
+      "Level": "4",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 170
+        "Amount": 230
       },
       "Reward": {
         "Currency": "Experience",
@@ -366,7 +378,7 @@
         }
       ],
       "Pieces": {
-        "B1": [
+        "Magic2": [
           {
             "X": 21,
             "Y": 5
@@ -434,7 +446,7 @@
     },
     {
       "Uid": "Fog 4",
-      "Level": "4",
+      "Level": "5",
       "Condition": {
         "Currency": "Mana",
         "Amount": 300
@@ -551,7 +563,7 @@
       "Level": "6",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 350
+        "Amount": 450
       },
       "Reward": {
         "Currency": "Experience",
@@ -631,7 +643,7 @@
       "Level": "7",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 400
+        "Amount": 800
       },
       "Reward": {
         "Currency": "Experience",
@@ -719,7 +731,7 @@
       "Level": "10",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 450
+        "Amount": 1000
       },
       "Reward": {
         "Currency": "Experience",

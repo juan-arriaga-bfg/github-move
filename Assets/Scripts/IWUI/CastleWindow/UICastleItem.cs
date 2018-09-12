@@ -3,8 +3,7 @@ using UnityEngine.UI;
 
 public class UICastleItem : MonoBehaviour
 {
-	[SerializeField] private Image iconTop;
-	[SerializeField] private Image iconBottom;
+	[SerializeField] private Image icon;
 	
 	[SerializeField] private NSText label;
 	[SerializeField] private NSText labelBtn;
@@ -39,10 +38,7 @@ public class UICastleItem : MonoBehaviour
 		label.Text = chest.Uid;
 		labelBtn.Text = isFree ? "Claim!" : $"Buy for {chest.Price.ToStringIcon(false)}";
 		
-		var key = GetChestIcon();
-
-		iconTop.sprite = IconService.Current.GetSpriteById($"chest_{key}_2");
-		iconBottom.sprite = IconService.Current.GetSpriteById($"chest_{key}_1");
+		icon.sprite = IconService.Current.GetSpriteById(chest.Uid);
 	}
 
 	private void OnDisable()
@@ -117,22 +113,5 @@ public class UICastleItem : MonoBehaviour
 			model.ChestReward = chest.Piece;
 			UIService.Get.CloseWindow(UIWindowType.CastleWindow, true);
 		});
-	}
-
-	private string GetChestIcon()
-	{
-		var key = chest.Piece;
-		
-		if (key == PieceType.ChestX3.Id)
-		{
-			return "3";
-		}
-		
-		if (key == PieceType.ChestC3.Id)
-		{
-			return "4";
-		}
-
-		return "1";
 	}
 }

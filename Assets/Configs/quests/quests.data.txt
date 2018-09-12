@@ -16,7 +16,15 @@
       },
       {
         "Currency": "Coin3",
+        "Amount": 2
+      },
+      {
+        "Currency": "Mana1",
         "Amount": 1
+      },
+      {
+        "Currency": "Experience1",
+        "Amount": 3
       }
     ],
     "Conditions": [
@@ -35,12 +43,20 @@
     },
     "Rewards": [
       {
-        "Currency": "Coin1",
-        "Amount": 1
+        "Currency": "Coin2",
+        "Amount": 2
       },
       {
         "Currency": "Coin3",
         "Amount": 1
+      },
+      {
+        "Currency": "Mana1",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience2",
+        "Amount": 2
       }
     ],
     "Conditions": [
@@ -60,10 +76,18 @@
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 2
+        "Amount": 3
       },
       {
         "Currency": "Coin2",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana2",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience2",
         "Amount": 3
       }
     ],
@@ -84,10 +108,18 @@
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 3
+        "Amount": 2
       },
       {
         "Currency": "Coin2",
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana1",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience1",
         "Amount": 2
       }
     ],
@@ -112,7 +144,15 @@
       },
       {
         "Currency": "Coin2",
-        "Amount": 4
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana2",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience2",
+        "Amount": 2
       }
     ],
     "Conditions": [
@@ -131,11 +171,19 @@
     },
     "Rewards": [
       {
-        "Currency": "Coin1",
+        "Currency": "Coin2",
         "Amount": 1
       },
       {
-        "Currency": "Coin2",
+        "Currency": "Coin3",
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana2",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience2",
         "Amount": 1
       }
     ],
@@ -160,7 +208,15 @@
       },
       {
         "Currency": "Coin2",
-        "Amount": 3
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana1",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience1",
+        "Amount": 1
       }
     ],
     "Conditions": [
@@ -180,10 +236,18 @@
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 5
+        "Amount": 3
       },
       {
         "Currency": "Coin2",
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana1",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience1",
         "Amount": 2
       }
     ],
@@ -205,6 +269,14 @@
       {
         "Currency": "Coin3",
         "Amount": 2
+      },
+      {
+        "Currency": "Mana3",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience3",
+        "Amount": 1
       }
     ],
     "Conditions": [
@@ -228,6 +300,14 @@
       },
       {
         "Currency": "Coin3",
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana1",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience1",
         "Amount": 1
       }
     ],
@@ -253,6 +333,14 @@
       {
         "Currency": "Coin2",
         "Amount": 3
+      },
+      {
+        "Currency": "Mana1",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience1",
+        "Amount": 2
       }
     ],
     "Conditions": [
@@ -281,6 +369,14 @@
       {
         "Currency": "Coin3",
         "Amount": 1
+      },
+      {
+        "Currency": "Mana2",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience2",
+        "Amount": 2
       }
     ],
     "Conditions": [
@@ -304,6 +400,14 @@
       {
         "Currency": "Coin3",
         "Amount": 1
+      },
+      {
+        "Currency": "Mana2",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience2",
+        "Amount": 2
       }
     ],
     "Conditions": [
@@ -327,6 +431,14 @@
       {
         "Currency": "Coin3",
         "Amount": 1
+      },
+      {
+        "Currency": "Mana1",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience1",
+        "Amount": 2
       }
     ],
     "Conditions": [
@@ -349,6 +461,14 @@
       },
       {
         "Currency": "Coin3",
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana2",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience3",
         "Amount": 1
       }
     ],
@@ -373,6 +493,14 @@
       {
         "Currency": "Coin3",
         "Amount": 2
+      },
+      {
+        "Currency": "Mana1",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience1",
+        "Amount": 2
       }
     ],
     "Conditions": [
@@ -396,6 +524,14 @@
       {
         "Currency": "Coin3",
         "Amount": 2
+      },
+      {
+        "Currency": "Mana3",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience3",
+        "Amount": 2
       }
     ],
     "Conditions": [
@@ -418,6 +554,14 @@
       },
       {
         "Currency": "Coin3",
+        "Amount": 2
+      },
+      {
+        "Currency": "Mana3",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience3",
         "Amount": 2
       }
     ],

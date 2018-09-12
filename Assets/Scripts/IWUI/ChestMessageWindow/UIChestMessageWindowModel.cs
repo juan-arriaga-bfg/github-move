@@ -7,25 +7,13 @@ public class UIChestMessageWindowModel : IWWindowModel
 
     public Action OnOpen;
     
-    public string Title
-    {
-        get { return "Unlock chest!"; }
-    }
-    
-    public string Message
-    {
-        get { return "Do you want to unlock this chest?"; }
-    }
-    
-    public string ButtonText
-    {
-        get { return "Unlock"; }
-    }
-    
-    public string ChanceText
-    {
-        get { return "May contain:"; }
-    }
+    public string Title => "Unlock chest!";
+
+    public string Message => "Do you want to unlock this chest?";
+
+    public string ButtonText => "Unlock";
+
+    public string ChanceText => "May contain:";
 
     public List<string> Icons()
     {

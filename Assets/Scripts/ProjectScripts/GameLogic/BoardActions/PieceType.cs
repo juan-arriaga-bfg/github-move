@@ -225,9 +225,12 @@ public static partial class PieceType
     public static readonly PieceTypeDef MineY = new PieceTypeDef{Id = 10003, Abbreviations = new List<string>{ "MineY" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
     public static readonly PieceTypeDef MineZ = new PieceTypeDef{Id = 10004, Abbreviations = new List<string>{ "MineZ" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Mine};
     
-    public static readonly PieceTypeDef ChestA1 = new PieceTypeDef{Id = 13101, Abbreviations = new List<string>{ "ChestA1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
-    public static readonly PieceTypeDef ChestA2 = new PieceTypeDef{Id = 13102, Abbreviations = new List<string>{ "ChestA2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
-    public static readonly PieceTypeDef ChestA3 = new PieceTypeDef{Id = 13103, Abbreviations = new List<string>{ "ChestA3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    public static readonly PieceTypeDef ChestA1 = new PieceTypeDef{Id = 13100, Abbreviations = new List<string>{ "ChestA1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    public static readonly PieceTypeDef ChestA2 = new PieceTypeDef{Id = 13101, Abbreviations = new List<string>{ "ChestA2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    public static readonly PieceTypeDef ChestA3 = new PieceTypeDef{Id = 13102, Abbreviations = new List<string>{ "ChestA3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    public static readonly PieceTypeDef ChestA4 = new PieceTypeDef{Id = 13103, Abbreviations = new List<string>{ "ChestA4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    public static readonly PieceTypeDef ChestA5 = new PieceTypeDef{Id = 13104, Abbreviations = new List<string>{ "ChestA5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    public static readonly PieceTypeDef ChestA6 = new PieceTypeDef{Id = 13105, Abbreviations = new List<string>{ "ChestA6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     
     public static readonly PieceTypeDef ChestX1 = new PieceTypeDef{Id = 13201, Abbreviations = new List<string>{ "ChestX1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     public static readonly PieceTypeDef ChestX2 = new PieceTypeDef{Id = 13202, Abbreviations = new List<string>{ "ChestX2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};

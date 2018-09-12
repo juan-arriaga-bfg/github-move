@@ -9,12 +9,6 @@ public class ChestPieceView : PieceBoardElementView
 
     [SerializeField] private Material hightlightMaterial;
     
-    [SerializeField] private Transform cap;
-    [SerializeField] private GameObject shine;
-    
-    [SerializeField] private float open;
-    [SerializeField] private float close;
-
     private SpriteRenderer backlight;
     private SpriteRenderer hightlight;
     
@@ -72,12 +66,6 @@ public class ChestPieceView : PieceBoardElementView
         
         SetHighlight(isStorage);
         SetBackLight(isStorage);
-        
-        var isOpen = chestComponent.Chest.State == ChestState.Open;
-        
-        if(shine != null) shine.SetActive(isOpen);
-        
-        if(cap != null) cap.localPosition = new Vector3(cap.localPosition.x, isOpen ? open : close);
     }
 
     public void SetBackLight(bool active = true)

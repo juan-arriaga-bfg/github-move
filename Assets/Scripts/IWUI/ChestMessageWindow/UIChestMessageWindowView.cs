@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class UIChestMessageWindowView : UIGenericPopupWindowView
 {
     [SerializeField] private NSText btnOpenLabel;
-    
     [SerializeField] private NSText chanceLabel;
     
+    [SerializeField] private Image chest;
     [SerializeField] private Image item;
 
     private List<Image> icons = new List<Image>();
@@ -26,11 +26,12 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         SetMessage(windowModel.Message);
         
         btnOpenLabel.Text = windowModel.ButtonText;
-        
         chanceLabel.Text = windowModel.ChanceText;
-
-        var sprites = windowModel.Icons();
         
+        chest.sprite = IconService.Current.GetSpriteById(windowModel.Chest.Def.Uid);
+        chest.SetNativeSize();
+        
+        var sprites = windowModel.Icons();
         item.sprite = IconService.Current.GetSpriteById(sprites[0]);
         
         for (var i = 1; i < sprites.Count; i++)

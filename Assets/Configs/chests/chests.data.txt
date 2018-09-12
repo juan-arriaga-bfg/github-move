@@ -21,7 +21,7 @@
         "Weight": 5
       },
       {
-        "Uid": "E2",
+        "Uid": "E1",
         "Weight": 5
       },
       {
@@ -86,7 +86,7 @@
         "Override": true
       },
       {
-        "Uid": "B2",
+        "Uid": "B1",
         "Weight": 10,
         "Override": true
       },
@@ -111,12 +111,12 @@
         "Override": true
       },
       {
-        "Uid": "E2",
+        "Uid": "E1",
         "Weight": 10,
         "Override": true
       },
       {
-        "Uid": "F2",
+        "Uid": "A1",
         "Weight": 10,
         "Override": true
       },
@@ -172,7 +172,7 @@
         "Override": true
       },
       {
-        "Uid": "J5",
+        "Uid": "J2",
         "Weight": 10,
         "Override": true
       },
@@ -316,7 +316,7 @@
       "Currency": "Crystals",
       "Amount": 120
     },
-    "PieceAmount": 15,
+    "PieceAmount": 8,
     "PieceWeights": [
       {
         "Uid": "A2",
@@ -349,7 +349,7 @@
         "Override": true
       },
       {
-        "Uid": "E2",
+        "Uid": "E1",
         "Weight": 10,
         "Override": true
       }
@@ -360,8 +360,7 @@
       "D1",
       "F5",
       "J5",
-      "Coin1",
-      "Coin2"
+      "Coin1"
     ]
   },
   {
@@ -409,7 +408,7 @@
         "Override": true
       },
       {
-        "Uid": "E2",
+        "Uid": "Coin1",
         "Weight": 10,
         "Override": true
       }
@@ -422,7 +421,7 @@
       "J5",
       "H2",
       "Coin1",
-      "Coin2"
+      "Empty"
     ]
   },
   {
@@ -451,10 +450,10 @@
     ],
     "RandomPieces": [
       "E1",
-      "E2",
+      "Coin1",
       "F1",
       "F2",
-      "J5"
+      "J1"
     ]
   },
   {
@@ -483,10 +482,10 @@
     ],
     "RandomPieces": [
       "E1",
-      "E2",
+      "Coin1",
       "F1",
       "F2",
-      "J5"
+      "J1"
     ]
   },
   {
@@ -510,10 +509,91 @@
     ],
     "RandomPieces": [
       "E1",
-      "E2",
+      "Coin1",
       "F1",
       "F2",
-      "J5"
+      "J2"
+    ]
+  },
+  {
+    "Uid": "ChestA4",
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 40
+    },
+    "PieceAmount": 7,
+    "PieceWeights": [
+      {
+        "Uid": "Empty",
+        "Weight": 2,
+        "Override": true
+      },
+      {
+        "Uid": "A5",
+        "Weight": 10,
+        "Override": true
+      }
+    ],
+    "RandomPieces": [
+      "E1",
+      "Coin1",
+      "F1",
+      "F2",
+      "J2"
+    ]
+  },
+  {
+    "Uid": "ChestA5",
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 60
+    },
+    "PieceAmount": 8,
+    "PieceWeights": [
+      {
+        "Uid": "Empty",
+        "Weight": 2,
+        "Override": true
+      },
+      {
+        "Uid": "A5",
+        "Weight": 10,
+        "Override": true
+      }
+    ],
+    "RandomPieces": [
+      "E1",
+      "Coin1",
+      "F1",
+      "F2",
+      "J2"
+    ]
+  },
+  {
+    "Uid": "ChestA6",
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 80
+    },
+    "PieceAmount": 7,
+    "PieceWeights": [
+      {
+        "Uid": "Empty",
+        "Weight": 2,
+        "Override": true
+      },
+      {
+        "Uid": "A5",
+        "Weight": 10,
+        "Override": true
+      }
+    ],
+    "RandomPieces": [
+      "E1",
+      "Coin1",
+      "F1",
+      "F2",
+      "J2"
     ]
   },
   {
@@ -544,12 +624,9 @@
       "A1",
       "A2",
       "B1",
-      "B2",
       "E1",
-      "E2",
-      "F1",
-      "F2",
-      "J5"
+      "Coin1",
+      "F1"
     ]
   },
   {
@@ -582,7 +659,7 @@
       "B1",
       "B2",
       "E1",
-      "E2",
+      "Coin1",
       "F1",
       "F2",
       "J5"
@@ -613,7 +690,7 @@
       "B1",
       "B2",
       "E1",
-      "E2",
+      "Coin1",
       "F1",
       "F2",
       "J5"
@@ -651,7 +728,7 @@
       "C1",
       "C2",
       "E1",
-      "E2",
+      "Coin1",
       "F1",
       "F2",
       "J5"
@@ -689,7 +766,7 @@
       "C1",
       "C2",
       "E1",
-      "E2",
+      "Coin1",
       "F1",
       "F2",
       "J5"
@@ -722,7 +799,7 @@
       "C1",
       "C2",
       "E1",
-      "E2",
+      "Coin1",
       "F1",
       "F2",
       "J5"
@@ -811,7 +888,7 @@
       "C1",
       "C2",
       "E1",
-      "E2",
+      "Coin1",
       "F1",
       "F2",
       "J5"
@@ -849,7 +926,7 @@
       "C1",
       "C2",
       "E1",
-      "E2",
+      "Coin1",
       "F1",
       "F2",
       "J5"
@@ -882,7 +959,7 @@
       "C1",
       "C2",
       "E1",
-      "E2",
+      "Coin1",
       "F1",
       "F2",
       "J5"

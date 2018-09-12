@@ -23,7 +23,7 @@ public class FieldControllerComponent : IECSComponent
         var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
         CutTriangles(maxEdge / 2, Directions.All);
         
-//        TestFieldOleg(); return;
+        TestFieldOleg(); return;
 //        TestFieldAlex(); return;
 //        TestFieldQA(); return;
         
@@ -93,9 +93,8 @@ public class FieldControllerComponent : IECSComponent
 
     private void TestFieldOleg()
     {
-        AddPieces(new BoardPosition(4, 16), PieceType.O1.Id,  PieceType.O5.Id);
+        /*AddPieces(new BoardPosition(4, 16), PieceType.O1.Id,  PieceType.O5.Id);
         AddPieces(new BoardPosition(6, 16), PieceType.OX1.Id, PieceType.OX5.Id);
-        
         
         AddPieces(new BoardPosition(10, 12), PieceType.B1.Id, PieceType.B5.Id);
         AddPieces(new BoardPosition(12, 12), PieceType.C1.Id, PieceType.C12.Id, true);
@@ -106,9 +105,13 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(20, 12), PieceType.G1.Id, PieceType.G4.Id);
         AddPieces(new BoardPosition(22, 12), PieceType.H1.Id, PieceType.H4.Id);
         AddPieces(new BoardPosition(24, 12), PieceType.I1.Id, PieceType.I5.Id);
-        AddPieces(new BoardPosition(26, 12), PieceType.J1.Id, PieceType.J5.Id);
+        AddPieces(new BoardPosition(26, 12), PieceType.J1.Id, PieceType.J5.Id);*/
         
-        AddPieces(new BoardPosition(28, 14), PieceType.ChestX1.Id, PieceType.ChestX3.Id);
+        AddPieces(new BoardPosition(26, 16), PieceType.Chest1.Id, PieceType.Chest9.Id);
+        AddPieces(new BoardPosition(27, 16), PieceType.ChestA1.Id, PieceType.ChestA6.Id);
+        
+        AddPieces(new BoardPosition(28, 10), PieceType.ChestX1.Id, PieceType.ChestX3.Id);
+        AddPieces(new BoardPosition(28, 14), PieceType.ChestZ1.Id, PieceType.ChestZ3.Id);
         AddPieces(new BoardPosition(28, 18), PieceType.ChestC1.Id, PieceType.ChestC3.Id);
         AddPieces(new BoardPosition(28, 22), PieceType.Basket1.Id, PieceType.Basket3.Id);
         
@@ -127,7 +130,7 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(24, 16), PieceType.Magic1.Id, PieceType.Magic.Id);
         AddPieces(new BoardPosition(25, 16), PieceType.Magic.Id, PieceType.Magic.Id);
         AddPieces(new BoardPosition(26, 16), PieceType.Chest1.Id, PieceType.Chest9.Id);
-        AddPieces(new BoardPosition(27, 16), PieceType.ChestA1.Id, PieceType.ChestA3.Id);
+        AddPieces(new BoardPosition(27, 16), PieceType.ChestA1.Id, PieceType.ChestA6.Id);
         AddPieces(new BoardPosition(28, 16), PieceType.O1.Id, PieceType.O9.Id);
         AddPieces(new BoardPosition(29, 16), PieceType.H1.Id, PieceType.H5.Id);
     }

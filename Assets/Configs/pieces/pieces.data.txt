@@ -6,23 +6,35 @@
     "Uid": "Magic1"
   },
   {
-    "Uid": "Magic2"
+    "Uid": "Magic2",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ]
   },
   {
-    "Uid": "Magic"
+    "Uid": "Magic",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ]
   },
   {
     "Uid": "Char1",
     "SpawnResources": {
       "Currency": "Mana1",
-      "Amount": 2
+      "Amount": 3
     }
   },
   {
     "Uid": "Char2",
     "SpawnResources": {
-      "Currency": "Mana1",
-      "Amount": 1
+      "Currency": "Mana2",
+      "Amount": 2
     }
   },
   {
@@ -78,377 +90,161 @@
     "Uid": "Mana1",
     "SpawnResources": {
       "Currency": "Mana",
-      "Amount": 10
+      "Amount": 5
     },
-    "Name": "Bronze",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Bronze"
   },
   {
     "Uid": "Mana2",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 5
-      }
-    ],
     "SpawnResources": {
       "Currency": "Mana",
-      "Amount": 35
+      "Amount": 20
     },
-    "Name": "Silver",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Silver"
   },
   {
     "Uid": "Mana3",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 10
-      }
-    ],
     "SpawnResources": {
       "Currency": "Mana",
-      "Amount": 110
+      "Amount": 75
     },
-    "Name": "Gold",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Gold"
   },
   {
     "Uid": "Mana4",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 15
-      }
-    ],
     "SpawnResources": {
       "Currency": "Mana",
-      "Amount": 350
+      "Amount": 250
     },
-    "Name": "Ametist",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Ametist"
   },
   {
     "Uid": "Mana5",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 25
-      }
-    ],
     "SpawnResources": {
       "Currency": "Mana",
-      "Amount": 1100
+      "Amount": 1000
     },
-    "Name": "Sapphire",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Sapphire"
   },
   {
     "Uid": "Experience1",
     "SpawnResources": {
       "Currency": "Experience",
-      "Amount": 10
+      "Amount": 5
     },
-    "Name": "Bronze",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Bronze"
   },
   {
     "Uid": "Experience2",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 5
-      }
-    ],
     "SpawnResources": {
       "Currency": "Experience",
-      "Amount": 35
+      "Amount": 20
     },
-    "Name": "Silver",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Silver"
   },
   {
     "Uid": "Experience3",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 10
-      }
-    ],
     "SpawnResources": {
       "Currency": "Experience",
-      "Amount": 110
+      "Amount": 75
     },
-    "Name": "Gold",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Gold"
   },
   {
     "Uid": "Experience4",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 15
-      }
-    ],
     "SpawnResources": {
       "Currency": "Experience",
-      "Amount": 350
+      "Amount": 250
     },
-    "Name": "Ametist",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Ametist"
   },
   {
     "Uid": "Experience5",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 25
-      }
-    ],
     "SpawnResources": {
       "Currency": "Experience",
-      "Amount": 1100
+      "Amount": 1000
     },
-    "Name": "Sapphire",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Sapphire"
   },
   {
     "Uid": "Crystal1",
     "SpawnResources": {
       "Currency": "Crystals",
-      "Amount": 10
+      "Amount": 5
     },
-    "Name": "Bronze",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Bronze"
   },
   {
     "Uid": "Crystal2",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 5
-      }
-    ],
     "SpawnResources": {
       "Currency": "Crystals",
-      "Amount": 35
+      "Amount": 20
     },
-    "Name": "Silver",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Silver"
   },
   {
     "Uid": "Crystal3",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 10
-      }
-    ],
     "SpawnResources": {
       "Currency": "Crystals",
-      "Amount": 110
+      "Amount": 75
     },
-    "Name": "Gold",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Gold"
   },
   {
     "Uid": "Crystal4",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 15
-      }
-    ],
     "SpawnResources": {
       "Currency": "Crystals",
-      "Amount": 350
+      "Amount": 250
     },
-    "Name": "Ametist",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Ametist"
   },
   {
     "Uid": "Crystal5",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 25
-      }
-    ],
     "SpawnResources": {
       "Currency": "Crystals",
-      "Amount": 1100
+      "Amount": 1000
     },
-    "Name": "Sapphire",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Sapphire"
   },
   {
     "Uid": "Coin1",
     "SpawnResources": {
       "Currency": "Coins",
-      "Amount": 10
+      "Amount": 5
     },
-    "Name": "Bronze",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Bronze"
   },
   {
     "Uid": "Coin2",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 5
-      }
-    ],
     "SpawnResources": {
       "Currency": "Coins",
-      "Amount": 35
+      "Amount": 20
     },
-    "Name": "Silver",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Silver"
   },
   {
     "Uid": "Coin3",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 10
-      }
-    ],
     "SpawnResources": {
       "Currency": "Coins",
-      "Amount": 110
+      "Amount": 75
     },
-    "Name": "Gold",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Gold"
   },
   {
     "Uid": "Coin4",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 15
-      }
-    ],
     "SpawnResources": {
       "Currency": "Coins",
-      "Amount": 350
+      "Amount": 250
     },
-    "Name": "Ametist",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Ametist"
   },
   {
     "Uid": "Coin5",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 25
-      }
-    ],
     "SpawnResources": {
       "Currency": "Coins",
-      "Amount": 1100
+      "Amount": 1000
     },
-    "Name": "Sapphire",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
+    "Name": "Sapphire"
   },
   {
     "Uid": "Chest1",
@@ -456,7 +252,7 @@
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 1
       }
     ]
   },
@@ -476,7 +272,7 @@
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 3
       }
     ]
   },
@@ -516,7 +312,7 @@
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 8
       }
     ]
   },
@@ -525,18 +321,18 @@
     "CreateRewards": [
       {
         "Currency": "Experience",
-        "Amount": 25
+        "Amount": 15
       },
       {
         "Currency": "Mana",
-        "Amount": 25
+        "Amount": 15
       }
     ],
     "Name": "Chest5 Piece",
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 15
       }
     ]
   },
@@ -545,18 +341,18 @@
     "CreateRewards": [
       {
         "Currency": "Experience",
-        "Amount": 50
+        "Amount": 25
       },
       {
         "Currency": "Mana",
-        "Amount": 50
+        "Amount": 25
       }
     ],
     "Name": "Chest6 Piece",
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 25
       }
     ]
   },
@@ -565,18 +361,18 @@
     "CreateRewards": [
       {
         "Currency": "Experience",
-        "Amount": 75
+        "Amount": 50
       },
       {
         "Currency": "Mana",
-        "Amount": 75
+        "Amount": 50
       }
     ],
     "Name": "Chest7 Piece",
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 45
       }
     ]
   },
@@ -585,18 +381,18 @@
     "CreateRewards": [
       {
         "Currency": "Experience",
-        "Amount": 100
+        "Amount": 75
       },
       {
         "Currency": "Mana",
-        "Amount": 100
+        "Amount": 75
       }
     ],
     "Name": "Chest8 Piece",
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 50
       }
     ]
   },
@@ -605,18 +401,18 @@
     "CreateRewards": [
       {
         "Currency": "Experience",
-        "Amount": 150
+        "Amount": 100
       },
       {
         "Currency": "Mana",
-        "Amount": 150
+        "Amount": 100
       }
     ],
     "Name": "Chest9 Piece",
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 70
       }
     ]
   },
@@ -626,7 +422,7 @@
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 1
       }
     ]
   },
@@ -635,14 +431,34 @@
     "CreateRewards": [
       {
         "Currency": "Experience",
-        "Amount": 5
+        "Amount": 1
       },
       {
         "Currency": "Mana",
-        "Amount": 5
+        "Amount": 1
       }
     ],
     "Name": "Ordinary",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "ChestA3",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
+    "Name": "Big",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -651,7 +467,27 @@
     ]
   },
   {
-    "Uid": "ChestA3",
+    "Uid": "ChestA4",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 10
+      }
+    ],
+    "Name": "Big",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
+    ]
+  },
+  {
+    "Uid": "ChestA5",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -666,7 +502,27 @@
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 15
+      }
+    ]
+  },
+  {
+    "Uid": "ChestA6",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 25
+      }
+    ],
+    "Name": "Big",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
       }
     ]
   },
@@ -676,7 +532,7 @@
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 1
       }
     ]
   },
@@ -696,7 +552,7 @@
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 3
       }
     ]
   },
@@ -726,7 +582,7 @@
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 1
       }
     ]
   },
@@ -746,7 +602,7 @@
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 3
       }
     ]
   },
@@ -776,7 +632,7 @@
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 1
       }
     ]
   },
@@ -796,7 +652,7 @@
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 3
       }
     ]
   },
@@ -826,7 +682,7 @@
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 1
       }
     ]
   },
@@ -846,7 +702,7 @@
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 5
+        "Amount": 3
       }
     ]
   },
@@ -1005,7 +861,7 @@
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 20
+        "Amount": 15
       },
       {
         "Currency": "Experience",
@@ -1029,7 +885,7 @@
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 30
+        "Amount": 25
       },
       {
         "Currency": "Experience",
@@ -1077,7 +933,7 @@
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 80
+        "Amount": 100
       },
       {
         "Currency": "Experience",
@@ -1085,7 +941,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 90
+        "Amount": 100
       }
     ],
     "Name": "Mill",
@@ -1139,7 +995,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 15
+        "Amount": 10
       },
       {
         "Currency": "Mana",
@@ -1163,7 +1019,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 25
+        "Amount": 15
       },
       {
         "Currency": "Mana",
@@ -1187,7 +1043,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 50
+        "Amount": 25
       },
       {
         "Currency": "Mana",
@@ -1221,7 +1077,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 25
+        "Amount": 5
       },
       {
         "Currency": "Mana",
@@ -1245,7 +1101,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 50
+        "Amount": 10
       },
       {
         "Currency": "Mana",
@@ -1269,7 +1125,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 100
+        "Amount": 15
       },
       {
         "Currency": "Mana",
@@ -1293,7 +1149,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 150
+        "Amount": 25
       },
       {
         "Currency": "Mana",
@@ -1317,7 +1173,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 200
+        "Amount": 50
       },
       {
         "Currency": "Mana",
@@ -1337,11 +1193,11 @@
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 40
+        "Amount": 25
       },
       {
         "Currency": "Experience",
-        "Amount": 250
+        "Amount": 100
       },
       {
         "Currency": "Mana",
@@ -1361,15 +1217,15 @@
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 60
+        "Amount": 50
       },
       {
         "Currency": "Experience",
-        "Amount": 300
+        "Amount": 250
       },
       {
         "Currency": "Mana",
-        "Amount": 35
+        "Amount": 50
       }
     ],
     "Name": "Blue house",
@@ -1385,7 +1241,7 @@
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 100
+        "Amount": 75
       },
       {
         "Currency": "Experience",
@@ -1393,7 +1249,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 50
+        "Amount": 75
       }
     ],
     "Name": "Palace",
@@ -1409,7 +1265,7 @@
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 200
+        "Amount": 100
       },
       {
         "Currency": "Experience",
@@ -1433,7 +1289,7 @@
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 100
+        "Amount": 125
       },
       {
         "Currency": "Experience",
@@ -1441,7 +1297,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 50
+        "Amount": 125
       }
     ],
     "Name": "Castle",
@@ -1457,7 +1313,7 @@
     "CreateRewards": [
       {
         "Currency": "Coins",
-        "Amount": 200
+        "Amount": 150
       },
       {
         "Currency": "Experience",
@@ -1465,7 +1321,7 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 100
+        "Amount": 150
       }
     ],
     "Name": "Castle",
@@ -1557,7 +1413,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 50
+        "Amount": 25
       },
       {
         "Currency": "Mana",
@@ -1657,7 +1513,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 50
+        "Amount": 25
       },
       {
         "Currency": "Mana",
@@ -1757,7 +1613,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 50
+        "Amount": 25
       },
       {
         "Currency": "Mana",
@@ -1957,7 +1813,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 50
+        "Amount": 25
       },
       {
         "Currency": "Mana",
@@ -2057,7 +1913,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 50
+        "Amount": 25
       },
       {
         "Currency": "Mana",
