@@ -39,8 +39,10 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.A8.Id, new PieceMatchDef {Next = PieceType.A9Fake.Id, Previous = PieceType.A7.Id, Count = 3});
         dict.Add(PieceType.A9Fake.Id, new PieceMatchDef {Next = PieceType.A9.Id, Previous = PieceType.A8.Id, Count = 1, IsIgnore = true});
         dict.Add(PieceType.A9.Id, new PieceMatchDef {Next = PieceType.A10Fake.Id, Previous = PieceType.A8.Id, Count = 3});
-        dict.Add(PieceType.A10Fake.Id, new PieceMatchDef {Next = PieceType.A10.Id, Previous = PieceType.A9.Id, Count = 1, IsIgnore = true});
-        dict.Add(PieceType.A10.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.A9.Id, Count = 3});
+        
+        dict = AddFakeMulticellularPiece(dict, PieceType.A10Fake.Id, PieceType.A10.Id, PieceType.A9.Id);
+        
+        dict.Add(PieceType.A10.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.A9.Id});
         
         dict.Add(PieceType.B1.Id, new PieceMatchDef {Next = PieceType.B2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.B2.Id, new PieceMatchDef {Next = PieceType.B3.Id, Previous = PieceType.B1.Id, Count = 3});

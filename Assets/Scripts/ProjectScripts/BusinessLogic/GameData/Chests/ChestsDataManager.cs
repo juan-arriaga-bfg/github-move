@@ -61,13 +61,13 @@ public class ChestsDataManager : IECSComponent, IDataManager, IDataLoader<List<C
                 {
                     var chest = GetChest(item.Id);
                     
-                    chest.State = item.State;
-                    chest.SetStartTime(item.StartTime);
+//                    chest.State = item.State;
+//                    chest.SetStartTime(item.StartTime);
                     chest.Reward = item.Reward;
                     
                     ChestsOnBoard.Add(item.Position, chest);
 
-                    if (chest.State == ChestState.InProgress) ActiveChest = chest;
+//                    if (chest.State == ChestState.InProgress) ActiveChest = chest;
                 }
             }
             else

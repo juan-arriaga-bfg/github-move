@@ -89,7 +89,7 @@ public class UILimitPanelViewController : UIGenericResourcePanelViewController
     {
         if (amountLabel == null) return;
 
-        var color = current < limit ? "FE4704" : "00D46C";
+        var color = current == 0 ? "FE4704" : (current > limit ? "00D46C" : "FFFFFF");
         amountLabel.Text = $"<mspace=2.7em><color=#{color}>{current}</color>/{limit}</mspace>";
     }
     

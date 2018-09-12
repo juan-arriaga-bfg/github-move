@@ -8,15 +8,15 @@
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 1
+        "Amount": 2
       },
       {
         "Currency": "Coin2",
-        "Amount": 1
+        "Amount": 2
       },
       {
         "Currency": "Coin3",
-        "Amount": 2
+        "Amount": 1
       }
     ],
     "Conditions": [
@@ -40,7 +40,7 @@
       },
       {
         "Currency": "Coin3",
-        "Amount": 2
+        "Amount": 1
       }
     ],
     "Conditions": [
@@ -136,7 +136,7 @@
       },
       {
         "Currency": "Coin2",
-        "Amount": 4
+        "Amount": 1
       }
     ],
     "Conditions": [
@@ -228,7 +228,7 @@
       },
       {
         "Currency": "Coin3",
-        "Amount": 2
+        "Amount": 1
       }
     ],
     "Conditions": [
@@ -276,11 +276,11 @@
       },
       {
         "Currency": "Coin2",
-        "Amount": 3
+        "Amount": 2
       },
       {
         "Currency": "Coin3",
-        "Amount": 2
+        "Amount": 1
       }
     ],
     "Conditions": [
@@ -322,11 +322,11 @@
     "Rewards": [
       {
         "Currency": "Coin2",
-        "Amount": 2
+        "Amount": 3
       },
       {
         "Currency": "Coin3",
-        "Amount": 2
+        "Amount": 1
       }
     ],
     "Conditions": [
@@ -345,11 +345,11 @@
     "Rewards": [
       {
         "Currency": "Coin2",
-        "Amount": 1
+        "Amount": 3
       },
       {
         "Currency": "Coin3",
-        "Amount": 2
+        "Amount": 1
       }
     ],
     "Conditions": [
@@ -362,8 +362,8 @@
   {
     "Uid": "16",
     "Price": {
-      "Currency": "E5",
-      "Amount": 3
+      "Currency": "H3",
+      "Amount": 1
     },
     "Rewards": [
       {
@@ -385,29 +385,6 @@
   {
     "Uid": "17",
     "Price": {
-      "Currency": "H3",
-      "Amount": 1
-    },
-    "Rewards": [
-      {
-        "Currency": "Coin2",
-        "Amount": 3
-      },
-      {
-        "Currency": "Coin3",
-        "Amount": 1
-      }
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 11
-      }
-    ]
-  },
-  {
-    "Uid": "18",
-    "Price": {
       "Currency": "A7",
       "Amount": 1
     },
@@ -418,7 +395,7 @@
       },
       {
         "Currency": "Coin3",
-        "Amount": 3
+        "Amount": 2
       }
     ],
     "Conditions": [
@@ -429,7 +406,7 @@
     ]
   },
   {
-    "Uid": "19",
+    "Uid": "18",
     "Price": {
       "Currency": "C7",
       "Amount": 2
@@ -437,11 +414,11 @@
     "Rewards": [
       {
         "Currency": "Coin2",
-        "Amount": 2
+        "Amount": 3
       },
       {
         "Currency": "Coin3",
-        "Amount": 4
+        "Amount": 2
       }
     ],
     "Conditions": [

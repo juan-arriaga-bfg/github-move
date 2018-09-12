@@ -104,26 +104,20 @@
         }
       ],
       "Pieces": {
-        "B1": [
-          {
-            "X": 15,
-            "Y": 7
-          },
-          {
-            "X": 18,
-            "Y": 7
-          }
-        ],
         "Mine 1": [
           {
             "X": 15,
             "Y": 8
           }
         ],
-        "F1": [
+        "O1": [
           {
-            "X": 17,
+            "X": 16,
             "Y": 7
+          },
+          {
+            "X": 18,
+            "Y": 9
           }
         ],
         "O3": [
@@ -142,12 +136,6 @@
           {
             "X": 18,
             "Y": 8
-          }
-        ],
-        "O1": [
-          {
-            "X": 18,
-            "Y": 9
           }
         ],
         "J5": [
@@ -169,7 +157,7 @@
       "Level": "3",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 210
+        "Amount": 150
       },
       "Reward": {
         "Currency": "Experience",
@@ -306,14 +294,14 @@
     },
     {
       "Uid": "Fog 3",
-      "Level": "4",
+      "Level": "3",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 250
+        "Amount": 170
       },
       "Reward": {
         "Currency": "Experience",
-        "Amount": 300
+        "Amount": 200
       },
       "Positions": [
         {
@@ -446,14 +434,14 @@
     },
     {
       "Uid": "Fog 4",
-      "Level": "5",
+      "Level": "4",
       "Condition": {
         "Currency": "Mana",
         "Amount": 300
       },
       "Reward": {
         "Currency": "Experience",
-        "Amount": 350
+        "Amount": 300
       },
       "Positions": [
         {

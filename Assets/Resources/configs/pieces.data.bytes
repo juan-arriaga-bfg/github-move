@@ -2078,7 +2078,13 @@
   },
   {
     "Uid": "J1",
-    "Name": "J1 Piece"
+    "Name": "J1 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "J2",
