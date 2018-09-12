@@ -141,6 +141,11 @@ public class PieceBoardElementView : BoardElementView
 
     public void ToggleSelection(bool enabled, bool isValid = true)
     {
+        if (selectionSprite == null)
+        {
+            return;
+        }
+        
         if (enabled)
         {
             var duration = 0.2f;
