@@ -85,7 +85,7 @@ public class TimerComponent : IECSComponent, IECSSystem
     {
         if (Price == null) return null;
 
-        var amount = Mathf.Max(1, (int) (Price.Amount * (1 - GetProgress())));
+        var amount = Mathf.Max(1, Mathf.CeilToInt(Price.Amount * (1 - GetProgress())));
         
         return  new CurrencyPair {Currency = Price.Currency, Amount = amount};
     }
