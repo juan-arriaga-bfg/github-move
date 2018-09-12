@@ -22,6 +22,7 @@ public class ReproductionPieceView : PieceBoardElementView
         timer.OnComplete += UpdateSate;
 
         if (sprite != null) unlockedMaterial = sprite.material;
+        UpdateSate();
     }
     
     public override void ResetViewOnDestroy()
