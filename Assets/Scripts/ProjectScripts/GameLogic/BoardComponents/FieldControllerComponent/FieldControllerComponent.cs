@@ -23,10 +23,9 @@ public class FieldControllerComponent : IECSComponent
         var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
         CutTriangles(maxEdge / 2, Directions.All);
         
-//        TestFieldOleg();
-//        TestFieldAlex();
-//        TestFieldQA();
-//        return; 
+        // TestFieldOleg(); return;
+        // TestFieldAlex(); return;
+        // TestFieldQA(); return;
         
         context.BoardLogic.PieceFlyer.Locker.Lock(context);
         
@@ -108,19 +107,19 @@ public class FieldControllerComponent : IECSComponent
     
     private void TestFieldAlex()
     {
+        AddPieces(new BoardPosition(17, 16), PieceType.A1.Id, PieceType.A1.Id);
+        AddPieces(new BoardPosition(18, 16), PieceType.B1.Id, PieceType.B5.Id);
         AddPieces(new BoardPosition(19, 16), PieceType.C1.Id, PieceType.C11.Id);
-        AddPieces(new BoardPosition(17, 16), PieceType.C1.Id, PieceType.C11.Id);
-        AddPieces(new BoardPosition(18, 16), PieceType.C1.Id, PieceType.C11.Id);
-        AddPieces(new BoardPosition(16, 16), PieceType.C1.Id, PieceType.C11.Id);
-
-        AddPieces(new BoardPosition(29, 16), PieceType.C11.Id, PieceType.C11.Id);
-        AddPieces(new BoardPosition(29, 17), PieceType.C11.Id, PieceType.C11.Id);
-        AddPieces(new BoardPosition(29, 15), PieceType.C11.Id, PieceType.C11.Id);
-        AddPieces(new BoardPosition(29, 24), PieceType.C11.Id, PieceType.C11.Id);
-
-        AddPieces(new BoardPosition(20, 15), PieceType.Magic1.Id, PieceType.Magic.Id);
-        AddPieces(new BoardPosition(22, 15), PieceType.Magic1.Id, PieceType.Magic.Id);
-        AddPieces(new BoardPosition(24, 15), PieceType.Magic1.Id, PieceType.Magic.Id);
+        AddPieces(new BoardPosition(20, 16), PieceType.D1.Id, PieceType.D5.Id);
+        AddPieces(new BoardPosition(21, 16), PieceType.Char1.Id, PieceType.Char9.Id);
+        AddPieces(new BoardPosition(22, 16), PieceType.Mana1.Id, PieceType.Mana5.Id);
+        AddPieces(new BoardPosition(23, 16), PieceType.Magic1.Id, PieceType.Magic.Id);
+        AddPieces(new BoardPosition(24, 16), PieceType.Magic1.Id, PieceType.Magic.Id);
+        AddPieces(new BoardPosition(25, 16), PieceType.Magic.Id, PieceType.Magic.Id);
+        AddPieces(new BoardPosition(26, 16), PieceType.Chest1.Id, PieceType.Chest9.Id);
+        AddPieces(new BoardPosition(27, 16), PieceType.ChestA1.Id, PieceType.ChestA3.Id);
+        AddPieces(new BoardPosition(28, 16), PieceType.O1.Id, PieceType.O9.Id);
+        AddPieces(new BoardPosition(29, 16), PieceType.H1.Id, PieceType.H5.Id);
     }
     
     private void TestFieldQA()
