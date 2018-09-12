@@ -23,9 +23,9 @@ public class FieldControllerComponent : IECSComponent
         var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
         CutTriangles(maxEdge / 2, Directions.All);
         
-        // TestFieldOleg(); return;
-        // TestFieldAlex(); return;
-        // TestFieldQA(); return;
+//        TestFieldOleg(); return;
+//        TestFieldAlex(); return;
+//        TestFieldQA(); return;
         
         context.BoardLogic.PieceFlyer.Locker.Lock(context);
         
@@ -96,16 +96,17 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(4, 16), PieceType.O1.Id,  PieceType.O5.Id);
         AddPieces(new BoardPosition(6, 16), PieceType.OX1.Id, PieceType.OX5.Id);
         
-        AddPieces(new BoardPosition(8,  16), PieceType.A1.Id, PieceType.A9.Id);
-        AddPieces(new BoardPosition(10, 16), PieceType.B1.Id, PieceType.B5.Id);
-        AddPieces(new BoardPosition(12, 16), PieceType.C1.Id, PieceType.C9.Id);
-        AddPieces(new BoardPosition(14, 16), PieceType.D1.Id, PieceType.D4.Id);
-        AddPieces(new BoardPosition(16, 16), PieceType.E1.Id, PieceType.E5.Id);
-        AddPieces(new BoardPosition(18, 16), PieceType.F1.Id, PieceType.F5.Id);
-        AddPieces(new BoardPosition(20, 16), PieceType.G1.Id, PieceType.G4.Id);
-        AddPieces(new BoardPosition(22, 16), PieceType.H1.Id, PieceType.H4.Id);
-        AddPieces(new BoardPosition(24, 16), PieceType.I1.Id, PieceType.I5.Id);
-        AddPieces(new BoardPosition(26, 16), PieceType.J1.Id, PieceType.J5.Id);
+        
+        AddPieces(new BoardPosition(10, 12), PieceType.B1.Id, PieceType.B5.Id);
+        AddPieces(new BoardPosition(12, 12), PieceType.C1.Id, PieceType.C12.Id, true);
+        AddPieces(new BoardPosition(13, 12), PieceType.A1.Id, PieceType.A10.Id, true);
+        AddPieces(new BoardPosition(14, 12), PieceType.D1.Id, PieceType.D4.Id);
+        AddPieces(new BoardPosition(16, 12), PieceType.E1.Id, PieceType.E5.Id);
+        AddPieces(new BoardPosition(18, 12), PieceType.F1.Id, PieceType.F5.Id);
+        AddPieces(new BoardPosition(20, 12), PieceType.G1.Id, PieceType.G4.Id);
+        AddPieces(new BoardPosition(22, 12), PieceType.H1.Id, PieceType.H4.Id);
+        AddPieces(new BoardPosition(24, 12), PieceType.I1.Id, PieceType.I5.Id);
+        AddPieces(new BoardPosition(26, 12), PieceType.J1.Id, PieceType.J5.Id);
         
         AddPieces(new BoardPosition(28, 14), PieceType.ChestX1.Id, PieceType.ChestX3.Id);
         AddPieces(new BoardPosition(28, 18), PieceType.ChestC1.Id, PieceType.ChestC3.Id);

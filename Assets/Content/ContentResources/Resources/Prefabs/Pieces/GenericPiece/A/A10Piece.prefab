@@ -156,8 +156,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4539638809535996}
-  - component: {fileID: 114732073168195222}
   - component: {fileID: 114478531949485382}
+  - component: {fileID: 114732073168195222}
   m_Layer: 0
   m_Name: A10Piece
   m_TagString: Untagged
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1911769902832156}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 936ad26a54d643842959f4b72d3f2d76, type: 3}
+  m_Script: {fileID: 11500000, guid: b417249933ed1444d9155c0a93fc2e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsFading: 0
@@ -256,6 +256,7 @@ MonoBehaviour:
     type: 2}
   highlightPieceMaterial: {fileID: 2100000, guid: 8df69b780d2d9354c8ffb9b8293c73ad,
     type: 2}
+  lockedMaterial: {fileID: 2100000, guid: c7f931e90f2ff8a428774823d5cbce3c, type: 2}
 --- !u!114 &114732073168195222
 MonoBehaviour:
   m_ObjectHideFlags: 1
