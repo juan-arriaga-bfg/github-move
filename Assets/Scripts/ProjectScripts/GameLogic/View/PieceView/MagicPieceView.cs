@@ -42,16 +42,18 @@ public class MagicPieceView : PieceBoardElementView
 
     private void HighlightMatchable(PieceBoardElementView view)
     {
-        var piece = view.Piece;
-        var board = Context.Context;
-        view.OnDragStart(piece.CachedPosition, board.BoardDef.GetSectorCenterWorldPosition(piece.CachedPosition.X, piece.CachedPosition.Y, piece.CachedPosition.Z));
+        // var piece = view.Piece;
+        // var board = Context.Context;
+        view.ToggleHighlight(true);
+        view.ToggleSelection(true);
     }
 
     private void OffHighlightMatchable(PieceBoardElementView view)
     {
-        var piece = view.Piece;
-        var board = Context.Context;
-        view.OnDragEnd(piece.CachedPosition, board.BoardDef.GetSectorCenterWorldPosition(piece.CachedPosition.X, piece.CachedPosition.Y, piece.CachedPosition.Z));
+        // var piece = view.Piece;
+        // var board = Context.Context;
+        view.ToggleHighlight(false);
+        view.ToggleSelection(false);
     }
 
     private List<Piece> FindBestMatches(BoardController board)

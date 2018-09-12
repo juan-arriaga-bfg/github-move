@@ -13,7 +13,7 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
 
     protected ViewAnimationUid animationUid = new ViewAnimationUid();
 
-    private BetterList<RendererLayer> cachedRenderers = new BetterList<RendererLayer>();
+    protected BetterList<RendererLayer> cachedRenderers = new BetterList<RendererLayer>();
 
     public bool IsFading;
 
@@ -362,6 +362,33 @@ public class RendererLayer : MonoBehaviour
 
     private Renderer cachedRenderer;
 
+    private Material cachedDefaultMaterial;
+
+    public void CacheDefaultMaterial()
+    {
+        if (cachedDefaultMaterial == null)
+        {
+            cachedDefaultMaterial = CachedRenderer.sharedMaterial;
+        }
+    }
+
+    public void ResetDefaultMaterial()
+    {
+        if (cachedDefaultMaterial != null)
+        {
+            CachedRenderer.material = cachedDefaultMaterial;
+        }
+    }
+
+    public Material MaterialCopy
+    {
+        get
+        {
+            CacheDefaultMaterial();
+            return CachedRenderer.material;
+        }
+    }
+
     public int SortingOrderOffset
     {
         get
@@ -385,10 +412,4 @@ public class RendererLayer : MonoBehaviour
             return cachedRenderer;
         }
     }
-    // public virtual void SetLayerAndOrder(int layerId, int order)
-    // {
-    //     CachedRenderer.sortingOrder = order * 100 + sortingOrderOffset + layerId * 10000;
-    // }
-
-
 }
