@@ -13,7 +13,7 @@ TextureImporter:
     21300016: tile_grass_4
     21300018: background_tile
   externalObjects: {}
-  serializedVersion: 6
+  serializedVersion: 7
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -141,13 +141,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 19c749d8cf155664fba47795065e00e0
+      spriteID: 48f1027f95a987c428d52f5bb7584446
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile_grass_2
+      name: tile_grass_1
       rect:
         serializedVersion: 2
         x: 178
@@ -161,13 +161,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8f4347e772f54f74cbbf53096587760a
+      spriteID: a06d343ae1140594db6f6a0d2d699195
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile_grass_1
+      name: tile_grass_2
       rect:
         serializedVersion: 2
         x: 314
@@ -181,7 +181,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b4b4a5a55501afe45b9f453a1c87a1ff
+      spriteID: 99eb9b0983b914f438148f320e38b685
       vertices: []
       indices: 
       edges: []
@@ -195,6 +195,8 @@ TextureImporter:
     edges: []
     weights: []
   spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
