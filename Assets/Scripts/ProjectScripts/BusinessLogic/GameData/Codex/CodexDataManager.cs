@@ -159,6 +159,11 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             return true;
         }
 
+        if (def.Filter.Has(PieceTypeFilter.Mine))
+        {
+            return true;
+        }
+
         return false;
     }
 
