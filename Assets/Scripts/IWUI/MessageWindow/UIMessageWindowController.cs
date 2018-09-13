@@ -92,8 +92,8 @@ public class UIMessageWindowController : IWWindowController {
     {
         var model= UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
-        model.Title = string.Format("Need {0}?", currency.ToLower());
-        model.Message = string.Format("You do not have enough <sprite name={0}>!", currency);
+        model.Title = $"Need {currency.ToLower()}?";
+        model.Message = $"You do not have enough <sprite name={currency}>!";
         model.AcceptLabel = "Ok";
         
         model.OnAccept = () => {};
@@ -104,6 +104,8 @@ public class UIMessageWindowController : IWWindowController {
 
     public static void CreateTimerCompleteMessage(string title, string message, string buttonText, TimerComponent timer, Action onAccept)
     {
+        if(timer.Delay - timer.StartTime.GetTime().TotalSeconds < 1) return;
+        
         var model= UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
         model.Title = title;
