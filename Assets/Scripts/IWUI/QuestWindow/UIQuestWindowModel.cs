@@ -46,7 +46,7 @@ public class UIQuestWindowModel : IWWindowModel
                 rewards.Add($"{reward.Amount} <sprite name={reward.Currency}>");
             }
             
-            str.Append(string.Join(", ", rewards));
+            str.Append(string.Join("  ", rewards));
             str.Append("</size>");
             
             return str.ToString();
