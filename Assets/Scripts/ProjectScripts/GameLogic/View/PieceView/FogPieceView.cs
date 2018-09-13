@@ -17,7 +17,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 	private FogObserver observer;
     private Piece currentPiece;
 
-    private readonly object HIGHLIGHT_ANIMATION_ID = Random.value;
+    private readonly object HIGHLIGHT_ANIMATION_ID = new ViewAnimationUid();
     
 	public override void Init(BoardRenderer context, Piece piece)
 	{
