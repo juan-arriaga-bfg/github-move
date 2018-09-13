@@ -1208,7 +1208,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-  m_spriteAsset: {fileID: 11400000, guid: 768ef9f8b7deaf240819b0854e609961, type: 2}
+  m_spriteAsset: {fileID: 0}
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 21422176916225508, guid: 768ef9f8b7deaf240819b0854e609961,
     type: 2}
@@ -1282,7 +1282,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 38.35
+  m_fontSize: 39.7
   m_fontSizeBase: 36.25
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1403,7 +1403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 21422176916225508, guid: 768ef9f8b7deaf240819b0854e609961,
+  m_Material: {fileID: 21051067900865784, guid: ffbd35cc817b0eb4a9027f74c7c0efb4,
     type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -1413,9 +1413,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-  m_spriteAsset: {fileID: 11400000, guid: 768ef9f8b7deaf240819b0854e609961, type: 2}
+  m_spriteAsset: {fileID: 11400000, guid: ffbd35cc817b0eb4a9027f74c7c0efb4, type: 2}
   m_material: {fileID: 0}
-  m_sharedMaterial: {fileID: 21422176916225508, guid: 768ef9f8b7deaf240819b0854e609961,
+  m_sharedMaterial: {fileID: 21051067900865784, guid: ffbd35cc817b0eb4a9027f74c7c0efb4,
     type: 2}
   m_isDefaultMaterial: 1
   m_padding: 0
@@ -2983,8 +2983,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 10}
-  m_SizeDelta: {x: -80, y: -120}
+  m_AnchoredPosition: {x: 0, y: 25}
+  m_SizeDelta: {x: 22, y: -34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224121115192802650
 RectTransform:
