@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 114101510669842026}
   - component: {fileID: 114546918099256988}
   m_Layer: 0
-  m_Name: MagicPiece
+  m_Name: MagicPiece22
   m_TagString: Untagged
   m_Icon: {fileID: 4660412927644837186, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -287,6 +287,7 @@ MonoBehaviour:
     type: 0}
   defaultSelectionMaterial: {fileID: 2100000, guid: d55a16b9364b048ba884d5ede8dae221,
     type: 2}
+  highlightPieceMaterial: {fileID: 0}
 --- !u!114 &114907919537140904
 MonoBehaviour:
   m_ObjectHideFlags: 1
