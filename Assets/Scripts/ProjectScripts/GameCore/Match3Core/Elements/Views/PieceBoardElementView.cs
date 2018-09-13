@@ -21,7 +21,7 @@ public class PieceBoardElementView : BoardElementView
     private readonly Color dragErrorColor = new Color(0.7f, 0.1f, 0.1f);
     private readonly Color dragSpriteErrorColor = new Color(1f, 0.44f, 0.44f, 0.9f);
     
-    public bool IsHighlighted { get; private set; }
+    public bool IsHighlighted { get; protected set; }
     
     public virtual void Init(BoardRenderer context, Piece piece)
     {
@@ -133,7 +133,7 @@ public class PieceBoardElementView : BoardElementView
             {
                 rend.CacheDefaultMaterial();
                 rend.CachedRenderer.material = highlightPieceMaterial;
-                rend.CachedRenderer.material.SetFloat("_HighlightSpeed", 1f);
+                // rend.CachedRenderer.material.SetFloat("_HighlightSpeed", 1f);
                 IsHighlighted = true;
             }
         }
