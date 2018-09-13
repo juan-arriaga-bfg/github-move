@@ -172,4 +172,12 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             thisContext.CachedPosition.Y,
             thisContext.CachedPosition.Z);
     }
+
+    public bool CanBeCleared()
+    {
+        var pathExists = thisContext.Context.Pathfinder.CanPathToCastle(thisContext);
+        var resourcesEnought = storageItem.Amount >= level;
+
+        return pathExists && resourcesEnought;
+    }
 }
