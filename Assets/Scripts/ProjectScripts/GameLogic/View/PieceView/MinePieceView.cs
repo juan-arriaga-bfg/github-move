@@ -37,8 +37,11 @@ public class MinePieceView : PieceBoardElementView
         var views = viewDef.GetViews();
         foreach (var view in views)
         {
-            if (counter >= views.Count)
+            if (counter >= viewLastStates.Count)
+            {
                 break;
+            }
+            
             view.SetActiveState(viewLastStates[counter]);
             counter++;
         }
