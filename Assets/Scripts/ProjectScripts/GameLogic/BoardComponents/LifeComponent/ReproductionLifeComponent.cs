@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ReproductionLifeComponent : StorageLifeComponent
 {
@@ -19,6 +20,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
         
         def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType).ReproductionDef;
         
+        HP = def.Limit;
         cooldown = new TimerComponent{Delay = def.Delay, Price = def.FastPrice};
         RegisterComponent(cooldown);
         
@@ -36,8 +38,6 @@ public class ReproductionLifeComponent : StorageLifeComponent
         
         storage.SpawnPiece = PieceType.Parse(def.Reproduction.Currency);
         storage.Capacity = storage.Amount = def.Reproduction.Amount;
-        
-        HP = def.Limit;
     }
 
     protected override LifeSaveItem InitInSave(BoardPosition position)

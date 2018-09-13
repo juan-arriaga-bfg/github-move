@@ -36,6 +36,8 @@
         
         current = item.Step;
         
+        
+        
         OnTimerStart();
 
         return item;
