@@ -120,6 +120,8 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
 
     private void OnWaiting()
     {
+        thisContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, thisContext.CachedPosition);
+        
         var view = viewDef.AddView(ViewType.Bubble) as BubbleView;
         
         view.OnHide = () => { State = BuildingState.Warning; };
