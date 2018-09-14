@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,6 +59,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         }
         
         var pieces = windowModel.Quest.Rewards;
+        var rewards = windowModel.Quest.RewardsCurruncy;
         var board = BoardService.Current.GetBoardById(0);
         var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
         
@@ -66,7 +68,17 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         board.ActionExecutor.AddAction(new EjectionPieceAction
         {
             From = position,
-            Pieces = pieces
+            Pieces = pieces,
+            OnComplete = () =>
+            {
+                var sequence = DOTween.Sequence();
+                
+                for (var i = 0; i < rewards.Count; i++)
+                {
+                    var reward = rewards[i];
+                    sequence.InsertCallback(0.5f*i, () => AddResourceView.Show(position, reward));
+                }
+            }
         });
     }
 
