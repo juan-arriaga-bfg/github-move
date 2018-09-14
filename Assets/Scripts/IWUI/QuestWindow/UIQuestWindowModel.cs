@@ -60,7 +60,7 @@ public class UIQuestWindowModel : IWWindowModel
 
                 if (pair.Amount == 0) pair.Amount = reward.Amount;
                 
-                rewards.Add(pair.ToStringIcon());
+                rewards.Add(pair.ToStringIcon(false));
             }
             
             str.Append(string.Join("  ", rewards));

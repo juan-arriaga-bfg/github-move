@@ -96,7 +96,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7e6f9fba7fcac7a41bfc73eec0299dbd
+      spriteID: bcead370a1c49e74abd9c8bcc837d255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crystals
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 181
+        width: 86
+        height: 74
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd919bce646fafd43b62085f16d9d17f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Experience
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 181
+        width: 76
+        height: 74
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b37ac98b35272b14a94f54a076f81706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Coins
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 0
+        width: 66
+        height: 74
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff82da5d875a61d4597bf1872723f1cd
       vertices: []
       indices: 
       edges: []
@@ -106,9 +166,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 157
-        y: 0
-        width: 82
-        height: 100
+        y: 75
+        width: 60
+        height: 74
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -116,67 +176,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b1f5b9356bb1e564ea0b8b4daaa59f62
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Crystals
-      rect:
-        serializedVersion: 2
-        x: 157
-        y: 101
-        width: 96
-        height: 82
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 95b23a9ba00c7a84980125b2313249c2
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Experience
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 0
-        width: 87
-        height: 88
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1b9652418b74b6f49948d628f0cf2e40
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Coins
-      rect:
-        serializedVersion: 2
-        x: 254
-        y: 89
-        width: 80
-        height: 88
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 911b150d9317ce04a9d0fb757eeb148f
+      spriteID: 1e42964679a312f40a0a430c62bf6b8b
       vertices: []
       indices: 
       edges: []
@@ -185,8 +185,8 @@ TextureImporter:
       name: Timer
       rect:
         serializedVersion: 2
-        x: 0
-        y: 181
+        x: 164
+        y: 150
         width: 64
         height: 64
       alignment: 9
@@ -196,7 +196,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d285dde5431815c4cb38bf61417fe537
+      spriteID: 07dc18439c003da468b3434188cf49fa
       vertices: []
       indices: 
       edges: []
@@ -205,8 +205,8 @@ TextureImporter:
       name: Life
       rect:
         serializedVersion: 2
-        x: 65
-        y: 181
+        x: 218
+        y: 75
         width: 63
         height: 53
       alignment: 9
@@ -216,7 +216,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6cbf43e01ba7e144bb6f52113a1f1ddd
+      spriteID: c3637ea8f4f598c42b63b377bbb0aed7
       vertices: []
       indices: 
       edges: []
@@ -225,10 +225,10 @@ TextureImporter:
       name: Energy
       rect:
         serializedVersion: 2
-        x: 328
+        x: 224
         y: 0
-        width: 40
-        height: 76
+        width: 38
+        height: 74
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,7 +236,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8a25bfedbc11c2047b63781c542197dd
+      spriteID: b9a27a7b6a7b77740bf29fef74707bce
       vertices: []
       indices: 
       edges: []
