@@ -19,4 +19,6 @@
     public const string EnergyShopWindow = "EnergyShopWindow";
     
     public const string CodexWindow = "CodexWindow";
+    
+    public const string CurrencyCheatSheetWindow = "CurrencyCheatSheetWindow";
 }
