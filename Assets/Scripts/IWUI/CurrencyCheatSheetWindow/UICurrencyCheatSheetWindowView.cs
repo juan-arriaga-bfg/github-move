@@ -1,58 +1,76 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+using UnityEngine.SceneManagement;
 
-public class UICurrencyCheatSheetWindowView : IWUIWindowView 
+public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
 {
+    [SerializeField] private UICurrencyCheatSheetWindowItem itemPrefab;
+
+    private List<UICurrencyCheatSheetWindowItem> items;
+    
     public override void OnViewShow()
     {
         base.OnViewShow();
         
-        UICurrencyCheatSheetWindowModel windowModel = Model as UICurrencyCheatSheetWindowModel;
-        
+        UICurrencyCheatSheetWindowModel model = Model as UICurrencyCheatSheetWindowModel;
+
+        SetTitle(model.Title);
+        CreateItems(model);
     }
 
-    public override void OnViewClose()
+    private void CreateItems(UICurrencyCheatSheetWindowModel model)
     {
-        base.OnViewClose();
+        itemPrefab.gameObject.SetActive(true);
+        
+        items = new List<UICurrencyCheatSheetWindowItem>();
+        var currencies = model.CurrenciesList();
+
+        foreach (var currencyDef in currencies)
+        {
+            var item = Instantiate(itemPrefab);
+            item.transform.SetParent(itemPrefab.transform.parent, false);
+            item.Init(currencyDef); 
+            
+            items.Add(item);
+        }
+
+        itemPrefab.gameObject.SetActive(false);
+    }
+
+    public override void OnViewCloseCompleted()
+    {
+        base.OnViewCloseCompleted();
         
         UICurrencyCheatSheetWindowModel windowModel = Model as UICurrencyCheatSheetWindowModel;
+
+        bool isAnyChange = false;
         
+        foreach (var item in items)
+        {
+            isAnyChange = isAnyChange || item.IsChanged();
+            Destroy(item.gameObject);
+        }
+
+        if (isAnyChange)
+        {
+            ReloadScene();
+        }
+    }
+
+    private void ReloadScene()
+    {
+        SceneManager.LoadScene("Main", LoadSceneMode.Single);
+            
+        var ecsSystems = new List<IECSSystem>(ECSService.Current.SystemProcessor.RegisteredSystems);
+            
+        foreach (var system in ecsSystems)
+        {
+            ECSService.Current.SystemProcessor.UnRegisterSystem(system);
+        }
     }
 
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
         base.InitView(model, controller);
-    }
-
-    private List<CurrencyDef> GetCurrencies()
-    {
-        List<FieldInfo> fields = new List<FieldInfo>();
-        
-        var classesList = Assembly.GetExecutingAssembly().GetTypes().Where(e => e.IsClass && e.IsDefined(typeof(IncludeToCheatSheet))).ToList();
-        foreach (var classType in classesList)
-        {
-            var classFields = classType.GetFields();
-            var result = classFields.Where(e => e.IsDefined(typeof(IncludeToCheatSheet))).ToList();
-
-            if (result.Count > 0)
-            {
-                fields.AddRange(result);
-            }
-        } 
-
-        List<CurrencyDef> ret = new List<CurrencyDef>();
-        foreach (var field in fields)
-        {
-            if (field.FieldType == typeof(CurrencyDef))
-            {
-                CurrencyDef def = (CurrencyDef) field.GetValue(null);
-                ret.Add(def);
-            }
-        }
-
-        return ret;
     }
 }
