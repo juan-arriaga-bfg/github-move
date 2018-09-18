@@ -463,6 +463,11 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                         Name = "Stone",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.C1.Id))
                     },
+                    new CodexChainDef
+                    {
+                        Name = "Flower",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.K1.Id))
+                    },
                 }
             },
             new CodexTabDef
@@ -484,6 +489,11 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     {
                         Name = "Stone",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestC1.Id)),
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Flower",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestK1.Id)),
                     },
                     new CodexChainDef
                     {

@@ -697,6 +697,56 @@
     ]
   },
   {
+    "Uid": "ChestK1",
+    "Name": "Small",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "ChestK2",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 5
+      }
+    ],
+    "Name": "Ordinary",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "ChestK3",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 15
+      }
+    ],
+    "Name": "Big",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
     "Uid": "ChestX1",
     "Name": "Small",
     "UnlockBonus": [
@@ -2231,6 +2281,232 @@
       {
         "Currency": "Coins",
         "Amount": 15
+      }
+    ]
+  },
+  {
+    "Uid": "K1",
+    "Name": "K1",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "K2",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 1
+      }
+    ],
+    "Name": "K2",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "K3",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 2
+      }
+    ],
+    "Name": "K3",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      }
+    ]
+  },
+  {
+    "Uid": "K4",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 5
+      }
+    ],
+    "Name": "K4",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "K5",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 10
+      }
+    ],
+    "Name": "K5",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "K6",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 15
+      }
+    ],
+    "Name": "K6",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      }
+    ]
+  },
+  {
+    "Uid": "K7",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 75
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 25
+      }
+    ],
+    "Name": "K7",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
+  },
+  {
+    "Uid": "K8",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 100
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 35
+      }
+    ],
+    "Name": "K8",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 20
+      }
+    ]
+  },
+  {
+    "Uid": "K9",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 50
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 150
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 50
+      }
+    ],
+    "Name": "K9",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      }
+    ]
+  },
+  {
+    "Uid": "K10",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 100
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 200
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 100
+      }
+    ],
+    "Name": "K10",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 30
       }
     ]
   }

@@ -32,10 +32,6 @@ MonoBehaviour:
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseMines
     Pattern: '{"Uid":"","Skin":"","Delay":0,"Size":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"StepReward":{"Currency":"","Amount":0}}'
-  - Key: shop
-    Link: 15hj4e6i2F9UkK_p-lSEvp8d1MJW0KNj3PmEL_1rQU_4
-    Route: parse
-    Pattern: '[{"Uid":"","Product":{"Currency":"","Amount":0},"Price":{"Currency":"","Amount":0}}]'
   - Key: field
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseField
