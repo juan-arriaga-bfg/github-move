@@ -166,4 +166,5 @@ public class R
      public const string ChestZ1Piece = "ChestZ1Piece";
      public const string ChestZ2Piece = "ChestZ2Piece";
      public const string ChestZ3Piece = "ChestZ3Piece";
+     public const string Cell = "Cell";
 }
