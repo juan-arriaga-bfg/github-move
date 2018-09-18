@@ -5,7 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 
 [JsonObject(MemberSerialization.OptIn)]
-public class FieldDefComponent : ECSEntity, IECSSerializeable 
+public class FieldDefComponent : ECSEntity, IECSSerializeable
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
@@ -19,7 +19,9 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	private string completeFogs;
 	private string movedMines;
 	private string remowedMines;
-
+	
+	[JsonProperty] public string FreeChestStartTime;
+	
 	[JsonProperty]
 	public List<PieceSaveItem> Pieces
 	{
@@ -91,6 +93,8 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		
 		var board = BoardService.Current.GetBoardById(0);
 		var cash = board.BoardLogic.PositionsCache.Cache;
+		
+		FreeChestStartTime = board.FreeChestLogic.Timer.StartTimeLong.ToString();
 		
 		if(cash.Count == 0) return;
 		

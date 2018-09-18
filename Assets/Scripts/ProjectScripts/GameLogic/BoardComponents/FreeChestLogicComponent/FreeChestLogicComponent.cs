@@ -10,6 +10,15 @@
 		RegisterComponent(Timer);
 		
 		Timer.Delay = GameDataService.Current.ConstantsManager.FreeChestDelay;
+		
+		var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+
+		if (save != null && string.IsNullOrEmpty(save.FreeChestStartTime) == false)
+		{
+			Timer.Start(long.Parse(save.FreeChestStartTime));
+			return;
+		}
+		
 		Timer.Start();
 	}
 }
