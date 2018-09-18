@@ -40,7 +40,6 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new BoardLoggerComponent()); // logger
         
         boardController.RegisterComponent(new WorkerCurrencyLogicComponent());
-        
         boardController.RegisterComponent(new EnergyCurrencyLogicComponent{Delay = 60}
                             .RegisterComponent(new TimerComponent()));
         
@@ -60,6 +59,7 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new PathfindLockerComponent());
         boardController.RegisterComponent(new BoardRandomComponent()); // random
         boardController.RegisterComponent(new ReproductionLogicComponent());
+        boardController.RegisterComponent(new FreeChestLogicComponent());
         boardController.RegisterComponent(new HintCooldownComponent());
         boardController.RegisterComponent(new PartPiecesLogicComponent());
         boardController.RegisterComponent(new BoardRenderer().Init(gameBoardResourcesDef,

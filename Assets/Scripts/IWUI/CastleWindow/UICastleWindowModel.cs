@@ -15,7 +15,7 @@ public class UICastleWindowModel : IWWindowModel
             var board = BoardService.Current.GetBoardById(0);
             var definition = board.BoardLogic.MatchDefinition;
             
-            var current = PieceType.Chest1.Id + GameDataService.Current.LevelsManager.Level - 1;
+            var current = GameDataService.Current.LevelsManager.Chest;
             var ignore = definition.GetLast(current);
             
             var last = GameDataService.Current.ChestsManager.Chests.FindAll(def =>
@@ -31,19 +31,9 @@ public class UICastleWindowModel : IWWindowModel
             return last;
         }
     }
-    
-    public StorageComponent Storage
-    {
-        get
-        {
-            var board = BoardService.Current.GetBoardById(0);
-            var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
-            var piece = board.BoardLogic.GetPieceAt(position);
-            var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
-            return storage;
-        }
-    }
-    
+
+    public FreeChestLogicComponent FreeChestLogic => BoardService.Current.GetBoardById(0).FreeChestLogic;
+
     public bool Spawn()
     {
         if (ChestReward == -1) return false;
@@ -60,6 +50,7 @@ public class UICastleWindowModel : IWWindowModel
 
         spawn.Reward = ChestReward;
         ChestReward = -1;
+        FreeChestLogic.Timer.Start();
         return spawn.Make(piece.CachedPosition, piece);
     }
 }

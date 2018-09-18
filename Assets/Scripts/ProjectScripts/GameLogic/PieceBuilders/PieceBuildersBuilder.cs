@@ -81,6 +81,13 @@ public class PieceBuildersBuilder
         
         return dict;
     }
+    
+    private Dictionary<int, IPieceBuilder> AddEnemyPiece(Dictionary<int, IPieceBuilder> dict)
+    {
+        dict = AddSimplePiece<EnemyPieceBuilder>(PieceType.Enemy1.Id,  PieceType.Enemy1.Id,  dict);
+        
+        return dict;
+    }
 
     private Dictionary<int, IPieceBuilder> AddMulticellularPiece2x2(Dictionary<int, IPieceBuilder> dict)
     {
@@ -140,15 +147,6 @@ public class PieceBuildersBuilder
         dict.Add(idMax - 2, new PartPieceBuilder());
         dict.Add(idMax - 1, new BuildingBigPieceBuilder{Mask = mask});
         dict.Add(idMax, new MulticellularDraggablePieceBuilder{Mask = mask});
-        
-        return dict;
-    }
-    
-    private Dictionary<int, IPieceBuilder> AddEnemyPiece(Dictionary<int, IPieceBuilder> dict)
-    {
-        dict = AddSimplePiece<EnemyPieceBuilder>(PieceType.Enemy1.Id,  PieceType.Enemy1.Id,  dict);
-        
-        // dict.Add(PieceType.Fog.Id, new FogPieceBuilder());
         
         return dict;
     }
