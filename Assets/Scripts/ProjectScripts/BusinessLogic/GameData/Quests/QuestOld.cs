@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Quest
+public class QuestOld
 {
-    private QuestDef def;
+    private QuestDefOld def;
 
     private int currentAmount;
     
-    public Quest(QuestDef def)
+    public QuestOld(QuestDefOld def)
     {
         this.def = def;
         WantedPiece = PieceType.Parse(def.Price.Currency);
     }
     
-    public QuestDef Def => def;
+    public QuestDefOld Def => def;
 
     public int WantedPiece { get; private set; }
     

@@ -1,4 +1,4 @@
-﻿public class QuestConditionLevel : IQuestCondition
+﻿public class QuestConditionLevel : IQuestConditionOld
 {
     public int UserLevel { get; set; }
     

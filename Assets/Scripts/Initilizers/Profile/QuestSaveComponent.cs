@@ -37,7 +37,7 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
     
     private void SaveQuest()
     {
-        var manager = GameDataService.Current.QuestsManager;
+        var manager = GameDataService.Current.QuestsManagerOld;
         
         completed = manager.SaveCompleted();
         completed.Sort((a, b) => a.CompareTo(b));

@@ -1,9 +1,9 @@
-﻿public class QuestConditionOtherQuest : IQuestCondition
+﻿public class QuestConditionOtherQuest : IQuestConditionOld
 {
 	public int OtherUid { get; set; }
 	
 	public bool Check()
 	{
-		return GameDataService.Current.QuestsManager.IsCompleted(OtherUid);
+		return GameDataService.Current.QuestsManagerOld.IsCompleted(OtherUid);
 	}
 }

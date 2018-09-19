@@ -99,7 +99,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
                 return;
             }
             
-            GameDataService.Current.QuestsManager.RemoveActiveQuest(quest);
+            GameDataService.Current.QuestsManagerOld.RemoveActiveQuest(quest);
             
             isComplete = true;
             return;

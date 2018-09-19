@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<QuestDef>>
+public class QuestsDataManagerOld : IECSComponent, IDataManager, IDataLoader<List<QuestDefOld>>
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
 	public int Guid => ComponentGuid;
@@ -17,11 +17,11 @@ public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<Q
 	{
 	}
 	
-	private List<QuestDef> quests;
+	private List<QuestDefOld> quests;
 	
-	public List<Quest> ActiveQuests = new List<Quest>();
+	public List<QuestOld> ActiveQuests = new List<QuestOld>();
 
-	private List<Quest> stack = new List<Quest>();
+	private List<QuestOld> stack = new List<QuestOld>();
 	private Dictionary<int, bool> completed = new Dictionary<int, bool>();
 
 	public Action OnUpdateActiveQuests;
@@ -29,15 +29,15 @@ public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<Q
 	public void Reload()
 	{
 		quests = null;
-		ActiveQuests = new List<Quest>();
-		stack = new List<Quest>();
+		ActiveQuests = new List<QuestOld>();
+		stack = new List<QuestOld>();
 		completed = new Dictionary<int, bool>();
 		OnUpdateActiveQuests = null;
 		
-		LoadData(new ResourceConfigDataMapper<List<QuestDef>>("configs/quests.data", NSConfigsSettings.Instance.IsUseEncryption));
+		LoadData(new ResourceConfigDataMapper<List<QuestDefOld>>("configs/quests.data", NSConfigsSettings.Instance.IsUseEncryption));
 	}
 	
-	public void LoadData(IDataMapper<List<QuestDef>> dataMapper)
+	public void LoadData(IDataMapper<List<QuestDefOld>> dataMapper)
 	{
 		dataMapper.LoadData((data, error) =>
 		{
@@ -90,11 +90,11 @@ public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<Q
 		{
 			foreach (var def in quests)
 			{
-				stack.Add(new Quest(def));
+				stack.Add(new QuestOld(def));
 			}
 		}
 		
-		ActiveQuests = new List<Quest>();
+		ActiveQuests = new List<QuestOld>();
 
 		for (var i = stack.Count - 1; i >= 0; i--)
 		{
@@ -114,7 +114,7 @@ public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<Q
 		OnUpdateActiveQuests?.Invoke();
 	}
 
-	public bool RemoveActiveQuest(Quest quest)
+	public bool RemoveActiveQuest(QuestOld quest)
 	{
 		for (var i = ActiveQuests.Count - 1; i >= 0; i--)
 		{

@@ -4,7 +4,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 {
     [SerializeField] private GameObject shine;
     
-    private Quest quest;
+    private QuestOld quest;
     private bool isUp;
 
     public override int CurrentValueAnimated
@@ -16,7 +16,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         }
     }
 
-    public void Init(Quest quest)
+    public void Init(QuestOld quest)
     {
         if(this.quest != null) ResourcesViewManager.Instance.UnRegisterView(this);
         

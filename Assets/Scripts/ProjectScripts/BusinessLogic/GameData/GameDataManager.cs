@@ -117,8 +117,8 @@ public class GameDataManager : ECSEntity,
     private FogsDataManager fogsManager;
     public FogsDataManager FogsManager => fogsManager ?? (fogsManager = GetComponent<FogsDataManager>(FogsDataManager.ComponentGuid));
     
-    private QuestsDataManager questsManager;
-    public QuestsDataManager QuestsManager => questsManager ?? (questsManager = GetComponent<QuestsDataManager>(QuestsDataManager.ComponentGuid));
+    private QuestsDataManagerOld questsManagerOld;
+    public QuestsDataManagerOld QuestsManagerOld => questsManagerOld ?? (questsManagerOld = GetComponent<QuestsDataManagerOld>(QuestsDataManagerOld.ComponentGuid));
     
     private ObstaclesDataManager obstaclesManager;
     public ObstaclesDataManager ObstaclesManager => obstaclesManager ?? (obstaclesManager = GetComponent<ObstaclesDataManager>(ObstaclesDataManager.ComponentGuid));
@@ -144,7 +144,7 @@ public class GameDataManager : ECSEntity,
         RegisterComponent(new PiecesDataManager());
         RegisterComponent(new ObstaclesDataManager());
         RegisterComponent(new EnemiesDataManager());
-        RegisterComponent(new QuestsDataManager());
+        RegisterComponent(new QuestsDataManagerOld());
         RegisterComponent(new FogsDataManager());
         RegisterComponent(new LevelsDataManager());
         RegisterComponent(new MinesDataManager());

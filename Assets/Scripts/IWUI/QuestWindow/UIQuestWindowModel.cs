@@ -4,10 +4,10 @@ using System.Text;
 
 public class UIQuestWindowModel : IWWindowModel
 {
-    private Quest quest;
-    public Quest Quest
+    private QuestOld quest;
+    public QuestOld Quest
     {
-        get { return quest ?? GameDataService.Current.QuestsManager.ActiveQuests[0]; }
+        get { return quest ?? GameDataService.Current.QuestsManagerOld.ActiveQuests[0]; }
         set { quest = value; }
     }
 
