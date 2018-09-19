@@ -13,11 +13,11 @@ public class UICurrencyCheatSheetWindowItem : MonoBehaviour
 
     private CurrencyDef def;
 
-    private bool changed;
-
+    private string initialValue;
+    
     public bool IsChanged()
     {
-        return changed; 
+        return initialValue != inputField.text; 
     }
 
     public void Init(CurrencyDef def)
@@ -35,6 +35,8 @@ public class UICurrencyCheatSheetWindowItem : MonoBehaviour
         
         var item = ProfileService.Current.Purchases.GetStorageItem(def.Name);
         inputField.text = item.Amount.ToString();
+        
+        initialValue = inputField.text;
     }
 
     public void OnEndEdit(string value)
@@ -46,10 +48,7 @@ public class UICurrencyCheatSheetWindowItem : MonoBehaviour
         
         storageItem.Amount = newValue;
 
-        if (oldValue != newValue)
-        {
-            changed = true;
-        }
+        inputField.textComponent.color = IsChanged() ? Color.yellow : Color.white; 
         
         Debug.Log($"[UICurrencyCheatSheetWindowItem] => OnEndEdit: {def.Name}: {oldValue} -> {newValue}");
     }
