@@ -166,4 +166,18 @@ public class R
      public const string ChestZ1Piece = "ChestZ1Piece";
      public const string ChestZ2Piece = "ChestZ2Piece";
      public const string ChestZ3Piece = "ChestZ3Piece";
+     public const string K1Piece = "K1Piece";
+     public const string K2Piece = "K2Piece";
+     public const string K3Piece = "K3Piece";
+     public const string K4Piece = "K4Piece";
+     public const string K5Piece = "K5Piece";
+     public const string K6Piece = "K6Piece";
+     public const string K7Piece = "K7Piece";
+     public const string K8Piece = "K8Piece";
+     public const string K9Piece = "K9Piece";
+     public const string K10Piece = "K10Piece";
+     public const string MineKPiece = "MineKPiece";
+     public const string ChestK1Piece = "ChestK1Piece";
+     public const string ChestK2Piece = "ChestK2Piece";
+     public const string ChestK3Piece = "ChestK3Piece";
 }

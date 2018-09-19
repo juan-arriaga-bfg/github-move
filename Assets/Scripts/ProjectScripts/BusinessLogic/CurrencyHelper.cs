@@ -212,7 +212,7 @@ public static class CurrencyHellper
         return isCan;
     }
 
-    public static CurrencyPair ResourcePieceToCurrence(Dictionary<int, int> dict, string currensy)
+    public static CurrencyPair ResourcePieceToCurrence(Dictionary<int, int> dict, string currency)
     {
         var amount = 0;
         
@@ -220,15 +220,15 @@ public static class CurrencyHellper
         {
             var def = GameDataService.Current.PiecesManager.GetPieceDef(pair.Key);
             
-            if(def?.SpawnResources == null || def.SpawnResources.Currency != currensy) continue;
+            if(def?.SpawnResources == null || def.SpawnResources.Currency != currency) continue;
             
             amount += pair.Value * def.SpawnResources.Amount;
         }
         
-        return new CurrencyPair{Currency = currensy, Amount = amount};
+        return new CurrencyPair{Currency = currency, Amount = amount};
     }
     
-    public static Dictionary<int, int> CurrencyToResourcePieces(int amount, string currensy)
+    public static Dictionary<int, int> CurrencyToResourcePieces(int amount, string currency)
     {
         var dict = new Dictionary<int, int>();
         var ids = PieceType.GetIdsByFilter(PieceTypeFilter.Resource);
@@ -238,7 +238,7 @@ public static class CurrencyHellper
         {
             var def = GameDataService.Current.PiecesManager.GetPieceDef(id);
             
-            if(def?.SpawnResources == null || def.SpawnResources.Currency != currensy) continue;
+            if(def?.SpawnResources == null || def.SpawnResources.Currency != currency) continue;
             
             defs.Add(def);
         }

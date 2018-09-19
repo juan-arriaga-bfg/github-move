@@ -19,12 +19,12 @@
         "Amount": 2
       },
       {
-        "Currency": "Mana1",
-        "Amount": 1
+        "Currency": "Mana",
+        "Amount": 5
       },
       {
-        "Currency": "Experience1",
-        "Amount": 3
+        "Currency": "Experience",
+        "Amount": 15
       }
     ],
     "Conditions": [
@@ -51,12 +51,12 @@
         "Amount": 1
       },
       {
-        "Currency": "Mana1",
-        "Amount": 3
+        "Currency": "Mana",
+        "Amount": 15
       },
       {
-        "Currency": "Experience2",
-        "Amount": 2
+        "Currency": "Experience",
+        "Amount": 40
       }
     ],
     "Conditions": [
@@ -83,12 +83,12 @@
         "Amount": 3
       },
       {
-        "Currency": "Mana2",
-        "Amount": 2
+        "Currency": "Mana",
+        "Amount": 40
       },
       {
-        "Currency": "Experience2",
-        "Amount": 3
+        "Currency": "Experience",
+        "Amount": 60
       }
     ],
     "Conditions": [
@@ -115,18 +115,18 @@
         "Amount": 1
       },
       {
-        "Currency": "Mana1",
-        "Amount": 2
+        "Currency": "Mana",
+        "Amount": 10
       },
       {
-        "Currency": "Experience1",
-        "Amount": 2
+        "Currency": "Experience",
+        "Amount": 10
       }
     ],
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 2
+        "OtherUid": 1
       }
     ],
     "Message": "The miller is ready to thanks well for a good batch of sheaves"
@@ -135,7 +135,7 @@
     "Uid": "5",
     "Price": {
       "Currency": "A5",
-      "Amount": 2
+      "Amount": 1
     },
     "Rewards": [
       {
@@ -147,12 +147,12 @@
         "Amount": 3
       },
       {
-        "Currency": "Mana2",
-        "Amount": 2
+        "Currency": "Mana",
+        "Amount": 40
       },
       {
-        "Currency": "Experience2",
-        "Amount": 2
+        "Currency": "Experience",
+        "Amount": 40
       }
     ],
     "Conditions": [
@@ -179,18 +179,18 @@
         "Amount": 1
       },
       {
-        "Currency": "Mana2",
-        "Amount": 2
+        "Currency": "Mana",
+        "Amount": 40
       },
       {
-        "Currency": "Experience2",
-        "Amount": 1
+        "Currency": "Experience",
+        "Amount": 20
       }
     ],
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 5
+        "OtherUid": 4
       }
     ],
     "Message": "The miller is ready to thanks well for a good batch of sheaves"
@@ -211,12 +211,12 @@
         "Amount": 1
       },
       {
-        "Currency": "Mana1",
-        "Amount": 1
+        "Currency": "Mana",
+        "Amount": 5
       },
       {
-        "Currency": "Experience1",
-        "Amount": 1
+        "Currency": "Experience",
+        "Amount": 5
       }
     ],
     "Conditions": [
@@ -231,7 +231,7 @@
     "Uid": "8",
     "Price": {
       "Currency": "C4",
-      "Amount": 3
+      "Amount": 2
     },
     "Rewards": [
       {
@@ -243,12 +243,12 @@
         "Amount": 1
       },
       {
-        "Currency": "Mana1",
-        "Amount": 2
+        "Currency": "Mana",
+        "Amount": 10
       },
       {
-        "Currency": "Experience1",
-        "Amount": 2
+        "Currency": "Experience",
+        "Amount": 10
       }
     ],
     "Conditions": [
@@ -271,12 +271,12 @@
         "Amount": 2
       },
       {
-        "Currency": "Mana3",
-        "Amount": 1
+        "Currency": "Mana",
+        "Amount": 75
       },
       {
-        "Currency": "Experience3",
-        "Amount": 1
+        "Currency": "Experience",
+        "Amount": 75
       }
     ],
     "Conditions": [
@@ -303,12 +303,12 @@
         "Amount": 1
       },
       {
-        "Currency": "Mana1",
-        "Amount": 1
+        "Currency": "Mana",
+        "Amount": 5
       },
       {
-        "Currency": "Experience1",
-        "Amount": 1
+        "Currency": "Experience",
+        "Amount": 5
       }
     ],
     "Conditions": [
@@ -335,12 +335,12 @@
         "Amount": 3
       },
       {
-        "Currency": "Mana1",
-        "Amount": 2
+        "Currency": "Mana",
+        "Amount": 10
       },
       {
-        "Currency": "Experience1",
-        "Amount": 2
+        "Currency": "Experience",
+        "Amount": 10
       }
     ],
     "Conditions": [
@@ -371,18 +371,18 @@
         "Amount": 1
       },
       {
-        "Currency": "Mana2",
-        "Amount": 2
+        "Currency": "Mana",
+        "Amount": 40
       },
       {
-        "Currency": "Experience2",
-        "Amount": 2
+        "Currency": "Experience",
+        "Amount": 40
       }
     ],
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 8
+        "OtherUid": 11
       }
     ]
   },
@@ -402,12 +402,12 @@
         "Amount": 1
       },
       {
-        "Currency": "Mana2",
-        "Amount": 3
+        "Currency": "Mana",
+        "Amount": 60
       },
       {
-        "Currency": "Experience2",
-        "Amount": 2
+        "Currency": "Experience",
+        "Amount": 40
       }
     ],
     "Conditions": [
@@ -433,12 +433,12 @@
         "Amount": 1
       },
       {
-        "Currency": "Mana1",
-        "Amount": 2
+        "Currency": "Mana",
+        "Amount": 10
       },
       {
-        "Currency": "Experience1",
-        "Amount": 2
+        "Currency": "Experience",
+        "Amount": 10
       }
     ],
     "Conditions": [
@@ -464,12 +464,12 @@
         "Amount": 1
       },
       {
-        "Currency": "Mana2",
-        "Amount": 3
+        "Currency": "Mana",
+        "Amount": 60
       },
       {
-        "Currency": "Experience3",
-        "Amount": 1
+        "Currency": "Experience",
+        "Amount": 75
       }
     ],
     "Conditions": [
@@ -495,12 +495,12 @@
         "Amount": 2
       },
       {
-        "Currency": "Mana1",
-        "Amount": 2
+        "Currency": "Mana",
+        "Amount": 10
       },
       {
-        "Currency": "Experience1",
-        "Amount": 2
+        "Currency": "Experience",
+        "Amount": 10
       }
     ],
     "Conditions": [
@@ -526,12 +526,12 @@
         "Amount": 2
       },
       {
-        "Currency": "Mana3",
-        "Amount": 2
+        "Currency": "Mana",
+        "Amount": 150
       },
       {
-        "Currency": "Experience3",
-        "Amount": 2
+        "Currency": "Experience",
+        "Amount": 150
       }
     ],
     "Conditions": [
@@ -557,12 +557,12 @@
         "Amount": 2
       },
       {
-        "Currency": "Mana3",
-        "Amount": 1
+        "Currency": "Mana",
+        "Amount": 75
       },
       {
-        "Currency": "Experience3",
-        "Amount": 2
+        "Currency": "Experience",
+        "Amount": 150
       }
     ],
     "Conditions": [

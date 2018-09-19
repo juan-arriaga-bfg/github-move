@@ -27,6 +27,11 @@ public class Quest
         set { currentAmount = Mathf.Min(value, def.Price.Amount); }
     }
 
+    public List<CurrencyPair> RewardsCurruncy
+    {
+        get { return def.Rewards.FindAll(pair => PieceType.Parse(pair.Currency) == PieceType.None.Id); }
+    }
+
     public Dictionary<int, int> Rewards
     {
         get
@@ -37,6 +42,8 @@ public class Quest
             {
                 var id = PieceType.Parse(reward.Currency);
 
+                if (id == PieceType.None.Id) continue;
+                
                 if (rewards.ContainsKey(id))
                 {
                     rewards[id] += reward.Amount;

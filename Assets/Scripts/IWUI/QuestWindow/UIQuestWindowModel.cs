@@ -25,25 +25,42 @@ public class UIQuestWindowModel : IWWindowModel
     {
         get
         {
-            var types = new List<string>
-            {
-                Currency.Coins.Name,
-                Currency.Crystals.Name,
-                Currency.Energy.Name,
-                Currency.Mana.Name,
-                Currency.Experience.Name,
-            };
-
+            var types = new List<string>();
             var rewards = new List<string>();
+            
             var str = new StringBuilder("<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>Reward:</color></font> <size=50>");
             
-            foreach (var type in types)
+            foreach (var reward in Quest.Def.Rewards)
             {
-                var reward = CurrencyHellper.ResourcePieceToCurrence(Quest.Rewards, type);
+                var currency = reward.Currency;
                 
-                if(reward.Amount == 0) continue;
+                if(types.Contains(currency)) continue;
                 
-                rewards.Add($"{reward.Amount} <sprite name={reward.Currency}>");
+                var id = PieceType.Parse(currency);
+
+                if (id != PieceType.None.Id)
+                {
+                    var def = GameDataService.Current.PiecesManager.GetPieceDef(id);
+
+                    if (def?.SpawnResources == null)
+                    {
+                        types.Add(currency);
+                        rewards.Add(reward.ToStringIcon());
+                        continue;
+                    }
+                    
+                    currency = def.SpawnResources.Currency;
+                }
+                
+                if(types.Contains(currency)) continue;
+                
+                types.Add(currency);
+                
+                var pair = CurrencyHellper.ResourcePieceToCurrence(Quest.Rewards, currency);
+
+                if (pair.Amount == 0) pair.Amount = reward.Amount;
+                
+                rewards.Add(pair.ToStringIcon(false));
             }
             
             str.Append(string.Join("  ", rewards));

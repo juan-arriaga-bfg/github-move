@@ -12,13 +12,41 @@ MonoBehaviour:
   m_Name: iconsText
   m_EditorClassIdentifier: 
   hashCode: 128033944
-  material: {fileID: 21051067900865784}
+  material: {fileID: 21890263133963880}
   materialHashCode: 0
   spriteSheet: {fileID: 2800000, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
   spriteInfoList:
   - id: 0
     x: 0
     y: 181
+    width: 86
+    height: 74
+    xOffset: 5
+    yOffset: 63
+    xAdvance: 93
+    scale: 1.3
+    name: Crystals
+    hashCode: -1118933007
+    unicode: 0
+    pivot: {x: -43, y: 37}
+    sprite: {fileID: 21300002, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
+  - id: 1
+    x: 87
+    y: 181
+    width: 76
+    height: 74
+    xOffset: 4
+    yOffset: 63
+    xAdvance: 83
+    scale: 1.3
+    name: Experience
+    hashCode: -989729378
+    unicode: 0
+    pivot: {x: -38, y: 37}
+    sprite: {fileID: 21300008, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
+  - id: 2
+    x: 164
+    y: 150
     width: 64
     height: 64
     xOffset: 0
@@ -30,9 +58,23 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -32, y: 32}
     sprite: {fileID: 21300014, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 1
-    x: 65
-    y: 181
+  - id: 3
+    x: 157
+    y: 75
+    width: 60
+    height: 74
+    xOffset: 4
+    yOffset: 62
+    xAdvance: 75
+    scale: 1.3
+    name: Mana
+    hashCode: 2664387
+    unicode: 0
+    pivot: {x: -30, y: 37}
+    sprite: {fileID: 21300016, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
+  - id: 4
+    x: 218
+    y: 75
     width: 63
     height: 53
     xOffset: 0
@@ -44,35 +86,7 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -31.5, y: 26.5}
     sprite: {fileID: 21300012, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 2
-    x: 157
-    y: 101
-    width: 96
-    height: 82
-    xOffset: 0
-    yOffset: 66
-    xAdvance: 90
-    scale: 1.3
-    name: Crystals
-    hashCode: -1118933007
-    unicode: 0
-    pivot: {x: -48, y: 41}
-    sprite: {fileID: 21300002, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 3
-    x: 254
-    y: 89
-    width: 80
-    height: 88
-    xOffset: 0
-    yOffset: 72
-    xAdvance: 77
-    scale: 1.3
-    name: Coins
-    hashCode: 80886904
-    unicode: 0
-    pivot: {x: -40, y: 44}
-    sprite: {fileID: 21300010, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 4
+  - id: 5
     x: 0
     y: 0
     width: 156
@@ -86,50 +100,36 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -78, y: 90}
     sprite: {fileID: 21300006, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 5
+  - id: 6
     x: 157
     y: 0
-    width: 82
-    height: 100
-    xOffset: 0
-    yOffset: 83
-    xAdvance: 75
+    width: 66
+    height: 74
+    xOffset: 7
+    yOffset: 63
+    xAdvance: 80
     scale: 1.3
-    name: Mana
-    hashCode: 2664387
+    name: Coins
+    hashCode: 80886904
     unicode: 0
-    pivot: {x: -41, y: 50}
-    sprite: {fileID: 21300016, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 6
-    x: 240
-    y: 0
-    width: 87
-    height: 88
-    xOffset: 0
-    yOffset: 74
-    xAdvance: 83
-    scale: 1.3
-    name: Experience
-    hashCode: -989729378
-    unicode: 0
-    pivot: {x: -43.5, y: 44}
-    sprite: {fileID: 21300008, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
+    pivot: {x: -33, y: 37}
+    sprite: {fileID: 21300010, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
   - id: 7
-    x: 328
+    x: 224
     y: 0
-    width: 40
-    height: 76
-    xOffset: 0
+    width: 38
+    height: 74
+    xOffset: 3
     yOffset: 64
-    xAdvance: 40
+    xAdvance: 45
     scale: 1.3
     name: Energy
     hashCode: -1704718782
     unicode: 0
-    pivot: {x: -20, y: 38}
+    pivot: {x: -19, y: 37}
     sprite: {fileID: 21300004, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
   fallbackSpriteAssets: []
---- !u!21 &21051067900865784
+--- !u!21 &21890263133963880
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 1

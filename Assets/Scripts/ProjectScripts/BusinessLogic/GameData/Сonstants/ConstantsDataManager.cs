@@ -11,6 +11,7 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     public int ReproductionDelay;
     public int ReproductionStepDelay;
     public int ReproductionChance;
+    public int FreeChestDelay;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {

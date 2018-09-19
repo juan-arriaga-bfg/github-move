@@ -11,18 +11,7 @@ public class TouchReactionDefinitionSpawnShop : TouchReactionDefinitionComponent
     
 	public override bool Make(BoardPosition position, Piece piece)
 	{
-		var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
-		
-		var amount = 1;
-        
-		if (storage != null && storage.SpawnPiece == Reward)
-		{
-			if (storage.Scatter(out amount) == false)
-			{
-				UIErrorWindowController.AddError("Production of the resource is not complete!");
-				return false;
-			}
-		}
+		const int amount = 1;
         
 		var free = new List<BoardPosition>();
 		var positions = new List<BoardPosition>();
@@ -43,6 +32,7 @@ public class TouchReactionDefinitionSpawnShop : TouchReactionDefinitionComponent
 
 		var target = positions[0];
 		var worldPos = piece.Context.BoardDef.GetSectorCenterWorldPosition(target.X, target.Y, target.Z);
+		
 		piece.Context.Manipulator.CameraManipulator.MoveTo(worldPos);
         
 		piece.Context.ActionExecutor.AddAction(new ReproductionPieceAction

@@ -4,12 +4,8 @@ using System.Collections.Generic;
 public class EjectionPieceAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
+	public virtual int Guid => ComponentGuid;
 
-	public virtual int Guid
-	{
-		get { return ComponentGuid; }
-	}
-	
 	public BoardPosition From { get; set; }
 	
 	public Dictionary<int, int> Pieces { get; set; }
@@ -60,7 +56,7 @@ public class EjectionPieceAction : IBoardAction
 				gameBoardController.BoardLogic.UnlockCell(pair.Key, this);
 			}
 
-			if (OnComplete != null) OnComplete();
+			OnComplete?.Invoke();
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

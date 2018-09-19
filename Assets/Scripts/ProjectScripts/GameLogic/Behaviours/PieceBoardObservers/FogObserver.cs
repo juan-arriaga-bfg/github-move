@@ -49,8 +49,6 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     {
         base.OnRemoveFromBoard(position, context);
         
-        viewDef?.RemoveView(ViewType.Lock);
-        
         ResourcesViewManager.Instance.UnRegisterView(this);
         
         var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
@@ -131,12 +129,12 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     public void UpdateResource(int offset)
     {
         var canPath = thisContext.Context.Pathfinder.CanPathToCastle(thisContext);
-        if ((canPath ^ storageItem.Amount >= level) && lockView == null)
+        var levelAccess = storageItem.Amount >= level;
+        if ((canPath ^ levelAccess) && lockView == null)
         {
-            var lockOffset = new Vector3(0, 0);
             lockView = viewDef.AddView(ViewType.Lock) as LockView;
             lockView.Value = level.ToString();
-            lockView.transform.position = def.GetCenter(thisContext.Context) + lockOffset;
+            lockView.transform.position = def.GetCenter(thisContext.Context);
         }
 
         lockView?.SetGrayscale(!canPath);
@@ -146,7 +144,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
         if (lockView != null)
         {
-            lockView.DestroyOnBoard();
+            lockView.Change(false);
             viewDef.RemoveView(ViewType.Lock);
             lockView = null;
         }

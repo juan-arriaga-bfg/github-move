@@ -15,11 +15,11 @@ MonoBehaviour:
   - Key: chests
     Link: 1SnYRNQBmFgpeb5BJmQ5rwUWKHYBwPFNrFHzeW4OxWXs
     Route: parse
-    Pattern: '[{"Uid":"","Time":0,"Price":{"Currency":"","Amount":0},"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0,"":"","Override":true}],"RandomPieces":[""],"HardPieces":[{"Currency":"","Amount":0}]}]'
+    Pattern: '[{"Uid":"","Price":{"Currency":"","Amount":0},"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0,"":"","Override":true}],"RandomPieces":[""],"HardPieces":[{"Currency":"","Amount":0}]}]'
   - Key: levels
     Link: 1q0Pxo7d7saZDkpj2IXPB94nnAqKviZ0lZK4QvVfG0vE
     Route: parse
-    Pattern: '[{"Index":0,"Price":{"Currency": "","Amount":0},"Rewards":[{"Currency":"","Amount":0}]}]'
+    Pattern: '[{"Index":0,"Price":{"Currency": "","Amount":0},"Rewards":[{"Currency":"","Amount":0}],"Chest":""}]'
   - Key: obstacles
     Link: 16Q9fxlFX40VRx6u1kwfMvWm1GuvK8MaGs117g5Pkd2g
     Route: parse
@@ -32,10 +32,6 @@ MonoBehaviour:
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseMines
     Pattern: '{"Uid":"","Skin":"","Delay":0,"Size":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"StepReward":{"Currency":"","Amount":0}}'
-  - Key: shop
-    Link: 15hj4e6i2F9UkK_p-lSEvp8d1MJW0KNj3PmEL_1rQU_4
-    Route: parse
-    Pattern: '[{"Uid":"","Product":{"Currency":"","Amount":0},"Price":{"Currency":"","Amount":0}}]'
   - Key: field
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseField

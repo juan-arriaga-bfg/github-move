@@ -25,12 +25,12 @@ public class UICastleItem : MonoBehaviour
 		
 		model = UIService.Get.GetCachedModel<UICastleWindowModel>(UIWindowType.CastleWindow);
 
-		isFree = model.Storage.SpawnPiece == chest.Piece;
+		isFree = GameDataService.Current.LevelsManager.Chest == chest.Piece;
 		
 		if (isFree)
 		{
-			model.Storage.Timer.OnExecute += UpdateLabel;
-			model.Storage.Timer.OnComplete += ChengeButtons;
+			model.FreeChestLogic.Timer.OnExecute += UpdateLabel;
+			model.FreeChestLogic.Timer.OnComplete += ChengeButtons;
 		}
 
 		ChengeButtons();
@@ -45,18 +45,18 @@ public class UICastleItem : MonoBehaviour
 	{
 		if(isFree == false) return;
 
-		model.Storage.Timer.OnExecute -= UpdateLabel;
-		model.Storage.Timer.OnComplete -= ChengeButtons;
+		model.FreeChestLogic.Timer.OnExecute -= UpdateLabel;
+		model.FreeChestLogic.Timer.OnComplete -= ChengeButtons;
 	}
 
 	private void UpdateLabel()
 	{
-		labelTimer.Text = model.Storage.Timer.CompleteTime.GetTimeLeftText();
+		labelTimer.Text = model.FreeChestLogic.Timer.CompleteTime.GetTimeLeftText();
 	}
 
 	private void ChengeButtons()
 	{
-		var isActive = isFree && model.Storage.Timer.IsExecuteable();
+		var isActive = isFree && model.FreeChestLogic.Timer.IsExecuteable();
 		
 		timer.SetActive(isActive);
 		button.SetActive(!isActive);
@@ -90,7 +90,7 @@ public class UICastleItem : MonoBehaviour
 	
 	private void OnClickFree()
 	{
-		if (model.Storage.Timer.IsExecuteable())
+		if (model.FreeChestLogic.Timer.IsExecuteable())
 		{
 			UIErrorWindowController.AddError("Production of the resource is not complete!");
 			return;

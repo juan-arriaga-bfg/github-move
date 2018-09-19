@@ -1,87 +1,707 @@
 ﻿[
   {
     "AssetName": "sprite",
-    "TextureName": "ChestA3",
+    "TextureName": "K10",
     "ShaderName": "Sprites/Default"
   },
   {
     "AssetName": "sprite",
-    "TextureName": "ChestA5",
+    "TextureName": "C12",
     "ShaderName": "Sprites/Default"
   },
   {
     "AssetName": "sprite",
-    "TextureName": "ChestA6",
+    "TextureName": "A10",
     "ShaderName": "Sprites/Default"
   },
   {
     "AssetName": "sprite",
-    "TextureName": "ChestA4",
+    "TextureName": "tree_1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "mill",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "K9",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "K8",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "A9",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "C11",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "K7",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "A8",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "F3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "B4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "D3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "FogItem",
+    "TextureName": "Fog_1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "m_5",
+    "TextureName": "m_5",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "m_4",
+    "TextureName": "m_4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "m_3",
+    "TextureName": "m_3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "m_2",
+    "TextureName": "m_2",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "m_1",
+    "TextureName": "m_1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "m_6",
+    "TextureName": "m_6",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "C10",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "E2",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "E3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "K6",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "G3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "B2",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "A7",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "C8",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "coin5",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "C9",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "H3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "K5",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "F5",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Image",
+    "TextureName": "F5",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "K4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "coin6",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "C5",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "C7",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "A6",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "J5",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "C6",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "B3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "A5",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "C3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "I4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Magic",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Magic",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "coin4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "A4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "I5",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "C2",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "J3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "I3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "K3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "D2",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "D5",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "G2",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "C4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "B1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "B1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "A3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "D4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "K2",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Experience3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Experience1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Experience5",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Experience4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Experience2",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Magic2",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "I2",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "F4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "G1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "coin3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "K1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "H4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "H4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Image (1)",
+    "TextureName": "E1",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "E1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "J4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "H2",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "J2",
     "ShaderName": "Sprites/Default"
   },
   {
     "AssetName": "Icon",
-    "TextureName": "ChestC3",
+    "TextureName": "A2",
     "ShaderName": "UI/Default"
   },
   {
     "AssetName": "sprite",
-    "TextureName": "ChestA2",
+    "TextureName": "A2",
     "ShaderName": "Sprites/Default"
   },
   {
     "AssetName": "sprite",
-    "TextureName": "Chest3",
+    "TextureName": "G4",
     "ShaderName": "Sprites/Default"
   },
   {
-    "AssetName": "sprite",
-    "TextureName": "Chest4",
-    "ShaderName": "Sprites/Default"
-  },
-  {
-    "AssetName": "sprite",
-    "TextureName": "Chest7",
-    "ShaderName": "Sprites/Default"
-  },
-  {
-    "AssetName": "sprite",
-    "TextureName": "Chest5",
-    "ShaderName": "Sprites/Default"
-  },
-  {
-    "AssetName": "sprite",
-    "TextureName": "Chest8",
-    "ShaderName": "Sprites/Default"
-  },
-  {
-    "AssetName": "sprite",
-    "TextureName": "Chest9",
-    "ShaderName": "Sprites/Default"
-  },
-  {
-    "AssetName": "sprite",
-    "TextureName": "Chest6",
-    "ShaderName": "Sprites/Default"
-  },
-  {
-    "AssetName": "sprite",
-    "TextureName": "Chest2",
-    "ShaderName": "Sprites/Default"
-  },
-  {
-    "AssetName": "sprite",
-    "TextureName": "Chest1",
-    "ShaderName": "Sprites/Default"
-  },
-  {
-    "AssetName": "Chest",
-    "TextureName": "Chest1",
+    "AssetName": "Image (2)",
+    "TextureName": "G4",
     "ShaderName": "UI/Default"
   },
   {
     "AssetName": "sprite",
-    "TextureName": "ChestA1",
+    "TextureName": "G4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "F2",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "C1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "E4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Magic1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Mana5",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Mana4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Mana3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Mana2",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Mana1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "coin2",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "X5",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "E5",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Crystal3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Crystal2",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Crystal4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Crystal5",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "Crystal1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "X4",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "X3",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "D1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "I1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "F1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "coin1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Icon",
+    "TextureName": "A1",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Icon",
+    "TextureName": "A1",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "A1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Piece",
+    "TextureName": "A1",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Icon",
+    "TextureName": "A1",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "X2",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "J1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "X1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "sprite",
+    "TextureName": "H1",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "shadow",
+    "TextureName": "shadowPiece",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "shadow",
+    "TextureName": "shadowPiece",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "shadow",
+    "TextureName": "shadowPiece",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "shadow",
+    "TextureName": "shadowPiece",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "shadow",
+    "TextureName": "shadowPiece",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Shadow",
+    "TextureName": "coins_shadow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Shadow",
+    "TextureName": "coins_shadow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Shadow",
+    "TextureName": "coins_shadow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Shadow",
+    "TextureName": "coins_shadow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Shadow",
+    "TextureName": "coins_shadow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Shadow",
+    "TextureName": "coins_shadow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Shadow",
+    "TextureName": "coins_shadow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Shadow",
+    "TextureName": "coins_shadow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Shadow",
+    "TextureName": "coins_shadow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Shadow",
+    "TextureName": "coins_shadow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Shadow",
+    "TextureName": "coins_shadow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Shadow",
+    "TextureName": "coins_shadow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Shadow",
+    "TextureName": "coins_shadow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Shadow",
+    "TextureName": "coins_shadow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Shadow",
+    "TextureName": "coins_shadow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "Shadow",
+    "TextureName": "coins_shadow",
+    "ShaderName": "Sprites/Default"
+  },
+  {
+    "AssetName": "mill_cup",
+    "TextureName": "mill_cup",
     "ShaderName": "Sprites/Default"
   }
 ]
