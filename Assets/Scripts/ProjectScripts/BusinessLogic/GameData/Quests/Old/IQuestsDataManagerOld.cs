@@ -1,4 +1,4 @@
-﻿public interface IQuestsDataManager
+﻿public interface IQuestsDataManagerOld
 {
     QuestsDataManagerOld QuestsManagerOld { get; }
 }

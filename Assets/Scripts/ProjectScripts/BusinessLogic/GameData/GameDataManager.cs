@@ -99,7 +99,7 @@ public class ItemWeight
 
 
 public class GameDataManager : ECSEntity,
-    IChestsDataManager, IPiecesDataManager, IFogsDataManager, IMinesDataManager, IQuestsDataManager, IObstaclesDataManager, ILevelsDataManager,
+    IChestsDataManager, IPiecesDataManager, IFogsDataManager, IMinesDataManager, IQuestsDataManagerOld, IObstaclesDataManager, ILevelsDataManager,
     IFieldDataManager, ICodexDataManager, IEnemiesDataManager, IConstantsDataManager
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
