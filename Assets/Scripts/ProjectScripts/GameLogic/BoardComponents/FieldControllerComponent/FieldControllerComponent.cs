@@ -102,17 +102,21 @@ public class FieldControllerComponent : IECSComponent
                 new BoardPosition(20, 12),
                 new BoardPosition(21, 12),
                 new BoardPosition(22, 12),
-                new BoardPosition(23, 12),}
+                new BoardPosition(23, 12),
+                new BoardPosition(24, 12),
+                new BoardPosition(25, 12),}
         });
         
         context.ActionExecutor.AddAction(new FillBoardAction
         {
-            Piece = PieceType.C11.Id,
+            Piece = PieceType.A9.Id,
             Positions = new List<BoardPosition>{
                 new BoardPosition(20, 15),
                 new BoardPosition(21, 15),
                 new BoardPosition(22, 15),
-                new BoardPosition(23, 15),}
+                new BoardPosition(23, 15),
+                new BoardPosition(24, 15),
+                new BoardPosition(25, 15),}
         });
         return;
         
