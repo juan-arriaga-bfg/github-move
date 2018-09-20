@@ -14,7 +14,7 @@ public class EnemyPieceView: PieceBoardElementView
     {
         base.Init(context, piece);
 
-        AreaLockComponent areaLock = piece.GetComponent<AreaLockComponent>(AreaLockComponent.ComponentGuid);
+        AreaLockCrossComponent areaLock = piece.GetComponent<AreaLockCrossComponent>(AreaLockCrossComponent.ComponentGuid);
 
         foreach (var position in areaLock.LockedCells)
         {

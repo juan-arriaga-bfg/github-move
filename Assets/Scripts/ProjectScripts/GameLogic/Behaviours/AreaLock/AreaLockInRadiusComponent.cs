@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Lock all cells around point
 /// </summary>
-public class AreaLockComponent : IECSComponent, IPieceBoardObserver
+public class AreaLockInRadiusComponent : IECSComponent, IPieceBoardObserver
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
@@ -28,11 +28,6 @@ public class AreaLockComponent : IECSComponent, IPieceBoardObserver
         int size = RADIUS * 2 + 1;
         LockedCells = BoardPosition.GetRectInCenterForArea(position, size, size, piece.Context.BoardDef.Width, piece.Context.BoardDef.Height, false);
         piece.Context.BoardLogic.LockCells(LockedCells, this);
-
-        // foreach (var cell in LockedCells)
-        // {
-        //     Debug.Log($"[AreaLockComponent] => Cell locked: {cell}");
-        // }
     }
     
     public void OnRemoveFromBoard(BoardPosition position, Piece piece = null)
