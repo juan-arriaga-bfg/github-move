@@ -47,15 +47,9 @@ public class CellHintsComponent : IECSComponent
         selectCells = new List<PartCellView>();
         
         // search all variants
-        for (var k = positions.Count - 1; k >= 0; k--)
+        foreach (var position in positions)
         {
-            var position = positions[k];
-            
-            if (boardPos.Equals(position) || ignoreCells.Contains(position))
-            {
-                positions.RemoveAt(k);
-                continue;
-            }
+            if (boardPos.Equals(position) || ignoreCells.Contains(position)) continue;
 
             var hints = new List<PartHint>();
 
@@ -66,8 +60,7 @@ public class CellHintsComponent : IECSComponent
                 for (var j = 0; j < line.Count; j++)
                 {
                     var weight = 0;
-                    var list = GetHintList(pattern, context,
-                        new BoardPosition(position.X - i, position.Y - j, position.Z), out weight);
+                    var list = GetHintList(pattern, context, new BoardPosition(position.X - i, position.Y - j, position.Z), out weight);
 
                     if (list == null) continue;
 
@@ -141,21 +134,7 @@ public class CellHintsComponent : IECSComponent
             if(hints.Count == 0) continue;
             
             hints.Sort((a, b) => -a.Weight.CompareTo(b.Weight));
-
-            var max = (hints[0].Weight / CurrentWeight) * CurrentWeight;
-
-            if (max < CurrentWeight * 2)
-            {
-                hintCells = AddCells(hintCells, hints[0].Cells);
-                continue;
-            }
-            
-            foreach (var hint in hints)
-            {
-                if(hint.Weight < max) continue;
-                
-                hintCells = AddCells(hintCells, hint.Cells);
-            }
+            hintCells = AddCells(hintCells, hints[0].Cells);
         }
         
         foreach (var point in hintCells)
