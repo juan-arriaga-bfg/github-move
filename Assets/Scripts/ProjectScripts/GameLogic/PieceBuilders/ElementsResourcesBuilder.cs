@@ -270,6 +270,7 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.Lock, R.LockView);
         dict.Add((int)ViewType.Hourglass, R.Hourglass);
         dict.Add((int)ViewType.EnemyBubble, R.EnemyBubbleView);
+        dict.Add((int)ViewType.Cell, R.Cell);
         
         return dict;
     }

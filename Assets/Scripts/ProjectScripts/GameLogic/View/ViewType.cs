@@ -16,4 +16,5 @@
     Lock = -1012,
     Hourglass = -1013,
     EnemyBubble = -1014,
+    Cell = -1015,
 }

@@ -6,6 +6,6 @@ public class DebugCellView : BoardElementView
 
     public void SetIndex(int x, int y)
     {
-        label.Text = string.Format("{0}:{1}", x, y);
+        label.Text = $"{x}:{y}";
     }
 }

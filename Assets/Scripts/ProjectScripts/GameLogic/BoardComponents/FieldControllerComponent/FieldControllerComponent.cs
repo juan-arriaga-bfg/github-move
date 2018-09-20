@@ -16,7 +16,7 @@ public class FieldControllerComponent : IECSComponent
         var fieldDef = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
 
 #if UNITY_EDITOR
-        CreateDebug();
+//        CreateDebug();
 #endif
         
         GenerateBorder();
@@ -95,6 +95,31 @@ public class FieldControllerComponent : IECSComponent
 
     private void TestFieldOleg()
     {
+        context.ActionExecutor.AddAction(new FillBoardAction
+        {
+            Piece = PieceType.A9.Id,
+            Positions = new List<BoardPosition>{
+                new BoardPosition(20, 12),
+                new BoardPosition(21, 12),
+                new BoardPosition(22, 12),
+                new BoardPosition(23, 12),
+                new BoardPosition(24, 12),
+                new BoardPosition(25, 12),}
+        });
+        
+        context.ActionExecutor.AddAction(new FillBoardAction
+        {
+            Piece = PieceType.A9.Id,
+            Positions = new List<BoardPosition>{
+                new BoardPosition(20, 15),
+                new BoardPosition(21, 15),
+                new BoardPosition(22, 15),
+                new BoardPosition(23, 15),
+                new BoardPosition(24, 15),
+                new BoardPosition(25, 15),}
+        });
+        return;
+        
         AddPieces(new BoardPosition(4, 16), PieceType.O1.Id,  PieceType.O5.Id);
         AddPieces(new BoardPosition(6, 16), PieceType.OX1.Id, PieceType.OX5.Id);
         
