@@ -19,6 +19,7 @@ public class CellHintsComponent : IECSComponent
     private const int CurrentWeight = 1000;
 
     private int findId;
+    private BoardPosition target;
     private List<PartCellView> selectCells;
 
 	public void OnRegisterEntity(ECSEntity entity)
@@ -32,6 +33,7 @@ public class CellHintsComponent : IECSComponent
     
     public void OnDragStart(BoardPosition boardPos, int pieceId)
     {
+        target = boardPos;
         findId = pieceId;
         
         var id = context.MatchDefinition.GetNext(findId, false);
@@ -39,17 +41,14 @@ public class CellHintsComponent : IECSComponent
         var positions = context.PositionsCache.GetPiecePositionsByType(findId);
         
         var variants = new List<PartHint>();
-        
         var hintCells = new List<BoardPosition>();
-        var bestCells = new List<BoardPosition>();
-        var ignoreCells = new List<BoardPosition>();
         
         selectCells = new List<PartCellView>();
         
         // search all variants
         foreach (var position in positions)
         {
-            if (boardPos.Equals(position) || ignoreCells.Contains(position)) continue;
+            if (target.Equals(position)) continue;
 
             var hints = new List<PartHint>();
 
@@ -80,53 +79,31 @@ public class CellHintsComponent : IECSComponent
                 hintCells = AddCells(hintCells, hints[0].Cells);
                 continue;
             }
-
-            if (max == CurrentWeight * 4)
-            {
-                ignoreCells = AddCells(ignoreCells, hints[0].Cells);
-                continue;
-            }
-
+            
             variants.AddRange(hints);
         }
-
-        // ignore ready pieces
-        foreach (var ignore in ignoreCells)
-        {
-            for (var i = variants.Count - 1; i >= 0; i--)
-            {
-                if (variants[i].Cells.Contains(ignore) == false) continue;
-                
-                variants.RemoveAt(i);
-            }
-        }
         
-        // ignore copy variants
-        foreach (var variant in variants)
-        {
-            if(variant.Weight < CurrentWeight * 3) continue;
-            
-            bestCells = AddCells(bestCells, variant.Cells);
-        }
-
-        for (var i = variants.Count - 1; i >= 0; i--)
-        {
-            var variant = variants[i];
-
-            if (variant.Weight >= CurrentWeight * 3) continue;
-            
-            foreach (var cell in bestCells)
-            {
-                if(variant.Cells.Contains(cell) == false) continue;
-
-                variants.RemoveAt(i);
-                break;
-            }
-        }
-
-        positions = positions.FindAll(position => !ignoreCells.Contains(position));
+        variants.Sort((a, b) => -a.Weight.CompareTo(b.Weight));
         
         // search best variants
+        for (var i = 0; i < variants.Count; i++)
+        {
+            var cells = variants[i].Cells;
+            
+            for (var j = i + 1; j < variants.Count; j++)
+            {
+                foreach (var cell in cells)
+                {
+                    if(variants[j].Cells.Contains(cell) == false) continue;
+
+                    variants.RemoveAt(j);
+                    j--;
+                    break;
+                }
+            }
+        }
+        
+        // search all cells
         foreach (var position in positions)
         {
             var hints = variants.FindAll(hint => hint.Key.Equals(position));
@@ -134,9 +111,13 @@ public class CellHintsComponent : IECSComponent
             if(hints.Count == 0) continue;
             
             hints.Sort((a, b) => -a.Weight.CompareTo(b.Weight));
+            
+            if(hints[0].Weight == CurrentWeight * 4 && hints[0].Cells.Contains(target) == false) continue;
+            
             hintCells = AddCells(hintCells, hints[0].Cells);
         }
         
+        // show
         foreach (var point in hintCells)
         {
             var cell = context.Context.RendererContext.CreateBoardElementAt<PartCellView>(R.Cell, new BoardPosition(point.X, point.Y, 21));
@@ -190,6 +171,8 @@ public class CellHintsComponent : IECSComponent
                 if (piece.PieceType == findId)
                 {
                     weight += CurrentWeight;
+
+                    if (target.Equals(pos)) weight -= OtherWeight;
                     continue;
                 }
                 
