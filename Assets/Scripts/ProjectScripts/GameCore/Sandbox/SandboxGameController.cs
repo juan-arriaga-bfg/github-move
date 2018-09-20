@@ -48,6 +48,7 @@ public class SandboxGameController : MonoBehaviour
             .RegisterComponent(new PiecePositionsCacheComponent())
             .RegisterComponent(new FieldFinderComponent())
             .RegisterComponent(new CharactersLogicComponent())
+            .RegisterComponent(new CellHintsComponent())
             .RegisterComponent(new PieceFlyerComponent()
                 .RegisterComponent(new LockerComponent()))
             .RegisterComponent(new EmptyCellsFinderComponent()) // finds empty cells
