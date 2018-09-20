@@ -148,6 +148,7 @@ public class GameDataManager : ECSEntity,
         RegisterComponent(new ObstaclesDataManager());
         RegisterComponent(new EnemiesDataManager());
         RegisterComponent(new QuestsDataManagerOld());
+        RegisterComponent(new QuestsDataManager());
         RegisterComponent(new FogsDataManager());
         RegisterComponent(new LevelsDataManager());
         RegisterComponent(new MinesDataManager());

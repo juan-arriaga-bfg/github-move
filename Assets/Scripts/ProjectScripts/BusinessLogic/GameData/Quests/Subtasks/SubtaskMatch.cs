@@ -1,6 +1,9 @@
-﻿namespace Quests
+﻿using System;
+
+namespace Quests
 {
-    public class SubtaskMatch: SubtaskCounter, IBoardEventListener
+    [Serializable]
+    public class SubtaskMatch: SubtaskCurrencyCounter, IBoardEventListener
     {
         public override void Init()
         {
@@ -11,7 +14,7 @@
         {
             if (code == GameEventsCodes.Match)
             {
-                currentValue += 1;
+                CurrentValue += 1;
                 OnChanged(this);
             }
         }

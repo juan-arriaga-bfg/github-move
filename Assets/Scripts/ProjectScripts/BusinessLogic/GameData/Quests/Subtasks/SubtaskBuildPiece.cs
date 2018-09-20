@@ -1,6 +1,6 @@
 ﻿namespace Quests
 {
-    public class SubtaskBuildPiece: SubtaskCounter, IBoardEventListener
+    public class SubtaskBuildPiece: SubtaskCurrencyCounter, IBoardEventListener
     {
         public override void Init()
         {
@@ -11,7 +11,7 @@
         {
             if (code == GameEventsCodes.CreatePiece)
             {
-                currentValue += 1;
+                CurrentValue += 1;
                 OnChanged(this);
             }
         }

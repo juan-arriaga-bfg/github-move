@@ -1,22 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Quests
 {
-    public class TaskBase
+    [Serializable]
+    public class TaskBase : IHaveId
     {
-        protected string message;
-        protected List<CurrencyPair> reward;
+        // Predefined
+        [JsonProperty] public string Id { get; protected set; }
+        [JsonProperty] public string Message { get; protected set; }
+        [JsonProperty] public string Ico { get; protected set; }
+        [JsonProperty] public List<CurrencyPair> Reward  { get; protected set; }
+        [JsonProperty] public List<string> SubtaskIds  { get; protected set; }
         
-        protected List<SubtaskBase> subtasks;
-        
+        public List<SubtaskBase> Subtasks  { get; protected set; }
+
         public Action<TaskBase> OnChanged; 
 
         public virtual TaskState State
         {
             get
             {
-                foreach (var subtask in subtasks)
+                foreach (var subtask in Subtasks)
                 {
                     if (subtask.State != SubtaskState.Completed)
                     {
@@ -30,7 +36,7 @@ namespace Quests
         
         protected virtual void Init()
         {
-            foreach (var subtask in subtasks)
+            foreach (var subtask in Subtasks)
             {
                 subtask.OnChanged += OnSubtaskChanged;
             }

@@ -1,12 +1,15 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Quests
 {
-    public class SubtaskBase
+    [Serializable]
+    public class SubtaskBase : IHaveId
     {
-        public string Id { get; protected set; }
-        public string Message { get; protected set; }
-        public string Ico { get; protected set; }
+        // Predefined
+        [JsonProperty] public string Id { get; protected set; }
+        [JsonProperty] public string Message { get; protected set; }
+        [JsonProperty] public string Ico { get; protected set; }
         
         public Action<SubtaskBase> OnChanged; 
         
