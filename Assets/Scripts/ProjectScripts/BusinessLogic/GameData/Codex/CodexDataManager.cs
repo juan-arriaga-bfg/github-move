@@ -307,7 +307,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             {
                 itemDef.State = isPendingReward ? CodexItemState.PendingReward : CodexItemState.Unlocked;
             } 
-            else if (isPreviousPieceUnlocked)
+            else if (isPreviousPieceUnlocked || i == 0)
             {
                 itemDef.State = CodexItemState.PartLock; 
             } 
@@ -375,6 +375,33 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         {
             new CodexTabDef
             {
+                Name = "Buildings",
+                ChainDefs = new List<CodexChainDef>
+                {
+                    new CodexChainDef
+                    {
+                        Name = "Wood",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.A1.Id)),
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Farm",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.B1.Id))
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Stone",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.C1.Id))
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Flower",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.K1.Id))
+                    },
+                }
+            },
+            new CodexTabDef
+            {
                 Name = "Energy",
                 ChainDefs = new List<CodexChainDef>
                 {
@@ -440,33 +467,6 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                             matchDef.GetChain(PieceType.J1.Id),
                             matchDef.GetChain(PieceType.J4.Id)
                         })
-                    },
-                }
-            },
-            new CodexTabDef
-            {
-                Name = "Buildings",
-                ChainDefs = new List<CodexChainDef>
-                {
-                    new CodexChainDef
-                    {
-                        Name = "Wood",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.A1.Id)),
-                    },
-                    new CodexChainDef
-                    {
-                        Name = "Farm",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.B1.Id))
-                    },
-                    new CodexChainDef
-                    {
-                        Name = "Stone",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.C1.Id))
-                    },
-                    new CodexChainDef
-                    {
-                        Name = "Flower",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.K1.Id))
                     },
                 }
             },
