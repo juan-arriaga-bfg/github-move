@@ -80,14 +80,6 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "icon_Worker",
-    "SpriteName": "face_John",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "uicommon",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
     "Uid": "chest_4_2",
     "SpriteName": "chest_4_2",
     "BundleName": "graphicscommon",
@@ -1765,6 +1757,14 @@
     "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/ProcessedContent",
     "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "icon_Worker",
+    "SpriteName": "icon_Worker",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "new",
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   }
 ]
