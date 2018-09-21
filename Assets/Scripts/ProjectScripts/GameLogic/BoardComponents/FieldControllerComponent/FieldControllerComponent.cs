@@ -16,7 +16,7 @@ public class FieldControllerComponent : IECSComponent
         var fieldDef = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
 
 #if UNITY_EDITOR
-//        CreateDebug();
+        CreateDebug();
 #endif
         
         GenerateBorder();

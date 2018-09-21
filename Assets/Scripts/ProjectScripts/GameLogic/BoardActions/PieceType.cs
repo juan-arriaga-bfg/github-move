@@ -68,6 +68,20 @@ public static partial class PieceType
         return result;
     }
     
+    public static List<int> GetAllIds()
+    {
+        var result = new List<int>();
+
+        foreach (var def in defs.Values)
+        {
+            result.Add(def.Id);
+        }
+        
+        result.Sort((a, b) => a.CompareTo(b));
+        
+        return result;
+    }
+    
     public static readonly PieceTypeDef Char1 = new PieceTypeDef{Id = 10, Abbreviations = new List<string>{ "Char1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     public static readonly PieceTypeDef Char2 = new PieceTypeDef{Id = 11, Abbreviations = new List<string>{ "Char2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     public static readonly PieceTypeDef Char3 = new PieceTypeDef{Id = 12, Abbreviations = new List<string>{ "Char3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};

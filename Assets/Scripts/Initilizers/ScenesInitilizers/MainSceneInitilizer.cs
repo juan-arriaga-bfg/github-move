@@ -28,6 +28,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.EnergyShopWindow,
             UIWindowType.CodexWindow,
             UIWindowType.CurrencyCheatSheetWindow,
+            UIWindowType.PiecesCheatSheetWindow,
         });
         
         // on cache complete
