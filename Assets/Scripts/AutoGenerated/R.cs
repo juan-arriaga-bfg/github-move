@@ -181,4 +181,5 @@ public class R
      public const string ChestK1Piece = "ChestK1Piece";
      public const string ChestK2Piece = "ChestK2Piece";
      public const string ChestK3Piece = "ChestK3Piece";
+     public const string Worker1Piece = "Worker1Piece";
 }

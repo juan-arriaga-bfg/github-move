@@ -3,6 +3,19 @@
     "Uid": "Empty"
   },
   {
+    "Uid": "Worker1",
+    "SpawnResources": {
+      "Currency": "Worker",
+      "Amount": 1
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
     "Uid": "Magic1"
   },
   {

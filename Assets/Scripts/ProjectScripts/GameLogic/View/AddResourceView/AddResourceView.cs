@@ -60,6 +60,7 @@ public class AddResourceView : BoardElementView
 		    || resource.Currency == Currency.Crystals.Name
 		    || resource.Currency == Currency.Energy.Name
 		    || resource.Currency == Currency.Mana.Name
+		    || resource.Currency == Currency.Worker.Name
 		    || resource.Currency == Currency.Experience.Name)
 		{
 			var from = board.BoardDef.GetPiecePosition(position.X, position.Y);

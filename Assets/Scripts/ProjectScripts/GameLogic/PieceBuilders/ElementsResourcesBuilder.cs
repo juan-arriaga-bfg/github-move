@@ -210,6 +210,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Mana4.Id, R.Mana4Piece);
         dict.Add(PieceType.Mana5.Id, R.Mana5Piece);
         
+        dict.Add(PieceType.Worker1.Id, R.Worker1Piece);
+        
         dict.Add(PieceType.Experience1.Id, R.Experience1Piece);
         dict.Add(PieceType.Experience2.Id, R.Experience2Piece);
         dict.Add(PieceType.Experience3.Id, R.Experience3Piece);

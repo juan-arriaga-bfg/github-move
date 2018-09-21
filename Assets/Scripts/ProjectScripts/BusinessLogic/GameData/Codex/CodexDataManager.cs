@@ -537,6 +537,11 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                         Name = "Experience",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Experience1.Id)),
                     },
+                    new CodexChainDef
+                    {
+                        Name = "Worker",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Worker1.Id)),
+                    },
                 }
             }
         };

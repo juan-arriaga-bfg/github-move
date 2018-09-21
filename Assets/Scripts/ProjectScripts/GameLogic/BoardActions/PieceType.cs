@@ -229,6 +229,7 @@ public static partial class PieceType
     
     public static readonly PieceTypeDef Fog = new PieceTypeDef{Id = 2201, Abbreviations = new List<string>{ "Fog" }, Filter = PieceTypeFilter.Multicellular};
     
+    public static readonly PieceTypeDef Worker1 = new PieceTypeDef{Id = 2999, Abbreviations = new List<string>{ "Worker1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     public static readonly PieceTypeDef Experience1 = new PieceTypeDef{Id = 3000, Abbreviations = new List<string>{ "Experience1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     public static readonly PieceTypeDef Experience2 = new PieceTypeDef{Id = 3001, Abbreviations = new List<string>{ "Experience2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     public static readonly PieceTypeDef Experience3 = new PieceTypeDef{Id = 3002, Abbreviations = new List<string>{ "Experience3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
