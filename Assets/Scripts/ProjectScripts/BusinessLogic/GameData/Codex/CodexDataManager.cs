@@ -398,6 +398,11 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                         Name = "Flower",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.K1.Id))
                     },
+                    new CodexChainDef
+                    {
+                        Name = "Alchemist",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.L1.Id))
+                    },
                 }
             },
             new CodexTabDef
@@ -497,13 +502,13 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     },
                     new CodexChainDef
                     {
-                        Name = "X",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestX1.Id)),
+                        Name = "Alchemist",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestL1.Id)),
                     },
                     new CodexChainDef
                     {
-                        Name = "Z",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestZ1.Id)),
+                        Name = "Epic",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestEpic1.Id)),
                     },
                     new CodexChainDef
                     {
@@ -526,16 +531,6 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     {
                         Name = "Crystal",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Crystal1.Id)),
-                    },
-                    new CodexChainDef
-                    {
-                        Name = "Mana",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Mana1.Id)),
-                    },
-                    new CodexChainDef
-                    {
-                        Name = "Experience",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Experience1.Id)),
                     },
                     new CodexChainDef
                     {
