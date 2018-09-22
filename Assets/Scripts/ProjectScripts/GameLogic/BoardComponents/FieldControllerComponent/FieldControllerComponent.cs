@@ -24,7 +24,7 @@ public class FieldControllerComponent : IECSComponent
         CutTriangles(maxEdge / 2, Directions.All);
         
 #if UNITY_EDITOR
-        TestFieldOleg(); return;
+//        TestFieldOleg(); return;
 //        TestFieldAlex(); return;
 //        TestFieldQA(); return;
 #endif
