@@ -54,6 +54,7 @@ public class UIBoardView : BoardElementView
     {
         IsShow = false;
         ResetAnimation();
+        offset = new Vector3(0, 0.5f);
         
         base.ResetViewOnDestroy();
     }
