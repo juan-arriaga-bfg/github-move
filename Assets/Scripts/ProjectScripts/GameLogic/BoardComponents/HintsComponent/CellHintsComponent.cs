@@ -159,12 +159,14 @@ public class CellHintsComponent : IECSComponent
                 positions.Add(pos);
                 
                 var piece = logic.GetPieceAt(pos);
-
+                
                 if (piece == null)
                 {
                     weight += EmptyWeight;
                     continue;
                 }
+
+                if (piece.PieceType == PieceType.Fog.Id) return null;
                 
                 if (piece.Draggable == null) continue;
 
