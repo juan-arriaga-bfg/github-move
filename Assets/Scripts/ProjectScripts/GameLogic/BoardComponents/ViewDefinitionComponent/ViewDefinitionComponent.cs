@@ -27,6 +27,14 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     {
     }
 
+    public void OnDrag(bool isEnd)
+    {
+        foreach (var view in views.Values)
+        {
+            view.OnDrag(isEnd);
+        }
+    }
+
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
         if (thisContext == null) return;
@@ -59,6 +67,8 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
             thisContext.Context.RendererContext.MoveElement(f, t);
             view.SetOfset();
         }
+
+        OnDrag(true);
     }
     
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
@@ -103,8 +113,8 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         
         var pos = Position;
         var currentPos = Position;
-        
-        pos.Z += Layer*10;
+
+        pos.Z += Layer * 10;
         
         var element = thisContext.Context.RendererContext.CreateElementAt((int)id, pos) as UIBoardView;
         element.Init(thisContext);

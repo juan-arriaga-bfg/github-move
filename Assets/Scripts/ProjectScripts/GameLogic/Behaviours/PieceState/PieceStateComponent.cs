@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public enum BuildingState
 {
@@ -22,7 +21,6 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     public Action OnChangeState;
     
     private Piece thisContext;
-    private ViewDefinitionComponent viewDef;
     
     private string key => thisContext.CachedPosition.ToSaveString();
     
@@ -67,8 +65,6 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         thisContext = entity as Piece;
         
         var def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType + 1);
-        
-        viewDef = thisContext.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
         
         Timer = new TimerComponent{Delay = def.MatchConditionsDef.Delay, Price = def.MatchConditionsDef.FastPrice};
         Timer.OnComplete += OnComplete;
@@ -122,7 +118,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     {
         thisContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, thisContext.CachedPosition);
         
-        var view = viewDef.AddView(ViewType.Bubble) as BubbleView;
+        var view = thisContext.ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
         
         view.OnHide = () => { State = BuildingState.Warning; };
         view.SetData($"Build Piece:\n{DateTimeExtension.GetDelayText(Timer.Delay)}?", $"Send <sprite name={Currency.Worker.Name}>", piece => OnClick(), true, false);
@@ -134,7 +130,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         switch (state)
         {
             case BuildingState.Waiting:
-                viewDef.AddView(ViewType.Bubble).Change(false);
+                thisContext.ViewDefinition.AddView(ViewType.Bubble).Change(false);
                 break;
             case BuildingState.Warning:
                 State = BuildingState.Waiting;
@@ -146,7 +142,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     {
         if(thisContext.Context.WorkerLogic.Get(key, Timer.Delay) == false) return;
         
-        var view = viewDef.AddView(ViewType.Bubble);
+        var view = thisContext.ViewDefinition.AddView(ViewType.Bubble);
         
         view.OnHide = null;
         view.Change(false);
@@ -156,7 +152,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
 
     private void OnStart()
     {
-        var view = viewDef.AddView(ViewType.BoardTimer) as BoardTimerView;
+        var view = thisContext.ViewDefinition.AddView(ViewType.BoardTimer) as BoardTimerView;
         
         view.SetTimer(Timer);
         view.Change(true);
@@ -187,7 +183,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     
     private void OnComplete()
     {
-        viewDef.AddView(ViewType.BoardTimer).Change(false);
+        thisContext.ViewDefinition.AddView(ViewType.BoardTimer).Change(false);
         State = BuildingState.Complete;
     }
 }

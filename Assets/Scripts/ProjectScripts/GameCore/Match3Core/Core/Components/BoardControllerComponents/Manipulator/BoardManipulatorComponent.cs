@@ -116,14 +116,14 @@ public class BoardManipulatorComponent : ECSEntity,
     private void BeginDrag(Vector2 startPos, Vector2 pos)
     {
         isDrag = false;
+        
         var start = context.BoardDef.GetSectorPosition(startPos);
         var current = context.BoardDef.GetSectorPosition(pos);
-        if (!start.Equals(current))
-            return;
+        
+        if (!start.Equals(current)) return;
            
         if (cachedViewForDrag == null)
         {
-            
             var selectedView = GetSelectedBoardElementView();
             
             if (selectedView == null) return;
@@ -147,6 +147,7 @@ public class BoardManipulatorComponent : ECSEntity,
                 
                 var boardPos = context.BoardDef.GetSectorPosition(pos);
                 pieceView.OnDragStart(boardPos, pos);
+                pieceView.Piece.ViewDefinition?.OnDrag(false);
             }
             
             cachedViewForDrag = selectedView;

@@ -23,8 +23,6 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     
     public Action OnHideBubble;
     
-    private ViewDefinitionComponent viewDef;
-    
     public TimerComponent Timer { get; private set; }
     public Vector2 TimerOffset = Vector2.zero;
 
@@ -44,7 +42,6 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
         Timer = pieceContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-        viewDef = pieceContext.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
         
         if(Timer == null) return;
         
@@ -123,9 +120,9 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     
     private void UpdateView()
     {
-        if(viewDef == null) return;
+        if(pieceContext.ViewDefinition == null) return;
         
-        var view = viewDef.AddView(ViewType.StorageState);
+        var view = pieceContext.ViewDefinition.AddView(ViewType.StorageState);
         var isShow = Filling / (float) Capacity > 0.2f;
         
         view.Change(isShow);
@@ -156,9 +153,9 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
 
     private void OnShowTimer()
     {
-        if(viewDef == null) return;
+        if(pieceContext.ViewDefinition == null) return;
         
-        var view = viewDef.AddView(ViewType.BoardTimer);
+        var view = pieceContext.ViewDefinition.AddView(ViewType.BoardTimer);
 
         view.Priority = -1;
         view.Ofset = TimerOffset;
@@ -168,9 +165,9 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     
     private void OnHideTimer()
     {
-        if(viewDef == null) return;
+        if(pieceContext.ViewDefinition == null) return;
         
-        var view = viewDef.AddView(ViewType.BoardTimer);
+        var view = pieceContext.ViewDefinition.AddView(ViewType.BoardTimer);
         var isShow = !IsFilled;
         
         if(isShow == false) view.Priority = 10;

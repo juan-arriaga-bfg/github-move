@@ -1,7 +1,5 @@
 ﻿public class TouchReactionDefinitionBuilding : TouchReactionDefinitionComponent
 {
-	private ViewDefinitionComponent viewDef;
-	
 	public override bool Make(BoardPosition position, Piece piece)
 	{
 		piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, position);

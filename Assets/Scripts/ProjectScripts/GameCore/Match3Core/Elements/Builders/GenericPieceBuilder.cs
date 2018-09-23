@@ -18,11 +18,9 @@ public class GenericPieceBuilder : IPieceBuilder
     
     protected ViewDefinitionComponent CreateViewComponent(Piece piece)
     {
-        var view = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
-
-        if (view != null) return view;
+        if (piece.ViewDefinition != null) return piece.ViewDefinition;
         
-        view = new ViewDefinitionComponent();
+        var view = new ViewDefinitionComponent();
         piece.RegisterComponent(view);
         AddObserver(piece, view);
         
@@ -43,7 +41,7 @@ public class GenericPieceBuilder : IPieceBuilder
     
     protected void AddView(Piece piece, ViewType id)
     {
-        var view = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid) ?? CreateViewComponent(piece);
+        var view = piece.ViewDefinition ?? CreateViewComponent(piece);
 
         if(view.ViewIds == null) view.ViewIds = new List<ViewType>();
 		

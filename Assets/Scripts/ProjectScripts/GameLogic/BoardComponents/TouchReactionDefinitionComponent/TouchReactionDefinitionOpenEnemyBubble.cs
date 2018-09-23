@@ -6,9 +6,7 @@ public class TouchReactionDefinitionOpenEnemyBubble : TouchReactionDefinitionCom
 {
     public ViewType ViewId;
     public Action<bool> OnChange;
-	
-    private ViewDefinitionComponent viewDef;
-
+    
     private BubbleView view;
     private EnemyDef enemyDef;
     
@@ -21,25 +19,18 @@ public class TouchReactionDefinitionOpenEnemyBubble : TouchReactionDefinitionCom
     {
         piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, position);
 
-        if (viewDef == null)
-        {
-            viewDef = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
+        if (piece.ViewDefinition == null) return false;
 
-            if (viewDef == null) return false;
-        }
-
-        view = viewDef.AddView(ViewId) as BubbleView;
+        view = piece.ViewDefinition.AddView(ViewId) as BubbleView;
 
         enemyDef = GameDataService.Current.EnemiesManager.GetEnemyDefById(piece.PieceType);
 
-        // ReSharper disable once PossibleNullReferenceException
         view.SetData($"{enemyDef.Name}", $"Erradicate <sprite name={enemyDef.Price.Currency}> {enemyDef.Price.Amount}", OnClick, true, false);
 
         OnChange?.Invoke(!view.IsShow);
         view.Change(!view.IsShow);
 
         return true;
-
     }
     
     private void OnClick(Piece piece)

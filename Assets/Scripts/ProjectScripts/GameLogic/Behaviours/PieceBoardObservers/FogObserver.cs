@@ -27,12 +27,13 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
         var key = new BoardPosition(position.X, position.Y);
-        var def = GameDataService.Current.FogsManager.GetDef(key);
-        this.def = def;
+        
+        def = GameDataService.Current.FogsManager.GetDef(key);
+        
         if(def == null) return;
         
         Mask = def.Positions;
-        viewDef = thisContext.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
+        viewDef = thisContext.ViewDefinition;
 
         if (viewDef != null)
         {
