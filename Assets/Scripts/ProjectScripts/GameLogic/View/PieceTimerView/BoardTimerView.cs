@@ -45,4 +45,13 @@ public class BoardTimerView : UIBoardView
         if(progressBar != null) progressBar.SetProgress(timer.GetProgress());
         label.Text = timer.CompleteTime.GetTimeLeftText();
     }
+    
+    public override void OnDrag(bool isEnd)
+    {
+        base.OnDrag(isEnd);
+        
+        if (timer == null) return;
+        
+        timer.IsPaused = !isEnd;
+    }
 }

@@ -33,9 +33,6 @@ public class LockView : UIBoardView
 
     public void SetGrayscale(bool enabled)
     {
-        if (enabled)
-            Image.material = GrayscaleMaterial;
-        else
-            Image.material = null;
+        Image.material = enabled ? GrayscaleMaterial : null;
     }
 }

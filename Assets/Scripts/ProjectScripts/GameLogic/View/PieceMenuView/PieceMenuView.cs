@@ -7,15 +7,9 @@ public class PieceMenuView : UIBoardView, IBoardEventListener
     
     private List<GameObject> btns = new List<GameObject>();
     
-    protected override ViewType Id
-    {
-        get { return ViewType.Menu; }
-    }
-    
-    public override Vector3 Ofset
-    {
-        get { return new Vector3(0, 0.7f); }
-    }
+    protected override ViewType Id => ViewType.Menu;
+
+    public override Vector3 Ofset => new Vector3(0, 0.7f);
 
     public override void SetOfset()
     {
@@ -29,10 +23,8 @@ public class PieceMenuView : UIBoardView, IBoardEventListener
         Priority = defaultPriority = 20;
         
         var touchReaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
-        
-        if(touchReaction == null) return;
-        
-        var menuDef = touchReaction.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
+
+        var menuDef = touchReaction?.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
         
         if(menuDef == null) return;
         

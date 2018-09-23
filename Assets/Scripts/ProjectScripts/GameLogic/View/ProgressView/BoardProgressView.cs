@@ -37,4 +37,13 @@ public class BoardProgressView : UIBoardView
         
         bar.UpdateValue(life.GetProgress, life.GetProgressNext);
     }
+    
+    public override void OnDrag(bool isEnd)
+    {
+        base.OnDrag(isEnd);
+        
+        if (life == null) return;
+
+        life.Timer.IsPaused = !isEnd;
+    }
 }

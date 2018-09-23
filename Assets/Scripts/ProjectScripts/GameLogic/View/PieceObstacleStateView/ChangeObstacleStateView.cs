@@ -46,7 +46,16 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
         }
         base.ResetViewOnDestroy();
     }
+    
+    public override void OnDrag(bool isEnd)
+    {
+        base.OnDrag(isEnd);
+        
+        if (life == null) return;
 
+        life.Timer.IsPaused = !isEnd;
+    }
+    
     public override void UpdateVisibility(bool isVisible)
     {
         Context.Context.HintCooldown.IsPaused = isVisible;
