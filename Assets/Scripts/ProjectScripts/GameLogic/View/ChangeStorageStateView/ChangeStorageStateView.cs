@@ -26,12 +26,10 @@ public class ChangeStorageStateView : UIBoardView
         var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
         
         if (storage == null) return;
-
-        var isChest = Context.Context.BoardLogic.MatchDefinition.GetFirst(storage.SpawnPiece) == PieceType.Chest1.Id;
         
-        icon.sprite = IconService.Current.GetSpriteById(isChest ? "Chest" : PieceType.Parse(storage.SpawnPiece));
+        icon.sprite = IconService.Current.GetSpriteById(storage.Icon);
     }
-
+    
     public void OnClick()
     {
         var definition = Context.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
