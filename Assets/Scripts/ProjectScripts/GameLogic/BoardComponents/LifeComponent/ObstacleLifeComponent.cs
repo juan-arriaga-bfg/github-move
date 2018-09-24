@@ -57,7 +57,7 @@ public class ObstacleLifeComponent : StorageLifeComponent
 
     protected override void OnComplete()
     {
-        storage.SpawnPiece = PieceType.Chest1.Id;
+        storage.SpawnPiece = GameDataService.Current.ObstaclesManager.GetReward(thisContext.PieceType);
         
         storage.OnScatter = () =>
         {

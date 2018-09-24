@@ -20,7 +20,7 @@ public class TouchReactionDefinitionObstacleComponent : TouchReactionDefinitionS
                 OnCompleteAction = new CreatePieceAtAction
                 {
                     At = position,
-                    PieceTypeId = GameDataService.Current.ObstaclesManager.GetReward(piece.PieceType),
+                    PieceTypeId = storage.SpawnPiece,
                     OnComplete = () =>
                     {
                         storage.OnScatter?.Invoke();
