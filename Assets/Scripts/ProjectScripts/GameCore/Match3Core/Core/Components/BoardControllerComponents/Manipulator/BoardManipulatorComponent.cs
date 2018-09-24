@@ -274,13 +274,13 @@ public class BoardManipulatorComponent : ECSEntity,
                     var distance = Vector2.Distance(currentPos, targetPos);
 
                     var duration = dragDuration * (distance < 1 ? distance : 1);
-                    
-                    cachedViewForDrag.CachedTransform
-                        .DOLocalMove(targetPos, duration).OnComplete(() =>
+
+                    cachedViewForDrag.CachedTransform.DOLocalMove(targetPos, duration).OnComplete(() =>
                         {
                             if (cachedViewForDrag == null) return;
-                            
-                            cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, context.BoardDef.PieceLayer));
+
+                            cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y,
+                                context.BoardDef.PieceLayer));
                             cachedViewForDrag = null;
                             cameraManipulator.CameraMove.UnLock(this);
                         })
