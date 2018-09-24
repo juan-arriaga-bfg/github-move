@@ -16,6 +16,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     private Piece thisContext;
     
     private const int Layer = 10;
+    private bool isDrag;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -29,6 +30,10 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
     public void OnDrag(bool isEnd)
     {
+        if(isDrag == !isEnd) return;
+
+        isDrag = !isEnd;
+        
         foreach (var view in views.Values)
         {
             view.OnDrag(isEnd);

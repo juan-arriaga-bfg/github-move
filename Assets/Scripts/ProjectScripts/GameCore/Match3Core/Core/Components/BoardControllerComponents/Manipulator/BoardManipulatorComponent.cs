@@ -147,7 +147,6 @@ public class BoardManipulatorComponent : ECSEntity,
                 
                 var boardPos = context.BoardDef.GetSectorPosition(pos);
                 pieceView.OnDragStart(boardPos, pos);
-                pieceView.Piece.ViewDefinition?.OnDrag(false);
             }
             
             cachedViewForDrag = selectedView;
@@ -186,6 +185,7 @@ public class BoardManipulatorComponent : ECSEntity,
             var boardPos = context.BoardDef.GetSectorPosition(targetPos);
             boardPos.Z = context.BoardDef.PieceLayer;
             pieceView.OnDrag(boardPos, pos);
+            pieceView.Piece.ViewDefinition?.OnDrag(false);
 
             if ((prevDragPos - pos).sqrMagnitude > 0.01f || isFullPass)
             {
