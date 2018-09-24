@@ -27,7 +27,7 @@ public class UICurrencyCheatSheetWindowItem : MonoBehaviour
         lblName.text = def.Name;
         lblId.text = $"id: {def.Id}";
         
-        var spr = IconService.Current.GetSpriteById(def.Name);
+        var spr = GetPieecSprite();
         if (spr != null)
         {
             ico.sprite = spr;
@@ -37,6 +37,11 @@ public class UICurrencyCheatSheetWindowItem : MonoBehaviour
         inputField.text = item.Amount.ToString();
         
         initialValue = inputField.text;
+    }
+    
+    private Sprite GetPieecSprite()
+    {
+        return IconService.Current.GetSpriteById(def.Icon);
     }
 
     public void OnEndEdit(string value)
