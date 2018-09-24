@@ -133,9 +133,6 @@ public class R
      public const string ChestA1Piece = "ChestA1Piece";
      public const string ChestA2Piece = "ChestA2Piece";
      public const string ChestA3Piece = "ChestA3Piece";
-     public const string ChestA4Piece = "ChestA4Piece";
-     public const string ChestA5Piece = "ChestA5Piece";
-     public const string ChestA6Piece = "ChestA6Piece";
      public const string ChestC1Piece = "ChestC1Piece";
      public const string ChestC2Piece = "ChestC2Piece";
      public const string ChestC3Piece = "ChestC3Piece";

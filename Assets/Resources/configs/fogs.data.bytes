@@ -104,6 +104,12 @@
         }
       ],
       "Pieces": {
+        "Worker1": [
+          {
+            "X": 15,
+            "Y": 7
+          }
+        ],
         "Mine 1": [
           {
             "X": 15,
@@ -309,7 +315,7 @@
       "Level": "4",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 230
+        "Amount": 250
       },
       "Reward": {
         "Currency": "Experience",
@@ -420,7 +426,7 @@
             "Y": 5
           }
         ],
-        "Mine 2": [
+        "Mine 3": [
           {
             "X": 23,
             "Y": 6
@@ -516,7 +522,7 @@
             "Y": 8
           }
         ],
-        "Mine 3": [
+        "Mine 2": [
           {
             "X": 11,
             "Y": 9

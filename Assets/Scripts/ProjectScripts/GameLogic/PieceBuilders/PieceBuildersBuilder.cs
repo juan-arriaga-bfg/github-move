@@ -38,7 +38,7 @@ public class PieceBuildersBuilder
         
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest9.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.ChestEpic1.Id, PieceType.ChestEpic3.Id, dict);
-        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.ChestA1.Id, PieceType.ChestA6.Id, dict);
+        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.ChestA1.Id, PieceType.ChestA3.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.ChestC1.Id, PieceType.ChestC3.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.ChestK1.Id, PieceType.ChestK3.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.ChestL1.Id, PieceType.ChestL3.Id, dict);

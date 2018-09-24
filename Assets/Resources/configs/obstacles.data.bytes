@@ -19,11 +19,7 @@
     "ChestWeights": [
       {
         "Uid": "ChestA1",
-        "Weight": 100
-      },
-      {
-        "Uid": "ChestA2",
-        "Weight": 30,
+        "Weight": 100,
         "Override": true
       }
     ]
@@ -49,7 +45,7 @@
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 30
+        "Weight": 50
       },
       {
         "Uid": "B1",
@@ -63,12 +59,12 @@
     "ChestWeights": [
       {
         "Uid": "ChestA1",
-        "Weight": 20,
+        "Weight": 100,
         "Override": true
       },
       {
         "Uid": "ChestA2",
-        "Weight": 100,
+        "Weight": 10,
         "Override": true
       }
     ]
@@ -94,7 +90,7 @@
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 20
+        "Weight": 30
       },
       {
         "Uid": "E1",
@@ -110,7 +106,7 @@
       },
       {
         "Uid": "A2",
-        "Weight": 10
+        "Weight": 20
       },
       {
         "Uid": "B1",
@@ -119,13 +115,14 @@
     ],
     "ChestWeights": [
       {
-        "Uid": "ChestA3",
-        "Weight": 100,
+        "Uid": "ChestA1",
+        "Weight": 60,
         "Override": true
       },
       {
         "Uid": "ChestA2",
-        "Weight": 40
+        "Weight": 40,
+        "Override": true
       }
     ]
   },
@@ -150,11 +147,11 @@
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 10
+        "Weight": 50
       },
       {
         "Uid": "A2",
-        "Weight": 10
+        "Weight": 50
       },
       {
         "Uid": "J1",
@@ -175,17 +172,14 @@
     ],
     "ChestWeights": [
       {
+        "Uid": "ChestA2",
+        "Weight": 60,
+        "Override": true
+      },
+      {
         "Uid": "ChestA3",
-        "Weight": 30,
+        "Weight": 40,
         "Override": true
-      },
-      {
-        "Uid": "ChestA4",
-        "Weight": 100,
-        "Override": true
-      },
-      {
-        "Uid": "ChestA5"
       }
     ]
   },
@@ -210,11 +204,11 @@
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 10
+        "Weight": 50
       },
       {
         "Uid": "A2",
-        "Weight": 10
+        "Weight": 50
       },
       {
         "Uid": "J1",
@@ -239,17 +233,14 @@
     ],
     "ChestWeights": [
       {
-        "Weight": 0,
+        "Uid": "ChestA2",
+        "Weight": 50,
         "Override": true
       },
       {
-        "Uid": "ChestA5",
-        "Weight": 100,
+        "Uid": "ChestA3",
+        "Weight": 50,
         "Override": true
-      },
-      {
-        "Uid": "ChestA4",
-        "Weight": 30
       }
     ]
   },
@@ -299,18 +290,14 @@
     ],
     "ChestWeights": [
       {
+        "Uid": "ChestA2",
+        "Weight": 30,
+        "Override": true
+      },
+      {
         "Uid": "ChestA3",
-        "Weight": 0,
+        "Weight": 70,
         "Override": true
-      },
-      {
-        "Uid": "ChestA5",
-        "Weight": 100,
-        "Override": true
-      },
-      {
-        "Uid": "ChestA6",
-        "Weight": 30
       }
     ]
   },
@@ -335,31 +322,27 @@
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 10
+        "Weight": 50
       },
       {
         "Uid": "A2",
-        "Weight": 10
+        "Weight": 50
       },
       {
         "Uid": "Coin1",
-        "Weight": 10
+        "Weight": 50
       }
     ],
     "ChestWeights": [
       {
-        "Uid": "ChestA3",
-        "Weight": 0,
+        "Uid": "ChestA2",
+        "Weight": 30,
         "Override": true
       },
       {
-        "Uid": "ChestA5",
+        "Uid": "ChestA3",
         "Weight": 100,
         "Override": true
-      },
-      {
-        "Uid": "ChestA6",
-        "Weight": 30
       }
     ]
   },
@@ -397,18 +380,14 @@
     ],
     "ChestWeights": [
       {
-        "Uid": "ChestA3",
-        "Weight": 0,
+        "Uid": "ChestA2",
+        "Weight": 20,
         "Override": true
       },
       {
-        "Uid": "ChestA5",
+        "Uid": "ChestA3",
         "Weight": 100,
         "Override": true
-      },
-      {
-        "Uid": "ChestA6",
-        "Weight": 30
       }
     ]
   },
@@ -447,17 +426,8 @@
     "ChestWeights": [
       {
         "Uid": "ChestA3",
-        "Weight": 0,
-        "Override": true
-      },
-      {
-        "Uid": "ChestA5",
         "Weight": 100,
         "Override": true
-      },
-      {
-        "Uid": "ChestA6",
-        "Weight": 30
       }
     ]
   },
@@ -481,11 +451,13 @@
     "ChestWeights": [
       {
         "Uid": "ChestA1",
-        "Weight": 100
+        "Weight": 100,
+        "Override": true
       },
       {
         "Uid": "ChestA2",
-        "Weight": 20
+        "Weight": 20,
+        "Override": true
       }
     ]
   },
@@ -515,13 +487,14 @@
     ],
     "ChestWeights": [
       {
-        "Uid": "ChestA3",
-        "Weight": 30,
+        "Uid": "ChestA1",
+        "Weight": 100,
         "Override": true
       },
       {
-        "Uid": "ChestA4",
-        "Weight": 100
+        "Uid": "ChestA2",
+        "Weight": 30,
+        "Override": true
       }
     ]
   },
@@ -555,18 +528,14 @@
     ],
     "ChestWeights": [
       {
-        "Uid": "ChestA2",
-        "Weight": 0,
-        "Override": true
-      },
-      {
-        "Uid": "ChestA4",
+        "Uid": "ChestA1",
         "Weight": 100,
         "Override": true
       },
       {
-        "Uid": "ChestA5",
-        "Weight": 20
+        "Uid": "ChestA2",
+        "Weight": 40,
+        "Override": true
       }
     ]
   },
@@ -604,13 +573,14 @@
     ],
     "ChestWeights": [
       {
-        "Uid": "ChestA5",
+        "Uid": "ChestA1",
         "Weight": 100,
         "Override": true
       },
       {
-        "Uid": "ChestA6",
-        "Weight": 20
+        "Uid": "ChestA2",
+        "Weight": 50,
+        "Override": true
       }
     ]
   },
@@ -648,13 +618,14 @@
     ],
     "ChestWeights": [
       {
-        "Uid": "ChestA6",
-        "Weight": 100,
+        "Uid": "ChestA1",
+        "Weight": 50,
         "Override": true
       },
       {
-        "Uid": "Chest7",
-        "Weight": 20
+        "Uid": "ChestA2",
+        "Weight": 50,
+        "Override": true
       }
     ]
   },
@@ -692,13 +663,13 @@
     ],
     "ChestWeights": [
       {
-        "Uid": "ChestA6",
-        "Weight": 100,
+        "Uid": "ChestA1",
+        "Weight": 40,
         "Override": true
       },
       {
-        "Uid": "Chest7",
-        "Weight": 50,
+        "Uid": "ChestA2",
+        "Weight": 60,
         "Override": true
       }
     ]
@@ -737,13 +708,13 @@
     ],
     "ChestWeights": [
       {
-        "Uid": "ChestA6",
-        "Weight": 100,
+        "Uid": "ChestA1",
+        "Weight": 30,
         "Override": true
       },
       {
-        "Uid": "Chest7",
-        "Weight": 100,
+        "Uid": "ChestA2",
+        "Weight": 70,
         "Override": true
       }
     ]
@@ -782,13 +753,13 @@
     ],
     "ChestWeights": [
       {
-        "Uid": "ChestA6",
-        "Weight": 100,
+        "Uid": "ChestA1",
+        "Weight": 20,
         "Override": true
       },
       {
-        "Uid": "Chest7",
-        "Weight": 120,
+        "Uid": "ChestA2",
+        "Weight": 100,
         "Override": true
       }
     ]
@@ -827,7 +798,12 @@
     ],
     "ChestWeights": [
       {
-        "Uid": "Chest7",
+        "Uid": "ChestA1",
+        "Weight": 10,
+        "Override": true
+      },
+      {
+        "Uid": "ChestA2",
         "Weight": 100,
         "Override": true
       }
