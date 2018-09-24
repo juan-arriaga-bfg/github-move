@@ -11,6 +11,31 @@ public class CameraScroll : MonoBehaviour
     private Vector2 half;
     private LayerMask defaultMask;
     
+    private Vector2? unscaledRectSize;
+    public Vector2 UnscaledRectSize => unscaledRectSize ?? (unscaledRectSize = cameraManipulator.CurrentCameraSettings.CameraClampRegion.size) ?? Vector2.one;
+
+    private Vector2? unscaledRectOffset;
+    public Vector2 UnscaledRectOffset => unscaledRectOffset ?? (unscaledRectOffset = cameraManipulator.CurrentCameraSettings.CameraClampRegion.position) ?? Vector2.one;
+
+    private float lastCheckedScale;
+    
+    public void ScaleClampRect()
+    {
+        var clamp = cameraManipulator.CurrentCameraSettings.CameraClampRegion;
+        var offsetSize = 2;
+        var CameraZoom = cameraManipulator.CameraZoom;
+        var targetZoom = cameraManipulator.TargetCameraZoom;
+        if (targetZoom < CameraZoom.ZoomMin)
+            targetZoom = CameraZoom.ZoomMin;
+        var scaleFactor = (1 + (targetZoom - CameraZoom.ZoomMin) / (CameraZoom.ZoomMax - CameraZoom.ZoomMin)) * offsetSize;
+        clamp.size = new Vector2(UnscaledRectSize.x + scaleFactor, UnscaledRectSize.y + scaleFactor);
+
+        clamp.position = new Vector2(UnscaledRectOffset.x - scaleFactor / 2,
+            UnscaledRectOffset.y - scaleFactor / 2);
+            
+        cameraManipulator.CurrentCameraSettings.CameraClampRegion = clamp;
+    }
+    
     private void Awake()
     {
         border = (int)(200 * (Screen.height / 1080f));
@@ -20,6 +45,12 @@ public class CameraScroll : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (lastCheckedScale != cameraManipulator.TargetCameraZoom)
+        {
+            ScaleClampRect();
+            lastCheckedScale = cameraManipulator.TargetCameraZoom;
+        }
+        
         if (cameraManipulator.CameraMove.IsLocked == false) return;
         
         var fingers = LeanTouch.GetFingers(true, 1);
