@@ -67,8 +67,11 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
             thisContext.Context.RendererContext.MoveElement(f, t);
             view.SetOfset();
         }
-
-        OnDrag(true);
+        
+        thisContext.Context.ActionExecutor.AddAction(new CallbackAction{Callback = controller =>
+        {
+            OnDrag(true);
+        }});
     }
     
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
