@@ -3,8 +3,7 @@
 public class MatchActionBuilderComponent : ECSEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-
-    public override int Guid { get { return ComponentGuid; } }
+    public override int Guid => ComponentGuid;
 
     private BoardLogicComponent context;
     private IMatchActionBuilder defaultBuilder;

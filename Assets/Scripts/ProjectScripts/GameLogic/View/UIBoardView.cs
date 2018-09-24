@@ -45,8 +45,8 @@ public class UIBoardView : BoardElementView
         Context = piece;
         ResetAnimation();
         UpdateVisibility(false);
-        controller = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
-        multiSize = GetMultiSize(piece);
+        controller = Context.ViewDefinition;
+        multiSize = GetMultiSize();
         SetOfset();
     }
 
@@ -54,6 +54,7 @@ public class UIBoardView : BoardElementView
     {
         IsShow = false;
         ResetAnimation();
+        offset = new Vector3(0, 0.5f);
         
         base.ResetViewOnDestroy();
     }
@@ -120,6 +121,25 @@ public class UIBoardView : BoardElementView
         sequence.Insert(0.65f, viewTransform.DOScale(new Vector3(1.1f, 0.9f), 0.1f));
         sequence.Insert(0.75f, viewTransform.DOScale(Vector3.one, 0.1f));
     }
+
+    public virtual void OnDrag(bool isEnd)
+    {
+        if(IsShow == false) return; 
+        
+        DOTween.Kill(viewTransform);
+        
+        var sequence = DOTween.Sequence().SetId(viewTransform);
+
+        if (isEnd)
+        {
+            sequence.Insert(0f, group.DOFade(1, 0.3f));
+            sequence.Insert(0F, viewTransform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack));
+            return;
+        }
+        
+        sequence.Insert(0f, group.DOFade(0, 0.2f));
+        sequence.Insert(0f, viewTransform.DOScale(Vector3.zero, 0.2f));
+    }
     
     public virtual void UpdateVisibility(bool isVisible)
     {
@@ -149,21 +169,15 @@ public class UIBoardView : BoardElementView
         });
     }
     
-    private int GetMultiSize(Piece piece)
+    private int GetMultiSize()
     {
-        var multi = piece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
-
-        if (multi == null) return 1;
-        
-        return (int)Mathf.Sqrt(multi.Mask.Count + 1);
+        return Context.Multicellular == null ? 1 : (int)Mathf.Sqrt(Context.Multicellular.Mask.Count + 1);
     }
 
     private void Cash()
     {
         if(Id == ViewType.None) return;
         
-        var viewDef = Context.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
-
-        viewDef?.RemoveView(Id);
+        controller.RemoveView(Id);
     }
 }

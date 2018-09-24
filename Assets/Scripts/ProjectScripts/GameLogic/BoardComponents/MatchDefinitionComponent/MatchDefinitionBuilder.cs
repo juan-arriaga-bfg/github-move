@@ -37,14 +37,12 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.A6.Id, new PieceMatchDef {Next = PieceType.A7Fake.Id, Previous = PieceType.A5.Id, Count = 3});
         dict.Add(PieceType.A7Fake.Id, new PieceMatchDef {Next = PieceType.A7.Id, Previous = PieceType.A6.Id, Count = 1, IsIgnore = true});
         dict.Add(PieceType.A7.Id, new PieceMatchDef {Next = PieceType.A8Fake.Id, Previous = PieceType.A6.Id, Count = 3});
-        dict.Add(PieceType.A8Fake.Id, new PieceMatchDef {Next = PieceType.A8.Id, Previous = PieceType.A7.Id, Count = 1, IsIgnore = true});
+        dict.Add(PieceType.A8Fake.Id, new PieceMatchDef {Next = PieceType.A9.Id, Previous = PieceType.A7.Id, Count = 1, IsIgnore = true});
         dict.Add(PieceType.A8.Id, new PieceMatchDef {Next = PieceType.A9Fake.Id, Previous = PieceType.A7.Id, Count = 3});
-        dict.Add(PieceType.A9Fake.Id, new PieceMatchDef {Next = PieceType.A9.Id, Previous = PieceType.A8.Id, Count = 1, IsIgnore = true});
-        dict.Add(PieceType.A9.Id, new PieceMatchDef {Next = PieceType.A10Fake.Id, Previous = PieceType.A8.Id, Count = 3});
         
-        dict = AddFakeMulticellularPiece(dict, PieceType.A10Fake.Id, PieceType.A10.Id, PieceType.A9.Id);
+        dict = AddFakeMulticellularPiece(dict, PieceType.A9Fake.Id, PieceType.A9.Id, PieceType.A8.Id);
         
-        dict.Add(PieceType.A10.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.A9.Id});
+        dict.Add(PieceType.A9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.A8.Id});
         
         // ------------------ B -------------
         
@@ -167,13 +165,26 @@ public class MatchDefinitionBuilder
         
         dict.Add(PieceType.K10.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.K9.Id});
         
-        // ------------------ X -------------
+        // ------------------ A -------------
         
-        dict.Add(PieceType.X1.Id, new PieceMatchDef {Next = PieceType.X2.Id, Previous = PieceType.None.Id, Count = 3});
-        dict.Add(PieceType.X2.Id, new PieceMatchDef {Next = PieceType.X3.Id, Previous = PieceType.X1.Id, Count = 3});
-        dict.Add(PieceType.X3.Id, new PieceMatchDef {Next = PieceType.X4.Id, Previous = PieceType.X2.Id, Count = 3});
-        dict.Add(PieceType.X4.Id, new PieceMatchDef {Next = PieceType.X5.Id, Previous = PieceType.X3.Id, Count = 3});
-        dict.Add(PieceType.X5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.X4.Id});
+        dict.Add(PieceType.L1.Id, new PieceMatchDef {Next = PieceType.L2.Id, Previous = PieceType.None.Id, Count = 3});
+        dict.Add(PieceType.L2.Id, new PieceMatchDef {Next = PieceType.L3Fake.Id, Previous = PieceType.L1.Id, Count = 3});
+        dict.Add(PieceType.L3Fake.Id, new PieceMatchDef {Next = PieceType.L3.Id, Previous = PieceType.L2.Id, Count = 1, IsIgnore = true});
+        dict.Add(PieceType.L3.Id, new PieceMatchDef {Next = PieceType.L4Fake.Id, Previous = PieceType.L2.Id, Count = 3});
+        dict.Add(PieceType.L4Fake.Id, new PieceMatchDef {Next = PieceType.L4.Id, Previous = PieceType.L3.Id, Count = 1, IsIgnore = true});
+        dict.Add(PieceType.L4.Id, new PieceMatchDef {Next = PieceType.L5Fake.Id, Previous = PieceType.L3.Id, Count = 3});
+        dict.Add(PieceType.L5Fake.Id, new PieceMatchDef {Next = PieceType.L5.Id, Previous = PieceType.L4.Id, Count = 1, IsIgnore = true});
+        dict.Add(PieceType.L5.Id, new PieceMatchDef {Next = PieceType.L6Fake.Id, Previous = PieceType.L4.Id, Count = 3});
+        dict.Add(PieceType.L6Fake.Id, new PieceMatchDef {Next = PieceType.L6.Id, Previous = PieceType.L5.Id, Count = 1, IsIgnore = true});
+        dict.Add(PieceType.L6.Id, new PieceMatchDef {Next = PieceType.L7Fake.Id, Previous = PieceType.L5.Id, Count = 3});
+        dict.Add(PieceType.L7Fake.Id, new PieceMatchDef {Next = PieceType.L7.Id, Previous = PieceType.L6.Id, Count = 1, IsIgnore = true});
+        dict.Add(PieceType.L7.Id, new PieceMatchDef {Next = PieceType.L8Fake.Id, Previous = PieceType.L6.Id, Count = 3});
+        dict.Add(PieceType.L8Fake.Id, new PieceMatchDef {Next = PieceType.L9.Id, Previous = PieceType.L7.Id, Count = 1, IsIgnore = true});
+        dict.Add(PieceType.L8.Id, new PieceMatchDef {Next = PieceType.L9Fake.Id, Previous = PieceType.L7.Id, Count = 3});
+        
+        dict = AddFakeMulticellularPiece(dict, PieceType.L9Fake.Id, PieceType.L9.Id, PieceType.L8.Id);
+        
+        dict.Add(PieceType.L9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.L8.Id});
         
         // ------------------ obstacle -------------
         
@@ -197,6 +208,16 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.OX8.Id, new PieceMatchDef {Next = PieceType.OX9.Id, Previous = PieceType.OX7.Id, Count = -1});
         dict.Add(PieceType.OX9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.OX8.Id, Count = -1});
         
+        dict.Add(PieceType.OEpic1.Id, new PieceMatchDef {Next = PieceType.OEpic2.Id, Previous = PieceType.None.Id, Count = -1});
+        dict.Add(PieceType.OEpic2.Id, new PieceMatchDef {Next = PieceType.OEpic3.Id, Previous = PieceType.OEpic1.Id, Count = -1});
+        dict.Add(PieceType.OEpic3.Id, new PieceMatchDef {Next = PieceType.OEpic4.Id, Previous = PieceType.OEpic2.Id, Count = -1});
+        dict.Add(PieceType.OEpic4.Id, new PieceMatchDef {Next = PieceType.OEpic5.Id, Previous = PieceType.OEpic3.Id, Count = -1});
+        dict.Add(PieceType.OEpic5.Id, new PieceMatchDef {Next = PieceType.OEpic6.Id, Previous = PieceType.OEpic4.Id, Count = -1});
+        dict.Add(PieceType.OEpic6.Id, new PieceMatchDef {Next = PieceType.OEpic7.Id, Previous = PieceType.OEpic5.Id, Count = -1});
+        dict.Add(PieceType.OEpic7.Id, new PieceMatchDef {Next = PieceType.OEpic8.Id, Previous = PieceType.OEpic6.Id, Count = -1});
+        dict.Add(PieceType.OEpic8.Id, new PieceMatchDef {Next = PieceType.OEpic9.Id, Previous = PieceType.OEpic7.Id, Count = -1});
+        dict.Add(PieceType.OEpic9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.OEpic8.Id, Count = -1});
+        
         dict.Add(PieceType.Chest1.Id, new PieceMatchDef {Next = PieceType.Chest2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.Chest2.Id, new PieceMatchDef {Next = PieceType.Chest3.Id, Previous = PieceType.Chest1.Id, Count = 3});
         dict.Add(PieceType.Chest3.Id, new PieceMatchDef {Next = PieceType.Chest4.Id, Previous = PieceType.Chest2.Id, Count = 3});
@@ -206,6 +227,10 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.Chest7.Id, new PieceMatchDef {Next = PieceType.Chest8.Id, Previous = PieceType.Chest6.Id, Count = 3});
         dict.Add(PieceType.Chest8.Id, new PieceMatchDef {Next = PieceType.Chest9.Id, Previous = PieceType.Chest7.Id, Count = 3});
         dict.Add(PieceType.Chest9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Chest8.Id});
+        
+        dict.Add(PieceType.ChestEpic1.Id, new PieceMatchDef {Next = PieceType.ChestEpic2.Id, Previous = PieceType.None.Id, Count = 3});
+        dict.Add(PieceType.ChestEpic2.Id, new PieceMatchDef {Next = PieceType.ChestEpic3.Id, Previous = PieceType.ChestEpic1.Id, Count = 3});
+        dict.Add(PieceType.ChestEpic3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.ChestEpic2.Id});
         
         dict.Add(PieceType.ChestA1.Id, new PieceMatchDef {Next = PieceType.ChestA2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.ChestA2.Id, new PieceMatchDef {Next = PieceType.ChestA3.Id, Previous = PieceType.ChestA1.Id, Count = 3});
@@ -222,29 +247,13 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.ChestK2.Id, new PieceMatchDef {Next = PieceType.ChestK3.Id, Previous = PieceType.ChestK1.Id, Count = 3});
         dict.Add(PieceType.ChestK3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.ChestK2.Id});
         
+        dict.Add(PieceType.ChestL1.Id, new PieceMatchDef {Next = PieceType.ChestL2.Id, Previous = PieceType.None.Id, Count = 3});
+        dict.Add(PieceType.ChestL2.Id, new PieceMatchDef {Next = PieceType.ChestL3.Id, Previous = PieceType.ChestL1.Id, Count = 3});
+        dict.Add(PieceType.ChestL3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.ChestL2.Id});
+        
         dict.Add(PieceType.Basket1.Id, new PieceMatchDef {Next = PieceType.Basket2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.Basket2.Id, new PieceMatchDef {Next = PieceType.Basket3.Id, Previous = PieceType.Basket1.Id, Count = 3});
         dict.Add(PieceType.Basket3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Basket2.Id});
-        
-        dict.Add(PieceType.ChestX1.Id, new PieceMatchDef {Next = PieceType.ChestX2.Id, Previous = PieceType.None.Id, Count = 3});
-        dict.Add(PieceType.ChestX2.Id, new PieceMatchDef {Next = PieceType.ChestX3.Id, Previous = PieceType.ChestX1.Id, Count = 3});
-        dict.Add(PieceType.ChestX3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.ChestX2.Id});
-        
-        dict.Add(PieceType.ChestZ1.Id, new PieceMatchDef {Next = PieceType.ChestZ2.Id, Previous = PieceType.None.Id, Count = 3});
-        dict.Add(PieceType.ChestZ2.Id, new PieceMatchDef {Next = PieceType.ChestZ3.Id, Previous = PieceType.ChestZ1.Id, Count = 3});
-        dict.Add(PieceType.ChestZ3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.ChestZ2.Id});
-        
-        dict.Add(PieceType.Experience1.Id, new PieceMatchDef {Next = PieceType.Experience2.Id, Previous = PieceType.None.Id, Count = 3});
-        dict.Add(PieceType.Experience2.Id, new PieceMatchDef {Next = PieceType.Experience3.Id, Previous = PieceType.Experience1.Id, Count = 3});
-        dict.Add(PieceType.Experience3.Id, new PieceMatchDef {Next = PieceType.Experience4.Id, Previous = PieceType.Experience2.Id, Count = 3});
-        dict.Add(PieceType.Experience4.Id, new PieceMatchDef {Next = PieceType.Experience5.Id, Previous = PieceType.Experience3.Id, Count = 3});
-        dict.Add(PieceType.Experience5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Experience4.Id});
-        
-        dict.Add(PieceType.Mana1.Id, new PieceMatchDef {Next = PieceType.Mana2.Id, Previous = PieceType.None.Id, Count = 3});
-        dict.Add(PieceType.Mana2.Id, new PieceMatchDef {Next = PieceType.Mana3.Id, Previous = PieceType.Mana1.Id, Count = 3});
-        dict.Add(PieceType.Mana3.Id, new PieceMatchDef {Next = PieceType.Mana4.Id, Previous = PieceType.Mana2.Id, Count = 3});
-        dict.Add(PieceType.Mana4.Id, new PieceMatchDef {Next = PieceType.Mana5.Id, Previous = PieceType.Mana3.Id, Count = 3});
-        dict.Add(PieceType.Mana5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Mana4.Id});
         
         dict.Add(PieceType.Coin1.Id, new PieceMatchDef {Next = PieceType.Coin2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.Coin2.Id, new PieceMatchDef {Next = PieceType.Coin3.Id, Previous = PieceType.Coin1.Id, Count = 3});

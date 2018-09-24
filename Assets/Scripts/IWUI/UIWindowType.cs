@@ -21,4 +21,6 @@
     public const string CodexWindow = "CodexWindow";
     
     public const string CurrencyCheatSheetWindow = "CurrencyCheatSheetWindow";
+    
+    public const string PiecesCheatSheetWindow = "PiecesCheatSheetWindow";
 }

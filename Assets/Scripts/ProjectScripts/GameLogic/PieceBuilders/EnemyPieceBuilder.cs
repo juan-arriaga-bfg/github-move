@@ -6,7 +6,7 @@
 
         CreateViewComponent(piece);
 
-        var areaLockComponent = new AreaLockComponent();
+        var areaLockComponent = new AreaLockCrossComponent();
         AddObserver(piece, areaLockComponent);
         piece.RegisterComponent(areaLockComponent)
              .RegisterComponent(new TouchReactionComponent()

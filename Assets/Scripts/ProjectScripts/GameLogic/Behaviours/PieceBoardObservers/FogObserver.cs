@@ -9,6 +9,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     private ViewDefinitionComponent viewDef;
     private LockView lockView;
     private UIBoardView view;
+    private BoardPosition key;
     
     public RectTransform GetAnchorRect()
     {
@@ -26,13 +27,14 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        var key = new BoardPosition(position.X, position.Y);
-        var def = GameDataService.Current.FogsManager.GetDef(key);
-        this.def = def;
+        key = new BoardPosition(position.X, position.Y);
+        
+        def = GameDataService.Current.FogsManager.GetDef(key);
+        
         if(def == null) return;
         
         Mask = def.Positions;
-        viewDef = thisContext.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
+        viewDef = thisContext.ViewDefinition;
 
         if (viewDef != null)
         {
@@ -68,9 +70,6 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
     public void Clear()
     {
-        var key = new BoardPosition(realPosition.X, realPosition.Y);
-        var def = GameDataService.Current.FogsManager.GetDef(key);
-        
         if(def == null) return;
         
         AddResourceView.Show(def.GetCenter(thisContext.Context), def.Reward);

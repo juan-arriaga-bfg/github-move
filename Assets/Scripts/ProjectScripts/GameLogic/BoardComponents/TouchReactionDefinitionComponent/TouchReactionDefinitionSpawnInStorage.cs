@@ -38,7 +38,13 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
         if (storage == null) return;
         
         storage.OnHideBubble = null;
-            
+
+        if (storage.isSpawnResource)
+        {
+            AddResourceView.Show(position, new CurrencyPair{Currency = Currency.GetCurrencyDef(storage.SpawnPiece).Name, Amount = amount});
+            return;
+        }
+        
         var free = new List<BoardPosition>();
         var positions = new List<BoardPosition>();
 
@@ -52,14 +58,14 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
             positions.Add(pos);
             if (positions.Count == amount) break;
         }
-
+        
         if (storage.SpawnAction != null)
         {
             piece.Context.ActionExecutor.AddAction(storage.SpawnAction);
             storage.SpawnAction = null;
             return;
         }
-
+        
         piece.Context.ActionExecutor.AddAction(new ReproductionPieceAction
         {
             From = position,

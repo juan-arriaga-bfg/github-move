@@ -1,11 +1,7 @@
-﻿using System.Linq;
-using UnityEngine;
-
-public class ChestPieceComponent : IECSComponent, IPieceBoardObserver, ITimerComponent
+﻿public class ChestPieceComponent : IECSComponent, IPieceBoardObserver, ITimerComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-    
-    public int Guid { get { return ComponentGuid; } }
+    public int Guid => ComponentGuid;
 
     public Chest Chest;
 
@@ -13,18 +9,15 @@ public class ChestPieceComponent : IECSComponent, IPieceBoardObserver, ITimerCom
     private Piece contextPiece;
     private ViewDefinitionComponent viewDef;
     
-    public TimerComponent Timer
-    {
-        get { return timer; }
-    }
-    
+    public TimerComponent Timer => timer;
+
     public void OnRegisterEntity(ECSEntity entity)
     {
         contextPiece = entity as Piece;
         
         timer = new TimerComponent();
         contextPiece.RegisterComponent(timer);
-        viewDef = contextPiece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
+        viewDef = contextPiece.ViewDefinition;
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)

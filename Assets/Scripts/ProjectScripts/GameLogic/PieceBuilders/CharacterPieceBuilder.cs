@@ -11,7 +11,7 @@
 		
 		var storage = new StorageComponent
 		{
-			SpawnPiece = PieceType.Parse(def.SpawnResources.Currency),
+			SpawnPiece = Currency.GetCurrencyDef(def.SpawnResources.Currency).Id,
 			IsAutoStart = false,
 			IsTimerShow = false,
 			Amount = def.SpawnResources.Amount,
@@ -20,7 +20,7 @@
 		
 		piece.RegisterComponent(storage);
 		AddObserver(piece, storage);
-
+		
 		var pathfindLockObserver = new PathfindLockObserver() {AutoLock = true}; 
 		AddObserver(piece, pathfindLockObserver);
 		piece.RegisterComponent(pathfindLockObserver);

@@ -5,14 +5,13 @@ using UnityEngine;
 public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-    
     public int Guid => ComponentGuid;
 
     public List<ViewType> ViewIds { get; set; }
 
     private int shownViewPriority;
     private BoardPosition Position;
-    private Dictionary<ViewType, UIBoardView> views = new Dictionary<ViewType, UIBoardView>();
+    private readonly Dictionary<ViewType, UIBoardView> views = new Dictionary<ViewType, UIBoardView>();
 
     private Piece thisContext;
     
@@ -26,6 +25,14 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     
     public void OnUnRegisterEntity(ECSEntity entity)
     {
+    }
+
+    public void OnDrag(bool isEnd)
+    {
+        foreach (var view in views.Values)
+        {
+            view.OnDrag(isEnd);
+        }
     }
 
     public void OnAddToBoard(BoardPosition position, Piece context = null)
@@ -53,14 +60,15 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
         foreach (var view in views.Values)
         {
+            if(view.IsShow == false) continue;
+            
             f.Z = t.Z += Layer + view.Layer;
             
             thisContext.Context.RendererContext.MoveElement(f, t);
-            
-            if(view.IsShow == false) continue;
-            
             view.SetOfset();
         }
+
+        OnDrag(true);
     }
     
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
@@ -68,14 +76,12 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         if(context == null) return;
 
         var keys = views.Keys.ToList();
-
+        
         foreach (var key in keys)
         {
             var view = views[key];
-            var currentPos = Position;
             
-            currentPos.Z += Layer + view.Layer;
-            thisContext.Context.RendererContext.RemoveElementAt(currentPos);
+            thisContext.Context.RendererContext.RemoveElement(view);
             views.Remove(key);
         }
     }
@@ -83,7 +89,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     public bool ShowView(int priority)
     {
         if (priority < shownViewPriority) return false;
-
+        
         shownViewPriority = priority;
 
         foreach (var view in views.Values)
@@ -107,8 +113,8 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         
         var pos = Position;
         var currentPos = Position;
-        
-        pos.Z += Layer*10;
+
+        pos.Z += Layer * 10;
         
         var element = thisContext.Context.RendererContext.CreateElementAt((int)id, pos) as UIBoardView;
         element.Init(thisContext);
@@ -130,16 +136,12 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     public void RemoveView(ViewType id)
     {
         UIBoardView view;
-
+        
         if (views.TryGetValue(id, out view) == false) return;
 
         if (view.IsShow == false)
         {
-            var currentPos = Position;
-            currentPos.Z += Layer + view.Layer;
-        
-            thisContext.Context.RendererContext.RemoveElementAt(currentPos);
-
+            thisContext.Context.RendererContext.RemoveElement(view);
             views.Remove(id);
         }
         

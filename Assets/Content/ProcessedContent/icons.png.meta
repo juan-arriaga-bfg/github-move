@@ -82,31 +82,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Worker
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 156
-        height: 180
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bcead370a1c49e74abd9c8bcc837d255
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Crystals
       rect:
         serializedVersion: 2
         x: 0
-        y: 181
+        y: 0
         width: 86
         height: 74
       alignment: 9
@@ -116,7 +96,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fd919bce646fafd43b62085f16d9d17f
+      spriteID: e1a0f22eef56f1c4498450790b1393bd
       vertices: []
       indices: 
       edges: []
@@ -126,7 +106,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 87
-        y: 181
+        y: 0
         width: 76
         height: 74
       alignment: 9
@@ -136,7 +116,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b37ac98b35272b14a94f54a076f81706
+      spriteID: ef03e9f09adf4704ea42c3ceca0de8ec
       vertices: []
       indices: 
       edges: []
@@ -145,7 +125,7 @@ TextureImporter:
       name: Coins
       rect:
         serializedVersion: 2
-        x: 157
+        x: 164
         y: 0
         width: 66
         height: 74
@@ -156,7 +136,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ff82da5d875a61d4597bf1872723f1cd
+      spriteID: d4fedaff6fc82144a93ef6544efde661
       vertices: []
       indices: 
       edges: []
@@ -165,9 +145,9 @@ TextureImporter:
       name: Mana
       rect:
         serializedVersion: 2
-        x: 157
+        x: 0
         y: 75
-        width: 60
+        width: 62
         height: 74
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
@@ -176,7 +156,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1e42964679a312f40a0a430c62bf6b8b
+      spriteID: 19b1d4eb59da463489fcd4384b9ad964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Worker
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 150
+        width: 58
+        height: 74
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e1abf8da01042942a2685003504d143
       vertices: []
       indices: 
       edges: []
@@ -185,7 +185,7 @@ TextureImporter:
       name: Timer
       rect:
         serializedVersion: 2
-        x: 164
+        x: 59
         y: 150
         width: 64
         height: 64
@@ -196,7 +196,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 07dc18439c003da468b3434188cf49fa
+      spriteID: 363e0d8b303b12942aea30c00b882b0f
       vertices: []
       indices: 
       edges: []
@@ -205,7 +205,7 @@ TextureImporter:
       name: Life
       rect:
         serializedVersion: 2
-        x: 218
+        x: 63
         y: 75
         width: 63
         height: 53
@@ -216,7 +216,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c3637ea8f4f598c42b63b377bbb0aed7
+      spriteID: ee0ebf7cd7f95214b99639242628e21b
       vertices: []
       indices: 
       edges: []
@@ -225,8 +225,8 @@ TextureImporter:
       name: Energy
       rect:
         serializedVersion: 2
-        x: 224
-        y: 0
+        x: 124
+        y: 129
         width: 38
         height: 74
       alignment: 9
@@ -236,7 +236,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b9a27a7b6a7b77740bf29fef74707bce
+      spriteID: 0a048f592ce681245ada0f1c8604d13d
       vertices: []
       indices: 
       edges: []

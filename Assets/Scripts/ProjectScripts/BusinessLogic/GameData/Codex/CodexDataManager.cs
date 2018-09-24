@@ -307,7 +307,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             {
                 itemDef.State = isPendingReward ? CodexItemState.PendingReward : CodexItemState.Unlocked;
             } 
-            else if (isPreviousPieceUnlocked)
+            else if (isPreviousPieceUnlocked || i == 0)
             {
                 itemDef.State = CodexItemState.PartLock; 
             } 
@@ -373,6 +373,38 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
 
         ret.TabDefs = new List<CodexTabDef>
         {
+            new CodexTabDef
+            {
+                Name = "Buildings",
+                ChainDefs = new List<CodexChainDef>
+                {
+                    new CodexChainDef
+                    {
+                        Name = "Wood",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.A1.Id)),
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Farm",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.B1.Id))
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Stone",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.C1.Id))
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Flower",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.K1.Id))
+                    },
+                    new CodexChainDef
+                    {
+                        Name = "Alchemist",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.L1.Id))
+                    },
+                }
+            },
             new CodexTabDef
             {
                 Name = "Energy",
@@ -445,33 +477,6 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             },
             new CodexTabDef
             {
-                Name = "Buildings",
-                ChainDefs = new List<CodexChainDef>
-                {
-                    new CodexChainDef
-                    {
-                        Name = "Wood",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.A1.Id)),
-                    },
-                    new CodexChainDef
-                    {
-                        Name = "Farm",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.B1.Id))
-                    },
-                    new CodexChainDef
-                    {
-                        Name = "Stone",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.C1.Id))
-                    },
-                    new CodexChainDef
-                    {
-                        Name = "Flower",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.K1.Id))
-                    },
-                }
-            },
-            new CodexTabDef
-            {
                 Name = "Chests",
                 ChainDefs = new List<CodexChainDef>
                 {
@@ -497,13 +502,13 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     },
                     new CodexChainDef
                     {
-                        Name = "X",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestX1.Id)),
+                        Name = "Alchemist",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestL1.Id)),
                     },
                     new CodexChainDef
                     {
-                        Name = "Z",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestZ1.Id)),
+                        Name = "Epic",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestEpic1.Id)),
                     },
                     new CodexChainDef
                     {
@@ -529,13 +534,8 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     },
                     new CodexChainDef
                     {
-                        Name = "Mana",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Mana1.Id)),
-                    },
-                    new CodexChainDef
-                    {
-                        Name = "Experience",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Experience1.Id)),
+                        Name = "Worker",
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Worker1.Id)),
                     },
                 }
             }

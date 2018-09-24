@@ -52,6 +52,12 @@ public class DevTools : MonoBehaviour
         var model = UIService.Get.GetCachedModel<UICodexWindowModel>(UIWindowType.CurrencyCheatSheetWindow);
         UIService.Get.ShowWindow(UIWindowType.CurrencyCheatSheetWindow);
     }
+    
+    public void OnPiecesCheatSheetClick()
+    {
+        var model = UIService.Get.GetCachedModel<UICodexWindowModel>(UIWindowType.PiecesCheatSheetWindow);
+        UIService.Get.ShowWindow(UIWindowType.PiecesCheatSheetWindow);
+    }
 
     public void OnDebug1Click()
     {

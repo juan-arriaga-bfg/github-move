@@ -50,6 +50,15 @@ public static class PathfindIgnoreBuilder
          PieceType.OX7.Id,
          PieceType.OX8.Id,
          PieceType.OX9.Id,
+         PieceType.OEpic1.Id,
+         PieceType.OEpic2.Id,
+         PieceType.OEpic3.Id,
+         PieceType.OEpic4.Id,
+         PieceType.OEpic5.Id,
+         PieceType.OEpic6.Id,
+         PieceType.OEpic7.Id,
+         PieceType.OEpic8.Id,
+         PieceType.OEpic9.Id,
          PieceType.Fog.Id
       });
       
@@ -71,6 +80,15 @@ public static class PathfindIgnoreBuilder
       dict.Add(PieceType.OX7.Id, obstacleIgnorePices);
       dict.Add(PieceType.OX8.Id, obstacleIgnorePices);
       dict.Add(PieceType.OX9.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OEpic1.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OEpic2.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OEpic3.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OEpic4.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OEpic5.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OEpic6.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OEpic7.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OEpic8.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OEpic9.Id, obstacleIgnorePices);
    }
    
    private static void InitMines(Dictionary<int, HashSet<int>> dict)
@@ -95,13 +113,21 @@ public static class PathfindIgnoreBuilder
          PieceType.OX7.Id,
          PieceType.OX8.Id,
          PieceType.OX9.Id,
+         PieceType.OEpic1.Id,
+         PieceType.OEpic2.Id,
+         PieceType.OEpic3.Id,
+         PieceType.OEpic4.Id,
+         PieceType.OEpic5.Id,
+         PieceType.OEpic6.Id,
+         PieceType.OEpic7.Id,
+         PieceType.OEpic8.Id,
+         PieceType.OEpic9.Id,
          PieceType.Fog.Id
       });
       
       dict.Add(PieceType.MineC.Id, mineIgnorePieces);
-      dict.Add(PieceType.MineX.Id, mineIgnorePieces);
-      dict.Add(PieceType.MineY.Id, mineIgnorePieces);
-      dict.Add(PieceType.MineZ.Id, mineIgnorePieces);
+      dict.Add(PieceType.MineK.Id, mineIgnorePieces);
+      dict.Add(PieceType.MineL.Id, mineIgnorePieces);
    }
 
    private static void InitCharacters(Dictionary<int, HashSet<int>> dict)
@@ -126,6 +152,15 @@ public static class PathfindIgnoreBuilder
          PieceType.OX7.Id,
          PieceType.OX8.Id,
          PieceType.OX9.Id,
+         PieceType.OEpic1.Id,
+         PieceType.OEpic2.Id,
+         PieceType.OEpic3.Id,
+         PieceType.OEpic4.Id,
+         PieceType.OEpic5.Id,
+         PieceType.OEpic6.Id,
+         PieceType.OEpic7.Id,
+         PieceType.OEpic8.Id,
+         PieceType.OEpic9.Id,
          PieceType.Fog.Id
       });
       
@@ -153,7 +188,7 @@ public static class PathfindIgnoreBuilder
       if(dictLinks.ContainsKey(pieceTypeId))
          return new PathfindIgnoreComponent(dictLinks[pieceTypeId]);
       
-      Debug.LogWarning(string.Format("[PathfindIgnoreBuilder] id {0} not initialized", pieceTypeId));
+      Debug.LogWarning($"[PathfindIgnoreBuilder] id {pieceTypeId} not initialized");
       return PathfindIgnoreComponent.Empty;
    }
 }

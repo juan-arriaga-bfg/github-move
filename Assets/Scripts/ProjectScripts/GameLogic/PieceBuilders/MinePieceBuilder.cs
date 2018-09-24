@@ -6,8 +6,8 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 	{
 		var piece = base.Build(pieceType, context);
 		
-		CreateViewComponent(piece);
-
+		AddView(piece, ViewType.LevelLabel);
+		
 		piece.RegisterComponent(new DraggablePieceComponent());
 		piece.RegisterComponent(new TimerComponent());
 		

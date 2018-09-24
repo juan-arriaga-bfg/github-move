@@ -4,7 +4,7 @@ using System.Text;
 
 public class BoardLogicComponent : ECSEntity,
     IMatchDefinitionComponent, IFieldFinderComponent, IEmptyCellsFinderComponent, IMatchActionBuilderComponent, IPiecePositionsCacheComponent,
-    IPieceFlyerComponent, ICharactersLogicComponent
+    IPieceFlyerComponent, ICharactersLogicComponent, ICellHintsComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -60,7 +60,10 @@ public class BoardLogicComponent : ECSEntity,
     
     protected CharactersLogicComponent charactersLogic;
     public CharactersLogicComponent CharactersLogic => charactersLogic ?? (charactersLogic = GetComponent<CharactersLogicComponent>(CharactersLogicComponent.ComponentGuid));
-
+    
+    protected CellHintsComponent cellHints;
+    public CellHintsComponent CellHints => cellHints ?? (cellHints = GetComponent<CellHintsComponent>(CellHintsComponent.ComponentGuid));
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
         context = entity as BoardController;
@@ -327,36 +330,29 @@ public class BoardLogicComponent : ECSEntity,
         var fromPiece = GetPieceAt(from);
         var toPiece = GetPieceAt(to);
         
-        if (fromPiece == null)
-            return false;
+        if (fromPiece == null) return false;
         
-        var multicellular = fromPiece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
         var observer = fromPiece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
         
-        if (multicellular != null)
+        if (fromPiece.Multicellular != null)
         {
-            if(fromPiece != toPiece && toPiece != null)
-                return false;
+            if(fromPiece != toPiece && toPiece != null) return false;
             
             var targetPositions = new List<BoardPosition>();
-            var sourcePositions = new List<BoardPosition>();
             
             observer?.OnMovedFromToStart(@from, to);
             
-            for (int i = 0; i < multicellular.Mask.Count; i++)
+            foreach (var maskPos in fromPiece.Multicellular.Mask)
             {
-                var maskPos = multicellular.Mask[i];
                 var targetPos = maskPos + to;
-                var sourcePos = maskPos + from;
+                var sourcePos = maskPos + @from;
                 
                 targetPositions.Add(targetPos);
-                sourcePositions.Add(sourcePos);
                 RemovePieceFromBoardSilent(sourcePos);
             }
-            
-            for (int i = 0; i < multicellular.Mask.Count; i++)
+
+            foreach (var targetPos in targetPositions)
             {
-                var targetPos = targetPositions[i];
                 AddPieceToBoardSilent(targetPos.X, targetPos.Y, fromPiece);
             }
             

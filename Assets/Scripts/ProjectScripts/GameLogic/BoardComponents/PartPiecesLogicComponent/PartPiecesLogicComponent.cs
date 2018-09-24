@@ -27,13 +27,12 @@ public class PartPiecesLogicComponent : IECSComponent
         if(bubble.ContainsKey(position)) return;
         
         var piece = context.BoardLogic.GetPieceAt(position);
-        var viewDef = piece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
         
-        if(viewDef == null) return;
+        if(piece.ViewDefinition == null) return;
         
-        bubble.Add(position, viewDef);
+        bubble.Add(position, piece.ViewDefinition);
         
-        var view = viewDef.AddView(ViewType.Bubble) as BubbleView;
+        var view = piece.ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
         
         view.SetData("Build Castle?", $"Send <sprite name={Currency.Worker.Name}>", OnClick);
         view.Change(true);

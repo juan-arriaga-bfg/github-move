@@ -33,7 +33,6 @@ public class FieldControllerComponent : IECSComponent
         
         if (fieldDef.Pieces == null)
         {
-            
             var pieces = new Dictionary<int, List<BoardPosition>>(GameDataService.Current.FieldManager.Pieces)
                 {
                     {PieceType.Fog.Id, CreateFog()}
@@ -95,25 +94,29 @@ public class FieldControllerComponent : IECSComponent
 
     private void TestFieldOleg()
     {
-        AddPieces(new BoardPosition(4, 16), PieceType.O1.Id,  PieceType.O5.Id);
-        AddPieces(new BoardPosition(6, 16), PieceType.OX1.Id, PieceType.OX5.Id);
+        AddPieces(new BoardPosition(4, 16), PieceType.O1.Id,  PieceType.O9.Id);
+        AddPieces(new BoardPosition(5, 16), PieceType.OX1.Id, PieceType.OX9.Id);
+        AddPieces(new BoardPosition(6, 16), PieceType.OEpic1.Id, PieceType.OEpic9.Id);
         
         AddPieces(new BoardPosition(10, 12), PieceType.B1.Id, PieceType.B5.Id);
-        AddPieces(new BoardPosition(12, 12), PieceType.C1.Id, PieceType.C12.Id, true);
-        AddPieces(new BoardPosition(13, 12), PieceType.A1.Id, PieceType.A10.Id, true);
-        AddPieces(new BoardPosition(14, 12), PieceType.D1.Id, PieceType.D4.Id);
+        AddPieces(new BoardPosition(11, 12), PieceType.C1.Id, PieceType.C12.Id, true);
+        AddPieces(new BoardPosition(12, 12), PieceType.A1.Id, PieceType.A9.Id, true);
+        AddPieces(new BoardPosition(13, 12), PieceType.K1.Id, PieceType.K10.Id, true);
+        AddPieces(new BoardPosition(14, 12), PieceType.L1.Id, PieceType.L9.Id, true);
+        AddPieces(new BoardPosition(15, 12), PieceType.D1.Id, PieceType.D4.Id);
         AddPieces(new BoardPosition(16, 12), PieceType.E1.Id, PieceType.E5.Id);
         AddPieces(new BoardPosition(18, 12), PieceType.F1.Id, PieceType.F5.Id);
         AddPieces(new BoardPosition(20, 12), PieceType.G1.Id, PieceType.G4.Id);
         AddPieces(new BoardPosition(22, 12), PieceType.H1.Id, PieceType.H4.Id);
         AddPieces(new BoardPosition(24, 12), PieceType.I1.Id, PieceType.I5.Id);
-        AddPieces(new BoardPosition(26, 12), PieceType.J1.Id, PieceType.J5.Id);
+        AddPieces(new BoardPosition(25, 12), PieceType.J1.Id, PieceType.J5.Id);
         
+        AddPieces(new BoardPosition(26, 12), PieceType.ChestEpic1.Id, PieceType.ChestEpic3.Id);
         AddPieces(new BoardPosition(26, 16), PieceType.Chest1.Id, PieceType.Chest9.Id);
         AddPieces(new BoardPosition(27, 16), PieceType.ChestA1.Id, PieceType.ChestA6.Id);
         
-        AddPieces(new BoardPosition(28, 10), PieceType.ChestX1.Id, PieceType.ChestX3.Id);
-        AddPieces(new BoardPosition(28, 14), PieceType.ChestZ1.Id, PieceType.ChestZ3.Id);
+        AddPieces(new BoardPosition(28, 10), PieceType.ChestK1.Id, PieceType.ChestK3.Id);
+        AddPieces(new BoardPosition(28, 14), PieceType.ChestL1.Id, PieceType.ChestL3.Id);
         AddPieces(new BoardPosition(28, 18), PieceType.ChestC1.Id, PieceType.ChestC3.Id);
         AddPieces(new BoardPosition(28, 22), PieceType.Basket1.Id, PieceType.Basket3.Id);
         
@@ -127,7 +130,6 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(19, 16), PieceType.C1.Id, PieceType.C11.Id);
         AddPieces(new BoardPosition(20, 16), PieceType.D1.Id, PieceType.D5.Id);
         AddPieces(new BoardPosition(21, 16), PieceType.Char1.Id, PieceType.Char9.Id);
-        AddPieces(new BoardPosition(22, 16), PieceType.Mana1.Id, PieceType.Mana5.Id);
         AddPieces(new BoardPosition(23, 16), PieceType.Magic1.Id, PieceType.Magic.Id);
         AddPieces(new BoardPosition(24, 16), PieceType.Magic1.Id, PieceType.Magic.Id);
         AddPieces(new BoardPosition(25, 16), PieceType.Magic.Id, PieceType.Magic.Id);
