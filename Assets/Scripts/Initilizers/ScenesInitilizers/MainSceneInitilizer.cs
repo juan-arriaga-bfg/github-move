@@ -14,6 +14,8 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         IWUISettings.Instance.SetResourceManager(new DefaultUIResourceManager());
         
         InitGameField();
+
+        ConnectQuestManager();
         
         // cache windows
         IWUIManager.Instance.Init(new[]
@@ -42,6 +44,12 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
 
             onComplete?.Invoke();
         };
+    }
+
+    // Events subscribtion
+    private void ConnectQuestManager()
+    {
+         QuestService.Current.ConnectToBoard();
     }
 
     private void InitGameField()

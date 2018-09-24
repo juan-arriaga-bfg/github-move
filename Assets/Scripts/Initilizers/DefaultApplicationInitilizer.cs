@@ -100,6 +100,12 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         GameDataService.Instance.SetManager(dataManager);
         
         dataManager.SetupComponents();
+        
+        // Quests and tasks
+        QuestManager questManager = new QuestManager();
+        QuestService.Instance.SetManager(questManager);
+        
+        questManager.Init();
     }
     
     void OnApplicationPause(bool pauseStatus)

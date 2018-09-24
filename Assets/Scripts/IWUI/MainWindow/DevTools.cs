@@ -69,5 +69,7 @@ public class DevTools : MonoBehaviour
     public void OnDebug2Click()
     {
         Debug.Log("OnDebug2Click");
+        
+        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
     }
 }
