@@ -30,4 +30,10 @@ public class TaskCreatePieceCounterEntity : TaskCounterEntity, IBoardEventListen
             CurrentValue += 1;
         }
     }
+    
+    public override string ToString()
+    {
+        string ret = $"{GetType()} [{Id}], State: {State}, Progress: {PieceType.GetDefById(PieceId).Abbreviations[0]} - {CurrentValue}/{TargetValue}";
+        return ret;
+    }
 }

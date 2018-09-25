@@ -8,14 +8,17 @@ public class QuestManager : ECSEntity
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
-    private List<QuestEntity> activeQuests = new List<QuestEntity>();
-    private List<QuestStarterEntity> questStarters = new List<QuestStarterEntity>();
+    private List<QuestEntity> activeQuests;
+    private List<QuestStarterEntity> questStarters;
 
     public void Init()
     {
+        activeQuests = new List<QuestEntity>();
+        questStarters = new List<QuestStarterEntity>();
+        
         var questStarter1 = GameDataService.Current.QuestsManager.InstantiateQuestStarter("Quest1");
         var questStarter2 = GameDataService.Current.QuestsManager.InstantiateQuestStarter("Quest2");
-
+        
         questStarters.Add(questStarter1);
         questStarters.Add(questStarter2);
 
@@ -72,6 +75,19 @@ public class QuestManager : ECSEntity
                 
                 quest.Start();
             }
+        }
+    }
+
+    public void Cleanup()
+    {
+        if (activeQuests == null)
+        {
+            return;
+        }
+
+        foreach (var quest in activeQuests)
+        {
+            quest.Cleanup();
         }
     }
 }

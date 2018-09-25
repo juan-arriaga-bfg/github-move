@@ -49,7 +49,7 @@ public abstract class TaskCounterEntity : TaskEntity
 
     public override string ToString()
     {
-        string ret = $"Task: {Id}, State: {State}, Progress: {CurrentValue}/{TargetValue}";
+        string ret = $"{GetType()} [{Id}], State: {State}, Progress: {CurrentValue}/{TargetValue}";
         return ret;
     }
 }

@@ -42,6 +42,20 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         
         Debug.Log("Start: " + this);
     }
+    
+    public void Cleanup()
+    {
+        if (activeTasks == null)
+        {
+            return;
+        }
+        
+        for (int i = 0; i < activeTasks.Count; i++)
+        {
+            var task = activeTasks[i];
+            task.Cleanup();
+        }
+    }
 
     private void StartActiveTasks()
     {

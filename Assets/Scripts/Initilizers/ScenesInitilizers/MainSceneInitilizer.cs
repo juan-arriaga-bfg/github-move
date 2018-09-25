@@ -15,6 +15,8 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         
         InitGameField();
 
+        // Should be called after BoardService initialization
+        // Can't be created at DefaultApplicationinitializer because should be recreated after Reset Progress
         ConnectQuestManager();
         
         // cache windows
@@ -49,7 +51,13 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
     // Events subscribtion
     private void ConnectQuestManager()
     {
-         QuestService.Current.ConnectToBoard();
+        // Quests and tasks
+        QuestManager questManager = new QuestManager();
+        QuestService.Instance.SetManager(questManager);
+        
+        questManager.Init();
+        
+        QuestService.Current.ConnectToBoard();
     }
 
     private void InitGameField()

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,6 +28,11 @@ public class DevTools : MonoBehaviour
         
         model.OnAccept = () =>
         {
+            QuestService.Current.Cleanup();
+            QuestService.Instance.SetManager(null);
+            
+            BoardService.Instance.SetManager(null);
+            
             var profileBuilder = new DefaultProfileBuilder();
             ProfileService.Instance.Manager.ReplaceProfile(profileBuilder.Create());
             
@@ -71,5 +77,11 @@ public class DevTools : MonoBehaviour
         Debug.Log("OnDebug2Click");
         
         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
+        
+#if LEAKWATCHER
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        Debug.Log(LeakWatcher.Instance.DataAsString(false));
+#endif
     }
 }

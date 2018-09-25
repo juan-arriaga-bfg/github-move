@@ -37,10 +37,12 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
         }
 
         var connectedToBoard = this as IConnectedToBoardEvent;
-        if (connectedToBoard != null)
-        {
-            connectedToBoard.DisconnectFromBoard();
-            connectedToBoard.ConnectToBoard();
-        }
+        connectedToBoard?.ConnectToBoard();
+    }
+
+    public void Cleanup()
+    {
+        var connectedToBoard = this as IConnectedToBoardEvent;
+        connectedToBoard?.DisconnectFromBoard();
     }
 }
