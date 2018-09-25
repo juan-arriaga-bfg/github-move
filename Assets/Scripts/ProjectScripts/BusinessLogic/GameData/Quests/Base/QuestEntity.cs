@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Quests;
+using UnityEngine;
 
+[JsonObject(MemberSerialization.OptIn)]
 public class TaskDef
 {
-    public string TaskId { get; protected set; }
-    public int Order { get; protected set; }
+    [JsonProperty] public string TaskId { get; protected set; }
+    [JsonProperty] public int Order { get; protected set; }
 }
 
 [JsonObject(MemberSerialization.OptIn)]
@@ -37,6 +39,8 @@ public class QuestEntity : ECSEntity, IECSSerializeable
 
         SelectActiveTasks();
         StartActiveTasks();
+        
+        Debug.Log("Start: " + this);
     }
 
     private void StartActiveTasks()
@@ -84,7 +88,8 @@ public class QuestEntity : ECSEntity, IECSSerializeable
 
     private void TaskChanged(TaskEntity task)
     {
-        OnChanged(this, task);
+        Debug.Log("TaskChanged: " + this);
+        OnChanged?.Invoke(this, task);
     }
 
     private void SortTasks()

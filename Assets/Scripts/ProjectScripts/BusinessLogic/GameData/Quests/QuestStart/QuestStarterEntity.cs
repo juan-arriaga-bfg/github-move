@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using UnityEngine;
 
 [JsonObject(MemberSerialization.OptIn)]
 public class QuestStarterEntity : ECSEntity, IECSSerializeable
@@ -29,14 +30,26 @@ public class QuestStarterEntity : ECSEntity, IECSSerializeable
     
     public bool Check()
     {
-        foreach (var condition in conditions)
+        bool isTimeToStart = true;
+        
+        string log = $"[QuestStarterEntity] => Check: Starter Id: {Id}";
+
+        for (var i = 0; i < conditions.Count; i++)
         {
-            if (!condition.Check())
+            var condition = conditions[i];
+            var result    = condition.Check();
+            log += "\n" + $"Condition {i + 1}/{conditions.Count}: {condition.Id}, Result: {result}";
+
+            if (!result)
             {
-                return false;
+                isTimeToStart = false;
+                break;
             }
         }
 
-        return false;
+        log += "\n" + $"Resolution: {(isTimeToStart ? "START quest with id: " + QuestToStartId : "SKIP")}";
+        Debug.Log(log);
+        
+        return isTimeToStart;
     }
 }

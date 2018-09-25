@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.Serialization.Formatters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Quests;
 using UnityEngine;
 
 public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<QuestDefOld>>
@@ -90,7 +87,7 @@ public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<Q
 #if DEBUG
             if (ret.ContainsKey(id))
             {
-                Debug.LogError($"[QuestsDataManager] => Parse: Duplicate ID '{id} found in {file}!");
+                Debug.LogError($"[QuestsDataManager] => Parse: Duplicate ID '{id}' found in '{file}'!");
             }
 #endif
             
@@ -102,6 +99,12 @@ public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<Q
 
     private T InstantiateById<T>(string id) where T : IECSComponent
     {
+        if (string.IsNullOrEmpty(id))
+        {
+            Debug.LogError($"[QuestsDataManager] => InstantiateById: called with null or empty id!");
+            return default(T);
+        }
+        
         Dictionary<string, JToken> dictWithConfigs;
         if (!cache.TryGetValue(typeof(T), out dictWithConfigs))
         {

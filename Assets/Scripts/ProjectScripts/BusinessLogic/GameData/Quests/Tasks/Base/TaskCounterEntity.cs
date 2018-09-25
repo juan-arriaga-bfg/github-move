@@ -22,7 +22,8 @@ public abstract class TaskCounterEntity : TaskEntity
             
             currentValue = value;
             Check();
-            OnChanged(this);
+
+            OnChanged?.Invoke(this);
         }
     }
 
@@ -35,7 +36,7 @@ public abstract class TaskCounterEntity : TaskEntity
 
         if (IsInProgress())
         {
-            bool result = currentValue > TargetValue;
+            bool result = currentValue >= TargetValue;
             if (result)
             {
                 State = TaskState.Completed;

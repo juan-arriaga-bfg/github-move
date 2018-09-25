@@ -20,12 +20,12 @@ public class TaskCreatePieceCounterEntity : TaskCounterEntity, IBoardEventListen
 
     public void OnBoardEvent(int code, object context)
     {
-        if (State != TaskState.InProgress)
+        if (!IsInProgress())
         {
             return;
         }
         
-        if (code == GameEventsCodes.Match && PieceId == (int)context)
+        if (code == GameEventsCodes.CreatePiece && PieceId == (int)context)
         {
             CurrentValue += 1;
         }

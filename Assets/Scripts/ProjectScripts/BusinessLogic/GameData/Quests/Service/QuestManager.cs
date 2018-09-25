@@ -36,14 +36,15 @@ public class QuestManager : ECSEntity
     }
    
     public void ConnectToBoard()
-    {
-        CheckConditions();
-        
+    {   
+        // Run quests from user profile
         foreach (var quest in activeQuests)
         {
             quest.Start();
-            Debug.Log(quest.ToString());
         }
+        
+        // Run new quests if conditions changed 
+        CheckConditions();
 
         JsonSerializerSettings serializerSettings = new JsonSerializerSettings
         {
@@ -51,12 +52,12 @@ public class QuestManager : ECSEntity
             TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple,
         };
         
-        var text1 = JsonConvert.SerializeObject(activeQuests[0], serializerSettings);
-        var text2 = JsonConvert.SerializeObject(questStarters[0], serializerSettings);
-
-        var item1 = JsonConvert.DeserializeObject<ECSEntity>(text1, serializerSettings);
-        var item2 = JsonConvert.DeserializeObject<ECSEntity>(text2, serializerSettings);
-        int i    = 0;
+        // var text1 = JsonConvert.SerializeObject(activeQuests[0], serializerSettings);
+        // var text2 = JsonConvert.SerializeObject(questStarters[0], serializerSettings);
+        //
+        // var item1 = JsonConvert.DeserializeObject<ECSEntity>(text1, serializerSettings);
+        // var item2 = JsonConvert.DeserializeObject<ECSEntity>(text2, serializerSettings);
+        // int i    = 0;
     }
 
     private void CheckConditions()
@@ -68,6 +69,8 @@ public class QuestManager : ECSEntity
             {
                 var quest = GameDataService.Current.QuestsManager.InstantiateQuest(starter.QuestToStartId);
                 activeQuests.Add(quest);
+                
+                quest.Start();
             }
         }
     }
