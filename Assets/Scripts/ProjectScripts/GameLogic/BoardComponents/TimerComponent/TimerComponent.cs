@@ -16,6 +16,8 @@ public class TimerComponent : IECSComponent, IECSSystem
     
     public DateTime StartTime;
     public DateTime CompleteTime;
+
+    public BoardTimerView View;
     
     public long StartTimeLong => StartTime.ConvertToUnixTime();
     
@@ -80,13 +82,24 @@ public class TimerComponent : IECSComponent, IECSSystem
     {
         return (int)StartTime.GetTime().TotalSeconds / (float)Delay;
     }
+
+    public void FastComplete()
+    {
+        CurrencyHellper.Purchase(Currency.Timer.Name, 1, GetPrise(), success =>
+        {
+            if(success == false) return;
+            
+            Stop();
+            OnComplete();
+        });
+    }
     
     public CurrencyPair GetPrise()
     {
         if (Price == null) return null;
 
         var amount = Mathf.Max(1, Mathf.CeilToInt(Price.Amount * (1 - GetProgress())));
-        
-        return  new CurrencyPair {Currency = Price.Currency, Amount = amount};
+
+        return new CurrencyPair {Currency = Price.Currency, Amount = amount};
     }
 }

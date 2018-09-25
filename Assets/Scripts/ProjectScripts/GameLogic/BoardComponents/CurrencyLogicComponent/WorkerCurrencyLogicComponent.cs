@@ -69,6 +69,23 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             
             UIErrorWindowController.AddError("All workers are busy!");
             context.HintCooldown.Step(position);
+
+            foreach (var time in completeTimesList)
+            {
+                var pos = BoardPosition.Parse(time);
+                var piece = context.BoardLogic.GetPieceAt(position);
+
+                var timer = piece?.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
+                
+                if(timer == null) continue;
+
+                var view = timer.View;
+                
+                if(view == null) continue;
+                
+                view.SetState(position.Equals(pos) ? TimerViewSate.Select : TimerViewSate.Hide);
+            }
+            
             return false;
         }
         

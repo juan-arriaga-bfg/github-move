@@ -22,14 +22,7 @@
 				"Complete now!",
 				"Would you like to build the item right now for crystals?",
 				"Complete now ",
-				storage.Timer,
-				() => CurrencyHellper.Purchase(Currency.Timer.Name, 1, storage.Timer.GetPrise(), success =>
-				{
-					if(success == false) return;
-					
-					storage.Timer.Stop();
-					storage.Timer.OnComplete();
-				}));
+				storage.Timer);
 		}
         
 		return IsDone;

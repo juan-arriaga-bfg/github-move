@@ -160,12 +160,6 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         if (Timer.IsStarted == false) Timer.Start();
     }
     
-    public void Fast()
-    {
-        Timer.Stop();
-        Timer.OnComplete();
-    }
-    
     private void OnComplete()
     {
         thisContext.ViewDefinition.AddView(ViewType.BoardTimer).Change(false);

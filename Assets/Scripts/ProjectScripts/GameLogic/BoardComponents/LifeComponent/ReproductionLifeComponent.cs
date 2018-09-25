@@ -57,17 +57,9 @@ public class ReproductionLifeComponent : StorageLifeComponent
             "Complete now!",
             "Would you like to build the item right now for crystals?",
             "Complete now ",
-            cooldown,
-            () => CurrencyHellper.Purchase(Currency.Timer.Name, 1, cooldown.GetPrise(), success =>
-            {
-                if(success == false) return;
-					
-                cooldown.Stop();
-                cooldown.OnComplete();
-            }));
-            
+            cooldown);
+        
         return false;
-
     }
 
     protected override void Success()
