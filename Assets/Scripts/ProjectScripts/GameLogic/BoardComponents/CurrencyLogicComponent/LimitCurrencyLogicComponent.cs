@@ -25,15 +25,9 @@ public class LimitCurrencyLogicComponent : ECSEntity
     {
     }
     
-    protected virtual void Add(int amount, bool isExtra = false)
+    protected virtual void Add(int amount)
     {
         if (amount <= 0) return;
-        
-        if (isExtra)
-        {
-            CurrencyHellper.Purchase(targetItem.Currency, amount);
-            return;
-        }
         
         if (limitItem.Amount <= targetItem.Amount) return;
 

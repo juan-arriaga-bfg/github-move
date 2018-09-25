@@ -164,6 +164,12 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     {
         Timer.Stop();
         Timer.OnComplete();
+    }
+    
+    private void OnComplete()
+    {
+        thisContext.ViewDefinition.AddView(ViewType.BoardTimer).Change(false);
+        State = BuildingState.Complete;
         
         if (thisContext.Multicellular == null)
         {
@@ -179,11 +185,5 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
             
             return;
         }
-    }
-    
-    private void OnComplete()
-    {
-        thisContext.ViewDefinition.AddView(ViewType.BoardTimer).Change(false);
-        State = BuildingState.Complete;
     }
 }
