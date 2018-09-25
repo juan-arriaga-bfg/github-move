@@ -1,13 +1,46 @@
+using System;
 using Newtonsoft.Json;
 using Quests;
 
-public class TaskEntity : ECSEntity, IECSSerializeable
+public abstract class TaskEntity : ECSEntity, IECSSerializeable
 {
-    public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-    
-    public override int Guid => ComponentGuid;
+    [JsonProperty] public string Id { get; protected set; }
 
-    [JsonProperty] public string Id;
+    [JsonProperty] public int Order;
 
     [JsonProperty] public TaskState State { get; protected set; }
+
+    public bool IsInProgress()
+    {
+        return State == TaskState.New || State == TaskState.InProgress;
+    }
+    
+    public bool IsCompleted()
+    {
+        return State == TaskState.Completed || State == TaskState.Claimed;
+    }
+    
+    public bool IsClaimed()
+    {
+        return State == TaskState.Claimed;
+    }
+    
+    public Action<TaskEntity> OnChanged;
+
+    protected abstract bool Check();
+
+    public virtual void Start()
+    {
+        if (State == TaskState.Pending)
+        {
+            State = TaskState.New;
+        }
+
+        var connectedToBoard = this as IConnectedToBoardEvent;
+        if (connectedToBoard != null)
+        {
+            connectedToBoard.DisconnectFromBoard();
+            connectedToBoard.ConnectToBoard();
+        }
+    }
 }

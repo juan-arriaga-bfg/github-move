@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using Quests;
 
 [JsonObject(MemberSerialization.OptIn)]
-public abstract class SubtaskCounterEntity : SubtaskEntity
+public abstract class TaskCounterEntity : TaskEntity
 {
     [JsonProperty] 
     public int TargetValue  { get; protected set; }
@@ -28,24 +28,27 @@ public abstract class SubtaskCounterEntity : SubtaskEntity
 
     protected override bool Check()
     {
-        switch (State)
+        if (IsCompleted())
         {
-            case SubtaskState.Completed:
-                return true;
-            
-            case SubtaskState.InProgress:
-            {
-                bool result = currentValue > TargetValue;
-                if (result)
-                {
-                    State = SubtaskState.Completed;
-                    return true;
-                }
+            return true;
+        }
 
-                break;
+        if (IsInProgress())
+        {
+            bool result = currentValue > TargetValue;
+            if (result)
+            {
+                State = TaskState.Completed;
+                return true;
             }
         }
 
         return false;
+    }
+
+    public override string ToString()
+    {
+        string ret = $"Task: {Id}, State: {State}, Progress: {CurrentValue}/{TargetValue}";
+        return ret;
     }
 }

@@ -2,8 +2,10 @@
 {
     public enum TaskState
     {
-        Unknown,
+        Pending,
+        New,
         InProgress,
         Completed,
+        Claimed
     }
 }

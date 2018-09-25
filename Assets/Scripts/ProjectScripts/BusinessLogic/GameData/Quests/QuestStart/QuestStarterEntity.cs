@@ -8,9 +8,13 @@ public class QuestStarterEntity : ECSEntity, IECSSerializeable
     
     public override int Guid => ComponentGuid;
 
+    [JsonProperty] public string Id { get; protected set; }
+    
+    [JsonProperty] public List<string> ConditionIds { get; protected set; }
+    
     private List<QuestStartConditionComponent> conditions = new List<QuestStartConditionComponent>();
     
-    [JsonProperty] public string TaskToStartId { get; protected set; }
+    [JsonProperty] public string QuestToStartId { get; protected set; }
     
     public override ECSEntity RegisterComponent(IECSComponent component, bool isCollection = false)
     {
@@ -23,21 +27,16 @@ public class QuestStarterEntity : ECSEntity, IECSSerializeable
         return base.RegisterComponent(component, isCollection);
     }
     
-    public void Check()
+    public bool Check()
     {
         foreach (var condition in conditions)
         {
             if (!condition.Check())
             {
-                return;
+                return false;
             }
         }
-        
-        StartQuest();
-    }
 
-    public void StartQuest()
-    {
-        
+        return false;
     }
 }

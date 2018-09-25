@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -15,9 +16,13 @@ public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<Q
     public int Guid => ComponentGuid;
 
     // private Dictionary<string, QuestBase>   quests;
+    private Dictionary<string, JToken> questStartConditions;
+    private Dictionary<string, JToken> questStarters;
     private Dictionary<string, JToken> tasks;
-    private Dictionary<string, string> subtasks;
+    private Dictionary<string, JToken> quests;
 
+    private Dictionary<Type, Dictionary<string, JToken>> cache;
+    
     private readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings
     {
         TypeNameHandling = TypeNameHandling.Objects,
@@ -44,49 +49,24 @@ public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<Q
         {
             if (string.IsNullOrEmpty(error))
             {
-                // quests = data;
-
-                // quests   = Parse<QuestBase>  ("D:/quests.json"  );
-                // tasks    = Parse("D:/tasks.json"   );
-
-                return;
+                cache = new Dictionary<Type, Dictionary<string, JToken>>();
                 
-                TaskEntity task = new TaskEntity {Id = "SomeTaskId"};
-                task.RegisterComponent(new QuestDescriptionComponent());
-                task.RegisterComponent(new QuestRewardComponent());
+                string conditionsFile = @"C:\Users\keht\.Rider2018.2\config\scratches\QuestStartConditions.json";
+                questStartConditions = Parse(conditionsFile);
                 
-                SubtaskMatchCounterEntity subtaskMatch = new SubtaskMatchCounterEntity {Id = "MatchSubtaskId"};
-                subtaskMatch.RegisterComponent(new QuestDescriptionComponent());
+                string startersFile = @"C:\Users\keht\.Rider2018.2\config\scratches\QuestStarters.json";
+                questStarters = Parse(startersFile);
                 
-                SubtaskCreatePieceCounterEntity subtaskBuild = new SubtaskCreatePieceCounterEntity {Id = "CreateSubtaskId"};
-                subtaskBuild.RegisterComponent(new QuestDescriptionComponent());
-
-                task.RegisterComponent(subtaskMatch);
-                task.RegisterComponent(subtaskBuild);
-
-
-                // SubtaskEntity ent = new SubtaskEntity {Id = "SomeId"};
-                // ent.RegisterComponent(new QuestDescriptionComponent());
-                // ent.RegisterComponent(new QuestRewardComponent());
-                //
-                var text = JsonConvert.SerializeObject(task, serializerSettings);
-                // Debug.LogWarning(text);
-                //
-                var item = JsonConvert.DeserializeObject<ECSEntity>(text, serializerSettings);
-                int i = 0;
-
-                // subtasks = Parse("D:/subtasks.json");
-
-                // var quest = quests.First();
-                // var text  = JsonConvert.SerializeObject(quest);
-                // File.WriteAllText("D:/serialized.json", text);
-                //
-                // var questSave = ProfileService.Current.GetComponent<QuestSaveComponent>(QuestSaveComponent.ComponentGuid);
-                //
-                // if (questSave != null)
-                // {
-                //
-                // }
+                string questsFile = @"C:\Users\keht\.Rider2018.2\config\scratches\Quests.json";
+                quests = Parse(questsFile);
+                
+                string tasksFile = @"C:\Users\keht\.Rider2018.2\config\scratches\Tasks.json";
+                tasks = Parse(tasksFile);
+                
+                cache.Add(typeof(QuestStartConditionComponent), questStartConditions);
+                cache.Add(typeof(QuestStarterEntity), questStarters);
+                cache.Add(typeof(QuestEntity), quests);
+                cache.Add(typeof(TaskEntity), tasks);
             }
             else
             {
@@ -105,72 +85,80 @@ public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<Q
         
         foreach (var node in root.First)
         {
-            string id = node.SelectToken("Id").Value<string>();        
+            string id = node.SelectToken("Id").Value<string>();  
+            
+#if DEBUG
+            if (ret.ContainsKey(id))
+            {
+                Debug.LogError($"[QuestsDataManager] => Parse: Duplicate ID '{id} found in {file}!");
+            }
+#endif
+            
             ret.Add(id, node);
         }
     
         return ret;
     }
 
-    // private TaskBase InstantiateTaskById(string id)
-    // {
-    //     var taskConfig = tasks["TaskMatch"];
-    //
-    //     var bkp = JsonConvert.DefaultSettings;
-    //     JsonConvert.DefaultSettings = () => serializerSettings;
-    //             
-    //     var item = taskConfig.ToObject<TaskBase>();
-    //
-    //     JsonConvert.DefaultSettings = bkp;
-    //
-    //     return item;
-    // }
-
-    // private Dictionary<string, T> Parse<T>(string file) where T : IHaveId
-    // {
-    //     Dictionary<string, T> ret = new Dictionary<string, T>();
-    //
-    //     CurrencyPair p = new CurrencyPair {Currency = PieceType.Chest1.Abbreviations[0], Amount = 1};
-    //     var obj = JsonConvert.SerializeObject(p);
-    //     
-    //     var json = File.ReadAllText(file);
-    //     List<T> list = JsonConvert.DeserializeObject<List<T>>(json, serializerSettings);
-    //     foreach (var item in list)
-    //     {        
-    //         ret.Add(item.Id, item);
-    //     }
-    //     // JObject root = JObject.Parse(json);
-    //     //
-    //     // foreach (var node in root)
-    //     // {
-    //     //     string val = node.ToString();
-    //     //     var item = JsonConvert.DeserializeObject(val, serializerSettings);
-    //     //     
-    //     //     T itemTyped = (T) item;         
-    //     //     ret.Add(itemTyped.Id, itemTyped);
-    //     // }
-    //
-    //     return ret;
-    // }
+    private T InstantiateById<T>(string id) where T : IECSComponent
+    {
+        Dictionary<string, JToken> dictWithConfigs;
+        if (!cache.TryGetValue(typeof(T), out dictWithConfigs))
+        {
+            Debug.LogError($"[QuestsDataManager] => InstantiateById: Configs cache for type '{typeof(T)}' not found!");
+            return default(T);
+        }
+        
+        JToken config;
+        if (!dictWithConfigs.TryGetValue(id, out config))
+        {
+            Debug.LogError($"[QuestsDataManager] => InstantiateById: Config not found for id '{id}' with type '{typeof(T)}'!");
+            return default(T); 
+        }
     
-    // public QuestBase GetQuestById(string id)
-    // {
-    //     QuestBase ret;
-    //     quests.TryGetValue(id, out ret);
-    //     return ret;
-    // }
-    //
-    // public TaskBase GetTaskById(string id)
-    // {
-    //     TaskBase ret;
-    //     tasks.TryGetValue(id, out ret);
-    //     return ret;
-    // }
-    //
-    // public SubtaskBase GetSubtaskById(string id)
-    // {
-    //     SubtaskBase ret;
-    //     subtasks.TryGetValue(id, out ret);
-    //     return ret;
-    // }
+        var bkp = JsonConvert.DefaultSettings;
+        JsonConvert.DefaultSettings = () => serializerSettings;
+                
+        T item = config.ToObject<T>();
+    
+        JsonConvert.DefaultSettings = bkp;
+    
+        return item;
+    }
+
+    private QuestStartConditionComponent InstantiateCondition(string id)
+    {
+        return InstantiateById<QuestStartConditionComponent>(id);
+    }    
+    
+    private TaskEntity InstantiateTask(string id)
+    {
+        return InstantiateById<TaskEntity>(id);
+    }
+    
+    public QuestStarterEntity InstantiateQuestStarter(string id)
+    {
+        var starter = InstantiateById<QuestStarterEntity>(id);
+        foreach (var conditionId in starter.ConditionIds)
+        {
+            var condition = InstantiateCondition(conditionId);
+            starter.RegisterComponent(condition);
+        }
+
+        return starter;
+    }
+
+    public QuestEntity InstantiateQuest(string id)
+    {
+        var quest = InstantiateById<QuestEntity>(id);
+        foreach (var taskDef in quest.TaskDefs)
+        {
+            var task = InstantiateTask(taskDef.TaskId);
+            task.Order = taskDef.Order;
+            
+            quest.RegisterComponent(task);
+        }
+
+        return quest;
+    }
 }

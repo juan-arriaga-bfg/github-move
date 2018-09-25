@@ -1,6 +1,6 @@
 using Quests;
 
-public class SubtaskMatchCounterEntity : SubtaskCounterEntity, IBoardEventListener, IConnectedToBoardEvent
+public class TaskMatchCounterEntity : TaskCounterEntity, IBoardEventListener, IConnectedToBoardEvent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -17,7 +17,7 @@ public class SubtaskMatchCounterEntity : SubtaskCounterEntity, IBoardEventListen
 
     public void OnBoardEvent(int code, object context)
     {
-        if (State != SubtaskState.InProgress)
+        if (State != TaskState.InProgress)
         {
             return;
         }
