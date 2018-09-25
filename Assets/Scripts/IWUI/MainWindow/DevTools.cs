@@ -17,6 +17,31 @@ public class DevTools : MonoBehaviour
         panel.SetActive(!isChecked);
     }
 
+    public static void ReloadScene(bool resetProgress)
+    {
+        QuestService.Current.Cleanup();
+        QuestService.Instance.SetManager(null);
+            
+        BoardService.Instance.SetManager(null);
+
+        if (resetProgress)
+        {
+            var profileBuilder = new DefaultProfileBuilder();
+            ProfileService.Instance.Manager.ReplaceProfile(profileBuilder.Create());
+        }
+
+        GameDataService.Current.Reload();
+        
+        SceneManager.LoadScene("Main", LoadSceneMode.Single);
+            
+        var ecsSystems = new List<IECSSystem>(ECSService.Current.SystemProcessor.RegisteredSystems);
+            
+        foreach (var system in ecsSystems)
+        {
+            ECSService.Current.SystemProcessor.UnRegisterSystem(system);
+        }
+    }
+    
     public void OnResetProgressClick()
     {
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
@@ -28,24 +53,7 @@ public class DevTools : MonoBehaviour
         
         model.OnAccept = () =>
         {
-            QuestService.Current.Cleanup();
-            QuestService.Instance.SetManager(null);
-            
-            BoardService.Instance.SetManager(null);
-            
-            var profileBuilder = new DefaultProfileBuilder();
-            ProfileService.Instance.Manager.ReplaceProfile(profileBuilder.Create());
-            
-            GameDataService.Current.Reload();
-        
-            SceneManager.LoadScene("Main", LoadSceneMode.Single);
-            
-            var ecsSystems = new List<IECSSystem>(ECSService.Current.SystemProcessor.RegisteredSystems);
-            
-            foreach (var system in ecsSystems)
-            {
-                ECSService.Current.SystemProcessor.UnRegisterSystem(system);
-            }
+            ReloadScene(true);
         };
         
         model.OnCancel = () => {};
