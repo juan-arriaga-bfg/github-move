@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-public class TaskCurrencyCounterEntity : TaskCounterEntity, IConnectedToBoardEvent
+public class TaskCurrencySpendEntity : TaskCounterEntity, IConnectedToBoardEvent  
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -24,9 +24,12 @@ public class TaskCurrencyCounterEntity : TaskCounterEntity, IConnectedToBoardEve
             return;
         }
 
-        if (shopItem.Uid == Currency)
+        foreach (var price in shopItem.CurrentPrices)
         {
-            CurrentValue += shopItem.Amount;
+            if (price.Currency == Currency)
+            {
+                CurrentValue += price.TargetPriceAmount;
+            }
         }
     }
     
