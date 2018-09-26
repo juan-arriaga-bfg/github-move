@@ -22,8 +22,6 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     
     private Piece thisContext;
     
-    private string key => thisContext.CachedPosition.ToSaveString();
-    
     private BuildingState state;
     public BuildingState State
     {
@@ -82,7 +80,11 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
             return;
         }
         
-        if (item.State == BuildingState.InProgress) Timer.Start(item.StartTime);
+        if (item.State == BuildingState.InProgress)
+        {
+            Timer.Start(item.StartTime);
+            thisContext.Context.WorkerLogic.Init(position, Timer);
+        }
         
         State = item.State;
     }
@@ -95,7 +97,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     {
         if (thisContext.Multicellular == null)
         {
-            thisContext.Context.WorkerLogic.Replase(from.ToSaveString(), to.ToSaveString());
+            thisContext.Context.WorkerLogic.Replace(from, to);
             return;
         }
         
@@ -104,7 +106,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
             var posFrom = thisContext.Multicellular.GetPointInMask(from, point);
             var posTo = thisContext.Multicellular.GetPointInMask(to, point);
             
-            if(thisContext.Context.WorkerLogic.Replase(posFrom.ToSaveString(), posTo.ToSaveString()) == false) continue;
+            if(thisContext.Context.WorkerLogic.Replace(posFrom, posTo) == false) continue;
             
             return;
         }
@@ -140,13 +142,13 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
 
     private void OnClick()
     {
-        if(thisContext.Context.WorkerLogic.Get(key, Timer.Delay) == false) return;
-        
         var view = thisContext.ViewDefinition.AddView(ViewType.Bubble);
         
-        view.OnHide = null;
         view.Change(false);
         
+        if(thisContext.Context.WorkerLogic.Get(thisContext.CachedPosition, Timer) == false) return;
+        
+        view.OnHide = null;
         State = BuildingState.InProgress;
     }
 
@@ -156,14 +158,9 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         
         view.SetTimer(Timer);
         view.Change(true);
-
+        view.SetHourglass(true);
+        
         if (Timer.IsStarted == false) Timer.Start();
-    }
-    
-    public void Fast()
-    {
-        Timer.Stop();
-        Timer.OnComplete();
     }
     
     private void OnComplete()
@@ -173,7 +170,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         
         if (thisContext.Multicellular == null)
         {
-            thisContext.Context.WorkerLogic.Return(key);
+            thisContext.Context.WorkerLogic.Return(thisContext.CachedPosition);
             return;
         }
 
@@ -181,7 +178,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         {
             var position = thisContext.Multicellular.GetPointInMask(thisContext.CachedPosition, point);
             
-            if(thisContext.Context.WorkerLogic.Return(position.ToSaveString()) == false) continue;
+            if(thisContext.Context.WorkerLogic.Return(position) == false) continue;
             
             return;
         }

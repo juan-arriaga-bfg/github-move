@@ -54,10 +54,7 @@ public class PartPiecesLogicComponent : IECSComponent
 
     private void OnClick(Piece piece)
     {
-        var key = piece.CachedPosition.ToSaveString();
-        var def = GameDataService.Current.PiecesManager.GetPieceDef(piece.PieceType + 2);
-        
-        if(context.WorkerLogic.Get(key, def.MatchConditionsDef.Delay) == false) return;
+        if(context.WorkerLogic.Get(piece.CachedPosition, null) == false) return;
         
         var action = piece.Context.BoardLogic.MatchActionBuilder.GetMatchAction(new List<BoardPosition>(), piece.PieceType, piece.CachedPosition);
         
