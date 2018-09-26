@@ -49,7 +49,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
         foreach (var completeTime in completeTimesList)
         {
-            str.AppendFormat("{0};", completeTime.Key);
+            str.AppendFormat("{0};", completeTime.Key.ToSaveString());
         }
 
         return str.ToString();
