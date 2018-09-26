@@ -9,19 +9,16 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
-    private Dictionary<string, DateTime> completeTimes = new Dictionary<string, DateTime>();
-    private readonly List<string> completeTimesList = new List<string>();
-
-    private DateTime then;
+    private List<KeyValuePair<BoardPosition, TimerComponent>> completeTimesList = new List<KeyValuePair<BoardPosition, TimerComponent>>();
+    
     private BoardController context;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
         context = entity as BoardController;
+        
         targetItem = ProfileService.Current.Purchases.GetStorageItem(Currency.Worker.Name);
         limitItem = ProfileService.Current.Purchases.GetStorageItem(Currency.WorkerLimit.Name);
-        
-        then = DateTime.UtcNow;
         
         base.OnRegisterEntity(entity);
     }
@@ -32,7 +29,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         
         if(save == null) return;
 
-        completeTimes = new Dictionary<string, DateTime>();
+        completeTimesList = new List<KeyValuePair<BoardPosition, TimerComponent>>();
         
         if(string.IsNullOrEmpty(save.WorkerUnlockDelay)) return;
         
@@ -40,9 +37,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
         foreach (var worker in workers)
         {
-            var arr = worker.Split(new[] {":"}, StringSplitOptions.RemoveEmptyEntries);
-            
-            completeTimes.Add(arr[0], DateTimeExtension.UnixTimeToDateTime(long.Parse(arr[1])));
+            completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(BoardPosition.Parse(worker), null));
         }
     }
 
@@ -50,40 +45,44 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     {
         var str = new StringBuilder();
         
-        if(completeTimes.Count == 0) return string.Empty;
+        if(completeTimesList.Count == 0) return string.Empty;
 
-        foreach (var completeTime in completeTimes)
+        foreach (var completeTime in completeTimesList)
         {
-            str.AppendFormat("{0}:{1};", completeTime.Key, completeTime.Value.ConvertToUnixTime());
+            str.AppendFormat("{0};", completeTime.Key);
         }
 
         return str.ToString();
     }
+    
+    public void Init(BoardPosition id, TimerComponent timer)
+    {
+        foreach (var pair in completeTimesList)
+        {
+            if (pair.Key.Equals(id) == false) continue;
+            
+            completeTimesList.Remove(pair);
+            completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(id, timer));
+            
+            return;
+        }
+    }
 
-    public bool Get(string id, int delay)
+    public bool Get(BoardPosition id, TimerComponent timer)
     {
         if (CurrencyHellper.IsCanPurchase(targetItem.Currency, 1) == false)
         {
-            var str = completeTimesList[Random.Range(0, completeTimesList.Count)];
-            var position = BoardPosition.Parse(str);
+            var select = completeTimesList[Random.Range(0, completeTimesList.Count)];
             
             UIErrorWindowController.AddError("All workers are busy!");
-            context.HintCooldown.Step(position);
+            context.HintCooldown.Step(select.Key);
+            
+            select.Value.View.SetState(TimerViewSate.Select);
 
-            foreach (var time in completeTimesList)
+            foreach (var item in completeTimesList)
             {
-                var pos = BoardPosition.Parse(time);
-                var piece = context.BoardLogic.GetPieceAt(position);
-
-                var timer = piece?.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-                
-                if(timer == null) continue;
-
-                var view = timer.View;
-                
-                if(view == null) continue;
-                
-                view.SetState(position.Equals(pos) ? TimerViewSate.Select : TimerViewSate.Hide);
+                if(select.Value == item.Value) continue;
+                item.Value.View.SetState(TimerViewSate.Hide);
             }
             
             return false;
@@ -97,35 +96,39 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
             if (isSuccess == false) return;
             
-            completeTimes.Add(id, DateTime.UtcNow.AddSeconds(delay));
-            completeTimesList.Add(id);
+            completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(id, timer));
         });
         
         return isSuccess;
     }
 
-    public bool Replase(string oldKey, string newKey)
+    public bool Replace(BoardPosition oldKey, BoardPosition newKey)
     {
-        DateTime value;
-        if(completeTimes.TryGetValue(oldKey, out value) == false) return false;
+        foreach (var pair in completeTimesList)
+        {
+            if (pair.Key.Equals(oldKey) == false) continue;
+            
+            completeTimesList.Remove(pair);
+            completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(newKey, pair.Value));
+            
+            return true;
+        }
         
-        completeTimes.Remove(oldKey);
-        completeTimesList.Remove(oldKey);
-        
-        completeTimes.Add(newKey, value);
-        completeTimesList.Add(newKey);
-        
-        return true;
+        return false;
     }
     
-    public bool Return(string id)
+    public bool Return(BoardPosition id)
     {
-        if(completeTimes.ContainsKey(id) == false) return false;
+        foreach (var pair in completeTimesList)
+        {
+            if (pair.Key.Equals(id) == false) continue;
+            
+            completeTimesList.Remove(pair);
+            Add(1);
+            
+            return true;
+        }
         
-        completeTimes.Remove(id);
-        completeTimesList.Remove(id);
-        Add(1);
-        
-        return true;
+        return false;
     }
 }

@@ -26,10 +26,9 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     public void SetState(TimerViewSate state, float duration = 0.2f)
     {
         group.DOFade(state == TimerViewSate.Hide ? 0.7f : 1, duration);
-
+        
         bigButton.interactable = state == TimerViewSate.Select;
         smallButton.SetActive(state == TimerViewSate.Select);
-        Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
     }
     
     public override void Init(Piece piece)
@@ -43,6 +42,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
 
         Priority = defaultPriority = 10;
         SetTimer(piece.GetComponent<TimerComponent>(TimerComponent.ComponentGuid));
+        Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
     }
     
     public void SetTimer(TimerComponent timer)
@@ -74,7 +74,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     {
         if(progressBar != null) progressBar.SetProgress(timer.GetProgress());
         label.Text = timer.CompleteTime.GetTimeLeftText();
-        price.Text = timer.GetPrise().ToStringIcon(false);;
+        if(smallButton.activeSelf) price.Text = timer.GetPrise().ToStringIcon(false);;
     }
     
     public void OnBoardEvent(int code, object context)
