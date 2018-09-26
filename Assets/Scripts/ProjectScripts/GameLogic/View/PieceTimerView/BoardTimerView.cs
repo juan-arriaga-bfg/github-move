@@ -16,32 +16,28 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     
     [SerializeField] private BoardProgressBarView progressBar;
     
-    [SerializeField] private Button bigButton;
+    [SerializeField] private Button button;
     [SerializeField] private GameObject smallButton;
+    [SerializeField] private GameObject bigButton;
+    [SerializeField] private GameObject hourglass;
     
     private TimerComponent timer;
     
     protected override ViewType Id => ViewType.BoardTimer;
-
-    public void SetState(TimerViewSate state, float duration = 0.2f)
-    {
-        group.DOFade(state == TimerViewSate.Hide ? 0.7f : 1, duration);
-        
-        bigButton.interactable = state == TimerViewSate.Select;
-        smallButton.SetActive(state == TimerViewSate.Select);
-    }
     
     public override void Init(Piece piece)
     {
         base.Init(piece);
-
-        SetState(TimerViewSate.Normal, 0);
+        
+        Priority = defaultPriority = 10;
         
         Ofset = multiSize == 1 ? Ofset : new Vector3(0, 1.3f);
+        
         SetOfset();
-
-        Priority = defaultPriority = 10;
         SetTimer(piece.GetComponent<TimerComponent>(TimerComponent.ComponentGuid));
+        SetState(TimerViewSate.Normal, 0);
+        SetHourglass(false);
+        
         Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
     }
     
@@ -53,6 +49,21 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         this.timer = timer;
         this.timer.OnExecute += UpdateView;
         this.timer.View = this;
+    }
+    
+    public void SetState(TimerViewSate state, float duration = 0.2f)
+    {
+        group.DOFade(state == TimerViewSate.Hide ? 0.7f : 1, duration);
+        
+        button.interactable = state == TimerViewSate.Select;
+        smallButton.SetActive(state == TimerViewSate.Select);
+        bigButton.SetActive(state == TimerViewSate.Select);
+    }
+
+    public void SetHourglass(bool isActive)
+    {
+        if(timer == null) return;
+        hourglass.SetActive(isActive);
     }
     
     protected virtual void OnDestroy()

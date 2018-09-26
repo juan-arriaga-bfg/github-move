@@ -158,7 +158,8 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         
         view.SetTimer(Timer);
         view.Change(true);
-
+        view.SetHourglass(true);
+        
         if (Timer.IsStarted == false) Timer.Start();
     }
     

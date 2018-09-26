@@ -14,7 +14,6 @@
     Progress = -1010,
     Warning = -1011,
     Lock = -1012,
-    Hourglass = -1013,
-    EnemyBubble = -1014,
-    Cell = -1015,
+    EnemyBubble = -1013,
+    Cell = -1014,
 }
