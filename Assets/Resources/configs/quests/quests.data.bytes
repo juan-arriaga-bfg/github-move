@@ -1,0 +1,80 @@
+[
+  {
+    "$type": "QuestEntity, Assembly-CSharp",
+    "Id": "Quest1",
+    "TaskDefs": [
+      {
+        "TaskId": "CreateTaskId_1",
+        "Order": 0
+      },
+      {
+        "TaskId": "CurrencyCoinsTaskId_1",
+        "Order": 0
+      },
+      {
+        "TaskId": "CurrencyExpTaskId_1",
+        "Order": 0
+      },
+      {
+        "TaskId": "MatchTaskId_1",
+        "Order": 0
+      },
+      {
+        "TaskId": "Dummy_1",
+        "Order": 0
+      },
+      {
+        "TaskId": "CurrencyManaSpendTaskId_1",
+        "Order": 0
+      }
+    ],
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "$type": "QuestDescriptionComponent, Assembly-CSharp",
+        "Message": "test mess 1",
+        "Ico": "test ico 1"
+      },
+      "QuestRewardComponent": {
+        "$type": "QuestRewardComponent, Assembly-CSharp",
+        "Value": [
+          {
+            "$type": "CurrencyPair, Assembly-CSharp",
+            "Currency": "Coins",
+            "Amount": 100
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "QuestEntity, Assembly-CSharp",
+    "Id": "Quest2",
+    "TaskDefs": [
+      {
+        "TaskId": "CreateTaskId_1",
+        "Order": 0
+      },
+      {
+        "TaskId": "MatchTaskId_1",
+        "Order": 0
+      }
+    ],
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "$type": "QuestDescriptionComponent, Assembly-CSharp",
+        "Message": "test mess 2",
+        "Ico": "test ico 2"
+      },
+      "QuestRewardComponent": {
+        "$type": "QuestRewardComponent, Assembly-CSharp",
+        "Value": [
+          {
+            "$type": "CurrencyPair, Assembly-CSharp",
+            "Currency": "Coins",
+            "Amount": 200
+          }
+        ]
+      }
+    }
+  }
+]

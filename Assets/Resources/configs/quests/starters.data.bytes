@@ -1,0 +1,18 @@
+[
+  {
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "Id": "Quest1",
+    "QuestToStartId": "Quest1",
+    "ConditionIds": [
+      "Cond_level_1"
+    ]
+  },
+  {
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "Id": "Quest2",
+    "QuestToStartId": "Quest2",
+    "ConditionIds": [
+      "Cond_level_2"
+    ]
+  }
+]

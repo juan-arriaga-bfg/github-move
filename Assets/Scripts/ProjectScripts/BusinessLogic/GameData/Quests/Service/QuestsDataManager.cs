@@ -6,17 +6,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<QuestDefOld>>
+public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List<QuestDefOld>>*/
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-
     public int Guid => ComponentGuid;
-
-    // private Dictionary<string, QuestBase>   quests;
-    private Dictionary<string, JToken> questStartConditions;
-    private Dictionary<string, JToken> questStarters;
-    private Dictionary<string, JToken> tasks;
-    private Dictionary<string, JToken> quests;
 
     private Dictionary<Type, Dictionary<string, JToken>> cache;
     
@@ -36,58 +29,50 @@ public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<Q
     }
 
     public void Reload()
-    {		
-        LoadData(new ResourceConfigDataMapper<List<QuestDefOld>>("configs/quests.data", NSConfigsSettings.Instance.IsUseEncryption));
+    {	
+        cache = new Dictionary<Type, Dictionary<string, JToken>>();
+
+        LoadData<QuestStartConditionComponent>("configs/quests/conditions.data");
+        LoadData<QuestStarterEntity>          ("configs/quests/starters.data");
+        LoadData<QuestEntity>                 ("configs/quests/quests.data");
+        LoadData<TaskEntity>                  ("configs/quests/tasks.data");
+
+        LoadProfile();
     }
-	
-    public void LoadData(IDataMapper<List<QuestDefOld>> dataMapper)
+
+    private void LoadProfile()
     {
-        dataMapper.LoadData((data, error) =>
+        
+    }
+
+    private void LoadData<T>(string path)
+    {
+        var dataMapper = new ResourceConfigDataMapper<T>(path, NSConfigsSettings.Instance.IsUseEncryption);
+        var json = dataMapper.GetDataAsJson();
+        if (string.IsNullOrEmpty(json))
         {
-            if (string.IsNullOrEmpty(error))
-            {
-                cache = new Dictionary<Type, Dictionary<string, JToken>>();
-                
-                string conditionsFile = @"C:\Users\keht\.Rider2018.2\config\scratches\QuestStartConditions.json";
-                questStartConditions = Parse(conditionsFile);
-                
-                string startersFile = @"C:\Users\keht\.Rider2018.2\config\scratches\QuestStarters.json";
-                questStarters = Parse(startersFile);
-                
-                string questsFile = @"C:\Users\keht\.Rider2018.2\config\scratches\Quests.json";
-                quests = Parse(questsFile);
-                
-                string tasksFile = @"C:\Users\keht\.Rider2018.2\config\scratches\Tasks.json";
-                tasks = Parse(tasksFile);
-                
-                cache.Add(typeof(QuestStartConditionComponent), questStartConditions);
-                cache.Add(typeof(QuestStarterEntity), questStarters);
-                cache.Add(typeof(QuestEntity), quests);
-                cache.Add(typeof(TaskEntity), tasks);
-            }
-            else
-            {
-                Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
-            }
-        });
+            Debug.LogErrorFormat("Config '{0}' not loaded", path);
+            return;
+        }
+        
+        var configs = Parse(json);
+        cache.Add(typeof(T), configs);
     }
     
-    private Dictionary<string, JToken> Parse(string file)
+    private Dictionary<string, JToken> Parse(string json)
     {
         Dictionary<string, JToken> ret = new Dictionary<string, JToken>();
 
-        var json = File.ReadAllText(file);
-
-        JToken root = JObject.Parse(json).First;
+        JToken root = JToken.Parse(json);
         
-        foreach (var node in root.First)
+        foreach (var node in root)
         {
             string id = node["Id"].Value<string>();  
             
 #if DEBUG
             if (ret.ContainsKey(id))
             {
-                Debug.LogError($"[QuestsDataManager] => Parse: Duplicate ID '{id}' found in '{file}'!");
+                Debug.LogError($"[QuestsDataManager] => Parse: Duplicate ID '{id}' found in\n'{json}'!");
             }
 #endif
             
