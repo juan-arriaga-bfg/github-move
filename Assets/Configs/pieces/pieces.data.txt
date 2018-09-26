@@ -38,7 +38,6 @@
   },
   {
     "Uid": "Char1",
-    "0": "#ERROR!",
     "SpawnResources": {
       "Currency": "Mana",
       "Amount": 15
@@ -46,7 +45,6 @@
   },
   {
     "Uid": "Char2",
-    "0": "#ERROR!",
     "SpawnResources": {
       "Currency": "Mana",
       "Amount": 40
@@ -61,7 +59,6 @@
   },
   {
     "Uid": "Char4",
-    "0": "#ERROR!",
     "SpawnResources": {
       "Currency": "Mana",
       "Amount": 5
@@ -69,7 +66,6 @@
   },
   {
     "Uid": "Char5",
-    "0": "#ERROR!",
     "SpawnResources": {
       "Currency": "Mana",
       "Amount": 5
@@ -84,7 +80,6 @@
   },
   {
     "Uid": "Char7",
-    "0": "#ERROR!",
     "SpawnResources": {
       "Currency": "Mana",
       "Amount": 5
@@ -92,7 +87,6 @@
   },
   {
     "Uid": "Char8",
-    "0": "#ERROR!",
     "SpawnResources": {
       "Currency": "Mana",
       "Amount": 5
@@ -107,7 +101,6 @@
   },
   {
     "Uid": "Crystal1",
-    "0": "#ERROR!",
     "SpawnResources": {
       "Currency": "Crystals",
       "Amount": 5
@@ -150,7 +143,6 @@
   },
   {
     "Uid": "Crystal4",
-    "0": "#ERROR!",
     "SpawnResources": {
       "Currency": "Crystals",
       "Amount": 250
@@ -193,7 +185,6 @@
   },
   {
     "Uid": "Coin2",
-    "0": "#ERROR!",
     "SpawnResources": {
       "Currency": "Coins",
       "Amount": 20
@@ -222,7 +213,6 @@
   },
   {
     "Uid": "Coin4",
-    "0": "#ERROR!",
     "SpawnResources": {
       "Currency": "Coins",
       "Amount": 250
@@ -251,7 +241,6 @@
   },
   {
     "Uid": "Chest1",
-    "0": "#ERROR!",
     "Name": "Chest1 Piece",
     "UnlockBonus": [
       {
@@ -302,7 +291,6 @@
   },
   {
     "Uid": "Chest4",
-    "0": "#ERROR!",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -323,7 +311,6 @@
   },
   {
     "Uid": "Chest5",
-    "0": "#ERROR!",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -344,7 +331,6 @@
   },
   {
     "Uid": "Chest6",
-    "0": "#ERROR!",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -365,7 +351,6 @@
   },
   {
     "Uid": "Chest7",
-    "0": "#ERROR!",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -406,7 +391,6 @@
   },
   {
     "Uid": "Chest9",
-    "0": "#ERROR!",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -427,7 +411,6 @@
   },
   {
     "Uid": "ChestEpic1",
-    "0": "#ERROR!",
     "Name": "ChestEpic1",
     "UnlockBonus": [
       {
@@ -438,7 +421,6 @@
   },
   {
     "Uid": "ChestEpic2",
-    "0": "#ERROR!",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -528,69 +510,7 @@
     ]
   },
   {
-    "Uid": "ChestA4",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 10
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 10
-      }
-    ],
-    "Name": "Big",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 8
-      }
-    ]
-  },
-  {
-    "Uid": "ChestA5",
-    "0": "#ERROR!",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 15
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 15
-      }
-    ],
-    "Name": "Big",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 15
-      }
-    ]
-  },
-  {
-    "Uid": "ChestA6",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 25
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 25
-      }
-    ],
-    "Name": "Big",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 25
-      }
-    ]
-  },
-  {
     "Uid": "ChestC1",
-    "0": "#ERROR!",
     "Name": "Small",
     "UnlockBonus": [
       {
@@ -601,7 +521,6 @@
   },
   {
     "Uid": "ChestC2",
-    "0": "#ERROR!",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -642,7 +561,6 @@
   },
   {
     "Uid": "ChestK1",
-    "0": "#ERROR!",
     "Name": "Small",
     "UnlockBonus": [
       {
@@ -673,7 +591,6 @@
   },
   {
     "Uid": "ChestK3",
-    "0": "#ERROR!",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -694,7 +611,6 @@
   },
   {
     "Uid": "ChestL1",
-    "0": "#ERROR!",
     "Name": "Small",
     "UnlockBonus": [
       {
@@ -725,7 +641,6 @@
   },
   {
     "Uid": "ChestL3",
-    "0": "#ERROR!",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -746,7 +661,6 @@
   },
   {
     "Uid": "Basket1",
-    "0": "#ERROR!",
     "Name": "Small",
     "UnlockBonus": [
       {
@@ -757,7 +671,6 @@
   },
   {
     "Uid": "Basket2",
-    "0": "#ERROR!",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -778,7 +691,6 @@
   },
   {
     "Uid": "Basket3",
-    "0": "#ERROR!",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -799,7 +711,6 @@
   },
   {
     "Uid": "A1",
-    "0": "#ERROR!",
     "Name": "Log",
     "UnlockBonus": [
       {
@@ -810,7 +721,6 @@
   },
   {
     "Uid": "A2",
-    "0": "#ERROR!",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -835,7 +745,6 @@
   },
   {
     "Uid": "A3",
-    "0": "#ERROR!",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -884,7 +793,6 @@
   },
   {
     "Uid": "A5",
-    "0": "#ERROR!",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -909,7 +817,6 @@
   },
   {
     "Uid": "A6",
-    "0": "#ERROR!",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -934,7 +841,6 @@
   },
   {
     "Uid": "A7",
-    "0": "#ERROR!",
     "CreateRewards": [
       {
         "Currency": "Coins",

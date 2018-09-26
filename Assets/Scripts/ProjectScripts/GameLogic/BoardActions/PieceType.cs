@@ -279,9 +279,6 @@ public static partial class PieceType
     public static readonly PieceTypeDef ChestA1 = new PieceTypeDef{Id = 10100, Abbreviations = new List<string>{ "ChestA1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     public static readonly PieceTypeDef ChestA2 = new PieceTypeDef{Id = 10101, Abbreviations = new List<string>{ "ChestA2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     public static readonly PieceTypeDef ChestA3 = new PieceTypeDef{Id = 10102, Abbreviations = new List<string>{ "ChestA3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
-    public static readonly PieceTypeDef ChestA4 = new PieceTypeDef{Id = 10103, Abbreviations = new List<string>{ "ChestA4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
-    public static readonly PieceTypeDef ChestA5 = new PieceTypeDef{Id = 10104, Abbreviations = new List<string>{ "ChestA5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
-    public static readonly PieceTypeDef ChestA6 = new PieceTypeDef{Id = 10105, Abbreviations = new List<string>{ "ChestA6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     
     public static readonly PieceTypeDef ChestC1 = new PieceTypeDef{Id = 10201, Abbreviations = new List<string>{ "ChestC1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     public static readonly PieceTypeDef ChestC2 = new PieceTypeDef{Id = 10202, Abbreviations = new List<string>{ "ChestC2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};

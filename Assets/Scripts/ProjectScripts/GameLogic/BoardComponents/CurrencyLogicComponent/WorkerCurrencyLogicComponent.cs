@@ -4,7 +4,7 @@ using System.Text;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSystem
+public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -60,39 +60,6 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         return str.ToString();
     }
 
-    public void Execute()
-    {
-        var now = DateTime.UtcNow;
-        
-        if ((now - then).TotalSeconds < 1) return;
-        
-        then = now;
-        
-        var remove = new List<string>();
-        
-        foreach (var pair in completeTimes)
-        {
-            if((pair.Value - now).TotalSeconds > 0.5) continue;
-            
-            remove.Add(pair.Key);
-        }
-        
-        if(remove.Count == 0) return;
-        
-        foreach (var key in remove)
-        {
-            completeTimes.Remove(key);
-            completeTimesList.Remove(key);
-        }
-        
-        Add(remove.Count);
-    }
-
-    public object GetDependency()
-    {
-        return null;
-    }
-
     public bool Get(string id, int delay)
     {
         if (CurrencyHellper.IsCanPurchase(targetItem.Currency, 1) == false)
@@ -143,10 +110,5 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         Add(1);
         
         return true;
-    }
-    
-    public bool IsExecuteable()
-    {
-        return targetItem.Amount < limitItem.Amount;
     }
 }

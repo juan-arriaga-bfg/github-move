@@ -21,7 +21,11 @@
         
         var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
 
-        if (timer != null) timer.OnStart += OnTimerStart;
+        if (timer != null)
+        {
+            timer.OnStart += OnTimerStart;
+            timer.OnComplete += OnTimerComplete;
+        }
         
         InitInSave(position);
     }
@@ -36,9 +40,9 @@
         
         current = item.Step;
         
-        
-        
         OnTimerStart();
+
+        if (storage.IsFilled) OnTimerComplete();
 
         return item;
     }
@@ -55,6 +59,7 @@
     public virtual void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
         storage.Timer.OnStart -= OnTimerStart;
+        storage.Timer.OnStart -= OnTimerComplete;
     }
 
     protected virtual int GetTimerDelay()
@@ -107,5 +112,10 @@
 
     protected virtual void OnSpawnRewards()
     {
+    }
+    
+    protected virtual void OnTimerComplete()
+    {
+        thisContext.Context.WorkerLogic.Return(Key);
     }
 }

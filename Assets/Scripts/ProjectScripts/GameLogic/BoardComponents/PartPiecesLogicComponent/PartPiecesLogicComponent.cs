@@ -33,8 +33,9 @@ public class PartPiecesLogicComponent : IECSComponent
         bubble.Add(position, piece.ViewDefinition);
         
         var view = piece.ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
+        var def = GameDataService.Current.PiecesManager.GetPieceDef(piece.PieceType + 2);
         
-        view.SetData("Build Castle?", $"Send <sprite name={Currency.Worker.Name}>", OnClick);
+        view.SetData($"Build Castle:\n{DateTimeExtension.GetDelayText(def.MatchConditionsDef.Delay)}?", $"Send <sprite name={Currency.Worker.Name}>", OnClick);
         view.Change(true);
     }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using IW.Content.ContentModule;
+using UnityEditor;
 
 public class DefaultApplicationInitilizer : ApplicationInitializer 
 {
@@ -107,7 +108,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         if (pauseStatus)
         {
             ProfileService.Instance.Manager.UploadCurrentProfile();
-
+            
 #if UNITY_EDITOR
             ProfileService.Instance.Manager.SaveLocalProfile();
 #endif
@@ -120,6 +121,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
 
 #if UNITY_EDITOR
         ProfileService.Instance.Manager.SaveLocalProfile();
+        AssetDatabase.Refresh();
 #endif
     }
 

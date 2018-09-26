@@ -17,7 +17,7 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
 
         if (storage == null) return false;
         
-        if(!piece.Context.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, storage.Filling))
+        if(!storage.isSpawnResource && !piece.Context.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, storage.Filling))
         {
             UIErrorWindowController.AddError("Free space not found");
             return false;

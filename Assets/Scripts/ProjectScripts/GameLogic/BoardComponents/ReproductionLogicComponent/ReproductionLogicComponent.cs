@@ -76,13 +76,15 @@ public class ReproductionLogicComponent : ECSEntity
     {
         items.Add(item);
         stack.Add(item);
-        timer.IsPaused = items.Count == 0;
+        
+        if(items.Count == 1) timer.Start();
     }
 
     public void Remove(ReproductionPieceComponent item)
     {
         items.Remove(item);
         stack.Remove(item);
-        timer.IsPaused = items.Count == 0;
+        
+        if(items.Count == 0) timer.Stop();
     }
 }

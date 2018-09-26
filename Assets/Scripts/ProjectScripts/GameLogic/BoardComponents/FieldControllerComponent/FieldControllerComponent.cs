@@ -113,7 +113,7 @@ public class FieldControllerComponent : IECSComponent
         
         AddPieces(new BoardPosition(26, 12), PieceType.ChestEpic1.Id, PieceType.ChestEpic3.Id);
         AddPieces(new BoardPosition(26, 16), PieceType.Chest1.Id, PieceType.Chest9.Id);
-        AddPieces(new BoardPosition(27, 16), PieceType.ChestA1.Id, PieceType.ChestA6.Id);
+        AddPieces(new BoardPosition(27, 16), PieceType.ChestA1.Id, PieceType.ChestA3.Id);
         
         AddPieces(new BoardPosition(28, 10), PieceType.ChestK1.Id, PieceType.ChestK3.Id);
         AddPieces(new BoardPosition(28, 14), PieceType.ChestL1.Id, PieceType.ChestL3.Id);
@@ -134,7 +134,7 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(24, 16), PieceType.Magic1.Id, PieceType.Magic.Id);
         AddPieces(new BoardPosition(25, 16), PieceType.Magic.Id, PieceType.Magic.Id);
         AddPieces(new BoardPosition(26, 16), PieceType.Chest1.Id, PieceType.Chest9.Id);
-        AddPieces(new BoardPosition(27, 16), PieceType.ChestA1.Id, PieceType.ChestA6.Id);
+        AddPieces(new BoardPosition(27, 16), PieceType.ChestA1.Id, PieceType.ChestA3.Id);
         AddPieces(new BoardPosition(28, 16), PieceType.O1.Id, PieceType.O9.Id);
         AddPieces(new BoardPosition(29, 16), PieceType.H1.Id, PieceType.H5.Id);
     }

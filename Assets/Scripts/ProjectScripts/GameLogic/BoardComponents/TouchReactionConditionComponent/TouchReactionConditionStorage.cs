@@ -29,10 +29,6 @@
 					
 					storage.Timer.Stop();
 					storage.Timer.OnComplete();
-					
-					var life = piece.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
-					
-					piece.Context.WorkerLogic.Return(life.Key);
 				}));
 		}
         

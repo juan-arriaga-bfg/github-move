@@ -8,12 +8,12 @@
     "PieceAmount": 4,
     "PieceWeights": [
       {
-        "Uid": "A1",
+        "Uid": "A2",
         "Weight": 20
       },
       {
-        "Uid": "F1",
-        "Weight": 5
+        "Uid": "C2",
+        "Weight": 10
       },
       {
         "Uid": "B1",
@@ -550,23 +550,28 @@
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 20
+        "Weight": 25,
+        "Override": true
       },
       {
         "Uid": "F1",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       },
       {
         "Uid": "B1",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       },
       {
         "Uid": "E1",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       },
       {
         "Uid": "J1",
-        "Weight": 5
+        "Weight": 5,
+        "Override": true
       }
     ]
   },
@@ -576,16 +581,16 @@
       "Currency": "Crystals",
       "Amount": 5
     },
-    "PieceAmount": 5,
+    "PieceAmount": 8,
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 50,
+        "Weight": 20,
         "Override": true
       },
       {
         "Uid": "A2",
-        "Weight": 10,
+        "Weight": 50,
         "Override": true
       },
       {
@@ -616,11 +621,11 @@
       "Currency": "Crystals",
       "Amount": 20
     },
-    "PieceAmount": 5,
+    "PieceAmount": 15,
     "PieceWeights": [
       {
         "Uid": "A2",
-        "Weight": 30,
+        "Weight": 50,
         "Override": true
       },
       {
@@ -661,159 +666,6 @@
       {
         "Uid": "G1",
         "Weight": 10,
-        "Override": true
-      }
-    ]
-  },
-  {
-    "Uid": "ChestA4",
-    "Price": {
-      "Currency": "Crystals",
-      "Amount": 40
-    },
-    "PieceAmount": 7,
-    "PieceWeights": [
-      {
-        "Uid": "A2",
-        "Weight": 40,
-        "Override": true
-      },
-      {
-        "Uid": "F1",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "B1",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "H1",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "J1",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "I1",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "E1",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "J2",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "F4",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "C1",
-        "Weight": 10,
-        "Override": true
-      }
-    ]
-  },
-  {
-    "Uid": "ChestA5",
-    "Price": {
-      "Currency": "Crystals",
-      "Amount": 60
-    },
-    "PieceAmount": 8,
-    "PieceWeights": [
-      {
-        "Uid": "D1",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "A2",
-        "Weight": 30
-      },
-      {
-        "Uid": "E1",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "F1",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "F5",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "I2",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "H2",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "C1",
-        "Weight": 5,
-        "Override": true
-      },
-      {
-        "Uid": "D1",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "G1",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "F2",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "J5",
-        "Weight": 10,
-        "Override": true
-      }
-    ]
-  },
-  {
-    "Uid": "ChestA6",
-    "Price": {
-      "Currency": "Crystals",
-      "Amount": 80
-    },
-    "PieceAmount": 7,
-    "PieceWeights": [
-      {
-        "Uid": "J5",
-        "Weight": 15,
-        "Override": true
-      },
-      {
-        "Uid": "A2",
-        "Weight": 30
-      },
-      {
-        "Uid": "F5",
-        "Weight": 15,
         "Override": true
       }
     ]

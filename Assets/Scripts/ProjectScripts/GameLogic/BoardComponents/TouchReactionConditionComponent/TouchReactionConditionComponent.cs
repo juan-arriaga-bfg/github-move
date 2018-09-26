@@ -1,17 +1,22 @@
-﻿public class TouchReactionConditionComponent : IECSComponent
+﻿public class TouchReactionConditionComponent : ECSEntity
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-	public int Guid => ComponentGuid;
+	public override int Guid => ComponentGuid;
 
 	public bool IsDone;
 	
-	public virtual void OnRegisterEntity(ECSEntity entity)
-	{
-		Recharge();
-	}
+	private LockerComponent locker;
+	public LockerComponent Locker => locker ?? GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
 	
-	public void OnUnRegisterEntity(ECSEntity entity)
+	public override void OnRegisterEntity(ECSEntity entity)
 	{
+		if (Locker == null)
+		{
+			locker = new LockerComponent();
+			RegisterComponent(locker);
+		}
+			
+		Recharge();
 	}
 	
 	public virtual void Recharge()
@@ -22,6 +27,6 @@
 	public virtual bool Check(BoardPosition position, Piece piece)
 	{
 		IsDone = true;
-		return IsDone;
+		return IsDone && !Locker.IsLocked;
 	}
 }

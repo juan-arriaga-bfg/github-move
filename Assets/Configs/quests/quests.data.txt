@@ -8,15 +8,15 @@
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 2
+        "Amount": 1
       },
       {
         "Currency": "Coin2",
-        "Amount": 2
+        "Amount": 1
       },
       {
         "Currency": "Coin3",
-        "Amount": 2
+        "Amount": 1
       },
       {
         "Currency": "Mana",
@@ -70,6 +70,38 @@
   {
     "Uid": "3",
     "Price": {
+      "Currency": "B2",
+      "Amount": 2
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 2
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 2
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 10
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 1
+      }
+    ],
+    "Message": "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks."
+  },
+  {
+    "Uid": "4",
+    "Price": {
       "Currency": "A4",
       "Amount": 2
     },
@@ -97,18 +129,18 @@
         "OtherUid": 2
       }
     ],
-    "Message": "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks."
+    "Message": "The miller is ready to thanks well for a good batch of sheaves"
   },
   {
-    "Uid": "4",
+    "Uid": "5",
     "Price": {
-      "Currency": "B2",
-      "Amount": 2
+      "Currency": "E3",
+      "Amount": 1
     },
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 2
+        "Amount": 1
       },
       {
         "Currency": "Coin2",
@@ -116,43 +148,11 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 10
+        "Amount": 20
       },
       {
         "Currency": "Experience",
-        "Amount": 10
-      }
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 1
-      }
-    ],
-    "Message": "The miller is ready to thanks well for a good batch of sheaves"
-  },
-  {
-    "Uid": "5",
-    "Price": {
-      "Currency": "A5",
-      "Amount": 1
-    },
-    "Rewards": [
-      {
-        "Currency": "Coin1",
-        "Amount": 3
-      },
-      {
-        "Currency": "Coin2",
-        "Amount": 3
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 40
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 40
+        "Amount": 20
       }
     ],
     "Conditions": [
@@ -166,13 +166,48 @@
   {
     "Uid": "6",
     "Price": {
-      "Currency": "E3",
+      "Currency": "B3",
+      "Amount": 3
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 3
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 15
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 3
+      }
+    ]
+  },
+  {
+    "Uid": "7",
+    "Price": {
+      "Currency": "A5",
       "Amount": 1
     },
     "Rewards": [
       {
-        "Currency": "Coin2",
+        "Currency": "Coin1",
         "Amount": 1
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 2
       },
       {
         "Currency": "Coin3",
@@ -184,7 +219,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 20
+        "Amount": 40
       }
     ],
     "Conditions": [
@@ -196,7 +231,38 @@
     "Message": "The miller is ready to thanks well for a good batch of sheaves"
   },
   {
-    "Uid": "7",
+    "Uid": "8",
+    "Price": {
+      "Currency": "J3",
+      "Amount": 1
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 2
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 2
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 10
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 5
+      }
+    ]
+  },
+  {
+    "Uid": "9",
     "Price": {
       "Currency": "C3",
       "Amount": 2
@@ -208,139 +274,15 @@
       },
       {
         "Currency": "Coin2",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 5
-      }
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 3
-      }
-    ],
-    "Message": "The merchant is ready to pay good for a batch of quality cloth"
-  },
-  {
-    "Uid": "8",
-    "Price": {
-      "Currency": "C4",
-      "Amount": 2
-    },
-    "Rewards": [
-      {
-        "Currency": "Coin1",
-        "Amount": 3
-      },
-      {
-        "Currency": "Coin2",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 10
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 10
-      }
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 7
-      }
-    ],
-    "Message": "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks."
-  },
-  {
-    "Uid": "9",
-    "Price": {
-      "Currency": "A6",
-      "Amount": 2
-    },
-    "Rewards": [
-      {
-        "Currency": "Coin3",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 75
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 75
-      }
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 5
-      }
-    ],
-    "Message": "Now we can clean up the area from obstacles and build Houses!"
-  },
-  {
-    "Uid": "10",
-    "Price": {
-      "Currency": "J3",
-      "Amount": 1
-    },
-    "Rewards": [
-      {
-        "Currency": "Coin1",
-        "Amount": 2
-      },
-      {
-        "Currency": "Coin3",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 5
-      }
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 11
-      }
-    ],
-    "Message": "The cook promises to bake a pie if you give him some apples"
-  },
-  {
-    "Uid": "11",
-    "Price": {
-      "Currency": "D3",
-      "Amount": 2
-    },
-    "Rewards": [
-      {
-        "Currency": "Coin1",
-        "Amount": 2
-      },
-      {
-        "Currency": "Coin2",
         "Amount": 3
       },
       {
         "Currency": "Mana",
-        "Amount": 10
+        "Amount": 15
       },
       {
         "Currency": "Experience",
-        "Amount": 10
+        "Amount": 15
       }
     ],
     "Conditions": [
@@ -349,10 +291,180 @@
         "OtherUid": 4
       }
     ],
-    "Message": "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks."
+    "Message": "The merchant is ready to pay good for a batch of quality cloth"
+  },
+  {
+    "Uid": "10",
+    "Price": {
+      "Currency": "B4",
+      "Amount": 1
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 1
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 1
+      },
+      {
+        "Currency": "Coin3",
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 25
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 6
+      }
+    ]
+  },
+  {
+    "Uid": "11",
+    "Price": {
+      "Currency": "H3",
+      "Amount": 1
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin3",
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 30
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 30
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 8
+      }
+    ]
   },
   {
     "Uid": "12",
+    "Price": {
+      "Currency": "C4",
+      "Amount": 2
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 1
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 1
+      },
+      {
+        "Currency": "Coin3",
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 50
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 9
+      }
+    ],
+    "Message": "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks."
+  },
+  {
+    "Uid": "13",
+    "Price": {
+      "Currency": "D3",
+      "Amount": 2
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 1
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 1
+      },
+      {
+        "Currency": "Coin3",
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 30
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 30
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 8
+      }
+    ],
+    "Message": "Now we can clean up the area from obstacles and build Houses!"
+  },
+  {
+    "Uid": "14",
+    "Price": {
+      "Currency": "A6",
+      "Amount": 2
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 2
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 2
+      },
+      {
+        "Currency": "Coin3",
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 75
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 75
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 7
+      }
+    ],
+    "Message": "The cook promises to bake a pie if you give him some apples"
+  },
+  {
+    "Uid": "15",
     "Price": {
       "Currency": "B5",
       "Amount": 1
@@ -382,15 +494,16 @@
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 11
+        "OtherUid": 10
       }
-    ]
+    ],
+    "Message": "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks."
   },
   {
-    "Uid": "13",
+    "Uid": "16",
     "Price": {
       "Currency": "C5",
-      "Amount": 3
+      "Amount": 1
     },
     "Rewards": [
       {
@@ -403,22 +516,22 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 60
+        "Amount": 75
       },
       {
         "Currency": "Experience",
-        "Amount": 40
+        "Amount": 75
       }
     ],
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 8
+        "OtherUid": 12
       }
     ]
   },
   {
-    "Uid": "14",
+    "Uid": "17",
     "Price": {
       "Currency": "G3",
       "Amount": 2
@@ -444,12 +557,12 @@
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 12
+        "OtherUid": 11
       }
     ]
   },
   {
-    "Uid": "15",
+    "Uid": "18",
     "Price": {
       "Currency": "C6",
       "Amount": 2
@@ -475,43 +588,12 @@
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 13
+        "OtherUid": 16
       }
     ]
   },
   {
-    "Uid": "16",
-    "Price": {
-      "Currency": "H3",
-      "Amount": 1
-    },
-    "Rewards": [
-      {
-        "Currency": "Coin2",
-        "Amount": 2
-      },
-      {
-        "Currency": "Coin3",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 10
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 10
-      }
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 10
-      }
-    ]
-  },
-  {
-    "Uid": "17",
+    "Uid": "19",
     "Price": {
       "Currency": "A7",
       "Amount": 1
@@ -542,7 +624,7 @@
     ]
   },
   {
-    "Uid": "18",
+    "Uid": "20",
     "Price": {
       "Currency": "C7",
       "Amount": 2
