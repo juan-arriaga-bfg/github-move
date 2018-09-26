@@ -8,6 +8,15 @@ public class TaskCreatePieceCounterEntity : TaskCounterEntity, IBoardEventListen
 
     [JsonProperty] public int PieceId { get; protected set; }
     
+#region Serialization
+
+    public bool ShouldSerializePieceId()
+    {
+        return false;
+    }
+    
+#endregion
+    
     public void ConnectToBoard()
     {
         BoardService.Current.FirstBoard.BoardEvents.AddListener(this, GameEventsCodes.CreatePiece);

@@ -4,12 +4,23 @@ using Quests;
 
 public abstract class TaskEntity : ECSEntity, IECSSerializeable
 {
-    [JsonProperty] public string Id { get; protected set; }
+    [JsonProperty(Order = -1000)] 
+    public string Id { get; protected set; }
+
+    [JsonProperty(Order = -900)]
+    public TaskState State { get; protected set; }
 
     [JsonProperty] public int Order;
+    
+#region Serialization
 
-    [JsonProperty] public TaskState State { get; protected set; }
-
+    public bool ShouldSerializeOrder()
+    {
+        return false;
+    }
+    
+#endregion
+    
     public bool IsInProgress()
     {
         return State == TaskState.New || State == TaskState.InProgress;

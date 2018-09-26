@@ -82,7 +82,7 @@ public class QuestsDataManager : IECSComponent, IDataManager, IDataLoader<List<Q
         
         foreach (var node in root.First)
         {
-            string id = node.SelectToken("Id").Value<string>();  
+            string id = node["Id"].Value<string>();  
             
 #if DEBUG
             if (ret.ContainsKey(id))

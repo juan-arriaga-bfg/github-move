@@ -26,6 +26,15 @@ public abstract class TaskCounterEntity : TaskEntity
             OnChanged?.Invoke(this);
         }
     }
+    
+#region Serialization
+
+    public bool ShouldSerializeTargetValue()
+    {
+        return false;
+    }
+    
+#endregion
 
     protected override bool Check()
     {

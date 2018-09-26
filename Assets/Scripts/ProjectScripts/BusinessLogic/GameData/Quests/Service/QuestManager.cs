@@ -1,6 +1,9 @@
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 public class QuestManager : ECSEntity
@@ -40,12 +43,6 @@ public class QuestManager : ECSEntity
    
     public void ConnectToBoard()
     {   
-        // Run quests from user profile
-        foreach (var quest in activeQuests)
-        {
-            quest.Start();
-        }
-        
         // Run new quests if conditions changed 
         CheckConditions();
 
@@ -70,14 +67,21 @@ public class QuestManager : ECSEntity
             var starter = questStarters[i];
             if (starter.Check())
             {
-                var quest = GameDataService.Current.QuestsManager.InstantiateQuest(starter.QuestToStartId);
-                activeQuests.Add(quest);
-                
-                quest.Start();
+                 StartQuestById(starter.QuestToStartId, null);
             }
         }
     }
 
+    public QuestEntity StartQuestById(string id, JToken saveData)
+    {
+        QuestEntity quest = GameDataService.Current.QuestsManager.InstantiateQuest(id);
+        activeQuests.Add(quest);
+
+        quest.Start(saveData);
+
+        return quest;
+    }
+    
     public void Cleanup()
     {
         if (activeQuests == null)
@@ -89,5 +93,64 @@ public class QuestManager : ECSEntity
         {
             quest.Cleanup();
         }
+    }
+
+        
+    private readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings
+    {
+        TypeNameHandling = TypeNameHandling.Objects,
+        TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple,
+    };
+    
+    public void Serialize()
+    {
+        List<QuestSaveData> questDatas = new List<QuestSaveData>();
+        foreach (var quest in activeQuests)
+        {
+            questDatas.Add(quest.GetDataForSerialization());
+        }
+
+        string text = JsonConvert.SerializeObject(questDatas);
+        File.WriteAllText(@"D:/save.json", text);
+        
+        //QuestEntity quest1 = activeQuests.First(e => e.Id == "Quest1");
+        // string questData = JsonConvert.SerializeObject(activeQuests[0]);
+        // string tasksData = JsonConvert.SerializeObject(activeQuests[0].Tasks);
+        //
+        // File.WriteAllText(@"D:/qsave.json", questData);
+        // File.WriteAllText(@"D:/tsave.json", tasksData);
+    }
+
+    public void Load()
+    {
+        Cleanup();
+        activeQuests.Clear();
+
+        string text = File.ReadAllText(@"D:/save.json");
+        JToken root = JToken.Parse(text);
+        
+        foreach (JToken saveData in root)
+        {
+            JToken questNode = saveData["Quest"];
+            string id = questNode["Id"].Value<string>();
+
+            StartQuestById(id, saveData);
+            
+            //Debug.Log("LOADED:\n" + quest);
+        }
+        
+        // string textQ = File.ReadAllText(@"D:/qsave.json");
+        // string textT = File.ReadAllText(@"D:/tsave.json");
+        // QuestEntity quest = activeQuests.First(e => e.Id == "Quest1");
+        // JsonConvert.PopulateObject(textQ, quest);
+        //
+        // JToken root = JToken.Parse(textT)/*.First*/;
+        //
+        // foreach (var node in root)
+        // {
+        //     string id = node.SelectToken("Id").Value<string>();
+        //     TaskEntity task = quest.Tasks.First(e => e.Id == id);
+        //     JsonConvert.PopulateObject(node.ToString(), task);
+        // }
     }
 }

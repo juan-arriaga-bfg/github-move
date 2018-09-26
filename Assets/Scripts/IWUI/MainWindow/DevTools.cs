@@ -78,18 +78,25 @@ public class DevTools : MonoBehaviour
         Debug.Log("OnDebug1Click");
         
         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, null);
+        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
+        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
+        
+        QuestService.Current.Serialize();
     }
 
     public void OnDebug2Click()
     {
         Debug.Log("OnDebug2Click");
         
-        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
+        // BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
         
 #if LEAKWATCHER
         GC.Collect();
         GC.WaitForPendingFinalizers();
         Debug.Log(LeakWatcher.Instance.DataAsString(false));
 #endif
+
+        QuestService.Current.Load();
+        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, null);
     }
 }

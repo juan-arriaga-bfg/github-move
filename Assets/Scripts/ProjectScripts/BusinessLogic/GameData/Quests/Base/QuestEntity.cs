@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Quests;
 using UnityEngine;
 
@@ -9,6 +10,12 @@ public class TaskDef
 {
     [JsonProperty] public string TaskId { get; protected set; }
     [JsonProperty] public int Order { get; protected set; }
+}
+
+public class QuestSaveData
+{
+    public QuestEntity Quest;
+    public List<TaskEntity> Tasks;
 }
 
 [JsonObject(MemberSerialization.OptIn)]
@@ -25,13 +32,33 @@ public class QuestEntity : ECSEntity, IECSSerializeable
     
     [JsonProperty] public List<TaskDef> TaskDefs { get; protected set; }
     
-    private readonly List<TaskEntity> tasks = new List<TaskEntity>();
-    private List<TaskEntity> activeTasks;
+    [JsonProperty] public List<TaskEntity> Tasks { get; protected set; } = new List<TaskEntity>();
+    
+    public List<TaskEntity> ActiveTasks { get; protected set; }
     
     public Action<QuestEntity, TaskEntity> OnChanged;
 
-    public virtual void Start()
+#region Serialization
+
+    public bool ShouldSerializeTaskDefs()
     {
+        return false;
+    }
+    
+    public bool ShouldSerializeTasks()
+    {
+        return false;
+    }
+    
+#endregion
+    
+    public virtual void Start(JToken saveData)
+    {
+        if (saveData != null)
+        {
+            Load(saveData);
+        }
+        
         if (State == TaskState.Pending)
         {
             State = TaskState.New;
@@ -40,50 +67,50 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         SelectActiveTasks();
         StartActiveTasks();
         
-        Debug.Log("Start: " + this);
+        Debug.Log($"{(saveData != null ? "LOADED" : "STARTED")} {this}");
     }
     
     public void Cleanup()
     {
-        if (activeTasks == null)
+        if (ActiveTasks == null)
         {
             return;
         }
         
-        for (int i = 0; i < activeTasks.Count; i++)
+        for (int i = 0; i < ActiveTasks.Count; i++)
         {
-            var task = activeTasks[i];
+            var task = ActiveTasks[i];
             task.Cleanup();
         }
     }
 
     private void StartActiveTasks()
     {
-        for (int i = 0; i < activeTasks.Count; i++)
+        for (int i = 0; i < ActiveTasks.Count; i++)
         {
-            var task = activeTasks[i];
+            var task = ActiveTasks[i];
             task.Start();
         }
     }
 
     private void SelectActiveTasks()
     {
-        activeTasks = new List<TaskEntity>();
+        ActiveTasks = new List<TaskEntity>();
         SortTasks();
 
-        activeTasks = new List<TaskEntity>();
+        ActiveTasks = new List<TaskEntity>();
 
         if (ActiveTasksOrder < 0)
         {
-            ActiveTasksOrder = tasks[0].Order;
+            ActiveTasksOrder = Tasks[0].Order;
         }
         
-        for (int i = 0; i < tasks.Count; i++)
+        for (int i = 0; i < Tasks.Count; i++)
         {
-            var task = tasks[i];
+            var task = Tasks[i];
             if (task.Order == ActiveTasksOrder)
             {
-                activeTasks.Add(task); 
+                ActiveTasks.Add(task); 
             }
         }
     }
@@ -93,7 +120,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         TaskEntity task = component as TaskEntity;
         if (task != null)
         {
-            tasks.Add(task);
+            Tasks.Add(task);
             task.OnChanged += TaskChanged;
         }
         
@@ -108,21 +135,59 @@ public class QuestEntity : ECSEntity, IECSSerializeable
 
     private void SortTasks()
     {
-        tasks.Sort((task1, task2) => { return task1.Order - task2.Order;});
+        Tasks.Sort((task1, task2) => { return task1.Order - task2.Order;});
     }
 
     public override string ToString()
     {
-        string ret = $"QUEST: {Id}, State: {State}, ActiveTasksOrder: {ActiveTasksOrder}, Tasks: {tasks?.Count}, ActiveTasks: {activeTasks?.Count}";
+        string ret = $"QUEST: {Id}, State: {State}, ActiveTasksOrder: {ActiveTasksOrder}, Tasks: {Tasks?.Count}, ActiveTasks: {ActiveTasks?.Count}";
 
-        if (activeTasks != null)
+        if (ActiveTasks != null)
         {
-            foreach (var task in activeTasks)
+            foreach (var task in ActiveTasks)
             {
                 ret += $"\n    [{task.Order}] " + task.ToString();
             }
         }
 
         return ret;
+    }
+
+    public TaskEntity GetTaskById(string id)
+    {
+        for (var i = 0; i < Tasks.Count; i++)
+        {
+            var task = Tasks[i];
+            if (task.Id == id)
+            {
+                return task;
+            }
+        }
+
+        return null;
+    }
+    
+    public QuestSaveData GetDataForSerialization()
+    {
+        return new QuestSaveData
+        {
+            Quest = this,
+            Tasks = Tasks
+        };
+    }
+
+    public void Load(JToken json)
+    {
+        JToken quest = json["Quest"];
+        JToken tasks = json["Tasks"];
+
+        quest.PopulateObject(this);
+        
+        foreach (var node in tasks)
+        {
+            string id = node.SelectToken("Id").Value<string>();
+            TaskEntity task = GetTaskById(id);
+            node.PopulateObject(task);
+        }
     }
 }
