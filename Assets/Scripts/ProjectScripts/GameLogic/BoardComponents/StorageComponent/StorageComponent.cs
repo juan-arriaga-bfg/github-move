@@ -25,6 +25,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     
     public TimerComponent Timer { get; private set; }
     public Vector2 TimerOffset = Vector2.zero;
+    public Vector2 BubbleOffset = new Vector3(0, 1.5f);
 
     public Action OnScatter;
     
@@ -125,6 +126,8 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         var view = pieceContext.ViewDefinition.AddView(ViewType.StorageState);
         var isShow = Filling / (float) Capacity > 0.2f;
         
+        view.Ofset = BubbleOffset;
+        view.SetOfset();
         view.Change(isShow);
 
         if (isShow)
