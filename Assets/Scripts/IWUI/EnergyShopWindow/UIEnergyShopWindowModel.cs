@@ -48,9 +48,8 @@ public class UIEnergyShopWindowModel : IWWindowModel
         var board = BoardService.Current.GetBoardById(0);
         var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
         var piece = board.BoardLogic.GetPieceAt(position);
-        var reaction = piece.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
 
-        var menu = reaction?.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
+        var menu = piece.TouchReaction?.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
         var spawn = menu?.GetDefinition<TouchReactionDefinitionSpawnShop>();
         
         if(spawn == null) return false;

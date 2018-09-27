@@ -43,8 +43,6 @@ public class ChangeStorageStateView : UIBoardView
 
     public void OnClick()
     {
-        var definition = Context.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
-
-        definition?.Touch(Context.CachedPosition);
+        Context.TouchReaction?.Touch(Context.CachedPosition);
     }
 }

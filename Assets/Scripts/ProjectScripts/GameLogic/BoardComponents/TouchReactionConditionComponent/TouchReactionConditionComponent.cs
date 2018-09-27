@@ -1,4 +1,4 @@
-﻿public class TouchReactionConditionComponent : ECSEntity
+﻿public class TouchReactionConditionComponent : ECSEntity, ILockerComponent
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
@@ -10,12 +10,7 @@
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
-		if (Locker == null)
-		{
-			locker = new LockerComponent();
-			RegisterComponent(locker);
-		}
-			
+		RegisterComponent(new LockerComponent());
 		Recharge();
 	}
 	
