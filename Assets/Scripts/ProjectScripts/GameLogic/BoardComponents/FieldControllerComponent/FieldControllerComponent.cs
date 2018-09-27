@@ -14,10 +14,6 @@ public class FieldControllerComponent : IECSComponent
         context = entity as BoardController;
         
         var fieldDef = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
-
-#if UNITY_EDITOR
-        CreateDebug();
-#endif
         
         GenerateBorder();
         var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
@@ -159,18 +155,6 @@ public class FieldControllerComponent : IECSComponent
         }
 
         return positions;
-    }
-
-    private void CreateDebug()
-    {
-        for (var i = 0; i < context.BoardDef.Width; i++)
-        {
-            for (var j = 0; j < context.BoardDef.Height; j++)
-            {
-                var cell = context.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell, new BoardPosition(i, j, 20));
-                cell.SetIndex(i, j);
-            }
-        }
     }
     
     private void AddPieces(BoardPosition position, int first, int last, bool includeFake = false)
