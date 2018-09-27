@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,7 +21,7 @@ public class DevTools : MonoBehaviour
 
     public static void ReloadScene(bool resetProgress)
     {
-        QuestService.Current.Cleanup();
+        QuestService.Current.DisconnectFromBoard();
         QuestService.Instance.SetManager(null);
             
         BoardService.Instance.SetManager(null);
@@ -88,7 +90,7 @@ public class DevTools : MonoBehaviour
     {
         Debug.Log("OnDebug2Click");
         
-        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
+        //BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
         
 #if LEAKWATCHER
         GC.Collect();
@@ -98,5 +100,10 @@ public class DevTools : MonoBehaviour
 
         // QuestService.Current.Load();
         // BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, null);
+
+        string text = File.ReadAllText(@"D:/save.json");
+        QuestSaveComponent q = JsonConvert.DeserializeObject<QuestSaveComponent>(text);
+
+        string i = "";
     }
 }

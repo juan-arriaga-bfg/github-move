@@ -64,7 +64,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         Debug.Log($"{(saveData != null ? "LOADED" : "STARTED")} {this}");
     }
     
-    public void Cleanup()
+    public void DisconnectFromBoard()
     {
         if (ActiveTasks == null)
         {
@@ -74,7 +74,21 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         for (int i = 0; i < ActiveTasks.Count; i++)
         {
             var task = ActiveTasks[i];
-            task.Cleanup();
+            task.DisconnectFromBoard();
+        }
+    }
+    
+    public void ConnectToBoard()
+    {
+        if (ActiveTasks == null)
+        {
+            return;
+        }
+        
+        for (int i = 0; i < ActiveTasks.Count; i++)
+        {
+            var task = ActiveTasks[i];
+            task.ConnectToBoard();
         }
     }
 

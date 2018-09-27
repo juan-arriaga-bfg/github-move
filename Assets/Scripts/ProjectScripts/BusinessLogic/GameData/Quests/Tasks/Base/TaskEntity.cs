@@ -46,14 +46,15 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
         {
             State = TaskState.New;
         }
-
-        var connectedToBoard = this as IConnectedToBoardEvent;
-        connectedToBoard?.ConnectToBoard();
     }
 
-    public void Cleanup()
+    public virtual void ConnectToBoard()
     {
-        var connectedToBoard = this as IConnectedToBoardEvent;
-        connectedToBoard?.DisconnectFromBoard();
+        
+    }
+
+    public virtual void DisconnectFromBoard()
+    {
+        
     }
 }

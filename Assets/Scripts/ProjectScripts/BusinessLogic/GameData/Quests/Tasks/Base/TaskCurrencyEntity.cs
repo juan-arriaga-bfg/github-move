@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-public abstract class TaskCurrencyEntity : TaskCounterEntity, IConnectedToBoardEvent
+public abstract class TaskCurrencyEntity : TaskCounterEntity
 {
     [JsonProperty] public string Currency { get; protected set; }
     
@@ -13,12 +13,12 @@ public abstract class TaskCurrencyEntity : TaskCounterEntity, IConnectedToBoardE
     
 #endregion
     
-    public void ConnectToBoard()
+    public override void ConnectToBoard()
     {
         ShopService.Current.OnPurchasedEvent += OnPurchasedEventHandler;
     }
 
-    public void DisconnectFromBoard()
+    public override void DisconnectFromBoard()
     {
         ShopService.Current.OnPurchasedEvent -= OnPurchasedEventHandler;
     }

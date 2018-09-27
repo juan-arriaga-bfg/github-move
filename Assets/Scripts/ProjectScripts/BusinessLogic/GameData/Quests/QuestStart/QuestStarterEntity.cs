@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -39,20 +40,48 @@ public class QuestStarterEntity : ECSEntity, IECSSerializeable
     
     public bool Check()
     {
-        bool isTimeToStart = true;
-        
         string log = $"[QuestStarterEntity] => Check: Starter Id: {Id}";
+        
+        bool isTimeToStart = true;
 
-        for (var i = 0; i < conditions.Count; i++)
+        var dataManager = GameDataService.Current.QuestsManager;
+        
+        switch (Mode)
         {
-            var condition = conditions[i];
-            var result    = condition.Check();
-            log += "\n" + $"Condition {i + 1}/{conditions.Count}: {condition.Id}, Result: {result}";
-
-            if (!result)
-            {
-                isTimeToStart = false;
+            case QuestStarterMode.Once:
+                if (dataManager.CompletedQuests.Contains(QuestToStartId))
+                {
+                    isTimeToStart = false;
+                    log += "\n" + $"QuestStarterMode is 'Once' but quest have been completed.";
+                }
+                else if (dataManager.GetActiveQuestById(QuestToStartId) != null)
+                {
+                    isTimeToStart = false;
+                    log += "\n" + $"QuestStarterMode is 'Once' but quest already in progress.";
+                }
                 break;
+            
+            case QuestStarterMode.Loop:
+                break;
+            
+            case QuestStarterMode.Restart:
+                break;
+        }
+
+
+        if (isTimeToStart)
+        {
+            for (var i = 0; i < conditions.Count; i++)
+            {
+                var condition = conditions[i];
+                var result    = condition.Check();
+                log += "\n" + $"Condition {i + 1}/{conditions.Count}: {condition.Id}, Result: {result}";
+
+                if (!result)
+                {
+                    isTimeToStart = false;
+                    break;
+                }
             }
         }
 

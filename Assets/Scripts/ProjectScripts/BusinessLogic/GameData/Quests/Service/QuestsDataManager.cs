@@ -13,6 +13,9 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
 
     private Dictionary<Type, Dictionary<string, JToken>> cache;
     
+    public List<QuestEntity> ActiveQuests;
+    public List<string> CompletedQuests;
+    
     private readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings
     {
         TypeNameHandling = TypeNameHandling.Objects,
@@ -37,12 +40,30 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
         LoadData<QuestEntity>                 ("configs/quests/quests.data");
         LoadData<TaskEntity>                  ("configs/quests/tasks.data");
 
-        // LoadProfile();
+        LoadProfile();
     }
 
     private void LoadProfile()
     {
-  
+        var questSave = ProfileService.Current.GetComponent<QuestSaveComponent>(QuestSaveComponent.ComponentGuid);
+
+        CompletedQuests = questSave.CompletedQuests ?? new List<string>();
+        
+        ActiveQuests = new List<QuestEntity>();
+
+        if (questSave.ActiveQuests == null)
+        {
+            return;
+        }
+
+        foreach (var activeQuest in questSave.ActiveQuests)
+        {
+            JToken saveData  = activeQuest.Data; 
+            JToken questNode = saveData["Quest"];
+            string id        = questNode["Id"].Value<string>();
+        
+           StartQuestById(id, saveData);
+        }
     }
 
     private void LoadData<T>(string path)
@@ -148,5 +169,40 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
         }
 
         return quest;
+    }
+    
+    public List<QuestSaveData> GetQuestsSaveData()
+    {
+        List<QuestSaveData> questDatas = new List<QuestSaveData>();
+        foreach (var quest in ActiveQuests)
+        {
+            questDatas.Add(quest.GetDataForSerialization());
+        }
+
+        return questDatas;
+    }
+    
+    public QuestEntity StartQuestById(string id, JToken saveData)
+    {
+        QuestEntity quest = GameDataService.Current.QuestsManager.InstantiateQuest(id);
+        ActiveQuests.Add(quest);
+
+        quest.Start(saveData);
+
+        return quest;
+    }
+
+    public QuestEntity GetActiveQuestById(string id)
+    {
+        for (var i = 0; i < ActiveQuests.Count; i++)
+        {
+            var quest = ActiveQuests[i];
+            if (quest.Id == id)
+            {
+                return quest;
+            }
+        }
+
+        return null;
     }
 }

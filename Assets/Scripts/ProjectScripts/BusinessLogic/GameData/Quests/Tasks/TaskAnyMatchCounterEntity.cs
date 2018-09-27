@@ -1,16 +1,16 @@
 using Quests;
 
-public class TaskAnyMatchCounterEntity : TaskCounterEntity, IBoardEventListener, IConnectedToBoardEvent
+public class TaskAnyMatchCounterEntity : TaskCounterEntity, IBoardEventListener
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
-    public void ConnectToBoard()
+    public override void ConnectToBoard()
     {
         BoardService.Current.FirstBoard.BoardEvents.AddListener(this, GameEventsCodes.Match);
     }
 
-    public void DisconnectFromBoard()
+    public override void DisconnectFromBoard()
     {
         BoardService.Current.FirstBoard.BoardEvents.RemoveListener(this, GameEventsCodes.Match); 
     }
