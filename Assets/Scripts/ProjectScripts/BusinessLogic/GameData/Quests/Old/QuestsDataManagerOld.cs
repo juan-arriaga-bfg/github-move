@@ -45,7 +45,7 @@ public class QuestsDataManagerOld : IECSComponent, IDataManager, IDataLoader<Lis
 			{
 				quests = data;
 
-				var questSave = ProfileService.Current.GetComponent<QuestSaveComponent>(QuestSaveComponent.ComponentGuid);
+				var questSave = ProfileService.Current.GetComponent<QuestSaveOldComponent>(QuestSaveOldComponent.ComponentGuid);
 
 				if (questSave != null)
 				{

@@ -2,6 +2,13 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 
+public enum QuestStarterMode
+{
+    Once,
+    Loop,
+    Restart
+}
+
 [JsonObject(MemberSerialization.OptIn)]
 public class QuestStarterEntity : ECSEntity, IECSSerializeable
 {
@@ -11,8 +18,10 @@ public class QuestStarterEntity : ECSEntity, IECSSerializeable
 
     [JsonProperty] public string Id { get; protected set; }
     
-    [JsonProperty] public List<string> ConditionIds { get; protected set; }
+    [JsonProperty] public QuestStarterMode Mode { get; protected set; }
     
+    [JsonProperty] public List<string> ConditionIds { get; protected set; }
+
     private List<QuestStartConditionComponent> conditions = new List<QuestStartConditionComponent>();
     
     [JsonProperty] public string QuestToStartId { get; protected set; }

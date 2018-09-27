@@ -43,6 +43,11 @@ public class QuestManager : ECSEntity
    
     public void ConnectToBoard()
     {   
+        var questSave = ProfileService.Current.GetComponent<QuestSaveComponent>(QuestSaveComponent.ComponentGuid);
+        // var json      = JsonConvert.SerializeObject(questSave);
+        
+        Load(questSave);
+        
         // Run new quests if conditions changed 
         CheckConditions();
 
@@ -102,6 +107,17 @@ public class QuestManager : ECSEntity
         TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple,
     };
     
+    public List<QuestSaveData> GetQuestsSaveData()
+    {
+        List<QuestSaveData> questDatas = new List<QuestSaveData>();
+        foreach (var quest in activeQuests)
+        {
+            questDatas.Add(quest.GetDataForSerialization());
+        }
+
+        return questDatas;
+    }
+    
     public void Serialize()
     {
         List<QuestSaveData> questDatas = new List<QuestSaveData>();
@@ -121,15 +137,21 @@ public class QuestManager : ECSEntity
         // File.WriteAllText(@"D:/tsave.json", tasksData);
     }
 
-    public void Load()
+    public void Load(QuestSaveComponent save)
     {
         Cleanup();
         activeQuests.Clear();
 
-        string text = File.ReadAllText(@"D:/save.json");
-        JToken root = JToken.Parse(text);
+        if (save.ActiveQuests == null)
+        {
+            return;
+        }
         
-        foreach (JToken saveData in root)
+        // string text = File.ReadAllText(@"D:/save.json");
+        JToken root = JToken.Parse(save.ActiveQuests[0].DataAsJson);
+        JToken active = root["ActiveQuests"];
+        
+        foreach (JToken saveData in active)
         {
             JToken questNode = saveData["Quest"];
             string id = questNode["Id"].Value<string>();

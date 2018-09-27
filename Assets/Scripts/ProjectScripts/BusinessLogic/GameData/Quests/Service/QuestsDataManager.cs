@@ -37,12 +37,12 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
         LoadData<QuestEntity>                 ("configs/quests/quests.data");
         LoadData<TaskEntity>                  ("configs/quests/tasks.data");
 
-        LoadProfile();
+        // LoadProfile();
     }
 
     private void LoadProfile()
     {
-        
+  
     }
 
     private void LoadData<T>(string path)

@@ -12,12 +12,6 @@ public class TaskDef
     [JsonProperty] public int Order { get; protected set; }
 }
 
-public class QuestSaveData
-{
-    public QuestEntity Quest;
-    public List<TaskEntity> Tasks;
-}
-
 [JsonObject(MemberSerialization.OptIn)]
 public class QuestEntity : ECSEntity, IECSSerializeable
 {
