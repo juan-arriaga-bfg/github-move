@@ -5,14 +5,12 @@ using Newtonsoft.Json.Linq;
 using Quests;
 using UnityEngine;
 
-[JsonObject(MemberSerialization.OptIn)]
 public class TaskDef
 {
     [JsonProperty] public string TaskId { get; protected set; }
     [JsonProperty] public int Order { get; protected set; }
 }
 
-[JsonObject(MemberSerialization.OptIn)]
 public class QuestEntity : ECSEntity, IECSSerializeable
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
@@ -26,11 +24,19 @@ public class QuestEntity : ECSEntity, IECSSerializeable
     
     [JsonProperty] public List<TaskDef> TaskDefs { get; protected set; }
     
-    [JsonProperty] public List<TaskEntity> Tasks { get; protected set; } = new List<TaskEntity>();
+    [JsonIgnore] public List<TaskEntity> Tasks { get; protected set; } = new List<TaskEntity>();
     
-    public List<TaskEntity> ActiveTasks { get; protected set; }
+    [JsonIgnore] public List<TaskEntity> ActiveTasks { get; protected set; }
     
-    public Action<QuestEntity, TaskEntity> OnChanged;
+    [JsonIgnore] public Action<QuestEntity, TaskEntity> OnChanged;
+    
+    // overrided to be able to use ShouldSerializeComponentsCache
+    [JsonConverter(typeof(ECSEntityJsonConverter))]
+    public override Dictionary<int, IECSComponent> ComponentsCache
+    {
+        get { return componentsCache; }
+        set { componentsCache = value; }
+    }
 
 #region Serialization
 
@@ -40,6 +46,16 @@ public class QuestEntity : ECSEntity, IECSSerializeable
     }
     
     public bool ShouldSerializeTasks()
+    {
+        return false;
+    }
+    
+    public bool ShouldSerializeState()
+    {
+        return false;
+    }
+    
+    public bool ShouldSerializeComponentsCache()
     {
         return false;
     }
@@ -172,7 +188,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         UpdateState();
         OnChanged?.Invoke(this, task);
     }
-
+    
     private void SortTasks()
     {
         Tasks.Sort((task1, task2) => { return task1.Order - task2.Order;});
@@ -229,5 +245,22 @@ public class QuestEntity : ECSEntity, IECSSerializeable
             TaskEntity task = GetTaskById(id);
             node.PopulateObject(task);
         }
+    }
+
+    public void SetClaimedState()
+    {
+        if (State == TaskState.Claimed)
+        {
+            return;
+        }
+        
+        if (State != TaskState.Completed)
+        {
+            throw new ArgumentException($"Can't set Claimed state when quest is in '{State}' state!");
+        }
+        
+        State = TaskState.Claimed;
+        
+        OnChanged?.Invoke(this, null);
     }
 }

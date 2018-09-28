@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Quests;
 
@@ -12,9 +13,23 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
 
     [JsonProperty] public int Order;
     
+    // overrided to be able to use ShouldSerializeComponentsCache
+    [JsonProperty]
+    [JsonConverter(typeof(ECSEntityJsonConverter))]
+    public override Dictionary<int, IECSComponent> ComponentsCache
+    {
+        get { return componentsCache; }
+        set { componentsCache = value; }
+    }
+    
 #region Serialization
 
     public bool ShouldSerializeOrder()
+    {
+        return false;
+    }
+    
+    public bool ShouldSerializeComponentsCache()
     {
         return false;
     }

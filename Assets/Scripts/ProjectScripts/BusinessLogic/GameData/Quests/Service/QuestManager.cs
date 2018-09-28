@@ -19,8 +19,8 @@ public class QuestManager : ECSEntity
     {
         questStarters = new List<QuestStarterEntity>();
         
-        var questStarter1 = GameDataService.Current.QuestsManager.InstantiateQuestStarter("Quest1");
-        var questStarter2 = GameDataService.Current.QuestsManager.InstantiateQuestStarter("Quest2");
+        var questStarter1 = GameDataService.Current.QuestsManager.InstantiateQuestStarter("Quest_1");
+        var questStarter2 = GameDataService.Current.QuestsManager.InstantiateQuestStarter("Quest_2");
         
         questStarters.Add(questStarter1);
         questStarters.Add(questStarter2);
@@ -72,6 +72,4 @@ public class QuestManager : ECSEntity
             quest.DisconnectFromBoard();
         }
     }
-
-
 }

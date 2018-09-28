@@ -48,6 +48,11 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIQuestWindowModel;
     }
 
+    private List<CurrencyPair> RewardsCurruncy(List<CurrencyPair> rewards)
+    {
+        return rewards.FindAll(pair => PieceType.Parse(pair.Currency) == PieceType.None.Id); 
+    }
+    
     public override void OnViewCloseCompleted()
     {
         var windowModel = Model as UIQuestWindowModel;
@@ -58,8 +63,8 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             return;
         }
         
-        var pieces = windowModel.Quest.Rewards;
-        var rewards = windowModel.Quest.RewardsCurruncy;
+        Dictionary<int, int> pieces = windowModel.ConvertRewardsToDict(windowModel.Reward);
+        List<CurrencyPair> rewards = RewardsCurruncy(windowModel.Reward);
         var board = BoardService.Current.GetBoardById(0);
         var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
         
@@ -99,7 +104,9 @@ public class UIQuestWindowView : UIGenericPopupWindowView
                 return;
             }
             
-            GameDataService.Current.QuestsManagerOld.RemoveActiveQuest(quest);
+            
+            quest.SetClaimedState();
+            GameDataService.Current.QuestsManager.CompleteQuest(quest.Id);
             
             isComplete = true;
             return;

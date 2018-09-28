@@ -12,9 +12,7 @@ public class QuestDescriptionComponent : IECSComponent, IECSSerializeable
     
     public void OnRegisterEntity(ECSEntity entity)
     {
-        Title = "test title";
-        Message = "test mess";
-        Ico = "test ico";
+
     }
 
     public void OnUnRegisterEntity(ECSEntity entity)

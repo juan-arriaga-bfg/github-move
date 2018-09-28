@@ -2,21 +2,13 @@
   {
     "$type": "QuestEntity, Assembly-CSharp",
     "Id": "Quest_1",
-    "TaskDefs": [
-      {
-        "TaskId": "CreatePiece_A2_4",
-        "Order": 0
-      }
-    ],
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "$type": "QuestDescriptionComponent, Assembly-CSharp",
         "Title": "Quest 1",
         "Message": "Quest 1 message",
         "Ico": null
       },
       "QuestRewardComponent": {
-        "$type": "QuestRewardComponent, Assembly-CSharp",
         "Value": [
           {
             "$type": "CurrencyPair, Assembly-CSharp",
@@ -30,7 +22,13 @@
           }
         ]
       }
-    }
+    },
+    "TaskDefs": [
+      {
+        "TaskId": "CreatePiece_A2_4",
+        "Order": 0
+      }
+    ]
   },
   {
     "$type": "QuestEntity, Assembly-CSharp",
@@ -43,13 +41,11 @@
     ],
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "$type": "QuestDescriptionComponent, Assembly-CSharp",
         "Title": "Quest 2",
         "Message": "Quest 2 message",
         "Ico": null
       },
       "QuestRewardComponent": {
-        "$type": "QuestRewardComponent, Assembly-CSharp",
         "Value": [
           {
             "$type": "CurrencyPair, Assembly-CSharp",

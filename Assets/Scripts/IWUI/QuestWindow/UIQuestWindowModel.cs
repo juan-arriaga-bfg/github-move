@@ -76,7 +76,7 @@ public class UIQuestWindowModel : IWWindowModel
         }
     }
 
-    private Dictionary<int, int> ConvertRewardsToDict(List<CurrencyPair> src)
+    public Dictionary<int, int> ConvertRewardsToDict(List<CurrencyPair> src)
     {
         var rewards = new Dictionary<int, int>();
 
@@ -159,11 +159,12 @@ public class UIQuestWindowModel : IWWindowModel
     {
         get
         {
-            QuestDescriptionComponent cmp = quest.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid);
-            if (cmp == null)
+            QuestDescriptionComponent cmp = FirstTask.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid);
+
+            if (cmp?.Ico == null)
             {
                 return null;
-            } 
+            }
             
             return IconService.Current.GetSpriteById(cmp.Ico);
         }

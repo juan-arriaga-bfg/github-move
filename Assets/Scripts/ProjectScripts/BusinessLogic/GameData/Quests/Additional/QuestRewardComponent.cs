@@ -11,7 +11,7 @@ public class QuestRewardComponent : IECSComponent, IECSSerializeable
     
     public void OnRegisterEntity(ECSEntity entity)
     {
-        Value = new List<CurrencyPair> {new CurrencyPair {Amount = 100, Currency = Currency.Coins.Name}};
+
     }
 
     public void OnUnRegisterEntity(ECSEntity entity)

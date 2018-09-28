@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
     {
         TypeNameHandling = TypeNameHandling.Objects,
         TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple,
+        // Converters = new List<JsonConverter> {new ECSEntityJsonConverter(), new VectorConverter()}
     };
     
     public void OnRegisterEntity(ECSEntity entity)
@@ -204,5 +206,21 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
         }
 
         return null;
+    }
+
+    public void CompleteQuest(string id)
+    {
+        for (var i = 0; i < ActiveQuests.Count; i++)
+        {
+            var quest = ActiveQuests[i];
+            if (quest.Id == id)
+            {
+                CompletedQuests.Add(id);
+                ActiveQuests.RemoveAt(i);
+                return;
+            }
+        }
+        
+        Debug.LogError($"[QuestsDataManager] => CompleteQuest: Quest with id '{id}' is not active!");
     }
 }
