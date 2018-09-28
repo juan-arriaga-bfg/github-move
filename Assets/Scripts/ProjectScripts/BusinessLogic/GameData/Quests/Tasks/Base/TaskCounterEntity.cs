@@ -1,5 +1,16 @@
+using System;
 using Newtonsoft.Json;
 using Quests;
+
+public enum CompareOperatorType
+{
+    GreaterOrEqual,
+    LessOrEqual,
+    GreaterThan,
+    LessThan,
+    Equal,
+    NotEqual
+}
 
 [JsonObject(MemberSerialization.OptIn)]
 public abstract class TaskCounterEntity : TaskEntity
@@ -9,6 +20,9 @@ public abstract class TaskCounterEntity : TaskEntity
     
     [JsonProperty(PropertyName = "CurrentValue")] 
     private int currentValue;
+
+    [JsonProperty]
+    public CompareOperatorType CompareOperator { get; protected set; } = CompareOperatorType.GreaterOrEqual;
     
     public int CurrentValue
     {
@@ -34,8 +48,50 @@ public abstract class TaskCounterEntity : TaskEntity
         return false;
     }
     
+    public bool ShouldSerializeCompareOperator()
+    {
+        return false;
+    }
+    
 #endregion
 
+    protected virtual bool Compare(int current, int target)
+    {
+        bool result;
+        
+        switch (CompareOperator)
+        {
+            case CompareOperatorType.GreaterOrEqual:
+                result = current >= target;
+                break;
+            
+            case CompareOperatorType.LessOrEqual:
+                result = current <= target;
+                break;
+            
+            case CompareOperatorType.GreaterThan:
+                result = current > target;
+                break;
+            
+            case CompareOperatorType.LessThan:
+                result = current < target;
+                break;
+            
+            case CompareOperatorType.Equal:
+                result = current == target;
+                break;
+            
+            case CompareOperatorType.NotEqual:
+                result = current != target;
+                break;
+            
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        return result;
+    }
+    
     protected override bool Check()
     {
         if (IsCompleted())
@@ -45,7 +101,7 @@ public abstract class TaskCounterEntity : TaskEntity
 
         if (IsInProgress())
         {
-            bool result = currentValue >= TargetValue;
+            bool result = Compare(currentValue, TargetValue);
             if (result)
             {
                 State = TaskState.Completed;
