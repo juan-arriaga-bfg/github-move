@@ -1,38 +1,19 @@
 [
   {
     "$type": "QuestEntity, Assembly-CSharp",
-    "Id": "Quest1",
+    "Id": "Quest_1",
     "TaskDefs": [
       {
-        "TaskId": "CreateTaskId_1",
-        "Order": 0
-      },
-      {
-        "TaskId": "CurrencyCoinsTaskId_1",
-        "Order": 0
-      },
-      {
-        "TaskId": "CurrencyExpTaskId_1",
-        "Order": 0
-      },
-      {
-        "TaskId": "MatchTaskId_1",
-        "Order": 0
-      },
-      {
-        "TaskId": "Dummy_1",
-        "Order": 0
-      },
-      {
-        "TaskId": "CurrencyManaSpendTaskId_1",
+        "TaskId": "CreatePiece_A2_4",
         "Order": 0
       }
     ],
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "$type": "QuestDescriptionComponent, Assembly-CSharp",
-        "Message": "test mess 1",
-        "Ico": "test ico 1"
+        "Title": "Quest 1",
+        "Message": "Quest 1 message",
+        "Ico": null
       },
       "QuestRewardComponent": {
         "$type": "QuestRewardComponent, Assembly-CSharp",
@@ -41,6 +22,11 @@
             "$type": "CurrencyPair, Assembly-CSharp",
             "Currency": "Coins",
             "Amount": 100
+          },
+          {
+            "$type": "CurrencyPair, Assembly-CSharp",
+            "Currency": "Mana",
+            "Amount": 10
           }
         ]
       }
@@ -48,22 +34,19 @@
   },
   {
     "$type": "QuestEntity, Assembly-CSharp",
-    "Id": "Quest2",
+    "Id": "Quest_2",
     "TaskDefs": [
       {
-        "TaskId": "CreateTaskId_1",
-        "Order": 0
-      },
-      {
-        "TaskId": "MatchTaskId_1",
+        "TaskId": "CreatePiece_A3_3",
         "Order": 0
       }
     ],
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "$type": "QuestDescriptionComponent, Assembly-CSharp",
-        "Message": "test mess 2",
-        "Ico": "test ico 2"
+        "Title": "Quest 2",
+        "Message": "Quest 2 message",
+        "Ico": null
       },
       "QuestRewardComponent": {
         "$type": "QuestRewardComponent, Assembly-CSharp",
@@ -72,6 +55,11 @@
             "$type": "CurrencyPair, Assembly-CSharp",
             "Currency": "Coins",
             "Amount": 200
+          },
+          {
+            "$type": "CurrencyPair, Assembly-CSharp",
+            "Currency": "Mana",
+            "Amount": 20
           }
         ]
       }

@@ -46,6 +46,37 @@ public class QuestEntity : ECSEntity, IECSSerializeable
     
 #endregion
     
+    public bool IsInProgress()
+    {
+        return State == TaskState.New || State == TaskState.InProgress;
+    }
+    
+    public bool IsCompleted()
+    {
+        return State == TaskState.Completed || State == TaskState.Claimed;
+    }
+    
+    public bool IsClaimed()
+    {
+        return State == TaskState.Claimed;
+    }
+
+    private void UpdateState()
+    {
+        if (State == TaskState.InProgress)
+        {
+            foreach (var task in Tasks)
+            {
+                if (task.State != TaskState.Completed && task.State != TaskState.Claimed)
+                {
+                    return;
+                }
+            }
+            
+            State = TaskState.Completed;
+        }
+    }
+    
     public virtual void Start(JToken saveData)
     {
         if (saveData != null)
@@ -138,6 +169,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
     private void TaskChanged(TaskEntity task)
     {
         Debug.Log("TaskChanged: " + this);
+        UpdateState();
         OnChanged?.Invoke(this, task);
     }
 

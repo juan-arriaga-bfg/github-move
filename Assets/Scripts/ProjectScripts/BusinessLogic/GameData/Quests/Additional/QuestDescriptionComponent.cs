@@ -6,11 +6,13 @@ public class QuestDescriptionComponent : IECSComponent, IECSSerializeable
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
 
+    [JsonProperty] public string Title { get; protected set; }
     [JsonProperty] public string Message { get; protected set; }
     [JsonProperty] public string Ico { get; protected set; }
     
     public void OnRegisterEntity(ECSEntity entity)
     {
+        Title = "test title";
         Message = "test mess";
         Ico = "test ico";
     }

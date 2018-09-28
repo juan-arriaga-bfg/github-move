@@ -89,11 +89,11 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         
         var board = BoardService.Current.GetBoardById(0);
         
-        if (quest.Check())
+        if (quest.IsCompleted())
         {
             var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
             
-            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, quest.Rewards.Values.Sum()))
+            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, windowModel.Reward.Sum(e => e.Amount)))
             {
                 UIErrorWindowController.AddError("Need more free cells");
                 return;
@@ -105,7 +105,8 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             return;
         }
         
-        var piece = board.BoardLogic.MatchDefinition.GetFirst(quest.WantedPiece);
+        var targetId = (quest.Tasks[0] as TaskCreatePieceCounterEntity).PieceId;
+        var piece = board.BoardLogic.MatchDefinition.GetFirst(targetId);
         
         if(piece == PieceType.None.Id) return;
         
@@ -166,7 +167,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             Destroy(child.gameObject);
         }
         
-        var targetId = model.Quest.WantedPiece;
+        var targetId = (model.Quest.Tasks[0] as TaskCreatePieceCounterEntity).PieceId;
         var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId, CHAIN_LENGTH);
         CodexChainDef chainDef = new CodexChainDef {ItemDefs = itemDefs};
         UICodexWindowView.CreateItems(chain, chainDef, codexItemPrefab, CHAIN_LENGTH);

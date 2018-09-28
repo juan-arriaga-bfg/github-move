@@ -1,36 +1,121 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Text;
+using Quests;
 
 public class UIQuestWindowModel : IWWindowModel
 {
-    private QuestOld quest;
-    public QuestOld Quest
+    private QuestEntity quest;
+    public QuestEntity Quest
     {
-        get { return quest ?? GameDataService.Current.QuestsManagerOld.ActiveQuests[0]; }
-        set { quest = value; }
+        get { return quest; }
+        set
+        {
+            quest = value;
+            questDescription = quest?.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid);
+            tasks = quest?.Tasks;
+        }
     }
 
-    public string Title => $"Quest {Quest.Def.Uid}";
+    private QuestDescriptionComponent questDescription;
 
-    public string Message => Quest.Def.Message;
+    private List<TaskEntity> tasks;
 
-    public string Description => "Collect pieces for quest complete";
+    private TaskEntity FirstTask => tasks[0];
+    
+    public string Title => questDescription?.Title;
 
-    public string ButtonText => Quest.Check() ? "Claim" : "Find";
+    public string Message => questDescription?.Message;
 
-    public string AmountText => $"<color=#{(Quest.Check() ? "FFFFFF" : "FE4704")}><size=55>{Quest.CurrentAmount}</size></color>/{Quest.TargetAmount}";
+    public string Description => FirstTask.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
+    
+    public List<CurrencyPair> Reward => FirstTask.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
 
+    public string ButtonText
+    {
+        get
+        {
+            switch (Quest.State)
+            {
+                case TaskState.Pending:
+                case TaskState.New:
+                case TaskState.InProgress:                                                                                              
+                    return "Find";
+
+                case TaskState.Completed:
+                    return "Claim";
+
+                case TaskState.Claimed:
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return string.Empty;
+        }
+    }
+
+    public string AmountText
+    {
+        get
+        {
+            var task = FirstTask;
+            TaskCounterEntity counterTask = task as TaskCounterEntity;
+            if (counterTask == null)
+            {
+                return string.Empty;
+            }
+            
+            bool isCompleted = task.IsCompleted();
+            int  current     = counterTask.CurrentValue;
+            int  target      = counterTask.TargetValue;
+                
+            return $"<color=#{( isCompleted ? "FFFFFF" : "FE4704")}><size=55>{current}</size></color>/{target}";
+        }
+    }
+
+    private Dictionary<int, int> ConvertRewardsToDict(List<CurrencyPair> src)
+    {
+        var rewards = new Dictionary<int, int>();
+
+        foreach (var reward in src)
+        {
+            var id = PieceType.Parse(reward.Currency);
+
+            if (id == PieceType.None.Id) continue;
+
+            if (rewards.ContainsKey(id))
+            {
+                rewards[id] += reward.Amount;
+                continue;
+            }
+
+            rewards.Add(id, reward.Amount);
+        }
+
+        return rewards;
+    }
+    
     public string RewardText
     {
         get
         {
+            QuestRewardComponent rewardComponent = quest.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid);
+            if (rewardComponent == null)
+            {
+                return string.Empty;
+            }
+
+            var rewardDef = rewardComponent.Value;
+            
             var types = new List<string>();
             var rewards = new List<string>();
             
             var str = new StringBuilder("<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>Reward:</color></font> <size=50>");
             
-            foreach (var reward in Quest.Def.Rewards)
+            foreach (var reward in rewardDef)
             {
                 var currency = reward.Currency;
                 
@@ -56,7 +141,7 @@ public class UIQuestWindowModel : IWWindowModel
                 
                 types.Add(currency);
                 
-                var pair = CurrencyHellper.ResourcePieceToCurrence(Quest.Rewards, currency);
+                var pair = CurrencyHellper.ResourcePieceToCurrence(ConvertRewardsToDict(rewardDef), currency);
 
                 if (pair.Amount == 0) pair.Amount = reward.Amount;
                 
@@ -70,5 +155,17 @@ public class UIQuestWindowModel : IWWindowModel
         }
     }
 
-    public Sprite Icon => IconService.Current.GetSpriteById(Quest.WantedIcon);
+    public Sprite Icon
+    {
+        get
+        {
+            QuestDescriptionComponent cmp = quest.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid);
+            if (cmp == null)
+            {
+                return null;
+            } 
+            
+            return IconService.Current.GetSpriteById(cmp.Ico);
+        }
+    }
 }

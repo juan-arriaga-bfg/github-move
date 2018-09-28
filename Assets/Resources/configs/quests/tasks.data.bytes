@@ -1,35 +1,30 @@
 [
   {
-    "$type": "TaskAnyMatchCounterEntity, Assembly-CSharp",
-    "Id": "MatchTaskId_1",
-    "TargetValue": 3
-  },
+    "$type": "TaskCreatePieceCounterEntity, Assembly-CSharp",
+    "Id": "CreatePiece_A2_4",
+    "PieceId": 101,
+    "TargetValue": 4,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "$type": "QuestDescriptionComponent, Assembly-CSharp",
+        "Title": "null",
+        "Message": "Create A2",
+        "Ico": "A2"
+      }
+    }
+  },  
   {
     "$type": "TaskCreatePieceCounterEntity, Assembly-CSharp",
-    "Id": "CreateTaskId_1",
-    "PieceId": 100,
-    "TargetValue": 2
-  },
-  {
-    "$type": "TaskCurrencyCollectEntity, Assembly-CSharp",
-    "Id": "CurrencyCoinsTaskId_1",
-    "Currency": "Coins",
-    "TargetValue": 200
-  },
-  {
-    "$type": "TaskCurrencyCollectEntity, Assembly-CSharp",
-    "Id": "CurrencyExpTaskId_1",
-    "Currency": "Experience",
-    "TargetValue": 50
-  },
-  {
-    "$type": "TaskCurrencySpendEntity, Assembly-CSharp",
-    "Id": "CurrencyManaSpendTaskId_1",
-    "Currency": "Mana",
-    "TargetValue": 50
-  },
-  {
-    "$type": "TaskDummyEntity, Assembly-CSharp",
-    "Id": "Dummy_1"
+    "Id": "CreatePiece_A3_3",
+    "PieceId": 102,
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "$type": "QuestDescriptionComponent, Assembly-CSharp",
+        "Title": "null",
+        "Message": "Create A3",
+        "Ico": "A3"
+      }
+    }
   }
 ]
