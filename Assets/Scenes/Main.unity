@@ -496,6 +496,9 @@ MonoBehaviour:
   zoomVelocity: 0
   cameraZoom: {fileID: 1931227305}
   cameraMove: {fileID: 1931227306}
+  isAnimating: 0
+  ignoredUIWindows:
+  - MainWindow
 --- !u!114 &1931227308
 MonoBehaviour:
   m_ObjectHideFlags: 0
