@@ -5,7 +5,7 @@
       "Currency": "Crystals",
       "Amount": 1
     },
-    "PieceAmount": 4,
+    "PieceAmount": 7,
     "PieceWeights": [
       {
         "Uid": "A2",
@@ -35,7 +35,7 @@
       "Currency": "Crystals",
       "Amount": 5
     },
-    "PieceAmount": 5,
+    "PieceAmount": 10,
     "PieceWeights": [
       {
         "Uid": "A1",
@@ -75,7 +75,7 @@
       "Currency": "Crystals",
       "Amount": 20
     },
-    "PieceAmount": 5,
+    "PieceAmount": 12,
     "PieceWeights": [
       {
         "Uid": "A2",
@@ -130,7 +130,7 @@
       "Currency": "Crystals",
       "Amount": 40
     },
-    "PieceAmount": 7,
+    "PieceAmount": 15,
     "PieceWeights": [
       {
         "Uid": "A2",
@@ -190,7 +190,7 @@
       "Currency": "Crystals",
       "Amount": 60
     },
-    "PieceAmount": 8,
+    "PieceAmount": 15,
     "PieceWeights": [
       {
         "Uid": "D1",
@@ -550,7 +550,7 @@
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 25,
+        "Weight": 50,
         "Override": true
       },
       {
@@ -560,7 +560,7 @@
       },
       {
         "Uid": "B1",
-        "Weight": 5,
+        "Weight": 15,
         "Override": true
       },
       {
@@ -595,7 +595,7 @@
       },
       {
         "Uid": "B1",
-        "Weight": 5,
+        "Weight": 10,
         "Override": true
       },
       {
@@ -605,7 +605,7 @@
       },
       {
         "Uid": "F1",
-        "Weight": 10,
+        "Weight": 5,
         "Override": true
       },
       {
@@ -709,7 +709,7 @@
       "Currency": "Crystals",
       "Amount": 5
     },
-    "PieceAmount": 14,
+    "PieceAmount": 10,
     "PieceWeights": [
       {
         "Uid": "Empty",
@@ -745,7 +745,7 @@
       "Currency": "Crystals",
       "Amount": 20
     },
-    "PieceAmount": 22,
+    "PieceAmount": 14,
     "PieceWeights": [
       {
         "Uid": "Empty",
@@ -790,7 +790,7 @@
       },
       {
         "Uid": "K2",
-        "Weight": 7,
+        "Weight": 15,
         "Override": true
       }
     ],
@@ -809,22 +809,26 @@
       "Currency": "Crystals",
       "Amount": 5
     },
-    "PieceAmount": 14,
+    "PieceAmount": 10,
     "PieceWeights": [
       {
         "Uid": "Empty",
-        "Weight": 5,
+        "Weight": 10,
         "Override": true
       },
       {
         "Uid": "K2",
-        "Weight": 5,
+        "Weight": 40,
         "Override": true
       },
       {
         "Uid": "K3",
         "Weight": 20,
         "Override": true
+      },
+      {
+        "Uid": "K1",
+        "Weight": 10
       }
     ],
     "RandomPieces": [
@@ -845,17 +849,25 @@
       "Currency": "Crystals",
       "Amount": 20
     },
-    "PieceAmount": 22,
+    "PieceAmount": 14,
     "PieceWeights": [
       {
         "Uid": "Empty",
-        "Weight": 2,
+        "Weight": 10,
         "Override": true
       },
       {
         "Uid": "K4",
-        "Weight": 10,
+        "Weight": 50,
         "Override": true
+      },
+      {
+        "Uid": "K2",
+        "Weight": 30
+      },
+      {
+        "Uid": "K3",
+        "Weight": 20
       }
     ],
     "RandomPieces": [
@@ -890,7 +902,7 @@
       },
       {
         "Uid": "L2",
-        "Weight": 7,
+        "Weight": 15,
         "Override": true
       }
     ],
@@ -909,22 +921,26 @@
       "Currency": "Crystals",
       "Amount": 5
     },
-    "PieceAmount": 14,
+    "PieceAmount": 10,
     "PieceWeights": [
       {
         "Uid": "Empty",
-        "Weight": 5,
+        "Weight": 10,
         "Override": true
       },
       {
         "Uid": "L2",
-        "Weight": 5,
+        "Weight": 40,
         "Override": true
       },
       {
         "Uid": "L3",
         "Weight": 20,
         "Override": true
+      },
+      {
+        "Uid": "L1",
+        "Weight": 10
       }
     ],
     "RandomPieces": [
@@ -945,17 +961,25 @@
       "Currency": "Crystals",
       "Amount": 20
     },
-    "PieceAmount": 22,
+    "PieceAmount": 14,
     "PieceWeights": [
       {
         "Uid": "Empty",
-        "Weight": 2,
+        "Weight": 10,
         "Override": true
       },
       {
         "Uid": "L4",
-        "Weight": 10,
+        "Weight": 50,
         "Override": true
+      },
+      {
+        "Uid": "L2",
+        "Weight": 30
+      },
+      {
+        "Uid": "L3",
+        "Weight": 20
       }
     ],
     "RandomPieces": [
@@ -974,11 +998,28 @@
     "Uid": "Basket1",
     "Price": {
       "Currency": "Coins",
-      "Amount": 100
+      "Amount": 200
     },
     "HardPieces": [
       {
         "Currency": "F5",
+        "Amount": 1
+      },
+      {
+        "Currency": "J5",
+        "Amount": 2
+      }
+    ]
+  },
+  {
+    "Uid": "Basket2",
+    "Price": {
+      "Currency": "Coins",
+      "Amount": 350
+    },
+    "HardPieces": [
+      {
+        "Currency": "D5",
         "Amount": 2
       },
       {
@@ -988,27 +1029,10 @@
     ]
   },
   {
-    "Uid": "Basket2",
-    "Price": {
-      "Currency": "Coins",
-      "Amount": 180
-    },
-    "HardPieces": [
-      {
-        "Currency": "D5",
-        "Amount": 1
-      },
-      {
-        "Currency": "J5",
-        "Amount": 3
-      }
-    ]
-  },
-  {
     "Uid": "Basket3",
     "Price": {
       "Currency": "Coins",
-      "Amount": 250
+      "Amount": 500
     },
     "HardPieces": [
       {

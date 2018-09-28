@@ -9,9 +9,7 @@
     public virtual string Price => $"Send<sprite name={Worker.Currency}>";
     
     public virtual bool IsUseCooldown => false;
-
-    public string Key => thisContext.CachedPosition.ToSaveString();
-
+    
     public virtual TimerComponent Timer => storage.Timer;
     public float GetProgressNext => 1 - (current+1)/(float)HP;
 
@@ -39,11 +37,12 @@
         if (item == null) return null;
         
         current = item.Step;
-        
+
+        thisContext.Context.WorkerLogic.Init(thisContext.CachedPosition, storage.Timer);
         OnTimerStart();
 
         if (storage.IsFilled) OnTimerComplete();
-
+        
         return item;
     }
 
@@ -53,18 +52,13 @@
 
     public virtual void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
-        thisContext.Context.WorkerLogic.Replase(from.ToSaveString(), to.ToSaveString());
+        thisContext.Context.WorkerLogic.Replace(from, to);
     }
 
     public virtual void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
         storage.Timer.OnStart -= OnTimerStart;
         storage.Timer.OnStart -= OnTimerComplete;
-    }
-
-    protected virtual int GetTimerDelay()
-    {
-        return storage.Timer.Delay;
     }
     
     public virtual bool Damage()
@@ -74,7 +68,7 @@
         var isSuccess = false;
 
         if (CurrencyHellper.IsCanPurchase(Energy, true) == false
-            || thisContext.Context.WorkerLogic.Get(Key, GetTimerDelay()) == false) return false;
+            || thisContext.Context.WorkerLogic.Get(thisContext.CachedPosition, storage.Timer) == false) return false;
         
         Success();
         
@@ -116,6 +110,6 @@
     
     protected virtual void OnTimerComplete()
     {
-        thisContext.Context.WorkerLogic.Return(Key);
+        thisContext.Context.WorkerLogic.Return(thisContext.CachedPosition);
     }
 }

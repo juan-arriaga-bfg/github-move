@@ -88,7 +88,8 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
     
     public void Clear()
     {
-        if (life.Damage()) Change(false);
+        life.Damage();
+        Change(false);
     }
     
     public void OnBoardEvent(int code, object context)

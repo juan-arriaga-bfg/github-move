@@ -27,12 +27,7 @@ public class ObstacleLifeComponent : StorageLifeComponent
         storage.Timer.Price = GameDataService.Current.ObstaclesManager.GetFastPriceByStep(thisContext.PieceType, current);
         storage.Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current);
     }
-
-    protected override int GetTimerDelay()
-    {
-        return GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current);
-    }
-
+    
     protected override void OnStep()
     {
         var pieces = GameDataService.Current.ObstaclesManager.GetPiecesByStep(thisContext.PieceType, current);

@@ -1,4 +1,6 @@
-﻿public class CharacterPieceBuilder : GenericPieceBuilder
+﻿using UnityEngine;
+
+public class CharacterPieceBuilder : GenericPieceBuilder
 {
 	public override Piece Build(int pieceType, BoardController context)
 	{
@@ -15,7 +17,8 @@
 			IsAutoStart = false,
 			IsTimerShow = false,
 			Amount = def.SpawnResources.Amount,
-			Capacity = def.SpawnResources.Amount
+			Capacity = def.SpawnResources.Amount,
+			BubbleOffset = new Vector3(-0.1f, 2f)
 		};
 		
 		piece.RegisterComponent(storage);

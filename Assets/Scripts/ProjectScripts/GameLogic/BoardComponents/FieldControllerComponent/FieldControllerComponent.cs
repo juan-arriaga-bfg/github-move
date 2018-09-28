@@ -14,10 +14,6 @@ public class FieldControllerComponent : IECSComponent
         context = entity as BoardController;
         
         var fieldDef = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
-
-#if UNITY_EDITOR
-        CreateDebug();
-#endif
         
         GenerateBorder();
         var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
@@ -94,9 +90,9 @@ public class FieldControllerComponent : IECSComponent
 
     private void TestFieldOleg()
     {
-        AddPieces(new BoardPosition(4, 16), PieceType.O1.Id,  PieceType.O9.Id);
-        AddPieces(new BoardPosition(5, 16), PieceType.OX1.Id, PieceType.OX9.Id);
-        AddPieces(new BoardPosition(6, 16), PieceType.OEpic1.Id, PieceType.OEpic9.Id);
+        AddPieces(new BoardPosition(24, 12), PieceType.O1.Id,  PieceType.O9.Id);
+        AddPieces(new BoardPosition(25, 12), PieceType.O1.Id, PieceType.O9.Id);
+        /*AddPieces(new BoardPosition(6, 16), PieceType.OEpic1.Id, PieceType.OEpic9.Id);
         
         AddPieces(new BoardPosition(10, 12), PieceType.B1.Id, PieceType.B5.Id);
         AddPieces(new BoardPosition(11, 12), PieceType.C1.Id, PieceType.C12.Id, true);
@@ -118,7 +114,7 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(28, 10), PieceType.ChestK1.Id, PieceType.ChestK3.Id);
         AddPieces(new BoardPosition(28, 14), PieceType.ChestL1.Id, PieceType.ChestL3.Id);
         AddPieces(new BoardPosition(28, 18), PieceType.ChestC1.Id, PieceType.ChestC3.Id);
-        AddPieces(new BoardPosition(28, 22), PieceType.Basket1.Id, PieceType.Basket3.Id);
+        AddPieces(new BoardPosition(28, 22), PieceType.Basket1.Id, PieceType.Basket3.Id);*/
         
         AddPieces(new BoardPosition(29, 16), PieceType.Char1.Id, PieceType.Char1.Id);
     }
@@ -159,18 +155,6 @@ public class FieldControllerComponent : IECSComponent
         }
 
         return positions;
-    }
-
-    private void CreateDebug()
-    {
-        for (var i = 0; i < context.BoardDef.Width; i++)
-        {
-            for (var j = 0; j < context.BoardDef.Height; j++)
-            {
-                var cell = context.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell, new BoardPosition(i, j, 20));
-                cell.SetIndex(i, j);
-            }
-        }
     }
     
     private void AddPieces(BoardPosition position, int first, int last, bool includeFake = false)

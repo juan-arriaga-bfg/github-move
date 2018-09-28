@@ -71,7 +71,6 @@ public class MatchPieceToAnimation : BoardAnimation
 			SetTrailToPiece(boardElement, points[i]);
 			sequence.Insert(0 + elementOffset*i, boardElement.CachedTransform.DOMove(new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.25f));
 			sequence.Insert(0.15f + elementOffset*i, boardElement.CachedTransform.DOScale(Vector3.zero, 0.20f));
-			
 		}
 
 		sequence.InsertCallback(0.35f, () => ParticleView.Show(R.ExplosionParticleSystem, particlePosition));
@@ -82,7 +81,7 @@ public class MatchPieceToAnimation : BoardAnimation
 			{
 				context.RemoveElementAt(points[i]);
 			}
-
+			
 			CompleteAnimation(context);
 		});
 	}

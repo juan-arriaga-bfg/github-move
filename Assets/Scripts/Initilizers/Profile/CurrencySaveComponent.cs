@@ -5,8 +5,7 @@ using Newtonsoft.Json;
 public class CurrencySaveComponent : ECSEntity, IECSSerializeable
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-
-    public override int Guid { get { return ComponentGuid; } }
+    public override int Guid => ComponentGuid;
 
     [JsonProperty]
     public long EnergyLastUpdate;

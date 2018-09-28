@@ -37,7 +37,7 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.A6.Id, new PieceMatchDef {Next = PieceType.A7Fake.Id, Previous = PieceType.A5.Id, Count = 3});
         dict.Add(PieceType.A7Fake.Id, new PieceMatchDef {Next = PieceType.A7.Id, Previous = PieceType.A6.Id, Count = 1, IsIgnore = true});
         dict.Add(PieceType.A7.Id, new PieceMatchDef {Next = PieceType.A8Fake.Id, Previous = PieceType.A6.Id, Count = 3});
-        dict.Add(PieceType.A8Fake.Id, new PieceMatchDef {Next = PieceType.A9.Id, Previous = PieceType.A7.Id, Count = 1, IsIgnore = true});
+        dict.Add(PieceType.A8Fake.Id, new PieceMatchDef {Next = PieceType.A8.Id, Previous = PieceType.A7.Id, Count = 1, IsIgnore = true});
         dict.Add(PieceType.A8.Id, new PieceMatchDef {Next = PieceType.A9Fake.Id, Previous = PieceType.A7.Id, Count = 3});
         
         dict = AddFakeMulticellularPiece(dict, PieceType.A9Fake.Id, PieceType.A9.Id, PieceType.A8.Id);
@@ -165,7 +165,7 @@ public class MatchDefinitionBuilder
         
         dict.Add(PieceType.K10.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.K9.Id});
         
-        // ------------------ A -------------
+        // ------------------ L -------------
         
         dict.Add(PieceType.L1.Id, new PieceMatchDef {Next = PieceType.L2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.L2.Id, new PieceMatchDef {Next = PieceType.L3Fake.Id, Previous = PieceType.L1.Id, Count = 3});
@@ -179,7 +179,7 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.L6.Id, new PieceMatchDef {Next = PieceType.L7Fake.Id, Previous = PieceType.L5.Id, Count = 3});
         dict.Add(PieceType.L7Fake.Id, new PieceMatchDef {Next = PieceType.L7.Id, Previous = PieceType.L6.Id, Count = 1, IsIgnore = true});
         dict.Add(PieceType.L7.Id, new PieceMatchDef {Next = PieceType.L8Fake.Id, Previous = PieceType.L6.Id, Count = 3});
-        dict.Add(PieceType.L8Fake.Id, new PieceMatchDef {Next = PieceType.L9.Id, Previous = PieceType.L7.Id, Count = 1, IsIgnore = true});
+        dict.Add(PieceType.L8Fake.Id, new PieceMatchDef {Next = PieceType.L8.Id, Previous = PieceType.L7.Id, Count = 1, IsIgnore = true});
         dict.Add(PieceType.L8.Id, new PieceMatchDef {Next = PieceType.L9Fake.Id, Previous = PieceType.L7.Id, Count = 3});
         
         dict = AddFakeMulticellularPiece(dict, PieceType.L9Fake.Id, PieceType.L9.Id, PieceType.L8.Id);

@@ -8,15 +8,7 @@
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 1
-      },
-      {
-        "Currency": "Coin2",
-        "Amount": 1
-      },
-      {
-        "Currency": "Coin3",
-        "Amount": 1
+        "Amount": 2
       },
       {
         "Currency": "Mana",
@@ -43,11 +35,11 @@
     },
     "Rewards": [
       {
-        "Currency": "Coin2",
-        "Amount": 2
+        "Currency": "Coin1",
+        "Amount": 1
       },
       {
-        "Currency": "Coin3",
+        "Currency": "Coin2",
         "Amount": 1
       },
       {
@@ -56,7 +48,7 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 40
+        "Amount": 30
       }
     ],
     "Conditions": [
@@ -112,7 +104,7 @@
       },
       {
         "Currency": "Coin2",
-        "Amount": 3
+        "Amount": 2
       },
       {
         "Currency": "Mana",
@@ -144,7 +136,7 @@
       },
       {
         "Currency": "Coin2",
-        "Amount": 1
+        "Amount": 2
       },
       {
         "Currency": "Mana",
@@ -172,11 +164,15 @@
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 3
+        "Amount": 1
       },
       {
         "Currency": "Coin2",
-        "Amount": 3
+        "Amount": 1
+      },
+      {
+        "Currency": "Coin3",
+        "Amount": 1
       },
       {
         "Currency": "Mana",
@@ -202,14 +198,6 @@
     },
     "Rewards": [
       {
-        "Currency": "Coin1",
-        "Amount": 1
-      },
-      {
-        "Currency": "Coin2",
-        "Amount": 2
-      },
-      {
         "Currency": "Coin3",
         "Amount": 1
       },
@@ -227,8 +215,7 @@
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
         "OtherUid": 4
       }
-    ],
-    "Message": "The miller is ready to thanks well for a good batch of sheaves"
+    ]
   },
   {
     "Uid": "8",
@@ -239,7 +226,7 @@
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 2
+        "Amount": 1
       },
       {
         "Currency": "Coin2",
@@ -274,7 +261,7 @@
       },
       {
         "Currency": "Coin2",
-        "Amount": 3
+        "Amount": 1
       },
       {
         "Currency": "Mana",
@@ -306,10 +293,6 @@
       },
       {
         "Currency": "Coin2",
-        "Amount": 1
-      },
-      {
-        "Currency": "Coin3",
         "Amount": 1
       },
       {
@@ -363,14 +346,6 @@
     },
     "Rewards": [
       {
-        "Currency": "Coin1",
-        "Amount": 1
-      },
-      {
-        "Currency": "Coin2",
-        "Amount": 1
-      },
-      {
         "Currency": "Coin3",
         "Amount": 1
       },
@@ -404,11 +379,7 @@
       },
       {
         "Currency": "Coin2",
-        "Amount": 1
-      },
-      {
-        "Currency": "Coin3",
-        "Amount": 1
+        "Amount": 2
       },
       {
         "Currency": "Mana",
@@ -431,16 +402,16 @@
     "Uid": "14",
     "Price": {
       "Currency": "A6",
-      "Amount": 2
+      "Amount": 1
     },
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 2
+        "Amount": 1
       },
       {
         "Currency": "Coin2",
-        "Amount": 2
+        "Amount": 1
       },
       {
         "Currency": "Coin3",
@@ -472,7 +443,7 @@
     "Rewards": [
       {
         "Currency": "Coin1",
-        "Amount": 3
+        "Amount": 2
       },
       {
         "Currency": "Coin2",
@@ -507,12 +478,16 @@
     },
     "Rewards": [
       {
+        "Currency": "Coin1",
+        "Amount": 1
+      },
+      {
         "Currency": "Coin2",
-        "Amount": 2
+        "Amount": 1
       },
       {
         "Currency": "Coin3",
-        "Amount": 1
+        "Amount": 2
       },
       {
         "Currency": "Mana",
@@ -533,13 +508,75 @@
   {
     "Uid": "17",
     "Price": {
-      "Currency": "G3",
+      "Currency": "K3",
+      "Amount": 3
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 1
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 15
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionLevel, Assembly-CSharp",
+        "UserLevel": 4
+      }
+    ]
+  },
+  {
+    "Uid": "18",
+    "Price": {
+      "Currency": "K4",
       "Amount": 2
     },
     "Rewards": [
       {
+        "Currency": "Coin1",
+        "Amount": 2
+      },
+      {
         "Currency": "Coin2",
-        "Amount": 3
+        "Amount": 2
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 30
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 30
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 17
+      }
+    ]
+  },
+  {
+    "Uid": "19",
+    "Price": {
+      "Currency": "K5",
+      "Amount": 1
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 1
       },
       {
         "Currency": "Coin3",
@@ -547,30 +584,30 @@
       },
       {
         "Currency": "Mana",
-        "Amount": 10
+        "Amount": 50
       },
       {
         "Currency": "Experience",
-        "Amount": 10
+        "Amount": 50
       }
     ],
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 11
+        "OtherUid": 18
       }
     ]
   },
   {
-    "Uid": "18",
+    "Uid": "20",
     "Price": {
       "Currency": "C6",
-      "Amount": 2
+      "Amount": 1
     },
     "Rewards": [
       {
         "Currency": "Coin2",
-        "Amount": 3
+        "Amount": 2
       },
       {
         "Currency": "Coin3",
@@ -593,7 +630,7 @@
     ]
   },
   {
-    "Uid": "19",
+    "Uid": "21",
     "Price": {
       "Currency": "A7",
       "Amount": 1
@@ -619,24 +656,28 @@
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 9
+        "OtherUid": 14
       }
     ]
   },
   {
-    "Uid": "20",
+    "Uid": "22",
     "Price": {
-      "Currency": "C7",
-      "Amount": 2
+      "Currency": "K6",
+      "Amount": 1
     },
     "Rewards": [
       {
+        "Currency": "Coin1",
+        "Amount": 1
+      },
+      {
         "Currency": "Coin2",
-        "Amount": 3
+        "Amount": 1
       },
       {
         "Currency": "Coin3",
-        "Amount": 2
+        "Amount": 1
       },
       {
         "Currency": "Mana",
@@ -644,13 +685,48 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 150
+        "Amount": 75
       }
     ],
     "Conditions": [
       {
         "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 15
+        "OtherUid": 19
+      }
+    ]
+  },
+  {
+    "Uid": "23",
+    "Price": {
+      "Currency": "K7",
+      "Amount": 1
+    },
+    "Rewards": [
+      {
+        "Currency": "Coin1",
+        "Amount": 2
+      },
+      {
+        "Currency": "Coin2",
+        "Amount": 2
+      },
+      {
+        "Currency": "Coin3",
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 75
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 75
+      }
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
+        "OtherUid": 22
       }
     ]
   }
