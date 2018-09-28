@@ -30,7 +30,7 @@ public class UIQuestWindowModel : IWWindowModel
 
     public string Description => FirstTask.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
     
-    public List<CurrencyPair> Reward => FirstTask.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
+    public List<CurrencyPair> Reward => quest.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
 
     public string ButtonText
     {
@@ -102,13 +102,13 @@ public class UIQuestWindowModel : IWWindowModel
     {
         get
         {
-            QuestRewardComponent rewardComponent = quest.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid);
-            if (rewardComponent == null)
-            {
-                return string.Empty;
-            }
+            // QuestRewardComponent rewardComponent = quest.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid);
+            // if (rewardComponent == null)
+            // {
+            //     return string.Empty;
+            // }
 
-            var rewardDef = rewardComponent.Value;
+            var rewardDef = Reward;
             
             var types = new List<string>();
             var rewards = new List<string>();

@@ -217,6 +217,7 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
             {
                 CompletedQuests.Add(id);
                 ActiveQuests.RemoveAt(i);
+                QuestService.Current.CheckConditions();
                 return;
             }
         }

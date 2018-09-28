@@ -98,11 +98,11 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         {
             var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
             
-            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, windowModel.Reward.Sum(e => e.Amount)))
-            {
-                UIErrorWindowController.AddError("Need more free cells");
-                return;
-            }
+            // if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, windowModel.Reward.Sum(e => e.Amount)))
+            // {
+            //     UIErrorWindowController.AddError("Need more free cells");
+            //     return;
+            // }
             
             
             quest.SetClaimedState();

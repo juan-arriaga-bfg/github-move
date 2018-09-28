@@ -19,12 +19,12 @@ public class TaskCreatePieceCounterEntity : TaskCounterEntity, IBoardEventListen
     
     public override void ConnectToBoard()
     {
-        BoardService.Current.FirstBoard.BoardEvents.AddListener(this, GameEventsCodes.CreatePiece);
+        BoardService.Current.FirstBoard.BoardEvents.AddListener(this, GameEventsCodes.AddPieceToBoard);
     }
 
     public override void DisconnectFromBoard()
     {
-        BoardService.Current.FirstBoard.BoardEvents.RemoveListener(this, GameEventsCodes.CreatePiece); 
+        BoardService.Current.FirstBoard.BoardEvents.RemoveListener(this, GameEventsCodes.AddPieceToBoard); 
     }
 
     public void OnBoardEvent(int code, object context)
@@ -34,7 +34,7 @@ public class TaskCreatePieceCounterEntity : TaskCounterEntity, IBoardEventListen
             return;
         }
         
-        if (code == GameEventsCodes.CreatePiece && PieceId == (int)context)
+        if (code == GameEventsCodes.AddPieceToBoard && PieceId == (int)context)
         {
             CurrentValue += 1;
         }

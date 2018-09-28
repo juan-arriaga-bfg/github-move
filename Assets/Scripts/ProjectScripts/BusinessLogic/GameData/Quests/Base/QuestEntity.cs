@@ -50,10 +50,10 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         return false;
     }
     
-    public bool ShouldSerializeState()
-    {
-        return false;
-    }
+    // public bool ShouldSerializeState()
+    // {
+    //     return false;
+    // }
     
     public bool ShouldSerializeComponentsCache()
     {
@@ -79,7 +79,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
 
     private void UpdateState()
     {
-        if (State == TaskState.InProgress)
+        if (IsInProgress())
         {
             foreach (var task in Tasks)
             {

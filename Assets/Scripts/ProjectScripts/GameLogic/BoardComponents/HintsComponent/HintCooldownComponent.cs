@@ -62,7 +62,7 @@ public class HintCooldownComponent : ECSEntity
 	public void Step(HintType type)
 	{
 		if(IsPaused
-		   || GameDataService.Current.QuestsManagerOld.IsThirdCompleted()
+		   // || GameDataService.Current.QuestsManagerOld.IsThirdCompleted()
 		   || type != HintType.HighPriority && type != HintType.OpenChest && timerArrow.IsStarted) return;
 		
 		timerArrow.Stop();

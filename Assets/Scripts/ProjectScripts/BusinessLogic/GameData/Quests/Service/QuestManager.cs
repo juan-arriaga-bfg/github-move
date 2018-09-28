@@ -44,7 +44,7 @@ public class QuestManager : ECSEntity
         ConnectedToBoard = true;
     }
 
-    private void CheckConditions()
+    public void CheckConditions()
     {
         var dataManager = GameDataService.Current.QuestsManager;
         

@@ -25,6 +25,7 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
     private void Update()
     {
         ActiveQuests = GameDataService.Current.QuestsManager.GetQuestsSaveData();
+        CompletedQuests = GameDataService.Current.QuestsManager.CompletedQuests;
     }
 }
 
