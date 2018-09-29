@@ -15,10 +15,10 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
     {
         foreach (var pathfindLockObserver in nonLoaded)
         {
-            var target = pathfindLockObserver.GetTargetPosition();
+            var target = pathfindLockObserver.GetTargetPositions();
             if(target == null)
                 continue;
-            pathfindLockObserver.OnAddToBoard(target.Value, pathfindLockObserver.piece);
+            pathfindLockObserver.OnAddToBoard(pathfindLockObserver.piece.CachedPosition, pathfindLockObserver.piece);
         }
         nonLoaded.Clear();
     }
@@ -44,9 +44,9 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
             piece = board.BoardLogic.GetPieceAt(position);
        }
         
-       var target = GetTargetPosition();
+       var target = GetTargetPositions();
        if(target != null)
-           board.PathfindLocker?.RecalcCacheOnPieceAdded(target.Value, piece.CachedPosition, piece, AutoLock);
+           board.PathfindLocker?.RecalcCacheOnPieceAdded(target, piece.CachedPosition, piece, AutoLock);
        else if(AutoLock)
            nonLoaded.Add(this);
     }
@@ -57,27 +57,28 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
 
     public void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
-        var target = GetTargetPosition();
+        var target = GetTargetPositions();
         if(target != null)
-            board.PathfindLocker?.RecalcCacheOnPieceMoved(target.Value, from, to, piece, AutoLock);
+            board.PathfindLocker?.RecalcCacheOnPieceMoved(target, from, to, piece, AutoLock);
     }
 
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
-        var target = GetTargetPosition();
+        var target = GetTargetPositions();
         if(target != null)
-            board.PathfindLocker?.RecalcCacheOnPieceRemoved(target.Value, position, piece);
+            board.PathfindLocker?.RecalcCacheOnPieceRemoved(target, position, piece);
     }
 
-    private BoardPosition? GetTargetPosition()
+    private HashSet<BoardPosition> GetTargetPositions()
     {
-        var pieces = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1);
-        if (pieces != null && pieces.Count > 0)
-        {
-            var target = pieces[0];
-            return target;    
-        }
-
-        return null;
+        return board.AreaAccessController?.AvailiablePositions;
+//        var pieces = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1);
+//        if (pieces != null && pieces.Count > 0)
+//        {
+//            var target = pieces[0];
+//            return target;    
+//        }
+//
+//        return null;
     }
 }

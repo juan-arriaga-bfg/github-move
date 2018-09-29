@@ -34,6 +34,9 @@ public class FieldControllerComponent : IECSComponent
                     {PieceType.Fog.Id, CreateFog()}
                 };
 
+           
+            
+            
             foreach (var piece in pieces)
             {
                 context.ActionExecutor.AddAction(new FillBoardAction
@@ -43,6 +46,9 @@ public class FieldControllerComponent : IECSComponent
                 });
             }
 
+            //AddPiece(new BoardPosition(18,18), PieceType.Char1.Id);
+            //AddPiece(new BoardPosition(19,3), PieceType.MineK.Id);
+            
             AddLastAction();
             
             return;
@@ -83,6 +89,7 @@ public class FieldControllerComponent : IECSComponent
                     view.UpdateResource(0);
                 }
                 
+                controller.AreaAccessController?.FullRecalculate();
                 PathfindLockObserver.LoadPathfindLock();
             }
         });

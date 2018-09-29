@@ -101,7 +101,7 @@ public class DevTools : MonoBehaviour
 
     public void OnDebug1Click()
     {
-        Debug.Log("OnDebug1Click");
+        CurrencyHellper.Purchase(Currency.Experience.Name, 500);
     }
 
     public void OnDebug2Click()

@@ -15,7 +15,7 @@ public class PathfindLockerComponent : ECSEntity
 
     private Dictionary<Piece, List<BoardPosition>> blockPathPieces = new Dictionary<Piece, List<BoardPosition>>();
     private List<Piece> freePieces = new List<Piece>();
-    private BoardPosition lastCheckedPosition = BoardPosition.Default();
+    private HashSet<BoardPosition> lastCheckedPositions = new HashSet<BoardPosition>();
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -28,9 +28,9 @@ public class PathfindLockerComponent : ECSEntity
         return !blockPathPieces.ContainsKey(piece) && freePieces.Contains(piece); 
     }
 
-    public virtual void RecalcCacheOnPieceAdded(BoardPosition target, BoardPosition changedPosition, Piece piece, bool autoLock)
+    public virtual void RecalcCacheOnPieceAdded(HashSet<BoardPosition> target, BoardPosition changedPosition, Piece piece, bool autoLock)
     {
-        lastCheckedPosition = target;
+        lastCheckedPositions = target;
         
         RecalcFree(target, changedPosition);
 
@@ -42,7 +42,7 @@ public class PathfindLockerComponent : ECSEntity
         }   
     }
 
-    private bool RecalcFor(Piece piece, BoardPosition target, List<BoardPosition> ignorablePositions = null)
+    private bool RecalcFor(Piece piece, HashSet<BoardPosition> target, List<BoardPosition> ignorablePositions = null)
     {
         if (ignorablePositions == null)
             ignorablePositions = new List<BoardPosition>();
@@ -70,9 +70,9 @@ public class PathfindLockerComponent : ECSEntity
         return canPath;
     }
     
-    public virtual void RecalcCacheOnPieceRemoved(BoardPosition target , BoardPosition changedPosition, Piece removedPiece)
+    public virtual void RecalcCacheOnPieceRemoved(HashSet<BoardPosition> target , BoardPosition changedPosition, Piece removedPiece)
     {
-        if (changedPosition.Equals(lastCheckedPosition))
+        if (changedPosition.Equals(lastCheckedPositions))
         {
             RecalcAll(target);
             return;
@@ -86,10 +86,10 @@ public class PathfindLockerComponent : ECSEntity
         RecalcBlocked(target, changedPosition);
     }
 
-    public virtual void RecalcCacheOnPieceMoved(BoardPosition target, BoardPosition fromPosition, BoardPosition to, Piece piece,
+    public virtual void RecalcCacheOnPieceMoved(HashSet<BoardPosition> target, BoardPosition fromPosition, BoardPosition to, Piece piece,
         bool autoLock)
     {
-        if (fromPosition.Equals(lastCheckedPosition))
+        if (fromPosition.Equals(lastCheckedPositions))
         {
             RecalcAll(target);
             return;
@@ -110,10 +110,10 @@ public class PathfindLockerComponent : ECSEntity
             }
         }
 
-        lastCheckedPosition = target;
+        lastCheckedPositions = target;
     }
 
-    private void RecalcBlocked(BoardPosition target, BoardPosition changedPosition)
+    private void RecalcBlocked(HashSet<BoardPosition> target, BoardPosition changedPosition)
     {
         foreach (var piece in blockPathPieces.Keys.ToList())
         {
@@ -121,11 +121,11 @@ public class PathfindLockerComponent : ECSEntity
             if (!blockers.Contains(changedPosition))
                 continue;
 
-            RecalcFor(piece, target, new List<BoardPosition>() {target, changedPosition});
+            RecalcFor(piece, target, new List<BoardPosition>(target) {changedPosition});
         }
     }
 
-    private void RecalcFree(BoardPosition target, BoardPosition changedPosition)
+    private void RecalcFree(HashSet<BoardPosition> target, BoardPosition changedPosition)
     {
         var current = 0;
         while (current < freePieces.Count)
@@ -136,9 +136,9 @@ public class PathfindLockerComponent : ECSEntity
         }
     }
 
-    protected virtual void RecalcAll(BoardPosition target)
+    protected virtual void RecalcAll(HashSet<BoardPosition> target)
     {
-        lastCheckedPosition = target;
+        lastCheckedPositions = target;
         
         var allPieces = blockPathPieces.Keys.ToList();
         allPieces.AddRange(freePieces);
