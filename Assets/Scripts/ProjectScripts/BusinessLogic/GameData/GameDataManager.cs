@@ -99,7 +99,7 @@ public class ItemWeight
 
 
 public class GameDataManager : ECSEntity,
-    IChestsDataManager, IPiecesDataManager, IFogsDataManager, IMinesDataManager, IQuestsDataManagerOld, IObstaclesDataManager, ILevelsDataManager,
+    IChestsDataManager, IPiecesDataManager, IFogsDataManager, IMinesDataManager, IObstaclesDataManager, ILevelsDataManager,
     IFieldDataManager, ICodexDataManager, IEnemiesDataManager, IConstantsDataManager, IQuestsDataManager
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
@@ -116,10 +116,7 @@ public class GameDataManager : ECSEntity,
     
     private FogsDataManager fogsManager;
     public FogsDataManager FogsManager => fogsManager ?? (fogsManager = GetComponent<FogsDataManager>(FogsDataManager.ComponentGuid));
-    
-    private QuestsDataManagerOld questsManagerOld;
-    public QuestsDataManagerOld QuestsManagerOld => questsManagerOld ?? (questsManagerOld = GetComponent<QuestsDataManagerOld>(QuestsDataManagerOld.ComponentGuid));
-    
+
     private QuestsDataManager questsManager;
     public QuestsDataManager QuestsManager => questsManager ?? (questsManager = GetComponent<QuestsDataManager>(QuestsDataManager.ComponentGuid));
     
@@ -147,7 +144,6 @@ public class GameDataManager : ECSEntity,
         RegisterComponent(new PiecesDataManager());
         RegisterComponent(new ObstaclesDataManager());
         RegisterComponent(new EnemiesDataManager());
-        RegisterComponent(new QuestsDataManagerOld());
         RegisterComponent(new QuestsDataManager());
         RegisterComponent(new FogsDataManager());
         RegisterComponent(new LevelsDataManager());
