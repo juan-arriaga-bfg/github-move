@@ -76,7 +76,7 @@ public class AddResourceView : BoardElementView
 		    || resource.Currency == Currency.Experience.Name)
 		{
 			var from = board.BoardDef.GetPiecePosition(position.X, position.Y);
-			
+
 			CurrencyHellper.Purchase(
 				resource,
 				success => { ShowCounter(board, position, resource); },

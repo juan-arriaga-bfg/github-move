@@ -5,10 +5,11 @@ public class TouchReactionDefinitionCollectResource : TouchReactionDefinitionCom
     public override bool Make(BoardPosition position, Piece piece)
     {
         var storage = piece.GetComponent<ResourceStorageComponent>(ResourceStorageComponent.ComponentGuid);
+        var isPiece = storage?.Resources == null;
+        var resources = isPiece ? new CurrencyPair {Currency = PieceType.Parse(piece.PieceType), Amount = 1} : storage.Resources;
 
-        if (storage == null || storage.Resources == null || storage.Resources.Amount == 0) return false;
-
-        AddResourceView.Show(position, storage.Resources);
+        if (isPiece) piece.Context.BoardLogic.PieceFlyer.FlyToTarget(piece, position, Currency.Order.Name);
+        else AddResourceView.Show(position, resources);
         
         piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
         {
