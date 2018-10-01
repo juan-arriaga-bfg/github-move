@@ -16,6 +16,8 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
     
     public List<QuestEntity> ActiveQuests;
     public List<string> CompletedQuests;
+
+    public Action OnActiveQuestsListChanged;
     
     private readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings
     {
@@ -33,6 +35,8 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
     {
     }
 
+#region Loading    
+    
     public void Reload()
     {	
         cache = new Dictionary<Type, Dictionary<string, JToken>>();
@@ -104,7 +108,11 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
     
         return ret;
     }
+    
+#endregion
 
+#region Builder
+    
     private T InstantiateById<T>(string id) where T : IECSComponent
     {
         if (string.IsNullOrEmpty(id))
@@ -173,6 +181,8 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
         return quest;
     }
     
+#endregion
+    
     public List<QuestSaveData> GetQuestsSaveData()
     {
         List<QuestSaveData> questDatas = new List<QuestSaveData>();
@@ -191,6 +201,8 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
 
         quest.Start(saveData);
 
+        OnActiveQuestsListChanged?.Invoke();
+        
         return quest;
     }
 
@@ -217,6 +229,9 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
             {
                 CompletedQuests.Add(id);
                 ActiveQuests.RemoveAt(i);
+                
+                OnActiveQuestsListChanged?.Invoke();
+                
                 QuestService.Current.CheckConditions();
                 return;
             }

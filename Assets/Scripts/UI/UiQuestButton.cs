@@ -4,7 +4,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 {
     [SerializeField] private GameObject shine;
     
-    private QuestOld quest;
+    private QuestEntity quest;
     private bool isUp;
 
     public override int CurrentValueAnimated
@@ -16,16 +16,25 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         }
     }
 
-    public void Init(QuestOld quest)
+    public void Init(QuestEntity quest)
     {
         if(this.quest != null) ResourcesViewManager.Instance.UnRegisterView(this);
         
         this.quest = quest;
 
         isUp = false;
-        itemUid = PieceType.Parse(quest.WantedPiece);
+        int pieceId = (quest.ActiveTasks[0] as IHavePieceId).PieceId;
+        PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceId);
+        itemUid = pieceTypeDef.Id.ToString();
+        
+        quest.OnChanged += OnQuestChanged;
         
         ResourcesViewManager.Instance.RegisterView(this);
+        UpdateView();
+    }
+
+    private void OnQuestChanged(QuestEntity quest, TaskEntity task)
+    {
         UpdateView();
     }
 
@@ -35,6 +44,10 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     private void OnDestroy()
     {
+        if (quest != null)
+        {
+            quest.OnChanged -= OnQuestChanged;
+        }
         ResourcesViewManager.Instance.UnRegisterView(this);
     }
 
@@ -42,24 +55,33 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     {
         if(quest == null) return;
         
-        currentValueAnimated = currentValue = quest.CurrentAmount;
+        int value = (quest.ActiveTasks[0] as TaskCounterEntity).TargetValue;
+
+        currentValueAnimated = value;
+        currentValue = value;
 
         SetLabelValue(currentValue);
     }
 
-    public override void UpdateResource(int offset)
+    private Sprite GetIcon()
     {
-        base.UpdateResource(offset);
-        quest.CurrentAmount += offset;
-    }
+        QuestDescriptionComponent cmp = quest.ActiveTasks[0].GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid);
 
+        if (cmp?.Ico == null)
+        {
+            return null;
+        }
+            
+        return IconService.Current.GetSpriteById(cmp.Ico);
+    }
+    
     private void SetLabelValue(int value)
     {
         if(quest == null) return;
-        
-        icon.sprite = IconService.Current.GetSpriteById(quest.WantedIcon);
 
-        var isComplete = quest.Check();
+        icon.sprite = GetIcon();
+
+        var isComplete = quest.IsCompleted();
 
         if (isComplete && isUp == false)
         {
@@ -67,8 +89,11 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             transform.SetSiblingIndex(0);
             OnClick();
         }
+
+        int targetValue = (quest.ActiveTasks[0] as TaskCounterEntity).TargetValue;
+        int curValue = (quest.ActiveTasks[0] as TaskCounterEntity).CurrentValue;
         
-        amountLabel.Text = $"<color=#{(isComplete ? "FFFFFF" : "FE4704")}><size=33>{Mathf.Min(value, quest.TargetAmount)}</size></color>/{quest.TargetAmount}";
+        amountLabel.Text = $"<color=#{(isComplete ? "FFFFFF" : "FE4704")}><size=33>{Mathf.Min(value, curValue)}</size></color>/{targetValue}";
         shine.SetActive(isComplete);
     }
     

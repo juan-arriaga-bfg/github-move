@@ -15,22 +15,22 @@ public class UIMainWindowView : IWUIWindowView
         
         var windowModel = Model as UIMainWindowModel;
 
-        GameDataService.Current.QuestsManagerOld.OnUpdateActiveQuests += UpdateQuest;
+        GameDataService.Current.QuestsManager.OnActiveQuestsListChanged += OnActiveQuestsListChanged;
         GameDataService.Current.CodexManager.OnNewItemUnlocked += OnNewPieceBuilded;
         
-        UpdateQuest();
+        OnActiveQuestsListChanged();
         UpdateCodexButton();
     }
     
     private void OnDestroy()
     {
-        GameDataService.Current.QuestsManagerOld.OnUpdateActiveQuests -= UpdateQuest;
+        GameDataService.Current.QuestsManager.OnActiveQuestsListChanged -= OnActiveQuestsListChanged;
         GameDataService.Current.CodexManager.OnNewItemUnlocked -= OnNewPieceBuilded;
     }
 
-    public void UpdateQuest()
+    public void OnActiveQuestsListChanged()
     {
-        var active = GameDataService.Current.QuestsManagerOld.ActiveQuests;
+        var active = GameDataService.Current.QuestsManager.ActiveQuests;
         
         CheckQuestButtons(active);
         
@@ -42,7 +42,7 @@ public class UIMainWindowView : IWUIWindowView
         InitWindowViewControllers();
     }
 
-    private void CheckQuestButtons(List<QuestOld> active)
+    private void CheckQuestButtons(List<QuestEntity> active)
     {
         pattern.SetActive(true);
 

@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Quests;
 
-public class TaskCreatePieceCounterEntity : TaskCounterEntity, IBoardEventListener
+public class TaskCreatePieceCounterEntity : TaskCounterEntity, IBoardEventListener, IHavePieceId
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
