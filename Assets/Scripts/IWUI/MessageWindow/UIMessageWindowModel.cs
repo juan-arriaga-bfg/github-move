@@ -6,6 +6,7 @@ public class UIMessageWindowModel : IWWindowModel
     public string Message { get; set; }
     
     public bool isHardAccept { get; set; }
+    public bool isBuy { get; set; }
     
     public string AcceptLabel { get; set; }
     public string CancelLabel { get; set; }

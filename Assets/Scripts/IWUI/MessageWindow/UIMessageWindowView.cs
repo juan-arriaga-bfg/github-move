@@ -4,12 +4,14 @@ using UnityEngine.UI;
 public class UIMessageWindowView : UIGenericPopupWindowView
 {
     [SerializeField] private NSText buttonAcceptLabel;
+    [SerializeField] private NSText buttonBuyLabel;
     [SerializeField] private NSText buttonCancelLabel;
     [SerializeField] private NSText timerLabel;
     
     [SerializeField] private Image imageMessage;
     
     [SerializeField] private GameObject btnAccept;
+    [SerializeField] private GameObject btnBuy;
     [SerializeField] private GameObject btnCancel;
     [SerializeField] private GameObject timer;
     
@@ -36,10 +38,11 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
         
-        buttonAcceptLabel.Text = windowModel.AcceptLabel;
+        buttonAcceptLabel.Text = buttonBuyLabel.Text = windowModel.AcceptLabel;
         buttonCancelLabel.Text = windowModel.CancelLabel;
         
-        btnAccept.SetActive(windowModel.OnAccept != null);
+        btnAccept.SetActive(windowModel.isBuy == false && windowModel.OnAccept != null);
+        btnBuy.SetActive(windowModel.isBuy && windowModel.OnAccept != null);
         btnCancel.SetActive(windowModel.OnCancel != null);
         timer.SetActive(windowModel.Timer != null);
         
@@ -68,6 +71,7 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         if (isCancel) windowModel.OnCancel?.Invoke();
 
         windowModel.isHardAccept = false;
+        windowModel.isBuy = false;
     }
 
     public void OnClickAccept()
@@ -85,7 +89,7 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIMessageWindowModel;
 
         timerLabel.Text = windowModel.Timer.CompleteTime.GetTimeLeftText();
-        buttonAcceptLabel.Text = windowModel.AcceptLabel + windowModel.Timer.GetPrise().ToStringIcon(false);
+        buttonBuyLabel.Text = windowModel.AcceptLabel + windowModel.Timer.GetPrise().ToStringIcon(false);
     }
 
     private void CompleteTimer()

@@ -49,7 +49,6 @@
             UIMessageWindowController.CreateTimerCompleteMessage(
                 "Complete now!",
                 "Would you like to build the item right now for crystals?",
-                "Complete now ",
                 cooldown);
 
             return false;
