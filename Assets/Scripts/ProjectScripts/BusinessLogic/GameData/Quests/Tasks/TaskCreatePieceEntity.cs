@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Quests;
 
-public class TaskCreatePieceCounterEntity : TaskCounterEntity, IBoardEventListener, IHavePieceId
+public class TaskCreatePieceEntity : TaskCounterEntity, IBoardEventListener, IHavePieceId
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -19,12 +19,12 @@ public class TaskCreatePieceCounterEntity : TaskCounterEntity, IBoardEventListen
     
     public override void ConnectToBoard()
     {
-        BoardService.Current.FirstBoard.BoardEvents.AddListener(this, GameEventsCodes.AddPieceToBoard);
+        BoardService.Current.FirstBoard.BoardEvents.AddListener(this, GameEventsCodes.PieceBuilded);
     }
 
     public override void DisconnectFromBoard()
     {
-        BoardService.Current.FirstBoard.BoardEvents.RemoveListener(this, GameEventsCodes.AddPieceToBoard); 
+        BoardService.Current.FirstBoard.BoardEvents.RemoveListener(this, GameEventsCodes.PieceBuilded); 
     }
 
     public void OnBoardEvent(int code, object context)

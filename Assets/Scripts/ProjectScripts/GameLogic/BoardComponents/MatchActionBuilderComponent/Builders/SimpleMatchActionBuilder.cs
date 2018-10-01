@@ -59,6 +59,15 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
             }
         };
 
+        MatchDescription matchDescription = new MatchDescription
+        {
+            SourcePieceType = pieceType,
+            MatchedPiecesCount = matchField.Count,
+            CreatedPieceType = nextType,
+        };
+            
+        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, matchDescription);
+        
         return new CollapsePieceToAction
         {
             To = position,
@@ -67,7 +76,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
             OnCompleteAction = nextAction
         };
     }
-
+    
     private List<int> Add(int count, int piece, List<int> pieces)
     {
         for (var i = 0; i < count; i++)

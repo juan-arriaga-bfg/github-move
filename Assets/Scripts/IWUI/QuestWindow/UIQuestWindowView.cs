@@ -112,7 +112,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             return;
         }
         
-        var targetId = (quest.Tasks[0] as TaskCreatePieceCounterEntity).PieceId;
+        var targetId = (quest.Tasks[0] as TaskCreatePieceEntity).PieceId;
         var piece = board.BoardLogic.MatchDefinition.GetFirst(targetId);
         
         if(piece == PieceType.None.Id) return;
@@ -174,7 +174,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             Destroy(child.gameObject);
         }
         
-        var targetId = (model.Quest.Tasks[0] as TaskCreatePieceCounterEntity).PieceId;
+        var targetId = (model.Quest.Tasks[0] as TaskCreatePieceEntity).PieceId;
         var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId, CHAIN_LENGTH);
         CodexChainDef chainDef = new CodexChainDef {ItemDefs = itemDefs};
         UICodexWindowView.CreateItems(chain, chainDef, codexItemPrefab, CHAIN_LENGTH);

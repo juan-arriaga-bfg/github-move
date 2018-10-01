@@ -41,8 +41,10 @@ public class PieceFlyerComponent : ECSEntity, ILockerComponent
     {
         if (Locker.IsLocked || IsAnyActiveQuestAboutPiece(piece) == false) return;
         
-        var flay = ResourcesViewManager.Instance.GetFirstViewById(PieceType.Parse(piece.PieceType));
-        flay?.UpdateResource(1);
+        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.PieceBuilded, piece.PieceType);
+        
+        // var flay = ResourcesViewManager.Instance.GetFirstViewById(PieceType.Parse(piece.PieceType));
+        // flay?.UpdateResource(1);
     }
     
     public void FlyTo(Piece piece, int x, int y, string target)

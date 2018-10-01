@@ -1,10 +1,13 @@
 using Quests;
+using UnityEngine;
 
-public class TaskAnyMatchCounterEntity : TaskCounterEntity, IBoardEventListener
+public class TaskMatchEntity : TaskCounterEntity, IBoardEventListener, IHavePieceId
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
+    public int PieceId { get; protected set; }
+    
     public override void ConnectToBoard()
     {
         BoardService.Current.FirstBoard.BoardEvents.AddListener(this, GameEventsCodes.Match);
@@ -21,8 +24,20 @@ public class TaskAnyMatchCounterEntity : TaskCounterEntity, IBoardEventListener
         {
             return;
         }
+
+        if (code != GameEventsCodes.Match)
+        {
+            return;
+        }
         
-        if (code == GameEventsCodes.Match)
+        var matchDescr = context as MatchDescription;
+        if (matchDescr == null)
+        {
+            Debug.LogError("[TaskMatchEntity] => OnBoardEvent: MatchDescription is null for GameEventsCodes.Match event");
+            return;
+        }
+
+        if (PieceId == PieceType.None.Id || matchDescr.CreatedPieceType == PieceId)
         {
             CurrentValue += 1;
         }
