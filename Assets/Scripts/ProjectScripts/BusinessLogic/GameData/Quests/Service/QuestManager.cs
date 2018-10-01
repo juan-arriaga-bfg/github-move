@@ -19,10 +19,10 @@ public class QuestManager : ECSEntity
     {
         questStarters = new List<QuestStarterEntity>();
         
-        // var questStarter1 = GameDataService.Current.QuestsManager.InstantiateQuestStarter("Quest_1");
+        var questStarter1 = GameDataService.Current.QuestsManager.InstantiateQuestStarter("Quest_3");
         // var questStarter2 = GameDataService.Current.QuestsManager.InstantiateQuestStarter("Quest_2");
         //
-        // questStarters.Add(questStarter1);
+        questStarters.Add(questStarter1);
         // questStarters.Add(questStarter2);
     }
    

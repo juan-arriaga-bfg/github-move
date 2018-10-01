@@ -11,6 +11,18 @@
         "Ico": "A2"
       }
     }
+  },   
+  {
+    "$type": "TaskClearFogEntity, Assembly-CSharp",
+    "Id": "ClearFog_1",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": null,
+        "Message": "Clear Fog",
+        "Ico": "GreenarrowItem1"
+      }
+    }
   },  
   {
     "$type": "TaskCreatePieceCounterEntity, Assembly-CSharp",

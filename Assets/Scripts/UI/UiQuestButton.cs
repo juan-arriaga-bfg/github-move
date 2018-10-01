@@ -23,10 +23,13 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         this.quest = quest;
 
         isUp = false;
-        int pieceId = (quest.ActiveTasks[0] as IHavePieceId).PieceId;
-        PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceId);
-        itemUid = pieceTypeDef.Id.ToString();
-        
+        var taskAboutPiece = quest.ActiveTasks[0] as IHavePieceId;
+        if (taskAboutPiece != null)
+        {
+            int pieceId = taskAboutPiece.PieceId;
+            PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceId);
+            itemUid = pieceTypeDef.Id.ToString();
+        }
         quest.OnChanged += OnQuestChanged;
         
         ResourcesViewManager.Instance.RegisterView(this);

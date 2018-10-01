@@ -38,7 +38,9 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
 #region Loading    
     
     public void Reload()
-    {	
+    {
+        OnActiveQuestsListChanged = null;
+        
         cache = new Dictionary<Type, Dictionary<string, JToken>>();
 
         LoadData<QuestStartConditionComponent>("configs/quests/conditions.data");

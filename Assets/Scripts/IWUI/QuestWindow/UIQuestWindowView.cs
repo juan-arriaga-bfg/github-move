@@ -24,21 +24,28 @@ public class UIQuestWindowView : UIGenericPopupWindowView
     {
         base.OnViewShow();
         
-        var windowModel = Model as UIQuestWindowModel;
+        var model = Model as UIQuestWindowModel;
 
         isComplete = false;
         
-        SetTitle(windowModel.Title);
-        SetMessage(windowModel.Message);
+        SetTitle(model.Title);
+        SetMessage(model.Message);
 
-        descriptionLabel.Text = windowModel.Description;
-        rewardLabel.Text = windowModel.RewardText;
-        amountLabel.Text = windowModel.AmountText;
-        buttonLabel.Text = windowModel.ButtonText;
+        descriptionLabel.Text = model.Description;
+        rewardLabel.Text = model.RewardText;
+        amountLabel.Text = model.AmountText;
+        buttonLabel.Text = model.ButtonText;
 
-        targetIcon.sprite = windowModel.Icon;
+        targetIcon.sprite = model.Icon;
 
-        CreateChain(windowModel);
+        if (model.Quest.ActiveTasks[0] is IHavePieceId)
+        {
+            CreateChain(model);
+        }
+        else
+        {
+            chain.gameObject.SetActive(false);
+        }
     }
 
     public override void OnViewClose()
@@ -96,7 +103,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         
         if (quest.IsCompleted())
         {
-            var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
+            // var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
             
             // if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, windowModel.Reward.Sum(e => e.Amount)))
             // {
@@ -111,8 +118,15 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             isComplete = true;
             return;
         }
+
+        var taskAboutPiece = quest.Tasks[0] as IHavePieceId;
+        if (taskAboutPiece == null)
+        {
+            UIMessageWindowController.CreateMessage("[Debug]", "Not implemented yet");
+            return;
+        }
         
-        var targetId = (quest.Tasks[0] as TaskCreatePieceEntity).PieceId;
+        var targetId = taskAboutPiece.PieceId;
         var piece = board.BoardLogic.MatchDefinition.GetFirst(targetId);
         
         if(piece == PieceType.None.Id) return;
@@ -169,6 +183,8 @@ public class UIQuestWindowView : UIGenericPopupWindowView
 
     private void CreateChain(UIQuestWindowModel model)
     {
+        chain.gameObject.SetActive(true);
+        
         foreach (Transform child in chain.ItemsHost) 
         {
             Destroy(child.gameObject);
