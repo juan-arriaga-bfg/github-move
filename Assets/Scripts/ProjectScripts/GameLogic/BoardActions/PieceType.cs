@@ -178,43 +178,36 @@ public static partial class PieceType
     public static readonly PieceTypeDef D2 = new PieceTypeDef{Id = 401, Abbreviations = new List<string>{ "D2" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef D3 = new PieceTypeDef{Id = 402, Abbreviations = new List<string>{ "D3" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef D4 = new PieceTypeDef{Id = 403, Abbreviations = new List<string>{ "D4" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef D5 = new PieceTypeDef{Id = 404, Abbreviations = new List<string>{ "D5" }, Filter = PieceTypeFilter.Simple};
     
     public static readonly PieceTypeDef E1 = new PieceTypeDef{Id = 500, Abbreviations = new List<string>{ "E1" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef E2 = new PieceTypeDef{Id = 501, Abbreviations = new List<string>{ "E2" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef E3 = new PieceTypeDef{Id = 502, Abbreviations = new List<string>{ "E3" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef E4 = new PieceTypeDef{Id = 503, Abbreviations = new List<string>{ "E4" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef E5 = new PieceTypeDef{Id = 504, Abbreviations = new List<string>{ "E5" }, Filter = PieceTypeFilter.Simple};
     
     public static readonly PieceTypeDef F1 = new PieceTypeDef{Id = 600, Abbreviations = new List<string>{ "F1" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef F2 = new PieceTypeDef{Id = 601, Abbreviations = new List<string>{ "F2" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef F3 = new PieceTypeDef{Id = 602, Abbreviations = new List<string>{ "F3" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef F4 = new PieceTypeDef{Id = 603, Abbreviations = new List<string>{ "F4" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef F5 = new PieceTypeDef{Id = 604, Abbreviations = new List<string>{ "F5" }, Filter = PieceTypeFilter.Simple};
     
     public static readonly PieceTypeDef G1 = new PieceTypeDef{Id = 700, Abbreviations = new List<string>{ "G1" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef G2 = new PieceTypeDef{Id = 701, Abbreviations = new List<string>{ "G2" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef G3 = new PieceTypeDef{Id = 702, Abbreviations = new List<string>{ "G3" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef G4 = new PieceTypeDef{Id = 703, Abbreviations = new List<string>{ "G4" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef G5 = new PieceTypeDef{Id = 704, Abbreviations = new List<string>{ "G5" }, Filter = PieceTypeFilter.Simple};
     
     public static readonly PieceTypeDef H1 = new PieceTypeDef{Id = 800, Abbreviations = new List<string>{ "H1" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef H2 = new PieceTypeDef{Id = 801, Abbreviations = new List<string>{ "H2" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef H3 = new PieceTypeDef{Id = 802, Abbreviations = new List<string>{ "H3" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef H4 = new PieceTypeDef{Id = 803, Abbreviations = new List<string>{ "H4" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef H5 = new PieceTypeDef{Id = 804, Abbreviations = new List<string>{ "H5" }, Filter = PieceTypeFilter.Simple};
     
     public static readonly PieceTypeDef I1 = new PieceTypeDef{Id = 900, Abbreviations = new List<string>{ "I1" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef I2 = new PieceTypeDef{Id = 901, Abbreviations = new List<string>{ "I2" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef I3 = new PieceTypeDef{Id = 902, Abbreviations = new List<string>{ "I3" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef I4 = new PieceTypeDef{Id = 903, Abbreviations = new List<string>{ "I4" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef I5 = new PieceTypeDef{Id = 904, Abbreviations = new List<string>{ "I5" }, Filter = PieceTypeFilter.Simple};
     
     public static readonly PieceTypeDef J1 = new PieceTypeDef{Id = 1000, Abbreviations = new List<string>{ "J1" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef J2 = new PieceTypeDef{Id = 1001, Abbreviations = new List<string>{ "J2" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef J3 = new PieceTypeDef{Id = 1002, Abbreviations = new List<string>{ "J3" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef J4 = new PieceTypeDef{Id = 1003, Abbreviations = new List<string>{ "J4" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef J5 = new PieceTypeDef{Id = 1004, Abbreviations = new List<string>{ "J5" }, Filter = PieceTypeFilter.Simple};
     
     public static readonly PieceTypeDef Fog = new PieceTypeDef{Id = 2000, Abbreviations = new List<string>{ "Fog" }, Filter = PieceTypeFilter.Multicellular};
     
