@@ -119,9 +119,6 @@ public class R
      public const string MagicPiece = "MagicPiece";
      public const string Magic1Piece = "Magic1Piece";
      public const string Magic2Piece = "Magic2Piece";
-     public const string Basket1Piece = "Basket1Piece";
-     public const string Basket2Piece = "Basket2Piece";
-     public const string Basket3Piece = "Basket3Piece";
      public const string ChestA1Piece = "ChestA1Piece";
      public const string ChestA2Piece = "ChestA2Piece";
      public const string ChestA3Piece = "ChestA3Piece";

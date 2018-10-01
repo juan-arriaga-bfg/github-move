@@ -227,10 +227,6 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.ChestL2.Id, new PieceMatchDef {Next = PieceType.ChestL3.Id, Previous = PieceType.ChestL1.Id, Count = 3});
         dict.Add(PieceType.ChestL3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.ChestL2.Id});
         
-        dict.Add(PieceType.Basket1.Id, new PieceMatchDef {Next = PieceType.Basket2.Id, Previous = PieceType.None.Id, Count = 3});
-        dict.Add(PieceType.Basket2.Id, new PieceMatchDef {Next = PieceType.Basket3.Id, Previous = PieceType.Basket1.Id, Count = 3});
-        dict.Add(PieceType.Basket3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Basket2.Id});
-        
         dict.Add(PieceType.Coin1.Id, new PieceMatchDef {Next = PieceType.Coin2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.Coin2.Id, new PieceMatchDef {Next = PieceType.Coin3.Id, Previous = PieceType.Coin1.Id, Count = 3});
         dict.Add(PieceType.Coin3.Id, new PieceMatchDef {Next = PieceType.Coin4.Id, Previous = PieceType.Coin2.Id, Count = 3});

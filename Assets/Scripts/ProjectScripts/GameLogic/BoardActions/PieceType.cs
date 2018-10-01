@@ -289,10 +289,6 @@ public static partial class PieceType
     public static readonly PieceTypeDef ChestEpic2 = new PieceTypeDef{Id = 10502, Abbreviations = new List<string>{ "ChestEpic2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     public static readonly PieceTypeDef ChestEpic3 = new PieceTypeDef{Id = 10503, Abbreviations = new List<string>{ "ChestEpic3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     
-    public static readonly PieceTypeDef Basket1 = new PieceTypeDef{Id = 10601, Abbreviations = new List<string>{ "Basket1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest | PieceTypeFilter.Energy};
-    public static readonly PieceTypeDef Basket2 = new PieceTypeDef{Id = 10602, Abbreviations = new List<string>{ "Basket2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest | PieceTypeFilter.Energy};
-    public static readonly PieceTypeDef Basket3 = new PieceTypeDef{Id = 10603, Abbreviations = new List<string>{ "Basket3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest | PieceTypeFilter.Energy};
-    
     public static readonly PieceTypeDef Enemy1 = new PieceTypeDef{Id = 20000, Abbreviations = new List<string>{ "Enemy1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Enemy};
     
     public static readonly PieceTypeDef Magic1 = new PieceTypeDef{Id = 1000001, Abbreviations = new List<string>{ "Magic1" }, Filter = PieceTypeFilter.Simple};
