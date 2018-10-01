@@ -52,6 +52,10 @@ MonoBehaviour:
     Link: 1DMxuJpSv3tZUMNKTQXEB2HQ2d7xPCpoLjB5ZEV00kUI
     Route: parse
     Pattern: '[{"Uid":"","Delay":0,"Limit":0,"FastPrice":{"Currency":"","Amount":0},"StepReward":{"Currency":"","Amount":0},"Reproduction":{"Currency":"","Amount":0}}]'
+  - Key: piecesMaking
+    Link: 1XjQudoqqkn2yyjonWc_R1fAyQNprQRJuw4zphfjE2rY
+    Route: parse
+    Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}]}]'
   - Key: enemies
     Link: 1ggZRqwYTC5dMe-X53tOAMfxCmgJh-RjGQHv5u2iPYZ0
     Route: parse

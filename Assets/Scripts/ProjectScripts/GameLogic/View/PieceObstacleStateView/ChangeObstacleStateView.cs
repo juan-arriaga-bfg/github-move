@@ -27,7 +27,8 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
         life = piece.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
         
         if(life == null) return;
-        
+
+        bar.IsVisible = life.HP != -1;
         bar.Init(life.HP);
 
         if (life.IsUseCooldown == false) return;
@@ -39,11 +40,13 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
     public override void ResetViewOnDestroy()
     {
         bar.Clear();
+        
         if (life.IsUseCooldown)
         {
             life.Timer.OnExecute -= UpdateButtonText;
             life.Timer.OnComplete -= UpdateButtonText;
         }
+        
         base.ResetViewOnDestroy();
     }
     

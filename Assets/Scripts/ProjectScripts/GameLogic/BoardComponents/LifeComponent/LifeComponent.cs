@@ -23,8 +23,8 @@ public class LifeComponent : ECSEntity
     public void Damage(int damage)
     {
         if (IsDead) return;
-        
-        current = Mathf.Clamp(current + damage, 0, HP);
+
+        if (HP != -1) current = Mathf.Clamp(current + damage, 0, HP);
         AddResourceView.Show(StartPosition(), new CurrencyPair{Currency = Currency.Life.Name, Amount = -damage});
     }
 

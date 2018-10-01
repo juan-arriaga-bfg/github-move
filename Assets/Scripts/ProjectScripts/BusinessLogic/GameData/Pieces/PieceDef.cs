@@ -4,6 +4,7 @@ public class PieceDef : SimplePieceDef
 {
     public PiecesReproductionDef ReproductionDef;
     public PiecesMatchConditionsDef MatchConditionsDef;
+    public PiecesMakingDef MakingDef;
     
     public string Name { get; set; }
     

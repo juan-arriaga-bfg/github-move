@@ -6,7 +6,7 @@
     public virtual CurrencyPair Worker => new CurrencyPair {Currency = Currency.Worker.Name, Amount = 1};
     
     public virtual string Message => "";
-    public virtual string Price => $"Send<sprite name={Worker.Currency}>";
+    public virtual string Price => $"Send <sprite name={Worker.Currency}>";
     
     public virtual bool IsUseCooldown => false;
     

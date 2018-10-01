@@ -1,0 +1,190 @@
+﻿[
+  {
+    "Uid": "A9",
+    "Delay": 15,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 10
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 2
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 5
+      }
+    ],
+    "PieceAmount": 4,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 50
+      },
+      {
+        "Uid": "B1",
+        "Weight": 15
+      },
+      {
+        "Uid": "F1",
+        "Weight": 10
+      }
+    ]
+  },
+  {
+    "Uid": "C12",
+    "Delay": 30,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 15
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 3
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 5
+      }
+    ],
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 30
+      },
+      {
+        "Uid": "E1",
+        "Weight": 5
+      },
+      {
+        "Uid": "F1",
+        "Weight": 10
+      },
+      {
+        "Uid": "Coin1",
+        "Weight": 5
+      },
+      {
+        "Uid": "A2",
+        "Weight": 20
+      },
+      {
+        "Uid": "B1",
+        "Weight": 15
+      }
+    ]
+  },
+  {
+    "Uid": "K10",
+    "Delay": 45,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 20
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 5
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 20
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 5
+      }
+    ],
+    "PieceAmount": 4,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 50
+      },
+      {
+        "Uid": "A2",
+        "Weight": 50
+      },
+      {
+        "Uid": "J1",
+        "Weight": 10
+      },
+      {
+        "Uid": "B1",
+        "Weight": 10
+      },
+      {
+        "Uid": "F1",
+        "Weight": 20
+      },
+      {
+        "Uid": "E1",
+        "Weight": 10
+      }
+    ]
+  },
+  {
+    "Uid": "L9",
+    "Delay": 120,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 25
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 7
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 5
+      }
+    ],
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 50
+      },
+      {
+        "Uid": "A2",
+        "Weight": 50
+      },
+      {
+        "Uid": "J1",
+        "Weight": 10
+      },
+      {
+        "Uid": "B1",
+        "Weight": 10
+      },
+      {
+        "Uid": "H1",
+        "Weight": 10
+      },
+      {
+        "Uid": "J5",
+        "Weight": 10
+      },
+      {
+        "Uid": "Coin1",
+        "Weight": 5
+      }
+    ]
+  }
+]
