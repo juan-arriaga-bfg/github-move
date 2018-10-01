@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class AddResourceView : BoardElementView 
@@ -48,6 +49,17 @@ public class AddResourceView : BoardElementView
 		var from = board.BoardDef.GetSectorPosition(position);
 		
 		Show(from, resource);
+	}
+
+	public static void Show(BoardPosition position, List<CurrencyPair> resource)
+	{
+		var sequence = DOTween.Sequence();
+        
+		for (var i = 0; i < resource.Count; i++)
+		{
+			var reward = resource[i];
+			sequence.InsertCallback(0.5f * i, () => Show(position, reward));
+		}
 	}
 
 	public static void Show(BoardPosition position, CurrencyPair resource)

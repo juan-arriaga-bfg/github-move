@@ -55,6 +55,28 @@ public class ItemWeight
         return null;
     }
 
+    public static Dictionary<int, int> GetRandomPieces(int amount, List<ItemWeight> weights, bool isExclude = false)
+    {
+        var result = new Dictionary<int, int>();
+        
+        for (var i = amount - 1; i >= 0; i--)
+        {
+            var item = GetRandomItem(weights);
+
+            if (item == null) continue;
+
+            if (result.ContainsKey(item.Piece) == false)
+            {
+                result.Add(item.Piece, 1);
+                continue;
+            }
+            
+            result[item.Piece]++;
+        }
+        
+        return result;
+    }
+
     public static List<ItemWeight> ReplaseWeights(List<ItemWeight> oldWeights, List<ItemWeight> nextWeights)
     {
         if (oldWeights == null) return nextWeights;

@@ -145,7 +145,7 @@ public class PieceBuildersBuilder
         
         dict.Add(idMax - 2, new PartPieceBuilder());
         dict.Add(idMax - 1, new BuildingBigPieceBuilder{Mask = mask});
-        dict.Add(idMax, new MulticellularDraggablePieceBuilder{Mask = mask});
+        dict.Add(idMax, new MakingPieceBuilder{Mask = mask});
         
         return dict;
     }

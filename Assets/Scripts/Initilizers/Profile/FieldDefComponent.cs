@@ -270,15 +270,16 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		foreach (var position in positions)
 		{
 			var piece = logic.GetPieceAt(position);
-
 			var component = piece?.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
 			
-			if(component == null || component.Current == 0) continue;
-
+			if(component == null) break;
+			if(component.Current == 0 && component.HP != -1) continue;
+			
 			var item = new LifeSaveItem
 			{
 				Step = component.Current,
 				StartTime = component.Timer.StartTimeLong,
+				IsStart = component.Timer.IsExecuteable(),
 				Position = position
 			};
 			

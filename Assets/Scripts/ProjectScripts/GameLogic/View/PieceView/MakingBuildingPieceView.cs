@@ -1,28 +1,22 @@
-﻿using UnityEngine;
-
-public class ReproductionPieceView : PieceBoardElementView
+﻿public class MakingBuildingPieceView : BuildingPieceView
 {
-    [SerializeField] private Material lockedMaterial;
-    
-    private Material unlockedMaterial;
-    
     private TimerComponent timer;
     
     public override void Init(BoardRenderer context, Piece piece)
     {
         base.Init(context, piece);
 
-        var life = Piece.GetComponent<ReproductionLifeComponent>(ReproductionLifeComponent.ComponentGuid);
+        var life = Piece.GetComponent<MakingLifeComponent>(MakingLifeComponent.ComponentGuid);
 
         timer = life?.Timer;
         
         if(timer == null) return;
         
-        timer.OnStart += UpdateSate;
-        timer.OnComplete += UpdateSate;
+        timer.OnStart += UpdateLockSate;
+        timer.OnComplete += UpdateLockSate;
 
         if (sprite != null) unlockedMaterial = sprite.material;
-        UpdateSate();
+        UpdateLockSate();
     }
     
     public override void ResetViewOnDestroy()
@@ -32,11 +26,11 @@ public class ReproductionPieceView : PieceBoardElementView
         
         if(timer == null) return;
         
-        timer.OnStart -= UpdateSate;
-        timer.OnComplete -= UpdateSate;
+        timer.OnStart -= UpdateLockSate;
+        timer.OnComplete -= UpdateLockSate;
     }
     
-    private void UpdateSate()
+    private void UpdateLockSate()
     {
         if(timer == null || sprite == null) return;
         

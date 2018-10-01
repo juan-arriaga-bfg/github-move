@@ -13,6 +13,7 @@ public class PiecesDataManager : ECSEntity, IDataManager, IDataLoader<List<Piece
         Reload();
         RegisterComponent(new PiecesMatchConditionsManager());
         RegisterComponent(new PiecesReproductionDataManager());
+        RegisterComponent(new PiecesMakingDataManager());
     }
     
     public void Reload()
@@ -58,7 +59,6 @@ public class PiecesDataManager : ECSEntity, IDataManager, IDataLoader<List<Piece
         if (pieceDef.SpawnResources != null && pieceDef.SpawnResources.Currency == Currency.Energy.Name)
         {
             pieceTypeDef.Filter = pieceTypeDef.Filter.Add(PieceTypeFilter.Energy);
-            // Debug.Log($"Add Energy filter to {pieceTypeDef.Abbreviations[0]}");
         }
     }
 
@@ -67,12 +67,5 @@ public class PiecesDataManager : ECSEntity, IDataManager, IDataLoader<List<Piece
         PieceDef def;
 
         return pieces.TryGetValue(id, out def) ? def : null;
-    }
-
-    public PieceDef GetPieceDefOrDefault(int id)
-    {
-        PieceDef def;
-
-        return pieces.TryGetValue(id, out def) ? def : PieceDef.Default();
     }
 }

@@ -1,7 +1,4 @@
-﻿using DG.Tweening;
-using UnityEngine;
-
-public class ObstacleLifeComponent : StorageLifeComponent
+﻿public class ObstacleLifeComponent : StorageLifeComponent
 {
     public override CurrencyPair Energy => GameDataService.Current.ObstaclesManager.GetPriceByStep(thisContext.PieceType, current);
 
@@ -65,14 +62,7 @@ public class ObstacleLifeComponent : StorageLifeComponent
     {
         var rewards = GameDataService.Current.ObstaclesManager.GetRewardByStep(thisContext.PieceType, current);
         
-        var sequence = DOTween.Sequence();
-        
-        for (var i = 0; i < rewards.Count; i++)
-        {
-            var reward = rewards[i];
-            sequence.InsertCallback(0.5f * i, () => AddResourceView.Show(StartPosition(), reward));
-        }
-                
+        AddResourceView.Show(StartPosition(), rewards);
         thisContext.Context.HintCooldown.Step(HintType.Obstacle);
     }
 }

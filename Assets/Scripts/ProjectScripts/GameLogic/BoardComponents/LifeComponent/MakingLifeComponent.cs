@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-
-public class ReproductionLifeComponent : StorageLifeComponent
+﻿public class MakingLifeComponent : StorageLifeComponent
 {
-    private PiecesReproductionDef def;
-    private string childName;
+    private PiecesMakingDef def;
     private TimerComponent cooldown;
     
-    public override string Message => $"Harvest {childName}";
+    public override CurrencyPair Energy => def.Price;
+    public override string Message => $"Make: {Energy.ToStringIcon()}";
     public override string Price => Timer.IsExecuteable() ? $"Wait\n{Timer.CompleteTime.GetTimeLeftText()}" : base.Price;
 
     public override TimerComponent Timer => cooldown;
@@ -17,14 +15,11 @@ public class ReproductionLifeComponent : StorageLifeComponent
     {
         base.OnRegisterEntity(entity);
         
-        def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType).ReproductionDef;
+        def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType).MakingDef;
         
-        HP = def.Limit;
+        HP = -1;
         cooldown = new TimerComponent{Delay = def.Delay, Price = def.FastPrice};
         RegisterComponent(cooldown);
-        
-        var child = GameDataService.Current.PiecesManager.GetPieceDef(PieceType.Parse(def.Reproduction.Currency));
-        childName = child?.Name;
     }
 
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
@@ -35,14 +30,13 @@ public class ReproductionLifeComponent : StorageLifeComponent
         
         timer.Delay = 2;
         
-        storage.SpawnPiece = PieceType.Parse(def.Reproduction.Currency);
-        storage.Capacity = storage.Amount = def.Reproduction.Amount;
+        storage.Capacity = storage.Amount = def.PieceAmount;
     }
 
     protected override LifeSaveItem InitInSave(BoardPosition position)
     {
         var item = base.InitInSave(position);
-
+        
         if (item != null && item.IsStart) cooldown.Start(item.StartTime);
         
         return item;
@@ -70,41 +64,25 @@ public class ReproductionLifeComponent : StorageLifeComponent
 
     protected override void OnStep()
     {
-        storage.OnScatter = () =>
+        var pieces = ItemWeight.GetRandomPieces(def.PieceAmount, def.PieceWeights);
+        
+        foreach (var key in pieces.Keys)
         {
-            storage.OnScatter = null;
-            OnSpawnRewards();
-            cooldown.Start();
+            storage.SpawnPiece = key;
+            break;
+        }
+        
+        storage.SpawnAction = new EjectionPieceAction
+        {
+            From = thisContext.CachedPosition,
+            Pieces = pieces,
+            OnComplete = OnSpawnRewards
         };
     }
-
-    protected override void OnComplete()
-    {
-        storage.OnScatter = () =>
-        {
-            storage.OnScatter = null;
-            OnSpawnRewards();
-            thisContext.Context.ActionExecutor.AddAction(new CollapsePieceToAction
-            {
-                To = thisContext.CachedPosition,
-                Positions = new List<BoardPosition> {thisContext.CachedPosition},
-                OnComplete = OnRemove
-            });
-        };
-    }
-
-    private void OnRemove()
-    {
-        thisContext.Context.ActionExecutor.AddAction(new SpawnPieceAtAction()
-        {
-            IsCheckMatch = false,
-            At = thisContext.CachedPosition,
-            PieceTypeId = PieceType.OX1.Id
-        });
-    }
-
+    
     protected override void OnSpawnRewards()
     {
-        AddResourceView.Show(StartPosition(), def.StepReward);
+        AddResourceView.Show(StartPosition(), def.StepRewards);
+        cooldown.Start();
     }
 }

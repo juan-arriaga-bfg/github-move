@@ -2,9 +2,9 @@
 
 public class BuildingPieceView : PieceBoardElementView
 {
-	[SerializeField] private Material lockedMaterial;
+	[SerializeField] protected Material lockedMaterial;
     
-	private Material unlockedMaterial;
+	protected Material unlockedMaterial;
     
 	private PieceStateComponent state;
 	

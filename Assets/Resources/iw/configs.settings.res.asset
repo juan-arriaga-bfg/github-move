@@ -15,6 +15,9 @@ MonoBehaviour:
   configNames:
   - /Configs/chests/chests.data.txt
   - /Configs/pieces/pieces.data.txt
+  - /Configs/pieces/piecesMatchConditions.data.txt
+  - /Configs/pieces/piecesReproduction.data.txt
+  - /Configs/pieces/piecesMaking.data.txt
   - /Configs/quests/quests.data.txt
   - /Configs/fogs/fogs.data.txt
   - /Configs/obstacles/obstacles.data.txt
@@ -22,7 +25,5 @@ MonoBehaviour:
   - /Configs/mines/mines.data.txt
   - /Configs/field/field.data.txt
   - /Configs/codex/codex.data.txt
-  - /Configs/pieces/piecesMatchConditions.data.txt
-  - /Configs/pieces/piecesReproduction.data.txt
   - /Configs/constants/constants.data.txt
   - /Configs/enemies/enemies.data.txt
