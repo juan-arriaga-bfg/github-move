@@ -291,6 +291,12 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             
             PieceDef pieceDef = pieceManager.GetPieceDef(pieceId);
             PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceId);
+
+            // Skip fake
+            if (pieceTypeDef.Filter.Has(PieceTypeFilter.Fake))
+            {
+                continue;
+            }
             
             // pieceDef.Reproduction // Create by timer
             // pieceDef.SpawnResources // Create on consume 
