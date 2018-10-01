@@ -94,14 +94,17 @@
     
     protected virtual void Success()
     {
+        int i = 0;
     }
 
     protected virtual void OnStep()
     {
+        int i = 0;
     }
     
     protected virtual void OnComplete()
     {
+        int i = 0;
     }
 
     protected virtual void OnSpawnRewards()

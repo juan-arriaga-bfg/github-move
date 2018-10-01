@@ -65,4 +65,14 @@
         AddResourceView.Show(StartPosition(), rewards);
         thisContext.Context.HintCooldown.Step(HintType.Obstacle);
     }
+    
+    protected override void OnTimerComplete()
+    {
+        base.OnTimerComplete();
+
+        if (IsDead)
+        {
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ObstacleKilled, this);
+        }
+    }
 }

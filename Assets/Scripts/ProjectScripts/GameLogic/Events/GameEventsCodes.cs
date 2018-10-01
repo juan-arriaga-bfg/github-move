@@ -9,5 +9,7 @@
     public const int Match = 1001;
     public const int OpenChest = 1002;
     public const int ClearFog = 1003;
-    public const int UseWorker = 1004;
+    public const int WorkerUsed = 1004;
+    public const int ObstacleKilled = 1005;
+    public const int MineUsed = 1005;
 }

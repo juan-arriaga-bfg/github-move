@@ -89,4 +89,10 @@ public class MineLifeComponent : StorageLifeComponent
     {
         AddResourceView.Show(StartPosition(), def.StepReward);
     }
+
+    protected override void OnTimerComplete()
+    {
+        base.OnTimerComplete();
+        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.MineUsed, this);
+    }
 }

@@ -107,6 +107,8 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         ClearCodexContentCache();
 
         OnNewItemUnlocked?.Invoke();
+        
+        QuestService.Current.CheckConditions();
 
         return true;
     }

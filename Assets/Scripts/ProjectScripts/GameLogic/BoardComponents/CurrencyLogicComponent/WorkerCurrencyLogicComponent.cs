@@ -126,6 +126,8 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             completeTimesList.Remove(pair);
             Add(1);
             
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.WorkerUsed, this);
+            
             return true;
         }
         
