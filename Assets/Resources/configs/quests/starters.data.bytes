@@ -1,23 +1,15 @@
 [
   {
     "$type": "QuestStarterEntity, Assembly-CSharp",
-    "Id": "0",
-    "QuestToStartId": "All_Test",
+    "Id": "1",
+    "QuestToStartId": "ClearFog_Test",
     "ConditionIds": [
-      "AlwaysTrue_Test"
+      "PlayerLevel_Test_1"
     ]
   },
   {
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "Id": "2",
-    "QuestToStartId": "ClearFog_Test",
-    "ConditionIds": [
-      "MaxActiveQuestsCount_Test"
-    ]
-  },
-  {
-    "$type": "QuestStarterEntity, Assembly-CSharp",
-    "Id": "1",
     "QuestToStartId": "CreatePiece_Test",
     "ConditionIds": [
       "MaxActiveQuestsCount_Test"
