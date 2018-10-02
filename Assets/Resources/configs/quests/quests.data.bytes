@@ -1,37 +1,6 @@
 [
   {
     "$type": "QuestEntity, Assembly-CSharp",
-    "Id": "All_Test",
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Title": "All_Test",
-        "Message": "All_Test message"
-      },
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "$type": "CurrencyPair, Assembly-CSharp",
-            "Currency": "Coins",
-            "Amount": 100
-          }
-        ]
-      }
-    },
-    "TaskDefs": [
-      { "TaskId": "CreatePiece_Test" },
-      { "TaskId": "ClearFog_Test" },
-      { "TaskId": "CurrencyCollect_Test" },
-      { "TaskId": "CurrencySpend_Test" },
-      { "TaskId": "KillObstacle_Test" },
-      { "TaskId": "Match_Test" },
-      { "TaskId": "SuperMatch_Test" },
-      { "TaskId": "OpenChest_Test" },
-      { "TaskId": "UseMine_Test" },
-      { "TaskId": "UseWorker_Test" }
-    ]
-  },
-  {
-    "$type": "QuestEntity, Assembly-CSharp",
     "Id": "CreatePiece_Test",
     "ComponentsCache": {
       "QuestDescriptionComponent": {
