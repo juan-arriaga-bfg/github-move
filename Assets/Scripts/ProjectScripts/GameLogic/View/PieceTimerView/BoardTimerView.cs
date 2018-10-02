@@ -22,6 +22,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     [SerializeField] private GameObject hourglass;
     
     private TimerComponent timer;
+    private bool isActiveHourglass;
     
     protected override ViewType Id => ViewType.BoardTimer;
     
@@ -58,11 +59,13 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         button.interactable = state == TimerViewSate.Select;
         smallButton.SetActive(state == TimerViewSate.Select);
         bigButton.SetActive(state == TimerViewSate.Select);
+        hourglass.SetActive(isActiveHourglass && state != TimerViewSate.Select);
     }
 
     public void SetHourglass(bool isActive)
     {
         if(timer == null) return;
+        isActiveHourglass = isActive;
         hourglass.SetActive(isActive);
     }
     
