@@ -151,7 +151,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         {
             if (position == null || position.Value.X == 0 && position.Value.Y == 0)
             {
-                UIService.Get.ShowWindow(UIWindowType.CastleWindow);
+                UIService.Get.ShowWindow(UIWindowType.ChestsShopWindow);
                 return;
             }
             

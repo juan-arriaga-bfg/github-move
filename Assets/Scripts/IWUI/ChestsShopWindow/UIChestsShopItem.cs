@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UICastleItem : MonoBehaviour
+public class UIChestsShopItem : IWUIWindowViewController
 {
 	[SerializeField] private Image icon;
 	
@@ -11,20 +11,21 @@ public class UICastleItem : MonoBehaviour
 	
 	[SerializeField] private GameObject timer;
 	[SerializeField] private GameObject button;
-
+	
+	private UIChestsShopWindowModel model;
+	
 	private ChestDef chest;
+	public int reward = -1;
+	
 	private bool isFree;
 	private bool isClick;
-	private UICastleWindowModel model;
-    
+	
 	public void Init(ChestDef def)
 	{
+		model = context.Model as UIChestsShopWindowModel;
 		chest = def;
-
-		isClick = false;
 		
-		model = UIService.Get.GetCachedModel<UICastleWindowModel>(UIWindowType.CastleWindow);
-
+		isClick = false;
 		isFree = GameDataService.Current.LevelsManager.Chest == chest.Piece;
 		
 		if (isFree)
@@ -40,13 +41,30 @@ public class UICastleItem : MonoBehaviour
 		
 		icon.sprite = IconService.Current.GetSpriteById(chest.Uid);
 	}
-
-	private void OnDisable()
+	
+	public override void OnViewCloseCompleted()
 	{
-		if(isFree == false) return;
+		if (isFree)
+		{
+			model.FreeChestLogic.Timer.OnExecute -= UpdateLabel;
+			model.FreeChestLogic.Timer.OnComplete -= ChengeButtons;
+		}
+		
+		if (isClick == false || reward == -1) return;
+		
+		var board = BoardService.Current.GetBoardById(0);
+		var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
+		var piece = board.BoardLogic.GetPieceAt(position);
+        
+		var menu = piece.TouchReaction?.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
+		var spawn = menu?.GetDefinition<TouchReactionDefinitionSpawnShop>();
+        
+		if(spawn == null) return;
 
-		model.FreeChestLogic.Timer.OnExecute -= UpdateLabel;
-		model.FreeChestLogic.Timer.OnComplete -= ChengeButtons;
+		spawn.Reward = reward;
+		reward = -1;
+		model.FreeChestLogic.Timer.Start();
+		spawn.Make(piece.CachedPosition, piece);
 	}
 
 	private void UpdateLabel()
@@ -96,8 +114,8 @@ public class UICastleItem : MonoBehaviour
 			return;
 		}
 		
-		model.ChestReward = chest.Piece;
-		UIService.Get.CloseWindow(UIWindowType.CastleWindow, true);
+		reward = chest.Piece;
+		context.Controller.CloseCurrentWindow();
 	}
 
 	private void OnClickPaid()
@@ -110,8 +128,8 @@ public class UICastleItem : MonoBehaviour
 				return;
 			}
 			
-			model.ChestReward = chest.Piece;
-			UIService.Get.CloseWindow(UIWindowType.CastleWindow, true);
+			reward = chest.Piece;
+			context.Controller.CloseCurrentWindow();
 		});
 	}
 }

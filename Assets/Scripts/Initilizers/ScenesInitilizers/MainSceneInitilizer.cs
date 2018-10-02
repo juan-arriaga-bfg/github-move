@@ -24,7 +24,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.ChestMessage,
             UIWindowType.QuestWindow,
             UIWindowType.ErrorWindow,
-            UIWindowType.CastleWindow,
+            UIWindowType.ChestsShopWindow,
             UIWindowType.EnergyShopWindow,
             UIWindowType.CodexWindow,
             UIWindowType.CurrencyCheatSheetWindow,

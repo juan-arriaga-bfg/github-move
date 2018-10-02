@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 
-public class UICastleWindowModel : IWWindowModel 
+public class UIChestsShopWindowModel : IWWindowModel 
 {
-    public int ChestReward = -1;
-    
     public string Title => "Shop of Chests";
     public string Message => "Upgrade your castle to get new chests!";
     public string Button => "Show";
-
+    
+    public FreeChestLogicComponent FreeChestLogic => BoardService.Current.GetBoardById(0).FreeChestLogic;
+    
     public List<ChestDef> Chests
     {
         get
@@ -30,26 +30,5 @@ public class UICastleWindowModel : IWWindowModel
             
             return last;
         }
-    }
-
-    public FreeChestLogicComponent FreeChestLogic => BoardService.Current.GetBoardById(0).FreeChestLogic;
-
-    public bool Spawn()
-    {
-        if (ChestReward == -1) return false;
-        
-        var board = BoardService.Current.GetBoardById(0);
-        var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
-        var piece = board.BoardLogic.GetPieceAt(position);
-        
-        var menu = piece.TouchReaction?.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
-        var spawn = menu?.GetDefinition<TouchReactionDefinitionSpawnShop>();
-        
-        if(spawn == null) return false;
-
-        spawn.Reward = ChestReward;
-        ChestReward = -1;
-        FreeChestLogic.Timer.Start();
-        return spawn.Make(piece.CachedPosition, piece);
     }
 }

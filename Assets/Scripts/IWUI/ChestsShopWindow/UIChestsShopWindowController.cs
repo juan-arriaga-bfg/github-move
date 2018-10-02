@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class UICastleWindowController : IWWindowController {
+public class UIChestsShopWindowController : IWWindowController {
 
     public override IWWindowModel CreateModel()
     {
-        UICastleWindowModel windowModel = new UICastleWindowModel();
+        UIChestsShopWindowModel windowModel = new UIChestsShopWindowModel();
 
 
 

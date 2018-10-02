@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine.UI;
 
-public class UICastleWindowView : UIGenericPopupWindowView 
+public class UIChestsShopWindowView : UIGenericPopupWindowView 
 {
     [SerializeField] private GameObject itemPattern;
     [SerializeField] private NSText buttonShow;
     [SerializeField] private ScrollRect scroll;
     [SerializeField] private RectTransform content;
     
-    private List<GameObject> items = new List<GameObject>();
+    private List<UIChestsShopItem> items = new List<UIChestsShopItem>();
     
     public override void OnViewShow()
     {
         base.OnViewShow();
         
-        var windowModel = Model as UICastleWindowModel;
+        var windowModel = Model as UIChestsShopWindowModel;
         
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
@@ -27,9 +27,12 @@ public class UICastleWindowView : UIGenericPopupWindowView
         
         foreach (var chest in chests)
         {
-            var item = Instantiate(itemPattern, itemPattern.transform.parent).GetComponent<UICastleItem>();
+            var item = Instantiate(itemPattern, itemPattern.transform.parent).GetComponent<UIChestsShopItem>();
+            
+            RegisterWindowViewController(item);
+            
             item.Init(chest);
-            items.Add(item.gameObject);
+            items.Add(item);
         }
         
         itemPattern.SetActive(false);
@@ -51,7 +54,7 @@ public class UICastleWindowView : UIGenericPopupWindowView
     {
         base.OnViewClose();
         
-        var windowModel = Model as UICastleWindowModel;
+        var windowModel = Model as UIChestsShopWindowModel;
         
         DOTween.Kill(scroll);
     }
@@ -64,14 +67,11 @@ public class UICastleWindowView : UIGenericPopupWindowView
 
         foreach (var item in items)
         {
-            Destroy(item);
+            UnRegisterWindowViewController(item);
+            Destroy(item.gameObject);
         }
         
-        items = new List<GameObject>();
-        
-        var windowModel = Model as UICastleWindowModel;
-        
-        windowModel.Spawn();
+        items = new List<UIChestsShopItem>();
     }
     
     public void OnClick()

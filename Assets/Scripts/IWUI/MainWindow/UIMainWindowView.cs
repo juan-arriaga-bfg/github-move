@@ -97,7 +97,7 @@ public class UIMainWindowView : IWUIWindowView
     
     public void OnClickShop()
     {
-        UIService.Get.ShowWindow(UIWindowType.CastleWindow);
+        UIService.Get.ShowWindow(UIWindowType.ChestsShopWindow);
     }
     
     public void OnClickOrders()
