@@ -21,13 +21,13 @@ public class ReproductionPieceView : PieceBoardElementView
         timer.OnStart += UpdateSate;
         timer.OnComplete += UpdateSate;
 
-        if (sprite != null) unlockedMaterial = sprite.material;
+        if (bodySprite != null) unlockedMaterial = bodySprite.material;
         UpdateSate();
     }
     
     public override void ResetViewOnDestroy()
     {
-        sprite.material = unlockedMaterial;
+        bodySprite.material = unlockedMaterial;
         base.ResetViewOnDestroy();
         
         if(timer == null) return;
@@ -38,8 +38,8 @@ public class ReproductionPieceView : PieceBoardElementView
     
     private void UpdateSate()
     {
-        if(timer == null || sprite == null) return;
+        if(timer == null || bodySprite == null) return;
         
-        sprite.material = timer.IsStarted ? lockedMaterial : unlockedMaterial;
+        bodySprite.material = timer.IsStarted ? lockedMaterial : unlockedMaterial;
     }
 }

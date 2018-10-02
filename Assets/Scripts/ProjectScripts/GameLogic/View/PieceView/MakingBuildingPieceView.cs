@@ -15,13 +15,13 @@
         timer.OnStart += UpdateLockSate;
         timer.OnComplete += UpdateLockSate;
 
-        if (sprite != null) unlockedMaterial = sprite.material;
+        if (bodySprite != null) unlockedMaterial = bodySprite.material;
         UpdateLockSate();
     }
     
     public override void ResetViewOnDestroy()
     {
-        sprite.material = unlockedMaterial;
+        bodySprite.material = unlockedMaterial;
         base.ResetViewOnDestroy();
         
         if(timer == null) return;
@@ -32,8 +32,8 @@
     
     private void UpdateLockSate()
     {
-        if(timer == null || sprite == null) return;
+        if(timer == null || bodySprite == null) return;
         
-        sprite.material = timer.IsStarted ? lockedMaterial : unlockedMaterial;
+        bodySprite.material = timer.IsStarted ? lockedMaterial : unlockedMaterial;
     }
 }

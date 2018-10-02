@@ -694,7 +694,7 @@ MonoBehaviour:
   errorSelectionMaterial: {fileID: 0}
   defaultSelectionMaterial: {fileID: 0}
   highlightPieceMaterial: {fileID: 0}
-  animator: {fileID: 95470564245212044}
+  worker: {fileID: 95470564245212044}
 --- !u!114 &114595616929405838
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -724,6 +724,7 @@ MonoBehaviour:
     Name: O4
     Offset: {x: 0, y: 0.28}
     Scale: 0.8
+  isRandom: 1
 --- !u!114 &114607854138475680
 MonoBehaviour:
   m_ObjectHideFlags: 1
