@@ -24,21 +24,28 @@ public class UIQuestWindowView : UIGenericPopupWindowView
     {
         base.OnViewShow();
         
-        var windowModel = Model as UIQuestWindowModel;
+        var model = Model as UIQuestWindowModel;
 
         isComplete = false;
         
-        SetTitle(windowModel.Title);
-        SetMessage(windowModel.Message);
+        SetTitle(model.Title);
+        SetMessage(model.Message);
 
-        descriptionLabel.Text = windowModel.Description;
-        rewardLabel.Text = windowModel.RewardText;
-        amountLabel.Text = windowModel.AmountText;
-        buttonLabel.Text = windowModel.ButtonText;
+        descriptionLabel.Text = model.Description;
+        rewardLabel.Text = model.RewardText;
+        amountLabel.Text = model.AmountText;
+        buttonLabel.Text = model.ButtonText;
 
-        targetIcon.sprite = windowModel.Icon;
+        targetIcon.sprite = model.Icon;
 
-        CreateChain(windowModel);
+        if (model.Quest.ActiveTasks[0] is IHavePieceId)
+        {
+            CreateChain(model);
+        }
+        else
+        {
+            chain.gameObject.SetActive(false); 
+        }
     }
 
     public override void OnViewClose()
@@ -169,6 +176,8 @@ public class UIQuestWindowView : UIGenericPopupWindowView
 
     private void CreateChain(UIQuestWindowModel model)
     {
+        chain.gameObject.SetActive(true); 
+        
         foreach (Transform child in chain.ItemsHost) 
         {
             Destroy(child.gameObject);
