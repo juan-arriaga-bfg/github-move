@@ -34,7 +34,7 @@ public class TaskCreatePieceEntity : TaskCounterEntity, IBoardEventListener, IHa
             return;
         }
         
-        if (code == GameEventsCodes.AddPieceToBoard && PieceId == (int)context)
+        if (code == GameEventsCodes.PieceBuilded && PieceId == (int)context)
         {
             CurrentValue += 1;
         }

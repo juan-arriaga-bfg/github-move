@@ -206,8 +206,15 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
 
         var chain = matchDef.GetChain(targetId);
-        var list = GetCodexItemsForChain(chain);
 
+        // Current piece is not a part of any chain
+        if (chain.Count == 0)
+        {
+            return null;
+        }
+        
+        var list = GetCodexItemsForChain(chain);
+        
         int highlightedIndex = -1;
 
         for (var i = 0; i < list.Count; i++)

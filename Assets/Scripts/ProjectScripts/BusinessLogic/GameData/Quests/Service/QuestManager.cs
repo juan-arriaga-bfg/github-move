@@ -18,11 +18,18 @@ public class QuestManager : ECSEntity
     public void Init()
     {
         questStarters = new List<QuestStarterEntity>();
+
+        for (int i = 1; i <= 10; i++)
+        {
+            var starter = GameDataService.Current.QuestsManager.InstantiateQuestStarter(i.ToString());
+            questStarters.Add(starter);
+        }
         
-        var questStarter1 = GameDataService.Current.QuestsManager.InstantiateQuestStarter("Quest_3");
+        // var questStarter1 = GameDataService.Current.QuestsManager.InstantiateQuestStarter("Quest_3");
         // var questStarter2 = GameDataService.Current.QuestsManager.InstantiateQuestStarter("Quest_2");
         //
-        questStarters.Add(questStarter1);
+        
+        // questStarters.Add(questStarter1);
         // questStarters.Add(questStarter2);
     }
    
@@ -53,7 +60,11 @@ public class QuestManager : ECSEntity
             var starter = questStarters[i];
             if (starter.Check())
             {
-                dataManager.StartQuestById(starter.QuestToStartId, null);
+                var quest = dataManager.StartQuestById(starter.QuestToStartId, null);
+                if (ConnectedToBoard)
+                {
+                    quest.ConnectToBoard();
+                }
             }
         }
     }

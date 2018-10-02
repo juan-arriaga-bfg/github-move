@@ -103,7 +103,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         
         if (quest.IsCompleted())
         {
-            var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
+            // var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
             
             // if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, windowModel.Reward.Sum(e => e.Amount)))
             // {
@@ -118,8 +118,15 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             isComplete = true;
             return;
         }
+
+        var taskAboutPiece = quest.Tasks[0] as IHavePieceId;
+        if (taskAboutPiece == null)
+        {
+            UIMessageWindowController.CreateMessage("[Debug]", "Not implemented yet");
+            return;
+        }
         
-        var targetId = (quest.Tasks[0] as TaskCreatePieceEntity).PieceId;
+        var targetId = taskAboutPiece.PieceId;
         var piece = board.BoardLogic.MatchDefinition.GetFirst(targetId);
         
         if(piece == PieceType.None.Id) return;
@@ -183,8 +190,14 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             Destroy(child.gameObject);
         }
         
-        var targetId = (model.Quest.Tasks[0] as TaskCreatePieceEntity).PieceId;
+        var targetId = (model.Quest.Tasks[0] as IHavePieceId).PieceId;
         var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId, CHAIN_LENGTH);
+        if (itemDefs == null)
+        {
+            chain.gameObject.SetActive(false);
+            return;
+        }
+        
         CodexChainDef chainDef = new CodexChainDef {ItemDefs = itemDefs};
         UICodexWindowView.CreateItems(chain, chainDef, codexItemPrefab, CHAIN_LENGTH);
     }

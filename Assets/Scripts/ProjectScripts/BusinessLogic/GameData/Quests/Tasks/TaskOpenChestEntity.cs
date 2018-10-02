@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class TaskOpenChestEntity : TaskCounterEntity, IBoardEventListener, IHavePieceId
@@ -5,7 +6,7 @@ public class TaskOpenChestEntity : TaskCounterEntity, IBoardEventListener, IHave
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
-    public int PieceId { get; protected set; }
+    [JsonProperty] public int PieceId { get; protected set; }
     
     public override void ConnectToBoard()
     {

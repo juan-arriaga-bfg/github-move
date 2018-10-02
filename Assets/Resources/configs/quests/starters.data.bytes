@@ -1,7 +1,7 @@
 [
   {
     "$type": "QuestStarterEntity, Assembly-CSharp",
-    "Id": "1",
+    "Id": "2",
     "QuestToStartId": "ClearFog_Test",
     "ConditionIds": [
       "MaxActiveQuestsCount_Test"
@@ -17,7 +17,7 @@
   },
   {
     "$type": "QuestStarterEntity, Assembly-CSharp",
-    "Id": "1",
+    "Id": "3",
     "QuestToStartId": "CurrencyCollect_Test",
     "ConditionIds": [
       "MaxActiveQuestsCount_Test"
@@ -25,7 +25,7 @@
   },
   {
     "$type": "QuestStarterEntity, Assembly-CSharp",
-    "Id": "1",
+    "Id": "4",
     "QuestToStartId": "CurrencySpend_Test",
     "ConditionIds": [
       "MaxActiveQuestsCount_Test"
@@ -33,7 +33,7 @@
   },
   {
     "$type": "QuestStarterEntity, Assembly-CSharp",
-    "Id": "1",
+    "Id": "10",
     "QuestToStartId": "KillObstacle_Test",
     "ConditionIds": [
       "MaxActiveQuestsCount_Test"
@@ -41,7 +41,7 @@
   },
   {
     "$type": "QuestStarterEntity, Assembly-CSharp",
-    "Id": "1",
+    "Id": "5",
     "QuestToStartId": "UseWorker_Test",
     "ConditionIds": [
       "MaxActiveQuestsCount_Test"
@@ -49,7 +49,7 @@
   },
   {
     "$type": "QuestStarterEntity, Assembly-CSharp",
-    "Id": "1",
+    "Id": "6",
     "QuestToStartId": "OpenChest_Test",
     "ConditionIds": [
       "MaxActiveQuestsCount_Test"
@@ -57,7 +57,7 @@
   },
   {
     "$type": "QuestStarterEntity, Assembly-CSharp",
-    "Id": "1",
+    "Id": "7",
     "QuestToStartId": "Match_Test",
     "ConditionIds": [
       "MaxActiveQuestsCount_Test"
@@ -65,7 +65,7 @@
   },
   {
     "$type": "QuestStarterEntity, Assembly-CSharp",
-    "Id": "1",
+    "Id": "8",
     "QuestToStartId": "SuperMatch_Test",
     "ConditionIds": [
       "MaxActiveQuestsCount_Test"
@@ -73,7 +73,7 @@
   },
   {
     "$type": "QuestStarterEntity, Assembly-CSharp",
-    "Id": "1",
+    "Id": "9",
     "QuestToStartId": "UseMine_Test",
     "ConditionIds": [
       "MaxActiveQuestsCount_Test"
