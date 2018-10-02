@@ -37,7 +37,6 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
 
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        
        if (piece == null || board == null)
        {
             board = BoardService.Current.GetBoardById(0);

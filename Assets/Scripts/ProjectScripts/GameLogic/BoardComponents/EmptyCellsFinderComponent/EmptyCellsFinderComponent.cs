@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EmptyCellsFinderComponent : IECSComponent
@@ -109,6 +110,39 @@ public class EmptyCellsFinderComponent : IECSComponent
 		}
 
 		return field.Count != 0;
+	}
+	
+	public List<BoardPosition> FindEmptyAreaByPoint(BoardPosition targetPoint)
+	{   
+        var checkedPositions = new HashSet<BoardPosition>();
+        var uncheckedPositions = new HashSet<BoardPosition>();
+
+		var resultCollection = new List<BoardPosition>();
+
+        uncheckedPositions.Add(targetPoint);
+		
+        while (uncheckedPositions.Count > 0)
+        {
+            var current = uncheckedPositions.Last();
+
+            uncheckedPositions.Remove(current);
+            checkedPositions.Add(current);
+
+	        if (current.IsValid && context.IsPointValid(current) && context.GetPieceAt(current) == null)
+		        resultCollection.Add(current);
+	        else
+		        continue;
+	        
+            var availiablePositions = current.Neighbors();
+            
+	        foreach (var pos in availiablePositions)
+	        {
+		        if (checkedPositions.Contains(pos) == false && context.GetPieceAt(current) == null)
+			        uncheckedPositions.Add(pos);
+	        }
+        }
+
+		return resultCollection;
 	}
 
 	public bool CheckFreeSpaceNearPosition(BoardPosition position, int count)

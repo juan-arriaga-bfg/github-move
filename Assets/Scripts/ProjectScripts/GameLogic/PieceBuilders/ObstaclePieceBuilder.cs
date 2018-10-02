@@ -36,6 +36,8 @@ public class ObstaclePieceBuilder : GenericPieceBuilder
 		var pathfindLockObserver = new PathfindLockObserver() {AutoLock = true}; 
 		AddObserver(piece, pathfindLockObserver);
 		piece.RegisterComponent(pathfindLockObserver);
+
+		AddObserver(piece, new AreaRecalculateObserver());
 		
 		return piece;
 	}
