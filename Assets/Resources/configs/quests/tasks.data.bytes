@@ -1,39 +1,127 @@
-[
+[  
   {
-    "$type": "TaskCreatePieceCounterEntity, Assembly-CSharp",
-    "Id": "CreatePiece_A2_4",
+    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
+    "Id": "CreatePiece_Test",
     "PieceId": 101,
-    "TargetValue": 4,
+    "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": null,
-        "Message": "Create A2",
+        "Message": "CreatePiece message",
         "Ico": "A2"
       }
     }
   },   
   {
     "$type": "TaskClearFogEntity, Assembly-CSharp",
-    "Id": "ClearFog_1",
+    "Id": "ClearFog_Test",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": null,
-        "Message": "Clear Fog",
-        "Ico": "GreenarrowItem1"
+        "Message": "ClearFog message",
+        "Ico": "codexQuestion"
       }
     }
   },  
   {
-    "$type": "TaskCreatePieceCounterEntity, Assembly-CSharp",
-    "Id": "CreatePiece_A3_3",
-    "PieceId": 102,
-    "TargetValue": 3,
+    "$type": "TaskCurrencyCollectEntity, Assembly-CSharp",
+    "Id": "CurrencyCollect_Test",
+    "Currency": "Mana",
+    "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": null,
-        "Message": "Create A3",
-        "Ico": "A3"
+        "Message": "CurrencyCollect message",
+        "Ico": "codexQuestion"
+      }
+    }
+  },
+  {
+    "$type": "TaskCurrencySpendEntity, Assembly-CSharp",
+    "Id": "CurrencySpend_Test",
+    "Currency": "Mana",
+    "TargetValue": 5,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": null,
+        "Message": "CurrencySpend message",
+        "Ico": "codexQuestion"
+      }
+    }
+  },
+  {
+    "$type": "TaskKillObstacleEntity, Assembly-CSharp",
+    "Id": "KillObstacle_Test",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": null,
+        "Message": "KillObstacle message",
+        "Ico": "codexQuestion"
+      }
+    }
+  },
+  {
+    "$type": "TaskMatchEntity, Assembly-CSharp",
+    "Id": "Match_Test",
+    "PieceId": 101,
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": null,
+        "Message": "Match message",
+        "Ico": "codexQuestion"
+      }
+    }
+  },
+  {
+    "$type": "TaskSuperMatchEntity, Assembly-CSharp",
+    "Id": "SuperMatch_Test",
+    "PieceId": 100,
+    "TargetValue": 5,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": null,
+        "Message": "SuperMatch message",
+        "Ico": "codexQuestion"
+      }
+    }
+  },
+  {
+    "$type": "TaskOpenChestEntity, Assembly-CSharp",
+    "Id": "OpenChest_Test",
+    "PieceId": -1,
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": null,
+        "Message": "OpenChest message",
+        "Ico": "codexQuestion"
+      }
+    }
+  },
+  {
+    "$type": "TaskUseMineEntity, Assembly-CSharp",
+    "Id": "UseMine_Test",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": null,
+        "Message": "UseMine message",
+        "Ico": "codexQuestion"
+      }
+    }
+  },
+  {
+    "$type": "TaskUseWorkerEntity, Assembly-CSharp",
+    "Id": "UseWorker_Test",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": null,
+        "Message": "UseWorker message",
+        "Ico": "codexQuestion"
       }
     }
   }

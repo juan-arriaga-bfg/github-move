@@ -1,18 +1,82 @@
 [
   {
     "$type": "QuestStarterEntity, Assembly-CSharp",
-    "Id": "Quest_3",
-    "QuestToStartId": "Quest_3",
+    "Id": "1",
+    "QuestToStartId": "ClearFog_Test",
     "ConditionIds": [
-      "PlayerLevel_1"
+      "MaxActiveQuestsCount_Test"
     ]
   },
   {
     "$type": "QuestStarterEntity, Assembly-CSharp",
-    "Id": "Quest_2",
-    "QuestToStartId": "Quest_2",
+    "Id": "1",
+    "QuestToStartId": "CreatePiece_Test",
     "ConditionIds": [
-      "QuestCompleted_Quest_1"
+      "MaxActiveQuestsCount_Test"
+    ]
+  },
+  {
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "Id": "1",
+    "QuestToStartId": "CurrencyCollect_Test",
+    "ConditionIds": [
+      "MaxActiveQuestsCount_Test"
+    ]
+  },
+  {
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "Id": "1",
+    "QuestToStartId": "CurrencySpend_Test",
+    "ConditionIds": [
+      "MaxActiveQuestsCount_Test"
+    ]
+  },
+  {
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "Id": "1",
+    "QuestToStartId": "KillObstacle_Test",
+    "ConditionIds": [
+      "MaxActiveQuestsCount_Test"
+    ]
+  },
+  {
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "Id": "1",
+    "QuestToStartId": "UseWorker_Test",
+    "ConditionIds": [
+      "MaxActiveQuestsCount_Test"
+    ]
+  },
+  {
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "Id": "1",
+    "QuestToStartId": "OpenChest_Test",
+    "ConditionIds": [
+      "MaxActiveQuestsCount_Test"
+    ]
+  },
+  {
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "Id": "1",
+    "QuestToStartId": "Match_Test",
+    "ConditionIds": [
+      "MaxActiveQuestsCount_Test"
+    ]
+  },
+  {
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "Id": "1",
+    "QuestToStartId": "SuperMatch_Test",
+    "ConditionIds": [
+      "MaxActiveQuestsCount_Test"
+    ]
+  },
+  {
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "Id": "1",
+    "QuestToStartId": "UseMine_Test",
+    "ConditionIds": [
+      "MaxActiveQuestsCount_Test"
     ]
   }
 ]

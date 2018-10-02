@@ -1,12 +1,11 @@
 [
   {
     "$type": "QuestEntity, Assembly-CSharp",
-    "Id": "Quest_1",
+    "Id": "CreatePiece_Test",
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Title": "Quest 1",
-        "Message": "Quest 1 message",
-        "Ico": null
+        "Title": "CreatePiece_Test",
+        "Message": "CreatePiece_Test message"
       },
       "QuestRewardComponent": {
         "Value": [
@@ -14,51 +13,230 @@
             "$type": "CurrencyPair, Assembly-CSharp",
             "Currency": "Coins",
             "Amount": 100
-          },
-          {
-            "$type": "CurrencyPair, Assembly-CSharp",
-            "Currency": "Mana",
-            "Amount": 10
           }
         ]
       }
     },
     "TaskDefs": [
       {
-        "TaskId": "CreatePiece_A2_4",
-        "Order": 0
+        "TaskId": "CreatePiece_Test"
       }
     ]
   },
   {
     "$type": "QuestEntity, Assembly-CSharp",
-    "Id": "Quest_3",
-    "TaskDefs": [
-      {
-        "TaskId": "ClearFog_1",
-        "Order": 0
-      }
-    ],
+    "Id": "ClearFog_Test",
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Title": "Quest 2",
-        "Message": "Quest 2 message",
-        "Ico": null
+        "Title": "ClearFog_Test",
+        "Message": "ClearFog_Test message"
       },
       "QuestRewardComponent": {
         "Value": [
           {
             "$type": "CurrencyPair, Assembly-CSharp",
             "Currency": "Coins",
-            "Amount": 200
-          },
-          {
-            "$type": "CurrencyPair, Assembly-CSharp",
-            "Currency": "Mana",
-            "Amount": 20
+            "Amount": 100
           }
         ]
       }
-    }
+    },
+    "TaskDefs": [
+      {
+        "TaskId": "ClearFog_Test"
+      }
+    ]
+  },
+  {
+    "$type": "QuestEntity, Assembly-CSharp",
+    "Id": "CurrencyCollect_Test",
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "CurrencyCollect_Test",
+        "Message": "CurrencyCollect_Test message"
+      },
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "$type": "CurrencyPair, Assembly-CSharp",
+            "Currency": "Coins",
+            "Amount": 100
+          }
+        ]
+      }
+    },
+    "TaskDefs": [
+      {
+        "TaskId": "CurrencyCollect_Test"
+      }
+    ]
+  },
+  {
+    "$type": "QuestEntity, Assembly-CSharp",
+    "Id": "CurrencySpend_Test",
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "CurrencySpend_Test",
+        "Message": "CurrencySpend_Test message"
+      },
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "$type": "CurrencyPair, Assembly-CSharp",
+            "Currency": "Coins",
+            "Amount": 100
+          }
+        ]
+      }
+    },
+    "TaskDefs": [
+      {
+        "TaskId": "CurrencySpend_Test"
+      }
+    ]
+  },
+  {
+    "$type": "QuestEntity, Assembly-CSharp",
+    "Id": "KillObstacle_Test",
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "KillObstacle_Test",
+        "Message": "KillObstacle_Test message"
+      },
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "$type": "CurrencyPair, Assembly-CSharp",
+            "Currency": "Coins",
+            "Amount": 100
+          }
+        ]
+      }
+    },
+    "TaskDefs": [
+      {
+        "TaskId": "KillObstacle_Test"
+      }
+    ]
+  },
+  {
+    "$type": "QuestEntity, Assembly-CSharp",
+    "Id": "Match_Test",
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "Match_Test",
+        "Message": "Match_Test message"
+      },
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "$type": "CurrencyPair, Assembly-CSharp",
+            "Currency": "Coins",
+            "Amount": 100
+          }
+        ]
+      }
+    },
+    "TaskDefs": [
+      {
+        "TaskId": "Match_Test"
+      }
+    ]
+  },
+  {
+    "$type": "QuestEntity, Assembly-CSharp",
+    "Id": "SuperMatch_Test",
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "SuperMatch_Test",
+        "Message": "SuperMatch_Test message"
+      },
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "$type": "CurrencyPair, Assembly-CSharp",
+            "Currency": "Coins",
+            "Amount": 100
+          }
+        ]
+      }
+    },
+    "TaskDefs": [
+      {
+        "TaskId": "SuperMatch_Test"
+      }
+    ]
+  },
+  {
+    "$type": "QuestEntity, Assembly-CSharp",
+    "Id": "OpenChest_Test",
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "OpenChest_Test",
+        "Message": "OpenChest_Test message"
+      },
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "$type": "CurrencyPair, Assembly-CSharp",
+            "Currency": "Coins",
+            "Amount": 100
+          }
+        ]
+      }
+    },
+    "TaskDefs": [
+      {
+        "TaskId": "OpenChest_Test"
+      }
+    ]
+  },
+  {
+    "$type": "QuestEntity, Assembly-CSharp",
+    "Id": "UseMine_Test",
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "UseMine_Test",
+        "Message": "UseMine_Test message"
+      },
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "$type": "CurrencyPair, Assembly-CSharp",
+            "Currency": "Coins",
+            "Amount": 100
+          }
+        ]
+      }
+    },
+    "TaskDefs": [
+      {
+        "TaskId": "UseMine_Test"
+      }
+    ]
+  },
+  {
+    "$type": "QuestEntity, Assembly-CSharp",
+    "Id": "UseWorker_Test",
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "UseWorker_Test",
+        "Message": "UseWorker_Test message"
+      },
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "$type": "CurrencyPair, Assembly-CSharp",
+            "Currency": "Coins",
+            "Amount": 100
+          }
+        ]
+      }
+    },
+    "TaskDefs": [
+      {
+        "TaskId": "UseWorker_Test"
+      }
+    ]
   }
 ]

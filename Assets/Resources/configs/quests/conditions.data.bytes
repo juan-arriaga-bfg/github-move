@@ -1,12 +1,31 @@
 [
   {
     "$type": "QuestStartConditionPlayerLevelComponent, Assembly-CSharp",
-    "Id": "PlayerLevel_1",
+    "Id": "PlayerLevel_Test_1",
     "Level": 1
+  },
+  {
+    "$type": "QuestStartConditionAlwaysTrueComponent, Assembly-CSharp",
+    "Id": "AlwaysTrue_Test"
+  },
+  {
+    "$type": "QuestStartConditionPieceUnlockedComponent, Assembly-CSharp",
+    "Id": "PieceUnlocked_Test_A3",
+    "PieceId": 103
+  },
+  {
+    "$type": "QuestStartConditionPieceUnlockedComponent, Assembly-CSharp",
+    "Id": "PieceUnlocked_Test_Char2",
+    "PieceId": 11
   },
   {
     "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
     "Id": "QuestCompleted_Quest_1",
     "QuestId": "Quest_1"
+  },
+  {
+    "$type": "QuestStartConditionMaxActiveQuestsCountComponent, Assembly-CSharp",
+    "Id": "MaxActiveQuestsCount_Test",
+    "Count": "1"
   }
 ]
