@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class TaskSuperMatchEntity : TaskCounterEntity, IBoardEventListener, IHavePieceId
@@ -5,8 +6,22 @@ public class TaskSuperMatchEntity : TaskCounterEntity, IBoardEventListener, IHav
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
-    public int PieceId { get; protected set; }
-    public int CountToMatch { get; protected set; }
+    [JsonProperty] public int PieceId { get; protected set; }
+    [JsonProperty] public int CountToMatch { get; protected set; }
+    
+#region Serialization
+
+    public bool ShouldSerializePieceId()
+    {
+        return false;
+    }    
+    
+    public bool ShouldSerializeCountToMatch()
+    {
+        return false;
+    }
+    
+#endregion
     
     public override void ConnectToBoard()
     {
@@ -37,7 +52,7 @@ public class TaskSuperMatchEntity : TaskCounterEntity, IBoardEventListener, IHav
             return;
         }
 
-        if (PieceId != PieceType.None.Id && matchDescr.CreatedPieceType != PieceId)
+        if (PieceId != PieceType.None.Id && matchDescr.SourcePieceType != PieceId)
         {
             return;
         }

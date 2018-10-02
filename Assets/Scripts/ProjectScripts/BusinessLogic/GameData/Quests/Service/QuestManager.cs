@@ -19,6 +19,9 @@ public class QuestManager : ECSEntity
     {
         questStarters = new List<QuestStarterEntity>();
 
+        var s = GameDataService.Current.QuestsManager.InstantiateQuestStarter(0.ToString());
+        questStarters.Add(s);
+        
         for (int i = 1; i <= 10; i++)
         {
             var starter = GameDataService.Current.QuestsManager.InstantiateQuestStarter(i.ToString());

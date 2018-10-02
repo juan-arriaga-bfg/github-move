@@ -38,14 +38,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
 
         targetIcon.sprite = model.Icon;
 
-        if (model.Quest.ActiveTasks[0] is IHavePieceId)
-        {
-            CreateChain(model);
-        }
-        else
-        {
-            chain.gameObject.SetActive(false); 
-        }
+        ShowChainIfPossible(model);
     }
 
     public override void OnViewClose()
@@ -181,22 +174,34 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         });
     }
 
-    private void CreateChain(UIQuestWindowModel model)
+    private void ShowChainIfPossible(UIQuestWindowModel model)
     {
-        chain.gameObject.SetActive(true); 
-        
         foreach (Transform child in chain.ItemsHost) 
         {
             Destroy(child.gameObject);
         }
         
-        var targetId = (model.Quest.Tasks[0] as IHavePieceId).PieceId;
+        chain.gameObject.SetActive(false);
+
+        var taskAboutPiece = model.Quest.Tasks[0] as IHavePieceId;
+        if (taskAboutPiece == null)
+        {
+            return;
+        }
+        
+        var targetId = taskAboutPiece.PieceId;
+        if (targetId == PieceType.None.Id)
+        {
+            return;
+        }
+        
         var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId, CHAIN_LENGTH);
         if (itemDefs == null)
         {
-            chain.gameObject.SetActive(false);
             return;
         }
+       
+        chain.gameObject.SetActive(true); 
         
         CodexChainDef chainDef = new CodexChainDef {ItemDefs = itemDefs};
         UICodexWindowView.CreateItems(chain, chainDef, codexItemPrefab, CHAIN_LENGTH);

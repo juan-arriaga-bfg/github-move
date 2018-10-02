@@ -8,6 +8,15 @@ public class TaskOpenChestEntity : TaskCounterEntity, IBoardEventListener, IHave
 
     [JsonProperty] public int PieceId { get; protected set; }
     
+#region Serialization
+
+    public bool ShouldSerializePieceId()
+    {
+        return false;
+    }
+    
+#endregion
+    
     public override void ConnectToBoard()
     {
         BoardService.Current.FirstBoard.BoardEvents.AddListener(this, GameEventsCodes.OpenChest);

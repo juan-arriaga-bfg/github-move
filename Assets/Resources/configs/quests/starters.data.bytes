@@ -1,6 +1,14 @@
 [
   {
     "$type": "QuestStarterEntity, Assembly-CSharp",
+    "Id": "0",
+    "QuestToStartId": "All_Test",
+    "ConditionIds": [
+      "AlwaysTrue_Test"
+    ]
+  },
+  {
+    "$type": "QuestStarterEntity, Assembly-CSharp",
     "Id": "2",
     "QuestToStartId": "ClearFog_Test",
     "ConditionIds": [
