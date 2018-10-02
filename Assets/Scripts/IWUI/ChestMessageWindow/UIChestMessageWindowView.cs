@@ -9,6 +9,8 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
     
     [SerializeField] private Image chest;
     [SerializeField] private Image item;
+    
+    [SerializeField] private ScrollRect scroll;
 
     private List<Image> icons = new List<Image>();
 
@@ -38,6 +40,8 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         {
             CreateIcon(sprites[i]);
         }
+
+        scroll.horizontalNormalizedPosition = 0;
     }
 
     public override void OnViewClose()
