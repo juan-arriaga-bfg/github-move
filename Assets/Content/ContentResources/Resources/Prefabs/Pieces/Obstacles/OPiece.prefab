@@ -709,19 +709,19 @@ MonoBehaviour:
   image: {fileID: 212749282012894596}
   skins:
   - Weight: 10
-    Name: tree_1
+    Name: O1
     Offset: {x: 0, y: 0.28}
     Scale: 0.8
   - Weight: 10
-    Name: tree_2
+    Name: O2
     Offset: {x: 0, y: 0.28}
     Scale: 0.8
   - Weight: 10
-    Name: tree_3
+    Name: O3
     Offset: {x: 0, y: 0.28}
     Scale: 0.8
   - Weight: 10
-    Name: tree_4
+    Name: O4
     Offset: {x: 0, y: 0.28}
     Scale: 0.8
 --- !u!114 &114607854138475680
@@ -5999,7 +5999,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300056, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  m_Sprite: {fileID: 21300018, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -1,15 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class RandomCompositeSkin : IWBaseMonoBehaviour
+[Serializable]
+public class Skin
+{
+    public int Weight;
+    public string Name;
+    public Vector2 Offset;
+    public float Scale = 1;
+}
+
+public class RandomPieceSkin : IWBaseMonoBehaviour
 {
     [SerializeField] private SpriteRenderer image;
-
     [SerializeField] private List<Skin> skins;
 
     private int totalWeight;
 	
-    protected void OnEnable()
+    private void OnEnable()
     {
         if (totalWeight == 0) CalculationTotalWeight();
         if (totalWeight == 0) return;
@@ -19,6 +29,11 @@ public class RandomCompositeSkin : IWBaseMonoBehaviour
         image.sprite = IconService.Current.GetSpriteById(skin.Name);
         image.transform.localPosition = skin.Offset;
         image.transform.localScale = Vector3.one * skin.Scale;
+    }
+
+    private void OnDisable()
+    {
+        totalWeight = 0;
     }
 
     private Skin GetSkin()
