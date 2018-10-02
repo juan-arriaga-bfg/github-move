@@ -23,7 +23,7 @@ public class UICastleWindowModel : IWWindowModel
                 var chest = PieceType.Parse(def.Uid);
                 var next = definition.GetNext(chest);
                 
-                return next == PieceType.None.Id && chest != ignore && chest != PieceType.Basket3.Id;
+                return next == PieceType.None.Id && chest != ignore;
             });
             
             last.Add(GameDataService.Current.ChestsManager.Chests.Find(def => PieceType.Parse(def.Uid) == current));

@@ -308,7 +308,7 @@ public class BoardLogicComponent : ECSEntity,
         Context.BoardEvents.RaiseEvent(GameEventsCodes.AddPieceToBoard, piece.PieceType);
         
         PieceFlyer.FlyToQuest(piece);
-        PieceFlyer.FlyTo(piece, x, y, Currency.Piece.Name);
+        PieceFlyer.FlyTo(piece, x, y, Currency.Codex.Name);
         
         return true;
     }

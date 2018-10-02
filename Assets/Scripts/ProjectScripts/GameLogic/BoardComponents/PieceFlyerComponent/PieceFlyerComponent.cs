@@ -46,16 +46,29 @@ public class PieceFlyerComponent : ECSEntity, ILockerComponent
         // var flay = ResourcesViewManager.Instance.GetFirstViewById(PieceType.Parse(piece.PieceType));
         // flay?.UpdateResource(1);
     }
+
     
     public void FlyTo(Piece piece, int x, int y, string target)
     {
         if (Locker.IsLocked || GameDataService.Current.CodexManager.OnPieceBuilded(piece.PieceType) == false) return;
+
+        FlyToTarget(piece, x, y, target);
+    }
+
+    public void FlyToTarget(Piece piece, BoardPosition position, string target)
+    {
+        FlyToTarget(piece, position.X, position.Y, target);
+    }
+    
+    public void FlyToTarget(Piece piece, int x, int y, string target)
+    {
+        if (Locker.IsLocked) return;
         
         var currency = PieceType.Parse(piece.PieceType);
         var flay = ResourcesViewManager.Instance.GetFirstViewById(target);
         
         if (flay == null) return;
-        
+
         var from = context.Context.BoardDef.GetPiecePosition(x, y);
         
         var carriers = ResourcesViewManager.DeliverResource<ResourceCarrier>
@@ -69,4 +82,5 @@ public class PieceFlyerComponent : ECSEntity, ILockerComponent
         
         if (carriers.Count != 0) carriers[0].RefreshIcon(currency);
     }
+
 }

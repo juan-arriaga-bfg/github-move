@@ -94,12 +94,17 @@ public class UIMainWindowView : IWUIWindowView
         
         UIService.Get.ShowWindow(UIWindowType.CodexWindow);
     }
-
+    
     public void OnClickShop()
     {
         UIService.Get.ShowWindow(UIWindowType.CastleWindow);
     }
-
+    
+    public void OnClickOrders()
+    {
+        UIMessageWindowController.CreateNotImplementedMessage();
+    }
+    
     private void OnNewPieceBuilded()
     {
         codexButton.UpdateState();

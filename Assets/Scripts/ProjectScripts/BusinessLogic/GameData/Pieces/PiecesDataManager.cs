@@ -54,12 +54,12 @@ public class PiecesDataManager : ECSEntity, IDataManager, IDataLoader<List<Piece
 
     private void AssignFilters(PieceDef pieceDef)
     {
-        PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceDef.Id);
+        /*PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceDef.Id);
 
         if (pieceDef.SpawnResources != null && pieceDef.SpawnResources.Currency == Currency.Energy.Name)
         {
             pieceTypeDef.Filter = pieceTypeDef.Filter.Add(PieceTypeFilter.Energy);
-        }
+        }*/
     }
 
     public PieceDef GetPieceDef(int id)

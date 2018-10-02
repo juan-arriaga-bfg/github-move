@@ -36,12 +36,10 @@ public class R
      public const string D2Piece = "D2Piece";
      public const string D3Piece = "D3Piece";
      public const string D4Piece = "D4Piece";
-     public const string D5Piece = "D5Piece";
      public const string E1Piece = "E1Piece";
      public const string E2Piece = "E2Piece";
      public const string E3Piece = "E3Piece";
      public const string E4Piece = "E4Piece";
-     public const string E5Piece = "E5Piece";
      public const string ChangeFogStateView = "ChangeFogStateView";
      public const string Chest1Piece = "Chest1Piece";
      public const string Chest2Piece = "Chest2Piece";
@@ -75,13 +73,10 @@ public class R
      public const string I2Piece = "I2Piece";
      public const string I3Piece = "I3Piece";
      public const string I4Piece = "I4Piece";
-     public const string I5Piece = "I5Piece";
-     public const string F5Piece = "F5Piece";
      public const string J1Piece = "J1Piece";
      public const string J2Piece = "J2Piece";
      public const string J3Piece = "J3Piece";
      public const string J4Piece = "J4Piece";
-     public const string J5Piece = "J5Piece";
      public const string ChangeObstacleStateView = "ChangeObstacleStateView";
      public const string BorderDark = "BorderDark";
      public const string BorderDarkLeft = "BorderDarkLeft";
@@ -100,8 +95,6 @@ public class R
      public const string OutMergeParticleSystem = "OutMergeParticleSystem";
      public const string ExplosionParticleSystem = "ExplosionParticleSystem";
      public const string BoardProgressView = "BoardProgressView";
-     public const string G5Piece = "G5Piece";
-     public const string H5Piece = "H5Piece";
      public const string Warning = "Warning";
      public const string Char1Piece = "Char1Piece";
      public const string Char2Piece = "Char2Piece";
@@ -126,9 +119,6 @@ public class R
      public const string MagicPiece = "MagicPiece";
      public const string Magic1Piece = "Magic1Piece";
      public const string Magic2Piece = "Magic2Piece";
-     public const string Basket1Piece = "Basket1Piece";
-     public const string Basket2Piece = "Basket2Piece";
-     public const string Basket3Piece = "Basket3Piece";
      public const string ChestA1Piece = "ChestA1Piece";
      public const string ChestA2Piece = "ChestA2Piece";
      public const string ChestA3Piece = "ChestA3Piece";

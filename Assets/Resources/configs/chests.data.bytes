@@ -212,11 +212,6 @@
         "Override": true
       },
       {
-        "Uid": "F5",
-        "Weight": 10,
-        "Override": true
-      },
-      {
         "Uid": "I2",
         "Weight": 10,
         "Override": true
@@ -245,11 +240,6 @@
         "Uid": "F2",
         "Weight": 10,
         "Override": true
-      },
-      {
-        "Uid": "J5",
-        "Weight": 10,
-        "Override": true
       }
     ]
   },
@@ -262,7 +252,7 @@
     "PieceAmount": 7,
     "PieceWeights": [
       {
-        "Uid": "J5",
+        "Uid": "J4",
         "Weight": 15,
         "Override": true
       },
@@ -271,7 +261,7 @@
         "Weight": 30
       },
       {
-        "Uid": "F5",
+        "Uid": "F4",
         "Weight": 15,
         "Override": true
       }
@@ -735,8 +725,7 @@
       "E1",
       "Coin1",
       "F1",
-      "F2",
-      "J5"
+      "F2"
     ]
   },
   {
@@ -766,8 +755,7 @@
       "E1",
       "Coin1",
       "F1",
-      "F2",
-      "J5"
+      "F2"
     ]
   },
   {
@@ -839,8 +827,7 @@
       "E1",
       "Coin1",
       "F1",
-      "F2",
-      "J5"
+      "F2"
     ]
   },
   {
@@ -878,8 +865,7 @@
       "E1",
       "Coin1",
       "F1",
-      "F2",
-      "J5"
+      "F2"
     ]
   },
   {
@@ -951,8 +937,7 @@
       "E1",
       "Coin1",
       "F1",
-      "F2",
-      "J5"
+      "F2"
     ]
   },
   {
@@ -990,59 +975,7 @@
       "E1",
       "Coin1",
       "F1",
-      "F2",
-      "J5"
-    ]
-  },
-  {
-    "Uid": "Basket1",
-    "Price": {
-      "Currency": "Coins",
-      "Amount": 200
-    },
-    "HardPieces": [
-      {
-        "Currency": "F5",
-        "Amount": 1
-      },
-      {
-        "Currency": "J5",
-        "Amount": 2
-      }
-    ]
-  },
-  {
-    "Uid": "Basket2",
-    "Price": {
-      "Currency": "Coins",
-      "Amount": 350
-    },
-    "HardPieces": [
-      {
-        "Currency": "D5",
-        "Amount": 2
-      },
-      {
-        "Currency": "J5",
-        "Amount": 1
-      }
-    ]
-  },
-  {
-    "Uid": "Basket3",
-    "Price": {
-      "Currency": "Coins",
-      "Amount": 500
-    },
-    "HardPieces": [
-      {
-        "Currency": "D5",
-        "Amount": 3
-      },
-      {
-        "Currency": "J5",
-        "Amount": 2
-      }
+      "F2"
     ]
   }
 ]
