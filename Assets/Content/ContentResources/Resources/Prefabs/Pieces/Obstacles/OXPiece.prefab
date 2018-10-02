@@ -690,7 +690,7 @@ MonoBehaviour:
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 0}
-  sprite: {fileID: 0}
+  bodySprite: {fileID: 0}
   errorSelectionMaterial: {fileID: 0}
   defaultSelectionMaterial: {fileID: 0}
   highlightPieceMaterial: {fileID: 0}
@@ -716,7 +716,6 @@ MonoBehaviour:
     Name: OX2
     Offset: {x: 0, y: 0.08}
     Scale: 1.2
-  isRandom: 1
 --- !u!114 &114607854138475680
 MonoBehaviour:
   m_ObjectHideFlags: 1
