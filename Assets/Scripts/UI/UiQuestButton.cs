@@ -18,7 +18,12 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     public void Init(QuestEntity quest)
     {
-        if(this.quest != null) ResourcesViewManager.Instance.UnRegisterView(this);
+        if (this.quest != null)
+        {
+            ResourcesViewManager.Instance.UnRegisterView(this);
+            this.quest.OnChanged -= OnQuestChanged;
+            // Debug.Log($"AAAAA FIX UNSUBSCRIBE: {quest.Id}");
+        }
         
         this.quest = quest;
 
@@ -30,6 +35,9 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceId);
             itemUid = pieceTypeDef.Id.ToString();
         }
+        
+        // Debug.Log($"AAAAA SUBSCRIBE: {quest.Id}");
+        
         quest.OnChanged += OnQuestChanged;
         
         ResourcesViewManager.Instance.RegisterView(this);
@@ -49,6 +57,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     {
         if (quest != null)
         {
+            // Debug.Log($"AAAAA UNSUBSCRIBE: {quest.Id}");
             quest.OnChanged -= OnQuestChanged;
         }
         ResourcesViewManager.Instance.UnRegisterView(this);
@@ -88,6 +97,8 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     {
         if(quest == null) return;
 
+        // Debug.Log($"AAAAA UPDATE: {quest.Id}");
+        
         icon.sprite = GetIcon(quest);
 
         var isComplete = quest.IsCompleted();
