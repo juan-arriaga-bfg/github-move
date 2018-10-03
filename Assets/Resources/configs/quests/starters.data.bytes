@@ -1,10 +1,32 @@
 [
-  {
-    "$type": "QuestStarterEntity, Assembly-CSharp",
-    "Id": "1",
-    "QuestToStartId": "SuperMatch_Test",
-    "ConditionIds": [
-      "AlwaysTrue_Test"
-    ]
-  }
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "1",  "QuestToStartId": "1",  "ConditionIds": ["AlwaysTrue"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "2",  "QuestToStartId": "2",  "ConditionIds": ["QuestCompleted_1"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "3",  "QuestToStartId": "3",  "ConditionIds": ["QuestCompleted_2"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "4",  "QuestToStartId": "4",  "ConditionIds": ["QuestCompleted_2"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "5",  "QuestToStartId": "5",  "ConditionIds": ["QuestCompleted_3"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "6",  "QuestToStartId": "6",  "ConditionIds": ["QuestCompleted_3"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "7",  "QuestToStartId": "7",  "ConditionIds": ["QuestCompleted_4"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "8",  "QuestToStartId": "8",  "ConditionIds": ["QuestCompleted_5"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "9",  "QuestToStartId": "9",  "ConditionIds": ["QuestCompleted_4"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "10", "QuestToStartId": "10", "ConditionIds": ["QuestCompleted_6"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "11", "QuestToStartId": "11", "ConditionIds": ["QuestCompleted_8"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "12", "QuestToStartId": "12", "ConditionIds": ["QuestCompleted_9"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "13", "QuestToStartId": "13", "ConditionIds": ["QuestCompleted_8"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "14", "QuestToStartId": "14", "ConditionIds": ["QuestCompleted_7"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "15", "QuestToStartId": "15", "ConditionIds": ["QuestCompleted_10"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "16", "QuestToStartId": "16", "ConditionIds": ["QuestCompleted_12"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "17", "QuestToStartId": "17", "ConditionIds": ["PlayerLevel_4"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "18", "QuestToStartId": "18", "ConditionIds": ["QuestCompleted_17"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "19", "QuestToStartId": "19", "ConditionIds": ["QuestCompleted_18"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "20", "QuestToStartId": "20", "ConditionIds": ["QuestCompleted_16"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "21", "QuestToStartId": "21", "ConditionIds": ["QuestCompleted_14"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "22", "QuestToStartId": "22", "ConditionIds": ["QuestCompleted_19"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "23", "QuestToStartId": "23", "ConditionIds": ["QuestCompleted_22"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "24", "QuestToStartId": "24", "ConditionIds": ["QuestCompleted_2",  "MaxActiveQuestsCount_3"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "25", "QuestToStartId": "25", "ConditionIds": ["PlayerLevel_2",     "MaxActiveQuestsCount_4"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "26", "QuestToStartId": "26", "ConditionIds": ["QuestCompleted_4",  "MaxActiveQuestsCount_4"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "27", "QuestToStartId": "27", "ConditionIds": ["QuestCompleted_1"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "28", "QuestToStartId": "28", "ConditionIds": ["QuestCompleted_3",  "MaxActiveQuestsCount_3"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "29", "QuestToStartId": "29", "ConditionIds": ["QuestCompleted_28", "MaxActiveQuestsCount_3"] },
+  {"$type": "QuestStarterEntity, Assembly-CSharp", "Id": "30", "QuestToStartId": "30", "ConditionIds": ["QuestCompleted_29", "MaxActiveQuestsCount_4"] }
 ]
