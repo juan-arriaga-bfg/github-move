@@ -17,15 +17,16 @@ public class AddResourceView : BoardElementView
 		
 		amountLabel.Text = $"<color=#{color}>{value}</color>";
 		
-		DOTween.Kill(animationUid);
+		DOTween.Kill(amountLabel);
 
 		var position = CachedTransform.position.y;
-		var sequence = DOTween.Sequence().SetId(animationUid);
+		var sequence = DOTween.Sequence().SetId(amountLabel);
 		
 		sequence.Insert(duration * 0f, amountLabel.TextLabel.DOFade(1f, duration * 0.1f));
 		sequence.Insert(duration * 0.9f, amountLabel.TextLabel.DOFade(0f, duration * 0.1f));
 		
 		sequence.Insert(duration * 0f, CachedTransform.DOMoveY(position + 0.5f, duration * 0.5f).SetEase(Ease.OutQuart));
+		sequence.Insert(duration * 0.5f, CachedTransform.DOMoveY(position + 0.7f, duration * 0.3f).SetEase(Ease.Linear));
 		sequence.Insert(duration * 0.8f, CachedTransform.DOMoveY(position + 1, duration * 0.2f).SetEase(Ease.InQuart));
 		
 		if(isPurchase) sequence.InsertCallback(duration * 0.5f, () => { CurrencyHellper.Purchase(resource); });
@@ -37,7 +38,7 @@ public class AddResourceView : BoardElementView
 	{
 		base.ResetViewOnDestroy();
 		
-		DOTween.Kill(animationUid);
+		DOTween.Kill(amountLabel);
 		
 		var tColor = amountLabel.TextLabel.color;
 		amountLabel.TextLabel.color = new Color(tColor.r, tColor.g, tColor.b, 0);
@@ -58,7 +59,7 @@ public class AddResourceView : BoardElementView
 		for (var i = 0; i < resource.Count; i++)
 		{
 			var reward = resource[i];
-			sequence.InsertCallback(0.5f * i, () => Show(position, reward));
+			sequence.InsertCallback(duration * 0.5f * i, () => Show(position, reward));
 		}
 	}
 
@@ -79,8 +80,10 @@ public class AddResourceView : BoardElementView
 
 			CurrencyHellper.Purchase(
 				resource,
-				success => { ShowCounter(board, position, resource); },
+				null,
 				board.BoardDef.ViewCamera.WorldToScreenPoint(from));
+			
+			DOTween.Sequence().InsertCallback(0.5f, () => ShowCounter(board, position, resource));
 			
 			return;
 		}
