@@ -28,6 +28,7 @@
         }
         
         var pathfindLockObserver = new PathfindLockObserver() {AutoLock = false}; 
+        
         AddObserver(piece, pathfindLockObserver);
         piece.RegisterComponent(pathfindLockObserver);
         

@@ -255,13 +255,11 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.LevelLabel, R.PieceLevelView);
         dict.Add((int)ViewType.Menu, R.MenuView);
         dict.Add((int)ViewType.ObstacleState, R.ChangeObstacleStateView);
-        dict.Add((int)ViewType.FogState, R.ChangeFogStateView);
         dict.Add((int)ViewType.Bubble, R.BubbleView);
         dict.Add((int)ViewType.MergeParticle, R.MergeParticleSystem);
         dict.Add((int)ViewType.Progress, R.BoardProgressView);
         dict.Add((int)ViewType.Warning, R.Warning);
         dict.Add((int)ViewType.Lock, R.LockView);
-        dict.Add((int)ViewType.EnemyBubble, R.EnemyBubbleView);
         dict.Add((int)ViewType.Cell, R.Cell);
         
         return dict;

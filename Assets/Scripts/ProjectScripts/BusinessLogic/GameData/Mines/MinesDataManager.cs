@@ -81,7 +81,7 @@ public class MinesDataManager : IECSComponent, IDataManager, IDataLoader<List<Mi
 		return All.TryGetValue(key, out def) == false ? null : def;
 	}
 
-	public void Chenge(int id, BoardPosition position)
+	public void Change(int id, BoardPosition position)
 	{
 		position.Z = id;
 		

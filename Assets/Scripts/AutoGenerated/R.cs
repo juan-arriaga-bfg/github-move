@@ -40,7 +40,6 @@ public class R
      public const string E2Piece = "E2Piece";
      public const string E3Piece = "E3Piece";
      public const string E4Piece = "E4Piece";
-     public const string ChangeFogStateView = "ChangeFogStateView";
      public const string Chest1Piece = "Chest1Piece";
      public const string Chest2Piece = "Chest2Piece";
      public const string Chest3Piece = "Chest3Piece";
@@ -110,7 +109,6 @@ public class R
      public const string C11Piece = "C11Piece";
      public const string C12Piece = "C12Piece";
      public const string Enemy1Piece = "Enemy1Piece";
-     public const string EnemyBubbleView = "EnemyBubbleView";
      public const string Crystal1Piece = "Crystal1Piece";
      public const string Crystal2Piece = "Crystal2Piece";
      public const string Crystal3Piece = "Crystal3Piece";
