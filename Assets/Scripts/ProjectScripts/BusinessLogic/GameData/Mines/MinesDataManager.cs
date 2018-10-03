@@ -74,14 +74,18 @@ public class MinesDataManager : IECSComponent, IDataManager, IDataLoader<List<Mi
 		});
 	}
 	
-	public MineDef GetDef(BoardPosition key)
+    
+    /// <summary>
+    /// WARNING! Will not handle Move or Remove
+    /// </summary>
+	public MineDef GetInitialDef(BoardPosition key)
 	{
 		key.Z = 0;
 		MineDef def;
 		return All.TryGetValue(key, out def) == false ? null : def;
 	}
 
-	public void Change(int id, BoardPosition position)
+	public void Move(int id, BoardPosition position)
 	{
 		position.Z = id;
 		
@@ -111,7 +115,7 @@ public class MinesDataManager : IECSComponent, IDataManager, IDataLoader<List<Mi
 		}
 	}
 
-	public int GetMineById(string id)
+	public int GetMineTypeById(string id)
 	{
 		foreach (var def in All.Values)
 		{
@@ -122,4 +126,42 @@ public class MinesDataManager : IECSComponent, IDataManager, IDataLoader<List<Mi
 
 		return PieceType.None.Id;
 	}
+
+    public bool GetMinePositionByUid(string uid, out BoardPosition position)
+    {
+        position = BoardPosition.Default();
+        
+        MineDef mineDef = null;
+        
+        foreach (var def in All.Values)
+        {
+            if (def.Uid != uid) continue;
+
+            mineDef = def;
+            break;
+        }
+
+        if (mineDef == null)
+        {
+            return false;
+        }
+
+        int id = mineDef.Id;
+        foreach (var pos in Moved)
+        {
+            if (pos.Z == id)
+            {
+                position = pos;
+                return true;
+            }
+        }
+
+        if (Removed.Contains(id))
+        {
+            return false;
+        }
+
+        position = mineDef.Position;
+        return true;
+    }
 }

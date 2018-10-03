@@ -85,7 +85,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             {
                 foreach (var pos in piece.Value)
                 {
-                    var pieceId = GameDataService.Current.MinesManager.GetMineById(piece.Key);
+                    var pieceId = GameDataService.Current.MinesManager.GetMineTypeById(piece.Key);
 
                     if (pieceId == PieceType.None.Id)
                     {

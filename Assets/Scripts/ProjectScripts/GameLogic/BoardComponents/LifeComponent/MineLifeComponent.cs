@@ -14,8 +14,8 @@ public class MineLifeComponent : StorageLifeComponent
         
         var key = new BoardPosition(position.X, position.Y);
 
-        if (def == null) def = GameDataService.Current.MinesManager.GetDef(key);
-        else GameDataService.Current.MinesManager.Change(def.Id, key);
+        if (def == null) def = GameDataService.Current.MinesManager.GetInitialDef(key);
+        else GameDataService.Current.MinesManager.Move(def.Id, key);
         
         var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
         
@@ -33,7 +33,7 @@ public class MineLifeComponent : StorageLifeComponent
         base.OnMovedFromToFinish(@from, to, context);
         
         var key = new BoardPosition(to.X, to.Y);
-        GameDataService.Current.MinesManager.Change(def.Id, key);
+        GameDataService.Current.MinesManager.Move(def.Id, key);
     }
 
     protected override void OnStep()
@@ -93,6 +93,8 @@ public class MineLifeComponent : StorageLifeComponent
     protected override void OnTimerComplete()
     {
         base.OnTimerComplete();
+        
+        QuestService.Current.CheckConditions(); // To ensure that QuestStartConditionMineUsedComponent triggered
         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.MineUsed, this);
     }
 }

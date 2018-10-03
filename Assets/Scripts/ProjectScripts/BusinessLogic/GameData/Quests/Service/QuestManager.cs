@@ -49,6 +49,10 @@ public class QuestManager : ECSEntity
 
     public void CheckConditions()
     {
+#if DEBUG
+        var sw = new System.Diagnostics.Stopwatch();
+        sw.Start();
+#endif        
         var dataManager = GameDataService.Current.QuestsManager;
         
         for (var i = 0; i < questStarters.Count; i++)
@@ -56,13 +60,23 @@ public class QuestManager : ECSEntity
             var starter = questStarters[i];
             if (starter.Check())
             {
+#if DEBUG
+                sw.Stop();
+#endif
                 var quest = dataManager.StartQuestById(starter.QuestToStartId, null);
                 if (ConnectedToBoard)
                 {
                     quest.ConnectToBoard();
                 }
+#if DEBUG
+                sw.Start();
+#endif
             }
         }
+#if DEBUG
+      sw.Stop();
+      Debug.Log($"[QuestManager] => CheckConditions() done in {sw.ElapsedMilliseconds}ms");
+#endif
     }
    
     public void DisconnectFromBoard()
