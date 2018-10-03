@@ -15,7 +15,7 @@ public abstract class TaskEventCounterEntity : TaskCounterEntity, IBoardEventLis
         BoardService.Current.FirstBoard.BoardEvents.RemoveListener(this, EventCode); 
     }
 
-    public void OnBoardEvent(int code, object context)
+    public virtual void OnBoardEvent(int code, object context)
     {
         if (!IsInProgress())
         {
