@@ -14,6 +14,10 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         IWUISettings.Instance.SetResourceManager(new DefaultUIResourceManager());
         
         InitGameField();
+
+        // Should be called after BoardService initialization
+        // Can't be created at DefaultApplicationinitializer because should be recreated after Reset Progress
+        ConnectQuestManager();
         
         // cache windows
         IWUIManager.Instance.Init(new[]
@@ -42,6 +46,18 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
 
             onComplete?.Invoke();
         };
+    }
+
+    // Events subscribtion
+    private void ConnectQuestManager()
+    {
+        // Quests and tasks
+        QuestManager questManager = new QuestManager();
+        QuestService.Instance.SetManager(questManager);
+        
+        questManager.Init();
+        
+        QuestService.Current.ConnectToBoard();
     }
 
     private void InitGameField()

@@ -48,10 +48,16 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
     {
         base.OnViewClose();
         
-        var windowModel = Model as UIChestMessageWindowModel;
-        windowModel.Chest = null;
+        var model = Model as UIChestMessageWindowModel;
+
+        if (isOpen)
+        {
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.OpenChest, model.Chest);
+            
+            model.OnOpen?.Invoke();
+        }  
         
-        if (isOpen) windowModel.OnOpen?.Invoke();
+        model.Chest = null;
     }
 
     public override void OnViewCloseCompleted()

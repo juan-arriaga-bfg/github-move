@@ -107,6 +107,8 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         ClearCodexContentCache();
 
         OnNewItemUnlocked?.Invoke();
+        
+        QuestService.Current.CheckConditions();
 
         return true;
     }
@@ -204,8 +206,15 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
 
         var chain = matchDef.GetChain(targetId);
-        var list = GetCodexItemsForChain(chain);
 
+        // Current piece is not a part of any chain
+        if (chain.Count == 0)
+        {
+            return null;
+        }
+        
+        var list = GetCodexItemsForChain(chain);
+        
         int highlightedIndex = -1;
 
         for (var i = 0; i < list.Count; i++)
@@ -291,6 +300,12 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             
             PieceDef pieceDef = pieceManager.GetPieceDef(pieceId);
             PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceId);
+
+            // Skip fake
+            if (pieceTypeDef.Filter.Has(PieceTypeFilter.Fake))
+            {
+                continue;
+            }
             
             // pieceDef.Reproduction // Create by timer
             // pieceDef.SpawnResources // Create on consume 
