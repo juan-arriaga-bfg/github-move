@@ -362,14 +362,13 @@ MonoBehaviour:
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 4652346514204232}
-  sprite: {fileID: 212755057029318060}
+  bodySprite: {fileID: 0}
   errorSelectionMaterial: {fileID: 2100000, guid: 1faf170e9acf1d64f86eefcd318ff557,
     type: 2}
   defaultSelectionMaterial: {fileID: 2100000, guid: cbc475da5f4748047a7b2d276ac8a4ff,
     type: 2}
   highlightPieceMaterial: {fileID: 2100000, guid: 8df69b780d2d9354c8ffb9b8293c73ad,
     type: 2}
-  sprite: {fileID: 212755057029318060}
   backlightMaterial: {fileID: 2100000, guid: 6e23cb2ec086c463dacfc8e46de765b2, type: 2}
   backlightScale: 1.1
   hightlightMaterial: {fileID: 2100000, guid: d55a16b9364b048ba884d5ede8dae221, type: 2}

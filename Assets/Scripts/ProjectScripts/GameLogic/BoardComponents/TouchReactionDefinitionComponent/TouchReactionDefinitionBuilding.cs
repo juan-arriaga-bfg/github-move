@@ -9,7 +9,6 @@
 			UIMessageWindowController.CreateTimerCompleteMessage(
 				"Complete now!",
 				"Would you like to build the item right now for crystals?",
-				"Complete now ",
 				piece.PieceState.Timer);
 			
 			return false;

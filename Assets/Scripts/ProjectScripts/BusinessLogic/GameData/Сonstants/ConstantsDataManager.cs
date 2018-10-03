@@ -13,6 +13,12 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     public int ReproductionChance;
     public int FreeChestDelay;
     
+    public int MinDelayHintArrow;
+    public int MaxDelayHintArrow;
+    
+    public int MinDelayBounceBubble;
+    public int MaxDelayBounceBubble;
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
         Reload();

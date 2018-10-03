@@ -14,7 +14,7 @@
     
     public const string ErrorWindow = "ErrorWindow";
     
-    public const string CastleWindow = "CastleWindow";
+    public const string ChestsShopWindow = "ChestsShopWindow";
     
     public const string EnergyShopWindow = "EnergyShopWindow";
     

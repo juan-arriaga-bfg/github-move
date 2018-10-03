@@ -3,14 +3,14 @@ using DG.Tweening;
 
 public class PieceBoardElementView : BoardElementView
 {
-    public Piece Piece { get; set; }
-
     [SerializeField] private Transform selectionView;
-    [SerializeField] protected SpriteRenderer sprite;
+    [SerializeField] protected SpriteRenderer bodySprite;
     [SerializeField] private Material errorSelectionMaterial;
     [SerializeField] private Material defaultSelectionMaterial;
     [SerializeField] private Material highlightPieceMaterial;
-
+    
+    public Piece Piece { get; set; }
+    
     private Animation cachedSelectionAnimation;
 
     private readonly ViewAnimationUid selectedAnimationId = new ViewAnimationUid();
@@ -27,10 +27,10 @@ public class PieceBoardElementView : BoardElementView
     {
         base.Init(context);
 
-        if (sprite == null)
+        if (bodySprite == null)
         {
             var view = transform.Find("View");
-            sprite = view.GetComponentInChildren<SpriteRenderer>();
+            bodySprite = view.GetComponentInChildren<SpriteRenderer>();
         }
         
         Piece = piece;
@@ -42,8 +42,6 @@ public class PieceBoardElementView : BoardElementView
         }
 
         lastBoardPosition = piece.CachedPosition;
-        
-        
     }
 
     protected virtual void OnEnable()
@@ -156,14 +154,14 @@ public class PieceBoardElementView : BoardElementView
 
             if (Piece.Draggable != null && isValid)
             {
-                if (sprite != null) sequence.Insert(0f, sprite.DOColor(Color.white, duration));
+                if (bodySprite != null) sequence.Insert(0f, bodySprite.DOColor(Color.white, duration));
 
                 sequence.Insert(0f, selectionSprite.DOColor(baseColor, duration));
                 selectionSprite.material = defaultSelectionMaterial;
             }
             else
             {
-                if (sprite != null) sequence.Insert(0f, sprite.DOColor(dragSpriteErrorColor, duration));
+                if (bodySprite != null) sequence.Insert(0f, bodySprite.DOColor(dragSpriteErrorColor, duration));
 
                 sequence.Insert(0f, selectionSprite.DOColor(dragErrorColor, duration));
                 selectionSprite.material = errorSelectionMaterial;
@@ -174,7 +172,7 @@ public class PieceBoardElementView : BoardElementView
         else
         {
             DOTween.Kill(animationUid);
-            sprite.color = Color.white;
+            bodySprite.color = Color.white;
             selectionSprite.color = baseColor;
             selectionView.gameObject.SetActive(false);
         }

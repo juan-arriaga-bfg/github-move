@@ -32,7 +32,7 @@ public class CharacterPieceBuilder : GenericPieceBuilder
 		
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}
-				.RegisterDefinition(new TouchReactionDefinitionOpenWindow{WindowType = UIWindowType.CastleWindow})
+				.RegisterDefinition(new TouchReactionDefinitionOpenWindow{WindowType = UIWindowType.ChestsShopWindow})
 				.RegisterDefinition(new TouchReactionDefinitionSpawnInStorage {IsAutoStart = false})
 				.RegisterDefinition(new TouchReactionDefinitionSpawnShop()))
 			.RegisterComponent(new TouchReactionConditionComponent()))
