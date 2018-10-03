@@ -15,7 +15,7 @@ public class MineLifeComponent : StorageLifeComponent
         var key = new BoardPosition(position.X, position.Y);
 
         if (def == null) def = GameDataService.Current.MinesManager.GetDef(key);
-        else GameDataService.Current.MinesManager.Chenge(def.Id, key);
+        else GameDataService.Current.MinesManager.Change(def.Id, key);
         
         var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
         
@@ -33,7 +33,7 @@ public class MineLifeComponent : StorageLifeComponent
         base.OnMovedFromToFinish(@from, to, context);
         
         var key = new BoardPosition(to.X, to.Y);
-        GameDataService.Current.MinesManager.Chenge(def.Id, key);
+        GameDataService.Current.MinesManager.Change(def.Id, key);
     }
 
     protected override void OnStep()
