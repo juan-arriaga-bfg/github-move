@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 
 [JsonObject(MemberSerialization.OptIn)]
-public sealed class QuestStartConditionMineAccessibleComponent : QuestStartConditionComponent
+public sealed class QuestStartConditionMineUsedComponent : QuestStartConditionComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;

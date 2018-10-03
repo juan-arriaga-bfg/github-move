@@ -59,7 +59,7 @@ public class TaskSuperMatchEntity : TaskCounterEntity, IBoardEventListener, IHav
         
         if (matchDescr.MatchedPiecesCount >= CountToMatch)
         {
-            CurrentValue += 1;
+            CurrentValue += (int)(matchDescr.MatchedPiecesCount / CountToMatch);
         }
     }
 }
