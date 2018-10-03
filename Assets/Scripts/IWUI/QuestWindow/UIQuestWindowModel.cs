@@ -155,18 +155,5 @@ public class UIQuestWindowModel : IWWindowModel
         }
     }
 
-    public Sprite Icon
-    {
-        get
-        {
-            QuestDescriptionComponent cmp = FirstTask.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid);
-
-            if (cmp?.Ico == null)
-            {
-                return null;
-            }
-            
-            return IconService.Current.GetSpriteById(cmp.Ico);
-        }
-    }
+    public Sprite Icon => UiQuestButton.GetIcon(quest);
 }

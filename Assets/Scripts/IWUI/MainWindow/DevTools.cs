@@ -105,14 +105,32 @@ public class DevTools : MonoBehaviour
         }
     }
 
+    public void OnCompleteFirstQuestClick()
+    {
+        var manager = GameDataService.Current.QuestsManager;
+        if (manager.ActiveQuests.Count == 0)
+        {
+            return;
+        }
+
+        var quest = manager.ActiveQuests[0];
+        quest.ForceComplete();
+    }
+
     public void OnDebug1Click()
     {
         Debug.Log("OnDebug1Click");
-        
-        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, null);
+
+        var a1 = GameDataService.Current.MinesManager.All;
+        var a2 = GameDataService.Current.MinesManager.Moved;
+        var a3 = GameDataService.Current.MinesManager.Removed;
+
+        int i = 0;
+
+        // BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, null);
         // BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
         // BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
-        
+
         // QuestService.Current.Serialize();
     }
 
@@ -131,9 +149,9 @@ public class DevTools : MonoBehaviour
         // QuestService.Current.Load();
         // BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, null);
 
-        string text = File.ReadAllText(@"D:/save.json");
-        QuestSaveComponent q = JsonConvert.DeserializeObject<QuestSaveComponent>(text);
-
-        string i = "";
+        // string text = File.ReadAllText(@"D:/save.json");
+        // QuestSaveComponent q = JsonConvert.DeserializeObject<QuestSaveComponent>(text);
+        //
+        // string i = "";
     }
 }

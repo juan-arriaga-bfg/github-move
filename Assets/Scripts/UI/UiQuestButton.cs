@@ -66,23 +66,29 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         SetLabelValue(currentValue);
     }
 
-    private Sprite GetIcon()
+    public static Sprite GetIcon(QuestEntity quest)
     {
         QuestDescriptionComponent cmp = quest.ActiveTasks[0].GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid);
 
-        if (cmp?.Ico == null)
+        if (cmp?.Ico != null)
         {
-            return null;
+            return IconService.Current.GetSpriteById(cmp.Ico);
         }
-            
-        return IconService.Current.GetSpriteById(cmp.Ico);
+        
+        IHavePieceId taskAboutPiece = quest.ActiveTasks[0] as IHavePieceId;
+        if (taskAboutPiece != null && taskAboutPiece.PieceId != PieceType.None.Id)
+        {
+            return IconService.Current.GetSpriteById(PieceType.GetDefById(taskAboutPiece.PieceId).Abbreviations[0]); 
+        }
+
+        return IconService.Current.GetSpriteById("codexQuestion");
     }
     
     private void SetLabelValue(int value)
     {
         if(quest == null) return;
 
-        icon.sprite = GetIcon();
+        icon.sprite = GetIcon(quest);
 
         var isComplete = quest.IsCompleted();
 
@@ -104,7 +110,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     {
         var model = UIService.Get.GetCachedModel<UIQuestWindowModel>(UIWindowType.QuestWindow);
         
-        model.Quest = GameDataService.Current.QuestsManager.ActiveQuests[0];
+        model.Quest = quest;
         
         UIService.Get.ShowWindow(UIWindowType.QuestWindow);
         

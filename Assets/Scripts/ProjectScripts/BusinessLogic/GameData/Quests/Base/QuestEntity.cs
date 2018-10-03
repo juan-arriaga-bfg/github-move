@@ -263,4 +263,13 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         
         OnChanged?.Invoke(this, null);
     }
+
+    /// <summary>
+    /// Used for debug purposes
+    /// </summary>
+    public void ForceComplete()
+    {
+        State = TaskState.Completed;
+        OnChanged?.Invoke(this, null);
+    }
 }
