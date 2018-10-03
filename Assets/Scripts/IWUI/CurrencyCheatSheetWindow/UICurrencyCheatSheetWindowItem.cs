@@ -23,7 +23,7 @@ public class UICurrencyCheatSheetWindowItem : MonoBehaviour
         this.def = def;
         
         lblName.text = def.Name;
-        lblId.text = $"id: {def.Id}";
+        lblId.text = $"id {def.Id}";
         
         var spr = GetPieecSprite();
         if (spr != null)
