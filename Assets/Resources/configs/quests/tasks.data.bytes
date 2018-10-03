@@ -14,7 +14,7 @@
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "2",
     "PieceId": 103,
-    "TargetValue": 3,
+    "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Message": "Create Piece"
@@ -86,7 +86,7 @@
         "Message": "Create Piece"
       }
     }
-  },  
+  },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "9",
@@ -97,7 +97,7 @@
         "Message": "Create Piece"
       }
     }
-  },  
+  },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "10",
@@ -240,7 +240,7 @@
         "Message": "Create Piece"
       }
     }
-  },  
+  },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "23",
@@ -258,7 +258,8 @@
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Message": "Clear a fog"
+        "Message": "Clear a fog",
+        "Ico": "Fog_1"
       }
     }
   },
@@ -270,7 +271,7 @@
       "QuestDescriptionComponent": {
         "Title": null,
         "Message": "Use a mine",
-        "Ico": "codexQuestion"
+        "Ico": "MineC"
       }
     }
   },
@@ -282,8 +283,9 @@
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
+        "Title": null,
         "Message": "Match 10 pieces in one time",
-        "Ico": "codexQuestion"
+        "Ico": "A1"
       }
     }
   },
@@ -295,7 +297,7 @@
       "QuestDescriptionComponent": {
         "Title": null,
         "Message": "Cut down a tree",
-        "Ico": "codexQuestion"
+        "Ico": "O1"
       }
     }
   },
@@ -307,7 +309,7 @@
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Message": "Open chests",
-        "Ico": "codexQuestion"
+        "Ico": "ChestA1"
       }
     }
   },
@@ -320,7 +322,7 @@
       "QuestDescriptionComponent": {
         "Title": null,
         "Message": "Match chests",
-        "Ico": "codexQuestion"
+        "Ico": "ChestA2"
       }
     }
   },
@@ -332,7 +334,7 @@
       "QuestDescriptionComponent": {
         "Title": null,
         "Message": "Use workers",
-        "Ico": "codexQuestion"
+        "Ico": "Worker1"
       }
     }
   }
