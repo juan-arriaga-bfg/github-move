@@ -1,3 +1,4 @@
+[TaskHighlight(typeof(HighlightTaskClearFog))]
 public class TaskClearFogEntity : TaskEventCounterEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();

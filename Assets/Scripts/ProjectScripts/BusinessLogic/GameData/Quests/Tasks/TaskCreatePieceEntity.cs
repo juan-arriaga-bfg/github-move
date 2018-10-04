@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Quests;
 
+[TaskHighlight(typeof(HighlightTaskPiece))]
 public class TaskCreatePieceEntity : TaskCounterEntity, IBoardEventListener, IHavePieceId
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();

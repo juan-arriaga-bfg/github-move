@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Quests;
+using UnityEngine;
 
 public abstract class TaskEntity : ECSEntity, IECSSerializeable
 {
@@ -71,5 +72,27 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     public virtual void DisconnectFromBoard()
     {
         
+    }
+
+    public virtual void Highlight()
+    {
+        Type hlType = typeof(HighlightTaskNotImplemented);
+        
+        var attributes = GetType().GetCustomAttributes(typeof(TaskHighlight), true);
+        if (attributes.Length == 0)
+        {
+            Debug.LogError($"[TaskEntity] => TaskHighlight attribute not found for {GetType()} class.");
+        }
+        else
+        {
+            var attr = attributes[0] as TaskHighlight;
+            // ReSharper disable once PossibleNullReferenceException
+            hlType = attr.HighlightType;
+        }
+
+        object hlInstance = Activator.CreateInstance(hlType);
+        ITaskHighlight hl = hlInstance as ITaskHighlight;
+        // ReSharper disable once PossibleNullReferenceException
+        hl.Highlight(this);
     }
 }

@@ -23,13 +23,15 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
 
     public bool ConnectedToBoard { get; private set; }
     
+    private Dictionary<Type, ITaskHighlight> highlighters;
+    
     private readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings
     {
         TypeNameHandling = TypeNameHandling.Objects,
         TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple,
         // Converters = new List<JsonConverter> {new ECSEntityJsonConverter(), new VectorConverter()}
     };
-    
+
     public void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
@@ -45,7 +47,7 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
     {
         OnActiveQuestsListChanged = null;
         questStarters = null;
-        
+
         cache = new Dictionary<Type, Dictionary<string, JToken>>();
 
         LoadData<QuestStartConditionComponent>("configs/quests/conditions.data");
