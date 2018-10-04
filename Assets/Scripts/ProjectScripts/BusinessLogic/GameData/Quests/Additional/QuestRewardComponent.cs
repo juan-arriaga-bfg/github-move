@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
+/// <summary>
+/// Contains reward for Quest or Task
+/// </summary>
 [JsonObject(MemberSerialization.OptIn)]
 public class QuestRewardComponent : IECSComponent, IECSSerializeable
 {

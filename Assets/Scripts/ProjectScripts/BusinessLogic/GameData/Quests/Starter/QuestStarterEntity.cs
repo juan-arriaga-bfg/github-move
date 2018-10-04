@@ -5,11 +5,14 @@ using UnityEngine;
 
 public enum QuestStarterMode
 {
-    Once,
-    Loop,
-    Restart
+    Once,    // Quest may run only once
+    Loop,    // Quest may run again after completion
+    Restart  // Quest will be restarted even it already in progress right now
 }
 
+/// <summary>
+/// Starter will call Check method of all added Conditions and return true if all Conditions are true.
+/// </summary>
 [JsonObject(MemberSerialization.OptIn)]
 public class QuestStarterEntity : ECSEntity, IECSSerializeable
 {
@@ -62,9 +65,11 @@ public class QuestStarterEntity : ECSEntity, IECSSerializeable
                 break;
             
             case QuestStarterMode.Loop:
+                throw new NotImplementedException();
                 break;
             
             case QuestStarterMode.Restart:
+                throw new NotImplementedException();
                 break;
         }
 

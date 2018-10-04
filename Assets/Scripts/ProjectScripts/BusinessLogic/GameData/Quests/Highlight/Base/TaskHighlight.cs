@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Attribute for connection TaskHighlight with a Task. 
+/// </summary>
 [AttributeUsage(AttributeTargets.Class)]
 public class TaskHighlight : Attribute
 {

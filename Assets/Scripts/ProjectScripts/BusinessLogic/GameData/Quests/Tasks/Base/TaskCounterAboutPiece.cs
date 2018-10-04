@@ -2,6 +2,8 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 /// <summary>
+/// Base class for Tasks that require PieceId field.
+/// 
 /// Warning you should specify one PieceId OR PieceUid in json config!
 /// </summary>
 public abstract class TaskCounterAboutPiece : TaskCounterEntity, IHavePieceId

@@ -1,5 +1,8 @@
 using Newtonsoft.Json;
 
+/// <summary>
+/// Contains user friendly description of Quest or Task
+/// </summary>
 [JsonObject(MemberSerialization.OptIn)]
 public class QuestDescriptionComponent : IECSComponent, IECSSerializeable
 {

@@ -1,5 +1,8 @@
 using Newtonsoft.Json;
 
+/// <summary>
+/// Always returns True on check
+/// </summary>
 [JsonObject(MemberSerialization.OptIn)]
 public sealed class QuestStartConditionAlwaysTrueComponent : QuestStartConditionComponent
 {

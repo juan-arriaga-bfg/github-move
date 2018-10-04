@@ -1,5 +1,8 @@
 using Newtonsoft.Json;
 
+/// <summary>
+/// Check actual level of a player
+/// </summary>
 [JsonObject(MemberSerialization.OptIn)]
 public sealed class QuestStartConditionPlayerLevelComponent : QuestStartConditionComponent
 {

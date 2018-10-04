@@ -1,5 +1,8 @@
 using Newtonsoft.Json;
 
+/// <summary>
+/// Base task for currencies 
+/// </summary>
 public abstract class TaskCurrencyEntity : TaskCounterEntity
 {
     [JsonProperty] public string Currency { get; protected set; }

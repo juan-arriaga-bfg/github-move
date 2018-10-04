@@ -1,5 +1,8 @@
 using Newtonsoft.Json;
 
+/// <summary>
+/// Condition to limit count of Quests running at the same time.
+/// </summary>
 [JsonObject(MemberSerialization.OptIn)]
 public sealed class QuestStartConditionMaxActiveQuestsCountComponent : QuestStartConditionComponent
 {

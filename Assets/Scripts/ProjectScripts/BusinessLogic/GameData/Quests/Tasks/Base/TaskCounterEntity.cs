@@ -4,14 +4,18 @@ using Quests;
 
 public enum CompareOperatorType
 {
-    GreaterOrEqual,
-    LessOrEqual,
-    GreaterThan,
-    LessThan,
-    Equal,
-    NotEqual
+    GreaterOrEqual,   // >=
+    LessOrEqual,      // <=
+    GreaterThan,      // >
+    LessThan,         // <
+    Equal,            // ==
+    NotEqual          // !=
 }
 
+
+/// <summary>
+/// Base class for tasks that have counter - 'Current' of 'Target'. Current and Target values will be compared using specified CompareOperatorType. 
+/// </summary>
 [JsonObject(MemberSerialization.OptIn)]
 public abstract class TaskCounterEntity : TaskEntity
 {
