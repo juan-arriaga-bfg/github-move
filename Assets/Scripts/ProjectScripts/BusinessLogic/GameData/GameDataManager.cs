@@ -79,7 +79,8 @@ public class ItemWeight
 
     public static List<ItemWeight> ReplaseWeights(List<ItemWeight> oldWeights, List<ItemWeight> nextWeights)
     {
-        if (oldWeights == null) return nextWeights;
+        if (oldWeights == null) return new List<ItemWeight>(nextWeights);
+        if (nextWeights == null) return new List<ItemWeight>(oldWeights);
         
         var weights = new List<ItemWeight>();
 
@@ -122,7 +123,8 @@ public class ItemWeight
 
 public class GameDataManager : ECSEntity,
     IChestsDataManager, IPiecesDataManager, IFogsDataManager, IMinesDataManager, IObstaclesDataManager, ILevelsDataManager,
-    IFieldDataManager, ICodexDataManager, IEnemiesDataManager, IConstantsDataManager, IQuestsDataManager, IShopDataManager
+    IFieldDataManager, ICodexDataManager, IEnemiesDataManager, IConstantsDataManager, IQuestsDataManager, IShopDataManager,
+    IOrdersDataManager
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -163,6 +165,9 @@ public class GameDataManager : ECSEntity,
     private ShopDataManager shopManager;
     public ShopDataManager ShopManager => shopManager ?? (shopManager = GetComponent<ShopDataManager>(ShopDataManager.ComponentGuid));
     
+    private OrdersDataManager ordersManager;
+    public OrdersDataManager OrdersManager => ordersManager ?? (ordersManager = GetComponent<OrdersDataManager>(OrdersDataManager.ComponentGuid));
+    
     public void SetupComponents()
     {
         RegisterComponent(new ChestsDataManager());
@@ -177,6 +182,7 @@ public class GameDataManager : ECSEntity,
         RegisterComponent(new CodexDataManager()); // should be the last one
         RegisterComponent(new ConstantsDataManager());
         RegisterComponent(new ShopDataManager());
+        RegisterComponent(new OrdersDataManager());
     }
 
     public void Reload()
