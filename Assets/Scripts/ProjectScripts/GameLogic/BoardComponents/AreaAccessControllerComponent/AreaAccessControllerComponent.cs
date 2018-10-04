@@ -12,9 +12,20 @@ public class AreaAccessControllerComponent:ECSEntity
 
     private HashSet<BoardPosition> InitAvailiable(BoardController board)
     {
+        var def = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+        if (def != null && def.AreaAccess != null)
+        {
+            return new HashSet<BoardPosition>(def.AreaAccess?.BasePoints);
+        }
+            
         return null;
     }
 
+    public AreaAccessSaveItem GetSaveItem()
+    {
+        return new AreaAccessSaveItem() {BasePoints = basePoints.ToList()};
+    }
+    
     private List<BoardPosition> FindConnections(BoardPosition at, List<BoardPosition> positions)
     {
         var result = new List<BoardPosition>();
@@ -75,8 +86,7 @@ public class AreaAccessControllerComponent:ECSEntity
     public override void OnRegisterEntity(ECSEntity entity)
     {
         board = entity as BoardController;
-        basePoints = InitAvailiable(board);
-        availiablePositions = basePoints != null ? new HashSet<BoardPosition>(basePoints) : null;
+        
     }
 
     private HashSet<BoardPosition> basePoints;
@@ -85,8 +95,11 @@ public class AreaAccessControllerComponent:ECSEntity
 
     public void FullRecalculate()
     {
-        if (basePoints == null)
-            basePoints = DetectBasePoints(board);
+        if (basePoints == null || basePoints.Count == 0)
+        {
+            basePoints = InitAvailiable(board) ?? DetectBasePoints(board);
+        }
+          
         
         AvailiablePositions?.Clear();
         availiablePositions = new HashSet<BoardPosition>(basePoints);
