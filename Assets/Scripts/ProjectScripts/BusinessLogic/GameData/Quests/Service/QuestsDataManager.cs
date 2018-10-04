@@ -19,6 +19,10 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
 
     public Action OnActiveQuestsListChanged;
     
+    private List<QuestStarterEntity> questStarters;
+
+    public bool ConnectedToBoard { get; private set; }
+    
     private readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings
     {
         TypeNameHandling = TypeNameHandling.Objects,
@@ -35,11 +39,12 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
     {
     }
 
-#region Loading    
+#region Save/Load    
     
     public void Reload()
     {
         OnActiveQuestsListChanged = null;
+        questStarters = null;
         
         cache = new Dictionary<Type, Dictionary<string, JToken>>();
 
@@ -109,6 +114,31 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
         }
     
         return ret;
+    }
+    
+    public List<QuestSaveData> GetQuestsSaveData()
+    {
+        List<QuestSaveData> questDatas = new List<QuestSaveData>();
+        foreach (var quest in ActiveQuests)
+        {
+            questDatas.Add(quest.GetDataForSerialization());
+        }
+
+        return questDatas;
+    }
+       
+    public void CreateStarters()
+    {
+        questStarters = new List<QuestStarterEntity>();
+
+        // var s = InstantiateQuestStarter(@id: "1");
+        // questStarters.Add(s);
+        
+        for (int i = 1; i <= 30; i++)
+        {
+            var starter = InstantiateQuestStarter(i.ToString());
+            questStarters.Add(starter);
+        }
     }
     
 #endregion
@@ -185,20 +215,76 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
     
 #endregion
     
-    public List<QuestSaveData> GetQuestsSaveData()
-    {
-        List<QuestSaveData> questDatas = new List<QuestSaveData>();
-        foreach (var quest in ActiveQuests)
+#region Board Connection
+    
+    public void ConnectToBoard()
+    {          
+        // Run new quests if conditions changed 
+        CheckConditions();
+
+        if (ActiveQuests != null)
         {
-            questDatas.Add(quest.GetDataForSerialization());
+            foreach (var quest in ActiveQuests)
+            {
+                quest.ConnectToBoard();
+            }
         }
 
-        return questDatas;
+        ConnectedToBoard = true;
+    }
+
+    public void DisconnectFromBoard()
+    {
+        ConnectedToBoard = false;
+        
+        if (ActiveQuests == null)
+        {
+            return;
+        }
+
+        foreach (var quest in ActiveQuests)
+        {
+            quest.DisconnectFromBoard();
+        }
+    }
+    
+#endregion
+    
+    public void CheckConditions()
+    {
+#if DEBUG
+        var sw = new System.Diagnostics.Stopwatch();
+        sw.Start();
+#endif        
+        var dataManager = GameDataService.Current.QuestsManager;
+        
+        for (var i = 0; i < questStarters.Count; i++)
+        {
+            var starter = questStarters[i];
+            if (starter.Check())
+            {
+#if DEBUG
+                sw.Stop();
+#endif
+                var quest = dataManager.StartQuestById(starter.QuestToStartId, null);
+                if (ConnectedToBoard)
+                {
+                    quest.ConnectToBoard();
+                }
+#if DEBUG
+                sw.Start();
+#endif
+            }
+        }
+#if DEBUG
+        sw.Stop();
+        Debug.Log($"[QuestManager] => CheckConditions() done in {sw.ElapsedMilliseconds}ms");
+#endif
     }
     
     public QuestEntity StartQuestById(string id, JToken saveData)
     {
-        QuestEntity quest = GameDataService.Current.QuestsManager.InstantiateQuest(id);
+        QuestEntity quest = InstantiateQuest(id);
         ActiveQuests.Add(quest);
 
         quest.Start(saveData);
@@ -235,7 +321,7 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
                 
                 OnActiveQuestsListChanged?.Invoke();
                 
-                QuestService.Current.CheckConditions();
+                CheckConditions();
                 return;
             }
         }
