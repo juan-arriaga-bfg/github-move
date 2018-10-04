@@ -1,5 +1,8 @@
 using Newtonsoft.Json;
 
+/// <summary>
+/// Immortal Task, just for debug. This task can't be completed in any way.
+/// </summary>
 [JsonObject(MemberSerialization.OptIn)]
 public class TaskDummyEntity : TaskEntity
 {

@@ -94,7 +94,7 @@ public class MineLifeComponent : StorageLifeComponent
     {
         base.OnTimerComplete();
         
-        QuestService.Current.CheckConditions(); // To ensure that QuestStartConditionMineUsedComponent triggered
+        GameDataService.Current.QuestsManager.CheckConditions(); // To ensure that QuestStartConditionMineUsedComponent triggered
         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.MineUsed, this);
     }
 }

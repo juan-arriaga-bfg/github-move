@@ -11,6 +11,9 @@ public class TaskDef
     [JsonProperty] public int Order { get; protected set; }
 }
 
+/// <summary>
+/// Represents Quest that contains one or more Tasks
+/// </summary>
 public class QuestEntity : ECSEntity, IECSSerializeable
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
@@ -20,16 +23,30 @@ public class QuestEntity : ECSEntity, IECSSerializeable
 
     [JsonProperty] public TaskState State { get; protected set; }
 
+    /// <summary>
+    /// Index (order) of active tasks group
+    /// </summary>
     [JsonProperty] public int ActiveTasksOrder { get; protected set; } = -1;
     
     [JsonProperty] public List<TaskDef> TaskDefs { get; protected set; }
     
+    /// <summary>
+    /// All the tasks included to quests
+    /// </summary>
     [JsonIgnore] public List<TaskEntity> Tasks { get; protected set; } = new List<TaskEntity>();
     
+    /// <summary>
+    /// List of tasks that active currently
+    /// </summary>
     [JsonIgnore] public List<TaskEntity> ActiveTasks { get; protected set; }
     
+    /// <summary>
+    /// Will be called every time when Quest state or state of any active Task is changing.
+    /// </summary>
     [JsonIgnore] public Action<QuestEntity, TaskEntity> OnChanged;
-    
+
+#region Serialization
+
     // overrided to be able to use ShouldSerializeComponentsCache
     [JsonConverter(typeof(ECSEntityJsonConverter))]
     public override Dictionary<int, IECSComponent> ComponentsCache
@@ -37,9 +54,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         get { return componentsCache; }
         set { componentsCache = value; }
     }
-
-#region Serialization
-
+    
     public bool ShouldSerializeTaskDefs()
     {
         return false;
@@ -50,14 +65,34 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         return false;
     }
     
-    // public bool ShouldSerializeState()
-    // {
-    //     return false;
-    // }
-    
     public bool ShouldSerializeComponentsCache()
     {
         return false;
+    }
+
+    public QuestSaveData GetDataForSerialization()
+    {
+        return new QuestSaveData
+        {
+            Quest = this,
+            Tasks = Tasks
+        };
+    }
+
+    // Load quest/tasks progress from json
+    private void Load(JToken json)
+    {
+        JToken quest = json["Quest"];
+        JToken tasks = json["Tasks"];
+
+        quest.PopulateObject(this);
+        
+        foreach (var node in tasks)
+        {
+            string     id   = node.SelectToken("Id").Value<string>();
+            TaskEntity task = GetTaskById(id);
+            node.PopulateObject(task);
+        }
     }
     
 #endregion
@@ -93,6 +128,9 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         }
     }
     
+    /// <summary>
+    /// Start quest (and load previous state if any)
+    /// </summary>
     public virtual void Start(JToken saveData)
     {
         if (saveData != null)
@@ -222,31 +260,10 @@ public class QuestEntity : ECSEntity, IECSSerializeable
 
         return null;
     }
-    
-    public QuestSaveData GetDataForSerialization()
-    {
-        return new QuestSaveData
-        {
-            Quest = this,
-            Tasks = Tasks
-        };
-    }
 
-    public void Load(JToken json)
-    {
-        JToken quest = json["Quest"];
-        JToken tasks = json["Tasks"];
-
-        quest.PopulateObject(this);
-        
-        foreach (var node in tasks)
-        {
-            string id = node.SelectToken("Id").Value<string>();
-            TaskEntity task = GetTaskById(id);
-            node.PopulateObject(task);
-        }
-    }
-
+    /// <summary>
+    /// Call it when player take a reward
+    /// </summary>
     public void SetClaimedState()
     {
         if (State == TaskState.Claimed)

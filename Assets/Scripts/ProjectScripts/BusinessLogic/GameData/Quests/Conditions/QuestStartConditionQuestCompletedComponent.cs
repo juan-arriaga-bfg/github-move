@@ -1,5 +1,8 @@
 using Newtonsoft.Json;
 
+/// <summary>
+/// Check that quest with QuestId have been completed by a user.
+/// </summary>
 [JsonObject(MemberSerialization.OptIn)]
 public sealed class QuestStartConditionQuestCompletedComponent : QuestStartConditionComponent
 {

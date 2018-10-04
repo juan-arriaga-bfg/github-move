@@ -1,5 +1,8 @@
 using Newtonsoft.Json;
 
+/// <summary>
+/// Base class for Tasks that counts BoardEvent occurrences
+/// </summary>
 public abstract class TaskEventCounterEntity : TaskCounterEntity, IBoardEventListener
 {
     [JsonIgnore]

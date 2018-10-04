@@ -7,25 +7,35 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List<QuestDefOld>>*/
+public class QuestsDataManager : IECSComponent, IDataManager
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
 
     private Dictionary<Type, Dictionary<string, JToken>> cache;
     
+    /// <summary>
+    /// List of Quests that currently in progress
+    /// </summary>
     public List<QuestEntity> ActiveQuests;
+    
+    /// <summary>
+    /// List of ids of completed quests
+    /// </summary>
     public List<string> CompletedQuests;
 
+    /// <summary>
+    /// Will be invoked when we Start new or Claim active quests. This mean that ActiveQuests list is changing.
+    /// </summary>
     public Action OnActiveQuestsListChanged;
     
-    private readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings
-    {
-        TypeNameHandling = TypeNameHandling.Objects,
-        TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple,
-        // Converters = new List<JsonConverter> {new ECSEntityJsonConverter(), new VectorConverter()}
-    };
-    
+    private List<QuestStarterEntity> questStarters;
+
+    /// <summary>
+    /// Flag that indicates that all active quests and tasks are listening to BoardEvents
+    /// </summary>
+    public bool ConnectedToBoard { get; private set; }
+
     public void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
@@ -35,12 +45,20 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
     {
     }
 
-#region Loading    
+#region Save/Load    
+    
+    private readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings
+    {
+        TypeNameHandling = TypeNameHandling.Objects,
+        TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple,
+        // Converters = new List<JsonConverter> {new ECSEntityJsonConverter(), new VectorConverter()}
+    };
     
     public void Reload()
     {
         OnActiveQuestsListChanged = null;
-        
+        questStarters = null;
+
         cache = new Dictionary<Type, Dictionary<string, JToken>>();
 
         LoadData<QuestStartConditionComponent>("configs/quests/conditions.data");
@@ -109,6 +127,31 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
         }
     
         return ret;
+    }
+    
+    public List<QuestSaveData> GetQuestsSaveData()
+    {
+        List<QuestSaveData> questDatas = new List<QuestSaveData>();
+        foreach (var quest in ActiveQuests)
+        {
+            questDatas.Add(quest.GetDataForSerialization());
+        }
+
+        return questDatas;
+    }
+       
+    public void CreateStarters()
+    {
+        questStarters = new List<QuestStarterEntity>();
+
+        // var s = InstantiateQuestStarter(@id: "1");
+        // questStarters.Add(s);
+        
+        for (int i = 1; i <= 30; i++)
+        {
+            var starter = InstantiateQuestStarter(i.ToString());
+            questStarters.Add(starter);
+        }
     }
     
 #endregion
@@ -185,27 +228,75 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
     
 #endregion
     
-    public List<QuestSaveData> GetQuestsSaveData()
-    {
-        List<QuestSaveData> questDatas = new List<QuestSaveData>();
-        foreach (var quest in ActiveQuests)
+#region Board Connection
+    
+    public void ConnectToBoard()
+    {          
+        // Run new quests if conditions changed 
+        CheckConditions();
+
+        if (ActiveQuests != null)
         {
-            questDatas.Add(quest.GetDataForSerialization());
+            foreach (var quest in ActiveQuests)
+            {
+                quest.ConnectToBoard();
+            }
         }
 
-        return questDatas;
+        ConnectedToBoard = true;
+    }
+
+    public void DisconnectFromBoard()
+    {
+        ConnectedToBoard = false;
+        
+        if (ActiveQuests == null)
+        {
+            return;
+        }
+
+        foreach (var quest in ActiveQuests)
+        {
+            quest.DisconnectFromBoard();
+        }
     }
     
-    public QuestEntity StartQuestById(string id, JToken saveData)
+#endregion
+    
+    /// <summary>
+    /// Call this to foreach through Starters and Start new quests if Conditions are met.
+    /// Highly expensive! 
+    /// </summary>
+    public void CheckConditions()
     {
-        QuestEntity quest = GameDataService.Current.QuestsManager.InstantiateQuest(id);
-        ActiveQuests.Add(quest);
-
-        quest.Start(saveData);
-
-        OnActiveQuestsListChanged?.Invoke();
+#if DEBUG
+        var sw = new System.Diagnostics.Stopwatch();
+        sw.Start();
+#endif        
+        var dataManager = GameDataService.Current.QuestsManager;
         
-        return quest;
+        for (var i = 0; i < questStarters.Count; i++)
+        {
+            var starter = questStarters[i];
+            if (starter.Check())
+            {
+#if DEBUG
+                sw.Stop();
+#endif
+                var quest = dataManager.StartQuestById(starter.QuestToStartId, null);
+                if (ConnectedToBoard)
+                {
+                    quest.ConnectToBoard();
+                }
+#if DEBUG
+                sw.Start();
+#endif
+            }
+        }
+#if DEBUG
+        sw.Stop();
+        Debug.Log($"[QuestManager] => CheckConditions() done in {sw.ElapsedMilliseconds}ms");
+#endif
     }
 
     public QuestEntity GetActiveQuestById(string id)
@@ -222,6 +313,22 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
         return null;
     }
 
+    private QuestEntity StartQuestById(string id, JToken saveData)
+    {
+        QuestEntity quest = InstantiateQuest(id);
+        ActiveQuests.Add(quest);
+
+        quest.Start(saveData);
+
+        OnActiveQuestsListChanged?.Invoke();
+        
+        return quest;
+    }
+
+    /// <summary>
+    /// Call it when a player claimed a reward to remove a quest from ActiveQuests list
+    /// </summary>
+    /// <param name="id"></param>
     public void CompleteQuest(string id)
     {
         for (var i = 0; i < ActiveQuests.Count; i++)
@@ -235,7 +342,7 @@ public class QuestsDataManager : IECSComponent, IDataManager/*, IDataLoader<List
                 
                 OnActiveQuestsListChanged?.Invoke();
                 
-                QuestService.Current.CheckConditions();
+                CheckConditions();
                 return;
             }
         }

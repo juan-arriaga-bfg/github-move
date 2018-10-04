@@ -1,5 +1,8 @@
 using Newtonsoft.Json;
 
+/// <summary>
+/// Base class for Start Conditions.
+/// </summary>
 public abstract class QuestStartConditionComponent : IECSComponent, IECSSerializeable
 {    
     public abstract int Guid { get; }

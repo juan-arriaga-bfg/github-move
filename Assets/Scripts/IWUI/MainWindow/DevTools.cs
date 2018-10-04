@@ -21,8 +21,8 @@ public class DevTools : MonoBehaviour
 
     public static void ReloadScene(bool resetProgress)
     {
-        QuestService.Current.DisconnectFromBoard();
-        QuestService.Instance.SetManager(null);
+        var manager = GameDataService.Current.QuestsManager;
+        manager.DisconnectFromBoard();
             
         BoardService.Instance.SetManager(null);
 

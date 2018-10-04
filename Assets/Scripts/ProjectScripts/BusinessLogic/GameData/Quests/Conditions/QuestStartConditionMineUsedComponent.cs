@@ -1,6 +1,9 @@
 using Newtonsoft.Json;
 using UnityEngine;
 
+/// <summary>
+/// Will check if mine with MineUid used by a player at least once.
+/// </summary>
 [JsonObject(MemberSerialization.OptIn)]
 public sealed class QuestStartConditionMineUsedComponent : QuestStartConditionComponent
 {
@@ -17,7 +20,7 @@ public sealed class QuestStartConditionMineUsedComponent : QuestStartConditionCo
         {
             // Assume that mine was removed
             
-            Debug.Log($"[QuestStartConditionMineUsedComponent] => Check: {MineUid} removed, return true");
+            // Debug.Log($"[QuestStartConditionMineUsedComponent] => Check: {MineUid} removed, return true");
             return true;
         }
         
