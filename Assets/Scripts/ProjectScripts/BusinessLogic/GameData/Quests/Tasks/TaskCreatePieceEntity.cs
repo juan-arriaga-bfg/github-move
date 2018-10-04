@@ -2,21 +2,10 @@ using Newtonsoft.Json;
 using Quests;
 
 [TaskHighlight(typeof(HighlightTaskPiece))]
-public class TaskCreatePieceEntity : TaskCounterEntity, IBoardEventListener, IHavePieceId
+public class TaskCreatePieceEntity : TaskCounterAboutPiece, IBoardEventListener, IHavePieceId
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
-
-    [JsonProperty] public int PieceId { get; protected set; }
-    
-#region Serialization
-
-    public bool ShouldSerializePieceId()
-    {
-        return false;
-    }
-    
-#endregion
     
     public override void ConnectToBoard()
     {
