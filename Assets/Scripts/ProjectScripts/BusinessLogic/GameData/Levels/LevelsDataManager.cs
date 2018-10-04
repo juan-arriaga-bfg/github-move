@@ -30,8 +30,8 @@ public class LevelsDataManager : IECSComponent, IDataManager, IDataLoader<List<L
 			if (string.IsNullOrEmpty(error))
 			{
 				data.Sort((a, b) => a.Index.CompareTo(b.Index));
-				Levels = new List<LevelsDef>();
-
+				Levels = new List<LevelsDef>{data[0]};
+				
 				for (var i = 1; i < data.Count; i++)
 				{
 					var previous = data[i - 1];
