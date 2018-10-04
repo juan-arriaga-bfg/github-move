@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Security.Policy;
 using UnityEngine;
 
@@ -11,26 +12,84 @@ public class AreaAccessControllerComponent:ECSEntity
 
     private HashSet<BoardPosition> InitAvailiable(BoardController board)
     {
-        var logic = board.BoardLogic;
-        var resultSet = new HashSet<BoardPosition>();
-        resultSet.Add(new BoardPosition(23, 10, 1));
-        return resultSet;
+        return null;
+    }
+
+    private List<BoardPosition> FindConnections(BoardPosition at, List<BoardPosition> positions)
+    {
+        var result = new List<BoardPosition>();
+        foreach (var pos in positions)
+        {
+            if (pos.IsNeighbor(at))
+                result.Add(pos);
+        }
+
+        return result;
+    }
+    
+    private HashSet<BoardPosition> CutGroup(List<BoardPosition> positions)
+    {
+        var group = new HashSet<BoardPosition>();
+        var uncheckedPositions = new HashSet<BoardPosition>();
+        uncheckedPositions.Add(positions.First());
+        
+        while (uncheckedPositions.Count > 0)
+        {
+            var current = uncheckedPositions.First();
+            uncheckedPositions.Remove(current);
+            group.Add(current);
+            positions.Remove(current);
+            foreach (var connection in FindConnections(current, positions))
+            {
+                if (group.Contains(connection) == false && uncheckedPositions.Contains(connection) == false)
+                    uncheckedPositions.Add(connection);
+            }
+        }
+
+        return group;
+    }
+    
+    private HashSet<BoardPosition> DetectBasePoints(BoardController board)
+    {
+        var empty = board.BoardLogic.FieldFinder.FindWhere((pos, logic) =>
+        {
+            var piece = logic.GetPieceAt(pos);
+            if (piece != null && piece.Draggable?.IsDraggable(piece.CachedPosition) != true)
+                return false;
+            return true;
+        });
+        
+        //Group zones;
+        var currentMaxGroup = new HashSet<BoardPosition>();
+        var currentCheckGroup = CutGroup(empty);
+        while (currentCheckGroup.Count > 0)
+        {
+            if (currentCheckGroup.Count > currentMaxGroup.Count)
+                currentMaxGroup = currentCheckGroup;
+
+            currentCheckGroup = empty.Count > 0 ? CutGroup(empty) : new HashSet<BoardPosition>();
+        }
+        return currentMaxGroup;
     }
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
         board = entity as BoardController;
         basePoints = InitAvailiable(board);
-        availiablePoints = new HashSet<BoardPosition>(basePoints);
+        availiablePositions = basePoints != null ? new HashSet<BoardPosition>(basePoints) : null;
     }
 
     private HashSet<BoardPosition> basePoints;
-    private HashSet<BoardPosition> availiablePoints;
-    public HashSet<BoardPosition> AvailiablePositions => availiablePoints;
+    private HashSet<BoardPosition> availiablePositions;
+    public HashSet<BoardPosition> AvailiablePositions => availiablePositions;
 
     public void FullRecalculate()
     {
-        AvailiablePositions.Clear();
+        if (basePoints == null)
+            basePoints = DetectBasePoints(board);
+        
+        AvailiablePositions?.Clear();
+        availiablePositions = new HashSet<BoardPosition>(basePoints);
         foreach (var basePos in basePoints)
         {
             var resultArea = board.BoardLogic.EmptyCellsFinder.FindEmptyAreaByPoint(basePos);
@@ -41,13 +100,14 @@ public class AreaAccessControllerComponent:ECSEntity
         }
         
     }
-
-    
     
     public void LocalRecalculate(BoardPosition changedPosition)
     {
         var fields = new List<BoardPosition>();
-        fields = board.BoardLogic.EmptyCellsFinder.FindEmptyAreaByPoint(changedPosition);
+        var emptyFinder = board.BoardLogic.EmptyCellsFinder;
+        fields = emptyFinder.FindAreaByPoint(changedPosition, 
+                                             (pos, controller) => AvailiablePositions.Contains(pos) == false 
+                                                                  && controller.BoardLogic.GetPieceAt(pos) == null);
 
         foreach (var field in fields)
         {

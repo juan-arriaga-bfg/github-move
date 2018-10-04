@@ -111,8 +111,14 @@ public class EmptyCellsFinderComponent : IECSComponent
 
 		return field.Count != 0;
 	}
-	
+
 	public List<BoardPosition> FindEmptyAreaByPoint(BoardPosition targetPoint)
+	{
+		var result = FindAreaByPoint(targetPoint, (pos, controller) => controller.BoardLogic.GetPieceAt(pos) == null);
+		return result;
+	}
+	
+	public List<BoardPosition> FindAreaByPoint(BoardPosition targetPoint, Func<BoardPosition, BoardController, bool> condition)
 	{   
         var checkedPositions = new HashSet<BoardPosition>();
         var uncheckedPositions = new HashSet<BoardPosition>();
@@ -128,7 +134,7 @@ public class EmptyCellsFinderComponent : IECSComponent
             uncheckedPositions.Remove(current);
             checkedPositions.Add(current);
 
-	        if (current.IsValid && context.IsPointValid(current) && context.GetPieceAt(current) == null)
+	        if (condition(current, context.Context) && context.IsPointValid(current))
 		        resultCollection.Add(current);
 	        else
 		        continue;
@@ -137,7 +143,7 @@ public class EmptyCellsFinderComponent : IECSComponent
             
 	        foreach (var pos in availiablePositions)
 	        {
-		        if (checkedPositions.Contains(pos) == false && context.GetPieceAt(current) == null)
+		        if (checkedPositions.Contains(pos) == false && uncheckedPositions.Contains(pos) == false)
 			        uncheckedPositions.Add(pos);
 	        }
         }
