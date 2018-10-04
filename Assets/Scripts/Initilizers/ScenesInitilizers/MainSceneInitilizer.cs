@@ -53,7 +53,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
     {
         // Quests and tasks
         var manager = GameDataService.Current.QuestsManager;
-        manager.Init();
+        manager.CreateStarters();
         manager.ConnectToBoard();
     }
 
