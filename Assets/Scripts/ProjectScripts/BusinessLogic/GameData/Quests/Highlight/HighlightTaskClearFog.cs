@@ -1,4 +1,4 @@
-public class HighlightTaskClearFog
+public class HighlightTaskClearFog : ITaskHighlight
 {
     public void Highlight(TaskEntity task)
     {
