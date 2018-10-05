@@ -7,10 +7,22 @@ using Newtonsoft.Json;
 /// Warning you should specify one PieceId OR PieceUid in json config!
 /// </summary>
 public abstract class TaskCounterAboutPiece : TaskCounterEntity, IHavePieceId
-{
+{   
+    [JsonProperty] public int PieceId { get; protected set; } //[JsonProperty] is for backward compatibility
+        
+#region Serialization
+
     [JsonProperty] private string PieceUid;
     
-    [JsonProperty] public int PieceId { get; protected set; }
+    public bool ShouldSerializePieceId()
+    {
+        return false;
+    }    
+    
+    public bool ShouldSerializePieceUid()
+    {
+        return false;
+    }
     
     [OnDeserialized]
     internal void OnDeserialized(StreamingContext context)
@@ -21,18 +33,6 @@ public abstract class TaskCounterAboutPiece : TaskCounterEntity, IHavePieceId
         }
         
         PieceId = PieceType.Parse(PieceUid);
-    }
-    
-#region Serialization
-
-    public bool ShouldSerializePieceId()
-    {
-        return false;
-    }    
-    
-    public bool ShouldSerializePieceUid()
-    {
-        return false;
     }
     
 #endregion
