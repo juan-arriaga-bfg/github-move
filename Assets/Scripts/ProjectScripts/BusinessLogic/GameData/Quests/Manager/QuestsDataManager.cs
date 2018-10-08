@@ -147,9 +147,22 @@ public class QuestsDataManager : IECSComponent, IDataManager
         // var s = InstantiateQuestStarter(@id: "1");
         // questStarters.Add(s);
         
-        for (int i = 1; i <= 30; i++)
+        // for (int i = 1; i <= 30; i++)
+        // {
+        //     var starter = InstantiateQuestStarter(i.ToString());
+        //     questStarters.Add(starter);
+        // }
+        
+        Dictionary<string, JToken> starterConfigs;
+        if (!cache.TryGetValue(typeof(QuestStarterEntity), out starterConfigs))
         {
-            var starter = InstantiateQuestStarter(i.ToString());
+            Debug.LogError($"[QuestsDataManager] => CreateStarters: Configs cache for type '{typeof(QuestStarterEntity)}' not found!");
+            return;
+        }
+
+        foreach (var config in starterConfigs.Values)
+        {
+            QuestStarterEntity starter = InstantiateFromJson<QuestStarterEntity>(config);
             questStarters.Add(starter);
         }
     }
@@ -179,14 +192,21 @@ public class QuestsDataManager : IECSComponent, IDataManager
             Debug.LogError($"[QuestsDataManager] => InstantiateById: Config not found for id '{id}' with type '{typeof(T)}'!");
             return default(T); 
         }
-    
+
+
+        T ret = InstantiateFromJson<T>(config);
+        return ret;
+    }
+
+    private T InstantiateFromJson<T>(JToken token) where T : IECSComponent
+    {
         var bkp = JsonConvert.DefaultSettings;
         JsonConvert.DefaultSettings = () => serializerSettings;
                 
-        T item = config.ToObject<T>();
+        T item = token.ToObject<T>();
     
         JsonConvert.DefaultSettings = bkp;
-    
+        
         return item;
     }
 
