@@ -102,7 +102,7 @@ public class UIMainWindowView : IWUIWindowView
     
     public void OnClickOrders()
     {
-        UIMessageWindowController.CreateNotImplementedMessage();
+        UIService.Get.ShowWindow(UIWindowType.OrdersWindow);
     }
     
     private void OnNewPieceBuilded()
