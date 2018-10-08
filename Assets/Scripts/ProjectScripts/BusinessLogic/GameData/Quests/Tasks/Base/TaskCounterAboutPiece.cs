@@ -25,7 +25,7 @@ public abstract class TaskCounterAboutPiece : TaskCounterEntity, IHavePieceId
     }
     
     [OnDeserialized]
-    internal void OnDeserialized(StreamingContext context)
+    protected void OnDeserializedTaskCounterAboutPiece(StreamingContext context)
     {
         if (string.IsNullOrEmpty(PieceUid))
         {
