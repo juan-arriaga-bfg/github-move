@@ -25,8 +25,8 @@ public class SimplePieceBuilder : GenericPieceBuilder
 
         piece.RegisterComponent(
             new PiecePathfindBoardCondition(piece.Context, piece)
-                .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType
-        )));
+                .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)
+        ));
         
         if (def.SpawnResources != null)
         {

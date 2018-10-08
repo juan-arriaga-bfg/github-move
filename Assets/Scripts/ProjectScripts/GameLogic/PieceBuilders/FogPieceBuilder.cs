@@ -5,9 +5,7 @@ public class FogPieceBuilder : MulticellularPieceBuilder
     public override Piece Build(int pieceType, BoardController context)
     {
         var piece = base.Build(pieceType, context);
-        
-        
-        
+    
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionComponent())
             .RegisterComponent(new TouchReactionConditionFog()))
@@ -16,7 +14,7 @@ public class FogPieceBuilder : MulticellularPieceBuilder
         
         CreateViewComponent(piece);
         
-        AddPathfindLockObserver(piece, true,  new List<LockerComponent>()
+        AddPathfindLockObserver(piece, true, new List<LockerComponent>
         {
             piece.TouchReaction.ReactionCondition.Locker
         });

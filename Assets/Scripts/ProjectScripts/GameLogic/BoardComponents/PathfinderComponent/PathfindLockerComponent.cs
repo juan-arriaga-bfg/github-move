@@ -26,21 +26,8 @@ public class PathfindLockerComponent : ECSEntity
     
     public virtual bool HasPath(Piece piece)
     {
+        Debug.LogWarning($"{piece.CachedPosition} check path. Block contains: {blockPathPieces.ContainsKey(piece)}, free contains {freePieces.Contains(piece)}");
         return !blockPathPieces.ContainsKey(piece) && freePieces.Contains(piece); 
-    }
-
-    public virtual void RecalcCacheOnPieceAdded(HashSet<BoardPosition> target, BoardPosition changedPosition, Piece piece, bool autoLock)
-    {
-        lastCheckedPositions = target;
-        
-        RecalcFree(target, changedPosition);
-
-        
-        if (autoLock)
-        {
-            var addedPiece = piece;
-            RecalcFor(addedPiece, target);
-        }   
     }
 
     private void LockPathfinding(Piece piece)
@@ -76,6 +63,11 @@ public class PathfindLockerComponent : ECSEntity
         
         List<BoardPosition> pieceBlockers;
         
+        if (piece.CachedPosition.Equals(new BoardPosition(17, 8, 1)))
+        {
+            Debug.LogError($"Recalc for {piece.CachedPosition}");    
+        }
+        
         var defaultCondition = Pathfinder.GetCondition(piece);
         Predicate<BoardPosition> pathCondition = (pos) => ignorablePositions.Contains(pos) || defaultCondition(pos);
         
@@ -94,20 +86,25 @@ public class PathfindLockerComponent : ECSEntity
             if(blockPathPieces.ContainsKey(piece) == false)
                  LockPathfinding(piece); //piece.Draggable?.Locker?.Lock(this);
             blockPathPieces[piece] = pieceBlockers;
-            
         }
         
         return canPath;
     }
     
+    public virtual void RecalcCacheOnPieceAdded(HashSet<BoardPosition> target, BoardPosition changedPosition, Piece piece, bool autoLock)
+    {
+        lastCheckedPositions = target;        
+        RecalcFree(target, changedPosition);
+
+        if (autoLock)
+        {
+            var addedPiece = piece;
+            RecalcFor(addedPiece, target);
+        }   
+    }
+    
     public virtual void RecalcCacheOnPieceRemoved(HashSet<BoardPosition> target , BoardPosition changedPosition, Piece removedPiece)
     {
-        if (changedPosition.Equals(lastCheckedPositions))
-        {
-            RecalcAll(target);
-            return;
-        }
-
         if (freePieces.Contains(removedPiece))
             freePieces.Remove(removedPiece);
         if (blockPathPieces.ContainsKey(removedPiece))
@@ -119,12 +116,6 @@ public class PathfindLockerComponent : ECSEntity
     public virtual void RecalcCacheOnPieceMoved(HashSet<BoardPosition> target, BoardPosition fromPosition, BoardPosition to, Piece piece,
         bool autoLock)
     {
-        if (fromPosition.Equals(lastCheckedPositions))
-        {
-            RecalcAll(target);
-            return;
-        }
-
         var pieceOnPos = piece;
         if (pieceOnPos == null)
         {

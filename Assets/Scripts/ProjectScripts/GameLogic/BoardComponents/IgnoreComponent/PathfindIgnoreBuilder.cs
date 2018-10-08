@@ -7,31 +7,12 @@ using UnityEngine;
 
 public static class PathfindIgnoreBuilder
 {
-   [JsonIgnore]
    private static Dictionary<int, HashSet<int>> dictLinks = InitLinks();
+   private static HashSet<int> defaultIgnores = InitDefault();
 
-   private static Dictionary<int, HashSet<int>> InitLinks()
+   private static HashSet<int> InitDefault()
    {
-      var links = new Dictionary<int, HashSet<int>>();
-      
-      InitMines(links);
-      InitFog(links);
-      InitObstacles(links);
-      InitCharacters(links);
-      return links;
-   }
-
-   private static HashSet<int> allPieceTypes;
-   private static HashSet<int> GetReverseSet(HashSet<int> nonIgnorableItems)
-   {
-      if (allPieceTypes == null)
-         allPieceTypes = new HashSet<int>(PieceType.Abbreviations.Values.Distinct());
-      return new HashSet<int>(allPieceTypes.Except(nonIgnorableItems));
-   }
-
-   private static void InitSimplePieces(Dictionary<int, HashSet<int>> dict)
-   {
-      var simpleIgnorePieces = GetReverseSet(new HashSet<int>
+      var ignorable = GetReverseSet(new HashSet<int>
       {
          PieceType.O1.Id,
          PieceType.O2.Id,
@@ -62,7 +43,27 @@ public static class PathfindIgnoreBuilder
          PieceType.OEpic9.Id,
          PieceType.Fog.Id
       });
+
+      return ignorable;
+   }
+   
+   private static Dictionary<int, HashSet<int>> InitLinks()
+   {
+      var links = new Dictionary<int, HashSet<int>>();
       
+      InitMines(links);
+      InitFog(links);
+      InitObstacles(links);
+      InitCharacters(links);
+      return links;
+   }
+
+   private static HashSet<int> allPieceTypes;
+   private static HashSet<int> GetReverseSet(HashSet<int> nonIgnorableItems)
+   {
+      if (allPieceTypes == null)
+         allPieceTypes = new HashSet<int>(PieceType.Abbreviations.Values.Distinct());
+      return new HashSet<int>(allPieceTypes.Except(nonIgnorableItems));
    }
    
    private static void InitObstacles(Dictionary<int, HashSet<int>> dict)
@@ -222,10 +223,9 @@ public static class PathfindIgnoreBuilder
 
    public static PathfindIgnoreComponent Build(int pieceTypeId)
    {
-      if(dictLinks.ContainsKey(pieceTypeId))
-         return new PathfindIgnoreComponent(dictLinks[pieceTypeId]);
+      if (dictLinks.ContainsKey(pieceTypeId))
+         return new PathfindIgnoreComponent(dictLinks[pieceTypeId]);  
       
-      Debug.LogWarning($"[PathfindIgnoreBuilder] id {pieceTypeId} not initialized");
-      return PathfindIgnoreComponent.Empty;
+      return new PathfindIgnoreComponent(defaultIgnores);
    }
 }
