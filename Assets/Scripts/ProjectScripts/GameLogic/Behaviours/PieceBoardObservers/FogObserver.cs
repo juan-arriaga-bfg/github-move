@@ -184,6 +184,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     private void OnClick(Piece piece)
     {
+        if(CurrencyHellper.IsCanPurchase(def.Condition, true, () => OnClick(piece)) == false) return;
+        
         CurrencyHellper.Purchase(Currency.Fog.Name, 1, def.Condition, success =>
         {
             if (success == false) return;

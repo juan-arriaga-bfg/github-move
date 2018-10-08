@@ -9,6 +9,7 @@ public class PieceDef : SimplePieceDef
     public string Name { get; set; }
     
     public CurrencyPair SpawnResources { get; set; }
+    public CurrencyPair ExchangePrice { get; set; }
     
     public List<CurrencyPair> CreateRewards { get; set; }
     public List<CurrencyPair> UnlockBonus { get; set; }
