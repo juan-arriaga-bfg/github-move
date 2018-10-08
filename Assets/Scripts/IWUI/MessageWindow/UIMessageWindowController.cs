@@ -60,7 +60,7 @@ public class UIMessageWindowController : IWWindowController {
 
     public static void CreateImageMessage(string title, string image, Action onAccept)
     {
-        var model= UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
         model.Title = title;
         model.Message = null;
@@ -75,7 +75,7 @@ public class UIMessageWindowController : IWWindowController {
     
     public static void CreateNeedCoinsMessage()
     {
-        var model= UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
         model.Title = "Need coins?";
         model.Message = null;
@@ -90,7 +90,7 @@ public class UIMessageWindowController : IWWindowController {
     
     public static void CreateNeedCurrencyMessage(string currency)
     {
-        var model= UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
         model.Title = $"Need {currency.ToLower()}?";
         model.Message = $"You do not have enough <sprite name={currency}>!";
@@ -105,8 +105,8 @@ public class UIMessageWindowController : IWWindowController {
     public static void CreateTimerCompleteMessage(string title, string message, TimerComponent timer)
     {
         if(timer.Delay - timer.StartTime.GetTime().TotalSeconds < 1) return;
-        
-        var model= UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+
+        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
         model.Title = title;
         model.Message = message;

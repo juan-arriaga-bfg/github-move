@@ -23,4 +23,6 @@
     public const string CurrencyCheatSheetWindow = "CurrencyCheatSheetWindow";
     
     public const string PiecesCheatSheetWindow = "PiecesCheatSheetWindow";
+    
+    public const string ExchangeWindow = "ExchangeWindow";
 }

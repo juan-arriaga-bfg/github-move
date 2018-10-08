@@ -88,7 +88,10 @@ public class UILimitPanelViewController : UIGenericResourcePanelViewController
     private void SetLabelText(int current, int limit)
     {
         if (amountLabel == null) return;
-
+        
+        current = Mathf.Max(0, current);
+        limit = Mathf.Max(0, limit);
+        
         var color = current == 0 ? "FE4704" : (current > limit ? "00D46C" : "FFFFFF");
         amountLabel.Text = $"<mspace=2.7em><color=#{color}>{current}</color>/{limit}</mspace>";
     }
