@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ObstaclePieceBuilder : GenericPieceBuilder
 {
@@ -33,11 +34,12 @@ public class ObstaclePieceBuilder : GenericPieceBuilder
 			.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
 				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
 		
-		var pathfindLockObserver = new PathfindLockObserver() {AutoLock = true}; 
-		AddObserver(piece, pathfindLockObserver);
-		piece.RegisterComponent(pathfindLockObserver);
-
 		AddObserver(piece, new AreaRecalculateObserver());
+		
+		AddPathfindLockObserver(piece, true, new List<LockerComponent>()
+		{
+			piece.TouchReaction.Locker
+		});
 		
 		return piece;
 	}

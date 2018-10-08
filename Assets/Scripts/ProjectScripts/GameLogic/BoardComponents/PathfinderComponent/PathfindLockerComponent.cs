@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class PathfindLockerComponent : ECSEntity
 {   
@@ -42,6 +43,32 @@ public class PathfindLockerComponent : ECSEntity
         }   
     }
 
+    private void LockPathfinding(Piece piece)
+    {
+        Debug.LogError($"{piece.CachedPosition}: is locked");
+        var observer = piece.PathfindLockObserver;
+        if (observer != null)
+        {
+            foreach (var lockerComponent in observer.Lockers)
+            {
+                lockerComponent.Lock(this);
+            }
+        }
+    }
+
+    public void UnlockPathfinding(Piece piece)
+    {
+        Debug.LogError($"{piece.CachedPosition}: unlock");
+        var observer = piece.PathfindLockObserver;
+        if (observer != null)
+        {
+            foreach (var lockerComponent in observer.Lockers)
+            {
+                lockerComponent.Unlock(this);
+            }
+        }
+    }
+
     private bool RecalcFor(Piece piece, HashSet<BoardPosition> target, List<BoardPosition> ignorablePositions = null)
     {
         if (ignorablePositions == null)
@@ -57,14 +84,17 @@ public class PathfindLockerComponent : ECSEntity
         {
             blockPathPieces.Remove(piece);
             freePieces.Add(piece);
-            piece.Draggable?.Locker?.Unlock(this, true);
+            //piece.Draggable?.Locker?.Unlock(this, true);
+            UnlockPathfinding(piece);
+            
         }
         else if (canPath == false)
         {
             freePieces.Remove(piece);
             if(blockPathPieces.ContainsKey(piece) == false)
-                piece.Draggable?.Locker?.Lock(this);
+                 LockPathfinding(piece); //piece.Draggable?.Locker?.Lock(this);
             blockPathPieces[piece] = pieceBlockers;
+            
         }
         
         return canPath;
@@ -136,7 +166,7 @@ public class PathfindLockerComponent : ECSEntity
         }
     }
 
-    protected virtual void RecalcAll(HashSet<BoardPosition> target)
+    public virtual void RecalcAll(HashSet<BoardPosition> target)
     {
         lastCheckedPositions = target;
         

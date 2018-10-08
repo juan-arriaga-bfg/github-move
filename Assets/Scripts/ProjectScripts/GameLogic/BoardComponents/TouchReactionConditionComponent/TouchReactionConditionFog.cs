@@ -2,11 +2,12 @@
 {
 	public override bool Check(BoardPosition position, Piece piece)
 	{
-		var boardController = piece.Context;
+		var board = piece.Context;
 		
-		if (boardController?.Pathfinder.CanPathToCastle(piece) == false)
+		if (Locker.IsLocked/*boardController?.Pathfinder.CanPathToCastle(piece) == false*/)
 		{
-			UIErrorWindowController.AddError("Path not found");
+			if(board.PathfindLocker.HasPath(piece) == false)
+				UIErrorWindowController.AddError("Path not found");
 			return false;
 		}
 		

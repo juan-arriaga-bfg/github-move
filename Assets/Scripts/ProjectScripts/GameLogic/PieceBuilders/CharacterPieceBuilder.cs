@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CharacterPieceBuilder : GenericPieceBuilder
 {
@@ -24,10 +25,6 @@ public class CharacterPieceBuilder : GenericPieceBuilder
 		piece.RegisterComponent(storage);
 		AddObserver(piece, storage);
 		
-		var pathfindLockObserver = new PathfindLockObserver() {AutoLock = true}; 
-		AddObserver(piece, pathfindLockObserver);
-		piece.RegisterComponent(pathfindLockObserver);
-		
 		piece.RegisterComponent(new DraggablePieceComponent());
 		
 		piece.RegisterComponent(new TouchReactionComponent()
@@ -38,6 +35,12 @@ public class CharacterPieceBuilder : GenericPieceBuilder
 			.RegisterComponent(new TouchReactionConditionComponent()))
 			.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
 				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
+
+		AddPathfindLockObserver(piece, true,  new List<LockerComponent>
+		{
+			piece.Draggable.Locker, 
+			piece.TouchReaction.ReactionCondition.Locker
+		});
 		
 		return piece;
 	}

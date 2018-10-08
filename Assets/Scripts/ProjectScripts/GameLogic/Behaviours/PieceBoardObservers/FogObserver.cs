@@ -127,7 +127,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void UpdateResource(int offset)
     {
-        var canPath = thisContext.Context.Pathfinder.CanPathToCastle(thisContext);
+//      var canPath = thisContext.Context.Pathfinder.CanPathToCastle(thisContext);
+        var canPath = thisContext.Context.PathfindLocker.HasPath(thisContext);
         var levelAccess = storageItem.Amount >= level;
         if ((canPath ^ levelAccess) && lockView == null)
         {

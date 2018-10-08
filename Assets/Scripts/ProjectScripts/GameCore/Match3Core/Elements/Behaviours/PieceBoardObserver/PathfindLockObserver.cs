@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
@@ -9,6 +10,13 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
     protected Piece piece;
     protected BoardController board;
 
+    public readonly List<LockerComponent> Lockers;
+
+    public PathfindLockObserver(params LockerComponent[] lockers)
+    {
+        Lockers = lockers.ToList();
+    }
+    
     private static List<PathfindLockObserver> nonLoaded = new List<PathfindLockObserver>();
 
     public static void LoadPathfindLock()
@@ -71,13 +79,5 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
     private HashSet<BoardPosition> GetTargetPositions()
     {
         return board.AreaAccessController?.AvailiablePositions;
-//        var pieces = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1);
-//        if (pieces != null && pieces.Count > 0)
-//        {
-//            var target = pieces[0];
-//            return target;    
-//        }
-//
-//        return null;
     }
 }
