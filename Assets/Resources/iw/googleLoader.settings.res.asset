@@ -72,6 +72,10 @@ MonoBehaviour:
     Link: 1jaDy9GfzL7SMM9wR1HHHD1kYRj1tjPZrnBw5ZLIT1tk
     Route: parse
     Pattern: '[{"Uid":0,"Price":{"Currency":"","Amount":0},"Rewards":[{"Currency":"","Amount":0}],"Conditions":[],"Message":""}]'
+  - Key: questEntity
+    Link: 1Y6MtoZhcHKgmmL96-rYsTV7Lp4LPYNm21jYc_xNPHXc
+    Route: parse
+    Pattern: '[{"Id":"","$type":"","TaskDefs":[{"TaskId":0}],"ComponentsCache":{"QuestRewardComponent":{"Value":[{"Currency":"","Amount": 0}]},"QuestDescriptionComponent":{"Ico":"","Title":"","Message":""}}}]'
   - Key: questStarters
     Link: 1npF9IT2A2bAW-Lslya3BYlIK7RCdDzceDIOxFCJbu80
     Route: parse
@@ -79,4 +83,4 @@ MonoBehaviour:
   - Key: questTasks
     Link: 1dvyzQoKk6OMhIC59EApw2vjebAdn4LxrbM7raQJAlXY
     Route: parse
-    Pattern: '[{"Id":"","$type":"","":"","PieceId":"","TargetValue":0,"CountToMatch":0,"QuestDescriptionComponent":{"Ico":"","Title":"","Message":""}}]'
+    Pattern: '[{"Id":"","$type":"","":"","PieceId":"","TargetValue":0,"Value1":0,"ComponentsCache":{"QuestDescriptionComponent":{"Ico":"","Title":"","Message":""}}}]'
