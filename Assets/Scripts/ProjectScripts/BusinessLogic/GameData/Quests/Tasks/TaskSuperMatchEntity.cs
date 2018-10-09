@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -6,13 +7,29 @@ public class TaskSuperMatchEntity : TaskCounterAboutPiece, IBoardEventListener
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
-    [JsonProperty] public int CountToMatch { get; protected set; }
+    [JsonProperty] public int CountToMatch { get; protected set; } // [JsonProperty] is for a backward compatibility
+    
+    [JsonProperty] public int Value1 { get; protected set; }
     
 #region Serialization
 
     public bool ShouldSerializeCountToMatch()
     {
         return false;
+    }   
+    
+    public bool ShouldSerializeValue1()
+    {
+        return false;
+    }
+    
+    [OnDeserialized]
+    protected void OnDeserializedTaskSuperMatchEntity(StreamingContext context)
+    {
+        if (CountToMatch <= 0)
+        {
+            CountToMatch = Value1;
+        }
     }
     
 #endregion

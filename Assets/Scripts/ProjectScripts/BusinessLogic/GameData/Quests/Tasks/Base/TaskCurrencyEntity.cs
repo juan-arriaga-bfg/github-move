@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 /// <summary>
@@ -5,10 +6,34 @@ using Newtonsoft.Json;
 /// </summary>
 public abstract class TaskCurrencyEntity : TaskCounterEntity
 {
-    [JsonProperty] public string Currency { get; protected set; }
+    [JsonProperty] public string Currency { get; protected set; } //[JsonProperty] is for backward compatibility
     
 #region Serialization
 
+    // Use PieceUid name to unify names across the tasks to simplify Google Drive export
+    [JsonProperty] private string PieceUid;
+    
+    public bool ShouldSerializePieceId()
+    {
+        return false;
+    }    
+    
+    public bool ShouldSerializePieceUid()
+    {
+        return false;
+    }
+    
+    [OnDeserialized]
+    internal void OnDeserialized(StreamingContext context)
+    {
+        if (string.IsNullOrEmpty(PieceUid))
+        {
+            return;
+        }
+        
+        Currency = PieceUid;
+    }
+    
     public bool ShouldSerializeCurrency()
     {
         return false;

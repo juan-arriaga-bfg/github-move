@@ -33,6 +33,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.CodexWindow,
             UIWindowType.CurrencyCheatSheetWindow,
             UIWindowType.PiecesCheatSheetWindow,
+            UIWindowType.ExchangeWindow,
         });
         
         // on cache complete

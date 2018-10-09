@@ -39,7 +39,7 @@ MonoBehaviour:
   - Key: pieces
     Link: 15C96r0vcgzzhJ6Fo_OQXBcCoIkSogZnTZg8Jc6MKDH8
     Route: parse
-    Pattern: '[{"Uid":"","":"","CreateRewards":[{"Currency":"","Amount":0}],"SpawnResources":{"Currency":"","Amount":0},"Name":"","UnlockBonus":[{"Currency":"","Amount":0}]}]'
+    Pattern: '[{"Uid":"","":"","CreateRewards":[{"Currency":"","Amount":0}],"SpawnResources":{"Currency":"","Amount":0},"Name":"","UnlockBonus":[{"Currency":"","Amount":0}],"ExchangePrice":{"Currency":"","Amount":0}}]'
   - Key: piecesMatchConditions
     Link: 1VvIEMGGf-pkdVpJ96nSW8sBkIDX18vr1FAGY4NFLCRQ
     Route: parse

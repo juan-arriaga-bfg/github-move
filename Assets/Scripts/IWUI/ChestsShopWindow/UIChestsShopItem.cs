@@ -15,10 +15,10 @@ public class UIChestsShopItem : IWUIWindowViewController
 	private UIChestsShopWindowModel model;
 	
 	private ChestDef chest;
-	public int reward = -1;
 	
 	private bool isFree;
 	private bool isClick;
+	private bool isReward;
 	
 	public void Init(ChestDef def)
 	{
@@ -26,6 +26,7 @@ public class UIChestsShopItem : IWUIWindowViewController
 		chest = def;
 		
 		isClick = false;
+		isReward = false;
 		isFree = GameDataService.Current.LevelsManager.Chest == chest.Piece;
 		
 		if (isFree)
@@ -50,7 +51,7 @@ public class UIChestsShopItem : IWUIWindowViewController
 			model.FreeChestLogic.Timer.OnComplete -= ChengeButtons;
 		}
 		
-		if (isClick == false || reward == -1) return;
+		if (isClick == false || isReward == false) return;
 		
 		var board = BoardService.Current.GetBoardById(0);
 		var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
@@ -61,8 +62,7 @@ public class UIChestsShopItem : IWUIWindowViewController
         
 		if(spawn == null) return;
 
-		spawn.Reward = reward;
-		reward = -1;
+		spawn.Reward = chest.Piece;
 		model.FreeChestLogic.Timer.Start();
 		spawn.Make(piece.CachedPosition, piece);
 	}
@@ -98,7 +98,6 @@ public class UIChestsShopItem : IWUIWindowViewController
 		
 		if (isFree)
 		{
-			isClick = false;
 			OnClickFree();
 			return;
 		}
@@ -114,7 +113,7 @@ public class UIChestsShopItem : IWUIWindowViewController
 			return;
 		}
 		
-		reward = chest.Piece;
+		isReward = true;
 		context.Controller.CloseCurrentWindow();
 	}
 
@@ -128,7 +127,7 @@ public class UIChestsShopItem : IWUIWindowViewController
 				return;
 			}
 			
-			reward = chest.Piece;
+			isReward = true;
 			context.Controller.CloseCurrentWindow();
 		});
 	}
