@@ -25,4 +25,6 @@
     public const string PiecesCheatSheetWindow = "PiecesCheatSheetWindow";
     
     public const string ExchangeWindow = "ExchangeWindow";
+    
+    public const string OrdersWindow = "OrdersWindow";
 }

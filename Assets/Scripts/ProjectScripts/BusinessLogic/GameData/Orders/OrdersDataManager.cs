@@ -15,10 +15,12 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
     {
     }
 
+    public List<OrderDef> Recipes;
     public List<OrderDef> Orders;
 
     public void Reload()
     {
+        Recipes = null;
         Orders = null;
         LoadData(new ResourceConfigDataMapper<List<OrderDef>>("configs/orders.data",
             NSConfigsSettings.Instance.IsUseEncryption));
@@ -30,6 +32,7 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
         {
             if (string.IsNullOrEmpty(error))
             {
+                Recipes = data;
                 Orders = data;
             }
             else
