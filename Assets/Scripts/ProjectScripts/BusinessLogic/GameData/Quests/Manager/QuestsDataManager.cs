@@ -217,7 +217,6 @@ public class QuestsDataManager : IECSComponent, IDataManager
     
     private TaskEntity InstantiateTask(string id)
     {
-        Debug.LogError(id);
         return InstantiateById<TaskEntity>(id);
     }
     
