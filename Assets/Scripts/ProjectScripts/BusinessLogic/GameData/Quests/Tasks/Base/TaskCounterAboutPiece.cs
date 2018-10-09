@@ -12,7 +12,7 @@ public abstract class TaskCounterAboutPiece : TaskCounterEntity, IHavePieceId
         
 #region Serialization
 
-    [JsonProperty] private string PieceUid;
+    [JsonProperty] public string PieceUid;
     
     public bool ShouldSerializePieceId()
     {

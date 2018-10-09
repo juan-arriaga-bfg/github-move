@@ -63,8 +63,8 @@ public class QuestsDataManager : IECSComponent, IDataManager
 
         LoadData<QuestStartConditionComponent>("configs/quests/conditions.data");
         LoadData<QuestStarterEntity>          ("configs/quests/starters.data");
-        LoadData<QuestEntity>                 ("configs/quests/quests.data");
-        LoadData<TaskEntity>                  ("configs/quests/tasks.data");
+        LoadData<QuestEntity>                 ("configs/quests.data");
+        LoadData<TaskEntity>                  ("configs/questTasks.data");
 
         LoadProfile();
     }
@@ -147,11 +147,11 @@ public class QuestsDataManager : IECSComponent, IDataManager
         // var s = InstantiateQuestStarter(@id: "1");
         // questStarters.Add(s);
         
-        // for (int i = 1; i <= 30; i++)
-        // {
-        //     var starter = InstantiateQuestStarter(i.ToString());
-        //     questStarters.Add(starter);
-        // }
+        for (int i = 1; i <= 30; i++)
+        {
+            var starter = InstantiateQuestStarter(i.ToString());
+            questStarters.Add(starter);
+        }
         
         Dictionary<string, JToken> starterConfigs;
         if (!cache.TryGetValue(typeof(QuestStarterEntity), out starterConfigs))
@@ -217,6 +217,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
     
     private TaskEntity InstantiateTask(string id)
     {
+        Debug.LogError(id);
         return InstantiateById<TaskEntity>(id);
     }
     

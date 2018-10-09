@@ -2,7 +2,7 @@
   {
     "Id": "1",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "A2",
+    "PieceUid": "A2",
     "TargetValue": 4,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -13,7 +13,7 @@
   {
     "Id": "2",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "A3",
+    "PieceUid": "A3",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -24,7 +24,7 @@
   {
     "Id": "3",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "B2",
+    "PieceUid": "B2",
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -35,7 +35,7 @@
   {
     "Id": "4",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "A4",
+    "PieceUid": "A4",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -46,7 +46,7 @@
   {
     "Id": "5",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "E3",
+    "PieceUid": "E3",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -57,7 +57,7 @@
   {
     "Id": "6",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "B3",
+    "PieceUid": "B3",
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -68,7 +68,7 @@
   {
     "Id": "7",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "A5",
+    "PieceUid": "A5",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -79,7 +79,7 @@
   {
     "Id": "8",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "J3",
+    "PieceUid": "J3",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -90,7 +90,7 @@
   {
     "Id": "9",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "C3",
+    "PieceUid": "C3",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -101,7 +101,7 @@
   {
     "Id": "10",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "B4",
+    "PieceUid": "B4",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -112,7 +112,7 @@
   {
     "Id": "11",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "H3",
+    "PieceUid": "H3",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -123,7 +123,7 @@
   {
     "Id": "12",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "C4",
+    "PieceUid": "C4",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -134,7 +134,7 @@
   {
     "Id": "13",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "D3",
+    "PieceUid": "D3",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -145,7 +145,7 @@
   {
     "Id": "14",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "A6",
+    "PieceUid": "A6",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -156,7 +156,7 @@
   {
     "Id": "15",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "B5",
+    "PieceUid": "B5",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -167,7 +167,7 @@
   {
     "Id": "16",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "C5",
+    "PieceUid": "C5",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -178,7 +178,7 @@
   {
     "Id": "17",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "K3",
+    "PieceUid": "K3",
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -189,7 +189,7 @@
   {
     "Id": "18",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "K4",
+    "PieceUid": "K4",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -200,7 +200,7 @@
   {
     "Id": "19",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "K5",
+    "PieceUid": "K5",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -211,7 +211,7 @@
   {
     "Id": "20",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "C6",
+    "PieceUid": "C6",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -222,7 +222,7 @@
   {
     "Id": "21",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "A7",
+    "PieceUid": "A7",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -233,7 +233,7 @@
   {
     "Id": "22",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "K6",
+    "PieceUid": "K6",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -244,7 +244,7 @@
   {
     "Id": "23",
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "PieceId": "K7",
+    "PieceUid": "K7",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -277,7 +277,7 @@
   {
     "Id": "26",
     "$type": "TaskSuperMatchEntity, Assembly-CSharp",
-    "PieceId": "A1",
+    "PieceUid": "A1",
     "TargetValue": 1,
     "Value1": 10,
     "ComponentsCache": {
@@ -301,7 +301,7 @@
   {
     "Id": "28",
     "$type": "TaskOpenChestEntity, Assembly-CSharp",
-    "PieceId": "ChestA1",
+    "PieceUid": "ChestA1",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -313,7 +313,7 @@
   {
     "Id": "29",
     "$type": "TaskMatchEntity, Assembly-CSharp",
-    "PieceId": "ChestA1",
+    "PieceUid": "ChestA1",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
