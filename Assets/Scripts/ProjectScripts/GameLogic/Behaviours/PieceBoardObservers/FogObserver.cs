@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
@@ -76,6 +78,9 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         GameDataService.Current.FogsManager.RemoveFog(key);
         
         thisContext.Context.HintCooldown.RemoweView(view);
+
+        List<CreatePieceAtAction> actions = new List<CreatePieceAtAction>();
+        List<BoardPosition> addedPieces = new List<BoardPosition>();
         
         if(def.Pieces != null)
         {
@@ -90,11 +95,14 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                         pieceId = PieceType.Parse(piece.Key);
                     }
                     
-                    thisContext.Context.ActionExecutor.AddAction(new CreatePieceAtAction
+                    addedPieces.Add(new BoardPosition(pos.X, pos.Y, thisContext.Layer.Index));
+                    var act = new CreatePieceAtAction
                     {
                         At = pos,
                         PieceTypeId = pieceId
-                    });
+                    };
+                    thisContext.Context.ActionExecutor.AddAction(act);
+                    actions.Add(act);
                 }
             }
         }
@@ -109,12 +117,32 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             
             if(piece == PieceType.Empty.Id) continue;
             
-            thisContext.Context.ActionExecutor.AddAction(new CreatePieceAtAction
+            addedPieces.Add(new BoardPosition(point.X, point.Y, thisContext.Layer.Index));
+            var act = new CreatePieceAtAction
             {
                 At = point,
                 PieceTypeId = piece
-            });
+            };
+            thisContext.Context.ActionExecutor.AddAction(act);
+            actions.Add(act);
         }
+        Debug.LogError($"SpawnPositions {string.Join(",", actions.Select(action => action.At))}");
+        GeneratePathfindRecalc(actions);
+    }
+
+    private void GeneratePathfindRecalc(List<CreatePieceAtAction> actions)
+    {
+        actions.Last().OnComplete = () =>
+        {
+            foreach (var act in actions)
+            {
+                var pos = act.At;
+                var piece = thisContext.Context.BoardLogic.GetPieceAt(pos);
+                piece.PathfindLockObserver.OnAddToBoard(pos);
+            }
+
+            Debug.LogError("Callback Execute");
+        };
     }
     
     public void RegisterCarrier(IResourceCarrier carrier)

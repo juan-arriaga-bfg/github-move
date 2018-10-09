@@ -1,14 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YamlDotNet.Core;
 
 public class DevTools : MonoBehaviour
 {
     [SerializeField] private GameObject panel;
 
+    public static DevTools Instance;
+    
     public void Start()
     {
         panel.SetActive(false);
+        Instance = this;
     }
     
     public void OnToggleValueChanged(bool isChecked)
@@ -70,6 +75,12 @@ public class DevTools : MonoBehaviour
     }
     
     private List<DebugCellView> cells = new List<DebugCellView>();
+    public IReadOnlyList<DebugCellView> DebugCells => cells;
+
+    public void MarkCell(BoardPosition position, bool enableMark = true)
+    {
+        cells.Find(elem => elem.Position.Equals(new BoardPosition(position.X, position.Y)))?.Mark(enabled);
+    }
     
     public void OnToggleCells(bool isChecked)
     {
@@ -99,6 +110,8 @@ public class DevTools : MonoBehaviour
         }
     }
 
+    
+
     public void OnDebug1Click()
     {
         CurrencyHellper.Purchase(Currency.Experience.Name, 500);
@@ -106,6 +119,10 @@ public class DevTools : MonoBehaviour
 
     public void OnDebug2Click()
     {
-        Debug.Log("OnDebug2Click");
+        var board = BoardService.Current.GetBoardById(0);
+        foreach (var pos in board.AreaAccessController.AvailiablePositions)
+        {
+            MarkCell(pos);
+        }
     }
 }

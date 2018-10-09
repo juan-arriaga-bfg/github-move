@@ -152,7 +152,7 @@ public class PathfindLockerComponent : ECSEntity
         while (current < freePieces.Count)
         {
             var piece = freePieces[current];
-            if (RecalcFor(piece, target))
+            if (RecalcFor(piece, target, new List<BoardPosition>(target) {changedPosition}))
                 current++;
         }
     }
