@@ -153,6 +153,12 @@ public class QuestsDataManager : IECSComponent, IDataManager
         foreach (var config in starterConfigs.Values)
         {
             QuestStarterEntity starter = InstantiateFromJson<QuestStarterEntity>(config);
+            
+            foreach (var condition in starter.Conditions)
+            {
+                starter.RegisterComponent(condition);
+            }
+            
             questStarters.Add(starter);
         }
     }
@@ -203,18 +209,6 @@ public class QuestsDataManager : IECSComponent, IDataManager
     private TaskEntity InstantiateTask(string id)
     {
         return InstantiateById<TaskEntity>(id);
-    }
-    
-    public QuestStarterEntity InstantiateQuestStarter(string id)
-    {
-        var starter = InstantiateById<QuestStarterEntity>(id);
-        
-        foreach (var condition in starter.Conditions)
-        {
-            starter.RegisterComponent(condition);
-        }
-
-        return starter;
     }
 
     public QuestEntity InstantiateQuest(string id)
