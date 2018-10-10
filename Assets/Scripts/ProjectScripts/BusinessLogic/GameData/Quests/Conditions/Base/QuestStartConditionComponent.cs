@@ -9,6 +9,17 @@ public abstract class QuestStartConditionComponent : IECSComponent, IECSSerializ
     
     [JsonProperty] public string Id { get; protected set; }
     
+#region Serialization
+
+    [JsonProperty] public string Value;   
+    
+    public bool ShouldSerializeValue()
+    {
+        return false;
+    }
+    
+#endregion
+    
     public void OnRegisterEntity(ECSEntity entity)
     {
 

@@ -24,10 +24,6 @@ MonoBehaviour:
     Link: 16Q9fxlFX40VRx6u1kwfMvWm1GuvK8MaGs117g5Pkd2g
     Route: parse
     Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestWeights":[{"Uid":"","Weight":0,"":"","Override":true}]}]'
-  - Key: quests
-    Link: 1jaDy9GfzL7SMM9wR1HHHD1kYRj1tjPZrnBw5ZLIT1tk
-    Route: parse
-    Pattern: '[{"Uid":0,"Price":{"Currency":"","Amount":0},"Rewards":[{"Currency":"","Amount":0}],"Conditions":[],"Message":""}]'
   - Key: mines
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseMines
@@ -72,3 +68,15 @@ MonoBehaviour:
     Link: 1MakAUEhU8pxDDasINjyEBIXVEZ3oPr3PMrisNbH650I
     Route: parse
     Pattern: '[{"Uid":"","Delay":0,"Prices":[{"Currency":"","Amount":0}],"Rewards":[{"Currency":"","Amount":0}]}]'
+  - Key: quests
+    Link: 1Y6MtoZhcHKgmmL96-rYsTV7Lp4LPYNm21jYc_xNPHXc
+    Route: parse
+    Pattern: '[{"Id":"","$type":"","TaskDefs":[{"TaskId":0}],"ComponentsCache":{"QuestRewardComponent":{"Value":[{"Currency":"","Amount": 0}]},"QuestDescriptionComponent":{"Ico":"","Title":"","Message":""}}}]'
+  - Key: questStarters
+    Link: 1npF9IT2A2bAW-Lslya3BYlIK7RCdDzceDIOxFCJbu80
+    Route: parse
+    Pattern: '[{"Id":"","$type":"","QuestToStartId":"","Conditions":[{"$type":"","Id":"","Value":""}]}]'
+  - Key: questTasks
+    Link: 1dvyzQoKk6OMhIC59EApw2vjebAdn4LxrbM7raQJAlXY
+    Route: parse
+    Pattern: '[{"$type":"","Id":"","":"","PieceUid":"","TargetValue":0,"Value1":0,"ComponentsCache":{"QuestDescriptionComponent":{"Ico":"","Title":"","Message":""}}}]'

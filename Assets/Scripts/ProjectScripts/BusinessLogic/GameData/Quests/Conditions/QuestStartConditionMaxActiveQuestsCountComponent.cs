@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 /// <summary>
@@ -15,5 +16,11 @@ public sealed class QuestStartConditionMaxActiveQuestsCountComponent : QuestStar
     {
         var quests = GameDataService.Current.QuestsManager.ActiveQuests;
         return quests != null && quests.Count <= Count;
+    }
+    
+    [OnDeserialized]
+    internal void OnDeserialized(StreamingContext context)
+    {
+        Count = int.Parse(Value);
     }
 }

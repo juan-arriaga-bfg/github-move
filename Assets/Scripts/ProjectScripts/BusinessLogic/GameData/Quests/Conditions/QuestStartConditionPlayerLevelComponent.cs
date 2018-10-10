@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 /// <summary>
@@ -14,5 +15,11 @@ public sealed class QuestStartConditionPlayerLevelComponent : QuestStartConditio
     public override bool Check()
     {
         return Level <= ProfileService.Current.GetStorageItem(Currency.Level.Name).Amount;
+    }
+    
+    [OnDeserialized]
+    internal void OnDeserialized(StreamingContext context)
+    {
+        Level = int.Parse(Value);
     }
 }

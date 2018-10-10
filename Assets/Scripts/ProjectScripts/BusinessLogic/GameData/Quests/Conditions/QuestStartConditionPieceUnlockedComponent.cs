@@ -17,19 +17,12 @@ public sealed class QuestStartConditionPieceUnlockedComponent : QuestStartCondit
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
     
-    [JsonProperty] private string PieceUid;
-    
     [JsonProperty] public int PieceId { get; protected set; }
     
     [OnDeserialized]
     internal void OnDeserialized(StreamingContext context)
     {
-        if (string.IsNullOrEmpty(PieceUid))
-        {
-            return;
-        }
-        
-        PieceId = PieceType.Parse(PieceUid);
+        PieceId = PieceType.Parse(Value);
     }
 
     public override bool Check()

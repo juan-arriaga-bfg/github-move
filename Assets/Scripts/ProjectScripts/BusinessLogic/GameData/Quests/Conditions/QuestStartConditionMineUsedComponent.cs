@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -11,6 +12,12 @@ public sealed class QuestStartConditionMineUsedComponent : QuestStartConditionCo
     public override int Guid => ComponentGuid;
     
     [JsonProperty] public string MineUid { get; protected set; }
+    
+    [OnDeserialized]
+    internal void OnDeserialized(StreamingContext context)
+    {
+        MineUid = Value;
+    }
 
     public override bool Check()
     {
