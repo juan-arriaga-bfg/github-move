@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -24,22 +25,18 @@ public class QuestStarterEntity : ECSEntity, IECSSerializeable
     
     [JsonProperty] public QuestStarterMode Mode { get; protected set; }
     
-    [JsonProperty] public List<string> ConditionIds { get; protected set; }
-
-    private List<QuestStartConditionComponent> conditions = new List<QuestStartConditionComponent>();
-    
     [JsonProperty] public string QuestToStartId { get; protected set; }
     
-    public override ECSEntity RegisterComponent(IECSComponent component, bool isCollection = false)
+    [JsonProperty] public List<QuestStartConditionComponent> Conditions = new List<QuestStartConditionComponent>();
+    
+#region Serialization
+    
+    public bool ShouldSerializeConditions()
     {
-        var conditionComponent = component as QuestStartConditionComponent;
-        if (conditionComponent != null)
-        {
-            conditions.Add(conditionComponent);
-        }
-        
-        return base.RegisterComponent(component, isCollection);
+        return false;
     }
+    
+#endregion
     
     public bool Check()
     {
@@ -76,11 +73,11 @@ public class QuestStarterEntity : ECSEntity, IECSSerializeable
 
         if (isTimeToStart)
         {
-            for (var i = 0; i < conditions.Count; i++)
+            for (var i = 0; i < Conditions.Count; i++)
             {
-                var condition = conditions[i];
+                var condition = Conditions[i];
                 var result    = condition.Check();
-                log += "\n" + $"Condition {i + 1}/{conditions.Count}: id: {condition.Id}, Result: {result}";
+                log += "\n" + $"Condition {i + 1}/{Conditions.Count}: id: {condition.Id}, Result: {result}";
 
                 if (!result)
                 {

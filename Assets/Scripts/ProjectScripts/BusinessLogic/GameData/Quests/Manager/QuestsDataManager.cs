@@ -60,9 +60,8 @@ public class QuestsDataManager : IECSComponent, IDataManager
         questStarters = null;
 
         cache = new Dictionary<Type, Dictionary<string, JToken>>();
-
-        LoadData<QuestStartConditionComponent>("configs/quests/conditions.data");
-        LoadData<QuestStarterEntity>          ("configs/quests/starters.data");
+        
+        LoadData<QuestStarterEntity>          ("configs/questStarters.data");
         LoadData<QuestEntity>                 ("configs/quests.data");
         LoadData<TaskEntity>                  ("configs/questTasks.data");
 
@@ -143,15 +142,6 @@ public class QuestsDataManager : IECSComponent, IDataManager
     public void CreateStarters()
     {
         questStarters = new List<QuestStarterEntity>();
-
-        // var s = InstantiateQuestStarter(@id: "1");
-        // questStarters.Add(s);
-        
-        for (int i = 1; i <= 30; i++)
-        {
-            var starter = InstantiateQuestStarter(i.ToString());
-            questStarters.Add(starter);
-        }
         
         Dictionary<string, JToken> starterConfigs;
         if (!cache.TryGetValue(typeof(QuestStarterEntity), out starterConfigs))
@@ -159,7 +149,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
             Debug.LogError($"[QuestsDataManager] => CreateStarters: Configs cache for type '{typeof(QuestStarterEntity)}' not found!");
             return;
         }
-
+        
         foreach (var config in starterConfigs.Values)
         {
             QuestStarterEntity starter = InstantiateFromJson<QuestStarterEntity>(config);
@@ -209,11 +199,6 @@ public class QuestsDataManager : IECSComponent, IDataManager
         
         return item;
     }
-
-    private QuestStartConditionComponent InstantiateCondition(string id)
-    {
-        return InstantiateById<QuestStartConditionComponent>(id);
-    }    
     
     private TaskEntity InstantiateTask(string id)
     {
@@ -223,9 +208,9 @@ public class QuestsDataManager : IECSComponent, IDataManager
     public QuestStarterEntity InstantiateQuestStarter(string id)
     {
         var starter = InstantiateById<QuestStarterEntity>(id);
-        foreach (var conditionId in starter.ConditionIds)
+        
+        foreach (var condition in starter.Conditions)
         {
-            var condition = InstantiateCondition(conditionId);
             starter.RegisterComponent(condition);
         }
 

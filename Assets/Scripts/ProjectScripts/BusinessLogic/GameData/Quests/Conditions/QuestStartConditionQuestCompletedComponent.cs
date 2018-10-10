@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 /// <summary>
@@ -14,5 +15,11 @@ public sealed class QuestStartConditionQuestCompletedComponent : QuestStartCondi
     public override bool Check()
     {
         return GameDataService.Current.QuestsManager.CompletedQuests.Contains(QuestId);
+    }
+    
+    [OnDeserialized]
+    internal void OnDeserialized(StreamingContext context)
+    {
+        QuestId = Value;
     }
 }
