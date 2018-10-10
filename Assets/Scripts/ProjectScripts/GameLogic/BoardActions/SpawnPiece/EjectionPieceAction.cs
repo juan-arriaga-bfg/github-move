@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class EjectionPieceAction : IBoardAction
 {
@@ -16,6 +17,8 @@ public class EjectionPieceAction : IBoardAction
 	{
 		var pieces = new Dictionary<BoardPosition, Piece>();
 
+		var positionsForLock = new List<BoardPosition>();
+		
 		foreach (var pair in Pieces)
 		{
 			var field = new List<BoardPosition>();
@@ -35,10 +38,11 @@ public class EjectionPieceAction : IBoardAction
 				}
 			
 				pieces.Add(pos, piece);
-				gameBoardController.BoardLogic.LockCell(pos, this);
+				positionsForLock.Add(pos);
 			}
 		}
 		
+		gameBoardController.BoardLogic.LockCells(positionsForLock, this);
 		gameBoardController.BoardLogic.LockCell(From, this);
 		
 		var animation = new ReproductionPieceAnimation
@@ -55,7 +59,13 @@ public class EjectionPieceAction : IBoardAction
 			{
 				gameBoardController.BoardLogic.UnlockCell(pair.Key, this);
 			}
+//			
+//			foreach (var piece in pieces.Values)
+//			{
+//				piece.PathfindLockObserver?.OnAddToBoard(piece.CachedPosition);
+//			}
 
+			Debug.LogError("Ejection completed");
 			OnComplete?.Invoke();
 		};
 		

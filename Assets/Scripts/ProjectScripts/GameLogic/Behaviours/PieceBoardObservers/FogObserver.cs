@@ -126,18 +126,21 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             thisContext.Context.ActionExecutor.AddAction(act);
             actions.Add(act);
         }
-        Debug.LogError($"SpawnPositions {string.Join(",", actions.Select(action => action.At))}");
+        
         GeneratePathfindRecalc(actions);
     }
 
     private void GeneratePathfindRecalc(List<CreatePieceAtAction> actions)
     {
-        actions.Last().OnComplete = () =>
+        actions.First().OnComplete = () =>
         {
+            //thisContext.Context.PathfindLocker.RecalcAll(thisContext.Context.AreaAccessController.AvailiablePositions);
             foreach (var act in actions)
             {
+                
                 var pos = act.At;
                 var piece = thisContext.Context.BoardLogic.GetPieceAt(pos);
+                
                 piece.PathfindLockObserver.OnAddToBoard(pos);
             }
 
