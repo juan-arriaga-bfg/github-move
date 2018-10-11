@@ -132,19 +132,20 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
     private void GeneratePathfindRecalc(List<CreatePieceAtAction> actions)
     {
-        actions.First().OnComplete = () =>
+        if (actions.Count == 0)
+            return;
+        
+        actions.Last().OnComplete = () =>
         {
-            //thisContext.Context.PathfindLocker.RecalcAll(thisContext.Context.AreaAccessController.AvailiablePositions);
-            foreach (var act in actions)
-            {
-                
-                var pos = act.At;
-                var piece = thisContext.Context.BoardLogic.GetPieceAt(pos);
-                
-                piece.PathfindLockObserver.OnAddToBoard(pos);
-            }
-
-            Debug.LogError("Callback Execute");
+            thisContext.Context.PathfindLocker.RecalcAll(thisContext.Context.AreaAccessController.AvailiablePositions);
+//            foreach (var act in actions)
+//            {
+//                
+//                var pos = act.At;
+//                var piece = thisContext.Context.BoardLogic.GetPieceAt(pos);
+//                
+//                piece.PathfindLockObserver.OnAddToBoard(pos);
+//            }
         };
     }
     
@@ -160,7 +161,16 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     {
 //      var canPath = thisContext.Context.Pathfinder.CanPathToCastle(thisContext);
         var canPath = thisContext.Context.PathfindLocker.HasPath(thisContext);
+        
+        
         var levelAccess = storageItem.Amount >= level;
+        
+        if (thisContext.CachedPosition.Equals(new BoardPosition(14, 6, 1)))
+        {
+            Debug.LogError($"Path for {thisContext.CachedPosition} exist {canPath}");
+            Debug.LogError($"LevelAccess for {thisContext.CachedPosition} = {levelAccess}");
+        }
+        
         if ((canPath ^ levelAccess) && lockView == null)
         {
             lockView = viewDef.AddView(ViewType.Lock) as LockView;

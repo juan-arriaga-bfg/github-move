@@ -115,22 +115,17 @@ public class PathfinderComponent:ECSEntity
     
     protected List<BoardPosition> AvailiablePositions(BoardPosition position, HashSet<BoardPosition> checkedPositions, Predicate<BoardPosition> predicate, ref List<BoardPosition> unavailiable)
     {
-        var uncheckedNeigbours = new List<BoardPosition>
-        {
-            position.Right,
-            position.Up,
-            position.Left,
-            position.Down
-        };
+        var uncheckedNeigbours = position.Neighbors();
         
         var checkedNeigbours = new List<BoardPosition>();
 
         for (var i = 0; i < uncheckedNeigbours.Count; i++)
         {
             var currentNeighbour = uncheckedNeigbours[i];
+            var targetPiece = board.BoardLogic.GetPieceAt(currentNeighbour);
             if(!checkedPositions.Contains(currentNeighbour) && predicate.Invoke(currentNeighbour))
                 checkedNeigbours.Add(currentNeighbour); 
-            else if(!unavailiable.Contains(currentNeighbour) && board.BoardLogic.GetPieceAt(currentNeighbour) != null)
+            else if(targetPiece != null && !unavailiable.Contains(currentNeighbour))
                 unavailiable.Add(currentNeighbour);
         }
         

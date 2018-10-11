@@ -32,7 +32,6 @@ public class PathfindLockerComponent : ECSEntity
 
     private void LockPathfinding(Piece piece)
     {
-        Debug.LogError($"{piece.CachedPosition}: is locked");
         var observer = piece.PathfindLockObserver;
         if (observer != null)
         {
@@ -45,7 +44,6 @@ public class PathfindLockerComponent : ECSEntity
 
     public void UnlockPathfinding(Piece piece)
     {
-        Debug.LogError($"{piece.CachedPosition}: unlock");
         var observer = piece.PathfindLockObserver;
         if (observer != null)
         {
@@ -63,11 +61,6 @@ public class PathfindLockerComponent : ECSEntity
         
         List<BoardPosition> pieceBlockers;
         
-        if (piece.CachedPosition.Equals(new BoardPosition(17, 8, 1)))
-        {
-            Debug.LogError($"Recalc for {piece.CachedPosition}");    
-        }
-        
         var defaultCondition = Pathfinder.GetCondition(piece);
         Predicate<BoardPosition> pathCondition = (pos) => ignorablePositions.Contains(pos) || defaultCondition(pos);
         
@@ -76,7 +69,6 @@ public class PathfindLockerComponent : ECSEntity
         {
             blockPathPieces.Remove(piece);
             freePieces.Add(piece);
-            //piece.Draggable?.Locker?.Unlock(this, true);
             UnlockPathfinding(piece);
             
         }
@@ -84,7 +76,7 @@ public class PathfindLockerComponent : ECSEntity
         {
             freePieces.Remove(piece);
             if(blockPathPieces.ContainsKey(piece) == false)
-                 LockPathfinding(piece); //piece.Draggable?.Locker?.Lock(this);
+                 LockPathfinding(piece);
             blockPathPieces[piece] = pieceBlockers;
         }
         
@@ -108,7 +100,7 @@ public class PathfindLockerComponent : ECSEntity
         if (freePieces.Contains(removedPiece))
             freePieces.Remove(removedPiece);
         if (blockPathPieces.ContainsKey(removedPiece))
-            freePieces.Remove(removedPiece);
+            blockPathPieces.Remove(removedPiece);
 
         RecalcBlocked(target, changedPosition);
     }
