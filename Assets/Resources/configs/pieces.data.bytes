@@ -38,66 +38,84 @@
   },
   {
     "Uid": "Char1",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 15
-    }
+    "CreateRewards": [
+      {
+        "Currency": "Mana",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "Char2",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 40
-    }
+    "CreateRewards": [
+      {
+        "Currency": "Mana",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "Char3",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 5
-    }
+    "CreateRewards": [
+      {
+        "Currency": "Mana",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "Char4",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 5
-    }
+    "CreateRewards": [
+      {
+        "Currency": "Mana",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "Char5",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 5
-    }
+    "CreateRewards": [
+      {
+        "Currency": "Mana",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "Char6",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 5
-    }
+    "CreateRewards": [
+      {
+        "Currency": "Mana",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "Char7",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 5
-    }
+    "CreateRewards": [
+      {
+        "Currency": "Mana",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "Char8",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 5
-    }
+    "CreateRewards": [
+      {
+        "Currency": "Mana",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "Char9",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 5
-    }
+    "CreateRewards": [
+      {
+        "Currency": "Mana",
+        "Amount": 1
+      }
+    ]
   },
   {
     "Uid": "Crystal1",
@@ -115,6 +133,12 @@
   },
   {
     "Uid": "Crystal2",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
     "SpawnResources": {
       "Currency": "Crystals",
       "Amount": 5
@@ -129,6 +153,12 @@
   },
   {
     "Uid": "Crystal3",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
     "SpawnResources": {
       "Currency": "Crystals",
       "Amount": 20
@@ -143,6 +173,12 @@
   },
   {
     "Uid": "Crystal4",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      }
+    ],
     "SpawnResources": {
       "Currency": "Crystals",
       "Amount": 75
@@ -157,6 +193,12 @@
   },
   {
     "Uid": "Crystal5",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 100
+      }
+    ],
     "SpawnResources": {
       "Currency": "Crystals",
       "Amount": 250
@@ -185,6 +227,12 @@
   },
   {
     "Uid": "Coin2",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
     "SpawnResources": {
       "Currency": "Coins",
       "Amount": 20
@@ -199,6 +247,12 @@
   },
   {
     "Uid": "Coin3",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
     "SpawnResources": {
       "Currency": "Coins",
       "Amount": 75
@@ -213,6 +267,12 @@
   },
   {
     "Uid": "Coin4",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
     "SpawnResources": {
       "Currency": "Coins",
       "Amount": 250
@@ -227,6 +287,12 @@
   },
   {
     "Uid": "Coin5",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      }
+    ],
     "SpawnResources": {
       "Currency": "Coins",
       "Amount": 1000
