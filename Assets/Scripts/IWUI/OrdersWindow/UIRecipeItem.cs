@@ -8,7 +8,7 @@ public class UIRecipeItem : UISimpleScrollItem
     private Material unlockMaterial;
     private Toggle toggle;
 
-    private void Start()
+    private void Awake()
     {
         unlockMaterial = icon.material;
     }
