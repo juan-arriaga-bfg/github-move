@@ -289,21 +289,6 @@ public static class CurrencyHellper
             return;
         }
         
-        if (currency == Currency.Mana.Name)
-        {
-            var def = GameDataService.Current.ShopManager.Defs[currency][0];
-            var model = UIService.Get.GetCachedModel<UIExchangeWindowModel>(UIWindowType.ExchangeWindow);
-            
-            model.Title = "Open Now!";
-            model.Message = "Buy the missing mana";
-            model.Products = new List<CurrencyPair>{new CurrencyPair{Currency = currency, Amount = diff}};
-            model.Price = new CurrencyPair {Currency = def.Price.Currency, Amount = def.Price.Amount * diff};
-            model.OnClick = onMessageConfirm;
-        
-            UIService.Get.ShowWindow(UIWindowType.ExchangeWindow);
-            return;
-        }
-        
         UIMessageWindowController.CreateNeedCurrencyMessage(currency);
     }
 }
