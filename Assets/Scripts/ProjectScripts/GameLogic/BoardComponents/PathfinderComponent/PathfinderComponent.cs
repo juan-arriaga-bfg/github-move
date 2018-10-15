@@ -125,8 +125,8 @@ public class PathfinderComponent:ECSEntity
             var targetPiece = board.BoardLogic.GetPieceAt(currentNeighbour);
             if(!checkedPositions.Contains(currentNeighbour) && predicate.Invoke(currentNeighbour))
                 checkedNeigbours.Add(currentNeighbour); 
-            else if(targetPiece != null && !unavailiable.Contains(currentNeighbour))
-                unavailiable.Add(currentNeighbour);
+            else if(targetPiece != null && !unavailiable.Contains(targetPiece.CachedPosition))
+                unavailiable.Add(targetPiece.CachedPosition);
         }
         
         return checkedNeigbours;

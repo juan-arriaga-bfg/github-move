@@ -80,7 +80,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         thisContext.Context.HintCooldown.RemoweView(view);
 
         List<CreatePieceAtAction> actions = new List<CreatePieceAtAction>();
-        List<BoardPosition> addedPieces = new List<BoardPosition>();
+        var addedPieces = new Dictionary<BoardPosition, int>();
         
         if(def.Pieces != null)
         {
@@ -95,14 +95,14 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                         pieceId = PieceType.Parse(piece.Key);
                     }
                     
-                    addedPieces.Add(new BoardPosition(pos.X, pos.Y, thisContext.Layer.Index));
-                    var act = new CreatePieceAtAction
-                    {
-                        At = pos,
-                        PieceTypeId = pieceId
-                    };
-                    thisContext.Context.ActionExecutor.AddAction(act);
-                    actions.Add(act);
+                    addedPieces.Add(new BoardPosition(pos.X, pos.Y, thisContext.Layer.Index), pieceId);
+//                    var act = new CreatePieceAtAction
+//                    {
+//                        At = pos,
+//                        PieceTypeId = pieceId
+//                    };
+//                    thisContext.Context.ActionExecutor.AddAction(act);
+//                    actions.Add(act);
                 }
             }
         }
@@ -114,41 +114,30 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         foreach (var point in Mask)
         {
             var piece = ItemWeight.GetRandomItem(weights).Piece;
-            
             if(piece == PieceType.Empty.Id) continue;
-            
-            addedPieces.Add(new BoardPosition(point.X, point.Y, thisContext.Layer.Index));
-            var act = new CreatePieceAtAction
-            {
-                At = point,
-                PieceTypeId = piece
-            };
-            thisContext.Context.ActionExecutor.AddAction(act);
-            actions.Add(act);
+            var position = new BoardPosition(point.X, point.Y, thisContext.Layer.Index);
+            if(addedPieces.ContainsKey(position) == false)
+                addedPieces.Add(position, piece);
         }
         
-        GeneratePathfindRecalc(actions);
+        thisContext.Context.ActionExecutor.AddAction(new CreateGroupPieces()
+        {
+            Pieces = addedPieces,
+            OnSuccessEvent = () =>
+            {
+                var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
+
+                if (views == null) return;
+        
+                foreach (var view in views)
+                {
+                    view.UpdateResource(0);
+                }
+            }
+        });
+
     }
 
-    private void GeneratePathfindRecalc(List<CreatePieceAtAction> actions)
-    {
-        if (actions.Count == 0)
-            return;
-        
-        actions.Last().OnComplete = () =>
-        {
-            thisContext.Context.PathfindLocker.RecalcAll(thisContext.Context.AreaAccessController.AvailiablePositions);
-//            foreach (var act in actions)
-//            {
-//                
-//                var pos = act.At;
-//                var piece = thisContext.Context.BoardLogic.GetPieceAt(pos);
-//                
-//                piece.PathfindLockObserver.OnAddToBoard(pos);
-//            }
-        };
-    }
-    
     public void RegisterCarrier(IResourceCarrier carrier)
     {
     }
@@ -164,13 +153,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         
         
         var levelAccess = storageItem.Amount >= level;
-        
-        if (thisContext.CachedPosition.Equals(new BoardPosition(14, 6, 1)))
-        {
-            Debug.LogError($"Path for {thisContext.CachedPosition} exist {canPath}");
-            Debug.LogError($"LevelAccess for {thisContext.CachedPosition} = {levelAccess}");
-        }
-        
+
         if ((canPath ^ levelAccess) && lockView == null)
         {
             lockView = viewDef.AddView(ViewType.Lock) as LockView;

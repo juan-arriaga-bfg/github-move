@@ -16,7 +16,6 @@ public class PathfindLockerComponent : ECSEntity
 
     private Dictionary<Piece, List<BoardPosition>> blockPathPieces = new Dictionary<Piece, List<BoardPosition>>();
     private List<Piece> freePieces = new List<Piece>();
-    private HashSet<BoardPosition> lastCheckedPositions = new HashSet<BoardPosition>();
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -42,7 +41,7 @@ public class PathfindLockerComponent : ECSEntity
         }
     }
 
-    public void UnlockPathfinding(Piece piece)
+    private void UnlockPathfinding(Piece piece)
     {
         var observer = piece.PathfindLockObserver;
         if (observer != null)
@@ -78,14 +77,26 @@ public class PathfindLockerComponent : ECSEntity
             if(blockPathPieces.ContainsKey(piece) == false)
                  LockPathfinding(piece);
             blockPathPieces[piece] = pieceBlockers;
+            if (piece.CachedPosition.Equals(new BoardPosition(15, 14, 1)))
+            {
+                Debug.LogError($"{piece.CachedPosition} blocked by {string.Join(",", blockPathPieces[piece])}");
+                foreach (var pos in blockPathPieces[piece])
+                {
+                    DevTools.Instance.MarkCell(pos);
+                    Debug.LogError($"{pos} lock {piece.CachedPosition}. Type = {PieceType.GetDefById(context.BoardLogic.GetPieceAt(pos).PieceType).Abbreviations.First()}");
+                }
+            }
+                
+            
         }
+        
+        
         
         return canPath;
     }
     
     public virtual void RecalcCacheOnPieceAdded(HashSet<BoardPosition> target, BoardPosition changedPosition, Piece piece, bool autoLock)
-    {
-        lastCheckedPositions = target;        
+    {    
         RecalcFree(target, changedPosition);
 
         if (autoLock)
@@ -97,12 +108,13 @@ public class PathfindLockerComponent : ECSEntity
     
     public virtual void RecalcCacheOnPieceRemoved(HashSet<BoardPosition> target , BoardPosition changedPosition, Piece removedPiece)
     {
+        Debug.LogError($"PathfindLocker execute on cell {removedPiece.CachedPosition}");
+        RecalcBlocked(target, removedPiece.CachedPosition);
+        
         if (freePieces.Contains(removedPiece))
             freePieces.Remove(removedPiece);
         if (blockPathPieces.ContainsKey(removedPiece))
             blockPathPieces.Remove(removedPiece);
-
-        RecalcBlocked(target, changedPosition);
     }
 
     public virtual void RecalcCacheOnPieceMoved(HashSet<BoardPosition> target, BoardPosition fromPosition, BoardPosition to, Piece piece,
@@ -123,15 +135,23 @@ public class PathfindLockerComponent : ECSEntity
             }
         }
 
-        lastCheckedPositions = target;
     }
 
     private void RecalcBlocked(HashSet<BoardPosition> target, BoardPosition changedPosition)
     {
+        var changedPositions = new List<BoardPosition>();
+        var sourcePiece = context.BoardLogic.GetPieceAt(changedPosition);
+        
+        if (sourcePiece?.Multicellular == null)
+            changedPositions.Add(changedPosition);
+        else
+            foreach (var maskItem in sourcePiece.Multicellular.Mask)
+                changedPositions.Add(sourcePiece.Multicellular.GetPointInMask(sourcePiece.CachedPosition, maskItem));
+
         foreach (var piece in blockPathPieces.Keys.ToList())
         {
             var blockers = blockPathPieces[piece];
-            if (!blockers.Contains(changedPosition))
+            if (!blockers.Any(elem => changedPositions.Contains(elem)))
                 continue;
 
             RecalcFor(piece, target, new List<BoardPosition>(target) {changedPosition});
@@ -151,7 +171,6 @@ public class PathfindLockerComponent : ECSEntity
 
     public virtual void RecalcAll(HashSet<BoardPosition> target)
     {
-        lastCheckedPositions = target;
         
         var allPieces = blockPathPieces.Keys.ToList();
         allPieces.AddRange(freePieces);
