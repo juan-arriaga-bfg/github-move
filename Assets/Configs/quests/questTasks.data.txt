@@ -124,17 +124,6 @@
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "13",
-    "PieceUid": "B2",
-    "TargetValue": 3,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Message": "Create Piece"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "14",
     "PieceUid": "A5",
     "TargetValue": 2,
@@ -174,17 +163,6 @@
       "QuestDescriptionComponent": {
         "Ico": "Fog_1",
         "Message": "Clear a fog"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "18",
-    "PieceUid": "B3",
-    "TargetValue": 2,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Message": "Create Piece"
       }
     }
   },

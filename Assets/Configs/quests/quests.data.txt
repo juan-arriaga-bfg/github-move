@@ -364,40 +364,6 @@
     }
   },
   {
-    "Id": 13,
-    "$type": "QuestEntity, Assembly-CSharp",
-    "TaskDefs": [
-      {
-        "TaskId": "13"
-      }
-    ],
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coin1",
-            "Amount": 1
-          },
-          {
-            "Currency": "Coin2",
-            "Amount": 2
-          },
-          {
-            "Currency": "Mana",
-            "Amount": 30
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 30
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Title": "Quest 13"
-      }
-    }
-  },
-  {
     "Id": 14,
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
@@ -522,40 +488,6 @@
       },
       "QuestDescriptionComponent": {
         "Title": "Quest 17"
-      }
-    }
-  },
-  {
-    "Id": 18,
-    "$type": "QuestEntity, Assembly-CSharp",
-    "TaskDefs": [
-      {
-        "TaskId": "18"
-      }
-    ],
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coin1",
-            "Amount": 1
-          },
-          {
-            "Currency": "Coin2",
-            "Amount": 3
-          },
-          {
-            "Currency": "Mana",
-            "Amount": 50
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 50
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Title": "Quest 18"
       }
     }
   },

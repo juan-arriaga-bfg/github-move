@@ -51,21 +51,7 @@
         "Amount": 5
       }
     ],
-    "Chest": "Chest1",
-    "OrdersWeights": [
-      {
-        "Uid": "Order1",
-        "Weight": 10
-      },
-      {
-        "Uid": "Order2",
-        "Weight": 10
-      },
-      {
-        "Uid": "Order3",
-        "Weight": 10
-      }
-    ]
+    "Chest": "Chest1"
   },
   {
     "Index": 4,
@@ -86,11 +72,7 @@
     "Chest": "Chest1",
     "OrdersWeights": [
       {
-        "Uid": "Order4",
-        "Weight": 10
-      },
-      {
-        "Uid": "Order3",
+        "Uid": "Order1",
         "Weight": 10
       },
       {
@@ -98,11 +80,11 @@
         "Weight": 10
       },
       {
-        "Uid": "Order6",
+        "Uid": "Order3",
         "Weight": 10
       },
       {
-        "Uid": "Order5",
+        "Uid": "Order4",
         "Weight": 10
       }
     ]
@@ -126,19 +108,19 @@
     "Chest": "Chest2",
     "OrdersWeights": [
       {
-        "Uid": "Order6",
-        "Weight": 10
-      },
-      {
-        "Uid": "Order2",
-        "Weight": 10
-      },
-      {
-        "Uid": "Order3",
+        "Uid": "Order4",
         "Weight": 10
       },
       {
         "Uid": "Order5",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order6",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order7",
         "Weight": 10
       }
     ]
@@ -162,7 +144,19 @@
     "Chest": "Chest2",
     "OrdersWeights": [
       {
+        "Uid": "Order7",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order8",
+        "Weight": 10
+      },
+      {
         "Uid": "Order9",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order10",
         "Weight": 10
       }
     ]
@@ -186,12 +180,20 @@
     "Chest": "Chest2",
     "OrdersWeights": [
       {
-        "Uid": "Order1",
-        "Weight": 0,
+        "Uid": "Order9",
+        "Weight": 10,
         "Override": true
       },
       {
         "Uid": "Order10",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order11",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order12",
         "Weight": 10
       }
     ]

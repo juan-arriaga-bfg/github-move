@@ -151,23 +151,6 @@
     ]
   },
   {
-    "Id": 13,
-    "$type": "QuestStarterEntity, Assembly-CSharp",
-    "QuestToStartId": "13",
-    "Conditions": [
-      {
-        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
-        "Id": "QuestCompleted",
-        "Value": "2"
-      },
-      {
-        "$type": "QuestStartConditionMaxActiveQuestsCountComponent, Assembly-CSharp",
-        "Id": "MaxActiveQuestsCount",
-        "Value": "4"
-      }
-    ]
-  },
-  {
     "Id": 14,
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "QuestToStartId": "14",
@@ -212,18 +195,6 @@
         "$type": "QuestStartConditionPlayerLevelComponent, Assembly-CSharp",
         "Id": "PlayerLevel",
         "Value": "4"
-      }
-    ]
-  },
-  {
-    "Id": 18,
-    "$type": "QuestStarterEntity, Assembly-CSharp",
-    "QuestToStartId": "18",
-    "Conditions": [
-      {
-        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
-        "Id": "QuestCompleted",
-        "Value": "13"
       }
     ]
   },

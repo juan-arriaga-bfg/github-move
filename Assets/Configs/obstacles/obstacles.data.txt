@@ -48,11 +48,11 @@
         "Weight": 50
       },
       {
-        "Uid": "B1",
+        "Uid": "E1",
         "Weight": 5
       },
       {
-        "Uid": "F1",
+        "Uid": "D1",
         "Weight": 2
       }
     ],
@@ -97,7 +97,7 @@
         "Weight": 2
       },
       {
-        "Uid": "F1",
+        "Uid": "D1",
         "Weight": 2
       },
       {
@@ -107,10 +107,6 @@
       {
         "Uid": "A2",
         "Weight": 20
-      },
-      {
-        "Uid": "B1",
-        "Weight": 2
       }
     ],
     "ChestWeights": [
@@ -154,12 +150,8 @@
         "Weight": 50
       },
       {
-        "Uid": "J1",
+        "Uid": "D1",
         "Weight": 2
-      },
-      {
-        "Uid": "B1",
-        "Weight": 10
       },
       {
         "Uid": "F1",
@@ -211,12 +203,11 @@
         "Weight": 50
       },
       {
-        "Uid": "J1",
+        "Uid": "D1",
         "Weight": 2
       },
       {
-        "Uid": "B1",
-        "Weight": 10
+        "Uid": "E1"
       },
       {
         "Uid": "H1",
@@ -272,11 +263,11 @@
         "Weight": 2
       },
       {
-        "Uid": "I2",
+        "Uid": "D1",
         "Weight": 2
       },
       {
-        "Uid": "I1",
+        "Uid": "E1",
         "Weight": 2
       },
       {
@@ -469,10 +460,14 @@
         "Amount": 10
       }
     ],
-    "PieceAmount": 2,
+    "PieceAmount": 3,
     "PieceWeights": [
       {
-        "Uid": "F1",
+        "Uid": "D1",
+        "Weight": 10
+      },
+      {
+        "Uid": "E1",
         "Weight": 10
       }
     ],
@@ -508,7 +503,7 @@
         "Weight": 10
       },
       {
-        "Uid": "A1",
+        "Uid": "D1",
         "Weight": 10
       },
       {
@@ -544,23 +539,19 @@
     "PieceAmount": 4,
     "PieceWeights": [
       {
-        "Uid": "B1",
-        "Weight": 5
-      },
-      {
-        "Uid": "A1",
-        "Weight": 10
-      },
-      {
-        "Uid": "A2",
-        "Weight": 10
-      },
-      {
         "Uid": "F1",
-        "Weight": 15
+        "Weight": 10
+      },
+      {
+        "Uid": "D1",
+        "Weight": 10
       },
       {
         "Uid": "E1",
+        "Weight": 15
+      },
+      {
+        "Uid": "G1",
         "Weight": 15
       }
     ],
@@ -592,27 +583,19 @@
     "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": "I1",
-        "Weight": 5
+        "Uid": "D1",
+        "Weight": 10
       },
       {
         "Uid": "F1",
         "Weight": 15
       },
       {
-        "Uid": "A1",
-        "Weight": 10
-      },
-      {
-        "Uid": "A2",
-        "Weight": 10
-      },
-      {
-        "Uid": "J1",
-        "Weight": 10
-      },
-      {
         "Uid": "E1",
+        "Weight": 10
+      },
+      {
+        "Uid": "G1",
         "Weight": 15
       }
     ],
@@ -645,6 +628,10 @@
     "PieceWeights": [
       {
         "Uid": "F1",
+        "Weight": 10
+      },
+      {
+        "Uid": "G1",
         "Weight": 10
       },
       {
