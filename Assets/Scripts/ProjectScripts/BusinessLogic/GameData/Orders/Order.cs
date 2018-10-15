@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine.UI;
 
 public enum OrderState
 {
@@ -48,6 +49,26 @@ public class Order
         {
             state = value;
             OnStateChange?.Invoke();
+
+            ResourcesViewManager.Instance.GetFirstViewById(Currency.Order.Name)?.UpdateResource(0);
+        }
+    }
+
+    public void SetMark(Image mark)
+    {
+        switch (state)
+        {
+            case OrderState.Enough:
+                mark.gameObject.SetActive(true);
+                mark.sprite = IconService.Current.GetSpriteById("icon_Warning");
+                break;
+            case OrderState.Complete:
+                mark.gameObject.SetActive(true);
+                mark.sprite = IconService.Current.GetSpriteById("icon_Complete");
+                break;
+            default:
+                mark.gameObject.SetActive(false);
+                break;
         }
     }
     

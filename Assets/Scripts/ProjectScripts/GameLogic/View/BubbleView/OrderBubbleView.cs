@@ -17,7 +17,7 @@ public class OrderBubbleView : UIBoardView
 
 	public override void Init(Piece piece)
 	{
-		Ofset = new Vector3(0, 2f);
+		Ofset = new Vector3(0, 1.5f);
 		
 		base.Init(piece);
         
@@ -34,12 +34,9 @@ public class OrderBubbleView : UIBoardView
 	{
 		if (customer == null) return;
 		
-		mark.gameObject.SetActive(customer.Order.State == OrderState.Waiting || customer.Order.State == OrderState.Complete);
+		customer.Order.SetMark(mark);
 		
 		icon.sprite = IconService.Current.GetSpriteById(customer.Order.State == OrderState.Init ? "codexQuestion" : customer.Order.Def.Uid);
-		
-		if(customer.Order.State == OrderState.Waiting) mark.sprite = IconService.Current.GetSpriteById("icon_Warning");
-		if(customer.Order.State == OrderState.Complete) mark.sprite = IconService.Current.GetSpriteById("icon_Complete");
 	}
 
 	public override void OnDrag(bool isEnd)

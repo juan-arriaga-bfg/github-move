@@ -21,14 +21,10 @@ public class UIOrderItem : UISimpleScrollItem
 
 		UpdateIndicator();
 	}
-
+	
 	public void UpdateIndicator()
 	{
-		var isShowIndicator = order.State == OrderState.Complete || order.State == OrderState.Enough;
-		
-		indicator.gameObject.SetActive(isShowIndicator);
-
-		if (isShowIndicator) indicator.sprite = IconService.Current.GetSpriteById($"icon_{(order.State == OrderState.Enough ? "Warning" : "Complete")}");
+		order.SetMark(indicator);
 	}
 
 	public void Select(bool isSelect)
