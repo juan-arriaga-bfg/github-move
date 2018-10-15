@@ -10,6 +10,7 @@ public class UIOrdersWindowModel : IWWindowModel
     public string RecipesText => "Recipes";
 
     public bool IsRecipes;
+    public Order Select; 
 
     public List<OrderDef> Recipes => GameDataService.Current.OrdersManager.Recipes;
     public List<Order> Orders => GameDataService.Current.OrdersManager.Orders;

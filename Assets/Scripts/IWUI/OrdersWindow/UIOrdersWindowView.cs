@@ -66,7 +66,8 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
             item.Init(order);
             orders.Add(item);
         }
-        
+
+        windowModel.Select = null;
         patternOrder.SetActive(false);
         
         message.gameObject.SetActive(data.Count == 0);
@@ -110,8 +111,6 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
     private void UpdateLists()
     {
         UIOrdersWindowModel windowModel = Model as UIOrdersWindowModel;
-        
-        if(orders.Count > 0) orders[0].GetComponent<Toggle>().isOn = true;
         
         var data = windowModel.Recipes;
 

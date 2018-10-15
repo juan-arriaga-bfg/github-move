@@ -102,6 +102,9 @@ public class UIMainWindowView : IWUIWindowView
     
     public void OnClickOrders()
     {
+        var model = UIService.Get.GetCachedModel<UIOrdersWindowModel>(UIWindowType.OrdersWindow);
+        if(model.Orders != null && model.Orders.Count > 0) model.Select = model.Orders[0];
+        
         UIService.Get.ShowWindow(UIWindowType.OrdersWindow);
     }
     

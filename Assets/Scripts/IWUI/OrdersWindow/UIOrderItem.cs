@@ -15,7 +15,7 @@ public class UIOrderItem : UISimpleScrollItem
 		
 		if (toggle == null) toggle = gameObject.GetComponent<Toggle>();
 		
-		toggle.isOn = false;
+		toggle.isOn = UIService.Get.GetCachedModel<UIOrdersWindowModel>(UIWindowType.OrdersWindow).Select == order;
 		
 		Init(order.Def.Uid, order.Reward.Replace(Order.Separator, "\n"));
 

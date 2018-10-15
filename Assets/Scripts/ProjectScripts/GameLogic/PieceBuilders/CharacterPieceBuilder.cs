@@ -21,6 +21,9 @@
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0, OnMake = success =>
 					{
+						var model = UIService.Get.GetCachedModel<UIOrdersWindowModel>(UIWindowType.OrdersWindow);
+						model.Select = customer.Order;
+						
 						customer.UpdateState(OrderState.Waiting);
 					}
 				}
