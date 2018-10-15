@@ -74,6 +74,7 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
         if (Orders.Count >= GameDataService.Current.ConstantsManager.MaxOrders) return null;
         
         if (sequence.Count == 0) UpdateSequence();
+        if (sequence.Count == 0) return null;
 
         var recipe = Recipes[sequence[0]];
         var order = new Order{Customer = customer, Def = recipe};

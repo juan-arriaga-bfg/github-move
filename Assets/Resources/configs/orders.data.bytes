@@ -4,32 +4,8 @@
     "Delay": 10,
     "Prices": [
       {
-        "Currency": "D4",
-        "Amount": 2
-      }
-    ],
-    "Rewards": [
-      {
-        "Currency": "Mana",
-        "Amount": 10
-      },
-      {
-        "Currency": "Coins",
-        "Amount": 20
-      }
-    ]
-  },
-  {
-    "Uid": "Order2",
-    "Delay": 20,
-    "Prices": [
-      {
-        "Currency": "D4",
-        "Amount": 1
-      },
-      {
-        "Currency": "E4",
-        "Amount": 2
+        "Currency": "F4",
+        "Amount": 3
       }
     ],
     "Rewards": [
@@ -39,25 +15,21 @@
       },
       {
         "Currency": "Coins",
-        "Amount": 40
+        "Amount": 10
       }
     ]
   },
   {
-    "Uid": "Order3",
-    "Delay": 30,
+    "Uid": "Order2",
+    "Delay": 20,
     "Prices": [
       {
         "Currency": "F4",
-        "Amount": 3
+        "Amount": 2
       },
       {
-        "Currency": "G4",
-        "Amount": 10
-      },
-      {
-        "Currency": "I4",
-        "Amount": 22
+        "Currency": "E4",
+        "Amount": 1
       }
     ],
     "Rewards": [
@@ -67,7 +39,31 @@
       },
       {
         "Currency": "Coins",
-        "Amount": 60
+        "Amount": 20
+      }
+    ]
+  },
+  {
+    "Uid": "Order3",
+    "Delay": 30,
+    "Prices": [
+      {
+        "Currency": "E4",
+        "Amount": 2
+      },
+      {
+        "Currency": "J4",
+        "Amount": 2
+      }
+    ],
+    "Rewards": [
+      {
+        "Currency": "Mana",
+        "Amount": 75
+      },
+      {
+        "Currency": "Coins",
+        "Amount": 20
       }
     ]
   },
@@ -76,26 +72,26 @@
     "Delay": 40,
     "Prices": [
       {
+        "Currency": "J4",
+        "Amount": 1
+      },
+      {
+        "Currency": "E4",
+        "Amount": 2
+      },
+      {
         "Currency": "F4",
         "Amount": 3
-      },
-      {
-        "Currency": "G4",
-        "Amount": 10
-      },
-      {
-        "Currency": "I4",
-        "Amount": 22
       }
     ],
     "Rewards": [
       {
         "Currency": "Mana",
-        "Amount": 70
+        "Amount": 100
       },
       {
         "Currency": "Coins",
-        "Amount": 80
+        "Amount": 30
       }
     ]
   },
@@ -108,22 +104,22 @@
         "Amount": 3
       },
       {
-        "Currency": "G4",
-        "Amount": 10
+        "Currency": "J4",
+        "Amount": 4
       },
       {
         "Currency": "I4",
-        "Amount": 22
+        "Amount": 2
       }
     ],
     "Rewards": [
       {
         "Currency": "Mana",
-        "Amount": 90
+        "Amount": 150
       },
       {
         "Currency": "Coins",
-        "Amount": 100
+        "Amount": 50
       }
     ]
   },
@@ -147,11 +143,11 @@
     "Rewards": [
       {
         "Currency": "Mana",
-        "Amount": 110
+        "Amount": 100
       },
       {
         "Currency": "Coins",
-        "Amount": 120
+        "Amount": 50
       }
     ]
   },
@@ -175,11 +171,11 @@
     "Rewards": [
       {
         "Currency": "Mana",
-        "Amount": 130
+        "Amount": 100
       },
       {
         "Currency": "Coins",
-        "Amount": 140
+        "Amount": 50
       }
     ]
   },
@@ -203,11 +199,11 @@
     "Rewards": [
       {
         "Currency": "Mana",
-        "Amount": 150
+        "Amount": 100
       },
       {
         "Currency": "Coins",
-        "Amount": 160
+        "Amount": 50
       }
     ]
   },
@@ -231,11 +227,11 @@
     "Rewards": [
       {
         "Currency": "Mana",
-        "Amount": 170
+        "Amount": 100
       },
       {
         "Currency": "Coins",
-        "Amount": 180
+        "Amount": 50
       }
     ]
   },
@@ -259,7 +255,7 @@
     "Rewards": [
       {
         "Currency": "Mana",
-        "Amount": 190
+        "Amount": 100
       }
     ]
   }
