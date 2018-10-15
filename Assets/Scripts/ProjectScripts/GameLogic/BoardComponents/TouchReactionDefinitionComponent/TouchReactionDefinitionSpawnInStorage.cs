@@ -17,7 +17,7 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
 
         if (storage == null) return false;
         
-        if(!storage.isSpawnResource && !piece.Context.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, storage.Filling))
+        if(!storage.IsSpawnResource && !piece.Context.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, storage.Filling))
         {
             UIErrorWindowController.AddError("Free space not found");
             return false;
@@ -39,7 +39,7 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
         
         storage.OnHideBubble = null;
 
-        if (storage.isSpawnResource)
+        if (storage.IsSpawnResource)
         {
             AddResourceView.Show(position, new CurrencyPair{Currency = Currency.GetCurrencyDef(storage.SpawnPiece).Name, Amount = amount});
             return;

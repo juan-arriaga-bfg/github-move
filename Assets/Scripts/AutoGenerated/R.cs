@@ -158,4 +158,5 @@ public class R
      public const string ChestEpic1Piece = "ChestEpic1Piece";
      public const string ChestEpic2Piece = "ChestEpic2Piece";
      public const string ChestEpic3Piece = "ChestEpic3Piece";
+     public const string OrderBubbleView = "OrderBubbleView";
 }

@@ -15,17 +15,7 @@
         "Amount": 5
       }
     ],
-    "Chest": "Chest1",
-    "OrdersWeights": [
-      {
-        "Uid": "Order1",
-        "Weight": 10
-      },
-      {
-        "Uid": "Order2",
-        "Weight": 10
-      }
-    ]
+    "Chest": "Chest1"
   },
   {
     "Index": 2,
@@ -43,23 +33,13 @@
         "Amount": 10
       }
     ],
-    "Chest": "Chest1",
-    "OrdersWeights": [
-      {
-        "Uid": "Order3",
-        "Weight": 10
-      },
-      {
-        "Uid": "Order4",
-        "Weight": 10
-      }
-    ]
+    "Chest": "Chest1"
   },
   {
     "Index": 3,
     "Price": {
       "Currency": "Experience",
-      "Amount": 1000
+      "Amount": 700
     },
     "Rewards": [
       {
@@ -74,11 +54,15 @@
     "Chest": "Chest1",
     "OrdersWeights": [
       {
-        "Uid": "Order5",
+        "Uid": "Order1",
         "Weight": 10
       },
       {
-        "Uid": "Order6",
+        "Uid": "Order2",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order3",
         "Weight": 10
       }
     ]
@@ -87,7 +71,7 @@
     "Index": 4,
     "Price": {
       "Currency": "Experience",
-      "Amount": 1500
+      "Amount": 1000
     },
     "Rewards": [
       {
@@ -102,7 +86,23 @@
     "Chest": "Chest1",
     "OrdersWeights": [
       {
-        "Uid": "Order7",
+        "Uid": "Order4",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order3",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order2",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order6",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order5",
         "Weight": 10
       }
     ]
@@ -111,7 +111,7 @@
     "Index": 5,
     "Price": {
       "Currency": "Experience",
-      "Amount": 2000
+      "Amount": 1500
     },
     "Rewards": [
       {
@@ -126,7 +126,19 @@
     "Chest": "Chest2",
     "OrdersWeights": [
       {
-        "Uid": "Order8",
+        "Uid": "Order6",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order2",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order3",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order5",
         "Weight": 10
       }
     ]
@@ -135,7 +147,7 @@
     "Index": 6,
     "Price": {
       "Currency": "Experience",
-      "Amount": 3500
+      "Amount": 2000
     },
     "Rewards": [
       {

@@ -1,15 +1,30 @@
-﻿using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class UIRecipeItem : UISimpleScrollItem
 {
+    [SerializeField] private Material lockMaterial;
+    
+    private Material unlockMaterial;
     private Toggle toggle;
+
+    private void Start()
+    {
+        unlockMaterial = icon.material;
+    }
 
     public void Init(OrderDef recipe)
     {
         if (toggle == null) toggle = gameObject.GetComponent<Toggle>();
 
-        toggle.isOn = false;
+        var isLock = recipe.Level > GameDataService.Current.LevelsManager.Level;
         
-        Init(recipe.Uid, "99");
+        toggle.isOn = false;
+        toggle.interactable = !isLock;
+
+        icon.material = isLock ? lockMaterial : unlockMaterial;
+        
+        Init(recipe.Uid, $"Level {recipe.Level}");
+        label.gameObject.SetActive(isLock);
     }
 }

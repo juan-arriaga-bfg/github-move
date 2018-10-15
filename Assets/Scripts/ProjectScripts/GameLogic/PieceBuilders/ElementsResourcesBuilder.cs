@@ -261,6 +261,7 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.Warning, R.Warning);
         dict.Add((int)ViewType.Lock, R.LockView);
         dict.Add((int)ViewType.Cell, R.Cell);
+        dict.Add((int)ViewType.OrderBubble, R.OrderBubbleView);
         
         return dict;
     }

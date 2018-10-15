@@ -46,7 +46,6 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new BoardLogicComponent() // core logic
             .RegisterComponent(new PiecePositionsCacheComponent())
             .RegisterComponent(new FieldFinderComponent())
-            .RegisterComponent(new CharactersLogicComponent())
             .RegisterComponent(new CellHintsComponent())
             .RegisterComponent(new PieceFlyerComponent()
                 .RegisterComponent(new LockerComponent()))

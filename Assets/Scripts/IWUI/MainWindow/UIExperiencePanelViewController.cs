@@ -73,6 +73,7 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
             RefillEnergy();
             
             GameDataService.Current.QuestsManager.CheckConditions();
+            GameDataService.Current.OrdersManager.UpdateSequence();
             
         }, null, true);
         

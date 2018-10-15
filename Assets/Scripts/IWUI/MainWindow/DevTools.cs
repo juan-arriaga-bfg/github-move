@@ -120,18 +120,6 @@ public class DevTools : MonoBehaviour
     public void OnDebug1Click()
     {
         Debug.Log("OnDebug1Click");
-
-        var a1 = GameDataService.Current.MinesManager.All;
-        var a2 = GameDataService.Current.MinesManager.Moved;
-        var a3 = GameDataService.Current.MinesManager.Removed;
-
-        int i = 0;
-
-        // BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, null);
-        // BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
-        // BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
-
-        // QuestService.Current.Serialize();
     }
 
     public void OnDebug2Click()

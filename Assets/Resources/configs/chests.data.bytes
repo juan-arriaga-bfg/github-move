@@ -252,17 +252,38 @@
     "PieceAmount": 7,
     "PieceWeights": [
       {
-        "Uid": "J4",
-        "Weight": 2,
+        "Uid": "B1",
+        "Weight": 10,
+        "Override": true
+      },
+      {
+        "Uid": "A1",
+        "Weight": 10,
         "Override": true
       },
       {
         "Uid": "A2",
-        "Weight": 30
+        "Weight": 10,
+        "Override": true
       },
       {
-        "Uid": "F4",
-        "Weight": 2,
+        "Uid": "I1",
+        "Weight": 10,
+        "Override": true
+      },
+      {
+        "Uid": "E1",
+        "Weight": 10,
+        "Override": true
+      },
+      {
+        "Uid": "F1",
+        "Weight": 10,
+        "Override": true
+      },
+      {
+        "Uid": "J1",
+        "Weight": 10,
         "Override": true
       }
     ]
@@ -550,7 +571,7 @@
       },
       {
         "Uid": "B1",
-        "Weight": 5,
+        "Weight": 15,
         "Override": true
       },
       {
@@ -585,7 +606,7 @@
       },
       {
         "Uid": "B1",
-        "Weight": 5,
+        "Weight": 10,
         "Override": true
       },
       {

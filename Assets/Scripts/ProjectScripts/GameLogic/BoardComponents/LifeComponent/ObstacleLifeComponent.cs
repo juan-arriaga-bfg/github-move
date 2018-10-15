@@ -39,11 +39,7 @@
         {
             From = thisContext.CachedPosition,
             Pieces = pieces,
-            OnComplete = () =>
-            {
-                OnSpawnRewards();
-                thisContext.Context.HintCooldown.Step(HintType.Obstacle);
-            }
+            OnComplete = OnSpawnRewards
         };
     }
 

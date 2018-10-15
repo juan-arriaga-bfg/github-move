@@ -6,5 +6,5 @@ public class LevelsDef
     public string Chest;
     public CurrencyPair Price;
     public List<CurrencyPair> Rewards;
-    public List<ItemWeight> OrdersWeights;
+    public List<ItemWeight> OrdersWeights = new List<ItemWeight>();
 }

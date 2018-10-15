@@ -12,5 +12,5 @@ public class UIOrdersWindowModel : IWWindowModel
     public bool IsRecipes;
 
     public List<OrderDef> Recipes => GameDataService.Current.OrdersManager.Recipes;
-    public List<OrderDef> Orders => GameDataService.Current.OrdersManager.Orders;
+    public List<Order> Orders => GameDataService.Current.OrdersManager.Orders;
 }

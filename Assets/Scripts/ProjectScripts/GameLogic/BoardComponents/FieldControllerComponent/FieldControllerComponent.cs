@@ -90,7 +90,7 @@ public class FieldControllerComponent : IECSComponent
 
     private void TestFieldOleg()
     {
-        AddPieces(new BoardPosition(24, 12), PieceType.O1.Id,  PieceType.O9.Id);
+        /*AddPieces(new BoardPosition(24, 12), PieceType.O1.Id,  PieceType.O9.Id);
         AddPieces(new BoardPosition(25, 12), PieceType.OX1.Id, PieceType.OX9.Id);
         AddPieces(new BoardPosition(6, 16), PieceType.OEpic1.Id, PieceType.OEpic9.Id);
         
@@ -113,9 +113,9 @@ public class FieldControllerComponent : IECSComponent
         
         AddPieces(new BoardPosition(28, 10), PieceType.ChestK1.Id, PieceType.ChestK3.Id);
         AddPieces(new BoardPosition(28, 14), PieceType.ChestL1.Id, PieceType.ChestL3.Id);
-        AddPieces(new BoardPosition(28, 18), PieceType.ChestC1.Id, PieceType.ChestC3.Id);
+        AddPieces(new BoardPosition(28, 18), PieceType.ChestC1.Id, PieceType.ChestC3.Id);*/
         
-        AddPieces(new BoardPosition(29, 16), PieceType.Char1.Id, PieceType.Char1.Id);
+        AddPieces(new BoardPosition(29, 16), PieceType.Char1.Id, PieceType.Char9.Id);
     }
     
     private void TestFieldAlex()

@@ -16,8 +16,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
     [SerializeField] private ScrollRect ordersScroll;
     [SerializeField] private ScrollRect recipesScroll;
     
-    [SerializeField] private UIOrdersSelectItem selectItem;
-    
+    [SerializeField] private GameObject selectItem;
     [SerializeField] private GameObject patternOrder;
     [SerializeField] private GameObject patternRecipe;
 
@@ -55,10 +54,10 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         ordersLabelOn.Text = ordersLabelOff.Text = windowModel.OrdersText;
         recipesLabelOn.Text = recipesLabelOff.Text = windowModel.RecipesText;
 
-        ordersToggle.isOn = windowModel.IsRecipes;
-        recipesToggle.isOn = !windowModel.IsRecipes;
+        ordersToggle.isOn = !windowModel.IsRecipes;
+        recipesToggle.isOn = windowModel.IsRecipes;
         
-        var data = windowModel.Orders;
+        var data = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
         
         foreach (var order in data)
         {
@@ -71,7 +70,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         patternOrder.SetActive(false);
         
         message.gameObject.SetActive(data.Count == 0);
-        selectItem.gameObject.SetActive(data.Count > 0);
+        selectItem.SetActive(data.Count > 0);
         
         UpdateLists();
     }
@@ -98,6 +97,14 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         patternRecipe.SetActive(true);
         
         patternRecipe.GetComponent<Toggle>().isOn = true;
+    }
+
+    public void UpdateOrders()
+    {
+        foreach (var order in orders)
+        {
+            order.UpdateIndicator();
+        }
     }
 
     private void UpdateLists()

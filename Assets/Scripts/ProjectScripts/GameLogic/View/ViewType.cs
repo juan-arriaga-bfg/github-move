@@ -14,4 +14,5 @@
     Warning = -1010,
     Lock = -1011,
     Cell = -1012,
+    OrderBubble = -1013,
 }

@@ -19,6 +19,9 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     public int MinDelayBounceBubble;
     public int MaxDelayBounceBubble;
     
+    public int MaxOrders;
+    public int NextOrderDelay;
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
