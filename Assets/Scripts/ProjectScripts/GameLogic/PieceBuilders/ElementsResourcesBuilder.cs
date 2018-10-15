@@ -225,6 +225,7 @@ public class ElementsResourcesBuilder
         
         dict.Add(PieceType.Magic1.Id, R.Magic1Piece);
         dict.Add(PieceType.Magic2.Id, R.Magic2Piece);
+        dict.Add(PieceType.Magic3.Id, R.Magic3Piece);
         dict.Add(PieceType.Magic.Id, R.MagicPiece);
         
         return dict;

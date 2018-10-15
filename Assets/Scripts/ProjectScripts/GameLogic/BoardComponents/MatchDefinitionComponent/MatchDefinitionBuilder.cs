@@ -240,8 +240,9 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.Crystal5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Crystal4.Id});
         
         dict.Add(PieceType.Magic1.Id, new PieceMatchDef {Next = PieceType.Magic2.Id, Previous = PieceType.None.Id,   Count = 3});
-        dict.Add(PieceType.Magic2.Id, new PieceMatchDef {Next = PieceType.Magic.Id,  Previous = PieceType.Magic1.Id, Count = 3});
-        dict.Add(PieceType.Magic.Id,  new PieceMatchDef {Next = PieceType.None.Id,   Previous = PieceType.Magic2.Id });
+        dict.Add(PieceType.Magic2.Id, new PieceMatchDef {Next = PieceType.Magic3.Id,  Previous = PieceType.Magic1.Id, Count = 3});
+        dict.Add(PieceType.Magic3.Id, new PieceMatchDef {Next = PieceType.Magic.Id,  Previous = PieceType.Magic2.Id, Count = 3});
+        dict.Add(PieceType.Magic.Id,  new PieceMatchDef {Next = PieceType.None.Id,   Previous = PieceType.Magic3.Id });
         
         return dict;
     }

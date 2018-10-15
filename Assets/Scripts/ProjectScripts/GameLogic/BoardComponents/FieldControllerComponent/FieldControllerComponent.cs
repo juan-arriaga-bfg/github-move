@@ -21,7 +21,7 @@ public class FieldControllerComponent : IECSComponent
         
 #if UNITY_EDITOR
 //        TestFieldOleg(); return;
-//        TestFieldAlex(); return;
+        TestFieldAlex(); return;
 //        TestFieldQA(); return;
 #endif
         

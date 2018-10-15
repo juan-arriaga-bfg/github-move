@@ -293,5 +293,6 @@ public static partial class PieceType
     
     public static readonly PieceTypeDef Magic1 = new PieceTypeDef{Id = 1000001, Abbreviations = new List<string>{ "Magic1" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef Magic2 = new PieceTypeDef{Id = 1000002, Abbreviations = new List<string>{ "Magic2" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef Magic  = new PieceTypeDef{Id = 1000003, Abbreviations = new List<string>{ "Magic"  }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Booster};
+    public static readonly PieceTypeDef Magic3 = new PieceTypeDef{Id = 1000003, Abbreviations = new List<string>{ "Magic3" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef Magic  = new PieceTypeDef{Id = 1000004, Abbreviations = new List<string>{ "Magic"  }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Booster};
 }

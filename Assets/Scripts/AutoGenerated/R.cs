@@ -114,9 +114,6 @@ public class R
      public const string Crystal3Piece = "Crystal3Piece";
      public const string Crystal4Piece = "Crystal4Piece";
      public const string Crystal5Piece = "Crystal5Piece";
-     public const string MagicPiece = "MagicPiece";
-     public const string Magic1Piece = "Magic1Piece";
-     public const string Magic2Piece = "Magic2Piece";
      public const string ChestA1Piece = "ChestA1Piece";
      public const string ChestA2Piece = "ChestA2Piece";
      public const string ChestA3Piece = "ChestA3Piece";
@@ -159,4 +156,8 @@ public class R
      public const string ChestEpic2Piece = "ChestEpic2Piece";
      public const string ChestEpic3Piece = "ChestEpic3Piece";
      public const string OrderBubbleView = "OrderBubbleView";
+     public const string Magic1Piece = "Magic1Piece";
+     public const string Magic2Piece = "Magic2Piece";
+     public const string Magic3Piece = "Magic3Piece";
+     public const string MagicPiece = "MagicPiece";
 }
