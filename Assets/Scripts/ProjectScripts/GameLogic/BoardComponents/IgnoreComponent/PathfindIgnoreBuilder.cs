@@ -59,6 +59,11 @@ public static class PathfindIgnoreBuilder
          PieceType.OEpic7.Id,
          PieceType.OEpic8.Id,
          PieceType.OEpic9.Id,
+         PieceType.ObstacleD.Id,
+         PieceType.ObstacleE.Id,
+         PieceType.ObstacleF.Id,
+         PieceType.ObstacleG.Id,
+         PieceType.ObstacleH.Id,
          PieceType.Fog.Id
       });
       
@@ -89,6 +94,11 @@ public static class PathfindIgnoreBuilder
       dict.Add(PieceType.OEpic7.Id, obstacleIgnorePices);
       dict.Add(PieceType.OEpic8.Id, obstacleIgnorePices);
       dict.Add(PieceType.OEpic9.Id, obstacleIgnorePices);
+      dict.Add(PieceType.ObstacleD.Id, obstacleIgnorePices);
+      dict.Add(PieceType.ObstacleE.Id, obstacleIgnorePices);
+      dict.Add(PieceType.ObstacleF.Id, obstacleIgnorePices);
+      dict.Add(PieceType.ObstacleG.Id, obstacleIgnorePices);
+      dict.Add(PieceType.ObstacleH.Id, obstacleIgnorePices);
    }
    
    private static void InitMines(Dictionary<int, HashSet<int>> dict)
@@ -122,6 +132,11 @@ public static class PathfindIgnoreBuilder
          PieceType.OEpic7.Id,
          PieceType.OEpic8.Id,
          PieceType.OEpic9.Id,
+         PieceType.ObstacleD.Id,
+         PieceType.ObstacleE.Id,
+         PieceType.ObstacleF.Id,
+         PieceType.ObstacleG.Id,
+         PieceType.ObstacleH.Id,
          PieceType.Fog.Id
       });
       
@@ -161,6 +176,11 @@ public static class PathfindIgnoreBuilder
          PieceType.OEpic7.Id,
          PieceType.OEpic8.Id,
          PieceType.OEpic9.Id,
+         PieceType.ObstacleD.Id,
+         PieceType.ObstacleE.Id,
+         PieceType.ObstacleF.Id,
+         PieceType.ObstacleG.Id,
+         PieceType.ObstacleH.Id,
          PieceType.Fog.Id
       });
       

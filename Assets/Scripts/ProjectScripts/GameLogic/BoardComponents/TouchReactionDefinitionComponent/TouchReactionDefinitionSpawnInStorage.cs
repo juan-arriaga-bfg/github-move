@@ -23,7 +23,7 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
             return false;
         }
         
-        storage.OnHideBubble = () => { Spawn(position, piece); };
+        storage.OnHideBubble = () => { Spawn(position, piece, storage); };
 
         if (storage.Scatter(out amount, IsAutoStart)) return true;
         
@@ -31,10 +31,8 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
         return false;
     }
 
-    private void Spawn(BoardPosition position, Piece piece)
+    private void Spawn(BoardPosition position, Piece piece, StorageComponent storage)
     {
-        var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
-
         if (storage == null) return;
         
         storage.OnHideBubble = null;

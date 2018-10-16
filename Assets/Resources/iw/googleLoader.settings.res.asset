@@ -47,7 +47,7 @@ MonoBehaviour:
   - Key: piecesReproduction
     Link: 1DMxuJpSv3tZUMNKTQXEB2HQ2d7xPCpoLjB5ZEV00kUI
     Route: parse
-    Pattern: '[{"Uid":"","Delay":0,"Limit":0,"FastPrice":{"Currency":"","Amount":0},"StepReward":{"Currency":"","Amount":0},"Reproduction":{"Currency":"","Amount":0}}]'
+    Pattern: '[{"Uid":"","Delay":0,"Limit":0,"FastPrice":{"Currency":"","Amount":0},"StepReward":{"Currency":"","Amount":0},"Reproduction":{"Currency":"","Amount":0},"Obstacle":""}]'
   - Key: piecesMaking
     Link: 1XjQudoqqkn2yyjonWc_R1fAyQNprQRJuw4zphfjE2rY
     Route: parse

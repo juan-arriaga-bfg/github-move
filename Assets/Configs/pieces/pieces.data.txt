@@ -46,85 +46,31 @@
     ]
   },
   {
-    "Uid": "Char1",
-    "CreateRewards": [
-      {
-        "Currency": "Mana",
-        "Amount": 1
-      }
-    ]
+    "Uid": "Char1"
   },
   {
-    "Uid": "Char2",
-    "CreateRewards": [
-      {
-        "Currency": "Mana",
-        "Amount": 1
-      }
-    ]
+    "Uid": "Char2"
   },
   {
-    "Uid": "Char3",
-    "CreateRewards": [
-      {
-        "Currency": "Mana",
-        "Amount": 1
-      }
-    ]
+    "Uid": "Char3"
   },
   {
-    "Uid": "Char4",
-    "CreateRewards": [
-      {
-        "Currency": "Mana",
-        "Amount": 1
-      }
-    ]
+    "Uid": "Char4"
   },
   {
-    "Uid": "Char5",
-    "CreateRewards": [
-      {
-        "Currency": "Mana",
-        "Amount": 1
-      }
-    ]
+    "Uid": "Char5"
   },
   {
-    "Uid": "Char6",
-    "CreateRewards": [
-      {
-        "Currency": "Mana",
-        "Amount": 1
-      }
-    ]
+    "Uid": "Char6"
   },
   {
-    "Uid": "Char7",
-    "CreateRewards": [
-      {
-        "Currency": "Mana",
-        "Amount": 1
-      }
-    ]
+    "Uid": "Char7"
   },
   {
-    "Uid": "Char8",
-    "CreateRewards": [
-      {
-        "Currency": "Mana",
-        "Amount": 1
-      }
-    ]
+    "Uid": "Char8"
   },
   {
-    "Uid": "Char9",
-    "CreateRewards": [
-      {
-        "Currency": "Mana",
-        "Amount": 1
-      }
-    ]
+    "Uid": "Char9"
   },
   {
     "Uid": "Crystal1",
@@ -1293,30 +1239,6 @@
     ]
   },
   {
-    "Uid": "C12",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 100
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 150
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 150
-      }
-    ],
-    "Name": "Castle",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 130
-      }
-    ]
-  },
-  {
     "Uid": "D1",
     "Name": "Little sheep",
     "UnlockBonus": [
@@ -1376,11 +1298,35 @@
   },
   {
     "Uid": "D4",
-    "Name": "Wool",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
+    "Name": "D4",
     "UnlockBonus": [
       {
         "Currency": "Coins",
         "Amount": 8
+      }
+    ]
+  },
+  {
+    "Uid": "D5",
+    "Name": "Wool",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
       }
     ],
     "ExchangePrice": {
@@ -1448,11 +1394,35 @@
   },
   {
     "Uid": "E4",
-    "Name": "Apple",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
+    "Name": "E4",
     "UnlockBonus": [
       {
         "Currency": "Coins",
         "Amount": 8
+      }
+    ]
+  },
+  {
+    "Uid": "E5",
+    "Name": "Apple",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
       }
     ],
     "ExchangePrice": {
@@ -1520,11 +1490,35 @@
   },
   {
     "Uid": "F4",
-    "Name": "Corn",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
+    "Name": "F4",
     "UnlockBonus": [
       {
         "Currency": "Coins",
         "Amount": 8
+      }
+    ]
+  },
+  {
+    "Uid": "F5",
+    "Name": "Corn",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
       }
     ],
     "ExchangePrice": {
@@ -1592,11 +1586,35 @@
   },
   {
     "Uid": "G4",
-    "Name": "Milk",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
+    "Name": "G4",
     "UnlockBonus": [
       {
         "Currency": "Coins",
         "Amount": 8
+      }
+    ]
+  },
+  {
+    "Uid": "G5",
+    "Name": "Milk",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
       }
     ],
     "ExchangePrice": {
@@ -1664,11 +1682,35 @@
   },
   {
     "Uid": "H4",
-    "Name": "Egg",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
+    "Name": "H4",
     "UnlockBonus": [
       {
         "Currency": "Coins",
         "Amount": 8
+      }
+    ]
+  },
+  {
+    "Uid": "H5",
+    "Name": "Egg",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
       }
     ],
     "ExchangePrice": {
@@ -1736,11 +1778,35 @@
   },
   {
     "Uid": "I4",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
     "Name": "I4 Piece",
     "UnlockBonus": [
       {
         "Currency": "Coins",
         "Amount": 8
+      }
+    ]
+  },
+  {
+    "Uid": "I5",
+    "Name": "I5 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
       }
     ],
     "ExchangePrice": {
@@ -1808,11 +1874,35 @@
   },
   {
     "Uid": "J4",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
     "Name": "J4 Piece",
     "UnlockBonus": [
       {
         "Currency": "Coins",
         "Amount": 8
+      }
+    ]
+  },
+  {
+    "Uid": "J5",
+    "Name": "J5 Piece",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
       }
     ],
     "ExchangePrice": {

@@ -29,7 +29,7 @@ public class PieceBuildersBuilder
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.B1.Id, PieceType.B5.Id, dict);
         
-        dict = AddBuildingBranchPiece(dict, PieceType.C1.Id, PieceType.C12.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.C1.Id, PieceType.C11.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.K1.Id, PieceType.K10.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.L1.Id, PieceType.L9.Id);
         
@@ -50,13 +50,13 @@ public class PieceBuildersBuilder
 
     private Dictionary<int, IPieceBuilder> AddEnergyBranchPiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict = AddEnergyBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.D1.Id, PieceType.D4.Id);
-        dict = AddEnergyBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.E1.Id, PieceType.E4.Id);
-        dict = AddEnergyBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.F1.Id, PieceType.F4.Id);
-        dict = AddEnergyBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.G1.Id, PieceType.G4.Id);
-        dict = AddEnergyBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.H1.Id, PieceType.H4.Id);
-        dict = AddEnergyBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.I1.Id, PieceType.I4.Id);
-        dict = AddEnergyBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.J1.Id, PieceType.J4.Id);
+        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.D1.Id, PieceType.D5.Id);
+        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.E1.Id, PieceType.E5.Id);
+        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.F1.Id, PieceType.F5.Id);
+        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.G1.Id, PieceType.G5.Id);
+        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.H1.Id, PieceType.H5.Id);
+        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.I1.Id, PieceType.I5.Id);
+        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.J1.Id, PieceType.J5.Id);
         
         return dict;
     }
@@ -66,6 +66,7 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.O1.Id, PieceType.O9.Id, dict);
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OX1.Id, PieceType.OX9.Id, dict);
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OEpic1.Id, PieceType.OEpic9.Id, dict);
+        dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.ObstacleD.Id, PieceType.ObstacleH.Id, dict);
         
         dict.Add(PieceType.Fog.Id, new FogPieceBuilder());
         
@@ -116,13 +117,13 @@ public class PieceBuildersBuilder
         return dict;
     }
     
-    private Dictionary<int, IPieceBuilder> AddEnergyBranchPiece<TA, TB>(Dictionary<int, IPieceBuilder> dict, int idMin, int idMax)
+    private Dictionary<int, IPieceBuilder> AddReproductionBranchPiece<TA, TB>(Dictionary<int, IPieceBuilder> dict, int idMin, int idMax)
         where TA : IPieceBuilder, new()
         where TB : IPieceBuilder, new()
     {
-        dict = AddSimplePiece<TA>(idMin, idMin + 1, dict);
+        dict = AddSimplePiece<TA>(idMin, idMax - 2, dict);
         
-        dict.Add(idMin + 2, new TB());
+        dict.Add(idMax - 1, new TB());
         dict.Add(idMax, new TA());
         
         return dict;

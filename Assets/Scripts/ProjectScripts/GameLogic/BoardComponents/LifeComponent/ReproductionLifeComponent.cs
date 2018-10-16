@@ -98,7 +98,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
         {
             IsCheckMatch = false,
             At = thisContext.CachedPosition,
-            PieceTypeId = PieceType.OX1.Id
+            PieceTypeId = def.ObstacleType
         });
     }
 

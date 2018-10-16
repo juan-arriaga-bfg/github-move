@@ -60,6 +60,12 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.OEpic8.Id, R.OEpicPiece);
         dict.Add(PieceType.OEpic9.Id, R.OEpicPiece);
         
+        dict.Add(PieceType.ObstacleD.Id, R.ObstacleDPiece);
+        dict.Add(PieceType.ObstacleE.Id, R.ObstacleEPiece);
+        dict.Add(PieceType.ObstacleF.Id, R.ObstacleFPiece);
+        dict.Add(PieceType.ObstacleG.Id, R.ObstacleGPiece);
+        dict.Add(PieceType.ObstacleH.Id, R.ObstacleHPiece);
+        
         dict.Add(PieceType.A1.Id, R.A1Piece);
         dict.Add(PieceType.A2.Id, R.A2Piece);
         dict.Add(PieceType.A3Fake.Id, R.A3Piece);
@@ -103,43 +109,48 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.C10.Id, R.C10Piece);
         dict.Add(PieceType.C11Fake.Id, R.C11Piece);
         dict.Add(PieceType.C11.Id, R.C11Piece);
-        dict.Add(PieceType.C12Fake.Id, R.C12Piece);
-        dict.Add(PieceType.C12.Id, R.C12Piece);
         
         dict.Add(PieceType.D1.Id, R.D1Piece);
         dict.Add(PieceType.D2.Id, R.D2Piece);
         dict.Add(PieceType.D3.Id, R.D3Piece);
         dict.Add(PieceType.D4.Id, R.D4Piece);
+        dict.Add(PieceType.D5.Id, R.D5Piece);
         
         dict.Add(PieceType.E1.Id, R.E1Piece);
         dict.Add(PieceType.E2.Id, R.E2Piece);
         dict.Add(PieceType.E3.Id, R.E3Piece);
         dict.Add(PieceType.E4.Id, R.E4Piece);
+        dict.Add(PieceType.E5.Id, R.E5Piece);
         
         dict.Add(PieceType.F1.Id, R.F1Piece);
         dict.Add(PieceType.F2.Id, R.F2Piece);
         dict.Add(PieceType.F3.Id, R.F3Piece);
         dict.Add(PieceType.F4.Id, R.F4Piece);
+        dict.Add(PieceType.F5.Id, R.F5Piece);
         
         dict.Add(PieceType.G1.Id, R.G1Piece);
         dict.Add(PieceType.G2.Id, R.G2Piece);
         dict.Add(PieceType.G3.Id, R.G3Piece);
         dict.Add(PieceType.G4.Id, R.G4Piece);
+        dict.Add(PieceType.G5.Id, R.G5Piece);
         
         dict.Add(PieceType.H1.Id, R.H1Piece);
         dict.Add(PieceType.H2.Id, R.H2Piece);
         dict.Add(PieceType.H3.Id, R.H3Piece);
         dict.Add(PieceType.H4.Id, R.H4Piece);
+        dict.Add(PieceType.H5.Id, R.H5Piece);
         
         dict.Add(PieceType.I1.Id, R.I1Piece);
         dict.Add(PieceType.I2.Id, R.I2Piece);
         dict.Add(PieceType.I3.Id, R.I3Piece);
         dict.Add(PieceType.I4.Id, R.I4Piece);
+        dict.Add(PieceType.I5.Id, R.I5Piece);
         
         dict.Add(PieceType.J1.Id, R.J1Piece);
         dict.Add(PieceType.J2.Id, R.J2Piece);
         dict.Add(PieceType.J3.Id, R.J3Piece);
         dict.Add(PieceType.J4.Id, R.J4Piece);
+        dict.Add(PieceType.J5.Id, R.J5Piece);
         
         dict.Add(PieceType.K1.Id, R.K1Piece);
         dict.Add(PieceType.K2.Id, R.K2Piece);

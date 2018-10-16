@@ -99,7 +99,7 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     {
         ObstacleDef def;
 
-        if (Obstacles.TryGetValue(piece, out def) == false) return PieceType.None.Id;
+        if (Obstacles.TryGetValue(piece, out def) == false || def.ChestWeights == null) return PieceType.None.Id;
         
         var item = ItemWeight.GetRandomItem(def.ChestWeights);
         
