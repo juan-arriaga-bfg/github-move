@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBuilder
 {
@@ -28,19 +29,10 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         var countForMatchDefault = definition.GetPieceCountForMatch(pieceType);
         
         if (countForMatchDefault == -1 || countForMatch < countForMatchDefault) return null;
-
-        var countForMatchBonus = countForMatchDefault * 2 - 1;
-        var nextPieces = new List<int>();
-
-        if (countForMatch % countForMatchBonus == 0)
-        {
-            nextPieces = Add(countForMatchDefault == 1 ? countForMatch : (countForMatch / countForMatchBonus) * 2, nextType, nextPieces);
-        }
-        else
-        {
-            nextPieces = Add(countForMatch / countForMatchDefault, nextType, nextPieces);
-            nextPieces = Add(countForMatch - (countForMatch / countForMatchDefault) * countForMatchDefault, pieceType, nextPieces);
-        }
+        
+        var nextPieces = Add(Mathf.RoundToInt(countForMatch / 3f), nextType, new List<int>());
+        
+        if(countForMatch % 3 == 1) nextPieces = Add(1, pieceType, nextPieces);
 
         var nextAction = new SpawnPiecesAction
         {
