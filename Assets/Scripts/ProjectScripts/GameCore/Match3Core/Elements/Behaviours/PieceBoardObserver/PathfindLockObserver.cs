@@ -9,13 +9,6 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
 
     protected Piece piece;
     protected BoardController board;
-
-    public readonly List<LockerComponent> Lockers;
-
-    public PathfindLockObserver(params LockerComponent[] lockers)
-    {
-        Lockers = lockers.ToList();
-    }
     
     private static List<PathfindLockObserver> nonLoaded = new List<PathfindLockObserver>();
 
@@ -30,7 +23,7 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
         }
         nonLoaded.Clear();
     }
-
+    
     public bool AutoLock = true;
     
     public virtual void OnRegisterEntity(ECSEntity entity)

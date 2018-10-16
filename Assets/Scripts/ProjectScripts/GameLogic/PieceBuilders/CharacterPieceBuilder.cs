@@ -36,11 +36,7 @@ public class CharacterPieceBuilder : GenericPieceBuilder
 			.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
 				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
 
-		AddPathfindLockObserver(piece, true,  new List<LockerComponent>
-		{
-			piece.Draggable.Locker, 
-			piece.TouchReaction.ReactionCondition.Locker
-		});
+		AddPathfindLockObserver(piece, true);
 		
 		return piece;
 	}

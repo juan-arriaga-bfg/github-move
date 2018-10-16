@@ -34,19 +34,16 @@ public class GenericPieceBuilder : IPieceBuilder
         piece.RegisterComponent(new MatchablePieceComponent());
     }
 
-    protected void AddPathfindLockObserver(Piece piece, bool autoLock, IEnumerable<LockerComponent> lockers)
+    protected void AddPathfindLockObserver(Piece piece, bool autoLock)
     {   
         if (piece.PathfindLockObserver != null)
         {
             var lockObserver = piece.PathfindLockObserver;
             lockObserver.AutoLock = autoLock;
-            lockObserver.Lockers.Clear();
-            lockObserver.Lockers.AddRange(lockers);
             return;
         }
         
         var pathfindLockObserver = new PathfindLockObserver() {AutoLock = autoLock};
-        pathfindLockObserver.Lockers.AddRange(lockers);
         AddObserver(piece, pathfindLockObserver);
         piece.RegisterComponent(pathfindLockObserver);
     }

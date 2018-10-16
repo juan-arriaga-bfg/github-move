@@ -14,10 +14,7 @@ public class FogPieceBuilder : MulticellularPieceBuilder
         
         CreateViewComponent(piece);
         
-        AddPathfindLockObserver(piece, true, new List<LockerComponent>
-        {
-            piece.TouchReaction.ReactionCondition.Locker
-        });
+        AddPathfindLockObserver(piece, true);
         
         return piece;
     }

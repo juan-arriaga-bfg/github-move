@@ -122,12 +122,12 @@ public class DevTools : MonoBehaviour
         var board = BoardService.Current.GetBoardById(0);
         foreach (var elem in board.BoardLogic.BoardEntities.Values)
         {
-            var lockers = elem.PathfindLockObserver.Lockers;
-            if(lockers.Count == 0)
-                continue;
-            var locker = lockers.First();
-            if(locker.IsLocked)
-                MarkCell(elem.CachedPosition);
+//            var lockers = elem.PathfindLockObserver.Lockers;
+//            if(lockers.Count == 0)
+//                continue;
+//            var locker = lockers.First();
+//            if(locker.IsLocked)
+//                MarkCell(elem.CachedPosition);
         }
     }
 }

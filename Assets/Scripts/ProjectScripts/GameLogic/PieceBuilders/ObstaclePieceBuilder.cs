@@ -36,10 +36,7 @@ public class ObstaclePieceBuilder : GenericPieceBuilder
 		
 		AddObserver(piece, new AreaRecalculateObserver());
 		
-		AddPathfindLockObserver(piece, true, new List<LockerComponent>()
-		{
-			piece.TouchReaction.Locker
-		});
+		AddPathfindLockObserver(piece, true);
 		
 		return piece;
 	}

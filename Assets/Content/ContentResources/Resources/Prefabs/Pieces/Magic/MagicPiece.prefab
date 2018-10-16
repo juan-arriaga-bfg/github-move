@@ -298,12 +298,14 @@ MonoBehaviour:
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 4992854153274830}
-  sprite: {fileID: 0}
+  sprite: {fileID: 212563891028986222}
   errorSelectionMaterial: {fileID: 2100000, guid: 1faf170e9acf1d64f86eefcd318ff557,
     type: 2}
   defaultSelectionMaterial: {fileID: 2100000, guid: cbc475da5f4748047a7b2d276ac8a4ff,
     type: 2}
   highlightPieceMaterial: {fileID: 2100000, guid: 8df69b780d2d9354c8ffb9b8293c73ad,
+    type: 2}
+  reactionLockMaterial: {fileID: 2100000, guid: 1b93d1c97a7697840bb4fb1f9377e698,
     type: 2}
 --- !u!198 &198254519643896722
 ParticleSystem:

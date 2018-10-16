@@ -21,8 +21,6 @@ public class SimplePieceBuilder : GenericPieceBuilder
             AddObserver(piece, observer);
         }
 
-        var pathfindLockers = new List<LockerComponent>() {piece.Draggable.Locker};
-
         piece.RegisterComponent(
             new PiecePathfindBoardCondition(piece.Context, piece)
                 .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)
@@ -36,10 +34,9 @@ public class SimplePieceBuilder : GenericPieceBuilder
                 .RegisterComponent(new TouchReactionDefinitionCollectResource())
                 .RegisterComponent(new TouchReactionConditionComponent()));
             
-            pathfindLockers.Add(piece.TouchReaction.Locker);
         }
 
-        AddPathfindLockObserver(piece, true, pathfindLockers);
+        AddPathfindLockObserver(piece, true);
         
         return piece;
     }

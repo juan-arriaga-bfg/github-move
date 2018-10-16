@@ -4,12 +4,12 @@
 	{
 		var board = piece.Context;
 		
-		if (Locker.IsLocked/*boardController?.Pathfinder.CanPathToCastle(piece) == false*/)
-		{
-			if(board.PathfindLocker.HasPath(piece) == false)
-				UIErrorWindowController.AddError("Path not found");
-			return false;
-		}
+//		if (Locker.IsLocked/*boardController?.Pathfinder.CanPathToCastle(piece) == false*/)
+//		{
+//			if(board.PathfindLocker.HasPath(piece) == false)
+//				UIErrorWindowController.AddError("Path not found");
+//			return false;
+//		}
 		
 		var key = new BoardPosition(position.X, position.Y);
 		var def = GameDataService.Current.FogsManager.GetDef(key);

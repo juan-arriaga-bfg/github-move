@@ -10,6 +10,7 @@ public class PieceBoardElementView : BoardElementView
     [SerializeField] private Material errorSelectionMaterial;
     [SerializeField] private Material defaultSelectionMaterial;
     [SerializeField] private Material highlightPieceMaterial;
+    [SerializeField] private Material reactionLockMaterial;
 
     private Animation cachedSelectionAnimation;
 
@@ -42,8 +43,28 @@ public class PieceBoardElementView : BoardElementView
         }
 
         lastBoardPosition = piece.CachedPosition;
-        
-        
+
+        if (reactionLockMaterial == null)
+        {
+            var obj = ContentService.Current.GetObjectByName("pieces.grayscale") as Material;
+            reactionLockMaterial = obj;
+            Debug.LogError(obj.name);
+        }
+             
+        CheckLock();
+    }
+
+    private void CheckLock()
+    {
+        foreach (var item in Piece.ComponentsCache.Values)
+        {
+            if (item is ILockerComponent && ((ILockerComponent) item).Locker?.IsLocked == true)
+            {
+                ToggleLockView(true);
+                return;
+            }
+        }
+        ToggleLockView(false);
     }
 
     protected virtual void OnEnable()
@@ -98,16 +119,40 @@ public class PieceBoardElementView : BoardElementView
 
     public virtual void UpdateView()
     {
+        
+    }
+
+    public virtual void ToggleLockView(bool enabled)
+    {
+        if (reactionLockMaterial == null)
+            return;
+        
+        if (cachedRenderers == null || cachedRenderers.size <= 0)
+            CacheLayers();
+        
+        Debug.LogError($"{Piece.CachedPosition} toggle set {enabled}");
+        
+        foreach (var rend in cachedRenderers)
+        {
+            if (rend?.CachedRenderer?.sharedMaterial == null) continue;
+            
+            if (enabled)
+            {
+                rend.CacheDefaultMaterial();
+                sprite.material = reactionLockMaterial;
+            }
+            else
+            {
+                rend.ResetDefaultMaterial();
+            }
+        }
+        
+        
     }
     
     public virtual void ToggleHighlight(bool enabled)
     {
-        if (highlightPieceMaterial == null)
-        {
-            return;
-        }
-
-        if (IsHighlighted == enabled)
+        if (highlightPieceMaterial == null || IsHighlighted == enabled)
         {
             return;
         }
