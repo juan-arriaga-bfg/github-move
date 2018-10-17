@@ -18,12 +18,13 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
     public List<OrderDef> Recipes;
     public List<Order> Orders;
     
-    private List<int> sequence = new List<int>();
+    private List<int> sequence;
     
     public void Reload()
     {
         Recipes = new List<OrderDef>();
         Orders = new List<Order>();
+        sequence = new List<int>();
         LoadData(new ResourceConfigDataMapper<List<OrderDef>>("configs/orders.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 

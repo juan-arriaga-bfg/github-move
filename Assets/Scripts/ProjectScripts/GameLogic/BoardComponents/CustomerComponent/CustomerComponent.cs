@@ -142,6 +142,7 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         CurrencyHellper.Purchase(new CurrencyPair{Currency = Currency.Order.Name, Amount = 1}, Order.Def.Prices,
             success =>
             {
+                GameDataService.Current.OrdersManager.UpdateOrders();
                 Order.State = OrderState.InProgress;
                 Timer?.Start();
             });
