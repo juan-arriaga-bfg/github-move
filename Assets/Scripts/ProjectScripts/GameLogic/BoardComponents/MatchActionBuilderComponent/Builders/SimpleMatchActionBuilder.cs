@@ -30,9 +30,9 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         
         if (countForMatchDefault == -1 || countForMatch < countForMatchDefault) return null;
         
-        var nextPieces = Add(Mathf.RoundToInt(countForMatch / 3f), nextType, new List<int>());
+        var nextPieces = Add(Mathf.RoundToInt(countForMatch / (float)countForMatchDefault), nextType, new List<int>());
         
-        if(countForMatch % 3 == 1) nextPieces = Add(1, pieceType, nextPieces);
+        if(countForMatch % countForMatchDefault == 1) nextPieces = Add(1, pieceType, nextPieces);
 
         var nextAction = new SpawnPiecesAction
         {
