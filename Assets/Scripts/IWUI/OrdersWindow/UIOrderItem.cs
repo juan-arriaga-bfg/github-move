@@ -27,11 +27,11 @@ public class UIOrderItem : UISimpleScrollItem
 		order.SetMark(indicator);
 	}
 
-	public override void Select(bool isSelect)
+	public override void Select(bool isActive)
 	{
-		base.Select(isSelect);
+		base.Select(isActive);
 		
-		if(isSelect == false) return;
+		if(isActive == false) return;
 		
 		selectItem.Init(order);
 	}

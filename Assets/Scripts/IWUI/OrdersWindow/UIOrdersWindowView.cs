@@ -95,9 +95,6 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         orders = new List<UIOrderItem>();
         
         patternOrder.SetActive(true);
-        patternRecipe.SetActive(true);
-        
-        patternRecipe.GetComponent<Toggle>().isOn = true;
     }
 
     public void UpdateOrders()
@@ -119,21 +116,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
             recipes[i].Init(data[i]);
         }
         
-        patternRecipe.SetActive(false);
-        
         ordersScroll.verticalNormalizedPosition = 1;
         recipesScroll.verticalNormalizedPosition = 1;
-    }
-
-    public void ResetRecipesView(bool isOn)
-    {
-        if (isOn == false)
-        {
-            UpdateLists();
-            return;
-        }
-        
-        patternRecipe.SetActive(isOn);
-        patternRecipe.GetComponent<Toggle>().isOn = isOn;
     }
 }

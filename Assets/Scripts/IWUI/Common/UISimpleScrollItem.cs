@@ -28,5 +28,5 @@ public class UISimpleScrollItem : IWUIWindowViewController
 
         DOTween.Kill(body);
         body.DOScale(scale, time).SetId(body);
-    } 
+    }
 }
