@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: sprite.grayscale.adjustable
+  m_Name: pieces.grayscale
   m_Shader: {fileID: 4800000, guid: 415cfba32ca6f894a9f9cc5b73d5c835, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 5
@@ -63,6 +63,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Glossiness: 0.5
+    - _Intensity: 1
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02

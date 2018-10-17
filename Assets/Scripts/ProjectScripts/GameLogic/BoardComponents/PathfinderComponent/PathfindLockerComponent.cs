@@ -90,14 +90,12 @@ public class PathfindLockerComponent : ECSEntity
         var canPath = Pathfinder.HasPath(piece.CachedPosition, target, out pieceBlockers, piece, pathCondition);
         if (canPath && !freePieces.Contains(piece))
         {
-            Debug.LogError("UnlockCanWork");
             UnlockPathfinding(piece);
             blockPathPieces.Remove(piece);
             freePieces.Add(piece);
         }
         else if (canPath == false)
         {
-            Debug.LogError("LockCanWork");
             LockPathfinding(piece);
             freePieces.Remove(piece);
             blockPathPieces[piece] = pieceBlockers;

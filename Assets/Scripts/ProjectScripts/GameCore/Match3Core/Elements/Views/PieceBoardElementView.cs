@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using DG.Tweening;
 
 public class PieceBoardElementView : BoardElementView
@@ -21,6 +22,7 @@ public class PieceBoardElementView : BoardElementView
     private readonly Color baseColor = new Color(0.6f, 0.4f, 0.2f);
     private readonly Color dragErrorColor = new Color(0.7f, 0.1f, 0.1f);
     private readonly Color dragSpriteErrorColor = new Color(1f, 0.44f, 0.44f, 0.9f);
+    private bool isLockVisual = false;
     
     public bool IsHighlighted { get; protected set; }
     
@@ -54,17 +56,29 @@ public class PieceBoardElementView : BoardElementView
         CheckLock();
     }
 
+    protected List<LockerComponent> GetPieceLockers()
+    {
+        var lockers = new List<LockerComponent>();
+        foreach (var component in Piece.ComponentsCache.Values)
+        {
+            var ilocker = component as ILockerComponent;
+            if (ilocker != null)
+                lockers.Add(ilocker.Locker);
+        }
+
+        return lockers;
+    }
+    
     private void CheckLock()
     {
-        foreach (var item in Piece.ComponentsCache.Values)
+        var lockers = GetPieceLockers();
+        var lockedCount = 0;
+        foreach (var lockerComponent in lockers)
         {
-            if (item is ILockerComponent && ((ILockerComponent) item).Locker?.IsLocked == true)
-            {
-                ToggleLockView(true);
-                return;
-            }
+            if (lockerComponent.IsLocked)
+                lockedCount++;
         }
-        ToggleLockView(false);
+        ToggleLockView(lockedCount == lockers.Count);
     }
 
     protected virtual void OnEnable()
@@ -124,7 +138,7 @@ public class PieceBoardElementView : BoardElementView
 
     public virtual void ToggleLockView(bool enabled)
     {
-        if (reactionLockMaterial == null)
+        if (reactionLockMaterial == null || isLockVisual == enabled)
             return;
         
         if (cachedRenderers == null || cachedRenderers.size <= 0)
@@ -146,8 +160,8 @@ public class PieceBoardElementView : BoardElementView
                 rend.ResetDefaultMaterial();
             }
         }
-        
-        
+
+        isLockVisual = enabled;
     }
     
     public virtual void ToggleHighlight(bool enabled)
