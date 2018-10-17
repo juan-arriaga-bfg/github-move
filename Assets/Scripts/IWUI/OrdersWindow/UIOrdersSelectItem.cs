@@ -17,6 +17,7 @@ public class UIOrdersSelectItem : UISimpleScrollItem
     
     [SerializeField] protected GameObject btnComplete;
     [SerializeField] protected GameObject btnBuy;
+    [SerializeField] protected GameObject shine;
 
     private Order order;
     private CustomerComponent customer;
@@ -103,6 +104,7 @@ public class UIOrdersSelectItem : UISimpleScrollItem
         goTimer.SetActive(order.State == OrderState.InProgress);
         btnBuy.SetActive(order.State == OrderState.InProgress);
         btnComplete.SetActive(order.State != OrderState.InProgress);
+        shine.SetActive(order.State == OrderState.Complete);
         
         for (var i = 0; i < priceItems.Count; i++)
         {
@@ -111,9 +113,16 @@ public class UIOrdersSelectItem : UISimpleScrollItem
             if(isExcess) continue;
             
             var price = order.Def.Prices[i];
+            
+            if (order.State == OrderState.InProgress || order.State == OrderState.Complete)
+            {
+                priceItems[i].Init(price.Currency, "");
+                continue;
+            }
+            
             var current = ProfileService.Current.GetStorageItem(price.Currency).Amount;
-
-            if (order.State == OrderState.InProgress || order.State == OrderState.Complete || current >= price.Amount)
+            
+            if (current >= price.Amount)
             {
                 priceItems[i].Init(price.Currency, $"<sprite name={OrderState.Complete}>");
             }
