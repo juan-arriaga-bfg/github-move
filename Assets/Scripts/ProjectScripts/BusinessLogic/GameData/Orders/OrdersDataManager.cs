@@ -17,7 +17,6 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
 
     public List<OrderDef> Recipes;
     public List<Order> Orders;
-    private List<int> ids;
     
     private List<int> sequence = new List<int>();
     
@@ -34,8 +33,8 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
         {
             if (string.IsNullOrEmpty(error))
             {
-                ids = PieceType.GetIdsByFilter(PieceTypeFilter.Character);
                 var levels = GameDataService.Current.LevelsManager.Levels;
+                var save = ProfileService.Current.GetComponent<OrdersSaveComponent>(OrdersSaveComponent.ComponentGuid);
 
                 foreach (var level in levels)
                 {
@@ -50,6 +49,15 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
                         data.Remove(find);
                         Recipes.Add(find);
                     }
+                }
+                
+                Recipes.Sort((a, b) => a.Level.CompareTo(b.Level));
+                
+                if(save?.Orders == null) return;
+
+                foreach (var order in save.Orders)
+                {
+                    Orders.Add(new Order{Customer = order.Customer, Def = Recipes[order.Id]});
                 }
             }
             else
@@ -90,14 +98,12 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
         Orders.Remove(order);
 
         var customers = new List<CustomerComponent>();
+        
+        var positions = logic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Character);
 
-        foreach (var id in ids)
+        foreach (var position in positions)
         {
-            var cash = logic.PositionsCache.GetPiecePositionsByType(id);
-            
-            if(cash.Count == 0) continue;
-            
-            var customer = logic.GetPieceAt(cash[0])?.GetComponent<CustomerComponent>(CustomerComponent.ComponentGuid);
+            var customer = logic.GetPieceAt(position)?.GetComponent<CustomerComponent>(CustomerComponent.ComponentGuid);
             
             if(customer == null || customer.Order != null || customer.Cooldown.IsExecuteable()) continue;
             

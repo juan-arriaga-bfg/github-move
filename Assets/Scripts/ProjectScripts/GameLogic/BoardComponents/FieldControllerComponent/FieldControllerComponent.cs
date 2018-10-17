@@ -84,6 +84,7 @@ public class FieldControllerComponent : IECSComponent
                 }
                 
                 PathfindLockObserver.LoadPathfindLock();
+                GameDataService.Current.OrdersManager.RemoveOrder(null, context.BoardLogic);
             }
         });
     }

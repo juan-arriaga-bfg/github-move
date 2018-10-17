@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class CustomerComponent : ECSEntity
+public class CustomerComponent : ECSEntity, IPieceBoardObserver
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -28,14 +28,50 @@ public class CustomerComponent : ECSEntity
         Cooldown.OnComplete += CreateOrder;
 
         RegisterComponent(Cooldown);
+    }
+    
+    public void OnAddToBoard(BoardPosition position, Piece context = null)
+    {
         InitInSave();
     }
 
-    private void InitInSave()
+    public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
     {
-        if (Order == null && GameDataService.Current.OrdersManager.CheckStart()) Cooldown.Start();
     }
 
+    public void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
+    {
+    }
+
+    public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
+    {
+    }
+    
+    private void InitInSave()
+    {
+        var save = ProfileService.Current.GetComponent<OrdersSaveComponent>(OrdersSaveComponent.ComponentGuid);
+        var item = save?.Orders?.Find(o => o.Customer == pieceContext.PieceType);
+
+        if (item == null) return;
+        
+        Order = GameDataService.Current.OrdersManager.Orders.Find(o => o.Customer == pieceContext.PieceType);
+        
+        Timer.Delay = Order.Def.Delay;
+        
+        if(item.IsStart) Timer.Start(item.StartTime);
+        if(item.IsStartCooldown) Cooldown.Start(item.CooldownTime);
+
+        Order.State = item.State;
+        
+        UpdateView();
+        
+        save.Orders.Remove(item);
+        
+        if(save.Orders.Count > 0) return;
+        
+        save.Orders = null;
+    }
+    
     private void UpdateView()
     {
         if(Order == null || pieceContext.ViewDefinition == null) return;

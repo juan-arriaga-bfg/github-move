@@ -11,10 +11,12 @@
 		AddObserver(piece, pathfindLockObserver);
 		piece.RegisterComponent(pathfindLockObserver);
 
+		piece.RegisterComponent(new TimerComponent());
+		
 		var customer = new CustomerComponent();
 		
-		piece.RegisterComponent(new TimerComponent());
 		piece.RegisterComponent(customer);
+		AddObserver(piece, customer);
 		
 		piece.RegisterComponent(new DraggablePieceComponent());
 		
