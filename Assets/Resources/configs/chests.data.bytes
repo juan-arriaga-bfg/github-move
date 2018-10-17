@@ -139,11 +139,6 @@
         "Override": true
       },
       {
-        "Uid": "I1",
-        "Weight": 2,
-        "Override": true
-      },
-      {
         "Uid": "E1",
         "Weight": 3,
         "Override": true
@@ -175,7 +170,8 @@
       },
       {
         "Uid": "A2",
-        "Weight": 30
+        "Weight": 30,
+        "Override": true
       },
       {
         "Uid": "E1",
@@ -184,11 +180,6 @@
       },
       {
         "Uid": "F1",
-        "Weight": 2,
-        "Override": true
-      },
-      {
-        "Uid": "I2",
         "Weight": 2,
         "Override": true
       },
@@ -225,11 +216,36 @@
       "Currency": "Crystals",
       "Amount": 80
     },
-    "PieceAmount": 7,
+    "PieceAmount": 8,
     "PieceWeights": [
       {
         "Uid": "H1",
-        "Weight": 5,
+        "Weight": 2,
+        "Override": true
+      },
+      {
+        "Uid": "H2",
+        "Weight": 0,
+        "Override": true
+      },
+      {
+        "Uid": "A1",
+        "Weight": 0,
+        "Override": true
+      },
+      {
+        "Uid": "A2",
+        "Weight": 0,
+        "Override": true
+      },
+      {
+        "Uid": "C1",
+        "Weight": 0,
+        "Override": true
+      },
+      {
+        "Uid": "C2",
+        "Weight": 0,
         "Override": true
       },
       {
@@ -260,21 +276,31 @@
       "Currency": "Crystals",
       "Amount": 100
     },
-    "PieceAmount": 6,
+    "PieceAmount": 8,
     "PieceWeights": [
       {
-        "Uid": "D5",
-        "Weight": 15,
+        "Uid": "H1",
+        "Weight": 5,
         "Override": true
       },
       {
-        "Uid": "E5",
-        "Weight": 15,
+        "Uid": "D2",
+        "Weight": 10,
         "Override": true
       },
       {
-        "Uid": "F5",
-        "Weight": 15,
+        "Uid": "E2",
+        "Weight": 10,
+        "Override": true
+      },
+      {
+        "Uid": "F2",
+        "Weight": 10,
+        "Override": true
+      },
+      {
+        "Uid": "E1",
+        "Weight": 10,
         "Override": true
       }
     ]
@@ -364,8 +390,6 @@
         "Override": true
       },
       {
-        "Uid": "I1",
-        "Weight": 10,
         "Override": true
       },
       {
@@ -406,10 +430,6 @@
       {
         "Uid": "E1",
         "Weight": 5
-      },
-      {
-        "Uid": "J1",
-        "Weight": 5
       }
     ]
   },
@@ -428,11 +448,6 @@
       },
       {
         "Uid": "A2",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "J1",
         "Weight": 10,
         "Override": true
       },
