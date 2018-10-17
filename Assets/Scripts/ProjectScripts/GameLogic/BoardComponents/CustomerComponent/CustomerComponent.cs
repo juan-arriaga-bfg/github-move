@@ -52,7 +52,11 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         var save = ProfileService.Current.GetComponent<OrdersSaveComponent>(OrdersSaveComponent.ComponentGuid);
         var item = save?.Orders?.Find(o => o.Customer == pieceContext.PieceType);
 
-        if (item == null) return;
+        if (item == null)
+        {
+            if(GameDataService.Current.OrdersManager.CheckStart()) Cooldown.Start();
+            return;
+        }
         
         Order = GameDataService.Current.OrdersManager.Orders.Find(o => o.Customer == pieceContext.PieceType);
         
