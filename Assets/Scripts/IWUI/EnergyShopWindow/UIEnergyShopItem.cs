@@ -37,16 +37,6 @@ public class UIEnergyShopItem : IWUIWindowViewController
 		
         isClick = true;
         
-        var board = BoardService.Current.GetBoardById(0);
-        var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
-        
-        if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, 1))
-        {
-            isClick = false;
-            UIErrorWindowController.AddError("Free space not found");
-            return;
-        }
-
         if (CurrencyHellper.IsCanPurchase(def.Price, true) == false)
         {
             isClick = false;
