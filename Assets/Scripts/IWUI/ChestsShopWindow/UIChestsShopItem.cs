@@ -63,7 +63,9 @@ public class UIChestsShopItem : IWUIWindowViewController
 		if(spawn == null) return;
 
 		spawn.Reward = chest.Piece;
-		model.FreeChestLogic.Timer.Start();
+		
+		if(isFree) model.FreeChestLogic.Timer.Start();
+		
 		spawn.Make(piece.CachedPosition, piece);
 	}
 
