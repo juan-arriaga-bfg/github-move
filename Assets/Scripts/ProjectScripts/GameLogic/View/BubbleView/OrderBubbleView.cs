@@ -5,6 +5,7 @@ public class OrderBubbleView : UIBoardView
 {
 	[SerializeField] private Image icon;
 	[SerializeField] private Image mark;
+	[SerializeField] private GameObject question;
 
 	protected override ViewType Id => ViewType.OrderBubble;
 	
@@ -36,7 +37,10 @@ public class OrderBubbleView : UIBoardView
 		
 		customer.Order.SetMark(mark);
 		
-		icon.sprite = IconService.Current.GetSpriteById(customer.Order.State == OrderState.Init ? "codexQuestion" : customer.Order.Def.Uid);
+		icon.gameObject.SetActive(customer.Order.State != OrderState.Init);
+		question.SetActive(customer.Order.State == OrderState.Init);
+		
+		icon.sprite = IconService.Current.GetSpriteById(customer.Order.Def.Uid);
 	}
 
 	public override void OnDrag(bool isEnd)
