@@ -8,14 +8,10 @@ public class UIRecipeItem : UISimpleScrollItem
     private Material unlockMaterial;
     private Toggle toggle;
 
-    private void Awake()
-    {
-        unlockMaterial = icon.material;
-    }
-
     public void Init(OrderDef recipe)
     {
         if (toggle == null) toggle = gameObject.GetComponent<Toggle>();
+        if(unlockMaterial == null) unlockMaterial = icon.material;
 
         var isLock = recipe.Level > GameDataService.Current.LevelsManager.Level;
         
