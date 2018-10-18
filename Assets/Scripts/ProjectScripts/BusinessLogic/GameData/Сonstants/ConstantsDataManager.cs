@@ -7,9 +7,6 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
     
-    public int ReproductionDelay;
-    public int ReproductionStepDelay;
-    public int ReproductionChance;
     public int FreeChestDelay;
     
     public int MinDelayHintArrow;
