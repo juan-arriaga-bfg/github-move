@@ -3,7 +3,7 @@
     "Index": 1,
     "Price": {
       "Currency": "Experience",
-      "Amount": 200
+      "Amount": 100
     },
     "Rewards": [
       {
@@ -21,7 +21,7 @@
     "Index": 2,
     "Price": {
       "Currency": "Experience",
-      "Amount": 700
+      "Amount": 250
     },
     "Rewards": [
       {
@@ -39,7 +39,7 @@
     "Index": 3,
     "Price": {
       "Currency": "Experience",
-      "Amount": 1000
+      "Amount": 700
     },
     "Rewards": [
       {
@@ -57,7 +57,7 @@
     "Index": 4,
     "Price": {
       "Currency": "Experience",
-      "Amount": 1500
+      "Amount": 1000
     },
     "Rewards": [
       {
@@ -69,13 +69,31 @@
         "Amount": 10
       }
     ],
-    "Chest": "Chest1"
+    "Chest": "Chest1",
+    "OrdersWeights": [
+      {
+        "Uid": "Order1",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order2",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order4",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order5",
+        "Weight": 10
+      }
+    ]
   },
   {
     "Index": 5,
     "Price": {
       "Currency": "Experience",
-      "Amount": 2000
+      "Amount": 1500
     },
     "Rewards": [
       {
@@ -87,13 +105,31 @@
         "Amount": 10
       }
     ],
-    "Chest": "Chest2"
+    "Chest": "Chest2",
+    "OrdersWeights": [
+      {
+        "Uid": "Order4",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order5",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order7",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order2",
+        "Weight": 10
+      }
+    ]
   },
   {
     "Index": 6,
     "Price": {
       "Currency": "Experience",
-      "Amount": 3500
+      "Amount": 2000
     },
     "Rewards": [
       {
@@ -105,7 +141,25 @@
         "Amount": 5
       }
     ],
-    "Chest": "Chest2"
+    "Chest": "Chest2",
+    "OrdersWeights": [
+      {
+        "Uid": "Order7",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order4",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order9",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order2",
+        "Weight": 10
+      }
+    ]
   },
   {
     "Index": 7,
@@ -123,7 +177,26 @@
         "Amount": 5
       }
     ],
-    "Chest": "Chest2"
+    "Chest": "Chest2",
+    "OrdersWeights": [
+      {
+        "Uid": "Order9",
+        "Weight": 10,
+        "Override": true
+      },
+      {
+        "Uid": "Order4",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order5",
+        "Weight": 10
+      },
+      {
+        "Uid": "Order7",
+        "Weight": 10
+      }
+    ]
   },
   {
     "Index": 8,

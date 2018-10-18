@@ -49,6 +49,8 @@ public class UIResourcePanelViewController : UIGenericResourcePanelViewControlle
     private void SetLabelText(int value)
     {
         if (amountLabel == null) return;
+
+        value = Mathf.Max(0, value);
         amountLabel.Text = $"<mspace=2.7em>{value}</mspace>";
     }
 }

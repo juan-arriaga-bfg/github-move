@@ -1,9 +1,16 @@
 ﻿using System;
+using UnityEngine;
 
 public class CurrencyPair
 {
     public string Currency;
     public int Amount;
+    
+    public Sprite GetIcon()
+    {
+        var def = global::Currency.GetCurrencyDef(Currency);
+        return IconService.Current.GetSpriteById(def == null ? Currency : def.Icon);
+    }
 
     public override string ToString()
     {

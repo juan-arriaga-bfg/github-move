@@ -99,7 +99,7 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     {
         ObstacleDef def;
 
-        if (Obstacles.TryGetValue(piece, out def) == false) return PieceType.None.Id;
+        if (Obstacles.TryGetValue(piece, out def) == false || def.ChestWeights == null) return PieceType.None.Id;
         
         var item = ItemWeight.GetRandomItem(def.ChestWeights);
         
@@ -122,25 +122,9 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
 
     public Dictionary<int, int> GetPiecesByStep(int piece, int step)
     {
-        var result = new Dictionary<int, int>();
         var def = GetStep(piece, step);
         
-        for (var i = def.PieceAmount - 1; i >= 0; i--)
-        {
-            var item = ItemWeight.GetRandomItem(def.PieceWeights);
-
-            if (item == null) continue;
-
-            if (result.ContainsKey(item.Piece) == false)
-            {
-                result.Add(item.Piece, 1);
-                continue;
-            }
-            
-            result[item.Piece]++;
-        }
-        
-        return result;
+        return ItemWeight.GetRandomPieces(def.PieceAmount, def.PieceWeights);
     }
 
     public CurrencyPair GetPriceByStep(int piece, int step)

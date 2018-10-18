@@ -72,7 +72,9 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     {
         if (CurrencyHellper.IsCanPurchase(targetItem.Currency, 1) == false)
         {
-            var select = completeTimesList[Random.Range(0, completeTimesList.Count)];
+            completeTimesList.Sort((a, b) => a.Value.CompleteTime.CompareTo(b.Value.CompleteTime));
+            
+            var select = completeTimesList[0];
             
             UIErrorWindowController.AddError("All workers are busy!");
             context.HintCooldown.Step(select.Key);
@@ -125,6 +127,8 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             
             completeTimesList.Remove(pair);
             Add(1);
+            
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.WorkerUsed, this);
             
             return true;
         }

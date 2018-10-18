@@ -26,7 +26,7 @@ public class SimplePieceBuilder : GenericPieceBuilder
                 .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)
         ));
         
-        if (def.SpawnResources != null)
+        if (def.SpawnResources != null || PieceType.GetDefById(pieceType).Filter.Has(PieceTypeFilter.Resource))
         {
             piece.RegisterComponent(new ResourceStorageComponent {Resources = def.SpawnResources});
 

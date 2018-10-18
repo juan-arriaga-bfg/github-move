@@ -11,12 +11,6 @@ public enum HintType
 
 public class HintCooldownComponent : ECSEntity
 {
-	private const int MinDelayArrow = 30;
-	private const int MaxDelayArrow = 60;
-	
-	private const int MinDelayBounce = 15;
-	private const int MaxDelayBounce = 30;
-	
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
 	
@@ -48,8 +42,10 @@ public class HintCooldownComponent : ECSEntity
 		obstaclesId = PieceType.GetIdsByFilter(PieceTypeFilter.Obstacle);
 		
 		Step(HintType.Obstacle);
+
+		timerBounce.Delay = Random.Range(GameDataService.Current.ConstantsManager.MinDelayBounceBubble,
+			GameDataService.Current.ConstantsManager.MaxDelayBounceBubble);
 		
-		timerBounce.Delay = Random.Range(MinDelayBounce, MaxDelayBounce);
 		timerBounce.OnComplete = Bounce;
 	}
 	
@@ -62,11 +58,14 @@ public class HintCooldownComponent : ECSEntity
 	public void Step(HintType type)
 	{
 		if(IsPaused
-		   || GameDataService.Current.QuestsManager.IsThirdCompleted()
+		   // || GameDataService.Current.QuestsManagerOld.IsThirdCompleted()
 		   || type != HintType.HighPriority && type != HintType.OpenChest && timerArrow.IsStarted) return;
 		
 		timerArrow.Stop();
-		timerArrow.Delay = Random.Range(MinDelayArrow, MaxDelayArrow);
+		
+		timerArrow.Delay = Random.Range(GameDataService.Current.ConstantsManager.MinDelayHintArrow,
+			GameDataService.Current.ConstantsManager.MaxDelayHintArrow);
+		
 		timerArrow.OnComplete = Hint;
 		timerArrow.Start();
 	}
@@ -133,7 +132,9 @@ public class HintCooldownComponent : ECSEntity
 
 	private void Bounce()
 	{
-		timerBounce.Delay = Random.Range(MinDelayBounce, MaxDelayBounce);
+		timerBounce.Delay = Random.Range(GameDataService.Current.ConstantsManager.MinDelayBounceBubble,
+			GameDataService.Current.ConstantsManager.MaxDelayBounceBubble);
+		
 		timerBounce.Start();
 
 		var view = views[Random.Range(0, views.Count)];

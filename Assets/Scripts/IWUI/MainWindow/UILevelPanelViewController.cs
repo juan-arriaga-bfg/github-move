@@ -10,7 +10,7 @@
         {
             currentValueAnimated = value;
             
-            if (amountLabel != null) amountLabel.Text = string.Format("<size=80>{0}</size>\n<size=30>Level</size>", currentValueAnimated);
+            if (amountLabel != null) amountLabel.Text = $"<size=80>{currentValueAnimated}</size>\n<size=30>Level</size>";
         }
     }
 
@@ -20,6 +20,6 @@
 
         currentValue = storageItem.Amount;
 
-        if (amountLabel != null) amountLabel.Text = string.Format("<size=80>{0}</size>\n<size=30>Level</size>", storageItem.Amount);
+        if (amountLabel != null) amountLabel.Text = $"<size=80>{storageItem.Amount}</size>\n<size=30>Level</size>";
     }
 }

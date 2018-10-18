@@ -11,6 +11,7 @@ TextureImporter:
     21300012: Life
     21300014: Timer
     21300016: Mana
+    21300018: Complete
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -96,7 +97,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e1a0f22eef56f1c4498450790b1393bd
+      spriteID: d2f69177a6254914fa534adf366edd72
       vertices: []
       indices: 
       edges: []
@@ -116,7 +117,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ef03e9f09adf4704ea42c3ceca0de8ec
+      spriteID: 82bb2d7b2119ec84696c73d1477e45f6
       vertices: []
       indices: 
       edges: []
@@ -136,7 +137,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d4fedaff6fc82144a93ef6544efde661
+      spriteID: 1d2a2a261fb8e6e479eeb91b6d310d12
       vertices: []
       indices: 
       edges: []
@@ -156,7 +157,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 19b1d4eb59da463489fcd4384b9ad964
+      spriteID: 7dc675c67a5f9204e96e4a615ee010be
       vertices: []
       indices: 
       edges: []
@@ -176,7 +177,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7e1abf8da01042942a2685003504d143
+      spriteID: 08674367b2a63064b88444ed138cce42
       vertices: []
       indices: 
       edges: []
@@ -196,7 +197,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 363e0d8b303b12942aea30c00b882b0f
+      spriteID: d4b75ecb05ecd0149b67653c24509c8f
       vertices: []
       indices: 
       edges: []
@@ -216,7 +217,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ee0ebf7cd7f95214b99639242628e21b
+      spriteID: 50c97fe8ebe2f204fa60289e58f8ca05
       vertices: []
       indices: 
       edges: []
@@ -236,7 +237,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0a048f592ce681245ada0f1c8604d13d
+      spriteID: a711816f9d129524fb60c7553a7798ee
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Complete
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 204
+        width: 48
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85aace3657675e248b5bf58bb39e2efb
       vertices: []
       indices: 
       edges: []

@@ -29,7 +29,17 @@ public class LevelsDataManager : IECSComponent, IDataManager, IDataLoader<List<L
 		{
 			if (string.IsNullOrEmpty(error))
 			{
-				Levels = data;
+				data.Sort((a, b) => a.Index.CompareTo(b.Index));
+				Levels = new List<LevelsDef>{data[0]};
+				
+				for (var i = 1; i < data.Count; i++)
+				{
+					var previous = data[i - 1];
+					var next = data[i];
+					
+					next.OrdersWeights = ItemWeight.ReplaseWeights(previous.OrdersWeights, next.OrdersWeights);
+					Levels.Add(next);
+				}
 			}
 			else
 			{
@@ -52,4 +62,6 @@ public class LevelsDataManager : IECSComponent, IDataManager, IDataLoader<List<L
 	public List<CurrencyPair> Rewards => Levels[Level - 1].Rewards;
 	
 	public int Chest => PieceType.Parse(Levels[Level - 1].Chest);
+
+	public List<ItemWeight> Recipes => Levels[Level - 1].OrdersWeights;
 }

@@ -13,8 +13,8 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     public int Capacity;
     public int Filling;
 
-    public bool isSpawnResource => string.IsNullOrEmpty(PieceType.Parse(SpawnPiece));
-    public string Icon => isSpawnResource ? $"icon_{Currency.GetCurrencyDef(SpawnPiece).Name}" : PieceType.Parse(SpawnPiece);
+    public bool IsSpawnResource => string.IsNullOrEmpty(PieceType.Parse(SpawnPiece));
+    public string Icon => IsSpawnResource ? $"icon_{Currency.GetCurrencyDef(SpawnPiece).Name}" : PieceType.Parse(SpawnPiece);
 
     public bool IsTimerShow;
     public bool IsAutoStart = true;

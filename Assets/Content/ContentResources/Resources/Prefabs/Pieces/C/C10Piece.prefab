@@ -127,8 +127,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1504512004575130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.06, y: 0.5, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalPosition: {x: 0.03, y: 0.59, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4165696310882474}
   m_RootOrder: 0
@@ -167,13 +167,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1128644930658512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b417249933ed1444d9155c0a93fc2e11, type: 3}
+  m_Script: {fileID: 11500000, guid: 822bb2fb32e400f42b6d7da416a6f5b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 4898566547631376}
-  sprite: {fileID: 0}
+  bodySprite: {fileID: 0}
   errorSelectionMaterial: {fileID: 2100000, guid: 1faf170e9acf1d64f86eefcd318ff557,
     type: 2}
   defaultSelectionMaterial: {fileID: 2100000, guid: cbc475da5f4748047a7b2d276ac8a4ff,

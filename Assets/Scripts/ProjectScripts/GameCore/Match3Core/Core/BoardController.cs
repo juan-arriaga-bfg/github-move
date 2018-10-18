@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class BoardController : ECSEntity,
     IActionExecuteComponent, IBoardEventsComponent, IBoardLoggerComponent, IBoardLogicComponent, IBoardDefinitionComponent, IBoardStatesComponent, ISessionBoardStateComponent,
-    IBoardSystemProcessor, IBoardRendererComponent, IBoardManipulatorComponent, IBoardRandomComponent, IReproductionLogicComponent,
-    IWorkerCurrencyLogicComponent, IHintCooldownComponent, IPartPiecesLogicComponent, IPathfinderComponent, IFreeChestLogicComponent
+    IBoardSystemProcessor, IBoardRendererComponent, IBoardManipulatorComponent, IBoardRandomComponent, IWorkerCurrencyLogicComponent, IHintCooldownComponent,
+    IPartPiecesLogicComponent, IPathfinderComponent, IFreeChestLogicComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -39,9 +39,6 @@ public class BoardController : ECSEntity,
 
     protected BoardManipulatorComponent manipulator;
     public BoardManipulatorComponent Manipulator => manipulator ?? (manipulator = GetComponent<BoardManipulatorComponent>(BoardManipulatorComponent.ComponentGuid));
-
-    protected ReproductionLogicComponent reproductionLogic;
-    public ReproductionLogicComponent ReproductionLogic => reproductionLogic ?? (reproductionLogic = GetComponent<ReproductionLogicComponent>(ReproductionLogicComponent.ComponentGuid));
     
     protected WorkerCurrencyLogicComponent workerLogic;
     public WorkerCurrencyLogicComponent WorkerLogic => workerLogic ?? (workerLogic = GetComponent<WorkerCurrencyLogicComponent>(WorkerCurrencyLogicComponent.ComponentGuid));

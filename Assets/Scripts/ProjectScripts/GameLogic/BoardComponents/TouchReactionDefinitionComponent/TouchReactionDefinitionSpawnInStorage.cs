@@ -17,13 +17,13 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
 
         if (storage == null) return false;
         
-        if(!storage.isSpawnResource && !piece.Context.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, storage.Filling))
+        if(!storage.IsSpawnResource && !piece.Context.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, storage.Filling))
         {
             UIErrorWindowController.AddError("Free space not found");
             return false;
         }
         
-        storage.OnHideBubble = () => { Spawn(position, piece); };
+        storage.OnHideBubble = () => { Spawn(position, piece, storage); };
 
         if (storage.Scatter(out amount, IsAutoStart)) return true;
         
@@ -31,15 +31,13 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
         return false;
     }
 
-    private void Spawn(BoardPosition position, Piece piece)
+    private void Spawn(BoardPosition position, Piece piece, StorageComponent storage)
     {
-        var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
-
         if (storage == null) return;
         
         storage.OnHideBubble = null;
 
-        if (storage.isSpawnResource)
+        if (storage.IsSpawnResource)
         {
             AddResourceView.Show(position, new CurrencyPair{Currency = Currency.GetCurrencyDef(storage.SpawnPiece).Name, Amount = amount});
             return;

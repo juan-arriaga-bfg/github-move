@@ -137,10 +137,8 @@ public class MagicPieceView : PieceBoardElementView
         int currentId;
         if (logic.FieldFinder.Find(to, positions, out currentId) == false) return false;
         var action = logic.MatchActionBuilder.GetMatchAction(positions, currentId, to);
-        var isMatch = action != null;
-        if (isMatch) board.ReproductionLogic.Restart();
-
-        return isMatch;
+        
+        return action != null;
     }
 
     private List<int> GetChain(Piece piece)

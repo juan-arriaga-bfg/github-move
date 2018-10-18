@@ -9,6 +9,8 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
     
     [SerializeField] private Image chest;
     [SerializeField] private Image item;
+    
+    [SerializeField] private ScrollRect scroll;
 
     private List<Image> icons = new List<Image>();
 
@@ -38,16 +40,24 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         {
             CreateIcon(sprites[i]);
         }
+
+        scroll.horizontalNormalizedPosition = 0;
     }
 
     public override void OnViewClose()
     {
         base.OnViewClose();
         
-        var windowModel = Model as UIChestMessageWindowModel;
-        windowModel.Chest = null;
+        var model = Model as UIChestMessageWindowModel;
+
+        if (isOpen)
+        {
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.OpenChest, model.Chest);
+            
+            model.OnOpen?.Invoke();
+        }  
         
-        if (isOpen) windowModel.OnOpen?.Invoke();
+        model.Chest = null;
     }
 
     public override void OnViewCloseCompleted()

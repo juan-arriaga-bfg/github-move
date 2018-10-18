@@ -15,20 +15,20 @@ public class UIMainWindowView : IWUIWindowView
         
         var windowModel = Model as UIMainWindowModel;
 
-        GameDataService.Current.QuestsManager.OnUpdateActiveQuests += UpdateQuest;
+        GameDataService.Current.QuestsManager.OnActiveQuestsListChanged += OnActiveQuestsListChanged;
         GameDataService.Current.CodexManager.OnNewItemUnlocked += OnNewPieceBuilded;
         
-        UpdateQuest();
+        OnActiveQuestsListChanged();
         UpdateCodexButton();
     }
     
     private void OnDestroy()
     {
-        GameDataService.Current.QuestsManager.OnUpdateActiveQuests -= UpdateQuest;
+        GameDataService.Current.QuestsManager.OnActiveQuestsListChanged -= OnActiveQuestsListChanged;
         GameDataService.Current.CodexManager.OnNewItemUnlocked -= OnNewPieceBuilded;
     }
 
-    public void UpdateQuest()
+    public void OnActiveQuestsListChanged()
     {
         var active = GameDataService.Current.QuestsManager.ActiveQuests;
         
@@ -42,7 +42,7 @@ public class UIMainWindowView : IWUIWindowView
         InitWindowViewControllers();
     }
 
-    private void CheckQuestButtons(List<Quest> active)
+    private void CheckQuestButtons(List<QuestEntity> active)
     {
         pattern.SetActive(true);
 
@@ -94,12 +94,20 @@ public class UIMainWindowView : IWUIWindowView
         
         UIService.Get.ShowWindow(UIWindowType.CodexWindow);
     }
-
+    
     public void OnClickShop()
     {
-        UIService.Get.ShowWindow(UIWindowType.CastleWindow);
+        UIService.Get.ShowWindow(UIWindowType.ChestsShopWindow);
     }
-
+    
+    public void OnClickOrders()
+    {
+        var model = UIService.Get.GetCachedModel<UIOrdersWindowModel>(UIWindowType.OrdersWindow);
+        if(model.Orders != null && model.Orders.Count > 0) model.Select = model.Orders[0];
+        
+        UIService.Get.ShowWindow(UIWindowType.OrdersWindow);
+    }
+    
     private void OnNewPieceBuilded()
     {
         codexButton.UpdateState();

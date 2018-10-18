@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
 {
+    public Action<bool> OnMake;
     public int MainReactionIndex = -1;
     public readonly List<TouchReactionDefinitionComponent> Definitions = new List<TouchReactionDefinitionComponent>();
     
@@ -16,19 +18,25 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
     public override bool Make(BoardPosition position, Piece piece)
     {
         piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, piece);
-        
-        if (piece.ViewDefinition == null) return false;
+
+        if (piece.ViewDefinition == null)
+        {
+            OnMake?.Invoke(false);
+            return false;
+        }
         
         foreach (var def in Definitions)
         {
             if(def.IsViewShow(piece.ViewDefinition) == false) continue;
 
+            OnMake?.Invoke(true);
             def.Make(position, piece);
             return true;
         }
 
         if (MainReactionIndex != -1)
         {
+            OnMake?.Invoke(true);
             Definitions[MainReactionIndex].Make(position, piece);
             return true;
         }
@@ -36,6 +44,7 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
         var view = piece.ViewDefinition.AddView(ViewType.Menu);
         
         view.Change(!view.IsShow);
+        OnMake?.Invoke(true);
         return true;
     }
 

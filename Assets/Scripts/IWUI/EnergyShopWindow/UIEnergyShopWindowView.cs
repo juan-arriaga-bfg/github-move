@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using DG.Tweening;
-using UnityEngine.UI;
 
 public class UIEnergyShopWindowView : UIGenericPopupWindowView 
 {
@@ -10,17 +8,13 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
     
     [SerializeField] private GameObject itemPattern;
     
-    private List<GameObject> items = new List<GameObject>();
-
-    private bool isHint;
+    private List<UIEnergyShopItem> items = new List<UIEnergyShopItem>();
     
     public override void OnViewShow()
     {
         base.OnViewShow();
         
         var windowModel = Model as UIEnergyShopWindowModel;
-
-        isHint = false;
         
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
@@ -32,8 +26,11 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
         foreach (var product in products)
         {
             var item = Instantiate(itemPattern, itemPattern.transform.parent).GetComponent<UIEnergyShopItem>();
+            
+            RegisterWindowViewController(item);
+            
             item.Init(product);
-            items.Add(item.gameObject);
+            items.Add(item);
         }
         
         itemPattern.SetActive(false);
@@ -54,69 +51,15 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
 
         foreach (var item in items)
         {
-            Destroy(item);
+            UnRegisterWindowViewController(item);
+            Destroy(item.gameObject);
         }
         
-        items = new List<GameObject>();
-
-        if (isHint)
-        {
-            Hint();
-            return;
-        }
-        
-        var windowModel = Model as UIEnergyShopWindowModel;
-        windowModel.Spawn();
+        items = new List<UIEnergyShopItem>();
     }
 
     public void OnClick()
     {
-        isHint = true;
-        Controller.CloseCurrentWindow();
-    }
-
-    private void Hint()
-    {
-        var windowModel = Model as UIEnergyShopWindowModel;
-        var ids = windowModel.SelectedPieces;
-        var positions = new List<BoardPosition>();
-
-        var board = BoardService.Current.GetBoardById(0);
-
-        foreach (var id in ids)
-        {
-            positions.AddRange(board.BoardLogic.PositionsCache.GetPiecePositionsByType(id));
-        }
-
-        if (positions.Count == 0)
-        {
-            UIMessageWindowController.CreateImageMessage("Need more energy?", "collect_pieces", () => {});
-            return;
-        }
-
-        var nearest = BoardPosition.Default();
-        var distance = float.MaxValue;
-
-        for (var i = 0; i < positions.Count; i++)
-        {
-            var value = 0f;
-            
-            for (var j = 0; j < positions.Count; j++)
-            {
-                if(i == j) continue;
-
-                value += BoardPosition.SqrMagnitude(positions[i], positions[j]);
-            }
-            
-            HintArrowView.Show(positions[i], 0, -0.5f, false);
-            
-            if(distance <= value) continue;
-
-            distance = value;
-            nearest = positions[i];
-        }
-        
-        var worldPos = board.BoardDef.GetSectorCenterWorldPosition(nearest.X, nearest.Up.Y, nearest.Z);
-        board.Manipulator.CameraManipulator.MoveTo(worldPos);
+        UIMessageWindowController.CreateImageMessage("Need more energy?", "collect_pieces", () => {});
     }
 }

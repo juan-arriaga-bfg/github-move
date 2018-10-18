@@ -14,6 +14,10 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         IWUISettings.Instance.SetResourceManager(new DefaultUIResourceManager());
         
         InitGameField();
+
+        // Should be called after BoardService initialization
+        // Can't be created at DefaultApplicationinitializer because should be recreated after Reset Progress
+        InitQuests();
         
         // cache windows
         IWUIManager.Instance.Init(new[]
@@ -24,11 +28,13 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.ChestMessage,
             UIWindowType.QuestWindow,
             UIWindowType.ErrorWindow,
-            UIWindowType.CastleWindow,
+            UIWindowType.ChestsShopWindow,
             UIWindowType.EnergyShopWindow,
             UIWindowType.CodexWindow,
             UIWindowType.CurrencyCheatSheetWindow,
             UIWindowType.PiecesCheatSheetWindow,
+            UIWindowType.ExchangeWindow,
+            UIWindowType.OrdersWindow,
         });
         
         // on cache complete
@@ -42,6 +48,15 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
 
             onComplete?.Invoke();
         };
+    }
+
+    // Events subscribtion
+    private void InitQuests()
+    {
+        // Quests and tasks
+        var manager = GameDataService.Current.QuestsManager;
+        manager.CreateStarters();
+        manager.ConnectToBoard();
     }
 
     private void InitGameField()

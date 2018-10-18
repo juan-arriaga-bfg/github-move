@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using YamlDotNet.Core;
@@ -23,6 +25,9 @@ public class DevTools : MonoBehaviour
 
     public static void ReloadScene(bool resetProgress)
     {
+        var manager = GameDataService.Current.QuestsManager;
+        manager.DisconnectFromBoard();
+            
         BoardService.Instance.SetManager(null);
 
         if (resetProgress)
@@ -110,7 +115,17 @@ public class DevTools : MonoBehaviour
         }
     }
 
-    
+    public void OnCompleteFirstQuestClick()
+    {
+        var manager = GameDataService.Current.QuestsManager;
+        if (manager.ActiveQuests.Count == 0)
+        {
+            return;
+        }
+
+        var quest = manager.ActiveQuests[0];
+        quest.ForceComplete();
+    }
 
     public void OnDebug1Click()
     {
@@ -119,15 +134,6 @@ public class DevTools : MonoBehaviour
 
     public void OnDebug2Click()
     {
-        var board = BoardService.Current.GetBoardById(0);
-        foreach (var elem in board.BoardLogic.BoardEntities.Values)
-        {
-//            var lockers = elem.PathfindLockObserver.Lockers;
-//            if(lockers.Count == 0)
-//                continue;
-//            var locker = lockers.First();
-//            if(locker.IsLocked)
-//                MarkCell(elem.CachedPosition);
-        }
+
     }
 }

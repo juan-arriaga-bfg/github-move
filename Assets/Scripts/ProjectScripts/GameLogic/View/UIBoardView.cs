@@ -73,6 +73,11 @@ public class UIBoardView : BoardElementView
     {
         CachedTransform.localPosition = controller.GetViewPositionBottom(multiSize) + Ofset;
     }
+    
+    public void SetOfset(Vector3 ofset)
+    {
+        CachedTransform.localPosition = ofset;
+    }
 
     public void Change(bool isShow)
     {

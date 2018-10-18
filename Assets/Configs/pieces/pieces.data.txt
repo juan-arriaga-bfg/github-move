@@ -28,7 +28,7 @@
     ]
   },
   {
-    "Uid": "Magic",
+    "Uid": "Magic3",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -37,73 +37,46 @@
     ]
   },
   {
-    "Uid": "Char1",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 15
-    }
+    "Uid": "Magic",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ]
   },
   {
-    "Uid": "Char2",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 40
-    }
+    "Uid": "Char1"
   },
   {
-    "Uid": "Char3",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 5
-    }
+    "Uid": "Char2"
   },
   {
-    "Uid": "Char4",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 5
-    }
+    "Uid": "Char3"
   },
   {
-    "Uid": "Char5",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 5
-    }
+    "Uid": "Char4"
   },
   {
-    "Uid": "Char6",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 5
-    }
+    "Uid": "Char5"
   },
   {
-    "Uid": "Char7",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 5
-    }
+    "Uid": "Char6"
   },
   {
-    "Uid": "Char8",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 5
-    }
+    "Uid": "Char7"
   },
   {
-    "Uid": "Char9",
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 5
-    }
+    "Uid": "Char8"
+  },
+  {
+    "Uid": "Char9"
   },
   {
     "Uid": "Crystal1",
     "SpawnResources": {
       "Currency": "Crystals",
-      "Amount": 5
+      "Amount": 1
     },
     "Name": "Bronze",
     "UnlockBonus": [
@@ -115,9 +88,15 @@
   },
   {
     "Uid": "Crystal2",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
     "SpawnResources": {
       "Currency": "Crystals",
-      "Amount": 20
+      "Amount": 5
     },
     "Name": "Silver",
     "UnlockBonus": [
@@ -129,9 +108,15 @@
   },
   {
     "Uid": "Crystal3",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
     "SpawnResources": {
       "Currency": "Crystals",
-      "Amount": 75
+      "Amount": 20
     },
     "Name": "Gold",
     "UnlockBonus": [
@@ -143,9 +128,15 @@
   },
   {
     "Uid": "Crystal4",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      }
+    ],
     "SpawnResources": {
       "Currency": "Crystals",
-      "Amount": 250
+      "Amount": 75
     },
     "Name": "Ametist",
     "UnlockBonus": [
@@ -157,9 +148,15 @@
   },
   {
     "Uid": "Crystal5",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 100
+      }
+    ],
     "SpawnResources": {
       "Currency": "Crystals",
-      "Amount": 1000
+      "Amount": 250
     },
     "Name": "Sapphire",
     "UnlockBonus": [
@@ -185,6 +182,12 @@
   },
   {
     "Uid": "Coin2",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
     "SpawnResources": {
       "Currency": "Coins",
       "Amount": 20
@@ -199,6 +202,12 @@
   },
   {
     "Uid": "Coin3",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
     "SpawnResources": {
       "Currency": "Coins",
       "Amount": 75
@@ -213,6 +222,12 @@
   },
   {
     "Uid": "Coin4",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
     "SpawnResources": {
       "Currency": "Coins",
       "Amount": 250
@@ -227,6 +242,12 @@
   },
   {
     "Uid": "Coin5",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      }
+    ],
     "SpawnResources": {
       "Currency": "Coins",
       "Amount": 1000
@@ -660,56 +681,6 @@
     ]
   },
   {
-    "Uid": "Basket1",
-    "Name": "Small",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      }
-    ]
-  },
-  {
-    "Uid": "Basket2",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 10
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 10
-      }
-    ],
-    "Name": "Ordinary",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 3
-      }
-    ]
-  },
-  {
-    "Uid": "Basket3",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 25
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 25
-      }
-    ],
-    "Name": "Big",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
-  },
-  {
     "Uid": "A1",
     "Name": "Log",
     "UnlockBonus": [
@@ -908,112 +879,6 @@
       {
         "Currency": "Coins",
         "Amount": 25
-      }
-    ]
-  },
-  {
-    "Uid": "B1",
-    "Name": "Wheat",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      }
-    ]
-  },
-  {
-    "Uid": "B2",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
-      }
-    ],
-    "Name": "Field",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 3
-      }
-    ]
-  },
-  {
-    "Uid": "B3",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 2
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 2
-      }
-    ],
-    "Name": "Sheaf",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
-  },
-  {
-    "Uid": "B4",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 3
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 5
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
-      }
-    ],
-    "Name": "Barn",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 8
-      }
-    ]
-  },
-  {
-    "Uid": "B5",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 15
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 15
-      }
-    ],
-    "Name": "Mill",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 15
       }
     ]
   },
@@ -1268,30 +1133,6 @@
     ]
   },
   {
-    "Uid": "C12",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 100
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 150
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 150
-      }
-    ],
-    "Name": "Castle",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 130
-      }
-    ]
-  },
-  {
     "Uid": "D1",
     "Name": "Little sheep",
     "UnlockBonus": [
@@ -1351,11 +1192,21 @@
   },
   {
     "Uid": "D4",
-    "SpawnResources": {
-      "Currency": "Energy",
-      "Amount": 5
-    },
-    "Name": "Wool",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
+    "Name": "D4",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -1365,31 +1216,17 @@
   },
   {
     "Uid": "D5",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 5
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
-      }
-    ],
-    "SpawnResources": {
-      "Currency": "Energy",
-      "Amount": 20
-    },
-    "Name": "Cloth",
+    "Name": "Wool",
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 15
+        "Amount": 10
       }
-    ]
+    ],
+    "ExchangePrice": {
+      "Currency": "Crystals",
+      "Amount": 1
+    }
   },
   {
     "Uid": "E1",
@@ -1451,11 +1288,21 @@
   },
   {
     "Uid": "E4",
-    "SpawnResources": {
-      "Currency": "Energy",
-      "Amount": 1
-    },
-    "Name": "Apple",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
+    "Name": "E4",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -1465,31 +1312,17 @@
   },
   {
     "Uid": "E5",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 5
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
-      }
-    ],
-    "SpawnResources": {
-      "Currency": "Energy",
-      "Amount": 5
-    },
-    "Name": "Seed",
+    "Name": "Apple",
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 15
+        "Amount": 10
       }
-    ]
+    ],
+    "ExchangePrice": {
+      "Currency": "Crystals",
+      "Amount": 1
+    }
   },
   {
     "Uid": "F1",
@@ -1551,11 +1384,21 @@
   },
   {
     "Uid": "F4",
-    "SpawnResources": {
-      "Currency": "Energy",
-      "Amount": 1
-    },
-    "Name": "Corn",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
+    "Name": "F4",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -1565,31 +1408,17 @@
   },
   {
     "Uid": "F5",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 5
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
-      }
-    ],
-    "SpawnResources": {
-      "Currency": "Energy",
-      "Amount": 5
-    },
-    "Name": "Basket of corn",
+    "Name": "Corn",
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 15
+        "Amount": 10
       }
-    ]
+    ],
+    "ExchangePrice": {
+      "Currency": "Crystals",
+      "Amount": 1
+    }
   },
   {
     "Uid": "G1",
@@ -1651,11 +1480,21 @@
   },
   {
     "Uid": "G4",
-    "SpawnResources": {
-      "Currency": "Energy",
-      "Amount": 3
-    },
-    "Name": "Milk",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
+    "Name": "G4",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -1665,31 +1504,17 @@
   },
   {
     "Uid": "G5",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 5
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
-      }
-    ],
-    "SpawnResources": {
-      "Currency": "Energy",
-      "Amount": 10
-    },
-    "Name": "A lot of milk",
+    "Name": "Milk",
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 15
+        "Amount": 10
       }
-    ]
+    ],
+    "ExchangePrice": {
+      "Currency": "Crystals",
+      "Amount": 1
+    }
   },
   {
     "Uid": "H1",
@@ -1751,11 +1576,21 @@
   },
   {
     "Uid": "H4",
-    "SpawnResources": {
-      "Currency": "Energy",
-      "Amount": 2
-    },
-    "Name": "Egg",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
+    "Name": "H4",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -1765,31 +1600,17 @@
   },
   {
     "Uid": "H5",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 5
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
-      }
-    ],
-    "SpawnResources": {
-      "Currency": "Energy",
-      "Amount": 8
-    },
-    "Name": "Eggs",
+    "Name": "Egg",
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 15
+        "Amount": 10
       }
-    ]
+    ],
+    "ExchangePrice": {
+      "Currency": "Crystals",
+      "Amount": 1
+    }
   },
   {
     "Uid": "I1",
@@ -1851,10 +1672,20 @@
   },
   {
     "Uid": "I4",
-    "SpawnResources": {
-      "Currency": "Energy",
-      "Amount": 1
-    },
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
     "Name": "I4 Piece",
     "UnlockBonus": [
       {
@@ -1865,31 +1696,17 @@
   },
   {
     "Uid": "I5",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 5
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
-      }
-    ],
-    "SpawnResources": {
-      "Currency": "Energy",
-      "Amount": 5
-    },
     "Name": "I5 Piece",
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 15
+        "Amount": 10
       }
-    ]
+    ],
+    "ExchangePrice": {
+      "Currency": "Crystals",
+      "Amount": 1
+    }
   },
   {
     "Uid": "J1",
@@ -1951,10 +1768,20 @@
   },
   {
     "Uid": "J4",
-    "SpawnResources": {
-      "Currency": "Energy",
-      "Amount": 3
-    },
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
     "Name": "J4 Piece",
     "UnlockBonus": [
       {
@@ -1965,31 +1792,17 @@
   },
   {
     "Uid": "J5",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 5
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
-      }
-    ],
-    "SpawnResources": {
-      "Currency": "Energy",
-      "Amount": 10
-    },
     "Name": "J5 Piece",
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 15
+        "Amount": 10
       }
-    ]
+    ],
+    "ExchangePrice": {
+      "Currency": "Crystals",
+      "Amount": 1
+    }
   },
   {
     "Uid": "K1",

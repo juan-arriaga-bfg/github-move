@@ -9,22 +9,23 @@ public class LifeComponent : ECSEntity
     
     public int HP { get; protected set; }
     public bool IsDead => current == HP;
-
-    protected int current;
     
+    protected int current;
+
+    public int Value => HP == -1 ? 0 : HP - Current;
     public int Current => current;
     public float GetProgress => 1 - current/(float)HP;
-
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
         thisContext = entity as Piece;
     }
-
+    
     public void Damage(int damage)
     {
         if (IsDead) return;
-        
-        current = Mathf.Clamp(current + damage, 0, HP);
+
+        if (HP != -1) current = Mathf.Clamp(current + damage, 0, HP);
         AddResourceView.Show(StartPosition(), new CurrencyPair{Currency = Currency.Life.Name, Amount = -damage});
     }
 

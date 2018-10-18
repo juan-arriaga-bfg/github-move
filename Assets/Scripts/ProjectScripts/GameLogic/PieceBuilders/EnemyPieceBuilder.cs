@@ -7,20 +7,14 @@
         CreateViewComponent(piece);
 
         var areaLockComponent = new AreaLockCrossComponent();
+        
         AddObserver(piece, areaLockComponent);
-        piece.RegisterComponent(areaLockComponent)
-             .RegisterComponent(new TouchReactionComponent()
-                               .RegisterComponent(new TouchReactionDefinitionOpenEnemyBubble() {ViewId = ViewType.EnemyBubble})
-                                // .RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}
-                                //                   .RegisterDefinition(new TouchReactionDefinitionOpenBubble {ViewId = ViewType.Bubble})
-                                //                   // .RegisterDefinition(new TouchReactionDefinitionObstacleComponent {IsAutoStart = false}))
-                                //      )
-                               .RegisterComponent(new TouchReactionConditionComponent())
-              );
+        piece.RegisterComponent(areaLockComponent);
 
-        // .RegisterComponent(new PiecePathfindBoardCondition(context, piece)
-        //                   .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
-
+        piece.RegisterComponent(new TouchReactionComponent()
+            .RegisterComponent(new TouchReactionDefinitionOpenEnemyBubble())
+            .RegisterComponent(new TouchReactionConditionComponent()));
+        
         return piece;
     }
 }

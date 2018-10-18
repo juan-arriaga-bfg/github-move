@@ -40,6 +40,26 @@ public static class CurrencyHellper
         }
     }
     
+    public static void Purchase(List<CurrencyPair> products, CurrencyPair price, Action<bool> onSuccess = null, Vector3? flyPosition = null)
+    {
+        for (var i = 0; i < products.Count; i++)
+        {
+            var product = products[i];
+            
+            var isLast = i == products.Count - 1;
+            
+            var shopItem = new ShopItem
+            {
+                Uid = $"purchase.test.{product.Currency}.10", 
+                ItemUid = product.Currency, 
+                Amount = product.Amount,
+                CurrentPrices = new List<Price>{new Price{Currency = (isLast ? price.Currency : Currency.Cash.Name), DefaultPriceAmount = (isLast ? price.Amount : 0)}}
+            };
+            
+            PurchaseItem(shopItem, product, false, isLast ? onSuccess : null, flyPosition, 0.5f * i);
+        }
+    }
+    
     public static bool Purchase(CurrencyPair product, CurrencyPair price, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
         return Purchase(product.Currency, product.Amount, price.Currency, price.Amount, onSuccess, flyPosition);
@@ -107,7 +127,11 @@ public static class CurrencyHellper
             {
                 // on purchase failed (not enough cash)
                 onSuccess?.Invoke(false);
-                if(isShoowHint) ShowHint(shopItem.CurrentPrices[0].Currency);
+                
+                if (!isShoowHint) return;
+                
+                var prices = shopItem.CurrentPrices[0];
+                IsCanPurchase(prices.Currency, prices.DefaultPriceAmount, true);
             }
         );
         
@@ -149,55 +173,42 @@ public static class CurrencyHellper
         return diffs.Count == 0;
     }
 
-    public static bool IsCanPurchase(CurrencyPair price, out int diff)
+    public static bool IsCanPurchase(CurrencyPair price, out int diff, bool isMessageShow = false, Action onMessageConfirm = null)
     {
-        return IsCanPurchase(price.Currency, price.Amount, out diff);
+        return IsCanPurchase(price.Currency, price.Amount, out diff, isMessageShow, onMessageConfirm);
     }
-
-    public static bool IsCanPurchase(string price, int amount, out int diff)
+    
+    public static bool IsCanPurchase(CurrencyPair price, bool isMessageShow = false, Action onMessageConfirm = null)
+    {
+        var diff = 0;
+        return IsCanPurchase(price.Currency, price.Amount, out diff, isMessageShow, onMessageConfirm);
+    }
+    
+    public static bool IsCanPurchase(string price, int amount, bool isMessageShow = false, Action onMessageConfirm = null)
+    {
+        var diff = 0;
+        return IsCanPurchase(price, amount, out diff, isMessageShow, onMessageConfirm);
+    }
+    
+    public static bool IsCanPurchase(string price, int amount, out int diff, bool isMessageShow = false, Action onMessageConfirm = null)
     {
         diff = 0;
         
-        if (price == null) return false;
-
+        if (string.IsNullOrEmpty(price)) return false;
         if (price == Currency.Cash.Name) return true;
         
         var storageItem = ProfileService.Current.Purchases.GetStorageItem(price);
 
-        if (storageItem.Amount >= amount)
-        {
-            return true;
-        }
-
+        if (storageItem.Amount >= amount) return true;
+        
         diff = amount - storageItem.Amount;
+
+        if (isMessageShow) ShowHint(price, diff, onMessageConfirm);
+        
         return false;
     }
     
-    public static bool IsCanPurchase(string price, int amount, bool isMessageShow = false)
-    {
-        var isCan = ShopService.Current.IsCanPurchase(new Price{Currency = price, DefaultPriceAmount = amount});
-
-        if (isCan == false && isMessageShow)
-        {
-            ShowHint(price);
-        }
-        
-        return isCan;
-    }
-
-    public static bool IsCanPurchase(CurrencyPair price, bool isMessageShow = false)
-    {
-        var isCan = ShopService.Current.IsCanPurchase(new Price{Currency = price.Currency, DefaultPriceAmount = price.Amount});
-        
-        if (isCan == false && isMessageShow)
-        {
-            ShowHint(price.Currency);
-        }
-        
-        return isCan;
-    }
-
-    public static bool IsCanPurchase(List<CurrencyPair> prices, bool isMessageShow = false)
+    public static bool IsCanPurchase(List<CurrencyPair> prices, bool isMessageShow = false, Action onMessageConfirm = null)
     {
         var isCan = true;
         
@@ -259,7 +270,7 @@ public static class CurrencyHellper
         return dict;
     }
 
-    private static void ShowHint(string currency)
+    private static void ShowHint(string currency, int diff, Action onMessageConfirm)
     {
         if (currency == Currency.Worker.Name)
         {

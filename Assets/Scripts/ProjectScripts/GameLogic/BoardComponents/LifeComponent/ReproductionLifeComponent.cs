@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 public class ReproductionLifeComponent : StorageLifeComponent
 {
@@ -43,23 +42,25 @@ public class ReproductionLifeComponent : StorageLifeComponent
     protected override LifeSaveItem InitInSave(BoardPosition position)
     {
         var item = base.InitInSave(position);
-        
-        if(item != null) cooldown.Start(item.StartTime);
+
+        if (item != null && item.IsStart) cooldown.Start(item.StartTime);
         
         return item;
     }
 
     public override bool Damage()
     {
-        if (!cooldown.IsExecuteable()) return base.Damage();
+        if (cooldown.IsExecuteable())
+        {
+            UIMessageWindowController.CreateTimerCompleteMessage(
+                "Complete now!",
+                "Would you like to build the item right now for crystals?",
+                cooldown);
+
+            return false;
+        }
         
-        UIMessageWindowController.CreateTimerCompleteMessage(
-            "Complete now!",
-            "Would you like to build the item right now for crystals?",
-            "Complete now ",
-            cooldown);
-        
-        return false;
+        return base.Damage();
     }
 
     protected override void Success()
@@ -97,7 +98,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
         {
             IsCheckMatch = false,
             At = thisContext.CachedPosition,
-            PieceTypeId = PieceType.OX1.Id
+            PieceTypeId = def.ObstacleType
         });
     }
 

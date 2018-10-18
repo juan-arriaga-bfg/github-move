@@ -8,7 +8,7 @@ public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMat
         return new List<int>
         {
             PieceType.A8.Id,
-            PieceType.C11.Id,
+            PieceType.C10.Id,
             PieceType.K9.Id,
             PieceType.L8.Id,
         };

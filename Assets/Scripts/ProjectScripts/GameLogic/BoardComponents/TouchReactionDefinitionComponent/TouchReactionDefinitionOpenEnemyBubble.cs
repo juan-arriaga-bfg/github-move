@@ -4,7 +4,6 @@ using DG.Tweening;
 
 public class TouchReactionDefinitionOpenEnemyBubble : TouchReactionDefinitionComponent
 {
-    public ViewType ViewId;
     public Action<bool> OnChange;
     
     private BubbleView view;
@@ -12,7 +11,7 @@ public class TouchReactionDefinitionOpenEnemyBubble : TouchReactionDefinitionCom
     
     public override bool IsViewShow(ViewDefinitionComponent viewDefinition)
     {
-        return viewDefinition != null && viewDefinition.AddView(ViewId).IsShow;
+        return viewDefinition != null && viewDefinition.AddView(ViewType.Bubble).IsShow;
     }
     
     public override bool Make(BoardPosition position, Piece piece)
@@ -21,11 +20,11 @@ public class TouchReactionDefinitionOpenEnemyBubble : TouchReactionDefinitionCom
 
         if (piece.ViewDefinition == null) return false;
 
-        view = piece.ViewDefinition.AddView(ViewId) as BubbleView;
+        view = piece.ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
 
         enemyDef = GameDataService.Current.EnemiesManager.GetEnemyDefById(piece.PieceType);
 
-        view.SetData($"{enemyDef.Name}", $"Erradicate <sprite name={enemyDef.Price.Currency}> {enemyDef.Price.Amount}", OnClick, true, false);
+        view.SetData($"{enemyDef.Name}", $"Eradicate <sprite name={enemyDef.Price.Currency}> {enemyDef.Price.Amount}", OnClick, true, false);
 
         OnChange?.Invoke(!view.IsShow);
         view.Change(!view.IsShow);
