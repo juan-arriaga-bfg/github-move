@@ -222,7 +222,29 @@ public static class CurrencyHellper
 
         return isCan;
     }
-
+    
+    private static void ShowHint(string currency, int diff, Action onMessageConfirm)
+    {
+        if (currency == Currency.Worker.Name)
+        {
+            return;
+        }
+        
+        if (currency == Currency.Coins.Name)
+        {
+            UIMessageWindowController.CreateNeedCoinsMessage();
+            return;
+        }
+        
+        if (currency == Currency.Energy.Name)
+        {
+            UIService.Get.ShowWindow(UIWindowType.EnergyShopWindow);
+            return;
+        }
+        
+        UIMessageWindowController.CreateNeedCurrencyMessage(currency);
+    }
+    
     public static CurrencyPair ResourcePieceToCurrence(Dictionary<int, int> dict, string currency)
     {
         var amount = 0;
@@ -270,25 +292,30 @@ public static class CurrencyHellper
         return dict;
     }
 
-    private static void ShowHint(string currency, int diff, Action onMessageConfirm)
+    public static Dictionary<int, int> FiltrationRewards(List<CurrencyPair> src, out List<CurrencyPair> currency)
     {
-        if (currency == Currency.Worker.Name)
+        var dict = new Dictionary<int, int>();
+        currency = new List<CurrencyPair>();
+
+        foreach (var reward in src)
         {
-            return;
+            var id = PieceType.Parse(reward.Currency);
+
+            if (id == PieceType.None.Id)
+            {
+                currency.Add(reward);
+                continue;
+            }
+            
+            if (dict.ContainsKey(id) == false)
+            {
+                dict.Add(id, reward.Amount);
+                continue;
+            }
+            
+            dict[id] += reward.Amount;
         }
-        
-        if (currency == Currency.Coins.Name)
-        {
-            UIMessageWindowController.CreateNeedCoinsMessage();
-            return;
-        }
-        
-        if (currency == Currency.Energy.Name)
-        {
-            UIService.Get.ShowWindow(UIWindowType.EnergyShopWindow);
-            return;
-        }
-        
-        UIMessageWindowController.CreateNeedCurrencyMessage(currency);
+
+        return dict;
     }
 }

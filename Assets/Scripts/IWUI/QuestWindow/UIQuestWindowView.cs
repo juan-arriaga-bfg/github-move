@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.Linq;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,6 +28,8 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         
         SetTitle(model.Title);
         SetMessage(model.Message);
+        
+        model.InitReward();
 
         descriptionLabel.Text = model.Description;
         rewardLabel.Text = model.RewardText;
@@ -47,43 +47,23 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         
         var windowModel = Model as UIQuestWindowModel;
     }
-
-    private List<CurrencyPair> RewardsCurrency(List<CurrencyPair> rewards)
-    {
-        return rewards.FindAll(pair => PieceType.Parse(pair.Currency) == PieceType.None.Id); 
-    }
     
     public override void OnViewCloseCompleted()
     {
         var windowModel = Model as UIQuestWindowModel;
         
-        if(isComplete == false)
-        {
-            windowModel.Quest = null;
-            return;
-        }
+        windowModel.Quest = null;
         
-        Dictionary<int, int> pieces = windowModel.ConvertRewardsToDict(windowModel.Reward);
-        List<CurrencyPair> rewards = RewardsCurrency(windowModel.Reward);
+        if(isComplete == false) return;
+        
         var board = BoardService.Current.GetBoardById(0);
         var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
-        
-        windowModel.Quest = null;
         
         board.ActionExecutor.AddAction(new EjectionPieceAction
         {
             From = position,
-            Pieces = pieces,
-            OnComplete = () =>
-            {
-                var sequence = DOTween.Sequence();
-                
-                for (var i = 0; i < rewards.Count; i++)
-                {
-                    var reward = rewards[i];
-                    sequence.InsertCallback(0.5f*i, () => AddResourceView.Show(position, reward));
-                }
-            }
+            Pieces = windowModel.PiecesReward,
+            OnComplete = () => { AddResourceView.Show(position, windowModel.CurrencysReward); }
         });
     }
 
@@ -98,7 +78,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         {
             var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
             
-            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, windowModel.Reward.Sum(e => e.Amount)))
+            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, windowModel.PiecesReward.Sum(e => e.Value)))
             {
                 UIErrorWindowController.AddError("Need more free cells");
                 return;

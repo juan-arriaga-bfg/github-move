@@ -29,9 +29,10 @@ public class UIQuestWindowModel : IWWindowModel
     public string Message => questDescription?.Message;
 
     public string Description => FirstTask.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
-    
-    public List<CurrencyPair> Reward => quest.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
 
+    public Dictionary<int, int> PiecesReward;
+    public List<CurrencyPair> CurrencysReward;
+    
     public string ButtonText
     {
         get
@@ -75,78 +76,42 @@ public class UIQuestWindowModel : IWWindowModel
             return $"<color=#{( isCompleted ? "FFFFFF" : "FE4704")}><size=55>{current}</size></color>/{target}";
         }
     }
-
-    public Dictionary<int, int> ConvertRewardsToDict(List<CurrencyPair> src)
-    {
-        var rewards = new Dictionary<int, int>();
-
-        foreach (var reward in src)
-        {
-            var id = PieceType.Parse(reward.Currency);
-
-            if (id == PieceType.None.Id) continue;
-
-            if (rewards.ContainsKey(id))
-            {
-                rewards[id] += reward.Amount;
-                continue;
-            }
-
-            rewards.Add(id, reward.Amount);
-        }
-
-        return rewards;
-    }
     
     public string RewardText
     {
         get
         {
-            // QuestRewardComponent rewardComponent = quest.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid);
-            // if (rewardComponent == null)
-            // {
-            //     return string.Empty;
-            // }
-
-            var rewardDef = Reward;
-            
             var types = new List<string>();
             var rewards = new List<string>();
             
-            var str = new StringBuilder("<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>Reward:</color></font> <size=50>");
-            
-            foreach (var reward in rewardDef)
+            foreach (var reward in PiecesReward)
             {
-                var currency = reward.Currency;
-                
-                if(types.Contains(currency)) continue;
-                
-                var id = PieceType.Parse(currency);
+                var def = GameDataService.Current.PiecesManager.GetPieceDef(reward.Key);
 
-                if (id != PieceType.None.Id)
+                if (def?.SpawnResources == null)
                 {
-                    var def = GameDataService.Current.PiecesManager.GetPieceDef(id);
-
-                    if (def?.SpawnResources == null)
-                    {
-                        types.Add(currency);
-                        rewards.Add(reward.ToStringIcon());
-                        continue;
-                    }
-                    
-                    currency = def.SpawnResources.Currency;
+                    rewards.Add(new CurrencyPair{Currency = PieceType.Parse(reward.Key), Amount = reward.Value}.ToStringIcon(false));
+                    continue;
                 }
                 
+                var currency = def.SpawnResources.Currency;
+                
                 if(types.Contains(currency)) continue;
                 
+                var pair = CurrencyHellper.ResourcePieceToCurrence(PiecesReward, currency);
+                
+                if (pair.Amount == 0) pair.Amount = reward.Value;
+                
                 types.Add(currency);
-                
-                var pair = CurrencyHellper.ResourcePieceToCurrence(ConvertRewardsToDict(rewardDef), currency);
-
-                if (pair.Amount == 0) pair.Amount = reward.Amount;
-                
                 rewards.Add(pair.ToStringIcon(false));
             }
+
+            foreach (var pair in CurrencysReward)
+            {
+                rewards.Add(pair.ToStringIcon(false));
+            }
+            
+            var str = new StringBuilder("<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>Reward:</color></font> <size=50>");
             
             str.Append(string.Join("  ", rewards));
             str.Append("</size>");
@@ -156,4 +121,13 @@ public class UIQuestWindowModel : IWWindowModel
     }
 
     public Sprite Icon => UiQuestButton.GetIcon(quest);
+
+    public void InitReward()
+    {
+        var reward = quest.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
+        
+        if(reward == null) return;
+
+        PiecesReward = CurrencyHellper.FiltrationRewards(reward, out CurrencysReward);
+    }
 }
