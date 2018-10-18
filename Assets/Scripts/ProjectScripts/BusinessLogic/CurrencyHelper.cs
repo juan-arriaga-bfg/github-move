@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 
 public static class CurrencyHellper
@@ -317,5 +318,40 @@ public static class CurrencyHellper
         }
 
         return dict;
+    }
+
+    public static string RewardsToString(string separator, Dictionary<int, int> pieces, List<CurrencyPair> currencys)
+    {
+        var types = new List<string>();
+        var rewards = new List<string>();
+            
+        foreach (var reward in pieces)
+        {
+            var def = GameDataService.Current.PiecesManager.GetPieceDef(reward.Key);
+
+            if (def?.SpawnResources == null)
+            {
+                rewards.Add(new CurrencyPair{Currency = PieceType.Parse(reward.Key), Amount = reward.Value}.ToStringIcon(false));
+                continue;
+            }
+                
+            var currency = def.SpawnResources.Currency;
+                
+            if(types.Contains(currency)) continue;
+                
+            var pair = ResourcePieceToCurrence(pieces, currency);
+                
+            if (pair.Amount == 0) pair.Amount = reward.Value;
+                
+            types.Add(currency);
+            rewards.Add(pair.ToStringIcon(false));
+        }
+        
+        foreach (var pair in currencys)
+        {
+            rewards.Add(pair.ToStringIcon(false));
+        }
+        
+        return string.Join(separator, rewards);
     }
 }

@@ -81,39 +81,9 @@ public class UIQuestWindowModel : IWWindowModel
     {
         get
         {
-            var types = new List<string>();
-            var rewards = new List<string>();
-            
-            foreach (var reward in PiecesReward)
-            {
-                var def = GameDataService.Current.PiecesManager.GetPieceDef(reward.Key);
-
-                if (def?.SpawnResources == null)
-                {
-                    rewards.Add(new CurrencyPair{Currency = PieceType.Parse(reward.Key), Amount = reward.Value}.ToStringIcon(false));
-                    continue;
-                }
-                
-                var currency = def.SpawnResources.Currency;
-                
-                if(types.Contains(currency)) continue;
-                
-                var pair = CurrencyHellper.ResourcePieceToCurrence(PiecesReward, currency);
-                
-                if (pair.Amount == 0) pair.Amount = reward.Value;
-                
-                types.Add(currency);
-                rewards.Add(pair.ToStringIcon(false));
-            }
-
-            foreach (var pair in CurrencysReward)
-            {
-                rewards.Add(pair.ToStringIcon(false));
-            }
-            
             var str = new StringBuilder("<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>Reward:</color></font> <size=50>");
             
-            str.Append(string.Join("  ", rewards));
+            str.Append(CurrencyHellper.RewardsToString("  ", PiecesReward, CurrencysReward));
             str.Append("</size>");
             
             return str.ToString();

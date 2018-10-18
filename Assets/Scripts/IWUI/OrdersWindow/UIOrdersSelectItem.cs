@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -152,9 +153,17 @@ public class UIOrdersSelectItem : UISimpleScrollItem
 
         if (order.State == OrderState.Complete)
         {
+            var board = BoardService.Current.GetBoardById(0);
+            var position = board.BoardLogic.PositionsCache.GetRandomPositions(order.Customer, 1)[0];
+            
+            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, order.PiecesReward.Sum(e => e.Value)))
+            {
+                UIErrorWindowController.AddError("Need more free cells");
+                return;
+            }
+            
             isComplete = true;
             context.Controller.CloseCurrentWindow();
-            return;
         }
     }
 }

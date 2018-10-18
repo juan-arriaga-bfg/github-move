@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine.UI;
 
@@ -20,22 +21,47 @@ public class Order
     
     public Action OnStateChange;
 
+    private Dictionary<int, int> piecesReward;
+    public Dictionary<int, int> PiecesReward
+    {
+        get
+        {
+            if (piecesReward == null)
+            {
+                InitReward();
+            }
+            
+            return piecesReward;
+        }
+    }
+    
+    private List<CurrencyPair> currencysReward;
+    public List<CurrencyPair> CurrencysReward
+    {
+        get
+        {
+            if (currencysReward == null)
+            {
+                InitReward();
+            }
+            
+            return currencysReward;
+        }
+    }
+
+    private void InitReward()
+    {
+        piecesReward = CurrencyHellper.FiltrationRewards(Def.Rewards, out currencysReward);
+    }
+    
     private string reward;
     public string Reward
     {
         get
         {
             if (string.IsNullOrEmpty(reward) == false) return reward;
-
-            var str = new StringBuilder();
             
-            for (var i = 0; i < Def.Rewards.Count; i++)
-            {
-                if (i != 0) str.Append(Separator);
-                str.Append(Def.Rewards[i].ToStringIcon(false));
-            }
-            
-            reward = str.ToString();
+            reward = CurrencyHellper.RewardsToString(Separator, PiecesReward, CurrencysReward);
             return reward;
         }
     }
