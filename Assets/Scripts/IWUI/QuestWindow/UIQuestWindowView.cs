@@ -48,7 +48,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIQuestWindowModel;
     }
 
-    private List<CurrencyPair> RewardsCurruncy(List<CurrencyPair> rewards)
+    private List<CurrencyPair> RewardsCurrency(List<CurrencyPair> rewards)
     {
         return rewards.FindAll(pair => PieceType.Parse(pair.Currency) == PieceType.None.Id); 
     }
@@ -64,7 +64,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         }
         
         Dictionary<int, int> pieces = windowModel.ConvertRewardsToDict(windowModel.Reward);
-        List<CurrencyPair> rewards = RewardsCurruncy(windowModel.Reward);
+        List<CurrencyPair> rewards = RewardsCurrency(windowModel.Reward);
         var board = BoardService.Current.GetBoardById(0);
         var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
         
@@ -96,14 +96,13 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         
         if (quest.IsCompleted())
         {
-            // var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
+            var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
             
-            // if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, windowModel.Reward.Sum(e => e.Amount)))
-            // {
-            //     UIErrorWindowController.AddError("Need more free cells");
-            //     return;
-            // }
-            
+            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, windowModel.Reward.Sum(e => e.Amount)))
+            {
+                UIErrorWindowController.AddError("Need more free cells");
+                return;
+            }
             
             quest.SetClaimedState();
             GameDataService.Current.QuestsManager.CompleteQuest(quest.Id);
