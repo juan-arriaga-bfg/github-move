@@ -400,11 +400,6 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     },
                     new CodexChainDef
                     {
-                        Name = "Farm",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.B1.Id))
-                    },
-                    new CodexChainDef
-                    {
                         Name = "Stone",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.C1.Id))
                     },

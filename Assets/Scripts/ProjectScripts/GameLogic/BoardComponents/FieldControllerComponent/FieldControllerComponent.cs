@@ -96,7 +96,6 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(25, 12), PieceType.OX1.Id, PieceType.OX9.Id);
         AddPieces(new BoardPosition(6, 16), PieceType.OEpic1.Id, PieceType.OEpic9.Id);
         
-        AddPieces(new BoardPosition(10, 12), PieceType.B1.Id, PieceType.B5.Id);
         AddPieces(new BoardPosition(11, 12), PieceType.C1.Id, PieceType.C11.Id, true);
         AddPieces(new BoardPosition(12, 12), PieceType.A1.Id, PieceType.A9.Id, true);
         AddPieces(new BoardPosition(13, 12), PieceType.K1.Id, PieceType.K10.Id, true);
@@ -123,7 +122,6 @@ public class FieldControllerComponent : IECSComponent
     private void TestFieldAlex()
     {
         AddPieces(new BoardPosition(17, 16), PieceType.A1.Id, PieceType.A1.Id);
-        AddPieces(new BoardPosition(18, 16), PieceType.B1.Id, PieceType.B5.Id);
         AddPieces(new BoardPosition(19, 16), PieceType.C1.Id, PieceType.C11.Id);
         AddPieces(new BoardPosition(20, 16), PieceType.D1.Id, PieceType.D5.Id);
         AddPieces(new BoardPosition(21, 16), PieceType.Char1.Id, PieceType.Char9.Id);

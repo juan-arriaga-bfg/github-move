@@ -18,11 +18,6 @@ public class R
      public const string A7Piece = "A7Piece";
      public const string A8Piece = "A8Piece";
      public const string A9Piece = "A9Piece";
-     public const string B1Piece = "B1Piece";
-     public const string B2Piece = "B2Piece";
-     public const string B3Piece = "B3Piece";
-     public const string B4Piece = "B4Piece";
-     public const string B5Piece = "B5Piece";
      public const string C1Piece = "C1Piece";
      public const string C2Piece = "C2Piece";
      public const string C3Piece = "C3Piece";

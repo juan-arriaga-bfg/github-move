@@ -32,11 +32,6 @@ public class HighlightTaskPiece : ITaskHighlight
             image = "wood_UI";
             positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Obstacle, 1);
         }
-        else if(piece == PieceType.B1.Id)
-        {
-            title = "Need wheat pieces?";
-            image = "hay_UI";
-        }
         else if(piece == PieceType.C1.Id)
         {
             title = "Need stone pieces?";

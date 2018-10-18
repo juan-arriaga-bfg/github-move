@@ -26,9 +26,6 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<CharacterPieceBuilder>(PieceType.Char1.Id, PieceType.Char9.Id, dict);
         
         dict = AddBuildingBranchPiece(dict, PieceType.A1.Id, PieceType.A9.Id);
-        
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.B1.Id, PieceType.B5.Id, dict);
-        
         dict = AddBuildingBranchPiece(dict, PieceType.C1.Id, PieceType.C11.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.K1.Id, PieceType.K10.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.L1.Id, PieceType.L9.Id);

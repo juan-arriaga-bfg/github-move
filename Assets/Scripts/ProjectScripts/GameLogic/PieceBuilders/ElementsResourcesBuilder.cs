@@ -83,12 +83,6 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.A9Fake.Id, R.A9Piece);
         dict.Add(PieceType.A9.Id, R.A9Piece);
         
-        dict.Add(PieceType.B1.Id, R.B1Piece);
-        dict.Add(PieceType.B2.Id, R.B2Piece);
-        dict.Add(PieceType.B3.Id, R.B3Piece);
-        dict.Add(PieceType.B4.Id, R.B4Piece);
-        dict.Add(PieceType.B5.Id, R.B5Piece);
-        
         dict.Add(PieceType.C1.Id, R.C1Piece);
         dict.Add(PieceType.C2.Id, R.C2Piece);
         dict.Add(PieceType.C3Fake.Id, R.C3Piece);
