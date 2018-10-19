@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 
 public static class CurrencyHellper
@@ -222,7 +223,29 @@ public static class CurrencyHellper
 
         return isCan;
     }
-
+    
+    private static void ShowHint(string currency, int diff, Action onMessageConfirm)
+    {
+        if (currency == Currency.Worker.Name)
+        {
+            return;
+        }
+        
+        if (currency == Currency.Coins.Name)
+        {
+            UIMessageWindowController.CreateNeedCoinsMessage();
+            return;
+        }
+        
+        if (currency == Currency.Energy.Name)
+        {
+            UIService.Get.ShowWindow(UIWindowType.EnergyShopWindow);
+            return;
+        }
+        
+        UIMessageWindowController.CreateNeedCurrencyMessage(currency);
+    }
+    
     public static CurrencyPair ResourcePieceToCurrence(Dictionary<int, int> dict, string currency)
     {
         var amount = 0;
@@ -270,25 +293,65 @@ public static class CurrencyHellper
         return dict;
     }
 
-    private static void ShowHint(string currency, int diff, Action onMessageConfirm)
+    public static Dictionary<int, int> FiltrationRewards(List<CurrencyPair> src, out List<CurrencyPair> currency)
     {
-        if (currency == Currency.Worker.Name)
+        var dict = new Dictionary<int, int>();
+        currency = new List<CurrencyPair>();
+
+        foreach (var reward in src)
         {
-            return;
+            var id = PieceType.Parse(reward.Currency);
+
+            if (id == PieceType.None.Id)
+            {
+                currency.Add(reward);
+                continue;
+            }
+            
+            if (dict.ContainsKey(id) == false)
+            {
+                dict.Add(id, reward.Amount);
+                continue;
+            }
+            
+            dict[id] += reward.Amount;
+        }
+
+        return dict;
+    }
+
+    public static string RewardsToString(string separator, Dictionary<int, int> pieces, List<CurrencyPair> currencys)
+    {
+        var types = new List<string>();
+        var rewards = new List<string>();
+            
+        foreach (var reward in pieces)
+        {
+            var def = GameDataService.Current.PiecesManager.GetPieceDef(reward.Key);
+
+            if (def?.SpawnResources == null)
+            {
+                rewards.Add(new CurrencyPair{Currency = PieceType.Parse(reward.Key), Amount = reward.Value}.ToStringIcon(false));
+                continue;
+            }
+                
+            var currency = def.SpawnResources.Currency;
+                
+            if(types.Contains(currency)) continue;
+                
+            var pair = ResourcePieceToCurrence(pieces, currency);
+                
+            if (pair.Amount == 0) pair.Amount = reward.Value;
+                
+            types.Add(currency);
+            rewards.Add(pair.ToStringIcon(false));
         }
         
-        if (currency == Currency.Coins.Name)
+        foreach (var pair in currencys)
         {
-            UIMessageWindowController.CreateNeedCoinsMessage();
-            return;
+            rewards.Add(pair.ToStringIcon(false));
         }
         
-        if (currency == Currency.Energy.Name)
-        {
-            UIService.Get.ShowWindow(UIWindowType.EnergyShopWindow);
-            return;
-        }
-        
-        UIMessageWindowController.CreateNeedCurrencyMessage(currency);
+        return string.Join(separator, rewards);
     }
 }
