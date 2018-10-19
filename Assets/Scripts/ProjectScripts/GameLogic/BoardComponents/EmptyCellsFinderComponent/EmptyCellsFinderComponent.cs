@@ -156,7 +156,7 @@ public class EmptyCellsFinderComponent : IECSComponent
 		var free = new List<BoardPosition>();
 		if (!FindRandomNearWithPointInCenter(position, free, count))
 			return false;
-
+		Debug.LogError($"free cells count = {free.Count}, need {count}");
 		return free.Count >= count;
 	}
 	
