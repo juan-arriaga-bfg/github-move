@@ -17,18 +17,10 @@ public class DragAndCheckMatchAction : IBoardAction
 	public bool PerformAction(BoardController gameBoardController)
 	{
 		var pieceFrom = gameBoardController.BoardLogic.GetPieceAt(From);
-
-//		if (pieceFrom == null)
-//		{
-//			Reset(gameBoardController.RendererContext);
-//			return false;
-//		}
-		
-		/*targetPositions = GetAllPiecePoints(pieceFrom, To);
-		fromPositions = GetAllPiecePoints(pieceFrom , From);*/
 		
 		targetPositions = new List<BoardPosition> {To};
 		fromPositions = new List<BoardPosition> {From};
+		
 		if (pieceFrom.Multicellular != null)
 		{
 			targetPositions = pieceFrom.Multicellular.Mask.ToList();
@@ -61,34 +53,8 @@ public class DragAndCheckMatchAction : IBoardAction
 	}
 	
 	private bool CheckValid(BoardController board)
-	{	
-//		if (To.IsValidFor(board.BoardDef.Width, board.BoardDef.Height) == false || From.Equals(To))
-//		{
-//			return false;
-//		}
-//
-//		var pieceFrom = board.BoardLogic.GetPieceAt(From);
-//		
-//		
-//		foreach (var position in targetPositions)
-//		{
-//			var pieceTo = board.BoardLogic.GetPieceAt(position);
-//			if (pieceFrom.Equals(pieceTo))
-//				continue;
-//			
-//			if (board.BoardLogic.IsLockedCell(position))
-//				return false;
-//			
-//			if (pieceTo != null)
-//			{
-//				var draggable = pieceTo.GetComponent<DraggablePieceComponent>(DraggablePieceComponent.ComponentGuid);
-//				if (draggable == null || !draggable.IsDraggable(position) || IsLargeObject(pieceTo))
-//					return false;
-//			}
-//		}
-
-		if (From.Equals(To))
-			return false;
+	{
+		if (From.Equals(To)) return false;
 		
 		var pieceFrom = board.BoardLogic.GetPieceAt(From);
 		
@@ -139,15 +105,15 @@ public class DragAndCheckMatchAction : IBoardAction
 		
 		var saveTarget = new List<Piece>();
 		var countPositions = fromPositions.Count;
-		
+
 		for (int i = 0; i < countPositions; i++)
 		{
 			var toPiece = logic.GetPieceAt(targetPositions[i]);
 
 			if (toPiece != null && multicellularPiece != toPiece)
-				saveTarget.Add(toPiece);	
+				saveTarget.Add(toPiece);
 			logic.RemovePieceFromBoardSilent(fromPositions[i]);
-			if(toPiece != null)
+			if (toPiece != null)
 				logic.RemovePieceFromBoardSilent(targetPositions[i]);
 		}
 
@@ -306,21 +272,10 @@ public class DragAndCheckMatchAction : IBoardAction
 	private void MovePiece(BoardController board, BoardPosition from, BoardPosition to)
 	{
 		var logic = board.BoardLogic;
-
-		//var fromPiece = board.BoardLogic.GetPieceAt(from);
 		
-		//var fromPositions = GetAllPiecePoints(piece, from);
-		//var targetPositions = GetAllPiecePoints(piece, to);
-
 		logic.LockCell(from, this);
 		logic.LockCell(to, this);
 		
-		/*for (int i = 0; i < fromPositions.Count; i++)
-		{
-			logic.LockCell(fromPositions[i], this);
-			logic.LockCell(targetPositions[i], this);	
-		}*/	
-
 		var animation = new MovePieceFromToAnimation
 		{
 			From = from,
@@ -331,11 +286,6 @@ public class DragAndCheckMatchAction : IBoardAction
 		{
 			logic.UnlockCell(from, this);
 			logic.UnlockCell(to, this);
-			/*for (int i = 0; i < fromPositions.Count; i++)
-			{
-				logic.UnlockCell(fromPositions[i], this);
-				logic.UnlockCell(targetPositions[i], this);	
-			}*/
 		};
 
 		board.RendererContext.AddAnimationToQueue(animation);
@@ -397,7 +347,6 @@ public class DragAndCheckMatchAction : IBoardAction
 		from.AddRange(piecePositions);
 		from.Add(From);
 		
-		//var freeSpace = new List<BoardPosition>();
 		var current = 0;
 		while (current < free.Count)
 		{

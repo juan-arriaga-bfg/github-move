@@ -62,4 +62,9 @@ public class PartPiecesLogicComponent : IECSComponent
         
         piece.Context.ActionExecutor.AddAction(action);
     }
+
+    public bool Work(BoardPosition position)
+    {
+        return true;
+    }
 }

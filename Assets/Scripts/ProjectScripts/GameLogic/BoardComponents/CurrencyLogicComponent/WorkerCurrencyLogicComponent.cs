@@ -135,4 +135,60 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         
         return false;
     }
+
+    public bool SetExtra(Piece worker, BoardPosition targetPosition)
+    {
+        if (worker.PieceType != PieceType.Worker1.Id || context.BoardLogic.IsEmpty(targetPosition)) return false;
+
+        var target = context.BoardLogic.GetPieceAt(targetPosition);
+        var def = PieceType.GetDefById(target.PieceType);
+
+        if (def.Filter.Has(PieceTypeFilter.WorkPlace) == false) return false;
+        
+        if (CheckLife(target) || CheckPieceState(target) || CheckBuilding(target))
+        {
+            context.ActionExecutor.AddAction(new CollapsePieceToAction
+            {
+                To = targetPosition,
+                Positions = new List<BoardPosition> {worker.CachedPosition},
+            });
+
+            return true;
+        }
+        
+        return false;
+    }
+
+    private bool CheckLife(Piece target)
+    {
+        var life = target.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
+
+        if (life == null) return false;
+
+        if (!life.Locker.IsLocked) return life.Damage(true);
+        
+        UIErrorWindowController.AddError("Someone is working here already!");
+        return false;
+    }
+
+    private bool CheckPieceState(Piece target)
+    {
+        var state = target.GetComponent<PieceStateComponent>(PieceStateComponent.ComponentGuid);
+
+        if (state == null) return false;
+
+        if (state.State == BuildingState.InProgress || state.State == BuildingState.Complete)
+        {
+            UIErrorWindowController.AddError("Someone is working here already!");
+            return false;
+        }
+        
+        state.Work(true);
+        return true;
+    }
+
+    private bool CheckBuilding(Piece target)
+    {
+        return false;
+    }
 }

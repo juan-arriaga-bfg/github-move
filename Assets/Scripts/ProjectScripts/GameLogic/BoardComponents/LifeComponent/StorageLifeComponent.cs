@@ -1,5 +1,8 @@
-﻿public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerComponent
+﻿public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerComponent, ILockerComponent
 {
+    private LockerComponent locker;
+    public LockerComponent Locker => locker ?? GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
+    
     protected StorageComponent storage;
     
     public virtual CurrencyPair Energy => new CurrencyPair {Currency = Currency.Energy.Name, Amount = 0};
@@ -12,6 +15,14 @@
     
     public virtual TimerComponent Timer => storage.Timer;
     public float GetProgressNext => 1 - (current+1)/(float)HP;
+
+    public override void OnRegisterEntity(ECSEntity entity)
+    {
+        base.OnRegisterEntity(entity);
+        
+        locker = new LockerComponent();
+        RegisterComponent(locker);
+    }
 
     public virtual void OnAddToBoard(BoardPosition position, Piece context = null)
     {
@@ -61,14 +72,14 @@
         storage.Timer.OnStart -= OnTimerComplete;
     }
     
-    public virtual bool Damage()
+    public virtual bool Damage(bool isExtra = false)
     {
         if (IsDead) return false;
         
         var isSuccess = false;
 
         if (CurrencyHellper.IsCanPurchase(Energy, true) == false
-            || thisContext.Context.WorkerLogic.Get(thisContext.CachedPosition, storage.Timer) == false) return false;
+            || isExtra == false && thisContext.Context.WorkerLogic.Get(thisContext.CachedPosition, storage.Timer) == false) return false;
         
         Success();
         
@@ -90,6 +101,8 @@
     {
         if (IsDead == false) OnStep();
         else OnComplete();
+        
+        locker.Lock(this, false);
     }
     
     protected virtual void Success()
@@ -106,6 +119,7 @@
 
     protected virtual void OnSpawnRewards()
     {
+        locker.Unlock(this);
     }
     
     protected virtual void OnTimerComplete()

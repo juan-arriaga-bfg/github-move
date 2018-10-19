@@ -83,6 +83,8 @@ public class ObstacleLifeComponent : StorageLifeComponent
         
         AddResourceView.Show(StartPosition(), rewards);
         thisContext.Context.HintCooldown.Step(HintType.Obstacle);
+
+        base.OnSpawnRewards();
     }
     
     protected override void OnTimerComplete()

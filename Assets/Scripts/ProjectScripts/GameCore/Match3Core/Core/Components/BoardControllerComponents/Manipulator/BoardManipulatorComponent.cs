@@ -254,12 +254,16 @@ public class BoardManipulatorComponent : ECSEntity,
                 if ((cachedDragDownPos - pos).sqrMagnitude > 0.01f && !isTouch)
                 {
                     var targetPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
-                    
-                    context.ActionExecutor.AddAction(new DragAndCheckMatchAction
+                    var toPosition = new BoardPosition(targetPosition.X, targetPosition.Y, fromPosition.Z);
+
+                    if (context.WorkerLogic.SetExtra(pieceView.Piece, toPosition) == false)
                     {
-                        From = fromPosition,
-                        To = new BoardPosition(targetPosition.X, targetPosition.Y, fromPosition.Z)
-                    });
+                        context.ActionExecutor.AddAction(new DragAndCheckMatchAction
+                        {
+                            From = fromPosition,
+                            To = toPosition
+                        });
+                    }
                     
                     cachedViewForDrag = null;
                     cameraManipulator.CameraMove.UnLock(this);

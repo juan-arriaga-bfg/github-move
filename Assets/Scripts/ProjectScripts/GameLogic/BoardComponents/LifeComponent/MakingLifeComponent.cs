@@ -18,8 +18,11 @@
         def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType).MakingDef;
         
         HP = -1;
+        
         cooldown = new TimerComponent{Delay = def.Delay, Price = def.FastPrice};
         RegisterComponent(cooldown);
+        
+        cooldown.OnComplete += Unlock;
     }
 
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
@@ -32,6 +35,12 @@
         
         storage.Capacity = storage.Amount = def.PieceAmount;
     }
+    
+    public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
+    {
+        base.OnRemoveFromBoard(position, context);
+        cooldown.OnComplete -= Unlock;
+    }
 
     protected override LifeSaveItem InitInSave(BoardPosition position)
     {
@@ -42,7 +51,7 @@
         return item;
     }
 
-    public override bool Damage()
+    public override bool Damage(bool isExtra = false)
     {
         if (cooldown.IsExecuteable())
         {
@@ -54,7 +63,7 @@
             return false;
         }
         
-        return base.Damage();
+        return base.Damage(isExtra);
     }
 
     protected override void Success()
@@ -83,5 +92,10 @@
     {
         AddResourceView.Show(StartPosition(), def.StepRewards);
         cooldown.Start();
+    }
+    
+    private void Unlock()
+    {
+        Locker.Unlock(this);
     }
 }

@@ -88,6 +88,7 @@ public class MineLifeComponent : StorageLifeComponent
     protected override void OnSpawnRewards()
     {
         AddResourceView.Show(StartPosition(), def.StepReward);
+        base.OnSpawnRewards();
     }
 
     protected override void OnTimerComplete()

@@ -22,6 +22,8 @@ public class ReproductionLifeComponent : StorageLifeComponent
         HP = def.Limit;
         cooldown = new TimerComponent{Delay = def.Delay, Price = def.FastPrice};
         RegisterComponent(cooldown);
+
+        cooldown.OnComplete += Unlock;
         
         var child = GameDataService.Current.PiecesManager.GetPieceDef(PieceType.Parse(def.Reproduction.Currency));
         childName = child?.Name;
@@ -39,6 +41,12 @@ public class ReproductionLifeComponent : StorageLifeComponent
         storage.Capacity = storage.Amount = def.Reproduction.Amount;
     }
 
+    public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
+    {
+        base.OnRemoveFromBoard(position, context);
+        cooldown.OnComplete -= Unlock;
+    }
+
     protected override LifeSaveItem InitInSave(BoardPosition position)
     {
         var item = base.InitInSave(position);
@@ -48,7 +56,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
         return item;
     }
 
-    public override bool Damage()
+    public override bool Damage(bool isExtra = false)
     {
         if (cooldown.IsExecuteable())
         {
@@ -60,7 +68,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
             return false;
         }
         
-        return base.Damage();
+        return base.Damage(isExtra);
     }
 
     protected override void Success()
@@ -105,5 +113,10 @@ public class ReproductionLifeComponent : StorageLifeComponent
     protected override void OnSpawnRewards()
     {
         AddResourceView.Show(StartPosition(), def.StepReward);
+    }
+
+    private void Unlock()
+    {
+        Locker.Unlock(this);
     }
 }

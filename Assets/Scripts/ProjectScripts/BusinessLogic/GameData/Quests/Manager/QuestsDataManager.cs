@@ -268,6 +268,8 @@ public class QuestsDataManager : IECSComponent, IDataManager
     /// </summary>
     public void CheckConditions()
     {
+        if(questStarters == null) return;
+        
 #if DEBUG
         var sw = new System.Diagnostics.Stopwatch();
         sw.Start();
