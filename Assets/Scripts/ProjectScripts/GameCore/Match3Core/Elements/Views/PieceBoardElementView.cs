@@ -50,7 +50,6 @@ public class PieceBoardElementView : BoardElementView
         {
             var obj = ContentService.Current.GetObjectByName("pieces.grayscale") as Material;
             reactionLockMaterial = obj;
-            Debug.LogError(obj.name);
         }
              
         CheckLock();
@@ -144,8 +143,6 @@ public class PieceBoardElementView : BoardElementView
         if (cachedRenderers == null || cachedRenderers.size <= 0)
             CacheLayers();
         
-        Debug.LogError($"{Piece.CachedPosition} toggle set {enabled}");
-        
         foreach (var rend in cachedRenderers)
         {
             if (rend?.CachedRenderer?.sharedMaterial == null) continue;
@@ -192,7 +189,6 @@ public class PieceBoardElementView : BoardElementView
             {
                 rend.CacheDefaultMaterial();
                 rend.CachedRenderer.material = highlightPieceMaterial;
-                // rend.CachedRenderer.material.SetFloat("_HighlightSpeed", 1f);
                 IsHighlighted = true;
             }
         }

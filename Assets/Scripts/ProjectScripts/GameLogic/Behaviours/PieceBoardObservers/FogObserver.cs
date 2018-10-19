@@ -98,13 +98,6 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                     }
                     
                     addedPieces.Add(new BoardPosition(pos.X, pos.Y, thisContext.Layer.Index), pieceId);
-//                    var act = new CreatePieceAtAction
-//                    {
-//                        At = pos,
-//                        PieceTypeId = pieceId
-//                    };
-//                    thisContext.Context.ActionExecutor.AddAction(act);
-//                    actions.Add(act);
                 }
             }
         }

@@ -62,31 +62,6 @@ public class DragAndCheckMatchAction : IBoardAction
 	
 	private bool CheckValid(BoardController board)
 	{	
-//		if (To.IsValidFor(board.BoardDef.Width, board.BoardDef.Height) == false || From.Equals(To))
-//		{
-//			return false;
-//		}
-//
-//		var pieceFrom = board.BoardLogic.GetPieceAt(From);
-//		
-//		
-//		foreach (var position in targetPositions)
-//		{
-//			var pieceTo = board.BoardLogic.GetPieceAt(position);
-//			if (pieceFrom.Equals(pieceTo))
-//				continue;
-//			
-//			if (board.BoardLogic.IsLockedCell(position))
-//				return false;
-//			
-//			if (pieceTo != null)
-//			{
-//				var draggable = pieceTo.GetComponent<DraggablePieceComponent>(DraggablePieceComponent.ComponentGuid);
-//				if (draggable == null || !draggable.IsDraggable(position) || IsLargeObject(pieceTo))
-//					return false;
-//			}
-//		}
-
 		if (From.Equals(To))
 			return false;
 		

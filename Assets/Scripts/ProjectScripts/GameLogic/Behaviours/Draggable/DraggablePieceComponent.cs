@@ -21,7 +21,6 @@ public class DraggablePieceComponent : ECSEntity, ILockerComponent
     
     public virtual bool IsDraggable(BoardPosition at)
     {
-//        Debug.LogError($"IsDraggable check ({!Locker.IsLocked})");
         return !Locker.IsLocked;
     }
     
