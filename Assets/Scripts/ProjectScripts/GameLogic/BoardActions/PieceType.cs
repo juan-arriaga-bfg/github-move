@@ -254,6 +254,7 @@ public static partial class PieceType
     public static readonly PieceTypeDef Coin3 = new PieceTypeDef{Id = 3102, Abbreviations = new List<string>{ "Coin3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource}; 
     public static readonly PieceTypeDef Coin4 = new PieceTypeDef{Id = 3103, Abbreviations = new List<string>{ "Coin4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     public static readonly PieceTypeDef Coin5 = new PieceTypeDef{Id = 3104, Abbreviations = new List<string>{ "Coin5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Coin6 = new PieceTypeDef{Id = 3105, Abbreviations = new List<string>{ "Coin6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     
     public static readonly PieceTypeDef Crystal1 = new PieceTypeDef{Id = 3200, Abbreviations = new List<string>{ "Crystal1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     public static readonly PieceTypeDef Crystal2 = new PieceTypeDef{Id = 3201, Abbreviations = new List<string>{ "Crystal2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};

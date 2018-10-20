@@ -221,6 +221,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Coin3.Id, R.Coin3Piece);
         dict.Add(PieceType.Coin4.Id, R.Coin4Piece);
         dict.Add(PieceType.Coin5.Id, R.Coin5Piece);
+        dict.Add(PieceType.Coin6.Id, R.Coin6Piece);
         
         dict.Add(PieceType.Crystal1.Id, R.Crystal1Piece);
         dict.Add(PieceType.Crystal2.Id, R.Crystal2Piece);

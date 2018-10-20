@@ -257,6 +257,26 @@
     ]
   },
   {
+    "Uid": "Coin6",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 110
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Coins",
+      "Amount": 3500
+    },
+    "Name": "Sapphire",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 6
+      }
+    ]
+  },
+  {
     "Uid": "Chest1",
     "Name": "Chest1 Piece",
     "UnlockBonus": [

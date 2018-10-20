@@ -166,4 +166,5 @@ public class R
      public const string ObstacleFPiece = "ObstacleFPiece";
      public const string ObstacleGPiece = "ObstacleGPiece";
      public const string ObstacleHPiece = "ObstacleHPiece";
+     public const string Coin6Piece = "Coin6Piece";
 }

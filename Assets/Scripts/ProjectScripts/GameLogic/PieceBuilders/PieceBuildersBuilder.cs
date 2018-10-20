@@ -30,7 +30,7 @@ public class PieceBuildersBuilder
         dict = AddBuildingBranchPiece(dict, PieceType.K1.Id, PieceType.K10.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.L1.Id, PieceType.L9.Id);
         
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Coin1.Id, PieceType.Coin5.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Coin1.Id, PieceType.Coin6.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Crystal1.Id, PieceType.Crystal5.Id, dict);
         
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest9.Id, dict);
