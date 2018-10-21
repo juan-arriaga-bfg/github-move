@@ -144,19 +144,15 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         var def = PieceType.GetDefById(target.PieceType);
 
         if (def.Filter.Has(PieceTypeFilter.WorkPlace) == false) return false;
+        if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target)) return false;
         
-        if (CheckLife(target) || CheckPieceState(target) || CheckBuilding(target))
+        context.ActionExecutor.AddAction(new CollapsePieceToAction
         {
-            context.ActionExecutor.AddAction(new CollapsePieceToAction
-            {
-                To = targetPosition,
-                Positions = new List<BoardPosition> {worker.CachedPosition},
-            });
+            To = targetPosition,
+            Positions = new List<BoardPosition> {worker.CachedPosition},
+        });
 
-            return true;
-        }
-        
-        return false;
+        return true;
     }
 
     private bool CheckLife(Piece target)
@@ -184,17 +180,6 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         }
         
         state.Work(true);
-        return true;
-    }
-
-    private bool CheckBuilding(Piece target)
-    {
-        var action = context.BoardLogic.MatchActionBuilder.GetMatchAction(new List<BoardPosition>(), target.PieceType, target.CachedPosition);
-        
-        if(action == null) return false;
-        
-        context.ActionExecutor.AddAction(action);
-        
         return true;
     }
 }

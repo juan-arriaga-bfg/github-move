@@ -56,15 +56,17 @@ public class PartPiecesLogicComponent : IECSComponent
     {
         if(context.WorkerLogic.Get(piece.CachedPosition, null) == false) return;
         
-        var action = piece.Context.BoardLogic.MatchActionBuilder.GetMatchAction(new List<BoardPosition>(), piece.PieceType, piece.CachedPosition);
-        
-        if(action == null) return;
-        
-        piece.Context.ActionExecutor.AddAction(action);
+        Work(piece);
     }
 
-    public bool Work(BoardPosition position)
+    public bool Work(Piece piece)
     {
+        var action = context.BoardLogic.MatchActionBuilder.GetMatchAction(new List<BoardPosition>(), piece.PieceType, piece.CachedPosition);
+        
+        if(action == null) return false;
+        
+        context.ActionExecutor.AddAction(action);
+        
         return true;
     }
 }
