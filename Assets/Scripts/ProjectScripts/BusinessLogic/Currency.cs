@@ -1,7 +1,5 @@
 ﻿public partial class CurrencyDef
 {
-    
-    
     private string icon;
     public string Icon
     {

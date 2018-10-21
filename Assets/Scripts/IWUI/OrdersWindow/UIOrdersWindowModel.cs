@@ -8,10 +8,27 @@ public class UIOrdersWindowModel : IWWindowModel
     
     public string OrdersText => "Orders";
     public string RecipesText => "Recipes";
-
-    public bool IsRecipes;
+    public string IngredientsText => "Ingredients";
+    
     public Order Select; 
 
     public List<OrderDef> Recipes => GameDataService.Current.OrdersManager.Recipes;
     public List<Order> Orders => GameDataService.Current.OrdersManager.Orders;
+
+    public List<CurrencyPair> Ingredients
+    {
+        get
+        {
+            var currencys = new List<CurrencyPair>();
+
+            for (var i = Currency.D5.Id; i < Currency.H5.Id +1; i++)
+            {
+                var currency = Currency.GetCurrencyDef(i);
+                var amound = ProfileService.Current.GetStorageItem(currency.Name).Amount;
+                currencys.Add(new CurrencyPair{Currency = currency.Name, Amount = amound});
+            }
+            
+            return currencys;
+        }
+    }
 }

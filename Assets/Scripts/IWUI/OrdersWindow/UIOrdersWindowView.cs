@@ -9,19 +9,24 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
     
     [SerializeField] private NSText recipesLabelOn;
     [SerializeField] private NSText recipesLabelOff;
-
+    
+    [SerializeField] private NSText ingredientsLabelOn;
+    [SerializeField] private NSText ingredientsLabelOff;
+    
     [SerializeField] private Toggle ordersToggle;
-    [SerializeField] private Toggle recipesToggle;
     
     [SerializeField] private ScrollRect ordersScroll;
     [SerializeField] private ScrollRect recipesScroll;
+    [SerializeField] private ScrollRect ingredientsScroll;
     
     [SerializeField] private GameObject selectItem;
     [SerializeField] private GameObject patternOrder;
     [SerializeField] private GameObject patternRecipe;
+    [SerializeField] private GameObject patternIngredient;
 
     private List<UIRecipeItem> recipes = new List<UIRecipeItem>();
     private List<UIOrderItem> orders = new List<UIOrderItem>();
+    private List<UISimpleScrollItem> ingredients = new List<UISimpleScrollItem>();
 
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
@@ -29,9 +34,9 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         
         UIOrdersWindowModel windowModel = Model as UIOrdersWindowModel;
         
-        var data = windowModel.Recipes;
+        var dataRecipes = windowModel.Recipes;
         
-        foreach (var recipe in data)
+        foreach (var recipe in dataRecipes)
         {
             var item = Instantiate(patternRecipe, patternRecipe.transform.parent).GetComponent<UIRecipeItem>();
             
@@ -39,7 +44,18 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
             recipes.Add(item);
         }
         
+        var dataIngredients = windowModel.Ingredients;
+        
+        foreach (var ingredient in dataIngredients)
+        {
+            var item = Instantiate(patternIngredient, patternIngredient.transform.parent).GetComponent<UISimpleScrollItem>();
+            
+            item.Init(ingredient.Currency, ingredient.Amount.ToString());
+            ingredients.Add(item);
+        }
+        
         patternRecipe.SetActive(false);
+        patternIngredient.SetActive(false);
     }
 
     public override void OnViewShow()
@@ -53,25 +69,34 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
 
         ordersLabelOn.Text = ordersLabelOff.Text = windowModel.OrdersText;
         recipesLabelOn.Text = recipesLabelOff.Text = windowModel.RecipesText;
+        ingredientsLabelOn.Text = ingredientsLabelOff.Text = windowModel.IngredientsText;
 
-        ordersToggle.isOn = !windowModel.IsRecipes;
-        recipesToggle.isOn = windowModel.IsRecipes;
+        ordersToggle.isOn = true;
         
-        var data = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
+        var dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
         
-        foreach (var order in data)
+        foreach (var order in dataOrders)
         {
             var item = Instantiate(patternOrder, patternOrder.transform.parent).GetComponent<UIOrderItem>();
             
             item.Init(order);
             orders.Add(item);
         }
+        
+        var dataIngredients = windowModel.Ingredients;
+
+        for (var i = 0; i < dataIngredients.Count; i++)
+        {
+            var ingredient = ingredients[i];
+            var data = dataIngredients[i];
+            ingredient.Init(data.Currency, data.Amount.ToString());
+        }
 
         windowModel.Select = null;
         patternOrder.SetActive(false);
         
-        message.gameObject.SetActive(data.Count == 0);
-        selectItem.SetActive(data.Count > 0);
+        message.gameObject.SetActive(dataOrders.Count == 0);
+        selectItem.SetActive(dataOrders.Count > 0);
         
         UpdateLists();
     }
@@ -118,5 +143,6 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         
         ordersScroll.verticalNormalizedPosition = 1;
         recipesScroll.verticalNormalizedPosition = 1;
+        ingredientsScroll.verticalNormalizedPosition = 1;
     }
 }
