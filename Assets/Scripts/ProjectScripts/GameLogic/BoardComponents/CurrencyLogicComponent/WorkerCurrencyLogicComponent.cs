@@ -189,6 +189,12 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
     private bool CheckBuilding(Piece target)
     {
-        return false;
+        var action = context.BoardLogic.MatchActionBuilder.GetMatchAction(new List<BoardPosition>(), target.PieceType, target.CachedPosition);
+        
+        if(action == null) return false;
+        
+        context.ActionExecutor.AddAction(action);
+        
+        return true;
     }
 }
