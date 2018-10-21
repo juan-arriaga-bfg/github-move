@@ -19,7 +19,7 @@ MonoBehaviour:
   - Key: levels
     Link: 1q0Pxo7d7saZDkpj2IXPB94nnAqKviZ0lZK4QvVfG0vE
     Route: parse
-    Pattern: '[{"Index":0,"Price":{"Currency": "","Amount":0},"Rewards":[{"Currency":"","Amount":0}],"Chest":"","OrdersWeights":[{"Uid":"","Weight":0,"":"","Override":true}]}]'
+    Pattern: '[{"Index":0,"Price":{"Currency": "","Amount":0},"Rewards":[{"Currency":"","Amount":0}],"OrdersWeights":[{"Uid":"","Weight":0,"":"","Override":true}]}]'
   - Key: obstacles
     Link: 16Q9fxlFX40VRx6u1kwfMvWm1GuvK8MaGs117g5Pkd2g
     Route: parse
