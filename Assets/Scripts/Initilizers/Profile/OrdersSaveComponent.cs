@@ -10,10 +10,6 @@ public class OrdersSaveComponent : ECSEntity, IECSSerializeable
 	
 	private List<OrderSaveItem> orders;
 
-	public override void OnRegisterEntity(ECSEntity entity)
-	{
-	}
-
 	[JsonProperty]
 	public List<OrderSaveItem> Orders
 	{
@@ -58,6 +54,5 @@ public class OrdersSaveComponent : ECSEntity, IECSSerializeable
 	[OnDeserialized]
 	internal void OnDeserialized(StreamingContext context)
 	{
-		
 	}
 }

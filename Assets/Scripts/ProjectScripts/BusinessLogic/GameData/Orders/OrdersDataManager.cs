@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<OrderDef>>
+public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<OrderDef>>, ISequenceData
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
@@ -19,6 +19,13 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
     public List<Order> Orders;
     
     private List<int> sequence;
+
+    private int seed = -1;
+    
+    public List<RandomSaveItem> GetSaveSequences()
+    {
+        return new List<RandomSaveItem>{new RandomSaveItem{Uid = GetType().ToString(), Seed = seed, Count = sequence.Count}};
+    }
     
     public void Reload()
     {
@@ -54,6 +61,8 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
                 
                 Recipes.Sort((a, b) => a.Level.CompareTo(b.Level));
                 
+                InitSequence();
+                
                 if(save?.Orders == null) return;
 
                 foreach (var order in save.Orders)
@@ -68,9 +77,29 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
         });
     }
 
+    private void InitSequence()
+    {
+        var save = ProfileService.Current.GetComponent<RandomSaveComponent>(RandomSaveComponent.ComponentGuid);
+        var item = save?.GetSave(GetType().ToString());
+
+        seed = item?.Seed ?? Random.Range(0, 1000000);
+        sequence = ItemWeight.GetRandomSequence(GameDataService.Current.LevelsManager.Recipes, 100, seed);
+        
+        if(item == null) return;
+        
+        if (item.Count == 0)
+        {
+            UpdateSequence();
+            return;
+        }
+        
+        sequence.RemoveRange(0, sequence.Count - item.Count);
+    }
+
     public void UpdateSequence()
     {
-        sequence = ItemWeight.GetRandomSequence(GameDataService.Current.LevelsManager.Recipes, 100);
+        seed++;
+        sequence = ItemWeight.GetRandomSequence(GameDataService.Current.LevelsManager.Recipes, 100, seed);
     }
 
     public bool CheckStart()
