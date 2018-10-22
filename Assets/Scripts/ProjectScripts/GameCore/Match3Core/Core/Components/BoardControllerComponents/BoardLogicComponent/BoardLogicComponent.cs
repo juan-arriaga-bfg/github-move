@@ -364,7 +364,7 @@ public class BoardLogicComponent : ECSEntity,
         
         observer?.OnMovedFromToStart(@from, to);
         
-        if (AddPieceToBoardSilent(to.X, to.Y, fromPiece) && RemovePieceFromBoardSilent(from))
+        if (RemovePieceFromBoardSilent(from) && AddPieceToBoardSilent(to.X, to.Y, fromPiece))
         {
             observer?.OnMovedFromToFinish(@from, to);
             return true;
