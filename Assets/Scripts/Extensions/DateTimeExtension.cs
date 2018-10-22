@@ -54,7 +54,7 @@ public static class DateTimeExtension
     
     public static string GetDelayText(int delay, bool icon = false, string format = null)
     {
-        return TimeFormat(DateTime.UtcNow.AddSeconds(delay) - DateTime.UtcNow, icon, format);
+        return TimeFormat(new TimeSpan(0, 0, delay), icon, format);
     }
 
     public static string GetTimeText(this DateTime datetime, bool icon = false, string format = null)
