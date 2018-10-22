@@ -28,23 +28,18 @@ public class ReproductionLifeComponent : StorageLifeComponent
         var child = GameDataService.Current.PiecesManager.GetPieceDef(PieceType.Parse(def.Reproduction.Currency));
         childName = child?.Name;
     }
-
-    public override void OnAddToBoard(BoardPosition position, Piece context = null)
-    {
-        base.OnAddToBoard(position, context);
-        
-        var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-        
-        timer.Delay = 2;
-        
-        storage.SpawnPiece = PieceType.Parse(def.Reproduction.Currency);
-        storage.Capacity = storage.Amount = def.Reproduction.Amount;
-    }
-
+    
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
         base.OnRemoveFromBoard(position, context);
         cooldown.OnComplete -= Unlock;
+    }
+
+    protected override void InitStorage()
+    {
+        storage.SpawnPiece = PieceType.Parse(def.Reproduction.Currency);
+        storage.Capacity = storage.Amount = def.Reproduction.Amount;
+        storage.Timer.Delay = 2;
     }
 
     protected override LifeSaveItem InitInSave(BoardPosition position)

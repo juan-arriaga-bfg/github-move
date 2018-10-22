@@ -1,22 +1,21 @@
-﻿using System;
-
-public class ObstacleLifeComponent : StorageLifeComponent
+﻿public class ObstacleLifeComponent : StorageLifeComponent
 {
     public override CurrencyPair Energy => GameDataService.Current.ObstaclesManager.GetPriceByStep(thisContext.PieceType, current);
 
     public override string Message => $"Tree chopping:\n{DateTimeExtension.GetDelayText(GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current))}";
     public override string Price => $"Chop {Energy.ToStringIcon()}";
 
-    public override void OnAddToBoard(BoardPosition position, Piece context = null)
+    public override void OnRegisterEntity(ECSEntity entity)
     {
+        base.OnRegisterEntity(entity);
+        
         HP = thisContext.Context.BoardLogic.MatchDefinition.GetIndexInChain(thisContext.PieceType);
-        
-        base.OnAddToBoard(position, context);
-        
-        var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-        
-        timer.Price = GameDataService.Current.ObstaclesManager.GetFastPriceByStep(thisContext.PieceType, current - 1);
-        timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current - 1);
+    }
+
+    protected override void InitStorage()
+    {
+        storage.Timer.Price = GameDataService.Current.ObstaclesManager.GetFastPriceByStep(thisContext.PieceType, current - 1);
+        storage.Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current - 1);
         
         storage.Capacity = storage.Amount = 1;
     }

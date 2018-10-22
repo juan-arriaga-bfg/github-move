@@ -22,21 +22,23 @@
         
         locker = new LockerComponent();
         RegisterComponent(locker);
+        
+        storage = thisContext.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
+        
+        if (storage.Timer == null) return;
+        
+        storage.Timer.OnStart += OnTimerStart;
+        storage.Timer.OnComplete += OnTimerComplete;
     }
 
     public virtual void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        if(storage == null) storage = thisContext.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
-        
-        var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-
-        if (timer != null)
-        {
-            timer.OnStart += OnTimerStart;
-            timer.OnComplete += OnTimerComplete;
-        }
-        
+        InitStorage();
         InitInSave(position);
+    }
+
+    protected virtual void InitStorage()
+    {
     }
 
     protected virtual LifeSaveItem InitInSave(BoardPosition position)
@@ -48,10 +50,12 @@
         if (item == null) return null;
         
         current = item.Step;
-
+        
         thisContext.Context.WorkerLogic.Init(thisContext.CachedPosition, storage.Timer);
+        
         OnTimerStart();
-
+        storage.InitInSave(thisContext.CachedPosition);
+        
         if (storage.IsFilled) OnTimerComplete();
         
         return item;
@@ -69,7 +73,7 @@
     public virtual void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
         storage.Timer.OnStart -= OnTimerStart;
-        storage.Timer.OnStart -= OnTimerComplete;
+        storage.Timer.OnComplete -= OnTimerComplete;
     }
     
     public virtual bool Damage(bool isExtra = false)

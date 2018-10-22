@@ -7,14 +7,19 @@ public class LifeComponent : ECSEntity
 
     protected Piece thisContext;
     
-    public int HP { get; protected set; }
-    public bool IsDead => current == HP;
+    // maximum amount of damage
+    public int HP { get; protected set; } 
     
+    // amount of damage received
     protected int current;
-
-    public int Value => HP == -1 ? 0 : HP - Current;
     public int Current => current;
+    
+    // how much damage can still get
+    public int Value => HP == -1 ? 0 : HP - Current;
+    
     public float GetProgress => 1 - current/(float)HP;
+    
+    public bool IsDead => current == HP;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {

@@ -11,11 +11,6 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 		piece.RegisterComponent(new DraggablePieceComponent());
 		piece.RegisterComponent(new TimerComponent());
 		
-		var life = new MineLifeComponent();
-		
-		piece.RegisterComponent(life);
-		AddObserver(piece, life);
-		
 		var storage = new StorageComponent
 		{
 			IsAutoStart = false,
@@ -25,6 +20,11 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 		
 		piece.RegisterComponent(storage);
 		AddObserver(piece, storage);
+		
+		var life = new MineLifeComponent();
+		
+		piece.RegisterComponent(life);
+		AddObserver(piece, life);
 		
 		AddObserver(piece, new PathfindLockObserver {AutoLock = true});
 		

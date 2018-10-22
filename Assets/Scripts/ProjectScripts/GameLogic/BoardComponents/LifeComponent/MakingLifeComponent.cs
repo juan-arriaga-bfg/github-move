@@ -24,22 +24,17 @@
         
         cooldown.OnComplete += Unlock;
     }
-
-    public override void OnAddToBoard(BoardPosition position, Piece context = null)
-    {
-        base.OnAddToBoard(position, context);
-        
-        var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-        
-        timer.Delay = 2;
-        
-        storage.Capacity = storage.Amount = def.PieceAmount;
-    }
     
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
         base.OnRemoveFromBoard(position, context);
         cooldown.OnComplete -= Unlock;
+    }
+
+    protected override void InitStorage()
+    {
+        storage.Capacity = storage.Amount = def.PieceAmount;
+        storage.Timer.Delay = 2;
     }
 
     protected override LifeSaveItem InitInSave(BoardPosition position)
