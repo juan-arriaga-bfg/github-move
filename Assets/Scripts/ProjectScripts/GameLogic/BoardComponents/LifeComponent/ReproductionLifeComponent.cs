@@ -31,15 +31,14 @@ public class ReproductionLifeComponent : StorageLifeComponent
 
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
+        base.OnAddToBoard(position, context);
+        
         var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
         
         timer.Delay = 2;
         
         storage.SpawnPiece = PieceType.Parse(def.Reproduction.Currency);
         storage.Capacity = storage.Amount = def.Reproduction.Amount;
-        
-        // Called at the end because InitInSave called from OnAddToBoard should have storage.Capacity initialized
-        base.OnAddToBoard(position, context);
     }
 
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)

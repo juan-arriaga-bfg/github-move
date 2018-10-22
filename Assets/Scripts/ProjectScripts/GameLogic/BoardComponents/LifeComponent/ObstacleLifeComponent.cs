@@ -11,15 +11,14 @@ public class ObstacleLifeComponent : StorageLifeComponent
     {
         HP = thisContext.Context.BoardLogic.MatchDefinition.GetIndexInChain(thisContext.PieceType);
         
+        base.OnAddToBoard(position, context);
+        
         var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
         
         timer.Price = GameDataService.Current.ObstaclesManager.GetFastPriceByStep(thisContext.PieceType, current - 1);
         timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current - 1);
         
         storage.Capacity = storage.Amount = 1;
-        
-        // Called at the end because InitInSave called from OnAddToBoard should have storage.Capacity initialized
-        base.OnAddToBoard(position, context);
     }
 
     protected override void Success()

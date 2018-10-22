@@ -10,6 +10,8 @@ public class MineLifeComponent : StorageLifeComponent
     
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
+        base.OnAddToBoard(position, context);
+        
         var key = new BoardPosition(position.X, position.Y);
 
         if (def == null) def = GameDataService.Current.MinesManager.GetInitialDef(key);
@@ -19,19 +21,11 @@ public class MineLifeComponent : StorageLifeComponent
         
         timer.Delay = def.Delay;
         timer.Price = def.FastPrice;
-
-        if (storage == null)
-        {
-            storage = thisContext.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
-        }
         
         storage.SpawnPiece = PieceType.Parse(def.Reward.Currency);
         storage.Capacity = storage.Amount = def.Reward.Amount;
         
         HP = def.Size;
-        
-        // Called at the end because InitInSave called from OnAddToBoard should have storage.Capacity initialized
-        base.OnAddToBoard(position, context);
     }
 
     public override void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
