@@ -16,10 +16,6 @@ public class ObstacleLifeComponent : StorageLifeComponent
         timer.Price = GameDataService.Current.ObstaclesManager.GetFastPriceByStep(thisContext.PieceType, current - 1);
         timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current - 1);
         
-        if (storage == null)
-        {
-            storage = thisContext.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
-        }
         storage.Capacity = storage.Amount = 1;
         
         // Called at the end because InitInSave called from OnAddToBoard should have storage.Capacity initialized
