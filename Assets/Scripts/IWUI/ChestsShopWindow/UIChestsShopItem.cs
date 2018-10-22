@@ -27,7 +27,7 @@ public class UIChestsShopItem : IWUIWindowViewController
 		
 		isClick = false;
 		isReward = false;
-		isFree = GameDataService.Current.LevelsManager.Chest == chest.Piece;
+		isFree = PieceType.Chest1.Id == chest.Piece;
 		
 		if (isFree)
 		{

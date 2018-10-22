@@ -51,7 +51,6 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
                         var previous = data.Find(def => def.Piece == previousType);
                         
                         next.PieceWeights = ItemWeight.ReplaseWeights(previous.PieceWeights, next.PieceWeights);
-                        next.ChestWeights = ItemWeight.ReplaseWeights(previous.ChestWeights, next.ChestWeights);
                     }
                     
                     Obstacles.Add(next.Piece, next);
@@ -99,11 +98,7 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     {
         ObstacleDef def;
 
-        if (Obstacles.TryGetValue(piece, out def) == false || def.ChestWeights == null) return PieceType.None.Id;
-        
-        var item = ItemWeight.GetRandomItem(def.ChestWeights);
-        
-        return item?.Piece ?? PieceType.None.Id;
+        return Obstacles.TryGetValue(piece, out def) ? def.Chest : PieceType.None.Id;
     }
     
     public int GetDelayByStep(int piece, int step)

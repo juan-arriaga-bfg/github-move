@@ -492,11 +492,6 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                 {
                     new CodexChainDef
                     {
-                        Name = "Free",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Chest1.Id)),
-                    },
-                    new CodexChainDef
-                    {
                         Name = "Wood",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestA1.Id)),
                     },

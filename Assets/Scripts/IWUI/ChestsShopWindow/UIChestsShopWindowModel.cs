@@ -15,18 +15,16 @@ public class UIChestsShopWindowModel : IWWindowModel
             var board = BoardService.Current.GetBoardById(0);
             var definition = board.BoardLogic.MatchDefinition;
             
-            var current = GameDataService.Current.LevelsManager.Chest;
-            var ignore = definition.GetLast(current);
-            
             var last = GameDataService.Current.ChestsManager.Chests.FindAll(def =>
             {
                 var chest = PieceType.Parse(def.Uid);
                 var next = definition.GetNext(chest);
+                var index = definition.GetIndexInChain(chest);
                 
-                return next == PieceType.None.Id && chest != ignore;
+                return index != 1 && next == PieceType.None.Id && chest != PieceType.Chest1.Id;
             });
             
-            last.Add(GameDataService.Current.ChestsManager.Chests.Find(def => PieceType.Parse(def.Uid) == current));
+            last.Add(GameDataService.Current.ChestsManager.Chests.Find(def => PieceType.Parse(def.Uid) == PieceType.Chest1.Id));
             
             return last;
         }

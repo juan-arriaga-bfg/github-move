@@ -61,7 +61,5 @@ public class LevelsDataManager : IECSComponent, IDataManager, IDataLoader<List<L
 
 	public List<CurrencyPair> Rewards => Levels[Level - 1].Rewards;
 	
-	public int Chest => PieceType.Chest1.Id;
-
 	public List<ItemWeight> Recipes => Levels[Level - 1].OrdersWeights;
 }

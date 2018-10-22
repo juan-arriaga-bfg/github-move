@@ -16,13 +16,7 @@
         "Amount": 5
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestA1",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestA1"
   },
   {
     "Uid": "O2",
@@ -56,18 +50,7 @@
         "Weight": 2
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestA1",
-        "Weight": 100,
-        "Override": true
-      },
-      {
-        "Uid": "ChestA2",
-        "Weight": 10,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestA1"
   },
   {
     "Uid": "O3",
@@ -109,18 +92,7 @@
         "Weight": 20
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestA1",
-        "Weight": 60,
-        "Override": true
-      },
-      {
-        "Uid": "ChestA2",
-        "Weight": 40,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestA1"
   },
   {
     "Uid": "O4",
@@ -162,18 +134,7 @@
         "Weight": 2
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestA2",
-        "Weight": 60,
-        "Override": true
-      },
-      {
-        "Uid": "ChestA3",
-        "Weight": 40,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestA2"
   },
   {
     "Uid": "O5",
@@ -207,7 +168,8 @@
         "Weight": 2
       },
       {
-        "Uid": "E1"
+        "Uid": "E1",
+        "Weight": 2
       },
       {
         "Uid": "H1",
@@ -218,18 +180,7 @@
         "Weight": 15
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestA2",
-        "Weight": 50,
-        "Override": true
-      },
-      {
-        "Uid": "ChestA3",
-        "Weight": 50,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestA2"
   },
   {
     "Uid": "O6",
@@ -275,18 +226,7 @@
         "Weight": 10
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestA2",
-        "Weight": 30,
-        "Override": true
-      },
-      {
-        "Uid": "ChestA3",
-        "Weight": 70,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestA2"
   },
   {
     "Uid": "O7",
@@ -320,18 +260,7 @@
         "Weight": 50
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestA2",
-        "Weight": 30,
-        "Override": true
-      },
-      {
-        "Uid": "ChestA3",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestA2"
   },
   {
     "Uid": "O8",
@@ -365,18 +294,7 @@
         "Weight": 10
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestA2",
-        "Weight": 20,
-        "Override": true
-      },
-      {
-        "Uid": "ChestA3",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestA2"
   },
   {
     "Uid": "O9",
@@ -410,13 +328,7 @@
         "Weight": 10
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestA3",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestA3"
   },
   {
     "Uid": "ObstacleD",
@@ -600,13 +512,7 @@
         "Amount": 5
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "Chest6",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "Chest6"
   },
   {
     "Uid": "OX2",
@@ -636,13 +542,7 @@
         "Weight": 10
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "Chest6",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "Chest6"
   },
   {
     "Uid": "OX3",
@@ -676,13 +576,7 @@
         "Weight": 15
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "Chest6",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "Chest6"
   },
   {
     "Uid": "OX4",
@@ -720,13 +614,7 @@
         "Weight": 15
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "Chest6",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "Chest6"
   },
   {
     "Uid": "OX5",
@@ -764,13 +652,7 @@
         "Weight": 15
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "Chest6",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "Chest6"
   },
   {
     "Uid": "OX6",
@@ -808,16 +690,7 @@
         "Weight": 10
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "Chest6",
-        "Weight": 100,
-        "Override": true
-      },
-      {
-        "Override": true
-      }
-    ]
+    "ChestId": "Chest6"
   },
   {
     "Uid": "OX7",
@@ -851,18 +724,7 @@
         "Weight": 10
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestA1",
-        "Weight": 30,
-        "Override": true
-      },
-      {
-        "Uid": "ChestA2",
-        "Weight": 70,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestA1"
   },
   {
     "Uid": "OX8",
@@ -896,18 +758,7 @@
         "Weight": 10
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestA1",
-        "Weight": 20,
-        "Override": true
-      },
-      {
-        "Uid": "ChestA2",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestA1"
   },
   {
     "Uid": "OX9",
@@ -941,18 +792,7 @@
         "Weight": 10
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestA1",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "ChestA2",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestA1"
   },
   {
     "Uid": "OEpic1",
@@ -971,12 +811,7 @@
         "Amount": 5
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestEpic1",
-        "Weight": 100
-      }
-    ]
+    "ChestId": "ChestEpic1"
   },
   {
     "Uid": "OEpic2",
@@ -1002,13 +837,7 @@
         "Weight": 10
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestEpic1",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestEpic1"
   },
   {
     "Uid": "OEpic3",
@@ -1038,13 +867,7 @@
         "Weight": 10
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestEpic1",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestEpic1"
   },
   {
     "Uid": "OEpic4",
@@ -1078,18 +901,7 @@
         "Weight": 10
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestEpic1",
-        "Weight": 0,
-        "Override": true
-      },
-      {
-        "Uid": "ChestEpic2",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestEpic1"
   },
   {
     "Uid": "OEpic5",
@@ -1123,13 +935,7 @@
         "Weight": 10
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestEpic2",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestEpic2"
   },
   {
     "Uid": "OEpic6",
@@ -1163,13 +969,7 @@
         "Weight": 10
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestEpic2",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestEpic2"
   },
   {
     "Uid": "OEpic7",
@@ -1203,18 +1003,7 @@
         "Weight": 10
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestEpic2",
-        "Weight": 0,
-        "Override": true
-      },
-      {
-        "Uid": "ChestEpic3",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestEpic2"
   },
   {
     "Uid": "OEpic8",
@@ -1248,13 +1037,7 @@
         "Weight": 10
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestEpic3",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestEpic3"
   },
   {
     "Uid": "OEpic9",
@@ -1288,12 +1071,6 @@
         "Weight": 10
       }
     ],
-    "ChestWeights": [
-      {
-        "Uid": "ChestEpic3",
-        "Weight": 100,
-        "Override": true
-      }
-    ]
+    "ChestId": "ChestEpic3"
   }
 ]

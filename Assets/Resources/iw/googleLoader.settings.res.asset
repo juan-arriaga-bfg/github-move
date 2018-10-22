@@ -23,7 +23,7 @@ MonoBehaviour:
   - Key: obstacles
     Link: 16Q9fxlFX40VRx6u1kwfMvWm1GuvK8MaGs117g5Pkd2g
     Route: parse
-    Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestWeights":[{"Uid":"","Weight":0,"":"","Override":true}]}]'
+    Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestId":""}]'
   - Key: mines
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseMines
