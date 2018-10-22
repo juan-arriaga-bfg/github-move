@@ -91,6 +91,9 @@ public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMat
 
         if(positions == null) return null;
         
+        matchField.Clear();
+        matchField.AddRange(positions);
+        
         var nextAction = new SpawnPieceAtAction
         {
             IsCheckMatch = false,

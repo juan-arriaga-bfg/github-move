@@ -61,10 +61,12 @@ public class PartPiecesLogicComponent : IECSComponent
 
     public bool Work(Piece piece)
     {
-        var action = context.BoardLogic.MatchActionBuilder.GetMatchAction(new List<BoardPosition>(), piece.PieceType, piece.CachedPosition);
+        var positions = new List<BoardPosition>();
+        var action = context.BoardLogic.MatchActionBuilder.GetMatchAction(positions, piece.PieceType, piece.CachedPosition);
         
         if(action == null) return false;
-        
+
+        Remove(positions);
         context.ActionExecutor.AddAction(action);
         
         return true;
