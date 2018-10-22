@@ -27,13 +27,18 @@
 
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        base.OnAddToBoard(position, context);
-        
         var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
         
         timer.Delay = 2;
         
+        if (storage == null)
+        {
+            storage = thisContext.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
+        }
         storage.Capacity = storage.Amount = def.PieceAmount;
+        
+        // Called at the end because InitInSave called from OnAddToBoard should have storage.Capacity initialized
+        base.OnAddToBoard(position, context);
     }
     
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
