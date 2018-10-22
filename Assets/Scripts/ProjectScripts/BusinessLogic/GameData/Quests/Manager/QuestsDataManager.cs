@@ -268,7 +268,11 @@ public class QuestsDataManager : IECSComponent, IDataManager
     /// </summary>
     public void CheckConditions()
     {
-        if(questStarters == null) return;
+        if (questStarters == null)
+        {
+            Debug.LogError($"[QuestsDataManager] => CheckConditions() is called when questStarters list is empty");
+            return;
+        }
         
 #if DEBUG
         var sw = new System.Diagnostics.Stopwatch();
@@ -296,7 +300,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
         }
 #if DEBUG
         sw.Stop();
-        Debug.Log($"[QuestManager] => CheckConditions() done in {sw.ElapsedMilliseconds}ms");
+        Debug.Log($"[QuestsDataManager] => CheckConditions() done in {sw.ElapsedMilliseconds}ms");
 #endif
     }
 
