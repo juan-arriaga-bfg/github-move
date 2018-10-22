@@ -35,10 +35,6 @@ public class ReproductionLifeComponent : StorageLifeComponent
         
         timer.Delay = 2;
         
-        if (storage == null)
-        {
-            storage = thisContext.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
-        }
         storage.SpawnPiece = PieceType.Parse(def.Reproduction.Currency);
         storage.Capacity = storage.Amount = def.Reproduction.Amount;
         
