@@ -21,18 +21,8 @@ public class ChestsDataManager : ECSEntity, IDataManager, IDataLoader<List<Chest
         ActiveChest = null;
         Chests = null;
         ChestsOnBoard = new Dictionary<BoardPosition, Chest>();
-        
-        var collection = GetComponent<ECSComponentCollection>(SequenceComponent.ComponentGuid);
 
-        if (collection != null)
-        {
-            var components = new List<IECSComponent>(collection.Components);
-            
-            foreach (var component in components)
-            {
-                UnRegisterComponent(component);
-            }
-        }
+        ReloadSequences();
         
         LoadData(new ResourceConfigDataMapper<List<ChestDef>>("configs/chests.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
@@ -50,7 +40,21 @@ public class ChestsDataManager : ECSEntity, IDataManager, IDataLoader<List<Chest
         
         return save;
     }
-    
+
+    public void ReloadSequences()
+    {
+        var collection = GetComponent<ECSComponentCollection>(SequenceComponent.ComponentGuid);
+
+        if (collection?.Components == null) return;
+        
+        var components = new List<IECSComponent>(collection.Components);
+            
+        foreach (var component in components)
+        {
+            UnRegisterComponent(component);
+        }
+    }
+
     public void LoadData(IDataMapper<List<ChestDef>> dataMapper)
     {
         dataMapper.LoadData((data, error)=> 

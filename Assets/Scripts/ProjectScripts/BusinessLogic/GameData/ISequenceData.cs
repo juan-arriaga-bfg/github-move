@@ -3,4 +3,6 @@
 public interface ISequenceData
 {
     List<RandomSaveItem> GetSaveSequences();
+
+    void ReloadSequences();
 }

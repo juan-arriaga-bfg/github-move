@@ -67,7 +67,7 @@
 
     protected override void OnStep()
     {
-        var pieces = ItemWeight.GetRandomPieces(def.PieceAmount, def.PieceWeights);
+        var pieces = GameDataService.Current.PiecesManager.GetSequence(def.Uid).GetNextDict(def.PieceAmount);
         
         foreach (var key in pieces.Keys)
         {

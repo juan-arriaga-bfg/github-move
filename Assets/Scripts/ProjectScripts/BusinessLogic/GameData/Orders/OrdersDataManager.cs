@@ -10,8 +10,6 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
 
     public override void OnRegisterEntity(ECSEntity entity)
     {
-        sequenceData = new SequenceComponent{Key = "Orders"};
-        RegisterComponent(sequenceData);
         Reload();
     }
 
@@ -22,6 +20,9 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
     {
         Recipes = new List<OrderDef>();
         Orders = new List<Order>();
+
+        ReloadSequences();
+        
         LoadData(new ResourceConfigDataMapper<List<OrderDef>>("configs/orders.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
     
@@ -29,7 +30,14 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
     {
         return new List<RandomSaveItem>{sequenceData.Save()};
     }
-    
+
+    public void ReloadSequences()
+    {
+        if(sequenceData == null) return;
+        
+        UnRegisterComponent(sequenceData);
+    }
+
     public void LoadData(IDataMapper<List<OrderDef>> dataMapper)
     {
         dataMapper.LoadData((data, error) =>
@@ -56,7 +64,10 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
                 
                 Recipes.Sort((a, b) => a.Level.CompareTo(b.Level));
                 
+                sequenceData = new SequenceComponent{Key = "Orders"};
                 sequenceData.Init(GameDataService.Current.LevelsManager.Recipes);
+                
+                RegisterComponent(sequenceData);
                 
                 if(save?.Orders == null) return;
 
