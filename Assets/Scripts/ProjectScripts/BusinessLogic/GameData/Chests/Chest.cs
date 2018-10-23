@@ -84,7 +84,7 @@ public class Chest
         var hard = GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name);
         var sequence = GameDataService.Current.ChestsManager.GetSequence(def.Uid);
         
-        reward = hard.GetNextDict(GameDataService.Current.LevelsManager.PieceAmount);
+        reward = hard.GetNextDict(def.ProductionAmount.Range());
         reward = sequence.GetNextDict(def.PieceAmount, reward);
         
         return reward;

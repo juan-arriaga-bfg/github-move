@@ -120,7 +120,7 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
         var hard = GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name);
         var sequence = GetSequence(def.Uid);
         
-        var reward = hard.GetNextDict(GameDataService.Current.LevelsManager.PieceAmount);
+        var reward = hard.GetNextDict(def.ProductionAmount.Range());
         reward = sequence.GetNextDict(def.PieceAmount, reward);
         
         return reward;

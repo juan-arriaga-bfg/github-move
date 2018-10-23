@@ -17,6 +17,8 @@ public class ObstacleDef
     public int PieceAmount { get; set; }
     public List<ItemWeight> PieceWeights { get; set; }
     
+    public AmountRange ProductionAmount;
+    
     public int Piece => pieceType == -1 ? (pieceType = PieceType.Parse(Uid)) : pieceType;
     public int Chest => chestType == -1 ? (chestType = PieceType.Parse(ChestId)) : chestType;
 }
