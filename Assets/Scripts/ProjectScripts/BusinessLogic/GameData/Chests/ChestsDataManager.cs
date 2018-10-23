@@ -1,18 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ChestsDataManager : IECSComponent, IDataManager, IDataLoader<List<ChestDef>>
+public class ChestsDataManager : ECSEntity, IDataManager, IDataLoader<List<ChestDef>>, ISequenceData
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-    public int Guid => ComponentGuid;
+    public override int Guid => ComponentGuid;
 
-    public void OnRegisterEntity(ECSEntity entity)
+    public override void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
-    }
-
-    public void OnUnRegisterEntity(ECSEntity entity)
-    {
     }
     
     public Chest ActiveChest;
@@ -25,7 +21,34 @@ public class ChestsDataManager : IECSComponent, IDataManager, IDataLoader<List<C
         ActiveChest = null;
         Chests = null;
         ChestsOnBoard = new Dictionary<BoardPosition, Chest>();
+        
+        var collection = GetComponent<ECSComponentCollection>(SequenceComponent.ComponentGuid);
+
+        if (collection != null)
+        {
+            var components = new List<IECSComponent>(collection.Components);
+            
+            foreach (var component in components)
+            {
+                UnRegisterComponent(component);
+            }
+        }
+        
         LoadData(new ResourceConfigDataMapper<List<ChestDef>>("configs/chests.data", NSConfigsSettings.Instance.IsUseEncryption));
+    }
+    
+    public List<RandomSaveItem> GetSaveSequences()
+    {
+        var save = new List<RandomSaveItem>();
+
+        var collection = GetComponent<ECSComponentCollection>(SequenceComponent.ComponentGuid);
+
+        foreach (SequenceComponent component in collection.Components)
+        {
+            save.Add(component.Save());
+        }
+        
+        return save;
     }
     
     public void LoadData(IDataMapper<List<ChestDef>> dataMapper)
@@ -51,6 +74,11 @@ public class ChestsDataManager : IECSComponent, IDataManager, IDataLoader<List<C
                     }
                     
                     Chests.Add(next);
+                    
+                    var sequenceData = new SequenceComponent{Key = next.Uid};
+                    
+                    sequenceData.Init(next.PieceWeights);
+                    RegisterComponent(sequenceData, true);
                 }
 
                 var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
@@ -61,13 +89,8 @@ public class ChestsDataManager : IECSComponent, IDataManager, IDataLoader<List<C
                 {
                     var chest = GetChest(item.Id);
                     
-//                    chest.State = item.State;
-//                    chest.SetStartTime(item.StartTime);
                     chest.Reward = item.Reward;
-                    
                     ChestsOnBoard.Add(item.Position, chest);
-
-//                    if (chest.State == ChestState.InProgress) ActiveChest = chest;
                 }
             }
             else
@@ -82,6 +105,12 @@ public class ChestsDataManager : IECSComponent, IDataManager, IDataLoader<List<C
         var chestDef = Chests.Find(def => def.Piece == pieceType);
         
         return chestDef == null ? null : new Chest(chestDef);
+    }
+
+    public SequenceComponent GetSequence(string uid)
+    {
+        var collection = GetComponent<ECSComponentCollection>(SequenceComponent.ComponentGuid);
+        return (SequenceComponent) collection.Components.Find(component => (component as SequenceComponent).Key == uid);
     }
     
     public bool AddToBoard(BoardPosition position, int pieceType, bool isOpen = false)

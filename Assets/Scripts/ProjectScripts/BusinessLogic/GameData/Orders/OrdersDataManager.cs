@@ -1,40 +1,35 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<OrderDef>>, ISequenceData
+public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<OrderDef>>, ISequenceData
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-    public int Guid => ComponentGuid;
+    public override int Guid => ComponentGuid;
 
-    public void OnRegisterEntity(ECSEntity entity)
+    private SequenceComponent sequenceData;
+
+    public override void OnRegisterEntity(ECSEntity entity)
     {
+        sequenceData = new SequenceComponent{Key = "Orders"};
+        RegisterComponent(sequenceData);
         Reload();
-    }
-
-    public void OnUnRegisterEntity(ECSEntity entity)
-    {
     }
 
     public List<OrderDef> Recipes;
     public List<Order> Orders;
     
-    private List<int> sequence;
-
-    private int seed = -1;
-    
-    public List<RandomSaveItem> GetSaveSequences()
-    {
-        return new List<RandomSaveItem>{new RandomSaveItem{Uid = GetType().ToString(), Seed = seed, Count = sequence.Count}};
-    }
-    
     public void Reload()
     {
         Recipes = new List<OrderDef>();
         Orders = new List<Order>();
-        sequence = new List<int>();
         LoadData(new ResourceConfigDataMapper<List<OrderDef>>("configs/orders.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
-
+    
+    public List<RandomSaveItem> GetSaveSequences()
+    {
+        return new List<RandomSaveItem>{sequenceData.Save()};
+    }
+    
     public void LoadData(IDataMapper<List<OrderDef>> dataMapper)
     {
         dataMapper.LoadData((data, error) =>
@@ -61,7 +56,7 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
                 
                 Recipes.Sort((a, b) => a.Level.CompareTo(b.Level));
                 
-                InitSequence();
+                sequenceData.Init(GameDataService.Current.LevelsManager.Recipes);
                 
                 if(save?.Orders == null) return;
 
@@ -77,29 +72,9 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
         });
     }
 
-    private void InitSequence()
-    {
-        var save = ProfileService.Current.GetComponent<RandomSaveComponent>(RandomSaveComponent.ComponentGuid);
-        var item = save?.GetSave(GetType().ToString());
-
-        seed = item?.Seed ?? Random.Range(0, 1000000);
-        sequence = ItemWeight.GetRandomSequence(GameDataService.Current.LevelsManager.Recipes, 100, seed);
-        
-        if(item == null) return;
-        
-        if (item.Count == 0)
-        {
-            UpdateSequence();
-            return;
-        }
-        
-        sequence.RemoveRange(0, sequence.Count - item.Count);
-    }
-
     public void UpdateSequence()
     {
-        seed++;
-        sequence = ItemWeight.GetRandomSequence(GameDataService.Current.LevelsManager.Recipes, 100, seed);
+        sequenceData.Reinit(GameDataService.Current.LevelsManager.Recipes);
     }
 
     public bool CheckStart()
@@ -110,14 +85,14 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
     public Order GetOrder(int customer)
     {
         if (Orders.Count >= GameDataService.Current.ConstantsManager.MaxOrders) return null;
-        
-        if (sequence.Count == 0) UpdateSequence();
-        if (sequence.Count == 0) return null;
 
-        var recipe = Recipes[sequence[0]];
+        var item = sequenceData.GetNext();
+        
+        if (item == null) return null;
+
+        var recipe = Recipes.Find(def => def.Uid == item.Uid);
         var order = new Order{Customer = customer, Def = recipe};
         
-        sequence.RemoveAt(0);
         Orders.Add(order);
         
         return order;

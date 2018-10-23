@@ -10,18 +10,7 @@ public class ItemWeight
     public int Weight { get; set; }
     public bool Override { get; set; }
     
-    public int Piece
-    {
-        get
-        {
-            if (pieceType == -1)
-            {
-                pieceType = PieceType.Parse(Uid);
-            }
-            
-            return pieceType;
-        }
-    }
+    public int Piece => pieceType == -1 ? (pieceType = PieceType.Parse(Uid)) : pieceType;
 
     public ItemWeight Copy()
     {
