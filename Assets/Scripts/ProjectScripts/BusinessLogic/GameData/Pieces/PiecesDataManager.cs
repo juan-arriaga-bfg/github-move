@@ -30,10 +30,6 @@ public class PiecesDataManager : SequenceData, IDataLoader<List<PieceDef>>
         }
     }
 
-    public override void UpdateSequence()
-    {
-    }
-
     public void LoadData(IDataMapper<List<PieceDef>> dataMapper)
     {
         dataMapper.LoadData((data, error)=>

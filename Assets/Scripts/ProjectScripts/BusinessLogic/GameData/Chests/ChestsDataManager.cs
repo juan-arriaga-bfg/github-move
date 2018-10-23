@@ -27,10 +27,6 @@ public class ChestsDataManager : SequenceData, IDataLoader<List<ChestDef>>
         LoadData(new ResourceConfigDataMapper<List<ChestDef>>("configs/chests.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 
-    public override void UpdateSequence()
-    {
-    }
-
     public void LoadData(IDataMapper<List<ChestDef>> dataMapper)
     {
         dataMapper.LoadData((data, error)=> 
@@ -75,25 +71,12 @@ public class ChestsDataManager : SequenceData, IDataLoader<List<ChestDef>>
             }
         });
     }
-    
-    public Chest GetChest(int pieceType)
+
+    private Chest GetChest(int pieceType)
     {
         var chestDef = Chests.Find(def => def.Piece == pieceType);
         
         return chestDef == null ? null : new Chest(chestDef);
-    }
-    
-    public bool AddToBoard(BoardPosition position, int pieceType, bool isOpen = false)
-    {
-        if (ChestsOnBoard.ContainsKey(position)) return false;
-
-        var chest = GetChest(pieceType);
-
-        if (isOpen) chest.State = ChestState.Open;
-        
-        ChestsOnBoard.Add(position, chest);
-        
-        return true;
     }
     
     public Chest GetFromBoard(BoardPosition position, int pieceType)

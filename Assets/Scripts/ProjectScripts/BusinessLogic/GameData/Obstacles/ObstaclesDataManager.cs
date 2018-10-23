@@ -25,10 +25,6 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
         LoadData(new ResourceConfigDataMapper<List<ObstacleDef>>("configs/obstacles.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 
-    public override void UpdateSequence()
-    {
-    }
-
     public void LoadData(IDataMapper<List<ObstacleDef>> dataMapper)
     {
         dataMapper.LoadData((data, error)=> 
@@ -121,7 +117,13 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
     {
         var def = GetStep(piece, step);
         
-        return GetSequence(def.Uid).GetNextDict(def.PieceAmount);
+        var hard = GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name);
+        var sequence = GetSequence(def.Uid);
+        
+        var reward = hard.GetNextDict(GameDataService.Current.LevelsManager.PieceAmount);
+        reward = sequence.GetNextDict(def.PieceAmount, reward);
+        
+        return reward;
     }
 
     public CurrencyPair GetPriceByStep(int piece, int step)

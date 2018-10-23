@@ -1,25 +1,25 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class OrdersDataManager : SequenceData, IDataLoader<List<OrderDef>>
+public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<OrderDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-    public override int Guid => ComponentGuid;
-
-    private string Key => Currency.Order.Name;
+    public int Guid => ComponentGuid;
     
-    public override void OnRegisterEntity(ECSEntity entity)
+    public void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
+    }
+    
+    public void OnUnRegisterEntity(ECSEntity entity)
+    {
     }
 
     public List<OrderDef> Recipes;
     public List<Order> Orders;
     
-    public override void Reload()
+    public void Reload()
     {
-        base.Reload();
-        
         Recipes = new List<OrderDef>();
         Orders = new List<Order>();
         LoadData(new ResourceConfigDataMapper<List<OrderDef>>("configs/orders.data", NSConfigsSettings.Instance.IsUseEncryption));
@@ -51,8 +51,6 @@ public class OrdersDataManager : SequenceData, IDataLoader<List<OrderDef>>
                 
                 Recipes.Sort((a, b) => a.Level.CompareTo(b.Level));
                 
-                AddSequence(Key, GameDataService.Current.LevelsManager.Recipes);
-                
                 if(save?.Orders == null) return;
 
                 foreach (var order in save.Orders)
@@ -66,12 +64,7 @@ public class OrdersDataManager : SequenceData, IDataLoader<List<OrderDef>>
             }
         });
     }
-
-    public override void UpdateSequence()
-    {
-        GetSequence(Key)?.Reinit(GameDataService.Current.LevelsManager.Recipes);
-    }
-
+    
     public bool CheckStart()
     {
         return Orders.Count < GameDataService.Current.ConstantsManager.MaxOrders;
@@ -81,7 +74,7 @@ public class OrdersDataManager : SequenceData, IDataLoader<List<OrderDef>>
     {
         if (Orders.Count >= GameDataService.Current.ConstantsManager.MaxOrders) return null;
 
-        var item = GetSequence(Key)?.GetNext();
+        var item = GameDataService.Current.LevelsManager.GetSequence(Currency.Order.Name)?.GetNext();
         
         if (item == null) return null;
 

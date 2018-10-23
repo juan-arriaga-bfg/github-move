@@ -70,26 +70,23 @@ public class Chest
         var rewardCount = Reward.Values.Sum();
         return rewardCount < def.PieceAmount;
     }
-
+    
     public void SetStartTime(DateTime time)
     {
         StartTime = time;
         completeTime = time.AddSeconds(def.Time);
     }
-
+    
     public Dictionary<int, int> GetRewardPieces()
     {
         if (reward.Count != 0) return reward;
         
+        var hard = GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name);
         var sequence = GameDataService.Current.ChestsManager.GetSequence(def.Uid);
         
-        reward = sequence.GetNextDict(def.PieceAmount);
+        reward = hard.GetNextDict(GameDataService.Current.LevelsManager.PieceAmount);
+        reward = sequence.GetNextDict(def.PieceAmount, reward);
         
         return reward;
-    }
-
-    public float GetTimerProgress()
-    {
-        return StartTime == null ? 1 : Mathf.Clamp01((int)(completeTime - DateTime.UtcNow).TotalSeconds/(float)def.Time);
     }
 }

@@ -17,17 +17,23 @@ public class UIChestMessageWindowModel : IWWindowModel
 
     public List<string> Icons()
     {
-        var icons = new List<string>();
-
-        if (Chest.Def.PieceWeights == null) return icons;
-        
-        foreach (var piece in Chest.Def.PieceWeights)
-        {
-            if(piece.Piece == PieceType.Empty.Id || piece.Weight == 0) continue;
-            
-            icons.Add(piece.Uid);
-        }
+        var icons = AddIcons(new List<string>(), Chest.Def.PieceWeights);
+        icons = AddIcons(icons, GameDataService.Current.LevelsManager.PieceWeights);
         
         return icons;
+    }
+
+    private List<string> AddIcons(List<string> list, List<ItemWeight> weights)
+    {
+        if (weights == null) return list;
+        
+        foreach (var weight in weights)
+        {
+            if(weight.Piece == PieceType.Empty.Id || list.Contains(weight.Uid) || weight.Weight == 0) continue;
+            
+            list.Add(weight.Uid);
+        }
+        
+        return list;
     }
 }

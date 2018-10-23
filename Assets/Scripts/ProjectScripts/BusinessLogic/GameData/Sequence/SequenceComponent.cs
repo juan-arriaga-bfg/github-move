@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class SequenceComponent : IECSComponent
 {
+    private const int Range = 10000;
+    
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
 
@@ -10,7 +12,7 @@ public class SequenceComponent : IECSComponent
     
     private int seed = -1;
     
-    private List<int> sequence;
+    private List<byte> sequence;
     private List<ItemWeight> weights;
     
     public void OnRegisterEntity(ECSEntity entity)
@@ -26,9 +28,9 @@ public class SequenceComponent : IECSComponent
         weights = value ?? new List<ItemWeight>();
         
         var save = ProfileService.Current.GetComponent<SequenceSaveComponent>(SequenceSaveComponent.ComponentGuid)?.GetSave(Key);
-
-        seed = save?.Seed ?? Random.Range(0, 10000);
-        sequence = ItemWeight.GetRandomSequence(weights, 100, seed);
+        
+        seed = save?.Seed ?? Random.Range(0, Range);
+        sequence = ItemWeight.GetRandomSequence(weights, seed);
         
         if(save == null) return;
         
@@ -44,8 +46,8 @@ public class SequenceComponent : IECSComponent
     public void Reinit(List<ItemWeight> value)
     {
         weights = value ?? new List<ItemWeight>();
-        seed = Random.Range(0, 10000);
-        sequence = ItemWeight.GetRandomSequence(weights, 100, seed);
+        seed = Random.Range(0, Range);
+        sequence = ItemWeight.GetRandomSequence(weights, seed);
     }
 
     private bool IsValid()
@@ -57,11 +59,11 @@ public class SequenceComponent : IECSComponent
     {
         return new SequenceSaveItem{Uid = Key, Seed = seed, Count = sequence.Count};
     }
-    
-    public void UpdateSequence()
+
+    private void UpdateSequence()
     {
         seed++;
-        sequence = weights.Count == 0 ? new List<int>() : ItemWeight.GetRandomSequence(weights, 100, seed);
+        sequence = weights.Count == 0 ? new List<byte>() : ItemWeight.GetRandomSequence(weights, seed);
     }
     
     private ItemWeight Next()
@@ -80,9 +82,9 @@ public class SequenceComponent : IECSComponent
         return IsValid() == false ? null : Next().Copy();
     }
 
-    public List<int> GetNextList(int amount)
+    public List<int> GetNextList(int amount, List<int> list = null)
     {
-        var result = new List<int>();
+        var result = list ?? new List<int>();
 
         if (IsValid() == false) return result;
 
@@ -93,10 +95,10 @@ public class SequenceComponent : IECSComponent
 
         return result;
     }
-
-    public Dictionary<int, int> GetNextDict(int amount)
+    
+    public Dictionary<int, int> GetNextDict(int amount, Dictionary<int, int> dict = null)
     {
-        var result = new Dictionary<int, int>();
+        var result = dict ?? new Dictionary<int, int>();
         
         if (IsValid() == false) return result;
 

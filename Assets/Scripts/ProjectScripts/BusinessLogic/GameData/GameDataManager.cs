@@ -73,26 +73,23 @@ public class ItemWeight
         return item == null ? -1 : weights.IndexOf(item);
     }
 
-    public static List<int> GetRandomSequence(List<ItemWeight> weights, int length, int seed = -1)
+    public static List<byte> GetRandomSequence(List<ItemWeight> weights, int seed = -1)
     {
-        var sum = weights.Sum(w => w.Weight);
-        var result = new List<int>();
+        var result = new List<byte>();
 
-        for (var i = 0; i < weights.Count; i++)
+        for (byte i = 0; i < weights.Count; i++)
         {
             var item = weights[i];
-            var amount = Mathf.CeilToInt(length * (item.Weight / (float)sum));
-
-            for (var j = 0; j < amount; j++)
+            
+            for (var j = 0; j < item.Weight; j++)
             {
                 result.Add(i);
             }
         }
-
+        
         if (result.Count == 0) return result;
         
         result.Shuffle(seed);
-        result.RemoveRange(length - 1, result.Count - length);
 
         return result;
     }

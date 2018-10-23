@@ -56,6 +56,4 @@ public abstract class SequenceData : ECSEntity, IDataManager
             return sequenceData != null && sequenceData.Key == uid;
         });
     }
-
-    public abstract void UpdateSequence();
 }
