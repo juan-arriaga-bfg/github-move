@@ -12,6 +12,12 @@ public class HighlightTaskClearFog : TaskHighlightUsingArrow
         }
         
         string fogUid = fogTask.FogId;
+
+        if (string.IsNullOrEmpty(fogUid))
+        {
+            return HighlightFogHelper.HighlightNextFog(delay);
+        }
+        
         return HighlightFogHelper.HighlightByUid(fogUid, delay);
     }
 }

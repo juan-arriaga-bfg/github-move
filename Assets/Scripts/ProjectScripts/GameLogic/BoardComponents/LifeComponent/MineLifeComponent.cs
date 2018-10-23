@@ -8,9 +8,13 @@ public class MineLifeComponent : StorageLifeComponent
     public override string Message => $"Clear mine:\n{DateTimeExtension.GetDelayText(def.Delay)}";
     public override string Price => $"Clear {Energy.ToStringIcon()}";
     
+    public int MinePieceType { get; private set; }
+    
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
         base.OnAddToBoard(position, context);
+
+        MinePieceType = context.PieceType;
         
         var key = new BoardPosition(position.X, position.Y);
 
