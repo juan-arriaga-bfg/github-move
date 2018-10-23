@@ -106,25 +106,19 @@ public class SandboxGameController : MonoBehaviour
         var widthShift = boardController.BoardDef.Width / 4;
         var heightShift = boardController.BoardDef.Height / 4;
         
-        var leftPoint = boardController.BoardDef.GetSectorCenterWorldPosition(widthShift, widthShift, 0);
-        var rightPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - widthShift, boardController.BoardDef.Height - widthShift, 0);
-        var topPoint = boardController.BoardDef.GetSectorCenterWorldPosition(heightShift, boardController.BoardDef.Height - heightShift, 0);
-        var bottomPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - heightShift, heightShift, 0);
+        var leftPoint = boardController.BoardDef.GetSectorCenterWorldPosition(widthShift, heightShift - 1, 0);
+        var rightPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - widthShift - 1, boardController.BoardDef.Height - widthShift, 0);
+        var topPoint = boardController.BoardDef.GetSectorCenterWorldPosition(heightShift - 1, boardController.BoardDef.Height - heightShift - 1, 0);
+        var bottomPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - heightShift - 1, heightShift - 1, 0);
         
         var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition(19, 14, boardController.BoardDef.PieceLayer);
-
-        var interfaceOffsetTop = boardController.BoardDef.CellHeightInUnit();
-        var interfaceOffsetBottom = boardController.BoardDef.UnitSize;
-        var interfaceOffsetLeft = boardController.BoardDef.CellWidthInUnit()*2;
-        var interfaceOffsetRight = 0;
-        
         
         boardController.Manipulator.CameraManipulator.CurrentCameraSettings.CameraClampRegion = new Rect
         (
-            leftPoint.x - interfaceOffsetLeft, 
-            bottomPoint.y - interfaceOffsetBottom,
-            Mathf.Abs((leftPoint - rightPoint).x) + interfaceOffsetLeft + interfaceOffsetRight,
-            Mathf.Abs((topPoint - bottomPoint).y) + interfaceOffsetBottom + interfaceOffsetTop
+            leftPoint.x, 
+            bottomPoint.y,
+            Mathf.Abs((leftPoint - rightPoint).x),
+            Mathf.Abs((topPoint - bottomPoint).y)
         );
        
         boardController.Manipulator.CameraManipulator.CachedCameraTransform.localPosition = new Vector3
