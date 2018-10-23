@@ -35,10 +35,29 @@ public class HintArrowView : BoardElementView
 
         arrowView.CachedTransform.localPosition = arrowView.CachedTransform.localPosition + (Vector3.up * 2) + new Vector3(offsetX, offsetY);
         arrowView.Show();
-        
-        if(focus == false) return;
-        
+
+        if (focus == false)
+        {
+            return;
+        }
+
         var worldPos = board.BoardDef.GetSectorCenterWorldPosition(position.X, position.Up.Y, position.Z);
         board.Manipulator.CameraManipulator.MoveTo(worldPos);
+    }
+    
+    public static void Show(Transform hintTarget, float offsetX = 0f, float offsetY = 0f, bool focus = true)
+    {
+        BoardController board = BoardService.Current.FirstBoard;
+        var arrowView = board.RendererContext.CreateBoardElementAt<HintArrowView>(R.HintArrow, new BoardPosition(0,0));
+
+        arrowView.CachedTransform.position = hintTarget.position + new Vector3(offsetX, offsetY);
+        arrowView.Show();
+        
+        if (focus == false)
+        {
+            return;
+        }
+        
+        board.Manipulator.CameraManipulator.MoveTo(hintTarget.position);
     }
 }

@@ -13,12 +13,10 @@ public class HintCooldownComponent : ECSEntity
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
-	
-	public bool IsPaused
-	{
-		get { return timerArrow.IsPaused; }
-		set { timerArrow.IsPaused = value; }
-	}
+
+    private LockerComponent locker;
+    
+	public bool IsPaused => locker.IsLocked;
 
 	private readonly TimerComponent timerArrow = new TimerComponent();
 	private readonly TimerComponent timerBounce = new TimerComponent();
@@ -31,8 +29,40 @@ public class HintCooldownComponent : ECSEntity
 	
 	private readonly List<UIBoardView> views = new List<UIBoardView>();
 	
+    public void Pause(object who)
+    {
+        Debug.Log($"[HintCooldownComponent] => Pause by {who.GetType()}");
+        
+        locker.Lock(who);
+        UpdateLockState();
+    }
+    
+    public void Resume(object who)
+    {
+        Debug.Log($"[HintCooldownComponent] => Resume by {who.GetType()}");
+        
+        locker.Unlock(who);
+        UpdateLockState();
+    }
+
+    private void UpdateLockState()
+    {
+        if (timerArrow.IsPaused != locker.IsLocked)
+        {
+            Debug.Log($"[HintCooldownComponent] => State {(timerArrow.IsPaused ? "PAUSED" : "RESUMED")} => {(locker.IsLocked ? "PAUSED" : "RESUMED")}");
+            timerArrow.IsPaused = locker.IsLocked;
+        }
+        else
+        {
+            Debug.Log($"[HintCooldownComponent] => State still {(timerArrow.IsPaused ? "PAUSED" : "RESUMED")}"); 
+        }
+
+    }
+
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
+	    locker = GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
+	    
 		context = entity as BoardController;
 		RegisterComponent(timerArrow, true);
 		RegisterComponent(timerBounce, true);

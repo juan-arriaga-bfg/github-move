@@ -75,4 +75,23 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         Completed.Add(key);
         FogPositions.Remove(key);
     }
+
+    public BoardPosition? GetFogPositionByUid(string uid, bool includeCleared)
+    {
+        foreach (var pair in FogPositions)
+        {
+            if (pair.Value.Uid == uid)
+            {
+                var pos = pair.Key;
+                if (!includeCleared && Completed.Contains(pos))
+                {
+                    break;
+                }
+                
+                return pair.Value.GetCenter();
+            }
+        }
+
+        return null;
+    }
 }

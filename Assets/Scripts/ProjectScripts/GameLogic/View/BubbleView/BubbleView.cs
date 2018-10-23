@@ -42,8 +42,19 @@ public class BubbleView : UIBoardView, IBoardEventListener
     public override void UpdateVisibility(bool isVisible)
     {
         base.UpdateVisibility(isVisible);
+
+        if (isPausedHint)
+        {
+            if (isVisible)
+            {
+                Context.Context.HintCooldown.Pause(this); 
+            }
+            else
+            {
+                Context.Context.HintCooldown.Resume(this);  
+            }
+        }
         
-        if(isPausedHint) Context.Context.HintCooldown.IsPaused = isVisible;
         if(isIgnoreHide == false) UpdateListener(isVisible);
     }
     
