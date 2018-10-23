@@ -1,16 +1,16 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-public class RandomSaveItemJsonConverter : JsonConverter
+public class SequenceSaveItemJsonConverter : JsonConverter
 {
 	public override bool CanConvert(Type objectType)
 	{
-		return objectType == typeof (RandomSaveItem);
+		return objectType == typeof (SequenceSaveItem);
 	}
     
 	public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 	{
-		var targetValue = (RandomSaveItem) value;
+		var targetValue = (SequenceSaveItem) value;
         
 		serializer.TypeNameHandling = TypeNameHandling.None;
 		serializer.Serialize(writer, $"{targetValue.Uid},{targetValue.Seed},{targetValue.Count}");
@@ -21,7 +21,7 @@ public class RandomSaveItemJsonConverter : JsonConverter
 		var data = serializer.Deserialize<string>(reader);
 		var dataArray = data.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
         
-		var targetValue = new RandomSaveItem
+		var targetValue = new SequenceSaveItem
 		{
 			Uid = dataArray[0],
 			Seed = int.Parse(dataArray[1]),
@@ -32,8 +32,8 @@ public class RandomSaveItemJsonConverter : JsonConverter
 	}
 }
 
-[JsonConverter(typeof(RandomSaveItemJsonConverter))]
-public class RandomSaveItem
+[JsonConverter(typeof(SequenceSaveItemJsonConverter))]
+public class SequenceSaveItem
 {
 	private string uid;
 	private int seed;

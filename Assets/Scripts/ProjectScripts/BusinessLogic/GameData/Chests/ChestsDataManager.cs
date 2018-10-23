@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ChestsDataManager : ECSEntity, IDataManager, IDataLoader<List<ChestDef>>, ISequenceData
+public class ChestsDataManager : SequenceData, IDataLoader<List<ChestDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -16,43 +16,19 @@ public class ChestsDataManager : ECSEntity, IDataManager, IDataLoader<List<Chest
     
     public Dictionary<BoardPosition, Chest> ChestsOnBoard = new Dictionary<BoardPosition, Chest>();
     
-    public void Reload()
+    public override void Reload()
     {
+        base.Reload();
+        
         ActiveChest = null;
         Chests = null;
         ChestsOnBoard = new Dictionary<BoardPosition, Chest>();
-
-        ReloadSequences();
         
         LoadData(new ResourceConfigDataMapper<List<ChestDef>>("configs/chests.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
-    
-    public List<RandomSaveItem> GetSaveSequences()
+
+    public override void UpdateSequence()
     {
-        var save = new List<RandomSaveItem>();
-
-        var collection = GetComponent<ECSComponentCollection>(SequenceComponent.ComponentGuid);
-
-        foreach (SequenceComponent component in collection.Components)
-        {
-            save.Add(component.Save());
-        }
-        
-        return save;
-    }
-
-    public void ReloadSequences()
-    {
-        var collection = GetComponent<ECSComponentCollection>(SequenceComponent.ComponentGuid);
-
-        if (collection?.Components == null) return;
-        
-        var components = new List<IECSComponent>(collection.Components);
-            
-        foreach (var component in components)
-        {
-            UnRegisterComponent(component);
-        }
     }
 
     public void LoadData(IDataMapper<List<ChestDef>> dataMapper)
@@ -78,11 +54,7 @@ public class ChestsDataManager : ECSEntity, IDataManager, IDataLoader<List<Chest
                     }
                     
                     Chests.Add(next);
-                    
-                    var sequenceData = new SequenceComponent{Key = next.Uid};
-                    
-                    sequenceData.Init(next.PieceWeights);
-                    RegisterComponent(sequenceData, true);
+                    AddSequence(next.Uid, next.PieceWeights);
                 }
 
                 var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
@@ -109,12 +81,6 @@ public class ChestsDataManager : ECSEntity, IDataManager, IDataLoader<List<Chest
         var chestDef = Chests.Find(def => def.Piece == pieceType);
         
         return chestDef == null ? null : new Chest(chestDef);
-    }
-
-    public SequenceComponent GetSequence(string uid)
-    {
-        var collection = GetComponent<ECSComponentCollection>(SequenceComponent.ComponentGuid);
-        return (SequenceComponent) collection.Components.Find(component => (component as SequenceComponent).Key == uid);
     }
     
     public bool AddToBoard(BoardPosition position, int pieceType, bool isOpen = false)

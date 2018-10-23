@@ -11,7 +11,7 @@ public class SequenceComponent : IECSComponent
     private int seed = -1;
     
     private List<int> sequence;
-    public List<ItemWeight> Weights;
+    private List<ItemWeight> weights;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -21,14 +21,14 @@ public class SequenceComponent : IECSComponent
     {
     }
     
-    public void Init(List<ItemWeight> weights)
+    public void Init(List<ItemWeight> value)
     {
-        if(weights != null) Weights = weights;
+        weights = value ?? new List<ItemWeight>();
         
-        var save = ProfileService.Current.GetComponent<RandomSaveComponent>(RandomSaveComponent.ComponentGuid)?.GetSave(Key);
+        var save = ProfileService.Current.GetComponent<SequenceSaveComponent>(SequenceSaveComponent.ComponentGuid)?.GetSave(Key);
 
         seed = save?.Seed ?? Random.Range(0, 10000);
-        sequence = ItemWeight.GetRandomSequence(Weights, 100, seed);
+        sequence = ItemWeight.GetRandomSequence(weights, 100, seed);
         
         if(save == null) return;
         
@@ -41,27 +41,27 @@ public class SequenceComponent : IECSComponent
         sequence.RemoveRange(0, sequence.Count - save.Count);
     }
 
-    public void Reinit(List<ItemWeight> weights)
+    public void Reinit(List<ItemWeight> value)
     {
-        Weights = weights;
+        weights = value ?? new List<ItemWeight>();
         seed = Random.Range(0, 10000);
-        sequence = ItemWeight.GetRandomSequence(Weights, 100, seed);
+        sequence = ItemWeight.GetRandomSequence(weights, 100, seed);
     }
 
     private bool IsValid()
     {
-        return Weights != null && Weights.Count > 0;
+        return weights != null && weights.Count > 0;
     }
     
-    public RandomSaveItem Save()
+    public SequenceSaveItem Save()
     {
-        return new RandomSaveItem{Uid = Key, Seed = seed, Count = sequence.Count};
+        return new SequenceSaveItem{Uid = Key, Seed = seed, Count = sequence.Count};
     }
     
     public void UpdateSequence()
     {
         seed++;
-        sequence = Weights.Count == 0 ? new List<int>() : ItemWeight.GetRandomSequence(Weights, 100, seed);
+        sequence = weights.Count == 0 ? new List<int>() : ItemWeight.GetRandomSequence(weights, 100, seed);
     }
     
     private ItemWeight Next()
@@ -72,7 +72,7 @@ public class SequenceComponent : IECSComponent
         
         sequence.RemoveAt(0);
         
-        return Weights[index];
+        return weights[index];
     }
 
     public ItemWeight GetNext()

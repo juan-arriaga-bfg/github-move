@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PiecesDataManager : ECSEntity, IDataManager, IDataLoader<List<PieceDef>>, ISequenceData
+public class PiecesDataManager : SequenceData, IDataLoader<List<PieceDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -16,39 +16,11 @@ public class PiecesDataManager : ECSEntity, IDataManager, IDataLoader<List<Piece
         RegisterComponent(new PiecesMakingDataManager());
     }
     
-    public List<RandomSaveItem> GetSaveSequences()
+    public override void Reload()
     {
-        var save = new List<RandomSaveItem>();
-
-        var collection = GetComponent<ECSComponentCollection>(SequenceComponent.ComponentGuid);
-
-        foreach (SequenceComponent component in collection.Components)
-        {
-            save.Add(component.Save());
-        }
-        
-        return save;
-    }
-
-    public void ReloadSequences()
-    {
-        var collection = GetComponent<ECSComponentCollection>(SequenceComponent.ComponentGuid);
-
-        if (collection?.Components == null) return;
-        
-        var components = new List<IECSComponent>(collection.Components);
-            
-        foreach (var component in components)
-        {
-            UnRegisterComponent(component);
-        }
-    }
-    
-    public void Reload()
-    {
+        base.Reload();
         pieces = null;
-
-        ReloadSequences();
+        
         LoadData(new ResourceConfigDataMapper<List<PieceDef>>("configs/pieces.data", NSConfigsSettings.Instance.IsUseEncryption));
 
         foreach (var component in componentsCache.Values)
@@ -56,6 +28,10 @@ public class PiecesDataManager : ECSEntity, IDataManager, IDataLoader<List<Piece
             var manager = component as IDataManager;
             manager?.Reload();
         }
+    }
+
+    public override void UpdateSequence()
+    {
     }
 
     public void LoadData(IDataMapper<List<PieceDef>> dataMapper)
@@ -96,11 +72,5 @@ public class PiecesDataManager : ECSEntity, IDataManager, IDataLoader<List<Piece
         PieceDef def;
 
         return pieces.TryGetValue(id, out def) ? def : null;
-    }
-    
-    public SequenceComponent GetSequence(string uid)
-    {
-        var collection = GetComponent<ECSComponentCollection>(SequenceComponent.ComponentGuid);
-        return (SequenceComponent) collection.Components.Find(component => (component as SequenceComponent).Key == uid);
     }
 }

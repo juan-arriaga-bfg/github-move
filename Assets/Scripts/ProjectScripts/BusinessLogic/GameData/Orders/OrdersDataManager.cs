@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<OrderDef>>, ISequenceData
+public class OrdersDataManager : SequenceData, IDataLoader<List<OrderDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
-    private SequenceComponent sequenceData;
-
+    private string Key => Currency.Order.Name;
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
@@ -16,26 +16,13 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
     public List<OrderDef> Recipes;
     public List<Order> Orders;
     
-    public void Reload()
+    public override void Reload()
     {
+        base.Reload();
+        
         Recipes = new List<OrderDef>();
         Orders = new List<Order>();
-
-        ReloadSequences();
-        
         LoadData(new ResourceConfigDataMapper<List<OrderDef>>("configs/orders.data", NSConfigsSettings.Instance.IsUseEncryption));
-    }
-    
-    public List<RandomSaveItem> GetSaveSequences()
-    {
-        return new List<RandomSaveItem>{sequenceData.Save()};
-    }
-
-    public void ReloadSequences()
-    {
-        if(sequenceData == null) return;
-        
-        UnRegisterComponent(sequenceData);
     }
 
     public void LoadData(IDataMapper<List<OrderDef>> dataMapper)
@@ -64,10 +51,7 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
                 
                 Recipes.Sort((a, b) => a.Level.CompareTo(b.Level));
                 
-                sequenceData = new SequenceComponent{Key = "Orders"};
-                sequenceData.Init(GameDataService.Current.LevelsManager.Recipes);
-                
-                RegisterComponent(sequenceData);
+                AddSequence(Key, GameDataService.Current.LevelsManager.Recipes);
                 
                 if(save?.Orders == null) return;
 
@@ -83,9 +67,9 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
         });
     }
 
-    public void UpdateSequence()
+    public override void UpdateSequence()
     {
-        sequenceData.Reinit(GameDataService.Current.LevelsManager.Recipes);
+        GetSequence(Key)?.Reinit(GameDataService.Current.LevelsManager.Recipes);
     }
 
     public bool CheckStart()
@@ -97,7 +81,7 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
     {
         if (Orders.Count >= GameDataService.Current.ConstantsManager.MaxOrders) return null;
 
-        var item = sequenceData.GetNext();
+        var item = GetSequence(Key)?.GetNext();
         
         if (item == null) return null;
 

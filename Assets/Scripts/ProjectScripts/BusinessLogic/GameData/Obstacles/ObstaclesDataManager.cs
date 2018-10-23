@@ -1,18 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<List<ObstacleDef>>
+public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-    public int Guid => ComponentGuid;
+    public override int Guid => ComponentGuid;
 
-    public void OnRegisterEntity(ECSEntity entity)
+    public override void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
-    }
-    
-    public void OnUnRegisterEntity(ECSEntity entity)
-    {
     }
     
     public Dictionary<int, ObstacleDef> Obstacles;
@@ -22,12 +18,17 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     
     private MatchDefinitionComponent matchDefinition;
     
-    public void Reload()
+    public override void Reload()
     {
+        base.Reload();
         Obstacles = null;
         LoadData(new ResourceConfigDataMapper<List<ObstacleDef>>("configs/obstacles.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
-    
+
+    public override void UpdateSequence()
+    {
+    }
+
     public void LoadData(IDataMapper<List<ObstacleDef>> dataMapper)
     {
         dataMapper.LoadData((data, error)=> 
@@ -55,6 +56,7 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
                     
                     Obstacles.Add(next.Piece, next);
                     AddToBranch(matchDefinition.GetFirst(next.Piece), next);
+                    AddSequence(next.Uid, next.PieceWeights);
                 }
             }
             else
@@ -119,7 +121,7 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     {
         var def = GetStep(piece, step);
         
-        return ItemWeight.GetRandomPieces(def.PieceAmount, def.PieceWeights);
+        return GetSequence(def.Uid).GetNextDict(def.PieceAmount);
     }
 
     public CurrencyPair GetPriceByStep(int piece, int step)

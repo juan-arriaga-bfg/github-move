@@ -37,10 +37,7 @@ public class PiecesMakingDataManager : IECSComponent, IDataManager, IDataLoader<
 
 					baseDef.MakingDef = def;
 					
-					var sequenceData = new SequenceComponent{Key = def.Uid};
-                    
-					sequenceData.Init(def.PieceWeights);
-					context.RegisterComponent(sequenceData, true);
+					context.AddSequence(def.Uid, def.PieceWeights);
 				}
 			}
 			else
