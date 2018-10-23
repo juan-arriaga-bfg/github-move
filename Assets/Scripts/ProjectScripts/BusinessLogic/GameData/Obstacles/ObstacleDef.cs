@@ -4,9 +4,9 @@ public class ObstacleDef
 { 
     private int pieceType = -1;
     private int chestType = -1;
-    
-    public string Uid { get; set; }
-    public string ChestId { get; set; }
+
+    public string Uid = "";
+    public string ChestId = "";
     
     public int Delay { get; set; }
     
