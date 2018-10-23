@@ -14,10 +14,15 @@
 
     protected override void InitStorage()
     {
+        storage.Capacity = storage.Amount = 1;
+    }
+
+    protected override void InitInSaveStorage()
+    {
         storage.Timer.Price = GameDataService.Current.ObstaclesManager.GetFastPriceByStep(thisContext.PieceType, current - 1);
         storage.Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current - 1);
         
-        storage.Capacity = storage.Amount = 1;
+        base.InitInSaveStorage();
     }
 
     protected override void Success()

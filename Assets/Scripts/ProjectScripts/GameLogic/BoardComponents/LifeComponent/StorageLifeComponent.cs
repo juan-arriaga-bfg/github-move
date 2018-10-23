@@ -41,6 +41,11 @@
     {
     }
 
+    protected virtual void InitInSaveStorage()
+    {
+        storage.InitInSave(thisContext.CachedPosition);
+    }
+
     protected virtual LifeSaveItem InitInSave(BoardPosition position)
     {
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
@@ -54,7 +59,7 @@
         thisContext.Context.WorkerLogic.Init(thisContext.CachedPosition, storage.Timer);
         
         OnTimerStart();
-        storage.InitInSave(thisContext.CachedPosition);
+        InitInSaveStorage();
         
         if (storage.IsFilled) OnTimerComplete();
         
