@@ -73,6 +73,11 @@ public class UIBoardView : BoardElementView
     {
         CachedTransform.localPosition = controller.GetViewPositionBottom(multiSize) + Ofset;
     }
+    
+    public void SetOfset(Vector3 ofset)
+    {
+        CachedTransform.localPosition = ofset;
+    }
 
     public void Change(bool isShow)
     {
@@ -132,13 +137,11 @@ public class UIBoardView : BoardElementView
 
         if (isEnd)
         {
-            sequence.Insert(0f, group.DOFade(1, 0.3f));
-            sequence.Insert(0F, viewTransform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack));
+            AddShowAnimation(sequence);
             return;
         }
         
-        sequence.Insert(0f, group.DOFade(0, 0.2f));
-        sequence.Insert(0f, viewTransform.DOScale(Vector3.zero, 0.2f));
+        AddHideAnimation(sequence);
     }
     
     public virtual void UpdateVisibility(bool isVisible)
@@ -146,11 +149,10 @@ public class UIBoardView : BoardElementView
         DOTween.Kill(viewTransform);
         
         var sequence = DOTween.Sequence().SetId(viewTransform);
-
+        
         if (Priority < 0 || isVisible)
         {
-            sequence.Insert(0f, group.DOFade(1, 0.3f));
-            sequence.Insert(0F, viewTransform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack));
+            sequence = AddShowAnimation(sequence);
             sequence.InsertCallback(0.25f, () =>
             {
                 OnShow?.Invoke();
@@ -159,14 +161,28 @@ public class UIBoardView : BoardElementView
             return;
         }
         
-        sequence.Insert(0f, group.DOFade(0, 0.2f));
-        sequence.Insert(0f, viewTransform.DOScale(Vector3.zero, 0.2f));
+        Context.Context.RendererContext.RemoveElement(this, false);
+        sequence = AddHideAnimation(sequence);
         sequence.InsertCallback(0.2f, Cash);
         sequence.InsertCallback(0.15f, () =>
         {
             OnHide?.Invoke();
             OnHide = null;
         });
+    }
+
+    private Sequence AddShowAnimation(Sequence sequence)
+    {
+        sequence.Insert(0f, group.DOFade(1, 0.3f));
+        sequence.Insert(0F, viewTransform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack));
+        return sequence;
+    }
+
+    private Sequence AddHideAnimation(Sequence sequence)
+    {
+        sequence.Insert(0f, group.DOFade(0, 0.2f));
+        sequence.Insert(0f, viewTransform.DOScale(Vector3.zero, 0.2f));
+        return sequence;
     }
     
     private int GetMultiSize()

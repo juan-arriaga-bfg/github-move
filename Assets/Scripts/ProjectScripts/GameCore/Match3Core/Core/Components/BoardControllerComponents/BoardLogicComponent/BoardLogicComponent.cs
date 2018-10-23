@@ -4,7 +4,7 @@ using System.Text;
 
 public class BoardLogicComponent : ECSEntity,
     IMatchDefinitionComponent, IFieldFinderComponent, IEmptyCellsFinderComponent, IMatchActionBuilderComponent, IPiecePositionsCacheComponent,
-    IPieceFlyerComponent, ICharactersLogicComponent, ICellHintsComponent
+    IPieceFlyerComponent, ICellHintsComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -57,9 +57,6 @@ public class BoardLogicComponent : ECSEntity,
     
     protected PieceFlyerComponent pieceFlyer;
     public PieceFlyerComponent PieceFlyer => pieceFlyer ?? (pieceFlyer = GetComponent<PieceFlyerComponent>(PieceFlyerComponent.ComponentGuid));
-    
-    protected CharactersLogicComponent charactersLogic;
-    public CharactersLogicComponent CharactersLogic => charactersLogic ?? (charactersLogic = GetComponent<CharactersLogicComponent>(CharactersLogicComponent.ComponentGuid));
     
     protected CellHintsComponent cellHints;
     public CellHintsComponent CellHints => cellHints ?? (cellHints = GetComponent<CellHintsComponent>(CellHintsComponent.ComponentGuid));
@@ -304,9 +301,11 @@ public class BoardLogicComponent : ECSEntity,
         var observer = piece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
 
         observer?.OnAddToBoard(position, piece);
+
+        Context.BoardEvents.RaiseEvent(GameEventsCodes.AddPieceToBoard, piece.PieceType);
         
         PieceFlyer.FlyToQuest(piece);
-        PieceFlyer.FlyTo(piece, x, y, Currency.Piece.Name);
+        PieceFlyer.FlyTo(piece, x, y, Currency.Codex.Name);
         
         return true;
     }
@@ -365,7 +364,7 @@ public class BoardLogicComponent : ECSEntity,
         
         observer?.OnMovedFromToStart(@from, to);
         
-        if (AddPieceToBoardSilent(to.X, to.Y, fromPiece) && RemovePieceFromBoardSilent(from))
+        if (RemovePieceFromBoardSilent(from) && AddPieceToBoardSilent(to.X, to.Y, fromPiece))
         {
             observer?.OnMovedFromToFinish(@from, to);
             return true;

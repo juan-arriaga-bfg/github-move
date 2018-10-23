@@ -8,7 +8,7 @@ public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMat
         return new List<int>
         {
             PieceType.A8.Id,
-            PieceType.C11.Id,
+            PieceType.C10.Id,
             PieceType.K9.Id,
             PieceType.L8.Id,
         };
@@ -90,6 +90,9 @@ public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMat
         }
 
         if(positions == null) return null;
+        
+        matchField.Clear();
+        matchField.AddRange(positions);
         
         var nextAction = new SpawnPieceAtAction
         {

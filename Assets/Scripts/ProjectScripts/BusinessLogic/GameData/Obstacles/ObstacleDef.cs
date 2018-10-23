@@ -3,8 +3,10 @@
 public class ObstacleDef
 { 
     private int pieceType = -1;
+    private int chestType = -1;
     
     public string Uid { get; set; }
+    public string ChestId { get; set; }
     
     public int Delay { get; set; }
     
@@ -14,18 +16,7 @@ public class ObstacleDef
     
     public int PieceAmount { get; set; }
     public List<ItemWeight> PieceWeights { get; set; }
-    public List<ItemWeight> ChestWeights { get; set; }
     
-    public int Piece
-    {
-        get
-        {
-            if (pieceType == -1)
-            {
-                pieceType = PieceType.Parse(Uid);
-            }
-            
-            return pieceType;
-        }
-    }
+    public int Piece => pieceType == -1 ? (pieceType = PieceType.Parse(Uid)) : pieceType;
+    public int Chest => chestType == -1 ? (chestType = PieceType.Parse(ChestId)) : chestType;
 }

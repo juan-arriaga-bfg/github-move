@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public class TouchReactionDefinitionObstacleComponent : TouchReactionDefinitionSpawnInStorage
 {
@@ -9,30 +10,42 @@ public class TouchReactionDefinitionObstacleComponent : TouchReactionDefinitionS
 
         if (storageLife.IsDead == false) return base.Make(position, piece);
         
+        var action = storage.SpawnAction as EjectionPieceAction;
+
+        if (action != null)
+        {
+            var onComplete = action.OnComplete;
+            
+            action.OnComplete = () => CollapsePiece(position, piece, storage, () => { onComplete?.Invoke(); });
+            
+            return base.Make(position, piece);
+        }
+        
         storage.OnHideBubble = () =>
         {
             storage.OnHideBubble = null;
-            
-            piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
-            {
-                Positions = new List<BoardPosition> {position},
-                To = position,
-                OnCompleteAction = new CreatePieceAtAction
-                {
-                    At = position,
-                    PieceTypeId = GameDataService.Current.ObstaclesManager.GetReward(piece.PieceType),
-                    OnComplete = () =>
-                    {
-                        storage.OnScatter?.Invoke();
-                    }
-                }
-            });
+            CollapsePiece(position, piece, storage, () => { storage.OnScatter?.Invoke(); });
         };
         
         int tmp;
-        if (storage.Scatter(out tmp, IsAutoStart) != false) return true;
+        if (storage.Scatter(out tmp, IsAutoStart)) return true;
         
         UIErrorWindowController.AddError("Production of the resource is not complete!");
         return false;
+    }
+
+    private void CollapsePiece(BoardPosition position, Piece piece, StorageComponent storage, Action onComplete)
+    {
+        piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+        {
+            Positions = new List<BoardPosition> {position},
+            To = position,
+            OnCompleteAction = new CreatePieceAtAction
+            {
+                At = position,
+                PieceTypeId = storage.SpawnPiece,
+                OnComplete = onComplete
+            }
+        });
     }
 }

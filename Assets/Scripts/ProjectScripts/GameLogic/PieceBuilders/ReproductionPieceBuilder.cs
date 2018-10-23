@@ -10,11 +10,6 @@ public class ReproductionPieceBuilder : SimplePieceBuilder
 		
 		piece.RegisterComponent(new TimerComponent());
 		
-		var life = new ReproductionLifeComponent();
-
-		piece.RegisterComponent(life);
-		AddObserver(piece, life);
-		
 		var storage = new StorageComponent
 		{
 			IsAutoStart = false,
@@ -24,7 +19,12 @@ public class ReproductionPieceBuilder : SimplePieceBuilder
 		
 		piece.RegisterComponent(storage);
 		AddObserver(piece, storage);
+		
+		var life = new ReproductionLifeComponent();
 
+		piece.RegisterComponent(life);
+		AddObserver(piece, life);
+		
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}
 				.RegisterDefinition(new TouchReactionDefinitionOpenBubble {ViewId = ViewType.ObstacleState})

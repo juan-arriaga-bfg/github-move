@@ -2,8 +2,9 @@
 
 public class LevelsDef
 {
-    public int Index { get; set; }
-    public string Chest { get; set; }
-    public CurrencyPair Price { get; set; }
-    public List<CurrencyPair> Rewards { get; set; }
+    public int Index;
+    public string Chest;
+    public CurrencyPair Price;
+    public List<CurrencyPair> Rewards;
+    public List<ItemWeight> OrdersWeights = new List<ItemWeight>();
 }

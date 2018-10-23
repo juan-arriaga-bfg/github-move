@@ -3,7 +3,7 @@
     "Uid": "Mine 1",
     "Skin": "MineC",
     "Delay": 45,
-    "Size": 7,
+    "Size": 10,
     "Price": {
       "Currency": "Energy",
       "Amount": 15
@@ -29,10 +29,10 @@
     "Uid": "Mine 2",
     "Skin": "MineC",
     "Delay": 55,
-    "Size": 10,
+    "Size": 15,
     "Price": {
       "Currency": "Energy",
-      "Amount": 15
+      "Amount": 10
     },
     "FastPrice": {
       "Currency": "Crystals",
@@ -44,33 +44,7 @@
     },
     "StepReward": {
       "Currency": "Experience",
-      "Amount": 15
-    },
-    "Position": {
-      "X": 23,
-      "Y": 6
-    }
-  },
-  {
-    "Uid": "Mine 3",
-    "Skin": "MineC",
-    "Delay": 90,
-    "Size": 15,
-    "Price": {
-      "Currency": "Energy",
-      "Amount": 15
-    },
-    "FastPrice": {
-      "Currency": "Crystals",
-      "Amount": 3
-    },
-    "Reward": {
-      "Currency": "ChestC1",
-      "Amount": 1
-    },
-    "StepReward": {
-      "Currency": "Experience",
-      "Amount": 15
+      "Amount": 25
     },
     "Position": {
       "X": 11,
@@ -78,25 +52,51 @@
     }
   },
   {
-    "Uid": "Mine 4",
-    "Skin": "MineC",
-    "Delay": 120,
-    "Size": 10,
+    "Uid": "Mine 3",
+    "Skin": "MineK",
+    "Delay": 90,
+    "Size": 17,
     "Price": {
       "Currency": "Energy",
-      "Amount": 10
+      "Amount": 15
     },
     "FastPrice": {
       "Currency": "Crystals",
-      "Amount": 10
+      "Amount": 5
     },
     "Reward": {
-      "Currency": "ChestC1",
+      "Currency": "ChestK1",
       "Amount": 1
     },
     "StepReward": {
       "Currency": "Experience",
-      "Amount": 10
+      "Amount": 20
+    },
+    "Position": {
+      "X": 23,
+      "Y": 6
+    }
+  },
+  {
+    "Uid": "Mine 4",
+    "Skin": "MineL",
+    "Delay": 120,
+    "Size": 15,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 15
+    },
+    "FastPrice": {
+      "Currency": "Crystals",
+      "Amount": 5
+    },
+    "Reward": {
+      "Currency": "ChestL1",
+      "Amount": 1
+    },
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 20
     },
     "Position": {
       "X": 20,

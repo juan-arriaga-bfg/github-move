@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.Linq;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,21 +22,23 @@ public class UIQuestWindowView : UIGenericPopupWindowView
     {
         base.OnViewShow();
         
-        var windowModel = Model as UIQuestWindowModel;
+        var model = Model as UIQuestWindowModel;
 
         isComplete = false;
         
-        SetTitle(windowModel.Title);
-        SetMessage(windowModel.Message);
+        SetTitle(model.Title);
+        SetMessage(model.Message);
+        
+        model.InitReward();
 
-        descriptionLabel.Text = windowModel.Description;
-        rewardLabel.Text = windowModel.RewardText;
-        amountLabel.Text = windowModel.AmountText;
-        buttonLabel.Text = windowModel.ButtonText;
+        descriptionLabel.Text = model.Description;
+        rewardLabel.Text = model.RewardText;
+        amountLabel.Text = model.AmountText;
+        buttonLabel.Text = model.ButtonText;
 
-        targetIcon.sprite = windowModel.Icon;
+        targetIcon.sprite = model.Icon;
 
-        CreateChain(windowModel);
+        ShowChainIfPossible(model);
     }
 
     public override void OnViewClose()
@@ -47,38 +47,23 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         
         var windowModel = Model as UIQuestWindowModel;
     }
-
+    
     public override void OnViewCloseCompleted()
     {
         var windowModel = Model as UIQuestWindowModel;
         
-        if(isComplete == false)
-        {
-            windowModel.Quest = null;
-            return;
-        }
+        windowModel.Quest = null;
         
-        var pieces = windowModel.Quest.Rewards;
-        var rewards = windowModel.Quest.RewardsCurruncy;
+        if(isComplete == false) return;
+        
         var board = BoardService.Current.GetBoardById(0);
         var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
-        
-        windowModel.Quest = null;
         
         board.ActionExecutor.AddAction(new EjectionPieceAction
         {
             From = position,
-            Pieces = pieces,
-            OnComplete = () =>
-            {
-                var sequence = DOTween.Sequence();
-                
-                for (var i = 0; i < rewards.Count; i++)
-                {
-                    var reward = rewards[i];
-                    sequence.InsertCallback(0.5f*i, () => AddResourceView.Show(position, reward));
-                }
-            }
+            Pieces = windowModel.PiecesReward,
+            OnComplete = () => { AddResourceView.Show(position, windowModel.CurrencysReward); }
         });
     }
 
@@ -89,85 +74,55 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         
         var board = BoardService.Current.GetBoardById(0);
         
-        if (quest.Check())
+        if (quest.IsCompleted())
         {
             var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
             
-            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, quest.Rewards.Values.Sum()))
+            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, windowModel.PiecesReward.Sum(e => e.Value)))
             {
                 UIErrorWindowController.AddError("Need more free cells");
                 return;
             }
             
-            GameDataService.Current.QuestsManager.RemoveActiveQuest(quest);
+            quest.SetClaimedState();
+            GameDataService.Current.QuestsManager.CompleteQuest(quest.Id);
             
             isComplete = true;
             return;
         }
-        
-        var piece = board.BoardLogic.MatchDefinition.GetFirst(quest.WantedPiece);
-        
-        if(piece == PieceType.None.Id) return;
-        
-        BoardPosition? position = null;
 
-        var title = "";
-        var image = "";
-
-        var positions = new List<BoardPosition>();
-        
-        if(piece == PieceType.A1.Id)
-        {
-            title = "Need wooden pieces?";
-            image = "wood_UI";
-            positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Obstacle, 1);
-        }
-        else if(piece == PieceType.B1.Id)
-        {
-            title = "Need wheat pieces?";
-            image = "hay_UI";
-        }
-        else if(piece == PieceType.C1.Id)
-        {
-            title = "Need stone pieces?";
-            image = "stone_UI";
-            
-            positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.MineC.Id, 1);
-        }
-        else if(piece == PieceType.D1.Id)
-        {
-            title = "Need sheep pieces?";
-            image = "sheeps_UI";
-        }
-        else if(piece == PieceType.E1.Id)
-        {
-            title = "Need apple pieces?";
-            image = "apple_UI";
-        }
-        
-        if (positions.Count != 0) position = positions[0];
-        
-        UIMessageWindowController.CreateImageMessage(title, image, () =>
-        {
-            if (position == null || position.Value.X == 0 && position.Value.Y == 0)
-            {
-                UIService.Get.ShowWindow(UIWindowType.CastleWindow);
-                return;
-            }
-            
-            board.HintCooldown.Step(position.Value);
-        });
+        quest.Tasks[0].Highlight();
     }
 
-    private void CreateChain(UIQuestWindowModel model)
+    private void ShowChainIfPossible(UIQuestWindowModel model)
     {
         foreach (Transform child in chain.ItemsHost) 
         {
             Destroy(child.gameObject);
         }
         
-        var targetId = model.Quest.WantedPiece;
+        chain.gameObject.SetActive(false);
+
+        var taskAboutPiece = model.Quest.Tasks[0] as IHavePieceId;
+        if (taskAboutPiece == null)
+        {
+            return;
+        }
+        
+        var targetId = taskAboutPiece.PieceId;
+        if (targetId == PieceType.None.Id)
+        {
+            return;
+        }
+        
         var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId, CHAIN_LENGTH);
+        if (itemDefs == null)
+        {
+            return;
+        }
+       
+        chain.gameObject.SetActive(true); 
+        
         CodexChainDef chainDef = new CodexChainDef {ItemDefs = itemDefs};
         UICodexWindowView.CreateItems(chain, chainDef, codexItemPrefab, CHAIN_LENGTH);
     }

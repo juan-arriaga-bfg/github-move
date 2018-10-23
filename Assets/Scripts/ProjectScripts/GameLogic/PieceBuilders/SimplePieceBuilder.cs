@@ -17,8 +17,8 @@
             piece.RegisterComponent(observer);
             AddObserver(piece, observer);
         }
-
-        if (def.SpawnResources != null)
+        
+        if (def.SpawnResources != null || PieceType.GetDefById(pieceType).Filter.Has(PieceTypeFilter.Resource))
         {
             piece.RegisterComponent(new ResourceStorageComponent{Resources = def.SpawnResources});
 		
@@ -28,6 +28,7 @@
         }
         
         var pathfindLockObserver = new PathfindLockObserver() {AutoLock = false}; 
+        
         AddObserver(piece, pathfindLockObserver);
         piece.RegisterComponent(pathfindLockObserver);
         

@@ -4,24 +4,21 @@ using System.Text;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSystem
+public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
-    private Dictionary<string, DateTime> completeTimes = new Dictionary<string, DateTime>();
-    private readonly List<string> completeTimesList = new List<string>();
-
-    private DateTime then;
+    private List<KeyValuePair<BoardPosition, TimerComponent>> completeTimesList = new List<KeyValuePair<BoardPosition, TimerComponent>>();
+    
     private BoardController context;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
         context = entity as BoardController;
+        
         targetItem = ProfileService.Current.Purchases.GetStorageItem(Currency.Worker.Name);
         limitItem = ProfileService.Current.Purchases.GetStorageItem(Currency.WorkerLimit.Name);
-        
-        then = DateTime.UtcNow;
         
         base.OnRegisterEntity(entity);
     }
@@ -32,7 +29,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         
         if(save == null) return;
 
-        completeTimes = new Dictionary<string, DateTime>();
+        completeTimesList = new List<KeyValuePair<BoardPosition, TimerComponent>>();
         
         if(string.IsNullOrEmpty(save.WorkerUnlockDelay)) return;
         
@@ -40,9 +37,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
 
         foreach (var worker in workers)
         {
-            var arr = worker.Split(new[] {":"}, StringSplitOptions.RemoveEmptyEntries);
-            
-            completeTimes.Add(arr[0], DateTimeExtension.UnixTimeToDateTime(long.Parse(arr[1])));
+            completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(BoardPosition.Parse(worker), null));
         }
     }
 
@@ -50,58 +45,48 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
     {
         var str = new StringBuilder();
         
-        if(completeTimes.Count == 0) return string.Empty;
+        if(completeTimesList.Count == 0) return string.Empty;
 
-        foreach (var completeTime in completeTimes)
+        foreach (var completeTime in completeTimesList)
         {
-            str.AppendFormat("{0}:{1};", completeTime.Key, completeTime.Value.ConvertToUnixTime());
+            str.AppendFormat("{0};", completeTime.Key.ToSaveString());
         }
 
         return str.ToString();
     }
-
-    public void Execute()
+    
+    public void Init(BoardPosition id, TimerComponent timer)
     {
-        var now = DateTime.UtcNow;
-        
-        if ((now - then).TotalSeconds < 1) return;
-        
-        then = now;
-        
-        var remove = new List<string>();
-        
-        foreach (var pair in completeTimes)
+        foreach (var pair in completeTimesList)
         {
-            if((pair.Value - now).TotalSeconds > 0.5) continue;
+            if (pair.Key.Equals(id) == false) continue;
             
-            remove.Add(pair.Key);
+            completeTimesList.Remove(pair);
+            completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(id, timer));
+            
+            return;
         }
-        
-        if(remove.Count == 0) return;
-        
-        foreach (var key in remove)
-        {
-            completeTimes.Remove(key);
-            completeTimesList.Remove(key);
-        }
-        
-        Add(remove.Count);
     }
 
-    public object GetDependency()
-    {
-        return null;
-    }
-
-    public bool Get(string id, int delay)
+    public bool Get(BoardPosition id, TimerComponent timer)
     {
         if (CurrencyHellper.IsCanPurchase(targetItem.Currency, 1) == false)
         {
-            var str = completeTimesList[Random.Range(0, completeTimesList.Count)];
-            var position = BoardPosition.Parse(str);
+            completeTimesList.Sort((a, b) => a.Value.CompleteTime.CompareTo(b.Value.CompleteTime));
+            
+            var select = completeTimesList[0];
             
             UIErrorWindowController.AddError("All workers are busy!");
-            context.HintCooldown.Step(position);
+            context.HintCooldown.Step(select.Key);
+            
+            select.Value.View.SetState(TimerViewSate.Select);
+
+            foreach (var item in completeTimesList)
+            {
+                if(select.Value == item.Value) continue;
+                item.Value.View.SetState(TimerViewSate.Hide);
+            }
+            
             return false;
         }
         
@@ -113,40 +98,88 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
 
             if (isSuccess == false) return;
             
-            completeTimes.Add(id, DateTime.UtcNow.AddSeconds(delay));
-            completeTimesList.Add(id);
+            completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(id, timer));
         });
         
         return isSuccess;
     }
 
-    public bool Replase(string oldKey, string newKey)
+    public bool Replace(BoardPosition oldKey, BoardPosition newKey)
     {
-        DateTime value;
-        if(completeTimes.TryGetValue(oldKey, out value) == false) return false;
+        foreach (var pair in completeTimesList)
+        {
+            if (pair.Key.Equals(oldKey) == false) continue;
+            
+            completeTimesList.Remove(pair);
+            completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(newKey, pair.Value));
+            
+            return true;
+        }
         
-        completeTimes.Remove(oldKey);
-        completeTimesList.Remove(oldKey);
-        
-        completeTimes.Add(newKey, value);
-        completeTimesList.Add(newKey);
-        
-        return true;
+        return false;
     }
     
-    public bool Return(string id)
+    public bool Return(BoardPosition id)
     {
-        if(completeTimes.ContainsKey(id) == false) return false;
+        foreach (var pair in completeTimesList)
+        {
+            if (pair.Key.Equals(id) == false) continue;
+            
+            completeTimesList.Remove(pair);
+            Add(1);
+            
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.WorkerUsed, this);
+            
+            return true;
+        }
         
-        completeTimes.Remove(id);
-        completeTimesList.Remove(id);
-        Add(1);
+        return false;
+    }
+
+    public bool SetExtra(Piece worker, BoardPosition targetPosition)
+    {
+        if (worker.PieceType != PieceType.Worker1.Id || context.BoardLogic.IsEmpty(targetPosition)) return false;
+
+        var target = context.BoardLogic.GetPieceAt(targetPosition);
+        var def = PieceType.GetDefById(target.PieceType);
+
+        if (def.Filter.Has(PieceTypeFilter.WorkPlace) == false) return false;
+        if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target)) return false;
         
+        context.ActionExecutor.AddAction(new CollapsePieceToAction
+        {
+            To = targetPosition,
+            Positions = new List<BoardPosition> {worker.CachedPosition},
+        });
+
         return true;
     }
-    
-    public bool IsExecuteable()
+
+    private bool CheckLife(Piece target)
     {
-        return targetItem.Amount < limitItem.Amount;
+        var life = target.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
+
+        if (life == null) return false;
+
+        if (!life.Locker.IsLocked) return life.Damage(true);
+        
+        UIErrorWindowController.AddError("Someone is working here already!");
+        return false;
+    }
+
+    private bool CheckPieceState(Piece target)
+    {
+        var state = target.GetComponent<PieceStateComponent>(PieceStateComponent.ComponentGuid);
+
+        if (state == null) return false;
+
+        if (state.State == BuildingState.InProgress || state.State == BuildingState.Complete)
+        {
+            UIErrorWindowController.AddError("Someone is working here already!");
+            return false;
+        }
+        
+        state.Work(true);
+        return true;
     }
 }

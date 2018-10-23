@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class ChestPieceView : PieceBoardElementView
 {
-    [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Material backlightMaterial;
     [SerializeField] private float backlightScale = 1.1f;
 
@@ -128,18 +127,18 @@ public class ChestPieceView : PieceBoardElementView
     
     private bool CreateBackLight()
     {
-        if (sprite == null)
+        if (bodySprite == null)
             return false;
         
-        var backlightObject = Instantiate(sprite.gameObject, transform);
-        backlightObject.transform.position = sprite.gameObject.transform.position;
+        var backlightObject = Instantiate(bodySprite.gameObject, transform);
+        backlightObject.transform.position = bodySprite.gameObject.transform.position;
         var backlightLocal = backlightObject.GetComponent<SpriteRenderer>();
         
         backlightLocal.name = "_backlight";
         if(backlightMaterial != null)
             backlightLocal.material = backlightMaterial;
 
-        backlightLocal.sortingOrder = sprite.sortingOrder - 1;
+        backlightLocal.sortingOrder = bodySprite.sortingOrder - 1;
 
         this.backlight = backlightLocal; 
         
@@ -152,17 +151,17 @@ public class ChestPieceView : PieceBoardElementView
 
     private bool CreateHighlight()
     {
-        if (sprite == null)
+        if (bodySprite == null)
             return false;
         
-        var highlightObject = Instantiate(sprite.gameObject, transform);
-        highlightObject.transform.position = sprite.gameObject.transform.position;
+        var highlightObject = Instantiate(bodySprite.gameObject, transform);
+        highlightObject.transform.position = bodySprite.gameObject.transform.position;
         var highlightLocal = highlightObject.GetComponent<SpriteRenderer>();
         highlightLocal.name = "_highlight";
         if(hightlightMaterial != null)
             highlightLocal.material = hightlightMaterial;
 
-        highlightLocal.sortingOrder = sprite.sortingOrder + 1;
+        highlightLocal.sortingOrder = bodySprite.sortingOrder + 1;
         
         this.hightlight = highlightLocal;
 

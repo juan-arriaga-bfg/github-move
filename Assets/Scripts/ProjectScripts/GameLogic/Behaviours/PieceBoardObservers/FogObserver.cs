@@ -8,7 +8,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     private StorageItem storageItem;
     private ViewDefinitionComponent viewDef;
     private LockView lockView;
-    private UIBoardView view;
+    private BubbleView view;
     private BoardPosition key;
     
     public RectTransform GetAnchorRect()
@@ -72,6 +72,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     {
         if(def == null) return;
         
+        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, def);
+        
         AddResourceView.Show(def.GetCenter(thisContext.Context), def.Reward);
         GameDataService.Current.FogsManager.RemoveFog(key);
         
@@ -83,7 +85,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             {
                 foreach (var pos in piece.Value)
                 {
-                    var pieceId = GameDataService.Current.MinesManager.GetMineById(piece.Key);
+                    var pieceId = GameDataService.Current.MinesManager.GetMineTypeById(piece.Key);
 
                     if (pieceId == PieceType.None.Id)
                     {
@@ -148,10 +150,12 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             lockView = null;
         }
         
-        view = viewDef.AddView(ViewType.FogState);
+        view = viewDef.AddView(ViewType.Bubble) as BubbleView;
         
         if(view.IsShow) return;
         
+        view.SetData("Clear fog", def.Condition.ToStringIcon(), OnClick);
+        view.SetOfset(def.GetCenter(thisContext.Context) + new Vector3(0, 0.1f));
         view.Priority = -1;
         view.Change(true);
         thisContext.Context.HintCooldown.AddView(view);
@@ -176,5 +180,21 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         var resourcesEnought = storageItem.Amount >= level;
 
         return pathExists && resourcesEnought;
+    }
+    
+    private void OnClick(Piece piece)
+    {
+        if(CurrencyHellper.IsCanPurchase(def.Condition, true, () => OnClick(piece)) == false) return;
+        
+        CurrencyHellper.Purchase(Currency.Fog.Name, 1, def.Condition, success =>
+        {
+            if (success == false) return;
+			
+            piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+            {
+                To = piece.CachedPosition,
+                Positions = new List<BoardPosition>{piece.CachedPosition}
+            });
+        });
     }
 }

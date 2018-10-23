@@ -4,7 +4,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 {
     [SerializeField] private GameObject shine;
     
-    private Quest quest;
+    private QuestEntity quest;
     private bool isUp;
 
     public override int CurrentValueAnimated
@@ -16,16 +16,36 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         }
     }
 
-    public void Init(Quest quest)
+    public void Init(QuestEntity quest)
     {
-        if(this.quest != null) ResourcesViewManager.Instance.UnRegisterView(this);
+        if (this.quest != null)
+        {
+            ResourcesViewManager.Instance.UnRegisterView(this);
+            this.quest.OnChanged -= OnQuestChanged;
+            // Debug.Log($"AAAAA FIX UNSUBSCRIBE: {quest.Id}");
+        }
         
         this.quest = quest;
 
         isUp = false;
-        itemUid = PieceType.Parse(quest.WantedPiece);
+        var taskAboutPiece = quest.ActiveTasks[0] as IHavePieceId;
+        if (taskAboutPiece != null)
+        {
+            int pieceId = taskAboutPiece.PieceId;
+            PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceId);
+            itemUid = pieceTypeDef.Id.ToString();
+        }
+        
+        // Debug.Log($"AAAAA SUBSCRIBE: {quest.Id}");
+        
+        quest.OnChanged += OnQuestChanged;
         
         ResourcesViewManager.Instance.RegisterView(this);
+        UpdateView();
+    }
+
+    private void OnQuestChanged(QuestEntity quest, TaskEntity task)
+    {
         UpdateView();
     }
 
@@ -35,6 +55,11 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     private void OnDestroy()
     {
+        if (quest != null)
+        {
+            // Debug.Log($"AAAAA UNSUBSCRIBE: {quest.Id}");
+            quest.OnChanged -= OnQuestChanged;
+        }
         ResourcesViewManager.Instance.UnRegisterView(this);
     }
 
@@ -42,24 +67,41 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     {
         if(quest == null) return;
         
-        currentValueAnimated = currentValue = quest.CurrentAmount;
+        int value = (quest.ActiveTasks[0] as TaskCounterEntity).TargetValue;
+
+        currentValueAnimated = value;
+        currentValue = value;
 
         SetLabelValue(currentValue);
     }
 
-    public override void UpdateResource(int offset)
+    public static Sprite GetIcon(QuestEntity quest)
     {
-        base.UpdateResource(offset);
-        quest.CurrentAmount += offset;
-    }
+        QuestDescriptionComponent cmp = quest.ActiveTasks[0].GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid);
 
+        if (cmp?.Ico != null)
+        {
+            return IconService.Current.GetSpriteById(cmp.Ico);
+        }
+        
+        IHavePieceId taskAboutPiece = quest.ActiveTasks[0] as IHavePieceId;
+        if (taskAboutPiece != null && taskAboutPiece.PieceId != PieceType.None.Id)
+        {
+            return IconService.Current.GetSpriteById(PieceType.GetDefById(taskAboutPiece.PieceId).Abbreviations[0]); 
+        }
+
+        return IconService.Current.GetSpriteById("codexQuestion");
+    }
+    
     private void SetLabelValue(int value)
     {
         if(quest == null) return;
-        
-        icon.sprite = IconService.Current.GetSpriteById(quest.WantedIcon);
 
-        var isComplete = quest.Check();
+        // Debug.Log($"AAAAA UPDATE: {quest.Id}");
+        
+        icon.sprite = GetIcon(quest);
+
+        var isComplete = quest.IsCompleted();
 
         if (isComplete && isUp == false)
         {
@@ -67,8 +109,11 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             transform.SetSiblingIndex(0);
             OnClick();
         }
+
+        int targetValue = (quest.ActiveTasks[0] as TaskCounterEntity).TargetValue;
+        int curValue = (quest.ActiveTasks[0] as TaskCounterEntity).CurrentValue;
         
-        amountLabel.Text = $"<color=#{(isComplete ? "FFFFFF" : "FE4704")}><size=33>{Mathf.Min(value, quest.TargetAmount)}</size></color>/{quest.TargetAmount}";
+        amountLabel.Text = $"<color=#{(isComplete ? "FFFFFF" : "FE4704")}><size=33>{Mathf.Min(value, curValue)}</size></color>/{targetValue}";
         shine.SetActive(isComplete);
     }
     

@@ -6,9 +6,7 @@ public class ChangeStorageStateView : UIBoardView
     [SerializeField] private Image icon;
 
     protected override ViewType Id => ViewType.StorageState;
-
-    public override Vector3 Ofset => new Vector3(0, 1.5f);
-
+    
     private StorageComponent storage;
     
     private bool isClick;
@@ -21,6 +19,10 @@ public class ChangeStorageStateView : UIBoardView
     public override void Init(Piece piece)
     {
         base.Init(piece);
+        
+        Ofset = new Vector3(0, 1.5f);
+        
+        SetOfset();
         
         Priority = defaultPriority = 11;
         isClick = false;
@@ -43,8 +45,6 @@ public class ChangeStorageStateView : UIBoardView
 
     public void OnClick()
     {
-        var definition = Context.GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid);
-
-        definition?.Touch(Context.CachedPosition);
+        Context.TouchReaction?.Touch(Context.CachedPosition);
     }
 }

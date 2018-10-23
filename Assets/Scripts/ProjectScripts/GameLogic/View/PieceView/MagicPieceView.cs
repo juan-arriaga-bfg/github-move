@@ -132,15 +132,13 @@ public class MagicPieceView : PieceBoardElementView
     private bool CheckMatch(BoardController board, BoardPosition from, BoardPosition to, List<BoardPosition> positions)
     {
         positions.Add(from);
+        
         var logic = board.BoardLogic;
 		
         int currentId;
-        if (logic.FieldFinder.Find(to, positions, out currentId) == false) return false;
-        var action = logic.MatchActionBuilder.GetMatchAction(positions, currentId, to);
-        var isMatch = action != null;
-        if (isMatch) board.ReproductionLogic.Restart();
-
-        return isMatch;
+        int nextId;
+        
+        return logic.FieldFinder.Find(to, positions, out currentId) && logic.MatchActionBuilder.CheckMatch(positions, currentId, to, out nextId);
     }
 
     private List<int> GetChain(Piece piece)

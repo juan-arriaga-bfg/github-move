@@ -1,22 +1,30 @@
 [
   {
-    "Key": "CreateManaDelay",
-    "Value": 300
-  },
-  {
-    "Key": "ReproductionStepDelay",
-    "Value": 5
-  },
-  {
-    "Key": "ReproductionDelay",
-    "Value": 20
-  },
-  {
-    "Key": "ReproductionChance",
-    "Value": 50
-  },
-  {
     "Key": "FreeChestDelay",
     "Value": 10800
+  },
+  {
+    "Key": "MinDelayHintArrow",
+    "Value": 30
+  },
+  {
+    "Key": "MaxDelayHintArrow",
+    "Value": 60
+  },
+  {
+    "Key": "MinDelayBounceBubble",
+    "Value": 15
+  },
+  {
+    "Key": "MaxDelayBounceBubble",
+    "Value": 30
+  },
+  {
+    "Key": "MaxOrders",
+    "Value": 6
+  },
+  {
+    "Key": "NextOrderDelay",
+    "Value": 180
   }
 ]

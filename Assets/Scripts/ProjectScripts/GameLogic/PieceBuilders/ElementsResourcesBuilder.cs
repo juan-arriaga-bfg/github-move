@@ -60,6 +60,12 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.OEpic8.Id, R.OEpicPiece);
         dict.Add(PieceType.OEpic9.Id, R.OEpicPiece);
         
+        dict.Add(PieceType.ObstacleD.Id, R.ObstacleDPiece);
+        dict.Add(PieceType.ObstacleE.Id, R.ObstacleEPiece);
+        dict.Add(PieceType.ObstacleF.Id, R.ObstacleFPiece);
+        dict.Add(PieceType.ObstacleG.Id, R.ObstacleGPiece);
+        dict.Add(PieceType.ObstacleH.Id, R.ObstacleHPiece);
+        
         dict.Add(PieceType.A1.Id, R.A1Piece);
         dict.Add(PieceType.A2.Id, R.A2Piece);
         dict.Add(PieceType.A3Fake.Id, R.A3Piece);
@@ -76,12 +82,6 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.A8.Id, R.A8Piece);
         dict.Add(PieceType.A9Fake.Id, R.A9Piece);
         dict.Add(PieceType.A9.Id, R.A9Piece);
-        
-        dict.Add(PieceType.B1.Id, R.B1Piece);
-        dict.Add(PieceType.B2.Id, R.B2Piece);
-        dict.Add(PieceType.B3.Id, R.B3Piece);
-        dict.Add(PieceType.B4.Id, R.B4Piece);
-        dict.Add(PieceType.B5.Id, R.B5Piece);
         
         dict.Add(PieceType.C1.Id, R.C1Piece);
         dict.Add(PieceType.C2.Id, R.C2Piece);
@@ -103,8 +103,6 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.C10.Id, R.C10Piece);
         dict.Add(PieceType.C11Fake.Id, R.C11Piece);
         dict.Add(PieceType.C11.Id, R.C11Piece);
-        dict.Add(PieceType.C12Fake.Id, R.C12Piece);
-        dict.Add(PieceType.C12.Id, R.C12Piece);
         
         dict.Add(PieceType.D1.Id, R.D1Piece);
         dict.Add(PieceType.D2.Id, R.D2Piece);
@@ -203,9 +201,6 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.ChestA1.Id, R.ChestA1Piece);
         dict.Add(PieceType.ChestA2.Id, R.ChestA2Piece);
         dict.Add(PieceType.ChestA3.Id, R.ChestA3Piece);
-        dict.Add(PieceType.ChestA4.Id, R.ChestA4Piece);
-        dict.Add(PieceType.ChestA5.Id, R.ChestA5Piece);
-        dict.Add(PieceType.ChestA6.Id, R.ChestA6Piece);
         
         dict.Add(PieceType.ChestC1.Id, R.ChestC1Piece);
         dict.Add(PieceType.ChestC2.Id, R.ChestC2Piece);
@@ -219,10 +214,6 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.ChestL2.Id, R.ChestL2Piece);
         dict.Add(PieceType.ChestL3.Id, R.ChestL3Piece);
         
-        dict.Add(PieceType.Basket1.Id, R.Basket1Piece);
-        dict.Add(PieceType.Basket2.Id, R.Basket2Piece);
-        dict.Add(PieceType.Basket3.Id, R.Basket3Piece);
-        
         dict.Add(PieceType.Worker1.Id, R.Worker1Piece);
         
         dict.Add(PieceType.Coin1.Id, R.Coin1Piece);
@@ -230,6 +221,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Coin3.Id, R.Coin3Piece);
         dict.Add(PieceType.Coin4.Id, R.Coin4Piece);
         dict.Add(PieceType.Coin5.Id, R.Coin5Piece);
+        dict.Add(PieceType.Coin6.Id, R.Coin6Piece);
         
         dict.Add(PieceType.Crystal1.Id, R.Crystal1Piece);
         dict.Add(PieceType.Crystal2.Id, R.Crystal2Piece);
@@ -239,6 +231,7 @@ public class ElementsResourcesBuilder
         
         dict.Add(PieceType.Magic1.Id, R.Magic1Piece);
         dict.Add(PieceType.Magic2.Id, R.Magic2Piece);
+        dict.Add(PieceType.Magic3.Id, R.Magic3Piece);
         dict.Add(PieceType.Magic.Id, R.MagicPiece);
         
         return dict;
@@ -269,15 +262,13 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.LevelLabel, R.PieceLevelView);
         dict.Add((int)ViewType.Menu, R.MenuView);
         dict.Add((int)ViewType.ObstacleState, R.ChangeObstacleStateView);
-        dict.Add((int)ViewType.FogState, R.ChangeFogStateView);
         dict.Add((int)ViewType.Bubble, R.BubbleView);
         dict.Add((int)ViewType.MergeParticle, R.MergeParticleSystem);
         dict.Add((int)ViewType.Progress, R.BoardProgressView);
         dict.Add((int)ViewType.Warning, R.Warning);
         dict.Add((int)ViewType.Lock, R.LockView);
-        dict.Add((int)ViewType.Hourglass, R.Hourglass);
-        dict.Add((int)ViewType.EnemyBubble, R.EnemyBubbleView);
         dict.Add((int)ViewType.Cell, R.Cell);
+        dict.Add((int)ViewType.OrderBubble, R.OrderBubbleView);
         
         return dict;
     }

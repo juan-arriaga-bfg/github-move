@@ -7,11 +7,16 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
     
-    public int CreateManaDelay;
-    public int ReproductionDelay;
-    public int ReproductionStepDelay;
-    public int ReproductionChance;
     public int FreeChestDelay;
+    
+    public int MinDelayHintArrow;
+    public int MaxDelayHintArrow;
+    
+    public int MinDelayBounceBubble;
+    public int MaxDelayBounceBubble;
+    
+    public int MaxOrders;
+    public int NextOrderDelay;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {

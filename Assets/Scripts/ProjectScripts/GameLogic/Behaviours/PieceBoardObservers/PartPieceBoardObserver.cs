@@ -54,13 +54,5 @@ public class PartPieceBoardObserver : IECSComponent, IPieceBoardObserver
 
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
-        if(context == null) return;
-        
-        int next;
-        var positions = new List<BoardPosition>();
-        
-        if(matchActionBuilder.CheckMatch(positions, context.PieceType, position, out next) == false) return;
-        
-        context.Context.PartPiecesLogic.Remove(positions);
     }
 }

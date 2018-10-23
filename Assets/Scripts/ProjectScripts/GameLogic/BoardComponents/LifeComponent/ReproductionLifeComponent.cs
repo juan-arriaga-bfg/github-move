@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 public class ReproductionLifeComponent : StorageLifeComponent
 {
@@ -23,51 +22,48 @@ public class ReproductionLifeComponent : StorageLifeComponent
         HP = def.Limit;
         cooldown = new TimerComponent{Delay = def.Delay, Price = def.FastPrice};
         RegisterComponent(cooldown);
+
+        cooldown.OnComplete += Unlock;
         
         var child = GameDataService.Current.PiecesManager.GetPieceDef(PieceType.Parse(def.Reproduction.Currency));
         childName = child?.Name;
     }
-
-    public override void OnAddToBoard(BoardPosition position, Piece context = null)
+    
+    public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
-        base.OnAddToBoard(position, context);
-        
-        var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-        
-        timer.Delay = 2;
-        
+        base.OnRemoveFromBoard(position, context);
+        cooldown.OnComplete -= Unlock;
+    }
+
+    protected override void InitStorage()
+    {
         storage.SpawnPiece = PieceType.Parse(def.Reproduction.Currency);
         storage.Capacity = storage.Amount = def.Reproduction.Amount;
+        storage.Timer.Delay = 2;
     }
 
     protected override LifeSaveItem InitInSave(BoardPosition position)
     {
         var item = base.InitInSave(position);
-        
-        if(item != null) cooldown.Start(item.StartTime);
+
+        if (item != null && item.IsStart) cooldown.Start(item.StartTime);
         
         return item;
     }
 
-    public override bool Damage()
+    public override bool Damage(bool isExtra = false)
     {
-        if (!cooldown.IsExecuteable()) return base.Damage();
-        
-        UIMessageWindowController.CreateTimerCompleteMessage(
-            "Complete now!",
-            "Would you like to build the item right now for crystals?",
-            "Complete now ",
-            cooldown,
-            () => CurrencyHellper.Purchase(Currency.Timer.Name, 1, cooldown.GetPrise(), success =>
-            {
-                if(success == false) return;
-					
-                cooldown.Stop();
-                cooldown.OnComplete();
-            }));
-            
-        return false;
+        if (cooldown.IsExecuteable())
+        {
+            UIMessageWindowController.CreateTimerCompleteMessage(
+                "Complete now!",
+                "Would you like to build the item right now for crystals?",
+                cooldown);
 
+            return false;
+        }
+        
+        return base.Damage(isExtra);
     }
 
     protected override void Success()
@@ -105,12 +101,17 @@ public class ReproductionLifeComponent : StorageLifeComponent
         {
             IsCheckMatch = false,
             At = thisContext.CachedPosition,
-            PieceTypeId = PieceType.OX1.Id
+            PieceTypeId = def.ObstacleType
         });
     }
 
     protected override void OnSpawnRewards()
     {
         AddResourceView.Show(StartPosition(), def.StepReward);
+    }
+
+    private void Unlock()
+    {
+        Locker.Unlock(this);
     }
 }

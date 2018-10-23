@@ -24,18 +24,27 @@ public class PiecePositionsCacheComponent : IECSComponent
 	{
 		List<BoardPosition> list;
 
-		if (cache.TryGetValue(pieceType, out list) == false) return 0;
-
-		return list.Count;
+		return cache.TryGetValue(pieceType, out list) == false ? 0 : list.Count;
 	}
 	
 	public List<BoardPosition>  GetPiecePositionsByType(int pieceType)
 	{
 		List<BoardPosition> list;
 
-		if (cache.TryGetValue(pieceType, out list) == false) return new List<BoardPosition>();
+		return cache.TryGetValue(pieceType, out list) == false ? new List<BoardPosition>() : new List<BoardPosition>(list);
+	}
 
-		return new List<BoardPosition>(list);
+	public List<BoardPosition> GetPiecePositionsByFilter(PieceTypeFilter filter)
+	{
+		var ids = PieceType.GetIdsByFilter(filter);
+		var list = new List<BoardPosition>();
+
+		foreach (var id in ids)
+		{
+			list.AddRange(GetPiecePositionsByType(id));
+		}
+		
+		return list;
 	}
 
 	public List<BoardPosition> GetRandomPositions(PieceTypeFilter filter, int count)

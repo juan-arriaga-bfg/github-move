@@ -71,7 +71,10 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
             CurrencyHellper.Purchase(Currency.EnergyLimit.Name, 1);
             CurrencyHellper.Purchase(data, null, new Vector2(Screen.width/2, Screen.height/2));
             RefillEnergy();
-            GameDataService.Current.QuestsManager.UpdateActiveQuest();
+            
+            GameDataService.Current.QuestsManager.CheckConditions();
+            GameDataService.Current.OrdersManager.UpdateSequence();
+            
         }, null, true);
         
     }

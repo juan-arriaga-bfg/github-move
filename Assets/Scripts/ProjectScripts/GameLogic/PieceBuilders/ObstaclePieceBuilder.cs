@@ -10,11 +10,6 @@ public class ObstaclePieceBuilder : GenericPieceBuilder
 		
 		piece.RegisterComponent(new TimerComponent());
 		
-		var life = new ObstacleLifeComponent();
-
-		piece.RegisterComponent(life);
-		AddObserver(piece, life);
-		
 		var storage = new StorageComponent
 		{
 			IsAutoStart = false,
@@ -24,6 +19,11 @@ public class ObstaclePieceBuilder : GenericPieceBuilder
 		
 		piece.RegisterComponent(storage);
 		AddObserver(piece, storage);
+		
+		var life = new ObstacleLifeComponent();
+
+		piece.RegisterComponent(life);
+		AddObserver(piece, life);
 		
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}

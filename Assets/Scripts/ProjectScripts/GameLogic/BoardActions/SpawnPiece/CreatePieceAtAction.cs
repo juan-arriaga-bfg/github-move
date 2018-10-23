@@ -4,12 +4,8 @@ using UnityEngine;
 public class CreatePieceAtAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
+	public virtual int Guid => ComponentGuid;
 
-	public virtual int Guid
-	{
-		get { return ComponentGuid; }
-	}
-	
 	public BoardPosition At { get; set; }
 	
 	public int PieceTypeId { get; set; }
@@ -39,7 +35,7 @@ public class CreatePieceAtAction : IBoardAction
 		animation.OnCompleteEvent += (_) =>
 		{
 			gameBoardController.BoardLogic.UnlockCell(At, this);
-			if (OnComplete != null) OnComplete();
+			OnComplete?.Invoke();
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

@@ -19,15 +19,11 @@ MonoBehaviour:
   - Key: levels
     Link: 1q0Pxo7d7saZDkpj2IXPB94nnAqKviZ0lZK4QvVfG0vE
     Route: parse
-    Pattern: '[{"Index":0,"Price":{"Currency": "","Amount":0},"Rewards":[{"Currency":"","Amount":0}],"Chest":""}]'
+    Pattern: '[{"Index":0,"Price":{"Currency": "","Amount":0},"Rewards":[{"Currency":"","Amount":0}],"OrdersWeights":[{"Uid":"","Weight":0,"":"","Override":true}]}]'
   - Key: obstacles
     Link: 16Q9fxlFX40VRx6u1kwfMvWm1GuvK8MaGs117g5Pkd2g
     Route: parse
-    Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestWeights":[{"Uid":"","Weight":0,"":"","Override":true}]}]'
-  - Key: quests
-    Link: 1jaDy9GfzL7SMM9wR1HHHD1kYRj1tjPZrnBw5ZLIT1tk
-    Route: parse
-    Pattern: '[{"Uid":0,"Price":{"Currency":"","Amount":0},"Rewards":[{"Currency":"","Amount":0}],"Conditions":[],"Message":""}]'
+    Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestId":""}]'
   - Key: mines
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseMines
@@ -43,7 +39,7 @@ MonoBehaviour:
   - Key: pieces
     Link: 15C96r0vcgzzhJ6Fo_OQXBcCoIkSogZnTZg8Jc6MKDH8
     Route: parse
-    Pattern: '[{"Uid":"","":"","CreateRewards":[{"Currency":"","Amount":0}],"SpawnResources":{"Currency":"","Amount":0},"Name":"","UnlockBonus":[{"Currency":"","Amount":0}]}]'
+    Pattern: '[{"Uid":"","":"","CreateRewards":[{"Currency":"","Amount":0}],"SpawnResources":{"Currency":"","Amount":0},"Name":"","UnlockBonus":[{"Currency":"","Amount":0}],"ExchangePrice":{"Currency":"","Amount":0}}]'
   - Key: piecesMatchConditions
     Link: 1VvIEMGGf-pkdVpJ96nSW8sBkIDX18vr1FAGY4NFLCRQ
     Route: parse
@@ -51,7 +47,11 @@ MonoBehaviour:
   - Key: piecesReproduction
     Link: 1DMxuJpSv3tZUMNKTQXEB2HQ2d7xPCpoLjB5ZEV00kUI
     Route: parse
-    Pattern: '[{"Uid":"","Delay":0,"Limit":0,"FastPrice":{"Currency":"","Amount":0},"StepReward":{"Currency":"","Amount":0},"Reproduction":{"Currency":"","Amount":0}}]'
+    Pattern: '[{"Uid":"","Delay":0,"Limit":0,"FastPrice":{"Currency":"","Amount":0},"StepReward":{"Currency":"","Amount":0},"Reproduction":{"Currency":"","Amount":0},"Obstacle":""}]'
+  - Key: piecesMaking
+    Link: 1XjQudoqqkn2yyjonWc_R1fAyQNprQRJuw4zphfjE2rY
+    Route: parse
+    Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}]}]'
   - Key: enemies
     Link: 1ggZRqwYTC5dMe-X53tOAMfxCmgJh-RjGQHv5u2iPYZ0
     Route: parse
@@ -60,3 +60,23 @@ MonoBehaviour:
     Link: 1y_ojsKddVMT1FmJ3PS-Sm4XVtYQ4yAZqmwyJJvyRzrY
     Route: parse
     Pattern: '[{"Key":"","Value":0}]'
+  - Key: shop
+    Link: 15hj4e6i2F9UkK_p-lSEvp8d1MJW0KNj3PmEL_1rQU_4
+    Route: parse
+    Pattern: '[{"Uid":"","Product":{"Currency":"","Amount":0},"Price":{"Currency":"","Amount":0},"Icon":""}]'
+  - Key: orders
+    Link: 1MakAUEhU8pxDDasINjyEBIXVEZ3oPr3PMrisNbH650I
+    Route: parse
+    Pattern: '[{"Uid":"","":"","Delay":0,"Prices":[{"Currency":"","Amount":0}],"Rewards":[{"Currency":"","Amount":0}]}]'
+  - Key: quests
+    Link: 1Y6MtoZhcHKgmmL96-rYsTV7Lp4LPYNm21jYc_xNPHXc
+    Route: parse
+    Pattern: '[{"Id":"","$type":"","TaskDefs":[{"TaskId":0}],"ComponentsCache":{"QuestRewardComponent":{"Value":[{"Currency":"","Amount": 0}]},"QuestDescriptionComponent":{"Ico":"","Title":"","Message":""}}}]'
+  - Key: questStarters
+    Link: 1npF9IT2A2bAW-Lslya3BYlIK7RCdDzceDIOxFCJbu80
+    Route: parse
+    Pattern: '[{"Id":"","$type":"","QuestToStartId":"","Conditions":[{"$type":"","Id":"","Value":""}]}]'
+  - Key: questTasks
+    Link: 1dvyzQoKk6OMhIC59EApw2vjebAdn4LxrbM7raQJAlXY
+    Route: parse
+    Pattern: '[{"$type":"","Id":"","":"","PieceUid":"","TargetValue":0,"Value1":0,"ComponentsCache":{"QuestDescriptionComponent":{"Ico":"","Title":"","Message":""}}}]'

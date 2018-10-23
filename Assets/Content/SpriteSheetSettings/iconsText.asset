@@ -12,11 +12,25 @@ MonoBehaviour:
   m_Name: iconsText
   m_EditorClassIdentifier: 
   hashCode: 128033944
-  material: {fileID: 21473500708721750}
+  material: {fileID: 21828550339951598}
   materialHashCode: 0
   spriteSheet: {fileID: 2800000, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
   spriteInfoList:
   - id: 0
+    x: 124
+    y: 204
+    width: 48
+    height: 48
+    xOffset: 0
+    yOffset: 45
+    xAdvance: 47
+    scale: 0.8
+    name: Complete
+    hashCode: -1009548247
+    unicode: 0
+    pivot: {x: -24, y: 24}
+    sprite: {fileID: 21300018, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
+  - id: 1
     x: 0
     y: 150
     width: 58
@@ -30,7 +44,7 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -29, y: 37}
     sprite: {fileID: 21300006, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 1
+  - id: 2
     x: 59
     y: 150
     width: 64
@@ -44,7 +58,7 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -32, y: 32}
     sprite: {fileID: 21300014, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 2
+  - id: 3
     x: 124
     y: 129
     width: 38
@@ -58,7 +72,7 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -19, y: 37}
     sprite: {fileID: 21300004, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 3
+  - id: 4
     x: 0
     y: 75
     width: 62
@@ -72,7 +86,7 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -31, y: 37}
     sprite: {fileID: 21300016, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 4
+  - id: 5
     x: 63
     y: 75
     width: 63
@@ -86,7 +100,7 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -31.5, y: 26.5}
     sprite: {fileID: 21300012, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 5
+  - id: 6
     x: 0
     y: 0
     width: 86
@@ -100,7 +114,7 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -43, y: 37}
     sprite: {fileID: 21300002, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 6
+  - id: 7
     x: 87
     y: 0
     width: 76
@@ -114,7 +128,7 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -38, y: 37}
     sprite: {fileID: 21300008, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 7
+  - id: 8
     x: 164
     y: 0
     width: 66
@@ -129,7 +143,7 @@ MonoBehaviour:
     pivot: {x: -33, y: 37}
     sprite: {fileID: 21300010, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
   fallbackSpriteAssets: []
---- !u!21 &21473500708721750
+--- !u!21 &21828550339951598
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 1

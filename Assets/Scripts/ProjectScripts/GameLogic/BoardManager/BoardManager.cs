@@ -47,4 +47,6 @@ public class BoardManager : ECSEntity
 
         return null;
     }
+    
+    public virtual BoardController FirstBoard => GetBoardById(0);
 }

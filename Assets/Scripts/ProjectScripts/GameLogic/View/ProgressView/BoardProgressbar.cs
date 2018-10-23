@@ -26,6 +26,8 @@ public class BoardProgressbar : MonoBehaviour
 
     public void Init(int max)
     {
+        if(body.activeSelf == false) return;
+        
         if (dividing)
         {
             for (var i = 1; i < max; i++)
@@ -52,12 +54,16 @@ public class BoardProgressbar : MonoBehaviour
 
     public void UpdateValue(float current, float next)
     {
+        if(body.activeSelf == false) return;
+        
         light.fillAmount = current;
         progress.fillAmount = next;
     }
 
     public void Clear()
     {
+        if(body.activeSelf == false) return;
+        
         if (dividing)
         {
             foreach (var dt in dots)

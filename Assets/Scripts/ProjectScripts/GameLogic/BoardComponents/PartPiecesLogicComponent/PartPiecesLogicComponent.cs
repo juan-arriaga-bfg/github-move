@@ -33,8 +33,9 @@ public class PartPiecesLogicComponent : IECSComponent
         bubble.Add(position, piece.ViewDefinition);
         
         var view = piece.ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
+        var def = GameDataService.Current.PiecesManager.GetPieceDef(piece.PieceType + 2);
         
-        view.SetData("Build Castle?", $"Send <sprite name={Currency.Worker.Name}>", OnClick);
+        view.SetData($"Build Castle:\n{DateTimeExtension.GetDelayText(def.MatchConditionsDef.Delay)}?", $"Send <sprite name={Currency.Worker.Name}>", OnClick);
         view.Change(true);
     }
 
@@ -53,15 +54,21 @@ public class PartPiecesLogicComponent : IECSComponent
 
     private void OnClick(Piece piece)
     {
-        var key = piece.CachedPosition.ToSaveString();
-        var def = GameDataService.Current.PiecesManager.GetPieceDef(piece.PieceType + 2);
+        if(context.WorkerLogic.Get(piece.CachedPosition, null) == false) return;
         
-        if(context.WorkerLogic.Get(key, def.MatchConditionsDef.Delay) == false) return;
+        Work(piece);
+    }
+
+    public bool Work(Piece piece)
+    {
+        var positions = new List<BoardPosition>();
+        var action = context.BoardLogic.MatchActionBuilder.GetMatchAction(positions, piece.PieceType, piece.CachedPosition);
         
-        var action = piece.Context.BoardLogic.MatchActionBuilder.GetMatchAction(new List<BoardPosition>(), piece.PieceType, piece.CachedPosition);
+        if(action == null) return false;
+
+        Remove(positions);
+        context.ActionExecutor.AddAction(action);
         
-        if(action == null) return;
-        
-        piece.Context.ActionExecutor.AddAction(action);
+        return true;
     }
 }

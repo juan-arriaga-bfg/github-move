@@ -10,22 +10,17 @@ public class MineLifeComponent : StorageLifeComponent
     
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        base.OnAddToBoard(position, context);
-        
         var key = new BoardPosition(position.X, position.Y);
 
-        if (def == null) def = GameDataService.Current.MinesManager.GetDef(key);
-        else GameDataService.Current.MinesManager.Chenge(def.Id, key);
+        if (def == null) def = GameDataService.Current.MinesManager.GetInitialDef(key);
+        else GameDataService.Current.MinesManager.Move(def.Id, key);
         
-        var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-        
-        timer.Delay = def.Delay;
-        timer.Price = def.FastPrice;
-        
-        storage.SpawnPiece = PieceType.Parse(def.Reward.Currency);
-        storage.Capacity = storage.Amount = def.Reward.Amount;
+        storage.Timer.Delay = def.Delay;
+        storage.Timer.Price = def.FastPrice;
         
         HP = def.Size;
+        
+        base.OnAddToBoard(position, context);
     }
 
     public override void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
@@ -33,7 +28,13 @@ public class MineLifeComponent : StorageLifeComponent
         base.OnMovedFromToFinish(@from, to, context);
         
         var key = new BoardPosition(to.X, to.Y);
-        GameDataService.Current.MinesManager.Chenge(def.Id, key);
+        GameDataService.Current.MinesManager.Move(def.Id, key);
+    }
+
+    protected override void InitStorage()
+    {
+        storage.SpawnPiece = PieceType.Parse(def.Reward.Currency);
+        storage.Capacity = storage.Amount = def.Reward.Amount;
     }
 
     protected override void OnStep()
@@ -88,5 +89,14 @@ public class MineLifeComponent : StorageLifeComponent
     protected override void OnSpawnRewards()
     {
         AddResourceView.Show(StartPosition(), def.StepReward);
+        base.OnSpawnRewards();
+    }
+
+    protected override void OnTimerComplete()
+    {
+        base.OnTimerComplete();
+        
+        GameDataService.Current.QuestsManager.CheckConditions(); // To ensure that QuestStartConditionMineUsedComponent triggered
+        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.MineUsed, this);
     }
 }

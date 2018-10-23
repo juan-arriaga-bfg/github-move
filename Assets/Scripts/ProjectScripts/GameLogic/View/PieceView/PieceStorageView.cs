@@ -2,9 +2,10 @@
 
 public class PieceStorageView : PieceBoardElementView
 {
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator worker;
     
     private StorageComponent storage;
+    private PieceSkin skin;
 
     public override void Init(BoardRenderer context, Piece piece)
     {
@@ -18,6 +19,17 @@ public class PieceStorageView : PieceBoardElementView
         storage.Timer.OnComplete += UpdateAnimation;
         
         UpdateAnimation();
+        
+        skin = gameObject.GetComponent<PieceSkin>();
+        
+        if(skin == null) return;
+
+        var life = Piece.GetComponent<LifeComponent>(LifeComponent.ComponentGuid);
+        
+        if(life == null) return;
+        
+        skin.Init(life.Value);
+        storage.Timer.OnComplete += skin.UpdateView;
     }
 
     public override void ResetViewOnDestroy()
@@ -26,11 +38,13 @@ public class PieceStorageView : PieceBoardElementView
         
         storage.Timer.OnStart -= UpdateAnimation;
         storage.Timer.OnComplete -= UpdateAnimation;
+        
+        if(skin != null) storage.Timer.OnComplete -= skin.UpdateView;
     }
 
     private void UpdateAnimation()
     {
-        animator.ResetTrigger(storage.Timer.IsExecuteable() ? "IsStop" : "IsPlay");
-        animator.SetTrigger(storage.Timer.IsExecuteable() ? "IsPlay" : "IsStop");
+        worker.ResetTrigger(storage.Timer.IsExecuteable() ? "IsStop" : "IsPlay");
+        worker.SetTrigger(storage.Timer.IsExecuteable() ? "IsPlay" : "IsStop");
     }
 }

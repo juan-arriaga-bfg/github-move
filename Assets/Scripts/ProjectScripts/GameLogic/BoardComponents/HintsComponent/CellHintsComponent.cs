@@ -129,6 +129,8 @@ public class CellHintsComponent : IECSComponent
     
     public void OnDragEnd()
     {
+        if(selectCells == null) return;
+        
         foreach (var cell in selectCells)
         {
             cell.ToggleSelection(false);
@@ -166,7 +168,7 @@ public class CellHintsComponent : IECSComponent
                     continue;
                 }
 
-                if (piece.PieceType == PieceType.Fog.Id) return null;
+                if (piece.PieceType == PieceType.Fog.Id || PieceType.GetDefById(piece.PieceType).Filter.Has(PieceTypeFilter.Multicellular)) return null;
                 
                 if (piece.Draggable == null) continue;
 

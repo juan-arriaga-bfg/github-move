@@ -496,6 +496,10 @@ MonoBehaviour:
   zoomVelocity: 0
   cameraZoom: {fileID: 1931227305}
   cameraMove: {fileID: 1931227306}
+  isAnimating: 0
+  ignoredUIWindows:
+  - MainWindow
+  - ErrorWindow
 --- !u!114 &1931227308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,4 +515,4 @@ MonoBehaviour:
   leftOffset: 0.14
   topOffset: 0.08
   rightOffset: 0.14
-  bottomOffset: 0.08
+  bottomOffset: 0.12

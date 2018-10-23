@@ -54,7 +54,7 @@ public static class DateTimeExtension
     
     public static string GetDelayText(int delay, bool icon = false, string format = null)
     {
-        return TimeFormat(DateTime.UtcNow.AddSeconds(delay) - DateTime.UtcNow, icon, format);
+        return TimeFormat(new TimeSpan(0, 0, delay - 1), icon, format);
     }
 
     public static string GetTimeText(this DateTime datetime, bool icon = false, string format = null)
@@ -69,15 +69,17 @@ public static class DateTimeExtension
     
     private static string TimeFormat(TimeSpan time, bool icon, string format)
     {
+        var temp = time.Add(new TimeSpan(0, 0, 1));
+        
         if (string.IsNullOrEmpty(format))
         {
-            var str = icon ? $"<sprite name={Currency.Timer.Name}>" : "";
+            var str = icon ? $"<sprite name={Currency.Timer.Name}> " : "";
             
-            return (int) time.TotalHours > 0
-                ? $"{str} <mspace=3em>{time.Hours:00}:{time.Minutes:00}:{time.Seconds:00}</mspace>"
-                : $"{str} <mspace=3em>{time.Minutes:00}:{time.Seconds:00}</mspace>";
+            return (int) temp.TotalHours > 0
+                ? $"{str}<mspace=3em>{temp.Hours:00}:{temp.Minutes:00}:{temp.Seconds:00}</mspace>"
+                : $"{str}<mspace=3em>{temp.Minutes:00}:{temp.Seconds:00}</mspace>";
         }
         
-        return string.Format(format, time.Hours, time.Minutes, time.Seconds);
+        return string.Format(format, temp.Hours, temp.Minutes, temp.Seconds);
     }
 }

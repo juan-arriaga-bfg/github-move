@@ -23,7 +23,6 @@ public class ReproductionPieceComponent : IECSComponent, IPieceBoardObserver
     
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        contextPiece.Context.ReproductionLogic.Add(this);
         if (life == null) life = contextPiece.GetComponent<ReproductionLifeComponent>(ReproductionLifeComponent.ComponentGuid);
     }
 
@@ -37,7 +36,6 @@ public class ReproductionPieceComponent : IECSComponent, IPieceBoardObserver
 
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
-        contextPiece.Context.ReproductionLogic.Remove(this);
     }
     
     public void Reproduction()

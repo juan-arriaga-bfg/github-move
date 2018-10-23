@@ -1,575 +1,698 @@
 [
   {
-    "Uid": "1",
-    "Price": {
-      "Currency": "A2",
-      "Amount": 4
-    },
-    "Rewards": [
+    "Id": 1,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin1",
-        "Amount": 2
-      },
-      {
-        "Currency": "Coin2",
-        "Amount": 2
-      },
-      {
-        "Currency": "Coin3",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 15
+        "TaskId": "1"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionLevel, Assembly-CSharp",
-        "UserLevel": 1
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 2
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 5
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 15
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 1",
+        "Message": "The Sheriff destroyed the village during my absence. It's time to start its restoration!"
       }
-    ],
-    "Message": "The Sheriff destroyed the village during my absence. It's time to start its restoration!"
+    }
   },
   {
-    "Uid": "2",
-    "Price": {
-      "Currency": "A3",
-      "Amount": 3
-    },
-    "Rewards": [
+    "Id": 2,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin2",
-        "Amount": 2
-      },
-      {
-        "Currency": "Coin3",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 15
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 40
+        "TaskId": "2"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 1
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 1
+          },
+          {
+            "Currency": "Coin2",
+            "Amount": 1
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 30
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 30
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 2",
+        "Message": "Now we can clean up the area from obstacles and build Houses!"
       }
-    ],
-    "Message": "Now we can clean up the area from obstacles and build Houses!"
+    }
   },
   {
-    "Uid": "3",
-    "Price": {
-      "Currency": "A4",
-      "Amount": 2
-    },
-    "Rewards": [
+    "Id": 3,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin1",
-        "Amount": 3
-      },
-      {
-        "Currency": "Coin2",
-        "Amount": 3
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 40
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 60
+        "TaskId": "3"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 2
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 2
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 10
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 10
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 3",
+        "Message": "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks."
       }
-    ],
-    "Message": "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks."
+    }
   },
   {
-    "Uid": "4",
-    "Price": {
-      "Currency": "B2",
-      "Amount": 2
-    },
-    "Rewards": [
+    "Id": 4,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin1",
-        "Amount": 2
-      },
-      {
-        "Currency": "Coin2",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 10
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 10
+        "TaskId": "4"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 1
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 2
+          },
+          {
+            "Currency": "Coin2",
+            "Amount": 1
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 30
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 30
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 4",
+        "Message": "The miller is ready to thanks well for a good batch of sheaves"
       }
-    ],
-    "Message": "The miller is ready to thanks well for a good batch of sheaves"
+    }
   },
   {
-    "Uid": "5",
-    "Price": {
-      "Currency": "A5",
-      "Amount": 1
-    },
-    "Rewards": [
+    "Id": 5,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin1",
-        "Amount": 3
-      },
-      {
-        "Currency": "Coin2",
-        "Amount": 3
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 40
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 40
+        "TaskId": "5"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 3
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 3
+          },
+          {
+            "Currency": "Coin2",
+            "Amount": 1
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 40
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 60
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 5",
+        "Message": "Peasant women are asked to give them little wool for knitting"
       }
-    ],
-    "Message": "Peasant women are asked to give them little wool for knitting"
+    }
   },
   {
-    "Uid": "6",
-    "Price": {
-      "Currency": "E3",
-      "Amount": 1
-    },
-    "Rewards": [
+    "Id": 6,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin2",
-        "Amount": 1
-      },
-      {
-        "Currency": "Coin3",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 40
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 20
+        "TaskId": "6"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 4
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin2",
+            "Amount": 2
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 40
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 6"
       }
-    ],
-    "Message": "The miller is ready to thanks well for a good batch of sheaves"
+    }
   },
   {
-    "Uid": "7",
-    "Price": {
-      "Currency": "C3",
-      "Amount": 2
-    },
-    "Rewards": [
+    "Id": 7,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin1",
-        "Amount": 1
-      },
-      {
-        "Currency": "Coin2",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 5
+        "TaskId": "7"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 3
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 2
+          },
+          {
+            "Currency": "Coin2",
+            "Amount": 1
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 20
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 20
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 7"
       }
-    ],
-    "Message": "The merchant is ready to pay good for a batch of quality cloth"
+    }
   },
   {
-    "Uid": "8",
-    "Price": {
-      "Currency": "C4",
-      "Amount": 2
-    },
-    "Rewards": [
+    "Id": 8,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin1",
-        "Amount": 3
-      },
-      {
-        "Currency": "Coin2",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 10
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 10
+        "TaskId": "8"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 7
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 1
+          },
+          {
+            "Currency": "Coin2",
+            "Amount": 1
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 15
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 30
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 8"
       }
-    ],
-    "Message": "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks."
+    }
   },
   {
-    "Uid": "9",
-    "Price": {
-      "Currency": "A6",
-      "Amount": 2
-    },
-    "Rewards": [
+    "Id": 9,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin3",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 75
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 75
+        "TaskId": "9"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 5
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin3",
+            "Amount": 1
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 9",
+        "Message": "The merchant is ready to pay good for a batch of quality cloth"
       }
-    ],
-    "Message": "Now we can clean up the area from obstacles and build Houses!"
+    }
   },
   {
-    "Uid": "10",
-    "Price": {
-      "Currency": "J3",
-      "Amount": 1
-    },
-    "Rewards": [
+    "Id": 10,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin1",
-        "Amount": 2
-      },
-      {
-        "Currency": "Coin3",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 5
+        "TaskId": "10"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 11
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 2
+          },
+          {
+            "Currency": "Coin2",
+            "Amount": 1
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 30
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 30
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 10"
       }
-    ],
-    "Message": "The cook promises to bake a pie if you give him some apples"
+    }
   },
   {
-    "Uid": "11",
-    "Price": {
-      "Currency": "D3",
-      "Amount": 2
-    },
-    "Rewards": [
+    "Id": 11,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin1",
-        "Amount": 2
-      },
-      {
-        "Currency": "Coin2",
-        "Amount": 3
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 10
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 10
+        "TaskId": "11"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 4
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 3
+          },
+          {
+            "Currency": "Coin2",
+            "Amount": 2
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 11"
       }
-    ],
-    "Message": "Citizens of the neighboring city plan to pave the square. They need a lot of stone blocks."
+    }
   },
   {
-    "Uid": "12",
-    "Price": {
-      "Currency": "B5",
-      "Amount": 1
-    },
-    "Rewards": [
+    "Id": 14,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin1",
-        "Amount": 3
-      },
-      {
-        "Currency": "Coin2",
-        "Amount": 2
-      },
-      {
-        "Currency": "Coin3",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 40
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 40
+        "TaskId": "14"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 11
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 1
+          },
+          {
+            "Currency": "Coin2",
+            "Amount": 2
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 14"
       }
-    ]
+    }
   },
   {
-    "Uid": "13",
-    "Price": {
-      "Currency": "C5",
-      "Amount": 3
-    },
-    "Rewards": [
+    "Id": 15,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin2",
-        "Amount": 2
-      },
-      {
-        "Currency": "Coin3",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 60
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 40
+        "TaskId": "15"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 8
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 2
+          },
+          {
+            "Currency": "Coin2",
+            "Amount": 2
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 15"
       }
-    ]
+    }
   },
   {
-    "Uid": "14",
-    "Price": {
-      "Currency": "G3",
-      "Amount": 2
-    },
-    "Rewards": [
+    "Id": 16,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin2",
-        "Amount": 3
-      },
-      {
-        "Currency": "Coin3",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 10
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 10
+        "TaskId": "16"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 12
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin3",
+            "Amount": 2
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 16"
       }
-    ]
+    }
   },
   {
-    "Uid": "15",
-    "Price": {
-      "Currency": "C6",
-      "Amount": 2
-    },
-    "Rewards": [
+    "Id": 17,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin2",
-        "Amount": 3
-      },
-      {
-        "Currency": "Coin3",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 60
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 75
+        "TaskId": "17"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 13
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin3",
+            "Amount": 1
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 17"
       }
-    ]
+    }
   },
   {
-    "Uid": "16",
-    "Price": {
-      "Currency": "H3",
-      "Amount": 1
-    },
-    "Rewards": [
+    "Id": 19,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin2",
-        "Amount": 2
-      },
-      {
-        "Currency": "Coin3",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 10
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 10
+        "TaskId": "19"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 10
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 2
+          },
+          {
+            "Currency": "Coin2",
+            "Amount": 2
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 40
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 40
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 19"
       }
-    ]
+    }
   },
   {
-    "Uid": "17",
-    "Price": {
-      "Currency": "A7",
-      "Amount": 1
-    },
-    "Rewards": [
+    "Id": 20,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin2",
-        "Amount": 1
-      },
-      {
-        "Currency": "Coin3",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 150
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 150
+        "TaskId": "20"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 9
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 1
+          },
+          {
+            "Currency": "Coin2",
+            "Amount": 2
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 20"
       }
-    ]
+    }
   },
   {
-    "Uid": "18",
-    "Price": {
-      "Currency": "C7",
-      "Amount": 2
-    },
-    "Rewards": [
+    "Id": 21,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
       {
-        "Currency": "Coin2",
-        "Amount": 3
-      },
-      {
-        "Currency": "Coin3",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 75
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 150
+        "TaskId": "21"
       }
     ],
-    "Conditions": [
-      {
-        "$type": "QuestConditionOtherQuest, Assembly-CSharp",
-        "OtherUid": 15
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 1
+          },
+          {
+            "Currency": "Coin3",
+            "Amount": 1
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 21"
       }
-    ]
+    }
+  },
+  {
+    "Id": 22,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
+      {
+        "TaskId": "22"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 2
+          },
+          {
+            "Currency": "Coin2",
+            "Amount": 2
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 22"
+      }
+    }
+  },
+  {
+    "Id": 23,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
+      {
+        "TaskId": "23"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 2
+          },
+          {
+            "Currency": "Coin2",
+            "Amount": 3
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 23"
+      }
+    }
+  },
+  {
+    "Id": 24,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
+      {
+        "TaskId": "24"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coin1",
+            "Amount": 3
+          },
+          {
+            "Currency": "Coin3",
+            "Amount": 1
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest 24"
+      }
+    }
   }
 ]

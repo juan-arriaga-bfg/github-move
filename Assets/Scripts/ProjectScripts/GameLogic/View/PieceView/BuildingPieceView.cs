@@ -2,14 +2,13 @@
 
 public class BuildingPieceView : PieceBoardElementView
 {
-	[SerializeField] private Material lockedMaterial;
+	[SerializeField] protected Material lockedMaterial;
     
-	private Material unlockedMaterial;
+	protected Material unlockedMaterial;
     
 	private PieceStateComponent state;
 	
 	private GameObject warning;
-	private GameObject hourglass;
     
 	public override void Init(BoardRenderer context, Piece piece)
 	{
@@ -17,10 +16,10 @@ public class BuildingPieceView : PieceBoardElementView
 
 		state = Piece.GetComponent<PieceStateComponent>(PieceStateComponent.ComponentGuid);
 
-		if (sprite != null)
+		if (bodySprite != null)
 		{
-			unlockedMaterial = sprite.material;
-			sprite.material = state == null ? unlockedMaterial : lockedMaterial;
+			unlockedMaterial = bodySprite.material;
+			bodySprite.material = state == null ? unlockedMaterial : lockedMaterial;
 		}
 		
 		if(state == null) return;
@@ -28,7 +27,6 @@ public class BuildingPieceView : PieceBoardElementView
 		state.OnChangeState += UpdateSate;
 		
 		if (warning == null) warning = CreateUi(ViewType.Warning);
-		if (hourglass == null) hourglass = CreateUi(ViewType.Hourglass);
 		
 		SyncRendererLayers(piece.CachedPosition);
 		
@@ -39,7 +37,7 @@ public class BuildingPieceView : PieceBoardElementView
 	{
 		base.ResetViewOnDestroy();
 		
-		sprite.material = unlockedMaterial;
+		bodySprite.material = unlockedMaterial;
 		
 		if(state == null) return;
         
@@ -51,7 +49,6 @@ public class BuildingPieceView : PieceBoardElementView
 		if(state == null) return;
 		
 		warning.SetActive(state.State == BuildingState.Warning);
-		hourglass.SetActive(state.State == BuildingState.InProgress);
 	}
 
 	private GameObject CreateUi(ViewType view)
@@ -59,7 +56,7 @@ public class BuildingPieceView : PieceBoardElementView
 		var go = Context.CreateElement((int) view);
 		var renderers = go.GetComponentsInChildren<Renderer>();
 		
-		go.SetParent(sprite.transform, false);
+		go.SetParent(bodySprite.transform, false);
 
 		foreach (var items in renderers)
 		{

@@ -10,16 +10,11 @@ public abstract class BoardAnimation
 
 	public virtual void CompleteAnimation(BoardRenderer context)
 	{
-		if (OnCompleteEvent != null)
-		{
-			OnCompleteEvent(this);
-		}
-
+		OnCompleteEvent?.Invoke(this);
 		context.CompleteAnimation(this);
 	}
 
 	public virtual void StopAnimation(BoardRenderer context)
 	{
-		
 	}
 }

@@ -23,8 +23,8 @@ public class EmptyCellsFinderComponent : IECSComponent
 		var index = 0;
 		extraSpacePrecent = Mathf.Clamp(extraSpacePrecent, 0, float.MaxValue);
 		var extra = 1 + extraSpacePrecent;
-		
-		while (field.Count < count*extra && index < 10)
+
+		while (field.Count < count * extra && index < 10)
 		{
 			index++;
 			FindRingWithPointInCenter(point, field, (index * 2) * 4, index);
@@ -78,11 +78,11 @@ public class EmptyCellsFinderComponent : IECSComponent
 		// TODO: нет проверки на валидность координаты, в результате идет проход даже по ячекам, которые не существуют
 		
 		radius = Mathf.Max(radius, 0);
-
-		if (radius == 0)
-		{
-			return AddIsEmpty(point, field, count);
-		}
+		
+		var isStartAdded = AddIsEmpty(point, field, count);
+		
+		if (radius == 0) return isStartAdded;
+		if (isStartAdded && chechCount) return true;
 		
 		var bottomLeft = point.BottomLeftAtDistance(radius);
 		var topLeft = point.TopLeftAtDistance(radius);

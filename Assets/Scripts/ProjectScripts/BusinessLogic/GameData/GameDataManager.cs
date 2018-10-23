@@ -32,8 +32,8 @@ public class ItemWeight
     {
         return $"Uid: {Uid} - Weight: {Weight} - Override: {Override}";
     }
-
-    public static ItemWeight GetRandomItem(List<ItemWeight> weights, bool isExclude = false)
+    
+    public static ItemWeight GetRandomItem(List<ItemWeight> weights)
     {
         var sum = weights.Sum(w => w.Weight);
         var current = 0;
@@ -46,18 +46,72 @@ public class ItemWeight
             current += item.Weight;
             
             if (current < random) continue;
-
-            if (isExclude) weights.Remove(item);
             
             return item;
         }
         
         return null;
     }
+    
+    public static Dictionary<int, int> GetRandomPieces(int amount, List<ItemWeight> weights, bool isExclude = false)
+    {
+        var cash = new List<ItemWeight>(weights);
+        var result = new Dictionary<int, int>();
+        
+        for (var i = amount - 1; i >= 0; i--)
+        {
+            var item = GetRandomItem(cash);
+            
+            if (item == null) continue;
 
+            if (isExclude) cash.Remove(item);
+            
+            if (result.ContainsKey(item.Piece) == false)
+            {
+                result.Add(item.Piece, 1);
+                continue;
+            }
+            
+            result[item.Piece]++;
+        }
+        
+        return result;
+    }
+    
+    public static int GetRandomItemIndex(List<ItemWeight> weights)
+    {
+        var item = GetRandomItem(weights);
+        return item == null ? -1 : weights.IndexOf(item);
+    }
+
+    public static List<int> GetRandomSequence(List<ItemWeight> weights, int length, int seed = -1)
+    {
+        var sum = weights.Sum(w => w.Weight);
+        var result = new List<int>();
+
+        for (var i = 0; i < weights.Count; i++)
+        {
+            var item = weights[i];
+            var amount = Mathf.CeilToInt(length * (item.Weight / (float)sum));
+
+            for (var j = 0; j < amount; j++)
+            {
+                result.Add(i);
+            }
+        }
+
+        if (result.Count == 0) return result;
+        
+        result.Shuffle(seed);
+        result.RemoveRange(length - 1, result.Count - length);
+
+        return result;
+    }
+    
     public static List<ItemWeight> ReplaseWeights(List<ItemWeight> oldWeights, List<ItemWeight> nextWeights)
     {
-        if (oldWeights == null) return nextWeights;
+        if (oldWeights == null) return nextWeights == null ? new List<ItemWeight>() : new List<ItemWeight>(nextWeights);
+        if (nextWeights == null) return new List<ItemWeight>(oldWeights);
         
         var weights = new List<ItemWeight>();
 
@@ -73,7 +127,7 @@ public class ItemWeight
             
             if (next.Override)
             {
-                weights.Add(next.Copy());
+                if(next.Weight > 0) weights.Add(next.Copy());
                 continue;
             }
             
@@ -97,10 +151,10 @@ public class ItemWeight
     }
 }
 
-
 public class GameDataManager : ECSEntity,
-    IChestsDataManager, IPiecesDataManager, IFogsDataManager, IMinesDataManager, IQuestsDataManager, IObstaclesDataManager, ILevelsDataManager,
-    IFieldDataManager, ICodexDataManager, IEnemiesDataManager, IConstantsDataManager
+    IChestsDataManager, IPiecesDataManager, IFogsDataManager, IMinesDataManager, IObstaclesDataManager, ILevelsDataManager,
+    IFieldDataManager, ICodexDataManager, IEnemiesDataManager, IConstantsDataManager, IQuestsDataManager, IShopDataManager,
+    IOrdersDataManager
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -116,7 +170,7 @@ public class GameDataManager : ECSEntity,
     
     private FogsDataManager fogsManager;
     public FogsDataManager FogsManager => fogsManager ?? (fogsManager = GetComponent<FogsDataManager>(FogsDataManager.ComponentGuid));
-    
+
     private QuestsDataManager questsManager;
     public QuestsDataManager QuestsManager => questsManager ?? (questsManager = GetComponent<QuestsDataManager>(QuestsDataManager.ComponentGuid));
     
@@ -138,6 +192,12 @@ public class GameDataManager : ECSEntity,
     private ConstantsDataManager constantsManager;
     public ConstantsDataManager ConstantsManager => constantsManager ?? (constantsManager = GetComponent<ConstantsDataManager>(ConstantsDataManager.ComponentGuid));
     
+    private ShopDataManager shopManager;
+    public ShopDataManager ShopManager => shopManager ?? (shopManager = GetComponent<ShopDataManager>(ShopDataManager.ComponentGuid));
+    
+    private OrdersDataManager ordersManager;
+    public OrdersDataManager OrdersManager => ordersManager ?? (ordersManager = GetComponent<OrdersDataManager>(OrdersDataManager.ComponentGuid));
+    
     public void SetupComponents()
     {
         RegisterComponent(new ChestsDataManager());
@@ -151,6 +211,8 @@ public class GameDataManager : ECSEntity,
         RegisterComponent(new FieldDataManager());
         RegisterComponent(new CodexDataManager()); // should be the last one
         RegisterComponent(new ConstantsDataManager());
+        RegisterComponent(new ShopDataManager());
+        RegisterComponent(new OrdersDataManager());
     }
 
     public void Reload()

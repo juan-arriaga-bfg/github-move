@@ -29,7 +29,7 @@ public class UIPiecesCheatSheetWindowItem : MonoBehaviour
         PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceId);
 
         lblName.text = pieceTypeDef.Abbreviations[0];
-        lblId.text = "id: " + pieceId.ToString();
+        lblId.text = "id " + pieceId.ToString();
 
         var spr = GetPieecSprite();
         if (spr != null)

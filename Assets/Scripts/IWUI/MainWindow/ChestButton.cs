@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ChestButton : IWUIWindowViewController
+public class ChestButton : UIGenericResourcePanelViewController
 {
     [SerializeField] private GameObject shine;
     [SerializeField] private GameObject exclamationMark;
@@ -13,21 +13,27 @@ public class ChestButton : IWUIWindowViewController
 
         timer = BoardService.Current.GetBoardById(0).FreeChestLogic.Timer;
         
-        timer.OnStart += UpdateState;
-        timer.OnComplete += UpdateState;
+        timer.OnStart += UpdateTimerState;
+        timer.OnComplete += UpdateTimerState;
 
-        UpdateState();
+        UpdateTimerState();
     }
     
     private void OnDestroy()
     {
-        timer.OnStart -= UpdateState;
-        timer.OnComplete -= UpdateState;
+        timer.OnStart -= UpdateTimerState;
+        timer.OnComplete -= UpdateTimerState;
     }
 
-    private void UpdateState()
+    public override void UpdateResource(int offset)
     {
-        var isActive = !timer.IsExecuteable();
+        base.UpdateResource(offset);
+        UpdateTimerState();
+    }
+
+    private void UpdateTimerState()
+    {
+        var isActive = !timer?.IsExecuteable() ?? false;
         
         shine.SetActive(isActive);
         exclamationMark.SetActive(isActive);

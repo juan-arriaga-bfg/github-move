@@ -149,7 +149,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
         if (view.IsShow == false)
         {
-            thisContext.Context.RendererContext.RemoveElement(view);
+            thisContext.Context.RendererContext.DestroyElement(view);
             views.Remove(id);
         }
         

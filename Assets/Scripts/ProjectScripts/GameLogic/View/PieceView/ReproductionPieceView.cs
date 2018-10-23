@@ -1,11 +1,5 @@
-﻿using UnityEngine;
-
-public class ReproductionPieceView : PieceBoardElementView
+﻿public class ReproductionPieceView : PieceBoardElementView
 {
-    [SerializeField] private Material lockedMaterial;
-    
-    private Material unlockedMaterial;
-    
     private TimerComponent timer;
     
     public override void Init(BoardRenderer context, Piece piece)
@@ -20,25 +14,24 @@ public class ReproductionPieceView : PieceBoardElementView
         
         timer.OnStart += UpdateSate;
         timer.OnComplete += UpdateSate;
-
-        if (sprite != null) unlockedMaterial = sprite.material;
+        
         UpdateSate();
     }
     
     public override void ResetViewOnDestroy()
     {
+        base.ResetViewOnDestroy();
+        
         if(timer == null) return;
         
         timer.OnStart -= UpdateSate;
         timer.OnComplete -= UpdateSate;
-        
-        base.ResetViewOnDestroy();
     }
     
     private void UpdateSate()
     {
-        if(timer == null || sprite == null) return;
+        if(timer == null || bodySprite == null) return;
         
-        sprite.material = timer.IsStarted ? lockedMaterial : unlockedMaterial;
+        bodySprite.sprite = IconService.Current.GetSpriteById( $"{PieceType.Parse(Piece.PieceType)}{(timer.IsStarted ? "_lock" : "")}");
     }
 }

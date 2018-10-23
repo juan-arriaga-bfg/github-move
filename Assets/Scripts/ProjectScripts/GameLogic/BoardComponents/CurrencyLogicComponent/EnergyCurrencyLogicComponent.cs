@@ -7,16 +7,10 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
     public override int Guid => ComponentGuid;
 
     private TimerComponent timer;
-    public TimerComponent Timer
-    {
-        get { return timer ?? (timer = GetComponent<TimerComponent>(TimerComponent.ComponentGuid)); }
-    }
-    
+    public TimerComponent Timer => timer ?? (timer = GetComponent<TimerComponent>(TimerComponent.ComponentGuid));
+
     public int Delay { get; set; }
     
-//    private DateTime then;
-//    public DateTime Later;
-//    
     public Action OnExecute;
     
     public long LastUpdate => Timer.StartTime.ConvertToUnixTime();
@@ -36,12 +30,13 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
 
     private void TimerStopCheck()
     {
-        if(!CheckIsNeed() && Timer.IsExecuteable())
-            Timer.Stop();
+        if(!CheckIsNeed() && Timer.IsExecuteable()) Timer.Stop();
     }
     
     protected override void InitInSave()
     {
+        if(CheckIsNeed() == false) return;
+        
         var save = ProfileService.Current.GetComponent<CurrencySaveComponent>(CurrencySaveComponent.ComponentGuid);
         
         if(save == null) return;
@@ -49,12 +44,8 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         var refil = DateTimeExtension.CountOfStepsPassedWhenAppWasInBackground(save.EnergyLastUpdate, Delay, out Timer.StartTime);
         
         targetItem.Amount += Mathf.Min(refil, limitItem.Amount - targetItem.Amount);
-
         
-        
-        
-        if(CheckIsNeed())
-            Timer.Start(Timer.StartTime);
+        if(CheckIsNeed()) Timer.Start(Timer.StartTime);
     }
 
     public bool CheckIsNeed()
@@ -64,10 +55,7 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
     
     public void Execute()
     {
-        if (!Timer.IsStarted && CheckIsNeed())
-        {
-            Timer.Start();
-        }
+        if (!Timer.IsStarted && CheckIsNeed()) Timer.Start();
         
         OnExecute?.Invoke();
     }
@@ -75,17 +63,11 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
     public void StepComplete()
     {
         Add(1);
-        if(targetItem.Amount >= limitItem.Amount)
-            Timer.Stop();
-        else
-            Timer.Start();
+        
+        if(targetItem.Amount >= limitItem.Amount) Timer.Stop();
+        else Timer.Start();
         
         Execute();
-    }
-
-    protected override void Add(int amount, bool isExtra = false)
-    {
-        base.Add(amount, isExtra);
     }
 
     public object GetDependency()
