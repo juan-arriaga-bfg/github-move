@@ -105,8 +105,6 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     /// </summary>
     public virtual void Highlight()
     {
-        Type hlType = typeof(HighlightTaskNotImplemented);
-        
         var attributes = GetType().GetCustomAttributes(typeof(TaskHighlight), true);
         if (attributes.Length == 0)
         {
@@ -114,14 +112,25 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
         }
         else
         {
-            var attr = attributes[0] as TaskHighlight;
-            // ReSharper disable once PossibleNullReferenceException
-            hlType = attr.HighlightType;
-        }
+            for (var i = 0; i < attributes.Length; i++)
+            {
+                var attribute = attributes[i];
+                var attr  = attribute as TaskHighlight;
+                if (attr == null)
+                {
+                    continue;
+                }
 
-        object hlInstance = Activator.CreateInstance(hlType);
-        ITaskHighlight hl = hlInstance as ITaskHighlight;
-        // ReSharper disable once PossibleNullReferenceException
-        hl.Highlight(this);
+                var hlType = attr.HighlightType;
+                object hlInstance = Activator.CreateInstance(hlType);
+                ITaskHighlight hl = hlInstance as ITaskHighlight;
+
+                // ReSharper disable once PossibleNullReferenceException
+                if (hl.Highlight(this))
+                {
+                    return;
+                }
+            }
+        }
     }
 }
