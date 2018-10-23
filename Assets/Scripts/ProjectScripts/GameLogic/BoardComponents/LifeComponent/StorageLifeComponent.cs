@@ -12,6 +12,7 @@
     public virtual string Price => $"Send <sprite name={Worker.Currency}>";
     
     public virtual bool IsUseCooldown => false;
+    public bool IsFilled => storage.IsFilled;
     
     public virtual TimerComponent Timer => storage.Timer;
     public float GetProgressNext => 1 - (current+1)/(float)HP;

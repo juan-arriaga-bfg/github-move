@@ -21,16 +21,8 @@
         
         cooldown = new TimerComponent{Delay = def.Delay, Price = def.FastPrice};
         RegisterComponent(cooldown);
-        
-        cooldown.OnComplete += Unlock;
     }
     
-    public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
-    {
-        base.OnRemoveFromBoard(position, context);
-        cooldown.OnComplete -= Unlock;
-    }
-
     protected override void InitStorage()
     {
         storage.Capacity = storage.Amount = def.PieceAmount;
@@ -85,12 +77,8 @@
     
     protected override void OnSpawnRewards()
     {
+        base.OnSpawnRewards();
         AddResourceView.Show(StartPosition(), def.StepRewards);
         cooldown.Start();
-    }
-    
-    private void Unlock()
-    {
-        Locker.Unlock(this);
     }
 }

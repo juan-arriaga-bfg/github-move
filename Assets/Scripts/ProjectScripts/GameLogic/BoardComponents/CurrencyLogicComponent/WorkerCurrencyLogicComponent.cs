@@ -158,13 +158,22 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     private bool CheckLife(Piece target)
     {
         var life = target.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
-
+        
         if (life == null) return false;
 
-        if (!life.Locker.IsLocked) return life.Damage(true);
-        
-        UIErrorWindowController.AddError("Someone is working here already!");
-        return false;
+        if (life.Locker.IsLocked)
+        {
+            UIErrorWindowController.AddError(life.IsFilled ? "Can't make this action!" : "Someone is working here already!");
+            return false;
+        }
+
+        if (life.IsUseCooldown && life.Timer.IsExecuteable())
+        {
+            UIErrorWindowController.AddError("It's not ready yet!");
+            return false;
+        }
+
+        return life.Damage(true);
     }
 
     private bool CheckPieceState(Piece target)
