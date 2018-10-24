@@ -146,7 +146,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         var target = context.BoardLogic.GetPieceAt(targetPosition);
         var def = PieceType.GetDefById(target.PieceType);
 
-        if (def.Filter.Has(PieceTypeFilter.WorkPlace) == false) return false;
+        if (def.Filter.Has(PieceTypeFilter.WorkPlace) == false || !CheckLock(target)) return false;
         if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target)) return false;
         
         context.ActionExecutor.AddAction(new CollapsePieceToAction
@@ -154,6 +154,19 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             To = targetPosition,
             Positions = new List<BoardPosition> {worker.CachedPosition},
         });
+
+        return true;
+    }
+
+    private bool CheckLock(Piece target)
+    {
+        var reaction = target.GetComponent<PiecePathfindBoardCondition>(PiecePathfindBoardCondition.ComponentGuid);
+
+        if (reaction != null && reaction.Check(target.CachedPosition))
+        {
+            UIErrorWindowController.AddError("Can't make this action!");
+            return false;
+        }
 
         return true;
     }

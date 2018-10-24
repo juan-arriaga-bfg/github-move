@@ -14,6 +14,13 @@
 
         if (target == null) return true;
         
+        var reaction = target.GetComponent<PiecePathfindBoardCondition>(PiecePathfindBoardCondition.ComponentGuid);
+
+        if (reaction != null)
+        {
+            return !reaction.Check(target.CachedPosition);
+        }
+        
         var life = target.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
 
         if (life != null)
