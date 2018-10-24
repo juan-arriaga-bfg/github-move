@@ -9,7 +9,7 @@
       "Min": 3,
       "Max": 5
     },
-    "PieceAmount": 7,
+    "PieceAmount": 4,
     "PieceWeights": [
       {
         "Uid": "A2",
@@ -18,14 +18,6 @@
       {
         "Uid": "C2",
         "Weight": 10
-      },
-      {
-        "Uid": "E1",
-        "Weight": 3
-      },
-      {
-        "Uid": "D1",
-        "Weight": 3
       }
     ]
   },
@@ -39,7 +31,7 @@
       "Min": 3,
       "Max": 5
     },
-    "PieceAmount": 10,
+    "PieceAmount": 5,
     "PieceWeights": [
       {
         "Uid": "A1",
@@ -49,21 +41,6 @@
       {
         "Uid": "A2",
         "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "D1",
-        "Weight": 2,
-        "Override": true
-      },
-      {
-        "Uid": "F1",
-        "Weight": 2,
-        "Override": true
-      },
-      {
-        "Uid": "E1",
-        "Weight": 2,
         "Override": true
       }
     ]
@@ -236,8 +213,8 @@
       "Amount": 80
     },
     "ProductionAmount": {
-      "Min": 3,
-      "Max": 5
+      "Min": 0,
+      "Max": 0
     },
     "PieceAmount": 8,
     "PieceWeights": [
@@ -300,10 +277,10 @@
       "Amount": 100
     },
     "ProductionAmount": {
-      "Min": 3,
-      "Max": 5
+      "Min": 0,
+      "Max": 0
     },
-    "PieceAmount": 8,
+    "PieceAmount": 5,
     "PieceWeights": [
       {
         "Uid": "H1",
@@ -316,12 +293,17 @@
         "Override": true
       },
       {
-        "Uid": "E2",
+        "Uid": "Magic1",
         "Weight": 10,
         "Override": true
       },
       {
-        "Uid": "F2",
+        "Uid": "Coin2",
+        "Weight": 10,
+        "Override": true
+      },
+      {
+        "Uid": "Coin1",
         "Weight": 10,
         "Override": true
       },
@@ -541,30 +523,14 @@
       "Amount": 1
     },
     "ProductionAmount": {
-      "Min": 3,
-      "Max": 5
+      "Min": 1,
+      "Max": 2
     },
-    "PieceAmount": 4,
+    "PieceAmount": 3,
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 80,
-        "Override": true
-      },
-      {
-        "Uid": "D1",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "E1",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "F1",
-        "Weight": 5,
-        "Override": true
+        "Weight": 50
       }
     ]
   },
@@ -575,34 +541,19 @@
       "Amount": 5
     },
     "ProductionAmount": {
-      "Min": 3,
-      "Max": 5
+      "Min": 1,
+      "Max": 3
     },
-    "PieceAmount": 8,
+    "PieceAmount": 4,
     "PieceWeights": [
       {
         "Uid": "A1",
-        "Weight": 20,
-        "Override": true
-      },
-      {
-        "Uid": "A2",
         "Weight": 50,
         "Override": true
       },
       {
-        "Uid": "D1",
-        "Weight": 5,
-        "Override": true
-      },
-      {
-        "Uid": "F1",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "E1",
-        "Weight": 10,
+        "Uid": "A2",
+        "Weight": 30,
         "Override": true
       }
     ]
@@ -615,48 +566,17 @@
     },
     "ProductionAmount": {
       "Min": 3,
-      "Max": 5
+      "Max": 4
     },
-    "PieceAmount": 15,
+    "PieceAmount": 7,
     "PieceWeights": [
       {
         "Uid": "A2",
-        "Weight": 50,
-        "Override": true
-      },
-      {
-        "Uid": "F1",
-        "Weight": 6,
-        "Override": true
+        "Weight": 10
       },
       {
         "Uid": "A1",
-        "Weight": 6,
-        "Override": true
-      },
-      {
-        "Uid": "H1",
-        "Weight": 6,
-        "Override": true
-      },
-      {
-        "Uid": "D2",
-        "Weight": 6,
-        "Override": true
-      },
-      {
-        "Uid": "E1",
-        "Weight": 6,
-        "Override": true
-      },
-      {
-        "Uid": "F1",
-        "Weight": 6,
-        "Override": true
-      },
-      {
-        "Uid": "G1",
-        "Weight": 6,
+        "Weight": 20,
         "Override": true
       }
     ]
@@ -668,20 +588,18 @@
       "Amount": 1
     },
     "ProductionAmount": {
-      "Min": 3,
-      "Max": 5
+      "Min": 1,
+      "Max": 2
     },
-    "PieceAmount": 8,
+    "PieceAmount": 5,
     "PieceWeights": [
       {
         "Uid": "C1",
-        "Weight": 35,
-        "Override": true
+        "Weight": 30
       },
       {
         "Uid": "C2",
-        "Weight": 7,
-        "Override": true
+        "Weight": 10
       }
     ]
   },
@@ -692,20 +610,18 @@
       "Amount": 5
     },
     "ProductionAmount": {
-      "Min": 3,
-      "Max": 5
+      "Min": 2,
+      "Max": 4
     },
-    "PieceAmount": 10,
+    "PieceAmount": 8,
     "PieceWeights": [
       {
         "Uid": "C2",
-        "Weight": 5,
-        "Override": true
+        "Weight": 30
       },
       {
         "Uid": "C3",
-        "Weight": 20,
-        "Override": true
+        "Weight": 10
       }
     ]
   },
@@ -716,15 +632,14 @@
       "Amount": 20
     },
     "ProductionAmount": {
-      "Min": 3,
+      "Min": 2,
       "Max": 5
     },
-    "PieceAmount": 14,
+    "PieceAmount": 11,
     "PieceWeights": [
       {
         "Uid": "C4",
-        "Weight": 10,
-        "Override": true
+        "Weight": 10
       }
     ]
   },
@@ -735,10 +650,10 @@
       "Amount": 1
     },
     "ProductionAmount": {
-      "Min": 3,
-      "Max": 5
+      "Min": 1,
+      "Max": 2
     },
-    "PieceAmount": 8,
+    "PieceAmount": 4,
     "PieceWeights": [
       {
         "Uid": "K1",
@@ -759,10 +674,10 @@
       "Amount": 5
     },
     "ProductionAmount": {
-      "Min": 3,
-      "Max": 5
+      "Min": 1,
+      "Max": 3
     },
-    "PieceAmount": 10,
+    "PieceAmount": 6,
     "PieceWeights": [
       {
         "Uid": "K2",
@@ -787,10 +702,10 @@
       "Amount": 20
     },
     "ProductionAmount": {
-      "Min": 3,
-      "Max": 5
+      "Min": 2,
+      "Max": 4
     },
-    "PieceAmount": 14,
+    "PieceAmount": 8,
     "PieceWeights": [
       {
         "Uid": "K4",
@@ -814,10 +729,10 @@
       "Amount": 1
     },
     "ProductionAmount": {
-      "Min": 3,
-      "Max": 5
+      "Min": 1,
+      "Max": 2
     },
-    "PieceAmount": 8,
+    "PieceAmount": 4,
     "PieceWeights": [
       {
         "Uid": "L1",
@@ -838,10 +753,10 @@
       "Amount": 5
     },
     "ProductionAmount": {
-      "Min": 3,
-      "Max": 5
+      "Min": 1,
+      "Max": 3
     },
-    "PieceAmount": 10,
+    "PieceAmount": 6,
     "PieceWeights": [
       {
         "Uid": "L2",
@@ -866,10 +781,10 @@
       "Amount": 20
     },
     "ProductionAmount": {
-      "Min": 3,
-      "Max": 5
+      "Min": 2,
+      "Max": 4
     },
-    "PieceAmount": 14,
+    "PieceAmount": 8,
     "PieceWeights": [
       {
         "Uid": "L4",
