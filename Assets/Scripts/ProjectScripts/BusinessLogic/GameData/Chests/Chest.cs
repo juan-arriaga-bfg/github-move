@@ -17,8 +17,8 @@ public class Chest
     private ChestState chestState;
     
     public DateTime? StartTime { get; set; }
-    private DateTime completeTime;
-
+    private DateTime completeTime; 
+    
     private Dictionary<int, int> reward = new Dictionary<int, int>();
     
     public Chest(ChestDef def)
@@ -68,7 +68,7 @@ public class Chest
     public bool CheckStorage()
     {
         var rewardCount = Reward.Values.Sum();
-        return rewardCount < def.PieceAmount;
+        return rewardCount < def.PieceAmount + def.ProductionAmount.Range();
     }
     
     public void SetStartTime(DateTime time)
