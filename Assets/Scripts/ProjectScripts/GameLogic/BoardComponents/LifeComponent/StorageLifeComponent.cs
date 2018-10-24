@@ -102,6 +102,8 @@
             Damage(Worker?.Amount ?? 1);
             
             storage.Timer.Start();
+            
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.StorageDamage, this);
         });
         
         return isSuccess;

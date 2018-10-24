@@ -1,11 +1,11 @@
 [TaskHighlight(typeof(HighlightTaskAboutTree))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
-public class TaskCutTreeEntity : TaskEventCounterEntity
+public class TaskHitTreeEntity : TaskEventCounterEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
-    protected override int EventCode => GameEventsCodes.ObstacleKilled;
+    protected override int EventCode => GameEventsCodes.StorageDamage;
     
     public override void OnBoardEvent(int code, object context)
     {

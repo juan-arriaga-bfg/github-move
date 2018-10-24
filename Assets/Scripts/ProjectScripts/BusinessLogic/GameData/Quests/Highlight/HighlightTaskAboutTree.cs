@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HighlightTaskCutTree : TaskHighlightUsingArrow
+public class HighlightTaskAboutTree : TaskHighlightUsingArrow
 {   
     protected override bool ShowArrow(TaskEntity task, float delay)
     {
