@@ -123,12 +123,12 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     {
         foreach (var pair in completeTimesList)
         {
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.WorkerUsed, this);
+            
             if (pair.Key.Equals(id) == false) continue;
             
             completeTimesList.Remove(pair);
             Add(1);
-            
-            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.WorkerUsed, this);
             
             return true;
         }
