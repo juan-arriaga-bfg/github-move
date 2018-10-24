@@ -1,6 +1,8 @@
 using Newtonsoft.Json;
 using UnityEngine;
 
+[TaskHighlight(typeof(HighlightTaskNotImplemented))]
+[TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskOpenChestEntity : TaskCounterAboutPiece, IBoardEventListener, IHavePieceId
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
