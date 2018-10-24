@@ -107,7 +107,7 @@ public static partial class PieceType
     public static readonly PieceTypeDef A7 = new PieceTypeDef{Id = 111, Abbreviations = new List<string>{ "A7" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef A8Fake = new PieceTypeDef{Id = 112, Abbreviations = new List<string>{ "A8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.WorkPlace};
     public static readonly PieceTypeDef A8 = new PieceTypeDef{Id = 113, Abbreviations = new List<string>{ "A8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.WorkPlace};
-    public static readonly PieceTypeDef A9Fake = new PieceTypeDef{Id = 114, Abbreviations = new List<string>{ "A9Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake};
+    public static readonly PieceTypeDef A9Fake = new PieceTypeDef{Id = 114, Abbreviations = new List<string>{ "A9Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.WorkPlace};
     public static readonly PieceTypeDef A9 = new PieceTypeDef{Id = 115, Abbreviations = new List<string>{ "A9" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.WorkPlace};
     
     public static readonly PieceTypeDef C1 = new PieceTypeDef{Id = 300, Abbreviations = new List<string>{ "C1" }, Filter = PieceTypeFilter.Simple};
@@ -128,7 +128,7 @@ public static partial class PieceType
     public static readonly PieceTypeDef C9 = new PieceTypeDef{Id = 315, Abbreviations = new List<string>{ "C9" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef C10Fake = new PieceTypeDef{Id = 316, Abbreviations = new List<string>{ "C10Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.WorkPlace};
     public static readonly PieceTypeDef C10 = new PieceTypeDef{Id = 317, Abbreviations = new List<string>{ "C10" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.WorkPlace};
-    public static readonly PieceTypeDef C11Fake = new PieceTypeDef{Id = 318, Abbreviations = new List<string>{ "C11Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake};
+    public static readonly PieceTypeDef C11Fake = new PieceTypeDef{Id = 318, Abbreviations = new List<string>{ "C11Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.WorkPlace};
     public static readonly PieceTypeDef C11 = new PieceTypeDef{Id = 319, Abbreviations = new List<string>{ "C11" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.WorkPlace};
     
     public static readonly PieceTypeDef K1 = new PieceTypeDef{Id = 1100, Abbreviations = new List<string>{ "K1" }, Filter = PieceTypeFilter.Simple};
@@ -147,7 +147,7 @@ public static partial class PieceType
     public static readonly PieceTypeDef K8 = new PieceTypeDef{Id = 1113, Abbreviations = new List<string>{ "K8" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef K9Fake = new PieceTypeDef{Id = 1114, Abbreviations = new List<string>{ "K9Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.WorkPlace};
     public static readonly PieceTypeDef K9 = new PieceTypeDef{Id = 1115, Abbreviations = new List<string>{ "K9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.WorkPlace};
-    public static readonly PieceTypeDef K10Fake = new PieceTypeDef{Id = 1116, Abbreviations = new List<string>{ "K10Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake};
+    public static readonly PieceTypeDef K10Fake = new PieceTypeDef{Id = 1116, Abbreviations = new List<string>{ "K10Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.WorkPlace};
     public static readonly PieceTypeDef K10 = new PieceTypeDef{Id = 1117, Abbreviations = new List<string>{ "K10" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.WorkPlace};
     
     public static readonly PieceTypeDef L1 = new PieceTypeDef{Id = 1200, Abbreviations = new List<string>{ "L1" }, Filter = PieceTypeFilter.Simple};
@@ -164,7 +164,7 @@ public static partial class PieceType
     public static readonly PieceTypeDef L7 = new PieceTypeDef{Id = 1211, Abbreviations = new List<string>{ "L7" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef L8Fake = new PieceTypeDef{Id = 1212, Abbreviations = new List<string>{ "L8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.WorkPlace};
     public static readonly PieceTypeDef L8 = new PieceTypeDef{Id = 1213, Abbreviations = new List<string>{ "L8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.WorkPlace};
-    public static readonly PieceTypeDef L9Fake = new PieceTypeDef{Id = 1214, Abbreviations = new List<string>{ "L9Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake};
+    public static readonly PieceTypeDef L9Fake = new PieceTypeDef{Id = 1214, Abbreviations = new List<string>{ "L9Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.WorkPlace};
     public static readonly PieceTypeDef L9 = new PieceTypeDef{Id = 1215, Abbreviations = new List<string>{ "L9" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.WorkPlace};
     
     public static readonly PieceTypeDef D1 = new PieceTypeDef{Id = 400, Abbreviations = new List<string>{ "D1" }, Filter = PieceTypeFilter.Simple};
