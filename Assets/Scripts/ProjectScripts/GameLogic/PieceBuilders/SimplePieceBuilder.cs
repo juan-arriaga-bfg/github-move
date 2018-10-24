@@ -3,11 +3,11 @@
     public override Piece Build(int pieceType, BoardController context)
     {
         var piece = base.Build(pieceType, context);
-        
-        piece.RegisterComponent(new DraggablePieceComponent());
-        
-        var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType);
 
+        piece.RegisterComponent(pieceType == PieceType.Worker1.Id ? new WorkerDraggablePieceComponent() : new DraggablePieceComponent());
+
+        var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType);
+        
         if (def == null) return piece;
 
         if (def.ReproductionDef?.Reproduction != null)
