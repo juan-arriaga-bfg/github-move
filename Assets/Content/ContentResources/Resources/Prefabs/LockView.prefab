@@ -45,6 +45,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1621667424339048
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4416699312119922}
+  m_Layer: 0
+  m_Name: HintTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1733262110875666
 GameObject:
   m_ObjectHideFlags: 1
@@ -95,6 +110,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4416699312119922
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1621667424339048}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 205, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224038450565839906}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114327550189128394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -130,6 +158,7 @@ MonoBehaviour:
   label: {fileID: 114799497485031272}
   Image: {fileID: 114355985180100058}
   GrayscaleMaterial: {fileID: 2100000, guid: 0d35caa97a534a2489864c71c621025d, type: 2}
+  HintArrowTarget: {fileID: 4416699312119922}
 --- !u!114 &114355985180100058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -342,7 +371,7 @@ RectTransform:
   m_Children:
   - {fileID: 224832773845305330}
   m_Father: {fileID: 224038450565839906}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -359,6 +388,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
+  - {fileID: 4416699312119922}
   - {fileID: 224028145413022148}
   m_Father: {fileID: 4083952304798366}
   m_RootOrder: 0

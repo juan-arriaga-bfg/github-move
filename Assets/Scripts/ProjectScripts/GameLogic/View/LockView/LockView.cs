@@ -6,6 +6,7 @@ public class LockView : UIBoardView
     [SerializeField] private NSText label;
     [SerializeField] private Image Image;
     [SerializeField] private Material GrayscaleMaterial;
+    [SerializeField] private Transform HintArrowTarget;
     
     protected override ViewType Id => ViewType.Lock;
 
@@ -18,6 +19,11 @@ public class LockView : UIBoardView
             this.value = value;
             label.Text = value;
         }
+    }
+
+    public Transform GetHintTarget()
+    {
+        return HintArrowTarget;
     }
     
     public override void Init(Piece piece)

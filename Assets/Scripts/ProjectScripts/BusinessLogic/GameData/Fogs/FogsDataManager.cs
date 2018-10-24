@@ -75,4 +75,64 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         Completed.Add(key);
         FogPositions.Remove(key);
     }
+
+    public BoardPosition? GetFogPositionByUid(string uid)
+    {
+        foreach (var pair in FogPositions)
+        {
+            if (pair.Value.Uid == uid)
+            {              
+                return pair.Value.GetCenter();
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// If there are more than one fog with level x, random one will be selected 
+    /// </summary>
+    public string GetUidOfFirstNotClearedFog()
+    {
+        List<FogDef> defs = new List<FogDef>();
+        foreach (var pair in FogPositions)
+        {
+            if (Completed.Contains(pair.Key))
+            {
+                continue;
+            }
+            
+            defs.Add(pair.Value);
+        }
+
+        if (defs.Count == 0)
+        {
+            Debug.LogError("[FogsDataManager] => GetUidOfFirstNotClearedFog: No defs found!");
+            return null;
+        }
+        
+        defs.Sort((def1, def2) => def1.Level - def2.Level);
+        
+        int firstLevel = defs[0].Level;
+        int lastIndex = -1;
+        
+        for (int i = 1; i < defs.Count; i++)
+        {
+            var def = defs[i];
+            if (def.Level == firstLevel)
+            {
+                lastIndex = i;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        int index = Random.Range(0, lastIndex + 1);
+
+        string ret = defs[index].Uid;
+
+        return ret;
+    }
 }

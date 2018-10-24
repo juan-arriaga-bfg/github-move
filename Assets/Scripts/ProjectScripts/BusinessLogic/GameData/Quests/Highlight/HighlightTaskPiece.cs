@@ -3,21 +3,24 @@ using UnityEngine;
 
 public class HighlightTaskPiece : ITaskHighlight
 {
-    public void Highlight(TaskEntity task)
+    public bool Highlight(TaskEntity task)
     {
         var taskAboutPiece = task as IHavePieceId;
         if (taskAboutPiece == null)
         {
             Debug.LogError($"[HighlightTaskPiece] => Highlight: Can't highlight '{task.GetType()}' because it not implements IHavePieceId");
-            return;
+            return false;
         }
 
         var board = BoardService.Current.FirstBoard;
         
         var targetId = taskAboutPiece.PieceId;
         var piece    = board.BoardLogic.MatchDefinition.GetFirst(targetId);
-        
-        if(piece == PieceType.None.Id) return;
+
+        if (piece == PieceType.None.Id)
+        {
+            return false;
+        }
         
         BoardPosition? position = null;
 
@@ -67,5 +70,7 @@ public class HighlightTaskPiece : ITaskHighlight
             
             board.HintCooldown.Step(position.Value);
         });
+
+        return true;
     }
 }
