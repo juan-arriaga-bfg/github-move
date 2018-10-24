@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class UIOrdersWindowView : UIGenericPopupWindowView
 {
+    [SerializeField] private NSText ingredientsMessage;
+    
     [SerializeField] private NSText ordersLabelOn;
     [SerializeField] private NSText ordersLabelOff;
     
@@ -18,6 +20,8 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
     [SerializeField] private ScrollRect ordersScroll;
     [SerializeField] private ScrollRect recipesScroll;
     [SerializeField] private ScrollRect ingredientsScroll;
+    
+    [SerializeField] private GameObject ingredientsBack;
     
     [SerializeField] private GameObject selectItem;
     [SerializeField] private GameObject patternOrder;
@@ -44,18 +48,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
             recipes.Add(item);
         }
         
-        var dataIngredients = windowModel.Ingredients;
-        
-        foreach (var ingredient in dataIngredients)
-        {
-            var item = Instantiate(patternIngredient, patternIngredient.transform.parent).GetComponent<UISimpleScrollItem>();
-            
-            item.Init(ingredient.Currency, ingredient.Amount.ToString());
-            ingredients.Add(item);
-        }
-        
         patternRecipe.SetActive(false);
-        patternIngredient.SetActive(false);
     }
 
     public override void OnViewShow()
@@ -67,6 +60,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
 
+        ingredientsMessage.Text = windowModel.TngredientsMessage;
         ordersLabelOn.Text = ordersLabelOff.Text = windowModel.OrdersText;
         recipesLabelOn.Text = recipesLabelOff.Text = windowModel.RecipesText;
         ingredientsLabelOn.Text = ingredientsLabelOff.Text = windowModel.IngredientsText;
@@ -84,18 +78,23 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         }
         
         var dataIngredients = windowModel.Ingredients;
-
-        for (var i = 0; i < dataIngredients.Count; i++)
+        
+        foreach (var ingredient in dataIngredients)
         {
-            var ingredient = ingredients[i];
-            var data = dataIngredients[i];
-            ingredient.Init(data.Currency, data.Amount.ToString());
+            var item = Instantiate(patternIngredient, patternIngredient.transform.parent).GetComponent<UISimpleScrollItem>();
+            
+            item.Init(ingredient.Currency, ingredient.Amount.ToString());
+            ingredients.Add(item);
         }
 
         windowModel.Select = null;
+        
         patternOrder.SetActive(false);
+        patternIngredient.SetActive(false);
         
         message.gameObject.SetActive(dataOrders.Count == 0);
+        ingredientsMessage.gameObject.SetActive(dataIngredients.Count == 0);
+        ingredientsBack.SetActive(dataIngredients.Count != 0);
         selectItem.SetActive(dataOrders.Count > 0);
         
         UpdateLists();
@@ -117,9 +116,16 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
             Destroy(item.gameObject);
         }
         
+        foreach (var item in ingredients)
+        {
+            Destroy(item.gameObject);
+        }
+        
         orders = new List<UIOrderItem>();
+        ingredients = new List<UISimpleScrollItem>();
         
         patternOrder.SetActive(true);
+        patternIngredient.SetActive(true);
     }
 
     public void UpdateOrders()

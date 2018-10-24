@@ -5,6 +5,7 @@ public class UIOrdersWindowModel : IWWindowModel
     public string Title => "Orders";
     
     public string Message => "You have no orders at the moment. Come back later.";
+    public string TngredientsMessage => "You have no ingredients at the moment. Come back later.";
     
     public string OrdersText => "Orders";
     public string RecipesText => "Recipes";
@@ -25,6 +26,9 @@ public class UIOrdersWindowModel : IWWindowModel
             {
                 var currency = Currency.GetCurrencyDef(i);
                 var amound = ProfileService.Current.GetStorageItem(currency.Name).Amount;
+                
+                if(amound == 0) continue;
+                
                 currencys.Add(new CurrencyPair{Currency = currency.Name, Amount = amound});
             }
             
