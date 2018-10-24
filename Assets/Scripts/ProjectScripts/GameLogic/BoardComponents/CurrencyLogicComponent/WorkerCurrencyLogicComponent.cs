@@ -121,14 +121,17 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     
     public bool Return(BoardPosition id)
     {
+        Debug.Log($"[WorkerCurrencyLogicComponent] => Return: {id}");
+        
         foreach (var pair in completeTimesList)
-        {
-            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.WorkerUsed, this);
-            
+        {           
             if (pair.Key.Equals(id) == false) continue;
-            
+
             completeTimesList.Remove(pair);
             Add(1);
+            
+            // Should be after if (pair.Key.Equals(id) == false) continue; to avoid event raising for every (even not completed) timers
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.WorkerUsed, this);
             
             return true;
         }
