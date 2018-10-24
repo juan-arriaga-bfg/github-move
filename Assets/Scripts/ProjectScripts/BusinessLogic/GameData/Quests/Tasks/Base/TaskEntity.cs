@@ -105,7 +105,7 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     /// </summary>
     public virtual void Highlight()
     {
-        var attributes = GetType().GetCustomAttributes(typeof(TaskHighlight), true);
+        var attributes = GetType().GetCustomAttributes(typeof(TaskHighlight), inherit: false);
         if (attributes.Length == 0)
         {
             Debug.LogError($"[TaskEntity] => TaskHighlight attribute not found for {GetType()} class.");
