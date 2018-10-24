@@ -86,6 +86,8 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new BoardStatesComponent()
             .RegisterState(new SessionBoardStateComponent(SessionBoardStateType.Processing))
         ); // states
+
+        boardController.RegisterComponent(new QuestConnectorComponent());
         
         boardController.States.AddState(SessionBoardStateComponent.ComponentGuid);
         
