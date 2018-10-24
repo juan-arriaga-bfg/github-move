@@ -132,9 +132,7 @@ public class SandboxGameController : MonoBehaviour
         );
 
         var shift = 12;
-        //var vectorShift = (shift / 2) * boardController.BoardDef.UnitSize;
         var vectorShift = boardController.BoardDef.GetSectorWorldPosition(-shift / 2, -shift / 2, 0);
-        //vectorShift -= new Vector3(boardController.BoardDef.CellWidthInUnit()/2, boardController.BoardDef.CellHeightInUnit()/2);
         boardController.RendererContext.GenerateBackground
         (
             vectorShift,

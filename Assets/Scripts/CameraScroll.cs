@@ -32,13 +32,6 @@ public class CameraScroll : MonoBehaviour
         var resolutionFactor = 1;
         var camera = Camera.main;
 
-        //float leftOffset = 0.03f * 2 + 0.08f;
-        //float topOffset = 0.08f;
-        //float rightOffset = 0.03f*2 + 0.08f;
-        //float bottomOffset = 0.06f ;
-        
-        //var targetZoom = Mathf.Clamp(cameraManipulator.TargetCameraZoom, cameraZoom.ZoomMin, cameraZoom.ZoomMax);
-
         Func<float, float> convertFunc = (vect) =>
             Vector3.Distance(camera.ViewportToWorldPoint(new Vector3(vect, 0, 0)),
                 camera.ViewportToWorldPoint(Vector3.zero));
@@ -47,7 +40,7 @@ public class CameraScroll : MonoBehaviour
         var topResult = convertFunc(topOffset);
         var rightResult = convertFunc(rightOffset);
         var bottomResult =  convertFunc(bottomOffset);
-       //var resultScale = (1 + (targetZoom - cameraZoom.ZoomMin) / (cameraZoom.ZoomMax - cameraZoom.ZoomMin)) * resolutionFactor;
+        
         clamp.size = new Vector2(UnscaledRectSize.x + leftResult + rightResult, UnscaledRectSize.y + bottomResult + topResult);
 
         clamp.position = new Vector2(
@@ -67,8 +60,6 @@ public class CameraScroll : MonoBehaviour
 
     private void LateUpdate()
     {
-//        var point = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-//        Debug.LogError($"{point.x:F}.{point.y:F}.{point.z:F}");
         if (lastCheckedScale != cameraManipulator.TargetCameraZoom)
         {
             ScaleClampRect();
