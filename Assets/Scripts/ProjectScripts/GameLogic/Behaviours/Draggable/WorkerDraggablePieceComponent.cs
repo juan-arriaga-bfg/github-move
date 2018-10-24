@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class WorkerDraggablePieceComponent : DraggablePieceComponent
+﻿public class WorkerDraggablePieceComponent : DraggablePieceComponent
 {
     public override bool IsValidDrag(BoardPosition to)
     {
