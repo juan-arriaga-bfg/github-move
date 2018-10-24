@@ -19,7 +19,8 @@ public enum PieceTypeFilter
     Fake = 1024,
     Enemy = 2048,
     Booster = 4096,
-    WorkPlace = 8192
+    WorkPlace = 8192,
+    Tree = 16384,
 }
 
 public partial class PieceTypeDef
@@ -211,15 +212,15 @@ public static partial class PieceType
     
     public static readonly PieceTypeDef Fog = new PieceTypeDef{Id = 2000, Abbreviations = new List<string>{ "Fog" }, Filter = PieceTypeFilter.Multicellular};
     
-    public static readonly PieceTypeDef O1 = new PieceTypeDef{Id = 2100, Abbreviations = new List<string>{ "O1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace};
-    public static readonly PieceTypeDef O2 = new PieceTypeDef{Id = 2101, Abbreviations = new List<string>{ "O2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace};
-    public static readonly PieceTypeDef O3 = new PieceTypeDef{Id = 2102, Abbreviations = new List<string>{ "O3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace};
-    public static readonly PieceTypeDef O4 = new PieceTypeDef{Id = 2103, Abbreviations = new List<string>{ "O4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace};
-    public static readonly PieceTypeDef O5 = new PieceTypeDef{Id = 2104, Abbreviations = new List<string>{ "O5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace};
-    public static readonly PieceTypeDef O6 = new PieceTypeDef{Id = 2105, Abbreviations = new List<string>{ "O6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace};
-    public static readonly PieceTypeDef O7 = new PieceTypeDef{Id = 2106, Abbreviations = new List<string>{ "O7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace};
-    public static readonly PieceTypeDef O8 = new PieceTypeDef{Id = 2107, Abbreviations = new List<string>{ "O8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace};
-    public static readonly PieceTypeDef O9 = new PieceTypeDef{Id = 2108, Abbreviations = new List<string>{ "O9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace};
+    public static readonly PieceTypeDef O1 = new PieceTypeDef{Id = 2100, Abbreviations = new List<string>{ "O1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef O2 = new PieceTypeDef{Id = 2101, Abbreviations = new List<string>{ "O2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef O3 = new PieceTypeDef{Id = 2102, Abbreviations = new List<string>{ "O3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef O4 = new PieceTypeDef{Id = 2103, Abbreviations = new List<string>{ "O4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef O5 = new PieceTypeDef{Id = 2104, Abbreviations = new List<string>{ "O5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef O6 = new PieceTypeDef{Id = 2105, Abbreviations = new List<string>{ "O6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef O7 = new PieceTypeDef{Id = 2106, Abbreviations = new List<string>{ "O7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef O8 = new PieceTypeDef{Id = 2107, Abbreviations = new List<string>{ "O8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef O9 = new PieceTypeDef{Id = 2108, Abbreviations = new List<string>{ "O9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace | PieceTypeFilter.Tree};
     
     public static readonly PieceTypeDef OX1 = new PieceTypeDef{Id = 2200, Abbreviations = new List<string>{ "OX1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace};
     public static readonly PieceTypeDef OX2 = new PieceTypeDef{Id = 2201, Abbreviations = new List<string>{ "OX2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace};

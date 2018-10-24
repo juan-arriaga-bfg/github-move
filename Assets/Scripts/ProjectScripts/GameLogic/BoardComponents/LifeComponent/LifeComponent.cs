@@ -20,6 +20,11 @@ public class LifeComponent : ECSEntity
     public float GetProgress => 1 - current/(float)HP;
     
     public bool IsDead => current == HP;
+
+    public Piece GetContext()
+    {
+        return thisContext;
+    }
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
