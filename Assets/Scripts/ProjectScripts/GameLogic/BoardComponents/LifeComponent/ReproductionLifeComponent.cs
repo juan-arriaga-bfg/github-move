@@ -38,7 +38,11 @@ public class ReproductionLifeComponent : StorageLifeComponent
     {
         var item = base.InitInSave(position);
 
-        if (item != null && item.IsStart) cooldown.Start(item.StartTime);
+        if (item != null && item.IsStart)
+        {
+            cooldown.Start(item.StartTime);
+            Locker.Unlock(this);
+        }
         
         return item;
     }
