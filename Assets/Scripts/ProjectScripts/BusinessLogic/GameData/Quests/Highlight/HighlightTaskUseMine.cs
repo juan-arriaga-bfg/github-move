@@ -35,19 +35,10 @@ public class HighlightTaskUseMine : TaskHighlightUsingArrow
         }
         
         // Find accessible mine
-        List<BoardPosition> accessibleMinePositions = new List<BoardPosition>();
-        foreach (var pos in minePositions)
+        List<BoardPosition> accessibleMinePositions = HighlightTaskPathHelper.GetAccessiblePositions(minePositions);
+        if (accessibleMinePositions.Count > 0)
         {
-            var piece = boardLogic.GetPieceAt(pos);
-            if (piece != null && board.Pathfinder.CanPathToCastle(piece))
-            {
-                accessibleMinePositions.Add(pos);
-            }
-        }
-
-        if (minePositions.Count == 1)
-        {
-            HintArrowView.Show(minePositions[Random.Range(0, accessibleMinePositions.Count)]);
+            HintArrowView.Show(accessibleMinePositions[Random.Range(0, accessibleMinePositions.Count)]);
             return true;
         }
 

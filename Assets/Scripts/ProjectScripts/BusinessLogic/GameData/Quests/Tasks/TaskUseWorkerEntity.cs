@@ -1,3 +1,5 @@
+[TaskHighlight(typeof(HighlightTaskUseWorker))]
+[TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskUseWorkerEntity : TaskEventCounterEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();

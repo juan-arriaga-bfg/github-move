@@ -36,7 +36,7 @@ public static class HighlightFogHelper
         }
 
         ViewDefinitionComponent viewDef = fogPiece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
-        var                     views   = viewDef.GetViews();
+        var views = viewDef.GetViews();
         if (views == null || views.Count == 0)
         {
             Debug.LogError($"[HighlightTaskClearFog] => fog with id {fogUid} at {pos} have no views!");
