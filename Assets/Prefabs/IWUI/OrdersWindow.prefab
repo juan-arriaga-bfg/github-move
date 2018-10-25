@@ -471,6 +471,7 @@ GameObject:
   - component: {fileID: 224996389147119680}
   - component: {fileID: 222912612507525066}
   - component: {fileID: 114767165646784948}
+  - component: {fileID: 225156766521154930}
   m_Layer: 31
   m_Name: Icon
   m_TagString: Untagged
@@ -1711,6 +1712,7 @@ GameObject:
   - component: {fileID: 224946346697630674}
   - component: {fileID: 222474336030073932}
   - component: {fileID: 114285639540877054}
+  - component: {fileID: 225128232489094756}
   m_Layer: 31
   m_Name: Icon
   m_TagString: Untagged
@@ -1935,6 +1937,7 @@ GameObject:
   - component: {fileID: 224603757909641324}
   - component: {fileID: 222747813915781646}
   - component: {fileID: 114450119172317266}
+  - component: {fileID: 225723831155562048}
   m_Layer: 31
   m_Name: Icon
   m_TagString: Untagged
@@ -3022,6 +3025,7 @@ MonoBehaviour:
   anchor: {fileID: 0}
   label: {fileID: 114760146634597148}
   body: {fileID: 0}
+  canvas: {fileID: 0}
 --- !u!114 &114180532053978582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3166,6 +3170,7 @@ MonoBehaviour:
   anchor: {fileID: 0}
   label: {fileID: 114605016792630262}
   body: {fileID: 0}
+  canvas: {fileID: 0}
 --- !u!114 &114242213624967970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3954,6 +3959,7 @@ MonoBehaviour:
   anchor: {fileID: 0}
   label: {fileID: 114280315463629008}
   body: {fileID: 0}
+  canvas: {fileID: 225156766521154930}
 --- !u!114 &114411855729158704
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5179,6 +5185,7 @@ MonoBehaviour:
   anchor: {fileID: 0}
   label: {fileID: 114987324713705274}
   body: {fileID: 0}
+  canvas: {fileID: 225128232489094756}
 --- !u!114 &114587524117424062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5247,6 +5254,7 @@ MonoBehaviour:
   anchor: {fileID: 224670286386149460}
   label: {fileID: 114432496539309722}
   body: {fileID: 0}
+  canvas: {fileID: 0}
   priceItems:
   - {fileID: 114674308570002354}
   - {fileID: 114581536338520482}
@@ -5686,6 +5694,7 @@ MonoBehaviour:
   anchor: {fileID: 0}
   label: {fileID: 114888617743193686}
   body: {fileID: 224225461202313222}
+  canvas: {fileID: 0}
 --- !u!114 &114635949063500694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5969,6 +5978,7 @@ MonoBehaviour:
   anchor: {fileID: 0}
   label: {fileID: 114084813082219772}
   body: {fileID: 0}
+  canvas: {fileID: 225723831155562048}
 --- !u!114 &114676405038507668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6114,6 +6124,7 @@ MonoBehaviour:
   anchor: {fileID: 0}
   label: {fileID: 114045818903287888}
   body: {fileID: 0}
+  canvas: {fileID: 0}
 --- !u!114 &114713259053700154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6512,6 +6523,7 @@ MonoBehaviour:
   anchor: {fileID: 0}
   label: {fileID: 114345684075120504}
   body: {fileID: 224702688747467630}
+  canvas: {fileID: 0}
   selectItem: {fileID: 114592266500034890}
   indicator: {fileID: 114995541886865808}
 --- !u!114 &114752931725581568
@@ -7374,6 +7386,7 @@ MonoBehaviour:
   anchor: {fileID: 0}
   label: {fileID: 114223515476962118}
   body: {fileID: 224344780736777766}
+  canvas: {fileID: 0}
   lockMaterial: {fileID: 2100000, guid: 663a56ae543401d419dcc60b1ed229ec, type: 2}
   prices: {fileID: 114119775938201856}
 --- !u!114 &114882890530782488
@@ -10592,6 +10605,28 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!225 &225128232489094756
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1932746820203018}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!225 &225156766521154930
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1281665690347360}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!225 &225542192152859632
 CanvasGroup:
   m_ObjectHideFlags: 1
@@ -10602,4 +10637,15 @@ CanvasGroup:
   m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &225723831155562048
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1990586840727192}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0

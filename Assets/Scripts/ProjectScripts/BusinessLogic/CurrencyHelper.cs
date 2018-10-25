@@ -324,6 +324,11 @@ public static class CurrencyHellper
     {
         var types = new List<string>();
         var rewards = new List<string>();
+        
+        foreach (var pair in currencys)
+        {
+            rewards.Add(pair.ToStringIcon(false));
+        }
             
         foreach (var reward in pieces)
         {
@@ -340,15 +345,10 @@ public static class CurrencyHellper
             if(types.Contains(currency)) continue;
                 
             var pair = ResourcePieceToCurrence(pieces, currency);
-                
+            
             if (pair.Amount == 0) pair.Amount = reward.Value;
                 
             types.Add(currency);
-            rewards.Add(pair.ToStringIcon(false));
-        }
-        
-        foreach (var pair in currencys)
-        {
             rewards.Add(pair.ToStringIcon(false));
         }
         

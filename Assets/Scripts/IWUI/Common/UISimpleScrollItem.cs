@@ -9,11 +9,22 @@ public class UISimpleScrollItem : IWUIWindowViewController
     [SerializeField] protected NSText label;
     
     [SerializeField] private Transform body;
+    [SerializeField] private CanvasGroup canvas;
 
     private Transform iconObj;
+
+    public float Alpha
+    {
+        set
+        {
+            if (canvas != null) canvas.alpha = value;
+        }
+    }
     
     public void Init(string id, string text)
     {
+        Alpha = 1;
+        
         if (icon != null)
         {
             icon.sprite = IconService.Current.GetSpriteById(id);

@@ -112,12 +112,14 @@ public class UIOrdersSelectItem : UISimpleScrollItem
             var isExcess = i >= order.Def.Prices.Count;
             
             if(isExcess) continue;
-            
+
+            var item = priceItems[i];
             var price = order.Def.Prices[i];
-            
+
             if (order.State == OrderState.InProgress || order.State == OrderState.Complete)
             {
-                priceItems[i].Init(price.Currency, "");
+                item.Init(price.Currency, "");
+                item.Alpha = 0.7f;
                 continue;
             }
             
@@ -125,7 +127,7 @@ public class UIOrdersSelectItem : UISimpleScrollItem
             
             if (current >= price.Amount)
             {
-                priceItems[i].Init(price.Currency, $"<sprite name={OrderState.Complete}>");
+                item.Init(price.Currency, $"<sprite name={OrderState.Complete}>");
             }
         }
         

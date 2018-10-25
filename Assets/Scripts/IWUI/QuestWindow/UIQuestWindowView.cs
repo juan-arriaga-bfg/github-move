@@ -33,12 +33,12 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         SetMessage(model.Message);
         
         model.InitReward();
-
+        
         descriptionLabel.Text = model.Description;
         rewardLabel.Text = model.RewardText;
         amountLabel.Text = model.AmountText;
         buttonLabel.Text = model.ButtonText;
-
+        
         targetIcon.sprite = model.Icon;
 
         ShowChainIfPossible(model);
