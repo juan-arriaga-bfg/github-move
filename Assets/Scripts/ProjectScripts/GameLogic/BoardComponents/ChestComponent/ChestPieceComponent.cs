@@ -1,23 +1,18 @@
-﻿public class ChestPieceComponent : IECSComponent, IPieceBoardObserver, ITimerComponent
+﻿using System.Collections.Generic;
+using System.Linq;
+
+public class ChestPieceComponent : IECSComponent, IPieceBoardObserver
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
 
     public Chest Chest;
 
-    private TimerComponent timer;
     private Piece contextPiece;
-    private ViewDefinitionComponent viewDef;
     
-    public TimerComponent Timer => timer;
-
     public void OnRegisterEntity(ECSEntity entity)
     {
         contextPiece = entity as Piece;
-        
-        timer = new TimerComponent();
-        contextPiece.RegisterComponent(timer);
-        viewDef = contextPiece.ViewDefinition;
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)
@@ -28,14 +23,15 @@
     {
         if(Chest != null) return;
         
-        Chest = GameDataService.Current.ChestsManager.GetFromBoard(position, contextPiece.PieceType);
+        var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+        var item = save?.GetChestsSave(position);
         
-        timer.Delay = Chest.Def.Time;
-        timer.OnStart += OnStart;
-        timer.OnStop += OnComplete;
-        timer.OnComplete += OnComplete;
-
-        if (Chest.StartTime != null) timer.Start(Chest.StartTime.Value);
+        Chest = GameDataService.Current.ChestsManager.GetChest(contextPiece.PieceType);
+        
+        if(item == null) return;
+        
+        Chest.Reward = item.Reward;
+        Chest.RewardCount = item.RewardAmount;
     }
 
     public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
@@ -49,45 +45,38 @@
 
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
-        timer.OnStart -= OnStart;
-        timer.OnComplete -= OnComplete;
-    }
-
-    private void OnStart()
-    {
-        if(viewDef == null) return;
-        
-        var view = viewDef.AddView(ViewType.BoardTimer);
-        
-        view.Change(true);
-    }
-
-    public void TimerViewChange(bool isShow)
-    {
-        if(viewDef == null || timer.IsStarted == false) return;
-
-        timer.IsPaused = !isShow;
-        
-        var view = viewDef.AddView(ViewType.BoardTimer);
-        
-        view.Change(isShow);
     }
     
-    private void OnComplete()
+    public void Open()
     {
-        if(viewDef == null) return;
+        contextPiece.TouchReaction.Locker.Lock(this);
         
-        var view = viewDef.AddView(ViewType.BoardTimer);
-        
-        view.Change(false);
-        
-        if(Chest.State != ChestState.Open) return;
-        
-        if(GameDataService.Current.ChestsManager.ActiveChest == Chest)
+        var rewardPieces = Chest.GetRewardPieces();
+		
+        contextPiece.Context.ActionExecutor.AddAction(new ChestRewardAction
         {
-            GameDataService.Current.ChestsManager.ActiveChest = null;
-        }
-        
-        contextPiece.Context.HintCooldown.Step(HintType.OpenChest);
+            From = contextPiece.CachedPosition,
+            Pieces = rewardPieces,
+            OnErrorAction = () => { contextPiece.TouchReaction.Locker.Unlock(this); },
+            OnCompleteAction = () =>
+            {
+                var remaind = rewardPieces.Sum(elem => elem.Value);
+				
+                if (remaind == 0)
+                {
+                    contextPiece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+                    {
+                        To = contextPiece.CachedPosition,
+                        Positions = new List<BoardPosition> {contextPiece.CachedPosition}
+                    });
+				    
+                    BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.OpenChest, contextPiece);
+                    return;
+                }
+                
+                contextPiece.ActorView.UpdateView();
+                contextPiece.TouchReaction.Locker.Unlock(this);
+            }
+        });
     }
 }
