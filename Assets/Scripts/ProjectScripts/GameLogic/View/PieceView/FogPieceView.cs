@@ -34,6 +34,9 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 			var fog = Instantiate(fogItem, fogItem.transform.parent);
 			var touch = Instantiate(touchItem, touchItem.transform.parent);
 			var sprite = fog.GetComponent<SpriteRenderer>();
+			
+			sprite.sprite = IconService.Current.GetSpriteById($"Fog{Random.Range(1, 4)}");
+			
 		    fogSprites.Add(sprite);
 		    
 			sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + 101;
