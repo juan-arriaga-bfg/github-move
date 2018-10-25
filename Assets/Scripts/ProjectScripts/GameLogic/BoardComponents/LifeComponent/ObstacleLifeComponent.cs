@@ -89,15 +89,17 @@
         thisContext.Context.HintCooldown.Step(HintType.Obstacle);
 
         base.OnSpawnRewards();
+        
+        if (IsDead)
+        {
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ObstacleKilled, this);
+        }
     }
     
     protected override void OnTimerComplete()
     {
         base.OnTimerComplete();
 
-        if (IsDead)
-        {
-            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ObstacleKilled, this);
-        }
+
     }
 }
