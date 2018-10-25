@@ -113,6 +113,8 @@ public class EmptyCellsFinderComponent : IECSComponent
 
 	public bool CheckFreeSpaceNearPosition(BoardPosition position, int count)
 	{
+		if (count == 0) return true;
+		
 		var free = new List<BoardPosition>();
 		if (!FindRandomNearWithPointInCenter(position, free, count))
 			return false;
