@@ -160,9 +160,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
     private bool CheckLock(Piece target)
     {
-        var reaction = target.GetComponent<PiecePathfindBoardCondition>(PiecePathfindBoardCondition.ComponentGuid);
-
-        if (reaction != null && reaction.Check(target.CachedPosition))
+        if (!target.Context.Pathfinder.CanPathToCastle(target))
         {
             UIErrorWindowController.AddError("Can't make this action!");
             return false;

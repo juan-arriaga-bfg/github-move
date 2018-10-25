@@ -14,11 +14,9 @@
 
         if (target == null) return true;
         
-        var reaction = target.GetComponent<PiecePathfindBoardCondition>(PiecePathfindBoardCondition.ComponentGuid);
-
-        if (reaction != null)
+        if (!target.Context.Pathfinder.CanPathToCastle(target))
         {
-            return !reaction.Check(target.CachedPosition);
+            return false;
         }
         
         var life = target.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
