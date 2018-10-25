@@ -2,6 +2,7 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using UnityEngine;
 
+[TaskHighlight(typeof(HighlightTaskSuperMatch))]
 public class TaskSuperMatchEntity : TaskCounterAboutPiece, IBoardEventListener
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();

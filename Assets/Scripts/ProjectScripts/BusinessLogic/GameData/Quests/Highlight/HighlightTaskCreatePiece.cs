@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HighlightTaskPiece : ITaskHighlight
+public class HighlightTaskCreatePiece : ITaskHighlight
 {
     public bool Highlight(TaskEntity task)
     {
