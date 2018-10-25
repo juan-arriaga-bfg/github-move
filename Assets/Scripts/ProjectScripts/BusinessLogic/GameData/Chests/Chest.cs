@@ -76,7 +76,6 @@ public class Chest
     {
         
         var currentRewardCount = Reward.Values.Sum();
-        Debug.LogError($"{currentRewardCount}/{rewardCount}");
         return currentRewardCount < rewardCount;
     }
     
