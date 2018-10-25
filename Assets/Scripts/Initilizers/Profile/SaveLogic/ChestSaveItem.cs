@@ -51,7 +51,7 @@ public class ChestSaveItemJsonConverter : JsonConverter
         var targetValue = (ChestSaveItem) value;
         
         serializer.TypeNameHandling = TypeNameHandling.None;
-        serializer.Serialize(writer, $"{targetValue.Id},{(int) targetValue.State},{targetValue.StartTime.ConvertToUnixTime()},{targetValue.Position.ToSaveString()},{targetValue.Reward.ToSaveString()}");
+        serializer.Serialize(writer, $"{targetValue.Id},{(int) targetValue.State},{targetValue.StartTime.ConvertToUnixTime()},{targetValue.Position.ToSaveString()}, {targetValue.RewardAmount}, {targetValue.Reward.ToSaveString()},");
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -65,7 +65,8 @@ public class ChestSaveItemJsonConverter : JsonConverter
             State = (ChestState) int.Parse(dataArray[1]),
             StartTime = DateTimeExtension.UnixTimeToDateTime(long.Parse(dataArray[2])),
             Position = new BoardPosition(int.Parse(dataArray[3]), int.Parse(dataArray[4]), int.Parse(dataArray[5])),
-            Reward = DictionaryStringConverter.FromDataArray(dataArray, int.Parse, int.Parse, 6)
+            RewardAmount = int.Parse(dataArray[6]),
+            Reward = DictionaryStringConverter.FromDataArray(dataArray, int.Parse, int.Parse, 7)
         };
         
         return targetValue;
@@ -80,6 +81,7 @@ public class ChestSaveItem
     private ChestState state;
     private DateTime startTime;
     private Dictionary<int, int> reward;
+    private int rewardAmount;
     
     public int Id
     {
@@ -109,5 +111,11 @@ public class ChestSaveItem
     {
         get { return reward; }
         set { reward = value; }
+    }
+
+    public int RewardAmount
+    {
+        get { return rewardAmount; }
+        set { rewardAmount = value; }
     }
 }

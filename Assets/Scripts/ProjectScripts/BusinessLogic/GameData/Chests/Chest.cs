@@ -17,8 +17,9 @@ public class Chest
     private ChestState chestState;
     
     public DateTime? StartTime { get; set; }
-    private DateTime completeTime; 
-    
+    private DateTime completeTime;
+
+    private int rewardCount;
     private Dictionary<int, int> reward = new Dictionary<int, int>();
     
     public Chest(ChestDef def)
@@ -30,6 +31,12 @@ public class Chest
     {
         get { return GetRewardPieces(); }
         set { reward = value; }
+    }
+
+    public int RewardCount
+    {
+        get { return rewardCount; }
+        set { rewardCount = value; }
     }
 
     public ChestDef Def => def;
@@ -67,8 +74,10 @@ public class Chest
 
     public bool CheckStorage()
     {
-        var rewardCount = Reward.Values.Sum();
-        return rewardCount < def.PieceAmount + def.ProductionAmount.Range();
+        
+        var currentRewardCount = Reward.Values.Sum();
+        Debug.LogError($"{currentRewardCount}/{rewardCount}");
+        return currentRewardCount < rewardCount;
     }
     
     public void SetStartTime(DateTime time)
@@ -83,9 +92,12 @@ public class Chest
         
         var hard = GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name);
         var sequence = GameDataService.Current.ChestsManager.GetSequence(def.Uid);
-        
-        reward = hard.GetNextDict(def.ProductionAmount.Range());
+
+        var productionAmount = def.ProductionAmount.Range();
+        reward = hard.GetNextDict(productionAmount);
         reward = sequence.GetNextDict(def.PieceAmount, reward);
+
+        rewardCount = productionAmount + def.PieceAmount;
         
         return reward;
     }

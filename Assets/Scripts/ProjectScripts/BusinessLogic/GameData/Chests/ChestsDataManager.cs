@@ -62,6 +62,7 @@ public class ChestsDataManager : SequenceData, IDataLoader<List<ChestDef>>
                     var chest = GetChest(item.Id);
                     
                     chest.Reward = item.Reward;
+                    chest.RewardCount = item.RewardAmount;
                     ChestsOnBoard.Add(item.Position, chest);
                 }
             }

@@ -253,7 +253,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			
 			if(component == null) continue;
 
-			var item = new ChestSaveItem {Id = piece.PieceType, State = component.Chest.State, Position = position, Reward = component.Chest.Reward};
+			var item = new ChestSaveItem {Id = piece.PieceType, State = component.Chest.State, Position = position, Reward = component.Chest.Reward, RewardAmount = component.Chest.RewardCount};
 			
 			if (component.Chest.State == ChestState.InProgress && component.Chest.StartTime != null) item.StartTime = component.Chest.StartTime.Value;
 			
