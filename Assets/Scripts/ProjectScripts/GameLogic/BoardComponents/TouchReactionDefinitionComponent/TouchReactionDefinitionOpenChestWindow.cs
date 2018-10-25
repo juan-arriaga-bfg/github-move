@@ -52,6 +52,8 @@ public class TouchReactionDefinitionOpenChestWindow : TouchReactionDefinitionCom
 						To = position,
 						Positions = new List<BoardPosition> {position}
 					});
+				    
+				    BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.OpenChest, piece);
 				}
 				else
 				{

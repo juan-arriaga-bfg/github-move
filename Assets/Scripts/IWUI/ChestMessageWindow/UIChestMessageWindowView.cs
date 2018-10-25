@@ -52,8 +52,6 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
 
         if (isOpen)
         {
-            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.OpenChest, model.Chest);
-            
             model.OnOpen?.Invoke();
         }  
         
