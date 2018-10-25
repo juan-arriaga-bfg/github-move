@@ -13,10 +13,13 @@ public class UIQuestWindowView : UIGenericPopupWindowView
     
     [SerializeField] private CodexChain chain;
     [SerializeField] private GameObject codexItemPrefab;
+    [SerializeField] private Transform anchor;
 
     private bool isComplete;
 
     private const int CHAIN_LENGTH = 5;
+
+    private Transform icon;
     
     public override void OnViewShow()
     {
@@ -39,6 +42,9 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         targetIcon.sprite = model.Icon;
 
         ShowChainIfPossible(model);
+        
+        icon = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(PieceType.Char1.Abbreviations[0]));
+        icon.SetParentAndReset(anchor);
     }
 
     public override void OnViewClose()
@@ -53,6 +59,8 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIQuestWindowModel;
         
         windowModel.Quest = null;
+        
+        UIService.Get.PoolContainer.Return(icon.gameObject);
         
         if(isComplete == false) return;
         

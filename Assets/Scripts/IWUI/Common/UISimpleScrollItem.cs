@@ -5,13 +5,30 @@ using UnityEngine.UI;
 public class UISimpleScrollItem : IWUIWindowViewController
 {
     [SerializeField] protected Image icon;
+    [SerializeField] protected Transform anchor;
     [SerializeField] protected NSText label;
     
     [SerializeField] private Transform body;
+
+    private Transform iconObj;
     
     public void Init(string id, string text)
-    {   
-        icon.sprite = IconService.Current.GetSpriteById(id);
+    {
+        if (icon != null)
+        {
+            icon.sprite = IconService.Current.GetSpriteById(id);
+        }
+        else
+        {
+            if (iconObj != null)
+            {
+                UIService.Get.PoolContainer.Return(iconObj.gameObject);
+            }
+            
+            iconObj = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
+            iconObj.SetParentAndReset(anchor);
+        }
+        
         label.Text = text;
     }
     
