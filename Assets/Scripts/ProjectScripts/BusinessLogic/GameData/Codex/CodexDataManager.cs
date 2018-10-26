@@ -108,7 +108,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
 
         OnNewItemUnlocked?.Invoke();
         
-        GameDataService.Current.QuestsManager.CheckConditions();
+        GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
 
         return true;
     }

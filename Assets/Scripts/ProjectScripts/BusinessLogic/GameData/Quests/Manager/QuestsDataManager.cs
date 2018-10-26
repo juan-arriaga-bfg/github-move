@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -232,7 +233,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
     public void ConnectToBoard()
     {          
         // Run new quests if conditions changed 
-        CheckConditions();
+        StartNewQuestsIfAny();
 
         if (ActiveQuests != null)
         {
@@ -261,25 +262,64 @@ public class QuestsDataManager : IECSComponent, IDataManager
     }
     
 #endregion
+
+    public bool StartNewQuestsIfAny()
+    {
+        var questsToStart = CheckConditions();
+        if (questsToStart == null || questsToStart.Count == 0)
+        {
+            return false;
+        }
+
+        var action = new QueueActionComponent {Id = "RunQuest"}
+                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = new HashSet<string> {UIWindowType.MainWindow}})
+                    //.AddCondition(new ElapsedTimeQueueConditionComponent {Delay = 5f})
+                    .SetAction(() =>
+                     {
+                         UIMessageWindowController.CreateMessage("[DEBUG]", $"Run quests: {string.Join(",", questsToStart)}", () =>
+                         {
+                             StartQuests(questsToStart);
+                         });
+                     });
+
+        ProfileService.Current.QueueComponent.AddAction(action, false);
+
+        return true;
+    }
+
+    public void StartQuests(List<string> questIds)
+    {
+        var dataManager = GameDataService.Current.QuestsManager;
+        
+        foreach (var id in questIds)
+        {
+            var quest = dataManager.StartQuestById(id, null);
+            if (ConnectedToBoard)
+            {
+                quest.ConnectToBoard();
+            }
+        }
+    }
     
     /// <summary>
     /// Call this to foreach through Starters and Start new quests if Conditions are met.
     /// Highly expensive! 
     /// </summary>
-    public void CheckConditions()
+    private List<string> CheckConditions()
     {
         if (questStarters == null)
         {
             Debug.LogError($"[QuestsDataManager] => CheckConditions() is called when questStarters list is empty");
-            return;
+            return null;
         }
+
+        List<string> ret = new List<string>();
         
 #if DEBUG
         var sw = new System.Diagnostics.Stopwatch();
         sw.Start();
 #endif        
-        var dataManager = GameDataService.Current.QuestsManager;
-        
+
         for (var i = 0; i < questStarters.Count; i++)
         {
             var starter = questStarters[i];
@@ -288,11 +328,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
 #if DEBUG
                 sw.Stop();
 #endif
-                var quest = dataManager.StartQuestById(starter.QuestToStartId, null);
-                if (ConnectedToBoard)
-                {
-                    quest.ConnectToBoard();
-                }
+                ret.Add(starter.QuestToStartId);
 #if DEBUG
                 sw.Start();
 #endif
@@ -302,6 +338,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
         sw.Stop();
         Debug.Log($"[QuestsDataManager] => CheckConditions() done in {sw.ElapsedMilliseconds}ms");
 #endif
+        return ret;
     }
 
     public QuestEntity GetActiveQuestById(string id)
