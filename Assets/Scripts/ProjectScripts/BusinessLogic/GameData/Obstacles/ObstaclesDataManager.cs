@@ -132,11 +132,4 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
         
         return def.Price;
     }
-
-    public CurrencyPair GetFastPriceByStep(int piece, int step)
-    {
-        var def = GetStep(piece, step);
-        
-        return def.FastPrice;
-    }
 }

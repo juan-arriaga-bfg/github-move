@@ -20,7 +20,6 @@ public class MineLifeComponent : StorageLifeComponent
         else GameDataService.Current.MinesManager.Move(def.Id, key);
         
         storage.Timer.Delay = def.Delay;
-        storage.Timer.Price = def.FastPrice;
         
         HP = def.Size;
         

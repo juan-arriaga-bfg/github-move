@@ -19,7 +19,7 @@
         
         HP = -1;
         
-        cooldown = new TimerComponent{Delay = def.Delay, Price = def.FastPrice};
+        cooldown = new TimerComponent{Delay = def.Delay};
         RegisterComponent(cooldown);
     }
     

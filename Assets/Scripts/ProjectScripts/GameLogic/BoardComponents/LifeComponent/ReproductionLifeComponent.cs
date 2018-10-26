@@ -20,7 +20,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
         def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType).ReproductionDef;
         
         HP = def.Limit;
-        cooldown = new TimerComponent{Delay = def.Delay, Price = def.FastPrice};
+        cooldown = new TimerComponent{Delay = def.Delay};
         RegisterComponent(cooldown);
         
         var child = GameDataService.Current.PiecesManager.GetPieceDef(PieceType.Parse(def.Reproduction.Currency));
