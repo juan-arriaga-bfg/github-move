@@ -64,7 +64,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         
         var def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType + 1);
         
-        Timer = new TimerComponent{Delay = def.MatchConditionsDef.Delay};
+        Timer = new TimerComponent{Delay = def.Delay};
         Timer.OnComplete += OnComplete;
         RegisterComponent(Timer);
     }
