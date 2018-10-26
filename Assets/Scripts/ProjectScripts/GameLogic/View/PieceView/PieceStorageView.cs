@@ -2,10 +2,13 @@
 
 public class PieceStorageView : PieceBoardElementView
 {
-    [SerializeField] private Animator worker;
+    [SerializeField] private GameObject anchorObject;
     
     private StorageComponent storage;
     private PieceSkin skin;
+    private WorkerView worker;
+
+    private WorkerType lastWorkerType = WorkerType.Empty;
 
     public override void Init(BoardRenderer context, Piece piece)
     {
@@ -44,7 +47,30 @@ public class PieceStorageView : PieceBoardElementView
 
     private void UpdateAnimation()
     {
-        worker.ResetTrigger(storage.Timer.IsExecuteable() ? "IsStop" : "IsPlay");
-        worker.SetTrigger(storage.Timer.IsExecuteable() ? "IsPlay" : "IsStop");
+        var currentWorkerType = Piece.Context.WorkerLogic.GetWorkerType(Piece.CachedPosition);
+        if (lastWorkerType == currentWorkerType) return;
+        Debug.LogError($"{Piece.CachedPosition} workType change from {lastWorkerType} to {currentWorkerType}");
+        lastWorkerType = currentWorkerType; 
+        
+        if (worker != null)
+        {
+            worker.WorkAnimation.ResetTrigger(storage.Timer.IsExecuteable() ? "IsStop" : "IsPlay");
+            Context.DestroyElement(worker);
+        }
+
+        if (currentWorkerType == WorkerType.Empty)
+        {
+            worker = null;
+            return;
+        }
+        else
+        {
+            var resourceName = currentWorkerType == WorkerType.Default ? R.DefaultWorker : R.ExtraWorker;
+            worker = Context.CreateBoardElementAt<WorkerView>(resourceName, new BoardPosition(Piece.CachedPosition.X, Piece.CachedPosition.Y, Piece.CachedPosition.Z + 1));
+            worker.CachedTransform.SetParent(anchorObject.transform);
+            worker.CachedTransform.localPosition = Vector3.zero;
+            worker.WorkAnimation.SetTrigger(storage.Timer.IsExecuteable() ? "IsPlay" : "IsStop");    
+        }
+        
     }
 }

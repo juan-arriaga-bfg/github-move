@@ -4,12 +4,22 @@ using System.Text;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public enum WorkerType
+{
+    Default,
+    Extra,
+    Empty
+}
+
 public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
     private List<KeyValuePair<BoardPosition, TimerComponent>> completeTimesList = new List<KeyValuePair<BoardPosition, TimerComponent>>();
+    
+    
+    private Dictionary<BoardPosition, WorkerType> workerTypes = new Dictionary<BoardPosition, WorkerType>();
     
     private BoardController context;
     
@@ -68,6 +78,13 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         }
     }
 
+    public WorkerType GetWorkerType(BoardPosition position)
+    {
+        if (workerTypes.ContainsKey(position))
+            return workerTypes[position];
+        return WorkerType.Empty;
+    }
+
     public bool Get(BoardPosition id, TimerComponent timer)
     {
         if (CurrencyHellper.IsCanPurchase(targetItem.Currency, 1) == false)
@@ -100,6 +117,12 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             
             completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(id, timer));
         });
+
+        if (isSuccess)
+        {
+            workerTypes[id] = WorkerType.Default;
+            Debug.LogError($"WorkerAdd!");
+        }
         
         return isSuccess;
     }
@@ -109,6 +132,10 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         foreach (var pair in completeTimesList)
         {
             if (pair.Key.Equals(oldKey) == false) continue;
+
+            var saveWorkerType = workerTypes[oldKey];
+            workerTypes.Remove(oldKey);
+            workerTypes[newKey] = saveWorkerType;
             
             completeTimesList.Remove(pair);
             completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(newKey, pair.Value));
@@ -121,12 +148,15 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     
     public bool Return(BoardPosition id)
     {
-        Debug.Log($"[WorkerCurrencyLogicComponent] => Return: {id}");
+        Debug.LogError($"[WorkerCurrencyLogicComponent] => Return: {id}");
+        
+        if (workerTypes.ContainsKey(id))
+            workerTypes.Remove(id);
         
         foreach (var pair in completeTimesList)
         {           
             if (pair.Key.Equals(id) == false) continue;
-
+            
             completeTimesList.Remove(pair);
             Add(1);
             
@@ -147,14 +177,19 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         var def = PieceType.GetDefById(target.PieceType);
 
         if (def.Filter.Has(PieceTypeFilter.WorkPlace) == false || !CheckLock(target)) return false;
-        if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target)) return false;
+        
+        workerTypes[targetPosition] = WorkerType.Extra;
+        if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target))
+        {
+            workerTypes[targetPosition] = WorkerType.Empty;
+            return false;
+        }
         
         context.ActionExecutor.AddAction(new CollapsePieceToAction
         {
             To = targetPosition,
             Positions = new List<BoardPosition> {worker.CachedPosition},
         });
-
         return true;
     }
 

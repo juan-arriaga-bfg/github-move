@@ -1,4 +1,6 @@
-﻿public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerComponent, ILockerComponent
+﻿using UnityEngine;
+
+public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerComponent, ILockerComponent
 {
     private LockerComponent locker;
     public LockerComponent Locker => locker ?? GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
@@ -84,6 +86,7 @@
     
     public virtual bool Damage(bool isExtra = false)
     {
+        Debug.LogError($"{(isExtra?"extra":"default")} damage");
         if (IsDead) return false;
         
         var isSuccess = false;
