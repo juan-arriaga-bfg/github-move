@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Xml.Schema;
 using UnityEngine;
 
 public class PathfindLockerComponent : ECSEntity
@@ -26,7 +28,6 @@ public class PathfindLockerComponent : ECSEntity
     
     public virtual bool HasPath(Piece piece)
     {
-        Debug.LogWarning($"{piece.CachedPosition} check path. Block contains: {blockPathPieces.ContainsKey(piece)}, free contains {freePieces.Contains(piece)}");
         return !blockPathPieces.ContainsKey(piece) && freePieces.Contains(piece); 
     }
 
@@ -52,7 +53,6 @@ public class PathfindLockerComponent : ECSEntity
         if (blockPathPieces.ContainsKey(piece))
             return;
 
-        Debug.LogWarning($"PathfindLockExecute {piece.ActorView == null}");
         piece.ActorView?.ToggleLockView(true);
         
         var lockers = GetLockers(piece);
@@ -61,13 +61,22 @@ public class PathfindLockerComponent : ECSEntity
             lockerComponent.Lock(this);
         }
     }
-
+    
     private void UnlockPathfinding(Piece piece)
     {
+        if (piece.PieceType == PieceType.LockedEmpty.Id)
+        {
+            context.ActionExecutor.AddAction(new CollapsePieceToAction()
+            {
+                IsMatch = false,
+                Positions = new List<BoardPosition>() {piece.CachedPosition},
+                To = piece.CachedPosition
+            });    
+        }
+        
         if (freePieces.Contains(piece))
             return;
         
-        Debug.LogWarning($"PathfindUnlockExecute {piece.ActorView == null}");
         piece.ActorView?.ToggleLockView(false);
         
         var lockers = GetLockers(piece);
@@ -117,7 +126,6 @@ public class PathfindLockerComponent : ECSEntity
     
     public virtual void RecalcCacheOnPieceRemoved(HashSet<BoardPosition> target , BoardPosition changedPosition, Piece removedPiece)
     {
-        Debug.LogError($"PathfindLocker execute on cell {removedPiece.CachedPosition}");
         RecalcBlocked(target, removedPiece.CachedPosition);
         
         if (freePieces.Contains(removedPiece))

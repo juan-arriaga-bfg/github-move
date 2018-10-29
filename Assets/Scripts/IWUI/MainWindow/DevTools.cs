@@ -129,11 +129,11 @@ public class DevTools : MonoBehaviour
 
     public void OnDebug1Click()
     {
-        CurrencyHellper.Purchase(Currency.Experience.Name, 500);
+        CurrencyHellper.Purchase(Currency.Experience.Name, 5000);
     }
 
     public void OnDebug2Click()
     {
-
+        CurrencyHellper.Purchase(Currency.Mana.Name, 50000000);
     }
 }

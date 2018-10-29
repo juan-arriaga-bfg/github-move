@@ -167,4 +167,5 @@ public class R
      public const string ObstacleGPiece = "ObstacleGPiece";
      public const string ObstacleHPiece = "ObstacleHPiece";
      public const string pieces_grayscale = "pieces.grayscale";
+     public const string LockedEmpty = "LockedEmpty";
 }

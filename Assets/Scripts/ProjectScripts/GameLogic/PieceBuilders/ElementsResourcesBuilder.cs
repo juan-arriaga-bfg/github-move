@@ -17,6 +17,7 @@ public class ElementsResourcesBuilder
     private Dictionary<int, string> AddPiece(Dictionary<int, string> dict)
     {
         dict.Add(PieceType.Generic.Id, R.GenericPiece);
+        dict.Add(PieceType.LockedEmpty.Id, R.LockedEmpty);
         
         dict.Add(PieceType.Char1.Id, R.Char1Piece);
         dict.Add(PieceType.Char2.Id, R.Char2Piece);

@@ -96,6 +96,9 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                     {
                         pieceId = PieceType.Parse(piece.Key);
                     }
+
+                    if (pieceId == PieceType.Empty.Id || pieceId == PieceType.None.Id)
+                        pieceId = PieceType.LockedEmpty.Id;
                     
                     addedPieces.Add(new BoardPosition(pos.X, pos.Y, thisContext.Layer.Index), pieceId);
                 }
@@ -109,7 +112,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         foreach (var point in Mask)
         {
             var piece = ItemWeight.GetRandomItem(weights).Piece;
-            if(piece == PieceType.Empty.Id) continue;
+            if (piece == PieceType.Empty.Id)
+                piece = PieceType.LockedEmpty.Id;
             var position = new BoardPosition(point.X, point.Y, thisContext.Layer.Index);
             if(addedPieces.ContainsKey(position) == false)
                 addedPieces.Add(position, piece);
