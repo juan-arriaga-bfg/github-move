@@ -47,8 +47,11 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
         foreach (var worker in workers)
         {
-            completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(BoardPosition.Parse(worker), null));
+            var timerElement = new KeyValuePair<BoardPosition, TimerComponent>(BoardPosition.Parse(worker), null);
+            completeTimesList.Add(timerElement);
+            workerTypes.Add(timerElement.Key, WorkerType.Default);
         }
+        
     }
 
     public string Save()
@@ -119,10 +122,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         });
 
         if (isSuccess)
-        {
             workerTypes[id] = WorkerType.Default;
-            Debug.LogError($"WorkerAdd!");
-        }
         
         return isSuccess;
     }
@@ -148,7 +148,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     
     public bool Return(BoardPosition id)
     {
-        Debug.LogError($"[WorkerCurrencyLogicComponent] => Return: {id}");
+        Debug.Log($"[WorkerCurrencyLogicComponent] => Return: {id}");
         
         if (workerTypes.ContainsKey(id))
             workerTypes.Remove(id);

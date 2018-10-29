@@ -86,7 +86,6 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerCo
     
     public virtual bool Damage(bool isExtra = false)
     {
-        Debug.LogError($"{(isExtra?"extra":"default")} damage");
         if (IsDead) return false;
         
         var isSuccess = false;

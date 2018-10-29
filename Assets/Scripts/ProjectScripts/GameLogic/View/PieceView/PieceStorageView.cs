@@ -21,7 +21,7 @@ public class PieceStorageView : PieceBoardElementView
         storage.Timer.OnStart += UpdateAnimation;
         storage.Timer.OnComplete += UpdateAnimation;
         
-        UpdateAnimation();
+        InitAnimation();
         
         skin = gameObject.GetComponent<PieceSkin>();
         
@@ -45,16 +45,29 @@ public class PieceStorageView : PieceBoardElementView
         if(skin != null) storage.Timer.OnComplete -= skin.UpdateView;
     }
 
+    private void InitAnimation()
+    {
+        var currentWorkerType = Piece.Context.WorkerLogic.GetWorkerType(Piece.CachedPosition);
+        if (currentWorkerType == WorkerType.Empty && storage.Timer.IsExecuteable())
+            currentWorkerType = WorkerType.Extra;
+        ChangeAnimationState(currentWorkerType);
+    }
+    
     private void UpdateAnimation()
     {
         var currentWorkerType = Piece.Context.WorkerLogic.GetWorkerType(Piece.CachedPosition);
+        ChangeAnimationState(currentWorkerType);
+    }
+
+    private void ChangeAnimationState(WorkerType currentWorkerType)
+    {
         if (lastWorkerType == currentWorkerType) return;
-        Debug.LogError($"{Piece.CachedPosition} workType change from {lastWorkerType} to {currentWorkerType}");
+        
         lastWorkerType = currentWorkerType; 
         
         if (worker != null)
         {
-            worker.WorkAnimation.ResetTrigger(storage.Timer.IsExecuteable() ? "IsStop" : "IsPlay");
+            worker.WorkAnimation.ResetTrigger("IsPlay");
             Context.DestroyElement(worker);
         }
 
@@ -69,8 +82,7 @@ public class PieceStorageView : PieceBoardElementView
             worker = Context.CreateBoardElementAt<WorkerView>(resourceName, new BoardPosition(Piece.CachedPosition.X, Piece.CachedPosition.Y, Piece.CachedPosition.Z + 1));
             worker.CachedTransform.SetParent(anchorObject.transform);
             worker.CachedTransform.localPosition = Vector3.zero;
-            worker.WorkAnimation.SetTrigger(storage.Timer.IsExecuteable() ? "IsPlay" : "IsStop");    
+            worker.WorkAnimation.SetTrigger("IsPlay");    
         }
-        
     }
 }
