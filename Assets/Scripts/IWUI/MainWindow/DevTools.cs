@@ -120,6 +120,7 @@ public class DevTools : MonoBehaviour
     public void OnDebug1Click()
     {
         Debug.Log("OnDebug1Click");
+        BoardService.Current.FirstBoard.BoardLogic.FireflyLogic.Execute();
     }
 
     public void OnDebug2Click()

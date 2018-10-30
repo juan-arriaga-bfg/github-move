@@ -41,7 +41,6 @@ public class R
      public const string Coin3Piece = "Coin3Piece";
      public const string Coin4Piece = "Coin4Piece";
      public const string Coin5Piece = "Coin5Piece";
-     public const string ResourceView = "ResourceView";
      public const string DebugCell = "DebugCell";
      public const string ChangeObstacleStateView = "ChangeObstacleStateView";
      public const string BorderDark = "BorderDark";
@@ -167,4 +166,5 @@ public class R
      public const string ObstacleGPiece = "ObstacleGPiece";
      public const string ObstacleHPiece = "ObstacleHPiece";
      public const string Coin6Piece = "Coin6Piece";
+     public const string Firefly = "Firefly";
 }

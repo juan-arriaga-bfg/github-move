@@ -18,13 +18,13 @@ public class EmptyCellsFinderComponent : IECSComponent
 	{
 	}
 	
-	public bool FindRandomNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, float extraSpacePrecent = 0)
+	public bool FindRandomNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int amount, float extraSpacePrecent = 0)
 	{
 		var index = 0;
 		extraSpacePrecent = Mathf.Clamp(extraSpacePrecent, 0, float.MaxValue);
 		var extra = 1 + extraSpacePrecent;
 
-		while (field.Count < count * extra && index < 10)
+		while (field.Count < amount * extra && index < 10)
 		{
 			index++;
 			FindRingWithPointInCenter(point, field, (index * 2) * 4, index);
@@ -37,9 +37,9 @@ public class EmptyCellsFinderComponent : IECSComponent
 
 		field.Shuffle();
 		
-		if (field.Count > count)
+		if (field.Count > amount)
 		{
-			field.RemoveRange(count, field.Count - count);
+			field.RemoveRange(amount, field.Count - amount);
 		}
 
 		return field.Count != 0;
@@ -49,6 +49,15 @@ public class EmptyCellsFinderComponent : IECSComponent
 	{
 		var field = new List<BoardPosition>();
 		return FindNearWithPointInCenter(point, field, 1, radius);
+	}
+	
+	public List<BoardPosition> FindNearWithPointInCenter(BoardPosition point, int amount, int radius = 3)
+	{
+		var result = new List<BoardPosition>();
+		
+		FindNearWithPointInCenter(point, result, amount, radius);
+		
+		return result;
 	}
 	
 	public bool FindNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, int radius = 3)
