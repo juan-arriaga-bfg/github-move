@@ -53,7 +53,14 @@ public class PathfindLockerComponent : ECSEntity
         if (blockPathPieces.ContainsKey(piece))
             return;
 
-        piece.ActorView?.ToggleLockView(true);
+        try
+        {
+            piece.ActorView?.ToggleLockView(true);
+        }
+        catch (Exception e)
+        {
+        }
+
         
         var lockers = GetLockers(piece);
         foreach (var lockerComponent in lockers)
@@ -61,23 +68,45 @@ public class PathfindLockerComponent : ECSEntity
             lockerComponent.Lock(this);
         }
     }
-    
+
+    private Stack<Piece> unlockedEmptyPieces = new Stack<Piece>();
+
+    public void CheckLockedEmptyCells()
+    {
+        var collapseEmptyPieces = new List<BoardPosition>();
+        while (unlockedEmptyPieces.Count > 0)
+        {
+            var emptyPiece = unlockedEmptyPieces.Pop();
+            if(HasPath(emptyPiece))
+                collapseEmptyPieces.Add(emptyPiece.CachedPosition);
+        }
+
+        context.BoardLogic.RemovePiecesAt(collapseEmptyPieces);
+        foreach (var position in collapseEmptyPieces)
+        {
+            context.RendererContext.RemoveElementAt(position);
+        }
+    }
+
     private void UnlockPathfinding(Piece piece)
     {
-        if (piece.PieceType == PieceType.LockedEmpty.Id)
+        if (piece.PieceType == PieceType.LockedEmpty.Id && unlockedEmptyPieces.Contains(piece) == false)
         {
-            context.ActionExecutor.AddAction(new CollapsePieceToAction()
-            {
-                IsMatch = false,
-                Positions = new List<BoardPosition>() {piece.CachedPosition},
-                To = piece.CachedPosition
-            });    
+            unlockedEmptyPieces.Push(piece);
         }
         
         if (freePieces.Contains(piece))
             return;
+
+        try
+        {
+            piece.ActorView?.ToggleLockView(false);
+        }
+        catch (Exception e)
+        {
+        }
         
-        piece.ActorView?.ToggleLockView(false);
+
         
         var lockers = GetLockers(piece);
         foreach (var lockerComponent in lockers)
@@ -132,6 +161,9 @@ public class PathfindLockerComponent : ECSEntity
             freePieces.Remove(removedPiece);
         if (blockPathPieces.ContainsKey(removedPiece))
             blockPathPieces.Remove(removedPiece);
+
+        var board = context;
+        board.PathfindLocker.CheckLockedEmptyCells();
     }
 
     public virtual void RecalcCacheOnPieceMoved(HashSet<BoardPosition> target, BoardPosition fromPosition, BoardPosition to, Piece piece,
@@ -154,23 +186,26 @@ public class PathfindLockerComponent : ECSEntity
 
     }
 
-    private void RecalcBlocked(HashSet<BoardPosition> target, BoardPosition changedPosition)
+    private void RecalcBlocked(HashSet<BoardPosition> target, BoardPosition changedPosition, bool includeChangedPosition = true)
     {
         var changedPositions = new List<BoardPosition>();
         var sourcePiece = context.BoardLogic.GetPieceAt(changedPosition);
-        
-        if (sourcePiece?.Multicellular == null)
-            changedPositions.Add(changedPosition);
-        else
-            foreach (var maskItem in sourcePiece.Multicellular.Mask)
-                changedPositions.Add(sourcePiece.Multicellular.GetPointInMask(sourcePiece.CachedPosition, maskItem));
+
+        if (includeChangedPosition)
+        {
+            if (sourcePiece?.Multicellular == null)
+                changedPositions.Add(changedPosition);
+            else
+                foreach (var maskItem in sourcePiece.Multicellular.Mask)
+                    changedPositions.Add(sourcePiece.Multicellular.GetPointInMask(sourcePiece.CachedPosition, maskItem));    
+        }
 
         foreach (var piece in blockPathPieces.Keys.ToList())
         {
             var blockers = blockPathPieces[piece];
             if (!blockers.Any(elem => changedPositions.Contains(elem)))
                 continue;
-
+            
             RecalcFor(piece, target, new List<BoardPosition>(target) {changedPosition});
         }
     }

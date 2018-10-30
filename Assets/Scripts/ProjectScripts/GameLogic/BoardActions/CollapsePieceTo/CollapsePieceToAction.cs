@@ -20,10 +20,22 @@ public class CollapsePieceToAction : IBoardAction
 	public bool PerformAction(BoardController gameBoardController)
 	{
 		if (Positions == null || Positions.Count == 0) return false;
+
+		var obstaclesPieces = new List<Piece>();
+
+		foreach (var pos in Positions)
+		{
+			var piece = gameBoardController.BoardLogic.GetPieceAt(pos);
+			if (((int)PieceType.GetDefById(piece.PieceType).Filter & (int)PieceTypeFilter.Obstacle) != 0)
+			{
+				obstaclesPieces.Add(piece);
+				Debug.LogError($"Obstacle on {pos}");
+			}
+				
+		}
 		
-		gameBoardController.BoardLogic.LockCells(Positions, this);
 		gameBoardController.BoardLogic.RemovePiecesAt(Positions);
-		
+		gameBoardController.BoardLogic.LockCells(Positions, this);
 		BoardAnimation animation;
 		
 		if (IsMatch)
@@ -43,6 +55,11 @@ public class CollapsePieceToAction : IBoardAction
 		
 		animation.OnCompleteEvent += (_) =>
 		{
+			foreach (var obstaclesPiece in obstaclesPieces)
+			{
+				obstaclesPiece.PathfindLockObserver.RemoveRecalculate(obstaclesPiece.CachedPosition);
+			}
+			
 			gameBoardController.BoardLogic.UnlockCells(Positions, this);
 			if (OnCompleteAction != null) gameBoardController.ActionExecutor.AddAction(OnCompleteAction);
 			OnComplete?.Invoke();

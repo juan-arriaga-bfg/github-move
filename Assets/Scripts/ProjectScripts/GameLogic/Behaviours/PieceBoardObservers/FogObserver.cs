@@ -124,6 +124,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             Pieces = addedPieces,
             OnSuccessEvent = () =>
             {
+                var board = thisContext.Context;
+                thisContext.PathfindLockObserver.AutoLock = false;
+                thisContext.PathfindLockObserver.RemoveRecalculate(thisContext.CachedPosition);
+                board.PathfindLocker.CheckLockedEmptyCells();
+                
                 var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
 
                 if (views == null) return;
@@ -135,6 +140,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             }
         });
 
+        
     }
 
     public void RegisterCarrier(IResourceCarrier carrier)

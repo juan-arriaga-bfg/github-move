@@ -17,5 +17,6 @@
         var board = BoardService.Current.GetBoardById(0);
         var piece = board.BoardLogic.GetPieceAt(position);
         board.AreaAccessController?.LocalRecalculate(context.CachedPosition);
+        
     }
 }

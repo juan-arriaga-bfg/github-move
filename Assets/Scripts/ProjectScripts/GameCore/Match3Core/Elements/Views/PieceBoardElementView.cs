@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -140,13 +141,13 @@ public class PieceBoardElementView : BoardElementView
         if (reactionLockMaterial == null || isLockVisual == enabled)
             return;
         
-        if (cachedRenderers == null || cachedRenderers.size <= 0)
+        if (cachedRenderers == null || cachedRenderers.size == 0)
             CacheLayers();
-        
+
         foreach (var rend in cachedRenderers)
         {
             if (rend?.CachedRenderer?.sharedMaterial == null) continue;
-            
+
             if (enabled)
             {
                 rend.CacheDefaultMaterial();
@@ -159,6 +160,8 @@ public class PieceBoardElementView : BoardElementView
         }
 
         isLockVisual = enabled;
+
+        
     }
     
     public virtual void ToggleHighlight(bool enabled)
