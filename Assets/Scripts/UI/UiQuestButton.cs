@@ -1,12 +1,15 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Quests;
+using UnityEngine;
 
 public class UiQuestButton : UIGenericResourcePanelViewController
 {
     [SerializeField] private GameObject shine;
     
-    private QuestEntity quest;
+    public QuestEntity Quest { get; private set; }
     private bool isUp;
-
+    private bool interactive;
+    
     public override int CurrentValueAnimated
     {
         set
@@ -16,19 +19,26 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         }
     }
 
-    public void Init(QuestEntity quest)
+    private TaskEntity GetFirstTask()
     {
-        if (this.quest != null)
+        return interactive ? Quest.ActiveTasks[0] : Quest.Tasks[0];
+    }
+    
+    public void Init(QuestEntity quest, bool interactive)
+    {
+        this.interactive = interactive;
+        
+        if (this.Quest != null)
         {
             ResourcesViewManager.Instance.UnRegisterView(this);
-            this.quest.OnChanged -= OnQuestChanged;
+            this.Quest.OnChanged -= OnQuestChanged;
             // Debug.Log($"AAAAA FIX UNSUBSCRIBE: {quest.Id}");
         }
         
-        this.quest = quest;
+        this.Quest = quest;
 
         isUp = false;
-        var taskAboutPiece = quest.ActiveTasks[0] as IHavePieceId;
+        var taskAboutPiece = GetFirstTask() as IHavePieceId;
         if (taskAboutPiece != null)
         {
             int pieceId = taskAboutPiece.PieceId;
@@ -37,8 +47,11 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         }
         
         // Debug.Log($"AAAAA SUBSCRIBE: {quest.Id}");
-        
-        quest.OnChanged += OnQuestChanged;
+
+        if (interactive)
+        {
+            quest.OnChanged += OnQuestChanged;
+        }
         
         ResourcesViewManager.Instance.RegisterView(this);
         UpdateView();
@@ -46,6 +59,11 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     private void OnQuestChanged(QuestEntity quest, TaskEntity task)
     {
+        if (quest.Id != Quest.Id)
+        {
+            return;
+        }
+        
         UpdateView();
     }
 
@@ -55,19 +73,19 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     private void OnDestroy()
     {
-        if (quest != null)
+        if (Quest != null)
         {
             // Debug.Log($"AAAAA UNSUBSCRIBE: {quest.Id}");
-            quest.OnChanged -= OnQuestChanged;
+            Quest.OnChanged -= OnQuestChanged;
         }
         ResourcesViewManager.Instance.UnRegisterView(this);
     }
 
     public override void UpdateView()
     {
-        if(quest == null) return;
+        if(Quest == null) return;
         
-        int value = (quest.ActiveTasks[0] as TaskCounterEntity).TargetValue;
+        int value = (GetFirstTask() as TaskCounterEntity).TargetValue;
 
         currentValueAnimated = value;
         currentValue = value;
@@ -77,14 +95,14 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     public static Sprite GetIcon(QuestEntity quest)
     {
-        QuestDescriptionComponent cmp = quest.ActiveTasks[0].GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid);
+        QuestDescriptionComponent cmp = quest.Tasks[0].GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid);
 
         if (cmp?.Ico != null)
         {
             return IconService.Current.GetSpriteById(cmp.Ico);
         }
         
-        IHavePieceId taskAboutPiece = quest.ActiveTasks[0] as IHavePieceId;
+        IHavePieceId taskAboutPiece = quest.Tasks[0] as IHavePieceId;
         if (taskAboutPiece != null && taskAboutPiece.PieceId != PieceType.None.Id)
         {
             return IconService.Current.GetSpriteById(PieceType.GetDefById(taskAboutPiece.PieceId).Abbreviations[0]); 
@@ -95,33 +113,71 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     
     private void SetLabelValue(int value)
     {
-        if(quest == null) return;
+        if(Quest == null) return;
 
         // Debug.Log($"AAAAA UPDATE: {quest.Id}");
         
-        icon.sprite = GetIcon(quest);
+        icon.sprite = GetIcon(Quest);
 
-        var isComplete = quest.IsCompleted();
+        var isComplete = Quest.IsCompleted();
 
-        if (isComplete && isUp == false)
+        if (isComplete && isUp == false && interactive)
         {
             isUp = true;
             transform.SetSiblingIndex(0);
-            OnClick();
+
+            if (Quest.State == TaskState.Completed)
+            {
+                AddQuestWindowToQueue();
+            }
         }
 
-        int targetValue = (quest.ActiveTasks[0] as TaskCounterEntity).TargetValue;
-        int curValue = (quest.ActiveTasks[0] as TaskCounterEntity).CurrentValue;
-        
-        amountLabel.Text = $"<color=#{(isComplete ? "FFFFFF" : "FE4704")}><size=33>{Mathf.Min(value, curValue)}</size></color>/{targetValue}";
-        shine.SetActive(isComplete);
+        int targetValue = (GetFirstTask() as TaskCounterEntity).TargetValue;
+        if (interactive)
+        {
+            int curValue = (GetFirstTask() as TaskCounterEntity).CurrentValue; 
+            amountLabel.Text = $"<color=#{(isComplete ? "FFFFFF" : "FE4704")}><size=33>{Mathf.Min(value, curValue)}</size></color>/{targetValue}";
+        }
+        else
+        {
+            amountLabel.Text = $"x{targetValue}";
+        }
+
+        shine.SetActive(isComplete || !interactive);
     }
     
     public void OnClick()
     {
+        if (!interactive)
+        {
+            return;
+        }
+        
+        ShowQuestWindow();
+    }
+
+    private void AddQuestWindowToQueue()
+    {
+        Debug.Log("!!! CompleteQuest: AddQuestWindowToQueue: " + Quest.Id);
+        
+        var action = new QueueActionComponent()
+                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = new HashSet<string> {UIWindowType.MainWindow}})
+                    .AddCondition(new NoQueuedActionsConditionComponent {ActionIds = new List<string> {"StartNewQuestsIfAny"}})
+                    .SetAction(() =>
+                     {
+                         ShowQuestWindow();
+                     });
+
+        ProfileService.Current.QueueComponent.AddAction(action, false);
+    }
+    
+    private void ShowQuestWindow()
+    {
         var model = UIService.Get.GetCachedModel<UIQuestWindowModel>(UIWindowType.QuestWindow);
         
-        model.Quest = quest;
+        model.Quest = Quest;
+        
+        Debug.Log("!!! CompleteQuest: ShowQuestWindow: " + Quest.Id);
         
         UIService.Get.ShowWindow(UIWindowType.QuestWindow);
         

@@ -27,4 +27,6 @@
     public const string ExchangeWindow = "ExchangeWindow";
     
     public const string OrdersWindow = "OrdersWindow";
+    
+    public const string QuestStartWindow = "QuestStartWindow";
 }

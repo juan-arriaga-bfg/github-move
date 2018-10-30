@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters;
+using DG.Tweening;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
@@ -265,24 +266,30 @@ public class QuestsDataManager : IECSComponent, IDataManager
 
     public bool StartNewQuestsIfAny()
     {
-        var questsToStart = CheckConditions();
-        if (questsToStart == null || questsToStart.Count == 0)
-        {
-            return false;
-        }
-
-        var action = new QueueActionComponent {Id = "RunQuest"}
+        const string ACTION_ID = "StartNewQuestsIfAny";
+        
+        Debug.Log($"[QuestsDataManager] => StartNewQuestsIfAny Schedule");
+        
+        var action = new QueueActionComponent {Id = ACTION_ID}
                     .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = new HashSet<string> {UIWindowType.MainWindow}})
-                    //.AddCondition(new ElapsedTimeQueueConditionComponent {Delay = 5f})
                     .SetAction(() =>
                      {
-                         UIMessageWindowController.CreateMessage("[DEBUG]", $"Run quests: {string.Join(",", questsToStart)}", () =>
+                         var questsToStart = CheckConditions();
+                         if (questsToStart.Count == 0)
                          {
-                             StartQuests(questsToStart);
-                         });
+                             Debug.Log($"[QuestsDataManager] => CheckConditions == 0, return");
+                             return;
+                         }
+
+                         Debug.Log($"[QuestsDataManager] => StartNewQuestsIfAny before dlg");
+                         
+                         var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
+                         model.SetQuests(questsToStart);
+        
+                         UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
                      });
 
-        ProfileService.Current.QueueComponent.AddAction(action, false);
+        ProfileService.Current.QueueComponent.AddAction(action, true);
 
         return true;
     }
@@ -293,7 +300,14 @@ public class QuestsDataManager : IECSComponent, IDataManager
         
         foreach (var id in questIds)
         {
-            var quest = dataManager.StartQuestById(id, null);
+            QuestEntity quest = GetActiveQuestById(id);
+            if (quest != null)
+            {
+                // Quest already started
+                continue;
+            }
+            
+            quest = dataManager.StartQuestById(id, null);
             if (ConnectedToBoard)
             {
                 quest.ConnectToBoard();
@@ -357,7 +371,15 @@ public class QuestsDataManager : IECSComponent, IDataManager
 
     private QuestEntity StartQuestById(string id, JToken saveData)
     {
-        QuestEntity quest = InstantiateQuest(id);
+        QuestEntity quest = GetActiveQuestById(id);
+        
+        if (quest != null)
+        {
+            Debug.LogError($"[QuestsDataManager] => StartQuestById({id}): quest already started");
+            return null;
+        }
+        
+        quest = InstantiateQuest(id);
         ActiveQuests.Add(quest);
 
         quest.Start(saveData);
@@ -373,6 +395,8 @@ public class QuestsDataManager : IECSComponent, IDataManager
     /// <param name="id"></param>
     public void CompleteQuest(string id)
     {
+        Debug.Log("!!! CompleteQuest: " + id);
+        
         for (var i = 0; i < ActiveQuests.Count; i++)
         {
             var quest = ActiveQuests[i];
@@ -384,7 +408,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
                 
                 OnActiveQuestsListChanged?.Invoke();
                 
-                CheckConditions();
+                StartNewQuestsIfAny();
                 return;
             }
         }
