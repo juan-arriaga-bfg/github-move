@@ -5,7 +5,7 @@
 
 	public int PieceId;
 	public BoardPosition At;
-	public BoardElementView View;
+	public FireflyView View;
 	
 	public bool PerformAction(BoardController gameBoardController)
 	{

@@ -4,6 +4,7 @@ using UnityEngine;
 public class FireflyView : BoardElementView
 {
     [SerializeField] private Transform body;
+    public ParticleSystem Plume;
     
     private Vector2 bottom;
     private Vector2 right;
@@ -43,6 +44,8 @@ public class FireflyView : BoardElementView
         to = Cross(from, temp);
         CachedTransform.position = from;
         Move();
+        
+        Plume.gameObject.SetActive(false);
     }
     
     public override void OnFastInstantiate()
@@ -53,6 +56,11 @@ public class FireflyView : BoardElementView
     {
         Context.Context.BoardLogic.FireflyLogic.Remove();
         CachedTransform.localScale = Vector3.one;
+        
+        Plume.gameObject.SetActive(false);
+        
+        var temp = Plume.main;
+        temp.loop = true;
     }
 
     public void OnDragStart()
@@ -97,6 +105,7 @@ public class FireflyView : BoardElementView
             return;
         }
         
+        Plume.gameObject.SetActive(true);
         Context.Context.ActionExecutor.AddAction(new FireflyPieceSpawnAction
         {
             PieceId = GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name).GetNext().Piece,
