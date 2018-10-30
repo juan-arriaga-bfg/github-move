@@ -51,7 +51,7 @@ public class FireflyLogicComponent : IECSComponent, IECSSystem
 		return null;
 	}
 
-	public bool ChecK(BoardElementView view)
+	public bool Check(BoardElementView view)
 	{
 		var firefly = view as FireflyView;
 

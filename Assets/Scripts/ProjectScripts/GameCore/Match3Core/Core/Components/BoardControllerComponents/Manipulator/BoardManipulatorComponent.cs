@@ -169,7 +169,7 @@ public class BoardManipulatorComponent : ECSEntity,
 
         var targetPos = new Vector3(pos.x, pos.y, cachedViewForDrag.CachedTransform.position.z);
 
-        if (context.BoardLogic.FireflyLogic.ChecK(cachedViewForDrag))
+        if (context.BoardLogic.FireflyLogic.Check(cachedViewForDrag))
         {
             cachedViewForDrag.CachedTransform.localPosition = pos;
             return true;
@@ -321,7 +321,7 @@ public class BoardManipulatorComponent : ECSEntity,
                 coef = position.X * context.BoardDef.Width - position.Y + position.Z;
             }
 
-            if (context.BoardLogic.FireflyLogic.ChecK(touchableObject as BoardElementView))
+            if (context.BoardLogic.FireflyLogic.Check(touchableObject as BoardElementView))
             {
                 coef = int.MaxValue;
             }

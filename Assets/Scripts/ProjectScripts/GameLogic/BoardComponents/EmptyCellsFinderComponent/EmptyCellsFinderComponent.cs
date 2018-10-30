@@ -17,15 +17,6 @@ public class EmptyCellsFinderComponent : IECSComponent
 	public void OnUnRegisterEntity(ECSEntity entity)
 	{
 	}
-
-	public List<BoardPosition> FindRandomNearWithPointInCenter(BoardPosition point, int amount)
-	{
-		var result = new List<BoardPosition>();
-
-		FindRandomNearWithPointInCenter(point, result, amount);
-		
-		return result;
-	}
 	
 	public bool FindRandomNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int amount, float extraSpacePrecent = 0)
 	{
@@ -58,6 +49,15 @@ public class EmptyCellsFinderComponent : IECSComponent
 	{
 		var field = new List<BoardPosition>();
 		return FindNearWithPointInCenter(point, field, 1, radius);
+	}
+	
+	public List<BoardPosition> FindNearWithPointInCenter(BoardPosition point, int amount, int radius = 3)
+	{
+		var result = new List<BoardPosition>();
+		
+		FindNearWithPointInCenter(point, result, amount, radius);
+		
+		return result;
 	}
 	
 	public bool FindNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, int radius = 3)
