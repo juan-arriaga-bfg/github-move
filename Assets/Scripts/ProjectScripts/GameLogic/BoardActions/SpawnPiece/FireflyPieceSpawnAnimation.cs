@@ -15,8 +15,9 @@ public class FireflyPieceSpawnAnimation : BoardAnimation
 		var sequence = DOTween.Sequence().SetId(animationUid);
 		var particlePosition = new BoardPosition(Action.At.X, Action.At.Y, 2);
 		
-		sequence.Insert(0f, Action.View.CachedTransform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack));
+		sequence.Insert(0f, Action.View.CachedTransform.DOScale(Vector3.one * 0.5f, 0.3f));
 		sequence.Insert(0f, Action.View.CachedTransform.DOMove(boardElement.CachedTransform.position, 0.3f));
+		sequence.Insert(0.3f, Action.View.CachedTransform.DOScale(Vector3.zero, 0.3f));
 		
 		sequence.InsertCallback(0.25f, () => ParticleView.Show(R.SmolderingParticles, particlePosition));
 		sequence.InsertCallback(0.25f, () => ParticleView.Show(R.MergeParticleSystem, particlePosition).SyncRendererLayers(new BoardPosition(Action.At.X, Action.At.Y, 4)));

@@ -55,7 +55,7 @@ public class FireflyView : BoardElementView
     
     public override void OnFastDestroy()
     {
-//        Debug.LogError("!!!!!!!!!! OnFastDestroy");
+        CachedTransform.localScale = Vector3.one;
     }
 
     public void OnDragStart()

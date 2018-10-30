@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class FireflyPieceSpawnAction : IBoardAction
+﻿public class FireflyPieceSpawnAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public virtual int Guid => ComponentGuid;
@@ -17,7 +15,6 @@ public class FireflyPieceSpawnAction : IBoardAction
 
 		if (gameBoardController.BoardLogic.AddPieceToBoard(At.X, At.Y, piece) == false)
 		{
-			Debug.LogError("!!!!!!!!!! " + At);
 			return false;
 		}
 		
