@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class FireflyLogicComponent : IECSComponent, IECSSystem
@@ -10,13 +8,18 @@ public class FireflyLogicComponent : IECSComponent, IECSSystem
 
 	private BoardLogicComponent context;
 
+	private int amount;
+	private int index = 1;
 	private int delay = 1;
+	
 	private DateTime startTime;
+
+	private bool isClick;
 	
 	public void OnRegisterEntity(ECSEntity entity)
 	{
 		context = entity as BoardLogicComponent;
-		startTime = DateTime.UtcNow;
+		OnMatch();
 	}
 
 	public void OnUnRegisterEntity(ECSEntity entity)
@@ -25,16 +28,21 @@ public class FireflyLogicComponent : IECSComponent, IECSSystem
 	
 	public void Execute()
 	{
-		var firefly = context.Context.RendererContext.CreateBoardElement<FireflyView>((int) ViewType.Firefly);
+		amount = Random.Range(GameDataService.Current.ConstantsManager.MinAmountFirefly, GameDataService.Current.ConstantsManager.MaxAmountFirefly + 1);
 		
-		firefly.GetComponent<FireflyView>().Init(context.Context.RendererContext);
+		for (var i = 0; i < amount; i++)
+		{
+			var firefly = context.Context.RendererContext.CreateBoardElement<FireflyView>((int) ViewType.Firefly);
+			firefly.GetComponent<FireflyView>().Init(context.Context.RendererContext);
+		}
 	}
-
+	
 	public bool IsExecuteable()
 	{
-		if(startTime.GetTime().TotalSeconds < delay) return false;
+		if(amount > 0 || startTime.GetTime().TotalSeconds < delay) return false;
 		
-		startTime = DateTime.UtcNow;
+		isClick = false;
+		OnMatch();
 		return true;
 	}
 	
@@ -72,11 +80,33 @@ public class FireflyLogicComponent : IECSComponent, IECSSystem
 
 	public bool OnClick(BoardElementView view)
 	{
+		if (isClick == false)
+		{
+			isClick = true;
+			delay = GameDataService.Current.ConstantsManager.TapDelayFirefly * index;
+			startTime = DateTime.UtcNow;
+			index++;
+		}
+		
 		var firefly = view as FireflyView;
 		
 		if (firefly == null) return false;
 		
 		firefly.OnClick();
 		return true;
+	}
+
+	public void OnMatch()
+	{
+		if (isClick) return;
+
+		delay = Random.Range(GameDataService.Current.ConstantsManager.MinDelaySpawnFirefly, GameDataService.Current.ConstantsManager.MaxDelaySpawnFirefly + 1);
+		startTime = DateTime.UtcNow;
+	}
+
+	public void Remove()
+	{
+		amount--;
+		startTime = DateTime.UtcNow;
 	}
 }

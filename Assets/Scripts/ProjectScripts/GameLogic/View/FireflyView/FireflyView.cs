@@ -5,8 +5,6 @@ public class FireflyView : BoardElementView
 {
     [SerializeField] private Transform body;
     
-    private float speed = 1f;
-    
     private Vector2 bottom;
     private Vector2 right;
     
@@ -22,7 +20,7 @@ public class FireflyView : BoardElementView
 
         isClick = false;
         
-        var positionStart = new Vector2(0, Screen.height);
+        var positionStart = new Vector2(-Random.Range(50, 150), Screen.height + Random.Range(50, 150));
         var positionFinish = new Vector2(Screen.width, 0);
 
         if (Random.Range(0, 2) == 0) positionStart.y = Random.Range(Screen.height / 2f, Screen.height);
@@ -49,12 +47,11 @@ public class FireflyView : BoardElementView
     
     public override void OnFastInstantiate()
     {
-//        Debug.LogError("!!!!!!!!!! OnFastInstantiate");
-        
     }
     
     public override void OnFastDestroy()
     {
+        Context.Context.BoardLogic.FireflyLogic.Remove();
         CachedTransform.localScale = Vector3.one;
     }
 
@@ -112,7 +109,7 @@ public class FireflyView : BoardElementView
     {
         var lenght = Vector2.Distance(CachedTransform.position, to);
         
-        CachedTransform.DOMove(to, lenght / speed)
+        CachedTransform.DOMove(to, lenght / (GameDataService.Current.ConstantsManager.SpeedFirefly / 10f))
             .SetEase(Ease.Linear)
             .SetId(CachedTransform)
             .OnComplete(() => { Context.DestroyElement(gameObject); });
