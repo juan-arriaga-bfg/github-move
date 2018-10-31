@@ -270,6 +270,8 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.Cell, R.Cell);
         dict.Add((int)ViewType.OrderBubble, R.OrderBubbleView);
         dict.Add((int)ViewType.Firefly, R.Firefly);
+        dict.Add((int)ViewType.DefaultWorker, R.DefaultWorker);
+        dict.Add((int)ViewType.ExtraWorker, R.ExtraWorker);
         
         return dict;
     }

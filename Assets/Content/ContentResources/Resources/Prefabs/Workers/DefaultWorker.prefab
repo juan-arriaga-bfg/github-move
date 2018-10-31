@@ -52,7 +52,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4374507957778120}
   - component: {fileID: 95959944160119864}
-  - component: {fileID: 114279551300976766}
   m_Layer: 0
   m_Name: DefaultWorker
   m_TagString: Untagged
@@ -570,20 +569,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114279551300976766
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1048340327480088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c49d7584200c4bd985cade22bffd423d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsFading: 0
-  FadeValue: 0
-  workAnimation: {fileID: 95959944160119864}
 --- !u!198 &198021162104658268
 ParticleSystem:
   m_ObjectHideFlags: 1

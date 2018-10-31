@@ -2,11 +2,11 @@
 
 public class ObstaclePieceView : PieceBoardElementView
 {
-    [SerializeField] private GameObject anchorWorker;
+    [SerializeField] private Transform anchorWorker;
     
     private StorageComponent storage;
     private PieceSkin skin;
-    private WorkerView worker;
+    private GameObject worker;
     
     public override void Init(BoardRenderer context, Piece piece)
     {
@@ -53,16 +53,18 @@ public class ObstaclePieceView : PieceBoardElementView
     {
         if (worker != null)
         {
-            worker.WorkAnimation.ResetTrigger("IsPlay");
+            RemoveFromLayerCache(worker);
             Context.DestroyElement(worker);
+            worker = null;
         }
         
         if(storage.Timer.IsExecuteable() == false) return;
         
-        var resourceName = isExtra ? R.ExtraWorker : R.DefaultWorker;
-        worker = Context.CreateBoardElementAt<WorkerView>(resourceName, new BoardPosition(Piece.CachedPosition.X, Piece.CachedPosition.Y, Piece.CachedPosition.Z + 1));
-        worker.CachedTransform.SetParent(anchorWorker.transform);
-        worker.CachedTransform.localPosition = Vector3.zero;
-        worker.WorkAnimation.SetTrigger("IsPlay");
+        worker = Context.CreateElement((int)(isExtra ? ViewType.ExtraWorker : ViewType.DefaultWorker)).gameObject;
+        worker.transform.SetParent(anchorWorker, false);
+        
+        AddToLayerCache(worker);
+        
+        SyncRendererLayers(Piece.CachedPosition);
     }
 }

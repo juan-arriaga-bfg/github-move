@@ -16,4 +16,6 @@
     Cell = -1012,
     OrderBubble = -1013,
     Firefly = -1014,
+    DefaultWorker = -1015,
+    ExtraWorker = -1016,
 }

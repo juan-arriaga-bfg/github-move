@@ -54,14 +54,9 @@ public class BuildingPieceView : PieceBoardElementView
 	private GameObject CreateUi(ViewType view)
 	{
 		var go = Context.CreateElement((int) view);
-		var renderers = go.GetComponentsInChildren<Renderer>();
 		
 		go.SetParent(bodySprite.transform, false);
-
-		foreach (var items in renderers)
-		{
-			AddLayerToCache(items);
-		}
+		AddToLayerCache(go.gameObject);
 		
 		return go.gameObject;
 	}
