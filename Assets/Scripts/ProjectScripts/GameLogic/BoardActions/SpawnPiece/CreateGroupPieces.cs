@@ -46,7 +46,9 @@ public class CreateGroupPieces:IBoardAction
                 animation.OnCompleteEvent += boardAnimation =>
                 {
                     gameBoardController.BoardLogic.UnlockCells(positionsForLock, this);
+                    gameBoardController.PathfindLocker.OnAddComplete();
                     OnSuccessEvent?.Invoke();
+                    
                 };
             }
             gameBoardController.RendererContext.AddAnimationToQueue(animation);

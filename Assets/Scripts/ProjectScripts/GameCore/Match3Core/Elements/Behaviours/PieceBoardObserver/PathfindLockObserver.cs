@@ -46,7 +46,7 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
         
        var target = GetTargetPositions();
        if(target != null)
-           board.PathfindLocker?.RecalcCacheOnPieceAdded(target, piece.CachedPosition, piece, AutoLock);
+           board.PathfindLocker?.RecalcCacheOnPieceAdded(target, piece.CachedPosition, piece);
        else if(AutoLock)
            nonLoaded.Add(this);
     }
@@ -65,7 +65,7 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
 
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
-        
+        board.PathfindLocker?.RemoveFromCache(piece);
     }
 
     public void RemoveRecalculate(BoardPosition position)

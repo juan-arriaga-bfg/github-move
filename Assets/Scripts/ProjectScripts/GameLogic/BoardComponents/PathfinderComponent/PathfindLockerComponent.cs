@@ -141,29 +141,42 @@ public class PathfindLockerComponent : ECSEntity
         
         return canPath;
     }
-    
-    public virtual void RecalcCacheOnPieceAdded(HashSet<BoardPosition> target, BoardPosition changedPosition, Piece piece, bool autoLock)
-    {    
-        RecalcFree(target, changedPosition);
 
-        if (autoLock)
+    private List<Piece> pieceAddCache = new List<Piece>();
+    public virtual void RecalcCacheOnPieceAdded(HashSet<BoardPosition> target, BoardPosition changedPosition, Piece piece)
+    {   
+        //RecalcFree(target, changedPosition);
+        
+        if (piece.PathfindLockObserver.AutoLock)
         {
-            var addedPiece = piece;
-            RecalcFor(addedPiece, target);
+            pieceAddCache.Add(piece);
+            RecalcFor(piece, target);
         }   
+    }
+
+    public void OnAddComplete()
+    {
+        if (pieceAddCache.Count > 0)
+        {
+            RecalcFree(context.AreaAccessController.AvailiablePositions, pieceAddCache[0].CachedPosition);
+        }
+        pieceAddCache.Clear();
     }
     
     public virtual void RecalcCacheOnPieceRemoved(HashSet<BoardPosition> target , BoardPosition changedPosition, Piece removedPiece)
     {
         RecalcBlocked(target, removedPiece.CachedPosition);
-        
-        if (freePieces.Contains(removedPiece))
-            freePieces.Remove(removedPiece);
-        if (blockPathPieces.ContainsKey(removedPiece))
-            blockPathPieces.Remove(removedPiece);
 
         var board = context;
         board.PathfindLocker.CheckLockedEmptyCells();
+    }
+
+    public virtual void RemoveFromCache(Piece piece)
+    {
+        if (freePieces.Contains(piece))
+            freePieces.Remove(piece);
+        if (blockPathPieces.ContainsKey(piece))
+            blockPathPieces.Remove(piece);
     }
 
     public virtual void RecalcCacheOnPieceMoved(HashSet<BoardPosition> target, BoardPosition fromPosition, BoardPosition to, Piece piece,

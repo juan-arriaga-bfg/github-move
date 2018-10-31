@@ -65,7 +65,7 @@ public class EjectionPieceAction : IBoardAction
 //				piece.PathfindLockObserver?.OnAddToBoard(piece.CachedPosition);
 //			}
 
-			Debug.LogError("Ejection completed");
+			gameBoardController.PathfindLocker.OnAddComplete();
 			OnComplete?.Invoke();
 		};
 		
