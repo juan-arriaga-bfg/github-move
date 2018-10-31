@@ -2,7 +2,7 @@
 
 public class ObstaclePieceView : PieceBoardElementView
 {
-    [SerializeField] private GameObject anchorObject;
+    [SerializeField] private GameObject anchorWorker;
     
     private StorageComponent storage;
     private PieceSkin skin;
@@ -61,7 +61,7 @@ public class ObstaclePieceView : PieceBoardElementView
         
         var resourceName = isExtra ? R.ExtraWorker : R.DefaultWorker;
         worker = Context.CreateBoardElementAt<WorkerView>(resourceName, new BoardPosition(Piece.CachedPosition.X, Piece.CachedPosition.Y, Piece.CachedPosition.Z + 1));
-        worker.CachedTransform.SetParent(anchorObject.transform);
+        worker.CachedTransform.SetParent(anchorWorker.transform);
         worker.CachedTransform.localPosition = Vector3.zero;
         worker.WorkAnimation.SetTrigger("IsPlay");
     }
