@@ -167,4 +167,7 @@ public class R
      public const string ObstacleGPiece = "ObstacleGPiece";
      public const string ObstacleHPiece = "ObstacleHPiece";
      public const string Coin6Piece = "Coin6Piece";
+     public const string UICharacterConversationView = "UICharacterConversationView";
+     public const string UICharacterBubbleMessageView = "UICharacterBubbleMessageView";
+     public const string UICharacterGirlView = "UICharacterGirlView";
 }

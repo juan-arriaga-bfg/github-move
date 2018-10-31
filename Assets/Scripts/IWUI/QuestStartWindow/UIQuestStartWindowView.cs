@@ -2,12 +2,14 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 public class UIQuestStartWindowView : IWUIWindowView
 {
     [SerializeField] private GameObject questCardPrefab;
+    [SerializeField] private Transform characterConversationAnchor;
     
-    private List<UIQuestCard> questCards = new List<UIQuestCard>();
+    private readonly List<UIQuestCard> questCards = new List<UIQuestCard>();
     
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
@@ -21,10 +23,11 @@ public class UIQuestStartWindowView : IWUIWindowView
         base.OnViewShow();
         
         UIQuestStartWindowModel windowModel = Model as UIQuestStartWindowModel;
-        CreateQuestCards(windowModel.Quests);
+        CreateQuestCards(windowModel);
+        CreateConversation(windowModel);
     }
 
-    private void CreateQuestCards(List<QuestEntity> quests)
+    private void CreateQuestCards(UIQuestStartWindowModel model)
     {
         var pool = UIService.Get.PoolContainer;
         
@@ -35,15 +38,18 @@ public class UIQuestStartWindowView : IWUIWindowView
         }
         questCards.Clear();
 
-        // Create cards
-        foreach (var quest in quests)
+        if (model.Quests != null)
         {
-            UIQuestCard card = pool.Create<UIQuestCard>(questCardPrefab);
-            card.gameObject.SetActive(true);
-            card.transform.SetParent(questCardPrefab.transform.parent, false);
-            card.Init(quest);
-            
-            questCards.Add(card);
+            // Create cards
+            foreach (var quest in model.Quests)
+            {
+                UIQuestCard card = pool.Create<UIQuestCard>(questCardPrefab);
+                card.gameObject.SetActive(true);
+                card.transform.SetParent(questCardPrefab.transform.parent, false);
+                card.Init(quest);
+
+                questCards.Add(card);
+            }
         }
     }
 
@@ -74,5 +80,57 @@ public class UIQuestStartWindowView : IWUIWindowView
         }
         
         questCardPrefab.SetActive(false);
+    }
+
+    private void CreateConversation(UIQuestStartWindowModel windowModel)
+    {
+        UICharactersConversationViewController conversation = UIService.Get.GetCachedObject<UICharactersConversationViewController>(R.UICharacterConversationView);
+        conversation.transform.SetParent(characterConversationAnchor, false);
+
+        string charId = R.UICharacterGirlView;
+        
+        conversation.AddCharacter(charId, CharacterPosition.LeftInner, true, true, () =>
+        {
+            conversation.NextBubble(R.UICharacterBubbleMessageView, new UiCharacterBubbleDefMessage {Side = CharacterBubbleSide.Left, CharacterId = charId, Message = "Hi there!"}, () =>
+            {
+                // Done!
+            });
+        });
+    }
+}
+
+public class ScenarioAction
+{
+    
+}
+
+public class ScenarioActionAddChar
+{
+    public CharacterPosition Position;
+    public string CharId;
+}
+
+public class ScenarioActionBubble
+{
+    public string Message;
+}
+
+public class Scenario
+{
+    [JsonIgnore] private int index;
+    
+    private List<ScenarioAction> actions;
+
+    public ScenarioAction GetNextAction()
+    {
+        if (actions == null || index >= actions.Count - 1)
+        {
+            return null;
+        }
+
+        var ret = actions[index];
+        index++;
+
+        return ret;
     }
 }

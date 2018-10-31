@@ -863,5 +863,20 @@
     "Uid": "Char3",
     "ResourcePath": "Prefabs\\UI\\Characters/Char3",
     "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "UICharacterConversationView",
+    "ResourcePath": "Prefabs\\UI\\CharactersConversation/UICharacterConversationView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "UICharacterBubbleMessageView",
+    "ResourcePath": "Prefabs\\UI\\CharactersConversation/UICharacterBubbleMessageView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "UICharacterGirlView",
+    "ResourcePath": "Prefabs\\UI\\CharactersConversation/UICharacterGirlView",
+    "IsGenerateAutoName": true
   }
 ]

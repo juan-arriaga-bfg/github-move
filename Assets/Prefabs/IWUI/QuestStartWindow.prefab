@@ -62,7 +62,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1204157237485552
 GameObject:
   m_ObjectHideFlags: 1
@@ -403,6 +403,21 @@ GameObject:
   - component: {fileID: 111998205999776314}
   m_Layer: 31
   m_Name: Shine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1703668179897754
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224436617996335464}
+  m_Layer: 31
+  m_Name: ConversationAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -895,6 +910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questCardPrefab: {fileID: 1366435372129510}
+  characterConversationAnchor: {fileID: 224436617996335464}
 --- !u!114 &114286650053371802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2030,10 +2046,10 @@ RectTransform:
   m_Father: {fileID: 224147764091657038}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 47, y: -23.82}
-  m_SizeDelta: {x: 49.55, y: 39.64}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224147764091657038
 RectTransform:
@@ -2171,6 +2187,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -84.4}
   m_SizeDelta: {x: 0, y: 78.2}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224436617996335464
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1703668179897754}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224557790478726696}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224445799349919204
 RectTransform:
   m_ObjectHideFlags: 1
@@ -2243,6 +2277,7 @@ RectTransform:
   - {fileID: 224278385021404020}
   - {fileID: 224445799349919204}
   - {fileID: 224847844957240058}
+  - {fileID: 224436617996335464}
   m_Father: {fileID: 224519764713084220}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2320,10 +2355,10 @@ RectTransform:
   m_Father: {fileID: 224399452877454978}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 192.68, y: -24.099998}
-  m_SizeDelta: {x: 211.31, y: 48.04}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224723276485434066
 RectTransform:
