@@ -93,11 +93,4 @@
             BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ObstacleKilled, this);
         }
     }
-    
-    protected override void OnTimerComplete()
-    {
-        base.OnTimerComplete();
-
-
-    }
 }

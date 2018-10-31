@@ -166,5 +166,7 @@ public class R
      public const string ObstacleGPiece = "ObstacleGPiece";
      public const string ObstacleHPiece = "ObstacleHPiece";
      public const string Coin6Piece = "Coin6Piece";
+     public const string DefaultWorker = "DefaultWorker";
+     public const string ExtraWorker = "ExtraWorker";
      public const string Firefly = "Firefly";
 }
