@@ -72,8 +72,8 @@ public class FireflyView : BoardElementView
     public void OnDragEnd()
     {
         var diff = (Vector2)CachedTransform.position - current;
-
-        to = to + diff;
+        
+        to = Cross(CachedTransform.position, to + diff);
         Move();
     }
 
