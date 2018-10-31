@@ -33,24 +33,7 @@
     {
         OnStep(false);
     }
-
-    protected override void OnComplete()
-    {
-        storage.SpawnPiece = GameDataService.Current.ObstaclesManager.GetReward(thisContext.PieceType);
-
-        if (storage.SpawnPiece == PieceType.None.Id)
-        {
-            OnStep(true);
-            return;
-        }
-        
-        storage.OnScatter = () =>
-        {
-            storage.OnScatter = null;
-            OnSpawnRewards();
-        };
-    }
-
+    
     private void OnStep(bool isRemoveMain)
     {
         var pieces = GameDataService.Current.ObstaclesManager.GetPiecesByStep(thisContext.PieceType, current);
@@ -73,9 +56,26 @@
         
         storage.SpawnAction = new EjectionPieceAction
         {
-            From = thisContext.CachedPosition,
+            GetFrom = () => thisContext.CachedPosition,
             Pieces = pieces,
             OnComplete = OnSpawnRewards
+        };
+    }
+    
+    protected override void OnComplete()
+    {
+        storage.SpawnPiece = GameDataService.Current.ObstaclesManager.GetReward(thisContext.PieceType);
+
+        if (storage.SpawnPiece == PieceType.None.Id)
+        {
+            OnStep(true);
+            return;
+        }
+        
+        storage.OnScatter = () =>
+        {
+            storage.OnScatter = null;
+            OnSpawnRewards();
         };
     }
 
