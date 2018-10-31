@@ -288,11 +288,15 @@ public class QuestsDataManager : IECSComponent, IDataManager
 #if DEBUG
                 sw.Stop();
 #endif
-                var quest = dataManager.StartQuestById(starter.QuestToStartId, null);
-                if (ConnectedToBoard)
+                foreach (var questToStartId in starter.QuestToStartIds)
                 {
-                    quest.ConnectToBoard();
+                    var quest = dataManager.StartQuestById(questToStartId, null);
+                    if (ConnectedToBoard)
+                    {
+                        quest.ConnectToBoard();
+                    } 
                 }
+
 #if DEBUG
                 sw.Start();
 #endif
