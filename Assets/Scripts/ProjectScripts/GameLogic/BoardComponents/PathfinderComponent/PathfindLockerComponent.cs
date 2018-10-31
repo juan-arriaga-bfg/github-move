@@ -156,9 +156,10 @@ public class PathfindLockerComponent : ECSEntity
 
     public void OnAddComplete()
     {
+        RecalcFree(context.AreaAccessController.AvailiablePositions);
         if (pieceAddCache.Count > 0)
         {
-            RecalcFree(context.AreaAccessController.AvailiablePositions, pieceAddCache[0].CachedPosition);
+            
         }
         pieceAddCache.Clear();
     }
@@ -189,7 +190,7 @@ public class PathfindLockerComponent : ECSEntity
         }
         else
         {
-            RecalcFree(target, to);
+            RecalcFree(target);
 
             if (autoLock)
             {
@@ -223,13 +224,13 @@ public class PathfindLockerComponent : ECSEntity
         }
     }
 
-    private void RecalcFree(HashSet<BoardPosition> target, BoardPosition changedPosition)
+    private void RecalcFree(HashSet<BoardPosition> target)
     {
         var current = 0;
         while (current < freePieces.Count)
         {
             var piece = freePieces[current];
-            if (RecalcFor(piece, target, new List<BoardPosition>(target) {changedPosition}))
+            if (RecalcFor(piece, target, new List<BoardPosition>(target)))
                 current++;
         }
     }
