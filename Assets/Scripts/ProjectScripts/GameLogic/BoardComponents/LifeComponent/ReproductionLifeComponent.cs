@@ -37,12 +37,11 @@ public class ReproductionLifeComponent : StorageLifeComponent
     protected override LifeSaveItem InitInSave(BoardPosition position)
     {
         var item = base.InitInSave(position);
-
-        if (item != null && item.IsStart)
-        {
-            cooldown.Start(item.StartTime);
-            Locker.Unlock(this);
-        }
+        
+        if (item == null) return null;
+        
+        if(item.IsStart) cooldown.Start(item.StartTime);
+        Locker.Unlock(this);
         
         return item;
     }
