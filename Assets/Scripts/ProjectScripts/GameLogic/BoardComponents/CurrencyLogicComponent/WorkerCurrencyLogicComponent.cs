@@ -2,14 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-using Random = UnityEngine.Random;
-
-public enum WorkerType
-{
-    Default,
-    Extra,
-    Empty
-}
 
 public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 {
@@ -17,9 +9,6 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     public override int Guid => ComponentGuid;
 
     private List<KeyValuePair<BoardPosition, TimerComponent>> completeTimesList = new List<KeyValuePair<BoardPosition, TimerComponent>>();
-    
-    
-    private Dictionary<BoardPosition, WorkerType> workerTypes = new Dictionary<BoardPosition, WorkerType>();
     
     private BoardController context;
     
@@ -49,9 +38,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         {
             var timerElement = new KeyValuePair<BoardPosition, TimerComponent>(BoardPosition.Parse(worker), null);
             completeTimesList.Add(timerElement);
-            workerTypes.Add(timerElement.Key, WorkerType.Default);
         }
-        
     }
 
     public string Save()
@@ -80,14 +67,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             return;
         }
     }
-
-    public WorkerType GetWorkerType(BoardPosition position)
-    {
-        if (workerTypes.ContainsKey(position))
-            return workerTypes[position];
-        return WorkerType.Empty;
-    }
-
+    
     public bool Get(BoardPosition id, TimerComponent timer)
     {
         if (CurrencyHellper.IsCanPurchase(targetItem.Currency, 1) == false)
@@ -120,9 +100,6 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             
             completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(id, timer));
         });
-
-        if (isSuccess)
-            workerTypes[id] = WorkerType.Default;
         
         return isSuccess;
     }
@@ -132,10 +109,6 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         foreach (var pair in completeTimesList)
         {
             if (pair.Key.Equals(oldKey) == false) continue;
-
-            var saveWorkerType = workerTypes[oldKey];
-            workerTypes.Remove(oldKey);
-            workerTypes[newKey] = saveWorkerType;
             
             completeTimesList.Remove(pair);
             completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(newKey, pair.Value));
@@ -149,9 +122,6 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     public bool Return(BoardPosition id)
     {
         Debug.Log($"[WorkerCurrencyLogicComponent] => Return: {id}");
-        
-        if (workerTypes.ContainsKey(id))
-            workerTypes.Remove(id);
         
         foreach (var pair in completeTimesList)
         {           
@@ -169,6 +139,18 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         return false;
     }
 
+    public bool Check(BoardPosition id)
+    {
+        foreach (var pair in completeTimesList)
+        {           
+            if (pair.Key.Equals(id) == false) continue;
+            
+            return true;
+        }
+        
+        return false;
+    }
+
     public bool SetExtra(Piece worker, BoardPosition targetPosition)
     {
         if (worker.PieceType != PieceType.Worker1.Id || context.BoardLogic.IsEmpty(targetPosition)) return false;
@@ -178,18 +160,14 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
         if (def.Filter.Has(PieceTypeFilter.WorkPlace) == false || !CheckLock(target)) return false;
         
-        workerTypes[targetPosition] = WorkerType.Extra;
-        if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target))
-        {
-            workerTypes[targetPosition] = WorkerType.Empty;
-            return false;
-        }
+        if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target)) return false;
         
         context.ActionExecutor.AddAction(new CollapsePieceToAction
         {
             To = targetPosition,
             Positions = new List<BoardPosition> {worker.CachedPosition},
         });
+        
         return true;
     }
 
