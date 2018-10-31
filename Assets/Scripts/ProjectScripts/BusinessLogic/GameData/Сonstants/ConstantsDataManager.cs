@@ -17,7 +17,22 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     
     public int MaxOrders;
     public int NextOrderDelay;
+
+    public int PricePerMinute;
+
+    private float pricePerSecond = -1f;
+    public float PricePerSecond => pricePerSecond < 0 ? (pricePerSecond = PricePerMinute / 60f) : pricePerSecond;
+
+    public int MinDelaySpawnFirefly;
+    public int MaxDelaySpawnFirefly;
     
+    public int TapDelayFirefly;
+    
+    public int MinAmountFirefly;
+    public int MaxAmountFirefly;
+    
+    public float SpeedFirefly;
+
     public override void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
@@ -52,4 +67,6 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
             }
         });
     }
+
+    
 }

@@ -39,20 +39,11 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
                 data.Sort((a, b) => a.Piece.CompareTo(b.Piece));
                 defaultDef = data[0];
 
-                foreach (var next in data)
+                foreach (var def in data)
                 {
-                    var previousType = matchDefinition.GetPrevious(next.Piece);
-                    
-                    if (previousType != PieceType.None.Id)
-                    {
-                        var previous = data.Find(def => def.Piece == previousType);
-                        
-                        next.PieceWeights = ItemWeight.ReplaseWeights(previous.PieceWeights, next.PieceWeights);
-                    }
-                    
-                    Obstacles.Add(next.Piece, next);
-                    AddToBranch(matchDefinition.GetFirst(next.Piece), next);
-                    AddSequence(next.Uid, next.PieceWeights);
+                    Obstacles.Add(def.Piece, def);
+                    AddToBranch(matchDefinition.GetFirst(def.Piece), def);
+                    AddSequence(def.Uid, def.PieceWeights);
                 }
             }
             else
@@ -131,12 +122,5 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
         var def = GetStep(piece, step);
         
         return def.Price;
-    }
-
-    public CurrencyPair GetFastPriceByStep(int piece, int step)
-    {
-        var def = GetStep(piece, step);
-        
-        return def.FastPrice;
     }
 }

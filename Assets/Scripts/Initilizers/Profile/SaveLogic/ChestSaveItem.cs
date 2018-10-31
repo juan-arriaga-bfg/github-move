@@ -51,7 +51,7 @@ public class ChestSaveItemJsonConverter : JsonConverter
         var targetValue = (ChestSaveItem) value;
         
         serializer.TypeNameHandling = TypeNameHandling.None;
-        serializer.Serialize(writer, $"{targetValue.Id},{(int) targetValue.State},{targetValue.StartTime.ConvertToUnixTime()},{targetValue.Position.ToSaveString()}, {targetValue.RewardAmount}, {targetValue.Reward.ToSaveString()},");
+        serializer.Serialize(writer, $"{targetValue.Position.ToSaveString()}, {targetValue.RewardAmount}, {targetValue.Reward.ToSaveString()},");
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -61,12 +61,9 @@ public class ChestSaveItemJsonConverter : JsonConverter
         
         var targetValue = new ChestSaveItem
         {
-            Id = int.Parse(dataArray[0]),
-            State = (ChestState) int.Parse(dataArray[1]),
-            StartTime = DateTimeExtension.UnixTimeToDateTime(long.Parse(dataArray[2])),
-            Position = new BoardPosition(int.Parse(dataArray[3]), int.Parse(dataArray[4]), int.Parse(dataArray[5])),
-            RewardAmount = int.Parse(dataArray[6]),
-            Reward = DictionaryStringConverter.FromDataArray(dataArray, int.Parse, int.Parse, 7)
+            Position = new BoardPosition(int.Parse(dataArray[0]), int.Parse(dataArray[1]), int.Parse(dataArray[2])),
+            RewardAmount = int.Parse(dataArray[3]),
+            Reward = DictionaryStringConverter.FromDataArray(dataArray, int.Parse, int.Parse, 4)
         };
         
         return targetValue;
@@ -76,35 +73,14 @@ public class ChestSaveItemJsonConverter : JsonConverter
 [JsonConverter(typeof(ChestSaveItemJsonConverter))]
 public class ChestSaveItem
 {
-    private int id;
     private BoardPosition position;
-    private ChestState state;
-    private DateTime startTime;
     private Dictionary<int, int> reward;
     private int rewardAmount;
-    
-    public int Id
-    {
-        get { return id; }
-        set { id = value; }
-    }
     
     public BoardPosition Position
     {
         get { return position; }
         set { position = value; }
-    }
-
-    public ChestState State
-    {
-        get { return state; }
-        set { state = value; }
-    }
-
-    public DateTime StartTime
-    {
-        get { return startTime; }
-        set { startTime = value; }
     }
 
     public Dictionary<int, int> Reward

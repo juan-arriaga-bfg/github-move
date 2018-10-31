@@ -63,7 +63,7 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.O1.Id, PieceType.O9.Id, dict);
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OX1.Id, PieceType.OX9.Id, dict);
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OEpic1.Id, PieceType.OEpic9.Id, dict);
-        dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.ObstacleD.Id, PieceType.ObstacleH.Id, dict);
+        dict = AddSimplePiece<MovedObstaclePieceBuilder>(PieceType.ObstacleD.Id, PieceType.ObstacleH.Id, dict);
         
         dict.Add(PieceType.Fog.Id, new FogPieceBuilder());
         

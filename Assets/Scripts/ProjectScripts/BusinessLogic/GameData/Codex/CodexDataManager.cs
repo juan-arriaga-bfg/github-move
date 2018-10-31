@@ -227,7 +227,8 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
 
             if (def.PieceTypeDef.Id == targetId)
             {
-                def.State = CodexItemState.Highlighted;
+                if(def.State == CodexItemState.Unlocked)
+                    def.State = CodexItemState.Highlighted;
                 highlightedIndex = i;
             }
         }

@@ -4,11 +4,8 @@ public class CheckMatchAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	
-	public virtual int Guid
-	{
-		get { return ComponentGuid; }
-	}
-	
+	public virtual int Guid => ComponentGuid;
+
 	public BoardPosition At { get; set; }
 
 	public List<BoardPosition> MatchField { get; set; }

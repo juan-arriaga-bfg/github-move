@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PieceStorageView : PieceBoardElementView
+public class ObstaclePieceView : PieceBoardElementView
 {
     [SerializeField] private GameObject anchorObject;
     

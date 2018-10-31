@@ -15,4 +15,5 @@
     Lock = -1011,
     Cell = -1012,
     OrderBubble = -1013,
+    Firefly = -1014,
 }

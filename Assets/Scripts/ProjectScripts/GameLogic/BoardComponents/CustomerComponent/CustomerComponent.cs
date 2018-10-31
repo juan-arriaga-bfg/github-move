@@ -20,7 +20,6 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         pieceContext = entity as Piece;
         
         Timer = pieceContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-        Timer.Price = new CurrencyPair{Currency = Currency.Crystals.Name, Amount = 10};
         Timer.OnComplete += UpdateView;
         Timer.OnComplete += () => UpdateState(OrderState.Complete);
         

@@ -1,32 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
-
-public enum ChestState
-{
-    Close = 0,
-    InProgress,
-    Open,
-    Finished
-}
 
 public class Chest
 {
-    private readonly ChestDef def;
-    private ChestState chestState;
+    public ChestDef Def;
     
-    public DateTime? StartTime { get; set; }
-    private DateTime completeTime;
-
     private int rewardCount;
     private Dictionary<int, int> reward = new Dictionary<int, int>();
     
-    public Chest(ChestDef def)
-    {
-        this.def = def;
-    }
-
     public Dictionary<int, int> Reward
     {
         get { return GetRewardPieces(); }
@@ -38,51 +19,11 @@ public class Chest
         get { return rewardCount; }
         set { rewardCount = value; }
     }
-
-    public ChestDef Def => def;
-
-    public int Piece => def.Piece;
-
-    public int MergePoints => 100;
-
-    public ChestState State
-    {
-        get
-        {
-            if (StartTime != null && (int) (DateTime.UtcNow - StartTime.Value).TotalSeconds >= def.Time)
-            {
-                chestState = ChestState.Open;
-            }
-            
-            return chestState;
-        }
-        set
-        {
-            switch (value)
-            {
-                case ChestState.Close:
-                    StartTime = null;
-                    break;
-                case ChestState.InProgress:
-                    SetStartTime(DateTime.UtcNow);
-                    break;
-            }
-
-            chestState = value;
-        }
-    }
-
+    
     public bool CheckStorage()
     {
-        
         var currentRewardCount = Reward.Values.Sum();
         return currentRewardCount < rewardCount;
-    }
-    
-    public void SetStartTime(DateTime time)
-    {
-        StartTime = time;
-        completeTime = time.AddSeconds(def.Time);
     }
     
     public Dictionary<int, int> GetRewardPieces()
@@ -90,13 +31,13 @@ public class Chest
         if (reward.Count != 0) return reward;
         
         var hard = GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name);
-        var sequence = GameDataService.Current.ChestsManager.GetSequence(def.Uid);
+        var sequence = GameDataService.Current.ChestsManager.GetSequence(Def.Uid);
 
-        var productionAmount = def.ProductionAmount.Range();
+        var productionAmount = Def.ProductionAmount.Range();
         reward = hard.GetNextDict(productionAmount);
-        reward = sequence.GetNextDict(def.PieceAmount, reward);
+        reward = sequence.GetNextDict(Def.PieceAmount, reward);
 
-        rewardCount = productionAmount + def.PieceAmount;
+        rewardCount = productionAmount + Def.PieceAmount;
         
         return reward;
     }

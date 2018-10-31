@@ -23,11 +23,11 @@ MonoBehaviour:
   - Key: obstacles
     Link: 16Q9fxlFX40VRx6u1kwfMvWm1GuvK8MaGs117g5Pkd2g
     Route: parse
-    Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"ProductionAmount":{"Min":0,"Max":0},"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestId":""}]'
+    Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"ProductionAmount":{"Min":0,"Max":0},"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestId":""}]'
   - Key: mines
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseMines
-    Pattern: '{"Uid":"","Skin":"","Delay":0,"Size":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"StepReward":{"Currency":"","Amount":0}}'
+    Pattern: '{"Uid":"","Skin":"","Delay":0,"Size":0,"Price":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"StepReward":{"Currency":"","Amount":0}}'
   - Key: field
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseField
@@ -39,19 +39,15 @@ MonoBehaviour:
   - Key: pieces
     Link: 15C96r0vcgzzhJ6Fo_OQXBcCoIkSogZnTZg8Jc6MKDH8
     Route: parse
-    Pattern: '[{"Uid":"","":"","CreateRewards":[{"Currency":"","Amount":0}],"SpawnResources":{"Currency":"","Amount":0},"Name":"","UnlockBonus":[{"Currency":"","Amount":0}],"ExchangePrice":{"Currency":"","Amount":0}}]'
-  - Key: piecesMatchConditions
-    Link: 1VvIEMGGf-pkdVpJ96nSW8sBkIDX18vr1FAGY4NFLCRQ
-    Route: parse
-    Pattern: '[{"Uid":"","Delay":0,"FastPrice":{"Currency":"","Amount":0}}]'
+    Pattern: '[{"Uid":"","":"","Delay":0,"CreateRewards":[{"Currency":"","Amount":0}],"SpawnResources":{"Currency":"","Amount":0},"Name":"","UnlockBonus":[{"Currency":"","Amount":0}],"ExchangePrice":{"Currency":"","Amount":0}}]'
   - Key: piecesReproduction
     Link: 1DMxuJpSv3tZUMNKTQXEB2HQ2d7xPCpoLjB5ZEV00kUI
     Route: parse
-    Pattern: '[{"Uid":"","Delay":0,"Limit":0,"FastPrice":{"Currency":"","Amount":0},"StepReward":{"Currency":"","Amount":0},"Reproduction":{"Currency":"","Amount":0},"Obstacle":""}]'
+    Pattern: '[{"Uid":"","Delay":0,"Limit":0,"StepReward":{"Currency":"","Amount":0},"Reproduction":{"Currency":"","Amount":0},"Obstacle":""}]'
   - Key: piecesMaking
     Link: 1XjQudoqqkn2yyjonWc_R1fAyQNprQRJuw4zphfjE2rY
     Route: parse
-    Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"FastPrice":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}]}]'
+    Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}]}]'
   - Key: enemies
     Link: 1ggZRqwYTC5dMe-X53tOAMfxCmgJh-RjGQHv5u2iPYZ0
     Route: parse

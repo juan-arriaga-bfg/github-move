@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 
-public class UIChestMessageWindowModel : IWWindowModel 
+public class UIChestMessageWindowModel : IWWindowModel
 {
-    public Chest Chest { get; set; }
-
-    public Action OnOpen;
+    public ChestPieceComponent ChestComponent;
     
     public string Title => "Unlock chest!";
 
@@ -17,12 +14,12 @@ public class UIChestMessageWindowModel : IWWindowModel
 
     public List<string> Icons()
     {
-        var icons = AddIcons(new List<string>(), Chest.Def.PieceWeights);
+        var icons = AddIcons(new List<string>(), ChestComponent.Chest.Def.PieceWeights);
         icons = AddIcons(icons, GameDataService.Current.LevelsManager.PieceWeights);
         
         return icons;
     }
-
+    
     private List<string> AddIcons(List<string> list, List<ItemWeight> weights)
     {
         if (weights == null) return list;
