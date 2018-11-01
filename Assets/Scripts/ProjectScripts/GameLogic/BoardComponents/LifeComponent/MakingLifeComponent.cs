@@ -62,9 +62,9 @@
 
     protected override void OnStep()
     {
-        var pieces = GameDataService.Current.PiecesManager.GetSequence(def.Uid).GetNextDict(def.PieceAmount);
+        if(Reward == null || Reward.Count == 0) Reward = GameDataService.Current.PiecesManager.GetSequence(def.Uid).GetNextDict(def.PieceAmount);
         
-        foreach (var key in pieces.Keys)
+        foreach (var key in Reward.Keys)
         {
             storage.SpawnPiece = key;
             break;
@@ -73,8 +73,12 @@
         storage.SpawnAction = new EjectionPieceAction
         {
             GetFrom = () => thisContext.CachedPosition,
-            Pieces = pieces,
-            OnComplete = OnSpawnRewards
+            Pieces = Reward,
+            OnComplete = () =>
+            {
+                Reward = null;
+                OnSpawnRewards();
+            }
         };
     }
     

@@ -34,12 +34,6 @@ public class SequenceComponent : IECSComponent
         
         if(save == null) return;
         
-        if (save.Count == 0)
-        {
-            UpdateSequence();
-            return;
-        }
-        
         sequence.RemoveRange(0, sequence.Count - save.Count);
     }
 

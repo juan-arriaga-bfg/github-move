@@ -301,7 +301,8 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 				Step = component.Current,
 				StartTime = component.Timer.StartTimeLong,
 				IsStart = component.Timer.IsExecuteable(),
-				Position = position
+				Position = position,
+				Reward = component.Reward
 			};
 			
 			items.Add(item);

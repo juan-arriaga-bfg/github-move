@@ -36,9 +36,9 @@
     
     private void OnStep(bool isRemoveMain)
     {
-        var pieces = GameDataService.Current.ObstaclesManager.GetPiecesByStep(thisContext.PieceType, current);
+        if(Reward == null || Reward.Count == 0) Reward = GameDataService.Current.ObstaclesManager.GetPiecesByStep(thisContext.PieceType, current);
         
-        foreach (var key in pieces.Keys)
+        foreach (var key in Reward.Keys)
         {
             storage.SpawnPiece = key;
             break;
@@ -46,19 +46,23 @@
 
         if (isRemoveMain)
         {
-            var value = pieces[storage.SpawnPiece];
+            var value = Reward[storage.SpawnPiece];
             
             value--;
             
-            if (value == 0) pieces.Remove(storage.SpawnPiece);
-            else pieces[storage.SpawnPiece] = value;
+            if (value == 0) Reward.Remove(storage.SpawnPiece);
+            else Reward[storage.SpawnPiece] = value;
         }
         
         storage.SpawnAction = new EjectionPieceAction
         {
             GetFrom = () => thisContext.CachedPosition,
-            Pieces = pieces,
-            OnComplete = OnSpawnRewards
+            Pieces = Reward,
+            OnComplete = () =>
+            {
+                Reward = null;
+                OnSpawnRewards();
+            }
         };
     }
     

@@ -1,4 +1,6 @@
-﻿public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerComponent, ILockerComponent
+﻿using System.Collections.Generic;
+
+public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerComponent, ILockerComponent
 {
     private LockerComponent locker;
     public LockerComponent Locker => locker ?? GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
@@ -16,6 +18,8 @@
     
     public virtual TimerComponent Timer => storage.Timer;
     public float GetProgressNext => 1 - (current+1)/(float)HP;
+
+    public Dictionary<int, int> Reward;
 
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -56,6 +60,7 @@
         if (item == null) return null;
         
         current = item.Step;
+        Reward = item.Reward;
         
         thisContext.Context.WorkerLogic.Init(thisContext.CachedPosition, storage.Timer);
         
