@@ -71,7 +71,7 @@ MonoBehaviour:
   - Key: questStarters
     Link: 1npF9IT2A2bAW-Lslya3BYlIK7RCdDzceDIOxFCJbu80
     Route: parse
-    Pattern: '[{"Id":"","$type":"","QuestToStartId":"","Conditions":[{"$type":"","Id":"","Value":""}]}]'
+    Pattern: '[{"Id":"","$type":"","QuestToStartIds":"[]","Conditions":[{"$type":"","Id":"","Value":""}]}]'
   - Key: questTasks
     Link: 1dvyzQoKk6OMhIC59EApw2vjebAdn4LxrbM7raQJAlXY
     Route: parse
