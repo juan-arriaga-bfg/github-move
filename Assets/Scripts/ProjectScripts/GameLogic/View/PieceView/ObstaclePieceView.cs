@@ -2,11 +2,12 @@
 
 public class ObstaclePieceView : PieceBoardElementView
 {
-    [SerializeField] private Animator worker;
+    [SerializeField] private Transform anchorWorker;
     
     private StorageComponent storage;
     private PieceSkin skin;
-
+    private GameObject worker;
+    
     public override void Init(BoardRenderer context, Piece piece)
     {
         base.Init(context, piece);
@@ -41,10 +42,29 @@ public class ObstaclePieceView : PieceBoardElementView
         
         if(skin != null) storage.Timer.OnComplete -= skin.UpdateView;
     }
-
+    
     private void UpdateAnimation()
     {
-        worker.ResetTrigger(storage.Timer.IsExecuteable() ? "IsStop" : "IsPlay");
-        worker.SetTrigger(storage.Timer.IsExecuteable() ? "IsPlay" : "IsStop");
+        var isExtra = !Piece.Context.WorkerLogic.Check(Piece.CachedPosition);
+        ChangeAnimationState(isExtra);
+    }
+
+    private void ChangeAnimationState(bool isExtra)
+    {
+        if (worker != null)
+        {
+            RemoveFromLayerCache(worker);
+            Context.DestroyElement(worker);
+            worker = null;
+        }
+        
+        if(storage.Timer.IsExecuteable() == false) return;
+        
+        worker = Context.CreateElement((int)(isExtra ? ViewType.ExtraWorker : ViewType.DefaultWorker)).gameObject;
+        worker.transform.SetParent(anchorWorker, false);
+        
+        AddToLayerCache(worker);
+        
+        SyncRendererLayers(Piece.CachedPosition);
     }
 }

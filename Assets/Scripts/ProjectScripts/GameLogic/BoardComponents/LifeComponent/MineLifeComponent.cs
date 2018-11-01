@@ -51,16 +51,14 @@ public class MineLifeComponent : StorageLifeComponent
 
     protected override void OnComplete()
     {
-        var position = thisContext.CachedPosition;
-                
         storage.OnScatter = () =>
         {
             storage.OnScatter = null;
             OnSpawnRewards();
             thisContext.Context.ActionExecutor.AddAction(new CollapsePieceToAction
             {
-                To = position,
-                Positions = new List<BoardPosition> {position},
+                To = thisContext.CachedPosition,
+                Positions = new List<BoardPosition> {thisContext.CachedPosition},
                 OnComplete = OnRemove
             });
         };

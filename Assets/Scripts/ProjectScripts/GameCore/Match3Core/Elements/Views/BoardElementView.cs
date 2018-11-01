@@ -40,6 +40,28 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         Context = context;
     }
 
+    protected void AddToLayerCache(GameObject target)
+    {
+        var renderers = target.GetComponentsInChildren<Renderer>();
+		
+        foreach (var items in renderers)
+        {
+            AddLayerToCache(items);
+        }
+    }
+
+    protected void RemoveFromLayerCache(GameObject target)
+    {
+        var renderers = target.GetComponentsInChildren<Renderer>();
+		
+        foreach (var items in renderers)
+        {
+            RemoveLayerFromCache(items);
+            var rendererLayer = items.gameObject.GetComponent<RendererLayer>();
+            items.sortingOrder = rendererLayer.SortingOrderOffset;
+        }
+    }
+    
     protected void AddLayerToCache(Renderer rend)
     {
         var rendererLayerParams = rend.GetComponent<RendererLayerParams>();

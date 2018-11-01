@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 {
@@ -37,7 +36,8 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
         foreach (var worker in workers)
         {
-            completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(BoardPosition.Parse(worker), null));
+            var timerElement = new KeyValuePair<BoardPosition, TimerComponent>(BoardPosition.Parse(worker), null);
+            completeTimesList.Add(timerElement);
         }
     }
 
@@ -67,7 +67,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             return;
         }
     }
-
+    
     public bool Get(BoardPosition id, TimerComponent timer)
     {
         if (CurrencyHellper.IsCanPurchase(targetItem.Currency, 1) == false)
@@ -126,12 +126,24 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         foreach (var pair in completeTimesList)
         {           
             if (pair.Key.Equals(id) == false) continue;
-
+            
             completeTimesList.Remove(pair);
             Add(1);
             
             // Should be after if (pair.Key.Equals(id) == false) continue; to avoid event raising for every (even not completed) timers
             BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.WorkerUsed, this);
+            
+            return true;
+        }
+        
+        return false;
+    }
+
+    public bool Check(BoardPosition id)
+    {
+        foreach (var pair in completeTimesList)
+        {           
+            if (pair.Key.Equals(id) == false) continue;
             
             return true;
         }
@@ -147,6 +159,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         var def = PieceType.GetDefById(target.PieceType);
 
         if (def.Filter.Has(PieceTypeFilter.WorkPlace) == false || !CheckLock(target)) return false;
+        
         if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target)) return false;
         
         context.ActionExecutor.AddAction(new CollapsePieceToAction
@@ -154,7 +167,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             To = targetPosition,
             Positions = new List<BoardPosition> {worker.CachedPosition},
         });
-
+        
         return true;
     }
 

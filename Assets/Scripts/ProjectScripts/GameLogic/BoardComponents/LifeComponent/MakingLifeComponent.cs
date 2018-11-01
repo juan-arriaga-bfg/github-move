@@ -72,7 +72,7 @@
         
         storage.SpawnAction = new EjectionPieceAction
         {
-            From = thisContext.CachedPosition,
+            GetFrom = () => thisContext.CachedPosition,
             Pieces = pieces,
             OnComplete = OnSpawnRewards
         };
