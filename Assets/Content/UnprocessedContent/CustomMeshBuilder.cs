@@ -114,7 +114,7 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
         float borderWidth = def.BorderWidth;
         float cornerSize  = borderWidth;
         Dictionary<string, string> skinDef = def.SkinDef;
-        float offsetFromCell = -0.1f;
+        float offsetFromCell = -0.05f;
         
         
         var   defaultColor = Color.white;
@@ -266,7 +266,7 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                     float topOffsetFromCell = 0f;
                     if (isInnerCornerTop)
                     {
-                        topOffsetFromCell = 0;
+                        topOffsetFromCell = -offsetFromCell;
                     }
                     else if (isOuterCornerTop)
                     {
@@ -276,7 +276,7 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                     float bottomOffsetFromCell = 0f;
                     if (isInnerCornerBottom)
                     {
-                        bottomOffsetFromCell = 0;
+                        bottomOffsetFromCell = -offsetFromCell;
                     }
                     else if (isOuterCornerBottom)
                     {
@@ -363,7 +363,7 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                     float topOffsetFromCell = 0f;
                     if (isInnerCornerTop)
                     {
-                        topOffsetFromCell = 0;
+                        topOffsetFromCell = -offsetFromCell;
                     }
                     else if (isOuterCornerTop)
                     {
@@ -373,7 +373,7 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                     float bottomOffsetFromCell = 0f;
                     if (isInnerCornerBottom)
                     {
-                        bottomOffsetFromCell = 0;
+                        bottomOffsetFromCell = -offsetFromCell;
                     }
                     else if (isOuterCornerBottom)
                     {
@@ -415,9 +415,41 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                 {
                     var borderTile = IconService.Current.GetSpriteById(skinDef["cell_tile_02"]);
 
+                    // float offsetXLeft  = 0f;
+                    // float offsetXRight = 0f;
+                    //
+                    // if ((IsHasCellAt(matrix, x - 1, y) || IsHasCellAt(matrix, x - 1, y - 1))
+                    //  && (IsHasCellAt(matrix, x - 1, y) && IsHasCellAt(matrix, x - 1, y - 1)) == false)
+                    // {
+                    //     offsetXLeft = 0f;
+                    // }
+                    // else
+                    // {
+                    //     offsetXLeft = cornerSize;
+                    // }
+                    //
+                    // if ((IsHasCellAt(matrix, x + 1, y) || IsHasCellAt(matrix, x + 1, y - 1))
+                    //  && (IsHasCellAt(matrix, x + 1, y) && IsHasCellAt(matrix, x + 1, y - 1)) == false)
+                    // {
+                    //     offsetXRight = 0f;
+                    // }
+                    // else
+                    // {
+                    //     offsetXRight = cornerSize;
+                    // }
+                    //
+                    // // draw border for x0 y0
+                    // cornerVertices.Add(new Vector3(x +     offsetXLeft  - offsetFromCell, - offsetFromCell + y,               0));
+                    // cornerVertices.Add(new Vector3(x + 1 - offsetXRight + offsetFromCell, - offsetFromCell + y,               0));
+                    // cornerVertices.Add(new Vector3(x +     offsetXLeft  - offsetFromCell, - offsetFromCell + y - borderWidth, 0));
+                    // cornerVertices.Add(new Vector3(x + 1 - offsetXRight + offsetFromCell, - offsetFromCell + y - borderWidth, 0));
+
                     float offsetXLeft  = 0f;
                     float offsetXRight = 0f;
 
+                    bool isOuterCornerLeft = false; 
+                    bool isOuterCornerRight = false;
+                    
                     if ((IsHasCellAt(matrix, x - 1, y) || IsHasCellAt(matrix, x - 1, y - 1))
                      && (IsHasCellAt(matrix, x - 1, y) && IsHasCellAt(matrix, x - 1, y - 1)) == false)
                     {
@@ -425,6 +457,7 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                     }
                     else
                     {
+                        isOuterCornerLeft = true;
                         offsetXLeft = cornerSize;
                     }
 
@@ -435,15 +468,57 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                     }
                     else
                     {
+                        isOuterCornerRight = true;
                         offsetXRight = cornerSize;
                     }
 
-                    // draw border for x0 y0
-                    cornerVertices.Add(new Vector3(x +     offsetXLeft  - offsetFromCell, - offsetFromCell + y,               0));
-                    cornerVertices.Add(new Vector3(x + 1 - offsetXRight + offsetFromCell, - offsetFromCell + y,               0));
-                    cornerVertices.Add(new Vector3(x +     offsetXLeft  - offsetFromCell, - offsetFromCell + y - borderWidth, 0));
-                    cornerVertices.Add(new Vector3(x + 1 - offsetXRight + offsetFromCell, - offsetFromCell + y - borderWidth, 0));
+                    bool isInnerCornerLeft   = IsHasCellAt(matrix, x - 1, y - 1) && IsHasCellAt(matrix, x - 1, y);
+                    bool isInnerCornerRight  = IsHasCellAt(matrix, x + 1, y - 1) && IsHasCellAt(matrix, x + 1, y);
 
+                    Vector3 tl = new Vector3(x +     offsetXLeft , y,               0);
+                    Vector3 tr = new Vector3(x + 1 - offsetXRight, y,               0);
+                    Vector3 bl = new Vector3(x +     offsetXLeft , y - borderWidth, 0);
+                    Vector3 br = new Vector3(x + 1 - offsetXRight, y - borderWidth, 0);
+
+                    Vector3 yOffset = new Vector3(0, offsetFromCell, 0);
+                    tl -= yOffset;
+                    tr -= yOffset;
+                    br -= yOffset;
+                    bl -= yOffset;
+
+                    float rightOffsetFromCell = 0f;
+                    if (isInnerCornerRight)
+                    {
+                        rightOffsetFromCell = -offsetFromCell;
+                    }
+                    else if (isOuterCornerRight)
+                    {
+                        rightOffsetFromCell = offsetFromCell;
+                    }
+                    
+                    float leftOffsetFromCell = 0f;
+                    if (isInnerCornerLeft)
+                    {
+                        leftOffsetFromCell = -offsetFromCell;
+                    }
+                    else if (isOuterCornerLeft)
+                    {
+                        leftOffsetFromCell = offsetFromCell;
+                    }
+                    
+                    Vector3 xOffsetRight = new Vector3(rightOffsetFromCell, 0 , 0);
+                    tr += xOffsetRight;
+                    br += xOffsetRight;
+
+                    Vector3 xOffsetLeft = new Vector3(leftOffsetFromCell, 0, 0);
+                    tl -= xOffsetLeft;
+                    bl -= xOffsetLeft;
+                    
+                    cornerVertices.Add(tl);
+                    cornerVertices.Add(tr);
+                    cornerVertices.Add(bl);
+                    cornerVertices.Add(br);
+                    
                     cornerTris.Add(cornerCellIndex);
                     cornerTris.Add(cornerCellIndex + 1);
                     cornerTris.Add(cornerCellIndex + 2);
@@ -470,34 +545,6 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                 if (IsHasCellAt(matrix, x, y + 1) == false && IsHasCellAt(matrix, x, y))
                 {
                     var borderTile = IconService.Current.GetSpriteById(skinDef["cell_tile_03"]);
-
-                    // float offsetXLeft  = 0f;
-                    // float offsetXRight = 0f;
-                    //
-                    // if ((IsHasCellAt(matrix, x - 1, y) || IsHasCellAt(matrix, x - 1, y + 1))
-                    //  && (IsHasCellAt(matrix, x - 1, y) && IsHasCellAt(matrix, x - 1, y + 1)) == false)
-                    // {
-                    //     offsetXLeft = 0f;
-                    // }
-                    // else
-                    // {
-                    //     offsetXLeft = cornerSize;
-                    // }
-                    //
-                    // if ((IsHasCellAt(matrix, x + 1, y) || IsHasCellAt(matrix, x + 1, y + 1))
-                    //  && (IsHasCellAt(matrix, x + 1, y) && IsHasCellAt(matrix, x + 1, y + 1)) == false)
-                    // {
-                    //     offsetXRight = 0f;
-                    // }
-                    // else
-                    // {
-                    //     offsetXRight = cornerSize;
-                    // }
-                    //
-                    // cornerVertices.Add(new Vector3(x +     offsetXLeft  - offsetFromCell, offsetFromCell + y + 1 + borderWidth, 0));
-                    // cornerVertices.Add(new Vector3(x + 1 - offsetXRight + offsetFromCell, offsetFromCell + y + 1 + borderWidth, 0));
-                    // cornerVertices.Add(new Vector3(x +     offsetXLeft  - offsetFromCell, offsetFromCell + y + 1,               0));
-                    // cornerVertices.Add(new Vector3(x + 1 - offsetXRight + offsetFromCell, offsetFromCell + y + 1,               0));
 
                     float offsetXLeft  = 0f;
                     float offsetXRight = 0f;
@@ -526,10 +573,7 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                         isOuterCornerRight = true;
                         offsetXRight = cornerSize;
                     }
-                    
-                    // bool isInnerCornerBottom = IsHasCellAt(matrix, x + 1, y - 1) && IsHasCellAt(matrix, x, y - 1);
-                    // bool isInnerCornerTop    = IsHasCellAt(matrix, x + 1, y + 1) && IsHasCellAt(matrix, x, y + 1);
-                    
+
                     bool isInnerCornerLeft   = IsHasCellAt(matrix, x - 1, y + 1) && IsHasCellAt(matrix, x - 1, y);
                     bool isInnerCornerRight  = IsHasCellAt(matrix, x + 1, y + 1) && IsHasCellAt(matrix, x + 1, y);
 
@@ -547,7 +591,7 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                     float rightOffsetFromCell = 0f;
                     if (isInnerCornerRight)
                     {
-                        rightOffsetFromCell = 0;
+                        rightOffsetFromCell = -offsetFromCell;
                     }
                     else if (isOuterCornerRight)
                     {
@@ -557,7 +601,7 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                     float leftOffsetFromCell = 0f;
                     if (isInnerCornerLeft)
                     {
-                        leftOffsetFromCell = 0;
+                        leftOffsetFromCell = -offsetFromCell;
                     }
                     else if (isOuterCornerLeft)
                     {
@@ -600,16 +644,18 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                 }
 
 #region Inner Corners
+                
+                // TOP RIGHT
                 if (IsHasCellAt(matrix, x - 1, y - 1) == false
                  && IsHasCellAt(matrix, x - 1, y)
                  && IsHasCellAt(matrix, x,     y - 1))
                 {
                     var cornerTile = IconService.Current.GetSpriteById(skinDef["cell_tile_10"]);
 
-                    cornerVertices.Add(new Vector3(x - cornerSize, y,              0));
-                    cornerVertices.Add(new Vector3(x,              y,              0));
-                    cornerVertices.Add(new Vector3(x - cornerSize, y - cornerSize, 0));
-                    cornerVertices.Add(new Vector3(x,              y - cornerSize, 0));
+                    cornerVertices.Add(new Vector3(x - cornerSize - offsetFromCell, y              - offsetFromCell, 0));
+                    cornerVertices.Add(new Vector3(x              - offsetFromCell, y              - offsetFromCell, 0));
+                    cornerVertices.Add(new Vector3(x - cornerSize - offsetFromCell, y - cornerSize - offsetFromCell, 0));
+                    cornerVertices.Add(new Vector3(x              - offsetFromCell, y - cornerSize - offsetFromCell, 0));
 
                     cornerTris.Add(cornerCellIndex);
                     cornerTris.Add(cornerCellIndex + 1);
@@ -633,16 +679,17 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                     cornerCellIndex = cornerCellIndex + 4;
                 }
 
+                //TOP LEFT
                 if (IsHasCellAt(matrix, x, y - 1) == false
                  && IsHasCellAt(matrix, x - 1, y - 1)
                  && IsHasCellAt(matrix, x,     y))
                 {
                     var cornerTile = IconService.Current.GetSpriteById(skinDef["cell_tile_20"]);
 
-                    cornerVertices.Add(new Vector3(x,              y,              0));
-                    cornerVertices.Add(new Vector3(x + cornerSize, y,              0));
-                    cornerVertices.Add(new Vector3(x,              y - cornerSize, 0));
-                    cornerVertices.Add(new Vector3(x + cornerSize, y - cornerSize, 0));
+                    cornerVertices.Add(new Vector3(x              + offsetFromCell, y              - offsetFromCell, 0));
+                    cornerVertices.Add(new Vector3(x + cornerSize + offsetFromCell, y              - offsetFromCell, 0));
+                    cornerVertices.Add(new Vector3(x              + offsetFromCell, y - cornerSize - offsetFromCell, 0));
+                    cornerVertices.Add(new Vector3(x + cornerSize + offsetFromCell, y - cornerSize - offsetFromCell, 0));
 
                     cornerTris.Add(cornerCellIndex);
                     cornerTris.Add(cornerCellIndex + 1);
@@ -658,25 +705,20 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                         cornerColors.Add(defaultColor);
                     }
 
-
-                    if (cornerVertices.Count != cornerUV.Count)
-                    {
-                        int asfasd = 0;
-                    }
-
                     cornerCellIndex = cornerCellIndex + 4;
                 }
 
+                //BOTTOM LEFT
                 if (IsHasCellAt(matrix, x, y + 1) == false
                  && IsHasCellAt(matrix, x - 1, y + 1)
                  && IsHasCellAt(matrix, x,     y))
                 {
                     var cornerTile = IconService.Current.GetSpriteById(skinDef["cell_tile_30"]);
 
-                    cornerVertices.Add(new Vector3(x,              y + 1 + cornerSize, 0));
-                    cornerVertices.Add(new Vector3(x + cornerSize, y + 1 + cornerSize, 0));
-                    cornerVertices.Add(new Vector3(x,              y + 1,              0));
-                    cornerVertices.Add(new Vector3(x + cornerSize, y + 1,              0));
+                    cornerVertices.Add(new Vector3(x              + offsetFromCell, y + 1 + cornerSize + offsetFromCell, 0));
+                    cornerVertices.Add(new Vector3(x + cornerSize + offsetFromCell, y + 1 + cornerSize + offsetFromCell, 0));
+                    cornerVertices.Add(new Vector3(x              + offsetFromCell, y + 1              + offsetFromCell, 0));
+                    cornerVertices.Add(new Vector3(x + cornerSize + offsetFromCell, y + 1              + offsetFromCell, 0));
 
                     cornerTris.Add(cornerCellIndex);
                     cornerTris.Add(cornerCellIndex + 1);
@@ -706,10 +748,10 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                 {
                     var cornerTile = IconService.Current.GetSpriteById(skinDef["cell_tile_40"]);
 
-                    cornerVertices.Add(new Vector3(x - cornerSize, y + cornerSize, 0));
-                    cornerVertices.Add(new Vector3(x,              y + cornerSize, 0));
-                    cornerVertices.Add(new Vector3(x - cornerSize, y,              0));
-                    cornerVertices.Add(new Vector3(x,              y,              0));
+                    cornerVertices.Add(new Vector3(x - cornerSize - offsetFromCell, y + cornerSize + offsetFromCell, 0));
+                    cornerVertices.Add(new Vector3(x              - offsetFromCell, y + cornerSize + offsetFromCell, 0));
+                    cornerVertices.Add(new Vector3(x - cornerSize - offsetFromCell, y              + offsetFromCell, 0));
+                    cornerVertices.Add(new Vector3(x              - offsetFromCell, y              + offsetFromCell, 0));
 
                     cornerTris.Add(cornerCellIndex);
                     cornerTris.Add(cornerCellIndex + 1);
@@ -723,11 +765,6 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                     {
                         cornerUV.Add(cornerTile.uv[i]);
                         cornerColors.Add(defaultColor);
-                    }
-
-                    if (cornerVertices.Count != cornerUV.Count)
-                    {
-                        int asfasd = 0;
                     }
 
                     cornerCellIndex = cornerCellIndex + 4;
@@ -762,11 +799,6 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                         cornerColors.Add(defaultColor);
                     }
 
-                    if (cornerVertices.Count != cornerUV.Count)
-                    {
-                        int asfasd = 0;
-                    }
-
                     cornerCellIndex = cornerCellIndex + 4;
                 }
 
@@ -795,11 +827,6 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                     {
                         cornerUV.Add(cornerTile.uv[i]);
                         cornerColors.Add(defaultColor);
-                    }
-
-                    if (cornerVertices.Count != cornerUV.Count)
-                    {
-                        int asfasd = 0;
                     }
 
                     cornerCellIndex = cornerCellIndex + 4;
@@ -831,11 +858,6 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                         cornerColors.Add(defaultColor);
                     }
 
-                    if (cornerVertices.Count != cornerUV.Count)
-                    {
-                        int asfasd = 0;
-                    }
-
                     cornerCellIndex = cornerCellIndex + 4;
                 }
 
@@ -864,11 +886,6 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                     {
                         cornerUV.Add(cornerTile.uv[i]);
                         cornerColors.Add(defaultColor);
-                    }
-
-                    if (cornerVertices.Count != cornerUV.Count)
-                    {
-                        int asfasd = 0;
                     }
 
                     cornerCellIndex = cornerCellIndex + 4;
