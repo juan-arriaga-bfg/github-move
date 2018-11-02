@@ -113,27 +113,27 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(28, 14), PieceType.ChestL1.Id, PieceType.ChestL3.Id);
         AddPieces(new BoardPosition(28, 18), PieceType.ChestC1.Id, PieceType.ChestC3.Id);*/
         
-        AddPieces(new BoardPosition(29, 16), PieceType.Char1.Id, PieceType.Char9.Id);
+        AddPieces(new BoardPosition(29, 16), PieceType.NPC_SleepingBeauty.Id, PieceType.NPC_9.Id);
     }
     
     private void TestFieldAlex()
     {
         AddPieces(new BoardPosition(17, 16), PieceType.A1.Id, PieceType.A1.Id);
-        AddPieces(new BoardPosition(19, 16), PieceType.C1.Id, PieceType.C11.Id);
-        AddPieces(new BoardPosition(20, 16), PieceType.D1.Id, PieceType.D5.Id);
-        AddPieces(new BoardPosition(21, 16), PieceType.Char1.Id, PieceType.Char9.Id);
-        AddPieces(new BoardPosition(23, 16), PieceType.Magic1.Id, PieceType.Magic.Id);
-        AddPieces(new BoardPosition(24, 16), PieceType.Magic1.Id, PieceType.Magic.Id);
-        AddPieces(new BoardPosition(25, 16), PieceType.Magic.Id, PieceType.Magic.Id);
-        AddPieces(new BoardPosition(27, 16), PieceType.ChestA1.Id, PieceType.ChestA3.Id);
-        AddPieces(new BoardPosition(28, 16), PieceType.O1.Id, PieceType.O9.Id);
-        AddPieces(new BoardPosition(29, 16), PieceType.H1.Id, PieceType.H5.Id);
+        AddPieces(new BoardPosition(19, 16), PieceType.B1.Id, PieceType.B11.Id);
+        AddPieces(new BoardPosition(20, 16), PieceType.PR_A1.Id, PieceType.PR_A5.Id);
+        AddPieces(new BoardPosition(21, 16), PieceType.NPC_SleepingBeauty.Id, PieceType.NPC_9.Id);
+        AddPieces(new BoardPosition(23, 16), PieceType.Boost_CR1.Id, PieceType.Boost_CR.Id);
+        AddPieces(new BoardPosition(24, 16), PieceType.Boost_CR1.Id, PieceType.Boost_CR.Id);
+        AddPieces(new BoardPosition(25, 16), PieceType.Boost_CR.Id, PieceType.Boost_CR.Id);
+        AddPieces(new BoardPosition(27, 16), PieceType.CH1_A.Id, PieceType.CH3_A.Id);
+        AddPieces(new BoardPosition(28, 16), PieceType.OB1_A.Id, PieceType.OB9_A.Id);
+        AddPieces(new BoardPosition(29, 16), PieceType.PR_E1.Id, PieceType.PR_E5.Id);
     }
     
     private void TestFieldQA()
     {
-        AddPieces(new BoardPosition(19, 16), PieceType.C1.Id, PieceType.C11.Id);
-        AddPiece(10, 20, PieceType.C1.Id);
+        AddPieces(new BoardPosition(19, 16), PieceType.B1.Id, PieceType.B11.Id);
+        AddPiece(10, 20, PieceType.B1.Id);
     }
     
     private List<BoardPosition> CreateFog()

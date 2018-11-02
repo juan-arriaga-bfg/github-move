@@ -4,7 +4,7 @@
     {
         var piece = base.Build(pieceType, context);
 
-        piece.RegisterComponent(pieceType == PieceType.Worker1.Id ? new WorkerDraggablePieceComponent() : new DraggablePieceComponent());
+        piece.RegisterComponent(pieceType == PieceType.Boost_WR.Id ? new WorkerDraggablePieceComponent() : new DraggablePieceComponent());
 
         var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType);
         

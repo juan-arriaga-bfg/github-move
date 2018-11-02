@@ -15,7 +15,7 @@
 		locker = new LockerComponent();
 		RegisterComponent(locker);
 		
-		if(context.PieceType != PieceType.Magic.Id && context.Context.BoardLogic.MatchDefinition.GetNext(context.PieceType, false) == PieceType.None.Id) locker.Lock(this);
+		if(context.PieceType != PieceType.Boost_CR.Id && context.Context.BoardLogic.MatchDefinition.GetNext(context.PieceType, false) == PieceType.None.Id) locker.Lock(this);
 	}
     
 	public virtual bool IsMatchable()
