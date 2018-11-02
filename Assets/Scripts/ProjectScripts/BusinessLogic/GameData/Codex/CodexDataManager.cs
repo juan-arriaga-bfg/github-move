@@ -511,11 +511,6 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                         Name = "Alchemist",
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestL1.Id)),
                     },
-                    new CodexChainDef
-                    {
-                        Name = "Epic",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestEpic1.Id)),
-                    },
                 }
             },
             new CodexTabDef

@@ -33,8 +33,8 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Coin1.Id, PieceType.Coin6.Id, dict);
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Crystal1.Id, PieceType.Crystal5.Id, dict);
         
-        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.Chest1.Id, PieceType.Chest9.Id, dict);
-        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.ChestEpic1.Id, PieceType.ChestEpic3.Id, dict);
+        dict.Add(PieceType.Chest1.Id, new ChestPieceBuilder());
+        
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.ChestA1.Id, PieceType.ChestA3.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.ChestC1.Id, PieceType.ChestC3.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.ChestK1.Id, PieceType.ChestK3.Id, dict);
@@ -61,8 +61,6 @@ public class PieceBuildersBuilder
     private Dictionary<int, IPieceBuilder> AddObstaclePiece(Dictionary<int, IPieceBuilder> dict)
     {
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.O1.Id, PieceType.O9.Id, dict);
-        dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OX1.Id, PieceType.OX9.Id, dict);
-        dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OEpic1.Id, PieceType.OEpic9.Id, dict);
         dict = AddSimplePiece<MovedObstaclePieceBuilder>(PieceType.ObstacleD.Id, PieceType.ObstacleH.Id, dict);
         
         dict.Add(PieceType.Fog.Id, new FogPieceBuilder());

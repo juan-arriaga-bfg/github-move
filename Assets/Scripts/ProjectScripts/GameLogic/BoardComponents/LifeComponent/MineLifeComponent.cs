@@ -82,7 +82,7 @@ public class MineLifeComponent : StorageLifeComponent
             {
                 IsCheckMatch = false,
                 At = point,
-                PieceTypeId = PieceType.OX1.Id
+                PieceTypeId = PieceType.O1.Id
             });
         }
     }

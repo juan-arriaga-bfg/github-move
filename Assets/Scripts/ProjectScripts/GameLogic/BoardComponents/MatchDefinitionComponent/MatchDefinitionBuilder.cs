@@ -174,30 +174,6 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.O8.Id, new PieceMatchDef {Next = PieceType.O9.Id, Previous = PieceType.O7.Id, Count = -1});
         dict.Add(PieceType.O9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.O8.Id, Count = -1});
         
-        dict.Add(PieceType.OX1.Id, new PieceMatchDef {Next = PieceType.OX2.Id, Previous = PieceType.None.Id, Count = -1});
-        dict.Add(PieceType.OX2.Id, new PieceMatchDef {Next = PieceType.OX3.Id, Previous = PieceType.OX1.Id, Count = -1});
-        dict.Add(PieceType.OX3.Id, new PieceMatchDef {Next = PieceType.OX4.Id, Previous = PieceType.OX2.Id, Count = -1});
-        dict.Add(PieceType.OX4.Id, new PieceMatchDef {Next = PieceType.OX5.Id, Previous = PieceType.OX3.Id, Count = -1});
-        dict.Add(PieceType.OX5.Id, new PieceMatchDef {Next = PieceType.OX6.Id, Previous = PieceType.OX4.Id, Count = -1});
-        dict.Add(PieceType.OX6.Id, new PieceMatchDef {Next = PieceType.OX7.Id, Previous = PieceType.OX5.Id, Count = -1});
-        dict.Add(PieceType.OX7.Id, new PieceMatchDef {Next = PieceType.OX8.Id, Previous = PieceType.OX6.Id, Count = -1});
-        dict.Add(PieceType.OX8.Id, new PieceMatchDef {Next = PieceType.OX9.Id, Previous = PieceType.OX7.Id, Count = -1});
-        dict.Add(PieceType.OX9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.OX8.Id, Count = -1});
-        
-        dict.Add(PieceType.OEpic1.Id, new PieceMatchDef {Next = PieceType.OEpic2.Id, Previous = PieceType.None.Id, Count = -1});
-        dict.Add(PieceType.OEpic2.Id, new PieceMatchDef {Next = PieceType.OEpic3.Id, Previous = PieceType.OEpic1.Id, Count = -1});
-        dict.Add(PieceType.OEpic3.Id, new PieceMatchDef {Next = PieceType.OEpic4.Id, Previous = PieceType.OEpic2.Id, Count = -1});
-        dict.Add(PieceType.OEpic4.Id, new PieceMatchDef {Next = PieceType.OEpic5.Id, Previous = PieceType.OEpic3.Id, Count = -1});
-        dict.Add(PieceType.OEpic5.Id, new PieceMatchDef {Next = PieceType.OEpic6.Id, Previous = PieceType.OEpic4.Id, Count = -1});
-        dict.Add(PieceType.OEpic6.Id, new PieceMatchDef {Next = PieceType.OEpic7.Id, Previous = PieceType.OEpic5.Id, Count = -1});
-        dict.Add(PieceType.OEpic7.Id, new PieceMatchDef {Next = PieceType.OEpic8.Id, Previous = PieceType.OEpic6.Id, Count = -1});
-        dict.Add(PieceType.OEpic8.Id, new PieceMatchDef {Next = PieceType.OEpic9.Id, Previous = PieceType.OEpic7.Id, Count = -1});
-        dict.Add(PieceType.OEpic9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.OEpic8.Id, Count = -1});
-        
-        dict.Add(PieceType.ChestEpic1.Id, new PieceMatchDef {Next = PieceType.ChestEpic2.Id, Previous = PieceType.None.Id, Count = 3});
-        dict.Add(PieceType.ChestEpic2.Id, new PieceMatchDef {Next = PieceType.ChestEpic3.Id, Previous = PieceType.ChestEpic1.Id, Count = 3});
-        dict.Add(PieceType.ChestEpic3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.ChestEpic2.Id});
-        
         dict.Add(PieceType.ChestA1.Id, new PieceMatchDef {Next = PieceType.ChestA2.Id, Previous = PieceType.None.Id, Count = 3});
         dict.Add(PieceType.ChestA2.Id, new PieceMatchDef {Next = PieceType.ChestA3.Id, Previous = PieceType.ChestA1.Id, Count = 3});
         dict.Add(PieceType.ChestA3.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.ChestA2.Id});
