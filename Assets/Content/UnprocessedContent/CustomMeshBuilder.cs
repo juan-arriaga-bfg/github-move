@@ -718,9 +718,9 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
         cellsMesh.RecalculateBounds();
 
 
-        var meshGO        = new GameObject("!!!!_cells");
+        var meshGO = new GameObject("Fill");
         var meshTransform = meshGO.transform;
-        meshTransform.SetParent(def.Parent, false);
+        meshTransform.SetParent(def.Parent != null ? def.Parent : context.ViewRoot, false);
         meshTransform.localPosition = Vector3.zero;
 
         var meshRenderer = meshGO.AddComponent<MeshRenderer>();
@@ -728,7 +728,7 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
 
         cachedGridMeshRenderer = meshRenderer;
 
-        meshTransform.localScale = new Vector3(127.4f, 127.4f, 1f);
+        //meshTransform.localScale = new Vector3(127.4f, 127.4f, 1f);
 
         meshFilter.mesh = cellsMesh;
 
@@ -743,9 +743,9 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
         meshRenderer.material = material;
 
         // size 
-        var boundsOffset = new Vector3(-meshRenderer.bounds.extents.x, -meshRenderer.bounds.extents.y, 0f);
-        var localOffset  = new Vector3(0f,                             -61f,                           0f);
-        meshTransform.localPosition = boundsOffset + localOffset;
+        // var boundsOffset = new Vector3(-meshRenderer.bounds.extents.x, -meshRenderer.bounds.extents.y, 0f);
+        // var localOffset  = new Vector3(0f,                             -61f,                           0f);
+        // meshTransform.localPosition = boundsOffset + localOffset;
 
 
         // corners
@@ -756,7 +756,7 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
 
         cornerMesh.RecalculateBounds();
 
-        var cornerMeshGO        = new GameObject("_cells_corner");
+        var cornerMeshGO        = new GameObject("Border");
         var cornerMeshTransform = cornerMeshGO.transform;
         cornerMeshTransform.SetParent(meshTransform);
 
