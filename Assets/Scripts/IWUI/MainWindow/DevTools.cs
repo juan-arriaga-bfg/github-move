@@ -120,8 +120,77 @@ public class DevTools : MonoBehaviour
     public void OnDebug1Click()
     {
         Debug.Log("OnDebug1Click");
+
+        var skinDef = new Dictionary<string, string>
+        {
+            {"cell_tile_full_0", "cell_tile_full_0"},
+            {"cell_tile_full_1", "cell_tile_full_1"},
+            {"cell_tile_00", "cell_tile_00"},
+            {"cell_tile_01", "cell_tile_01"},
+            {"cell_tile_02", "cell_tile_02"},
+            {"cell_tile_03", "cell_tile_03"},
+            {"cell_tile_10", "cell_tile_10"},
+            {"cell_tile_20", "cell_tile_20"},
+            {"cell_tile_30", "cell_tile_30"},
+            {"cell_tile_40", "cell_tile_40"},
+            {"cell_tile_11", "cell_tile_11"},
+            {"cell_tile_14", "cell_tile_14"},
+            {"cell_tile_13", "cell_tile_13"},
+            {"cell_tile_12", "cell_tile_12"},
+        };
         
-        UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
+        // int[,] fieldDef = new[,]
+        // {
+        //     {1,1,0,0},
+        //     {1,1,0,0},
+        //     {0,0,1,1},
+        //     {1,1,1,1},
+        //     {1,0,0,0},
+        // };
+        
+        // int[,] fieldDef = new[,]
+        // {
+        //     {0,0,1,1,0,0},
+        //     {0,1,1,1,1,0},
+        //     {1,1,0,0,1,1},
+        //     {1,1,0,0,1,1},
+        //     {0,1,1,1,1,0},
+        //     {0,0,1,1,0,0},
+        // };
+        
+        int[,] fieldDef = new[,]
+        {
+            {1,1,0,0,1,1},
+            {1,1,0,0,1,1},
+            {0,0,1,1,0,0},
+            {0,0,1,1,0,0},
+            {1,1,0,0,1,1},
+            {1,1,0,0,1,1},
+        };
+
+        //var material = new Material(Shader.Find("Sprites/Opaque"));
+        Material fillMaterial = new Material(Shader.Find("Sprites/Default"))
+        {
+            renderQueue = 999
+        };
+
+        Material borderMaterial = new Material(Shader.Find("Sprites/Default"))
+        {
+            renderQueue = 1000
+        };
+
+        CustomMeshBuilder.LayoutDef def = new CustomMeshBuilder.LayoutDef
+        {
+            SkinDef = skinDef,
+            BorderWidth = 0.2f,
+            Matrix = fieldDef,
+            Parent = GameObject.Find("PARAMPAMPAM").transform,
+            FillMaterial = fillMaterial,
+            BorderMaterial = borderMaterial,
+            Fill = true
+        };
+
+        new CustomMeshBuilder().Build(def);
     }
 
     public void OnDebug2Click()
@@ -144,4 +213,21 @@ public class DevTools : MonoBehaviour
         //
         // string i = "";
     }
+    
+    #if DEBUG
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                OnDebug1Click();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                OnDebug2Click();
+            }
+        }
+    }
+#endif
 }
