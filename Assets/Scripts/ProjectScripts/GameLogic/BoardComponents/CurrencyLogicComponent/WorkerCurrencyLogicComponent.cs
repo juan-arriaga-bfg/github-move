@@ -153,7 +153,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
     public bool SetExtra(Piece worker, BoardPosition targetPosition)
     {
-        if (worker.PieceType != PieceType.Worker1.Id || context.BoardLogic.IsEmpty(targetPosition)) return false;
+        if (worker.PieceType != PieceType.Boost_WR.Id || context.BoardLogic.IsEmpty(targetPosition)) return false;
 
         var target = context.BoardLogic.GetPieceAt(targetPosition);
         var def = PieceType.GetDefById(target.PieceType);

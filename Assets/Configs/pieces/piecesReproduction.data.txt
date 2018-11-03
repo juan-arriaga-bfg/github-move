@@ -1,6 +1,6 @@
 ﻿[
   {
-    "Uid": "D4",
+    "Uid": "PR_A4",
     "Delay": 50,
     "Limit": 3,
     "StepReward": {
@@ -8,13 +8,13 @@
       "Amount": 10
     },
     "Reproduction": {
-      "Currency": "D5",
+      "Currency": "PR_A5",
       "Amount": 1
     },
-    "Obstacle": "ObstacleD"
+    "Obstacle": "OB_PR_A"
   },
   {
-    "Uid": "E4",
+    "Uid": "PR_B4",
     "Delay": 50,
     "Limit": 3,
     "StepReward": {
@@ -22,13 +22,13 @@
       "Amount": 10
     },
     "Reproduction": {
-      "Currency": "E5",
+      "Currency": "PR_B5",
       "Amount": 1
     },
-    "Obstacle": "ObstacleE"
+    "Obstacle": "OB_PR_B"
   },
   {
-    "Uid": "F4",
+    "Uid": "PR_C4",
     "Delay": 50,
     "Limit": 3,
     "StepReward": {
@@ -36,13 +36,13 @@
       "Amount": 10
     },
     "Reproduction": {
-      "Currency": "F5",
+      "Currency": "PR_C5",
       "Amount": 1
     },
-    "Obstacle": "ObstacleF"
+    "Obstacle": "OB_PR_C"
   },
   {
-    "Uid": "G4",
+    "Uid": "PR_D4",
     "Delay": 50,
     "Limit": 3,
     "StepReward": {
@@ -50,13 +50,13 @@
       "Amount": 10
     },
     "Reproduction": {
-      "Currency": "G5",
+      "Currency": "PR_D5",
       "Amount": 1
     },
-    "Obstacle": "ObstacleG"
+    "Obstacle": "OB_PR_D"
   },
   {
-    "Uid": "H4",
+    "Uid": "PR_E4",
     "Delay": 50,
     "Limit": 3,
     "StepReward": {
@@ -64,37 +64,9 @@
       "Amount": 10
     },
     "Reproduction": {
-      "Currency": "H5",
+      "Currency": "PR_E5",
       "Amount": 1
     },
-    "Obstacle": "ObstacleH"
-  },
-  {
-    "Uid": "I4",
-    "Delay": 50,
-    "Limit": 3,
-    "StepReward": {
-      "Currency": "Experience",
-      "Amount": 10
-    },
-    "Reproduction": {
-      "Currency": "I5",
-      "Amount": 1
-    },
-    "Obstacle": "OX1"
-  },
-  {
-    "Uid": "J4",
-    "Delay": 50,
-    "Limit": 3,
-    "StepReward": {
-      "Currency": "Experience",
-      "Amount": 10
-    },
-    "Reproduction": {
-      "Currency": "J5",
-      "Amount": 1
-    },
-    "Obstacle": "OX1"
+    "Obstacle": "OB_PR_E"
   }
 ]

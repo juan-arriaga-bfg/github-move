@@ -71,7 +71,7 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
 
     private BoardPosition? GetTargetPosition()
     {
-        var pieces = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1);
+        var pieces = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1);
         if (pieces != null && pieces.Count > 0)
         {
             var target = pieces[0];

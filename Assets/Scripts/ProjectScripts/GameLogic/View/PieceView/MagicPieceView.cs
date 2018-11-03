@@ -30,7 +30,7 @@ public class MagicPieceView : PieceBoardElementView
         bestMatchPieces = FindBestMatches(board);
         foreach (var piece in bestMatchPieces)
         {
-            if(piece.PieceType == PieceType.Magic.Id)
+            if(piece.PieceType == PieceType.Boost_CR.Id)
                 continue;
   
             var view = piece.ActorView;
@@ -156,7 +156,7 @@ public class MagicPieceView : PieceBoardElementView
 
         foreach (var piece in bestMatchPieces)
         {
-            if(piece.PieceType == PieceType.Magic.Id)
+            if(piece.PieceType == PieceType.Boost_CR.Id)
                 continue;
             
             var view = piece.ActorView;

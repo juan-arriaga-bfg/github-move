@@ -3,7 +3,7 @@
     "Uid": "Empty"
   },
   {
-    "Uid": "Worker1",
+    "Uid": "Boost_WR",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -12,10 +12,10 @@
     ]
   },
   {
-    "Uid": "Magic1"
+    "Uid": "Boost_CR1"
   },
   {
-    "Uid": "Magic2",
+    "Uid": "Boost_CR2",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -24,7 +24,7 @@
     ]
   },
   {
-    "Uid": "Magic3",
+    "Uid": "Boost_CR3",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -33,7 +33,7 @@
     ]
   },
   {
-    "Uid": "Magic",
+    "Uid": "Boost_CR",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -42,34 +42,34 @@
     ]
   },
   {
-    "Uid": "Char1"
+    "Uid": "NPC_SleepingBeauty"
   },
   {
-    "Uid": "Char2"
+    "Uid": "NPC_Rapunzel"
   },
   {
-    "Uid": "Char3"
+    "Uid": "NPC_PussInBoots"
   },
   {
-    "Uid": "Char4"
+    "Uid": "NPC_4"
   },
   {
-    "Uid": "Char5"
+    "Uid": "NPC_5"
   },
   {
-    "Uid": "Char6"
+    "Uid": "NPC_6"
   },
   {
-    "Uid": "Char7"
+    "Uid": "NPC_7"
   },
   {
-    "Uid": "Char8"
+    "Uid": "NPC_8"
   },
   {
-    "Uid": "Char9"
+    "Uid": "NPC_9"
   },
   {
-    "Uid": "Crystal1",
+    "Uid": "Hard1",
     "SpawnResources": {
       "Currency": "Crystals",
       "Amount": 1
@@ -83,7 +83,7 @@
     ]
   },
   {
-    "Uid": "Crystal2",
+    "Uid": "Hard2",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -103,7 +103,7 @@
     ]
   },
   {
-    "Uid": "Crystal3",
+    "Uid": "Hard3",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -123,7 +123,7 @@
     ]
   },
   {
-    "Uid": "Crystal4",
+    "Uid": "Hard4",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -143,7 +143,7 @@
     ]
   },
   {
-    "Uid": "Crystal5",
+    "Uid": "Hard5",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -154,7 +154,7 @@
       "Currency": "Crystals",
       "Amount": 250
     },
-    "Name": "Sapphire",
+    "Name": "Ametist",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -163,7 +163,27 @@
     ]
   },
   {
-    "Uid": "Coin1",
+    "Uid": "Hard6",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 175
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Crystals",
+      "Amount": 500
+    },
+    "Name": "Sapphire",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 6
+      }
+    ]
+  },
+  {
+    "Uid": "Soft1",
     "SpawnResources": {
       "Currency": "Coins",
       "Amount": 5
@@ -177,7 +197,7 @@
     ]
   },
   {
-    "Uid": "Coin2",
+    "Uid": "Soft2",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -197,7 +217,7 @@
     ]
   },
   {
-    "Uid": "Coin3",
+    "Uid": "Soft3",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -217,7 +237,7 @@
     ]
   },
   {
-    "Uid": "Coin4",
+    "Uid": "Soft4",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -237,7 +257,7 @@
     ]
   },
   {
-    "Uid": "Coin5",
+    "Uid": "Soft5",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -257,7 +277,7 @@
     ]
   },
   {
-    "Uid": "Coin6",
+    "Uid": "Soft6",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -277,8 +297,8 @@
     ]
   },
   {
-    "Uid": "Chest1",
-    "Name": "Chest1 Piece",
+    "Uid": "CH_Free",
+    "Name": "CH_Free Piece",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -287,217 +307,7 @@
     ]
   },
   {
-    "Uid": "Chest2",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
-      }
-    ],
-    "Name": "Chest2 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 3
-      }
-    ]
-  },
-  {
-    "Uid": "Chest3",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 3
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 3
-      }
-    ],
-    "Name": "Chest3 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
-  },
-  {
-    "Uid": "Chest4",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 10
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 10
-      }
-    ],
-    "Name": "Chest4 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 8
-      }
-    ]
-  },
-  {
-    "Uid": "Chest5",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 15
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 15
-      }
-    ],
-    "Name": "Chest5 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 15
-      }
-    ]
-  },
-  {
-    "Uid": "Chest6",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 25
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 25
-      }
-    ],
-    "Name": "Chest6 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 25
-      }
-    ]
-  },
-  {
-    "Uid": "Chest7",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 50
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 50
-      }
-    ],
-    "Name": "Chest7 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 45
-      }
-    ]
-  },
-  {
-    "Uid": "Chest8",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 75
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 75
-      }
-    ],
-    "Name": "Chest8 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 50
-      }
-    ]
-  },
-  {
-    "Uid": "Chest9",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 100
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 100
-      }
-    ],
-    "Name": "Chest9 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 70
-      }
-    ]
-  },
-  {
-    "Uid": "ChestEpic1",
-    "Name": "ChestEpic1",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      }
-    ]
-  },
-  {
-    "Uid": "ChestEpic2",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
-      }
-    ],
-    "Name": "ChestEpic2",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 3
-      }
-    ]
-  },
-  {
-    "Uid": "ChestEpic3",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 3
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 3
-      }
-    ],
-    "Name": "ChestEpic3",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
-  },
-  {
-    "Uid": "ChestA1",
+    "Uid": "CH1_A",
     "Name": "Small",
     "UnlockBonus": [
       {
@@ -507,7 +317,7 @@
     ]
   },
   {
-    "Uid": "ChestA2",
+    "Uid": "CH2_A",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -527,7 +337,7 @@
     ]
   },
   {
-    "Uid": "ChestA3",
+    "Uid": "CH3_A",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -547,7 +357,7 @@
     ]
   },
   {
-    "Uid": "ChestC1",
+    "Uid": "CH1_B",
     "Name": "Small",
     "UnlockBonus": [
       {
@@ -557,7 +367,7 @@
     ]
   },
   {
-    "Uid": "ChestC2",
+    "Uid": "CH2_B",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -577,7 +387,7 @@
     ]
   },
   {
-    "Uid": "ChestC3",
+    "Uid": "CH3_B",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -597,7 +407,7 @@
     ]
   },
   {
-    "Uid": "ChestK1",
+    "Uid": "CH1_C",
     "Name": "Small",
     "UnlockBonus": [
       {
@@ -607,7 +417,7 @@
     ]
   },
   {
-    "Uid": "ChestK2",
+    "Uid": "CH2_C",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -627,7 +437,7 @@
     ]
   },
   {
-    "Uid": "ChestK3",
+    "Uid": "CH3_C",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -647,7 +457,7 @@
     ]
   },
   {
-    "Uid": "ChestL1",
+    "Uid": "CH1_D",
     "Name": "Small",
     "UnlockBonus": [
       {
@@ -657,7 +467,7 @@
     ]
   },
   {
-    "Uid": "ChestL2",
+    "Uid": "CH2_D",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -677,7 +487,7 @@
     ]
   },
   {
-    "Uid": "ChestL3",
+    "Uid": "CH3_D",
     "CreateRewards": [
       {
         "Currency": "Experience",
@@ -906,7 +716,7 @@
     ]
   },
   {
-    "Uid": "C1",
+    "Uid": "B1",
     "Name": "Stone",
     "UnlockBonus": [
       {
@@ -916,7 +726,7 @@
     ]
   },
   {
-    "Uid": "C2",
+    "Uid": "B2",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -940,7 +750,7 @@
     ]
   },
   {
-    "Uid": "C3",
+    "Uid": "B3",
     "Delay": 10,
     "CreateRewards": [
       {
@@ -965,7 +775,7 @@
     ]
   },
   {
-    "Uid": "C4",
+    "Uid": "B4",
     "Delay": 60,
     "CreateRewards": [
       {
@@ -990,7 +800,7 @@
     ]
   },
   {
-    "Uid": "C5",
+    "Uid": "B5",
     "Delay": 180,
     "CreateRewards": [
       {
@@ -1015,7 +825,7 @@
     ]
   },
   {
-    "Uid": "C6",
+    "Uid": "B6",
     "Delay": 300,
     "CreateRewards": [
       {
@@ -1040,7 +850,7 @@
     ]
   },
   {
-    "Uid": "C7",
+    "Uid": "B7",
     "Delay": 900,
     "CreateRewards": [
       {
@@ -1065,7 +875,7 @@
     ]
   },
   {
-    "Uid": "C8",
+    "Uid": "B8",
     "Delay": 1800,
     "CreateRewards": [
       {
@@ -1090,7 +900,7 @@
     ]
   },
   {
-    "Uid": "C9",
+    "Uid": "B9",
     "Delay": 2400,
     "CreateRewards": [
       {
@@ -1115,7 +925,7 @@
     ]
   },
   {
-    "Uid": "C10",
+    "Uid": "B10",
     "Delay": 3600,
     "CreateRewards": [
       {
@@ -1140,7 +950,7 @@
     ]
   },
   {
-    "Uid": "C11",
+    "Uid": "B11",
     "Delay": 7200,
     "CreateRewards": [
       {
@@ -1165,8 +975,242 @@
     ]
   },
   {
+    "Uid": "C1",
+    "Name": "C1",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "C2",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 1
+      }
+    ],
+    "Name": "C2",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "C3",
+    "Delay": 10,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 2
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 2
+      }
+    ],
+    "Name": "C3",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      }
+    ]
+  },
+  {
+    "Uid": "C4",
+    "Delay": 45,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 5
+      }
+    ],
+    "Name": "C4",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "C5",
+    "Delay": 180,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 15
+      }
+    ],
+    "Name": "C5",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "C6",
+    "Delay": 300,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 25
+      }
+    ],
+    "Name": "C6",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      }
+    ]
+  },
+  {
+    "Uid": "C7",
+    "Delay": 900,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 50
+      }
+    ],
+    "Name": "C7",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
+  },
+  {
+    "Uid": "C8",
+    "Delay": 1800,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 75
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 75
+      }
+    ],
+    "Name": "C8",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 20
+      }
+    ]
+  },
+  {
+    "Uid": "C9",
+    "Delay": 3600,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 50
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 100
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 100
+      }
+    ],
+    "Name": "C9",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      }
+    ]
+  },
+  {
+    "Uid": "C10",
+    "Delay": 10800,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 75
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 150
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 150
+      }
+    ],
+    "Name": "C10",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 30
+      }
+    ]
+  },
+  {
     "Uid": "D1",
-    "Name": "Little sheep",
+    "Name": "D1",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -1190,6 +1234,215 @@
         "Amount": 1
       }
     ],
+    "Name": "D2",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "D3",
+    "Delay": 10,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 2
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 2
+      }
+    ],
+    "Name": "D3",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      }
+    ]
+  },
+  {
+    "Uid": "D4",
+    "Delay": 45,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 5
+      }
+    ],
+    "Name": "D4",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "D5",
+    "Delay": 180,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 15
+      }
+    ],
+    "Name": "D5",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "D6",
+    "Delay": 300,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 25
+      }
+    ],
+    "Name": "D6",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      }
+    ]
+  },
+  {
+    "Uid": "D7",
+    "Delay": 900,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 50
+      }
+    ],
+    "Name": "D7",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
+  },
+  {
+    "Uid": "D8",
+    "Delay": 1800,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 75
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 75
+      }
+    ],
+    "Name": "D8",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 20
+      }
+    ]
+  },
+  {
+    "Uid": "D9",
+    "Delay": 3600,
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 50
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 100
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 100
+      }
+    ],
+    "Name": "D9",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      }
+    ]
+  },
+  {
+    "Uid": "PR_A1",
+    "Name": "Little sheep",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "PR_A2",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 1
+      }
+    ],
     "Name": "Sheep",
     "UnlockBonus": [
       {
@@ -1199,7 +1452,7 @@
     ]
   },
   {
-    "Uid": "D3",
+    "Uid": "PR_A3",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -1223,7 +1476,7 @@
     ]
   },
   {
-    "Uid": "D4",
+    "Uid": "PR_A4",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -1238,7 +1491,7 @@
         "Amount": 3
       }
     ],
-    "Name": "D4",
+    "Name": "PR_A4",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -1247,7 +1500,7 @@
     ]
   },
   {
-    "Uid": "D5",
+    "Uid": "PR_A5",
     "Name": "Wool",
     "UnlockBonus": [
       {
@@ -1261,7 +1514,7 @@
     }
   },
   {
-    "Uid": "E1",
+    "Uid": "PR_B1",
     "Name": "Sprout",
     "UnlockBonus": [
       {
@@ -1271,7 +1524,7 @@
     ]
   },
   {
-    "Uid": "E2",
+    "Uid": "PR_B2",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -1295,7 +1548,7 @@
     ]
   },
   {
-    "Uid": "E3",
+    "Uid": "PR_B3",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -1319,7 +1572,7 @@
     ]
   },
   {
-    "Uid": "E4",
+    "Uid": "PR_B4",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -1334,7 +1587,7 @@
         "Amount": 3
       }
     ],
-    "Name": "E4",
+    "Name": "PR_B4",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -1343,7 +1596,7 @@
     ]
   },
   {
-    "Uid": "E5",
+    "Uid": "PR_B5",
     "Name": "Apple",
     "UnlockBonus": [
       {
@@ -1357,7 +1610,7 @@
     }
   },
   {
-    "Uid": "F1",
+    "Uid": "PR_C1",
     "Name": "Sprout",
     "UnlockBonus": [
       {
@@ -1367,7 +1620,7 @@
     ]
   },
   {
-    "Uid": "F2",
+    "Uid": "PR_C2",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -1391,7 +1644,7 @@
     ]
   },
   {
-    "Uid": "F3",
+    "Uid": "PR_C3",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -1415,7 +1668,7 @@
     ]
   },
   {
-    "Uid": "F4",
+    "Uid": "PR_C4",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -1430,7 +1683,7 @@
         "Amount": 3
       }
     ],
-    "Name": "F4",
+    "Name": "PR_C4",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -1439,7 +1692,7 @@
     ]
   },
   {
-    "Uid": "F5",
+    "Uid": "PR_C5",
     "Name": "Corn",
     "UnlockBonus": [
       {
@@ -1453,7 +1706,7 @@
     }
   },
   {
-    "Uid": "G1",
+    "Uid": "PR_D1",
     "Name": "Calf",
     "UnlockBonus": [
       {
@@ -1463,7 +1716,7 @@
     ]
   },
   {
-    "Uid": "G2",
+    "Uid": "PR_D2",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -1487,7 +1740,7 @@
     ]
   },
   {
-    "Uid": "G3",
+    "Uid": "PR_D3",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -1511,7 +1764,7 @@
     ]
   },
   {
-    "Uid": "G4",
+    "Uid": "PR_D4",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -1526,7 +1779,7 @@
         "Amount": 3
       }
     ],
-    "Name": "G4",
+    "Name": "PR_D4",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -1535,7 +1788,7 @@
     ]
   },
   {
-    "Uid": "G5",
+    "Uid": "PR_D5",
     "Name": "Milk",
     "UnlockBonus": [
       {
@@ -1549,7 +1802,7 @@
     }
   },
   {
-    "Uid": "H1",
+    "Uid": "PR_E1",
     "Name": "Chick",
     "UnlockBonus": [
       {
@@ -1559,7 +1812,7 @@
     ]
   },
   {
-    "Uid": "H2",
+    "Uid": "PR_E2",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -1583,7 +1836,7 @@
     ]
   },
   {
-    "Uid": "H3",
+    "Uid": "PR_E3",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -1607,7 +1860,7 @@
     ]
   },
   {
-    "Uid": "H4",
+    "Uid": "PR_E4",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -1622,7 +1875,7 @@
         "Amount": 3
       }
     ],
-    "Name": "H4",
+    "Name": "PR_E4",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -1631,7 +1884,7 @@
     ]
   },
   {
-    "Uid": "H5",
+    "Uid": "PR_E5",
     "Name": "Egg",
     "UnlockBonus": [
       {
@@ -1643,640 +1896,5 @@
       "Currency": "Crystals",
       "Amount": 1
     }
-  },
-  {
-    "Uid": "I1",
-    "Name": "I1 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      }
-    ]
-  },
-  {
-    "Uid": "I2",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
-      }
-    ],
-    "Name": "I2 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 3
-      }
-    ]
-  },
-  {
-    "Uid": "I3",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 2
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 2
-      }
-    ],
-    "Name": "I3 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
-  },
-  {
-    "Uid": "I4",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 3
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 3
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 3
-      }
-    ],
-    "Name": "I4 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 8
-      }
-    ]
-  },
-  {
-    "Uid": "I5",
-    "Name": "I5 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 10
-      }
-    ],
-    "ExchangePrice": {
-      "Currency": "Crystals",
-      "Amount": 1
-    }
-  },
-  {
-    "Uid": "J1",
-    "Name": "J1 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      }
-    ]
-  },
-  {
-    "Uid": "J2",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
-      }
-    ],
-    "Name": "J2 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 3
-      }
-    ]
-  },
-  {
-    "Uid": "J3",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 2
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 2
-      }
-    ],
-    "Name": "J3  Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
-  },
-  {
-    "Uid": "J4",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 3
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 3
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 3
-      }
-    ],
-    "Name": "J4 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 8
-      }
-    ]
-  },
-  {
-    "Uid": "J5",
-    "Name": "J5 Piece",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 10
-      }
-    ],
-    "ExchangePrice": {
-      "Currency": "Crystals",
-      "Amount": 1
-    }
-  },
-  {
-    "Uid": "K1",
-    "Name": "K1",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      }
-    ]
-  },
-  {
-    "Uid": "K2",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
-      }
-    ],
-    "Name": "K2",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      }
-    ]
-  },
-  {
-    "Uid": "K3",
-    "Delay": 10,
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 2
-      }
-    ],
-    "Name": "K3",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 2
-      }
-    ]
-  },
-  {
-    "Uid": "K4",
-    "Delay": 45,
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 2
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 5
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
-      }
-    ],
-    "Name": "K4",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 3
-      }
-    ]
-  },
-  {
-    "Uid": "K5",
-    "Delay": 180,
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 15
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 15
-      }
-    ],
-    "Name": "K5",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
-  },
-  {
-    "Uid": "K6",
-    "Delay": 300,
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 10
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 25
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 25
-      }
-    ],
-    "Name": "K6",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 10
-      }
-    ]
-  },
-  {
-    "Uid": "K7",
-    "Delay": 900,
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 15
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 50
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 50
-      }
-    ],
-    "Name": "K7",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 15
-      }
-    ]
-  },
-  {
-    "Uid": "K8",
-    "Delay": 1800,
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 25
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 75
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 75
-      }
-    ],
-    "Name": "K8",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 20
-      }
-    ]
-  },
-  {
-    "Uid": "K9",
-    "Delay": 3600,
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 50
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 100
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 100
-      }
-    ],
-    "Name": "K9",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 25
-      }
-    ]
-  },
-  {
-    "Uid": "K10",
-    "Delay": 10800,
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 75
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 150
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 150
-      }
-    ],
-    "Name": "K10",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 30
-      }
-    ]
-  },
-  {
-    "Uid": "L1",
-    "Name": "K1",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      }
-    ]
-  },
-  {
-    "Uid": "L2",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
-      }
-    ],
-    "Name": "K2",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      }
-    ]
-  },
-  {
-    "Uid": "L3",
-    "Delay": 10,
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 1
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 2
-      }
-    ],
-    "Name": "K3",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 2
-      }
-    ]
-  },
-  {
-    "Uid": "L4",
-    "Delay": 45,
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 2
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 5
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
-      }
-    ],
-    "Name": "K4",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 3
-      }
-    ]
-  },
-  {
-    "Uid": "L5",
-    "Delay": 180,
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 15
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 15
-      }
-    ],
-    "Name": "K5",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 5
-      }
-    ]
-  },
-  {
-    "Uid": "L6",
-    "Delay": 300,
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 10
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 25
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 25
-      }
-    ],
-    "Name": "K6",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 10
-      }
-    ]
-  },
-  {
-    "Uid": "L7",
-    "Delay": 900,
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 15
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 50
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 50
-      }
-    ],
-    "Name": "K7",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 15
-      }
-    ]
-  },
-  {
-    "Uid": "L8",
-    "Delay": 1800,
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 25
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 75
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 75
-      }
-    ],
-    "Name": "K8",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 20
-      }
-    ]
-  },
-  {
-    "Uid": "L9",
-    "Delay": 3600,
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 50
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 100
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 100
-      }
-    ],
-    "Name": "K9",
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 25
-      }
-    ]
   }
 ]

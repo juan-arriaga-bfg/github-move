@@ -31,147 +31,75 @@ public static class PathfindIgnoreBuilder
    {
       var obstacleIgnorePices = GetReverseSet(new HashSet<int>
       {
-         PieceType.O1.Id,
-         PieceType.O2.Id,
-         PieceType.O3.Id,
-         PieceType.O4.Id,
-         PieceType.O5.Id,
-         PieceType.O6.Id,
-         PieceType.O7.Id,
-         PieceType.O8.Id,
-         PieceType.O9.Id,
-         PieceType.OX1.Id,
-         PieceType.OX2.Id,
-         PieceType.OX3.Id,
-         PieceType.OX4.Id,
-         PieceType.OX5.Id,
-         PieceType.OX6.Id,
-         PieceType.OX7.Id,
-         PieceType.OX8.Id,
-         PieceType.OX9.Id,
-         PieceType.OEpic1.Id,
-         PieceType.OEpic2.Id,
-         PieceType.OEpic3.Id,
-         PieceType.OEpic4.Id,
-         PieceType.OEpic5.Id,
-         PieceType.OEpic6.Id,
-         PieceType.OEpic7.Id,
-         PieceType.OEpic8.Id,
-         PieceType.OEpic9.Id,
+         PieceType.OB1_A.Id,
+         PieceType.OB2_A.Id,
+         PieceType.OB3_A.Id,
+         PieceType.OB4_A.Id,
+         PieceType.OB5_A.Id,
+         PieceType.OB6_A.Id,
+         PieceType.OB7_A.Id,
+         PieceType.OB8_A.Id,
+         PieceType.OB9_A.Id,
          PieceType.Fog.Id
       });
       
-      dict.Add(PieceType.O1.Id, obstacleIgnorePices);
-      dict.Add(PieceType.O2.Id, obstacleIgnorePices);
-      dict.Add(PieceType.O3.Id, obstacleIgnorePices);
-      dict.Add(PieceType.O4.Id, obstacleIgnorePices);
-      dict.Add(PieceType.O5.Id, obstacleIgnorePices);
-      dict.Add(PieceType.O6.Id, obstacleIgnorePices);
-      dict.Add(PieceType.O7.Id, obstacleIgnorePices);
-      dict.Add(PieceType.O8.Id, obstacleIgnorePices);
-      dict.Add(PieceType.O9.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OX1.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OX2.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OX3.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OX4.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OX5.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OX6.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OX7.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OX8.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OX9.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OEpic1.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OEpic2.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OEpic3.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OEpic4.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OEpic5.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OEpic6.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OEpic7.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OEpic8.Id, obstacleIgnorePices);
-      dict.Add(PieceType.OEpic9.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OB1_A.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OB2_A.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OB3_A.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OB4_A.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OB5_A.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OB6_A.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OB7_A.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OB8_A.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OB9_A.Id, obstacleIgnorePices);
    }
    
    private static void InitMines(Dictionary<int, HashSet<int>> dict)
    {
       var mineIgnorePieces = GetReverseSet(new HashSet<int>
       {
-         PieceType.O1.Id,
-         PieceType.O2.Id,
-         PieceType.O3.Id,
-         PieceType.O4.Id,
-         PieceType.O5.Id,
-         PieceType.O6.Id,
-         PieceType.O7.Id,
-         PieceType.O8.Id,
-         PieceType.O9.Id,
-         PieceType.OX1.Id,
-         PieceType.OX2.Id,
-         PieceType.OX3.Id,
-         PieceType.OX4.Id,
-         PieceType.OX5.Id,
-         PieceType.OX6.Id,
-         PieceType.OX7.Id,
-         PieceType.OX8.Id,
-         PieceType.OX9.Id,
-         PieceType.OEpic1.Id,
-         PieceType.OEpic2.Id,
-         PieceType.OEpic3.Id,
-         PieceType.OEpic4.Id,
-         PieceType.OEpic5.Id,
-         PieceType.OEpic6.Id,
-         PieceType.OEpic7.Id,
-         PieceType.OEpic8.Id,
-         PieceType.OEpic9.Id,
+         PieceType.OB1_A.Id,
+         PieceType.OB2_A.Id,
+         PieceType.OB3_A.Id,
+         PieceType.OB4_A.Id,
+         PieceType.OB5_A.Id,
+         PieceType.OB6_A.Id,
+         PieceType.OB7_A.Id,
+         PieceType.OB8_A.Id,
+         PieceType.OB9_A.Id,
          PieceType.Fog.Id
       });
       
-      dict.Add(PieceType.MineC.Id, mineIgnorePieces);
-      dict.Add(PieceType.MineK.Id, mineIgnorePieces);
-      dict.Add(PieceType.MineL.Id, mineIgnorePieces);
+      dict.Add(PieceType.MN_B.Id, mineIgnorePieces);
+      dict.Add(PieceType.MN_C.Id, mineIgnorePieces);
+      dict.Add(PieceType.MN_D.Id, mineIgnorePieces);
    }
 
    private static void InitCharacters(Dictionary<int, HashSet<int>> dict)
    {
       var charIgnorePieces = GetReverseSet(new HashSet<int>
       {
-         PieceType.O1.Id,
-         PieceType.O2.Id,
-         PieceType.O3.Id,
-         PieceType.O4.Id,
-         PieceType.O5.Id,
-         PieceType.O6.Id,
-         PieceType.O7.Id,
-         PieceType.O8.Id,
-         PieceType.O9.Id,
-         PieceType.OX1.Id,
-         PieceType.OX2.Id,
-         PieceType.OX3.Id,
-         PieceType.OX4.Id,
-         PieceType.OX5.Id,
-         PieceType.OX6.Id,
-         PieceType.OX7.Id,
-         PieceType.OX8.Id,
-         PieceType.OX9.Id,
-         PieceType.OEpic1.Id,
-         PieceType.OEpic2.Id,
-         PieceType.OEpic3.Id,
-         PieceType.OEpic4.Id,
-         PieceType.OEpic5.Id,
-         PieceType.OEpic6.Id,
-         PieceType.OEpic7.Id,
-         PieceType.OEpic8.Id,
-         PieceType.OEpic9.Id,
+         PieceType.OB1_A.Id,
+         PieceType.OB2_A.Id,
+         PieceType.OB3_A.Id,
+         PieceType.OB4_A.Id,
+         PieceType.OB5_A.Id,
+         PieceType.OB6_A.Id,
+         PieceType.OB7_A.Id,
+         PieceType.OB8_A.Id,
+         PieceType.OB9_A.Id,
          PieceType.Fog.Id
       });
       
-      dict.Add(PieceType.Char1.Id, charIgnorePieces);
-      dict.Add(PieceType.Char2.Id, charIgnorePieces);
-      dict.Add(PieceType.Char3.Id, charIgnorePieces);
-      dict.Add(PieceType.Char4.Id, charIgnorePieces);
-      dict.Add(PieceType.Char5.Id, charIgnorePieces);
-      dict.Add(PieceType.Char6.Id, charIgnorePieces);
-      dict.Add(PieceType.Char7.Id, charIgnorePieces);
-      dict.Add(PieceType.Char8.Id, charIgnorePieces);
-      dict.Add(PieceType.Char9.Id, charIgnorePieces);
+      dict.Add(PieceType.NPC_SleepingBeauty.Id, charIgnorePieces);
+      dict.Add(PieceType.NPC_Rapunzel.Id, charIgnorePieces);
+      dict.Add(PieceType.NPC_PussInBoots.Id, charIgnorePieces);
+      dict.Add(PieceType.NPC_4.Id, charIgnorePieces);
+      dict.Add(PieceType.NPC_5.Id, charIgnorePieces);
+      dict.Add(PieceType.NPC_6.Id, charIgnorePieces);
+      dict.Add(PieceType.NPC_7.Id, charIgnorePieces);
+      dict.Add(PieceType.NPC_8.Id, charIgnorePieces);
+      dict.Add(PieceType.NPC_9.Id, charIgnorePieces);
    }
 
    private static void InitFog(Dictionary<int, HashSet<int>> dict)

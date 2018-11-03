@@ -402,17 +402,17 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     new CodexChainDef
                     {
                         Name = "Stone",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.C1.Id))
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.B1.Id))
                     },
                     new CodexChainDef
                     {
                         Name = "Flower",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.K1.Id))
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.C1.Id))
                     },
                     new CodexChainDef
                     {
                         Name = "Alchemist",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.L1.Id))
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.D1.Id))
                     },
                 }
             },
@@ -426,8 +426,8 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                         Name = "Wool",
                         ItemDefs = GetCodexItemsForChain(new List<List<int>>
                         {
-                            matchDef.GetChain(PieceType.D1.Id),
-                            matchDef.GetChain(PieceType.D5.Id)
+                            matchDef.GetChain(PieceType.PR_A1.Id),
+                            matchDef.GetChain(PieceType.PR_A5.Id)
                         })
                     },
                     new CodexChainDef
@@ -435,8 +435,8 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                         Name = "Apple",
                         ItemDefs = GetCodexItemsForChain(new List<List<int>>
                         {
-                            matchDef.GetChain(PieceType.E1.Id),
-                            matchDef.GetChain(PieceType.E5.Id)
+                            matchDef.GetChain(PieceType.PR_B1.Id),
+                            matchDef.GetChain(PieceType.PR_B5.Id)
                         })
                     },
                     new CodexChainDef
@@ -444,8 +444,8 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                         Name = "Corn",
                         ItemDefs = GetCodexItemsForChain(new List<List<int>>
                         {
-                            matchDef.GetChain(PieceType.F1.Id),
-                            matchDef.GetChain(PieceType.F5.Id)
+                            matchDef.GetChain(PieceType.PR_C1.Id),
+                            matchDef.GetChain(PieceType.PR_C5.Id)
                         })
                     },
                     new CodexChainDef
@@ -453,8 +453,8 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                         Name = "Milk",
                         ItemDefs = GetCodexItemsForChain(new List<List<int>>
                         {
-                            matchDef.GetChain(PieceType.G1.Id),
-                            matchDef.GetChain(PieceType.G5.Id)
+                            matchDef.GetChain(PieceType.PR_D1.Id),
+                            matchDef.GetChain(PieceType.PR_D5.Id)
                         })
                     },
                     new CodexChainDef
@@ -462,26 +462,8 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                         Name = "Egg",
                         ItemDefs = GetCodexItemsForChain(new List<List<int>>
                         {
-                            matchDef.GetChain(PieceType.H1.Id),
-                            matchDef.GetChain(PieceType.H5.Id)
-                        })
-                    },
-                    new CodexChainDef
-                    {
-                        Name = "Flowers",
-                        ItemDefs = GetCodexItemsForChain(new List<List<int>>
-                        {
-                            matchDef.GetChain(PieceType.I1.Id),
-                            matchDef.GetChain(PieceType.I5.Id)
-                        })
-                    },
-                    new CodexChainDef
-                    {
-                        Name = "Cherry",
-                        ItemDefs = GetCodexItemsForChain(new List<List<int>>
-                        {
-                            matchDef.GetChain(PieceType.J1.Id),
-                            matchDef.GetChain(PieceType.J5.Id)
+                            matchDef.GetChain(PieceType.PR_E1.Id),
+                            matchDef.GetChain(PieceType.PR_E5.Id)
                         })
                     },
                 }
@@ -494,27 +476,22 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     new CodexChainDef
                     {
                         Name = "Wood",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestA1.Id)),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.CH1_A.Id)),
                     },
                     new CodexChainDef
                     {
                         Name = "Stone",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestC1.Id)),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.CH1_B.Id)),
                     },
                     new CodexChainDef
                     {
                         Name = "Flower",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestK1.Id)),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.CH1_C.Id)),
                     },
                     new CodexChainDef
                     {
                         Name = "Alchemist",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestL1.Id)),
-                    },
-                    new CodexChainDef
-                    {
-                        Name = "Epic",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.ChestEpic1.Id)),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.CH1_D.Id)),
                     },
                 }
             },
@@ -526,17 +503,17 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     new CodexChainDef
                     {
                         Name = "Coin",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Coin1.Id)),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Soft1.Id)),
                     },
                     new CodexChainDef
                     {
                         Name = "Crystal",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Crystal1.Id)),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Hard1.Id)),
                     },
                     new CodexChainDef
                     {
                         Name = "Worker",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Worker1.Id)),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Boost_WR.Id)),
                     },
                 }
             }
