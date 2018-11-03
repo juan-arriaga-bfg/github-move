@@ -27,7 +27,7 @@
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "O1",
+        "Ico": "OB1_A",
         "Message": "Cut down a tree"
       }
     }
@@ -35,7 +35,7 @@
   {
     "$type": "TaskOpenChestEntity, Assembly-CSharp",
     "Id": "4",
-    "PieceUid": "ChestA1",
+    "PieceUid": "CH1_A",
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -79,7 +79,7 @@
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "8",
-    "PieceUid": "C3",
+    "PieceUid": "B3",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -90,7 +90,7 @@
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "9",
-    "PieceUid": "C4",
+    "PieceUid": "B4",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -147,7 +147,7 @@
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "16",
-    "PieceUid": "C5",
+    "PieceUid": "B5",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -183,12 +183,12 @@
   {
     "$type": "TaskSuperMatchEntity, Assembly-CSharp",
     "Id": "20",
-    "PieceUid": "C1",
+    "PieceUid": "B1",
     "TargetValue": 2,
     "Value1": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "C1",
+        "Ico": "B1",
         "Message": "Match 5 pieces in one time"
       }
     }
@@ -230,7 +230,7 @@
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "24",
-    "PieceUid": "C6",
+    "PieceUid": "B6",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
