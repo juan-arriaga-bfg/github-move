@@ -59,32 +59,9 @@ public class MineLifeComponent : StorageLifeComponent
             {
                 To = thisContext.CachedPosition,
                 Positions = new List<BoardPosition> {thisContext.CachedPosition},
-                OnComplete = OnRemove
+                OnComplete = () => GameDataService.Current.MinesManager.Remove(def.Id)
             });
         };
-    }
-
-    private void OnRemove()
-    {
-        GameDataService.Current.MinesManager.Remove(def.Id);
-        
-        var multi = thisContext.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
-        
-        if(multi == null) return;
-
-        var mask = multi.Mask;
-        
-        foreach (var maskPoint in mask)
-        {
-            var point = multi.GetPointInMask(thisContext.CachedPosition, maskPoint);
-            
-            thisContext.Context.ActionExecutor.AddAction(new SpawnPieceAtAction()
-            {
-                IsCheckMatch = false,
-                At = point,
-                PieceTypeId = PieceType.OB1_A.Id
-            });
-        }
     }
 
     protected override void OnSpawnRewards()
