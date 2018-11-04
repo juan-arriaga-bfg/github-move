@@ -135,4 +135,56 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
 
         return ret;
     }
+
+    public List<GridMeshArea> GetFoggedAreas()
+    {
+        List<GridMeshArea> ret = new List<GridMeshArea>();
+
+        int cnt = 0;
+        
+        HashSet<int> draw = new  HashSet<int>
+        {
+            3, 4
+        };
+        
+        foreach (var fogDef in FogPositions.Values)
+        {
+            cnt++;
+
+            if (!draw.Contains(cnt))
+            {
+                //continue;
+            }
+            
+            var positions = fogDef.Positions;
+
+            BoardPosition topLeft;
+            BoardPosition topRight;
+            BoardPosition bottomRight;
+            BoardPosition bottomLeft;
+            BoardPosition.GetAABB(positions, out topLeft, out topRight, out bottomRight, out bottomLeft);
+
+            int areaW = topRight.X - topLeft.X + 1;
+            int areaH = topLeft.Y - bottomLeft.Y + 1;
+            
+            GridMeshArea area = new GridMeshArea
+            {
+                X = bottomLeft.X, 
+                Y = bottomLeft.Y, 
+                Matrix = new int[areaW, areaH],
+                Exclude = cnt == 1
+            };
+
+            foreach (var position in positions)
+            {
+                int x = position.X - area.X;
+                int y = position.Y - area.Y;
+                area.Matrix[x, y] = 1;
+            }
+            
+            ret.Add(area);
+        }
+
+        return ret;
+    }
 }
