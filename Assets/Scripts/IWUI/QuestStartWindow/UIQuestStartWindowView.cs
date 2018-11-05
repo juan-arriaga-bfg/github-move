@@ -96,50 +96,88 @@ public class UIQuestStartWindowView : IWUIWindowView
         conversation.AddCharacter(char3Id, CharacterPosition.RightInner, false, false);
         conversation.AddCharacter(char2Id, CharacterPosition.LeftOuter,  false, false);
         conversation.AddCharacter(char1Id, CharacterPosition.LeftInner,  false, false);
-        
-        conversation.NextBubble(R.UICharacterBubbleMessageView, new UiCharacterBubbleDefMessage {CharacterId = char1Id, 
-            Message = "The only thing we remember is a great noise while we cutting down trees. Then terrible fog appeared everywhere, then we run, then we hid..."}, () =>
+
+
+        ConversationScenario scenario = new ConversationScenario();
+        scenario.RegisterComponent(new ConversationActionBubble
         {
-            conversation.NextBubble(R.UICharacterBubbleMessageView, new UiCharacterBubbleDefMessage {CharacterId = char2Id, 
-                Message = "22222"}, () =>
+            Def = new UiCharacterBubbleDefMessage
             {
-                conversation.NextBubble(R.UICharacterBubbleMessageView, new UiCharacterBubbleDefMessage {CharacterId = char3Id, 
-                    Message = "3333"}, () =>
-                {
-                    conversation.NextBubble(R.UICharacterBubbleMessageView, new UiCharacterBubbleDefMessage {CharacterId = char4Id, 
-                        Message = "4444"}, () =>
-                    {
-                        // Done!
-                    });
-                });
-            });
+                CharacterId = char1Id,
+                Message = "The only thing we remember is a great noise while we cutting down trees. Then terrible fog appeared everywhere, then we run, then we hid..."
+            }
         });
+        scenario.RegisterComponent(new ConversationActionBubble
+        {
+            Def = new UiCharacterBubbleDefMessage
+            {
+                CharacterId = char2Id,
+                Message = "2222"
+            }
+        });
+        scenario.RegisterComponent(new ConversationActionBubble
+        {
+            Def = new UiCharacterBubbleDefMessage
+            {
+                CharacterId = char3Id,
+                Message = "33333"
+            }
+        });
+        scenario.RegisterComponent(new ConversationActionBubble
+        {
+            Def = new UiCharacterBubbleDefMessage
+            {
+                CharacterId = char4Id,
+                Message = "444444"
+            }
+        });
+            
+        
+        conversation.PlayScenario(scenario);
     }
 }
 
-public class ScenarioAction
-{
+public class ConversationAction : IECSComponent, IECSSerializeable
+{    
+    public static readonly int ComponentGuid = ECSManager.GetNextGuid();
+    public  int Guid => ComponentGuid;
     
+    public void OnRegisterEntity(ECSEntity entity)
+    {
+    }
+
+    public void OnUnRegisterEntity(ECSEntity entity)
+    {
+    }
 }
 
-public class ScenarioActionAddChar
+public class ConversationActionBubble : ConversationAction
 {
-    public CharacterPosition Position;
-    public string CharId;
+    public string BubbleId = R.UICharacterBubbleMessageView;
+    public UiCharacterBubbleDefMessage Def;
 }
 
-public class ScenarioActionBubble
+public class ConversationScenario : ECSEntity, IECSSerializeable
 {
-    public string Message;
-}
+    public static readonly int ComponentGuid = ECSManager.GetNextGuid();
+    public override int Guid => ComponentGuid;
+   
+    private readonly List<ConversationAction> actions = new List<ConversationAction>();
 
-public class Scenario
-{
-    [JsonIgnore] private int index;
-    
-    private List<ScenarioAction> actions;
+    private int index;
 
-    public ScenarioAction GetNextAction()
+    public override ECSEntity RegisterComponent(IECSComponent component, bool isCollection = false)
+    {
+        return base.RegisterComponent(component, isCollection);
+        
+        ConversationAction action = component as ConversationAction;
+        if (action != null)
+        {
+            actions.Add(action);
+        }
+    }
+
+    public ConversationAction GetNextAction()
     {
         if (actions == null || index >= actions.Count - 1)
         {

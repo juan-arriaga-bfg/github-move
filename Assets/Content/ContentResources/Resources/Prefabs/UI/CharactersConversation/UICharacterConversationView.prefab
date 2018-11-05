@@ -189,13 +189,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterAnchors:
-  - Position: 0
-    Anchor: {fileID: 224312504220575318}
   - Position: 1
-    Anchor: {fileID: 224039318578451584}
+    Anchor: {fileID: 224312504220575318}
   - Position: 2
-    Anchor: {fileID: 224239399111790770}
+    Anchor: {fileID: 224039318578451584}
   - Position: 3
+    Anchor: {fileID: 224239399111790770}
+  - Position: 4
     Anchor: {fileID: 224814463879052378}
   bubbleAnchorLeft: {fileID: 224409750074406028}
   bubbleAnchorRight: {fileID: 224084925581342236}

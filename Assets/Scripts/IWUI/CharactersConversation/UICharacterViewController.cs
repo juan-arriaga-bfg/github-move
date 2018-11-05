@@ -8,6 +8,8 @@ public class UICharacterViewController : IWBaseMonoBehaviour
 {
     [SerializeField] private Image characterImage;
 
+    public const float FADE_TIME = 0.7f;
+    
     public string CharacterId;
     
     private bool active = true;
@@ -63,17 +65,14 @@ public class UICharacterViewController : IWBaseMonoBehaviour
         Vector3 scale = active ? Vector3.one : Vector3.one * 0.9f;
         if (animated)
         {
-            
-            const float TIME = 0.7f;
-
-            characterImage.DOColor(color, TIME)
+            characterImage.DOColor(color, FADE_TIME)
                           .SetEase(Ease.OutSine)
                           .OnComplete(() =>
                            {
                                onComplete?.Invoke();
                            });
 
-            transform.DOScale(scale, TIME)
+            transform.DOScale(scale, FADE_TIME)
                      .SetEase(Ease.OutSine);
         }
         else

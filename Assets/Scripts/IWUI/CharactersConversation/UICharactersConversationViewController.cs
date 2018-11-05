@@ -1,22 +1,7 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
-
-public partial class UICharactersConversationViewController
-{
-    private interface IScenarioActionExecutor
-    {
-        void Perform(ScenarioAction action);
-    }
-    
-    private class ScenarioActionExecutorBubble : IScenarioActionExecutor
-    {
-        public void Perform(ScenarioAction action)
-        {
-            throw new NotImplementedException();
-        }
-    }
-}
 
 public partial class UICharactersConversationViewController : IWUIWindowView
 {
@@ -26,8 +11,16 @@ public partial class UICharactersConversationViewController : IWUIWindowView
     [SerializeField] private Transform bubbleAnchorRight;
     
     [SerializeField] private Transform tapToContinueAnchor;
+
+    private ConversationScenario scenario;
+
+    private bool clickAllowed;
+
+    private Action onScenarioCompleted;
     
-    private Dictionary<string, UICharacterViewController> characters = new Dictionary<string, UICharacterViewController>();
+    private readonly Dictionary<string, UICharacterViewController> characters = new Dictionary<string, UICharacterViewController>();
+    private readonly Dictionary<CharacterPosition, UICharacterViewController> characterPositions = new Dictionary<CharacterPosition, UICharacterViewController>();
+    
     private UICharacterBubbleView bubbleView;
 
     private TapToContinueTextViewController tapToContinue;
@@ -52,6 +45,12 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         return null;
     }
     
+    private Vector3 GetAnchorCoordinatesForCharacterPosition(CharacterPosition pos)
+    {
+        var anchor = GetAnchorForCharacterPosition(pos);
+        return anchor.position;
+    }
+    
     private Transform GetAnchorForBubblePosition(UICharacterBubbleDef def)
     {
         return def.Side == CharacterSide.Left ? bubbleAnchorLeft : bubbleAnchorRight;
@@ -73,7 +72,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         throw new IndexOutOfRangeException();
     }
     
-    public UICharacterViewController AddCharacter(string characterId, CharacterPosition position, bool active, bool animated, Action onComplete = null)
+    public void AddCharacter(string characterId, CharacterPosition position, bool active, bool animated, Action onComplete = null)
     {
         var pool = UIService.Get.PoolContainer;
 
@@ -81,15 +80,19 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         
         UICharacterViewController character = pool.Create<UICharacterViewController>(viewName);
         character.CharacterId = characterId;
+       
+        Transform anchor = GetAnchorForCharacterPosition(position);
+        Transform host = anchor.parent;
         
-        character.transform.SetParent(GetAnchorForCharacterPosition(position), false);
+        character.transform.SetParent(host, false);
+        character.transform.position = anchor.position;
+                  
         character.Side = GetSideByCharacterPosition(position);
 
         characters.Add(characterId, character);
+        characterPositions.Add(position, character);
         
         character.ToggleActive(active, animated, onComplete);
-
-        return character;
     }
 
     public void RemoveCharacter(int characterId)
@@ -131,9 +134,95 @@ public partial class UICharactersConversationViewController : IWUIWindowView
     
     private void SendCharacterToForeground(string charId, bool animated, Action onComplete = null)
     {
-        characters[charId].ToForeground(animated, onComplete);
+        do
+        {
+            var character = characters[charId];       
+            character.ToForeground(animated, onComplete);
+            
+            if (IsCharacterAtFront(character))
+            {
+                break;
+            }
+
+            UICharacterViewController neighbor = GetNeighborFor(character);
+            if (neighbor == null)
+            {
+                break;
+            }
+
+            character.transform.SetAsLastSibling();
+            CharacterPosition charToFrontPos = GetPositionForCharacter(character);
+            CharacterPosition charToBackPos  = GetPositionForCharacter(neighbor);
+
+            characterPositions[charToBackPos] = character;
+            characterPositions[charToFrontPos] = neighbor;
+
+            Vector3 frontCoords = GetAnchorCoordinatesForCharacterPosition(charToBackPos);
+            Vector3 backCoords  = GetAnchorCoordinatesForCharacterPosition(charToFrontPos);
+
+            if (!animated)
+            {
+                character.transform.position = frontCoords;
+                neighbor.transform.position = backCoords;
+                break;
+            }
+
+            const float TIME = UICharacterViewController.FADE_TIME;
+
+            character.transform.DOMove(frontCoords, TIME)
+                     .SetEase(Ease.OutSine);
+
+            neighbor.transform.DOMove(backCoords, TIME)
+                    .SetEase(Ease.OutSine)
+                    .OnComplete(() => { onComplete?.Invoke(); });
+            return;
+
+        } while (false);
+        
+        onComplete?.Invoke();
     }
 
+    private CharacterPosition GetPositionForCharacter(UICharacterViewController character)
+    {
+        foreach (var pair in characterPositions)
+        {
+            if (pair.Value == character)
+            {
+                return pair.Key;
+            }
+        }
+
+        return CharacterPosition.Unknown;
+    }
+    
+    private UICharacterViewController GetCharacterForPosition(CharacterPosition pos)
+    {
+        UICharacterViewController character;
+        characterPositions.TryGetValue(pos, out character);
+        return character;
+    }
+    
+    private UICharacterViewController GetNeighborFor(UICharacterViewController character)
+    {
+        CharacterPosition pos = GetPositionForCharacter(character);
+        
+        CharacterPosition neighborPos = CharacterPosition.Unknown;
+        
+        if (pos == CharacterPosition.LeftInner) { neighborPos = CharacterPosition.LeftOuter;}
+        if (pos == CharacterPosition.LeftOuter) { neighborPos = CharacterPosition.LeftInner;}        
+        if (pos == CharacterPosition.RightInner) { neighborPos = CharacterPosition.RightOuter;}
+        if (pos == CharacterPosition.RightOuter) { neighborPos = CharacterPosition.RightInner;}
+
+        UICharacterViewController neighbor = GetCharacterForPosition(neighborPos);
+        return neighbor;
+    }
+
+    private bool IsCharacterAtFront(UICharacterViewController character)
+    {
+        CharacterPosition pos = GetPositionForCharacter(character);
+        return pos == CharacterPosition.LeftInner || pos == CharacterPosition.RightInner;
+    }
+    
     public void NextBubble(string bubbleId, UICharacterBubbleDef data, Action onComplete)
     {
         ToggleTapToContinue(false);
@@ -142,38 +231,76 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         {
             data.Side = GetCharacterById(data.CharacterId).Side;
         }
-        
-        var pool = UIService.Get.PoolContainer;
-        
-        Action showNextBubble = () =>
-        {
-            string charId = data.CharacterId;
-            SendToBackgroundAllCharacters(true, charId);
-            SendCharacterToForeground(charId, true, () =>
-            {
-                UICharacterBubbleView bubble = pool.Create<UICharacterBubbleView>(bubbleId);
-                bubbleView = bubble;
 
-                bubbleView.transform.SetParent(GetAnchorForBubblePosition(data), false);
-                bubbleView.Show(data, () =>
-                {
-                    ToggleTapToContinue(true);
-                    onComplete?.Invoke();
-                });
-            });
-        };
-        
         if (bubbleView != null)
         {
+            var pool = UIService.Get.PoolContainer;
             bubbleView.Hide(true, () =>
             {
                 pool.Return(bubbleView.gameObject);
-                showNextBubble();
+                ReorderCharsAndShowBubble(bubbleId, data, onComplete);
             });
+        }
+        else
+        {
+            ReorderCharsAndShowBubble(bubbleId, data, onComplete);
+        }
+    }
+
+    private void ReorderCharsAndShowBubble(string bubbleId, UICharacterBubbleDef data, Action onComplete)
+    {
+        string charId = data.CharacterId;
+        SendToBackgroundAllCharacters(true, charId);
+        SendCharacterToForeground(charId, true, () =>
+        {
+            var pool = UIService.Get.PoolContainer;
+            UICharacterBubbleView bubble = pool.Create<UICharacterBubbleView>(bubbleId);
+            bubbleView = bubble;
+
+            bubbleView.transform.SetParent(GetAnchorForBubblePosition(data), false);
+            bubbleView.Show(data, () =>
+            {
+                ToggleTapToContinue(true);
+                onComplete?.Invoke();
+            });
+        });
+    }
+    
+    public void PlayScenario(ConversationScenario scenario, Action onComplete)
+    {
+        NextScenarioAction();
+    }
+
+    private bool NextScenarioAction()
+    {
+        var action = scenario.GetNextAction();
+
+        if (action == null)
+        {
+            onScenarioCompleted?.Invoke();
+            return false;
+        }
+        
+        if (action is ConversationActionBubble)
+        {
+            clickAllowed = false;
             
+            ConversationActionBubble act = action as ConversationActionBubble;
+            NextBubble(act.BubbleId, act.Def, () => { clickAllowed = true;});
+            return true;
+        }
+
+        Debug.LogError($"[UICharactersConversationViewController] => Unknown action type: {action.GetType()} ");
+        return NextScenarioAction();
+    }
+
+    public void OnClick()
+    {
+        if (!clickAllowed)
+        {
             return;
         }
 
-        showNextBubble();
+        NextScenarioAction();
     }
 }
