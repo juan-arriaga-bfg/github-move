@@ -31,6 +31,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.PiecesCheatSheetWindow,
             UIWindowType.ExchangeWindow,
             UIWindowType.OrdersWindow,
+            UIWindowType.NextLevelWindow,
         });
         
         // on cache complete
