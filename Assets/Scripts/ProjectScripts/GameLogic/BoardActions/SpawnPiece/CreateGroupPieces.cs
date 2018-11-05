@@ -11,6 +11,8 @@ public class CreateGroupPieces:IBoardAction
     public Dictionary<BoardPosition, int> Pieces { get; set; }
     public Action OnSuccessEvent { get; set; }
 
+    public Action LogicCallback { get; set; }
+    
     public bool PerformAction(BoardController gameBoardController)
     {
         Debug.LogError("GroupSpawnExecute");
@@ -31,6 +33,8 @@ public class CreateGroupPieces:IBoardAction
             positionsForLock.Add(pos);
         }
         
+        LogicCallback?.Invoke();
+        
         gameBoardController.BoardLogic.LockCells(positionsForLock, this);
 
         var lastPiece = pieces.Last();
@@ -46,7 +50,7 @@ public class CreateGroupPieces:IBoardAction
                 animation.OnCompleteEvent += boardAnimation =>
                 {
                     gameBoardController.BoardLogic.UnlockCells(positionsForLock, this);
-                    gameBoardController.PathfindLocker.OnAddComplete();
+                    //gameBoardController.PathfindLocker.OnAddComplete();
                     OnSuccessEvent?.Invoke();
                     
                 };

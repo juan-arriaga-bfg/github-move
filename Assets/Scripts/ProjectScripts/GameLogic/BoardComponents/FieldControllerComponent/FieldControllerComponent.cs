@@ -91,6 +91,7 @@ public class FieldControllerComponent : IECSComponent
                 
                 controller.AreaAccessController?.FullRecalculate();
                 PathfindLockObserver.LoadPathfindLock();
+                controller.PathfindLocker.OnAddComplete();
                 //controller.PathfindLocker.RecalcAll(controller.AreaAccessController.AvailiablePositions);
             }
         });

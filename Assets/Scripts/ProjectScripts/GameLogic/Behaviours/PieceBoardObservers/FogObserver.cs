@@ -118,17 +118,21 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             if(addedPieces.ContainsKey(position) == false)
                 addedPieces.Add(position, piece);
         }
+
+        
         
         thisContext.Context.ActionExecutor.AddAction(new CreateGroupPieces()
         {
             Pieces = addedPieces,
-            OnSuccessEvent = () =>
+            LogicCallback = () =>
             {
                 var board = thisContext.Context;
-                thisContext.PathfindLockObserver.AutoLock = false;
                 thisContext.PathfindLockObserver.RemoveRecalculate(thisContext.CachedPosition);
+                board.PathfindLocker.OnAddComplete();
                 board.PathfindLocker.CheckLockedEmptyCells();
-                
+            },
+            OnSuccessEvent = () =>
+            {
                 var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
 
                 if (views == null) return;
@@ -139,10 +143,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                 }
             }
         });
-
-        
     }
-
+    
     public void RegisterCarrier(IResourceCarrier carrier)
     {
     }
@@ -225,4 +227,5 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             });
         });
     }
+
 }

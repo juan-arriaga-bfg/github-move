@@ -29,9 +29,7 @@ public class CollapsePieceToAction : IBoardAction
 			if (((int)PieceType.GetDefById(piece.PieceType).Filter & (int)PieceTypeFilter.Obstacle) != 0)
 			{
 				obstaclesPieces.Add(piece);
-				Debug.LogError($"Obstacle on {pos}");
-			}
-				
+			}	
 		}
 		
 		gameBoardController.BoardLogic.RemovePiecesAt(Positions);
@@ -55,9 +53,9 @@ public class CollapsePieceToAction : IBoardAction
 		
 		animation.OnCompleteEvent += (_) =>
 		{
-			foreach (var obstaclesPiece in obstaclesPieces)
+			foreach (var obstaclePiece in obstaclesPieces)
 			{
-				obstaclesPiece.PathfindLockObserver.RemoveRecalculate(obstaclesPiece.CachedPosition);
+				obstaclePiece.PathfindLockObserver.RemoveRecalculate(obstaclePiece.CachedPosition);
 			}
 			
 			gameBoardController.BoardLogic.UnlockCells(Positions, this);
