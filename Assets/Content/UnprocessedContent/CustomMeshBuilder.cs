@@ -635,11 +635,6 @@ public class CustomMeshBuilder : ECSEntity, IECSSystem
                         cornerColors.Add(defaultColor);
                     }
 
-                    if (cornerVertices.Count != cornerUV.Count)
-                    {
-                        int asfasd = 0;
-                    }
-
                     cornerCellIndex = cornerCellIndex + 4;
                 }
 

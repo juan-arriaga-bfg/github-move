@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -213,15 +210,17 @@ public class DevTools : MonoBehaviour
             Corner2Sprite = corner2Sprite,
             Corner3Sprite = corner3Sprite,
             Corner4Sprite = corner4Sprite,
-            LineWidth = 0.3f
+            LineWidth = 0.5f
         };
         
         var mesh = meshBuilder.Build(def);
 
         var meshGo = new GameObject("Grid");
         var meshTransform = meshGo.transform;
-        meshTransform.SetParent(GameObject.Find("PARAMPAMPAM").transform);
+        meshTransform.SetParent(GameObject.Find("PARAMPAMPAM").transform, false);
         meshTransform.localPosition = Vector3.zero;
+        meshTransform.localScale = Vector3.one * 1.8f;
+        
 
         var meshRenderer = meshGo.AddComponent<MeshRenderer>();
         var meshFilter   = meshGo.AddComponent<MeshFilter>();
@@ -230,11 +229,14 @@ public class DevTools : MonoBehaviour
 
         Material mat = new Material(Shader.Find("Sprites/Default"))
         {
-            renderQueue = 1000
+            renderQueue = 3000
         };
 
         meshRenderer.material = mat;
         meshRenderer.material.mainTexture = lineSprite.texture;
+
+        meshRenderer.sortingOrder = 2000;
+        meshRenderer.sortingLayerName = "Default";
     }
 
     public void OnDebug2Click()

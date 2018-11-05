@@ -127,33 +127,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LINE
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 128
-        height: 332
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7e09f3f615577924c88954d28986e683
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: CORNER_0_1
       rect:
         serializedVersion: 2
         x: 0
-        y: 333
-        width: 128
-        height: 128
+        y: 0
+        width: 52
+        height: 52
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,7 +141,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f16477113f8cc0c4fb219cc406da898a
+      spriteID: bc3fa99628615434eaee8c8e65481e16
       vertices: []
       indices: 
       edges: []
@@ -170,10 +150,10 @@ TextureImporter:
       name: CORNER_0_1_2
       rect:
         serializedVersion: 2
-        x: 129
-        y: 0
-        width: 128
-        height: 128
+        x: 0
+        y: 53
+        width: 52
+        height: 52
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,7 +161,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 551a8e8ac62c7e0408b60d1efe69cdf4
+      spriteID: ef4e9c09c9ec8f446912ba422db682f1
       vertices: []
       indices: 
       edges: []
@@ -190,10 +170,10 @@ TextureImporter:
       name: CORNER_0_1_2_3
       rect:
         serializedVersion: 2
-        x: 258
+        x: 53
         y: 0
-        width: 128
-        height: 128
+        width: 52
+        height: 52
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,7 +181,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f1ba41f73b0ab0a4f968230625b742b6
+      spriteID: 275cd3474f0543540806044cfa9d34f3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LINE
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 53
+        width: 52
+        height: 52
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3af03971ddbec04489351dc204980195
       vertices: []
       indices: 
       edges: []
