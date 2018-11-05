@@ -169,5 +169,5 @@ public class R
      public const string Coin6Piece = "Coin6Piece";
      public const string UICharacterConversationView = "UICharacterConversationView";
      public const string UICharacterBubbleMessageView = "UICharacterBubbleMessageView";
-     public const string UICharacterGirlView = "UICharacterGirlView";
+     public const string TapToContinueTextView = "TapToContinueTextView";
 }

@@ -87,13 +87,31 @@ public class UIQuestStartWindowView : IWUIWindowView
         UICharactersConversationViewController conversation = UIService.Get.GetCachedObject<UICharactersConversationViewController>(R.UICharacterConversationView);
         conversation.transform.SetParent(characterConversationAnchor, false);
 
-        string charId = R.UICharacterGirlView;
+        string char1Id = UiCharacterData.CharSleepingBeauty;
+        string char2Id = UiCharacterData.CharRapunzel;
+        string char3Id = UiCharacterData.CharGnomeWorker;
+        string char4Id = UiCharacterData.CharPussInBoots;
         
-        conversation.AddCharacter(charId, CharacterPosition.LeftInner, true, true, () =>
+        conversation.AddCharacter(char4Id, CharacterPosition.RightOuter, false, false);
+        conversation.AddCharacter(char3Id, CharacterPosition.RightInner, false, false);
+        conversation.AddCharacter(char2Id, CharacterPosition.LeftOuter,  false, false);
+        conversation.AddCharacter(char1Id, CharacterPosition.LeftInner,  false, false);
+        
+        conversation.NextBubble(R.UICharacterBubbleMessageView, new UiCharacterBubbleDefMessage {CharacterId = char1Id, 
+            Message = "The only thing we remember is a great noise while we cutting down trees. Then terrible fog appeared everywhere, then we run, then we hid..."}, () =>
         {
-            conversation.NextBubble(R.UICharacterBubbleMessageView, new UiCharacterBubbleDefMessage {Side = CharacterBubbleSide.Left, CharacterId = charId, Message = "Hi there!"}, () =>
+            conversation.NextBubble(R.UICharacterBubbleMessageView, new UiCharacterBubbleDefMessage {CharacterId = char2Id, 
+                Message = "22222"}, () =>
             {
-                // Done!
+                conversation.NextBubble(R.UICharacterBubbleMessageView, new UiCharacterBubbleDefMessage {CharacterId = char3Id, 
+                    Message = "3333"}, () =>
+                {
+                    conversation.NextBubble(R.UICharacterBubbleMessageView, new UiCharacterBubbleDefMessage {CharacterId = char4Id, 
+                        Message = "4444"}, () =>
+                    {
+                        // Done!
+                    });
+                });
             });
         });
     }

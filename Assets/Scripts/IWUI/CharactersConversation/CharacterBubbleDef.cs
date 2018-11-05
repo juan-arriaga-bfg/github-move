@@ -1,5 +1,5 @@
 public abstract class UICharacterBubbleDef
 {
-    public CharacterBubbleSide Side;
+    public CharacterSide Side;
     public string CharacterId;
 }

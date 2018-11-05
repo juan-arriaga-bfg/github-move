@@ -1,10 +1,13 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UICharacterBubbleMessageViewController : UICharacterBubbleView
 {
     [SerializeField] private Transform back;
+    [SerializeField] private Image headerBack;
+    [SerializeField] private NSText header;
     [SerializeField] private NSText message;
     [SerializeField] private CanvasGroup canvasGroup;
 
@@ -52,9 +55,9 @@ public class UICharacterBubbleMessageViewController : UICharacterBubbleView
     {
         UiCharacterBubbleDefMessage data = def as UiCharacterBubbleDefMessage;
 
-        Vector3 scale = data.Side == CharacterBubbleSide.Left ? new Vector3(1, 1, 1) : new Vector3(-1, 1, 1);
-        back.localScale = scale;
-        message.transform.localScale = scale;
+        SetCharRelatedData(data);
+
+        SetSide(data.Side);
         
         canvasGroup.alpha = 0;
         canvasGroup.DOFade(1, 1);
@@ -68,6 +71,21 @@ public class UICharacterBubbleMessageViewController : UICharacterBubbleView
                 {
                     onComplete?.Invoke();
                 });
+    }
+
+    private void SetSide(CharacterSide side)
+    {
+        Vector3 scale = side == CharacterSide.Left ? new Vector3(1, 1, 1) : new Vector3(-1, 1, 1);
+        back.localScale = scale;
+        message.transform.localScale = scale;
+        header.transform.localScale = scale;
+    }
+
+    private void SetCharRelatedData(UiCharacterBubbleDefMessage data)
+    {
+        UICharacterDef charDef = UiCharacterData.GetDef(data.CharacterId);
+        headerBack.color = charDef.Color;
+        header.Text = charDef.Name;
     }
 
     public override void Hide(bool animated, Action onComplete)
