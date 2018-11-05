@@ -51,22 +51,23 @@ public class MineLifeComponent : StorageLifeComponent
 
     protected override void OnComplete()
     {
-        storage.OnScatter = () =>
+        if(Reward == null || Reward.Count == 0) Reward = GameDataService.Current.MinesManager.GetSequence(def.Skin).GetNextDict(def.PieceAmount);
+        
+        storage.SpawnAction = new EjectionPieceAction
         {
-            storage.OnScatter = null;
-            OnSpawnRewards();
-            thisContext.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+            GetFrom = () => thisContext.CachedPosition,
+            Pieces = Reward,
+            OnComplete = () =>
             {
-                To = thisContext.CachedPosition,
-                Positions = new List<BoardPosition> {thisContext.CachedPosition},
-                OnComplete = () => GameDataService.Current.MinesManager.Remove(def.Id)
-            });
+                Reward = null;
+                OnSpawnRewards();
+            }
         };
     }
 
     protected override void OnSpawnRewards()
     {
-        AddResourceView.Show(StartPosition(), def.StepReward);
+        AddResourceView.Show(StartPosition(), def.StepRewards);
         base.OnSpawnRewards();
     }
 

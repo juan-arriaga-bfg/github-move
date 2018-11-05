@@ -2,6 +2,11 @@
 
 public abstract class SequenceData : ECSEntity, IDataManager
 {
+    public override void OnRegisterEntity(ECSEntity entity)
+    {
+        Reload();
+    }
+    
     public virtual void Reload()
     {
         UnRegisterSequences();

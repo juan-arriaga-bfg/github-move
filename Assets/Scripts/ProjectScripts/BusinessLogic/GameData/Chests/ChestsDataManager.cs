@@ -5,11 +5,6 @@ public class ChestsDataManager : SequenceData, IDataLoader<List<ChestDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
-
-    public override void OnRegisterEntity(ECSEntity entity)
-    {
-        Reload();
-    }
     
     public List<ChestDef> Chests;
     

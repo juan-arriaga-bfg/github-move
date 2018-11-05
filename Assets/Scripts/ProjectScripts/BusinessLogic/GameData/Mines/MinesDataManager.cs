@@ -1,26 +1,17 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class MinesDataManager : IECSComponent, IDataManager, IDataLoader<List<MineDef>>
+public class MinesDataManager : SequenceData, IDataLoader<List<MineDef>>
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
-	public int Guid => ComponentGuid;
-
-	public void OnRegisterEntity(ECSEntity entity)
-	{
-		Reload();
-	}
-	
-	public void OnUnRegisterEntity(ECSEntity entity)
-	{
-	}
+	public override int Guid => ComponentGuid;
 	
 	public Dictionary<BoardPosition, MineDef> All;
 	
 	public List<BoardPosition> Moved = new List<BoardPosition>();
 	public List<int> Removed = new List<int>();
 	
-	public void Reload()
+	public override void Reload()
 	{
 		All = null;
 		Moved = new List<BoardPosition>();
@@ -36,6 +27,7 @@ public class MinesDataManager : IECSComponent, IDataManager, IDataLoader<List<Mi
 		{
 			if (string.IsNullOrEmpty(error))
 			{
+				var uniq = new List<string>();
 				var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
 
 				if (save != null)
@@ -65,6 +57,11 @@ public class MinesDataManager : IECSComponent, IDataManager, IDataLoader<List<Mi
 					}
 					
 					All.Add(def.Position, def);
+
+					if (uniq.Contains(def.Skin)) continue;
+					
+					AddSequence(def.Skin, def.PieceWeights);
+					uniq.Add(def.Skin);
 				}
 			}
 			else

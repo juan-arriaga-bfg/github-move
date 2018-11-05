@@ -5,11 +5,6 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
-
-    public override void OnRegisterEntity(ECSEntity entity)
-    {
-        Reload();
-    }
     
     public Dictionary<int, ObstacleDef> Obstacles;
 

@@ -27,7 +27,7 @@ MonoBehaviour:
   - Key: mines
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseMines
-    Pattern: '{"Uid":"","Skin":"","Delay":0,"Size":0,"Price":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"StepReward":{"Currency":"","Amount":0}}'
+    Pattern: '{"Uid":"","Skin":"","Delay":0,"Size":0,"Price":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}]}'
   - Key: field
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseField

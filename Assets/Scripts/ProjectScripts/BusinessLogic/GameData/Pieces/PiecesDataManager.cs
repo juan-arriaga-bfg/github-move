@@ -10,7 +10,7 @@ public class PiecesDataManager : SequenceData, IDataLoader<List<PieceDef>>
 
     public override void OnRegisterEntity(ECSEntity entity)
     {
-        Reload();
+        base.OnRegisterEntity(entity);
         RegisterComponent(new PiecesReproductionDataManager());
         RegisterComponent(new PiecesMakingDataManager());
     }
