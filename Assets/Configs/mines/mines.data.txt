@@ -12,10 +12,23 @@
       "Currency": "CH1_B",
       "Amount": 1
     },
-    "StepReward": {
-      "Currency": "Experience",
-      "Amount": 15
-    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ],
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "Soft1",
+        "Weight": 10
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 5
+      }
+    ],
     "Position": {
       "X": 15,
       "Y": 8
@@ -34,10 +47,23 @@
       "Currency": "CH1_B",
       "Amount": 1
     },
-    "StepReward": {
-      "Currency": "Experience",
-      "Amount": 25
-    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "Soft1",
+        "Weight": 10
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 5
+      }
+    ],
     "Position": {
       "X": 11,
       "Y": 9
@@ -56,10 +82,23 @@
       "Currency": "CH1_C",
       "Amount": 1
     },
-    "StepReward": {
-      "Currency": "Experience",
-      "Amount": 20
-    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 20
+      }
+    ],
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "Soft1",
+        "Weight": 10
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 5
+      }
+    ],
     "Position": {
       "X": 23,
       "Y": 6
@@ -78,10 +117,23 @@
       "Currency": "CH1_D",
       "Amount": 1
     },
-    "StepReward": {
-      "Currency": "Experience",
-      "Amount": 20
-    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 20
+      }
+    ],
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "Soft1",
+        "Weight": 10
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 5
+      }
+    ],
     "Position": {
       "X": 20,
       "Y": 2
