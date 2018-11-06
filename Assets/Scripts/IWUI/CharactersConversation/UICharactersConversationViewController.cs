@@ -26,6 +26,24 @@ public partial class UICharactersConversationViewController : IWUIWindowView
 
     private TapToContinueTextViewController tapToContinue;
 
+    private void CleanUp()
+    {
+        var pool = UIService.Get.PoolContainer;
+        
+        foreach (var character in characters.Values)
+        {
+            pool.Return(character.gameObject);
+        }
+        
+        characters.Clear();
+        characterPositions.Clear();
+
+        if (bubbleView != null)
+        {
+            bubbleView.Hide(false, null);
+        }
+    }
+    
     private UICharacterViewController GetCharacterById(string charId)
     {
         UICharacterViewController characterViewController;
@@ -71,6 +89,15 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         }
         
         throw new IndexOutOfRangeException();
+    }
+    
+    private void AddCharactersFromScenario(ConversationScenarioEntity scenario)
+    {
+        ConversationScenarioCharsListComponent charsList = scenario.GetComponent<ConversationScenarioCharsListComponent>(ConversationScenarioCharsListComponent.ComponentGuid);
+        foreach (var pair in charsList.Characters)
+        {
+            AddCharacter(pair.Value, pair.Key, false, false);
+        }
     }
     
     public void AddCharacter(string characterId, CharacterPosition position, bool active, bool animated, Action onComplete = null)
@@ -282,10 +309,14 @@ public partial class UICharactersConversationViewController : IWUIWindowView
                              Action<ConversationActionEntity> onActionEnded, 
                              Action onScenarioComplete)
     {
+        CleanUp();
+        
         this.scenario = scenario;
         this.onScenarioComplete = onScenarioComplete;
         this.onActionStarted = onActionStarted;
         this.onActionEnded = onActionEnded;
+
+        AddCharactersFromScenario(scenario);
         
         NextScenarioAction();
     }

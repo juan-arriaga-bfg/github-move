@@ -29,9 +29,23 @@ public class UIQuestStartWindowView : IWUIWindowView
     public override void OnViewShow()
     {
         base.OnViewShow();
+
+        CleanUp();
         
         UIQuestStartWindowModel windowModel = Model as UIQuestStartWindowModel;
         CreateConversation(windowModel);
+    }
+
+    private void CleanUp()
+    {
+        var pool = UIService.Get.PoolContainer;
+        
+        foreach (var card in questCards)
+        {
+            pool.Return(card.gameObject);
+        }
+        
+        questCards.Clear();
     }
 
     public override void OnViewClose()
@@ -151,27 +165,15 @@ public class UIQuestStartWindowView : IWUIWindowView
         }
     }
     
-    private void CreateConversation(UIQuestStartWindowModel windowModel)
+    private void CreateConversation(UIQuestStartWindowModel model)
     {
-        // todo: fix caching!
-        var conversationPrefab = UIService.Get.GetCachedObject<UICharactersConversationViewController>(R.UICharacterConversationView);
-        conversation = Instantiate(conversationPrefab);
-        UIService.Get.ReturnCachedObject(conversationPrefab.gameObject);
-        conversation.transform.SetParent(characterConversationAnchor, false);
-        
-        var scenario = windowModel.Scenario;
-        AddCharactersFromScenario(scenario);
-
-        conversation.PlayScenario(scenario, OnActionStarted, OnActionEnded, OnScenarioComplete);
-    }
-
-    private void AddCharactersFromScenario(ConversationScenarioEntity scenario)
-    {
-        ConversationScenarioCharsListComponent charsList = scenario.GetComponent<ConversationScenarioCharsListComponent>(ConversationScenarioCharsListComponent.ComponentGuid);
-        foreach (var pair in charsList.Characters)
+        if (conversation == null)
         {
-            conversation.AddCharacter(pair.Value, pair.Key, false, false);
+            conversation = UIService.Get.GetCachedObject<UICharactersConversationViewController>(R.UICharacterConversationView);
+            conversation.transform.SetParent(characterConversationAnchor, false);
         }
+
+        conversation.PlayScenario(model.Scenario, OnActionStarted, OnActionEnded, OnScenarioComplete);
     }
 
     private void OnActionStarted(ConversationActionEntity act)
@@ -187,14 +189,14 @@ public class UIQuestStartWindowView : IWUIWindowView
             CreateQuestCards(Model as UIQuestStartWindowModel, payload1, () => { isClickAllowed = true; });
             return;
         }
-        
-        var payload2 = act.GetComponent<ConversationActionPayloadStartNewQuestsIfAnyComponent>(ConversationActionPayloadComponent.ComponentGuid);
-        if (payload2 != null)
-        {
-            GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
-            isClickAllowed = true;
-            return;
-        }
+        //
+        // var payload2 = act.GetComponent<ConversationActionPayloadStartNewQuestsIfAnyComponent>(ConversationActionPayloadComponent.ComponentGuid);
+        // if (payload2 != null)
+        // {
+        //     GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
+        //     isClickAllowed = true;
+        //     return;
+        // }
 
         isClickAllowed = true;
     }
