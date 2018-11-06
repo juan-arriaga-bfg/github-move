@@ -89,6 +89,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224557790478726696}
+  - component: {fileID: 225770205861889946}
   m_Layer: 31
   m_Name: Body
   m_TagString: Untagged
@@ -140,6 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224445799349919204}
   - component: {fileID: 114103376460553746}
+  - component: {fileID: 225979289074672204}
   m_Layer: 31
   m_Name: Quests
   m_TagString: Untagged
@@ -227,6 +229,7 @@ GameObject:
   - component: {fileID: 222984193218843360}
   - component: {fileID: 114159008069717072}
   - component: {fileID: 114024504479007828}
+  - component: {fileID: 225686229603652224}
   m_Layer: 31
   m_Name: CardPrefab
   m_TagString: Untagged
@@ -693,6 +696,7 @@ MonoBehaviour:
   questButton: {fileID: 114282287832508816}
   title: {fileID: 114373653775755546}
   message: {fileID: 114865229186667338}
+  canvasGroup: {fileID: 225686229603652224}
 --- !u!114 &114089565763350418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -729,10 +733,10 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 129
+    m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 1
-  m_Spacing: 103.81
+  m_ChildAlignment: 7
+  m_Spacing: 100
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -911,6 +915,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questCardPrefab: {fileID: 1366435372129510}
   characterConversationAnchor: {fileID: 224436617996335464}
+  questCardsCanvasGroup: {fileID: 225979289074672204}
+  rootCanvasGroup: {fileID: 225770205861889946}
 --- !u!114 &114286650053371802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2219,8 +2225,8 @@ RectTransform:
   m_Father: {fileID: 224557790478726696}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2517,4 +2523,37 @@ CanvasGroup:
   m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &225686229603652224
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1366435372129510}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!225 &225770205861889946
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217360159033870}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!225 &225979289074672204
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1258924056305160}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
