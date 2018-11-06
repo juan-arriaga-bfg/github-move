@@ -1,7 +1,7 @@
 ﻿[
   {
     "Uid": "OB1_A",
-    "Delay": 5,
+    "Delay": 2,
     "Price": {
       "Currency": "Energy",
       "Amount": 5
@@ -12,11 +12,21 @@
         "Amount": 5
       }
     ],
-    "ChestId": "CH1_A"
+    "ProductionAmount": {
+      "Min": 1,
+      "Max": 1
+    },
+    "PieceAmount": 1,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 50
+      }
+    ]
   },
   {
     "Uid": "OB2_A",
-    "Delay": 15,
+    "Delay": 5,
     "Price": {
       "Currency": "Energy",
       "Amount": 10
@@ -31,7 +41,7 @@
       "Min": 1,
       "Max": 2
     },
-    "PieceAmount": 3,
+    "PieceAmount": 2,
     "PieceWeights": [
       {
         "Uid": "A1",
@@ -42,7 +52,7 @@
   },
   {
     "Uid": "OB3_A",
-    "Delay": 30,
+    "Delay": 15,
     "Price": {
       "Currency": "Energy",
       "Amount": 15

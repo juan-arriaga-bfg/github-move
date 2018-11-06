@@ -2,27 +2,27 @@
   "DefaultPieceWeights": [
     {
       "Uid": "Empty",
-      "Weight": 15
+      "Weight": 0
     },
     {
       "Uid": "OB1_A",
-      "Weight": 20
+      "Weight": 0
     },
     {
       "Uid": "OB2_A",
-      "Weight": 10
+      "Weight": 0
     },
     {
       "Uid": "OB3_A",
-      "Weight": 10
+      "Weight": 0
     },
     {
       "Uid": "PR_B1",
-      "Weight": 10
+      "Weight": 0
     },
     {
       "Uid": "PR_C1",
-      "Weight": 10
+      "Weight": 0
     }
   ],
   "Fogs": [
@@ -31,19 +31,15 @@
       "Level": "2",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 50
+        "Amount": 15
       },
       "Reward": {
         "Currency": "Experience",
-        "Amount": 150
+        "Amount": 10
       },
       "Positions": [
         {
           "X": 18,
-          "Y": 6
-        },
-        {
-          "X": 18,
           "Y": 7
         },
         {
@@ -52,47 +48,23 @@
         },
         {
           "X": 19,
-          "Y": 6
-        },
-        {
-          "X": 19,
           "Y": 7
         },
         {
           "X": 19,
           "Y": 8
-        },
-        {
-          "X": 20,
-          "Y": 6
-        },
-        {
-          "X": 20,
-          "Y": 7
         }
       ],
       "Pieces": {
-        "OB2_A": [
-          {
-            "X": 18,
-            "Y": 6
-          },
-          {
-            "X": 20,
-            "Y": 6
-          }
-        ],
         "OB1_A": [
           {
             "X": 18,
             "Y": 8
-          },
+          }
+        ],
+        "OB2_A": [
           {
             "X": 19,
-            "Y": 7
-          },
-          {
-            "X": 20,
             "Y": 7
           }
         ]
@@ -103,11 +75,11 @@
       "Level": "2",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 110
+        "Amount": 50
       },
       "Reward": {
         "Currency": "Experience",
-        "Amount": 200
+        "Amount": 10
       },
       "Positions": [
         {
@@ -177,11 +149,11 @@
       "Level": "3",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 150
+        "Amount": 70
       },
       "Reward": {
         "Currency": "Experience",
-        "Amount": 200
+        "Amount": 20
       },
       "Positions": [
         {
@@ -279,7 +251,7 @@
       },
       "Reward": {
         "Currency": "Experience",
-        "Amount": 300
+        "Amount": 50
       },
       "Positions": [
         {
@@ -318,7 +290,7 @@
       },
       "Reward": {
         "Currency": "Experience",
-        "Amount": 400
+        "Amount": 50
       },
       "Positions": [
         {
@@ -382,74 +354,7 @@
           "Y": 7
         }
       ],
-      "Pieces": {
-        "Boost_CR2": [
-          {
-            "X": 21,
-            "Y": 5
-          },
-          {
-            "X": 22,
-            "Y": 5
-          }
-        ],
-        "OB3_A": [
-          {
-            "X": 21,
-            "Y": 6
-          }
-        ],
-        "OB5_A": [
-          {
-            "X": 21,
-            "Y": 7
-          }
-        ],
-        "OB2_A": [
-          {
-            "X": 22,
-            "Y": 6
-          }
-        ],
-        "Boost_CR1": [
-          {
-            "X": 22,
-            "Y": 7
-          },
-          {
-            "X": 25,
-            "Y": 7
-          },
-          {
-            "X": 26,
-            "Y": 7
-          }
-        ],
-        "PR_D4": [
-          {
-            "X": 23,
-            "Y": 5
-          }
-        ],
-        "Mine 3": [
-          {
-            "X": 23,
-            "Y": 6
-          }
-        ],
-        "A6": [
-          {
-            "X": 24,
-            "Y": 5
-          }
-        ],
-        "OB4_A": [
-          {
-            "X": 25,
-            "Y": 6
-          }
-        ]
-      }
+      "Pieces": {}
     },
     {
       "Uid": "Fog 6",
@@ -460,7 +365,7 @@
       },
       "Reward": {
         "Currency": "Experience",
-        "Amount": 500
+        "Amount": 50
       },
       "Positions": [
         {
@@ -512,60 +417,7 @@
           "Y": 10
         }
       ],
-      "Pieces": {
-        "PR_E2": [
-          {
-            "X": 10,
-            "Y": 10
-          }
-        ],
-        "Mine 2": [
-          {
-            "X": 11,
-            "Y": 9
-          }
-        ],
-        "A7": [
-          {
-            "X": 12,
-            "Y": 8
-          }
-        ],
-        "Boost_CR": [
-          {
-            "X": 13,
-            "Y": 8
-          }
-        ],
-        "OB4_A": [
-          {
-            "X": 13,
-            "Y": 9
-          }
-        ],
-        "OB6_A": [
-          {
-            "X": 13,
-            "Y": 10
-          },
-          {
-            "X": 14,
-            "Y": 8
-          }
-        ],
-        "OB2_A": [
-          {
-            "X": 14,
-            "Y": 9
-          }
-        ],
-        "CH2_A": [
-          {
-            "X": 14,
-            "Y": 10
-          }
-        ]
-      }
+      "Pieces": {}
     },
     {
       "Uid": "Fog 7",
@@ -576,7 +428,7 @@
       },
       "Reward": {
         "Currency": "Experience",
-        "Amount": 10
+        "Amount": 50
       },
       "Positions": [
         {
@@ -612,34 +464,7 @@
           "Y": 5
         }
       ],
-      "Pieces": {
-        "Boost_CR1": [
-          {
-            "X": 17,
-            "Y": 4
-          },
-          {
-            "X": 17,
-            "Y": 6
-          },
-          {
-            "X": 18,
-            "Y": 4
-          }
-        ],
-        "Boost_CR2": [
-          {
-            "X": 19,
-            "Y": 5
-          }
-        ],
-        "OB3_A": [
-          {
-            "X": 20,
-            "Y": 5
-          }
-        ]
-      }
+      "Pieces": {}
     },
     {
       "Uid": "Fog 8",
@@ -650,7 +475,7 @@
       },
       "Reward": {
         "Currency": "Experience",
-        "Amount": 10
+        "Amount": 50
       },
       "Positions": [
         {
@@ -690,26 +515,38 @@
           "Y": 4
         }
       ],
-      "Pieces": {
-        "Mine 4": [
-          {
-            "X": 20,
-            "Y": 2
-          }
-        ],
-        "OB5_A": [
-          {
-            "X": 20,
-            "Y": 4
-          }
-        ],
-        "OB6_A": [
-          {
-            "X": 21,
-            "Y": 4
-          }
-        ]
-      }
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 9",
+      "Level": "10",
+      "Condition": {
+        "Currency": "Mana",
+        "Amount": 100000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 50
+      },
+      "Positions": [
+        {
+          "X": 18,
+          "Y": 6
+        },
+        {
+          "X": 19,
+          "Y": 6
+        },
+        {
+          "X": 20,
+          "Y": 6
+        },
+        {
+          "X": 20,
+          "Y": 7
+        }
+      ],
+      "Pieces": {}
     },
     {
       "Uid": "Fog 20",

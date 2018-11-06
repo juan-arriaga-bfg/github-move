@@ -2,8 +2,8 @@
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "1",
-    "PieceUid": "A2",
-    "TargetValue": 3,
+    "PieceUid": "PR_C4",
+    "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Message": "Create Piece"
@@ -11,13 +11,13 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
+    "$type": "TaskClearFogEntity, Assembly-CSharp",
     "Id": "2",
-    "PieceUid": "A3",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Message": "Create Piece"
+        "Ico": "Fog1",
+        "Message": "Clear a fog"
       }
     }
   },
@@ -36,9 +36,10 @@
     "$type": "TaskOpenChestEntity, Assembly-CSharp",
     "Id": "4",
     "PieceUid": "CH1_A",
-    "TargetValue": 3,
+    "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
+        "Ico": "CH1_A",
         "Message": "Open chests"
       }
     }
@@ -46,8 +47,19 @@
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "5",
-    "PieceUid": "A4",
-    "TargetValue": 2,
+    "PieceUid": "A2",
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Message": "Create Piece"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
+    "Id": "6",
+    "PieceUid": "A5",
+    "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Message": "Create Piece"
@@ -56,8 +68,8 @@
   },
   {
     "$type": "TaskClearFogEntity, Assembly-CSharp",
-    "Id": "6",
-    "TargetValue": 2,
+    "Id": "7",
+    "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "Fog1",
@@ -66,21 +78,10 @@
     }
   },
   {
-    "$type": "TaskUseMineEntity, Assembly-CSharp",
-    "Id": "7",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Ico": "MN_B",
-        "Message": "Use a mine"
-      }
-    }
-  },
-  {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "8",
-    "PieceUid": "B3",
-    "TargetValue": 2,
+    "PieceUid": "PR_A5",
+    "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Message": "Create Piece"
@@ -90,8 +91,8 @@
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "9",
-    "PieceUid": "B4",
-    "TargetValue": 2,
+    "PieceUid": "PR_B5",
+    "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Message": "Create Piece"
@@ -99,139 +100,10 @@
     }
   },
   {
-    "$type": "TaskSuperMatchEntity, Assembly-CSharp",
+    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "10",
-    "PieceUid": "A1",
-    "TargetValue": 1,
-    "Value1": 5,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Ico": "A1",
-        "Message": "Match 5 pieces in one time"
-      }
-    }
-  },
-  {
-    "$type": "TaskUseWorkerEntity, Assembly-CSharp",
-    "Id": "11",
-    "TargetValue": 10,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Ico": "Boost_WR",
-        "Message": "Use workers"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "14",
-    "PieceUid": "A5",
-    "TargetValue": 2,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Message": "Create Piece"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "15",
-    "PieceUid": "A6",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Message": "Create Piece"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "16",
-    "PieceUid": "B5",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Message": "Create Piece"
-      }
-    }
-  },
-  {
-    "$type": "TaskClearFogEntity, Assembly-CSharp",
-    "Id": "17",
-    "PieceUid": "Fog 2",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Ico": "Fog1",
-        "Message": "Clear a fog"
-      }
-    }
-  },
-  {
-    "$type": "TaskSuperMatchEntity, Assembly-CSharp",
-    "Id": "19",
-    "PieceUid": "A2",
-    "TargetValue": 2,
-    "Value1": 5,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Ico": "A2",
-        "Message": "Match 5 pieces in one time"
-      }
-    }
-  },
-  {
-    "$type": "TaskSuperMatchEntity, Assembly-CSharp",
-    "Id": "20",
-    "PieceUid": "B1",
-    "TargetValue": 2,
-    "Value1": 5,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Ico": "B1",
-        "Message": "Match 5 pieces in one time"
-      }
-    }
-  },
-  {
-    "$type": "TaskClearFogEntity, Assembly-CSharp",
-    "Id": "21",
-    "PieceUid": "Fog 3",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Ico": "Fog1",
-        "Message": "Clear a fog"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "22",
-    "PieceUid": "A7",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Message": "Create Piece"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "23",
-    "PieceUid": "A8",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Message": "Create Piece"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "24",
-    "PieceUid": "B6",
-    "TargetValue": 1,
+    "PieceUid": "PR_C5",
+    "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Message": "Create Piece"
