@@ -22,6 +22,11 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 		piece.RegisterComponent(storage);
 		AddObserver(piece, storage);
 		
+		var life = new MineLifeComponent();
+		
+		piece.RegisterComponent(life);
+		AddObserver(piece, life);
+		
 		piece.RegisterComponent(new TouchReactionComponent()
 			 .RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
 				 .RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.ObstacleState})
