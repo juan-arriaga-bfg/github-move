@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,10 @@ public class UIQuestStartWindowView : IWUIWindowView
     [SerializeField] private Transform characterConversationAnchor;
     
     private readonly List<UIQuestCard> questCards = new List<UIQuestCard>();
+
+    private UICharactersConversationViewController conversation;
+
+    private bool isClickAllowed;
     
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
@@ -23,11 +28,10 @@ public class UIQuestStartWindowView : IWUIWindowView
         base.OnViewShow();
         
         UIQuestStartWindowModel windowModel = Model as UIQuestStartWindowModel;
-        CreateQuestCards(windowModel);
         CreateConversation(windowModel);
     }
 
-    private void CreateQuestCards(UIQuestStartWindowModel model)
+    private void CreateQuestCards(UIQuestStartWindowModel model, ConversationActionPayloadShowQuestComponent payload, Action onComplete)
     {
         var pool = UIService.Get.PoolContainer;
         
@@ -43,6 +47,11 @@ public class UIQuestStartWindowView : IWUIWindowView
             // Create cards
             foreach (var quest in model.Quests)
             {
+                if (payload.QuestIds != null && !payload.QuestIds.Contains(quest.Id))
+                {
+                    continue;
+                }
+                
                 UIQuestCard card = pool.Create<UIQuestCard>(questCardPrefab);
                 card.gameObject.SetActive(true);
                 card.transform.SetParent(questCardPrefab.transform.parent, false);
@@ -51,6 +60,8 @@ public class UIQuestStartWindowView : IWUIWindowView
                 questCards.Add(card);
             }
         }
+        
+        onComplete?.Invoke();
     }
 
     public override void OnViewClose()
@@ -82,9 +93,22 @@ public class UIQuestStartWindowView : IWUIWindowView
         questCardPrefab.SetActive(false);
     }
 
+    public void OnClick()
+    {
+        if (!isClickAllowed)
+        {
+            return;
+        }
+        
+        if (conversation != null)
+        {
+            conversation.OnClick();
+        }
+    }
+    
     private void CreateConversation(UIQuestStartWindowModel windowModel)
     {
-        UICharactersConversationViewController conversation = UIService.Get.GetCachedObject<UICharactersConversationViewController>(R.UICharacterConversationView);
+        conversation = UIService.Get.GetCachedObject<UICharactersConversationViewController>(R.UICharacterConversationView);
         conversation.transform.SetParent(characterConversationAnchor, false);
 
         string char1Id = UiCharacterData.CharSleepingBeauty;
@@ -97,9 +121,8 @@ public class UIQuestStartWindowView : IWUIWindowView
         conversation.AddCharacter(char2Id, CharacterPosition.LeftOuter,  false, false);
         conversation.AddCharacter(char1Id, CharacterPosition.LeftInner,  false, false);
 
-
-        ConversationScenario scenario = new ConversationScenario();
-        scenario.RegisterComponent(new ConversationActionBubble
+        ConversationScenarioEntity scenario = new ConversationScenarioEntity();
+        scenario.RegisterComponent(new ConversationActionBubbleEntity
         {
             Def = new UiCharacterBubbleDefMessage
             {
@@ -107,15 +130,21 @@ public class UIQuestStartWindowView : IWUIWindowView
                 Message = "The only thing we remember is a great noise while we cutting down trees. Then terrible fog appeared everywhere, then we run, then we hid..."
             }
         });
-        scenario.RegisterComponent(new ConversationActionBubble
+        ConversationActionBubbleEntity actBubble = new ConversationActionBubbleEntity
         {
             Def = new UiCharacterBubbleDefMessage
             {
                 CharacterId = char2Id,
                 Message = "2222"
             }
+        };
+        actBubble.RegisterComponent(new ConversationActionPayloadShowQuestComponent
+        {
+            QuestIds = windowModel.Quests.Select(e => e.Id).ToList()
         });
-        scenario.RegisterComponent(new ConversationActionBubble
+        scenario.RegisterComponent(actBubble);
+        
+        scenario.RegisterComponent(new ConversationActionBubbleEntity
         {
             Def = new UiCharacterBubbleDefMessage
             {
@@ -123,7 +152,7 @@ public class UIQuestStartWindowView : IWUIWindowView
                 Message = "33333"
             }
         });
-        scenario.RegisterComponent(new ConversationActionBubble
+        scenario.RegisterComponent(new ConversationActionBubbleEntity
         {
             Def = new UiCharacterBubbleDefMessage
             {
@@ -133,60 +162,31 @@ public class UIQuestStartWindowView : IWUIWindowView
         });
             
         
-        conversation.PlayScenario(scenario);
-    }
-}
-
-public class ConversationAction : IECSComponent, IECSSerializeable
-{    
-    public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-    public  int Guid => ComponentGuid;
-    
-    public void OnRegisterEntity(ECSEntity entity)
-    {
+        conversation.PlayScenario(scenario, OnActionStarted, OnActionEnded, OnScenarioComplete);
     }
 
-    public void OnUnRegisterEntity(ECSEntity entity)
+    private void OnScenarioComplete()
     {
+        Controller.CloseCurrentWindow();
     }
-}
 
-public class ConversationActionBubble : ConversationAction
-{
-    public string BubbleId = R.UICharacterBubbleMessageView;
-    public UiCharacterBubbleDefMessage Def;
-}
-
-public class ConversationScenario : ECSEntity, IECSSerializeable
-{
-    public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-    public override int Guid => ComponentGuid;
-   
-    private readonly List<ConversationAction> actions = new List<ConversationAction>();
-
-    private int index;
-
-    public override ECSEntity RegisterComponent(IECSComponent component, bool isCollection = false)
+    private void OnActionEnded(ConversationActionEntity act)
     {
-        return base.RegisterComponent(component, isCollection);
-        
-        ConversationAction action = component as ConversationAction;
-        if (action != null)
+        var payload = act.GetComponent<ConversationActionPayloadShowQuestComponent>(ConversationActionPayloadComponent.ComponentGuid);
+        if (payload == null)
         {
-            actions.Add(action);
-        }
-    }
-
-    public ConversationAction GetNextAction()
-    {
-        if (actions == null || index >= actions.Count - 1)
-        {
-            return null;
+            isClickAllowed = true;
+            return;
         }
 
-        var ret = actions[index];
-        index++;
+        CreateQuestCards(Model as UIQuestStartWindowModel, payload, () =>
+        {
+            isClickAllowed = true;
+        });
+    }
 
-        return ret;
+    private void OnActionStarted(ConversationActionEntity act)
+    {
+        isClickAllowed = false;
     }
 }

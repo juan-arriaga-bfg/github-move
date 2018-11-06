@@ -12,11 +12,12 @@ public partial class UICharactersConversationViewController : IWUIWindowView
     
     [SerializeField] private Transform tapToContinueAnchor;
 
-    private ConversationScenario scenario;
+    private ConversationScenarioEntity scenario;
 
-    private bool clickAllowed;
-
-    private Action onScenarioCompleted;
+    private Action onScenarioComplete;
+    private Action<ConversationActionEntity> onActionStarted;
+    private Action<ConversationActionEntity> onActionEnded;
+    private ConversationActionEntity activeAction;
     
     private readonly Dictionary<string, UICharacterViewController> characters = new Dictionary<string, UICharacterViewController>();
     private readonly Dictionary<CharacterPosition, UICharacterViewController> characterPositions = new Dictionary<CharacterPosition, UICharacterViewController>();
@@ -24,7 +25,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
     private UICharacterBubbleView bubbleView;
 
     private TapToContinueTextViewController tapToContinue;
-    
+
     private UICharacterViewController GetCharacterById(string charId)
     {
         UICharacterViewController characterViewController;
@@ -223,7 +224,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         return pos == CharacterPosition.LeftInner || pos == CharacterPosition.RightInner;
     }
     
-    public void NextBubble(string bubbleId, UICharacterBubbleDef data, Action onComplete)
+    private void NextBubble(string bubbleId, UICharacterBubbleDef data, Action onComplete)
     {
         ToggleTapToContinue(false);
         
@@ -266,41 +267,63 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         });
     }
     
-    public void PlayScenario(ConversationScenario scenario, Action onComplete)
+    public void PlayScenario(ConversationScenarioEntity scenario, 
+                             Action<ConversationActionEntity> onActionStarted, 
+                             Action<ConversationActionEntity> onActionEnded, 
+                             Action onScenarioComplete)
     {
+        this.scenario = scenario;
+        this.onScenarioComplete = onScenarioComplete;
+        this.onActionStarted = onActionStarted;
+        this.onActionEnded = onActionEnded;
+        
         NextScenarioAction();
     }
 
-    private bool NextScenarioAction()
+    public void NextScenarioAction()
     {
-        var action = scenario.GetNextAction();
-
-        if (action == null)
+        if (activeAction != null)
         {
-            onScenarioCompleted?.Invoke();
-            return false;
+            onActionStarted?.Invoke(activeAction);
         }
         
-        if (action is ConversationActionBubble)
+        activeAction = scenario.GetNextAction();
+
+        if (activeAction == null)
         {
-            clickAllowed = false;
+            onScenarioComplete?.Invoke();
+            return;
+        }
+        
+        if (activeAction is ConversationActionBubbleEntity)
+        {
+            ConversationActionBubbleEntity act = activeAction as ConversationActionBubbleEntity;
+            NextBubble(act.BubbleId, act.Def, () =>
+            {
+                 onActionEnded?.Invoke(act);
+            });
             
-            ConversationActionBubble act = action as ConversationActionBubble;
-            NextBubble(act.BubbleId, act.Def, () => { clickAllowed = true;});
-            return true;
+            onActionStarted?.Invoke(act);
+            return;
         }
 
-        Debug.LogError($"[UICharactersConversationViewController] => Unknown action type: {action.GetType()} ");
-        return NextScenarioAction();
+        Debug.LogError($"[UICharactersConversationViewController] => Unknown action type: {activeAction.GetType()} ");
+        NextScenarioAction();
     }
 
     public void OnClick()
     {
-        if (!clickAllowed)
-        {
-            return;
-        }
-
         NextScenarioAction();
     }
+
+    // private bool ShouldAutocompleteAction(ConversationActionEntity action)
+    // {
+    //     var payload = action.GetComponent<ConversationActionPayloadShowQuestComponent>(ConversationActionPayloadComponent.ComponentGuid);
+    //     if (payload == null)
+    //     {
+    //         return true;
+    //     }
+    //
+    //     return false;
+    // }
 }
