@@ -285,6 +285,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
                          
                          var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
                          model.SetQuests(questsToStart);
+                         model.BuildTestConversation();
         
                          UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
                      });

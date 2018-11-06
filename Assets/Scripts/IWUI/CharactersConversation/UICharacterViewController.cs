@@ -8,7 +8,7 @@ public class UICharacterViewController : IWBaseMonoBehaviour
 {
     [SerializeField] private Image characterImage;
 
-    public const float FADE_TIME = 0.7f;
+    public const float FADE_TIME = 0.4f;
     
     public string CharacterId;
     

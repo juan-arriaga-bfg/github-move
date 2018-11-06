@@ -6,6 +6,9 @@ public class UIQuestCard : MonoBehaviour
     [SerializeField] private UiQuestButton questButton;
     [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private TextMeshProUGUI message;
+    [SerializeField] private CanvasGroup canvasGroup;
+
+    public CanvasGroup GetCanvasGroup() { return canvasGroup;}
 
     public void Init(QuestEntity quest)
     {

@@ -22,7 +22,7 @@ public class ConversationScenarioEntity : ECSEntity, IECSSerializeable
 
     public ConversationActionEntity GetNextAction()
     {
-        if (actions == null || index >= actions.Count - 1)
+        if (actions == null || index >= actions.Count)
         {
             return null;
         }

@@ -105,6 +105,13 @@ public partial class UICharactersConversationViewController : IWUIWindowView
     {
         InitTapToContinue();
         tapToContinue.gameObject.SetActive(enabled);
+
+        // Show with some delay
+        if (enabled)
+        {
+            tapToContinue.Hide(false);
+            tapToContinue.Show(true, 1f);
+        }
     }
     
     private void InitTapToContinue()
@@ -138,7 +145,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         do
         {
             var character = characters[charId];       
-            character.ToForeground(animated, onComplete);
+            character.ToForeground(animated, null);
             
             if (IsCharacterAtFront(character))
             {
@@ -175,7 +182,10 @@ public partial class UICharactersConversationViewController : IWUIWindowView
 
             neighbor.transform.DOMove(backCoords, TIME)
                     .SetEase(Ease.OutSine)
-                    .OnComplete(() => { onComplete?.Invoke(); });
+                    .OnComplete(() =>
+                     {
+                         onComplete?.Invoke();
+                     });
             return;
 
         } while (false);

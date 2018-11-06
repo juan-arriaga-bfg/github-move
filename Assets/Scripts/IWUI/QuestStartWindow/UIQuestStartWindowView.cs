@@ -3,12 +3,15 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using Newtonsoft.Json;
 
 public class UIQuestStartWindowView : IWUIWindowView
 {
     [SerializeField] private GameObject questCardPrefab;
     [SerializeField] private Transform characterConversationAnchor;
+    [SerializeField] private CanvasGroup questCardsCanvasGroup;
+    [SerializeField] private CanvasGroup rootCanvasGroup;
     
     private readonly List<UIQuestCard> questCards = new List<UIQuestCard>();
 
@@ -31,6 +34,30 @@ public class UIQuestStartWindowView : IWUIWindowView
         CreateConversation(windowModel);
     }
 
+    public override void OnViewClose()
+    {
+        StartQuests();
+        
+        base.OnViewClose();
+        
+        UIQuestStartWindowModel windowModel = Model as UIQuestStartWindowModel;
+        
+    }
+
+    public override void AnimateShow()
+    {
+        base.AnimateShow();
+
+        rootCanvasGroup.DOFade(1f, 0.5f);
+    }
+
+    public override void AnimateClose()
+    {
+        base.AnimateClose();
+
+        rootCanvasGroup.DOFade(0f, 0.5f);
+    }
+
     private void CreateQuestCards(UIQuestStartWindowModel model, ConversationActionPayloadShowQuestComponent payload, Action onComplete)
     {
         var pool = UIService.Get.PoolContainer;
@@ -42,6 +69,10 @@ public class UIQuestStartWindowView : IWUIWindowView
         }
         questCards.Clear();
 
+        bool cardsAdded = false;
+
+        const float ANIMATION_TIME = 0.5f;
+        
         if (model.Quests != null)
         {
             // Create cards
@@ -58,20 +89,28 @@ public class UIQuestStartWindowView : IWUIWindowView
                 card.Init(quest);
 
                 questCards.Add(card);
+                
+                cardsAdded = true;
+
+                // Animate
+                var canvasGroup = card.GetCanvasGroup();
+                canvasGroup.alpha = 0;
+                canvasGroup.DOFade(1, ANIMATION_TIME)
+                           .SetEase(Ease.OutSine);
+                
+                card.transform.localScale = Vector3.zero;
+                card.transform.DOScale(Vector3.one, ANIMATION_TIME)
+                    .SetEase(Ease.OutElastic);
+
             }
         }
-        
-        onComplete?.Invoke();
-    }
 
-    public override void OnViewClose()
-    {
-        StartQuests();
-        
-        base.OnViewClose();
-        
-        UIQuestStartWindowModel windowModel = Model as UIQuestStartWindowModel;
-        
+        DOTween.Sequence()
+               .AppendInterval(cardsAdded ? ANIMATION_TIME : 0)
+               .OnComplete(() =>
+                {
+                    onComplete?.Invoke();
+                });
     }
 
     private void StartQuests()
@@ -111,62 +150,24 @@ public class UIQuestStartWindowView : IWUIWindowView
         conversation = UIService.Get.GetCachedObject<UICharactersConversationViewController>(R.UICharacterConversationView);
         conversation.transform.SetParent(characterConversationAnchor, false);
 
-        string char1Id = UiCharacterData.CharSleepingBeauty;
-        string char2Id = UiCharacterData.CharRapunzel;
-        string char3Id = UiCharacterData.CharGnomeWorker;
-        string char4Id = UiCharacterData.CharPussInBoots;
-        
-        conversation.AddCharacter(char4Id, CharacterPosition.RightOuter, false, false);
-        conversation.AddCharacter(char3Id, CharacterPosition.RightInner, false, false);
-        conversation.AddCharacter(char2Id, CharacterPosition.LeftOuter,  false, false);
-        conversation.AddCharacter(char1Id, CharacterPosition.LeftInner,  false, false);
+        var scenario = windowModel.Scenario;
+        AddCharactersFromScenario(scenario);
 
-        ConversationScenarioEntity scenario = new ConversationScenarioEntity();
-        scenario.RegisterComponent(new ConversationActionBubbleEntity
-        {
-            Def = new UiCharacterBubbleDefMessage
-            {
-                CharacterId = char1Id,
-                Message = "The only thing we remember is a great noise while we cutting down trees. Then terrible fog appeared everywhere, then we run, then we hid..."
-            }
-        });
-        ConversationActionBubbleEntity actBubble = new ConversationActionBubbleEntity
-        {
-            Def = new UiCharacterBubbleDefMessage
-            {
-                CharacterId = char2Id,
-                Message = "2222"
-            }
-        };
-        actBubble.RegisterComponent(new ConversationActionPayloadShowQuestComponent
-        {
-            QuestIds = windowModel.Quests.Select(e => e.Id).ToList()
-        });
-        scenario.RegisterComponent(actBubble);
-        
-        scenario.RegisterComponent(new ConversationActionBubbleEntity
-        {
-            Def = new UiCharacterBubbleDefMessage
-            {
-                CharacterId = char3Id,
-                Message = "33333"
-            }
-        });
-        scenario.RegisterComponent(new ConversationActionBubbleEntity
-        {
-            Def = new UiCharacterBubbleDefMessage
-            {
-                CharacterId = char4Id,
-                Message = "444444"
-            }
-        });
-            
-        
         conversation.PlayScenario(scenario, OnActionStarted, OnActionEnded, OnScenarioComplete);
+    }
+
+    private void AddCharactersFromScenario(ConversationScenarioEntity scenario)
+    {
+        ConversationScenarioCharsListComponent charsList = scenario.GetComponent<ConversationScenarioCharsListComponent>(ConversationScenarioCharsListComponent.ComponentGuid);
+        foreach (var pair in charsList.Characters)
+        {
+            conversation.AddCharacter(pair.Value, pair.Key, false, false);
+        }
     }
 
     private void OnScenarioComplete()
     {
+        isClickAllowed = false;
         Controller.CloseCurrentWindow();
     }
 
