@@ -17,7 +17,5 @@ public class MineDef
     
     public CurrencyPair Reward { get; set; }
     public List<CurrencyPair> StepRewards { get; set; }
-    
-    public int PieceAmount { get; set; }
-    public List<ItemWeight> PieceWeights { get; set; }
+    public List<CurrencyPair> LastRewards { get; set; }
 }

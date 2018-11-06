@@ -51,15 +51,20 @@ public class MineLifeComponent : StorageLifeComponent
 
     protected override void OnComplete()
     {
-        if(Reward == null || Reward.Count == 0) Reward = GameDataService.Current.MinesManager.GetSequence(def.Skin).GetNextDict(def.PieceAmount);
+        var pieces = new Dictionary<int, int>();
+
+        foreach (var pair in def.LastRewards)
+        {
+            pieces.Add(PieceType.Parse(pair.Currency), pair.Amount);
+        }
         
         storage.SpawnAction = new EjectionPieceAction
         {
             GetFrom = () => thisContext.CachedPosition,
-            Pieces = Reward,
+            Pieces = pieces,
             OnComplete = () =>
             {
-                Reward = null;
+                GameDataService.Current.MinesManager.Remove(def.Id);
                 OnSpawnRewards();
             }
         };
