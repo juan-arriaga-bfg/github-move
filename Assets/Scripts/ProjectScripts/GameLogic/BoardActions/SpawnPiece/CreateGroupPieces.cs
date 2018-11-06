@@ -15,7 +15,6 @@ public class CreateGroupPieces:IBoardAction
     
     public bool PerformAction(BoardController gameBoardController)
     {
-        Debug.LogError("GroupSpawnExecute");
         var pieces = new Dictionary<BoardPosition, Piece>();
 
         var positionsForLock = new List<BoardPosition>();
@@ -50,7 +49,6 @@ public class CreateGroupPieces:IBoardAction
                 animation.OnCompleteEvent += boardAnimation =>
                 {
                     gameBoardController.BoardLogic.UnlockCells(positionsForLock, this);
-                    //gameBoardController.PathfindLocker.OnAddComplete();
                     OnSuccessEvent?.Invoke();
                     
                 };
