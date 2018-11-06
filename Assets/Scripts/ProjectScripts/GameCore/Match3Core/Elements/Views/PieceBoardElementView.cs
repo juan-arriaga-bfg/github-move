@@ -26,7 +26,7 @@ public class PieceBoardElementView : BoardElementView
     private bool isLockVisual = false;
     
     public bool IsHighlighted { get; protected set; }
-    
+
     public virtual void Init(BoardRenderer context, Piece piece)
     {
         base.Init(context);
@@ -36,10 +36,10 @@ public class PieceBoardElementView : BoardElementView
             var view = transform.Find("View");
             bodySprite = view.GetComponentInChildren<SpriteRenderer>();
         }
-        
+
         Piece = piece;
         Piece.ActorView = this;
-        
+
         if (selectionView != null)
         {
             selectionSprite = selectionView.GetComponent<SpriteRenderer>();
@@ -49,10 +49,17 @@ public class PieceBoardElementView : BoardElementView
 
         if (reactionLockMaterial == null)
         {
-            var obj = ContentService.Current.GetObjectByName("pieces.grayscale") as Material;
+            var obj = ContentService.Current.GetObjectByName(R.pieces_grayscale) as Material;
             reactionLockMaterial = obj;
         }
-             
+    
+        if (cachedRenderers == null || cachedRenderers.size == 0)
+            CacheLayers();
+        foreach (var rend in cachedRenderers)
+        {
+            rend.CacheDefaultMaterial();
+        }
+
         CheckLock();
     }
 
@@ -143,11 +150,11 @@ public class PieceBoardElementView : BoardElementView
         
         if (cachedRenderers == null || cachedRenderers.size == 0)
             CacheLayers();
-
+        
         foreach (var rend in cachedRenderers)
         {
             if (rend?.CachedRenderer?.sharedMaterial == null) continue;
-
+            
             if (enabled)
             {
                 rend.CacheDefaultMaterial();
