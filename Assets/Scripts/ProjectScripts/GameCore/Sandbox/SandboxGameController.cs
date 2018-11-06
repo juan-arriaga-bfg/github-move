@@ -46,6 +46,7 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new BoardLogicComponent() // core logic
             .RegisterComponent(new PiecePositionsCacheComponent())
             .RegisterComponent(new FieldFinderComponent())
+            .RegisterComponent(new FireflyLogicComponent())
             .RegisterComponent(new CellHintsComponent())
             .RegisterComponent(new PieceFlyerComponent()
                 .RegisterComponent(new LockerComponent()))
@@ -60,7 +61,8 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new PathfindLockerComponent());
         boardController.RegisterComponent(new BoardRandomComponent()); // random
         boardController.RegisterComponent(new FreeChestLogicComponent());
-        boardController.RegisterComponent(new HintCooldownComponent());
+        boardController.RegisterComponent(new HintCooldownComponent()
+            .RegisterComponent(new LockerComponent()));
         boardController.RegisterComponent(new PartPiecesLogicComponent());
         boardController.RegisterComponent(new BoardRenderer().Init(gameBoardResourcesDef,
             gameBoardRendererView.transform)); // renderer context
@@ -86,6 +88,8 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new BoardStatesComponent()
             .RegisterState(new SessionBoardStateComponent(SessionBoardStateType.Processing))
         ); // states
+
+        boardController.RegisterComponent(new QuestConnectorComponent());
         
         boardController.States.AddState(SessionBoardStateComponent.ComponentGuid);
         
@@ -107,25 +111,19 @@ public class SandboxGameController : MonoBehaviour
         var widthShift = boardController.BoardDef.Width / 4;
         var heightShift = boardController.BoardDef.Height / 4;
         
-        var leftPoint = boardController.BoardDef.GetSectorCenterWorldPosition(widthShift, widthShift, 0);
-        var rightPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - widthShift, boardController.BoardDef.Height - widthShift, 0);
-        var topPoint = boardController.BoardDef.GetSectorCenterWorldPosition(heightShift, boardController.BoardDef.Height - heightShift, 0);
-        var bottomPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - heightShift, heightShift, 0);
+        var leftPoint = boardController.BoardDef.GetSectorCenterWorldPosition(widthShift, heightShift - 1, 0);
+        var rightPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - widthShift - 1, boardController.BoardDef.Height - widthShift, 0);
+        var topPoint = boardController.BoardDef.GetSectorCenterWorldPosition(heightShift - 1, boardController.BoardDef.Height - heightShift - 1, 0);
+        var bottomPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - heightShift - 1, heightShift - 1, 0);
         
         var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition(19, 14, boardController.BoardDef.PieceLayer);
-
-        var interfaceOffsetTop = boardController.BoardDef.CellHeightInUnit();
-        var interfaceOffsetBottom = boardController.BoardDef.UnitSize;
-        var interfaceOffsetLeft = boardController.BoardDef.CellWidthInUnit()*2;
-        var interfaceOffsetRight = 0;
-        
         
         boardController.Manipulator.CameraManipulator.CurrentCameraSettings.CameraClampRegion = new Rect
         (
-            leftPoint.x - interfaceOffsetLeft, 
-            bottomPoint.y - interfaceOffsetBottom,
-            Mathf.Abs((leftPoint - rightPoint).x) + interfaceOffsetLeft + interfaceOffsetRight,
-            Mathf.Abs((topPoint - bottomPoint).y) + interfaceOffsetBottom + interfaceOffsetTop
+            leftPoint.x, 
+            bottomPoint.y,
+            Mathf.Abs((leftPoint - rightPoint).x),
+            Mathf.Abs((topPoint - bottomPoint).y)
         );
        
         boardController.Manipulator.CameraManipulator.CachedCameraTransform.localPosition = new Vector3
@@ -136,9 +134,7 @@ public class SandboxGameController : MonoBehaviour
         );
 
         var shift = 12;
-        //var vectorShift = (shift / 2) * boardController.BoardDef.UnitSize;
         var vectorShift = boardController.BoardDef.GetSectorWorldPosition(-shift / 2, -shift / 2, 0);
-        //vectorShift -= new Vector3(boardController.BoardDef.CellWidthInUnit()/2, boardController.BoardDef.CellHeightInUnit()/2);
         boardController.RendererContext.GenerateBackground
         (
             vectorShift,

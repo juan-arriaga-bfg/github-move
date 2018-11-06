@@ -1,6 +1,8 @@
 using Newtonsoft.Json;
 using UnityEngine;
 
+[TaskHighlight(typeof(HighlightTaskNotImplemented))]
+[TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskOpenChestEntity : TaskCounterAboutPiece, IBoardEventListener, IHavePieceId
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
@@ -28,14 +30,14 @@ public class TaskOpenChestEntity : TaskCounterAboutPiece, IBoardEventListener, I
             return;
         }
         
-        var chest = context as Chest;
-        if (chest == null)
+        var piece = context as Piece;
+        if (piece == null)
         {
             Debug.LogError("[TaskOpenChestEntity] => OnBoardEvent: Chest is null for GameEventsCodes.OpenChest event");
             return;
         }
 
-        if (PieceId == PieceType.None.Id || chest.Piece == PieceId)
+        if (PieceId == PieceType.None.Id || piece.PieceType == PieceId)
         {
             CurrentValue += 1;
         }

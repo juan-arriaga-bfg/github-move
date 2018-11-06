@@ -14,7 +14,7 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
     protected override ViewType Id => ViewType.ObstacleState;
 
     private bool isAddListener;
-    
+
     public override void SetOfset()
     {
         CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Ofset;
@@ -23,7 +23,7 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
     public override void Init(Piece piece)
     {
         base.Init(piece);
-        
+
         life = piece.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
         
         if(life == null) return;
@@ -61,7 +61,15 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
     
     public override void UpdateVisibility(bool isVisible)
     {
-        Context.Context.HintCooldown.IsPaused = isVisible;
+        if (isVisible)
+        {
+            Context.Context.HintCooldown.Pause(this);
+        }
+        else
+        {
+            Context.Context.HintCooldown.Resume(this);
+        }
+
         base.UpdateVisibility(isVisible);
         
         UpdateListener(isVisible);

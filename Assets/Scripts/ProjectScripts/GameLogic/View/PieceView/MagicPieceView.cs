@@ -30,7 +30,7 @@ public class MagicPieceView : PieceBoardElementView
         bestMatchPieces = FindBestMatches(board);
         foreach (var piece in bestMatchPieces)
         {
-            if(piece.PieceType == PieceType.Magic.Id)
+            if(piece.PieceType == PieceType.Boost_CR.Id)
                 continue;
   
             var view = piece.ActorView;
@@ -132,13 +132,13 @@ public class MagicPieceView : PieceBoardElementView
     private bool CheckMatch(BoardController board, BoardPosition from, BoardPosition to, List<BoardPosition> positions)
     {
         positions.Add(from);
+        
         var logic = board.BoardLogic;
 		
         int currentId;
-        if (logic.FieldFinder.Find(to, positions, out currentId) == false) return false;
-        var action = logic.MatchActionBuilder.GetMatchAction(positions, currentId, to);
+        int nextId;
         
-        return action != null;
+        return logic.FieldFinder.Find(to, positions, out currentId) && logic.MatchActionBuilder.CheckMatch(positions, currentId, to, out nextId);
     }
 
     private List<int> GetChain(Piece piece)
@@ -156,7 +156,7 @@ public class MagicPieceView : PieceBoardElementView
 
         foreach (var piece in bestMatchPieces)
         {
-            if(piece.PieceType == PieceType.Magic.Id)
+            if(piece.PieceType == PieceType.Boost_CR.Id)
                 continue;
             
             var view = piece.ActorView;

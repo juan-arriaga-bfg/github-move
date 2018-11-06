@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class UIEnergyShopItem : IWUIWindowViewController
 {
-    [SerializeField] private Image icon;
+    [SerializeField] private Transform anchor;
     [SerializeField] private NSText product;
     [SerializeField] private NSText price;
     
@@ -16,11 +16,11 @@ public class UIEnergyShopItem : IWUIWindowViewController
         this.def = def;
         
         isClick = false;
+
+        var tr = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(def.Icon));
+        tr.SetParentAndReset(anchor);
         
-        icon.sprite = IconService.Current.GetSpriteById(def.Icon);
-        icon.SetNativeSize();
-        
-        product.Text = $"{Currency.Energy.Name}: +{def.Product.ToStringIcon(false)}";
+        product.Text = $"+{def.Product.Amount}<size=35> <sprite name={def.Product.Currency}></size>";
         price.Text = $"Buy {def.Price.ToStringIcon(false)}";
     }
 

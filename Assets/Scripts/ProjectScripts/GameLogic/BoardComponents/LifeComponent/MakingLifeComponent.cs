@@ -18,31 +18,30 @@
         def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType).MakingDef;
         
         HP = -1;
-        cooldown = new TimerComponent{Delay = def.Delay, Price = def.FastPrice};
+        
+        cooldown = new TimerComponent{Delay = def.Delay};
         RegisterComponent(cooldown);
     }
-
-    public override void OnAddToBoard(BoardPosition position, Piece context = null)
+    
+    protected override void InitStorage()
     {
-        base.OnAddToBoard(position, context);
-        
-        var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-        
-        timer.Delay = 2;
-        
         storage.Capacity = storage.Amount = def.PieceAmount;
+        storage.Timer.Delay = 2;
     }
 
     protected override LifeSaveItem InitInSave(BoardPosition position)
     {
         var item = base.InitInSave(position);
         
-        if (item != null && item.IsStart) cooldown.Start(item.StartTime);
+        if (item == null) return null;
+        
+        if(item.IsStart) cooldown.Start(item.StartTime);
+        Locker.Unlock(this);
         
         return item;
     }
 
-    public override bool Damage()
+    public override bool Damage(bool isExtra = false)
     {
         if (cooldown.IsExecuteable())
         {
@@ -54,7 +53,7 @@
             return false;
         }
         
-        return base.Damage();
+        return base.Damage(isExtra);
     }
 
     protected override void Success()
@@ -63,9 +62,9 @@
 
     protected override void OnStep()
     {
-        var pieces = ItemWeight.GetRandomPieces(def.PieceAmount, def.PieceWeights);
+        if(Reward == null || Reward.Count == 0) Reward = GameDataService.Current.PiecesManager.GetSequence(def.Uid).GetNextDict(def.PieceAmount);
         
-        foreach (var key in pieces.Keys)
+        foreach (var key in Reward.Keys)
         {
             storage.SpawnPiece = key;
             break;
@@ -73,14 +72,19 @@
         
         storage.SpawnAction = new EjectionPieceAction
         {
-            From = thisContext.CachedPosition,
-            Pieces = pieces,
-            OnComplete = OnSpawnRewards
+            GetFrom = () => thisContext.CachedPosition,
+            Pieces = Reward,
+            OnComplete = () =>
+            {
+                Reward = null;
+                OnSpawnRewards();
+            }
         };
     }
     
     protected override void OnSpawnRewards()
     {
+        base.OnSpawnRewards();
         AddResourceView.Show(StartPosition(), def.StepRewards);
         cooldown.Start();
     }

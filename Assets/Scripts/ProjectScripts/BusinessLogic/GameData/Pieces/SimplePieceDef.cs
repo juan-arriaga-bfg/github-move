@@ -6,5 +6,4 @@
     public int Id => id > 0 ? id : (id = PieceType.Parse(Uid));
 
     public int Delay;
-    public CurrencyPair FastPrice;
 }

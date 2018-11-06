@@ -35,6 +35,8 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
     
     protected override void InitInSave()
     {
+        if(CheckIsNeed() == false) return;
+        
         var save = ProfileService.Current.GetComponent<CurrencySaveComponent>(CurrencySaveComponent.ComponentGuid);
         
         if(save == null) return;
@@ -43,8 +45,7 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         
         targetItem.Amount += Mathf.Min(refil, limitItem.Amount - targetItem.Amount);
         
-        if(CheckIsNeed())
-            Timer.Start(Timer.StartTime);
+        if(CheckIsNeed()) Timer.Start(Timer.StartTime);
     }
 
     public bool CheckIsNeed()

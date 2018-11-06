@@ -1,51 +1,63 @@
 ﻿[
   {
     "Uid": "Mine 1",
-    "Skin": "MineC",
+    "Skin": "MN_B",
     "Delay": 45,
-    "Size": 10,
+    "Size": 20,
     "Price": {
       "Currency": "Energy",
       "Amount": 15
     },
-    "FastPrice": {
-      "Currency": "Crystals",
-      "Amount": 3
-    },
     "Reward": {
-      "Currency": "ChestC1",
+      "Currency": "CH1_B",
       "Amount": 1
     },
-    "StepReward": {
-      "Currency": "Experience",
-      "Amount": 15
-    },
-    "Position": {
-      "X": 15,
-      "Y": 8
-    }
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ],
+    "LastRewards": [
+      {
+        "Currency": "Soft1",
+        "Amount": 10
+      },
+      {
+        "Currency": "Hard1",
+        "Amount": 5
+      }
+    ]
   },
   {
     "Uid": "Mine 2",
-    "Skin": "MineC",
+    "Skin": "MN_B",
     "Delay": 55,
     "Size": 15,
     "Price": {
       "Currency": "Energy",
       "Amount": 10
     },
-    "FastPrice": {
-      "Currency": "Crystals",
-      "Amount": 5
-    },
     "Reward": {
-      "Currency": "ChestC1",
+      "Currency": "CH1_B",
       "Amount": 1
     },
-    "StepReward": {
-      "Currency": "Experience",
-      "Amount": 25
-    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "LastRewards": [
+      {
+        "Currency": "Soft1",
+        "Amount": 10
+      },
+      {
+        "Currency": "Hard1",
+        "Amount": 5
+      }
+    ],
     "Position": {
       "X": 11,
       "Y": 9
@@ -53,25 +65,33 @@
   },
   {
     "Uid": "Mine 3",
-    "Skin": "MineK",
+    "Skin": "MN_C",
     "Delay": 90,
     "Size": 17,
     "Price": {
       "Currency": "Energy",
       "Amount": 15
     },
-    "FastPrice": {
-      "Currency": "Crystals",
-      "Amount": 5
-    },
     "Reward": {
-      "Currency": "ChestK1",
+      "Currency": "CH1_C",
       "Amount": 1
     },
-    "StepReward": {
-      "Currency": "Experience",
-      "Amount": 20
-    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 20
+      }
+    ],
+    "LastRewards": [
+      {
+        "Currency": "Soft1",
+        "Amount": 10
+      },
+      {
+        "Currency": "Hard1",
+        "Amount": 5
+      }
+    ],
     "Position": {
       "X": 23,
       "Y": 6
@@ -79,25 +99,33 @@
   },
   {
     "Uid": "Mine 4",
-    "Skin": "MineL",
+    "Skin": "MN_B",
     "Delay": 120,
     "Size": 15,
     "Price": {
       "Currency": "Energy",
       "Amount": 15
     },
-    "FastPrice": {
-      "Currency": "Crystals",
-      "Amount": 5
-    },
     "Reward": {
-      "Currency": "ChestL1",
+      "Currency": "CH1_D",
       "Amount": 1
     },
-    "StepReward": {
-      "Currency": "Experience",
-      "Amount": 20
-    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 20
+      }
+    ],
+    "LastRewards": [
+      {
+        "Currency": "Soft1",
+        "Amount": 10
+      },
+      {
+        "Currency": "Hard1",
+        "Amount": 5
+      }
+    ],
     "Position": {
       "X": 20,
       "Y": 2

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 {
@@ -37,7 +36,8 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
         foreach (var worker in workers)
         {
-            completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(BoardPosition.Parse(worker), null));
+            var timerElement = new KeyValuePair<BoardPosition, TimerComponent>(BoardPosition.Parse(worker), null);
+            completeTimesList.Add(timerElement);
         }
     }
 
@@ -67,7 +67,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             return;
         }
     }
-
+    
     public bool Get(BoardPosition id, TimerComponent timer)
     {
         if (CurrencyHellper.IsCanPurchase(targetItem.Currency, 1) == false)
@@ -121,18 +121,101 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     
     public bool Return(BoardPosition id)
     {
+        Debug.Log($"[WorkerCurrencyLogicComponent] => Return: {id}");
+        
         foreach (var pair in completeTimesList)
-        {
+        {           
             if (pair.Key.Equals(id) == false) continue;
             
             completeTimesList.Remove(pair);
             Add(1);
             
+            // Should be after if (pair.Key.Equals(id) == false) continue; to avoid event raising for every (even not completed) timers
             BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.WorkerUsed, this);
             
             return true;
         }
         
         return false;
+    }
+
+    public bool Check(BoardPosition id)
+    {
+        foreach (var pair in completeTimesList)
+        {           
+            if (pair.Key.Equals(id) == false) continue;
+            
+            return true;
+        }
+        
+        return false;
+    }
+
+    public bool SetExtra(Piece worker, BoardPosition targetPosition)
+    {
+        if (worker.PieceType != PieceType.Boost_WR.Id || context.BoardLogic.IsEmpty(targetPosition)) return false;
+
+        var target = context.BoardLogic.GetPieceAt(targetPosition);
+        var def = PieceType.GetDefById(target.PieceType);
+
+        if (def.Filter.Has(PieceTypeFilter.WorkPlace) == false || !CheckLock(target)) return false;
+        
+        if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target)) return false;
+        
+        context.ActionExecutor.AddAction(new CollapsePieceToAction
+        {
+            To = targetPosition,
+            Positions = new List<BoardPosition> {worker.CachedPosition},
+        });
+        
+        return true;
+    }
+
+    private bool CheckLock(Piece target)
+    {
+        if (!target.Context.Pathfinder.CanPathToCastle(target))
+        {
+            UIErrorWindowController.AddError("Can't make this action!");
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool CheckLife(Piece target)
+    {
+        var life = target.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
+        
+        if (life == null) return false;
+
+        if (life.Locker.IsLocked)
+        {
+            UIErrorWindowController.AddError(life.IsFilled ? "Can't make this action!" : "Someone is working here already!");
+            return false;
+        }
+
+        if (life.IsUseCooldown && life.Timer.IsExecuteable())
+        {
+            UIErrorWindowController.AddError("It's not ready yet!");
+            return false;
+        }
+
+        return life.Damage(true);
+    }
+
+    private bool CheckPieceState(Piece target)
+    {
+        var state = target.GetComponent<PieceStateComponent>(PieceStateComponent.ComponentGuid);
+
+        if (state == null) return false;
+
+        if (state.State == BuildingState.InProgress || state.State == BuildingState.Complete)
+        {
+            UIErrorWindowController.AddError("Someone is working here already!");
+            return false;
+        }
+        
+        state.Work(true);
+        return true;
     }
 }

@@ -2,10 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class UIEnergyShopWindowView : UIGenericPopupWindowView 
-{
-    [SerializeField] private NSText secondMessage;
-    [SerializeField] private NSText buttonLabel;
-    
+{   
     [SerializeField] private GameObject itemPattern;
     
     private List<UIEnergyShopItem> items = new List<UIEnergyShopItem>();
@@ -17,9 +14,6 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIEnergyShopWindowModel;
         
         SetTitle(windowModel.Title);
-        SetMessage(windowModel.Message);
-        secondMessage.Text = windowModel.SecondMessage;
-        buttonLabel.Text = windowModel.ButtonText;
         
         var products = windowModel.Products;
         
@@ -56,10 +50,5 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
         }
         
         items = new List<UIEnergyShopItem>();
-    }
-
-    public void OnClick()
-    {
-        UIMessageWindowController.CreateImageMessage("Need more energy?", "collect_pieces", () => {});
     }
 }

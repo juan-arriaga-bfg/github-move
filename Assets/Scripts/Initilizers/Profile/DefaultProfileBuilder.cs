@@ -19,6 +19,7 @@
         profile.RegisterComponent(new CurrencySaveComponent());
         profile.RegisterComponent(new CodexSaveComponent());
         profile.RegisterComponent(new OrdersSaveComponent());
+        profile.RegisterComponent(new SequenceSaveComponent());
 //        profile.RegisterComponent(new CharacterSaveComponent());
     }
     

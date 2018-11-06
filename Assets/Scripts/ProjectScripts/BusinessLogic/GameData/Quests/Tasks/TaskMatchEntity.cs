@@ -36,7 +36,7 @@ public class TaskMatchEntity : TaskCounterAboutPiece, IBoardEventListener, IHave
             return;
         }
 
-        if (PieceId == PieceType.None.Id || matchDescr.CreatedPieceType == PieceId)
+        if (PieceId == PieceType.None.Id || matchDescr.SourcePieceType == PieceId)
         {
             CurrentValue += 1;
         }

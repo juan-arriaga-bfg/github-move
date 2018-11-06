@@ -4,7 +4,7 @@ using System.Text;
 
 public class BoardLogicComponent : ECSEntity,
     IMatchDefinitionComponent, IFieldFinderComponent, IEmptyCellsFinderComponent, IMatchActionBuilderComponent, IPiecePositionsCacheComponent,
-    IPieceFlyerComponent, ICellHintsComponent
+    IPieceFlyerComponent, ICellHintsComponent, IFireflyLogicComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -60,6 +60,9 @@ public class BoardLogicComponent : ECSEntity,
     
     protected CellHintsComponent cellHints;
     public CellHintsComponent CellHints => cellHints ?? (cellHints = GetComponent<CellHintsComponent>(CellHintsComponent.ComponentGuid));
+    
+    protected FireflyLogicComponent fireflyLogic;
+    public FireflyLogicComponent FireflyLogic => fireflyLogic ?? (fireflyLogic = GetComponent<FireflyLogicComponent>(FireflyLogicComponent.ComponentGuid));
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -364,7 +367,7 @@ public class BoardLogicComponent : ECSEntity,
         
         observer?.OnMovedFromToStart(@from, to);
         
-        if (AddPieceToBoardSilent(to.X, to.Y, fromPiece) && RemovePieceFromBoardSilent(from))
+        if (RemovePieceFromBoardSilent(from) && AddPieceToBoardSilent(to.X, to.Y, fromPiece))
         {
             observer?.OnMovedFromToFinish(@from, to);
             return true;

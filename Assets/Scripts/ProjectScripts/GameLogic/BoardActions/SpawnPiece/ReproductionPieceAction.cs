@@ -8,11 +8,8 @@ public class ReproductionPieceAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
-	public virtual int Guid
-	{
-		get { return ComponentGuid; }
-	}
-	
+	public virtual int Guid => ComponentGuid;
+
 	public BoardElementView BoardElement;
 	public BoardPosition From { get; set; }
 	public int Piece { get; set; }
@@ -57,7 +54,7 @@ public class ReproductionPieceAction : IBoardAction
 				gameBoardController.BoardLogic.UnlockCell(pair.Key, this);
 			}
 
-			if (OnComplete != null) OnComplete();
+			OnComplete?.Invoke();
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

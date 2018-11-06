@@ -74,7 +74,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     {
         if(def == null) return;
         
-        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, null);
+        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, def);
         
         AddResourceView.Show(def.GetCenter(thisContext.Context), def.Reward);
         GameDataService.Current.FogsManager.RemoveFog(key);
@@ -220,11 +220,19 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         {
             if (success == false) return;
 			
-            piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+            thisContext.Context.HintCooldown.RemoweView(view);
+
+            view.OnHide = () =>
             {
-                To = piece.CachedPosition,
-                Positions = new List<BoardPosition>{piece.CachedPosition}
-            });
+                piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+                {
+                    To = piece.CachedPosition,
+                    Positions = new List<BoardPosition> {piece.CachedPosition}
+                });
+            };
+            
+            view.Priority = 1;
+            view.Change(false);
         });
     }
 

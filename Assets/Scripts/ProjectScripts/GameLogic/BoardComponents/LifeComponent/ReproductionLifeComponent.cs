@@ -20,35 +20,33 @@ public class ReproductionLifeComponent : StorageLifeComponent
         def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType).ReproductionDef;
         
         HP = def.Limit;
-        cooldown = new TimerComponent{Delay = def.Delay, Price = def.FastPrice};
+        cooldown = new TimerComponent{Delay = def.Delay};
         RegisterComponent(cooldown);
         
         var child = GameDataService.Current.PiecesManager.GetPieceDef(PieceType.Parse(def.Reproduction.Currency));
         childName = child?.Name;
     }
-
-    public override void OnAddToBoard(BoardPosition position, Piece context = null)
+    
+    protected override void InitStorage()
     {
-        base.OnAddToBoard(position, context);
-        
-        var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-        
-        timer.Delay = 2;
-        
         storage.SpawnPiece = PieceType.Parse(def.Reproduction.Currency);
         storage.Capacity = storage.Amount = def.Reproduction.Amount;
+        storage.Timer.Delay = 2;
     }
 
     protected override LifeSaveItem InitInSave(BoardPosition position)
     {
         var item = base.InitInSave(position);
-
-        if (item != null && item.IsStart) cooldown.Start(item.StartTime);
+        
+        if (item == null) return null;
+        
+        if(item.IsStart) cooldown.Start(item.StartTime);
+        Locker.Unlock(this);
         
         return item;
     }
 
-    public override bool Damage()
+    public override bool Damage(bool isExtra = false)
     {
         if (cooldown.IsExecuteable())
         {
@@ -60,7 +58,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
             return false;
         }
         
-        return base.Damage();
+        return base.Damage(isExtra);
     }
 
     protected override void Success()
@@ -104,6 +102,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
 
     protected override void OnSpawnRewards()
     {
+        base.OnSpawnRewards();
         AddResourceView.Show(StartPosition(), def.StepReward);
     }
 }

@@ -5,12 +5,12 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
-
+    
     public void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
     }
-
+    
     public void OnUnRegisterEntity(ECSEntity entity)
     {
     }
@@ -18,13 +18,10 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
     public List<OrderDef> Recipes;
     public List<Order> Orders;
     
-    private List<int> sequence;
-    
     public void Reload()
     {
         Recipes = new List<OrderDef>();
         Orders = new List<Order>();
-        sequence = new List<int>();
         LoadData(new ResourceConfigDataMapper<List<OrderDef>>("configs/orders.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 
@@ -67,12 +64,7 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
             }
         });
     }
-
-    public void UpdateSequence()
-    {
-        sequence = ItemWeight.GetRandomSequence(GameDataService.Current.LevelsManager.Recipes, 100);
-    }
-
+    
     public bool CheckStart()
     {
         return Orders.Count < GameDataService.Current.ConstantsManager.MaxOrders;
@@ -81,14 +73,14 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
     public Order GetOrder(int customer)
     {
         if (Orders.Count >= GameDataService.Current.ConstantsManager.MaxOrders) return null;
-        
-        if (sequence.Count == 0) UpdateSequence();
-        if (sequence.Count == 0) return null;
 
-        var recipe = Recipes[sequence[0]];
+        var item = GameDataService.Current.LevelsManager.GetSequence(Currency.Order.Name)?.GetNext();
+        
+        if (item == null) return null;
+
+        var recipe = Recipes.Find(def => def.Uid == item.Uid);
         var order = new Order{Customer = customer, Def = recipe};
         
-        sequence.RemoveAt(0);
         Orders.Add(order);
         
         return order;

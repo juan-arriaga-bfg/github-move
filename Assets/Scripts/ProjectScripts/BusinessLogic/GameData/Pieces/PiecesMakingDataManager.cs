@@ -36,6 +36,8 @@ public class PiecesMakingDataManager : IECSComponent, IDataManager, IDataLoader<
 					if(baseDef == null) continue;
 
 					baseDef.MakingDef = def;
+					
+					context.AddSequence(def.Uid, def.PieceWeights);
 				}
 			}
 			else

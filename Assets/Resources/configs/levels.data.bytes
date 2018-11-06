@@ -15,7 +15,16 @@
         "Amount": 5
       }
     ],
-    "Chest": "Chest1"
+    "PieceWeights": [
+      {
+        "Uid": "PR_A1",
+        "Weight": 50
+      },
+      {
+        "Uid": "PR_B1",
+        "Weight": 50
+      }
+    ]
   },
   {
     "Index": 2,
@@ -33,7 +42,23 @@
         "Amount": 10
       }
     ],
-    "Chest": "Chest1"
+    "PieceWeights": [
+      {
+        "Uid": "PR_A1",
+        "Weight": 30,
+        "Override": true
+      },
+      {
+        "Uid": "PR_B1",
+        "Weight": 30,
+        "Override": true
+      },
+      {
+        "Uid": "PR_C1",
+        "Weight": 40,
+        "Override": true
+      }
+    ]
   },
   {
     "Index": 3,
@@ -51,7 +76,22 @@
         "Amount": 5
       }
     ],
-    "Chest": "Chest1"
+    "PieceWeights": [
+      {
+        "Uid": "PR_A1",
+        "Weight": 10
+      },
+      {
+        "Uid": "PR_C1",
+        "Weight": 20,
+        "Override": true
+      },
+      {
+        "Uid": "PR_B1",
+        "Weight": 30,
+        "Override": true
+      }
+    ]
   },
   {
     "Index": 4,
@@ -69,7 +109,6 @@
         "Amount": 10
       }
     ],
-    "Chest": "Chest1",
     "OrdersWeights": [
       {
         "Uid": "Order1",
@@ -86,6 +125,31 @@
       {
         "Uid": "Order5",
         "Weight": 10
+      }
+    ],
+    "PieceWeights": [
+      {
+        "Uid": "PR_A1",
+        "Weight": 20,
+        "Override": true
+      },
+      {
+        "Uid": "PR_C1",
+        "Weight": 10,
+        "Override": true
+      },
+      {
+        "Uid": "PR_B1",
+        "Weight": 5,
+        "Override": true
+      },
+      {
+        "Uid": "PR_E1",
+        "Weight": 5
+      },
+      {
+        "Uid": "PR_D1",
+        "Weight": 5
       }
     ]
   },
@@ -105,11 +169,11 @@
         "Amount": 10
       }
     ],
-    "Chest": "Chest2",
     "OrdersWeights": [
       {
         "Uid": "Order4",
-        "Weight": 10
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "Order5",
@@ -117,10 +181,26 @@
       },
       {
         "Uid": "Order7",
+        "Weight": 15
+      }
+    ],
+    "PieceWeights": [
+      {
+        "Uid": "PR_A1",
+        "Weight": 30,
+        "Override": true
+      },
+      {
+        "Uid": "PR_C1",
+        "Weight": 30,
+        "Override": true
+      },
+      {
+        "Uid": "PR_E1",
         "Weight": 10
       },
       {
-        "Uid": "Order2",
+        "Uid": "PR_B1",
         "Weight": 10
       }
     ]
@@ -141,7 +221,6 @@
         "Amount": 5
       }
     ],
-    "Chest": "Chest2",
     "OrdersWeights": [
       {
         "Uid": "Order7",
@@ -177,12 +256,10 @@
         "Amount": 5
       }
     ],
-    "Chest": "Chest2",
     "OrdersWeights": [
       {
         "Uid": "Order9",
-        "Weight": 10,
-        "Override": true
+        "Weight": 10
       },
       {
         "Uid": "Order4",
@@ -213,8 +290,7 @@
         "Currency": "Crystals",
         "Amount": 5
       }
-    ],
-    "Chest": "Chest2"
+    ]
   },
   {
     "Index": 9,
@@ -231,8 +307,7 @@
         "Currency": "Crystals",
         "Amount": 5
       }
-    ],
-    "Chest": "Chest2"
+    ]
   },
   {
     "Index": 10,
@@ -249,7 +324,6 @@
         "Currency": "Crystals",
         "Amount": 5
       }
-    ],
-    "Chest": "Chest3"
+    ]
   }
 ]

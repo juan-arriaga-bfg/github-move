@@ -1,21 +1,17 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using YamlDotNet.Core;
 
 public class DevTools : MonoBehaviour
 {
     [SerializeField] private GameObject panel;
 
-    public static DevTools Instance;
-    
     public void Start()
     {
         panel.SetActive(false);
-        Instance = this;
     }
     
     public void OnToggleValueChanged(bool isChecked)
@@ -80,12 +76,6 @@ public class DevTools : MonoBehaviour
     }
     
     private List<DebugCellView> cells = new List<DebugCellView>();
-    public IReadOnlyList<DebugCellView> DebugCells => cells;
-
-    public void MarkCell(BoardPosition position, bool enableMark = true)
-    {
-        cells.Find(elem => elem.Position.Equals(new BoardPosition(position.X, position.Y)))?.Mark(enabled);
-    }
     
     public void OnToggleCells(bool isChecked)
     {
@@ -129,11 +119,30 @@ public class DevTools : MonoBehaviour
 
     public void OnDebug1Click()
     {
-        CurrencyHellper.Purchase(Currency.Experience.Name, 5000);
+        Debug.Log("OnDebug1Click");
+        BoardService.Current.FirstBoard.BoardLogic.FireflyLogic.Execute();
     }
 
     public void OnDebug2Click()
     {
-        CurrencyHellper.Purchase(Currency.Mana.Name, 50000000);
+//        Debug.Log("OnDebug2Click");
+        CurrencyHellper.Purchase(Currency.Experience.Name, 6000);
+        CurrencyHellper.Purchase(Currency.Mana.Name, 5000000);
+
+        //BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
+
+#if LEAKWATCHER
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        Debug.Log(LeakWatcher.Instance.DataAsString(false));
+#endif
+
+        // QuestService.Current.Load();
+        // BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, null);
+
+        // string text = File.ReadAllText(@"D:/save.json");
+        // QuestSaveComponent q = JsonConvert.DeserializeObject<QuestSaveComponent>(text);
+        //
+        // string i = "";
     }
 }

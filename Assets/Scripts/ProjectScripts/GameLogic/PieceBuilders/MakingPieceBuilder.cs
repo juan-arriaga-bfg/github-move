@@ -8,11 +8,6 @@ public class MakingPieceBuilder : MulticellularDraggablePieceBuilder
 		
         piece.RegisterComponent(new TimerComponent());
 		
-        var life = new MakingLifeComponent();
-
-        piece.RegisterComponent(life);
-        AddObserver(piece, life);
-		
         var storage = new StorageComponent
         {
             IsAutoStart = false,
@@ -22,6 +17,11 @@ public class MakingPieceBuilder : MulticellularDraggablePieceBuilder
 		
         piece.RegisterComponent(storage);
         AddObserver(piece, storage);
+        
+        var life = new MakingLifeComponent();
+
+        piece.RegisterComponent(life);
+        AddObserver(piece, life);
 
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}

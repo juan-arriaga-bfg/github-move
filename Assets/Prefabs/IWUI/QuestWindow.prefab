@@ -1588,7 +1588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 21473500708721750, guid: 453d5306b07e3314ca20f15f24d19a35,
+  m_Material: {fileID: 21828550339951598, guid: cee3366b5f6997148af4153df8f0d51a,
     type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -1598,9 +1598,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: cee3366b5f6997148af4153df8f0d51a, type: 2}
   m_material: {fileID: 0}
-  m_sharedMaterial: {fileID: 21473500708721750, guid: 453d5306b07e3314ca20f15f24d19a35,
+  m_sharedMaterial: {fileID: 21828550339951598, guid: cee3366b5f6997148af4153df8f0d51a,
     type: 2}
   m_isDefaultMaterial: 1
   m_padding: 0
@@ -2187,7 +2187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 21473500708721750, guid: 453d5306b07e3314ca20f15f24d19a35,
+  m_Material: {fileID: 21828550339951598, guid: cee3366b5f6997148af4153df8f0d51a,
     type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -2197,9 +2197,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: cee3366b5f6997148af4153df8f0d51a, type: 2}
   m_material: {fileID: 0}
-  m_sharedMaterial: {fileID: 21473500708721750, guid: 453d5306b07e3314ca20f15f24d19a35,
+  m_sharedMaterial: {fileID: 21828550339951598, guid: cee3366b5f6997148af4153df8f0d51a,
     type: 2}
   m_isDefaultMaterial: 1
   m_padding: 0
@@ -2233,6 +2233,7 @@ MonoBehaviour:
   chain: {fileID: 114531073467444964}
   codexItemPrefab: {fileID: 1815276886000352, guid: f68c6d6a2f1d251479cfa0addd3acbcf,
     type: 2}
+  anchor: {fileID: 224941197145650514}
 --- !u!114 &114729411385438914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2792,7 +2793,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300190, guid: e181f4d13a7366b41b4a3fb279f36c94, type: 3}
+  m_Sprite: {fileID: 21300198, guid: e181f4d13a7366b41b4a3fb279f36c94, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3032,8 +3033,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 772.5, y: 0}
-  m_SizeDelta: {x: 195, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224088602125262916
 RectTransform:
@@ -3540,8 +3541,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 130, y: 46.31}
-  m_SizeDelta: {x: 171, y: 188}
+  m_AnchoredPosition: {x: 130, y: 45}
+  m_SizeDelta: {x: 158, y: 164}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224952422256074100
 RectTransform:

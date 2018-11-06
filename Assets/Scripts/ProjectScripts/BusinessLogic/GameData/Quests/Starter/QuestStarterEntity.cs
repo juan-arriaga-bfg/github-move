@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -25,7 +26,7 @@ public class QuestStarterEntity : ECSEntity, IECSSerializeable
     
     [JsonProperty] public QuestStarterMode Mode { get; protected set; }
     
-    [JsonProperty] public string QuestToStartId { get; protected set; }
+    [JsonProperty] public List<string> QuestToStartIds { get; protected set; }
     
     [JsonProperty] public List<QuestStartConditionComponent> Conditions = new List<QuestStartConditionComponent>();
     
@@ -40,36 +41,43 @@ public class QuestStarterEntity : ECSEntity, IECSSerializeable
     
     public bool Check()
     {
-        string log = $"[QuestStarterEntity] => Check: Starter Id: {Id}";
+        StringBuilder log = new StringBuilder($"[QuestStarterEntity] => Check: Starter Id: {Id}");
         
         bool isTimeToStart = true;
 
         var dataManager = GameDataService.Current.QuestsManager;
-        
-        switch (Mode)
-        {
-            case QuestStarterMode.Once:
-                if (dataManager.CompletedQuests.Contains(QuestToStartId))
-                {
-                    isTimeToStart = false;
-                    log += "\n" + $"QuestStarterMode is 'Once' but quest have been completed.";
-                }
-                else if (dataManager.GetActiveQuestById(QuestToStartId) != null)
-                {
-                    isTimeToStart = false;
-                    log += "\n" + $"QuestStarterMode is 'Once' but quest already in progress.";
-                }
-                break;
-            
-            case QuestStarterMode.Loop:
-                throw new NotImplementedException();
-                break;
-            
-            case QuestStarterMode.Restart:
-                throw new NotImplementedException();
-                break;
-        }
 
+        foreach (var questId in QuestToStartIds)
+        {
+            if (isTimeToStart == false)
+            {
+                break;
+            }
+            
+            switch (Mode)
+            {
+                case QuestStarterMode.Once:
+                    if (dataManager.CompletedQuests.Contains(questId))
+                    {
+                        isTimeToStart = false;
+                        log.Append("\n" + $"QuestStarterMode is 'Once' but quest have been completed.");
+                    }
+                    else if (dataManager.GetActiveQuestById(questId) != null)
+                    {
+                        isTimeToStart = false;
+                        log.Append("\n" + $"QuestStarterMode is 'Once' but quest already in progress.");
+                    }
+                    break;
+            
+                case QuestStarterMode.Loop:
+                    throw new NotImplementedException();
+                    break;
+            
+                case QuestStarterMode.Restart:
+                    throw new NotImplementedException();
+                    break;
+            }
+        }
 
         if (isTimeToStart)
         {
@@ -77,7 +85,7 @@ public class QuestStarterEntity : ECSEntity, IECSSerializeable
             {
                 var condition = Conditions[i];
                 var result    = condition.Check();
-                log += "\n" + $"Condition {i + 1}/{Conditions.Count}: id: {condition.Id}, Result: {result}";
+                log.Append("\n" + $"Condition {i + 1}/{Conditions.Count}: id: {condition.Id}, Result: {result}");
 
                 if (!result)
                 {
@@ -87,8 +95,9 @@ public class QuestStarterEntity : ECSEntity, IECSSerializeable
             }
         }
 
-        log += "\n" + $"Resolution: {(isTimeToStart ? "START quest with id: " + QuestToStartId : "SKIP")}";
-        Debug.Log(log);
+        log.Append("\n" + $"Resolution: {(isTimeToStart ? $"START quests with ids: [{string.Join(",", QuestToStartIds)}]" : "SKIP")}");
+
+        Debug.Log(log.ToString());
         
         return isTimeToStart;
     }

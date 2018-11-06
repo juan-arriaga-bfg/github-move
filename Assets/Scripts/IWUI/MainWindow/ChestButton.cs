@@ -37,6 +37,5 @@ public class ChestButton : UIGenericResourcePanelViewController
         
         shine.SetActive(isActive);
         exclamationMark.SetActive(isActive);
-        icon.sprite = IconService.Current.GetSpriteById(PieceType.Parse(GameDataService.Current.LevelsManager.Chest));
     }
 }

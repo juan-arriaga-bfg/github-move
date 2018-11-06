@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 public class LifeSaveItemJsonConverter : JsonConverter
@@ -13,7 +14,7 @@ public class LifeSaveItemJsonConverter : JsonConverter
         var targetValue = (LifeSaveItem) value;
         
         serializer.TypeNameHandling = TypeNameHandling.None;
-        serializer.Serialize(writer, $"{targetValue.Step},{targetValue.StartTime},{(targetValue.IsStart ? 1 : 0)},{targetValue.Position.ToSaveString()}");
+        serializer.Serialize(writer, $"{targetValue.Step},{targetValue.StartTime},{(targetValue.IsStart ? 1 : 0)},{targetValue.Position.ToSaveString()},{targetValue.Reward.ToSaveString()}");
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -26,7 +27,8 @@ public class LifeSaveItemJsonConverter : JsonConverter
             Step = int.Parse(dataArray[0]),
             StartTime = long.Parse(dataArray[1]),
             IsStart = int.Parse(dataArray[2]) == 1,
-            Position = new BoardPosition(int.Parse(dataArray[3]), int.Parse(dataArray[4]), int.Parse(dataArray[5]))
+            Position = new BoardPosition(int.Parse(dataArray[3]), int.Parse(dataArray[4]), int.Parse(dataArray[5])),
+            Reward = DictionaryStringConverter.FromDataArray(dataArray, int.Parse, int.Parse, 6)
         };
         
         return targetValue;
@@ -40,6 +42,7 @@ public class LifeSaveItem
     private long startTime;
     private BoardPosition position;
     private bool isStart;
+    private Dictionary<int, int> reward;
     
     public int Step
     {
@@ -63,5 +66,11 @@ public class LifeSaveItem
     {
         get { return isStart; }
         set { isStart = value; }
+    }
+
+    public Dictionary<int, int> Reward
+    {
+        get { return reward; }
+        set { reward = value; }
     }
 }

@@ -6,10 +6,6 @@
       "Currency": "Energy",
       "Amount": 15
     },
-    "FastPrice": {
-      "Currency": "Crystals",
-      "Amount": 10
-    },
     "StepRewards": [
       {
         "Currency": "Experience",
@@ -23,29 +19,25 @@
     "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": "Coin1",
+        "Uid": "Soft1",
         "Weight": 10
       },
       {
-        "Uid": "Magic1",
+        "Uid": "Boost_CR1",
         "Weight": 5
       },
       {
-        "Uid": "Crystal1",
+        "Uid": "Hard1",
         "Weight": 5
       }
     ]
   },
   {
-    "Uid": "C11",
+    "Uid": "B11",
     "Delay": 1800,
     "Price": {
       "Currency": "Energy",
       "Amount": 20
-    },
-    "FastPrice": {
-      "Currency": "Crystals",
-      "Amount": 10
     },
     "StepRewards": [
       {
@@ -58,6 +50,55 @@
       }
     ],
     "PieceAmount": 6,
+    "PieceWeights": [
+      {
+        "Uid": "B1",
+        "Weight": 50
+      },
+      {
+        "Uid": "B2",
+        "Weight": 50
+      },
+      {
+        "Uid": "PR_B1",
+        "Weight": 10
+      },
+      {
+        "Uid": "PR_C1",
+        "Weight": 10
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 10
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 5
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 5
+      }
+    ]
+  },
+  {
+    "Uid": "C10",
+    "Delay": 1800,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 15
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 10
+      }
+    ],
+    "PieceAmount": 5,
     "PieceWeights": [
       {
         "Uid": "C1",
@@ -68,94 +109,29 @@
         "Weight": 50
       },
       {
-        "Uid": "E1",
+        "Uid": "PR_B1",
         "Weight": 10
       },
       {
-        "Uid": "F1",
+        "Uid": "Soft1",
         "Weight": 10
       },
       {
-        "Uid": "Coin1",
-        "Weight": 10
-      },
-      {
-        "Uid": "Magic1",
+        "Uid": "Boost_CR1",
         "Weight": 5
       },
       {
-        "Uid": "Crystal1",
+        "Uid": "Hard1",
         "Weight": 5
       }
     ]
   },
   {
-    "Uid": "K10",
-    "Delay": 1800,
-    "Price": {
-      "Currency": "Energy",
-      "Amount": 15
-    },
-    "FastPrice": {
-      "Currency": "Crystals",
-      "Amount": 10
-    },
-    "StepRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 25
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 10
-      }
-    ],
-    "PieceAmount": 5,
-    "PieceWeights": [
-      {
-        "Uid": "K1",
-        "Weight": 50
-      },
-      {
-        "Uid": "K2",
-        "Weight": 50
-      },
-      {
-        "Uid": "I1",
-        "Weight": 10
-      },
-      {
-        "Uid": "E1",
-        "Weight": 10
-      },
-      {
-        "Uid": "J1",
-        "Weight": 10
-      },
-      {
-        "Uid": "Coin1",
-        "Weight": 10
-      },
-      {
-        "Uid": "Magic1",
-        "Weight": 5
-      },
-      {
-        "Uid": "Crystal1",
-        "Weight": 5
-      }
-    ]
-  },
-  {
-    "Uid": "L9",
+    "Uid": "D9",
     "Delay": 1800,
     "Price": {
       "Currency": "Energy",
       "Amount": 20
-    },
-    "FastPrice": {
-      "Currency": "Crystals",
-      "Amount": 10
     },
     "StepRewards": [
       {
@@ -170,35 +146,31 @@
     "PieceAmount": 6,
     "PieceWeights": [
       {
-        "Uid": "L1",
-        "Weight": 50
-      },
-      {
-        "Uid": "L2",
-        "Weight": 50
-      },
-      {
-        "Uid": "H1",
-        "Weight": 10
-      },
-      {
-        "Uid": "J1",
-        "Weight": 10
-      },
-      {
         "Uid": "D1",
+        "Weight": 50
+      },
+      {
+        "Uid": "D2",
+        "Weight": 50
+      },
+      {
+        "Uid": "PR_E1",
         "Weight": 10
       },
       {
-        "Uid": "Coin1",
+        "Uid": "PR_A1",
         "Weight": 10
       },
       {
-        "Uid": "Magic1",
+        "Uid": "Soft1",
+        "Weight": 10
+      },
+      {
+        "Uid": "Boost_CR1",
         "Weight": 5
       },
       {
-        "Uid": "Crystal1",
+        "Uid": "Hard1",
         "Weight": 5
       }
     ]

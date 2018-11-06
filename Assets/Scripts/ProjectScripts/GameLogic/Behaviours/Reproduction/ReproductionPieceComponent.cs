@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-public class ReproductionPieceComponent : IECSComponent, IPieceBoardObserver
+﻿public class ReproductionPieceComponent : IECSComponent, IPieceBoardObserver
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
@@ -36,31 +34,5 @@ public class ReproductionPieceComponent : IECSComponent, IPieceBoardObserver
 
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
-    }
-    
-    public void Reproduction()
-    {
-        var field = new List<BoardPosition>();
-        
-        if (emptyFinder.FindRandomNearWithPointInCenter(contextPiece.CachedPosition, field, Child.Amount) == false)
-        {
-            return;
-        }
-        
-        life?.Damage(life.Worker?.Amount ?? 1);
-        
-        contextPiece.Context.ActionExecutor.AddAction(new ReproductionPieceAction()
-        {
-            From = contextPiece.CachedPosition,
-            Piece = PieceType.Parse(Child.Currency),
-            Positions = field
-        });
-    }
-    
-    public bool Check()
-    {
-        if (emptyFinder.CheckWithPointInCenter(contextPiece.CachedPosition) == false) return false;
-        
-        return life == null || (!life.Timer.IsExecuteable() && life.HP - life.Current > 1);
     }
 }

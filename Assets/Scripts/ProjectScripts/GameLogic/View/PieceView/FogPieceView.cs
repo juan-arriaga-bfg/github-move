@@ -10,7 +10,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 	[SerializeField] private TouchRegion touchRegion;
 
     private readonly Color highlightColor = new Color(222 / 255f, 222 / 255f, 1, 1);
-    private readonly Color initialColor = new Color(1, 1, 1, 230 / 255f);
+    private readonly Color initialColor = new Color(1, 1, 1, 1);
     
 	private List<GameObject> views = new List<GameObject>();
 	private readonly List<SpriteRenderer> fogSprites = new List<SpriteRenderer>();
@@ -34,8 +34,12 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 			var fog = Instantiate(fogItem, fogItem.transform.parent);
 			var touch = Instantiate(touchItem, touchItem.transform.parent);
 			var sprite = fog.GetComponent<SpriteRenderer>();
+			
+			sprite.sprite = IconService.Current.GetSpriteById($"Fog{Random.Range(1, 4)}");
+			
 		    fogSprites.Add(sprite);
 		    
+			sprite.transform.localScale = Vector3.one * 1.1f;
 			sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + 101;
 			
 			fog.transform.position = touch.transform.position = piece.Context.BoardDef.GetSectorCenterWorldPosition(position.X, position.Y, 0);

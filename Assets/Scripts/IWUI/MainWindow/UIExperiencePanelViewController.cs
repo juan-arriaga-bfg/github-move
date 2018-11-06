@@ -55,35 +55,13 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
 
         isLevelUp = true;
         
-        var rewards = new StringBuilder("Rewards:");
-        var data = GameDataService.Current.LevelsManager.Rewards;
-
-        foreach (var pair in data)
-        {
-            rewards.Append(" ");
-            rewards.Append(pair.ToStringIcon());
-        }
-        
-        UIMessageWindowController.CreateMessage("New level", rewards.ToString(), () =>
-        {
-            isLevelUp = false;
-            CurrencyHellper.Purchase(Currency.Level.Name, 1, itemUid, manager.Price);
-            CurrencyHellper.Purchase(Currency.EnergyLimit.Name, 1);
-            CurrencyHellper.Purchase(data, null, new Vector2(Screen.width/2, Screen.height/2));
-            RefillEnergy();
-            
-            GameDataService.Current.QuestsManager.CheckConditions();
-            GameDataService.Current.OrdersManager.UpdateSequence();
-            
-        }, null, true);
-        
+        UIService.Get.ShowWindow(UIWindowType.NextLevelWindow);
+        UIService.Get.OnCloseWindowEvent += OnCloseNextLevelWindow;
     }
 
-    private void RefillEnergy()
+    private void OnCloseNextLevelWindow(IWUIWindow window)
     {
-        var currentValue = ProfileService.Current.GetStorageItem(Currency.Energy.Name).Amount;
-        var limitValue = ProfileService.Current.GetStorageItem(Currency.EnergyLimit.Name).Amount;
-        if (limitValue - currentValue > 0)
-            CurrencyHellper.Purchase(Currency.Energy.Name, limitValue - currentValue);
+        UIService.Get.OnCloseWindowEvent -= OnCloseNextLevelWindow;
+        isLevelUp = false;
     }
 }

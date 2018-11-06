@@ -30,7 +30,7 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         btnOpenLabel.Text = windowModel.ButtonText;
         chanceLabel.Text = windowModel.ChanceText;
         
-        chest.sprite = IconService.Current.GetSpriteById(windowModel.Chest.Def.Uid);
+        chest.sprite = IconService.Current.GetSpriteById(windowModel.ChestComponent.Chest.Def.Uid);
         chest.SetNativeSize();
         
         var sprites = windowModel.Icons();
@@ -48,18 +48,13 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
     {
         base.OnViewClose();
         
-        var model = Model as UIChestMessageWindowModel;
+        var windowModel = Model as UIChestMessageWindowModel;
 
-        if (isOpen)
-        {
-            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.OpenChest, model.Chest);
-            
-            model.OnOpen?.Invoke();
-        }  
+        if (isOpen) windowModel.ChestComponent.Open();
         
-        model.Chest = null;
+        windowModel.ChestComponent = null;
     }
-
+    
     public override void OnViewCloseCompleted()
     {
         foreach (var image in icons)

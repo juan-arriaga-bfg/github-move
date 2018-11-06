@@ -1,28 +1,26 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelsDataManager : IECSComponent, IDataManager, IDataLoader<List<LevelsDef>>
+public class LevelsDataManager : SequenceData, IDataLoader<List<LevelsDef>>
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
-	public int Guid => ComponentGuid;
-
-	public void OnRegisterEntity(ECSEntity entity)
-	{
-		Reload();
-	}
-	
-	public void OnUnRegisterEntity(ECSEntity entity)
-	{
-	}
+	public override int Guid => ComponentGuid;
 	
 	public List<LevelsDef> Levels;
 	
-	public void Reload()
+	public override void Reload()
 	{
+		base.Reload();
 		Levels = null;
 		LoadData(new ResourceConfigDataMapper<List<LevelsDef>>("configs/levels.data", NSConfigsSettings.Instance.IsUseEncryption));
 	}
 	
+	public void UpdateSequence()
+	{
+		GetSequence(Currency.Level.Name).Reinit(Levels[Level - 1].PieceWeights);
+		GetSequence(Currency.Order.Name).Reinit(Levels[Level - 1].OrdersWeights);
+	}
+
 	public void LoadData(IDataMapper<List<LevelsDef>> dataMapper)
 	{
 		dataMapper.LoadData((data, error) =>
@@ -38,8 +36,12 @@ public class LevelsDataManager : IECSComponent, IDataManager, IDataLoader<List<L
 					var next = data[i];
 					
 					next.OrdersWeights = ItemWeight.ReplaseWeights(previous.OrdersWeights, next.OrdersWeights);
+					next.PieceWeights = ItemWeight.ReplaseWeights(previous.PieceWeights, next.PieceWeights);
 					Levels.Add(next);
 				}
+				
+				AddSequence(Currency.Level.Name, Levels[Level - 1].PieceWeights);
+				AddSequence(Currency.Order.Name, Levels[Level - 1].OrdersWeights);
 			}
 			else
 			{
@@ -60,8 +62,5 @@ public class LevelsDataManager : IECSComponent, IDataManager, IDataLoader<List<L
 	}
 
 	public List<CurrencyPair> Rewards => Levels[Level - 1].Rewards;
-	
-	public int Chest => PieceType.Parse(Levels[Level - 1].Chest);
-
-	public List<ItemWeight> Recipes => Levels[Level - 1].OrdersWeights;
+	public List<ItemWeight> PieceWeights => Levels[Level - 1].PieceWeights;
 }

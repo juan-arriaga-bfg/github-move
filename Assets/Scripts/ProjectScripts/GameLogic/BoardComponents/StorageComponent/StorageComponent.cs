@@ -9,8 +9,11 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     public IBoardAction SpawnAction;
     public int SpawnPiece;
     
+    // amount received in 1 step
     public int Amount;
+    // maximum capacity
     public int Capacity;
+    // how much is filled at the moment
     public int Filling;
 
     public bool IsSpawnResource => string.IsNullOrEmpty(PieceType.Parse(SpawnPiece));
@@ -34,6 +37,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     public void OnRegisterEntity(ECSEntity entity)
     {
         pieceContext = entity as Piece;
+        Timer = pieceContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
     }
     
     public void OnUnRegisterEntity(ECSEntity entity)
@@ -42,39 +46,33 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
     
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        Timer = pieceContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-        
         if(Timer == null) return;
         
         Timer.OnComplete += Update;
 
-        if (IsTimerShow)
-        {
-            Timer.OnStart += OnShowTimer;
-            Timer.OnComplete += OnHideTimer;
-        }
+        if (!IsTimerShow) return;
         
-        if (InitInSave(position) == false && IsAutoStart && !IsFilled)
-        {
-            Timer.Start();
-        }
-        
-        UpdateView();
+        Timer.OnStart += OnShowTimer;
+        Timer.OnComplete += OnHideTimer;
     }
     
-    private bool InitInSave(BoardPosition position)
+    public void InitInSave(BoardPosition position)
     {
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
-
         var item = save?.GetStorageSave(position);
-
-        if (item == null) return false;
-
+        
+        if (item == null && IsAutoStart && !IsFilled)
+        {
+            Timer.Start();
+            return;
+        }
+        
         if (item.IsStart == false)
         {
             item.StartTime = DateTime.UtcNow.ConvertToUnixTime();
             Filling = Mathf.Min(item.Filling, Capacity);
-            return true;
+            UpdateView();
+            return;
         }
         
         DateTime now;
@@ -85,7 +83,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         
         if (item.IsStart && !IsFilled) Timer.Start(item.StartTime);
         
-        return true;
+        UpdateView();
     }
     
     public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
@@ -129,7 +127,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         view.Ofset = BubbleOffset;
         view.SetOfset();
         view.Change(isShow);
-
+        
         if (isShow)
         {
             pieceContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);

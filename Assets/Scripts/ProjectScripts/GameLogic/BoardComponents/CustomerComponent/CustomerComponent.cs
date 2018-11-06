@@ -20,7 +20,6 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         pieceContext = entity as Piece;
         
         Timer = pieceContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-        Timer.Price = new CurrencyPair{Currency = Currency.Crystals.Name, Amount = 10};
         Timer.OnComplete += UpdateView;
         Timer.OnComplete += () => UpdateState(OrderState.Complete);
         
@@ -121,7 +120,7 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
             
             pieceContext.Context.ActionExecutor.AddAction(new EjectionPieceAction
             {
-                From = pieceContext.CachedPosition,
+                GetFrom = () => pieceContext.CachedPosition,
                 Pieces = order.PiecesReward,
                 OnComplete = () => { AddResourceView.Show(pieceContext.CachedPosition, order.CurrencysReward); }
             });

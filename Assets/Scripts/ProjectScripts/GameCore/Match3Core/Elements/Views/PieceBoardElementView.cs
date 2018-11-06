@@ -109,13 +109,13 @@ public class PieceBoardElementView : BoardElementView
     public virtual void OnDragStart(BoardPosition boardPos, Vector2 worldPos)
     {
         OnDrag(Piece.CachedPosition, worldPos);
-        Piece.Context.HintCooldown.IsPaused = true;
+        Piece.Context.HintCooldown.Pause(this);
         Piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
     }
 
     public virtual void OnDragEnd(BoardPosition boardPos, Vector2 worldPos)
     {
-        Piece.Context.HintCooldown.IsPaused = false;
+        Piece.Context.HintCooldown.Resume(this);
         
         if (selectionView == null) return;
         

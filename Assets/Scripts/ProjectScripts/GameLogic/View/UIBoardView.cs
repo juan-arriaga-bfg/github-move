@@ -160,7 +160,8 @@ public class UIBoardView : BoardElementView
             });
             return;
         }
-
+        
+        Context.Context.RendererContext.RemoveElement(this, false);
         sequence = AddHideAnimation(sequence);
         sequence.InsertCallback(0.2f, Cash);
         sequence.InsertCallback(0.15f, () =>

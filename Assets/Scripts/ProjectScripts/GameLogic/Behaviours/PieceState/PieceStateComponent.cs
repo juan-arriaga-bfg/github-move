@@ -64,7 +64,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         
         var def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType + 1);
         
-        Timer = new TimerComponent{Delay = def.MatchConditionsDef.Delay, Price = def.MatchConditionsDef.FastPrice};
+        Timer = new TimerComponent{Delay = def.Delay};
         Timer.OnComplete += OnComplete;
         RegisterComponent(Timer);
     }
@@ -123,7 +123,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         var view = thisContext.ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
         
         view.OnHide = () => { State = BuildingState.Warning; };
-        view.SetData($"Build Piece:\n{DateTimeExtension.GetDelayText(Timer.Delay)}?", $"Send <sprite name={Currency.Worker.Name}>", piece => OnClick(), true, false);
+        view.SetData($"Build Piece:\n{DateTimeExtension.GetDelayText(Timer.Delay)}?", $"Send <sprite name={Currency.Worker.Name}>", piece => Work(), true, false);
         view.Change(true);
     }
 
@@ -140,13 +140,13 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         }
     }
 
-    private void OnClick()
+    public void Work(bool isExtra = false)
     {
         var view = thisContext.ViewDefinition.AddView(ViewType.Bubble);
         
         view.Change(false);
         
-        if(thisContext.Context.WorkerLogic.Get(thisContext.CachedPosition, Timer) == false) return;
+        if(isExtra == false && thisContext.Context.WorkerLogic.Get(thisContext.CachedPosition, Timer) == false) return;
         
         view.OnHide = null;
         State = BuildingState.InProgress;

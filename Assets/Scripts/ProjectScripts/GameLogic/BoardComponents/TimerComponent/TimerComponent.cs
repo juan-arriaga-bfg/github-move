@@ -7,7 +7,6 @@ public class TimerComponent : IECSComponent, IECSSystem
     public int Guid => ComponentGuid;
 
     public int Delay;
-    public CurrencyPair Price;
     
     public Action OnStart;
     public Action OnExecute;
@@ -23,6 +22,8 @@ public class TimerComponent : IECSComponent, IECSSystem
     
     public bool IsStarted { get; set; }
     public bool IsPaused { get; set; }
+    
+    private CurrencyPair price = new CurrencyPair{Currency = Currency.Crystals.Name};
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -82,7 +83,7 @@ public class TimerComponent : IECSComponent, IECSSystem
     {
         return (int)StartTime.GetTime().TotalSeconds / (float)Delay;
     }
-
+    
     public void FastComplete()
     {
         CurrencyHellper.Purchase(Currency.Timer.Name, 1, GetPrise(), success =>
@@ -96,10 +97,8 @@ public class TimerComponent : IECSComponent, IECSSystem
     
     public CurrencyPair GetPrise()
     {
-        if (Price == null) return null;
+        price.Amount = Mathf.Max(1, Mathf.CeilToInt(GameDataService.Current.ConstantsManager.PricePerSecond * (float) CompleteTime.GetTimeLeft().TotalSeconds));
 
-        var amount = Mathf.Max(1, Mathf.CeilToInt(Price.Amount * (1 - GetProgress())));
-
-        return new CurrencyPair {Currency = Price.Currency, Amount = amount};
+        return price;
     }
 }

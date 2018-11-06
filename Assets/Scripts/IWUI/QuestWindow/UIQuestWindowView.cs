@@ -13,10 +13,13 @@ public class UIQuestWindowView : UIGenericPopupWindowView
     
     [SerializeField] private CodexChain chain;
     [SerializeField] private GameObject codexItemPrefab;
+    [SerializeField] private Transform anchor;
 
     private bool isComplete;
 
     private const int CHAIN_LENGTH = 5;
+
+    private Transform icon;
     
     public override void OnViewShow()
     {
@@ -30,15 +33,18 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         SetMessage(model.Message);
         
         model.InitReward();
-
+        
         descriptionLabel.Text = model.Description;
         rewardLabel.Text = model.RewardText;
         amountLabel.Text = model.AmountText;
         buttonLabel.Text = model.ButtonText;
-
+        
         targetIcon.sprite = model.Icon;
 
         ShowChainIfPossible(model);
+        
+        icon = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(PieceType.NPC_SleepingBeauty.Abbreviations[0]));
+        icon.SetParentAndReset(anchor);
     }
 
     public override void OnViewClose()
@@ -54,14 +60,16 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         
         windowModel.Quest = null;
         
+        UIService.Get.PoolContainer.Return(icon.gameObject);
+        
         if(isComplete == false) return;
         
         var board = BoardService.Current.GetBoardById(0);
-        var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
+        var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
         
         board.ActionExecutor.AddAction(new EjectionPieceAction
         {
-            From = position,
+            GetFrom = () => position,
             Pieces = windowModel.PiecesReward,
             OnComplete = () => { AddResourceView.Show(position, windowModel.CurrencysReward); }
         });
@@ -76,7 +84,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         
         if (quest.IsCompleted())
         {
-            var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
+            var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
             
             if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, windowModel.PiecesReward.Sum(e => e.Value)))
             {

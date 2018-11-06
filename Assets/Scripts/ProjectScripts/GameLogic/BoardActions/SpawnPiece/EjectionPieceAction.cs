@@ -7,7 +7,7 @@ public class EjectionPieceAction : IBoardAction
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public virtual int Guid => ComponentGuid;
 
-	public BoardPosition From { get; set; }
+	public Func<BoardPosition> GetFrom { get; set; }
 	
 	public Dictionary<int, int> Pieces { get; set; }
 	
@@ -23,7 +23,7 @@ public class EjectionPieceAction : IBoardAction
 		{
 			var field = new List<BoardPosition>();
         
-			if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From, field, pair.Value) == false)
+			if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(GetFrom(), field, pair.Value) == false)
 			{
 				break;
 			}
@@ -43,17 +43,17 @@ public class EjectionPieceAction : IBoardAction
 		}
 		
 		gameBoardController.BoardLogic.LockCells(positionsForLock, this);
-		gameBoardController.BoardLogic.LockCell(From, this);
+		gameBoardController.BoardLogic.LockCell(GetFrom(), this);
 		
 		var animation = new ReproductionPieceAnimation
 		{
-			From = From,
+			From = GetFrom(),
 			Pieces = pieces
 		};
 
 		animation.OnCompleteEvent += (_) =>
 		{
-			gameBoardController.BoardLogic.UnlockCell(From, this);
+			gameBoardController.BoardLogic.UnlockCell(GetFrom(), this);
 
 			foreach (var pair in pieces)
 			{

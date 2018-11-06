@@ -1,19 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<List<ObstacleDef>>
+public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-    public int Guid => ComponentGuid;
-
-    public void OnRegisterEntity(ECSEntity entity)
-    {
-        Reload();
-    }
-    
-    public void OnUnRegisterEntity(ECSEntity entity)
-    {
-    }
+    public override int Guid => ComponentGuid;
     
     public Dictionary<int, ObstacleDef> Obstacles;
 
@@ -22,12 +13,13 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     
     private MatchDefinitionComponent matchDefinition;
     
-    public void Reload()
+    public override void Reload()
     {
+        base.Reload();
         Obstacles = null;
         LoadData(new ResourceConfigDataMapper<List<ObstacleDef>>("configs/obstacles.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
-    
+
     public void LoadData(IDataMapper<List<ObstacleDef>> dataMapper)
     {
         dataMapper.LoadData((data, error)=> 
@@ -42,20 +34,11 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
                 data.Sort((a, b) => a.Piece.CompareTo(b.Piece));
                 defaultDef = data[0];
 
-                foreach (var next in data)
+                foreach (var def in data)
                 {
-                    var previousType = matchDefinition.GetPrevious(next.Piece);
-                    
-                    if (previousType != PieceType.None.Id)
-                    {
-                        var previous = data.Find(def => def.Piece == previousType);
-                        
-                        next.PieceWeights = ItemWeight.ReplaseWeights(previous.PieceWeights, next.PieceWeights);
-                        next.ChestWeights = ItemWeight.ReplaseWeights(previous.ChestWeights, next.ChestWeights);
-                    }
-                    
-                    Obstacles.Add(next.Piece, next);
-                    AddToBranch(matchDefinition.GetFirst(next.Piece), next);
+                    Obstacles.Add(def.Piece, def);
+                    AddToBranch(matchDefinition.GetFirst(def.Piece), def);
+                    AddSequence(def.Uid, def.PieceWeights);
                 }
             }
             else
@@ -99,11 +82,7 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     {
         ObstacleDef def;
 
-        if (Obstacles.TryGetValue(piece, out def) == false || def.ChestWeights == null) return PieceType.None.Id;
-        
-        var item = ItemWeight.GetRandomItem(def.ChestWeights);
-        
-        return item?.Piece ?? PieceType.None.Id;
+        return Obstacles.TryGetValue(piece, out def) ? def.Chest : PieceType.None.Id;
     }
     
     public int GetDelayByStep(int piece, int step)
@@ -124,7 +103,13 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
     {
         var def = GetStep(piece, step);
         
-        return ItemWeight.GetRandomPieces(def.PieceAmount, def.PieceWeights);
+        var hard = GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name);
+        var sequence = GetSequence(def.Uid);
+        
+        var reward = hard.GetNextDict(def.ProductionAmount.Range());
+        reward = sequence.GetNextDict(def.PieceAmount, reward);
+        
+        return reward;
     }
 
     public CurrencyPair GetPriceByStep(int piece, int step)
@@ -132,12 +117,5 @@ public class ObstaclesDataManager : IECSComponent, IDataManager, IDataLoader<Lis
         var def = GetStep(piece, step);
         
         return def.Price;
-    }
-
-    public CurrencyPair GetFastPriceByStep(int piece, int step)
-    {
-        var def = GetStep(piece, step);
-        
-        return def.FastPrice;
     }
 }

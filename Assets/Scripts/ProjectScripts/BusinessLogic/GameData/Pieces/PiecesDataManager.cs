@@ -1,25 +1,25 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PiecesDataManager : ECSEntity, IDataManager, IDataLoader<List<PieceDef>>
+public class PiecesDataManager : SequenceData, IDataLoader<List<PieceDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
     
     private Dictionary<int, PieceDef> pieces;
-    
+
     public override void OnRegisterEntity(ECSEntity entity)
     {
-        Reload();
-        RegisterComponent(new PiecesMatchConditionsManager());
+        base.OnRegisterEntity(entity);
         RegisterComponent(new PiecesReproductionDataManager());
         RegisterComponent(new PiecesMakingDataManager());
     }
     
-    public void Reload()
+    public override void Reload()
     {
+        base.Reload();
         pieces = null;
-
+        
         LoadData(new ResourceConfigDataMapper<List<PieceDef>>("configs/pieces.data", NSConfigsSettings.Instance.IsUseEncryption));
 
         foreach (var component in componentsCache.Values)

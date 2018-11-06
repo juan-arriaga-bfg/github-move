@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using Newtonsoft.Json;
@@ -91,6 +92,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	public List<int> RemovedMinePositions;
 	
 	private Dictionary<BoardPosition, StorageSaveItem> storageSave;
+	private Dictionary<BoardPosition, ChestSaveItem> chestSave;
 	private Dictionary<BoardPosition, LifeSaveItem> lifeSave;
 	private Dictionary<BoardPosition, BuildingSaveItem> buildingSave;
 	
@@ -118,15 +120,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			
 			pieces.Add(GetPieceSave(item.Key, item.Value));
 			storages.AddRange(GetStorageSave(board.BoardLogic, item.Value));
-
-			var chestSave = GetChestsSave(board.BoardLogic, item.Value);
-			
-			if (chestSave.Count > 0)
-			{
-				chests.AddRange(chestSave);
-				continue;
-			}
-			
+			chests.AddRange(GetChestsSave(board.BoardLogic, item.Value));
 			lifes.AddRange(GetLifeSave(board.BoardLogic, item.Value));
 			buildings.AddRange(GetBuildingSave(board.BoardLogic, item.Value));
 		}
@@ -155,6 +149,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	internal void OnDeserialized(StreamingContext context)
 	{
 		storageSave = new Dictionary<BoardPosition, StorageSaveItem>();
+		chestSave = new Dictionary<BoardPosition, ChestSaveItem>();
 		lifeSave = new Dictionary<BoardPosition, LifeSaveItem>();
 		buildingSave = new Dictionary<BoardPosition, BuildingSaveItem>();
 		
@@ -167,6 +162,14 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			foreach (var storage in storages)
 			{
 				storageSave.Add(storage.Position, storage);
+			}
+		}
+		
+		if (chests != null)
+		{
+			foreach (var chest in chests)
+			{
+				chestSave.Add(chest.Position, chest);
 			}
 		}
 		
@@ -208,6 +211,20 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		}
 
 		storageSave.Remove(position);
+		
+		return item;
+	}
+	
+	public ChestSaveItem GetChestsSave(BoardPosition position)
+	{
+		ChestSaveItem item;
+		
+		if (chestSave == null || chestSave.TryGetValue(position, out item) == false)
+		{
+			return null;
+		}
+
+		chestSave.Remove(position);
 		
 		return item;
 	}
@@ -262,11 +279,15 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 
 			var component = piece?.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
 			
-			if(component == null) continue;
+			if(component == null) break;
+			if(component.Chest.Reward == null || component.Chest.Reward.Sum(pair => pair.Value) == 0) continue;
 
-			var item = new ChestSaveItem {Id = piece.PieceType, State = component.Chest.State, Position = position, Reward = component.Chest.Reward};
-			
-			if (component.Chest.State == ChestState.InProgress && component.Chest.StartTime != null) item.StartTime = component.Chest.StartTime.Value;
+			var item = new ChestSaveItem
+			{
+				Position = position,
+				Reward = component.Chest.Reward,
+				RewardAmount = component.Chest.RewardCount
+			};
 			
 			items.Add(item);
 		}
@@ -291,7 +312,8 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 				Step = component.Current,
 				StartTime = component.Timer.StartTimeLong,
 				IsStart = component.Timer.IsExecuteable(),
-				Position = position
+				Position = position,
+				Reward = component.Reward
 			};
 			
 			items.Add(item);

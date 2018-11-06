@@ -1,5 +1,10 @@
-﻿public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerComponent
+﻿using System.Collections.Generic;
+
+public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerComponent, ILockerComponent
 {
+    private LockerComponent locker;
+    public LockerComponent Locker => locker ?? GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
+    
     protected StorageComponent storage;
     
     public virtual CurrencyPair Energy => new CurrencyPair {Currency = Currency.Energy.Name, Amount = 0};
@@ -9,23 +14,41 @@
     public virtual string Price => $"Send <sprite name={Worker.Currency}>";
     
     public virtual bool IsUseCooldown => false;
+    public bool IsFilled => storage.IsFilled;
     
     public virtual TimerComponent Timer => storage.Timer;
     public float GetProgressNext => 1 - (current+1)/(float)HP;
 
+    public Dictionary<int, int> Reward;
+
+    public override void OnRegisterEntity(ECSEntity entity)
+    {
+        base.OnRegisterEntity(entity);
+        
+        locker = new LockerComponent();
+        RegisterComponent(locker);
+        
+        storage = thisContext.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
+        
+        if (storage.Timer == null) return;
+        
+        storage.Timer.OnStart += OnTimerStart;
+        storage.Timer.OnComplete += OnTimerComplete;
+    }
+
     public virtual void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        if(storage == null) storage = thisContext.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
-        
-        var timer = thisContext.GetComponent<TimerComponent>(TimerComponent.ComponentGuid);
-
-        if (timer != null)
-        {
-            timer.OnStart += OnTimerStart;
-            timer.OnComplete += OnTimerComplete;
-        }
-        
+        InitStorage();
         InitInSave(position);
+    }
+
+    protected virtual void InitStorage()
+    {
+    }
+
+    protected virtual void InitInSaveStorage()
+    {
+        storage.InitInSave(thisContext.CachedPosition);
     }
 
     protected virtual LifeSaveItem InitInSave(BoardPosition position)
@@ -37,10 +60,13 @@
         if (item == null) return null;
         
         current = item.Step;
-
+        Reward = item.Reward;
+        
         thisContext.Context.WorkerLogic.Init(thisContext.CachedPosition, storage.Timer);
+        
         OnTimerStart();
-
+        InitInSaveStorage();
+        
         if (storage.IsFilled) OnTimerComplete();
         
         return item;
@@ -58,17 +84,17 @@
     public virtual void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
         storage.Timer.OnStart -= OnTimerStart;
-        storage.Timer.OnStart -= OnTimerComplete;
+        storage.Timer.OnComplete -= OnTimerComplete;
     }
     
-    public virtual bool Damage()
+    public virtual bool Damage(bool isExtra = false)
     {
         if (IsDead) return false;
         
         var isSuccess = false;
 
         if (CurrencyHellper.IsCanPurchase(Energy, true) == false
-            || thisContext.Context.WorkerLogic.Get(thisContext.CachedPosition, storage.Timer) == false) return false;
+            || isExtra == false && thisContext.Context.WorkerLogic.Get(thisContext.CachedPosition, storage.Timer) == false) return false;
         
         Success();
         
@@ -81,6 +107,8 @@
             Damage(Worker?.Amount ?? 1);
             
             storage.Timer.Start();
+            
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.StorageDamage, this);
         });
         
         return isSuccess;
@@ -90,6 +118,8 @@
     {
         if (IsDead == false) OnStep();
         else OnComplete();
+        
+        locker.Lock(this, false);
     }
     
     protected virtual void Success()
@@ -106,6 +136,7 @@
 
     protected virtual void OnSpawnRewards()
     {
+        locker.Unlock(this);
     }
     
     protected virtual void OnTimerComplete()
