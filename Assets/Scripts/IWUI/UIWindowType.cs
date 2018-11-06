@@ -29,4 +29,6 @@
     public const string OrdersWindow = "OrdersWindow";
     
     public const string QuestStartWindow = "QuestStartWindow";
+    
+    public const string QuestCompletetWindow = "QuestCompleteWindow";
 }

@@ -115,7 +115,13 @@ public class UIQuestStartWindowView : IWUIWindowView
 
     private void StartQuests()
     {
-        List<string> ids = (Model as UIQuestStartWindowModel).Quests.Select(e => e.Id).ToList();
+        var model = (Model as UIQuestStartWindowModel);
+        if (model.Quests == null || model.Quests.Count == 0)
+        {
+            return;
+        }
+        
+        List<string> ids = model.Quests.Select(e => e.Id).ToList();
         GameDataService.Current.QuestsManager.StartQuests(ids);
     }
 
@@ -147,9 +153,12 @@ public class UIQuestStartWindowView : IWUIWindowView
     
     private void CreateConversation(UIQuestStartWindowModel windowModel)
     {
-        conversation = UIService.Get.GetCachedObject<UICharactersConversationViewController>(R.UICharacterConversationView);
+        // todo: fix caching!
+        var conversationPrefab = UIService.Get.GetCachedObject<UICharactersConversationViewController>(R.UICharacterConversationView);
+        conversation = Instantiate(conversationPrefab);
+        UIService.Get.ReturnCachedObject(conversationPrefab.gameObject);
         conversation.transform.SetParent(characterConversationAnchor, false);
-
+        
         var scenario = windowModel.Scenario;
         AddCharactersFromScenario(scenario);
 
@@ -165,29 +174,35 @@ public class UIQuestStartWindowView : IWUIWindowView
         }
     }
 
+    private void OnActionStarted(ConversationActionEntity act)
+    {
+        isClickAllowed = false;
+    }
+    
+    private void OnActionEnded(ConversationActionEntity act)
+    {
+        var payload1 = act.GetComponent<ConversationActionPayloadShowQuestComponent>(ConversationActionPayloadComponent.ComponentGuid);
+        if (payload1 != null)
+        {
+            CreateQuestCards(Model as UIQuestStartWindowModel, payload1, () => { isClickAllowed = true; });
+            return;
+        }
+        
+        var payload2 = act.GetComponent<ConversationActionPayloadStartNewQuestsIfAnyComponent>(ConversationActionPayloadComponent.ComponentGuid);
+        if (payload2 != null)
+        {
+            GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
+            isClickAllowed = true;
+            return;
+        }
+
+        isClickAllowed = true;
+    }
+    
     private void OnScenarioComplete()
     {
         isClickAllowed = false;
         Controller.CloseCurrentWindow();
     }
 
-    private void OnActionEnded(ConversationActionEntity act)
-    {
-        var payload = act.GetComponent<ConversationActionPayloadShowQuestComponent>(ConversationActionPayloadComponent.ComponentGuid);
-        if (payload == null)
-        {
-            isClickAllowed = true;
-            return;
-        }
-
-        CreateQuestCards(Model as UIQuestStartWindowModel, payload, () =>
-        {
-            isClickAllowed = true;
-        });
-    }
-
-    private void OnActionStarted(ConversationActionEntity act)
-    {
-        isClickAllowed = false;
-    }
 }

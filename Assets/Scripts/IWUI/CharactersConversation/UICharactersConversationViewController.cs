@@ -308,12 +308,18 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         if (activeAction is ConversationActionBubbleEntity)
         {
             ConversationActionBubbleEntity act = activeAction as ConversationActionBubbleEntity;
-            NextBubble(act.BubbleId, act.Def, () =>
+            NextBubble(act.BubbleId, act.BubbleDef, () =>
             {
                  onActionEnded?.Invoke(act);
             });
             
             onActionStarted?.Invoke(act);
+            return;
+        }
+        else if (activeAction is ConversationActionExternalActionEntity)
+        {            
+            onActionStarted?.Invoke(activeAction);
+            onActionEnded?.Invoke(activeAction);
             return;
         }
 
@@ -325,15 +331,4 @@ public partial class UICharactersConversationViewController : IWUIWindowView
     {
         NextScenarioAction();
     }
-
-    // private bool ShouldAutocompleteAction(ConversationActionEntity action)
-    // {
-    //     var payload = action.GetComponent<ConversationActionPayloadShowQuestComponent>(ConversationActionPayloadComponent.ComponentGuid);
-    //     if (payload == null)
-    //     {
-    //         return true;
-    //     }
-    //
-    //     return false;
-    // }
 }

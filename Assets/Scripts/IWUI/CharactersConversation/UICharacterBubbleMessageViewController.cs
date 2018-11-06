@@ -63,7 +63,11 @@ public class UICharacterBubbleMessageViewController : UICharacterBubbleView
         canvasGroup.DOFade(1, 1);
         
         message.Text = data.Message;
-        PlayTeleTypeEffect();
+
+        if (data.AllowTeleType)
+        {
+            PlayTeleTypeEffect();
+        }
 
         DOTween.Sequence()
                .AppendInterval(1)

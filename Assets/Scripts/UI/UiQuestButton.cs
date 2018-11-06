@@ -5,6 +5,7 @@ using UnityEngine;
 public class UiQuestButton : UIGenericResourcePanelViewController
 {
     [SerializeField] private GameObject shine;
+    [SerializeField] private GameObject checkmark;
     
     public QuestEntity Quest { get; private set; }
     private bool isUp;
@@ -27,6 +28,11 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     public void Init(QuestEntity quest, bool interactive)
     {
         this.interactive = interactive;
+
+        if (checkmark != null)
+        {
+            checkmark.SetActive(false);
+        }
         
         if (this.Quest != null)
         {
@@ -132,18 +138,25 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             }
         }
 
-        int targetValue = (GetFirstTask() as TaskCounterEntity).TargetValue;
-        if (interactive)
+        if (amountLabel != null)
         {
-            int curValue = (GetFirstTask() as TaskCounterEntity).CurrentValue; 
-            amountLabel.Text = $"<color=#{(isComplete ? "FFFFFF" : "FE4704")}><size=33>{Mathf.Min(value, curValue)}</size></color>/{targetValue}";
-        }
-        else
-        {
-            amountLabel.Text = $"x{targetValue}";
+
+            int targetValue = (GetFirstTask() as TaskCounterEntity).TargetValue;
+            if (interactive)
+            {
+                int curValue = (GetFirstTask() as TaskCounterEntity).CurrentValue;
+                amountLabel.Text = $"<color=#{(isComplete ? "FFFFFF" : "FE4704")}><size=33>{Mathf.Min(value, curValue)}</size></color>/{targetValue}";
+            }
+            else
+            {
+                amountLabel.Text = $"x{targetValue}";
+            }
         }
 
-        shine.SetActive(isComplete || !interactive);
+        if (shine != null)
+        {
+            shine.SetActive(isComplete || !interactive);
+        }
     }
     
     public void OnClick()
@@ -165,10 +178,19 @@ public class UiQuestButton : UIGenericResourcePanelViewController
                     .AddCondition(new NoQueuedActionsConditionComponent {ActionIds = new List<string> {"StartNewQuestsIfAny"}})
                     .SetAction(() =>
                      {
-                         ShowQuestWindow();
+                         // ShowQuestWindow();
+                         ShowQuestCompletedWindow();
                      });
 
         ProfileService.Current.QueueComponent.AddAction(action, false);
+    }
+
+    private void ShowQuestCompletedWindow()
+    {
+        var model = UIService.Get.GetCachedModel<UIQuestCompleteWindowModel>(UIWindowType.QuestCompletetWindow);
+        model.Quest = Quest;
+        
+        UIService.Get.ShowWindow(UIWindowType.QuestCompletetWindow);
     }
     
     private void ShowQuestWindow()
@@ -189,5 +211,15 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         // board.Manipulator.CameraManipulator.MoveTo(position);
         
         board.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
+    }
+
+    public void ToggleCheckMark(bool enabled)
+    {
+        if (checkmark == null)
+        {
+            return;
+        }
+        
+        checkmark.SetActive(enabled);
     }
 }

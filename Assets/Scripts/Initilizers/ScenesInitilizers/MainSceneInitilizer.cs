@@ -32,6 +32,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.ExchangeWindow,
             UIWindowType.OrdersWindow,
             UIWindowType.QuestStartWindow,
+            UIWindowType.QuestCompletetWindow,
         });
         
         // on cache complete
