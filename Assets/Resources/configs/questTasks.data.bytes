@@ -13,7 +13,7 @@
   {
     "$type": "TaskClearFogEntity, Assembly-CSharp",
     "Id": "2",
-    "TargetValue": 2,
+    "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "Fog1",
@@ -24,7 +24,7 @@
   {
     "$type": "TaskKillObstacleEntity, Assembly-CSharp",
     "Id": "3",
-    "TargetValue": 2,
+    "TargetValue": 4,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "OB1_A",
@@ -33,25 +33,24 @@
     }
   },
   {
-    "$type": "TaskOpenChestEntity, Assembly-CSharp",
-    "Id": "4",
-    "PieceUid": "CH1_A",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Ico": "CH1_A",
-        "Message": "Open chests"
-      }
-    }
-  },
-  {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "5",
+    "Id": "4",
     "PieceUid": "A2",
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Message": "Create Piece"
+      }
+    }
+  },
+  {
+    "$type": "TaskClearFogEntity, Assembly-CSharp",
+    "Id": "5",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "Fog1",
+        "Message": "Clear a fog"
       }
     }
   },
@@ -69,7 +68,7 @@
   {
     "$type": "TaskClearFogEntity, Assembly-CSharp",
     "Id": "7",
-    "TargetValue": 1,
+    "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "Fog1",
@@ -109,5 +108,65 @@
         "Message": "Create Piece"
       }
     }
+  },
+  {
+    "$type": "TaskOpenChestEntity, Assembly-CSharp",
+    "Id": "11",
+    "PieceUid": "CH2_A",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "CH2_A",
+        "Message": "Open a chest"
+      }
+    }
+  },
+  {
+    "$type": "TaskUseWorkerEntity, Assembly-CSharp",
+    "Id": "12",
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "Boost_WR"
+      }
+    }
+  },
+  {
+    "$type": "TaskUseMineEntity, Assembly-CSharp",
+    "Id": "13",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "MN_B"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
+    "Id": "14",
+    "PieceUid": "A6",
+    "TargetValue": 1
+  },
+  {
+    "$type": "TaskClearFogEntity, Assembly-CSharp",
+    "Id": "15",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "Fog1"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
+    "Id": "16",
+    "PieceUid": "B3",
+    "TargetValue": 3
+  },
+  {
+    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
+    "Id": "17",
+    "PieceUid": "B4",
+    "TargetValue": 2
   }
 ]

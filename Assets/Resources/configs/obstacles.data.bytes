@@ -13,8 +13,8 @@
       }
     ],
     "ProductionAmount": {
-      "Min": 1,
-      "Max": 1
+      "Min": 0,
+      "Max": 0
     },
     "PieceAmount": 1,
     "PieceWeights": [
@@ -38,17 +38,16 @@
       }
     ],
     "ProductionAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 1
     },
-    "PieceAmount": 2,
+    "PieceAmount": 1,
     "PieceWeights": [
       {
         "Uid": "A1",
         "Weight": 50
       }
-    ],
-    "ChestId": "CH1_A"
+    ]
   },
   {
     "Uid": "OB3_A",
@@ -65,21 +64,13 @@
     ],
     "ProductionAmount": {
       "Min": 1,
-      "Max": 3
+      "Max": 1
     },
     "PieceAmount": 3,
     "PieceWeights": [
       {
         "Uid": "A1",
         "Weight": 40
-      },
-      {
-        "Uid": "Soft1",
-        "Weight": 10
-      },
-      {
-        "Uid": "A2",
-        "Weight": 20
       }
     ],
     "ChestId": "CH1_A"

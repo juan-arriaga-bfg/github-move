@@ -26,7 +26,7 @@
     "Index": 2,
     "Price": {
       "Currency": "Experience",
-      "Amount": 250
+      "Amount": 100
     },
     "Rewards": [
       {
@@ -43,7 +43,7 @@
     "Index": 3,
     "Price": {
       "Currency": "Experience",
-      "Amount": 400
+      "Amount": 300
     },
     "Rewards": [
       {
@@ -75,7 +75,7 @@
     "Index": 4,
     "Price": {
       "Currency": "Experience",
-      "Amount": 1500
+      "Amount": 500
     },
     "Rewards": [
       {
@@ -88,10 +88,6 @@
       }
     ],
     "OrdersWeights": [
-      {
-        "Uid": "Order1",
-        "Weight": 10
-      },
       {
         "Uid": "Order2",
         "Weight": 10
@@ -148,15 +144,6 @@
       }
     ],
     "OrdersWeights": [
-      {
-        "Uid": "Order4",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "Order5",
-        "Weight": 10
-      },
       {
         "Uid": "Order7",
         "Weight": 15

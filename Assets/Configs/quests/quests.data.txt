@@ -25,7 +25,7 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Quest 1",
+        "Title": "Grow a Candy Tree",
         "Message": "Grow a Candy Tree"
       }
     }
@@ -56,7 +56,7 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Quest 2",
+        "Title": "Clear a fog",
         "Message": "Now we can clean up the area from obstacles and build Houses!"
       }
     }
@@ -78,17 +78,17 @@
           },
           {
             "Currency": "Mana",
-            "Amount": 25
+            "Amount": 30
           },
           {
             "Currency": "Experience",
-            "Amount": 25
+            "Amount": 30
           }
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Quest 3",
-        "Message": "Clear the fog"
+        "Title": "Cut down trees",
+        "Message": "Clear a fog"
       }
     }
   },
@@ -109,17 +109,17 @@
           },
           {
             "Currency": "Mana",
-            "Amount": 25
+            "Amount": 50
           },
           {
             "Currency": "Experience",
-            "Amount": 25
+            "Amount": 50
           }
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Quest 4",
-        "Message": " Open the Chest"
+        "Title": "Create wood packs",
+        "Message": "Create wood packs"
       }
     }
   },
@@ -149,8 +149,8 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Quest5",
-        "Message": "Create 3 houses"
+        "Title": "Clear a fog",
+        "Message": "Clear a fog"
       }
     }
   },
@@ -180,7 +180,7 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Quest6",
+        "Title": "Build a new House",
         "Message": "Build a new House"
       }
     }
@@ -211,8 +211,8 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Quest7",
-        "Message": "Clear the fog"
+        "Title": "Clear a fog",
+        "Message": "Clear a fog"
       }
     }
   },
@@ -242,7 +242,7 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Quest8",
+        "Title": "Collect wheat",
         "Message": "Collect wheat"
       }
     }
@@ -273,7 +273,7 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Quest9",
+        "Title": "Collect apples",
         "Message": "Collect apples"
       }
     }
@@ -304,8 +304,225 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Quest10",
+        "Title": "Collect candies",
         "Message": "Collect candies"
+      }
+    }
+  },
+  {
+    "Id": 11,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
+      {
+        "TaskId": "11"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Open a chest",
+        "Message": "Open a chest"
+      }
+    }
+  },
+  {
+    "Id": 12,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
+      {
+        "TaskId": "12"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 30
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Use workers",
+        "Message": "Use workers"
+      }
+    }
+  },
+  {
+    "Id": 13,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
+      {
+        "TaskId": "13"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 30
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 30
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 30
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Use the Mine",
+        "Message": "Use the Mine"
+      }
+    }
+  },
+  {
+    "Id": 14,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
+      {
+        "TaskId": "14"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 35
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 100
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 100
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Create a Piece",
+        "Message": "Create a Piece"
+      }
+    }
+  },
+  {
+    "Id": 15,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
+      {
+        "TaskId": "15"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 25
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 25
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Clear a fog",
+        "Message": "Clear a fog"
+      }
+    }
+  },
+  {
+    "Id": 16,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
+      {
+        "TaskId": "16"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 10
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 20
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 20
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Create a Piece",
+        "Message": "Create a Piece"
+      }
+    }
+  },
+  {
+    "Id": 17,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
+      {
+        "TaskId": "17"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 15
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 30
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 30
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Create a Piece",
+        "Message": "Create a Piece"
       }
     }
   }
