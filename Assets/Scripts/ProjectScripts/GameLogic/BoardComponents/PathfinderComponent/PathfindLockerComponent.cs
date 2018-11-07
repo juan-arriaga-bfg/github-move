@@ -188,15 +188,18 @@ public class PathfindLockerComponent : ECSEntity
     {
         var changedPositions = new List<BoardPosition>();
 
+        var changedPiece = BoardService.Current.FirstBoard.BoardLogic.GetPieceAt(changedPosition);
         changedPositions.Add(changedPosition);
+       
 
         foreach (var piece in blockPathPieces.Keys.ToList())
         {
+            const int maxCheckDistance = 10;
             var blockers = blockPathPieces[piece];
-            if (!blockers.Any(elem => changedPositions.Contains(elem)))
-                continue;
+            if (blockers.Any(elem => changedPositions.Contains(elem)) 
+                || Math.Abs((piece.CachedPosition.X + piece.CachedPosition.Y) - (changedPosition.X + changedPosition.Y)) < maxCheckDistance)
+                RecalcFor(piece, target, new List<BoardPosition>(target));
             
-            RecalcFor(piece, target, new List<BoardPosition>(target));
         }
     }
 

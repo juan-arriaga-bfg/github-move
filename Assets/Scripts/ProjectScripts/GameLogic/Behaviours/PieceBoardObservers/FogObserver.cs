@@ -124,15 +124,14 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         thisContext.Context.ActionExecutor.AddAction(new CreateGroupPieces()
         {
             Pieces = addedPieces,
-            LogicCallback = () =>
-            {
-                var board = thisContext.Context;
-                thisContext.PathfindLockObserver.RemoveRecalculate(thisContext.CachedPosition);
-                board.PathfindLocker.OnAddComplete();
-                board.PathfindLocker.CheckLockedEmptyCells();
-            },
             OnSuccessEvent = () =>
             {
+                var board = thisContext.Context;
+                
+                board.PathfindLocker.OnAddComplete();
+                board.PathfindLocker.CheckLockedEmptyCells();
+                thisContext.PathfindLockObserver.RemoveRecalculate(thisContext.CachedPosition);
+                
                 var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
 
                 if (views == null) return;
@@ -211,7 +210,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
         return pathExists && resourcesEnought;
     }
-    
+
     private void OnClick(Piece piece)
     {
         if(CurrencyHellper.IsCanPurchase(def.Condition, true, () => OnClick(piece)) == false) return;
@@ -219,7 +218,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         CurrencyHellper.Purchase(Currency.Fog.Name, 1, def.Condition, success =>
         {
             if (success == false) return;
-			
+            
             thisContext.Context.HintCooldown.RemoweView(view);
 
             view.OnHide = () =>
