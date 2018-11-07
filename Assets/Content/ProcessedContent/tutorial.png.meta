@@ -23,6 +23,11 @@ TextureImporter:
     21300036: tutorial_TextBlock_1
     21300038: collect_pieces
     21300040: collect_pieces
+    21300042: tutorFinger
+    21300044: tutorShineFinger
+    21300046: PR_C3_tutor
+    21300048: PR_C2_tutor
+    21300050: PR_C1_tutor
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -108,13 +113,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3d575da0efd9d654d82d423544d003d4
+      spriteID: 2cd70d10517258f47bae69bd42b94fed
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sheeps_UI
+      name: apple_UI
       rect:
         serializedVersion: 2
         x: 747
@@ -128,13 +133,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a9bc03f7cf8cd304b8c18db39bef3b96
+      spriteID: cde8d901f6cda584ca701fd4f1975e1b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Stone_UI
+      name: Chest_UI
       rect:
         serializedVersion: 2
         x: 747
@@ -148,13 +153,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5866b4e26f0c3df49a8e86126b4750b1
+      spriteID: 48751946b282bec408df62b26043bea8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wood_UI
+      name: collection_UI
       rect:
         serializedVersion: 2
         x: 747
@@ -168,13 +173,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 265fbdd2345131e42b39d90e106068fe
+      spriteID: 639b4aecde167134a8997fc2ad754fe8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tutorial_TextBlock_1
+      name: hay_UI
       rect:
         serializedVersion: 2
         x: 0
@@ -188,13 +193,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 77143c8bc22f89a4ebeacaf4b5a0dd5a
+      spriteID: 063db53df2117964eba65c5e6170af11
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chest_UI
+      name: Sheeps_UI
       rect:
         serializedVersion: 2
         x: 657
@@ -208,13 +213,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8d3cdf5f82651604e9c454b412a30453
+      spriteID: 5f313549fa5f6f64a9c99641e289a0dd
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: apple_UI
+      name: Stone_UI
       rect:
         serializedVersion: 2
         x: 0
@@ -228,13 +233,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dd43222af37a419408bbbffeb49c866f
+      spriteID: 7249ae36269c98441806896bd82bd14b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hay_UI
+      name: tutorial_TextBlock_1
       rect:
         serializedVersion: 2
         x: 1314
@@ -248,13 +253,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b85b024b1c7367e41adfa3fa9e2e9d37
+      spriteID: ed371bc225291db4aabd099bf88784df
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: collection_UI
+      name: Wood_UI
       rect:
         serializedVersion: 2
         x: 657
@@ -268,7 +273,107 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4c7673885da93e446901d9b02337f9f5
+      spriteID: 496dd22b20df4194f9c4c583253d8e70
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tutorFinger
+      rect:
+        serializedVersion: 2
+        x: 1404
+        y: 0
+        width: 276
+        height: 298
+      alignment: 9
+      pivot: {x: 0.90139335, y: 0.922011}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abaac01c254cd004ea37e6a9045714cd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tutorShineFinger
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 0
+        width: 222
+        height: 218
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dace4765362c587419aed1d0fe21a498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PR_C3_tutor
+      rect:
+        serializedVersion: 2
+        x: 1904
+        y: 0
+        width: 142
+        height: 158
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a5e411082623bb458b316e7e3e8574a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PR_C2_tutor
+      rect:
+        serializedVersion: 2
+        x: 1904
+        y: 159
+        width: 120
+        height: 120
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb91b4e7f8ef7fd4b889cc4f9a2ec06d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PR_C1_tutor
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 219
+        width: 94
+        height: 110
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81bb43963ac07cb46878077c2716eecd
       vertices: []
       indices: 
       edges: []
