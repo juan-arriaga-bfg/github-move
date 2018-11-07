@@ -6,7 +6,7 @@ public class FieldControllerComponent : IECSComponent
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
-
+    
     private BoardController context;
     
     public void OnRegisterEntity(ECSEntity entity)

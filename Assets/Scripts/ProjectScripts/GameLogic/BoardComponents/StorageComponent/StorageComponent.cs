@@ -56,10 +56,12 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         Timer.OnComplete += OnHideTimer;
     }
     
-    public void InitInSave(BoardPosition position)
+    public void InitInSave(BoardPosition position, out Action updateView)
     {
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
         var item = save?.GetStorageSave(position);
+
+        updateView = null;
         
         if (item == null && IsAutoStart && !IsFilled)
         {
@@ -71,7 +73,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         {
             item.StartTime = DateTime.UtcNow.ConvertToUnixTime();
             Filling = Mathf.Min(item.Filling, Capacity);
-            UpdateView();
+            updateView = UpdateView;
             return;
         }
         
@@ -83,7 +85,7 @@ public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObser
         
         if (item.IsStart && !IsFilled) Timer.Start(item.StartTime);
         
-        UpdateView();
+        updateView = UpdateView;
     }
     
     public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
