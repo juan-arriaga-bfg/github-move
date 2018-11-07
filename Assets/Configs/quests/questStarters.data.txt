@@ -142,8 +142,8 @@
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
-        "Id": "QuestCompleted",
+        "$type": "QuestStartConditionPlayerLevelComponent, Assembly-CSharp",
+        "Id": "PlayerLevel",
         "Value": "3"
       },
       {
