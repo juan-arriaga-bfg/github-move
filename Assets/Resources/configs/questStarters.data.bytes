@@ -16,8 +16,7 @@
     "Id": 2,
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "QuestToStartIds": [
-      "2",
-      "3"
+      "2"
     ],
     "Conditions": [
       {
@@ -28,35 +27,18 @@
     ]
   },
   {
-    "Id": 4,
+    "Id": 3,
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "QuestToStartIds": [
-      "4"
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestStartConditionPieceUnlockedComponent, Assembly-CSharp",
-        "Id": "PieceUnlocked",
-        "Value": "CH1_A"
-      },
-      {
-        "$type": "QuestStartConditionMaxActiveQuestsCountComponent, Assembly-CSharp",
-        "Id": "MaxActiveQuestsCount",
-        "Value": "4"
-      }
-    ]
-  },
-  {
-    "Id": 5,
-    "$type": "QuestStarterEntity, Assembly-CSharp",
-    "QuestToStartIds": [
+      "3",
+      "4",
       "5"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
         "Id": "QuestCompleted",
-        "Value": "4"
+        "Value": "2"
       }
     ]
   },
@@ -82,14 +64,9 @@
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
-        "Id": "QuestCompleted",
-        "Value": "2"
-      },
-      {
-        "$type": "QuestStartConditionMaxActiveQuestsCountComponent, Assembly-CSharp",
-        "Id": "MaxActiveQuestsCount",
-        "Value": "3"
+        "$type": "QuestStartConditionPlayerLevelComponent, Assembly-CSharp",
+        "Id": "PlayerLevel",
+        "Value": "4"
       }
     ]
   },
@@ -103,14 +80,107 @@
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionPlayerLevelComponent, Assembly-CSharp",
-        "Id": "PlayerLevel",
-        "Value": "3"
-      },
+        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
+        "Id": "QuestCompleted",
+        "Value": "15"
+      }
+    ]
+  },
+  {
+    "Id": 9,
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "QuestToStartIds": [
+      "12"
+    ],
+    "Conditions": [
       {
-        "$type": "QuestStartConditionMaxActiveQuestsCountComponent, Assembly-CSharp",
-        "Id": "MaxActiveQuestsCount",
-        "Value": "4"
+        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
+        "Id": "QuestCompleted",
+        "Value": "9"
+      }
+    ]
+  },
+  {
+    "Id": 10,
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "QuestToStartIds": [
+      "13"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
+        "Id": "QuestCompleted",
+        "Value": "7"
+      }
+    ]
+  },
+  {
+    "Id": 11,
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "QuestToStartIds": [
+      "14"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
+        "Id": "QuestCompleted",
+        "Value": "6"
+      }
+    ]
+  },
+  {
+    "Id": 12,
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "QuestToStartIds": [
+      "15"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
+        "Id": "QuestCompleted",
+        "Value": "5"
+      }
+    ]
+  },
+  {
+    "Id": 13,
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "QuestToStartIds": [
+      "11"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionPieceUnlockedComponent, Assembly-CSharp",
+        "Id": "PieceUnlocked",
+        "Value": "CH2_A"
+      }
+    ]
+  },
+  {
+    "Id": 14,
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "QuestToStartIds": [
+      "16"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
+        "Id": "QuestCompleted",
+        "Value": "13"
+      }
+    ]
+  },
+  {
+    "Id": 15,
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "QuestToStartIds": [
+      "17"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
+        "Id": "QuestCompleted",
+        "Value": "16"
       }
     ]
   }
