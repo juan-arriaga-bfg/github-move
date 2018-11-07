@@ -41,7 +41,7 @@ public class UINextLevelWindowView : UIGenericPopupWindowView
         
         if (diff > 0) CurrencyHellper.Purchase(Currency.Energy.Name, diff);
             
-        GameDataService.Current.QuestsManager.CheckConditions();
+        GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
         GameDataService.Current.LevelsManager.UpdateSequence();
         
         base.OnViewCloseCompleted();

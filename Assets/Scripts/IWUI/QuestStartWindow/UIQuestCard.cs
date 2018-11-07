@@ -1,0 +1,19 @@
+using TMPro;
+using UnityEngine;
+
+public class UIQuestCard : MonoBehaviour
+{
+    [SerializeField] private UiQuestButton questButton;
+    [SerializeField] private TextMeshProUGUI title;
+    [SerializeField] private TextMeshProUGUI message;
+    [SerializeField] private CanvasGroup canvasGroup;
+
+    public CanvasGroup GetCanvasGroup() { return canvasGroup;}
+
+    public void Init(QuestEntity quest)
+    {
+        questButton.Init(quest, false);
+        title.text = "New quest";
+        message.text = quest?.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Title ?? "";
+    }
+}

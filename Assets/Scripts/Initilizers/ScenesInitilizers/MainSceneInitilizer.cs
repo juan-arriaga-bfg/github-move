@@ -31,6 +31,8 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.PiecesCheatSheetWindow,
             UIWindowType.ExchangeWindow,
             UIWindowType.OrdersWindow,
+            UIWindowType.QuestStartWindow,
+            UIWindowType.QuestCompletetWindow,
             UIWindowType.NextLevelWindow,
         });
         
