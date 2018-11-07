@@ -43,7 +43,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
 
         ShowChainIfPossible(model);
         
-        icon = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(PieceType.Char1.Abbreviations[0]));
+        icon = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(PieceType.NPC_SleepingBeauty.Abbreviations[0]));
         icon.SetParentAndReset(anchor);
     }
 
@@ -65,7 +65,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         if(isComplete == false) return;
         
         var board = BoardService.Current.GetBoardById(0);
-        var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
+        var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
         
         board.ActionExecutor.AddAction(new EjectionPieceAction
         {
@@ -84,7 +84,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         
         if (quest.IsCompleted())
         {
-            var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
+            var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
             
             if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, windowModel.PiecesReward.Sum(e => e.Value)))
             {

@@ -20,7 +20,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
         def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType).ReproductionDef;
         
         HP = def.Limit;
-        cooldown = new TimerComponent{Delay = def.Delay, Price = def.FastPrice};
+        cooldown = new TimerComponent{Delay = def.Delay};
         RegisterComponent(cooldown);
         
         var child = GameDataService.Current.PiecesManager.GetPieceDef(PieceType.Parse(def.Reproduction.Currency));
@@ -37,12 +37,11 @@ public class ReproductionLifeComponent : StorageLifeComponent
     protected override LifeSaveItem InitInSave(BoardPosition position)
     {
         var item = base.InitInSave(position);
-
-        if (item != null && item.IsStart)
-        {
-            cooldown.Start(item.StartTime);
-            Locker.Unlock(this);
-        }
+        
+        if (item == null) return null;
+        
+        if(item.IsStart) cooldown.Start(item.StartTime);
+        Locker.Unlock(this);
         
         return item;
     }

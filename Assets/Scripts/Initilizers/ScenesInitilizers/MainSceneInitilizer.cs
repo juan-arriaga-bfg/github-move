@@ -33,6 +33,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.OrdersWindow,
             UIWindowType.QuestStartWindow,
             UIWindowType.QuestCompletetWindow,
+            UIWindowType.NextLevelWindow,
         });
         
         // on cache complete

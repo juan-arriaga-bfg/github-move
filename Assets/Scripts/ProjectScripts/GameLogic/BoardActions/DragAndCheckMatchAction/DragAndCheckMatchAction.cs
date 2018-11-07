@@ -189,13 +189,14 @@ public class DragAndCheckMatchAction : IBoardAction
 		var pieceFrom = logic.GetPieceAt(From);
 		var pieceTo = logic.GetPieceAt(To);
 
-		if (pieceFrom.PieceType == PieceType.Magic.Id || pieceFrom.PieceType == pieceTo.PieceType)
+		if (pieceFrom.PieceType == PieceType.Boost_CR.Id || pieceFrom.PieceType == pieceTo.PieceType)
 		{
 			IBoardAction action;
 			
 			if (pieceFrom.Matchable.IsMatchable() && CheckMatch(board, new List<BoardPosition> {From}, out action))
 			{
 				board.ActionExecutor.PerformAction(action);
+				board.BoardLogic.FireflyLogic.OnMatch();
 				return;
 			}
 			

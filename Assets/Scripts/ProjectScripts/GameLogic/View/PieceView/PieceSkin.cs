@@ -8,7 +8,6 @@ public class Skin
 	public int Weight;
 	public string Name;
 	public Vector2 Offset;
-	public float Scale = 1;
 }
 
 public abstract class PieceSkin : IWBaseMonoBehaviour
@@ -31,6 +30,5 @@ public abstract class PieceSkin : IWBaseMonoBehaviour
         
 		image.sprite = IconService.Current.GetSpriteById(skin.Name);
 		image.transform.localPosition = skin.Offset;
-		image.transform.localScale = Vector3.one * skin.Scale;
 	}
 }

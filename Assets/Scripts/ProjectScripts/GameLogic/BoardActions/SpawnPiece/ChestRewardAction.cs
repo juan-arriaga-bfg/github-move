@@ -11,6 +11,7 @@ public class ChestRewardAction : IBoardAction
 	public BoardPosition From { get; set; }
 	public Dictionary<int, int> Pieces = new Dictionary<int, int>();
 	public IBoardAction OnComplete;
+	public Action OnErrorAction;
 	public Action OnCompleteAction;
 	
 	public bool PerformAction(BoardController gameBoardController)
@@ -22,6 +23,7 @@ public class ChestRewardAction : IBoardAction
 		if (Pieces.Count != 0 && gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From, free, count, 0.1f) == false)
 		{
 			UIErrorWindowController.AddError("Not found free cells");
+			OnErrorAction?.Invoke();
 			return false;
 		}
 

@@ -22,7 +22,7 @@ public class UIOrdersWindowModel : IWWindowModel
         {
             var currencys = new List<CurrencyPair>();
 
-            for (var i = Currency.D5.Id; i < Currency.H5.Id +1; i++)
+            for (var i = Currency.PR_A5.Id; i < Currency.PR_E5.Id +1; i++)
             {
                 var currency = Currency.GetCurrencyDef(i);
                 var amound = ProfileService.Current.GetStorageItem(currency.Name).Amount;

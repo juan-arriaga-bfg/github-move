@@ -19,7 +19,7 @@
         
         HP = -1;
         
-        cooldown = new TimerComponent{Delay = def.Delay, Price = def.FastPrice};
+        cooldown = new TimerComponent{Delay = def.Delay};
         RegisterComponent(cooldown);
     }
     
@@ -33,11 +33,10 @@
     {
         var item = base.InitInSave(position);
         
-        if (item != null && item.IsStart)
-        {
-            cooldown.Start(item.StartTime);
-            Locker.Unlock(this);
-        }
+        if (item == null) return null;
+        
+        if(item.IsStart) cooldown.Start(item.StartTime);
+        Locker.Unlock(this);
         
         return item;
     }
@@ -63,9 +62,9 @@
 
     protected override void OnStep()
     {
-        var pieces = GameDataService.Current.PiecesManager.GetSequence(def.Uid).GetNextDict(def.PieceAmount);
+        if(Reward == null || Reward.Count == 0) Reward = GameDataService.Current.PiecesManager.GetSequence(def.Uid).GetNextDict(def.PieceAmount);
         
-        foreach (var key in pieces.Keys)
+        foreach (var key in Reward.Keys)
         {
             storage.SpawnPiece = key;
             break;
@@ -73,9 +72,13 @@
         
         storage.SpawnAction = new EjectionPieceAction
         {
-            From = thisContext.CachedPosition,
-            Pieces = pieces,
-            OnComplete = OnSpawnRewards
+            GetFrom = () => thisContext.CachedPosition,
+            Pieces = Reward,
+            OnComplete = () =>
+            {
+                Reward = null;
+                OnSpawnRewards();
+            }
         };
     }
     

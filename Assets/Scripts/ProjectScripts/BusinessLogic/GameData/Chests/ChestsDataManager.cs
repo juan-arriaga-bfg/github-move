@@ -5,24 +5,14 @@ public class ChestsDataManager : SequenceData, IDataLoader<List<ChestDef>>
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
-
-    public override void OnRegisterEntity(ECSEntity entity)
-    {
-        Reload();
-    }
     
-    public Chest ActiveChest;
     public List<ChestDef> Chests;
-    
-    public Dictionary<BoardPosition, Chest> ChestsOnBoard = new Dictionary<BoardPosition, Chest>();
     
     public override void Reload()
     {
         base.Reload();
         
-        ActiveChest = null;
         Chests = null;
-        ChestsOnBoard = new Dictionary<BoardPosition, Chest>();
         
         LoadData(new ResourceConfigDataMapper<List<ChestDef>>("configs/chests.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
@@ -52,19 +42,6 @@ public class ChestsDataManager : SequenceData, IDataLoader<List<ChestDef>>
                     Chests.Add(next);
                     AddSequence(next.Uid, next.PieceWeights);
                 }
-
-                var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
-                
-                if(save?.Chests == null) return;
-
-                foreach (var item in save.Chests)
-                {
-                    var chest = GetChest(item.Id);
-                    
-                    chest.Reward = item.Reward;
-                    chest.RewardCount = item.RewardAmount;
-                    ChestsOnBoard.Add(item.Position, chest);
-                }
             }
             else
             {
@@ -73,20 +50,10 @@ public class ChestsDataManager : SequenceData, IDataLoader<List<ChestDef>>
         });
     }
 
-    private Chest GetChest(int pieceType)
+    public Chest GetChest(int pieceType)
     {
         var chestDef = Chests.Find(def => def.Piece == pieceType);
         
-        return chestDef == null ? null : new Chest(chestDef);
-    }
-    
-    public Chest GetFromBoard(BoardPosition position, int pieceType)
-    {
-        Chest chest;
-
-        if (ChestsOnBoard.TryGetValue(position, out chest) == false) return GetChest(pieceType);
-        
-        ChestsOnBoard.Remove(position);
-        return chest;
+        return chestDef == null ? null : new Chest {Def = chestDef};
     }
 }

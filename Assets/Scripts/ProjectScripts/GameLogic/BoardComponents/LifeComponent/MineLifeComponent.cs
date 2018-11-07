@@ -20,7 +20,6 @@ public class MineLifeComponent : StorageLifeComponent
         else GameDataService.Current.MinesManager.Move(def.Id, key);
         
         storage.Timer.Delay = def.Delay;
-        storage.Timer.Price = def.FastPrice;
         
         HP = def.Size;
         
@@ -52,47 +51,28 @@ public class MineLifeComponent : StorageLifeComponent
 
     protected override void OnComplete()
     {
-        var position = thisContext.CachedPosition;
-                
-        storage.OnScatter = () =>
-        {
-            storage.OnScatter = null;
-            OnSpawnRewards();
-            thisContext.Context.ActionExecutor.AddAction(new CollapsePieceToAction
-            {
-                To = position,
-                Positions = new List<BoardPosition> {position},
-                OnComplete = OnRemove
-            });
-        };
-    }
+        var pieces = new Dictionary<int, int>();
 
-    private void OnRemove()
-    {
-        GameDataService.Current.MinesManager.Remove(def.Id);
-        
-        var multi = thisContext.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
-        
-        if(multi == null) return;
-
-        var mask = multi.Mask;
-        
-        foreach (var maskPoint in mask)
+        foreach (var pair in def.LastRewards)
         {
-            var point = multi.GetPointInMask(thisContext.CachedPosition, maskPoint);
-            
-            thisContext.Context.ActionExecutor.AddAction(new SpawnPieceAtAction()
-            {
-                IsCheckMatch = false,
-                At = point,
-                PieceTypeId = PieceType.OX1.Id
-            });
+            pieces.Add(PieceType.Parse(pair.Currency), pair.Amount);
         }
+        
+        storage.SpawnAction = new EjectionPieceAction
+        {
+            GetFrom = () => thisContext.CachedPosition,
+            Pieces = pieces,
+            OnComplete = () =>
+            {
+                GameDataService.Current.MinesManager.Remove(def.Id);
+                OnSpawnRewards();
+            }
+        };
     }
 
     protected override void OnSpawnRewards()
     {
-        AddResourceView.Show(StartPosition(), def.StepReward);
+        AddResourceView.Show(StartPosition(), def.StepRewards);
         base.OnSpawnRewards();
     }
 

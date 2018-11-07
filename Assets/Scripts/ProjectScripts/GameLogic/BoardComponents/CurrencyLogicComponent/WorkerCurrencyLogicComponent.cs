@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 {
@@ -37,7 +36,8 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
         foreach (var worker in workers)
         {
-            completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(BoardPosition.Parse(worker), null));
+            var timerElement = new KeyValuePair<BoardPosition, TimerComponent>(BoardPosition.Parse(worker), null);
+            completeTimesList.Add(timerElement);
         }
     }
 
@@ -67,7 +67,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             return;
         }
     }
-
+    
     public bool Get(BoardPosition id, TimerComponent timer)
     {
         if (CurrencyHellper.IsCanPurchase(targetItem.Currency, 1) == false)
@@ -126,7 +126,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         foreach (var pair in completeTimesList)
         {           
             if (pair.Key.Equals(id) == false) continue;
-
+            
             completeTimesList.Remove(pair);
             Add(1);
             
@@ -139,14 +139,27 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         return false;
     }
 
+    public bool Check(BoardPosition id)
+    {
+        foreach (var pair in completeTimesList)
+        {           
+            if (pair.Key.Equals(id) == false) continue;
+            
+            return true;
+        }
+        
+        return false;
+    }
+
     public bool SetExtra(Piece worker, BoardPosition targetPosition)
     {
-        if (worker.PieceType != PieceType.Worker1.Id || context.BoardLogic.IsEmpty(targetPosition)) return false;
+        if (worker.PieceType != PieceType.Boost_WR.Id || context.BoardLogic.IsEmpty(targetPosition)) return false;
 
         var target = context.BoardLogic.GetPieceAt(targetPosition);
         var def = PieceType.GetDefById(target.PieceType);
 
         if (def.Filter.Has(PieceTypeFilter.WorkPlace) == false || !CheckLock(target)) return false;
+        
         if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target)) return false;
         
         context.ActionExecutor.AddAction(new CollapsePieceToAction
@@ -154,7 +167,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             To = targetPosition,
             Positions = new List<BoardPosition> {worker.CachedPosition},
         });
-
+        
         return true;
     }
 

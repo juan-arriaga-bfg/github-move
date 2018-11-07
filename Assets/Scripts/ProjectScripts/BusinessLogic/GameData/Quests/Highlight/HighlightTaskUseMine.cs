@@ -12,16 +12,15 @@ public class HighlightTaskUseMine : TaskHighlightUsingArrow
             return false;
         }
         
-        int pieceId = useMineTask.PieceId;
-        if (pieceId < 0)
-        {
-            return false;
-        }
-
         var board = BoardService.Current.FirstBoard;
         var boardLogic = board.BoardLogic;
+
+        int pieceId = useMineTask.PieceId;
         
-        var minePositions = boardLogic.PositionsCache.GetPiecePositionsByType(pieceId);
+        List<BoardPosition> minePositions = pieceId <= 0
+            ? boardLogic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Mine)
+            : boardLogic.PositionsCache.GetPiecePositionsByType(pieceId);
+
         if (minePositions.Count == 0)
         {
             return false;

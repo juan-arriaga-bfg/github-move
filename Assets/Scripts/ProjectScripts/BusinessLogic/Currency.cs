@@ -34,11 +34,9 @@ public static partial class Currency
                           public static readonly CurrencyDef Life        = new CurrencyDef { Id = 130, Name = "Life",        IsConsumable = true };
                           public static readonly CurrencyDef Timer       = new CurrencyDef { Id = 140, Name = "Timer",       IsConsumable = true };
     
-    [IncludeToCheatSheet] public static readonly CurrencyDef D5          = new CurrencyDef { Id = 1001, Name = "D5",         IsConsumable = true, Icon = "D5" };
-    [IncludeToCheatSheet] public static readonly CurrencyDef E5          = new CurrencyDef { Id = 1002, Name = "E5",         IsConsumable = true, Icon = "E5" };
-    [IncludeToCheatSheet] public static readonly CurrencyDef F5          = new CurrencyDef { Id = 1003, Name = "F5",         IsConsumable = true, Icon = "F5" };
-    [IncludeToCheatSheet] public static readonly CurrencyDef G5          = new CurrencyDef { Id = 1004, Name = "G5",         IsConsumable = true, Icon = "G5" };
-    [IncludeToCheatSheet] public static readonly CurrencyDef H5          = new CurrencyDef { Id = 1005, Name = "H5",         IsConsumable = true, Icon = "H5" };
-    [IncludeToCheatSheet] public static readonly CurrencyDef I5          = new CurrencyDef { Id = 1006, Name = "I5",         IsConsumable = true, Icon = "I5" };
-    [IncludeToCheatSheet] public static readonly CurrencyDef J5          = new CurrencyDef { Id = 1007, Name = "J5",         IsConsumable = true, Icon = "J5" };
+    [IncludeToCheatSheet] public static readonly CurrencyDef PR_A5       = new CurrencyDef { Id = 1001, Name = "PR_A5",      IsConsumable = true, Icon = "PR_A5" };
+    [IncludeToCheatSheet] public static readonly CurrencyDef PR_B5       = new CurrencyDef { Id = 1002, Name = "PR_B5",      IsConsumable = true, Icon = "PR_B5" };
+    [IncludeToCheatSheet] public static readonly CurrencyDef PR_C5       = new CurrencyDef { Id = 1003, Name = "PR_C5",      IsConsumable = true, Icon = "PR_C5" };
+    [IncludeToCheatSheet] public static readonly CurrencyDef PR_D5       = new CurrencyDef { Id = 1004, Name = "PR_D5",      IsConsumable = true, Icon = "PR_D5" };
+    [IncludeToCheatSheet] public static readonly CurrencyDef PR_E5       = new CurrencyDef { Id = 1005, Name = "PR_E5",      IsConsumable = true, Icon = "PR_E5" };
 }

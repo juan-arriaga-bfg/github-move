@@ -35,19 +35,19 @@ public class HighlightTaskCreatePiece : ITaskHighlight
             image = "wood_UI";
             positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Obstacle, 1);
         }
-        else if(piece == PieceType.C1.Id)
+        else if(piece == PieceType.B1.Id)
         {
             title = "Need stone pieces?";
             image = "stone_UI";
             
-            positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.MineC.Id, 1);
+            positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.MN_B.Id, 1);
         }
-        else if(piece == PieceType.D1.Id)
+        else if(piece == PieceType.PR_A1.Id)
         {
             title = "Need sheep pieces?";
             image = "sheeps_UI";
         }
-        else if(piece == PieceType.E1.Id)
+        else if(piece == PieceType.PR_B1.Id)
         {
             title = "Need apple pieces?";
             image = "apple_UI";

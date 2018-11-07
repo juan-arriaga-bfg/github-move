@@ -18,8 +18,6 @@ public class ChestPieceView : PieceBoardElementView
         base.Init(context, piece);
 
         chestComponent = piece.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
-        chestComponent.Timer.OnStop += UpdateView;
-        chestComponent.Timer.OnComplete += UpdateView;
         
         UpdateView();
         Context.Context.HintCooldown.Step(HintType.CloseChest);
@@ -32,29 +30,14 @@ public class ChestPieceView : PieceBoardElementView
             RemoveLayerFromCache(backlight);
             Destroy(backlight.gameObject);
         }
-
-
+        
         if (hightlight != null)
         {
             RemoveLayerFromCache(hightlight);
             Destroy(hightlight.gameObject);
         }
-          
-        chestComponent.Timer.OnStop -= UpdateView;
-        chestComponent.Timer.OnComplete -= UpdateView;
+        
         base.ResetViewOnDestroy();
-    }
-
-    public override void OnDragStart(BoardPosition boardPos, Vector2 worldPos)
-    {
-        base.OnDragStart(boardPos, worldPos);
-        chestComponent.TimerViewChange(false);
-    }
-
-    public override void OnDragEnd(BoardPosition boardPos, Vector2 worldPos)
-    {
-        base.OnDragEnd(boardPos, worldPos);
-        chestComponent.TimerViewChange(true);
     }
     
     public override void UpdateView()

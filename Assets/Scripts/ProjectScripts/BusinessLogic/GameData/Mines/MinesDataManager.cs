@@ -5,20 +5,20 @@ public class MinesDataManager : IECSComponent, IDataManager, IDataLoader<List<Mi
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
 	public int Guid => ComponentGuid;
-
-	public void OnRegisterEntity(ECSEntity entity)
-	{
-		Reload();
-	}
-	
-	public void OnUnRegisterEntity(ECSEntity entity)
-	{
-	}
 	
 	public Dictionary<BoardPosition, MineDef> All;
 	
 	public List<BoardPosition> Moved = new List<BoardPosition>();
 	public List<int> Removed = new List<int>();
+	
+	public void OnRegisterEntity(ECSEntity entity)
+	{
+		Reload();
+	}
+
+	public void OnUnRegisterEntity(ECSEntity entity)
+	{
+	}
 	
 	public void Reload()
 	{
@@ -47,6 +47,9 @@ public class MinesDataManager : IECSComponent, IDataManager, IDataLoader<List<Mi
 				for (var i = data.Count - 1; i >= 0; i--)
 				{
 					var def = data[i];
+					var pos = new BoardPosition();
+					
+					if(pos.Equals(def.Position)) continue;
 					
 					if (Removed.FindIndex(id => id == def.Id) != -1)
 					{

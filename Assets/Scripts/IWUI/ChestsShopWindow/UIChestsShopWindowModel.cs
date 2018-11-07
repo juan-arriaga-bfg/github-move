@@ -21,10 +21,10 @@ public class UIChestsShopWindowModel : IWWindowModel
                 var next = definition.GetNext(chest);
                 var index = definition.GetIndexInChain(chest);
                 
-                return index != 1 && next == PieceType.None.Id && chest != PieceType.Chest1.Id;
+                return index != 1 && next == PieceType.None.Id && chest != PieceType.CH_Free.Id;
             });
             
-            last.Add(GameDataService.Current.ChestsManager.Chests.Find(def => PieceType.Parse(def.Uid) == PieceType.Chest1.Id));
+            last.Add(GameDataService.Current.ChestsManager.Chests.Find(def => PieceType.Parse(def.Uid) == PieceType.CH_Free.Id));
             
             return last;
         }

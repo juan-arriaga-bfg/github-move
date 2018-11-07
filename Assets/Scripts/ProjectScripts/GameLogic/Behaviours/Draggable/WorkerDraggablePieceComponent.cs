@@ -23,11 +23,11 @@
 
         if (life != null)
         {
-            return !life.Locker.IsLocked && (!life.IsUseCooldown || !life.Timer.IsExecuteable());
+            return !life.Locker.IsLocked && (!life.IsUseCooldown || !life.Timer.IsExecuteable()) && CurrencyHellper.IsCanPurchase(life.Energy);
         }
         
         var state = target.GetComponent<PieceStateComponent>(PieceStateComponent.ComponentGuid);
-
+        
         if (state != null)
         {
             return state.State != BuildingState.InProgress && state.State != BuildingState.Complete;

@@ -27,7 +27,7 @@ public class UIChestsShopItem : IWUIWindowViewController
 		
 		isClick = false;
 		isReward = false;
-		isFree = PieceType.Chest1.Id == chest.Piece;
+		isFree = PieceType.CH_Free.Id == chest.Piece;
 		
 		if (isFree)
 		{
@@ -54,7 +54,7 @@ public class UIChestsShopItem : IWUIWindowViewController
 		if (isClick == false || isReward == false) return;
 		
 		var board = BoardService.Current.GetBoardById(0);
-		var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
+		var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
 		var piece = board.BoardLogic.GetPieceAt(position);
         
 		var menu = piece.TouchReaction?.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
@@ -89,7 +89,7 @@ public class UIChestsShopItem : IWUIWindowViewController
 		isClick = true;
 		
 		var board = BoardService.Current.GetBoardById(0);
-		var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];
+		var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
 		
 		if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, 1))
 		{

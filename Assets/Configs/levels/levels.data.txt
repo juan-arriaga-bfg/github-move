@@ -3,7 +3,7 @@
     "Index": 1,
     "Price": {
       "Currency": "Experience",
-      "Amount": 100
+      "Amount": 15
     },
     "Rewards": [
       {
@@ -17,11 +17,7 @@
     ],
     "PieceWeights": [
       {
-        "Uid": "D1",
-        "Weight": 50
-      },
-      {
-        "Uid": "E1",
+        "Uid": "PR_C1",
         "Weight": 50
       }
     ]
@@ -41,30 +37,13 @@
         "Currency": "Crystals",
         "Amount": 10
       }
-    ],
-    "PieceWeights": [
-      {
-        "Uid": "D1",
-        "Weight": 30,
-        "Override": true
-      },
-      {
-        "Uid": "E1",
-        "Weight": 30,
-        "Override": true
-      },
-      {
-        "Uid": "F1",
-        "Weight": 40,
-        "Override": true
-      }
     ]
   },
   {
     "Index": 3,
     "Price": {
       "Currency": "Experience",
-      "Amount": 700
+      "Amount": 400
     },
     "Rewards": [
       {
@@ -78,18 +57,17 @@
     ],
     "PieceWeights": [
       {
-        "Uid": "D1",
-        "Weight": 10
+        "Uid": "PR_A1",
+        "Weight": 30
       },
       {
-        "Uid": "F1",
+        "Uid": "PR_C1",
         "Weight": 20,
         "Override": true
       },
       {
-        "Uid": "E1",
-        "Weight": 30,
-        "Override": true
+        "Uid": "PR_B1",
+        "Weight": 30
       }
     ]
   },
@@ -97,7 +75,7 @@
     "Index": 4,
     "Price": {
       "Currency": "Experience",
-      "Amount": 1000
+      "Amount": 1500
     },
     "Rewards": [
       {
@@ -129,26 +107,26 @@
     ],
     "PieceWeights": [
       {
-        "Uid": "D1",
+        "Uid": "PR_A1",
         "Weight": 20,
         "Override": true
       },
       {
-        "Uid": "F1",
+        "Uid": "PR_C1",
         "Weight": 10,
         "Override": true
       },
       {
-        "Uid": "E1",
+        "Uid": "PR_B1",
         "Weight": 5,
         "Override": true
       },
       {
-        "Uid": "H1",
+        "Uid": "PR_E1",
         "Weight": 5
       },
       {
-        "Uid": "G1",
+        "Uid": "PR_D1",
         "Weight": 5
       }
     ]
@@ -157,7 +135,7 @@
     "Index": 5,
     "Price": {
       "Currency": "Experience",
-      "Amount": 1500
+      "Amount": 2000
     },
     "Rewards": [
       {
@@ -186,21 +164,21 @@
     ],
     "PieceWeights": [
       {
-        "Uid": "D1",
+        "Uid": "PR_A1",
         "Weight": 30,
         "Override": true
       },
       {
-        "Uid": "F1",
+        "Uid": "PR_C1",
         "Weight": 30,
         "Override": true
       },
       {
-        "Uid": "H1",
+        "Uid": "PR_E1",
         "Weight": 10
       },
       {
-        "Uid": "E1",
+        "Uid": "PR_B1",
         "Weight": 10
       }
     ]
@@ -209,7 +187,7 @@
     "Index": 6,
     "Price": {
       "Currency": "Experience",
-      "Amount": 2000
+      "Amount": 2500
     },
     "Rewards": [
       {
