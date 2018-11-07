@@ -46,7 +46,8 @@
     "Id": 6,
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "QuestToStartIds": [
-      "6"
+      "6",
+      "15"
     ],
     "Conditions": [
       {
@@ -125,20 +126,6 @@
         "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
         "Id": "QuestCompleted",
         "Value": "6"
-      }
-    ]
-  },
-  {
-    "Id": 12,
-    "$type": "QuestStarterEntity, Assembly-CSharp",
-    "QuestToStartIds": [
-      "15"
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
-        "Id": "QuestCompleted",
-        "Value": "5"
       }
     ]
   },
