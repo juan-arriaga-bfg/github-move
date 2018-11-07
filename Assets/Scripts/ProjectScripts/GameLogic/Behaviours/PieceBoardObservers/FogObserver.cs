@@ -178,10 +178,10 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             viewDef.RemoveView(ViewType.Lock);
             lockView = null;
         }
-        
+
         view = viewDef.AddView(ViewType.Bubble) as BubbleView;
         
-        if(view.IsShow) return;
+        if(view.IsShow || view.OnHide != null) return;
         
         view.SetData("Clear fog", def.Condition.ToStringIcon(), OnClick);
         view.SetOfset(def.GetCenter(thisContext.Context) + new Vector3(0, 0.1f));
