@@ -39,13 +39,43 @@ public class UIQuestCompleteWindowModel : IWWindowModel
                 break;
             
             case "4" :
-                CharacterId = UiCharacterData.CharGnomeWorker;
-                Message = "We're chest hunters from now!";
+                CharacterId = UiCharacterData.CharSleepingBeauty;
+                Message = "Well done! Let's continue work and build up a house.";
                 break;
             
             case "5" :
                 CharacterId = UiCharacterData.CharSleepingBeauty;
-                Message = "Well done! Let's continue work and build up a house.";
+                Message = "It's much better without this fog.";
+                break;
+            
+            case "6" :
+                CharacterId = UiCharacterData.CharGnomeWorker;
+                Message = "A nice building! It remind us about our native village.";
+                break;
+            
+            case "8" :
+                CharacterId = UiCharacterData.CharSleepingBeauty;
+                Message = "It seems for now we have enough wheat to start cooking. Great job.";
+                break;
+            
+            case "9" :
+                CharacterId = UiCharacterData.CharSleepingBeauty;
+                Message = "These apples looks great and a pie will be even better.";
+                break;
+            
+            case "10" :
+                CharacterId = UiCharacterData.CharSleepingBeauty;
+                Message = "Aw! One time I've heard that candies don't grow on trees. Funny joke, right?";
+                break;
+            
+            case "11" :
+                CharacterId = UiCharacterData.CharGnomeWorker;
+                Message = "We're chest hunters from now!";
+                break;
+            
+            case "15" :
+                CharacterId = UiCharacterData.CharSleepingBeauty;
+                Message = "Great! That fog is really annoying.";
                 break;
 
             default:

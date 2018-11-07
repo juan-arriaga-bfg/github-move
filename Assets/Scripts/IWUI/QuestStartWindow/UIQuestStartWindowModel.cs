@@ -29,9 +29,16 @@ public class UIQuestStartWindowModel : IWWindowModel
              case "3" : CreateStartScenario3(); break;
              // case "4" : CreateStartScenario4(); break;
              // case "5" : CreateStartScenario5(); break;
-             // case "6" : CreateStartScenario6(); break;
+             case "6" : CreateStartScenario6(); break;
              // case "7" : CreateStartScenario7(); break;
-             // case "8" : CreateStartScenario8(); break;
+             case "8" : CreateStartScenario8(); break;
+             // case "9" : CreateStartScenario9(); break;
+             // case "10" : CreateStartScenario10(); break;
+             // case "11" : CreateStartScenario11(); break;
+             // case "12" : CreateStartScenario12(); break;
+             case "13" : CreateStartScenario13(); break;
+             // case "14" : CreateStartScenario14(); break;
+             // case "15" : CreateStartScenario15(); break;
              
              default : CreateAbstractStartScenario(); break;
         }
@@ -336,4 +343,100 @@ public class UIQuestStartWindowModel : IWWindowModel
         ));
     }
 
+    private void CreateStartScenario6()
+    {
+        Scenario = new ConversationScenarioEntity();
+        
+        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        {
+            Characters = new Dictionary<CharacterPosition, string>
+            {
+                {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
+                {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
+                // {CharacterPosition.RightOuter, UiCharacterData.CharSleepingBeauty},
+                // {CharacterPosition.RightInner, UiCharacterData.CharRapunzel},
+                // {CharacterPosition.LeftOuter,  UiCharacterData.CharGnomeWorker},
+                // {CharacterPosition.LeftInner,  UiCharacterData.CharPussInBoots},
+            }
+        };
+
+        Scenario.RegisterComponent(charsList);
+        
+        Scenario.RegisterComponent(CreateStartBubble(
+            UiCharacterData.CharSleepingBeauty, 
+            "Hey, look at this. Someone have left almost finished houses.",
+            CharacterEmotion.Happy
+        ));
+
+        Scenario.RegisterComponent(CreateStartBubble(
+            UiCharacterData.CharGnomeWorker, 
+            "Let's complete these buildings. There are many suitable resources nearby.",
+            CharacterEmotion.Normal,
+            Quests.Select(e => e.Id).ToList()
+        ));
+    }
+    
+    private void CreateStartScenario8()
+    {
+        Scenario = new ConversationScenarioEntity();
+        
+        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        {
+            Characters = new Dictionary<CharacterPosition, string>
+            {
+                {CharacterPosition.LeftInner, UiCharacterData.CharSleepingBeauty},
+                // {CharacterPosition.RightOuter, UiCharacterData.CharSleepingBeauty},
+                // {CharacterPosition.RightInner, UiCharacterData.CharRapunzel},
+                // {CharacterPosition.LeftOuter,  UiCharacterData.CharGnomeWorker},
+                // {CharacterPosition.LeftInner,  UiCharacterData.CharPussInBoots},
+            }
+        };
+
+        Scenario.RegisterComponent(charsList);
+        
+        Scenario.RegisterComponent(CreateStartBubble(
+            UiCharacterData.CharSleepingBeauty, 
+            "Hey, look at this field of wheat. And an apple tree. We’re lucky!",
+            CharacterEmotion.Happy
+        ));
+
+        Scenario.RegisterComponent(CreateStartBubble(
+            UiCharacterData.CharSleepingBeauty, 
+            "I think we can cook a great treats using these ingredients. Let’s collect them.",
+            CharacterEmotion.Normal,
+            Quests.Select(e => e.Id).ToList()
+        ));
+    }
+    
+    private void CreateStartScenario13()
+    {
+        Scenario = new ConversationScenarioEntity();
+        
+        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        {
+            Characters = new Dictionary<CharacterPosition, string>
+            {
+                {CharacterPosition.LeftInner, UiCharacterData.CharGnomeWorker},
+                // {CharacterPosition.RightOuter, UiCharacterData.CharSleepingBeauty},
+                // {CharacterPosition.RightInner, UiCharacterData.CharRapunzel},
+                // {CharacterPosition.LeftOuter,  UiCharacterData.CharGnomeWorker},
+                // {CharacterPosition.LeftInner,  UiCharacterData.CharPussInBoots},
+            }
+        };
+
+        Scenario.RegisterComponent(charsList);
+        
+        Scenario.RegisterComponent(CreateStartBubble(
+            UiCharacterData.CharGnomeWorker, 
+            "Wow! We've found a chest during wood cutting. You're totally lucky!",
+            CharacterEmotion.Happy
+        ));
+
+        Scenario.RegisterComponent(CreateStartBubble(
+            UiCharacterData.CharGnomeWorker, 
+            "You can open this chest and take a look at his content.",
+            CharacterEmotion.Normal,
+            Quests.Select(e => e.Id).ToList()
+        ));
+    }
 }
