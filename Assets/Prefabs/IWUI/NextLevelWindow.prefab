@@ -106,6 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224002377294266482}
   - component: {fileID: 95296730788579436}
+  - component: {fileID: 225097697517585882}
   m_Layer: 31
   m_Name: Body
   m_TagString: Untagged
@@ -1124,11 +1125,11 @@ MonoBehaviour:
   mainCanvasGroup: {fileID: 0}
   canvas: {fileID: 0}
   isHideable: 1
-  viewAnimators: []
+  viewAnimators:
+  - {fileID: 95296730788579436}
   backLayer: {fileID: 225830284296112788}
   title: {fileID: 114283386450715380}
   message: {fileID: 114259568127352398}
-  viewAnchor: {fileID: 224002377294266482}
   rewards: {fileID: 114987625610161176}
   tapLabel: {fileID: 114350054969335148}
 --- !u!114 &114532302348594362
@@ -2094,7 +2095,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 277.86}
-  m_SizeDelta: {x: 537.64, y: 78.20001}
+  m_SizeDelta: {x: 0, y: 78.20001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224185611486481652
 RectTransform:
@@ -2406,10 +2407,10 @@ RectTransform:
   m_Father: {fileID: 224114942894150422}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 268.82, y: -39.100006}
-  m_SizeDelta: {x: 397.64, y: 72.06}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224878136895658210
 RectTransform:
@@ -2447,6 +2448,17 @@ RectTransform:
   m_AnchoredPosition: {x: 324, y: 140}
   m_SizeDelta: {x: 340, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225097697517585882
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1178714136197620}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!225 &225830284296112788
 CanvasGroup:
   m_ObjectHideFlags: 1
