@@ -274,7 +274,8 @@ public class QuestsDataManager : IECSComponent, IDataManager
                     .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = new HashSet<string> {UIWindowType.MainWindow}})
                     .SetAction(() =>
                      {
-                         var questsToStart = CheckConditions();
+                         string starterId = null;
+                         var questsToStart = CheckConditions(out starterId);
                          if (questsToStart.Count == 0)
                          {
                              Debug.Log($"[QuestsDataManager] => CheckConditions == 0, return");
@@ -285,7 +286,8 @@ public class QuestsDataManager : IECSComponent, IDataManager
                          
                          var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
                          model.SetQuests(questsToStart);
-                         model.BuildTestConversation();
+                         model.BuildConversation(starterId);
+                         // model.BuildTestConversation();
                          //model.BuildQuestCompletedConversation();
         
                          UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
@@ -321,8 +323,10 @@ public class QuestsDataManager : IECSComponent, IDataManager
     /// Call this to foreach through Starters and Start new quests if Conditions are met.
     /// Highly expensive! 
     /// </summary>
-    private List<string> CheckConditions()
+    private List<string> CheckConditions(out string starterId)
     {
+        starterId = null;
+        
         if (questStarters == null)
         {
             Debug.LogError($"[QuestsDataManager] => CheckConditions() is called when questStarters list is empty");
@@ -341,15 +345,11 @@ public class QuestsDataManager : IECSComponent, IDataManager
             var starter = questStarters[i];
             if (starter.Check())
             {
-#if DEBUG
-                sw.Stop();
-#endif
+                starterId = starter.Id;
                 ret.AddRange(starter.QuestToStartIds);
-#if DEBUG
-                sw.Start();
-#endif
             }
         }
+        
 #if DEBUG
         sw.Stop();
         Debug.Log($"[QuestsDataManager] => CheckConditions() done in {sw.ElapsedMilliseconds}ms");

@@ -14,5 +14,6 @@ public class UIQuestCard : MonoBehaviour
     {
         questButton.Init(quest, false);
         title.text = "New quest";
+        message.text = quest?.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Title ?? "";
     }
 }

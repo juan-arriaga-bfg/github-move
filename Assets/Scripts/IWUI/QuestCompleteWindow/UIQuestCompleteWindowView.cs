@@ -24,7 +24,7 @@ public class UIQuestCompleteWindowView : IWUIWindowView
         
         var model = Model as UIQuestCompleteWindowModel;
         
-        InitCharacter(UiCharacterData.CharSleepingBeauty);
+        InitCharacter();
         InitBubble();
         InitTapToContinue(3f);
     }
@@ -36,8 +36,10 @@ public class UIQuestCompleteWindowView : IWUIWindowView
         var model = Model as UIQuestCompleteWindowModel;
     }
     
-    public void InitCharacter(string characterId)
+    public void InitCharacter()
     {
+        var model = Model as UIQuestCompleteWindowModel;
+        
         var pool = UIService.Get.PoolContainer;
 
         if (characterGo != null)
@@ -45,10 +47,11 @@ public class UIQuestCompleteWindowView : IWUIWindowView
             pool.Return(characterGo);
         }
         
-        string viewName = $"UICharacter{characterId}View";
+        string viewName = $"UICharacter{model.CharacterId}View";
         
         UICharacterViewController character = pool.Create<UICharacterViewController>(viewName);
-        character.CharacterId = characterId;
+        character.CharacterId = model.CharacterId;
+        character.SetEmotion(model.Emotion);
 
         character.transform.SetParent(characterAnchor, false);
 
