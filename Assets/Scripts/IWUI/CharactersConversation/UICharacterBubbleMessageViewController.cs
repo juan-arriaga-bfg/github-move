@@ -60,7 +60,7 @@ public class UICharacterBubbleMessageViewController : UICharacterBubbleView
         SetSide(data.Side);
         
         canvasGroup.alpha = 0;
-        canvasGroup.DOFade(1, 1);
+        canvasGroup.DOFade(1, 0.5f);
         
         message.Text = data.Message;
 
@@ -104,7 +104,7 @@ public class UICharacterBubbleMessageViewController : UICharacterBubbleView
         
         canvasGroup.DOFade(0, 1);
         DOTween.Sequence()
-               .AppendInterval(1)
+               .AppendInterval(0.5f)
                .AppendCallback(() =>
                 {
                     StopTeleTypeEffect();

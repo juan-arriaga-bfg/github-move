@@ -18,15 +18,30 @@ public class UIQuestCompleteWindowView : IWUIWindowView
     
     private bool isClickAllowed;
 
+    public override void AnimateShow()
+    {
+        base.AnimateShow();
+
+        rootCanvasGroup.alpha = 0;
+
+        DOTween.Sequence()
+               .AppendInterval(1.5f)
+               .AppendCallback(() =>
+                {
+                    InitCharacter();
+                    InitBubble();
+                    InitTapToContinue(3f);
+                    rootCanvasGroup.DOFade(1, 0.5f);
+                });
+    }
+
     public override void OnViewShow()
     {
         base.OnViewShow();
         
         var model = Model as UIQuestCompleteWindowModel;
-        
-        InitCharacter();
-        InitBubble();
-        InitTapToContinue(3f);
+
+        CleanUp();
     }
 
     public override void OnViewClose()
@@ -35,11 +50,9 @@ public class UIQuestCompleteWindowView : IWUIWindowView
         
         var model = Model as UIQuestCompleteWindowModel;
     }
-    
-    public void InitCharacter()
+
+    public void CleanUp()
     {
-        var model = Model as UIQuestCompleteWindowModel;
-        
         var pool = UIService.Get.PoolContainer;
 
         if (characterGo != null)
@@ -47,11 +60,23 @@ public class UIQuestCompleteWindowView : IWUIWindowView
             pool.Return(characterGo);
         }
         
+        if (bubbleGo != null)
+        {
+            pool.Return(bubbleGo);
+        }
+    }
+    
+    public void InitCharacter()
+    {
+        var pool = UIService.Get.PoolContainer;
+        
+        var model = Model as UIQuestCompleteWindowModel;
+               
         string viewName = $"UICharacter{model.CharacterId}View";
         
         UICharacterViewController character = pool.Create<UICharacterViewController>(viewName);
         character.CharacterId = model.CharacterId;
-        character.SetEmotion(model.Emotion);
+        character.Emotion = model.Emotion;
 
         character.transform.SetParent(characterAnchor, false);
 
@@ -65,21 +90,16 @@ public class UIQuestCompleteWindowView : IWUIWindowView
     public void InitBubble()
     {      
         var pool = UIService.Get.PoolContainer;
-
-        if (bubbleGo != null)
-        {
-            pool.Return(bubbleGo);
-        }
-        
+       
         var model = Model as UIQuestCompleteWindowModel;
 
         var bubbleId = R.UICharacterBubbleQuestCompletedView;
         var bubbleDef = new UiCharacterBubbleDefQuestCompleted
         {
-            Message = "Well done! Let's continue work and build up a house.",
+            Message = model.Message,
             QuestId = model.Quest.Id,
             AllowTeleType = false,
-            CharacterId = UiCharacterData.CharSleepingBeauty,
+            CharacterId = model.CharacterId,
             Side = CharacterSide.Left
         };
         

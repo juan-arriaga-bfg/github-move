@@ -162,7 +162,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         {
             if (character.CharacterId != excludedCharId)
             {
-                character.ToBackground(animated, CharacterEmotion.Normal);
+                character.ToBackground(animated, character.Emotion);
             }
         }
     }

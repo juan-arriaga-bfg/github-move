@@ -23,53 +23,33 @@ public class UIQuestCompleteWindowModel : IWWindowModel
         switch (questId)
         {
             case "1" :
-                CharacterId = UiCharacterData.CharRapunzel;
+                CharacterId = UiCharacterData.CharSleepingBeauty;
                 Message = "What a beautiful tree!";
                 break;
             
             case "2" :
-                CharacterId = UiCharacterData.CharRapunzel;
+                CharacterId = UiCharacterData.CharSleepingBeauty;
                 Message = "Great! That fog is really annoying.";
                 break;
             
             case "3" :
-                CharacterId = UiCharacterData.CharRapunzel;
+                CharacterId = UiCharacterData.CharSleepingBeauty;
                 Emotion = CharacterEmotion.Normal;
                 Message = "There are much better without those rusted trees.";
                 break;
             
             case "4" :
-                CharacterId = UiCharacterData.CharRapunzel;
-                Message = "What a beautiful tree!";
+                CharacterId = UiCharacterData.CharGnomeWorker;
+                Message = "We're chest hunters from now!";
                 break;
             
             case "5" :
-                CharacterId = UiCharacterData.CharRapunzel;
-                Message = "What a beautiful tree!";
+                CharacterId = UiCharacterData.CharSleepingBeauty;
+                Message = "Well done! Let's continue work and build up a house.";
                 break;
-            
-            case "6" :
-                CharacterId = UiCharacterData.CharRapunzel;
-                Message = "What a beautiful tree!";
-                break;
-            
-            case "7" :
-                CharacterId = UiCharacterData.CharRapunzel;
-                Message = "What a beautiful tree!";
-                break;
-            
-            case "8" :
-                CharacterId = UiCharacterData.CharRapunzel;
-                Message = "What a beautiful tree!";
-                break;
-            
-            case "9" :
-                CharacterId = UiCharacterData.CharRapunzel;
-                Message = "What a beautiful tree!";
-                break;
-            
+
             default:
-                CharacterId = UiCharacterData.CharRapunzel;
+                CharacterId = UiCharacterData.CharSleepingBeauty;
                 Message = "Cool quest completed message here!";
                 break;
         }

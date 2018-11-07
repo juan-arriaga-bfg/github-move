@@ -27,6 +27,11 @@ public class UIQuestStartWindowModel : IWWindowModel
              case "1" : CreateStartScenario1(); break;
              case "2" : CreateStartScenario2(); break;
              case "3" : CreateStartScenario3(); break;
+             // case "4" : CreateStartScenario4(); break;
+             // case "5" : CreateStartScenario5(); break;
+             // case "6" : CreateStartScenario6(); break;
+             // case "7" : CreateStartScenario7(); break;
+             // case "8" : CreateStartScenario8(); break;
              
              default : CreateAbstractStartScenario(); break;
         }

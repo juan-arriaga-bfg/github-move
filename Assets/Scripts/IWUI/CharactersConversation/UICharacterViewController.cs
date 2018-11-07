@@ -19,7 +19,7 @@ public class UICharacterViewController : IWBaseMonoBehaviour
     private CharacterEmotion currentEmotion;
     private Image currentCharImage;
 
-    public const float FADE_TIME = 0.4f;
+    public const float FADE_TIME = 0.3f;
 
     public string CharacterId { get; set; }
 
@@ -46,46 +46,52 @@ public class UICharacterViewController : IWBaseMonoBehaviour
         }
     }
 
-    public void SetEmotion(CharacterEmotion emotion)
+    public CharacterEmotion Emotion
     {
-        if (currentEmotion == emotion)
+        get { return currentEmotion; }
+        set
         {
-            return;
-        }
-
-        bool found = false;
-        foreach (var item in emotions)
-        {
-            if (item.Emotion == emotion)
-            {
-                item.Image.gameObject.SetActive(true);
-                currentEmotion = emotion;
-                currentCharImage = item.Image;
-                found = true;
-            }
-            else
-            {
-                item.Image.gameObject.SetActive(false); 
-            }
-        }
-
-        if (!found)
-        {
-            var item = emotions[0];
-            item.Image.gameObject.SetActive(true);
-            currentEmotion = CharacterEmotion.Normal;
-            currentCharImage = item.Image;
-            Debug.LogError($"[UICharacterViewController] => SetEmotion({emotion}: Not defined!");
-        }
+            Debug.Log($"[UICharacterViewController] => SetEmotion({value})");
         
-        SyncPivot();
+            if (currentEmotion == value)
+            {
+                return;
+            }
+
+            bool found = false;
+            foreach (var item in emotions)
+            {
+                if (item.Emotion == value)
+                {
+                    item.Image.gameObject.SetActive(true);
+                    currentEmotion = value;
+                    currentCharImage = item.Image;
+                    found = true;
+                }
+                else
+                {
+                    item.Image.gameObject.SetActive(false); 
+                }
+            }
+
+            if (!found)
+            {
+                var item = emotions[0];
+                item.Image.gameObject.SetActive(true);
+                currentEmotion = CharacterEmotion.Normal;
+                currentCharImage = item.Image;
+                Debug.LogError($"[UICharacterViewController] => SetEmotion({value}: Not defined!");
+            }
+        
+            SyncPivot();
+        }
     }
 
     public void OnEnable()
     {
         if (currentEmotion == CharacterEmotion.Unknown)
         {
-            SetEmotion(CharacterEmotion.Normal);
+            Emotion = CharacterEmotion.Normal;
             return;
         }
         
@@ -110,6 +116,8 @@ public class UICharacterViewController : IWBaseMonoBehaviour
 
     public void ToggleActive(bool active, CharacterEmotion emotion, bool animated, Action onComplete = null)
     {
+        Emotion = emotion;
+        
         if (this.active == active)
         {
             onComplete?.Invoke();
@@ -138,8 +146,6 @@ public class UICharacterViewController : IWBaseMonoBehaviour
             transform.localScale = scale;
             onComplete?.Invoke();
         }
-        
-        SetEmotion(CharacterEmotion.Normal);
     }
     
     public void ToForeground(bool animated, CharacterEmotion emotion, Action onComplete = null)

@@ -18,7 +18,7 @@ public class UIQuestStartWindowView : IWUIWindowView
     private UICharactersConversationViewController conversation;
 
     private bool isClickAllowed;
-    
+       
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
         base.InitView(model, controller);
@@ -33,7 +33,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         CleanUp();
         
         UIQuestStartWindowModel windowModel = Model as UIQuestStartWindowModel;
-        CreateConversation(windowModel);
+
     }
 
     private void CleanUp()
@@ -60,9 +60,20 @@ public class UIQuestStartWindowView : IWUIWindowView
 
     public override void AnimateShow()
     {
+        UIQuestStartWindowModel windowModel = Model as UIQuestStartWindowModel;
+        
         base.AnimateShow();
+        
+        rootCanvasGroup.alpha = 0;
 
-        rootCanvasGroup.DOFade(1f, 0.5f);
+        DOTween.Sequence()
+               .AppendInterval(1f)
+               .AppendCallback(() =>
+                {
+                    CreateConversation(windowModel);
+                    rootCanvasGroup.DOFade(1f, 0.5f);
+                })
+            ;
     }
 
     public override void AnimateClose()
