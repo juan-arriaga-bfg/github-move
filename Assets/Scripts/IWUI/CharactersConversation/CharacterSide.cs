@@ -1,6 +1,6 @@
 public enum CharacterSide
 {
-    Unknown,
-    Left,
-    Right
+    Unknown = 0,
+    Left    = 1,
+    Right   = 2 
 }

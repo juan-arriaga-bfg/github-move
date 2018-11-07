@@ -1,17 +1,28 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
 [ExecuteInEditMode]
-public class UICharacterViewController : IWBaseMonoBehaviour   
+public class UICharacterViewController : IWBaseMonoBehaviour
 {
-    [SerializeField] private Image characterImage;
+    [Serializable]
+    public class CharacterEmotionDef
+    {
+        public CharacterEmotion Emotion;
+        public Image Image;
+    }
+
+    [SerializeField] private List<CharacterEmotionDef> emotions;
+    
+    private CharacterEmotion currentEmotion;
+    private Image currentCharImage;
 
     public const float FADE_TIME = 0.4f;
-    
-    public string CharacterId;
-    
+
+    public string CharacterId { get; set; }
+
     private bool active = true;
 
     private CharacterSide side;
@@ -23,11 +34,11 @@ public class UICharacterViewController : IWBaseMonoBehaviour
         {
             if (value == CharacterSide.Right)
             {
-                var scale = characterImage.transform.localScale;
+                var scale = currentCharImage.transform.localScale;
                 if (scale.x > 0)
                 {
                     scale.x *= -1;
-                    characterImage.transform.localScale = scale;
+                    currentCharImage.transform.localScale = scale;
                 }
             }
 
@@ -35,23 +46,69 @@ public class UICharacterViewController : IWBaseMonoBehaviour
         }
     }
 
-    public void OnEnable()
+    public void SetEmotion(CharacterEmotion emotion)
     {
-        if (characterImage == null)
+        if (currentEmotion == emotion)
         {
             return;
         }
 
+        bool found = false;
+        foreach (var item in emotions)
+        {
+            if (item.Emotion == emotion)
+            {
+                item.Image.gameObject.SetActive(true);
+                currentEmotion = emotion;
+                currentCharImage = item.Image;
+                found = true;
+            }
+            else
+            {
+                item.Image.gameObject.SetActive(false); 
+            }
+        }
+
+        if (!found)
+        {
+            var item = emotions[0];
+            item.Image.gameObject.SetActive(true);
+            currentEmotion = CharacterEmotion.Normal;
+            currentCharImage = item.Image;
+            Debug.LogError($"[UICharacterViewController] => SetEmotion({emotion}: Not defined!");
+        }
+        
+        SyncPivot();
+    }
+
+    public void OnEnable()
+    {
+        if (currentEmotion == CharacterEmotion.Unknown)
+        {
+            SetEmotion(CharacterEmotion.Normal);
+            return;
+        }
+        
+        if (currentCharImage == null)
+        {
+            return;
+        }
+
+        SyncPivot();
+    }
+
+    private void SyncPivot()
+    {
         // Sync sprite and rect transform pivots
-        RectTransform rectTransform = characterImage.GetComponent<RectTransform>();
+        RectTransform rectTransform = currentCharImage.GetComponent<RectTransform>();
         Vector2 size = rectTransform.sizeDelta;
-        size *= characterImage.pixelsPerUnit;
-        Vector2 pixelPivot = characterImage.sprite.pivot;
+        size *= currentCharImage.pixelsPerUnit;
+        Vector2 pixelPivot = currentCharImage.sprite.pivot;
         Vector2 percentPivot = new Vector2(pixelPivot.x / size.x, pixelPivot.y / size.y);
         rectTransform.pivot = percentPivot;
     }
-    
-    public void ToggleActive(bool active, bool animated, Action onComplete = null)
+
+    public void ToggleActive(bool active, CharacterEmotion emotion, bool animated, Action onComplete = null)
     {
         if (this.active == active)
         {
@@ -65,7 +122,7 @@ public class UICharacterViewController : IWBaseMonoBehaviour
         Vector3 scale = active ? Vector3.one : Vector3.one * 0.9f;
         if (animated)
         {
-            characterImage.DOColor(color, FADE_TIME)
+            currentCharImage.DOColor(color, FADE_TIME)
                           .SetEase(Ease.OutSine)
                           .OnComplete(() =>
                            {
@@ -77,19 +134,21 @@ public class UICharacterViewController : IWBaseMonoBehaviour
         }
         else
         {
-            characterImage.color = color;
+            currentCharImage.color = color;
             transform.localScale = scale;
             onComplete?.Invoke();
         }
+        
+        SetEmotion(CharacterEmotion.Normal);
     }
     
-    public void ToForeground(bool animated, Action onComplete = null)
+    public void ToForeground(bool animated, CharacterEmotion emotion, Action onComplete = null)
     {
-        ToggleActive(true, animated, onComplete);
+        ToggleActive(true, emotion, animated, onComplete);
     }
 
-    public void ToBackground(bool animated, Action onComplete = null)
+    public void ToBackground(bool animated, CharacterEmotion emotion, Action onComplete = null)
     {
-        ToggleActive(false, animated, onComplete);
+        ToggleActive(false, emotion, animated, onComplete);
     }
 }

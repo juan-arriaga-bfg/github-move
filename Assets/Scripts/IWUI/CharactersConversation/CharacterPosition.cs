@@ -1,8 +1,8 @@
 public enum CharacterPosition
 {
-    Unknown,
-    LeftOuter,
-    LeftInner,
-    RightInner,
-    RightOuter
+    Unknown    = 0,
+    LeftOuter  = 1,
+    LeftInner  = 2,
+    RightInner = 3,
+    RightOuter = 4
 }

@@ -120,7 +120,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         characters.Add(characterId, character);
         characterPositions.Add(position, character);
         
-        character.ToggleActive(active, animated, onComplete);
+        character.ToggleActive(active, CharacterEmotion.Normal, animated, onComplete);
     }
 
     public void RemoveCharacter(int characterId)
@@ -162,17 +162,17 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         {
             if (character.CharacterId != excludedCharId)
             {
-                character.ToBackground(animated);
+                character.ToBackground(animated, CharacterEmotion.Normal);
             }
         }
     }
     
-    private void SendCharacterToForeground(string charId, bool animated, Action onComplete = null)
+    private void SendCharacterToForeground(string charId, CharacterEmotion emotion, bool animated, Action onComplete = null)
     {
         do
         {
             var character = characters[charId];       
-            character.ToForeground(animated, null);
+            character.ToForeground(animated, emotion, null);
             
             if (IsCharacterAtFront(character))
             {
@@ -289,7 +289,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
     {
         string charId = data.CharacterId;
         SendToBackgroundAllCharacters(true, charId);
-        SendCharacterToForeground(charId, true, () =>
+        SendCharacterToForeground(charId, data.Emotion, true, () =>
         {
             var pool = UIService.Get.PoolContainer;
             UICharacterBubbleView bubble = pool.Create<UICharacterBubbleView>(bubbleId);

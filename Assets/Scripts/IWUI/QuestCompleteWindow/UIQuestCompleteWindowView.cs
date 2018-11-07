@@ -56,7 +56,7 @@ public class UIQuestCompleteWindowView : IWUIWindowView
 
         characterGo = character.gameObject;
         
-        character.ToggleActive(true, true, null);
+        character.ToggleActive(true, CharacterEmotion.Normal, true, null);
     }
 
     public void InitBubble()
