@@ -39,7 +39,9 @@ public class FireflyLogicComponent : IECSComponent, IECSSystem
 	
 	public bool IsExecuteable()
 	{
-		if(amount > 0 || startTime.GetTime().TotalSeconds < delay) return false;
+		if(GameDataService.Current.LevelsManager.Level < GameDataService.Current.ConstantsManager.StartLevelFirefly
+		   || amount > 0 
+		   || startTime.GetTime().TotalSeconds < delay) return false;
 		
 		isClick = false;
 		OnMatch();
