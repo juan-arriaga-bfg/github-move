@@ -42,7 +42,7 @@ public class FieldControllerComponent : IECSComponent
                     Positions = piece.Value
                 });
             }
-
+            
             AddLastAction();
             
             return;
@@ -72,6 +72,7 @@ public class FieldControllerComponent : IECSComponent
         {
             Callback = controller =>
             {
+                context.TutorialLogic.Update();
                 controller.BoardLogic.PieceFlyer.Locker.Unlock(controller);
                 
                 var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
@@ -84,6 +85,7 @@ public class FieldControllerComponent : IECSComponent
                 }
                 
                 PathfindLockObserver.LoadPathfindLock();
+                
             }
         });
     }

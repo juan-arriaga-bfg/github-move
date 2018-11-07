@@ -33,7 +33,7 @@ public class FireflyLogicComponent : IECSComponent, IECSSystem
 		for (var i = 0; i < amount; i++)
 		{
 			var firefly = context.Context.RendererContext.CreateBoardElement<FireflyView>((int) ViewType.Firefly);
-			firefly.GetComponent<FireflyView>().Init(context.Context.RendererContext);
+			firefly.Init(context.Context.RendererContext);
 		}
 	}
 	

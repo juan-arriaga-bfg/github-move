@@ -4,7 +4,7 @@ using UnityEngine;
 public class BoardController : ECSEntity,
     IActionExecuteComponent, IBoardEventsComponent, IBoardLoggerComponent, IBoardLogicComponent, IBoardDefinitionComponent, IBoardStatesComponent, ISessionBoardStateComponent,
     IBoardSystemProcessor, IBoardRendererComponent, IBoardManipulatorComponent, IBoardRandomComponent, IWorkerCurrencyLogicComponent, IHintCooldownComponent,
-    IPartPiecesLogicComponent, IPathfinderComponent, IFreeChestLogicComponent
+    IPartPiecesLogicComponent, IPathfinderComponent, IFreeChestLogicComponent, ITutorialLogicComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -57,6 +57,9 @@ public class BoardController : ECSEntity,
     
     protected FreeChestLogicComponent freeChestLogic;
     public FreeChestLogicComponent FreeChestLogic => freeChestLogic ?? (freeChestLogic = GetComponent<FreeChestLogicComponent>(FreeChestLogicComponent.ComponentGuid));
+    
+    protected TutorialLogicComponent tutorialLogic;
+    public TutorialLogicComponent TutorialLogic => tutorialLogic ?? (tutorialLogic = GetComponent<TutorialLogicComponent>(TutorialLogicComponent.ComponentGuid));
     
     protected BoardRandomComponent random;
     public BoardRandomComponent Random => random ?? (random = GetComponent<BoardRandomComponent>(BoardRandomComponent.ComponentGuid));

@@ -158,4 +158,5 @@ public class R
      public const string UICharacterBubbleMessageView = "UICharacterBubbleMessageView";
      public const string TapToContinueTextView = "TapToContinueTextView";
      public const string UICharacterBubbleQuestCompletedView = "UICharacterBubbleQuestCompletedView";
+     public const string TutorialMergeFinger = "TutorialMergeFinger";
 }
