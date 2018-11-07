@@ -34,11 +34,14 @@ public class UICharacterViewController : IWBaseMonoBehaviour
         {
             if (value == CharacterSide.Right)
             {
-                var scale = currentCharImage.transform.localScale;
-                if (scale.x > 0)
+                foreach (var item in emotions)
                 {
-                    scale.x *= -1;
-                    currentCharImage.transform.localScale = scale;
+                    var scale = item.Image.transform.localScale;
+                    if (scale.x > 0)
+                    {
+                        scale.x *= -1;
+                        item.Image.transform.localScale = scale;
+                    }
                 }
             }
 
