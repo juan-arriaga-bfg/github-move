@@ -344,7 +344,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
 #if DEBUG
                 sw.Stop();
 #endif
-                ret.Add(starter.QuestToStartId);
+                ret.AddRange(starter.QuestToStartIds);
 #if DEBUG
                 sw.Start();
 #endif
