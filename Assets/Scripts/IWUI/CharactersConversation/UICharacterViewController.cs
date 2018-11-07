@@ -32,6 +32,7 @@ public class UICharacterViewController : IWBaseMonoBehaviour
 
         set
         {
+            // todo: refactor!
             if (value == CharacterSide.Right)
             {
                 foreach (var item in emotions)
@@ -43,6 +44,18 @@ public class UICharacterViewController : IWBaseMonoBehaviour
                         item.Image.transform.localScale = scale;
                     }
                 }
+            }
+            else if (value == CharacterSide.Left)
+            {
+                foreach (var item in emotions)
+                {
+                    var scale = item.Image.transform.localScale;
+                    if (scale.x < 0)
+                    {
+                        scale.x *= -1;
+                        item.Image.transform.localScale = scale;
+                    }
+                }  
             }
 
             side = value;

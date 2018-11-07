@@ -179,7 +179,7 @@ public class UIQuestStartWindowModel : IWWindowModel
 
         Scenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
-            "[New cool quest start dialog here!]",
+            "New cool quest start dialog here!",
             CharacterEmotion.Normal,
             Quests.Select(e => e.Id).ToList()
         ));
