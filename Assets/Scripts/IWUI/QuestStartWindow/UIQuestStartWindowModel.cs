@@ -24,11 +24,11 @@ public class UIQuestStartWindowModel : IWWindowModel
     {
         switch (starterId)
         {
-             case "1" : CreateScenario1(); break;
-             case "2" : CreateScenario2(); break;
-             case "3" : CreateScenario3(); break;
+             case "1" : CreateStartScenario1(); break;
+             case "2" : CreateStartScenario2(); break;
+             case "3" : CreateStartScenario3(); break;
              
-             default : CreateAbstractScenario(); break;
+             default : CreateAbstractStartScenario(); break;
         }
     }
 
@@ -154,7 +154,7 @@ public class UIQuestStartWindowModel : IWWindowModel
         return actBubble;
     }
  
-    private void CreateAbstractScenario()
+    private void CreateAbstractStartScenario()
     {
         Scenario = new ConversationScenarioEntity();
         
@@ -170,6 +170,8 @@ public class UIQuestStartWindowModel : IWWindowModel
             }
         };
 
+        Scenario.RegisterComponent(charsList);
+
         Scenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
             "[New cool quest start dialog here!]",
@@ -178,7 +180,7 @@ public class UIQuestStartWindowModel : IWWindowModel
         ));
     }
     
-    private void CreateScenario1()
+    private void CreateStartScenario1()
     {
         Scenario = new ConversationScenarioEntity();
         
@@ -193,6 +195,8 @@ public class UIQuestStartWindowModel : IWWindowModel
                 // {CharacterPosition.LeftInner,  UiCharacterData.CharPussInBoots},
             }
         };
+        
+        Scenario.RegisterComponent(charsList);
 
         Scenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
@@ -220,7 +224,7 @@ public class UIQuestStartWindowModel : IWWindowModel
         ));
     }
     
-    private void CreateScenario2()
+    private void CreateStartScenario2()
     {
         Scenario = new ConversationScenarioEntity();
         
@@ -235,6 +239,8 @@ public class UIQuestStartWindowModel : IWWindowModel
                 // {CharacterPosition.LeftInner,  UiCharacterData.CharPussInBoots},
             }
         };
+        
+        Scenario.RegisterComponent(charsList);
 
         Scenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
@@ -268,7 +274,7 @@ public class UIQuestStartWindowModel : IWWindowModel
         ));
     }
     
-    private void CreateScenario3()
+    private void CreateStartScenario3()
     {
         Scenario = new ConversationScenarioEntity();
         
@@ -285,6 +291,8 @@ public class UIQuestStartWindowModel : IWWindowModel
             }
         };
 
+        Scenario.RegisterComponent(charsList);
+        
         Scenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharGnomeWorker, 
             "Thanks a lot! You're our saviour! Do you know that A Gnome's greatest fear is fog? ",
