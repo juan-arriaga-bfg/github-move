@@ -67,7 +67,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         rootCanvasGroup.alpha = 0;
 
         DOTween.Sequence()
-               .AppendInterval(1f)
+               .AppendInterval(0)
                .AppendCallback(() =>
                 {
                     CreateConversation(windowModel);

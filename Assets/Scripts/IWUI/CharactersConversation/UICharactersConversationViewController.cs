@@ -14,6 +14,8 @@ public partial class UICharactersConversationViewController : IWUIWindowView
 
     private ConversationScenarioEntity scenario;
 
+    private bool isFirstBubbleShowed;
+    
     private Action onScenarioComplete;
     private Action<ConversationActionEntity> onActionStarted;
     private Action<ConversationActionEntity> onActionEnded;
@@ -28,6 +30,8 @@ public partial class UICharactersConversationViewController : IWUIWindowView
 
     private void CleanUp()
     {
+        isFirstBubbleShowed = false;
+        
         var pool = UIService.Get.PoolContainer;
         
         foreach (var character in characters.Values)
@@ -287,9 +291,11 @@ public partial class UICharactersConversationViewController : IWUIWindowView
 
     private void ReorderCharsAndShowBubble(string bubbleId, UICharacterBubbleDef data, Action onComplete)
     {
+        bool animated = isFirstBubbleShowed;
+        
         string charId = data.CharacterId;
-        SendToBackgroundAllCharacters(true, charId);
-        SendCharacterToForeground(charId, data.Emotion, true, () =>
+        SendToBackgroundAllCharacters(animated, charId);
+        SendCharacterToForeground(charId, data.Emotion, animated, () =>
         {
             var pool = UIService.Get.PoolContainer;
             UICharacterBubbleView bubble = pool.Create<UICharacterBubbleView>(bubbleId);
@@ -298,6 +304,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             bubbleView.transform.SetParent(GetAnchorForBubblePosition(data), false);
             bubbleView.Show(data, () =>
             {
+                isFirstBubbleShowed = true;
                 ToggleTapToContinue(true);
                 onComplete?.Invoke();
             });
