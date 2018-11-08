@@ -28,8 +28,7 @@ public class TaskKillFieldEntity : TaskEventCounterEntity
         
         PieceTypeDef pieceTypeDef = PieceType.GetDefById(piece.PieceType);
 
-        // Skip fake
-        if (pieceTypeDef.Filter.Has(PieceTypeFilter.Reproduction))
+        if (pieceTypeDef.Filter.Has(PieceTypeFilter.ProductionField))
         {
             CurrentValue += 1;
         }
