@@ -1,13 +1,7 @@
 ﻿public class TouchReactionConditionStorage : TouchReactionConditionComponent
 {
 	public override bool Check(BoardPosition position, Piece piece)
-	{
-		if (piece.Context?.Pathfinder.CanPathToOpenArea(piece) == false)
-		{
-			UIErrorWindowController.AddError("Path not found");
-			return false;
-		}
-		
+	{	
 		var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
 		
 		if (storage == null) return true;

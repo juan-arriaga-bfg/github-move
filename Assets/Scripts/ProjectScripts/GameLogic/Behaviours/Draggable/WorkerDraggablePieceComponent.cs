@@ -14,11 +14,6 @@
 
         if (target == null) return true;
         
-        if (!target.Context.Pathfinder.CanPathToOpenArea(target))
-        {
-            return false;
-        }
-        
         var life = target.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
 
         if (life != null)

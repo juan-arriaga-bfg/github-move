@@ -173,7 +173,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
     private bool CheckLock(Piece target)
     {
-        if (!target.Context.Pathfinder.CanPathToOpenArea(target))
+        if (!target.Context.PathfindLocker.HasPath(target))
         {
             UIErrorWindowController.AddError("Can't make this action!");
             return false;
