@@ -1,4 +1,4 @@
-[TaskHighlight(typeof(HighlightTaskAboutTree))]
+[TaskHighlight(typeof(HighlightTaskUsingObstaclePieceFilter))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskKillTreeEntity : TaskEventCounterEntity
 {

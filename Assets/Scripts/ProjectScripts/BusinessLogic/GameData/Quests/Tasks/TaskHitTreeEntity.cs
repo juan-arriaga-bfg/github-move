@@ -1,4 +1,4 @@
-[TaskHighlight(typeof(HighlightTaskAboutTree))]
+[TaskHighlight(typeof(HighlightTaskUsingObstaclePieceFilter))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskHitTreeEntity : TaskEventCounterEntity
 {
@@ -29,7 +29,6 @@ public class TaskHitTreeEntity : TaskEventCounterEntity
         
         PieceTypeDef pieceTypeDef = PieceType.GetDefById(piece.PieceType);
 
-        // Skip fake
         if (pieceTypeDef.Filter.Has(PieceTypeFilter.Tree))
         {
             CurrentValue += 1;

@@ -1,12 +1,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HighlightTaskAboutTree : TaskHighlightUsingArrow
-{   
+public class HighlightTaskUsingObstaclePieceFilter : TaskHighlightUsingArrow
+{
     protected override bool ShowArrow(TaskEntity task, float delay)
     {
+        PieceTypeFilter filter;
+
+        if (task is TaskKillTreeEntity || task is TaskHitTreeEntity)
+        {
+            filter = PieceTypeFilter.Tree;
+        }
+        else if (task is TaskKillFieldEntity)
+        {
+            filter = PieceTypeFilter.ProductionField;
+        }
+        else
+        {
+            Debug.LogError($"[HighlightTaskUsingPieceFilter] => Unsupported task type: {task.GetType()}");
+            return false;
+        }
+        
         var boardLogic = BoardService.Current.FirstBoard.BoardLogic;
-        var workPlacesList = boardLogic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Tree);
+        var workPlacesList = boardLogic.PositionsCache.GetPiecePositionsByFilter(filter);
         
         if (workPlacesList.Count == 0)
         {

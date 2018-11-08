@@ -1,3 +1,4 @@
+[TaskHighlight(typeof(HighlightTaskUsingObstaclePieceFilter))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskKillFieldEntity : TaskEventCounterEntity
 {
