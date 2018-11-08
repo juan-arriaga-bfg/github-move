@@ -1078,6 +1078,7 @@ GameObject:
   - component: {fileID: 224218512494807234}
   - component: {fileID: 114712789735479068}
   - component: {fileID: 114366899087641308}
+  - component: {fileID: 225082415230832884}
   m_Layer: 31
   m_Name: QuestButton
   m_TagString: Untagged
@@ -6375,6 +6376,7 @@ MonoBehaviour:
   itemUid: Quest
   shine: {fileID: 1664995581192254}
   checkmark: {fileID: 0}
+  rootCanvasGroup: {fileID: 225082415230832884}
 --- !u!114 &114718808981214302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8862,7 +8864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.00002160238}
   m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224039078224091110
@@ -10847,6 +10849,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 7, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225082415230832884
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1573962232676210}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!225 &225704323715649028
 CanvasGroup:
   m_ObjectHideFlags: 1

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using Quests;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 {
     [SerializeField] private GameObject shine;
     [SerializeField] private GameObject checkmark;
+    [SerializeField] private CanvasGroup rootCanvasGroup;
     
     public QuestEntity Quest { get; private set; }
     private bool isUp;
@@ -27,6 +29,11 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     
     public void Init(QuestEntity quest, bool interactive)
     {
+        if (rootCanvasGroup != null)
+        {
+            rootCanvasGroup.alpha = 1;
+        }
+
         this.interactive = interactive;
 
         if (checkmark != null)
@@ -71,6 +78,16 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         }
         
         UpdateView();
+        
+        if (Quest.IsCompleted())
+        {
+            interactive = false;
+
+            if (rootCanvasGroup != null)
+            {
+                rootCanvasGroup.DOFade(0, 1);
+            }
+        }
     }
 
     protected override void OnEnable()
