@@ -115,7 +115,7 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
             customer.Cooldown.Start();
         }
         
-        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.StorageDamage, order);
+        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.OrderCompleted, order);
     }
 
     public void UpdateOrders()
