@@ -74,8 +74,8 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         
         Completed.Add(key);
         FogPositions.Remove(key);
-        
-        
+
+        GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
     }
 
     public BoardPosition? GetFogPositionByUid(string uid)
@@ -94,7 +94,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     public bool IsFogCleared(string uid)
     {
         var pos = GetFogPositionByUid(uid);
-        return pos.HasValue && Completed.Contains(pos.Value);
+        return !pos.HasValue;
     }
 
     /// <summary>

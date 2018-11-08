@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 /// Check that fog with id is cleared by a user.
 /// </summary>
 [JsonObject(MemberSerialization.OptIn)]
-public sealed class QuestStartConditionClearFogComponent : QuestStartConditionComponent
+public sealed class QuestStartConditionFogClearedComponent : QuestStartConditionComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
