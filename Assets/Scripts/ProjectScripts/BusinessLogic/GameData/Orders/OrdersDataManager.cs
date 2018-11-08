@@ -114,6 +114,8 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
             customers.Remove(customer);
             customer.Cooldown.Start();
         }
+        
+        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.StorageDamage, order);
     }
 
     public void UpdateOrders()

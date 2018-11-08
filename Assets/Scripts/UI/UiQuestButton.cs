@@ -215,9 +215,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         var model = UIService.Get.GetCachedModel<UIQuestWindowModel>(UIWindowType.QuestWindow);
         
         model.Quest = Quest;
-        
-        Debug.Log("!!! CompleteQuest: ShowQuestWindow: " + Quest.Id);
-        
+
         UIService.Get.ShowWindow(UIWindowType.QuestWindow);
         
         var board = BoardService.Current.GetBoardById(0);

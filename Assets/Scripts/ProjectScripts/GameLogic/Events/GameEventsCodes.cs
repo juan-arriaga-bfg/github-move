@@ -13,4 +13,5 @@
     public const int ObstacleKilled = 1005;
     public const int MineUsed = 1006;
     public const int StorageDamage = 1007;
+    public const int OrderCompleted = 1008;
 }
