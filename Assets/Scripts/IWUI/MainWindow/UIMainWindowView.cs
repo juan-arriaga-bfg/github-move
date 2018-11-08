@@ -71,6 +71,11 @@ public class UIMainWindowView : IWUIWindowView
             button.Init(quest, true);
             
             questButtons.Add(button);
+
+            if (quest.IsCompleted())
+            {
+                button.gameObject.SetActive(false);
+            }
         }
         
         pattern.SetActive(false);
