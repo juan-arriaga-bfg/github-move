@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -55,8 +56,15 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
 
         isLevelUp = true;
         
-        UIService.Get.ShowWindow(UIWindowType.NextLevelWindow);
-        UIService.Get.OnCloseWindowEvent += OnCloseNextLevelWindow;
+        var action = new QueueActionComponent()
+                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = new HashSet<string> {UIWindowType.MainWindow}})
+                    .SetAction(() =>
+                     {
+                         UIService.Get.ShowWindow(UIWindowType.NextLevelWindow);
+                         UIService.Get.OnCloseWindowEvent += OnCloseNextLevelWindow;
+                     });
+
+        ProfileService.Current.QueueComponent.AddAction(action, false);
     }
 
     private void OnCloseNextLevelWindow(IWUIWindow window)

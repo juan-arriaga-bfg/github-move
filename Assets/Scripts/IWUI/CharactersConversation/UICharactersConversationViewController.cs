@@ -360,6 +360,13 @@ public partial class UICharactersConversationViewController : IWUIWindowView
 
     public void OnClick()
     {
+        var teletype = bubbleView as ITeleTypedText;
+        if (teletype != null && teletype.IsPlayingTeleTypeEffect())
+        {
+            teletype.StopTeleTypeEffect();
+            return;
+        }   
+        
         NextScenarioAction();
     }
 }

@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UICharacterBubbleMessageViewController : UICharacterBubbleView
+public class UICharacterBubbleMessageViewController : UICharacterBubbleView, ITeleTypedText
 {
     [SerializeField] private Transform back;
     [SerializeField] private Image headerBack;
@@ -70,7 +70,7 @@ public class UICharacterBubbleMessageViewController : UICharacterBubbleView
         }
 
         DOTween.Sequence()
-               .AppendInterval(1)
+               .AppendInterval(0.1f)
                .AppendCallback(() =>
                 {
                     onComplete?.Invoke();
