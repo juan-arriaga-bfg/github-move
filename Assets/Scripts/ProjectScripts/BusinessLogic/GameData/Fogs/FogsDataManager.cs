@@ -74,6 +74,8 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         
         Completed.Add(key);
         FogPositions.Remove(key);
+        
+        
     }
 
     public BoardPosition? GetFogPositionByUid(string uid)
