@@ -197,5 +197,33 @@
         "Value": "9"
       }
     ]
+  },
+  {
+    "Id": 15,
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "QuestToStartIds": [
+      "19"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
+        "Id": "QuestCompleted",
+        "Value": "8"
+      }
+    ]
+  },
+  {
+    "Id": 16,
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "QuestToStartIds": [
+      "19"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
+        "Id": "QuestCompleted",
+        "Value": "10"
+      }
+    ]
   }
 ]
