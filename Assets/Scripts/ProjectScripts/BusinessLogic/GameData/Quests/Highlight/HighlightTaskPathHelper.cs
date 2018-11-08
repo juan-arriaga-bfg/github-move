@@ -12,7 +12,7 @@ public static class HighlightTaskPathHelper
         foreach (var pos in positionsToCheck)
         {
             var piece = boardLogic.GetPieceAt(pos);
-            if (piece != null && board.Pathfinder.CanPathToCastle(piece))
+            if (piece != null && board.Pathfinder.CanPathToOpenArea(piece))
             {
                 ret.Add(pos);
             }

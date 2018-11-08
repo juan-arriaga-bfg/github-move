@@ -207,7 +207,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
     public bool CanBeCleared()
     {
-        var pathExists = thisContext.Context.Pathfinder.CanPathToCastle(thisContext);
+        var pathExists = thisContext.Context.Pathfinder.CanPathToOpenArea(thisContext);
         var resourcesEnought = storageItem.Amount >= level;
 
         return pathExists && resourcesEnought;

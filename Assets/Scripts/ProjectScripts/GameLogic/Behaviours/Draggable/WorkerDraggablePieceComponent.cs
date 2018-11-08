@@ -14,7 +14,7 @@
 
         if (target == null) return true;
         
-        if (!target.Context.Pathfinder.CanPathToCastle(target))
+        if (!target.Context.Pathfinder.CanPathToOpenArea(target))
         {
             return false;
         }

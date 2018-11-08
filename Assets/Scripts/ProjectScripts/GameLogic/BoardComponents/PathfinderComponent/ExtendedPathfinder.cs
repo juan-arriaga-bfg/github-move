@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-public static class CastlePathfinder
+public static class ExtendedPathfinder
 {
-      public static bool CanPathToCastle(this PathfinderComponent pathfinder, Piece piece)
+      public static bool CanPathToOpenArea(this PathfinderComponent pathfinder, Piece piece)
       {
-            return pathfinder.CanPathToCastle(piece, piece.CachedPosition);
+            return pathfinder.CanPathToOpenArea(piece, piece.CachedPosition);
       }
 
-      public static bool CanPathToCastle(this PathfinderComponent pathfinder, Piece piece, BoardPosition from)
+      public static bool CanPathToOpenArea(this PathfinderComponent pathfinder, Piece piece, BoardPosition from)
       {
             var board = piece.Context;
             

@@ -2,7 +2,7 @@
 {
 	public override bool Check(BoardPosition position, Piece piece)
 	{
-		if (piece.Context?.Pathfinder.CanPathToCastle(piece) == false)
+		if (piece.Context?.Pathfinder.CanPathToOpenArea(piece) == false)
 		{
 			UIErrorWindowController.AddError("Path not found");
 			return false;
