@@ -33,13 +33,15 @@ public class FireflyLogicComponent : IECSComponent, IECSSystem
 		for (var i = 0; i < amount; i++)
 		{
 			var firefly = context.Context.RendererContext.CreateBoardElement<FireflyView>((int) ViewType.Firefly);
-			firefly.GetComponent<FireflyView>().Init(context.Context.RendererContext);
+			firefly.Init(context.Context.RendererContext);
 		}
 	}
 	
 	public bool IsExecuteable()
 	{
-		if(amount > 0 || startTime.GetTime().TotalSeconds < delay) return false;
+		if(GameDataService.Current.LevelsManager.Level < GameDataService.Current.ConstantsManager.StartLevelFirefly
+		   || amount > 0 
+		   || startTime.GetTime().TotalSeconds < delay) return false;
 		
 		isClick = false;
 		OnMatch();

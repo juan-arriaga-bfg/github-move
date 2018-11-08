@@ -222,6 +222,8 @@ public class BoardManipulatorComponent : ECSEntity,
     
     public bool OnDown(Vector2 startPos, Vector2 pos)
     {
+        context.TutorialLogic.Pause(true);
+        
         if (cachedViewForDrag == null)
         {
             isDrag = null;
@@ -245,6 +247,8 @@ public class BoardManipulatorComponent : ECSEntity,
             {
                 cachedViewForDrag = null;
                 cameraManipulator.CameraMove.UnLock(this);
+                context.TutorialLogic.Pause(false);
+                context.TutorialLogic.Update();
                 return true;
             }
             
@@ -292,9 +296,21 @@ public class BoardManipulatorComponent : ECSEntity,
                 }
             }
             
+            context.ActionExecutor.AddAction(new CallbackAction
+            {
+                Delay = 0.5f,
+                Callback = controller =>
+                {
+                    context.TutorialLogic.Pause(false);
+                    context.TutorialLogic.Update();
+                }
+            });
+            
             return true;
         }
-
+        
+        context.TutorialLogic.Pause(false);
+        context.TutorialLogic.Update();
         return false;
     }
 

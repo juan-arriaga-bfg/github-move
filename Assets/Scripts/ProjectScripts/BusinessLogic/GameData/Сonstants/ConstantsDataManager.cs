@@ -32,6 +32,8 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     public int MaxAmountFirefly;
     
     public float SpeedFirefly;
+    
+    public int StartLevelFirefly;
 
     public override void OnRegisterEntity(ECSEntity entity)
     {

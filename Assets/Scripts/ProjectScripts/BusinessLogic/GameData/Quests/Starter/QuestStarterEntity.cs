@@ -84,8 +84,8 @@ public class QuestStarterEntity : ECSEntity, IECSSerializeable
             for (var i = 0; i < Conditions.Count; i++)
             {
                 var condition = Conditions[i];
-                var result    = condition.Check();
-                log.Append("\n" + $"Condition {i + 1}/{Conditions.Count}: id: {condition.Id}, Result: {result}");
+                bool result = condition.Check();
+                log.Append("\n" + $"Condition {i + 1}/{Conditions.Count}: {condition.GetType().ToString().Replace("QuestStartCondition", "").Replace("Component", "")} [id: {condition.Id}], Result: {result}");
 
                 if (!result)
                 {

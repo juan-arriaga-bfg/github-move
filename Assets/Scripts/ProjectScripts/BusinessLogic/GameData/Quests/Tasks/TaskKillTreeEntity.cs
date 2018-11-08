@@ -1,6 +1,6 @@
-[TaskHighlight(typeof(HighlightTaskAboutTree))]
+[TaskHighlight(typeof(HighlightTaskUsingObstaclePieceFilter))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
-public class TaskCutTreeEntity : TaskEventCounterEntity
+public class TaskKillTreeEntity : TaskEventCounterEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -29,7 +29,6 @@ public class TaskCutTreeEntity : TaskEventCounterEntity
         
         PieceTypeDef pieceTypeDef = PieceType.GetDefById(piece.PieceType);
 
-        // Skip fake
         if (pieceTypeDef.Filter.Has(PieceTypeFilter.Tree))
         {
             CurrentValue += 1;

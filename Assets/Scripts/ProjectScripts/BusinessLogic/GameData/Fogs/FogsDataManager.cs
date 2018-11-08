@@ -74,6 +74,8 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         
         Completed.Add(key);
         FogPositions.Remove(key);
+
+        GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
     }
 
     public BoardPosition? GetFogPositionByUid(string uid)
@@ -87,6 +89,12 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         }
 
         return null;
+    }
+
+    public bool IsFogCleared(string uid)
+    {
+        var pos = GetFogPositionByUid(uid);
+        return !pos.HasValue;
     }
 
     /// <summary>
@@ -134,5 +142,65 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         string ret = defs[index].Uid;
 
         return ret;
+    }
+
+    public List<GridMeshArea> GetFoggedAreas()
+    {
+        List<GridMeshArea> ret = new List<GridMeshArea>();
+
+        foreach (var fogDef in FogPositions.Values)
+        {
+            var positions = fogDef.Positions;
+
+            var area = GetFogAreaForPositions(positions, false);
+
+            ret.Add(area);
+        }
+        
+        // Starting field
+        List<BoardPosition> startPositions = new List<BoardPosition>();
+        for (int x = 20; x <= 25; x++)
+        {
+            for (int y = 8; y <= 12; y++)
+            {
+                startPositions.Add(new BoardPosition(x, y));
+            }
+        }
+
+        ret.Add(GetFogAreaForPositions(startPositions, true));
+        
+        return ret;
+    }
+
+    /// <summary>
+    /// reate GridMeshArea using any list of BoardPosition, even when no real fog there
+    /// </summary>
+    private static GridMeshArea GetFogAreaForPositions(List<BoardPosition> positions, bool exclude)
+    {
+        BoardPosition topLeft;
+        BoardPosition topRight;
+        BoardPosition bottomRight;
+        BoardPosition bottomLeft;
+        BoardPosition.GetAABB(positions, out topLeft, out topRight, out bottomRight, out bottomLeft);
+
+        int areaW = topRight.X - topLeft.X + 1;
+        int areaH = topLeft.Y - bottomLeft.Y + 1;
+
+        GridMeshArea area = new GridMeshArea
+        {
+            X = bottomLeft.X,
+            Y = bottomLeft.Y,
+            Matrix = new int[areaW, areaH],
+            Exclude = exclude
+        };
+
+        foreach (var position in positions)
+        {
+            int x = position.X - area.X;
+            int y = position.Y - area.Y;
+            area.Matrix[x, y] = 1;
+        }
+
+        return area;
     }
 }

@@ -1,4 +1,6 @@
-﻿public class ObstacleLifeComponent : StorageLifeComponent
+﻿using System;
+
+public class ObstacleLifeComponent : StorageLifeComponent
 {
     public override CurrencyPair Energy => GameDataService.Current.ObstaclesManager.GetPriceByStep(thisContext.PieceType, current);
 
@@ -17,11 +19,11 @@
         storage.Capacity = storage.Amount = 1;
     }
 
-    protected override void InitInSaveStorage()
+    protected override Action InitInSaveStorage()
     {
         storage.Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current - 1);
         
-        base.InitInSaveStorage();
+        return base.InitInSaveStorage();
     }
 
     protected override void Success()

@@ -283,6 +283,27 @@ public struct BoardPosition : IEquatable<BoardPosition>
         return new BoardPosition(Mathf.RoundToInt(center.x), Mathf.RoundToInt(center.y), Mathf.RoundToInt(center.z));
     }
 
+    public static void GetAABB(List<BoardPosition> positions, out BoardPosition topLeft, out BoardPosition topRight, out BoardPosition bottomRight, out BoardPosition bottomLeft)
+    {
+        int minX = int.MaxValue;
+        int maxX = int.MinValue;        
+        int minY = int.MaxValue;
+        int maxY = int.MinValue;
+        
+        foreach (var pos in positions)
+        {
+            if (minX > pos.X) {minX = pos.X;}
+            if (maxX < pos.X) {maxX = pos.X;}
+            if (minY > pos.Y) {minY = pos.Y;}
+            if (maxY < pos.Y) {maxY = pos.Y;}
+        }
+        
+        topLeft     = new BoardPosition(minX, maxY);
+        topRight    = new BoardPosition(maxX, maxY);
+        bottomRight = new BoardPosition(maxX, minY);
+        bottomLeft  = new BoardPosition(minX, minY);
+    }
+
     public bool Equals(BoardPosition other)
     {
         return (this.X.Equals(other.X) && this.Y.Equals(other.Y) && this.Z.Equals(other.Z));

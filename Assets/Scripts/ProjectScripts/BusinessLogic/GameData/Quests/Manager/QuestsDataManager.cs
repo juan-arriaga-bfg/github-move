@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters;
+using DG.Tweening;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
@@ -232,7 +234,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
     public void ConnectToBoard()
     {          
         // Run new quests if conditions changed 
-        CheckConditions();
+        StartNewQuestsIfAny();
 
         if (ActiveQuests != null)
         {
@@ -261,51 +263,98 @@ public class QuestsDataManager : IECSComponent, IDataManager
     }
     
 #endregion
+
+    public bool StartNewQuestsIfAny()
+    {
+        const string ACTION_ID = "StartNewQuestsIfAny";
+        
+        Debug.Log($"[QuestsDataManager] => StartNewQuestsIfAny Schedule");
+        
+        var action = new QueueActionComponent {Id = ACTION_ID}
+                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = new HashSet<string> {UIWindowType.MainWindow}})
+                    .SetAction(() =>
+                     {
+                         string starterId = null;
+                         var questsToStart = CheckConditions(out starterId);
+                         if (questsToStart.Count == 0)
+                         {
+                             Debug.Log($"[QuestsDataManager] => CheckConditions == 0, return");
+                             return;
+                         }
+
+                         Debug.Log($"[QuestsDataManager] => StartNewQuestsIfAny before dlg");
+                         
+                         var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
+                         model.SetQuests(questsToStart);
+                         model.BuildConversation(starterId);
+                         // model.BuildTestConversation();
+                         //model.BuildQuestCompletedConversation();
+        
+                         UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
+                     });
+
+        ProfileService.Current.QueueComponent.AddAction(action, true);
+
+        return true;
+    }
+
+    public void StartQuests(List<string> questIds)
+    {
+        var dataManager = GameDataService.Current.QuestsManager;
+        
+        foreach (var id in questIds)
+        {
+            QuestEntity quest = GetActiveQuestById(id);
+            if (quest != null)
+            {
+                // Quest already started
+                continue;
+            }
+            
+            quest = dataManager.StartQuestById(id, null);
+            if (ConnectedToBoard)
+            {
+                quest.ConnectToBoard();
+            }
+        }
+    }
     
     /// <summary>
     /// Call this to foreach through Starters and Start new quests if Conditions are met.
     /// Highly expensive! 
     /// </summary>
-    public void CheckConditions()
+    private List<string> CheckConditions(out string starterId)
     {
+        starterId = null;
+        
         if (questStarters == null)
         {
             Debug.LogError($"[QuestsDataManager] => CheckConditions() is called when questStarters list is empty");
-            return;
+            return null;
         }
+
+        List<string> ret = new List<string>();
         
 #if DEBUG
         var sw = new System.Diagnostics.Stopwatch();
         sw.Start();
 #endif        
-        var dataManager = GameDataService.Current.QuestsManager;
-        
+
         for (var i = 0; i < questStarters.Count; i++)
         {
             var starter = questStarters[i];
             if (starter.Check())
             {
-#if DEBUG
-                sw.Stop();
-#endif
-                foreach (var questToStartId in starter.QuestToStartIds)
-                {
-                    var quest = dataManager.StartQuestById(questToStartId, null);
-                    if (ConnectedToBoard)
-                    {
-                        quest.ConnectToBoard();
-                    } 
-                }
-
-#if DEBUG
-                sw.Start();
-#endif
+                starterId = starter.Id;
+                ret.AddRange(starter.QuestToStartIds);
             }
         }
+        
 #if DEBUG
         sw.Stop();
         Debug.Log($"[QuestsDataManager] => CheckConditions() done in {sw.ElapsedMilliseconds}ms");
 #endif
+        return ret;
     }
 
     public QuestEntity GetActiveQuestById(string id)
@@ -324,7 +373,15 @@ public class QuestsDataManager : IECSComponent, IDataManager
 
     private QuestEntity StartQuestById(string id, JToken saveData)
     {
-        QuestEntity quest = InstantiateQuest(id);
+        QuestEntity quest = GetActiveQuestById(id);
+        
+        if (quest != null)
+        {
+            Debug.LogError($"[QuestsDataManager] => StartQuestById({id}): quest already started");
+            return null;
+        }
+        
+        quest = InstantiateQuest(id);
         ActiveQuests.Add(quest);
 
         quest.Start(saveData);
@@ -340,6 +397,8 @@ public class QuestsDataManager : IECSComponent, IDataManager
     /// <param name="id"></param>
     public void CompleteQuest(string id)
     {
+        Debug.Log("!!! CompleteQuest: " + id);
+        
         for (var i = 0; i < ActiveQuests.Count; i++)
         {
             var quest = ActiveQuests[i];
@@ -351,7 +410,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
                 
                 OnActiveQuestsListChanged?.Invoke();
                 
-                CheckConditions();
+                StartNewQuestsIfAny();
                 return;
             }
         }

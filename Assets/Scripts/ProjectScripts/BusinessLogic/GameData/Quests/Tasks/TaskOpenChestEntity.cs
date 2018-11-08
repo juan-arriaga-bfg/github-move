@@ -37,7 +37,7 @@ public class TaskOpenChestEntity : TaskCounterAboutPiece, IBoardEventListener, I
             return;
         }
 
-        if (PieceId == PieceType.None.Id || piece.PieceType == PieceId)
+        if (PieceId <= 0 || piece.PieceType == PieceId)
         {
             CurrentValue += 1;
         }

@@ -156,4 +156,9 @@ public class R
      public const string NPC_9Piece = "NPC_9Piece";
      public const string pieces_grayscale = "pieces.grayscale";
      public const string LockedEmpty = "LockedEmpty";
+     public const string UICharacterConversationView = "UICharacterConversationView";
+     public const string UICharacterBubbleMessageView = "UICharacterBubbleMessageView";
+     public const string TapToContinueTextView = "TapToContinueTextView";
+     public const string UICharacterBubbleQuestCompletedView = "UICharacterBubbleQuestCompletedView";
+     public const string TutorialMergeFinger = "TutorialMergeFinger";
 }

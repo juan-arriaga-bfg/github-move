@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerComponent, ILockerComponent
 {
@@ -46,9 +47,11 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerCo
     {
     }
 
-    protected virtual void InitInSaveStorage()
+    protected virtual Action InitInSaveStorage()
     {
-        storage.InitInSave(thisContext.CachedPosition);
+        Action updateView;
+        storage.InitInSave(thisContext.CachedPosition, out updateView);
+        return updateView;
     }
 
     protected virtual LifeSaveItem InitInSave(BoardPosition position)
@@ -64,10 +67,15 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerCo
         
         thisContext.Context.WorkerLogic.Init(thisContext.CachedPosition, storage.Timer);
         
-        OnTimerStart();
-        InitInSaveStorage();
+        var updateView = InitInSaveStorage();
+
+        if (storage.IsFilled)
+        {
+            OnTimerStart();
+            OnTimerComplete();
+        }
         
-        if (storage.IsFilled) OnTimerComplete();
+        updateView?.Invoke();
         
         return item;
     }

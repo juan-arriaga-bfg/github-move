@@ -18,4 +18,5 @@
     Firefly = -1014,
     DefaultWorker = -1015,
     ExtraWorker = -1016,
+    TutorialMergeFinger = -1017,
 }

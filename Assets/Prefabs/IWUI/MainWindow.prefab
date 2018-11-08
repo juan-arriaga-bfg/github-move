@@ -1078,13 +1078,14 @@ GameObject:
   - component: {fileID: 224218512494807234}
   - component: {fileID: 114712789735479068}
   - component: {fileID: 114366899087641308}
+  - component: {fileID: 225082415230832884}
   m_Layer: 31
   m_Name: QuestButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1576418285182002
 GameObject:
   m_ObjectHideFlags: 1
@@ -6374,6 +6375,8 @@ MonoBehaviour:
   icon: {fileID: 114248192454126996}
   itemUid: Quest
   shine: {fileID: 1664995581192254}
+  checkmark: {fileID: 0}
+  rootCanvasGroup: {fileID: 225082415230832884}
 --- !u!114 &114718808981214302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8861,7 +8864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.00002160238}
   m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224039078224091110
@@ -9283,10 +9286,10 @@ RectTransform:
   m_Father: {fileID: 224035866756411724}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 60, y: -200}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224219903985999492
 RectTransform:
@@ -10128,7 +10131,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 15}
-  m_SizeDelta: {x: 0, y: 54}
+  m_SizeDelta: {x: 94, y: 54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224705108568670506
 RectTransform:
@@ -10605,10 +10608,10 @@ RectTransform:
   m_Father: {fileID: 224691490699155678}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 47, y: -23.82}
+  m_SizeDelta: {x: 49.55, y: 39.64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224896916406466998
 RectTransform:
@@ -10846,6 +10849,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 7, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225082415230832884
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1573962232676210}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!225 &225704323715649028
 CanvasGroup:
   m_ObjectHideFlags: 1

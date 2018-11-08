@@ -678,17 +678,17 @@
       "PR_C5": "dc7c317b57aa22c75bb127b9dc3cd658",
       "Soft5": "ac4ad4ac26983cf8be8e8033a6795f48",
       "PR_E2": "e16f4024df94233b1a2179539877867b",
-      "OB3_A": "2c9c833273c478015601a82131909919",
+      "OB3_A": "4603cbb1e9cbecba9beb1b3cdc809467",
       "PR_A5": "214c85580a851b9d4959803407a6f135",
       "Soft4": "09ad56847f148e3131363393f140fa77",
-      "OB9_A": "993a70fcf6c778c474071146cb955d62",
-      "OB8_A": "993a70fcf6c778c474071146cb955d62",
-      "OB4_A": "993a70fcf6c778c474071146cb955d62",
-      "OB6_A": "993a70fcf6c778c474071146cb955d62",
-      "OB5_A": "993a70fcf6c778c474071146cb955d62",
-      "OB7_A": "993a70fcf6c778c474071146cb955d62",
-      "OB1_A": "1f343ba2f0e4431353f8955b60d2dd8e",
-      "OB2_A": "0a9ea628af98cf3ced9a577de4ab1e02",
+      "OB9_A": "be4df2c91c4ea8e5086b95e0d077f88a",
+      "OB8_A": "beec9879ac82086718006b7cc13ef723",
+      "OB4_A": "984ced0610c60162eb71d46dada83eb1",
+      "OB6_A": "a9e91e5ad9c85d6330093081606347f0",
+      "OB5_A": "c87e39aca75b37db3d669453995c8f28",
+      "OB7_A": "25da12d7560bace294d1caf177d764d4",
+      "OB1_A": "558643a086ec0cba5dd3a2d1d0d7f3bb",
+      "OB2_A": "64a09003428ffb619025aaa12da4ab10",
       "PR_D5": "4cdc67eaed5f072f49f52a12bbfe89d1",
       "PR_E1": "ca45a437b66f864a346f9b3d8414881e",
       "PR_C2": "542248af1736a983a576e435ef8050d6",
@@ -711,7 +711,8 @@
       "Hard4": "39794884d3bf5c18c19772b56e859078",
       "Hard3": "39794884d3bf5c18c19772b56e859078",
       "Boost_CR1": "3f8738405a35a7ad3019add26b00a7f8",
-      "Boost_WR": "740a773314063439faf5d21f394d9087"
+      "Boost_WR": "740a773314063439faf5d21f394d9087",
+      "OB_grass": "1d943cc03b584db68cf756e2305bb79b"
     },
     "IsAllowAlphaSplitting": false,
     "SpriteSheetName": "gamefield",
@@ -734,7 +735,12 @@
       "Stone_UI": "d641a615e5bb4ac9efc5e38ce8fbdc92",
       "Wood_UI": "ac9379f5cf5e5d885cbfce44484e5c3e",
       "collection_UI": "8531542a155335bcb2fe9ca940aa46ac",
-      "collect_pieces": "3395fe26c6d15bf06af7a3e1dbada3c8"
+      "collect_pieces": "3395fe26c6d15bf06af7a3e1dbada3c8",
+      "tutorFinger": "2584acb47aba414c457e949d08703194",
+      "tutorShineFinger": "76de68fdf70d1ef2de74301bb67cf442",
+      "PR_C3_tutor": "dcf65314c286b46308d3141bbf47f83f",
+      "PR_C2_tutor": "36971c1627290e120aca101e7efda57f",
+      "PR_C1_tutor": "70878b93e015c7671bd48ab66f5440f1"
     },
     "IsAllowAlphaSplitting": false,
     "SpriteSheetName": "tutorial",
@@ -885,6 +891,21 @@
     "PathToSpriteSheetSettings": "Assets/Content/SpriteSheetSettings",
     "PathesToSource": [
       "Assets/Content/SourceContent/Textures/Pieces2"
+    ],
+    "PathToProcessedPack": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Hashes": {
+      "LINE": "86a7ae6f9cb4d3cf60088677d483723c",
+      "CORNER_0_1": "5ef017b0d27ce78acc41e1e0da304c7f",
+      "CORNER_0_1_2": "83470df1144bdea7c759081bb9c38dca",
+      "CORNER_0_1_2_3": "c0fffc3be62f669d23c7f85a4d383fd4"
+    },
+    "IsAllowAlphaSplitting": false,
+    "SpriteSheetName": "meshTest",
+    "PathToSpriteSheetSettings": "Assets/Content/SpriteSheetSettings",
+    "PathesToSource": [
+      "Assets/Content/SourceContent/MeshTest"
     ],
     "PathToProcessedPack": "Assets/Content/ProcessedContent"
   }

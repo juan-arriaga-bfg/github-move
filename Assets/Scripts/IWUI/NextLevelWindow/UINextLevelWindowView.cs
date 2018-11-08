@@ -1,8 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class UINextLevelWindowView : UIGenericPopupWindowView
+public class UINextLevelWindowView : UIGenericWindowView
 {
+    [SerializeField] private NSText title;
+    [SerializeField] private NSText message;
     [SerializeField] private NSText rewards;
     [SerializeField] private NSText tapLabel;
     
@@ -12,11 +14,9 @@ public class UINextLevelWindowView : UIGenericPopupWindowView
         
         UINextLevelWindowModel windowModel = Model as UINextLevelWindowModel;
         
-        SetTitle(windowModel.Title);
-        SetMessage(windowModel.Mesage);
-
+        title.Text = windowModel.Title;
+        message.Text = windowModel.Mesage;
         rewards.Text = windowModel.Rewards;
-
         tapLabel.Text = windowModel.TapText;
     }
 
@@ -41,7 +41,7 @@ public class UINextLevelWindowView : UIGenericPopupWindowView
         
         if (diff > 0) CurrencyHellper.Purchase(Currency.Energy.Name, diff);
             
-        GameDataService.Current.QuestsManager.CheckConditions();
+        GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
         GameDataService.Current.LevelsManager.UpdateSequence();
         
         base.OnViewCloseCompleted();

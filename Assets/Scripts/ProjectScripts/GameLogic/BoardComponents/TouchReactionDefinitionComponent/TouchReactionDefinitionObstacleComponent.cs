@@ -1,17 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class TouchReactionDefinitionObstacleComponent : TouchReactionDefinitionSpawnInStorage
 {
     public override bool Make(BoardPosition position, Piece piece)
     {
-        var storageLife = piece.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
+        var life = piece.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
         var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
-
-        if (storageLife.IsDead == false) return base.Make(position, piece);
         
         var action = storage.SpawnAction as EjectionPieceAction;
-
+        var amount = action?.Pieces.Sum(pair => pair.Value) ?? 0;
+        
+        if (action != null && !piece.Context.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, amount))
+        {
+            UIErrorWindowController.AddError("Free space not found");
+            return false;
+        }
+        
+        if (life.IsDead == false) return base.Make(position, piece);
+        
         if (action != null)
         {
             var onComplete = action.OnComplete;

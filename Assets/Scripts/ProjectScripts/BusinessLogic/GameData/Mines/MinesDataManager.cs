@@ -47,6 +47,9 @@ public class MinesDataManager : IECSComponent, IDataManager, IDataLoader<List<Mi
 				for (var i = data.Count - 1; i >= 0; i--)
 				{
 					var def = data[i];
+					var pos = new BoardPosition();
+					
+					if(pos.Equals(def.Position)) continue;
 					
 					if (Removed.FindIndex(id => id == def.Id) != -1)
 					{

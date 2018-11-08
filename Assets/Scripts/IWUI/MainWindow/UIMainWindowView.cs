@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,7 +8,7 @@ public class UIMainWindowView : IWUIWindowView
     [SerializeField] private GameObject pattern;
     [SerializeField] private CodexButton codexButton;
     
-    private List<UiQuestButton> quests = new List<UiQuestButton>();
+    private List<UiQuestButton> questButtons = new List<UiQuestButton>();
 
     public override void OnViewShow()
     {
@@ -30,42 +31,55 @@ public class UIMainWindowView : IWUIWindowView
 
     public void OnActiveQuestsListChanged()
     {
-        var active = GameDataService.Current.QuestsManager.ActiveQuests;
+        var activeQuests = GameDataService.Current.QuestsManager.ActiveQuests;
         
-        CheckQuestButtons(active);
-        
-        for (var i = 0; i < active.Count; i++)
-        {
-            quests[i].Init(active[i]);
-        }
-        
+        CheckQuestButtons(activeQuests);
+
         InitWindowViewControllers();
     }
 
     private void CheckQuestButtons(List<QuestEntity> active)
     {
+        for (int i = questButtons.Count - 1; i >= 0; i--)
+        {
+            var item = questButtons[i];
+            if (active.Any(e => e.Id == item.Quest.Id))
+            {
+                continue;
+            }
+            
+            questButtons.RemoveAt(i);
+            Destroy(item.gameObject);
+        }
+
+        if (questButtons.Count == active.Count)
+        {
+            return;
+        }
+        
         pattern.SetActive(true);
 
-        if (quests.Count < active.Count)
+        foreach (var quest in active)
         {
-            for (var i = quests.Count; i < active.Count; i++)
+            if (questButtons.Any(e => e.Quest.Id == quest.Id))
             {
-                var item = Instantiate(pattern, pattern.transform.parent);
-                quests.Add(item.GetComponent<UiQuestButton>());
+                continue;
+            }
+            
+            var item = Instantiate(pattern, pattern.transform.parent);
+            var button = item.GetComponent<UiQuestButton>();
+            button.Init(quest, true);
+            
+            questButtons.Add(button);
+
+            if (quest.IsCompleted())
+            {
+                button.gameObject.SetActive(false);
             }
         }
         
         pattern.SetActive(false);
 
-        if (quests.Count <= active.Count) return;
-        
-        while (quests.Count != active.Count)
-        {
-            var item = quests[0];
-                
-            quests.RemoveAt(0);
-            Destroy(item.gameObject);
-        }
     }
     
     private void UpdateCodexButton()

@@ -25,6 +25,7 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.Firefly, R.Firefly);
         dict.Add((int)ViewType.DefaultWorker, R.DefaultWorker);
         dict.Add((int)ViewType.ExtraWorker, R.ExtraWorker);
+        dict.Add((int)ViewType.TutorialMergeFinger, R.TutorialMergeFinger);
         
 #endregion
         

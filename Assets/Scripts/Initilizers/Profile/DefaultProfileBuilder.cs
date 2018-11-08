@@ -20,7 +20,9 @@
         profile.RegisterComponent(new CodexSaveComponent());
         profile.RegisterComponent(new OrdersSaveComponent());
         profile.RegisterComponent(new SequenceSaveComponent());
+        profile.RegisterComponent(new TutorialSaveComponent());
 //        profile.RegisterComponent(new CharacterSaveComponent());
+        profile.RegisterComponent(new QueueComponent());// todo: ensure that it is a good place to store QueueComponent
     }
     
     public void SetDefaultSettings(UserProfile profile)
