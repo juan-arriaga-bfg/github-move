@@ -89,6 +89,12 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         return null;
     }
 
+    public bool IsFogCleared(string uid)
+    {
+        var pos = GetFogPositionByUid(uid);
+        return pos.HasValue && Completed.Contains(pos.Value);
+    }
+
     /// <summary>
     /// If there are more than one fog with level x, random one will be selected 
     /// </summary>
@@ -164,6 +170,9 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         return ret;
     }
 
+    /// <summary>
+    /// reate GridMeshArea using any list of BoardPosition, even when no real fog there
+    /// </summary>
     private static GridMeshArea GetFogAreaForPositions(List<BoardPosition> positions, bool exclude)
     {
         BoardPosition topLeft;
