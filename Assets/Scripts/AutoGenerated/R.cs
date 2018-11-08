@@ -159,4 +159,6 @@ public class R
      public const string TapToContinueTextView = "TapToContinueTextView";
      public const string UICharacterBubbleQuestCompletedView = "UICharacterBubbleQuestCompletedView";
      public const string TutorialMergeFinger = "TutorialMergeFinger";
+     public const string OB1_TTPiece = "OB1_TTPiece";
+     public const string OB2_TTPiece = "OB2_TTPiece";
 }

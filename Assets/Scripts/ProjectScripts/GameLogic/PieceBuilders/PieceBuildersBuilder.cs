@@ -58,6 +58,7 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddObstaclePiece(Dictionary<int, IPieceBuilder> dict)
     {
+        dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OB1_TT.Id, PieceType.OB2_TT.Id, dict);
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OB1_A.Id, PieceType.OB9_A.Id, dict);
         dict = AddSimplePiece<MovedObstaclePieceBuilder>(PieceType.OB_PR_A.Id, PieceType.OB_PR_E.Id, dict);
         

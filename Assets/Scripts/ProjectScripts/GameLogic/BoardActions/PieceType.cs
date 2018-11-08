@@ -168,6 +168,9 @@ public static partial class PieceType
     
     public static readonly PieceTypeDef Fog = new PieceTypeDef{Id = 20000, Abbreviations = new List<string>{ "Fog" }, Filter = PieceTypeFilter.Multicellular};
     
+    public static readonly PieceTypeDef OB1_TT = new PieceTypeDef{Id = 20001, Abbreviations = new List<string>{ "OB1_TT" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef OB2_TT = new PieceTypeDef{Id = 20002, Abbreviations = new List<string>{ "OB2_TT" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace | PieceTypeFilter.Tree};
+    
     public static readonly PieceTypeDef OB1_A = new PieceTypeDef{Id = 20100, Abbreviations = new List<string>{ "OB1_A" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace | PieceTypeFilter.Tree};
     public static readonly PieceTypeDef OB2_A = new PieceTypeDef{Id = 20101, Abbreviations = new List<string>{ "OB2_A" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace | PieceTypeFilter.Tree};
     public static readonly PieceTypeDef OB3_A = new PieceTypeDef{Id = 20102, Abbreviations = new List<string>{ "OB3_A" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.WorkPlace | PieceTypeFilter.Tree};

@@ -6,14 +6,14 @@
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Message": "Create Piece"
+        "Message": "Create a Piece"
       }
     }
   },
   {
     "$type": "TaskClearFogEntity, Assembly-CSharp",
     "Id": "2",
-    "TargetValue": 1,
+    "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "Fog1",
@@ -22,7 +22,7 @@
     }
   },
   {
-    "$type": "TaskKillObstacleEntity, Assembly-CSharp",
+    "$type": "TaskKillTreeEntity, Assembly-CSharp",
     "Id": "3",
     "TargetValue": 4,
     "ComponentsCache": {
@@ -39,18 +39,7 @@
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Message": "Create Piece"
-      }
-    }
-  },
-  {
-    "$type": "TaskClearFogEntity, Assembly-CSharp",
-    "Id": "5",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Ico": "Fog1",
-        "Message": "Clear a fog"
+        "Message": "Create a Piece"
       }
     }
   },
@@ -61,7 +50,7 @@
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Message": "Create Piece"
+        "Message": "Clear a fog"
       }
     }
   },
@@ -72,7 +61,7 @@
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "Fog1",
-        "Message": "Clear a fog"
+        "Message": "Create a Piece"
       }
     }
   },
@@ -83,7 +72,7 @@
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Message": "Create Piece"
+        "Message": "Clear a fog"
       }
     }
   },
@@ -94,7 +83,7 @@
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Message": "Create Piece"
+        "Message": "Create a Piece"
       }
     }
   },
@@ -105,7 +94,7 @@
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Message": "Create Piece"
+        "Message": "Create a Piece"
       }
     }
   },
@@ -117,7 +106,7 @@
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "CH2_A",
-        "Message": "Open a chest"
+        "Message": "Create a Piece"
       }
     }
   },
@@ -127,7 +116,8 @@
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "Boost_WR"
+        "Ico": "Boost_WR",
+        "Message": "Open a chest"
       }
     }
   },
@@ -137,7 +127,8 @@
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_B"
+        "Ico": "MN_B",
+        "Message": "Use the Mine"
       }
     }
   },
@@ -145,7 +136,12 @@
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "14",
     "PieceUid": "A6",
-    "TargetValue": 1
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Message": "Create a Piece"
+      }
+    }
   },
   {
     "$type": "TaskClearFogEntity, Assembly-CSharp",
@@ -153,7 +149,8 @@
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "Fog1"
+        "Ico": "Fog1",
+        "Message": "Clear a fog"
       }
     }
   },
@@ -161,12 +158,44 @@
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "16",
     "PieceUid": "B3",
-    "TargetValue": 3
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Message": "Create a Piece"
+      }
+    }
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "17",
     "PieceUid": "B4",
-    "TargetValue": 2
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Message": "Create a Piece"
+      }
+    }
+  },
+  {
+    "$type": "TaskCompleteOrderEntity, Assembly-CSharp",
+    "Id": "18",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "NPC_SleepingBeauty",
+        "Message": "Complete Orders"
+      }
+    }
+  },
+  {
+    "$type": "TaskKillFieldEntity, Assembly-CSharp",
+    "Id": "19",
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "OB_PR_A",
+        "Message": "Clear old fields"
+      }
+    }
   }
 ]

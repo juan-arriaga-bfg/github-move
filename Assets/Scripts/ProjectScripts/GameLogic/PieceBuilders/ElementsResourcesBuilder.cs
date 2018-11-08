@@ -118,6 +118,9 @@ public class ElementsResourcesBuilder
         
         dict.Add(PieceType.Fog.Id, R.FogPiece);
         
+        dict.Add(PieceType.OB1_TT.Id, R.OB1_TTPiece);
+        dict.Add(PieceType.OB2_TT.Id, R.OB2_TTPiece);
+        
         dict.Add(PieceType.OB1_A.Id, R.OB1_APiece);
         dict.Add(PieceType.OB2_A.Id, R.OB2_APiece);
         dict.Add(PieceType.OB3_A.Id, R.OB3_APiece);

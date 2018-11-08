@@ -92,7 +92,7 @@ public class FieldControllerComponent : IECSComponent
 
     private void TestFieldOleg()
     {
-        AddPieces(new BoardPosition(24, 12), PieceType.OB1_A.Id, PieceType.OB9_A.Id);
+        AddPieces(new BoardPosition(24, 12), PieceType.OB1_TT.Id, PieceType.OB2_TT.Id);
         AddPieces(new BoardPosition(29, 16), PieceType.NPC_SleepingBeauty.Id, PieceType.NPC_9.Id);
     }
     

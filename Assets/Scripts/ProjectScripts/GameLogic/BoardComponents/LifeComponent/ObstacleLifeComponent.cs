@@ -38,7 +38,7 @@ public class ObstacleLifeComponent : StorageLifeComponent
     
     private void OnStep(bool isRemoveMain)
     {
-        if(Reward == null || Reward.Count == 0) Reward = GameDataService.Current.ObstaclesManager.GetPiecesByStep(thisContext.PieceType, current);
+        if(Reward == null || Reward.Count == 0) Reward = GameDataService.Current.ObstaclesManager.GetPiecesByStep(thisContext.PieceType, current - 1);
         
         foreach (var key in Reward.Keys)
         {
@@ -87,7 +87,7 @@ public class ObstacleLifeComponent : StorageLifeComponent
 
     protected override void OnSpawnRewards()
     {
-        var rewards = GameDataService.Current.ObstaclesManager.GetRewardByStep(thisContext.PieceType, current);
+        var rewards = GameDataService.Current.ObstaclesManager.GetRewardByStep(thisContext.PieceType, current - 1);
         
         AddResourceView.Show(StartPosition(), rewards);
         thisContext.Context.HintCooldown.Step(HintType.Obstacle);

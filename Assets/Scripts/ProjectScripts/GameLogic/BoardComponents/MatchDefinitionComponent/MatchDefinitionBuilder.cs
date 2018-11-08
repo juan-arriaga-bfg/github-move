@@ -45,6 +45,9 @@ public class MatchDefinitionBuilder
         
 #region Obstacles
         
+        dict.Add(PieceType.OB1_TT.Id, new PieceMatchDef {Next = PieceType.OB2_TT.Id, Previous = PieceType.None.Id, Count = -1});
+        dict.Add(PieceType.OB2_TT.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.OB1_TT.Id, Count = -1});
+        
         dict.Add(PieceType.OB1_A.Id, new PieceMatchDef {Next = PieceType.OB2_A.Id, Previous = PieceType.None.Id, Count = -1});
         dict.Add(PieceType.OB2_A.Id, new PieceMatchDef {Next = PieceType.OB3_A.Id, Previous = PieceType.OB1_A.Id, Count = -1});
         dict.Add(PieceType.OB3_A.Id, new PieceMatchDef {Next = PieceType.OB4_A.Id, Previous = PieceType.OB2_A.Id, Count = -1});

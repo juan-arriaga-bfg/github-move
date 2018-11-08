@@ -31,6 +31,8 @@ public static class PathfindIgnoreBuilder
    {
       var obstacleIgnorePices = GetReverseSet(new HashSet<int>
       {
+         PieceType.OB1_TT.Id,
+         PieceType.OB2_TT.Id,
          PieceType.OB1_A.Id,
          PieceType.OB2_A.Id,
          PieceType.OB3_A.Id,
@@ -43,6 +45,8 @@ public static class PathfindIgnoreBuilder
          PieceType.Fog.Id
       });
       
+      dict.Add(PieceType.OB1_TT.Id, obstacleIgnorePices);
+      dict.Add(PieceType.OB2_TT.Id, obstacleIgnorePices);
       dict.Add(PieceType.OB1_A.Id, obstacleIgnorePices);
       dict.Add(PieceType.OB2_A.Id, obstacleIgnorePices);
       dict.Add(PieceType.OB3_A.Id, obstacleIgnorePices);
@@ -58,6 +62,8 @@ public static class PathfindIgnoreBuilder
    {
       var mineIgnorePieces = GetReverseSet(new HashSet<int>
       {
+         PieceType.OB1_TT.Id,
+         PieceType.OB2_TT.Id,
          PieceType.OB1_A.Id,
          PieceType.OB2_A.Id,
          PieceType.OB3_A.Id,
@@ -79,6 +85,8 @@ public static class PathfindIgnoreBuilder
    {
       var charIgnorePieces = GetReverseSet(new HashSet<int>
       {
+         PieceType.OB1_TT.Id,
+         PieceType.OB2_TT.Id,
          PieceType.OB1_A.Id,
          PieceType.OB2_A.Id,
          PieceType.OB3_A.Id,

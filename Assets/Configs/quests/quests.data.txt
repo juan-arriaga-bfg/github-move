@@ -124,37 +124,6 @@
     }
   },
   {
-    "Id": 5,
-    "$type": "QuestEntity, Assembly-CSharp",
-    "TaskDefs": [
-      {
-        "TaskId": "5"
-      }
-    ],
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 25
-          },
-          {
-            "Currency": "Mana",
-            "Amount": 30
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 30
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Title": "Clear a fog",
-        "Message": "Clear a fog"
-      }
-    }
-  },
-  {
     "Id": 6,
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
@@ -523,6 +492,68 @@
       "QuestDescriptionComponent": {
         "Title": "Create a Piece",
         "Message": "Create a Piece"
+      }
+    }
+  },
+  {
+    "Id": 18,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
+      {
+        "TaskId": "18"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Complete Orders",
+        "Message": "Complete Orders"
+      }
+    }
+  },
+  {
+    "Id": 19,
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
+      {
+        "TaskId": "19"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Cleare old fields",
+        "Message": "Cleare old fields"
       }
     }
   }

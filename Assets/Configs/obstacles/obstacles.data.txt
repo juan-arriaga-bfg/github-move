@@ -47,7 +47,8 @@
         "Uid": "A1",
         "Weight": 50
       }
-    ]
+    ],
+    "ChestId": "CH1_A"
   },
   {
     "Uid": "OB3_A",
@@ -437,6 +438,56 @@
       {
         "Uid": "Soft1",
         "Weight": 5
+      }
+    ]
+  },
+  {
+    "Uid": "OB1_TT",
+    "Delay": 2,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 1
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 1
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 1,
+    "PieceWeights": [
+      {
+        "Uid": "A1",
+        "Weight": 50
+      }
+    ]
+  },
+  {
+    "Uid": "OB2_TT",
+    "Delay": 5,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 2
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 2
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 2,
+    "PieceWeights": [
+      {
+        "Uid": "A2",
+        "Weight": 50
       }
     ]
   }
