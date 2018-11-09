@@ -72,6 +72,8 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 			
 			sprite.sprite = IconService.Current.GetSpriteById($"Fog{Random.Range(1, 4)}{str}");
 		}
+
+		HighlightIfCanClear();
 	}
 
 	private string CheckBorder(int x, int y)

@@ -141,6 +141,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     {
         var canPath = Context.Context.Pathfinder.CanPathToCastle(Context);
         var levelAccess = storageItem.Amount >= level;
+        
         if ((canPath ^ levelAccess) && lockView == null)
         {
             lockView = viewDef.AddView(ViewType.Lock) as LockView;
@@ -168,6 +169,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         bubble.SetOfset(def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
         bubble.Priority = -1;
         bubble.Change(true);
+        
         Context.Context.HintCooldown.AddView(bubble);
     }
     
