@@ -392,38 +392,6 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "Fog1",
-    "SpriteName": "Fog1",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "Fog2",
-    "SpriteName": "Fog2",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "Fog3",
-    "SpriteName": "Fog3",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "FogOpacity",
-    "SpriteName": "FogOpacity",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
     "Uid": "A1",
     "SpriteName": "A1",
     "BundleName": "graphicscommon",
@@ -1470,5 +1438,53 @@
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
     "SpriteSheetName": "OB2_A",
     "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+  },
+  {
+    "Uid": "Fog1",
+    "SpriteName": "Fog1",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog",
+    "SpriteSheetName": "Fog1",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog"
+  },
+  {
+    "Uid": "Fog1_border",
+    "SpriteName": "Fog1_border",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog",
+    "SpriteSheetName": "Fog1_border",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog"
+  },
+  {
+    "Uid": "Fog2",
+    "SpriteName": "Fog2",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog",
+    "SpriteSheetName": "Fog2",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog"
+  },
+  {
+    "Uid": "Fog2_border",
+    "SpriteName": "Fog2_border",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog",
+    "SpriteSheetName": "Fog2_border",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog"
+  },
+  {
+    "Uid": "Fog3",
+    "SpriteName": "Fog3",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog",
+    "SpriteSheetName": "Fog3",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog"
+  },
+  {
+    "Uid": "Fog3_border",
+    "SpriteName": "Fog3_border",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog",
+    "SpriteSheetName": "Fog3_border",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog"
   }
 ]

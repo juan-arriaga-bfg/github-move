@@ -35,14 +35,13 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 			var touch = Instantiate(touchItem, touchItem.transform.parent);
 			var sprite = fog.GetComponent<SpriteRenderer>();
 			
-			sprite.sprite = IconService.Current.GetSpriteById($"Fog{Random.Range(1, 4)}");
+			fogSprites.Add(sprite);
 			
-		    fogSprites.Add(sprite);
-		    
+			sprite.sprite = IconService.Current.GetSpriteById($"Fog{Random.Range(1, 4)}{CheckBorder(position.X, position.Y)}");
 			sprite.transform.localScale = Vector3.one * 1.1f;
 			sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + 101;
 			
-			fog.transform.position = touch.transform.position = piece.Context.BoardDef.GetSectorCenterWorldPosition(position.X, position.Y, 0);
+			fog.transform.position = touch.transform.position = Context.Context.BoardDef.GetSectorCenterWorldPosition(position.X, position.Y, 0);
 			
 			touchRegion.AddTouchRegion(touch.GetComponent<RectTransform>());
 			
@@ -57,6 +56,33 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 	    Context.Context.BoardEvents.AddListener(this, GameEventsCodes.FogTap);
 
 	    HighlightIfCanClear();
+	}
+
+	public void UpdateBorder()
+	{
+		if(observer == null) return;
+		
+		for (var i = 0; i < observer.Mask.Count; i++)
+		{
+			var position = observer.Mask[i];
+			var str = CheckBorder(position.X, position.Y);
+			var sprite = fogSprites[i];
+			
+			if(string.IsNullOrEmpty(str) || sprite.sprite.name.Contains(str)) continue;
+			
+			sprite.sprite = IconService.Current.GetSpriteById($"Fog{Random.Range(1, 4)}{str}");
+		}
+	}
+
+	private string CheckBorder(int x, int y)
+	{
+		var right = new BoardPosition(x+1, y, Context.Context.BoardDef.PieceLayer);
+		var left = new BoardPosition(x, y-1, Context.Context.BoardDef.PieceLayer);
+		
+		var pieceR = Context.Context.BoardLogic.GetPieceAt(right);
+		var pieceL = Context.Context.BoardLogic.GetPieceAt(left);
+		
+		return pieceR == null || pieceL == null || pieceR.PieceType != PieceType.Fog.Id || pieceL.PieceType != PieceType.Fog.Id ? "_border" : "";
 	}
 
     private void HighlightIfCanClear()

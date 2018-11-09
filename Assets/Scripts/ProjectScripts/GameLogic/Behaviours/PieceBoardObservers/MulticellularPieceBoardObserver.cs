@@ -18,11 +18,11 @@ public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserve
 	}
 	
 	protected BoardPosition realPosition;
-	protected Piece thisContext;
+	public Piece Context;
 	
 	public void OnRegisterEntity(ECSEntity entity)
 	{
-		thisContext = entity as Piece;
+		Context = entity as Piece;
 	}
 
 	public void OnUnRegisterEntity(ECSEntity entity)
