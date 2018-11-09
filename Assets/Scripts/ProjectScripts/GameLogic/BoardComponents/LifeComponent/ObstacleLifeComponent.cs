@@ -7,6 +7,9 @@ public class ObstacleLifeComponent : StorageLifeComponent
     public override string Message => $"Tree chopping:\n{DateTimeExtension.GetDelayText(GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current))}";
     public override string Price => $"Chop {Energy.ToStringIcon()}";
 
+    private int spawnPiece = PieceType.None.Id;
+    public override int StorageSpawnPiece => spawnPiece;
+
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
@@ -24,6 +27,20 @@ public class ObstacleLifeComponent : StorageLifeComponent
         storage.Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current - 1);
         
         return base.InitInSaveStorage();
+    }
+
+    protected override void InitInSaveReward(LifeSaveItem item)
+    {
+        base.InitInSaveReward(item);
+        
+        if(Reward == null || !storage.IsFilled || IsDead == false) return;
+        
+        int value;
+
+        spawnPiece = item.StorageSpawnPiece;
+
+        if (Reward.TryGetValue(spawnPiece, out value)) Reward[spawnPiece] = value + 1;
+        else Reward.Add(spawnPiece, value);
     }
 
     protected override void Success()
@@ -48,6 +65,9 @@ public class ObstacleLifeComponent : StorageLifeComponent
 
         if (isRemoveMain)
         {
+            if (spawnPiece == PieceType.None.Id) spawnPiece = storage.SpawnPiece;
+            else storage.SpawnPiece = spawnPiece;
+            
             var value = Reward[storage.SpawnPiece];
             
             value--;
@@ -62,6 +82,7 @@ public class ObstacleLifeComponent : StorageLifeComponent
             Pieces = Reward,
             OnComplete = () =>
             {
+                spawnPiece = PieceType.None.Id;
                 Reward = null;
                 OnSpawnRewards();
             }
