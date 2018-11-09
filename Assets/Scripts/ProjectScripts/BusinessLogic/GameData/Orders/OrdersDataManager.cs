@@ -17,6 +17,8 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
 
     public List<OrderDef> Recipes;
     public List<Order> Orders;
+
+    private int unlockLevel;
     
     public void Reload()
     {
@@ -50,6 +52,8 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
                 }
                 
                 Recipes.Sort((a, b) => a.Level.CompareTo(b.Level));
+
+                unlockLevel = Recipes[0].Level;
                 
                 if(save?.Orders == null) return;
 
@@ -63,6 +67,20 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
                 Debug.LogWarningFormat("[{0}]: config not loaded", GetType());
             }
         });
+    }
+
+    public void Unlock()
+    {
+        if(GameDataService.Current.LevelsManager.Level != unlockLevel) return;
+
+        var logic = BoardService.Current.FirstBoard.BoardLogic;
+        var positions = logic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Character);
+        
+        if(positions.Count == 0) return;
+        
+        var customer = logic.GetPieceAt(positions[0])?.GetComponent<CustomerComponent>(CustomerComponent.ComponentGuid);
+        
+        customer?.Cooldown.Complete();
     }
     
     public bool CheckStart()
