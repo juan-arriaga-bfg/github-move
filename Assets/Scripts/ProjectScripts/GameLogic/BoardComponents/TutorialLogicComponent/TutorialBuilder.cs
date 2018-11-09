@@ -20,7 +20,8 @@ public static class TutorialBuilder
                     ToPositions = new List<BoardPosition>
                     {
                         new BoardPosition(23, 10, context.BoardDef.PieceLayer),
-                        new BoardPosition(22, 10, context.BoardDef.PieceLayer)
+                        new BoardPosition(22, 10, context.BoardDef.PieceLayer),
+                        new BoardPosition(23, 9, context.BoardDef.PieceLayer)
                     }
                 };
                 break;
@@ -33,8 +34,9 @@ public static class TutorialBuilder
                     ToType = PieceType.PR_C3.Id,
                     FromPositions = new List<BoardPosition>
                     {
+                        new BoardPosition(23, 10, context.BoardDef.PieceLayer),
                         new BoardPosition(22, 10, context.BoardDef.PieceLayer),
-                        new BoardPosition(23, 10, context.BoardDef.PieceLayer)
+                        new BoardPosition(23, 9, context.BoardDef.PieceLayer)
                     },
                     ToPositions = new List<BoardPosition>
                     {

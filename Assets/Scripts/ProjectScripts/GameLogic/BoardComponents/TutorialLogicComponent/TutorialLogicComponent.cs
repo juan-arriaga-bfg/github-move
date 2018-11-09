@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class TutorialLogicComponent : ECSEntity, ILockerComponent
 {
@@ -19,8 +20,6 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
         
         Save = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid)?.Complete ?? new List<int>();
         
-        if(Save.Count > 0) Locker.Unlock(this);
-        
         for (var i = 0; i < TutorialBuilder.Amount; i++)
         {
             if(Save.Contains(i)) continue;
@@ -32,6 +31,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             RegisterComponent(tutorial, true);
         }
         
+        Start();
         GameDataService.Current.QuestsManager.OnActiveQuestsListChanged += Start;
     }
     
@@ -39,12 +39,12 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     {
         var target = GameDataService.Current.QuestsManager.ActiveQuests.Find(entity => entity.Id == "1");
 
-        if (target == null) return;
+        if (target == null && Save.Count == 0) return;
         
         Locker.Unlock(this);
         Update();
     }
-
+    
     public void Pause(bool isOn)
     {
         if (Locker.IsLocked) return;
