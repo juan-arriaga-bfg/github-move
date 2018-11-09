@@ -31,7 +31,7 @@
 				}
 				.RegisterDefinition(new TouchReactionDefinitionOpenWindow {WindowType = UIWindowType.OrdersWindow})
 				.RegisterDefinition(new TouchReactionDefinitionSpawnShop()))
-			.RegisterComponent(new TouchReactionConditionComponent()));
+			.RegisterComponent(new TouchReactionConditionCharacter()));
 		
 		piece.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
 				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
