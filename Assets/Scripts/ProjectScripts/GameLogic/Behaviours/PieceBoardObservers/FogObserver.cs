@@ -60,16 +60,6 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         foreach (var carrierView in views)
         {
             carrierView.UpdateResource(0);
-
-            var view = carrierView as MulticellularPieceBoardObserver;
-            
-            if(view == null) continue;
-
-            var fog = view.Context.ActorView as FogPieceView;
-            
-            if(fog == null) continue;
-            
-            fog.UpdateBorder();
         }
     }
 
@@ -151,6 +141,9 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
         lockView?.SetGrayscale(!canPath);
         
+        var fog = Context.ActorView as FogPieceView;
+        
+        if(fog != null) fog.UpdateBorder();
         
         if(canPath == false || storageItem.Amount < level) return;
 
