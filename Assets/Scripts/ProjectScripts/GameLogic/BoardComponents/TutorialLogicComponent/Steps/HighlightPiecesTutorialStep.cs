@@ -10,6 +10,8 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
     {
         if(selectCells == null) return;
         
+        base.PauseOn();
+        
         foreach (var cell in selectCells)
         {
             cell.ToggleSelection(false);

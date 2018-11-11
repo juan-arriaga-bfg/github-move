@@ -4,12 +4,20 @@ public class DelayTutorialStep : BaseTutorialStep, IECSSystem
 {
     public int Delay;
     private DateTime startTime;
-    
+
+    private bool isPaused;
+
+    public override void PauseOn()
+    {
+        isPaused = true;
+    }
+
     public override void PauseOff()
     {
         base.PauseOff();
         
         startTime = DateTime.UtcNow;
+        isPaused = false;
     }
     
     public override void Perform()
@@ -23,7 +31,7 @@ public class DelayTutorialStep : BaseTutorialStep, IECSSystem
     
     public virtual bool IsExecuteable()
     {
-        return IsPerform && (DateTime.UtcNow - startTime).TotalSeconds >= Delay;
+        return isPaused == false && IsPerform && (DateTime.UtcNow - startTime).TotalSeconds >= Delay;
     }
     
     public virtual void Execute()
