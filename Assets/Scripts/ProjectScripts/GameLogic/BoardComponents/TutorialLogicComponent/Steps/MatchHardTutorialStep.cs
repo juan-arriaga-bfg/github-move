@@ -44,16 +44,18 @@ public class MatchHardTutorialStep : BaseTutorialStep
 
     public override void PauseOff()
     {
+        base.PauseOff();
+        
         if(finger != null) finger.Show();
     }
     
     public override void Perform()
     {
-        if(isPerform) return;
+        if(IsPerform) return;
+        
+        base.Perform();
         
         Context.LockAll();
-
-        isPerform = true;
         
         var from = FromPositions.Find(position =>
         {

@@ -27,10 +27,15 @@
     public const string ExchangeWindow = "ExchangeWindow";
     
     public const string OrdersWindow = "OrdersWindow";
-
+    
     public const string QuestStartWindow = "QuestStartWindow";
     
     public const string QuestCompletetWindow = "QuestCompleteWindow";
-
+    
     public const string NextLevelWindow = "NextLevelWindow";
+    
+    public static bool IsIgnore(string name)
+    {
+        return name == MainWindow || name == ErrorWindow;
+    }
 }

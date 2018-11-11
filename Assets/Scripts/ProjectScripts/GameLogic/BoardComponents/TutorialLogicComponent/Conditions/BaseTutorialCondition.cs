@@ -1,7 +1,8 @@
 ﻿public enum TutorialConditionType
 {
     Start,
-    Complete
+    Complete,
+    Hard
 }
 
 public class BaseTutorialCondition : IECSComponent
@@ -13,12 +14,12 @@ public class BaseTutorialCondition : IECSComponent
     
     protected BaseTutorialStep context;
     
-    public void OnRegisterEntity(ECSEntity entity)
+    public virtual void OnRegisterEntity(ECSEntity entity)
     {
         context = entity as BaseTutorialStep;
     }
 
-    public void OnUnRegisterEntity(ECSEntity entity)
+    public virtual void OnUnRegisterEntity(ECSEntity entity)
     {
     }
     

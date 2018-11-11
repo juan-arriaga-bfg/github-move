@@ -72,7 +72,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	
 	private void OnShowWindow(IWUIWindow window)
 	{
-		if(window.WindowName == UIWindowType.MainWindow || window.WindowName == UIWindowType.ErrorWindow) return;
+		if(UIWindowType.IsIgnore(window.WindowName)) return;
 		
 		if(Locker.IsLocked == false) pauseTime = DateTime.UtcNow;
 		
@@ -81,7 +81,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	
 	private void OnCloseWindow(IWUIWindow window)
 	{
-		if(window.WindowName == UIWindowType.MainWindow || window.WindowName == UIWindowType.ErrorWindow) return;
+		if(UIWindowType.IsIgnore(window.WindowName)) return;
 		
 		Locker.Unlock(this);
 		

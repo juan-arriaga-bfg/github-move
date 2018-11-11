@@ -38,16 +38,18 @@ public class SwapHardTutorialStep : BaseTutorialStep
 
     public override void PauseOff()
     {
+        base.PauseOff();
+        
         if(finger != null) finger.Show();
     }
     
     public override void Perform()
     {
-        if(isPerform) return;
+        if(IsPerform) return;
+        
+        base.Perform();
         
         Context.LockAll();
-
-        isPerform = true;
         
         Context.UnlockCell(FromPosition);
         Context.UnlockCell(ToPosition);

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 public class TutorialLogicComponent : ECSEntity, ILockerComponent
 {
@@ -16,32 +15,58 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     {
         Context = entity as BoardController;
         
-        Locker.Lock(this);
-        
         Save = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid)?.Complete ?? new List<int>();
         
-        for (var i = 0; i < TutorialBuilder.Amount; i++)
+        for (var i = 0;; i++)
         {
             if(Save.Contains(i)) continue;
 
             var tutorial = TutorialBuilder.BuildTutorial(i, Context);
-            
-            if(tutorial == null) continue;
+
+            if (tutorial == null)
+            {
+                var collection = GetComponent<ECSComponentCollection>(BaseTutorialStep.ComponentGuid);
+                if (collection?.Components == null)
+                {
+                    Locker.Lock(this);
+                    return;
+                }
+                
+                break;
+            }
             
             RegisterComponent(tutorial, true);
         }
         
-        Start();
-        GameDataService.Current.QuestsManager.OnActiveQuestsListChanged += Start;
+        UIService.Get.OnShowWindowEvent += OnShowWindow;
+        UIService.Get.OnCloseWindowEvent += OnCloseWindow;
+        GameDataService.Current.QuestsManager.OnActiveQuestsListChanged += Update;
     }
     
-    private void Start()
+    public override void OnUnRegisterEntity(ECSEntity entity)
     {
-        var target = GameDataService.Current.QuestsManager.ActiveQuests.Find(entity => entity.Id == "1");
+        UIService.Get.OnShowWindowEvent -= OnShowWindow;
+        UIService.Get.OnCloseWindowEvent -= OnCloseWindow;
+    }
+    
+    private void OnShowWindow(IWUIWindow window)
+    {
+        if(UIWindowType.IsIgnore(window.WindowName)) return;
 
-        if (target == null && Save.Count == 0) return;
-        
+        if (Locker.IsLocked == false) Pause(true);
+		
+        Locker.Lock(this);
+    }
+	
+    private void OnCloseWindow(IWUIWindow window)
+    {
+        if(UIWindowType.IsIgnore(window.WindowName)) return;
+		
         Locker.Unlock(this);
+		
+        if(Locker.IsLocked) return;
+		
+        Pause(false);
         Update();
     }
     
@@ -58,7 +83,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
         {
             var condition = (BaseTutorialStep) components[i];
             
-            if(condition.IsStart() == false) continue;
+            if(condition.IsPerform == false) continue;
             
             if (isOn) condition.PauseOn();
             else condition.PauseOff();
@@ -84,7 +109,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             components.Remove(condition);
             Save.Add(condition.Id);
         }
-
+        
         for (var i = components.Count - 1; i >= 0; i--)
         {
             var condition = (BaseTutorialStep) components[i];
