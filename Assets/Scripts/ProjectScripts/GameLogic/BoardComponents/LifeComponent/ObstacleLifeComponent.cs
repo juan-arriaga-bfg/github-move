@@ -40,7 +40,7 @@ public class ObstacleLifeComponent : StorageLifeComponent
         spawnPiece = item.StorageSpawnPiece;
 
         if (Reward.TryGetValue(spawnPiece, out value)) Reward[spawnPiece] = value + 1;
-        else Reward.Add(spawnPiece, value);
+        else Reward.Add(spawnPiece, 1);
     }
 
     protected override void Success()
