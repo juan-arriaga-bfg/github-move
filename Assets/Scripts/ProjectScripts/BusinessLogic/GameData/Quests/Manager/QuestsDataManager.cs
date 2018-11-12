@@ -271,7 +271,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
         Debug.Log($"[QuestsDataManager] => StartNewQuestsIfAny Schedule");
         
         var action = new QueueActionComponent {Id = ACTION_ID}
-                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = new HashSet<string> {UIWindowType.MainWindow}})
+                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = UIWindowType.IgnoredWindows})
                     .SetAction(() =>
                      {
                          string starterId = null;

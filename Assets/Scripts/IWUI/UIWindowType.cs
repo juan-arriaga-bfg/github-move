@@ -1,4 +1,6 @@
-﻿public class UIWindowType
+﻿using System.Collections.Generic;
+
+public class UIWindowType
 {
     public const string LauncherWindow = "LauncherWindow";
     
@@ -33,9 +35,15 @@
     public const string QuestCompletetWindow = "QuestCompleteWindow";
     
     public const string NextLevelWindow = "NextLevelWindow";
+
+    public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
+    {
+        MainWindow,
+        ErrorWindow
+    };
     
     public static bool IsIgnore(string name)
     {
-        return name == MainWindow || name == ErrorWindow;
+        return IgnoredWindows.Contains(name);
     }
 }

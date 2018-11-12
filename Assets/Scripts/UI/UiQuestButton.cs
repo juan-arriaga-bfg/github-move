@@ -191,7 +191,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         Debug.Log("!!! CompleteQuest: AddQuestWindowToQueue: " + Quest.Id);
         
         var action = new QueueActionComponent()
-                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = new HashSet<string> {UIWindowType.MainWindow}})
+                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = UIWindowType.IgnoredWindows})
                     .AddCondition(new NoQueuedActionsConditionComponent {ActionIds = new List<string> {"StartNewQuestsIfAny"}})
                     .SetAction(() =>
                      {
