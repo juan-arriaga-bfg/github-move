@@ -46,6 +46,8 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIService.Get.ShowWindow(UIWindowType.MainWindow);
 
             onComplete?.Invoke();
+            
+            ProfileService.Current.QueueComponent.Run();
         };
     }
 
