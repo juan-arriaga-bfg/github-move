@@ -8,6 +8,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     [SerializeField] private GameObject shine;
     [SerializeField] private GameObject checkmark;
     [SerializeField] private CanvasGroup rootCanvasGroup;
+    [SerializeField] private UiQuestButtonArrow arrow;
     
     public QuestEntity Quest { get; private set; }
     private bool isUp;
@@ -68,6 +69,11 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         
         ResourcesViewManager.Instance.RegisterView(this);
         UpdateView();
+
+        if (arrow != null)
+        {
+            arrow.SetQuest(interactive ? quest : null);
+        }
     }
 
     private void OnQuestChanged(QuestEntity quest, TaskEntity task)
