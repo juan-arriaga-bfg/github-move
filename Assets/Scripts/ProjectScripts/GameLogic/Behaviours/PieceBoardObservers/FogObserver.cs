@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using UnityEngine;
 
 public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
@@ -126,13 +127,37 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         thisContext.Context.ActionExecutor.AddAction(new CreateGroupPieces()
         {
             Pieces = addedPieces,
-            OnSuccessEvent = () =>
+            LogicCallback = (pieces) =>
             {
                 var board = thisContext.Context;
                 
                 board.PathfindLocker.OnAddComplete();
-                board.PathfindLocker.CheckLockedEmptyCells();
                 thisContext.PathfindLockObserver.RemoveRecalculate(thisContext.CachedPosition);
+
+                var emptyCells = board.PathfindLocker.CollectUnlockedEmptyCells();
+                foreach (var emptyCell in emptyCells)
+                {
+                    var hasPath = board.PathfindLocker.HasPath(emptyCell);
+                    if (hasPath && pieces.ContainsKey(emptyCell.CachedPosition))
+                    {
+                        pieces.Remove(emptyCell.CachedPosition);    
+                        board.BoardLogic.RemovePieceAt(emptyCell.CachedPosition);    
+                    }
+                    else if(hasPath)
+                    {
+                        board.ActionExecutor.AddAction(new CollapsePieceToAction()
+                        {
+                            IsMatch = false,
+                            Positions = new List<BoardPosition>() {emptyCell.CachedPosition},
+                            To = emptyCell.CachedPosition
+                        });
+                    }
+                    
+                }
+            },
+            OnSuccessEvent = () =>
+            {
+                
                 
                 var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
 

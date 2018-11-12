@@ -63,28 +63,12 @@ public class PathfindLockerComponent : ECSEntity
     }
 
     private Stack<Piece> unlockedEmptyPieces = new Stack<Piece>();
-    public void CheckLockedEmptyCells()
-    {
-        var collapseEmptyPieces = new List<BoardPosition>();
-        while (unlockedEmptyPieces.Count > 0)
-        {
-            var emptyPiece = unlockedEmptyPieces.Pop();
-            if(HasPath(emptyPiece))
-                collapseEmptyPieces.Add(emptyPiece.CachedPosition);
-        }
 
-        context.ActionExecutor.AddAction(new CallbackAction()
-        {
-            Callback = (board) =>
-            {
-                board.BoardLogic.RemovePiecesAt(collapseEmptyPieces);
-                foreach (var position in collapseEmptyPieces)
-                {
-                    board.RendererContext.RemoveElementAt(position);
-                }        
-            }
-        });
-        
+    public List<Piece> CollectUnlockedEmptyCells()
+    {
+        var collapseEmptyPieces = unlockedEmptyPieces.ToList();
+        unlockedEmptyPieces.Clear();
+        return collapseEmptyPieces;    
     }
 
     private void UnlockPathfinding(Piece piece)
@@ -160,7 +144,6 @@ public class PathfindLockerComponent : ECSEntity
         RecalcBlocked(target, removedPiece.CachedPosition);
 
         var board = context;
-        board.PathfindLocker.CheckLockedEmptyCells();
     }
 
     public virtual void RemoveFromCache(Piece piece)
@@ -198,7 +181,7 @@ public class PathfindLockerComponent : ECSEntity
 
         foreach (var piece in blockPathPieces.Keys.ToList())
         {
-            const int maxCheckDistance = 10;
+            const int maxCheckDistance = 100;
             var blockers = blockPathPieces[piece];
             if (blockers.Any(elem => changedPositions.Contains(elem)) 
                 || Math.Abs((piece.CachedPosition.X + piece.CachedPosition.Y) - (changedPosition.X + changedPosition.Y)) < maxCheckDistance)

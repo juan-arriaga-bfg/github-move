@@ -11,7 +11,7 @@ public class CreateGroupPieces:IBoardAction
     public Dictionary<BoardPosition, int> Pieces { get; set; }
     public Action OnSuccessEvent { get; set; }
 
-    public Action LogicCallback { get; set; }
+    public Action<Dictionary<BoardPosition, Piece>> LogicCallback { get; set; }
     
     public bool PerformAction(BoardController gameBoardController)
     {
@@ -32,8 +32,13 @@ public class CreateGroupPieces:IBoardAction
             positionsForLock.Add(pos);
         }
         
-        LogicCallback?.Invoke();
-        
+        LogicCallback?.Invoke(pieces);
+        if (pieces.Count == 0)
+        {
+            OnSuccessEvent?.Invoke();
+            return true;
+        }
+            
         gameBoardController.BoardLogic.LockCells(positionsForLock, this);
 
         var lastPiece = pieces.Last();
