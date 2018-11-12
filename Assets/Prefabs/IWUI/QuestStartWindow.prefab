@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 223078928985135540}
   - component: {fileID: 114994704574507260}
   - component: {fileID: 114190463429734350}
+  - component: {fileID: 225227454811340648}
   m_Layer: 31
   m_Name: canvas
   m_TagString: Untagged
@@ -918,7 +919,7 @@ MonoBehaviour:
   questCardPrefab: {fileID: 1366435372129510}
   characterConversationAnchor: {fileID: 224436617996335464}
   questCardsCanvasGroup: {fileID: 225979289074672204}
-  rootCanvasGroup: {fileID: 225770205861889946}
+  rootCanvasGroup: {fileID: 225227454811340648}
   uiLayer: {fileID: 114286650053371802}
 --- !u!114 &114286650053371802
 MonoBehaviour:
@@ -2522,6 +2523,17 @@ CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1566157003359202}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &225227454811340648
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1204157237485552}
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 1

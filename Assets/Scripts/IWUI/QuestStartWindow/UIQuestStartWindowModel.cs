@@ -23,10 +23,15 @@ public class UIQuestStartWindowModel : IWWindowModel
         {
             BuildQuestCompletedScenario();
         }
+        else
+        {
+            QuestCompletedScenario = null;
+        }
         
         if (questsToStart == null)
         {
             QuestsToStart = null;
+            QuestStartScenario = null;
         }
         else
         {
@@ -40,8 +45,8 @@ public class UIQuestStartWindowModel : IWWindowModel
             BuildStartConversation();
         }
     }
-    
-    public void BuildStartConversation()
+
+    private void BuildStartConversation()
     {
         switch (StarterId)
         {

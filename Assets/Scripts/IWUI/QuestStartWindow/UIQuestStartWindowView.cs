@@ -1,10 +1,8 @@
 using System;
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
-using Newtonsoft.Json;
 
 public class UIQuestStartWindowView : IWUIWindowView
 {
@@ -73,16 +71,21 @@ public class UIQuestStartWindowView : IWUIWindowView
 
     public override void AnimateShow()
     {
-        UIQuestStartWindowModel windowModel = Model as UIQuestStartWindowModel;
+        UIQuestStartWindowModel model = Model as UIQuestStartWindowModel;
         
         base.AnimateShow();
         
         rootCanvasGroup.alpha = 0;
 
+        var delay = model.QuestCompletedScenario != null ? 2.5f : 0f;
+        
         DOTween.Sequence()
-               .AppendInterval(0)
+               .AppendInterval(delay)
                .AppendCallback(() =>
                 {
+                    //todo: remove hack
+                    FindObjectOfType<UIMainWindowView>().FadeAuxButtons(false);
+                    
                     PlayNextScenario();
                     rootCanvasGroup.DOFade(1f, 0.5f);
                 })
@@ -93,6 +96,9 @@ public class UIQuestStartWindowView : IWUIWindowView
     {
         base.AnimateClose();
 
+        //todo: remove hack
+        FindObjectOfType<UIMainWindowView>().FadeAuxButtons(true);
+        
         rootCanvasGroup.DOFade(0f, 0.5f);
     }
 
@@ -252,6 +258,7 @@ public class UIQuestStartWindowView : IWUIWindowView
                 if (questsToStart.Count > 0)
                 {
                     model.Init(null, questsToStart, starterId);
+                    model.QuestStartScenario.Continuation = true;
                     step = Step.QuestStart;
                 }
                 else
@@ -284,12 +291,17 @@ public class UIQuestStartWindowView : IWUIWindowView
 
         int curLayer = uiLayer.CurrentLayer;
         uiLayer.CurrentLayer = 10;
+
+        Vector3 pos = conversation.GetLeftBubbleAnchor().position;
+        var point = uiLayer.ViewCamera.WorldToScreenPoint(pos);
+        point.x -= 350;
+        point.x += 70;
         
         CurrencyHellper.Purchase(reward, success =>
         {
             uiLayer.CurrentLayer = curLayer;
             onComplete();
         },
-        new Vector2(Screen.width / 2f, Screen.height / 2f));
+        point);
     }
 }

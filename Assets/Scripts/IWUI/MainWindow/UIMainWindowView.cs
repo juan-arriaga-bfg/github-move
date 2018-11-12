@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,8 @@ public class UIMainWindowView : IWUIWindowView
 {
     [SerializeField] private GameObject pattern;
     [SerializeField] private CodexButton codexButton;
+    [SerializeField] private CanvasGroup questsCanvasGroup;
+    [SerializeField] private CanvasGroup rightButtonsCanvasGroups;
     
     private List<UiQuestButton> questButtons = new List<UiQuestButton>();
 
@@ -125,5 +128,14 @@ public class UIMainWindowView : IWUIWindowView
     private void OnNewPieceBuilded()
     {
         codexButton.UpdateState();
+    }
+
+    //todo: remove this hack
+    public void FadeAuxButtons(bool visible)
+    {
+        var time = 0.5f;
+
+        questsCanvasGroup.DOFade(visible ? 1 : 0, time);
+        rightButtonsCanvasGroups.DOFade(visible ? 1 : 0, time);
     }
 }

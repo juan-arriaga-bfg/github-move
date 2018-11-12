@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 
@@ -12,6 +13,11 @@ public partial class UICharactersConversationViewController : IWUIWindowView
     
     [SerializeField] private Transform tapToContinueAnchor;
 
+    public Transform GetLeftBubbleAnchor()
+    {
+        return bubbleAnchorLeft;
+    }
+    
     private ConversationScenarioEntity scenario;
 
     private bool isFirstBubbleShowed;
@@ -28,19 +34,22 @@ public partial class UICharactersConversationViewController : IWUIWindowView
 
     private TapToContinueTextViewController tapToContinue;
 
-    private void CleanUp()
+    private void CleanUp(bool preserveCharacters)
     {
         isFirstBubbleShowed = false;
         
         var pool = UIService.Get.PoolContainer;
-        
-        foreach (var character in characters.Values)
+
+        if (!preserveCharacters)
         {
-            //pool.Return(character.gameObject);
+            foreach (var character in characters.Values)
+            {
+                pool.Return(character.gameObject);
+            }
+
+            characters.Clear();
+            characterPositions.Clear();
         }
-        
-        characters.Clear();
-        characterPositions.Clear();
 
         if (bubbleView != null)
         {
@@ -95,13 +104,40 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         throw new IndexOutOfRangeException();
     }
     
-    private void AddCharactersFromScenario(ConversationScenarioEntity scenario)
+    private void AddCharactersFromScenario(ConversationScenarioEntity scenario, Action onComplete)
     {
         ConversationScenarioCharsListComponent charsList = scenario.GetComponent<ConversationScenarioCharsListComponent>(ConversationScenarioCharsListComponent.ComponentGuid);
+
+        if (scenario.Continuation)
+        {
+            // Remove chars that not a part of new scenario
+            List<string> charsToRemove = characters.Keys.ToList();
+            for (var i = charsToRemove.Count - 1; i >= 0; i--)
+            {
+                var character = charsToRemove[i];
+                if (charsList.Characters.Values.Contains(character))
+                {
+                    charsToRemove.RemoveAt(i);
+                }
+            }
+
+            foreach (var character in charsToRemove)
+            {
+                RemoveCharacter(character, false);
+            }
+        }
+        
         foreach (var pair in charsList.Characters)
         {
+            if (GetCharacterById(pair.Value) != null)
+            {
+                continue;
+            }
+            
             AddCharacter(pair.Value, pair.Key, false, false);
         }
+
+        onComplete();
     }
     
     public void AddCharacter(string characterId, CharacterPosition position, bool active, bool animated, Action onComplete = null)
@@ -127,9 +163,24 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         character.ToggleActive(active, CharacterEmotion.Normal, animated, onComplete);
     }
 
-    public void RemoveCharacter(int characterId)
+    public void RemoveCharacter(string characterId, bool animated)
     {
-        throw new NotImplementedException();
+        var pool = UIService.Get.PoolContainer;
+
+        var character = characters.Values.FirstOrDefault(e => e.CharacterId == characterId);
+        if (character == null)
+        {
+            return;
+        }
+
+        character.ToBackground(animated, character.Emotion, () =>
+        {
+            pool.Return(character.gameObject);
+        });
+
+        var pos = GetPositionForCharacter(character);
+        characters.Remove(characterId);
+        characterPositions.Remove(pos);
     }
 
     private void ToggleTapToContinue(bool enabled)
@@ -330,16 +381,17 @@ public partial class UICharactersConversationViewController : IWUIWindowView
                              Action<ConversationActionEntity> onActionEnded, 
                              Action onScenarioComplete)
     {
-        CleanUp();
+        CleanUp(scenario.Continuation);
         
         this.scenario = scenario;
         this.onScenarioComplete = onScenarioComplete;
         this.onActionStarted = onActionStarted;
         this.onActionEnded = onActionEnded;
 
-        AddCharactersFromScenario(scenario);
-        
-        NextScenarioAction();
+        AddCharactersFromScenario(scenario, () =>
+        {
+            NextScenarioAction();
+        });
     }
 
     public void NextScenarioAction()
@@ -359,28 +411,44 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         
         if (activeAction is ConversationActionBubbleEntity)
         {
-            ConversationActionBubbleEntity act = activeAction as ConversationActionBubbleEntity;
-            NextBubble(act.BubbleId, act.BubbleDef, () =>
-            {
-                 onActionEnded?.Invoke(act);
-            });
-            
-            onActionStarted?.Invoke(act);
+            PerformActionBubble();
+            return;
+        }
+        if (activeAction is ConversationActionAddCharactersEntity)
+        {
+            PerformActionAddCharacters();
             return;
         }
         else if (activeAction is ConversationActionExternalActionEntity)
         {
-            HideBubble(() =>
-            {
-                onActionStarted?.Invoke(activeAction);
-                onActionEnded?.Invoke(activeAction);    
-            });
-
+            PerformActionExternal();
             return;
         }
 
         Debug.LogError($"[UICharactersConversationViewController] => Unknown action type: {activeAction.GetType()} ");
         NextScenarioAction();
+    }
+
+    private void PerformActionAddCharacters()
+    {
+     //   AddC
+    }
+
+    private void PerformActionExternal()
+    {
+        HideBubble(() =>
+        {
+            onActionStarted?.Invoke(activeAction);
+            onActionEnded?.Invoke(activeAction);
+        });
+    }
+
+    private void PerformActionBubble()
+    {
+        ConversationActionBubbleEntity act = activeAction as ConversationActionBubbleEntity;
+        NextBubble(act.BubbleId, act.BubbleDef, () => { onActionEnded?.Invoke(act); });
+
+        onActionStarted?.Invoke(act);
     }
 
     public void OnClick()

@@ -4,7 +4,9 @@ public class ConversationScenarioEntity : ECSEntity, IECSSerializeable
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
-   
+
+    public bool Continuation { get; set; }
+    
     private readonly List<ConversationActionEntity> actions = new List<ConversationActionEntity>();
 
     private int index;
