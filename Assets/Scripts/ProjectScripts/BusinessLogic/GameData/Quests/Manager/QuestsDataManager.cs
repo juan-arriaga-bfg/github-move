@@ -31,6 +31,11 @@ public class QuestsDataManager : IECSComponent, IDataManager
     /// </summary>
     public Action OnActiveQuestsListChanged;
     
+    /// <summary>
+    /// Will be invoked when quest state is changing.
+    /// </summary>
+    public Action<QuestEntity, TaskEntity> OnQuestStateChanged;
+    
     private List<QuestStarterEntity> questStarters;
 
     /// <summary>
@@ -383,6 +388,8 @@ public class QuestsDataManager : IECSComponent, IDataManager
 
         quest.Start(saveData);
 
+        quest.OnChanged += OnQuestsStateChangedEvent;
+        
         OnActiveQuestsListChanged?.Invoke();
         
         return quest;
@@ -405,6 +412,8 @@ public class QuestsDataManager : IECSComponent, IDataManager
                 ActiveQuests.RemoveAt(i);
                 quest.DisconnectFromBoard();
                 
+                quest.OnChanged -= OnQuestsStateChangedEvent;
+                
                 OnActiveQuestsListChanged?.Invoke();
                 
                 StartNewQuestsIfAny();
@@ -413,5 +422,10 @@ public class QuestsDataManager : IECSComponent, IDataManager
         }
         
         Debug.LogError($"[QuestsDataManager] => CompleteQuest: Quest with id '{id}' is not active!");
+    }
+
+    private void OnQuestsStateChangedEvent(QuestEntity quest, TaskEntity task)
+    {
+        OnQuestStateChanged?.Invoke(quest, task);
     }
 }
