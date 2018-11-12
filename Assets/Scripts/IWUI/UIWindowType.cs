@@ -32,7 +32,7 @@ public class UIWindowType
     
     public const string QuestStartWindow = "QuestStartWindow";
     
-    public const string QuestCompletetWindow = "QuestCompleteWindow";
+    public const string QuestCompleteWindow = "QuestCompleteWindow";
     
     public const string NextLevelWindow = "NextLevelWindow";
 

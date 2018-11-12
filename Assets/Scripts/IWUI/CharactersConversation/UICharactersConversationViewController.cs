@@ -36,7 +36,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         
         foreach (var character in characters.Values)
         {
-            pool.Return(character.gameObject);
+            //pool.Return(character.gameObject);
         }
         
         characters.Clear();
@@ -276,10 +276,8 @@ public partial class UICharactersConversationViewController : IWUIWindowView
 
         if (bubbleView != null)
         {
-            var pool = UIService.Get.PoolContainer;
-            bubbleView.Hide(true, () =>
+            HideBubble(() =>
             {
-                pool.Return(bubbleView.gameObject);
                 ReorderCharsAndShowBubble(bubbleId, data, onComplete);
             });
         }
@@ -287,6 +285,22 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         {
             ReorderCharsAndShowBubble(bubbleId, data, onComplete);
         }
+    }
+
+    private void HideBubble(Action onComplete)
+    {
+        if (bubbleView == null)
+        {
+            onComplete?.Invoke();
+            return;
+        }
+        
+        var pool = UIService.Get.PoolContainer;
+        bubbleView.Hide(true, () =>
+        {
+            pool.Return(bubbleView.gameObject);
+            onComplete?.Invoke();
+        });
     }
 
     private void ReorderCharsAndShowBubble(string bubbleId, UICharacterBubbleDef data, Action onComplete)
@@ -355,9 +369,13 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             return;
         }
         else if (activeAction is ConversationActionExternalActionEntity)
-        {            
-            onActionStarted?.Invoke(activeAction);
-            onActionEnded?.Invoke(activeAction);
+        {
+            HideBubble(() =>
+            {
+                onActionStarted?.Invoke(activeAction);
+                onActionEnded?.Invoke(activeAction);    
+            });
+
             return;
         }
 

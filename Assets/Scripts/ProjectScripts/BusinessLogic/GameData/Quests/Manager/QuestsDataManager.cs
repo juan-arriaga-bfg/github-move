@@ -285,11 +285,8 @@ public class QuestsDataManager : IECSComponent, IDataManager
                          Debug.Log($"[QuestsDataManager] => StartNewQuestsIfAny before dlg");
                          
                          var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
-                         model.SetQuests(questsToStart);
-                         model.BuildConversation(starterId);
-                         // model.BuildTestConversation();
-                         //model.BuildQuestCompletedConversation();
-        
+                         model.Init(null, questsToStart, starterId);
+
                          UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
                      });
 
@@ -323,7 +320,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
     /// Call this to foreach through Starters and Start new quests if Conditions are met.
     /// Highly expensive! 
     /// </summary>
-    private List<string> CheckConditions(out string starterId)
+    public List<string> CheckConditions(out string starterId)
     {
         starterId = null;
         

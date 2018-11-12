@@ -8,17 +8,27 @@ using Newtonsoft.Json;
 
 public class UIQuestStartWindowView : IWUIWindowView
 {
+    private enum Step
+    {
+        Unknown,
+        QuestComplete,
+        QuestStart
+    }
+    
     [SerializeField] private GameObject questCardPrefab;
     [SerializeField] private Transform characterConversationAnchor;
     [SerializeField] private CanvasGroup questCardsCanvasGroup;
     [SerializeField] private CanvasGroup rootCanvasGroup;
+    [SerializeField] private IWUILayer uiLayer;
     
     private readonly List<UIQuestCard> questCards = new List<UIQuestCard>();
 
     private UICharactersConversationViewController conversation;
 
     private bool isClickAllowed;
-       
+
+    private Step step;
+    
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
         base.InitView(model, controller);
@@ -32,12 +42,15 @@ public class UIQuestStartWindowView : IWUIWindowView
 
         CleanUp();
         
-        UIQuestStartWindowModel windowModel = Model as UIQuestStartWindowModel;
+        UIQuestStartWindowModel model = Model as UIQuestStartWindowModel;
 
+        step = model.CompletedQuest != null ? Step.QuestComplete : Step.QuestStart;
     }
 
     private void CleanUp()
     {
+        step = Step.Unknown;
+        
         var pool = UIService.Get.PoolContainer;
         
         foreach (var card in questCards)
@@ -70,7 +83,7 @@ public class UIQuestStartWindowView : IWUIWindowView
                .AppendInterval(0)
                .AppendCallback(() =>
                 {
-                    CreateConversation(windowModel);
+                    PlayNextScenario();
                     rootCanvasGroup.DOFade(1f, 0.5f);
                 })
             ;
@@ -98,10 +111,10 @@ public class UIQuestStartWindowView : IWUIWindowView
 
         const float ANIMATION_TIME = 0.5f;
         
-        if (model.Quests != null)
+        if (model.QuestsToStart != null)
         {
             // Create cards
-            foreach (var quest in model.Quests)
+            foreach (var quest in model.QuestsToStart)
             {
                 if (payload.QuestIds != null && !payload.QuestIds.Contains(quest.Id))
                 {
@@ -141,12 +154,12 @@ public class UIQuestStartWindowView : IWUIWindowView
     private void StartQuests()
     {
         var model = (Model as UIQuestStartWindowModel);
-        if (model.Quests == null || model.Quests.Count == 0)
+        if (model.QuestsToStart == null || model.QuestsToStart.Count == 0)
         {
             return;
         }
         
-        List<string> ids = model.Quests.Select(e => e.Id).ToList();
+        List<string> ids = model.QuestsToStart.Select(e => e.Id).ToList();
         GameDataService.Current.QuestsManager.StartQuests(ids);
     }
 
@@ -176,15 +189,18 @@ public class UIQuestStartWindowView : IWUIWindowView
         }
     }
     
-    private void CreateConversation(UIQuestStartWindowModel model)
+    private void PlayNextScenario()
     {
+        var model = Model as UIQuestStartWindowModel;
+        
         if (conversation == null)
         {
             conversation = UIService.Get.GetCachedObject<UICharactersConversationViewController>(R.UICharacterConversationView);
             conversation.transform.SetParent(characterConversationAnchor, false);
         }
 
-        conversation.PlayScenario(model.Scenario, OnActionStarted, OnActionEnded, OnScenarioComplete);
+        var scenario = step == Step.QuestComplete ? model.QuestCompletedScenario : model.QuestStartScenario;
+        conversation.PlayScenario(scenario, OnActionStarted, OnActionEnded, OnScenarioComplete);
     }
 
     private void OnActionStarted(ConversationActionEntity act)
@@ -200,22 +216,80 @@ public class UIQuestStartWindowView : IWUIWindowView
             CreateQuestCards(Model as UIQuestStartWindowModel, payload1, () => { isClickAllowed = true; });
             return;
         }
-        //
-        // var payload2 = act.GetComponent<ConversationActionPayloadStartNewQuestsIfAnyComponent>(ConversationActionPayloadComponent.ComponentGuid);
-        // if (payload2 != null)
-        // {
-        //     GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
-        //     isClickAllowed = true;
-        //     return;
-        // }
+        
+        var payload2 = act.GetComponent<ConversationActionPayloadProvideRewardComponent>(ConversationActionPayloadComponent.ComponentGuid);
+        if (payload2 != null)
+        {
+            ProvideReward(() =>
+            {
+                isClickAllowed = true;
+                conversation.OnClick();
+            });
+            return;
+        }
 
         isClickAllowed = true;
     }
     
     private void OnScenarioComplete()
     {
+        var model = Model as UIQuestStartWindowModel;
+        
         isClickAllowed = false;
-        Controller.CloseCurrentWindow();
+
+        if (step == Step.QuestComplete)
+        {
+            if (model.QuestsToStart != null && model.QuestsToStart.Count > 0)
+            {
+                
+            }
+            else
+            {
+                var questManager = GameDataService.Current.QuestsManager;
+            
+                string starterId;
+                List<string> questsToStart = questManager.CheckConditions(out starterId);
+                if (questsToStart.Count > 0)
+                {
+                    model.Init(null, questsToStart, starterId);
+                    step = Step.QuestStart;
+                }
+                else
+                {
+                    Controller.CloseCurrentWindow();
+                }
+            }
+
+            PlayNextScenario();
+        }
+        else
+        {
+            Controller.CloseCurrentWindow();
+        }
+
     }
 
+    private void ProvideReward(Action onComplete)
+    {
+        var model = Model as UIQuestStartWindowModel;
+        
+        isClickAllowed = false;
+
+        var quest = model.CompletedQuest;
+
+        quest.SetClaimedState();
+        GameDataService.Current.QuestsManager.CompleteQuest(quest.Id);
+
+        List<CurrencyPair> reward = quest.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
+
+        int curLayer = uiLayer.CurrentLayer;
+        uiLayer.CurrentLayer = 10;
+        
+        CurrencyHellper.Purchase(reward, success =>
+        {
+            uiLayer.CurrentLayer = curLayer;
+            onComplete();
+        },
+        new Vector2(Screen.width / 2f, Screen.height / 2f));
+    }
 }

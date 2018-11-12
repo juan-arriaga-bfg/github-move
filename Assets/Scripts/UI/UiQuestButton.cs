@@ -204,10 +204,10 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     private void ShowQuestCompletedWindow()
     {
-        var model = UIService.Get.GetCachedModel<UIQuestCompleteWindowModel>(UIWindowType.QuestCompletetWindow);
-        model.Quest = Quest;
+        var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
+        model.Init(Quest, null, null);
         
-        UIService.Get.ShowWindow(UIWindowType.QuestCompletetWindow);
+        UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
     }
     
     private void ShowQuestWindow()

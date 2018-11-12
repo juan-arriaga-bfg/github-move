@@ -32,7 +32,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.ExchangeWindow,
             UIWindowType.OrdersWindow,
             UIWindowType.QuestStartWindow,
-            UIWindowType.QuestCompletetWindow,
+            UIWindowType.QuestCompleteWindow,
             UIWindowType.NextLevelWindow,
         });
         
