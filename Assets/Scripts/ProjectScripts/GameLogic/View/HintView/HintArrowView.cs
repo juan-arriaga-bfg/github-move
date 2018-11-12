@@ -16,12 +16,12 @@ public class HintArrowView : BoardElementView
         sequence.Insert(0, icon.DOFade(1, 1f));
     }
 
-    public void Remove(float delay = 1f)
+    public void Remove(float delay = 3.5f)
     {
         var sequence = DOTween.Sequence().SetId(animationUid);
-        sequence.Insert(delay + DURATION * 0.5f, icon.DOFade(0, DURATION * 0.5f));
+        sequence.Insert(delay, icon.DOFade(0, DURATION * 0.5f));
         
-        DestroyOnBoard(delay + DURATION);
+        DestroyOnBoard(delay + DURATION * 0.6f);
     }
 
     public static HintArrowView Show(BoardPosition position, float offsetX = 0, float offsetY = 0, bool focus = true, bool loop = false)
