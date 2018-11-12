@@ -119,15 +119,15 @@ public class DevTools : MonoBehaviour
 
     public void OnDebug1Click()
     {
-        Debug.Log("OnDebug1Click");
-        BoardService.Current.FirstBoard.BoardLogic.FireflyLogic.Execute();
+        CurrencyHellper.Purchase(Currency.Level.Name, 8);
+        CurrencyHellper.Purchase(Currency.Experience.Name, 8000);
+        CurrencyHellper.Purchase(Currency.Mana.Name, 5000000);
     }
 
     public void OnDebug2Click()
     {
 //        Debug.Log("OnDebug2Click");
-        CurrencyHellper.Purchase(Currency.Experience.Name, 6000);
-        CurrencyHellper.Purchase(Currency.Mana.Name, 5000000);
+        
 
         //BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
 
