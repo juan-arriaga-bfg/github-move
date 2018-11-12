@@ -95,6 +95,15 @@ public static class TutorialBuilder
             }
             case 6:
             {
+                step = new SelectObstacleTutorialStep {Delay = 5, Targets = new List<int>{PieceType.OB1_A.Id}};
+                
+                step.RegisterComponent(new ChechStepTutorialCondition{Target = 5, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckCurrencyTutorialCondition{Target = -1, Currensy = Currency.Worker.Name, ConditionType = TutorialConditionType.Complete}, true);
+                
+                break;
+            }
+            case 7:
+            {
                 step = new HighlightPiecesTutorialStep {Delay = 5, Targets = new List<int>{PieceType.A1.Id}};
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);

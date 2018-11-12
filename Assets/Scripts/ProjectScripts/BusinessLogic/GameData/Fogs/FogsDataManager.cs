@@ -97,19 +97,12 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         return !pos.HasValue;
     }
 
-    /// <summary>
-    /// If there are more than one fog with level x, random one will be selected 
-    /// </summary>
-    public string GetUidOfFirstNotClearedFog()
+    public FogDef GetFirstNotClearedFog()
     {
-        List<FogDef> defs = new List<FogDef>();
+        var defs = new List<FogDef>();
+        
         foreach (var pair in FogPositions)
         {
-            if (Completed.Contains(pair.Key))
-            {
-                continue;
-            }
-            
             defs.Add(pair.Value);
         }
 
@@ -139,9 +132,15 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
 
         int index = Random.Range(0, lastIndex + 1);
 
-        string ret = defs[index].Uid;
+        return defs[index];
+    }
 
-        return ret;
+    /// <summary>
+    /// If there are more than one fog with level x, random one will be selected 
+    /// </summary>
+    public string GetUidOfFirstNotClearedFog()
+    {
+        return GetFirstNotClearedFog()?.Uid;
     }
 
     public List<GridMeshArea> GetFoggedAreas()
