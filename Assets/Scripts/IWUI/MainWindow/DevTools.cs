@@ -121,7 +121,7 @@ public class DevTools : MonoBehaviour
     {
         CurrencyHellper.Purchase(Currency.Level.Name, 8);
         CurrencyHellper.Purchase(Currency.Experience.Name, 8000);
-        CurrencyHellper.Purchase(Currency.Mana.Name, 5000000);
+        CurrencyHellper.Purchase(Currency.Mana.Name, 50000000);
     }
 
     public void OnDebug2Click()

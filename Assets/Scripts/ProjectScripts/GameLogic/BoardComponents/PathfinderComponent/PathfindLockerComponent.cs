@@ -111,12 +111,16 @@ public class PathfindLockerComponent : ECSEntity
         if (ignorablePositions == null)
             ignorablePositions = new List<BoardPosition>();
         
-        List<BoardPosition> pieceBlockers;
+        List<BoardPosition> pieceBlockers = new List<BoardPosition>();
         
         var defaultCondition = Pathfinder.GetCondition(piece);
         Predicate<BoardPosition> pathCondition = (pos) => ignorablePositions.Contains(pos) || defaultCondition(pos);
         
-        var canPath = Pathfinder.HasPath(piece.CachedPosition, target, out pieceBlockers, piece, pathCondition);
+        bool canPath = context.AreaAccessController.AvailiablePositions.Contains(piece.CachedPosition);
+        
+        if(canPath == false)
+            canPath = Pathfinder.HasPath(piece.CachedPosition, target, out pieceBlockers, piece, pathCondition);
+
         if (canPath && !freePieces.Contains(piece))
         {
             UnlockPathfinding(piece);
