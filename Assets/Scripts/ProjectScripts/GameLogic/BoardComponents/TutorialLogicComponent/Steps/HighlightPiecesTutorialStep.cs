@@ -4,26 +4,25 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
 {
     public List<int> Targets;
     
-    private List<PartCellView> selectCells;
+    private List<PieceBoardElementView> selectPieces;
     
     public override void PauseOn()
     {
-        if(selectCells == null) return;
+        if(selectPieces == null) return;
         
         base.PauseOn();
         
-        foreach (var cell in selectCells)
+        foreach (var view in selectPieces)
         {
-            cell.ToggleSelection(false);
-            Context.Context.RendererContext.DestroyElement(cell);
+            view.ToggleSelection(false);
         }
         
-        selectCells = null;
+        selectPieces = null;
     }
     
     public override void PauseOff()
     {
-        if(selectCells != null) return;
+        if(selectPieces != null) return;
         
         base.PauseOff();
     }
@@ -37,11 +36,12 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
     {
         base.Execute();
         
-        if(selectCells != null) return;
+        if(selectPieces != null) return;
         
-        selectCells = new List<PartCellView>();
+        selectPieces = new List<PieceBoardElementView>();
 
         List<BoardPosition> positions = null;
+        var amountMatch = 0;
         
         foreach (var target in Targets)
         {
@@ -51,22 +51,68 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
             if(cache.Count < amount) continue;
 
             positions = cache;
+            amountMatch = amount;
             break;
         }
         
         if(positions == null) return;
         
+        var options = new List<List<BoardPosition>>();
+
         foreach (var position in positions)
         {
-            var cell = Context.Context.RendererContext.CreateBoardElementAt<PartCellView>(R.Cell, new BoardPosition(position.X, position.Y, 21));
-
-            cell.ToggleSelection(true);
-            selectCells.Add(cell);
+            int amount;
+            var field = new List<BoardPosition>();
+            
+            if(Context.Context.BoardLogic.FieldFinder.Find(position, field, out amount) == false) continue;
+            
+            options.Add(field);
         }
+        
+        options.Sort((a, b) => -a.Count.CompareTo(b.Count));
+
+        var best = options[0];
+
+        if (best.Count < amountMatch)
+        {
+            var distance = float.MaxValue;
+                
+            BoardPosition? next = null;
+            BoardPosition? previous = null;
+                
+            foreach (var position in positions)
+            {
+                if(best.Contains(position)) continue;
+
+                var magnitude = BoardPosition.SqrMagnitude(best[0], position);
+                    
+                if(distance <= magnitude) continue;
+
+                distance = magnitude;
+
+                previous = next;
+                next = position;
+            }
+
+            if (next != null) best.Add(next.Value);
+            if (best.Count < amountMatch && previous != null) best.Add(previous.Value);
+        }
+        
+        foreach (var position in best)
+        {
+            var view = Context.Context.RendererContext.GetElementAt(position) as PieceBoardElementView;
+            
+            if(view == null) continue;
+            
+            view.ToggleSelection(true);
+            selectPieces.Add(view);
+        }
+        
+        Context.Context.Manipulator.CameraManipulator.MoveTo(selectPieces[0].transform.position);
     }
     
     public override bool IsExecuteable()
     {
-        return selectCells == null && base.IsExecuteable();
+        return selectPieces == null && base.IsExecuteable();
     }
 }
