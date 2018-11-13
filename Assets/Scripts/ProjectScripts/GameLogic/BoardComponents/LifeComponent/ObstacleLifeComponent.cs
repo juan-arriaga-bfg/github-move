@@ -22,11 +22,11 @@ public class ObstacleLifeComponent : StorageLifeComponent
         storage.Capacity = storage.Amount = 1;
     }
 
-    protected override Action InitInSaveStorage()
+    protected override Action InitInSaveStorage(LifeSaveItem item)
     {
         storage.Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current - 1);
         
-        return base.InitInSaveStorage();
+        return base.InitInSaveStorage(item);
     }
 
     protected override void InitInSaveReward(LifeSaveItem item)
