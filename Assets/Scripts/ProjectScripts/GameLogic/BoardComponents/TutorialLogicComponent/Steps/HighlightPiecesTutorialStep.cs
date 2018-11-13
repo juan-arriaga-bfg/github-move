@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 
 public class HighlightPiecesTutorialStep : DelayTutorialStep
 {
@@ -11,13 +12,8 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
         if(selectPieces == null) return;
         
         base.PauseOn();
-        
-        foreach (var view in selectPieces)
-        {
-            view.ToggleSelection(false);
-        }
-        
-        selectPieces = null;
+
+        SelectionOff();
     }
     
     public override void PauseOff()
@@ -29,7 +25,7 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
     
     protected override void Complete()
     {
-        PauseOn();
+        SelectionOff();
     }
     
     public override void Execute()
@@ -109,10 +105,29 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
         }
         
         Context.Context.Manipulator.CameraManipulator.MoveTo(selectPieces[0].transform.position);
+        
+        var sequence = DOTween.Sequence().SetId(this);
+
+        sequence.AppendInterval(2.7f);
+        sequence.AppendCallback(SelectionOff);
     }
     
     public override bool IsExecuteable()
     {
         return selectPieces == null && base.IsExecuteable();
+    }
+
+    private void SelectionOff()
+    {
+        DOTween.Kill(this);
+        
+        if(selectPieces == null) return;
+        
+        foreach (var view in selectPieces)
+        {
+            view.ToggleSelection(false);
+        }
+        
+        selectPieces = null;
     }
 }
