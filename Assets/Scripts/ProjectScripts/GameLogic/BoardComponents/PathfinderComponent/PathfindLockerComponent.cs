@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Xml.Schema;
-using UnityEngine;
 
 public class PathfindLockerComponent : ECSEntity
 {   
@@ -89,8 +86,24 @@ public class PathfindLockerComponent : ECSEntity
         }
     }
 
+    private void OpenPiece(Piece piece)
+    {
+        UnlockPathfinding(piece);
+        blockPathPieces.Remove(piece);
+        freePieces.Add(piece);
+    }
+
+    private void ClosePiece(Piece piece, List<BoardPosition> pieceBlockers)
+    {
+        LockPathfinding(piece);
+        freePieces.Remove(piece);
+        blockPathPieces[piece] = pieceBlockers;
+    }
+    
     private bool RecalcFor(Piece piece, HashSet<BoardPosition> target, List<BoardPosition> ignorablePositions = null)
     {
+        
+        
         if (ignorablePositions == null)
             ignorablePositions = new List<BoardPosition>();
         
@@ -106,15 +119,11 @@ public class PathfindLockerComponent : ECSEntity
 
         if (canPath && !freePieces.Contains(piece))
         {
-            UnlockPathfinding(piece);
-            blockPathPieces.Remove(piece);
-            freePieces.Add(piece);
+            OpenPiece(piece);
         }
         else if (canPath == false)
         {
-            LockPathfinding(piece);
-            freePieces.Remove(piece);
-            blockPathPieces[piece] = pieceBlockers;
+            ClosePiece(piece, pieceBlockers);
         }
         
         return canPath;
@@ -140,6 +149,9 @@ public class PathfindLockerComponent : ECSEntity
     
     public virtual void RecalcCacheOnPieceRemoved(HashSet<BoardPosition> target , BoardPosition changedPosition, Piece removedPiece)
     {
+        if(removedPiece.PieceType == PieceType.Fog.Id)
+            OnFogRemove(removedPiece);
+        
         RecalcBlocked(target, removedPiece.CachedPosition);
         if (PieceType.GetDefById(removedPiece.PieceType).Filter.HasFlag(PieceTypeFilter.Obstacle))
         {
@@ -181,7 +193,8 @@ public class PathfindLockerComponent : ECSEntity
 
             if (autoLock)
             {
-                RecalcFor(pieceOnPos, target);
+                if (piece.PieceType != PieceType.Fog.Id)
+                    RecalcFor(pieceOnPos, target);
             }
         }
     }
@@ -200,7 +213,8 @@ public class PathfindLockerComponent : ECSEntity
             var blockers = blockPathPieces[piece];
             if (blockers.Any(elem => changedPositions.Contains(elem)) 
                 || Math.Abs((piece.CachedPosition.X + piece.CachedPosition.Y) - (changedPosition.X + changedPosition.Y)) < maxCheckDistance)
-                RecalcFor(piece, target, new List<BoardPosition>(target));
+                if (piece.PieceType != PieceType.Fog.Id)
+                    RecalcFor(piece, target, new List<BoardPosition>(target));
             
         }
     }
@@ -211,7 +225,7 @@ public class PathfindLockerComponent : ECSEntity
         while (current < freePieces.Count)
         {
             var piece = freePieces[current];
-            if (RecalcFor(piece, target, new List<BoardPosition>(target)))
+            if ((piece.PieceType == PieceType.Fog.Id) || RecalcFor(piece, target, new List<BoardPosition>(target)))
                 current++;
         }
     }
@@ -226,7 +240,62 @@ public class PathfindLockerComponent : ECSEntity
         
         foreach (var piece in allPieces)
         {
-            RecalcFor(piece, target);
+            if (piece.PieceType != PieceType.Fog.Id)
+                RecalcFor(piece, target);
         }
+    }
+
+    private List<BoardPosition> GetOuterBorderPositions(HashSet<BoardPosition> area)
+    {
+        var border = new HashSet<BoardPosition>();
+        foreach (var pos in area)
+        {
+            var neighbors = pos.Neighbors();
+            foreach (var neighPos in neighbors)
+            {
+                var normilizedNeight = new BoardPosition(neighPos.X, neighPos.Y, context.BoardDef.PieceLayer);
+                if (area.Contains(normilizedNeight) == false && border.Contains(normilizedNeight) == false)
+                    border.Add(normilizedNeight);
+            }
+        }
+
+        return border.ToList();
+    }
+    
+    private List<Piece> GetNearFogs(Piece fog)
+    {
+        var mask = fog.Multicellular.Mask;
+        var fogPositions = new HashSet<BoardPosition>();
+        foreach (var maskPos in mask)
+        {
+            fogPositions.Add(maskPos);
+        }
+
+        var outBorder = GetOuterBorderPositions(fogPositions);
+        
+        var nearFogs = new List<Piece>();
+        foreach (var outPos in outBorder)
+        {
+            var piece = context.BoardLogic.GetPieceAt(outPos);
+            if (piece != null && piece.PieceType == PieceType.Fog.Id && nearFogs.Contains(piece) == false)
+            {
+                
+                nearFogs.Add(piece);
+            }
+                
+        }
+        
+
+        return nearFogs;
+        
+    }
+    
+    private void OnFogRemove(Piece fog)
+    {
+        var nearFogs = GetNearFogs(fog);
+        
+        foreach (var nearFog in nearFogs)
+            if (freePieces.Contains(nearFog) == false)
+                OpenPiece(nearFog);
     }
 }
