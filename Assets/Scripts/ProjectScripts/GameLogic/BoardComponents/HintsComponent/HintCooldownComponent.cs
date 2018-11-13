@@ -120,7 +120,7 @@ public class HintCooldownComponent : ECSEntity
 	
 	private void Hint()
 	{
-		if(UIService.Get.ShowedWindows.Count > 1) return;
+		if(IsPaused || UIService.Get.ShowedWindows.Count > 1) return;
 		
 		if (Show(chestsId))
 		{
@@ -162,6 +162,8 @@ public class HintCooldownComponent : ECSEntity
 
 	private void Bounce()
 	{
+		if(IsPaused) return;
+		
 		timerBounce.Delay = Random.Range(GameDataService.Current.ConstantsManager.MinDelayBounceBubble,
 			GameDataService.Current.ConstantsManager.MaxDelayBounceBubble);
 		

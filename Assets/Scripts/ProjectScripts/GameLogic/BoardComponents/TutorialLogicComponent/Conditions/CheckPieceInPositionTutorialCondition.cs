@@ -5,10 +5,11 @@ public class CheckPieceInPositionTutorialCondition : BaseTutorialCondition
     public int Target;
     public List<BoardPosition> Positions;
     public bool CheckAll;
+    public bool CheckAbsence;
 
     public override bool Check()
     {
-        if (Positions == null || Positions.Count == 0) return false;
+        if (Positions == null || Positions.Count == 0) return CheckAbsence;
         
         foreach (var position in Positions)
         {
@@ -18,12 +19,12 @@ public class CheckPieceInPositionTutorialCondition : BaseTutorialCondition
             {
                 if(CheckAll) continue;
 
-                return true;
+                return !CheckAbsence;
             }
             
-            if(CheckAll) return false;
+            if(CheckAll) return CheckAbsence;
         }
         
-        return CheckAll;
+        return CheckAbsence ? !CheckAll : CheckAll;
     }
 }

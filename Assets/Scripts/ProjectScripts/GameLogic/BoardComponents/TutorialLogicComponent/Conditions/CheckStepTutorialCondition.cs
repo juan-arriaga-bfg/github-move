@@ -1,4 +1,4 @@
-﻿public class ChechStepTutorialCondition : BaseTutorialCondition
+﻿public class CheckStepTutorialCondition : BaseTutorialCondition
 {
     public int Target;
     

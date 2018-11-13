@@ -22,11 +22,11 @@ public class ObstacleLifeComponent : StorageLifeComponent
         storage.Capacity = storage.Amount = 1;
     }
 
-    protected override Action InitInSaveStorage()
+    protected override Action InitInSaveStorage(LifeSaveItem item)
     {
         storage.Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current - 1);
         
-        return base.InitInSaveStorage();
+        return base.InitInSaveStorage(item);
     }
 
     protected override void InitInSaveReward(LifeSaveItem item)
@@ -40,7 +40,7 @@ public class ObstacleLifeComponent : StorageLifeComponent
         spawnPiece = item.StorageSpawnPiece;
 
         if (Reward.TryGetValue(spawnPiece, out value)) Reward[spawnPiece] = value + 1;
-        else Reward.Add(spawnPiece, value);
+        else Reward.Add(spawnPiece, 1);
     }
 
     protected override void Success()

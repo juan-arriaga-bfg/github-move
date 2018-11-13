@@ -46,7 +46,7 @@ public static class TutorialBuilder
                     }
                 };
                 
-                step.RegisterComponent(new ChechStepTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckStepTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 
                 break;
             }
@@ -60,7 +60,7 @@ public static class TutorialBuilder
                     ToPosition = new BoardPosition(20, 12, context.BoardDef.PieceLayer)
                 };
                 
-                step.RegisterComponent(new ChechStepTutorialCondition{Target = 1, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckStepTutorialCondition{Target = 1, ConditionType = TutorialConditionType.Start}, true);
                 
                 break;
             }
@@ -68,7 +68,7 @@ public static class TutorialBuilder
             {
                 step = new HighlightPiecesTutorialStep {Delay = 3, Targets = new List<int>{PieceType.PR_C1.Id}};
                 
-                step.RegisterComponent(new ChechStepTutorialCondition{Target = 2, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckStepTutorialCondition{Target = 2, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckCounterTutorialCondition{Target = 1, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
                 
@@ -78,7 +78,7 @@ public static class TutorialBuilder
             {
                 step = new HighlightPiecesTutorialStep {Delay = 5, Targets = new List<int>{PieceType.PR_C1.Id, PieceType.PR_C2.Id, PieceType.PR_C3.Id}};
                 
-                step.RegisterComponent(new ChechStepTutorialCondition{Target = 3, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckStepTutorialCondition{Target = 3, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
                 
@@ -95,11 +95,21 @@ public static class TutorialBuilder
             }
             case 6:
             {
+                step = new SelectObstacleTutorialStep {Delay = 5, Targets = new List<int>{PieceType.OB1_TT.Id}};
+                
+                step.RegisterComponent(new CheckStepTutorialCondition{Target = 5, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckCurrencyTutorialCondition{Target = -1, Currensy = Currency.Worker.Name, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "3", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Hard}, true);
+                
+                break;
+            }
+            case 7:
+            {
                 step = new HighlightPiecesTutorialStep {Delay = 5, Targets = new List<int>{PieceType.A1.Id}};
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "6", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }

@@ -48,13 +48,13 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerCo
     {
     }
 
-    protected virtual Action InitInSaveStorage()
+    protected virtual Action InitInSaveStorage(LifeSaveItem item)
     {
         Action updateView;
-        storage.InitInSave(thisContext.CachedPosition, out updateView);
+        storage.InitInSave(thisContext.CachedPosition, () => InitInSaveReward(item), out updateView);
         return updateView;
     }
-
+    
     protected virtual void InitInSaveReward(LifeSaveItem item)
     {
         Reward = item.Reward;
@@ -71,9 +71,7 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerCo
         current = item.Step;
         thisContext.Context.WorkerLogic.Init(thisContext.CachedPosition, storage.Timer);
         
-        var updateView = InitInSaveStorage();
-        
-        InitInSaveReward(item);
+        var updateView = InitInSaveStorage(item);
         
         if (storage.IsFilled)
         {

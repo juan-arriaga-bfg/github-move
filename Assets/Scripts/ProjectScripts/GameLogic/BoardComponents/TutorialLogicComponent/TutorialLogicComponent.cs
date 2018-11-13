@@ -41,12 +41,15 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
         UIService.Get.OnShowWindowEvent += OnShowWindow;
         UIService.Get.OnCloseWindowEvent += OnCloseWindow;
         GameDataService.Current.QuestsManager.OnActiveQuestsListChanged += Update;
+        GameDataService.Current.QuestsManager.OnQuestStateChanged += OnQuestStateChanged;
     }
     
     public override void OnUnRegisterEntity(ECSEntity entity)
     {
         UIService.Get.OnShowWindowEvent -= OnShowWindow;
         UIService.Get.OnCloseWindowEvent -= OnCloseWindow;
+        GameDataService.Current.QuestsManager.OnActiveQuestsListChanged -= Update;
+        GameDataService.Current.QuestsManager.OnQuestStateChanged -= OnQuestStateChanged;
     }
     
     private void OnShowWindow(IWUIWindow window)
@@ -88,6 +91,11 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             if (isOn) condition.PauseOn();
             else condition.PauseOff();
         }
+    }
+
+    private void OnQuestStateChanged(QuestEntity quest, TaskEntity task)
+    {
+        Update();
     }
     
     public void Update()
