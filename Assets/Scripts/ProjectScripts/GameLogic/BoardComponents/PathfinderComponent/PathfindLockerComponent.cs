@@ -18,7 +18,6 @@ public class PathfindLockerComponent : ECSEntity
 
     private Dictionary<Piece, List<BoardPosition>> blockPathPieces = new Dictionary<Piece, List<BoardPosition>>();
     private List<Piece> freePieces = new List<Piece>();
-
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -142,7 +141,23 @@ public class PathfindLockerComponent : ECSEntity
     public virtual void RecalcCacheOnPieceRemoved(HashSet<BoardPosition> target , BoardPosition changedPosition, Piece removedPiece)
     {
         RecalcBlocked(target, removedPiece.CachedPosition);
-
+        if (PieceType.GetDefById(removedPiece.PieceType).Filter.HasFlag(PieceTypeFilter.Obstacle))
+        {
+            var emptyCells = CollectUnlockedEmptyCells();
+            foreach (var emptyCell in emptyCells)
+            {
+                var hasPath = HasPath(emptyCell);
+                if (hasPath)
+                {
+                    context.ActionExecutor.AddAction(new CollapsePieceToAction()
+                    {
+                        IsMatch = false,
+                        Positions = new List<BoardPosition>() {emptyCell.CachedPosition},
+                        To = emptyCell.CachedPosition
+                    });
+                }
+            }
+        }
         var board = context;
     }
 
