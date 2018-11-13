@@ -118,8 +118,8 @@ public class UiQuestButtonArrow : MonoBehaviour
         
         DOTween.Sequence()
                .SetId(this)
-               .Append(host.transform.DOLocalMoveX(-deltaMoveX, moveTime).SetRelative(true).SetEase(Ease.OutQuad).SetId(this))
-               .Append(host.transform.DOLocalMoveX(deltaMoveX, moveTime).SetRelative(true).SetEase(Ease.InOutQuad).SetId(this))
+               .Append(host.transform.DOLocalMoveX(deltaMoveX, moveTime).SetRelative(true).SetEase(Ease.OutQuad).SetId(this))
+               .Append(host.transform.DOLocalMoveX(-deltaMoveX, moveTime).SetRelative(true).SetEase(Ease.InOutQuad).SetId(this))
                .SetLoops(3);
 
         DOTween.Sequence()

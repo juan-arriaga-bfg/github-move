@@ -390,7 +390,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
 
         AddCharactersFromScenario(scenario, () =>
         {
-            NextScenarioAction();
+            NextScenarioAction(); 
         });
     }
 

@@ -205,6 +205,16 @@ public class UIQuestStartWindowModel : IWWindowModel
     {
         QuestStartScenario = new ConversationScenarioEntity();
 
+        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        {
+            Characters = new Dictionary<CharacterPosition, string>
+            {
+                {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
+            }
+        };
+        
+        QuestStartScenario.RegisterComponent(charsList);
+        
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
             "New cool quest start dialog here!",
@@ -251,7 +261,7 @@ public class UIQuestStartWindowModel : IWWindowModel
         
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
-            "We'll grow a candy tree when I get back.",
+            "We'll grow a candy tree\n\n when I get back.",
             CharacterEmotion.Sleep1,
             QuestsToStart.Select(e => e.Id).ToList()
         ));
@@ -275,29 +285,29 @@ public class UIQuestStartWindowModel : IWWindowModel
         
         QuestStartScenario.RegisterComponent(charsList);
 
-        QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharSleepingBeauty, 
-            "I've never seen anyone solve this puzzle so fast. You're talented!",
-            CharacterEmotion.Normal
-        ));
-        
-        QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharSleepingBeauty, 
-            "Oh, sorry, I almost forgot... ",
-            CharacterEmotion.Normal
-        ));
-
-        QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharSleepingBeauty, 
-            "Welcome to the Faitytale Kingdom! I'm Aurora, but some call me Sleeing Beauty. I'll be your guide on this magic journey.",
-            CharacterEmotion.Normal
-        ));           
-        
-        QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharSleepingBeauty, 
-            "I can't wait to start making some magic. Let's stop wasting time.",
-            CharacterEmotion.Happy
-        ));        
+        // QuestStartScenario.RegisterComponent(CreateStartBubble(
+        //     UiCharacterData.CharSleepingBeauty, 
+        //     "I've never seen anyone solve this puzzle so fast. You're talented!",
+        //     CharacterEmotion.Normal
+        // ));
+        //
+        // QuestStartScenario.RegisterComponent(CreateStartBubble(
+        //     UiCharacterData.CharSleepingBeauty, 
+        //     "Oh, sorry, I almost forgot... ",
+        //     CharacterEmotion.Normal
+        // ));
+        //
+        // QuestStartScenario.RegisterComponent(CreateStartBubble(
+        //     UiCharacterData.CharSleepingBeauty, 
+        //     "Welcome to the Faitytale Kingdom! I'm Aurora, but some call me Sleeing Beauty. I'll be your guide on this magic journey.",
+        //     CharacterEmotion.Normal
+        // ));           
+        //
+        // QuestStartScenario.RegisterComponent(CreateStartBubble(
+        //     UiCharacterData.CharSleepingBeauty, 
+        //     "I can't wait to start making some magic. Let's stop wasting time.",
+        //     CharacterEmotion.Happy
+        // ));        
         
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 

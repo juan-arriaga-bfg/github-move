@@ -18,6 +18,7 @@ public class UIQuestStartWindowView : IWUIWindowView
     [SerializeField] private CanvasGroup questCardsCanvasGroup;
     [SerializeField] private CanvasGroup rootCanvasGroup;
     [SerializeField] private IWUILayer uiLayer;
+    [SerializeField] private QuestCardsLayoutHelper questCardsLayoutHelper;
     
     private readonly List<UIQuestCard> questCards = new List<UIQuestCard>();
 
@@ -119,6 +120,8 @@ public class UIQuestStartWindowView : IWUIWindowView
         
         if (model.QuestsToStart != null)
         {
+            questCardsLayoutHelper.FixLayout();
+            
             // Create cards
             foreach (var quest in model.QuestsToStart)
             {
@@ -141,12 +144,16 @@ public class UIQuestStartWindowView : IWUIWindowView
                 canvasGroup.alpha = 0;
                 canvasGroup.DOFade(1, ANIMATION_TIME)
                            .SetEase(Ease.OutSine);
+
+                var finalScale = questCardPrefab.transform.localScale;
                 
                 card.transform.localScale = Vector3.zero;
-                card.transform.DOScale(Vector3.one, ANIMATION_TIME)
+                card.transform.DOScale(finalScale, ANIMATION_TIME)
                     .SetEase(Ease.OutElastic);
 
             }
+
+            //questCardsLayoutHelper.FixLayoutAtTheNextFrame();
         }
 
         DOTween.Sequence()
@@ -264,6 +271,7 @@ public class UIQuestStartWindowView : IWUIWindowView
                 else
                 {
                     Controller.CloseCurrentWindow();
+                    return;
                 }
             }
 
