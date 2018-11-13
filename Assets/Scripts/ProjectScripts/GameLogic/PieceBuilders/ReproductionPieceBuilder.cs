@@ -29,7 +29,7 @@ public class ReproductionPieceBuilder : SimplePieceBuilder
 			.RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}
 				.RegisterDefinition(new TouchReactionDefinitionOpenBubble {ViewId = ViewType.ObstacleState})
 				.RegisterDefinition(new TouchReactionDefinitionSpawnInStorage {IsAutoStart = false}))
-			.RegisterComponent(new TouchReactionConditionStorage()));
+			.RegisterComponent(new TouchReactionConditionPR()));
 		
 		return piece;
 	}

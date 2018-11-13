@@ -113,6 +113,16 @@ public static class TutorialBuilder
                 
                 break;
             }
+            case 8: // unlock PR pieces
+            {
+                step = new BaseTutorialStep();
+                
+                step.RegisterComponent(new CheckStepTutorialCondition{Target = 1, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "8", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "8", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
+                
+                break;
+            }
             default:
                 return null;
         }
