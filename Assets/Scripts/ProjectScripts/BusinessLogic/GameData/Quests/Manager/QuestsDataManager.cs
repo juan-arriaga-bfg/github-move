@@ -386,12 +386,20 @@ public class QuestsDataManager : IECSComponent, IDataManager
         quest = InstantiateQuest(id);
         ActiveQuests.Add(quest);
 
-        quest.Start(saveData);
+        // To handle Pending -> New transition for listeners
+        if (saveData == null)
+        {
+            quest.OnChanged += OnQuestsStateChangedEvent;
+            OnActiveQuestsListChanged?.Invoke();
+            quest.Start(null);
+        }
+        else
+        {
+            quest.Start(saveData);
+            quest.OnChanged += OnQuestsStateChangedEvent;
+            OnActiveQuestsListChanged?.Invoke();
+        }
 
-        quest.OnChanged += OnQuestsStateChangedEvent;
-        
-        OnActiveQuestsListChanged?.Invoke();
-        
         return quest;
     }
 

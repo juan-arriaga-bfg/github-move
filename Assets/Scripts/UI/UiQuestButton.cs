@@ -25,7 +25,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     private TaskEntity GetFirstTask()
     {
-        return interactive ? Quest.ActiveTasks[0] : Quest.Tasks[0];
+        return Quest.Tasks[0];
     }
     
     public void Init(QuestEntity quest, bool interactive)
