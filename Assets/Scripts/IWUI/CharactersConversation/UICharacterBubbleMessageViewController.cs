@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class UICharacterBubbleMessageViewController : UICharacterBubbleView, ITeleTypedText
 {
-    [SerializeField] private Transform back;
-    [SerializeField] private Image headerBack;
-    [SerializeField] private NSText header;
-    [SerializeField] private NSText message;
-    [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] protected Transform back;
+    [SerializeField] protected Transform bubbleHost;
+    [SerializeField] protected Image headerBack;
+    [SerializeField] protected NSText header;
+    [SerializeField] protected NSText message;
+    [SerializeField] protected CanvasGroup canvasGroup;
 
 #region Teletype
     
@@ -57,11 +58,8 @@ public class UICharacterBubbleMessageViewController : UICharacterBubbleView, ITe
 
         SetCharRelatedData(data);
 
-        SetSide(data.Side);
-        
-        canvasGroup.alpha = 0;
-        canvasGroup.DOFade(1, 0.5f);
-        
+        SetSide(data.Side);    
+
         message.Text = data.Message;
 
         if (data.AllowTeleType)
@@ -69,12 +67,18 @@ public class UICharacterBubbleMessageViewController : UICharacterBubbleView, ITe
             PlayTeleTypeEffect();
         }
 
+        canvasGroup.alpha = 0;
+        
+        ShowAnimation(onComplete);
+    }
+
+    protected virtual void ShowAnimation(Action onComplete)
+    {
+        canvasGroup.DOFade(1, 0.5f);
+
         DOTween.Sequence()
                .AppendInterval(0.1f)
-               .AppendCallback(() =>
-                {
-                    onComplete?.Invoke();
-                });
+               .AppendCallback(() => { onComplete?.Invoke(); });
     }
 
     private void SetSide(CharacterSide side)
