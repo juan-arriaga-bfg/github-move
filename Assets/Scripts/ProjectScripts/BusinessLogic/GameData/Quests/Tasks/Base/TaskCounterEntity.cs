@@ -37,6 +37,11 @@ public abstract class TaskCounterEntity : TaskEntity
             {
                 return;
             }
+
+            if (State == TaskState.New)
+            {
+                State = TaskState.InProgress;
+            }
             
             currentValue = value;
             Check();

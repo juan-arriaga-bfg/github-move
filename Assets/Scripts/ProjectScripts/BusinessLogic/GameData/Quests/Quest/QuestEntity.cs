@@ -116,11 +116,15 @@ public class QuestEntity : ECSEntity, IECSSerializeable
     {
         if (IsInProgress())
         {
+            bool isAllTasksCompleted = true;
+            
             foreach (var task in Tasks)
             {
-                if (task.State != TaskState.Completed && task.State != TaskState.Claimed)
+                isAllTasksCompleted = isAllTasksCompleted && (task.State == TaskState.Completed || task.State == TaskState.Claimed);
+
+                if (task.State == TaskState.InProgress && State == TaskState.New)
                 {
-                    return;
+                    State = TaskState.InProgress;
                 }
             }
             
@@ -222,9 +226,9 @@ public class QuestEntity : ECSEntity, IECSSerializeable
 
     private void TaskChanged(TaskEntity task)
     {
-        Debug.Log("TaskChanged: " + this);
         UpdateState();
         OnChanged?.Invoke(this, task);
+        Debug.Log("TaskChanged: " + this);
     }
     
     private void SortTasks()
