@@ -9,6 +9,6 @@ public class CheckQuestTutorialCondition : BaseTutorialCondition
 	{
 		var quest = GameDataService.Current?.QuestsManager?.ActiveQuests?.Find(entity => entity.Id == Target);
 		
-		return quest != null && quest.State == TargetState;
+		return quest != null && quest.State >= TargetState;
 	}
 }

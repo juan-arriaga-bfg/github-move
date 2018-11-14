@@ -72,27 +72,7 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
 
         if (best.Count < amountMatch)
         {
-            var distance = float.MaxValue;
-                
-            BoardPosition? next = null;
-            BoardPosition? previous = null;
-                
-            foreach (var position in positions)
-            {
-                if(best.Contains(position)) continue;
-
-                var magnitude = BoardPosition.SqrMagnitude(best[0], position);
-                    
-                if(distance <= magnitude) continue;
-
-                distance = magnitude;
-
-                previous = next;
-                next = position;
-            }
-
-            if (next != null) best.Add(next.Value);
-            if (best.Count < amountMatch && previous != null) best.Add(previous.Value);
+            best.AddRange(best[0].GetImmediate(positions, best, amountMatch - best.Count));
         }
         
         foreach (var position in best)
