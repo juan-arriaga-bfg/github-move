@@ -41,7 +41,7 @@ public class IWTextMeshAnimation : MonoBehaviour
 
         isAnimating = true;
         
-        Curve();
+        //Curve();
 
         StartCoroutine(AnimateScaleCoroutine());
     }
@@ -147,6 +147,16 @@ public class IWTextMeshAnimation : MonoBehaviour
 
     public virtual IEnumerator AnimateScaleCoroutine()
     {
+        float time = 0f;
+        float duration = animDuration;
+        
+        
+        if (string.IsNullOrEmpty(textLabel.text))
+        {
+            isAnimating = false;
+            time = float.MaxValue;
+        }
+        
         textLabel.ForceMeshUpdate();
         var mesh = textLabel.mesh;
         Vector3[] vertices = mesh.vertices;
@@ -156,6 +166,12 @@ public class IWTextMeshAnimation : MonoBehaviour
         Matrix4x4 matrix;
         int charCount = textLabel.textInfo.characterCount;
 
+        // Why characterCount may != characterInfo.Length happens ?!
+        while (textLabel.textInfo.characterCount != textLabel.textInfo.characterInfo.Length)
+        {
+            yield return null;
+        }
+        
         List<int> processedVertexIndex = new List<int>();
 
         for (int i = 0; i < charCount; i++)
@@ -168,12 +184,8 @@ public class IWTextMeshAnimation : MonoBehaviour
             processedVertexIndex.Add(vertexIndex);
         }
 
-        float time = 0f;
-        float duration = animDuration;
-
         while (time < duration)
         {
-
             for (int i = 0; i < processedVertexIndex.Count; i++)
             {
                 int vertexIndex = processedVertexIndex[i];
