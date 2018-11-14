@@ -409,7 +409,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
     /// <param name="id"></param>
     public void CompleteQuest(string id)
     {
-        Debug.Log("!!! CompleteQuest: " + id);
+        //Debug.Log("!!! CompleteQuest: " + id);
         
         for (var i = 0; i < ActiveQuests.Count; i++)
         {

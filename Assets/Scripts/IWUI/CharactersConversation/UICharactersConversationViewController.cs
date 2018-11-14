@@ -134,13 +134,53 @@ public partial class UICharactersConversationViewController : IWUIWindowView
                 continue;
             }
 
-                AddCharacter(pair.Value, pair.Key, false, false, onComplete);
+            InitCharacter(pair.Value, pair.Key, false);
          }
 
-        // if (scenario.Continuation && charsList.Characters.Count == 1)
-        if (false)
+        if (!scenario.Continuation && charsList.Characters.Count == 1)
         {
-            SpawnCharactersAnimated(onComplete);
+            SpawnCharacters(true, onComplete);
+        }
+        else
+        {
+            SpawnCharacters(false, onComplete);
+        }
+    }
+
+    private void SpawnCharacters(bool animated, Action onComplete)
+    {
+        if (animated && (scenario.Continuation || characters.Count != 1))
+        {
+            Debug.LogError("[UICharactersConversationViewController] => SpawnCharactersAnimated: supported only for ONE char in scenario and not for chained scenario");
+            onComplete();
+            return;
+        }
+
+        ConversationActionEntity action = scenario.GetFirstAction();
+        ConversationActionBubbleEntity bubbleAction = action as ConversationActionBubbleEntity;
+
+        var character = characters[bubbleAction.BubbleDef.CharacterId];
+        character.ToForeground(false, bubbleAction.BubbleDef.Emotion);
+
+        if (animated)
+        {
+            float dx = 150;
+            float moveTime = 0.3f;
+            float fadeTime = moveTime - 0.1f;
+
+            var initialPos = character.transform.localPosition;
+            var newPos = initialPos;
+            newPos.x -= dx;
+            character.transform.localPosition = newPos;
+
+            var canvasGroup = character.GetCanvasGroup();
+            canvasGroup.alpha = 0;
+
+            canvasGroup.DOFade(1, fadeTime);
+
+            character.transform.DOLocalMoveX(initialPos.x, moveTime)
+                     .SetEase(Ease.OutBack)
+                     .OnComplete(() => { onComplete(); });
         }
         else
         {
@@ -148,37 +188,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         }
     }
 
-    private void SpawnCharactersAnimated(Action onComplete)
-    {
-        if (scenario.Continuation || characters.Count != 1)
-        {
-            Debug.LogError("[UICharactersConversationViewController] => SpawnCharactersAnimated: supported only for ONE char in scenario and not for chained scenario");
-            onComplete();
-            return;
-        }
-
-        var character = characters.Values.First();
-
-        float dx = 150;
-        float moveTime = 0.3f;
-        float fadeTime = moveTime - 0.1f;
-
-        var initialPos = character.transform.localPosition;
-        var newPos = initialPos;
-        newPos.x -= dx;
-        character.transform.localPosition = newPos;
-
-        var canvasGroup = character.GetCanvasGroup();
-        canvasGroup.alpha = 0;
-        
-        canvasGroup.DOFade(1, fadeTime);
-
-        character.transform.DOLocalMoveX(initialPos.x, moveTime)
-                 .SetEase(Ease.OutSine)
-                 .OnComplete(() => { onComplete(); });
-    }
-
-    public void AddCharacter(string characterId, CharacterPosition position, bool active, bool animated, Action onComplete = null)
+    public void InitCharacter(string characterId, CharacterPosition position, bool active)
     {
         var pool = UIService.Get.PoolContainer;
 
@@ -198,7 +208,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         characters.Add(characterId, character);
         characterPositions.Add(position, character);
         
-        character.ToggleActive(active, CharacterEmotion.Normal, false, onComplete);
+        character.ToggleActive(active, CharacterEmotion.Normal, false);
     }
 
     public void RemoveCharacter(string characterId, bool animated)

@@ -34,4 +34,9 @@ public class ConversationScenarioEntity : ECSEntity, IECSSerializeable
 
         return ret;
     }
+
+    public ConversationActionEntity GetFirstAction()
+    {
+        return actions[0];
+    }
 }
