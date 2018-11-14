@@ -1,10 +1,14 @@
 ﻿public class TouchReactionConditionFog : TouchReactionConditionComponent
 {
+	private FogObserver observer;
+	
 	public override bool Check(BoardPosition position, Piece piece)
 	{
-		var boardController = piece.Context;
+		if (observer == null) observer = piece.GetComponent<FogObserver>(FogObserver.ComponentGuid);
+
+		if (!observer.IsActive) return false;
 		
-		if (boardController?.Pathfinder.CanPathToCastle(piece) == false)
+		if (piece.Context?.Pathfinder.CanPathToCastle(piece) == false)
 		{
 			UIErrorWindowController.AddError("Path not found");
 			return false;

@@ -163,6 +163,8 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 
     public override void OnTap(BoardPosition boardPos, Vector2 worldPos)
     {
+	    if(observer.IsActive == false) return;
+	    
         base.OnTap(boardPos, worldPos);
         Piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.FogTap, Piece);
     }

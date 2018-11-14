@@ -186,6 +186,15 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
         return pathExists && resourcesEnought;
     }
+
+    public bool IsActive
+    {
+        get
+        {
+            var canPath = Context.Context.Pathfinder.CanPathToCastle(Context);
+            return canPath || storageItem.Amount >= level;
+        }
+    }
     
     private void OnClick(Piece piece)
     {
