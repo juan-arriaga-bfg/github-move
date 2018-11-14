@@ -1336,14 +1336,6 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "NPC_4",
-    "SpriteName": "NPC_4",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield2",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
     "Uid": "NPC_5",
     "SpriteName": "NPC_5",
     "BundleName": "graphicscommon",
@@ -1477,6 +1469,14 @@
     "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/ProcessedContent",
     "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "NPC_Gnome",
+    "SpriteName": "NPC_Gnome",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield2",
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   }
 ]

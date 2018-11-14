@@ -750,11 +750,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "NPC_4Piece",
-    "ResourcePath": "Prefabs\\Pieces\\Characters/NPC_4Piece",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "NPC_5Piece",
     "ResourcePath": "Prefabs\\Pieces\\Characters/NPC_5Piece",
     "IsGenerateAutoName": true
@@ -862,6 +857,11 @@
   {
     "Uid": "OB2_TTPiece",
     "ResourcePath": "Prefabs\\Pieces\\Obstacles/OB2_TTPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "NPC_GnomePiece",
+    "ResourcePath": "Prefabs\\Pieces\\Characters/NPC_GnomePiece",
     "IsGenerateAutoName": true
   }
 ]

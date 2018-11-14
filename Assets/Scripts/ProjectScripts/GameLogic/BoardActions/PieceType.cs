@@ -90,7 +90,7 @@ public static partial class PieceType
     public static readonly PieceTypeDef NPC_SleepingBeauty = new PieceTypeDef{Id = 10, Abbreviations = new List<string>{ "NPC_SleepingBeauty" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     public static readonly PieceTypeDef NPC_Rapunzel = new PieceTypeDef{Id = 11, Abbreviations = new List<string>{ "NPC_Rapunzel" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     public static readonly PieceTypeDef NPC_PussInBoots = new PieceTypeDef{Id = 12, Abbreviations = new List<string>{ "NPC_PussInBoots" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_4 = new PieceTypeDef{Id = 13, Abbreviations = new List<string>{ "NPC_4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_Gnome = new PieceTypeDef{Id = 13, Abbreviations = new List<string>{ "NPC_Gnome" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     public static readonly PieceTypeDef NPC_5 = new PieceTypeDef{Id = 14, Abbreviations = new List<string>{ "NPC_5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     public static readonly PieceTypeDef NPC_6 = new PieceTypeDef{Id = 15, Abbreviations = new List<string>{ "NPC_6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     public static readonly PieceTypeDef NPC_7 = new PieceTypeDef{Id = 16, Abbreviations = new List<string>{ "NPC_7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
