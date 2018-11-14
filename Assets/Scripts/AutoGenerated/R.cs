@@ -63,7 +63,6 @@ public class R
      public const string C7Piece = "C7Piece";
      public const string C8Piece = "C8Piece";
      public const string C9Piece = "C9Piece";
-     public const string C10Piece = "C10Piece";
      public const string D1Piece = "D1Piece";
      public const string D2Piece = "D2Piece";
      public const string D3Piece = "D3Piece";

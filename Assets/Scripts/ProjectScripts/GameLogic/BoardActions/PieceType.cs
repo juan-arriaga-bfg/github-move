@@ -252,11 +252,9 @@ public static partial class PieceType
     public static readonly PieceTypeDef C7Fake = new PieceTypeDef{Id = 100210, Abbreviations = new List<string>{ "C7Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.WorkPlace};
     public static readonly PieceTypeDef C7 = new PieceTypeDef{Id = 100211, Abbreviations = new List<string>{ "C7" }, Filter = PieceTypeFilter.Simple};
     public static readonly PieceTypeDef C8Fake = new PieceTypeDef{Id = 100212, Abbreviations = new List<string>{ "C8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.WorkPlace};
-    public static readonly PieceTypeDef C8 = new PieceTypeDef{Id = 100213, Abbreviations = new List<string>{ "C8" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef C9Fake = new PieceTypeDef{Id = 100214, Abbreviations = new List<string>{ "C9Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.WorkPlace};
-    public static readonly PieceTypeDef C9 = new PieceTypeDef{Id = 100215, Abbreviations = new List<string>{ "C9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.WorkPlace};
-    public static readonly PieceTypeDef C10Fake = new PieceTypeDef{Id = 100216, Abbreviations = new List<string>{ "C10Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.WorkPlace};
-    public static readonly PieceTypeDef C10 = new PieceTypeDef{Id = 100217, Abbreviations = new List<string>{ "C10" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.WorkPlace};
+    public static readonly PieceTypeDef C8 = new PieceTypeDef{Id = 100213, Abbreviations = new List<string>{ "C8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.WorkPlace};
+    public static readonly PieceTypeDef C9Fake = new PieceTypeDef{Id = 100214, Abbreviations = new List<string>{ "C9Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.WorkPlace};
+    public static readonly PieceTypeDef C9 = new PieceTypeDef{Id = 100215, Abbreviations = new List<string>{ "C9" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.WorkPlace};
     
     #endregion
     
