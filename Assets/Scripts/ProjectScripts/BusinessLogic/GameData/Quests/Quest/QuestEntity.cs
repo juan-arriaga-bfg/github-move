@@ -127,6 +127,11 @@ public class QuestEntity : ECSEntity, IECSSerializeable
                     State = TaskState.InProgress;
                 }
             }
+
+            if (isAllTasksCompleted)
+            {
+                State = TaskState.Completed;
+            }
         }
     }
     

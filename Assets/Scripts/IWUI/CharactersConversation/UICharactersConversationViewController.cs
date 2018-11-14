@@ -414,12 +414,8 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             PerformActionBubble();
             return;
         }
-        if (activeAction is ConversationActionAddCharactersEntity)
-        {
-            PerformActionAddCharacters();
-            return;
-        }
-        else if (activeAction is ConversationActionExternalActionEntity)
+
+        if (activeAction is ConversationActionExternalActionEntity)
         {
             PerformActionExternal();
             return;
