@@ -1,10 +1,10 @@
 [
   {
-    "Id": 1,
+    "Id": "1_CreatePiece_PR_C4",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "1"
+        "TaskId": "1_CreatePiece_PR_C4"
       }
     ],
     "ComponentsCache": {
@@ -31,11 +31,11 @@
     }
   },
   {
-    "Id": 2,
+    "Id": "2_ClearFog",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "2"
+        "TaskId": "2_ClearFog"
       }
     ],
     "ComponentsCache": {
@@ -62,11 +62,11 @@
     }
   },
   {
-    "Id": 3,
+    "Id": "3_KillTree",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "3"
+        "TaskId": "3_KillTree"
       }
     ],
     "ComponentsCache": {
@@ -93,11 +93,11 @@
     }
   },
   {
-    "Id": 4,
+    "Id": "4_CreatePiece_A2",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "4"
+        "TaskId": "4_CreatePiece_A2"
       }
     ],
     "ComponentsCache": {
@@ -124,11 +124,11 @@
     }
   },
   {
-    "Id": 6,
+    "Id": "5_CreatePieceA5",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "6"
+        "TaskId": "5_CreatePieceA5"
       }
     ],
     "ComponentsCache": {
@@ -155,11 +155,11 @@
     }
   },
   {
-    "Id": 7,
+    "Id": "6_ClearFog",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "7"
+        "TaskId": "6_ClearFog"
       }
     ],
     "ComponentsCache": {
@@ -186,11 +186,11 @@
     }
   },
   {
-    "Id": 8,
+    "Id": "7_CreatePiece_PR_A5",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "8"
+        "TaskId": "7_CreatePiece_PR_A5"
       }
     ],
     "ComponentsCache": {
@@ -217,11 +217,11 @@
     }
   },
   {
-    "Id": 9,
+    "Id": "8_CreatePiece_PR_B5",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "9"
+        "TaskId": "8_CreatePiece_PR_B5"
       }
     ],
     "ComponentsCache": {
@@ -248,11 +248,11 @@
     }
   },
   {
-    "Id": 10,
+    "Id": "\n9_CreatePiece_PR_C5\n",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "10"
+        "TaskId": "9_CreatePiece_PR_C5"
       }
     ],
     "ComponentsCache": {
@@ -279,11 +279,11 @@
     }
   },
   {
-    "Id": 11,
+    "Id": "10_OpenChest",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "11"
+        "TaskId": "10_OpenChest"
       }
     ],
     "ComponentsCache": {
@@ -310,11 +310,11 @@
     }
   },
   {
-    "Id": 12,
+    "Id": "11_UseWorker",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "12"
+        "TaskId": "11_UseWorker"
       }
     ],
     "ComponentsCache": {
@@ -341,11 +341,11 @@
     }
   },
   {
-    "Id": 13,
+    "Id": "12_UseMine",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "13"
+        "TaskId": "12_UseMine"
       }
     ],
     "ComponentsCache": {
@@ -372,11 +372,11 @@
     }
   },
   {
-    "Id": 14,
+    "Id": "13_CreatePiece_A6",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "14"
+        "TaskId": "13_CreatePiece_A6"
       }
     ],
     "ComponentsCache": {
@@ -403,11 +403,11 @@
     }
   },
   {
-    "Id": 16,
+    "Id": "14_CreatePiece_B3",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "16"
+        "TaskId": "14_CreatePiece_B3"
       }
     ],
     "ComponentsCache": {
@@ -434,11 +434,11 @@
     }
   },
   {
-    "Id": 17,
+    "Id": "15_CreatePiece_B4",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "17"
+        "TaskId": "15_CreatePiece_B4"
       }
     ],
     "ComponentsCache": {
@@ -465,11 +465,11 @@
     }
   },
   {
-    "Id": 18,
+    "Id": "16_CompleteOrder",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "18"
+        "TaskId": "16_CompleteOrder"
       }
     ],
     "ComponentsCache": {
@@ -496,11 +496,11 @@
     }
   },
   {
-    "Id": 19,
+    "Id": "17_KillField",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "19"
+        "TaskId": "17_KillField"
       }
     ],
     "ComponentsCache": {

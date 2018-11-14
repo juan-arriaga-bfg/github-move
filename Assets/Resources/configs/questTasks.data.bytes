@@ -1,7 +1,7 @@
 [
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "1",
+    "Id": "1_CreatePiece_PR_C4",
     "PieceUid": "PR_C4",
     "TargetValue": 1,
     "ComponentsCache": {
@@ -12,7 +12,7 @@
   },
   {
     "$type": "TaskClearFogEntity, Assembly-CSharp",
-    "Id": "2",
+    "Id": "2_ClearFog",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -23,7 +23,7 @@
   },
   {
     "$type": "TaskKillTreeEntity, Assembly-CSharp",
-    "Id": "3",
+    "Id": "3_KillTree",
     "TargetValue": 4,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -34,7 +34,7 @@
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "4",
+    "Id": "4_CreatePiece_A2",
     "PieceUid": "A2",
     "TargetValue": 3,
     "ComponentsCache": {
@@ -45,7 +45,7 @@
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "6",
+    "Id": "5_CreatePieceA5",
     "PieceUid": "A5",
     "TargetValue": 1,
     "ComponentsCache": {
@@ -56,7 +56,7 @@
   },
   {
     "$type": "TaskClearFogEntity, Assembly-CSharp",
-    "Id": "7",
+    "Id": "6_ClearFog",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -67,7 +67,7 @@
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "8",
+    "Id": "7_CreatePiece_PR_A5",
     "PieceUid": "PR_A5",
     "TargetValue": 5,
     "ComponentsCache": {
@@ -78,7 +78,7 @@
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "9",
+    "Id": "8_CreatePiece_PR_B5",
     "PieceUid": "PR_B5",
     "TargetValue": 3,
     "ComponentsCache": {
@@ -89,7 +89,7 @@
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "10",
+    "Id": "9_CreatePiece_PR_C5",
     "PieceUid": "PR_C5",
     "TargetValue": 3,
     "ComponentsCache": {
@@ -100,7 +100,7 @@
   },
   {
     "$type": "TaskOpenChestEntity, Assembly-CSharp",
-    "Id": "11",
+    "Id": "10_OpenChest",
     "PieceUid": "CH1_A",
     "TargetValue": 1,
     "ComponentsCache": {
@@ -112,7 +112,7 @@
   },
   {
     "$type": "TaskUseWorkerEntity, Assembly-CSharp",
-    "Id": "12",
+    "Id": "11_UseWorker",
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -123,7 +123,7 @@
   },
   {
     "$type": "TaskUseMineEntity, Assembly-CSharp",
-    "Id": "13",
+    "Id": "12_UseMine",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -134,7 +134,7 @@
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "14",
+    "Id": "13_CreatePiece_A6",
     "PieceUid": "A6",
     "TargetValue": 1,
     "ComponentsCache": {
@@ -145,7 +145,7 @@
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "16",
+    "Id": "14_CreatePiece_B3",
     "PieceUid": "B3",
     "TargetValue": 3,
     "ComponentsCache": {
@@ -156,7 +156,7 @@
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "17",
+    "Id": "15_CreatePiece_B4",
     "PieceUid": "B4",
     "TargetValue": 2,
     "ComponentsCache": {
@@ -167,8 +167,8 @@
   },
   {
     "$type": "TaskCompleteOrderEntity, Assembly-CSharp",
-    "Id": "18",
-    "PieceUid": "B4",
+    "Id": "16_CompleteOrder",
+    "PieceUid": "NPC_SleepingBeauty",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -179,7 +179,7 @@
   },
   {
     "$type": "TaskKillFieldEntity, Assembly-CSharp",
-    "Id": "19",
+    "Id": "17_KillField",
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
