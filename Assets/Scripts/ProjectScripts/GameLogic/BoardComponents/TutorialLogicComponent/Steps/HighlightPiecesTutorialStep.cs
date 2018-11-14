@@ -105,11 +105,6 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
         }
         
         Context.Context.Manipulator.CameraManipulator.MoveTo(selectPieces[0].transform.position);
-        
-        var sequence = DOTween.Sequence().SetId(this);
-
-        sequence.AppendInterval(2.7f);
-        sequence.AppendCallback(SelectionOff);
     }
     
     public override bool IsExecuteable()
