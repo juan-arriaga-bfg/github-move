@@ -403,37 +403,6 @@
     }
   },
   {
-    "Id": 15,
-    "$type": "QuestEntity, Assembly-CSharp",
-    "TaskDefs": [
-      {
-        "TaskId": "15"
-      }
-    ],
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 25
-          },
-          {
-            "Currency": "Mana",
-            "Amount": 25
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 25
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Title": "Clear a fog",
-        "Message": "Clear a fog"
-      }
-    }
-  },
-  {
     "Id": 16,
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [

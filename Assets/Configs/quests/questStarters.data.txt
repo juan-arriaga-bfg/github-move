@@ -56,20 +56,6 @@
     ]
   },
   {
-    "Id": 5,
-    "$type": "QuestStarterEntity, Assembly-CSharp",
-    "QuestToStartIds": [
-      "15"
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
-        "Id": "QuestCompleted",
-        "Value": "2"
-      }
-    ]
-  },
-  {
     "Id": 6,
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "QuestToStartIds": [
@@ -94,9 +80,9 @@
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
-        "Id": "QuestCompleted",
-        "Value": "15"
+        "$type": "QuestStartConditionFogClearedComponent, Assembly-CSharp",
+        "Id": "FogCleared",
+        "Value": "Fog 3"
       }
     ]
   },
@@ -152,7 +138,7 @@
       {
         "$type": "QuestStartConditionPieceUnlockedComponent, Assembly-CSharp",
         "Id": "PieceUnlocked",
-        "Value": "CH2_A"
+        "Value": "CH1_A"
       }
     ]
   },
@@ -178,9 +164,9 @@
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
-        "Id": "QuestCompleted",
-        "Value": "16"
+        "$type": "QuestStartConditionFogClearedComponent, Assembly-CSharp",
+        "Id": "FogCleared",
+        "Value": "Fog 5"
       }
     ]
   },

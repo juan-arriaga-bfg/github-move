@@ -69,7 +69,7 @@
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "8",
     "PieceUid": "PR_A5",
-    "TargetValue": 3,
+    "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Message": "Clear a fog"
@@ -101,11 +101,11 @@
   {
     "$type": "TaskOpenChestEntity, Assembly-CSharp",
     "Id": "11",
-    "PieceUid": "CH2_A",
+    "PieceUid": "CH1_A",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "CH2_A",
+        "Ico": "CH1_A",
         "Message": "Create a Piece"
       }
     }
@@ -144,17 +144,6 @@
     }
   },
   {
-    "$type": "TaskClearFogEntity, Assembly-CSharp",
-    "Id": "15",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Ico": "Fog1",
-        "Message": "Clear a fog"
-      }
-    }
-  },
-  {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
     "Id": "16",
     "PieceUid": "B3",
@@ -179,6 +168,7 @@
   {
     "$type": "TaskCompleteOrderEntity, Assembly-CSharp",
     "Id": "18",
+    "PieceUid": "B4",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
