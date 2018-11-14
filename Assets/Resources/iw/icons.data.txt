@@ -624,14 +624,6 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "C10",
-    "SpriteName": "C10",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
     "Uid": "D1",
     "SpriteName": "D1",
     "BundleName": "graphicscommon",
@@ -1474,17 +1466,17 @@
   {
     "Uid": "OB1_TT",
     "SpriteName": "OB1_TT",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB1_TT",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
     "Uid": "OB2_TT",
     "SpriteName": "OB2_TT",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB2_TT",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   }
 ]
