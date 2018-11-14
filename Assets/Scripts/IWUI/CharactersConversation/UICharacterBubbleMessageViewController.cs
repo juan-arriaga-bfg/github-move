@@ -105,7 +105,12 @@ public class UICharacterBubbleMessageViewController : UICharacterBubbleView, ITe
             onComplete?.Invoke();
             return;
         }
-        
+
+        HideAnimation(onComplete);
+    }
+
+    protected virtual void HideAnimation(Action onComplete)
+    {
         canvasGroup.DOFade(0, 1);
         DOTween.Sequence()
                .AppendInterval(0.5f)

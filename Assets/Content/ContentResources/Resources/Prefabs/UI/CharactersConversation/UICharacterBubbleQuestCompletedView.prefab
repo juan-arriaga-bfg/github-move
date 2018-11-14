@@ -128,6 +128,7 @@ GameObject:
   - component: {fileID: 222933877080247286}
   - component: {fileID: 114519042304135008}
   - component: {fileID: 111306389239395128}
+  - component: {fileID: 225682170423672510}
   m_Layer: 31
   m_Name: Shine
   m_TagString: Untagged
@@ -146,8 +147,6 @@ GameObject:
   - component: {fileID: 222559536288863572}
   - component: {fileID: 114394277861144584}
   - component: {fileID: 114755390409285948}
-  - component: {fileID: 114648353214209952}
-  - component: {fileID: 114029997358602424}
   - component: {fileID: 114374066820713348}
   m_Layer: 31
   m_Name: MegaHeader
@@ -326,6 +325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224912511503045222}
   - component: {fileID: 114508989221445860}
+  - component: {fileID: 95759121435225624}
   m_Layer: 31
   m_Name: UICharacterBubbleQuestCompletedView
   m_TagString: Untagged
@@ -350,6 +350,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &95759121435225624
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1981514431409320}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 06e2a530eee13c74ab983bf97adcbf60, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!111 &111306389239395128
 Animation:
   m_ObjectHideFlags: 1
@@ -378,25 +396,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowSwitching: 1
   styleId: 10
---- !u!114 &114029997358602424
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1386587897504836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 1
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!114 &114091696980748566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -721,6 +720,7 @@ MonoBehaviour:
   angleMultiplier: 1
   curveScale: 1
   animDuration: 1
+  autoplayOnEnable: 1
 --- !u!114 &114388520757124470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -819,8 +819,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 81.86
-  m_fontSizeBase: 81.86
+  m_fontSize: 140
+  m_fontSizeBase: 140
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -837,7 +837,7 @@ MonoBehaviour:
   m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -868,11 +868,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1059,6 +1059,7 @@ MonoBehaviour:
   questButton: {fileID: 114697657903006910}
   rewardLabel: {fileID: 114904862601707934}
   textMeshAnimation: {fileID: 114374066820713348}
+  animator: {fileID: 95759121435225624}
 --- !u!114 &114519042304135008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1181,11 +1182,11 @@ MonoBehaviour:
     lineCount: 3
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1346,11 +1347,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 3
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1386,17 +1387,6 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
---- !u!114 &114648353214209952
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1386587897504836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a49eb839d9894efd9e5b210f378073f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114697657903006910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1851,7 +1841,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 357, y: 358.29498}
+  m_AnchoredPosition: {x: 357, y: 633}
   m_SizeDelta: {x: 816.5, y: 118.6}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224309695717674686
@@ -2120,6 +2110,17 @@ RectTransform:
   m_AnchoredPosition: {x: -350, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225682170423672510
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1282702155169610}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!225 &225810614482783040
 CanvasGroup:
   m_ObjectHideFlags: 1

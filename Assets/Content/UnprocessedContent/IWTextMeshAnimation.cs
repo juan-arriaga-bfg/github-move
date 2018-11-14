@@ -19,6 +19,8 @@ public class IWTextMeshAnimation : MonoBehaviour
     [SerializeField] private float curveScale = 1f;
 
     [SerializeField] private float animDuration = 1f;
+    
+    [SerializeField] private bool autoplayOnEnable = false;
 
     protected bool isAnimating = false;
 
@@ -49,11 +51,22 @@ public class IWTextMeshAnimation : MonoBehaviour
     
     private void OnEnable()
     {
-        if (Application.isPlaying) return;
+        // if (Application.isPlaying)
+        // {
+        //     Curve();
+        //     return;
+        // }
         
-        if (isAnimating) return;
-        
-        Curve();
+        // if (isAnimating && !autoplayOnEnable) return;
+
+        if (autoplayOnEnable && Application.isPlaying)
+        {
+            Animate();
+        }
+        else
+        {
+            Curve();
+        }
     }
 
     private void OnDisable()
@@ -61,9 +74,9 @@ public class IWTextMeshAnimation : MonoBehaviour
         isAnimating = false;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        if (Application.isPlaying) return;
+        // if (Application.isPlaying) return;
         
         if (isAnimating) return;
         
