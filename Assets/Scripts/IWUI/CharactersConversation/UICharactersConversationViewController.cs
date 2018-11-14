@@ -126,20 +126,58 @@ public partial class UICharactersConversationViewController : IWUIWindowView
                 RemoveCharacter(character, false);
             }
         }
-        
+
         foreach (var pair in charsList.Characters)
         {
             if (GetCharacterById(pair.Value) != null)
             {
                 continue;
             }
-            
-            AddCharacter(pair.Value, pair.Key, false, false);
+
+                AddCharacter(pair.Value, pair.Key, false, false, onComplete);
+         }
+
+        // if (scenario.Continuation && charsList.Characters.Count == 1)
+        if (false)
+        {
+            SpawnCharactersAnimated(onComplete);
+        }
+        else
+        {
+            onComplete();
+        }
+    }
+
+    private void SpawnCharactersAnimated(Action onComplete)
+    {
+        if (scenario.Continuation || characters.Count != 1)
+        {
+            Debug.LogError("[UICharactersConversationViewController] => SpawnCharactersAnimated: supported only for ONE char in scenario and not for chained scenario");
+            onComplete();
+            return;
         }
 
-        onComplete();
+        var character = characters.Values.First();
+
+        float dx = 150;
+        float moveTime = 0.3f;
+        float fadeTime = moveTime - 0.1f;
+
+        var initialPos = character.transform.localPosition;
+        var newPos = initialPos;
+        newPos.x -= dx;
+        character.transform.localPosition = newPos;
+
+        var canvasGroup = character.GetCanvasGroup();
+        canvasGroup.alpha = 0;
+        
+        canvasGroup.DOFade(1, fadeTime);
+
+        character.transform.DOLocalMoveX(initialPos.x, moveTime)
+                 .SetEase(Ease.OutSine)
+                 .OnComplete(() => { onComplete(); });
     }
-    
+
     public void AddCharacter(string characterId, CharacterPosition position, bool active, bool animated, Action onComplete = null)
     {
         var pool = UIService.Get.PoolContainer;
@@ -160,7 +198,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         characters.Add(characterId, character);
         characterPositions.Add(position, character);
         
-        character.ToggleActive(active, CharacterEmotion.Normal, animated, onComplete);
+        character.ToggleActive(active, CharacterEmotion.Normal, false, onComplete);
     }
 
     public void RemoveCharacter(string characterId, bool animated)
@@ -414,12 +452,8 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             PerformActionBubble();
             return;
         }
-        if (activeAction is ConversationActionAddCharactersEntity)
-        {
-            PerformActionAddCharacters();
-            return;
-        }
-        else if (activeAction is ConversationActionExternalActionEntity)
+        
+        if (activeAction is ConversationActionExternalActionEntity)
         {
             PerformActionExternal();
             return;
@@ -427,11 +461,6 @@ public partial class UICharactersConversationViewController : IWUIWindowView
 
         Debug.LogError($"[UICharactersConversationViewController] => Unknown action type: {activeAction.GetType()} ");
         NextScenarioAction();
-    }
-
-    private void PerformActionAddCharacters()
-    {
-     //   AddC
     }
 
     private void PerformActionExternal()

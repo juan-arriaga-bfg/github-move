@@ -88,7 +88,7 @@ public class UIQuestStartWindowView : IWUIWindowView
                     FindObjectOfType<UIMainWindowView>().FadeAuxButtons(false);
                     
                     PlayNextScenario();
-                    rootCanvasGroup.DOFade(1f, 0.5f);
+                    rootCanvasGroup.DOFade(1f, 0.1f);
                 })
             ;
     }
