@@ -164,13 +164,13 @@
             "Y": 9
           }
         ],
-        "OB5_A": [
+        "OB2_A": [
           {
             "X": 23,
             "Y": 8
           }
         ],
-        "OB3_A": [
+        "OB5_A": [
           {
             "X": 23,
             "Y": 10
@@ -621,7 +621,22 @@
         {
           "X": 22,
           "Y": 7
-        },
+        }
+      ],
+      "Pieces": {}
+    },
+    {
+      "Uid": "Fog 11",
+      "Level": "10",
+      "Condition": {
+        "Currency": "Mana",
+        "Amount": 100000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 50
+      },
+      "Positions": [
         {
           "X": 23,
           "Y": 6
