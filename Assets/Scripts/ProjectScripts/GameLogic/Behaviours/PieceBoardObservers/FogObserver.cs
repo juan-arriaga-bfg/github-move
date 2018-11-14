@@ -130,8 +130,13 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             LogicCallback = (pieces) =>
             {
                 var board = thisContext.Context;
+                var posByMask = new List<BoardPosition>();
+                foreach (var boardPosition in Mask)
+                {
+                    posByMask.Add(GetPointInMask(thisContext.CachedPosition, boardPosition));
+                }
+                board.PathfindLocker.OnAddComplete(posByMask);
                 
-                board.PathfindLocker.OnAddComplete();
                 thisContext.PathfindLockObserver.RemoveRecalculate(thisContext.CachedPosition);
 
                 var emptyCells = board.PathfindLocker.CollectUnlockedEmptyCells();

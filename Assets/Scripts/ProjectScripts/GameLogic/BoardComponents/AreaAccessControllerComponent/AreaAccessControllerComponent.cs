@@ -26,7 +26,7 @@ public class AreaAccessControllerComponent:ECSEntity
         return new AreaAccessSaveItem() {BasePoints = basePoints.ToList()};
     }
     
-    private List<BoardPosition> FindConnections(BoardPosition at, List<BoardPosition> positions)
+    private static List<BoardPosition> FindConnections(BoardPosition at, List<BoardPosition> positions)
     {
         var result = new List<BoardPosition>();
         foreach (var pos in positions)
@@ -38,7 +38,7 @@ public class AreaAccessControllerComponent:ECSEntity
         return result;
     }
     
-    private HashSet<BoardPosition> CutGroup(List<BoardPosition> positions)
+    private static HashSet<BoardPosition> CutGroup(List<BoardPosition> positions)
     {
         var group = new HashSet<BoardPosition>();
         var uncheckedPositions = new HashSet<BoardPosition>();

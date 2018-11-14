@@ -68,7 +68,7 @@ public class SpawnPieceAtAction : IBoardAction
 				});
 			}
 
-			gameBoardController.PathfindLocker.OnAddComplete();
+//			gameBoardController.PathfindLocker.OnAddComplete();
 			if (OnSuccessEvent == null) return;
 			
 			var observer = piece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
