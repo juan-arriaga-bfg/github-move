@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using DG.Tweening;
@@ -23,6 +24,42 @@ public class UICharacterBubbleQuestCompletedViewController : UICharacterBubbleMe
         questButton.ToggleCheckMark(true);
 
         rewardLabel.Text = GetRewardText(quest);
+
+        StartCoroutine(AlignMegaHeaderCoroutine());
+    }
+           
+    public static Vector2 WorldToCanvasPosition(Canvas canvas, Vector3 worldPosition)
+    {
+        var viewportPosition = Camera.main.WorldToViewportPoint(worldPosition);
+        var canvasRect = canvas.GetComponent<RectTransform>();
+ 
+        return new Vector2((viewportPosition.x * canvasRect.sizeDelta.x) - (canvasRect.sizeDelta.x * 0.5f), (viewportPosition.y * canvasRect.sizeDelta.y) - (canvasRect.sizeDelta.y * 0.5f));
+    }
+    
+    private IEnumerator AlignMegaHeaderCoroutine()
+    {
+        // Wait for layout
+        yield return new WaitForEndOfFrame();
+        
+        RectTransform labelRect = textMeshAnimation.GetComponent<RectTransform>();
+        
+        RectTransform backRect = back.GetComponent<RectTransform>();
+        RectTransform backParentRect = back.transform.parent.GetComponent<RectTransform>();
+        
+        var backH = backRect.sizeDelta.y;
+        
+        var screenTop = new Vector2(0, Screen.height);
+        
+        Vector2 screenTopAtBubbleBackSpace;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(backRect, screenTop, Camera.current, out screenTopAtBubbleBackSpace);
+        Vector2 backTop = new Vector2(0, backRect.localPosition.y + backH / 2f);
+
+        float bubbleScreenTop = screenTopAtBubbleBackSpace.y + backRect.localPosition.y;
+        float bubbleTopY = backTop.y;
+        float finalY = bubbleTopY + (bubbleScreenTop - bubbleTopY) / 2f;
+
+        // labelRect.localPosition = new Vector2(labelRect.localPosition.x, finalY);
+        labelRect.localPosition = new Vector2(labelRect.localPosition.x, finalY - backParentRect.localPosition.y);
     }
 
     private string GetRewardText(QuestEntity quest)
