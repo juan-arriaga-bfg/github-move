@@ -15,12 +15,12 @@ public static class TutorialBuilder
                 {
                     FromType = PieceType.PR_C1.Id,
                     ToType = PieceType.PR_C2.Id,
-                    FromPositions = new List<BoardPosition> {new BoardPosition(23, 9, context.BoardDef.PieceLayer)},
+                    FromPositions = new List<BoardPosition> {new BoardPosition(20, 11, context.BoardDef.PieceLayer)},
                     ToPositions = new List<BoardPosition>
                     {
-                        new BoardPosition(23, 10, context.BoardDef.PieceLayer),
-                        new BoardPosition(22, 10, context.BoardDef.PieceLayer),
-                        new BoardPosition(23, 9, context.BoardDef.PieceLayer)
+                        new BoardPosition(20, 12, context.BoardDef.PieceLayer),
+                        new BoardPosition(21, 12, context.BoardDef.PieceLayer),
+                        new BoardPosition(20, 11, context.BoardDef.PieceLayer)
                     }
                 };
                 
@@ -35,14 +35,14 @@ public static class TutorialBuilder
                     ToType = PieceType.PR_C3.Id,
                     FromPositions = new List<BoardPosition>
                     {
-                        new BoardPosition(23, 10, context.BoardDef.PieceLayer),
-                        new BoardPosition(22, 10, context.BoardDef.PieceLayer),
-                        new BoardPosition(23, 9, context.BoardDef.PieceLayer)
+                        new BoardPosition(20, 12, context.BoardDef.PieceLayer),
+                        new BoardPosition(21, 12, context.BoardDef.PieceLayer),
+                        new BoardPosition(20, 11, context.BoardDef.PieceLayer)
                     },
                     ToPositions = new List<BoardPosition>
                     {
-                        new BoardPosition(24, 11, context.BoardDef.PieceLayer),
-                        new BoardPosition(24, 12, context.BoardDef.PieceLayer)
+                        new BoardPosition(22, 13, context.BoardDef.PieceLayer),
+                        new BoardPosition(22, 14, context.BoardDef.PieceLayer)
                     }
                 };
                 
@@ -56,8 +56,8 @@ public static class TutorialBuilder
                 {
                     FromType = PieceType.PR_C1.Id,
                     ToType = PieceType.PR_C1.Id,
-                    FromPosition = new BoardPosition(20, 11, context.BoardDef.PieceLayer),
-                    ToPosition = new BoardPosition(20, 12, context.BoardDef.PieceLayer)
+                    FromPosition = new BoardPosition(18, 13, context.BoardDef.PieceLayer),
+                    ToPosition = new BoardPosition(18, 14, context.BoardDef.PieceLayer)
                 };
                 
                 step.RegisterComponent(new CheckStepTutorialCondition{Target = 1, ConditionType = TutorialConditionType.Start}, true);
