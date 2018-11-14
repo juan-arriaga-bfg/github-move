@@ -25,6 +25,7 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
     
     protected override void Complete()
     {
+        base.Complete();
         SelectionOff();
     }
     

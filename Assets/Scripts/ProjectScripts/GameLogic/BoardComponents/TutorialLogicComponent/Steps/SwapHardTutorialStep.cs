@@ -62,6 +62,8 @@ public class SwapHardTutorialStep : BaseTutorialStep
     {
         if(finger == null) return;
         
+        base.Complete();
+        
         Context.UnlockAll();
         Context.Context.RendererContext.DestroyElement(finger.gameObject);
     }
