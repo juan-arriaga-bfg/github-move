@@ -27,7 +27,7 @@ public class TutorialMergeFinger : BoardElementView
         Reset();
         
         DOTween.Kill(anchor);
-
+        
         const float duration = 0.5f;
         const float shineDuration = 0.2f;
         

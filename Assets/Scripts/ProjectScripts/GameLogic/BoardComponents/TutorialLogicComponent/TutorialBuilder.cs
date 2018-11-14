@@ -136,6 +136,16 @@ public static class TutorialBuilder
                 
                 break;
             }
+            case 10: // lock camera
+            {
+                step = new CameraLockTutorialStep();
+                
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Hard}, true);
+                
+                break;
+            }
             default:
                 return null;
         }

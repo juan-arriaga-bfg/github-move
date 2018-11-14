@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Lean.Touch;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ public class CameraScroll : MonoBehaviour
     [SerializeField] private float topOffset;
     [SerializeField] private float rightOffset;
     [SerializeField] private float bottomOffset;
+    
+    private List<object> lockers = new List<object>();
     
     private int border;
     private float speed = 60f;
@@ -25,6 +28,35 @@ public class CameraScroll : MonoBehaviour
     public Vector2 UnscaledRectOffset => unscaledRectOffset ?? (unscaledRectOffset = cameraManipulator.CurrentCameraSettings.CameraClampRegion.position) ?? Vector2.one;
 
     private float lastCheckedScale;
+    
+    public void Lock(object locker)
+    {
+        lockers.Add(locker);
+    }
+    
+    public void UnLock(object locker)
+    {
+        lockers.Remove(locker);
+    }
+    
+    private bool isLocked = false;
+    
+    public bool IsLocked
+    {
+        get
+        {
+            if (isLocked && lockers.Count <= 0)
+            {
+                isLocked = false;
+            }
+            if (isLocked == false && lockers.Count > 0)
+            {
+                isLocked = true;
+            }
+
+            return isLocked;
+        }
+    }
     
     public void ScaleClampRect()
     {
@@ -66,7 +98,7 @@ public class CameraScroll : MonoBehaviour
             lastCheckedScale = cameraManipulator.TargetCameraZoom;
         }
         
-        if (cameraManipulator.CameraMove.IsLocked == false) return;
+        if (cameraManipulator.CameraMove.IsLocked == false || IsLocked) return;
         
         var fingers = LeanTouch.GetFingers(true, 1);
         
