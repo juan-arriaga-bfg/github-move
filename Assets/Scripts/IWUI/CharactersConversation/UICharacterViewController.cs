@@ -14,7 +14,16 @@ public class UICharacterViewController : IWBaseMonoBehaviour
         public Image Image;
     }
 
+    [Header("Emotions")]
     [SerializeField] private List<CharacterEmotionDef> emotions;
+
+    [Header("Other settings")]
+    [SerializeField] private CanvasGroup canvasGroup;
+
+    public CanvasGroup GetCanvasGroup()
+    {
+        return canvasGroup;
+    }
     
     private CharacterEmotion currentEmotion;
     private Image currentCharImage;

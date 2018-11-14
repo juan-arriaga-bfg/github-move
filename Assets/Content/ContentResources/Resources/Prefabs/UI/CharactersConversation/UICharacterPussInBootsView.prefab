@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224073453707956826}
+  - component: {fileID: 225986158864704288}
   m_Layer: 31
   m_Name: View
   m_TagString: Untagged
@@ -100,6 +101,7 @@ MonoBehaviour:
   emotions:
   - Emotion: 1
     Image: {fileID: 114655894376726854}
+  canvasGroup: {fileID: 225986158864704288}
 --- !u!222 &222594328841449522
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -163,3 +165,14 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225986158864704288
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118024946051622}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
