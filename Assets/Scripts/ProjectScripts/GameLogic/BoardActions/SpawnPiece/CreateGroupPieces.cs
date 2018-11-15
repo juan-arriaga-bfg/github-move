@@ -33,6 +33,7 @@ public class CreateGroupPieces:IBoardAction
         }
         
         LogicCallback?.Invoke(pieces);
+        
         if (pieces.Count == 0)
         {
             OnSuccessEvent?.Invoke();
