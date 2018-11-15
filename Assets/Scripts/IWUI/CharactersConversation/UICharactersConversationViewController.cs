@@ -51,10 +51,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             characterPositions.Clear();
         }
 
-        if (bubbleView != null)
-        {
-            bubbleView.Hide(false, null);
-        }
+        bubbleView = null;
     }
     
     private UICharacterViewController GetCharacterById(string charId)
@@ -405,6 +402,8 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         //var pool = UIService.Get.PoolContainer;
         bubbleView.Hide(true, () =>
         {
+            bubbleView = null;
+            
             // do not return bubble to the pool here!
             onComplete?.Invoke();
         });
@@ -461,7 +460,10 @@ public partial class UICharactersConversationViewController : IWUIWindowView
 
         if (activeAction == null)
         {
-            onScenarioComplete?.Invoke();
+            HideBubble(() =>
+            {
+                onScenarioComplete?.Invoke();
+            });
             return;
         }
         

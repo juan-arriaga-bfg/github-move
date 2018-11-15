@@ -27,15 +27,7 @@ public class UICharacterBubbleQuestCompletedViewController : UICharacterBubbleMe
 
         StartCoroutine(AlignMegaHeaderCoroutine());
     }
-           
-    public static Vector2 WorldToCanvasPosition(Canvas canvas, Vector3 worldPosition)
-    {
-        var viewportPosition = Camera.main.WorldToViewportPoint(worldPosition);
-        var canvasRect = canvas.GetComponent<RectTransform>();
- 
-        return new Vector2((viewportPosition.x * canvasRect.sizeDelta.x) - (canvasRect.sizeDelta.x * 0.5f), (viewportPosition.y * canvasRect.sizeDelta.y) - (canvasRect.sizeDelta.y * 0.5f));
-    }
-    
+
     private IEnumerator AlignMegaHeaderCoroutine()
     {
         // Wait for layout
@@ -128,7 +120,7 @@ public class UICharacterBubbleQuestCompletedViewController : UICharacterBubbleMe
                     StopTeleTypeEffect();
                     onComplete?.Invoke();
                 })
-                .InsertCallback(1f, () =>
+                .InsertCallback(2f, () =>
                 {
                     pool.Return(gameObject);
                 })
