@@ -13,7 +13,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	
 	private BoardLogicComponent context;
 
-	private List<List<Vector2>> slots = new List<List<Vector2>>();
+	private List<Vector2> slots = new List<Vector2>();
 
 	private int amount;
 	private int index = 1;
@@ -38,27 +38,23 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		UIService.Get.OnShowWindowEvent += OnShowWindow;
 		UIService.Get.OnCloseWindowEvent += OnCloseWindow;
 		
-		const int step = 70;
+		const int step = 100;
 		
 		for (var i = 0; i < 5; i++)
 		{
-			var line = new List<Vector2>();
-			
 			var y1 = Screen.height + 50 + step * i;
 			
 			for (var x1 = -50; x1 < Screen.width / 3f; x1 += step)
 			{
-				line.Add(new Vector2(x1, y1));
+				slots.Add(new Vector2(x1, y1));
 			}
 			
 			var x2 = -50 - step * i;
 			
 			for (var y2 = Screen.height / 2f; y2 < Screen.height + 50; y2 += step)
 			{
-				line.Add(new Vector2(x2, y2));
+				slots.Add(new Vector2(x2, y2));
 			}
-			
-			slots.Add(line);
 		}
 		
 		OnMatch();
@@ -98,16 +94,12 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		
 		for (var i = 0; i < amount; i++)
 		{
-			var line = slots[i];
-			
-			line.Shuffle();
-			
 			var positionFinish = new Vector2(Screen.width, 0);
 			
 			if (Random.Range(0, 2) == 0) positionFinish.y = Random.Range(0, Screen.height / 2f);
 			else positionFinish.x = Random.Range(2 * Screen.width / 3f, Screen.width);
 			
-			Vector2 start = context.Context.BoardDef.ViewCamera.ScreenToWorldPoint(line[0]);
+			Vector2 start = context.Context.BoardDef.ViewCamera.ScreenToWorldPoint(slots[i]);
 			Vector2 finish = context.Context.BoardDef.ViewCamera.ScreenToWorldPoint(positionFinish);
 			
 			var firefly = context.Context.RendererContext.CreateBoardElement<FireflyView>((int) ViewType.Firefly);
