@@ -39,7 +39,13 @@ public class TouchReactionDefinitionSpawnShop : TouchReactionDefinitionComponent
 		{
 			From = position,
 			Piece = Reward,
-			Positions = positions
+			Positions = positions,
+			OnComplete = () =>
+			{
+				var view = piece.Context.RendererContext.GetElementAt(position) as CharacterPieceView;
+                
+				if(view != null) view.StartRewardAnimation();
+			}
 		});
 		
 		Reward = -1;

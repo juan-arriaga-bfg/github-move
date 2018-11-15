@@ -15,11 +15,13 @@ public class CharacterControllerAnimation : StateMachineBehaviour
 	{
 		animator.SetInteger(animationId, 0);
 
-		DOTween.Sequence().InsertCallback(duration, () => animator.SetInteger(animationId, Random.Range(1, maxIndex + 1)));
+		DOTween.Sequence().SetId(this)
+			.InsertCallback(duration, () => animator.SetInteger(animationId, Random.Range(1, maxIndex + 1)));
 	}
 
 	public void StartRewardAnimation(Animator animator)
 	{
+		DOTween.Kill(this);
 		animator.SetInteger(animationId, rewardIndex);
 	}
 	

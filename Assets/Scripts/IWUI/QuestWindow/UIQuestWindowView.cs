@@ -71,7 +71,14 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         {
             From = position,
             Pieces = windowModel.PiecesReward,
-            OnComplete = () => { AddResourceView.Show(position, windowModel.CurrencysReward); }
+            OnComplete = () =>
+            {
+                var view = board.RendererContext.GetElementAt(position) as CharacterPieceView;
+                
+                if(view != null) view.StartRewardAnimation();
+                
+                AddResourceView.Show(position, windowModel.CurrencysReward);
+            }
         });
     }
 
