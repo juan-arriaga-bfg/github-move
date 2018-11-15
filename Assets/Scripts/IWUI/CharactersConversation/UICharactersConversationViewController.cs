@@ -164,9 +164,10 @@ public partial class UICharactersConversationViewController : IWUIWindowView
 
         if (animated)
         {
-            float dx = 150;
-            float moveTime = 0.3f;
-            float fadeTime = moveTime - 0.1f;
+            float dx = 170;
+            float moveTime = 0.4f;
+            float fadeTime = 0.35f;
+            float totalTime = 0.3f;
 
             var initialPos = character.transform.localPosition;
             var newPos = initialPos;
@@ -179,8 +180,15 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             canvasGroup.DOFade(1, fadeTime);
 
             character.transform.DOLocalMoveX(initialPos.x, moveTime)
-                     .SetEase(Ease.OutBack)
-                     .OnComplete(() => { onComplete(); });
+                      .SetEase(Ease.OutBack)
+                     // .SetEase(Ease.OutSine)
+                     ;
+
+            DOTween.Sequence()
+                   .InsertCallback(totalTime, () =>
+                    {
+                        onComplete();
+                    });
         }
         else
         {
