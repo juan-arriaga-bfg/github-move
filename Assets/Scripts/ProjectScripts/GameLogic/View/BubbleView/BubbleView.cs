@@ -77,6 +77,7 @@ public class BubbleView : UIBoardView, IBoardEventListener
 
     public void OnClick()
     {
+        Context.Context.TutorialLogic.Pause(true);
         onClick?.Invoke(Context);
     }
 }

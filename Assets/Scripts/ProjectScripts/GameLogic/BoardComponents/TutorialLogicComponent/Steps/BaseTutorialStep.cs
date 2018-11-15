@@ -32,6 +32,7 @@
 	public virtual void Perform()
 	{
 		IsPerform = true;
+		StartAnimation(TutorialAnimationType.Perform);
 	}
 	
 	public virtual void PauseOff()
@@ -43,6 +44,7 @@
 
 	protected virtual void Complete()
 	{
+		StartAnimation(TutorialAnimationType.Complete);
 	}
 	
 	public bool IsComplete()
@@ -101,5 +103,22 @@
 		}
 
 		return conditions.Count == 0;
+	}
+	
+	private void StartAnimation(TutorialAnimationType type)
+	{
+		var collection = GetComponent<ECSComponentCollection>(BaseTutorialAnimation.ComponentGuid);
+		var animations = collection?.Components.FindAll(component => (component as BaseTutorialAnimation).AnimationType == type);
+
+		if (animations == null) return;
+		
+		for (var i = animations.Count - 1; i >= 0; i--)
+		{
+			var animation = (BaseTutorialAnimation) animations[i];
+			
+			animation.Start();
+			UnRegisterComponent(animation);
+			animations.Remove(animation);
+		}
 	}
 }

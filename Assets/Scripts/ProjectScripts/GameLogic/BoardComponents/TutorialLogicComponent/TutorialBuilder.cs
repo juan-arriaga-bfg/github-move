@@ -114,13 +114,35 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 8: // unlock PR pieces
+            case 8: // remove worker
+            {
+                step = new BaseTutorialStep();
+                
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
+                
+                step.RegisterComponent(new RemoveTutorialAnimation{Target = new BoardPosition(19, 9, context.BoardDef.PieceLayer), AnimationType = TutorialAnimationType.Perform}, true);
+                step.RegisterComponent(new RemoveTutorialAnimation{Target = new BoardPosition(20, 10, context.BoardDef.PieceLayer), AnimationType = TutorialAnimationType.Perform}, true);
+                
+                break;
+            }
+            case 9: // unlock PR pieces
             {
                 step = new BaseTutorialStep();
                 
                 step.RegisterComponent(new CheckStepTutorialCondition{Target = 1, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
+                
+                break;
+            }
+            case 10: // lock camera
+            {
+                step = new CameraLockTutorialStep();
+                
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }

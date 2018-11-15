@@ -55,6 +55,7 @@ public class OrderBubbleView : UIBoardView
 
 	public void OnClick()
 	{
+		Context.Context.TutorialLogic.Pause(true);
 		Context.TouchReaction?.Touch(Context.CachedPosition);
 	}
 }

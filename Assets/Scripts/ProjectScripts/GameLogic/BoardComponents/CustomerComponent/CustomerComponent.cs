@@ -172,8 +172,8 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         
         var model = UIService.Get.GetCachedModel<UIExchangeWindowModel>(UIWindowType.ExchangeWindow);
             
-        model.Title = "Open Now!";
-        model.Message = "Buy the missing resources";
+        model.Title = "Need ingredients?";
+        model.Message = "Buy the missing ingredients";
         model.Products = diff;
         model.Price = price;
         model.OnClick = Buy;
