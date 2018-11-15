@@ -359,38 +359,26 @@ public class UIQuestStartWindowModel : IWWindowModel
         QuestStartScenario.RegisterComponent(charsList);
 
         QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharGnomeWorker, 
-            "Thanks a lot! You're our saviour! Do you know that A Gnome's greatest fear is fog?",
-            CharacterEmotion.Happy
-        ));
-        QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
-            "What had hapened? Where is my fairytale candy garden? What should I show to our Guest?",
+            "Gnomes? What happened to our fairytale candy garden?",
             CharacterEmotion.Shocked
         ));
-        
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharGnomeWorker, 
-            "The only thing we remember is a great noise while we cutting down trees. Then terrible fog appeared everywhere, then we run, then we hid...",
+            "Not sure.. we were chopping down old trees and then this weird fog covered everything...",
             CharacterEmotion.Normal
         ));
         
         QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharSleepingBeauty, 
-            "Fog scared Gnomes? It's hard to believe this.",
-            CharacterEmotion.Thinking
+            UiCharacterData.CharGnomeWorker, 
+            "No worries, fog is gone and we'll be glad rebuild everything here, our savior!",
+            CharacterEmotion.Happy
         ));
         
         QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharGnomeWorker, 
-            "But it's true. We've sweared that we'll help with any requests to the person who saves us. So thank you one more time.",
-            CharacterEmotion.Happy
-        ));
-
-        QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
-            "We really need your help right now. Let's clear here everything and clean up.",
-            CharacterEmotion.Normal,
+            "Sounds good! We can do this together!",
+            CharacterEmotion.Happy,
             QuestsToStart.Select(e => e.Id).ToList()
         ));
     }
@@ -473,7 +461,7 @@ public class UIQuestStartWindowModel : IWWindowModel
         {
             case "1_CreatePiece_PR_C4"   : characterId = UiCharacterData.CharSleepingBeauty; emotion = CharacterEmotion.Happy;  message="I've never seen anyone make it so fast. You're talented!"                    ; break;
             case "3_KillTree"            : characterId = UiCharacterData.CharSleepingBeauty; emotion = CharacterEmotion.Normal; message="There are much better without those rusted trees."                           ; break;
-            case "5_Clear fog (2 parts)" : characterId = UiCharacterData.CharSleepingBeauty; emotion = CharacterEmotion.Normal; message="That fog is really annoying. And it's everywhere"                            ; break;
+            case "2_ClearFog"            : characterId = UiCharacterData.CharSleepingBeauty; emotion = CharacterEmotion.Normal; message="That fog is everywhere, but it don't stop us!"                               ; break;
             case "4_CreatePiece_A2"      : characterId = UiCharacterData.CharSleepingBeauty; emotion = CharacterEmotion.Happy;  message="Well done! Let's continue work and build up a house."                        ; break;
             case "10_OpenChest"          : characterId = UiCharacterData.CharGnomeWorker;    emotion = CharacterEmotion.Happy;  message="Would be great if we find another chests like this."                         ; break;
             case "5_CreatePieceA5"       : characterId = UiCharacterData.CharGnomeWorker;    emotion = CharacterEmotion.Happy;  message="A nice building! It remind us about our native village."                     ; break;
@@ -481,8 +469,13 @@ public class UIQuestStartWindowModel : IWWindowModel
             case "8_CreatePiece_PR_B5"   : characterId = UiCharacterData.CharSleepingBeauty; emotion = CharacterEmotion.Happy;  message="These apples looks great and a pie will be even better."                     ; break;
             case "9_CreatePiece_PR_C5"   : characterId = UiCharacterData.CharSleepingBeauty; emotion = CharacterEmotion.Happy;  message="Aw! One time I've heard that candies don't grow on trees. Funny joke, right?"; break;
             case "17_KillField"          : characterId = UiCharacterData.CharGnomeWorker;    emotion = CharacterEmotion.Normal; message="Cool! We can always find some resources after removing a dead field."        ; break;
+            case "6_ClearFog"            : characterId = UiCharacterData.CharSleepingBeauty; emotion = CharacterEmotion.Normal; message="The less fog around the more space for our Kingdom."                         ; break;
             case "11_UseWorker"          : characterId = UiCharacterData.CharGnomeWorker;    emotion = CharacterEmotion.Happy;  message="We've worked so hard and done so much. Like it!"                             ; break;
-            case "UnlockB2"              : characterId = UiCharacterData.CharSleepingBeauty; emotion = CharacterEmotion.Normal; message="Gorgeous! Seems like we'll create a whole Kingdom in a couple of hours."     ; break;
+            case "12_UseMine"            : characterId = UiCharacterData.CharSleepingBeauty; emotion = CharacterEmotion.Happy;  message="Fairytale mines gives you chests. Adore this feature."                       ; break;
+            case "13_CreatePiece_A6"     : characterId = UiCharacterData.CharSleepingBeauty; emotion = CharacterEmotion.Happy;  message="So nice! I may even move into this house."                                   ; break;
+            case "14_CreatePiece_B3"     : characterId = UiCharacterData.CharSleepingBeauty; emotion = CharacterEmotion.Happy;  message="Gorgeous! Seems like we'll create a whole Kingdom in a couple of hours."     ; break;
+            case "15_CreatePiece_B4"     : characterId = UiCharacterData.CharSleepingBeauty; emotion = CharacterEmotion.Happy;  message="Great house. You're a good architect."                                       ; break;
+            case "16_CompleteOrder"      : characterId = UiCharacterData.CharSleepingBeauty; emotion = CharacterEmotion.Happy;  message="We'll make together so many sweets. For the whole Kingdom!"                  ; break;
             default                      : characterId = UiCharacterData.CharSleepingBeauty; emotion = CharacterEmotion.Happy;  message = "Cool quest completed message here!"                                        ; break;
         }
     }
