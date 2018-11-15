@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DG.Tweening;
 
-public class SelectObstacleTutorialStep : DelayTutorialStep
+public class SelectStorageTutorialStep : DelayTutorialStep
 {
     public List<int> Targets;
 
