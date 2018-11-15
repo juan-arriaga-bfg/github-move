@@ -10,8 +10,20 @@ public static class CastlePathfinder
       public static bool CanPathToCastle(this PathfinderComponent pathfinder, Piece piece, BoardPosition from)
       {
             var board = piece.Context;
-            var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
-            var targetPositions = new HashSet<BoardPosition>{position};
+
+            var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1);
+
+            if (positions.Count == 0)
+            {
+                  positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeautyPlaid.Id, 1);
+            }
+            
+            if (positions.Count == 0)
+            {
+                  positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.A7.Id, 1);
+            }
+            
+            var targetPositions = new HashSet<BoardPosition>{positions[0]};
 
             List<BoardPosition> tmp;
             return pathfinder.HasPath(from, targetPositions, out tmp, piece);

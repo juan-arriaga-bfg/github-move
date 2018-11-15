@@ -10,6 +10,8 @@ public class RemoveTutorialAnimation : BaseTutorialAnimation
         
         base.Start();
         
+        if(context.Context.Context.BoardLogic.IsEmpty(Target)) return;
+        
         context.Context.Context.ActionExecutor.AddAction(new CollapsePieceToAction{To = Target, Positions = new List<BoardPosition>{Target}});
     }
 }

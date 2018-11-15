@@ -3,6 +3,8 @@ using Quests;
 
 public static class TutorialBuilder
 {
+    public const int LockPRStepIndex = 9;
+    
     public static BaseTutorialStep BuildTutorial(int index, BoardController context)
     {
         BaseTutorialStep step;
@@ -50,7 +52,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 2:
+            /*case 2:
             {
                 step = new SwapHardTutorialStep
                 {
@@ -63,28 +65,28 @@ public static class TutorialBuilder
                 step.RegisterComponent(new CheckStepTutorialCondition{Target = 1, ConditionType = TutorialConditionType.Start}, true);
                 
                 break;
-            }
-            case 3:
+            }*/
+            case 2:
             {
                 step = new HighlightPiecesTutorialStep {Delay = 3, Targets = new List<int>{PieceType.PR_C1.Id}};
                 
-                step.RegisterComponent(new CheckStepTutorialCondition{Target = 2, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckStepTutorialCondition{Target = 1, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckCounterTutorialCondition{Target = 1, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "2_ClearFog", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
-            case 4:
+            case 3:
             {
                 step = new HighlightPiecesTutorialStep {Delay = 5, Targets = new List<int>{PieceType.PR_C1.Id, PieceType.PR_C2.Id, PieceType.PR_C3.Id}};
                 
-                step.RegisterComponent(new CheckStepTutorialCondition{Target = 3, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckStepTutorialCondition{Target = 2, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "2_ClearFog", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
-            case 5:
+            case 4:
             {
                 step = new HighlightFogTutorialStep {Delay = 5};
                 
@@ -94,23 +96,33 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 6:
+            case 5:
             {
-                step = new SelectObstacleTutorialStep {Delay = 5, Targets = new List<int>{PieceType.OB1_TT.Id}};
+                step = new SelectStorageTutorialStep {Delay = 5, Targets = new List<int>{PieceType.OB1_TT.Id}};
                 
-                step.RegisterComponent(new CheckStepTutorialCondition{Target = 5, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckStepTutorialCondition{Target = 4, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckCurrencyTutorialCondition{Target = -1, Currensy = Currency.Worker.Name, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "3_KillTree", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
-            case 7:
+            case 6:
             {
                 step = new HighlightPiecesTutorialStep {Delay = 5, Targets = new List<int>{PieceType.A1.Id}};
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4_CreatePiece_A2", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4_CreatePiece_A2", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Hard}, true);
+                
+                break;
+            }
+            case 7:
+            {
+                step = new SelectStorageTutorialStep {Delay = 5, Targets = new List<int>{PieceType.PR_A4.Id, PieceType.PR_B4.Id, PieceType.PR_C4.Id, PieceType.PR_D4.Id, PieceType.PR_E4.Id}};
+                
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckCurrencyTutorialCondition{Target = -1, Currensy = Currency.Worker.Name, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "7_CreatePiece_PR_A5", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
@@ -163,6 +175,24 @@ public static class TutorialBuilder
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
+                
+                break;
+            }
+            case 13: // add SleepingBeauty
+            {
+                step = new BaseTutorialStep();
+                
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Hard}, true);
+                
+                step.RegisterComponent(new RemoveTutorialAnimation{Target = new BoardPosition(20, 13, context.BoardDef.PieceLayer), AnimationType = TutorialAnimationType.Perform}, true);
+                step.RegisterComponent(new AddTutorialAnimation
+                    {
+                        PieceId = PieceType.NPC_SleepingBeauty.Id,
+                        Targets = new List<BoardPosition> {new BoardPosition(20, 13, context.BoardDef.PieceLayer), new BoardPosition(20, 12, context.BoardDef.PieceLayer)},
+                        AnimationType = TutorialAnimationType.Complete
+                    }, true);
                 
                 break;
             }

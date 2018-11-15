@@ -38,6 +38,7 @@ public class ElementsResourcesBuilder
 #region Characters
         
         dict.Add(PieceType.NPC_SleepingBeauty.Id, R.NPC_SleepingBeautyPiece);
+        dict.Add(PieceType.NPC_SleepingBeautyPlaid.Id, R.NPC_SleepingBeautyPlaidPiece);
         dict.Add(PieceType.NPC_Rapunzel.Id, R.NPC_RapunzelPiece);
         dict.Add(PieceType.NPC_PussInBoots.Id, R.NPC_PussInBootsPiece);
         dict.Add(PieceType.NPC_Gnome.Id, R.NPC_GnomePiece);

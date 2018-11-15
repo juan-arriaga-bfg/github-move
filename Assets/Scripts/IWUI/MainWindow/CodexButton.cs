@@ -17,11 +17,8 @@ public class CodexButton : MonoBehaviour
         switch (codexManager.CodexState)
         {
             case CodexState.NewPiece:
-                ToggleShine(true);
-                ToggleExclamationMark(true);
-                break;
-            
             case CodexState.PendingReward:
+                ToggleShine(true);
                 ToggleExclamationMark(true);
                 break;
         }

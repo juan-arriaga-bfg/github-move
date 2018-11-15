@@ -122,7 +122,14 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
             {
                 From = pieceContext.CachedPosition,
                 Pieces = order.PiecesReward,
-                OnComplete = () => { AddResourceView.Show(pieceContext.CachedPosition, order.CurrencysReward); }
+                OnComplete = () =>
+                {
+                    var view = pieceContext.Context.RendererContext.GetElementAt(pieceContext.CachedPosition) as CharacterPieceView;
+                
+                    if(view != null) view.StartRewardAnimation();
+                    
+                    AddResourceView.Show(pieceContext.CachedPosition, order.CurrencysReward);
+                }
             });
             
             GameDataService.Current.OrdersManager.RemoveOrder(order, pieceContext.Context.BoardLogic);

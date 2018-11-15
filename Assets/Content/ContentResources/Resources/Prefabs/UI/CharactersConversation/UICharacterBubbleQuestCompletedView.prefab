@@ -1271,8 +1271,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: <font="POETSENONE-REGULAR SDF" material="POETSENONE-REGULAR SDF"><color=#933E00></color></font>5
-    <sprite name=Mana>  15 <sprite name=Experience>  10 <sprite name=Coins></size>
+  m_text: <font="POETSENONE-REGULAR SDF" material="POETSENONE-REGULAR SDF"><color=#933E00></color></font>888
+    <sprite name=Mana>  888 <sprite name=Experience>  888 <sprite name=Coins></size>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 971c9320aef681a47afb074c8dc1b434, type: 2}
@@ -1299,7 +1299,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 60
+  m_fontSize: 50.75
   m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1340,7 +1340,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 114638359924099582}
-    characterCount: 15
+    characterCount: 19
     spriteCount: 0
     spaceCount: 7
     wordCount: 3
@@ -1789,7 +1789,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 20, y: 199.795}
-  m_SizeDelta: {x: -40, y: 329}
+  m_SizeDelta: {x: -40, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224161832463262980
 RectTransform:
@@ -1896,10 +1896,10 @@ RectTransform:
   m_Father: {fileID: 224121407733921640}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 436.5, y: -117.5}
-  m_SizeDelta: {x: 387, y: 157}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224656105246087022
 RectTransform:
@@ -2032,8 +2032,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 19}
-  m_SizeDelta: {x: 0, y: 98.6}
+  m_AnchoredPosition: {x: 18, y: 19}
+  m_SizeDelta: {x: -96.1, y: 98.6}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!224 &224846923408049838
 RectTransform:
