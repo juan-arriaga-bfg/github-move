@@ -46,9 +46,6 @@ public class IWTextMeshAnimation : MonoBehaviour
         StartCoroutine(AnimateScaleCoroutine());
     }
 
-    
-#if UNITY_EDITOR
-    
     private void OnEnable()
     {
         // if (Application.isPlaying)
@@ -83,8 +80,6 @@ public class IWTextMeshAnimation : MonoBehaviour
         Curve();
     }
     
-#endif
-
     public virtual void Curve()
     {
         textLabel.ForceMeshUpdate();
