@@ -113,7 +113,7 @@ public class IWTextMeshAnimation : MonoBehaviour
         
         float defaultMeshWidth = vertices.Length > 0 ? Mathf.Abs(vertices[0].x - vertices[vertices.Length - 1].x) : 0f;
         defaultMeshWidth = defaultMeshWidth / 600f;
-        Debug.LogWarning("defaultMeshWidth: " + defaultMeshWidth);
+        // Debug.LogWarning("defaultMeshWidth: " + defaultMeshWidth);
 
         for (int i = 0; i < processedVertexIndex.Count; i++)
         {
@@ -137,8 +137,6 @@ public class IWTextMeshAnimation : MonoBehaviour
             vertices[vertexIndex + 3] = defaultVertices[vertexIndex + 3] - offset;
 
             matrix = Matrix4x4.TRS(targetOffset * curveMultiply, Quaternion.Euler(0, 0, angle * angleMultiplier), Vector3.one * curveScale);
-            
-            // matrix = Matrix4x4.TRS(targetOffset * curveMultiply * 1f, Quaternion.Euler(0, 0, angle * angleMultiplier), new Vector3(1f, 1f, 1f) * curveScale);
 
             vertices[vertexIndex + 0] = matrix.MultiplyPoint3x4(vertices[vertexIndex + 0]);
             vertices[vertexIndex + 1] = matrix.MultiplyPoint3x4(vertices[vertexIndex + 1]);
