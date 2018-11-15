@@ -48,6 +48,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             onComplete?.Invoke();
             
             ProfileService.Current.QueueComponent.Run();
+            BoardService.Current.FirstBoard.TutorialLogic.Run();
         };
     }
 

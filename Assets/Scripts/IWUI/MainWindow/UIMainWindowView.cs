@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
@@ -10,6 +11,12 @@ public class UIMainWindowView : IWUIWindowView
     [SerializeField] private CodexButton codexButton;
     [SerializeField] private CanvasGroup questsCanvasGroup;
     [SerializeField] private CanvasGroup rightButtonsCanvasGroups;
+    
+    [SerializeField] private CanvasGroup workerCanvasGroup;
+    [SerializeField] private CanvasGroup energyCanvasGroup;
+    [SerializeField] private CanvasGroup codexCanvasGroup;
+    [SerializeField] private CanvasGroup shopCanvasGroup;
+    [SerializeField] private CanvasGroup ordersCanvasGroup;
     
     private List<UiQuestButton> questButtons = new List<UiQuestButton>();
 
@@ -30,6 +37,42 @@ public class UIMainWindowView : IWUIWindowView
     {
         GameDataService.Current.QuestsManager.OnActiveQuestsListChanged -= OnActiveQuestsListChanged;
         GameDataService.Current.CodexManager.OnNewItemUnlocked -= OnNewPieceBuilded;
+    }
+
+    public void ChangeVisibility(UiLockTutorialItem item, bool isLock, bool isAnimate)
+    {
+        CanvasGroup target = null;
+        
+        switch (item)
+        {
+            case UiLockTutorialItem.Worker:
+                target = workerCanvasGroup;
+                break;
+            case UiLockTutorialItem.Energy:
+                target = energyCanvasGroup;
+                break;
+            case UiLockTutorialItem.Codex:
+                target = codexCanvasGroup;
+                break;
+            case UiLockTutorialItem.Shop:
+                target = shopCanvasGroup;
+                break;
+            case UiLockTutorialItem.Orders:
+                target = ordersCanvasGroup;
+                break;
+            default:
+                return;
+        }
+        
+        DOTween.Kill(target);
+
+        if (isAnimate == false)
+        {
+            target.alpha = isLock ? 0 : 1;
+            return;
+        }
+
+        target.DOFade(isLock ? 0 : 1, 0.2f);
     }
 
     public void OnActiveQuestsListChanged()

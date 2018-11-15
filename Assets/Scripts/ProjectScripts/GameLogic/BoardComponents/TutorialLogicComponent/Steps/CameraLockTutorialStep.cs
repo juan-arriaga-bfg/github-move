@@ -10,7 +10,7 @@ public class CameraLockTutorialStep : BaseTutorialStep
         
         cameraMove = GameObject.FindObjectOfType<CameraScroll>();
     }
-
+    
     public override void Perform()
     {
         if (IsPerform) return;

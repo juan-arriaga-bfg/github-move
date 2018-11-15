@@ -14,7 +14,18 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     public override void OnRegisterEntity(ECSEntity entity)
     {
         Context = entity as BoardController;
-        
+    }
+    
+    public override void OnUnRegisterEntity(ECSEntity entity)
+    {
+        UIService.Get.OnShowWindowEvent -= OnShowWindow;
+        UIService.Get.OnCloseWindowEvent -= OnCloseWindow;
+        GameDataService.Current.QuestsManager.OnActiveQuestsListChanged -= Update;
+        GameDataService.Current.QuestsManager.OnQuestStateChanged -= OnQuestStateChanged;
+    }
+
+    public void Run()
+    {
         Save = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid)?.Complete ?? new List<int>();
         
         for (var i = 0;; i++)
@@ -42,14 +53,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
         UIService.Get.OnCloseWindowEvent += OnCloseWindow;
         GameDataService.Current.QuestsManager.OnActiveQuestsListChanged += Update;
         GameDataService.Current.QuestsManager.OnQuestStateChanged += OnQuestStateChanged;
-    }
-    
-    public override void OnUnRegisterEntity(ECSEntity entity)
-    {
-        UIService.Get.OnShowWindowEvent -= OnShowWindow;
-        UIService.Get.OnCloseWindowEvent -= OnCloseWindow;
-        GameDataService.Current.QuestsManager.OnActiveQuestsListChanged -= Update;
-        GameDataService.Current.QuestsManager.OnQuestStateChanged -= OnQuestStateChanged;
+        Update();
     }
     
     private void OnShowWindow(IWUIWindow window)

@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 114824055546702410}
   - component: {fileID: 114664704947251026}
   - component: {fileID: 114215427106205600}
+  - component: {fileID: 225386350910846268}
   m_Layer: 31
   m_Name: ResourcePanelWorker
   m_TagString: Untagged
@@ -401,6 +402,7 @@ GameObject:
   - component: {fileID: 114198858953966554}
   - component: {fileID: 114328593715584918}
   - component: {fileID: 114217802309735196}
+  - component: {fileID: 225942259081841114}
   m_Layer: 31
   m_Name: ResourcePanelEnergy
   m_TagString: Untagged
@@ -1323,6 +1325,7 @@ GameObject:
   - component: {fileID: 114728483881951702}
   - component: {fileID: 114622145751600294}
   - component: {fileID: 114303687972030474}
+  - component: {fileID: 225204404915232306}
   m_Layer: 31
   m_Name: ButtonCodex
   m_TagString: Untagged
@@ -1632,6 +1635,7 @@ GameObject:
   - component: {fileID: 224806171105476310}
   - component: {fileID: 114940422106044236}
   - component: {fileID: 114797185797761178}
+  - component: {fileID: 225853144537110904}
   m_Layer: 31
   m_Name: ButtonChests
   m_TagString: Untagged
@@ -1953,6 +1957,7 @@ GameObject:
   - component: {fileID: 224343724886406510}
   - component: {fileID: 114564600295167192}
   - component: {fileID: 114954669348514602}
+  - component: {fileID: 225513730606985444}
   m_Layer: 31
   m_Name: ButtonOrders
   m_TagString: Untagged
@@ -7405,6 +7410,11 @@ MonoBehaviour:
   codexButton: {fileID: 114622145751600294}
   questsCanvasGroup: {fileID: 225909200540593616}
   rightButtonsCanvasGroups: {fileID: 225546837550727712}
+  workerCanvasGroup: {fileID: 225386350910846268}
+  energyCanvasGroup: {fileID: 225942259081841114}
+  codexCanvasGroup: {fileID: 225204404915232306}
+  shopCanvasGroup: {fileID: 225853144537110904}
+  ordersCanvasGroup: {fileID: 225513730606985444}
 --- !u!114 &114834187065225206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9160,7 +9170,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -132.08, y: 0.00006027793}
+  m_AnchoredPosition: {x: -132.08, y: 0.000000027550085}
   m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224039078224091110
@@ -11206,6 +11216,39 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!225 &225204404915232306
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1633336755738332}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!225 &225386350910846268
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1047742977560102}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!225 &225513730606985444
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1938770638583472}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!225 &225546837550727712
 CanvasGroup:
   m_ObjectHideFlags: 1
@@ -11228,6 +11271,17 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!225 &225853144537110904
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1801924256985272}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!225 &225909200540593616
 CanvasGroup:
   m_ObjectHideFlags: 1
@@ -11238,4 +11292,15 @@ CanvasGroup:
   m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &225942259081841114
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1198351112218162}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
