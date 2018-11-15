@@ -4,6 +4,6 @@
     {
         var save = BoardService.Current.FirstBoard.TutorialLogic.Save;
 
-        return save.Contains(8) && base.Check(position, piece);
+        return save.Contains(9) && base.Check(position, piece);
     }
 }
