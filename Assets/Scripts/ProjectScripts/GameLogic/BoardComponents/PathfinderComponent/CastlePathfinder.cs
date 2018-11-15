@@ -18,6 +18,11 @@ public static class CastlePathfinder
                   positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeautyPlaid.Id, 1);
             }
             
+            if (positions.Count == 0)
+            {
+                  positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.A7.Id, 1);
+            }
+            
             var targetPositions = new HashSet<BoardPosition>{positions[0]};
 
             List<BoardPosition> tmp;
