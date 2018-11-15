@@ -44,7 +44,12 @@ public class TutorialMergeFinger : BoardElementView
         sequence.Insert(duration, shine.DOScale(Vector3.one * 2f, shineDuration));
         sequence.Insert(duration + shineDuration, shine.DOScale(Vector3.zero, shineDuration));
         sequence.Insert(duration + shineDuration + 0.1f, CachedTransform.DOLocalMove(toPos, duration));
-        sequence.InsertCallback((duration * 2) + shineDuration + 0.1f, Reset);
+        sequence.InsertCallback((duration * 2) + shineDuration + 0.1f, () => gameObject.SetActive(false));
+        sequence.InsertCallback((duration * 2) + shineDuration + 0.5f, () =>
+        {
+            Reset();
+            gameObject.SetActive(true);
+        });
     }
 
     public void Show()
