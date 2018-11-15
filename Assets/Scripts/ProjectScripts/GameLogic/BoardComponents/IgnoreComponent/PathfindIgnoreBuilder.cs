@@ -100,6 +100,7 @@ public static class PathfindIgnoreBuilder
       });
       
       dict.Add(PieceType.NPC_SleepingBeauty.Id, charIgnorePieces);
+      dict.Add(PieceType.NPC_SleepingBeautyPlaid.Id, charIgnorePieces);
       dict.Add(PieceType.NPC_Rapunzel.Id, charIgnorePieces);
       dict.Add(PieceType.NPC_PussInBoots.Id, charIgnorePieces);
       dict.Add(PieceType.NPC_Gnome.Id, charIgnorePieces);

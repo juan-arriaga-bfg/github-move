@@ -4,6 +4,6 @@
     {
         var save = BoardService.Current.FirstBoard.TutorialLogic.Save;
 
-        return save.Contains(9) && base.Check(position, piece);
+        return save.Contains(TutorialBuilder.LockPRStepIndex) && base.Check(position, piece);
     }
 }
