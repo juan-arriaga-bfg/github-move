@@ -22,7 +22,7 @@ public class IWTextMeshAnimation : MonoBehaviour
     
     [SerializeField] private bool autoplayOnEnable = false;
 
-    [SerializeField] private bool dependsOnLength = false;
+    private bool dependsOnLength = true;
 
     protected bool isAnimating = false;
 
