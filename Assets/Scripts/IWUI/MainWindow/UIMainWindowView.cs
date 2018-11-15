@@ -4,6 +4,7 @@ using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIMainWindowView : IWUIWindowView
 {
@@ -18,8 +19,14 @@ public class UIMainWindowView : IWUIWindowView
     [SerializeField] private CanvasGroup shopCanvasGroup;
     [SerializeField] private CanvasGroup ordersCanvasGroup;
     
+    [SerializeField] private GameObject delimiters;
+    
+    [SerializeField] private ScrollRect questsScroll;
+
     private List<UiQuestButton> questButtons = new List<UiQuestButton>();
 
+    private int maxCountOfVisibleQuestButtonsCached = -1;
+    
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -86,6 +93,8 @@ public class UIMainWindowView : IWUIWindowView
 
     private void CheckQuestButtons(List<QuestEntity> active)
     {
+        bool listChanged = false;
+        
         for (int i = questButtons.Count - 1; i >= 0; i--)
         {
             var item = questButtons[i];
@@ -96,6 +105,8 @@ public class UIMainWindowView : IWUIWindowView
             
             questButtons.RemoveAt(i);
             Destroy(item.gameObject);
+
+            listChanged = true;
         }
 
         if (questButtons.Count == active.Count)
@@ -112,7 +123,8 @@ public class UIMainWindowView : IWUIWindowView
                 continue;
             }
             
-            var item = Instantiate(pattern, pattern.transform.parent);
+            GameObject item = Instantiate(pattern, pattern.transform.parent);
+            item.transform.SetSiblingIndex(0);
             var button = item.GetComponent<UiQuestButton>();
             button.Init(quest, true);
             
@@ -122,12 +134,23 @@ public class UIMainWindowView : IWUIWindowView
             {
                 button.gameObject.SetActive(false);
             }
+            else
+            {
+                listChanged = true;
+            }
         }
         
         pattern.SetActive(false);
 
+        delimiters.SetActive(GetMaxCountOfVisibleQuestButtons() < questButtons.Count);
+        
+        // Scroll list to top
+        if (listChanged)
+        {
+            questsScroll.verticalNormalizedPosition  = 1f;
+        }
     }
-    
+
     private void UpdateCodexButton()
     {
         codexButton.UpdateState();
@@ -180,5 +203,31 @@ public class UIMainWindowView : IWUIWindowView
 
         questsCanvasGroup.DOFade(visible ? 1 : 0, time);
         rightButtonsCanvasGroups.DOFade(visible ? 1 : 0, time);
+
+        foreach (var image in delimiters.transform.GetComponentsInChildren<Image>())
+        {
+            image.DOFade(visible ? 1 : 0, time);
+        }
+    }
+
+    private int GetMaxCountOfVisibleQuestButtons()
+    {
+        if (maxCountOfVisibleQuestButtonsCached > 0)
+        {
+            return maxCountOfVisibleQuestButtonsCached;
+        }
+
+        LayoutElement layoutElement = pattern.GetComponent<LayoutElement>();
+        VerticalLayoutGroup layoutGroup = pattern.transform.parent.GetComponent<VerticalLayoutGroup>();
+        RectTransform container = layoutGroup.transform.parent.GetComponent<RectTransform>();
+
+        float itemH = layoutElement.minHeight;
+        float spacing = layoutGroup.spacing;
+        float topPadding = layoutGroup.padding.top;
+        float bottomPadding = layoutGroup.padding.bottom;
+        float containerH = container.rect.height;
+
+        maxCountOfVisibleQuestButtonsCached = (int) ((containerH - topPadding - bottomPadding + spacing) / (itemH + spacing));
+        return maxCountOfVisibleQuestButtonsCached;
     }
 }
