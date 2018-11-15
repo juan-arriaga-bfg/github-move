@@ -119,13 +119,20 @@ public class UICharacterBubbleQuestCompletedViewController : UICharacterBubbleMe
     {
         animator.Play("QuestCompleteBubbleHide");
         
+        
+        var pool = UIService.Get.PoolContainer;
+        
         DOTween.Sequence()
-               .AppendInterval(1f)
-               .AppendCallback(() =>
+               .InsertCallback(0.1f, () =>
                 {
                     StopTeleTypeEffect();
                     onComplete?.Invoke();
-                });
+                })
+                .InsertCallback(1f, () =>
+                {
+                    pool.Return(gameObject);
+                })
+            ;
     }
 
     public void ShowCheer()

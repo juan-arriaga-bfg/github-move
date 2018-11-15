@@ -167,7 +167,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             float dx = 170;
             float moveTime = 0.4f;
             float fadeTime = 0.35f;
-            float totalTime = 0.3f;
+            float totalTime = 0.1f;
 
             var initialPos = character.transform.localPosition;
             var newPos = initialPos;
@@ -402,10 +402,10 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             return;
         }
         
-        var pool = UIService.Get.PoolContainer;
+        //var pool = UIService.Get.PoolContainer;
         bubbleView.Hide(true, () =>
         {
-            pool.Return(bubbleView.gameObject);
+            // do not return bubble to the pool here!
             onComplete?.Invoke();
         });
     }

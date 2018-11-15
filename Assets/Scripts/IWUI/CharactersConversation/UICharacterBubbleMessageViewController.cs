@@ -111,13 +111,21 @@ public class UICharacterBubbleMessageViewController : UICharacterBubbleView, ITe
 
     protected virtual void HideAnimation(Action onComplete)
     {
+        var pool = UIService.Get.PoolContainer;
+
+        float fadeTime = 1f;
+        
         canvasGroup.DOFade(0, 1);
+        
         DOTween.Sequence()
-               .AppendInterval(0.5f)
-               .AppendCallback(() =>
+               .InsertCallback(0.5f, () =>
                 {
                     StopTeleTypeEffect();
                     onComplete?.Invoke();
+                })               
+                .InsertCallback(fadeTime, () =>
+                {
+                    pool.Return(gameObject);
                 });
     }
 }
