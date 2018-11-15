@@ -7,6 +7,7 @@ using DG.Tweening;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+using Quests;
 using UnityEngine;
 
 public class QuestsDataManager : IECSComponent, IDataManager
@@ -24,7 +25,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
     /// <summary>
     /// List of ids of completed quests
     /// </summary>
-    public List<string> CompletedQuests;
+    public List<string> FinishedQuests;
 
     /// <summary>
     /// Will be invoked when we Start new or Claim active quests. This mean that ActiveQuests list is changing.
@@ -79,7 +80,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
     {
         var questSave = ProfileService.Current.GetComponent<QuestSaveComponent>(QuestSaveComponent.ComponentGuid);
 
-        CompletedQuests = questSave.CompletedQuests ?? new List<string>();
+        FinishedQuests = questSave.FinishedQuests ?? new List<string>();
         
         ActiveQuests = new List<QuestEntity>();
 
@@ -407,7 +408,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
     /// Call it when a player claimed a reward to remove a quest from ActiveQuests list
     /// </summary>
     /// <param name="id"></param>
-    public void CompleteQuest(string id)
+    public void FinishQuest(string id)
     {
         //Debug.Log("!!! CompleteQuest: " + id);
         
@@ -416,7 +417,9 @@ public class QuestsDataManager : IECSComponent, IDataManager
             var quest = ActiveQuests[i];
             if (quest.Id == id)
             {
-                CompletedQuests.Add(id);
+                quest.SetClaimedState();
+                
+                FinishedQuests.Add(id);
                 ActiveQuests.RemoveAt(i);
                 quest.DisconnectFromBoard();
                 

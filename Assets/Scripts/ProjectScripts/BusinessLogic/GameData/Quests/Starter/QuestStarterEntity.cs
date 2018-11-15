@@ -57,7 +57,7 @@ public class QuestStarterEntity : ECSEntity, IECSSerializeable
             switch (Mode)
             {
                 case QuestStarterMode.Once:
-                    if (dataManager.CompletedQuests.Contains(questId))
+                    if (dataManager.FinishedQuests.Contains(questId))
                     {
                         isTimeToStart = false;
                         log.Append("\n" + $"QuestStarterMode is 'Once' but quest have been completed.");

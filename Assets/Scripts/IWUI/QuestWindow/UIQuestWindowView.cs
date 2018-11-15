@@ -93,7 +93,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             }
             
             quest.SetClaimedState();
-            GameDataService.Current.QuestsManager.CompleteQuest(quest.Id);
+            GameDataService.Current.QuestsManager.FinishQuest(quest.Id);
             
             isComplete = true;
             return;

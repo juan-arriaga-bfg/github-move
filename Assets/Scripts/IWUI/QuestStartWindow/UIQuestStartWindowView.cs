@@ -78,7 +78,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         
         rootCanvasGroup.alpha = 0;
 
-        var delay = model.QuestCompletedScenario != null ? 2.5f : 0f;
+        var delay = model.QuestCompletedScenario != null ? 1f : 0f;
         
         DOTween.Sequence()
                .AppendInterval(delay)
@@ -293,7 +293,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         var quest = model.CompletedQuest;
 
         quest.SetClaimedState();
-        GameDataService.Current.QuestsManager.CompleteQuest(quest.Id);
+        GameDataService.Current.QuestsManager.FinishQuest(quest.Id);
 
         List<CurrencyPair> reward = quest.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
 

@@ -132,8 +132,7 @@ public class UIQuestCompleteWindowView : IWUIWindowView
             var model = Model as UIQuestCompleteWindowModel;
             var quest = model.Quest;
 
-            quest.SetClaimedState();
-            GameDataService.Current.QuestsManager.CompleteQuest(quest.Id);
+            GameDataService.Current.QuestsManager.FinishQuest(quest.Id);
 
             List<CurrencyPair> reward = model.Quest.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
 

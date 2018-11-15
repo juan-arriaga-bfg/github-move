@@ -14,7 +14,7 @@ public sealed class QuestStartConditionQuestCompletedComponent : QuestStartCondi
 
     public override bool Check()
     {
-        return GameDataService.Current.QuestsManager.CompletedQuests.Contains(QuestId);
+        return GameDataService.Current.QuestsManager.FinishedQuests.Contains(QuestId);
     }
     
     [OnDeserialized]
