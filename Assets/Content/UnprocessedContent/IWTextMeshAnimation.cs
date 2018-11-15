@@ -78,7 +78,7 @@ public class IWTextMeshAnimation : MonoBehaviour
     {
         // if (Application.isPlaying) return;
         
-        if (isAnimating) return;
+        // if (isAnimating) return;
         
         Curve();
     }
@@ -91,9 +91,13 @@ public class IWTextMeshAnimation : MonoBehaviour
         var mesh = textLabel.mesh;
         Vector3[] vertices = mesh.vertices;
         Vector3[] defaultVertices = mesh.vertices;
+        Color[] colors = mesh.colors;
+        Color[] defaultColors = mesh.colors;
         Matrix4x4 matrix;
 
         int charCount = textLabel.textInfo.characterCount;
+        
+        if (charCount < 2) return;
 
         List<int> processedVertexIndex = new List<int>();
 
@@ -106,6 +110,10 @@ public class IWTextMeshAnimation : MonoBehaviour
 
             processedVertexIndex.Add(vertexIndex);
         }
+        
+        float defaultMeshWidth = vertices.Length > 0 ? Mathf.Abs(vertices[0].x - vertices[vertices.Length - 1].x) : 0f;
+        defaultMeshWidth = defaultMeshWidth / 600f;
+        Debug.LogWarning("defaultMeshWidth: " + defaultMeshWidth);
 
         for (int i = 0; i < processedVertexIndex.Count; i++)
         {
@@ -116,7 +124,7 @@ public class IWTextMeshAnimation : MonoBehaviour
             var coef = curve.Evaluate(percent);
             var rotationCoef = rotationCurve.Evaluate(percent);
 
-            float angle = rotationCoef - 0.5f;// (i >= processedVertexIndex.Count * 0.5f) ? 1f * rotationCoef : -1f * rotationCoef;
+            float angle = rotationCoef - 0.5f;
 
             var targetOffset = new Vector3(0f, coef, 0f);
 
@@ -129,6 +137,8 @@ public class IWTextMeshAnimation : MonoBehaviour
             vertices[vertexIndex + 3] = defaultVertices[vertexIndex + 3] - offset;
 
             matrix = Matrix4x4.TRS(targetOffset * curveMultiply, Quaternion.Euler(0, 0, angle * angleMultiplier), Vector3.one * curveScale);
+            
+            // matrix = Matrix4x4.TRS(targetOffset * curveMultiply * 1f, Quaternion.Euler(0, 0, angle * angleMultiplier), new Vector3(1f, 1f, 1f) * curveScale);
 
             vertices[vertexIndex + 0] = matrix.MultiplyPoint3x4(vertices[vertexIndex + 0]);
             vertices[vertexIndex + 1] = matrix.MultiplyPoint3x4(vertices[vertexIndex + 1]);
@@ -139,18 +149,28 @@ public class IWTextMeshAnimation : MonoBehaviour
             vertices[vertexIndex + 1] += offset;
             vertices[vertexIndex + 2] += offset;
             vertices[vertexIndex + 3] += offset;
+
+            if (targetColors != null)
+            {
+                colors[vertexIndex + 0] = new Color(defaultColors[vertexIndex + 0].r, defaultColors[vertexIndex + 0].g, defaultColors[vertexIndex + 0].b, targetColors[vertexIndex + 0].a);
+                colors[vertexIndex + 1] = new Color(defaultColors[vertexIndex + 1].r, defaultColors[vertexIndex + 1].g, defaultColors[vertexIndex + 1].b, targetColors[vertexIndex + 1].a);
+                colors[vertexIndex + 2] = new Color(defaultColors[vertexIndex + 2].r, defaultColors[vertexIndex + 2].g, defaultColors[vertexIndex + 2].b, targetColors[vertexIndex + 2].a);
+                colors[vertexIndex + 3] = new Color(defaultColors[vertexIndex + 3].r, defaultColors[vertexIndex + 3].g, defaultColors[vertexIndex + 3].b, targetColors[vertexIndex + 3].a);
+            }
         }
 
         mesh.vertices = vertices;
+        mesh.colors = colors;
         textLabel.canvasRenderer.SetMesh(mesh);
     }
+
+    private Color[] targetColors = null;
 
     public virtual IEnumerator AnimateScaleCoroutine()
     {
         float time = 0f;
         float duration = animDuration;
-        
-        
+
         if (string.IsNullOrEmpty(textLabel.text))
         {
             isAnimating = false;
@@ -159,11 +179,11 @@ public class IWTextMeshAnimation : MonoBehaviour
         
         textLabel.ForceMeshUpdate();
         var mesh = textLabel.mesh;
-        Vector3[] vertices = mesh.vertices;
-        Vector3[] defaultVertices = mesh.vertices;
+        
         Color[] colors = mesh.colors;
         Color[] defaultColors = mesh.colors;
-        Matrix4x4 matrix;
+        targetColors = colors;
+
         int charCount = textLabel.textInfo.characterCount;
 
         // Why characterCount may != characterInfo.Length happens ?!
@@ -184,64 +204,35 @@ public class IWTextMeshAnimation : MonoBehaviour
             processedVertexIndex.Add(vertexIndex);
         }
 
-        while (time < duration)
+        while (time <= duration)
         {
             for (int i = 0; i < processedVertexIndex.Count; i++)
             {
                 int vertexIndex = processedVertexIndex[i];
 
-                float percent = i / (float)(processedVertexIndex.Count - 1);
-
-                var coef = curve.Evaluate(percent);
-                var rotationCoef = rotationCurve.Evaluate(percent);
-
                 float range = duration / (float)(processedVertexIndex.Count);
                 float fromRange = range * i;
                 float toRange = range * (i + 2);
                 toRange = Mathf.Clamp(toRange, 0f, duration);
-                float targetScale = Mathf.Lerp(0f, 1f, (time - fromRange) / (toRange - fromRange));
+
                 float targerAlpha = Mathf.Lerp(0f, 1f, (time - fromRange) / (toRange - fromRange));
 
-                float angle = rotationCoef - 0.5f;// (i >= processedVertexIndex.Count * 0.5f) ? 1f * rotationCoef : -1f * rotationCoef;
-
-                var targetOffset = new Vector3(0f, coef, 0f);
-
-                Vector2 charMidBasline = (vertices[vertexIndex + 0] + vertices[vertexIndex + 2]) / 2;
-                Vector3 offset = charMidBasline;
-
-                vertices[vertexIndex + 0] = defaultVertices[vertexIndex + 0] - offset;
-                vertices[vertexIndex + 1] = defaultVertices[vertexIndex + 1] - offset;
-                vertices[vertexIndex + 2] = defaultVertices[vertexIndex + 2] - offset;
-                vertices[vertexIndex + 3] = defaultVertices[vertexIndex + 3] - offset;
-
-                matrix = Matrix4x4.TRS(targetOffset * curveMultiply * targetScale, Quaternion.Euler(0, 0, angle * angleMultiplier), new Vector3(targetScale, targetScale, targetScale) * curveScale);
-
-                vertices[vertexIndex + 0] = matrix.MultiplyPoint3x4(vertices[vertexIndex + 0]);
-                vertices[vertexIndex + 1] = matrix.MultiplyPoint3x4(vertices[vertexIndex + 1]);
-                vertices[vertexIndex + 2] = matrix.MultiplyPoint3x4(vertices[vertexIndex + 2]);
-                vertices[vertexIndex + 3] = matrix.MultiplyPoint3x4(vertices[vertexIndex + 3]);
-
-                vertices[vertexIndex + 0] += offset;
-                vertices[vertexIndex + 1] += offset;
-                vertices[vertexIndex + 2] += offset;
-                vertices[vertexIndex + 3] += offset;
-
-                colors[vertexIndex + 0] = new Color(defaultColors[vertexIndex + 0].r, defaultColors[vertexIndex + 0].g, defaultColors[vertexIndex + 0].b, targerAlpha);
-                colors[vertexIndex + 1] = new Color(defaultColors[vertexIndex + 1].r, defaultColors[vertexIndex + 1].g, defaultColors[vertexIndex + 1].b, targerAlpha);
-                colors[vertexIndex + 2] = new Color(defaultColors[vertexIndex + 2].r, defaultColors[vertexIndex + 2].g, defaultColors[vertexIndex + 2].b, targerAlpha);
-                colors[vertexIndex + 3] = new Color(defaultColors[vertexIndex + 3].r, defaultColors[vertexIndex + 3].g, defaultColors[vertexIndex + 3].b, targerAlpha);
+                targetColors[vertexIndex + 0] = new Color(defaultColors[vertexIndex + 0].r, defaultColors[vertexIndex + 0].g, defaultColors[vertexIndex + 0].b, targerAlpha);
+                targetColors[vertexIndex + 1] = new Color(defaultColors[vertexIndex + 1].r, defaultColors[vertexIndex + 1].g, defaultColors[vertexIndex + 1].b, targerAlpha);
+                targetColors[vertexIndex + 2] = new Color(defaultColors[vertexIndex + 2].r, defaultColors[vertexIndex + 2].g, defaultColors[vertexIndex + 2].b, targerAlpha);
+                targetColors[vertexIndex + 3] = new Color(defaultColors[vertexIndex + 3].r, defaultColors[vertexIndex + 3].g, defaultColors[vertexIndex + 3].b, targerAlpha);
             }
 
-            mesh.vertices = vertices;
-            mesh.colors = colors;
-            textLabel.canvasRenderer.SetMesh(mesh);
+            // mesh.colors = colors;
+            // textLabel.canvasRenderer.SetMesh(mesh);
 
             time = time + Time.deltaTime;
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
 
         yield return null;
 
+        targetColors = null;
         isAnimating = false;
     }
 }
