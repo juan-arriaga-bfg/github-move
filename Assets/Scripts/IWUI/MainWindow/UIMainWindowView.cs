@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIMainWindowView : IWUIWindowView
@@ -72,6 +70,7 @@ public class UIMainWindowView : IWUIWindowView
         }
         
         DOTween.Kill(target);
+        target.blocksRaycasts = !isLock;
 
         if (isAnimate == false)
         {
