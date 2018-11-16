@@ -5,7 +5,7 @@ public class HintArrowView : BoardElementView
 {
     [SerializeField] private SpriteRenderer icon;
     
-    public const float DURATION = 5f;
+    public const float DURATION = 0.5f;
     
     private void Show()
     {
@@ -19,9 +19,9 @@ public class HintArrowView : BoardElementView
     public void Remove(float delay = 3.5f)
     {
         var sequence = DOTween.Sequence().SetId(animationUid);
-        sequence.Insert(delay, icon.DOFade(0, DURATION * 0.5f));
+        sequence.Insert(delay, icon.DOFade(0, DURATION));
         
-        DestroyOnBoard(delay + DURATION * 0.6f);
+        DestroyOnBoard(delay + DURATION * 1.1f);
     }
 
     public static HintArrowView Show(BoardPosition position, float offsetX = 0, float offsetY = 0, bool focus = true, bool loop = false)

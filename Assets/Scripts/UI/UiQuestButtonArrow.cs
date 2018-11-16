@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Quests;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,7 +24,7 @@ public class UiQuestButtonArrow : MonoBehaviour
         {
             var action = new QueueActionComponent {Id = QUEUE_ACTION_ID}
                         .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = UIWindowType.IgnoredWindows})
-                        .SetAction(() => { AnimateNewArrow(); });
+                        .SetAction(AnimateNewArrow);
 
             ProfileService.Current.QueueComponent.AddAction(action, true);
         }
@@ -95,14 +93,14 @@ public class UiQuestButtonArrow : MonoBehaviour
     private void AnimateProgressArrow(int current, int target)
     {
         arrow.sprite = newSprite;
-        label.Text = $"Progress";
+        label.Text = LocalizationService.Instance.Manager.GetTextByUid("quest.arrow.progress", "Progress");
         MovementAnimation();
     }
 
     private void AnimateNewArrow()
     {
         arrow.sprite = progressSprite;
-        label.Text = $"New task";
+        label.Text = LocalizationService.Instance.Manager.GetTextByUid("quest.arrow.new", "New task");
         MovementAnimation();
     }
 

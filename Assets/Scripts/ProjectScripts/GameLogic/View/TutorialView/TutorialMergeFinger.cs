@@ -5,6 +5,7 @@ public class TutorialMergeFinger : BoardElementView
 {
     [SerializeField] private Transform anchor;
     [SerializeField] private Transform shine;
+    [SerializeField] private SpriteRenderer finger;
 
     private Sequence sequence;
     private BoardPosition start;
@@ -29,27 +30,33 @@ public class TutorialMergeFinger : BoardElementView
         DOTween.Kill(anchor);
         
         const float duration = 0.5f;
-        const float shineDuration = 0.2f;
+        const float fadeDuration = 0.2f;
         
         sequence = DOTween.Sequence().SetId(anchor).SetLoops(int.MaxValue);
+
+        sequence.AppendCallback(() => finger.DOFade(1f, fadeDuration));
+        sequence.Append(CachedTransform.DOLocalMove(fromPos, duration));
         
-        sequence.Insert(0f, CachedTransform.DOLocalMove(fromPos, duration));
-        
-        sequence.InsertCallback(duration, () =>
+        sequence.AppendCallback(() =>
         {
             anchor.gameObject.SetActive(true);
             shine.gameObject.SetActive(true);
         });
         
-        sequence.Insert(duration, shine.DOScale(Vector3.one * 2f, shineDuration));
-        sequence.Insert(duration + shineDuration, shine.DOScale(Vector3.zero, shineDuration));
-        sequence.Insert(duration + shineDuration + 0.1f, CachedTransform.DOLocalMove(toPos, duration));
-        sequence.InsertCallback((duration * 2) + shineDuration + 0.1f, () => gameObject.SetActive(false));
-        sequence.InsertCallback((duration * 2) + shineDuration + 0.5f, () =>
+        sequence.Append(shine.DOScale(Vector3.one * 2f, fadeDuration));
+        sequence.Append(shine.DOScale(Vector3.zero, fadeDuration * 0.5f));
+        sequence.Append(CachedTransform.DOLocalMove(toPos, duration));
+        sequence.AppendInterval(duration);
+        
+        sequence.AppendCallback(() =>
         {
-            Reset();
-            gameObject.SetActive(true);
+            anchor.gameObject.SetActive(false);
+            shine.gameObject.SetActive(false);
         });
+        
+        sequence.Append(finger.DOFade(0f, fadeDuration));
+        sequence.AppendCallback(Reset);
+        sequence.AppendInterval(duration);
     }
 
     public void Show()
@@ -80,6 +87,7 @@ public class TutorialMergeFinger : BoardElementView
 
     private void Reset()
     {
+        finger.DOFade(0, 0);
         anchor.gameObject.SetActive(false);
         shine.gameObject.SetActive(false);
         shine.localScale = Vector3.one;
