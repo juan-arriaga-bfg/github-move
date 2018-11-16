@@ -21,7 +21,8 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     public Dictionary<BoardPosition, FogDef> FogPositions;
     public List<BoardPosition> Completed;
     
-    Dictionary<BoardPosition, FogObserver> FogObservers;
+    private Dictionary<BoardPosition, FogObserver> FogObservers;
+    private List<FogDef> ActiveFogs;
     
     public void Reload()
     {
@@ -30,6 +31,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         FogPositions = null;
         Completed = new List<BoardPosition>();
         FogObservers = new Dictionary<BoardPosition, FogObserver>();
+        ActiveFogs = new List<FogDef>();
         LoadData(new ResourceConfigDataMapper<FogsDataManager>("configs/fogs.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
     
@@ -100,48 +102,20 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         return !pos.HasValue;
     }
 
-    public FogDef GetFirstNotClearedFog()
+    public FogDef GetRandomActiveFogWithLeastLevel()
     {
-        var defs = new List<FogDef>();
-        
-        var sw = new System.Diagnostics.Stopwatch();
-        sw.Start();
-        
-        foreach (var pair in FogPositions)
-        {
-            BoardPosition pos = pair.Key;
-
-            FogObserver observer;
-            if (!FogObservers.TryGetValue(pos, out observer))
-            {
-                continue;
-            }
-
-            if (!observer.CanBeReached())
-            {
-                continue;
-            }
-            
-            defs.Add(pair.Value);
-        }
-        
-        sw.Stop();
-        Debug.LogError($"SW: {sw.ElapsedMilliseconds}s");
-
-        if (defs.Count == 0)
+        if (ActiveFogs.Count == 0)
         {
             Debug.LogError("[FogsDataManager] => GetUidOfFirstNotClearedFog: No defs found!");
             return null;
         }
 
-        defs.Sort((def1, def2) => def1.Level - def2.Level);
-        
-        int firstLevel = defs[0].Level;
+        int firstLevel = ActiveFogs[0].Level;
         int lastIndex = -1;
         
-        for (int i = 1; i < defs.Count; i++)
+        for (int i = 1; i < ActiveFogs.Count; i++)
         {
-            var def = defs[i];
+            var def = ActiveFogs[i];
             if (def.Level == firstLevel)
             {
                 lastIndex = i;
@@ -154,7 +128,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
 
         int index = Random.Range(0, lastIndex + 1);
 
-        return defs[index];
+        return ActiveFogs[index];
     }
 
     /// <summary>
@@ -162,7 +136,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     /// </summary>
     public string GetUidOfFirstNotClearedFog()
     {
-        return GetFirstNotClearedFog()?.Uid;
+        return GetRandomActiveFogWithLeastLevel()?.Uid;
     }
 
     public List<GridMeshArea> GetFoggedAreas()
@@ -228,10 +202,16 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     public void RegisterFogObserver(FogObserver observer)
     {
         FogObservers.Add(observer.Key, observer);
+        if (observer.IsActive)
+        {
+            ActiveFogs.Add(observer.Def);
+            ActiveFogs.Sort((def1, def2) => def1.Level - def2.Level);
+        }
     }
     
     public void UnregisterFogObserver(FogObserver observer)
     {
         FogObservers.Remove(observer.Key);
+        ActiveFogs.Remove(observer.Def);
     }
 }
