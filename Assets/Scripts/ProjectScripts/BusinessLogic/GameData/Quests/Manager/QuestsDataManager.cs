@@ -7,6 +7,7 @@ using DG.Tweening;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+using Quests;
 using UnityEngine;
 
 public class QuestsDataManager : IECSComponent, IDataManager
@@ -24,12 +25,17 @@ public class QuestsDataManager : IECSComponent, IDataManager
     /// <summary>
     /// List of ids of completed quests
     /// </summary>
-    public List<string> CompletedQuests;
+    public List<string> FinishedQuests;
 
     /// <summary>
     /// Will be invoked when we Start new or Claim active quests. This mean that ActiveQuests list is changing.
     /// </summary>
     public Action OnActiveQuestsListChanged;
+    
+    /// <summary>
+    /// Will be invoked when quest state is changing.
+    /// </summary>
+    public Action<QuestEntity, TaskEntity> OnQuestStateChanged;
     
     private List<QuestStarterEntity> questStarters;
 
@@ -74,7 +80,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
     {
         var questSave = ProfileService.Current.GetComponent<QuestSaveComponent>(QuestSaveComponent.ComponentGuid);
 
-        CompletedQuests = questSave.CompletedQuests ?? new List<string>();
+        FinishedQuests = questSave.FinishedQuests ?? new List<string>();
         
         ActiveQuests = new List<QuestEntity>();
 
@@ -271,7 +277,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
         Debug.Log($"[QuestsDataManager] => StartNewQuestsIfAny Schedule");
         
         var action = new QueueActionComponent {Id = ACTION_ID}
-                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = new HashSet<string> {UIWindowType.MainWindow}})
+                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = UIWindowType.IgnoredWindows})
                     .SetAction(() =>
                      {
                          string starterId = null;
@@ -285,11 +291,8 @@ public class QuestsDataManager : IECSComponent, IDataManager
                          Debug.Log($"[QuestsDataManager] => StartNewQuestsIfAny before dlg");
                          
                          var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
-                         model.SetQuests(questsToStart);
-                         model.BuildConversation(starterId);
-                         // model.BuildTestConversation();
-                         //model.BuildQuestCompletedConversation();
-        
+                         model.Init(null, questsToStart, starterId);
+
                          UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
                      });
 
@@ -323,7 +326,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
     /// Call this to foreach through Starters and Start new quests if Conditions are met.
     /// Highly expensive! 
     /// </summary>
-    private List<string> CheckConditions(out string starterId)
+    public List<string> CheckConditions(out string starterId)
     {
         starterId = null;
         
@@ -384,10 +387,20 @@ public class QuestsDataManager : IECSComponent, IDataManager
         quest = InstantiateQuest(id);
         ActiveQuests.Add(quest);
 
-        quest.Start(saveData);
+        // To handle Pending -> New transition for listeners
+        if (saveData == null)
+        {
+            quest.OnChanged += OnQuestsStateChangedEvent;
+            OnActiveQuestsListChanged?.Invoke();
+            quest.Start(null);
+        }
+        else
+        {
+            quest.Start(saveData);
+            quest.OnChanged += OnQuestsStateChangedEvent;
+            OnActiveQuestsListChanged?.Invoke();
+        }
 
-        OnActiveQuestsListChanged?.Invoke();
-        
         return quest;
     }
 
@@ -395,18 +408,22 @@ public class QuestsDataManager : IECSComponent, IDataManager
     /// Call it when a player claimed a reward to remove a quest from ActiveQuests list
     /// </summary>
     /// <param name="id"></param>
-    public void CompleteQuest(string id)
+    public void FinishQuest(string id)
     {
-        Debug.Log("!!! CompleteQuest: " + id);
+        //Debug.Log("!!! CompleteQuest: " + id);
         
         for (var i = 0; i < ActiveQuests.Count; i++)
         {
             var quest = ActiveQuests[i];
             if (quest.Id == id)
             {
-                CompletedQuests.Add(id);
+                quest.SetClaimedState();
+                
+                FinishedQuests.Add(id);
                 ActiveQuests.RemoveAt(i);
                 quest.DisconnectFromBoard();
+                
+                quest.OnChanged -= OnQuestsStateChangedEvent;
                 
                 OnActiveQuestsListChanged?.Invoke();
                 
@@ -416,5 +433,10 @@ public class QuestsDataManager : IECSComponent, IDataManager
         }
         
         Debug.LogError($"[QuestsDataManager] => CompleteQuest: Quest with id '{id}' is not active!");
+    }
+
+    private void OnQuestsStateChangedEvent(QuestEntity quest, TaskEntity task)
+    {
+        OnQuestStateChanged?.Invoke(quest, task);
     }
 }

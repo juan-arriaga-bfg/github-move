@@ -45,6 +45,7 @@ public class ChangeStorageStateView : UIBoardView
 
     public void OnClick()
     {
+        Context.Context.TutorialLogic.Pause(true);
         Context.TouchReaction?.Touch(Context.CachedPosition);
     }
 }

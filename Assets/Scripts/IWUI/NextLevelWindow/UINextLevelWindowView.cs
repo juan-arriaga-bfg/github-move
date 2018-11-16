@@ -7,6 +7,7 @@ public class UINextLevelWindowView : UIGenericWindowView
     [SerializeField] private NSText message;
     [SerializeField] private NSText rewards;
     [SerializeField] private NSText tapLabel;
+    [SerializeField] private IWTextMeshAnimation textMeshAnimation;
     
     public override void OnViewShow()
     {
@@ -18,6 +19,8 @@ public class UINextLevelWindowView : UIGenericWindowView
         message.Text = windowModel.Mesage;
         rewards.Text = windowModel.Rewards;
         tapLabel.Text = windowModel.TapText;
+        
+        textMeshAnimation.Animate();
     }
 
     public override void OnViewClose()
@@ -43,6 +46,7 @@ public class UINextLevelWindowView : UIGenericWindowView
             
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
         GameDataService.Current.LevelsManager.UpdateSequence();
+        GameDataService.Current.OrdersManager.Unlock();
         
         base.OnViewCloseCompleted();
     }

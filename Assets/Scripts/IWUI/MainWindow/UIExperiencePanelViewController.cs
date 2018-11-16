@@ -57,7 +57,7 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
         isLevelUp = true;
         
         var action = new QueueActionComponent()
-                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = new HashSet<string> {UIWindowType.MainWindow}})
+                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = UIWindowType.IgnoredWindows})
                     .SetAction(() =>
                      {
                          UIService.Get.ShowWindow(UIWindowType.NextLevelWindow);

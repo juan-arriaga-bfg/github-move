@@ -21,7 +21,8 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerCo
     public float GetProgressNext => 1 - (current+1)/(float)HP;
 
     public Dictionary<int, int> Reward;
-
+    public virtual int StorageSpawnPiece => storage.SpawnPiece;
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
@@ -47,11 +48,16 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerCo
     {
     }
 
-    protected virtual Action InitInSaveStorage()
+    protected virtual Action InitInSaveStorage(LifeSaveItem item)
     {
         Action updateView;
-        storage.InitInSave(thisContext.CachedPosition, out updateView);
+        storage.InitInSave(thisContext.CachedPosition, () => InitInSaveReward(item), out updateView);
         return updateView;
+    }
+    
+    protected virtual void InitInSaveReward(LifeSaveItem item)
+    {
+        Reward = item.Reward;
     }
 
     protected virtual LifeSaveItem InitInSave(BoardPosition position)
@@ -63,12 +69,10 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerCo
         if (item == null) return null;
         
         current = item.Step;
-        Reward = item.Reward;
-        
         thisContext.Context.WorkerLogic.Init(thisContext.CachedPosition, storage.Timer);
         
-        var updateView = InitInSaveStorage();
-
+        var updateView = InitInSaveStorage(item);
+        
         if (storage.IsFilled)
         {
             OnTimerStart();

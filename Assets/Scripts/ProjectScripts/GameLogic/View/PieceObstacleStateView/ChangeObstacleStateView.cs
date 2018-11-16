@@ -99,6 +99,7 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
     
     public void Clear()
     {
+        Context.Context.TutorialLogic.Pause(true);
         life.Damage();
         Change(false);
     }

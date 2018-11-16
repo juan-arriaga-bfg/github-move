@@ -310,6 +310,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			var item = new LifeSaveItem
 			{
 				Step = component.Current,
+				StorageSpawnPiece = component.StorageSpawnPiece,
 				StartTime = component.Timer.StartTimeLong,
 				IsStart = component.Timer.IsExecuteable(),
 				Position = position,

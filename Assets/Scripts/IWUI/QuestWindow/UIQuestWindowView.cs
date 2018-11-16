@@ -71,7 +71,14 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         {
             GetFrom = () => position,
             Pieces = windowModel.PiecesReward,
-            OnComplete = () => { AddResourceView.Show(position, windowModel.CurrencysReward); }
+            OnComplete = () =>
+            {
+                var view = board.RendererContext.GetElementAt(position) as CharacterPieceView;
+                
+                if(view != null) view.StartRewardAnimation();
+                
+                AddResourceView.Show(position, windowModel.CurrencysReward);
+            }
         });
     }
 
@@ -93,7 +100,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             }
             
             quest.SetClaimedState();
-            GameDataService.Current.QuestsManager.CompleteQuest(quest.Id);
+            GameDataService.Current.QuestsManager.FinishQuest(quest.Id);
             
             isComplete = true;
             return;

@@ -9,7 +9,7 @@ public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMat
         {
             PieceType.A8.Id,
             PieceType.B10.Id,
-            PieceType.C9.Id,
+            PieceType.C8.Id,
             PieceType.D8.Id,
         };
     }

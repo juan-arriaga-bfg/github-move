@@ -25,7 +25,7 @@ public class PieceBuildersBuilder
         
         dict = AddBuildingBranchPiece(dict, PieceType.A1.Id, PieceType.A9.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.B1.Id, PieceType.B11.Id);
-        dict = AddBuildingBranchPiece(dict, PieceType.C1.Id, PieceType.C10.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.C1.Id, PieceType.C9.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.D1.Id, PieceType.D9.Id);
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Soft1.Id, PieceType.Soft6.Id, dict);
@@ -56,6 +56,7 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddObstaclePiece(Dictionary<int, IPieceBuilder> dict)
     {
+        dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OB1_TT.Id, PieceType.OB2_TT.Id, dict);
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OB1_A.Id, PieceType.OB9_A.Id, dict);
         dict = AddSimplePiece<MovedObstaclePieceBuilder>(PieceType.OB_PR_A.Id, PieceType.OB_PR_E.Id, dict);
         

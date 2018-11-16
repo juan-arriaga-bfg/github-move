@@ -1,15 +1,10 @@
 ﻿public class TouchReactionConditionFog : TouchReactionConditionComponent
 {
+	private FogObserver observer;
+	
 	public override bool Check(BoardPosition position, Piece piece)
 	{
 		var board = piece.Context;
-		
-//		if (Locker.IsLocked/*boardController?.Pathfinder.CanPathToCastle(piece) == false*/)
-//		{
-//			if(board.PathfindLocker.HasPath(piece) == false)
-//				UIErrorWindowController.AddError("Path not found");
-//			return false;
-//		}
 		
 		var key = new BoardPosition(position.X, position.Y);
 		var def = GameDataService.Current.FogsManager.GetDef(key);

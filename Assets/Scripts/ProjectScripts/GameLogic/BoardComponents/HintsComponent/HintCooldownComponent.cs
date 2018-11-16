@@ -18,7 +18,7 @@ public class HintCooldownComponent : ECSEntity
     
 	public bool IsPaused => locker.IsLocked;
 
-	private readonly TimerComponent timerArrow = new TimerComponent();
+//	private readonly TimerComponent timerArrow = new TimerComponent();
 	private readonly TimerComponent timerBounce = new TimerComponent();
 
 	private BoardController context;
@@ -47,7 +47,7 @@ public class HintCooldownComponent : ECSEntity
 
     private void UpdateLockState()
     {
-        if (timerArrow.IsPaused != locker.IsLocked)
+        /*if (timerArrow.IsPaused != locker.IsLocked)
         {
             Debug.Log($"[HintCooldownComponent] => State {(timerArrow.IsPaused ? "PAUSED" : "RESUMED")} => {(locker.IsLocked ? "PAUSED" : "RESUMED")}");
             timerArrow.IsPaused = locker.IsLocked;
@@ -55,7 +55,7 @@ public class HintCooldownComponent : ECSEntity
         else
         {
             Debug.Log($"[HintCooldownComponent] => State still {(timerArrow.IsPaused ? "PAUSED" : "RESUMED")}"); 
-        }
+        }*/
 
     }
 
@@ -64,7 +64,7 @@ public class HintCooldownComponent : ECSEntity
 	    locker = GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
 	    
 		context = entity as BoardController;
-		RegisterComponent(timerArrow, true);
+//		RegisterComponent(timerArrow, true);
 		RegisterComponent(timerBounce, true);
 		
 		chestsId = PieceType.GetIdsByFilter(PieceTypeFilter.Chest);
@@ -87,7 +87,7 @@ public class HintCooldownComponent : ECSEntity
 
 	public void Step(HintType type)
 	{
-		if(IsPaused
+		/*if(IsPaused
 		   // || GameDataService.Current.QuestsManagerOld.IsThirdCompleted()
 		   || type != HintType.HighPriority && type != HintType.OpenChest && timerArrow.IsStarted) return;
 		
@@ -97,7 +97,7 @@ public class HintCooldownComponent : ECSEntity
 			GameDataService.Current.ConstantsManager.MaxDelayHintArrow);
 		
 		timerArrow.OnComplete = Hint;
-		timerArrow.Start();
+		timerArrow.Start();*/
 	}
 
 	public void AddView(UIBoardView view)
@@ -120,7 +120,7 @@ public class HintCooldownComponent : ECSEntity
 	
 	private void Hint()
 	{
-		if(UIService.Get.ShowedWindows.Count > 1) return;
+		if(IsPaused || UIService.Get.ShowedWindows.Count > 1) return;
 		
 		if (Show(chestsId))
 		{
@@ -162,6 +162,8 @@ public class HintCooldownComponent : ECSEntity
 
 	private void Bounce()
 	{
+		if(IsPaused) return;
+		
 		timerBounce.Delay = Random.Range(GameDataService.Current.ConstantsManager.MinDelayBounceBubble,
 			GameDataService.Current.ConstantsManager.MaxDelayBounceBubble);
 		

@@ -392,38 +392,6 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "Fog1",
-    "SpriteName": "Fog1",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "Fog2",
-    "SpriteName": "Fog2",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "Fog3",
-    "SpriteName": "Fog3",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "FogOpacity",
-    "SpriteName": "FogOpacity",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
     "Uid": "A1",
     "SpriteName": "A1",
     "BundleName": "graphicscommon",
@@ -650,14 +618,6 @@
   {
     "Uid": "C9",
     "SpriteName": "C9",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "Uid": "C10",
-    "SpriteName": "C10",
     "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/ProcessedContent",
     "SpriteSheetName": "gamefield",
@@ -1376,14 +1336,6 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
-    "Uid": "NPC_4",
-    "SpriteName": "NPC_4",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/ProcessedContent",
-    "SpriteSheetName": "gamefield2",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
     "Uid": "NPC_5",
     "SpriteName": "NPC_5",
     "BundleName": "graphicscommon",
@@ -1453,6 +1405,86 @@
     "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/ProcessedContent",
     "SpriteSheetName": "meshTest",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Fog1",
+    "SpriteName": "Fog1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Fog1_border",
+    "SpriteName": "Fog1_border",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Fog2",
+    "SpriteName": "Fog2",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Fog2_border",
+    "SpriteName": "Fog2_border",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Fog3",
+    "SpriteName": "Fog3",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "Fog3_border",
+    "SpriteName": "Fog3_border",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "OB1_TT",
+    "SpriteName": "OB1_TT",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "OB2_TT",
+    "SpriteName": "OB2_TT",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "NPC_Gnome",
+    "SpriteName": "NPC_Gnome",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "NPC_SleepingBeautyPlaid",
+    "SpriteName": "NPC_SleepingBeautyPlaid",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield2",
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   }
 ]

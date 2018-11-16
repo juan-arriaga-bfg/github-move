@@ -26,6 +26,7 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.DefaultWorker, R.DefaultWorker);
         dict.Add((int)ViewType.ExtraWorker, R.ExtraWorker);
         dict.Add((int)ViewType.TutorialMergeFinger, R.TutorialMergeFinger);
+        dict.Add((int)ViewType.PieceRemover, R.PieceRemover);
         
 #endregion
         
@@ -39,9 +40,10 @@ public class ElementsResourcesBuilder
 #region Characters
         
         dict.Add(PieceType.NPC_SleepingBeauty.Id, R.NPC_SleepingBeautyPiece);
+        dict.Add(PieceType.NPC_SleepingBeautyPlaid.Id, R.NPC_SleepingBeautyPlaidPiece);
         dict.Add(PieceType.NPC_Rapunzel.Id, R.NPC_RapunzelPiece);
         dict.Add(PieceType.NPC_PussInBoots.Id, R.NPC_PussInBootsPiece);
-        dict.Add(PieceType.NPC_4.Id, R.NPC_4Piece);
+        dict.Add(PieceType.NPC_Gnome.Id, R.NPC_GnomePiece);
         dict.Add(PieceType.NPC_5.Id, R.NPC_5Piece);
         dict.Add(PieceType.NPC_6.Id, R.NPC_6Piece);
         dict.Add(PieceType.NPC_7.Id, R.NPC_7Piece);
@@ -118,6 +120,9 @@ public class ElementsResourcesBuilder
 #region Obstacles
         
         dict.Add(PieceType.Fog.Id, R.FogPiece);
+        
+        dict.Add(PieceType.OB1_TT.Id, R.OB1_TTPiece);
+        dict.Add(PieceType.OB2_TT.Id, R.OB2_TTPiece);
         
         dict.Add(PieceType.OB1_A.Id, R.OB1_APiece);
         dict.Add(PieceType.OB2_A.Id, R.OB2_APiece);
@@ -203,8 +208,6 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.C8.Id, R.C8Piece);
         dict.Add(PieceType.C9Fake.Id, R.C9Piece);
         dict.Add(PieceType.C9.Id, R.C9Piece);
-        dict.Add(PieceType.C10Fake.Id, R.C10Piece);
-        dict.Add(PieceType.C10.Id, R.C10Piece);
         
         #endregion
         

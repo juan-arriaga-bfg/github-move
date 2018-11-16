@@ -7,8 +7,7 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
     public override int Guid => ComponentGuid;
     
     public Dictionary<int, ObstacleDef> Obstacles;
-
-    private ObstacleDef defaultDef;
+    
     private Dictionary<int, List<ObstacleDef>> branches;
     
     private MatchDefinitionComponent matchDefinition;
@@ -32,7 +31,6 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
             if (string.IsNullOrEmpty(error))
             {
                 data.Sort((a, b) => a.Piece.CompareTo(b.Piece));
-                defaultDef = data[0];
 
                 foreach (var def in data)
                 {
@@ -68,13 +66,10 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
         
         List<ObstacleDef> list;
 
-        if (branches.TryGetValue(key, out list) == false)
-        {
-            return defaultDef;
-        }
-
+        if (branches.TryGetValue(key, out list) == false) return null;
+        
         step = Mathf.Clamp(step, 0, list.Count - 1);
-
+        
         return list[step];
     }
     

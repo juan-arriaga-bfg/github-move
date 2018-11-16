@@ -100,31 +100,6 @@
         "Uid": "Order5",
         "Weight": 10
       }
-    ],
-    "PieceWeights": [
-      {
-        "Uid": "PR_A1",
-        "Weight": 20,
-        "Override": true
-      },
-      {
-        "Uid": "PR_C1",
-        "Weight": 10,
-        "Override": true
-      },
-      {
-        "Uid": "PR_B1",
-        "Weight": 5,
-        "Override": true
-      },
-      {
-        "Uid": "PR_E1",
-        "Weight": 5
-      },
-      {
-        "Uid": "PR_D1",
-        "Weight": 5
-      }
     ]
   },
   {
@@ -147,26 +122,26 @@
       {
         "Uid": "Order7",
         "Weight": 15
+      },
+      {
+        "Uid": "Order1",
+        "Weight": 15
       }
     ],
     "PieceWeights": [
-      {
-        "Uid": "PR_A1",
-        "Weight": 30,
-        "Override": true
-      },
       {
         "Uid": "PR_C1",
         "Weight": 30,
         "Override": true
       },
       {
-        "Uid": "PR_E1",
+        "Uid": "PR_D1",
         "Weight": 10
       },
       {
         "Uid": "PR_B1",
-        "Weight": 10
+        "Weight": 10,
+        "Override": true
       }
     ]
   },
@@ -188,19 +163,13 @@
     ],
     "OrdersWeights": [
       {
-        "Uid": "Order7",
-        "Weight": 10
-      },
-      {
-        "Uid": "Order4",
-        "Weight": 10
-      },
-      {
         "Uid": "Order9",
-        "Weight": 10
-      },
+        "Weight": 20
+      }
+    ],
+    "PieceWeights": [
       {
-        "Uid": "Order2",
+        "Uid": "PR_E1",
         "Weight": 10
       }
     ]
@@ -219,24 +188,6 @@
       {
         "Currency": "Crystals",
         "Amount": 5
-      }
-    ],
-    "OrdersWeights": [
-      {
-        "Uid": "Order9",
-        "Weight": 10
-      },
-      {
-        "Uid": "Order4",
-        "Weight": 10
-      },
-      {
-        "Uid": "Order5",
-        "Weight": 10
-      },
-      {
-        "Uid": "Order7",
-        "Weight": 10
       }
     ]
   },

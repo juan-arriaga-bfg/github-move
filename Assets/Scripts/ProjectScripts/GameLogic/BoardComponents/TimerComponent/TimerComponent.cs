@@ -84,14 +84,19 @@ public class TimerComponent : IECSComponent, IECSSystem
         return (int)StartTime.GetTime().TotalSeconds / (float)Delay;
     }
     
+    public void Complete()
+    {
+        Stop();
+        OnComplete();
+    }
+    
     public void FastComplete()
     {
         CurrencyHellper.Purchase(Currency.Timer.Name, 1, GetPrise(), success =>
         {
             if(success == false) return;
             
-            Stop();
-            OnComplete();
+            Complete();
         });
     }
     

@@ -32,7 +32,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.ExchangeWindow,
             UIWindowType.OrdersWindow,
             UIWindowType.QuestStartWindow,
-            UIWindowType.QuestCompletetWindow,
+            UIWindowType.QuestCompleteWindow,
             UIWindowType.NextLevelWindow,
         });
         
@@ -46,6 +46,9 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIService.Get.ShowWindow(UIWindowType.MainWindow);
 
             onComplete?.Invoke();
+            
+            ProfileService.Current.QueueComponent.Run();
+            BoardService.Current.FirstBoard.TutorialLogic.Run();
         };
     }
 

@@ -47,6 +47,7 @@ public class SandboxGameController : MonoBehaviour
             .RegisterComponent(new PiecePositionsCacheComponent())
             .RegisterComponent(new FieldFinderComponent())
             .RegisterComponent(new FireflyLogicComponent())
+            .RegisterComponent(new PieceRemoverComponent())
             .RegisterComponent(new CellHintsComponent())
             .RegisterComponent(new PieceFlyerComponent()
                 .RegisterComponent(new LockerComponent()))
@@ -117,7 +118,7 @@ public class SandboxGameController : MonoBehaviour
         var topPoint = boardController.BoardDef.GetSectorCenterWorldPosition(heightShift - 1, boardController.BoardDef.Height - heightShift - 1, 0);
         var bottomPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - heightShift - 1, heightShift - 1, 0);
         
-        var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition(19, 14, boardController.BoardDef.PieceLayer);
+        var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition(19, 13, boardController.BoardDef.PieceLayer);
         
         boardController.Manipulator.CameraManipulator.CurrentCameraSettings.CameraClampRegion = new Rect
         (

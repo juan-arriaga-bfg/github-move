@@ -122,7 +122,14 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
             {
                 GetFrom = () => pieceContext.CachedPosition,
                 Pieces = order.PiecesReward,
-                OnComplete = () => { AddResourceView.Show(pieceContext.CachedPosition, order.CurrencysReward); }
+                OnComplete = () =>
+                {
+                    var view = pieceContext.Context.RendererContext.GetElementAt(pieceContext.CachedPosition) as CharacterPieceView;
+                
+                    if(view != null) view.StartRewardAnimation();
+                    
+                    AddResourceView.Show(pieceContext.CachedPosition, order.CurrencysReward);
+                }
             });
             
             GameDataService.Current.OrdersManager.RemoveOrder(order, pieceContext.Context.BoardLogic);
@@ -172,8 +179,8 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         
         var model = UIService.Get.GetCachedModel<UIExchangeWindowModel>(UIWindowType.ExchangeWindow);
             
-        model.Title = "Open Now!";
-        model.Message = "Buy the missing mana";
+        model.Title = "Need ingredients?";
+        model.Message = "Buy the missing ingredients";
         model.Products = diff;
         model.Price = price;
         model.OnClick = Buy;

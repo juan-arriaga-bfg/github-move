@@ -1,10 +1,10 @@
 ﻿[
   {
-    "Id": 1,
+    "Id": "1_CreatePiece_PR_C4",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "1"
+        "TaskId": "1_CreatePiece_PR_C4"
       }
     ],
     "ComponentsCache": {
@@ -20,22 +20,22 @@
           },
           {
             "Currency": "Experience",
-            "Amount": 10
+            "Amount": 15
           }
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Grow a Candy Tree",
+        "Title": "Quest",
         "Message": "Grow a Candy Tree"
       }
     }
   },
   {
-    "Id": 2,
+    "Id": "2_ClearFog",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "2"
+        "TaskId": "2_ClearFog"
       }
     ],
     "ComponentsCache": {
@@ -56,17 +56,17 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Clear a fog",
-        "Message": "Now we can clean up the area from obstacles and build Houses!"
+        "Title": "Quest",
+        "Message": "Let's remove this annoying fog"
       }
     }
   },
   {
-    "Id": 3,
+    "Id": "3_KillTree",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "3"
+        "TaskId": "3_KillTree"
       }
     ],
     "ComponentsCache": {
@@ -82,22 +82,22 @@
           },
           {
             "Currency": "Experience",
-            "Amount": 30
+            "Amount": 55
           }
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Cut down trees",
-        "Message": "Clear a fog"
+        "Title": "Quest",
+        "Message": "Remove obstacles"
       }
     }
   },
   {
-    "Id": 4,
+    "Id": "4_CreatePiece_A2",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "4"
+        "TaskId": "4_CreatePiece_A2"
       }
     ],
     "ComponentsCache": {
@@ -118,48 +118,17 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Create wood packs",
+        "Title": "Quest",
         "Message": "Create wood packs"
       }
     }
   },
   {
-    "Id": 5,
+    "Id": "5_CreatePieceA5",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "5"
-      }
-    ],
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 25
-          },
-          {
-            "Currency": "Mana",
-            "Amount": 30
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 30
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Title": "Clear a fog",
-        "Message": "Clear a fog"
-      }
-    }
-  },
-  {
-    "Id": 6,
-    "$type": "QuestEntity, Assembly-CSharp",
-    "TaskDefs": [
-      {
-        "TaskId": "6"
+        "TaskId": "5_CreatePieceA5"
       }
     ],
     "ComponentsCache": {
@@ -180,17 +149,17 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Build a new House",
+        "Title": "Quest",
         "Message": "Build a new House"
       }
     }
   },
   {
-    "Id": 7,
+    "Id": "6_ClearFog",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "7"
+        "TaskId": "6_ClearFog"
       }
     ],
     "ComponentsCache": {
@@ -211,17 +180,17 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Clear a fog",
+        "Title": "Quest",
         "Message": "Clear a fog"
       }
     }
   },
   {
-    "Id": 8,
+    "Id": "7_CreatePiece_PR_A5",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "8"
+        "TaskId": "7_CreatePiece_PR_A5"
       }
     ],
     "ComponentsCache": {
@@ -242,17 +211,17 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Collect wheat",
+        "Title": "Quest",
         "Message": "Collect wheat"
       }
     }
   },
   {
-    "Id": 9,
+    "Id": "8_CreatePiece_PR_B5",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "9"
+        "TaskId": "8_CreatePiece_PR_B5"
       }
     ],
     "ComponentsCache": {
@@ -273,17 +242,17 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Collect apples",
+        "Title": "Quest",
         "Message": "Collect apples"
       }
     }
   },
   {
-    "Id": 10,
+    "Id": "9_CreatePiece_PR_C5",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "10"
+        "TaskId": "9_CreatePiece_PR_C5"
       }
     ],
     "ComponentsCache": {
@@ -304,17 +273,17 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Collect candies",
+        "Title": "Quest",
         "Message": "Collect candies"
       }
     }
   },
   {
-    "Id": 11,
+    "Id": "10_OpenChest",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "11"
+        "TaskId": "10_OpenChest"
       }
     ],
     "ComponentsCache": {
@@ -335,17 +304,17 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Open a chest",
+        "Title": "Quest",
         "Message": "Open a chest"
       }
     }
   },
   {
-    "Id": 12,
+    "Id": "11_UseWorker",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "12"
+        "TaskId": "11_UseWorker"
       }
     ],
     "ComponentsCache": {
@@ -366,17 +335,17 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Use workers",
-        "Message": "Use workers"
+        "Title": "Quest",
+        "Message": "Continue setting in order. Use gnomes."
       }
     }
   },
   {
-    "Id": 13,
+    "Id": "12_UseMine",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "13"
+        "TaskId": "12_UseMine"
       }
     ],
     "ComponentsCache": {
@@ -397,17 +366,17 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Use the Mine",
-        "Message": "Use the Mine"
+        "Title": "Quest",
+        "Message": "We should examine the mine"
       }
     }
   },
   {
-    "Id": 14,
+    "Id": "13_CreatePiece_A6",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "14"
+        "TaskId": "13_CreatePiece_A6"
       }
     ],
     "ComponentsCache": {
@@ -428,48 +397,17 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Create a Piece",
-        "Message": "Create a Piece"
+        "Title": "Quest",
+        "Message": "Let's make this house even better."
       }
     }
   },
   {
-    "Id": 15,
+    "Id": "14_CreatePiece_B3",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "15"
-      }
-    ],
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 25
-          },
-          {
-            "Currency": "Mana",
-            "Amount": 25
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 25
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Title": "Clear a fog",
-        "Message": "Clear a fog"
-      }
-    }
-  },
-  {
-    "Id": 16,
-    "$type": "QuestEntity, Assembly-CSharp",
-    "TaskDefs": [
-      {
-        "TaskId": "16"
+        "TaskId": "14_CreatePiece_B3"
       }
     ],
     "ComponentsCache": {
@@ -490,17 +428,17 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Create a Piece",
+        "Title": "Quest",
         "Message": "Create a Piece"
       }
     }
   },
   {
-    "Id": 17,
+    "Id": "15_CreatePiece_B4",
     "$type": "QuestEntity, Assembly-CSharp",
     "TaskDefs": [
       {
-        "TaskId": "17"
+        "TaskId": "15_CreatePiece_B4"
       }
     ],
     "ComponentsCache": {
@@ -521,8 +459,70 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Title": "Create a Piece",
+        "Title": "Quest",
         "Message": "Create a Piece"
+      }
+    }
+  },
+  {
+    "Id": "16_CompleteOrder",
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
+      {
+        "TaskId": "16_CompleteOrder"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest",
+        "Message": "We need to make some treats."
+      }
+    }
+  },
+  {
+    "Id": "17_KillField",
+    "$type": "QuestEntity, Assembly-CSharp",
+    "TaskDefs": [
+      {
+        "TaskId": "17_KillField"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest",
+        "Message": "Let's remove old fields."
       }
     }
   }

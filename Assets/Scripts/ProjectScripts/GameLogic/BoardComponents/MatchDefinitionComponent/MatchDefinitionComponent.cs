@@ -23,7 +23,7 @@ public class MatchDefinitionComponent : ECSEntity
     {
         PieceMatchDef def;
         
-        return definition.TryGetValue(pieceId, out def) ? def.Count : -1;
+        return definition.TryGetValue(pieceId, out def) ? def.Amount : -1;
     }
 
     public List<List<int>> GetPattern(int pieceId)

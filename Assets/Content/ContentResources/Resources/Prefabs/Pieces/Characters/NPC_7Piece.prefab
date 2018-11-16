@@ -167,7 +167,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1963358622952210}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e94db1dff9a4341a9922139f675b17, type: 3}
+  m_Script: {fileID: 11500000, guid: 117a747512dc5ec4d9b6140529c27b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsFading: 0
@@ -180,6 +180,7 @@ MonoBehaviour:
     type: 2}
   highlightPieceMaterial: {fileID: 2100000, guid: 8df69b780d2d9354c8ffb9b8293c73ad,
     type: 2}
+  charAnimator: {fileID: 0}
 --- !u!212 &212330162334391976
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -220,7 +221,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 1.5}
+  m_Size: {x: 0.98, y: 1.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

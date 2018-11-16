@@ -4,11 +4,12 @@
 	public override int Guid => ComponentGuid;
 
 	public int Id;
+	public int Repeat;
 	
 	public TutorialLogicComponent Context;
 	
 	private bool isStart;
-	protected bool isPerform;
+	public bool IsPerform;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
@@ -30,23 +31,58 @@
 	
 	public virtual void Perform()
 	{
+		IsPerform = true;
+		StartAnimation(TutorialAnimationType.Perform);
 	}
 	
 	public virtual void PauseOff()
 	{
+		if(Repeat == 0) return;
+		
+		Repeat--;
 	}
 
 	protected virtual void Complete()
 	{
+		StartAnimation(TutorialAnimationType.Complete);
 	}
-
+	
 	public bool IsComplete()
 	{
-		var isComplete = Check(TutorialConditionType.Complete);
+		var isComplete = IsHardComplete();
 
+		if (isComplete)
+		{
+			Complete();
+			return true;
+		}
+		
+		if (IsPerform == false) return false;
+		
+		isComplete = Check(TutorialConditionType.Complete);
+			
 		if (isComplete) Complete();
 		
 		return isComplete;
+	}
+	
+	private bool IsHardComplete()
+	{
+		var collection = GetComponent<ECSComponentCollection>(BaseTutorialCondition.ComponentGuid);
+		var conditions = collection?.Components.FindAll(component => (component as BaseTutorialCondition).ConditionType == TutorialConditionType.Hard);
+
+		if (conditions == null) return false;
+		
+		for (var i = conditions.Count - 1; i >= 0; i--)
+		{
+			var condition = (BaseTutorialCondition) conditions[i];
+			
+			if (condition.Check() == false) continue;
+
+			return true;
+		}
+		
+		return false;
 	}
 
 	private bool Check(TutorialConditionType type)
@@ -67,5 +103,22 @@
 		}
 
 		return conditions.Count == 0;
+	}
+	
+	private void StartAnimation(TutorialAnimationType type)
+	{
+		var collection = GetComponent<ECSComponentCollection>(BaseTutorialAnimation.ComponentGuid);
+		var animations = collection?.Components.FindAll(component => (component as BaseTutorialAnimation).AnimationType == type);
+
+		if (animations == null) return;
+		
+		for (var i = animations.Count - 1; i >= 0; i--)
+		{
+			var animation = (BaseTutorialAnimation) animations[i];
+			
+			animation.Start();
+			UnRegisterComponent(animation);
+			animations.Remove(animation);
+		}
 	}
 }

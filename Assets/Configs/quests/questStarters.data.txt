@@ -3,7 +3,7 @@
     "Id": 1,
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "QuestToStartIds": [
-      "1"
+      "1_CreatePiece_PR_C4"
     ],
     "Conditions": [
       {
@@ -16,13 +16,13 @@
     "Id": 2,
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "QuestToStartIds": [
-      "2"
+      "2_ClearFog"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
         "Id": "QuestCompleted",
-        "Value": "1"
+        "Value": "1_CreatePiece_PR_C4"
       }
     ]
   },
@@ -30,38 +30,37 @@
     "Id": 3,
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "QuestToStartIds": [
-      "3",
-      "4",
-      "5"
+      "3_KillTree",
+      "4_CreatePiece_A2"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionFogClearedComponent, Assembly-CSharp",
+        "Id": "FogCleared",
+        "Value": "Fog 1"
+      }
+    ]
+  },
+  {
+    "Id": 4,
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "QuestToStartIds": [
+      "5_CreatePieceA5"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
         "Id": "QuestCompleted",
-        "Value": "2"
+        "Value": "2_ClearFog"
       }
     ]
   },
   {
-    "Id": 6,
+    "Id": 5,
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "QuestToStartIds": [
-      "6",
-      "15"
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
-        "Id": "QuestCompleted",
-        "Value": "5"
-      }
-    ]
-  },
-  {
-    "Id": 7,
-    "$type": "QuestStarterEntity, Assembly-CSharp",
-    "QuestToStartIds": [
-      "7"
+      "6_ClearFog",
+      "16_CompleteOrder"
     ],
     "Conditions": [
       {
@@ -72,18 +71,46 @@
     ]
   },
   {
-    "Id": 8,
+    "Id": 6,
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "QuestToStartIds": [
-      "8",
-      "9",
-      "10"
+      "7_CreatePiece_PR_A5",
+      "8_CreatePiece_PR_B5",
+      "9_CreatePiece_PR_C5"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionFogClearedComponent, Assembly-CSharp",
+        "Id": "FogCleared",
+        "Value": "Fog 3"
+      }
+    ]
+  },
+  {
+    "Id": 7,
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "QuestToStartIds": [
+      "11_UseWorker"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
         "Id": "QuestCompleted",
-        "Value": "15"
+        "Value": "17_KillField"
+      }
+    ]
+  },
+  {
+    "Id": 8,
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "QuestToStartIds": [
+      "12_UseMine"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionFogClearedComponent, Assembly-CSharp",
+        "Id": "FogCleared",
+        "Value": "Fog 5"
       }
     ]
   },
@@ -91,13 +118,13 @@
     "Id": 9,
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "QuestToStartIds": [
-      "12"
+      "13_CreatePiece_A6"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
         "Id": "QuestCompleted",
-        "Value": "9"
+        "Value": "5_CreatePieceA5"
       }
     ]
   },
@@ -105,13 +132,13 @@
     "Id": 10,
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "QuestToStartIds": [
-      "13"
+      "10_OpenChest"
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
-        "Id": "QuestCompleted",
-        "Value": "7"
+        "$type": "QuestStartConditionPieceUnlockedComponent, Assembly-CSharp",
+        "Id": "PieceUnlocked",
+        "Value": "CH1_A"
       }
     ]
   },
@@ -119,13 +146,27 @@
     "Id": 11,
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "QuestToStartIds": [
-      "14"
+      "14_CreatePiece_B3"
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
-        "Id": "QuestCompleted",
-        "Value": "6"
+        "$type": "QuestStartConditionPieceUnlockedComponent, Assembly-CSharp",
+        "Id": "PieceUnlocked",
+        "Value": "B2"
+      }
+    ]
+  },
+  {
+    "Id": 12,
+    "$type": "QuestStarterEntity, Assembly-CSharp",
+    "QuestToStartIds": [
+      "15_CreatePiece_B4"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionPieceUnlockedComponent, Assembly-CSharp",
+        "Id": "PieceUnlocked",
+        "Value": "B3"
       }
     ]
   },
@@ -133,13 +174,13 @@
     "Id": 13,
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "QuestToStartIds": [
-      "11"
+      "17_KillField"
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionPieceUnlockedComponent, Assembly-CSharp",
-        "Id": "PieceUnlocked",
-        "Value": "CH2_A"
+        "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
+        "Id": "QuestCompleted",
+        "Value": "8_CreatePiece_PR_B5"
       }
     ]
   },
@@ -147,13 +188,13 @@
     "Id": 14,
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "QuestToStartIds": [
-      "16"
+      "17_KillField"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
         "Id": "QuestCompleted",
-        "Value": "13"
+        "Value": "7_CreatePiece_PR_A5"
       }
     ]
   },
@@ -161,13 +202,13 @@
     "Id": 15,
     "$type": "QuestStarterEntity, Assembly-CSharp",
     "QuestToStartIds": [
-      "17"
+      "17_KillField"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionQuestCompletedComponent, Assembly-CSharp",
         "Id": "QuestCompleted",
-        "Value": "16"
+        "Value": "9_CreatePiece_PR_C5"
       }
     ]
   }

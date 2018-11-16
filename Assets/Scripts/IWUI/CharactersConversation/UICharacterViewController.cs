@@ -14,7 +14,16 @@ public class UICharacterViewController : IWBaseMonoBehaviour
         public Image Image;
     }
 
+    [Header("Emotions")]
     [SerializeField] private List<CharacterEmotionDef> emotions;
+
+    [Header("Other settings")]
+    [SerializeField] private CanvasGroup canvasGroup;
+
+    public CanvasGroup GetCanvasGroup()
+    {
+        return canvasGroup;
+    }
     
     private CharacterEmotion currentEmotion;
     private Image currentCharImage;
@@ -132,9 +141,16 @@ public class UICharacterViewController : IWBaseMonoBehaviour
 
     public void ToggleActive(bool active, CharacterEmotion emotion, bool animated, Action onComplete = null)
     {
-        Emotion = emotion;
+        Debug.Log($"[UICharacterViewController] => ToggleActive(active: {active}, animated: {animated})");
+
+        bool emotionChanged = false;
+        if (Emotion != emotion)
+        {
+            Emotion = emotion;
+            emotionChanged = true;
+        }
         
-        if (this.active == active)
+        if (this.active == active && !emotionChanged)
         {
             onComplete?.Invoke();
             return;

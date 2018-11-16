@@ -18,7 +18,7 @@ public class OrderBubbleView : UIBoardView
 
 	public override void Init(Piece piece)
 	{
-		Ofset = new Vector3(0, 1.5f);
+		Ofset = new Vector3(0, 2.0f);
 		
 		base.Init(piece);
         
@@ -55,6 +55,7 @@ public class OrderBubbleView : UIBoardView
 
 	public void OnClick()
 	{
+		Context.Context.TutorialLogic.Pause(true);
 		Context.TouchReaction?.Touch(Context.CachedPosition);
 	}
 }

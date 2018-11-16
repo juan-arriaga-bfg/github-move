@@ -283,6 +283,33 @@ public struct BoardPosition : IEquatable<BoardPosition>
         return new BoardPosition(Mathf.RoundToInt(center.x), Mathf.RoundToInt(center.y), Mathf.RoundToInt(center.z));
     }
 
+    public List<BoardPosition> GetImmediate(List<BoardPosition> positions, List<BoardPosition> ignore, int amount)
+    {
+        if (ignore == null) ignore = new List<BoardPosition>(); 
+        
+        var rezult = new List<BoardPosition>();
+        var temp = new List<KeyValuePair<float, BoardPosition>>();
+        
+        foreach (var position in positions)
+        {
+            if(ignore.Contains(position)) continue;
+            
+            var magnitude = SqrMagnitude(this, position);
+            temp.Add(new KeyValuePair<float, BoardPosition>(magnitude, position));
+        }
+        
+        temp.Sort((a, b) => a.Key.CompareTo(b.Key));
+
+        amount = Mathf.Min(amount, temp.Count);
+
+        for (var i = 0; i < amount; i++)
+        {
+            rezult.Add(temp[i].Value);
+        }
+        
+        return rezult;
+    }
+
     public static void GetAABB(List<BoardPosition> positions, out BoardPosition topLeft, out BoardPosition topRight, out BoardPosition bottomRight, out BoardPosition bottomLeft)
     {
         int minX = int.MaxValue;

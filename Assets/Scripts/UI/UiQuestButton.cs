@@ -8,6 +8,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     [SerializeField] private GameObject shine;
     [SerializeField] private GameObject checkmark;
     [SerializeField] private CanvasGroup rootCanvasGroup;
+    [SerializeField] private UiQuestButtonArrow arrow;
     
     public QuestEntity Quest { get; private set; }
     private bool isUp;
@@ -24,7 +25,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     private TaskEntity GetFirstTask()
     {
-        return interactive ? Quest.ActiveTasks[0] : Quest.Tasks[0];
+        return Quest.Tasks[0];
     }
     
     public void Init(QuestEntity quest, bool interactive)
@@ -68,6 +69,11 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         
         ResourcesViewManager.Instance.RegisterView(this);
         UpdateView();
+
+        if (arrow != null)
+        {
+            arrow.SetQuest(interactive ? quest : null);
+        }
     }
 
     private void OnQuestChanged(QuestEntity quest, TaskEntity task)
@@ -188,11 +194,11 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     private void AddQuestWindowToQueue()
     {
-        Debug.Log("!!! CompleteQuest: AddQuestWindowToQueue: " + Quest.Id);
+        //Debug.Log("!!! CompleteQuest: AddQuestWindowToQueue: " + Quest.Id);
         
         var action = new QueueActionComponent()
-                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = new HashSet<string> {UIWindowType.MainWindow}})
-                    .AddCondition(new NoQueuedActionsConditionComponent {ActionIds = new List<string> {"StartNewQuestsIfAny"}})
+                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = UIWindowType.IgnoredWindows})
+                    //.AddCondition(new NoQueuedActionsConditionComponent {ActionIds = new List<string> {"StartNewQuestsIfAny"}})
                     .SetAction(() =>
                      {
                          // ShowQuestWindow();
@@ -204,10 +210,10 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     private void ShowQuestCompletedWindow()
     {
-        var model = UIService.Get.GetCachedModel<UIQuestCompleteWindowModel>(UIWindowType.QuestCompletetWindow);
-        model.Quest = Quest;
+        var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
+        model.Init(Quest, null, null);
         
-        UIService.Get.ShowWindow(UIWindowType.QuestCompletetWindow);
+        UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
     }
     
     private void ShowQuestWindow()

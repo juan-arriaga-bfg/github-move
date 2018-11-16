@@ -63,7 +63,6 @@ public class R
      public const string C7Piece = "C7Piece";
      public const string C8Piece = "C8Piece";
      public const string C9Piece = "C9Piece";
-     public const string C10Piece = "C10Piece";
      public const string D1Piece = "D1Piece";
      public const string D2Piece = "D2Piece";
      public const string D3Piece = "D3Piece";
@@ -148,7 +147,6 @@ public class R
      public const string NPC_SleepingBeautyPiece = "NPC_SleepingBeautyPiece";
      public const string NPC_RapunzelPiece = "NPC_RapunzelPiece";
      public const string NPC_PussInBootsPiece = "NPC_PussInBootsPiece";
-     public const string NPC_4Piece = "NPC_4Piece";
      public const string NPC_5Piece = "NPC_5Piece";
      public const string NPC_6Piece = "NPC_6Piece";
      public const string NPC_7Piece = "NPC_7Piece";
@@ -161,4 +159,10 @@ public class R
      public const string TapToContinueTextView = "TapToContinueTextView";
      public const string UICharacterBubbleQuestCompletedView = "UICharacterBubbleQuestCompletedView";
      public const string TutorialMergeFinger = "TutorialMergeFinger";
+     public const string OB1_TTPiece = "OB1_TTPiece";
+     public const string OB2_TTPiece = "OB2_TTPiece";
+     public const string NPC_GnomePiece = "NPC_GnomePiece";
+     public const string NPC_SleepingBeautyPlaidPiece = "NPC_SleepingBeautyPlaidPiece";
+     public const string PieceRemover = "PieceRemover";
+     public const string UIHintArrow = "UIHintArrow";
 }

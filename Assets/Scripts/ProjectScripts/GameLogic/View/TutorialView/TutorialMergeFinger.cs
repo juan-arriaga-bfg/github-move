@@ -4,6 +4,7 @@ using UnityEngine;
 public class TutorialMergeFinger : BoardElementView
 {
     [SerializeField] private Transform anchor;
+    [SerializeField] private Transform shine;
 
     private Sequence sequence;
     private BoardPosition start;
@@ -18,7 +19,7 @@ public class TutorialMergeFinger : BoardElementView
         piece = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(PieceType.Parse(target.PieceType) + "_Tutor"));
         piece.SetParentAndReset(anchor);
         
-        start = from.DownAtDistance(2).LeftAtDistance(1);
+        start = from.DownAtDistance(1);
         
         var fromPos = Context.Context.BoardDef.GetPiecePosition(from.X, from.Y);
         var toPos = Context.Context.BoardDef.GetPiecePosition(to.X, to.Y);
@@ -27,13 +28,28 @@ public class TutorialMergeFinger : BoardElementView
         
         DOTween.Kill(anchor);
         
+        const float duration = 0.5f;
+        const float shineDuration = 0.2f;
+        
         sequence = DOTween.Sequence().SetId(anchor).SetLoops(int.MaxValue);
         
-        sequence.Insert(0f, CachedTransform.DOLocalMove(fromPos + new Vector3(0.1f, -0.2f), 1.5f));
-        sequence.Insert(1.5f, CachedTransform.DOLocalMove(fromPos, 0.1f));
-        sequence.InsertCallback(1.6f, () => anchor.gameObject.SetActive(true));
-        sequence.Insert(1.7f, CachedTransform.DOLocalMove(toPos, 1f));
-        sequence.InsertCallback(3f, Reset);
+        sequence.Insert(0f, CachedTransform.DOLocalMove(fromPos, duration));
+        
+        sequence.InsertCallback(duration, () =>
+        {
+            anchor.gameObject.SetActive(true);
+            shine.gameObject.SetActive(true);
+        });
+        
+        sequence.Insert(duration, shine.DOScale(Vector3.one * 2f, shineDuration));
+        sequence.Insert(duration + shineDuration, shine.DOScale(Vector3.zero, shineDuration));
+        sequence.Insert(duration + shineDuration + 0.1f, CachedTransform.DOLocalMove(toPos, duration));
+        sequence.InsertCallback((duration * 2) + shineDuration + 0.1f, () => gameObject.SetActive(false));
+        sequence.InsertCallback((duration * 2) + shineDuration + 0.5f, () =>
+        {
+            Reset();
+            gameObject.SetActive(true);
+        });
     }
 
     public void Show()
@@ -65,6 +81,8 @@ public class TutorialMergeFinger : BoardElementView
     private void Reset()
     {
         anchor.gameObject.SetActive(false);
+        shine.gameObject.SetActive(false);
+        shine.localScale = Vector3.one;
         CachedTransform.localPosition = Context.Context.BoardDef.GetPiecePosition(start.X, start.Y);
     }
 }

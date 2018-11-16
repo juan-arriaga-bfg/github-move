@@ -1,172 +1,208 @@
 ﻿[
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "1",
+    "Id": "1_CreatePiece_PR_C4",
     "PieceUid": "PR_C4",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Message": "Create Piece"
+        "Title": "Create a Piece",
+        "Message": "Create a Piece"
       }
     }
   },
   {
     "$type": "TaskClearFogEntity, Assembly-CSharp",
-    "Id": "2",
-    "TargetValue": 1,
+    "Id": "2_ClearFog",
+    "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "Fog1",
+        "Title": "Clear a fog",
         "Message": "Clear a fog"
       }
     }
   },
   {
-    "$type": "TaskKillObstacleEntity, Assembly-CSharp",
-    "Id": "3",
+    "$type": "TaskKillTreeEntity, Assembly-CSharp",
+    "Id": "3_KillTree",
     "TargetValue": 4,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "OB1_A",
+        "Title": "Cut down a tree",
         "Message": "Cut down a tree"
       }
     }
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "4",
+    "Id": "4_CreatePiece_A2",
     "PieceUid": "A2",
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Message": "Create Piece"
-      }
-    }
-  },
-  {
-    "$type": "TaskClearFogEntity, Assembly-CSharp",
-    "Id": "5",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Ico": "Fog1",
-        "Message": "Clear a fog"
+        "Title": "Create a Piece",
+        "Message": "Create a Piece"
       }
     }
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "6",
+    "Id": "5_CreatePieceA5",
     "PieceUid": "A5",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Message": "Create Piece"
+        "Title": "Create a Piece",
+        "Message": "Create a Piece"
       }
     }
   },
   {
     "$type": "TaskClearFogEntity, Assembly-CSharp",
-    "Id": "7",
+    "Id": "6_ClearFog",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "Fog1",
+        "Title": "Clear a fog",
         "Message": "Clear a fog"
       }
     }
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "8",
+    "Id": "7_CreatePiece_PR_A5",
     "PieceUid": "PR_A5",
-    "TargetValue": 3,
+    "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Message": "Create Piece"
+        "Title": "Collect ingredients",
+        "Message": "Collect ingredients"
       }
     }
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "9",
+    "Id": "8_CreatePiece_PR_B5",
     "PieceUid": "PR_B5",
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Message": "Create Piece"
+        "Title": "Collect ingredients",
+        "Message": "Collect ingredients"
       }
     }
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "10",
+    "Id": "9_CreatePiece_PR_C5",
     "PieceUid": "PR_C5",
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Message": "Create Piece"
+        "Title": "Collect ingredients",
+        "Message": "Collect ingredients"
       }
     }
   },
   {
     "$type": "TaskOpenChestEntity, Assembly-CSharp",
-    "Id": "11",
-    "PieceUid": "CH2_A",
+    "Id": "10_OpenChest",
+    "PieceUid": "CH1_A",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "CH2_A",
+        "Ico": "CH1_A",
+        "Title": "Open a chest",
         "Message": "Open a chest"
       }
     }
   },
   {
     "$type": "TaskUseWorkerEntity, Assembly-CSharp",
-    "Id": "12",
+    "Id": "11_UseWorker",
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "Boost_WR"
+        "Ico": "Boost_WR",
+        "Title": "Use workers",
+        "Message": "Use workers"
       }
     }
   },
   {
     "$type": "TaskUseMineEntity, Assembly-CSharp",
-    "Id": "13",
+    "Id": "12_UseMine",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "MN_B"
+        "Ico": "MN_B",
+        "Title": "Use a Mine",
+        "Message": "Use a Mine"
       }
     }
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "14",
+    "Id": "13_CreatePiece_A6",
     "PieceUid": "A6",
-    "TargetValue": 1
-  },
-  {
-    "$type": "TaskClearFogEntity, Assembly-CSharp",
-    "Id": "15",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "Fog1"
+        "Title": "Create a Piece",
+        "Message": "Create a Piece"
       }
     }
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "16",
+    "Id": "14_CreatePiece_B3",
     "PieceUid": "B3",
-    "TargetValue": 3
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "Create a Piece",
+        "Message": "Create a Piece"
+      }
+    }
   },
   {
     "$type": "TaskCreatePieceEntity, Assembly-CSharp",
-    "Id": "17",
+    "Id": "15_CreatePiece_B4",
     "PieceUid": "B4",
-    "TargetValue": 2
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "Create a Piece",
+        "Message": "Create a Piece"
+      }
+    }
+  },
+  {
+    "$type": "TaskCompleteOrderEntity, Assembly-CSharp",
+    "Id": "16_CompleteOrder",
+    "PieceUid": "NPC_SleepingBeauty",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "NPC_SleepingBeauty",
+        "Title": "Complete Orders",
+        "Message": "Complete Orders"
+      }
+    }
+  },
+  {
+    "$type": "TaskKillFieldEntity, Assembly-CSharp",
+    "Id": "17_KillField",
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "OB_PR_A",
+        "Title": "Clear dead fields",
+        "Message": "Clear dead fields"
+      }
+    }
   }
 ]

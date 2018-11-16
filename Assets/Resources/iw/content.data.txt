@@ -330,11 +330,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "C10Piece",
-    "ResourcePath": "Prefabs\\Pieces\\C/C10Piece",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "D1Piece",
     "ResourcePath": "Prefabs\\Pieces\\D/D1Piece",
     "IsGenerateAutoName": true
@@ -755,11 +750,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "NPC_4Piece",
-    "ResourcePath": "Prefabs\\Pieces\\Characters/NPC_4Piece",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "NPC_5Piece",
     "ResourcePath": "Prefabs\\Pieces\\Characters/NPC_5Piece",
     "IsGenerateAutoName": true
@@ -873,5 +863,35 @@
     "Uid": "PR_C3_Tutor",
     "ResourcePath": "Prefabs\\Tutorial/PR_C3_Tutor",
     "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "OB1_TTPiece",
+    "ResourcePath": "Prefabs\\Pieces\\Obstacles/OB1_TTPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "OB2_TTPiece",
+    "ResourcePath": "Prefabs\\Pieces\\Obstacles/OB2_TTPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "NPC_GnomePiece",
+    "ResourcePath": "Prefabs\\Pieces\\Characters/NPC_GnomePiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "NPC_SleepingBeautyPlaidPiece",
+    "ResourcePath": "Prefabs\\Pieces\\Characters/NPC_SleepingBeautyPlaidPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "PieceRemover",
+    "ResourcePath": "Prefabs/PieceRemover",
+	"IsGenerateAutoName": true
+  },
+  {
+    "Uid": "UIHintArrow",
+    "ResourcePath": "Prefabs\\UI/UIHintArrow",
+    "IsGenerateAutoName": true
   }
 ]
