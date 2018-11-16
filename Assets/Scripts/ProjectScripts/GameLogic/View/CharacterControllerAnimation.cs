@@ -24,8 +24,8 @@ public class CharacterControllerAnimation : StateMachineBehaviour
 		DOTween.Kill(this);
 		animator.SetInteger(animationId, rewardIndex);
 	}
-
-	public void Destroy()
+	
+	public void OnDestroy()
 	{
 		DOTween.Kill(this);
 	}
