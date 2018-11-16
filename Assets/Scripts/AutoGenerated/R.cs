@@ -161,4 +161,5 @@ public class R
      public const string OB2_TTPiece = "OB2_TTPiece";
      public const string NPC_GnomePiece = "NPC_GnomePiece";
      public const string NPC_SleepingBeautyPlaidPiece = "NPC_SleepingBeautyPlaidPiece";
+     public const string PieceRemover = "PieceRemover";
 }

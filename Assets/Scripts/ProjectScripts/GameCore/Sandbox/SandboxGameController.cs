@@ -47,6 +47,7 @@ public class SandboxGameController : MonoBehaviour
             .RegisterComponent(new PiecePositionsCacheComponent())
             .RegisterComponent(new FieldFinderComponent())
             .RegisterComponent(new FireflyLogicComponent())
+            .RegisterComponent(new PieceRemoverComponent())
             .RegisterComponent(new CellHintsComponent())
             .RegisterComponent(new PieceFlyerComponent()
                 .RegisterComponent(new LockerComponent()))

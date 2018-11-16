@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class BoardController : ECSEntity,
+public partial class BoardController : ECSEntity,
     IActionExecuteComponent, IBoardEventsComponent, IBoardLoggerComponent, IBoardLogicComponent, IBoardDefinitionComponent, IBoardStatesComponent, ISessionBoardStateComponent,
     IBoardSystemProcessor, IBoardRendererComponent, IBoardManipulatorComponent, IBoardRandomComponent, IWorkerCurrencyLogicComponent, IHintCooldownComponent,
     IPartPiecesLogicComponent, IPathfinderComponent, IFreeChestLogicComponent, ITutorialLogicComponent

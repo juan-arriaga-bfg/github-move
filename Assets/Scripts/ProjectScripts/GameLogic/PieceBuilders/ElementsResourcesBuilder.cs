@@ -26,6 +26,7 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.DefaultWorker, R.DefaultWorker);
         dict.Add((int)ViewType.ExtraWorker, R.ExtraWorker);
         dict.Add((int)ViewType.TutorialMergeFinger, R.TutorialMergeFinger);
+        dict.Add((int)ViewType.PieceRemover, R.PieceRemover);
         
 #endregion
         

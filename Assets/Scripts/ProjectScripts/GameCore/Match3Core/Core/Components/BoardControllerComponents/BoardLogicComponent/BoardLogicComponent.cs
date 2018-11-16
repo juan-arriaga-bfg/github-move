@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Text;
 
-public class BoardLogicComponent : ECSEntity,
+public partial class BoardLogicComponent : ECSEntity,
     IMatchDefinitionComponent, IFieldFinderComponent, IEmptyCellsFinderComponent, IMatchActionBuilderComponent, IPiecePositionsCacheComponent,
     IPieceFlyerComponent, ICellHintsComponent, IFireflyLogicComponent
 {
