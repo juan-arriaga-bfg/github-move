@@ -71,13 +71,11 @@ public class CollapsePieceToAction : IBoardAction
 		
 		animation.OnCompleteEvent += (_) =>
 		{
+			gameBoardController.BoardLogic.UnlockCells(positonsForLock, this);
 			foreach (var obstaclePiece in obstaclesPieces)
 			{
 				obstaclePiece.PathfindLockObserver.RemoveRecalculate(obstaclePiece.CachedPosition);
 			}
-			
-			gameBoardController.BoardLogic.UnlockCells(positonsForLock, this);
-			
 			if (OnCompleteAction != null) gameBoardController.ActionExecutor.AddAction(OnCompleteAction);
 			OnComplete?.Invoke();
 		};
