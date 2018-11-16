@@ -872,6 +872,11 @@
   {
     "Uid": "PieceRemover",
     "ResourcePath": "Prefabs/PieceRemover",
+	"IsGenerateAutoName": true
+  },
+  {
+    "Uid": "UIHintArrow",
+    "ResourcePath": "Prefabs\\UI/UIHintArrow",
     "IsGenerateAutoName": true
   }
 ]

@@ -4,7 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIMainWindowView : IWUIWindowView
+public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
 {
     [SerializeField] private GameObject pattern;
     [SerializeField] private CodexButton codexButton;
@@ -31,6 +31,8 @@ public class UIMainWindowView : IWUIWindowView
         
         var windowModel = Model as UIMainWindowModel;
 
+        Components.RegisterComponent(new UIHintArrowComponent().SetContextView(this, GetCanvas().transform));
+        
         GameDataService.Current.QuestsManager.OnActiveQuestsListChanged += OnActiveQuestsListChanged;
         GameDataService.Current.CodexManager.OnNewItemUnlocked += OnNewPieceBuilded;
         
