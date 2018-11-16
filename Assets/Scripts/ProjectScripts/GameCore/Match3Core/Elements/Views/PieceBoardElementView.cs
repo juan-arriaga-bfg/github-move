@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using DG.Tweening;
 
 public class PieceBoardElementView : BoardElementView
 {
     [SerializeField] private Transform selectionView;
-    [SerializeField] protected SpriteRenderer bodySprite;
+    [SerializeField] protected List<SpriteRenderer> bodySprites;
     [SerializeField] private Material errorSelectionMaterial;
     [SerializeField] private Material defaultSelectionMaterial;
     [SerializeField] private Material highlightPieceMaterial;
@@ -27,10 +28,12 @@ public class PieceBoardElementView : BoardElementView
     {
         base.Init(context);
 
-        if (bodySprite == null)
+        if (bodySprites == null || bodySprites.Count == 0)
         {
             var view = transform.Find("View");
-            bodySprite = view.GetComponentInChildren<SpriteRenderer>();
+            
+            bodySprites = new List<SpriteRenderer>(view.GetComponentsInChildren<SpriteRenderer>());   
+            Debug.LogError($"BodySprites count: {bodySprites.Count}");
         }
         
         Piece = piece;
@@ -154,15 +157,14 @@ public class PieceBoardElementView : BoardElementView
 
             if (Piece.Draggable != null && isValid)
             {
-                if (bodySprite != null) sequence.Insert(0f, bodySprite.DOColor(Color.white, duration));
+                bodySprites?.ForEach(sprite => sequence.Insert(0f, sprite.DOColor(Color.white, duration)));
 
                 sequence.Insert(0f, selectionSprite.DOColor(baseColor, duration));
                 selectionSprite.material = defaultSelectionMaterial;
             }
             else
             {
-                if (bodySprite != null) sequence.Insert(0f, bodySprite.DOColor(dragSpriteErrorColor, duration));
-
+                bodySprites?.ForEach(sprite => sequence.Insert(0f, sprite.DOColor(dragSpriteErrorColor, duration)));
                 sequence.Insert(0f, selectionSprite.DOColor(dragErrorColor, duration));
                 selectionSprite.material = errorSelectionMaterial;
             }
@@ -172,7 +174,7 @@ public class PieceBoardElementView : BoardElementView
         else
         {
             DOTween.Kill(animationUid);
-            bodySprite.color = Color.white;
+            bodySprites.ForEach(sprite => sprite.color = Color.white);
             selectionSprite.color = baseColor;
             selectionView.gameObject.SetActive(false);
         }
