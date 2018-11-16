@@ -30,4 +30,9 @@ public class UIRemoverButtonViewController : IWUIWindowViewController
         
         
     }
+
+    public void OnClick()
+    {
+        
+    }
 }
