@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UIRemoverButtonViewController : IWUIWindowViewController
+public class UIRemoverButtonViewController : IWUIWindowViewController, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private Image icon;
 
@@ -34,5 +35,15 @@ public class UIRemoverButtonViewController : IWUIWindowViewController
     public void OnClick()
     {
         
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
     }
 }
