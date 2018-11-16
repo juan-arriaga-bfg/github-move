@@ -9,7 +9,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     private ViewDefinitionComponent viewDef;
     private LockView lockView;
     private BubbleView bubble;
-    private BoardPosition key;
+    public BoardPosition Key { get; private set; }
     
     public RectTransform GetAnchorRect()
     {
@@ -27,9 +27,9 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        key = new BoardPosition(position.X, position.Y);
+        Key = new BoardPosition(position.X, position.Y);
         
-        def = GameDataService.Current.FogsManager.GetDef(key);
+        def = GameDataService.Current.FogsManager.GetDef(Key);
         
         if(def == null) return;
         
@@ -45,6 +45,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         }
         
         base.OnAddToBoard(position, context);
+        
+        GameDataService.Current.FogsManager.RegisterFogObserver(this);
     }
 
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
@@ -61,6 +63,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         {
             carrierView.UpdateResource(0);
         }
+        
+        GameDataService.Current.FogsManager.UnregisterFogObserver(this);
     }
 
     public override BoardPosition GetPointInMask(BoardPosition position, BoardPosition mask)
@@ -77,7 +81,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, def);
         
         AddResourceView.Show(def.GetCenter(Context.Context), def.Reward);
-        GameDataService.Current.FogsManager.RemoveFog(key);
+        GameDataService.Current.FogsManager.RemoveFog(Key);
         
         if(def.Pieces != null)
         {
@@ -129,7 +133,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void UpdateResource(int offset)
     {
-        var canPath = Context.Context.Pathfinder.CanPathToCastle(Context);
+        var canPath = CanBeReached();
         var levelAccess = storageItem.Amount >= level;
         
         if ((canPath ^ levelAccess) && lockView == null)
@@ -179,9 +183,15 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             Context.CachedPosition.Z);
     }
 
-    public bool CanBeCleared()
+    public bool CanBeReached()
     {
         var pathExists = Context.Context.Pathfinder.CanPathToCastle(Context);
+        return pathExists;
+    }
+
+    public bool CanBeCleared()
+    {
+        var pathExists = CanBeReached();
         var resourcesEnought = storageItem.Amount >= level;
 
         return pathExists && resourcesEnought;
@@ -191,7 +201,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     {
         get
         {
-            var canPath = Context.Context.Pathfinder.CanPathToCastle(Context);
+            var canPath = CanBeReached();
             return canPath || storageItem.Amount >= level;
         }
     }

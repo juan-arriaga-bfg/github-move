@@ -19,7 +19,9 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     public List<FogDef> Fogs { get; set; }
     
     public Dictionary<BoardPosition, FogDef> FogPositions;
-    public List<BoardPosition> Completed = new List<BoardPosition>();
+    public List<BoardPosition> Completed;
+    
+    Dictionary<BoardPosition, FogObserver> FogObservers;
     
     public void Reload()
     {
@@ -27,6 +29,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         Fogs = null;
         FogPositions = null;
         Completed = new List<BoardPosition>();
+        FogObservers = new Dictionary<BoardPosition, FogObserver>();
         LoadData(new ResourceConfigDataMapper<FogsDataManager>("configs/fogs.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
     
@@ -101,17 +104,36 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     {
         var defs = new List<FogDef>();
         
+        var sw = new System.Diagnostics.Stopwatch();
+        sw.Start();
+        
         foreach (var pair in FogPositions)
         {
+            BoardPosition pos = pair.Key;
+
+            FogObserver observer;
+            if (!FogObservers.TryGetValue(pos, out observer))
+            {
+                continue;
+            }
+
+            if (!observer.CanBeReached())
+            {
+                continue;
+            }
+            
             defs.Add(pair.Value);
         }
+        
+        sw.Stop();
+        Debug.LogError($"SW: {sw.ElapsedMilliseconds}s");
 
         if (defs.Count == 0)
         {
             Debug.LogError("[FogsDataManager] => GetUidOfFirstNotClearedFog: No defs found!");
             return null;
         }
-        
+
         defs.Sort((def1, def2) => def1.Level - def2.Level);
         
         int firstLevel = defs[0].Level;
@@ -201,5 +223,15 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         }
 
         return area;
+    }
+
+    public void RegisterFogObserver(FogObserver observer)
+    {
+        FogObservers.Add(observer.Key, observer);
+    }
+    
+    public void UnregisterFogObserver(FogObserver observer)
+    {
+        FogObservers.Remove(observer.Key);
     }
 }
