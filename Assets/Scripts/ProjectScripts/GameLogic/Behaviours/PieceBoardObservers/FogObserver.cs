@@ -4,12 +4,12 @@ using UnityEngine;
 public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 {
     private int level;
-    private FogDef def;
+    public FogDef Def { get; private set; }
     private StorageItem storageItem;
     private ViewDefinitionComponent viewDef;
     private LockView lockView;
     private BubbleView bubble;
-    private BoardPosition key;
+    public BoardPosition Key { get; private set; }
     
     public RectTransform GetAnchorRect()
     {
@@ -24,27 +24,31 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     public Camera RenderCamera => Context.Context.BoardDef.ViewCamera;
 
     public List<IResourceCarrier> Carriers { get; private set; }
+
+    private bool? canBeReachedCached;
     
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        key = new BoardPosition(position.X, position.Y);
+        Key = new BoardPosition(position.X, position.Y);
         
-        def = GameDataService.Current.FogsManager.GetDef(key);
+        Def = GameDataService.Current.FogsManager.GetDef(Key);
         
-        if(def == null) return;
+        if(Def == null) return;
         
-        Mask = def.Positions;
+        Mask = Def.Positions;
         viewDef = Context.ViewDefinition;
 
         if (viewDef != null)
         {
             viewDef.OnAddToBoard(position, context);
-            level = def.Level;
+            level = Def.Level;
             storageItem = ProfileService.Current.GetStorageItem(GetResourceId());
             ResourcesViewManager.Instance.RegisterView(this);
         }
         
         base.OnAddToBoard(position, context);
+        
+        GameDataService.Current.FogsManager.RegisterFogObserver(this);
     }
 
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
@@ -61,6 +65,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         {
             carrierView.UpdateResource(0);
         }
+        
+        GameDataService.Current.FogsManager.UnregisterFogObserver(this);
     }
 
     public override BoardPosition GetPointInMask(BoardPosition position, BoardPosition mask)
@@ -70,18 +76,18 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
     public void Clear()
     {
-        if(def == null) return;
+        if(Def == null) return;
         
-        Debug.Log($"[FogObserver] => Clear fog with uid: {def.Uid}");
+        Debug.Log($"[FogObserver] => Clear fog with uid: {Def.Uid}");
         
-        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, def);
+        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, Def);
         
-        AddResourceView.Show(def.GetCenter(Context.Context), def.Reward);
-        GameDataService.Current.FogsManager.RemoveFog(key);
+        AddResourceView.Show(Def.GetCenter(Context.Context), Def.Reward);
+        GameDataService.Current.FogsManager.RemoveFog(Key);
         
-        if(def.Pieces != null)
+        if(Def.Pieces != null)
         {
-            foreach (var piece in def.Pieces)
+            foreach (var piece in Def.Pieces)
             {
                 foreach (var pos in piece.Value)
                 {
@@ -101,9 +107,9 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             }
         }
         
-        var weights = def.PieceWeights == null || def.PieceWeights.Count == 0
+        var weights = Def.PieceWeights == null || Def.PieceWeights.Count == 0
             ? GameDataService.Current.FogsManager.DefaultPieceWeights
-            : def.PieceWeights;
+            : Def.PieceWeights;
         
         foreach (var point in Mask)
         {
@@ -129,14 +135,16 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void UpdateResource(int offset)
     {
-        var canPath = Context.Context.Pathfinder.CanPathToCastle(Context);
+        canBeReachedCached = null;
+        
+        var canPath = CanBeReached();
         var levelAccess = storageItem.Amount >= level;
         
         if ((canPath ^ levelAccess) && lockView == null)
         {
             lockView = viewDef.AddView(ViewType.Lock) as LockView;
             lockView.Value = level.ToString();
-            lockView.transform.position = def.GetCenter(Context.Context);
+            lockView.transform.position = Def.GetCenter(Context.Context);
         }
 
         lockView?.SetGrayscale(!canPath);
@@ -158,8 +166,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         
         if(bubble.IsShow) return;
         
-        bubble.SetData("Clear fog", def.Condition.ToStringIcon(), OnClick);
-        bubble.SetOfset(def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
+        bubble.SetData("Clear fog", Def.Condition.ToStringIcon(), OnClick);
+        bubble.SetOfset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
         bubble.Priority = -1;
         bubble.Change(true);
         
@@ -179,9 +187,20 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             Context.CachedPosition.Z);
     }
 
+    public bool CanBeReached()
+    {
+        if (canBeReachedCached.HasValue)
+        {
+            return canBeReachedCached.Value;
+        }
+        
+        canBeReachedCached = Context.Context.Pathfinder.CanPathToCastle(Context);
+        return canBeReachedCached.Value;
+    }
+
     public bool CanBeCleared()
     {
-        var pathExists = Context.Context.Pathfinder.CanPathToCastle(Context);
+        var pathExists = CanBeReached();
         var resourcesEnought = storageItem.Amount >= level;
 
         return pathExists && resourcesEnought;
@@ -191,16 +210,16 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     {
         get
         {
-            var canPath = Context.Context.Pathfinder.CanPathToCastle(Context);
+            var canPath = CanBeReached();
             return canPath || storageItem.Amount >= level;
         }
     }
     
     private void OnClick(Piece piece)
     {
-        if(CurrencyHellper.IsCanPurchase(def.Condition, true, () => OnClick(piece)) == false) return;
+        if(CurrencyHellper.IsCanPurchase(Def.Condition, true, () => OnClick(piece)) == false) return;
         
-        CurrencyHellper.Purchase(Currency.Fog.Name, 1, def.Condition, success =>
+        CurrencyHellper.Purchase(Currency.Fog.Name, 1, Def.Condition, success =>
         {
             if (success == false) return;
 			
