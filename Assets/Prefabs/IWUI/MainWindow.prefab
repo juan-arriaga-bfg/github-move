@@ -945,6 +945,7 @@ GameObject:
   - component: {fileID: 223422161517140894}
   - component: {fileID: 114719397578781462}
   - component: {fileID: 114689858356462918}
+  - component: {fileID: 225080394933947702}
   m_Layer: 31
   m_Name: canvas
   m_TagString: Untagged
@@ -1464,6 +1465,21 @@ GameObject:
   - component: {fileID: 225055371916757472}
   m_Layer: 31
   m_Name: ButtonOrders
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1659650109591896
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224005000279984372}
+  m_Layer: 31
+  m_Name: HintAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7820,6 +7836,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94390430f3d0948b68b8501fc9e5ddf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCanvasGroup: {fileID: 225080394933947702}
+  canvas: {fileID: 223422161517140894}
+  isHideable: 1
   pattern: {fileID: 1573962232676210}
   codexButton: {fileID: 114622145751600294}
   questsCanvasGroup: {fileID: 225909200540593616}
@@ -7831,6 +7850,7 @@ MonoBehaviour:
   ordersCanvasGroup: {fileID: 225055371916757472}
   delimiters: {fileID: 1796603363501246}
   questsScroll: {fileID: 114139557744125974}
+  hintAnchorOrdersButton: {fileID: 224005000279984372}
 --- !u!114 &114834187065225206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9710,6 +9730,24 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!224 &224005000279984372
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1659650109591896}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224519792993818588}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 111.9}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224005544072818888
 RectTransform:
   m_ObjectHideFlags: 1
@@ -9832,7 +9870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -132.08, y: 0.000061035156}
+  m_AnchoredPosition: {x: -132.08, y: 0}
   m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224039078224091110
@@ -10441,7 +10479,7 @@ RectTransform:
   - {fileID: 224515684851920644}
   - {fileID: 224424680973849120}
   m_Father: {fileID: 224519792993818588}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10971,6 +11009,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 224005000279984372}
   - {fileID: 224601383303020660}
   - {fileID: 224287049512488878}
   m_Father: {fileID: 224844713052690776}
@@ -11106,7 +11145,7 @@ RectTransform:
   m_Children:
   - {fileID: 224186307381075238}
   m_Father: {fileID: 224519792993818588}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12105,6 +12144,17 @@ CanvasGroup:
   m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!225 &225080394933947702
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1468683550408844}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!225 &225082415230832884
 CanvasGroup:

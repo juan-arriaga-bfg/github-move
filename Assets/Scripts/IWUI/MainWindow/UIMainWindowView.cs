@@ -21,9 +21,15 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
     
     [SerializeField] private ScrollRect questsScroll;
 
+    [Header("Hint anchors")] 
+    [SerializeField] private Transform hintAnchorOrdersButton;
+    public Transform HintAnchorOrdersButton => hintAnchorOrdersButton;
+
     private List<UiQuestButton> questButtons = new List<UiQuestButton>();
 
     private int maxCountOfVisibleQuestButtonsCached = -1;
+    
+    public UIHintArrowComponent CachedHintArrowComponent { get; private set; }
     
     public override void OnViewShow()
     {
@@ -31,8 +37,11 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
         
         var windowModel = Model as UIMainWindowModel;
 
-        Components.RegisterComponent(new UIHintArrowComponent().SetContextView(this, GetCanvas().transform));
+        CachedHintArrowComponent = new UIHintArrowComponent();
+        CachedHintArrowComponent.SetContextView(this, GetCanvas().transform);
         
+        Components.RegisterComponent(CachedHintArrowComponent);
+
         GameDataService.Current.QuestsManager.OnActiveQuestsListChanged += OnActiveQuestsListChanged;
         GameDataService.Current.CodexManager.OnNewItemUnlocked += OnNewPieceBuilded;
         
