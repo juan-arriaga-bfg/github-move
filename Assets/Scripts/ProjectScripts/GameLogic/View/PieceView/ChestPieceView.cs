@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 public class ChestPieceView : PieceBoardElementView
@@ -69,8 +70,8 @@ public class ChestPieceView : PieceBoardElementView
         
         if (hightlight != null || CreateHighlight())
         {
-//            hightlight.gameObject.SetActive(active);
-//            HightlightAnimation(active);
+            hightlight.gameObject.SetActive(active);
+            HightlightAnimation(active);
         }
     }
 
@@ -110,42 +111,41 @@ public class ChestPieceView : PieceBoardElementView
     
     private bool CreateBackLight()
     {
-        /*if (bodySprites == null)
+        if (bodySprites == null || bodySprites.Count == 0)
             return false;
         
-        var backlightObject = Instantiate(bodySprites.gameObject, transform);
-        backlightObject.transform.position = bodySprites.gameObject.transform.position;
+        var backlightObject = Instantiate(bodySprites[0].gameObject, transform);
+        backlightObject.transform.position = bodySprites[0].gameObject.transform.position;
         var backlightLocal = backlightObject.GetComponent<SpriteRenderer>();
         
         backlightLocal.name = "_backlight";
         if(backlightMaterial != null)
             backlightLocal.material = backlightMaterial;
 
-        backlightLocal.sortingOrder = bodySprites.sortingOrder - 1;
+        backlightLocal.sortingOrder = bodySprites[0].sortingOrder - 1;
 
         this.backlight = backlightLocal; 
         
         AddLayerToCache(backlightLocal);
         var baclightRendererLayer = backlightObject.GetComponent<RendererLayer>();
-        baclightRendererLayer.SortingOrderOffset = 0;
-        */
+        baclightRendererLayer.SortingOrderOffset = 0; 
 
         return true;
     }
 
     private bool CreateHighlight()
     {
-        if (bodySprites == null)
+        if (bodySprites == null || bodySprites.Count == 0)
             return false;
         
-        /*var highlightObject = Instantiate(bodySprites.gameObject, transform);
-        highlightObject.transform.position = bodySprites.gameObject.transform.position;
+        var highlightObject = Instantiate(bodySprites[0].gameObject, transform);
+        highlightObject.transform.position = bodySprites[0].gameObject.transform.position;
         var highlightLocal = highlightObject.GetComponent<SpriteRenderer>();
         highlightLocal.name = "_highlight";
         if(hightlightMaterial != null)
             highlightLocal.material = hightlightMaterial;
 
-        highlightLocal.sortingOrder = bodySprites.sortingOrder + 1;
+        highlightLocal.sortingOrder = bodySprites[0].sortingOrder + 1;
         
         this.hightlight = highlightLocal;
 
@@ -153,7 +153,6 @@ public class ChestPieceView : PieceBoardElementView
         
         var highlightRendererLayer = highlightObject.GetComponent<RendererLayer>();
         highlightRendererLayer.SortingOrderOffset = 2;
-        */
 
         return true;
     }
