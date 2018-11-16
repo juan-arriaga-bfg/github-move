@@ -4,8 +4,7 @@ using DG.Tweening;
 public class SelectStorageTutorialStep : DelayTutorialStep
 {
     public List<int> Targets;
-
-    private BoardPosition? position;
+    
     private HintArrowView arrow;
     private ChangeObstacleStateView bubble;
     
@@ -29,15 +28,23 @@ public class SelectStorageTutorialStep : DelayTutorialStep
     {
         base.Execute();
         
+        KillBubble();
+        Find();
+            
+        if (bubble != null)
+        {
+            bubble.Attention();
+            CheckBubble();
+            return;
+        }
+        
         foreach (var target in Targets)
         {
             var positions = Context.Context.BoardLogic.PositionsCache.GetRandomPositions(target, 1);
             
             if(positions.Count == 0) continue;
-
-            position = positions[0];
             
-            arrow = HintArrowView.Show(position.Value, 0, 0, true, true);
+            arrow = HintArrowView.Show(positions[0], 0, 0, true, true);
             break;
         }
     }
@@ -51,9 +58,7 @@ public class SelectStorageTutorialStep : DelayTutorialStep
     {
         base.Complete();
 
-        DOTween.Kill(this);
-        bubble = null;
-        
+        KillBubble();
         RemoveArrow();
         Context.Context.HintCooldown.Resume(this);
     }
@@ -68,10 +73,7 @@ public class SelectStorageTutorialStep : DelayTutorialStep
 
     private void CheckBubble()
     {
-        DOTween.Kill(this);
-        bubble = null;
-        
-        if(position == null) return;
+        KillBubble();
         
         var sequence = DOTween.Sequence().SetId(this).SetLoops(int.MaxValue);
         
@@ -82,15 +84,41 @@ public class SelectStorageTutorialStep : DelayTutorialStep
                 bubble.Attention();
                 return;
             }
-            
-            var piece = Context.Context.BoardLogic.GetPieceAt(position.Value);
 
-            bubble = piece?.ViewDefinition?.GetViews().Find(view => view is ChangeObstacleStateView) as ChangeObstacleStateView;
-        
-            if(bubble == null) return;
+            Find();
             
-            bubble.Attention();
-            position = null;
+            if (bubble != null)
+            {
+                bubble.Attention();
+                return;
+            }
+
+            if (IsExecuteable()) DOTween.Kill(this);
         });
+    }
+    
+    private void Find()
+    {
+        foreach (var target in Targets)
+        {
+            var positions = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(target);
+            
+            if(positions.Count == 0) continue;
+
+            foreach (var position in positions)
+            {
+                var piece = Context.Context.BoardLogic.GetPieceAt(position);
+
+                bubble = piece?.ViewDefinition?.GetViews().Find(view => view is ChangeObstacleStateView) as ChangeObstacleStateView;
+        
+                if(bubble != null) return;
+            }
+        }
+    }
+
+    private void KillBubble()
+    {
+        DOTween.Kill(this);
+        bubble = null;
     }
 }
