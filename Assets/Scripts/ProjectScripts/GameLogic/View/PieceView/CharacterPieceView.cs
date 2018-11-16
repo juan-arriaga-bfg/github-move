@@ -17,6 +17,7 @@ public class CharacterPieceView : PieceBoardElementView
     
     public override void ResetViewOnDestroy()
     {
+        controller.Destroy();
         controller = null;
         
         base.ResetViewOnDestroy();

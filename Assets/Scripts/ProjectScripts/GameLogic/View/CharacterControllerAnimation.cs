@@ -24,6 +24,11 @@ public class CharacterControllerAnimation : StateMachineBehaviour
 		DOTween.Kill(this);
 		animator.SetInteger(animationId, rewardIndex);
 	}
+
+	public void Destroy()
+	{
+		DOTween.Kill(this);
+	}
 	
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	//override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

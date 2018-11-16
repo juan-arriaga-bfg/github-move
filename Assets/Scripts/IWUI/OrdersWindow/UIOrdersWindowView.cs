@@ -36,7 +36,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
     {
         base.InitView(model, controller);
         
-        UIOrdersWindowModel windowModel = Model as UIOrdersWindowModel;
+        var windowModel = Model as UIOrdersWindowModel;
         
         var dataRecipes = windowModel.Recipes;
         
@@ -55,7 +55,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
     {
         base.OnViewShow();
         
-        UIOrdersWindowModel windowModel = Model as UIOrdersWindowModel;
+        var windowModel = Model as UIOrdersWindowModel;
         
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
@@ -104,7 +104,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
     {
         base.OnViewClose();
         
-        UIOrdersWindowModel windowModel = Model as UIOrdersWindowModel;
+        var windowModel = Model as UIOrdersWindowModel;
     }
 
     public override void OnViewCloseCompleted()
@@ -138,7 +138,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
 
     private void UpdateLists()
     {
-        UIOrdersWindowModel windowModel = Model as UIOrdersWindowModel;
+        var windowModel = Model as UIOrdersWindowModel;
         
         var data = windowModel.Recipes;
 
@@ -150,5 +150,30 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         ordersScroll.verticalNormalizedPosition = 1;
         recipesScroll.verticalNormalizedPosition = 1;
         ingredientsScroll.verticalNormalizedPosition = 1;
+    }
+    
+    public void UpdateIngredients()
+    {
+        var windowModel = Model as UIOrdersWindowModel;
+        
+        foreach (var item in ingredients)
+        {
+            Destroy(item.gameObject);
+        }
+        
+        ingredients = new List<UISimpleScrollItem>();
+        patternIngredient.SetActive(true);
+        
+        var data = windowModel.Ingredients;
+        
+        foreach (var ingredient in data)
+        {
+            var item = Instantiate(patternIngredient, patternIngredient.transform.parent).GetComponent<UISimpleScrollItem>();
+            
+            item.Init(ingredient.Currency, ingredient.Amount.ToString());
+            ingredients.Add(item);
+        }
+        
+        patternIngredient.SetActive(false);
     }
 }
