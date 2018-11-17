@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Lean.Touch;
 using UnityEngine;
 
@@ -32,6 +33,8 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
     private int cachedPointerId = -2;
 
     private Vector3 lastRemoverWorldPosition;
+
+    private int cachedApplyAnimationId = Animator.StringToHash("Apply");
 
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -101,7 +104,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         
         model.OnAccept = () =>
         {
-            
+            EndRemover();
         };
         
         model.OnCancel = () =>
@@ -117,12 +120,20 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
     protected virtual void Confirm(BoardPosition position)
     {
         CollapsePieceAt(position);
+
+        if (cachedRemoverView != null) cachedRemoverView.Animator.SetTrigger(cachedApplyAnimationId);
+
+        DOTween.Kill(this);
+        var sequence = DOTween.Sequence().SetId(this);
+        sequence.AppendInterval(1f);
+        sequence.OnComplete(() =>
+        {
+            EndRemover();
+        });
     }
 
     protected virtual void EndRemover()
     {
-        Debug.LogWarning("EndRemover");
-
         this.cachedPointerId = -2;
 
         if (cachedRemoverView != null)
@@ -166,10 +177,14 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
 
         if (touchDef == null)
         {
-            TryCollapsePieceAt(lastRemoverWorldPosition);
-            
-            EndRemover();
-
+            if (TryCollapsePieceAt(lastRemoverWorldPosition) == false)
+            {
+                EndRemover(); 
+            }
+            else
+            {
+                this.cachedPointerId = -2;
+            }
         }
         else
         {
