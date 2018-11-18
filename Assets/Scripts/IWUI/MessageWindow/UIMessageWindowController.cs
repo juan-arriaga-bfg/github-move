@@ -19,9 +19,9 @@ public class UIMessageWindowController : IWWindowController {
     {
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
-        model.Title = "Message";
-        model.Message = "Not Implemented";
-        model.AcceptLabel = "Ok";
+        model.Title = LocalizationService.Get("common.message.message", "Message");
+        model.Message = LocalizationService.Get("common.message.notImplemented", "Not Implemented");
+        model.AcceptLabel = LocalizationService.Get("common.button.ok", "Ok");
         
         model.OnAccept = () => {};
         model.OnCancel = null;
@@ -33,9 +33,9 @@ public class UIMessageWindowController : IWWindowController {
     {
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
-        model.Title = "Message";
+        model.Title = LocalizationService.Get("common.message.message", "Message");
         model.Message = message;
-        model.AcceptLabel = "Ok";
+        model.AcceptLabel = LocalizationService.Get("common.button.ok", "Ok");
         
         model.OnAccept = OnAccept ?? (() => {});
         model.OnCancel = null;
@@ -49,7 +49,7 @@ public class UIMessageWindowController : IWWindowController {
         
         model.Title = title;
         model.Message = message;
-        model.AcceptLabel = "Ok";
+        model.AcceptLabel = LocalizationService.Get("common.button.ok", "Ok");
         model.isHardAccept = isHardAccept;
         
         model.OnAccept = OnAccept ?? (() => {});
@@ -65,7 +65,7 @@ public class UIMessageWindowController : IWWindowController {
         model.Title = title;
         model.Message = null;
         model.Image = image;
-        model.AcceptLabel = "Ok";
+        model.AcceptLabel = LocalizationService.Get("common.button.ok", "Ok");
         
         model.OnAccept = onAccept;
         model.OnCancel = null;
@@ -77,10 +77,10 @@ public class UIMessageWindowController : IWWindowController {
     {
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
-        model.Title = "Need coins?";
+        model.Title = string.Format(LocalizationService.Get("common.message.need", "Need {0}?"), Currency.Coins.Name.ToLower());
         model.Message = null;
         model.Image = "tutorial_TextBlock_1";
-        model.AcceptLabel = "Ok";
+        model.AcceptLabel = LocalizationService.Get("common.button.ok", "Ok");
         
         model.OnAccept = () => {};
         model.OnCancel = null;
@@ -92,9 +92,9 @@ public class UIMessageWindowController : IWWindowController {
     {
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
-        model.Title = $"Need {currency.ToLower()}?";
-        model.Message = $"You do not have enough <sprite name={currency}>!";
-        model.AcceptLabel = "Ok";
+        model.Title = string.Format(LocalizationService.Get("common.message.need", "Need {0}?"), currency.ToLower());
+        model.Message = string.Format(LocalizationService.Get("common.message.notHave", "You do not have enough {0}!"), $"<sprite name={currency}>");
+        model.AcceptLabel = LocalizationService.Get("common.button.ok", "Ok");
         
         model.OnAccept = () => {};
         model.OnCancel = null;
@@ -102,13 +102,13 @@ public class UIMessageWindowController : IWWindowController {
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
 
-    public static void CreateTimerCompleteMessage(string title, string message, TimerComponent timer)
+    public static void CreateTimerCompleteMessage(string message, TimerComponent timer)
     {
         if(timer.Delay - timer.StartTime.GetTime().TotalSeconds < 1) return;
 
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
-        model.Title = title;
+        model.Title = LocalizationService.Get("window.timerComplete.title", "Complete now!");
         model.Message = message;
         model.AcceptLabel = "";
         model.isBuy = true;

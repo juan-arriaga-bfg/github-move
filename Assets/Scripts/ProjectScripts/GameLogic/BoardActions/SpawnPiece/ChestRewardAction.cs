@@ -22,7 +22,7 @@ public class ChestRewardAction : IBoardAction
 		
 		if (Pieces.Count != 0 && gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From, free, count, 0.1f) == false)
 		{
-			UIErrorWindowController.AddError("Not found free cells");
+			UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.freeSpace", "Free space not found!"));
 			OnErrorAction?.Invoke();
 			return false;
 		}

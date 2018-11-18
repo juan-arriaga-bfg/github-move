@@ -165,8 +165,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         bubble = viewDef.AddView(ViewType.Bubble) as BubbleView;
         
         if(bubble.IsShow) return;
-        
-        bubble.SetData("Clear fog", Def.Condition.ToStringIcon(), OnClick);
+
+        bubble.SetData(LocalizationService.Instance.Manager.GetTextByUid("gameboard.bubble.message.fog", "Clear fog"), Def.Condition.ToStringIcon(), OnClick);
         bubble.SetOfset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
         bubble.Priority = -1;
         bubble.Change(true);

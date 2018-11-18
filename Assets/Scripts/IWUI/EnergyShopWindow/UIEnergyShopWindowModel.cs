@@ -4,13 +4,7 @@ public class UIEnergyShopWindowModel : IWWindowModel
 {
     private List<ShopDef> products;
     
-    public string Title => "Out of Energy";
-
-    public string Message => "Need more energy? Make it yourself or buy more.";
-
-    public string SecondMessage => "Get energy for free from:";
-
-    public string ButtonText => "Show";
+    public string Title => LocalizationService.Instance.Manager.GetTextByUid("window.shop.energy.title", "Out of Energy");
 
     public List<ShopDef> Products => products ?? (products = GameDataService.Current.ShopManager.Defs["Energy"]);
 }

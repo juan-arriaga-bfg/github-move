@@ -76,7 +76,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             
             var select = completeTimesList[0];
             
-            UIErrorWindowController.AddError("All workers are busy!");
+            UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.workerBusy", "All workers are busy!"));
             context.HintCooldown.Step(select.Key);
             
             select.Value.View.SetState(TimerViewSate.Select);
@@ -175,7 +175,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     {
         if (!target.Context.Pathfinder.CanPathToCastle(target))
         {
-            UIErrorWindowController.AddError("Can't make this action!");
+            UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.action", "Can't make this action!"));
             return false;
         }
 
@@ -190,13 +190,16 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
         if (life.Locker.IsLocked)
         {
-            UIErrorWindowController.AddError(life.IsFilled ? "Can't make this action!" : "Someone is working here already!");
+            UIErrorWindowController.AddError(life.IsFilled
+                ? LocalizationService.Instance.Manager.GetTextByUid("message.error.action", "Can't make this action!")
+                : LocalizationService.Instance.Manager.GetTextByUid("message.error.workingHere", "Someone is working here already!"));
+            
             return false;
         }
 
         if (life.IsUseCooldown && life.Timer.IsExecuteable())
         {
-            UIErrorWindowController.AddError("It's not ready yet!");
+            UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.notReady", "It's not ready yet!"));
             return false;
         }
 
@@ -211,7 +214,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
         if (state.State == BuildingState.InProgress || state.State == BuildingState.Complete)
         {
-            UIErrorWindowController.AddError("Someone is working here already!");
+            UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.workingHere", "Someone is working here already!"));
             return false;
         }
         

@@ -6,8 +6,8 @@ public class ReproductionLifeComponent : StorageLifeComponent
     private string childName;
     private TimerComponent cooldown;
     
-    public override string Message => $"Harvest {childName}";
-    public override string Price => Timer.IsExecuteable() ? $"Wait\n{Timer.CompleteTime.GetTimeLeftText()}" : base.Price;
+    public override string Message => string.Format(LocalizationService.Instance.Manager.GetTextByUid("gameboard.bubble.message.production", "Harvest {0}"), childName);
+    public override string Price => Timer.IsExecuteable() ? string.Format(LocalizationService.Instance.Manager.GetTextByUid("gameboard.bubble.button.wait", "Wait\n{0}"), Timer.CompleteTime.GetTimeLeftText()) : base.Price;
 
     public override TimerComponent Timer => cooldown;
 
@@ -51,8 +51,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
         if (cooldown.IsExecuteable())
         {
             UIMessageWindowController.CreateTimerCompleteMessage(
-                "Complete now!",
-                "Would you like to build the item right now for crystals?",
+                LocalizationService.Get("window.timerComplete.message.production", "Would you like to build the item right now for crystals?"),
                 cooldown);
 
             return false;

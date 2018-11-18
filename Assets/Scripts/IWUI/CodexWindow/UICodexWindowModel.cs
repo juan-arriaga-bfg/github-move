@@ -1,8 +1,5 @@
 using System;
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using Random = UnityEngine.Random;
 
 public class CodexItemDef
 {
@@ -44,7 +41,7 @@ public class CodexContent
 
 public class UICodexWindowModel : IWWindowModel
 {
-    public readonly string Title = "Codex";
+    public readonly string Title = LocalizationService.Instance.Manager.GetTextByUid("window.codex.title", "Codex");
 
     public int ActiveTabIndex = 0;
 

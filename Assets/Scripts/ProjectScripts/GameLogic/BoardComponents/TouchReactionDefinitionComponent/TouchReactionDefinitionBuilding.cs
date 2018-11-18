@@ -7,8 +7,7 @@
 		if (piece.PieceState.State == BuildingState.InProgress)
 		{
 			UIMessageWindowController.CreateTimerCompleteMessage(
-				"Complete now!",
-				"Would you like to build the item right now for crystals?",
+				LocalizationService.Get("window.timerComplete.message.piece", "Would you like to build the item right now for crystals?"),
 				piece.PieceState.Timer);
 			
 			return false;

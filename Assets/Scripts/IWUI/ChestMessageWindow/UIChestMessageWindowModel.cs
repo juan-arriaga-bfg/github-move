@@ -4,13 +4,13 @@ public class UIChestMessageWindowModel : IWWindowModel
 {
     public ChestPieceComponent ChestComponent;
     
-    public string Title => "Unlock chest!";
+    public string Title => LocalizationService.Instance.Manager.GetTextByUid("window.chest.title", "Unlock chest!");
 
-    public string Message => "Do you want to unlock this chest?";
+    public string Message => LocalizationService.Instance.Manager.GetTextByUid("window.chest.message", "Do you want to unlock this chest?");
 
-    public string ButtonText => "Unlock";
+    public string ButtonText => LocalizationService.Instance.Manager.GetTextByUid("common.button.unlock", "Unlock");
 
-    public string ChanceText => "May contain:";
+    public string ChanceText => LocalizationService.Instance.Manager.GetTextByUid("window.chest.chance", "May contain:");
 
     public List<string> Icons()
     {

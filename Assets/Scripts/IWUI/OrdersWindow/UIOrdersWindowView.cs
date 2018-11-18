@@ -58,9 +58,9 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIOrdersWindowModel;
         
         SetTitle(windowModel.Title);
-        SetMessage(windowModel.Message);
+        SetMessage(windowModel.OrdersMessage);
 
-        ingredientsMessage.Text = windowModel.TngredientsMessage;
+        ingredientsMessage.Text = windowModel.IngredientsMessage;
         ordersLabelOn.Text = ordersLabelOff.Text = windowModel.OrdersText;
         recipesLabelOn.Text = recipesLabelOff.Text = windowModel.RecipesText;
         ingredientsLabelOn.Text = ingredientsLabelOff.Text = windowModel.IngredientsText;

@@ -14,7 +14,7 @@ public class TouchReactionDefinitionObstacleComponent : TouchReactionDefinitionS
         
         if (action != null && !piece.Context.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, amount))
         {
-            UIErrorWindowController.AddError("Free space not found");
+            UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.freeSpace", "Free space not found!"));
             return false;
         }
         
@@ -38,7 +38,7 @@ public class TouchReactionDefinitionObstacleComponent : TouchReactionDefinitionS
         int tmp;
         if (storage.Scatter(out tmp, IsAutoStart)) return true;
         
-        UIErrorWindowController.AddError("Production of the resource is not complete!");
+        UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.notComplete", "Production of the resource is not complete!"));
         return false;
     }
 
