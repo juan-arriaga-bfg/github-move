@@ -1,13 +1,16 @@
 using UnityEngine;
-using System.Collections;
 
 public class UINextLevelWindowView : UIGenericWindowView
 {
     [SerializeField] private NSText title;
     [SerializeField] private NSText message;
     [SerializeField] private NSText rewards;
-    [SerializeField] private NSText tapLabel;
+    
+    [SerializeField] private Transform tapToContinueAnchor;
+    
     [SerializeField] private IWTextMeshAnimation textMeshAnimation;
+    
+    private TapToContinueTextViewController tapToContinue;
     
     public override void OnViewShow()
     {
@@ -18,9 +21,14 @@ public class UINextLevelWindowView : UIGenericWindowView
         title.Text = windowModel.Title;
         message.Text = windowModel.Mesage;
         rewards.Text = windowModel.Rewards;
-        tapLabel.Text = windowModel.TapText;
         
         textMeshAnimation.Animate();
+    }
+    
+    public override void AnimateShow()
+    {
+        base.AnimateShow();
+        InitTapToContinue(1f);
     }
 
     public override void OnViewClose()
@@ -49,5 +57,19 @@ public class UINextLevelWindowView : UIGenericWindowView
         GameDataService.Current.OrdersManager.Unlock();
         
         base.OnViewCloseCompleted();
+    }
+    
+    private void InitTapToContinue(float delay)
+    {
+        if (tapToContinue == null)
+        {
+            var pool = UIService.Get.PoolContainer;
+            tapToContinue = pool.Create<TapToContinueTextViewController>(R.TapToContinueTextView);
+            tapToContinue.transform.SetParent(tapToContinueAnchor, false);
+            tapToContinue.transform.localPosition = Vector3.zero;
+        }
+
+        tapToContinue.Hide(false);
+        tapToContinue.Show(true, delay);
     }
 }

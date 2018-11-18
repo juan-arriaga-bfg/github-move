@@ -21,5 +21,4 @@ public class UINextLevelWindowModel : IWWindowModel
             return string.Format(LocalizationService.Instance.Manager.GetTextByUid("common.message.reward", "Reward:{0}"), rewards);
         }
     }
-    public string TapText => LocalizationService.Instance.Manager.GetTextByUid("common.message.tapToContinue", "Tap to continue...");
 }
