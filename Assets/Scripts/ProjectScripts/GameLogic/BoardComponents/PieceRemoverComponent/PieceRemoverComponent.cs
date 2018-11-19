@@ -28,11 +28,13 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
 
     private BoardLogicComponent context;
 
-    private BoardElementView cachedRemoverView;
+    private PieceBoardElementView cachedRemoverView;
 
     private int cachedPointerId = -2;
 
     private Vector3 lastRemoverWorldPosition;
+
+    private BoardPosition lastRemoverBoardPosition = BoardPosition.Default();
 
     private int cachedApplyAnimationId = Animator.StringToHash("Apply");
 
@@ -49,15 +51,43 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         
     }
 
+    private void ToggleFilterPieces(bool state)
+    {
+        if (state)
+        {
+            var points = context.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Removable);
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                var point = points[i];
+                var pieceView = context.Context.RendererContext.GetElementAt(point) as PieceBoardElementView;
+                
+                if (pieceView != null) pieceView.ToggleHighlight(true);
+            }
+        }
+        else
+        {
+            var points = context.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Removable);
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                var point = points[i];
+                var pieceView = context.Context.RendererContext.GetElementAt(point) as PieceBoardElementView;
+                
+                if (pieceView != null) pieceView.ToggleHighlight(false);
+            }
+        }
+    }
+
     public virtual bool BeginRemover(int pointerId)
     {
-        Debug.LogWarning($"BeginRemover => pointerId:{pointerId}");
-
         this.cachedPointerId = pointerId;
         
-        cachedRemoverView = context.Context.RendererContext.CreateBoardElement<BoardElementView>((int) ViewType.PieceRemover);
+        cachedRemoverView = context.Context.RendererContext.CreateBoardElement<PieceBoardElementView>((int) ViewType.PieceRemover);
         cachedRemoverView.Init(context.Context.RendererContext);
         cachedRemoverView.SyncRendererLayers(new BoardPosition(0, 0, 100));
+
+        ToggleFilterPieces(true);
 
         if (OnBeginRemoverEvent != null)
         {
@@ -65,6 +95,26 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         }
 
         return true;
+    }
+    
+    protected virtual void EndRemover()
+    {
+        this.cachedPointerId = -2;
+
+        if (cachedRemoverView != null)
+        {
+            cachedRemoverView.ToggleSelection(false);
+            
+            context.Context.RendererContext.DestroyElement(cachedRemoverView);
+            cachedRemoverView = null;
+        }
+        
+        ToggleFilterPieces(false);
+        
+        if (OnEndRemoverEvent != null)
+        {
+            OnEndRemoverEvent();
+        }
     }
 
     public virtual void CollapsePieceAt(BoardPosition position)
@@ -87,11 +137,10 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
 
     protected virtual bool TryCollapsePieceAt(BoardPosition boardPosition)
     {
-        var isEmpty = context.IsEmpty(boardPosition);
+        var isValid = IsValidPoint(boardPosition);
 
-        if (isEmpty)
+        if (isValid)
         {
-            Debug.LogWarning($"TryCollapsePieceAt => isEmpty at:{boardPosition}");
             return false;
         }
         
@@ -132,25 +181,20 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         });
     }
 
-    protected virtual void EndRemover()
-    {
-        this.cachedPointerId = -2;
-
-        if (cachedRemoverView != null)
-        {
-            context.Context.RendererContext.DestroyElement(cachedRemoverView);
-            cachedRemoverView = null;
-        }
-        
-        if (OnEndRemoverEvent != null)
-        {
-            OnEndRemoverEvent();
-        }
-    }
-
     public bool IsExecuteable()
     {
         return cachedPointerId != -2;
+    }
+
+    public bool IsValidPoint(BoardPosition boardPosition)
+    {
+        var pieceEntity = context.GetPieceAt(boardPosition);
+
+        if (pieceEntity == null) return false;
+
+        var ids = PieceType.GetIdsByFilter(PieceTypeFilter.Removable);
+        
+        return ids.Contains(pieceEntity.PieceType);
     }
 
     public void Execute()
@@ -190,15 +234,24 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         {
             Vector3 screenPosition = new Vector3(touchDef.ScreenPosition.x, touchDef.ScreenPosition.y, context.Context.BoardDef.ViewCamera.transform.position.z * -1);
             var targetPosition = context.Context.BoardDef.ViewCamera.ScreenToWorldPoint(screenPosition);
-            
-            cachedRemoverView.CachedTransform.position = targetPosition;
-            cachedRemoverView.CachedTransform.localPosition = new Vector3(cachedRemoverView.CachedTransform.localPosition.x, cachedRemoverView.CachedTransform.localPosition.y, 0f);
 
             lastRemoverWorldPosition = targetPosition;
-            
+
+            var normalPosition = new Vector3(targetPosition.x, targetPosition.y, -context.Context.BoardDef.ViewCamera.transform.localPosition.z);
             var boardPosition = context.Context.BoardDef.GetSectorPosition(targetPosition);
+            boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, context.Context.BoardDef.PieceLayer);
             
-            // Debug.LogWarning($"ProcessRemover => {boardPosition}");
+            if (boardPosition.Equals(lastRemoverBoardPosition) == false)
+            {
+                lastRemoverBoardPosition = boardPosition;
+                var targetCellPosition = context.Context.BoardDef.GetWorldPosition(boardPosition.X, boardPosition.Y);
+
+                cachedRemoverView.CachedTransform.position = targetCellPosition;
+                cachedRemoverView.CachedTransform.localPosition = new Vector3(cachedRemoverView.CachedTransform.localPosition.x, cachedRemoverView.CachedTransform.localPosition.y, 0f);
+
+                bool isValidPoint = IsValidPoint(boardPosition);
+                cachedRemoverView.ToggleSelection(true, isValidPoint);
+            }
         }
 
     }

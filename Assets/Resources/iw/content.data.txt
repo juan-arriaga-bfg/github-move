@@ -872,11 +872,21 @@
   {
     "Uid": "PieceRemover",
     "ResourcePath": "Prefabs/PieceRemover",
-	"IsGenerateAutoName": true
+    "IsGenerateAutoName": true
   },
   {
     "Uid": "UIHintArrow",
     "ResourcePath": "Prefabs\\UI/UIHintArrow",
     "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "pieces.sepia.material",
+    "ResourcePath": "Materials/pieces.sepia.material",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "pieces.default.material",
+    "ResourcePath": "Materials/pieces.default.material",
+    "IsGenerateAutoName": false
   }
 ]
