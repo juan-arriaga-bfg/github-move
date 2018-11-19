@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ObstaclePieceView : PieceBoardElementView
 {
@@ -7,6 +8,7 @@ public class ObstaclePieceView : PieceBoardElementView
     private StorageComponent storage;
     private PieceSkin skin;
     private GameObject worker;
+    private List<SpriteRenderer> workerSprites;
     
     public override void Init(BoardRenderer context, Piece piece)
     {
@@ -55,6 +57,10 @@ public class ObstaclePieceView : PieceBoardElementView
         {
             RemoveFromLayerCache(worker);
             Context.DestroyElement(worker);
+
+            bodySprites.RemoveAll(elem => workerSprites.Contains(elem));
+            
+            workerSprites = null;
             worker = null;
         }
         
@@ -62,6 +68,9 @@ public class ObstaclePieceView : PieceBoardElementView
         
         worker = Context.CreateElement((int)(isExtra ? ViewType.ExtraWorker : ViewType.DefaultWorker)).gameObject;
         worker.transform.SetParent(anchorWorker, false);
+
+        workerSprites = new List<SpriteRenderer>(worker.GetComponentsInChildren<SpriteRenderer>());
+        bodySprites.AddRange(workerSprites);
         
         AddToLayerCache(worker);
         

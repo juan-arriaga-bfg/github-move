@@ -1,4 +1,7 @@
-﻿public class ReproductionPieceView : PieceBoardElementView
+﻿using System.Linq;
+using UnityEngine;
+
+public class ReproductionPieceView : PieceBoardElementView
 {
     private TimerComponent timer;
     
@@ -30,8 +33,8 @@
     
     private void UpdateSate()
     {
-        if(timer == null || bodySprite == null) return;
+        if(timer == null || bodySprites == null) return;
         
-        bodySprite.sprite = IconService.Current.GetSpriteById( $"{PieceType.Parse(Piece.PieceType)}{(timer.IsStarted ? "_lock" : "")}");
+        bodySprites.First().sprite = IconService.Current.GetSpriteById( $"{PieceType.Parse(Piece.PieceType)}{(timer.IsStarted ? "_lock" : "")}");
     }
 }
