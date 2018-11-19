@@ -11,6 +11,10 @@ public class DevTools : MonoBehaviour
     [SerializeField] private GameObject panel;
     [SerializeField] private Toggle questDialogsToggle;
 
+#if !UNITY_EDITOR
+    private static bool isQuestDialogsDisabled;
+#endif
+    
     public void Start()
     {
         panel.SetActive(false);
@@ -325,7 +329,7 @@ public class DevTools : MonoBehaviour
 #if UNITY_EDITOR
         EditorPrefs.SetBool("DEBUG_QUEST_DIALOGS_DISABLED", !isChecked);
 #else
-        UIMessageWindowController.CreateNotImplementedMessage();
+        isQuestDialogsDisabled = !isChecked;
 #endif
     }
     
@@ -334,7 +338,7 @@ public class DevTools : MonoBehaviour
 #if UNITY_EDITOR
         return !EditorPrefs.GetBool("DEBUG_QUEST_DIALOGS_DISABLED", false);
 #else
-        return true;
+        return !isQuestDialogsDisabled;
 #endif
         
     }
