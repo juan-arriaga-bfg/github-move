@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class BuildingPieceView : PieceBoardElementView
 {
@@ -16,10 +17,10 @@ public class BuildingPieceView : PieceBoardElementView
 
 		state = Piece.GetComponent<PieceStateComponent>(PieceStateComponent.ComponentGuid);
 
-		if (bodySprite != null)
+		if (bodySprites != null && bodySprites.Count > 0)
 		{
-			unlockedMaterial = bodySprite.material;
-			bodySprite.material = state == null ? unlockedMaterial : lockedMaterial;
+			unlockedMaterial = bodySprites.First().material;
+			bodySprites.ForEach(sprite => sprite.material = state == null ? unlockedMaterial : lockedMaterial);
 		}
 		
 		if(state == null) return;
@@ -37,7 +38,7 @@ public class BuildingPieceView : PieceBoardElementView
 	{
 		base.ResetViewOnDestroy();
 		
-		bodySprite.material = unlockedMaterial;
+		bodySprites.ForEach(sprite => sprite.material = unlockedMaterial);
 		
 		if(state == null) return;
         
@@ -55,7 +56,7 @@ public class BuildingPieceView : PieceBoardElementView
 	{
 		var go = Context.CreateElement((int) view);
 		
-		go.SetParent(bodySprite.transform, false);
+		go.SetParent(bodySprites.First().transform, false);
 		AddToLayerCache(go.gameObject);
 		
 		return go.gameObject;

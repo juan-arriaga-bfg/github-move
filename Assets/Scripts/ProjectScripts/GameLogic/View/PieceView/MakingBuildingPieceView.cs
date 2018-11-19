@@ -1,4 +1,6 @@
-﻿public class MakingBuildingPieceView : BuildingPieceView
+﻿using System.Linq;
+
+public class MakingBuildingPieceView : BuildingPieceView
 {
     private TimerComponent timer;
     
@@ -15,13 +17,13 @@
         timer.OnStart += UpdateLockSate;
         timer.OnComplete += UpdateLockSate;
 
-        if (bodySprite != null) unlockedMaterial = bodySprite.material;
+        if (bodySprites != null) unlockedMaterial = bodySprites.First().material;
         UpdateLockSate();
     }
     
     public override void ResetViewOnDestroy()
     {
-        bodySprite.material = unlockedMaterial;
+        bodySprites.ForEach(sprite => sprite.material = unlockedMaterial);
         base.ResetViewOnDestroy();
         
         if(timer == null) return;
@@ -32,8 +34,8 @@
     
     private void UpdateLockSate()
     {
-        if(timer == null || bodySprite == null) return;
+        if(timer == null || bodySprites == null) return;
         
-        bodySprite.material = timer.IsStarted ? lockedMaterial : unlockedMaterial;
+        bodySprites.ForEach(sprite => sprite.material = timer.IsStarted ? lockedMaterial : unlockedMaterial);
     }
 }
