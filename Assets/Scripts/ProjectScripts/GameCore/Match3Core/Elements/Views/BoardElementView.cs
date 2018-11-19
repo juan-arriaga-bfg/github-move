@@ -101,6 +101,30 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         }
     }
     
+    public virtual void SetHighlight(bool state)
+    {
+        if (cachedRenderers == null || cachedRenderers.size <= 0)
+        {
+            CacheLayers();
+        }
+
+        foreach (var rend in cachedRenderers)
+        {
+            if (rend == null) continue;
+            if (rend.CachedRenderer == null) continue;
+            if (rend.CachedRenderer.sharedMaterial == null) continue;
+
+            if (state)
+            {
+                rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial("pieces.highlight.material"));
+            }
+            else
+            {
+                rend.ResetDefaultMaterial();
+            }
+        }
+    }
+    
     public virtual void ResetDefaultMaterial()
     {
         if (cachedRenderers == null || cachedRenderers.size <= 0)

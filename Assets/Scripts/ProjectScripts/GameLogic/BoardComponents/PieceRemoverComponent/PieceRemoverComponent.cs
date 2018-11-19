@@ -65,11 +65,17 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
                 if (pieceEntity == null) continue;
                 if (pieceEntity.PieceType == PieceType.Fog.Id) continue;
                 
-                if (filteredIds.Contains(pieceEntity.PieceType)) continue; 
-                
                 var pieceView = context.Context.RendererContext.GetElementAt(point) as PieceBoardElementView;
-      
-                if (pieceView != null) pieceView.SetFade(0.5f);
+                
+                if (filteredIds.Contains(pieceEntity.PieceType) == false)
+                {
+                    if (pieceView != null) pieceView.SetFade(0.5f);
+                }
+                else
+                {
+                    if (pieceView != null) pieceView.SetHighlight(true);
+                }
+
             }
         }
         else
@@ -84,7 +90,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
                 if (pieceEntity == null) continue;
                 if (pieceEntity.PieceType == PieceType.Fog.Id) continue;
                 
-                if (filteredIds.Contains(pieceEntity.PieceType)) continue; 
+                // if (filteredIds.Contains(pieceEntity.PieceType)) continue; 
                 
                 var pieceView = context.Context.RendererContext.GetElementAt(point) as PieceBoardElementView;
                 
@@ -185,10 +191,14 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         CollapsePieceAt(position);
 
         if (cachedRemoverView != null) cachedRemoverView.Animator.SetTrigger(cachedApplyAnimationId);
+        
+        if (cachedRemoverView != null) cachedRemoverView.ToggleSelection(false);
+        
+        ToggleFilterPieces(false);
 
         DOTween.Kill(this);
         var sequence = DOTween.Sequence().SetId(this);
-        sequence.AppendInterval(1f);
+        sequence.AppendInterval(2f);
         sequence.OnComplete(() =>
         {
             EndRemover();
