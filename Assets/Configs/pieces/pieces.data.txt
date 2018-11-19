@@ -12,7 +12,13 @@
     ]
   },
   {
-    "Uid": "Boost_CR1"
+    "Uid": "Boost_CR1",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      }
+    ]
   },
   {
     "Uid": "Boost_CR2",
@@ -20,6 +26,12 @@
       {
         "Currency": "Experience",
         "Amount": 5
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
       }
     ]
   },
@@ -30,6 +42,12 @@
         "Currency": "Experience",
         "Amount": 10
       }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 4
+      }
     ]
   },
   {
@@ -38,6 +56,12 @@
       {
         "Currency": "Experience",
         "Amount": 15
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
       }
     ]
   },
