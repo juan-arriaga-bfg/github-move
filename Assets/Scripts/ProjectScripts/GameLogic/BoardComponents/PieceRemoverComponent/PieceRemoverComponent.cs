@@ -38,17 +38,15 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
 
     private int cachedApplyAnimationId = Animator.StringToHash("Apply");
 
+    private bool isActive = false;
+
+    public bool IsActive => isActive;
+
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
         
         context = entity as BoardLogicComponent;
-    }
-
-    public override void OnUnRegisterEntity(ECSEntity entity)
-    {
-        base.OnUnRegisterEntity(entity);
-        
     }
 
     protected virtual void ToggleFilterPieces(bool state)
@@ -101,6 +99,8 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
 
     public virtual bool BeginRemover(int pointerId)
     {
+        if (isActive) return false;
+        
         this.cachedPointerId = pointerId;
         
         cachedRemoverView = context.Context.RendererContext.CreateBoardElement<PieceBoardElementView>((int) ViewType.PieceRemover);
@@ -108,6 +108,8 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         cachedRemoverView.SyncRendererLayers(new BoardPosition(0, 0, 100));
 
         ToggleFilterPieces(true);
+
+        isActive = true;
 
         if (OnBeginRemoverEvent != null)
         {
@@ -131,13 +133,15 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         
         ToggleFilterPieces(false);
         
+        isActive = false;
+        
         if (OnEndRemoverEvent != null)
         {
             OnEndRemoverEvent();
         }
     }
 
-    public virtual void CollapsePieceAt(BoardPosition position)
+    protected virtual void CollapsePieceAt(BoardPosition position)
     {
         context.Context.ActionExecutor.AddAction(new CollapsePieceToAction
         {
@@ -164,7 +168,11 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
             return false;
         }
         
-        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        var pieceEntity = context.GetPieceAt(boardPosition);
+        
+        var model = UIService.Get.GetCachedModel<UIConfirmRemoverMessageWindowModel>(UIWindowType.ConfirmRemoverMessageWindow);
+
+        model.Image = PieceType.Parse(pieceEntity.PieceType);
         
         model.Title = LocalizationService.Get("window.remove.title","Remove");
         model.Message = LocalizationService.Get("window.remove.message", "Are you sure that you want to remove the figure from the field?");
@@ -181,7 +189,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
             Confirm(boardPosition);
         };
 
-        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+        UIService.Get.ShowWindow(UIWindowType.ConfirmRemoverMessageWindow);
 
         return true;
     }

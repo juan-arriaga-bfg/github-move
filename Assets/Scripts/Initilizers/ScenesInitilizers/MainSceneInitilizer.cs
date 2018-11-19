@@ -34,6 +34,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.QuestStartWindow,
             UIWindowType.QuestCompleteWindow,
             UIWindowType.NextLevelWindow,
+            UIWindowType.ConfirmRemoverMessageWindow,
         });
         
         // on cache complete
