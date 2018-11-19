@@ -176,8 +176,6 @@ public class PieceBoardElementView : BoardElementView
         }
         
         particles.ForEach(particle => particle.gameObject.SetActive(!enabled));
-        if(particles.Count > 0)
-            Debug.LogError($"{Piece.CachedPosition} particle objects: {particles.Count}");
         
         isLockVisual = enabled;
 
