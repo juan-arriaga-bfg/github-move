@@ -22,6 +22,18 @@ public class PieceBoardElementView : BoardElementView
     private readonly Color dragSpriteErrorColor = new Color(1f, 0.44f, 0.44f, 0.9f);
     
     public bool IsHighlighted { get; protected set; }
+
+    public SpriteRenderer SelectionSprite
+    {
+        get
+        {
+            if (selectionView != null && selectionSprite == null)
+            {
+                selectionSprite = selectionView.GetComponent<SpriteRenderer>();
+            }
+            return selectionSprite;
+        }
+    }
     
     public virtual void Init(BoardRenderer context, Piece piece)
     {
@@ -139,7 +151,7 @@ public class PieceBoardElementView : BoardElementView
 
     public void ToggleSelection(bool enabled, bool isValid = true)
     {
-        if (selectionSprite == null)
+        if (SelectionSprite == null)
         {
             return;
         }
@@ -152,7 +164,7 @@ public class PieceBoardElementView : BoardElementView
 
             var sequence = DOTween.Sequence().SetId(animationUid);
 
-            if (Piece.Draggable != null && isValid)
+            if ((Piece == null || Piece.Draggable != null) && isValid)
             {
                 if (bodySprite != null) sequence.Insert(0f, bodySprite.DOColor(Color.white, duration));
 
@@ -172,7 +184,7 @@ public class PieceBoardElementView : BoardElementView
         else
         {
             DOTween.Kill(animationUid);
-            bodySprite.color = Color.white;
+            if (bodySprite != null) bodySprite.color = Color.white;
             selectionSprite.color = baseColor;
             selectionView.gameObject.SetActive(false);
         }

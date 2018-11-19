@@ -62,6 +62,27 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         }
     }
     
+    public virtual void SetFade(float alpha)
+    {
+        if (cachedRenderers == null || cachedRenderers.size <= 0)
+        {
+            CacheLayers();
+        }
+
+        foreach (var rend in cachedRenderers)
+        {
+            if (rend == null) continue;
+            if (rend.CachedRenderer == null) continue;
+            if (rend.CachedRenderer.sharedMaterial == null) continue;
+            
+            rend.MaterialCopy.SetFloat("_AlphaCoef", alpha);
+            if (alpha >= 1f)
+            {
+                rend.ResetDefaultMaterial();
+            }
+        }
+    }
+
     protected void AddLayerToCache(Renderer rend)
     {
         var rendererLayerParams = rend.GetComponent<RendererLayerParams>();
