@@ -125,13 +125,13 @@ public class UICodexWindowView : UIGenericPopupWindowView
 
     private void ToggleButtons(UICodexWindowModel model)
     {
-        int reward = model.CodexContent.PendingRewardAmount;
-        bool isRewardAvailable = reward > 0;
+        var reward = new CurrencyPair {Currency = Currency.Coins.Name, Amount = model.CodexContent.PendingRewardAmount};
+        bool isRewardAvailable = reward.Amount > 0;
         
         btnClose.SetActive(!isRewardAvailable);
         btnReward.SetActive(isRewardAvailable);
 
-        btnRewardText.text = $"Claim Reward <sprite name=\"Coins\"> {reward}";
+        btnRewardText.text = string.Format(LocalizationService.Instance.Manager.GetTextByUid("common.button.claimReward", "Claim Reward {0}"), reward.ToStringIcon());
     }
 
     private void CreateTabs(List<CodexTabDef> tabDefs)

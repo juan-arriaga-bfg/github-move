@@ -5,7 +5,7 @@ public class UIExchangeWindowModel : IWWindowModel
 {
     public string Title;
     public string Message;
-    public string Button => $"Buy all {Price.ToStringIcon(false)}";
+    public string Button => string.Format(LocalizationService.Instance.Manager.GetTextByUid("common.button.buyAll", "Buy all {0}"), Price.ToStringIcon(false));
 
     public Action OnClick;
     

@@ -109,10 +109,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	
 	public bool IsExecuteable()
 	{
-		if(Locker.IsLocked
-		   || GameDataService.Current.LevelsManager.Level < GameDataService.Current.ConstantsManager.StartLevelFirefly
-		   || amount > 0 
-		   || startTime.GetTime().TotalSeconds < delay) return false;
+		if(Locker.IsLocked || amount > 0 || startTime.GetTime().TotalSeconds < delay) return false;
 		
 		isClick = false;
 		OnMatch();

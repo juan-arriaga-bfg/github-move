@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
+﻿using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -16,7 +14,7 @@ public class TapToContinueTextViewController : IWBaseMonoBehaviour
     
     private void Start()
     {
-        label.text = "Tap to continue...";
+        label.text = LocalizationService.Instance.Manager.GetTextByUid("common.message.tapToContinue", "Tap to continue...");
     }
 
     private void OnEnable()

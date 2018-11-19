@@ -94,10 +94,10 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
-        model.Title = LocalizationService.Get("label.Remove","Remove");
-        model.Message = LocalizationService.Get("message.RemoveConfirm", "Are you sure that you want to remove the figure from the field?");
-        model.CancelLabel = LocalizationService.Get("label.Yes", "Yes");
-        model.AcceptLabel = LocalizationService.Get("label.No", "No");
+        model.Title = LocalizationService.Get("window.remove.title","Remove");
+        model.Message = LocalizationService.Get("window.remove.message", "Are you sure that you want to remove the figure from the field?");
+        model.CancelLabel = LocalizationService.Get("common.button.yes", "Yes");
+        model.AcceptLabel = LocalizationService.Get("common.button.no", "No");
         
         model.OnAccept = () =>
         {

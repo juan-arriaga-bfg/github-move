@@ -22,7 +22,7 @@ public enum PieceTypeFilter
     WorkPlace = 8192,
     Tree = 16384,
     ProductionField = 32768, // Грядка (bed)
-    Removable = 65636,
+    Removable = 65536,
 }
 
 public partial class PieceTypeDef

@@ -95,7 +95,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             
             if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, windowModel.PiecesReward.Sum(e => e.Value)))
             {
-                UIErrorWindowController.AddError("Need more free cells");
+                UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.freeSpace", "Free space not found!"));
                 return;
             }
             

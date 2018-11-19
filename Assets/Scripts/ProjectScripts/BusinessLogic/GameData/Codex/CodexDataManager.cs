@@ -131,11 +131,11 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         else
         {
             Items.Add(firstInChain,
-                      new CodexChainState
-                      {
-                          Unlocked = new HashSet<int> {id},
-                          PendingReward = new HashSet<int> {id}
-                      }
+                new CodexChainState
+                {
+                    Unlocked = new HashSet<int> {id},
+                    PendingReward = new HashSet<int> {id}
+                }
             );
             CodexState = CodexState.NewPiece;
         }
@@ -391,39 +391,39 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
         {
             new CodexTabDef
             {
-                Name = "Buildings",
+                Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.toggle.main", "Main"),
                 ChainDefs = new List<CodexChainDef>
                 {
                     new CodexChainDef
                     {
-                        Name = "Wood",
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.A", "A"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.A1.Id)),
                     },
                     new CodexChainDef
                     {
-                        Name = "Stone",
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.B", "B"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.B1.Id))
                     },
                     new CodexChainDef
                     {
-                        Name = "Flower",
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.C", "C"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.C1.Id))
                     },
                     new CodexChainDef
                     {
-                        Name = "Alchemist",
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.D", "D"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.D1.Id))
                     },
                 }
             },
             new CodexTabDef
             {
-                Name = "Energy",
+                Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.toggle.production", "Production"),
                 ChainDefs = new List<CodexChainDef>
                 {
                     new CodexChainDef
                     {
-                        Name = "Wool",
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.PR_A", "PR_A"),
                         ItemDefs = GetCodexItemsForChain(new List<List<int>>
                         {
                             matchDef.GetChain(PieceType.PR_A1.Id),
@@ -432,7 +432,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     },
                     new CodexChainDef
                     {
-                        Name = "Apple",
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.PR_B", "PR_B"),
                         ItemDefs = GetCodexItemsForChain(new List<List<int>>
                         {
                             matchDef.GetChain(PieceType.PR_B1.Id),
@@ -441,7 +441,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     },
                     new CodexChainDef
                     {
-                        Name = "Corn",
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.PR_C", "PR_C"),
                         ItemDefs = GetCodexItemsForChain(new List<List<int>>
                         {
                             matchDef.GetChain(PieceType.PR_C1.Id),
@@ -450,7 +450,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     },
                     new CodexChainDef
                     {
-                        Name = "Milk",
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.PR_D", "PR_D"),
                         ItemDefs = GetCodexItemsForChain(new List<List<int>>
                         {
                             matchDef.GetChain(PieceType.PR_D1.Id),
@@ -459,7 +459,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                     },
                     new CodexChainDef
                     {
-                        Name = "Egg",
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.PR_E", "PR_E"),
                         ItemDefs = GetCodexItemsForChain(new List<List<int>>
                         {
                             matchDef.GetChain(PieceType.PR_E1.Id),
@@ -470,50 +470,62 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
             },
             new CodexTabDef
             {
-                Name = "Chests",
+                Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.toggle.chests", "Chests"),
                 ChainDefs = new List<CodexChainDef>
                 {
                     new CodexChainDef
                     {
-                        Name = "Wood",
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.CH_A", "CH_A"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.CH1_A.Id)),
                     },
                     new CodexChainDef
                     {
-                        Name = "Stone",
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.CH_B", "CH_B"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.CH1_B.Id)),
                     },
                     new CodexChainDef
                     {
-                        Name = "Flower",
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.CH_C", "CH_C"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.CH1_C.Id)),
                     },
                     new CodexChainDef
                     {
-                        Name = "Alchemist",
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.CH_D", "CH_D"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.CH1_D.Id)),
                     },
                 }
             },
             new CodexTabDef
             {
-                Name = "Resources",
+                Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.toggle.currency", "Currency"),
                 ChainDefs = new List<CodexChainDef>
                 {
                     new CodexChainDef
                     {
-                        Name = "Coin",
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.Soft", "Soft"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Soft1.Id)),
                     },
                     new CodexChainDef
                     {
-                        Name = "Crystal",
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.Hard", "Hard"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Hard1.Id)),
+                    },
+                }
+            },
+            new CodexTabDef
+            {
+                Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.toggle.boosters", "Boosters"),
+                ChainDefs = new List<CodexChainDef>
+                {
+                    new CodexChainDef
+                    {
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.Boost_WR", "Boost_WR"),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Boost_WR.Id)),
                     },
                     new CodexChainDef
                     {
-                        Name = "Worker",
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Boost_WR.Id)),
+                        Name = LocalizationService.Instance.Manager.GetTextByUid("window.codex.branch.Boost_CR", "Boost_CR"),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Boost_CR1.Id)),
                     },
                 }
             }

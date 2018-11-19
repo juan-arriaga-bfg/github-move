@@ -196,6 +196,16 @@ public static class TutorialBuilder
                 
                 break;
             }
+            case 14: // unlock Firefly
+            {
+                step = new FireflyLockTutorialStep();
+                
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition{Target = GameDataService.Current.ConstantsManager.StartLevelFirefly, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition{Target = GameDataService.Current.ConstantsManager.StartLevelFirefly, ConditionType = TutorialConditionType.Hard}, true);
+                
+                break;
+            }
             default:
                 return null;
         }

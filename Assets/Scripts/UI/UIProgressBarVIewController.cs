@@ -16,9 +16,9 @@ public class UIProgressBarVIewController : IWUIWindowViewController
 
     public virtual void SetProgress(int currentAmount, int targetAmount, bool isAnimate = true)
     {
-        float percent = currentAmount / (float) targetAmount;
+        var percent = currentAmount / (float) targetAmount;
 
-        if (progressLabel != null) progressLabel.Text = string.Format("{0}/{1}", currentAmount, targetAmount);
+        if (progressLabel != null) progressLabel.Text = $"{currentAmount}/{targetAmount}";
         
         if (progressBarRect == null) return;
         

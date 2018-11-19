@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 public class UIChestsShopWindowModel : IWWindowModel 
 {
-    public string Title => "Shop of Chests";
-    public string Message => "Upgrade your castle to get new chests!";
-    public string Button => "Show";
+    public string Title => LocalizationService.Instance.Manager.GetTextByUid("window.shop.chest.title", "Shop of Chests");
+    public string Message => LocalizationService.Instance.Manager.GetTextByUid("window.shop.chest.message", "Upgrade your castle to get new chests!");
+    public string Button => LocalizationService.Instance.Manager.GetTextByUid("window.shop.chest.button", "Show");
     
     public FreeChestLogicComponent FreeChestLogic => BoardService.Current.GetBoardById(0).FreeChestLogic;
     

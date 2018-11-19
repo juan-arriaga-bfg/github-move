@@ -17,7 +17,10 @@
 		
 		if (IsDone == false)
 		{
-			UIErrorWindowController.AddError($"Reach Level {def.Level} to get access to the fog");
+			var message = string.Format(LocalizationService.Instance.Manager.GetTextByUid("message.error.fogLevel",
+						"Reach Level {0} to get access to the fog!"), def.Level);
+			
+			UIErrorWindowController.AddError(message);
 		}
         
 		return IsDone;
