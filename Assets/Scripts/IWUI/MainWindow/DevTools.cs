@@ -1,14 +1,20 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 
 public class DevTools : MonoBehaviour
 {
     [SerializeField] private GameObject panel;
+    [SerializeField] private Toggle questDialogsToggle;
 
     public void Start()
     {
         panel.SetActive(false);
+        questDialogsToggle.isOn = IsQuestDialogsEnabled();
     }
     
     public void OnToggleValueChanged(bool isChecked)
@@ -112,6 +118,12 @@ public class DevTools : MonoBehaviour
 
         var quest = manager.ActiveQuests[0];
         quest.ForceComplete();
+    }
+    
+    public void OnSpawnFireFlyClick()
+    {
+        Debug.Log("OnSpawnFireFlyClick");
+        BoardService.Current.FirstBoard.BoardLogic.FireflyLogic.Execute();
     }
 
     public void OnDebug1Click()
@@ -242,7 +254,6 @@ public class DevTools : MonoBehaviour
     public void OnDebug2Click()
     {
         Debug.Log("OnDebug2Click");
-        BoardService.Current.FirstBoard.BoardLogic.FireflyLogic.Execute();
         
         //BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
         
@@ -308,4 +319,23 @@ public class DevTools : MonoBehaviour
         }
     }
 #endif
+
+    public void OnQuestDialogsValueChanged(bool isChecked)
+    {
+#if UNITY_EDITOR
+        EditorPrefs.SetBool("DEBUG_QUEST_DIALOGS_DISABLED", !isChecked);
+#else
+        UIMessageWindowController.CreateNotImplementedMessage();
+#endif
+    }
+    
+    public static bool IsQuestDialogsEnabled()
+    {
+#if UNITY_EDITOR
+        return !EditorPrefs.GetBool("DEBUG_QUEST_DIALOGS_DISABLED", false);
+#else
+        return true;
+#endif
+        
+    }
 }

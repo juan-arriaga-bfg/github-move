@@ -20,6 +20,9 @@ public class UiQuestButtonArrow : MonoBehaviour
     {
         this.quest = quest;
 
+        DOTween.Kill(this);
+        canvasGroup.alpha = 0;
+        
         if (this.quest != null && this.quest.State == TaskState.Pending)
         {
             var action = new QueueActionComponent {Id = QUEUE_ACTION_ID}
@@ -37,9 +40,6 @@ public class UiQuestButtonArrow : MonoBehaviour
         {
             RemoveListner();
         }
-        
-        DOTween.Kill(this);
-        canvasGroup.alpha = 0;
     }
     
     private void OnDisable()
@@ -113,6 +113,8 @@ public class UiQuestButtonArrow : MonoBehaviour
         float deltaMoveX = 15f;
         float moveTime = 0.35f;
         int loops = 3;
+
+        canvasGroup.alpha = 0;
 
         canvasGroup.DOFade(1, fadeTime)
                    .SetId(this);
