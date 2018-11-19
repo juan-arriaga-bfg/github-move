@@ -369,7 +369,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         return pos == CharacterPosition.LeftInner || pos == CharacterPosition.RightInner;
     }
     
-    private void NextBubble(string bubbleId, UICharacterBubbleDef data, Action onComplete)
+    private void NextBubble(UICharacterBubbleDef data, Action onComplete)
     {
         ToggleTapToContinue(false);
         
@@ -382,12 +382,12 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         {
             HideBubble(() =>
             {
-                ReorderCharsAndShowBubble(bubbleId, data, onComplete);
+                ReorderCharsAndShowBubble(data, onComplete);
             });
         }
         else
         {
-            ReorderCharsAndShowBubble(bubbleId, data, onComplete);
+            ReorderCharsAndShowBubble(data, onComplete);
         }
     }
 
@@ -409,7 +409,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         });
     }
 
-    private void ReorderCharsAndShowBubble(string bubbleId, UICharacterBubbleDef data, Action onComplete)
+    private void ReorderCharsAndShowBubble(UICharacterBubbleDef data, Action onComplete)
     {
         bool animated = isFirstBubbleShowed;
         
@@ -418,7 +418,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         SendCharacterToForeground(charId, data.Emotion, animated, () =>
         {
             var pool = UIService.Get.PoolContainer;
-            UICharacterBubbleView bubble = pool.Create<UICharacterBubbleView>(bubbleId);
+            UICharacterBubbleView bubble = pool.Create<UICharacterBubbleView>(data.BubbleView);
             bubbleView = bubble;
 
             bubbleView.transform.SetParent(GetAnchorForBubblePosition(data), false);
@@ -495,7 +495,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
     private void PerformActionBubble()
     {
         ConversationActionBubbleEntity act = activeAction as ConversationActionBubbleEntity;
-        NextBubble(act.BubbleId, act.BubbleDef, () => { onActionEnded?.Invoke(act); });
+        NextBubble(act.BubbleDef, () => { onActionEnded?.Invoke(act); });
 
         onActionStarted?.Invoke(act);
     }

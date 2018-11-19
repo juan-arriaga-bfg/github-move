@@ -486,6 +486,7 @@ public class UIQuestStartWindowModel : IWWindowModel
         {
             BubbleDef = new UiCharacterBubbleDefMessage
             {
+                BubbleView = R.UICharacterBubbleMessageView,
                 Emotion = emotion,
                 CharacterId = charId,
                 Message = message
@@ -524,9 +525,9 @@ public class UIQuestStartWindowModel : IWWindowModel
         
         ConversationActionBubbleEntity actBubble = new ConversationActionBubbleEntity
         {
-            BubbleId = R.UICharacterBubbleQuestCompletedView,
             BubbleDef = new UiCharacterBubbleDefQuestCompleted
             {
+                BubbleView = R.UICharacterBubbleQuestCompletedView,
                 Emotion = emotion,
                 CharacterId = characterId,
                 Message = message,
