@@ -77,20 +77,7 @@ public class UIRemoverButtonViewController : IWUIWindowViewController, IPointerD
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        int pointerId = eventData.pointerId;
-        if (Input.touchSupported == false)
-        {
-            pointerId = 0;
-        }
-
         
-        bool isReady = BoardService.Current.FirstBoard.BoardLogic.Remover.BeginRemover(pointerId);
-
-        if (isReady)
-        {
-            isDown = false;
-            isDrag = true;
-        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -119,6 +106,21 @@ public class UIRemoverButtonViewController : IWUIWindowViewController, IPointerD
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (BoardService.Current.FirstBoard.BoardLogic.Remover.IsActive) return;
         
+        int pointerId = eventData.pointerId;
+        if (Input.touchSupported == false)
+        {
+            pointerId = 0;
+        }
+
+        
+        bool isReady = BoardService.Current.FirstBoard.BoardLogic.Remover.BeginRemover(pointerId);
+
+        if (isReady)
+        {
+            isDown = false;
+            isDrag = true;
+        }
     }
 }

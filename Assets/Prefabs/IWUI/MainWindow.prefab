@@ -2293,6 +2293,8 @@ GameObject:
   - component: {fileID: 114954669348514602}
   - component: {fileID: 225513730606985444}
   - component: {fileID: 114817611064025808}
+  - component: {fileID: 222269531013315744}
+  - component: {fileID: 114406839228861970}
   m_Layer: 31
   m_Name: ButtonRemove
   m_TagString: Untagged
@@ -5654,6 +5656,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114406839228861970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1938770638583472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82183c8375eb948479f4f485c0a96e23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 1d9eb302018624ad48b38b9aa4f08340, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
 --- !u!114 &114415144444774404
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9861,6 +9877,13 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1041854712542190}
+  m_CullTransparentMesh: 0
+--- !u!222 &222269531013315744
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1938770638583472}
   m_CullTransparentMesh: 0
 --- !u!222 &222276161651517334
 CanvasRenderer:
