@@ -143,8 +143,23 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     {
         List<GridMeshArea> ret = new List<GridMeshArea>();
 
-        foreach (var fogDef in FogPositions.Values)
+        foreach (var pair in FogPositions)
         {
+            var fogDef = pair.Value;
+
+            FogObserver observer;
+            if (FogObservers.TryGetValue(pair.Key, out observer))
+            {
+                if (!observer.IsActive)
+                {
+                    continue; 
+                }
+            }
+            else
+            {
+                continue;
+            }
+            
             var positions = fogDef.Positions;
 
             var area = GetFogAreaForPositions(positions, false);
@@ -154,13 +169,17 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         
         // Starting field
         List<BoardPosition> startPositions = new List<BoardPosition>();
-        for (int x = 20; x <= 25; x++)
+        for (int x = 18; x <= 22; x++)
         {
-            for (int y = 8; y <= 12; y++)
+            for (int y = 11; y <= 14; y++)
             {
                 startPositions.Add(new BoardPosition(x, y));
             }
         }
+        
+        // startPositions.Add(new BoardPosition(19, 9));
+        // startPositions.Add(new BoardPosition(20, 9));
+        // startPositions.Add(new BoardPosition(21, 9));
 
         ret.Add(GetFogAreaForPositions(startPositions, true));
         
