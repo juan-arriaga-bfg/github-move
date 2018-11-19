@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -11,5 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7efff3405ebf44158615b128008666c, type: 3}
   m_Name: localization.settings.res
   m_EditorClassIdentifier: 
-  supportedLanguages: []
-  localizationConfigs: []
+  supportedLanguages:
+  - English
+  localizationConfigs:
+  - uid: common
+    googleId: https://docs.google.com/spreadsheets/d/1-JWw6x66W6lgv_Ka5pP_mBgz1bIhsU7oPkSYUe_4co4/export?format=tsv&id=1-JWw6x66W6lgv_Ka5pP_mBgz1bIhsU7oPkSYUe_4co4&gid=0
+    keyColumn: 0
+    localizationKeys:
+    - English
+    localizationValueColumn: 03000000
