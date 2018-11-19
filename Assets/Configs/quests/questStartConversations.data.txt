@@ -1,0 +1,72 @@
+﻿[
+  {
+    "StarterId": 123,
+    "Participants": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "CharacterPosition": "LeftInner"
+      },
+      {
+        "CharacterId": "GnomeWorker",
+        "CharacterPosition": "RightInner"
+      }
+    ],
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "MessageId": "mess.1.asd"
+      },
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Sad",
+        "MessageId": "mess.2.asd"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Sad",
+        "MessageId": "mess.3.asd"
+      },
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "MessageId": "mess.4.asd"
+      }
+    ]
+  },
+  {
+    "StarterId": 124,
+    "Participants": [
+      {
+        "CharacterId": "PussInBoots",
+        "CharacterPosition": "LeftInner"
+      },
+      {
+        "CharacterId": "Rapunzel",
+        "CharacterPosition": "RightInner"
+      }
+    ],
+    "Bubbles": [
+      {
+        "CharacterId": "Rapunzel",
+        "Emotion": "Thinking",
+        "MessageId": "mess.5.asd"
+      },
+      {
+        "CharacterId": "PussInBoots",
+        "Emotion": "Thinking",
+        "MessageId": "mess.6.asd"
+      },
+      {
+        "CharacterId": "Rapunzel",
+        "Emotion": "Sleep1",
+        "MessageId": "mess.7.asd"
+      },
+      {
+        "CharacterId": "PussInBoots",
+        "Emotion": "Sleep2",
+        "MessageId": "mess.8.asd"
+      }
+    ]
+  }
+]

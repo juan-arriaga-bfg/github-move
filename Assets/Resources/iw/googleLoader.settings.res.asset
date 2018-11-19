@@ -76,3 +76,7 @@ MonoBehaviour:
     Link: 1dvyzQoKk6OMhIC59EApw2vjebAdn4LxrbM7raQJAlXY
     Route: parse
     Pattern: '[{"$type":"","Id":"","":"","PieceUid":"","TargetValue":0,"Value1":0,"ComponentsCache":{"QuestDescriptionComponent":{"Ico":"","Title":"","Message":""}}}]'
+  - Key: questStartConversations
+    Link: 1dvyzQoKk6OMhIC59EApw2vjebAdn4LxrbM7raQJAlXY
+    Route: parse
+    Pattern: '[{"Id":"","ConversationActionScenarioEntity":[{"ConversationActionBubbleEntity":{"CharacterId":"","Side":"","Emotion":"","Message":""}}]}]'
