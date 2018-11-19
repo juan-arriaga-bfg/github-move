@@ -51,30 +51,44 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         
     }
 
-    private void ToggleFilterPieces(bool state)
+    protected virtual void ToggleFilterPieces(bool state)
     {
         if (state)
         {
-            var points = context.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Removable);
+            var points = context.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Default);
+            var filteredIds = PieceType.GetIdsByFilter(PieceTypeFilter.Removable);
 
             for (int i = 0; i < points.Count; i++)
             {
                 var point = points[i];
-                var pieceView = context.Context.RendererContext.GetElementAt(point) as PieceBoardElementView;
+                var pieceEntity = context.GetPieceAt(point);
+                if (pieceEntity == null) continue;
+                if (pieceEntity.PieceType == PieceType.Fog.Id) continue;
                 
-                if (pieceView != null) pieceView.ToggleHighlight(true);
+                if (filteredIds.Contains(pieceEntity.PieceType)) continue; 
+                
+                var pieceView = context.Context.RendererContext.GetElementAt(point) as PieceBoardElementView;
+      
+                if (pieceView != null) pieceView.SetFade(0.5f);
             }
         }
         else
         {
-            var points = context.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Removable);
+            var points = context.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Default);
+            var filteredIds = PieceType.GetIdsByFilter(PieceTypeFilter.Removable);
 
             for (int i = 0; i < points.Count; i++)
             {
                 var point = points[i];
+                var pieceEntity = context.GetPieceAt(point);
+                if (pieceEntity == null) continue;
+                if (pieceEntity.PieceType == PieceType.Fog.Id) continue;
+                
+                if (filteredIds.Contains(pieceEntity.PieceType)) continue; 
+                
                 var pieceView = context.Context.RendererContext.GetElementAt(point) as PieceBoardElementView;
                 
-                if (pieceView != null) pieceView.ToggleHighlight(false);
+                if (pieceView != null) pieceView.ResetDefaultMaterial();
             }
         }
     }
@@ -139,7 +153,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
     {
         var isValid = IsValidPoint(boardPosition);
 
-        if (isValid)
+        if (isValid == false)
         {
             return false;
         }
@@ -217,8 +231,6 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
             }
         }
         
-        // Debug.LogWarning($"ProcessRemover => isHas:{touchDef != null} touchCount:{touchCount}");
-
         if (touchDef == null)
         {
             if (TryCollapsePieceAt(lastRemoverWorldPosition) == false)

@@ -65,7 +65,8 @@ public class SandboxGameController : MonoBehaviour
             .RegisterComponent(new LockerComponent()));
         boardController.RegisterComponent(new PartPiecesLogicComponent());
         boardController.RegisterComponent(new BoardRenderer().Init(gameBoardResourcesDef,
-            gameBoardRendererView.transform)); // renderer context
+            gameBoardRendererView.transform)
+            .RegisterComponent(new RendererCachedMaterialsComponent())); // renderer context
         
         boardController.RegisterComponent(new BoardManipulatorComponent()
             .RegisterComponent(new LockerComponent())); // user manipualtor

@@ -74,12 +74,47 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             if (rend == null) continue;
             if (rend.CachedRenderer == null) continue;
             if (rend.CachedRenderer.sharedMaterial == null) continue;
-            
-            rend.MaterialCopy.SetFloat("_AlphaCoef", alpha);
+
+            var material = rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial("pieces.fade.material"));
+            material.SetFloat("_AlphaCoef", alpha);
             if (alpha >= 1f)
             {
                 rend.ResetDefaultMaterial();
             }
+        }
+    }
+    
+    public virtual void SetGrayscale()
+    {
+        if (cachedRenderers == null || cachedRenderers.size <= 0)
+        {
+            CacheLayers();
+        }
+
+        foreach (var rend in cachedRenderers)
+        {
+            if (rend == null) continue;
+            if (rend.CachedRenderer == null) continue;
+            if (rend.CachedRenderer.sharedMaterial == null) continue;
+
+            rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial("pieces.grayscale.material"));
+        }
+    }
+    
+    public virtual void ResetDefaultMaterial()
+    {
+        if (cachedRenderers == null || cachedRenderers.size <= 0)
+        {
+            CacheLayers();
+        }
+
+        foreach (var rend in cachedRenderers)
+        {
+            if (rend == null) continue;
+            if (rend.CachedRenderer == null) continue;
+            if (rend.CachedRenderer.sharedMaterial == null) continue;
+
+            rend.ResetDefaultMaterial();
         }
     }
 
@@ -338,6 +373,8 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         this.isProcessMove = false;
         this.targetPosition = CachedTransform.localPosition;
 
+        ResetDefaultMaterial();
+        
         DOTween.Kill(animationUid);
 
         if (Animator != null && Animator.HasState(0, cachedIdleAnimatorHash))
@@ -421,6 +458,14 @@ public class RendererLayer : MonoBehaviour
         {
             CachedRenderer.material = cachedDefaultMaterial;
         }
+    }
+    
+    public Material SetCustomMaterial(Material customMaterial)
+    {
+        CacheDefaultMaterial();
+        CachedRenderer.material = customMaterial;
+
+        return customMaterial;
     }
 
     public Material MaterialCopy
