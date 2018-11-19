@@ -120,7 +120,7 @@ public class DevTools : MonoBehaviour
     public void OnDebug1Click()
     {
         CurrencyHellper.Purchase(Currency.Level.Name, 8);
-        CurrencyHellper.Purchase(Currency.Experience.Name, 8000);
+        CurrencyHellper.Purchase(Currency.Experience.Name, 7000);
         CurrencyHellper.Purchase(Currency.Mana.Name, 50000000);
     }
 

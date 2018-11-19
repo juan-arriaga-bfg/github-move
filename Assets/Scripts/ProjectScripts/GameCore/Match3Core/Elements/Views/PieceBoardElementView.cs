@@ -17,6 +17,8 @@ public class PieceBoardElementView : BoardElementView
     [SerializeField] private Material highlightPieceMaterial;
     [SerializeField] private Material reactionLockMaterial;
 
+    private BoardElementView lockedSubtrate;
+
     private Animation cachedSelectionAnimation;
 
     private readonly ViewAnimationUid selectedAnimationId = new ViewAnimationUid();
@@ -170,18 +172,47 @@ public class PieceBoardElementView : BoardElementView
                 rend.ResetDefaultMaterial();
         }
 
+        
         if (enabled)
         {
             bodySprites.ForEach(sprite => sprite.material = reactionLockMaterial);
+
+            var pieceDef = PieceType.GetDefById(Piece.PieceType);
+            var defaultSubtrate = Piece.PieceType == PieceType.LockedEmpty.Id
+                               || Piece.PieceType == PieceType.Fog.Id
+                               || pieceDef.Filter.HasFlag(PieceTypeFilter.Obstacle)
+                               || pieceDef.Filter.HasFlag(PieceTypeFilter.Mine);
+            if (defaultSubtrate == false)
+            {
+                var substratePosition =
+                    new BoardPosition(Piece.CachedPosition.X, Piece.CachedPosition.Y, Piece.CachedPosition.Z - 1);
+                lockedSubtrate = Context.CreateBoardElementAt<BoardElementView>(R.LockedSubstrate, substratePosition);    
+            }
+            
+        }
+        else if (lockedSubtrate != null)
+        {
+            Context.DestroyElement(lockedSubtrate);
+            lockedSubtrate = null;
         }
         
         particles.ForEach(particle => particle.gameObject.SetActive(!enabled));
         
-        isLockVisual = enabled;
-
         
+        isLockVisual = enabled;
     }
-    
+
+    public override void ResetViewOnDestroy()
+    {
+        if (lockedSubtrate != null)
+        {
+            Context.DestroyElement(lockedSubtrate);
+            lockedSubtrate = null;
+        }
+
+        base.ResetViewOnDestroy();
+    }
+
     public virtual void ToggleHighlight(bool enabled)
     {
         if (highlightPieceMaterial == null || IsHighlighted == enabled)
