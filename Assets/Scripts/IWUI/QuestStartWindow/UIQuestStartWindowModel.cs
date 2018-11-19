@@ -482,15 +482,12 @@ public class UIQuestStartWindowModel : IWWindowModel
     
     private ConversationActionBubbleEntity CreateStartBubble(string charId, string message, CharacterEmotion emotion = CharacterEmotion.Normal, List<string> questIds = null)
     {
-        ConversationActionBubbleEntity actBubble = new ConversationActionBubbleEntity
+        ConversationActionBubbleEntity actBubble = new ConversationActionBubbleEntity()
         {
-            BubbleDef = new UiCharacterBubbleDefMessage
-            {
-                BubbleView = R.UICharacterBubbleMessageView,
-                Emotion = emotion,
-                CharacterId = charId,
-                Message = message
-            }
+             BubbleView = R.UICharacterBubbleMessageView,
+             Emotion = emotion,
+             CharacterId = charId,
+             Message = message
         };
 
         if (questIds != null)
@@ -523,17 +520,14 @@ public class UIQuestStartWindowModel : IWWindowModel
         
         QuestCompletedScenario.RegisterComponent(charsList);
         
-        ConversationActionBubbleEntity actBubble = new ConversationActionBubbleEntity
+        ConversationActionBubbleEntity actBubble = new ConversationActionBubbleQuestCompletedEntity()
         {
-            BubbleDef = new UiCharacterBubbleDefQuestCompleted
-            {
-                BubbleView = R.UICharacterBubbleQuestCompletedView,
-                Emotion = emotion,
-                CharacterId = characterId,
-                Message = message,
-                AllowTeleType = false,
-                QuestId = CompletedQuest.Id
-            }
+            BubbleView = R.UICharacterBubbleQuestCompletedView,
+            Emotion = emotion,
+            CharacterId = characterId,
+            Message = message,
+            AllowTeleType = false,
+            QuestId = CompletedQuest.Id
         };
         QuestCompletedScenario.RegisterComponent(actBubble);
         

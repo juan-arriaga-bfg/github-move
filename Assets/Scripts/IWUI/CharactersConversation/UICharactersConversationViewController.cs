@@ -80,9 +80,9 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         return anchor.position;
     }
     
-    private Transform GetAnchorForBubblePosition(UICharacterBubbleDef def)
+    private Transform GetAnchorForBubblePosition(ConversationActionBubbleEntity data)
     {
-        return def.Side == CharacterSide.Left ? bubbleAnchorLeft : bubbleAnchorRight;
+        return data.Side == CharacterSide.Left ? bubbleAnchorLeft : bubbleAnchorRight;
     }
 
     private CharacterSide GetSideByCharacterPosition(CharacterPosition pos)
@@ -156,8 +156,8 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         ConversationActionEntity action = scenario.GetFirstAction();
         ConversationActionBubbleEntity bubbleAction = action as ConversationActionBubbleEntity;
 
-        var character = characters[bubbleAction.BubbleDef.CharacterId];
-        character.ToForeground(false, bubbleAction.BubbleDef.Emotion);
+        var character = characters[bubbleAction.CharacterId];
+        character.ToForeground(false, bubbleAction.Emotion);
 
         if (animated)
         {
@@ -369,7 +369,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         return pos == CharacterPosition.LeftInner || pos == CharacterPosition.RightInner;
     }
     
-    private void NextBubble(UICharacterBubbleDef data, Action onComplete)
+    private void NextBubble(ConversationActionBubbleEntity data, Action onComplete)
     {
         ToggleTapToContinue(false);
         
@@ -409,7 +409,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         });
     }
 
-    private void ReorderCharsAndShowBubble(UICharacterBubbleDef data, Action onComplete)
+    private void ReorderCharsAndShowBubble(ConversationActionBubbleEntity data, Action onComplete)
     {
         bool animated = isFirstBubbleShowed;
         
@@ -495,7 +495,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
     private void PerformActionBubble()
     {
         ConversationActionBubbleEntity act = activeAction as ConversationActionBubbleEntity;
-        NextBubble(act.BubbleDef, () => { onActionEnded?.Invoke(act); });
+        NextBubble(act, () => { onActionEnded?.Invoke(act); });
 
         onActionStarted?.Invoke(act);
     }
