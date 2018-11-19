@@ -7,8 +7,3 @@ public class ConversationActionBubbleEntity : ConversationActionEntity
     public string CharacterId;
     public bool AllowTeleType = true;
 }
-
-public class ConversationActionBubbleQuestCompletedEntity : ConversationActionBubbleEntity
-{
-    public string QuestId;
-}
