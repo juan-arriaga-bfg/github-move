@@ -3,7 +3,7 @@
 public class AddTutorialAnimation : BaseTutorialAnimation
 {
 	public int PieceId;
-	public List<BoardPosition> Targets;
+	public BoardPosition Target;
     
 	public override void Start()
 	{
@@ -11,12 +11,27 @@ public class AddTutorialAnimation : BaseTutorialAnimation
         
 		base.Start();
 		
-		foreach (var target in Targets)
-		{
-			if(context.Context.Context.BoardLogic.IsEmpty(target) == false) continue;
+		if(Hard(Target)) return;
+
+		Find();
+	}
+
+	private void Find()
+	{
+		var positions = new List<BoardPosition>();
+		
+		if(context.Context.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(Target, positions, 1) == false) return;
+
+		Hard(positions[0]);
+	}
+
+	private bool Hard(BoardPosition target)
+	{
+		var board = context.Context.Context;
+		
+		if(board.BoardLogic.IsEmpty(target) == false) return false;
 			
-			context.Context.Context.ActionExecutor.AddAction(new SpawnPieceAtAction{At = target, PieceTypeId = PieceId});
-			break;
-		}
+		board.ActionExecutor.AddAction(new SpawnPieceAtAction{At = target, PieceTypeId = PieceId});
+		return true;
 	}
 }
