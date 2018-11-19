@@ -93,7 +93,7 @@ public class DevTools : MonoBehaviour
         {
             for (var j = 0; j < board.BoardDef.Height; j++)
             {
-                if(board.BoardLogic.IsLockedCell(new BoardPosition(i, j, 1))) continue;
+                //if(board.BoardLogic.IsLockedCell(new BoardPosition(i, j, 1))) continue;
                 
                 var cell = board.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell, new BoardPosition(i, j, 20));
                 cell.SetIndex(i, j);
@@ -261,8 +261,38 @@ public class DevTools : MonoBehaviour
         //
         // string i = "";
     }
+
+    /// <summary>
+    /// Start quest without conversations. DEBUG use only!
+    /// </summary>
+    public static void FastStartQuest(List<string> questsToStart)
+    {
+        var questManager = GameDataService.Current.QuestsManager;
+        questManager.StartQuests(questsToStart);
+    }
     
-    #if DEBUG
+    /// <summary>
+    /// Complete quest without conversations. DEBUG use only!
+    /// </summary>
+    public static void FastCompleteQuest(QuestEntity questToFinish)
+    {
+        var questManager = GameDataService.Current.QuestsManager;
+        
+        questToFinish.SetClaimedState();
+        questManager.FinishQuest(questToFinish.Id);
+
+        List<CurrencyPair> reward = questToFinish.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
+        CurrencyHellper.Purchase(reward, success =>
+            {
+                string starterId;
+                List<string> questsToStart = questManager.CheckConditions(out starterId);
+                questManager.StartQuests(questsToStart);
+            },
+            new Vector2(Screen.width / 2, Screen.height / 2)
+        );
+    }
+    
+#if DEBUG
     private void Update()
     {
         if (Input.GetKey(KeyCode.LeftShift))
