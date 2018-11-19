@@ -122,6 +122,15 @@ public class UINextLevelWindowView : UIGenericWindowView
                     viewAnimators[i].SetTrigger(tapAnimationId);
                 }
                 
+                var windowModel = Model as UINextLevelWindowModel;
+                var recipes = windowModel.Recipes;
+
+                if (recipes.Count == 0)
+                {
+                    Controller.CloseCurrentWindow();
+                    return;
+                }
+                
                 CreateCards();
                 break;
             case 1:
@@ -135,7 +144,6 @@ public class UINextLevelWindowView : UIGenericWindowView
                 cards.Clear();
 
                 headerCanvas.DOFade(0, 0.2f).OnComplete(() => headerObj.SetActive(false));
-                
                 break;
             default:
                 return;
