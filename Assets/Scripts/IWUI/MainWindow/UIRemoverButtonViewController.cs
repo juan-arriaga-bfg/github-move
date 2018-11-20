@@ -20,6 +20,8 @@ public class UIRemoverButtonViewController : IWUIWindowViewController, IPointerD
 
     [SerializeField] private Transform iconView;
 
+    private int cachedPointerId = -2;
+
     public override void OnViewShow(IWUIWindowView context)
     {
         base.OnViewShow(context);
@@ -76,10 +78,23 @@ public class UIRemoverButtonViewController : IWUIWindowViewController, IPointerD
             pointerId = 0;
         }
 
+        cachedPointerId = pointerId;
         
         bool isReady = BoardService.Current.FirstBoard.BoardLogic.Remover.BeginRemover(pointerId);
     }
 
+    private void Update()
+    {
+        string currentFingers = "";
+        
+        var fingers = LeanTouch.GetFingers(false);
+        for (int i = 0; i < fingers.Count; i++)
+        {
+            var touch = fingers[i]; // Input.GetTouch(i);
 
+            currentFingers += $"f{i}:{touch.Index}/";
+        }
 
+        label.Text = $"p:{cachedPointerId}={currentFingers}";
+    }
 }
