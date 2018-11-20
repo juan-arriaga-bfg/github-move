@@ -82,19 +82,4 @@ public class UIRemoverButtonViewController : IWUIWindowViewController, IPointerD
         
         bool isReady = BoardService.Current.FirstBoard.BoardLogic.Remover.BeginRemover(pointerId);
     }
-
-    private void Update()
-    {
-        string currentFingers = "";
-        
-        var fingers = LeanTouch.GetFingers(false);
-        for (int i = 0; i < fingers.Count; i++)
-        {
-            var touch = fingers[i]; // Input.GetTouch(i);
-
-            currentFingers += $"f{i}:{touch.Index}/";
-        }
-
-        label.Text = $"p:{cachedPointerId}={currentFingers}";
-    }
 }
