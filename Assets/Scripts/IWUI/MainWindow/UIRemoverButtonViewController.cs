@@ -19,7 +19,9 @@ public class UIRemoverButtonViewController : IWUIWindowViewController, IPointerD
     [SerializeField] private Transform warningView;
 
     [SerializeField] private Transform iconView;
-    
+
+    private int cachedPointerId = -2;
+
     public override void OnViewShow(IWUIWindowView context)
     {
         base.OnViewShow(context);
@@ -68,12 +70,16 @@ public class UIRemoverButtonViewController : IWUIWindowViewController, IPointerD
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (BoardService.Current.FirstBoard.BoardLogic.Remover.IsActive) return;
+        
         int pointerId = eventData.pointerId;
         if (Input.touchSupported == false)
         {
             pointerId = 0;
         }
+
+        cachedPointerId = pointerId;
+        
         bool isReady = BoardService.Current.FirstBoard.BoardLogic.Remover.BeginRemover(pointerId);
     }
-    
 }

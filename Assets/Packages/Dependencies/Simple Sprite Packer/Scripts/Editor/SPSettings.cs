@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 using SimpleSpritePacker;
 using System.Collections;
@@ -142,3 +143,4 @@ namespace SimpleSpritePackerEditor
 		}
 	}
 }
+#endif

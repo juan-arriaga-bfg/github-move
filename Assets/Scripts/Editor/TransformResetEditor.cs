@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 
 [CustomEditor (typeof(Transform))]
@@ -51,3 +52,4 @@ class TransformResetEditor : Editor
         return v;
     }
 }
+#endif

@@ -44,8 +44,10 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
 
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
+        Timer.OnComplete = null;
+        Cooldown.OnComplete = null;
     }
-    
+
     private void InitInSave()
     {
         var save = ProfileService.Current.GetComponent<OrdersSaveComponent>(OrdersSaveComponent.ComponentGuid);

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -32,6 +32,18 @@ public class PieceBoardElementView : BoardElementView
     
     public bool IsHighlighted { get; protected set; }
 
+    public SpriteRenderer SelectionSprite
+    {
+        get
+        {
+            if (selectionView != null && selectionSprite == null)
+            {
+                selectionSprite = selectionView.GetComponent<SpriteRenderer>();
+            }
+            return selectionSprite;
+        }
+    }
+    
     public virtual void Init(BoardRenderer context, Piece piece)
     {
         base.Init(context);
@@ -248,7 +260,7 @@ public class PieceBoardElementView : BoardElementView
 
     public void ToggleSelection(bool enabled, bool isValid = true)
     {
-        if (selectionSprite == null)
+        if (SelectionSprite == null)
         {
             return;
         }
@@ -261,7 +273,7 @@ public class PieceBoardElementView : BoardElementView
 
             var sequence = DOTween.Sequence().SetId(animationUid);
 
-            if (Piece.Draggable != null && isValid)
+            if ((Piece == null || Piece.Draggable != null) && isValid)
             {
                 bodySprites?.ForEach(sprite => sequence.Insert(0f, sprite.DOColor(Color.white, duration)));
 

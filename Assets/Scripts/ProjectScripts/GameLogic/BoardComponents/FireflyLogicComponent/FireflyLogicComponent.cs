@@ -19,8 +19,8 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	private int index = 1;
 	private int delay = 1;
 	
-	private DateTime startTime;
-	private DateTime pauseTime;
+	private DateTime startTime = DateTime.UtcNow;
+	private DateTime pauseTime = DateTime.UtcNow;
 	
 	private Vector2 bottom;
 	private Vector2 right;

@@ -289,7 +289,13 @@ public class QuestsDataManager : IECSComponent, IDataManager
                          }
 
                          Debug.Log($"[QuestsDataManager] => StartNewQuestsIfAny before dlg");
-                         
+
+                         if (!DevTools.IsQuestDialogsEnabled())
+                         {
+                             DevTools.FastStartQuest(questsToStart);
+                             return;
+                         }
+
                          var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
                          model.Init(null, questsToStart, starterId);
 

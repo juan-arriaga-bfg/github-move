@@ -895,6 +895,36 @@
     "IsGenerateAutoName": true
   },
   {
+    "Uid": "pieces.sepia.material",
+    "ResourcePath": "Materials/pieces.sepia.material",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "pieces.default.material",
+    "ResourcePath": "Materials/pieces.default.material",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "pieces.grayscale.material",
+    "ResourcePath": "Materials/pieces.grayscale.material",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "pieces.fade.material",
+    "ResourcePath": "Materials/pieces.fade.material",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "pieces.highlight.material",
+    "ResourcePath": "Materials/pieces.highlight.material",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "FogExplosionParticleSystem",
+    "ResourcePath": "Particles/FogExplosionParticleSystem",
+    "IsGenerateAutoName": true
+  },
+  {
     "Uid": "LockedSubstrate",
     "ResourcePath": "Prefabs/LockedSubstrate",
     "IsGenerateAutoName": true

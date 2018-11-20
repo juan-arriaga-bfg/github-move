@@ -2,6 +2,7 @@
 
 public class RemoveTutorialAnimation : BaseTutorialAnimation
 {
+    public int PieceId = PieceType.None.Id;
     public BoardPosition Target;
     
     public override void Start()
@@ -10,8 +11,31 @@ public class RemoveTutorialAnimation : BaseTutorialAnimation
         
         base.Start();
         
-        if(context.Context.Context.BoardLogic.IsEmpty(Target)) return;
+        if(Find()) return;
+
+        Hard(Target);
+    }
+
+    private bool Find()
+    {
+        if(PieceId == PieceType.None.Id) return false;
+
+        var positions = context.Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(PieceId);
+
+        foreach (var position in positions)
+        {
+            Hard(position);
+        }
         
-        context.Context.Context.ActionExecutor.AddAction(new CollapsePieceToAction{To = Target, Positions = new List<BoardPosition>{Target}});
+        return true;
+    }
+    
+    private void Hard(BoardPosition target)
+    {
+        var board = context.Context.Context;
+        
+        if(board.BoardLogic.IsEmpty(target)) return;
+        
+        board.ActionExecutor.AddAction(new CollapsePieceToAction{To = target, Positions = new List<BoardPosition>{target}});
     }
 }

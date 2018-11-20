@@ -166,5 +166,6 @@ public class R
      public const string NPC_SleepingBeautyPlaidPiece = "NPC_SleepingBeautyPlaidPiece";
      public const string PieceRemover = "PieceRemover";
      public const string UIHintArrow = "UIHintArrow";
+     public const string FogExplosionParticleSystem = "FogExplosionParticleSystem";
      public const string LockedSubstrate = "LockedSubstrate";
 }

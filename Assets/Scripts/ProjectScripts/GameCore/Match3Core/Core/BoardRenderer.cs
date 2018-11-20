@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class BoardRenderer : ECSEntity
+public partial class BoardRenderer : ECSEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 

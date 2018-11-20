@@ -188,6 +188,11 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         {
             return;
         }
+
+        if (Quest == null || Quest.IsCompleted())
+        {
+            return;
+        }
         
         ShowQuestWindow();
     }
@@ -202,7 +207,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
                     .SetAction(() =>
                      {
                          // ShowQuestWindow();
-                         ShowQuestCompletedWindow();
+                         ShowQuestCompletedWindow();     
                      });
 
         ProfileService.Current.QueueComponent.AddAction(action, false);
@@ -210,6 +215,12 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     private void ShowQuestCompletedWindow()
     {
+        if (!DevTools.IsQuestDialogsEnabled())
+        {
+            DevTools.FastCompleteQuest(Quest);
+            return;
+        }
+
         var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
         model.Init(Quest, null, null);
         
@@ -240,7 +251,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         {
             return;
         }
-        
+
         checkmark.SetActive(enabled);
     }
 }
