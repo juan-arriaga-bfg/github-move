@@ -259,15 +259,19 @@ public class DevTools : MonoBehaviour
     public void OnDebug2Click()
     {
         Debug.Log("OnDebug2Click");
-        
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent();
-        charsList.Characters = new Dictionary<CharacterPosition, string>
+
+        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
         {
-            {CharacterPosition.LeftInner, UiCharacterData.CharSleepingBeauty},
-            {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
+            Characters = new Dictionary<CharacterPosition, string>
+            {
+                {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
+                {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
+            }
         };
 
-        string data = JsonConvert.SerializeObject(charsList);
+        var json = JsonConvert.SerializeObject(charsList);
+        
+        var scenario = GameDataService.Current.ConversationsManager.BuildScenario("123");
         int i = 0;
 
         //BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityScript.Steps;
@@ -22,13 +24,11 @@ public class ConversationsDataManager : IECSComponent, IDataManager
     
     public void Reload()
     {
-        LoadData("configs/quests/questStartConversations.data");
+        LoadData("configs/questStartConversations.data");
     }
     
     private void LoadData(string path)
     {
-        return;
-        
         var dataMapper = new ResourceConfigDataMapper<object>(path, NSConfigsSettings.Instance.IsUseEncryption);
         var json = dataMapper.GetDataAsJson();
         
@@ -60,7 +60,7 @@ public class ConversationsDataManager : IECSComponent, IDataManager
 
     public ConversationScenarioEntity BuildScenario(string id)
     {
-         JToken json;
+        JToken json;
         if (!cache.TryGetValue(id, out json))
         {
             Debug.LogError($"[ConversationsDataManager] => BuildScenario: config for id '{id}' not found");
@@ -69,27 +69,45 @@ public class ConversationsDataManager : IECSComponent, IDataManager
         
         ConversationScenarioEntity scenario = new ConversationScenarioEntity();
         
-        JToken participants = json["Participants"];
-        scenario.RegisterComponent(BuildCharsList(participants));
+        JToken charsJson = json["Characters"];
+        scenario.RegisterComponent(BuildCharsList(json));
 
-        return null;
+        
+        var bubbles = json["Bubbles"];
+        foreach (JToken bubbleJson in bubbles)
+        {
+            ConversationActionBubbleEntity bubble = BuildBubble(bubbleJson);
+            scenario.RegisterComponent(bubble);
+        }
+        
+        return scenario;
     }
 
     private ConversationScenarioCharsListComponent BuildCharsList(JToken json)
     {
         ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent();
-        charsList.Characters = new Dictionary<CharacterPosition, string>
+        
+        var deserializeSettings = new JsonSerializerSettings
         {
-            {CharacterPosition.LeftInner, UiCharacterData.CharSleepingBeauty},
-            // {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
+            TypeNameHandling = TypeNameHandling.None,
+            Formatting = Formatting.Indented,
+            MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
         };
 
-        return null;
+        // JsonConvert.PopulateObject(serializedObject, newDic, deserializeSettings);
+        // // json.PopulateObject(charsList, deserializeSettings);
+        //
+        return charsList;
     }
 
     private ConversationActionBubbleEntity BuildBubble(JToken json)
     {
-
-        return null;
+        ConversationActionBubbleEntity bubble = new ConversationActionBubbleEntity
+        {
+            BubbleView = R.UICharacterBubbleMessageView
+        };
+        json.PopulateObject(bubble);
+        
+        return bubble;
     }
 }
