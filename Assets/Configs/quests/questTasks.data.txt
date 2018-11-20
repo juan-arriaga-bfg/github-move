@@ -1,6 +1,6 @@
 ﻿[
   {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
+    "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "1_CreatePiece_PR_C4",
     "PieceUid": "PR_C4",
     "TargetValue": 1,
@@ -12,7 +12,7 @@
     }
   },
   {
-    "$type": "TaskClearFogEntity, Assembly-CSharp",
+    "$type": "TaskClearFogEntity, GameAssembly",
     "Id": "2_ClearFog",
     "TargetValue": 2,
     "ComponentsCache": {
@@ -24,7 +24,7 @@
     }
   },
   {
-    "$type": "TaskKillTreeEntity, Assembly-CSharp",
+    "$type": "TaskKillTreeEntity, GameAssembly",
     "Id": "3_KillTree",
     "TargetValue": 4,
     "ComponentsCache": {
@@ -36,7 +36,7 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
+    "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "4_CreatePiece_A2",
     "PieceUid": "A2",
     "TargetValue": 3,
@@ -48,7 +48,7 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
+    "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "5_CreatePieceA5",
     "PieceUid": "A5",
     "TargetValue": 1,
@@ -60,7 +60,7 @@
     }
   },
   {
-    "$type": "TaskClearFogEntity, Assembly-CSharp",
+    "$type": "TaskClearFogEntity, GameAssembly",
     "Id": "6_ClearFog",
     "TargetValue": 2,
     "ComponentsCache": {
@@ -72,7 +72,7 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
+    "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "7_CreatePiece_PR_A5",
     "PieceUid": "PR_A5",
     "TargetValue": 5,
@@ -84,7 +84,7 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
+    "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "8_CreatePiece_PR_B5",
     "PieceUid": "PR_B5",
     "TargetValue": 3,
@@ -96,7 +96,7 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
+    "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "9_CreatePiece_PR_C5",
     "PieceUid": "PR_C5",
     "TargetValue": 3,
@@ -108,7 +108,7 @@
     }
   },
   {
-    "$type": "TaskOpenChestEntity, Assembly-CSharp",
+    "$type": "TaskOpenChestEntity, GameAssembly",
     "Id": "10_OpenChest",
     "PieceUid": "CH1_A",
     "TargetValue": 1,
@@ -121,7 +121,7 @@
     }
   },
   {
-    "$type": "TaskUseWorkerEntity, Assembly-CSharp",
+    "$type": "TaskUseWorkerEntity, GameAssembly",
     "Id": "11_UseWorker",
     "TargetValue": 3,
     "ComponentsCache": {
@@ -133,7 +133,7 @@
     }
   },
   {
-    "$type": "TaskUseMineEntity, Assembly-CSharp",
+    "$type": "TaskUseMineEntity, GameAssembly",
     "Id": "12_UseMine",
     "TargetValue": 2,
     "ComponentsCache": {
@@ -145,7 +145,7 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
+    "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "13_CreatePiece_A6",
     "PieceUid": "A6",
     "TargetValue": 1,
@@ -157,7 +157,7 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
+    "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "14_CreatePiece_B3",
     "PieceUid": "B3",
     "TargetValue": 3,
@@ -169,7 +169,7 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, Assembly-CSharp",
+    "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "15_CreatePiece_B4",
     "PieceUid": "B4",
     "TargetValue": 2,
@@ -181,7 +181,7 @@
     }
   },
   {
-    "$type": "TaskCompleteOrderEntity, Assembly-CSharp",
+    "$type": "TaskCompleteOrderEntity, GameAssembly",
     "Id": "16_CompleteOrder",
     "PieceUid": "NPC_SleepingBeauty",
     "TargetValue": 2,
@@ -194,7 +194,7 @@
     }
   },
   {
-    "$type": "TaskKillFieldEntity, Assembly-CSharp",
+    "$type": "TaskKillFieldEntity, GameAssembly",
     "Id": "17_KillField",
     "TargetValue": 3,
     "ComponentsCache": {
