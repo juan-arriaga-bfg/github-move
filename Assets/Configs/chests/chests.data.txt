@@ -6,17 +6,37 @@
       "Amount": 1
     },
     "ProductionAmount": {
-      "Min": 3,
-      "Max": 5
+      "Min": 1,
+      "Max": 3
     },
-    "PieceAmount": 4,
+    "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": "A2",
+        "Uid": "Soft1",
         "Weight": 20
       },
       {
-        "Uid": "B2",
+        "Uid": "Boost_CR1",
+        "Weight": 20
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 20
+      },
+      {
+        "Uid": "PR_C5",
+        "Weight": 10
+      },
+      {
+        "Uid": "PR_A5",
+        "Weight": 10
+      },
+      {
+        "Uid": "PR_B5",
+        "Weight": 10
+      },
+      {
+        "Uid": "Soft2",
         "Weight": 10
       }
     ]
@@ -70,14 +90,34 @@
       "Amount": 20
     },
     "ProductionAmount": {
-      "Min": 3,
-      "Max": 4
+      "Min": 1,
+      "Max": 2
     },
-    "PieceAmount": 7,
+    "PieceAmount": 10,
     "PieceWeights": [
       {
         "Uid": "A2",
         "Weight": 10
+      },
+      {
+        "Uid": "PR_A5",
+        "Weight": 10,
+        "Override": true
+      },
+      {
+        "Uid": "PR_B5",
+        "Weight": 10,
+        "Override": true
+      },
+      {
+        "Uid": "PR_C5",
+        "Weight": 10,
+        "Override": true
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 10,
+        "Override": true
       },
       {
         "Uid": "A1",

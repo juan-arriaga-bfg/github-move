@@ -26,7 +26,7 @@
   {
     "$type": "TaskKillTreeEntity, GameAssembly",
     "Id": "3_KillTree",
-    "TargetValue": 4,
+    "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "OB1_A",
@@ -111,7 +111,7 @@
     "$type": "TaskOpenChestEntity, GameAssembly",
     "Id": "10_OpenChest",
     "PieceUid": "CH1_A",
-    "TargetValue": 1,
+    "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "CH1_A",
@@ -123,10 +123,10 @@
   {
     "$type": "TaskUseWorkerEntity, GameAssembly",
     "Id": "11_UseWorker",
-    "TargetValue": 3,
+    "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "Boost_WR",
+        "Ico": "NPC_Gnome",
         "Title": "Use workers",
         "Message": "Use workers"
       }
@@ -199,7 +199,7 @@
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "OB_PR_A",
+        "Ico": "OB_PR_B",
         "Title": "Clear dead fields",
         "Message": "Clear dead fields"
       }
