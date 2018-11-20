@@ -1,71 +1,63 @@
 ﻿[
   {
-    "StarterId": 123,
-    "Participants": [
+    "Id": 123,
+    "Characters": [
       {
-        "CharacterId": "SleepingBeauty",
-        "CharacterPosition": "LeftInner"
+        "0": "LeftInner"
       },
       {
-        "CharacterId": "GnomeWorker",
-        "CharacterPosition": "RightInner"
+        "0": "RightInner"
       }
     ],
     "Bubbles": [
       {
         "CharacterId": "SleepingBeauty",
-        "Emotion": "Normal",
-        "MessageId": "mess.1.asd"
+        "Emotion": "SleepingBeauty",
+        "MessageId": "Normal"
       },
       {
         "CharacterId": "GnomeWorker",
-        "Emotion": "Sad",
-        "MessageId": "mess.2.asd"
+        "Emotion": "GnomeWorker",
+        "MessageId": "Sad"
       },
       {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Sad",
-        "MessageId": "mess.3.asd"
+        "Emotion": "SleepingBeauty",
+        "MessageId": "Sad"
       },
       {
-        "CharacterId": "GnomeWorker",
-        "Emotion": "Normal",
-        "MessageId": "mess.4.asd"
+        "Emotion": "GnomeWorker",
+        "MessageId": "Normal"
       }
     ]
   },
   {
-    "StarterId": 124,
-    "Participants": [
+    "Id": 124,
+    "Characters": [
       {
-        "CharacterId": "PussInBoots",
-        "CharacterPosition": "LeftInner"
+        "0": "LeftInner"
       },
       {
-        "CharacterId": "Rapunzel",
-        "CharacterPosition": "RightInner"
+        "0": "RightInner"
       }
     ],
     "Bubbles": [
       {
-        "CharacterId": "Rapunzel",
-        "Emotion": "Thinking",
-        "MessageId": "mess.5.asd"
-      },
-      {
         "CharacterId": "PussInBoots",
-        "Emotion": "Thinking",
-        "MessageId": "mess.6.asd"
+        "Emotion": "Rapunzel",
+        "MessageId": "Thinking"
       },
       {
         "CharacterId": "Rapunzel",
-        "Emotion": "Sleep1",
-        "MessageId": "mess.7.asd"
+        "Emotion": "PussInBoots",
+        "MessageId": "Thinking"
       },
       {
-        "CharacterId": "PussInBoots",
-        "Emotion": "Sleep2",
-        "MessageId": "mess.8.asd"
+        "Emotion": "Rapunzel",
+        "MessageId": "Sleep1"
+      },
+      {
+        "Emotion": "PussInBoots",
+        "MessageId": "Sleep2"
       }
     ]
   }

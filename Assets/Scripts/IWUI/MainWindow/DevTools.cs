@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -259,8 +260,18 @@ public class DevTools : MonoBehaviour
     {
         Debug.Log("OnDebug2Click");
         
+        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent();
+        charsList.Characters = new Dictionary<CharacterPosition, string>
+        {
+            {CharacterPosition.LeftInner, UiCharacterData.CharSleepingBeauty},
+            {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
+        };
+
+        string data = JsonConvert.SerializeObject(charsList);
+        int i = 0;
+
         //BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
-        
+
 #if LEAKWATCHER
         GC.Collect();
         GC.WaitForPendingFinalizers();
