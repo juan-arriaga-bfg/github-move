@@ -186,7 +186,7 @@ public class IWTextMeshAnimation : MonoBehaviour
         // Why characterCount may != characterInfo.Length happens ?!
         while (textLabel.textInfo.characterCount != textLabel.textInfo.characterInfo.Length)
         {
-            Debug.LogError("textLabel.textInfo.characterCount != textLabel.textInfo.characterInfo.Length");
+            // Debug.LogError("textLabel.textInfo.characterCount != textLabel.textInfo.characterInfo.Length");
             yield return null;
         }
         
