@@ -56,9 +56,9 @@ public class UICharacterBubbleMessageViewController : UICharacterBubbleView, ITe
     {
         SetCharRelatedData(data);
 
-        SetSide(data.Side);    
+        SetSide(data.Side);
 
-        message.Text = data.Message;
+        message.Text = LocalizationService.Current.GetTextByUid(data.Message, data.Message);
 
         if (data.AllowTeleType)
         {

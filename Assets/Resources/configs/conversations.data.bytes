@@ -1,0 +1,77 @@
+[
+  {
+    "Id": 1,
+    "Characters": {
+      "LeftInner": "SleepingBeauty"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Sleep1",
+        "Message": "conversation.1.message1"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Sleep2",
+        "Message": "conversation.1.message2"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Sleep1",
+        "Message": "conversation.1.message3"
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "Characters": {
+      "LeftInner": "SleepingBeauty"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.2.message1"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.2.message2"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Thinking",
+        "Message": "conversation.2.message3"
+      }
+    ]
+  },
+  {
+    "Id": 3,
+    "Characters": {
+      "LeftInner": "SleepingBeauty",
+      "RightInner": "GnomeWorker"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Shocked",
+        "Message": "conversation.3.message1"
+      },
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.3.message2"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.3.message3"
+      },
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Happy",
+        "Message": "conversation.3.message4"
+      }
+    ]
+  }
+]

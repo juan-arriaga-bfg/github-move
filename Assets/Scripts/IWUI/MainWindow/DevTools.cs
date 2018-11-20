@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -259,18 +260,24 @@ public class DevTools : MonoBehaviour
     public void OnDebug2Click()
     {
         Debug.Log("OnDebug2Click");
-
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
-        {
-            Characters = new Dictionary<CharacterPosition, string>
-            {
-                {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
-                {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
-            }
-        };
-
-        var json = JsonConvert.SerializeObject(charsList);
-        
+        //
+        // ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        // {
+        //     Characters = new Dictionary<CharacterPosition, string>
+        //     {
+        //         {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
+        //         {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
+        //     }
+        // };
+        //
+        // var json = JsonConvert.SerializeObject(charsList);
+        // var charsListClone = JsonConvert.DeserializeObject<ConversationScenarioCharsListComponent>(json);
+        //
+        // var charsListClone2 = new ConversationScenarioCharsListComponent();
+        // JToken.Parse(json).PopulateObject(charsListClone2);
+        //
+        // return;
+        //
         var scenario = GameDataService.Current.ConversationsManager.BuildScenario("123");
         int i = 0;
 

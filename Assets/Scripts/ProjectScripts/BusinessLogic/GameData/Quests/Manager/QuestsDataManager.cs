@@ -379,6 +379,20 @@ public class QuestsDataManager : IECSComponent, IDataManager
 
         return null;
     }
+    
+    public QuestStarterEntity GetQuestStarterById(string id)
+    {
+        for (var i = 0; i < questStarters.Count; i++)
+        {
+            var starter = questStarters[i];
+            if (starter.Id == id)
+            {
+                return starter;
+            }
+        }
+
+        return null;
+    }
 
     private QuestEntity StartQuestById(string id, JToken saveData)
     {

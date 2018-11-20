@@ -24,7 +24,7 @@ public class ConversationsDataManager : IECSComponent, IDataManager
     
     public void Reload()
     {
-        LoadData("configs/questStartConversations.data");
+        LoadData("configs/conversations.data");
     }
     
     private void LoadData(string path)
@@ -68,17 +68,33 @@ public class ConversationsDataManager : IECSComponent, IDataManager
         }
         
         ConversationScenarioEntity scenario = new ConversationScenarioEntity();
-        
-        JToken charsJson = json["Characters"];
-        scenario.RegisterComponent(BuildCharsList(json));
 
+        var charsList = BuildCharsList(json);
+        scenario.RegisterComponent(charsList);
+
+        ConversationActionBubbleEntity lastBubble = null;
         
         var bubbles = json["Bubbles"];
         foreach (JToken bubbleJson in bubbles)
         {
             ConversationActionBubbleEntity bubble = BuildBubble(bubbleJson);
+            bubble.Side = charsList.GetCharacterSide(bubble.CharacterId);
             scenario.RegisterComponent(bubble);
+
+            lastBubble = bubble;
         }
+        
+        if (lastBubble == null)
+        {
+            Debug.LogError($"[ConversationsDataManager] => BuildScenario: No bubbles specified!");
+            return null;
+        }
+
+        var starter = GameDataService.Current.QuestsManager.GetQuestStarterById(id);
+        lastBubble.RegisterComponent(new ConversationActionPayloadShowQuestComponent
+        {
+            QuestIds = starter.QuestToStartIds
+        });
         
         return scenario;
     }
@@ -86,17 +102,16 @@ public class ConversationsDataManager : IECSComponent, IDataManager
     private ConversationScenarioCharsListComponent BuildCharsList(JToken json)
     {
         ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent();
+        // charsList.Characters = new Dictionary<CharacterPosition, string>
+        // {
+        //     {CharacterPosition.LeftInner, UiCharacterData.CharSleepingBeauty},
+        //     {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
+        //     {CharacterPosition.LeftOuter, UiCharacterData.CharRapunzel},
+        //     {CharacterPosition.RightOuter, UiCharacterData.CharPussInBoots},
+        // };
         
-        var deserializeSettings = new JsonSerializerSettings
-        {
-            TypeNameHandling = TypeNameHandling.None,
-            Formatting = Formatting.Indented,
-            MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
-        };
-
-        // JsonConvert.PopulateObject(serializedObject, newDic, deserializeSettings);
-        // // json.PopulateObject(charsList, deserializeSettings);
-        //
+        json.PopulateObject(charsList);
+        
         return charsList;
     }
 
@@ -106,6 +121,7 @@ public class ConversationsDataManager : IECSComponent, IDataManager
         {
             BubbleView = R.UICharacterBubbleMessageView
         };
+        
         json.PopulateObject(bubble);
         
         return bubble;

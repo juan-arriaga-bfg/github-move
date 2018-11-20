@@ -50,9 +50,12 @@ public class UIQuestStartWindowModel : IWWindowModel
     {
         switch (StarterId)
         {
-             case "1" : CreateStartScenario1(); break;
-             case "2" : CreateStartScenario2(); break;
-             case "3" : CreateStartScenario3(); break;
+             case "1" : 
+             case "2" : 
+             case "3" : 
+                 QuestStartScenario = QuestStartScenario = GameDataService.Current.ConversationsManager.BuildScenario(StarterId);
+                 break;
+             
              case "4" : CreateStartScenario4(); break;
              case "5" : CreateStartScenario5(); break;
              case "6" : CreateStartScenario6(); break;
@@ -339,116 +342,6 @@ public class UIQuestStartWindowModel : IWWindowModel
             UiCharacterData.CharGnomeWorker, 
             "Let's complete these buildings. There are many suitable resources nearby.",
             CharacterEmotion.Normal,
-            QuestsToStart.Select(e => e.Id).ToList()
-        ));
-    }
-
-    private void CreateStartScenario3()
-    {
-        QuestStartScenario = new ConversationScenarioEntity();
-        
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
-        {
-            Characters = new Dictionary<CharacterPosition, string>
-            {
-                {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
-                {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
-            }
-        };
-        
-        QuestStartScenario.RegisterComponent(charsList);
-
-        QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharSleepingBeauty, 
-            "Gnomes? What happened to our fairytale candy garden?",
-            CharacterEmotion.Shocked
-        ));
-        QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharGnomeWorker, 
-            "Not sure.. we were chopping down old trees and then this weird fog covered everything...",
-            CharacterEmotion.Normal
-        ));
-        
-        QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharGnomeWorker, 
-            "No worries, fog is gone and we'll be glad rebuild everything here, our savior!",
-            CharacterEmotion.Happy
-        ));
-        
-        QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharSleepingBeauty, 
-            "Sounds good! We can do this together!",
-            CharacterEmotion.Happy,
-            QuestsToStart.Select(e => e.Id).ToList()
-        ));
-    }
-
-    private void CreateStartScenario2()
-    {
-        QuestStartScenario = new ConversationScenarioEntity();
-        
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
-        {
-            Characters = new Dictionary<CharacterPosition, string>
-            {
-                {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
-                // {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
-            }
-        };
-        
-        QuestStartScenario.RegisterComponent(charsList);
-
-        QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharSleepingBeauty, 
-            "Oh, sorry, I almost forgot...",
-            CharacterEmotion.Normal
-        ));
-        
-        QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharSleepingBeauty, 
-            "Welcome to the Faitytale Kingdom! I'm Aurora, but some call me Sleeing Beauty. I'll be your guide on this magic journey.",
-            CharacterEmotion.Normal
-        ));
-
-        QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharSleepingBeauty, 
-            "Where did this annoying fog come from? It's ruining my garden! Let's see if we can remove it...",
-            CharacterEmotion.Thinking,
-            QuestsToStart.Select(e => e.Id).ToList()
-        ));
-    }
-
-    private void CreateStartScenario1()
-    {
-        QuestStartScenario = new ConversationScenarioEntity();
-        
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
-        {
-            Characters = new Dictionary<CharacterPosition, string>
-            {
-                {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
-                // {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
-            }
-        };
-        
-        QuestStartScenario.RegisterComponent(charsList);
-
-        QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharSleepingBeauty, 
-            "What's that noise? Who's here?",
-            CharacterEmotion.Sleep1
-        ));
-        
-        QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharSleepingBeauty, 
-            "Hey! A new guest, at last! I've been waiting for you for so long. Apparently I fell asleep.",
-            CharacterEmotion.Sleep2
-        ));
-
-        QuestStartScenario.RegisterComponent(CreateStartBubble(
-            UiCharacterData.CharSleepingBeauty, 
-            "Please wait for a while and we'll grow a candy tree when I get back.",
-            CharacterEmotion.Sleep1,
             QuestsToStart.Select(e => e.Id).ToList()
         ));
     }
