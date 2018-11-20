@@ -59,8 +59,7 @@
     "Id": 5,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "6_ClearFog",
-      "16_CompleteOrder"
+      "6_ClearFog"
     ],
     "Conditions": [
       {
@@ -209,6 +208,20 @@
         "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
         "Id": "QuestCompleted",
         "Value": "9_CreatePiece_PR_C5"
+      }
+    ]
+  },
+  {
+    "Id": 16,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "16_CompleteOrder"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "17_KillField"
       }
     ]
   }
