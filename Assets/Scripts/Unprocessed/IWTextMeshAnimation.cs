@@ -173,33 +173,38 @@ public class IWTextMeshAnimation : MonoBehaviour
         }
         
         textLabel.ForceMeshUpdate();
+        yield return new WaitForEndOfFrame();
+        
         var mesh = textLabel.mesh;
         
         Color[] colors = mesh.colors;
         Color[] defaultColors = mesh.colors;
         targetColors = colors;
+
         
-        yield return new WaitForEndOfFrame();
 
         int charCount = textLabel.textInfo.characterInfo.Length;//textLabel.textInfo.characterCount;
 
         // Why characterCount may != characterInfo.Length happens ?!
-        while (textLabel.textInfo.characterCount != textLabel.textInfo.characterInfo.Length)
-        {
-            // Debug.LogError("textLabel.textInfo.characterCount != textLabel.textInfo.characterInfo.Length");
-            yield return null;
-        }
+        // while (textLabel.textInfo.characterCount != textLabel.textInfo.characterInfo.Length)
+        // {
+        //     // Debug.LogError("textLabel.textInfo.characterCount != textLabel.textInfo.characterInfo.Length");
+        //     yield return null;
+        // }
         
         List<int> processedVertexIndex = new List<int>();
 
+        int targetVertexIndex = 0;
         for (int i = 0; i < charCount; i++)
         {
-            var charInfo = textLabel.textInfo.characterInfo[i];
-            int vertexIndex = charInfo.vertexIndex;
+            // var charInfo = textLabel.textInfo.characterInfo[i];
+            // int vertexIndex = charInfo.vertexIndex;
 
-            if (processedVertexIndex.Contains(vertexIndex)) continue;
+            // if (processedVertexIndex.Contains(vertexIndex)) continue;
 
-            processedVertexIndex.Add(vertexIndex);
+            processedVertexIndex.Add(targetVertexIndex);
+
+            targetVertexIndex += 4;
         }
 
         while (time <= duration)
@@ -215,10 +220,16 @@ public class IWTextMeshAnimation : MonoBehaviour
 
                 float targerAlpha = Mathf.Lerp(0f, 1f, (time - fromRange) / (toRange - fromRange));
 
-                targetColors[vertexIndex + 0] = new Color(defaultColors[vertexIndex + 0].r, defaultColors[vertexIndex + 0].g, defaultColors[vertexIndex + 0].b, targerAlpha);
-                targetColors[vertexIndex + 1] = new Color(defaultColors[vertexIndex + 1].r, defaultColors[vertexIndex + 1].g, defaultColors[vertexIndex + 1].b, targerAlpha);
-                targetColors[vertexIndex + 2] = new Color(defaultColors[vertexIndex + 2].r, defaultColors[vertexIndex + 2].g, defaultColors[vertexIndex + 2].b, targerAlpha);
-                targetColors[vertexIndex + 3] = new Color(defaultColors[vertexIndex + 3].r, defaultColors[vertexIndex + 3].g, defaultColors[vertexIndex + 3].b, targerAlpha);
+                if ((targetColors.Length > vertexIndex)
+                 && (targetColors.Length > vertexIndex + 1)
+                 && (targetColors.Length > vertexIndex + 2)
+                 && (targetColors.Length > vertexIndex + 3))
+                {
+                    targetColors[vertexIndex + 0] = new Color(defaultColors[vertexIndex + 0].r, defaultColors[vertexIndex + 0].g, defaultColors[vertexIndex + 0].b, targerAlpha);
+                    targetColors[vertexIndex + 1] = new Color(defaultColors[vertexIndex + 1].r, defaultColors[vertexIndex + 1].g, defaultColors[vertexIndex + 1].b, targerAlpha);
+                    targetColors[vertexIndex + 2] = new Color(defaultColors[vertexIndex + 2].r, defaultColors[vertexIndex + 2].g, defaultColors[vertexIndex + 2].b, targerAlpha);
+                    targetColors[vertexIndex + 3] = new Color(defaultColors[vertexIndex + 3].r, defaultColors[vertexIndex + 3].g, defaultColors[vertexIndex + 3].b, targerAlpha);
+                }
             }
 
             // mesh.colors = colors;
