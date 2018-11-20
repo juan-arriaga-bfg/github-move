@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+#if UNITY_EDITOR
+using UnityEngine;
 using System.Collections;
 
 namespace SimpleSpritePackerEditor
@@ -12,3 +13,4 @@ namespace SimpleSpritePackerEditor
 		public Vector2 pivot;
 	}
 }
+#endif

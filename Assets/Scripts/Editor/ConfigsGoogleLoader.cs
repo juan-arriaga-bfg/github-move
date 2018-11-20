@@ -1,4 +1,5 @@
-﻿using System;
+#if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -207,3 +208,4 @@ public class ConfigsGoogleLoader
         return string.Format("https://script.google.com/macros/s/AKfycbz82MTaf-dECcAPhCIveDy9R0OPApWfWUx6aLScGaWQKsIK6D4/exec?route={0}&{1}", route, prms);
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+#if UNITY_EDITOR
+using UnityEditor;
 using UnityEditor.SceneManagement;
 
 public class OpenSceneMenu : Editor
@@ -23,3 +24,5 @@ public class OpenSceneMenu : Editor
         }
     }
 }
+
+#endif
