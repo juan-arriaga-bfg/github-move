@@ -132,6 +132,9 @@ public class DevTools : MonoBehaviour
 
     public void OnDebug1Click()
     {
+        UIService.Get.ShowWindow(UIWindowType.NextLevelWindow);
+        return;
+        
         Debug.Log("OnDebug1Click");
         //
         // var skinDef = new Dictionary<string, string>

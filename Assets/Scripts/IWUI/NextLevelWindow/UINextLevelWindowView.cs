@@ -22,6 +22,7 @@ public class UINextLevelWindowView : UIGenericWindowView
     private TapToContinueTextViewController tapToContinue;
     
     private int tapCount;
+    private bool isClick;
     
     public override void OnViewShow()
     {
@@ -39,6 +40,8 @@ public class UINextLevelWindowView : UIGenericWindowView
         
         tapCount = 0;
         headerCanvas.alpha = 0;
+
+        isClick = true;
     }
     
     public override void AnimateShow()
@@ -46,7 +49,13 @@ public class UINextLevelWindowView : UIGenericWindowView
         base.AnimateShow();
         InitTapToContinue(1f);
     }
-    
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        isClick = false;
+    }
+
     public override void OnViewClose()
     {
         base.OnViewClose();
@@ -109,11 +118,16 @@ public class UINextLevelWindowView : UIGenericWindowView
         
         DOTween.Sequence()
             .InsertCallback(0.6f, () => headerObj.SetActive(true))
-            .InsertCallback(0.62f, () => headerCanvas.alpha = 1);
+            .InsertCallback(0.62f, () => headerCanvas.alpha = 1)
+            .InsertCallback(0.6f + 0.1f*recipes.Count, () => isClick = false);
     }
     
     public void OnClick()
     {
+//        if(isClick) return;
+//
+//        isClick = true;
+        
         switch (tapCount)
         {
             case 0:
