@@ -4,9 +4,11 @@ using UnityEngine.UI;
 
 public enum TimerViewSate
 {
+    Default,
     Normal,
     Hide,
-    Select
+    Select,
+    Free
 }
 
 public class BoardTimerView : UIBoardView, IBoardEventListener
@@ -23,6 +25,8 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     
     private TimerComponent timer;
     private bool isActiveHourglass;
+
+    private TimerViewSate timerState;
     
     protected override ViewType Id => ViewType.BoardTimer;
     
@@ -54,12 +58,18 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     
     public void SetState(TimerViewSate state, float duration = 0.2f)
     {
+        if(state == timerState || timerState == TimerViewSate.Free) return;
+        
+        timerState = state;
+        
+        var isShow = state == TimerViewSate.Select || state == TimerViewSate.Free;
+        
         group.DOFade(state == TimerViewSate.Hide ? 0.7f : 1, duration);
         
-        button.interactable = state == TimerViewSate.Select;
-        smallButton.SetActive(state == TimerViewSate.Select);
-        bigButton.SetActive(state == TimerViewSate.Select);
-        hourglass.SetActive(isActiveHourglass && state != TimerViewSate.Select);
+        button.interactable = isShow;
+        smallButton.SetActive(isShow);
+        bigButton.SetActive(isShow);
+        hourglass.SetActive(isActiveHourglass && !isShow);
     }
 
     public void SetHourglass(bool isActive)
@@ -79,6 +89,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
 
     public override void ResetViewOnDestroy()
     {
+        timerState = TimerViewSate.Default;
         Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
         timer.OnExecute -= UpdateView;
         base.ResetViewOnDestroy();
@@ -88,7 +99,13 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     {
         if(progressBar != null) progressBar.SetProgress(timer.GetProgress());
         label.Text = timer.CompleteTime.GetTimeLeftText();
-        if(smallButton.activeSelf) price.Text = timer.GetPrise().ToStringIcon(false);;
+        
+        if (timer.CompleteTime.GetTimeLeft().TotalSeconds <= GameDataService.Current.ConstantsManager.FreeTimeLimit)
+        {
+            SetState(TimerViewSate.Free);
+        }
+        
+        if(smallButton.activeSelf) price.Text = timerState == TimerViewSate.Free ? LocalizationService.Get("common.button.free", "Free") : timer.GetPrise().ToStringIcon(false);
     }
     
     public void OnBoardEvent(int code, object context)
@@ -109,6 +126,12 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     
     public void OnClick()
     {
+        if (timerState == TimerViewSate.Free)
+        {
+            timer?.Complete();
+            return;
+        }
+        
         timer?.FastComplete();
     }
 }
