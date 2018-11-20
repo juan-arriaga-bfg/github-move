@@ -53,7 +53,7 @@ public class BoardManipulatorComponent : ECSEntity,
     {
         return null;
     }
-
+    
     public virtual LockerComponent Locker => locker ?? (locker = GetComponent<LockerComponent>(LockerComponent.ComponentGuid));
 
     public override void OnRegisterEntity(ECSEntity entity)
@@ -288,7 +288,17 @@ public class BoardManipulatorComponent : ECSEntity,
                         {
                             if (cachedViewForDrag == null) return;
 
-                            cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, context.BoardDef.PieceLayer));
+                            var cachedViewForDragPiece = cachedViewForDrag as PieceBoardElementView;
+                            if (cachedViewForDragPiece != null && cachedViewForDragPiece.Piece != null)
+                            {
+                                // cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, context.BoardDef.PieceLayer));
+                                cachedViewForDragPiece.SyncRendererLayers(cachedViewForDragPiece.Piece.CachedPosition);
+                            }
+                            else
+                            {
+                                cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, context.BoardDef.PieceLayer));
+                            }
+                            
                             cachedViewForDrag = null;
                             cameraManipulator.CameraMove.UnLock(this);
                         })

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UIRemoverButtonViewController : IWUIWindowViewController, IPointerDownHandler, IBeginDragHandler, IPointerUpHandler, IDragHandler
+public class UIRemoverButtonViewController : IWUIWindowViewController, IPointerDownHandler
 {
     [SerializeField] private Image icon;
 
@@ -20,10 +20,8 @@ public class UIRemoverButtonViewController : IWUIWindowViewController, IPointerD
 
     [SerializeField] private Transform iconView;
 
-    private bool isDown = false;
+    private int cachedPointerId = -2;
 
-    private bool isDrag = false;
-    
     public override void OnViewShow(IWUIWindowView context)
     {
         base.OnViewShow(context);
@@ -72,53 +70,16 @@ public class UIRemoverButtonViewController : IWUIWindowViewController, IPointerD
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        isDown = true;
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
+        if (BoardService.Current.FirstBoard.BoardLogic.Remover.IsActive) return;
+        
         int pointerId = eventData.pointerId;
         if (Input.touchSupported == false)
         {
             pointerId = 0;
         }
 
+        cachedPointerId = pointerId;
         
         bool isReady = BoardService.Current.FirstBoard.BoardLogic.Remover.BeginRemover(pointerId);
-
-        if (isReady)
-        {
-            isDown = false;
-            isDrag = true;
-        }
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        if (isDown && BoardService.Current.FirstBoard.BoardLogic.Remover.IsActive == false)
-        {
-            var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
-
-            model.Image = "";
-        
-            model.Title = LocalizationService.Get("window.remover.hint.title",     "Shovel Hint");
-            model.Message = LocalizationService.Get("window.remover.hint.message", "Drag and drop shovel to the piece to remove it");
-            model.AcceptLabel = LocalizationService.Get("common.button.ok",  "Ok");
- 
-            model.OnAccept = () =>
-            {
-                
-            };
-
-            model.OnCancel = null;
-            
-            UIService.Get.ShowWindow(UIWindowType.MessageWindow);
-        }
-        isDown = false;
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        
     }
 }

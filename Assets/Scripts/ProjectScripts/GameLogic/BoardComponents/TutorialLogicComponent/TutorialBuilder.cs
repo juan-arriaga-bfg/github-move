@@ -133,8 +133,7 @@ public static class TutorialBuilder
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
                 
-                step.RegisterComponent(new RemoveTutorialAnimation{Target = new BoardPosition(19, 9, context.BoardDef.PieceLayer), AnimationType = TutorialAnimationType.Perform}, true);
-                step.RegisterComponent(new RemoveTutorialAnimation{Target = new BoardPosition(20, 10, context.BoardDef.PieceLayer), AnimationType = TutorialAnimationType.Perform}, true);
+                step.RegisterComponent(new RemoveTutorialAnimation{PieceId = PieceType.NPC_Gnome.Id, AnimationType = TutorialAnimationType.Perform}, true);
                 
                 break;
             }
@@ -186,13 +185,8 @@ public static class TutorialBuilder
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Hard}, true);
                 
-                step.RegisterComponent(new RemoveTutorialAnimation{Target = new BoardPosition(20, 13, context.BoardDef.PieceLayer), AnimationType = TutorialAnimationType.Perform}, true);
-                step.RegisterComponent(new AddTutorialAnimation
-                    {
-                        PieceId = PieceType.NPC_SleepingBeauty.Id,
-                        Targets = new List<BoardPosition> {new BoardPosition(20, 13, context.BoardDef.PieceLayer), new BoardPosition(20, 12, context.BoardDef.PieceLayer)},
-                        AnimationType = TutorialAnimationType.Complete
-                    }, true);
+                step.RegisterComponent(new RemoveTutorialAnimation{PieceId = PieceType.NPC_SleepingBeautyPlaid.Id, AnimationType = TutorialAnimationType.Perform}, true);
+                step.RegisterComponent(new AddTutorialAnimation{PieceId = PieceType.NPC_SleepingBeauty.Id, Target = new BoardPosition(20, 13, context.BoardDef.PieceLayer), AnimationType = TutorialAnimationType.Complete}, true);
                 
                 break;
             }

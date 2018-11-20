@@ -178,12 +178,15 @@ public class IWTextMeshAnimation : MonoBehaviour
         Color[] colors = mesh.colors;
         Color[] defaultColors = mesh.colors;
         targetColors = colors;
+        
+        yield return new WaitForEndOfFrame();
 
-        int charCount = textLabel.textInfo.characterCount;
+        int charCount = textLabel.textInfo.characterInfo.Length;//textLabel.textInfo.characterCount;
 
         // Why characterCount may != characterInfo.Length happens ?!
         while (textLabel.textInfo.characterCount != textLabel.textInfo.characterInfo.Length)
         {
+            Debug.LogError("textLabel.textInfo.characterCount != textLabel.textInfo.characterInfo.Length");
             yield return null;
         }
         

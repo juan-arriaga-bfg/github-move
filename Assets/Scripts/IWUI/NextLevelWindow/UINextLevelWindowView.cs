@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class UINextLevelWindowView : UIGenericWindowView
@@ -5,24 +7,38 @@ public class UINextLevelWindowView : UIGenericWindowView
     [SerializeField] private NSText title;
     [SerializeField] private NSText message;
     [SerializeField] private NSText rewards;
+    [SerializeField] private NSText header;
+    
+    [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private GameObject headerObj;
+    [SerializeField] private CanvasGroup headerCanvas;
     
     [SerializeField] private Transform tapToContinueAnchor;
     
-    [SerializeField] private IWTextMeshAnimation textMeshAnimation;
+    private int tapAnimationId = Animator.StringToHash("Tap");
+    
+    private readonly List<UIRecipeCard> cards = new List<UIRecipeCard>();
     
     private TapToContinueTextViewController tapToContinue;
+    
+    private int tapCount;
     
     public override void OnViewShow()
     {
         base.OnViewShow();
         
-        UINextLevelWindowModel windowModel = Model as UINextLevelWindowModel;
+        var windowModel = Model as UINextLevelWindowModel;
         
         title.Text = windowModel.Title;
         message.Text = windowModel.Mesage;
         rewards.Text = windowModel.Rewards;
+        header.Text = windowModel.Header;
         
-        textMeshAnimation.Animate();
+        headerObj.SetActive(false);
+        cardPrefab.SetActive(false);
+        
+        tapCount = 0;
+        headerCanvas.alpha = 0;
     }
     
     public override void AnimateShow()
@@ -30,7 +46,7 @@ public class UINextLevelWindowView : UIGenericWindowView
         base.AnimateShow();
         InitTapToContinue(1f);
     }
-
+    
     public override void OnViewClose()
     {
         base.OnViewClose();
@@ -68,8 +84,71 @@ public class UINextLevelWindowView : UIGenericWindowView
             tapToContinue.transform.SetParent(tapToContinueAnchor, false);
             tapToContinue.transform.localPosition = Vector3.zero;
         }
-
+        
         tapToContinue.Hide(false);
         tapToContinue.Show(true, delay);
+    }
+    
+    private void CreateCards()
+    {
+        var windowModel = Model as UINextLevelWindowModel;
+        var recipes = windowModel.Recipes;
+
+        for (var i = 0; i < recipes.Count; i++)
+        {
+            var recipe = recipes[i];
+            var card = UIService.Get.PoolContainer.Create<UIRecipeCard>(cardPrefab);
+            
+            card.gameObject.SetActive(true);
+            card.transform.SetParent(cardPrefab.transform.parent, false);
+            card.CachedTransform.SetAsLastSibling();
+            card.Init(recipe.Uid, LocalizationService.Get($"order.name.{recipe.Uid}", $"{recipe.Uid}"));
+            card.AddAnimation(0.6f + 0.1f*i);
+            cards.Add(card);
+        }
+        
+        DOTween.Sequence()
+            .InsertCallback(0.6f, () => headerObj.SetActive(true))
+            .InsertCallback(0.62f, () => headerCanvas.alpha = 1);
+    }
+    
+    public void OnClick()
+    {
+        switch (tapCount)
+        {
+            case 0:
+                for (var i = 0; i < viewAnimators.Count; i++)
+                {
+                    viewAnimators[i].SetTrigger(tapAnimationId);
+                }
+                
+                var windowModel = Model as UINextLevelWindowModel;
+                var recipes = windowModel.Recipes;
+
+                if (recipes.Count == 0)
+                {
+                    Controller.CloseCurrentWindow();
+                    return;
+                }
+                
+                CreateCards();
+                break;
+            case 1:
+                Controller.CloseCurrentWindow();
+                
+                foreach (var card in cards)
+                {
+                    card.RemoveAnimation(0, () => UIService.Get.PoolContainer.Return(card.gameObject));
+                }
+        
+                cards.Clear();
+
+                headerCanvas.DOFade(0, 0.2f).OnComplete(() => headerObj.SetActive(false));
+                break;
+            default:
+                return;
+        }
+
+        tapCount++;
     }
 }

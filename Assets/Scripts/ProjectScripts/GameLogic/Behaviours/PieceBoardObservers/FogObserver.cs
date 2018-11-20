@@ -160,6 +160,12 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             lockView.Change(false);
             viewDef.RemoveView(ViewType.Lock);
             lockView = null;
+
+            var pos = Def.GetCenter();
+
+            pos.Z = 4;
+            
+            ParticleView.Show(R.FogExplosionParticleSystem, pos);
         }
         
         bubble = viewDef.AddView(ViewType.Bubble) as BubbleView;

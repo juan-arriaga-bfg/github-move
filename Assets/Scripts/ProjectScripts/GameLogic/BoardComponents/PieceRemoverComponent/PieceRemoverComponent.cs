@@ -103,20 +103,23 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         
         this.cachedPointerId = pointerId;
         
+        return true;
+    }
+
+    protected virtual void BeginRemoverInternal()
+    {
+        isActive = true;
+        
         cachedRemoverView = context.Context.RendererContext.CreateBoardElement<PieceBoardElementView>((int) ViewType.PieceRemover);
         cachedRemoverView.Init(context.Context.RendererContext);
         cachedRemoverView.SyncRendererLayers(new BoardPosition(0, 0, 100));
-
+        
         ToggleFilterPieces(true);
-
-        isActive = true;
 
         if (OnBeginRemoverEvent != null)
         {
             OnBeginRemoverEvent();
         }
-
-        return true;
     }
     
     protected virtual void EndRemover()
@@ -161,37 +164,46 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
 
     protected virtual bool TryCollapsePieceAt(BoardPosition boardPosition)
     {
-        var isValid = IsValidPoint(boardPosition);
-
-        if (isValid == false)
+        if (IsActive == false)
         {
+            var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+            model.Image = "";
+            model.Title = LocalizationService.Get("window.remover.hint.title",     "Shovel Hint");
+            model.Message = LocalizationService.Get("window.remover.hint.message", "Drag and drop shovel to the piece to remove it");
+            model.AcceptLabel = LocalizationService.Get("common.button.ok",        "Ok");
+ 
+            model.OnAccept = () =>{};
+
+            model.OnCancel = null;
+            
+            UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+            
             return false;
         }
         
-        var pieceEntity = context.GetPieceAt(boardPosition);
-        
-        var model = UIService.Get.GetCachedModel<UIConfirmRemoverMessageWindowModel>(UIWindowType.ConfirmRemoverMessageWindow);
+        var isValid = IsValidPoint(boardPosition);
 
-        model.Image = PieceType.Parse(pieceEntity.PieceType);
-        
-        model.Title = LocalizationService.Get("window.remove.title","Remove");
-        model.Message = LocalizationService.Get("window.remove.message", "Are you sure that you want to remove the figure from the field?");
-        model.CancelLabel = LocalizationService.Get("common.button.yes", "Yes");
-        model.AcceptLabel = LocalizationService.Get("common.button.no", "No");
-        
-        model.OnAccept = () =>
+        if (isValid)
         {
-            EndRemover();
-        };
-        
-        model.OnCancel = () =>
-        {
-            Confirm(boardPosition);
-        };
+            var pieceEntity = context.GetPieceAt(boardPosition);
 
-        UIService.Get.ShowWindow(UIWindowType.ConfirmRemoverMessageWindow);
+            var model = UIService.Get.GetCachedModel<UIConfirmRemoverMessageWindowModel>(UIWindowType.ConfirmRemoverMessageWindow);
 
-        return true;
+            model.Image = PieceType.Parse(pieceEntity.PieceType);
+            model.Title = LocalizationService.Get("window.remove.title",     "Remove");
+            model.Message = LocalizationService.Get("window.remove.message", "Are you sure that you want to remove the figure from the field?");
+            model.CancelLabel = LocalizationService.Get("common.button.yes", "Yes");
+            model.AcceptLabel = LocalizationService.Get("common.button.no",  "No");
+
+            model.OnAccept = () => { EndRemover(); };
+
+            model.OnCancel = () => { Confirm(boardPosition); };
+
+            UIService.Get.ShowWindow(UIWindowType.ConfirmRemoverMessageWindow);
+            return true;
+        }
+
+        return false;
     }
 
     protected virtual void Confirm(BoardPosition position)
@@ -231,8 +243,6 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
 
     public void Execute()
     {
-        if (cachedRemoverView == null) return;
-
         int touchCount = LeanTouch.Fingers.Count; // Input.touchCount;
         LeanFinger touchDef = null;
         for (int i = 0; i < touchCount; i++)
@@ -242,10 +252,6 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
             if (touch.Index == cachedPointerId)
             {
                 touchDef = touch;
-            }
-            else
-            {
-                Debug.LogWarning($"Finger => id:{touch.Index}");
             }
         }
         
@@ -262,28 +268,37 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         }
         else
         {
-            Vector3 screenPosition = new Vector3(touchDef.ScreenPosition.x, touchDef.ScreenPosition.y, context.Context.BoardDef.ViewCamera.transform.position.z * -1);
-            var targetPosition = context.Context.BoardDef.ViewCamera.ScreenToWorldPoint(screenPosition);
-
-            lastRemoverWorldPosition = targetPosition;
-
-            var normalPosition = new Vector3(targetPosition.x, targetPosition.y, -context.Context.BoardDef.ViewCamera.transform.localPosition.z);
-            var boardPosition = context.Context.BoardDef.GetSectorPosition(targetPosition);
-            boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, context.Context.BoardDef.PieceLayer);
-            
-            if (boardPosition.Equals(lastRemoverBoardPosition) == false)
+            if (IsActive)
             {
-                lastRemoverBoardPosition = boardPosition;
-                var targetCellPosition = context.Context.BoardDef.GetWorldPosition(boardPosition.X, boardPosition.Y);
+                Vector3 screenPosition = new Vector3(touchDef.ScreenPosition.x, touchDef.ScreenPosition.y, context.Context.BoardDef.ViewCamera.transform.position.z * -1);
+                var targetPosition = context.Context.BoardDef.ViewCamera.ScreenToWorldPoint(screenPosition);
 
-                cachedRemoverView.CachedTransform.position = targetCellPosition;
-                cachedRemoverView.CachedTransform.localPosition = new Vector3(cachedRemoverView.CachedTransform.localPosition.x, cachedRemoverView.CachedTransform.localPosition.y, 0f);
+                lastRemoverWorldPosition = targetPosition;
 
-                bool isValidPoint = IsValidPoint(boardPosition);
-                cachedRemoverView.ToggleSelection(true, isValidPoint);
+                var normalPosition = new Vector3(targetPosition.x, targetPosition.y, -context.Context.BoardDef.ViewCamera.transform.localPosition.z);
+                var boardPosition = context.Context.BoardDef.GetSectorPosition(targetPosition);
+                boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, context.Context.BoardDef.PieceLayer);
+
+                if (boardPosition.Equals(lastRemoverBoardPosition) == false)
+                {
+                    lastRemoverBoardPosition = boardPosition;
+                    var targetCellPosition = context.Context.BoardDef.GetWorldPosition(boardPosition.X, boardPosition.Y);
+
+                    cachedRemoverView.CachedTransform.position = targetCellPosition;
+                    cachedRemoverView.CachedTransform.localPosition = new Vector3(cachedRemoverView.CachedTransform.localPosition.x, cachedRemoverView.CachedTransform.localPosition.y, 0f);
+
+                    bool isValidPoint = IsValidPoint(boardPosition);
+                    cachedRemoverView.ToggleSelection(true, isValidPoint);
+                }
+            }
+            else
+            {
+                if (touchDef.SwipeScaledDelta.sqrMagnitude > 25f)
+                {
+                    BeginRemoverInternal();
+                }
             }
         }
-
     }
 
     public object GetDependency()

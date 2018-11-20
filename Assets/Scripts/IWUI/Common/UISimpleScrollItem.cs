@@ -9,9 +9,11 @@ public class UISimpleScrollItem : IWUIWindowViewController
     [SerializeField] protected NSText label;
     
     [SerializeField] private Transform body;
-    [SerializeField] private CanvasGroup canvas;
-
+    [SerializeField] protected CanvasGroup canvas;
+    
     private Transform iconObj;
+    
+    public CanvasGroup GetCanvasGroup() { return canvas;}
 
     public float Alpha
     {
@@ -21,7 +23,7 @@ public class UISimpleScrollItem : IWUIWindowViewController
         }
     }
     
-    public void Init(string id, string text)
+    public virtual void Init(string id, string text)
     {
         Alpha = 1;
         
