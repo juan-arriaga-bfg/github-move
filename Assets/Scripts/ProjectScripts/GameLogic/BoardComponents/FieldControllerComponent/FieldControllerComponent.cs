@@ -86,6 +86,7 @@ public class FieldControllerComponent : IECSComponent
                 
                 PathfindLockObserver.LoadPathfindLock();
                 
+                DevTools.UpdateFogSectorsDebug();
             }
         });
     }

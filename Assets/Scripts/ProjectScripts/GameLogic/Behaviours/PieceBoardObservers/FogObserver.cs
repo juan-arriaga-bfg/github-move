@@ -228,7 +228,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         CurrencyHellper.Purchase(Currency.Fog.Name, 1, Def.Condition, success =>
         {
             if (success == false) return;
-			
+			            
             Context.Context.HintCooldown.RemoweView(bubble);
 
             bubble.OnHide = () =>
@@ -236,7 +236,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                 piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
                 {
                     To = piece.CachedPosition,
-                    Positions = new List<BoardPosition> {piece.CachedPosition}
+                    Positions = new List<BoardPosition> {piece.CachedPosition},
+                    OnComplete = () =>
+                    {
+                        DevTools.UpdateFogSectorsDebug();
+                    }
                 });
             };
             

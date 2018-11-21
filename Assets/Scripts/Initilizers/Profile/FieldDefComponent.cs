@@ -119,7 +119,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		
 		pieces.Sort((a, b) => -a.Id.CompareTo(b.Id));
 
-		completeFogs = PositionsToString(GameDataService.Current.FogsManager.Completed);
+		completeFogs = PositionsToString(GameDataService.Current.FogsManager.ClearedFogPositions.Keys.ToList());
 		movedMines = PositionsToString(GameDataService.Current.MinesManager.Moved);
 
 		if (GameDataService.Current == null) return;
