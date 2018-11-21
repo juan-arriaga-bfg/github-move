@@ -113,7 +113,7 @@ namespace UT
                 if (filePath.Contains(".meta")) continue;
 
                 var fileName = Path.GetFileNameWithoutExtension(filePath);
-                var absoluteFilePath = Path.Combine(Application.dataPath, filePath.Replace($"Assets{Path.DirectorySeparatorChar}", ""));
+                var absoluteFilePath = Path.Combine(Application.dataPath, filePath.Replace($"Assets/", ""));
 
                 // skip directory
                 if (File.GetAttributes(absoluteFilePath).HasFlag(FileAttributes.Directory))
