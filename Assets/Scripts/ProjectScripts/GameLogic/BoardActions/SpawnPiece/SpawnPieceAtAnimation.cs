@@ -14,6 +14,15 @@ public class SpawnPieceAtAnimation : BoardAnimation
         {
             Debug.LogError($"[SpawnPieceAtAnimation] => Animate: Can't create piece with id {CreatedPiece.PieceType} at {At}");
         }
+
+        var def = AnimationDataManager.GetDefinition(CreatedPiece.PieceType);
+        if (def != null && string.IsNullOrEmpty(def.OnSpawn) == false)
+        {
+            var animView = context.CreateBoardElementAt<AnimationView>(def.OnSpawn, At);
+            animView.OnComplete = () => CompleteAnimation(context);
+            animView.Play(boardElement);
+            return;
+        }
         
         boardElement.CachedTransform.localScale = Vector3.zero;
         
