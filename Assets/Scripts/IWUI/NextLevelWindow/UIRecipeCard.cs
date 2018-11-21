@@ -22,7 +22,7 @@ public class UIRecipeCard : UISimpleScrollItem
     public void RemoveAnimation(float delay = 0, Action onComplete = null)
     {
         DOTween.Kill(this);
-
+        
         var speed = ANIMATION_TIME * 0.5f / canvas.alpha;
         var sequence = DOTween.Sequence().SetId(this);
         

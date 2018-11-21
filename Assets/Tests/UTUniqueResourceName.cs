@@ -2,37 +2,42 @@
 using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
 using UnityEditor;
 
-public class UTUniqueResourceName {
+namespace UT
+{
+    public class UTUniqueResourceName
+    {
+        private List<string> pathToCheck = new List<string> {"Assets/Content/ContentResources"};
+        private List<string> ignoredFileNames = new List<string> { };
 
-    [Test]
-    public void UTUniqueResourceNameSimplePasses() {
-        // Use the Assert class to test conditions.
-        // var scriptsGuids = AssetDatabase.FindAssets("", new string[]{});
-        // var filteredScriptPath = new List<string>();
-        // var filteredScriptAbsolutePath = new List<string>();
-        // for (int i = 0; i < scriptsGuids.Length; i++)
-        // {
-        //     var scriptGuid = scriptsGuids[i];
-        //     var scriptPath = AssetDatabase.GUIDToAssetPath(scriptGuid);
-        //     if ((scriptPath.Contains($"{Path.DirectorySeparatorChar}Editor{Path.DirectorySeparatorChar}")) && scriptPath.Contains(".cs"))
-        //     {
-        //         filteredScriptPath.Add(scriptPath);
-        //         filteredScriptAbsolutePath.Add(Path.Combine(Application.dataPath, scriptPath.Replace($"Assets{Path.DirectorySeparatorChar}", "")));
-        //         
-        //     }
-        // }
-        //
-        // filteredScriptAbsolutePath.ForEach((path) => { Debug.LogWarning($"{path}");});
-    }
+        [Test]
+        public void UTUniqueResourceNameSimplePasses()
+        {
+            var dublicatedFiles = AssetsUsageFinderUtils.GetDublicatedFileNames(pathToCheck, ignoredFileNames, "");
 
-    // A UnityTest behaves like a coroutine in PlayMode
-    // and allows you to yield null to skip a frame in EditMode
-    [UnityTest]
-    public IEnumerator UTUniqueResourceNameWithEnumeratorPasses() {
-        // Use the Assert class to test conditions.
-        // yield to skip a frame
-        yield return null;
+            if (dublicatedFiles.Count > 0)
+            {
+                var message = new StringBuilder();
+                foreach (var dublicatedFile in dublicatedFiles)
+                {
+                    for (int i = 0; i < dublicatedFile.Value.Count; i++)
+                    {
+                        var path = dublicatedFile.Value[i];
+                        message.AppendLine($"{dublicatedFile.Key} => {path}");
+                    }
+                }
+
+                Assert.Fail(message.ToString());
+            }
+            else
+            {
+                Assert.Pass();
+            }
+        }
     }
 }

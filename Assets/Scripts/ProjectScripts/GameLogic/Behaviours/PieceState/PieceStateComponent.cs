@@ -38,7 +38,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
                     OnWaiting();
                     break;
                 case BuildingState.InProgress:
-                    OnStart();
+                    if (Timer.IsStarted == false) Timer.Start();
                     break;
             }
             
@@ -65,12 +65,15 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         var def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType + 1);
         
         Timer = new TimerComponent{Delay = def.Delay};
-        Timer.OnComplete += OnComplete;
+        
         RegisterComponent(Timer);
     }
     
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
+        Timer.OnComplete += OnComplete;
+        Timer.OnStart += OnStart;
+        
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
         var item = save?.GetBuildingSave(position);
 
@@ -114,6 +117,10 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
 
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
+        if(Timer == null) return;
+        
+        Timer.OnComplete -= OnComplete;
+        Timer.OnStart -= OnStart;
     }
 
     private void OnWaiting()
@@ -162,8 +169,6 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
         view.SetTimer(Timer);
         view.Change(true);
         view.SetHourglass(true);
-        
-        if (Timer.IsStarted == false) Timer.Start();
     }
     
     private void OnComplete()
