@@ -37,7 +37,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
     /// </summary>
     public Action<QuestEntity, TaskEntity> OnQuestStateChanged;
     
-    private List<QuestStarterEntity> questStarters;
+    public List<QuestStarterEntity> QuestStarters;
 
     /// <summary>
     /// Flag that indicates that all active quests and tasks are listening to BoardEvents
@@ -65,7 +65,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
     public void Reload()
     {
         OnActiveQuestsListChanged = null;
-        questStarters = null;
+        QuestStarters = null;
 
         cache = new Dictionary<Type, Dictionary<string, JToken>>();
         
@@ -73,7 +73,10 @@ public class QuestsDataManager : IECSComponent, IDataManager
         LoadData<QuestEntity>                 ("configs/quests.data");
         LoadData<TaskEntity>                  ("configs/questTasks.data");
 
-        LoadProfile();
+        if (Application.isPlaying)// Check for UT
+        {
+            LoadProfile();
+        }
     }
 
     private void LoadProfile()
@@ -147,15 +150,15 @@ public class QuestsDataManager : IECSComponent, IDataManager
         return questDatas;
     }
        
-    public void CreateStarters()
+    public bool CreateStarters()
     {
-        questStarters = new List<QuestStarterEntity>();
+        QuestStarters = new List<QuestStarterEntity>();
         
         Dictionary<string, JToken> starterConfigs;
         if (!cache.TryGetValue(typeof(QuestStarterEntity), out starterConfigs))
         {
             Debug.LogError($"[QuestsDataManager] => CreateStarters: Configs cache for type '{typeof(QuestStarterEntity)}' not found!");
-            return;
+            return false;
         }
         
         foreach (var config in starterConfigs.Values)
@@ -167,8 +170,10 @@ public class QuestsDataManager : IECSComponent, IDataManager
                 starter.RegisterComponent(condition);
             }
             
-            questStarters.Add(starter);
+            QuestStarters.Add(starter);
         }
+
+        return true;
     }
     
 #endregion
@@ -213,8 +218,8 @@ public class QuestsDataManager : IECSComponent, IDataManager
         
         return item;
     }
-    
-    private TaskEntity InstantiateTask(string id)
+
+    public TaskEntity InstantiateTask(string id)
     {
         return InstantiateById<TaskEntity>(id);
     }
@@ -222,9 +227,18 @@ public class QuestsDataManager : IECSComponent, IDataManager
     public QuestEntity InstantiateQuest(string id)
     {
         var quest = InstantiateById<QuestEntity>(id);
+        if (quest == null)
+        {
+            return null;
+        }
+        
         foreach (var taskDef in quest.TaskDefs)
         {
             var task = InstantiateTask(taskDef.TaskId);
+            if (task == null)
+            {
+                continue;
+            }
             task.Order = taskDef.Order;
             
             quest.RegisterComponent(task);
@@ -336,7 +350,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
     {
         starterId = null;
         
-        if (questStarters == null)
+        if (QuestStarters == null)
         {
             Debug.LogError($"[QuestsDataManager] => CheckConditions() is called when questStarters list is empty");
             return null;
@@ -349,9 +363,9 @@ public class QuestsDataManager : IECSComponent, IDataManager
         sw.Start();
 #endif        
 
-        for (var i = 0; i < questStarters.Count; i++)
+        for (var i = 0; i < QuestStarters.Count; i++)
         {
-            var starter = questStarters[i];
+            var starter = QuestStarters[i];
             if (starter.Check())
             {
                 starterId = starter.Id;
@@ -382,9 +396,9 @@ public class QuestsDataManager : IECSComponent, IDataManager
     
     public QuestStarterEntity GetQuestStarterById(string id)
     {
-        for (var i = 0; i < questStarters.Count; i++)
+        for (var i = 0; i < QuestStarters.Count; i++)
         {
-            var starter = questStarters[i];
+            var starter = QuestStarters[i];
             if (starter.Id == id)
             {
                 return starter;
