@@ -473,4 +473,9 @@ public class QuestsDataManager : IECSComponent, IDataManager
     {
         OnQuestStateChanged?.Invoke(quest, task);
     }
+
+    public bool IsQuestDefined(string id)
+    {
+        return cache[typeof(QuestEntity)].ContainsKey(id);
+    }
 }

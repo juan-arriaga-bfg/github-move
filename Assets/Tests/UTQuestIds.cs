@@ -18,6 +18,7 @@ namespace UT
             questsDataManager.Reload();
             if (!questsDataManager.CreateStarters())
             {
+                LogAssert.ignoreFailingMessages = false;
                 Assert.Fail("Can't create starters");
                 return;
             }
@@ -83,6 +84,8 @@ namespace UT
             //     sb.AppendLine($"Only {processedCount} items used but {cacheCount} defined. Please ensure that all quests added to starters and all tasks added to quests."); 
             // }
 
+            LogAssert.ignoreFailingMessages = false;
+            
             var message = sb.ToString();
             if (string.IsNullOrEmpty(message))
             {

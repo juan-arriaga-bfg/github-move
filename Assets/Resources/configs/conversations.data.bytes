@@ -1,79 +1,76 @@
 [
   {
     "Id": 1,
-    "purpose": "LeftInner",
     "ConversationCharacters": {
-      "SleepingBeauty": "SleepingBeauty"
+      "LeftInner": "SleepingBeauty"
     },
     "Bubbles": [
       {
-        "CharacterId": "Sleep1",
-        "Emotion": "conversation.1.message1",
-        "MessageId": "What's that noise? Who's here?"
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Sleep1",
+        "Message": "conversation.1.message1"
       },
       {
-        "CharacterId": "Sleep2",
-        "Emotion": "conversation.1.message2",
-        "MessageId": "Hey! A new guest, at last! I've been waiting for you for so long. Apparently I fell asleep."
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Sleep2",
+        "Message": "conversation.1.message2"
       },
       {
-        "CharacterId": "Sleep1",
-        "Emotion": "conversation.1.message3",
-        "MessageId": "Please wait for a while and we'll grow a candy tree when I get back."
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Sleep1",
+        "Message": "conversation.1.message3"
       }
     ]
   },
   {
     "Id": 2,
-    "purpose": "LeftInner",
     "ConversationCharacters": {
-      "SleepingBeauty": "SleepingBeauty"
+      "LeftInner": "SleepingBeauty"
     },
     "Bubbles": [
       {
-        "CharacterId": "Normal",
-        "Emotion": "conversation.2.message1",
-        "MessageId": "Oh, sorry, I almost forgot..."
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.2.message1"
       },
       {
-        "CharacterId": "Normal",
-        "Emotion": "conversation.2.message2",
-        "MessageId": "Welcome to the Faitytale Kingdom! I'm Aurora, but some call me Sleeing Beauty. I'll be your guide on this magic journey."
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.2.message2"
       },
       {
-        "CharacterId": "Thinking",
-        "Emotion": "conversation.2.message3",
-        "MessageId": "Where did this annoying fog come from? It's ruining my garden! Let's see if we can remove it..."
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Thinking",
+        "Message": "conversation.2.message3"
       }
     ]
   },
   {
     "Id": 3,
-    "purpose": "LeftInner",
     "ConversationCharacters": {
-      "SleepingBeauty": "SleepingBeauty",
-      "GnomeWorker": "GnomeWorker"
+      "LeftInner": "SleepingBeauty",
+      "RightInner": "GnomeWorker"
     },
     "Bubbles": [
       {
-        "CharacterId": "Shocked",
-        "Emotion": "conversation.3.message1",
-        "MessageId": "Gnomes? What happened to our fairytale candy garden?"
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Shocked",
+        "Message": "conversation.3.message1"
       },
       {
-        "CharacterId": "Normal",
-        "Emotion": "conversation.3.message2",
-        "MessageId": "Not sure.. we were chopping down old trees and then this weird fog covered everything..."
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.3.message2"
       },
       {
-        "CharacterId": "Happy",
-        "Emotion": "conversation.3.message3",
-        "MessageId": "No worries, fog is gone and we'll be glad rebuild everything here, our savior!"
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.3.message3"
       },
       {
-        "CharacterId": "Happy",
-        "Emotion": "conversation.3.message4",
-        "MessageId": "Sounds good! We can do this together!"
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Happy",
+        "Message": "conversation.3.message4"
       }
     ]
   },
@@ -81,9 +78,9 @@
     "Id": "1_CreatePiece_PR_C4",
     "Bubbles": [
       {
-        "CharacterId": "Happy",
-        "Emotion": "conversation.4.message1",
-        "MessageId": "I've never seen anyone make it so fast. You're talented!"
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.4.message1"
       }
     ]
   },
@@ -91,9 +88,9 @@
     "Id": "3_KillTree",
     "Bubbles": [
       {
-        "CharacterId": "Normal",
-        "Emotion": "conversation.5.message1",
-        "MessageId": "There are much better without those rusted trees."
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.5.message1"
       }
     ]
   },
@@ -101,9 +98,9 @@
     "Id": "2_ClearFog",
     "Bubbles": [
       {
-        "CharacterId": "Happy",
-        "Emotion": "conversation.6.message1",
-        "MessageId": "That fog is everywhere, but it don't stop us!"
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.6.message1"
       }
     ]
   }

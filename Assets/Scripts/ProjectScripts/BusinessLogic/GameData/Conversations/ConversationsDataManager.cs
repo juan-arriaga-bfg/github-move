@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization.Formatters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -8,6 +9,14 @@ using UnityScript.Steps;
 
 public class ConversationsDataManager : IECSComponent, IDataManager
 {
+    private enum ConversationPurpose
+    {
+        Unknown,
+        QuestStart,
+        QuestFinish,
+        Other
+    }
+    
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
 
@@ -66,64 +75,140 @@ public class ConversationsDataManager : IECSComponent, IDataManager
             Debug.LogError($"[ConversationsDataManager] => BuildScenario: config for id '{id}' not found");
             return null;
         }
+
+        ConversationPurpose purpose = DetectPurpose(id);
         
         ConversationScenarioEntity scenario = new ConversationScenarioEntity();
 
-        var charsList = BuildCharsList(json);
-        scenario.RegisterComponent(charsList);
-
-        ConversationActionBubbleEntity lastBubble = null;
+        List<ConversationActionBubbleEntity> bubbles = new List<ConversationActionBubbleEntity>();
         
-        var bubbles = json["Bubbles"];
-        foreach (JToken bubbleJson in bubbles)
+        var bubblesJson = json["Bubbles"];
+        foreach (JToken bubbleJson in bubblesJson)
         {
-            ConversationActionBubbleEntity bubble = BuildBubble(bubbleJson);
-            bubble.Side = charsList.GetCharacterSide(bubble.CharacterId);
+            ConversationActionBubbleEntity bubble = BuildBubble(bubbleJson, purpose, id);
             scenario.RegisterComponent(bubble);
 
-            lastBubble = bubble;
+            bubbles.Add(bubble);
         }
         
-        if (lastBubble == null)
+        if (bubbles.Count == 0)
         {
             Debug.LogError($"[ConversationsDataManager] => BuildScenario: No bubbles specified!");
             return null;
         }
 
-        var starter = GameDataService.Current.QuestsManager.GetQuestStarterById(id);
-        lastBubble.RegisterComponent(new ConversationActionPayloadShowQuestComponent
+        // Chars list
+        var charsList = BuildCharsList(json, bubbles, purpose);
+        scenario.RegisterComponent(charsList);
+
+        // Side and quest ids
+        for (var i = 0; i < bubbles.Count; i++)
         {
-            QuestIds = starter.QuestToStartIds
-        });
+            var bubble = bubbles[i];
+            bubble.Side = charsList.GetCharacterSide(bubble.CharacterId);
+
+            if (purpose == ConversationPurpose.QuestStart && i == bubbles.Count - 1)
+            {
+                var starter = GameDataService.Current.QuestsManager.GetQuestStarterById(id);
+                if (starter == null)
+                {
+                    Debug.LogError($"[ConversationsDataManager] => BuildScenario: starter '{id}' not found!");
+                    return null;
+                }
+                
+                bubble.RegisterComponent(new ConversationActionPayloadShowQuestComponent
+                {
+                    QuestIds = starter.QuestToStartIds
+                });
+            }
+        }
+
+        if (purpose == ConversationPurpose.QuestFinish)
+        {
+            ConversationActionExternalActionEntity extAction = new ConversationActionExternalActionEntity();
+            extAction.RegisterComponent(new ConversationActionPayloadProvideRewardComponent());
+            scenario.RegisterComponent(extAction);
+        }
         
         return scenario;
     }
 
-    private ConversationScenarioCharacterListComponent BuildCharsList(JToken json)
+    private ConversationPurpose DetectPurpose(string id)
+    {
+        var starter = GameDataService.Current.QuestsManager.GetQuestStarterById(id);
+        if (starter != null)
+        {
+            return ConversationPurpose.QuestStart;
+        }
+
+        if (GameDataService.Current.QuestsManager.IsQuestDefined(id))
+        {
+            return ConversationPurpose.QuestFinish;
+        }
+
+        return ConversationPurpose.Unknown;
+    }
+
+    private ConversationScenarioCharacterListComponent BuildCharsList(JToken json, List<ConversationActionBubbleEntity> bubbles, ConversationPurpose purpose)
     {
         ConversationScenarioCharacterListComponent characterList = new ConversationScenarioCharacterListComponent();
-        // charsList.Characters = new Dictionary<CharacterPosition, string>
-        // {
-        //     {CharacterPosition.LeftInner, UiCharacterData.CharSleepingBeauty},
-        //     {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
-        //     {CharacterPosition.LeftOuter, UiCharacterData.CharRapunzel},
-        //     {CharacterPosition.RightOuter, UiCharacterData.CharPussInBoots},
-        // };
+        if (purpose == ConversationPurpose.QuestFinish)
+        {
+            characterList.ConversationCharacters = new Dictionary<CharacterPosition, string>
+            {
+                {CharacterPosition.LeftInner, bubbles[0].CharacterId},
+            };
+        }
+        else
+        {
+            json.PopulateObject(characterList);
+        }
         
-        json.PopulateObject(characterList);
+        // Validate
+#if DEBUG
+        foreach (var bubble in bubbles)
+        {
+            var charId = bubble.CharacterId;
+            if (!characterList.ConversationCharacters.ContainsValue(charId))
+            {
+                Debug.LogError($"[ConversationsDataManager] => BuildCharsList: Char with id '{charId}' not defined but found in bubble '{bubble.Message}'!");
+            }
+        }
+#endif
         
         return characterList;
     }
 
-    private ConversationActionBubbleEntity BuildBubble(JToken json)
+    private ConversationActionBubbleEntity BuildBubble(JToken json, ConversationPurpose purpose, string scenarioId)
     {
-        ConversationActionBubbleEntity bubble = new ConversationActionBubbleEntity
-        {
-            BubbleView = R.UICharacterBubbleMessageView
-        };
+        ConversationActionBubbleEntity bubble;
         
+        switch (purpose)
+        {
+            case ConversationPurpose.QuestFinish:
+                bubble = new ConversationActionBubbleQuestCompletedEntity
+                {
+                    BubbleView = R.UICharacterBubbleQuestCompletedView,
+                    AllowTeleType = false,
+                    QuestId = scenarioId
+                };
+                break;
+
+            default:
+                bubble = new ConversationActionBubbleEntity
+                {
+                    BubbleView = R.UICharacterBubbleMessageView
+                };
+                break;
+        }
+
         json.PopulateObject(bubble);
         
         return bubble;
+    }
+
+    public List<string> GetAvailableScenarioIds()
+    {
+        return cache.Keys.ToList();
     }
 }
