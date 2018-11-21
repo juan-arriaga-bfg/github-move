@@ -1,14 +1,21 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class FogSectorsView : BoardElementView
+public class FogSectorsView// : BoardElementView
 {
     private static GameObject fogSectors;
 
-    public override void Init(BoardRenderer context)
+    // public override void Init(BoardRenderer context)
+    // {
+    //     base.Init(context);
+    // }
+    
+    public void Init(BoardRenderer context)
     {
-        base.Init(context);
+        Context = context;
     }
+
+    public BoardRenderer Context { get; set; }
 
     public void UpdateFogSectorsMesh()
     {
@@ -72,7 +79,7 @@ public class FogSectorsView : BoardElementView
         MeshRenderer newRenderer = newSectors.GetComponent<MeshRenderer>();
 
         oldRenderer.material.DOFade(0, 0.5f)
-                    .OnComplete(() => { Destroy(oldSectors); });
+                    .OnComplete(() => { GameObject.Destroy(oldSectors); });
         
         newRenderer.material.color = new Color(1,1,1,0);
 
