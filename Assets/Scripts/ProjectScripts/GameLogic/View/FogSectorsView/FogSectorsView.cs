@@ -41,7 +41,7 @@ public class FogSectorsView : BoardElementView
         fogSectors = new GameObject("FogSectors");
         var meshTransform = fogSectors.transform;
         meshTransform.SetParent(Context.SectorsContainer, false);
-        meshTransform.localPosition = new Vector3(-0.5f, 0.5f, 0);
+        meshTransform.localPosition = new Vector3(-0.71f, 0.56f, 0);
         meshTransform.localScale = Vector3.one * 1.8f;
 
         var meshRenderer = fogSectors.AddComponent<MeshRenderer>();
