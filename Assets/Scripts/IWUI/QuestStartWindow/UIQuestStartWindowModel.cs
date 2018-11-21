@@ -78,16 +78,16 @@ public class UIQuestStartWindowModel : IWWindowModel
     {
         QuestStartScenario = new ConversationScenarioEntity();
         
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        ConversationScenarioCharacterListComponent characterList = new ConversationScenarioCharacterListComponent
         {
-            Characters = new Dictionary<CharacterPosition, string>
+            ConversationCharacters = new Dictionary<CharacterPosition, string>
             {
                 {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
                 // {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
             }
         };
         
-        QuestStartScenario.RegisterComponent(charsList);
+        QuestStartScenario.RegisterComponent(characterList);
 
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
@@ -101,16 +101,16 @@ public class UIQuestStartWindowModel : IWWindowModel
     {
         QuestStartScenario = new ConversationScenarioEntity();
         
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        ConversationScenarioCharacterListComponent characterList = new ConversationScenarioCharacterListComponent
         {
-            Characters = new Dictionary<CharacterPosition, string>
+            ConversationCharacters = new Dictionary<CharacterPosition, string>
             {
                 {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
                 // {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
             }
         };
         
-        QuestStartScenario.RegisterComponent(charsList);
+        QuestStartScenario.RegisterComponent(characterList);
 
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
@@ -130,16 +130,16 @@ public class UIQuestStartWindowModel : IWWindowModel
     {
         QuestStartScenario = new ConversationScenarioEntity();
         
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        ConversationScenarioCharacterListComponent characterList = new ConversationScenarioCharacterListComponent
         {
-            Characters = new Dictionary<CharacterPosition, string>
+            ConversationCharacters = new Dictionary<CharacterPosition, string>
             {
                 {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
                 // {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
             }
         };
         
-        QuestStartScenario.RegisterComponent(charsList);
+        QuestStartScenario.RegisterComponent(characterList);
 
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
@@ -159,16 +159,16 @@ public class UIQuestStartWindowModel : IWWindowModel
     {
         QuestStartScenario = new ConversationScenarioEntity();
         
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        ConversationScenarioCharacterListComponent characterList = new ConversationScenarioCharacterListComponent
         {
-            Characters = new Dictionary<CharacterPosition, string>
+            ConversationCharacters = new Dictionary<CharacterPosition, string>
             {
                 {CharacterPosition.LeftInner,  UiCharacterData.CharGnomeWorker},
                 // {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
             }
         };
         
-        QuestStartScenario.RegisterComponent(charsList);
+        QuestStartScenario.RegisterComponent(characterList);
 
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharGnomeWorker, 
@@ -182,16 +182,16 @@ public class UIQuestStartWindowModel : IWWindowModel
     {
         QuestStartScenario = new ConversationScenarioEntity();
         
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        ConversationScenarioCharacterListComponent characterList = new ConversationScenarioCharacterListComponent
         {
-            Characters = new Dictionary<CharacterPosition, string>
+            ConversationCharacters = new Dictionary<CharacterPosition, string>
             {
                 {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
                 // {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
             }
         };
         
-        QuestStartScenario.RegisterComponent(charsList);
+        QuestStartScenario.RegisterComponent(characterList);
 
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
@@ -211,16 +211,16 @@ public class UIQuestStartWindowModel : IWWindowModel
     {
         QuestStartScenario = new ConversationScenarioEntity();
         
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        ConversationScenarioCharacterListComponent characterList = new ConversationScenarioCharacterListComponent
         {
-            Characters = new Dictionary<CharacterPosition, string>
+            ConversationCharacters = new Dictionary<CharacterPosition, string>
             {
                 {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
                 // {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
             }
         };
         
-        QuestStartScenario.RegisterComponent(charsList);
+        QuestStartScenario.RegisterComponent(characterList);
 
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
@@ -240,16 +240,16 @@ public class UIQuestStartWindowModel : IWWindowModel
     {
         QuestStartScenario = new ConversationScenarioEntity();
         
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        ConversationScenarioCharacterListComponent characterList = new ConversationScenarioCharacterListComponent
         {
-            Characters = new Dictionary<CharacterPosition, string>
+            ConversationCharacters = new Dictionary<CharacterPosition, string>
             {
                 {CharacterPosition.LeftInner,  UiCharacterData.CharGnomeWorker},
                 // {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
             }
         };
         
-        QuestStartScenario.RegisterComponent(charsList);
+        QuestStartScenario.RegisterComponent(characterList);
 
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharGnomeWorker, 
@@ -263,16 +263,16 @@ public class UIQuestStartWindowModel : IWWindowModel
     {
         QuestStartScenario = new ConversationScenarioEntity();
         
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        ConversationScenarioCharacterListComponent characterList = new ConversationScenarioCharacterListComponent
         {
-            Characters = new Dictionary<CharacterPosition, string>
+            ConversationCharacters = new Dictionary<CharacterPosition, string>
             {
                 {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
                 // {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
             }
         };
         
-        QuestStartScenario.RegisterComponent(charsList);
+        QuestStartScenario.RegisterComponent(characterList);
 
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
@@ -292,16 +292,16 @@ public class UIQuestStartWindowModel : IWWindowModel
     {
         QuestStartScenario = new ConversationScenarioEntity();
         
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        ConversationScenarioCharacterListComponent characterList = new ConversationScenarioCharacterListComponent
         {
-            Characters = new Dictionary<CharacterPosition, string>
+            ConversationCharacters = new Dictionary<CharacterPosition, string>
             {
                 {CharacterPosition.LeftInner,  UiCharacterData.CharGnomeWorker},
                 // {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
             }
         };
         
-        QuestStartScenario.RegisterComponent(charsList);
+        QuestStartScenario.RegisterComponent(characterList);
 
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharGnomeWorker, 
@@ -321,16 +321,16 @@ public class UIQuestStartWindowModel : IWWindowModel
     {
         QuestStartScenario = new ConversationScenarioEntity();
         
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        ConversationScenarioCharacterListComponent characterList = new ConversationScenarioCharacterListComponent
         {
-            Characters = new Dictionary<CharacterPosition, string>
+            ConversationCharacters = new Dictionary<CharacterPosition, string>
             {
                 {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
                 {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
             }
         };
         
-        QuestStartScenario.RegisterComponent(charsList);
+        QuestStartScenario.RegisterComponent(characterList);
 
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
@@ -403,15 +403,15 @@ public class UIQuestStartWindowModel : IWWindowModel
         CharacterEmotion emotion;
         GetQuestCompletedData(CompletedQuest.Id, out characterId, out message, out emotion);
 
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        ConversationScenarioCharacterListComponent characterList = new ConversationScenarioCharacterListComponent
         {
-            Characters = new Dictionary<CharacterPosition, string>
+            ConversationCharacters = new Dictionary<CharacterPosition, string>
             {
                 {CharacterPosition.LeftInner,  characterId},
             }
         };
         
-        QuestCompletedScenario.RegisterComponent(charsList);
+        QuestCompletedScenario.RegisterComponent(characterList);
         
         ConversationActionBubbleEntity actBubble = new ConversationActionBubbleQuestCompletedEntity()
         {
@@ -434,15 +434,15 @@ public class UIQuestStartWindowModel : IWWindowModel
     {
         QuestStartScenario = new ConversationScenarioEntity();
 
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
+        ConversationScenarioCharacterListComponent characterList = new ConversationScenarioCharacterListComponent
         {
-            Characters = new Dictionary<CharacterPosition, string>
+            ConversationCharacters = new Dictionary<CharacterPosition, string>
             {
                 {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
             }
         };
         
-        QuestStartScenario.RegisterComponent(charsList);
+        QuestStartScenario.RegisterComponent(characterList);
         
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 

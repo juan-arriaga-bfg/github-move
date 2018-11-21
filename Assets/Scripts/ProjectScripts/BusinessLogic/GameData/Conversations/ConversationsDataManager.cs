@@ -99,9 +99,9 @@ public class ConversationsDataManager : IECSComponent, IDataManager
         return scenario;
     }
 
-    private ConversationScenarioCharsListComponent BuildCharsList(JToken json)
+    private ConversationScenarioCharacterListComponent BuildCharsList(JToken json)
     {
-        ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent();
+        ConversationScenarioCharacterListComponent characterList = new ConversationScenarioCharacterListComponent();
         // charsList.Characters = new Dictionary<CharacterPosition, string>
         // {
         //     {CharacterPosition.LeftInner, UiCharacterData.CharSleepingBeauty},
@@ -110,9 +110,9 @@ public class ConversationsDataManager : IECSComponent, IDataManager
         //     {CharacterPosition.RightOuter, UiCharacterData.CharPussInBoots},
         // };
         
-        json.PopulateObject(charsList);
+        json.PopulateObject(characterList);
         
-        return charsList;
+        return characterList;
     }
 
     private ConversationActionBubbleEntity BuildBubble(JToken json)

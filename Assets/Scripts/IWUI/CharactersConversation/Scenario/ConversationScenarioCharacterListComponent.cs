@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public class ConversationScenarioCharsListComponent : IECSComponent, IECSSerializeable
+public class ConversationScenarioCharacterListComponent : IECSComponent, IECSSerializeable
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
@@ -14,16 +14,16 @@ public class ConversationScenarioCharsListComponent : IECSComponent, IECSSeriali
     {
     }
 
-    public Dictionary<CharacterPosition, string> Characters;
+    public Dictionary<CharacterPosition, string> ConversationCharacters;
 
     public CharacterSide GetCharacterSide(string charId)
     {
-        if (Characters == null)
+        if (ConversationCharacters == null)
         {
             return CharacterSide.Unknown;
         }
 
-        foreach (var item in Characters)
+        foreach (var item in ConversationCharacters)
         {
             if (item.Value != charId)
             {

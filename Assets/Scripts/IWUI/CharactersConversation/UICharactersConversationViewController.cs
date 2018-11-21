@@ -103,7 +103,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
     
     private void AddCharactersFromScenario(ConversationScenarioEntity scenario, Action onComplete)
     {
-        ConversationScenarioCharsListComponent charsList = scenario.GetComponent<ConversationScenarioCharsListComponent>(ConversationScenarioCharsListComponent.ComponentGuid);
+        ConversationScenarioCharacterListComponent characterList = scenario.GetComponent<ConversationScenarioCharacterListComponent>(ConversationScenarioCharacterListComponent.ComponentGuid);
 
         if (scenario.Continuation)
         {
@@ -112,7 +112,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             for (var i = charsToRemove.Count - 1; i >= 0; i--)
             {
                 var character = charsToRemove[i];
-                if (charsList.Characters.Values.Contains(character))
+                if (characterList.ConversationCharacters.Values.Contains(character))
                 {
                     charsToRemove.RemoveAt(i);
                 }
@@ -124,7 +124,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             }
         }
 
-        foreach (var pair in charsList.Characters)
+        foreach (var pair in characterList.ConversationCharacters)
         {
             if (GetCharacterById(pair.Value) != null)
             {
@@ -134,7 +134,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             InitCharacter(pair.Value, pair.Key, false);
          }
 
-        if (!scenario.Continuation && charsList.Characters.Count == 1)
+        if (!scenario.Continuation && characterList.ConversationCharacters.Count == 1)
         {
             SpawnCharacters(true, onComplete);
         }
