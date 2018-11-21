@@ -100,6 +100,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     private void OnQuestStateChanged(QuestEntity quest, TaskEntity task)
     {
         Update();
+        UpdateHard();
     }
     
     public void Update()
@@ -107,8 +108,20 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
         if (Locker.IsLocked) return;
         
         var collection = GetComponent<ECSComponentCollection>(BaseTutorialStep.ComponentGuid);
-        var components = collection?.Components;
         
+        UpdateComponents(collection?.Components);
+    }
+
+    public void UpdateHard()
+    {
+        var collection = GetComponent<ECSComponentCollection>(BaseTutorialStep.ComponentGuid);
+        var components = collection?.Components?.FindAll(component => (component as BaseTutorialStep)?.IsIgnoreUi == true);
+
+        UpdateComponents(components);
+    }
+
+    private void UpdateComponents(List<IECSComponent> components)
+    {
         if(components == null) return;
         
         for (var i = components.Count - 1; i >= 0; i--)

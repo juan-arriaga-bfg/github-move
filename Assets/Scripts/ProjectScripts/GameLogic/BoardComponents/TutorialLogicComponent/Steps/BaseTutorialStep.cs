@@ -10,6 +10,7 @@
 	
 	private bool isStart;
 	public bool IsPerform;
+	public bool IsIgnoreUi;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{

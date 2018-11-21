@@ -128,7 +128,7 @@ public static class TutorialBuilder
             }
             case 8: // remove worker
             {
-                step = new BaseTutorialStep();
+                step = new BaseTutorialStep{IsIgnoreUi = true};
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
@@ -179,7 +179,7 @@ public static class TutorialBuilder
             }
             case 13: // add SleepingBeauty
             {
-                step = new BaseTutorialStep();
+                step = new BaseTutorialStep{IsIgnoreUi = true};
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
