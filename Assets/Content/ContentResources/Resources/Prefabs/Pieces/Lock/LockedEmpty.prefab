@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4721964448284682}
-  - component: {fileID: 114270495807880900}
   - component: {fileID: 114972051697825788}
+  - component: {fileID: 114027888847583358}
   m_Layer: 0
   m_Name: LockedEmpty
   m_TagString: Untagged
@@ -116,7 +116,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -24.144001, y: 30.092001, z: 0.003}
---- !u!114 &114270495807880900
+--- !u!114 &114027888847583358
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,20 +124,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1065998800956580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e94db1dff9a4341a9922139f675b17, type: 3}
+  m_Script: {fileID: 11500000, guid: 85866bbace1a4331a0b140e1926dc2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 0}
-  bodySprite: {fileID: 0}
+  bodySprites: []
+  particles: []
   errorSelectionMaterial: {fileID: 2100000, guid: 1faf170e9acf1d64f86eefcd318ff557,
     type: 2}
   defaultSelectionMaterial: {fileID: 2100000, guid: cbc475da5f4748047a7b2d276ac8a4ff,
     type: 2}
   highlightPieceMaterial: {fileID: 2100000, guid: 8df69b780d2d9354c8ffb9b8293c73ad,
     type: 2}
-  reactionLockMaterial: {fileID: 0}
 --- !u!114 &114972051697825788
 MonoBehaviour:
   m_ObjectHideFlags: 1
