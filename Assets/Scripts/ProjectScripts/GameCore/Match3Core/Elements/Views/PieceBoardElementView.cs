@@ -15,7 +15,6 @@ public class PieceBoardElementView : BoardElementView
     [SerializeField] private Material errorSelectionMaterial;
     [SerializeField] private Material defaultSelectionMaterial;
     [SerializeField] private Material highlightPieceMaterial;
-    [SerializeField] private Material reactionLockMaterial;
 
     private BoardElementView lockedSubtrate;
 
@@ -70,12 +69,6 @@ public class PieceBoardElementView : BoardElementView
 
         lastBoardPosition = piece.CachedPosition;
 
-        if (reactionLockMaterial == null)
-        {
-            var obj = ContentService.Current.GetObjectByName(R.pieces_grayscale) as Material;
-            reactionLockMaterial = obj;
-        }
-    
         if (cachedRenderers == null || cachedRenderers.size == 0)
             CacheLayers();
         foreach (var rend in cachedRenderers)
@@ -168,27 +161,22 @@ public class PieceBoardElementView : BoardElementView
 
     public virtual void ToggleLockView(bool enabled)
     {
-        if (reactionLockMaterial == null || isLockVisual == enabled)
+        if (isLockVisual == enabled)
             return;
-        
-        if (cachedRenderers == null || cachedRenderers.size == 0)
-            CacheLayers();
-        
-        foreach (var rend in cachedRenderers)
-        {
-            if (rend?.CachedRenderer?.sharedMaterial == null) continue;
-            
-            if (enabled)
-                rend.CacheDefaultMaterial();
-            else
-                rend.ResetDefaultMaterial();
-        }
 
-        
         if (enabled)
         {
-            bodySprites.ForEach(sprite => sprite.material = reactionLockMaterial);
+            SetGrayscale();
+            SaveCurrentMaterialAsDefault();
+        }
+        else
+        {
+            ClearCurrentMaterialAsDefault();
+            ResetDefaultMaterial();
+        }
 
+        if (enabled)
+        {
             var pieceDef = PieceType.GetDefById(Piece.PieceType);
             var defaultSubtrate = Piece.PieceType == PieceType.LockedEmpty.Id
                                || Piece.PieceType == PieceType.Fog.Id
@@ -237,24 +225,15 @@ public class PieceBoardElementView : BoardElementView
             CacheLayers();
         }
 
-        foreach (var rend in cachedRenderers)
+        if (!enabled)
         {
-            if (rend == null) continue;
-            if (rend.CachedRenderer == null) continue;
-            if (rend.CachedRenderer.sharedMaterial == null) continue;
-            if (rend.gameObject == selectionSprite.gameObject) continue;
-            
-            if (!enabled)
-            {
-                rend.ResetDefaultMaterial();
-                IsHighlighted = false;
-            }
-            else
-            {
-                rend.CacheDefaultMaterial();
-                rend.CachedRenderer.material = highlightPieceMaterial;
-                IsHighlighted = true;
-            }
+            ResetDefaultMaterial();
+            IsHighlighted = false;
+        }
+        else
+        {
+            SetHighlight(true, new List<GameObject>{SelectionSprite == null ? null : SelectionSprite.gameObject});
+            IsHighlighted = true;
         }
     }
 
