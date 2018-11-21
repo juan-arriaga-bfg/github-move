@@ -402,7 +402,7 @@ public class GridMeshBuilder
                         colors[colors.Count - 2] = new Color(1, 1, 1, 0);
                     }
                     
-                    // todo: optimize
+                    // todo: optimize, check bounds
                     var topEdge = edgesData[x, y + 1];
                     if (BitsHelper.IsBitSet(topEdge, BIT_EXCLUDED_VERTEX))
                     {
@@ -436,7 +436,7 @@ public class GridMeshBuilder
                         colors[colors.Count - 2] = new Color(1, 1, 1, 0);
                     }
                     
-                    // todo: optimize
+                    // todo: optimize, check bounds
                     var rightEdge = edgesData[x + 1, y];
                     if (BitsHelper.IsBitSet(rightEdge, BIT_EXCLUDED_VERTEX))
                     {
