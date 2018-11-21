@@ -124,9 +124,9 @@ public class UINextLevelWindowView : UIGenericWindowView
     
     public void OnClick()
     {
-//        if(isClick) return;
-//
-//        isClick = true;
+        if(isClick) return;
+
+        isClick = true;
         
         switch (tapCount)
         {
@@ -138,7 +138,7 @@ public class UINextLevelWindowView : UIGenericWindowView
                 
                 var windowModel = Model as UINextLevelWindowModel;
                 var recipes = windowModel.Recipes;
-
+                
                 if (recipes.Count == 0)
                 {
                     Controller.CloseCurrentWindow();

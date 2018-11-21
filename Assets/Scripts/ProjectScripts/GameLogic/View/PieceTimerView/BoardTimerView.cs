@@ -40,7 +40,6 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         
         SetOfset();
         SetTimer(piece.GetComponent<TimerComponent>(TimerComponent.ComponentGuid));
-        SetState(TimerViewSate.Normal, 0);
         SetHourglass(false);
         
         Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
@@ -54,6 +53,9 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         this.timer = timer;
         this.timer.OnExecute += UpdateView;
         this.timer.View = this;
+        
+        timerState = TimerViewSate.Default;
+        SetState(TimerViewSate.Normal, 0);
     }
     
     public void SetState(TimerViewSate state, float duration = 0.2f)
@@ -69,7 +71,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         button.interactable = isShow;
         smallButton.SetActive(isShow);
         bigButton.SetActive(isShow);
-        hourglass.SetActive(isActiveHourglass && !isShow);
+        hourglass.SetActive(isActiveHourglass && state != TimerViewSate.Hide);
     }
 
     public void SetHourglass(bool isActive)

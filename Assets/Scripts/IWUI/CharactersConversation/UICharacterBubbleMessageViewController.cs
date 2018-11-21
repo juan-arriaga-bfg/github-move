@@ -52,15 +52,13 @@ public class UICharacterBubbleMessageViewController : UICharacterBubbleView, ITe
 
 #endregion
     
-    public override void Show(UICharacterBubbleDef def, Action onComplete)
+    public override void Show(ConversationActionBubbleEntity data, Action onComplete)
     {
-        UiCharacterBubbleDefMessage data = def as UiCharacterBubbleDefMessage;
-
         SetCharRelatedData(data);
 
-        SetSide(data.Side);    
+        SetSide(data.Side);
 
-        message.Text = data.Message;
+        message.Text = LocalizationService.Current.GetTextByUid(data.Message, data.Message);
 
         if (data.AllowTeleType)
         {
@@ -89,7 +87,7 @@ public class UICharacterBubbleMessageViewController : UICharacterBubbleView, ITe
         header.transform.localScale = scale;
     }
 
-    private void SetCharRelatedData(UiCharacterBubbleDefMessage data)
+    private void SetCharRelatedData(ConversationActionBubbleEntity data)
     {
         UICharacterDef charDef = UiCharacterData.GetDef(data.CharacterId);
         headerBack.color = charDef.Color;

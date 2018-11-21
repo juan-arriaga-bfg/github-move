@@ -65,6 +65,11 @@ public class ConfigsGoogleLoader
     
     private static void CheckNeedToUpdate(bool forceUpdate)
     {
+        HashSet<string> alwaysUpdate = new HashSet<string>
+        {
+            "questStartConversations"
+        };
+        
         var idsArray = update.Select(e => e.Value.Link).ToArray();
         HashSet<string> uniqIds = new HashSet<string>(idsArray);
         var idsStr = string.Join(",", uniqIds);
@@ -116,7 +121,7 @@ public class ConfigsGoogleLoader
                 var then = long.Parse(EditorPrefs.GetString(gLink.Key));
                 var now = timestamps[gLink.Link];
                 
-                if (then < now)
+                if (then < now || alwaysUpdate.Contains(gLink.Key))
                 {
                     Debug.LogWarningFormat("Config {0} need to update. then {1} < now {2}", gLink.Key, then, now);
                 }

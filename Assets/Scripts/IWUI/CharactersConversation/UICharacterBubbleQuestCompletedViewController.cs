@@ -13,11 +13,11 @@ public class UICharacterBubbleQuestCompletedViewController : UICharacterBubbleMe
 
     [SerializeField] private Animator animator;
     
-    public override void Show(UICharacterBubbleDef def, Action onComplete)
+    public override void Show(ConversationActionBubbleEntity def, Action onComplete)
     {
         base.Show(def, onComplete);
         
-        UiCharacterBubbleDefQuestCompleted data = def as UiCharacterBubbleDefQuestCompleted;
+        ConversationActionBubbleQuestCompletedEntity data = def as ConversationActionBubbleQuestCompletedEntity;
 
         var quest = GameDataService.Current.QuestsManager.GetActiveQuestById(data.QuestId);
         questButton.Init(quest, false);

@@ -1,24 +1,20 @@
-﻿using UnityEngine;
-using UnityEngine.TestTools;
-using NUnit.Framework;
-using System.Collections;
+﻿using NUnit.Framework;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text;
-using UnityEditor;
 
 namespace UT
 {
-    public class UTUniqueResourceName
+    public class UTUniqueTextureName
     {
-        private List<string> pathToCheck = new List<string> {"Assets/Content/ContentResources"};
+        private List<string> pathToCheck = new List<string> {"Assets/Content/SourceContent"};
         private List<string> ignoredFileNames = new List<string> { };
+        private string searchFilter = "t:Texture";
 
         [Test]
-        public void UTUniqueResourceNameSimplePasses()
+        public void UTUniqueTextureNameSimplePasses()
         {
-            var dublicatedFiles = AssetsUsageFinderUtils.GetDublicatedFileNames(pathToCheck, ignoredFileNames, "");
+            // Use the Assert class to test conditions.
+            var dublicatedFiles = AssetsUsageFinderUtils.GetDublicatedFileNames(pathToCheck, ignoredFileNames, searchFilter);
 
             if (dublicatedFiles.Count > 0)
             {
@@ -39,5 +35,6 @@ namespace UT
                 Assert.Pass();
             }
         }
+        
     }
 }

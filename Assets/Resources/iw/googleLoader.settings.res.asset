@@ -76,3 +76,7 @@ MonoBehaviour:
     Link: 1dvyzQoKk6OMhIC59EApw2vjebAdn4LxrbM7raQJAlXY
     Route: parse
     Pattern: '[{"$type":"","Id":"","":"","PieceUid":"","TargetValue":0,"Value1":0,"ComponentsCache":{"QuestDescriptionComponent":{"Ico":"","Title":"","Message":""}}}]'
+  - Key: conversations
+    Link: 1oXEl5zGo7GJCRoXn9iktjma5pfNAYh83KU_pWhzGls0
+    Route: parse
+    Pattern: '[{"Id":"","ConversationCharacters" : {}, "Bubbles":[{"CharacterId":"","Emotion":"","Message":""}]},{"Id":"","ConversationCharacters" : {}, "Bubbles":[{"CharacterId":"","Emotion":"","Message":""}]}]'

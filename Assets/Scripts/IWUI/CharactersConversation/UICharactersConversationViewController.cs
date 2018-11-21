@@ -80,9 +80,9 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         return anchor.position;
     }
     
-    private Transform GetAnchorForBubblePosition(UICharacterBubbleDef def)
+    private Transform GetAnchorForBubblePosition(ConversationActionBubbleEntity data)
     {
-        return def.Side == CharacterSide.Left ? bubbleAnchorLeft : bubbleAnchorRight;
+        return data.Side == CharacterSide.Left ? bubbleAnchorLeft : bubbleAnchorRight;
     }
 
     private CharacterSide GetSideByCharacterPosition(CharacterPosition pos)
@@ -103,7 +103,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
     
     private void AddCharactersFromScenario(ConversationScenarioEntity scenario, Action onComplete)
     {
-        ConversationScenarioCharsListComponent charsList = scenario.GetComponent<ConversationScenarioCharsListComponent>(ConversationScenarioCharsListComponent.ComponentGuid);
+        ConversationScenarioCharacterListComponent characterList = scenario.GetComponent<ConversationScenarioCharacterListComponent>(ConversationScenarioCharacterListComponent.ComponentGuid);
 
         if (scenario.Continuation)
         {
@@ -112,7 +112,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             for (var i = charsToRemove.Count - 1; i >= 0; i--)
             {
                 var character = charsToRemove[i];
-                if (charsList.Characters.Values.Contains(character))
+                if (characterList.ConversationCharacters.Values.Contains(character))
                 {
                     charsToRemove.RemoveAt(i);
                 }
@@ -124,7 +124,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             }
         }
 
-        foreach (var pair in charsList.Characters)
+        foreach (var pair in characterList.ConversationCharacters)
         {
             if (GetCharacterById(pair.Value) != null)
             {
@@ -134,7 +134,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
             InitCharacter(pair.Value, pair.Key, false);
          }
 
-        if (!scenario.Continuation && charsList.Characters.Count == 1)
+        if (!scenario.Continuation && characterList.ConversationCharacters.Count == 1)
         {
             SpawnCharacters(true, onComplete);
         }
@@ -156,8 +156,8 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         ConversationActionEntity action = scenario.GetFirstAction();
         ConversationActionBubbleEntity bubbleAction = action as ConversationActionBubbleEntity;
 
-        var character = characters[bubbleAction.BubbleDef.CharacterId];
-        character.ToForeground(false, bubbleAction.BubbleDef.Emotion);
+        var character = characters[bubbleAction.CharacterId];
+        character.ToForeground(false, bubbleAction.Emotion);
 
         if (animated)
         {
@@ -369,7 +369,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         return pos == CharacterPosition.LeftInner || pos == CharacterPosition.RightInner;
     }
     
-    private void NextBubble(string bubbleId, UICharacterBubbleDef data, Action onComplete)
+    private void NextBubble(ConversationActionBubbleEntity data, Action onComplete)
     {
         ToggleTapToContinue(false);
         
@@ -382,12 +382,12 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         {
             HideBubble(() =>
             {
-                ReorderCharsAndShowBubble(bubbleId, data, onComplete);
+                ReorderCharsAndShowBubble(data, onComplete);
             });
         }
         else
         {
-            ReorderCharsAndShowBubble(bubbleId, data, onComplete);
+            ReorderCharsAndShowBubble(data, onComplete);
         }
     }
 
@@ -409,7 +409,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         });
     }
 
-    private void ReorderCharsAndShowBubble(string bubbleId, UICharacterBubbleDef data, Action onComplete)
+    private void ReorderCharsAndShowBubble(ConversationActionBubbleEntity data, Action onComplete)
     {
         bool animated = isFirstBubbleShowed;
         
@@ -418,7 +418,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
         SendCharacterToForeground(charId, data.Emotion, animated, () =>
         {
             var pool = UIService.Get.PoolContainer;
-            UICharacterBubbleView bubble = pool.Create<UICharacterBubbleView>(bubbleId);
+            UICharacterBubbleView bubble = pool.Create<UICharacterBubbleView>(data.BubbleView);
             bubbleView = bubble;
 
             bubbleView.transform.SetParent(GetAnchorForBubblePosition(data), false);
@@ -495,7 +495,7 @@ public partial class UICharactersConversationViewController : IWUIWindowView
     private void PerformActionBubble()
     {
         ConversationActionBubbleEntity act = activeAction as ConversationActionBubbleEntity;
-        NextBubble(act.BubbleId, act.BubbleDef, () => { onActionEnded?.Invoke(act); });
+        NextBubble(act, () => { onActionEnded?.Invoke(act); });
 
         onActionStarted?.Invoke(act);
     }

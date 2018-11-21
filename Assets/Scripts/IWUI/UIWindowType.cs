@@ -31,9 +31,7 @@ public class UIWindowType
     public const string OrdersWindow = "OrdersWindow";
     
     public const string QuestStartWindow = "QuestStartWindow";
-    
-    public const string QuestCompleteWindow = "QuestCompleteWindow";
-    
+
     public const string NextLevelWindow = "NextLevelWindow";
 
     public const string ConfirmRemoverMessageWindow = "ConfirmRemoverMessageWindow";
