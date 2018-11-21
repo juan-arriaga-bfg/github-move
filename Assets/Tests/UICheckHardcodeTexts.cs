@@ -13,6 +13,7 @@ namespace UT
     {
 
         private List<string> pathToCheck = new List<string> {"Assets/Scripts"};
+
         private List<string> ignoredFileNames = new List<string>
         {
             "R",
@@ -72,26 +73,20 @@ namespace UT
             string findHardcodeStringsPattern = ".+\\s*=\\s*(\").+";
             var findHardcodeStringsMatches = Regex.Matches(scriptText.ToString(), findHardcodeStringsPattern);
 
+            var resultMessage = new StringBuilder();
             if (findHardcodeStringsMatches.Count > 0)
             {
-                var resultMessage = new StringBuilder();
-
                 foreach (Match match in findHardcodeStringsMatches)
                 {
-                    resultMessage.AppendLine(match.Value);
+                    var val = match.Value;
+                    
+                    resultMessage.AppendLine(val);
                 }
-
-                if (result != null)
-                {
-                    result(resultMessage.ToString());
-                }
-
-                return;
             }
-
+            
             if (result != null)
             {
-                result(null);
+                result(resultMessage.ToString());
             }
         }
 
