@@ -128,12 +128,6 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     
     public void OnClick()
     {
-        if (timerState == TimerViewSate.Free)
-        {
-            timer?.Complete();
-            return;
-        }
-        
         timer?.FastComplete();
     }
 }

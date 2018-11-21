@@ -16,11 +16,22 @@
         
 		IsDone = !storage.Timer.IsExecuteable();
 		
-		if (IsDone == false && storage.Timer.GetPrise() != null)
+		if (IsDone == false)
 		{
-			UIMessageWindowController.CreateTimerCompleteMessage(
-				LocalizationService.Get("window.timerComplete.message.default", "Would you like to build the item right now for crystals?"),
-				storage.Timer);
+			if (storage.Timer.IsFree())
+			{
+				storage.Timer.FastComplete();
+				return false;
+			}
+
+			if (storage.Timer.GetPrise() != null)
+			{
+				UIMessageWindowController.CreateTimerCompleteMessage(
+					LocalizationService.Get("window.timerComplete.message.default", "Would you like to build the item right now for crystals?"),
+					storage.Timer);
+				
+				return false;
+			}
 		}
         
 		return IsDone;

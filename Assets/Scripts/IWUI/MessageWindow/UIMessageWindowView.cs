@@ -87,12 +87,10 @@ public class UIMessageWindowView : UIGenericPopupWindowView
     private void UpdateTimer()
     {
         var windowModel = Model as UIMessageWindowModel;
-        var isFree = windowModel.Timer.CompleteTime.GetTimeLeft().TotalSeconds <= GameDataService.Current.ConstantsManager.FreeTimeLimit;
+        var isFree = windowModel.Timer.IsFree();
         
         timerLabel.Text = windowModel.Timer.CompleteTime.GetTimeLeftText();
         buttonBuyLabel.Text = isFree ? LocalizationService.Get("common.button.free", "Free") : windowModel.AcceptLabel + windowModel.Timer.GetPrise().ToStringIcon(false);
-
-        if (isFree && windowModel.OnAccept != windowModel.Timer.Complete) windowModel.OnAccept = windowModel.Timer.Complete;
     }
 
     private void CompleteTimer()
