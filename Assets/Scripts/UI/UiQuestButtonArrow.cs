@@ -73,7 +73,7 @@ public class UiQuestButtonArrow : MonoBehaviour
 
     private void OnQuestChanged(QuestEntity quest, TaskEntity task)
     {
-        if (!quest.IsInProgress())
+        if (quest.State != TaskState.InProgress)
         {
             return;
         }

@@ -81,6 +81,7 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
         if (State == TaskState.Pending)
         {
             State = TaskState.New;
+            OnChanged?.Invoke(this);
         }
     }
 
