@@ -29,7 +29,7 @@ public class MatchPieceToAnimation : BoardAnimation
 			{
 				sequence.Insert(0.25f, boardElement.CachedTransform.DOScale(Vector3.one * 1.2f, 0.10f));
 				sequence.Insert(0.35f, boardElement.CachedTransform.DOScale(Vector3.zero, 0.1f));
-				boardElement.SyncRendererLayers(new BoardPosition(To.X, To.Y, 4));
+				boardElement.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
 				continue;
 			}
 			

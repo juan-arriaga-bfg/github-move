@@ -199,7 +199,7 @@ public class BoardManipulatorComponent : ECSEntity,
             
             if (lastCachedDragPosition.Equals(boardPos) == false || isFullPass)
             {
-                cachedViewForDrag.SyncRendererLayers(new BoardPosition(context.BoardDef.Width, context.BoardDef.Height, context.BoardDef.Depth));
+                cachedViewForDrag.SyncRendererLayers(context.BoardDef.MaxPoit);
                 lastCachedDragPosition = boardPos;
                 
                 isDragLip = false;

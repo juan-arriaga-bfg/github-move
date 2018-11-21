@@ -25,15 +25,17 @@ public class MovePiecesFromToAnimation : BoardAnimation
 			var from = From[i];
 			var to = To[i];
 			
-			var pieceFromView = context.GetElementAt(from);
+			var view = context.GetElementAt(from);
 
 			context.MoveElement(from, to);
         
 			var pos = context.Context.BoardDef.GetPiecePosition(to.X, to.Y);
 			pos = new Vector3(pos.x, pos.y, 0f);
+			
+			view.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
 
-			sequence.Insert(0, pieceFromView.CachedTransform.DOLocalMove(pos, 0.4f).SetEase(Ease.InOutSine));
-			sequence.InsertCallback(0.4f, () => context.ResetBoardElement(pieceFromView, to));
+			sequence.Insert(0, view.CachedTransform.DOLocalMove(pos, 0.4f).SetEase(Ease.InOutSine));
+			sequence.InsertCallback(0.4f, () => context.ResetBoardElement(view, to));
 		}
 		
 		sequence.OnComplete(() => CompleteAnimation(context));

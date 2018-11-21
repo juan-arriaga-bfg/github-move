@@ -12,9 +12,11 @@ public class CollapsePieceToAnimation : BoardAnimation
 		
 		var sequence = DOTween.Sequence().SetId(animationUid);
 		
-		for (int i = 0; i < points.Count; i++)
+		foreach (var point in points)
 		{
-			var boardElement = context.GetElementAt(points[i]);
+			var boardElement = context.GetElementAt(point);
+			
+			boardElement.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
 			
 			sequence.Insert(0, boardElement.CachedTransform.DOMove(new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.4f).SetEase(Ease.OutBack));
 			sequence.Insert(0.2f, boardElement.CachedTransform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack));
@@ -22,11 +24,11 @@ public class CollapsePieceToAnimation : BoardAnimation
 		
 		sequence.OnComplete(() =>
 		{
-			for (int i = 0; i < points.Count; i++)
+			foreach (var point in points)
 			{
-				context.RemoveElementAt(points[i]);
+				context.RemoveElementAt(point);
 			}
-			
+
 			CompleteAnimation(context);
 		});
 	}
