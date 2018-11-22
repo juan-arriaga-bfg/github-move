@@ -1,12 +1,22 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine.SceneManagement;
 
 public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
 {
     [SerializeField] private UICurrencyCheatSheetWindowItem itemPrefab;
+    [SerializeField] private NSText labelAdd;
+    [SerializeField] private NSText labelRemove;
 
     private List<UICurrencyCheatSheetWindowItem> items;
+    
+    private List<CurrencyDef> mainCurrency = new List<CurrencyDef>
+    {
+        Currency.Coins,
+        Currency.Crystals,
+        Currency.Mana,
+    };
     
     public override void OnViewShow()
     {
@@ -16,6 +26,22 @@ public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
 
         SetTitle(model.Title);
         CreateItems(model);
+
+        labelAdd.Text = $"{GetBtnLabel()}99999";
+        labelRemove.Text = $"{GetBtnLabel()}0";
+    }
+
+    private string GetBtnLabel()
+    {
+        var str = new StringBuilder();
+
+        for (var i = 0; i < mainCurrency.Count; i++)
+        {
+            var def = mainCurrency[i];
+            str.Append($"<sprite name=\"{def.Name}\">{(i == mainCurrency.Count - 1 ? " = " : ", ")}");
+        }
+
+        return str.ToString();
     }
 
     private void CreateItems(UICurrencyCheatSheetWindowModel model)
@@ -43,24 +69,23 @@ public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
         
         UICurrencyCheatSheetWindowModel windowModel = Model as UICurrencyCheatSheetWindowModel;
 
-        bool isAnyChange = false;
-        
         foreach (var item in items)
         {
-            isAnyChange = isAnyChange || item.IsChanged();
+            item.Apply();
             Destroy(item.gameObject);
         }
-
-        if (isAnyChange)
-        {
-            ReloadScene();
-        }
+        
+        ProfileService.Instance.Manager.SaveLocalProfile();
     }
 
-    private void ReloadScene()
+    public void OnSet(int value)
     {
-        ProfileService.Instance.Manager.SaveLocalProfile();
-        DevTools.ReloadScene(false);
+        foreach (var item in items)
+        {
+            if (mainCurrency.Contains(item.Def) == false) continue;
+            
+            item.SetValue(value);
+        }
     }
 
     public override void InitView(IWWindowModel model, IWWindowController controller)
