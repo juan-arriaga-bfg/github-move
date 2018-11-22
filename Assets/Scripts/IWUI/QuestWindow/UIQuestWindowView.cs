@@ -86,23 +86,9 @@ public class UIQuestWindowView : UIGenericPopupWindowView
     {
         var windowModel = Model as UIQuestWindowModel;
         var quest = windowModel.Quest;
-        
-        var board = BoardService.Current.GetBoardById(0);
-        
+
         if (quest.IsCompleted())
         {
-            var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
-            
-            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, windowModel.PiecesReward.Sum(e => e.Value)))
-            {
-                UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.freeSpace", "Free space not found!"));
-                return;
-            }
-            
-            quest.SetClaimedState();
-            GameDataService.Current.QuestsManager.FinishQuest(quest.Id);
-            
-            isComplete = true;
             return;
         }
 

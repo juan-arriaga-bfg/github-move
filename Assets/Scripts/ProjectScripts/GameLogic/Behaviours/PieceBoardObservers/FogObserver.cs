@@ -79,9 +79,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         if(Def == null) return;
         
         Debug.Log($"[FogObserver] => Clear fog with uid: {Def.Uid}");
-        
-        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, Def);
-        
+                
         AddResourceView.Show(Def.GetCenter(Context.Context), Def.Reward);
         GameDataService.Current.FogsManager.RemoveFog(Key);
         
@@ -228,7 +226,9 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         CurrencyHellper.Purchase(Currency.Fog.Name, 1, Def.Condition, success =>
         {
             if (success == false) return;
-			            
+			  
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, Def);
+            
             Context.Context.HintCooldown.RemoweView(bubble);
 
             bubble.OnHide = () =>
