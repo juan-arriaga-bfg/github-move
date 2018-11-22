@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: sprite.default.extended
+  m_Name: sprite.default.highlighted
   m_Shader: {fileID: 4800000, guid: 691763b5f2cfaeb4c9178becb776d1ab, type: 3}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA USEHIGHLIGHT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -61,7 +61,7 @@ Material:
     m_Floats:
     - ONECOLOR: 0
     - USEBLICK: 0
-    - USEHIGHLIGHT: 0
+    - USEHIGHLIGHT: 1
     - USEVERTEXCOLOR: 0
     - _AlphaCoef: 1
     - _BlendMaskRotation: 0

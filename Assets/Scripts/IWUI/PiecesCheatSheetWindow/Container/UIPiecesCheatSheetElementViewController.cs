@@ -8,9 +8,14 @@ using UnityEngine.UI;
 public class UIPiecesCheatSheetElementViewController : UITabElementViewController
 {
     [IWUIBinding("#NameLabel")] private NSText lblName;
+    
     [IWUIBinding("#IdLabel")] private NSText lblId;
+    
     [IWUIBinding("#Icon")] private Image ico;
+    
     [IWUIBinding("#RootCanvas", true)] private CanvasGroup mainCanvasGroup;
+    
+    [IWUIBinding] private UIButtonViewController rootButton;
 
     private int pieceId;
     
@@ -45,14 +50,13 @@ public class UIPiecesCheatSheetElementViewController : UITabElementViewControlle
         {
             ico.sprite = spr;
         }
-    }
-    
-    private Sprite GetPieecSprite()
-    {
-        return IconService.Current.GetSpriteById(PieceType.Parse(pieceId));
+
+        rootButton
+           .ToState(GenericButtonState.Active)
+           .OnClick(OnClickEventHandler);
     }
 
-    public void OnClick()
+    private void OnClickEventHandler(UIButtonViewController obj)
     {
         BoardPosition pos = new BoardPosition(23, 10, BoardService.Current.GetBoardById(0).BoardDef.PieceLayer);
         var availablePoints = new List<BoardPosition>();
@@ -75,5 +79,10 @@ public class UIPiecesCheatSheetElementViewController : UITabElementViewControlle
                    .Append(mainCanvasGroup.DOFade(1f, 0.1f));
 
         }
+    }
+
+    private Sprite GetPieecSprite()
+    {
+        return IconService.Current.GetSpriteById(PieceType.Parse(pieceId));
     }
 }
