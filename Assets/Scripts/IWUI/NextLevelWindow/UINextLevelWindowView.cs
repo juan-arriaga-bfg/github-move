@@ -79,7 +79,6 @@ public class UINextLevelWindowView : UIGenericWindowView
             
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
         GameDataService.Current.LevelsManager.UpdateSequence();
-        GameDataService.Current.OrdersManager.Unlock();
         
         base.OnViewCloseCompleted();
     }
