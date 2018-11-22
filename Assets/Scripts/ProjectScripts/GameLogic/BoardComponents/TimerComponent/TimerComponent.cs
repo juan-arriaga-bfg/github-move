@@ -92,6 +92,12 @@ public class TimerComponent : IECSComponent, IECSSystem
     
     public void FastComplete()
     {
+        if (IsFree())
+        {
+            Complete();
+            return;
+        }
+        
         CurrencyHellper.Purchase(Currency.Timer.Name, 1, GetPrise(), success =>
         {
             if(success == false) return;
@@ -105,5 +111,10 @@ public class TimerComponent : IECSComponent, IECSSystem
         price.Amount = Mathf.Max(1, Mathf.CeilToInt(GameDataService.Current.ConstantsManager.PricePerSecond * (float) CompleteTime.GetTimeLeft().TotalSeconds));
 
         return price;
+    }
+    
+    public bool IsFree()
+    {
+        return CompleteTime.GetTimeLeft().TotalSeconds <= GameDataService.Current.ConstantsManager.FreeTimeLimit;
     }
 }

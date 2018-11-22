@@ -7,7 +7,9 @@ public partial class BoardRenderer : ECSEntity
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 
     public override int Guid { get { return ComponentGuid; } }
-    
+
+    public Transform SectorsContainer { get; private set; }
+
     protected BoardController context;
     
     public BoardController Context
@@ -1053,39 +1055,39 @@ public partial class BoardRenderer : ECSEntity
     
     public Transform GenerateField(int width, int height, float size, List<string> tiles, string backgroundTile = null, IList<BoardPosition> ignorablePositions = null)
     {
-        var sectorsContainer = new GameObject("Sectors.Container").transform;
-        sectorsContainer.localPosition = new Vector3(0f, 0f, 0f);
-        sectorsContainer.localRotation = Quaternion.Euler(54.5f, 0f, -45f);
-        sectorsContainer.localScale = Vector3.one;
+         SectorsContainer = new GameObject("Sectors.Container").transform;
+         SectorsContainer.localPosition = new Vector3(0f, 0f, 0f);
+         SectorsContainer.localRotation = Quaternion.Euler(54.5f, 0f, -45f);
+         SectorsContainer.localScale = Vector3.one;
+         
+         var sectorsMesh = GenerateMesh(width, height, size, tiles, backgroundTile, ignorablePositions);
+         
+         var meshGO = new GameObject("_cells");
+         var meshTransform = meshGO.transform;
+         meshTransform.SetParent(SectorsContainer);
+         meshTransform.localPosition = Vector3.zero;
+         meshTransform.localScale = new Vector3(1f, 1f, 1f);
+         meshTransform.localRotation = Quaternion.identity;
+         
+         var meshRenderer = meshGO.AddComponent<MeshRenderer>();
+         var meshFilter = meshGO.AddComponent<MeshFilter>();
+         
+         
+         
+         meshFilter.mesh = sectorsMesh;
+         
+         // apply material 
+         var material = new Material(Shader.Find("Sprites/Default"));
+         material.renderQueue = 2000;
+         
+         // load texture
+         var tileSprite = IconService.Current.GetSpriteById(tiles[0]);
+         var tileTexture = tileSprite == null ? null : tileSprite.texture;
+         material.mainTexture = tileTexture;
+         
+         meshRenderer.material = material;
 
-        var sectorsMesh = GenerateMesh(width, height, size, tiles, backgroundTile, ignorablePositions);
-        
-        var meshGO = new GameObject("_cells");
-        var meshTransform = meshGO.transform;
-        meshTransform.SetParent(sectorsContainer);
-        meshTransform.localPosition = Vector3.zero;
-        meshTransform.localScale = new Vector3(1f, 1f, 1f);
-        meshTransform.localRotation = Quaternion.identity;
-
-        var meshRenderer = meshGO.AddComponent<MeshRenderer>();
-        var meshFilter = meshGO.AddComponent<MeshFilter>();
-
-        
-
-        meshFilter.mesh = sectorsMesh;
-
-        // apply material 
-        var material = new Material(Shader.Find("Sprites/Default"));
-        material.renderQueue = 2000;
-
-        // load texture
-        var tileSprite = IconService.Current.GetSpriteById(tiles[0]);
-        var tileTexture = tileSprite == null ? null : tileSprite.texture;
-        material.mainTexture = tileTexture;
-
-        meshRenderer.material = material;
-
-         return sectorsContainer.transform;
+         return SectorsContainer.transform;
      }
 
     private Mesh GenerateMesh(int width, int height, float size, List<string> tiles, string ignorableTileName = null, IList<BoardPosition> ignorablePositions = null)
