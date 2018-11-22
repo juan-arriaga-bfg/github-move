@@ -52,6 +52,7 @@ public class UIPiecesCheatSheetElementViewController : UITabElementViewControlle
         }
 
         rootButton
+           .Init()
            .ToState(GenericButtonState.Active)
            .OnClick(OnClickEventHandler);
     }
