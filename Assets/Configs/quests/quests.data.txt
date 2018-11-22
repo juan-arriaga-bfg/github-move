@@ -1,7 +1,7 @@
 ﻿[
   {
     "Id": "1_CreatePiece_PR_C4",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "1_CreatePiece_PR_C4"
@@ -32,7 +32,7 @@
   },
   {
     "Id": "2_ClearFog",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "2_ClearFog"
@@ -63,7 +63,7 @@
   },
   {
     "Id": "3_KillTree",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "3_KillTree"
@@ -94,7 +94,7 @@
   },
   {
     "Id": "4_CreatePiece_A2",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "4_CreatePiece_A2"
@@ -125,7 +125,7 @@
   },
   {
     "Id": "5_CreatePieceA5",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "5_CreatePieceA5"
@@ -156,7 +156,7 @@
   },
   {
     "Id": "6_ClearFog",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "6_ClearFog"
@@ -187,7 +187,7 @@
   },
   {
     "Id": "7_CreatePiece_PR_A5",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "7_CreatePiece_PR_A5"
@@ -218,7 +218,7 @@
   },
   {
     "Id": "8_CreatePiece_PR_B5",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "8_CreatePiece_PR_B5"
@@ -249,7 +249,7 @@
   },
   {
     "Id": "9_CreatePiece_PR_C5",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "9_CreatePiece_PR_C5"
@@ -280,7 +280,7 @@
   },
   {
     "Id": "10_OpenChest",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "10_OpenChest"
@@ -311,7 +311,7 @@
   },
   {
     "Id": "11_UseWorker",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "11_UseWorker"
@@ -342,7 +342,7 @@
   },
   {
     "Id": "12_UseMine",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "12_UseMine"
@@ -373,7 +373,7 @@
   },
   {
     "Id": "13_CreatePiece_A6",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "13_CreatePiece_A6"
@@ -404,7 +404,7 @@
   },
   {
     "Id": "14_CreatePiece_B3",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "14_CreatePiece_B3"
@@ -435,7 +435,7 @@
   },
   {
     "Id": "15_CreatePiece_B4",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "15_CreatePiece_B4"
@@ -466,7 +466,7 @@
   },
   {
     "Id": "16_CompleteOrder",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "16_CompleteOrder"
@@ -497,7 +497,7 @@
   },
   {
     "Id": "17_KillField",
-    "$type": "QuestEntity, GameAssembly",
+    "$type": "StoryQuestEntity, GameAssembly",
     "TaskDefs": [
       {
         "TaskId": "17_KillField"
