@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView 
 {
-    [IWUIBinding("#Container")] private UITabPanelViewController itemsPanel;
+    [IWUIBinding("/#RootCanvas/Body/Border/Content/PanelContent/ScrollView/Viewport/#Container")] private UITabPanelViewController itemsPanel;
 
     public override void OnViewShow()
     {
