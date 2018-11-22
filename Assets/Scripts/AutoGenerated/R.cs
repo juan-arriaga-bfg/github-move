@@ -164,4 +164,5 @@ public class R
      public const string PieceRemover = "PieceRemover";
      public const string UIHintArrow = "UIHintArrow";
      public const string FogExplosionParticleSystem = "FogExplosionParticleSystem";
+     public const string FireflyExplosion = "FireflyExplosion";
 }
