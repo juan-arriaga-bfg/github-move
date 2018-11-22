@@ -10,14 +10,10 @@ public class UICurrencyCheatSheetWindowItem : MonoBehaviour
     [SerializeField] private Image ico;
 
     private CurrencyDef def;
-
-    private string initialValue;
+    public CurrencyDef Def => def;
     
-    public bool IsChanged()
-    {
-        return initialValue != inputField.text; 
-    }
-
+    private int oldValue;
+    
     public void Init(CurrencyDef def)
     {
         this.def = def;
@@ -32,9 +28,17 @@ public class UICurrencyCheatSheetWindowItem : MonoBehaviour
         }
         
         var item = ProfileService.Current.Purchases.GetStorageItem(def.Name);
-        inputField.text = item.Amount.ToString();
+
+        oldValue = item.Amount;
+        inputField.text = oldValue.ToString();
+    }
+
+    public void SetValue(int value)
+    {
+        var str = value.ToString();
         
-        initialValue = inputField.text;
+        inputField.text = str;
+        OnEndEdit(str);
     }
     
     private Sprite GetPieecSprite()
@@ -44,14 +48,31 @@ public class UICurrencyCheatSheetWindowItem : MonoBehaviour
 
     public void OnEndEdit(string value)
     {
-        StorageItem storageItem = ProfileService.Current.Purchases.GetStorageItem(def.Name);
+        var newValue = int.Parse(inputField.text);
 
-        int oldValue = storageItem.Amount; 
-        int newValue = int.Parse(value);
+        if (def.Name == Currency.Level.Name && oldValue > newValue)
+        {
+            inputField.text = oldValue.ToString();
+            return;
+        }
         
-        storageItem.Amount = newValue;
+        inputField.textComponent.color = oldValue != newValue ? Color.yellow : Color.white;
+    }
 
-        inputField.textComponent.color = IsChanged() ? Color.yellow : Color.white; 
+    public void Apply()
+    {
+        var newValue = int.Parse(inputField.text);
+        var deffValue = newValue - oldValue;
+        
+        if(deffValue == 0) return;
+        
+        if (deffValue > 0)
+        {
+            CurrencyHellper.Purchase(def.Name, deffValue);
+            
+            if(def.Name == Currency.Level.Name) CurrencyHellper.Purchase(Currency.Experience.Name, 1, Currency.Experience.Name, 1);
+        }
+        else CurrencyHellper.Purchase(def.Name, 0, def.Name, -deffValue);
         
         Debug.Log($"[UICurrencyCheatSheetWindowItem] => OnEndEdit: {def.Name}: {oldValue} -> {newValue}");
     }
