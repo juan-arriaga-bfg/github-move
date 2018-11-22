@@ -5,14 +5,23 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIPiecesCheatSheetWindowItem : MonoBehaviour
+public class UIPiecesCheatSheetElementViewController : UITabElementViewController
 {
-    [SerializeField] private TextMeshProUGUI lblName;
-    [SerializeField] private TextMeshProUGUI lblId;
-    [SerializeField] private Image ico;
-    [SerializeField] private CanvasGroup mainCanvasGroup;
+    [IWUIBinding("#NameLabel")] private NSText lblName;
+    [IWUIBinding("#IdLabel")] private NSText lblId;
+    [IWUIBinding("#Icon")] private Image ico;
+    [IWUIBinding("#RootCanvas", true)] private CanvasGroup mainCanvasGroup;
 
     private int pieceId;
+    
+    public override void Init()
+    {
+        base.Init();
+        
+        var targetEntity = entity as UIPiecesCheatSheetElementEntity;
+
+        Init(targetEntity.PieceId);
+    }
     
     public void Init(int pieceId)
     {
@@ -28,8 +37,8 @@ public class UIPiecesCheatSheetWindowItem : MonoBehaviour
         // var pieceManager = GameDataService.Current.PiecesManager;
         PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceId);
 
-        lblName.text = pieceTypeDef.Abbreviations[0];
-        lblId.text = "id " + pieceId.ToString();
+        lblName.Text = pieceTypeDef.Abbreviations[0];
+        lblId.Text = "id " + pieceId.ToString();
 
         var spr = GetPieecSprite();
         if (spr != null)
@@ -45,9 +54,6 @@ public class UIPiecesCheatSheetWindowItem : MonoBehaviour
 
     public void OnClick()
     {
-        // var camPos = Camera.main.transform.position;
-        // BoardPosition bp = BoardService.Current.GetBoardById(0).BoardDef.GetSectorPosition(camPos);
-        // Debug.Log($"{bp}");
         BoardPosition pos = new BoardPosition(23, 10, BoardService.Current.GetBoardById(0).BoardDef.PieceLayer);
         var availablePoints = new List<BoardPosition>();
 

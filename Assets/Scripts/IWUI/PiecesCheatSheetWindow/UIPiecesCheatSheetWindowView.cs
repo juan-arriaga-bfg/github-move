@@ -1,13 +1,9 @@
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView 
 {
-    [SerializeField] private UIPiecesCheatSheetWindowItem itemPrefab;
-    
-    private List<UIPiecesCheatSheetWindowItem> items;
-    
+    [IWUIBinding("#Container")] private UITabPanelViewController itemsPanel;
+
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -15,6 +11,7 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
         UIPiecesCheatSheetWindowModel model = Model as UIPiecesCheatSheetWindowModel;
 
         SetTitle(model.Title);
+        
         CreateItems(model);
     }
 
@@ -23,16 +20,21 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
         base.OnViewClose();
         
         UIPiecesCheatSheetWindowModel model = Model as UIPiecesCheatSheetWindowModel;
-        
-        foreach (var item in items)
-        {
-            Destroy(item.gameObject);
-        }
-        
     }
     
     private void CreateItems(UIPiecesCheatSheetWindowModel model)
     {
+        Fill(model.PiecesList());
+    }
+    
+    public void Fill(List<int> entities)
+    {
+        if (entities == null || entities.Count <= 0)
+        {
+            itemsPanel.Clear();
+            return;
+        }
+        
         var exclude = new HashSet<int>
         {
             0, 
@@ -40,35 +42,24 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
             1
         };
         
-        var matchDef = BoardService.Current.GetBoardById(0).BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
-        
-        itemPrefab.gameObject.SetActive(true);
-        
-        items = new List<UIPiecesCheatSheetWindowItem>();
-        var piecesList = model.PiecesList();
-
-        int prevChain = -1;
-        
-        foreach (var pieceId in piecesList)
+        // update items
+        var tabViews = new List<IUITabElementEntity>(entities.Count);
+        for (int i = 0; i < entities.Count; i++)
         {
-            if (exclude.Contains(pieceId))
+            var def = entities[i];
+            
+            // exclude items
+            if (exclude.Contains(def)) continue;
+
+            var tabEntity = new UIPiecesCheatSheetElementEntity
             {
-                continue;
-            }
-            
-            var item = Instantiate(itemPrefab);
-            item.transform.SetParent(itemPrefab.transform.parent, false);
-
-            var chainDef = matchDef.GetChain(pieceId);
-            
-            var chain = chainDef != null && chainDef.Count > 0 ? chainDef[0] : 0;
-            // item.Init(chain == -1 || chain == prevChain ? pieceId : 0 ); 
-            item.Init(pieceId);
-            items.Add(item);
-
-            prevChain = chain;
+                PieceId = def,
+                OnSelectEvent = null,
+                OnDeselectEvent = null
+            };
+            tabViews.Add(tabEntity);
         }
-
-        itemPrefab.gameObject.SetActive(false);
+        itemsPanel.Create(tabViews);
+        itemsPanel.Select(0);
     }
 }
