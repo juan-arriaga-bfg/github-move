@@ -170,7 +170,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         
         if(bubble.IsShow) return;
 
-        bubble.SetData(LocalizationService.Instance.Manager.GetTextByUid("gameboard.bubble.message.fog", "Clear fog"), Def.Condition.ToStringIcon(), OnClick);
+        bubble.SetData(LocalizationService.Get("gameboard.bubble.message.fog", "gameboard.bubble.message.fog"), Def.Condition.ToStringIcon(), OnClick);
         bubble.SetOfset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
         bubble.Priority = -1;
         bubble.Change(true);

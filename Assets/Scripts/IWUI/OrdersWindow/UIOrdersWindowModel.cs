@@ -2,14 +2,14 @@ using System.Collections.Generic;
 
 public class UIOrdersWindowModel : IWWindowModel 
 {
-    public string Title => LocalizationService.Instance.Manager.GetTextByUid("window.orders.title", "Orders");
+    public string Title => LocalizationService.Get("window.orders.title", "window.orders.title");
     
-    public string OrdersMessage => LocalizationService.Instance.Manager.GetTextByUid("window.orders.message.orders.empty", "You have no orders at the moment. Come back later.");
-    public string IngredientsMessage => LocalizationService.Instance.Manager.GetTextByUid("window.orders.message.ingredients.empty", "You have no ingredients at the moment. Come back later.");
+    public string OrdersMessage => LocalizationService.Get("window.orders.message.orders.empty", "window.orders.message.orders.empty");
+    public string IngredientsMessage => LocalizationService.Get("window.orders.message.ingredients.empty", "window.orders.message.ingredients.empty");
     
-    public string OrdersText => LocalizationService.Instance.Manager.GetTextByUid("window.orders.toggle.orders", "Orders");
-    public string RecipesText => LocalizationService.Instance.Manager.GetTextByUid("window.orders.toggle.recipes", "Recipes");
-    public string IngredientsText => LocalizationService.Instance.Manager.GetTextByUid("window.orders.toggle.ingredients", "Ingredients");
+    public string OrdersText => LocalizationService.Get("window.orders.toggle.orders", "window.orders.toggle.orders");
+    public string RecipesText => LocalizationService.Get("window.orders.toggle.recipes", "window.orders.toggle.recipes");
+    public string IngredientsText => LocalizationService.Get("window.orders.toggle.ingredients", "window.orders.toggle.ingredients");
     
     public Order Select; 
 

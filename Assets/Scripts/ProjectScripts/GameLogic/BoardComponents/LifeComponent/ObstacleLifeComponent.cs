@@ -4,8 +4,8 @@ public class ObstacleLifeComponent : StorageLifeComponent
 {
     public override CurrencyPair Energy => GameDataService.Current.ObstaclesManager.GetPriceByStep(thisContext.PieceType, current);
 
-    public override string Message => string.Format(LocalizationService.Instance.Manager.GetTextByUid("gameboard.bubble.message.obstacle", "Tree chopping:\n{0}?"), DateTimeExtension.GetDelayText(GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current)));
-    public override string Price => string.Format(LocalizationService.Instance.Manager.GetTextByUid("gameboard.bubble.button.chop", "Chop {0}"), Energy.ToStringIcon());
+    public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.obstacle", "gameboard.bubble.message.obstacle\n{0}?"), DateTimeExtension.GetDelayText(GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current)));
+    public override string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.chop", "gameboard.bubble.button.chop {0}"), Energy.ToStringIcon());
 
     private int spawnPiece = PieceType.None.Id;
     public override int StorageSpawnPiece => spawnPiece;
