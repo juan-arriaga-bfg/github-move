@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4522612196469224}
   - component: {fileID: 114803488472458252}
   m_Layer: 0
-  m_Name: ProductionStartParticle
+  m_Name: ProductionReadyParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsFading: 0
   FadeValue: 0
-  duration: 5
+  duration: 0
   Particles: {fileID: 198179352109070708}
 --- !u!198 &198179352109070708
 ParticleSystem:
@@ -96,7 +96,7 @@ ParticleSystem:
   lengthInSec: 0.72
   simulationSpeed: 1
   stopAction: 0
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0

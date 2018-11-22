@@ -167,5 +167,5 @@ public class R
      public const string FireflyExplosion = "FireflyExplosion";
      public const string ProductionEndParticle = "ProductionEndParticle";
      public const string ProductionProcessParticle = "ProductionProcessParticle";
-     public const string ProductionStartParticle = "ProductionStartParticle";
+     public const string ProductionReadyParticle = "ProductionReadyParticle";
 }

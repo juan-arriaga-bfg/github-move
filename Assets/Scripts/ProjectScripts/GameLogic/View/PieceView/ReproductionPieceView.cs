@@ -6,6 +6,7 @@ public class ReproductionPieceView : PieceBoardElementView
 {
     private TimerComponent timer;
     private ParticleView processParticle;
+    private ParticleView readyParticle;
     
     public override void Init(BoardRenderer context, Piece piece)
     {
@@ -27,6 +28,9 @@ public class ReproductionPieceView : PieceBoardElementView
     {
         base.ResetViewOnDestroy();
         
+        ClearParticle(ref processParticle);        
+        ClearParticle(ref readyParticle);
+        
         if(timer == null) return;
         
         timer.OnStart -= OnStart;
@@ -36,47 +40,65 @@ public class ReproductionPieceView : PieceBoardElementView
     public override void OnDragStart(BoardPosition boardPos, Vector2 worldPos)
     {
         base.OnDragStart(boardPos, worldPos);
-        if(processParticle != null)
-            processParticle.Particles.Stop();
+           
+        processParticle?.Particles.Stop();
+        readyParticle?.Particles.Stop();
+    }
+    
+    private void SyncParticlePosition(ParticleView particle)
+    {
+        particle.ParticleRenderer.sortingOrder = bodySprites.First().sortingOrder + 1;
     }
 
+    private void PlayAndSyncParticle(ParticleView particle)
+    {
+        if (particle != null)
+        {
+            SyncParticlePosition(particle);
+            particle.Particles.Play();
+        }
+    }
+    
     public override void OnDragEnd(BoardPosition boardPos, Vector2 worldPos)
     {
         base.OnDragEnd(boardPos, worldPos);
-        if (processParticle != null)
-        {
-            processParticle.SetTargetPosition(Context.Context.BoardDef.GetWorldPosition(boardPos.X, boardPos.Y));
-            processParticle.ParticleRenderer.sortingOrder = bodySprites.First().sortingOrder + 1;
-            processParticle.Particles.Play();
-        }
-            
+        
+        PlayAndSyncParticle(processParticle);
+        PlayAndSyncParticle(readyParticle);
     }
 
     private void OnStart()
     {
-        Debug.LogError("Start");
+        ClearParticle(ref readyParticle);
         
-        ParticleView.Show(R.ProductionStartParticle, Piece.CachedPosition.SetZ(Piece.CachedPosition.Z + 1));
         processParticle = ParticleView.Show(R.ProductionProcessParticle, Piece.CachedPosition);
-        processParticle.Particles.Play();
-
-        processParticle.ParticleRenderer.sortingOrder = bodySprites.First().sortingOrder + 1;
+        processParticle.transform.SetParent(transform);
+        processParticle.transform.localPosition = Vector3.zero;
+        
+        PlayAndSyncParticle(processParticle);
         
         UpdateSate();
     }
 
+    private void ClearParticle(ref ParticleView particle)
+    {
+        if (particle == null)
+            return;
+        Context.DestroyElement(particle);
+        particle = null;
+    }
+
     private void OnComplete()
-    {   
-        Debug.LogError("End");
+    {
         ParticleView.Show(R.ProductionEndParticle, Piece.CachedPosition.SetZ(Piece.CachedPosition.Z + 1));
 
-        if (processParticle != null)
-        {
-            Debug.LogError("Remove execute");
-            Context.DestroyElement(processParticle);
-            processParticle = null;
-        }
-            
+        ClearParticle(ref processParticle);
+        
+        readyParticle = ParticleView.Show(R.ProductionReadyParticle, Piece.CachedPosition);
+        readyParticle.transform.SetParent(transform);
+        readyParticle.transform.localPosition = Vector3.zero;
+        
+        PlayAndSyncParticle(readyParticle);         
         
         UpdateSate();
     }
