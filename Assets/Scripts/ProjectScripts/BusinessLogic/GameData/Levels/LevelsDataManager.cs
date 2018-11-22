@@ -19,6 +19,7 @@ public class LevelsDataManager : SequenceData, IDataLoader<List<LevelsDef>>
 	{
 		GetSequence(Currency.Level.Name).Reinit(Levels[Level - 1].PieceWeights);
 		GetSequence(Currency.Order.Name).Reinit(Levels[Level - 1].OrdersWeights);
+		GetSequence(Currency.Resources.Name).Reinit(Levels[Level - 1].ResourcesWeights);
 	}
 
 	public void LoadData(IDataMapper<List<LevelsDef>> dataMapper)
@@ -37,10 +38,12 @@ public class LevelsDataManager : SequenceData, IDataLoader<List<LevelsDef>>
 					
 					next.OrdersWeights = ItemWeight.ReplaseWeights(previous.OrdersWeights, next.OrdersWeights);
 					next.PieceWeights = ItemWeight.ReplaseWeights(previous.PieceWeights, next.PieceWeights);
+					next.ResourcesWeights = ItemWeight.ReplaseWeights(previous.ResourcesWeights, next.ResourcesWeights);
 					Levels.Add(next);
 				}
 				
 				AddSequence(Currency.Level.Name, Levels[Level - 1].PieceWeights);
+				AddSequence(Currency.Resources.Name, Levels[Level - 1].ResourcesWeights);
 				AddSequence(Currency.Order.Name, Levels[Level - 1].OrdersWeights);
 			}
 			else
@@ -63,4 +66,5 @@ public class LevelsDataManager : SequenceData, IDataLoader<List<LevelsDef>>
 
 	public List<CurrencyPair> Rewards => Levels[Level - 1].Rewards;
 	public List<ItemWeight> PieceWeights => Levels[Level - 1].PieceWeights;
+	public List<ItemWeight> ResourcesWeights => Levels[Level - 1].ResourcesWeights;
 }

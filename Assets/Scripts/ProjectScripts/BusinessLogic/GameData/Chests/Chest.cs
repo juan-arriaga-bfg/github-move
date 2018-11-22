@@ -31,13 +31,17 @@ public class Chest
         if (reward.Count != 0) return reward;
         
         var hard = GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name);
+        var resources = GameDataService.Current.LevelsManager.GetSequence(Currency.Resources.Name);
         var sequence = GameDataService.Current.ChestsManager.GetSequence(Def.Uid);
 
         var productionAmount = Def.ProductionAmount.Range();
+        var resourcesAmount = Def.ResourcesAmount.Range();
+        
         reward = hard.GetNextDict(productionAmount);
+        reward = resources.GetNextDict(resourcesAmount, reward);
         reward = sequence.GetNextDict(Def.PieceAmount, reward);
 
-        rewardCount = productionAmount + Def.PieceAmount;
+        rewardCount = productionAmount + resourcesAmount + Def.PieceAmount;
         
         return reward;
     }
