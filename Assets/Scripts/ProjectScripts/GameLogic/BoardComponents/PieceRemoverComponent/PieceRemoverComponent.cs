@@ -168,11 +168,11 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         {
             var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
             model.Image = "";
-            model.Title = LocalizationService.Get("window.remover.hint.title",     "Shovel Hint");
-            model.Message = LocalizationService.Get("window.remover.hint.message", "Drag and drop shovel to the piece to remove it");
-            model.AcceptLabel = LocalizationService.Get("common.button.ok",        "Ok");
- 
-            model.OnAccept = () =>{};
+            model.Title = LocalizationService.Get("window.remover.hint.title", "window.remover.hint.title");
+            model.Message = LocalizationService.Get("window.remover.hint.message", "window.remover.hint.message");
+            model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
+
+            model.OnAccept = () => { };
 
             model.OnCancel = null;
             
@@ -190,12 +190,12 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
             var model = UIService.Get.GetCachedModel<UIConfirmRemoverMessageWindowModel>(UIWindowType.ConfirmRemoverMessageWindow);
 
             model.Image = PieceType.Parse(pieceEntity.PieceType);
-            model.Title = LocalizationService.Get("window.remove.title",     "Remove");
-            model.Message = LocalizationService.Get("window.remove.message", "Are you sure that you want to remove the figure from the field?");
-            model.CancelLabel = LocalizationService.Get("common.button.yes", "Yes");
-            model.AcceptLabel = LocalizationService.Get("common.button.no",  "No");
+            model.Title = LocalizationService.Get("window.remove.title", "window.remove.title");
+            model.Message = LocalizationService.Get("window.remove.message", "window.remove.message");
+            model.CancelLabel = LocalizationService.Get("common.button.yes", "common.button.yes");
+            model.AcceptLabel = LocalizationService.Get("common.button.no", "common.button.no");
 
-            model.OnAccept = () => { EndRemover(); };
+            model.OnAccept = EndRemover;
 
             model.OnCancel = () => { Confirm(boardPosition); };
 

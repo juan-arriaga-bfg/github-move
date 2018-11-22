@@ -14,7 +14,7 @@ public class TapToContinueTextViewController : IWBaseMonoBehaviour
     
     private void Start()
     {
-        label.text = LocalizationService.Instance.Manager.GetTextByUid("common.message.tapToContinue", "Tap to continue...");
+        label.text = LocalizationService.Get("common.message.tapToContinue", "common.message.tapToContinue");
     }
 
     private void OnEnable()

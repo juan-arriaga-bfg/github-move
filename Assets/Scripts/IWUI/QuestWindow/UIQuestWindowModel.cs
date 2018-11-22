@@ -42,10 +42,10 @@ public class UIQuestWindowModel : IWWindowModel
                 case TaskState.Pending:
                 case TaskState.New:
                 case TaskState.InProgress:                                                                                              
-                    return LocalizationService.Instance.Manager.GetTextByUid("common.button.find", "Find");
+                    return LocalizationService.Get("common.button.find", "common.button.find");
 
                 case TaskState.Completed:
-                    return LocalizationService.Instance.Manager.GetTextByUid("common.button.claim", "Claim!");
+                    return LocalizationService.Get("common.button.claim", "common.button.claim");
 
                 case TaskState.Claimed:
                     break;
@@ -81,7 +81,7 @@ public class UIQuestWindowModel : IWWindowModel
     {
         get
         {
-            var str = string.Format(LocalizationService.Instance.Manager.GetTextByUid("common.message.reward", "Reward:{0}"), "");
+            var str = string.Format(LocalizationService.Get("common.message.reward", "common.message.reward:{0}"), "");
             var strBuilder = new StringBuilder($"<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>{str}</color></font> <size=50>");
             
             strBuilder.Append(CurrencyHellper.RewardsToString("  ", PiecesReward, CurrencysReward));

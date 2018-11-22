@@ -37,10 +37,10 @@ public class UIChestsShopItem : IWUIWindowViewController
 
 		ChengeButtons();
 
-		label.Text = LocalizationService.Instance.Manager.GetTextByUid($"piece.name.{chest.Uid}", "Chest");
+		label.Text = LocalizationService.Get($"piece.name.{chest.Uid}", $"piece.name.{chest.Uid}");
 		labelBtn.Text = isFree
-			? LocalizationService.Instance.Manager.GetTextByUid("common.button.claim", "Claim!")
-			: string.Format(LocalizationService.Instance.Manager.GetTextByUid("common.button.buyFor", "Buy for {0}"), chest.Price.ToStringIcon(false));
+			? LocalizationService.Get("common.button.claim", "common.button.claim")
+			: string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), chest.Price.ToStringIcon(false));
 		
 		icon.sprite = IconService.Current.GetSpriteById(chest.Uid);
 	}
@@ -96,7 +96,7 @@ public class UIChestsShopItem : IWUIWindowViewController
 		if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, 1))
 		{
 			isClick = false;
-			UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.freeSpace", "Free space not found!"));
+			UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
 			return;
 		}
 		
@@ -113,7 +113,7 @@ public class UIChestsShopItem : IWUIWindowViewController
 	{
 		if (model.FreeChestLogic.Timer.IsExecuteable())
 		{
-			UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.notComplete", "Production of the resource is not complete!"));
+			UIErrorWindowController.AddError(LocalizationService.Get("message.error.notComplete", "message.error.notComplete"));
 			return;
 		}
 		
