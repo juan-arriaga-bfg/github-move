@@ -16,6 +16,8 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     public TaskState State { get; protected set; }
 
     [JsonProperty] public int Order;
+    
+    [JsonProperty] public TaskGroup Group;
        
 #region Serialization
 
@@ -34,6 +36,11 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     }
     
     public bool ShouldSerializeComponentsCache()
+    {
+        return false;
+    }
+    
+    public bool ShouldSerializeGroup()
     {
         return false;
     }

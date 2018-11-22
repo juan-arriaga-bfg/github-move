@@ -14,7 +14,7 @@ public sealed class QuestStartConditionMaxActiveQuestsCountComponent : QuestStar
     
     public override bool Check()
     {
-        var quests = GameDataService.Current.QuestsManager.ActiveQuests;
+        var quests = GameDataService.Current.QuestsManager.ActiveStoryQuests;
         return quests != null && quests.Count <= Count;
     }
     

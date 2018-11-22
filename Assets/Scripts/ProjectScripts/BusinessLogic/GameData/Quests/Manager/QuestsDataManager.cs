@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 using Quests;
 using UnityEngine;
 
-public class QuestsDataManager : IECSComponent, IDataManager
+public sealed class QuestsDataManager : IECSComponent, IDataManager
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
@@ -18,9 +18,16 @@ public class QuestsDataManager : IECSComponent, IDataManager
     private Dictionary<Type, Dictionary<string, JToken>> cache;
     
     /// <summary>
-    /// List of Quests that currently in progress
+    /// List of Story-related Quests that currently in progress
     /// </summary>
-    public List<QuestEntity> ActiveQuests;
+    public List<QuestEntity> ActiveStoryQuests;
+    
+    /// <summary>
+    /// List of All active quests that handled by the Manager
+    /// </summary>
+    private List<QuestEntity> ActiveQuests;
+    
+    public DailyQuestEntity DailyQuest;
     
     /// <summary>
     /// List of ids of completed quests
@@ -85,6 +92,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
 
         FinishedQuests = questSave.FinishedQuests ?? new List<string>();
         
+        ActiveStoryQuests = new List<QuestEntity>();
         ActiveQuests = new List<QuestEntity>();
 
         if (questSave.ActiveQuests == null)
@@ -420,6 +428,16 @@ public class QuestsDataManager : IECSComponent, IDataManager
         
         quest = InstantiateQuest(id);
         ActiveQuests.Add(quest);
+
+        // Cache in appropriate store
+        if (quest is StoryQuestEntity)
+        {
+             ActiveStoryQuests.Add(quest);
+        } 
+        else if (quest is DailyQuestEntity)
+        {
+            DailyQuest = (DailyQuestEntity) quest;
+        }
 
         // To handle Pending -> New transition for listeners
         if (saveData == null)

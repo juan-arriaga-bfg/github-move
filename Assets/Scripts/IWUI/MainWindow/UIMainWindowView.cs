@@ -94,7 +94,7 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
 
     public void OnActiveQuestsListChanged()
     {
-        var activeQuests = GameDataService.Current.QuestsManager.ActiveQuests;
+        var activeQuests = GameDataService.Current.QuestsManager.ActiveStoryQuests;
         
         CheckQuestButtons(activeQuests);
 

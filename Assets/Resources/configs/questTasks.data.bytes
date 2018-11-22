@@ -204,5 +204,56 @@
         "Message": "Clear dead fields"
       }
     }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "1_Daily_CreatePiece",
+    "Group": "Permanent",
+    "TargetValue": 10,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "Create a Piece",
+        "Message": "Create a Piece"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "2_Daily_CreatePiece",
+    "Group": "Permanent",
+    "TargetValue": 20,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "Fog1",
+        "Title": "Clear a fog",
+        "Message": "Clear a fog"
+      }
+    }
+  },
+  {
+    "$type": "TaskSuperMatchEntity, GameAssembly",
+    "Id": "2_Daily_SuperMatch",
+    "Group": "Easy",
+    "TargetValue": 2,
+    "Value1": 6,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "Merge 6 or more objects in one turn"
+      }
+    }
+  },
+  {
+    "$type": "TaskCurrencyCollectEntity, GameAssembly",
+    "Id": "TEMP1",
+    "Group": "Easy",
+    "PieceUid": "Coins",
+    "TargetValue": 100
+  },
+  {
+    "$type": "TaskCurrencyCollectEntity, GameAssembly",
+    "Id": "TEMP2",
+    "Group": "Normal",
+    "PieceUid": "Crystals",
+    "TargetValue": 3
   }
 ]

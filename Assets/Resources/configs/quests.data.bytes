@@ -525,5 +525,29 @@
         "Message": "Let's remove old fields."
       }
     }
+  },
+  {
+    "Id": "Daily",
+    "$type": "DailyQuestEntity, GameAssembly",
+    "TaskDefs": [
+      {
+        "TaskId": "1_CreatePiece_PR_C4"
+      },
+      {
+        "TaskId": "3_KillTree"
+      },
+      {
+        "TaskId": "5_CreatePieceA5"
+      },
+      {
+        "TaskId": "6_ClearFog"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "Daily objectives",
+        "Message": "Do it!"
+      }
+    }
   }
 ]

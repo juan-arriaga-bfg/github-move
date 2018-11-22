@@ -15,7 +15,7 @@
 
     private bool IsAnyActiveQuestAboutPiece(Piece piece)
     {
-        var activeQuests = GameDataService.Current.QuestsManager.ActiveQuests;
+        var activeQuests = GameDataService.Current.QuestsManager.ActiveStoryQuests;
 
         for (var questIndex = 0; questIndex < activeQuests.Count; questIndex++)
         {
