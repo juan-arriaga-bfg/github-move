@@ -3,9 +3,9 @@ using System.Text;
 
 public class UINextLevelWindowModel : IWWindowModel
 {
-    public string Title => LocalizationService.Instance.Manager.GetTextByUid("window.nexLevel.title", "Next Level!");
+    public string Title => LocalizationService.Get("window.nexLevel.title", "window.nexLevel.title");
     public string Mesage => (GameDataService.Current.LevelsManager.Level + 1).ToString();
-    public string Header => LocalizationService.Instance.Manager.GetTextByUid("window.nexLevel.header", "New Recipe!");
+    public string Header => LocalizationService.Get("window.nexLevel.header", "window.nexLevel.header");
 
     public string Rewards
     {
@@ -20,7 +20,7 @@ public class UINextLevelWindowModel : IWWindowModel
                 rewards.Append(pair.ToStringIcon());
             }
             
-            return string.Format(LocalizationService.Instance.Manager.GetTextByUid("common.message.reward", "Reward:{0}"), rewards);
+            return string.Format(LocalizationService.Get("common.message.reward", "common.message.reward:{0}"), rewards);
         }
     }
 

@@ -31,7 +31,7 @@ public class UIOrdersSelectItem : UISimpleScrollItem
         this.order = order;
         isComplete = false;
         
-        Init(PieceType.Parse(order.Customer), string.Format(LocalizationService.Instance.Manager.GetTextByUid("common.message.reward", "Reward:{0}"), $"{Order.Separator}{order.Reward}"));
+        Init(PieceType.Parse(order.Customer), string.Format(LocalizationService.Get("common.message.reward", "common.message.reward:{0}"), $"{Order.Separator}{order.Reward}"));
         
         iconOrder.sprite = IconService.Current.GetSpriteById(order.Def.Uid);
         
@@ -101,8 +101,8 @@ public class UIOrdersSelectItem : UISimpleScrollItem
     private void UpdateState()
     {
         btnCompleteLabel.Text = order.State != OrderState.Complete
-            ? LocalizationService.Instance.Manager.GetTextByUid("common.button.produce", "Produce")
-            : LocalizationService.Instance.Manager.GetTextByUid("common.button.claim", "Claim!");
+            ? LocalizationService.Get("common.button.produce", "common.button.produce")
+            : LocalizationService.Get("common.button.claim", "common.button.claim");
         
         goTimer.SetActive(order.State == OrderState.InProgress);
         btnBuy.SetActive(order.State == OrderState.InProgress);
@@ -162,7 +162,7 @@ public class UIOrdersSelectItem : UISimpleScrollItem
             
             if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, order.PiecesReward.Sum(e => e.Value)))
             {
-                UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.freeSpace", "Free space not found!"));
+                UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
                 return;
             }
             

@@ -20,6 +20,12 @@
         "Uid": "PR_C1",
         "Weight": 50
       }
+    ],
+    "ResourcesWeights": [
+      {
+        "Uid": "PR_C5",
+        "Weight": 50
+      }
     ]
   },
   {
@@ -67,6 +73,21 @@
       },
       {
         "Uid": "PR_B1",
+        "Weight": 30
+      }
+    ],
+    "ResourcesWeights": [
+      {
+        "Uid": "PR_A5",
+        "Weight": 30
+      },
+      {
+        "Uid": "PR_C5",
+        "Weight": 20,
+        "Override": true
+      },
+      {
+        "Uid": "PR_B5",
         "Weight": 30
       }
     ]
@@ -143,6 +164,22 @@
         "Weight": 10,
         "Override": true
       }
+    ],
+    "ResourcesWeights": [
+      {
+        "Uid": "PR_C5",
+        "Weight": 30,
+        "Override": true
+      },
+      {
+        "Uid": "PR_D5",
+        "Weight": 10
+      },
+      {
+        "Uid": "PR_B5",
+        "Weight": 10,
+        "Override": true
+      }
     ]
   },
   {
@@ -170,6 +207,12 @@
     "PieceWeights": [
       {
         "Uid": "PR_E1",
+        "Weight": 10
+      }
+    ],
+    "ResourcesWeights": [
+      {
+        "Uid": "PR_E5",
         "Weight": 10
       }
     ]

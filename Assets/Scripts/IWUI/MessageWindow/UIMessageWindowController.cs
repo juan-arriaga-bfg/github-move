@@ -19,9 +19,9 @@ public class UIMessageWindowController : IWWindowController {
     {
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
-        model.Title = LocalizationService.Get("common.message.message", "Message");
-        model.Message = LocalizationService.Get("common.message.notImplemented", "Not Implemented");
-        model.AcceptLabel = LocalizationService.Get("common.button.ok", "Ok");
+        model.Title = LocalizationService.Get("common.message.message", "common.message.message");
+        model.Message = LocalizationService.Get("common.message.notImplemented", "common.message.notImplementedd");
+        model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
         
         model.OnAccept = () => {};
         model.OnCancel = null;
@@ -33,9 +33,9 @@ public class UIMessageWindowController : IWWindowController {
     {
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
-        model.Title = LocalizationService.Get("common.message.message", "Message");
+        model.Title = LocalizationService.Get("common.message.message", "common.message.message");
         model.Message = message;
-        model.AcceptLabel = LocalizationService.Get("common.button.ok", "Ok");
+        model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
         
         model.OnAccept = OnAccept ?? (() => {});
         model.OnCancel = null;
@@ -49,7 +49,7 @@ public class UIMessageWindowController : IWWindowController {
         
         model.Title = title;
         model.Message = message;
-        model.AcceptLabel = LocalizationService.Get("common.button.ok", "Ok");
+        model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
         model.isHardAccept = isHardAccept;
         
         model.OnAccept = OnAccept ?? (() => {});
@@ -65,7 +65,7 @@ public class UIMessageWindowController : IWWindowController {
         model.Title = title;
         model.Message = null;
         model.Image = image;
-        model.AcceptLabel = LocalizationService.Get("common.button.ok", "Ok");
+        model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
         
         model.OnAccept = onAccept;
         model.OnCancel = null;
@@ -77,10 +77,10 @@ public class UIMessageWindowController : IWWindowController {
     {
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
-        model.Title = string.Format(LocalizationService.Get("common.message.need", "Need {0}?"), Currency.Coins.Name.ToLower());
+        model.Title = string.Format(LocalizationService.Get("common.message.need", "common.message.need {0}?"), Currency.Coins.Name.ToLower());
         model.Message = null;
         model.Image = "tutorial_TextBlock_1";
-        model.AcceptLabel = LocalizationService.Get("common.button.ok", "Ok");
+        model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
         
         model.OnAccept = () => {};
         model.OnCancel = null;
@@ -92,9 +92,9 @@ public class UIMessageWindowController : IWWindowController {
     {
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
-        model.Title = string.Format(LocalizationService.Get("common.message.need", "Need {0}?"), currency.ToLower());
-        model.Message = string.Format(LocalizationService.Get("common.message.notHave", "You do not have enough {0}!"), $"<sprite name={currency}>");
-        model.AcceptLabel = LocalizationService.Get("common.button.ok", "Ok");
+        model.Title = string.Format(LocalizationService.Get("common.message.need", "common.message.need {0}?"), currency.ToLower());
+        model.Message = string.Format(LocalizationService.Get("common.message.notHave", "common.message.notHave {0}!"), $"<sprite name={currency}>");
+        model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
         
         model.OnAccept = () => {};
         model.OnCancel = null;
@@ -108,7 +108,7 @@ public class UIMessageWindowController : IWWindowController {
 
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
-        model.Title = LocalizationService.Get("window.timerComplete.title", "Complete now!");
+        model.Title = LocalizationService.Get("window.timerComplete.title", "window.timerComplete.title");
         model.Message = message;
         model.AcceptLabel = "";
         model.isBuy = true;

@@ -12,6 +12,7 @@ public class ChestDef
     public List<ItemWeight> PieceWeights;
     
     public AmountRange ProductionAmount;
+    public AmountRange ResourcesAmount;
     
     private int pieceType = -1;
     public int Piece => pieceType == -1 ? (pieceType = PieceType.Parse(Uid)) : pieceType;

@@ -4,8 +4,8 @@
     private TimerComponent cooldown;
     
     public override CurrencyPair Energy => def.Price;
-    public override string Message => string.Format(LocalizationService.Instance.Manager.GetTextByUid("gameboard.bubble.message.castle.make", "Make: {0}"), Energy.ToStringIcon());
-    public override string Price => Timer.IsExecuteable() ? string.Format(LocalizationService.Instance.Manager.GetTextByUid("gameboard.bubble.button.wait", "Wait\n{0}"), Timer.CompleteTime.GetTimeLeftText()) : base.Price;
+    public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.castle.make", "gameboard.bubble.message.castle.make {0}"), Energy.ToStringIcon());
+    public override string Price => Timer.IsExecuteable() ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), Timer.CompleteTime.GetTimeLeftText()) : base.Price;
 
     public override TimerComponent Timer => cooldown;
 
@@ -46,7 +46,7 @@
         if (cooldown.IsExecuteable())
         {
             UIMessageWindowController.CreateTimerCompleteMessage(
-                LocalizationService.Get("indow.timerComplete.message.castle", "Would you like to build the item right now for crystals?"),
+                LocalizationService.Get("indow.timerComplete.message.castle", "indow.timerComplete.message.castle"),
                 cooldown);
 
             return false;

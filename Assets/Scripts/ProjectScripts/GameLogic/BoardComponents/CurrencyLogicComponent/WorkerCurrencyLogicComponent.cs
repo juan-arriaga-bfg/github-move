@@ -76,7 +76,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             
             var select = completeTimesList[0];
             
-            UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.workerBusy", "All workers are busy!"));
+            UIErrorWindowController.AddError(LocalizationService.Get("message.error.workerBusy", "message.error.workerBusy"));
             context.HintCooldown.Step(select.Key);
             
             select.Value.View.SetState(TimerViewSate.Select);
@@ -175,7 +175,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     {
         if (!target.Context.Pathfinder.CanPathToCastle(target))
         {
-            UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.action", "Can't make this action!"));
+            UIErrorWindowController.AddError(LocalizationService.Get("message.error.action", "message.error.action"));
             return false;
         }
 
@@ -191,15 +191,15 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         if (life.Locker.IsLocked)
         {
             UIErrorWindowController.AddError(life.IsFilled
-                ? LocalizationService.Instance.Manager.GetTextByUid("message.error.action", "Can't make this action!")
-                : LocalizationService.Instance.Manager.GetTextByUid("message.error.workingHere", "Someone is working here already!"));
+                ? LocalizationService.Get("message.error.action", "message.error.action")
+                : LocalizationService.Get("message.error.workingHere", "message.error.workingHere"));
             
             return false;
         }
 
         if (life.IsUseCooldown && life.Timer.IsExecuteable())
         {
-            UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.notReady", "It's not ready yet!"));
+            UIErrorWindowController.AddError(LocalizationService.Get("message.error.notReady", "message.error.notReady"));
             return false;
         }
 
@@ -214,7 +214,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
         if (state.State == BuildingState.InProgress || state.State == BuildingState.Complete)
         {
-            UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.workingHere", "Someone is working here already!"));
+            UIErrorWindowController.AddError(LocalizationService.Get("message.error.workingHere", "message.error.workingHere"));
             return false;
         }
         

@@ -72,9 +72,8 @@ public class UIQuestStartWindowModel : IWWindowModel
     {
         emotion = CharacterEmotion.Happy;
         characterId = UiCharacterData.CharSleepingBeauty;
-
-        var key = "conversation.error.quest.complete";
-        message = LocalizationService.Current.GetTextByUid(key, key);
+        
+        message = LocalizationService.Get("conversation.error.quest.complete", "conversation.error.quest.complete");
     }
     
     private ConversationActionBubbleEntity CreateStartBubble(string charId, string message, CharacterEmotion emotion = CharacterEmotion.Normal, List<string> questIds = null)
@@ -146,12 +145,10 @@ public class UIQuestStartWindowModel : IWWindowModel
         };
         
         QuestStartScenario.RegisterComponent(characterList);
-
-        var key = "conversation.error.message1";
         
         QuestStartScenario.RegisterComponent(CreateStartBubble(
             UiCharacterData.CharSleepingBeauty, 
-            LocalizationService.Current.GetTextByUid(key, key),
+            LocalizationService.Get("conversation.error.message1", "conversation.error.message1"),
             CharacterEmotion.Normal,
             QuestsToStart.Select(e => e.Id).ToList()
         ));

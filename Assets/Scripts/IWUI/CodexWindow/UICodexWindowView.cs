@@ -131,7 +131,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
         btnClose.SetActive(!isRewardAvailable);
         btnReward.SetActive(isRewardAvailable);
 
-        btnRewardText.text = string.Format(LocalizationService.Instance.Manager.GetTextByUid("common.button.claimReward", "Claim Reward {0}"), reward.ToStringIcon());
+        btnRewardText.text = string.Format(LocalizationService.Get("common.button.claimReward", "common.button.claimReward {0}"), reward.ToStringIcon());
     }
 
     private void CreateTabs(List<CodexTabDef> tabDefs)

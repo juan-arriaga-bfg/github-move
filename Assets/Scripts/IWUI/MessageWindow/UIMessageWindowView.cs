@@ -90,7 +90,7 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         var isFree = windowModel.Timer.IsFree();
         
         timerLabel.Text = windowModel.Timer.CompleteTime.GetTimeLeftText();
-        buttonBuyLabel.Text = isFree ? LocalizationService.Get("common.button.free", "Free") : windowModel.AcceptLabel + windowModel.Timer.GetPrise().ToStringIcon(false);
+        buttonBuyLabel.Text = isFree ? LocalizationService.Get("common.button.free", "common.button.free") : windowModel.AcceptLabel + windowModel.Timer.GetPrise().ToStringIcon(false);
     }
 
     private void CompleteTimer()

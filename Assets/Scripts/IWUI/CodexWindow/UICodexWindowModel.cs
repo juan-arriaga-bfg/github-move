@@ -41,7 +41,7 @@ public class CodexContent
 
 public class UICodexWindowModel : IWWindowModel
 {
-    public readonly string Title = LocalizationService.Instance.Manager.GetTextByUid("window.codex.title", "Codex");
+    public readonly string Title = LocalizationService.Get("window.codex.title", "window.codex.title");
 
     public int ActiveTabIndex = 0;
 
