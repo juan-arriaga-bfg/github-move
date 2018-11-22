@@ -165,4 +165,7 @@ public class R
      public const string UIHintArrow = "UIHintArrow";
      public const string FogExplosionParticleSystem = "FogExplosionParticleSystem";
      public const string FireflyExplosion = "FireflyExplosion";
+     public const string ProductionEndParticle = "ProductionEndParticle";
+     public const string ProductionProcessParticle = "ProductionProcessParticle";
+     public const string ProductionStartParticle = "ProductionStartParticle";
 }

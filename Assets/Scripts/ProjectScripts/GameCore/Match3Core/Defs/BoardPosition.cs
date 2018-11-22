@@ -400,6 +400,21 @@ public struct BoardPosition : IEquatable<BoardPosition>
     {
         return new BoardPosition(X - distance, Y - distance, Z);
     }
+    
+    public BoardPosition SetX(int value)
+    {
+        return new BoardPosition(value, Y, Z);
+    }
+    
+    public BoardPosition SetY(int value)
+    {
+        return new BoardPosition(X, value, Z);
+    }
+    
+    public BoardPosition SetZ(int value)
+    {
+        return new BoardPosition(X, Y, value);
+    }
 
     [Newtonsoft.Json.JsonIgnore]
     public BoardPosition Up => new BoardPosition(X, Y + 1, Z);
