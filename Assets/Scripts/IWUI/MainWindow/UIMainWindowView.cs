@@ -25,7 +25,7 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
     [SerializeField] private Transform hintAnchorOrdersButton;
     public Transform HintAnchorOrdersButton => hintAnchorOrdersButton;
 
-    private List<UiQuestButton> questButtons = new List<UiQuestButton>();
+    private readonly List<UiQuestButton> questButtons = new List<UiQuestButton>();
 
     private int maxCountOfVisibleQuestButtonsCached = -1;
     
@@ -199,6 +199,12 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
         if(model.Orders != null && model.Orders.Count > 0) model.Select = model.Orders[0];
         
         UIService.Get.ShowWindow(UIWindowType.OrdersWindow);
+    }
+    
+    public void OnClickDailyQuest()
+    {
+        var model = UIService.Get.GetCachedModel<UIDailyQuestWindowModel>(UIWindowType.DailyQuestWindow);
+        UIService.Get.ShowWindow(UIWindowType.DailyQuestWindow);
     }
     
     private void OnNewPieceBuilded()

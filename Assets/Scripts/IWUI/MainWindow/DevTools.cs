@@ -136,8 +136,9 @@ public class DevTools : MonoBehaviour
     {
         Debug.Log("OnDebug1Click");
 
-        //var quest = GameDataService.Current.QuestsManager.StartQuestById("Daily", null);
 
+        GameDataService.Current.QuestsManager.StartDailyQuest();
+        //var quest = GameDataService.Current.QuestsManager.StartQuestById("Daily", null);
     }
 
     public static void UpdateFogSectorsDebug()

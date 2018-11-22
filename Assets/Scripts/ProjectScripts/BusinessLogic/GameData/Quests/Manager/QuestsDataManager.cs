@@ -496,4 +496,12 @@ public sealed class QuestsDataManager : IECSComponent, IDataManager
     {
         return cache[typeof(QuestEntity)].ContainsKey(id);
     }
+
+    public void StartDailyQuest()
+    {
+        if (DailyQuest == null)
+        {
+            StartQuestById("Daily", null);
+        }
+    }
 }
