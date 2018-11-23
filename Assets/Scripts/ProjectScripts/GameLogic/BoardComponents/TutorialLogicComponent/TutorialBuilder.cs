@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class TutorialBuilder
 {
-    public const int LockPRStepIndex = 10;
+    public const int LockPRStepIndex = 11;
     
     public static BaseTutorialStep BuildTutorial(int index, BoardController context)
     {
@@ -127,12 +127,17 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 8: // tutorial 7 - worker
+            case 8: // tutorial 8 - crystal
             {
-                step = new WorkerTutorialStep();
+                step = new СrystalTutorialStep{Delay = 3};
                 break;
             }
-            case 9: // remove worker
+            case 9: // tutorial 9 - worker
+            {
+                step = new WorkerTutorialStep{Delay = 5};
+                break;
+            }
+            case 10: // remove worker
             {
                 step = new BaseTutorialStep{IsIgnoreUi = true};
                 
@@ -143,7 +148,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 10: // unlock PR pieces
+            case 11: // unlock PR pieces
             {
                 if (LockPRStepIndex != index) Debug.LogError("Tutorial Error: LockPRStepIndex != index");
                 
@@ -155,7 +160,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 11: // lock camera
+            case 12: // lock camera
             {
                 step = new CameraLockTutorialStep();
                 
@@ -165,7 +170,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 12: // lock buttons Worker, Energy, Codex
+            case 13: // lock buttons Worker, Energy, Codex
             {
                 step = new UiLockTutorialStep{Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Worker, UiLockTutorialItem.Energy, UiLockTutorialItem.Codex}};
                 
@@ -175,7 +180,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 13: // lock Orders and buttons Orders, Shop
+            case 14: // lock Orders and buttons Orders, Shop
             {
                 step = new OrdersLockTutorialStep{Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Orders, UiLockTutorialItem.Shop}};
                 
@@ -185,7 +190,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 14: // add SleepingBeauty
+            case 15: // add SleepingBeauty
             {
                 step = new BaseTutorialStep{IsIgnoreUi = true};
                 
@@ -198,7 +203,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 15: // unlock Firefly
+            case 16: // unlock Firefly
             {
                 step = new FireflyLockTutorialStep();
                 
