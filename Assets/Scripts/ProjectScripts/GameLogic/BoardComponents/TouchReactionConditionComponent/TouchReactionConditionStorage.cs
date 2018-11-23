@@ -1,13 +1,7 @@
 ﻿public class TouchReactionConditionStorage : TouchReactionConditionComponent
 {
 	public override bool Check(BoardPosition position, Piece piece)
-	{
-		if (piece.Context?.Pathfinder.CanPathToCastle(piece) == false)
-		{
-			UIErrorWindowController.AddError(LocalizationService.Get("message.error.pieceLock", "message.error.pieceLock"));
-			return false;
-		}
-		
+	{	
 		var storage = piece.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
 		
 		if (storage == null) return true;

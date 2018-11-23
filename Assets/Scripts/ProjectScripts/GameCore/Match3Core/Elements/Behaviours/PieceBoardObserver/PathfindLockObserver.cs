@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
@@ -8,21 +9,21 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
 
     protected Piece piece;
     protected BoardController board;
-
+    
     private static List<PathfindLockObserver> nonLoaded = new List<PathfindLockObserver>();
 
     public static void LoadPathfindLock()
     {
         foreach (var pathfindLockObserver in nonLoaded)
         {
-            var target = pathfindLockObserver.GetTargetPosition();
+            var target = pathfindLockObserver.GetTargetPositions();
             if(target == null)
                 continue;
-            pathfindLockObserver.OnAddToBoard(target.Value, pathfindLockObserver.piece);
+            pathfindLockObserver.OnAddToBoard(pathfindLockObserver.piece.CachedPosition, pathfindLockObserver.piece);
         }
         nonLoaded.Clear();
     }
-
+    
     public bool AutoLock = true;
     
     public virtual void OnRegisterEntity(ECSEntity entity)
@@ -37,16 +38,15 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
 
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        
        if (piece == null || board == null)
        {
             board = BoardService.Current.GetBoardById(0);
             piece = board.BoardLogic.GetPieceAt(position);
        }
         
-       var target = GetTargetPosition();
+       var target = GetTargetPositions();
        if(target != null)
-           board.PathfindLocker?.RecalcCacheOnPieceAdded(target.Value, piece.CachedPosition, piece, AutoLock);
+           board.PathfindLocker?.RecalcCacheOnPieceAdded(target, piece.CachedPosition, piece);
        else if(AutoLock)
            nonLoaded.Add(this);
     }
@@ -57,27 +57,23 @@ public class PathfindLockObserver: IECSComponent, IPieceBoardObserver
 
     public void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
-        var target = GetTargetPosition();
-        if(target != null)
-            board.PathfindLocker?.RecalcCacheOnPieceMoved(target.Value, from, to, piece, AutoLock);
+       
     }
 
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
-        var target = GetTargetPosition();
-        if(target != null)
-            board.PathfindLocker?.RecalcCacheOnPieceRemoved(target.Value, position, piece);
+        board.PathfindLocker?.RemoveFromCache(piece);
     }
 
-    private BoardPosition? GetTargetPosition()
+    public void RemoveRecalculate(BoardPosition position)
     {
-        var pieces = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1);
-        if (pieces != null && pieces.Count > 0)
-        {
-            var target = pieces[0];
-            return target;    
-        }
+        var target = GetTargetPositions();
+        if(target != null)
+            board.PathfindLocker?.RecalcCacheOnPieceRemoved(target, position, piece);
+    }
 
-        return null;
+    private HashSet<BoardPosition> GetTargetPositions()
+    {
+        return board.AreaAccessController?.AvailiablePositions;
     }
 }

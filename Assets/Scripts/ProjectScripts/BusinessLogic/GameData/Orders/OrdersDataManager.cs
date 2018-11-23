@@ -1,24 +1,24 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<OrderDef>>
+public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<OrderDef>>, ILockerComponent
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
-    public int Guid => ComponentGuid;
+    public override int Guid => ComponentGuid;
     
-    public void OnRegisterEntity(ECSEntity entity)
+    private LockerComponent locker;
+    public LockerComponent Locker => locker ?? GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
+    
+    public override void OnRegisterEntity(ECSEntity entity)
     {
+        locker = new LockerComponent();
+        RegisterComponent(locker);
+        
         Reload();
-    }
-    
-    public void OnUnRegisterEntity(ECSEntity entity)
-    {
     }
 
     public List<OrderDef> Recipes;
     public List<Order> Orders;
-
-    private int unlockLevel;
     
     public void Reload()
     {
@@ -52,8 +52,6 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
                 }
                 
                 Recipes.Sort((a, b) => a.Level.CompareTo(b.Level));
-
-                unlockLevel = Recipes[0].Level;
                 
                 if(save?.Orders == null) return;
 
@@ -68,24 +66,10 @@ public class OrdersDataManager : IECSComponent, IDataManager, IDataLoader<List<O
             }
         });
     }
-
-    public void Unlock()
-    {
-        if(GameDataService.Current.LevelsManager.Level != unlockLevel) return;
-
-        var logic = BoardService.Current.FirstBoard.BoardLogic;
-        var positions = logic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Character);
-        
-        if(positions.Count == 0) return;
-        
-        var customer = logic.GetPieceAt(positions[0])?.GetComponent<CustomerComponent>(CustomerComponent.ComponentGuid);
-        
-        customer?.Cooldown.Complete();
-    }
     
     public bool CheckStart()
     {
-        return Orders.Count < GameDataService.Current.ConstantsManager.MaxOrders;
+        return Locker.IsLocked == false && Orders.Count < GameDataService.Current.ConstantsManager.MaxOrders;
     }
 
     public Order GetOrder(int customer)
