@@ -59,7 +59,7 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     /// Return true when all required actions are done by the player and game can provide a reward for this task (or a reward already provided).
     /// In this state task will not react to corresponded events in the game anymore.
     /// </summary>
-    public bool IsCompleted()
+    public bool IsCompletedOrClaimed()
     {
         return State == TaskState.Completed || State == TaskState.Claimed;
     }
@@ -71,6 +71,15 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     public bool IsClaimed()
     {
         return State == TaskState.Claimed;
+    }
+    
+    /// <summary>
+    /// Return true if a player completed the task but nob claimed a reward
+    /// </summary>
+    /// <returns></returns>
+    public bool IsCompleted()
+    {
+        return State == TaskState.Completed;
     }
     
     /// <summary>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Quests;
@@ -89,7 +90,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         
         foreach (var node in tasks)
         {
-            string     id   = node.SelectToken("Id").Value<string>();
+            string id = node.SelectToken("Id").Value<string>();
             TaskEntity task = GetTaskById(id);
             node.PopulateObject(task);
         }
@@ -102,7 +103,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         return State == TaskState.New || State == TaskState.InProgress;
     }
     
-    public bool IsCompleted()
+    public bool IsCompletedOrClaimed()
     {
         return State == TaskState.Completed || State == TaskState.Claimed;
     }
@@ -295,5 +296,36 @@ public class QuestEntity : ECSEntity, IECSSerializeable
     {
         State = TaskState.Completed;
         OnChanged?.Invoke(this, null);
+    }
+
+    public int ActiveTasksCount()
+    {
+        return ActiveTasks.Count;
+    }
+    
+    public int CompletedTasksCount()
+    {
+        int count = 0;
+        for (var i = 0; i < ActiveTasks.Count; i++)
+        {
+            if (ActiveTasks[i].IsCompletedOrClaimed())
+            {
+                count += 1;
+            }
+        }
+        return count;
+    }
+    
+    public int CompletedButNotClaimedTasksCount()
+    {
+        int count = 0;
+        for (var i = 0; i < ActiveTasks.Count; i++)
+        {
+            if (ActiveTasks[i].IsCompleted())
+            {
+                count += 1;
+            }
+        }
+        return count;
     }
 }

@@ -531,16 +531,16 @@
     "Id": "Daily",
     "TaskDefs": [
       {
-        "TaskId": "1_CreatePiece_PR_C4"
+        "TaskId": "Daily_Quest_1"
       },
       {
-        "TaskId": "3_KillTree"
+        "TaskId": "Daily_Quest_2"
       },
       {
-        "TaskId": "5_CreatePieceA5"
+        "TaskId": "Daily_Quest_3"
       },
       {
-        "TaskId": "6_ClearFog"
+        "TaskId": "Daily_Quest_4"
       }
     ],
     "ComponentsCache": {
@@ -549,5 +549,12 @@
         "Message": "Do it!"
       }
     }
+  },
+  {
+    "TaskDefs": [
+      {
+        "TaskId": "Daily_Quest_5"
+      }
+    ]
   }
 ]

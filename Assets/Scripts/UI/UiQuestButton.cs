@@ -85,7 +85,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         
         UpdateView();
         
-        if (Quest.IsCompleted())
+        if (Quest.IsCompletedOrClaimed())
         {
             interactive = false;
 
@@ -153,7 +153,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             return string.Empty;
         }
             
-        bool isCompleted = task.IsCompleted();
+        bool isCompleted = task.IsCompletedOrClaimed();
         int  current     = counterTask.CurrentValue;
         int  target      = counterTask.TargetValue;
                 
@@ -168,7 +168,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         
         icon.sprite = GetIconForFirstTask(Quest);
 
-        var isComplete = Quest.IsCompleted();
+        var isComplete = Quest.IsCompletedOrClaimed();
 
         if (isComplete && isUp == false && interactive)
         {
@@ -209,7 +209,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             return;
         }
 
-        if (Quest == null || Quest.IsCompleted())
+        if (Quest == null || Quest.IsCompletedOrClaimed())
         {
             return;
         }

@@ -680,7 +680,7 @@ GameObject:
   - component: {fileID: 114816816829147732}
   - component: {fileID: 114027868858609668}
   m_Layer: 31
-  m_Name: Label
+  m_Name: '#ProgressLabel'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1653,7 +1653,7 @@ GameObject:
   - component: {fileID: 114163489498198566}
   - component: {fileID: 225055371916757472}
   m_Layer: 31
-  m_Name: ButtonDailyQuest
+  m_Name: '#ButtonDailyQuest'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7015,10 +7015,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928f340fe613405ca9f765a7792ef8e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorView: {fileID: 224251584691508630}
-  amountLabel: {fileID: 114027868858609668}
-  icon: {fileID: 114063003578552642}
-  itemUid: DailyQuest
 --- !u!114 &114566598749583056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11109,8 +11105,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 224132476893780060}
-  - {fileID: 224519792993818588}
   - {fileID: 224123228248002244}
+  - {fileID: 224519792993818588}
   - {fileID: 224935263228494826}
   - {fileID: 224844713052690776}
   - {fileID: 224758658832929670}
@@ -11472,7 +11468,7 @@ RectTransform:
   - {fileID: 224869677067667336}
   - {fileID: 224431064200158690}
   m_Father: {fileID: 224016349248658524}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
@@ -12522,7 +12518,7 @@ RectTransform:
   - {fileID: 224601383303020660}
   - {fileID: 224287049512488878}
   m_Father: {fileID: 224016349248658524}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

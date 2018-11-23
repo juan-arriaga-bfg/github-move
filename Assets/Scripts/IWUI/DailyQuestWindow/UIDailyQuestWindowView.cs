@@ -43,6 +43,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
             var tabEntity = new UIDailyQuestTaskElementEntity
             {
                 Task = task,
+                WindowController = Controller,
                 OnSelectEvent = null,
                 OnDeselectEvent = null
             };
