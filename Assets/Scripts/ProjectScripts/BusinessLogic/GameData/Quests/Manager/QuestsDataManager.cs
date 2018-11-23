@@ -25,7 +25,7 @@ public sealed class QuestsDataManager : IECSComponent, IDataManager
     /// <summary>
     /// List of All active quests that handled by the Manager
     /// </summary>
-    private List<QuestEntity> ActiveQuests;
+    public List<QuestEntity> ActiveQuests;
     
     public DailyQuestEntity DailyQuest;
     
@@ -499,9 +499,21 @@ public sealed class QuestsDataManager : IECSComponent, IDataManager
 
     public void StartDailyQuest()
     {
-        if (DailyQuest == null)
+        const string ID = "Daily";
+        
+        QuestEntity quest = GetActiveQuestById(ID);
+        
+        if (quest != null)
         {
-            StartQuestById("Daily", null);
+            quest.ForceComplete();
+            FinishQuest(ID);
+        }
+        
+        quest = StartQuestById(ID, null);
+
+        if (ConnectedToBoard)
+        {
+            quest.ConnectToBoard();
         }
     }
 }

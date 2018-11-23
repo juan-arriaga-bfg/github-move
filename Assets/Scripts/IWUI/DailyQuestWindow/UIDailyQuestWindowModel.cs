@@ -18,7 +18,7 @@ public class UIDailyQuestWindowModel : IWWindowModel
     {
         get
         {
-            return Quest.Tasks;
+            return Quest.ActiveTasks;
         }
     }
 }
