@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BoardDefinitionComponent : IECSComponent
 {
@@ -8,8 +6,13 @@ public class BoardDefinitionComponent : IECSComponent
     public int Guid => ComponentGuid;
 
     protected BoardController context;
-    
-    public void OnRegisterEntity(ECSEntity entity) { this.context = entity as BoardController; }
+
+    public void OnRegisterEntity(ECSEntity entity)
+    {
+        context = entity as BoardController;
+        
+        MaxPoit = new BoardPosition(Width, Height, Depth);
+    }
 
     public void OnUnRegisterEntity(ECSEntity entity) { }
 
@@ -33,7 +36,7 @@ public class BoardDefinitionComponent : IECSComponent
 
     public Transform SectorsGridView { get; set; }
 
-
+    public BoardPosition MaxPoit;
 
     public virtual Vector3 GetPiecePosition(int x, int y, int z = 0)
     {

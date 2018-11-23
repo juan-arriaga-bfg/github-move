@@ -94,19 +94,12 @@ public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMat
         matchField.Clear();
         matchField.AddRange(positions);
         
-        var nextAction = new SpawnPieceAtAction
+        return new ModificationPiecesAction
         {
-            IsCheckMatch = false,
-            At = at,
-            PieceTypeId = nextType,
-            OnSuccessEvent = pos => SpawnReward(pos, nextType)
-        };
-        
-        return new CollapsePieceToAction
-        {
+            NextPieces = new List<int>{nextType},
             To = at,
             Positions = positions,
-            OnCompleteAction = nextAction
+            OnSuccess = list => SpawnReward(list[0], nextType)
         };
     }
 

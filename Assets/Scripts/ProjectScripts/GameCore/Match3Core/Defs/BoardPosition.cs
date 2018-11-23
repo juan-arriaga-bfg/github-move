@@ -16,6 +16,11 @@ public struct BoardPosition : IEquatable<BoardPosition>
         this.Z = z;
     }
 
+    public BoardPosition Copy()
+    {
+        return new BoardPosition(X, Y, Z);
+    }
+
     [JsonIgnore]
     public bool IsValid => X >= 0 && Y >= 0;
 

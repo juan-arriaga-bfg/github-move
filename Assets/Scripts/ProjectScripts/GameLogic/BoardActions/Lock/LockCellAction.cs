@@ -3,11 +3,7 @@
 public class LockCellAction : IBoardAction
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-	
-    public virtual int Guid
-    {
-        get { return ComponentGuid; }
-    }
+    public virtual int Guid => ComponentGuid;
 
     public FieldControllerComponent Locker;
     public List<BoardPosition> Positions { get; set; }
