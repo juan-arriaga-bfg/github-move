@@ -1,7 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Lean.Touch;
 using UnityEngine;
+
+public interface IDragAndDropPieceComponent
+{
+    DragAndDropPieceComponent DragAndDrop { get; }
+}
+
+public partial class BoardLogicComponent : IDragAndDropPieceComponent
+{
+    private DragAndDropPieceComponent dragAndDrop;
+    
+    public DragAndDropPieceComponent DragAndDrop => dragAndDrop ?? (dragAndDrop = GetComponent<DragAndDropPieceComponent>(DragAndDropPieceComponent.ComponentGuid));
+}
 
 public class DragAndDropPieceComponent :  ECSEntity, IECSSystem 
 {
@@ -10,6 +23,8 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
     public override int Guid => ComponentGuid;
     
     private int cachedPointerId = -2;
+
+    private int targetPieceId;
     
     private BoardLogicComponent context;
     
@@ -21,6 +36,10 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
 
     public bool IsActive => isActive;
     
+    public Action OnBeginDragAndDropEvent { get; set; }
+
+    public Action OnEndDragAndDropEvent { get; set; }
+    
     private PieceBoardElementView dragableView;
     
     public override void OnRegisterEntity(ECSEntity entity)
@@ -30,11 +49,12 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
         context = entity as BoardLogicComponent;
     }
     
-    public virtual bool Begin(int pointerId)
+    public virtual bool Begin(int pointerId, int targetPieceId)
     {
         if (isActive) return false;
         
         this.cachedPointerId = pointerId;
+        this.targetPieceId = targetPieceId;
         
         return true;
     }
@@ -43,38 +63,36 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
     {
         isActive = true;
         
-        // cachedRemoverView = context.Context.RendererContext.CreateBoardElement<PieceBoardElementView>((int) ViewType.PieceRemover);
-        // cachedRemoverView.Init(context.Context.RendererContext);
-        // cachedRemoverView.SyncRendererLayers(new BoardPosition(0, 0, 100));
-        //
-        // ToggleFilterPieces(true);
-        //
-        // if (OnBeginRemoverEvent != null)
-        // {
-        //     OnBeginRemoverEvent();
-        // }
+        var fakePiece = context.Context.CreatePieceFromType(targetPieceId);
+        var fakeBoardElement = context.Context.RendererContext.CreatePieceAt(fakePiece, new BoardPosition(0, 0, 3));
+        dragableView = fakeBoardElement;
+        dragableView.SyncRendererLayers(new BoardPosition(0, 0, 100));
+        
+ 
+        if (OnBeginDragAndDropEvent != null)
+        {
+            OnBeginDragAndDropEvent();
+        }
     }
     
     protected virtual void End()
     {
         this.cachedPointerId = -2;
 
-        // if (cachedRemoverView != null)
-        // {
-        //     cachedRemoverView.ToggleSelection(false);
-        //     
-        //     context.Context.RendererContext.DestroyElement(cachedRemoverView);
-        //     cachedRemoverView = null;
-        // }
-        //
-        // ToggleFilterPieces(false);
+        if (dragableView != null)
+        {
+            dragableView.ToggleSelection(false);
+            
+            context.Context.RendererContext.RemoveElement(dragableView);
+            dragableView = null;
+        }
         
         isActive = false;
         
-        // if (OnEndRemoverEvent != null)
-        // {
-        //     OnEndRemoverEvent();
-        // }
+        if (OnEndDragAndDropEvent != null)
+        {
+            OnEndDragAndDropEvent();
+        }
     }
     
     public bool IsExecuteable()
@@ -87,6 +105,15 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
         var pieceEntity = context.GetPieceAt(boardPosition);
 
         if (pieceEntity != null) return false;
+        
+        // BoardPosition pos = new BoardPosition(23, 10, BoardService.Current.GetBoardById(0).BoardDef.PieceLayer);
+        // var availablePoints = new List<BoardPosition>();
+        // BoardService.Current.GetBoardById(0).BoardLogic.EmptyCellsFinder..FindNearWithPointInCenter(pos, availablePoints, 1, 100);
+        //
+        // if (availablePoints.Count > 0 && availablePoints.Contains(boardPosition))
+        // {
+        //     return true;
+        // }
 
         return true;
     }
@@ -101,6 +128,16 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
 
     protected virtual bool TryApplyAt(BoardPosition boardPosition)
     {
+        if (IsValidPoint(boardPosition))
+        {
+            BoardService.Current.GetBoardById(0).ActionExecutor.AddAction(new CreatePieceAtAction
+            {
+                At = boardPosition,
+                PieceTypeId = targetPieceId
+            });
+
+            return true;
+        }
         return false;
     }
 
@@ -122,11 +159,13 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
         {
             if (TryApplyAt(lastRemoverWorldPosition) == false)
             {
+                this.cachedPointerId = -2;
                 End(); 
             }
             else
             {
                 this.cachedPointerId = -2;
+                End();
             }
         }
         else

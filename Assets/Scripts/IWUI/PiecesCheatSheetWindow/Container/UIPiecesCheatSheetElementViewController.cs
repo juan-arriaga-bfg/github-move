@@ -54,7 +54,21 @@ public class UIPiecesCheatSheetElementViewController : UIContainerElementViewCon
         rootButton
            .Init()
            .ToState(GenericButtonState.Active)
-           .OnClick(OnClickEventHandler);
+           .SetDragDirection(new Vector2(0f, 1f))
+           .SetDragThreshold(10f)
+           .OnBeginDrag(OnBeginDragEventHandler);
+    }
+
+    private void OnBeginDragEventHandler(UIButtonViewController obj, int pointerId)
+    {
+        if (BoardService.Current.FirstBoard.BoardLogic.DragAndDrop.IsActive) return;
+  
+        if (Input.touchSupported == false)
+        {
+            pointerId = 0;
+        }
+        
+        BoardService.Current.FirstBoard.BoardLogic.DragAndDrop.Begin(pointerId, pieceId);
     }
 
     private void OnClickEventHandler(UIButtonViewController obj)

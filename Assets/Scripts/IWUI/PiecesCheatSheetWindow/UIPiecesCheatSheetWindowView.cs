@@ -18,6 +18,12 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
         SetTitle(model.Title);
         
         CreateItems(model);
+        
+        ToggleVisabilityShowedWindows(false);
+        
+        var removerComponent = BoardService.Current.FirstBoard.BoardLogic.DragAndDrop;
+        removerComponent.OnBeginDragAndDropEvent += OnBeginDragAndDropEvent;
+        removerComponent.OnEndDragAndDropEvent += OnEndDragAndDropEvent;
     }
 
     public override void OnViewClose()
@@ -25,6 +31,22 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
         base.OnViewClose();
         
         UIPiecesCheatSheetWindowModel model = Model as UIPiecesCheatSheetWindowModel;
+        
+        ToggleVisabilityShowedWindows(true);
+        
+        var removerComponent = BoardService.Current.FirstBoard.BoardLogic.DragAndDrop;
+        removerComponent.OnBeginDragAndDropEvent -= OnBeginDragAndDropEvent;
+        removerComponent.OnEndDragAndDropEvent -= OnEndDragAndDropEvent;
+    }
+    
+    private void OnBeginDragAndDropEvent()
+    {
+        ToggleVisabilityWindow(false, this);
+    }
+    
+    private void OnEndDragAndDropEvent()
+    {
+        ToggleVisabilityWindow(true, this);
     }
     
     private void CreateItems(UIPiecesCheatSheetWindowModel model)
