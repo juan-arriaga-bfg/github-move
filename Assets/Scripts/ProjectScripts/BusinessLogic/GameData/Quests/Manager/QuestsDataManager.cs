@@ -471,8 +471,18 @@ public sealed class QuestsDataManager : IECSComponent, IDataManager
             {
                 quest.SetClaimedState();
                 
-                FinishedQuests.Add(id);
                 ActiveQuests.RemoveAt(i);
+                
+                if (DailyQuest != null && DailyQuest.Id == id)
+                {
+                    DailyQuest = null;
+                }
+                else
+                {
+                    ActiveStoryQuests.Remove(quest);
+                    FinishedQuests.Add(id);
+                }
+                
                 quest.DisconnectFromBoard();
                 
                 quest.OnChanged -= OnQuestsStateChangedEvent;
