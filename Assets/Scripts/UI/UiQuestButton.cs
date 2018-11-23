@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using Quests;
 using UnityEngine;
@@ -137,9 +138,17 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         }
         
         IHavePieceId taskAboutPiece = task as IHavePieceId;
-        if (taskAboutPiece != null && taskAboutPiece.PieceId != PieceType.None.Id)
+        try
         {
-            return IconService.Current.GetSpriteById(PieceType.GetDefById(taskAboutPiece.PieceId).Abbreviations[0]); 
+            if (taskAboutPiece != null && taskAboutPiece.PieceId != PieceType.None.Id && taskAboutPiece.PieceId != PieceType.Empty.Id)
+            {
+                var pieceTypeDef = PieceType.GetDefById(taskAboutPiece.PieceId);
+                return IconService.Current.GetSpriteById(pieceTypeDef.Abbreviations[0]);
+            }
+        }
+        catch (Exception e)
+        {
+            throw;
         }
 
         return IconService.Current.GetSpriteById("codexQuestion");
@@ -154,8 +163,8 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         }
             
         bool isCompleted = task.IsCompletedOrClaimed();
-        int  current     = counterTask.CurrentValue;
         int  target      = counterTask.TargetValue;
+        int  current     = Mathf.Min(counterTask.CurrentValue, target);
                 
         return $"<color=#{( isCompleted ? "FFFFFF" : currentValueColor)}><size={currentValueFontSize}>{current}</size></color>/{target}";
     }

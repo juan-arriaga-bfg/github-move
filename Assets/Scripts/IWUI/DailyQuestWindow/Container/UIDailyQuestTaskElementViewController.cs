@@ -35,7 +35,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         lblProgress.Text = UiQuestButton.GetTaskProgress(task);
         
-        lblDescription.Text = task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
+        lblDescription.Text = $"<color=#D2D2D2><size=25>[{task.Group} - {task.Id.ToLower()}]</size></color> " + task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
 
         lblReward.Text = GetReward();
     }

@@ -39,7 +39,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
     /// <summary>
     /// List of tasks that active currently
     /// </summary>
-    [JsonIgnore] public List<TaskEntity> ActiveTasks { get; protected set; }
+    [JsonIgnore] public List<TaskEntity> ActiveTasks { get; protected set; } = new List<TaskEntity>();
     
     /// <summary>
     /// Will be called every time when Quest state or state of any active Task is changing.

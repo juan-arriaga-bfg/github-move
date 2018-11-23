@@ -32,8 +32,9 @@ public class DailyQuestButton : IWUIWindowViewController
             return;
         }
         
-        ToggleSubscription(true);
         UpdateState();
+        
+        ToggleSubscription(true);
     }
     
     private void OnDisable()
@@ -48,6 +49,11 @@ public class DailyQuestButton : IWUIWindowViewController
 
     private void ToggleSubscription(bool enabled)
     {
+        if (dailyQuest == null)
+        {
+            return;
+        }
+        
         if (enabled)
         {
             dailyQuest.OnChanged += QuestChanged;
