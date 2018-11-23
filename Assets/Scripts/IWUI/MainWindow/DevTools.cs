@@ -117,12 +117,12 @@ public class DevTools : MonoBehaviour
     public void OnCompleteFirstQuestClick()
     {
         var manager = GameDataService.Current.QuestsManager;
-        if (manager.ActiveQuests.Count == 0)
+        if (manager.ActiveStoryQuests.Count == 0)
         {
             return;
         }
 
-        var quest = manager.ActiveQuests[0];
+        var quest = manager.ActiveStoryQuests[0];
         quest.ForceComplete();
     }
     
@@ -136,7 +136,9 @@ public class DevTools : MonoBehaviour
     {
         Debug.Log("OnDebug1Click");
 
-        UpdateFogSectorsDebug();
+
+        GameDataService.Current.QuestsManager.StartDailyQuest();
+        //var quest = GameDataService.Current.QuestsManager.StartQuestById("Daily", null);
     }
 
     public static void UpdateFogSectorsDebug()

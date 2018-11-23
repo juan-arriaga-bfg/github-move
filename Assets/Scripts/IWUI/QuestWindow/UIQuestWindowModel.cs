@@ -63,17 +63,7 @@ public class UIQuestWindowModel : IWWindowModel
         get
         {
             var task = FirstTask;
-            TaskCounterEntity counterTask = task as TaskCounterEntity;
-            if (counterTask == null)
-            {
-                return string.Empty;
-            }
-            
-            bool isCompleted = task.IsCompleted();
-            int  current     = counterTask.CurrentValue;
-            int  target      = counterTask.TargetValue;
-                
-            return $"<color=#{( isCompleted ? "FFFFFF" : "FE4704")}><size=55>{current}</size></color>/{target}";
+            return UiQuestButton.GetTaskProgress(task);
         }
     }
     
@@ -91,7 +81,7 @@ public class UIQuestWindowModel : IWWindowModel
         }
     }
 
-    public Sprite Icon => UiQuestButton.GetIcon(quest);
+    public Sprite Icon => UiQuestButton.GetIcon(FirstTask);
 
     public void InitReward()
     {

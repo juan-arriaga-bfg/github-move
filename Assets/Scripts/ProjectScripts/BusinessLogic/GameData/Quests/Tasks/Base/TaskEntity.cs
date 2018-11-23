@@ -16,6 +16,8 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     public TaskState State { get; protected set; }
 
     [JsonProperty] public int Order;
+    
+    [JsonProperty] public TaskGroup Group;
        
 #region Serialization
 
@@ -34,6 +36,11 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     }
     
     public bool ShouldSerializeComponentsCache()
+    {
+        return false;
+    }
+    
+    public bool ShouldSerializeGroup()
     {
         return false;
     }
@@ -83,6 +90,26 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
             State = TaskState.New;
             OnChanged?.Invoke(this);
         }
+    }
+    
+    /// <summary>
+    /// Mark that reward is provided to player
+    /// </summary>
+    public void SetClaimedState()
+    {
+        if (State == TaskState.Claimed)
+        {
+            return;
+        }
+        
+        if (State != TaskState.Completed)
+        {
+            throw new ArgumentException($"Can't set Claimed state when task is in '{State}' state!");
+        }
+        
+        State = TaskState.Claimed;
+        
+        OnChanged?.Invoke(this);
     }
 
     /// <summary>

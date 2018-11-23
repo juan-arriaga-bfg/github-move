@@ -7,7 +7,7 @@ public class CheckQuestTutorialCondition : BaseTutorialCondition
 	
 	public override bool Check()
 	{
-		var quest = GameDataService.Current?.QuestsManager?.ActiveQuests?.Find(entity => entity.Id == Target);
+		var quest = GameDataService.Current?.QuestsManager?.ActiveStoryQuests?.Find(entity => entity.Id == Target);
 		
 		return quest != null && quest.State >= TargetState;
 	}
