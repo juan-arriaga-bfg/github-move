@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class UIDailyQuestWindowView : UIGenericPopupWindowView 
 {
-    [IWUIBinding("#TaskList")] private UITabPanelViewController taskList;
+    [IWUIBinding("#TaskList")] private UIContainerViewController taskList;
     
     public override void OnViewShow()
     {
@@ -35,7 +35,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
             return;
         }
 
-        var tabViews = new List<IUITabElementEntity>(tasks.Count);
+        var tabViews = new List<IUIContainerElementEntity>(tasks.Count);
         for (int i = 0; i < tasks.Count; i++)
         {
             var task = tasks[i];

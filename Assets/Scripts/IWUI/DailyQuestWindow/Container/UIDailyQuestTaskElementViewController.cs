@@ -6,7 +6,7 @@ using Quests;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIDailyQuestTaskElementViewController : UITabElementViewController
+public class UIDailyQuestTaskElementViewController : UIContainerElementViewController
 {
     [IWUIBinding("#TaskDescription")] private NSText lblDescription;
     [IWUIBinding("#TaskProgress")] private NSText lblProgress;

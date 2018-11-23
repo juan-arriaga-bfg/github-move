@@ -1,10 +1,10 @@
 ﻿using System;
 
-public class UIDailyQuestTaskElementEntity : IUITabElementEntity 
+public class UIDailyQuestTaskElementEntity : IUIContainerElementEntity 
 {
     public string Uid { get; set; }
-    public Action<UITabElementViewController> OnSelectEvent { get; set; }
-    public Action<UITabElementViewController> OnDeselectEvent { get; set; }
+    public Action<UIContainerElementViewController> OnSelectEvent { get; set; }
+    public Action<UIContainerElementViewController> OnDeselectEvent { get; set; }
 
     public TaskEntity Task { get; set; }
 
