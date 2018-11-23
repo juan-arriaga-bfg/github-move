@@ -63,9 +63,6 @@ public partial class BoardController : ECSEntity,
     
     protected BoardRandomComponent random;
     public BoardRandomComponent Random => random ?? (random = GetComponent<BoardRandomComponent>(BoardRandomComponent.ComponentGuid));
-
-    protected AreaAccessControllerComponent areaAccess;
-    public AreaAccessControllerComponent AreaAccessController => areaAccess ?? (areaAccess = GetComponent<AreaAccessControllerComponent>(AreaAccessControllerComponent.ComponentGuid));
     
     private Dictionary<int, IPieceBuilder> pieceBuilderDef;
 

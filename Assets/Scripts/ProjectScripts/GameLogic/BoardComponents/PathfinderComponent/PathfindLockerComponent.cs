@@ -1,83 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 public class PathfindLockerComponent : ECSEntity
-{
-    private class Region
-    {
-        private HashSet<BoardPosition> regPositions;
-        
-        private HashSet<Piece> piecesOnRegion;
-        public HashSet<Piece> RegionPieces => piecesOnRegion;
-        
-        private List<BoardPosition> blockPathPositions;
-
-        private BoardController board;
-        
-        public bool Contains(BoardPosition position)
-        {
-            return regPositions.Contains(position);
-        }
-
-        public void AddPosition(BoardPosition position)
-        {
-            position = new BoardPosition(position.X, position.Y, board.BoardDef.PieceLayer);
-            regPositions.Add(position);
-            
-            var pieceOnPos = board.BoardLogic.GetPieceAt(position);
-            if (pieceOnPos != null && piecesOnRegion.Contains(pieceOnPos) == false)
-            {
-                piecesOnRegion.Add(pieceOnPos);
-            }
-                
-        }
-
-        public void RemovePosition(BoardPosition position)
-        {
-            position = new BoardPosition(position.X, position.Y, board.BoardDef.PieceLayer);
-            regPositions.Remove(position);
-            
-            var pieceOnPos = board.BoardLogic.GetPieceAt(position);
-            if (pieceOnPos != null && piecesOnRegion.Contains(pieceOnPos))
-                piecesOnRegion.Remove(pieceOnPos);
-        }
-
-        
-
-        public bool RecalculateState(Action<HashSet<Piece>> onRegionOpen, Piece changedPiece = null)
-        {
-            if (changedPiece != null &&
-                piecesOnRegion.Contains(changedPiece) &&
-                board.BoardLogic.GetPieceAt(changedPiece.CachedPosition) == null)
-                piecesOnRegion.Remove(changedPiece);
-            
-            if (piecesOnRegion.Count == 0)
-            {
-                return false;
-            }
-                
-            var firstPiece = piecesOnRegion.First();
-            var canPath = board.Pathfinder.HasPath(firstPiece.CachedPosition, board.AreaAccessController.AvailiablePositions, 
-                                                   out blockPathPositions, firstPiece, board.Pathfinder.GetCondition(firstPiece));
-            if (canPath)
-            {
-                onRegionOpen?.Invoke(piecesOnRegion);
-            }
-                
-            return canPath;
-        }
-        
-        public Region(BoardController boardController)
-        {
-            board = boardController;
-            regPositions = new HashSet<BoardPosition>();
-            blockPathPositions = new List<BoardPosition>();
-            piecesOnRegion = new HashSet<Piece>();
-        }
-    }
-    
+{   
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
@@ -89,8 +15,7 @@ public class PathfindLockerComponent : ECSEntity
 
     private Dictionary<Piece, List<BoardPosition>> blockPathPieces = new Dictionary<Piece, List<BoardPosition>>();
     private List<Piece> freePieces = new List<Piece>();
-
-    private List<Region> regions = new List<Region>();
+    private BoardPosition lastCheckedPosition = BoardPosition.Default();
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -102,281 +27,74 @@ public class PathfindLockerComponent : ECSEntity
     {
         return !blockPathPieces.ContainsKey(piece) && freePieces.Contains(piece); 
     }
-    
-    private List<LockerComponent> GetLockers(Piece piece)
+
+    public virtual void RecalcCacheOnPieceAdded(BoardPosition target, BoardPosition changedPosition, Piece piece, bool autoLock)
     {
-        var entities = piece.ComponentsCache.Values;
-        var lockers = new List<LockerComponent>();
-        foreach (var component in entities)
-        {
-            if (component is ILockerComponent)
-            {
-                var ILocker = component as ILockerComponent;
-                var locker = ILocker.Locker;
-                lockers.Add(locker);
-            }
-        }
-            
-        return lockers;
-    }
-    
-    private void LockPathfinding(Piece piece)
-    {
-        if (blockPathPieces.ContainsKey(piece))
-            return;
-
-        piece.ActorView?.ToggleLockView(true);
-
-        var lockers = GetLockers(piece);
-        foreach (var lockerComponent in lockers)
-        {
-            lockerComponent.Lock(this);
-        }
-    }
-
-    private Stack<Piece> unlockedEmptyPieces = new Stack<Piece>();
-
-    public List<Piece> CollectUnlockedEmptyCells()
-    {
-        var collapseEmptyPieces = unlockedEmptyPieces.ToList();
-        unlockedEmptyPieces.Clear();
-        return collapseEmptyPieces;    
-    }
-
-    private void UnlockPathfinding(Piece piece)
-    {
-        if (piece.PieceType == PieceType.LockedEmpty.Id && unlockedEmptyPieces.Contains(piece) == false)
-        {
-            unlockedEmptyPieces.Push(piece);
-        }
+        lastCheckedPosition = target;
         
-        if (freePieces.Contains(piece))
-            return;
+        RecalcFree(target, changedPosition);
 
-        piece.ActorView?.ToggleLockView(false);
         
-        var lockers = GetLockers(piece);
-        foreach (var lockerComponent in lockers)
+        if (autoLock)
         {
-            lockerComponent.Unlock(this);
-        }
+            var addedPiece = piece;
+            RecalcFor(addedPiece, target);
+        }   
     }
 
-    private void OpenPiece(Piece piece)
-    {
-        UnlockPathfinding(piece);
-        blockPathPieces.Remove(piece);
-        freePieces.Add(piece);
-    }
-
-    private void ClosePiece(Piece piece, List<BoardPosition> pieceBlockers)
-    {
-        LockPathfinding(piece);
-        freePieces.Remove(piece);
-        blockPathPieces[piece] = pieceBlockers;
-    }
-    
-    
-    private bool RecalcFor(Piece piece, HashSet<BoardPosition> target, List<BoardPosition> ignorablePositions = null)
+    private bool RecalcFor(Piece piece, BoardPosition target, List<BoardPosition> ignorablePositions = null)
     {
         if (ignorablePositions == null)
             ignorablePositions = new List<BoardPosition>();
         
-        List<BoardPosition> pieceBlockers = new List<BoardPosition>();
+        List<BoardPosition> pieceBlockers;
         
         var defaultCondition = Pathfinder.GetCondition(piece);
         Predicate<BoardPosition> pathCondition = (pos) => ignorablePositions.Contains(pos) || defaultCondition(pos);
         
-        bool canPath = context.AreaAccessController.AvailiablePositions.Contains(piece.CachedPosition);
-        
-        if(canPath == false)
-            canPath = Pathfinder.HasPath(piece.CachedPosition, target, out pieceBlockers, piece, pathCondition);
-
+        var canPath = Pathfinder.HasPath(piece.CachedPosition, target, out pieceBlockers, piece, pathCondition);
         if (canPath && !freePieces.Contains(piece))
         {
-            OpenPiece(piece);
+            blockPathPieces.Remove(piece);
+            freePieces.Add(piece);
+            piece.Draggable?.Locker?.Unlock(this, true);
         }
         else if (canPath == false)
         {
-            ClosePiece(piece, pieceBlockers);
+            freePieces.Remove(piece);
+            if(blockPathPieces.ContainsKey(piece) == false)
+                piece.Draggable?.Locker?.Lock(this);
+            blockPathPieces[piece] = pieceBlockers;
         }
         
         return canPath;
     }
-
-    private List<Piece> pieceAddCache = new List<Piece>();
-    public virtual void RecalcCacheOnPieceAdded(HashSet<BoardPosition> target, BoardPosition changedPosition, Piece piece)
-    {
-        if (piece.PieceType == PieceType.Fog.Id)
-            RecalcFor(piece, target);
-        if (piece.PathfindLockObserver.AutoLock)
-            pieceAddCache.Add(piece);     
-    }
     
-    private List<BoardPosition> FindConnections(BoardPosition at, List<BoardPosition> positions)
+    public virtual void RecalcCacheOnPieceRemoved(BoardPosition target , BoardPosition changedPosition, Piece removedPiece)
     {
-        var piece = context.BoardLogic.GetPieceAt(at);
-        var result = new List<BoardPosition>();
-        foreach (var pos in positions)
+        if (changedPosition.Equals(lastCheckedPosition))
         {
-            if (pos.IsNeighbor(at))
-            {
-                var neighPiece = context.BoardLogic.GetPieceAt(at);
-                if(neighPiece!= null && PieceType.GetDefById(neighPiece.PieceType).Filter.HasFlag(PieceTypeFilter.Obstacle))
-                    continue;
-                result.Add(pos);
-            }
+            RecalcAll(target);
+            return;
         }
 
-        return result;
-    }
-    
-    private List<BoardPosition> CutRegion(List<BoardPosition> area)
-    {
-        
-        
-        var group = new HashSet<BoardPosition>();
-        var uncheckedPositions = new HashSet<BoardPosition>();
-        var firstPosition = area.First();
-        uncheckedPositions.Add(firstPosition);
-        
-        while (uncheckedPositions.Count > 0)
-        {
-            var current = uncheckedPositions.First();
-            var piece = context.BoardLogic.GetPieceAt(current);
-            uncheckedPositions.Remove(current);
-            
-            var isObstacle = piece != null &&
-                             PieceType.GetDefById(piece.PieceType).Filter.HasFlag(PieceTypeFilter.Obstacle);
-            
-            if(isObstacle && group.Count > 0)
-                continue;
-            
-            area.Remove(current);
-            
-            if (isObstacle)
-                return new List<BoardPosition>() {piece.CachedPosition};
-                      
-            
-            group.Add(current);
-            
-            var connections = FindConnections(current, area);
-            
-            foreach (var connection in connections)
-            {
-                if (group.Contains(connection) == false && uncheckedPositions.Contains(connection) == false)
-                    uncheckedPositions.Add(connection);
-            }
-        }
+        if (freePieces.Contains(removedPiece))
+            freePieces.Remove(removedPiece);
+        if (blockPathPieces.ContainsKey(removedPiece))
+            freePieces.Remove(removedPiece);
 
-        return group.ToList();
-    }
-    
-    private List<Region> GetRegionsByPositions(List<BoardPosition> area)
-    {
-        var lockedArea = new List<BoardPosition>();
-        foreach (var pos in area)
-        {
-            var piecePos = new BoardPosition(pos.X, pos.Y, context.BoardDef.PieceLayer);
-            var piece = context.BoardLogic.GetPieceAt(piecePos);
-            
-            if(piece != null && piece.PieceType == PieceType.Fog.Id || context.BoardLogic.IsLockedCell(piecePos))
-                continue;
-            lockedArea.Add(piecePos);
-        }
-        var regions = new List<Region>();
-        var currentRegionPositions = CutRegion(lockedArea);
-        while (currentRegionPositions.Count > 0)
-        {
-            
-            var region = new Region(context);
-            foreach (var pos in currentRegionPositions)
-            {
-                region.AddPosition(pos);
-            }
-            regions.Add(region);
-            currentRegionPositions = lockedArea.Count > 0 ? CutRegion(lockedArea) : new List<BoardPosition>();
-        }
-        return regions;
+        RecalcBlocked(target, changedPosition);
     }
 
-    private void RecalculateRegions(Piece changedPiece)
-    {
-        Action<HashSet<Piece>> onRegionOpen = (pieces) =>
-        {
-            foreach (var piece in pieces)
-            {
-                OpenPiece(piece);
-            }
-        };
-        var regionsForRemove = new HashSet<Region>();
-        foreach (var region in regions)
-        {
-            if(region.RecalculateState(onRegionOpen, changedPiece))
-                regionsForRemove.Add(region);
-        }
-        
-        regions.RemoveAll(elem => regionsForRemove.Contains(elem));
-    }
-    
-    public void OnAddComplete(List<BoardPosition> spawnArea)
-    {
-        var newRegions = GetRegionsByPositions(spawnArea);
-        Action<HashSet<Piece>> onRegionOpen = (pieces) =>
-        {
-            foreach (var piece in pieces)
-            {
-                OpenPiece(piece);
-            }
-        };
-        
-        foreach (var region in newRegions)
-        {
-            if (region.RecalculateState(onRegionOpen) == false)
-            {
-                foreach (var regPiece in region.RegionPieces)
-                {
-                    ClosePiece(regPiece, new List<BoardPosition>());
-                }
-                regions.Add(region);
-            }   
-        }
-    }
-    
-    public virtual void RecalcCacheOnPieceRemoved(HashSet<BoardPosition> target , BoardPosition changedPosition, Piece removedPiece)
-    {
-        if(removedPiece.PieceType == PieceType.Fog.Id)
-            OnFogRemove(removedPiece);
-        
-        RecalcBlocked(target, removedPiece.CachedPosition);
-        if (PieceType.GetDefById(removedPiece.PieceType).Filter.HasFlag(PieceTypeFilter.Obstacle))
-        {
-            var emptyCells = CollectUnlockedEmptyCells();
-            foreach (var emptyCell in emptyCells)
-            {
-                var hasPath = HasPath(emptyCell);
-                if (hasPath)
-                {
-                    context.ActionExecutor.AddAction(new CollapsePieceToAction()
-                    {
-                        IsMatch = false,
-                        Positions = new List<BoardPosition>() {emptyCell.CachedPosition},
-                        To = emptyCell.CachedPosition
-                    });
-                }
-            }
-        }
-    }
-
-    public virtual void RemoveFromCache(Piece piece)
-    {
-        freePieces.Remove(piece);
-        blockPathPieces.Remove(piece);
-    }
-
-    public virtual void RecalcCacheOnPieceMoved(HashSet<BoardPosition> target, BoardPosition fromPosition, BoardPosition to, Piece piece,
+    public virtual void RecalcCacheOnPieceMoved(BoardPosition target, BoardPosition fromPosition, BoardPosition to, Piece piece,
         bool autoLock)
     {
+        if (fromPosition.Equals(lastCheckedPosition))
+        {
+            RecalcAll(target);
+            return;
+        }
+
         var pieceOnPos = piece;
         if (pieceOnPos == null)
         {
@@ -384,29 +102,44 @@ public class PathfindLockerComponent : ECSEntity
         }
         else
         {
-            RecalcFree(target);
+            RecalcFree(target, to);
 
             if (autoLock)
             {
-                if (piece.PieceType != PieceType.Fog.Id)
-                    RecalcFor(pieceOnPos, target);
+                RecalcFor(pieceOnPos, target);
             }
+        }
+
+        lastCheckedPosition = target;
+    }
+
+    private void RecalcBlocked(BoardPosition target, BoardPosition changedPosition)
+    {
+        foreach (var piece in blockPathPieces.Keys.ToList())
+        {
+            var blockers = blockPathPieces[piece];
+            if (!blockers.Contains(changedPosition))
+                continue;
+
+            RecalcFor(piece, target, new List<BoardPosition>() {target, changedPosition});
         }
     }
 
-    private void RecalcBlocked(HashSet<BoardPosition> target, BoardPosition changedPosition)
+    private void RecalcFree(BoardPosition target, BoardPosition changedPosition)
     {
-        var changedPiece = BoardService.Current.FirstBoard.BoardLogic.GetPieceAt(changedPosition);
-        RecalculateRegions(changedPiece);
+        var current = 0;
+        while (current < freePieces.Count)
+        {
+            var piece = freePieces[current];
+            if (RecalcFor(piece, target))
+                current++;
+        }
     }
 
-    private void RecalcFree(HashSet<BoardPosition> target)
+    protected virtual void RecalcAll(BoardPosition target)
     {
-        RecalculateRegions(null);
-    }
-
-    public virtual void RecalcAll(HashSet<BoardPosition> target)
-    {
+        lastCheckedPosition = target;
+        
         var allPieces = blockPathPieces.Keys.ToList();
         allPieces.AddRange(freePieces);
         
@@ -415,59 +148,7 @@ public class PathfindLockerComponent : ECSEntity
         
         foreach (var piece in allPieces)
         {
-            if (piece.PieceType != PieceType.Fog.Id)
-                RecalcFor(piece, target);
+            RecalcFor(piece, target);
         }
-    }
-
-    private List<BoardPosition> GetOuterBorderPositions(HashSet<BoardPosition> area)
-    {
-        var border = new HashSet<BoardPosition>();
-        foreach (var pos in area)
-        {
-            var neighbors = pos.Neighbors();
-            foreach (var neighPos in neighbors)
-            {
-                var normilizedNeight = new BoardPosition(neighPos.X, neighPos.Y, context.BoardDef.PieceLayer);
-                if (area.Contains(normilizedNeight) == false && border.Contains(normilizedNeight) == false)
-                    border.Add(normilizedNeight);
-            }
-        }
-
-        return border.ToList();
-    }
-    
-    private List<Piece> GetNearFogs(Piece fog)
-    {
-        var mask = fog.Multicellular.Mask;
-        var fogPositions = new HashSet<BoardPosition>();
-        foreach (var maskPos in mask)
-        {
-            fogPositions.Add(maskPos);
-        }
-
-        var outBorder = GetOuterBorderPositions(fogPositions);
-        
-        var nearFogs = new List<Piece>();
-        foreach (var outPos in outBorder)
-        {
-            var piece = context.BoardLogic.GetPieceAt(outPos);
-            if (piece != null && piece.PieceType == PieceType.Fog.Id && nearFogs.Contains(piece) == false)
-            {
-                
-                nearFogs.Add(piece);
-            }             
-        }
-        return nearFogs;
-        
-    }
-    
-    private void OnFogRemove(Piece fog)
-    {
-        var nearFogs = GetNearFogs(fog);
-        
-        foreach (var nearFog in nearFogs)
-            if (freePieces.Contains(nearFog) == false)
-                OpenPiece(nearFog);
     }
 }

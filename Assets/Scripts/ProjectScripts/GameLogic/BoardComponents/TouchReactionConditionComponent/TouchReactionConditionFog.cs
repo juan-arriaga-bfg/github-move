@@ -4,7 +4,15 @@
 	
 	public override bool Check(BoardPosition position, Piece piece)
 	{
-		var board = piece.Context;
+		if (observer == null) observer = piece.GetComponent<FogObserver>(FogObserver.ComponentGuid);
+
+		if (!observer.IsActive) return false;
+		
+		if (piece.Context?.Pathfinder.CanPathToCastle(piece) == false)
+		{
+			UIErrorWindowController.AddError(LocalizationService.Get("message.error.pieceLock", "message.error.pieceLock"));
+			return false;
+		}
 		
 		var key = new BoardPosition(position.X, position.Y);
 		var def = GameDataService.Current.FogsManager.GetDef(key);

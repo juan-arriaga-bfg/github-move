@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 public class ReproductionPieceAction : IBoardAction
 {
@@ -19,8 +16,6 @@ public class ReproductionPieceAction : IBoardAction
 	public bool PerformAction(BoardController gameBoardController)
 	{
 		var pieces = new Dictionary<BoardPosition, Piece>();
-
-		List<BoardPosition> cellsForLock = new List<BoardPosition>();
 		
 		foreach (var pos in Positions)
 		{
@@ -32,10 +27,9 @@ public class ReproductionPieceAction : IBoardAction
 			}
 			
 			pieces.Add(pos, piece);
-			cellsForLock.Add(pos);
+			gameBoardController.BoardLogic.LockCell(pos, this);
 		}
-
-		gameBoardController.BoardLogic.LockCells(cellsForLock, this);
+		
 		gameBoardController.BoardLogic.LockCell(From, this);
 		
 		var animation = new ReproductionPieceAnimation

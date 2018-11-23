@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ObstaclePieceBuilder : GenericPieceBuilder
 {
@@ -34,9 +33,9 @@ public class ObstaclePieceBuilder : GenericPieceBuilder
 			.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
 				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
 		
-		AddObserver(piece, new AreaRecalculateObserver());
-		
-		AddPathfindLockObserver(piece, true);
+		var pathfindLockObserver = new PathfindLockObserver() {AutoLock = true}; 
+		AddObserver(piece, pathfindLockObserver);
+		piece.RegisterComponent(pathfindLockObserver);
 		
 		return piece;
 	}

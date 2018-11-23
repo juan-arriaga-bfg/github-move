@@ -14,6 +14,11 @@
 
         if (target == null) return true;
         
+        if (!target.Context.Pathfinder.CanPathToCastle(target))
+        {
+            return false;
+        }
+        
         var life = target.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
 
         if (life != null)

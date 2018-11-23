@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Contexts;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
@@ -86,13 +83,6 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         AddResourceView.Show(Def.GetCenter(Context.Context), Def.Reward);
         GameDataService.Current.FogsManager.RemoveFog(Key);
         
-
-        
-        Context.Context.HintCooldown.RemoweView(bubble);
-
-        List<CreatePieceAtAction> actions = new List<CreatePieceAtAction>();
-        var addedPieces = new Dictionary<BoardPosition, int>();
-        
         if(Def.Pieces != null)
         {
             foreach (var piece in Def.Pieces)
@@ -105,11 +95,12 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                     {
                         pieceId = PieceType.Parse(piece.Key);
                     }
-
-                    if (pieceId == PieceType.Empty.Id || pieceId == PieceType.None.Id)
-                        pieceId = PieceType.LockedEmpty.Id;
                     
-                    addedPieces.Add(new BoardPosition(pos.X, pos.Y, Context.Layer.Index), pieceId);
+                    Context.Context.ActionExecutor.AddAction(new CreatePieceAtAction
+                    {
+                        At = pos,
+                        PieceTypeId = pieceId
+                    });
                 }
             }
         }
@@ -121,62 +112,15 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         foreach (var point in Mask)
         {
             var piece = ItemWeight.GetRandomItem(weights).Piece;
-            if (piece == PieceType.Empty.Id)
-                piece = PieceType.LockedEmpty.Id;
-            var position = new BoardPosition(point.X, point.Y, Context.Layer.Index);
-            if(addedPieces.ContainsKey(position) == false)
-                addedPieces.Add(position, piece);
-        }
-
-        
-        
-        Context.Context.ActionExecutor.AddAction(new CreateGroupPieces()
-        {
-            Pieces = addedPieces,
-            LogicCallback = (pieces) =>
+            
+            if(piece == PieceType.Empty.Id) continue;
+            
+            Context.Context.ActionExecutor.AddAction(new CreatePieceAtAction
             {
-                var board = Context.Context;
-                var posByMask = new List<BoardPosition>();
-                foreach (var boardPosition in Mask)
-                {
-                    posByMask.Add(GetPointInMask(Context.CachedPosition, boardPosition));
-                }
-                board.PathfindLocker.OnAddComplete(posByMask);
-                
-                Context.PathfindLockObserver.RemoveRecalculate(Context.CachedPosition);
-                var emptyCells = board.PathfindLocker.CollectUnlockedEmptyCells();
-                foreach (var emptyCell in emptyCells)
-                {
-                    var hasPath = board.PathfindLocker.HasPath(emptyCell);
-                    if (hasPath && pieces.ContainsKey(emptyCell.CachedPosition))
-                    {
-                        pieces.Remove(emptyCell.CachedPosition);    
-                        board.BoardLogic.RemovePieceAt(emptyCell.CachedPosition);    
-                    }
-                    else if(hasPath)
-                    {
-                        board.ActionExecutor.AddAction(new CollapsePieceToAction()
-                        {
-                            IsMatch = false,
-                            Positions = new List<BoardPosition>() {emptyCell.CachedPosition},
-                            To = emptyCell.CachedPosition
-                        });
-                    }
-                    
-                }
-            },
-            OnSuccessEvent = () =>
-            {     
-                var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
-
-                if (views == null) return;
-        
-                foreach (var view in views)
-                {
-                    view.UpdateResource(0);
-                }
-            }
-        });
+                At = point,
+                PieceTypeId = piece
+            });
+        }
     }
     
     public void RegisterCarrier(IResourceCarrier carrier)
@@ -189,13 +133,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void UpdateResource(int offset)
     {
-        if (bubble != null)
-            return;
-        var canPath = Context.Context.PathfindLocker.HasPath(Context);
+        canBeReachedCached = null;
         
-        
+        var canPath = CanBeReached();
         var levelAccess = storageItem.Amount >= level;
-
+        
         if ((canPath ^ levelAccess) && lockView == null)
         {
             lockView = viewDef.AddView(ViewType.Lock) as LockView;
@@ -256,7 +198,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             return canBeReachedCached.Value;
         }
         
-        canBeReachedCached = Context.Context.PathfindLocker.HasPath(Context);
+        canBeReachedCached = Context.Context.Pathfinder.CanPathToCastle(Context);
         return canBeReachedCached.Value;
     }
 
@@ -306,5 +248,4 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             bubble.Change(false);
         });
     }
-
 }

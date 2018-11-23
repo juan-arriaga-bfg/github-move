@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
+
 public class PieceBuildersBuilder
 {
     public Dictionary<int, IPieceBuilder> Build()
@@ -69,7 +71,6 @@ public class PieceBuildersBuilder
     {
         dict.Add(PieceType.Generic.Id, new GenericPieceBuilder());
         dict.Add(PieceType.Empty.Id, new EmptyPieceBuilder());
-        dict.Add(PieceType.LockedEmpty.Id, new LockedEmptyPieceBuilder());
         
         return dict;
     }

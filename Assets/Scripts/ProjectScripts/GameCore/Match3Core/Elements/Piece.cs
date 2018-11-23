@@ -42,10 +42,7 @@ public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchab
     
     private TouchReactionComponent touchReaction;
     public TouchReactionComponent TouchReaction => touchReaction ?? (touchReaction = GetComponent<TouchReactionComponent>(TouchReactionComponent.ComponentGuid));
-
-    private PathfindLockObserver pathfindLockObserver;
-    public PathfindLockObserver PathfindLockObserver => pathfindLockObserver ?? (pathfindLockObserver = GetComponent<PathfindLockObserver>(PathfindLockObserver.ComponentGuid));
-
+    
     public PieceBoardElementView ActorView
     {
         get { return actorView; }

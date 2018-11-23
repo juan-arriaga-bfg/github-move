@@ -16,7 +16,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	private List<LifeSaveItem> lifes;
 	private List<StorageSaveItem> storages;
 	private List<BuildingSaveItem> buildings;
-	private AreaAccessSaveItem areaAccess;
 	
 	private string completeFogs;
 	private string movedMines;
@@ -80,13 +79,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		set { buildings = value; }
 	}
 
-	[JsonProperty]
-	public AreaAccessSaveItem AreaAccess
-	{
-		get { return areaAccess; }
-		set { areaAccess = value; }
-	}
-
 	public List<BoardPosition> CompleteFogPositions;
 	public List<BoardPosition> MovedMinePositions;
 	public List<int> RemovedMinePositions;
@@ -141,8 +133,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		}
 		
 		remowedMines = str.ToString();
-
-		AreaAccess = BoardService.Current.GetBoardById(0).AreaAccessController.GetSaveItem();
 	}
 
 	[OnDeserialized]
@@ -198,7 +188,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 				RemovedMinePositions.Add(int.Parse(str));
 			}
 		}
-		
 	}
 
 	public StorageSaveItem GetStorageSave(BoardPosition position)

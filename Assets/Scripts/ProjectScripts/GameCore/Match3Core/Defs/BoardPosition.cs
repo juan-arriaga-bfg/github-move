@@ -43,14 +43,6 @@ public struct BoardPosition : IEquatable<BoardPosition>
     {
         if (Equals(other)) return false;
         
-        return ((X - 1 == other.X || X + 1 == other.X) && Y == other.Y) ||
-               ((Y - 1 == other.Y || Y + 1 == other.Y) && X == other.X);
-    }
-    
-    public bool IsDiagonalNeighbor(BoardPosition other)
-    {
-        if (Equals(other)) return false;
-        
         return other.X >= X - 1 && other.X <= X + 1 && other.Y >= Y - 1 && other.Y <= Y + 1;
     }
 
@@ -344,21 +336,6 @@ public struct BoardPosition : IEquatable<BoardPosition>
             Up,
             Right,
             Down
-        };
-    }
-
-    public List<BoardPosition> NeighborsWithDiagonal()
-    {
-        return new List<BoardPosition>
-        {
-            Left,
-            Up,
-            Right,
-            Down,
-            TopLeft,
-            BottomLeft,
-            TopRight,
-            BottomRight
         };
     }
     

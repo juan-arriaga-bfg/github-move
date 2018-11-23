@@ -62,7 +62,7 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         }
     }
     
-    public virtual void SetFade(float alpha, List<GameObject> ignoredObjects = null)
+    public virtual void SetFade(float alpha)
     {
         if (cachedRenderers == null || cachedRenderers.size <= 0)
         {
@@ -74,7 +74,6 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             if (rend == null) continue;
             if (rend.CachedRenderer == null) continue;
             if (rend.CachedRenderer.sharedMaterial == null) continue;
-            if (ignoredObjects != null && ignoredObjects.Contains(rend.gameObject)) continue;
 
             var material = rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial("pieces.fade.material"));
             material.SetFloat("_AlphaCoef", alpha);
@@ -85,7 +84,7 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         }
     }
     
-    public virtual void ClearCurrentMaterialAsDefault()
+    public virtual void SetGrayscale()
     {
         if (cachedRenderers == null || cachedRenderers.size <= 0)
         {
@@ -97,47 +96,12 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             if (rend == null) continue;
             if (rend.CachedRenderer == null) continue;
             if (rend.CachedRenderer.sharedMaterial == null) continue;
-
-            rend.SetLastDefaultMaterial(null);
-        }
-    }
-
-    public virtual void SaveCurrentMaterialAsDefault()
-    {
-        if (cachedRenderers == null || cachedRenderers.size <= 0)
-        {
-            CacheLayers();
-        }
-
-        foreach (var rend in cachedRenderers)
-        {
-            if (rend == null) continue;
-            if (rend.CachedRenderer == null) continue;
-            if (rend.CachedRenderer.sharedMaterial == null) continue;
-
-            rend.SetLastDefaultMaterial(rend.CachedRenderer.sharedMaterial);
-        }
-    }
-    
-    public virtual void SetGrayscale(List<GameObject> ignoredObjects = null)
-    {
-        if (cachedRenderers == null || cachedRenderers.size <= 0)
-        {
-            CacheLayers();
-        }
-
-        foreach (var rend in cachedRenderers)
-        {
-            if (rend == null) continue;
-            if (rend.CachedRenderer == null) continue;
-            if (rend.CachedRenderer.sharedMaterial == null) continue;
-            if (ignoredObjects != null && ignoredObjects.Contains(rend.gameObject)) continue;
 
             rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial("pieces.grayscale.material"));
         }
     }
     
-    public virtual void SetHighlight(bool state, List<GameObject> ignoredObjects = null)
+    public virtual void SetHighlight(bool state)
     {
         if (cachedRenderers == null || cachedRenderers.size <= 0)
         {
@@ -149,8 +113,7 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             if (rend == null) continue;
             if (rend.CachedRenderer == null) continue;
             if (rend.CachedRenderer.sharedMaterial == null) continue;
-            if (ignoredObjects != null && ignoredObjects.Contains(rend.gameObject)) continue;
-            
+
             if (state)
             {
                 rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial("pieces.highlight.material"));
@@ -505,8 +468,6 @@ public class RendererLayer : MonoBehaviour
 
     private Material cachedDefaultMaterial;
 
-    private Material cachedLastDefaultMaterial;
-
     public void CacheDefaultMaterial()
     {
         if (cachedDefaultMaterial == null)
@@ -517,27 +478,10 @@ public class RendererLayer : MonoBehaviour
 
     public void ResetDefaultMaterial()
     {
-        if (cachedLastDefaultMaterial != null)
-        {
-            CachedRenderer.material = cachedLastDefaultMaterial;
-            return;
-        }
-        
         if (cachedDefaultMaterial != null)
         {
             CachedRenderer.material = cachedDefaultMaterial;
-            return;
         }
-    }
-    
-    public void SetDefaultMaterial(Material defaultMaterial)
-    {
-        this.cachedDefaultMaterial = defaultMaterial;
-    }
-
-    public void SetLastDefaultMaterial(Material lastDefaultMaterial)
-    {
-        this.cachedLastDefaultMaterial = lastDefaultMaterial;
     }
     
     public Material SetCustomMaterial(Material customMaterial)

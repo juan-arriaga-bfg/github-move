@@ -1,4 +1,4 @@
-public class CharacterPieceBuilder : GenericPieceBuilder
+﻿public class CharacterPieceBuilder : GenericPieceBuilder
 {
 	public override Piece Build(int pieceType, BoardController context)
 	{
@@ -35,8 +35,6 @@ public class CharacterPieceBuilder : GenericPieceBuilder
 		
 		piece.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
 				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
-
-		AddPathfindLockObserver(piece, true);
 		
 		return piece;
 	}

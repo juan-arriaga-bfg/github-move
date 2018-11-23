@@ -173,7 +173,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
     private bool CheckLock(Piece target)
     {
-        if (!target.Context.PathfindLocker.HasPath(target))
+        if (!target.Context.Pathfinder.CanPathToCastle(target))
         {
             UIErrorWindowController.AddError(LocalizationService.Get("message.error.action", "message.error.action"));
             return false;

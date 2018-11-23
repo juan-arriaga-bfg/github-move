@@ -122,7 +122,7 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
             
             pieceContext.Context.ActionExecutor.AddAction(new EjectionPieceAction
             {
-                GetFrom = () => pieceContext.CachedPosition,
+                From = pieceContext.CachedPosition,
                 Pieces = order.PiecesReward,
                 OnComplete = () =>
                 {

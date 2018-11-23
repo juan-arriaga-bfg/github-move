@@ -12,7 +12,6 @@ public static partial class PieceType
     public static readonly PieceTypeDef None = new PieceTypeDef {Id = -1, Abbreviations = new List<string>{"None"}};
     public static readonly PieceTypeDef Empty = new PieceTypeDef {Id = 0, Abbreviations = new List<string>{"Empty", "---"}};
     public static readonly PieceTypeDef Generic = new PieceTypeDef {Id = 1, Abbreviations = new List<string>{"Generic"}};
-    public static readonly PieceTypeDef LockedEmpty = new PieceTypeDef{Id = 90000, Abbreviations = new List<string>{ "LockedEmpty" }, Filter = PieceTypeFilter.Simple};
     
     public static readonly Dictionary<string, int> Abbreviations = new Dictionary<string, int>();
 

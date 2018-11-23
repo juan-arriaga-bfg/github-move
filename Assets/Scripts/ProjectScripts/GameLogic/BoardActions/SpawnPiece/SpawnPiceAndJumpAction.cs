@@ -34,7 +34,6 @@
 		animation.OnCompleteEvent += (_) =>
 		{
 			gameBoardController.BoardLogic.UnlockCell(To, this);
-//			gameBoardController.PathfindLocker.OnAddComplete();
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);
