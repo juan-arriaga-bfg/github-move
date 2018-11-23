@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using DG.Tweening;
 using Quests;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class UIDailyQuestTaskElementViewController : UITabElementViewController
 {
     [IWUIBinding("#TaskDescription")] private NSText lblDescription;
     [IWUIBinding("#TaskProgress")] private NSText lblProgress;
+    [IWUIBinding("#TaskReward")] private NSText lblReward;
     [IWUIBinding("#TaskIcon")] private Image taskIcon;
     [IWUIBinding("#TaskButton")] private Button taskButton;
 
@@ -28,26 +30,36 @@ public class UIDailyQuestTaskElementViewController : UITabElementViewController
         this.task = task;
 
         taskButton.interactable = !task.IsClaimed();
-        // this.pieceId = pieceId;
-        //
-        // if (pieceId <= 0)
-        // {
-        //     lblName.gameObject.SetActive(false);
-        //     ico.gameObject.SetActive(false);
-        //     return;
-        // }
-        //
-        // // var pieceManager = GameDataService.Current.PiecesManager;
-        // PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceId);
-        //
-        // lblName.Text = pieceTypeDef.Abbreviations[0];
-        // lblId.Text = "id " + pieceId.ToString();
-        //
-        // var spr = GetPieecSprite();
-        // if (spr != null)
-        // {
-        //     ico.sprite = spr;
-        // }
+
+        taskIcon.sprite = UiQuestButton.GetIcon(task);
+
+        lblProgress.Text = UiQuestButton.GetTaskProgress(task);
+        
+        lblDescription.Text = task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
+
+        lblReward.Text = GetReward();
+    }
+
+    private string GetReward()
+    {
+        var reward = task.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
+
+        if (reward == null)
+        {
+            return "";
+        }
+
+        List<CurrencyPair> currencysReward;
+        var piecesReward = CurrencyHellper.FiltrationRewards(reward, out currencysReward);
+        
+        var str = string.Format(LocalizationService.Get("common.message.reward", "common.message.reward:{0}"), "");
+        
+        var stringBuilder = new StringBuilder($"<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>{str}</color></font> <size=50>");
+            
+        stringBuilder.Append(CurrencyHellper.RewardsToString("  ", piecesReward, currencysReward));
+        stringBuilder.Append("</size>");
+            
+        return stringBuilder.ToString();
     }
 
     public void OnClick()

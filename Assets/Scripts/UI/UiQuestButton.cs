@@ -122,22 +122,42 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         SetLabelValue(currentValue);
     }
 
-    public static Sprite GetIcon(QuestEntity quest)
+    private static Sprite GetIconForFirstTask(QuestEntity quest)
     {
-        QuestDescriptionComponent cmp = quest.Tasks[0].GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid);
+        return GetIcon(quest.Tasks[0]);
+    }
+    
+    public static Sprite GetIcon(TaskEntity task)
+    {
+        QuestDescriptionComponent cmp = task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid);
 
         if (cmp?.Ico != null)
         {
             return IconService.Current.GetSpriteById(cmp.Ico);
         }
         
-        IHavePieceId taskAboutPiece = quest.Tasks[0] as IHavePieceId;
+        IHavePieceId taskAboutPiece = task as IHavePieceId;
         if (taskAboutPiece != null && taskAboutPiece.PieceId != PieceType.None.Id)
         {
             return IconService.Current.GetSpriteById(PieceType.GetDefById(taskAboutPiece.PieceId).Abbreviations[0]); 
         }
 
         return IconService.Current.GetSpriteById("codexQuestion");
+    }
+
+    public static string GetTaskProgress(TaskEntity task, int currentValueFontSize = 55, string currentValueColor = "FE4704")
+    {
+        TaskCounterEntity counterTask = task as TaskCounterEntity;
+        if (counterTask == null)
+        {
+            return string.Empty;
+        }
+            
+        bool isCompleted = task.IsCompleted();
+        int  current     = counterTask.CurrentValue;
+        int  target      = counterTask.TargetValue;
+                
+        return $"<color=#{( isCompleted ? "FFFFFF" : currentValueColor)}><size={currentValueFontSize}>{current}</size></color>/{target}";
     }
     
     private void SetLabelValue(int value)
@@ -146,7 +166,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
         // Debug.Log($"AAAAA UPDATE: {quest.Id}");
         
-        icon.sprite = GetIcon(Quest);
+        icon.sprite = GetIconForFirstTask(Quest);
 
         var isComplete = Quest.IsCompleted();
 

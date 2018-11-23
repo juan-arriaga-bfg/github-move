@@ -6,7 +6,19 @@ public class UIDailyQuestWindowModel : IWWindowModel
 {
     public string Title => LocalizationService.Get("window.daily.quest.title", "window.daily.quest.title");
 
-    public DailyQuestEntity Quest => GameDataService.Current.QuestsManager.DailyQuest;
+    public DailyQuestEntity Quest
+    {
+        get
+        {
+            return GameDataService.Current.QuestsManager.DailyQuest;
+        }
+    }
 
-    public List<TaskEntity> Tasks => Quest.Tasks;
+    public List<TaskEntity> Tasks
+    {
+        get
+        {
+            return Quest.Tasks;
+        }
+    }
 }
