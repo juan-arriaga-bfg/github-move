@@ -28,6 +28,7 @@ public class PathfinderComponent:ECSEntity
         Piece piece = null, Predicate<BoardPosition> condition = null)
     {
         blockagePositions = new List<BoardPosition>();
+        var blockagePositionsHash = new HashSet<BoardPosition>();
         
         if (to.Contains(from))
             return true;
@@ -56,12 +57,15 @@ public class PathfinderComponent:ECSEntity
         {
             var current = FindPosWithMinimalCost(predictionCosts, uncheckedPositions);
             if (to.Contains(current))
-                return true;
+            {
+                blockagePositions = new List<BoardPosition>(blockagePositionsHash);
+                return true;                
+            }
             
             uncheckedPositions.Remove(current);
             checkedPositions.Add(current);
 
-            var availiablePositions = AvailiablePositions(current, checkedPositions, fieldCondition, ref blockagePositions);
+            var availiablePositions = AvailiablePositions(current, checkedPositions, fieldCondition, ref blockagePositionsHash);
             
             //Init neighbour positions data
             for (int i = 0; i < availiablePositions.Count; i++)
@@ -95,7 +99,7 @@ public class PathfinderComponent:ECSEntity
     {
         var currentPos = uncheckedPositions.First();
         var minimalCost = costs[currentPos];
-
+        
         foreach (var position in uncheckedPositions)
         {
             if (costs[position] < minimalCost)
@@ -113,25 +117,20 @@ public class PathfinderComponent:ECSEntity
         return Math.Abs(from.X - to.X) + Math.Abs(from.Y - to.Y);
     }
     
-    protected List<BoardPosition> AvailiablePositions(BoardPosition position, HashSet<BoardPosition> checkedPositions, Predicate<BoardPosition> predicate, ref List<BoardPosition> unavailiable)
+    protected List<BoardPosition> AvailiablePositions(BoardPosition position, HashSet<BoardPosition> checkedPositions, Predicate<BoardPosition> predicate, ref HashSet<BoardPosition> unavailiable)
     {
-        var uncheckedNeigbours = new List<BoardPosition>
-        {
-            position.Right,
-            position.Up,
-            position.Left,
-            position.Down
-        };
+        var uncheckedNeigbours = position.Neighbors();
         
         var checkedNeigbours = new List<BoardPosition>();
-
-        for (var i = 0; i < uncheckedNeigbours.Count; i++)
+        var count = uncheckedNeigbours.Count;
+        for (var i = 0; i < count; i++)
         {
             var currentNeighbour = uncheckedNeigbours[i];
+            var targetPiece = board.BoardLogic.GetPieceAt(currentNeighbour);
             if(!checkedPositions.Contains(currentNeighbour) && predicate.Invoke(currentNeighbour))
                 checkedNeigbours.Add(currentNeighbour); 
-            else if(!unavailiable.Contains(currentNeighbour) && board.BoardLogic.GetPieceAt(currentNeighbour) != null)
-                unavailiable.Add(currentNeighbour);
+            else if(targetPiece != null && !unavailiable.Contains(targetPiece.CachedPosition))
+                unavailiable.Add(targetPiece.CachedPosition);
         }
         
         return checkedNeigbours;

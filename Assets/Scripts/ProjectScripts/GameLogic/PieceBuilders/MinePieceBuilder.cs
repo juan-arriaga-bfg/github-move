@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class MinePieceBuilder : MulticellularPieceBuilder
 {
@@ -26,8 +27,6 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 		piece.RegisterComponent(life);
 		AddObserver(piece, life);
 		
-		AddObserver(piece, new PathfindLockObserver {AutoLock = true});
-		
 		piece.RegisterComponent(new TouchReactionComponent()
 			 .RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
 				 .RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.ObstacleState})
@@ -35,7 +34,9 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 			 .RegisterComponent(new TouchReactionConditionStorage()))
 			 .RegisterComponent(new PiecePathfindBoardCondition(context, piece)
 			 	.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
-        
+
+		AddPathfindLockObserver(piece, true);
+		
 		return piece;
 	}
 }

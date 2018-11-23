@@ -48,6 +48,8 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 			views.Add(fog);
 			views.Add(touch);
 		}
+		
+		
 
 		fogItem.SetActive(false);
 		touchItem.SetActive(false);
@@ -56,6 +58,8 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 	    Context.Context.BoardEvents.AddListener(this, GameEventsCodes.FogTap);
 
 	    HighlightIfCanClear();
+		
+		observer.UpdateResource(0);
 	}
 
 	public void UpdateBorder()
