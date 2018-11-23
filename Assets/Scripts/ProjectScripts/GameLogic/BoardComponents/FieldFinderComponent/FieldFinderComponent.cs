@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FieldFinderComponent : IECSComponent
@@ -33,7 +34,26 @@ public class FieldFinderComponent : IECSComponent
 		
 		return true;
 	}
-	
+
+	public List<BoardPosition> FindWhere(Func<BoardPosition, BoardLogicComponent, bool> predicate)
+	{
+		var field = new List<BoardPosition>();
+		
+		var def = context.Context.BoardDef;
+		for (int i = 0; i < def.Width; i++)
+		{
+			for (int j = 0; j < def.Height; j++)
+			{
+				var pos = new BoardPosition(i, j, def.PieceLayer);
+				if(context.IsLockedCell(pos) || context.IsLockedCell(pos) || predicate(pos, context) == false)
+					continue;
+				field.Add(pos);
+			}
+		}
+
+		return field;
+	}
+
 	private List<BoardPosition> FindField(int type, BoardPosition point, List<BoardPosition> field)
 	{
 		if(field.Contains(point) || context.IsLockedCell(point)) return field;

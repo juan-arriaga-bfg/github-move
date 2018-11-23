@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class SpawnPiecesAction : IBoardAction
 {
@@ -30,23 +31,88 @@ public class SpawnPiecesAction : IBoardAction
 
 		free.RemoveAt(index != -1 ? index : 0);
 		free.Add(At);
+
+		var positionsForLock = new List<BoardPosition>();
 		
 		for (var i = 0; i < pieces.Count; i++)
 		{
 			Action onSuccess = () => { };
 
-			if (i == pieces.Count - 1 ) onSuccess = () => { OnSuccessEvent?.Invoke(free); };
-
-			gameBoardController.ActionExecutor.AddAction(new SpawnPieceAtAction
+			if (i == pieces.Count - 1 ) onSuccess = () =>
 			{
-				IsCheckMatch = IsCheckMatch,
-				IsMatch = IsMatch,
-				At = free[i],
-				PieceTypeId = pieces[i],
-				OnSuccessEvent = position => { onSuccess(); }
+				OnSuccessEvent?.Invoke(free);
+			};
+
+			var targetPos = free[i];
+			targetPos.Z = gameBoardController.BoardDef.PieceLayer;
+			
+			positionsForLock.Add(targetPos);
+			SpawnSinglePiece(gameBoardController, IsCheckMatch, IsMatch, targetPos, pieces[i], position =>
+			{
+				gameBoardController.BoardLogic.UnlockCell(targetPos, this);
+				onSuccess();
 			});
+			
+//			gameBoardController.ActionExecutor.AddAction(new SpawnPieceAtAction
+//			{
+//				IsCheckMatch = IsCheckMatch,
+//				IsMatch = IsMatch,
+//				At = free[i],
+//				PieceTypeId = pieces[i],
+//				OnSuccessEvent = position => { onSuccess(); }
+//			});
 		}
+		gameBoardController.BoardLogic.LockCells(positionsForLock, this);
 		
 		return true;
 	}
+
+	private bool SpawnSinglePiece(BoardController gameBoardController, bool IsCheckMatch, bool IsMatch, BoardPosition At,
+								  int PieceTypeId, Action<BoardPosition> OnSuccessEvent)
+	{
+		var piece = gameBoardController.CreatePieceFromType(PieceTypeId);
+		
+		At = new BoardPosition(At.X, At.Y, piece.Layer.Index);
+
+		if (At.IsValid == false
+		    || gameBoardController.BoardLogic.IsLockedCell(At)
+		    || gameBoardController.BoardLogic.AddPieceToBoard(At.X, At.Y, piece) == false)
+		{
+			return false;
+		}
+
+		BoardAnimation animation;
+		
+		if (IsMatch)
+		{
+			animation = new MatchSpawnPieceAtAnimation
+			{
+				CreatedPiece = piece,
+				At = At
+			};
+		}
+		else
+		{
+			animation = new SpawnPieceAtAnimation
+			{
+				CreatedPiece = piece,
+				At = At
+			};
+		}
+		
+		animation.OnCompleteEvent += (_) =>
+		{
+			if (OnSuccessEvent == null) return;
+			
+			var observer = piece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
+				
+			OnSuccessEvent(observer?.GetTopPosition ?? At);
+		};
+		
+		gameBoardController.RendererContext.AddAnimationToQueue(animation);
+
+		return true;
+	}
+	
+	
 }
