@@ -28,6 +28,8 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
     private void CreateTaskList(UIDailyQuestWindowModel model)
     {
         var tasks = model.Tasks;
+
+        SortTasks(tasks);
         
         if (tasks == null || tasks.Count <= 0)
         {
@@ -43,6 +45,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
             var tabEntity = new UIDailyQuestTaskElementEntity
             {
                 Task = task,
+                WindowController = Controller,
                 OnSelectEvent = null,
                 OnDeselectEvent = null
             };
@@ -51,5 +54,37 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         
         taskList.Create(tabViews);
         taskList.Select(0);
+    }
+
+    private void SortTasks(List<TaskEntity> tasks)
+    {
+        tasks.Sort((item1, item2) =>
+        {
+            const int CLAIMED_WEIGHT = 10000;
+            const int COMPLETED_WEIGHT = -1000;
+            
+            int w1 = (int)item1.Group;
+            int w2 = (int)item2.Group;
+
+            if (item1.IsClaimed())
+            {
+                w1 += CLAIMED_WEIGHT;
+            }
+            else if (item1.IsCompleted())
+            {
+                w1 += COMPLETED_WEIGHT;
+            }
+
+            if (item2.IsClaimed())
+            {
+                w2 += CLAIMED_WEIGHT;
+            }
+            else if (item2.IsCompleted())
+            {
+                w2 += COMPLETED_WEIGHT;
+            }
+            
+            return w1 - w2;
+        });
     }
 }

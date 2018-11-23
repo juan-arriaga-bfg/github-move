@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using DG.Tweening;
-using Quests;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class UIDailyQuestTaskElementViewController : UIContainerElementViewController
@@ -13,14 +10,16 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     [IWUIBinding("#TaskReward")] private NSText lblReward;
     [IWUIBinding("#TaskIcon")] private Image taskIcon;
     [IWUIBinding("#TaskButton")] private Button taskButton;
+    [IWUIBinding("#TaskButtonLabel")] private NSText taskButtonLabel;
 
     private TaskEntity task;
-    
+    private UIDailyQuestTaskElementEntity targetEntity;
+
     public override void Init()
     {
         base.Init();
         
-        var targetEntity = entity as UIDailyQuestTaskElementEntity;
+        targetEntity = entity as UIDailyQuestTaskElementEntity;
 
         Init(targetEntity.Task);
     }
@@ -30,14 +29,25 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         this.task = task;
 
         taskButton.interactable = !task.IsClaimed();
+        taskButtonLabel.Text = GetTextForButton(task);
 
         taskIcon.sprite = UiQuestButton.GetIcon(task);
 
         lblProgress.Text = UiQuestButton.GetTaskProgress(task);
         
-        lblDescription.Text = task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
+        lblDescription.Text = $"<color=#D2D2D2><size=25>[{task.Group} - {task.Id.ToLower()}]</size></color> " + task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
 
         lblReward.Text = GetReward();
+    }
+
+    private string GetTextForButton(TaskEntity task)
+    {
+        if (task.IsCompletedOrClaimed())
+        {
+            return LocalizationService.Get("window.daily.quest.task.button.claim", "window.daily.quest.task.button.claim");
+        }
+        
+        return LocalizationService.Get("window.daily.quest.task.button.help", "window.daily.quest.task.button.help");
     }
 
     private string GetReward()
@@ -69,12 +79,13 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
             return;
         }
         
-        if (task.IsCompleted())
+        if (task.IsCompletedOrClaimed())
         {
             ProvideReward();
             return;
         }
         
+        targetEntity.WindowController.CloseCurrentWindow();
         task.Highlight();
     }
 

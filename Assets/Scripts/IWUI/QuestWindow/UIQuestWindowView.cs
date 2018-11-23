@@ -87,7 +87,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIQuestWindowModel;
         var quest = windowModel.Quest;
 
-        if (quest.IsCompleted())
+        if (quest.IsCompletedOrClaimed())
         {
             return;
         }

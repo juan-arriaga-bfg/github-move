@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using Quests;
 using UnityEngine;
@@ -85,7 +86,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         
         UpdateView();
         
-        if (Quest.IsCompleted())
+        if (Quest.IsCompletedOrClaimed())
         {
             interactive = false;
 
@@ -137,9 +138,17 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         }
         
         IHavePieceId taskAboutPiece = task as IHavePieceId;
-        if (taskAboutPiece != null && taskAboutPiece.PieceId != PieceType.None.Id)
+        try
         {
-            return IconService.Current.GetSpriteById(PieceType.GetDefById(taskAboutPiece.PieceId).Abbreviations[0]); 
+            if (taskAboutPiece != null && taskAboutPiece.PieceId != PieceType.None.Id && taskAboutPiece.PieceId != PieceType.Empty.Id)
+            {
+                var pieceTypeDef = PieceType.GetDefById(taskAboutPiece.PieceId);
+                return IconService.Current.GetSpriteById(pieceTypeDef.Abbreviations[0]);
+            }
+        }
+        catch (Exception e)
+        {
+            throw;
         }
 
         return IconService.Current.GetSpriteById("codexQuestion");
@@ -153,9 +162,9 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             return string.Empty;
         }
             
-        bool isCompleted = task.IsCompleted();
-        int  current     = counterTask.CurrentValue;
+        bool isCompleted = task.IsCompletedOrClaimed();
         int  target      = counterTask.TargetValue;
+        int  current     = Mathf.Min(counterTask.CurrentValue, target);
                 
         return $"<color=#{( isCompleted ? "FFFFFF" : currentValueColor)}><size={currentValueFontSize}>{current}</size></color>/{target}";
     }
@@ -168,7 +177,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         
         icon.sprite = GetIconForFirstTask(Quest);
 
-        var isComplete = Quest.IsCompleted();
+        var isComplete = Quest.IsCompletedOrClaimed();
 
         if (isComplete && isUp == false && interactive)
         {
@@ -209,7 +218,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             return;
         }
 
-        if (Quest == null || Quest.IsCompleted())
+        if (Quest == null || Quest.IsCompletedOrClaimed())
         {
             return;
         }
