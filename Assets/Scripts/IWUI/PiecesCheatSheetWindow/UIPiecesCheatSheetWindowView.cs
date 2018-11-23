@@ -1,8 +1,13 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView 
 {
-    [IWUIBinding("/#RootCanvas/Body/Border/Content/PanelContent/ScrollView/Viewport/#Container")] private UITabPanelViewController itemsPanel;
+    [IWUIBinding("#Container")] private UIContainerViewController itemsPanel;
+    
+    [IWUIBinding("#TabsContainer")] private UIContainerViewController tabsPanel;
+    
 
     public override void OnViewShow()
     {
@@ -24,14 +29,51 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
     
     private void CreateItems(UIPiecesCheatSheetWindowModel model)
     {
-        Fill(model.PiecesList());
+        var filters = Enum.GetValues(typeof(PieceTypeFilter)).Cast<PieceTypeFilter>().Select(x => Enum.GetName(typeof(PieceTypeFilter), x)).ToList();
+        FillTabs(filters, tabsPanel);
+        var tabsScrollRect = tabsPanel.GetScrollRect();
+        if (tabsScrollRect != null)
+        {
+            tabsScrollRect.horizontalNormalizedPosition = 0f;
+        }
     }
     
-    public void Fill(List<int> entities)
+    public void FillTabs(List<string> entities, UIContainerViewController container)
     {
         if (entities == null || entities.Count <= 0)
         {
-            itemsPanel.Clear();
+            container.Clear();
+            return;
+        }
+
+        // update items
+        var views = new List<IUIContainerElementEntity>(entities.Count);
+        for (int i = 0; i < entities.Count; i++)
+        {
+            var def = entities[i];
+
+            var entity = new UITabContainerElementEntity
+            {
+                Uid = def,
+                TabLabel = def,
+                OnSelectEvent = (view) =>
+                {
+                    UIPiecesCheatSheetWindowModel model = Model as UIPiecesCheatSheetWindowModel;
+                    Fill(model.GetPieceIdsBy((PieceTypeFilter)Enum.Parse(typeof(PieceTypeFilter), view.Entity.Uid)), itemsPanel);
+                },
+                OnDeselectEvent = null
+            };
+            views.Add(entity);
+        }
+        container.Create(views);
+        container.Select(0);
+    }
+    
+    public void Fill(List<int> entities, UIContainerViewController container)
+    {
+        if (entities == null || entities.Count <= 0)
+        {
+            container.Clear();
             return;
         }
         
@@ -43,7 +85,7 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
         };
         
         // update items
-        var tabViews = new List<IUITabElementEntity>(entities.Count);
+        var views = new List<IUIContainerElementEntity>(entities.Count);
         for (int i = 0; i < entities.Count; i++)
         {
             var def = entities[i];
@@ -51,15 +93,15 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
             // exclude items
             if (exclude.Contains(def)) continue;
 
-            var tabEntity = new UIPiecesCheatSheetElementEntity
+            var entity = new UIPiecesCheatSheetElementEntity
             {
                 PieceId = def,
                 OnSelectEvent = null,
                 OnDeselectEvent = null
             };
-            tabViews.Add(tabEntity);
+            views.Add(entity);
         }
-        itemsPanel.Create(tabViews);
-        itemsPanel.Select(0);
+        container.Create(views);
+        container.Select(0);
     }
 }

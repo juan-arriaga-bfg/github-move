@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIPiecesCheatSheetElementViewController : UITabElementViewController
+public class UIPiecesCheatSheetElementViewController : UIContainerElementViewController
 {
     [IWUIBinding("#NameLabel")] private NSText lblName;
     
