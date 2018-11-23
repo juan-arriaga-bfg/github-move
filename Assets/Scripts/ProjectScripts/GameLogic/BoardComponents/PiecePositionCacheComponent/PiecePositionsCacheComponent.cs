@@ -26,8 +26,30 @@ public class PiecePositionsCacheComponent : IECSComponent
 
 		return cache.TryGetValue(pieceType, out list) == false ? 0 : list.Count;
 	}
+
+	public BoardPosition? GetNearestByType(int pieceType, BoardPosition from)
+	{
+		var list = GetPiecePositionsByType(pieceType);
+		
+		if(list.Count == 0) return null;
+
+		var nearest = from.GetImmediate(list);
+
+		return nearest.Count == 0 ? null : (BoardPosition?) nearest[0];
+	}
 	
-	public List<BoardPosition>  GetPiecePositionsByType(int pieceType)
+	public BoardPosition? GetNearestByFilter(PieceTypeFilter filter, BoardPosition from)
+	{
+		var list = GetPiecePositionsByFilter(filter);
+		
+		if(list.Count == 0) return null;
+		
+		var nearest = from.GetImmediate(list);
+		
+		return nearest.Count == 0 ? null : (BoardPosition?) nearest[0];
+	}
+	
+	public List<BoardPosition> GetPiecePositionsByType(int pieceType)
 	{
 		List<BoardPosition> list;
 

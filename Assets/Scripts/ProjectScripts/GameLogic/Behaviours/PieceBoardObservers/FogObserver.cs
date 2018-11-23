@@ -121,6 +121,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                 PieceTypeId = piece
             });
         }
+        
+        Context.Context.ActionExecutor.AddAction(new CallbackAction
+        {
+            Callback = controller => controller.TutorialLogic.Update()
+        });
     }
     
     public void RegisterCarrier(IResourceCarrier carrier)

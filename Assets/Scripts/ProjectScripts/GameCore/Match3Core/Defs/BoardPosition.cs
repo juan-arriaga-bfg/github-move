@@ -280,11 +280,11 @@ public struct BoardPosition : IEquatable<BoardPosition>
         return new BoardPosition(Mathf.RoundToInt(center.x), Mathf.RoundToInt(center.y), Mathf.RoundToInt(center.z));
     }
 
-    public List<BoardPosition> GetImmediate(List<BoardPosition> positions, List<BoardPosition> ignore, int amount)
+    public List<BoardPosition> GetImmediate(List<BoardPosition> positions, List<BoardPosition> ignore = null, int amount = 1)
     {
         if (ignore == null) ignore = new List<BoardPosition>(); 
         
-        var rezult = new List<BoardPosition>();
+        var result = new List<BoardPosition>();
         var temp = new List<KeyValuePair<float, BoardPosition>>();
         
         foreach (var position in positions)
@@ -301,10 +301,10 @@ public struct BoardPosition : IEquatable<BoardPosition>
 
         for (var i = 0; i < amount; i++)
         {
-            rezult.Add(temp[i].Value);
+            result.Add(temp[i].Value);
         }
         
-        return rezult;
+        return result;
     }
 
     public static void GetAABB(List<BoardPosition> positions, out BoardPosition topLeft, out BoardPosition topRight, out BoardPosition bottomRight, out BoardPosition bottomLeft)

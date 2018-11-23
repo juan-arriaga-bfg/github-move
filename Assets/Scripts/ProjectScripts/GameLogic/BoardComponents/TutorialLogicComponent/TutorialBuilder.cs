@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using Quests;
+using UnityEngine;
 
 public static class TutorialBuilder
 {
-    public const int LockPRStepIndex = 9;
+    public const int LockPRStepIndex = 10;
     
     public static BaseTutorialStep BuildTutorial(int index, BoardController context)
     {
@@ -126,7 +127,12 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 8: // remove worker
+            case 8: // tutorial 7 - worker
+            {
+                step = new WorkerTutorialStep();
+                break;
+            }
+            case 9: // remove worker
             {
                 step = new BaseTutorialStep{IsIgnoreUi = true};
                 
@@ -137,47 +143,49 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 9: // unlock PR pieces
+            case 10: // unlock PR pieces
             {
+                if (LockPRStepIndex != index) Debug.LogError("Tutorial Error: LockPRStepIndex != index");
+                
                 step = new BaseTutorialStep();
                 
-                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
-            case 10: // lock camera
+            case 11: // lock camera
             {
                 step = new CameraLockTutorialStep();
                 
-                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
-            case 11: // lock buttons Worker, Energy, Codex
+            case 12: // lock buttons Worker, Energy, Codex
             {
                 step = new UiLockTutorialStep{Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Worker, UiLockTutorialItem.Energy, UiLockTutorialItem.Codex}};
                 
-                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
-            case 12: // lock Orders and buttons Orders, Shop
+            case 13: // lock Orders and buttons Orders, Shop
             {
                 step = new OrdersLockTutorialStep{Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Orders, UiLockTutorialItem.Shop}};
                 
-                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "16_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "16_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
-            case 13: // add SleepingBeauty
+            case 14: // add SleepingBeauty
             {
                 step = new BaseTutorialStep{IsIgnoreUi = true};
                 
@@ -190,11 +198,11 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 14: // unlock Firefly
+            case 15: // unlock Firefly
             {
                 step = new FireflyLockTutorialStep();
                 
-                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckLevelTutorialCondition{Target = GameDataService.Current.ConstantsManager.StartLevelFirefly, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckLevelTutorialCondition{Target = GameDataService.Current.ConstantsManager.StartLevelFirefly, ConditionType = TutorialConditionType.Hard}, true);
                 
