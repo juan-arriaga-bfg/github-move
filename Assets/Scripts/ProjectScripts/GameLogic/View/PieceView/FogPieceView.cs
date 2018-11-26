@@ -91,7 +91,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
     {
         if (observer.CanBeCleared())
         {
-            ToggleHighlight(true);
+            ToggleReadyToClear(true);
         }
     }
 
@@ -139,6 +139,25 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
                     ToggleHighlight(context == currentPiece);
                 }
                 break;
+        }
+    }
+    
+    public virtual void ToggleReadyToClear(bool enabled)
+    {
+        if (enabled == IsHighlighted)
+        {
+            return;
+        }
+
+        IsHighlighted = enabled;
+
+        DOTween.Kill(HIGHLIGHT_ANIMATION_ID);
+       
+        const float TIME = 0.35f;
+        
+        foreach (var spr in fogSprites)
+        {
+            spr.DOColor(enabled ? highlightColor : initialColor, TIME).SetId(HIGHLIGHT_ANIMATION_ID);
         }
     }
 
