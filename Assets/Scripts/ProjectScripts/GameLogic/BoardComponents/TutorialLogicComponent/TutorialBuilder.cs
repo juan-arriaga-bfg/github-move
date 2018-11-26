@@ -180,9 +180,29 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 14: // lock Orders and buttons Orders, Shop
+            case 14: // lock buttons Orders, Shop
             {
-                step = new OrdersLockTutorialStep{Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Orders, UiLockTutorialItem.Shop}};
+                step = new UiLockTutorialStep{Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Orders, UiLockTutorialItem.Shop}};
+                
+                step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
+                
+                break;
+            }
+            case 15: // lock buttons Remove
+            {
+                step = new UiLockTutorialStep{Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Remove}};
+                
+                step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "14_CreatePiece_B3", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "14_CreatePiece_B3", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
+                
+                break;
+            }
+            case 16: // lock Orders
+            {
+                step = new OrdersLockTutorialStep();
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "16_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
@@ -190,7 +210,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 15: // add SleepingBeauty
+            case 17: // add SleepingBeauty
             {
                 step = new BaseTutorialStep{IsIgnoreUi = true};
                 
@@ -203,7 +223,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 16: // unlock Firefly
+            case 18: // unlock Firefly
             {
                 step = new FireflyLockTutorialStep();
                 
