@@ -83,6 +83,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         
         OnActiveQuestsListChanged = null;
         QuestStarters = null;
+        DailyQuest = null;
 
         cache = new Dictionary<Type, Dictionary<string, JToken>>();
         
