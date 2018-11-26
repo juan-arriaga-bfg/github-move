@@ -20,8 +20,6 @@ public class FireflyPieceSpawnAnimation : BoardAnimation
 		sequence.Insert(0.3f, Action.View.CachedTransform.DOScale(Vector3.zero, 0.3f));
 		
 		sequence.InsertCallback(0.25f, () => ParticleView.Show(R.FireflyExplosion, particlePosition));
-		sequence.InsertCallback(0.25f, () => ParticleView.Show(R.SmolderingParticles, particlePosition));
-		sequence.InsertCallback(0.25f, () => ParticleView.Show(R.MergeParticleSystem, particlePosition).SyncRendererLayers(new BoardPosition(Action.At.X, Action.At.Y, 4)));
 		sequence.Insert(0.3f, boardElement.CachedTransform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack));
 		
 		sequence.InsertCallback(0.2f, () =>
