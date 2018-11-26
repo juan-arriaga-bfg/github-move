@@ -129,7 +129,7 @@ public static class TutorialBuilder
             }
             case 8: // tutorial 8 - crystal
             {
-                step = new СrystalTutorialStep{Delay = 3};
+                step = new СrystalTutorialStep{Delay = 3, isAnyCompleteCondition = true};
                 break;
             }
             case 9: // tutorial 9 - worker

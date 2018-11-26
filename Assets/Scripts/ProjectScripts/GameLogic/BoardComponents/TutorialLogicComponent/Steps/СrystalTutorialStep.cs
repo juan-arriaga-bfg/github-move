@@ -27,6 +27,22 @@ public class СrystalTutorialStep : LoopFingerTutorialStep
                 new BoardPosition(19, 8, Context.Context.BoardDef.PieceLayer)
             }
         }, true);
+        
+        RegisterComponent(new CheckPieceTutorialCondition
+        {
+            ConditionType = TutorialConditionType.Complete,
+            Target = crystal,
+            Amount = 0
+        }, true);
+    }
+    
+    public override void Perform()
+    {
+        if (IsPerform) return;
+        
+        base.Perform();
+        
+        startTime = startTime.AddSeconds(-(Delay-0.5f));
     }
     
     public override void Execute()
