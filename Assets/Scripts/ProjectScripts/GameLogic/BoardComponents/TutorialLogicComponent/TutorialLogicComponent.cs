@@ -14,6 +14,9 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     public override void OnRegisterEntity(ECSEntity entity)
     {
         Context = entity as BoardController;
+        
+        var firefly = Context.BoardLogic.FireflyLogic;
+        firefly.Locker.Unlock(firefly);
     }
     
     public override void OnUnRegisterEntity(ECSEntity entity)
