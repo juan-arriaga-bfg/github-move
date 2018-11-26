@@ -1,4 +1,6 @@
-﻿public class BaseTutorialStep : ECSEntity
+﻿using System;
+
+public class BaseTutorialStep : ECSEntity
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
@@ -11,6 +13,9 @@
 	private bool isStart;
 	public bool IsPerform;
 	public bool IsIgnoreUi;
+
+	public bool isAnyStartCondition;
+	public bool isAnyCompleteCondition;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
@@ -71,7 +76,7 @@
 	{
 		var collection = GetComponent<ECSComponentCollection>(BaseTutorialCondition.ComponentGuid);
 		var conditions = collection?.Components.FindAll(component => (component as BaseTutorialCondition).ConditionType == TutorialConditionType.Hard);
-
+		
 		if (conditions == null) return false;
 		
 		for (var i = conditions.Count - 1; i >= 0; i--)
@@ -79,7 +84,7 @@
 			var condition = (BaseTutorialCondition) conditions[i];
 			
 			if (condition.Check() == false) continue;
-
+			
 			return true;
 		}
 		
@@ -90,14 +95,32 @@
 	{
 		var collection = GetComponent<ECSComponentCollection>(BaseTutorialCondition.ComponentGuid);
 		var conditions = collection?.Components.FindAll(component => (component as BaseTutorialCondition).ConditionType == type);
-
+		
 		if (conditions == null) return true;
+		
+		var isAny = false;
+		var isRemove = false;
+		
+		switch (type)
+		{
+			case TutorialConditionType.Start:
+				isAny = isAnyStartCondition;
+				break;
+			case TutorialConditionType.Complete:
+				isAny = isAnyCompleteCondition;
+				break;
+		}
+		
+		if (isAny)
+		{
+			isRemove = conditions.Find(component => (component as BaseTutorialCondition).Check()) != null;
+		}
 		
 		for (var i = conditions.Count - 1; i >= 0; i--)
 		{
 			var condition = (BaseTutorialCondition) conditions[i];
 			
-			if (condition.Check() == false) continue;
+			if (isRemove == false && condition.Check() == false) continue;
 			
 			UnRegisterComponent(condition);
 			conditions.Remove(condition);
