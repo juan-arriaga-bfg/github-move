@@ -43,15 +43,7 @@ namespace UTRuntime
             }
             
             yield return new WaitForSeconds(1f);
-            
-            var exclude = new HashSet<int>
-            {
-                0, 
-                -1,
-                1
-            };
 
-            
             var testIds = PieceType.GetIdsByFilter(PieceTypeFilter.Default);
 
             var piecesCheatSheetWindowModel = new UIPiecesCheatSheetWindowModel();
