@@ -190,7 +190,17 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 15: // lock Orders
+            case 15: // lock buttons Remove
+            {
+                step = new UiLockTutorialStep{Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Remove}};
+                
+                step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "14_CreatePiece_B3", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "14_CreatePiece_B3", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
+                
+                break;
+            }
+            case 16: // lock Orders
             {
                 step = new OrdersLockTutorialStep();
                 
@@ -200,7 +210,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 16: // add SleepingBeauty
+            case 17: // add SleepingBeauty
             {
                 step = new BaseTutorialStep{IsIgnoreUi = true};
                 
@@ -213,7 +223,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 17: // unlock Firefly
+            case 18: // unlock Firefly
             {
                 step = new FireflyLockTutorialStep();
                 

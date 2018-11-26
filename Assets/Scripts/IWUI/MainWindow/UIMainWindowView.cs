@@ -16,6 +16,7 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
     [SerializeField] private CanvasGroup codexCanvasGroup;
     [SerializeField] private CanvasGroup shopCanvasGroup;
     [SerializeField] private CanvasGroup ordersCanvasGroup;
+    [SerializeField] private CanvasGroup removeCanvasGroup;
     
     [SerializeField] private GameObject delimiters;
     
@@ -79,6 +80,9 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
             case UiLockTutorialItem.Orders:
                 target = ordersCanvasGroup;
                 break;
+            case UiLockTutorialItem.Remove:
+                target = removeCanvasGroup;
+                break;
             default:
                 return;
         }
@@ -89,10 +93,21 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
         if (isAnimate == false)
         {
             target.alpha = isLock ? 0 : 1;
+            target.gameObject.SetActive(!isLock);
             return;
         }
-
-        target.DOFade(isLock ? 0 : 1, 0.2f);
+        
+        target.DOFade(isLock ? 0 : 1, 0.4f)
+            .OnStart(() =>
+            {
+                if(isLock) return;
+                target.gameObject.SetActive(true);
+            })
+            .OnComplete(() =>
+            {
+                if(isLock == false) return;
+                target.gameObject.SetActive(false);
+            });
     }
 
     public void OnActiveQuestsListChanged()
