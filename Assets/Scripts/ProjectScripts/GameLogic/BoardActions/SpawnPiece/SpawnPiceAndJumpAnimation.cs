@@ -18,7 +18,11 @@ public class SpawnPiceAndJumpAnimation : BoardAnimation
         
         var sequence = DOTween.Sequence().SetId(animationUid);
         
+        element.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
+        
         sequence.Insert(0, element.CachedTransform.DOJump(new Vector3(to.x, to.y, element.CachedTransform.position.z), 1, 1, 0.4f).SetEase(Ease.InOutSine));
+        sequence.InsertCallback(0.4f, () => context.ResetBoardElement(element, To));
+        
         sequence.Insert(0, element.CachedTransform.DOScale(Vector3.one * 1.3f, 0.2f));
         sequence.Insert(0.2f, element.CachedTransform.DOScale(Vector3.one, 0.2f));
             

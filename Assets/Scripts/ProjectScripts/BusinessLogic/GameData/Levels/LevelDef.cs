@@ -9,4 +9,5 @@ public class LevelsDef
     
     public List<ItemWeight> PieceWeights = new List<ItemWeight>();
     public List<ItemWeight> OrdersWeights = new List<ItemWeight>();
+    public List<ItemWeight> ResourcesWeights = new List<ItemWeight>();
 }

@@ -25,7 +25,9 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
     [SerializeField] private Transform hintAnchorOrdersButton;
     public Transform HintAnchorOrdersButton => hintAnchorOrdersButton;
 
-    private List<UiQuestButton> questButtons = new List<UiQuestButton>();
+    [IWUIBinding("#ButtonDailyQuest")] private DailyQuestButton dailyQuestButton;
+    
+    private readonly List<UiQuestButton> questButtons = new List<UiQuestButton>();
 
     private int maxCountOfVisibleQuestButtonsCached = -1;
     
@@ -47,8 +49,9 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
         
         OnActiveQuestsListChanged();
         UpdateCodexButton();
+        UpdateDailyQuestButton();
     }
-    
+
     private void OnDestroy()
     {
         GameDataService.Current.QuestsManager.OnActiveQuestsListChanged -= OnActiveQuestsListChanged;
@@ -94,11 +97,13 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
 
     public void OnActiveQuestsListChanged()
     {
-        var activeQuests = GameDataService.Current.QuestsManager.ActiveQuests;
+        var activeQuests = GameDataService.Current.QuestsManager.ActiveStoryQuests;
         
         CheckQuestButtons(activeQuests);
 
         InitWindowViewControllers();
+        
+        UpdateDailyQuestButton();
     }
 
     private void CheckQuestButtons(List<QuestEntity> active)
@@ -140,7 +145,7 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
             
             questButtons.Add(button);
 
-            if (quest.IsCompleted())
+            if (quest.IsCompletedOrClaimed())
             {
                 button.gameObject.SetActive(false);
             }
@@ -201,6 +206,12 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
         UIService.Get.ShowWindow(UIWindowType.OrdersWindow);
     }
     
+    public void OnClickDailyQuest()
+    {
+        var model = UIService.Get.GetCachedModel<UIDailyQuestWindowModel>(UIWindowType.DailyQuestWindow);
+        UIService.Get.ShowWindow(UIWindowType.DailyQuestWindow);
+    }
+    
     private void OnNewPieceBuilded()
     {
         codexButton.UpdateState();
@@ -239,5 +250,13 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
 
         maxCountOfVisibleQuestButtonsCached = (int) ((containerH - topPadding - bottomPadding + spacing) / (itemH + spacing));
         return maxCountOfVisibleQuestButtonsCached;
+    }
+    
+    
+    private void UpdateDailyQuestButton()
+    {
+        var questManager = GameDataService.Current.QuestsManager;
+        
+        dailyQuestButton.gameObject.SetActive(questManager.DailyQuest != null);
     }
 }

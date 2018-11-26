@@ -16,6 +16,8 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     public TaskState State { get; protected set; }
 
     [JsonProperty] public int Order;
+    
+    [JsonProperty] public TaskGroup Group;
        
 #region Serialization
 
@@ -38,6 +40,11 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
         return false;
     }
     
+    public bool ShouldSerializeGroup()
+    {
+        return false;
+    }
+    
 #endregion
     
     /// <summary>
@@ -52,7 +59,7 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     /// Return true when all required actions are done by the player and game can provide a reward for this task (or a reward already provided).
     /// In this state task will not react to corresponded events in the game anymore.
     /// </summary>
-    public bool IsCompleted()
+    public bool IsCompletedOrClaimed()
     {
         return State == TaskState.Completed || State == TaskState.Claimed;
     }
@@ -64,6 +71,15 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     public bool IsClaimed()
     {
         return State == TaskState.Claimed;
+    }
+    
+    /// <summary>
+    /// Return true if a player completed the task but nob claimed a reward
+    /// </summary>
+    /// <returns></returns>
+    public bool IsCompleted()
+    {
+        return State == TaskState.Completed;
     }
     
     /// <summary>
@@ -83,6 +99,26 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
             State = TaskState.New;
             OnChanged?.Invoke(this);
         }
+    }
+    
+    /// <summary>
+    /// Mark that reward is provided to player
+    /// </summary>
+    public void SetClaimedState()
+    {
+        if (State == TaskState.Claimed)
+        {
+            return;
+        }
+        
+        if (State != TaskState.Completed)
+        {
+            throw new ArgumentException($"Can't set Claimed state when task is in '{State}' state!");
+        }
+        
+        State = TaskState.Claimed;
+        
+        OnChanged?.Invoke(this);
     }
 
     /// <summary>

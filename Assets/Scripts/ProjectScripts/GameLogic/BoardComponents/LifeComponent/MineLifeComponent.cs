@@ -5,8 +5,8 @@ public class MineLifeComponent : StorageLifeComponent
     private MineDef def;
     
     public override CurrencyPair Energy => def.Price;
-    public override string Message => string.Format(LocalizationService.Instance.Manager.GetTextByUid("gameboard.bubble.message.mine", "Clear mine:\n{0}?"), DateTimeExtension.GetDelayText(def.Delay));
-    public override string Price => string.Format(LocalizationService.Instance.Manager.GetTextByUid("gameboard.bubble.button.clear", "Clear {0}"), Energy.ToStringIcon());
+    public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.mine", "gameboard.bubble.message.mine\n{0}?"), DateTimeExtension.GetDelayText(def.Delay));
+    public override string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.clear", "gameboard.bubble.button.clear {0}"), Energy.ToStringIcon());
     
     public int MinePieceType { get; private set; }
     

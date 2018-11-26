@@ -6,25 +6,25 @@ public class CheckPieceInPositionTutorialCondition : BaseTutorialCondition
     public List<BoardPosition> Positions;
     public bool CheckAll;
     public bool CheckAbsence;
-
+    
     public override bool Check()
     {
         if (Positions == null || Positions.Count == 0) return CheckAbsence;
-        
-        foreach (var position in Positions)
-        {
-            var piece = context.Context.Context.BoardLogic.GetPieceAt(position);
-            
-            if (piece != null && piece.PieceType == Target)
-            {
-                if(CheckAll) continue;
 
-                return !CheckAbsence;
-            }
-            
-            if(CheckAll) return CheckAbsence;
+        if (CheckAll)
+        {
+            var result = Positions.FindAll(CheckType);
+
+            return CheckAbsence ? result.Count == 0 : result.Count == Positions.Count;
         }
         
-        return CheckAbsence ? !CheckAll : CheckAll;
+        return Positions.FindIndex(position => CheckAbsence ? !CheckType(position) : CheckType(position)) != -1;
+    }
+
+    private bool CheckType(BoardPosition position)
+    {
+        var piece = context.Context.Context.BoardLogic.GetPieceAt(position);
+
+        return piece != null && piece.PieceType == Target;
     }
 }

@@ -8,7 +8,7 @@ public class BouncePieceAnimation : BoardAnimation
     
     public override void Animate(BoardRenderer context)
     {
-        var boardElement = BoardElement ?? context.GetElementAt(From);
+        var boardElement = BoardElement != null ? BoardElement : context.GetElementAt(From);
         
         var sequence = DOTween.Sequence().SetId(animationUid);
         

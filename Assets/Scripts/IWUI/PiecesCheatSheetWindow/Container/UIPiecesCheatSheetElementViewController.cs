@@ -5,14 +5,28 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIPiecesCheatSheetWindowItem : MonoBehaviour
+public class UIPiecesCheatSheetElementViewController : UIContainerElementViewController
 {
-    [SerializeField] private TextMeshProUGUI lblName;
-    [SerializeField] private TextMeshProUGUI lblId;
-    [SerializeField] private Image ico;
-    [SerializeField] private CanvasGroup mainCanvasGroup;
+    [IWUIBinding("#NameLabel")] private NSText lblName;
+    
+    [IWUIBinding("#IdLabel")] private NSText lblId;
+    
+    [IWUIBinding("#Icon")] private Image ico;
+    
+    [IWUIBinding("#RootCanvas", true)] private CanvasGroup mainCanvasGroup;
+    
+    [IWUIBinding] private UIButtonViewController rootButton;
 
     private int pieceId;
+    
+    public override void Init()
+    {
+        base.Init();
+        
+        var targetEntity = entity as UIPiecesCheatSheetElementEntity;
+
+        Init(targetEntity.PieceId);
+    }
     
     public void Init(int pieceId)
     {
@@ -28,26 +42,37 @@ public class UIPiecesCheatSheetWindowItem : MonoBehaviour
         // var pieceManager = GameDataService.Current.PiecesManager;
         PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceId);
 
-        lblName.text = pieceTypeDef.Abbreviations[0];
-        lblId.text = "id " + pieceId.ToString();
+        lblName.Text = pieceTypeDef.Abbreviations[0];
+        lblId.Text = "id " + pieceId.ToString();
 
         var spr = GetPieecSprite();
         if (spr != null)
         {
             ico.sprite = spr;
         }
-    }
-    
-    private Sprite GetPieecSprite()
-    {
-        return IconService.Current.GetSpriteById(PieceType.Parse(pieceId));
+
+        rootButton
+           .Init()
+           .ToState(GenericButtonState.Active)
+           .SetDragDirection(new Vector2(0f, 1f))
+           .SetDragThreshold(10f)
+           .OnBeginDrag(OnBeginDragEventHandler);
     }
 
-    public void OnClick()
+    private void OnBeginDragEventHandler(UIButtonViewController obj, int pointerId)
     {
-        // var camPos = Camera.main.transform.position;
-        // BoardPosition bp = BoardService.Current.GetBoardById(0).BoardDef.GetSectorPosition(camPos);
-        // Debug.Log($"{bp}");
+        if (BoardService.Current.FirstBoard.BoardLogic.DragAndDrop.IsActive) return;
+  
+        if (Input.touchSupported == false)
+        {
+            pointerId = 0;
+        }
+        
+        BoardService.Current.FirstBoard.BoardLogic.DragAndDrop.Begin(pointerId, pieceId);
+    }
+
+    private void OnClickEventHandler(UIButtonViewController obj)
+    {
         BoardPosition pos = new BoardPosition(23, 10, BoardService.Current.GetBoardById(0).BoardDef.PieceLayer);
         var availablePoints = new List<BoardPosition>();
 
@@ -69,5 +94,10 @@ public class UIPiecesCheatSheetWindowItem : MonoBehaviour
                    .Append(mainCanvasGroup.DOFade(1f, 0.1f));
 
         }
+    }
+
+    private Sprite GetPieecSprite()
+    {
+        return IconService.Current.GetSpriteById(PieceType.Parse(pieceId));
     }
 }

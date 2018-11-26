@@ -79,7 +79,6 @@ public class UINextLevelWindowView : UIGenericWindowView
             
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
         GameDataService.Current.LevelsManager.UpdateSequence();
-        GameDataService.Current.OrdersManager.Unlock();
         
         base.OnViewCloseCompleted();
     }
@@ -111,7 +110,7 @@ public class UINextLevelWindowView : UIGenericWindowView
             card.gameObject.SetActive(true);
             card.transform.SetParent(cardPrefab.transform.parent, false);
             card.CachedTransform.SetAsLastSibling();
-            card.Init(recipe.Uid, LocalizationService.Get($"order.name.{recipe.Uid}", $"{recipe.Uid}"));
+            card.Init(recipe.Uid, LocalizationService.Get($"order.name.{recipe.Uid}", $"order.name.{recipe.Uid}"));
             card.AddAnimation(0.6f + 0.1f*i);
             cards.Add(card);
         }

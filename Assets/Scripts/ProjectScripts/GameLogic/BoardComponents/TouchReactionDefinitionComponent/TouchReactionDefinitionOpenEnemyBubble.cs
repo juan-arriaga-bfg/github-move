@@ -24,7 +24,7 @@ public class TouchReactionDefinitionOpenEnemyBubble : TouchReactionDefinitionCom
 
         enemyDef = GameDataService.Current.EnemiesManager.GetEnemyDefById(piece.PieceType);
         
-        var button = string.Format(LocalizationService.Instance.Manager.GetTextByUid("gameboard.bubble.button.eradicate", "Eradicate {0}"), enemyDef.Price.ToStringIcon());
+        var button = string.Format(LocalizationService.Get("gameboard.bubble.button.eradicate", "gameboard.bubble.button.eradicate {0}"), enemyDef.Price.ToStringIcon());
         
         view.SetData($"{enemyDef.Name}", button, OnClick, true, false);
 

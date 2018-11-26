@@ -15,4 +15,13 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
         
         return ret;
     }
+
+    public List<int> GetPieceIdsBy(PieceTypeFilter typeFilter)
+    {
+        var ret = PieceType.GetIdsByFilter(typeFilter);
+
+        ret = ret.Where(e => !PieceType.GetDefById(e).Filter.Has(PieceTypeFilter.Fake)).ToList();
+        
+        return ret;
+    }
 }

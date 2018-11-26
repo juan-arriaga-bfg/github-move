@@ -79,9 +79,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         if(Def == null) return;
         
         Debug.Log($"[FogObserver] => Clear fog with uid: {Def.Uid}");
-        
-        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, Def);
-        
+                
         AddResourceView.Show(Def.GetCenter(Context.Context), Def.Reward);
         GameDataService.Current.FogsManager.RemoveFog(Key);
         
@@ -123,6 +121,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                 PieceTypeId = piece
             });
         }
+        
+        Context.Context.ActionExecutor.AddAction(new CallbackAction
+        {
+            Callback = controller => controller.TutorialLogic.Update()
+        });
     }
     
     public void RegisterCarrier(IResourceCarrier carrier)
@@ -172,7 +175,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         
         if(bubble.IsShow) return;
 
-        bubble.SetData(LocalizationService.Instance.Manager.GetTextByUid("gameboard.bubble.message.fog", "Clear fog"), Def.Condition.ToStringIcon(), OnClick);
+        bubble.SetData(LocalizationService.Get("gameboard.bubble.message.fog", "gameboard.bubble.message.fog"), Def.Condition.ToStringIcon(), OnClick);
         bubble.SetOfset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
         bubble.Priority = -1;
         bubble.Change(true);
@@ -228,7 +231,9 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         CurrencyHellper.Purchase(Currency.Fog.Name, 1, Def.Condition, success =>
         {
             if (success == false) return;
-			
+			  
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, Def);
+            
             Context.Context.HintCooldown.RemoweView(bubble);
 
             bubble.OnHide = () =>
@@ -236,7 +241,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                 piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
                 {
                     To = piece.CachedPosition,
-                    Positions = new List<BoardPosition> {piece.CachedPosition}
+                    Positions = new List<BoardPosition> {piece.CachedPosition},
+                    OnComplete = () =>
+                    {
+                        DevTools.UpdateFogSectorsDebug();
+                    }
                 });
             };
             

@@ -4,9 +4,11 @@ using Newtonsoft.Json;
 /// <summary>
 /// Base task for currencies 
 /// </summary>
-public abstract class TaskCurrencyEntity : TaskCounterEntity
+public abstract class TaskCurrencyEntity : TaskCounterEntity, IHavePieceId
 {
     [JsonProperty] public string Currency { get; protected set; } //[JsonProperty] is for backward compatibility
+    
+    public int PieceId => Currency != null ? PieceType.Parse(Currency) : PieceType.None.Id;
     
 #region Serialization
 

@@ -204,5 +204,498 @@
         "Message": "Clear dead fields"
       }
     }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "Daily_Quest_1",
+    "Group": "Permanent",
+    "TargetValue": 10,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Create a Piece",
+        "Message": "Make merges"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "Daily_Quest_2",
+    "Group": "Permanent",
+    "TargetValue": 20,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Energy",
+            "Amount": 20
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Ico": "Fog1",
+        "Title": "Create a Piece",
+        "Message": "Make merges"
+      }
+    }
+  },
+  {
+    "$type": "TaskSuperMatchEntity, GameAssembly",
+    "Id": "Daily_Quest_3",
+    "Group": "Easy",
+    "TargetValue": 3,
+    "Value1": 5,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 75
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Merge 5 or more objects in one turn",
+        "Message": "Merge 5 or more objects in one turn"
+      }
+    }
+  },
+  {
+    "$type": "TaskSuperMatchEntity, GameAssembly",
+    "Id": "Daily_Quest_4",
+    "Group": "Easy",
+    "TargetValue": 1,
+    "Value1": 8,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 75
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Merge 8 or more objects in one turn",
+        "Message": "Merge 8 or more objects in one turn"
+      }
+    }
+  },
+  {
+    "$type": "TaskCurrencyCollectEntity, GameAssembly",
+    "Id": "Daily_Quest_5",
+    "Group": "Easy",
+    "PieceUid": "Coins",
+    "TargetValue": 150,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 75
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Collect coins"
+      }
+    }
+  },
+  {
+    "$type": "TaskCollectIngredientEntity, GameAssembly",
+    "Id": "Daily_Quest_6",
+    "Group": "Easy",
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 75
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Collect ingredients"
+      }
+    }
+  },
+  {
+    "$type": "TaskUseWorkerEntity, GameAssembly",
+    "Id": "Daily_Quest_7",
+    "Group": "Easy",
+    "TargetValue": 9,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 75
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Ico": "NPC_Gnome",
+        "Message": "Use workers"
+      }
+    }
+  },
+  {
+    "$type": "TaskKillFieldEntity, GameAssembly",
+    "Id": "Daily_Quest_8",
+    "Group": "Easy",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 75
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Remove dead fields"
+      }
+    }
+  },
+  {
+    "$type": "TaskOpenChestEntity, GameAssembly",
+    "Id": "Daily_Quest_9",
+    "Group": "Easy",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 75
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Open any chests"
+      }
+    }
+  },
+  {
+    "$type": "TaskCompleteOrderEntity, GameAssembly",
+    "Id": "Daily_Quest_10",
+    "Group": "Easy",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 75
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Complete orders"
+      }
+    }
+  },
+  {
+    "$type": "TaskCurrencySpendEntity, GameAssembly",
+    "Id": "Daily_Quest_11",
+    "Group": "Easy",
+    "PieceUid": "Coins",
+    "TargetValue": 200,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 75
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Spend coins"
+      }
+    }
+  },
+  {
+    "$type": "TaskCurrencyCollectEntity, GameAssembly",
+    "Id": "Daily_Quest_12",
+    "Group": "Normal",
+    "PieceUid": "Coins",
+    "TargetValue": 550,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 125
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Collect coins"
+      }
+    }
+  },
+  {
+    "$type": "TaskCollectIngredientEntity, GameAssembly",
+    "Id": "Daily_Quest_13",
+    "Group": "Normal",
+    "TargetValue": 10,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 125
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Collect ingredients"
+      }
+    }
+  },
+  {
+    "$type": "TaskUseWorkerEntity, GameAssembly",
+    "Id": "Daily_Quest_14",
+    "Group": "Normal",
+    "TargetValue": 20,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 125
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Ico": "NPC_Gnome",
+        "Message": "Use workers"
+      }
+    }
+  },
+  {
+    "$type": "TaskKillFieldEntity, GameAssembly",
+    "Id": "Daily_Quest_15",
+    "Group": "Normal",
+    "TargetValue": 5,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 125
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Remove dead fields"
+      }
+    }
+  },
+  {
+    "$type": "TaskOpenChestEntity, GameAssembly",
+    "Id": "Daily_Quest_16",
+    "Group": "Normal",
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 125
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Open any chests"
+      }
+    }
+  },
+  {
+    "$type": "TaskCompleteOrderEntity, GameAssembly",
+    "Id": "Daily_Quest_17",
+    "Group": "Normal",
+    "TargetValue": 5,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 125
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Complete orders"
+      }
+    }
+  },
+  {
+    "$type": "TaskCurrencySpendEntity, GameAssembly",
+    "Id": "Daily_Quest_18",
+    "Group": "Normal",
+    "PieceUid": "Coins",
+    "TargetValue": 800,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 125
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Spend coins"
+      }
+    }
+  },
+  {
+    "$type": "TaskCurrencySpendEntity, GameAssembly",
+    "Id": "Daily_Quest_19",
+    "Group": "Normal",
+    "PieceUid": "Crystals",
+    "TargetValue": 10,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Energy",
+            "Amount": 30
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Spend rybies"
+      }
+    }
+  },
+  {
+    "$type": "TaskCurrencyCollectEntity, GameAssembly",
+    "Id": "Daily_Quest_20",
+    "Group": "Hard",
+    "PieceUid": "Crystals",
+    "TargetValue": 5,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Energy",
+            "Amount": 55
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Collect rubies"
+      }
+    }
+  },
+  {
+    "$type": "TaskCurrencySpendEntity, GameAssembly",
+    "Id": "Daily_Quest_21",
+    "Group": "Hard",
+    "PieceUid": "Coins",
+    "TargetValue": 1200,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Crystals",
+            "Amount": 15
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Spend coins"
+      }
+    }
+  },
+  {
+    "$type": "TaskCurrencySpendEntity, GameAssembly",
+    "Id": "Daily_Quest_22",
+    "Group": "Hard",
+    "PieceUid": "Crystals",
+    "TargetValue": 30,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Energy",
+            "Amount": 55
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Spend rybies"
+      }
+    }
+  },
+  {
+    "$type": "TaskKillFieldEntity, GameAssembly",
+    "Id": "Daily_Quest_23",
+    "Group": "Hard",
+    "TargetValue": 9,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Crystals",
+            "Amount": 15
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Remove dead fields"
+      }
+    }
+  },
+  {
+    "$type": "TaskUseWorkerEntity, GameAssembly",
+    "Id": "Daily_Quest_24",
+    "Group": "Hard",
+    "TargetValue": 30,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Crystals",
+            "Amount": 15
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Ico": "NPC_Gnome",
+        "Message": "Use workers"
+      }
+    }
+  },
+  {
+    "$type": "TaskOpenChestEntity, GameAssembly",
+    "Id": "Daily_Quest_25",
+    "Group": "Hard",
+    "TargetValue": 5,
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Crystals",
+            "Amount": 15
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Message": "Open any chests"
+      }
+    }
   }
 ]

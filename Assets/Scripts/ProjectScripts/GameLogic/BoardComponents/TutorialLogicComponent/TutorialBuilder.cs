@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using Quests;
+using UnityEngine;
 
 public static class TutorialBuilder
 {
-    public const int LockPRStepIndex = 9;
+    public const int LockPRStepIndex = 11;
     
     public static BaseTutorialStep BuildTutorial(int index, BoardController context)
     {
@@ -11,7 +12,7 @@ public static class TutorialBuilder
         
         switch (index)
         {
-            case 0:
+            case 0: // tutorial 1 step 1
             {
                 step = new MatchHardTutorialStep
                 {
@@ -29,7 +30,7 @@ public static class TutorialBuilder
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 break;
             }
-            case 1:
+            case 1: // tutorial 1 step 2
             {
                 step = new MatchHardTutorialStep
                 {
@@ -52,7 +53,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            /*case 2:
+            /*case 2: // tutorial 1 step 3
             {
                 step = new SwapHardTutorialStep
                 {
@@ -66,7 +67,7 @@ public static class TutorialBuilder
                 
                 break;
             }*/
-            case 2:
+            case 2: // tutorial 2 step 1
             {
                 step = new HighlightPiecesTutorialStep {Delay = 3, Targets = new List<int>{PieceType.PR_C1.Id}};
                 
@@ -76,7 +77,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 3:
+            case 3: // tutorial 2 step 2
             {
                 step = new HighlightPiecesTutorialStep {Delay = 5, Targets = new List<int>{PieceType.PR_C1.Id, PieceType.PR_C2.Id, PieceType.PR_C3.Id}};
                 
@@ -86,7 +87,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 4:
+            case 4: // tutorial 3 - clear fog
             {
                 step = new HighlightFogTutorialStep {Delay = 5};
                 
@@ -96,7 +97,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 5:
+            case 5: // tutorial 4 - remove tree
             {
                 step = new SelectStorageTutorialStep {Delay = 5, Targets = new List<int>{PieceType.OB1_TT.Id, PieceType.OB2_TT.Id}};
                 
@@ -106,7 +107,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 6:
+            case 6: // tutorial 5 step 1
             {
                 step = new HighlightPiecesTutorialStep {Delay = 5, Targets = new List<int>{PieceType.A1.Id}};
                 
@@ -116,7 +117,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 7:
+            case 7: // tutorial 6 - create ingredient
             {
                 step = new SelectStorageTutorialStep {Delay = 5, Targets = new List<int>{PieceType.PR_A4.Id, PieceType.PR_B4.Id, PieceType.PR_C4.Id, PieceType.PR_D4.Id, PieceType.PR_E4.Id}};
                 
@@ -126,7 +127,17 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 8: // remove worker
+            case 8: // tutorial 8 - crystal
+            {
+                step = new СrystalTutorialStep{Delay = 3};
+                break;
+            }
+            case 9: // tutorial 9 - worker
+            {
+                step = new WorkerTutorialStep{Delay = 5};
+                break;
+            }
+            case 10: // remove worker
             {
                 step = new BaseTutorialStep{IsIgnoreUi = true};
                 
@@ -137,47 +148,49 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 9: // unlock PR pieces
+            case 11: // unlock PR pieces
             {
+                if (LockPRStepIndex != index) Debug.LogError("Tutorial Error: LockPRStepIndex != index");
+                
                 step = new BaseTutorialStep();
                 
-                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
-            case 10: // lock camera
+            case 12: // lock camera
             {
                 step = new CameraLockTutorialStep();
                 
-                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
-            case 11: // lock ui Worker, Energy, Codex
+            case 13: // lock buttons Worker, Energy, Codex
             {
                 step = new UiLockTutorialStep{Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Worker, UiLockTutorialItem.Energy, UiLockTutorialItem.Codex}};
                 
-                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
-            case 12: // lock ui Orders, Shop
+            case 14: // lock Orders and buttons Orders, Shop
             {
-                step = new UiLockTutorialStep{Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Orders, UiLockTutorialItem.Shop}};
+                step = new OrdersLockTutorialStep{Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Orders, UiLockTutorialItem.Shop}};
                 
-                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "16_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "16_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
-            case 13: // add SleepingBeauty
+            case 15: // add SleepingBeauty
             {
                 step = new BaseTutorialStep{IsIgnoreUi = true};
                 
@@ -190,11 +203,11 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 14: // unlock Firefly
+            case 16: // unlock Firefly
             {
                 step = new FireflyLockTutorialStep();
                 
-                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckLevelTutorialCondition{Target = GameDataService.Current.ConstantsManager.StartLevelFirefly, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckLevelTutorialCondition{Target = GameDataService.Current.ConstantsManager.StartLevelFirefly, ConditionType = TutorialConditionType.Hard}, true);
                 

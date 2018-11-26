@@ -4,7 +4,7 @@
 	{
 		if (piece.Context?.Pathfinder.CanPathToCastle(piece) == false)
 		{
-			UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.pieceLock", "Path not found!"));
+			UIErrorWindowController.AddError(LocalizationService.Get("message.error.pieceLock", "message.error.pieceLock"));
 			return false;
 		}
 		
@@ -16,11 +16,22 @@
         
 		IsDone = !storage.Timer.IsExecuteable();
 		
-		if (IsDone == false && storage.Timer.GetPrise() != null)
+		if (IsDone == false)
 		{
-			UIMessageWindowController.CreateTimerCompleteMessage(
-				LocalizationService.Get("window.timerComplete.message.default", "Would you like to build the item right now for crystals?"),
-				storage.Timer);
+			if (storage.Timer.IsFree())
+			{
+				storage.Timer.FastComplete();
+				return false;
+			}
+
+			if (storage.Timer.GetPrise() != null)
+			{
+				UIMessageWindowController.CreateTimerCompleteMessage(
+					LocalizationService.Get("window.timerComplete.message.default", "window.timerComplete.message.default"),
+					storage.Timer);
+				
+				return false;
+			}
 		}
         
 		return IsDone;

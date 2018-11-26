@@ -24,7 +24,7 @@ public class UIRecipeItem : UISimpleScrollItem
         
         icon.material = isLock ? lockMaterial : unlockMaterial;
         
-        Init(recipe.Uid, string.Format(LocalizationService.Instance.Manager.GetTextByUid("common.message.level", "Level {0}"), recipe.Level));
+        Init(recipe.Uid, string.Format(LocalizationService.Get("common.message.level", "common.message.level {0}"), recipe.Level));
         label.gameObject.SetActive(isLock);
     }
     

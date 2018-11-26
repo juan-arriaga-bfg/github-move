@@ -25,19 +25,12 @@ public class MulticellularPieceMatchActionBuilder : DefaultMatchActionBuilder, I
         
         if(Check(definition, matchField, pieceType, position, out nextType) == false) return null;
         
-        var nextAction = new SpawnPieceAtAction
+        return new ModificationPiecesAction
         {
-            IsCheckMatch = false,
-            At = position,
-            PieceTypeId = nextType,
-            OnSuccessEvent = pos => SpawnReward(pos, nextType)
-        };
-        
-        return new CollapsePieceToAction
-        {
+            NextPieces = new List<int>{nextType},
             To = position,
             Positions = new List<BoardPosition>{position},
-            OnCompleteAction = nextAction
+            OnSuccess = list => SpawnReward(list[0], nextType)
         };
     }
 }

@@ -22,7 +22,12 @@ namespace UT
             "WebRequestHelper",
             "MainSceneInitilizer",
             "GoogleLoaderSettings",
+            "DevTools",
+            "UIWindowType",
+            "Currency",
+            "TutorialBuilder",
         };
+        
         private string searchFilter = "t:Script";
 
         [Test]

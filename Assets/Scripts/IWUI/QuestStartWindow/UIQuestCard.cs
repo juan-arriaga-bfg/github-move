@@ -13,7 +13,7 @@ public class UIQuestCard : MonoBehaviour
     public void Init(QuestEntity quest)
     {
         questButton.Init(quest, false);
-        title.text = LocalizationService.Instance.Manager.GetTextByUid("quest.card.new", "New quest");
+        title.text = LocalizationService.Get("quest.card.new", "quest.card.new");
         message.text = quest?.Tasks[0]?.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Title ?? "";
     }
 }
