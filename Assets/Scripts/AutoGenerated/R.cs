@@ -168,4 +168,5 @@ public class R
      public const string UIHintArrow = "UIHintArrow";
      public const string FogExplosionParticleSystem = "FogExplosionParticleSystem";
      public const string LockedSubstrate = "LockedSubstrate";
+     public const string LockParticles = "LockParticles";
 }

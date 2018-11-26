@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 
@@ -28,6 +29,8 @@ public class PieceBoardElementView : BoardElementView
     private readonly Color dragErrorColor = new Color(0.7f, 0.1f, 0.1f);
     private readonly Color dragSpriteErrorColor = new Color(1f, 0.44f, 0.44f, 0.9f);
     private bool isLockVisual = false;
+
+    private List<ParticleView> lockParticles = new List<ParticleView>();
     
     public bool IsHighlighted { get; protected set; }
 
@@ -159,6 +162,47 @@ public class PieceBoardElementView : BoardElementView
         
     }
 
+    private void SpawnLockParticles()
+    {
+        var order = 0;
+        foreach (var spriteRenderer in bodySprites)
+        {
+            if (spriteRenderer.sortingOrder > order)
+                order = spriteRenderer.sortingOrder;
+        }
+
+        order++;
+        
+        
+        List<BoardPosition> piecePositions = new List<BoardPosition>();
+        if (Piece.Multicellular == null)
+        {
+            piecePositions.Add(Piece.CachedPosition);
+        }
+        else
+        {
+            foreach (var maskPos in Piece.Multicellular.Mask)
+            {
+                piecePositions.Add(Piece.Multicellular.GetPointInMask(Piece.CachedPosition, maskPos));
+            }
+        }
+
+        foreach (var pos in piecePositions)
+        {
+            var particle = ParticleView.Show(R.LockParticles, pos); 
+            lockParticles.Add(particle);
+            particle.ParticleRenderer.sortingOrder = order;
+        }
+    }
+
+    private void RemoveLockParticles()
+    {
+        foreach (var lockParticle in lockParticles)
+        {
+            Context.DestroyElement(lockParticle);
+        }
+    }
+    
     public virtual void ToggleLockView(bool enabled)
     {
         if (isLockVisual == enabled)
@@ -188,13 +232,28 @@ public class PieceBoardElementView : BoardElementView
                     new BoardPosition(Piece.CachedPosition.X, Piece.CachedPosition.Y, Piece.CachedPosition.Z - 1);
                 lockedSubtrate = Context.CreateBoardElementAt<BoardElementView>(R.LockedSubstrate, substratePosition);    
             }
+
+            if (Piece.PieceType != PieceType.Fog.Id)
+            {
+                RemoveLockParticles();
+                SpawnLockParticles();    
+            }
             
         }
-        else if (lockedSubtrate != null)
+        else
         {
-            Context.DestroyElement(lockedSubtrate);
-            lockedSubtrate = null;
+            if (Piece.PieceType != PieceType.Fog.Id)
+            {
+                RemoveLockParticles();    
+            }
+            
+            if (lockedSubtrate != null)
+            {
+                Context.DestroyElement(lockedSubtrate);
+                lockedSubtrate = null;
+            }    
         }
+        
         
         particles.ForEach(particle => particle.gameObject.SetActive(!enabled));
         
