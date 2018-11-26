@@ -16,9 +16,9 @@ public class SpawnPieceAtAnimation : BoardAnimation
         }
 
         var def = AnimationDataManager.GetDefinition(CreatedPiece.PieceType);
-        if (def != null && string.IsNullOrEmpty(def.OnSpawn) == false)
+        if (def != null && string.IsNullOrEmpty(def.OnFogSpawn) == false)
         {
-            var animView = context.CreateBoardElementAt<AnimationView>(def.OnSpawn, At);
+            var animView = context.CreateBoardElementAt<AnimationView>(def.OnFogSpawn, At);
             animView.OnComplete = () => CompleteAnimation(context);
             animView.Play(boardElement);
             return;

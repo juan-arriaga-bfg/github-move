@@ -1,5 +1,9 @@
 ﻿public class AnimationDef
 {
-    public string OnSpawn;
-    public string OnDestroy;
+    public string OnFogSpawn;
+    public string OnMultiSpawn;
+    public string OnMergeSpawn;
+    public string OnPurchaseSpawn;
+    
+    public string OnDestroy;    
 }

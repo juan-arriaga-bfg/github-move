@@ -12,12 +12,17 @@ public class AnimationDataManager
             defDict.Add(i, definition);
         }
     }
+
+    private static void AddPiece(Dictionary<int, AnimationDef> defDict, int piece,  AnimationDef definition)
+    {
+        defDict.Add(piece, definition);
+    }
     
     private static Dictionary<int, AnimationDef> Build()
     {
         var defs = new Dictionary<int, AnimationDef>();
         
-        AddPieceChain(defs, PieceType.A1.Id, PieceType.A9.Id, new AnimationDef {OnSpawn = R.SpawnScalePieceAnimation});
+        AddPieceChain(defs, PieceType.A1.Id, PieceType.A9.Id, new AnimationDef {OnFogSpawn = R.SpawnScalePieceAnimation});
 
         return defs;
     }
