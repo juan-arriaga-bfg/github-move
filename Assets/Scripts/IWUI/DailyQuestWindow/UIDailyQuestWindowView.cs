@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class UIDailyQuestWindowView : UIGenericPopupWindowView 
 {
     [IWUIBinding("#TaskList")] private UIContainerViewController taskList;
+    [IWUIBinding("#TimerLabel")] private NSText timerLabel;
     
     public override void OnViewShow()
     {
@@ -15,14 +16,25 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         SetTitle(model.Title);
 
         CreateTaskList(model);
+        
+        model.Timer.OnExecute += OnTimerUpdate;
+
+        model.Quest.Immortal = true;
     }
 
     public override void OnViewClose()
     {
         base.OnViewClose();
         
-        UIDailyQuestWindowModel windowModel = Model as UIDailyQuestWindowModel;
+        UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
+        model.Timer.OnExecute -= OnTimerUpdate;
         
+        model.Quest.Immortal = false;
+
+        if (!model.Timer.IsExecuteable())
+        {
+            GameDataService.Current.QuestsManager.StartNewDailyQuest();
+        }
     }
     
     private void CreateTaskList(UIDailyQuestWindowModel model)
@@ -42,6 +54,11 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         {
             var task = tasks[i];
 
+            if (task.IsClaimed())
+            {
+                continue;
+            }
+            
             var tabEntity = new UIDailyQuestTaskElementEntity
             {
                 Task = task,
@@ -62,6 +79,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         {
             const int CLAIMED_WEIGHT = 10000;
             const int COMPLETED_WEIGHT = -1000;
+            const int CLEAR_ALL_WEIGHT = 20000;
             
             int w1 = (int)item1.Group;
             int w2 = (int)item2.Group;
@@ -83,8 +101,25 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
             {
                 w2 += COMPLETED_WEIGHT;
             }
+
+            if (item1 is TaskCompleteDailyTaskEntity)
+            {
+                w1 += CLEAR_ALL_WEIGHT;
+            }
+            
+            if (item2 is TaskCompleteDailyTaskEntity)
+            {
+                w2 += CLEAR_ALL_WEIGHT;
+            }
             
             return w1 - w2;
         });
+    }
+    
+    private void OnTimerUpdate()
+    {
+        UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
+        
+        timerLabel.Text = model.Timer.CompleteTime.GetTimeLeftText(false, null, model.Timer.UseUTC);
     }
 }

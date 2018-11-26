@@ -2,54 +2,59 @@
 
 public static class DateTimeExtension
 {
-    public static long ConvertToUnixTime(this DateTime datetime)
+    private static DateTime GetCurrentTime(bool utc)
     {
-        var sTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        return utc ? DateTime.UtcNow : DateTime.Now;
+    }
+    
+    public static long ConvertToUnixTime(this DateTime datetime, bool useUTC = true)
+    {
+        var sTime = new DateTime(1970, 1, 1, 0, 0, 0, useUTC ? DateTimeKind.Utc : DateTimeKind.Local);
         return (long) (datetime - sTime).TotalSeconds;
     }
     
-    public static long ConvertToUnixTimeMilliseconds(this DateTime datetime)
+    public static long ConvertToUnixTimeMilliseconds(this DateTime datetime, bool useUTC = true)
     {
-        var sTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        var sTime = new DateTime(1970, 1, 1, 0, 0, 0, useUTC ? DateTimeKind.Utc : DateTimeKind.Local);
         return (long) (datetime - sTime).TotalMilliseconds;
     }
     
-    public static DateTime UnixTimeToDateTime(long unixtime)
+    public static DateTime UnixTimeToDateTime(long unixtime, bool useUTC = true)
     {
-        var sTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        var sTime = new DateTime(1970, 1, 1, 0, 0, 0, useUTC ? DateTimeKind.Utc : DateTimeKind.Local);
         return sTime.AddSeconds(unixtime);
     }
 
-    public static int CountOfStepsPassedWhenAppWasInBackground(long then, int delay, out DateTime now)
+    public static int CountOfStepsPassedWhenAppWasInBackground(long then, int delay, out DateTime now, bool useUTC = true)
     {
         if (then == 0)
         {
-            now = DateTime.UtcNow;
+            now = GetCurrentTime(useUTC);
             return 0;
         }
         
         return CountOfStepsPassedWhenAppWasInBackground(UnixTimeToDateTime(then), delay, out now);
     }
     
-    public static int CountOfStepsPassedWhenAppWasInBackground(DateTime then, int delay, out DateTime now)
+    public static int CountOfStepsPassedWhenAppWasInBackground(DateTime then, int delay, out DateTime now, bool useUTC = true)
     {
-        var elapsedTime = DateTime.UtcNow - then;
+        var elapsedTime = GetCurrentTime(useUTC) - then;
         var count = (int) elapsedTime.TotalSeconds / delay;
         var remainder = (int) elapsedTime.TotalSeconds % delay;
         
-        now = DateTime.UtcNow.AddSeconds(-remainder);
+        now = GetCurrentTime(useUTC).AddSeconds(-remainder);
         
         return count;
     }
     
-    public static TimeSpan GetTime(this DateTime datetime)
+    public static TimeSpan GetTime(this DateTime datetime, bool useUTC = true)
     {
-        return DateTime.UtcNow - datetime;
+        return (useUTC ? DateTime.UtcNow : DateTime.Now) - datetime;
     }
 
-    public static TimeSpan GetTimeLeft(this DateTime datetime)
+    public static TimeSpan GetTimeLeft(this DateTime datetime, bool useUTC = true)
     {
-        return datetime - DateTime.UtcNow;
+        return datetime - (useUTC ? DateTime.UtcNow : DateTime.Now);
     }
     
     public static string GetDelayText(int delay, bool icon = false, string format = null)
@@ -57,14 +62,14 @@ public static class DateTimeExtension
         return TimeFormat(new TimeSpan(0, 0, delay - 1), icon, format);
     }
 
-    public static string GetTimeText(this DateTime datetime, bool icon = false, string format = null)
+    public static string GetTimeText(this DateTime datetime, bool icon = false, string format = null, bool useUTC = true)
     {
-        return TimeFormat(datetime.GetTime(), icon, format);
+        return TimeFormat(datetime.GetTime(useUTC), icon, format);
     }
     
-    public static string GetTimeLeftText(this DateTime datetime, bool icon = false, string format = null)
+    public static string GetTimeLeftText(this DateTime datetime, bool icon = false, string format = null, bool useUTC = true)
     {
-        return TimeFormat(datetime.GetTimeLeft(), icon, format);
+        return TimeFormat(datetime.GetTimeLeft(useUTC), icon, format);
     }
     
     private static string TimeFormat(TimeSpan time, bool icon, string format)
@@ -81,5 +86,15 @@ public static class DateTimeExtension
         }
         
         return string.Format(format, temp.Hours, temp.Minutes, temp.Seconds);
+    }
+    
+    /// <summary>
+    /// Convert 2001.02.03 14:30 ->  2001.02.03 00:00
+    /// </summary>
+    /// <param name="dateTime"></param>
+    /// <returns></returns>
+    public static DateTime TruncDateTimeToDays(this DateTime dateTime)
+    {
+        return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day);
     }
 }

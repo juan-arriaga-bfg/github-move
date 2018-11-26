@@ -192,7 +192,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         }
     }
 
-    private void StartActiveTasks()
+    protected virtual void StartActiveTasks()
     {
         for (int i = 0; i < ActiveTasks.Count; i++)
         {
