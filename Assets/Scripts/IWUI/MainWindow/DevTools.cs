@@ -137,7 +137,7 @@ public class DevTools : MonoBehaviour
         Debug.Log("OnDebug1Click");
 
 
-        GameDataService.Current.QuestsManager.StartDailyQuest();
+        GameDataService.Current.QuestsManager.StartNewDailyQuest();
         //var quest = GameDataService.Current.QuestsManager.StartQuestById("Daily", null);
     }
 

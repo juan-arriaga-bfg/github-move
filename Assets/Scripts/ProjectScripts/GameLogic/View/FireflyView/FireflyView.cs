@@ -11,6 +11,7 @@ public class FireflyView : BoardElementView
     private Vector2 current;
     
     private bool isClick;
+    private HintArrowView arrow;
     
     public void Init(BoardRenderer context, Vector2 start, Vector2 finish)
     {
@@ -31,13 +32,27 @@ public class FireflyView : BoardElementView
     
     public override void OnFastDestroy()
     {
-        Context.Context.BoardLogic.FireflyLogic.Remove();
+        Context.Context.BoardLogic.FireflyLogic.Remove(this);
         CachedTransform.localScale = Vector3.one;
         
         Plume.gameObject.SetActive(false);
         
         var temp = Plume.main;
         temp.loop = true;
+    }
+
+    public void AddArrow()
+    {
+        arrow = HintArrowView.Show(CachedTransform, 0, 1f, false, true);
+        arrow.CachedTransform.SetParent(CachedTransform, true);
+    }
+
+    public void RemoveArrow()
+    {
+        if(arrow == null) return;
+        
+        arrow.CachedTransform.SetParent(null);
+        arrow.Remove(0);
     }
 
     public void OnDragStart()
@@ -81,6 +96,9 @@ public class FireflyView : BoardElementView
             
             return;
         }
+
+        CurrencyHellper.Purchase(Currency.Firefly.Name, 1);
+        RemoveArrow();
         
         Plume.gameObject.SetActive(true);
         Context.Context.ActionExecutor.AddAction(new FireflyPieceSpawnAction
