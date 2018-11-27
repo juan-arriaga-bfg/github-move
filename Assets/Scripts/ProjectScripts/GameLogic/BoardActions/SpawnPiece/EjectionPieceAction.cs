@@ -12,6 +12,8 @@ public class EjectionPieceAction : IBoardAction
 	public Dictionary<int, int> Pieces { get; set; }
 	
 	public Action OnComplete { get; set; }
+	
+	public Func<int, string> AnimationResourceSearch;
 
 	public bool PerformAction(BoardController gameBoardController)
 	{
@@ -44,12 +46,13 @@ public class EjectionPieceAction : IBoardAction
 		}
 		
 		gameBoardController.BoardLogic.LockCell(From.Value, this);
-		
+		if (AnimationResourceSearch == null)
+			AnimationResourceSearch = piece => AnimationDataManager.FindAnimation(piece, def => def.OnMultiSpawn);
 		var animation = new ReproductionPieceAnimation
 		{
 			From = From.Value,
 			Pieces = pieces,
-			AnimationResourceSearch = piece => AnimationDataManager.FindAnimation(piece, def => def.OnMultiSpawn)
+			AnimationResourceSearch = AnimationResourceSearch
 		};
 
 		animation.OnCompleteEvent += (_) =>

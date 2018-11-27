@@ -52,7 +52,8 @@ public class TouchReactionDefinitionObstacleComponent : TouchReactionDefinitionS
             {
                 At = position,
                 PieceTypeId = storage.SpawnPiece,
-                OnComplete = onComplete
+                OnComplete = onComplete,
+                SpawnResource = AnimationDataManager.FindAnimation(storage.SpawnPiece, def => def.OnObstacleFinalSpawn)
             }
         });
     }

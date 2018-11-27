@@ -49,6 +49,7 @@ public class AnimationDataManager
 //            OnMergeSpawn = R.SpawnScalePieceAnimation,
 //            OnMultiSpawn = R.SpawnScalePieceAnimation,
             OnPurchaseSpawn = R.SpawnScalePieceAnimation,
+            OnObstacleFinalSpawn = R.SpawnScalePieceAnimation
         });
         
         return defs;
