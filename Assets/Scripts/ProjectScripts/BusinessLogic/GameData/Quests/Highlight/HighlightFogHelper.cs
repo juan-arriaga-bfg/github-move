@@ -61,8 +61,12 @@ public static class HighlightFogHelper
                    .AppendCallback(() =>
                     {
                         const float DURATION = 1f;
-                        board.Manipulator.CameraManipulator.MoveTo(view.transform.position, true, DURATION);
 
+                        if (board.Manipulator.CameraManipulator.CameraMove.IsLocked == false)
+                        {
+                            board.Manipulator.CameraManipulator.MoveTo(view.transform.position, true, DURATION);
+                        }
+                        
                         DOTween.Sequence()
                                .AppendInterval(DURATION - 0.15f)
                                .AppendCallback(() => { view.Attention(); });
