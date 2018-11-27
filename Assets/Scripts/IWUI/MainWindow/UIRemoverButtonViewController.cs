@@ -33,7 +33,8 @@ public class UIRemoverButtonViewController : IWUIWindowViewController
            .ToState(GenericButtonState.Active)
            .SetDragDirection(new Vector2(0f, 1f))
            .SetDragThreshold(30f)
-           .OnBeginDrag(OnBeginDragEventHandler);
+           .OnBeginDrag(OnBeginDragEventHandler)
+           .OnClick(OnClickEventHandler);
 
         var removerComponent = BoardService.Current.FirstBoard.BoardLogic.Remover;
         removerComponent.OnBeginRemoverEvent += OnBeginRemoverEvent;
@@ -47,6 +48,20 @@ public class UIRemoverButtonViewController : IWUIWindowViewController
         var removerComponent = BoardService.Current.FirstBoard.BoardLogic.Remover;
         removerComponent.OnBeginRemoverEvent -= OnBeginRemoverEvent;
         removerComponent.OnEndRemoverEvent -= OnEndRemoverEvent;
+    }
+    
+    private void OnClickEventHandler(int pointerId)
+    {
+        if (BoardService.Current.FirstBoard.BoardLogic.Remover.IsActive) return;
+        
+        if (Input.touchSupported == false)
+        {
+            pointerId = 0;
+        }
+
+        cachedPointerId = pointerId;
+        
+        bool isReady = BoardService.Current.FirstBoard.BoardLogic.Remover.BeginRemover(pointerId);
     }
     
     private void OnBeginDragEventHandler(UIButtonViewController obj, int pointerId)
