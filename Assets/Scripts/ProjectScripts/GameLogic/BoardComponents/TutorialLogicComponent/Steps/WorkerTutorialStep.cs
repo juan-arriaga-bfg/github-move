@@ -23,7 +23,7 @@
     {
         from = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(PieceType.Boost_WR.Id)[0];
 
-        var nearest = Context.Context.BoardLogic.PositionsCache.GetNearestByFilter(PieceTypeFilter.WorkPlace, from);
+        var nearest = Context.Context.BoardLogic.PositionsCache.GetNearestByFilter(PieceTypeFilter.WorkPlace, from, 50);
 
         if (nearest == null)
         {
@@ -31,8 +31,29 @@
             return;
         }
         
-        to = nearest.Value;
+        foreach (var position in nearest)
+        {
+            var target = Context.Context.BoardLogic.GetPieceAt(position);
+
+            if (!target.Context.Pathfinder.CanPathToCastle(target)) continue;
         
-        base.Execute();
+            var life = target.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
+
+            if (life != null && !life.Locker.IsLocked && (!life.IsUseCooldown || !life.Timer.IsExecuteable()))
+            {
+                to = position;
+                base.Execute();
+                return;
+            }
+        
+            var state = target.GetComponent<PieceStateComponent>(PieceStateComponent.ComponentGuid);
+        
+            if (state != null && state.State != BuildingState.InProgress && state.State != BuildingState.Complete)
+            {
+                to = position;
+                base.Execute();
+                return;
+            }
+        }
     }
 }
