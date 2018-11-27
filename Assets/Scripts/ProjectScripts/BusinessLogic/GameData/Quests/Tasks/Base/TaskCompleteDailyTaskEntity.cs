@@ -3,6 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Base task for daily tasks 
 /// </summary>
+[TaskHighlight(typeof(HighlightTaskNotImplemented))]
 public class TaskCompleteDailyTaskEntity : TaskCounterEntity
 {   
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
