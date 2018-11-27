@@ -5,5 +5,5 @@
     public string OnMergeSpawn;
     public string OnPurchaseSpawn;
     
-    public string OnDestroy;    
+    public string OnDestroyFromBoard;
 }

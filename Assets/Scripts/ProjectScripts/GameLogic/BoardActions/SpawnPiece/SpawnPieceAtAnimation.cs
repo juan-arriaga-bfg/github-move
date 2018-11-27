@@ -5,6 +5,7 @@ public class SpawnPieceAtAnimation : BoardAnimation
 {
     public Piece CreatedPiece;
     public BoardPosition At;
+    public string AnimationResource;
     
     public override void Animate(BoardRenderer context)
     {
@@ -15,11 +16,10 @@ public class SpawnPieceAtAnimation : BoardAnimation
             Debug.LogError($"[SpawnPieceAtAnimation] => Animate: Can't create piece with id {CreatedPiece.PieceType} at {At}");
         }
 
-        var def = AnimationDataManager.GetDefinition(CreatedPiece.PieceType);
-        if (def != null && string.IsNullOrEmpty(def.OnFogSpawn) == false)
+        if (string.IsNullOrEmpty(AnimationResource) == false)
         {
-            var animView = context.CreateBoardElementAt<AnimationView>(def.OnFogSpawn, At);
-            animView.OnComplete = () => CompleteAnimation(context);
+            var animView = context.CreateBoardElementAt<AnimationView>(AnimationResource, At);
+            animView.OnComplete += () => CompleteAnimation(context);
             animView.Play(boardElement);
             return;
         }
@@ -45,16 +45,33 @@ public class MatchSpawnPieceAtAnimation : BoardAnimation
     {
         var boardElement = context.CreatePieceAt(CreatedPiece, At);
 
-        boardElement.CachedTransform.localScale = Vector3.zero;
+        boardElement.SyncRendererLayers(new BoardPosition(At.X, At.Y, 5));
+
+        var animationResource = AnimationDataManager.FindAnimation(CreatedPiece.PieceType, def => def.OnMergeSpawn);
+        if (string.IsNullOrEmpty(animationResource) == false)
+        {
+            var animView = context.CreateBoardElementAt<AnimationView>(animationResource, At);
+            animView.SyncRendererLayers(new BoardPosition(At.X, At.Y, 6));
+
+            animView.OnComplete += () =>
+            {
+                CompleteAnimation(context);
+            };
+
+            animView.OnLifetimeEnd += () =>
+            {
+                boardElement.SyncRendererLayers(new BoardPosition(At.X, At.Y, At.Z));
+            };
+            animView.Play(boardElement);
+            return;
+        }
         
         var sequence = DOTween.Sequence().SetId(animationUid);
-        //sequence.timeScale = 0.5f;
-        //ParticleView.Show(R.OutMergeParticleSystem, new BoardPosition(At.X, At.Y, 4));
-        //ParticleView.Show(R.OutFrontMergeParticleSystem, new BoardPosition(At.X, At.Y, 6));
-        boardElement.SyncRendererLayers(new BoardPosition(At.X, At.Y, 5));
+        
+        boardElement.CachedTransform.localScale = Vector3.zero;
         sequence.Insert(0.1f, boardElement.CachedTransform.DOScale(Vector3.one * 1.2f, 0.4f));
         sequence.Insert(0.6f, boardElement.CachedTransform.DOScale(Vector3.one, 0.3f));
-        //sequence.Insert(0.1f, boardElement.CachedTransform.DOLocalJump(boardElement.transform.localPosition, 1, 1, 0.3f));
+        
         
         sequence.OnComplete(() =>
         {

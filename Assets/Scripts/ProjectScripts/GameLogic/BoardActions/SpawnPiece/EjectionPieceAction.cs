@@ -12,7 +12,7 @@ public class EjectionPieceAction : IBoardAction
 	public Dictionary<int, int> Pieces { get; set; }
 	
 	public Action OnComplete { get; set; }
-	
+
 	public bool PerformAction(BoardController gameBoardController)
 	{
 		if (From == null) From = GetFrom?.Invoke();
@@ -48,7 +48,8 @@ public class EjectionPieceAction : IBoardAction
 		var animation = new ReproductionPieceAnimation
 		{
 			From = From.Value,
-			Pieces = pieces
+			Pieces = pieces,
+			AnimationResourceSearch = piece => AnimationDataManager.FindAnimation(piece, def => def.OnMultiSpawn)
 		};
 
 		animation.OnCompleteEvent += (_) =>

@@ -73,7 +73,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     {
         return new BoardPosition(mask.X, mask.Y, position.Z);
     }
-
+    
     public void Clear()
     {
         if(Def == null) return;
@@ -101,7 +101,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                     Context.Context.ActionExecutor.AddAction(new CreatePieceAtAction
                     {
                         At = pos,
-                        PieceTypeId = pieceId
+                        PieceTypeId = pieceId,
+                        SpawnResource = AnimationDataManager.FindAnimation(pieceId, def => def.OnFogSpawn)
                     });
                 }
             }
@@ -116,11 +117,14 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             var piece = ItemWeight.GetRandomItem(weights).Piece;
             
             if(piece == PieceType.Empty.Id) continue;
+
+           
             
             Context.Context.ActionExecutor.AddAction(new CreatePieceAtAction
             {
                 At = point,
-                PieceTypeId = piece
+                PieceTypeId = piece,
+                SpawnResource = AnimationDataManager.FindAnimation(piece, def => def.OnFogSpawn)
             });
         }
     }

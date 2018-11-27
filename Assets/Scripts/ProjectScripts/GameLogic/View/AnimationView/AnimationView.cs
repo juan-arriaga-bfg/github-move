@@ -16,7 +16,7 @@ public class AnimationView: BoardElementView
         timer.Delay = lifeTime;
         timer.Start();
         
-        timer.OnComplete = DestroySelf;
+        timer.OnComplete += DestroySelf;
     }
 
     private void DestroySelf()

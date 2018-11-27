@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class AnimationDataManager
 {
@@ -9,21 +11,46 @@ public class AnimationDataManager
     {
         for (int i = start; i <= end; i++)
         {
-            defDict.Add(i, definition);
+            defDict[i] = definition;
         }
     }
 
     private static void AddPiece(Dictionary<int, AnimationDef> defDict, int piece,  AnimationDef definition)
     {
-        defDict.Add(piece, definition);
+        defDict[piece] = definition;
+    }
+
+    private static void AddByFilter(Dictionary<int, AnimationDef> defDict, PieceTypeFilter filter,
+        AnimationDef definition)
+    {
+        var piecesId = PieceType.GetIdsByFilter(filter);
+        foreach (var id in piecesId)
+        {
+            Debug.LogWarning($"{PieceType.GetDefById(id).Abbreviations[0]}");
+            AddPiece(defDict, id, definition);
+        }
     }
     
     private static Dictionary<int, AnimationDef> Build()
     {
         var defs = new Dictionary<int, AnimationDef>();
         
-        AddPieceChain(defs, PieceType.A1.Id, PieceType.A9.Id, new AnimationDef {OnFogSpawn = R.SpawnScalePieceAnimation});
+//        AddByFilter(defs, PieceTypeFilter.Simple, new AnimationDef
+//        {
+//            OnFogSpawn = R.SpawnScalePieceAnimation,
+//            OnMergeSpawn = R.SpawnScalePieceAnimation,
+//            OnMultiSpawn = R.SpawnScalePieceAnimation,
+//            OnPurchaseSpawn = R.SpawnScalePieceAnimation,
+//        });
 
+        AddByFilter(defs, PieceTypeFilter.Chest, new AnimationDef
+        {
+//            OnFogSpawn = R.SpawnScalePieceAnimation,
+//            OnMergeSpawn = R.SpawnScalePieceAnimation,
+//            OnMultiSpawn = R.SpawnScalePieceAnimation,
+            OnPurchaseSpawn = R.SpawnScalePieceAnimation,
+        });
+        
         return defs;
     }
     
@@ -32,5 +59,15 @@ public class AnimationDataManager
         if (animDefs.ContainsKey(pieceType))
             return animDefs[pieceType];
         return null;
+    }
+
+    public static string FindAnimation(int pieceType, Func<AnimationDef, string> onDefExist)
+    {
+        var animationDefinition = GetDefinition(pieceType);
+        var animationResource = "";
+        if (animationDefinition != null)
+            animationResource = onDefExist(animationDefinition);
+
+        return animationResource;
     }
 }

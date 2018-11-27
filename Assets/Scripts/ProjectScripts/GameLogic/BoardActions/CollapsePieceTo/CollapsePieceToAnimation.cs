@@ -16,6 +16,9 @@ public class CollapsePieceToAnimation : BoardAnimation
 		{
 			var boardElement = context.GetElementAt(points[i]);
 			
+			if(boardElement == null)
+				continue;
+			
 			sequence.Insert(0, boardElement.CachedTransform.DOMove(new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.4f).SetEase(Ease.OutBack));
 			sequence.Insert(0.2f, boardElement.CachedTransform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack));
 		}

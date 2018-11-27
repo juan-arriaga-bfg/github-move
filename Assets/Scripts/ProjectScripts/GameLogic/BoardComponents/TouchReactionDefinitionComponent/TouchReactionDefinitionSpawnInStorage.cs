@@ -69,6 +69,7 @@ public class TouchReactionDefinitionSpawnInStorage : TouchReactionDefinitionComp
             From = position,
             Piece = storage.SpawnPiece,
             Positions = positions,
+            AnimationResourceSearch = pieceType => AnimationDataManager.FindAnimation(pieceType, def => def.OnPurchaseSpawn),
             OnComplete = () => { storage.OnScatter?.Invoke(); }
         });
     }
