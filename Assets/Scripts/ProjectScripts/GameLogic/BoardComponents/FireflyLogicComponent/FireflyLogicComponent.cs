@@ -35,6 +35,8 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		locker = new LockerComponent();
 		RegisterComponent(locker);
 		
+		Locker.Lock(this);
+		
 		UIService.Get.OnShowWindowEvent += OnShowWindow;
 		UIService.Get.OnCloseWindowEvent += OnCloseWindow;
 		

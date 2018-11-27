@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UIRemoverButtonViewController : IWUIWindowViewController, IPointerDownHandler
+public class UIRemoverButtonViewController : IWUIWindowViewController
 {
     [SerializeField] private Image icon;
 
@@ -20,11 +20,21 @@ public class UIRemoverButtonViewController : IWUIWindowViewController, IPointerD
 
     [SerializeField] private Transform iconView;
 
+    [IWUIBinding] private UIButtonViewController rootButton;
+
     private int cachedPointerId = -2;
 
     public override void OnViewShow(IWUIWindowView context)
     {
         base.OnViewShow(context);
+        
+        rootButton
+           .Init()
+           .ToState(GenericButtonState.Active)
+           .SetDragDirection(new Vector2(0f, 1f))
+           .SetDragThreshold(30f)
+           .OnBeginDrag(OnBeginDragEventHandler)
+           .OnClick(OnClickEventHandler);
 
         var removerComponent = BoardService.Current.FirstBoard.BoardLogic.Remover;
         removerComponent.OnBeginRemoverEvent += OnBeginRemoverEvent;
@@ -38,6 +48,34 @@ public class UIRemoverButtonViewController : IWUIWindowViewController, IPointerD
         var removerComponent = BoardService.Current.FirstBoard.BoardLogic.Remover;
         removerComponent.OnBeginRemoverEvent -= OnBeginRemoverEvent;
         removerComponent.OnEndRemoverEvent -= OnEndRemoverEvent;
+    }
+    
+    private void OnClickEventHandler(int pointerId)
+    {
+        if (BoardService.Current.FirstBoard.BoardLogic.Remover.IsActive) return;
+        
+        if (Input.touchSupported == false)
+        {
+            pointerId = 0;
+        }
+
+        cachedPointerId = pointerId;
+        
+        bool isReady = BoardService.Current.FirstBoard.BoardLogic.Remover.BeginRemover(pointerId);
+    }
+    
+    private void OnBeginDragEventHandler(UIButtonViewController obj, int pointerId)
+    {
+        if (BoardService.Current.FirstBoard.BoardLogic.Remover.IsActive) return;
+        
+        if (Input.touchSupported == false)
+        {
+            pointerId = 0;
+        }
+
+        cachedPointerId = pointerId;
+        
+        bool isReady = BoardService.Current.FirstBoard.BoardLogic.Remover.BeginRemover(pointerId);
     }
 
     private void OnEndRemoverEvent()
@@ -68,18 +106,4 @@ public class UIRemoverButtonViewController : IWUIWindowViewController, IPointerD
         sequence.Append(CachedCanvasGroup.DOFade(0f, 0.35f));
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (BoardService.Current.FirstBoard.BoardLogic.Remover.IsActive) return;
-        
-        int pointerId = eventData.pointerId;
-        if (Input.touchSupported == false)
-        {
-            pointerId = 0;
-        }
-
-        cachedPointerId = pointerId;
-        
-        bool isReady = BoardService.Current.FirstBoard.BoardLogic.Remover.BeginRemover(pointerId);
-    }
 }

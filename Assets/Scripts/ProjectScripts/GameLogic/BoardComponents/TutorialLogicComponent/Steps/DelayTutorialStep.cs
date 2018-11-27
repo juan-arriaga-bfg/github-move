@@ -3,7 +3,7 @@
 public class DelayTutorialStep : BaseTutorialStep, IECSSystem
 {
     public int Delay;
-    private DateTime startTime;
+    protected DateTime startTime;
 
     private bool isPaused;
 

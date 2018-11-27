@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pieces.fade.material
-  m_Shader: {fileID: 4800000, guid: 691763b5f2cfaeb4c9178becb776d1ab, type: 3}
+  m_Name: PiecesSepiaMaterial
+  m_Shader: {fileID: 4800000, guid: e7872e722fb66284db21a8da19e9af15, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA USEVERTEXCOLOR_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -64,7 +64,7 @@ Material:
     - USEBLICK: 0
     - USEHIGHLIGHT: 0
     - USEVERTEXCOLOR: 1
-    - _AlphaCoef: 0.5
+    - _AlphaCoef: 1
     - _BlendMaskRotation: 0
     - _BumpScale: 1
     - _Cutoff: 0.5

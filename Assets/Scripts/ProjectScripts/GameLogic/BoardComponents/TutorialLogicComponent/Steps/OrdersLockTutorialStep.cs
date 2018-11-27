@@ -1,4 +1,4 @@
-﻿public class OrdersLockTutorialStep : UiLockTutorialStep
+﻿public class OrdersLockTutorialStep : BaseTutorialStep
 {
     public override void OnRegisterEntity(ECSEntity entity)
     {

@@ -7,6 +7,7 @@ public enum UiLockTutorialItem
 	Codex,
 	Shop,
 	Orders,
+	Remove,
 }
 
 public class UiLockTutorialStep : BaseTutorialStep

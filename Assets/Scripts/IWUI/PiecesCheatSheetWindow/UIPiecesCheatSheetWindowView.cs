@@ -98,23 +98,13 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
             container.Clear();
             return;
         }
-        
-        var exclude = new HashSet<int>
-        {
-            0, 
-            -1,
-            1
-        };
-        
+
         // update items
         var views = new List<IUIContainerElementEntity>(entities.Count);
         for (int i = 0; i < entities.Count; i++)
         {
             var def = entities[i];
             
-            // exclude items
-            if (exclude.Contains(def)) continue;
-
             var entity = new UIPiecesCheatSheetElementEntity
             {
                 PieceId = def,
