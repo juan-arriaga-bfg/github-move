@@ -2,7 +2,7 @@
 
 public class CheckCurrencyTutorialCondition : BaseTutorialCondition
 {
-    public string Currensy;
+    public string Currency;
     public int Target;
     
     private int current;
@@ -38,7 +38,7 @@ public class CheckCurrencyTutorialCondition : BaseTutorialCondition
         {
             foreach (var price in shopItem.CurrentPrices)
             {
-                if(price.Currency != Currensy) continue;
+                if(price.Currency != Currency) continue;
                 
                 current -= price.DefaultPriceAmount;
             } 
@@ -46,7 +46,7 @@ public class CheckCurrencyTutorialCondition : BaseTutorialCondition
             return;
         }
 
-        if (shopItem.ItemUid != Currensy) return;
+        if (shopItem.ItemUid != Currency) return;
         
         current += shopItem.Amount;
     }

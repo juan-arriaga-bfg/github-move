@@ -100,21 +100,28 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
         return cachedPointerId != -2;
     }
 
+    public virtual PieceBoardElementView CreateFakePiece(int targetPieceId, BoardPosition fakePosition)
+    {
+        var fakePiece = context.Context.CreatePieceFromType(targetPieceId);
+        var fakeBoardElement = context.Context.RendererContext.CreatePieceAt(fakePiece, fakePosition);
+        fakeBoardElement.SyncRendererLayers(new BoardPosition(0, 0, 100));
+        fakeBoardElement.ToggleSelection(true);
+
+        return fakeBoardElement;
+    }
+
+    public virtual void DestroyFakePiece(PieceBoardElementView fakePieceView)
+    {
+        fakePieceView.ToggleSelection(false);  
+        context.Context.RendererContext.RemoveElement(fakePieceView);
+    }
+
     public bool IsValidPoint(BoardPosition boardPosition)
     {
         var pieceEntity = context.GetPieceAt(boardPosition);
 
         if (pieceEntity != null) return false;
         
-        // BoardPosition pos = new BoardPosition(23, 10, BoardService.Current.GetBoardById(0).BoardDef.PieceLayer);
-        // var availablePoints = new List<BoardPosition>();
-        // BoardService.Current.GetBoardById(0).BoardLogic.EmptyCellsFinder..FindNearWithPointInCenter(pos, availablePoints, 1, 100);
-        //
-        // if (availablePoints.Count > 0 && availablePoints.Contains(boardPosition))
-        // {
-        //     return true;
-        // }
-
         return true;
     }
     
@@ -143,11 +150,11 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
 
     public void Execute()
     {
-        int touchCount = LeanTouch.Fingers.Count; // Input.touchCount;
+        int touchCount = LeanTouch.Fingers.Count;
         LeanFinger touchDef = null;
         for (int i = 0; i < touchCount; i++)
         {
-            var touch = LeanTouch.Fingers[i]; // Input.GetTouch(i);
+            var touch = LeanTouch.Fingers[i];
 
             if (touch.Index == cachedPointerId)
             {

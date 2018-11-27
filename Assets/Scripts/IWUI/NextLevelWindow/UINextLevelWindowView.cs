@@ -67,10 +67,10 @@ public class UINextLevelWindowView : UIGenericWindowView
     {
         var manager = GameDataService.Current.LevelsManager;
         
+        CurrencyHellper.Purchase(manager.Rewards, null, new Vector2(Screen.width/2, Screen.height/2));
         CurrencyHellper.Purchase(Currency.Level.Name, 1, Currency.Experience.Name, manager.Price);
         CurrencyHellper.Purchase(Currency.EnergyLimit.Name, 1);
-        CurrencyHellper.Purchase(manager.Rewards, null, new Vector2(Screen.width/2, Screen.height/2));
-       
+        
         var currentValue = ProfileService.Current.GetStorageItem(Currency.Energy.Name).Amount;
         var limitValue = ProfileService.Current.GetStorageItem(Currency.EnergyLimit.Name).Amount;
         var diff = limitValue - currentValue;

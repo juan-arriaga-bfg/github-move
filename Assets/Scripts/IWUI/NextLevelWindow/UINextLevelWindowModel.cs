@@ -24,5 +24,13 @@ public class UINextLevelWindowModel : IWWindowModel
         }
     }
 
-    public List<OrderDef> Recipes => GameDataService.Current.OrdersManager.Recipes.FindAll(def => def.Level == GameDataService.Current.LevelsManager.Level + 1);
+    public List<OrderDef> Recipes
+    {
+        get
+        {
+            var manager = GameDataService.Current.OrdersManager;
+            
+            return manager.Locker.IsLocked ? new List<OrderDef>() : manager.Recipes.FindAll(def => def.Level == GameDataService.Current.LevelsManager.Level + 1);
+        }
+    }
 }

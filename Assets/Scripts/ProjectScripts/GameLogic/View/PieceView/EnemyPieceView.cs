@@ -16,20 +16,23 @@ public class EnemyPieceView: PieceBoardElementView
 
         AreaLockCrossComponent areaLock = piece.GetComponent<AreaLockCrossComponent>(AreaLockCrossComponent.ComponentGuid);
 
-        foreach (var position in areaLock.LockedCells)
+        if (areaLock.LockedCells != null)
         {
-            var touch = Instantiate(touchItem, transform.parent);
-            touchRegion.AddTouchRegion(touch.GetComponent<RectTransform>());
-            
-            var lockView = Instantiate(lockItem, transform.parent);
-            // var sprite = fog.GetComponent<Spr			
-            // sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + 101;
-			
-            var pos = piece.Context.BoardDef.GetSectorCenterWorldPosition(position.X, position.Y, 0);
-            lockView.transform.position = pos;
-            touch.transform.position = pos;
-			
-            views.Add(lockView);
+            foreach (var position in areaLock.LockedCells)
+            {
+                var touch = Instantiate(touchItem, transform.parent);
+                touchRegion.AddTouchRegion(touch.GetComponent<RectTransform>());
+
+                var lockView = Instantiate(lockItem, transform.parent);
+                // var sprite = fog.GetComponent<Spr			
+                // sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + 101;
+
+                var pos = piece.Context.BoardDef.GetSectorCenterWorldPosition(position.X, position.Y, 0);
+                lockView.transform.position = pos;
+                touch.transform.position = pos;
+
+                views.Add(lockView);
+            }
         }
     }
     

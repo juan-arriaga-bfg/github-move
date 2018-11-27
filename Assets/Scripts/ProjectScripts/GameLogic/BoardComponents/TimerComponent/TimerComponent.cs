@@ -17,13 +17,17 @@ public class TimerComponent : IECSComponent, IECSSystem
     public DateTime CompleteTime;
 
     public BoardTimerView View;
+
+    public bool UseUTC = true;
     
-    public long StartTimeLong => StartTime.ConvertToUnixTime();
+    public long StartTimeLong => StartTime.ConvertToUnixTime(UseUTC);
     
     public bool IsStarted { get; set; }
     public bool IsPaused { get; set; }
     
     private CurrencyPair price = new CurrencyPair{Currency = Currency.Crystals.Name};
+
+    public string Tag;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -35,12 +39,12 @@ public class TimerComponent : IECSComponent, IECSSystem
     
     public void Start()
     {
-        Start(DateTime.UtcNow);
+        Start(UseUTC ? DateTime.UtcNow : DateTime.Now);
     }
 
     public void Start(long start)
     {
-        Start(DateTimeExtension.UnixTimeToDateTime(start));
+        Start(DateTimeExtension.UnixTimeToDateTime(start, UseUTC));
     }
     
     public void Start(DateTime start)
@@ -61,8 +65,13 @@ public class TimerComponent : IECSComponent, IECSSystem
     public void Execute()
     {
         OnExecute?.Invoke();
-        
-        if(StartTime.GetTime().TotalSeconds < Delay) return;
+
+        var elapsedTime = StartTime.GetTime(UseUTC);
+        var elapsedSeconds = elapsedTime.TotalSeconds;
+        if (elapsedSeconds < Delay)
+        {
+            return;
+        }
 
         IsStarted = false;
 
@@ -81,7 +90,7 @@ public class TimerComponent : IECSComponent, IECSSystem
     
     public float GetProgress()
     {
-        return (int)StartTime.GetTime().TotalSeconds / (float)Delay;
+        return (int)StartTime.GetTime(UseUTC).TotalSeconds / (float)Delay;
     }
     
     public void Complete()
@@ -108,13 +117,13 @@ public class TimerComponent : IECSComponent, IECSSystem
     
     public CurrencyPair GetPrise()
     {
-        price.Amount = Mathf.Max(1, Mathf.CeilToInt(GameDataService.Current.ConstantsManager.PricePerSecond * (float) CompleteTime.GetTimeLeft().TotalSeconds));
+        price.Amount = Mathf.Max(1, Mathf.CeilToInt(GameDataService.Current.ConstantsManager.PricePerSecond * (float) CompleteTime.GetTimeLeft(UseUTC).TotalSeconds));
 
         return price;
     }
     
     public bool IsFree()
     {
-        return CompleteTime.GetTimeLeft().TotalSeconds <= GameDataService.Current.ConstantsManager.FreeTimeLimit;
+        return CompleteTime.GetTimeLeft(UseUTC).TotalSeconds <= GameDataService.Current.ConstantsManager.FreeTimeLimit;
     }
 }

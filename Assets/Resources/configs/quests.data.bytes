@@ -531,6 +531,9 @@
     "Id": "Daily",
     "TaskDefs": [
       {
+        "TaskId": "Daily_ClearAll"
+      },
+      {
         "TaskId": "Daily_Quest_1"
       },
       {
@@ -607,6 +610,18 @@
       }
     ],
     "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "CH1_A",
+            "Amount": 1
+          },
+          {
+            "Currency": "CH1_B",
+            "Amount": 1
+          }
+        ]
+      },
       "QuestDescriptionComponent": {
         "Title": "Daily objectives",
         "Message": "Do it!"

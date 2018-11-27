@@ -14,8 +14,8 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	private BoardLogicComponent context;
 
 	private List<Vector2> slots = new List<Vector2>();
-
-	private int amount;
+	private List<FireflyView> views = new List<FireflyView>();
+	
 	private int index = 1;
 	private int delay = 1;
 	
@@ -27,6 +27,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	
 	private bool isClick;
 	private bool isFirst = true;
+	private bool isTuttorialActive => ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount < 3;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
@@ -35,8 +36,12 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		locker = new LockerComponent();
 		RegisterComponent(locker);
 		
+		Locker.Lock(this);
+		
 		UIService.Get.OnShowWindowEvent += OnShowWindow;
 		UIService.Get.OnCloseWindowEvent += OnCloseWindow;
+
+		if (isTuttorialActive) ShopService.Current.OnPurchasedEvent += UpdateFirefly;
 		
 		const int step = 100;
 		
@@ -64,6 +69,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	{
 		UIService.Get.OnShowWindowEvent -= OnShowWindow;
 		UIService.Get.OnCloseWindowEvent -= OnCloseWindow;
+		ShopService.Current.OnPurchasedEvent -= UpdateFirefly;
 	}
 	
 	private void OnShowWindow(IWUIWindow window)
@@ -85,10 +91,22 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		
 		startTime = startTime.AddSeconds((DateTime.UtcNow - pauseTime).TotalSeconds);
 	}
+
+	private void UpdateFirefly(IPurchaseableItem purchaseableItem, IShopItem shopItem)
+	{
+		if (shopItem.ItemUid != Currency.Firefly.Name || isTuttorialActive) return;
+        
+		ShopService.Current.OnPurchasedEvent -= UpdateFirefly;
+
+		foreach (var view in views)
+		{
+			view.RemoveArrow();
+		}
+	}
 	
 	public void Execute()
 	{
-		amount = Random.Range(GameDataService.Current.ConstantsManager.MinAmountFirefly, GameDataService.Current.ConstantsManager.MaxAmountFirefly + 1);
+		var amount = Random.Range(GameDataService.Current.ConstantsManager.MinAmountFirefly, GameDataService.Current.ConstantsManager.MaxAmountFirefly + 1);
 		
 		slots.Shuffle();
 		
@@ -104,12 +122,16 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 			
 			var firefly = context.Context.RendererContext.CreateBoardElement<FireflyView>((int) ViewType.Firefly);
 			firefly.Init(context.Context.RendererContext, start, finish);
+			
+			if(isTuttorialActive) firefly.AddArrow();
+			
+			views.Add(firefly);
 		}
 	}
 	
 	public bool IsExecuteable()
 	{
-		if(Locker.IsLocked || amount > 0 || startTime.GetTime().TotalSeconds < delay) return false;
+		if(Locker.IsLocked || views.Count > 0 || startTime.GetTime().TotalSeconds < delay) return false;
 		
 		isClick = false;
 		OnMatch();
@@ -161,7 +183,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		var firefly = view as FireflyView;
 		
 		if (firefly == null) return false;
-		
+
 		firefly.OnClick();
 		return true;
 	}
@@ -174,9 +196,9 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		startTime = DateTime.UtcNow;
 	}
 
-	public void Remove()
+	public void Remove(FireflyView view)
 	{
-		amount--;
+		views.Remove(view);
 		startTime = DateTime.UtcNow;
 	}
 	

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class ObstaclePieceView : PieceBoardElementView
@@ -55,9 +56,16 @@ public class ObstaclePieceView : PieceBoardElementView
     {
         if (worker != null)
         {
-            RemoveFromLayerCache(worker);
-            Context.DestroyElement(worker);
+            var gnom = worker;
+            
+            worker.GetComponent<Animator>().SetTrigger("Hide");
 
+            DOTween.Sequence().AppendInterval(1f).AppendCallback(() =>
+            {
+                RemoveFromLayerCache(gnom);
+                Context.DestroyElement(gnom);
+            });
+            
             bodySprites.RemoveAll(elem => workerSprites.Contains(elem));
             
             workerSprites = null;

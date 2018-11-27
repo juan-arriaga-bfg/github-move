@@ -55,7 +55,7 @@ public class UIPiecesCheatSheetElementViewController : UIContainerElementViewCon
            .Init()
            .ToState(GenericButtonState.Active)
            .SetDragDirection(new Vector2(0f, 1f))
-           .SetDragThreshold(10f)
+           .SetDragThreshold(100f)
            .OnBeginDrag(OnBeginDragEventHandler);
     }
 
