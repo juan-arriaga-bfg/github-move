@@ -16,10 +16,10 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     public override int Guid => ComponentGuid;
 
     private const int DAILY_TIMER_DELAY = 24 * 60 * 60;
-    // private const int DAILY_TIMER_START_OFFSET = 60 * 60;
-    private const int SECONDS_IN_MIN = 60;
-    private const int SECONDS_IN_HOUR = SECONDS_IN_MIN * 60;
-    private const int DAILY_TIMER_START_OFFSET = SECONDS_IN_HOUR * 17 + SECONDS_IN_MIN * 1;
+    private const int DAILY_TIMER_START_OFFSET = 60 * 60;
+    // private const int SECONDS_IN_MIN = 60;
+    // private const int SECONDS_IN_HOUR = SECONDS_IN_MIN * 60;
+    // private const int DAILY_TIMER_START_OFFSET = SECONDS_IN_HOUR * 17 + SECONDS_IN_MIN * 1;
     
     public TimerComponent DailyTimer { get; private set; }
 
