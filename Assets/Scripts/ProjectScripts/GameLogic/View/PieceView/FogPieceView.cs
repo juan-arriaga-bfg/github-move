@@ -28,7 +28,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 		observer = piece.GetComponent<FogObserver>(FogObserver.ComponentGuid);
 		
 		if(observer == null) return;
-		
+
 		foreach (var position in observer.Mask)
 		{
 			var fog = Instantiate(fogItem, fogItem.transform.parent);
@@ -73,7 +73,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 			sprite.sprite = IconService.Current.GetSpriteById($"Fog{Random.Range(1, 4)}{str}");
 		}
 
-		HighlightIfCanClear();
+		HighlightIfCanClear(true);
 	}
 
 	private string CheckBorder(int x, int y)
@@ -87,11 +87,11 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 		return pieceR == null || pieceL == null || pieceR.PieceType != PieceType.Fog.Id || pieceL.PieceType != PieceType.Fog.Id ? "_border" : "";
 	}
 
-    private void HighlightIfCanClear()
+    private void HighlightIfCanClear(bool isAnimate = false)
     {
         if (observer.CanBeCleared())
         {
-            ToggleReadyToClear(true);
+            ToggleReadyToClear(true, isAnimate);
         }
     }
 
@@ -142,7 +142,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
         }
     }
     
-    public virtual void ToggleReadyToClear(bool enabled)
+    public virtual void ToggleReadyToClear(bool enabled, bool isAnimate = false)
     {
         if (enabled == IsHighlighted)
         {
@@ -154,11 +154,22 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
         DOTween.Kill(HIGHLIGHT_ANIMATION_ID);
        
         const float TIME = 0.35f;
-        
-        foreach (var spr in fogSprites)
+
+        var fogMaterial = SetCustomMaterial(BoardElementMaterialType.FogDefaultMaterial, enabled, this);
+        if (isAnimate)
         {
-            spr.DOColor(enabled ? highlightColor : initialColor, TIME).SetId(HIGHLIGHT_ANIMATION_ID);
+            fogMaterial.SetFloat("_ScaleCoef", 1f);
+            fogMaterial.DOFloat(0.8f, "_ScaleCoef", 3f);
+            fogMaterial.SetFloat("_AlphaCoef", 1f);
+            fogMaterial.DOFloat(0.8f, "_AlphaCoef", 3f);
         }
+        else
+        {
+            fogMaterial.SetFloat("_ScaleCoef", 0.8f);
+            fogMaterial.SetFloat("_AlphaCoef", 0.8f);
+        }
+ 
+        
     }
 
     public override void ToggleHighlight(bool enabled)

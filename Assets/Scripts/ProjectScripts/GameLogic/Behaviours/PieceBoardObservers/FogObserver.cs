@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
@@ -10,6 +11,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     private LockView lockView;
     private BubbleView bubble;
     public BoardPosition Key { get; private set; }
+    
+    private List<PieceBoardElementView> fakePieces = new List<PieceBoardElementView>();
     
     public RectTransform GetAnchorRect()
     {
@@ -49,6 +52,43 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         base.OnAddToBoard(position, context);
         
         GameDataService.Current.FogsManager.RegisterFogObserver(this);
+
+        PrepareFogToClear();
+    }
+
+    public virtual void PrepareFogToClear()
+    {
+        if (!CanBeCleared()) return;
+        
+        if (Def == null || Def.Pieces == null) return;
+            
+        if (fakePieces.Count > 0) return;
+            
+        foreach (var pieceDefs in Def.Pieces)
+        {
+            foreach (var pos in pieceDefs.Value)
+            {
+
+                var pieceUid = pieceDefs.Key;
+                var pieceId = GameDataService.Current.MinesManager.GetMineTypeById(pieceUid);
+
+                if (pieceId == PieceType.None.Id)
+                {
+                    pieceId = PieceType.Parse(pieceUid);
+                }
+
+                var fakePos = new BoardPosition(pos.X, pos.Y, 0);
+                var fakePiece = Context.Context.BoardLogic.DragAndDrop.CreateFakePieceAt(pieceId, fakePos);
+                if (fakePiece != null)
+                {
+                    var underFogMaterial = fakePiece.SetCustomMaterial(BoardElementMaterialType.PiecesUnderFogMaterial, true, this);
+                    underFogMaterial.SetFloat("_AlphaCoef", 0f);
+                    underFogMaterial.DOFloat(1f, "_AlphaCoef", 2f);
+                    
+                    fakePieces.Add(fakePiece);
+                }
+            }
+        }
     }
 
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
@@ -126,6 +166,12 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         {
             Callback = controller => controller.TutorialLogic.Update()
         });
+
+        foreach (var fakePiece in fakePieces)
+        {
+            Context.Context.BoardLogic.DragAndDrop.DestroyFakePiece(fakePiece);
+        }
+        fakePieces.Clear();
     }
     
     public void RegisterCarrier(IResourceCarrier carrier)
@@ -181,6 +227,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         bubble.Change(true);
         
         Context.Context.HintCooldown.AddView(bubble);
+
+        PrepareFogToClear();
     }
     
     public string GetResourceId()

@@ -170,4 +170,5 @@ public class R
      public const string PiecesHighlightMaterial = "PiecesHighlightMaterial";
      public const string FogExplosionParticleSystem = "FogExplosionParticleSystem";
      public const string FogDefaultMaterial = "FogDefaultMaterial";
+     public const string PiecesUnderFogMaterial = "PiecesUnderFogMaterial";
 }

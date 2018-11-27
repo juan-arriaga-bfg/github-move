@@ -99,12 +99,25 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
     {
         return cachedPointerId != -2;
     }
+    
+    public virtual PieceBoardElementView CreateFakePieceAt(int targetPieceId, BoardPosition fakePosition)
+    {
+        var fakePiece = context.Context.CreatePieceFromType(targetPieceId);
+        var fakeBoardElement = context.Context.RendererContext.CreateElementAt(fakePiece.PieceType, fakePosition) as PieceBoardElementView;
+
+        if (fakeBoardElement != null)
+        {
+            fakeBoardElement.Init(context.Context.RendererContext, fakePiece);
+        }
+
+        return fakeBoardElement;
+    }
 
     public virtual PieceBoardElementView CreateFakePiece(int targetPieceId, BoardPosition fakePosition)
     {
         var fakePiece = context.Context.CreatePieceFromType(targetPieceId);
         var fakeBoardElement = context.Context.RendererContext.CreatePieceAt(fakePiece, fakePosition);
-        fakeBoardElement.SyncRendererLayers(new BoardPosition(0, 0, 100));
+        fakeBoardElement.SyncRendererLayers(new BoardPosition(0, 0, 3));
         fakeBoardElement.ToggleSelection(true);
 
         return fakeBoardElement;
