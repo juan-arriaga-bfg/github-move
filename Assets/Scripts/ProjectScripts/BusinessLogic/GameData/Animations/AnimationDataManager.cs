@@ -34,23 +34,12 @@ public class AnimationDataManager
     private static Dictionary<int, AnimationDef> Build()
     {
         var defs = new Dictionary<int, AnimationDef>();
-        
-//        AddByFilter(defs, PieceTypeFilter.Simple, new AnimationDef
-//        {
-//            OnFogSpawn = R.SpawnScalePieceAnimation,
-//            OnMergeSpawn = R.SpawnScalePieceAnimation,
-//            OnMultiSpawn = R.SpawnScalePieceAnimation,
-//            OnPurchaseSpawn = R.SpawnScalePieceAnimation,
-//        });
 
         AddByFilter(defs, PieceTypeFilter.Chest, new AnimationDef
         {
-//            OnFogSpawn = R.SpawnScalePieceAnimation,
-//            OnMergeSpawn = R.SpawnScalePieceAnimation,
-//            OnMultiSpawn = R.SpawnScalePieceAnimation,
-            OnPurchaseSpawn = R.MultiSpawnScalePieceAnimation,
-            OnObstacleFinalSpawn = R.SpawnScalePieceAnimation,
-            OnDestroyFromBoard = R.DestroyScalePieceAnimation
+            OnPurchaseSpawn = R.MultiSpawnChestAnimation,
+            OnObstacleFinalSpawn = R.SpawnChestAnimation,
+            OnDestroyFromBoard = R.DestroyChestAnimation
         });
         
         return defs;

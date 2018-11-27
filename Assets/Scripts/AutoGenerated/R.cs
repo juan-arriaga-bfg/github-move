@@ -167,4 +167,7 @@ public class R
      public const string SpawnScalePieceAnimation = "SpawnScalePieceAnimation";
      public const string DestroyScalePieceAnimation = "DestroyScalePieceAnimation";
      public const string MultiSpawnScalePieceAnimation = "MultiSpawnScalePieceAnimation";
+     public const string DestroyChestAnimation = "DestroyChestAnimation";
+     public const string MultiSpawnChestAnimation = "MultiSpawnChestAnimation";
+     public const string SpawnChestAnimation = "SpawnChestAnimation";
 }
