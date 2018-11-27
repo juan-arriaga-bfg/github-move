@@ -14,9 +14,6 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     public override void OnRegisterEntity(ECSEntity entity)
     {
         Context = entity as BoardController;
-        
-        var firefly = Context.BoardLogic.FireflyLogic;
-        firefly.Locker.Unlock(firefly);
     }
     
     public override void OnUnRegisterEntity(ECSEntity entity)
@@ -51,6 +48,9 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             
             RegisterComponent(tutorial, true);
         }
+        
+        var firefly = Context.BoardLogic.FireflyLogic;
+        firefly.Locker.Unlock(firefly);
         
         UIService.Get.OnShowWindowEvent += OnShowWindow;
         UIService.Get.OnCloseWindowEvent += OnCloseWindow;
