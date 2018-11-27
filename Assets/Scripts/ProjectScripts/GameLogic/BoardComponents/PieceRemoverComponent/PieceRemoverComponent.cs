@@ -167,7 +167,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         if (IsActive == false)
         {
             var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
-            model.Image = "hay_UI";
+            model.Image = "removerScene";
             model.Title   = LocalizationService.Get("window.remove.hint.title",   "window.remove.hint.title");
             model.Message = LocalizationService.Get("window.remove.hint.message", "window.remove.hint.message");
             

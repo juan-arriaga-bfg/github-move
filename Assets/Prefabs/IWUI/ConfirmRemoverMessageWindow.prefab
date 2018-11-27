@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 114289162000944314}
   - component: {fileID: 114645400852150042}
   m_Layer: 31
-  m_Name: ButtonBuy
+  m_Name: '#ButtonBuy'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 224152240437101052}
   - component: {fileID: 114463062565973612}
   m_Layer: 31
-  m_Name: Timer
+  m_Name: '#Timer'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 114031658980825872}
   - component: {fileID: 114427467627577782}
   m_Layer: 31
-  m_Name: Message
+  m_Name: '#Message'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 114161292274156280}
   - component: {fileID: 114000597682743738}
   m_Layer: 31
-  m_Name: ButtonCancel
+  m_Name: '#ButtonCancel'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 114913105984148718}
   - component: {fileID: 114773425172646978}
   m_Layer: 31
-  m_Name: Label
+  m_Name: '#ButtonCancelLabel'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 114141343232882846}
   - component: {fileID: 114987626333761232}
   m_Layer: 31
-  m_Name: ButtonAccept
+  m_Name: '#ButtonAccept'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 114901426927850182}
   - component: {fileID: 114552344553533986}
   m_Layer: 31
-  m_Name: Label
+  m_Name: '#ButtonAcceptLabel'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -381,6 +381,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1693031023847514
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224551412634223380}
+  - component: {fileID: 114494057811016854}
+  m_Layer: 31
+  m_Name: '#DelimiterImageAndText'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1704308807622016
 GameObject:
   m_ObjectHideFlags: 1
@@ -393,7 +409,7 @@ GameObject:
   - component: {fileID: 114319858509727108}
   - component: {fileID: 114806281710442654}
   m_Layer: 31
-  m_Name: Label
+  m_Name: '#ButtonBuyLabel'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -426,7 +442,7 @@ GameObject:
   - component: {fileID: 114328292863997604}
   - component: {fileID: 114133682750168514}
   m_Layer: 31
-  m_Name: Buttons
+  m_Name: '#Buttons'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -512,7 +528,7 @@ GameObject:
   - component: {fileID: 222644018703841974}
   - component: {fileID: 114137298761093626}
   m_Layer: 31
-  m_Name: Image
+  m_Name: '#Image'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -581,7 +597,7 @@ GameObject:
   - component: {fileID: 222738089752632256}
   - component: {fileID: 114284465355490200}
   m_Layer: 31
-  m_Name: Icon
+  m_Name: '#TimerIcon'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -616,7 +632,7 @@ GameObject:
   - component: {fileID: 114029166154334512}
   - component: {fileID: 114940181533212070}
   m_Layer: 31
-  m_Name: Label
+  m_Name: '#TimerLabel'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -632,7 +648,7 @@ GameObject:
   - component: {fileID: 224954683461518636}
   - component: {fileID: 114310624265952912}
   m_Layer: 31
-  m_Name: Delimiter
+  m_Name: '#DelimiterTextAndButtons'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1912,6 +1928,25 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &114494057811016854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1693031023847514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: 40
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!114 &114552344553533986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2030,15 +2065,6 @@ MonoBehaviour:
   title: {fileID: 114696149622254008}
   message: {fileID: 114427467627577782}
   viewAnchor: {fileID: 224384392863497274}
-  buttonAcceptLabel: {fileID: 114552344553533986}
-  buttonBuyLabel: {fileID: 114806281710442654}
-  buttonCancelLabel: {fileID: 114773425172646978}
-  timerLabel: {fileID: 114940181533212070}
-  imageMessage: {fileID: 114137298761093626}
-  btnAccept: {fileID: 1421244022908780}
-  btnBuy: {fileID: 1238690126300368}
-  btnCancel: {fileID: 1376649844925328}
-  timer: {fileID: 1262098206995626}
 --- !u!114 &114726266810044112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3012,7 +3038,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 680, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224054117848730026
@@ -3103,7 +3129,7 @@ RectTransform:
   - {fileID: 224089417059457460}
   - {fileID: 224628878351583446}
   m_Father: {fileID: 224384392863497274}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3141,6 +3167,7 @@ RectTransform:
   - {fileID: 224978114267032104}
   - {fileID: 224797776887507262}
   - {fileID: 224535415257844194}
+  - {fileID: 224551412634223380}
   - {fileID: 224551188773896560}
   - {fileID: 224954683461518636}
   - {fileID: 224152240437101052}
@@ -3239,12 +3266,30 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224384392863497274}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224551412634223380
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1693031023847514}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000798, y: 1.0000798, z: 1.0000798}
+  m_Children: []
+  m_Father: {fileID: 224384392863497274}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 494.99988, y: -424.99997}
+  m_SizeDelta: {x: 0, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224587907507778924
 RectTransform:
@@ -3430,7 +3475,7 @@ RectTransform:
   - {fileID: 224113308939285832}
   - {fileID: 224030935480743334}
   m_Father: {fileID: 224384392863497274}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3484,7 +3529,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224384392863497274}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

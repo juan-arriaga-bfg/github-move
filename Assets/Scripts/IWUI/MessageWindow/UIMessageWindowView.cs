@@ -3,22 +3,22 @@ using UnityEngine.UI;
 
 public class UIMessageWindowView : UIGenericPopupWindowView
 {
-    [IWUIBinding("#ButtonAcceptLabel")] private NSText buttonAcceptLabel;
-    [IWUIBinding("#ButtonBuyLabel")] private NSText buttonBuyLabel;
-    [IWUIBinding("#ButtonCancelLabel")] private NSText buttonCancelLabel;
+    [IWUIBinding("#ButtonAcceptLabel")] protected NSText buttonAcceptLabel;
+    [IWUIBinding("#ButtonBuyLabel")] protected NSText buttonBuyLabel;
+    [IWUIBinding("#ButtonCancelLabel")] protected NSText buttonCancelLabel;
     
-    [IWUIBinding("#Timer")] private GameObject timer;
-    [IWUIBinding("#TimerLabel")] private NSText timerLabel;
+    [IWUIBinding("#Timer")] protected GameObject timer;
+    [IWUIBinding("#TimerLabel")] protected NSText timerLabel;
     
-    [IWUIBinding("#Image")] private Image image;
+    [IWUIBinding("#Image")] protected Image image;
     
-    [IWUIBinding("#Buttons")] private GameObject buttonsPanel;
-    [IWUIBinding("#ButtonAccept")] private GameObject btnAccept;
-    [IWUIBinding("#ButtonBuy")] private GameObject btnBuy;
-    [IWUIBinding("#ButtonCancel")] private GameObject btnCancel;
+    [IWUIBinding("#Buttons")] protected GameObject buttonsPanel;
+    [IWUIBinding("#ButtonAccept")] protected GameObject btnAccept;
+    [IWUIBinding("#ButtonBuy")] protected GameObject btnBuy;
+    [IWUIBinding("#ButtonCancel")] protected GameObject btnCancel;
 
-    [IWUIBinding("#DelimiterImageAndButtons")] private GameObject delimiterImageAndButtons;
-    [IWUIBinding("#DelimiterTextAndButtons")] private GameObject delimiterTextAndButtons;
+    [IWUIBinding("#DelimiterImageAndText")] protected GameObject delimiterImageAndText;
+    [IWUIBinding("#DelimiterTextAndButtons")] protected GameObject delimiterTextAndButtons;
     
     private bool isAccept;
     private bool isCancel;
@@ -122,7 +122,7 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         btnBuy                  .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.ButtonBuy));
         btnCancel               .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.ButtonCancel));
         timer                   .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.Timer));
-        delimiterImageAndButtons.gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.ImageAndMessageDelimiter));
+        delimiterImageAndText.gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.ImageAndMessageDelimiter));
         delimiterTextAndButtons .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.MessageAndButtonsDelimiter));
         
         buttonsPanel.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.ButtonAccept) 

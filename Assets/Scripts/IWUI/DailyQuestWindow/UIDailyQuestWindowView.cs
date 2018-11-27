@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class UIDailyQuestWindowView : UIGenericPopupWindowView 
 {
@@ -122,4 +123,20 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         
         timerLabel.Text = model.Timer.CompleteTime.GetTimeLeftText(false, null, model.Timer.UseUTC);
     }
+}
+
+
+public class CoolDialog : IWUIWindowView
+{
+    [IWUIBinding("#Image")] private Image image;
+
+    public override void OnViewShow()
+    {
+        image.color = Color.blue;
+    }
+}
+
+public class AnotherCoolDialog : CoolDialog
+{
+
 }
