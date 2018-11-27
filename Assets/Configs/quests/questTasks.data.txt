@@ -209,6 +209,14 @@
     "$type": "TaskCompleteDailyTaskEntity, GameAssembly",
     "Id": "Daily_ClearAll",
     "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 1000
+          }
+        ]
+      },
       "QuestDescriptionComponent": {
         "Ico": "clockButtonDailyObjectives",
         "Message": "Clear all"

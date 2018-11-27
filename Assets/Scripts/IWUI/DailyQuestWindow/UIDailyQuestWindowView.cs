@@ -7,20 +7,27 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
 {
     [IWUIBinding("#TaskList")] private UIContainerViewController taskList;
     [IWUIBinding("#TimerLabel")] private NSText timerLabel;
+    [IWUIBinding("#ComeBackPanel")] private GameObject comeBackPanel;
+    [IWUIBinding("#ComeBackLabel")] private NSText comeBackLabel;
+    [IWUIBinding("#MainTimer")] private GameObject mainTimer;
     
     public override void OnViewShow()
     {
         base.OnViewShow();
         
         UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
-       
+
+        bool isQuestCompleted = model.Quest.IsCompletedOrClaimed();
+        
         SetTitle(model.Title);
 
         CreateTaskList(model);
         
         model.Timer.OnExecute += OnTimerUpdate;
 
-        model.Quest.Immortal = true;
+        model.Quest.Immortal = !isQuestCompleted;
+
+        ToggleComebackPanel(isQuestCompleted);
     }
 
     public override void OnViewClose()
@@ -123,20 +130,12 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         
         timerLabel.Text = model.Timer.CompleteTime.GetTimeLeftText(false, null, model.Timer.UseUTC);
     }
-}
 
-
-public class CoolDialog : IWUIWindowView
-{
-    [IWUIBinding("#Image")] private Image image;
-
-    public override void OnViewShow()
+    private void ToggleComebackPanel(bool isQuestCompleted)
     {
-        image.color = Color.blue;
+        mainTimer.SetActive(!isQuestCompleted);
+        
+        comeBackPanel.SetActive(isQuestCompleted);
+        comeBackLabel.Text = LocalizationService.Get("window.daily.quest.message.all.cleared", "window.daily.quest.message.all.cleared");
     }
-}
-
-public class AnotherCoolDialog : CoolDialog
-{
-
 }
