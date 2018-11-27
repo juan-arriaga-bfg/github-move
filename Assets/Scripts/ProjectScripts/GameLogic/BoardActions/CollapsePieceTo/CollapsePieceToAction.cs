@@ -16,6 +16,8 @@ public class CollapsePieceToAction : IBoardAction
 	public Action OnComplete;
 
 	public bool IsMatch = false;
+
+	public Func<int, string> AnimationResourceSearch;
 	
 	public bool PerformAction(BoardController gameBoardController)
 	{

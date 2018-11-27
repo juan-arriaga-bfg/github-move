@@ -15,20 +15,40 @@ public class CollapsePieceToAnimation : BoardAnimation
 		for (int i = 0; i < points.Count; i++)
 		{
 			var boardElement = context.GetElementAt(points[i]);
-			
-			if(boardElement == null)
-				continue;
-			
+			var currentIndex = i;
 			sequence.Insert(0, boardElement.CachedTransform.DOMove(new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.4f).SetEase(Ease.OutBack));
+			
+			if (boardElement is PieceBoardElementView)
+			{
+				var pieceBoardElement = (PieceBoardElementView)boardElement;
+				
+				var animationResource = Action.AnimationResourceSearch?.Invoke(pieceBoardElement.Piece.PieceType);
+				if (string.IsNullOrEmpty(animationResource) == false)
+				{
+					
+					sequence.InsertCallback(0.2f, () =>
+					{
+						var animView = context.CreateBoardElementAt<AnimationView>(animationResource, points[currentIndex]);
+						animView.Play(pieceBoardElement);
+						animView.OnComplete += () => context.RemoveElementAt(points[currentIndex]); 
+					});					
+					
+					continue;
+				}
+			
+			}
+			
+			
 			sequence.Insert(0.2f, boardElement.CachedTransform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack));
+			sequence.InsertCallback(0.3f, () => context.RemoveElementAt(points[currentIndex]));
 		}
 		
 		sequence.OnComplete(() =>
 		{
-			for (int i = 0; i < points.Count; i++)
-			{
-				context.RemoveElementAt(points[i]);
-			}
+//			for (int i = 0; i < points.Count; i++)
+//			{
+//				context.RemoveElementAt(points[i]);
+//			}
 			
 			CompleteAnimation(context);
 		});

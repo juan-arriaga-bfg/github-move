@@ -48,8 +48,9 @@ public class AnimationDataManager
 //            OnFogSpawn = R.SpawnScalePieceAnimation,
 //            OnMergeSpawn = R.SpawnScalePieceAnimation,
 //            OnMultiSpawn = R.SpawnScalePieceAnimation,
-            OnPurchaseSpawn = R.SpawnScalePieceAnimation,
-            OnObstacleFinalSpawn = R.SpawnScalePieceAnimation
+            OnPurchaseSpawn = R.MultiSpawnScalePieceAnimation,
+            OnObstacleFinalSpawn = R.SpawnScalePieceAnimation,
+            OnDestroyFromBoard = R.DestroyScalePieceAnimation
         });
         
         return defs;

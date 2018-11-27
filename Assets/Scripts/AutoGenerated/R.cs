@@ -165,4 +165,6 @@ public class R
      public const string UIHintArrow = "UIHintArrow";
      public const string FogExplosionParticleSystem = "FogExplosionParticleSystem";
      public const string SpawnScalePieceAnimation = "SpawnScalePieceAnimation";
+     public const string DestroyScalePieceAnimation = "DestroyScalePieceAnimation";
+     public const string MultiSpawnScalePieceAnimation = "MultiSpawnScalePieceAnimation";
 }

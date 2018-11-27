@@ -7,16 +7,22 @@ public class ScalePieceAnimationView : AnimationView
     [SerializeField] private bool startFromCurrentScale = false; 
     [SerializeField] private Vector3 from = new Vector3(1, 1, 1);
     [SerializeField] private Vector3 to = new Vector3(1, 1, 1);
-    [SerializeField] private float duration = 0.5f;
+    [SerializeField] private float duration = 0.2f;
+    [SerializeField] private float timeoutDuration = 0.5f;
 
-    private PieceBoardElementView pieceView = null;
+    protected PieceBoardElementView pieceView = null;
     
     public override void Play(PieceBoardElementView pieceView)
     {
         base.Play(pieceView);
         if(startFromCurrentScale == false)
-            pieceView.transform.localScale = this.from;
-        pieceView.transform.DOScale(to, duration).SetId(animationUid).OnComplete(() => OnComplete?.Invoke());
+            pieceView.transform.localScale = from;
+
+        var sequence = DOTween.Sequence();
+        sequence.SetId(animationUid);
+        sequence.Insert(0, pieceView.transform.DOScale(to, duration));
+        sequence.InsertCallback(timeoutDuration, () => OnComplete?.Invoke());
+
         this.pieceView = pieceView;
     }
 
