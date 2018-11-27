@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
@@ -17,10 +18,11 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
     [SerializeField] private CanvasGroup shopCanvasGroup;
     [SerializeField] private CanvasGroup ordersCanvasGroup;
     [SerializeField] private CanvasGroup removeCanvasGroup;
-    
-    [SerializeField] private GameObject delimiters;
-    
-    [SerializeField] private ScrollRect questsScroll;
+
+    [IWUIBinding("#QuestsList")] private ScrollRect questListScroll;
+    [IWUIBinding("#QuestListViewport")] private RectTransform questListViewport;
+    [IWUIBinding("#QuestListContent")] private RectTransform questListContent;
+    [IWUIBinding("#QuestListDelimiters")] private GameObject questListDelimiters;
 
     [Header("Hint anchors")] 
     [SerializeField] private Transform hintAnchorOrdersButton;
@@ -138,11 +140,6 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
 
             listChanged = true;
         }
-
-        if (questButtons.Count == active.Count)
-        {
-            return;
-        }
         
         pattern.SetActive(true);
 
@@ -172,13 +169,22 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
         
         pattern.SetActive(false);
 
-        delimiters.SetActive(GetMaxCountOfVisibleQuestButtons() < questButtons.Count);
-        
         // Scroll list to top
         if (listChanged)
         {
-            questsScroll.verticalNormalizedPosition  = 1f;
+            StartCoroutine(UpdateQuestListDelimiters());
+            questListScroll.verticalNormalizedPosition  = 1f;
         }
+    }
+
+    private IEnumerator UpdateQuestListDelimiters()
+    {
+        yield return new WaitForEndOfFrame();
+        
+        float contentH = questListContent.rect.height;
+        float viewportH = questListViewport.rect.height;
+        
+        questListDelimiters.SetActive(contentH > viewportH);
     }
 
     private void UpdateCodexButton()
@@ -240,33 +246,11 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
         questsCanvasGroup.DOFade(visible ? 1 : 0, time);
         rightButtonsCanvasGroups.DOFade(visible ? 1 : 0, time);
 
-        foreach (var image in delimiters.transform.GetComponentsInChildren<Image>())
+        foreach (var image in questListDelimiters.transform.GetComponentsInChildren<Image>())
         {
             image.DOFade(visible ? 1 : 0, time);
         }
     }
-
-    private int GetMaxCountOfVisibleQuestButtons()
-    {
-        if (maxCountOfVisibleQuestButtonsCached > 0)
-        {
-            return maxCountOfVisibleQuestButtonsCached;
-        }
-
-        LayoutElement layoutElement = pattern.GetComponent<LayoutElement>();
-        VerticalLayoutGroup layoutGroup = pattern.transform.parent.GetComponent<VerticalLayoutGroup>();
-        RectTransform container = layoutGroup.transform.parent.GetComponent<RectTransform>();
-
-        float itemH = layoutElement.minHeight;
-        float spacing = layoutGroup.spacing;
-        float topPadding = layoutGroup.padding.top;
-        float bottomPadding = layoutGroup.padding.bottom;
-        float containerH = container.rect.height;
-
-        maxCountOfVisibleQuestButtonsCached = (int) ((containerH - topPadding - bottomPadding + spacing) / (itemH + spacing));
-        return maxCountOfVisibleQuestButtonsCached;
-    }
-    
     
     private void UpdateDailyQuestButton()
     {

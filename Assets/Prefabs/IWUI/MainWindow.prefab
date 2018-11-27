@@ -1185,7 +1185,7 @@ GameObject:
   - component: {fileID: 114139557744125974}
   - component: {fileID: 225909200540593616}
   m_Layer: 31
-  m_Name: QuestsList
+  m_Name: '#QuestsList'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2073,12 +2073,12 @@ GameObject:
   m_Component:
   - component: {fileID: 224431064200158690}
   m_Layer: 31
-  m_Name: Delimiters
+  m_Name: '#QuestListDelimiters'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1801924256985272
 GameObject:
   m_ObjectHideFlags: 1
@@ -2305,7 +2305,7 @@ GameObject:
   - component: {fileID: 114887490970624690}
   - component: {fileID: 114077406088232722}
   m_Layer: 31
-  m_Name: Content
+  m_Name: '#QuestListContent'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2341,7 +2341,7 @@ GameObject:
   - component: {fileID: 222897716616711016}
   - component: {fileID: 114675261745713584}
   m_Layer: 31
-  m_Name: Viewport
+  m_Name: '#QuestListViewport'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8910,8 +8910,6 @@ MonoBehaviour:
   shopCanvasGroup: {fileID: 225853144537110904}
   ordersCanvasGroup: {fileID: 225741259789573918}
   removeCanvasGroup: {fileID: 225513730606985444}
-  delimiters: {fileID: 1796603363501246}
-  questsScroll: {fileID: 114139557744125974}
   hintAnchorOrdersButton: {fileID: 224911528357510934}
 --- !u!114 &114834187065225206
 MonoBehaviour:
@@ -13381,7 +13379,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -140, y: -90}
+  m_AnchoredPosition: {x: -140, y: -89.999756}
   m_SizeDelta: {x: 200, y: -220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224857803709138896
