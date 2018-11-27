@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DG.Tweening;
+using Quests;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,13 +26,33 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         
         targetEntity = entity as UIDailyQuestTaskElementEntity;
 
-        Init(targetEntity.Task);
+        task = targetEntity.Task;
+        
+        targetEntity.Task.OnChanged += OnTaskChanged; 
+        
+        UpdateUi();
     }
-    
-    public void Init(TaskEntity task)
-    {
-        this.task = task;
 
+    private void OnTaskChanged(TaskEntity task)
+    {
+        if (task.State != TaskState.Claimed)
+        {
+            UpdateUi();
+        }
+    }
+
+    public override void OnViewClose(IWUIWindowView context)
+    {
+        if (targetEntity != null)
+        {
+            targetEntity.Task.OnChanged -= OnTaskChanged;
+        }
+
+        base.OnViewClose(context);
+    }
+
+    public void UpdateUi()
+    {
         taskButton.interactable = !task.IsClaimed();
         taskButtonLabel.Text = GetTextForButton(task);
 
