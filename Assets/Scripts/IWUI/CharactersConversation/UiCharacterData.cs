@@ -13,7 +13,7 @@ public static class UiCharacterData
             CharSleepingBeauty, 
             new UICharacterDef
             {
-                Name = "Sleeping Beauty",
+                Name = "conversation.character.SleepingBeauty",
                 ColorHex = "#E046F8"
             }
         },
@@ -21,7 +21,7 @@ public static class UiCharacterData
             CharPussInBoots, 
             new UICharacterDef
             {
-                Name = "Puss in Boots",
+                Name = "conversation.character.PussInBoots",
                 ColorHex = "#52CBD1"
             }
         },
@@ -29,7 +29,7 @@ public static class UiCharacterData
             CharRapunzel, 
             new UICharacterDef
             {
-                Name = "Rapunzel",
+                Name = "conversation.character.Rapunzel",
                 ColorHex = "#F5BE03"
             }
         },
@@ -37,7 +37,7 @@ public static class UiCharacterData
             CharGnomeWorker, 
             new UICharacterDef
             {
-                Name = "Gnome worker",
+                Name = "conversation.character.GnomeWorker",
                 ColorHex = "#00A0FF"
             }
         },

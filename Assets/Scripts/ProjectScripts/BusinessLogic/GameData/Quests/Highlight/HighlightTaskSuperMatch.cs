@@ -1,3 +1,5 @@
+using System;
+
 public class HighlightTaskSuperMatch : ITaskHighlight
 {
     public bool Highlight(TaskEntity task)
@@ -9,8 +11,8 @@ public class HighlightTaskSuperMatch : ITaskHighlight
         }
 
         int count = superMatchTask.CountToMatch;
-        
-        string title = $"Match {count}+ pieces at once";
+
+        string title = string.Format(LocalizationService.Get("highlight.task.supermatch", "highlight.task.supermatch"), count);
         string image = $"codexQuestion";
         
         UIMessageWindowController.CreateImageMessage(title, image, () =>
