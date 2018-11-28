@@ -40,7 +40,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 			var sprite = fog.GetComponent<SpriteRenderer>();
 			
 			fogSprites.Add(sprite);
-			
+
 			sprite.sprite = IconService.Current.GetSpriteById($"Fog{Random.Range(1, 4)}{CheckBorder(position.X, position.Y)}");
 			sprite.transform.localScale = Vector3.one * 1.1f;
 			sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + 101;
@@ -98,20 +98,15 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
         if (observer.CanBeCleared())
         {
             ToggleReadyToClear(true, isAnimate);
-
-            var fogPiece = currentPiece.GetComponent<FogObserver>(FogObserver.ComponentGuid);
-            
-            if (fogPiece == null) return;
-            
-            if (fogPiece.Def == null || fogPiece.Def.Pieces == null) return;
+	        
+	        if (observer.Def?.Pieces == null) return;
             
             if (fakePieces.Count > 0) return;
             
-            foreach (var pieceDefs in fogPiece.Def.Pieces)
+            foreach (var pieceDefs in observer.Def.Pieces)
             {
                 foreach (var pos in pieceDefs.Value)
                 {
-
                     var pieceUid = pieceDefs.Key;
                     var pieceId = GameDataService.Current.MinesManager.GetMineTypeById(pieceUid);
 
@@ -122,6 +117,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 
                     var fakePos = new BoardPosition(pos.X, pos.Y, 0);
                     var fakePiece = Context.Context.BoardLogic.DragAndDrop.CreateFakePieceAt(pieceId, fakePos);
+	                
                     if (fakePiece != null)
                     {
                         fakePiece.SyncRendererLayers(new BoardPosition(pos.X, pos.Y, 1));
@@ -158,8 +154,6 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 		fogItem.SetActive(true);
 		touchItem.SetActive(true);
 		
-		// observer.Clear();
-	    
 	    Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
 	    Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.FogTap);
 	}
@@ -192,12 +186,10 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
         }
 
         IsHighlighted = enabled;
-
-        DOTween.Kill(HIGHLIGHT_ANIMATION_ID);
-       
-        const float TIME = 0.35f;
-
+	    DOTween.Kill(HIGHLIGHT_ANIMATION_ID);
+	    
         var fogMaterial = SetCustomMaterial(BoardElementMaterialType.FogDefaultMaterial, enabled, this);
+	    
         if (isAnimate)
         {
             fogMaterial.SetFloat("_ScaleCoef", 1f);
@@ -219,10 +211,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
             var position = observer.Mask.Count > i ? observer.Mask[i] : currentPiece.CachedPosition;
 
             sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + 1 * 100 - 1;
-            // sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + 101;
         }
-        
-        // SyncRendererLayers(new BoardPosition(currentPiece.CachedPosition.X, currentPiece.CachedPosition.Y, 2));
     }
 
     public override void ToggleHighlight(bool enabled)

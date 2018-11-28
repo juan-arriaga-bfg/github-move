@@ -59,8 +59,6 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     public virtual void PrepareFogToClear()
     {
         if (!CanBeCleared()) return;
-        
-        
     }
 
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
@@ -192,6 +190,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     private void OnClick(Piece piece)
     {
         if(CurrencyHellper.IsCanPurchase(Def.Condition, true, () => OnClick(piece)) == false) return;
+
+        bubble.CleanOnClick();
         
         CurrencyHellper.Purchase(Currency.Fog.Name, 1, Def.Condition, success =>
         {
@@ -209,10 +209,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                     To = piece.CachedPosition,
                     Positions = new List<BoardPosition> {piece.CachedPosition},
                     FogObserver = this,
-                    OnComplete = () =>
-                    {
-                        DevTools.UpdateFogSectorsDebug();
-                    }
+                    OnComplete = DevTools.UpdateFogSectorsDebug
                 });
             };
             
