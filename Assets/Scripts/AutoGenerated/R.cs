@@ -171,4 +171,6 @@ public class R
      public const string MultiSpawnChestAnimation = "MultiSpawnChestAnimation";
      public const string SpawnChestAnimation = "SpawnChestAnimation";
      public const string DestroyScaleMineAnimation = "DestroyScaleMineAnimation";
+     public const string DestroyProductionAnimation = "DestroyProductionAnimation";
+     public const string DestroyObstacleAnimation = "DestroyObstacleAnimation";
 }

@@ -37,12 +37,12 @@ public class AnimationDataManager
 
         AddByFilter(defs, PieceTypeFilter.Obstacle, new AnimationDef
         {
-            OnDestroyFromBoard = R.DestroyChestAnimation
+            OnDestroyFromBoard = R.DestroyObstacleAnimation
         });
         
         AddByFilter(defs, PieceTypeFilter.ProductionField, new AnimationDef
         {
-            OnDestroyFromBoard = R.DestroyChestAnimation
+            OnDestroyFromBoard = R.DestroyProductionAnimation
         });
         
         AddByFilter(defs, PieceTypeFilter.Mine, new AnimationDef
