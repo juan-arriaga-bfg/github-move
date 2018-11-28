@@ -39,6 +39,8 @@ public class MatchHardTutorialStep : BaseTutorialStep
 
     public override void PauseOn()
     {
+        base.PauseOn();
+        
         if(finger != null) finger.Hide();
     }
 
