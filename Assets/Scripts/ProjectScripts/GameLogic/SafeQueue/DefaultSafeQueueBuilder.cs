@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 public static class DefaultSafeQueueBuilder
 {
@@ -8,8 +9,19 @@ public static class DefaultSafeQueueBuilder
     public static QueueActionComponent BuildAndRun(string id, bool replaceIfExists, Action action)
     {
         var ret = new QueueActionComponent {Id = id}
-                 .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = UIWindowType.IgnoredWindows})
-                 .AddCondition(new NoBoardAnimationInProgressQueueConditionComponent {})
+                 .AddCondition(new OpenedWindowsQueueConditionComponent
+                  {
+                      IgnoredWindows = UIWindowType.IgnoredWindows
+                  })
+                  
+                 .AddCondition(new NoBoardAnimationInProgressQueueConditionComponent
+                  {
+                      BoardAnimations = new HashSet<Type>
+                      {
+                          typeof(CollapseFogToAnimation),
+                      }
+                  })
+                  
                  .SetAction(action);
 
         ProfileService.Current.QueueComponent.AddAction(ret, replaceIfExists);

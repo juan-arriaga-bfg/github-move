@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Ensure that no board animations with specified type are in progress
@@ -11,24 +12,30 @@ public class NoBoardAnimationInProgressQueueConditionComponent : QueueConditionC
     /// </summary>
     public HashSet<Type> BoardAnimations { get; set; }
 
+    private BoardRenderer cachedRenderer;
+
+    public BoardRenderer CachedRenderer => cachedRenderer ?? (cachedRenderer = BoardService.Current?.FirstBoard?.RendererContext);
+
     public override bool IsReady()
     {
-        var boardRenderer = BoardService.Current?.FirstBoard?.RendererContext;
-        if (boardRenderer == null)
+        if (CachedRenderer == null)
         {
+            // Debug.Log($"[NoBoardAnimationInProgressQueueConditionComponent] => IsReady == false");
             return false;
         }
 
-        var animations = boardRenderer.GetPerformingAnimations();
+        var animations = CachedRenderer.GetPerformingAnimations();
         for (var i = 0; i < animations.Count; i++)
         {
             var animation = animations[i];
             if (BoardAnimations.Contains(animation.GetType()))
             {
+                // Debug.Log($"[NoBoardAnimationInProgressQueueConditionComponent] => IsReady == false");
                 return false;
             }
         }
 
+        // Debug.Log($"[NoBoardAnimationInProgressQueueConditionComponent] => IsReady == true");
         return true;
     }
 
