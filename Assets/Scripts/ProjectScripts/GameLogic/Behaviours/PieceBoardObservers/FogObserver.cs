@@ -11,8 +11,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     private LockView lockView;
     private BubbleView bubble;
     public BoardPosition Key { get; private set; }
-    
-    
+
+    public bool IsRemoved = false;
     
     public RectTransform GetAnchorRect()
     {
@@ -203,6 +203,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
             bubble.OnHide = () =>
             {
+                IsRemoved = true;
                 piece.Context.ActionExecutor.AddAction(new CollapseFogToAction
                 {
                     To = piece.CachedPosition,

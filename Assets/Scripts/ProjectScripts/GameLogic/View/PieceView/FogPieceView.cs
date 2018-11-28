@@ -65,6 +65,8 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 	public void UpdateBorder()
 	{
 		if(observer == null) return;
+	    
+	    if (observer.IsRemoved) return;
 		
 		for (var i = 0; i < observer.Mask.Count; i++)
 		{
