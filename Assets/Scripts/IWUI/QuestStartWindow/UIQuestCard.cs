@@ -14,6 +14,8 @@ public class UIQuestCard : MonoBehaviour
     {
         questButton.Init(quest, false);
         title.text = LocalizationService.Get("quest.card.new", "quest.card.new");
-        message.text = quest?.Tasks[0]?.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Title ?? "";
+
+        string key = quest?.Tasks[0]?.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Title ?? "";
+        message.text = LocalizationService.Get(key, key) ;
     }
 }

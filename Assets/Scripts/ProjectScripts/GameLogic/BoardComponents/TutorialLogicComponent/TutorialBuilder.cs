@@ -129,22 +129,23 @@ public static class TutorialBuilder
             }
             case 8: // tutorial 8 - crystal
             {
-                step = new СrystalTutorialStep{Delay = 3, isAnyCompleteCondition = true};
+                step = new СrystalTutorialStep {Delay = 3, IsAnyCompleteCondition = true};
                 break;
             }
             case 9: // tutorial 9 - worker
             {
-                step = new WorkerTutorialStep{Delay = 5};
+                step = new WorkerTutorialStep {Delay = 5};
                 break;
             }
             case 10: // remove worker
             {
-                step = new BaseTutorialStep{IsIgnoreUi = true};
+                step = new BaseTutorialStep {IsIgnoreDev = false, IsIgnoreUi = true, IsAnyCompleteCondition = true};
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckCounterTutorialCondition{Target = 1, ConditionType = TutorialConditionType.Complete}, true);
                 
                 step.RegisterComponent(new RemoveTutorialAnimation{PieceId = PieceType.NPC_Gnome.Id, AnimationType = TutorialAnimationType.Perform}, true);
+                step.RegisterComponent(new RemoveTutorialAnimation{PieceId = PieceType.NPC_Gnome.Id, AnimationType = TutorialAnimationType.Complete}, true);
                 
                 break;
             }
@@ -172,7 +173,7 @@ public static class TutorialBuilder
             }
             case 13: // lock buttons Worker, Energy, Codex
             {
-                step = new UiLockTutorialStep{Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Worker, UiLockTutorialItem.Energy, UiLockTutorialItem.Codex}};
+                step = new UiLockTutorialStep {Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Worker, UiLockTutorialItem.Energy, UiLockTutorialItem.Codex}};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
@@ -182,7 +183,7 @@ public static class TutorialBuilder
             }
             case 14: // lock buttons Orders, Shop
             {
-                step = new UiLockTutorialStep{Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Orders, UiLockTutorialItem.Shop}};
+                step = new UiLockTutorialStep {Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Orders, UiLockTutorialItem.Shop}};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
@@ -192,7 +193,7 @@ public static class TutorialBuilder
             }
             case 15: // lock buttons Remove
             {
-                step = new UiLockTutorialStep{Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Remove}};
+                step = new UiLockTutorialStep {Targets = new List<UiLockTutorialItem> {UiLockTutorialItem.Remove}};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "14_CreatePiece_B3", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
@@ -202,7 +203,7 @@ public static class TutorialBuilder
             }
             case 16: // lock Orders
             {
-                step = new OrdersLockTutorialStep();
+                step = new OrdersLockTutorialStep {IsIgnoreDev = false};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "16_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
@@ -212,7 +213,7 @@ public static class TutorialBuilder
             }
             case 17: // add SleepingBeauty
             {
-                step = new BaseTutorialStep{IsIgnoreUi = true};
+                step = new BaseTutorialStep {IsIgnoreDev = false, IsIgnoreUi = true};
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
@@ -225,7 +226,7 @@ public static class TutorialBuilder
             }
             case 18: // unlock Firefly
             {
-                step = new FireflyLockTutorialStep();
+                step = new FireflyLockTutorialStep {IsIgnoreDev = false};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition{Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckLevelTutorialCondition{Target = GameDataService.Current.ConstantsManager.StartLevelFirefly, ConditionType = TutorialConditionType.Complete}, true);

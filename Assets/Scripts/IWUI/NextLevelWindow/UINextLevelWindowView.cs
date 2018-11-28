@@ -80,6 +80,15 @@ public class UINextLevelWindowView : UIGenericWindowView
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
         GameDataService.Current.LevelsManager.UpdateSequence();
         
+        // todo: temp code, remove it
+        if (GameDataService.Current.LevelsManager.Level == 2)
+        {
+            if (GameDataService.Current.QuestsManager.DailyQuest == null)
+            {
+                GameDataService.Current.QuestsManager.StartNewDailyQuest();
+            }
+        }
+        
         base.OnViewCloseCompleted();
     }
     

@@ -18,23 +18,38 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
     [SerializeField] private CanvasGroup shopCanvasGroup;
     [SerializeField] private CanvasGroup ordersCanvasGroup;
     [SerializeField] private CanvasGroup removeCanvasGroup;
+    
+    [IWUIBinding("#ButtonDailyQuest")] private DailyQuestButton dailyQuestButton;
 
     [IWUIBinding("#QuestsList")] private ScrollRect questListScroll;
     [IWUIBinding("#QuestListViewport")] private RectTransform questListViewport;
     [IWUIBinding("#QuestListContent")] private RectTransform questListContent;
     [IWUIBinding("#QuestListDelimiters")] private GameObject questListDelimiters;
+    
+    [IWUIBinding("#DebugButtonsAnchor")] private Transform debugButtonsAnchor;
 
     [Header("Hint anchors")] 
     [SerializeField] private Transform hintAnchorOrdersButton;
     public Transform HintAnchorOrdersButton => hintAnchorOrdersButton;
-
-    [IWUIBinding("#ButtonDailyQuest")] private DailyQuestButton dailyQuestButton;
     
     private readonly List<UiQuestButton> questButtons = new List<UiQuestButton>();
 
     private int maxCountOfVisibleQuestButtonsCached = -1;
     
     public UIHintArrowComponent CachedHintArrowComponent { get; private set; }
+
+    public override void InitView(IWWindowModel model, IWWindowController controller)
+    {
+        base.InitView(model, controller);
+        
+#if DEBUG
+        
+        var dev = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName("DevTools"));
+        dev.SetParent(debugButtonsAnchor, false);
+        
+#endif
+        
+    }
     
     public override void OnViewShow()
     {

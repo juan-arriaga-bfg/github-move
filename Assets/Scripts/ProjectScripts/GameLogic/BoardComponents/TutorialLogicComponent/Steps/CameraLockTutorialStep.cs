@@ -2,13 +2,13 @@
 
 public class CameraLockTutorialStep : BaseTutorialStep
 {
-    private CameraScroll cameraMove;
+    private CameraScroll cameraScroll;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
         
-        cameraMove = GameObject.FindObjectOfType<CameraScroll>();
+        cameraScroll = GameObject.FindObjectOfType<CameraScroll>();
     }
     
     public override void Perform()
@@ -19,7 +19,7 @@ public class CameraLockTutorialStep : BaseTutorialStep
         
         Context.Context.Manipulator.CameraManipulator.CameraZoom.Lock(this);
         Context.Context.Manipulator.CameraManipulator.CameraMove.Lock(this);
-        if(cameraMove != null) cameraMove.Lock(this);
+        if(cameraScroll != null) cameraScroll.Lock(this);
     }
     
     protected override void Complete()
@@ -28,6 +28,6 @@ public class CameraLockTutorialStep : BaseTutorialStep
         
         Context.Context.Manipulator.CameraManipulator.CameraZoom.UnLock(this);
         Context.Context.Manipulator.CameraManipulator.CameraMove.UnLock(this);
-        if(cameraMove != null) cameraMove.UnLock(this);
+        if(cameraScroll != null) cameraScroll.UnLock(this);
     }
 }

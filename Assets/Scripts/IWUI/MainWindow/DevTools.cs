@@ -8,19 +8,25 @@ using UnityEngine.UI;
     using UnityEditor;
 #endif
 
-public class DevTools : MonoBehaviour
+public class DevTools : UIContainerElementViewController
 {
-    [SerializeField] private GameObject panel;
-    [SerializeField] private Toggle questDialogsToggle;
+    [IWUIBinding("#ButtonsPanel")] private GameObject panel;
+    [IWUIBinding("#QuestDialogsToggle")] private Toggle questDialogsToggle;
+    [IWUIBinding("#TutorialToggle")] private Toggle tutorialToggle;
 
 #if !UNITY_EDITOR
     private static bool isQuestDialogsDisabled;
+    private static bool isTutorialDisabled;
 #endif
     
-    public void Start()
+    public override void OnViewInit(IWUIWindowView context)
     {
+        base.OnViewInit(context);
+        
         panel.SetActive(false);
+        
         questDialogsToggle.isOn = IsQuestDialogsEnabled();
+        tutorialToggle.isOn = IsTutorialEnabled();
     }
     
     public void OnToggleValueChanged(bool isChecked)
@@ -239,19 +245,44 @@ public class DevTools : MonoBehaviour
 
     public void OnQuestDialogsValueChanged(bool isChecked)
     {
+        
 #if UNITY_EDITOR
         EditorPrefs.SetBool("DEBUG_QUEST_DIALOGS_DISABLED", !isChecked);
 #else
         isQuestDialogsDisabled = !isChecked;
 #endif
+        
     }
     
     public static bool IsQuestDialogsEnabled()
     {
+        
 #if UNITY_EDITOR
         return !EditorPrefs.GetBool("DEBUG_QUEST_DIALOGS_DISABLED", false);
 #else
         return !isQuestDialogsDisabled;
+#endif
+        
+    }
+    
+    public void OnTutorialValueChanged(bool isChecked)
+    {
+        
+#if UNITY_EDITOR
+        EditorPrefs.SetBool("DEBUG_TUTORIAL_DISABLED", !isChecked);
+#else
+        isTutorialDisabled = !isChecked;
+#endif
+        
+    }
+    
+    public static bool IsTutorialEnabled()
+    {
+        
+#if UNITY_EDITOR
+        return !EditorPrefs.GetBool("DEBUG_TUTORIAL_DISABLED", false);
+#else
+        return !isTutorialDisabled;
 #endif
         
     }

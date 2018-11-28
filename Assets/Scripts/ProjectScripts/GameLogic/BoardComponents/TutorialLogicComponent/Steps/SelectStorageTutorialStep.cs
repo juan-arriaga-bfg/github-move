@@ -44,7 +44,7 @@ public class SelectStorageTutorialStep : DelayTutorialStep
             
             if(positions.Count == 0) continue;
             
-            arrow = HintArrowView.Show(positions[0], 0, 0, true, true);
+            arrow = HintArrowView.Show(positions[0], 0, 0, !Context.Context.Manipulator.CameraManipulator.CameraMove.IsLocked, true);
             break;
         }
     }

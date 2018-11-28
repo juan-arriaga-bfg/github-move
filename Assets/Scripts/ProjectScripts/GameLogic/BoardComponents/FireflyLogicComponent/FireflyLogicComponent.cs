@@ -75,8 +75,16 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	private void OnShowWindow(IWUIWindow window)
 	{
 		if(UIWindowType.IsIgnore(window.WindowName)) return;
-		
-		if(Locker.IsLocked == false) pauseTime = DateTime.UtcNow;
+
+		if (Locker.IsLocked == false)
+		{
+			pauseTime = DateTime.UtcNow;
+			
+			foreach (var view in views)
+			{
+				view.OnDragStart();
+			}
+		}
 		
 		Locker.Lock(this);
 	}
@@ -88,6 +96,11 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		Locker.Unlock(this);
 		
 		if(Locker.IsLocked) return;
+		
+		foreach (var view in views)
+		{
+			view.OnDragEnd();
+		}
 		
 		startTime = startTime.AddSeconds((DateTime.UtcNow - pauseTime).TotalSeconds);
 	}
