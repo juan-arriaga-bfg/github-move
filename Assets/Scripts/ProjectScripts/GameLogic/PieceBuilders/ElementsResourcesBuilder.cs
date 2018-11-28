@@ -82,7 +82,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.Hard3.Id, R.Hard3Piece);
         dict.Add(PieceType.Hard4.Id, R.Hard4Piece);
         dict.Add(PieceType.Hard5.Id, R.Hard5Piece);
-        dict.Add(PieceType.Hard6.Id, R.Hard5Piece);
+        dict.Add(PieceType.Hard6.Id, R.Hard6Piece);
         
 #endregion
         
