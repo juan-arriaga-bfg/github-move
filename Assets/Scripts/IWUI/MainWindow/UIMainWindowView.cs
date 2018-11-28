@@ -10,7 +10,9 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
     [SerializeField] private GameObject pattern;
     [SerializeField] private CodexButton codexButton;
     [SerializeField] private CanvasGroup questsCanvasGroup;
-    [SerializeField] private CanvasGroup rightButtonsCanvasGroups;
+    
+    [IWUIBinding("#ButtonsRight")] private CanvasGroup rightButtonsCanvasGroups;
+    [IWUIBinding("#ButtonsLeft")] private CanvasGroup leftButtonsCanvasGroups;
     
     [SerializeField] private CanvasGroup workerCanvasGroup;
     [SerializeField] private CanvasGroup energyCanvasGroup;
@@ -260,6 +262,7 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
 
         questsCanvasGroup.DOFade(visible ? 1 : 0, time);
         rightButtonsCanvasGroups.DOFade(visible ? 1 : 0, time);
+        leftButtonsCanvasGroups.DOFade(visible ? 1 : 0, time);
 
         foreach (var image in questListDelimiters.transform.GetComponentsInChildren<Image>())
         {
