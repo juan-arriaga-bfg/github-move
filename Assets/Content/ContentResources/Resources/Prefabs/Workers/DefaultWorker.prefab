@@ -255,7 +255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1619824107336932
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,6 +799,7 @@ MonoBehaviour:
   IsFading: 0
   FadeValue: 0
   duration: 4
+  Particles: {fileID: 0}
 --- !u!198 &198014301362484184
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -10165,7 +10166,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.2784314}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -33349,7 +33350,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 28
+  m_SortingOrder: 10003
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -33463,7 +33464,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 28
+  m_SortingOrder: 10003
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -33520,7 +33521,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 999
+  m_SortingOrder: 10003
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
