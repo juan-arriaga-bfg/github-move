@@ -38,6 +38,11 @@ public class BubbleView : UIBoardView, IBoardEventListener
         
         Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
     }
+
+    public void CleanOnClick()
+    {
+        onClick = null;
+    }
     
     public override void UpdateVisibility(bool isVisible)
     {
@@ -47,11 +52,11 @@ public class BubbleView : UIBoardView, IBoardEventListener
         {
             if (isVisible)
             {
-                Context.Context.HintCooldown.Pause(this); 
+                Context.Context.HintCooldown.Pause(this);
             }
             else
             {
-                Context.Context.HintCooldown.Resume(this);  
+                Context.Context.HintCooldown.Resume(this);
             }
         }
         
