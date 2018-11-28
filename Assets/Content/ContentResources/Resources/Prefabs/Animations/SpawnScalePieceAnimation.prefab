@@ -84,11 +84,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsFading: 0
   FadeValue: 0
-  lifeTime: 10
+  lifeTime: 3
   startFromCurrentScale: 0
   from: {x: 0, y: 0, z: 0}
   to: {x: 1, y: 1, z: 1}
-  duration: 0.5
+  duration: 0.2
+  timeoutDuration: 0.3
 --- !u!198 &198599459261661834
 ParticleSystem:
   m_ObjectHideFlags: 1
