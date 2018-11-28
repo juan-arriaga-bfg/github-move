@@ -55,16 +55,12 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
         if(isLevelUp || CurrencyHellper.IsCanPurchase(itemUid, manager.Price) == false) return;
 
         isLevelUp = true;
-        
-        var action = new QueueActionComponent()
-                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = UIWindowType.IgnoredWindows})
-                    .SetAction(() =>
-                     {
-                         UIService.Get.ShowWindow(UIWindowType.NextLevelWindow);
-                         UIService.Get.OnCloseWindowEvent += OnCloseNextLevelWindow;
-                     });
 
-        ProfileService.Current.QueueComponent.AddAction(action, false);
+        DefaultSafeQueueBuilder.BuildAndRun(() =>
+        {
+            UIService.Get.ShowWindow(UIWindowType.NextLevelWindow);
+            UIService.Get.OnCloseWindowEvent += OnCloseNextLevelWindow;
+        });
     }
 
     private void OnCloseNextLevelWindow(IWUIWindow window)

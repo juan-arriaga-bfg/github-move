@@ -25,11 +25,7 @@ public class UiQuestButtonArrow : MonoBehaviour
         
         if (this.quest != null && this.quest.State == TaskState.Pending)
         {
-            var action = new QueueActionComponent {Id = QUEUE_ACTION_ID}
-                        .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = UIWindowType.IgnoredWindows})
-                        .SetAction(AnimateNewArrow);
-
-            ProfileService.Current.QueueComponent.AddAction(action, true);
+            DefaultSafeQueueBuilder.BuildAndRun(QUEUE_ACTION_ID, true, AnimateNewArrow);
         }
         
         if (quest != null)

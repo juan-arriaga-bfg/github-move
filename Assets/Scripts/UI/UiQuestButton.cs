@@ -228,18 +228,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     private void AddQuestWindowToQueue()
     {
-        //Debug.Log("!!! CompleteQuest: AddQuestWindowToQueue: " + Quest.Id);
-        
-        var action = new QueueActionComponent()
-                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = UIWindowType.IgnoredWindows})
-                    //.AddCondition(new NoQueuedActionsConditionComponent {ActionIds = new List<string> {"StartNewQuestsIfAny"}})
-                    .SetAction(() =>
-                     {
-                         // ShowQuestWindow();
-                         ShowQuestCompletedWindow();     
-                     });
-
-        ProfileService.Current.QueueComponent.AddAction(action, false);
+        DefaultSafeQueueBuilder.BuildAndRun(ShowQuestCompletedWindow);
     }
 
     private void ShowQuestCompletedWindow()
