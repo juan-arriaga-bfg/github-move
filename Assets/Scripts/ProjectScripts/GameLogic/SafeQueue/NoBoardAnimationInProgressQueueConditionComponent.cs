@@ -20,22 +20,29 @@ public class NoBoardAnimationInProgressQueueConditionComponent : QueueConditionC
     {
         if (CachedRenderer == null)
         {
-            // Debug.Log($"[NoBoardAnimationInProgressQueueConditionComponent] => IsReady == false");
             return false;
         }
 
-        var animations = CachedRenderer.GetPerformingAnimations();
-        for (var i = 0; i < animations.Count; i++)
+        var performingAnimations = CachedRenderer.GetPerformingAnimations();
+        for (var i = 0; i < performingAnimations.Count; i++)
         {
-            var animation = animations[i];
+            var animation = performingAnimations[i];
             if (BoardAnimations.Contains(animation.GetType()))
             {
-                // Debug.Log($"[NoBoardAnimationInProgressQueueConditionComponent] => IsReady == false");
                 return false;
             }
         }
 
-        // Debug.Log($"[NoBoardAnimationInProgressQueueConditionComponent] => IsReady == true");
+        var queuedAnimations = CachedRenderer.GetAnimationsQueue();
+        for (var i = 0; i < queuedAnimations.Count; i++)
+        {
+            var animation = queuedAnimations[i];
+            if (BoardAnimations.Contains(animation.GetType()))
+            {
+                return false;
+            }
+        }
+
         return true;
     }
 
