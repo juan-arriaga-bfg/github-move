@@ -81,7 +81,7 @@ public class UINextLevelWindowView : UIGenericWindowView
         GameDataService.Current.LevelsManager.UpdateSequence();
         
         // todo: temp code, remove it
-        if (GameDataService.Current.LevelsManager.Level == 2)
+        if (GameDataService.Current.LevelsManager.Level == 3)
         {
             if (GameDataService.Current.QuestsManager.DailyQuest == null)
             {
