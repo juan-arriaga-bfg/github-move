@@ -20,17 +20,19 @@ public class CollapseFogToAction : IBoardAction
     {
         if (Positions == null || Positions.Count == 0) return false;
 		
-        gameBoardController.BoardLogic.LockCells(Positions, this);
+        // gameBoardController.BoardLogic.LockCells(Positions, this);
         gameBoardController.BoardLogic.RemovePiecesAt(Positions);
         
         var animation = new CollapseFogToAnimation
         {
             Action = this
         };
+        
+        animation.PrepareAnimation(gameBoardController.RendererContext);
 		
         animation.OnCompleteEvent += (_) =>
         {
-            gameBoardController.BoardLogic.UnlockCells(Positions, this);
+            // gameBoardController.BoardLogic.UnlockCells(Positions, this);
             if (OnCompleteAction != null) gameBoardController.ActionExecutor.AddAction(OnCompleteAction);
             OnComplete?.Invoke();
             
