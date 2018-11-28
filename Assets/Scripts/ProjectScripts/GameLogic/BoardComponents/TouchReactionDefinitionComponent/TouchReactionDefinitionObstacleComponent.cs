@@ -48,6 +48,7 @@ public class TouchReactionDefinitionObstacleComponent : TouchReactionDefinitionS
         {
             Positions = new List<BoardPosition> {position},
             To = position,
+            AnimationResourceSearch = pieceType => AnimationDataManager.FindAnimation(pieceType, def => def.OnDestroyFromBoard),
             OnCompleteAction = new CreatePieceAtAction
             {
                 At = position,

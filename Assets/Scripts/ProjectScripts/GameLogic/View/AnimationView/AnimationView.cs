@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AnimationView: BoardElementView
 {
-    [SerializeField] protected int lifeTime = 10;
+    [SerializeField] protected int lifeTime = 5;
     
     private TimerComponent timer = new TimerComponent();
     

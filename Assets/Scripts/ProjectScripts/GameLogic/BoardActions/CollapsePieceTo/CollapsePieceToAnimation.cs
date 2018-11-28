@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class CollapsePieceToAnimation : BoardAnimation
@@ -11,6 +12,22 @@ public class CollapsePieceToAnimation : BoardAnimation
 		var to = context.Context.BoardDef.GetPiecePosition(Action.To.X, Action.To.Y);
 		
 		var sequence = DOTween.Sequence().SetId(animationUid);
+
+		var completeCount = 0;
+		Action complete = () =>
+		{
+			completeCount++;
+			if (completeCount == points.Count)
+			{
+				for (int i = 0; i < points.Count; i++)
+				{
+					context.RemoveElementAt(points[i]);
+				}
+
+				CompleteAnimation(context);
+			}
+		};
+		
 		
 		for (int i = 0; i < points.Count; i++)
 		{
@@ -30,7 +47,7 @@ public class CollapsePieceToAnimation : BoardAnimation
 					{
 						var animView = context.CreateBoardElementAt<AnimationView>(animationResource, points[currentIndex]);
 						animView.Play(pieceBoardElement);
-						animView.OnComplete += () => context.RemoveElementAt(points[currentIndex]); 
+						animView.OnComplete += complete;
 					});					
 					
 					continue;
@@ -40,18 +57,8 @@ public class CollapsePieceToAnimation : BoardAnimation
 			
 			
 			sequence.Insert(0.2f, boardElement.CachedTransform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack));
-			sequence.InsertCallback(0.3f, () => context.RemoveElementAt(points[currentIndex]));
+			sequence.InsertCallback(0.3f, () => complete());
 		}
-		
-		sequence.OnComplete(() =>
-		{
-//			for (int i = 0; i < points.Count; i++)
-//			{
-//				context.RemoveElementAt(points[i]);
-//			}
-			
-			CompleteAnimation(context);
-		});
 	}
 }
 

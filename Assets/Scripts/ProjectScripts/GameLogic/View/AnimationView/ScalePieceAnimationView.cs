@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ScalePieceAnimationView : AnimationView
 {
+    [SerializeField] private bool scaleOnlyView = false;
     [SerializeField] private bool startFromCurrentScale = false; 
     [SerializeField] private Vector3 from = new Vector3(1, 1, 1);
     [SerializeField] private Vector3 to = new Vector3(1, 1, 1);
@@ -15,12 +16,21 @@ public class ScalePieceAnimationView : AnimationView
     public override void Play(PieceBoardElementView pieceView)
     {
         base.Play(pieceView);
+        
         if(startFromCurrentScale == false)
             pieceView.transform.localScale = from;
 
         var sequence = DOTween.Sequence();
         sequence.SetId(animationUid);
-        sequence.Insert(0, pieceView.transform.DOScale(to, duration));
+        if (scaleOnlyView)
+        {
+            var viewObj = pieceView.transform.Find("View");
+            sequence.Insert(0, viewObj.DOScale(to, duration));
+        }
+        else
+        {
+            sequence.Insert(0, pieceView.transform.DOScale(to, duration));    
+        }
         sequence.InsertCallback(timeoutDuration, () => OnComplete?.Invoke());
 
         this.pieceView = pieceView;

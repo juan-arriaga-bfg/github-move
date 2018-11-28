@@ -35,6 +35,21 @@ public class AnimationDataManager
     {
         var defs = new Dictionary<int, AnimationDef>();
 
+        AddByFilter(defs, PieceTypeFilter.Obstacle, new AnimationDef
+        {
+            OnDestroyFromBoard = R.DestroyChestAnimation
+        });
+        
+        AddByFilter(defs, PieceTypeFilter.ProductionField, new AnimationDef
+        {
+            OnDestroyFromBoard = R.DestroyChestAnimation
+        });
+        
+        AddByFilter(defs, PieceTypeFilter.Mine, new AnimationDef
+        {
+            OnDestroyFromBoard = R.DestroyScaleMineAnimation
+        });
+        
         AddByFilter(defs, PieceTypeFilter.Chest, new AnimationDef
         {
             OnPurchaseSpawn = R.MultiSpawnChestAnimation,
