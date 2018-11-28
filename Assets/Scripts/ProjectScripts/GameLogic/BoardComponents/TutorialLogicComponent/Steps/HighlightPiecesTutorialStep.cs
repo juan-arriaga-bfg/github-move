@@ -87,8 +87,8 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
         
         var center = BoardPosition.GetCenter(best);
         var centerPos = Context.Context.BoardDef.GetPiecePosition(center.X, center.Y);
-        
-        Context.Context.Manipulator.CameraManipulator.MoveTo(centerPos);
+
+        if (Context.Context.Manipulator.CameraManipulator.CameraMove.IsLocked == false) Context.Context.Manipulator.CameraManipulator.MoveTo(centerPos);
     }
     
     public override bool IsExecuteable()

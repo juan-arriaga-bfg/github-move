@@ -72,61 +72,75 @@ public class MagicPieceView : PieceBoardElementView
         // return currentBestPieces;
         
         var entities = board.BoardLogic.BoardEntities;
-        if (entities == null)
-            return new List<Piece>();
+        
+        if (entities == null) return new List<Piece>();
 
         var matchCheckedPositions = new Dictionary<BoardPosition, bool>();
-        
-        float currentBestScore = 0;
+        var options = new List<KeyValuePair<int, List<BoardPosition>>>();
+        var bestScore = 0;
         
         foreach (var piece in entities.Values)
         {   
             var isMatchable = piece.Matchable?.IsMatchable();
             
-            if (isMatchable != true || matchCheckedPositions.ContainsKey(piece.CachedPosition))
-                continue;
+            if (isMatchable != true || matchCheckedPositions.ContainsKey(piece.CachedPosition)) continue;
 
-            bool canCreateMatch = false;
-           
+            var canCreateMatch = false;
             var positions = new List<BoardPosition>();
+            
             canCreateMatch = CheckMatch(board, Piece.CachedPosition, piece.CachedPosition, positions);
+
+            positions.Remove(Piece.CachedPosition);
 
             foreach (var position in positions)
             {
-                if (matchCheckedPositions.ContainsKey(position))
-                    continue;
+                if (matchCheckedPositions.ContainsKey(position)) continue;
+                
                 matchCheckedPositions.Add(position, canCreateMatch);
             }
-
-
-            if(canCreateMatch == false)
-                continue;
-
+            
+            if(canCreateMatch == false) continue;
+            
             var score = CalcScore(piece, positions);
-            if (score > currentBestScore)
-            {
-                currentBestScore = score;
-                currentBestPieces = new List<Piece>();
-                foreach (var pos in positions)
-                {
-                    currentBestPieces.Add(board.BoardLogic.GetPieceAt(pos));
-                }
-            }
+            
+            if (bestScore < score) bestScore = score;
+
+            options.Add(new KeyValuePair<int, List<BoardPosition>>(score, positions));
+        }
+
+        options = options.FindAll(pair => pair.Key == bestScore);
+        
+        var immediate = new List<BoardPosition>();
+        
+        foreach (var option in options)
+        {
+            immediate.AddRange(Piece.CachedPosition.GetImmediate(option.Value));
+        }
+        
+        var best = Piece.CachedPosition.GetImmediate(immediate)[0];
+        var bestOption = options.Find(pair => pair.Value.Contains(best)).Value;
+        
+        bestOption.Add(Piece.CachedPosition);
+        
+        foreach (var pos in bestOption)
+        {
+            currentBestPieces.Add(board.BoardLogic.GetPieceAt(pos));
         }
         
         return currentBestPieces;
     }
 
-    private float CalcScore(Piece piece, List<BoardPosition> matchPositions)
+    private int CalcScore(Piece piece, List<BoardPosition> matchPositions)
     {
-        var chain = GetChain(piece);
+        var chain = Context.Context.BoardLogic.MatchDefinition.GetChain(piece.PieceType);
         var length = chain.Count;
-        var lengthFactor = 0.5f;
+        const float lengthFactor = 0.5f;
         var position = chain.IndexOf(piece.PieceType);
-        var positionFactor = 2;
+        const int positionFactor = 2;
         var matchLength = matchPositions.Count;
-        var matchLengthFactor = 0.001f;
-        return length * lengthFactor + position * positionFactor + matchLength * matchLengthFactor;
+        const float matchLengthFactor = 0.001f;
+        
+        return (int)((length * lengthFactor + position * positionFactor + matchLength * matchLengthFactor) * 1000);
     }
     
     private bool CheckMatch(BoardController board, BoardPosition from, BoardPosition to, List<BoardPosition> positions)
@@ -139,15 +153,6 @@ public class MagicPieceView : PieceBoardElementView
         int nextId;
         
         return logic.FieldFinder.Find(to, positions, out currentId) && logic.MatchActionBuilder.CheckMatch(positions, currentId, to, out nextId);
-    }
-
-    private List<int> GetChain(Piece piece)
-    {
-        var board = Context.Context;
-        var chain = board.BoardLogic.MatchDefinition?.GetChain(piece.PieceType);
-        if (chain == null)
-            return new List<int>();
-        return chain;
     }
 
     public override void OnDragEnd(BoardPosition boardPos, Vector2 worldPos)

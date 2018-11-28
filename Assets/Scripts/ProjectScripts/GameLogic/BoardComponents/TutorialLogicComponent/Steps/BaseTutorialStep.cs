@@ -1,6 +1,4 @@
-﻿using System;
-
-public class BaseTutorialStep : ECSEntity
+﻿public class BaseTutorialStep : ECSEntity
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
@@ -11,11 +9,13 @@ public class BaseTutorialStep : ECSEntity
 	public TutorialLogicComponent Context;
 	
 	private bool isStart;
+	
 	public bool IsPerform;
 	public bool IsIgnoreUi;
+	public bool IsIgnoreDev = true;
 
-	public bool isAnyStartCondition;
-	public bool isAnyCompleteCondition;
+	public bool IsAnyStartCondition;
+	public bool IsAnyCompleteCondition;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
@@ -66,7 +66,11 @@ public class BaseTutorialStep : ECSEntity
 		if (IsPerform == false) return false;
 		
 		isComplete = Check(TutorialConditionType.Complete);
-			
+		
+#if DEBUG
+		if (isComplete == false && IsIgnoreDev) isComplete = !DevTools.IsTutorialEnabled();
+#endif
+		
 		if (isComplete) Complete();
 		
 		return isComplete;
@@ -104,10 +108,10 @@ public class BaseTutorialStep : ECSEntity
 		switch (type)
 		{
 			case TutorialConditionType.Start:
-				isAny = isAnyStartCondition;
+				isAny = IsAnyStartCondition;
 				break;
 			case TutorialConditionType.Complete:
-				isAny = isAnyCompleteCondition;
+				isAny = IsAnyCompleteCondition;
 				break;
 		}
 		

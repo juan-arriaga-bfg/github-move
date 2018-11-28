@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using Quests;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class DailyQuestButton : IWUIWindowViewController
 {
-    [IWUIBinding("#(!)")] private Image markIcon;
-    [IWUIBinding("#(!)")] private Transform exclamationMark;
-    [IWUIBinding("#Shine")] private Transform shine;
+    [IWUIBinding("#(v)")] private GameObject checkMark;
+    [IWUIBinding("#(!)")] private GameObject exclamationMark;
+    [IWUIBinding("#Shine")] private GameObject shine;
     [IWUIBinding("#ProgressLabel")] private NSText progressLabel;
+    [IWUIBinding("#Progress")] private GameObject progressHost;
     
     private bool inited;
 
@@ -79,7 +81,11 @@ public class DailyQuestButton : IWUIWindowViewController
         progressLabel.Text = GetQuestProgress(dailyQuest);
 
         int notClaimedCount = dailyQuest.CompletedButNotClaimedTasksCount();
-        exclamationMark.gameObject.SetActive(notClaimedCount > 0);
+       
+        checkMark.SetActive(notClaimedCount > 0);
+        shine.SetActive(notClaimedCount > 0);
+        
+        exclamationMark.SetActive(dailyQuest.State == TaskState.New);
     }
     
     public static string GetQuestProgress(QuestEntity quest, int currentValueFontSize = 33, string currentValueColor = "FE4704")

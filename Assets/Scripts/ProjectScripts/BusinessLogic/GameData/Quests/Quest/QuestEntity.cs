@@ -119,8 +119,13 @@ public class QuestEntity : ECSEntity, IECSSerializeable
     {
         return State == TaskState.Claimed;
     }
+    
+    public bool IsCompleted()
+    {
+        return State == TaskState.Completed;
+    }
 
-    private void UpdateState()
+    protected virtual void UpdateState()
     {
         if (IsInProgress())
         {
@@ -128,7 +133,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
             
             foreach (var task in Tasks)
             {
-                isAllTasksCompleted = isAllTasksCompleted && (task.State == TaskState.Completed || task.State == TaskState.Claimed);
+                isAllTasksCompleted = isAllTasksCompleted && task.IsCompletedOrClaimed();
 
                 if (task.State == TaskState.InProgress && State == TaskState.New)
                 {
@@ -292,6 +297,23 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         }
         
         State = TaskState.Claimed;
+        
+        OnChanged?.Invoke(this, null);
+    }
+    
+    public void SetInProgressState()
+    {
+        if (State == TaskState.InProgress)
+        {
+            return;
+        }
+        
+        if (State != TaskState.New && State != TaskState.Pending)
+        {
+            throw new ArgumentException($"Can't set InProgress state when quest is in '{State}' state!");
+        }
+        
+        State = TaskState.InProgress;
         
         OnChanged?.Invoke(this, null);
     }

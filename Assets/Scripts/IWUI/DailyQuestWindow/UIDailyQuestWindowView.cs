@@ -1,12 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Quests;
 using UnityEngine.UI;
 
 public class UIDailyQuestWindowView : UIGenericPopupWindowView 
 {
     [IWUIBinding("#TaskList")] private UIContainerViewController taskList;
-    [IWUIBinding("#TimerLabel")] private NSText timerLabel;
+    [IWUIBinding("#MainTimerLabel")] private NSText mainTimerLabel;
+    [IWUIBinding("#SecondaryTimerLabel")] private NSText secondaryTimerLabel;
     [IWUIBinding("#ComeBackPanel")] private GameObject comeBackPanel;
     [IWUIBinding("#ComeBackLabel")] private NSText comeBackLabel;
     [IWUIBinding("#MainTimer")] private GameObject mainTimer;
@@ -17,17 +19,33 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         
         UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
 
-        bool isQuestCompleted = model.Quest.IsCompletedOrClaimed();
+        bool isQuestClaimed = model.Quest.IsClaimed();
         
         SetTitle(model.Title);
 
         CreateTaskList(model);
         
         model.Timer.OnExecute += OnTimerUpdate;
+       
+        model.Quest.OnChanged += OnQuestChanged;
 
-        model.Quest.Immortal = !isQuestCompleted;
+        model.Quest.Immortal = !isQuestClaimed;
 
-        ToggleComebackPanel(isQuestCompleted);
+        // To hide (!) from button at the main window
+        if (model.Quest.State == TaskState.New)
+        {
+            model.Quest.SetInProgressState();
+        }
+        
+        ToggleComebackPanel(isQuestClaimed);
+    }
+
+    private void OnQuestChanged(QuestEntity quest, TaskEntity task)
+    {
+        if (quest.IsClaimed())
+        {
+            ToggleComebackPanel(true); 
+        }
     }
 
     public override void OnViewClose()
@@ -35,7 +53,10 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         base.OnViewClose();
         
         UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
+        
         model.Timer.OnExecute -= OnTimerUpdate;
+        
+        model.Quest.OnChanged -= OnQuestChanged;
         
         model.Quest.Immortal = false;
 
@@ -128,7 +149,12 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
     {
         UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
         
-        timerLabel.Text = model.Timer.CompleteTime.GetTimeLeftText(false, null, model.Timer.UseUTC);
+        mainTimerLabel.Text = model.Timer.CompleteTime.GetTimeLeftText(false, null, model.Timer.UseUTC);
+
+        if (comeBackPanel.activeSelf)
+        {
+            secondaryTimerLabel.Text = model.Timer.CompleteTime.GetTimeLeftText(false, null, model.Timer.UseUTC);
+        }
     }
 
     private void ToggleComebackPanel(bool isQuestCompleted)
@@ -137,5 +163,6 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         
         comeBackPanel.SetActive(isQuestCompleted);
         comeBackLabel.Text = LocalizationService.Get("window.daily.quest.message.all.cleared", "window.daily.quest.message.all.cleared");
+        taskList.gameObject.SetActive(!isQuestCompleted);
     }
 }

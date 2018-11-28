@@ -91,7 +91,7 @@ public class UICharacterBubbleMessageViewController : UICharacterBubbleView, ITe
     {
         UICharacterDef charDef = UiCharacterData.GetDef(data.CharacterId);
         headerBack.color = charDef.Color;
-        header.Text = charDef.Name;
+        header.Text = LocalizationService.Get(charDef.Name, charDef.Name);
     }
 
     public override void Hide(bool animated, Action onComplete)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DG.Tweening;
+using Quests;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,13 +26,33 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         
         targetEntity = entity as UIDailyQuestTaskElementEntity;
 
-        Init(targetEntity.Task);
+        task = targetEntity.Task;
+        
+        targetEntity.Task.OnChanged += OnTaskChanged; 
+        
+        UpdateUi();
     }
-    
-    public void Init(TaskEntity task)
-    {
-        this.task = task;
 
+    private void OnTaskChanged(TaskEntity task)
+    {
+        if (task.State != TaskState.Claimed)
+        {
+            UpdateUi();
+        }
+    }
+
+    public override void OnViewClose(IWUIWindowView context)
+    {
+        if (targetEntity != null)
+        {
+            targetEntity.Task.OnChanged -= OnTaskChanged;
+        }
+
+        base.OnViewClose(context);
+    }
+
+    public void UpdateUi()
+    {
         taskButton.interactable = !task.IsClaimed();
         taskButtonLabel.Text = GetTextForButton(task);
 
@@ -39,7 +60,10 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         lblProgress.Text = UiQuestButton.GetTaskProgress(task);
         
-        lblDescription.Text = $"<color=#D2D2D2><size=25>[{task.Group} - {task.Id.ToLower()}]</size></color> " + task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
+        // lblDescription.Text = $"<color=#D2D2D2><size=25>[{task.Group} - {task.Id.ToLower()}]</size></color> " + task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
+
+        string key = task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
+        lblDescription.Text = LocalizationService.Get(key, key) ;
 
         lblReward.Text = GetRewardAsText();
         

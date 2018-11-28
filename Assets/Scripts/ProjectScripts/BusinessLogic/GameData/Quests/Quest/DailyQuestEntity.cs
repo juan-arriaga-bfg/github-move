@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Quests;
 using UnityEngine;
 
 public class DailyQuestEntity : QuestEntity
@@ -109,5 +110,55 @@ public class DailyQuestEntity : QuestEntity
         
         base.StartActiveTasks();
 
+    }
+    
+    protected override void UpdateState()
+    {
+        if (IsInProgress())
+        {
+            bool isAllTasksCompleted = true;
+            
+            foreach (var task in ActiveTasks)
+            {
+                isAllTasksCompleted = isAllTasksCompleted && task.IsCompletedOrClaimed();
+
+                if (task.State == TaskState.InProgress && State == TaskState.New)
+                {
+                    State = TaskState.InProgress;
+                }
+            }
+
+            if (isAllTasksCompleted)
+            {
+                State = TaskState.Completed;
+            }
+        } 
+        else if (IsCompleted())
+        {
+            bool isAllTasksClaimed = true;
+            
+            foreach (var task in ActiveTasks)
+            {
+                isAllTasksClaimed = isAllTasksClaimed && task.IsClaimed();
+            }
+
+            if (isAllTasksClaimed)
+            {
+                State = TaskState.Claimed;
+            }
+        }
+    }
+
+    public bool IsAllTasksClaimed()
+    {
+        foreach (var task in ActiveTasks)
+        {
+            if (!task.IsClaimed())
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
