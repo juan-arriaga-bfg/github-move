@@ -43,7 +43,6 @@ public partial class BoardRenderer : ECSEntity
     {
         get { return viewRoot; }
     }
-    
 
     public virtual BoardResourcesDef GameBoardResourcesDef
     {
@@ -1024,6 +1023,11 @@ public partial class BoardRenderer : ECSEntity
     public virtual List<BoardAnimation> GetPerformingAnimations()
     {
         return performingAnimationsQueue;
+    }
+    
+    public virtual List<BoardAnimation> GetAnimationsQueue()
+    {
+        return animationsQueue;
     }
 
     public virtual void CompleteAnimation(BoardAnimation animation)

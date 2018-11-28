@@ -4,6 +4,8 @@ using UnityEngine;
 public class CollapsePieceToAnimation : BoardAnimation
 {
 	public CollapsePieceToAction Action { get; set; }
+
+    public float Delay = 0f;
 	
 	public override void Animate(BoardRenderer context)
 	{
@@ -18,8 +20,8 @@ public class CollapsePieceToAnimation : BoardAnimation
 			
 			boardElement.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
 			
-			sequence.Insert(0, boardElement.CachedTransform.DOMove(new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.4f).SetEase(Ease.OutBack));
-			sequence.Insert(0.2f, boardElement.CachedTransform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack));
+			sequence.Insert(0 + Delay, boardElement.CachedTransform.DOMove(new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.4f).SetEase(Ease.OutBack));
+			sequence.Insert(0.2f + Delay, boardElement.CachedTransform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack));
 		}
 		
 		sequence.OnComplete(() =>

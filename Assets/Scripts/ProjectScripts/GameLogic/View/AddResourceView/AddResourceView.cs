@@ -44,12 +44,12 @@ public class AddResourceView : BoardElementView
 		amountLabel.TextLabel.color = new Color(tColor.r, tColor.g, tColor.b, 0);
 	}
 
-	public static void Show(Vector3 position, CurrencyPair resource)
+	public static void Show(Vector3 position, CurrencyPair resource, float delay = 0f)
 	{
 		var board = BoardService.Current.GetBoardById(0);
 		var from = board.BoardDef.GetSectorPosition(position);
 		
-		Show(from, resource);
+		Show(from, resource, delay);
 	}
 
 	public static void Show(BoardPosition position, List<CurrencyPair> resource)
@@ -63,7 +63,7 @@ public class AddResourceView : BoardElementView
 		}
 	}
 
-	public static void Show(BoardPosition position, CurrencyPair resource)
+	public static void Show(BoardPosition position, CurrencyPair resource, float delay = 0f)
 	{
 		if (resource == null) return;
 		
@@ -78,12 +78,16 @@ public class AddResourceView : BoardElementView
 		{
 			var from = board.BoardDef.GetPiecePosition(position.X, position.Y);
 
-			CurrencyHellper.Purchase(
+			var transaction = CurrencyHellper.PurchaseAsync(
 				resource,
 				null,
 				board.BoardDef.ViewCamera.WorldToScreenPoint(from));
 			
-			DOTween.Sequence().InsertCallback(0.5f, () => ShowCounter(board, position, resource));
+			DOTween.Sequence().InsertCallback(0.5f + delay, () =>
+			{
+			    transaction.Complete();
+			    ShowCounter(board, position, resource);
+			});
 			
 			return;
 		}

@@ -207,8 +207,6 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
 
     protected virtual void Confirm(BoardPosition position)
     {
-        CollapsePieceAt(position);
-
         if (cachedRemoverView != null) cachedRemoverView.Animator.SetTrigger(cachedApplyAnimationId);
         
         if (cachedRemoverView != null) cachedRemoverView.ToggleSelection(false);
@@ -217,6 +215,10 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
 
         DOTween.Kill(this);
         var sequence = DOTween.Sequence().SetId(this);
+        sequence.InsertCallback(1f, () =>
+        {
+            CollapsePieceAt(position);
+        });
         sequence.AppendInterval(2f);
         sequence.OnComplete(() =>
         {

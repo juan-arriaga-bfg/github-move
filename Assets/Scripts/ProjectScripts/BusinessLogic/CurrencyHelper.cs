@@ -26,6 +26,11 @@ public static class CurrencyHellper
         return Purchase(product, new CurrencyPair{Currency = Currency.Cash.Name, Amount = 0}, onSuccess, flyPosition);
     }
     
+    public static ShopItemTransaction PurchaseAsync(CurrencyPair product, Action<bool> onSuccess = null, Vector3? flyPosition = null)
+    {
+        return PurchaseAsync(product, new CurrencyPair{Currency = Currency.Cash.Name, Amount = 0}, onSuccess, flyPosition);
+    }
+    
     public static List<ShopItemTransaction> PurchaseAsync(List<CurrencyPair> products, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
         var transactions = new List<ShopItemTransaction>();
@@ -95,6 +100,11 @@ public static class CurrencyHellper
     public static ShopItemTransaction Purchase(CurrencyPair product, CurrencyPair price, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
         return Purchase(product.Currency, product.Amount, price.Currency, price.Amount, onSuccess, flyPosition);
+    }
+    
+    public static ShopItemTransaction PurchaseAsync(CurrencyPair product, CurrencyPair price, Action<bool> onSuccess = null, Vector3? flyPosition = null)
+    {
+        return PurchaseAsync(product.Currency, product.Amount, price.Currency, price.Amount, onSuccess, flyPosition);
     }
     
     public static ShopItemTransaction Purchase(string product, int amountProduct, string price, int amountPrice, Action<bool> onSuccess = null, Vector3? flyPosition = null)

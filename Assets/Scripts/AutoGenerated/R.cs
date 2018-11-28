@@ -174,4 +174,5 @@ public class R
      public const string ProductionProcessParticle = "ProductionProcessParticle";
      public const string ProductionReadyParticle = "ProductionReadyParticle";
      public const string FogDefaultMaterial = "FogDefaultMaterial";
+     public const string PiecesUnderFogMaterial = "PiecesUnderFogMaterial";
 }

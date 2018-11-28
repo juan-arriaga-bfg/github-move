@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
@@ -10,6 +11,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     private LockView lockView;
     private BubbleView bubble;
     public BoardPosition Key { get; private set; }
+    
+    
     
     public RectTransform GetAnchorRect()
     {
@@ -49,6 +52,15 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         base.OnAddToBoard(position, context);
         
         GameDataService.Current.FogsManager.RegisterFogObserver(this);
+
+        PrepareFogToClear();
+    }
+
+    public virtual void PrepareFogToClear()
+    {
+        if (!CanBeCleared()) return;
+        
+        
     }
 
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
@@ -76,56 +88,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
     public void Clear()
     {
-        if(Def == null) return;
         
-        Debug.Log($"[FogObserver] => Clear fog with uid: {Def.Uid}");
-                
-        AddResourceView.Show(Def.GetCenter(Context.Context), Def.Reward);
-        GameDataService.Current.FogsManager.RemoveFog(Key);
-        
-        if(Def.Pieces != null)
-        {
-            foreach (var piece in Def.Pieces)
-            {
-                foreach (var pos in piece.Value)
-                {
-                    var pieceId = GameDataService.Current.MinesManager.GetMineTypeById(piece.Key);
-
-                    if (pieceId == PieceType.None.Id)
-                    {
-                        pieceId = PieceType.Parse(piece.Key);
-                    }
-                    
-                    Context.Context.ActionExecutor.AddAction(new CreatePieceAtAction
-                    {
-                        At = pos,
-                        PieceTypeId = pieceId
-                    });
-                }
-            }
-        }
-        
-        var weights = Def.PieceWeights == null || Def.PieceWeights.Count == 0
-            ? GameDataService.Current.FogsManager.DefaultPieceWeights
-            : Def.PieceWeights;
-        
-        foreach (var point in Mask)
-        {
-            var piece = ItemWeight.GetRandomItem(weights).Piece;
-            
-            if(piece == PieceType.Empty.Id) continue;
-            
-            Context.Context.ActionExecutor.AddAction(new CreatePieceAtAction
-            {
-                At = point,
-                PieceTypeId = piece
-            });
-        }
-        
-        Context.Context.ActionExecutor.AddAction(new CallbackAction
-        {
-            Callback = controller => controller.TutorialLogic.Update()
-        });
     }
     
     public void RegisterCarrier(IResourceCarrier carrier)
@@ -181,6 +144,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         bubble.Change(true);
         
         Context.Context.HintCooldown.AddView(bubble);
+
+        PrepareFogToClear();
     }
     
     public string GetResourceId()
@@ -238,10 +203,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
             bubble.OnHide = () =>
             {
-                piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+                piece.Context.ActionExecutor.AddAction(new CollapseFogToAction
                 {
                     To = piece.CachedPosition,
                     Positions = new List<BoardPosition> {piece.CachedPosition},
+                    FogObserver = this,
                     OnComplete = () =>
                     {
                         DevTools.UpdateFogSectorsDebug();
