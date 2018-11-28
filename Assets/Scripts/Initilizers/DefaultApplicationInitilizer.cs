@@ -65,54 +65,63 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         
         ShopService.Instance.SetManager(shopManager);
 
+        // load local base profile
         ProfileService.Instance.Manager.LoadBaseProfile((baseProfile) =>
         {
-            if (profileManager.SystemVersion > baseProfile.SystemVersion)
+            // condition to reset profile
+            if (baseProfile == null || profileManager.SystemVersion > baseProfile.SystemVersion)
             {
                 var profileBuilder = new DefaultProfileBuilder();
                 ProfileService.Instance.Manager.ReplaceProfile(profileBuilder.Create());
+
+                LoadConfigsAndManagersAfterProfile();
             }
             else
             {
                 // load local profile
+                
                 ProfileService.Instance.Manager.LoadCurrentProfile((profile) =>
                 {
-                    new DefaultProfileBuilder().SetupComponents(profile);
-
-                    if (profileManager.SystemVersion > profile.SystemVersion)
+                    if (profile == null)
                     {
                         var profileBuilder = new DefaultProfileBuilder();
                         ProfileService.Instance.Manager.ReplaceProfile(profileBuilder.Create());
                     }
-            
-                    ProfileService.Instance.Manager.CheckMigration();
-                    
-                    LocalizationManager localizationManager = new BaseLocalizationManager();
-                    LocalizationService.Instance.SetManager(localizationManager);
-                    localizationManager.SupportedLanguages = NSLocalizationSettings.Instance.SupportedLanguages;
-
-                    if (localizationManager.IsLanguageSupported(ProfileService.Current.Settings.Language))
-                    {
-                        localizationManager.SwitchLocalization(ProfileService.Current.Settings.Language);
-                    }
                     else
                     {
-                        ProfileService.Current.Settings.Language = SystemLanguage.English.ToString();
-                        localizationManager.SwitchLocalization(ProfileService.Current.Settings.Language);
+                        new DefaultProfileBuilder().SetupComponents(profile);
+                        ProfileService.Instance.Manager.CheckMigration();
                     }
+                    
+                    LoadConfigsAndManagersAfterProfile();
                 });
             }
         });
-        
 
-        
         // gamedata configs
         GameDataManager dataManager = new GameDataManager();
         GameDataService.Instance.SetManager(dataManager);
         
         dataManager.SetupComponents();
     }
-    
+
+    public virtual void LoadConfigsAndManagersAfterProfile()
+    {         
+        LocalizationManager localizationManager = new BaseLocalizationManager();
+        LocalizationService.Instance.SetManager(localizationManager);
+        localizationManager.SupportedLanguages = NSLocalizationSettings.Instance.SupportedLanguages;
+
+        if (localizationManager.IsLanguageSupported(ProfileService.Current.Settings.Language))
+        {
+            localizationManager.SwitchLocalization(ProfileService.Current.Settings.Language);
+        }
+        else
+        {
+            ProfileService.Current.Settings.Language = SystemLanguage.English.ToString();
+            localizationManager.SwitchLocalization(ProfileService.Current.Settings.Language);
+        }
+    }
+
     void OnApplicationPause(bool pauseStatus)
     {
         if (pauseStatus)
