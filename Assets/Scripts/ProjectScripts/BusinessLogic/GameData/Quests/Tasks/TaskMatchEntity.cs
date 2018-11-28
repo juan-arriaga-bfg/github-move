@@ -2,7 +2,8 @@ using Newtonsoft.Json;
 using Quests;
 using UnityEngine;
 
-public class TaskMatchEntity : TaskCounterAboutPiece, IBoardEventListener, IHavePieceId
+[TaskHighlight(typeof(HighlightTaskNotImplemented))]
+public class TaskMatchEntity : TaskCounterAboutPiece, IBoardEventListener
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -36,7 +37,7 @@ public class TaskMatchEntity : TaskCounterAboutPiece, IBoardEventListener, IHave
             return;
         }
 
-        if (PieceId == PieceType.None.Id || matchDescr.SourcePieceType == PieceId)
+        if (PieceId == PieceType.None.Id || PieceId == PieceType.Empty.Id ||matchDescr.SourcePieceType == PieceId)
         {
             CurrentValue += 1;
         }

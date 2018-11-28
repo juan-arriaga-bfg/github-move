@@ -6,64 +6,74 @@ using UnityEngine;
 public class CollapseFogToAnimation : BoardAnimation
 {
     public CollapseFogToAction Action { get; set; }
-	
+    
+    protected List<BoardElementView> fogElements = new List<BoardElementView>();
+
+    protected FogPieceView fogPieceView;
+
+    public override void PrepareAnimation(BoardRenderer context)
+    {
+        var points = Action.Positions;
+        
+        fogPieceView = context.GetElementAt(points[0]) as FogPieceView;
+        
+        fogElements.Clear();
+        foreach (var point in points)
+        {
+            fogElements.Add(context.RemoveElementAt(point, false));
+        }
+    }
+
     public override void Animate(BoardRenderer context)
     {
         var points = Action.Positions;
         var to = context.Context.BoardDef.GetPiecePosition(Action.To.X, Action.To.Y);
 		
         var sequence = DOTween.Sequence().SetId(animationUid);
-		
-        var boardElement = context.GetElementAt(points[0]) as FogPieceView;
 
-        if (boardElement == null)
+        if (fogPieceView == null)
         {
             CompleteAnimation(context);
             return;
         }
             
-        boardElement.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
+        fogPieceView.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
 
-        var fogMaterial = boardElement.GetExistingCustomMaterial(BoardElementMaterialType.FogDefaultMaterial, boardElement);
+        var fogMaterial = fogPieceView.GetExistingCustomMaterial(BoardElementMaterialType.FogDefaultMaterial, fogPieceView);
 
         if (fogMaterial != null)
         {
             sequence.Insert(0f, fogMaterial.DOFloat(0f, "_AlphaCoef", 0.5f));
         }
         
-        var fakePiecesFogMaterial = boardElement.GetExistingCustomMaterial(BoardElementMaterialType.PiecesUnderFogMaterial, boardElement);
+        var fakePiecesFogMaterial = fogPieceView.GetExistingCustomMaterial(BoardElementMaterialType.PiecesUnderFogMaterial, fogPieceView);
         
         if (fakePiecesFogMaterial != null)
         {
             sequence.Insert(0f, fakePiecesFogMaterial.DOFloat(0f, "_AlphaCoef", 0.5f));
         }
         
-        for (int i = 0; i < boardElement.FakePieces.Count; i++)
+        for (int i = 0; i < fogPieceView.FakePieces.Count; i++)
         {
-            var fakePiece = boardElement.FakePieces[i];
+            var fakePiece = fogPieceView.FakePieces[i];
             sequence.Insert(0f, fakePiece.CachedTransform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InSine));
         }
         
-        // foreach (var point in points)
-        // {
-        //     
-        // }
-
         // wait for spawn animation
         sequence.AppendInterval(1f);
 		
         sequence.OnComplete(() =>
         {
-            for (int i = 0; i < boardElement.FakePieces.Count; i++)
+            for (int i = 0; i < fogPieceView.FakePieces.Count; i++)
             {
-                var fakePiece = boardElement.FakePieces[i];
+                var fakePiece = fogPieceView.FakePieces[i];
                 context.Context.BoardLogic.DragAndDrop.DestroyFakePiece(fakePiece);
             }
-            boardElement.FakePieces.Clear();
+            fogPieceView.FakePieces.Clear();
 
-            foreach (var point in points)
+            foreach (var fogElement in fogElements)
             {
-                context.RemoveElementAt(point);
+                context.DestroyElement(fogElement);
             }
 
             CompleteAnimation(context);

@@ -495,8 +495,11 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
                     ActiveStoryQuests.Remove(quest);
                     FinishedQuests.Add(id);
                 }
-                
-                quest.DisconnectFromBoard();
+
+                if (ConnectedToBoard)
+                {
+                    quest.DisconnectFromBoard();
+                }
                 
                 quest.OnChanged -= OnQuestsStateChangedEvent;
                 

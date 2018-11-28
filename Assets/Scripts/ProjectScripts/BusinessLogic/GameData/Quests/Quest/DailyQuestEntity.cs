@@ -7,7 +7,7 @@ using UnityEngine;
 public class DailyQuestEntity : QuestEntity
 {
     // Set this to prevent QuestManager from replacing this instance on timer completion
-    public bool Immortal;
+    [JsonIgnore] public bool Immortal;
     
     private readonly Dictionary<TaskGroup, int> tasksCount = new Dictionary<TaskGroup, int>
     {
