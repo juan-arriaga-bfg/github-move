@@ -50,7 +50,7 @@ public class CollapseFogToAnimation : BoardAnimation
         // }
 
         // wait for spawn animation
-        sequence.AppendInterval(0.5f);
+        sequence.AppendInterval(1f);
 		
         sequence.OnComplete(() =>
         {

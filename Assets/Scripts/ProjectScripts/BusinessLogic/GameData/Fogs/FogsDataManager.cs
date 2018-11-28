@@ -79,6 +79,8 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
 
     public void RemoveFog(BoardPosition key)
     {
+        Debug.Log($"[FogsDataManager] => RemoveFog({key}");
+        
         if(VisibleFogPositions.ContainsKey(key) == false) return;
         
         ClearedFogPositions.Add(key, GetDef(key));
