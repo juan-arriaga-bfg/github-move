@@ -159,17 +159,28 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
         if (isAnimate)
         {
             fogMaterial.SetFloat("_ScaleCoef", 1f);
-            fogMaterial.DOFloat(0.8f, "_ScaleCoef", 3f);
+            fogMaterial.DOFloat(1f, "_ScaleCoef", 3f);
             fogMaterial.SetFloat("_AlphaCoef", 1f);
-            fogMaterial.DOFloat(0.8f, "_AlphaCoef", 3f);
+            fogMaterial.DOFloat(0.85f, "_AlphaCoef", 3f);
         }
         else
         {
-            fogMaterial.SetFloat("_ScaleCoef", 0.8f);
-            fogMaterial.SetFloat("_AlphaCoef", 0.8f);
+            fogMaterial.SetFloat("_ScaleCoef", 1f);
+            fogMaterial.SetFloat("_AlphaCoef", 0.85f);
         }
- 
         
+        for (var i = 0; i < fogSprites.Count; i++)
+        {
+            var sprite = fogSprites[i];
+            sprite.sprite = IconService.Current.GetSpriteById("fog_opacity_1");
+
+            var position = observer.Mask.Count > i ? observer.Mask[i] : currentPiece.CachedPosition;
+
+            sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + 1 * 100 - 1;
+            // sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + 101;
+        }
+        
+        // SyncRendererLayers(new BoardPosition(currentPiece.CachedPosition.X, currentPiece.CachedPosition.Y, 2));
     }
 
     public override void ToggleHighlight(bool enabled)

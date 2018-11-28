@@ -81,9 +81,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                 var fakePiece = Context.Context.BoardLogic.DragAndDrop.CreateFakePieceAt(pieceId, fakePos);
                 if (fakePiece != null)
                 {
+                    fakePiece.SyncRendererLayers(new BoardPosition(pos.X, pos.Y, 1));
+                    
                     var underFogMaterial = fakePiece.SetCustomMaterial(BoardElementMaterialType.PiecesUnderFogMaterial, true, this);
                     underFogMaterial.SetFloat("_AlphaCoef", 0f);
-                    underFogMaterial.DOFloat(1f, "_AlphaCoef", 2f);
+                    underFogMaterial.DOFloat(0.4f, "_AlphaCoef", 2f);
                     
                     fakePieces.Add(fakePiece);
                 }
