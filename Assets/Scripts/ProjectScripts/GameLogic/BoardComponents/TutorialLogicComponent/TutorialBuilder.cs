@@ -119,7 +119,7 @@ public static class TutorialBuilder
             }
             case 7: // tutorial 6 - create ingredient
             {
-                step = new SelectStorageTutorialStep {Delay = 5, Targets = new List<int>{PieceType.PR_A4.Id, PieceType.PR_B4.Id, PieceType.PR_C4.Id, PieceType.PR_D4.Id, PieceType.PR_E4.Id}};
+                step = new SelectStorageTutorialStep {Delay = 5, IsFastStart = true, Targets = new List<int>{PieceType.PR_A4.Id, PieceType.PR_B4.Id, PieceType.PR_C4.Id, PieceType.PR_D4.Id, PieceType.PR_E4.Id}};
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckCurrencyTutorialCondition{Target = -1, Currency = Currency.Worker.Name, ConditionType = TutorialConditionType.Complete}, true);
