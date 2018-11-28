@@ -64,7 +64,7 @@ public class TaskSuperMatchEntity : TaskCounterAboutPiece, IBoardEventListener
             return;
         }
 
-        if (PieceId != PieceType.None.Id && matchDescr.SourcePieceType != PieceId)
+        if (PieceId != PieceType.None.Id && PieceId != PieceType.Empty.Id && matchDescr.SourcePieceType != PieceId)
         {
             return;
         }
