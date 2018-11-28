@@ -72,7 +72,7 @@ public class RendererCachedMaterialsComponent : ECSEntity
         return targetMaterial;
     }
     
-    public Material GetMaterialForGroup(string uid, object groupTag)
+    public Material GetMaterialForGroup(string uid, object groupTag, bool isCreateIfNotExist = true)
     {
         if (cachedGroupsMaterials.ContainsKey(groupTag) == false)
         {
@@ -86,6 +86,11 @@ public class RendererCachedMaterialsComponent : ECSEntity
         if (groupMaterials.TryGetValue(uid, out targetMaterial))
         {
             return targetMaterial;
+        }
+
+        if (isCreateIfNotExist == false)
+        {
+            return null;
         }
 
         targetMaterial = ContentService.Current.GetObjectByName(uid) as Material;

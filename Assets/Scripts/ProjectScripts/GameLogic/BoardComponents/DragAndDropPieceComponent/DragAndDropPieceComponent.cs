@@ -108,6 +108,14 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
         if (fakeBoardElement != null)
         {
             fakeBoardElement.Init(context.Context.RendererContext, fakePiece);
+
+            var particleSystems = fakeBoardElement.GetComponentsInChildren<ParticleSystem>();
+            for (int i = 0; i < particleSystems.Length; i++)
+            {
+                var particleSystem = particleSystems[i];
+                var emission = particleSystem.emission;
+                emission.enabled = false;
+            }
         }
 
         return fakeBoardElement;
@@ -125,6 +133,14 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
 
     public virtual void DestroyFakePiece(PieceBoardElementView fakePieceView)
     {
+        var particleSystems = fakePieceView.GetComponentsInChildren<ParticleSystem>();
+        for (int i = 0; i < particleSystems.Length; i++)
+        {
+            var particleSystem = particleSystems[i];
+            var emission = particleSystem.emission;
+            emission.enabled = true;
+        }
+        
         fakePieceView.ToggleSelection(false);  
         context.Context.RendererContext.RemoveElement(fakePieceView);
     }

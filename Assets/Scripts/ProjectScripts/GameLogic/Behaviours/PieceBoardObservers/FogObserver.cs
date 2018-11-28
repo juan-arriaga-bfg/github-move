@@ -12,7 +12,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     private BubbleView bubble;
     public BoardPosition Key { get; private set; }
     
-    private List<PieceBoardElementView> fakePieces = new List<PieceBoardElementView>();
+    
     
     public RectTransform GetAnchorRect()
     {
@@ -60,37 +60,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     {
         if (!CanBeCleared()) return;
         
-        if (Def == null || Def.Pieces == null) return;
-            
-        if (fakePieces.Count > 0) return;
-            
-        foreach (var pieceDefs in Def.Pieces)
-        {
-            foreach (var pos in pieceDefs.Value)
-            {
-
-                var pieceUid = pieceDefs.Key;
-                var pieceId = GameDataService.Current.MinesManager.GetMineTypeById(pieceUid);
-
-                if (pieceId == PieceType.None.Id)
-                {
-                    pieceId = PieceType.Parse(pieceUid);
-                }
-
-                var fakePos = new BoardPosition(pos.X, pos.Y, 0);
-                var fakePiece = Context.Context.BoardLogic.DragAndDrop.CreateFakePieceAt(pieceId, fakePos);
-                if (fakePiece != null)
-                {
-                    fakePiece.SyncRendererLayers(new BoardPosition(pos.X, pos.Y, 1));
-                    
-                    var underFogMaterial = fakePiece.SetCustomMaterial(BoardElementMaterialType.PiecesUnderFogMaterial, true, this);
-                    underFogMaterial.SetFloat("_AlphaCoef", 0f);
-                    underFogMaterial.DOFloat(0.4f, "_AlphaCoef", 2f);
-                    
-                    fakePieces.Add(fakePiece);
-                }
-            }
-        }
+        
     }
 
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
@@ -118,62 +88,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
     public void Clear()
     {
-        if(Def == null) return;
         
-        Debug.Log($"[FogObserver] => Clear fog with uid: {Def.Uid}");
-                
-        AddResourceView.Show(Def.GetCenter(Context.Context), Def.Reward);
-        GameDataService.Current.FogsManager.RemoveFog(Key);
-        
-        if(Def.Pieces != null)
-        {
-            foreach (var piece in Def.Pieces)
-            {
-                foreach (var pos in piece.Value)
-                {
-                    var pieceId = GameDataService.Current.MinesManager.GetMineTypeById(piece.Key);
-
-                    if (pieceId == PieceType.None.Id)
-                    {
-                        pieceId = PieceType.Parse(piece.Key);
-                    }
-                    
-                    Context.Context.ActionExecutor.AddAction(new CreatePieceAtAction
-                    {
-                        At = pos,
-                        PieceTypeId = pieceId
-                    });
-                }
-            }
-        }
-        
-        var weights = Def.PieceWeights == null || Def.PieceWeights.Count == 0
-            ? GameDataService.Current.FogsManager.DefaultPieceWeights
-            : Def.PieceWeights;
-        
-        foreach (var point in Mask)
-        {
-            var piece = ItemWeight.GetRandomItem(weights).Piece;
-            
-            if(piece == PieceType.Empty.Id) continue;
-            
-            Context.Context.ActionExecutor.AddAction(new CreatePieceAtAction
-            {
-                At = point,
-                PieceTypeId = piece
-            });
-        }
-        
-        Context.Context.ActionExecutor.AddAction(new CallbackAction
-        {
-            Callback = controller => controller.TutorialLogic.Update()
-        });
-
-        foreach (var fakePiece in fakePieces)
-        {
-            Context.Context.BoardLogic.DragAndDrop.DestroyFakePiece(fakePiece);
-        }
-        fakePieces.Clear();
     }
     
     public void RegisterCarrier(IResourceCarrier carrier)
@@ -288,10 +203,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
             bubble.OnHide = () =>
             {
-                piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+                piece.Context.ActionExecutor.AddAction(new CollapseFogToAction
                 {
                     To = piece.CachedPosition,
                     Positions = new List<BoardPosition> {piece.CachedPosition},
+                    FogObserver = this,
                     OnComplete = () =>
                     {
                         DevTools.UpdateFogSectorsDebug();

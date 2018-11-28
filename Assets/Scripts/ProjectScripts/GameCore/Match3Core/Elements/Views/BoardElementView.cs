@@ -101,6 +101,19 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         }
     }
     
+    public virtual Material GetExistingCustomMaterial(string customMaterialId, object groupTag)
+    {
+        if (cachedRenderers == null || cachedRenderers.size <= 0)
+        {
+            CacheLayers();
+        }
+
+        var customMaterial = Context.MaterialsCache.GetMaterialForGroup(customMaterialId, groupTag, false);
+
+        return customMaterial;
+    }
+    
+    
     public virtual Material SetCustomMaterial(string customMaterialId, bool state, object groupTag)
     {
         if (cachedRenderers == null || cachedRenderers.size <= 0)

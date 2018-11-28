@@ -16,8 +16,12 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 	private readonly List<SpriteRenderer> fogSprites = new List<SpriteRenderer>();
 	private FogObserver observer;
     private Piece currentPiece;
+    
+    private List<PieceBoardElementView> fakePieces = new List<PieceBoardElementView>();
 
     private readonly object HIGHLIGHT_ANIMATION_ID = new ViewAnimationUid();
+
+    public List<PieceBoardElementView> FakePieces => fakePieces;
     
 	public override void Init(BoardRenderer context, Piece piece)
 	{
@@ -92,6 +96,42 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
         if (observer.CanBeCleared())
         {
             ToggleReadyToClear(true, isAnimate);
+
+            var fogPiece = currentPiece.GetComponent<FogObserver>(FogObserver.ComponentGuid);
+            
+            if (fogPiece == null) return;
+            
+            if (fogPiece.Def == null || fogPiece.Def.Pieces == null) return;
+            
+            if (fakePieces.Count > 0) return;
+            
+            foreach (var pieceDefs in fogPiece.Def.Pieces)
+            {
+                foreach (var pos in pieceDefs.Value)
+                {
+
+                    var pieceUid = pieceDefs.Key;
+                    var pieceId = GameDataService.Current.MinesManager.GetMineTypeById(pieceUid);
+
+                    if (pieceId == PieceType.None.Id)
+                    {
+                        pieceId = PieceType.Parse(pieceUid);
+                    }
+
+                    var fakePos = new BoardPosition(pos.X, pos.Y, 0);
+                    var fakePiece = Context.Context.BoardLogic.DragAndDrop.CreateFakePieceAt(pieceId, fakePos);
+                    if (fakePiece != null)
+                    {
+                        fakePiece.SyncRendererLayers(new BoardPosition(pos.X, pos.Y, 1));
+                    
+                        var underFogMaterial = fakePiece.SetCustomMaterial(BoardElementMaterialType.PiecesUnderFogMaterial, true, this);
+                        underFogMaterial.SetFloat("_AlphaCoef", 0f);
+                        underFogMaterial.DOFloat(0.4f, "_AlphaCoef", 2f);
+                    
+                        fakePieces.Add(fakePiece);
+                    }
+                }
+            }
         }
     }
 
@@ -116,7 +156,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 		fogItem.SetActive(true);
 		touchItem.SetActive(true);
 		
-		observer.Clear();
+		// observer.Clear();
 	    
 	    Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
 	    Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.FogTap);
