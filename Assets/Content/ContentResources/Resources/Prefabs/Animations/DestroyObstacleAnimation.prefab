@@ -89,8 +89,9 @@ MonoBehaviour:
   startFromCurrentScale: 1
   from: {x: 1, y: 1, z: 1}
   to: {x: 0, y: 0, z: 0}
-  duration: 0.2
-  timeoutDuration: 0.2
+  duration: 0.3
+  timeoutDuration: 0.3
+  easeType: 27
 --- !u!198 &198372969572786066
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -25,11 +25,7 @@ public class UiQuestButtonArrow : MonoBehaviour
         
         if (this.quest != null && this.quest.State == TaskState.Pending)
         {
-            var action = new QueueActionComponent {Id = QUEUE_ACTION_ID}
-                        .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = UIWindowType.IgnoredWindows})
-                        .SetAction(AnimateNewArrow);
-
-            ProfileService.Current.QueueComponent.AddAction(action, true);
+            DefaultSafeQueueBuilder.BuildAndRun(QUEUE_ACTION_ID, true, AnimateNewArrow);
         }
         
         if (quest != null)
@@ -93,14 +89,14 @@ public class UiQuestButtonArrow : MonoBehaviour
     private void AnimateProgressArrow(int current, int target)
     {
         arrow.sprite = newSprite;
-        label.Text = LocalizationService.Instance.Manager.GetTextByUid("quest.arrow.progress", "Progress");
+        label.Text = LocalizationService.Get("quest.arrow.progress", "quest.arrow.progress");
         MovementAnimation();
     }
 
     private void AnimateNewArrow()
     {
         arrow.sprite = progressSprite;
-        label.Text = LocalizationService.Instance.Manager.GetTextByUid("quest.arrow.new", "New task");
+        label.Text = LocalizationService.Get("quest.arrow.new", "quest.arrow.new");
         MovementAnimation();
     }
 

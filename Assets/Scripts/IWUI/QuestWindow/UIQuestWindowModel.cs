@@ -24,11 +24,33 @@ public class UIQuestWindowModel : IWWindowModel
 
     private TaskEntity FirstTask => tasks[0];
     
-    public string Title => questDescription?.Title;
+    public string Title
+    {
+        get
+        {
+            string key = questDescription?.Title;
+            return LocalizationService.Get(key, key);
+        }
+    }
 
-    public string Message => questDescription?.Message;
+    public string Message
+    {
+        get
+        {
+            string key = questDescription?.Message;
+            return LocalizationService.Get(key, key);
+        }
+    }
 
-    public string Description => FirstTask.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
+    public string Description
+    {
+        get
+        {
+            
+            string key = FirstTask.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
+            return LocalizationService.Get(key, key);
+        }
+    }
 
     public Dictionary<int, int> PiecesReward;
     public List<CurrencyPair> CurrencysReward;
@@ -42,10 +64,10 @@ public class UIQuestWindowModel : IWWindowModel
                 case TaskState.Pending:
                 case TaskState.New:
                 case TaskState.InProgress:                                                                                              
-                    return LocalizationService.Instance.Manager.GetTextByUid("common.button.find", "Find");
+                    return LocalizationService.Get("common.button.find", "common.button.find");
 
                 case TaskState.Completed:
-                    return LocalizationService.Instance.Manager.GetTextByUid("common.button.claim", "Claim!");
+                    return LocalizationService.Get("common.button.claim", "common.button.claim");
 
                 case TaskState.Claimed:
                     break;
@@ -63,17 +85,7 @@ public class UIQuestWindowModel : IWWindowModel
         get
         {
             var task = FirstTask;
-            TaskCounterEntity counterTask = task as TaskCounterEntity;
-            if (counterTask == null)
-            {
-                return string.Empty;
-            }
-            
-            bool isCompleted = task.IsCompleted();
-            int  current     = counterTask.CurrentValue;
-            int  target      = counterTask.TargetValue;
-                
-            return $"<color=#{( isCompleted ? "FFFFFF" : "FE4704")}><size=55>{current}</size></color>/{target}";
+            return UiQuestButton.GetTaskProgress(task);
         }
     }
     
@@ -81,7 +93,7 @@ public class UIQuestWindowModel : IWWindowModel
     {
         get
         {
-            var str = string.Format(LocalizationService.Instance.Manager.GetTextByUid("common.message.reward", "Reward:{0}"), "");
+            var str = string.Format(LocalizationService.Get("common.message.reward", "common.message.reward:{0}"), "");
             var strBuilder = new StringBuilder($"<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>{str}</color></font> <size=50>");
             
             strBuilder.Append(CurrencyHellper.RewardsToString("  ", PiecesReward, CurrencysReward));
@@ -91,7 +103,7 @@ public class UIQuestWindowModel : IWWindowModel
         }
     }
 
-    public Sprite Icon => UiQuestButton.GetIcon(quest);
+    public Sprite Icon => UiQuestButton.GetIcon(FirstTask);
 
     public void InitReward()
     {

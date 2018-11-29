@@ -5,6 +5,8 @@ public class SelectStorageTutorialStep : DelayTutorialStep
 {
     public List<int> Targets;
     
+    public bool IsFastStart;
+    
     private HintArrowView arrow;
     private ChangeObstacleStateView bubble;
     
@@ -20,8 +22,9 @@ public class SelectStorageTutorialStep : DelayTutorialStep
         if (IsPerform) return;
         
         base.Perform();
-
+        
         Context.Context.HintCooldown.Pause(this);
+        if(IsFastStart) startTime = startTime.AddSeconds(-(Delay-0.5f));
     }
     
     public override void Execute()
@@ -44,7 +47,7 @@ public class SelectStorageTutorialStep : DelayTutorialStep
             
             if(positions.Count == 0) continue;
             
-            arrow = HintArrowView.Show(positions[0], 0, 0, true, true);
+            arrow = HintArrowView.Show(positions[0], 0, 0, !Context.Context.Manipulator.CameraManipulator.CameraMove.IsLocked, true);
             break;
         }
     }

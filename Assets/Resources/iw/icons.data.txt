@@ -1490,9 +1490,33 @@
   {
     "Uid": "icon_RemoveMark",
     "SpriteName": "icon_RemoveMark",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "clockButtonDailyObjectives",
+    "SpriteName": "clockButtonDailyObjectives",
     "BundleName": null,
-    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "icon_RemoveMark",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "AssetPath": "Assets/Content/UnprocessedContent/Sprites",
+    "SpriteSheetName": "clockButtonDailyObjectives",
+    "SpriteSheetPath": "Assets/Content/UnprocessedContent/Sprites"
+  },
+  {
+    "Uid": "removerScene",
+    "SpriteName": "removerScene",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/UnprocessedContent/Sprites",
+    "SpriteSheetName": "removerScene",
+    "SpriteSheetPath": "Assets/Content/UnprocessedContent/Sprites"
+  },
+  {
+    "Uid": "fog_opacity_1",
+    "SpriteName": "fog_opacity_1",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   }
 ]

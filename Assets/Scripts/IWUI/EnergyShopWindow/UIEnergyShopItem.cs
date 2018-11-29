@@ -21,7 +21,7 @@ public class UIEnergyShopItem : IWUIWindowViewController
         tr.SetParentAndReset(anchor);
         
         product.Text = $"+{def.Product.Amount}<size=35> <sprite name={def.Product.Currency}></size>";
-        price.Text = string.Format(LocalizationService.Instance.Manager.GetTextByUid("common.button.buy", "Buy {0}"), def.Price.ToStringIcon(false));
+        price.Text = string.Format(LocalizationService.Get("common.button.buy", "common.button.buy {0}"), def.Price.ToStringIcon(false));
     }
 
     public override void OnViewCloseCompleted()

@@ -1,13 +1,14 @@
-using UnityEngine;
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView 
 {
-    [SerializeField] private UIPiecesCheatSheetWindowItem itemPrefab;
+    [IWUIBinding("#Container")] private UIContainerViewController itemsPanel;
     
-    private List<UIPiecesCheatSheetWindowItem> items;
+    [IWUIBinding("#TabsContainer")] private UIContainerViewController tabsPanel;
     
+
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -15,7 +16,14 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
         UIPiecesCheatSheetWindowModel model = Model as UIPiecesCheatSheetWindowModel;
 
         SetTitle(model.Title);
+        
         CreateItems(model);
+        
+        ToggleVisabilityShowedWindows(false);
+        
+        var removerComponent = BoardService.Current.FirstBoard.BoardLogic.DragAndDrop;
+        removerComponent.OnBeginDragAndDropEvent += OnBeginDragAndDropEvent;
+        removerComponent.OnEndDragAndDropEvent += OnEndDragAndDropEvent;
     }
 
     public override void OnViewClose()
@@ -24,51 +32,88 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
         
         UIPiecesCheatSheetWindowModel model = Model as UIPiecesCheatSheetWindowModel;
         
-        foreach (var item in items)
-        {
-            Destroy(item.gameObject);
-        }
+        ToggleVisabilityShowedWindows(true);
         
+        var removerComponent = BoardService.Current.FirstBoard.BoardLogic.DragAndDrop;
+        removerComponent.OnBeginDragAndDropEvent -= OnBeginDragAndDropEvent;
+        removerComponent.OnEndDragAndDropEvent -= OnEndDragAndDropEvent;
+    }
+    
+    private void OnBeginDragAndDropEvent()
+    {
+        ToggleVisabilityWindow(false, this);
+    }
+    
+    private void OnEndDragAndDropEvent()
+    {
+        ToggleVisabilityWindow(true, this);
     }
     
     private void CreateItems(UIPiecesCheatSheetWindowModel model)
     {
-        var exclude = new HashSet<int>
+        var filters = Enum.GetValues(typeof(PieceTypeFilter)).Cast<PieceTypeFilter>().Select(x => Enum.GetName(typeof(PieceTypeFilter), x)).ToList();
+        FillTabs(filters, tabsPanel);
+        var tabsScrollRect = tabsPanel.GetScrollRect();
+        if (tabsScrollRect != null)
         {
-            0, 
-            -1,
-            1
-        };
-        
-        var matchDef = BoardService.Current.GetBoardById(0).BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
-        
-        itemPrefab.gameObject.SetActive(true);
-        
-        items = new List<UIPiecesCheatSheetWindowItem>();
-        var piecesList = model.PiecesList();
-
-        int prevChain = -1;
-        
-        foreach (var pieceId in piecesList)
+            tabsScrollRect.horizontalNormalizedPosition = 0f;
+        }
+    }
+    
+    public void FillTabs(List<string> entities, UIContainerViewController container)
+    {
+        if (entities == null || entities.Count <= 0)
         {
-            if (exclude.Contains(pieceId))
-            {
-                continue;
-            }
-            
-            var item = Instantiate(itemPrefab);
-            item.transform.SetParent(itemPrefab.transform.parent, false);
-
-            var chainDef = matchDef.GetChain(pieceId);
-            
-            var chain = chainDef != null && chainDef.Count > 0 ? chainDef[0] : 0;
-            // item.Init(chain == -1 || chain == prevChain ? pieceId : 0 ); 
-            item.Init(pieceId);
-            items.Add(item);
-
-            prevChain = chain;
+            container.Clear();
+            return;
         }
 
-        itemPrefab.gameObject.SetActive(false);
+        // update items
+        var views = new List<IUIContainerElementEntity>(entities.Count);
+        for (int i = 0; i < entities.Count; i++)
+        {
+            var def = entities[i];
+
+            var entity = new UITabContainerElementEntity
+            {
+                Uid = def,
+                TabLabel = def,
+                OnSelectEvent = (view) =>
+                {
+                    UIPiecesCheatSheetWindowModel model = Model as UIPiecesCheatSheetWindowModel;
+                    Fill(model.GetPieceIdsBy((PieceTypeFilter)Enum.Parse(typeof(PieceTypeFilter), view.Entity.Uid)), itemsPanel);
+                },
+                OnDeselectEvent = null
+            };
+            views.Add(entity);
+        }
+        container.Create(views);
+        container.Select(0);
+    }
+    
+    public void Fill(List<int> entities, UIContainerViewController container)
+    {
+        if (entities == null || entities.Count <= 0)
+        {
+            container.Clear();
+            return;
+        }
+
+        // update items
+        var views = new List<IUIContainerElementEntity>(entities.Count);
+        for (int i = 0; i < entities.Count; i++)
+        {
+            var def = entities[i];
+            
+            var entity = new UIPiecesCheatSheetElementEntity
+            {
+                PieceId = def,
+                OnSelectEvent = null,
+                OnDeselectEvent = null
+            };
+            views.Add(entity);
+        }
+        container.Create(views);
+        container.Select(0);
     }
 }

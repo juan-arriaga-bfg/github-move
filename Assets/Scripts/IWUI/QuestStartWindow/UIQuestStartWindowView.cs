@@ -121,6 +121,8 @@ public class UIQuestStartWindowView : IWUIWindowView
         if (model.QuestsToStart != null)
         {
             questCardsLayoutHelper.FixLayout();
+
+            var index = 0;
             
             // Create cards
             foreach (var quest in model.QuestsToStart)
@@ -130,9 +132,10 @@ public class UIQuestStartWindowView : IWUIWindowView
                     continue;
                 }
                 
-                UIQuestCard card = pool.Create<UIQuestCard>(questCardPrefab);
+                var card = pool.Create<UIQuestCard>(questCardPrefab);
                 card.gameObject.SetActive(true);
                 card.transform.SetParent(questCardPrefab.transform.parent, false);
+                card.transform.SetAsLastSibling();
                 card.Init(quest);
 
                 questCards.Add(card);
@@ -140,17 +143,19 @@ public class UIQuestStartWindowView : IWUIWindowView
                 cardsAdded = true;
 
                 // Animate
+                
                 var canvasGroup = card.GetCanvasGroup();
-                canvasGroup.alpha = 0;
-                canvasGroup.DOFade(1, ANIMATION_TIME)
-                           .SetEase(Ease.OutSine);
-
                 var finalScale = questCardPrefab.transform.localScale;
                 
+                var sequence = DOTween.Sequence().SetId(this);
+                
+                canvasGroup.alpha = 0;
                 card.transform.localScale = Vector3.zero;
-                card.transform.DOScale(finalScale, ANIMATION_TIME)
-                    .SetEase(Ease.OutElastic);
-
+                
+                sequence.Insert(0.1f * index, canvasGroup.DOFade(1, ANIMATION_TIME).SetEase(Ease.OutSine));
+                sequence.Insert(0.1f * index, card.transform.DOScale(finalScale, ANIMATION_TIME).SetEase(Ease.OutElastic));
+                
+                index++;
             }
 
             //questCardsLayoutHelper.FixLayoutAtTheNextFrame();

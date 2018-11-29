@@ -10,6 +10,7 @@ public class ScalePieceAnimationView : AnimationView
     [SerializeField] private Vector3 to = new Vector3(1, 1, 1);
     [SerializeField] private float duration = 0.2f;
     [SerializeField] private float timeoutDuration = 0.5f;
+    [SerializeField] private Ease easeType = Ease.Linear;
 
     protected PieceBoardElementView pieceView = null;
     
@@ -25,12 +26,13 @@ public class ScalePieceAnimationView : AnimationView
         if (scaleOnlyView)
         {
             var viewObj = pieceView.transform.Find("View");
-            sequence.Insert(0, viewObj.DOScale(to, duration));
+            sequence.Insert(0, viewObj.DOScale(to, duration)).SetEase(easeType);
         }
         else
         {
-            sequence.Insert(0, pieceView.transform.DOScale(to, duration));    
+            sequence.Insert(0, pieceView.transform.DOScale(to, duration)).SetEase(easeType);    
         }
+
         sequence.InsertCallback(timeoutDuration, () => OnComplete?.Invoke());
 
         this.pieceView = pieceView;

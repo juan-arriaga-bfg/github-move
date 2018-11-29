@@ -10,17 +10,32 @@ using Newtonsoft.Json.Linq;
 using Quests;
 using UnityEngine;
 
-public class QuestsDataManager : IECSComponent, IDataManager
+public sealed class QuestsDataManager : ECSEntity, IDataManager
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
-    public int Guid => ComponentGuid;
+    public override int Guid => ComponentGuid;
+
+    private const int DAILY_TIMER_DELAY = 24 * 60 * 60;
+    private const int DAILY_TIMER_START_OFFSET = 60 * 60;
+    // private const int SECONDS_IN_MIN = 60;
+    // private const int SECONDS_IN_HOUR = SECONDS_IN_MIN * 60;
+    // private const int DAILY_TIMER_START_OFFSET = SECONDS_IN_HOUR * 17 + SECONDS_IN_MIN * 1;
+    
+    public TimerComponent DailyTimer { get; private set; }
 
     private Dictionary<Type, Dictionary<string, JToken>> cache;
     
     /// <summary>
-    /// List of Quests that currently in progress
+    /// List of Story-related Quests that currently in progress
+    /// </summary>
+    public List<QuestEntity> ActiveStoryQuests;
+    
+    /// <summary>
+    /// List of All active quests that handled by the Manager
     /// </summary>
     public List<QuestEntity> ActiveQuests;
+    
+    public DailyQuestEntity DailyQuest;
     
     /// <summary>
     /// List of ids of completed quests
@@ -44,12 +59,12 @@ public class QuestsDataManager : IECSComponent, IDataManager
     /// </summary>
     public bool ConnectedToBoard { get; private set; }
 
-    public void OnRegisterEntity(ECSEntity entity)
+    public override void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
     }
 	
-    public void OnUnRegisterEntity(ECSEntity entity)
+    public override void OnUnRegisterEntity(ECSEntity entity)
     {
     }
 
@@ -64,8 +79,11 @@ public class QuestsDataManager : IECSComponent, IDataManager
     
     public void Reload()
     {
+        StopDailyTimer();
+        
         OnActiveQuestsListChanged = null;
         QuestStarters = null;
+        DailyQuest = null;
 
         cache = new Dictionary<Type, Dictionary<string, JToken>>();
         
@@ -85,6 +103,7 @@ public class QuestsDataManager : IECSComponent, IDataManager
 
         FinishedQuests = questSave.FinishedQuests ?? new List<string>();
         
+        ActiveStoryQuests = new List<QuestEntity>();
         ActiveQuests = new List<QuestEntity>();
 
         if (questSave.ActiveQuests == null)
@@ -99,6 +118,11 @@ public class QuestsDataManager : IECSComponent, IDataManager
             string id        = questNode["Id"].Value<string>();
         
            StartQuestById(id, saveData);
+        }
+
+        if (DailyQuest != null)
+        {
+            StartDailyTimer(DateTimeExtension.UnixTimeToDateTime(questSave.DailyTimerStart));
         }
     }
 
@@ -289,34 +313,30 @@ public class QuestsDataManager : IECSComponent, IDataManager
         const string ACTION_ID = "StartNewQuestsIfAny";
         
         Debug.Log($"[QuestsDataManager] => StartNewQuestsIfAny Schedule");
-        
-        var action = new QueueActionComponent {Id = ACTION_ID}
-                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = UIWindowType.IgnoredWindows})
-                    .SetAction(() =>
-                     {
-                         string starterId = null;
-                         var questsToStart = CheckConditions(out starterId);
-                         if (questsToStart.Count == 0)
-                         {
-                             Debug.Log($"[QuestsDataManager] => CheckConditions == 0, return");
-                             return;
-                         }
 
-                         Debug.Log($"[QuestsDataManager] => StartNewQuestsIfAny before dlg");
+        DefaultSafeQueueBuilder.BuildAndRun(ACTION_ID, true, () =>
+        {
+            string starterId = null;
+            var questsToStart = CheckConditions(out starterId);
+            if (questsToStart.Count == 0)
+            {
+                Debug.Log($"[QuestsDataManager] => CheckConditions == 0, return");
+                return;
+            }
 
-                         if (!DevTools.IsQuestDialogsEnabled())
-                         {
-                             DevTools.FastStartQuest(questsToStart);
-                             return;
-                         }
+            Debug.Log($"[QuestsDataManager] => StartNewQuestsIfAny before dlg");
 
-                         var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
-                         model.Init(null, questsToStart, starterId);
+            if (!DevTools.IsQuestDialogsEnabled())
+            {
+                DevTools.FastStartQuest(questsToStart);
+                return;
+            }
 
-                         UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
-                     });
+            var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
+            model.Init(null, questsToStart, starterId);
 
-        ProfileService.Current.QueueComponent.AddAction(action, true);
+            UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
+        });
 
         return true;
     }
@@ -421,6 +441,16 @@ public class QuestsDataManager : IECSComponent, IDataManager
         quest = InstantiateQuest(id);
         ActiveQuests.Add(quest);
 
+        // Cache in appropriate store
+        if (quest is StoryQuestEntity)
+        {
+             ActiveStoryQuests.Add(quest);
+        } 
+        else if (quest is DailyQuestEntity)
+        {
+            DailyQuest = (DailyQuestEntity) quest;
+        }
+
         // To handle Pending -> New transition for listeners
         if (saveData == null)
         {
@@ -453,9 +483,23 @@ public class QuestsDataManager : IECSComponent, IDataManager
             {
                 quest.SetClaimedState();
                 
-                FinishedQuests.Add(id);
                 ActiveQuests.RemoveAt(i);
-                quest.DisconnectFromBoard();
+                
+                if (DailyQuest != null && DailyQuest.Id == id)
+                {
+                    StopDailyTimer();
+                    DailyQuest = null;
+                }
+                else
+                {
+                    ActiveStoryQuests.Remove(quest);
+                    FinishedQuests.Add(id);
+                }
+
+                if (ConnectedToBoard)
+                {
+                    quest.DisconnectFromBoard();
+                }
                 
                 quest.OnChanged -= OnQuestsStateChangedEvent;
                 
@@ -477,5 +521,96 @@ public class QuestsDataManager : IECSComponent, IDataManager
     public bool IsQuestDefined(string id)
     {
         return cache[typeof(QuestEntity)].ContainsKey(id);
+    }
+
+    public void StartNewDailyQuest()
+    {
+        Debug.Log($"[QuestsDataManager] => StartDailyQuest");
+        
+        const string ID = "Daily";
+        
+        QuestEntity quest = GetActiveQuestById(ID);
+        
+        if (quest != null)
+        {
+            quest.ForceComplete();
+            FinishQuest(ID);
+        }
+        
+        quest = StartQuestById(ID, null);
+
+        if (ConnectedToBoard)
+        {
+            quest.ConnectToBoard();
+        }
+
+        StartDailyTimer(CalculateDailyTimerStartTime());
+    }
+
+    private void StartDailyTimer(DateTime startTime)
+    {    
+        Debug.Log($"[QuestsDataManager] => StartDailyTimer: startTime: {startTime}, delay: {DAILY_TIMER_DELAY}");
+        
+        DailyTimer = new TimerComponent
+        {
+            UseUTC = false,
+            Delay = DAILY_TIMER_DELAY,
+            Tag = "daily"
+        };
+        DailyTimer.OnComplete += OnCompleteDailyTimer;
+                                                                                                                
+        RegisterComponent(DailyTimer);
+        DailyTimer.Start(startTime);
+    }
+
+    private void StopDailyTimer()
+    {
+        Debug.Log($"[QuestsDataManager] => StopDailyTimer");
+        
+        if (DailyTimer == null)
+        {
+            return;    
+        }
+
+        UnRegisterComponent(DailyTimer);
+        
+        DailyTimer.OnComplete -= OnCompleteDailyTimer;
+        DailyTimer.Stop();
+        DailyTimer = null;
+    }
+
+    private void OnCompleteDailyTimer()
+    {
+        Debug.Log($"[QuestsDataManager] => OnCompleteDailyTimer");
+
+        if (DailyQuest != null && DailyQuest.Immortal == false)
+        {
+            StartNewDailyQuest();
+        }
+    }
+
+    private DateTime CalculateDailyTimerStartTime()
+    {
+        var now = DateTime.Now;
+        var todayDayStart = now.TruncDateTimeToDays();
+        var todayQuestStart = todayDayStart.AddSeconds(DAILY_TIMER_START_OFFSET);
+
+        if (todayQuestStart > now)
+        {
+            var fixedQuestStart = todayQuestStart.AddDays(-1);
+            return fixedQuestStart;
+        }
+        
+        return todayQuestStart;
+        //
+        // var nextDay = now.AddSeconds(DAILY_TIMER_DELAY);
+        // var nextDayStart = nextDay
+        // var nextDailyStart = nextDayStart.AddSeconds(DAILY_TIMER_START_OFFSET);
+        // var fromNowToStart = (nextDailyStart - now).TotalSeconds;
+        // var elapsed = DAILY_TIMER_DELAY - fromNowToStart;
+        // var resultLocal = now.AddSeconds(-elapsed);
+        // // var resultUtc = resultLocal.ToUniversalTime();
+        //
+        // return resultLocal;
     }
 }

@@ -9,8 +9,13 @@
 	public TutorialLogicComponent Context;
 	
 	private bool isStart;
+	
 	public bool IsPerform;
 	public bool IsIgnoreUi;
+	public bool IsIgnoreDev = true;
+
+	public bool IsAnyStartCondition;
+	public bool IsAnyCompleteCondition;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
@@ -61,7 +66,11 @@
 		if (IsPerform == false) return false;
 		
 		isComplete = Check(TutorialConditionType.Complete);
-			
+		
+#if DEBUG
+		if (isComplete == false && IsIgnoreDev) isComplete = !DevTools.IsTutorialEnabled();
+#endif
+		
 		if (isComplete) Complete();
 		
 		return isComplete;
@@ -71,7 +80,7 @@
 	{
 		var collection = GetComponent<ECSComponentCollection>(BaseTutorialCondition.ComponentGuid);
 		var conditions = collection?.Components.FindAll(component => (component as BaseTutorialCondition).ConditionType == TutorialConditionType.Hard);
-
+		
 		if (conditions == null) return false;
 		
 		for (var i = conditions.Count - 1; i >= 0; i--)
@@ -79,7 +88,7 @@
 			var condition = (BaseTutorialCondition) conditions[i];
 			
 			if (condition.Check() == false) continue;
-
+			
 			return true;
 		}
 		
@@ -90,14 +99,32 @@
 	{
 		var collection = GetComponent<ECSComponentCollection>(BaseTutorialCondition.ComponentGuid);
 		var conditions = collection?.Components.FindAll(component => (component as BaseTutorialCondition).ConditionType == type);
-
+		
 		if (conditions == null) return true;
+		
+		var isAny = false;
+		var isRemove = false;
+		
+		switch (type)
+		{
+			case TutorialConditionType.Start:
+				isAny = IsAnyStartCondition;
+				break;
+			case TutorialConditionType.Complete:
+				isAny = IsAnyCompleteCondition;
+				break;
+		}
+		
+		if (isAny)
+		{
+			isRemove = conditions.Find(component => (component as BaseTutorialCondition).Check()) != null;
+		}
 		
 		for (var i = conditions.Count - 1; i >= 0; i--)
 		{
 			var condition = (BaseTutorialCondition) conditions[i];
 			
-			if (condition.Check() == false) continue;
+			if (isRemove == false && condition.Check() == false) continue;
 			
 			UnRegisterComponent(condition);
 			conditions.Remove(condition);

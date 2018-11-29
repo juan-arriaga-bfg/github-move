@@ -12,6 +12,8 @@ public class EjectionPieceAction : IBoardAction
 	public Dictionary<int, int> Pieces { get; set; }
 	
 	public Action OnComplete { get; set; }
+    
+    public Action<List<BoardPosition>> OnSuccess;
 	
 	public Func<int, string> AnimationResourceSearch;
 
@@ -65,6 +67,15 @@ public class EjectionPieceAction : IBoardAction
 			}
 
 			OnComplete?.Invoke();
+		    
+		    var result = new List<BoardPosition>();
+		    
+		    foreach (var piece in pieces)
+		    {
+		        result.Add(piece.Value.Multicellular?.GetTopPosition ?? piece.Value.CachedPosition);
+		    }
+			
+		    OnSuccess?.Invoke(result);
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

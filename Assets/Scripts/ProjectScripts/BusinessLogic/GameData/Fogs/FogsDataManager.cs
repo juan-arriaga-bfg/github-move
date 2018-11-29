@@ -18,8 +18,8 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     public List<ItemWeight> DefaultPieceWeights { get; set; }
     public List<FogDef> Fogs { get; set; }
     
-    public Dictionary<BoardPosition, FogDef> FogPositions;
-    public List<BoardPosition> Completed;
+    public Dictionary<BoardPosition, FogDef> VisibleFogPositions;
+    public Dictionary<BoardPosition, FogDef> ClearedFogPositions;
     
     private Dictionary<BoardPosition, FogObserver> FogObservers;
     private List<FogDef> ActiveFogs;
@@ -28,10 +28,10 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     {
         DefaultPieceWeights = null;
         Fogs = null;
-        FogPositions = null;
-        Completed = new List<BoardPosition>();
+        VisibleFogPositions = null;
+        ClearedFogPositions = null;
         FogObservers = new Dictionary<BoardPosition, FogObserver>();
-        ActiveFogs = new List<FogDef>();
+        ActiveFogs   = new List<FogDef>();
         LoadData(new ResourceConfigDataMapper<FogsDataManager>("configs/fogs.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
     
@@ -39,7 +39,8 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     {
         dataMapper.LoadData((data, error)=> 
         {
-            FogPositions = new Dictionary<BoardPosition, FogDef>();
+            VisibleFogPositions = new Dictionary<BoardPosition, FogDef>();
+            ClearedFogPositions = new Dictionary<BoardPosition, FogDef>();
             
             if (string.IsNullOrEmpty(error))
             {
@@ -48,16 +49,19 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
                 
                 var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
 
-                if (save?.CompleteFogPositions != null)
-                {
-                    Completed = save.CompleteFogPositions;
-                }
+                List<BoardPosition> completeFogPositions = save?.CompleteFogPositions ?? new List<BoardPosition>();
                 
                 foreach (var def in data.Fogs)
                 {
-                    if(Completed.FindIndex(position => position.Equals(def.GetCenter())) != -1) continue;
-                    
-                    FogPositions.Add(def.GetCenter(), def);
+                    var pos = def.GetCenter();
+                    if (completeFogPositions.Contains(pos))
+                    {
+                        ClearedFogPositions.Add(pos, def);
+                    }
+                    else
+                    {
+                        VisibleFogPositions.Add(pos, def);
+                    }
                 }
             }
             else
@@ -70,22 +74,24 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     public FogDef GetDef(BoardPosition key)
     {
         FogDef def;
-        return FogPositions.TryGetValue(key, out def) == false ? null : def;
+        return VisibleFogPositions.TryGetValue(key, out def) == false ? null : def;
     }
 
     public void RemoveFog(BoardPosition key)
     {
-        if(FogPositions.ContainsKey(key) == false) return;
+        Debug.Log($"[FogsDataManager] => RemoveFog({key}");
         
-        Completed.Add(key);
-        FogPositions.Remove(key);
+        if(VisibleFogPositions.ContainsKey(key) == false) return;
+        
+        ClearedFogPositions.Add(key, GetDef(key));
+        VisibleFogPositions.Remove(key);
 
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
     }
 
     public BoardPosition? GetFogPositionByUid(string uid)
     {
-        foreach (var pair in FogPositions)
+        foreach (var pair in VisibleFogPositions)
         {
             if (pair.Value.Uid == uid)
             {              
@@ -143,7 +149,8 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     {
         List<GridMeshArea> ret = new List<GridMeshArea>();
 
-        foreach (var pair in FogPositions)
+        // INCLUDE
+        foreach (var pair in VisibleFogPositions)
         {
             var fogDef = pair.Value;
 
@@ -166,8 +173,19 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
 
             ret.Add(area);
         }
+
+        // EXCLUDE
+        foreach (var pair in ClearedFogPositions)
+        {
+            var fogDef = pair.Value;
+            var positions = fogDef.Positions;
+
+            var area = GetFogAreaForPositions(positions, true);
+
+            ret.Add(area);
+        }
         
-        // Starting field
+        //Starting field
         List<BoardPosition> startPositions = new List<BoardPosition>();
         for (int x = 18; x <= 22; x++)
         {

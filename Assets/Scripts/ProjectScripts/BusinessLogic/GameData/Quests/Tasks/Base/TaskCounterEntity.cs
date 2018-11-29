@@ -103,7 +103,7 @@ public abstract class TaskCounterEntity : TaskEntity
     
     protected override bool Check()
     {
-        if (IsCompleted())
+        if (IsCompletedOrClaimed())
         {
             return true;
         }

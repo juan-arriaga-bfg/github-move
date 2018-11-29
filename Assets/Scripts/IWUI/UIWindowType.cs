@@ -35,6 +35,8 @@ public class UIWindowType
     public const string NextLevelWindow = "NextLevelWindow";
 
     public const string ConfirmRemoverMessageWindow = "ConfirmRemoverMessageWindow";
+    
+    public const string DailyQuestWindow = "DailyQuestWindow";
 
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {

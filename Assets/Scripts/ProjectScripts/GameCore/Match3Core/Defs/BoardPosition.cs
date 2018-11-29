@@ -16,6 +16,11 @@ public struct BoardPosition : IEquatable<BoardPosition>
         this.Z = z;
     }
 
+    public BoardPosition Copy()
+    {
+        return new BoardPosition(X, Y, Z);
+    }
+
     [JsonIgnore]
     public bool IsValid => X >= 0 && Y >= 0;
 
@@ -275,11 +280,11 @@ public struct BoardPosition : IEquatable<BoardPosition>
         return new BoardPosition(Mathf.RoundToInt(center.x), Mathf.RoundToInt(center.y), Mathf.RoundToInt(center.z));
     }
 
-    public List<BoardPosition> GetImmediate(List<BoardPosition> positions, List<BoardPosition> ignore, int amount)
+    public List<BoardPosition> GetImmediate(List<BoardPosition> positions, List<BoardPosition> ignore = null, int amount = 1)
     {
         if (ignore == null) ignore = new List<BoardPosition>(); 
         
-        var rezult = new List<BoardPosition>();
+        var result = new List<BoardPosition>();
         var temp = new List<KeyValuePair<float, BoardPosition>>();
         
         foreach (var position in positions)
@@ -296,10 +301,10 @@ public struct BoardPosition : IEquatable<BoardPosition>
 
         for (var i = 0; i < amount; i++)
         {
-            rezult.Add(temp[i].Value);
+            result.Add(temp[i].Value);
         }
         
-        return rezult;
+        return result;
     }
 
     public static void GetAABB(List<BoardPosition> positions, out BoardPosition topLeft, out BoardPosition topRight, out BoardPosition bottomRight, out BoardPosition bottomLeft)
@@ -399,6 +404,21 @@ public struct BoardPosition : IEquatable<BoardPosition>
     public BoardPosition BottomLeftAtDistance(int distance)
     {
         return new BoardPosition(X - distance, Y - distance, Z);
+    }
+    
+    public BoardPosition SetX(int value)
+    {
+        return new BoardPosition(value, Y, Z);
+    }
+    
+    public BoardPosition SetY(int value)
+    {
+        return new BoardPosition(X, value, Z);
+    }
+    
+    public BoardPosition SetZ(int value)
+    {
+        return new BoardPosition(X, Y, value);
     }
 
     [Newtonsoft.Json.JsonIgnore]

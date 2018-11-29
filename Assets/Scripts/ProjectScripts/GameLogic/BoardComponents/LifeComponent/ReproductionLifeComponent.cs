@@ -6,8 +6,8 @@ public class ReproductionLifeComponent : StorageLifeComponent
     private string childName;
     private TimerComponent cooldown;
     
-    public override string Message => string.Format(LocalizationService.Instance.Manager.GetTextByUid("gameboard.bubble.message.production", "Harvest {0}"), childName);
-    public override string Price => Timer.IsExecuteable() ? string.Format(LocalizationService.Instance.Manager.GetTextByUid("gameboard.bubble.button.wait", "Wait\n{0}"), Timer.CompleteTime.GetTimeLeftText()) : base.Price;
+    public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.production", "gameboard.bubble.message.production {0}"), childName);
+    public override string Price => Timer.IsExecuteable() ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), Timer.CompleteTime.GetTimeLeftText()) : base.Price;
 
     public override TimerComponent Timer => cooldown;
 
@@ -51,7 +51,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
         if (cooldown.IsExecuteable())
         {
             UIMessageWindowController.CreateTimerCompleteMessage(
-                LocalizationService.Get("window.timerComplete.message.production", "Would you like to build the item right now for crystals?"),
+                LocalizationService.Get("window.timerComplete.message.production", "window.timerComplete.message.production"),
                 cooldown);
 
             return false;
@@ -76,9 +76,11 @@ public class ReproductionLifeComponent : StorageLifeComponent
 
     protected override void OnComplete()
     {
+        
         storage.OnScatter = () =>
         {
             storage.OnScatter = null;
+            thisContext.ActorView?.UpdateView();
             OnSpawnRewards();
             thisContext.Context.ActionExecutor.AddAction(new CollapsePieceToAction
             {

@@ -34,24 +34,47 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         
         model.InitReward();
         
-        descriptionLabel.Text = model.Description;
-        rewardLabel.Text = model.RewardText;
-        amountLabel.Text = model.AmountText;
-        buttonLabel.Text = model.ButtonText;
-        
+        UpdateUi();
+
         targetIcon.sprite = model.Icon;
 
         ShowChainIfPossible(model);
         
         icon = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(PieceType.NPC_SleepingBeauty.Abbreviations[0]));
         icon.SetParentAndReset(anchor);
+        
+        model.Quest.OnChanged += OnQuestChanged;
     }
-
+    
     public override void OnViewClose()
     {
-        base.OnViewClose();
+        var model = Model as UIQuestWindowModel;
+        model.Quest.OnChanged -= OnQuestChanged;
         
-        var windowModel = Model as UIQuestWindowModel;
+        base.OnViewClose();
+    }
+
+    private void OnQuestChanged(QuestEntity quest, TaskEntity task)
+    {
+        if (quest.IsCompleted())
+        {
+            Controller.CloseCurrentWindow();
+        }
+        else
+        {
+            UpdateUi();
+        }
+    }
+
+    private void UpdateUi()
+    {
+        var model = Model as UIQuestWindowModel;
+        
+        descriptionLabel.Text = model.Description;
+        rewardLabel.Text = model.RewardText;
+        amountLabel.Text = model.AmountText;
+        buttonLabel.Text = model.ButtonText;
+        buttonLabel.gameObject.SetActive(model.Quest.IsInProgress());
     }
     
     public override void OnViewCloseCompleted()
@@ -86,23 +109,9 @@ public class UIQuestWindowView : UIGenericPopupWindowView
     {
         var windowModel = Model as UIQuestWindowModel;
         var quest = windowModel.Quest;
-        
-        var board = BoardService.Current.GetBoardById(0);
-        
-        if (quest.IsCompleted())
+
+        if (quest.IsCompletedOrClaimed())
         {
-            var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
-            
-            if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, windowModel.PiecesReward.Sum(e => e.Value)))
-            {
-                UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.freeSpace", "Free space not found!"));
-                return;
-            }
-            
-            quest.SetClaimedState();
-            GameDataService.Current.QuestsManager.FinishQuest(quest.Id);
-            
-            isComplete = true;
             return;
         }
 

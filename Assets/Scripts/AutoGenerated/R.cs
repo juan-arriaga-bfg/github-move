@@ -163,6 +163,11 @@ public class R
      public const string NPC_SleepingBeautyPlaidPiece = "NPC_SleepingBeautyPlaidPiece";
      public const string PieceRemover = "PieceRemover";
      public const string UIHintArrow = "UIHintArrow";
+     public const string PiecesSepiaMaterial = "PiecesSepiaMaterial";
+     public const string PiecesDefaultMaterial = "PiecesDefaultMaterial";
+     public const string PiecesGrayscaleMaterial = "PiecesGrayscaleMaterial";
+     public const string PiecesFadeMaterial = "PiecesFadeMaterial";
+     public const string PiecesHighlightMaterial = "PiecesHighlightMaterial";
      public const string FogExplosionParticleSystem = "FogExplosionParticleSystem";
      public const string SpawnScalePieceAnimation = "SpawnScalePieceAnimation";
      public const string DestroyScalePieceAnimation = "DestroyScalePieceAnimation";
@@ -173,4 +178,11 @@ public class R
      public const string DestroyScaleMineAnimation = "DestroyScaleMineAnimation";
      public const string DestroyProductionAnimation = "DestroyProductionAnimation";
      public const string DestroyObstacleAnimation = "DestroyObstacleAnimation";
+     public const string FireflyExplosion = "FireflyExplosion";
+     public const string ProductionEndParticle = "ProductionEndParticle";
+     public const string ProductionProcessParticle = "ProductionProcessParticle";
+     public const string ProductionReadyParticle = "ProductionReadyParticle";
+     public const string FogDefaultMaterial = "FogDefaultMaterial";
+     public const string PiecesUnderFogMaterial = "PiecesUnderFogMaterial";
+     public const string GodRayView = "GodRayView";
 }

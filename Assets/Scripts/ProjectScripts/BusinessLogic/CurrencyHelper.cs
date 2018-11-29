@@ -6,19 +6,55 @@ using UnityEngine;
 
 public static class CurrencyHellper
 {
-    public static bool Purchase(string product, int amount, Action<bool> onSuccess = null, Vector3? flyPosition = null)
+    public static ShopItemTransaction Purchase(string product, int amount, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
         return Purchase(product, amount, Currency.Cash.Name, 0, onSuccess, flyPosition);
     }
     
-    public static bool Purchase(string product, int amount, CurrencyPair price, Action<bool> onSuccess = null, Vector3? flyPosition = null)
+    public static ShopItemTransaction PurchaseAsync(string product, int amount, Action<bool> onSuccess = null, Vector3? flyPosition = null)
+    {
+        return PurchaseAsync(product, amount, Currency.Cash.Name, 0, onSuccess, flyPosition);
+    }
+    
+    public static ShopItemTransaction Purchase(string product, int amount, CurrencyPair price, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
         return Purchase(product, amount, price.Currency, price.Amount, onSuccess, flyPosition);
     }
     
-    public static bool Purchase(CurrencyPair product, Action<bool> onSuccess = null, Vector3? flyPosition = null)
+    public static ShopItemTransaction Purchase(CurrencyPair product, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
         return Purchase(product, new CurrencyPair{Currency = Currency.Cash.Name, Amount = 0}, onSuccess, flyPosition);
+    }
+    
+    public static ShopItemTransaction PurchaseAsync(CurrencyPair product, Action<bool> onSuccess = null, Vector3? flyPosition = null)
+    {
+        return PurchaseAsync(product, new CurrencyPair{Currency = Currency.Cash.Name, Amount = 0}, onSuccess, flyPosition);
+    }
+    
+    public static List<ShopItemTransaction> PurchaseAsync(List<CurrencyPair> products, Action<bool> onSuccess = null, Vector3? flyPosition = null)
+    {
+        var transactions = new List<ShopItemTransaction>();
+        
+        for (var i = 0; i < products.Count; i++)
+        {
+            var product = products[i];
+            
+            var shopItem = new ShopItem
+            {
+                Uid = $"purchase.test.{product.Currency}.10", 
+                ItemUid = product.Currency, 
+                Amount = product.Amount,
+                CurrentPrices = new List<Price>{new Price{Currency = Currency.Cash.Name, DefaultPriceAmount = 0}}
+            };
+
+            var isLast = i == products.Count - 1;
+            
+            var transaction = PurchaseItemAsync(shopItem, product, false, isLast ? onSuccess : null, flyPosition, 0.5f * i);
+            
+            transactions.Add(transaction);
+        }
+
+        return transactions;
     }
     
     public static void Purchase(List<CurrencyPair> products, Action<bool> onSuccess = null, Vector3? flyPosition = null)
@@ -61,12 +97,17 @@ public static class CurrencyHellper
         }
     }
     
-    public static bool Purchase(CurrencyPair product, CurrencyPair price, Action<bool> onSuccess = null, Vector3? flyPosition = null)
+    public static ShopItemTransaction Purchase(CurrencyPair product, CurrencyPair price, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
         return Purchase(product.Currency, product.Amount, price.Currency, price.Amount, onSuccess, flyPosition);
     }
     
-    public static bool Purchase(string product, int amountProduct, string price, int amountPrice, Action<bool> onSuccess = null, Vector3? flyPosition = null)
+    public static ShopItemTransaction PurchaseAsync(CurrencyPair product, CurrencyPair price, Action<bool> onSuccess = null, Vector3? flyPosition = null)
+    {
+        return PurchaseAsync(product.Currency, product.Amount, price.Currency, price.Amount, onSuccess, flyPosition);
+    }
+    
+    public static ShopItemTransaction Purchase(string product, int amountProduct, string price, int amountPrice, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
         var shopItem = new ShopItem
         {
@@ -79,12 +120,25 @@ public static class CurrencyHellper
         return PurchaseItem(shopItem, new CurrencyPair{Currency = product, Amount = amountProduct}, true, onSuccess, flyPosition);
     }
     
-    public static bool Purchase(CurrencyPair product, List<CurrencyPair> prices, Action<bool> onSuccess = null, Vector3? flyPosition = null)
+    public static ShopItemTransaction PurchaseAsync(string product, int amountProduct, string price, int amountPrice, Action<bool> onSuccess = null, Vector3? flyPosition = null)
+    {
+        var shopItem = new ShopItem
+        {
+            Uid = $"purchase.test.{product}.10", 
+            ItemUid = product, 
+            Amount = amountProduct,
+            CurrentPrices = new List<Price>{new Price{Currency = price, DefaultPriceAmount = amountPrice}}
+        };
+
+        return PurchaseItemAsync(shopItem, new CurrencyPair{Currency = product, Amount = amountProduct}, true, onSuccess, flyPosition);
+    }
+    
+    public static ShopItemTransaction Purchase(CurrencyPair product, List<CurrencyPair> prices, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
         return Purchase(product.Currency, product.Amount, prices, onSuccess, flyPosition);
     }
     
-    public static bool Purchase(string product, int amount, List<CurrencyPair> prices, Action<bool> onSuccess = null, Vector3? flyPosition = null)
+    public static ShopItemTransaction Purchase(string product, int amount, List<CurrencyPair> prices, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
         var currentPrices = new List<Price>();
 
@@ -101,14 +155,15 @@ public static class CurrencyHellper
             CurrentPrices = currentPrices
         };
         
-        return PurchaseItem(shopItem, new CurrencyPair{Currency = product, Amount = amount}, false, onSuccess, flyPosition);
+        return PurchaseItem(shopItem, new CurrencyPair{Currency = product, Amount = amount}, false,onSuccess, flyPosition);
     }
 
-    private static bool PurchaseItem(ShopItem shopItem, CurrencyPair product, bool isShoowHint, Action<bool> onSuccess = null, Vector3? flyPosition = null, float delay = 0)
+    
+    private static ShopItemTransaction PurchaseItem(ShopItem shopItem, CurrencyPair product, bool isShoowHint, Action<bool> onSuccess = null, Vector3? flyPosition = null, float delay = 0)
     {
         var isSuccess = false;
         
-        ShopService.Current.PurchaseItem
+        var transaction = ShopService.Current.PurchaseItem
         (
             shopItem,
             (item, s) =>
@@ -133,10 +188,47 @@ public static class CurrencyHellper
                 
                 var prices = shopItem.CurrentPrices[0];
                 IsCanPurchase(prices.Currency, prices.DefaultPriceAmount, true);
-            }
+            },
+            false
         );
         
-        return isSuccess;
+        return transaction;
+    }
+    
+    private static ShopItemTransaction PurchaseItemAsync(ShopItem shopItem, CurrencyPair product, bool isShoowHint, Action<bool> onSuccess = null, Vector3? flyPosition = null, float delay = 0)
+    {
+        var isSuccess = false;
+        
+        var transaction = ShopService.Current.PurchaseItem
+        (
+            shopItem,
+            (item, s) =>
+            {
+                // on purchase success
+                isSuccess = true;
+                
+                if (flyPosition != null)
+                {
+                    CurrencyFly(flyPosition.Value, product, onSuccess, delay);
+                    return;
+                }
+                
+                onSuccess?.Invoke(true);
+            },
+            item =>
+            {
+                // on purchase failed (not enough cash)
+                onSuccess?.Invoke(false);
+                
+                if (!isShoowHint) return;
+                
+                var prices = shopItem.CurrentPrices[0];
+                IsCanPurchase(prices.Currency, prices.DefaultPriceAmount, true);
+            },
+            true
+        );
+        
+        return transaction;
     }
     
     private static void CurrencyFly(Vector3 screenPosition, CurrencyPair resource, Action<bool> onSuccess = null, float delay = 0)

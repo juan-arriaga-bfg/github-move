@@ -11,6 +11,8 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
+    [JsonProperty] public long DailyTimerStart;
+    
     [JsonProperty] public List<string> FinishedQuests;
     [JsonProperty] public List<QuestSaveData> ActiveQuests;
 
@@ -24,8 +26,11 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
     
     private void Update()
     {
-        ActiveQuests = GameDataService.Current.QuestsManager.GetQuestsSaveData();
-        FinishedQuests = GameDataService.Current.QuestsManager.FinishedQuests;
+        var manager = GameDataService.Current.QuestsManager;
+        
+        ActiveQuests    = manager.GetQuestsSaveData();
+        FinishedQuests  = manager.FinishedQuests;
+        DailyTimerStart = manager.DailyTimer?.StartTimeLong ?? 0;
     }
 }
 

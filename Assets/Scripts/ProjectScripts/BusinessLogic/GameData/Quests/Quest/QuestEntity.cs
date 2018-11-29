@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Quests;
@@ -38,12 +39,17 @@ public class QuestEntity : ECSEntity, IECSSerializeable
     /// <summary>
     /// List of tasks that active currently
     /// </summary>
-    [JsonIgnore] public List<TaskEntity> ActiveTasks { get; protected set; }
+    [JsonIgnore] public List<TaskEntity> ActiveTasks { get; protected set; } = new List<TaskEntity>();
     
     /// <summary>
     /// Will be called every time when Quest state or state of any active Task is changing.
     /// </summary>
     [JsonIgnore] public Action<QuestEntity, TaskEntity> OnChanged;
+
+    /// <summary>
+    /// List of tasks that loaded their state from player profile
+    /// </summary>
+    protected List<TaskEntity> tasksLoadedFromSave = new List<TaskEntity>();
 
 #region Serialization
 
@@ -70,7 +76,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         return false;
     }
 
-    public QuestSaveData GetDataForSerialization()
+    public virtual QuestSaveData GetDataForSerialization()
     {
         return new QuestSaveData
         {
@@ -89,9 +95,11 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         
         foreach (var node in tasks)
         {
-            string     id   = node.SelectToken("Id").Value<string>();
+            string id = node.SelectToken("Id").Value<string>();
             TaskEntity task = GetTaskById(id);
             node.PopulateObject(task);
+            
+            tasksLoadedFromSave.Add(task);
         }
     }
     
@@ -102,7 +110,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         return State == TaskState.New || State == TaskState.InProgress;
     }
     
-    public bool IsCompleted()
+    public bool IsCompletedOrClaimed()
     {
         return State == TaskState.Completed || State == TaskState.Claimed;
     }
@@ -111,8 +119,13 @@ public class QuestEntity : ECSEntity, IECSSerializeable
     {
         return State == TaskState.Claimed;
     }
+    
+    public bool IsCompleted()
+    {
+        return State == TaskState.Completed;
+    }
 
-    private void UpdateState()
+    protected virtual void UpdateState()
     {
         if (IsInProgress())
         {
@@ -120,7 +133,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
             
             foreach (var task in Tasks)
             {
-                isAllTasksCompleted = isAllTasksCompleted && (task.State == TaskState.Completed || task.State == TaskState.Claimed);
+                isAllTasksCompleted = isAllTasksCompleted && task.IsCompletedOrClaimed();
 
                 if (task.State == TaskState.InProgress && State == TaskState.New)
                 {
@@ -184,7 +197,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         }
     }
 
-    private void StartActiveTasks()
+    protected virtual void StartActiveTasks()
     {
         for (int i = 0; i < ActiveTasks.Count; i++)
         {
@@ -193,7 +206,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         }
     }
 
-    private void SelectActiveTasks()
+    protected virtual void SelectActiveTasks()
     {
         ActiveTasks = new List<TaskEntity>();
         SortTasks();
@@ -287,6 +300,23 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         
         OnChanged?.Invoke(this, null);
     }
+    
+    public void SetInProgressState()
+    {
+        if (State == TaskState.InProgress)
+        {
+            return;
+        }
+        
+        if (State != TaskState.New && State != TaskState.Pending)
+        {
+            throw new ArgumentException($"Can't set InProgress state when quest is in '{State}' state!");
+        }
+        
+        State = TaskState.InProgress;
+        
+        OnChanged?.Invoke(this, null);
+    }
 
     /// <summary>
     /// Used for debug purposes
@@ -295,5 +325,36 @@ public class QuestEntity : ECSEntity, IECSSerializeable
     {
         State = TaskState.Completed;
         OnChanged?.Invoke(this, null);
+    }
+
+    public int ActiveTasksCount()
+    {
+        return ActiveTasks.Count;
+    }
+    
+    public int CompletedTasksCount()
+    {
+        int count = 0;
+        for (var i = 0; i < ActiveTasks.Count; i++)
+        {
+            if (ActiveTasks[i].IsCompletedOrClaimed())
+            {
+                count += 1;
+            }
+        }
+        return count;
+    }
+    
+    public int CompletedButNotClaimedTasksCount()
+    {
+        int count = 0;
+        for (var i = 0; i < ActiveTasks.Count; i++)
+        {
+            if (ActiveTasks[i].IsCompleted())
+            {
+                count += 1;
+            }
+        }
+        return count;
     }
 }

@@ -8,19 +8,25 @@ using UnityEngine.UI;
     using UnityEditor;
 #endif
 
-public class DevTools : MonoBehaviour
+public class DevTools : UIContainerElementViewController
 {
-    [SerializeField] private GameObject panel;
-    [SerializeField] private Toggle questDialogsToggle;
+    [IWUIBinding("#ButtonsPanel")] private GameObject panel;
+    [IWUIBinding("#QuestDialogsToggle")] private Toggle questDialogsToggle;
+    [IWUIBinding("#TutorialToggle")] private Toggle tutorialToggle;
 
 #if !UNITY_EDITOR
     private static bool isQuestDialogsDisabled;
+    private static bool isTutorialDisabled;
 #endif
     
-    public void Start()
+    public override void OnViewInit(IWUIWindowView context)
     {
+        base.OnViewInit(context);
+        
         panel.SetActive(false);
+        
         questDialogsToggle.isOn = IsQuestDialogsEnabled();
+        tutorialToggle.isOn = IsTutorialEnabled();
     }
     
     public void OnToggleValueChanged(bool isChecked)
@@ -117,12 +123,12 @@ public class DevTools : MonoBehaviour
     public void OnCompleteFirstQuestClick()
     {
         var manager = GameDataService.Current.QuestsManager;
-        if (manager.ActiveQuests.Count == 0)
+        if (manager.ActiveStoryQuests.Count == 0)
         {
             return;
         }
 
-        var quest = manager.ActiveQuests[0];
+        var quest = manager.ActiveStoryQuests[0];
         quest.ForceComplete();
     }
     
@@ -135,153 +141,31 @@ public class DevTools : MonoBehaviour
     public void OnDebug1Click()
     {
         Debug.Log("OnDebug1Click");
-        //
-        // var skinDef = new Dictionary<string, string>
-        // {
-        //     {"cell_tile_full_0", "cell_tile_full_0"},
-        //     {"cell_tile_full_1", "cell_tile_full_1"},
-        //     {"cell_tile_00", "cell_tile_00"},
-        //     {"cell_tile_01", "cell_tile_01"},
-        //     {"cell_tile_02", "cell_tile_02"},
-        //     {"cell_tile_03", "cell_tile_03"},
-        //     {"cell_tile_10", "cell_tile_10"},
-        //     {"cell_tile_20", "cell_tile_20"},
-        //     {"cell_tile_30", "cell_tile_30"},
-        //     {"cell_tile_40", "cell_tile_40"},
-        //     {"cell_tile_11", "cell_tile_11"},
-        //     {"cell_tile_14", "cell_tile_14"},
-        //     {"cell_tile_13", "cell_tile_13"},
-        //     {"cell_tile_12", "cell_tile_12"},
-        // };
-        //
-        // // int[,] fieldDef = new[,]
-        // // {
-        // //     {1,1,0,0},
-        // //     {1,1,0,0},
-        // //     {0,0,1,1},
-        // //     {1,1,1,1},
-        // //     {1,0,0,0},
-        // // };
-        //
-        // // int[,] fieldDef = new[,]
-        // // {
-        // //     {0,0,1,1,0,0},
-        // //     {0,1,1,1,1,0},
-        // //     {1,1,0,0,1,1},
-        // //     {1,1,0,0,1,1},
-        // //     {0,1,1,1,1,0},
-        // //     {0,0,1,1,0,0},
-        // // };
-        //
-        // // int[,] fieldDef = new[,]
-        // // {
-        // //     {1,1,0,0,1,1},
-        // //     {1,1,0,0,1,1},
-        // //     {0,0,1,1,0,0},
-        // //     {0,0,1,1,0,0},
-        // //     {1,1,0,0,1,1},
-        // //     {1,1,0,0,1,1},
-        // // };
-        //
-        // var fieldDef = GameDataService.Current.FogsManager.GetFoggedArea();
-        //
-        // //var material = new Material(Shader.Find("Sprites/Opaque"));
-        // Material fillMaterial = new Material(Shader.Find("Sprites/Default"))
-        // {
-        //     renderQueue = 999
-        // };
-        //
-        // Material borderMaterial = new Material(Shader.Find("Sprites/Default"))
-        // {
-        //     renderQueue = 1000
-        // };
-        //
-        // CustomMeshBuilder.LayoutDef def = new CustomMeshBuilder.LayoutDef
-        // {
-        //     SkinDef = skinDef,
-        //     BorderWidth = 0.2f,
-        //     Matrix = fieldDef,
-        //     Parent = GameObject.Find("PARAMPAMPAM").transform,
-        //     FillMaterial = fillMaterial,
-        //     BorderMaterial = borderMaterial,
-        //     Fill = true
-        // };
-        //
-        // new CustomMeshBuilder().Build(def);
 
-        Sprite lineSprite    = IconService.Current.GetSpriteById("LINE");
-        Sprite corner2Sprite = IconService.Current.GetSpriteById("CORNER_0_1");
-        Sprite corner3Sprite = IconService.Current.GetSpriteById("CORNER_0_1_2");
-        Sprite corner4Sprite = IconService.Current.GetSpriteById("CORNER_0_1_2_3");
-        
-        var boardDef = BoardService.Current.FirstBoard.BoardDef;
-        int boardW   = boardDef.Width;
-        int boardH   = boardDef.Height;
-        
-        var meshBuilder = new GridMeshBuilder();
-        var def = new GridMeshBuilderDef
-        {
-            FieldWidth = boardW,
-            FieldHeight = boardH,
-            Areas = GameDataService.Current.FogsManager.GetFoggedAreas(),
-            LineSprite = lineSprite,
-            Corner2Sprite = corner2Sprite,
-            Corner3Sprite = corner3Sprite,
-            Corner4Sprite = corner4Sprite,
-            LineWidth = 0.5f
-        };
-        
-        var mesh = meshBuilder.Build(def);
 
-        var meshGo = new GameObject("Grid");
-        var meshTransform = meshGo.transform;
-        meshTransform.SetParent(GameObject.Find("PARAMPAMPAM").transform, false);
-        meshTransform.localPosition = Vector3.zero;
-        meshTransform.localScale = Vector3.one * 1.8f;
-        
+        GameDataService.Current.QuestsManager.StartNewDailyQuest();
+        //var quest = GameDataService.Current.QuestsManager.StartQuestById("Daily", null);
+    }
 
-        var meshRenderer = meshGo.AddComponent<MeshRenderer>();
-        var meshFilter   = meshGo.AddComponent<MeshFilter>();
-
-        meshFilter.mesh = mesh;
-
-        Material mat = new Material(Shader.Find("Sprites/Default"))
-        {
-            renderQueue = 3000
-        };
-
-        meshRenderer.material = mat;
-        meshRenderer.material.mainTexture = lineSprite.texture;
-
-        meshRenderer.sortingOrder = 2000;
-        meshRenderer.sortingLayerName = "Default";
+    public static void UpdateFogSectorsDebug()
+    {
+        var view = new FogSectorsView();
+        view.Init(BoardService.Current.FirstBoard.RendererContext);
+        view.UpdateFogSectorsMesh();
     }
 
     public void OnDebug2Click()
     {
         Debug.Log("OnDebug2Click");
-        //
-        // ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
-        // {
-        //     Characters = new Dictionary<CharacterPosition, string>
-        //     {
-        //         {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
-        //         {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
-        //     }
-        // };
-        //
-        // var json = JsonConvert.SerializeObject(charsList);
-        // var charsListClone = JsonConvert.DeserializeObject<ConversationScenarioCharsListComponent>(json);
-        //
-        // var charsListClone2 = new ConversationScenarioCharsListComponent();
-        // JToken.Parse(json).PopulateObject(charsListClone2);
-        //
-        // return;
-        //
-        var scenario = GameDataService.Current.ConversationsManager.BuildScenario("123");
-        int i = 0;
 
-        //BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
+        var board = BoardService.Current.FirstBoard;
+        var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Simple, 1);
+        
+        foreach (var pos in positions)
+        {
+            var ray = GodRayView.Show(pos);
+            ray.Remove();
+        }
 
 #if LEAKWATCHER
         GC.Collect();
@@ -348,19 +232,44 @@ public class DevTools : MonoBehaviour
 
     public void OnQuestDialogsValueChanged(bool isChecked)
     {
+        
 #if UNITY_EDITOR
         EditorPrefs.SetBool("DEBUG_QUEST_DIALOGS_DISABLED", !isChecked);
 #else
         isQuestDialogsDisabled = !isChecked;
 #endif
+        
     }
     
     public static bool IsQuestDialogsEnabled()
     {
+        
 #if UNITY_EDITOR
         return !EditorPrefs.GetBool("DEBUG_QUEST_DIALOGS_DISABLED", false);
 #else
         return !isQuestDialogsDisabled;
+#endif
+        
+    }
+    
+    public void OnTutorialValueChanged(bool isChecked)
+    {
+        
+#if UNITY_EDITOR
+        EditorPrefs.SetBool("DEBUG_TUTORIAL_DISABLED", !isChecked);
+#else
+        isTutorialDisabled = !isChecked;
+#endif
+        
+    }
+    
+    public static bool IsTutorialEnabled()
+    {
+        
+#if UNITY_EDITOR
+        return !EditorPrefs.GetBool("DEBUG_TUTORIAL_DISABLED", false);
+#else
+        return !isTutorialDisabled;
 #endif
         
     }

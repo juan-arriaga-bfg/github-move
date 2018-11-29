@@ -75,7 +75,7 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             if (rend.CachedRenderer == null) continue;
             if (rend.CachedRenderer.sharedMaterial == null) continue;
 
-            var material = rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial("pieces.fade.material"));
+            var material = rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial(BoardElementMaterialType.PiecesFadeMaterial));
             material.SetFloat("_AlphaCoef", alpha);
             if (alpha >= 1f)
             {
@@ -97,8 +97,77 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             if (rend.CachedRenderer == null) continue;
             if (rend.CachedRenderer.sharedMaterial == null) continue;
 
-            rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial("pieces.grayscale.material"));
+            rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial(BoardElementMaterialType.PiecesGrayscaleMaterial));
         }
+    }
+    
+    public virtual Material GetExistingCustomMaterial(string customMaterialId, object groupTag)
+    {
+        if (cachedRenderers == null || cachedRenderers.size <= 0)
+        {
+            CacheLayers();
+        }
+
+        var customMaterial = Context.MaterialsCache.GetMaterialForGroup(customMaterialId, groupTag, false);
+
+        return customMaterial;
+    }
+    
+    
+    public virtual Material SetCustomMaterial(string customMaterialId, bool state, object groupTag)
+    {
+        if (cachedRenderers == null || cachedRenderers.size <= 0)
+        {
+            CacheLayers();
+        }
+
+        var customMaterial = Context.MaterialsCache.GetMaterialForGroup(customMaterialId, groupTag);
+
+        foreach (var rend in cachedRenderers)
+        {
+            if (rend == null) continue;
+            if (rend.CachedRenderer == null) continue;
+            if (rend.CachedRenderer.sharedMaterial == null) continue;
+
+            if (state)
+            {
+                rend.SetCustomMaterial(customMaterial);
+            }
+            else
+            {
+                rend.ResetDefaultMaterial();
+            }
+        }
+
+        return customMaterial;
+    }
+    
+    public virtual Material SetCustomMaterial(string customMaterialId, bool state)
+    {
+        if (cachedRenderers == null || cachedRenderers.size <= 0)
+        {
+            CacheLayers();
+        }
+
+        var customMaterial = Context.MaterialsCache.GetMaterial(customMaterialId);
+
+        foreach (var rend in cachedRenderers)
+        {
+            if (rend == null) continue;
+            if (rend.CachedRenderer == null) continue;
+            if (rend.CachedRenderer.sharedMaterial == null) continue;
+
+            if (state)
+            {
+                rend.SetCustomMaterial(customMaterial);
+            }
+            else
+            {
+                rend.ResetDefaultMaterial();
+            }
+        }
+
+        return customMaterial;
     }
     
     public virtual void SetHighlight(bool state)
@@ -116,7 +185,7 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
 
             if (state)
             {
-                rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial("pieces.highlight.material"));
+                rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial(BoardElementMaterialType.PiecesHighlightMaterial));
             }
             else
             {

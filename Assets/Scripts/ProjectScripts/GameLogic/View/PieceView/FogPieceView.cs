@@ -16,8 +16,12 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 	private readonly List<SpriteRenderer> fogSprites = new List<SpriteRenderer>();
 	private FogObserver observer;
     private Piece currentPiece;
+    
+    private List<PieceBoardElementView> fakePieces = new List<PieceBoardElementView>();
 
     private readonly object HIGHLIGHT_ANIMATION_ID = new ViewAnimationUid();
+
+    public List<PieceBoardElementView> FakePieces => fakePieces;
     
 	public override void Init(BoardRenderer context, Piece piece)
 	{
@@ -28,7 +32,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 		observer = piece.GetComponent<FogObserver>(FogObserver.ComponentGuid);
 		
 		if(observer == null) return;
-		
+
 		foreach (var position in observer.Mask)
 		{
 			var fog = Instantiate(fogItem, fogItem.transform.parent);
@@ -36,7 +40,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 			var sprite = fog.GetComponent<SpriteRenderer>();
 			
 			fogSprites.Add(sprite);
-			
+
 			sprite.sprite = IconService.Current.GetSpriteById($"Fog{Random.Range(1, 4)}{CheckBorder(position.X, position.Y)}");
 			sprite.transform.localScale = Vector3.one * 1.1f;
 			sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + 101;
@@ -61,6 +65,8 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 	public void UpdateBorder()
 	{
 		if(observer == null) return;
+	    
+	    if (observer.IsRemoved) return;
 		
 		for (var i = 0; i < observer.Mask.Count; i++)
 		{
@@ -73,7 +79,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 			sprite.sprite = IconService.Current.GetSpriteById($"Fog{Random.Range(1, 4)}{str}");
 		}
 
-		HighlightIfCanClear();
+		HighlightIfCanClear(true);
 	}
 
 	private string CheckBorder(int x, int y)
@@ -87,11 +93,43 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 		return pieceR == null || pieceL == null || pieceR.PieceType != PieceType.Fog.Id || pieceL.PieceType != PieceType.Fog.Id ? "_border" : "";
 	}
 
-    private void HighlightIfCanClear()
+    private void HighlightIfCanClear(bool isAnimate = false)
     {
         if (observer.CanBeCleared())
         {
-            ToggleHighlight(true);
+            ToggleReadyToClear(true, isAnimate);
+	        
+	        if (observer.Def?.Pieces == null) return;
+            
+            if (fakePieces.Count > 0) return;
+            
+            foreach (var pieceDefs in observer.Def.Pieces)
+            {
+                foreach (var pos in pieceDefs.Value)
+                {
+                    var pieceUid = pieceDefs.Key;
+                    var pieceId = GameDataService.Current.MinesManager.GetMineTypeById(pieceUid);
+
+                    if (pieceId == PieceType.None.Id)
+                    {
+                        pieceId = PieceType.Parse(pieceUid);
+                    }
+
+                    var fakePos = new BoardPosition(pos.X, pos.Y, 0);
+                    var fakePiece = Context.Context.BoardLogic.DragAndDrop.CreateFakePieceAt(pieceId, fakePos);
+	                
+                    if (fakePiece != null)
+                    {
+                        fakePiece.SyncRendererLayers(new BoardPosition(pos.X, pos.Y, 1));
+                    
+                        var underFogMaterial = fakePiece.SetCustomMaterial(BoardElementMaterialType.PiecesUnderFogMaterial, true, this);
+                        underFogMaterial.SetFloat("_AlphaCoef", 0f);
+                        underFogMaterial.DOFloat(0.4f, "_AlphaCoef", 2f);
+                    
+                        fakePieces.Add(fakePiece);
+                    }
+                }
+            }
         }
     }
 
@@ -116,8 +154,6 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 		fogItem.SetActive(true);
 		touchItem.SetActive(true);
 		
-		observer.Clear();
-	    
 	    Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ClosePieceUI);
 	    Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.FogTap);
 	}
@@ -139,6 +175,42 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
                     ToggleHighlight(context == currentPiece);
                 }
                 break;
+        }
+    }
+    
+    public virtual void ToggleReadyToClear(bool enabled, bool isAnimate = false)
+    {
+        if (enabled == IsHighlighted)
+        {
+            return;
+        }
+
+        IsHighlighted = enabled;
+	    DOTween.Kill(HIGHLIGHT_ANIMATION_ID);
+	    
+        var fogMaterial = SetCustomMaterial(BoardElementMaterialType.FogDefaultMaterial, enabled, this);
+	    
+        if (isAnimate)
+        {
+            fogMaterial.SetFloat("_ScaleCoef", 1f);
+            fogMaterial.DOFloat(1f, "_ScaleCoef", 3f);
+            fogMaterial.SetFloat("_AlphaCoef", 1f);
+            fogMaterial.DOFloat(0.85f, "_AlphaCoef", 3f);
+        }
+        else
+        {
+            fogMaterial.SetFloat("_ScaleCoef", 1f);
+            fogMaterial.SetFloat("_AlphaCoef", 0.85f);
+        }
+        
+        for (var i = 0; i < fogSprites.Count; i++)
+        {
+            var sprite = fogSprites[i];
+            sprite.sprite = IconService.Current.GetSpriteById("fog_opacity_1");
+
+            var position = observer.Mask.Count > i ? observer.Mask[i] : currentPiece.CachedPosition;
+
+            sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + 1 * 100 - 1;
         }
     }
 

@@ -67,10 +67,10 @@ public class UINextLevelWindowView : UIGenericWindowView
     {
         var manager = GameDataService.Current.LevelsManager;
         
+        CurrencyHellper.Purchase(manager.Rewards, null, new Vector2(Screen.width/2, Screen.height/2));
         CurrencyHellper.Purchase(Currency.Level.Name, 1, Currency.Experience.Name, manager.Price);
         CurrencyHellper.Purchase(Currency.EnergyLimit.Name, 1);
-        CurrencyHellper.Purchase(manager.Rewards, null, new Vector2(Screen.width/2, Screen.height/2));
-       
+        
         var currentValue = ProfileService.Current.GetStorageItem(Currency.Energy.Name).Amount;
         var limitValue = ProfileService.Current.GetStorageItem(Currency.EnergyLimit.Name).Amount;
         var diff = limitValue - currentValue;
@@ -79,7 +79,15 @@ public class UINextLevelWindowView : UIGenericWindowView
             
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
         GameDataService.Current.LevelsManager.UpdateSequence();
-        GameDataService.Current.OrdersManager.Unlock();
+        
+        // todo: temp code, remove it
+        if (GameDataService.Current.LevelsManager.Level == 3)
+        {
+            if (GameDataService.Current.QuestsManager.DailyQuest == null)
+            {
+                GameDataService.Current.QuestsManager.StartNewDailyQuest();
+            }
+        }
         
         base.OnViewCloseCompleted();
     }
@@ -111,7 +119,7 @@ public class UINextLevelWindowView : UIGenericWindowView
             card.gameObject.SetActive(true);
             card.transform.SetParent(cardPrefab.transform.parent, false);
             card.CachedTransform.SetAsLastSibling();
-            card.Init(recipe.Uid, LocalizationService.Get($"order.name.{recipe.Uid}", $"{recipe.Uid}"));
+            card.Init(recipe.Uid, LocalizationService.Get($"order.name.{recipe.Uid}", $"order.name.{recipe.Uid}"));
             card.AddAnimation(0.6f + 0.1f*i);
             cards.Add(card);
         }

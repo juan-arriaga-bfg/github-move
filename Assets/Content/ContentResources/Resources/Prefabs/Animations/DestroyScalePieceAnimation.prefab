@@ -85,11 +85,13 @@ MonoBehaviour:
   IsFading: 0
   FadeValue: 0
   lifeTime: 3
+  scaleOnlyView: 0
   startFromCurrentScale: 1
   from: {x: 1, y: 1, z: 1}
   to: {x: 0, y: 0, z: 0}
-  duration: 0.2
-  timeoutDuration: 0.2
+  duration: 0.3
+  timeoutDuration: 0.3
+  easeType: 27
 --- !u!198 &198369875856840436
 ParticleSystem:
   m_ObjectHideFlags: 1

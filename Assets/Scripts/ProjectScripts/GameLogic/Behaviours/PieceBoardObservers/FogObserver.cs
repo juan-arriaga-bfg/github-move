@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
@@ -10,6 +11,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     private LockView lockView;
     private BubbleView bubble;
     public BoardPosition Key { get; private set; }
+
+    public bool IsRemoved = false;
     
     public RectTransform GetAnchorRect()
     {
@@ -49,6 +52,13 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         base.OnAddToBoard(position, context);
         
         GameDataService.Current.FogsManager.RegisterFogObserver(this);
+
+        PrepareFogToClear();
+    }
+
+    public virtual void PrepareFogToClear()
+    {
+        if (!CanBeCleared()) return;
     }
 
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
@@ -76,57 +86,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void Clear()
     {
-        if(Def == null) return;
         
-        Debug.Log($"[FogObserver] => Clear fog with uid: {Def.Uid}");
-        
-        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, Def);
-        
-        AddResourceView.Show(Def.GetCenter(Context.Context), Def.Reward);
-        GameDataService.Current.FogsManager.RemoveFog(Key);
-        
-        if(Def.Pieces != null)
-        {
-            foreach (var piece in Def.Pieces)
-            {
-                foreach (var pos in piece.Value)
-                {
-                    var pieceId = GameDataService.Current.MinesManager.GetMineTypeById(piece.Key);
-
-                    if (pieceId == PieceType.None.Id)
-                    {
-                        pieceId = PieceType.Parse(piece.Key);
-                    }
-                    
-                    Context.Context.ActionExecutor.AddAction(new CreatePieceAtAction
-                    {
-                        At = pos,
-                        PieceTypeId = pieceId,
-                        SpawnResource = AnimationDataManager.FindAnimation(pieceId, def => def.OnFogSpawn)
-                    });
-                }
-            }
-        }
-        
-        var weights = Def.PieceWeights == null || Def.PieceWeights.Count == 0
-            ? GameDataService.Current.FogsManager.DefaultPieceWeights
-            : Def.PieceWeights;
-        
-        foreach (var point in Mask)
-        {
-            var piece = ItemWeight.GetRandomItem(weights).Piece;
-            
-            if(piece == PieceType.Empty.Id) continue;
-
-           
-            
-            Context.Context.ActionExecutor.AddAction(new CreatePieceAtAction
-            {
-                At = point,
-                PieceTypeId = piece,
-                SpawnResource = AnimationDataManager.FindAnimation(piece, def => def.OnFogSpawn)
-            });
-        }
     }
     
     public void RegisterCarrier(IResourceCarrier carrier)
@@ -176,12 +136,14 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         
         if(bubble.IsShow) return;
 
-        bubble.SetData(LocalizationService.Instance.Manager.GetTextByUid("gameboard.bubble.message.fog", "Clear fog"), Def.Condition.ToStringIcon(), OnClick);
+        bubble.SetData(LocalizationService.Get("gameboard.bubble.message.fog", "gameboard.bubble.message.fog"), Def.Condition.ToStringIcon(), OnClick);
         bubble.SetOfset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
         bubble.Priority = -1;
         bubble.Change(true);
         
         Context.Context.HintCooldown.AddView(bubble);
+
+        PrepareFogToClear();
     }
     
     public string GetResourceId()
@@ -228,19 +190,26 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     private void OnClick(Piece piece)
     {
         if(CurrencyHellper.IsCanPurchase(Def.Condition, true, () => OnClick(piece)) == false) return;
+
+        bubble.CleanOnClick();
         
         CurrencyHellper.Purchase(Currency.Fog.Name, 1, Def.Condition, success =>
         {
             if (success == false) return;
-			
+			  
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, Def);
+            
             Context.Context.HintCooldown.RemoweView(bubble);
 
             bubble.OnHide = () =>
             {
-                piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+                IsRemoved = true;
+                piece.Context.ActionExecutor.AddAction(new CollapseFogToAction
                 {
                     To = piece.CachedPosition,
-                    Positions = new List<BoardPosition> {piece.CachedPosition}
+                    Positions = new List<BoardPosition> {piece.CachedPosition},
+                    FogObserver = this,
+                    OnComplete = DevTools.UpdateFogSectorsDebug
                 });
             };
             

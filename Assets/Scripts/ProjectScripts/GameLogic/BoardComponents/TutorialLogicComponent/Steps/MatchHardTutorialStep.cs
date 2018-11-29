@@ -7,7 +7,7 @@ public class MatchHardTutorialStep : BaseTutorialStep
     
     public List<BoardPosition> FromPositions;
     public List<BoardPosition> ToPositions;
-
+    
     private TutorialMergeFinger finger;
     
     public override void OnRegisterEntity(ECSEntity entity)
@@ -39,6 +39,8 @@ public class MatchHardTutorialStep : BaseTutorialStep
 
     public override void PauseOn()
     {
+        base.PauseOn();
+        
         if(finger != null) finger.Hide();
     }
 
@@ -78,5 +80,6 @@ public class MatchHardTutorialStep : BaseTutorialStep
         
         Context.UnlockAll();
         Context.Context.RendererContext.DestroyElement(finger.gameObject);
+        finger = null;
     }
 }

@@ -25,8 +25,9 @@
                 var task      = quest.Tasks[taskIndex];
                 var pieceTask = task as IHavePieceId;
 
-                if (pieceTask != null && pieceTask.PieceId == piece.PieceType)
+                if (pieceTask != null)
                 {
+                    if (pieceTask.PieceId == piece.PieceType || pieceTask.PieceId == PieceType.None.Id || pieceTask.PieceId == PieceType.Empty.Id )
                     return true;
                 }
             }

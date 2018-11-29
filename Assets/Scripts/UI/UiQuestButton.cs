@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using Quests;
 using UnityEngine;
@@ -85,7 +86,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         
         UpdateView();
         
-        if (Quest.IsCompleted())
+        if (Quest.IsCompletedOrClaimed())
         {
             interactive = false;
 
@@ -122,22 +123,50 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         SetLabelValue(currentValue);
     }
 
-    public static Sprite GetIcon(QuestEntity quest)
+    private static Sprite GetIconForFirstTask(QuestEntity quest)
     {
-        QuestDescriptionComponent cmp = quest.Tasks[0].GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid);
+        return GetIcon(quest.Tasks[0]);
+    }
+    
+    public static Sprite GetIcon(TaskEntity task)
+    {
+        QuestDescriptionComponent cmp = task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid);
 
         if (cmp?.Ico != null)
         {
             return IconService.Current.GetSpriteById(cmp.Ico);
         }
         
-        IHavePieceId taskAboutPiece = quest.Tasks[0] as IHavePieceId;
-        if (taskAboutPiece != null && taskAboutPiece.PieceId != PieceType.None.Id)
+        IHavePieceId taskAboutPiece = task as IHavePieceId;
+        try
         {
-            return IconService.Current.GetSpriteById(PieceType.GetDefById(taskAboutPiece.PieceId).Abbreviations[0]); 
+            if (taskAboutPiece != null && taskAboutPiece.PieceId != PieceType.None.Id && taskAboutPiece.PieceId != PieceType.Empty.Id)
+            {
+                var pieceTypeDef = PieceType.GetDefById(taskAboutPiece.PieceId);
+                return IconService.Current.GetSpriteById(pieceTypeDef.Abbreviations[0]);
+            }
+        }
+        catch (Exception e)
+        {
+            throw;
         }
 
         return IconService.Current.GetSpriteById("codexQuestion");
+    }
+
+    public static string GetTaskProgress(TaskEntity task, int currentValueFontSize = 55, string currentValueColor = "FE4704")
+    {
+        TaskCounterEntity counterTask = task as TaskCounterEntity;
+        if (counterTask == null)
+        {
+            return string.Empty;
+        }
+            
+        bool isCompleted = task.IsCompletedOrClaimed();
+        int  target      = counterTask.TargetValue;
+        int  current     = Mathf.Min(counterTask.CurrentValue, target);
+                
+        return $"<color=#{( isCompleted ? "FFFFFF" : currentValueColor)}><size={currentValueFontSize}>{current}</size></color>/{target}";
     }
     
     private void SetLabelValue(int value)
@@ -146,9 +175,9 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
         // Debug.Log($"AAAAA UPDATE: {quest.Id}");
         
-        icon.sprite = GetIcon(Quest);
+        icon.sprite = GetIconForFirstTask(Quest);
 
-        var isComplete = Quest.IsCompleted();
+        var isComplete = Quest.IsCompletedOrClaimed();
 
         if (isComplete && isUp == false && interactive)
         {
@@ -189,7 +218,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             return;
         }
 
-        if (Quest == null || Quest.IsCompleted())
+        if (Quest == null || Quest.IsCompletedOrClaimed())
         {
             return;
         }
@@ -199,18 +228,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     private void AddQuestWindowToQueue()
     {
-        //Debug.Log("!!! CompleteQuest: AddQuestWindowToQueue: " + Quest.Id);
-        
-        var action = new QueueActionComponent()
-                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = UIWindowType.IgnoredWindows})
-                    //.AddCondition(new NoQueuedActionsConditionComponent {ActionIds = new List<string> {"StartNewQuestsIfAny"}})
-                    .SetAction(() =>
-                     {
-                         // ShowQuestWindow();
-                         ShowQuestCompletedWindow();     
-                     });
-
-        ProfileService.Current.QueueComponent.AddAction(action, false);
+        DefaultSafeQueueBuilder.BuildAndRun(ShowQuestCompletedWindow);
     }
 
     private void ShowQuestCompletedWindow()

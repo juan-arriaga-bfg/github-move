@@ -10,7 +10,7 @@
 		
 		if (piece.Context?.Pathfinder.CanPathToCastle(piece) == false)
 		{
-			UIErrorWindowController.AddError(LocalizationService.Instance.Manager.GetTextByUid("message.error.pieceLock", "Path not found!"));
+			UIErrorWindowController.AddError(LocalizationService.Get("message.error.pieceLock", "message.error.pieceLock"));
 			return false;
 		}
 		
@@ -25,10 +25,7 @@
 		
 		if (IsDone == false)
 		{
-			var message = string.Format(LocalizationService.Instance.Manager.GetTextByUid("message.error.fogLevel",
-						"Reach Level {0} to get access to the fog!"), def.Level);
-			
-			UIErrorWindowController.AddError(message);
+			UIErrorWindowController.AddError(string.Format(LocalizationService.Get("message.error.fogLevel", "message.error.fogLevel {0}"), def.Level));
 		}
         
 		return IsDone;

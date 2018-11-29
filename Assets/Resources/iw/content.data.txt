@@ -880,33 +880,83 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "pieces.sepia.material",
-    "ResourcePath": "Materials/pieces.sepia.material",
-    "IsGenerateAutoName": false
+    "Uid": "PiecesSepiaMaterial",
+    "ResourcePath": "Materials/PiecesSepiaMaterial",
+    "IsGenerateAutoName": true
   },
   {
-    "Uid": "pieces.default.material",
-    "ResourcePath": "Materials/pieces.default.material",
-    "IsGenerateAutoName": false
+    "Uid": "PiecesDefaultMaterial",
+    "ResourcePath": "Materials/PiecesDefaultMaterial",
+    "IsGenerateAutoName": true
   },
   {
-    "Uid": "pieces.grayscale.material",
-    "ResourcePath": "Materials/pieces.grayscale.material",
-    "IsGenerateAutoName": false
+    "Uid": "PiecesGrayscaleMaterial",
+    "ResourcePath": "Materials/PiecesGrayscaleMaterial",
+    "IsGenerateAutoName": true
   },
   {
-    "Uid": "pieces.fade.material",
-    "ResourcePath": "Materials/pieces.fade.material",
-    "IsGenerateAutoName": false
+    "Uid": "PiecesFadeMaterial",
+    "ResourcePath": "Materials/PiecesFadeMaterial",
+    "IsGenerateAutoName": true
   },
   {
-    "Uid": "pieces.highlight.material",
-    "ResourcePath": "Materials/pieces.highlight.material",
-    "IsGenerateAutoName": false
+    "Uid": "PiecesHighlightMaterial",
+    "ResourcePath": "Materials/PiecesHighlightMaterial",
+    "IsGenerateAutoName": true
   },
   {
     "Uid": "FogExplosionParticleSystem",
     "ResourcePath": "Particles/FogExplosionParticleSystem",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "FireflyExplosion",
+    "ResourcePath": "Particles/FireflyExplosion",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ProductionEndParticle",
+    "ResourcePath": "Particles/ProductionEndParticle",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ProductionProcessParticle",
+    "ResourcePath": "Particles/ProductionProcessParticle",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ProductionReadyParticle",
+    "ResourcePath": "Particles/ProductionReadyParticle",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Boost_CR_Tutor",
+    "ResourcePath": "Prefabs\\Tutorial/Boost_CR_Tutor",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "Boost_WR_Tutor",
+    "ResourcePath": "Prefabs\\Tutorial/Boost_WR_Tutor",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "FogDefaultMaterial",
+    "ResourcePath": "Materials/FogDefaultMaterial",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "DevTools",
+    "ResourcePath": "Prefabs\\UI\\Main/DevTools",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "PiecesUnderFogMaterial",
+    "ResourcePath": "Materials/PiecesUnderFogMaterial",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "GodRayView",
+    "ResourcePath": "Prefabs/GodRayView",
     "IsGenerateAutoName": true
   },
   {

@@ -5,6 +5,8 @@ using UnityEngine;
 public class CollapsePieceToAnimation : BoardAnimation
 {
 	public CollapsePieceToAction Action { get; set; }
+
+    public float Delay = 0f;
 	
 	public override void Animate(BoardRenderer context)
 	{
@@ -19,9 +21,9 @@ public class CollapsePieceToAnimation : BoardAnimation
 			completeCount++;
 			if (completeCount == points.Count)
 			{
-				for (int i = 0; i < points.Count; i++)
+				foreach (var boardPosition in points)
 				{
-					context.RemoveElementAt(points[i]);
+					context.RemoveElementAt(boardPosition);	
 				}
 
 				CompleteAnimation(context);
@@ -29,12 +31,13 @@ public class CollapsePieceToAnimation : BoardAnimation
 		};
 		
 		
-		for (int i = 0; i < points.Count; i++)
+		foreach (var point in points)
 		{
-			var boardElement = context.GetElementAt(points[i]);
-			var currentIndex = i;
-			sequence.Insert(0, boardElement.CachedTransform.DOMove(new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.4f).SetEase(Ease.OutBack));
+			var boardElement = context.GetElementAt(point);
 			
+			boardElement.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
+			
+			sequence.Insert(0 + Delay, boardElement.CachedTransform.DOMove(new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.4f).SetEase(Ease.OutBack));
 			if (boardElement is PieceBoardElementView)
 			{
 				var pieceBoardElement = (PieceBoardElementView)boardElement;
@@ -45,7 +48,7 @@ public class CollapsePieceToAnimation : BoardAnimation
 					
 					sequence.InsertCallback(0.2f, () =>
 					{
-						var animView = context.CreateBoardElementAt<AnimationView>(animationResource, points[currentIndex]);
+						var animView = context.CreateBoardElementAt<AnimationView>(animationResource, point);
 						animView.Play(pieceBoardElement);
 						animView.OnComplete += complete;
 					});					
@@ -54,65 +57,8 @@ public class CollapsePieceToAnimation : BoardAnimation
 				}
 			
 			}
-			
-			
-			sequence.Insert(0.2f, boardElement.CachedTransform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack));
+			sequence.Insert(0.2f + Delay, boardElement.CachedTransform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack));
 			sequence.InsertCallback(0.3f, () => complete());
 		}
-	}
-}
-
-public class MatchPieceToAnimation : BoardAnimation
-{
-	public CollapsePieceToAction Action { get; set; }
-
-	private void SetTrailToPiece(BoardElementView pieceView, BoardPosition piecePosition)
-	{
-		var particles = ParticleView.Show(R.TrailMergeParticles, piecePosition);
-		particles.transform.SetParent(pieceView.transform);
-	}
-	
-	public override void Animate(BoardRenderer context)
-	{
-		var points = Action.Positions;
-		var to = context.Context.BoardDef.GetPiecePosition(Action.To.X, Action.To.Y);
-		
-		var sequence = DOTween.Sequence().SetId(animationUid);
-		var elementOffset = 0.00f;
-		//sequence.timeScale = 0.5f;
-		var particlePosition = new BoardPosition(Action.To.X, Action.To.Y, 2);
-		sequence.timeScale = 1.2f;
-		sequence.InsertCallback(0.0f, () => ParticleView.Show(R.SmolderingParticles, particlePosition));
-		sequence.InsertCallback(0.0f, () => ParticleView.Show(R.MergeParticleSystem, particlePosition).SyncRendererLayers(new BoardPosition(Action.To.X, Action.To.Y, 4)));
-		
-		for (int i = 0; i < points.Count; i++)
-		{
-			var boardElement = context.GetElementAt(points[i]);
-			if (points[i].Equals(Action.To))
-			{
-				sequence.Insert(0.25f, boardElement.CachedTransform.DOScale(Vector3.one * 1.2f, 0.10f));
-				sequence.Insert(0.35f, boardElement.CachedTransform.DOScale(Vector3.zero, 0.1f));
-				//sequence.Insert(0.35f + points.Count * elementOffset, boardElement.CachedTransform.DOScale(Vector3.zero, 0.1f));
-				//sequence.Insert(0.35f + points.Count * elementOffset,
-					//boardElement.CachedTransform.DOLocalJump(boardElement.transform.position, -1, 1, 0.1f));
-				boardElement.SyncRendererLayers(new BoardPosition(Action.To.X, Action.To.Y, 4));
-				continue;
-			}
-			SetTrailToPiece(boardElement, points[i]);
-			sequence.Insert(0 + elementOffset*i, boardElement.CachedTransform.DOMove(new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.25f));
-			sequence.Insert(0.15f + elementOffset*i, boardElement.CachedTransform.DOScale(Vector3.zero, 0.20f));
-		}
-
-		sequence.InsertCallback(0.35f, () => ParticleView.Show(R.ExplosionParticleSystem, particlePosition));
-		
-		sequence.OnComplete(() =>
-		{
-			for (int i = 0; i < points.Count; i++)
-			{
-				context.RemoveElementAt(points[i]);
-			}
-			
-			CompleteAnimation(context);
-		});
 	}
 }

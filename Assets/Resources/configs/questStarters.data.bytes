@@ -60,7 +60,6 @@
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
       "7_CreatePiece_PR_A5",
-      "8_CreatePiece_PR_B5",
       "9_CreatePiece_PR_C5"
     ],
     "Conditions": [
@@ -75,6 +74,20 @@
     "Id": 6,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
+      "8_CreatePiece_PR_B5"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
+        "Id": "FogCleared",
+        "Value": "Fog 4"
+      }
+    ]
+  },
+  {
+    "Id": 7,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
       "11_UseWorker"
     ],
     "Conditions": [
@@ -86,7 +99,7 @@
     ]
   },
   {
-    "Id": 7,
+    "Id": 8,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
       "12_UseMine"
@@ -100,7 +113,7 @@
     ]
   },
   {
-    "Id": 8,
+    "Id": 9,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
       "13_CreatePiece_A6"
@@ -114,7 +127,7 @@
     ]
   },
   {
-    "Id": 9,
+    "Id": 10,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
       "10_OpenChest"
@@ -128,7 +141,21 @@
     ]
   },
   {
-    "Id": 10,
+    "Id": 11,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "10_OpenChest"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
+        "Id": "PieceUnlocked",
+        "Value": "CH2_A"
+      }
+    ]
+  },
+  {
+    "Id": 12,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
       "14_CreatePiece_B3"
@@ -142,7 +169,7 @@
     ]
   },
   {
-    "Id": 11,
+    "Id": 13,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
       "15_CreatePiece_B4"
@@ -156,7 +183,7 @@
     ]
   },
   {
-    "Id": 12,
+    "Id": 14,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
       "17_KillField"
@@ -170,7 +197,7 @@
     ]
   },
   {
-    "Id": 13,
+    "Id": 15,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
       "17_KillField"
@@ -184,7 +211,7 @@
     ]
   },
   {
-    "Id": 14,
+    "Id": 16,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
       "17_KillField"
@@ -198,17 +225,12 @@
     ]
   },
   {
-    "Id": 15,
+    "Id": 17,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
       "16_CompleteOrder"
     ],
     "Conditions": [
-      {
-        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
-        "Id": "QuestCompleted",
-        "Value": "8_CreatePiece_PR_B5"
-      },
       {
         "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
         "Id": "QuestCompleted",

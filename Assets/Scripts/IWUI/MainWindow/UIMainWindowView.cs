@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
@@ -9,27 +10,48 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
     [SerializeField] private GameObject pattern;
     [SerializeField] private CodexButton codexButton;
     [SerializeField] private CanvasGroup questsCanvasGroup;
-    [SerializeField] private CanvasGroup rightButtonsCanvasGroups;
+    
+    [IWUIBinding("#ButtonsRight")] private CanvasGroup rightButtonsCanvasGroups;
+    [IWUIBinding("#ButtonsLeft")] private CanvasGroup leftButtonsCanvasGroups;
     
     [SerializeField] private CanvasGroup workerCanvasGroup;
     [SerializeField] private CanvasGroup energyCanvasGroup;
     [SerializeField] private CanvasGroup codexCanvasGroup;
     [SerializeField] private CanvasGroup shopCanvasGroup;
     [SerializeField] private CanvasGroup ordersCanvasGroup;
+    [SerializeField] private CanvasGroup removeCanvasGroup;
     
-    [SerializeField] private GameObject delimiters;
+    [IWUIBinding("#ButtonDailyQuest")] private DailyQuestButton dailyQuestButton;
+
+    [IWUIBinding("#QuestsList")] private ScrollRect questListScroll;
+    [IWUIBinding("#QuestListViewport")] private RectTransform questListViewport;
+    [IWUIBinding("#QuestListContent")] private RectTransform questListContent;
+    [IWUIBinding("#QuestListDelimiters")] private GameObject questListDelimiters;
     
-    [SerializeField] private ScrollRect questsScroll;
+    [IWUIBinding("#DebugButtonsAnchor")] private Transform debugButtonsAnchor;
 
     [Header("Hint anchors")] 
     [SerializeField] private Transform hintAnchorOrdersButton;
     public Transform HintAnchorOrdersButton => hintAnchorOrdersButton;
-
-    private List<UiQuestButton> questButtons = new List<UiQuestButton>();
+    
+    private readonly List<UiQuestButton> questButtons = new List<UiQuestButton>();
 
     private int maxCountOfVisibleQuestButtonsCached = -1;
     
     public UIHintArrowComponent CachedHintArrowComponent { get; private set; }
+
+    public override void InitView(IWWindowModel model, IWWindowController controller)
+    {
+        base.InitView(model, controller);
+        
+#if DEBUG
+        
+        var dev = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName("DevTools"));
+        dev.SetParent(debugButtonsAnchor, false);
+        
+#endif
+        
+    }
     
     public override void OnViewShow()
     {
@@ -47,8 +69,9 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
         
         OnActiveQuestsListChanged();
         UpdateCodexButton();
+        UpdateDailyQuestButton();
     }
-    
+
     private void OnDestroy()
     {
         GameDataService.Current.QuestsManager.OnActiveQuestsListChanged -= OnActiveQuestsListChanged;
@@ -76,6 +99,9 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
             case UiLockTutorialItem.Orders:
                 target = ordersCanvasGroup;
                 break;
+            case UiLockTutorialItem.Remove:
+                target = removeCanvasGroup;
+                break;
             default:
                 return;
         }
@@ -86,19 +112,32 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
         if (isAnimate == false)
         {
             target.alpha = isLock ? 0 : 1;
+            target.gameObject.SetActive(!isLock);
             return;
         }
-
-        target.DOFade(isLock ? 0 : 1, 0.2f);
+        
+        target.DOFade(isLock ? 0 : 1, 0.4f)
+            .OnStart(() =>
+            {
+                if(isLock) return;
+                target.gameObject.SetActive(true);
+            })
+            .OnComplete(() =>
+            {
+                if(isLock == false) return;
+                target.gameObject.SetActive(false);
+            });
     }
 
     public void OnActiveQuestsListChanged()
     {
-        var activeQuests = GameDataService.Current.QuestsManager.ActiveQuests;
+        var activeQuests = GameDataService.Current.QuestsManager.ActiveStoryQuests;
         
         CheckQuestButtons(activeQuests);
 
         InitWindowViewControllers();
+        
+        UpdateDailyQuestButton();
     }
 
     private void CheckQuestButtons(List<QuestEntity> active)
@@ -118,11 +157,6 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
 
             listChanged = true;
         }
-
-        if (questButtons.Count == active.Count)
-        {
-            return;
-        }
         
         pattern.SetActive(true);
 
@@ -140,7 +174,7 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
             
             questButtons.Add(button);
 
-            if (quest.IsCompleted())
+            if (quest.IsCompletedOrClaimed())
             {
                 button.gameObject.SetActive(false);
             }
@@ -152,13 +186,22 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
         
         pattern.SetActive(false);
 
-        delimiters.SetActive(GetMaxCountOfVisibleQuestButtons() < questButtons.Count);
-        
         // Scroll list to top
         if (listChanged)
         {
-            questsScroll.verticalNormalizedPosition  = 1f;
+            StartCoroutine(UpdateQuestListDelimiters());
+            questListScroll.verticalNormalizedPosition  = 1f;
         }
+    }
+
+    private IEnumerator UpdateQuestListDelimiters()
+    {
+        yield return new WaitForEndOfFrame();
+        
+        float contentH = questListContent.rect.height;
+        float viewportH = questListViewport.rect.height;
+        
+        questListDelimiters.SetActive(contentH > viewportH);
     }
 
     private void UpdateCodexButton()
@@ -201,6 +244,12 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
         UIService.Get.ShowWindow(UIWindowType.OrdersWindow);
     }
     
+    public void OnClickDailyQuest()
+    {
+        var model = UIService.Get.GetCachedModel<UIDailyQuestWindowModel>(UIWindowType.DailyQuestWindow);
+        UIService.Get.ShowWindow(UIWindowType.DailyQuestWindow);
+    }
+    
     private void OnNewPieceBuilded()
     {
         codexButton.UpdateState();
@@ -213,31 +262,23 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
 
         questsCanvasGroup.DOFade(visible ? 1 : 0, time);
         rightButtonsCanvasGroups.DOFade(visible ? 1 : 0, time);
+        leftButtonsCanvasGroups.DOFade(visible ? 1 : 0, time);
 
-        foreach (var image in delimiters.transform.GetComponentsInChildren<Image>())
+        foreach (var image in questListDelimiters.transform.GetComponentsInChildren<Image>())
         {
             image.DOFade(visible ? 1 : 0, time);
         }
     }
-
-    private int GetMaxCountOfVisibleQuestButtons()
+    
+    private void UpdateDailyQuestButton()
     {
-        if (maxCountOfVisibleQuestButtonsCached > 0)
-        {
-            return maxCountOfVisibleQuestButtonsCached;
-        }
+        var questManager = GameDataService.Current.QuestsManager;
+        
+        dailyQuestButton.gameObject.SetActive(questManager.DailyQuest != null);
+    }
 
-        LayoutElement layoutElement = pattern.GetComponent<LayoutElement>();
-        VerticalLayoutGroup layoutGroup = pattern.transform.parent.GetComponent<VerticalLayoutGroup>();
-        RectTransform container = layoutGroup.transform.parent.GetComponent<RectTransform>();
-
-        float itemH = layoutElement.minHeight;
-        float spacing = layoutGroup.spacing;
-        float topPadding = layoutGroup.padding.top;
-        float bottomPadding = layoutGroup.padding.bottom;
-        float containerH = container.rect.height;
-
-        maxCountOfVisibleQuestButtonsCached = (int) ((containerH - topPadding - bottomPadding + spacing) / (itemH + spacing));
-        return maxCountOfVisibleQuestButtonsCached;
+    public void OnClickSettings()
+    {
+        UIMessageWindowController.CreateNotImplementedMessage();
     }
 }

@@ -53,7 +53,17 @@ public class UILimitPanelViewController : UIGenericResourcePanelViewController
         if(shopItem.ItemUid != itemLimitUid) return;
             
         limitValueAnimated = currentLimitValue;
-        currentLimitValue += shopItem.Amount;
+
+        var offset = shopItem.Amount;
+
+        foreach (var price in shopItem.CurrentPrices)
+        {
+            if(price.Currency != itemLimitUid) continue;
+
+            offset -= price.DefaultPriceAmount;
+        }
+        
+        currentLimitValue += offset;
 
         DOTween.Kill(storageItemLimit);
         

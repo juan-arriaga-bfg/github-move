@@ -49,6 +49,9 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             RegisterComponent(tutorial, true);
         }
         
+        var firefly = Context.BoardLogic.FireflyLogic;
+        firefly.Locker.Unlock(firefly);
+        
         UIService.Get.OnShowWindowEvent += OnShowWindow;
         UIService.Get.OnCloseWindowEvent += OnCloseWindow;
         GameDataService.Current.QuestsManager.OnActiveQuestsListChanged += Update;

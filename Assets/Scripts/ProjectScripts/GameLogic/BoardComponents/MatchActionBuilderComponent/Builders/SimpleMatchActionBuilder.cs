@@ -33,14 +33,22 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         var nextPieces = Add(Mathf.RoundToInt(countForMatch / (float)countForMatchDefault), nextType, new List<int>());
         
         if(countForMatch % countForMatchDefault == 1) nextPieces = Add(1, pieceType, nextPieces);
-
-        var nextAction = new SpawnPiecesAction
+        
+        var matchDescription = new MatchDescription
         {
-            IsCheckMatch = false,
-            At = position,
-            Pieces = nextPieces,
-            IsMatch = true,
-            OnSuccessEvent = list =>
+            SourcePieceType = pieceType,
+            MatchedPiecesCount = matchField.Count,
+            CreatedPieceType = nextType,
+        };
+            
+        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, matchDescription);
+
+        return new ModificationPiecesAction
+        {
+            NextPieces = nextPieces,
+            To = position,
+            Positions = matchField,
+            OnSuccess = list =>
             {
                 for (var i = 0; i < list.Count; i++)
                 {
@@ -49,23 +57,6 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
                     SpawnReward(list[i], nextPieces[i]);
                 }
             }
-        };
-
-        MatchDescription matchDescription = new MatchDescription
-        {
-            SourcePieceType = pieceType,
-            MatchedPiecesCount = matchField.Count,
-            CreatedPieceType = nextType,
-        };
-            
-        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, matchDescription);
-        
-        return new CollapsePieceToAction
-        {
-            To = position,
-            Positions = matchField,
-            IsMatch = true,
-            OnCompleteAction = nextAction
         };
     }
     

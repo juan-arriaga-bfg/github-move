@@ -25,7 +25,9 @@ public class SwapPiecesAnimation : BoardAnimation
 	{
 		var pos = context.Context.BoardDef.GetPiecePosition(to.X, to.Y);
 		pos = new Vector3(pos.x, pos.y, 0f);
-
+		
+		view.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
+		
 		sequence.Insert(0, view.CachedTransform.DOLocalMove(pos, 0.4f).SetEase(Ease.InOutSine));
 		sequence.InsertCallback(0.4f, () => context.ResetBoardElement(view, to));
 	}

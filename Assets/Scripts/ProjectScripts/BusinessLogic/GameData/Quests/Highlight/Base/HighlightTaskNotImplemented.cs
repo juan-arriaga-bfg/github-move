@@ -5,7 +5,7 @@ public class HighlightTaskNotImplemented : ITaskHighlight
 {
     public bool Highlight(TaskEntity task)
     {
-        UIMessageWindowController.CreateNotImplementedMessage();
+        UIMessageWindowController.CreateMessage("Not implemented!", "The hint is not implemented yet.");
         return true;
     }
 }
