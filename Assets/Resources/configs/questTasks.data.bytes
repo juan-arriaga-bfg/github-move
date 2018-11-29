@@ -110,7 +110,6 @@
   {
     "$type": "TaskOpenChestEntity, GameAssembly",
     "Id": "10_OpenChest",
-    "PieceUid": "CH1_A",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -219,12 +218,12 @@
       },
       "QuestDescriptionComponent": {
         "Ico": "clockButtonDailyObjectives",
-        "Message": "Clear all"
+        "Message": "Clear all objectives"
       }
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "$type": "TaskMatchEntity, GameAssembly",
     "Id": "Daily_Quest_1",
     "Group": "Permanent",
     "TargetValue": 10,
@@ -244,7 +243,7 @@
     }
   },
   {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "$type": "TaskMatchEntity, GameAssembly",
     "Id": "Daily_Quest_2",
     "Group": "Permanent",
     "TargetValue": 20,

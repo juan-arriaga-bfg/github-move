@@ -25,7 +25,7 @@ public class TaskCollectIngredientEntity : TaskCurrencyCollectEntity
         }
         
         
-        if (shopItem.ItemUid == Currency)
+        if (shopItem.ItemUid == Currency || string.IsNullOrEmpty(Currency))
         {
             CurrentValue += shopItem.Amount;
         }

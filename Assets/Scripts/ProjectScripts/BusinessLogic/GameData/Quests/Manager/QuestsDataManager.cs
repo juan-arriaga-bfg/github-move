@@ -313,34 +313,30 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         const string ACTION_ID = "StartNewQuestsIfAny";
         
         Debug.Log($"[QuestsDataManager] => StartNewQuestsIfAny Schedule");
-        
-        var action = new QueueActionComponent {Id = ACTION_ID}
-                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = UIWindowType.IgnoredWindows})
-                    .SetAction(() =>
-                     {
-                         string starterId = null;
-                         var questsToStart = CheckConditions(out starterId);
-                         if (questsToStart.Count == 0)
-                         {
-                             Debug.Log($"[QuestsDataManager] => CheckConditions == 0, return");
-                             return;
-                         }
 
-                         Debug.Log($"[QuestsDataManager] => StartNewQuestsIfAny before dlg");
+        DefaultSafeQueueBuilder.BuildAndRun(ACTION_ID, true, () =>
+        {
+            string starterId = null;
+            var questsToStart = CheckConditions(out starterId);
+            if (questsToStart.Count == 0)
+            {
+                Debug.Log($"[QuestsDataManager] => CheckConditions == 0, return");
+                return;
+            }
 
-                         if (!DevTools.IsQuestDialogsEnabled())
-                         {
-                             DevTools.FastStartQuest(questsToStart);
-                             return;
-                         }
+            Debug.Log($"[QuestsDataManager] => StartNewQuestsIfAny before dlg");
 
-                         var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
-                         model.Init(null, questsToStart, starterId);
+            if (!DevTools.IsQuestDialogsEnabled())
+            {
+                DevTools.FastStartQuest(questsToStart);
+                return;
+            }
 
-                         UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
-                     });
+            var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
+            model.Init(null, questsToStart, starterId);
 
-        ProfileService.Current.QueueComponent.AddAction(action, true);
+            UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
+        });
 
         return true;
     }
@@ -499,8 +495,11 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
                     ActiveStoryQuests.Remove(quest);
                     FinishedQuests.Add(id);
                 }
-                
-                quest.DisconnectFromBoard();
+
+                if (ConnectedToBoard)
+                {
+                    quest.DisconnectFromBoard();
+                }
                 
                 quest.OnChanged -= OnQuestsStateChangedEvent;
                 

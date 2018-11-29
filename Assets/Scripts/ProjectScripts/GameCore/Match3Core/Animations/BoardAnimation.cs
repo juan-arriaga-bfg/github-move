@@ -8,6 +8,11 @@ public abstract class BoardAnimation
 
 	public abstract void Animate(BoardRenderer context);
 
+    public virtual void PrepareAnimation(BoardRenderer context)
+    {
+        
+    }
+
 	public virtual void CompleteAnimation(BoardRenderer context)
 	{
 		OnCompleteEvent?.Invoke(this);

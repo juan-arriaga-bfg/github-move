@@ -39,7 +39,7 @@ public class TaskCompleteDailyTaskEntity : TaskCounterEntity
         int completedCount = 0;
         foreach (var taskEntity in activeTasks)
         {
-            if (taskEntity.IsCompleted())
+            if (taskEntity.IsCompletedOrClaimed())
             {
                 completedCount++;
             }

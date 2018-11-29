@@ -11,6 +11,8 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
 
     private bool isLevelUp;
     public Action<int> OnLevelUp;
+
+    private string kiloAbbreviation;
     
     public override int CurrentValueAnimated
     {
@@ -21,7 +23,13 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
             UpdateProgress(currentValueAnimated);
         }
     }
-    
+
+    public override void OnViewShow(IWUIWindowView context)
+    {
+        base.OnViewShow(context);
+        kiloAbbreviation = LocalizationService.Get("common.abbreviation.kilo", "common.abbreviation.kilo");
+    }
+
     public override void UpdateView()
     {
         if (storageItem == null) return;
@@ -47,29 +55,47 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
         var manager = GameDataService.Current.LevelsManager;
         
         progress.fillAmount = Mathf.Clamp(value/manager.Price, 0f, 1f);
-        
-#if UNITY_EDITOR
-        amountLabel.Text = $"{Mathf.Max(0, value)}/{manager.Price}";
-#endif
+
+        SetText((int) Mathf.Max(0, value), manager.Price);
         
         if(isLevelUp || CurrencyHellper.IsCanPurchase(itemUid, manager.Price) == false) return;
 
         isLevelUp = true;
-        
-        var action = new QueueActionComponent()
-                    .AddCondition(new OpenedWindowsQueueConditionComponent {IgnoredWindows = UIWindowType.IgnoredWindows})
-                    .SetAction(() =>
-                     {
-                         UIService.Get.ShowWindow(UIWindowType.NextLevelWindow);
-                         UIService.Get.OnCloseWindowEvent += OnCloseNextLevelWindow;
-                     });
 
-        ProfileService.Current.QueueComponent.AddAction(action, false);
+        DefaultSafeQueueBuilder.BuildAndRun(() =>
+        {
+            UIService.Get.ShowWindow(UIWindowType.NextLevelWindow);
+            UIService.Get.OnCloseWindowEvent += OnCloseNextLevelWindow;
+        });
     }
 
     private void OnCloseNextLevelWindow(IWUIWindow window)
     {
         UIService.Get.OnCloseWindowEvent -= OnCloseNextLevelWindow;
         isLevelUp = false;
+    }
+
+    private void SetText(int from, int to)
+    {
+        const int MAX_LEN = 9;
+        
+        const string DELIMITER = "/";
+        string fromStr = from.ToString();
+        string toStr = to.ToString();
+
+        if (fromStr.Length + DELIMITER.Length + toStr.Length > MAX_LEN)
+        {
+            if (to < 1000)
+            {
+                Debug.LogError($"[UIExperiencePanelViewController] => SetText: Text size exceeded maximum limit of {MAX_LEN} chars but can't be compressed using K");
+            }
+            else if (to >= 1000)
+            {
+                int rounded = Mathf.CeilToInt(to / 1000f);
+                toStr = $"{rounded}{kiloAbbreviation}";
+            }
+        }
+        
+        amountLabel.Text = string.Concat(fromStr, DELIMITER, toStr);
     }
 }
