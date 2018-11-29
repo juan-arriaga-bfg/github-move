@@ -12,7 +12,7 @@ public class GodRayView : BoardElementView, IBoardEventListener
         particle.gameObject.SetActive(true);
     }
 
-    public void Remove(float delay = 10f)
+    public void Remove(float delay = 5f)
     {
         const float stopTime = 1.5f;
 
@@ -86,5 +86,23 @@ public class GodRayView : BoardElementView, IBoardEventListener
         }
 
         Remove(0);
+    }
+
+    public override void SyncRendererLayers(BoardPosition boardPosition)
+    {
+        // base.SyncRendererLayers(boardPosition);
+        
+        if (cachedRenderers.size <= 0)
+        {
+            CacheLayers();
+        }
+
+        for (int i =0; i < cachedRenderers.size; i++)
+        {
+            var rend = cachedRenderers[i];
+            rend.CachedRenderer.sortingOrder = boardPosition.X * Context.Context.BoardDef.Width - boardPosition.Y + boardPosition.Z * 100 + rend.SortingOrderOffset + 10000;
+        }
+
+        CachedTransform.localPosition = new Vector3(CachedTransform.localPosition.x, CachedTransform.localPosition.y, -boardPosition.Z * 0.1f);
     }
 }
