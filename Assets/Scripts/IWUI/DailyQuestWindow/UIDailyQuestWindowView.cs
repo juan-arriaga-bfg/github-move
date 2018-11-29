@@ -39,6 +39,11 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         
         ToggleComebackPanel(isQuestClaimed);
     }
+    
+    public void ScrollToTop()
+    {
+        taskList.GetScrollRect().normalizedPosition = new Vector2(0.5f, 1);
+    }
 
     private void OnQuestChanged(QuestEntity quest, TaskEntity task)
     {
@@ -83,10 +88,10 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         {
             var task = tasks[i];
 
-            if (task.IsClaimed())
-            {
-                continue;
-            }
+            // if (task.IsClaimed())
+            // {
+            //     continue;
+            // }
             
             var tabEntity = new UIDailyQuestTaskElementEntity
             {
@@ -108,7 +113,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         {
             const int CLAIMED_WEIGHT = 10000;
             const int COMPLETED_WEIGHT = -1000;
-            const int CLEAR_ALL_WEIGHT = 20000;
+            const int CLEAR_ALL_WEIGHT = 5000;
             
             int w1 = (int)item1.Group;
             int w2 = (int)item2.Group;

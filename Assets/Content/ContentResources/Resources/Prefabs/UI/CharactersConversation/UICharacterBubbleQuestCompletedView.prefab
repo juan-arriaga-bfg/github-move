@@ -622,7 +622,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 2100000, guid: c89a26b8f9bca2a4db04463316012bc1, type: 2}
-  m_isDefaultMaterial: 0
+  m_isDefaultMaterial: 1
   m_padding: 0.5
   m_canvasRenderer: {fileID: 222054699482044374}
   m_TextComponent: {fileID: 114638359924099582}
@@ -796,7 +796,7 @@ MonoBehaviour:
   m_text: Quest Completed!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 942d9c6c91941bb4bbed011dd717136b, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 68f49f42502684a8384102299c5374bf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -804,7 +804,7 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 1
+  m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 0.7764706, b: 0, a: 1}
     topRight: {r: 1, g: 0.7764706, b: 0, a: 1}
@@ -1473,7 +1473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowSwitching: 1
-  styleId: 12
+  styleId: 13
 --- !u!114 &114784301121569572
 MonoBehaviour:
   m_ObjectHideFlags: 1

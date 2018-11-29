@@ -7,23 +7,31 @@ public class HintArrowView : BoardElementView
     
     public const float DURATION = 0.5f;
     
-    private void Show()
+    private void Show(bool isLoop)
     {
         DOTween.Kill(animationUid);
         
         var sequence = DOTween.Sequence().SetId(animationUid);
         
         sequence.Insert(0, icon.DOFade(1, 1f));
+        
+        if(isLoop) return;
+        
+        sequence.Insert(3.5f, icon.DOFade(0, DURATION));
+        sequence.InsertCallback(3.5f + DURATION * 1.1f, () => DestroyOnBoard(0));
     }
-
+    
     public void Remove(float delay = 3.5f)
     {
+        DOTween.Kill(animationUid);
+        
         var sequence = DOTween.Sequence().SetId(animationUid);
+        
         sequence.Insert(delay, icon.DOFade(0, DURATION));
         
         DestroyOnBoard(delay + DURATION * 1.1f);
     }
-
+    
     public static HintArrowView Show(BoardPosition position, float offsetX = 0, float offsetY = 0, bool focus = true, bool loop = false)
     {
         var board = BoardService.Current.GetBoardById(0);
@@ -39,9 +47,8 @@ public class HintArrowView : BoardElementView
         var arrowView = board.RendererContext.CreateBoardElementAt<HintArrowView>(R.HintArrow, position);
 
         arrowView.CachedTransform.localPosition = arrowView.CachedTransform.localPosition + (Vector3.up * 2) + new Vector3(offsetX, offsetY);
-        arrowView.Show();
+        arrowView.Show(loop);
         
-        if (loop == false) arrowView.Remove();
         if (focus == false) return arrowView;
 
         var worldPos = board.BoardDef.GetSectorCenterWorldPosition(position.X, position.Up.Y, position.Z);
@@ -56,9 +63,8 @@ public class HintArrowView : BoardElementView
         var arrowView = board.RendererContext.CreateBoardElementAt<HintArrowView>(R.HintArrow, new BoardPosition(0,0));
 
         arrowView.CachedTransform.position = hintTarget.position + new Vector3(offsetX, offsetY);
-        arrowView.Show();
+        arrowView.Show(loop);
         
-        if (loop == false) arrowView.Remove();
         if (focus == false) return arrowView;
         
         board.Manipulator.CameraManipulator.MoveTo(hintTarget.position);
