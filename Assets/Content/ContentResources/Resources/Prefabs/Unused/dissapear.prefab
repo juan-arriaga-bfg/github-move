@@ -46,7 +46,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1203300490495470
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
@@ -60,7 +60,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1267128980122782
 GameObject:
   m_ObjectHideFlags: 1
@@ -107,6 +107,7 @@ Transform:
   m_Children:
   - {fileID: 4325682849450312}
   - {fileID: 4784242359378106}
+  - {fileID: 4718865705116858}
   m_Father: {fileID: 4956404047466530}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -133,8 +134,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4956404047466530}
-  m_RootOrder: 1
+  m_Father: {fileID: 4040944905540882}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4784242359378106
 Transform:
@@ -156,11 +157,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1159758249533698}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.04333709, y: -0.08913511, z: -10.073984}
+  m_LocalPosition: {x: -0.6570584, y: 1.9800553, z: -0.04468727}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4040944905540882}
-  - {fileID: 4718865705116858}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -178,6 +178,7 @@ MonoBehaviour:
   IsFading: 0
   FadeValue: 0
   duration: 4
+  Particles: {fileID: 0}
 --- !u!198 &198078376172285170
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -14105,7 +14106,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2

@@ -169,6 +169,10 @@ public class R
      public const string PiecesFadeMaterial = "PiecesFadeMaterial";
      public const string PiecesHighlightMaterial = "PiecesHighlightMaterial";
      public const string FogExplosionParticleSystem = "FogExplosionParticleSystem";
+     public const string FireflyExplosion = "FireflyExplosion";
+     public const string ProductionEndParticle = "ProductionEndParticle";
+     public const string ProductionProcessParticle = "ProductionProcessParticle";
+     public const string ProductionReadyParticle = "ProductionReadyParticle";
      public const string FogDefaultMaterial = "FogDefaultMaterial";
      public const string PiecesUnderFogMaterial = "PiecesUnderFogMaterial";
      public const string GodRayView = "GodRayView";
