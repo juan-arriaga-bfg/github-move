@@ -20,12 +20,6 @@
         "Uid": "PR_C1",
         "Weight": 50
       }
-    ],
-    "ResourcesWeights": [
-      {
-        "Uid": "PR_C5",
-        "Weight": 50
-      }
     ]
   },
   {
@@ -73,22 +67,7 @@
       },
       {
         "Uid": "PR_B1",
-        "Weight": 30
-      }
-    ],
-    "ResourcesWeights": [
-      {
-        "Uid": "PR_A5",
-        "Weight": 30
-      },
-      {
-        "Uid": "PR_C5",
-        "Weight": 20,
-        "Override": true
-      },
-      {
-        "Uid": "PR_B5",
-        "Weight": 30
+        "Weight": 10
       }
     ]
   },
@@ -110,16 +89,22 @@
     ],
     "OrdersWeights": [
       {
-        "Uid": "Order2",
-        "Weight": 10
-      },
-      {
-        "Uid": "Order4",
+        "Uid": "Order1",
         "Weight": 10
       },
       {
         "Uid": "Order5",
         "Weight": 10
+      }
+    ],
+    "ResourcesWeights": [
+      {
+        "Uid": "PR_A5",
+        "Weight": 30
+      },
+      {
+        "Uid": "PR_C5",
+        "Weight": 20
       }
     ]
   },
@@ -141,11 +126,11 @@
     ],
     "OrdersWeights": [
       {
-        "Uid": "Order7",
+        "Uid": "Order2",
         "Weight": 15
       },
       {
-        "Uid": "Order1",
+        "Uid": "Order4",
         "Weight": 15
       }
     ],
@@ -161,24 +146,14 @@
       },
       {
         "Uid": "PR_B1",
-        "Weight": 10,
+        "Weight": 50,
         "Override": true
       }
     ],
     "ResourcesWeights": [
       {
-        "Uid": "PR_C5",
-        "Weight": 30,
-        "Override": true
-      },
-      {
-        "Uid": "PR_D5",
-        "Weight": 10
-      },
-      {
         "Uid": "PR_B5",
-        "Weight": 10,
-        "Override": true
+        "Weight": 10
       }
     ]
   },
@@ -200,7 +175,7 @@
     ],
     "OrdersWeights": [
       {
-        "Uid": "Order9",
+        "Uid": "Order7",
         "Weight": 20
       }
     ],
