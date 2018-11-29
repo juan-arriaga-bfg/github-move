@@ -7,6 +7,8 @@ public class ReproductionPieceView : PieceBoardElementView
     private TimerComponent timer;
     private ParticleView processParticle;
     private ParticleView readyParticle;
+
+    private ReproductionLifeComponent reproductionLife;
     
     public override void Init(BoardRenderer context, Piece piece)
     {
@@ -23,7 +25,21 @@ public class ReproductionPieceView : PieceBoardElementView
         
         UpdateSate();
     }
-    
+
+    public override void UpdateView()
+    {
+        base.UpdateView();
+        
+        if(reproductionLife == null)
+            reproductionLife = Piece.GetComponent<ReproductionLifeComponent>(ReproductionLifeComponent.ComponentGuid);
+
+        if (reproductionLife?.IsDead == true)
+        {
+            ClearParticle(ref processParticle);        
+            ClearParticle(ref readyParticle);
+        }
+    }
+
     public override void ResetViewOnDestroy()
     {
         base.ResetViewOnDestroy();
@@ -47,7 +63,7 @@ public class ReproductionPieceView : PieceBoardElementView
     
     private void SyncParticlePosition(ParticleView particle)
     {
-        particle.ParticleRenderer.sortingOrder = bodySprites.First().sortingOrder + 1;
+        particle.SyncRendererLayers(Piece.CachedPosition.SetZ(3));
     }
 
     private void PlayAndSyncParticle(ParticleView particle)
@@ -84,6 +100,7 @@ public class ReproductionPieceView : PieceBoardElementView
     {
         if (particle == null)
             return;
+        particle.gameObject.SetActive(false);
         Context.DestroyElement(particle);
         particle = null;
     }
@@ -105,6 +122,7 @@ public class ReproductionPieceView : PieceBoardElementView
     
     private void UpdateSate()
     {
+        
         if(timer == null || bodySprites == null) return;
                 
         bodySprites.First().sprite = IconService.Current.GetSpriteById( $"{PieceType.Parse(Piece.PieceType)}{(timer.IsStarted ? "_lock" : "")}");

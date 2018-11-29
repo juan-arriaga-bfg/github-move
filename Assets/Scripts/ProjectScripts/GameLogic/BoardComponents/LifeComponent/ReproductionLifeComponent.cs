@@ -76,9 +76,11 @@ public class ReproductionLifeComponent : StorageLifeComponent
 
     protected override void OnComplete()
     {
+        
         storage.OnScatter = () =>
         {
             storage.OnScatter = null;
+            thisContext.ActorView?.UpdateView();
             OnSpawnRewards();
             thisContext.Context.ActionExecutor.AddAction(new CollapsePieceToAction
             {
