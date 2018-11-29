@@ -22,8 +22,8 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
     private List<BoardPosition> listOfPiecesToHighlight;
 
-    private UIDailyQuestWindowView dailyQuestWindow;
-    
+    private List<CurrencyPair> reward;
+
     public override void Init()
     {
         base.Init();
@@ -35,6 +35,8 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         targetEntity.Task.OnChanged += OnTaskChanged;
 
         listOfPiecesToHighlight = null;
+
+        reward = GetRewardFromComponent();
         
         UpdateUi();
     }
@@ -116,13 +118,11 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
     private string GetRewardAsText()
     {
-        var reward = task.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
-
-        if (reward == null)
+        if (reward == null || reward.Count == 0)
         {
             return "";
         }
-
+        
         List<CurrencyPair> currencies;
         var pieces = CurrencyHellper.FiltrationRewards(reward, out currencies);
         
@@ -130,10 +130,31 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         
         var stringBuilder = new StringBuilder($"<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>{str}</color></font> <size=50>");
             
-        stringBuilder.Append(CurrencyHellper.RewardsToString("  ", pieces, currencies));
+        stringBuilder.Append(CurrencyHellper.RewardsToString("  ", pieces, currencies, task is TaskCompleteDailyTaskEntity));
         stringBuilder.Append("</size>");
             
         return stringBuilder.ToString();
+    }
+
+    private List<CurrencyPair> GetRewardFromComponent()
+    {
+        var reward = task.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value ?? new List<CurrencyPair>();
+        int count = reward.Count;
+        
+        if (count == 0)
+        {
+            Debug.LogError("[UIDailyQuestTaskElementViewController] => GetReward: No reward specified for 'Clear all' task!");
+            return reward;
+        }
+        
+        if (task is TaskCompleteDailyTaskEntity)
+        {
+            int globalIndex = GameDataService.Current.QuestsManager.DailyQuestRewardIndex;
+            int index = globalIndex % count;
+            reward = new List<CurrencyPair> {reward[index]};
+        }
+        
+        return reward;
     }
 
     public void OnClick()
@@ -175,14 +196,12 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         ToggleActive(false, true);
         
-        List<CurrencyPair> allReward = task.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
-
         var board = BoardService.Current.FirstBoard;
         BoardPosition npcPos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
         
         // Reward to drop to field
         List<CurrencyPair> currencies;
-        Dictionary<int, int> pieces = CurrencyHellper.FiltrationRewards(allReward, out currencies);
+        Dictionary<int, int> pieces = CurrencyHellper.FiltrationRewards(reward, out currencies);
 
         var amount = pieces.Sum(pair => pair.Value);
         
@@ -248,4 +267,6 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         canvasGroup.DOFade(alpha, 0.3f);
     }
+    
+    
 }

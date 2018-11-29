@@ -412,7 +412,7 @@ public static class CurrencyHellper
         return dict;
     }
 
-    public static string RewardsToString(string separator, Dictionary<int, int> pieces, List<CurrencyPair> currencys)
+    public static string RewardsToString(string separator, Dictionary<int, int> pieces, List<CurrencyPair> currencys, bool noAmount = false)
     {
         var types = new List<string>();
         var rewards = new List<string>();
@@ -428,7 +428,7 @@ public static class CurrencyHellper
 
             if (def?.SpawnResources == null)
             {
-                rewards.Add(new CurrencyPair{Currency = PieceType.Parse(reward.Key), Amount = reward.Value}.ToStringIcon(false));
+                rewards.Add(new CurrencyPair{Currency = PieceType.Parse(reward.Key), Amount = reward.Value}.ToStringIcon(false, noAmount));
                 continue;
             }
                 
