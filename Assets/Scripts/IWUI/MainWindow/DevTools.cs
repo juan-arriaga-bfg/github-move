@@ -159,7 +159,7 @@ public class DevTools : UIContainerElementViewController
         Debug.Log("OnDebug2Click");
 
         var board = BoardService.Current.FirstBoard;
-        var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Simple, 3);
+        var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Simple, 1);
         
         foreach (var pos in positions)
         {
