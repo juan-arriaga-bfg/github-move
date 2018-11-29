@@ -219,7 +219,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         {
             CollapsePieceAt(position);
         });
-        sequence.AppendInterval(2f);
+        sequence.AppendInterval(4f);
         sequence.OnComplete(() =>
         {
             EndRemover();

@@ -340,6 +340,9 @@ public class BoardManipulatorComponent : ECSEntity,
             if (touchableObject is PieceBoardElementView)
             {
                 var view = touchableObject as PieceBoardElementView;
+                
+                if (view.Piece == null) continue;
+                
                 var position = view.Piece.CachedPosition;
                 
                 if(view.Piece.Context.BoardLogic.IsLockedCell(position)) continue;
