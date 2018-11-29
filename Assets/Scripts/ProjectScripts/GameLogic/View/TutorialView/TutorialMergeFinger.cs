@@ -61,9 +61,9 @@ public class TutorialMergeFinger : BoardElementView
 
     public void Show()
     {
+        if (gameObject.activeSelf == false) sequence?.Restart();
+        
         gameObject.SetActive(true);
-        Reset();
-        sequence?.Restart();
     }
 
     public void Hide()
