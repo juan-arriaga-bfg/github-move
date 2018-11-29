@@ -20,4 +20,5 @@
     ExtraWorker = -1016,
     TutorialMergeFinger = -1017,
     PieceRemover = -1018,
+    GodRay = -1019
 }

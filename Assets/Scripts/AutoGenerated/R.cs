@@ -171,4 +171,5 @@ public class R
      public const string FogExplosionParticleSystem = "FogExplosionParticleSystem";
      public const string FogDefaultMaterial = "FogDefaultMaterial";
      public const string PiecesUnderFogMaterial = "PiecesUnderFogMaterial";
+     public const string GodRayView = "GodRayView";
 }
