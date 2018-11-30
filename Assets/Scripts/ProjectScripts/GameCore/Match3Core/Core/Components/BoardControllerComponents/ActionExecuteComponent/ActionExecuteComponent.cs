@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ActionExecuteComponent : ECSEntity, IECSSystem, IActionHistoryComponent
 {
@@ -53,9 +54,11 @@ public class ActionExecuteComponent : ECSEntity, IECSSystem, IActionHistoryCompo
 
     private int stepIndex;
 
-    private List<IBoardAction> actionsQueue = new List<IBoardAction>();
+    private SortedDictionary<int, BetterList<IBoardAction>> actionsQueue = new SortedDictionary<int, BetterList<IBoardAction>>();
 
-    private List<IBoardAction> actionsQueueStep = new List<IBoardAction>();
+    private BetterList<IBoardAction> actionsQueueStep = new BetterList<IBoardAction>();
+    
+    private Dictionary<int, BetterList<IBoardAction>> actionsQueueTypes = new Dictionary<int, BetterList<IBoardAction>>();
 
 
     public int StepIndex
@@ -63,14 +66,14 @@ public class ActionExecuteComponent : ECSEntity, IECSSystem, IActionHistoryCompo
         get { return stepIndex; }
     }
 
-    public List<IBoardAction> ActionsQueueStep
+    public BetterList<IBoardAction> ActionsQueueStep
     {
         get { return actionsQueueStep; }
     }
 
     public virtual bool IsHasActionInQueueByType<T>()
     {
-        for (int i = 0; i < actionsQueueStep.Count; i++)
+        for (int i = 0; i < actionsQueueStep.size; i++)
         {
             if (actionsQueueStep[i] is T)
             {
@@ -81,43 +84,71 @@ public class ActionExecuteComponent : ECSEntity, IECSSystem, IActionHistoryCompo
         return false;
     }
 
-    public virtual void AddAction(IBoardAction action, BoardActionMode mode = BoardActionMode.MultiMode)
+    public virtual void AddAction(IBoardAction action, BoardActionMode mode = BoardActionMode.MultiMode, int threadIndex = 0)
     {
-        if (((int) mode & (int) BoardActionMode.SingleMode) == (int) BoardActionMode.SingleMode)
+        if (actionsQueue.ContainsKey(threadIndex) == false)
         {
-            for (int i = 0; i < actionsQueue.Count; i++)
-            {
-                if (actionsQueue[i].GetType() == action.GetType())
-                {
-                    return;
-                }
-            }
+            actionsQueue.Add(threadIndex, new BetterList<IBoardAction>());
         }
 
-        actionsQueue.Add(action);
+        BetterList<IBoardAction> actionsTypes;
+
+        if (actionsQueueTypes.TryGetValue(action.Guid, out actionsTypes))
+        {
+            if (((int) mode & (int) BoardActionMode.SingleMode) == (int) BoardActionMode.SingleMode)
+            {
+                return;
+            }
+            
+            actionsQueueTypes.Add(action.Guid, new BetterList<IBoardAction>());
+        }
+        
+        actionsQueueTypes[action.Guid].Add(action);
+
+        actionsQueue[threadIndex].Add(action);
     }
 
-    public virtual void AddActionOnTop(IBoardAction action, BoardActionMode mode = BoardActionMode.MultiMode)
+    public virtual void AddActionOnTop(IBoardAction action, BoardActionMode mode = BoardActionMode.MultiMode, int threadIndex = 0)
     {
-        if (((int) mode & (int) BoardActionMode.SingleMode) == (int) BoardActionMode.SingleMode)
+        if (actionsQueue.ContainsKey(threadIndex) == false)
         {
-            for (int i = 0; i < actionsQueue.Count; i++)
-            {
-                if (actionsQueue[i].GetType() == action.GetType())
-                {
-                    return;
-                }
-            }
+            actionsQueue.Add(threadIndex, new BetterList<IBoardAction>());
         }
 
-        actionsQueue.Insert(0, action);
+        BetterList<IBoardAction> actionsTypes;
+
+        if (actionsQueueTypes.TryGetValue(action.Guid, out actionsTypes))
+        {
+            if (((int) mode & (int) BoardActionMode.SingleMode) == (int) BoardActionMode.SingleMode)
+            {
+                return;
+            }
+            
+            actionsQueueTypes.Add(action.Guid, new BetterList<IBoardAction>());
+        }
+        
+        actionsQueueTypes[action.Guid].Add(action);
+
+        actionsQueue[threadIndex].Insert(0, action);
     }
 
-    public virtual List<IBoardAction> PrepareActions(List<IBoardAction> actions)
+    public virtual BetterList<IBoardAction> PrepareActions(SortedDictionary<int, BetterList<IBoardAction>> actions)
     {
-        var actionsQueueCopy = new List<IBoardAction>(actions);
-
-        return actionsQueueCopy;
+        actionsQueueStep.Clear();
+        
+        foreach (var actionDef in actions)
+        {
+            var list = actionDef.Value;
+            for (int i = 0; i < list.size; i++)
+            {
+                var action = list[i];
+                actionsQueueStep.Add(action);
+                
+                Debug.LogWarning($"PrepareActions => threadIndex:{actionDef.Key} index:{i} type:{action.GetType()}");
+            }
+        }
+        
+        return actionsQueueStep;
     }
 
     public virtual bool PerformAction(IBoardAction action)
@@ -149,8 +180,6 @@ public class ActionExecuteComponent : ECSEntity, IECSSystem, IActionHistoryCompo
             ActionHistory.RegisterAction(action, stepIndex, sw.ElapsedTicks);
 #endif
             
-            
-            
 #if UNITY_EDITOR
             sw.Stop();
 #endif
@@ -168,13 +197,16 @@ public class ActionExecuteComponent : ECSEntity, IECSSystem, IActionHistoryCompo
         {
             stepIndex++;
 
-            var actionsQueueCopy = PrepareActions(actionsQueue);
-            this.actionsQueueStep = actionsQueueCopy;
-            actionsQueue.Clear();
-
-            for (int i = 0; i < actionsQueueCopy.Count; i++)
+            PrepareActions(actionsQueue);
+            
+            foreach (var actionsQueueList in actionsQueue)
             {
-                var action = actionsQueueCopy[i];
+                actionsQueueList.Value.Clear();
+            }
+
+            for (int i = 0; i < actionsQueueStep.size; i++)
+            {
+                var action = actionsQueueStep[i];
 
                 PerformAction(action);
             }

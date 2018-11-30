@@ -108,7 +108,7 @@ public class UIBoardView : BoardElementView
         
         if(canvas == null || Context == null) return;
         
-        canvas.sortingOrder = boardPosition.X * Context.Context.BoardDef.Width - boardPosition.Y + 5000;
+        canvas.sortingOrder = boardPosition.X * Context.Context.BoardDef.Width - boardPosition.Y + 30000;
     }
 
     public virtual void Attention()

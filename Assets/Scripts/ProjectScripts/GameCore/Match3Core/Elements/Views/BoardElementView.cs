@@ -2,6 +2,7 @@
 using UnityEngine;
 using System;
 using DG.Tweening;
+using UnityEngine.Rendering;
 
 public class ViewAnimationUid { }
 
@@ -14,6 +15,8 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
     protected ViewAnimationUid animationUid = new ViewAnimationUid();
 
     protected BetterList<RendererLayer> cachedRenderers = new BetterList<RendererLayer>();
+
+    protected SortingGroup cachedSortingGroup;
 
     public bool IsFading;
 
@@ -295,6 +298,11 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         }
     }
 
+    public virtual int GetLayerIndexBy(BoardPosition boardPosition)
+    {
+        return boardPosition.X  + Context.Context.BoardDef.Width * Context.Context.BoardDef.Width - Context.Context.BoardDef.Width * boardPosition.Y; 
+    }
+
     public virtual void SyncRendererLayers(BoardPosition boardPosition)
     {
         if (cachedRenderers.size <= 0)
@@ -302,11 +310,22 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             CacheLayers();
         }
 
-        for (int i =0; i < cachedRenderers.size; i++)
+        if (cachedSortingGroup == null)
         {
-            var rend = cachedRenderers[i];
-            rend.CachedRenderer.sortingOrder = boardPosition.X * Context.Context.BoardDef.Width - boardPosition.Y + boardPosition.Z * 100 + rend.SortingOrderOffset;
+            cachedSortingGroup = GetComponent<SortingGroup>();
+            if (cachedSortingGroup == null)
+            {
+                cachedSortingGroup = gameObject.AddComponent<SortingGroup>();
+            }
         }
+
+        cachedSortingGroup.sortingOrder = boardPosition.X  + Context.Context.BoardDef.Width * Context.Context.BoardDef.Width - Context.Context.BoardDef.Width * boardPosition.Y; 
+        
+        // for (int i = 0; i < cachedRenderers.size; i++)
+        // {
+        //     var rend = cachedRenderers[i];
+        //     rend.CachedRenderer.sortingOrder = boardPosition.X * Context.Context.BoardDef.Width - boardPosition.Y * 1000 + boardPosition.Z * 10000 + rend.SortingOrderOffset - 32000;
+        // }
 
         CachedTransform.localPosition = new Vector3(CachedTransform.localPosition.x, CachedTransform.localPosition.y, -boardPosition.Z * 0.1f);
     }
