@@ -88,7 +88,7 @@ public class RewardsStoreComponent : IECSComponent
         context.Context.ActionExecutor.AddAction(new ScatterPiecesAction
         {
             IsTargetReplace = IsTargetReplace,
-            GetFrom = () => context.Multicellular?.GetTopPosition ?? context.CachedPosition,
+            From = context.CachedPosition,
             Pieces = rewards,
             OnComplete = OnComplete
         });

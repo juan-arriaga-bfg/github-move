@@ -37,6 +37,8 @@ public class ObstaclePieceView : PieceBoardElementView
     {
         base.ResetViewOnDestroy();
         
+        if(life?.Timer == null) return;
+        
         life.Timer.OnStart -= UpdateAnimation;
         life.Timer.OnComplete -= UpdateAnimation;
         

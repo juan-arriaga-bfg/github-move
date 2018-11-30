@@ -21,7 +21,7 @@ public class GenericPieceBuilder : IPieceBuilder
         if (piece.ViewDefinition != null) return piece.ViewDefinition;
         
         var view = new ViewDefinitionComponent();
-        piece.RegisterComponent(view);
+        
         AddObserver(piece, view);
         
         return view;
@@ -35,7 +35,8 @@ public class GenericPieceBuilder : IPieceBuilder
     protected void AddObserver(Piece piece, IPieceBoardObserver observer)
     {
         var observers = piece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
-
+        
+        piece.RegisterComponent(observer as IECSComponent);
         observers?.RegisterObserver(observer);
     }
     

@@ -6,15 +6,8 @@
 		
 		CreateViewComponent(piece);
 		
-		var pathfindLockObserver = new PathfindLockObserver {AutoLock = true};
-		
-		piece.RegisterComponent(pathfindLockObserver);
-		AddObserver(piece, pathfindLockObserver);
-		
-		var life = new ObstacleLifeComponent();
-		
-		piece.RegisterComponent(life);
-		AddObserver(piece, life);
+		AddObserver(piece, new PathfindLockObserver {AutoLock = true});
+		AddObserver(piece, new ObstacleLifeComponent());
 		
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}

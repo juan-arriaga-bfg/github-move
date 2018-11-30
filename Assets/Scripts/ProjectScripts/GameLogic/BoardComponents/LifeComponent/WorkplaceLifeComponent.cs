@@ -32,7 +32,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 			GetRewards = GetRewards,
 			OnComplete = OnSpawnCurrencyRewards
 		};
-
+		
 		Context.RegisterComponent(Rewards);
 		
 		Timer = new TimerComponent();
@@ -43,7 +43,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		Context.RegisterComponent(Timer);
 	}
 	
-	public void OnAddToBoard(BoardPosition position, Piece context = null)
+	public virtual void OnAddToBoard(BoardPosition position, Piece context = null)
 	{
 	}
 	
@@ -108,10 +108,12 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	
 	protected virtual void OnStep()
 	{
+		Rewards.IsTargetReplace = false;
 	}
 	
 	protected virtual void OnComplete()
 	{
+		Rewards.IsTargetReplace = true;
 	}
 	
 	protected virtual void OnSpawnCurrencyRewards()

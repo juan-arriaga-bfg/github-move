@@ -6,16 +6,12 @@
 		
 		CreateViewComponent(piece);
 		
-		var pathfindLockObserver = new PathfindLockObserver() {AutoLock = true}; 
-		
-		AddObserver(piece, pathfindLockObserver);
-		piece.RegisterComponent(pathfindLockObserver);
+		AddObserver(piece, new PathfindLockObserver {AutoLock = true});
 
 		piece.RegisterComponent(new TimerComponent());
 		
 		var customer = new CustomerComponent();
 		
-		piece.RegisterComponent(customer);
 		AddObserver(piece, customer);
 		
 		piece.RegisterComponent(new DraggablePieceComponent());

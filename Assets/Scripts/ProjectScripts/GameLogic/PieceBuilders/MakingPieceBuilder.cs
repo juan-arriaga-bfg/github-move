@@ -8,20 +8,14 @@ public class MakingPieceBuilder : MulticellularDraggablePieceBuilder
 		
         piece.RegisterComponent(new TimerComponent());
 		
-        var storage = new StorageComponent
+        AddObserver(piece, new StorageComponent
         {
             IsAutoStart = false,
             IsTimerShow = true,
             TimerOffset = new Vector2(0f, 0.5f)
-        };
-		
-        piece.RegisterComponent(storage);
-        AddObserver(piece, storage);
+        });
         
-        var life = new MakingLifeComponent();
-
-        piece.RegisterComponent(life);
-        AddObserver(piece, life);
+        AddObserver(piece, new MakingLifeComponent());
 
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}

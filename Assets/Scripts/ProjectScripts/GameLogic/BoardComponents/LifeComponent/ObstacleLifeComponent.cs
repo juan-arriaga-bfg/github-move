@@ -26,16 +26,6 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current);
     }
     
-    protected override void OnStep()
-    {
-        Rewards.IsTargetReplace = false;
-    }
-    
-    protected override void OnComplete()
-    {
-        Rewards.IsTargetReplace = true;
-    }
-
     protected override void OnSpawnCurrencyRewards()
     {
         var rewards = GameDataService.Current.ObstaclesManager.GetRewardByStep(Context.PieceType, current - 1);

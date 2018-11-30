@@ -6,7 +6,6 @@
         
         AddObserver(piece, new PathfindLockObserver {AutoLock = false});
         
-        
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionComponent())
             .RegisterComponent(new TouchReactionConditionFog()))
