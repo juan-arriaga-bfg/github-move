@@ -62,6 +62,10 @@ public class MatchDefinitionBuilder
         
 #region Chests
         
+        dict.Add(PieceType.SK1_PR.Id, new PieceMatchDef {Next = PieceType.SK2_PR.Id, Previous = PieceType.None.Id, Amount = 3});
+        dict.Add(PieceType.SK2_PR.Id, new PieceMatchDef {Next = PieceType.SK3_PR.Id, Previous = PieceType.SK1_PR.Id, Amount = 3});
+        dict.Add(PieceType.SK3_PR.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.SK2_PR.Id});
+        
         dict.Add(PieceType.CH1_A.Id, new PieceMatchDef {Next = PieceType.CH2_A.Id, Previous = PieceType.None.Id, Amount = 3});
         dict.Add(PieceType.CH2_A.Id, new PieceMatchDef {Next = PieceType.CH3_A.Id, Previous = PieceType.CH1_A.Id, Amount = 3});
         dict.Add(PieceType.CH3_A.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.CH2_A.Id});

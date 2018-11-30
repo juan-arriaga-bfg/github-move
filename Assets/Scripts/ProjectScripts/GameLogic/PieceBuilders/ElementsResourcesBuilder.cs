@@ -99,6 +99,10 @@ public class ElementsResourcesBuilder
         
         dict.Add(PieceType.CH_Free.Id, R.CH_FreePiece);
         
+        dict.Add(PieceType.SK1_PR.Id, R.SK1_PRPiece);
+        dict.Add(PieceType.SK2_PR.Id, R.SK2_PRPiece);
+        dict.Add(PieceType.SK3_PR.Id, R.SK3_PRPiece);
+        
         dict.Add(PieceType.CH1_A.Id, R.CH1_APiece);
         dict.Add(PieceType.CH2_A.Id, R.CH2_APiece);
         dict.Add(PieceType.CH3_A.Id, R.CH3_APiece);
