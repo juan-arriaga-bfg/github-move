@@ -10,98 +10,147 @@ using UnityEngine;
 
 public class TextMeshSpriteAssetHelper : MonoBehaviour
 {
-     private const string PREFS_KEY = "TextMeshSpriteAssetHelper_Backup";
-     
-     [Serializable]
-     private class TMP_SpriteBackup: TMP_TextElement
-     {
-          public string name; 
-     }
+    private const string PREFS_KEY = "TextMeshSpriteAssetHelper_Backup";
 
-     private static TMP_SpriteAsset LoadSettings()
-     {
-          if (TMP_Settings.defaultSpriteAsset == null)
-          {
-               TMP_Settings.LoadDefaultSettings();
-          }
-          
-          var spriteAsset = TMP_Settings.defaultSpriteAsset;
+    private static string GetPrefsKeyForAsset(TMP_SpriteAsset asset)
+    {
+        return $"{PREFS_KEY}_{asset.name}";
+    }
 
-          if (spriteAsset == null)
-          {
-               Debug.LogError("Can't open TMP_Settings. Please Start and Stop the game in the Editor to reload."); 
-          }
-          
-          return spriteAsset;
-     }
+    [Serializable]
+    private class TMP_SpriteBackup : TMP_TextElement
+    {
+        public string name;
+    }
 
-     [MenuItem("Tools/Content/TMP Sprite Font/Backup items")]
-     public static void Backup()
-     {
-          // Load Default SpriteAsset
-          var spriteAsset = LoadSettings();
-          List<TMP_SpriteBackup> backup = new List<TMP_SpriteBackup>();
-          
-          foreach (var item in spriteAsset.spriteInfoList)
-          {
-               TMP_SpriteBackup bkp = new TMP_SpriteBackup
-               {
-                    name = item.name,
-                    x = item.y,
-                    y = item.x,
-                    width = item.width,
-                    height = item.height,
-                    xOffset = item.xOffset,
-                    yOffset = item.yOffset,
-                    xAdvance = item.xAdvance,
-                    scale = item.scale
-               };
-               
-               backup.Add(bkp);
-          }
+    [MenuItem("Tools/Content/TMP Sprite Font/Backup items")]
+    public static void Backup()
+    {
+        Debug.Log("Backup TMP_SpriteAssets...");
+        
+        var assets = GetAllTMP_SpriteAsset();
+        
+        foreach (var asset in assets)
+        {
+            BackupSpriteAsset(asset);
+        }
 
-          string serialized = JsonConvert.SerializeObject(backup);
-          EditorPrefs.SetString(PREFS_KEY, serialized);
-          
-          Debug.LogWarning("Backed up!");
-     }
-     
-     [MenuItem("Tools/Content/TMP Sprite Font/Restore items")]
-     public static void Restore()
-     {
-          string serializedBackup = EditorPrefs.GetString(PREFS_KEY);
-          if (string.IsNullOrEmpty(serializedBackup))
-          {
-               Debug.LogError("No backup found!");
-               return;
-          }
+        Debug.Log("Done!");
+    }
 
-          List<TMP_SpriteBackup> backup = JsonConvert.DeserializeObject<List<TMP_SpriteBackup>>(serializedBackup);
+    [MenuItem("Tools/Content/TMP Sprite Font/Restore items")]
+    public static void Restore()
+    {
+        Debug.Log("Restoring TMP_SpriteAssets, fields: xOffset (OX), yOffset (OY), xAdvance (Adv.), scale (SF.)");
 
-          // Load Default SpriteAsset
-          var spriteAsset = LoadSettings();
+        var assets = GetAllTMP_SpriteAsset();
+        
+        foreach (var asset in assets)
+        {
+            RestoreSpriteAsset(asset);
+        }
 
-          foreach (var item in spriteAsset.spriteInfoList)
-          {
-               var backupItem = backup.FirstOrDefault(e => e.name == item.name);
-               if (backupItem == null)
-               {
-                    continue;
-               }
+        AssetDatabase.SaveAssets();
+        
+        Debug.Log("Done!");
+    }
 
-               if ((int) item.width != (int) backupItem.width || (int) item.height != (int) backupItem.height)
-               {
-                    Debug.LogWarning($"Restore: size of '{item.name}' changed. Please review all the params!");
-               }
-               
-               item.xOffset = backupItem.xOffset;
-               item.yOffset = backupItem.yOffset;
-               item.xAdvance = backupItem.xAdvance;
-               item.scale = backupItem.scale;
-          }
-          
-          Debug.LogWarning("Restored!");
-     }
+    private static void BackupSpriteAsset(TMP_SpriteAsset spriteAsset)
+    {
+        List<TMP_SpriteBackup> backup = new List<TMP_SpriteBackup>();
+
+        foreach (var item in spriteAsset.spriteInfoList)
+        {
+            TMP_SpriteBackup bkp = new TMP_SpriteBackup
+            {
+                name = item.name,
+                x = item.y,
+                y = item.x,
+                width = item.width,
+                height = item.height,
+                xOffset = item.xOffset,
+                yOffset = item.yOffset,
+                xAdvance = item.xAdvance,
+                scale = item.scale
+            };
+
+            backup.Add(bkp);
+        }
+
+        string serialized = JsonConvert.SerializeObject(backup);
+        EditorPrefs.SetString(GetPrefsKeyForAsset(spriteAsset), serialized);
+
+        Debug.LogWarning("Backed up: " + spriteAsset.name);
+    }
+
+    private static void RestoreSpriteAsset(TMP_SpriteAsset spriteAsset)
+    {
+        string serializedBackup = EditorPrefs.GetString(GetPrefsKeyForAsset(spriteAsset));
+        if (string.IsNullOrEmpty(serializedBackup))
+        {
+            Debug.LogError($"Restore {spriteAsset.name}: Backup not found!");
+            return;
+        }
+        // else
+        // {
+        //     Debug.LogWarning($"Restore {spriteAsset.name}: {serializedBackup}");
+        // }
+        
+        List<TMP_SpriteBackup> backup;
+
+        try
+        {
+            backup = JsonConvert.DeserializeObject<List<TMP_SpriteBackup>>(serializedBackup);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Restore {spriteAsset.name}: Can't parse backup: {e.Message}\n{serializedBackup}");
+            return;
+        }
+
+        foreach (var item in spriteAsset.spriteInfoList)
+        {
+            var backupItem = backup.FirstOrDefault(e => e.name == item.name);
+            if (backupItem == null)
+            {
+                continue;
+            }
+
+            if ((int) item.width != (int) backupItem.width || (int) item.height != (int) backupItem.height)
+            {
+                Debug.LogWarning($"Restore {spriteAsset.name}: size of '{item.name}' changed. Please review all the params!");
+            }
+
+            item.xOffset = backupItem.xOffset;
+            item.yOffset = backupItem.yOffset;
+            item.xAdvance = backupItem.xAdvance;
+            item.scale = backupItem.scale;
+        }
+
+        Debug.Log("Restored: " + spriteAsset.name);
+    }
+
+    private static List<TMP_SpriteAsset> GetAllTMP_SpriteAsset()
+    {
+        List<TMP_SpriteAsset> ret = new List<TMP_SpriteAsset>();
+
+        string[] assetsGUIDs = AssetDatabase.FindAssets("t:TMP_SpriteAsset");
+        foreach (var guid in assetsGUIDs)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+           
+            // Skip example
+            if (path.Contains("EmojiOne"))
+            {
+                continue;
+            }
+            
+            TMP_SpriteAsset asset = AssetDatabase.LoadAssetAtPath<TMP_SpriteAsset>(path);
+            ret.Add(asset);
+        }
+
+        return ret;
+    }
 }
 
 #endif

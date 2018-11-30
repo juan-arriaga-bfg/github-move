@@ -475,6 +475,11 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                 {
                     new CodexChainDef
                     {
+                        Name = LocalizationService.Get("window.codex.branch.SK_PR", "window.codex.branch.SK_PR"),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.SK1_PR.Id)),
+                    },
+                    new CodexChainDef
+                    {
                         Name = LocalizationService.Get("window.codex.branch.CH_A", "window.codex.branch.CH_A"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.CH1_A.Id)),
                     },

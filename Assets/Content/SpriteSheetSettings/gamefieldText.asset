@@ -1,0 +1,1536 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a92b25f83d49b9bc132d206b370281, type: 3}
+  m_Name: gamefieldText
+  m_EditorClassIdentifier: 
+  hashCode: 823017100
+  material: {fileID: 21440855645375684}
+  materialHashCode: 0
+  spriteSheet: {fileID: 2800000, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  spriteInfoList:
+  - id: 0
+    x: 111
+    y: 1886
+    width: 74
+    height: 68
+    xOffset: 0
+    yOffset: 48.1
+    xAdvance: 74
+    scale: 1.23
+    name: Boost_CR1
+    hashCode: -1126230502
+    unicode: 0
+    pivot: {x: -37, y: 34}
+    sprite: {fileID: 21301282, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 1
+    x: 230
+    y: 1851
+    width: 78
+    height: 82
+    xOffset: -39
+    yOffset: 41
+    xAdvance: 78
+    scale: 1
+    name: C1
+    hashCode: 2194
+    unicode: 0
+    pivot: {x: -39, y: 41}
+    sprite: {fileID: 21300034, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 2
+    x: 343
+    y: 1832
+    width: 92
+    height: 78
+    xOffset: 2.96
+    yOffset: 52.5
+    xAdvance: 92
+    scale: 1.4
+    name: Hard3
+    hashCode: 84260332
+    unicode: 0
+    pivot: {x: -46, y: 39}
+    sprite: {fileID: 21301280, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 3
+    x: 111
+    y: 1793
+    width: 118
+    height: 92
+    xOffset: -59
+    yOffset: 46
+    xAdvance: 118
+    scale: 1
+    name: C2
+    hashCode: 2193
+    unicode: 0
+    pivot: {x: -59, y: 46}
+    sprite: {fileID: 21300164, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 4
+    x: 0
+    y: 1775
+    width: 110
+    height: 116
+    xOffset: 0
+    yOffset: 84.6
+    xAdvance: 97
+    scale: 1.48
+    name: Boost_CR3
+    hashCode: -1126230504
+    unicode: 0
+    pivot: {x: -55, y: 58}
+    sprite: {fileID: 21301250, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 5
+    x: 244
+    y: 1734
+    width: 98
+    height: 116
+    xOffset: 0
+    yOffset: 76.2
+    xAdvance: 98
+    scale: 1.43
+    name: Soft3
+    hashCode: 99864317
+    unicode: 0
+    pivot: {x: -49, y: 58}
+    sprite: {fileID: 21301258, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 6
+    x: 385
+    y: 1733
+    width: 118
+    height: 98
+    xOffset: 0
+    yOffset: 66.4
+    xAdvance: 108.39
+    scale: 1.5
+    name: Hard4
+    hashCode: 84260331
+    unicode: 0
+    pivot: {x: -59, y: 49}
+    sprite: {fileID: 21301278, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 7
+    x: 504
+    y: 1733
+    width: 86
+    height: 102
+    xOffset: 0
+    yOffset: 67.2
+    xAdvance: 86
+    scale: 1.5
+    name: Soft2
+    hashCode: 99864316
+    unicode: 0
+    pivot: {x: -43, y: 51}
+    sprite: {fileID: 21301266, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 8
+    x: 0
+    y: 1670
+    width: 134
+    height: 104
+    xOffset: -67
+    yOffset: 52
+    xAdvance: 134
+    scale: 1
+    name: A2
+    hashCode: 2131
+    unicode: 0
+    pivot: {x: -67, y: 52}
+    sprite: {fileID: 21300028, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 9
+    x: 135
+    y: 1666
+    width: 108
+    height: 126
+    xOffset: 26
+    yOffset: 85.4
+    xAdvance: 141.5
+    scale: 1.6
+    name: Hard5
+    hashCode: 84260330
+    unicode: 0
+    pivot: {x: -54, y: 63}
+    sprite: {fileID: 21301274, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 10
+    x: 592
+    y: 1644
+    width: 96
+    height: 122
+    xOffset: -48
+    yOffset: 61
+    xAdvance: 96
+    scale: 1
+    name: PR_B2
+    hashCode: 92032493
+    unicode: 0
+    pivot: {x: -48, y: 61}
+    sprite: {fileID: 21301256, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 11
+    x: 268
+    y: 1605
+    width: 116
+    height: 128
+    xOffset: -58
+    yOffset: 64
+    xAdvance: 116
+    scale: 1
+    name: PR_E1
+    hashCode: 92032201
+    unicode: 0
+    pivot: {x: -58, y: 64}
+    sprite: {fileID: 21301242, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 12
+    x: 385
+    y: 1605
+    width: 84
+    height: 118
+    xOffset: -42
+    yOffset: 59
+    xAdvance: 84
+    scale: 1
+    name: PR_B1
+    hashCode: 92032494
+    unicode: 0
+    pivot: {x: -42, y: 59}
+    sprite: {fileID: 21301260, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 13
+    x: 471
+    y: 1604
+    width: 120
+    height: 128
+    xOffset: -60
+    yOffset: 64
+    xAdvance: 120
+    scale: 1
+    name: PR_A5
+    hashCode: 92032329
+    unicode: 0
+    pivot: {x: -60, y: 64}
+    sprite: {fileID: 21301220, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 14
+    x: 0
+    y: 1543
+    width: 134
+    height: 126
+    xOffset: -67
+    yOffset: 63
+    xAdvance: 134
+    scale: 1
+    name: C4
+    hashCode: 2199
+    unicode: 0
+    pivot: {x: -67, y: 63}
+    sprite: {fileID: 21300160, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 15
+    x: 743
+    y: 1525
+    width: 100
+    height: 124
+    xOffset: -50
+    yOffset: 62
+    xAdvance: 100
+    scale: 1
+    name: PR_D5
+    hashCode: 92032300
+    unicode: 0
+    pivot: {x: -50, y: 62}
+    sprite: {fileID: 21301240, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 16
+    x: 145
+    y: 1523
+    width: 122
+    height: 142
+    xOffset: 0
+    yOffset: 95.7
+    xAdvance: 122
+    scale: 1.7
+    name: Soft4
+    hashCode: 99864314
+    unicode: 0
+    pivot: {x: -61, y: 71}
+    sprite: {fileID: 21301222, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 17
+    x: 268
+    y: 1523
+    width: 58
+    height: 74
+    xOffset: 0
+    yOffset: 63.9
+    xAdvance: 58
+    scale: 1.3
+    name: Boost_WR
+    hashCode: -554730657
+    unicode: 0
+    pivot: {x: -29, y: 37}
+    sprite: {fileID: 21301284, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 18
+    x: 622
+    y: 1513
+    width: 120
+    height: 130
+    xOffset: -60
+    yOffset: 65
+    xAdvance: 120
+    scale: 1
+    name: PR_C2
+    hashCode: 92032396
+    unicode: 0
+    pivot: {x: -60, y: 65}
+    sprite: {fileID: 21301244, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 19
+    x: 330
+    y: 1466
+    width: 140
+    height: 138
+    xOffset: -70
+    yOffset: 69
+    xAdvance: 140
+    scale: 1
+    name: PR_E2
+    hashCode: 92032202
+    unicode: 0
+    pivot: {x: -70, y: 69}
+    sprite: {fileID: 21301216, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 20
+    x: 493
+    y: 1459
+    width: 128
+    height: 144
+    xOffset: 1.5
+    yOffset: 99
+    xAdvance: 135.1
+    scale: 1.7
+    name: Hard6
+    hashCode: 84260329
+    unicode: 0
+    pivot: {x: -64, y: 72}
+    sprite: {fileID: 21301276, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 21
+    x: 987
+    y: 1443
+    width: 100
+    height: 96
+    xOffset: 0
+    yOffset: 64.8
+    xAdvance: 86.6
+    scale: 1.44
+    name: Boost_CR2
+    hashCode: -1126230503
+    unicode: 0
+    pivot: {x: -50, y: 48}
+    sprite: {fileID: 21301262, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 22
+    x: 1177
+    y: 1423
+    width: 118
+    height: 86
+    xOffset: -59
+    yOffset: 43
+    xAdvance: 118
+    scale: 1
+    name: B2
+    hashCode: 2224
+    unicode: 0
+    pivot: {x: -59, y: 43}
+    sprite: {fileID: 21300030, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 23
+    x: 0
+    y: 1390
+    width: 144
+    height: 152
+    xOffset: 0
+    yOffset: 107.23
+    xAdvance: 144
+    scale: 1.8
+    name: Soft5
+    hashCode: 99864315
+    unicode: 0
+    pivot: {x: -72, y: 76}
+    sprite: {fileID: 21301214, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 24
+    x: 783
+    y: 1388
+    width: 116
+    height: 136
+    xOffset: -58
+    yOffset: 68
+    xAdvance: 116
+    scale: 1
+    name: PR_C1
+    hashCode: 92032399
+    unicode: 0
+    pivot: {x: -58, y: 68}
+    sprite: {fileID: 21301254, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 25
+    x: 900
+    y: 1388
+    width: 86
+    height: 146
+    xOffset: -43
+    yOffset: 73
+    xAdvance: 86
+    scale: 1
+    name: D4
+    hashCode: 2288
+    unicode: 0
+    pivot: {x: -43, y: 73}
+    sprite: {fileID: 21300212, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 26
+    x: 167
+    y: 1382
+    width: 162
+    height: 140
+    xOffset: -81
+    yOffset: 70
+    xAdvance: 162
+    scale: 1
+    name: OB2_TT
+    hashCode: -1127912768
+    unicode: 0
+    pivot: {x: -81, y: 70}
+    sprite: {fileID: 21301290, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 27
+    x: 632
+    y: 1376
+    width: 150
+    height: 136
+    xOffset: -75
+    yOffset: 68
+    xAdvance: 150
+    scale: 1
+    name: B3
+    hashCode: 2225
+    unicode: 0
+    pivot: {x: -75, y: 68}
+    sprite: {fileID: 21300024, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 28
+    x: 1480
+    y: 1343
+    width: 142
+    height: 172
+    xOffset: -71
+    yOffset: 86
+    xAdvance: 142
+    scale: 1
+    name: OB5_A
+    hashCode: 95964166
+    unicode: 0
+    pivot: {x: -71, y: 86}
+    sprite: {fileID: 21301232, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 29
+    x: 1623
+    y: 1343
+    width: 120
+    height: 186
+    xOffset: -60
+    yOffset: 93
+    xAdvance: 120
+    scale: 1
+    name: D7
+    hashCode: 2291
+    unicode: 0
+    pivot: {x: -60, y: 93}
+    sprite: {fileID: 21301196, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 30
+    x: 1010
+    y: 1338
+    width: 166
+    height: 104
+    xOffset: -83
+    yOffset: 52
+    xAdvance: 166
+    scale: 1
+    name: PR_C5
+    hashCode: 92032395
+    unicode: 0
+    pivot: {x: -83, y: 52}
+    sprite: {fileID: 21301212, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 31
+    x: 1177
+    y: 1338
+    width: 108
+    height: 76
+    xOffset: -54
+    yOffset: 38
+    xAdvance: 108
+    scale: 1
+    name: A1
+    hashCode: 2128
+    unicode: 0
+    pivot: {x: -54, y: 38}
+    sprite: {fileID: 21300036, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 32
+    x: 493
+    y: 1304
+    width: 138
+    height: 154
+    xOffset: -69
+    yOffset: 77
+    xAdvance: 138
+    scale: 1
+    name: C5
+    hashCode: 2198
+    unicode: 0
+    pivot: {x: -69, y: 77}
+    sprite: {fileID: 21300156, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 33
+    x: 346
+    y: 1301
+    width: 146
+    height: 164
+    xOffset: -73
+    yOffset: 82
+    xAdvance: 146
+    scale: 1
+    name: PR_C3
+    hashCode: 92032397
+    unicode: 0
+    pivot: {x: -73, y: 82}
+    sprite: {fileID: 21301200, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 34
+    x: 1293
+    y: 1288
+    width: 186
+    height: 134
+    xOffset: -93
+    yOffset: 67
+    xAdvance: 186
+    scale: 1
+    name: PR_D2
+    hashCode: 92032299
+    unicode: 0
+    pivot: {x: -93, y: 67}
+    sprite: {fileID: 21301188, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 35
+    x: 1748
+    y: 1256
+    width: 228
+    height: 108
+    xOffset: -114
+    yOffset: 54
+    xAdvance: 228
+    scale: 1
+    name: ruinedFence
+    hashCode: 78112618
+    unicode: 0
+    pivot: {x: -114, y: 54}
+    sprite: {fileID: 21301108, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 36
+    x: 860
+    y: 1250
+    width: 149
+    height: 137
+    xOffset: -74.5
+    yOffset: 68.5
+    xAdvance: 149
+    scale: 1
+    name: A3
+    hashCode: 2130
+    unicode: 0
+    pivot: {x: -74.5, y: 68.5}
+    sprite: {fileID: 21300020, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 37
+    x: 671
+    y: 1249
+    width: 188
+    height: 126
+    xOffset: -94
+    yOffset: 63
+    xAdvance: 188
+    scale: 1
+    name: OB_PR_E
+    hashCode: 1456785066
+    unicode: 0
+    pivot: {x: -94, y: 63}
+    sprite: {fileID: 21301210, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 38
+    x: 1064
+    y: 1227
+    width: 228
+    height: 110
+    xOffset: -114
+    yOffset: 55
+    xAdvance: 228
+    scale: 1
+    name: fence
+    hashCode: 122048683
+    unicode: 0
+    pivot: {x: -114, y: 55}
+    sprite: {fileID: 21301106, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 39
+    x: 1293
+    y: 1227
+    width: 86
+    height: 58
+    xOffset: -43
+    yOffset: 29
+    xAdvance: 86
+    scale: 1
+    name: B1
+    hashCode: 2227
+    unicode: 0
+    pivot: {x: -43, y: 29}
+    sprite: {fileID: 21300038, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 40
+    x: 0
+    y: 1221
+    width: 166
+    height: 168
+    xOffset: -83
+    yOffset: 84
+    xAdvance: 166
+    scale: 1
+    name: PR_C4_lock
+    hashCode: -1368435394
+    unicode: 0
+    pivot: {x: -83, y: 84}
+    sprite: {fileID: 21301198, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 41
+    x: 1557
+    y: 1210
+    width: 190
+    height: 132
+    xOffset: -103.239494
+    yOffset: 47.73938
+    xAdvance: 190
+    scale: 1
+    name: PR_E4_lock
+    hashCode: -223290312
+    unicode: 0
+    pivot: {x: -103.239494, y: 47.73938}
+    sprite: {fileID: 21301208, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 42
+    x: 181
+    y: 1209
+    width: 164
+    height: 172
+    xOffset: -82
+    yOffset: 86
+    xAdvance: 164
+    scale: 1
+    name: OB6_A
+    hashCode: 95967237
+    unicode: 0
+    pivot: {x: -82, y: 86}
+    sprite: {fileID: 21301230, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 43
+    x: 518
+    y: 1143
+    width: 152
+    height: 160
+    xOffset: 0
+    yOffset: 106.8
+    xAdvance: 127.9
+    scale: 1.9
+    name: Soft6
+    hashCode: 99864312
+    unicode: 0
+    pivot: {x: -76, y: 80}
+    sprite: {fileID: 21301206, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 44
+    x: 671
+    y: 1143
+    width: 64
+    height: 96
+    xOffset: -32
+    yOffset: 48
+    xAdvance: 64
+    scale: 1
+    name: D1
+    hashCode: 2293
+    unicode: 0
+    pivot: {x: -32, y: 48}
+    sprite: {fileID: 21300236, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 45
+    x: 1393
+    y: 1125
+    width: 163
+    height: 162
+    xOffset: -81.5
+    yOffset: 81
+    xAdvance: 163
+    scale: 1
+    name: OB3_A
+    hashCode: 95966080
+    unicode: 0
+    pivot: {x: -81.5, y: 81}
+    sprite: {fileID: 21301218, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 46
+    x: 1557
+    y: 1125
+    width: 91
+    height: 83
+    xOffset: 4.46
+    yOffset: 54.5
+    xAdvance: 91
+    scale: 1.3
+    name: Hard2
+    hashCode: 84260333
+    unicode: 0
+    pivot: {x: -45.5, y: 41.5}
+    sprite: {fileID: 21301270, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 47
+    x: 362
+    y: 1117
+    width: 155
+    height: 183
+    xOffset: -77.5
+    yOffset: 91.5
+    xAdvance: 155
+    scale: 1
+    name: A5
+    hashCode: 2132
+    unicode: 0
+    pivot: {x: -77.5, y: 91.5}
+    sprite: {fileID: 21300008, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 48
+    x: 1064
+    y: 1094
+    width: 142
+    height: 126
+    xOffset: -71
+    yOffset: 63
+    xAdvance: 142
+    scale: 1
+    name: C3
+    hashCode: 2192
+    unicode: 0
+    pivot: {x: -71, y: 63}
+    sprite: {fileID: 21300162, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 49
+    x: 737
+    y: 1092
+    width: 158
+    height: 156
+    xOffset: -79
+    yOffset: 78
+    xAdvance: 158
+    scale: 1
+    name: OB2_A
+    hashCode: 95971329
+    unicode: 0
+    pivot: {x: -79, y: 78}
+    sprite: {fileID: 21301238, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 50
+    x: 911
+    y: 1083
+    width: 152
+    height: 166
+    xOffset: -76
+    yOffset: 83
+    xAdvance: 152
+    scale: 1
+    name: PR_B3
+    hashCode: 92032492
+    unicode: 0
+    pivot: {x: -76, y: 83}
+    sprite: {fileID: 21301204, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 51
+    x: 1218
+    y: 1072
+    width: 174
+    height: 154
+    xOffset: -87
+    yOffset: 77
+    xAdvance: 174
+    scale: 1
+    name: OB1_TT
+    hashCode: -1128014173
+    unicode: 0
+    pivot: {x: -87, y: 77}
+    sprite: {fileID: 21301288, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 52
+    x: 1661
+    y: 1069
+    width: 220
+    height: 140
+    xOffset: -110
+    yOffset: 70
+    xAdvance: 220
+    scale: 1
+    name: OB_PR_D
+    hashCode: 1456785067
+    unicode: 0
+    pivot: {x: -110, y: 70}
+    sprite: {fileID: 21301186, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 53
+    x: 1882
+    y: 1069
+    width: 164
+    height: 186
+    xOffset: -82
+    yOffset: 93
+    xAdvance: 164
+    scale: 1
+    name: B5
+    hashCode: 2231
+    unicode: 0
+    pivot: {x: -82, y: 93}
+    sprite: {fileID: 21300012, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 54
+    x: 181
+    y: 1040
+    width: 180
+    height: 168
+    xOffset: -90
+    yOffset: 84
+    xAdvance: 180
+    scale: 1
+    name: OB_PR_B
+    hashCode: 1456785069
+    unicode: 0
+    pivot: {x: -90, y: 84}
+    sprite: {fileID: 21301180, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 55
+    x: 0
+    y: 1024
+    width: 180
+    height: 196
+    xOffset: -90.89711
+    yOffset: 103.15845
+    xAdvance: 180
+    scale: 1
+    name: PR_A4_lock
+    hashCode: 343739708
+    unicode: 0
+    pivot: {x: -90.89711, y: 103.15845}
+    sprite: {fileID: 21301168, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 56
+    x: 564
+    y: 970
+    width: 172
+    height: 172
+    xOffset: -86
+    yOffset: 86
+    xAdvance: 172
+    scale: 1
+    name: OB_PR_C
+    hashCode: 1456785068
+    unicode: 0
+    pivot: {x: -86, y: 86}
+    sprite: {fileID: 21301192, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 57
+    x: 1480
+    y: 952
+    width: 180
+    height: 172
+    xOffset: -90
+    yOffset: 86
+    xAdvance: 180
+    scale: 1
+    name: OB_PR_A
+    hashCode: 1456785070
+    unicode: 0
+    pivot: {x: -90, y: 86}
+    sprite: {fileID: 21301182, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 58
+    x: 1661
+    y: 952
+    width: 84
+    height: 114
+    xOffset: -42
+    yOffset: 57
+    xAdvance: 84
+    scale: 1
+    name: PR_B5
+    hashCode: 92032490
+    unicode: 0
+    pivot: {x: -42, y: 57}
+    sprite: {fileID: 21301264, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 59
+    x: 1965
+    y: 947
+    width: 80
+    height: 86
+    xOffset: 0
+    yOffset: 55.9
+    xAdvance: 80
+    scale: 1.4
+    name: Soft1
+    hashCode: 99864319
+    unicode: 0
+    pivot: {x: -40, y: 43}
+    sprite: {fileID: 21301268, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 60
+    x: 395
+    y: 934
+    width: 168
+    height: 182
+    xOffset: -84
+    yOffset: 91
+    xAdvance: 168
+    scale: 1
+    name: OB8_A
+    hashCode: 95956875
+    unicode: 0
+    pivot: {x: -84, y: 91}
+    sprite: {fileID: 21301226, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 61
+    x: 1752
+    y: 918
+    width: 212
+    height: 150
+    xOffset: -115.690674
+    yOffset: 51.891663
+    xAdvance: 212
+    scale: 1
+    name: PR_D4_lock
+    hashCode: -722196231
+    unicode: 0
+    pivot: {x: -115.690674, y: 51.891663}
+    sprite: {fileID: 21301178, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 62
+    x: 1069
+    y: 909
+    width: 148
+    height: 184
+    xOffset: -74
+    yOffset: 92
+    xAdvance: 148
+    scale: 1
+    name: D8
+    hashCode: 2300
+    unicode: 0
+    pivot: {x: -74, y: 92}
+    sprite: {fileID: 21301172, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 63
+    x: 747
+    y: 908
+    width: 163
+    height: 183
+    xOffset: -81.5
+    yOffset: 91.5
+    xAdvance: 163
+    scale: 1
+    name: A6
+    hashCode: 2135
+    unicode: 0
+    pivot: {x: -81.5, y: 91.5}
+    sprite: {fileID: 21300002, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 64
+    x: 911
+    y: 908
+    width: 157
+    height: 174
+    xOffset: -78.5
+    yOffset: 87
+    xAdvance: 157
+    scale: 1
+    name: A4
+    hashCode: 2133
+    unicode: 0
+    pivot: {x: -78.5, y: 87}
+    sprite: {fileID: 21300014, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 65
+    x: 1289
+    y: 907
+    width: 190
+    height: 164
+    xOffset: -95
+    yOffset: 82
+    xAdvance: 190
+    scale: 1
+    name: OB4_A
+    hashCode: 95960967
+    unicode: 0
+    pivot: {x: -95, y: 82}
+    sprite: {fileID: 21301228, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 66
+    x: 198
+    y: 857
+    width: 196
+    height: 182
+    xOffset: -98
+    yOffset: 91
+    xAdvance: 196
+    scale: 1
+    name: PR_E4
+    hashCode: 92032204
+    unicode: 0
+    pivot: {x: -98, y: 91}
+    sprite: {fileID: 21301166, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 67
+    x: 1965
+    y: 844
+    width: 76
+    height: 102
+    xOffset: -38
+    yOffset: 51
+    xAdvance: 76
+    scale: 1
+    name: D2
+    hashCode: 2294
+    unicode: 0
+    pivot: {x: -38, y: 51}
+    sprite: {fileID: 21300216, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 68
+    x: 0
+    y: 831
+    width: 197
+    height: 192
+    xOffset: -98.5
+    yOffset: 96
+    xAdvance: 197
+    scale: 1
+    name: A7
+    hashCode: 2134
+    unicode: 0
+    pivot: {x: -98.5, y: 96}
+    sprite: {fileID: 21300062, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 69
+    x: 576
+    y: 787
+    width: 170
+    height: 182
+    xOffset: -85
+    yOffset: 91
+    xAdvance: 170
+    scale: 1
+    name: PR_B4
+    hashCode: 92032491
+    unicode: 0
+    pivot: {x: -85, y: 91}
+    sprite: {fileID: 21301190, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 70
+    x: 747
+    y: 787
+    width: 118
+    height: 118
+    xOffset: -59
+    yOffset: 59
+    xAdvance: 118
+    scale: 1
+    name: PR_D1
+    hashCode: 92032296
+    unicode: 0
+    pivot: {x: -59, y: 59}
+    sprite: {fileID: 21301246, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 71
+    x: 1587
+    y: 749
+    width: 164
+    height: 202
+    xOffset: -82
+    yOffset: 101
+    xAdvance: 164
+    scale: 1
+    name: B6
+    hashCode: 2228
+    unicode: 0
+    pivot: {x: -82, y: 101}
+    sprite: {fileID: 21301176, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 72
+    x: 397
+    y: 731
+    width: 178
+    height: 202
+    xOffset: -89
+    yOffset: 101
+    xAdvance: 178
+    scale: 1
+    name: B7
+    hashCode: 2229
+    unicode: 0
+    pivot: {x: -89, y: 101}
+    sprite: {fileID: 21301162, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 73
+    x: 868
+    y: 725
+    width: 172
+    height: 182
+    xOffset: -86
+    yOffset: 91
+    xAdvance: 172
+    scale: 1
+    name: C6
+    hashCode: 2197
+    unicode: 0
+    pivot: {x: -86, y: 91}
+    sprite: {fileID: 21300208, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 74
+    x: 1041
+    y: 725
+    width: 76
+    height: 160
+    xOffset: -38
+    yOffset: 80
+    xAdvance: 76
+    scale: 1
+    name: PR_A1
+    hashCode: 92032333
+    unicode: 0
+    pivot: {x: -38, y: 80}
+    sprite: {fileID: 21301248, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 75
+    x: 1118
+    y: 722
+    width: 170
+    height: 186
+    xOffset: -85
+    yOffset: 93
+    xAdvance: 170
+    scale: 1
+    name: PR_B4_lock
+    hashCode: -1867341313
+    unicode: 0
+    pivot: {x: -85, y: 93}
+    sprite: {fileID: 21301184, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 76
+    x: 1289
+    y: 722
+    width: 110
+    height: 158
+    xOffset: -55
+    yOffset: 79
+    xAdvance: 110
+    scale: 1
+    name: D6
+    hashCode: 2290
+    unicode: 0
+    pivot: {x: -55, y: 79}
+    sprite: {fileID: 21301202, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 77
+    x: 1408
+    y: 718
+    width: 178
+    height: 188
+    xOffset: -89
+    yOffset: 94
+    xAdvance: 178
+    scale: 1
+    name: PR_C4
+    hashCode: 92032394
+    unicode: 0
+    pivot: {x: -89, y: 94}
+    sprite: {fileID: 21301174, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 78
+    x: 1788
+    y: 701
+    width: 154
+    height: 216
+    xOffset: -77
+    yOffset: 108
+    xAdvance: 154
+    scale: 1
+    name: OB1_A
+    hashCode: 95968258
+    unicode: 0
+    pivot: {x: -77, y: 108}
+    sprite: {fileID: 21301236, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 79
+    x: 1943
+    y: 701
+    width: 104
+    height: 142
+    xOffset: -52
+    yOffset: 71
+    xAdvance: 104
+    scale: 1
+    name: D5
+    hashCode: 2289
+    unicode: 0
+    pivot: {x: -52, y: 71}
+    sprite: {fileID: 21300214, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 80
+    x: 1118
+    y: 663
+    width: 62
+    height: 56
+    xOffset: 0.2
+    yOffset: 36.9
+    xAdvance: 62
+    scale: 1.2
+    name: Hard1
+    hashCode: 84260334
+    unicode: 0
+    pivot: {x: -31, y: 28}
+    sprite: {fileID: 21301272, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 81
+    x: 200
+    y: 658
+    width: 196
+    height: 198
+    xOffset: -54
+    yOffset: 144.8
+    xAdvance: 120.6
+    scale: 2.2
+    name: Boost_CR
+    hashCode: -554730293
+    unicode: 0
+    pivot: {x: -98, y: 99}
+    sprite: {fileID: 21301160, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 82
+    x: 0
+    y: 632
+    width: 199
+    height: 198
+    xOffset: -99.5
+    yOffset: 99
+    xAdvance: 199
+    scale: 1
+    name: PR_A4
+    hashCode: 92032328
+    unicode: 0
+    pivot: {x: -99.5, y: 99}
+    sprite: {fileID: 21301158, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 83
+    x: 675
+    y: 594
+    width: 192
+    height: 192
+    xOffset: -96
+    yOffset: 96
+    xAdvance: 192
+    scale: 1
+    name: C7
+    hashCode: 2196
+    unicode: 0
+    pivot: {x: -96, y: 96}
+    sprite: {fileID: 21300202, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 84
+    x: 412
+    y: 572
+    width: 262
+    height: 158
+    xOffset: -131
+    yOffset: 79
+    xAdvance: 262
+    scale: 1
+    name: OB_grass
+    hashCode: 889927110
+    unicode: 0
+    pivot: {x: -131, y: 79}
+    sprite: {fileID: 21301286, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 85
+    x: 1607
+    y: 558
+    width: 180
+    height: 190
+    xOffset: -90
+    yOffset: 95
+    xAdvance: 180
+    scale: 1
+    name: OB7_A
+    hashCode: 95961988
+    unicode: 0
+    pivot: {x: -90, y: 95}
+    sprite: {fileID: 21301234, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 86
+    x: 1788
+    y: 558
+    width: 240
+    height: 142
+    xOffset: -120
+    yOffset: 71
+    xAdvance: 240
+    scale: 1
+    name: grass
+    hashCode: 121467732
+    unicode: 0
+    pivot: {x: -120, y: 71}
+    sprite: {fileID: 21301142, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 87
+    x: 911
+    y: 544
+    width: 206
+    height: 180
+    xOffset: -103
+    yOffset: 90
+    xAdvance: 206
+    scale: 1
+    name: PR_E3
+    hashCode: 92032203
+    unicode: 0
+    pivot: {x: -103, y: 90}
+    sprite: {fileID: 21301164, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 88
+    x: 1118
+    y: 544
+    width: 76
+    height: 118
+    xOffset: -38
+    yOffset: 59
+    xAdvance: 76
+    scale: 1
+    name: D3
+    hashCode: 2295
+    unicode: 0
+    pivot: {x: -38, y: 59}
+    sprite: {fileID: 21300206, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 89
+    x: 1203
+    y: 539
+    width: 204
+    height: 182
+    xOffset: -102
+    yOffset: 91
+    xAdvance: 204
+    scale: 1
+    name: OB9_A
+    hashCode: 95960074
+    unicode: 0
+    pivot: {x: -102, y: 91}
+    sprite: {fileID: 21301224, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 90
+    x: 1408
+    y: 539
+    width: 198
+    height: 178
+    xOffset: -99
+    yOffset: 89
+    xAdvance: 198
+    scale: 1
+    name: PR_A3
+    hashCode: 92032335
+    unicode: 0
+    pivot: {x: -99, y: 89}
+    sprite: {fileID: 21301170, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 91
+    x: 0
+    y: 427
+    width: 220
+    height: 204
+    xOffset: -110
+    yOffset: 102
+    xAdvance: 220
+    scale: 1
+    name: C8
+    hashCode: 2203
+    unicode: 0
+    pivot: {x: -110, y: 102}
+    sprite: {fileID: 21300188, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 92
+    x: 221
+    y: 427
+    width: 190
+    height: 230
+    xOffset: -95
+    yOffset: 115
+    xAdvance: 190
+    scale: 1
+    name: B8
+    hashCode: 2234
+    unicode: 0
+    pivot: {x: -95, y: 115}
+    sprite: {fileID: 21301156, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 93
+    x: 412
+    y: 427
+    width: 76
+    height: 136
+    xOffset: -38
+    yOffset: 68
+    xAdvance: 76
+    scale: 1
+    name: PR_E5
+    hashCode: 92032205
+    unicode: 0
+    pivot: {x: -38, y: 68}
+    sprite: {fileID: 21301252, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 94
+    x: 495
+    y: 363
+    width: 218
+    height: 208
+    xOffset: -109
+    yOffset: 104
+    xAdvance: 218
+    scale: 1
+    name: PR_D4
+    hashCode: 92032301
+    unicode: 0
+    pivot: {x: -109, y: 104}
+    sprite: {fileID: 21301152, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 95
+    x: 714
+    y: 363
+    width: 196
+    height: 230
+    xOffset: -98
+    yOffset: 115
+    xAdvance: 196
+    scale: 1
+    name: B9
+    hashCode: 2235
+    unicode: 0
+    pivot: {x: -98, y: 115}
+    sprite: {fileID: 21301154, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 96
+    x: 956
+    y: 353
+    width: 246
+    height: 190
+    xOffset: -123
+    yOffset: 95
+    xAdvance: 246
+    scale: 1
+    name: PR_D3
+    hashCode: 92032298
+    unicode: 0
+    pivot: {x: -123, y: 95}
+    sprite: {fileID: 21301150, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 97
+    x: 1203
+    y: 353
+    width: 158
+    height: 180
+    xOffset: -79
+    yOffset: 90
+    xAdvance: 158
+    scale: 1
+    name: B4
+    hashCode: 2230
+    unicode: 0
+    pivot: {x: -79, y: 90}
+    sprite: {fileID: 21300016, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 98
+    x: 1366
+    y: 321
+    width: 227
+    height: 217
+    xOffset: -113.5
+    yOffset: 108.5
+    xAdvance: 227
+    scale: 1
+    name: A8
+    hashCode: 2137
+    unicode: 0
+    pivot: {x: -113.5, y: 108.5}
+    sprite: {fileID: 21300082, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 99
+    x: 1594
+    y: 321
+    width: 148
+    height: 196
+    xOffset: -74
+    yOffset: 98
+    xAdvance: 148
+    scale: 1
+    name: PR_A2
+    hashCode: 92032334
+    unicode: 0
+    pivot: {x: -74, y: 98}
+    sprite: {fileID: 21301194, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 100
+    x: 1745
+    y: 279
+    width: 262
+    height: 278
+    xOffset: -131
+    yOffset: 139
+    xAdvance: 262
+    scale: 1
+    name: B10
+    hashCode: 73507
+    unicode: 0
+    pivot: {x: -131, y: 139}
+    sprite: {fileID: 21301148, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 101
+    x: 0
+    y: 0
+    width: 494
+    height: 426
+    xOffset: -247
+    yOffset: 213
+    xAdvance: 494
+    scale: 1
+    name: B11
+    hashCode: 73506
+    unicode: 0
+    pivot: {x: -247, y: 213}
+    sprite: {fileID: 21301144, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 102
+    x: 495
+    y: 0
+    width: 460
+    height: 362
+    xOffset: -230
+    yOffset: 181
+    xAdvance: 460
+    scale: 1
+    name: D9
+    hashCode: 2301
+    unicode: 0
+    pivot: {x: -230, y: 181}
+    sprite: {fileID: 21301146, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 103
+    x: 956
+    y: 0
+    width: 409
+    height: 352
+    xOffset: -204.5
+    yOffset: 176
+    xAdvance: 409
+    scale: 1
+    name: A9
+    hashCode: 2136
+    unicode: 0
+    pivot: {x: -204.5, y: 176}
+    sprite: {fileID: 21300194, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 104
+    x: 1366
+    y: 0
+    width: 378
+    height: 320
+    xOffset: -189
+    yOffset: 160
+    xAdvance: 378
+    scale: 1
+    name: C9
+    hashCode: 2202
+    unicode: 0
+    pivot: {x: -189, y: 160}
+    sprite: {fileID: 21300184, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  - id: 105
+    x: 1745
+    y: 0
+    width: 284
+    height: 278
+    xOffset: -142
+    yOffset: 139
+    xAdvance: 284
+    scale: 1
+    name: crystallShine
+    hashCode: 380874007
+    unicode: 0
+    pivot: {x: -142, y: 139}
+    sprite: {fileID: 21301086, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+  fallbackSpriteAssets: []
+--- !u!21 &21440855645375684
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: TextMeshPro/Sprite
+  m_Shader: {fileID: 4800000, guid: cf81c85f95fe47e1a27f6ae460cf182c, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: caeeb9bda829a4f64b1a809f2f79ddf8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}

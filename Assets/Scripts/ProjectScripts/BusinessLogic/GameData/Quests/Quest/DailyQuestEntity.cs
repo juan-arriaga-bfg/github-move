@@ -5,10 +5,7 @@ using Quests;
 using UnityEngine;
 
 public class DailyQuestEntity : QuestEntity
-{
-    // Set this to prevent QuestManager from replacing this instance on timer completion
-    [JsonIgnore] public bool Immortal;
-    
+{   
     private readonly Dictionary<TaskGroup, int> tasksCount = new Dictionary<TaskGroup, int>
     {
         {TaskGroup.Permanent, 2},
@@ -16,6 +13,9 @@ public class DailyQuestEntity : QuestEntity
         {TaskGroup.Normal,    2},
         {TaskGroup.Hard,      1},
     };
+
+    // Set this to prevent QuestManager from replacing this instance on timer completion
+    [JsonIgnore] public bool Immortal;
     
     protected override void SelectActiveTasks()
     {

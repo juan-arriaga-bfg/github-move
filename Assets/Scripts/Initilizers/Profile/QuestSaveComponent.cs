@@ -15,6 +15,7 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
     
     [JsonProperty] public List<string> FinishedQuests;
     [JsonProperty] public List<QuestSaveData> ActiveQuests;
+    [JsonProperty] public int DailyQuestRewardIndex;
 
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
@@ -31,6 +32,7 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
         ActiveQuests    = manager.GetQuestsSaveData();
         FinishedQuests  = manager.FinishedQuests;
         DailyTimerStart = manager.DailyTimer?.StartTimeLong ?? 0;
+        DailyQuestRewardIndex = manager.DailyQuestRewardIndex;
     }
 }
 

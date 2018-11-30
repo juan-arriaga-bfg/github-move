@@ -12,6 +12,8 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
     [IWUIBinding("#ComeBackPanel")] private GameObject comeBackPanel;
     [IWUIBinding("#ComeBackLabel")] private NSText comeBackLabel;
     [IWUIBinding("#MainTimer")] private GameObject mainTimer;
+
+    [SerializeField] private List<Image> chestSlots;
     
     public override void OnViewShow()
     {
@@ -38,6 +40,50 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         }
         
         ToggleComebackPanel(isQuestClaimed);
+
+        SetChestsIcons();
+    }
+
+    private void SetChestsIcons()
+    {
+        UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
+
+        TaskCompleteDailyTaskEntity clearAllTask = model.Quest.GetTask<TaskCompleteDailyTaskEntity>();
+        
+        var reward = clearAllTask.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value ?? new List<CurrencyPair>();
+        int count = reward.Count;
+        
+        if (count == 0)
+        {
+            Debug.LogError("[UIDailyQuestTaskElementViewController] => GetReward: No reward specified for 'Clear all' task!");
+            return;
+        }
+
+        int globalIndex = GameDataService.Current.QuestsManager.DailyQuestRewardIndex;
+        int croppedIndex = globalIndex % count;
+        int index = croppedIndex;
+        
+        for (int i = 0; i < chestSlots.Count; i++)
+        {
+            Image chestImage = chestSlots[i];
+            CurrencyPair chest = reward[index];
+
+            var icon = chest.GetIcon();
+            chestImage.sprite = icon;
+            chestImage.color = new Color(1, 1, 1, index == croppedIndex ? 1 : 0.6f);
+            
+            index++;
+            if (index >= reward.Count)
+            {
+                index = 0;
+            }
+        }
+
+    }
+
+    public void ScrollToTop()
+    {
+        taskList.GetScrollRect().normalizedPosition = new Vector2(0.5f, 1);
     }
 
     private void OnQuestChanged(QuestEntity quest, TaskEntity task)
@@ -83,10 +129,10 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         {
             var task = tasks[i];
 
-            if (task.IsClaimed())
-            {
-                continue;
-            }
+            // if (task.IsClaimed())
+            // {
+            //     continue;
+            // }
             
             var tabEntity = new UIDailyQuestTaskElementEntity
             {
@@ -108,7 +154,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         {
             const int CLAIMED_WEIGHT = 10000;
             const int COMPLETED_WEIGHT = -1000;
-            const int CLEAR_ALL_WEIGHT = 20000;
+            const int CLEAR_ALL_WEIGHT = 5000;
             
             int w1 = (int)item1.Group;
             int w2 = (int)item2.Group;

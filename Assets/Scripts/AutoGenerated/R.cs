@@ -175,4 +175,8 @@ public class R
      public const string ProductionReadyParticle = "ProductionReadyParticle";
      public const string FogDefaultMaterial = "FogDefaultMaterial";
      public const string PiecesUnderFogMaterial = "PiecesUnderFogMaterial";
+     public const string GodRayView = "GodRayView";
+     public const string SK1_PRPiece = "SK1_PRPiece";
+     public const string SK2_PRPiece = "SK2_PRPiece";
+     public const string SK3_PRPiece = "SK3_PRPiece";
 }

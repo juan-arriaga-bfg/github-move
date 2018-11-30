@@ -142,7 +142,9 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -33, y: 37}
     sprite: {fileID: 21300010, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  fallbackSpriteAssets: []
+  fallbackSpriteAssets:
+  - {fileID: 11400000, guid: a5372b05be2e99b4891d3fb11b7075e9, type: 2}
+  - {fileID: 11400000, guid: 3ddce4f1067bc1247a9b39894412dcff, type: 2}
 --- !u!21 &21828550339951598
 Material:
   serializedVersion: 6

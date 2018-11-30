@@ -24,9 +24,15 @@ public class CurrencyPair
         return def == null ? null : $"{def.Id},{Amount}";
     }
 
-    public string ToStringIcon(bool isLeft = true)
+    public string ToStringIcon(bool isLeft = true, bool noAmount = false)
     {
         var icon = $"<sprite name={Currency}>";
+
+        if (noAmount)
+        {
+            return $"{icon}";
+        }
+        
         return isLeft ? $"{icon} {Amount}" : $"{Amount} {icon}";
     }
 

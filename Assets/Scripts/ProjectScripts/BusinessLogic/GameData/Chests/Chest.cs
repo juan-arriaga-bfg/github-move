@@ -41,7 +41,7 @@ public class Chest
         reward = resources.GetNextDict(resourcesAmount, reward);
         reward = sequence.GetNextDict(Def.PieceAmount, reward);
 
-        rewardCount = productionAmount + resourcesAmount + Def.PieceAmount;
+        rewardCount = reward.Sum(pair => pair.Value);
         
         return reward;
     }

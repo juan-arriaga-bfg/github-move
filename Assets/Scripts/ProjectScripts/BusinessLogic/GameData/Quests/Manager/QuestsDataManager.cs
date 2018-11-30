@@ -36,6 +36,8 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     public List<QuestEntity> ActiveQuests;
     
     public DailyQuestEntity DailyQuest;
+
+    public int DailyQuestRewardIndex { get; private set; }
     
     /// <summary>
     /// List of ids of completed quests
@@ -102,6 +104,8 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         var questSave = ProfileService.Current.GetComponent<QuestSaveComponent>(QuestSaveComponent.ComponentGuid);
 
         FinishedQuests = questSave.FinishedQuests ?? new List<string>();
+
+        DailyQuestRewardIndex = questSave.DailyQuestRewardIndex;
         
         ActiveStoryQuests = new List<QuestEntity>();
         ActiveQuests = new List<QuestEntity>();
@@ -516,6 +520,11 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     private void OnQuestsStateChangedEvent(QuestEntity quest, TaskEntity task)
     {
         OnQuestStateChanged?.Invoke(quest, task);
+
+        if (task is TaskCompleteDailyTaskEntity && task.IsClaimed())
+        {
+            DailyQuestRewardIndex++;
+        }
     }
 
     public bool IsQuestDefined(string id)
