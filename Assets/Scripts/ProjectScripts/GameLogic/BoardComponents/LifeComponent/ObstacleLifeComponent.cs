@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public class ObstacleLifeComponent : WorkplaceLifeComponent
 {
@@ -17,7 +16,9 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
     
     protected override Dictionary<int, int> GetRewards()
     {
-        return GameDataService.Current.ObstaclesManager.GetPiecesByStep(Context.PieceType, current - 1);
+        return IsDead
+            ? GameDataService.Current.ObstaclesManager.GetPiecesByLastStep(Context.PieceType, current - 1)
+            : GameDataService.Current.ObstaclesManager.GetPiecesByStep(Context.PieceType, current - 1);
     }
     
     protected override void Success()
@@ -27,43 +28,23 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
     
     protected override void OnStep()
     {
-        storage.SpawnAction = new EjectionPieceAction
-        {
-            GetFrom = () => Context.CachedPosition,
-            Pieces = Reward,
-            OnComplete = OnSpawnRewards
-        };
+        Rewards.IsTargetReplace = false;
     }
     
     protected override void OnComplete()
     {
-        storage.SpawnPiece = GameDataService.Current.ObstaclesManager.GetReward(Context.PieceType);
-
-        if (storage.SpawnPiece == PieceType.None.Id)
-        {
-            OnStep(true);
-            return;
-        }
-        
-        storage.OnScatter = () =>
-        {
-            storage.OnScatter = null;
-            OnSpawnRewards();
-        };
+        Rewards.IsTargetReplace = true;
     }
 
-    protected override void OnSpawnRewards()
+    protected override void OnSpawnCurrencyRewards()
     {
         var rewards = GameDataService.Current.ObstaclesManager.GetRewardByStep(Context.PieceType, current - 1);
         
         AddResourceView.Show(StartPosition(), rewards);
         Context.Context.HintCooldown.Step(HintType.Obstacle);
 
-        base.OnSpawnRewards();
+        base.OnSpawnCurrencyRewards();
         
-        if (IsDead)
-        {
-            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ObstacleKilled, this);
-        }
+        if (IsDead) BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ObstacleKilled, this);
     }
 }

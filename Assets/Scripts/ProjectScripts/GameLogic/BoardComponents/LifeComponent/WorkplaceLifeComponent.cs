@@ -13,7 +13,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	public virtual string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.send", "gameboard.bubble.button.send {0}"), $"<sprite name={Currency.Worker.Name}>");
     
 	public virtual TimerComponent Timer { get; set; }
-	public RewardsStoreComponent Rewards { get; set; }
+	public RewardsStoreComponent Rewards;
 	
 	public virtual bool IsUseCooldown => false;
 	
@@ -26,8 +26,13 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		base.OnRegisterEntity(entity);
 		
 		RegisterComponent(new LockerComponent());
+		
+		Rewards = new RewardsStoreComponent
+		{
+			GetRewards = GetRewards,
+			OnComplete = OnSpawnCurrencyRewards
+		};
 
-		Rewards = new RewardsStoreComponent {GetRewards = GetRewards};
 		Context.RegisterComponent(Rewards);
 		
 		Timer = new TimerComponent();
@@ -80,7 +85,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		if (IsDead == false) OnStep();
 		else OnComplete();
         
-		locker.Lock(this, false);
+		Locker.Lock(this, false);
 
 		if (Timer.IsExecuteable()) UpdateView(true);
 	}
@@ -109,9 +114,9 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	{
 	}
 	
-	protected virtual void OnSpawnRewards()
+	protected virtual void OnSpawnCurrencyRewards()
 	{
-		locker.Unlock(this);
+		Locker.Unlock(this);
 	}
 	
 	private void UpdateView(bool isShow)
@@ -131,6 +136,6 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 			view.Priority = 10;
 		}
 		
-		view.Change(true);
+		view.Change(isShow);
 	}
 }

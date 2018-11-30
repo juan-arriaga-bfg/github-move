@@ -17,7 +17,7 @@ public class ReproductionPieceAnimation : BoardAnimation
         sequence.Append(boardElement.CachedTransform.DOScale(new Vector3(1.2f, 0.7f, 1f), 0.1f));
         sequence.Append(boardElement.CachedTransform.DOScale(new Vector3(0.7f, 1.2f, 1f), 0.1f));
         sequence.Append(boardElement.CachedTransform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack));
-
+        
         var index = 0;
         
         foreach (var pair in Pieces)

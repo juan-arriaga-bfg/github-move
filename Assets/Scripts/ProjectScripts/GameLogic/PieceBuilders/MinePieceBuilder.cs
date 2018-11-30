@@ -30,7 +30,7 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 		
 		piece.RegisterComponent(new TouchReactionComponent()
 			 .RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
-				 .RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.ObstacleState})
+				 .RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.ObstacleBubble})
 				 .RegisterDefinition(new TouchReactionDefinitionObstacleComponent{IsAutoStart = false}))
 			 .RegisterComponent(new TouchReactionConditionStorage()))
 			 .RegisterComponent(new PiecePathfindBoardCondition(context, piece)

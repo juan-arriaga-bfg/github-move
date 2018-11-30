@@ -9,7 +9,6 @@ public class R
      public const string PieceLevelView = "PieceLevelView";
      public const string MenuView = "MenuView";
      public const string DebugCell = "DebugCell";
-     public const string ChangeObstacleStateView = "ChangeObstacleStateView";
      public const string BorderDark = "BorderDark";
      public const string BorderDarkLeft = "BorderDarkLeft";
      public const string BorderDarkRight = "BorderDarkRight";
@@ -171,4 +170,6 @@ public class R
      public const string FogExplosionParticleSystem = "FogExplosionParticleSystem";
      public const string FogDefaultMaterial = "FogDefaultMaterial";
      public const string PiecesUnderFogMaterial = "PiecesUnderFogMaterial";
+     public const string RewardsBubbleView = "RewardsBubbleView";
+     public const string ObstacleBubbleView = "ObstacleBubbleView";
 }

@@ -8,7 +8,7 @@ public class SelectStorageTutorialStep : DelayTutorialStep
     public bool IsFastStart;
     
     private HintArrowView arrow;
-    private ChangeObstacleStateView bubble;
+    private ObstacleBubbleView bubble;
     
     public override void PauseOn()
     {
@@ -112,7 +112,7 @@ public class SelectStorageTutorialStep : DelayTutorialStep
             {
                 var piece = Context.Context.BoardLogic.GetPieceAt(position);
 
-                bubble = piece?.ViewDefinition?.GetViews().Find(view => view is ChangeObstacleStateView) as ChangeObstacleStateView;
+                bubble = piece?.ViewDefinition?.GetViews().Find(view => view is ObstacleBubbleView) as ObstacleBubbleView;
         
                 if(bubble != null) return;
             }

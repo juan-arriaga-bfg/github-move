@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 
-public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
+public class ObstacleBubbleView : UIBoardView, IBoardEventListener
 {
     [SerializeField] private NSText message;
     [SerializeField] private NSText price;
     
     [SerializeField] private BoardProgressbar bar;
     
-    private StorageLifeComponent life;
+    private WorkplaceLifeComponent life;
     
     public override Vector3 Ofset => new Vector3(0, 1.5f);
     
-    protected override ViewType Id => ViewType.ObstacleState;
+    protected override ViewType Id => ViewType.ObstacleBubble;
 
     private bool isAddListener;
 
@@ -24,10 +24,10 @@ public class ChangeObstacleStateView : UIBoardView, IBoardEventListener
     {
         base.Init(piece);
 
-        life = piece.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
+        life = piece.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
         
         if(life == null) return;
-
+        
         bar.IsVisible = life.HP != -1;
         bar.Init(life.HP);
 

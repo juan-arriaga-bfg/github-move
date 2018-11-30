@@ -7,7 +7,7 @@
     BoardTimer = -1003,
     LevelLabel = -1004,
     Menu = -1005,
-    ObstacleState = -1006,
+    ObstacleBubble = -1006,
     Bubble = -1007,
     MergeParticle = -1008,
     Progress = -109,
@@ -20,4 +20,5 @@
     ExtraWorker = -1016,
     TutorialMergeFinger = -1017,
     PieceRemover = -1018,
+    RewardsBubble = -1019
 }

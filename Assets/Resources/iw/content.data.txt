@@ -45,11 +45,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "ChangeObstacleStateView",
-    "ResourcePath": "Prefabs/ChangeObstacleStateView",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "BorderDark",
     "ResourcePath": "Prefabs/Border/BorderDark",
     "IsGenerateAutoName": true
@@ -932,6 +927,16 @@
   {
     "Uid": "PiecesUnderFogMaterial",
     "ResourcePath": "Materials/PiecesUnderFogMaterial",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "RewardsBubbleView",
+    "ResourcePath": "Prefabs\\BoardUI/RewardsBubbleView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ObstacleBubbleView",
+    "ResourcePath": "Prefabs\\BoardUI/ObstacleBubbleView",
     "IsGenerateAutoName": true
   }
 ]

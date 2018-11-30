@@ -25,7 +25,7 @@ public class MakingPieceBuilder : MulticellularDraggablePieceBuilder
 
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}
-                .RegisterDefinition(new TouchReactionDefinitionOpenBubble {ViewId = ViewType.ObstacleState})
+                .RegisterDefinition(new TouchReactionDefinitionOpenBubble {ViewId = ViewType.ObstacleBubble})
                 .RegisterDefinition(new TouchReactionDefinitionSpawnInStorage {IsAutoStart = false}))
             .RegisterComponent(new TouchReactionConditionStorage()));
 		

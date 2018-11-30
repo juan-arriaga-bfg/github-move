@@ -7,15 +7,18 @@ public class RewardsStoreComponent : IECSComponent
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
     
-    public Action OnHideBubble;
     public Func<Dictionary<int, int>> GetRewards;
+    public Action OnComplete;
     
     public Vector2 BubbleOffset = new Vector3(0, 1.5f);
     
+    public string Icon => PieceType.Parse(next);
+    
+    public bool IsTargetReplace;
+    public bool IsComplete;
+    
     private Piece context;
     
-    public string Icon => PieceType.Parse(next);
-
     private int next;
     private Dictionary<int, int> rewards;
     
@@ -59,20 +62,35 @@ public class RewardsStoreComponent : IECSComponent
     {
         if(context.ViewDefinition == null) return;
         
-        var view = context.ViewDefinition.AddView(ViewType.StorageState);
+        var view = context.ViewDefinition.AddView(ViewType.RewardsBubble) as RewardsBubbleView;
+        
+        if(view == null) return;
         
         if (isShow)
         {
             view.Ofset = BubbleOffset;
             view.SetOfset();
+            view.OnClickAction = Get;
             context.Context.HintCooldown.AddView(view);
         }
         else
         {
-            view.OnHide = OnHideBubble;
+            view.OnHide = Scatter;
             context.Context.HintCooldown.RemoweView(view);
         }
         
+        IsComplete = isShow;
         view.Change(isShow);
+    }
+
+    private void Scatter()
+    {
+        context.Context.ActionExecutor.AddAction(new ScatterPiecesAction
+        {
+            IsTargetReplace = IsTargetReplace,
+            GetFrom = () => context.Multicellular?.GetTopPosition ?? context.CachedPosition,
+            Pieces = rewards,
+            OnComplete = OnComplete
+        });
     }
 }
