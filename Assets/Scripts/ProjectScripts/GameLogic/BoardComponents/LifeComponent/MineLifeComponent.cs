@@ -60,7 +60,7 @@ public class MineLifeComponent : StorageLifeComponent
         
         storage.SpawnAction = new EjectionPieceAction
         {
-            GetFrom = () => thisContext.CachedPosition,
+            GetFrom = () => Context.CachedPosition,
             Pieces = pieces,
             OnComplete = () =>
             {

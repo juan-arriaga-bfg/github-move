@@ -17,7 +17,7 @@ public class ReproductionLifeComponent : StorageLifeComponent
     {
         base.OnRegisterEntity(entity);
         
-        def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType).ReproductionDef;
+        def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).ReproductionDef;
         
         HP = def.Limit;
         cooldown = new TimerComponent{Delay = def.Delay};
@@ -80,10 +80,10 @@ public class ReproductionLifeComponent : StorageLifeComponent
         {
             storage.OnScatter = null;
             OnSpawnRewards();
-            thisContext.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+            Context.Context.ActionExecutor.AddAction(new CollapsePieceToAction
             {
-                To = thisContext.CachedPosition,
-                Positions = new List<BoardPosition> {thisContext.CachedPosition},
+                To = Context.CachedPosition,
+                Positions = new List<BoardPosition> {Context.CachedPosition},
                 OnComplete = OnRemove
             });
         };
@@ -91,10 +91,10 @@ public class ReproductionLifeComponent : StorageLifeComponent
 
     private void OnRemove()
     {
-        thisContext.Context.ActionExecutor.AddAction(new SpawnPieceAtAction()
+        Context.Context.ActionExecutor.AddAction(new SpawnPieceAtAction()
         {
             IsCheckMatch = false,
-            At = thisContext.CachedPosition,
+            At = Context.CachedPosition,
             PieceTypeId = def.ObstacleType
         });
     }

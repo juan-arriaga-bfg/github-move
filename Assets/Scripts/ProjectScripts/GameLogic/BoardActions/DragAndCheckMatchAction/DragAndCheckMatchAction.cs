@@ -333,7 +333,7 @@ public class DragAndCheckMatchAction : IBoardAction
 		var emptyFinder = logic.EmptyCellsFinder;
 		
 		var free = new List<BoardPosition>();
-		if (!emptyFinder.FindRandomNearWithPointInCenter(To,  free, targetFreeCount*3))
+		if (!emptyFinder.FindRandomNearWithPointInCenter(To,  free, targetFreeCount, 0.1f))
 		{
 			MulticellularSwapPieces(board);
 			return;

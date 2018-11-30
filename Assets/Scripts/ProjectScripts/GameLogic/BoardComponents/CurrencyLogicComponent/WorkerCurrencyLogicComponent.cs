@@ -158,7 +158,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         var target = context.BoardLogic.GetPieceAt(targetPosition);
         var def = PieceType.GetDefById(target.PieceType);
 
-        if (def.Filter.Has(PieceTypeFilter.WorkPlace) == false || !CheckLock(target)) return false;
+        if (def.Filter.Has(PieceTypeFilter.Workplace) == false || !CheckLock(target)) return false;
         
         if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target)) return false;
         

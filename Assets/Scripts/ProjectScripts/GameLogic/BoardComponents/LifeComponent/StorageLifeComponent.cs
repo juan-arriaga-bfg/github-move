@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerComponent, ILockerComponent
+public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ILockerComponent
 {
     private LockerComponent locker;
     public LockerComponent Locker => locker ?? GetComponent<LockerComponent>(LockerComponent.ComponentGuid);
@@ -30,7 +30,7 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerCo
         locker = new LockerComponent();
         RegisterComponent(locker);
         
-        storage = thisContext.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
+        storage = Context.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
         
         if (storage.Timer == null) return;
         
@@ -51,7 +51,7 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerCo
     protected virtual Action InitInSaveStorage(LifeSaveItem item)
     {
         Action updateView;
-        storage.InitInSave(thisContext.CachedPosition, () => InitInSaveReward(item), out updateView);
+        storage.InitInSave(Context.CachedPosition, () => InitInSaveReward(item), out updateView);
         return updateView;
     }
     
@@ -69,7 +69,7 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerCo
         if (item == null) return null;
         
         current = item.Step;
-        thisContext.Context.WorkerLogic.Init(thisContext.CachedPosition, storage.Timer);
+        Context.Context.WorkerLogic.Init(Context.CachedPosition, storage.Timer);
         
         var updateView = InitInSaveStorage(item);
         
@@ -90,7 +90,7 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerCo
 
     public virtual void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
     {
-        thisContext.Context.WorkerLogic.Replace(from, to);
+        Context.Context.WorkerLogic.Replace(from, to);
     }
 
     public virtual void OnRemoveFromBoard(BoardPosition position, Piece context = null)
@@ -106,7 +106,7 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerCo
         var isSuccess = false;
 
         if (CurrencyHellper.IsCanPurchase(Energy, true) == false
-            || isExtra == false && thisContext.Context.WorkerLogic.Get(thisContext.CachedPosition, storage.Timer) == false) return false;
+            || isExtra == false && Context.Context.WorkerLogic.Get(Context.CachedPosition, storage.Timer) == false) return false;
         
         Success();
         
@@ -153,6 +153,6 @@ public class StorageLifeComponent : LifeComponent, IPieceBoardObserver, ITimerCo
     
     protected virtual void OnTimerComplete()
     {
-        thisContext.Context.WorkerLogic.Return(thisContext.CachedPosition);
+        Context.Context.WorkerLogic.Return(Context.CachedPosition);
     }
 }

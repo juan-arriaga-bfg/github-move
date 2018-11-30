@@ -15,7 +15,7 @@
     {
         base.OnRegisterEntity(entity);
         
-        def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType).MakingDef;
+        def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).MakingDef;
         
         HP = -1;
         
@@ -71,7 +71,7 @@
         
         storage.SpawnAction = new EjectionPieceAction
         {
-            GetFrom = () => thisContext.CachedPosition,
+            GetFrom = () => Context.CachedPosition,
             Pieces = Reward,
             OnComplete = () =>
             {

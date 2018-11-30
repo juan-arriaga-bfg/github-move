@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class StorageComponent : IECSComponent, ITimerComponent, IPieceBoardObserver
+public class StorageComponent : IECSComponent, IPieceBoardObserver
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;

@@ -8,7 +8,7 @@ public class HighlightTaskUseWorker : TaskHighlightUsingArrow
     protected override bool ShowArrow(TaskEntity task, float delay)
     {
         var boardLogic = BoardService.Current.FirstBoard.BoardLogic;
-        var workPlacesList = boardLogic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.WorkPlace);
+        var workPlacesList = boardLogic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Workplace);
         
         if (workPlacesList.Count == 0)
         {

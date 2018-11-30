@@ -1,97 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
 
-public class ObstacleLifeComponent : StorageLifeComponent
+public class ObstacleLifeComponent : WorkplaceLifeComponent
 {
-    public override CurrencyPair Energy => GameDataService.Current.ObstaclesManager.GetPriceByStep(thisContext.PieceType, current);
+    public override CurrencyPair Energy => GameDataService.Current.ObstaclesManager.GetPriceByStep(Context.PieceType, current);
 
-    public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.obstacle", "gameboard.bubble.message.obstacle\n{0}?"), DateTimeExtension.GetDelayText(GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current)));
+    public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.obstacle", "gameboard.bubble.message.obstacle\n{0}?"), DateTimeExtension.GetDelayText(GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current)));
     public override string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.chop", "gameboard.bubble.button.chop {0}"), Energy.ToStringIcon());
-
-    private int spawnPiece = PieceType.None.Id;
-    public override int StorageSpawnPiece => spawnPiece;
-
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
         
-        HP = thisContext.Context.BoardLogic.MatchDefinition.GetIndexInChain(thisContext.PieceType);
+        HP = Context.Context.BoardLogic.MatchDefinition.GetIndexInChain(Context.PieceType);
     }
-
-    protected override void InitStorage()
+    
+    protected override Dictionary<int, int> GetRewards()
     {
-        storage.Capacity = storage.Amount = 1;
+        return GameDataService.Current.ObstaclesManager.GetPiecesByStep(Context.PieceType, current - 1);
     }
-
-    protected override Action InitInSaveStorage(LifeSaveItem item)
-    {
-        storage.Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current - 1);
-        
-        return base.InitInSaveStorage(item);
-    }
-
-    protected override void InitInSaveReward(LifeSaveItem item)
-    {
-        base.InitInSaveReward(item);
-        
-        if(Reward == null || !storage.IsFilled || IsDead == false) return;
-        
-        int value;
-
-        spawnPiece = item.StorageSpawnPiece;
-
-        if (Reward.TryGetValue(spawnPiece, out value)) Reward[spawnPiece] = value + 1;
-        else Reward.Add(spawnPiece, 1);
-    }
-
+    
     protected override void Success()
     {
-        storage.Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(thisContext.PieceType, current);
+        Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current);
     }
     
     protected override void OnStep()
     {
-        OnStep(false);
-    }
-    
-    private void OnStep(bool isRemoveMain)
-    {
-        if(Reward == null || Reward.Count == 0) Reward = GameDataService.Current.ObstaclesManager.GetPiecesByStep(thisContext.PieceType, current - 1);
-        
-        foreach (var key in Reward.Keys)
-        {
-            storage.SpawnPiece = key;
-            break;
-        }
-
-        if (isRemoveMain)
-        {
-            if (spawnPiece == PieceType.None.Id) spawnPiece = storage.SpawnPiece;
-            else storage.SpawnPiece = spawnPiece;
-            
-            var value = Reward[storage.SpawnPiece];
-            
-            value--;
-            
-            if (value == 0) Reward.Remove(storage.SpawnPiece);
-            else Reward[storage.SpawnPiece] = value;
-        }
-        
         storage.SpawnAction = new EjectionPieceAction
         {
-            GetFrom = () => thisContext.CachedPosition,
+            GetFrom = () => Context.CachedPosition,
             Pieces = Reward,
-            OnComplete = () =>
-            {
-                spawnPiece = PieceType.None.Id;
-                Reward = null;
-                OnSpawnRewards();
-            }
+            OnComplete = OnSpawnRewards
         };
     }
     
     protected override void OnComplete()
     {
-        storage.SpawnPiece = GameDataService.Current.ObstaclesManager.GetReward(thisContext.PieceType);
+        storage.SpawnPiece = GameDataService.Current.ObstaclesManager.GetReward(Context.PieceType);
 
         if (storage.SpawnPiece == PieceType.None.Id)
         {
@@ -108,10 +54,10 @@ public class ObstacleLifeComponent : StorageLifeComponent
 
     protected override void OnSpawnRewards()
     {
-        var rewards = GameDataService.Current.ObstaclesManager.GetRewardByStep(thisContext.PieceType, current - 1);
+        var rewards = GameDataService.Current.ObstaclesManager.GetRewardByStep(Context.PieceType, current - 1);
         
         AddResourceView.Show(StartPosition(), rewards);
-        thisContext.Context.HintCooldown.Step(HintType.Obstacle);
+        Context.Context.HintCooldown.Step(HintType.Obstacle);
 
         base.OnSpawnRewards();
         
