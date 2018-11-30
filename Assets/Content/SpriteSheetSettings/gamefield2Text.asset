@@ -12,54 +12,26 @@ MonoBehaviour:
   m_Name: gamefield2Text
   m_EditorClassIdentifier: 
   hashCode: 1389760574
-  material: {fileID: 21881473372422516}
+  material: {fileID: 21580960290980258}
   materialHashCode: 0
   spriteSheet: {fileID: 2800000, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   spriteInfoList:
   - id: 0
-    x: 578
-    y: 979
-    width: 86
-    height: 39
-    xOffset: -43
-    yOffset: 19.5
-    xAdvance: 86
+    x: 838
+    y: 980
+    width: 14
+    height: 22
+    xOffset: -4.305908
+    yOffset: 4.1886597
+    xAdvance: 14
     scale: 1
-    name: shadowSleepingBeauty
-    hashCode: -2048850601
+    name: l_hand1
+    hashCode: -69088447
     unicode: 0
-    pivot: {x: -43, y: 19.5}
-    sprite: {fileID: 21300246, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+    pivot: {x: -4.305908, y: 4.1886597}
+    sprite: {fileID: 21300132, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 1
-    x: 1127
-    y: 978
-    width: 12
-    height: 24
-    xOffset: -8.181763
-    yOffset: 3.4458604
-    xAdvance: 12
-    scale: 1
-    name: pink_r_hand1
-    hashCode: 743950460
-    unicode: 0
-    pivot: {x: -8.181763, y: 3.4458604}
-    sprite: {fileID: 21300162, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 2
-    x: 1090
-    y: 971
-    width: 36
-    height: 50
-    xOffset: -14.87256
-    yOffset: 24.431396
-    xAdvance: 36
-    scale: 1
-    name: pink_body
-    hashCode: 20225875
-    unicode: 0
-    pivot: {x: -14.87256, y: 24.431396}
-    sprite: {fileID: 21300154, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 3
-    x: 669
+    x: 652
     y: 954
     width: 74
     height: 63
@@ -72,35 +44,91 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -27.173462, y: 6.131409}
     sprite: {fileID: 21300244, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 2
+    x: 727
+    y: 954
+    width: 36
+    height: 50
+    xOffset: -18
+    yOffset: 25
+    xAdvance: 36
+    scale: 1
+    name: bodyExtra
+    hashCode: -1949591094
+    unicode: 0
+    pivot: {x: -18, y: 25}
+    sprite: {fileID: 21300168, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 3
+    x: 764
+    y: 954
+    width: 36
+    height: 50
+    xOffset: -18
+    yOffset: 25
+    xAdvance: 36
+    scale: 1
+    name: body
+    hashCode: 3565392
+    unicode: 0
+    pivot: {x: -18, y: 25}
+    sprite: {fileID: 21300094, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 4
-    x: 1127
-    y: 949
-    width: 11
-    height: 28
-    xOffset: -5.3797607
-    yOffset: 4.3378897
-    xAdvance: 11
+    x: 801
+    y: 954
+    width: 36
+    height: 50
+    xOffset: -14.8724985
+    yOffset: 24.431396
+    xAdvance: 36
     scale: 1
-    name: hand1LeftSleepingBeauty
-    hashCode: 920440088
+    name: blue_body
+    hashCode: -1355254543
     unicode: 0
-    pivot: {x: -5.3797607, y: 4.3378897}
-    sprite: {fileID: 21300258, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+    pivot: {x: -14.8724985, y: 24.431396}
+    sprite: {fileID: 21300236, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 5
-    x: 669
-    y: 943
-    width: 16
-    height: 10
-    xOffset: -8.711121
-    yOffset: 3.194458
-    xAdvance: 16
+    x: 838
+    y: 954
+    width: 14
+    height: 25
+    xOffset: -7
+    yOffset: 0
+    xAdvance: 14
     scale: 1
-    name: r_leg
-    hashCode: 137409923
+    name: pink_l_hand1
+    hashCode: 1912534754
     unicode: 0
-    pivot: {x: -8.711121, y: 3.194458}
-    sprite: {fileID: 21300104, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+    pivot: {x: -7, y: 0}
+    sprite: {fileID: 21300160, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 6
+    x: 853
+    y: 954
+    width: 12
+    height: 28
+    xOffset: -8.307495
+    yOffset: 4.2529297
+    xAdvance: 12
+    scale: 1
+    name: hand1RightSleepingBeauty
+    hashCode: -287612093
+    unicode: 0
+    pivot: {x: -8.307495, y: 4.2529297}
+    sprite: {fileID: 21300254, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 7
+    x: 866
+    y: 954
+    width: 12
+    height: 24
+    xOffset: -8.181763
+    yOffset: 3.4458604
+    xAdvance: 12
+    scale: 1
+    name: pink_r_hand1
+    hashCode: 743950460
+    unicode: 0
+    pivot: {x: -8.181763, y: 3.4458604}
+    sprite: {fileID: 21300162, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 8
     x: 449
     y: 920
     width: 128
@@ -114,50 +142,8 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -64, y: 50}
     sprite: {fileID: 21300148, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 7
-    x: 578
-    y: 920
-    width: 90
-    height: 58
-    xOffset: -23.481018
-    yOffset: 46.428898
-    xAdvance: 90
-    scale: 1
-    name: head
-    hashCode: 3639336
-    unicode: 0
-    pivot: {x: -23.481018, y: 46.428898}
-    sprite: {fileID: 21300096, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 8
-    x: 669
-    y: 920
-    width: 18
-    height: 22
-    xOffset: -10.677002
-    yOffset: 6.4522085
-    xAdvance: 18
-    scale: 1
-    name: r_hand3
-    hashCode: -679842595
-    unicode: 0
-    pivot: {x: -10.677002, y: 6.4522085}
-    sprite: {fileID: 21300126, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 9
-    x: 688
-    y: 920
-    width: 16
-    height: 24
-    xOffset: -10.966431
-    yOffset: 5.099121
-    xAdvance: 16
-    scale: 1
-    name: r_hand1
-    hashCode: -679842593
-    unicode: 0
-    pivot: {x: -10.966431, y: 5.099121}
-    sprite: {fileID: 21300128, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 10
-    x: 1016
+    x: 578
     y: 920
     width: 73
     height: 101
@@ -170,57 +156,71 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -37.329224, y: 27.419802}
     sprite: {fileID: 21300240, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 10
+    x: 652
+    y: 920
+    width: 48
+    height: 32
+    xOffset: -24
+    yOffset: 16
+    xAdvance: 48
+    scale: 1
+    name: shadow
+    hashCode: 180596838
+    unicode: 0
+    pivot: {x: -24, y: 16}
+    sprite: {fileID: 21300088, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 11
-    x: 1090
+    x: 1016
     y: 920
-    width: 36
-    height: 50
-    xOffset: -18
-    yOffset: 25
-    xAdvance: 36
+    width: 88
+    height: 102
+    xOffset: -44
+    yOffset: 51
+    xAdvance: 88
     scale: 1
-    name: body
-    hashCode: 3565392
+    name: SK1_PR
+    hashCode: -966648396
     unicode: 0
-    pivot: {x: -18, y: 25}
-    sprite: {fileID: 21300094, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+    pivot: {x: -44, y: 51}
+    sprite: {fileID: 21300276, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 12
-    x: 1127
-    y: 920
-    width: 12
-    height: 28
-    xOffset: -8.307495
-    yOffset: 4.2529297
-    xAdvance: 12
-    scale: 1
-    name: hand1RightSleepingBeauty
-    hashCode: -287612093
-    unicode: 0
-    pivot: {x: -8.307495, y: 4.2529297}
-    sprite: {fileID: 21300254, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 13
     x: 1141
-    y: 868
-    width: 130
+    y: 826
+    width: 98
     height: 132
-    xOffset: 0
-    yOffset: 104.23
-    xAdvance: 127.7
-    scale: 1.3
-    name: CH2_B
-    hashCode: 82095812
+    xOffset: -49
+    yOffset: 66
+    xAdvance: 98
+    scale: 1
+    name: NPC_7
+    hashCode: 95442389
     unicode: 0
-    pivot: {x: -65, y: 66}
-    sprite: {fileID: 21300202, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+    pivot: {x: -49, y: 66}
+    sprite: {fileID: 21300214, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 13
+    x: 1240
+    y: 826
+    width: 98
+    height: 132
+    xOffset: -49
+    yOffset: 66
+    xAdvance: 98
+    scale: 1
+    name: NPC_6
+    hashCode: 95442388
+    unicode: 0
+    pivot: {x: -49, y: 66}
+    sprite: {fileID: 21300216, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 14
     x: 708
     y: 769
     width: 176
     height: 184
-    xOffset: 0
-    yOffset: 142.3
-    xAdvance: 177.9
-    scale: 1.3
+    xOffset: -88
+    yOffset: 92
+    xAdvance: 176
+    scale: 1
     name: CH3_D
     hashCode: 82090563
     unicode: 0
@@ -241,20 +241,48 @@ MonoBehaviour:
     pivot: {x: -65, y: 102}
     sprite: {fileID: 21300184, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 16
+    x: 903
+    y: 755
+    width: 12
+    height: 12
+    xOffset: -6.666687
+    yOffset: 3.555542
+    xAdvance: 12
+    scale: 1
+    name: l_hand4
+    hashCode: -69088444
+    unicode: 0
+    pivot: {x: -6.666687, y: 3.555542}
+    sprite: {fileID: 21300142, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 17
     x: 891
     y: 741
-    width: 13
-    height: 12
-    xOffset: -10.033325
-    yOffset: 2.8889158
-    xAdvance: 13
+    width: 11
+    height: 21
+    xOffset: -4.7301025
+    yOffset: 3.4822376
+    xAdvance: 11
     scale: 1
-    name: hand3RightSleepingBeauty
-    hashCode: 1216993537
+    name: hand2LeftSleepingBeauty
+    hashCode: 594771227
     unicode: 0
-    pivot: {x: -10.033325, y: 2.8889158}
-    sprite: {fileID: 21300264, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 17
+    pivot: {x: -4.7301025, y: 3.4822376}
+    sprite: {fileID: 21300260, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 18
+    x: 903
+    y: 741
+    width: 12
+    height: 13
+    xOffset: -9.555542
+    yOffset: 2.8555293
+    xAdvance: 12
+    scale: 1
+    name: hand3LeftSleepingBeauty
+    hashCode: 2050777626
+    unicode: 0
+    pivot: {x: -9.555542, y: 2.8555293}
+    sprite: {fileID: 21300266, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 19
     x: 1016
     y: 741
     width: 124
@@ -268,21 +296,7 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -62, y: 89}
     sprite: {fileID: 21300038, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 18
-    x: 1117
-    y: 729
-    width: 16
-    height: 10
-    xOffset: -11.688843
-    yOffset: 3.3110957
-    xAdvance: 16
-    scale: 1
-    name: r_leg2
-    hashCode: 239560145
-    unicode: 0
-    pivot: {x: -11.688843, y: 3.3110957}
-    sprite: {fileID: 21300140, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 19
+  - id: 20
     x: 449
     y: 727
     width: 258
@@ -296,105 +310,35 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -131.94202, y: 121.296326}
     sprite: {fileID: 21300234, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 20
-    x: 1100
-    y: 726
-    width: 16
-    height: 12
-    xOffset: -8.244385
-    yOffset: 3.9999998
-    xAdvance: 16
-    scale: 1
-    name: r_hand2
-    hashCode: -679842596
-    unicode: 0
-    pivot: {x: -8.244385, y: 3.9999998}
-    sprite: {fileID: 21300138, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 21
-    x: 1081
-    y: 724
-    width: 18
-    height: 16
-    xOffset: -12.199951
-    yOffset: 3.9555664
-    xAdvance: 18
-    scale: 1
-    name: pink_r_leg
-    hashCode: 686927136
-    unicode: 0
-    pivot: {x: -12.199951, y: 3.9555664}
-    sprite: {fileID: 21300166, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 22
     x: 1050
-    y: 703
-    width: 30
-    height: 37
-    xOffset: -12.995361
-    yOffset: 30.859497
-    xAdvance: 30
+    y: 693
+    width: 86
+    height: 39
+    xOffset: -43
+    yOffset: 19.5
+    xAdvance: 86
     scale: 1
-    name: bodySleepingBeauty
-    hashCode: 1761319201
+    name: shadowSleepingBeauty
+    hashCode: -2048850601
     unicode: 0
-    pivot: {x: -12.995361, y: 30.859497}
-    sprite: {fileID: 21300248, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 23
-    x: 1081
-    y: 703
-    width: 18
-    height: 20
-    xOffset: -8.208252
-    yOffset: 4.114562
-    xAdvance: 18
-    scale: 1
-    name: l_hand3
-    hashCode: -69088445
-    unicode: 0
-    pivot: {x: -8.208252, y: 4.114562}
-    sprite: {fileID: 21300130, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 24
-    x: 1100
-    y: 703
-    width: 16
-    height: 22
-    xOffset: -10.030151
-    yOffset: 2.7041636
-    xAdvance: 16
-    scale: 1
-    name: pink_r_hand2
-    hashCode: 743950463
-    unicode: 0
-    pivot: {x: -10.030151, y: 2.7041636}
-    sprite: {fileID: 21300158, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 25
-    x: 1117
-    y: 703
-    width: 14
-    height: 25
-    xOffset: -7
-    yOffset: 0
-    xAdvance: 14
-    scale: 1
-    name: pink_l_hand1
-    hashCode: 1912534754
-    unicode: 0
-    pivot: {x: -7, y: 0}
-    sprite: {fileID: 21300160, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 26
+    pivot: {x: -43, y: 19.5}
+    sprite: {fileID: 21300246, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 22
     x: 1141
-    y: 703
-    width: 107
-    height: 164
-    xOffset: -53.5
-    yOffset: 82
-    xAdvance: 107
+    y: 693
+    width: 130
+    height: 132
+    xOffset: -65
+    yOffset: 66
+    xAdvance: 130
     scale: 1
-    name: NPC_SleepingBeautyPlaid
-    hashCode: 1740786947
+    name: CH2_B
+    hashCode: 82095812
     unicode: 0
-    pivot: {x: -53.5, y: 82}
-    sprite: {fileID: 21300268, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 27
+    pivot: {x: -65, y: 66}
+    sprite: {fileID: 21300202, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 23
     x: 0
     y: 676
     width: 448
@@ -408,161 +352,189 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -224, y: 169}
     sprite: {fileID: 21300178, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 28
-    x: 1249
-    y: 653
-    width: 114
-    height: 118
-    xOffset: 0
-    yOffset: 84.3
-    xAdvance: 106
-    scale: 1.3
-    name: CH1_A
-    hashCode: 82096836
+  - id: 24
+    x: 1201
+    y: 676
+    width: 22
+    height: 15
+    xOffset: -11
+    yOffset: 7.5
+    xAdvance: 22
+    scale: 1
+    name: mouthSleepingBeauty
+    hashCode: -1377998982
     unicode: 0
-    pivot: {x: -57, y: 59}
-    sprite: {fileID: 21300208, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+    pivot: {x: -11, y: 7.5}
+    sprite: {fileID: 21300256, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 25
+    x: 1224
+    y: 676
+    width: 13
+    height: 12
+    xOffset: -10.033325
+    yOffset: 2.8889158
+    xAdvance: 13
+    scale: 1
+    name: hand3RightSleepingBeauty
+    hashCode: 1216993537
+    unicode: 0
+    pivot: {x: -10.033325, y: 2.8889158}
+    sprite: {fileID: 21300264, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 26
+    x: 1238
+    y: 663
+    width: 16
+    height: 24
+    xOffset: -10.966431
+    yOffset: 5.099121
+    xAdvance: 16
+    scale: 1
+    name: r_hand1
+    hashCode: -679842593
+    unicode: 0
+    pivot: {x: -10.966431, y: 5.099121}
+    sprite: {fileID: 21300128, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 27
+    x: 1255
+    y: 663
+    width: 16
+    height: 22
+    xOffset: -10.030151
+    yOffset: 2.7041636
+    xAdvance: 16
+    scale: 1
+    name: pink_r_hand2
+    hashCode: 743950463
+    unicode: 0
+    pivot: {x: -10.030151, y: 2.7041636}
+    sprite: {fileID: 21300158, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 28
+    x: 1201
+    y: 625
+    width: 36
+    height: 50
+    xOffset: -14.87256
+    yOffset: 24.431396
+    xAdvance: 36
+    scale: 1
+    name: pink_body
+    hashCode: 20225875
+    unicode: 0
+    pivot: {x: -14.87256, y: 24.431396}
+    sprite: {fileID: 21300154, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 29
+    x: 1238
+    y: 625
+    width: 30
+    height: 37
+    xOffset: -12.995361
+    yOffset: 30.859497
+    xAdvance: 30
+    scale: 1
+    name: bodySleepingBeauty
+    hashCode: 1761319201
+    unicode: 0
+    pivot: {x: -12.995361, y: 30.859497}
+    sprite: {fileID: 21300248, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 30
+    x: 1272
+    y: 625
+    width: 98
+    height: 132
+    xOffset: -49
+    yOffset: 66
+    xAdvance: 98
+    scale: 1
+    name: NPC_5
+    hashCode: 95442391
+    unicode: 0
+    pivot: {x: -49, y: 66}
+    sprite: {fileID: 21300218, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 31
     x: 708
     y: 580
     width: 182
     height: 188
-    xOffset: 0
-    yOffset: 142.1
-    xAdvance: 181.3
-    scale: 1.3
+    xOffset: -91
+    yOffset: 94
+    xAdvance: 182
+    scale: 1
     name: CH3_C
     hashCode: 82090564
     unicode: 0
     pivot: {x: -91, y: 94}
     sprite: {fileID: 21300180, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 30
+  - id: 32
     x: 891
     y: 580
     width: 158
     height: 160
-    xOffset: 0
-    yOffset: 124.5
-    xAdvance: 166.9
-    scale: 1.3
+    xOffset: -79
+    yOffset: 80
+    xAdvance: 158
+    scale: 1
     name: CH2_D
     hashCode: 82095810
     unicode: 0
     pivot: {x: -79, y: 80}
     sprite: {fileID: 21300186, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 31
-    x: 1300
-    y: 567
-    width: 58
-    height: 74
-    xOffset: -29
-    yOffset: 37
-    xAdvance: 58
-    scale: 1
-    name: NPC_Gnome
-    hashCode: 1802489164
-    unicode: 0
-    pivot: {x: -29, y: 37}
-    sprite: {fileID: 21300238, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 32
+  - id: 33
     x: 949
     y: 556
-    width: 14
-    height: 22
-    xOffset: -4.305908
-    yOffset: 4.1886597
-    xAdvance: 14
+    width: 40
+    height: 19
+    xOffset: -20
+    yOffset: 9.5
+    xAdvance: 40
     scale: 1
-    name: l_hand1
-    hashCode: -69088447
+    name: eyesSleepingBeauty
+    hashCode: 1042774843
     unicode: 0
-    pivot: {x: -4.305908, y: 4.1886597}
-    sprite: {fileID: 21300132, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 33
-    x: 964
-    y: 556
-    width: 20
-    height: 14
-    xOffset: -13.211426
-    yOffset: 2.804016
-    xAdvance: 20
-    scale: 1
-    name: l_leg2
-    hashCode: -132104561
-    unicode: 0
-    pivot: {x: -13.211426, y: 2.804016}
-    sprite: {fileID: 21300136, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+    pivot: {x: -20, y: 9.5}
+    sprite: {fileID: 21300250, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 34
-    x: 985
+    x: 990
     y: 556
-    width: 20
-    height: 14
-    xOffset: -11.500244
-    yOffset: 3.6948242
-    xAdvance: 20
+    width: 40
+    height: 18
+    xOffset: -20
+    yOffset: 9
+    xAdvance: 40
     scale: 1
-    name: l_leg1
-    hashCode: -132104564
+    name: eyesLeftSleepingBeauty
+    hashCode: -1624039360
     unicode: 0
-    pivot: {x: -11.500244, y: 3.6948242}
-    sprite: {fileID: 21300134, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+    pivot: {x: -20, y: 9}
+    sprite: {fileID: 21300252, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 35
-    x: 1006
+    x: 1031
     y: 556
-    width: 20
-    height: 14
-    xOffset: -10
-    yOffset: 7
-    xAdvance: 20
-    scale: 1
-    name: l_leg1Extra
-    hashCode: -156690922
-    unicode: 0
-    pivot: {x: -10, y: 7}
-    sprite: {fileID: 21300170, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 36
-    x: 1027
-    y: 556
-    width: 11
-    height: 21
-    xOffset: -4.7301025
-    yOffset: 3.4822376
-    xAdvance: 11
-    scale: 1
-    name: hand2LeftSleepingBeauty
-    hashCode: 594771227
-    unicode: 0
-    pivot: {x: -4.7301025, y: 3.4822376}
-    sprite: {fileID: 21300260, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 37
-    x: 1039
-    y: 556
-    width: 8
+    width: 18
     height: 22
-    xOffset: -4.4002686
-    yOffset: 3.488098
-    xAdvance: 8
+    xOffset: -10.677002
+    yOffset: 6.4522085
+    xAdvance: 18
     scale: 1
-    name: hand2RightSleepingBeauty
-    hashCode: 949284000
+    name: r_hand3
+    hashCode: -679842595
     unicode: 0
-    pivot: {x: -4.4002686, y: 3.488098}
-    sprite: {fileID: 21300262, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 38
+    pivot: {x: -10.677002, y: 6.4522085}
+    sprite: {fileID: 21300126, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 36
     x: 1050
     y: 556
-    width: 128
-    height: 146
-    xOffset: 0
-    yOffset: 108.7
-    xAdvance: 128
-    scale: 1.3
-    name: CH1_C
-    hashCode: 82096838
+    width: 150
+    height: 136
+    xOffset: -75
+    yOffset: 68
+    xAdvance: 150
+    scale: 1
+    name: SK3_PR
+    hashCode: -966441354
     unicode: 0
-    pivot: {x: -64, y: 73}
-    sprite: {fileID: 21300194, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 39
+    pivot: {x: -75, y: 68}
+    sprite: {fileID: 21300272, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 37
     x: 449
     y: 532
     width: 258
@@ -576,107 +548,51 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -134.11284, y: 122.506165}
     sprite: {fileID: 21300228, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 40
+  - id: 38
     x: 1101
-    y: 525
-    width: 72
-    height: 30
-    xOffset: -53.55273
-    yOffset: 15.7595215
-    xAdvance: 72
+    y: 497
+    width: 90
+    height: 58
+    xOffset: -23.480959
+    yOffset: 46.428898
+    xAdvance: 90
     scale: 1
-    name: ax
-    hashCode: 3321
+    name: head
+    hashCode: 3639336
     unicode: 0
-    pivot: {x: -53.55273, y: 15.7595215}
-    sprite: {fileID: 21300124, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 41
-    x: 1179
-    y: 525
+    pivot: {x: -23.480959, y: 46.428898}
+    sprite: {fileID: 21300096, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 39
+    x: 1192
+    y: 497
+    width: 8
+    height: 22
+    xOffset: -4.4002686
+    yOffset: 3.488098
+    xAdvance: 8
+    scale: 1
+    name: hand2RightSleepingBeauty
+    hashCode: 949284000
+    unicode: 0
+    pivot: {x: -4.4002686, y: 3.488098}
+    sprite: {fileID: 21300262, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 40
+    x: 1201
+    y: 497
     width: 120
     height: 127
-    xOffset: 0
-    yOffset: 91.1
-    xAdvance: 118.8
-    scale: 1.3
+    xOffset: -60
+    yOffset: 63.5
+    xAdvance: 120
+    scale: 1
     name: CH_Free
     hashCode: -911126592
     unicode: 0
     pivot: {x: -60, y: 63.5}
     sprite: {fileID: 21300204, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 42
-    x: 1253
-    y: 513
-    width: 16
-    height: 10
-    xOffset: -8
-    yOffset: 5
-    xAdvance: 16
-    scale: 1
-    name: r_legExtra
-    hashCode: 151348729
-    unicode: 0
-    pivot: {x: -8, y: 5}
-    sprite: {fileID: 21300172, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 43
-    x: 1270
-    y: 513
-    width: 14
-    height: 10
-    xOffset: -7.5777593
-    yOffset: 3.5111082
-    xAdvance: 14
-    scale: 1
-    name: l_hand2
-    hashCode: -69088446
-    unicode: 0
-    pivot: {x: -7.5777593, y: 3.5111082}
-    sprite: {fileID: 21300144, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 44
-    x: 1285
-    y: 513
-    width: 12
-    height: 8
-    xOffset: -6.199951
-    yOffset: 3.0666504
-    xAdvance: 12
-    scale: 1
-    name: r_hand4
-    hashCode: -679842598
-    unicode: 0
-    pivot: {x: -6.199951, y: 3.0666504}
-    sprite: {fileID: 21300146, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 45
-    x: 1206
-    y: 493
-    width: 46
-    height: 30
-    xOffset: -23
-    yOffset: 15
-    xAdvance: 46
-    scale: 1
-    name: pink_shadow
-    hashCode: 1201412389
-    unicode: 0
-    pivot: {x: -23, y: 15}
-    sprite: {fileID: 21300152, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 46
-    x: 1253
-    y: 493
-    width: 40
-    height: 19
-    xOffset: -20
-    yOffset: 9.5
-    xAdvance: 40
-    scale: 1
-    name: eyesSleepingBeauty
-    hashCode: 1042774843
-    unicode: 0
-    pivot: {x: -20, y: 9.5}
-    sprite: {fileID: 21300250, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 47
-    x: 1206
-    y: 434
+  - id: 41
+    x: 1230
+    y: 431
     width: 90
     height: 58
     xOffset: -22.742678
@@ -688,21 +604,21 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -22.742678, y: 45.09171}
     sprite: {fileID: 21300150, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 48
-    x: 1300
-    y: 434
-    width: 98
-    height: 132
-    xOffset: -49
-    yOffset: 66
-    xAdvance: 98
+  - id: 42
+    x: 1322
+    y: 431
+    width: 78
+    height: 134
+    xOffset: -39
+    yOffset: 67
+    xAdvance: 78
     scale: 1
-    name: NPC_8
-    hashCode: 95442394
+    name: NPC_Rapunzel
+    hashCode: -215235479
     unicode: 0
-    pivot: {x: -49, y: 66}
-    sprite: {fileID: 21300212, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 49
+    pivot: {x: -39, y: 67}
+    sprite: {fileID: 21300222, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 43
     x: 708
     y: 397
     width: 240
@@ -716,35 +632,133 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -120, y: 91}
     sprite: {fileID: 21300270, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 50
+  - id: 44
     x: 949
     y: 397
     width: 151
     height: 158
-    xOffset: 0
-    yOffset: 122.6
+    xOffset: -75.5
+    yOffset: 79
     xAdvance: 151
-    scale: 1.3
+    scale: 1
     name: CH2_C
     hashCode: 82095813
     unicode: 0
     pivot: {x: -75.5, y: 79}
     sprite: {fileID: 21300188, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 51
+  - id: 45
     x: 1101
     y: 350
-    width: 104
-    height: 174
-    xOffset: -52
-    yOffset: 87
-    xAdvance: 104
+    width: 128
+    height: 146
+    xOffset: -64
+    yOffset: 73
+    xAdvance: 128
     scale: 1
-    name: NPC_SleepingBeauty
-    hashCode: 1646248595
+    name: CH1_C
+    hashCode: 82096838
     unicode: 0
-    pivot: {x: -52, y: 87}
-    sprite: {fileID: 21300196, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+    pivot: {x: -64, y: 73}
+    sprite: {fileID: 21300194, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 46
+    x: 1345
+    y: 349
+    width: 58
+    height: 74
+    xOffset: -29
+    yOffset: 37
+    xAdvance: 58
+    scale: 1
+    name: NPC_Gnome
+    hashCode: 1802489164
+    unicode: 0
+    pivot: {x: -29, y: 37}
+    sprite: {fileID: 21300238, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 47
+    x: 1216
+    y: 341
+    width: 12
+    height: 8
+    xOffset: -6.199951
+    yOffset: 3.066681
+    xAdvance: 12
+    scale: 1
+    name: r_hand4
+    hashCode: -679842598
+    unicode: 0
+    pivot: {x: -6.199951, y: 3.066681}
+    sprite: {fileID: 21300146, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 48
+    x: 1113
+    y: 329
+    width: 18
+    height: 20
+    xOffset: -8.208252
+    yOffset: 4.1145325
+    xAdvance: 18
+    scale: 1
+    name: l_hand3
+    hashCode: -69088445
+    unicode: 0
+    pivot: {x: -8.208252, y: 4.1145325}
+    sprite: {fileID: 21300130, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 49
+    x: 1132
+    y: 329
+    width: 20
+    height: 16
+    xOffset: -15.1571045
+    yOffset: 3.0234365
+    xAdvance: 20
+    scale: 1
+    name: pink_l_leg
+    hashCode: 680120766
+    unicode: 0
+    pivot: {x: -15.1571045, y: 3.0234365}
+    sprite: {fileID: 21300164, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 50
+    x: 1153
+    y: 329
+    width: 20
+    height: 14
+    xOffset: -13.211426
+    yOffset: 2.804016
+    xAdvance: 20
+    scale: 1
+    name: l_leg2
+    hashCode: -132104561
+    unicode: 0
+    pivot: {x: -13.211426, y: 2.804016}
+    sprite: {fileID: 21300136, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 51
+    x: 1174
+    y: 329
+    width: 20
+    height: 14
+    xOffset: -10
+    yOffset: 7
+    xAdvance: 20
+    scale: 1
+    name: l_leg1Extra
+    hashCode: -156690922
+    unicode: 0
+    pivot: {x: -10, y: 7}
+    sprite: {fileID: 21300170, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 52
+    x: 1195
+    y: 329
+    width: 20
+    height: 14
+    xOffset: -11.500244
+    yOffset: 3.6947932
+    xAdvance: 20
+    scale: 1
+    name: l_leg1
+    hashCode: -132104564
+    unicode: 0
+    pivot: {x: -11.500244, y: 3.6947932}
+    sprite: {fileID: 21300134, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 53
     x: 0
     y: 327
     width: 440
@@ -758,7 +772,7 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -220, y: 174}
     sprite: {fileID: 21300176, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 53
+  - id: 54
     x: 441
     y: 327
     width: 258
@@ -772,36 +786,78 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -131.99634, y: 121.25937}
     sprite: {fileID: 21300224, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 54
-    x: 1206
-    y: 301
-    width: 98
-    height: 132
-    xOffset: -49
-    yOffset: 66
-    xAdvance: 98
-    scale: 1
-    name: NPC_5
-    hashCode: 95442391
-    unicode: 0
-    pivot: {x: -49, y: 66}
-    sprite: {fileID: 21300218, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 55
-    x: 1236
-    y: 267
-    width: 48
-    height: 32
-    xOffset: -24
-    yOffset: 16
-    xAdvance: 48
+    x: 588
+    y: 316
+    width: 16
+    height: 10
+    xOffset: -8
+    yOffset: 5
+    xAdvance: 16
     scale: 1
-    name: shadow
-    hashCode: 180596838
+    name: r_legExtra
+    hashCode: 151348729
     unicode: 0
-    pivot: {x: -24, y: 16}
-    sprite: {fileID: 21300088, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+    pivot: {x: -8, y: 5}
+    sprite: {fileID: 21300172, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 56
-    x: 1285
+    x: 605
+    y: 316
+    width: 14
+    height: 10
+    xOffset: -7.5777593
+    yOffset: 3.5111082
+    xAdvance: 14
+    scale: 1
+    name: l_hand2
+    hashCode: -69088446
+    unicode: 0
+    pivot: {x: -7.5777593, y: 3.5111082}
+    sprite: {fileID: 21300144, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 57
+    x: 1218
+    y: 312
+    width: 11
+    height: 28
+    xOffset: -5.3797607
+    yOffset: 4.337921
+    xAdvance: 11
+    scale: 1
+    name: hand1LeftSleepingBeauty
+    hashCode: 920440088
+    unicode: 0
+    pivot: {x: -5.3797607, y: 4.337921}
+    sprite: {fileID: 21300258, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 58
+    x: 1230
+    y: 312
+    width: 114
+    height: 118
+    xOffset: -57
+    yOffset: 59
+    xAdvance: 114
+    scale: 1
+    name: CH1_A
+    hashCode: 82096836
+    unicode: 0
+    pivot: {x: -57, y: 59}
+    sprite: {fileID: 21300208, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 59
+    x: 1326
+    y: 294
+    width: 18
+    height: 16
+    xOffset: -12.199951
+    yOffset: 3.9555664
+    xAdvance: 18
+    scale: 1
+    name: pink_r_leg
+    hashCode: 686927136
+    unicode: 0
+    pivot: {x: -12.199951, y: 3.9555664}
+    sprite: {fileID: 21300166, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 60
+    x: 1326
     y: 267
     width: 18
     height: 26
@@ -814,51 +870,9 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -6.7164307, y: 3.0065932}
     sprite: {fileID: 21300156, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 57
-    x: 1305
+  - id: 61
+    x: 1345
     y: 267
-    width: 98
-    height: 132
-    xOffset: -49
-    yOffset: 66
-    xAdvance: 98
-    scale: 1
-    name: NPC_7
-    hashCode: 95442389
-    unicode: 0
-    pivot: {x: -49, y: 66}
-    sprite: {fileID: 21300214, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 58
-    x: 687
-    y: 217
-    width: 12
-    height: 12
-    xOffset: -6.666687
-    yOffset: 3.555557
-    xAdvance: 12
-    scale: 1
-    name: l_hand4
-    hashCode: -69088444
-    unicode: 0
-    pivot: {x: -6.666687, y: 3.555557}
-    sprite: {fileID: 21300142, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 59
-    x: 473
-    y: 203
-    width: 114
-    height: 119
-    xOffset: 0
-    yOffset: 84.3
-    xAdvance: 114
-    scale: 1.3
-    name: CH1_B
-    hashCode: 82096839
-    unicode: 0
-    pivot: {x: -57, y: 59.5}
-    sprite: {fileID: 21300206, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 60
-    x: 588
-    y: 203
     width: 61
     height: 81
     xOffset: -28.396118
@@ -870,35 +884,35 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -28.396118, y: 68.08441}
     sprite: {fileID: 21300242, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 61
-    x: 650
-    y: 203
-    width: 36
-    height: 50
-    xOffset: -18
-    yOffset: 25
-    xAdvance: 36
-    scale: 1
-    name: bodyExtra
-    hashCode: -1949591094
-    unicode: 0
-    pivot: {x: -18, y: 25}
-    sprite: {fileID: 21300168, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 62
-    x: 687
+    x: 473
     y: 203
-    width: 12
-    height: 13
-    xOffset: -9.555542
-    yOffset: 2.8555603
-    xAdvance: 12
+    width: 114
+    height: 119
+    xOffset: -57
+    yOffset: 59.5
+    xAdvance: 114
     scale: 1
-    name: hand3LeftSleepingBeauty
-    hashCode: 2050777626
+    name: CH1_B
+    hashCode: 82096839
     unicode: 0
-    pivot: {x: -9.555542, y: 2.8555603}
-    sprite: {fileID: 21300266, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+    pivot: {x: -57, y: 59.5}
+    sprite: {fileID: 21300206, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 63
+    x: 588
+    y: 203
+    width: 108
+    height: 112
+    xOffset: -54
+    yOffset: 56
+    xAdvance: 108
+    scale: 1
+    name: SK2_PR
+    hashCode: -966475241
+    unicode: 0
+    pivot: {x: -54, y: 56}
+    sprite: {fileID: 21300274, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 64
     x: 700
     y: 203
     width: 258
@@ -912,78 +926,120 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -134.04834, y: 122.40015}
     sprite: {fileID: 21300230, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 64
+  - id: 65
     x: 959
     y: 196
     width: 153
     height: 153
-    xOffset: 0
-    yOffset: 110.4
-    xAdvance: 141
-    scale: 1.3
+    xOffset: -76.5
+    yOffset: 76.5
+    xAdvance: 153
+    scale: 1
     name: CH3_B
     hashCode: 82090565
     unicode: 0
     pivot: {x: -76.5, y: 76.5}
     sprite: {fileID: 21300190, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 65
+  - id: 66
+    x: 990
+    y: 154
+    width: 72
+    height: 30
+    xOffset: -53.55273
+    yOffset: 15.759492
+    xAdvance: 72
+    scale: 1
+    name: ax
+    hashCode: 3321
+    unicode: 0
+    pivot: {x: -53.55273, y: 15.759492}
+    sprite: {fileID: 21300124, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 67
+    x: 1063
+    y: 154
+    width: 46
+    height: 30
+    xOffset: -23
+    yOffset: 15
+    xAdvance: 46
+    scale: 1
+    name: pink_shadow
+    hashCode: 1201412389
+    unicode: 0
+    pivot: {x: -23, y: 15}
+    sprite: {fileID: 21300152, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 68
     x: 1113
     y: 154
-    width: 122
-    height: 146
-    xOffset: -61
-    yOffset: 73
-    xAdvance: 122
+    width: 104
+    height: 174
+    xOffset: -52
+    yOffset: 87
+    xAdvance: 104
     scale: 1
-    name: CH1_D
-    hashCode: 82096833
+    name: NPC_SleepingBeauty
+    hashCode: 1646248595
     unicode: 0
-    pivot: {x: -61, y: 73}
-    sprite: {fileID: 21300198, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 66
-    x: 1144
-    y: 134
-    width: 40
-    height: 18
-    xOffset: -20
-    yOffset: 9
-    xAdvance: 40
-    scale: 1
-    name: eyesLeftSleepingBeauty
-    hashCode: -1624039360
-    unicode: 0
-    pivot: {x: -20, y: 9}
-    sprite: {fileID: 21300252, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 67
-    x: 1185
-    y: 134
-    width: 22
-    height: 15
-    xOffset: -11
-    yOffset: 7.5
-    xAdvance: 22
-    scale: 1
-    name: mouthSleepingBeauty
-    hashCode: -1377998982
-    unicode: 0
-    pivot: {x: -11, y: 7.5}
-    sprite: {fileID: 21300256, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 68
-    x: 1208
-    y: 134
-    width: 20
-    height: 16
-    xOffset: -15.1571045
-    yOffset: 3.0234365
-    xAdvance: 20
-    scale: 1
-    name: pink_l_leg
-    hashCode: 680120766
-    unicode: 0
-    pivot: {x: -15.1571045, y: 3.0234365}
-    sprite: {fileID: 21300164, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+    pivot: {x: -52, y: 87}
+    sprite: {fileID: 21300196, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   - id: 69
-    x: 1236
+    x: 1218
+    y: 147
+    width: 107
+    height: 164
+    xOffset: -53.5
+    yOffset: 82
+    xAdvance: 107
+    scale: 1
+    name: NPC_SleepingBeautyPlaid
+    hashCode: 1740786947
+    unicode: 0
+    pivot: {x: -53.5, y: 82}
+    sprite: {fileID: 21300268, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 70
+    x: 1267
+    y: 134
+    width: 16
+    height: 12
+    xOffset: -8.244385
+    yOffset: 3.9999998
+    xAdvance: 16
+    scale: 1
+    name: r_hand2
+    hashCode: -679842596
+    unicode: 0
+    pivot: {x: -8.244385, y: 3.9999998}
+    sprite: {fileID: 21300138, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 71
+    x: 1284
+    y: 134
+    width: 16
+    height: 10
+    xOffset: -8.71106
+    yOffset: 3.1944423
+    xAdvance: 16
+    scale: 1
+    name: r_leg
+    hashCode: 137409923
+    unicode: 0
+    pivot: {x: -8.71106, y: 3.1944423}
+    sprite: {fileID: 21300104, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 72
+    x: 1301
+    y: 134
+    width: 16
+    height: 10
+    xOffset: -11.688843
+    yOffset: 3.311112
+    xAdvance: 16
+    scale: 1
+    name: r_leg2
+    hashCode: 239560145
+    unicode: 0
+    pivot: {x: -11.688843, y: 3.311112}
+    sprite: {fileID: 21300140, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 73
+    x: 1326
     y: 134
     width: 98
     height: 132
@@ -991,26 +1047,12 @@ MonoBehaviour:
     yOffset: 66
     xAdvance: 98
     scale: 1
-    name: NPC_6
-    hashCode: 95442388
+    name: NPC_9
+    hashCode: 95442395
     unicode: 0
     pivot: {x: -49, y: 66}
-    sprite: {fileID: 21300216, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 70
-    x: 1335
-    y: 133
-    width: 36
-    height: 50
-    xOffset: -14.87256
-    yOffset: 24.431366
-    xAdvance: 36
-    scale: 1
-    name: blue_body
-    hashCode: -1355254543
-    unicode: 0
-    pivot: {x: -14.87256, y: 24.431366}
-    sprite: {fileID: 21300236, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 71
+    sprite: {fileID: 21300210, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 74
     x: 0
     y: 0
     width: 472
@@ -1024,7 +1066,7 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -236, y: 163}
     sprite: {fileID: 21300174, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 72
+  - id: 75
     x: 473
     y: 0
     width: 260
@@ -1038,7 +1080,7 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -135.46777, y: 131.4692}
     sprite: {fileID: 21300226, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 73
+  - id: 76
     x: 734
     y: 0
     width: 255
@@ -1052,7 +1094,7 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -134.51892, y: 125.34136}
     sprite: {fileID: 21300232, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 74
+  - id: 77
     x: 990
     y: 0
     width: 153
@@ -1066,8 +1108,22 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -76.5, y: 76.5}
     sprite: {fileID: 21300192, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 75
+  - id: 78
     x: 1144
+    y: 0
+    width: 122
+    height: 146
+    xOffset: -61
+    yOffset: 73
+    xAdvance: 122
+    scale: 1
+    name: CH1_D
+    hashCode: 82096833
+    unicode: 0
+    pivot: {x: -61, y: 73}
+    sprite: {fileID: 21300198, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+  - id: 79
+    x: 1267
     y: 0
     width: 130
     height: 133
@@ -1080,8 +1136,8 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -65, y: 66.5}
     sprite: {fileID: 21300200, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 76
-    x: 1275
+  - id: 80
+    x: 1398
     y: 0
     width: 98
     height: 132
@@ -1089,27 +1145,13 @@ MonoBehaviour:
     yOffset: 66
     xAdvance: 98
     scale: 1
-    name: NPC_9
-    hashCode: 95442395
+    name: NPC_8
+    hashCode: 95442394
     unicode: 0
     pivot: {x: -49, y: 66}
-    sprite: {fileID: 21300210, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
-  - id: 77
-    x: 1374
-    y: 0
-    width: 78
-    height: 134
-    xOffset: -39
-    yOffset: 67
-    xAdvance: 78
-    scale: 1
-    name: NPC_Rapunzel
-    hashCode: -215235479
-    unicode: 0
-    pivot: {x: -39, y: 67}
-    sprite: {fileID: 21300222, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
+    sprite: {fileID: 21300212, guid: 88cfdf1993ebb6848b6ecd697291b238, type: 3}
   fallbackSpriteAssets: []
---- !u!21 &21881473372422516
+--- !u!21 &21580960290980258
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 1
