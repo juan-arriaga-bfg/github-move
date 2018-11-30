@@ -24,8 +24,13 @@ public class ScatterPieceAction : IBoardAction
 		var pieces = new Dictionary<BoardPosition, Piece>();
 		var cells = new List<BoardPosition>();
 		var amount = Pieces.Sum(pair => pair.Value);
-
-		if (IsTargetReplace) amount -= 1;
+		
+		if (IsTargetReplace)
+		{
+			amount -= 1;
+			
+			
+		}
 		
 		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From.Value, cells, amount, 0.1f) == false) return false;
 		
@@ -34,6 +39,8 @@ public class ScatterPieceAction : IBoardAction
 			var id = GetPieceId();
 
 			if (id == PieceType.None.Id) break;
+
+			CreatePiece(gameBoardController, id, cells[0], pieces);
 			
 			var cell = cells[0];
 			var piece = gameBoardController.CreatePieceFromType(id);
@@ -137,5 +144,15 @@ public class ScatterPieceAction : IBoardAction
 		else Pieces[id] = value;
 
 		return id;
+	}
+
+	private void CreatePiece(BoardController board, int id, BoardPosition position, Dictionary<BoardPosition, Piece> pieces)
+	{
+		var piece = board.CreatePieceFromType(id);
+				
+		if (board.BoardLogic.AddPieceToBoard(position.X, position.Y, piece) == false) return;
+		
+		pieces.Add(position, piece);
+		board.BoardLogic.LockCell(position, this);
 	}
 }
