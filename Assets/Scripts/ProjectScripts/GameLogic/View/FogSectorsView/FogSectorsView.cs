@@ -40,7 +40,8 @@ public class FogSectorsView// : BoardElementView
             Corner2Sprite = corner2Sprite,
             Corner3Sprite = corner3Sprite,
             Corner4Sprite = corner4Sprite,
-            LineWidth = 0.5f
+            LineWidth = 0.5f,
+            FadeNearExcluded = true,
         };
         
         var mesh = meshBuilder.Build(def);

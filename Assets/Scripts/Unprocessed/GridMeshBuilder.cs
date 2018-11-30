@@ -23,6 +23,8 @@ public class GridMeshBuilderDef
     public Sprite Corner4Sprite;
 
     public float LineWidth;
+
+    public bool FadeNearExcluded;
 }
 
 public class GridMeshBuilder
@@ -35,6 +37,9 @@ public class GridMeshBuilder
     private int BIT_BOTTOM = 2;
     private int BIT_LEFT = 3;
     private int BIT_EXCLUDED_VERTEX = 4;
+   
+    private readonly Color WHITE_COLOR = new Color(1, 1, 1, 1);
+    private readonly Color TRANSPARENT_COLOR = new Color(1, 1, 1, 0);
     
     private void DebugRenderLine(float fromX, float fromY, float toX, float toY, Color color, string name)
     {
@@ -130,24 +135,7 @@ public class GridMeshBuilder
     {
         return HasCell(ref data, x - 1, y - 1);
     }
-    
-    // 0000 0
-    // 0001 1
-    // 0010 2
-    // 0011 3
-    // 0100 4
-    // 0101 5
-    // 0110 6
-    // 0111 7
-    // 1000 8
-    // 1001 9
-    // 1010 10
-    // 1011 11
-    // 1100 12
-    // 1101 13
-    // 1110 14
-    // 1111 15
-    
+
     private void CreateEdgesData()
     {
         edgesData = new int[def.FieldWidth + 1,def.FieldHeight + 1];
@@ -180,48 +168,48 @@ public class GridMeshBuilder
 
                     int edgeDataOld = edgeData;
                     
-#region TOP and RIGHT
-
                     bool hasLeftNeighbor       = HasLeftNeighbor(ref matrix, areaX, areaY);
                     bool hasBottomNeighbor     = HasBottomNeighbor(ref matrix, areaX, areaY);
                     bool hasBottomLeftNeighbor = HasBottomLeftNeighbor(ref matrix, areaX, areaY);
+                    
+#region TOP and RIGHT
 
                     if (HasCell(ref matrix, areaX, areaY))
                     {
                         if (!hasLeftNeighbor)
                         {
-                            edgeData = BitsHelper.ToggleBit(edgeData, 0, enable);
+                            edgeData = BitsHelper.ToggleBit(edgeData, BIT_TOP, enable);
                         }
 
                         if (!hasBottomNeighbor)
                         {
-                            edgeData = BitsHelper.ToggleBit(edgeData, 1, enable);
+                            edgeData = BitsHelper.ToggleBit(edgeData, BIT_RIGHT, enable);
                         }
                     }
                     else if (areaX == areaW)
                     {
                         if (hasLeftNeighbor)
                         {
-                            edgeData = BitsHelper.ToggleBit(edgeData, 0, enable);
+                            edgeData = BitsHelper.ToggleBit(edgeData, BIT_TOP, enable);
                         }
                     }
                     else if (areaY == areaH)
                     {
                         if (hasBottomNeighbor)
                         {
-                            edgeData = BitsHelper.ToggleBit(edgeData, 1, enable);
+                            edgeData = BitsHelper.ToggleBit(edgeData, BIT_RIGHT, enable);
                         }
                     }
                     else
                     {
                         if (hasBottomNeighbor)
                         {
-                            edgeData = BitsHelper.ToggleBit(edgeData, 1, enable);
+                            edgeData = BitsHelper.ToggleBit(edgeData, BIT_RIGHT, enable);
                         }
 
                         if (hasLeftNeighbor)
                         {
-                            edgeData = BitsHelper.ToggleBit(edgeData, 0, enable);
+                            edgeData = BitsHelper.ToggleBit(edgeData, BIT_TOP, enable);
                         }
                     }
 
@@ -233,38 +221,38 @@ public class GridMeshBuilder
                     {
                         if (!hasLeftNeighbor)
                         {
-                            edgeData = BitsHelper.ToggleBit(edgeData, 3, enable);
+                            edgeData = BitsHelper.ToggleBit(edgeData, BIT_LEFT, enable);
                         }
 
                         if (!hasBottomNeighbor)
                         {
-                            edgeData = BitsHelper.ToggleBit(edgeData, 2, enable);
+                            edgeData = BitsHelper.ToggleBit(edgeData, BIT_BOTTOM, enable);
                         }
                     }
                     else if (areaX == 0)
                     {
                         if (hasBottomNeighbor)
                         {
-                            edgeData = BitsHelper.ToggleBit(edgeData, 2, enable);
+                            edgeData = BitsHelper.ToggleBit(edgeData, BIT_BOTTOM, enable);
                         }
                     }
                     else if (areaY == 0)
                     {
                         if (hasLeftNeighbor)
                         {
-                            edgeData = BitsHelper.ToggleBit(edgeData, 3, enable);
+                            edgeData = BitsHelper.ToggleBit(edgeData, BIT_LEFT, enable);
                         }
                     }
                     else
                     {
                         if (hasBottomNeighbor)
                         {
-                            edgeData = BitsHelper.ToggleBit(edgeData, 2, enable);
+                            edgeData = BitsHelper.ToggleBit(edgeData, BIT_BOTTOM, enable);
                         }
 
                         if (hasLeftNeighbor)
                         {
-                            edgeData = BitsHelper.ToggleBit(edgeData, 3, enable);
+                            edgeData = BitsHelper.ToggleBit(edgeData, BIT_LEFT, enable);
                         }
                     }
 
@@ -273,7 +261,7 @@ public class GridMeshBuilder
                     {
                         edgeData = BitsHelper.ToggleBit(edgeData, BIT_EXCLUDED_VERTEX, true);
                     }
-                    
+
                     edgesData[worldX, worldY] = edgeData;
                 }
             }
@@ -372,10 +360,10 @@ public class GridMeshBuilder
                     continue;
                 }
 
-                bool isTopEdge    = BitsHelper.IsBitSet(edgeData, 0);
-                bool isRightEdge  = BitsHelper.IsBitSet(edgeData, 1);
-                bool isBottomEdge = BitsHelper.IsBitSet(edgeData, 2);
-                bool isLeftEdge   = BitsHelper.IsBitSet(edgeData, 3);
+                bool isTopEdge    = BitsHelper.IsBitSet(edgeData, BIT_TOP);
+                bool isRightEdge  = BitsHelper.IsBitSet(edgeData, BIT_RIGHT);
+                bool isBottomEdge = BitsHelper.IsBitSet(edgeData, BIT_BOTTOM);
+                bool isLeftEdge   = BitsHelper.IsBitSet(edgeData, BIT_LEFT);
                
                 // TOP EDGE
                 if (isTopEdge)
@@ -385,8 +373,8 @@ public class GridMeshBuilder
                     if (y + 1 < edgesArrayH)
                     {
                         int nextEdgeData = edgesData[x, y + 1];
-                        bool isNextRightEdge  = BitsHelper.IsBitSet(nextEdgeData, 1);
-                        bool isNextLeftEdge   = BitsHelper.IsBitSet(nextEdgeData, 3);
+                        bool isNextRightEdge  = BitsHelper.IsBitSet(nextEdgeData, BIT_RIGHT);
+                        bool isNextLeftEdge   = BitsHelper.IsBitSet(nextEdgeData, BIT_LEFT);
                         if (isNextLeftEdge || isNextRightEdge)
                         {
                             far = halfLineWidth;
@@ -395,19 +383,20 @@ public class GridMeshBuilder
                     
                     GenerateQuad(x, y, rotation0, new Vector3(x, y, 0), lineWidth, lineHeight, near, far, def.LineSprite, ref triangleIndex, ref vertices, ref triangles, ref uvs, ref colors);
 
-                    // todo: optimize
-                    if (BitsHelper.IsBitSet(edgeData, BIT_EXCLUDED_VERTEX))
+                    if (def.FadeNearExcluded)
                     {
-                        colors[colors.Count - 1] = new Color(1, 1, 1, 0);
-                        colors[colors.Count - 2] = new Color(1, 1, 1, 0);
-                    }
-                    
-                    // todo: optimize, check bounds
-                    var topEdge = edgesData[x, y + 1];
-                    if (BitsHelper.IsBitSet(topEdge, BIT_EXCLUDED_VERTEX))
-                    {
-                        colors[colors.Count - 3] = new Color(1, 1, 1, 0);
-                        colors[colors.Count - 4] = new Color(1, 1, 1, 0);
+                        if (BitsHelper.IsBitSet(edgeData, BIT_EXCLUDED_VERTEX))
+                        {
+                            colors[colors.Count - 1] = TRANSPARENT_COLOR;
+                            colors[colors.Count - 2] = TRANSPARENT_COLOR;
+                        }
+
+                        var topEdge = edgesData[x, y + 1];
+                        if (BitsHelper.IsBitSet(topEdge, BIT_EXCLUDED_VERTEX))
+                        {
+                            colors[colors.Count - 3] = TRANSPARENT_COLOR;
+                            colors[colors.Count - 4] = TRANSPARENT_COLOR;
+                        }
                     }
                 }
                 
@@ -419,8 +408,8 @@ public class GridMeshBuilder
                     if (x + 1 < edgesArrayW)
                     {
                         int  nextEdgeData    = edgesData[x + 1, y];
-                        bool isNextTopEdge = BitsHelper.IsBitSet(nextEdgeData, 0);
-                        bool isNextBottomEdge  = BitsHelper.IsBitSet(nextEdgeData, 2);
+                        bool isNextTopEdge = BitsHelper.IsBitSet(nextEdgeData, BIT_TOP);
+                        bool isNextBottomEdge  = BitsHelper.IsBitSet(nextEdgeData, BIT_BOTTOM);
                         if (isNextTopEdge || isNextBottomEdge)
                         {
                             far = halfLineWidth;
@@ -428,31 +417,28 @@ public class GridMeshBuilder
                     }
                     
                     GenerateQuad(x, y, rotation90, new Vector3(x, y, 0), lineWidth, lineHeight, near, far, def.LineSprite, ref triangleIndex, ref vertices, ref triangles, ref uvs, ref colors);
-                   
-                    // todo: optimize
-                    if (BitsHelper.IsBitSet(edgeData, BIT_EXCLUDED_VERTEX))
+
+                    if (def.FadeNearExcluded)
                     {
-                        colors[colors.Count - 1] = new Color(1, 1, 1, 0);
-                        colors[colors.Count - 2] = new Color(1, 1, 1, 0);
-                    }
-                    
-                    // todo: optimize, check bounds
-                    var rightEdge = edgesData[x + 1, y];
-                    if (BitsHelper.IsBitSet(rightEdge, BIT_EXCLUDED_VERTEX))
-                    {
-                        colors[colors.Count - 3] = new Color(1, 1, 1, 0);
-                        colors[colors.Count - 4] = new Color(1, 1, 1, 0);
+                        if (BitsHelper.IsBitSet(edgeData, BIT_EXCLUDED_VERTEX))
+                        {
+                            colors[colors.Count - 1] = TRANSPARENT_COLOR;
+                            colors[colors.Count - 2] = TRANSPARENT_COLOR;
+                        }
+
+                        var rightEdge = edgesData[x + 1, y];
+                        if (BitsHelper.IsBitSet(rightEdge, BIT_EXCLUDED_VERTEX))
+                        {
+                            colors[colors.Count - 3] = TRANSPARENT_COLOR;
+                            colors[colors.Count - 4] = TRANSPARENT_COLOR;
+                        }
                     }
                 }
 
                 // CORNERS
-                // todo: optimize
-                int countOfEdges = (BitsHelper.IsBitSet(edgeData, BIT_TOP)    ? 1 : 0) +
-                                   (BitsHelper.IsBitSet(edgeData, BIT_RIGHT)  ? 1 : 0) +
-                                   (BitsHelper.IsBitSet(edgeData, BIT_BOTTOM) ? 1 : 0) +
-                                   (BitsHelper.IsBitSet(edgeData, BIT_LEFT)   ? 1 : 0);      
+                int countOfEdges = BitsHelper.CountOfSetBits(edgeData & 15); // Get the first 4 bits and count how many of them is set to 1  
 
-                if (BitsHelper.IsBitSet(edgeData, BIT_EXCLUDED_VERTEX))
+                if (def.FadeNearExcluded && BitsHelper.IsBitSet(edgeData, BIT_EXCLUDED_VERTEX))
                 {
                     continue;
                 }
@@ -534,8 +520,6 @@ public class GridMeshBuilder
                         break;
                 }
 
-                // rotation = rotation0;
-                
                 GenerateQuad(x, y - halfLineWidth, rotation, new Vector3(x, y, 0), lineWidth, lineWidth, 0, 0, cornerSprite, ref triangleIndex, ref vertices, ref triangles, ref uvs, ref colors);
             }
         }
