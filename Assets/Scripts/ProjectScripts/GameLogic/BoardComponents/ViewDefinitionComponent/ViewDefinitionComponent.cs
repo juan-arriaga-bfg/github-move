@@ -17,6 +17,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     
     private const int Layer = 10;
     private bool isDrag;
+    private bool isSwap;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -28,8 +29,22 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     {
     }
 
+    public void OnSwap(bool isEnd)
+    {
+        if(isSwap == !isEnd) return;
+
+        isSwap = !isEnd;
+        
+        foreach (var view in views.Values)
+        {
+            view.OnSwap(isEnd);
+        }
+    }
+
     public void OnDrag(bool isEnd)
     {
+        if (isSwap) return;
+        
         if(isDrag == !isEnd) return;
 
         isDrag = !isEnd;
@@ -56,6 +71,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
     public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
     {
+        
     }
 
     public void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)

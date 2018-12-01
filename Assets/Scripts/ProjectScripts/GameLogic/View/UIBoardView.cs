@@ -126,6 +126,23 @@ public class UIBoardView : BoardElementView
         sequence.Insert(0.65f, viewTransform.DOScale(new Vector3(1.1f, 0.9f), 0.1f));
         sequence.Insert(0.75f, viewTransform.DOScale(Vector3.one, 0.1f));
     }
+    
+    public virtual void OnSwap(bool isEnd)
+    {
+        if(IsShow == false) return; 
+        
+        DOTween.Kill(viewTransform);
+        
+        var sequence = DOTween.Sequence().SetId(viewTransform);
+
+        if (isEnd)
+        {
+            AddShowAnimation(sequence);
+            return;
+        }
+        
+        AddHideAnimation(sequence, false);
+    }
 
     public virtual void OnDrag(bool isEnd)
     {
@@ -172,17 +189,35 @@ public class UIBoardView : BoardElementView
         });
     }
 
-    private Sequence AddShowAnimation(Sequence sequence)
+    private Sequence AddShowAnimation(Sequence sequence, bool isAnimate = true)
     {
-        sequence.Insert(0f, group.DOFade(1, 0.3f));
-        sequence.Insert(0F, viewTransform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack));
+        if (isAnimate)
+        {
+            sequence.Insert(0f, group.DOFade(1, 0.3f));
+            sequence.Insert(0F, viewTransform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack));
+        }
+        else
+        {
+            group.alpha = 1f;
+            viewTransform.localScale = Vector3.one;
+        }
+
         return sequence;
     }
 
-    private Sequence AddHideAnimation(Sequence sequence)
+    private Sequence AddHideAnimation(Sequence sequence, bool isAnimate = true)
     {
-        sequence.Insert(0f, group.DOFade(0, 0.2f));
-        sequence.Insert(0f, viewTransform.DOScale(Vector3.zero, 0.2f));
+        if (isAnimate)
+        {
+            sequence.Insert(0f, group.DOFade(0, 0.2f));
+            sequence.Insert(0f, viewTransform.DOScale(Vector3.zero, 0.2f));
+        }
+        else
+        {
+            group.alpha = 0f;
+            viewTransform.localScale = Vector3.zero;
+        }
+
         return sequence;
     }
     
