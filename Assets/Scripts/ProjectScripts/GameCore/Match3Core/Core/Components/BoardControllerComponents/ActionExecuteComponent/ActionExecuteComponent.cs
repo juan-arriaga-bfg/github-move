@@ -148,7 +148,7 @@ public class ActionExecuteComponent : ECSEntity, IECSSystem, IActionHistoryCompo
                 var action = list[i];
                 actionsQueueStep.Add(action);
                 
-                Debug.LogWarning($"PrepareActions => threadIndex:{actionDef.Key} index:{i} type:{action.GetType()}");
+                // Debug.LogWarning($"PrepareActions => threadIndex:{actionDef.Key} index:{i} type:{action.GetType()}");
             }
         }
         
