@@ -3,6 +3,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System;
 
+[Serializable]
 public struct BoardPosition : IEquatable<BoardPosition>
 {
     public int X;

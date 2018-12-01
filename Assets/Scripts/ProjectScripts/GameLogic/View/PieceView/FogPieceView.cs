@@ -46,7 +46,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 			sprite.sprite = IconService.Current.GetSpriteById($"Fog{Random.Range(1, 4)}{CheckBorder(position.X, position.Y)}");
 			sprite.transform.localScale = Vector3.one * 1.1f;
 
-		    sprite.transform.SetSiblingIndex(GetLayerIndexBy(new BoardPosition(position.X, position.Y, context.Context.BoardDef.PieceLayer)));
+		    sprite.transform.SetSiblingIndex(GetLayerIndexBy(new BoardPosition(position.X, position.Y, BoardLayer.Piece.Layer)));
 
 		    sprite.sortingOrder = 0;
 		    
@@ -55,7 +55,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 		    {
 		        cachedSpriteSortingGroup = sprite.gameObject.AddComponent<SortingGroup>();
 		    }
-		    cachedSpriteSortingGroup.sortingOrder = GetLayerIndexBy(new BoardPosition(position.X, position.Y, context.Context.BoardDef.PieceLayer));
+		    cachedSpriteSortingGroup.sortingOrder = GetLayerIndexBy(new BoardPosition(position.X, position.Y, BoardLayer.Piece.Layer));
 
 			fog.transform.position = touch.transform.position = Context.Context.BoardDef.GetSectorCenterWorldPosition(position.X, position.Y, 0);
 			
@@ -104,8 +104,8 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 
 	private string CheckBorder(int x, int y)
 	{
-		var right = new BoardPosition(x+1, y, Context.Context.BoardDef.PieceLayer);
-		var left = new BoardPosition(x, y-1, Context.Context.BoardDef.PieceLayer);
+		var right = new BoardPosition(x+1, y, BoardLayer.Piece.Layer);
+		var left = new BoardPosition(x, y-1, BoardLayer.Piece.Layer);
 		
 		var pieceR = Context.Context.BoardLogic.GetPieceAt(right);
 		var pieceL = Context.Context.BoardLogic.GetPieceAt(left);
@@ -144,7 +144,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
                     
                         var underFogMaterial = fakePiece.SetCustomMaterial(BoardElementMaterialType.PiecesUnderFogMaterial, true, this);
                         underFogMaterial.SetFloat("_AlphaCoef", 0f);
-                        underFogMaterial.DOFloat(0.4f, "_AlphaCoef", 2f);
+                        underFogMaterial.DOFloat(0.4f, "_AlphaCoef", 2f).SetId(underFogMaterial);
                     
                         fakePieces.Add(fakePiece);
                     }
@@ -213,10 +213,11 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 	    
         if (isAnimate)
         {
+            DOTween.Kill(fogMaterial);
             fogMaterial.SetFloat("_ScaleCoef", 1f);
-            fogMaterial.DOFloat(1f, "_ScaleCoef", 3f);
+            fogMaterial.DOFloat(1f, "_ScaleCoef", 3f).SetId(fogMaterial);
             fogMaterial.SetFloat("_AlphaCoef", 1f);
-            fogMaterial.DOFloat(0.85f, "_AlphaCoef", 3f);
+            fogMaterial.DOFloat(0.85f, "_AlphaCoef", 3f).SetId(fogMaterial);
         }
         else
         {
@@ -228,10 +229,6 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
         {
             var sprite = fogSprites[i];
             sprite.sprite = IconService.Current.GetSpriteById("fog_opacity_1");
-
-            var position = observer.Mask.Count > i ? observer.Mask[i] : currentPiece.CachedPosition;
-
-            // sprite.sortingOrder = position.X * 100 - position.Y * 1000 + position.Z * 10000 + 1 - 32000;
         }
     }
 

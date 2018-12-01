@@ -14,7 +14,7 @@ public class LockCellAction : IBoardAction
         {
             var target = position;
 
-            target.Z = gameBoardController.BoardDef.PieceLayer;
+            target.Z = BoardLayer.Piece.Layer;
             
             if(gameBoardController.BoardLogic.IsEmpty(target) == false) continue;
             

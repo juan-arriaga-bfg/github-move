@@ -8,6 +8,8 @@ public class ViewAnimationUid { }
 
 public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
 {
+    [SerializeField] protected BoardPosition lastBoardPosition;
+
     private int cachedIdleAnimatorHash = Animator.StringToHash("Idle");
 
     private Animator animator;
@@ -297,14 +299,20 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             cachedRenderers.Add(rendererLayer);
         }
     }
-
+    
     public virtual int GetLayerIndexBy(BoardPosition boardPosition)
     {
-        return boardPosition.X  + Context.Context.BoardDef.Width * Context.Context.BoardDef.Width - Context.Context.BoardDef.Width * boardPosition.Y + Context.Context.BoardDef.Width * Context.Context.BoardDef.Width * boardPosition.Z;
+        var layer = BoardLayer.GetDefaultLayerIndexBy(boardPosition, Context.Context.BoardDef.Width, Context.Context.BoardDef.Height);
+        
+        return layer;
     }
 
     public virtual void SyncRendererLayers(BoardPosition boardPosition)
     {
+        this.lastBoardPosition = boardPosition;
+
+        if (BoardLayer.IsValidLayer(boardPosition.Z)){}
+
         if (cachedRenderers.size <= 0)
         {
             CacheLayers();

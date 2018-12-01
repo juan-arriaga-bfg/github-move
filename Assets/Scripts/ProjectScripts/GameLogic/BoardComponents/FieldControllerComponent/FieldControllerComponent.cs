@@ -126,7 +126,7 @@ public class FieldControllerComponent : IECSComponent
         {
             var pos = fog.GetCenter();
 
-            pos.Z = context.BoardDef.PieceLayer;
+            pos.Z = BoardLayer.Piece.Layer;
             positions.Add(pos);
         }
 
@@ -170,25 +170,25 @@ public class FieldControllerComponent : IECSComponent
             {
                 if ((directions & Directions.Left) == Directions.Left)
                 {
-                    var point = new BoardPosition(i, j, context.BoardDef.PieceLayer);
+                    var point = new BoardPosition(i, j, BoardLayer.Piece.Layer);
                     context.BoardLogic.AddPieceToBoard(point.X, point.Y, context.CreatePieceFromType(PieceType.Empty.Id));
                 }
 
                 if ((directions & Directions.Right) == Directions.Right)
                 {
-                    var point = new BoardPosition(width - 1 - i, height - 1 - j, context.BoardDef.PieceLayer);
+                    var point = new BoardPosition(width - 1 - i, height - 1 - j, BoardLayer.Piece.Layer);
                     context.BoardLogic.AddPieceToBoard(point.X, point.Y, context.CreatePieceFromType(PieceType.Empty.Id));
                 }
 
                 if ((directions & Directions.Top) == Directions.Top)
                 {
-                    var point = new BoardPosition(i, height - 1 - j, context.BoardDef.PieceLayer);
+                    var point = new BoardPosition(i, height - 1 - j, BoardLayer.Piece.Layer);
                     context.BoardLogic.AddPieceToBoard(point.X, point.Y, context.CreatePieceFromType(PieceType.Empty.Id));
                 }
 
                 if ((directions & Directions.Bottom) == Directions.Bottom)
                 {
-                    var point = new BoardPosition(width - 1 - i, j, context.BoardDef.PieceLayer);
+                    var point = new BoardPosition(width - 1 - i, j, BoardLayer.Piece.Layer);
                     context.BoardLogic.AddPieceToBoard(point.X, point.Y, context.CreatePieceFromType(PieceType.Empty.Id));
                 }
             }    
@@ -216,9 +216,9 @@ public class FieldControllerComponent : IECSComponent
         {
             var j = cutSize - i;
             
-            var bottomPos = new BoardPosition(width - 1 - i, j, -2);
-            var leftPos = new BoardPosition(i, j, -2);
-            var rightPos = new BoardPosition(width - 1 - i, height - 1 - j, -2);
+            var bottomPos = new BoardPosition(width - 1 - i, j, BoardLayer.Default.Layer);
+            var leftPos = new BoardPosition(i, j, BoardLayer.Default.Layer);
+            var rightPos = new BoardPosition(width - 1 - i, height - 1 - j, BoardLayer.Default.Layer);
             
             if(bottomPos.X > minEdge / 2 - 1 && bottomPos.X < width - 1)
                 context.RendererContext.CreateBoardElementAt<BoardElementView>(typeBottom, bottomPos);

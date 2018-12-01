@@ -49,7 +49,7 @@ namespace UTRuntime
             var piecesCheatSheetWindowModel = new UIPiecesCheatSheetWindowModel();
             testIds = piecesCheatSheetWindowModel.GetPieceIdsBy(PieceTypeFilter.Default);
             
-            BoardPosition testPoint = new BoardPosition(21, 12, BoardService.Current.GetBoardById(0).BoardDef.PieceLayer);
+            BoardPosition testPoint = new BoardPosition(21, 12, BoardLayer.Piece.Layer);
             var availablePoints = new List<BoardPosition>();
             BoardService.Current.FirstBoard.BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(testPoint, availablePoints, 1, 100);
 

@@ -18,11 +18,27 @@ public class ClearBoardAction : IBoardAction
             
             var piece = gameBoardController.BoardLogic.GetPieceAt(position);
 
-            if (piece != null && piece.PieceType == PieceType.Fog.Id) return false;
+            if (piece != null && piece.PieceType == PieceType.Empty.Id) return false;
+
+            if (piece != null && piece.PieceType == PieceType.Fog.Id)
+            {
+                var fogObserver = piece.GetComponent<FogObserver>(FogObserver.ComponentGuid);
+                piece.Context.ActionExecutor.AddAction(new CollapseFogToAction
+                {
+                    To = piece.CachedPosition,
+                    Positions = new List<BoardPosition> {piece.CachedPosition},
+                    FogObserver = fogObserver,
+                    IsIgnoreSpawn = true,
+                    OnComplete = DevTools.UpdateFogSectorsDebug
+                });
+                
+                gameBoardController.ActionExecutor.AddAction(this, BoardActionMode.SingleMode, 100);
+                return false;
+            }
 
             return true;
 
-        }, gameBoardController.BoardDef.PieceLayer);
+        }, BoardLayer.Piece.Layer);
 
         var collapsePieceAction = new CollapsePieceToAction {Positions = targetPieces, To = BoardPosition.Default()};
         gameBoardController.ActionExecutor.PerformAction(collapsePieceAction);

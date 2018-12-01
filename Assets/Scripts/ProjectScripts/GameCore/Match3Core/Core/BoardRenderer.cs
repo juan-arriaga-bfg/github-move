@@ -145,7 +145,7 @@ public partial class BoardRenderer : ECSEntity
         int h = logicMatrix.GetLength(1);
         if (x < 0 || x >= w) return false;
         if (y < 0 || y >= h) return false;
-        if (logicMatrix != null && logicMatrix[x, y, context.BoardDef.PieceLayer] == PieceType.Empty.Id) return false;
+        if (logicMatrix != null && logicMatrix[x, y, BoardLayer.Piece.Layer] == PieceType.Empty.Id) return false;
 
         return true;
     }

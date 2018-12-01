@@ -19,7 +19,7 @@ public class SpawnAllPiecesAction  : IBoardAction
 
             return false;
        
-        }, gameBoardController.BoardDef.PieceLayer);
+        }, BoardLayer.Piece.Layer);
         
         targetPieces.Shuffle(1000);
 

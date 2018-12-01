@@ -64,6 +64,9 @@ public static partial class PieceType
         {
             if(def.Filter.Has(filter) == false) continue;
             
+            // ignore empty piece
+            if (def.Id == PieceType.Empty.Id) continue;
+            
             result.Add(def.Id);
         }
         

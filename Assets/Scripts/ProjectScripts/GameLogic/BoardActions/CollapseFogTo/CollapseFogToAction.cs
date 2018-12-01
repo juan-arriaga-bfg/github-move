@@ -15,7 +15,9 @@ public class CollapseFogToAction : IBoardAction
     public IBoardAction OnCompleteAction;
 
     public Action OnComplete;
-	
+
+    public bool IsIgnoreSpawn { get; set; }
+
     public bool PerformAction(BoardController gameBoardController)
     {
         if (Positions == null || Positions.Count == 0) return false;
@@ -52,6 +54,8 @@ public class CollapseFogToAction : IBoardAction
         }
 
         GameDataService.Current.FogsManager.RemoveFog(FogObserver.Key);
+
+        if (IsIgnoreSpawn) return true;
         
         AddResourceView.Show(FogObserver.Def.GetCenter(gameBoardController), FogObserver.Def.Reward, 0.5f);
 

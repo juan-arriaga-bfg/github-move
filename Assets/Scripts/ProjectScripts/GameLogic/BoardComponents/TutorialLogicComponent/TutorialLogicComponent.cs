@@ -154,7 +154,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
         {
             for (var j = 0; j < Context.BoardDef.Width; j++)
             {
-                Context.BoardLogic.LockCell(new BoardPosition(i, j, Context.BoardDef.PieceLayer), this);
+                Context.BoardLogic.LockCell(new BoardPosition(i, j, BoardLayer.Piece.Layer), this);
             }
         }
     }
@@ -178,7 +178,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
         {
             for (var j = 0; j < Context.BoardDef.Width; j++)
             {
-                Context.BoardLogic.UnlockCell(new BoardPosition(i, j, Context.BoardDef.PieceLayer), this);
+                Context.BoardLogic.UnlockCell(new BoardPosition(i, j, BoardLayer.Piece.Layer), this);
             }
         }
     }

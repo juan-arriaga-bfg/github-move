@@ -157,7 +157,7 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
     protected virtual bool TryApplyAt(Vector3 worldPosition)
     {
         var boardPosition = context.Context.BoardDef.GetSectorPosition(worldPosition);
-        boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, context.Context.BoardDef.PieceLayer);
+        boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, BoardLayer.Piece.Layer);
 
         return TryApplyAt(boardPosition);
     }
@@ -215,7 +215,7 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
 
                 var normalPosition = new Vector3(targetPosition.x, targetPosition.y, -context.Context.BoardDef.ViewCamera.transform.localPosition.z);
                 var boardPosition = context.Context.BoardDef.GetSectorPosition(targetPosition);
-                boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, context.Context.BoardDef.PieceLayer);
+                boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, BoardLayer.Piece.Layer);
 
                 if (boardPosition.Equals(lastRemoverBoardPosition) == false)
                 {
