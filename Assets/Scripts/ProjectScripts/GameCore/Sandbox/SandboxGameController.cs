@@ -93,6 +93,9 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.RegisterComponent(new TutorialLogicComponent().RegisterComponent(new LockerComponent()));
         boardController.RegisterComponent(new QuestConnectorComponent());
+
+        // GameBoardDebugComponent used for unit tests and debug operations with field
+        boardController.RegisterComponent(new GameBoardDebugComponent());
         
         boardController.States.AddState(SessionBoardStateComponent.ComponentGuid);
         

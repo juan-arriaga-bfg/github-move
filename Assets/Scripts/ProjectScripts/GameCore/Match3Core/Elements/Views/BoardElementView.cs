@@ -300,7 +300,7 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
 
     public virtual int GetLayerIndexBy(BoardPosition boardPosition)
     {
-        return boardPosition.X  + Context.Context.BoardDef.Width * Context.Context.BoardDef.Width - Context.Context.BoardDef.Width * boardPosition.Y; 
+        return boardPosition.X  + Context.Context.BoardDef.Width * Context.Context.BoardDef.Width - Context.Context.BoardDef.Width * boardPosition.Y + Context.Context.BoardDef.Width * Context.Context.BoardDef.Width * boardPosition.Z;
     }
 
     public virtual void SyncRendererLayers(BoardPosition boardPosition)
@@ -319,7 +319,7 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             }
         }
 
-        cachedSortingGroup.sortingOrder = boardPosition.X  + Context.Context.BoardDef.Width * Context.Context.BoardDef.Width - Context.Context.BoardDef.Width * boardPosition.Y; 
+        cachedSortingGroup.sortingOrder = GetLayerIndexBy(boardPosition);
         
         // for (int i = 0; i < cachedRenderers.size; i++)
         // {

@@ -22,6 +22,8 @@ public static class CastlePathfinder
             {
                   positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.A7.Id, 1);
             }
+
+            if (positions.Count <= 0) return false;
             
             var targetPositions = new HashSet<BoardPosition>{positions[0]};
 

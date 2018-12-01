@@ -193,6 +193,11 @@ public partial class BoardLogicComponent : ECSEntity,
     {
         if (IsPointValid(boardPosition) == false) return;
 
+        if (boardPosition.X == 0 && boardPosition.Y == 0 && boardPosition.Z == 1)
+        {
+            Debug.LogWarning("--");
+        }
+        
         boardCells[boardPosition.X, boardPosition.Y, boardPosition.Z].Lock(locker);
     }
     

@@ -95,11 +95,13 @@ public class ActionExecuteComponent : ECSEntity, IECSSystem, IActionHistoryCompo
 
         if (actionsQueueTypes.TryGetValue(action.Guid, out actionsTypes))
         {
-            if (((int) mode & (int) BoardActionMode.SingleMode) == (int) BoardActionMode.SingleMode)
+            if (((int) mode & (int) BoardActionMode.SingleMode) == (int) BoardActionMode.SingleMode && actionsTypes.size > 0)
             {
                 return;
             }
-            
+        }
+        else
+        {
             actionsQueueTypes.Add(action.Guid, new BetterList<IBoardAction>());
         }
         
@@ -119,11 +121,13 @@ public class ActionExecuteComponent : ECSEntity, IECSSystem, IActionHistoryCompo
 
         if (actionsQueueTypes.TryGetValue(action.Guid, out actionsTypes))
         {
-            if (((int) mode & (int) BoardActionMode.SingleMode) == (int) BoardActionMode.SingleMode)
+            if (((int) mode & (int) BoardActionMode.SingleMode) == (int) BoardActionMode.SingleMode && actionsTypes.size > 0)
             {
                 return;
             }
-            
+        }
+        else
+        {
             actionsQueueTypes.Add(action.Guid, new BetterList<IBoardAction>());
         }
         
@@ -203,7 +207,12 @@ public class ActionExecuteComponent : ECSEntity, IECSSystem, IActionHistoryCompo
             {
                 actionsQueueList.Value.Clear();
             }
-
+            
+            foreach (var actionsQueueTypeList in actionsQueueTypes)
+            {
+                actionsQueueTypeList.Value.Clear();
+            }
+    
             for (int i = 0; i < actionsQueueStep.size; i++)
             {
                 var action = actionsQueueStep[i];

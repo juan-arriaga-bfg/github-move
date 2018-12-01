@@ -131,14 +131,14 @@ public class EmptyCellsFinderComponent : IECSComponent
 		return free.Count >= count;
 	}
 	
-	public bool FindAllWithPointInCenter(BoardPosition point, int width, int height, List<BoardPosition> field)
+	public bool FindAllWithPointInCenter(BoardPosition point, int width, int height, List<BoardPosition> field, int targetLayer)
 	{
 		var startPoint = CenterToHome(point, width, height);
 		
-		return FindAllWithPointInHome(startPoint, width, height, field);
+		return FindAllWithPointInHome(startPoint, width, height, field, targetLayer);
 	}
     
-    public List<BoardPosition> FindAllWithCondition(Func<BoardPosition, bool> condition)
+    public List<BoardPosition> FindAllWithCondition(Func<BoardPosition, bool> condition, int targetLayer)
     {
         int xMin;
         int xMax;
@@ -158,7 +158,7 @@ public class EmptyCellsFinderComponent : IECSComponent
         {
             for (var j = yMin; j <= yMax; j++)
             {
-                var empty = new BoardPosition(i, j);
+                var empty = new BoardPosition(i, j, targetLayer);
 
                 if (condition.Invoke(empty) == false) continue;
 				
@@ -200,7 +200,7 @@ public class EmptyCellsFinderComponent : IECSComponent
         return field;
     }
 
-	public bool FindAllWithPointInHome(BoardPosition point, int width, int height, List<BoardPosition> field)
+	public bool FindAllWithPointInHome(BoardPosition point, int width, int height, List<BoardPosition> field, int targetLayer)
 	{
 		int xMin;
 		int xMax;
@@ -218,7 +218,7 @@ public class EmptyCellsFinderComponent : IECSComponent
 		{
 			for (var j = yMin; j <= yMax; j++)
 			{
-				var empty = new BoardPosition(i, j);
+				var empty = new BoardPosition(i, j, targetLayer);
 
 				if (context.IsEmpty(empty) == false) continue;
 				

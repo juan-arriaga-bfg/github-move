@@ -168,17 +168,29 @@ public class FieldControllerComponent : IECSComponent
         {
             for (var j = 0; j < count - i; j++)
             {
-                if ((directions & Directions.Left) == Directions.Left) 
-                    context.BoardLogic.LockCell(new BoardPosition(i, j, context.BoardDef.PieceLayer), this);
+                if ((directions & Directions.Left) == Directions.Left)
+                {
+                    var point = new BoardPosition(i, j, context.BoardDef.PieceLayer);
+                    context.BoardLogic.AddPieceToBoard(point.X, point.Y, context.CreatePieceFromType(PieceType.Empty.Id));
+                }
 
                 if ((directions & Directions.Right) == Directions.Right)
-                    context.BoardLogic.LockCell(new BoardPosition(width - 1 - i, height - 1 - j, context.BoardDef.PieceLayer), this);
-            
+                {
+                    var point = new BoardPosition(width - 1 - i, height - 1 - j, context.BoardDef.PieceLayer);
+                    context.BoardLogic.AddPieceToBoard(point.X, point.Y, context.CreatePieceFromType(PieceType.Empty.Id));
+                }
+
                 if ((directions & Directions.Top) == Directions.Top)
-                    context.BoardLogic.LockCell(new BoardPosition(i, height - 1 - j, context.BoardDef.PieceLayer), this);
-            
+                {
+                    var point = new BoardPosition(i, height - 1 - j, context.BoardDef.PieceLayer);
+                    context.BoardLogic.AddPieceToBoard(point.X, point.Y, context.CreatePieceFromType(PieceType.Empty.Id));
+                }
+
                 if ((directions & Directions.Bottom) == Directions.Bottom)
-                    context.BoardLogic.LockCell(new BoardPosition(width - 1 - i, j, context.BoardDef.PieceLayer), this);
+                {
+                    var point = new BoardPosition(width - 1 - i, j, context.BoardDef.PieceLayer);
+                    context.BoardLogic.AddPieceToBoard(point.X, point.Y, context.CreatePieceFromType(PieceType.Empty.Id));
+                }
             }    
         }
     }
