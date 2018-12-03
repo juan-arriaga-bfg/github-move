@@ -34,6 +34,12 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
     [SerializeField] private Transform hintAnchorOrdersButton;
     public Transform HintAnchorOrdersButton => hintAnchorOrdersButton;
     
+    [SerializeField] private Transform hintAnchorShopButton;
+    public Transform HintAnchorShopButton => hintAnchorShopButton;
+    
+    [SerializeField] private Transform hintAnchorEnergyPlusButton;
+    public Transform HintAnchorEnergyPlusButton => hintAnchorEnergyPlusButton;
+    
     private readonly List<UiQuestButton> questButtons = new List<UiQuestButton>();
 
     private int maxCountOfVisibleQuestButtonsCached = -1;

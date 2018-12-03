@@ -71,20 +71,6 @@
     ]
   },
   {
-    "Id": 6,
-    "$type": "QuestStarterEntity, GameAssembly",
-    "QuestToStartIds": [
-      "8_CreatePiece_PR_B5"
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
-        "Id": "FogCleared",
-        "Value": "Fog 4"
-      }
-    ]
-  },
-  {
     "Id": 7,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [

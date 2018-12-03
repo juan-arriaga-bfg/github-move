@@ -142,9 +142,12 @@ public class DevTools : UIContainerElementViewController
     {
         Debug.Log("OnDebug1Click");
 
-
-        GameDataService.Current.QuestsManager.StartNewDailyQuest();
+        // GameDataService.Current.QuestsManager.StartNewDailyQuest();
         //var quest = GameDataService.Current.QuestsManager.StartQuestById("Daily", null);
+
+        new HighlightTaskPointToOrdersButton().Highlight(null);
+        new HighlightTaskPointToShopButton().Highlight(null);
+        new HighlightTaskPointToEnergyPlusButton().Highlight(null);
     }
 
     public static void UpdateFogSectorsDebug()

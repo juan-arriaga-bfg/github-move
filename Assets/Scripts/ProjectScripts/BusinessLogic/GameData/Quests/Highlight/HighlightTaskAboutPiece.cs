@@ -12,10 +12,14 @@ public class HighlightTaskAboutPiece : TaskHighlightUsingArrow
         }
         
         int pieceId = taskPiece.PieceId;
-        
+        return FindAndPointToPiece(pieceId);
+    }
+
+    public static bool FindAndPointToPiece(int pieceId)
+    {
         var boardLogic = BoardService.Current.FirstBoard.BoardLogic;
         var piecesPositions = boardLogic.PositionsCache.GetPiecePositionsByType(pieceId);
-        
+
         if (piecesPositions.Count == 0)
         {
             return false;
@@ -29,7 +33,7 @@ public class HighlightTaskAboutPiece : TaskHighlightUsingArrow
         BoardPosition selectedPosition = positions[index];
 
         HintArrowView.Show(selectedPosition, 0f, -0.5f);
-        
+
         return true;
     }
 }

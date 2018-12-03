@@ -1,4 +1,4 @@
-[TaskHighlight(typeof(HighlightTaskNotImplemented))]
+[TaskHighlight(typeof(HighlightTaskCurrencyCollect))]
 public class TaskCurrencyCollectEntity : TaskCurrencyEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
