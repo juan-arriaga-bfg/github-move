@@ -10,7 +10,6 @@ public class ElementsResourcesBuilder
         
         dict.Add((int)ViewType.AddResource, R.AddResourceView);
         dict.Add((int)ViewType.HintArrow, R.HintArrow);
-        dict.Add((int)ViewType.StorageState, R.ChangeStorageStateView);
         dict.Add((int)ViewType.BoardTimer, R.BoardTimerView);
         dict.Add((int)ViewType.LevelLabel, R.PieceLevelView);
         dict.Add((int)ViewType.Menu, R.MenuView);

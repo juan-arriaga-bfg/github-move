@@ -47,6 +47,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	
 	public virtual void OnAddToBoard(BoardPosition position, Piece context = null)
 	{
+		InitInSave(position);
 	}
 	
 	public void OnMovedFromToStart(BoardPosition from, BoardPosition to, Piece context = null)
@@ -67,6 +68,17 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	protected virtual void InitInSave(BoardPosition position)
 	{
 		Rewards.InitInSave(position);
+		
+		var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+		var item = save?.GetLifeSave(position);
+		
+		if(item == null) return;
+		
+		current = item.Step;
+		Context.Context.WorkerLogic.Init(Context.CachedPosition, Timer);
+
+		if (item.IsStart) Timer.Start(item.StartTime);
+		else OnTimerStart();
 	}
     
 	public virtual bool Damage(bool isExtra = false)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RewardsStoreComponent : IECSComponent
@@ -20,6 +21,7 @@ public class RewardsStoreComponent : IECSComponent
     private Piece context;
     
     private int next;
+    private int defaulAmaunt;
     private Dictionary<int, int> rewards;
     
     public void OnRegisterEntity(ECSEntity entity)
@@ -33,12 +35,41 @@ public class RewardsStoreComponent : IECSComponent
 
     public void InitInSave(BoardPosition position)
     {
+        var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+        var item = save?.GetChestsSave(position);
+
+        if (item != null)
+        {
+            rewards = item.Reward;
+        }
+        
         InitRewards();
+    }
+
+    public ChestSaveItem Save()
+    {
+        return rewards == null
+            ? null
+            : new ChestSaveItem
+            {
+                Position = context.CachedPosition,
+                Reward = rewards,
+                RewardAmount = defaulAmaunt
+            };
     }
 
     private void InitRewards(Dictionary<int, int> value = null)
     {
-        if(rewards == null || rewards.Count == 0) rewards = value ?? GetRewards?.Invoke();
+        if (rewards == null || rewards.Count == 0)
+        {
+            rewards = value;
+
+            if (rewards == null)
+            {
+                rewards = GetRewards?.Invoke();
+                defaulAmaunt = rewards.Sum(pair => pair.Value);
+            } 
+        }
         
         foreach (var key in rewards.Keys)
         {

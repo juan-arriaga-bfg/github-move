@@ -3,7 +3,6 @@ public class R
      public const string GenericPiece = "GenericPiece";
      public const string ReadyArrowView = "ReadyArrowView";
      public const string AddResourceView = "AddResourceView";
-     public const string ChangeStorageStateView = "ChangeStorageStateView";
      public const string BoardTimerView = "BoardTimerView";
      public const string HintArrow = "HintArrow";
      public const string PieceLevelView = "PieceLevelView";
