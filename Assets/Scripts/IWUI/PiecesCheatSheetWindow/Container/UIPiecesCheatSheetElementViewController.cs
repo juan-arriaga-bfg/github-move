@@ -73,7 +73,7 @@ public class UIPiecesCheatSheetElementViewController : UIContainerElementViewCon
 
     private void OnClickEventHandler(UIButtonViewController obj)
     {
-        BoardPosition pos = new BoardPosition(23, 10, BoardService.Current.GetBoardById(0).BoardDef.PieceLayer);
+        BoardPosition pos = new BoardPosition(23, 10, BoardLayer.Piece.Layer);
         var availablePoints = new List<BoardPosition>();
 
         BoardService.Current.GetBoardById(0).BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(pos, availablePoints, 1, 100);

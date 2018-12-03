@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class BoardDefinitionComponent : IECSComponent
 {
@@ -32,7 +33,8 @@ public class BoardDefinitionComponent : IECSComponent
 
     public int Height { get; set; }
     
-    public int PieceLayer { get; set; }
+    public Dictionary<int, int> LayersDef { get; set; }
+
 
     public Transform SectorsGridView { get; set; }
 
@@ -41,6 +43,27 @@ public class BoardDefinitionComponent : IECSComponent
     public virtual Vector3 GetPiecePosition(int x, int y, int z = 0)
     {
         return GetSectorCenterWorldPosition(x, y, z);
+    }
+
+    /// <summary>
+    /// return predefined Z position for layer type
+    /// </summary>
+    /// <param name="boardLayerType"></param>
+    /// <returns></returns>
+    public virtual int GetLayerFor(int boardLayerType)
+    {
+        int layer = 0;
+        if (LayersDef != null && LayersDef.TryGetValue(boardLayerType, out layer))
+        {
+            return layer;
+        }
+
+        return layer;
+    }
+    
+    public virtual int GetLayerIndexBy(BoardPosition boardPosition)
+    {
+        return boardPosition.X  + Width * Width - Width * boardPosition.Y + Width * Width * boardPosition.Z;
     }
 
     public virtual Vector3 GetScreenPosition(int x, int y, int z = 0)

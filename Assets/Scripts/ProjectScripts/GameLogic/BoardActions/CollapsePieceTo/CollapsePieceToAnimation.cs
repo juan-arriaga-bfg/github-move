@@ -17,11 +17,15 @@ public class CollapsePieceToAnimation : BoardAnimation
 		foreach (var point in points)
 		{
 			var boardElement = context.GetElementAt(point);
-			
+
 			boardElement.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
-			
-			sequence.Insert(0 + Delay, boardElement.CachedTransform.DOMove(new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.4f).SetEase(Ease.OutBack));
-			sequence.Insert(0.2f + Delay, boardElement.CachedTransform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack));
+
+		    if (Action.To.IsValid)
+		    {
+		        sequence.Insert(0 + Delay, boardElement.CachedTransform.DOMove(new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.4f).SetEase(Ease.OutBack));
+		    }
+
+		    sequence.Insert(0.2f + Delay, boardElement.CachedTransform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack));
 		}
 		
 		sequence.OnComplete(() =>

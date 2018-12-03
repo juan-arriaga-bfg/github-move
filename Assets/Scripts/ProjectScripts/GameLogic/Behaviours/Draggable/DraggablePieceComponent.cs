@@ -27,7 +27,7 @@ public class DraggablePieceComponent : ECSEntity, ILockerComponent
     {
         var board = context.Context;
         
-        to.Z = board.BoardDef.PieceLayer;
+        to.Z = BoardLayer.Piece.Layer;
         
         if (context.CachedPosition.Equals(to)) return true;
         

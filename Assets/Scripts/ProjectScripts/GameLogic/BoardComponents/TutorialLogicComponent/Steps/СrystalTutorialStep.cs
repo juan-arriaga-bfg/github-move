@@ -23,8 +23,8 @@ public class СrystalTutorialStep : LoopFingerTutorialStep
             CheckAbsence = true,
             Positions = new List<BoardPosition>
             {
-                new BoardPosition(20, 8, Context.Context.BoardDef.PieceLayer),
-                new BoardPosition(19, 8, Context.Context.BoardDef.PieceLayer)
+                new BoardPosition(20, 8, BoardLayer.Piece.Layer),
+                new BoardPosition(19, 8, BoardLayer.Piece.Layer)
             }
         }, true);
         

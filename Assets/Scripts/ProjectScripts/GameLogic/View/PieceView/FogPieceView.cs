@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class FogPieceView : PieceBoardElementView, IBoardEventListener
 {
@@ -33,6 +34,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 		
 		if(observer == null) return;
 
+	    int fogIndex = 0;
 		foreach (var position in observer.Mask)
 		{
 			var fog = Instantiate(fogItem, fogItem.transform.parent);
@@ -43,15 +45,30 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 
 			sprite.sprite = IconService.Current.GetSpriteById($"Fog{Random.Range(1, 4)}{CheckBorder(position.X, position.Y)}");
 			sprite.transform.localScale = Vector3.one * 1.1f;
-			sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + 101;
-			
+
+		    sprite.transform.SetSiblingIndex(GetLayerIndexBy(new BoardPosition(position.X, position.Y, BoardLayer.Piece.Layer)));
+
+		    sprite.sortingOrder = 0;
+		    
+		    var cachedSpriteSortingGroup = sprite.GetComponent<SortingGroup>();
+		    if (cachedSpriteSortingGroup == null)
+		    {
+		        cachedSpriteSortingGroup = sprite.gameObject.AddComponent<SortingGroup>();
+		    }
+		    cachedSpriteSortingGroup.sortingOrder = GetLayerIndexBy(new BoardPosition(position.X, position.Y, BoardLayer.Piece.Layer));
+
 			fog.transform.position = touch.transform.position = Context.Context.BoardDef.GetSectorCenterWorldPosition(position.X, position.Y, 0);
 			
 			touchRegion.AddTouchRegion(touch.GetComponent<RectTransform>());
 			
 			views.Add(fog);
 			views.Add(touch);
+
+		    fogIndex++;
 		}
+	    
+	    ClearCacheLayers();
+	    SyncRendererLayers(currentPiece.CachedPosition);
 
 		fogItem.SetActive(false);
 		touchItem.SetActive(false);
@@ -67,25 +84,28 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 		if(observer == null) return;
 	    
 	    if (observer.IsRemoved) return;
-		
-		for (var i = 0; i < observer.Mask.Count; i++)
-		{
-			var position = observer.Mask[i];
-			var str = CheckBorder(position.X, position.Y);
-			var sprite = fogSprites[i];
-			
-			if(string.IsNullOrEmpty(str) || sprite.sprite.name.Contains(str)) continue;
-			
-			sprite.sprite = IconService.Current.GetSpriteById($"Fog{Random.Range(1, 4)}{str}");
-		}
+	    
+	    HighlightIfCanClear(true);
+	    
+	    if (IsHighlighted == false)
+	    {
+	        for (var i = 0; i < observer.Mask.Count; i++)
+	        {
+	            var position = observer.Mask[i];
+	            var str = CheckBorder(position.X, position.Y);
+	            var sprite = fogSprites[i];
 
-		HighlightIfCanClear(true);
+	            if (string.IsNullOrEmpty(str) || sprite.sprite.name.Contains(str)) continue;
+
+	            sprite.sprite = IconService.Current.GetSpriteById($"Fog{Random.Range(1, 4)}{str}");
+	        }
+	    }
 	}
 
 	private string CheckBorder(int x, int y)
 	{
-		var right = new BoardPosition(x+1, y, Context.Context.BoardDef.PieceLayer);
-		var left = new BoardPosition(x, y-1, Context.Context.BoardDef.PieceLayer);
+		var right = new BoardPosition(x+1, y, BoardLayer.Piece.Layer);
+		var left = new BoardPosition(x, y-1, BoardLayer.Piece.Layer);
 		
 		var pieceR = Context.Context.BoardLogic.GetPieceAt(right);
 		var pieceL = Context.Context.BoardLogic.GetPieceAt(left);
@@ -124,7 +144,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
                     
                         var underFogMaterial = fakePiece.SetCustomMaterial(BoardElementMaterialType.PiecesUnderFogMaterial, true, this);
                         underFogMaterial.SetFloat("_AlphaCoef", 0f);
-                        underFogMaterial.DOFloat(0.4f, "_AlphaCoef", 2f);
+                        underFogMaterial.DOFloat(0.4f, "_AlphaCoef", 2f).SetId(underFogMaterial);
                     
                         fakePieces.Add(fakePiece);
                     }
@@ -133,6 +153,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
         }
     }
 
+    // ignored base SyncRendererLayers cause parts of fog need to has separate layer 
     public override void SyncRendererLayers(BoardPosition boardPosition)
 	{
 		CachedTransform.localPosition = new Vector3(CachedTransform.localPosition.x, CachedTransform.localPosition.y, -boardPosition.Z * 0.1f);
@@ -192,10 +213,11 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 	    
         if (isAnimate)
         {
+            DOTween.Kill(fogMaterial);
             fogMaterial.SetFloat("_ScaleCoef", 1f);
-            fogMaterial.DOFloat(1f, "_ScaleCoef", 3f);
+            fogMaterial.DOFloat(1f, "_ScaleCoef", 3f).SetId(fogMaterial);
             fogMaterial.SetFloat("_AlphaCoef", 1f);
-            fogMaterial.DOFloat(0.85f, "_AlphaCoef", 3f);
+            fogMaterial.DOFloat(0.85f, "_AlphaCoef", 3f).SetId(fogMaterial);
         }
         else
         {
@@ -207,10 +229,6 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
         {
             var sprite = fogSprites[i];
             sprite.sprite = IconService.Current.GetSpriteById("fog_opacity_1");
-
-            var position = observer.Mask.Count > i ? observer.Mask[i] : currentPiece.CachedPosition;
-
-            sprite.sortingOrder = position.X * Context.Context.BoardDef.Width - position.Y + 1 * 100 - 1;
         }
     }
 

@@ -43,6 +43,7 @@ public class CollapseFogToAnimation : BoardAnimation
 
         if (fogMaterial != null)
         {
+            DOTween.Kill(fogMaterial);
             sequence.Insert(0f, fogMaterial.DOFloat(0f, "_AlphaCoef", 0.5f));
         }
         
@@ -50,6 +51,7 @@ public class CollapseFogToAnimation : BoardAnimation
         
         if (fakePiecesFogMaterial != null)
         {
+            DOTween.Kill(fakePiecesFogMaterial);
             sequence.Insert(0f, fakePiecesFogMaterial.DOFloat(0f, "_AlphaCoef", 0.5f));
         }
         

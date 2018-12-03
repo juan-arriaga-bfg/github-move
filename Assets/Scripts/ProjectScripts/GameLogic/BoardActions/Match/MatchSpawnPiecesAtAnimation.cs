@@ -19,7 +19,7 @@ public class MatchSpawnPiecesAtAnimation : BoardAnimation
 			var boardElement = context.CreatePieceAt(piece, position);
 
 			boardElement.CachedTransform.localScale = Vector3.zero;
-			boardElement.SyncRendererLayers(new BoardPosition(position.X, position.Y, 5));
+			boardElement.SyncRendererLayers(new BoardPosition(position.X, position.Y, BoardLayer.PieceUP1.Layer));
 			
 			sequence.Insert(0.1f, boardElement.CachedTransform.DOScale(Vector3.one * 1.2f, 0.4f));
 			sequence.Insert(0.6f, boardElement.CachedTransform.DOScale(Vector3.one, 0.3f));

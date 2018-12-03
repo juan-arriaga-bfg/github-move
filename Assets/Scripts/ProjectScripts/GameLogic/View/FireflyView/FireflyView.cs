@@ -76,7 +76,7 @@ public class FireflyView : BoardElementView
         isClick = true;
         
         var boardPos = Context.Context.BoardDef.GetSectorPosition(CachedTransform.position);
-        boardPos.Z = Context.Context.BoardDef.PieceLayer;
+        boardPos.Z = BoardLayer.Piece.Layer;
         
         var free = Context.Context.BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(boardPos, 1, 100);
         

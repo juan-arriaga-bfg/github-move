@@ -25,7 +25,7 @@ public static class HighlightFogHelper
         }
 
         var pos = fogPos.Value;
-        pos.Z = BoardService.Current.FirstBoard.BoardDef.PieceLayer;
+        pos.Z = BoardLayer.Piece.Layer;
         
         var fogPiece = BoardService.Current.FirstBoard.BoardLogic.GetPieceAt(pos);
 

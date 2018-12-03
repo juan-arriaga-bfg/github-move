@@ -33,7 +33,7 @@ public sealed class QuestStartConditionMineUsedComponent : QuestStartConditionCo
         
         var board = BoardService.Current.FirstBoard;
         
-        pos.Z = board.BoardDef.PieceLayer;
+        pos.Z = BoardLayer.Piece.Layer;
 
         var piece = board.BoardLogic.GetPieceAt(pos);
         if (piece == null)

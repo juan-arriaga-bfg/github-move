@@ -180,7 +180,7 @@ public class BoardManipulatorComponent : ECSEntity,
             var pieceView = cachedViewForDrag as PieceBoardElementView;
             
             var boardPos = context.BoardDef.GetSectorPosition(targetPos);
-            boardPos.Z = context.BoardDef.PieceLayer;
+            boardPos.Z = BoardLayer.Piece.Layer;
             pieceView.OnDrag(boardPos, pos);
             pieceView.Piece.ViewDefinition?.OnDrag(false);
             
@@ -296,7 +296,7 @@ public class BoardManipulatorComponent : ECSEntity,
                             }
                             else
                             {
-                                cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, context.BoardDef.PieceLayer));
+                                cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, BoardLayer.Piece.Layer));
                             }
                             
                             cachedViewForDrag = null;
@@ -340,6 +340,9 @@ public class BoardManipulatorComponent : ECSEntity,
             if (touchableObject is PieceBoardElementView)
             {
                 var view = touchableObject as PieceBoardElementView;
+                
+                if (view.Piece == null) continue;
+                
                 var position = view.Piece.CachedPosition;
                 
                 if(view.Piece.Context.BoardLogic.IsLockedCell(position)) continue;
