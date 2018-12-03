@@ -192,7 +192,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1999836452578724}
   m_LocalRotation: {x: 0.79044235, y: 0.14473058, z: -0.18085346, w: -0.5670502}
-  m_LocalPosition: {x: 0.07574972, y: -0.31841052, z: -0.00032846833}
+  m_LocalPosition: {x: 0.01, y: 0.37, z: -0.00032846833}
   m_LocalScale: {x: 1.3305607, y: 1.2138115, z: 1.4374778}
   m_Children: []
   m_Father: {fileID: 4363195063714452}
@@ -232,7 +232,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1432881994587164}
   m_LocalRotation: {x: -0.00051291223, y: 0.0022054755, z: -0.22653176, w: -0.97400117}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.02, y: 0.39, z: 0}
   m_LocalScale: {x: 1.450716, y: 1.450719, z: 1.2947305}
   m_Children: []
   m_Father: {fileID: 4363195063714452}
@@ -280,6 +280,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e94db1dff9a4341a9922139f675b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastBoardPosition:
+    X: 0
+    Y: 0
+    Z: 0
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 4342550883930490}
@@ -296,10 +300,10 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1999836452578724}
   serializedVersion: 5
-  lengthInSec: 1.35
+  lengthInSec: 2
   simulationSpeed: 1.2
   stopAction: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -4895,7 +4899,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1432881994587164}
   serializedVersion: 5
-  lengthInSec: 1
+  lengthInSec: 0.9
   simulationSpeed: 0.5
   stopAction: 0
   looping: 0
