@@ -112,7 +112,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         
         cachedRemoverView = context.Context.RendererContext.CreateBoardElement<PieceBoardElementView>((int) ViewType.PieceRemover);
         cachedRemoverView.Init(context.Context.RendererContext);
-        cachedRemoverView.SyncRendererLayers(new BoardPosition(0, 0, 100));
+        cachedRemoverView.SyncRendererLayers(new BoardPosition(0, 0, BoardLayer.MAX.Layer));
         
         ToggleFilterPieces(true);
 

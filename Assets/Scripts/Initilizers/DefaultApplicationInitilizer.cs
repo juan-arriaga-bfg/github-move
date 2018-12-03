@@ -71,6 +71,8 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             // condition to reset profile
             if (baseProfile == null || profileManager.SystemVersion > baseProfile.SystemVersion)
             {
+                Debug.LogError($"reset progress by: baseProfile == null:{baseProfile == null} profileManager.SystemVersion > baseProfile.SystemVersion:{profileManager.SystemVersion > baseProfile.SystemVersion}");
+                
                 var profileBuilder = new DefaultProfileBuilder();
                 ProfileService.Instance.Manager.ReplaceProfile(profileBuilder.Create());
 
@@ -79,11 +81,12 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             else
             {
                 // load local profile
-                
                 ProfileService.Instance.Manager.LoadCurrentProfile((profile) =>
                 {
                     if (profile == null)
                     {
+                        Debug.LogError($"reset progress by: profile == null:{profile == null}");
+
                         var profileBuilder = new DefaultProfileBuilder();
                         ProfileService.Instance.Manager.ReplaceProfile(profileBuilder.Create());
                     }
