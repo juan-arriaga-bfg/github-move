@@ -106,4 +106,8 @@ public partial class BoardLayer
     
     public static readonly BoardLayerDef UI = new BoardLayerDef {Index = 4, Names = new List<string>{"UI"}};
     
+    public static readonly BoardLayerDef UIUP1 = new BoardLayerDef {Index = 5, Names = new List<string>{"UIUP1"}};
+    
+    public static readonly BoardLayerDef MAX = new BoardLayerDef {Index = 6, Names = new List<string>{"MAX"}};
+    
 }

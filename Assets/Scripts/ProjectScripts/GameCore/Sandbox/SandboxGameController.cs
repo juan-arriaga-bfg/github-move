@@ -91,6 +91,8 @@ public class SandboxGameController : MonoBehaviour
                 {BoardLayer.PieceUP1.Index, 2},
                 {BoardLayer.FX.Index, 3},
                 {BoardLayer.UI.Index, 4},
+                {BoardLayer.UIUP1.Index, 5},
+                {BoardLayer.MAX.Index, 6},
             }
             
         }); // board settings

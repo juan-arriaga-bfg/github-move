@@ -66,7 +66,7 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
         var fakePiece = context.Context.CreatePieceFromType(targetPieceId);
         var fakeBoardElement = context.Context.RendererContext.CreatePieceAt(fakePiece, new BoardPosition(0, 0, 3));
         dragableView = fakeBoardElement;
-        dragableView.SyncRendererLayers(new BoardPosition(0, 0, 100));
+        dragableView.SyncRendererLayers(new BoardPosition(0, 0, BoardLayer.MAX.Layer));
         
  
         if (OnBeginDragAndDropEvent != null)
