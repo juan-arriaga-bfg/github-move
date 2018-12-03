@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 
-public class ReproductionLifeComponent : StorageLifeComponent
+public class ReproductionLifeComponent : WorkplaceLifeComponent
 {
     private PiecesReproductionDef def;
-    private string childName;
     private TimerComponent cooldown;
+    
+    private string childName;
     
     public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.production", "gameboard.bubble.message.production {0}"), childName);
     public override string Price => Timer.IsExecuteable() ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), Timer.CompleteTime.GetTimeLeftText()) : base.Price;
@@ -20,6 +21,8 @@ public class ReproductionLifeComponent : StorageLifeComponent
         def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).ReproductionDef;
         
         HP = def.Limit;
+        timer.Delay = 2;
+        
         cooldown = new TimerComponent{Delay = def.Delay};
         RegisterComponent(cooldown);
         
@@ -27,81 +30,38 @@ public class ReproductionLifeComponent : StorageLifeComponent
         childName = child?.Name;
     }
     
-    protected override void InitStorage()
+    protected override Dictionary<int, int> GetRewards()
     {
-        storage.SpawnPiece = PieceType.Parse(def.Reproduction.Currency);
-        storage.Capacity = storage.Amount = def.Reproduction.Amount;
-        storage.Timer.Delay = 2;
+        var pieces = new Dictionary<int, int>();
+        
+        if (IsDead) pieces.Add(def.ObstacleType, 1);
+        
+        pieces.Add(PieceType.Parse(def.Reproduction.Currency), def.Reproduction.Amount);
+        
+        return pieces;
     }
-
-    protected override LifeSaveItem InitInSave(BoardPosition position)
+    
+    protected override void InitInSave(BoardPosition position)
     {
-        var item = base.InitInSave(position);
-        
-        if (item == null) return null;
-        
-        if(item.IsStart) cooldown.Start(item.StartTime);
         Locker.Unlock(this);
-        
-        return item;
+        base.InitInSave(position);
     }
 
     public override bool Damage(bool isExtra = false)
     {
-        if (cooldown.IsExecuteable())
-        {
-            UIMessageWindowController.CreateTimerCompleteMessage(
-                LocalizationService.Get("window.timerComplete.message.production", "window.timerComplete.message.production"),
-                cooldown);
-
-            return false;
-        }
+        if (cooldown.IsExecuteable() == false) return base.Damage(isExtra);
         
-        return base.Damage(isExtra);
+        UIMessageWindowController.CreateTimerCompleteMessage(
+            LocalizationService.Get("window.timerComplete.message.production", "window.timerComplete.message.production"),
+            cooldown);
+        
+        return false;
     }
 
-    protected override void Success()
+    protected override void OnSpawnCurrencyRewards()
     {
-    }
-
-    protected override void OnStep()
-    {
-        storage.OnScatter = () =>
-        {
-            storage.OnScatter = null;
-            OnSpawnRewards();
-            cooldown.Start();
-        };
-    }
-
-    protected override void OnComplete()
-    {
-        storage.OnScatter = () =>
-        {
-            storage.OnScatter = null;
-            OnSpawnRewards();
-            Context.Context.ActionExecutor.AddAction(new CollapsePieceToAction
-            {
-                To = Context.CachedPosition,
-                Positions = new List<BoardPosition> {Context.CachedPosition},
-                OnComplete = OnRemove
-            });
-        };
-    }
-
-    private void OnRemove()
-    {
-        Context.Context.ActionExecutor.AddAction(new SpawnPieceAtAction()
-        {
-            IsCheckMatch = false,
-            At = Context.CachedPosition,
-            PieceTypeId = def.ObstacleType
-        });
-    }
-
-    protected override void OnSpawnRewards()
-    {
-        base.OnSpawnRewards();
         AddResourceView.Show(StartPosition(), def.StepReward);
+        base.OnSpawnCurrencyRewards();
+        if (IsDead == false) cooldown.Start();
     }
 }

@@ -288,7 +288,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	{
 		var items = new List<LifeSaveItem>();
 		
-		foreach (var position in positions)
+		/*foreach (var position in positions)
 		{
 			var piece = logic.GetPieceAt(position);
 			var component = piece?.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
@@ -307,7 +307,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			};
 			
 			items.Add(item);
-		}
+		}*/
 		
 		return items;
 	}

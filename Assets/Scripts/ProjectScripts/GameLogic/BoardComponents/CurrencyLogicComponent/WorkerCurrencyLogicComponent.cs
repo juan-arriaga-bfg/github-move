@@ -184,13 +184,13 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
     private bool CheckLife(Piece target)
     {
-        var life = target.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
+        var life = target.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
         
         if (life == null) return false;
 
         if (life.Locker.IsLocked)
         {
-            UIErrorWindowController.AddError(life.IsFilled
+            UIErrorWindowController.AddError(life.Rewards.IsComplete
                 ? LocalizationService.Get("message.error.action", "message.error.action")
                 : LocalizationService.Get("message.error.workingHere", "message.error.workingHere"));
             

@@ -37,7 +37,7 @@
 
             if (!target.Context.Pathfinder.CanPathToCastle(target)) continue;
         
-            var life = target.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
+            var life = target.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
 
             if (life != null && !life.Locker.IsLocked && (!life.IsUseCooldown || !life.Timer.IsExecuteable()))
             {
