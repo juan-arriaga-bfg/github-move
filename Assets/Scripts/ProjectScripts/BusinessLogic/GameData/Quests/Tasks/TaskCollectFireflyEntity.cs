@@ -1,5 +1,4 @@
-[TaskHighlight(typeof(HighlightTaskCurrencyCollect))]
-public class TaskCurrencyCollectEntity : TaskCurrencyEntity
+public class TaskCollectFireflyEntity : TaskCurrencyEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -11,7 +10,7 @@ public class TaskCurrencyCollectEntity : TaskCurrencyEntity
             return;
         }
 
-        if (shopItem.ItemUid == CurrencyName)
+        if (shopItem.ItemUid == Currency.Firefly.Name)
         {
             CurrentValue += shopItem.Amount;
         }

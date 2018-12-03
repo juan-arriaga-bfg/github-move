@@ -11,27 +11,27 @@ public class HighlightTaskCurrencyCollect : ITaskHighlight
             return false;
         }
         
-        if (string.IsNullOrEmpty(currencyTask.Currency))
+        if (string.IsNullOrEmpty(currencyTask.CurrencyName))
         {
             return false;
         }
 
-        if (currencyTask.Currency == Currency.Coins.Name)
+        if (currencyTask.CurrencyName == Currency.Coins.Name)
         {
             return HighlightSoft(currencyTask);
         }  
         
-        if (currencyTask.Currency == Currency.Crystals.Name)
+        if (currencyTask.CurrencyName == Currency.Crystals.Name)
         {
             return new HighlightTaskNotImplemented().Highlight(currencyTask);
         }
         
-        if (currencyTask.Currency == Currency.Mana.Name)
+        if (currencyTask.CurrencyName == Currency.Mana.Name)
         {
             return HighlightOrdersButton(currencyTask);
         }
 
-        Debug.LogError($"[HighlightTaskCurrencyCollect] => Unsupported Currency type: '{currencyTask.Currency}'");
+        Debug.LogError($"[HighlightTaskCurrencyCollect] => Unsupported Currency type: '{currencyTask.CurrencyName}'");
         
         return false;
     }
