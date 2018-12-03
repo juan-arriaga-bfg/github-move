@@ -15,6 +15,6 @@ public class HighlightTaskFindObstacleForPieceType : TaskHighlightUsingArrow
         }
 
         var sourceFilter = PieceTypeFilter.Obstacle;
-        return HighlightTaskPointToPieceTypeHelper.PointToPieceSource(pieceTask, sourceFilter);
+        return HighlightTaskPointToPieceSourceHelper.PointToPieceSource(pieceTask, sourceFilter);
     }
 }

@@ -1,4 +1,4 @@
-[TaskHighlight(typeof(HighlightTaskAboutPiece))]
+[TaskHighlight(typeof(HighlightTaskPointToPiece))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskCollectIngredientEntity : TaskCurrencyCollectEntity
 {
