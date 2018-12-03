@@ -10,14 +10,14 @@
 		
 		AddObserver(piece, new PathfindLockObserver {AutoLock = true});
 		AddObserver(piece, new MineLifeComponent());
-		
+
 		piece.RegisterComponent(new TouchReactionComponent()
-			 .RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
-				 .RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.ObstacleBubble})
-				 .RegisterDefinition(new TouchReactionDefinitionSpawnRewards()))
-			 .RegisterComponent(new TouchReactionConditionWorkplace()))
-			 .RegisterComponent(new PiecePathfindBoardCondition(context, piece)
-			 	.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
+			.RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}
+				.RegisterDefinition(new TouchReactionDefinitionOpenBubble {ViewId = ViewType.ObstacleBubble})
+				.RegisterDefinition(new TouchReactionDefinitionSpawnRewards()))
+			.RegisterComponent(new TouchReactionConditionWorkplace()))
+			.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
+				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
         
 		return piece;
 	}

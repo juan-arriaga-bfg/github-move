@@ -11,8 +11,10 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
     
 	public virtual string Message => "";
 	public virtual string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.send", "gameboard.bubble.button.send {0}"), $"<sprite name={Currency.Worker.Name}>");
-    
-	public virtual TimerComponent Timer { get; set; }
+
+	protected TimerComponent timer;
+	public virtual TimerComponent Timer => timer;
+	
 	public RewardsStoreComponent Rewards;
 	
 	public virtual bool IsUseCooldown => false;
@@ -35,12 +37,12 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		
 		Context.RegisterComponent(Rewards);
 		
-		Timer = new TimerComponent();
+		timer = new TimerComponent();
 		
-		Timer.OnStart += OnTimerStart;
-		Timer.OnComplete += OnTimerComplete;
+		timer.OnStart += OnTimerStart;
+		timer.OnComplete += OnTimerComplete;
 		
-		Context.RegisterComponent(Timer);
+		Context.RegisterComponent(timer);
 	}
 	
 	public virtual void OnAddToBoard(BoardPosition position, Piece context = null)
@@ -58,21 +60,26 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	
 	public virtual void OnRemoveFromBoard(BoardPosition position, Piece context = null)
 	{
-		Timer.OnStart -= OnTimerStart;
-		Timer.OnComplete -= OnTimerComplete;
+		timer.OnStart -= OnTimerStart;
+		timer.OnComplete -= OnTimerComplete;
+	}
+
+	protected virtual void InitInSave(BoardPosition position)
+	{
+		Rewards.InitInSave(position);
 	}
     
 	public virtual bool Damage(bool isExtra = false)
 	{
 		if (IsDead
 		    || CurrencyHellper.IsCanPurchase(Energy, true) == false
-		    || isExtra == false && Context.Context.WorkerLogic.Get(Context.CachedPosition, Timer) == false) return false;
+		    || isExtra == false && Context.Context.WorkerLogic.Get(Context.CachedPosition, timer) == false) return false;
         
 		CurrencyHellper.Purchase(Currency.Damage.Name, 1, Energy, success =>
 		{
 			Success();
 			Damage(Worker?.Amount ?? 1);
-			Timer.Start();
+			timer.Start();
             
 			BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.StorageDamage, this);
 		});
@@ -87,7 +94,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
         
 		Locker.Lock(this, false);
 
-		if (Timer.IsExecuteable()) UpdateView(true);
+		if (timer.IsExecuteable()) UpdateView(true);
 	}
 	
 	protected virtual void OnTimerComplete()

@@ -41,14 +41,14 @@ public class MineLifeComponent : WorkplaceLifeComponent
     protected override Dictionary<int, int> GetRewards()
     {
         var pieces = new Dictionary<int, int> {{PieceType.Parse(def.Reward.Currency), def.Reward.Amount}};
-
+        
         if (IsDead == false) return pieces;
         
         foreach (var pair in def.LastRewards)
         {
             pieces.Add(PieceType.Parse(pair.Currency), pair.Amount);
         }
-
+        
         return pieces;
     }
     

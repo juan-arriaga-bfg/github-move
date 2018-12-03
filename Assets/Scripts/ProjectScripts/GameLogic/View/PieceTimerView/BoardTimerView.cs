@@ -39,7 +39,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         Ofset = multiSize == 1 ? Ofset : new Vector3(0, 1.3f);
         
         SetOfset();
-        SetTimer(piece.GetComponent<TimerComponent>(TimerComponent.ComponentGuid));
+        SetTimer(Context.GetComponent<TimerComponent>(TimerComponent.ComponentGuid));
         SetHourglass(false);
         
         Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);

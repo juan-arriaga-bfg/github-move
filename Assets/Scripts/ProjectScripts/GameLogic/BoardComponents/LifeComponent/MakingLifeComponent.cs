@@ -1,4 +1,6 @@
-﻿public class MakingLifeComponent : StorageLifeComponent
+﻿using System.Collections.Generic;
+
+public class MakingLifeComponent : WorkplaceLifeComponent
 {
     private PiecesMakingDef def;
     private TimerComponent cooldown;
@@ -18,73 +20,38 @@
         def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).MakingDef;
         
         HP = -1;
+        timer.Delay = 2;
         
         cooldown = new TimerComponent{Delay = def.Delay};
         RegisterComponent(cooldown);
     }
+
+    protected override Dictionary<int, int> GetRewards()
+    {
+        return GameDataService.Current.PiecesManager.GetSequence(def.Uid).GetNextDict(def.PieceAmount);
+    }
     
-    protected override void InitStorage()
+    protected override void InitInSave(BoardPosition position)
     {
-        storage.Capacity = storage.Amount = def.PieceAmount;
-        storage.Timer.Delay = 2;
-    }
-
-    protected override LifeSaveItem InitInSave(BoardPosition position)
-    {
-        var item = base.InitInSave(position);
-        
-        if (item == null) return null;
-        
-        if(item.IsStart) cooldown.Start(item.StartTime);
         Locker.Unlock(this);
-        
-        return item;
+        base.InitInSave(position);
     }
-
+    
     public override bool Damage(bool isExtra = false)
     {
-        if (cooldown.IsExecuteable())
-        {
-            UIMessageWindowController.CreateTimerCompleteMessage(
-                LocalizationService.Get("indow.timerComplete.message.castle", "indow.timerComplete.message.castle"),
-                cooldown);
-
-            return false;
-        }
+        if (cooldown.IsExecuteable() == false) return base.Damage(isExtra);
         
-        return base.Damage(isExtra);
-    }
+        UIMessageWindowController.CreateTimerCompleteMessage(
+            LocalizationService.Get("window.timerComplete.message.castle", "window.timerComplete.message.castle"),
+            cooldown);
 
-    protected override void Success()
-    {
-    }
-
-    protected override void OnStep()
-    {
-        if(Reward == null || Reward.Count == 0) Reward = GameDataService.Current.PiecesManager.GetSequence(def.Uid).GetNextDict(def.PieceAmount);
-        
-        foreach (var key in Reward.Keys)
-        {
-            storage.SpawnPiece = key;
-            break;
-        }
-        
-        storage.SpawnAction = new EjectionPieceAction
-        {
-            GetFrom = () => Context.CachedPosition,
-            Pieces = Reward,
-            OnComplete = () =>
-            {
-                Reward = null;
-                OnSpawnRewards();
-            }
-        };
+        return false;
     }
     
-    protected override void OnSpawnRewards()
+    protected override void OnSpawnCurrencyRewards()
     {
-        base.OnSpawnRewards();
         AddResourceView.Show(StartPosition(), def.StepRewards);
+        base.OnSpawnCurrencyRewards();
         cooldown.Start();
     }
 }
