@@ -70,8 +70,8 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         foreach (var pos in listOfPiecesToHighlight)
         {
-           var ray = GodRayView.Show(pos);
-           ray.Remove();
+//           var ray = GodRayView.Show(pos);
+//           ray.Remove();
         }
     }
 
