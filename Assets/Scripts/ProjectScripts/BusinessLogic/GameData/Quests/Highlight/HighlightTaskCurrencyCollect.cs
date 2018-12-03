@@ -16,17 +16,17 @@ public class HighlightTaskCurrencyCollect : ITaskHighlight
             return false;
         }
 
-        if (currencyTask.Currency.StartsWith("Soft"))
+        if (currencyTask.Currency == Currency.Coins.Name)
         {
             return HighlightSoft(currencyTask);
         }  
         
-        if (currencyTask.Currency.StartsWith("Hard"))
+        if (currencyTask.Currency == Currency.Crystals.Name)
         {
             return new HighlightTaskNotImplemented().Highlight(currencyTask);
         }
         
-        if (currencyTask.Currency.StartsWith("Mana"))
+        if (currencyTask.Currency == Currency.Mana.Name)
         {
             return HighlightOrdersButton(currencyTask);
         }
