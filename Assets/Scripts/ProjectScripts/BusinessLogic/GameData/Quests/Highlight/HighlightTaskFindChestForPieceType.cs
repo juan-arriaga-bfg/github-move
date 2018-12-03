@@ -1,20 +1,20 @@
 using UnityEngine;
 
 /// <summary>
-/// Highlight random obstacle that can produce Piece specified in the task
+/// Highlight random chest that can produce Piece specified in the task
 /// </summary>
-public class HighlightTaskFindObstacleForPieceType : TaskHighlightUsingArrow
+public class HighlightTaskFindChestForPieceType : TaskHighlightUsingArrow
 {
     protected override bool ShowArrow(TaskEntity task, float delay)
     {
         IHavePieceId pieceTask = task as IHavePieceId;
         if (pieceTask == null)
         {
-            Debug.LogError("[HighlightTaskFindObstacleForPieceType] => task is not IHavePieceId");
+            Debug.LogError("[HighlightTaskFindChestForPieceType] => task is not IHavePieceId");
             return false;
         }
 
-        var sourceFilter = PieceTypeFilter.Obstacle;
+        var sourceFilter = PieceTypeFilter.Chest;
         return HighlightTaskPointToPieceTypeHelper.PointToPieceSource(pieceTask, sourceFilter);
     }
 }
