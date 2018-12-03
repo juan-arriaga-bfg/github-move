@@ -106,7 +106,7 @@ public class UIBoardView : BoardElementView
     {
         base.SyncRendererLayers(boardPosition);
         
-        if(canvas == null || Context == null) return;
+        if(canvas == null) return;
 
         canvas.sortingOrder = GetLayerIndexBy(boardPosition);
     }

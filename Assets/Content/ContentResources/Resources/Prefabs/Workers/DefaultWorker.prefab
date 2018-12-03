@@ -796,6 +796,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99202a8b676b4890872a08c801c8cef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastBoardPosition:
+    X: 0
+    Y: 0
+    Z: 0
   IsFading: 0
   FadeValue: 0
   duration: 4
@@ -33350,7 +33354,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10003
+  m_SortingOrder: 10010
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -33464,7 +33468,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10003
+  m_SortingOrder: 10010
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0

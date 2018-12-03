@@ -44,7 +44,7 @@ public class HintArrowView : BoardElementView
             position = multi.GetTopPosition;
         }
 
-        var arrowView = board.RendererContext.CreateBoardElementAt<HintArrowView>(R.HintArrow, position);
+        var arrowView = board.RendererContext.CreateBoardElementAt<HintArrowView>(R.HintArrow, new BoardPosition(position.X, position.Y, BoardLayer.UIUP1.Layer));
 
         arrowView.CachedTransform.localPosition = arrowView.CachedTransform.localPosition + (Vector3.up * 2) + new Vector3(offsetX, offsetY);
         arrowView.Show(loop);
@@ -60,7 +60,7 @@ public class HintArrowView : BoardElementView
     public static HintArrowView Show(Transform hintTarget, float offsetX = 0f, float offsetY = 0f, bool focus = true, bool loop = false)
     {
         BoardController board = BoardService.Current.FirstBoard;
-        var arrowView = board.RendererContext.CreateBoardElementAt<HintArrowView>(R.HintArrow, new BoardPosition(0,0));
+        var arrowView = board.RendererContext.CreateBoardElementAt<HintArrowView>(R.HintArrow, new BoardPosition(0,0, BoardLayer.UIUP1.Layer));
 
         arrowView.CachedTransform.position = hintTarget.position + new Vector3(offsetX, offsetY);
         arrowView.Show(loop);

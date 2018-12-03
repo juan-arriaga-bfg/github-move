@@ -142,6 +142,11 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         
         var element = thisContext.Context.RendererContext.CreateElementAt((int)id, pos) as UIBoardView;
         element.Init(thisContext);
+        
+        // var thisContextView = thisContext.Context.RendererContext.GetElementAt(thisContext.CachedPosition);
+
+        
+        // element.CachedTransform.SetParent(thisContextView.CachedTransform);
 
         // currentPos.Z += Layer + element.Layer;
         currentPos.Z = BoardLayer.UI.Layer;
