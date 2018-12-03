@@ -116,6 +116,9 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
                 var emission = particleSystem.emission;
                 emission.enabled = false;
             }
+            
+            var touchRegion = fakeBoardElement.GetComponent<TouchRegion>();
+            if (touchRegion != null) touchRegion.enabled = false;
         }
 
         return fakeBoardElement;
@@ -140,6 +143,9 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
             var emission = particleSystem.emission;
             emission.enabled = true;
         }
+        
+        var touchRegion = fakePieceView.GetComponent<TouchRegion>();
+        if (touchRegion != null) touchRegion.enabled = true;
         
         fakePieceView.ToggleSelection(false);  
         context.Context.RendererContext.RemoveElement(fakePieceView);
