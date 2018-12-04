@@ -35,4 +35,16 @@ public class ParticleView : BoardElementView
         particleView.Show();
         return particleView;
     }
+    
+    public override void SyncRendererLayers(BoardPosition boardPosition)
+    {
+        base.SyncRendererLayers(boardPosition);
+        
+        if (CachedTransform.parent == Context.ViewRoot) return;
+
+        if (cachedSortingGroup != null)
+        {
+            Destroy(cachedSortingGroup);
+        }
+    }
 }

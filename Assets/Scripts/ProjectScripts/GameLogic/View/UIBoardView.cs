@@ -12,6 +12,16 @@ public class UIBoardView : BoardElementView
     protected ViewDefinitionComponent controller;
     protected Piece Context;
 
+    public Canvas GetCanvas()
+    {
+        return canvas;
+    }
+
+    public CanvasGroup GetCanvasGroup()
+    {
+        return group;
+    }
+
     public Action OnShow;
     public Action OnHide;
     

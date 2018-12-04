@@ -37,11 +37,42 @@ public class GameBoardDebugComponent : ECSEntity, IECSSystem
         {
             SpawnAllPieces();
         }
+        
+        if (Input.GetKey(KeyCode.R) && Input.GetKeyUp(KeyCode.T))
+        {
+            AddUIViews();
+        }
     }
 
     public object GetDependency()
     {
         return context;
+    }
+
+    public virtual void AddUIViews()
+    {
+        var targetPiece = context.BoardLogic.GetPieceAt(new BoardPosition(19, 11, BoardLayer.Piece.Layer));
+        
+        if (targetPiece == null) return;
+        
+        if (targetPiece.ViewDefinition == null) return;
+
+        var bubbleView = targetPiece.ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
+        
+        bubbleView.SetData(LocalizationService.Get("gameboard.bubble.message.fog", "gameboard.bubble.message.fog"), "Ok", piece => { });
+        bubbleView.SetOfset();
+        bubbleView.Priority = -1;
+        bubbleView.Change(true);
+
+
+        // targetPiece.ViewDefinition.AddView(ViewType.Warning);
+
+        var boardTimerView = targetPiece.ViewDefinition.AddView(ViewType.BoardTimer) as BoardTimerView;
+        boardTimerView.SetOfset();
+        boardTimerView.Priority = -1;
+        boardTimerView.Change(true);
+
+
     }
 
     public virtual void ClearField()
