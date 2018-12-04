@@ -87,7 +87,7 @@ public partial class BoardLayer
     
     public static int GetDefaultLayerIndexBy(BoardPosition boardPosition, int width, int height)
     {
-        var layer = boardPosition.X + width * height - height * boardPosition.Y + width * height * boardPosition.Z - 32767;
+        var layer = -boardPosition.Y + width + height * boardPosition.X + width * height * boardPosition.Z - 32767;
         if (layer > 32767 || layer < -32767)
         {
             Debug.LogError($"GetLayerIndexBy: invalid layer:{layer} for:{boardPosition}");

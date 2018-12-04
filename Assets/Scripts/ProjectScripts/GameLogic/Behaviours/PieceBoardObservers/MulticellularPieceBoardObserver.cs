@@ -16,6 +16,28 @@ public class MulticellularPieceBoardObserver : IECSComponent, IPieceBoardObserve
 			return realPosition.UpAtDistance(size - 1);
 		}
 	}
+    
+    public BoardPosition GetRightPosition
+    {
+        get
+        {
+            int maxX = 0;
+            int maxY = 0;
+            BoardPosition targetPosition = realPosition;
+            foreach (var cell in Mask)
+            {
+                var point = GetPointInMask(realPosition, cell);
+                if (point.X >= maxX && point.Y >= maxY)
+                {
+                    targetPosition = point;
+                    maxX = point.X;
+                    maxY = point.Y;
+                }
+            }
+
+            return targetPosition;
+        }
+    }
 	
 	protected BoardPosition realPosition;
 	public Piece Context;

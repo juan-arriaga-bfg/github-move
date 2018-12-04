@@ -21,6 +21,8 @@ public class PieceBoardElementView : BoardElementView
     private readonly Color baseColor = new Color(0.6f, 0.4f, 0.2f);
     private readonly Color dragErrorColor = new Color(0.7f, 0.1f, 0.1f);
     private readonly Color dragSpriteErrorColor = new Color(1f, 0.44f, 0.44f, 0.9f);
+
+    private MulticellularPieceBoardObserver multicellularPieceBoardObserver;
     
     public bool IsHighlighted { get; protected set; }
 
@@ -56,6 +58,13 @@ public class PieceBoardElementView : BoardElementView
         }
 
         lastBoardPosition = piece.CachedPosition;
+        
+        multicellularPieceBoardObserver = Piece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
+
+        if (multicellularPieceBoardObserver != null)
+        {
+            SyncRendererLayers(piece.CachedPosition);
+        }
     }
 
     protected virtual void OnEnable()
@@ -189,5 +198,18 @@ public class PieceBoardElementView : BoardElementView
             selectionSprite.color = baseColor;
             selectionView.gameObject.SetActive(false);
         }
+    }
+
+    public override void SyncRendererLayers(BoardPosition boardPosition)
+    {
+        base.SyncRendererLayers(boardPosition);
+
+        if (Piece == null) return;
+        
+        if (multicellularPieceBoardObserver == null) return;
+        
+        var targetPosition = multicellularPieceBoardObserver.GetRightPosition;
+        
+        base.SyncRendererLayers(new BoardPosition(targetPosition.X, targetPosition.Y, boardPosition.Z));
     }
 }

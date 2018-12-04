@@ -16,7 +16,9 @@ public class MovePieceFromToAnimation : BoardAnimation
         var pos = context.Context.BoardDef.GetPiecePosition(To.X, To.Y);
         pos = new Vector3(pos.x, pos.y, 0f);
         
-        pieceFromView.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
+        // pieceFromView.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
+        
+        pieceFromView.SyncRendererLayers(To);        
 
         var sequence = DOTween.Sequence().SetId(pieceFromView.AnimationUid);
         sequence.Append(pieceFromView.CachedTransform.DOLocalMove(pos, 0.4f).SetEase(Ease.InOutSine));
