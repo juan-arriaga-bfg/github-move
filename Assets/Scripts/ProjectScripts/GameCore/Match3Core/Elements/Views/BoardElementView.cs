@@ -18,7 +18,9 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
 
     protected BetterList<RendererLayer> cachedRenderers = new BetterList<RendererLayer>();
 
-    protected SortingGroup cachedSortingGroup;
+    [SerializeField] protected SortingGroup cachedSortingGroup;
+
+    protected OverrideSortingGroup[] cachedOverrideSortingGroup;
 
     public bool IsFading;
 
@@ -259,6 +261,8 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
     public virtual void ClearCacheLayers()
     {
         cachedRenderers.Clear();
+
+        cachedOverrideSortingGroup = null;
         
         var renderers = GetComponentsInChildren<Renderer>(true);
         foreach (var rend in renderers)
@@ -276,6 +280,11 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             rendererLayer.SortingOrderOffset = rend.sortingOrder;
 
             cachedRenderers.Add(rendererLayer);
+        }
+        
+        if (cachedOverrideSortingGroup == null)
+        {
+            cachedOverrideSortingGroup = GetComponentsInChildren<OverrideSortingGroup>(true);
         }
     }
 
@@ -297,6 +306,11 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             rendererLayer.SortingOrderOffset = rend.sortingOrder;
 
             cachedRenderers.Add(rendererLayer);
+        }
+
+        if (cachedOverrideSortingGroup == null)
+        {
+            cachedOverrideSortingGroup = GetComponentsInChildren<OverrideSortingGroup>(true);
         }
     }
     
@@ -328,14 +342,17 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         }
 
         cachedSortingGroup.sortingOrder = GetLayerIndexBy(boardPosition);
-        
-        // for (int i = 0; i < cachedRenderers.size; i++)
-        // {
-        //     var rend = cachedRenderers[i];
-        //     rend.CachedRenderer.sortingOrder = boardPosition.X * Context.Context.BoardDef.Width - boardPosition.Y * 1000 + boardPosition.Z * 10000 + rend.SortingOrderOffset - 32000;
-        // }
 
         CachedTransform.localPosition = new Vector3(CachedTransform.localPosition.x, CachedTransform.localPosition.y, -boardPosition.Z * 0.1f);
+
+        if (cachedOverrideSortingGroup != null)
+        {
+            for (int i = 0; i < cachedOverrideSortingGroup.Length; i++)
+            {
+                var cachedOverrideSorting = cachedOverrideSortingGroup[i];
+                cachedOverrideSorting.SyncRendererLayers(this, boardPosition);
+            }
+        }
     }
 
     public virtual void OnFastInstantiate()
