@@ -35,7 +35,7 @@
         {
             var target = Context.Context.BoardLogic.GetPieceAt(position);
 
-            if (!target.Context.Pathfinder.CanPathToCastle(target)) continue;
+            if (!target.Context.PathfindLocker.HasPath(target)) continue;
         
             var life = target.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
 

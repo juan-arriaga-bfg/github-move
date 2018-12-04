@@ -35,6 +35,7 @@ public class ElementsResourcesBuilder
 #region Default
         
         dict.Add(PieceType.Generic.Id, R.GenericPiece);
+        dict.Add(PieceType.LockedEmpty.Id, R.LockedEmpty);
         
 #endregion
         

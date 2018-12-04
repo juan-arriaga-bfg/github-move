@@ -37,7 +37,7 @@ public class RemoveTutorialAnimation : BaseTutorialAnimation
         
         if(board.BoardLogic.IsEmpty(target)) return;
         
-        board.BoardLogic.RemovePieceAt(target);
+        //board.BoardLogic.RemovePieceAt(target);
         
         DOTween.Sequence()
             .AppendInterval(0.5f)

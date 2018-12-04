@@ -1,4 +1,4 @@
-﻿public class CharacterPieceBuilder : GenericPieceBuilder
+public class CharacterPieceBuilder : GenericPieceBuilder
 {
 	public override Piece Build(int pieceType, BoardController context)
 	{
@@ -6,10 +6,7 @@
 		
 		CreateViewComponent(piece);
 		
-		var pathfindLockObserver = new PathfindLockObserver() {AutoLock = true}; 
-		
-		AddObserver(piece, pathfindLockObserver);
-		piece.RegisterComponent(pathfindLockObserver);
+		AddPathfindLockObserver(piece, true);
 
 		piece.RegisterComponent(new TimerComponent());
 		
@@ -35,6 +32,8 @@
 		
 		piece.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
 				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
+
+		AddPathfindLockObserver(piece, true);
 		
 		return piece;
 	}

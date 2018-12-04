@@ -785,6 +785,21 @@
     "IsGenerateAutoName": false
   },
   {
+    "Uid": "ObstacleHPiece",
+    "ResourcePath": "Prefabs\\Pieces\\Obstacles/ObstacleHPiece",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "pieces.grayscale",
+    "ResourcePath": "Materials/pieces.grayscale",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "LockedEmpty",
+    "ResourcePath": "Prefabs\\Pieces\\Lock/LockedEmpty",
+    "IsGenerateAutoName": true
+  },
+  {
     "Uid": "NPC_PussInBoots",
     "ResourcePath": "Prefabs\\UI\\Characters/NPC_PussInBoots",
     "IsGenerateAutoName": false
@@ -1022,6 +1037,11 @@
   {
     "Uid": "UIBoardViewContainer",
     "ResourcePath": "Prefabs/UIBoardViewContainer",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "LockedSubstrate",
+    "ResourcePath": "Prefabs/LockedSubstrate",
     "IsGenerateAutoName": true
   }
 ]

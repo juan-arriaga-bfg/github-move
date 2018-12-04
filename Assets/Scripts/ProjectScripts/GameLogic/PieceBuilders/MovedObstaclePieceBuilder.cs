@@ -33,9 +33,7 @@ public class MovedObstaclePieceBuilder : GenericPieceBuilder
 			    .RegisterDefinition(new TouchReactionDefinitionObstacleComponent {IsAutoStart = false}))
 		    .RegisterComponent(new TouchReactionConditionStorage()));
 		
-        var pathfindLockObserver = new PathfindLockObserver {AutoLock = true}; 
-        AddObserver(piece, pathfindLockObserver);
-        piece.RegisterComponent(pathfindLockObserver);
+        AddPathfindLockObserver(piece, true);
 		
         return piece;
     }
