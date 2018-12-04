@@ -297,7 +297,7 @@ public static partial class PieceType
     public static readonly PieceTypeDef PR_A1 = new PieceTypeDef{Id = 200000, Abbreviations = new List<string>{ "PR_A1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
     public static readonly PieceTypeDef PR_A2 = new PieceTypeDef{Id = 200001, Abbreviations = new List<string>{ "PR_A2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
     public static readonly PieceTypeDef PR_A3 = new PieceTypeDef{Id = 200002, Abbreviations = new List<string>{ "PR_A3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
-    public static readonly PieceTypeDef PR_A4 = new PieceTypeDef{Id = 200003, Abbreviations = new List<string>{ "PR_A4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.WorkPlace | PieceTypeFilter.Removable};
+    public static readonly PieceTypeDef PR_A4 = new PieceTypeDef{Id = 200003, Abbreviations = new List<string>{ "PR_A4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.WorkPlace | PieceTypeFilter.Removable | PieceTypeFilter.ProductionField};
     public static readonly PieceTypeDef PR_A5 = new PieceTypeDef{Id = 200004, Abbreviations = new List<string>{ "PR_A5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     
     #endregion
@@ -307,7 +307,7 @@ public static partial class PieceType
     public static readonly PieceTypeDef PR_B1 = new PieceTypeDef{Id = 200100, Abbreviations = new List<string>{ "PR_B1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
     public static readonly PieceTypeDef PR_B2 = new PieceTypeDef{Id = 200101, Abbreviations = new List<string>{ "PR_B2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
     public static readonly PieceTypeDef PR_B3 = new PieceTypeDef{Id = 200102, Abbreviations = new List<string>{ "PR_B3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
-    public static readonly PieceTypeDef PR_B4 = new PieceTypeDef{Id = 200103, Abbreviations = new List<string>{ "PR_B4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.WorkPlace | PieceTypeFilter.Removable};
+    public static readonly PieceTypeDef PR_B4 = new PieceTypeDef{Id = 200103, Abbreviations = new List<string>{ "PR_B4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.WorkPlace | PieceTypeFilter.Removable | PieceTypeFilter.ProductionField};
     public static readonly PieceTypeDef PR_B5 = new PieceTypeDef{Id = 200104, Abbreviations = new List<string>{ "PR_B5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     
     #endregion
@@ -317,7 +317,7 @@ public static partial class PieceType
     public static readonly PieceTypeDef PR_C1 = new PieceTypeDef{Id = 200200, Abbreviations = new List<string>{ "PR_C1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
     public static readonly PieceTypeDef PR_C2 = new PieceTypeDef{Id = 200201, Abbreviations = new List<string>{ "PR_C2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
     public static readonly PieceTypeDef PR_C3 = new PieceTypeDef{Id = 200202, Abbreviations = new List<string>{ "PR_C3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
-    public static readonly PieceTypeDef PR_C4 = new PieceTypeDef{Id = 200203, Abbreviations = new List<string>{ "PR_C4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.WorkPlace | PieceTypeFilter.Removable};
+    public static readonly PieceTypeDef PR_C4 = new PieceTypeDef{Id = 200203, Abbreviations = new List<string>{ "PR_C4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.WorkPlace | PieceTypeFilter.Removable | PieceTypeFilter.ProductionField};
     public static readonly PieceTypeDef PR_C5 = new PieceTypeDef{Id = 200204, Abbreviations = new List<string>{ "PR_C5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     
     #endregion
@@ -327,7 +327,7 @@ public static partial class PieceType
     public static readonly PieceTypeDef PR_D1 = new PieceTypeDef{Id = 200300, Abbreviations = new List<string>{ "PR_D1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
     public static readonly PieceTypeDef PR_D2 = new PieceTypeDef{Id = 200301, Abbreviations = new List<string>{ "PR_D2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
     public static readonly PieceTypeDef PR_D3 = new PieceTypeDef{Id = 200302, Abbreviations = new List<string>{ "PR_D3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
-    public static readonly PieceTypeDef PR_D4 = new PieceTypeDef{Id = 200303, Abbreviations = new List<string>{ "PR_D4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.WorkPlace | PieceTypeFilter.Removable};
+    public static readonly PieceTypeDef PR_D4 = new PieceTypeDef{Id = 200303, Abbreviations = new List<string>{ "PR_D4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.WorkPlace | PieceTypeFilter.Removable | PieceTypeFilter.ProductionField};
     public static readonly PieceTypeDef PR_D5 = new PieceTypeDef{Id = 200304, Abbreviations = new List<string>{ "PR_D5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     
     #endregion
@@ -337,7 +337,7 @@ public static partial class PieceType
     public static readonly PieceTypeDef PR_E1 = new PieceTypeDef{Id = 200400, Abbreviations = new List<string>{ "PR_E1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
     public static readonly PieceTypeDef PR_E2 = new PieceTypeDef{Id = 200401, Abbreviations = new List<string>{ "PR_E2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
     public static readonly PieceTypeDef PR_E3 = new PieceTypeDef{Id = 200402, Abbreviations = new List<string>{ "PR_E3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
-    public static readonly PieceTypeDef PR_E4 = new PieceTypeDef{Id = 200403, Abbreviations = new List<string>{ "PR_E4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.WorkPlace | PieceTypeFilter.Removable};
+    public static readonly PieceTypeDef PR_E4 = new PieceTypeDef{Id = 200403, Abbreviations = new List<string>{ "PR_E4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.WorkPlace | PieceTypeFilter.Removable | PieceTypeFilter.ProductionField};
     public static readonly PieceTypeDef PR_E5 = new PieceTypeDef{Id = 200404, Abbreviations = new List<string>{ "PR_E5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     
     #endregion

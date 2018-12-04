@@ -65,7 +65,7 @@ public class HighlightTaskCurrencyCollect : ITaskHighlight
 
         foreach (var id in chain)
         {
-            if (HighlightTaskPointToPiece.FindAndPointToPiece(id))
+            if (HighlightTaskPointToPieceHelper.FindAndPointToRandomPiece(id))
             {
                 return true;
             }
