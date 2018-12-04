@@ -95,7 +95,6 @@ public class AreaAccessControllerComponent:ECSEntity
 
     public void FullRecalculate()
     {
-        Debug.LogError("FullRecalculate");
         if (basePoints == null || basePoints.Count == 0)
         {
             basePoints = InitAvailiable(board) ?? DetectBasePoints(board);

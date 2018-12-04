@@ -193,4 +193,5 @@ public class R
      public const string SK3_PRPiece = "SK3_PRPiece";
      public const string UIBoardViewContainer = "UIBoardViewContainer";
      public const string LockedSubstrate = "LockedSubstrate";
+     public const string LockParticles = "LockParticles";
 }

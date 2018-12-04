@@ -465,7 +465,6 @@ public class PathfindLockerComponent : ECSEntity
     
     private void OnFogRemove(Piece fog)
     {
-        Debug.LogError("FogRemove recalc");
         var nearFogs = GetNearFogs(fog);
         
         foreach (var nearFog in nearFogs)

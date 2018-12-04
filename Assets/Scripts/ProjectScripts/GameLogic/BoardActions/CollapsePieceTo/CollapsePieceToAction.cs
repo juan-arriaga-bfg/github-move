@@ -45,7 +45,6 @@ public class CollapsePieceToAction : IBoardAction
 	public bool PerformAction(BoardController gameBoardController)
 	{
 		if (Positions == null || Positions.Count == 0) return false;
-		Debug.LogError($"Collapse: {To}");
 		
 		var targetPiece = gameBoardController.BoardLogic.GetPieceAt(To);
 			
