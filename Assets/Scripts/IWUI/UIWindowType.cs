@@ -38,10 +38,13 @@ public class UIWindowType
     
     public const string DailyQuestWindow = "DailyQuestWindow";
 
+    public const string ResourcePanelWindow = "ResourcePanelWindow";
+
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {
         MainWindow,
-        ErrorWindow
+        ErrorWindow,
+        ResourcePanelWindow
     };
     
     public static bool IsIgnore(string name)

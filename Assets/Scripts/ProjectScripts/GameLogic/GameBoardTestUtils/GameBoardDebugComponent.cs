@@ -42,6 +42,15 @@ public class GameBoardDebugComponent : ECSEntity, IECSSystem
         {
             AddUIViews();
         }
+
+        if (Input.GetKey(KeyCode.A) && Input.GetKeyUp(KeyCode.W))
+        {
+            ToggleResourcePanel(false);
+        }
+        if (Input.GetKey(KeyCode.A) && Input.GetKeyUp(KeyCode.D))
+        {
+            ToggleResourcePanel(true);
+        }
     }
 
     public object GetDependency()
@@ -49,6 +58,12 @@ public class GameBoardDebugComponent : ECSEntity, IECSSystem
         return context;
     }
 
+    public virtual void ToggleResourcePanel(bool state)
+    {
+        var resourcePanel = UIService.Get.GetShowedView<UIResourcePanelWindowView>(UIWindowType.ResourcePanelWindow);
+        resourcePanel.ToggleFadePanel(Currency.Coins.Name, state);
+    }
+    
     public virtual void AddUIViews()
     {
         var targetPiece = context.BoardLogic.GetPieceAt(new BoardPosition(22, 11, BoardLayer.Piece.Layer));
