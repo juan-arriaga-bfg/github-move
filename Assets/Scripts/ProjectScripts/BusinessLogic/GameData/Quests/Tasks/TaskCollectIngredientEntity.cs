@@ -1,4 +1,7 @@
 [TaskHighlight(typeof(HighlightTaskPointToPiece))]
+[TaskHighlight(typeof(HighlightTaskFindProductionFieldForPieceType))]
+[TaskHighlight(typeof(HighlightTaskPointToPredecessor))]
+[TaskHighlight(typeof(HighlightTaskPointToRandomChest))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskCollectIngredientEntity : TaskCurrencyCollectEntity
 {
