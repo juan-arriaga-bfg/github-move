@@ -11,7 +11,7 @@ public class HighlightTaskFirstMineOfAnyType : TaskHighlightUsingArrow
         var mineIds = PieceType.GetIdsByFilter(PieceTypeFilter.Mine);
         foreach (var mineId in mineIds)
         {
-            if (TaskHighlightMineHelper.Highlight(mineId))
+            if (HighlightTaskMineHelper.Highlight(mineId))
             {
                 return true;
             }

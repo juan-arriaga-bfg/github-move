@@ -11,6 +11,6 @@ public class HighlightTaskUseMine : TaskHighlightUsingArrow
             return false;
         }
 
-        return TaskHighlightMineHelper.Highlight(useMineTask.PieceId);
+        return HighlightTaskMineHelper.Highlight(useMineTask.PieceId);
     }
 }
