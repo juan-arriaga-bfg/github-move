@@ -57,6 +57,8 @@ public class TutorialMergeFinger : BoardElementView
         sequence.Append(finger.DOFade(0f, fadeDuration));
         sequence.AppendCallback(Reset);
         sequence.AppendInterval(duration);
+        
+        SyncRendererLayers(new BoardPosition(to.X, to.Y, BoardLayer.UIUP1.Layer));
     }
 
     public void Show()

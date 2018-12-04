@@ -24,6 +24,8 @@ public class FireflyView : BoardElementView
         Move();
         
         Plume.gameObject.SetActive(false);
+        
+        SyncRendererLayers(new BoardPosition(context.Context.BoardDef.Width, 0, BoardLayer.UI.Layer));
     }
     
     public override void OnFastInstantiate()

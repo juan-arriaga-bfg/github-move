@@ -70,4 +70,13 @@ public class HintArrowView : BoardElementView
         board.Manipulator.CameraManipulator.MoveTo(hintTarget.position);
         return arrowView;
     }
+
+    public override void SyncRendererLayers(BoardPosition boardPosition)
+    {
+        var targetPosition = new BoardPosition(Context.Context.BoardDef.Width, 0, BoardLayer.UI.Layer);
+        
+        base.SyncRendererLayers(targetPosition);
+        
+        
+    }
 }

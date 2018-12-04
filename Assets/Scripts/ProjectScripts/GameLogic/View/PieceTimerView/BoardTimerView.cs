@@ -99,6 +99,8 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
 
     protected override void UpdateView()
     {
+        if (timer == null) return;
+        
         if(progressBar != null) progressBar.SetProgress(timer.GetProgress());
         label.Text = timer.CompleteTime.GetTimeLeftText();
         

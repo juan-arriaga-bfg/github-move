@@ -51,7 +51,7 @@ public class GameBoardDebugComponent : ECSEntity, IECSSystem
 
     public virtual void AddUIViews()
     {
-        var targetPiece = context.BoardLogic.GetPieceAt(new BoardPosition(19, 11, BoardLayer.Piece.Layer));
+        var targetPiece = context.BoardLogic.GetPieceAt(new BoardPosition(22, 11, BoardLayer.Piece.Layer));
         
         if (targetPiece == null) return;
         
@@ -71,7 +71,8 @@ public class GameBoardDebugComponent : ECSEntity, IECSSystem
         boardTimerView.SetOfset();
         boardTimerView.Priority = -1;
         boardTimerView.Change(true);
-
+        
+        var arrow = HintArrowView.Show(new BoardPosition(22, 11, BoardLayer.Piece.Layer), 0, 0, true, true);
 
     }
 
