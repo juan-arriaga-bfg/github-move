@@ -5,6 +5,7 @@ using UnityEngine;
 public class HighlightTaskCollectFirefly : ITaskHighlight
 {
     public const float DELAY_BEFORE_SHOW_ARROW = 0.5f;
+    public const float ARROW_LIFETIME = 1.5f;
     
     public bool Highlight(TaskEntity task)
     {
@@ -52,16 +53,9 @@ public class HighlightTaskCollectFirefly : ITaskHighlight
         
         var board = BoardService.Current.FirstBoard;
         board.Manipulator.CameraManipulator.MoveTo(selectedView.transform.position);
-        
-        DOTween.Sequence()
-               .AppendInterval(DELAY_BEFORE_SHOW_ARROW)
-               .AppendCallback(() =>
-                {
-                    if (selectedView != null)
-                    {
-                        selectedView.AddArrow();
-                    }
-                });
+
+
+        selectedView.AddArrow(DELAY_BEFORE_SHOW_ARROW, false);
         
         return true;
     }
