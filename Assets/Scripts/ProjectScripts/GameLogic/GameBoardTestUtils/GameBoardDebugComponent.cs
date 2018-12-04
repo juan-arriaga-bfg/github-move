@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// GameBoardDebugComponent used for unit tests and debug operations with field
@@ -43,25 +44,27 @@ public class GameBoardDebugComponent : ECSEntity, IECSSystem
             AddUIViews();
         }
 
-        if (Input.GetKey(KeyCode.A) && Input.GetKeyUp(KeyCode.W))
-        {
-            ToggleResourcePanel(false);
-        }
-        if (Input.GetKey(KeyCode.A) && Input.GetKeyUp(KeyCode.D))
-        {
-            ToggleResourcePanel(true);
-        }
+        // if (Input.GetKeyUp(KeyCode.Q))
+        // {
+        //     ResourcePanelUtils.ToggleFadePanels(false);
+        // }
+        // if (Input.GetKeyUp(KeyCode.W))
+        // {
+        //     ResourcePanelUtils.ToggleFadePanels(true);
+        // }
+        // if (Input.GetKeyUp(KeyCode.E))
+        // {
+        //     ResourcePanelUtils.TogglePanels(false, true, new List<string>{Currency.Energy.Name, Currency.Mana.Name});
+        // }
+        // if (Input.GetKeyUp(KeyCode.R))
+        // {
+        //     ResourcePanelUtils.TogglePanels(true, true);
+        // }
     }
 
     public object GetDependency()
     {
         return context;
-    }
-
-    public virtual void ToggleResourcePanel(bool state)
-    {
-        var resourcePanel = UIService.Get.GetShowedView<UIResourcePanelWindowView>(UIWindowType.ResourcePanelWindow);
-        resourcePanel.ToggleFadePanel(Currency.Coins.Name, state);
     }
     
     public virtual void AddUIViews()

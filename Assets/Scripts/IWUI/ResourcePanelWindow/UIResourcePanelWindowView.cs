@@ -1,6 +1,42 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+
+public class ResourcePanelUtils
+{
+    public static void ToggleFadePanel(string currency, bool state)
+    {
+        var resourcePanelWindow = UIService.Get.GetShowedView<UIResourcePanelWindowView>(UIWindowType.ResourcePanelWindow);
+        if (resourcePanelWindow == null) return;
+        
+        resourcePanelWindow.ToggleFadePanel(currency, state);
+    }
+
+    public static void TogglePanel(string currency, bool state, bool isAnimate = false)
+    {
+        var resourcePanelWindow = UIService.Get.GetShowedView<UIResourcePanelWindowView>(UIWindowType.ResourcePanelWindow);
+        if (resourcePanelWindow == null) return;
+        
+        resourcePanelWindow.TogglePanel(currency, state, isAnimate);
+    }
+
+    public static void TogglePanels(bool state, bool isAnimate = false, List<string> ignorePanels = null)
+    {
+        var resourcePanelWindow = UIService.Get.GetShowedView<UIResourcePanelWindowView>(UIWindowType.ResourcePanelWindow);
+        if (resourcePanelWindow == null) return;
+        
+        resourcePanelWindow.TogglePanels(state, isAnimate, ignorePanels);
+    }
+    
+    public static void ToggleFadePanels(bool state, List<string> ignorePanels = null)
+    {
+        var resourcePanelWindow = UIService.Get.GetShowedView<UIResourcePanelWindowView>(UIWindowType.ResourcePanelWindow);
+        if (resourcePanelWindow == null) return;
+        
+        resourcePanelWindow.ToggleFadePanels(state, ignorePanels);
+    }
+}
 
 public class UIResourcePanelWindowView : UIBaseWindowView 
 {
@@ -62,9 +98,65 @@ public class UIResourcePanelWindowView : UIBaseWindowView
         }
     }
 
-    public virtual void TogglePanel(string currency, bool isAnimate)
+    public virtual void TogglePanel(string currency, bool state, bool isAnimate = false)
     {
-        
+        Transform targetPanel;
+        CanvasGroup targetContainerUp;
+        CanvasGroup targetContainerDown;
+        if (cachedResourcePanelContainerDown.TryGetValue(currency, out targetContainerDown) 
+            && cachedResourcePanelContainerUp.TryGetValue(currency, out targetContainerUp)
+            && cachedResourcePanels.TryGetValue(currency, out targetPanel))
+        {
+            float alpha = state ? 1f : 0f;
+            if (isAnimate)
+            {
+                DOTween.Kill(targetContainerUp);
+                targetContainerUp.DOFade(alpha, 0.35f).SetId(targetContainerUp);
+
+                DOTween.Kill(targetContainerDown);
+                targetContainerDown.DOFade(alpha, 0.35f).SetId(targetContainerDown);
+
+                DOTween.Kill(targetPanel);
+                if (state == false)
+                {
+                    DOTween.Sequence().SetId(targetPanel).AppendInterval(0.35f).OnComplete(() => { targetPanel.gameObject.SetActive(state); });
+                }
+                else
+                {
+                    targetPanel.gameObject.SetActive(state);
+                }
+            }
+            else
+            {
+                DOTween.Kill(targetContainerUp);
+                DOTween.Kill(targetContainerDown);
+                DOTween.Kill(targetPanel);
+                
+                targetContainerUp.alpha = alpha;
+                targetContainerDown.alpha = alpha;
+                targetPanel.gameObject.SetActive(state);
+            }
+        }
+    }
+
+    public virtual void TogglePanels(bool state, bool isAnimate = false, List<string> ignorePanels = null)
+    {
+        foreach (var cachedResourcePanel in cachedResourcePanels)
+        {
+            if (ignorePanels != null && ignorePanels.Contains(cachedResourcePanel.Key)) continue;
+
+            TogglePanel(cachedResourcePanel.Key, state, isAnimate);
+        }
+    }
+    
+    public virtual void ToggleFadePanels(bool state, List<string> ignorePanels = null)
+    {
+        foreach (var cachedResourcePanel in cachedResourcePanels)
+        {
+            if (ignorePanels != null && ignorePanels.Contains(cachedResourcePanel.Key)) continue;
+
+            ToggleFadePanel(cachedResourcePanel.Key, state);
+        }
     }
 
     public override void OnViewShow()
