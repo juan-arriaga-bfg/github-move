@@ -169,6 +169,15 @@ public class R
      public const string PiecesFadeMaterial = "PiecesFadeMaterial";
      public const string PiecesHighlightMaterial = "PiecesHighlightMaterial";
      public const string FogExplosionParticleSystem = "FogExplosionParticleSystem";
+     public const string SpawnScalePieceAnimation = "SpawnScalePieceAnimation";
+     public const string DestroyScalePieceAnimation = "DestroyScalePieceAnimation";
+     public const string MultiSpawnScalePieceAnimation = "MultiSpawnScalePieceAnimation";
+     public const string DestroyChestAnimation = "DestroyChestAnimation";
+     public const string MultiSpawnChestAnimation = "MultiSpawnChestAnimation";
+     public const string SpawnChestAnimation = "SpawnChestAnimation";
+     public const string DestroyScaleMineAnimation = "DestroyScaleMineAnimation";
+     public const string DestroyProductionAnimation = "DestroyProductionAnimation";
+     public const string DestroyObstacleAnimation = "DestroyObstacleAnimation";
      public const string FireflyExplosion = "FireflyExplosion";
      public const string ProductionEndParticle = "ProductionEndParticle";
      public const string ProductionProcessParticle = "ProductionProcessParticle";

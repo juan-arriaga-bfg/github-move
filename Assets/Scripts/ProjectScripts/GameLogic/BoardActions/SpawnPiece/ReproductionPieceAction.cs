@@ -13,6 +13,8 @@ public class ReproductionPieceAction : IBoardAction
 	public List<BoardPosition> Positions { get; set; }
 	public Action OnComplete;
 
+	public Func<int, string> AnimationResourceSearch;
+	
 	public bool PerformAction(BoardController gameBoardController)
 	{
 		var pieces = new Dictionary<BoardPosition, Piece>();
@@ -36,7 +38,8 @@ public class ReproductionPieceAction : IBoardAction
 		{
 			BoardElement = BoardElement,
 			From = From,
-			Pieces = pieces
+			Pieces = pieces,
+			AnimationResourceSearch = AnimationResourceSearch
 		};
 
 		animation.OnCompleteEvent += (_) =>

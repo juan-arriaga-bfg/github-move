@@ -6,7 +6,7 @@ public class CollapsePieceToAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public virtual int Guid => ComponentGuid;
-
+	
 	public BoardPosition To { get; set; }
 
 	public List<BoardPosition> Positions { get; set; }
@@ -14,6 +14,8 @@ public class CollapsePieceToAction : IBoardAction
 	public IBoardAction OnCompleteAction;
 
 	public Action OnComplete;
+
+	public Func<int, string> AnimationResourceSearch;
 	
 	public bool PerformAction(BoardController gameBoardController)
 	{
