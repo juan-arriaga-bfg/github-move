@@ -1,14 +1,50 @@
 ﻿using UnityEngine.TestTools;
 using NUnit.Framework;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace UT
 {
-    public class UTQuestIds
+    public class UTQuest
     {
+        [Test]
+        public void UTQuestInstantiatePasses()
+        {
+            LogAssert.ignoreFailingMessages = false;
+
+            QuestsDataManager questsDataManager = new QuestsDataManager();
+            questsDataManager.Reload();
+
+            InstantiateAll<QuestStarterEntity>(questsDataManager);
+            InstantiateAll<QuestEntity>(questsDataManager);
+            InstantiateAll<TaskEntity>(questsDataManager);
+            
+            Assert.Pass();
+        }
+
+        private void InstantiateAll<T>(QuestsDataManager questsDataManager) where T : IECSComponent
+        {
+            Dictionary<string, JToken> configs = questsDataManager.Cache[typeof(T)];
+
+            var ids = new List<string>();
+            
+            foreach (var config in configs)
+            {
+                T obj = questsDataManager.InstantiateFromJson<T>(config.Value);
+                
+                if (ids.Contains(config.Key))
+                {
+                    Assert.Fail($"Duplicate id '{config.Key}' for type: '{typeof(T)}' ");
+                }
+                else
+                {
+                    ids.Add(config.Key);
+                }
+            }
+        }
+        
         [Test]
         public void UTQuestIdsPasses()
         {
