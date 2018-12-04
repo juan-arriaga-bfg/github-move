@@ -35,6 +35,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.NextLevelWindow,
             UIWindowType.ConfirmRemoverMessageWindow,
             UIWindowType.DailyQuestWindow,
+            UIWindowType.SuperMatchHintWindow,
         });
         
         // on cache complete

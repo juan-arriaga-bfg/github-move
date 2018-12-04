@@ -1,5 +1,3 @@
-using System;
-
 public class HighlightTaskSuperMatch : ITaskHighlight
 {
     public bool Highlight(TaskEntity task)
@@ -10,15 +8,8 @@ public class HighlightTaskSuperMatch : ITaskHighlight
             return false;
         }
 
-        int count = superMatchTask.CountToMatch;
-
-        string title = string.Format(LocalizationService.Get("highlight.task.supermatch", "highlight.task.supermatch"), count);
-        string image = $"codexQuestion";
-        
-        UIMessageWindowController.CreateImageMessage(title, image, () =>
-        {
-    
-        });
+        var model = UIService.Get.GetCachedModel<UICodexWindowModel>(UIWindowType.SuperMatchHintWindow);
+        UIService.Get.ShowWindow(UIWindowType.SuperMatchHintWindow);
 
         return true;
     }
