@@ -28,6 +28,7 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.TutorialMergeFinger, R.TutorialMergeFinger);
         dict.Add((int)ViewType.PieceRemover, R.PieceRemover);
         dict.Add((int)ViewType.GodRay, R.GodRayView);
+        dict.Add((int)ViewType.UIContainer, R.UIBoardViewContainer);
         
 #endregion
         

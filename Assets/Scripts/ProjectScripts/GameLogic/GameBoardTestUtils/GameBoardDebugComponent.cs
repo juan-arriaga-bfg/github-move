@@ -37,11 +37,27 @@ public class GameBoardDebugComponent : ECSEntity, IECSSystem
         {
             SpawnAllPieces();
         }
+        
+        if (Input.GetKey(KeyCode.R) && Input.GetKeyUp(KeyCode.T))
+        {
+            AddUIViews();
+        }
     }
 
     public object GetDependency()
     {
         return context;
+    }
+
+    public virtual void AddUIViews()
+    {
+        var targetPiece = context.BoardLogic.GetPieceAt(new BoardPosition(19, 11, BoardLayer.Piece.Layer));
+        
+        if (targetPiece == null) return;
+        
+        if (targetPiece.ViewDefinition == null) return;
+
+        targetPiece.ViewDefinition.AddView(ViewType.Lock);
     }
 
     public virtual void ClearField()

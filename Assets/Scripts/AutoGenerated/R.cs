@@ -179,4 +179,5 @@ public class R
      public const string SK1_PRPiece = "SK1_PRPiece";
      public const string SK2_PRPiece = "SK2_PRPiece";
      public const string SK3_PRPiece = "SK3_PRPiece";
+     public const string UIBoardViewContainer = "UIBoardViewContainer";
 }
