@@ -40,6 +40,7 @@ public class TouchReactionDefinitionSpawnShop : TouchReactionDefinitionComponent
 			From = position,
 			Piece = Reward,
 			Positions = positions,
+			AnimationResourceSearch = pieceType => AnimationDataManager.FindAnimation(pieceType, def => def.OnPurchaseSpawn),
 			OnComplete = () =>
 			{
 				var view = piece.Context.RendererContext.GetElementAt(position) as CharacterPieceView;

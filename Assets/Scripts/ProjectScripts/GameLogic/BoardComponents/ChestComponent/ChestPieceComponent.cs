@@ -67,7 +67,8 @@ public class ChestPieceComponent : IECSComponent, IPieceBoardObserver
                     contextPiece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
                     {
                         To = contextPiece.CachedPosition,
-                        Positions = new List<BoardPosition> {contextPiece.CachedPosition}
+                        Positions = new List<BoardPosition> {contextPiece.CachedPosition},
+                        AnimationResourceSearch = piece => AnimationDataManager.FindAnimation(piece, def => def.OnDestroyFromBoard)
                     });
 				    
                     BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.OpenChest, contextPiece);

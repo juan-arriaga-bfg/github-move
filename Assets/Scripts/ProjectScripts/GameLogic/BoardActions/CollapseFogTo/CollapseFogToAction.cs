@@ -76,7 +76,8 @@ public class CollapseFogToAction : IBoardAction
                     gameBoardController.ActionExecutor.PerformAction(new CreatePieceAtAction
                     {
                         At = pos,
-                        PieceTypeId = pieceId
+                        PieceTypeId = pieceId,
+                        SpawnResource = AnimationDataManager.FindAnimation(pieceId, def => def.OnFogSpawn)
                     });
                 }
             }
@@ -95,7 +96,8 @@ public class CollapseFogToAction : IBoardAction
             gameBoardController.ActionExecutor.PerformAction(new CreatePieceAtAction
             {
                 At = point,
-                PieceTypeId = piece
+                PieceTypeId = piece,
+                SpawnResource = AnimationDataManager.FindAnimation(piece, def => def.OnFogSpawn)
             });
         }
 

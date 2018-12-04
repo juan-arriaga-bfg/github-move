@@ -142,6 +142,8 @@ public class DevTools : UIContainerElementViewController
     {
         Debug.Log("OnDebug1Click");
 
+        CurrencyHellper.Purchase(Currency.Experience.Name, 2000);
+        return;
         // GameDataService.Current.QuestsManager.StartNewDailyQuest();
         //var quest = GameDataService.Current.QuestsManager.StartQuestById("Daily", null);
 

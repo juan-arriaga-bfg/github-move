@@ -83,7 +83,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     {
         return new BoardPosition(mask.X, mask.Y, position.Z);
     }
-
+    
     public void Clear()
     {
         

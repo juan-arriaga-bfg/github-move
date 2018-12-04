@@ -15,6 +15,8 @@ public class EjectionPieceAction : IBoardAction
     
     public Action<List<BoardPosition>> OnSuccess;
 	
+	public Func<int, string> AnimationResourceSearch;
+
 	public bool PerformAction(BoardController gameBoardController)
 	{
 		if (From == null) From = GetFrom?.Invoke();
@@ -46,11 +48,13 @@ public class EjectionPieceAction : IBoardAction
 		}
 		
 		gameBoardController.BoardLogic.LockCell(From.Value, this);
-		
+		if (AnimationResourceSearch == null)
+			AnimationResourceSearch = piece => AnimationDataManager.FindAnimation(piece, def => def.OnMultiSpawn);
 		var animation = new ReproductionPieceAnimation
 		{
 			From = From.Value,
-			Pieces = pieces
+			Pieces = pieces,
+			AnimationResourceSearch = AnimationResourceSearch
 		};
 
 		animation.OnCompleteEvent += (_) =>
