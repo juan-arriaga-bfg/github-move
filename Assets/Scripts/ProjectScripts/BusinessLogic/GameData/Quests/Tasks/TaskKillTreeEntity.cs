@@ -1,4 +1,4 @@
-[TaskHighlight(typeof(HighlightTaskUsingObstaclePieceFilter))]
+[TaskHighlight(typeof(HighlightTaskTree))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskKillTreeEntity : TaskEventCounterEntity
 {
@@ -21,7 +21,7 @@ public class TaskKillTreeEntity : TaskEventCounterEntity
 
         ObstacleLifeComponent lifeCmp = context as ObstacleLifeComponent;
 
-        Piece piece = lifeCmp?.GetContext();
+        Piece piece = lifeCmp?.Context;
         if (piece == null)
         {
             return;

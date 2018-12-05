@@ -351,7 +351,7 @@ public class PieceBoardElementView : BoardElementView
         
         if (multicellularPieceBoardObserver == null) return;
         
-        var targetPosition = multicellularPieceBoardObserver.GetRightPosition;
+        var targetPosition = multicellularPieceBoardObserver.GetUpPosition;
         
         base.SyncRendererLayers(new BoardPosition(targetPosition.X, targetPosition.Y, boardPosition.Z));
     }

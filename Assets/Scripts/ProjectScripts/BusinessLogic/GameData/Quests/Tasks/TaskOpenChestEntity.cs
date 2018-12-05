@@ -1,8 +1,9 @@
-using Newtonsoft.Json;
 using UnityEngine;
 
-[TaskHighlight(typeof(HighlightTaskNotImplemented))]
-[TaskHighlight(typeof(HighlightTaskNextFog))]
+[TaskHighlight(typeof(HighlightTaskOpenChest))]
+[TaskHighlight(typeof(HighlightTaskFindObstacleForPieceType))]
+[TaskHighlight(typeof(HighlightTaskFirstMineOfAnyType))]
+[TaskHighlight(typeof(HighlightTaskPointToShopButton))]
 public class TaskOpenChestEntity : TaskCounterAboutPiece, IBoardEventListener, IHavePieceId
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();

@@ -1,4 +1,9 @@
-[TaskHighlight(typeof(HighlightTaskAboutPiece))]
+[TaskHighlight(typeof(HighlightTaskPointToPiece))]
+[TaskHighlight(typeof(HighlightTaskFindProductionFieldForPieceType))]
+[TaskHighlight(typeof(HighlightTaskPointToPredecessor))]
+[TaskHighlight(typeof(HighlightTaskPointToRandomChest))]
+[TaskHighlight(typeof(HighlightTaskFindObstacleForPieceType))]
+[TaskHighlight(typeof(HighlightTaskFirstMineOfAnyType))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskCollectIngredientEntity : TaskCurrencyCollectEntity
 {
@@ -25,7 +30,7 @@ public class TaskCollectIngredientEntity : TaskCurrencyCollectEntity
         }
         
         
-        if (shopItem.ItemUid == Currency || string.IsNullOrEmpty(Currency))
+        if (shopItem.ItemUid == CurrencyName || string.IsNullOrEmpty(CurrencyName))
         {
             CurrentValue += shopItem.Amount;
         }

@@ -12,7 +12,6 @@ public class CharacterPieceBuilder : GenericPieceBuilder
 		
 		var customer = new CustomerComponent();
 		
-		piece.RegisterComponent(customer);
 		AddObserver(piece, customer);
 		
 		piece.RegisterComponent(new DraggablePieceComponent());
@@ -32,8 +31,6 @@ public class CharacterPieceBuilder : GenericPieceBuilder
 		
 		piece.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
 				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
-
-		AddPathfindLockObserver(piece, true);
 		
 		return piece;
 	}

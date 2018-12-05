@@ -100,7 +100,7 @@ public class PathfindLockerComponent : ECSEntity
     
     public virtual bool HasPath(Piece piece)
     {
-        return !blockPathPieces.ContainsKey(piece) && freePieces.Contains(piece); 
+        return !blockPathPieces.ContainsKey(piece); 
     }
     
     private List<LockerComponent> GetLockers(Piece piece)

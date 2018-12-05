@@ -11,7 +11,7 @@ public class TaskCurrencyCollectEntity : TaskCurrencyEntity
             return;
         }
 
-        if (shopItem.ItemUid == Currency)
+        if (shopItem.ItemUid == CurrencyName)
         {
             CurrentValue += shopItem.Amount;
         }

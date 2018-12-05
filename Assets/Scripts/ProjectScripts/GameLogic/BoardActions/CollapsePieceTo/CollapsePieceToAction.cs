@@ -45,24 +45,19 @@ public class CollapsePieceToAction : IBoardAction
 	
 	public bool PerformAction(BoardController gameBoardController)
 	{
+		
 		if (Positions == null || Positions.Count == 0) return false;
 		
 		var targetPiece = gameBoardController.BoardLogic.GetPieceAt(To);
 			
 		var positonsForLock = GetPositionsIncludeMask(gameBoardController);
-		gameBoardController.BoardLogic.LockCells(positonsForLock, this);
+		
 
 		var obstaclesPieces = new List<Piece>();
 		
-		foreach (var pos in Positions)
-		{
-			var piece = gameBoardController.BoardLogic.GetPieceAt(pos);
-			if (piece != null && ((int)PieceType.GetDefById(piece.PieceType).Filter & (int)PieceTypeFilter.Obstacle) != 0)
-			{
-				obstaclesPieces.Add(piece);
-			}	
-		}
 		
+		
+		gameBoardController.BoardLogic.LockCells(positonsForLock, this);
 		gameBoardController.BoardLogic.RemovePiecesAt(Positions);
 
 		var animation = new CollapsePieceToAnimation

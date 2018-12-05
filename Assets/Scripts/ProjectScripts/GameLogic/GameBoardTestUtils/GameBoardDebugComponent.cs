@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// GameBoardDebugComponent used for unit tests and debug operations with field
@@ -42,13 +43,30 @@ public class GameBoardDebugComponent : ECSEntity, IECSSystem
         {
             AddUIViews();
         }
+
+        // if (Input.GetKeyUp(KeyCode.Q))
+        // {
+        //     ResourcePanelUtils.ToggleFadePanels(false);
+        // }
+        // if (Input.GetKeyUp(KeyCode.W))
+        // {
+        //     ResourcePanelUtils.ToggleFadePanels(true);
+        // }
+        // if (Input.GetKeyUp(KeyCode.E))
+        // {
+        //     ResourcePanelUtils.TogglePanels(false, true, new List<string>{Currency.Energy.Name, Currency.Mana.Name});
+        // }
+        // if (Input.GetKeyUp(KeyCode.R))
+        // {
+        //     ResourcePanelUtils.TogglePanels(true, true);
+        // }
     }
 
     public object GetDependency()
     {
         return context;
     }
-
+    
     public virtual void AddUIViews()
     {
         var targetPiece = context.BoardLogic.GetPieceAt(new BoardPosition(22, 11, BoardLayer.Piece.Layer));

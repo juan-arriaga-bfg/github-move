@@ -37,11 +37,18 @@ public class UIWindowType
     public const string ConfirmRemoverMessageWindow = "ConfirmRemoverMessageWindow";
     
     public const string DailyQuestWindow = "DailyQuestWindow";
+    
+    public const string SuperMatchHintWindow = "SuperMatchHintWindow";
+    
+    public const string FireflyHintWindow = "FireflyHintWindow";
+
+    public const string ResourcePanelWindow = "ResourcePanelWindow";
 
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {
         MainWindow,
-        ErrorWindow
+        ErrorWindow,
+        ResourcePanelWindow
     };
     
     public static bool IsIgnore(string name)

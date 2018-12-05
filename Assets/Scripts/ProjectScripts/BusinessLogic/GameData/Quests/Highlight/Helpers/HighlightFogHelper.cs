@@ -5,7 +5,7 @@ public static class HighlightFogHelper
 {
     public static bool HighlightNextFog(float delay)
     {
-        var fogUid = GameDataService.Current.FogsManager.GetUidOfFirstNotClearedFog();
+        var fogUid = GameDataService.Current.FogsManager.GetRandomActiveFogWithLeastPrice()?.Uid;
         if (string.IsNullOrEmpty(fogUid))
         {
             return false;

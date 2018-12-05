@@ -216,6 +216,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e215d315f1fcf46a85e16147fb81d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastBoardPosition:
+    X: 0
+    Y: 0
+    Z: 0
+  cachedSortingGroup: {fileID: 0}
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 4502627343303910}

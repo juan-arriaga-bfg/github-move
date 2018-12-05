@@ -14,7 +14,12 @@
 
         if (target == null) return true;
         
-        var life = target.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
+        if (!target.Context.PathfindLocker.HasPath(target))
+        {
+            return false;
+        }
+        
+        var life = target.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
 
         if (life != null)
         {

@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class ReproductionPieceBuilder : SimplePieceBuilder
+﻿public class ReproductionPieceBuilder : SimplePieceBuilder
 {
 	public override Piece Build(int pieceType, BoardController context)
 	{
@@ -8,27 +6,12 @@ public class ReproductionPieceBuilder : SimplePieceBuilder
 		
 		CreateViewComponent(piece);
 		
-		piece.RegisterComponent(new TimerComponent());
-		
-		var storage = new StorageComponent
-		{
-			IsAutoStart = false,
-			IsTimerShow = true,
-			TimerOffset = new Vector2(0f, 0.5f)
-		};
-		
-		piece.RegisterComponent(storage);
-		AddObserver(piece, storage);
-		
-		var life = new ReproductionLifeComponent();
-
-		piece.RegisterComponent(life);
-		AddObserver(piece, life);
+		AddObserver(piece, new ReproductionLifeComponent());
 		
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}
-				.RegisterDefinition(new TouchReactionDefinitionOpenBubble {ViewId = ViewType.ObstacleState})
-				.RegisterDefinition(new TouchReactionDefinitionSpawnInStorage {IsAutoStart = false}))
+				.RegisterDefinition(new TouchReactionDefinitionOpenBubble {ViewId = ViewType.ObstacleBubble})
+				.RegisterDefinition(new TouchReactionDefinitionSpawnRewards()))
 			.RegisterComponent(new TouchReactionConditionPR()));
 		
 		return piece;

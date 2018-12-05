@@ -35,4 +35,12 @@ public class AnimationView: BoardElementView
     public Action<PieceBoardElementView> OnPlay;
     public Action OnStop;
     public Action OnLifetimeEnd;
+
+    public override void SyncRendererLayers(BoardPosition boardPosition)
+    {
+        var targetPosition = new BoardPosition(boardPosition.X, boardPosition.Y, BoardLayer.FX.Layer);
+        
+        base.SyncRendererLayers(targetPosition);
+        
+    }
 }

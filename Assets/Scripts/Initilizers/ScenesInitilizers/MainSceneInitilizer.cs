@@ -35,6 +35,9 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.NextLevelWindow,
             UIWindowType.ConfirmRemoverMessageWindow,
             UIWindowType.DailyQuestWindow,
+            UIWindowType.SuperMatchHintWindow,
+            UIWindowType.FireflyHintWindow,
+            UIWindowType.ResourcePanelWindow,
         });
         
         // on cache complete
@@ -42,6 +45,9 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         {
             // close launcher
             UIService.Get.CloseWindow(UIWindowType.LauncherWindow);
+            
+            //show resource panel 
+            UIService.Get.ShowWindow(UIWindowType.ResourcePanelWindow);
             
             // get model for window
             UIService.Get.ShowWindow(UIWindowType.MainWindow);

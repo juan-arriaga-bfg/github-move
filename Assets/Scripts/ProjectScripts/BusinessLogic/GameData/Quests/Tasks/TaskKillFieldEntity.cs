@@ -1,4 +1,5 @@
-[TaskHighlight(typeof(HighlightTaskUsingObstaclePieceFilter))]
+[TaskHighlight(typeof(HighlightTaskPointToRandomDeadProductionField))]
+[TaskHighlight(typeof(HighlightTaskPointToRandomLiveProductionField))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskKillFieldEntity : TaskEventCounterEntity
 {
@@ -21,7 +22,7 @@ public class TaskKillFieldEntity : TaskEventCounterEntity
 
         ObstacleLifeComponent lifeCmp = context as ObstacleLifeComponent;
 
-        Piece piece = lifeCmp?.GetContext();
+        Piece piece = lifeCmp?.Context;
         if (piece == null)
         {
             return;

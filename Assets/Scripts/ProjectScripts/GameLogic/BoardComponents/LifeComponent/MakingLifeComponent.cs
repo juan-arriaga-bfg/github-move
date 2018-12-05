@@ -1,4 +1,6 @@
-﻿public class MakingLifeComponent : StorageLifeComponent
+﻿using System.Collections.Generic;
+
+public class MakingLifeComponent : WorkplaceLifeComponent
 {
     private PiecesMakingDef def;
     private TimerComponent cooldown;
@@ -15,76 +17,60 @@
     {
         base.OnRegisterEntity(entity);
         
-        def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType).MakingDef;
+        def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).MakingDef;
         
         HP = -1;
+        timer.Delay = 2;
         
         cooldown = new TimerComponent{Delay = def.Delay};
         RegisterComponent(cooldown);
     }
-    
-    protected override void InitStorage()
-    {
-        storage.Capacity = storage.Amount = def.PieceAmount;
-        storage.Timer.Delay = 2;
-    }
 
+    protected override Dictionary<int, int> GetRewards()
+    {
+        return GameDataService.Current.PiecesManager.GetSequence(def.Uid).GetNextDict(def.PieceAmount);
+    }
+    
     protected override LifeSaveItem InitInSave(BoardPosition position)
     {
         var item = base.InitInSave(position);
         
         if (item == null) return null;
         
-        if(item.IsStart) cooldown.Start(item.StartTime);
-        Locker.Unlock(this);
+        if (item.IsStartCooldown) cooldown.Start(item.StartTimeCooldown);
+        else Locker.Unlock(this);
         
         return item;
     }
-
-    public override bool Damage(bool isExtra = false)
+    
+    public override LifeSaveItem Save()
     {
-        if (cooldown.IsExecuteable())
+        return new LifeSaveItem
         {
-            UIMessageWindowController.CreateTimerCompleteMessage(
-                LocalizationService.Get("indow.timerComplete.message.castle", "indow.timerComplete.message.castle"),
-                cooldown);
-
-            return false;
-        }
-        
-        return base.Damage(isExtra);
-    }
-
-    protected override void Success()
-    {
-    }
-
-    protected override void OnStep()
-    {
-        if(Reward == null || Reward.Count == 0) Reward = GameDataService.Current.PiecesManager.GetSequence(def.Uid).GetNextDict(def.PieceAmount);
-        
-        foreach (var key in Reward.Keys)
-        {
-            storage.SpawnPiece = key;
-            break;
-        }
-        
-        storage.SpawnAction = new EjectionPieceAction
-        {
-            GetFrom = () => thisContext.CachedPosition,
-            Pieces = Reward,
-            OnComplete = () =>
-            {
-                Reward = null;
-                OnSpawnRewards();
-            }
+            Step = current,
+            Position = Context.CachedPosition,
+            IsStartTimer = timer.IsExecuteable(),
+            StartTimeTimer = timer.StartTimeLong,
+            IsStartCooldown = cooldown.IsExecuteable(),
+            StartTimeCooldown = cooldown.StartTimeLong
         };
     }
     
-    protected override void OnSpawnRewards()
+    public override bool Damage(bool isExtra = false)
     {
-        base.OnSpawnRewards();
+        if (cooldown.IsExecuteable() == false) return base.Damage(isExtra);
+        
+        UIMessageWindowController.CreateTimerCompleteMessage(
+            LocalizationService.Get("window.timerComplete.message.castle", "window.timerComplete.message.castle"),
+            cooldown);
+
+        return false;
+    }
+    
+    protected override void OnSpawnCurrencyRewards()
+    {
         AddResourceView.Show(StartPosition(), def.StepRewards);
+        base.OnSpawnCurrencyRewards();
         cooldown.Start();
     }
 }

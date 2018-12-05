@@ -163,6 +163,12 @@ public class DevTools : UIContainerElementViewController
     {
         Debug.Log("OnDebug2Click");
 
+        const string QUEST_ID = "1";
+        
+        var quest = GameDataService.Current.QuestsManager.GetActiveQuestById(QUEST_ID);
+        quest.ActiveTasks[0].Highlight();
+        return;
+        
         var board = BoardService.Current.FirstBoard;
         var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Simple, 1);
         

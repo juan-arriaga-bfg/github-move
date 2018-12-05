@@ -15,10 +15,7 @@ public class SimplePieceBuilder : GenericPieceBuilder
 
         if (def.ReproductionDef?.Reproduction != null)
         {
-            var observer = new ReproductionPieceComponent {Child = def.ReproductionDef.Reproduction};
-        
-            piece.RegisterComponent(observer);
-            AddObserver(piece, observer);
+            AddObserver(piece, new ReproductionPieceComponent {Child = def.ReproductionDef.Reproduction});
         }
 
         piece.RegisterComponent(

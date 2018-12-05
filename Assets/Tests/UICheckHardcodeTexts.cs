@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using UnityEditor;
 
-namespace UT
+namespace UTIgnored
 {
     public class UICheckHardcodeTexts
     {

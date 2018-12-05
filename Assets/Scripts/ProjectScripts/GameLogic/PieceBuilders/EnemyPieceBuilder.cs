@@ -5,11 +5,7 @@
         var piece = base.Build(pieceType, context);
 
         CreateViewComponent(piece);
-
-        var areaLockComponent = new AreaLockCrossComponent();
-        
-        AddObserver(piece, areaLockComponent);
-        piece.RegisterComponent(areaLockComponent);
+        AddObserver(piece, new AreaLockCrossComponent());
 
         piece.RegisterComponent(new TouchReactionComponent()
             .RegisterComponent(new TouchReactionDefinitionOpenEnemyBubble())

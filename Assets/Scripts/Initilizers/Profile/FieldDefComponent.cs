@@ -14,7 +14,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	private List<PieceSaveItem> pieces;
 	private List<ChestSaveItem> chests;
 	private List<LifeSaveItem> lifes;
-	private List<StorageSaveItem> storages;
 	private List<BuildingSaveItem> buildings;
 	private AreaAccessSaveItem areaAccess;
 	
@@ -43,13 +42,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	{
 		get { return lifes; }
 		set { lifes = value; }
-	}
-	
-	[JsonProperty]
-	public List<StorageSaveItem> Storages
-	{
-		get { return storages; }
-		set { storages = value; }
 	}
 	
 	[JsonProperty]
@@ -91,7 +83,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	public List<BoardPosition> MovedMinePositions;
 	public List<int> RemovedMinePositions;
 	
-	private Dictionary<BoardPosition, StorageSaveItem> storageSave;
 	private Dictionary<BoardPosition, ChestSaveItem> chestSave;
 	private Dictionary<BoardPosition, LifeSaveItem> lifeSave;
 	private Dictionary<BoardPosition, BuildingSaveItem> buildingSave;
@@ -111,7 +102,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		pieces = new List<PieceSaveItem>();
 		chests = new List<ChestSaveItem>();
 		lifes = new List<LifeSaveItem>();
-		storages = new List<StorageSaveItem>();
 		buildings = new List<BuildingSaveItem>();
 		
 		foreach (var item in cash)
@@ -119,7 +109,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			if(item.Value.Count == 0) continue;
 			
 			pieces.Add(GetPieceSave(item.Key, item.Value));
-			storages.AddRange(GetStorageSave(board.BoardLogic, item.Value));
 			chests.AddRange(GetChestsSave(board.BoardLogic, item.Value));
 			lifes.AddRange(GetLifeSave(board.BoardLogic, item.Value));
 			buildings.AddRange(GetBuildingSave(board.BoardLogic, item.Value));
@@ -148,7 +137,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	[OnDeserialized]
 	internal void OnDeserialized(StreamingContext context)
 	{
-		storageSave = new Dictionary<BoardPosition, StorageSaveItem>();
 		chestSave = new Dictionary<BoardPosition, ChestSaveItem>();
 		lifeSave = new Dictionary<BoardPosition, LifeSaveItem>();
 		buildingSave = new Dictionary<BoardPosition, BuildingSaveItem>();
@@ -156,14 +144,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		CompleteFogPositions = StringToPositions(completeFogs);
 		MovedMinePositions = StringToPositions(movedMines);
 		RemovedMinePositions = new List<int>();
-
-		if (storages != null)
-		{
-			foreach (var storage in storages)
-			{
-				storageSave.Add(storage.Position, storage);
-			}
-		}
 		
 		if (chests != null)
 		{
@@ -199,20 +179,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			}
 		}
 		
-	}
-
-	public StorageSaveItem GetStorageSave(BoardPosition position)
-	{
-		StorageSaveItem item;
-		
-		if (storageSave == null || storageSave.TryGetValue(position, out item) == false)
-		{
-			return null;
-		}
-
-		storageSave.Remove(position);
-		
-		return item;
 	}
 	
 	public ChestSaveItem GetChestsSave(BoardPosition position)
@@ -276,11 +242,19 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		foreach (var position in positions)
 		{
 			var piece = logic.GetPieceAt(position);
+			
+			var reward = piece?.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid);
+			var save = reward?.Save();
 
+			if (save != null)
+			{
+				items.Add(save);
+				continue;
+			}
+			
 			var component = piece?.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
 			
-			if(component == null) break;
-			if(component.Chest.Reward == null || component.Chest.Reward.Sum(pair => pair.Value) == 0) continue;
+			if(component?.Chest.Reward == null || component.Chest.Reward.Sum(pair => pair.Value) == 0) continue;
 
 			var item = new ChestSaveItem
 			{
@@ -302,46 +276,13 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		foreach (var position in positions)
 		{
 			var piece = logic.GetPieceAt(position);
-			var component = piece?.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
+			var component = piece?.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
 			
 			if(component == null) break;
-			if(component.Current == 0 && component.HP != -1) continue;
-			
-			var item = new LifeSaveItem
-			{
-				Step = component.Current,
-				StorageSpawnPiece = component.StorageSpawnPiece,
-				StartTime = component.Timer.StartTimeLong,
-				IsStart = component.Timer.IsExecuteable(),
-				Position = position,
-				Reward = component.Reward
-			};
-			
-			items.Add(item);
-		}
-		
-		return items;
-	}
 
-	private List<StorageSaveItem> GetStorageSave(BoardLogicComponent logic, List<BoardPosition> positions)
-	{
-		var items = new List<StorageSaveItem>();
-		
-		foreach (var position in positions)
-		{
-			var piece = logic.GetPieceAt(position);
-
-			var component = piece?.GetComponent<StorageComponent>(StorageComponent.ComponentGuid);
+			var item = component.Save();
 			
-			if(component == null) continue;
-
-			var item = new StorageSaveItem
-			{
-				Position = position,
-				Filling = component.Filling,
-				IsStart = component.Timer.IsExecuteable(),
-				StartTime = component.Timer.StartTimeLong
-			};
+			if(item == null) continue;
 			
 			items.Add(item);
 		}
