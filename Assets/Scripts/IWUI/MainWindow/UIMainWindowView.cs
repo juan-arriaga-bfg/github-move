@@ -86,11 +86,11 @@ public class UIMainWindowView : UIBaseWindowView
         switch (item)
         {
             case UiLockTutorialItem.Worker:
-                ResourcePanelUtils.TogglePanel(Currency.Worker.Name, isLock, isAnimate);
+                ResourcePanelUtils.TogglePanel(Currency.Worker.Name, !isLock, isAnimate);
                 return;
                 break;
             case UiLockTutorialItem.Energy:
-                ResourcePanelUtils.TogglePanel(Currency.Energy.Name, isLock, isAnimate);
+                ResourcePanelUtils.TogglePanel(Currency.Energy.Name, !isLock, isAnimate);
                 return;
                 break;
             case UiLockTutorialItem.Codex:
