@@ -166,7 +166,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             return canBeReachedCached.Value;
         }
         
-        canBeReachedCached = Context.Context.Pathfinder.CanPathToCastle(Context);
+        canBeReachedCached = Context.Context.PathfindLocker.HasPath(Context);
         return canBeReachedCached.Value;
     }
 

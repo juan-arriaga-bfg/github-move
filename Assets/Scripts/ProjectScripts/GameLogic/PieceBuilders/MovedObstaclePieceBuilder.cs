@@ -16,6 +16,8 @@
 			    .RegisterDefinition(new TouchReactionDefinitionOpenBubble {ViewId = ViewType.ObstacleBubble})
 			    .RegisterDefinition(new TouchReactionDefinitionSpawnRewards()))
 		    .RegisterComponent(new TouchReactionConditionWorkplace()));
+
+		AddPathfindLockObserver(piece, true);
 		
         return piece;
     }

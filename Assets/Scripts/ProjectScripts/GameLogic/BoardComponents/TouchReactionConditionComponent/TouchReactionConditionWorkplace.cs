@@ -2,7 +2,7 @@
 {
 	public override bool Check(BoardPosition position, Piece piece)
 	{
-		if (piece.Context?.Pathfinder.CanPathToCastle(piece) == false)
+		if (piece.Context?.PathfindLocker.HasPath(piece) == false)
 		{
 			UIErrorWindowController.AddError(LocalizationService.Get("message.error.pieceLock", "message.error.pieceLock"));
 			return false;

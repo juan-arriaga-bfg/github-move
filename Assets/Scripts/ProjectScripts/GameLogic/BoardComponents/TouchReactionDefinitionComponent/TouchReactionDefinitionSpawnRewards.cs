@@ -1,4 +1,6 @@
-﻿public class TouchReactionDefinitionSpawnRewards : TouchReactionDefinitionComponent
+﻿using UnityEngine;
+
+public class TouchReactionDefinitionSpawnRewards : TouchReactionDefinitionComponent
 {
     public override bool IsViewShow(ViewDefinitionComponent viewDefinition)
     {

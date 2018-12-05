@@ -1,4 +1,4 @@
-﻿public class MinePieceBuilder : MulticellularPieceBuilder
+public class MinePieceBuilder : MulticellularPieceBuilder
 {
 	public override Piece Build(int pieceType, BoardController context)
 	{
@@ -18,7 +18,9 @@
 			.RegisterComponent(new TouchReactionConditionWorkplace()))
 			.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
 				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
-        
+
+		AddPathfindLockObserver(piece, true);
+		
 		return piece;
 	}
 }

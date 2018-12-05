@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EmptyCellsFinderComponent : IECSComponent
@@ -120,6 +121,45 @@ public class EmptyCellsFinderComponent : IECSComponent
 		return field.Count != 0;
 	}
 
+	public List<BoardPosition> FindEmptyAreaByPoint(BoardPosition targetPoint)
+	{
+		var result = FindAreaByPoint(targetPoint, (pos, controller) => controller.BoardLogic.GetPieceAt(pos) == null);
+		return result;
+	}
+	
+	public List<BoardPosition> FindAreaByPoint(BoardPosition targetPoint, Func<BoardPosition, BoardController, bool> condition)
+	{   
+        var checkedPositions = new HashSet<BoardPosition>();
+        var uncheckedPositions = new HashSet<BoardPosition>();
+
+		var resultCollection = new List<BoardPosition>();
+
+        uncheckedPositions.Add(targetPoint);
+		
+        while (uncheckedPositions.Count > 0)
+        {
+            var current = uncheckedPositions.Last();
+
+            uncheckedPositions.Remove(current);
+            checkedPositions.Add(current);
+
+	        if (condition(current, context.Context) && context.IsPointValid(current))
+		        resultCollection.Add(current);
+	        else
+		        continue;
+	        
+            var availiablePositions = current.Neighbors();
+            
+	        foreach (var pos in availiablePositions)
+	        {
+		        if (checkedPositions.Contains(pos) == false && uncheckedPositions.Contains(pos) == false)
+			        uncheckedPositions.Add(pos);
+	        }
+        }
+
+		return resultCollection;
+	}
+
 	public bool CheckFreeSpaceNearPosition(BoardPosition position, int count)
 	{
 		if (count == 0) return true;
@@ -127,7 +167,7 @@ public class EmptyCellsFinderComponent : IECSComponent
 		var free = new List<BoardPosition>();
 		if (!FindRandomNearWithPointInCenter(position, free, count))
 			return false;
-
+		
 		return free.Count >= count;
 	}
 	

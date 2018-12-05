@@ -92,7 +92,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         
         board.ActionExecutor.AddAction(new EjectionPieceAction
         {
-            From = position,
+            GetFrom = () => position,
             Pieces = windowModel.PiecesReward,
             OnComplete = () =>
             {

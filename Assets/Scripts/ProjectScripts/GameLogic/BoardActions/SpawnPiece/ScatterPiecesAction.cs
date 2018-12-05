@@ -32,6 +32,8 @@ public class ScatterPiecesAction : IBoardAction
 		
 		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(from, cells, amount, 0.1f) == false) return false;
 
+		var fromPiece = gameBoardController.BoardLogic.GetPieceAt(From.Value);
+		
 		var animation = new ScatterPiecesAnimation {From = from};
 		
 		if (IsTargetReplace && cells.Count == amount)
@@ -62,7 +64,8 @@ public class ScatterPiecesAction : IBoardAction
 		animation.OnCompleteEvent += (_) =>
 		{
 			gameBoardController.BoardLogic.UnlockCell(from, this);
-
+			if(fromPiece != null && PieceType.GetDefById(fromPiece.PieceType).Filter.HasFlag(PieceTypeFilter.Obstacle))
+				fromPiece.PathfindLockObserver.RemoveRecalculate(from);
 			foreach (var pair in pieces)
 			{
 				gameBoardController.BoardLogic.UnlockCell(pair.Key, this);

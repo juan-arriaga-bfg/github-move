@@ -1,4 +1,6 @@
-﻿public class ObstaclePieceBuilder : GenericPieceBuilder
+using UnityEngine;
+
+public class ObstaclePieceBuilder : GenericPieceBuilder
 {
 	public override Piece Build(int pieceType, BoardController context)
 	{
@@ -16,6 +18,10 @@
 			.RegisterComponent(new TouchReactionConditionWorkplace()))
 			.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
 				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
+		
+		AddObserver(piece, new AreaRecalculateObserver());
+		
+		AddPathfindLockObserver(piece, true);
 		
 		return piece;
 	}

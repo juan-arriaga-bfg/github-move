@@ -23,7 +23,7 @@ public static class HighlightTaskPathHelper
         var boardLogic = board.BoardLogic;
         
         var piece = boardLogic.GetPieceAt(pos);
-        if (piece != null && board.Pathfinder.CanPathToCastle(piece))
+        if (piece != null && board.PathfindLocker.HasPath(piece))
         {
             return true;
         }
