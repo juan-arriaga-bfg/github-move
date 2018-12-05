@@ -399,6 +399,7 @@ GameObject:
   - component: {fileID: 114120179299793548}
   - component: {fileID: 114887957004383950}
   - component: {fileID: 225375665684938126}
+  - component: {fileID: 114940636904138138}
   m_Layer: 8
   m_Name: canvas
   m_TagString: Untagged
@@ -828,6 +829,7 @@ GameObject:
   - component: {fileID: 223979225118290000}
   - component: {fileID: 114503733798040484}
   - component: {fileID: 114626194151350268}
+  - component: {fileID: 114505997863111068}
   m_Layer: 8
   m_Name: canvas
   m_TagString: Untagged
@@ -2184,6 +2186,20 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114505997863111068
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1954315694333974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661ffab0d69584a18922ace976064c69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fromToAspect: {x: 1.7777778, y: 1.3333334}
+  fromToMatchCoef: {x: 1, y: 0.2}
+  isExecuteInEditMode: 1
 --- !u!114 &114545363825928862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3269,6 +3285,20 @@ MonoBehaviour:
   amountLabel: {fileID: 114452571376344680}
   icon: {fileID: 114419389039223464}
   itemUid: Coins
+--- !u!114 &114940636904138138
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1532622697696174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661ffab0d69584a18922ace976064c69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fromToAspect: {x: 1.7777778, y: 1.3333334}
+  fromToMatchCoef: {x: 1, y: 0.2}
+  isExecuteInEditMode: 1
 --- !u!114 &114968246503923620
 MonoBehaviour:
   m_ObjectHideFlags: 1
