@@ -43,12 +43,16 @@ public class UIResourcePanelWindowView : UIBaseWindowView
     [IWUIBinding("#ResourceContainer")] protected CanvasGroup resourceContainerUp;
     
     [IWUIBinding("#ResourceContainerDown")] protected CanvasGroup resourceContainerDown;
+    
+    [IWUIBinding("#HintAnchorEnergyPlusButton")] public Transform HintAnchorEnergyPlusButton;
 
     private Dictionary<string, Transform> cachedResourcePanels = new Dictionary<string, Transform>();
     
     private Dictionary<string, CanvasGroup> cachedResourcePanelContainerUp = new Dictionary<string, CanvasGroup>();
     
     private Dictionary<string, CanvasGroup> cachedResourcePanelContainerDown = new Dictionary<string, CanvasGroup>();
+    
+    public UIHintArrowComponent CachedHintArrowComponent { get; private set; }
     
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
@@ -165,6 +169,10 @@ public class UIResourcePanelWindowView : UIBaseWindowView
         
         UIResourcePanelWindowModel windowModel = Model as UIResourcePanelWindowModel;
         
+        CachedHintArrowComponent = new UIHintArrowComponent();
+        CachedHintArrowComponent.SetContextView(this, GetCanvas().transform);
+        
+        Components.RegisterComponent(CachedHintArrowComponent);
     }
 
     public override void OnViewClose()

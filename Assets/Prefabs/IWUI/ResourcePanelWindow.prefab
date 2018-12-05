@@ -126,7 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224119770983399276}
   m_Layer: 8
-  m_Name: HintAnchor
+  m_Name: '#HintAnchorEnergyPlusButton'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1866,6 +1866,7 @@ MonoBehaviour:
   mainCanvasGroup: {fileID: 225375665684938126}
   canvas: {fileID: 223561915645789158}
   isHideable: 0
+  HintAnchorEnergyPlusButton: {fileID: 0}
 --- !u!114 &114419169085219098
 MonoBehaviour:
   m_ObjectHideFlags: 1

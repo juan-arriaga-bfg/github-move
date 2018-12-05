@@ -2,7 +2,7 @@ public class HighlightTaskPointToEnergyPlusButton : TaskHighlightUsingArrow
 {
     protected override bool ShowArrow(TaskEntity task, float delay)
     {
-        UIMainWindowView view = UIService.Get.GetShowedView<UIMainWindowView>(UIWindowType.MainWindow);
+        var view = UIService.Get.GetShowedView<UIResourcePanelWindowView>(UIWindowType.ResourcePanelWindow);
 
         view.CachedHintArrowComponent.ShowArrow(view.HintAnchorEnergyPlusButton);
 

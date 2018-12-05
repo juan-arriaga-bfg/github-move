@@ -5,7 +5,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
+public class UIMainWindowView : UIBaseWindowView
 {
     [SerializeField] private GameObject pattern;
     [SerializeField] private CodexButton codexButton;
@@ -14,8 +14,6 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
     [IWUIBinding("#ButtonsRight")] private CanvasGroup rightButtonsCanvasGroups;
     [IWUIBinding("#ButtonsLeft")] private CanvasGroup leftButtonsCanvasGroups;
     
-    [SerializeField] private CanvasGroup workerCanvasGroup;
-    [SerializeField] private CanvasGroup energyCanvasGroup;
     [SerializeField] private CanvasGroup codexCanvasGroup;
     [SerializeField] private CanvasGroup shopCanvasGroup;
     [SerializeField] private CanvasGroup ordersCanvasGroup;
@@ -36,9 +34,6 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
     
     [SerializeField] private Transform hintAnchorShopButton;
     public Transform HintAnchorShopButton => hintAnchorShopButton;
-    
-    [SerializeField] private Transform hintAnchorEnergyPlusButton;
-    public Transform HintAnchorEnergyPlusButton => hintAnchorEnergyPlusButton;
     
     private readonly List<UiQuestButton> questButtons = new List<UiQuestButton>();
 
@@ -91,10 +86,12 @@ public class UIMainWindowView : /*IWUIWindowView*/UIBaseWindowView
         switch (item)
         {
             case UiLockTutorialItem.Worker:
-                target = workerCanvasGroup;
+                ResourcePanelUtils.TogglePanel(Currency.Worker.Name, isLock, isAnimate);
+                return;
                 break;
             case UiLockTutorialItem.Energy:
-                target = energyCanvasGroup;
+                ResourcePanelUtils.TogglePanel(Currency.Energy.Name, isLock, isAnimate);
+                return;
                 break;
             case UiLockTutorialItem.Codex:
                 target = codexCanvasGroup;
