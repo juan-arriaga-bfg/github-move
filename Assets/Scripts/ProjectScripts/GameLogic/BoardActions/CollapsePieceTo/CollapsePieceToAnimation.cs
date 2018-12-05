@@ -35,7 +35,7 @@ public class CollapsePieceToAnimation : BoardAnimation
 		{
 			var boardElement = context.GetElementAt(point);
 
-			if (Action.To.IsValid)
+			if (boardElement != null && Action.To.IsValid)
 				boardElement.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
 			
 			sequence.Insert(0 + Delay, boardElement.CachedTransform.DOMove(new Vector3(to.x, to.y, boardElement.CachedTransform.position.z), 0.4f).SetEase(Ease.OutBack));
