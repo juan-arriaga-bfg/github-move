@@ -6,7 +6,7 @@
 	{
 		if (chestComponent == null) chestComponent = piece.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
 		
-		if (chestComponent?.Chest == null) return false;
+		if (chestComponent?.Def == null) return false;
 
 		var model = UIService.Get.GetCachedModel<UIChestMessageWindowModel>(UIWindowType.ChestMessage);
 

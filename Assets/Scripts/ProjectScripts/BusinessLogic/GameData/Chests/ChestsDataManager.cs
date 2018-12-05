@@ -49,11 +49,9 @@ public class ChestsDataManager : SequenceData, IDataLoader<List<ChestDef>>
             }
         });
     }
-
-    public Chest GetChest(int pieceType)
+    
+    public ChestDef GetChest(int pieceType)
     {
-        var chestDef = Chests.Find(def => def.Piece == pieceType);
-        
-        return chestDef == null ? null : new Chest {Def = chestDef};
+        return Chests.Find(def => def.Piece == pieceType);
     }
 }

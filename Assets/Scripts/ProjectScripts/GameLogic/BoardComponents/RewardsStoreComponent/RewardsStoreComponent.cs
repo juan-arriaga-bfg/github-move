@@ -36,20 +36,20 @@ public class RewardsStoreComponent : IECSComponent
     public void InitInSave(BoardPosition position)
     {
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
-        var item = save?.GetChestsSave(position);
+        var item = save?.GetRewardsSave(position);
 
         if (item == null) return;
         
         rewards = item.Reward;
         
-        if (item.IsComplete) Show();
+        if (item.IsComplete) ShowBubble();
     }
 
-    public ChestSaveItem Save()
+    public RewardsSaveItem Save()
     {
         return rewards == null
             ? null
-            : new ChestSaveItem
+            : new RewardsSaveItem
             {
                 Position = context.CachedPosition,
                 Reward = rewards,
@@ -78,15 +78,22 @@ public class RewardsStoreComponent : IECSComponent
         }
     }
     
-    public void Show()
+    public void ShowBubble()
     {
         InitRewards();
         UpdateView(true);
     }
-
-    public void Get()
+    
+    public void GetInBubble()
     {
         UpdateView(false);
+    }
+
+    public void GetInWindow()
+    {
+        InitRewards();
+        Scatter();
+        IsComplete = true;
     }
     
     private void UpdateView(bool isShow)
@@ -101,7 +108,7 @@ public class RewardsStoreComponent : IECSComponent
         {
             view.Ofset = BubbleOffset;
             view.SetOfset();
-            view.OnClickAction = Get;
+            view.OnClickAction = GetInBubble;
             context.Context.HintCooldown.AddView(view);
         }
         else

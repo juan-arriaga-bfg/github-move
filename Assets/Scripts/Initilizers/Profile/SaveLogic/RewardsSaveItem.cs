@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-public class ChestSaveItemJsonConverter : JsonConverter
+public class RewardsSaveItemJsonConverter : JsonConverter
 {
     public override bool CanConvert(Type objectType)
     {
-        return objectType == typeof (ChestSaveItem);
+        return objectType == typeof (RewardsSaveItem);
     }
     
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
     {
-        var targetValue = (ChestSaveItem) value;
+        var targetValue = (RewardsSaveItem) value;
         
         serializer.TypeNameHandling = TypeNameHandling.None;
         serializer.Serialize(writer, $"{targetValue.Position.ToSaveString()},{targetValue.RewardAmount},{(targetValue.IsComplete ? 1 : 0)},{targetValue.Reward.ToSaveString()},");
@@ -22,7 +22,7 @@ public class ChestSaveItemJsonConverter : JsonConverter
         var data = serializer.Deserialize<string>(reader);
         var dataArray = data.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
         
-        var targetValue = new ChestSaveItem
+        var targetValue = new RewardsSaveItem
         {
             Position = new BoardPosition(int.Parse(dataArray[0]), int.Parse(dataArray[1]), int.Parse(dataArray[2])),
             RewardAmount = int.Parse(dataArray[3]),
@@ -34,8 +34,8 @@ public class ChestSaveItemJsonConverter : JsonConverter
     }
 }
 
-[JsonConverter(typeof(ChestSaveItemJsonConverter))]
-public class ChestSaveItem
+[JsonConverter(typeof(RewardsSaveItemJsonConverter))]
+public class RewardsSaveItem
 {
     private BoardPosition position;
     private Dictionary<int, int> reward;

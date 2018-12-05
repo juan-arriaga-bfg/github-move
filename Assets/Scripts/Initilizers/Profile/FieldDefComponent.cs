@@ -12,7 +12,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	public override int Guid => ComponentGuid;
 
 	private List<PieceSaveItem> pieces;
-	private List<ChestSaveItem> chests;
+	private List<RewardsSaveItem> rewards;
 	private List<LifeSaveItem> lifes;
 	private List<BuildingSaveItem> buildings;
 	
@@ -30,10 +30,10 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	}
 	
 	[JsonProperty]
-	public List<ChestSaveItem> Chests
+	public List<RewardsSaveItem> Rewards
 	{
-		get { return chests; }
-		set { chests = value; }
+		get { return rewards; }
+		set { rewards = value; }
 	}
 	
 	[JsonProperty]
@@ -75,7 +75,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	public List<BoardPosition> MovedMinePositions;
 	public List<int> RemovedMinePositions;
 	
-	private Dictionary<BoardPosition, ChestSaveItem> chestSave;
+	private Dictionary<BoardPosition, RewardsSaveItem> rewardsSave;
 	private Dictionary<BoardPosition, LifeSaveItem> lifeSave;
 	private Dictionary<BoardPosition, BuildingSaveItem> buildingSave;
 	
@@ -92,7 +92,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		if(cash.Count == 0) return;
 		
 		pieces = new List<PieceSaveItem>();
-		chests = new List<ChestSaveItem>();
+		rewards = new List<RewardsSaveItem>();
 		lifes = new List<LifeSaveItem>();
 		buildings = new List<BuildingSaveItem>();
 		
@@ -101,7 +101,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			if(item.Value.Count == 0) continue;
 			
 			pieces.Add(GetPieceSave(item.Key, item.Value));
-			chests.AddRange(GetChestsSave(board.BoardLogic, item.Value));
+			rewards.AddRange(GetRewardsSave(board.BoardLogic, item.Value));
 			lifes.AddRange(GetLifeSave(board.BoardLogic, item.Value));
 			buildings.AddRange(GetBuildingSave(board.BoardLogic, item.Value));
 		}
@@ -127,7 +127,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	[OnDeserialized]
 	internal void OnDeserialized(StreamingContext context)
 	{
-		chestSave = new Dictionary<BoardPosition, ChestSaveItem>();
+		rewardsSave = new Dictionary<BoardPosition, RewardsSaveItem>();
 		lifeSave = new Dictionary<BoardPosition, LifeSaveItem>();
 		buildingSave = new Dictionary<BoardPosition, BuildingSaveItem>();
 		
@@ -135,11 +135,11 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		MovedMinePositions = StringToPositions(movedMines);
 		RemovedMinePositions = new List<int>();
 		
-		if (chests != null)
+		if (rewards != null)
 		{
-			foreach (var chest in chests)
+			foreach (var reward in rewards)
 			{
-				chestSave.Add(chest.Position, chest);
+				rewardsSave.Add(reward.Position, reward);
 			}
 		}
 		
@@ -170,16 +170,16 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		}
 	}
 	
-	public ChestSaveItem GetChestsSave(BoardPosition position)
+	public RewardsSaveItem GetRewardsSave(BoardPosition position)
 	{
-		ChestSaveItem item;
+		RewardsSaveItem item;
 		
-		if (chestSave == null || chestSave.TryGetValue(position, out item) == false)
+		if (rewardsSave == null || rewardsSave.TryGetValue(position, out item) == false)
 		{
 			return null;
 		}
 
-		chestSave.Remove(position);
+		rewardsSave.Remove(position);
 		
 		return item;
 	}
@@ -224,33 +224,20 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		return item;
 	}
 
-	private List<ChestSaveItem> GetChestsSave(BoardLogicComponent logic, List<BoardPosition> positions)
+	private List<RewardsSaveItem> GetRewardsSave(BoardLogicComponent logic, List<BoardPosition> positions)
 	{
-		var items = new List<ChestSaveItem>();
+		var items = new List<RewardsSaveItem>();
 
 		foreach (var position in positions)
 		{
 			var piece = logic.GetPieceAt(position);
+			var component = piece?.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid);
 			
-			var reward = piece?.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid);
-			var save = reward?.Save();
-
-			if (save != null)
-			{
-				items.Add(save);
-				continue;
-			}
+			if(component == null) break;
 			
-			var component = piece?.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
+			var item = component.Save();
 			
-			if(component?.Chest.Reward == null || component.Chest.Reward.Sum(pair => pair.Value) == 0) continue;
-
-			var item = new ChestSaveItem
-			{
-				Position = position,
-				Reward = component.Chest.Reward,
-				RewardAmount = component.Chest.RewardCount
-			};
+			if(item == null) continue;
 			
 			items.Add(item);
 		}

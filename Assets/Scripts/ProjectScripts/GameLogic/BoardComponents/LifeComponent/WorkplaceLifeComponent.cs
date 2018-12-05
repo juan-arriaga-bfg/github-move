@@ -126,7 +126,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	{
 		Context.Context.WorkerLogic.Return(Context.CachedPosition);
 		UpdateView(false);
-		Rewards.Show();
+		Rewards.ShowBubble();
 	}
     
 	protected virtual Dictionary<int, int> GetRewards()

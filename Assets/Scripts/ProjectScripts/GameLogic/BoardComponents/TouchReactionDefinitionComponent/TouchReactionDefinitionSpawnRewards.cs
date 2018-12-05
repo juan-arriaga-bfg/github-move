@@ -16,8 +16,8 @@
             UIErrorWindowController.AddError(LocalizationService.Get("message.error.notComplete", "message.error.notComplete"));
             return false;
         }
-
-        storage.Get();
+        
+        storage.GetInBubble();
         return true;
     }
 }

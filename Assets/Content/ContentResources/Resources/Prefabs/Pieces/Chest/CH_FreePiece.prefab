@@ -154,7 +154,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1415841773315382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6017256a19da59a4ea43d94d2062b35a, type: 3}
+  m_Script: {fileID: 11500000, guid: b5e94db1dff9a4341a9922139f675b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lastBoardPosition:
@@ -172,9 +172,6 @@ MonoBehaviour:
     type: 2}
   highlightPieceMaterial: {fileID: 2100000, guid: 8df69b780d2d9354c8ffb9b8293c73ad,
     type: 2}
-  backlightMaterial: {fileID: 2100000, guid: 6e23cb2ec086c463dacfc8e46de765b2, type: 2}
-  backlightScale: 1.1
-  hightlightMaterial: {fileID: 2100000, guid: d55a16b9364b048ba884d5ede8dae221, type: 2}
 --- !u!114 &114304385284955728
 MonoBehaviour:
   m_ObjectHideFlags: 1
