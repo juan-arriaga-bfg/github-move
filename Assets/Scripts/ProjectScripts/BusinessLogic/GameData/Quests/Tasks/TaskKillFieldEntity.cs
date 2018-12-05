@@ -22,7 +22,7 @@ public class TaskKillFieldEntity : TaskEventCounterEntity
 
         ObstacleLifeComponent lifeCmp = context as ObstacleLifeComponent;
 
-        Piece piece = lifeCmp?.GetContext();
+        Piece piece = lifeCmp?.Context;
         if (piece == null)
         {
             return;

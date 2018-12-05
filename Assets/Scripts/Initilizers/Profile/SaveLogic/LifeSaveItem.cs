@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 public class LifeSaveItemJsonConverter : JsonConverter
@@ -14,7 +13,7 @@ public class LifeSaveItemJsonConverter : JsonConverter
         var targetValue = (LifeSaveItem) value;
         
         serializer.TypeNameHandling = TypeNameHandling.None;
-        serializer.Serialize(writer, $"{targetValue.Step},{targetValue.StorageSpawnPiece},{targetValue.StartTime},{(targetValue.IsStart ? 1 : 0)},{targetValue.Position.ToSaveString()},{targetValue.Reward.ToSaveString()}");
+        serializer.Serialize(writer, $"{targetValue.Step},{targetValue.Position.ToSaveString()},{(targetValue.IsStartTimer ? 1 : 0)},{targetValue.StartTimeTimer},{(targetValue.IsStartCooldown ? 1 : 0)},{targetValue.StartTimeCooldown}");
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -25,11 +24,11 @@ public class LifeSaveItemJsonConverter : JsonConverter
         var targetValue = new LifeSaveItem
         {
             Step = int.Parse(dataArray[0]),
-            StorageSpawnPiece = int.Parse(dataArray[1]),
-            StartTime = long.Parse(dataArray[2]),
-            IsStart = int.Parse(dataArray[3]) == 1,
-            Position = new BoardPosition(int.Parse(dataArray[4]), int.Parse(dataArray[5]), int.Parse(dataArray[6])),
-            Reward = DictionaryStringConverter.FromDataArray(dataArray, int.Parse, int.Parse, 7)
+            Position = new BoardPosition(int.Parse(dataArray[1]), int.Parse(dataArray[2]), int.Parse(dataArray[3])),
+            IsStartTimer = int.Parse(dataArray[4]) == 1,
+            StartTimeTimer = long.Parse(dataArray[5]),
+            IsStartCooldown = int.Parse(dataArray[6]) == 1,
+            StartTimeCooldown = long.Parse(dataArray[7])
         };
         
         return targetValue;
@@ -39,29 +38,19 @@ public class LifeSaveItemJsonConverter : JsonConverter
 [JsonConverter(typeof(LifeSaveItemJsonConverter))]
 public class LifeSaveItem
 {
-    private int step;
-    private int storageSpawnPiece;
-    private long startTime;
     private BoardPosition position;
-    private bool isStart;
-    private Dictionary<int, int> reward;
+    private int step;
+    
+    private bool isStartTimer;
+    private long startTimeTimer;
+    
+    private bool isStartCooldown;
+    private long startTimeCooldown;
     
     public int Step
     {
         get { return step; }
         set { step = value; }
-    }
-    
-    public int StorageSpawnPiece
-    {
-        get { return storageSpawnPiece; }
-        set { storageSpawnPiece = value; }
-    }
-    
-    public long StartTime
-    {
-        get { return startTime; }
-        set { startTime = value; }
     }
     
     public BoardPosition Position
@@ -70,15 +59,27 @@ public class LifeSaveItem
         set { position = value; }
     }
     
-    public bool IsStart
+    public bool IsStartTimer
     {
-        get { return isStart; }
-        set { isStart = value; }
+        get { return isStartTimer; }
+        set { isStartTimer = value; }
     }
-
-    public Dictionary<int, int> Reward
+    
+    public long StartTimeTimer
     {
-        get { return reward; }
-        set { reward = value; }
+        get { return startTimeTimer; }
+        set { startTimeTimer = value; }
+    }
+    
+    public bool IsStartCooldown
+    {
+        get { return isStartCooldown; }
+        set { isStartCooldown = value; }
+    }
+    
+    public long StartTimeCooldown
+    {
+        get { return startTimeCooldown; }
+        set { startTimeCooldown = value; }
     }
 }

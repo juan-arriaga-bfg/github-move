@@ -15,11 +15,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "ChangeStorageStateView",
-    "ResourcePath": "Prefabs/ChangeStorageStateView",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "BoardTimerView",
     "ResourcePath": "Prefabs/BoardTimerView",
     "IsGenerateAutoName": true
@@ -42,11 +37,6 @@
   {
     "Uid": "DebugCell",
     "ResourcePath": "Prefabs/DebugCell",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "ChangeObstacleStateView",
-    "ResourcePath": "Prefabs/ChangeObstacleStateView",
     "IsGenerateAutoName": true
   },
   {
@@ -955,6 +945,16 @@
     "IsGenerateAutoName": true
   },
   {
+    "Uid": "RewardsBubbleView",
+    "ResourcePath": "Prefabs\\BoardUI/RewardsBubbleView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "ObstacleBubbleView",
+    "ResourcePath": "Prefabs\\BoardUI/ObstacleBubbleView",
+    "IsGenerateAutoName": true
+  },
+  {
     "Uid": "GodRayView",
     "ResourcePath": "Prefabs/GodRayView",
     "IsGenerateAutoName": true
@@ -1022,6 +1022,5 @@
   {
     "Uid": "UIBoardViewContainer",
     "ResourcePath": "Prefabs/UIBoardViewContainer",
-    "IsGenerateAutoName": true
-  }
+    "IsGenerateAutoName": true  }
 ]

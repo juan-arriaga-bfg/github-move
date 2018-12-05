@@ -12,10 +12,7 @@
 
         if (def.ReproductionDef?.Reproduction != null)
         {
-            var observer = new ReproductionPieceComponent {Child = def.ReproductionDef.Reproduction};
-        
-            piece.RegisterComponent(observer);
-            AddObserver(piece, observer);
+            AddObserver(piece, new ReproductionPieceComponent {Child = def.ReproductionDef.Reproduction});
         }
         
         if (def.SpawnResources != null || PieceType.GetDefById(pieceType).Filter.Has(PieceTypeFilter.Resource))
@@ -27,10 +24,7 @@
                  .RegisterComponent(new TouchReactionConditionComponent()));
         }
         
-        var pathfindLockObserver = new PathfindLockObserver() {AutoLock = false}; 
-        
-        AddObserver(piece, pathfindLockObserver);
-        piece.RegisterComponent(pathfindLockObserver);
+        AddObserver(piece, new PathfindLockObserver {AutoLock = false});
         
         return piece;
     }

@@ -8,11 +8,7 @@
         matcheble?.Locker.Lock(piece);
         
         CreateViewComponent(piece);
-        
-        var observer = new PartPieceBoardObserver();
-        
-        piece.RegisterComponent(observer);
-        AddObserver(piece, observer);
+        AddObserver(piece, new PartPieceBoardObserver());
         
         return piece;
     }

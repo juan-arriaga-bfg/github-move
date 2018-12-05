@@ -1,4 +1,4 @@
-﻿public class TouchReactionConditionPR : TouchReactionConditionStorage
+﻿public class TouchReactionConditionPR : TouchReactionConditionWorkplace
 {
     public override bool Check(BoardPosition position, Piece piece)
     {

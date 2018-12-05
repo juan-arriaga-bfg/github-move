@@ -10,11 +10,10 @@ public class ElementsResourcesBuilder
         
         dict.Add((int)ViewType.AddResource, R.AddResourceView);
         dict.Add((int)ViewType.HintArrow, R.HintArrow);
-        dict.Add((int)ViewType.StorageState, R.ChangeStorageStateView);
         dict.Add((int)ViewType.BoardTimer, R.BoardTimerView);
         dict.Add((int)ViewType.LevelLabel, R.PieceLevelView);
         dict.Add((int)ViewType.Menu, R.MenuView);
-        dict.Add((int)ViewType.ObstacleState, R.ChangeObstacleStateView);
+        dict.Add((int)ViewType.ObstacleBubble, R.ObstacleBubbleView);
         dict.Add((int)ViewType.Bubble, R.BubbleView);
         dict.Add((int)ViewType.MergeParticle, R.MergeParticleSystem);
         dict.Add((int)ViewType.Progress, R.BoardProgressView);
@@ -27,6 +26,7 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.ExtraWorker, R.ExtraWorker);
         dict.Add((int)ViewType.TutorialMergeFinger, R.TutorialMergeFinger);
         dict.Add((int)ViewType.PieceRemover, R.PieceRemover);
+        dict.Add((int)ViewType.RewardsBubble, R.RewardsBubbleView);
         dict.Add((int)ViewType.GodRay, R.GodRayView);
         dict.Add((int)ViewType.UIContainer, R.UIBoardViewContainer);
         

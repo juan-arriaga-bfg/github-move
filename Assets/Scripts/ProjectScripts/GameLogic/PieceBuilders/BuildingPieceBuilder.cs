@@ -5,11 +5,8 @@
 		var piece = base.Build(pieceType, context);
         
 		CreateViewComponent(piece);
-
-		var state = new PieceStateComponent();
 		
-		piece.RegisterComponent(state);
-		AddObserver(piece, state);
+		AddObserver(piece, new PieceStateComponent());
 		
 		piece.RegisterComponent(new DraggablePieceComponent());
 		

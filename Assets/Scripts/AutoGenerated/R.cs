@@ -3,13 +3,11 @@ public class R
      public const string GenericPiece = "GenericPiece";
      public const string ReadyArrowView = "ReadyArrowView";
      public const string AddResourceView = "AddResourceView";
-     public const string ChangeStorageStateView = "ChangeStorageStateView";
      public const string BoardTimerView = "BoardTimerView";
      public const string HintArrow = "HintArrow";
      public const string PieceLevelView = "PieceLevelView";
      public const string MenuView = "MenuView";
      public const string DebugCell = "DebugCell";
-     public const string ChangeObstacleStateView = "ChangeObstacleStateView";
      public const string BorderDark = "BorderDark";
      public const string BorderDarkLeft = "BorderDarkLeft";
      public const string BorderDarkRight = "BorderDarkRight";
@@ -184,6 +182,8 @@ public class R
      public const string ProductionReadyParticle = "ProductionReadyParticle";
      public const string FogDefaultMaterial = "FogDefaultMaterial";
      public const string PiecesUnderFogMaterial = "PiecesUnderFogMaterial";
+     public const string RewardsBubbleView = "RewardsBubbleView";
+     public const string ObstacleBubbleView = "ObstacleBubbleView";
      public const string GodRayView = "GodRayView";
      public const string SK1_PRPiece = "SK1_PRPiece";
      public const string SK2_PRPiece = "SK2_PRPiece";

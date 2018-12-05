@@ -14,7 +14,7 @@ public class ChestSaveItemJsonConverter : JsonConverter
         var targetValue = (ChestSaveItem) value;
         
         serializer.TypeNameHandling = TypeNameHandling.None;
-        serializer.Serialize(writer, $"{targetValue.Position.ToSaveString()},{targetValue.RewardAmount},{targetValue.Reward.ToSaveString()},");
+        serializer.Serialize(writer, $"{targetValue.Position.ToSaveString()},{targetValue.RewardAmount},{(targetValue.IsComplete ? 1 : 0)},{targetValue.Reward.ToSaveString()},");
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -26,7 +26,8 @@ public class ChestSaveItemJsonConverter : JsonConverter
         {
             Position = new BoardPosition(int.Parse(dataArray[0]), int.Parse(dataArray[1]), int.Parse(dataArray[2])),
             RewardAmount = int.Parse(dataArray[3]),
-            Reward = DictionaryStringConverter.FromDataArray(dataArray, int.Parse, int.Parse, 4)
+            IsComplete = int.Parse(dataArray[4]) == 1,
+            Reward = DictionaryStringConverter.FromDataArray(dataArray, int.Parse, int.Parse, 5)
         };
         
         return targetValue;
@@ -39,6 +40,7 @@ public class ChestSaveItem
     private BoardPosition position;
     private Dictionary<int, int> reward;
     private int rewardAmount;
+    private bool isComplete;
     
     public BoardPosition Position
     {
@@ -56,5 +58,11 @@ public class ChestSaveItem
     {
         get { return rewardAmount; }
         set { rewardAmount = value; }
+    }
+
+    public bool IsComplete
+    {
+        get { return isComplete; }
+        set { isComplete = value; }
     }
 }

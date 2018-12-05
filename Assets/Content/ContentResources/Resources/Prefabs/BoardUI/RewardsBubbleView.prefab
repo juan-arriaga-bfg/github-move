@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 4474059798550944}
   - component: {fileID: 114766297059166980}
   m_Layer: 0
-  m_Name: ChangeStorageStateView
+  m_Name: RewardsBubbleView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1852265019402934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc4efb79507363645bff69d6f43ae756, type: 3}
+  m_Script: {fileID: 11500000, guid: b732fa0d06291bc4496d11e607f3abc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lastBoardPosition:

@@ -6,10 +6,7 @@
         
 		CreateViewComponent(piece);
         
-		var observer = new ChestPieceComponent();
-        
-		piece.RegisterComponent(observer);
-		AddObserver(piece, observer);
+		AddObserver(piece, new ChestPieceComponent());
         
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionOpenChestWindow())
