@@ -53,13 +53,28 @@ public class PiecePositionsCacheComponent : IECSComponent
 		var ids = PieceType.GetIdsByFilter(filter);
 		var list = new List<BoardPosition>();
 
-		foreach (var id in ids)
-		{
-			list.AddRange(GetPiecePositionsByType(id));
-		}
-		
-		return list;
+	    for (var i = 0; i < ids.Count; i++)
+	    {
+	        var id = ids[i];
+	        list.AddRange(GetPiecePositionsByType(id));
+	    }
+
+	    return list;
 	}
+    
+    public List<BoardPosition> GetPiecePositionsByFilter(PieceTypeFilter filter, PieceTypeFilter exclude)
+    {
+        var ids = PieceType.GetIdsByFilter(filter, exclude);
+        var list = new List<BoardPosition>();
+
+        for (var i = 0; i < ids.Count; i++)
+        {
+            var id = ids[i];
+            list.AddRange(GetPiecePositionsByType(id));
+        }
+
+        return list;
+    }
 
 	public List<BoardPosition> GetRandomPositions(PieceTypeFilter filter, int count)
 	{

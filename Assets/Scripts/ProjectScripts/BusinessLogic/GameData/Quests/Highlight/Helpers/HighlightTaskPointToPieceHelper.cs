@@ -85,7 +85,7 @@ public static class HighlightTaskPointToPieceHelper
         return false;
     }
 
-    private static void ShowArrowForRandomPos(List<BoardPosition> positions)
+    public static void ShowArrowForRandomPos(List<BoardPosition> positions)
     {
         int index = Random.Range(0, positions.Count);
         BoardPosition selectedPosition = positions[index];

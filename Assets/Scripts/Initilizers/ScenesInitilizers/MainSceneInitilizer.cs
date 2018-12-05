@@ -36,6 +36,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.ConfirmRemoverMessageWindow,
             UIWindowType.DailyQuestWindow,
             UIWindowType.SuperMatchHintWindow,
+            UIWindowType.FireflyHintWindow,
             UIWindowType.ResourcePanelWindow,
         });
         

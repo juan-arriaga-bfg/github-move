@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class HighlightTaskSuperMatch : ITaskHighlight
 {
     public bool Highlight(TaskEntity task)
@@ -5,6 +7,7 @@ public class HighlightTaskSuperMatch : ITaskHighlight
         TaskSuperMatchEntity superMatchTask = task as TaskSuperMatchEntity;
         if (superMatchTask == null)
         {
+            Debug.LogError($"[HighlightTaskSuperMatch] => Unsupported task type: {task.GetType()}");
             return false;
         }
 

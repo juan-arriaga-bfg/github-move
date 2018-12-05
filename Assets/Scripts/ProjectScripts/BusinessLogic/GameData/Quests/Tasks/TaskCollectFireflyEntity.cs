@@ -1,3 +1,5 @@
+[TaskHighlight(typeof(HighlightTaskCollectFirefly))]
+[TaskHighlight(typeof(HighlightTaskFireflyPopup))]
 public class TaskCollectFireflyEntity : TaskCurrencyEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
