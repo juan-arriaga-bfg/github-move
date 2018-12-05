@@ -26,7 +26,7 @@ public class AnimationDataManager
         var piecesId = PieceType.GetIdsByFilter(filter);
         foreach (var id in piecesId)
         {
-            Debug.LogWarning($"{PieceType.GetDefById(id).Abbreviations[0]}");
+            // Debug.LogWarning($"{PieceType.GetDefById(id).Abbreviations[0]}");
             AddPiece(defDict, id, definition);
         }
     }
