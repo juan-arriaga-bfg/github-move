@@ -33,7 +33,7 @@ public static partial class Currency
                           public static readonly CurrencyDef Damage      = new CurrencyDef { Id = 120, Name = "Damage",      IsConsumable = true };
                           public static readonly CurrencyDef Life        = new CurrencyDef { Id = 130, Name = "Life",        IsConsumable = true };
                           public static readonly CurrencyDef Timer       = new CurrencyDef { Id = 140, Name = "Timer",       IsConsumable = true };
-                          public static readonly CurrencyDef Firefly    = new CurrencyDef { Id = 150, Name = "Fireflay",     IsConsumable = true };
+                          public static readonly CurrencyDef Firefly     = new CurrencyDef { Id = 150, Name = "Firefly",     IsConsumable = true };
     
                           public static readonly CurrencyDef Resources   = new CurrencyDef { Id = 1000, Name = "Resources",  IsConsumable = true };
     [IncludeToCheatSheet] public static readonly CurrencyDef PR_A5       = new CurrencyDef { Id = 1001, Name = "PR_A5",      IsConsumable = true, Icon = "PR_A5" };

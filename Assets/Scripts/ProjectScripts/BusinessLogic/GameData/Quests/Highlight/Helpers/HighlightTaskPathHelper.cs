@@ -4,20 +4,30 @@ public static class HighlightTaskPathHelper
 {
     public static List<BoardPosition> GetAccessiblePositions(List<BoardPosition> positionsToCheck)
     {
-        var board      = BoardService.Current.FirstBoard;
-        var boardLogic = board.BoardLogic;
-        
         List<BoardPosition> ret = new List<BoardPosition>();
         
         foreach (var pos in positionsToCheck)
         {
-            var piece = boardLogic.GetPieceAt(pos);
-            if (piece != null && board.Pathfinder.CanPathToCastle(piece))
+            if (IsPositionAccessible(pos))
             {
                 ret.Add(pos);
             }
         }
 
         return ret;
+    }
+    
+    public static bool IsPositionAccessible(BoardPosition pos)
+    {
+        var board = BoardService.Current.FirstBoard;
+        var boardLogic = board.BoardLogic;
+        
+        var piece = boardLogic.GetPieceAt(pos);
+        if (piece != null && board.Pathfinder.CanPathToCastle(piece))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

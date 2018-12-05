@@ -24,7 +24,8 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     public TimerComponent DailyTimer { get; private set; }
 
     private Dictionary<Type, Dictionary<string, JToken>> cache;
-    
+    public Dictionary<Type, Dictionary<string, JToken>> Cache => cache;
+
     /// <summary>
     /// List of Story-related Quests that currently in progress
     /// </summary>
@@ -235,7 +236,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         return ret;
     }
 
-    private T InstantiateFromJson<T>(JToken token) where T : IECSComponent
+    public T InstantiateFromJson<T>(JToken token) where T : IECSComponent
     {
         var bkp = JsonConvert.DefaultSettings;
         JsonConvert.DefaultSettings = () => serializerSettings;

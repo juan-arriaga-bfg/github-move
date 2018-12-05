@@ -11,22 +11,27 @@ public abstract class HighlightTaskUsingPieceFilter : TaskHighlightUsingArrow
     
     protected HashSet<int> allowedPieceTypes = null;
 
+    // Override to get additional conditions for pieces filtering
+    protected virtual bool Validate(Piece piece)
+    {
+        return true;
+    }
+    
     protected override bool ShowArrow(TaskEntity task, float delay)
     {
         var boardLogic = BoardService.Current.FirstBoard.BoardLogic;
         var positionsByFilter = boardLogic.PositionsCache.GetPiecePositionsByFilter(filter);
 
-        if (allowedPieceTypes != null)
+        for (int i = positionsByFilter.Count - 1; i >= 0; i--)
         {
-            for (int i = positionsByFilter.Count - 1; i >= 0; i--)
-            {
-                var piece = boardLogic.GetPieceAt(positionsByFilter[i]);
-                var type = piece.PieceType;
+            var piece = boardLogic.GetPieceAt(positionsByFilter[i]);
+            var type = piece.PieceType;
 
-                if (!allowedPieceTypes.Contains(type))
-                {
-                    positionsByFilter.RemoveAt(i);
-                }
+            if (!Validate(piece) 
+                || (allowedPieceTypes != null && !allowedPieceTypes.Contains(type))
+            )
+            {
+                positionsByFilter.RemoveAt(i);
             }
         }
         

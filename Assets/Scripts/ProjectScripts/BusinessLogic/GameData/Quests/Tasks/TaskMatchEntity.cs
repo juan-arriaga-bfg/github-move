@@ -1,8 +1,8 @@
-using Newtonsoft.Json;
-using Quests;
 using UnityEngine;
 
-[TaskHighlight(typeof(HighlightTaskNotImplemented))]
+[TaskHighlight(typeof(HighlightTaskFindObstacleForPieceType))]
+[TaskHighlight(typeof(HighlightTaskFirstMineOfAnyType))]
+[TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskMatchEntity : TaskCounterAboutPiece, IBoardEventListener
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();

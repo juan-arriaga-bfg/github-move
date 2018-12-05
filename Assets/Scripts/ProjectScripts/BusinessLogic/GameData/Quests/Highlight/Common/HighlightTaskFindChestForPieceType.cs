@@ -15,6 +15,6 @@ public class HighlightTaskFindChestForPieceType : TaskHighlightUsingArrow
         }
 
         var sourceFilter = PieceTypeFilter.Chest;
-        return HighlightTaskPointToPieceTypeHelper.PointToPieceSource(pieceTask, sourceFilter);
+        return HighlightTaskPointToPieceSourceHelper.PointToPieceSource(pieceTask, sourceFilter);
     }
 }

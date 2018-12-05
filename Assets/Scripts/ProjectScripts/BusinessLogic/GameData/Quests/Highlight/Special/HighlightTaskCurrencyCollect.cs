@@ -11,27 +11,27 @@ public class HighlightTaskCurrencyCollect : ITaskHighlight
             return false;
         }
         
-        if (string.IsNullOrEmpty(currencyTask.Currency))
+        if (string.IsNullOrEmpty(currencyTask.CurrencyName))
         {
             return false;
         }
 
-        if (currencyTask.Currency.StartsWith("Soft"))
+        if (currencyTask.CurrencyName == Currency.Coins.Name)
         {
             return HighlightSoft(currencyTask);
         }  
         
-        if (currencyTask.Currency.StartsWith("Hard"))
+        if (currencyTask.CurrencyName == Currency.Crystals.Name)
         {
             return new HighlightTaskNotImplemented().Highlight(currencyTask);
         }
         
-        if (currencyTask.Currency.StartsWith("Mana"))
+        if (currencyTask.CurrencyName == Currency.Mana.Name)
         {
             return HighlightOrdersButton(currencyTask);
         }
 
-        Debug.LogError($"[HighlightTaskCurrencyCollect] => Unsupported Currency type: '{currencyTask.Currency}'");
+        Debug.LogError($"[HighlightTaskCurrencyCollect] => Unsupported Currency type: '{currencyTask.CurrencyName}'");
         
         return false;
     }
@@ -65,7 +65,7 @@ public class HighlightTaskCurrencyCollect : ITaskHighlight
 
         foreach (var id in chain)
         {
-            if (HighlightTaskAboutPiece.FindAndPointToPiece(id))
+            if (HighlightTaskPointToPieceHelper.FindAndPointToRandomPiece(id))
             {
                 return true;
             }

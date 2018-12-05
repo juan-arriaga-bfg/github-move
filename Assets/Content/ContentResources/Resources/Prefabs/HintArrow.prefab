@@ -83,7 +83,7 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: d52376289bc0a4d32829bfc7e82deae1, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!114 &114111662036720030
@@ -97,9 +97,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400eb5de43e1e1240b6e2bf7e3ae234e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastBoardPosition:
+    X: 0
+    Y: 0
+    Z: 0
   IsFading: 0
   FadeValue: 0
   icon: {fileID: 212959770271376500}
+  animation: {fileID: 111021213617141936}
 --- !u!212 &212959770271376500
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -35,7 +35,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.NextLevelWindow,
             UIWindowType.ConfirmRemoverMessageWindow,
             UIWindowType.DailyQuestWindow,
-            UIWindowType.ResourcePanelWindow,
+            UIWindowType.SuperMatchHintWindow,
         });
         
         // on cache complete
@@ -43,12 +43,10 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         {
             // close launcher
             UIService.Get.CloseWindow(UIWindowType.LauncherWindow);
-
-            UIService.Get.ShowWindow(UIWindowType.ResourcePanelWindow);
             
             // get model for window
             UIService.Get.ShowWindow(UIWindowType.MainWindow);
-            
+
             onComplete?.Invoke();
             
             ProfileService.Current.QueueComponent.Run();

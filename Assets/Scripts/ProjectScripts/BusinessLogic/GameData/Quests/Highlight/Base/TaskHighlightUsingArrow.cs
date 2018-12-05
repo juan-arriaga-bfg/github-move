@@ -13,7 +13,7 @@ public abstract class TaskHighlightUsingArrow : ITaskHighlight
              hintCooldown.Pause(this);
  
              DOTween.Sequence()
-                    .AppendInterval(HintArrowView.DURATION + DELAY_BEFORE_SHOW_ARROW)
+                    .AppendInterval(HintArrowView.FADE_DURATION + DELAY_BEFORE_SHOW_ARROW)
                     .AppendCallback(() =>
                      {
                          hintCooldown.Resume(this);

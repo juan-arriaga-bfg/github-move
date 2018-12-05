@@ -1,9 +1,9 @@
 using UnityEngine;
 
 /// <summary>
-/// Highlight random obstacle that can produce Piece specified in the task
+/// Highlight random mine that can produce Piece specified in the task
 /// </summary>
-public class HighlightTaskFindObstacleForPieceType : TaskHighlightUsingArrow
+public class HighlightTaskFindMineForPieceType : TaskHighlightUsingArrow
 {
     protected override bool ShowArrow(TaskEntity task, float delay)
     {
@@ -14,7 +14,7 @@ public class HighlightTaskFindObstacleForPieceType : TaskHighlightUsingArrow
             return false;
         }
 
-        var sourceFilter = PieceTypeFilter.Obstacle;
-        return HighlightTaskPointToPieceTypeHelper.PointToPieceSource(pieceTask, sourceFilter);
+        var sourceFilter = PieceTypeFilter.Mine;
+        return HighlightTaskPointToPieceSourceHelper.PointToPieceSource(pieceTask, sourceFilter);
     }
 }
