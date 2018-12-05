@@ -65,20 +65,33 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		timer.OnComplete -= OnTimerComplete;
 	}
 
-	protected virtual void InitInSave(BoardPosition position)
+	protected virtual LifeSaveItem InitInSave(BoardPosition position)
 	{
 		Rewards.InitInSave(position);
 		
 		var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
 		var item = save?.GetLifeSave(position);
 		
-		if(item == null) return;
+		if(item == null) return null;
 		
 		current = item.Step;
-		Context.Context.WorkerLogic.Init(Context.CachedPosition, Timer);
+		Context.Context.WorkerLogic.Init(Context.CachedPosition, timer);
 
-		if (item.IsStart) Timer.Start(item.StartTime);
+		if (item.IsStartTimer) timer.Start(item.StartTimeTimer);
 		else OnTimerStart();
+
+		return item;
+	}
+
+	public virtual LifeSaveItem Save()
+	{
+		return current == 0 ? null : new LifeSaveItem
+		{
+			Step = current,
+			Position = Context.CachedPosition,
+			IsStartTimer = timer.IsExecuteable(),
+			StartTimeTimer = timer.StartTimeLong
+		};
 	}
     
 	public virtual bool Damage(bool isExtra = false)
@@ -99,7 +112,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		return true;
 	}
 	
-	private void OnTimerStart()
+	protected void OnTimerStart()
 	{
 		if (IsDead == false) OnStep();
 		else OnComplete();

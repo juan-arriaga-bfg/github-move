@@ -31,10 +31,29 @@ public class MakingLifeComponent : WorkplaceLifeComponent
         return GameDataService.Current.PiecesManager.GetSequence(def.Uid).GetNextDict(def.PieceAmount);
     }
     
-    protected override void InitInSave(BoardPosition position)
+    protected override LifeSaveItem InitInSave(BoardPosition position)
     {
-        Locker.Unlock(this);
-        base.InitInSave(position);
+        var item = base.InitInSave(position);
+        
+        if (item == null) return null;
+        
+        if (item.IsStartCooldown) cooldown.Start(item.StartTimeCooldown);
+        else Locker.Unlock(this);
+        
+        return item;
+    }
+    
+    public override LifeSaveItem Save()
+    {
+        return new LifeSaveItem
+        {
+            Step = current,
+            Position = Context.CachedPosition,
+            IsStartTimer = timer.IsExecuteable(),
+            StartTimeTimer = timer.StartTimeLong,
+            IsStartCooldown = cooldown.IsExecuteable(),
+            StartTimeCooldown = cooldown.StartTimeLong
+        };
     }
     
     public override bool Damage(bool isExtra = false)

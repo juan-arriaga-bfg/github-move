@@ -268,15 +268,10 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			var component = piece?.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
 			
 			if(component == null) break;
-			if(component.Current == 0 && component.HP != -1) continue;
+
+			var item = component.Save();
 			
-			var item = new LifeSaveItem
-			{
-				Step = component.Current,
-				StartTime = component.Timer.StartTimeLong,
-				IsStart = component.Timer.IsExecuteable(),
-				Position = position
-			};
+			if(item == null) continue;
 			
 			items.Add(item);
 		}

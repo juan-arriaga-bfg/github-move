@@ -13,7 +13,27 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         
         HP = Context.Context.BoardLogic.MatchDefinition.GetIndexInChain(Context.PieceType);
     }
-    
+
+    protected override LifeSaveItem InitInSave(BoardPosition position)
+    {
+        Rewards.InitInSave(position);
+		
+        var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+        var item = save?.GetLifeSave(position);
+		
+        if(item == null) return null;
+		
+        current = item.Step;
+        Context.Context.WorkerLogic.Init(Context.CachedPosition, Timer);
+        
+        Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current - 1);
+        
+        if (item.IsStartTimer) Timer.Start(item.StartTimeTimer);
+        else OnTimerStart();
+
+        return item;
+    }
+
     protected override Dictionary<int, int> GetRewards()
     {
         return IsDead

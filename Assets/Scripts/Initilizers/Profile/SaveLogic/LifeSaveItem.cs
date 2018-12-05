@@ -13,7 +13,7 @@ public class LifeSaveItemJsonConverter : JsonConverter
         var targetValue = (LifeSaveItem) value;
         
         serializer.TypeNameHandling = TypeNameHandling.None;
-        serializer.Serialize(writer, $"{targetValue.Step},{targetValue.StartTime},{(targetValue.IsStart ? 1 : 0)},{targetValue.Position.ToSaveString()}");
+        serializer.Serialize(writer, $"{targetValue.Step},{targetValue.Position.ToSaveString()},{(targetValue.IsStartTimer ? 1 : 0)},{targetValue.StartTimeTimer},{(targetValue.IsStartCooldown ? 1 : 0)},{targetValue.StartTimeCooldown}");
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -24,9 +24,11 @@ public class LifeSaveItemJsonConverter : JsonConverter
         var targetValue = new LifeSaveItem
         {
             Step = int.Parse(dataArray[0]),
-            StartTime = long.Parse(dataArray[1]),
-            IsStart = int.Parse(dataArray[2]) == 1,
-            Position = new BoardPosition(int.Parse(dataArray[3]), int.Parse(dataArray[4]), int.Parse(dataArray[5]))
+            Position = new BoardPosition(int.Parse(dataArray[1]), int.Parse(dataArray[2]), int.Parse(dataArray[3])),
+            IsStartTimer = int.Parse(dataArray[4]) == 1,
+            StartTimeTimer = long.Parse(dataArray[5]),
+            IsStartCooldown = int.Parse(dataArray[6]) == 1,
+            StartTimeCooldown = long.Parse(dataArray[7])
         };
         
         return targetValue;
@@ -36,21 +38,19 @@ public class LifeSaveItemJsonConverter : JsonConverter
 [JsonConverter(typeof(LifeSaveItemJsonConverter))]
 public class LifeSaveItem
 {
-    private int step;
-    private long startTime;
     private BoardPosition position;
-    private bool isStart;
+    private int step;
+    
+    private bool isStartTimer;
+    private long startTimeTimer;
+    
+    private bool isStartCooldown;
+    private long startTimeCooldown;
     
     public int Step
     {
         get { return step; }
         set { step = value; }
-    }
-    
-    public long StartTime
-    {
-        get { return startTime; }
-        set { startTime = value; }
     }
     
     public BoardPosition Position
@@ -59,9 +59,27 @@ public class LifeSaveItem
         set { position = value; }
     }
     
-    public bool IsStart
+    public bool IsStartTimer
     {
-        get { return isStart; }
-        set { isStart = value; }
+        get { return isStartTimer; }
+        set { isStartTimer = value; }
+    }
+    
+    public long StartTimeTimer
+    {
+        get { return startTimeTimer; }
+        set { startTimeTimer = value; }
+    }
+    
+    public bool IsStartCooldown
+    {
+        get { return isStartCooldown; }
+        set { isStartCooldown = value; }
+    }
+    
+    public long StartTimeCooldown
+    {
+        get { return startTimeCooldown; }
+        set { startTimeCooldown = value; }
     }
 }

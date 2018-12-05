@@ -99,6 +99,8 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
     
     public void Clear()
     {
+        if(IsShow == false) return;
+        
         Context.Context.TutorialLogic.Pause(true);
         life.Damage();
         Change(false);

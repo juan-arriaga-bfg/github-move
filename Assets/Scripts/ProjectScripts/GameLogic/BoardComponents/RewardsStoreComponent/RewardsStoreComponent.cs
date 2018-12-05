@@ -38,12 +38,11 @@ public class RewardsStoreComponent : IECSComponent
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
         var item = save?.GetChestsSave(position);
 
-        if (item != null)
-        {
-            rewards = item.Reward;
-        }
+        if (item == null) return;
         
-        InitRewards();
+        rewards = item.Reward;
+        
+        if (item.IsComplete) Show();
     }
 
     public ChestSaveItem Save()
@@ -54,7 +53,8 @@ public class RewardsStoreComponent : IECSComponent
             {
                 Position = context.CachedPosition,
                 Reward = rewards,
-                RewardAmount = defaulAmaunt
+                RewardAmount = defaulAmaunt,
+                IsComplete = IsComplete
             };
     }
 
@@ -94,8 +94,8 @@ public class RewardsStoreComponent : IECSComponent
         if(context.ViewDefinition == null) return;
         
         var view = context.ViewDefinition.AddView(ViewType.RewardsBubble) as RewardsBubbleView;
-        
-        if(view == null) return;
+
+        if (view == null || view.IsShow == isShow) return;
         
         if (isShow)
         {

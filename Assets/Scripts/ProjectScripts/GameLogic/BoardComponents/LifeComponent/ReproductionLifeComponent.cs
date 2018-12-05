@@ -41,10 +41,28 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         return pieces;
     }
     
-    protected override void InitInSave(BoardPosition position)
+    protected override LifeSaveItem InitInSave(BoardPosition position)
     {
-        Locker.Unlock(this);
-        base.InitInSave(position);
+        var item = base.InitInSave(position);
+        
+        if (item == null) return null;
+        
+        if (item.IsStartCooldown) cooldown.Start(item.StartTimeCooldown);
+        else Locker.Unlock(this);
+        
+        return item;
+    }
+    
+    public override LifeSaveItem Save()
+    {
+        var save = base.Save();
+        
+        if (save == null) return null;
+        
+        save.IsStartCooldown = cooldown.IsExecuteable();
+        save.StartTimeCooldown = cooldown.StartTimeLong;
+        
+        return save;
     }
 
     public override bool Damage(bool isExtra = false)
