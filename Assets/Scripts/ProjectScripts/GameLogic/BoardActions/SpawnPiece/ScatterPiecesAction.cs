@@ -29,8 +29,14 @@ public class ScatterPiecesAction : IBoardAction
 		var pieces = new Dictionary<BoardPosition, Piece>();
 		var cells = new List<BoardPosition>();
 		var amount = Pieces.Sum(pair => pair.Value);
-		
-		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(from, cells, amount, 0.1f) == false) return false;
+
+		if (IsTargetReplace) amount -= 1;
+
+		if (amount > 0 && gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(from, cells, amount, 0.1f) == false)
+		{
+			OutOfCells(gameBoardController, from);
+			return false;
+		}
 
 		var animation = new ScatterPiecesAnimation {From = from};
 		
@@ -43,8 +49,6 @@ public class ScatterPiecesAction : IBoardAction
 			gameBoardController.BoardLogic.AddPieceToBoard(from.X, from.Y, piece);
 
 			animation.Replace = piece;
-			
-			cells.RemoveAt(0);
 		}
 		
 		gameBoardController.BoardLogic.LockCell(from, this);
@@ -67,8 +71,12 @@ public class ScatterPiecesAction : IBoardAction
 			{
 				gameBoardController.BoardLogic.UnlockCell(pair.Key, this);
 			}
-
+			
 			OnComplete?.Invoke();
+			
+			if(Pieces.Count == 0) return;
+
+			OutOfCells(gameBoardController, from);
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);
@@ -104,5 +112,12 @@ public class ScatterPiecesAction : IBoardAction
 		
 		pieces.Add(position, piece);
 		board.BoardLogic.LockCell(position, this);
+	}
+
+	private void OutOfCells(BoardController board, BoardPosition position)
+	{
+		var rewards = board.BoardLogic.GetPieceAt(position)?.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid);
+
+		rewards?.ShowBubble();
 	}
 }

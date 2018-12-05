@@ -14,6 +14,7 @@ public class RewardsStoreComponent : IECSComponent
     public Vector2 BubbleOffset = new Vector3(0, 1.5f);
     
     public string Icon => PieceType.Parse(next);
+    public bool IsHightlight => rewards != null && rewards.Sum(pair => pair.Value) < defaulAmaunt;
     
     public bool IsTargetReplace;
     public bool IsComplete;
@@ -41,6 +42,7 @@ public class RewardsStoreComponent : IECSComponent
         if (item == null) return;
         
         rewards = item.Reward;
+        defaulAmaunt = item.RewardAmount;
         
         if (item.IsComplete) ShowBubble();
     }
@@ -86,14 +88,32 @@ public class RewardsStoreComponent : IECSComponent
     
     public void GetInBubble()
     {
+        if(CheckOutOfCells()) return;
+        
         UpdateView(false);
     }
 
     public void GetInWindow()
     {
         InitRewards();
+        
+        if(CheckOutOfCells()) return;
+        
         Scatter();
-        IsComplete = true;
+    }
+    
+    public bool CheckOutOfCells()
+    {
+        var current = rewards.Sum(pair => pair.Value);
+        
+        if (IsTargetReplace) current -= 1;
+        
+        var cells = new List<BoardPosition>();
+
+        if (current == 0 || context.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(context.CachedPosition, cells, current, 0.1f)) return false;
+        
+        UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
+        return true;
     }
     
     private void UpdateView(bool isShow)

@@ -16,7 +16,7 @@ public class ScatterPiecesAnimation : BoardAnimation
         
         var sequence = DOTween.Sequence().SetId(animationUid);
         
-        if (Pieces.Count != 0)
+        if (Pieces.Count > 0)
         {
             sequence.Append(target.CachedTransform.DOScale(new Vector3(1.2f, 0.7f, 1f), 0.1f));
             sequence.Append(target.CachedTransform.DOScale(new Vector3(0.7f, 1.2f, 1f), 0.1f));

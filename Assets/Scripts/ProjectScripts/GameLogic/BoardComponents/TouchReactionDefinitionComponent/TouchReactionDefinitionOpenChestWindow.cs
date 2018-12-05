@@ -6,7 +6,7 @@
 	{
 		if (chestComponent == null) chestComponent = piece.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
 		
-		if (chestComponent?.Def == null) return false;
+		if (chestComponent?.Def == null || chestComponent.Rewards.IsHightlight) return false;
 
 		var model = UIService.Get.GetCachedModel<UIChestMessageWindowModel>(UIWindowType.ChestMessage);
 
