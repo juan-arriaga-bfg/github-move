@@ -14,7 +14,9 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	private BoardLogicComponent context;
 
 	private List<Vector2> slots = new List<Vector2>();
-	private List<FireflyView> views = new List<FireflyView>();
+    
+	private readonly List<FireflyView> views = new List<FireflyView>();
+    public List<FireflyView> Views => views;
 	
 	private int index = 1;
 	private int delay = 1;

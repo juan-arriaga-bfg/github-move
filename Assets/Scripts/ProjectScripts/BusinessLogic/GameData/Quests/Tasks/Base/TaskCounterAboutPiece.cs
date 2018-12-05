@@ -1,5 +1,6 @@
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using UnityEngine;
 
 /// <summary>
 /// Base class for Tasks that require PieceId field.
@@ -27,12 +28,27 @@ public abstract class TaskCounterAboutPiece : TaskCounterEntity, IHavePieceId
     [OnDeserialized]
     protected void OnDeserializedTaskCounterAboutPiece(StreamingContext context)
     {
-        if (string.IsNullOrEmpty(PieceUid))
+        if (!string.IsNullOrEmpty(PieceUid))
         {
-            return;
+            PieceId = PieceType.Parse(PieceUid);
         }
-        
-        PieceId = PieceType.Parse(PieceUid);
+
+        var validationError = ValidateDeserializedData();
+        if (!string.IsNullOrEmpty(validationError))
+        {
+            Debug.LogError($"[TaskCounterAboutPiece] => [OnDeserialized]: Task with id '{Id}': Validation failed: {validationError}");
+        }
+    }
+
+    /// <summary>
+    /// Override to made any checks immediately after instantiation from json
+    /// </summary>
+    /// <returns>
+    /// Null if all ok and message if fail
+    /// </returns>
+    protected virtual string ValidateDeserializedData()
+    {
+        return null;
     }
     
 #endregion

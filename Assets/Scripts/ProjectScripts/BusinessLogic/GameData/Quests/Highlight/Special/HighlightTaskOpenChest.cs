@@ -4,9 +4,6 @@ using UnityEngine;
 /// <summary>
 /// Highlight random chest on the field
 /// </summary>
-[TaskHighlight(typeof(HighlightTaskPointToShopButton))]
-[TaskHighlight(typeof(HighlightTaskFindObstacleForPieceType))]
-[TaskHighlight(typeof(HighlightTaskFirstMineOfAnyType))]
 public class HighlightTaskOpenChest : HighlightTaskUsingPieceFilter
 {
     protected override bool ShowArrow(TaskEntity task, float delay)

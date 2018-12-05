@@ -41,20 +41,42 @@ public class FireflyView : BoardElementView
         
         var temp = Plume.main;
         temp.loop = true;
+
+        RemoveArrowImmediate();
     }
 
-    public void AddArrow()
+    public void AddArrow(float showDelay = 0, bool isLoop = true)
     {
-        arrow = HintArrowView.Show(CachedTransform, 0, 1f, false, true);
+        if (arrow != null)
+        {
+            return;
+        }
+        
+        arrow = HintArrowView.Show(CachedTransform, 0, 1f, false, isLoop, showDelay);
         arrow.CachedTransform.SetParent(CachedTransform, true);
+        arrow.SetOnRemoveAction(() =>
+        {
+            arrow = null;
+        });
     }
 
-    public void RemoveArrow()
+    public void RemoveArrow(float delay = 0)
     {
         if(arrow == null) return;
+
+        arrow.Remove(delay);
+    }
+    
+    public void RemoveArrowImmediate()
+    {
+        if (arrow == null)
+        {
+            return;
+        }
         
+        RemoveArrow();
+        arrow.gameObject.SetActive(false);
         arrow.CachedTransform.SetParent(null);
-        arrow.Remove(0);
     }
 
     public void OnDragStart()
@@ -100,7 +122,7 @@ public class FireflyView : BoardElementView
         }
 
         CurrencyHellper.Purchase(Currency.Firefly.Name, 1);
-        RemoveArrow();
+        RemoveArrowImmediate();
         
         Plume.gameObject.SetActive(true);
         Context.Context.ActionExecutor.AddAction(new FireflyPieceSpawnAction

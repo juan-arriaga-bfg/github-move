@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HighlightTaskUsingObstaclePieceFilter : HighlightTaskUsingPieceFilter
+public class HighlightTaskTree : HighlightTaskUsingPieceFilter
 {
     protected override bool ShowArrow(TaskEntity task, float delay)
     {
@@ -8,13 +8,9 @@ public class HighlightTaskUsingObstaclePieceFilter : HighlightTaskUsingPieceFilt
         {
             filter = PieceTypeFilter.Tree;
         }
-        else if (task is TaskKillFieldEntity)
-        {
-            filter = PieceTypeFilter.ProductionField;
-        }
         else
         {
-            Debug.LogError($"[HighlightTaskUsingPieceFilter] => Unsupported task type: {task.GetType()}");
+            Debug.LogError($"[HighlightTaskTree] => Unsupported task type: {task.GetType()}");
             return false;
         }
         

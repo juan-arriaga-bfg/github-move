@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class TaskHighlightMineHelper
+public static class HighlightTaskMineHelper
 {
     public static bool Highlight(int mineId)
     {

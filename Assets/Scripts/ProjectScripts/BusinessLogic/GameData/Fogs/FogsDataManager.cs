@@ -136,13 +136,48 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
 
         return ActiveFogs[index];
     }
-
-    /// <summary>
-    /// If there are more than one fog with level x, random one will be selected 
-    /// </summary>
-    public string GetUidOfFirstNotClearedFog()
+    
+    public FogDef GetRandomActiveFogWithLeastPrice()
     {
-        return GetRandomActiveFogWithLeastLevel()?.Uid;
+        if (ActiveFogs.Count == 0)
+        {
+            Debug.LogError("[FogsDataManager] => GetRandomActiveFogWithLeastPrice: No defs found!");
+            return null;
+        }
+
+        List<FogDef> fogsWithMinPrice = new List<FogDef>();
+
+        foreach (var fog in ActiveFogs)
+        {
+            if (fogsWithMinPrice.Count == 0)
+            {
+                fogsWithMinPrice.Add(fog);
+                continue;
+            }
+
+            var firstSavedFogPrice = fogsWithMinPrice[0].Condition.Amount;
+            var currentFogPrice = fog.Condition.Amount;
+            
+            if (firstSavedFogPrice > currentFogPrice)
+            {
+                fogsWithMinPrice.Clear();
+                fogsWithMinPrice.Add(fog);
+            }
+            else if (firstSavedFogPrice == currentFogPrice)
+            {
+                fogsWithMinPrice.Add(fog);
+            }
+        }
+
+        if (fogsWithMinPrice.Count == 0)
+        {
+            Debug.LogError("[FogsDataManager] => GetRandomActiveFogWithLeastPrice: No defs with least price found!");
+            return null;
+        }
+        
+        int index = Random.Range(0, fogsWithMinPrice.Count);
+
+        return fogsWithMinPrice[index];
     }
 
     public List<GridMeshArea> GetFoggedAreas()

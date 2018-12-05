@@ -1,4 +1,4 @@
-[TaskHighlight(typeof(HighlightTaskNotImplemented))]
+[TaskHighlight(typeof(HighlightTaskCurrencySpend))]
 public class TaskCurrencySpendEntity : TaskCurrencyEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
@@ -13,7 +13,7 @@ public class TaskCurrencySpendEntity : TaskCurrencyEntity
 
         foreach (var price in shopItem.CurrentPrices)
         {
-            if (price.Currency == Currency)
+            if (price.Currency == CurrencyName)
             {
                 CurrentValue += price.TargetPriceAmount;
             }
