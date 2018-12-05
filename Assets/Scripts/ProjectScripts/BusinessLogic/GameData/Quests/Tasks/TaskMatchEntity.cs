@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[TaskHighlight(typeof(HighlightTaskMatch))]
 [TaskHighlight(typeof(HighlightTaskFindObstacleForPieceType))]
 [TaskHighlight(typeof(HighlightTaskFirstMineOfAnyType))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
@@ -41,5 +42,15 @@ public class TaskMatchEntity : TaskCounterAboutPiece, IBoardEventListener
         {
             CurrentValue += 1;
         }
+    }
+    
+    protected override string ValidateDeserializedData()
+    {
+        if (PieceId != PieceType.Empty.Id && PieceId != PieceType.None.Id)
+        {
+            return "Only abstract 'Empty' or 'None' piece types are supported as target. Do not use exact piece type";
+        }
+
+        return null;
     }
 }

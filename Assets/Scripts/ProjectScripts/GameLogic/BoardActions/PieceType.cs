@@ -75,6 +75,26 @@ public static partial class PieceType
         return result;
     }
     
+    public static List<int> GetIdsByFilter(PieceTypeFilter filter, PieceTypeFilter exclude)
+    {
+        var result = new List<int>();
+
+        foreach (var def in defs.Values)
+        {
+            if(def.Filter.Has(filter) == false) continue;
+            if (def.Filter.Has(exclude)) continue;
+            
+            // ignore empty piece
+            if (def.Id == PieceType.Empty.Id) continue;
+            
+            result.Add(def.Id);
+        }
+        
+        result.Sort((a, b) => a.CompareTo(b));
+        
+        return result;
+    }
+    
     public static List<int> GetAllIds()
     {
         var result = new List<int>();
