@@ -38,7 +38,8 @@ public class CollapsePieceToAction : IBoardAction
 				resultPositions.Add(pos);
 			}
 		}
-
+		
+		
 		return resultPositions;
 	}
 	
@@ -49,14 +50,14 @@ public class CollapsePieceToAction : IBoardAction
 		var targetPiece = gameBoardController.BoardLogic.GetPieceAt(To);
 			
 		var positonsForLock = GetPositionsIncludeMask(gameBoardController);
-			
-	
+		gameBoardController.BoardLogic.LockCells(positonsForLock, this);
+
 		var obstaclesPieces = new List<Piece>();
 		
 		foreach (var pos in Positions)
 		{
 			var piece = gameBoardController.BoardLogic.GetPieceAt(pos);
-			if (((int)PieceType.GetDefById(piece.PieceType).Filter & (int)PieceTypeFilter.Obstacle) != 0)
+			if (piece != null && ((int)PieceType.GetDefById(piece.PieceType).Filter & (int)PieceTypeFilter.Obstacle) != 0)
 			{
 				obstaclesPieces.Add(piece);
 			}	

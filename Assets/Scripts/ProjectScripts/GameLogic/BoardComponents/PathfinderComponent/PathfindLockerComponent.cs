@@ -345,7 +345,6 @@ public class PathfindLockerComponent : ECSEntity
     
     public virtual void RecalcCacheOnPieceRemoved(HashSet<BoardPosition> target , BoardPosition changedPosition, Piece removedPiece)
     {
-        Debug.LogError("Remove recalc cache");
         if(removedPiece.PieceType == PieceType.Fog.Id)
             OnFogRemove(removedPiece);
         
