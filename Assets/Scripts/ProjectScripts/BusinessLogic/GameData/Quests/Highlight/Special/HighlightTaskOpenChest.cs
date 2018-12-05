@@ -8,7 +8,9 @@ public class HighlightTaskOpenChest : HighlightTaskUsingPieceFilter
 {
     protected override bool ShowArrow(TaskEntity task, float delay)
     {
-        filter = PieceTypeFilter.Chest;
+        includeFilter = PieceTypeFilter.Chest;
+        excludeFilter = PieceTypeFilter.Bag;
+        
         TaskOpenChestEntity openChestTask = task as TaskOpenChestEntity;
         if (openChestTask == null)
         {

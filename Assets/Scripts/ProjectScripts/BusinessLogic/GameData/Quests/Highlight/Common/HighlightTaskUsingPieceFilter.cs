@@ -7,7 +7,8 @@ using Random = UnityEngine.Random;
 /// </summary>
 public abstract class HighlightTaskUsingPieceFilter : TaskHighlightUsingArrow
 {
-    protected PieceTypeFilter filter = PieceTypeFilter.Default;
+    protected PieceTypeFilter includeFilter = PieceTypeFilter.Default;
+    protected PieceTypeFilter? excludeFilter = null;
     
     protected HashSet<int> allowedPieceTypes = null;
 
@@ -20,13 +21,16 @@ public abstract class HighlightTaskUsingPieceFilter : TaskHighlightUsingArrow
     protected override bool ShowArrow(TaskEntity task, float delay)
     {
         var boardLogic = BoardService.Current.FirstBoard.BoardLogic;
-        var positionsByFilter = boardLogic.PositionsCache.GetPiecePositionsByFilter(filter);
+        
+        var positionsByFilter = excludeFilter != null 
+            ? boardLogic.PositionsCache.GetPiecePositionsByFilter(includeFilter, excludeFilter.Value) 
+            : boardLogic.PositionsCache.GetPiecePositionsByFilter(includeFilter);
 
         for (int i = positionsByFilter.Count - 1; i >= 0; i--)
         {
             var piece = boardLogic.GetPieceAt(positionsByFilter[i]);
             var type = piece.PieceType;
-
+            
             if (!Validate(piece) 
                 || (allowedPieceTypes != null && !allowedPieceTypes.Contains(type))
             )

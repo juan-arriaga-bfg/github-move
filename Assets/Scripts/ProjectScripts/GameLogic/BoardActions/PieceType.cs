@@ -23,6 +23,7 @@ public enum PieceTypeFilter
     Tree = 16384,
     ProductionField = 32768, // Грядка (bed)
     Removable = 65536,
+    Bag = 131072,
 }
 
 public partial class PieceTypeDef
@@ -171,9 +172,9 @@ public static partial class PieceType
     
     public static readonly PieceTypeDef CH_Free = new PieceTypeDef{Id = 10001, Abbreviations = new List<string>{ "CH_Free" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     
-    public static readonly PieceTypeDef SK1_PR = new PieceTypeDef{Id = 10011, Abbreviations = new List<string>{ "SK1_PR" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
-    public static readonly PieceTypeDef SK2_PR = new PieceTypeDef{Id = 10012, Abbreviations = new List<string>{ "SK2_PR" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
-    public static readonly PieceTypeDef SK3_PR = new PieceTypeDef{Id = 10013, Abbreviations = new List<string>{ "SK3_PR" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    public static readonly PieceTypeDef SK1_PR = new PieceTypeDef{Id = 10011, Abbreviations = new List<string>{ "SK1_PR" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest | PieceTypeFilter.Bag};
+    public static readonly PieceTypeDef SK2_PR = new PieceTypeDef{Id = 10012, Abbreviations = new List<string>{ "SK2_PR" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest | PieceTypeFilter.Bag};
+    public static readonly PieceTypeDef SK3_PR = new PieceTypeDef{Id = 10013, Abbreviations = new List<string>{ "SK3_PR" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest | PieceTypeFilter.Bag};
     
     public static readonly PieceTypeDef CH1_A = new PieceTypeDef{Id = 10100, Abbreviations = new List<string>{ "CH1_A" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     public static readonly PieceTypeDef CH2_A = new PieceTypeDef{Id = 10101, Abbreviations = new List<string>{ "CH2_A" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
