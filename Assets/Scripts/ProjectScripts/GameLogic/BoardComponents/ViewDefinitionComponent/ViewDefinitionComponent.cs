@@ -17,6 +17,9 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     
     private const int Layer = 10;
     private bool isDrag;
+    private bool isSwap;
+
+    private UIBoardView container;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -28,8 +31,22 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     {
     }
 
+    public void OnSwap(bool isEnd)
+    {
+        if(isSwap == !isEnd) return;
+
+        isSwap = !isEnd;
+        
+        foreach (var view in views.Values)
+        {
+            view.OnSwap(isEnd);
+        }
+    }
+
     public void OnDrag(bool isEnd)
     {
+        if (isSwap) return;
+        
         if(isDrag == !isEnd) return;
 
         isDrag = !isEnd;
@@ -56,6 +73,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
     public void OnMovedFromToStart(BoardPosition @from, BoardPosition to, Piece context = null)
     {
+        
     }
 
     public void OnMovedFromToFinish(BoardPosition from, BoardPosition to, Piece context = null)
@@ -63,16 +81,23 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         var f = from;
         var t = Position = to;
 
+        
+
+        if (container != null)
+        {
+            f.Z = t.Z = BoardLayer.UI.Layer; // += Layer + view.Layer;
+            thisContext.Context.RendererContext.MoveElement(f, t);
+            container.CachedTransform.localPosition = new Vector3(0f, 0f, 0f);
+            // container.SetOfset();
+        }
+        
         foreach (var view in views.Values)
         {
             if(view.IsShow == false) continue;
             
-            f.Z = t.Z += Layer + view.Layer;
-            
-            thisContext.Context.RendererContext.MoveElement(f, t);
             view.SetOfset();
         }
-        
+
         thisContext.Context.ActionExecutor.AddAction(new CallbackAction{Callback = controller =>
         {
             OnDrag(true);
@@ -89,8 +114,14 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         {
             var view = views[key];
             
-            thisContext.Context.RendererContext.RemoveElement(view);
+            thisContext.Context.RendererContext.DestroyElement(view);
             views.Remove(key);
+        }
+
+        if (container != null)
+        {
+            thisContext.Context.RendererContext.RemoveElement(container);
+            container = null;
         }
     }
 
@@ -122,12 +153,30 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         var pos = Position;
         var currentPos = Position;
 
-        pos.Z += Layer * 10;
-        
-        var element = thisContext.Context.RendererContext.CreateElementAt((int)id, pos) as UIBoardView;
-        element.Init(thisContext);
+        pos.Z = BoardLayer.UI.Layer;
+        currentPos.Z = BoardLayer.UI.Layer;
 
-        currentPos.Z += Layer + element.Layer;
+        if (container == null)
+        {
+            container = thisContext.Context.RendererContext.CreateElementAt((int) ViewType.UIContainer, pos) as UIBoardView;
+            container.GetCanvasGroup().alpha = 1f;
+            container.CachedTransform.localPosition = new Vector3(0f, 0f, 0f);
+        }
+
+        var element = thisContext.Context.RendererContext.CreateBoardElement<UIBoardView>((int)id);
+        element.Init(thisContext);
+        element.Init(thisContext.Context.RendererContext);
+        element.CachedTransform.SetParentAndReset(container.CachedTransform);
+        element.SetOfset();
+        element.SyncRendererLayers(pos);
+        
+        // var thisContextView = thisContext.Context.RendererContext.GetElementAt(thisContext.CachedPosition);
+
+        
+        // element.CachedTransform.SetParent(thisContextView.CachedTransform);
+
+        // currentPos.Z += Layer + element.Layer;
+        
         
         thisContext.Context.RendererContext.MoveElement(pos, currentPos);
         

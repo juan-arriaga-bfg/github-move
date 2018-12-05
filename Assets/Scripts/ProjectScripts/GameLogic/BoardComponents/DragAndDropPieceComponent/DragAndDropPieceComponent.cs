@@ -66,7 +66,7 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
         var fakePiece = context.Context.CreatePieceFromType(targetPieceId);
         var fakeBoardElement = context.Context.RendererContext.CreatePieceAt(fakePiece, new BoardPosition(0, 0, 3));
         dragableView = fakeBoardElement;
-        dragableView.SyncRendererLayers(new BoardPosition(0, 0, 100));
+        dragableView.SyncRendererLayers(new BoardPosition(0, 0, BoardLayer.MAX.Layer));
         
  
         if (OnBeginDragAndDropEvent != null)
@@ -116,6 +116,9 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
                 var emission = particleSystem.emission;
                 emission.enabled = false;
             }
+            
+            var touchRegion = fakeBoardElement.GetComponent<TouchRegion>();
+            if (touchRegion != null) touchRegion.enabled = false;
         }
 
         return fakeBoardElement;
@@ -141,6 +144,9 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
             emission.enabled = true;
         }
         
+        var touchRegion = fakePieceView.GetComponent<TouchRegion>();
+        if (touchRegion != null) touchRegion.enabled = true;
+        
         fakePieceView.ToggleSelection(false);  
         context.Context.RendererContext.RemoveElement(fakePieceView);
     }
@@ -157,7 +163,7 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
     protected virtual bool TryApplyAt(Vector3 worldPosition)
     {
         var boardPosition = context.Context.BoardDef.GetSectorPosition(worldPosition);
-        boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, context.Context.BoardDef.PieceLayer);
+        boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, BoardLayer.Piece.Layer);
 
         return TryApplyAt(boardPosition);
     }
@@ -215,7 +221,7 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
 
                 var normalPosition = new Vector3(targetPosition.x, targetPosition.y, -context.Context.BoardDef.ViewCamera.transform.localPosition.z);
                 var boardPosition = context.Context.BoardDef.GetSectorPosition(targetPosition);
-                boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, context.Context.BoardDef.PieceLayer);
+                boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, BoardLayer.Piece.Layer);
 
                 if (boardPosition.Equals(lastRemoverBoardPosition) == false)
                 {

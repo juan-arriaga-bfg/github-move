@@ -13,7 +13,14 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
     public Action<int> OnLevelUp;
 
     private string kiloAbbreviation;
-    
+
+    private float progressMaxValue;
+
+    private void Start()
+    {
+        progressMaxValue = progress.fillAmount;
+    }
+
     public override int CurrentValueAnimated
     {
         get { return currentValueAnimated; }
@@ -54,7 +61,7 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
     {
         var manager = GameDataService.Current.LevelsManager;
         
-        progress.fillAmount = Mathf.Clamp(value/manager.Price, 0f, 1f);
+        progress.fillAmount = Mathf.Lerp(0f, progressMaxValue, value/manager.Price);
 
         SetText((int) Mathf.Max(0, value), manager.Price);
         

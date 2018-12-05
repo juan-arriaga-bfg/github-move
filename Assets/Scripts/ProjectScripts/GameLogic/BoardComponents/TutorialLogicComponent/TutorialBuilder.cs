@@ -18,12 +18,12 @@ public static class TutorialBuilder
                 {
                     FromType = PieceType.PR_C1.Id,
                     ToType = PieceType.PR_C2.Id,
-                    FromPositions = new List<BoardPosition> {new BoardPosition(20, 11, context.BoardDef.PieceLayer)},
+                    FromPositions = new List<BoardPosition> {new BoardPosition(20, 11, BoardLayer.Piece.Layer)},
                     ToPositions = new List<BoardPosition>
                     {
-                        new BoardPosition(20, 12, context.BoardDef.PieceLayer),
-                        new BoardPosition(21, 12, context.BoardDef.PieceLayer),
-                        new BoardPosition(20, 11, context.BoardDef.PieceLayer)
+                        new BoardPosition(20, 12, BoardLayer.Piece.Layer),
+                        new BoardPosition(21, 12, BoardLayer.Piece.Layer),
+                        new BoardPosition(20, 11, BoardLayer.Piece.Layer)
                     }
                 };
                 
@@ -38,14 +38,14 @@ public static class TutorialBuilder
                     ToType = PieceType.PR_C3.Id,
                     FromPositions = new List<BoardPosition>
                     {
-                        new BoardPosition(20, 12, context.BoardDef.PieceLayer),
-                        new BoardPosition(21, 12, context.BoardDef.PieceLayer),
-                        new BoardPosition(20, 11, context.BoardDef.PieceLayer)
+                        new BoardPosition(20, 12, BoardLayer.Piece.Layer),
+                        new BoardPosition(21, 12, BoardLayer.Piece.Layer),
+                        new BoardPosition(20, 11, BoardLayer.Piece.Layer)
                     },
                     ToPositions = new List<BoardPosition>
                     {
-                        new BoardPosition(22, 13, context.BoardDef.PieceLayer),
-                        new BoardPosition(22, 14, context.BoardDef.PieceLayer)
+                        new BoardPosition(22, 13, BoardLayer.Piece.Layer),
+                        new BoardPosition(22, 14, BoardLayer.Piece.Layer)
                     }
                 };
                 
@@ -222,7 +222,7 @@ public static class TutorialBuilder
                 step.RegisterComponent(new CheckQuestTutorialCondition{Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Hard}, true);
                 
                 step.RegisterComponent(new RemoveTutorialAnimation{PieceId = PieceType.NPC_SleepingBeautyPlaid.Id, AnimationType = TutorialAnimationType.Perform}, true);
-                step.RegisterComponent(new AddTutorialAnimation{PieceId = PieceType.NPC_SleepingBeauty.Id, Target = new BoardPosition(20, 13, context.BoardDef.PieceLayer), AnimationType = TutorialAnimationType.Complete}, true);
+                step.RegisterComponent(new AddTutorialAnimation{PieceId = PieceType.NPC_SleepingBeauty.Id, Target = new BoardPosition(20, 13, BoardLayer.Piece.Layer), AnimationType = TutorialAnimationType.Complete}, true);
                 
                 break;
             }

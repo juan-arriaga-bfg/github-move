@@ -112,4 +112,14 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
 		
         Change(false);
     }
+    
+    public override void SyncRendererLayers(BoardPosition boardPosition)
+    {
+        base.SyncRendererLayers(boardPosition);
+        
+        if(canvas == null) return;
+        
+        canvas.overrideSorting = true;
+        canvas.sortingOrder = GetLayerIndexBy(new BoardPosition(boardPosition.X, boardPosition.Y, BoardLayer.UIUP1.Layer));
+    }
 }

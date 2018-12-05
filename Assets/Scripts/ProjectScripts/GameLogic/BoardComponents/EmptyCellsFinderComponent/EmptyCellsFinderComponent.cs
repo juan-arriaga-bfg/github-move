@@ -131,14 +131,76 @@ public class EmptyCellsFinderComponent : IECSComponent
 		return free.Count >= count;
 	}
 	
-	public bool FindAllWithPointInCenter(BoardPosition point, int width, int height, List<BoardPosition> field)
+	public bool FindAllWithPointInCenter(BoardPosition point, int width, int height, List<BoardPosition> field, int targetLayer)
 	{
 		var startPoint = CenterToHome(point, width, height);
 		
-		return FindAllWithPointInHome(startPoint, width, height, field);
+		return FindAllWithPointInHome(startPoint, width, height, field, targetLayer);
 	}
+    
+    public List<BoardPosition> FindAllWithCondition(Func<BoardPosition, bool> condition, int targetLayer)
+    {
+        int xMin;
+        int xMax;
+		
+        int yMin;
+        int yMax;
 
-	public bool FindAllWithPointInHome(BoardPosition point, int width, int height, List<BoardPosition> field)
+        context.IsXValid(0,                    out xMin);
+        context.IsXValid(context.CurrentWidth, out xMax);
+		
+        context.IsYValid(0,                     out yMin);
+        context.IsYValid(context.CurrentHeight, out yMax);
+        
+        var field = new List<BoardPosition>();
+		
+        for (var i = xMin; i <= xMax; i++)
+        {
+            for (var j = yMin; j <= yMax; j++)
+            {
+                var empty = new BoardPosition(i, j, targetLayer);
+
+                if (condition.Invoke(empty) == false) continue;
+				
+                field.Add(empty);
+            }
+        }
+		
+        return field;
+    }
+    
+    public List<BoardPosition> FindAll()
+    {
+        int xMin;
+        int xMax;
+		
+        int yMin;
+        int yMax;
+
+        context.IsXValid(0,             out xMin);
+        context.IsXValid(context.CurrentWidth, out xMax);
+		
+        context.IsYValid(0,              out yMin);
+        context.IsYValid(context.CurrentHeight, out yMax);
+        
+        var field = new List<BoardPosition>();
+		
+        for (var i = xMin; i <= xMax; i++)
+        {
+            for (var j = yMin; j <= yMax; j++)
+            {
+                var empty = new BoardPosition(i, j);
+
+                if (context.IsEmpty(empty) == false) continue;
+				
+                field.Add(empty);
+            }
+        }
+		
+        return field;
+    }
+
+	public bool FindAllWithPointInHome(BoardPosition point, int width, int height, List<BoardPosition> field, int targetLayer)
 	{
 		int xMin;
 		int xMax;
@@ -156,7 +218,7 @@ public class EmptyCellsFinderComponent : IECSComponent
 		{
 			for (var j = yMin; j <= yMax; j++)
 			{
-				var empty = new BoardPosition(i, j);
+				var empty = new BoardPosition(i, j, targetLayer);
 
 				if (context.IsEmpty(empty) == false) continue;
 				

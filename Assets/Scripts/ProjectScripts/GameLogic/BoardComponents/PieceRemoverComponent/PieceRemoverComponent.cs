@@ -112,7 +112,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         
         cachedRemoverView = context.Context.RendererContext.CreateBoardElement<PieceBoardElementView>((int) ViewType.PieceRemover);
         cachedRemoverView.Init(context.Context.RendererContext);
-        cachedRemoverView.SyncRendererLayers(new BoardPosition(0, 0, 100));
+        cachedRemoverView.SyncRendererLayers(new BoardPosition(0, 0, BoardLayer.MAX.Layer));
         
         ToggleFilterPieces(true);
 
@@ -157,7 +157,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
     protected virtual bool TryCollapsePieceAt(Vector3 worldPosition)
     {
         var boardPosition = context.Context.BoardDef.GetSectorPosition(worldPosition);
-        boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, context.Context.BoardDef.PieceLayer);
+        boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, BoardLayer.Piece.Layer);
 
         return TryCollapsePieceAt(boardPosition);
     }
@@ -219,7 +219,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         {
             CollapsePieceAt(position);
         });
-        sequence.AppendInterval(2f);
+        sequence.AppendInterval(4f);
         sequence.OnComplete(() =>
         {
             EndRemover();
@@ -278,7 +278,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
 
                 var normalPosition = new Vector3(targetPosition.x, targetPosition.y, -context.Context.BoardDef.ViewCamera.transform.localPosition.z);
                 var boardPosition = context.Context.BoardDef.GetSectorPosition(targetPosition);
-                boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, context.Context.BoardDef.PieceLayer);
+                boardPosition = new BoardPosition(boardPosition.X, boardPosition.Y, BoardLayer.Piece.Layer);
 
                 if (boardPosition.Equals(lastRemoverBoardPosition) == false)
                 {

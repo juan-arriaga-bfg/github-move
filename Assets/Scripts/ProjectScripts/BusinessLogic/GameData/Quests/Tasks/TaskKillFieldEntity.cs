@@ -1,4 +1,5 @@
-[TaskHighlight(typeof(HighlightTaskUsingObstaclePieceFilter))]
+[TaskHighlight(typeof(HighlightTaskPointToRandomDeadProductionField))]
+[TaskHighlight(typeof(HighlightTaskPointToRandomLiveProductionField))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskKillFieldEntity : TaskEventCounterEntity
 {

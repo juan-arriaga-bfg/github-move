@@ -19,7 +19,27 @@ public class MatchSpawnPiecesAtAnimation : BoardAnimation
 			var boardElement = context.CreatePieceAt(piece, position);
 
 			boardElement.CachedTransform.localScale = Vector3.zero;
-			boardElement.SyncRendererLayers(new BoardPosition(position.X, position.Y, 5));
+			boardElement.SyncRendererLayers(new BoardPosition(position.X, position.Y, BoardLayer.PieceUP1.Layer));
+			
+			var animationResource = AnimationDataManager.FindAnimation(piece.PieceType, def => def.OnMergeSpawn);
+			if (string.IsNullOrEmpty(animationResource) == false)
+			{
+				var At = piece.CachedPosition;
+				var animView = context.CreateBoardElementAt<AnimationView>(animationResource, At);
+				animView.SyncRendererLayers(new BoardPosition(At.X, At.Y, 6));
+
+				animView.OnComplete += () =>
+				{
+					CompleteAnimation(context);
+				};
+
+				animView.OnLifetimeEnd += () =>
+				{
+					boardElement.SyncRendererLayers(new BoardPosition(At.X, At.Y, At.Z));
+				};
+				animView.Play(boardElement);
+				return;
+			}
 			
 			sequence.Insert(0.1f, boardElement.CachedTransform.DOScale(Vector3.one * 1.2f, 0.4f));
 			sequence.Insert(0.6f, boardElement.CachedTransform.DOScale(Vector3.one, 0.3f));

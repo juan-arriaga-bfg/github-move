@@ -84,7 +84,17 @@ public class SandboxGameController : MonoBehaviour
             Width = 40,
             Height = 40,
             Depth = 3,
-            PieceLayer = 1
+            LayersDef = new Dictionary<int, int>
+            {
+                {BoardLayer.Default.Index, 0},
+                {BoardLayer.Piece.Index, 1},
+                {BoardLayer.PieceUP1.Index, 2},
+                {BoardLayer.FX.Index, 3},
+                {BoardLayer.UI.Index, 4},
+                {BoardLayer.UIUP1.Index, 5},
+                {BoardLayer.MAX.Index, 6},
+            }
+            
         }); // board settings
         
         boardController.RegisterComponent(new BoardStatesComponent()
@@ -93,6 +103,9 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.RegisterComponent(new TutorialLogicComponent().RegisterComponent(new LockerComponent()));
         boardController.RegisterComponent(new QuestConnectorComponent());
+
+        // GameBoardDebugComponent used for unit tests and debug operations with field
+        boardController.RegisterComponent(new GameBoardDebugComponent());
         
         boardController.States.AddState(SessionBoardStateComponent.ComponentGuid);
         
@@ -119,7 +132,7 @@ public class SandboxGameController : MonoBehaviour
         var topPoint = boardController.BoardDef.GetSectorCenterWorldPosition(heightShift - 1, boardController.BoardDef.Height - heightShift - 1, 0);
         var bottomPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - heightShift - 1, heightShift - 1, 0);
         
-        var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition(19, 13, boardController.BoardDef.PieceLayer);
+        var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition(19, 13, BoardLayer.Piece.Layer);
         
         boardController.Manipulator.CameraManipulator.CurrentCameraSettings.CameraClampRegion = new Rect
         (

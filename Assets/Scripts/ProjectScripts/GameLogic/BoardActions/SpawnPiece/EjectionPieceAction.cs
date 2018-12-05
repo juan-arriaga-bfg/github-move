@@ -12,7 +12,11 @@ public class EjectionPieceAction : IBoardAction
 	public Dictionary<int, int> Pieces { get; set; }
 	
 	public Action OnComplete { get; set; }
+    
+    public Action<List<BoardPosition>> OnSuccess;
 	
+	public Func<int, string> AnimationResourceSearch;
+
 	public bool PerformAction(BoardController gameBoardController)
 	{
 		if (From == null) From = GetFrom?.Invoke();
@@ -44,11 +48,13 @@ public class EjectionPieceAction : IBoardAction
 		}
 		
 		gameBoardController.BoardLogic.LockCell(From.Value, this);
-		
+		if (AnimationResourceSearch == null)
+			AnimationResourceSearch = piece => AnimationDataManager.FindAnimation(piece, def => def.OnMultiSpawn);
 		var animation = new ReproductionPieceAnimation
 		{
 			From = From.Value,
-			Pieces = pieces
+			Pieces = pieces,
+			AnimationResourceSearch = AnimationResourceSearch
 		};
 
 		animation.OnCompleteEvent += (_) =>
@@ -61,6 +67,15 @@ public class EjectionPieceAction : IBoardAction
 			}
 
 			OnComplete?.Invoke();
+		    
+		    var result = new List<BoardPosition>();
+		    
+		    foreach (var piece in pieces)
+		    {
+		        result.Add(piece.Value.Multicellular?.GetTopPosition ?? piece.Value.CachedPosition);
+		    }
+			
+		    OnSuccess?.Invoke(result);
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

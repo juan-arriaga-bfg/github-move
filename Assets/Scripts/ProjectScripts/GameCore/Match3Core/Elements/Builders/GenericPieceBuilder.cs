@@ -6,7 +6,7 @@ public class GenericPieceBuilder : IPieceBuilder
     {
         var piece = new Piece(pieceType, context);
 
-        piece.RegisterComponent(new LayerPieceComponent {Index = context.BoardDef.PieceLayer});
+        piece.RegisterComponent(new LayerPieceComponent {Index = BoardLayer.Piece.Layer});
         
         piece.RegisterComponent(new PieceBoardObserversComponent());
         piece.RegisterComponent(new CachedPiecePositionComponent());

@@ -142,9 +142,14 @@ public class DevTools : UIContainerElementViewController
     {
         Debug.Log("OnDebug1Click");
 
-
-        GameDataService.Current.QuestsManager.StartNewDailyQuest();
+        CurrencyHellper.Purchase(Currency.Experience.Name, 2000);
+        return;
+        // GameDataService.Current.QuestsManager.StartNewDailyQuest();
         //var quest = GameDataService.Current.QuestsManager.StartQuestById("Daily", null);
+
+        new HighlightTaskPointToOrdersButton().Highlight(null);
+        new HighlightTaskPointToShopButton().Highlight(null);
+        new HighlightTaskPointToEnergyPlusButton().Highlight(null);
     }
 
     public static void UpdateFogSectorsDebug()
@@ -157,28 +162,15 @@ public class DevTools : UIContainerElementViewController
     public void OnDebug2Click()
     {
         Debug.Log("OnDebug2Click");
-        //
-        // ConversationScenarioCharsListComponent charsList = new ConversationScenarioCharsListComponent
-        // {
-        //     Characters = new Dictionary<CharacterPosition, string>
-        //     {
-        //         {CharacterPosition.LeftInner,  UiCharacterData.CharSleepingBeauty},
-        //         {CharacterPosition.RightInner, UiCharacterData.CharGnomeWorker},
-        //     }
-        // };
-        //
-        // var json = JsonConvert.SerializeObject(charsList);
-        // var charsListClone = JsonConvert.DeserializeObject<ConversationScenarioCharsListComponent>(json);
-        //
-        // var charsListClone2 = new ConversationScenarioCharsListComponent();
-        // JToken.Parse(json).PopulateObject(charsListClone2);
-        //
-        // return;
-        //
-        var scenario = GameDataService.Current.ConversationsManager.BuildScenario("123");
-        int i = 0;
 
-        //BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.CreatePiece, PieceType.A1.Id);
+        var board = BoardService.Current.FirstBoard;
+        var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Simple, 1);
+        
+        foreach (var pos in positions)
+        {
+            var ray = GodRayView.Show(pos);
+            ray.Remove();
+        }
 
 #if LEAKWATCHER
         GC.Collect();

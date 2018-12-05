@@ -1,4 +1,4 @@
-[TaskHighlight(typeof(HighlightTaskNotImplemented))]
+[TaskHighlight(typeof(HighlightTaskCurrencyCollect))]
 public class TaskCurrencyCollectEntity : TaskCurrencyEntity
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
@@ -11,7 +11,7 @@ public class TaskCurrencyCollectEntity : TaskCurrencyEntity
             return;
         }
 
-        if (shopItem.ItemUid == Currency)
+        if (shopItem.ItemUid == CurrencyName)
         {
             CurrentValue += shopItem.Amount;
         }

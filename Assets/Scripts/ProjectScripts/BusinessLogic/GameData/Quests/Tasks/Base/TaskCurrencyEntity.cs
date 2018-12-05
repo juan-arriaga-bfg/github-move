@@ -6,9 +6,9 @@ using Newtonsoft.Json;
 /// </summary>
 public abstract class TaskCurrencyEntity : TaskCounterEntity, IHavePieceId
 {
-    [JsonProperty] public string Currency { get; protected set; } //[JsonProperty] is for backward compatibility
+    public string CurrencyName { get; protected set; }
     
-    public int PieceId => Currency != null ? PieceType.Parse(Currency) : PieceType.None.Id;
+    public int PieceId => CurrencyName != null ? PieceType.Parse(CurrencyName) : PieceType.None.Id;
     
 #region Serialization
 
@@ -33,7 +33,7 @@ public abstract class TaskCurrencyEntity : TaskCounterEntity, IHavePieceId
             return;
         }
         
-        Currency = PieceUid;
+        CurrencyName = PieceUid;
     }
     
     public bool ShouldSerializeCurrency()
@@ -57,7 +57,7 @@ public abstract class TaskCurrencyEntity : TaskCounterEntity, IHavePieceId
 
     public override string ToString()
     {
-        string ret = $"{GetType()} [{Id}], State: {State}, Progress: {Currency} - {CurrentValue}/{TargetValue}";
+        string ret = $"{GetType()} [{Id}], State: {State}, Progress: {CurrencyName} - {CurrentValue}/{TargetValue}";
         return ret;
     }
 }

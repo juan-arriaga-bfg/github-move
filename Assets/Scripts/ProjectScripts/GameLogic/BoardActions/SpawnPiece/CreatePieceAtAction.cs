@@ -11,6 +11,8 @@ public class CreatePieceAtAction : IBoardAction
 	public int PieceTypeId { get; set; }
 	
 	public Action OnComplete;
+
+	public string SpawnResource;
 	
 	public bool PerformAction(BoardController gameBoardController)
 	{
@@ -29,7 +31,8 @@ public class CreatePieceAtAction : IBoardAction
 		var animation = new SpawnPieceAtAnimation
 		{
 			CreatedPiece = piece,
-			At = At
+			At = At,
+			AnimationResource = SpawnResource
 		};
 
 		animation.OnCompleteEvent += (_) =>

@@ -1506,10 +1506,10 @@
   {
     "Uid": "removerScene",
     "SpriteName": "removerScene",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/UnprocessedContent/Sprites",
-    "SpriteSheetName": "removerScene",
-    "SpriteSheetPath": "Assets/Content/UnprocessedContent/Sprites"
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "tutorial",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
     "Uid": "fog_opacity_1",
@@ -1518,5 +1518,125 @@
     "AssetPath": "Assets/Content/ProcessedContent",
     "SpriteSheetName": "gamefield2",
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "SK1_PR",
+    "SpriteName": "SK1_PR",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "SK2_PR",
+    "SpriteName": "SK2_PR",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "SK3_PR",
+    "SpriteName": "SK3_PR",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "Uid": "quest_icon_hit_tree",
+    "SpriteName": "quest_icon_hit_tree",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
+    "SpriteSheetName": "quest_icon_hit_tree",
+    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+  },
+  {
+    "Uid": "quest_icon_kill_tree",
+    "SpriteName": "quest_icon_kill_tree",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
+    "SpriteSheetName": "quest_icon_kill_tree",
+    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+  },
+  {
+    "Uid": "quest_icon_mn_b",
+    "SpriteName": "quest_icon_mn_b",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
+    "SpriteSheetName": "quest_icon_mn_b",
+    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+  },
+  {
+    "Uid": "quest_icon_mn_c",
+    "SpriteName": "quest_icon_mn_c",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
+    "SpriteSheetName": "quest_icon_mn_c",
+    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+  },
+  {
+    "Uid": "quest_icon_fog",
+    "SpriteName": "quest_icon_fog",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
+    "SpriteSheetName": "quest_icon_fog",
+    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+  },
+  {
+    "Uid": "quest_icon_mn_d",
+    "SpriteName": "quest_icon_mn_d",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
+    "SpriteSheetName": "quest_icon_mn_d",
+    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+  },
+  {
+    "Uid": "quest_icon_npc_cat",
+    "SpriteName": "quest_icon_npc_cat",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
+    "SpriteSheetName": "quest_icon_npc_cat",
+    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+  },
+  {
+    "Uid": "quest_icon_npc_gnome",
+    "SpriteName": "quest_icon_npc_gnome",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
+    "SpriteSheetName": "quest_icon_npc_gnome",
+    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+  },
+  {
+    "Uid": "quest_icon_npc_rapunzel",
+    "SpriteName": "quest_icon_npc_rapunzel",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
+    "SpriteSheetName": "quest_icon_npc_rapunzel",
+    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+  },
+  {
+    "Uid": "quest_icon_npc_sleeping",
+    "SpriteName": "quest_icon_npc_sleeping",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
+    "SpriteSheetName": "quest_icon_npc_sleeping",
+    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+  },
+  {
+    "Uid": "quest_icon_open_chest",
+    "SpriteName": "quest_icon_open_chest",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
+    "SpriteSheetName": "quest_icon_open_chest",
+    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+  },
+  {
+    "Uid": "quest_icon_super_match",
+    "SpriteName": "quest_icon_super_match",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
+    "SpriteSheetName": "quest_icon_super_match",
+    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
   }
 ]

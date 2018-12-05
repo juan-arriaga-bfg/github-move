@@ -110,7 +110,6 @@
   {
     "$type": "TaskOpenChestEntity, GameAssembly",
     "Id": "10_OpenChest",
-    "PieceUid": "CH1_A",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -212,14 +211,38 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 1000
+            "Currency": "CH_Free",
+            "Amount": 1
+          },
+          {
+            "Currency": "Soft3",
+            "Amount": 2
+          },
+          {
+            "Currency": "CH_Free",
+            "Amount": 1
+          },
+          {
+            "Currency": "Soft4",
+            "Amount": 1
+          },
+          {
+            "Currency": "Hard2",
+            "Amount": 3
+          },
+          {
+            "Currency": "Hard3",
+            "Amount": 2
+          },
+          {
+            "Currency": "CH_Free",
+            "Amount": 1
           }
         ]
       },
       "QuestDescriptionComponent": {
         "Ico": "clockButtonDailyObjectives",
-        "Message": "Complete all objectives"
+        "Message": "Clear all objectives"
       }
     }
   },
@@ -232,8 +255,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 50
+            "Currency": "Soft2",
+            "Amount": 1
           }
         ]
       },
@@ -252,13 +275,12 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Energy",
-            "Amount": 20
+            "Currency": "Soft2",
+            "Amount": 2
           }
         ]
       },
       "QuestDescriptionComponent": {
-        "Ico": "Fog1",
         "Title": "Create a Piece",
         "Message": "Make merges"
       }
@@ -274,8 +296,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 75
+            "Currency": "Soft3",
+            "Amount": 1
           }
         ]
       },
@@ -295,8 +317,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 75
+            "Currency": "Soft3",
+            "Amount": 1
           }
         ]
       },
@@ -316,12 +338,13 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 75
+            "Currency": "Soft3",
+            "Amount": 1
           }
         ]
       },
       "QuestDescriptionComponent": {
+        "Ico": "Coins",
         "Message": "Collect coins"
       }
     }
@@ -335,8 +358,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 75
+            "Currency": "Soft3",
+            "Amount": 1
           }
         ]
       },
@@ -354,8 +377,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 75
+            "Currency": "Soft3",
+            "Amount": 1
           }
         ]
       },
@@ -374,12 +397,13 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 75
+            "Currency": "Soft3",
+            "Amount": 1
           }
         ]
       },
       "QuestDescriptionComponent": {
+        "Ico": "OB_PR_B",
         "Message": "Remove dead fields"
       }
     }
@@ -393,12 +417,13 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 75
+            "Currency": "Soft3",
+            "Amount": 1
           }
         ]
       },
       "QuestDescriptionComponent": {
+        "Ico": "CH_Free",
         "Message": "Open any chests"
       }
     }
@@ -412,8 +437,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 75
+            "Currency": "Soft3",
+            "Amount": 1
           }
         ]
       },
@@ -432,12 +457,13 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 75
+            "Currency": "Soft3",
+            "Amount": 1
           }
         ]
       },
       "QuestDescriptionComponent": {
+        "Ico": "Coins",
         "Message": "Spend coins"
       }
     }
@@ -452,12 +478,13 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 125
+            "Currency": "Soft3",
+            "Amount": 2
           }
         ]
       },
       "QuestDescriptionComponent": {
+        "Ico": "Coins",
         "Message": "Collect coins"
       }
     }
@@ -471,8 +498,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 125
+            "Currency": "Soft3",
+            "Amount": 2
           }
         ]
       },
@@ -490,8 +517,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 125
+            "Currency": "Soft3",
+            "Amount": 2
           }
         ]
       },
@@ -510,12 +537,13 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 125
+            "Currency": "Soft4",
+            "Amount": 1
           }
         ]
       },
       "QuestDescriptionComponent": {
+        "Ico": "OB_PR_B",
         "Message": "Remove dead fields"
       }
     }
@@ -529,12 +557,13 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 125
+            "Currency": "Soft3",
+            "Amount": 2
           }
         ]
       },
       "QuestDescriptionComponent": {
+        "Ico": "CH_Free",
         "Message": "Open any chests"
       }
     }
@@ -548,8 +577,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 125
+            "Currency": "Soft4",
+            "Amount": 1
           }
         ]
       },
@@ -568,12 +597,13 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Coins",
-            "Amount": 125
+            "Currency": "Soft3",
+            "Amount": 2
           }
         ]
       },
       "QuestDescriptionComponent": {
+        "Ico": "Coins",
         "Message": "Spend coins"
       }
     }
@@ -588,12 +618,13 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Energy",
-            "Amount": 30
+            "Currency": "Soft4",
+            "Amount": 1
           }
         ]
       },
       "QuestDescriptionComponent": {
+        "Ico": "Crystals",
         "Message": "Spend rybies"
       }
     }
@@ -608,12 +639,13 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Energy",
-            "Amount": 55
+            "Currency": "Hard2",
+            "Amount": 1
           }
         ]
       },
       "QuestDescriptionComponent": {
+        "Ico": "Crystals",
         "Message": "Collect rubies"
       }
     }
@@ -628,12 +660,13 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Crystals",
-            "Amount": 15
+            "Currency": "Hard2",
+            "Amount": 1
           }
         ]
       },
       "QuestDescriptionComponent": {
+        "Ico": "Coins",
         "Message": "Spend coins"
       }
     }
@@ -643,17 +676,18 @@
     "Id": "Daily_Quest_22",
     "Group": "Hard",
     "PieceUid": "Crystals",
-    "TargetValue": 30,
+    "TargetValue": 20,
     "ComponentsCache": {
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Energy",
-            "Amount": 55
+            "Currency": "Hard3",
+            "Amount": 1
           }
         ]
       },
       "QuestDescriptionComponent": {
+        "Ico": "Coins",
         "Message": "Spend rybies"
       }
     }
@@ -667,12 +701,13 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Crystals",
-            "Amount": 15
+            "Currency": "Hard2",
+            "Amount": 1
           }
         ]
       },
       "QuestDescriptionComponent": {
+        "Ico": "OB_PR_B",
         "Message": "Remove dead fields"
       }
     }
@@ -686,8 +721,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Crystals",
-            "Amount": 15
+            "Currency": "Hard2",
+            "Amount": 1
           }
         ]
       },
@@ -706,12 +741,13 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Crystals",
-            "Amount": 15
+            "Currency": "Hard2",
+            "Amount": 1
           }
         ]
       },
       "QuestDescriptionComponent": {
+        "Ico": "CH_Free",
         "Message": "Open any chests"
       }
     }

@@ -36,6 +36,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4923283119704706}
+  - component: {fileID: 210844005359531110}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -281,6 +282,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0485a306b6fc045a6f5a27819c481c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastBoardPosition:
+    X: 0
+    Y: 0
+    Z: 0
+  cachedSortingGroup: {fileID: 210844005359531110}
   IsFading: 0
   FadeValue: 0
   body: {fileID: 4923283119704706}
@@ -18706,6 +18712,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!210 &210844005359531110
+SortingGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1093208419284794}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!212 &212148731431609550
 SpriteRenderer:
   m_ObjectHideFlags: 1

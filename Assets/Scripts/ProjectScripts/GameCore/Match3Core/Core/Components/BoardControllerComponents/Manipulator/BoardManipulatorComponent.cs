@@ -180,7 +180,7 @@ public class BoardManipulatorComponent : ECSEntity,
             var pieceView = cachedViewForDrag as PieceBoardElementView;
             
             var boardPos = context.BoardDef.GetSectorPosition(targetPos);
-            boardPos.Z = context.BoardDef.PieceLayer;
+            boardPos.Z = BoardLayer.Piece.Layer;
             pieceView.OnDrag(boardPos, pos);
             pieceView.Piece.ViewDefinition?.OnDrag(false);
             
@@ -283,22 +283,20 @@ public class BoardManipulatorComponent : ECSEntity,
                     var targetPos = context.BoardDef.GetSectorCenterWorldPosition(fromPosition.X, fromPosition.Y, 0);
                     var distance = Vector2.Distance(currentPos, targetPos);
                     var duration = dragDuration * (distance < 1 ? distance : 1);
-
+                    
+                    var cachedViewForDragPiece = cachedViewForDrag as PieceBoardElementView;
+                    if (cachedViewForDragPiece != null && cachedViewForDragPiece.Piece != null)
+                    {
+                        if (cachedViewForDragPiece != null) cachedViewForDragPiece.SyncRendererLayers(cachedViewForDragPiece.Piece.CachedPosition);
+                    }
+                    else
+                    {
+                       if (cachedViewForDrag != null) cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, BoardLayer.Piece.Layer));
+                    }
+                    
                     cachedViewForDrag.CachedTransform.DOLocalMove(targetPos, duration).OnComplete(() =>
                         {
-                            if (cachedViewForDrag == null) return;
 
-                            var cachedViewForDragPiece = cachedViewForDrag as PieceBoardElementView;
-                            if (cachedViewForDragPiece != null && cachedViewForDragPiece.Piece != null)
-                            {
-                                // cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, context.BoardDef.PieceLayer));
-                                cachedViewForDragPiece.SyncRendererLayers(cachedViewForDragPiece.Piece.CachedPosition);
-                            }
-                            else
-                            {
-                                cachedViewForDrag.SyncRendererLayers(new BoardPosition(boardPos.X, boardPos.Y, context.BoardDef.PieceLayer));
-                            }
-                            
                             cachedViewForDrag = null;
                             cameraManipulator.CameraMove.UnLock(this);
                         })
@@ -340,6 +338,9 @@ public class BoardManipulatorComponent : ECSEntity,
             if (touchableObject is PieceBoardElementView)
             {
                 var view = touchableObject as PieceBoardElementView;
+                
+                if (view.Piece == null) continue;
+                
                 var position = view.Piece.CachedPosition;
                 
                 if(view.Piece.Context.BoardLogic.IsLockedCell(position)) continue;

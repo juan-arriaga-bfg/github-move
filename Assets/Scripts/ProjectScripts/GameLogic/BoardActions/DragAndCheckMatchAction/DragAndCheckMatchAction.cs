@@ -28,11 +28,11 @@ public class DragAndCheckMatchAction : IBoardAction
 			for (int i = 0; i < pieceFrom.Multicellular.Mask.Count; i++)
 			{
 				var target = targetPositions[i] + To;
-				target.Z = gameBoardController.BoardDef.PieceLayer;
+			    target.Z = BoardLayer.Piece.Layer;
 				targetPositions[i] = target;
 
 				var from = fromPositions[i] + From;
-				from.Z = gameBoardController.BoardDef.PieceLayer;
+			    from.Z = BoardLayer.Piece.Layer;
 				fromPositions[i] = from;
 			}
 		}
@@ -151,7 +151,14 @@ public class DragAndCheckMatchAction : IBoardAction
 	private void ViewMulticellularSwapPieces(BoardController board, Piece multicellular, List<BoardPosition> allSpace, List<Piece> allPieces)
 	{
 		var logic = board.BoardLogic;
-		
+	    
+	    multicellular?.ViewDefinition?.OnSwap(false);
+	    for (int i = 0; i < allPieces.Count; i++)
+	    {
+	        var allPiece = allPieces[i];
+	        allPiece?.ViewDefinition?.OnSwap(false);
+	    }
+
 		board.BoardLogic.LockCells(fromPositions, this);
 		board.BoardLogic.LockCells(targetPositions, this);
 		
@@ -168,6 +175,13 @@ public class DragAndCheckMatchAction : IBoardAction
 		{
 			logic.UnlockCells(fromPositions, this);
 			logic.UnlockCells(targetPositions, this);
+		    
+		    multicellular?.ViewDefinition?.OnSwap(true);
+		    for (int i = 0; i < allPieces.Count; i++)
+		    {
+		        var allPiece = allPieces[i];
+		        allPiece?.ViewDefinition?.OnSwap(true);
+		    }
 		};
 		
 		board.RendererContext.AddAnimationToQueue(animation);
@@ -295,10 +309,16 @@ public class DragAndCheckMatchAction : IBoardAction
 	private void SwapPieces(BoardController board)
 	{
 		var logic = board.BoardLogic;
+	    
+	    var pieceFrom = logic.GetPieceAt(From);
+	    var pieceTo = logic.GetPieceAt(To);
 		
 		logic.LockCell(From, this);
 		logic.LockCell(To, this);
-		
+	    
+	    pieceFrom?.ViewDefinition?.OnSwap(false);
+	    pieceTo?.ViewDefinition?.OnSwap(false);
+	    
 		var animation = new SwapPiecesAnimation
 		{
 			PointA = From,
@@ -309,6 +329,9 @@ public class DragAndCheckMatchAction : IBoardAction
 		{
 			logic.UnlockCell(From, this);
 			logic.UnlockCell(To, this);
+		    
+		    pieceFrom?.ViewDefinition?.OnSwap(true);
+		    pieceTo?.ViewDefinition?.OnSwap(true);
 		};
 		
 		board.RendererContext.AddAnimationToQueue(animation);

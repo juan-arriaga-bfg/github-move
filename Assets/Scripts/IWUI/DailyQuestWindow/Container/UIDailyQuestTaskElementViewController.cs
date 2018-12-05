@@ -20,6 +20,10 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     private TaskEntity task;
     private UIDailyQuestTaskElementEntity targetEntity;
 
+    private List<BoardPosition> listOfPiecesToHighlight;
+
+    private List<CurrencyPair> reward;
+
     public override void Init()
     {
         base.Init();
@@ -28,7 +32,11 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         task = targetEntity.Task;
         
-        targetEntity.Task.OnChanged += OnTaskChanged; 
+        targetEntity.Task.OnChanged += OnTaskChanged;
+
+        listOfPiecesToHighlight = null;
+
+        reward = GetRewardFromComponent();
         
         UpdateUi();
     }
@@ -48,7 +56,23 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
             targetEntity.Task.OnChanged -= OnTaskChanged;
         }
 
+        HighlightDroppedPieces();
+        
         base.OnViewClose(context);
+    }
+
+    private void HighlightDroppedPieces()
+    {
+        if (listOfPiecesToHighlight == null)
+        {
+            return;
+        }
+
+        foreach (var pos in listOfPiecesToHighlight)
+        {
+//           var ray = GodRayView.Show(pos);
+//           ray.Remove();
+        }
     }
 
     public void UpdateUi()
@@ -72,23 +96,33 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
     private string GetTextForButton(TaskEntity task)
     {
-        if (task.IsCompletedOrClaimed())
-        {
-            return LocalizationService.Get("window.daily.quest.task.button.claim", "window.daily.quest.task.button.claim");
-        }
+        string key;
         
-        return LocalizationService.Get("window.daily.quest.task.button.help", "window.daily.quest.task.button.help");
+        switch (task.State)
+        {
+            case TaskState.Completed:
+                key = LocalizationService.Get("window.daily.quest.task.button.claim", "window.daily.quest.task.button.claim");
+                break;
+            
+            case TaskState.Claimed:
+                key = LocalizationService.Get("window.daily.quest.task.button.done", "window.daily.quest.task.button.done");
+                break;
+            
+            default:
+                key = LocalizationService.Get("window.daily.quest.task.button.help", "window.daily.quest.task.button.help");
+                break;
+        }
+
+        return key;
     }
 
     private string GetRewardAsText()
     {
-        var reward = task.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
-
-        if (reward == null)
+        if (reward == null || reward.Count == 0)
         {
             return "";
         }
-
+        
         List<CurrencyPair> currencies;
         var pieces = CurrencyHellper.FiltrationRewards(reward, out currencies);
         
@@ -96,10 +130,31 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         
         var stringBuilder = new StringBuilder($"<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>{str}</color></font> <size=50>");
             
-        stringBuilder.Append(CurrencyHellper.RewardsToString("  ", pieces, currencies));
+        stringBuilder.Append(CurrencyHellper.RewardsToString("  ", pieces, currencies, task is TaskCompleteDailyTaskEntity));
         stringBuilder.Append("</size>");
             
         return stringBuilder.ToString();
+    }
+
+    private List<CurrencyPair> GetRewardFromComponent()
+    {
+        var reward = task.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value ?? new List<CurrencyPair>();
+        int count = reward.Count;
+        
+        if (count == 0)
+        {
+            Debug.LogError("[UIDailyQuestTaskElementViewController] => GetReward: No reward specified for 'Clear all' task!");
+            return reward;
+        }
+        
+        if (task is TaskCompleteDailyTaskEntity)
+        {
+            int globalIndex = GameDataService.Current.QuestsManager.DailyQuestRewardIndex;
+            int index = globalIndex % count;
+            reward = new List<CurrencyPair> {reward[index]};
+        }
+        
+        return reward;
     }
 
     public void OnClick()
@@ -111,7 +166,21 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         
         if (task.IsCompletedOrClaimed())
         {
-            ProvideReward();
+            if (!ProvideReward())
+            {
+                // No free space
+                UIMessageWindowController.CreateMessage(
+                    LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"),
+                    LocalizationService.Get("common.title.error",      "common.title.error"));
+                
+                return;
+            }
+            
+            if (task is TaskCompleteDailyTaskEntity)
+            {
+                targetEntity.WindowController.CloseCurrentWindow();
+            }
+            
             return;
         }
         
@@ -119,7 +188,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         task.Highlight();
     }
 
-    private void ProvideReward(Action onComplete = null)
+    private bool ProvideReward(Action onComplete = null)
     {
         taskButton.interactable = false;
         
@@ -127,54 +196,40 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         ToggleActive(false, true);
         
-        List<CurrencyPair> allReward = task.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
-
+        var board = BoardService.Current.FirstBoard;
+        BoardPosition npcPos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
+        
         // Reward to drop to field
         List<CurrencyPair> currencies;
-        Dictionary<int, int> pieces = CurrencyHellper.FiltrationRewards(allReward, out currencies);
+        Dictionary<int, int> pieces = CurrencyHellper.FiltrationRewards(reward, out currencies);
 
+        var amount = pieces.Sum(pair => pair.Value);
+        
+        if (!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(npcPos, amount))
+        {
+            UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
+            return false;
+        }
+        
         Action dropReward = () =>
         {
-            var board = BoardService.Current.GetBoardById(0);
-            var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
-
             board.ActionExecutor.AddAction(new EjectionPieceAction
             {
-                From = position,
+                From = npcPos,
                 Pieces = pieces,
                 OnComplete = () =>
                 {
-                    var view = board.RendererContext.GetElementAt(position) as CharacterPieceView;
+                    var view = board.RendererContext.GetElementAt(npcPos) as CharacterPieceView;
 
                     if (view != null) view.StartRewardAnimation();
 
-                    AddResourceView.Show(position, currencies);
+                    AddResourceView.Show(npcPos, currencies);
 
                     onComplete?.Invoke();
-                }
+                },
+                OnSuccess = (droppedPiecesPositions) => { listOfPiecesToHighlight = droppedPiecesPositions; } 
             });
         };
-        
-        // // Reward to fly to counters
-        // List<CurrencyPair> nonPiecesReward = new List<CurrencyPair>();
-        //
-        // foreach (CurrencyPair reward in allReward)
-        // {
-        //     bool needToAdd = true;
-        //     foreach (CurrencyPair drop in currencies)
-        //     {
-        //         if (drop.Currency == reward.Currency)
-        //         {
-        //             needToAdd = false;
-        //             break;
-        //         }
-        //     }
-        //
-        //     if (needToAdd)
-        //     {
-        //         nonPiecesReward.Add(reward);
-        //     }
-        // }
 
         // Provide all reward
         if (currencies.Count > 0)
@@ -196,6 +251,8 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         {
             dropReward(); 
         }
+
+        return true;
     }
 
     private void ToggleActive(bool enabled, bool animated)
@@ -210,4 +267,6 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         canvasGroup.DOFade(alpha, 0.3f);
     }
+    
+    
 }

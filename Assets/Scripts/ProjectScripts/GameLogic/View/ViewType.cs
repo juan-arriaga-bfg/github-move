@@ -19,5 +19,7 @@
     ExtraWorker = -1015,
     TutorialMergeFinger = -1016,
     PieceRemover = -1017,
-    RewardsBubble = -1018
+    RewardsBubble = -1018,
+    GodRay = -1019,
+    UIContainer = -1020
 }

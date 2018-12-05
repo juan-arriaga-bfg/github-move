@@ -122,7 +122,7 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         btnBuy                  .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.ButtonBuy));
         btnCancel               .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.ButtonCancel));
         timer                   .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.Timer));
-        delimiterImageAndText.gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.ImageAndMessageDelimiter));
+        delimiterImageAndText   .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.ImageAndMessageDelimiter));
         delimiterTextAndButtons .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.MessageAndButtonsDelimiter));
         
         buttonsPanel.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.ButtonAccept) 

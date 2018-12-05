@@ -240,7 +240,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         return base.RegisterComponent(component, isCollection);
     }
 
-    private void TaskChanged(TaskEntity task)
+    protected virtual void TaskChanged(TaskEntity task)
     {
         UpdateState();
         OnChanged?.Invoke(this, task);
@@ -273,6 +273,20 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         {
             var task = Tasks[i];
             if (task.Id == id)
+            {
+                return task;
+            }
+        }
+
+        return null;
+    }
+    
+    public T GetTask<T>() where T : TaskEntity
+    {
+        for (var i = 0; i < Tasks.Count; i++)
+        {
+            var task = Tasks[i] as T;
+            if (task != null)
             {
                 return task;
             }

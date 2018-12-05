@@ -167,8 +167,26 @@ public class R
      public const string PiecesFadeMaterial = "PiecesFadeMaterial";
      public const string PiecesHighlightMaterial = "PiecesHighlightMaterial";
      public const string FogExplosionParticleSystem = "FogExplosionParticleSystem";
+     public const string SpawnScalePieceAnimation = "SpawnScalePieceAnimation";
+     public const string DestroyScalePieceAnimation = "DestroyScalePieceAnimation";
+     public const string MultiSpawnScalePieceAnimation = "MultiSpawnScalePieceAnimation";
+     public const string DestroyChestAnimation = "DestroyChestAnimation";
+     public const string MultiSpawnChestAnimation = "MultiSpawnChestAnimation";
+     public const string SpawnChestAnimation = "SpawnChestAnimation";
+     public const string DestroyScaleMineAnimation = "DestroyScaleMineAnimation";
+     public const string DestroyProductionAnimation = "DestroyProductionAnimation";
+     public const string DestroyObstacleAnimation = "DestroyObstacleAnimation";
+     public const string FireflyExplosion = "FireflyExplosion";
+     public const string ProductionEndParticle = "ProductionEndParticle";
+     public const string ProductionProcessParticle = "ProductionProcessParticle";
+     public const string ProductionReadyParticle = "ProductionReadyParticle";
      public const string FogDefaultMaterial = "FogDefaultMaterial";
      public const string PiecesUnderFogMaterial = "PiecesUnderFogMaterial";
      public const string RewardsBubbleView = "RewardsBubbleView";
      public const string ObstacleBubbleView = "ObstacleBubbleView";
+     public const string GodRayView = "GodRayView";
+     public const string SK1_PRPiece = "SK1_PRPiece";
+     public const string SK2_PRPiece = "SK2_PRPiece";
+     public const string SK3_PRPiece = "SK3_PRPiece";
+     public const string UIBoardViewContainer = "UIBoardViewContainer";
 }

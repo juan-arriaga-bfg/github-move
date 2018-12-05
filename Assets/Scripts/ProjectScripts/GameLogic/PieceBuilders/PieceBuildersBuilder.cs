@@ -35,6 +35,7 @@ public class PieceBuildersBuilder
         
         dict.Add(PieceType.CH_Free.Id, new ChestPieceBuilder());
         
+        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.SK1_PR.Id, PieceType.SK3_PR.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_A.Id, PieceType.CH3_A.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_B.Id, PieceType.CH3_B.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_C.Id, PieceType.CH3_C.Id, dict);

@@ -1,7 +1,11 @@
 using Newtonsoft.Json;
 using Quests;
 
-[TaskHighlight(typeof(HighlightTaskCreatePiece))]
+[TaskHighlight(typeof(HighlightTaskFindObstacleForPieceType))]
+[TaskHighlight(typeof(HighlightTaskFindMineForPieceType))]
+[TaskHighlight(typeof(HighlightTaskFindChestForPieceType))]
+[TaskHighlight(typeof(HighlightTaskPointToPredecessor))]
+
 [TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskCreatePieceEntity : TaskCounterAboutPiece, IBoardEventListener, IHavePieceId
 {
@@ -30,7 +34,7 @@ public class TaskCreatePieceEntity : TaskCounterAboutPiece, IBoardEventListener,
             return;
         }
 
-        if (PieceId == PieceType.Empty.Id || PieceId == PieceType.None.Id || PieceId == (int)context)
+        if (PieceId == (int)context)
         {
             CurrentValue += 1;
         }
@@ -40,5 +44,15 @@ public class TaskCreatePieceEntity : TaskCounterAboutPiece, IBoardEventListener,
     {
         string ret = $"{GetType()} [{Id}], State: {State}, Progress: {PieceType.GetDefById(PieceId).Abbreviations[0]} - {CurrentValue}/{TargetValue}";
         return ret;
+    }
+    
+    protected override string ValidateDeserializedData()
+    {
+        if (PieceId == PieceType.Empty.Id || PieceId == PieceType.None.Id)
+        {
+            return "Abstract 'Empty' or 'None' pieces not supported as target. Use specific piece type";
+        }
+
+        return null;
     }
 }

@@ -27,6 +27,8 @@ public class ElementsResourcesBuilder
         dict.Add((int)ViewType.TutorialMergeFinger, R.TutorialMergeFinger);
         dict.Add((int)ViewType.PieceRemover, R.PieceRemover);
         dict.Add((int)ViewType.RewardsBubble, R.RewardsBubbleView);
+        dict.Add((int)ViewType.GodRay, R.GodRayView);
+        dict.Add((int)ViewType.UIContainer, R.UIBoardViewContainer);
         
 #endregion
         
@@ -97,6 +99,10 @@ public class ElementsResourcesBuilder
 #region Chests
         
         dict.Add(PieceType.CH_Free.Id, R.CH_FreePiece);
+        
+        dict.Add(PieceType.SK1_PR.Id, R.SK1_PRPiece);
+        dict.Add(PieceType.SK2_PR.Id, R.SK2_PRPiece);
+        dict.Add(PieceType.SK3_PR.Id, R.SK3_PRPiece);
         
         dict.Add(PieceType.CH1_A.Id, R.CH1_APiece);
         dict.Add(PieceType.CH2_A.Id, R.CH2_APiece);

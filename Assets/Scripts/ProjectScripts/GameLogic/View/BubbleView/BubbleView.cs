@@ -85,4 +85,14 @@ public class BubbleView : UIBoardView, IBoardEventListener
         Context.Context.TutorialLogic.Pause(true);
         onClick?.Invoke(Context);
     }
+    
+    public override void SyncRendererLayers(BoardPosition boardPosition)
+    {
+        base.SyncRendererLayers(boardPosition);
+        
+        if(canvas == null) return;
+        
+        canvas.overrideSorting = true;
+        canvas.sortingOrder = GetLayerIndexBy(new BoardPosition(boardPosition.X, boardPosition.Y, BoardLayer.UIUP1.Layer));
+    }
 }

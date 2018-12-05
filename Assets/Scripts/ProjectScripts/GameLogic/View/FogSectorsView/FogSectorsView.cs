@@ -40,7 +40,8 @@ public class FogSectorsView// : BoardElementView
             Corner2Sprite = corner2Sprite,
             Corner3Sprite = corner3Sprite,
             Corner4Sprite = corner4Sprite,
-            LineWidth = 0.5f
+            LineWidth = 0.5f,
+            FadeNearExcluded = true,
         };
         
         var mesh = meshBuilder.Build(def);
@@ -64,7 +65,7 @@ public class FogSectorsView// : BoardElementView
         meshRenderer.material = mat;
         meshRenderer.material.mainTexture = lineSprite.texture;
 
-        meshRenderer.sortingOrder = 2000;
+        meshRenderer.sortingOrder = Context.Context.BoardDef.GetLayerIndexBy(new BoardPosition(0, 0, BoardLayer.PieceUP1.Layer));
         meshRenderer.sortingLayerName = "Default";
 
         if (oldFogSectors != null)

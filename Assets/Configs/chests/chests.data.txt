@@ -56,8 +56,8 @@
       "Max": 2
     },
     "ResourcesAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 0
     },
     "PieceAmount": 3,
     "PieceWeights": [
@@ -78,8 +78,8 @@
       "Max": 3
     },
     "ResourcesAmount": {
-      "Min": 1,
-      "Max": 3
+      "Min": 0,
+      "Max": 0
     },
     "PieceAmount": 4,
     "PieceWeights": [
@@ -369,6 +369,97 @@
   },
   {
     "Uid": "CH3_D",
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 20
+    },
+    "ProductionAmount": {
+      "Min": 2,
+      "Max": 4
+    },
+    "ResourcesAmount": {
+      "Min": 2,
+      "Max": 4
+    },
+    "PieceAmount": 8,
+    "PieceWeights": [
+      {
+        "Uid": "D4",
+        "Weight": 50,
+        "Override": true
+      },
+      {
+        "Uid": "D2",
+        "Weight": 30
+      },
+      {
+        "Uid": "D3",
+        "Weight": 20
+      }
+    ]
+  },
+  {
+    "Uid": "SK1_PR",
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 1
+    },
+    "ProductionAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "ResourcesAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "PieceAmount": 4,
+    "PieceWeights": [
+      {
+        "Uid": "D1",
+        "Weight": 35,
+        "Override": true
+      },
+      {
+        "Uid": "D2",
+        "Weight": 15,
+        "Override": true
+      }
+    ]
+  },
+  {
+    "Uid": "SK2_PR",
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 5
+    },
+    "ProductionAmount": {
+      "Min": 1,
+      "Max": 3
+    },
+    "ResourcesAmount": {
+      "Min": 1,
+      "Max": 3
+    },
+    "PieceAmount": 6,
+    "PieceWeights": [
+      {
+        "Uid": "D2",
+        "Weight": 40,
+        "Override": true
+      },
+      {
+        "Uid": "D3",
+        "Weight": 20,
+        "Override": true
+      },
+      {
+        "Uid": "D1",
+        "Weight": 10
+      }
+    ]
+  },
+  {
+    "Uid": "SK3_PR",
     "Price": {
       "Currency": "Crystals",
       "Amount": 20

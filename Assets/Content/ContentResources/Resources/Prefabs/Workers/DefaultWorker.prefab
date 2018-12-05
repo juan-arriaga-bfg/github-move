@@ -58,7 +58,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1071065163776982
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1453227701133478
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1619824107336932
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +288,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1700172890136052
 GameObject:
   m_ObjectHideFlags: 1
@@ -321,7 +321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1794731965613682
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +512,7 @@ Transform:
   m_LocalScale: {x: 0.0022420455, y: 0.004517458, z: 0.0046759187}
   m_Children: []
   m_Father: {fileID: 4374507957778120}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: -90.74799, y: 0, z: 0}
 --- !u!4 &4207363588648534
 Transform:
@@ -602,8 +602,8 @@ Transform:
   - {fileID: 4085099709814786}
   - {fileID: 4863695778717690}
   - {fileID: 4309342193324140}
-  - {fileID: 4385074123439162}
   - {fileID: 4187355712887430}
+  - {fileID: 4385074123439162}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -633,7 +633,7 @@ Transform:
   - {fileID: 4223912390709708}
   - {fileID: 4159880431601970}
   m_Father: {fileID: 4374507957778120}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4402433194693780
 Transform:
@@ -796,9 +796,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99202a8b676b4890872a08c801c8cef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastBoardPosition:
+    X: 0
+    Y: 0
+    Z: 0
+  cachedSortingGroup: {fileID: 0}
   IsFading: 0
   FadeValue: 0
   duration: 4
+  Particles: {fileID: 0}
 --- !u!198 &198014301362484184
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -10165,7 +10171,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.2784314}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -33349,7 +33355,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 28
+  m_SortingOrder: 10010
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -33463,7 +33469,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 28
+  m_SortingOrder: 10010
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -33520,7 +33526,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 999
+  m_SortingOrder: 10003
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0

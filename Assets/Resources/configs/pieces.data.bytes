@@ -509,6 +509,53 @@
     ]
   },
   {
+    "Uid": "SK1_PR",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "SK2_PR",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 10
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "SK3_PR",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 25
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
     "Uid": "A1",
     "UnlockBonus": [
       {
