@@ -38,7 +38,13 @@ public class TaskMatchEntity : TaskCounterAboutPiece, IBoardEventListener
             return;
         }
 
-        if (PieceId == PieceType.None.Id || PieceId == PieceType.Empty.Id ||matchDescr.SourcePieceType == PieceId)
+        // Ignore fake pieces
+        if (PieceType.GetDefById(matchDescr.SourcePieceType).Filter.Has(PieceTypeFilter.Fake))
+        {
+            return;
+        }
+        
+        if (PieceId == PieceType.None.Id || PieceId == PieceType.Empty.Id || matchDescr.SourcePieceType == PieceId)
         {
             CurrentValue += 1;
         }
