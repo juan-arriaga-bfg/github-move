@@ -431,7 +431,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BackGroundColor: {r: 0.3769135, g: 0.45632473, b: 0.6603774, a: 1}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -629,8 +629,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: "The quick brown fox <sprite=\"Coins\">jumps over the lazy dog\n CAPS 1
-    2 3 4 5 6 7 8 9 0 - + = ,.!@#$%^&*(){}"
+  m_text: "The quick brown fox <sprite name=Coins> jumps over the lazy dog\n CAPS
+    1 2 3 4 5 6 7 8 9 0 - + = ,.!@#$%^&*(){}"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
   m_sharedMaterial: {fileID: 21898692518253514, guid: 63ef471c6f037d14f953762c601d0d5c,
@@ -866,7 +866,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1395500128}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
