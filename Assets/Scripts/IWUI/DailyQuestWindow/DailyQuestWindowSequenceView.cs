@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DailyObjectiveSequenceView : IWBaseMonoBehaviour
+public class DailyQuestWindowSequenceView : IWBaseMonoBehaviour
 {
     public const int ITEMS_COUNT = 5;
 
     [SerializeField] private GameObject rewardItemPrefab;
     [SerializeField] private GameObject lineItemPrefab;
 
-    private List<DailyObjectiveRewardItemView> rewardItems;
-    private List<DailyObjectiveLineItemView> lineItems;
+    private List<DailyQuestWindowRewardItemView> rewardItems;
+    private List<DailyQuestWindowLineItemView> lineItems;
 
     public void Init()
     {
@@ -22,8 +22,8 @@ public class DailyObjectiveSequenceView : IWBaseMonoBehaviour
         rewardItemPrefab.SetActive(true);
         lineItemPrefab.SetActive(true);
 
-        rewardItems = new List<DailyObjectiveRewardItemView>();
-        lineItems = new List<DailyObjectiveLineItemView>();
+        rewardItems = new List<DailyQuestWindowRewardItemView>();
+        lineItems = new List<DailyQuestWindowLineItemView>();
         
         for (int i = 0; i < ITEMS_COUNT; i++)
         {
@@ -33,8 +33,8 @@ public class DailyObjectiveSequenceView : IWBaseMonoBehaviour
             goReward.transform.SetParentAndReset(rewardItemPrefab.transform.parent);
             goLine.transform.SetParentAndReset(lineItemPrefab.transform.parent);
             
-            rewardItems.Add(goReward.GetComponent<DailyObjectiveRewardItemView>());
-            lineItems.Add(goLine.GetComponent<DailyObjectiveLineItemView>());
+            rewardItems.Add(goReward.GetComponent<DailyQuestWindowRewardItemView>());
+            lineItems.Add(goLine.GetComponent<DailyQuestWindowLineItemView>());
         }
         
         rewardItemPrefab.SetActive(false);
@@ -50,21 +50,21 @@ public class DailyObjectiveSequenceView : IWBaseMonoBehaviour
         
         for (int i = 0; i < ITEMS_COUNT; i++)
         {
-            rewardItems[i].Init(reward[i]);
-
-            DailyObjectiveLineItemView.State state;
+            DailyQuestWindowLineItemView.State state;
             if (i == activeIndex)
             {
-                state = DailyObjectiveLineItemView.State.Fill;
+                state = DailyQuestWindowLineItemView.State.Fill;
             }
             else if (i < activeIndex)
             {
-                state = DailyObjectiveLineItemView.State.Check;
+                state = DailyQuestWindowLineItemView.State.Check;
             }
             else
             {
-                state = DailyObjectiveLineItemView.State.Empty;
+                state = DailyQuestWindowLineItemView.State.Empty;
             }
+            
+            rewardItems[i].Init(reward[i], state == DailyQuestWindowLineItemView.State.Empty || state == DailyQuestWindowLineItemView.State.Fill);
             
             lineItems[i].Init(state);
         }

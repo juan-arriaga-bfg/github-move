@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Quests;
-using UnityEngine.UI;
 
 public class UIDailyQuestWindowView : UIGenericPopupWindowView 
 {
@@ -12,7 +11,8 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
     [IWUIBinding("#ComeBackPanel")] private GameObject comeBackPanel;
     [IWUIBinding("#ComeBackLabel")] private NSText comeBackLabel;
     [IWUIBinding("#MainTimer")] private GameObject mainTimer;
-    [IWUIBinding("#SequenceView")] private DailyObjectiveSequenceView sequenceView;
+    [IWUIBinding("#MainTimerPlaceholder")] private GameObject mainTimerPlaceholder;
+    [IWUIBinding("#SequenceView")] private DailyQuestWindowSequenceView sequenceView;
 
     public override void OnViewShow()
     {
@@ -41,6 +41,8 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         ToggleComebackPanel(isQuestClaimed);
 
         SetupSequence();
+
+        ScrollToTop();
     }
 
     private void SetupSequence()
@@ -61,20 +63,22 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         }
 
         int globalIndex = GameDataService.Current.QuestsManager.DailyQuestRewardIndex;
-        int croppedIndex = globalIndex % count;
+        int croppedIndex = globalIndex > count ? globalIndex % count : globalIndex;
         int index = croppedIndex;
 
-        if (globalIndex > 1)
+        if (globalIndex > 0)
         {
-            index -= 2;
+            index -= 1;
         }
+
+        int activeIndex = globalIndex > 0 ? 1 : 0;
         
         List<CurrencyPair> rewardForView = new List<CurrencyPair>();
-        for (int i = 0; i < DailyObjectiveSequenceView.ITEMS_COUNT; i++)
+        for (int i = 0; i < DailyQuestWindowSequenceView.ITEMS_COUNT; i++)
         {
             if (index < 0)
             {
-                index = 0;
+                index = rewardForView.Count - index - 1;
             }
 
             if (index >= reward.Count)
@@ -82,12 +86,12 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
                 index = 0;
             }
 
-            rewardForView.Add(reward[i]);
+            rewardForView.Add(reward[index]);
 
             index++;
         }
 
-        sequenceView.SetValues(rewardForView, croppedIndex);
+        sequenceView.SetValues(rewardForView, activeIndex);
     }
 
     public void ScrollToTop()
@@ -215,6 +219,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
     private void ToggleComebackPanel(bool isQuestCompleted)
     {
         mainTimer.SetActive(!isQuestCompleted);
+        mainTimerPlaceholder.SetActive(isQuestCompleted);
         
         comeBackPanel.SetActive(isQuestCompleted);
         comeBackLabel.Text = LocalizationService.Get("window.daily.quest.message.all.cleared", "window.daily.quest.message.all.cleared");

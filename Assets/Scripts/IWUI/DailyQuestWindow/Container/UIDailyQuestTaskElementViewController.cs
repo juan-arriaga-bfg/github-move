@@ -13,10 +13,15 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     [IWUIBinding("#TaskProgress")] private NSText lblProgress;
     [IWUIBinding("#TaskReward")] private NSText lblReward;
     [IWUIBinding("#TaskIcon")] private Image taskIcon;
-    [IWUIBinding("#TaskButton")] private Button taskButton;
-    [IWUIBinding("#TaskButtonLabel")] private NSText taskButtonLabel;
+    [IWUIBinding("#TaskButton")] private DailyQuestWindowTaskButton taskButton;
     [IWUIBinding("#View")] private CanvasGroup canvasGroup;
     [IWUIBinding("#Mark")] private GameObject mark;
+    
+    [IWUIBinding("#BackNormal")] private Image backNormal;
+    [IWUIBinding("#BackActive")] private Image backActive;
+    [IWUIBinding("#BackCompleted")] private Image backCompleted;
+
+    [IWUIBinding("#DoneLabel")] private GameObject doneLabel;
 
     private TaskEntity task;
     private UIDailyQuestTaskElementEntity targetEntity;
@@ -78,8 +83,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
     public void UpdateUi()
     {
-        taskButton.interactable = !task.IsClaimed();
-        taskButtonLabel.Text = GetTextForButton(task);
+        taskButton.Init(task);
 
         taskIcon.sprite = UiQuestButton.GetIcon(task);
 
@@ -94,29 +98,16 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         
         mark.SetActive(task.IsCompleted());
         
+        ToggleBack();
+
         ToggleActive(!task.IsClaimed(), false);
     }
 
-    private string GetTextForButton(TaskEntity task)
+    private void ToggleBack()
     {
-        string key;
-        
-        switch (task.State)
-        {
-            case TaskState.Completed:
-                key = LocalizationService.Get("window.daily.quest.task.button.claim", "window.daily.quest.task.button.claim");
-                break;
-            
-            case TaskState.Claimed:
-                key = LocalizationService.Get("window.daily.quest.task.button.done", "window.daily.quest.task.button.done");
-                break;
-            
-            default:
-                key = LocalizationService.Get("window.daily.quest.task.button.help", "window.daily.quest.task.button.help");
-                break;
-        }
-
-        return key;
+        backActive.gameObject.SetActive(false);
+        backNormal.gameObject.SetActive(!task.IsCompleted());
+        backCompleted.gameObject.SetActive(task.IsCompleted());
     }
 
     private string GetRewardAsText()
@@ -193,7 +184,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
     private bool ProvideReward(Action onComplete = null)
     {
-        taskButton.interactable = false;
+        taskButton.Disable();
         
         task.SetClaimedState();
 
@@ -260,6 +251,10 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
     private void ToggleActive(bool enabled, bool animated)
     {
+        ToggleBack();
+
+        doneLabel.SetActive(!enabled);
+        
         float alpha = enabled ? 1 : 0.4f;
         
         if (!animated)
@@ -270,6 +265,4 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         canvasGroup.DOFade(alpha, 0.3f);
     }
-    
-    
 }

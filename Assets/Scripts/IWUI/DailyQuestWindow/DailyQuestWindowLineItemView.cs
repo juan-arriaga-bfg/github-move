@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DailyObjectiveLineItemView : IWBaseMonoBehaviour
+public class DailyQuestWindowLineItemView : IWBaseMonoBehaviour
 {
     public enum State
     {
