@@ -144,7 +144,7 @@
           },
           {
             "Currency": "Experience",
-            "Amount": 50
+            "Amount": 55
           }
         ]
       },
@@ -295,11 +295,11 @@
           },
           {
             "Currency": "Mana",
-            "Amount": 50
+            "Amount": 25
           },
           {
             "Currency": "Experience",
-            "Amount": 50
+            "Amount": 25
           }
         ]
       },
@@ -523,6 +523,37 @@
       "QuestDescriptionComponent": {
         "Title": "Quest",
         "Message": "Let's remove old fields."
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "18_ClearFog",
+    "TaskDefs": [
+      {
+        "TaskId": "18_ClearFog"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 25
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 25
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quest",
+        "Message": "Clear a fog"
       }
     }
   },
