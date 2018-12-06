@@ -90,11 +90,11 @@
     "OrdersWeights": [
       {
         "Uid": "Order1",
-        "Weight": 10
+        "Weight": 2
       },
       {
         "Uid": "Order5",
-        "Weight": 10
+        "Weight": 2
       }
     ],
     "ResourcesWeights": [
@@ -122,16 +122,6 @@
       {
         "Currency": "Crystals",
         "Amount": 10
-      }
-    ],
-    "OrdersWeights": [
-      {
-        "Uid": "Order2",
-        "Weight": 15
-      },
-      {
-        "Uid": "Order4",
-        "Weight": 15
       }
     ],
     "PieceWeights": [
@@ -175,8 +165,12 @@
     ],
     "OrdersWeights": [
       {
-        "Uid": "Order7",
-        "Weight": 20
+        "Uid": "Order2",
+        "Weight": 3
+      },
+      {
+        "Uid": "Order4",
+        "Weight": 3
       }
     ],
     "PieceWeights": [
@@ -206,6 +200,12 @@
       {
         "Currency": "Crystals",
         "Amount": 5
+      }
+    ],
+    "OrdersWeights": [
+      {
+        "Uid": "Order7",
+        "Weight": 4
       }
     ]
   },
