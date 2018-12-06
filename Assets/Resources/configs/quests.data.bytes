@@ -553,7 +553,69 @@
       },
       "QuestDescriptionComponent": {
         "Title": "Quest",
-        "Message": "Clear a fog"
+        "Message": "Clear a Fog"
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "19_CreatePiece_A7",
+    "TaskDefs": [
+      {
+        "TaskId": "19_CreatePiece_A7"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 30
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 60
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 100
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quets",
+        "Message": "Create a Piece"
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "20_KillTree",
+    "TaskDefs": [
+      {
+        "TaskId": "20_KillTree"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 15
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 15
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 15
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quets",
+        "Message": "Remove obstacles"
       }
     }
   },

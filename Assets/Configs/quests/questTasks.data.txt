@@ -207,10 +207,36 @@
   {
     "$type": "TaskClearFogEntity, GameAssembly",
     "Id": "18_ClearFog",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "Fog1",
+        "Title": "Clear a fog",
+        "Message": "Clear a fog"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "19_CreatePiece_A7",
+    "PieceUid": "A7",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "Fog 1"
+        "Title": "Create a Piece",
+        "Message": "Create a Piece"
+      }
+    }
+  },
+  {
+    "$type": "TaskKillTreeEntity, GameAssembly",
+    "Id": "20_KillTree",
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "OB2_A",
+        "Title": "Cut down a tree",
+        "Message": "Cut down a tree"
       }
     }
   },

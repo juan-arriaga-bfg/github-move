@@ -148,7 +148,7 @@
     ]
   },
   {
-    "Id": 9,
+    "Id": 14,
     "ConversationCharacters": {
       "LeftInner": "GnomeWorker"
     },
@@ -161,7 +161,7 @@
     ]
   },
   {
-    "Id": 17,
+    "Id": 9,
     "ConversationCharacters": {
       "LeftInner": "SleepingBeauty"
     },
@@ -179,61 +179,7 @@
     ]
   },
   {
-    "Id": 14,
-    "ConversationCharacters": {
-      "LeftInner": "SleepingBeauty"
-    },
-    "Bubbles": [
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Sad",
-        "Message": "conversation.9.message1"
-      },
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Normal",
-        "Message": "conversation.9.message2"
-      }
-    ]
-  },
-  {
-    "Id": 15,
-    "ConversationCharacters": {
-      "LeftInner": "SleepingBeauty"
-    },
-    "Bubbles": [
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Sad",
-        "Message": "conversation.9.message1"
-      },
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Normal",
-        "Message": "conversation.9.message2"
-      }
-    ]
-  },
-  {
     "Id": 16,
-    "ConversationCharacters": {
-      "LeftInner": "SleepingBeauty"
-    },
-    "Bubbles": [
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Sad",
-        "Message": "conversation.9.message1"
-      },
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Normal",
-        "Message": "conversation.9.message2"
-      }
-    ]
-  },
-  {
-    "Id": 7,
     "ConversationCharacters": {
       "LeftInner": "GnomeWorker"
     },
@@ -246,7 +192,7 @@
     ]
   },
   {
-    "Id": 8,
+    "Id": 7,
     "ConversationCharacters": {
       "LeftInner": "SleepingBeauty"
     },
@@ -291,6 +237,19 @@
         "CharacterId": "SleepingBeauty",
         "Emotion": "Normal",
         "Message": "conversation.13.message1"
+      }
+    ]
+  },
+  {
+    "Id": 18,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.14.message1"
       }
     ]
   },
@@ -348,7 +307,7 @@
     "Id": "5_CreatePieceA5",
     "Bubbles": [
       {
-        "CharacterId": "GnomeWorker",
+        "CharacterId": "SleepingBeauty",
         "Emotion": "Happy",
         "Message": "conversation.quest.complete6"
       }
@@ -365,16 +324,6 @@
     ]
   },
   {
-    "Id": "8_CreatePiece_PR_B5",
-    "Bubbles": [
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Happy",
-        "Message": "conversation.quest.complete8"
-      }
-    ]
-  },
-  {
     "Id": "9_CreatePiece_PR_C5",
     "Bubbles": [
       {
@@ -385,17 +334,7 @@
     ]
   },
   {
-    "Id": "17_KillField",
-    "Bubbles": [
-      {
-        "CharacterId": "GnomeWorker",
-        "Emotion": "Normal",
-        "Message": "conversation.quest.complete10"
-      }
-    ]
-  },
-  {
-    "Id": "6_ClearFog",
+    "Id": "18_ClearFog",
     "Bubbles": [
       {
         "CharacterId": "SleepingBeauty",
@@ -421,16 +360,6 @@
         "CharacterId": "SleepingBeauty",
         "Emotion": "Normal",
         "Message": "conversation.quest.complete13"
-      }
-    ]
-  },
-  {
-    "Id": "13_CreatePiece_A6",
-    "Bubbles": [
-      {
-        "CharacterId": "SleepingBeauty",
-        "Emotion": "Happy",
-        "Message": "conversation.quest.complete14"
       }
     ]
   },
@@ -461,6 +390,26 @@
         "CharacterId": "SleepingBeauty",
         "Emotion": "Normal",
         "Message": "conversation.quest.complete17"
+      }
+    ]
+  },
+  {
+    "Id": "19_CreatePiece_A7",
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.quest.complete14"
+      }
+    ]
+  },
+  {
+    "Id": "20_KillTree",
+    "Bubbles": [
+      {
+        "CharacterId": "GnomeWorker",
+        "Emotion": "Normal",
+        "Message": "conversation.quest.complete18"
       }
     ]
   }

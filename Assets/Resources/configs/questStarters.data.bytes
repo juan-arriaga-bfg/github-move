@@ -74,7 +74,6 @@
     "Id": 7,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "11_UseWorker",
       "12_UseMine"
     ],
     "Conditions": [
@@ -89,7 +88,8 @@
     "Id": 9,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "16_CompleteOrder"
+      "16_CompleteOrder",
+      "20_KillTree"
     ],
     "Conditions": [
       {
@@ -156,16 +156,30 @@
     ]
   },
   {
-    "Id": 17,
+    "Id": 14,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "13_CreatePiece_A6"
+      "19_CreatePiece_A7"
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
-        "Id": "FogCleared",
-        "Value": "Fog 4"
+        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
+        "Id": "PieceUnlocked",
+        "Value": "A6"
+      }
+    ]
+  },
+  {
+    "Id": 16,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "11_UseWorker"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "14_CreatePiece_B3"
       }
     ]
   },
