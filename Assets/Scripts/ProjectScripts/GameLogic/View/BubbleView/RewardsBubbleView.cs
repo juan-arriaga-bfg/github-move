@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class RewardsBubbleView : UIBoardView
 {
 	[SerializeField] private Image icon;
+	[SerializeField] private List<Image> borders;
 
 	protected override ViewType Id => ViewType.RewardsBubble;
-    
+
+	private RewardsStoreComponent storage;
+	
 	public Action OnClickAction;
 
 	public override void SetOfset()
@@ -25,16 +29,29 @@ public class RewardsBubbleView : UIBoardView
         
 		Priority = defaultPriority = 11;
         
-		var storage = piece.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid);
+		storage = piece.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid);
         
 		if (storage == null) return;
         
 		icon.sprite = IconService.Current.GetSpriteById(storage.Icon);
 	}
-	
+
+	protected override void UpdateView()
+	{
+		if (storage == null) return;
+		
+		foreach (var border in borders)
+		{
+			border.color = storage.IsHightlight ? Color.red : Color.white;
+		}
+	}
+
 	public void OnClick()
 	{
 		Context.Context.TutorialLogic.Pause(true);
+		
+		if (storage != null && storage.CheckOutOfCells()) return;
+		
 		OnClickAction?.Invoke();
 		OnClickAction = null;
 	}

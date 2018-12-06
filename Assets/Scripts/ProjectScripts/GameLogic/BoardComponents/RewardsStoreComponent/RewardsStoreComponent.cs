@@ -9,11 +9,12 @@ public class RewardsStoreComponent : IECSComponent
     public int Guid => ComponentGuid;
     
     public Func<Dictionary<int, int>> GetRewards;
-    public Action OnComplete;
+    public Action<bool> OnComplete;
     
     public Vector2 BubbleOffset = new Vector3(0, 1.5f);
     
     public string Icon => PieceType.Parse(next);
+    public bool IsHightlight => rewards != null && rewards.Sum(pair => pair.Value) < defaulAmaunt;
     
     public bool IsTargetReplace;
     public bool IsComplete;
@@ -36,20 +37,21 @@ public class RewardsStoreComponent : IECSComponent
     public void InitInSave(BoardPosition position)
     {
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
-        var item = save?.GetChestsSave(position);
+        var item = save?.GetRewardsSave(position);
 
         if (item == null) return;
         
         rewards = item.Reward;
+        defaulAmaunt = item.RewardAmount;
         
-        if (item.IsComplete) Show();
+        if (item.IsComplete) ShowBubble();
     }
 
-    public ChestSaveItem Save()
+    public RewardsSaveItem Save()
     {
         return rewards == null
             ? null
-            : new ChestSaveItem
+            : new RewardsSaveItem
             {
                 Position = context.CachedPosition,
                 Reward = rewards,
@@ -73,20 +75,50 @@ public class RewardsStoreComponent : IECSComponent
         
         foreach (var key in rewards.Keys)
         {
+            var def = PieceType.GetDefById(key);
+            
+            if(def.Filter.Has(PieceTypeFilter.Obstacle)) continue;
+            
             next = key;
+            
             break;
         }
     }
     
-    public void Show()
+    public void ShowBubble()
     {
         InitRewards();
         UpdateView(true);
     }
-
-    public void Get()
+    
+    public void GetInBubble()
     {
+        if(CheckOutOfCells()) return;
+        
         UpdateView(false);
+    }
+
+    public void GetInWindow()
+    {
+        InitRewards();
+        
+        if(CheckOutOfCells()) return;
+        
+        Scatter();
+    }
+    
+    public bool CheckOutOfCells()
+    {
+        var current = rewards.Sum(pair => pair.Value);
+        
+        if (IsTargetReplace) current = Mathf.Max(0, current - (context.Multicellular?.Mask.Count ?? 1));
+        
+        var cells = new List<BoardPosition>();
+        
+        if (current == 0 || context.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(context.CachedPosition, cells, current, 0.1f)) return false;
+        
+        UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
+        return true;
     }
     
     private void UpdateView(bool isShow)
@@ -101,7 +133,7 @@ public class RewardsStoreComponent : IECSComponent
         {
             view.Ofset = BubbleOffset;
             view.SetOfset();
-            view.OnClickAction = Get;
+            view.OnClickAction = GetInBubble;
             context.Context.HintCooldown.AddView(view);
         }
         else

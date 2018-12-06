@@ -9,9 +9,11 @@
 		AddObserver(piece, new ChestPieceComponent());
         
 		piece.RegisterComponent(new TouchReactionComponent()
-			.RegisterComponent(new TouchReactionDefinitionOpenChestWindow())
+			.RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}
+				.RegisterDefinition(new TouchReactionDefinitionOpenChestWindow())
+				.RegisterDefinition(new TouchReactionDefinitionSpawnRewards()))
 			.RegisterComponent(new TouchReactionConditionComponent()));
-
+		
 		return piece;
 	}
 	

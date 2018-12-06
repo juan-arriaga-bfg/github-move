@@ -46,15 +46,18 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current);
     }
     
-    protected override void OnSpawnCurrencyRewards()
+    protected override void OnSpawnCurrencyRewards(bool isComplete)
     {
-        var rewards = GameDataService.Current.ObstaclesManager.GetRewardByStep(Context.PieceType, current - 1);
+        if (isComplete)
+        {
+            var rewards = GameDataService.Current.ObstaclesManager.GetRewardByStep(Context.PieceType, current - 1);
         
-        AddResourceView.Show(StartPosition(), rewards);
-        Context.Context.HintCooldown.Step(HintType.Obstacle);
-
-        base.OnSpawnCurrencyRewards();
+            AddResourceView.Show(StartPosition(), rewards);
+            Context.Context.HintCooldown.Step(HintType.Obstacle);
+            
+            if (IsDead) BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ObstacleKilled, this);
+        }
         
-        if (IsDead) BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ObstacleKilled, this);
+        base.OnSpawnCurrencyRewards(isComplete);
     }
 }

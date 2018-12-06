@@ -67,10 +67,14 @@ public class MakingLifeComponent : WorkplaceLifeComponent
         return false;
     }
     
-    protected override void OnSpawnCurrencyRewards()
+    protected override void OnSpawnCurrencyRewards(bool isComplete)
     {
-        AddResourceView.Show(StartPosition(), def.StepRewards);
-        base.OnSpawnCurrencyRewards();
-        cooldown.Start();
+        if (isComplete)
+        {
+            AddResourceView.Show(StartPosition(), def.StepRewards);
+            cooldown.Start();
+        }
+        
+        base.OnSpawnCurrencyRewards(isComplete);
     }
 }

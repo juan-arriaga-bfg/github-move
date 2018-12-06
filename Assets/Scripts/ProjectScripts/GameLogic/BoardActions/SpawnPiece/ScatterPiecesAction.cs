@@ -1,55 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class ScatterPiecesAction : IBoardAction
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public virtual int Guid => ComponentGuid;
 
-	public BoardPosition? From;
-	public Func<BoardPosition> GetFrom;
+	public BoardPosition From;
 
 	public bool IsTargetReplace;
 
 	public Dictionary<int, int> Pieces;
 
-	public Action OnComplete;
+	public Action<bool> OnComplete;
 	
 	public bool PerformAction(BoardController gameBoardController)
 	{
-		if (From == null)
-		{
-			From = GetFrom?.Invoke();
-			
-			if (From == null) return false;
-		}
+		var target = gameBoardController.BoardLogic.GetPieceAt(From);
 		
-		var from = From.Value;
+		var next = new Dictionary<BoardPosition, Piece>();
 		var pieces = new Dictionary<BoardPosition, Piece>();
+		
+		var mask = new List<BoardPosition>();
 		var cells = new List<BoardPosition>();
+		
 		var amount = Pieces.Sum(pair => pair.Value);
-		
-		if (gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(from, cells, amount, 0.1f) == false) return false;
+		var replaceAmount = target.Multicellular?.Mask.Count ?? 1;
 
-		var fromPiece = gameBoardController.BoardLogic.GetPieceAt(From.Value);
-		
-		var animation = new ScatterPiecesAnimation {From = from};
+		if (IsTargetReplace) amount = Mathf.Max(0, amount - replaceAmount);
+
+		if (amount > 0 && gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From, cells, amount, 0.1f) == false)
+		{
+			target.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid)?.ShowBubble();
+			return false;
+		}
+
+		var animation = new ScatterPiecesAnimation {From = From};
 		
 		if (IsTargetReplace && cells.Count == amount)
 		{
-			var id = GetPieceId();
-			var piece = gameBoardController.CreatePieceFromType(id);
-
-			gameBoardController.BoardLogic.RemovePieceAt(from);
-			gameBoardController.BoardLogic.AddPieceToBoard(from.X, from.Y, piece);
-
-			animation.Replace = piece;
+			gameBoardController.BoardLogic.RemovePieceAt(From);
 			
-			cells.RemoveAt(0);
+			if (target.Multicellular != null)
+			{
+				foreach (var cell in target.Multicellular.Mask)
+				{
+					var point = target.Multicellular.GetPointInMask(target.CachedPosition, cell);
+					
+					mask.Add(point);
+				}
+			}
+			else
+			{
+				mask.Add(From);
+			}
+			
+			foreach (var cell in mask)
+			{
+				var id = GetPieceId();
+				
+				if (id == PieceType.None.Id) break;
+			
+				CreatePiece(gameBoardController, id, cell, next);
+			}
+			
+			animation.Replace = next;
 		}
 		
-		gameBoardController.BoardLogic.LockCell(from, this);
+		gameBoardController.BoardLogic.LockCell(From, this);
 
 		foreach (var cell in cells)
 		{
@@ -63,15 +83,27 @@ public class ScatterPiecesAction : IBoardAction
 		animation.Pieces = pieces;
 		animation.OnCompleteEvent += (_) =>
 		{
-			gameBoardController.BoardLogic.UnlockCell(from, this);
-			if(fromPiece != null && PieceType.GetDefById(fromPiece.PieceType).Filter.HasFlag(PieceTypeFilter.Obstacle))
-				fromPiece.PathfindLockObserver.RemoveRecalculate(from);
+			gameBoardController.BoardLogic.UnlockCell(From, this);
+			
+			foreach (var pair in next)
+			{
+				gameBoardController.BoardLogic.UnlockCell(pair.Key, this);
+			}
+			
 			foreach (var pair in pieces)
 			{
 				gameBoardController.BoardLogic.UnlockCell(pair.Key, this);
 			}
+			
+			OnComplete?.Invoke(Pieces.Count == 0);
 
-			OnComplete?.Invoke();
+			if (Pieces.Count == 0)
+			{
+				if (IsTargetReplace && PieceType.GetDefById(target.PieceType).Filter.HasFlag(PieceTypeFilter.Obstacle)) target.PathfindLockObserver.RemoveRecalculate(From);
+				return;
+			}
+
+			target.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid)?.ShowBubble();
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

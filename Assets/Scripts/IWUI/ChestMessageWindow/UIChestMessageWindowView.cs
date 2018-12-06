@@ -30,7 +30,7 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         btnOpenLabel.Text = windowModel.ButtonText;
         chanceLabel.Text = windowModel.ChanceText;
         
-        chest.sprite = IconService.Current.GetSpriteById(windowModel.ChestComponent.Chest.Def.Uid);
+        chest.sprite = IconService.Current.GetSpriteById(windowModel.ChestComponent.Def.Uid);
         chest.SetNativeSize();
         
         var sprites = windowModel.Icons();
@@ -50,7 +50,7 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         
         var windowModel = Model as UIChestMessageWindowModel;
 
-        if (isOpen) windowModel.ChestComponent.Open();
+        if (isOpen) windowModel.ChestComponent.Rewards.GetInWindow();
         
         windowModel.ChestComponent = null;
     }

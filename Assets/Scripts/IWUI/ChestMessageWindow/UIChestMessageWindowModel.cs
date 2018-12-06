@@ -11,7 +11,7 @@ public class UIChestMessageWindowModel : IWWindowModel
 
     public List<string> Icons()
     {
-        var icons = AddIcons(new List<string>(), ChestComponent.Chest.Def.PieceWeights);
+        var icons = AddIcons(new List<string>(), ChestComponent.Def.PieceWeights);
         
         icons = AddIcons(icons, GameDataService.Current.LevelsManager.PieceWeights);
         icons = AddIcons(icons, GameDataService.Current.LevelsManager.ResourcesWeights);
