@@ -644,6 +644,7 @@ GameObject:
   - component: {fileID: 114689858356462918}
   - component: {fileID: 225080394933947702}
   - component: {fileID: 114416732406126660}
+  - component: {fileID: 114658477802374860}
   m_Layer: 31
   m_Name: canvas
   m_TagString: Untagged
@@ -3658,6 +3659,20 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114658477802374860
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1468683550408844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d94556c2601943b58564f6e80fba563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isIgnoreBottomBorder: 1
+  isIgnoreLeftBorder: 0
+  isIgnoreRightBorder: 1
 --- !u!114 &114669140209472430
 MonoBehaviour:
   m_ObjectHideFlags: 1
