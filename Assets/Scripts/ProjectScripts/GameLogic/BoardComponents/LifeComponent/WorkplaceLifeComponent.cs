@@ -148,9 +148,9 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		Rewards.IsTargetReplace = true;
 	}
 	
-	protected virtual void OnSpawnCurrencyRewards()
+	protected virtual void OnSpawnCurrencyRewards(bool isComplete)
 	{
-		Locker.Unlock(this);
+		if(isComplete) Locker.Unlock(this);
 	}
 	
 	private void UpdateView(bool isShow)

@@ -14,7 +14,7 @@ public class ScatterPiecesAction : IBoardAction
 
 	public Dictionary<int, int> Pieces;
 
-	public Action OnComplete;
+	public Action<bool> OnComplete;
 	
 	public bool PerformAction(BoardController gameBoardController)
 	{
@@ -95,7 +95,7 @@ public class ScatterPiecesAction : IBoardAction
 				gameBoardController.BoardLogic.UnlockCell(pair.Key, this);
 			}
 			
-			OnComplete?.Invoke();
+			OnComplete?.Invoke(Pieces.Count == 0);
 			
 			if(Pieces.Count == 0) return;
 

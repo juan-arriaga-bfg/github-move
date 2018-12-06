@@ -51,22 +51,17 @@ public class MineLifeComponent : WorkplaceLifeComponent
         
         return pieces;
     }
-    
-    protected override void OnComplete()
-    {
-        base.OnComplete();
-        
-        Rewards.OnComplete = () =>
-        {
-            GameDataService.Current.MinesManager.Remove(def.Id);
-            OnSpawnCurrencyRewards();
-        };
-    }
 
-    protected override void OnSpawnCurrencyRewards()
+    protected override void OnSpawnCurrencyRewards(bool isComplete)
     {
-        AddResourceView.Show(StartPosition(), def.StepRewards);
-        base.OnSpawnCurrencyRewards();
+        if (isComplete)
+        {
+            AddResourceView.Show(StartPosition(), def.StepRewards);
+            
+            if (IsDead) GameDataService.Current.MinesManager.Remove(def.Id);
+        }
+        
+        base.OnSpawnCurrencyRewards(isComplete);
     }
 
     protected override void OnTimerComplete()

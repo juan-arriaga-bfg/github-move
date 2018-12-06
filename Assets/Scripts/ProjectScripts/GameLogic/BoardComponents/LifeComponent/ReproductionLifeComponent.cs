@@ -76,10 +76,14 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         return false;
     }
 
-    protected override void OnSpawnCurrencyRewards()
+    protected override void OnSpawnCurrencyRewards(bool isComplete)
     {
-        AddResourceView.Show(StartPosition(), def.StepReward);
-        base.OnSpawnCurrencyRewards();
-        if (IsDead == false) cooldown.Start();
+        if (isComplete)
+        {
+            AddResourceView.Show(StartPosition(), def.StepReward);
+            if (IsDead == false) cooldown.Start();
+        }
+        
+        base.OnSpawnCurrencyRewards(isComplete);
     }
 }

@@ -9,7 +9,7 @@ public class RewardsStoreComponent : IECSComponent
     public int Guid => ComponentGuid;
     
     public Func<Dictionary<int, int>> GetRewards;
-    public Action OnComplete;
+    public Action<bool> OnComplete;
     
     public Vector2 BubbleOffset = new Vector3(0, 1.5f);
     

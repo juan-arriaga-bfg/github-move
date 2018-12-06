@@ -19,6 +19,7 @@ public class ChestPieceComponent : IECSComponent, IPieceBoardObserver
         Rewards = new RewardsStoreComponent
         {
             GetRewards = GetRewards,
+            OnComplete = OnOpen,
             IsTargetReplace = true
         };
         
@@ -60,5 +61,10 @@ public class ChestPieceComponent : IECSComponent, IPieceBoardObserver
         reward = sequence.GetNextDict(Def.PieceAmount, reward);
         
         return reward;
+    }
+
+    private void OnOpen(bool isComplete)
+    {
+        if(isComplete) BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.OpenChest, contextPiece);
     }
 }
