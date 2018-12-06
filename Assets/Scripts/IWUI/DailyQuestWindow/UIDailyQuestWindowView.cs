@@ -7,13 +7,15 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
 {
     [IWUIBinding("#TaskList")] private UIContainerViewController taskList;
     [IWUIBinding("#MainTimerLabel")] private NSText mainTimerLabel;
+    [IWUIBinding("#MainTimerDescription")] private NSText mainTimerDescriptionLabel;
     [IWUIBinding("#SecondaryTimerLabel")] private NSText secondaryTimerLabel;
+    [IWUIBinding("#SequenceHeader")] private NSText sequenceHeaderLabel;
     [IWUIBinding("#ComeBackPanel")] private GameObject comeBackPanel;
     [IWUIBinding("#ComeBackLabel")] private NSText comeBackLabel;
     [IWUIBinding("#MainTimer")] private GameObject mainTimer;
     [IWUIBinding("#MainTimerPlaceholder")] private GameObject mainTimerPlaceholder;
     [IWUIBinding("#SequenceView")] private DailyQuestWindowSequenceView sequenceView;
-
+    
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -24,6 +26,10 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         
         SetTitle(model.Title);
 
+        mainTimerDescriptionLabel.Text = model.TimerHeader;
+
+        sequenceHeaderLabel.Text = model.SequenceHeaderText;
+        
         CreateTaskList(model);
         
         model.Timer.OnExecute += OnTimerUpdate;
@@ -208,11 +214,11 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
     {
         UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
         
-        mainTimerLabel.Text = model.Timer.CompleteTime.GetTimeLeftText(false, null, model.Timer.UseUTC);
+        mainTimerLabel.Text = model.Timer.CompleteTime.GetTimeLeftText(model.Timer.UseUTC, 2.5f);
 
         if (comeBackPanel.activeSelf)
         {
-            secondaryTimerLabel.Text = model.Timer.CompleteTime.GetTimeLeftText(false, null, model.Timer.UseUTC);
+            secondaryTimerLabel.Text = model.Timer.CompleteTime.GetTimeLeftText(model.Timer.UseUTC, 2.5f);
         }
     }
 
@@ -224,5 +230,12 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         comeBackPanel.SetActive(isQuestCompleted);
         comeBackLabel.Text = LocalizationService.Get("window.daily.quest.message.all.cleared", "window.daily.quest.message.all.cleared");
         taskList.gameObject.SetActive(!isQuestCompleted);
+    }
+
+    public void OnInformationButtonClick()
+    {
+        UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
+        
+        UIMessageWindowController.CreateMessage(model.InformationTitle, model.InformationMessage);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 public static class DateTimeExtension
 {
@@ -72,8 +73,20 @@ public static class DateTimeExtension
         return TimeFormat(datetime.GetTimeLeft(useUTC), icon, format);
     }
     
-    private static string TimeFormat(TimeSpan time, bool icon, string format)
+    public static string GetTimeLeftText(this DateTime datetime, bool useUTC = true)
     {
+        return TimeFormat(datetime.GetTimeLeft(useUTC), false, null);
+    }
+    
+    public static string GetTimeLeftText(this DateTime datetime, bool useUTC, float mspace)
+    {
+        return TimeFormat(datetime.GetTimeLeft(useUTC), false, null, mspace);
+    }
+    
+    private static string TimeFormat(TimeSpan time, bool icon, string format, float mspace = 3f)
+    {
+        string mspaceStr = mspace.ToString(CultureInfo.InvariantCulture);
+        
         var temp = time.Add(new TimeSpan(0, 0, 1));
         
         if (string.IsNullOrEmpty(format))
@@ -81,8 +94,8 @@ public static class DateTimeExtension
             var str = icon ? $"<sprite name={Currency.Timer.Name}> " : "";
             
             return (int) temp.TotalHours > 0
-                ? $"{str}<mspace=3em>{temp.Hours:00}:{temp.Minutes:00}:{temp.Seconds:00}</mspace>"
-                : $"{str}<mspace=3em>{temp.Minutes:00}:{temp.Seconds:00}</mspace>";
+                ? $"{str}<mspace={mspaceStr}em>{temp.Hours:00}:{temp.Minutes:00}:{temp.Seconds:00}</mspace>"
+                : $"{str}<mspace={mspaceStr}em>{temp.Minutes:00}:{temp.Seconds:00}</mspace>";
         }
         
         return string.Format(format, temp.Hours, temp.Minutes, temp.Seconds);

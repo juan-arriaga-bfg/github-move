@@ -23,6 +23,11 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
     [IWUIBinding("#DoneLabel")] private GameObject doneLabel;
 
+    private const int LABEL_DESCRIPTION_STYLE_NORMAL = 15;
+    private const int LABEL_REWARD_STYLE_NORMAL = 14;
+    private const int LABEL_DESCRIPTION_STYLE_COMPLETED = 18;
+    private const int LABEL_REWARD_STYLE_COMPLETED = 19;
+    
     private TaskEntity task;
     private UIDailyQuestTaskElementEntity targetEntity;
 
@@ -97,10 +102,29 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         lblReward.Text = GetRewardAsText();
         
         mark.SetActive(task.IsCompleted());
+
+        ToggleTextStyle();
         
         ToggleBack();
 
         ToggleActive(!task.IsClaimed(), false);
+    }
+
+    private void ToggleTextStyle()
+    {
+        if (task.IsCompleted())
+        {
+            lblDescription.StyleId = LABEL_DESCRIPTION_STYLE_COMPLETED;
+            lblReward.StyleId      = LABEL_REWARD_STYLE_COMPLETED;
+        }
+        else
+        {
+            lblDescription.StyleId = LABEL_DESCRIPTION_STYLE_NORMAL;
+            lblReward.StyleId      = LABEL_REWARD_STYLE_NORMAL;
+        }
+
+        lblDescription.ApplyStyle();
+        lblReward.ApplyStyle();
     }
 
     private void ToggleBack()
