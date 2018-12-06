@@ -113,7 +113,7 @@ public class DevTools : UIContainerElementViewController
             {
                 //if(board.BoardLogic.IsLockedCell(new BoardPosition(i, j, 1))) continue;
                 
-                var cell = board.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell, new BoardPosition(i, j, 20));
+                var cell = board.RendererContext.CreateBoardElementAt<DebugCellView>(R.DebugCell, new BoardPosition(i, j, BoardLayer.MAX.Layer));
                 cell.SetIndex(i, j);
                 cells.Add(cell);
             }

@@ -67,7 +67,7 @@ public class FieldFinderComponent : IECSComponent
 	{
 		var piece = context.GetPieceAt(point);
 
-		if (piece == null || piece.Matchable.IsMatchable() == false) return false;
+		if (piece == null || piece.Matchable?.IsMatchable() == false) return false;
 		
 		return piece.PieceType == type;
 	}

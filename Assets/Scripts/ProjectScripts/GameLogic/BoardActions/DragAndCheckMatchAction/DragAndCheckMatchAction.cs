@@ -207,7 +207,7 @@ public class DragAndCheckMatchAction : IBoardAction
 		{
 			IBoardAction action;
 			
-			if (pieceFrom.Matchable.IsMatchable() && CheckMatch(board, new List<BoardPosition> {From}, out action))
+			if (pieceFrom.Matchable?.IsMatchable() == true && CheckMatch(board, new List<BoardPosition> {From}, out action))
 			{
 				board.ActionExecutor.PerformAction(action);
 				board.BoardLogic.FireflyLogic.OnMatch();
