@@ -12,9 +12,8 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
     [IWUIBinding("#ComeBackPanel")] private GameObject comeBackPanel;
     [IWUIBinding("#ComeBackLabel")] private NSText comeBackLabel;
     [IWUIBinding("#MainTimer")] private GameObject mainTimer;
+    [IWUIBinding("#SequenceView")] private DailyObjectiveSequenceView sequenceView;
 
-    [SerializeField] private List<Image> chestSlots;
-    
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -41,16 +40,18 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         
         ToggleComebackPanel(isQuestClaimed);
 
-        SetChestsIcons();
+        SetupSequence();
     }
 
-    private void SetChestsIcons()
+    private void SetupSequence()
     {
         UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
 
+        sequenceView.Init();
+        
         TaskCompleteDailyTaskEntity clearAllTask = model.Quest.GetTask<TaskCompleteDailyTaskEntity>();
         
-        var reward = clearAllTask.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value ?? new List<CurrencyPair>();
+        List<CurrencyPair> reward = clearAllTask.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value ?? new List<CurrencyPair>();
         int count = reward.Count;
         
         if (count == 0)
@@ -62,23 +63,31 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         int globalIndex = GameDataService.Current.QuestsManager.DailyQuestRewardIndex;
         int croppedIndex = globalIndex % count;
         int index = croppedIndex;
-        
-        for (int i = 0; i < chestSlots.Count; i++)
-        {
-            Image chestImage = chestSlots[i];
-            CurrencyPair chest = reward[index];
 
-            var icon = chest.GetIcon();
-            chestImage.sprite = icon;
-            chestImage.color = new Color(1, 1, 1, index == croppedIndex ? 1 : 0.6f);
-            
-            index++;
+        if (globalIndex > 1)
+        {
+            index -= 2;
+        }
+        
+        List<CurrencyPair> rewardForView = new List<CurrencyPair>();
+        for (int i = 0; i < DailyObjectiveSequenceView.ITEMS_COUNT; i++)
+        {
+            if (index < 0)
+            {
+                index = 0;
+            }
+
             if (index >= reward.Count)
             {
                 index = 0;
             }
+
+            rewardForView.Add(reward[i]);
+
+            index++;
         }
 
+        sequenceView.SetValues(reward, croppedIndex);
     }
 
     public void ScrollToTop()

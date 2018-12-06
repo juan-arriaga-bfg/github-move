@@ -163,6 +163,9 @@ public class DevTools : UIContainerElementViewController
     {
         Debug.Log("OnDebug2Click");
 
+        GameDataService.Current.QuestsManager.StartNewDailyQuest();
+        return;
+        
         const string QUEST_ID = "1";
         
         var quest = GameDataService.Current.QuestsManager.GetActiveQuestById(QUEST_ID);
