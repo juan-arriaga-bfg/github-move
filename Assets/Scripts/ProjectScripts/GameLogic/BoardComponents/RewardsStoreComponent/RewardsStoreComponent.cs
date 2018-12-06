@@ -75,7 +75,12 @@ public class RewardsStoreComponent : IECSComponent
         
         foreach (var key in rewards.Keys)
         {
+            var def = PieceType.GetDefById(key);
+            
+            if(def.Filter.Has(PieceTypeFilter.Obstacle)) continue;
+            
             next = key;
+            
             break;
         }
     }
