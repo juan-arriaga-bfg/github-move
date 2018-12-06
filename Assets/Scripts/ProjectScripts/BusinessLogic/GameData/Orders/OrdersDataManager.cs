@@ -25,6 +25,8 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
         Recipes = new List<OrderDef>();
         Orders = new List<Order>();
         LoadData(new ResourceConfigDataMapper<List<OrderDef>>("configs/orders.data", NSConfigsSettings.Instance.IsUseEncryption));
+        
+        Locker.Lock(this);
     }
 
     public void LoadData(IDataMapper<List<OrderDef>> dataMapper)
