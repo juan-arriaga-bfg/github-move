@@ -16,6 +16,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     [IWUIBinding("#TaskButton")] private Button taskButton;
     [IWUIBinding("#TaskButtonLabel")] private NSText taskButtonLabel;
     [IWUIBinding("#View")] private CanvasGroup canvasGroup;
+    [IWUIBinding("#Mark")] private GameObject mark;
 
     private TaskEntity task;
     private UIDailyQuestTaskElementEntity targetEntity;
@@ -82,7 +83,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         taskIcon.sprite = UiQuestButton.GetIcon(task);
 
-        lblProgress.Text = UiQuestButton.GetTaskProgress(task);
+        lblProgress.Text = UiQuestButton.GetTaskProgress(task, 32);
         
         // lblDescription.Text = $"<color=#D2D2D2><size=25>[{task.Group} - {task.Id.ToLower()}]</size></color> " + task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
 
@@ -90,6 +91,8 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         lblDescription.Text = LocalizationService.Get(key, key) ;
 
         lblReward.Text = GetRewardAsText();
+        
+        mark.SetActive(task.IsCompleted());
         
         ToggleActive(!task.IsClaimed(), false);
     }

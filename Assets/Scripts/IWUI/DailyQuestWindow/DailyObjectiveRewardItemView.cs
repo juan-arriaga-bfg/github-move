@@ -8,7 +8,8 @@ public class DailyObjectiveRewardItemView : IWBaseMonoBehaviour
 
     public void Init(CurrencyPair reward)
     {
-        lblCount.Text = reward.Amount > 1 ? reward.Amount.ToString() : string.Empty;
+        lblCount.Text = reward.Amount > 1 ? "x" + reward.Amount : string.Empty;
         image.sprite = reward.GetIcon();
+        image.SetNativeSize();
     }
 }

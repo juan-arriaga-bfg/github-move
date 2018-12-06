@@ -27,8 +27,11 @@ public class DailyObjectiveSequenceView : IWBaseMonoBehaviour
         
         for (int i = 0; i < ITEMS_COUNT; i++)
         {
-            var goReward = Instantiate(rewardItemPrefab, rewardItemPrefab.transform);
-            var goLine = Instantiate(lineItemPrefab, lineItemPrefab.transform);
+            var goReward = Instantiate(rewardItemPrefab);
+            var goLine = Instantiate(lineItemPrefab);
+            
+            goReward.transform.SetParentAndReset(rewardItemPrefab.transform.parent);
+            goLine.transform.SetParentAndReset(lineItemPrefab.transform.parent);
             
             rewardItems.Add(goReward.GetComponent<DailyObjectiveRewardItemView>());
             lineItems.Add(goLine.GetComponent<DailyObjectiveLineItemView>());

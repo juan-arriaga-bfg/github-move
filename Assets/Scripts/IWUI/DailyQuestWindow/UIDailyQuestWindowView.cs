@@ -87,7 +87,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
             index++;
         }
 
-        sequenceView.SetValues(reward, croppedIndex);
+        sequenceView.SetValues(rewardForView, croppedIndex);
     }
 
     public void ScrollToTop()
