@@ -14,7 +14,7 @@
   {
     "$type": "TaskClearFogEntity, GameAssembly",
     "Id": "2_ClearFog",
-    "TargetValue": 2,
+    "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "Fog1",
@@ -26,7 +26,7 @@
   {
     "$type": "TaskKillTreeEntity, GameAssembly",
     "Id": "3_KillTree",
-    "TargetValue": 3,
+    "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Ico": "OB1_A",
@@ -205,6 +205,42 @@
     }
   },
   {
+    "$type": "TaskClearFogEntity, GameAssembly",
+    "Id": "18_ClearFog",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "Fog1",
+        "Title": "Clear a fog",
+        "Message": "Clear a fog"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "19_CreatePiece_A7",
+    "PieceUid": "A7",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "Create a Piece",
+        "Message": "Create a Piece"
+      }
+    }
+  },
+  {
+    "$type": "TaskKillTreeEntity, GameAssembly",
+    "Id": "20_KillTree",
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "OB3_A",
+        "Title": "Cut down a tree",
+        "Message": "Cut down a tree"
+      }
+    }
+  },
+  {
     "$type": "TaskCompleteDailyTaskEntity, GameAssembly",
     "Id": "Daily_ClearAll",
     "ComponentsCache": {
@@ -255,8 +291,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft2",
-            "Amount": 1
+            "Currency": "Coins",
+            "Amount": 15
           }
         ]
       },
@@ -275,8 +311,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft2",
-            "Amount": 2
+            "Currency": "Coins",
+            "Amount": 30
           }
         ]
       },
@@ -296,8 +332,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft3",
-            "Amount": 1
+            "Currency": "Coins",
+            "Amount": 25
           }
         ]
       },
@@ -317,8 +353,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft3",
-            "Amount": 1
+            "Currency": "Coins",
+            "Amount": 25
           }
         ]
       },
@@ -338,8 +374,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft3",
-            "Amount": 1
+            "Currency": "Coins",
+            "Amount": 25
           }
         ]
       },
@@ -358,8 +394,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft3",
-            "Amount": 1
+            "Currency": "Coins",
+            "Amount": 25
           }
         ]
       },
@@ -377,8 +413,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft3",
-            "Amount": 1
+            "Currency": "Coins",
+            "Amount": 25
           }
         ]
       },
@@ -397,8 +433,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft3",
-            "Amount": 1
+            "Currency": "Coins",
+            "Amount": 25
           }
         ]
       },
@@ -417,8 +453,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft3",
-            "Amount": 1
+            "Currency": "Coins",
+            "Amount": 25
           }
         ]
       },
@@ -437,8 +473,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft3",
-            "Amount": 1
+            "Currency": "Coins",
+            "Amount": 25
           }
         ]
       },
@@ -457,8 +493,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft3",
-            "Amount": 1
+            "Currency": "Coins",
+            "Amount": 25
           }
         ]
       },
@@ -478,8 +514,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft3",
-            "Amount": 2
+            "Currency": "Coins",
+            "Amount": 45
           }
         ]
       },
@@ -498,8 +534,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft3",
-            "Amount": 2
+            "Currency": "Coins",
+            "Amount": 45
           }
         ]
       },
@@ -517,8 +553,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft3",
-            "Amount": 2
+            "Currency": "Coins",
+            "Amount": 45
           }
         ]
       },
@@ -537,8 +573,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft4",
-            "Amount": 1
+            "Currency": "Coins",
+            "Amount": 45
           }
         ]
       },
@@ -557,8 +593,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft3",
-            "Amount": 2
+            "Currency": "Coins",
+            "Amount": 45
           }
         ]
       },
@@ -577,8 +613,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft4",
-            "Amount": 1
+            "Currency": "Coins",
+            "Amount": 45
           }
         ]
       },
@@ -597,8 +633,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft3",
-            "Amount": 2
+            "Currency": "Coins",
+            "Amount": 45
           }
         ]
       },
@@ -618,8 +654,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Soft4",
-            "Amount": 1
+            "Currency": "Coins",
+            "Amount": 45
           }
         ]
       },
@@ -639,8 +675,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Hard2",
-            "Amount": 1
+            "Currency": "Crystals",
+            "Amount": 15
           }
         ]
       },
@@ -660,8 +696,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Hard2",
-            "Amount": 1
+            "Currency": "Crystals",
+            "Amount": 15
           }
         ]
       },
@@ -681,8 +717,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Hard3",
-            "Amount": 1
+            "Currency": "Crystals",
+            "Amount": 25
           }
         ]
       },
@@ -701,8 +737,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Hard2",
-            "Amount": 1
+            "Currency": "Crystals",
+            "Amount": 15
           }
         ]
       },
@@ -721,8 +757,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Hard2",
-            "Amount": 1
+            "Currency": "Crystals",
+            "Amount": 15
           }
         ]
       },
@@ -741,8 +777,8 @@
       "QuestRewardComponent": {
         "Value": [
           {
-            "Currency": "Hard2",
-            "Amount": 1
+            "Currency": "Crystals",
+            "Amount": 15
           }
         ]
       },

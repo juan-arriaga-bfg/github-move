@@ -16,7 +16,7 @@ public class HighlightTaskPointToRandomLiveProductionField : HighlightTaskUsingP
 
     protected override bool ShowArrow(TaskEntity task, float delay)
     {
-        filter = PieceTypeFilter.ProductionField;
+        includeFilter = PieceTypeFilter.ProductionField;
         return base.ShowArrow(task, delay);
     }
 }

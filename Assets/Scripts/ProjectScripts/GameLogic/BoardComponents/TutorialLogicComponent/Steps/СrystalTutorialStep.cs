@@ -3,7 +3,7 @@
 public class СrystalTutorialStep : LoopFingerTutorialStep
 {
     private int crystal = PieceType.Boost_CR.Id;
-    private int target = PieceType.A4.Id;
+    private int target = PieceType.A5.Id;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -67,6 +67,12 @@ public class СrystalTutorialStep : LoopFingerTutorialStep
             if(Context.Context.BoardLogic.FieldFinder.Find(position, field, out amount) == false) continue;
             
             options.Add(field);
+        }
+        
+        if(options.Count == 0)
+        {
+            PauseOff();
+            return;
         }
         
         options.Sort((a, b) => -a.Count.CompareTo(b.Count));

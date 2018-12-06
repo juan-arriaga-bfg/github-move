@@ -5,7 +5,9 @@ public class HighlightTaskPointToRandomChest : HighlightTaskUsingPieceFilter
 {
     protected override bool ShowArrow(TaskEntity task, float delay)
     {
-        filter = PieceTypeFilter.Chest;
+        includeFilter = PieceTypeFilter.Chest;
+        excludeFilter = PieceTypeFilter.Bag;
+        
         return base.ShowArrow(task, delay);
     }
 }

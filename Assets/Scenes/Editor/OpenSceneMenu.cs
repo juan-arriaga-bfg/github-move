@@ -15,6 +15,12 @@ public class OpenSceneMenu : Editor
     {
         OpenIf("Assets/Scenes/Main.unity");
     }
+    
+    [MenuItem("Open Scene/Text Styles", false, 20)]
+    private static void TextStyles()
+    {
+        OpenIf("Assets/Scenes/TextStyles.unity");
+    }
 
     private static void OpenIf(string level)
     {

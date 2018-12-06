@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsDataManager>
@@ -137,11 +138,17 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         return ActiveFogs[index];
     }
     
-    public FogDef GetRandomActiveFogWithLeastPrice()
+    /// <summary>
+    /// Find fog with minimal price. Active fogs have top priority even when their prices are higher
+    /// </summary>
+    /// <returns></returns>
+    public FogDef GetRandomFogWithLeastPrice()
     {
-        if (ActiveFogs.Count == 0)
+        List<FogDef> fogsToSearch = ActiveFogs.Count > 0 ? ActiveFogs : VisibleFogPositions.Values.ToList();
+
+        if (fogsToSearch == null || fogsToSearch.Count == 0)
         {
-            Debug.LogError("[FogsDataManager] => GetRandomActiveFogWithLeastPrice: No defs found!");
+            Debug.LogError("[FogsDataManager] => GetRandomActiveFogWithLeastPrice: No visible fog found!");
             return null;
         }
 

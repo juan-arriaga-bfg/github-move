@@ -6,7 +6,7 @@ public class HighlightTaskTree : HighlightTaskUsingPieceFilter
     {
         if (task is TaskKillTreeEntity || task is TaskHitTreeEntity)
         {
-            filter = PieceTypeFilter.Tree;
+            includeFilter = PieceTypeFilter.Tree;
         }
         else
         {

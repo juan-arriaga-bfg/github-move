@@ -38,6 +38,12 @@ public class TaskOpenChestEntity : TaskCounterAboutPiece, IBoardEventListener, I
             return;
         }
 
+        var def = PieceType.GetDefById(piece.PieceType);
+        if (def.Filter.Has(PieceTypeFilter.Bag))
+        {
+            return;
+        }
+
         if (PieceId <= 0 || piece.PieceType == PieceId)
         {
             CurrentValue += 1;
