@@ -5,13 +5,12 @@ using UnityEngine;
 public class ScatterPiecesAnimation : BoardAnimation
 {
     public BoardPosition From;
-    public Piece Replace;
+    public Dictionary<BoardPosition, Piece> Replace;
     public Dictionary<BoardPosition, Piece> Pieces;
     
     public override void Animate(BoardRenderer context)
     {
         var target = Replace == null ? context.GetElementAt(From) : context.RemoveElementAt(From, false);
-        var next = Replace == null ? null : context.CreatePieceAt(Replace, From);
         var startPosition = context.Context.BoardDef.GetPiecePosition(From.X, From.Y);
         
         var sequence = DOTween.Sequence().SetId(animationUid);
@@ -51,17 +50,27 @@ public class ScatterPiecesAnimation : BoardAnimation
             }
         }
         
-        if (next != null)
+        if (Replace != null)
         {
-            next.CachedTransform.localScale = Vector3.zero;
-            
             sequence.Append(target.CachedTransform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack));
-            sequence.Append(next.CachedTransform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack));
+            
+            sequence.AppendCallback(() =>
+            {
+                foreach (var pair in Replace)
+                {
+                    var next = context.CreatePieceAt(pair.Value, pair.Key);
+                
+                    next.CachedTransform.localScale = Vector3.zero;
+                    next.CachedTransform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack);
+                }
+            });
+
+            sequence.AppendInterval(0.4f);
         }
         
         sequence.OnComplete(() =>
         {
-            if (next != null) context.DestroyElement(target);
+            if (Replace != null) context.DestroyElement(target);
             CompleteAnimation(context);
         });
     }

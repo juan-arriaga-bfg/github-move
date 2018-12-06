@@ -106,10 +106,10 @@ public class RewardsStoreComponent : IECSComponent
     {
         var current = rewards.Sum(pair => pair.Value);
         
-        if (IsTargetReplace) current -= 1;
+        if (IsTargetReplace) current = Mathf.Max(0, current - context.Multicellular?.Mask.Count ?? 1);
         
         var cells = new List<BoardPosition>();
-
+        
         if (current == 0 || context.Context.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(context.CachedPosition, cells, current, 0.1f)) return false;
         
         UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
