@@ -88,7 +88,8 @@
     "Id": 9,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "16_CompleteOrder"
+      "16_CompleteOrder",
+      "20_KillTree"
     ],
     "Conditions": [
       {
@@ -165,20 +166,6 @@
         "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
         "Id": "PieceUnlocked",
         "Value": "A6"
-      }
-    ]
-  },
-  {
-    "Id": 15,
-    "$type": "QuestStarterEntity, GameAssembly",
-    "QuestToStartIds": [
-      "20_KillTree"
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
-        "Id": "PieceUnlocked",
-        "Value": "A5"
       }
     ]
   },
