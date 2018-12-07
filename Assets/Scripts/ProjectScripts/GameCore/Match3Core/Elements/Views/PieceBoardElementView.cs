@@ -23,6 +23,8 @@ public class PieceBoardElementView : BoardElementView
     private readonly Color dragSpriteErrorColor = new Color(1f, 0.44f, 0.44f, 0.9f);
 
     private MulticellularPieceBoardObserver multicellularPieceBoardObserver;
+
+    private GodRayView dropEffectView;
     
     public bool IsHighlighted { get; protected set; }
 
@@ -94,6 +96,8 @@ public class PieceBoardElementView : BoardElementView
     
     public virtual void OnDragStart(BoardPosition boardPos, Vector2 worldPos)
     {
+        HideDropEffect();
+        
         OnDrag(Piece.CachedPosition, worldPos);
         Piece.Context.HintCooldown.Pause(this);
         Piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
@@ -211,5 +215,49 @@ public class PieceBoardElementView : BoardElementView
         var targetPosition = multicellularPieceBoardObserver.GetUpPosition;
         
         base.SyncRendererLayers(new BoardPosition(targetPosition.X, targetPosition.Y, boardPosition.Z));
+    }
+
+    
+    public void ShowDropEffect()
+    {
+        if (dropEffectView != null)
+        {
+            return;
+        }
+        
+        dropEffectView = GodRayView.Show(Piece.CachedPosition, 5, onHided: DestroyDropEffect);
+        
+        dropEffectView.transform.SetParent(transform);
+        dropEffectView.transform.localPosition = Vector3.zero;
+    }
+
+    public void DestroyDropEffect()
+    {
+        if (dropEffectView == null)
+        {
+            return;
+        }
+        
+        dropEffectView.gameObject.SetActive(false);
+        Context.DestroyElement(dropEffectView);
+        dropEffectView = null;
+    }
+    
+    public void HideDropEffect(bool animated = true)
+    {
+        if (dropEffectView == null)
+        {
+            return;
+        }
+        
+        dropEffectView.Hide(true);
+    }
+    
+    
+    public override void ResetViewOnDestroy()
+    {
+        base.ResetViewOnDestroy();
+
+        DestroyDropEffect();
     }
 }

@@ -1,51 +1,86 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
-public class GodRayView : BoardElementView, IBoardEventListener
+public class GodRayView : BoardElementView
 {
-    [SerializeField] private ParticleSystem particle;
+    [SerializeField] private ParticleSystem particleTop;
+    [SerializeField] private ParticleSystem particleBottom;
 
-    private Piece target;
+    const float SMOOTH_STOP_TIME = 0.5f;
+
+    private float lifetime;
+
+    private bool hideInProgress;
+
+    private Action onHided;
     
-    private void Show()
+    private void Show(Action onHided)
     {
-        particle.gameObject.SetActive(true);
-    }
-
-    public void Remove(float delay = 5f)
-    {
-        const float stopTime = 1.5f;
-
+        this.onHided = onHided;
+        
+        DOTween.Kill(this);
+        
+        hideInProgress = false;
+        
+        StartParticleSystem(particleTop);
+        StartParticleSystem(particleBottom);
+        
         DOTween.Sequence()
                .SetId(this)
-               .InsertCallback(delay, () =>
+               .InsertCallback(lifetime, () =>
                 {
-                    particle.Stop(true);
+                    Hide(true);
                 });
-
-        DestroyOnBoard(delay + stopTime);
     }
 
-    public override void Init(BoardRenderer context)
+    public void Hide(bool animated)
     {
-        base.Init(context);
-        Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ClosePieceUI);
+        if (!animated)
+        {
+            Context.RemoveElement(this);
+            
+            CleanUp();
+            onHided?.Invoke();
+            return;
+        }
+
+        if (hideInProgress)
+        {
+            return;
+        }
+        
+        DOTween.Kill(this);
+        
+        StopParticleSystemSmoothly(particleTop,    SMOOTH_STOP_TIME);
+        StopParticleSystemSmoothly(particleBottom, SMOOTH_STOP_TIME);
+
+        hideInProgress = true;
+        
+        DOTween.Sequence()
+               .SetId(this)
+               .InsertCallback(SMOOTH_STOP_TIME, () =>
+                {
+                    Context.RemoveElement(this);
+                    hideInProgress = false;
+                    onHided?.Invoke();
+                });
     }
 
     public override void OnFastDestroy()
     {
         base.OnFastDestroy();
-        DOTween.Kill(this);
+        CleanUp();
     }
 
     public void OnDestroy()
     {
-        DOTween.Kill(this); 
+        CleanUp();
     }
 
-    public static GodRayView Show(BoardPosition position, float offsetX = 0, float offsetY = 0, bool focus = false)
+    public static GodRayView Show(BoardPosition position, float lifetime, Action onHided, float offsetX = 0, float offsetY = 0, bool focus = false)
     {
-        var board = BoardService.Current.GetBoardById(0);
+        var board = BoardService.Current.FirstBoard;
         var target = board.BoardLogic.GetPieceAt(position);
 
         var multi = target?.Multicellular;
@@ -56,11 +91,10 @@ public class GodRayView : BoardElementView, IBoardEventListener
         }
 
         var view = board.RendererContext.CreateBoardElementAt<GodRayView>(R.GodRayView, position);
-
-        view.target = target;
+        view.lifetime = lifetime;
         
         view.CachedTransform.localPosition = view.CachedTransform.localPosition + (Vector3.up * 2) + new Vector3(offsetX, offsetY);
-        view.Show();
+        view.Show(onHided);
 
         if (focus == false)
         {
@@ -73,36 +107,47 @@ public class GodRayView : BoardElementView, IBoardEventListener
         return view;
     }
 
-    public void OnBoardEvent(int code, object context)
-    {
-        if (code != GameEventsCodes.ClosePieceUI)
-        {
-            return;
-        }
-
-        if ((context as PieceBoardElementView)?.Piece != target)
-        {
-            return;
-        }
-
-        Remove(0);
-    }
-
     public override void SyncRendererLayers(BoardPosition boardPosition)
     {
-        // base.SyncRendererLayers(boardPosition);
+        // Do nothing
+    }
+
+    private void StopParticleSystemSmoothly(ParticleSystem particleSystem, float stopTime)
+    {
+        var main = particleSystem.main;
+        main.loop = false;
         
-        if (cachedRenderers.size <= 0)
+        var emission = particleSystem.emission;
+        emission.enabled = false;
+        
+        var particles = new ParticleSystem.Particle[particleSystem.particleCount];
+        int count = particleSystem.GetParticles(particles);
+        for (int i = 0; i < count; i++)
         {
-            CacheLayers();
+            particles[i].remainingLifetime = Mathf.Min(particles[i].remainingLifetime, stopTime);
         }
+        
+        particleSystem.SetParticles(particles, count);
+    }
+    
+    private void StartParticleSystem(ParticleSystem particleSystem)
+    {       
+        var emission = particleSystem.emission;
+        emission.enabled = true;
 
-        for (int i =0; i < cachedRenderers.size; i++)
-        {
-            var rend = cachedRenderers[i];
-            rend.CachedRenderer.sortingOrder = boardPosition.X * Context.Context.BoardDef.Width - boardPosition.Y + boardPosition.Z * 100 + rend.SortingOrderOffset + 10000;
-        }
+        particleSystem.Play();
+    }
 
-        CachedTransform.localPosition = new Vector3(CachedTransform.localPosition.x, CachedTransform.localPosition.y, -boardPosition.Z * 0.1f);
+    public override void ResetViewOnDestroy()
+    {
+        base.ResetViewOnDestroy();
+        CleanUp();
+    }
+
+    private void CleanUp()
+    {
+        DOTween.Kill(this);
+        particleTop.Stop();
+        particleBottom.Stop(); 
     }
 }

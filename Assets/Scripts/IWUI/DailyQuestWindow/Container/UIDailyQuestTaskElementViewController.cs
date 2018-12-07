@@ -81,10 +81,12 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
             return;
         }
 
+        var board = BoardService.Current.FirstBoard;
+
         foreach (var pos in listOfPiecesToHighlight)
         {
-//           var ray = GodRayView.Show(pos);
-//           ray.Remove();
+            var target = board.BoardLogic.GetPieceAt(pos);
+            target.ActorView.ShowDropEffect();
         }
     }
 
