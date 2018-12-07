@@ -5,41 +5,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "ReadyArrowView",
-    "ResourcePath": "Prefabs/ReadyArrowView",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "AddResourceView",
-    "ResourcePath": "Prefabs/AddResourceView",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "BoardTimerView",
-    "ResourcePath": "Prefabs/BoardTimerView",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "HintArrow",
-    "ResourcePath": "Prefabs/HintArrow",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "PieceLevelView",
-    "ResourcePath": "Prefabs/PieceLevelView",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "MenuView",
-    "ResourcePath": "Prefabs/MenuView",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "DebugCell",
-    "ResourcePath": "Prefabs/DebugCell",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "BorderDark",
     "ResourcePath": "Prefabs/Border/BorderDark",
     "IsGenerateAutoName": true
@@ -75,11 +40,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "BubbleView",
-    "ResourcePath": "Prefabs/BubbleView",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "MergeParticleSystem",
     "ResourcePath": "Particles/MergeParticleSystem",
     "IsGenerateAutoName": true
@@ -110,21 +70,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "BoardProgressView",
-    "ResourcePath": "Prefabs/BoardProgressView",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "Warning",
-    "ResourcePath": "Prefabs/Warning",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "LockView",
-    "ResourcePath": "Prefabs/LockView",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "Enemy1Piece",
     "ResourcePath": "Prefabs/Pieces/Enemies/Enemy1Piece",
     "IsGenerateAutoName": true
@@ -132,11 +77,6 @@
   {
     "Uid": "Cell",
     "ResourcePath": "Prefabs\\Pieces/Cell",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "OrderBubbleView",
-    "ResourcePath": "Prefabs/OrderBubbleView",
     "IsGenerateAutoName": true
   },
   {
@@ -875,11 +815,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "PieceRemover",
-    "ResourcePath": "Prefabs/PieceRemover",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "UIHintArrow",
     "ResourcePath": "Prefabs\\UI/UIHintArrow",
     "IsGenerateAutoName": true
@@ -1035,11 +970,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "UIBoardViewContainer",
-    "ResourcePath": "Prefabs/UIBoardViewContainer",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "LockedSubstrate",
     "ResourcePath": "Prefabs/LockedSubstrate",
     "IsGenerateAutoName": true
@@ -1047,6 +977,61 @@
   {
     "Uid": "LockParticles",
     "ResourcePath": "Particles/LockParticles",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BubbleView",
+    "ResourcePath": "Prefabs\\BoardUI/BubbleView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "OrderBubbleView",
+    "ResourcePath": "Prefabs\\BoardUI/OrderBubbleView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "Warning",
+    "ResourcePath": "Prefabs\\BoardUI/Warning",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "LockView",
+    "ResourcePath": "Prefabs\\BoardUI/LockView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "AddResourceView",
+    "ResourcePath": "Prefabs\\BoardUI/AddResourceView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BoardTimerView",
+    "ResourcePath": "Prefabs\\BoardUI/BoardTimerView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "DebugCell",
+    "ResourcePath": "Prefabs\\BoardUI/DebugCell",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "HintArrow",
+    "ResourcePath": "Prefabs\\BoardUI/HintArrow",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BoardProgressView",
+    "ResourcePath": "Prefabs\\BoardUI/BoardProgressView",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "PieceRemover",
+    "ResourcePath": "Prefabs\\BoardUI/PieceRemover",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "UIBoardViewContainer",
+    "ResourcePath": "Prefabs\\BoardUI/UIBoardViewContainer",
     "IsGenerateAutoName": true
   }
 ]

@@ -41,10 +41,6 @@ public class TouchReactionDefinitionMenu : TouchReactionDefinitionComponent
             return true;
         }
         
-        var view = piece.ViewDefinition.AddView(ViewType.Menu);
-        
-        view.Change(!view.IsShow);
-        OnMake?.Invoke(true);
         return true;
     }
 

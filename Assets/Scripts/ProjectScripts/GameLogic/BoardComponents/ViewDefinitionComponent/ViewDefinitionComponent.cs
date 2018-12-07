@@ -80,9 +80,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     {
         var f = from;
         var t = Position = to;
-
         
-
         if (container != null)
         {
             f.Z = t.Z = BoardLayer.UI.Layer; // += Layer + view.Layer;

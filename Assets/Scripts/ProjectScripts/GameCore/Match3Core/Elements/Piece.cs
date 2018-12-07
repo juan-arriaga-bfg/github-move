@@ -62,12 +62,31 @@ public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchab
         PieceType = pieceType;
         Context = context;
     }
-
+    
     public virtual bool IsValidPieceAt(BoardPosition piecePosition)
     {
         var currentPiece = Context.BoardLogic.GetPieceAt(piecePosition);
         return currentPiece == this;
     }
-
     
+    public void AddView(ViewType id)
+    {
+        var view = ViewDefinition;
+
+        if (view == null)
+        {
+            view = new ViewDefinitionComponent();
+            var observers = GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
+            
+            RegisterComponent(view);
+            observers.RegisterObserver(view);
+        }
+        
+        view.AddView(id).Change(true);
+    }
+    
+    public void HideView(ViewType id)
+    {
+        ViewDefinition?.AddView(id).Change(false);
+    }
 }
