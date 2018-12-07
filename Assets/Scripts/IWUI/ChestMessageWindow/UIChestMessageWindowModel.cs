@@ -7,7 +7,7 @@ public class UIChestMessageWindowModel : IWWindowModel
     public string Title => LocalizationService.Get("window.chest.title", "window.chest.title");
     public string Message => LocalizationService.Get("window.chest.message", "window.chest.message");
     public string ButtonText => LocalizationService.Get("common.button.unlock", "common.button.unlock");
-    public string ChanceText => LocalizationService.Get("window.chest.chance", "window.chest.chance");
+    public string DelimiterText => LocalizationService.Get("window.chest.chance", "window.chest.chance");
 
     public List<string> Icons()
     {

@@ -5,15 +5,12 @@ using UnityEngine.UI;
 public class UIChestMessageWindowView : UIGenericPopupWindowView
 {
     [SerializeField] private NSText btnOpenLabel;
-    [SerializeField] private NSText chanceLabel;
     
-    [SerializeField] private Image chest;
-    [SerializeField] private Image item;
+    [IWUIBinding("#Delimiter")] private NSText delimiter;
     
-    [SerializeField] private ScrollRect scroll;
-
-    private List<Image> icons = new List<Image>();
-
+    [IWUIBinding("#Chest")] private Image chest;
+    [IWUIBinding("#Content")] private UIContainerViewController content;
+    
     private bool isOpen;
     
     public override void OnViewShow()
@@ -28,20 +25,16 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         SetMessage(windowModel.Message);
         
         btnOpenLabel.Text = windowModel.ButtonText;
-        chanceLabel.Text = windowModel.ChanceText;
+        delimiter.Text = windowModel.DelimiterText;
         
         chest.sprite = IconService.Current.GetSpriteById(windowModel.ChestComponent.Def.Uid);
         chest.SetNativeSize();
         
-        var sprites = windowModel.Icons();
-        item.sprite = IconService.Current.GetSpriteById(sprites[0]);
+        Fill(windowModel.Icons(), content);
         
-        for (var i = 1; i < sprites.Count; i++)
-        {
-            CreateIcon(sprites[i]);
-        }
-
-        scroll.horizontalNormalizedPosition = 0;
+        var scrollRect = content.GetScrollRect();
+        
+        if (scrollRect != null) scrollRect.horizontalNormalizedPosition = 0f;
     }
 
     public override void OnViewClose()
@@ -55,27 +48,38 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         windowModel.ChestComponent = null;
     }
     
-    public override void OnViewCloseCompleted()
-    {
-        foreach (var image in icons)
-        {
-            Destroy(image.gameObject);
-        }
-        
-        icons = new List<Image>();
-    }
-    
     public void OnOpenClick()
     {
         isOpen = true;
         Controller.CloseCurrentWindow();
     }
     
-    private void CreateIcon(string icon)
+    public void Fill(List<string> entities, UIContainerViewController container)
     {
-        var image = Instantiate(item, item.transform.parent).GetComponent<Image>();
-
-        image.sprite = IconService.Current.GetSpriteById(icon);
-        icons.Add(image);
+        if (entities == null || entities.Count <= 0)
+        {
+            container.Clear();
+            return;
+        }
+        
+        // update items
+        var views = new List<IUIContainerElementEntity>(entities.Count);
+        
+        for (var i = 0; i < entities.Count; i++)
+        {
+            var def = entities[i];
+            
+            var entity = new UISimpleScrollElementEntity
+            {
+                ContentId = def,
+                OnSelectEvent = null,
+                OnDeselectEvent = null
+            };
+            
+            views.Add(entity);
+        }
+        
+        container.Create(views);
+        container.Select(0);
     }
 }
