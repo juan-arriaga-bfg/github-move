@@ -45,6 +45,6 @@ public class DailyQuestWindowTaskButton : IWBaseMonoBehaviour
 
     public void Disable()
     {
-        button.interactable = false;
+        gameObject.SetActive(false);
     }
 }

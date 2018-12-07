@@ -13,6 +13,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     [IWUIBinding("#TaskProgress")] private NSText lblProgress;
     [IWUIBinding("#TaskReward")] private NSText lblReward;
     [IWUIBinding("#TaskIcon")] private Image taskIcon;
+    [IWUIBinding("#TaskIcon")] private CanvasGroup taskIconCanvasGroup;
     [IWUIBinding("#TaskButton")] private DailyQuestWindowTaskButton taskButton;
     [IWUIBinding("#View")] private CanvasGroup canvasGroup;
     [IWUIBinding("#Mark")] private GameObject mark;
@@ -22,6 +23,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     [IWUIBinding("#BackCompleted")] private Image backCompleted;
 
     [IWUIBinding("#DoneLabel")] private GameObject doneLabel;
+    [IWUIBinding("#Shine")] private GameObject shine;
 
     private const int LABEL_DESCRIPTION_STYLE_NORMAL = 15;
     private const int LABEL_REWARD_STYLE_NORMAL = 14;
@@ -102,6 +104,8 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         lblReward.Text = GetRewardAsText();
         
         mark.SetActive(task.IsCompleted());
+        
+        shine.SetActive(task.IsCompleted());
 
         ToggleTextStyle();
         
@@ -144,10 +148,17 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         List<CurrencyPair> currencies;
         var pieces = CurrencyHellper.FiltrationRewards(reward, out currencies);
         
+        if (task is TaskCompleteDailyTaskEntity)
+        {
+            var text = LocalizationService.Get("window.daily.quest.todays.reward.text", "window.daily.quest.todays.reward.text");
+            text += " <sprite name=pointLightProgressLine>";
+            return text;
+        }
+        
         var str = string.Format(LocalizationService.Get("common.message.reward", "common.message.reward:{0}"), "");
         
-        var stringBuilder = new StringBuilder($"<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>{str}</color></font> <size=50>");
-            
+        //var stringBuilder = new StringBuilder($"<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>{str}</color></font> <size=50>");
+        var stringBuilder = new StringBuilder($"{str} ");    
         stringBuilder.Append(CurrencyHellper.RewardsToString("  ", pieces, currencies, task is TaskCompleteDailyTaskEntity));
         stringBuilder.Append("</size>");
             
@@ -278,15 +289,19 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         ToggleBack();
 
         doneLabel.SetActive(!enabled);
+        mark.gameObject.SetActive(enabled && task.IsCompleted());
+        shine.gameObject.SetActive(enabled && task.IsCompleted());
         
         float alpha = enabled ? 1 : 0.4f;
         
         if (!animated)
         {
             canvasGroup.alpha = alpha;
+            taskIconCanvasGroup.alpha = alpha;
             return;
         }
 
         canvasGroup.DOFade(alpha, 0.3f);
+        taskIconCanvasGroup.DOFade(alpha, 0.3f);
     }
 }
