@@ -152,7 +152,7 @@ public class DevTools : UIContainerElementViewController
         new HighlightTaskPointToEnergyPlusButton().Highlight(null);
     }
 
-    public static void UpdateFogSectorsDebug()
+    public static void UpdateFogSectorsDebug()    
     {
         var view = new FogSectorsView();
         view.Init(BoardService.Current.FirstBoard.RendererContext);
@@ -171,15 +171,15 @@ public class DevTools : UIContainerElementViewController
         var quest = GameDataService.Current.QuestsManager.GetActiveQuestById(QUEST_ID);
         quest.ActiveTasks[0].Highlight();
         return;
-        
-        var board = BoardService.Current.FirstBoard;
-        var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Simple, 1);
-        
-        foreach (var pos in positions)
-        {
-            var ray = GodRayView.Show(pos);
-            ray.Remove();
-        }
+        //
+        // var board = BoardService.Current.FirstBoard;
+        // var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Simple, 1);
+        //
+        // foreach (var pos in positions)
+        // {
+        //     var ray = GodRayView.Show(pos);
+        //     ray.Remove();
+        // }
 
 #if LEAKWATCHER
         GC.Collect();
