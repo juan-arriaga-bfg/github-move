@@ -69,7 +69,6 @@ public class DailyQuestEntity : QuestEntity
             if (count > tasksPool.Count)
             {
                 Debug.LogError($"[DailyQuestEntity] => Not enough tasks in pool to fill '{def.Key}' group. At least {count} tasks expected.");
-                continue;
             }
             
             for (int i = 0; i < count && tasksPool.Count > 0; i++)

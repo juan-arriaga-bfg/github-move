@@ -137,18 +137,22 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             return IconService.Current.GetSpriteById(cmp.Ico);
         }
         
-        IHavePieceId taskAboutPiece = task as IHavePieceId;
-        try
+        TaskCurrencyEntity taskAboutCurrency = task as TaskCurrencyEntity;
+        if (taskAboutCurrency != null && !string.IsNullOrEmpty(taskAboutCurrency.CurrencyName))
         {
-            if (taskAboutPiece != null && taskAboutPiece.PieceId != PieceType.None.Id && taskAboutPiece.PieceId != PieceType.Empty.Id)
+            var pair = new CurrencyPair {Currency = taskAboutCurrency.CurrencyName};
+            var icon = pair.GetIcon();
+            if (icon != null)
             {
-                var pieceTypeDef = PieceType.GetDefById(taskAboutPiece.PieceId);
-                return IconService.Current.GetSpriteById(pieceTypeDef.Abbreviations[0]);
+                return icon;
             }
         }
-        catch (Exception e)
+        
+        IHavePieceId taskAboutPiece = task as IHavePieceId;
+        if (taskAboutPiece != null && taskAboutPiece.PieceId != PieceType.None.Id && taskAboutPiece.PieceId != PieceType.Empty.Id)
         {
-            throw;
+            var pieceTypeDef = PieceType.GetDefById(taskAboutPiece.PieceId);
+            return IconService.Current.GetSpriteById(pieceTypeDef.Abbreviations[0]);
         }
 
         return IconService.Current.GetSpriteById("codexQuestion");
