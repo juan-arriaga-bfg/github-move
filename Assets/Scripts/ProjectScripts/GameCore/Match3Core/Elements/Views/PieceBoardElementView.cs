@@ -218,14 +218,14 @@ public class PieceBoardElementView : BoardElementView
     }
 
     
-    public void ShowDropEffect()
+    public void ShowDropEffect(bool focus)
     {
         if (dropEffectView != null)
         {
             return;
         }
         
-        dropEffectView = GodRayView.Show(Piece.CachedPosition, 5, onHided: DestroyDropEffect);
+        dropEffectView = GodRayView.Show(Piece.CachedPosition, 5, DestroyDropEffect, 0, 0, focus);
         
         dropEffectView.transform.SetParent(transform);
         dropEffectView.transform.localPosition = Vector3.zero;

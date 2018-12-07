@@ -8,10 +8,10 @@ public class DailyQuestEntity : QuestEntity
 {   
     private readonly Dictionary<TaskGroup, int> tasksCount = new Dictionary<TaskGroup, int>
     {
-        {TaskGroup.Permanent, 2},
-        {TaskGroup.Easy,      2},
-        {TaskGroup.Normal,    2},
-        {TaskGroup.Hard,      1},
+        {TaskGroup.Permanent, 1},
+        {TaskGroup.Easy,      0},
+        {TaskGroup.Normal,    0},
+        {TaskGroup.Hard,      0},
     };
 
     // Set this to prevent QuestManager from replacing this instance on timer completion

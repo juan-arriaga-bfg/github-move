@@ -33,8 +33,6 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     private TaskEntity task;
     private UIDailyQuestTaskElementEntity targetEntity;
 
-    private List<BoardPosition> listOfPiecesToHighlight;
-
     private List<CurrencyPair> reward;
 
     public override void Init()
@@ -46,8 +44,6 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         task = targetEntity.Task;
         
         targetEntity.Task.OnChanged += OnTaskChanged;
-
-        listOfPiecesToHighlight = null;
 
         reward = GetRewardFromComponent();
         
@@ -69,12 +65,10 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
             targetEntity.Task.OnChanged -= OnTaskChanged;
         }
 
-        HighlightDroppedPieces();
-        
         base.OnViewClose(context);
     }
 
-    private void HighlightDroppedPieces()
+    private void HighlightDroppedPieces(List<BoardPosition> listOfPiecesToHighlight)
     {
         if (listOfPiecesToHighlight == null)
         {
@@ -83,10 +77,11 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         var board = BoardService.Current.FirstBoard;
 
-        foreach (var pos in listOfPiecesToHighlight)
+        for (var i = 0; i < listOfPiecesToHighlight.Count; i++)
         {
+            var pos = listOfPiecesToHighlight[i];
             var target = board.BoardLogic.GetPieceAt(pos);
-            target.ActorView.ShowDropEffect();
+            target.ActorView.ShowDropEffect(i == 0);
         }
     }
 
@@ -210,11 +205,11 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
                 return;
             }
             
-            if (task is TaskCompleteDailyTaskEntity)
+            if (task is TaskCompleteDailyTaskEntity || GameDataService.Current.QuestsManager.DailyQuest.GetCompletedButNotClaimedTasksCount() == 0)
             {
                 targetEntity.WindowController.CloseCurrentWindow();
             }
-            
+ 
             return;
         }
         
@@ -247,22 +242,26 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         
         Action dropReward = () =>
         {
-            board.ActionExecutor.AddAction(new EjectionPieceAction
-            {
-                From = npcPos,
-                Pieces = pieces,
-                OnComplete = () =>
-                {
-                    var view = board.RendererContext.GetElementAt(npcPos) as CharacterPieceView;
+            DOTween.Sequence()// Delay to hide window
+                   .InsertCallback(0.5f, () =>
+                    {
+                        board.ActionExecutor.AddAction(new EjectionPieceAction
+                        {
+                            From = npcPos,
+                            Pieces = pieces,
+                            OnComplete = () =>
+                            {
+                                var view = board.RendererContext.GetElementAt(npcPos) as CharacterPieceView;
 
-                    if (view != null) view.StartRewardAnimation();
+                                if (view != null) view.StartRewardAnimation();
 
-                    AddResourceView.Show(npcPos, currencies);
+                                AddResourceView.Show(npcPos, currencies);
 
-                    onComplete?.Invoke();
-                },
-                OnSuccess = (droppedPiecesPositions) => { listOfPiecesToHighlight = droppedPiecesPositions; } 
-            });
+                                onComplete?.Invoke();
+                            },
+                            OnSuccess = (droppedPiecesPositions) => { HighlightDroppedPieces(droppedPiecesPositions); }
+                        });
+                    });
         };
 
         // Provide all reward
@@ -279,7 +278,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
                     onComplete?.Invoke();
                 }
             },
-            taskIcon.transform.position);
+            targetEntity.WindowController.Window.Layers[0].ViewCamera.WorldToScreenPoint(taskIcon.transform.position));
         }
         else
         {

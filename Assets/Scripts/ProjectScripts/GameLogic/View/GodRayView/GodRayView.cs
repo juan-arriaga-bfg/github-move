@@ -59,7 +59,7 @@ public class GodRayView : BoardElementView
         
         DOTween.Sequence()
                .SetId(this)
-               .InsertCallback(SMOOTH_STOP_TIME, () =>
+               .InsertCallback(SMOOTH_STOP_TIME + 5, () =>
                 {
                     Context.RemoveElement(this);
                     hideInProgress = false;

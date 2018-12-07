@@ -7,7 +7,6 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
 {
     [IWUIBinding("#TaskList")] private UIContainerViewController taskList;
     [IWUIBinding("#MainTimerLabel")] private NSText mainTimerLabel;
-    [IWUIBinding("#MainTimerDescription")] private NSText mainTimerDescriptionLabel;
     [IWUIBinding("#SequenceHeader")] private NSText sequenceHeaderLabel;
     [IWUIBinding("#ComeBackPanel")] private GameObject comeBackPanel;
     [IWUIBinding("#ComeBackLabel")] private NSText comeBackLabel;
@@ -24,8 +23,6 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         bool isQuestClaimed = model.Quest.IsClaimed();
         
         SetTitle(model.Title);
-
-        // mainTimerDescriptionLabel.Text = model.TimerHeader;
 
         SetSequenceHeader(model);
         
@@ -117,7 +114,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
     {
         if (quest.IsClaimed())
         {
-            ToggleComebackPanel(true); 
+            //ToggleComebackPanel(true); 
         }
     }
 

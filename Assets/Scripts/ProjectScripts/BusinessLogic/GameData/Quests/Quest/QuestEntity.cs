@@ -341,12 +341,12 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         OnChanged?.Invoke(this, null);
     }
 
-    public int ActiveTasksCount()
+    public int GetActiveTasksCount()
     {
         return ActiveTasks.Count;
     }
     
-    public int CompletedTasksCount()
+    public int GetCompletedTasksCount()
     {
         int count = 0;
         for (var i = 0; i < ActiveTasks.Count; i++)
@@ -359,7 +359,7 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         return count;
     }
     
-    public int CompletedButNotClaimedTasksCount()
+    public int GetCompletedButNotClaimedTasksCount()
     {
         int count = 0;
         for (var i = 0; i < ActiveTasks.Count; i++)
