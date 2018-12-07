@@ -188,6 +188,9 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
     public void OnClick()
     {
+        // HighlightForHint();
+        // return;
+        
         if (task.IsClaimed())
         {
             return;
@@ -303,5 +306,28 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         canvasGroup.DOFade(alpha, 0.3f);
         taskIconCanvasGroup.DOFade(alpha, 0.3f);
+    }
+
+    public void HighlightForHint()
+    {
+        if (task.IsCompletedOrClaimed())
+        {
+            return;
+        }
+
+        DOTween.Kill(backActive, true);
+        
+        backActive.gameObject.SetActive(true);
+        backActive.color = new Color(1, 1, 1, 0);
+
+        float TIME = 0.3f;
+        backActive.DOColor(new Color(1, 1, 1, 1), TIME)
+                  .SetId(backActive)
+                  .SetLoops(4, LoopType.Yoyo)
+                  .SetEase(Ease.OutBack)
+                  .OnComplete(() =>
+                   {
+                       backActive.gameObject.SetActive(false);
+                   });
     }
 }
