@@ -21,6 +21,11 @@ public abstract class TaskCounterEntity : TaskEntity
 {
     [JsonProperty] 
     public int TargetValue  { get; protected set; }
+    // public int TargetValue
+    // {
+    //     get { return 1;}
+    //     protected set {}
+    // }
     
     [JsonProperty(PropertyName = "CurrentValue")] 
     private int currentValue;
@@ -102,7 +107,7 @@ public abstract class TaskCounterEntity : TaskEntity
     }
     
     protected override bool Check()
-    {
+    {       
         if (IsCompletedOrClaimed())
         {
             return true;

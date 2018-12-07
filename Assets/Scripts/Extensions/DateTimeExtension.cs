@@ -63,12 +63,7 @@ public static class DateTimeExtension
         return TimeFormat(new TimeSpan(0, 0, delay - 1), icon, format);
     }
 
-    public static string GetTimeText(this DateTime datetime, bool icon = false, string format = null, bool useUTC = true)
-    {
-        return TimeFormat(datetime.GetTime(useUTC), icon, format);
-    }
-    
-    public static string GetTimeLeftText(this DateTime datetime, bool icon = false, string format = null, bool useUTC = true)
+    public static string GetTimeLeftText(this DateTime datetime, bool useUTC, bool icon, string format)
     {
         return TimeFormat(datetime.GetTimeLeft(useUTC), icon, format);
     }

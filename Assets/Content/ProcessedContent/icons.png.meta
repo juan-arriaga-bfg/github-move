@@ -12,6 +12,7 @@ TextureImporter:
     21300014: Timer
     21300016: Mana
     21300018: Complete
+    21300020: pointLightProgressLine
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -97,7 +98,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d2f69177a6254914fa534adf366edd72
+      spriteID: b369a586d8efb404fb301628b08cb65b
       vertices: []
       indices: 
       edges: []
@@ -117,7 +118,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 82bb2d7b2119ec84696c73d1477e45f6
+      spriteID: 068d9031d941e3c4f91db9e18014289c
       vertices: []
       indices: 
       edges: []
@@ -137,7 +138,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1d2a2a261fb8e6e479eeb91b6d310d12
+      spriteID: c848ff7054b473945a613db37ab7e3c5
       vertices: []
       indices: 
       edges: []
@@ -157,7 +158,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7dc675c67a5f9204e96e4a615ee010be
+      spriteID: 33d74f7cd95f14c49b8893ac07e210ca
       vertices: []
       indices: 
       edges: []
@@ -177,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 08674367b2a63064b88444ed138cce42
+      spriteID: 4dbc59d415499084f8f7a48865fdfa72
       vertices: []
       indices: 
       edges: []
@@ -197,7 +198,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d4b75ecb05ecd0149b67653c24509c8f
+      spriteID: dff092253a301d447bdcd84362259a4b
       vertices: []
       indices: 
       edges: []
@@ -217,7 +218,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 50c97fe8ebe2f204fa60289e58f8ca05
+      spriteID: d6a68d06d42115f4c811a60dac1458ea
       vertices: []
       indices: 
       edges: []
@@ -237,7 +238,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a711816f9d129524fb60c7553a7798ee
+      spriteID: 781ab7e224978df438fe0c6ea24f9156
       vertices: []
       indices: 
       edges: []
@@ -257,7 +258,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 85aace3657675e248b5bf58bb39e2efb
+      spriteID: 53236ed8d65a7bf4b8b6c01d56a52160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pointLightProgressLine
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 75
+        width: 46
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afefba631292d6041a1f15f3d7fa2742
       vertices: []
       indices: 
       edges: []

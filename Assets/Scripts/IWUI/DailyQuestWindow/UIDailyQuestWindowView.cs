@@ -8,7 +8,6 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
     [IWUIBinding("#TaskList")] private UIContainerViewController taskList;
     [IWUIBinding("#MainTimerLabel")] private NSText mainTimerLabel;
     [IWUIBinding("#MainTimerDescription")] private NSText mainTimerDescriptionLabel;
-    [IWUIBinding("#SecondaryTimerLabel")] private NSText secondaryTimerLabel;
     [IWUIBinding("#SequenceHeader")] private NSText sequenceHeaderLabel;
     [IWUIBinding("#ComeBackPanel")] private GameObject comeBackPanel;
     [IWUIBinding("#ComeBackLabel")] private NSText comeBackLabel;
@@ -26,9 +25,9 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         
         SetTitle(model.Title);
 
-        mainTimerDescriptionLabel.Text = model.TimerHeader;
+        // mainTimerDescriptionLabel.Text = model.TimerHeader;
 
-        sequenceHeaderLabel.Text = model.SequenceHeaderText;
+        SetSequenceHeader(model);
         
         CreateTaskList(model);
         
@@ -49,6 +48,15 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         SetupSequence();
 
         ScrollToTop();
+    }
+
+    private void SetSequenceHeader(UIDailyQuestWindowModel model)
+    {
+        string allClearText = model.AllClearTaskName;
+        string sequenceHeaderMask = model.SequenceHeaderText;
+        string styledAllClearText = $"<color=#FFFFFF><font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SubtitleFinal\">{allClearText}</font></color>";
+
+        sequenceHeaderLabel.Text = string.Format(sequenceHeaderMask, styledAllClearText);
     }
 
     private void SetupSequence()
@@ -214,11 +222,18 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
     {
         UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
         
-        mainTimerLabel.Text = model.Timer.CompleteTime.GetTimeLeftText(model.Timer.UseUTC, 2.5f);
 
+        string time = model.Timer.CompleteTime.GetTimeLeftText(model.Timer.UseUTC, 2.5f);
+        
         if (comeBackPanel.activeSelf)
         {
-            secondaryTimerLabel.Text = model.Timer.CompleteTime.GetTimeLeftText(model.Timer.UseUTC, 2.5f);
+            string description = model.AllClearedText;
+            comeBackLabel.Text = $"{description} <sprite name=Timer> {time}";
+        }
+        else
+        {
+            string description = model.TimerHeader;
+            mainTimerLabel.Text = $"<color=#FFFFFF><font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SubtitleFinal\">{description} </font></color><sprite name=Timer> <mspace=2.5em>{time}</mspace>";
         }
     }
 
@@ -228,7 +243,6 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         mainTimerPlaceholder.SetActive(isQuestCompleted);
         
         comeBackPanel.SetActive(isQuestCompleted);
-        comeBackLabel.Text = LocalizationService.Get("window.daily.quest.message.all.cleared", "window.daily.quest.message.all.cleared");
         taskList.gameObject.SetActive(!isQuestCompleted);
     }
 

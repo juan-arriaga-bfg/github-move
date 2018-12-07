@@ -237,6 +237,8 @@ public static class CurrencyHellper
         
         if (fly == null) return;
         
+        ResourcePanelUtils.ToggleFadePanel(resource.Currency, true);
+        
         var carriers = ResourcesViewManager.DeliverResource<ResourceCarrier>
         (
             resource.Currency,
@@ -247,7 +249,11 @@ public static class CurrencyHellper
             delay
         );
         
-        carriers[carriers.Count - 1].Callback = () => { onSuccess?.Invoke(true); };
+        carriers[carriers.Count - 1].Callback = () =>
+        {
+            ResourcePanelUtils.ToggleFadePanel(resource.Currency, false);
+            onSuccess?.Invoke(true);
+        };
     }
 
     public static bool IsCanPurchase(List<CurrencyPair> prices, out List<CurrencyPair> diffs)

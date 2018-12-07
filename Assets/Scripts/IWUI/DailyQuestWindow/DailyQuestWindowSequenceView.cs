@@ -54,6 +54,11 @@ public class DailyQuestWindowSequenceView : IWBaseMonoBehaviour
             if (i == activeIndex)
             {
                 state = DailyQuestWindowLineItemView.State.Fill;
+
+                if (GameDataService.Current.QuestsManager.DailyQuest.IsClaimed())
+                {
+                    state = DailyQuestWindowLineItemView.State.Check;
+                }
             }
             else if (i < activeIndex)
             {
