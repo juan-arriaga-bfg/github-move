@@ -5,6 +5,7 @@
         var piece = base.Build(pieceType, context);
         
         CreateViewComponent(piece);
+        
         piece.RegisterComponent(new DraggablePieceComponent());
         
         return piece;

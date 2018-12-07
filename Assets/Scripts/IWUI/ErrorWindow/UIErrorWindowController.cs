@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class UIErrorWindowController : IWWindowController {
 
     public override IWWindowModel CreateModel()

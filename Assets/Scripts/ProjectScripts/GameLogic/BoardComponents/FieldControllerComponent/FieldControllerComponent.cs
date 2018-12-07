@@ -34,6 +34,9 @@ public class FieldControllerComponent : IECSComponent
                     {PieceType.Fog.Id, CreateFog()}
                 };
 
+           
+            
+            
             foreach (var piece in pieces)
             {
                 context.ActionExecutor.AddAction(new FillBoardAction
@@ -75,8 +78,13 @@ public class FieldControllerComponent : IECSComponent
                 context.TutorialLogic.Update();
                 controller.BoardLogic.PieceFlyer.Locker.Unlock(controller);
                 
+                controller.AreaAccessController?.FullRecalculate();
+                PathfindLockObserver.LoadPathfindLock();
+                controller.PathfindLocker.OnAddComplete(BoardPosition.GetRect(BoardPosition.Zero(), context.BoardDef.Width, context.BoardDef.Height));
+                
                 var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
 
+                
                 if (views == null) return;
                 
                 foreach (var view in views)
@@ -84,7 +92,6 @@ public class FieldControllerComponent : IECSComponent
                     view.UpdateResource(0);
                 }
                 
-                PathfindLockObserver.LoadPathfindLock();
                 
                 DevTools.UpdateFogSectorsDebug();
             }

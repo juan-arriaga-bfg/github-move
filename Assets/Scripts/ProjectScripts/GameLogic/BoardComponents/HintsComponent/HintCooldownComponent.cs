@@ -148,7 +148,7 @@ public class HintCooldownComponent : ECSEntity
 		positions = positions.FindAll(position =>
 		{
 			var piece = context.BoardLogic.GetPieceAt(position);
-			return piece != null && context?.Pathfinder.CanPathToCastle(piece) == true;
+			return piece != null && context?.PathfindLocker.HasPath(piece) == true;
 		});
 		
 		if (positions.Count == 0) return false;

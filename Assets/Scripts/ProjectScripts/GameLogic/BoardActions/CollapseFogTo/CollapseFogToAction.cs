@@ -59,6 +59,7 @@ public class CollapseFogToAction : IBoardAction
         
         AddResourceView.Show(FogObserver.Def.GetCenter(gameBoardController), FogObserver.Def.Reward, 0.5f);
 
+        var addedPieces = new Dictionary<BoardPosition, int>();
         
         if(FogObserver.Def.Pieces != null)
         {
@@ -72,13 +73,11 @@ public class CollapseFogToAction : IBoardAction
                     {
                         pieceId = PieceType.Parse(piece.Key);
                     }
+
+                    if (pieceId == PieceType.Empty.Id || pieceId == PieceType.None.Id)
+                        pieceId = PieceType.LockedEmpty.Id;
                     
-                    gameBoardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-                    {
-                        At = pos,
-                        PieceTypeId = pieceId,
-                        SpawnResource = AnimationDataManager.FindAnimation(pieceId, def => def.OnFogSpawn)
-                    });
+                    addedPieces.Add(new BoardPosition(pos.X, pos.Y, FogObserver.Context.Layer.Index), pieceId);
                 }
             }
         }
@@ -90,16 +89,61 @@ public class CollapseFogToAction : IBoardAction
         foreach (var point in FogObserver.Mask)
         {
             var piece = ItemWeight.GetRandomItem(weights).Piece;
-            
-            if(piece == PieceType.Empty.Id) continue;
-            
-            gameBoardController.ActionExecutor.PerformAction(new CreatePieceAtAction
-            {
-                At = point,
-                PieceTypeId = piece,
-                SpawnResource = AnimationDataManager.FindAnimation(piece, def => def.OnFogSpawn)
-            });
+            if (piece == PieceType.Empty.Id)
+                piece = PieceType.LockedEmpty.Id;
+            var position = new BoardPosition(point.X, point.Y, FogObserver.Context.Layer.Index);
+            if(addedPieces.ContainsKey(position) == false)
+                addedPieces.Add(position, piece);
         }
+        
+        gameBoardController.ActionExecutor.AddAction(new CreateGroupPieces()
+        {
+            Pieces = addedPieces,
+            LogicCallback = (pieces) =>
+            {
+                var Context = FogObserver.Context;
+                var board = Context.Context;
+                var posByMask = new List<BoardPosition>();
+                foreach (var boardPosition in FogObserver.Mask)
+                {
+                    posByMask.Add(FogObserver.GetPointInMask(Context.CachedPosition, boardPosition));
+                }
+                board.PathfindLocker.OnAddComplete(posByMask);
+                
+                Context.PathfindLockObserver.RemoveRecalculate(Context.CachedPosition);
+                var emptyCells = board.PathfindLocker.CollectUnlockedEmptyCells();
+                foreach (var emptyCell in emptyCells)
+                {
+                    var hasPath = board.PathfindLocker.HasPath(emptyCell);
+                    if (hasPath && pieces.ContainsKey(emptyCell.CachedPosition))
+                    {
+                        pieces.Remove(emptyCell.CachedPosition);    
+                        board.BoardLogic.RemovePieceAt(emptyCell.CachedPosition);    
+                    }
+                    else if(hasPath)
+                    {
+                        board.ActionExecutor.AddAction(new CollapsePieceToAction()
+                        {
+                            IsMatch = false,
+                            Positions = new List<BoardPosition>() {emptyCell.CachedPosition},
+                            To = emptyCell.CachedPosition
+                        });
+                    }
+                    
+                }
+            },
+            OnSuccessEvent = () =>
+            {     
+                var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
+
+                if (views == null) return;
+        
+                foreach (var view in views)
+                {
+                    view.UpdateResource(0);
+                }
+            }
+        });
 
         // add delay to spawn animations
         var animationsQueue = gameBoardController.RendererContext.GetAnimationsQueue();

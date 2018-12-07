@@ -17,11 +17,47 @@ public class CollapsePieceToAction : IBoardAction
 
 	public Func<int, string> AnimationResourceSearch;
 	
+	public bool IsMatch = false;
+
+	private List<BoardPosition> GetPositionsIncludeMask(BoardController board)
+	{
+		var resultPositions = new List<BoardPosition>();
+		foreach (var pos in Positions)
+		{
+			var piecePos = pos.SetZ(BoardLayer.Piece.Layer);
+			var piece = board.BoardLogic.GetPieceAt(piecePos);
+			if (piece?.Multicellular != null)
+			{
+				foreach (var maskPosition in piece.Multicellular.Mask)
+				{
+					resultPositions.Add(piece.Multicellular.GetPointInMask(piece.CachedPosition, maskPosition));
+				}
+			}
+			else
+			{
+				resultPositions.Add(pos);
+			}
+		}
+		
+		
+		return resultPositions;
+	}
+	
 	public bool PerformAction(BoardController gameBoardController)
 	{
+		
 		if (Positions == null || Positions.Count == 0) return false;
 		
-		gameBoardController.BoardLogic.LockCells(Positions, this);
+		var targetPiece = gameBoardController.BoardLogic.GetPieceAt(To);
+			
+		var positonsForLock = GetPositionsIncludeMask(gameBoardController);
+		
+
+		var obstaclesPieces = new List<Piece>();
+		
+		
+		
+		gameBoardController.BoardLogic.LockCells(positonsForLock, this);
 		gameBoardController.BoardLogic.RemovePiecesAt(Positions);
 
 		var animation = new CollapsePieceToAnimation
@@ -31,7 +67,11 @@ public class CollapsePieceToAction : IBoardAction
 		
 		animation.OnCompleteEvent += (_) =>
 		{
-			gameBoardController.BoardLogic.UnlockCells(Positions, this);
+			gameBoardController.BoardLogic.UnlockCells(positonsForLock, this);
+			foreach (var obstaclePiece in obstaclesPieces)
+			{
+				obstaclePiece.PathfindLockObserver.RemoveRecalculate(obstaclePiece.CachedPosition);
+			}
 			if (OnCompleteAction != null) gameBoardController.ActionExecutor.AddAction(OnCompleteAction);
 			OnComplete?.Invoke();
 		};

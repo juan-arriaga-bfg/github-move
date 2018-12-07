@@ -34,7 +34,13 @@ public class CollapsePieceToAnimation : BoardAnimation
 		foreach (var point in points)
 		{
 			var boardElement = context.GetElementAt(point);
-
+			if (boardElement == null)
+			{
+				sequence.InsertCallback(0.3f, () => complete());
+				continue;
+			}
+				
+			
 			if (Action.To.IsValid)
 				boardElement.SyncRendererLayers(context.Context.BoardDef.MaxPoit);
 			

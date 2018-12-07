@@ -8,7 +8,7 @@ public class BoardProgressView : UIBoardView
 
     protected override ViewType Id => ViewType.Progress;
     
-    private StorageLifeComponent life;
+    private WorkplaceLifeComponent life;
     
     public override void Init(Piece piece)
     {
@@ -16,7 +16,7 @@ public class BoardProgressView : UIBoardView
         
         Priority = defaultPriority = -2;
         
-        life = piece.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
+        life = piece.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
 
         if (life == null) return;
         

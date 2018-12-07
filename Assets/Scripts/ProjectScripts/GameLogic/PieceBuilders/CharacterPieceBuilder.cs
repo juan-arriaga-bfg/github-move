@@ -1,4 +1,4 @@
-﻿public class CharacterPieceBuilder : GenericPieceBuilder
+public class CharacterPieceBuilder : GenericPieceBuilder
 {
 	public override Piece Build(int pieceType, BoardController context)
 	{
@@ -6,16 +6,12 @@
 		
 		CreateViewComponent(piece);
 		
-		var pathfindLockObserver = new PathfindLockObserver() {AutoLock = true}; 
-		
-		AddObserver(piece, pathfindLockObserver);
-		piece.RegisterComponent(pathfindLockObserver);
+		AddPathfindLockObserver(piece, true);
 
 		piece.RegisterComponent(new TimerComponent());
 		
 		var customer = new CustomerComponent();
 		
-		piece.RegisterComponent(customer);
 		AddObserver(piece, customer);
 		
 		piece.RegisterComponent(new DraggablePieceComponent());

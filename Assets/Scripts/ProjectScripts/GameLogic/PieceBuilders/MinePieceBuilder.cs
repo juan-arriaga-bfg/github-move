@@ -1,5 +1,3 @@
-﻿using UnityEngine;
-
 public class MinePieceBuilder : MulticellularPieceBuilder
 {
 	public override Piece Build(int pieceType, BoardController context)
@@ -9,33 +7,20 @@ public class MinePieceBuilder : MulticellularPieceBuilder
 		CreateViewComponent(piece);
 		
 		piece.RegisterComponent(new DraggablePieceComponent());
-		piece.RegisterComponent(new TimerComponent());
-		
-		var storage = new StorageComponent
-		{
-			IsAutoStart = false,
-			IsTimerShow = true,
-			TimerOffset = new Vector2(0f, 1.4f)
-		};
-		
-		piece.RegisterComponent(storage);
-		AddObserver(piece, storage);
-		
-		var life = new MineLifeComponent();
-		
-		piece.RegisterComponent(life);
-		AddObserver(piece, life);
 		
 		AddObserver(piece, new PathfindLockObserver {AutoLock = true});
-		
+		AddObserver(piece, new MineLifeComponent());
+
 		piece.RegisterComponent(new TouchReactionComponent()
-			 .RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
-				 .RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.ObstacleState})
-				 .RegisterDefinition(new TouchReactionDefinitionObstacleComponent{IsAutoStart = false}))
-			 .RegisterComponent(new TouchReactionConditionStorage()))
-			 .RegisterComponent(new PiecePathfindBoardCondition(context, piece)
-			 	.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
-        
+			.RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}
+				.RegisterDefinition(new TouchReactionDefinitionOpenBubble {ViewId = ViewType.ObstacleBubble})
+				.RegisterDefinition(new TouchReactionDefinitionSpawnRewards()))
+			.RegisterComponent(new TouchReactionConditionWorkplace()))
+			.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
+				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
+
+		AddPathfindLockObserver(piece, true);
+		
 		return piece;
 	}
 }

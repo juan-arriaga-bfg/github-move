@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public class MineLifeComponent : StorageLifeComponent
+public class MineLifeComponent : WorkplaceLifeComponent
 {
     private MineDef def;
     
@@ -10,17 +10,21 @@ public class MineLifeComponent : StorageLifeComponent
     
     public int MinePieceType { get; private set; }
     
+    public override void OnRegisterEntity(ECSEntity entity)
+    {
+        base.OnRegisterEntity(entity);
+        
+        MinePieceType = Context.PieceType;
+    }
+    
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
-        MinePieceType = context.PieceType;
-        
         var key = new BoardPosition(position.X, position.Y);
 
         if (def == null) def = GameDataService.Current.MinesManager.GetInitialDef(key);
         else GameDataService.Current.MinesManager.Move(def.Id, key);
         
-        storage.Timer.Delay = def.Delay;
-        
+        Timer.Delay = def.Delay;
         HP = def.Size;
         
         base.OnAddToBoard(position, context);
@@ -33,47 +37,31 @@ public class MineLifeComponent : StorageLifeComponent
         var key = new BoardPosition(to.X, to.Y);
         GameDataService.Current.MinesManager.Move(def.Id, key);
     }
-
-    protected override void InitStorage()
+    
+    protected override Dictionary<int, int> GetRewards()
     {
-        storage.SpawnPiece = PieceType.Parse(def.Reward.Currency);
-        storage.Capacity = storage.Amount = def.Reward.Amount;
-    }
-
-    protected override void OnStep()
-    {
-        storage.OnScatter = () =>
-        {
-            storage.OnScatter = null;
-            OnSpawnRewards();
-        };
-    }
-
-    protected override void OnComplete()
-    {
-        var pieces = new Dictionary<int, int>();
-
+        var pieces = new Dictionary<int, int> {{PieceType.Parse(def.Reward.Currency), def.Reward.Amount}};
+        
+        if (IsDead == false) return pieces;
+        
         foreach (var pair in def.LastRewards)
         {
             pieces.Add(PieceType.Parse(pair.Currency), pair.Amount);
         }
         
-        storage.SpawnAction = new EjectionPieceAction
-        {
-            GetFrom = () => thisContext.CachedPosition,
-            Pieces = pieces,
-            OnComplete = () =>
-            {
-                GameDataService.Current.MinesManager.Remove(def.Id);
-                OnSpawnRewards();
-            }
-        };
+        return pieces;
     }
 
-    protected override void OnSpawnRewards()
+    protected override void OnSpawnCurrencyRewards(bool isComplete)
     {
-        AddResourceView.Show(StartPosition(), def.StepRewards);
-        base.OnSpawnRewards();
+        if (isComplete)
+        {
+            AddResourceView.Show(StartPosition(), def.StepRewards);
+            
+            if (IsDead) GameDataService.Current.MinesManager.Remove(def.Id);
+        }
+        
+        base.OnSpawnCurrencyRewards(isComplete);
     }
 
     protected override void OnTimerComplete()

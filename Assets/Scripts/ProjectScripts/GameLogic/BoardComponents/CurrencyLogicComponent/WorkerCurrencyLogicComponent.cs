@@ -158,7 +158,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         var target = context.BoardLogic.GetPieceAt(targetPosition);
         var def = PieceType.GetDefById(target.PieceType);
 
-        if (def.Filter.Has(PieceTypeFilter.WorkPlace) == false || !CheckLock(target)) return false;
+        if (def.Filter.Has(PieceTypeFilter.Workplace) == false || !CheckLock(target)) return false;
         
         if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target)) return false;
         
@@ -173,7 +173,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
     private bool CheckLock(Piece target)
     {
-        if (!target.Context.Pathfinder.CanPathToCastle(target))
+        if (!target.Context.PathfindLocker.HasPath(target))
         {
             UIErrorWindowController.AddError(LocalizationService.Get("message.error.action", "message.error.action"));
             return false;
@@ -184,13 +184,13 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 
     private bool CheckLife(Piece target)
     {
-        var life = target.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
+        var life = target.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
         
         if (life == null) return false;
 
         if (life.Locker.IsLocked)
         {
-            UIErrorWindowController.AddError(life.IsFilled
+            UIErrorWindowController.AddError(life.Rewards.IsComplete
                 ? LocalizationService.Get("message.error.action", "message.error.action")
                 : LocalizationService.Get("message.error.workingHere", "message.error.workingHere"));
             

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class ObstaclePieceBuilder : GenericPieceBuilder
 {
@@ -8,34 +8,20 @@ public class ObstaclePieceBuilder : GenericPieceBuilder
 		
 		CreateViewComponent(piece);
 		
-		piece.RegisterComponent(new TimerComponent());
-		
-		var storage = new StorageComponent
-		{
-			IsAutoStart = false,
-			IsTimerShow = true,
-			TimerOffset = new Vector2(0f, 0.5f)
-		};
-		
-		piece.RegisterComponent(storage);
-		AddObserver(piece, storage);
-		
-		var life = new ObstacleLifeComponent();
-
-		piece.RegisterComponent(life);
-		AddObserver(piece, life);
+		AddObserver(piece, new PathfindLockObserver {AutoLock = true});
+		AddObserver(piece, new ObstacleLifeComponent());
 		
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu{MainReactionIndex = 0}
-				.RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.ObstacleState})
-				.RegisterDefinition(new TouchReactionDefinitionObstacleComponent{IsAutoStart = false}))
-			.RegisterComponent(new TouchReactionConditionStorage()))
+				.RegisterDefinition(new TouchReactionDefinitionOpenBubble{ViewId = ViewType.ObstacleBubble})
+				.RegisterDefinition(new TouchReactionDefinitionSpawnRewards()))
+			.RegisterComponent(new TouchReactionConditionWorkplace()))
 			.RegisterComponent(new PiecePathfindBoardCondition(context, piece)
 				.RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
 		
-		var pathfindLockObserver = new PathfindLockObserver() {AutoLock = true}; 
-		AddObserver(piece, pathfindLockObserver);
-		piece.RegisterComponent(pathfindLockObserver);
+		AddObserver(piece, new AreaRecalculateObserver());
+		
+		AddPathfindLockObserver(piece, true);
 		
 		return piece;
 	}

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 
-public class ReproductionLifeComponent : StorageLifeComponent
+public class ReproductionLifeComponent : WorkplaceLifeComponent
 {
     private PiecesReproductionDef def;
-    private string childName;
     private TimerComponent cooldown;
+    
+    private string childName;
     
     public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.production", "gameboard.bubble.message.production {0}"), childName);
     public override string Price => Timer.IsExecuteable() ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), Timer.CompleteTime.GetTimeLeftText()) : base.Price;
@@ -17,9 +18,11 @@ public class ReproductionLifeComponent : StorageLifeComponent
     {
         base.OnRegisterEntity(entity);
         
-        def = GameDataService.Current.PiecesManager.GetPieceDef(thisContext.PieceType).ReproductionDef;
+        def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).ReproductionDef;
         
         HP = def.Limit;
+        timer.Delay = 2;
+        
         cooldown = new TimerComponent{Delay = def.Delay};
         RegisterComponent(cooldown);
         
@@ -27,83 +30,60 @@ public class ReproductionLifeComponent : StorageLifeComponent
         childName = child?.Name;
     }
     
-    protected override void InitStorage()
+    protected override Dictionary<int, int> GetRewards()
     {
-        storage.SpawnPiece = PieceType.Parse(def.Reproduction.Currency);
-        storage.Capacity = storage.Amount = def.Reproduction.Amount;
-        storage.Timer.Delay = 2;
+        var pieces = new Dictionary<int, int>();
+        
+        if (IsDead) pieces.Add(def.ObstacleType, 1);
+        
+        pieces.Add(PieceType.Parse(def.Reproduction.Currency), def.Reproduction.Amount);
+        
+        return pieces;
     }
-
+    
     protected override LifeSaveItem InitInSave(BoardPosition position)
     {
         var item = base.InitInSave(position);
         
         if (item == null) return null;
         
-        if(item.IsStart) cooldown.Start(item.StartTime);
-        Locker.Unlock(this);
+        if (item.IsStartCooldown) cooldown.Start(item.StartTimeCooldown);
+        else Locker.Unlock(this);
         
         return item;
+    }
+    
+    public override LifeSaveItem Save()
+    {
+        var save = base.Save();
+        
+        if (save == null) return null;
+        
+        save.IsStartCooldown = cooldown.IsExecuteable();
+        save.StartTimeCooldown = cooldown.StartTimeLong;
+        
+        return save;
     }
 
     public override bool Damage(bool isExtra = false)
     {
-        if (cooldown.IsExecuteable())
-        {
-            UIMessageWindowController.CreateTimerCompleteMessage(
-                LocalizationService.Get("window.timerComplete.message.production", "window.timerComplete.message.production"),
-                cooldown);
+        if (cooldown.IsExecuteable() == false) return base.Damage(isExtra);
+        
+        UIMessageWindowController.CreateTimerCompleteMessage(
+            LocalizationService.Get("window.timerComplete.message.production", "window.timerComplete.message.production"),
+            cooldown);
+        
+        return false;
+    }
 
-            return false;
+    protected override void OnSpawnCurrencyRewards(bool isComplete)
+    {
+        if (isComplete)
+        {
+            AddResourceView.Show(StartPosition(), def.StepReward);
+            if (IsDead == false) cooldown.Start();
         }
         
-        return base.Damage(isExtra);
-    }
-
-    protected override void Success()
-    {
-    }
-
-    protected override void OnStep()
-    {
-        storage.OnScatter = () =>
-        {
-            storage.OnScatter = null;
-            OnSpawnRewards();
-            cooldown.Start();
-        };
-    }
-
-    protected override void OnComplete()
-    {
-        
-        storage.OnScatter = () =>
-        {
-            storage.OnScatter = null;
-            thisContext.ActorView?.UpdateView();
-            OnSpawnRewards();
-            thisContext.Context.ActionExecutor.AddAction(new CollapsePieceToAction
-            {
-                To = thisContext.CachedPosition,
-                Positions = new List<BoardPosition> {thisContext.CachedPosition},
-                OnComplete = OnRemove
-            });
-        };
-    }
-
-    private void OnRemove()
-    {
-        thisContext.Context.ActionExecutor.AddAction(new SpawnPieceAtAction()
-        {
-            IsCheckMatch = false,
-            At = thisContext.CachedPosition,
-            PieceTypeId = def.ObstacleType
-        });
-    }
-
-    protected override void OnSpawnRewards()
-    {
-        base.OnSpawnRewards();
-        AddResourceView.Show(StartPosition(), def.StepReward);
+        base.OnSpawnCurrencyRewards(isComplete);
     }
 }

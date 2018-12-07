@@ -21,7 +21,7 @@ public class TaskHitTreeEntity : TaskEventCounterEntity
 
         ObstacleLifeComponent lifeCmp = context as ObstacleLifeComponent;
 
-        Piece piece = lifeCmp?.GetContext();
+        Piece piece = lifeCmp?.Context;
         if (piece == null)
         {
             return;

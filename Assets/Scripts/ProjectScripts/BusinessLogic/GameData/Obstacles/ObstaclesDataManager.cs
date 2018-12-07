@@ -73,13 +73,6 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
         return list[step];
     }
     
-    public int GetReward(int piece)
-    {
-        ObstacleDef def;
-
-        return Obstacles.TryGetValue(piece, out def) ? def.Chest : PieceType.None.Id;
-    }
-    
     public int GetDelayByStep(int piece, int step)
     {
         var def = GetStep(piece, step);
@@ -105,6 +98,13 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
         reward = sequence.GetNextDict(def.PieceAmount, reward);
         
         return reward;
+    }
+    
+    public Dictionary<int, int> GetPiecesByLastStep(int piece, int step)
+    {
+        ObstacleDef def;
+        
+        return Obstacles.TryGetValue(piece, out def) && def.Chest != PieceType.None.Id ? new Dictionary<int, int> {{def.Chest, 1}} : GetPiecesByStep(piece, step);
     }
 
     public CurrencyPair GetPriceByStep(int piece, int step)

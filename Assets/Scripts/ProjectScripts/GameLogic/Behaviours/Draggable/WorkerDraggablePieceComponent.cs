@@ -14,12 +14,12 @@
 
         if (target == null) return true;
         
-        if (!target.Context.Pathfinder.CanPathToCastle(target))
+        if (!target.Context.PathfindLocker.HasPath(target))
         {
             return false;
         }
         
-        var life = target.GetComponent<StorageLifeComponent>(StorageLifeComponent.ComponentGuid);
+        var life = target.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
 
         if (life != null)
         {

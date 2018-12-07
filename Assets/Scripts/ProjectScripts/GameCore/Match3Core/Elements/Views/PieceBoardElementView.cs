@@ -1,17 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 
 public class PieceBoardElementView : BoardElementView
 {
+    public Piece Piece { get; set; }
+
     [SerializeField] private Transform selectionView;
+    
     [SerializeField] protected List<SpriteRenderer> bodySprites;
+    [SerializeField] protected List<ParticleSystem> particles;
+    
     [SerializeField] private Material errorSelectionMaterial;
     [SerializeField] private Material defaultSelectionMaterial;
     [SerializeField] private Material highlightPieceMaterial;
-    
-    public Piece Piece { get; set; }
-    
+
+    private BoardElementView lockedSubtrate;
+
     private Animation cachedSelectionAnimation;
 
     private readonly ViewAnimationUid selectedAnimationId = new ViewAnimationUid();
@@ -23,6 +30,9 @@ public class PieceBoardElementView : BoardElementView
     private readonly Color dragSpriteErrorColor = new Color(1f, 0.44f, 0.44f, 0.9f);
 
     private MulticellularPieceBoardObserver multicellularPieceBoardObserver;
+    private bool isLockVisual = false;
+
+    private List<ParticleView> lockParticles = new List<ParticleView>();
     
     public bool IsHighlighted { get; protected set; }
 
@@ -42,29 +52,68 @@ public class PieceBoardElementView : BoardElementView
     {
         base.Init(context);
 
+        var view = transform.Find("View");
+        
         if (bodySprites == null || bodySprites.Count == 0)
         {
-            var view = transform.Find("View");
-            
             bodySprites = new List<SpriteRenderer>(view.GetComponentsInChildren<SpriteRenderer>());   
         }
-        
+
+        if (particles == null || particles.Count == 0)
+        {
+            particles = new List<ParticleSystem>(view.GetComponentsInChildren<ParticleSystem>());
+        }
+
         Piece = piece;
         Piece.ActorView = this;
-        
+
         if (selectionView != null)
         {
             selectionSprite = selectionView.GetComponent<SpriteRenderer>();
         }
 
         lastBoardPosition = piece.CachedPosition;
-        
-        multicellularPieceBoardObserver = Piece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
+
+		multicellularPieceBoardObserver = Piece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
 
         if (multicellularPieceBoardObserver != null)
         {
             SyncRendererLayers(piece.CachedPosition);
         }
+        
+        if (cachedRenderers == null || cachedRenderers.size == 0)
+            CacheLayers();
+        foreach (var rend in cachedRenderers)
+        {
+            rend.CacheDefaultMaterial();
+        }
+
+        CheckLock();
+    }
+
+    protected List<LockerComponent> GetPieceLockers()
+    {
+        var lockers = new List<LockerComponent>();
+        foreach (var component in Piece.ComponentsCache.Values)
+        {
+            var ilocker = component as ILockerComponent;
+            if (ilocker != null)
+                lockers.Add(ilocker.Locker);
+        }
+
+        return lockers;
+    }
+    
+    private void CheckLock()
+    {
+        var lockers = GetPieceLockers();
+        var lockedCount = 0;
+        foreach (var lockerComponent in lockers)
+        {
+            if (lockerComponent.IsLocked)
+                lockedCount++;
+        }
+        ToggleLockView(lockedCount == lockers.Count);
     }
 
     protected virtual void OnEnable()
@@ -119,16 +168,120 @@ public class PieceBoardElementView : BoardElementView
 
     public virtual void UpdateView()
     {
+        
     }
-    
-    public virtual void ToggleHighlight(bool enabled)
+
+    private void SpawnLockParticles()
     {
-        if (highlightPieceMaterial == null)
+        var order = 0;
+        foreach (var spriteRenderer in bodySprites)
         {
-            return;
+            if (spriteRenderer.sortingOrder > order)
+                order = spriteRenderer.sortingOrder;
         }
 
-        if (IsHighlighted == enabled)
+        order++;
+        
+        
+        List<BoardPosition> piecePositions = new List<BoardPosition>();
+        if (Piece.Multicellular == null)
+        {
+            piecePositions.Add(Piece.CachedPosition);
+        }
+        else
+        {
+            foreach (var maskPos in Piece.Multicellular.Mask)
+            {
+                piecePositions.Add(Piece.Multicellular.GetPointInMask(Piece.CachedPosition, maskPos));
+            }
+        }
+
+        foreach (var pos in piecePositions)
+        {
+            var particle = ParticleView.Show(R.LockParticles, pos); 
+            lockParticles.Add(particle);
+            particle.ParticleRenderer.sortingOrder = order;
+        }
+    }
+
+    private void RemoveLockParticles()
+    {
+        foreach (var lockParticle in lockParticles)
+        {
+            Context.DestroyElement(lockParticle);
+        }
+    }
+    
+    public virtual void ToggleLockView(bool enabled)
+    {
+        if (isLockVisual == enabled)
+            return;
+
+        if (enabled)
+        {
+            SetGrayscale();
+        }
+        else
+        {
+            ResetDefaultMaterial();
+        }
+
+        if (enabled)
+        {
+            var pieceDef = PieceType.GetDefById(Piece.PieceType);
+            var defaultSubtrate = Piece.PieceType == PieceType.LockedEmpty.Id
+                               || Piece.PieceType == PieceType.Fog.Id
+                               || pieceDef.Filter.HasFlag(PieceTypeFilter.Obstacle)
+                               || pieceDef.Filter.HasFlag(PieceTypeFilter.Mine);
+            if (defaultSubtrate == false)
+            {
+                var substratePosition =
+                    new BoardPosition(Piece.CachedPosition.X, Piece.CachedPosition.Y, Piece.CachedPosition.Z - 1);
+                lockedSubtrate = Context.CreateBoardElementAt<BoardElementView>(R.LockedSubstrate, substratePosition);    
+            }
+
+            if (Piece.PieceType != PieceType.Fog.Id)
+            {
+                RemoveLockParticles();
+                SpawnLockParticles();    
+            }
+            
+        }
+        else
+        {
+            if (Piece.PieceType != PieceType.Fog.Id)
+            {
+                RemoveLockParticles();    
+            }
+            
+            if (lockedSubtrate != null)
+            {
+                Context.DestroyElement(lockedSubtrate);
+                lockedSubtrate = null;
+            }    
+        }
+        
+        
+        particles.ForEach(particle => particle.gameObject.SetActive(!enabled));
+        
+        
+        isLockVisual = enabled;
+    }
+
+    public override void ResetViewOnDestroy()
+    {
+        if (lockedSubtrate != null)
+        {
+            Context.DestroyElement(lockedSubtrate);
+            lockedSubtrate = null;
+        }
+
+        base.ResetViewOnDestroy();
+    }
+
+    public virtual void ToggleHighlight(bool enabled)
+    {
+        if (highlightPieceMaterial == null || IsHighlighted == enabled)
         {
             return;
         }
@@ -138,25 +291,15 @@ public class PieceBoardElementView : BoardElementView
             CacheLayers();
         }
 
-        foreach (var rend in cachedRenderers)
+        if (!enabled)
         {
-            if (rend == null) continue;
-            if (rend.CachedRenderer == null) continue;
-            if (rend.CachedRenderer.sharedMaterial == null) continue;
-            if (rend.gameObject == selectionSprite.gameObject) continue;
-            
-            if (!enabled)
-            {
-                rend.ResetDefaultMaterial();
-                IsHighlighted = false;
-            }
-            else
-            {
-                rend.CacheDefaultMaterial();
-                rend.CachedRenderer.material = highlightPieceMaterial;
-                // rend.CachedRenderer.material.SetFloat("_HighlightSpeed", 1f);
-                IsHighlighted = true;
-            }
+            ResetDefaultMaterial();
+            IsHighlighted = false;
+        }
+        else
+        {
+            SetHighlight(true);
+            IsHighlighted = true;
         }
     }
 

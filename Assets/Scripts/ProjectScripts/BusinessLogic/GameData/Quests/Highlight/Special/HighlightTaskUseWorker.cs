@@ -8,7 +8,7 @@ public class HighlightTaskUseWorker : TaskHighlightUsingArrow
     protected override bool ShowArrow(TaskEntity task, float delay)
     {
         var boardLogic = BoardService.Current.FirstBoard.BoardLogic;
-        var workPlacesList = boardLogic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.WorkPlace);
+        var workPlacesList = boardLogic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Workplace);
         
         if (workPlacesList.Count == 0)
         {
@@ -33,14 +33,14 @@ public class HighlightTaskUseWorker : TaskHighlightUsingArrow
             }
 
             LifeComponent        lifeComponent        = piece.GetComponent<LifeComponent>(LifeComponent.ComponentGuid);
-            StorageLifeComponent storageLifeComponent = lifeComponent as StorageLifeComponent;
-            if (storageLifeComponent == null)
+            WorkplaceLifeComponent workplaceLifeComponent = lifeComponent as WorkplaceLifeComponent;
+            if (workplaceLifeComponent == null)
             {
                 Debug.LogError($"storageLifeComponent not found for pos {position}");
                 continue;
             }
 
-            int energyCost = storageLifeComponent.Energy.Amount;
+            int energyCost = workplaceLifeComponent.Energy.Amount;
             if (lastEnergy > energyCost)
             {
                 lastEnergy = energyCost;

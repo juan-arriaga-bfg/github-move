@@ -1,21 +1,16 @@
 ﻿public class MatchableChestComponent : MatchablePieceComponent
 {
-    private Chest chest;
-    private ChestPieceComponent chestPiece;
+    private RewardsStoreComponent reward;
     
     public override bool IsMatchable()
     {
         if (base.IsMatchable() == false) return false;
-        if (chest != null) return !chest.CheckStorage();
+        if (reward != null) return reward.IsComplete == false;
         
-        chestPiece = context.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
-
-        if (chestPiece == null) return false;
-            
-        chest = chestPiece.Chest;
-            
-        if (chest == null) return false;
-
-        return !chest.CheckStorage();
+        var component = context.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
+        
+        reward = component?.Rewards;
+        
+        return reward != null && reward.IsComplete == false;
     }
 }
