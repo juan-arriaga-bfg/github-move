@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: iconsText
   m_EditorClassIdentifier: 
   hashCode: 128033944
-  material: {fileID: 21828550339951598}
+  material: {fileID: 21121607270568730}
   materialHashCode: 0
   spriteSheet: {fileID: 2800000, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
   spriteInfoList:
@@ -101,6 +101,20 @@ MonoBehaviour:
     pivot: {x: -31.5, y: 26.5}
     sprite: {fileID: 21300012, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
   - id: 6
+    x: 127
+    y: 75
+    width: 46
+    height: 48
+    xOffset: 0
+    yOffset: 36.28
+    xAdvance: 46
+    scale: 1.25
+    name: pointLightProgressLine
+    hashCode: 995162017
+    unicode: 0
+    pivot: {x: -23, y: 24}
+    sprite: {fileID: 21300020, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
+  - id: 7
     x: 0
     y: 0
     width: 86
@@ -114,7 +128,7 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -43, y: 37}
     sprite: {fileID: 21300002, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 7
+  - id: 8
     x: 87
     y: 0
     width: 76
@@ -128,7 +142,7 @@ MonoBehaviour:
     unicode: 0
     pivot: {x: -38, y: 37}
     sprite: {fileID: 21300008, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
-  - id: 8
+  - id: 9
     x: 164
     y: 0
     width: 66
@@ -145,7 +159,7 @@ MonoBehaviour:
   fallbackSpriteAssets:
   - {fileID: 11400000, guid: a5372b05be2e99b4891d3fb11b7075e9, type: 2}
   - {fileID: 11400000, guid: 3ddce4f1067bc1247a9b39894412dcff, type: 2}
---- !u!21 &21828550339951598
+--- !u!21 &21121607270568730
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 1
