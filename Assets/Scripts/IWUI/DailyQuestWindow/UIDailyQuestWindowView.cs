@@ -2,18 +2,19 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Quests;
-using UnityEngine.UI;
 
 public class UIDailyQuestWindowView : UIGenericPopupWindowView 
 {
     [IWUIBinding("#TaskList")] private UIContainerViewController taskList;
     [IWUIBinding("#MainTimerLabel")] private NSText mainTimerLabel;
+    [IWUIBinding("#MainTimerDescription")] private NSText mainTimerDescriptionLabel;
     [IWUIBinding("#SecondaryTimerLabel")] private NSText secondaryTimerLabel;
+    [IWUIBinding("#SequenceHeader")] private NSText sequenceHeaderLabel;
     [IWUIBinding("#ComeBackPanel")] private GameObject comeBackPanel;
     [IWUIBinding("#ComeBackLabel")] private NSText comeBackLabel;
     [IWUIBinding("#MainTimer")] private GameObject mainTimer;
-
-    [SerializeField] private List<Image> chestSlots;
+    [IWUIBinding("#MainTimerPlaceholder")] private GameObject mainTimerPlaceholder;
+    [IWUIBinding("#SequenceView")] private DailyQuestWindowSequenceView sequenceView;
     
     public override void OnViewShow()
     {
@@ -25,6 +26,10 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         
         SetTitle(model.Title);
 
+        mainTimerDescriptionLabel.Text = model.TimerHeader;
+
+        sequenceHeaderLabel.Text = model.SequenceHeaderText;
+        
         CreateTaskList(model);
         
         model.Timer.OnExecute += OnTimerUpdate;
@@ -41,16 +46,20 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         
         ToggleComebackPanel(isQuestClaimed);
 
-        SetChestsIcons();
+        SetupSequence();
+
+        ScrollToTop();
     }
 
-    private void SetChestsIcons()
+    private void SetupSequence()
     {
         UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
 
+        sequenceView.Init();
+        
         TaskCompleteDailyTaskEntity clearAllTask = model.Quest.GetTask<TaskCompleteDailyTaskEntity>();
         
-        var reward = clearAllTask.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value ?? new List<CurrencyPair>();
+        List<CurrencyPair> reward = clearAllTask.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value ?? new List<CurrencyPair>();
         int count = reward.Count;
         
         if (count == 0)
@@ -60,25 +69,35 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         }
 
         int globalIndex = GameDataService.Current.QuestsManager.DailyQuestRewardIndex;
-        int croppedIndex = globalIndex % count;
+        int croppedIndex = globalIndex > count ? globalIndex % count : globalIndex;
         int index = croppedIndex;
-        
-        for (int i = 0; i < chestSlots.Count; i++)
-        {
-            Image chestImage = chestSlots[i];
-            CurrencyPair chest = reward[index];
 
-            var icon = chest.GetIcon();
-            chestImage.sprite = icon;
-            chestImage.color = new Color(1, 1, 1, index == croppedIndex ? 1 : 0.6f);
-            
-            index++;
+        if (globalIndex > 0)
+        {
+            index -= 1;
+        }
+
+        int activeIndex = globalIndex > 0 ? 1 : 0;
+        
+        List<CurrencyPair> rewardForView = new List<CurrencyPair>();
+        for (int i = 0; i < DailyQuestWindowSequenceView.ITEMS_COUNT; i++)
+        {
+            if (index < 0)
+            {
+                index = rewardForView.Count - index - 1;
+            }
+
             if (index >= reward.Count)
             {
                 index = 0;
             }
+
+            rewardForView.Add(reward[index]);
+
+            index++;
         }
 
+        sequenceView.SetValues(rewardForView, activeIndex);
     }
 
     public void ScrollToTop()
@@ -195,20 +214,28 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
     {
         UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
         
-        mainTimerLabel.Text = model.Timer.CompleteTime.GetTimeLeftText(false, null, model.Timer.UseUTC);
+        mainTimerLabel.Text = model.Timer.CompleteTime.GetTimeLeftText(model.Timer.UseUTC, 2.5f);
 
         if (comeBackPanel.activeSelf)
         {
-            secondaryTimerLabel.Text = model.Timer.CompleteTime.GetTimeLeftText(false, null, model.Timer.UseUTC);
+            secondaryTimerLabel.Text = model.Timer.CompleteTime.GetTimeLeftText(model.Timer.UseUTC, 2.5f);
         }
     }
 
     private void ToggleComebackPanel(bool isQuestCompleted)
     {
         mainTimer.SetActive(!isQuestCompleted);
+        mainTimerPlaceholder.SetActive(isQuestCompleted);
         
         comeBackPanel.SetActive(isQuestCompleted);
         comeBackLabel.Text = LocalizationService.Get("window.daily.quest.message.all.cleared", "window.daily.quest.message.all.cleared");
         taskList.gameObject.SetActive(!isQuestCompleted);
+    }
+
+    public void OnInformationButtonClick()
+    {
+        UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
+        
+        UIMessageWindowController.CreateMessage(model.InformationTitle, model.InformationMessage);
     }
 }

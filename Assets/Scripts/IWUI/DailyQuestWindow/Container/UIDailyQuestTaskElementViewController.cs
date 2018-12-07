@@ -13,10 +13,21 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     [IWUIBinding("#TaskProgress")] private NSText lblProgress;
     [IWUIBinding("#TaskReward")] private NSText lblReward;
     [IWUIBinding("#TaskIcon")] private Image taskIcon;
-    [IWUIBinding("#TaskButton")] private Button taskButton;
-    [IWUIBinding("#TaskButtonLabel")] private NSText taskButtonLabel;
+    [IWUIBinding("#TaskButton")] private DailyQuestWindowTaskButton taskButton;
     [IWUIBinding("#View")] private CanvasGroup canvasGroup;
+    [IWUIBinding("#Mark")] private GameObject mark;
+    
+    [IWUIBinding("#BackNormal")] private Image backNormal;
+    [IWUIBinding("#BackActive")] private Image backActive;
+    [IWUIBinding("#BackCompleted")] private Image backCompleted;
 
+    [IWUIBinding("#DoneLabel")] private GameObject doneLabel;
+
+    private const int LABEL_DESCRIPTION_STYLE_NORMAL = 15;
+    private const int LABEL_REWARD_STYLE_NORMAL = 14;
+    private const int LABEL_DESCRIPTION_STYLE_COMPLETED = 18;
+    private const int LABEL_REWARD_STYLE_COMPLETED = 19;
+    
     private TaskEntity task;
     private UIDailyQuestTaskElementEntity targetEntity;
 
@@ -77,12 +88,11 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
     public void UpdateUi()
     {
-        taskButton.interactable = !task.IsClaimed();
-        taskButtonLabel.Text = GetTextForButton(task);
+        taskButton.Init(task);
 
         taskIcon.sprite = UiQuestButton.GetIcon(task);
 
-        lblProgress.Text = UiQuestButton.GetTaskProgress(task);
+        lblProgress.Text = UiQuestButton.GetTaskProgress(task, 32);
         
         // lblDescription.Text = $"<color=#D2D2D2><size=25>[{task.Group} - {task.Id.ToLower()}]</size></color> " + task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
 
@@ -91,29 +101,37 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         lblReward.Text = GetRewardAsText();
         
+        mark.SetActive(task.IsCompleted());
+
+        ToggleTextStyle();
+        
+        ToggleBack();
+
         ToggleActive(!task.IsClaimed(), false);
     }
 
-    private string GetTextForButton(TaskEntity task)
+    private void ToggleTextStyle()
     {
-        string key;
-        
-        switch (task.State)
+        if (task.IsCompleted())
         {
-            case TaskState.Completed:
-                key = LocalizationService.Get("window.daily.quest.task.button.claim", "window.daily.quest.task.button.claim");
-                break;
-            
-            case TaskState.Claimed:
-                key = LocalizationService.Get("window.daily.quest.task.button.done", "window.daily.quest.task.button.done");
-                break;
-            
-            default:
-                key = LocalizationService.Get("window.daily.quest.task.button.help", "window.daily.quest.task.button.help");
-                break;
+            lblDescription.StyleId = LABEL_DESCRIPTION_STYLE_COMPLETED;
+            lblReward.StyleId      = LABEL_REWARD_STYLE_COMPLETED;
+        }
+        else
+        {
+            lblDescription.StyleId = LABEL_DESCRIPTION_STYLE_NORMAL;
+            lblReward.StyleId      = LABEL_REWARD_STYLE_NORMAL;
         }
 
-        return key;
+        lblDescription.ApplyStyle();
+        lblReward.ApplyStyle();
+    }
+
+    private void ToggleBack()
+    {
+        backActive.gameObject.SetActive(false);
+        backNormal.gameObject.SetActive(!task.IsCompleted());
+        backCompleted.gameObject.SetActive(task.IsCompleted());
     }
 
     private string GetRewardAsText()
@@ -190,7 +208,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
     private bool ProvideReward(Action onComplete = null)
     {
-        taskButton.interactable = false;
+        taskButton.Disable();
         
         task.SetClaimedState();
 
@@ -257,6 +275,10 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
     private void ToggleActive(bool enabled, bool animated)
     {
+        ToggleBack();
+
+        doneLabel.SetActive(!enabled);
+        
         float alpha = enabled ? 1 : 0.4f;
         
         if (!animated)
@@ -267,6 +289,4 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         canvasGroup.DOFade(alpha, 0.3f);
     }
-    
-    
 }
