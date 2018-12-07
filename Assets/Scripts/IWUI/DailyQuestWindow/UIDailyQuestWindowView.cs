@@ -1,11 +1,15 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Quests;
+using UnityEngine.UI;
 
 public class UIDailyQuestWindowView : UIGenericPopupWindowView 
 {
     [IWUIBinding("#TaskList")] private UIContainerViewController taskList;
+    [IWUIBinding("#ScrollView")] private ScrollRect scroll;
     [IWUIBinding("#MainTimerLabel")] private NSText mainTimerLabel;
     [IWUIBinding("#SequenceHeader")] private NSText sequenceHeaderLabel;
     [IWUIBinding("#ComeBackPanel")] private GameObject comeBackPanel;
@@ -248,5 +252,73 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
         
         UIMessageWindowController.CreateMessage(model.InformationTitle, model.InformationMessage);
+    }
+    
+    public void RunScrollTween(Transform target, Action onComplete)
+    {
+        scroll.enabled = false;
+        
+        DOTween.Sequence()
+               .SetId(this)
+               .AppendCallback(() =>
+                {
+                    StartCoroutine(WaitForLayoutAndScroll(target, onComplete));
+                })
+            ;
+    }
+
+    private IEnumerator WaitForLayoutAndScroll(Transform target, Action onComplete)
+    {       
+        yield return new WaitForEndOfFrame();
+        
+        // Respect space between top size of the viewport and item
+        const float PADDING = 3f;
+        const float SCROLL_TIME = 1f;
+        
+        RectTransform rect = target.GetComponent<RectTransform>();
+        float y   = rect.localPosition.y;
+        float h   = rect.sizeDelta.y;
+        float top = y + h / 2 + PADDING;
+
+        float scrollToY = -top;
+
+        // Do not scroll if already visible
+        if (scroll.content.anchoredPosition.y > scrollToY)
+        {
+            DOTween.Kill(scroll.content);
+        
+            scroll.content.DOAnchorPosY(scrollToY, SCROLL_TIME)
+                  .SetEase(Ease.InOutBack)
+                  .SetId(scroll.content)
+                  .OnComplete(() =>
+                   {
+                       scroll.enabled = true;
+                       onComplete?.Invoke();
+                   });
+        }
+        else 
+        {
+            onComplete?.Invoke();
+        }
+    }
+
+    public void ScrollToFirstNotCompletedTask()
+    {
+        foreach (var item in taskList.Tabs)
+        {
+            var view = (UIDailyQuestTaskElementViewController) item;
+            var task = view.Task;
+            if (task.IsCompletedOrClaimed())
+            {
+                continue;
+            }
+
+            RunScrollTween(view.transform, () =>
+            {
+                view.HighlightForHint();
+            });
+            
+            break;
+        }
     }
 }
