@@ -8,10 +8,10 @@ public class DailyQuestEntity : QuestEntity
 {   
     private readonly Dictionary<TaskGroup, int> tasksCount = new Dictionary<TaskGroup, int>
     {
-        {TaskGroup.Permanent, 2},
-        {TaskGroup.Easy,      2},
-        {TaskGroup.Normal,    2},
-        {TaskGroup.Hard,      1},
+        {TaskGroup.Permanent, 20},
+        {TaskGroup.Easy,      20},
+        {TaskGroup.Normal,    20},
+        {TaskGroup.Hard,      10},
     };
 
     // Set this to prevent QuestManager from replacing this instance on timer completion
@@ -66,7 +66,13 @@ public class DailyQuestEntity : QuestEntity
             int count = def.Value;
 
             List<TaskEntity> tasksPool = tasksDict[group];
-            for (int i = 0; i < count; i++)
+            if (tasksPool.Count > tasksPool.Count)
+            {
+                Debug.LogError($"[DailyQuestEntity] => Not enough tasks in pool to fill '{def.Key}' group. At least {count} tasks expected.");
+                continue;
+            }
+            
+            for (int i = 0; i < count && tasksPool.Count > 0; i++)
             {
                 int index = UnityEngine.Random.Range(0, tasksPool.Count);
                 ActiveTasks.Add(tasksPool[index]);
