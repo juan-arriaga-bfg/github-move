@@ -18,9 +18,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     [IWUIBinding("#View")] private CanvasGroup canvasGroup;
     [IWUIBinding("#Mark")] private GameObject mark;
     
-    [IWUIBinding("#BackNormal")] private Image backNormal;
-    [IWUIBinding("#BackActive")] private Image backActive;
-    [IWUIBinding("#BackCompleted")] private Image backCompleted;
+    [IWUIBinding("#Back")] private Image back;
 
     [IWUIBinding("#DoneLabel")] private GameObject doneLabel;
     [IWUIBinding("#Shine")] private GameObject shine;
@@ -29,11 +27,18 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     private const int LABEL_REWARD_STYLE_NORMAL = 14;
     private const int LABEL_DESCRIPTION_STYLE_COMPLETED = 18;
     private const int LABEL_REWARD_STYLE_COMPLETED = 19;
+
+    private readonly Color normalBackColor    = new Color(252 / 255f, 191 / 255f, 105 / 255f);
+    private readonly Color activeBackColor    = new Color(255 / 255f, 230 / 255f, 185 / 255f);
+    private readonly Color completedBackColor = new Color(180 / 255f, 201 / 255f, 17  / 255f);
     
     private TaskEntity task;
+    public TaskEntity Task
+    {
+        get { return task; }
+    }
+    
     private UIDailyQuestTaskElementEntity targetEntity;
-
-    private List<BoardPosition> listOfPiecesToHighlight;
 
     private List<CurrencyPair> reward;
 
@@ -46,8 +51,6 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         task = targetEntity.Task;
         
         targetEntity.Task.OnChanged += OnTaskChanged;
-
-        listOfPiecesToHighlight = null;
 
         reward = GetRewardFromComponent();
         
@@ -69,22 +72,23 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
             targetEntity.Task.OnChanged -= OnTaskChanged;
         }
 
-        HighlightDroppedPieces();
-        
         base.OnViewClose(context);
     }
 
-    private void HighlightDroppedPieces()
+    private void HighlightDroppedPieces(List<BoardPosition> listOfPiecesToHighlight)
     {
         if (listOfPiecesToHighlight == null)
         {
             return;
         }
 
-        foreach (var pos in listOfPiecesToHighlight)
+        var board = BoardService.Current.FirstBoard;
+
+        for (var i = 0; i < listOfPiecesToHighlight.Count; i++)
         {
-//           var ray = GodRayView.Show(pos);
-//           ray.Remove();
+            var pos = listOfPiecesToHighlight[i];
+            var target = board.BoardLogic.GetPieceAt(pos);
+            target.ActorView.ShowDropEffect(i == 0);
         }
     }
 
@@ -133,9 +137,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
     private void ToggleBack()
     {
-        backActive.gameObject.SetActive(false);
-        backNormal.gameObject.SetActive(!task.IsCompleted());
-        backCompleted.gameObject.SetActive(task.IsCompleted());
+        back.color = task.IsCompleted() ? completedBackColor : normalBackColor;
     }
 
     private string GetRewardAsText()
@@ -188,9 +190,6 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
     public void OnClick()
     {
-        // HighlightForHint();
-        // return;
-        
         if (task.IsClaimed())
         {
             return;
@@ -208,11 +207,17 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
                 return;
             }
             
-            if (task is TaskCompleteDailyTaskEntity)
+            if (task is TaskCompleteDailyTaskEntity || GameDataService.Current.QuestsManager.DailyQuest.GetCompletedButNotClaimedTasksCount() == 0)
             {
                 targetEntity.WindowController.CloseCurrentWindow();
             }
-            
+ 
+            return;
+        }
+
+        if (task is TaskCompleteDailyTaskEntity)
+        {
+            ((UIDailyQuestWindowView) targetEntity.WindowController.WindowView).ScrollToFirstNotCompletedTask();
             return;
         }
         
@@ -245,22 +250,26 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         
         Action dropReward = () =>
         {
-            board.ActionExecutor.AddAction(new EjectionPieceAction
-            {
-                From = npcPos,
-                Pieces = pieces,
-                OnComplete = () =>
-                {
-                    var view = board.RendererContext.GetElementAt(npcPos) as CharacterPieceView;
+            DOTween.Sequence()// Delay to hide window
+                   .InsertCallback(0.5f, () =>
+                    {
+                        board.ActionExecutor.AddAction(new EjectionPieceAction
+                        {
+                            From = npcPos,
+                            Pieces = pieces,
+                            OnComplete = () =>
+                            {
+                                var view = board.RendererContext.GetElementAt(npcPos) as CharacterPieceView;
 
-                    if (view != null) view.StartRewardAnimation();
+                                if (view != null) view.StartRewardAnimation();
 
-                    AddResourceView.Show(npcPos, currencies);
+                                AddResourceView.Show(npcPos, currencies);
 
-                    onComplete?.Invoke();
-                },
-                OnSuccess = (droppedPiecesPositions) => { listOfPiecesToHighlight = droppedPiecesPositions; } 
-            });
+                                onComplete?.Invoke();
+                            },
+                            OnSuccess = (droppedPiecesPositions) => { HighlightDroppedPieces(droppedPiecesPositions); }
+                        });
+                    });
         };
 
         // Provide all reward
@@ -277,7 +286,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
                     onComplete?.Invoke();
                 }
             },
-            taskIcon.transform.position);
+            targetEntity.WindowController.Window.Layers[0].ViewCamera.WorldToScreenPoint(taskIcon.transform.position));
         }
         else
         {
@@ -309,25 +318,29 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     }
 
     public void HighlightForHint()
-    {
+    {       
         if (task.IsCompletedOrClaimed())
         {
             return;
         }
 
-        DOTween.Kill(backActive, true);
-        
-        backActive.gameObject.SetActive(true);
-        backActive.color = new Color(1, 1, 1, 0);
+        if (task is TaskCompleteDailyTaskEntity)
+        {
+            return;
+        }
+
+        DOTween.Kill(back, true);
+
+        back.color = normalBackColor;
 
         float TIME = 0.3f;
-        backActive.DOColor(new Color(1, 1, 1, 1), TIME)
-                  .SetId(backActive)
+        back.DOColor(activeBackColor, TIME)
+                  .SetId(back)
                   .SetLoops(4, LoopType.Yoyo)
-                  .SetEase(Ease.OutBack)
+                  .SetEase(Ease.OutSine)
                   .OnComplete(() =>
                    {
-                       backActive.gameObject.SetActive(false);
+                       back.color = normalBackColor;
                    });
     }
 }

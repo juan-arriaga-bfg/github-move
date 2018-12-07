@@ -80,7 +80,7 @@ public class DailyQuestButton : IWUIWindowViewController
         
         progressLabel.Text = GetQuestProgress(dailyQuest);
 
-        int notClaimedCount = dailyQuest.CompletedButNotClaimedTasksCount();
+        int notClaimedCount = dailyQuest.GetCompletedButNotClaimedTasksCount();
        
         checkMark.SetActive(notClaimedCount > 0);
         shine.SetActive(notClaimedCount > 0);
@@ -91,8 +91,8 @@ public class DailyQuestButton : IWUIWindowViewController
     public static string GetQuestProgress(QuestEntity quest, int currentValueFontSize = 33, string currentValueColor = "FE4704")
     {
         bool isCompleted = quest.IsCompletedOrClaimed();
-        int  current     = quest.CompletedTasksCount();
-        int  target      = quest.ActiveTasksCount();
+        int  current     = quest.GetCompletedTasksCount();
+        int  target      = quest.GetActiveTasksCount();
                 
         return $"<color=#{( isCompleted ? "FFFFFF" : currentValueColor)}><size={currentValueFontSize}>{current}</size></color>/{target}";
     }

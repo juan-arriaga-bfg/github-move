@@ -30,9 +30,12 @@ public class PieceBoardElementView : BoardElementView
     private readonly Color dragSpriteErrorColor = new Color(1f, 0.44f, 0.44f, 0.9f);
 
     private MulticellularPieceBoardObserver multicellularPieceBoardObserver;
+
     private bool isLockVisual = false;
 
     private List<ParticleView> lockParticles = new List<ParticleView>();
+
+    private GodRayView dropEffectView;
     
     public bool IsHighlighted { get; protected set; }
 
@@ -146,6 +149,9 @@ public class PieceBoardElementView : BoardElementView
     public virtual void OnDragStart(BoardPosition boardPos, Vector2 worldPos)
     {
         RemoveArrow();
+
+        HideDropEffect();
+
         OnDrag(Piece.CachedPosition, worldPos);
         Piece.Context.HintCooldown.Pause(this);
         Piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
@@ -279,6 +285,8 @@ public class PieceBoardElementView : BoardElementView
             lockedSubtrate = null;
         }
         
+        DestroyDropEffect();
+        
         base.ResetViewOnDestroy();
     }
 
@@ -368,10 +376,46 @@ public class PieceBoardElementView : BoardElementView
 
     public void RemoveArrow(float delay = 0)
     {
-        if(arrow == null) return;
-        
+        if (arrow == null) return;
+
         arrow.CachedTransform.SetParent(null);
         arrow.Remove(delay);
         arrow = null;
+    }
+
+
+    public void ShowDropEffect(bool focus)
+    {
+        if (dropEffectView != null)
+        {
+            return;
+        }
+        
+        dropEffectView = GodRayView.Show(Piece.CachedPosition, 5, DestroyDropEffect, 0, 0, focus);
+        
+        dropEffectView.transform.SetParent(transform);
+        dropEffectView.transform.localPosition = Vector3.zero;
+    }
+
+    public void DestroyDropEffect()
+    {
+        if (dropEffectView == null)
+        {
+            return;
+        }
+        
+        dropEffectView.gameObject.SetActive(false);
+        Context.DestroyElement(dropEffectView);
+        dropEffectView = null;
+    }
+    
+    public void HideDropEffect(bool animated = true)
+    {
+        if (dropEffectView == null)
+        {
+            return;
+        }
+        
+        dropEffectView.Hide(true);
     }
 }
