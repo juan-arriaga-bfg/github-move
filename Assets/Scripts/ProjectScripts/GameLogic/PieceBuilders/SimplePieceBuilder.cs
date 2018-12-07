@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-public class SimplePieceBuilder : GenericPieceBuilder 
+﻿public class SimplePieceBuilder : GenericPieceBuilder 
 {
     public override Piece Build(int pieceType, BoardController context)
     {
@@ -30,7 +27,6 @@ public class SimplePieceBuilder : GenericPieceBuilder
             piece.RegisterComponent(new TouchReactionComponent()
                 .RegisterComponent(new TouchReactionDefinitionCollectResource())
                 .RegisterComponent(new TouchReactionConditionComponent()));
-            
         }
 
         AddPathfindLockObserver(piece, true);

@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CheckCurrencyTutorialCondition : BaseTutorialCondition
 {
-    public string Currency;
+    public List<string> Currency;
     public int Target;
     
     private int current;
@@ -11,6 +12,13 @@ public class CheckCurrencyTutorialCondition : BaseTutorialCondition
     {
         base.OnRegisterEntity(entity);
         ShopService.Current.OnPurchasedEvent += Update;
+
+        if (Target < 0) return;
+        
+        foreach (var name in Currency)
+        {
+            current += ProfileService.Current.GetStorageItem(name).Amount;
+        }
     }
 
     public override void OnUnRegisterEntity(ECSEntity entity)
@@ -38,15 +46,15 @@ public class CheckCurrencyTutorialCondition : BaseTutorialCondition
         {
             foreach (var price in shopItem.CurrentPrices)
             {
-                if(price.Currency != Currency) continue;
+                if(Currency.Contains(price.Currency) == false) continue;
                 
                 current -= price.DefaultPriceAmount;
             } 
             
             return;
         }
-
-        if (shopItem.ItemUid != Currency) return;
+        
+        if(Currency.Contains(shopItem.ItemUid) == false) return;
         
         current += shopItem.Amount;
     }

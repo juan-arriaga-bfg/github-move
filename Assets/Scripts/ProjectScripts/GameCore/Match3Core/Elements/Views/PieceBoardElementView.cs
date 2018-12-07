@@ -48,6 +48,8 @@ public class PieceBoardElementView : BoardElementView
         }
     }
     
+    private HintArrowView arrow;
+    
     public virtual void Init(BoardRenderer context, Piece piece)
     {
         base.Init(context);
@@ -143,6 +145,7 @@ public class PieceBoardElementView : BoardElementView
     
     public virtual void OnDragStart(BoardPosition boardPos, Vector2 worldPos)
     {
+        RemoveArrow();
         OnDrag(Piece.CachedPosition, worldPos);
         Piece.Context.HintCooldown.Pause(this);
         Piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
@@ -159,6 +162,7 @@ public class PieceBoardElementView : BoardElementView
 
     public virtual void OnTap(BoardPosition boardPos, Vector2 worldPos)
     {
+        RemoveArrow();
         DOTween.Kill(selectedAnimationId);
         var sequence = DOTween.Sequence().SetId(selectedAnimationId);
         sequence.Append(CachedTransform.DOScale(new Vector3(1.1f, 0.9f, 1f), 0.1f));
@@ -181,7 +185,6 @@ public class PieceBoardElementView : BoardElementView
         }
 
         order++;
-        
         
         List<BoardPosition> piecePositions = new List<BoardPosition>();
         if (Piece.Multicellular == null)
@@ -275,7 +278,7 @@ public class PieceBoardElementView : BoardElementView
             Context.DestroyElement(lockedSubtrate);
             lockedSubtrate = null;
         }
-
+        
         base.ResetViewOnDestroy();
     }
 
@@ -354,5 +357,21 @@ public class PieceBoardElementView : BoardElementView
         var targetPosition = multicellularPieceBoardObserver.GetUpPosition;
         
         base.SyncRendererLayers(new BoardPosition(targetPosition.X, targetPosition.Y, boardPosition.Z));
+    }
+    
+    public void AddArrow()
+    {
+        if (arrow != null) return;
+        
+        arrow = HintArrowView.Show(Piece.CachedPosition, 0, 0, false, true);
+    }
+
+    public void RemoveArrow(float delay = 0)
+    {
+        if(arrow == null) return;
+        
+        arrow.CachedTransform.SetParent(null);
+        arrow.Remove(delay);
+        arrow = null;
     }
 }

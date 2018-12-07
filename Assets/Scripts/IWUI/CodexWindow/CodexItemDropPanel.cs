@@ -16,11 +16,11 @@ public class CodexItemDropPanel : MonoBehaviour
         energyPanel.SetActive(false);
         reproductionPanel.SetActive(false);
         
-        if (itemDef.PieceTypeDef.Filter.Has(PieceTypeFilter.Energy))
+        /*if (itemDef.PieceTypeDef.Filter.Has(PieceTypeFilter.Energy))
         {
             RenderEnergy(itemDef);
         }
-        else if (itemDef.PieceTypeDef.Filter.Has(PieceTypeFilter.Reproduction))
+        else */if (itemDef.PieceTypeDef.Filter.Has(PieceTypeFilter.Reproduction))
         {
             RenderReproduction(itemDef); 
         }

@@ -47,10 +47,7 @@ public class FireflyView : BoardElementView
 
     public void AddArrow(float showDelay = 0, bool isLoop = true)
     {
-        if (arrow != null)
-        {
-            return;
-        }
+        if (arrow != null) return;
         
         arrow = HintArrowView.Show(CachedTransform, 0, 1f, false, isLoop, showDelay);
         arrow.CachedTransform.SetParent(CachedTransform, true);
@@ -69,14 +66,11 @@ public class FireflyView : BoardElementView
     
     public void RemoveArrowImmediate()
     {
-        if (arrow == null)
-        {
-            return;
-        }
+        if (arrow == null) return;
         
-        RemoveArrow();
         arrow.gameObject.SetActive(false);
         arrow.CachedTransform.SetParent(null);
+        RemoveArrow();
     }
 
     public void OnDragStart()
