@@ -31,8 +31,6 @@ public class LifeComponent : ECSEntity
         if (IsDead) return;
 
         if (HP != -1) current = Mathf.Clamp(current + damage, 0, HP);
-        
-        AddResourceView.Show(StartPosition(), new CurrencyPair{Currency = Currency.Life.Name, Amount = -damage});
     }
 
     protected BoardPosition StartPosition()
