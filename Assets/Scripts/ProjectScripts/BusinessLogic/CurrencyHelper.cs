@@ -302,7 +302,17 @@ public static class CurrencyHellper
         
         diff = amount - storageItem.Amount;
 
-        if (isMessageShow) ShowHint(price, diff, onMessageConfirm);
+        if (isMessageShow)
+        {
+            if (price == Currency.Crystals.Name)
+            {
+                UIMessageWindowController.CreateNeedCurrencyMessage(price);
+            }
+            else
+            {
+                OpenShopWindow(price);
+            }
+        }
         
         return false;
     }
@@ -321,23 +331,40 @@ public static class CurrencyHellper
 
         return isCan;
     }
-    
-    private static void ShowHint(string currency, int diff, Action onMessageConfirm)
+
+    public static void OpenShopWindow(string currency)
     {
-        if (currency == Currency.Worker.Name)
-        {
-            return;
-        }
+        BoardService.Current.GetBoardById(0)?.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, null);
         
         if (currency == Currency.Coins.Name)
         {
-            UIMessageWindowController.CreateNeedCoinsMessage();
+            var model = UIService.Get.GetCachedModel<UISoftShopWindowModel>(UIWindowType.SoftShopWindow);
+
+            model.ShopType = Currency.Coins;
+            
+            UIService.Get.ShowWindow(UIWindowType.SoftShopWindow);
             return;
         }
         
         if (currency == Currency.Energy.Name)
         {
-            UIService.Get.ShowWindow(UIWindowType.EnergyShopWindow);
+            var model = UIService.Get.GetCachedModel<UISoftShopWindowModel>(UIWindowType.SoftShopWindow);
+
+            model.ShopType = Currency.Energy;
+            
+            UIService.Get.ShowWindow(UIWindowType.SoftShopWindow);
+            return;
+        }
+        
+        if (currency == Currency.Crystals.Name)
+        {
+            var product = new CurrencyPair{Currency = currency, Amount = 5};
+            var message = string.Format(LocalizationService.Get("common.message.cheatCurrency", "common.message.cheatCurrency {0}?"), product.ToStringIcon(false));
+        
+            UIMessageWindowController.CreateDefaultMessage(message, () =>
+            {
+                Purchase(product, null, new Vector2(Screen.width/2, Screen.height/2));
+            });
             return;
         }
         

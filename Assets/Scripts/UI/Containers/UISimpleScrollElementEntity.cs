@@ -7,5 +7,5 @@ public class UISimpleScrollElementEntity : IUIContainerElementEntity
     public Action<UIContainerElementViewController> OnDeselectEvent { get; set; }
 
     public string ContentId;
-    public string LabelText;
+    public virtual string LabelText { get; set; }
 }

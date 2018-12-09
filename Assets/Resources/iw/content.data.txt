@@ -85,21 +85,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "EnergyShopIcon1",
-    "ResourcePath": "Prefabs\\UI\\EnergyShop/EnergyShopIcon1",
-    "IsGenerateAutoName": false
-  },
-  {
-    "Uid": "EnergyShopIcon2",
-    "ResourcePath": "Prefabs\\UI\\EnergyShop/EnergyShopIcon2",
-    "IsGenerateAutoName": false
-  },
-  {
-    "Uid": "EnergyShopIcon3",
-    "ResourcePath": "Prefabs\\UI\\EnergyShop/EnergyShopIcon3",
-    "IsGenerateAutoName": false
-  },
-  {
     "Uid": "DefaultWorker",
     "ResourcePath": "Prefabs\\Workers/DefaultWorker",
     "IsGenerateAutoName": true
@@ -1033,5 +1018,35 @@
     "Uid": "UIBoardViewContainer",
     "ResourcePath": "Prefabs\\BoardUI/UIBoardViewContainer",
     "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "EnergyShopIcon1",
+    "ResourcePath": "Prefabs\\UI\\SoftShop/EnergyShopIcon1",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "EnergyShopIcon2",
+    "ResourcePath": "Prefabs\\UI\\SoftShop/EnergyShopIcon2",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "EnergyShopIcon3",
+    "ResourcePath": "Prefabs\\UI\\SoftShop/EnergyShopIcon3",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "CoinsShopIcon1",
+    "ResourcePath": "Prefabs\\UI\\SoftShop/CoinsShopIcon1",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "CoinsShopIcon2",
+    "ResourcePath": "Prefabs\\UI\\SoftShop/CoinsShopIcon2",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "CoinsShopIcon3",
+    "ResourcePath": "Prefabs\\UI\\SoftShop/CoinsShopIcon3",
+    "IsGenerateAutoName": false
   }
 ]

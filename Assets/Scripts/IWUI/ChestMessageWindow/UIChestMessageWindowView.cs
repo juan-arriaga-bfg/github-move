@@ -4,15 +4,24 @@ using UnityEngine.UI;
 
 public class UIChestMessageWindowView : UIGenericPopupWindowView
 {
-    [SerializeField] private NSText btnOpenLabel;
-    
     [IWUIBinding("#Delimiter")] private NSText delimiter;
+    [IWUIBinding("#OpenButtonLabel")] private NSText btnOpenLabel;
     
     [IWUIBinding("#Chest")] private Image chest;
     [IWUIBinding("#Content")] private UIContainerViewController content;
+    [IWUIBinding("#OpenButton")] private UIButtonViewController btnOpen;
     
     private bool isOpen;
-    
+
+    public override void InitView(IWWindowModel model, IWWindowController controller)
+    {
+        base.InitView(model, controller);
+
+        btnOpen.Init()
+            .ToState(GenericButtonState.Active)
+            .OnClick(OnOpenClick);
+    }
+
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -30,7 +39,7 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         chest.sprite = IconService.Current.GetSpriteById(windowModel.ChestComponent.Def.Uid);
         chest.SetNativeSize();
         
-        Fill(windowModel.Icons(), content);
+        Fill(UpdateEntities(windowModel.Icons()), content);
         
         var scrollRect = content.GetScrollRect();
         
@@ -48,21 +57,14 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         windowModel.ChestComponent = null;
     }
     
-    public void OnOpenClick()
+    private void OnOpenClick()
     {
         isOpen = true;
         Controller.CloseCurrentWindow();
     }
-    
-    public void Fill(List<string> entities, UIContainerViewController container)
+
+    private List<IUIContainerElementEntity> UpdateEntities(List<string> entities)
     {
-        if (entities == null || entities.Count <= 0)
-        {
-            container.Clear();
-            return;
-        }
-        
-        // update items
         var views = new List<IUIContainerElementEntity>(entities.Count);
         
         for (var i = 0; i < entities.Count; i++)
@@ -79,7 +81,6 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
             views.Add(entity);
         }
         
-        container.Create(views);
-        container.Select(0);
+        return views;
     }
 }

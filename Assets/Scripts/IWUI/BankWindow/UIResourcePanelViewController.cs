@@ -34,17 +34,9 @@ public class UIResourcePanelViewController : UIGenericResourcePanelViewControlle
         sequence.Insert(0.3f, icon.transform.DOScale(new Vector3(1f, 1f, 1f), 0.3f)).SetEase(Ease.OutSine);
     }
 
-    public void DebugCurrentResources()
+    public void OpenShop()
     {
-        BoardService.Current.GetBoardById(0)?.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
-        
-        var product = new CurrencyPair{Currency = itemUid, Amount = itemUid == Currency.Crystals.Name ? 5 : 100};
-        var message = string.Format(LocalizationService.Get("common.message.cheatCurrency", "common.message.cheatCurrency {0}?"), product.ToStringIcon(false));
-        
-        UIMessageWindowController.CreateDefaultMessage(message, () =>
-        {
-            CurrencyHellper.Purchase(product, null, new Vector2(Screen.width/2, Screen.height/2));
-        });
+        CurrencyHellper.OpenShopWindow(itemUid);
     }
 
     private void SetLabelText(int value)

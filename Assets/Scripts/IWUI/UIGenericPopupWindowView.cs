@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -14,20 +15,6 @@ public class UIGenericPopupWindowView : UIGenericWindowView
     
     [SerializeField] private RectTransform viewAnchor;
     
-    public override void OnViewShow()
-    {
-        base.OnViewShow();
-        
-        UISampleWindowModel windowModel = Model as UISampleWindowModel;
-    }
-
-    public override void OnViewClose()
-    {
-        base.OnViewClose();
-        
-        UISampleWindowModel windowModel = Model as UISampleWindowModel;
-    }
-
     public override void AnimateShow()
     {
         base.AnimateShow();
@@ -62,5 +49,17 @@ public class UIGenericPopupWindowView : UIGenericWindowView
     {
         if(message != null) message.Text = text;
         if(messageLabel != null) messageLabel.Text = text;
+    }
+
+    protected void Fill(List<IUIContainerElementEntity> entities, UIContainerViewController container)
+    {
+        if (entities == null || entities.Count <= 0)
+        {
+            container.Clear();
+            return;
+        }
+        
+        container.Create(entities);
+        container.Select(0);
     }
 }

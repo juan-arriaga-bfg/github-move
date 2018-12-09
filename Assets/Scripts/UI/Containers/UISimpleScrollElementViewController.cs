@@ -6,8 +6,6 @@ public class UISimpleScrollElementViewController : UIContainerElementViewControl
     [IWUIBinding("#Icon")] protected Image icon;
     [IWUIBinding("#Anchor")] protected Transform anchor;
     [IWUIBinding("#Label")] protected NSText label;
-
-    private UISimpleScrollElementEntity contentEntity;
     
     private Transform content;
 
@@ -15,7 +13,7 @@ public class UISimpleScrollElementViewController : UIContainerElementViewControl
     {
         base.Init();
         
-        contentEntity = entity as UISimpleScrollElementEntity;
+        var contentEntity = entity as UISimpleScrollElementEntity;
         
         if (label != null) label.Text = contentEntity.LabelText;
         
