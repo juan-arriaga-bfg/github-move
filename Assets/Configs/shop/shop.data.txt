@@ -34,5 +34,41 @@
       "Amount": 500
     },
     "Icon": "EnergyShopIcon3"
+  },
+  {
+    "Uid": "Coins",
+    "Product": {
+      "Currency": "Coins",
+      "Amount": 150
+    },
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 15
+    },
+    "Icon": "CoinsShopIcon1"
+  },
+  {
+    "Uid": "Coins",
+    "Product": {
+      "Currency": "Coins",
+      "Amount": 600
+    },
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 45
+    },
+    "Icon": "CoinsShopIcon2"
+  },
+  {
+    "Uid": "Coins",
+    "Product": {
+      "Currency": "Coins",
+      "Amount": 120
+    },
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 75
+    },
+    "Icon": "CoinsShopIcon3"
   }
 ]

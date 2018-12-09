@@ -106,9 +106,8 @@ public class UILimitPanelViewController : UIGenericResourcePanelViewController
         amountLabel.Text = $"<mspace=2.7em><color=#{color}>{current}</color>/{limit}</mspace>";
     }
     
-    public void DebugCurrentResources()
+    public void OpenShop()
     {
-        BoardService.Current.GetBoardById(0)?.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
-        UIService.Get.ShowWindow(UIWindowType.EnergyShopWindow);
+        CurrencyHellper.OpenShopWindow(itemUid);
     }
 }

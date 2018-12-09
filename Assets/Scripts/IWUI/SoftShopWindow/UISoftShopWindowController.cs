@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class UIEnergyShopWindowController : IWWindowController {
+public class UISoftShopWindowController : IWWindowController {
 
     public override IWWindowModel CreateModel()
     {
-        UIEnergyShopWindowModel windowModel = new UIEnergyShopWindowModel();
+        UISoftShopWindowModel windowModel = new UISoftShopWindowModel();
 
 
 

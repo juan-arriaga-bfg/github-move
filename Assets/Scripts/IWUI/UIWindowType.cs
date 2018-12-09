@@ -18,7 +18,7 @@ public class UIWindowType
     
     public const string ChestsShopWindow = "ChestsShopWindow";
     
-    public const string EnergyShopWindow = "EnergyShopWindow";
+    public const string SoftShopWindow = "SoftShopWindow";
     
     public const string CodexWindow = "CodexWindow";
     

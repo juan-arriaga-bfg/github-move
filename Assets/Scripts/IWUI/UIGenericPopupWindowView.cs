@@ -1,59 +1,65 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
 public class UIGenericPopupWindowView : UIGenericWindowView
 {
+    [IWUIBinding("#Title")] protected NSText titleLabel;
+    [IWUIBinding("#Message")] protected NSText messageLabel;
+    
+    [IWUIBinding("#Body")] protected RectTransform body;
+    
     [SerializeField] private NSText title;
-    [SerializeField] protected NSText message;
+    [SerializeField] [Obsolete] protected NSText message;
     
     [SerializeField] private RectTransform viewAnchor;
-
-    public override void OnViewShow()
-    {
-        base.OnViewShow();
-        
-        UISampleWindowModel windowModel = Model as UISampleWindowModel;
-    }
-
-    public override void OnViewClose()
-    {
-        base.OnViewClose();
-        
-        UISampleWindowModel windowModel = Model as UISampleWindowModel;
-    }
-
+    
     public override void AnimateShow()
     {
         base.AnimateShow();
 
-        viewAnchor.anchoredPosition = new Vector2(0f, -Screen.height);
+        var target = body == null ? viewAnchor : body;
         
-        DOTween.Kill(viewAnchor);
-        var sequence = DOTween.Sequence().SetId(viewAnchor);
-        sequence.Append(viewAnchor.DOAnchorPos(new Vector2(0f, 0f), 0.5f).SetEase(Ease.OutBack));
+        target.anchoredPosition = new Vector2(0f, -Screen.height);
         
+        DOTween.Kill(target);
+        var sequence = DOTween.Sequence().SetId(target);
+        sequence.Append(target.DOAnchorPos(new Vector2(0f, 0f), 0.5f).SetEase(Ease.OutBack));
     }
 
     public override void AnimateClose()
     {
         base.AnimateClose();
-
-        DOTween.Kill(viewAnchor);
-        var sequence = DOTween.Sequence().SetId(viewAnchor);
-        sequence.Append(viewAnchor.DOAnchorPos(new Vector2(0f, -Screen.height), 0.5f).SetEase(Ease.InBack));
+        
+        var target = body == null ? viewAnchor : body;
+        
+        DOTween.Kill(target);
+        var sequence = DOTween.Sequence().SetId(target);
+        sequence.Append(target.DOAnchorPos(new Vector2(0f, -Screen.height), 0.5f).SetEase(Ease.InBack));
     }
 
     protected void SetTitle(string text)
     {
-        if(title == null) return;
-        
-        title.Text = text;
+        if(title != null) title.Text = text;
+        if(titleLabel != null) titleLabel.Text = text;
     }
     
     protected void SetMessage(string text)
     {
-        if(message == null) return;
+        if(message != null) message.Text = text;
+        if(messageLabel != null) messageLabel.Text = text;
+    }
+
+    protected void Fill(List<IUIContainerElementEntity> entities, UIContainerViewController container)
+    {
+        if (entities == null || entities.Count <= 0)
+        {
+            container.Clear();
+            return;
+        }
         
-        message.Text = text;
+        container.Create(entities);
+        container.Select(0);
     }
 }
