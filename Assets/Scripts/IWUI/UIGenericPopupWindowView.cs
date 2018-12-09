@@ -5,10 +5,10 @@ using DG.Tweening;
 
 public class UIGenericPopupWindowView : UIGenericWindowView
 {
-    [IWUIBinding("#Title")] private NSText titleLabel;
-    [IWUIBinding("#Message")] private NSText messageLabel;
+    [IWUIBinding("#Title")] protected NSText titleLabel;
+    [IWUIBinding("#Message")] protected NSText messageLabel;
     
-    [IWUIBinding("#Body")] private RectTransform body;
+    [IWUIBinding("#Body")] protected RectTransform body;
     
     [SerializeField] private NSText title;
     [SerializeField] [Obsolete] protected NSText message;
