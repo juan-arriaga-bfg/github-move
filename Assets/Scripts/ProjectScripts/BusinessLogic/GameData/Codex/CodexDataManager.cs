@@ -426,8 +426,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                         Name = LocalizationService.Get("window.codex.branch.PR_A", "window.codex.branch.PR_A"),
                         ItemDefs = GetCodexItemsForChain(new List<List<int>>
                         {
-                            matchDef.GetChain(PieceType.PR_A1.Id),
-                            matchDef.GetChain(PieceType.PR_A5.Id)
+                            matchDef.GetChain(PieceType.PR_A1.Id)
                         })
                     },
                     new CodexChainDef
@@ -435,8 +434,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                         Name = LocalizationService.Get("window.codex.branch.PR_B", "window.codex.branch.PR_B"),
                         ItemDefs = GetCodexItemsForChain(new List<List<int>>
                         {
-                            matchDef.GetChain(PieceType.PR_B1.Id),
-                            matchDef.GetChain(PieceType.PR_B5.Id)
+                            matchDef.GetChain(PieceType.PR_B1.Id)
                         })
                     },
                     new CodexChainDef
@@ -444,8 +442,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                         Name = LocalizationService.Get("window.codex.branch.PR_C", "window.codex.branch.PR_C"),
                         ItemDefs = GetCodexItemsForChain(new List<List<int>>
                         {
-                            matchDef.GetChain(PieceType.PR_C1.Id),
-                            matchDef.GetChain(PieceType.PR_C5.Id)
+                            matchDef.GetChain(PieceType.PR_C1.Id)
                         })
                     },
                     new CodexChainDef
@@ -453,8 +450,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                         Name = LocalizationService.Get("window.codex.branch.PR_D", "window.codex.branch.PR_D"),
                         ItemDefs = GetCodexItemsForChain(new List<List<int>>
                         {
-                            matchDef.GetChain(PieceType.PR_D1.Id),
-                            matchDef.GetChain(PieceType.PR_D5.Id)
+                            matchDef.GetChain(PieceType.PR_D1.Id)
                         })
                     },
                     new CodexChainDef
@@ -462,8 +458,7 @@ public class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Diction
                         Name = LocalizationService.Get("window.codex.branch.PR_E", "window.codex.branch.PR_E"),
                         ItemDefs = GetCodexItemsForChain(new List<List<int>>
                         {
-                            matchDef.GetChain(PieceType.PR_E1.Id),
-                            matchDef.GetChain(PieceType.PR_E5.Id)
+                            matchDef.GetChain(PieceType.PR_E1.Id)
                         })
                     },
                 }
