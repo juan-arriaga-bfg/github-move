@@ -185,20 +185,19 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         if (isValid)
         {
             var pieceEntity = context.GetPieceAt(boardPosition);
-
-            var model = UIService.Get.GetCachedModel<UIConfirmRemoverMessageWindowModel>(UIWindowType.ConfirmRemoverMessageWindow);
+            
+            var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
 
             model.Image = PieceType.Parse(pieceEntity.PieceType);
             model.Title = LocalizationService.Get("window.remove.title", "window.remove.title");
             model.Message = LocalizationService.Get("window.remove.message", "window.remove.message");
             model.CancelLabel = LocalizationService.Get("common.button.yes", "common.button.yes");
             model.AcceptLabel = LocalizationService.Get("common.button.no", "common.button.no");
-
+            
             model.OnAccept = EndRemover;
-
             model.OnCancel = () => { Confirm(boardPosition); };
-
-            UIService.Get.ShowWindow(UIWindowType.ConfirmRemoverMessageWindow);
+            
+            UIService.Get.ShowWindow(UIWindowType.MessageWindow);
             return true;
         }
 

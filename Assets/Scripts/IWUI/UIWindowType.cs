@@ -33,8 +33,6 @@ public class UIWindowType
     public const string QuestStartWindow = "QuestStartWindow";
 
     public const string NextLevelWindow = "NextLevelWindow";
-
-    public const string ConfirmRemoverMessageWindow = "ConfirmRemoverMessageWindow";
     
     public const string DailyQuestWindow = "DailyQuestWindow";
     
