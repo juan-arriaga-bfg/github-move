@@ -108,7 +108,7 @@ public class UICharacterViewController : IWBaseMonoBehaviour
                 Debug.LogError($"[UICharacterViewController] => SetEmotion({value}: Not defined!");
             }
         
-            SyncPivot();
+            SyncPivotAndSize();
         }
     }
 
@@ -125,11 +125,13 @@ public class UICharacterViewController : IWBaseMonoBehaviour
             return;
         }
 
-        SyncPivot();
+        SyncPivotAndSize();
     }
 
-    private void SyncPivot()
+    private void SyncPivotAndSize()
     {
+        currentCharImage.SetNativeSize();
+        
         // Sync sprite and rect transform pivots
         RectTransform rectTransform = currentCharImage.GetComponent<RectTransform>();
         Vector2 size = rectTransform.sizeDelta;
