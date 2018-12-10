@@ -103,39 +103,70 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         return null;
     }
 
+    public FogObserver GetFogObserver(BoardPosition pos)
+    {
+        FogObserver ret;
+        if (FogObservers.TryGetValue(pos, out ret))
+        {
+            return ret;
+        }
+
+        return null;
+    }
+    
     public bool IsFogCleared(string uid)
     {
         var pos = GetFogPositionByUid(uid);
         return !pos.HasValue;
     }
 
-    public FogDef GetRandomActiveFogWithLeastLevel()
+    /// <summary>
+    /// Find fog with minimal level. Active fogs have top priority even when their level are higher
+    /// </summary>
+    /// <returns></returns>
+    public FogDef GetRandomFogWithLeastLevel()
     {
-        if (ActiveFogs.Count == 0)
+        List<FogDef> fogsToSearch = ActiveFogs.Count > 0 ? ActiveFogs : VisibleFogPositions.Values.ToList();
+
+        if (fogsToSearch == null || fogsToSearch.Count == 0)
         {
-            Debug.LogError("[FogsDataManager] => GetUidOfFirstNotClearedFog: No defs found!");
+            Debug.LogError("[FogsDataManager] => GetRandomFogWithLeastLevel: No visible fog found!");
             return null;
         }
 
-        int firstLevel = ActiveFogs[0].Level;
-        int lastIndex = -1;
-        
-        for (int i = 1; i < ActiveFogs.Count; i++)
+        List<FogDef> fogsWithMinLevel = new List<FogDef>();
+
+        foreach (var fog in ActiveFogs)
         {
-            var def = ActiveFogs[i];
-            if (def.Level == firstLevel)
+            if (fogsWithMinLevel.Count == 0)
             {
-                lastIndex = i;
+                fogsWithMinLevel.Add(fog);
+                continue;
             }
-            else
+
+            var firstSavedFogLevel = fogsWithMinLevel[0].Level;
+            var currentFogLevel = fog.Condition.Amount;
+            
+            if (firstSavedFogLevel > currentFogLevel)
             {
-                break;
+                fogsWithMinLevel.Clear();
+                fogsWithMinLevel.Add(fog);
+            }
+            else if (firstSavedFogLevel == currentFogLevel)
+            {
+                fogsWithMinLevel.Add(fog);
             }
         }
 
-        int index = Random.Range(0, lastIndex + 1);
+        if (fogsWithMinLevel.Count == 0)
+        {
+            Debug.LogError("[FogsDataManager] => GetRandomFogWithLeastLevel: No defs with min level found!");
+            return null;
+        }
+        
+        int index = Random.Range(0, fogsWithMinLevel.Count);
 
-        return ActiveFogs[index];
+        return fogsWithMinLevel[index];
     }
     
     /// <summary>
