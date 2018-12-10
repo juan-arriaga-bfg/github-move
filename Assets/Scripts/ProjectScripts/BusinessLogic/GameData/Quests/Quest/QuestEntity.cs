@@ -337,8 +337,11 @@ public class QuestEntity : ECSEntity, IECSSerializeable
     /// </summary>
     public void ForceComplete()
     {
-        State = TaskState.Completed;
-        OnChanged?.Invoke(this, null);
+        if (State != TaskState.Claimed)
+        {
+            State = TaskState.Completed;
+            OnChanged?.Invoke(this, null);
+        }
     }
 
     public int GetActiveTasksCount()
