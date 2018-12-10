@@ -39,7 +39,7 @@ public class DailyQuestEntity : QuestEntity
             tasksDict.Add(key, new List<TaskEntity>());
         }
         
-        for (int i = 0; i < Tasks.Count - 1; i++)
+        for (int i = 0; i < Tasks.Count; i++)
         {
             var task = Tasks[i];
 
