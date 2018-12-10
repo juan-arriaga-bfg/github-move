@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Quests;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiQuestButton : UIGenericResourcePanelViewController
 {
@@ -10,6 +11,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     [SerializeField] private GameObject checkmark;
     [SerializeField] private CanvasGroup rootCanvasGroup;
     [SerializeField] private UiQuestButtonArrow arrow;
+    [SerializeField] private Button button;
     
     public QuestEntity Quest { get; private set; }
     private bool isUp;
@@ -43,14 +45,13 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             checkmark.SetActive(false);
         }
         
-        if (this.Quest != null)
+        if (Quest != null)
         {
             ResourcesViewManager.Instance.UnRegisterView(this);
-            this.Quest.OnChanged -= OnQuestChanged;
-            // Debug.Log($"AAAAA FIX UNSUBSCRIBE: {quest.Id}");
+            Quest.OnChanged -= OnQuestChanged;
         }
         
-        this.Quest = quest;
+        Quest = quest;
 
         isUp = false;
         var taskAboutPiece = GetFirstTask() as IHavePieceId;
@@ -60,8 +61,6 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceId);
             itemUid = pieceTypeDef.Id.ToString();
         }
-        
-        // Debug.Log($"AAAAA SUBSCRIBE: {quest.Id}");
 
         if (interactive)
         {
@@ -75,6 +74,18 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         {
             arrow.SetQuest(interactive ? quest : null);
         }
+
+        ToggleButton();
+    }
+
+    private void ToggleButton()
+    {
+        if (button == null)
+        {
+            return;
+        }
+
+        button.interactable = interactive && !IsClickDisabledByTutorial();
     }
 
     private void OnQuestChanged(QuestEntity quest, TaskEntity task)
@@ -227,8 +238,8 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             return;
         }
 
-        // Do not allow to open details until the end of tutorials https://app.assembla.com/spaces/sherwood/tickets/realtime_cardwall?ticket=1482
-        if (GameDataService.Current.QuestsManager.GetActiveQuestById("1_CreatePiece_PR_C4") != null)
+
+        if (IsClickDisabledByTutorial())
         {
             return;
         }
@@ -281,5 +292,11 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         }
 
         checkmark.SetActive(enabled);
+    }
+
+    // Do not allow to open details until the end of tutorials https://app.assembla.com/spaces/sherwood/tickets/realtime_cardwall?ticket=1482
+    public bool IsClickDisabledByTutorial()
+    {
+        return GameDataService.Current.QuestsManager.GetActiveQuestById("1_CreatePiece_PR_C4") != null;
     }
 }
