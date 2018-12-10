@@ -164,6 +164,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
             
             var tabEntity = new UIDailyQuestTaskElementEntity
             {
+                Quest = model.Quest,
                 Task = task,
                 WindowController = Controller,
                 OnSelectEvent = null,
@@ -272,7 +273,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         yield return new WaitForEndOfFrame();
         
         // Respect space between top size of the viewport and item
-        const float PADDING = 3f;
+        const float PADDING = 0f;
         const float SCROLL_TIME = 1f;
         
         RectTransform rect = target.GetComponent<RectTransform>();
@@ -298,6 +299,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         }
         else 
         {
+            scroll.enabled = true;
             onComplete?.Invoke();
         }
     }
@@ -305,7 +307,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
     public void ScrollToFirstNotCompletedOrNotClaimedTask()
     {
         // Allow to highlight completed but not claimed state on the second iteration
-        for (int i = 1; i <= 2; i++)
+        for (int i = 0; i <= 1; i++)
         {
             foreach (var item in taskList.Tabs)
             {
@@ -322,7 +324,10 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
                     continue;
                 }
 
-                RunScrollTween(view.transform, () => { view.HighlightForHint(); });
+                RunScrollTween(view.transform, () =>
+                {
+                    view.HighlightForHint();
+                });
 
                 return;
             }

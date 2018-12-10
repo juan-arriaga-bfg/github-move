@@ -23,7 +23,7 @@ public class DailyQuestWindowTaskButton : IWBaseMonoBehaviour
     
     private string GetTextForButton(TaskEntity task)
     {
-        if (task is TaskCompleteDailyTaskEntity && GameDataService.Current.QuestsManager.DailyQuest.IsAllTasksClaimed(true))
+        if (task is TaskCompleteDailyTaskEntity && !GameDataService.Current.QuestsManager.DailyQuest.IsAllTasksClaimed(true))
         {
              return LocalizationService.Get("window.daily.quest.task.button.help", "window.daily.quest.task.button.help");
         }

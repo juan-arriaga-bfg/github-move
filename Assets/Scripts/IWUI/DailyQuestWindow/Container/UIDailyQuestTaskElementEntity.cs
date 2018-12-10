@@ -7,6 +7,7 @@ public class UIDailyQuestTaskElementEntity : IUIContainerElementEntity
     public Action<UIContainerElementViewController> OnDeselectEvent { get; set; }
 
     public TaskEntity Task { get; set; }
+    public DailyQuestEntity Quest { get; set; }
     public IWWindowController WindowController { get; set; }
 
     public override string ToString()

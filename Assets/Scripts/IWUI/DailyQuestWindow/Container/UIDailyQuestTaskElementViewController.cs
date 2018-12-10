@@ -47,16 +47,16 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         task = targetEntity.Task;
         
-        targetEntity.Task.OnChanged += OnTaskChanged;
+        targetEntity.Quest.OnChanged += OnQuestChanged;
 
         reward = GetRewardFromComponent();
         
         UpdateUi();
     }
 
-    private void OnTaskChanged(TaskEntity task)
+    private void OnQuestChanged(QuestEntity quest, TaskEntity changedTask)
     {
-        if (task.State != TaskState.Claimed)
+        if (task == changedTask || (task is TaskCompleteDailyTaskEntity && changedTask != null))
         {
             UpdateUi();
         }
@@ -66,7 +66,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     {
         if (targetEntity != null)
         {
-            targetEntity.Task.OnChanged -= OnTaskChanged;
+            targetEntity.Quest.OnChanged -= OnQuestChanged;
         }
 
         base.OnViewClose(context);
@@ -308,16 +308,29 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         {
             canvasGroup.alpha = alpha;
             taskIconCanvasGroup.alpha = alpha;
+            if (!enabled)
+            {
+                back.color = normalBackColor;
+            }
             return;
         }
 
-        canvasGroup.DOFade(alpha, 0.3f);
-        taskIconCanvasGroup.DOFade(alpha, 0.3f);
+        DOTween.Kill(back, true);
+        
+        float TIME = 0.3f;
+        
+        canvasGroup.DOFade(alpha, TIME);
+        taskIconCanvasGroup.DOFade(alpha, TIME);
+
+        if (!enabled)
+        {
+            back.DOColor(normalBackColor, TIME);
+        }
     }
 
     public void HighlightForHint()
     {       
-        if (task.IsCompletedOrClaimed())
+        if (task.IsClaimed())
         {
             return;
         }
@@ -329,7 +342,9 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         DOTween.Kill(back, true);
 
-        back.color = normalBackColor;
+        var currentColor = task.IsCompleted() ? completedBackColor : normalBackColor;
+
+        back.color = currentColor;
 
         float TIME = 0.3f;
         back.DOColor(activeBackColor, TIME)
@@ -338,7 +353,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
                   .SetEase(Ease.OutSine)
                   .OnComplete(() =>
                    {
-                       back.color = normalBackColor;
+                       back.color = currentColor;
                    });
     }
 }
