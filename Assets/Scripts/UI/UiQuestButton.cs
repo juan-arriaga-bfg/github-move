@@ -226,6 +226,12 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         {
             return;
         }
+
+        // Do not allow to open details until the end of tutorials https://app.assembla.com/spaces/sherwood/tickets/realtime_cardwall?ticket=1482
+        if (GameDataService.Current.QuestsManager.GetActiveQuestById("1_CreatePiece_PR_C4") != null)
+        {
+            return;
+        }
         
         ShowQuestWindow();
     }
