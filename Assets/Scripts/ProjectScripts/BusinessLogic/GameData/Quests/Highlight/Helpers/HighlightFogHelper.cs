@@ -5,7 +5,29 @@ public static class HighlightFogHelper
 {
     public static bool HighlightNextFog(float delay)
     {
-        var fogUid = GameDataService.Current.FogsManager.GetRandomFogWithLeastPrice()?.Uid;
+        var fogManager = GameDataService.Current.FogsManager;
+        var fog = fogManager.GetRandomFogWithLeastPrice();
+        if (fog != null)
+        {
+            var fogObserver = fogManager.GetFogObserver(fog.GetCenter());
+            if (fogObserver == null)
+            {
+                Debug.LogError($"[HighlightTaskClearFog] => fog observer for fog with id {fog.Uid} not found!");
+                return false;
+            }
+
+            if (!fogObserver.CanBeCleared())
+            {
+                fog = null;
+            }
+        }
+
+        if (fog == null)
+        {
+            fog = fogManager.GetRandomFogWithLeastLevel();
+        }
+        
+        var fogUid = fog?.Uid;
         if (string.IsNullOrEmpty(fogUid))
         {
             return false;
