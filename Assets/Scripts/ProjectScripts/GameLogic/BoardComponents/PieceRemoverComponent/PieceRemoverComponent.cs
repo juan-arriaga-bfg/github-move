@@ -42,6 +42,19 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
 
     public bool IsActive => isActive;
 
+    private PieceTypeFilter Filter
+    {
+        get
+        {
+            // Debug hack: press LSHIFT to allow to remove any piece
+#if UNITY_EDITOR
+            return Input.GetKey(KeyCode.LeftShift) ? PieceTypeFilter.Default : PieceTypeFilter.Removable;
+#else
+             return PieceTypeFilter.Removable;
+#endif
+        }
+    }
+
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
@@ -54,7 +67,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         if (state)
         {
             var points = context.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Default);
-            var filteredIds = PieceType.GetIdsByFilter(PieceTypeFilter.Removable);
+            var filteredIds = PieceType.GetIdsByFilter(Filter);
 
             for (int i = 0; i < points.Count; i++)
             {
@@ -79,7 +92,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         else
         {
             var points = context.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Default);
-            var filteredIds = PieceType.GetIdsByFilter(PieceTypeFilter.Removable);
+            var filteredIds = PieceType.GetIdsByFilter(Filter);
 
             for (int i = 0; i < points.Count; i++)
             {
@@ -237,7 +250,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
 
         if (pieceEntity == null) return false;
 
-        var ids = PieceType.GetIdsByFilter(PieceTypeFilter.Removable);
+        var ids = PieceType.GetIdsByFilter(Filter);
         
         return ids.Contains(pieceEntity.PieceType);
     }
