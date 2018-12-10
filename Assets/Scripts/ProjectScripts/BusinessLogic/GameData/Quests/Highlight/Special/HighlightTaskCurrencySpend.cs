@@ -4,10 +4,10 @@ public class HighlightTaskCurrencySpend : ITaskHighlight
 {
     public bool Highlight(TaskEntity task)
     {
-        TaskCurrencyCollectEntity currencyTask = task as TaskCurrencyCollectEntity;
+        TaskCurrencySpendEntity currencyTask = task as TaskCurrencySpendEntity;
         if (currencyTask == null)
         {
-            Debug.LogError("[HighlightTaskCurrencySpend] => task is not TaskCurrencyCollectEntity");
+            Debug.LogError("[TaskCurrencySpendEntity] => task is not TaskCurrencySpendEntity");
             return false;
         }
 
