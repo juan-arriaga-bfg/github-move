@@ -50,7 +50,7 @@ public class UIMessageWindowController : IWWindowController {
         model.Title = title;
         model.Message = message;
         model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
-        model.isHardAccept = isHardAccept;
+        model.IsHardAccept = isHardAccept;
         
         model.OnAccept = OnAccept ?? (() => {});
         model.OnCancel = OnCancel;
@@ -111,7 +111,7 @@ public class UIMessageWindowController : IWWindowController {
         model.Title = LocalizationService.Get("window.timerComplete.title", "window.timerComplete.title");
         model.Message = message;
         model.AcceptLabel = "";
-        model.isBuy = true;
+        model.IsBuy = true;
         
         model.OnAccept = timer.FastComplete;
         model.OnCancel = null;

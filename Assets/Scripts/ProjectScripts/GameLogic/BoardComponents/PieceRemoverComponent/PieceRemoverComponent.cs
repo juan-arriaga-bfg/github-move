@@ -191,11 +191,17 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
             model.Image = PieceType.Parse(pieceEntity.PieceType);
             model.Title = LocalizationService.Get("window.remove.title", "window.remove.title");
             model.Message = LocalizationService.Get("window.remove.message", "window.remove.message");
-            model.CancelLabel = LocalizationService.Get("common.button.yes", "common.button.yes");
-            model.AcceptLabel = LocalizationService.Get("common.button.no", "common.button.no");
+            model.AcceptLabel = LocalizationService.Get("common.button.yes", "common.button.yes");
+            model.CancelLabel = LocalizationService.Get("common.button.no", "common.button.no");
             
-            model.OnAccept = EndRemover;
-            model.OnCancel = () => { Confirm(boardPosition); };
+            model.OnAccept = () => { Confirm(boardPosition); };
+            model.OnCancel = EndRemover;
+            model.OnClose = EndRemover;
+
+            model.AcceptColor = UIMessageWindowModel.ButtonColor.Red;
+            model.CancelColor = UIMessageWindowModel.ButtonColor.Green;
+
+            model.IsAcceptLeft = true;
             
             UIService.Get.ShowWindow(UIWindowType.MessageWindow);
             return true;
@@ -219,10 +225,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
             CollapsePieceAt(position);
         });
         sequence.AppendInterval(4f);
-        sequence.OnComplete(() =>
-        {
-            EndRemover();
-        });
+        sequence.OnComplete(EndRemover);
     }
 
     public bool IsExecuteable()
