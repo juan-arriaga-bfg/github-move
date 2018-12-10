@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class UIMessageWindowView : UIGenericPopupWindowView
     [IWUIBinding("#TimerLabel")] protected NSText timerLabel;
     
     [IWUIBinding("#Image")] protected Image image;
-    [IWUIBinding("#Anchor")] protected Transform anchor;
+    [IWUIBinding("#Anchor")] protected RectTransform anchor;
     
     [IWUIBinding("#Buttons")] protected GameObject buttonsPanel;
     
@@ -54,9 +55,6 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         
         var windowModel = Model as UIMessageWindowModel;
         
-        image.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Image));
-        messageLabel.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Message));
-        
         if (!string.IsNullOrEmpty(windowModel.Image))
         {
             image.sprite = IconService.Current.GetSpriteById(windowModel.Image);
@@ -82,6 +80,10 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         
         btnCancel.CachedTransform.SetSiblingIndex(windowModel.IsAcceptLeft ? 2 : 0);
         
+        image.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Image));
+        messageLabel.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Message));
+        anchor.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Prefab));
+        
         btnAccept.gameObject.SetActive(windowModel.IsBuy == false && windowModel.OnAccept != null);
         btnBuy.gameObject.SetActive(windowModel.IsBuy && windowModel.OnAccept != null);
         btnCancel.gameObject.SetActive(windowModel.OnCancel != null);
@@ -93,16 +95,22 @@ public class UIMessageWindowView : UIGenericPopupWindowView
 
         buttonsPanel.SetActive(btnAccept.gameObject.activeSelf || btnBuy.gameObject.activeSelf || btnCancel.gameObject.activeSelf);
         
+        StartCoroutine(UpdateLayoutCoroutine());
+        
         if (windowModel.Timer == null) return;
         
         windowModel.Timer.OnExecute += UpdateTimer;
         windowModel.Timer.OnComplete += CompleteTimer;
     }
+    
+    private IEnumerator UpdateLayoutCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(anchor);
+    }
 
     public override void OnViewCloseCompleted()
-    {   
-        base.OnViewCloseCompleted();
-        
+    {
         var windowModel = Model as UIMessageWindowModel;
 
         if (hint != null)
@@ -117,6 +125,8 @@ public class UIMessageWindowView : UIGenericPopupWindowView
             windowModel.Timer.OnComplete -= CompleteTimer;
         }
         
+        windowModel.Reset();
+        
         if (isAccept || windowModel.IsHardAccept) windowModel.OnAccept?.Invoke();
         if (isCancel) windowModel.OnCancel?.Invoke();
         
@@ -125,7 +135,11 @@ public class UIMessageWindowView : UIGenericPopupWindowView
             windowModel.OnClose?.Invoke();
         }
         
-        windowModel.Reset();
+        windowModel.OnAccept = null;
+        windowModel.OnCancel = null;
+        windowModel.OnClose = null;
+        
+        base.OnViewCloseCompleted();
     }
 
     private void OnClickAccept()
