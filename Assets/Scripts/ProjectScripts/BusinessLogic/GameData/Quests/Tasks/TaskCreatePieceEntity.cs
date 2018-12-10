@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Quests;
 
+[TaskHighlight(typeof(HighlightTaskFindProductionFieldForPieceType))]
 [TaskHighlight(typeof(HighlightTaskPointToPredecessor))]
 [TaskHighlight(typeof(HighlightTaskFindObstacleForPieceType))]
 [TaskHighlight(typeof(HighlightTaskFindMineForPieceType))]
