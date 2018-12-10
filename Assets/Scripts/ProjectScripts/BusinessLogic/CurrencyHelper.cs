@@ -306,11 +306,11 @@ public static class CurrencyHellper
         {
             if (price == Currency.Crystals.Name)
             {
-                UIMessageWindowController.CreateNeedCurrencyMessage(price);
+                UIMessageWindowController.CreateNeedCurrencyMessage(price, diff.ToString());
             }
             else
             {
-                OpenShopWindow(price);
+                OpenShopWindow(price, diff.ToString());
             }
         }
         
@@ -332,7 +332,7 @@ public static class CurrencyHellper
         return isCan;
     }
 
-    public static void OpenShopWindow(string currency)
+    public static void OpenShopWindow(string currency, string diff = "")
     {
         BoardService.Current.GetBoardById(0)?.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, null);
         
@@ -368,7 +368,7 @@ public static class CurrencyHellper
             return;
         }
         
-        UIMessageWindowController.CreateNeedCurrencyMessage(currency);
+        UIMessageWindowController.CreateNeedCurrencyMessage(currency, diff);
     }
     
     public static CurrencyPair ResourcePieceToCurrence(Dictionary<int, int> dict, string currency)

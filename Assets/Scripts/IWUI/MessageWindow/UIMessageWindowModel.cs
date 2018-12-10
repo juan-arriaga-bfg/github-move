@@ -55,10 +55,6 @@ public class UIMessageWindowModel : IWWindowModel
         IsHardAccept = false;
         IsBuy = false;
         IsAcceptLeft = false;
-
-        OnAccept = null;
-        OnCancel = null;
-        OnClose = null;
         
         AcceptColor = ButtonColor.Green;
         CancelColor = ButtonColor.Red;

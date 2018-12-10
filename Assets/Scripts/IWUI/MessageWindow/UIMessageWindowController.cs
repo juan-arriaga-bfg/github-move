@@ -70,14 +70,16 @@ public class UIMessageWindowController : IWWindowController {
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
     
-    public static void CreateNeedCurrencyMessage(string currency)
+    public static void CreateNeedCurrencyMessage(string currency, string diff = "")
     {
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+
+        model.Prefab = currency == Currency.Mana.Name ? "NotHaveMana" : null;
+        model.Title = string.Format(LocalizationService.Get("window.notHave.title", "window.notHave.title {0}?"), currency.ToLower());
         
-        model.Title = string.Format(LocalizationService.Get("common.message.need", "common.message.need {0}?"), currency.ToLower());
-        model.Message = string.Format(LocalizationService.Get("common.message.notHave", "common.message.notHave {0}!"), $"<sprite name={currency}>");
+        model.Message = string.Format(LocalizationService.Get($"window.notHave.message.{currency.ToLower()}", $"window.notHave.message.{currency.ToLower()}" + " {0}!"), $"{diff} <sprite name={currency}>");
         model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
-        
+            
         model.OnAccept = () => {};
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
