@@ -6,12 +6,14 @@ public class UISoftShopElementViewController : UISimpleScrollElementViewControll
     [IWUIBinding("#BuyButton")] private UIButtonViewController btnBuy;
     
     private bool isClick;
+    private bool isCanPurchase;
     
     public override void Init()
     {
         base.Init();
         
         isClick = false;
+        isCanPurchase = true;
         
         var contentEntity = entity as UISoftShopElementEntity;
 
@@ -24,9 +26,19 @@ public class UISoftShopElementViewController : UISimpleScrollElementViewControll
     
     public override void OnViewCloseCompleted()
     {
-        if (isClick == false) return;
-
         var contentEntity = entity as UISoftShopElementEntity;
+        
+        if(entity == null) return;
+        
+        if (isClick == false)
+        {
+            if (isCanPurchase == false)
+            {
+                CurrencyHellper.OpenShopWindow(contentEntity.Price.Currency);
+            }
+            
+            return;
+        }
         
         CurrencyHellper.Purchase(contentEntity.Product, contentEntity.Price, null, new Vector2(Screen.width/2, Screen.height/2));
     }
@@ -39,10 +51,10 @@ public class UISoftShopElementViewController : UISimpleScrollElementViewControll
         
         var contentEntity = entity as UISoftShopElementEntity;
         
-        if (CurrencyHellper.IsCanPurchase(contentEntity.Price, true) == false)
+        if (CurrencyHellper.IsCanPurchase(contentEntity.Price) == false)
         {
+            isCanPurchase = false;
             isClick = false;
-            return;
         }
         
         context.Controller.CloseCurrentWindow();
