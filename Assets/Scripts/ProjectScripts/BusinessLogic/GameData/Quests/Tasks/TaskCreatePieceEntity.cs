@@ -1,11 +1,10 @@
 using Newtonsoft.Json;
 using Quests;
 
+[TaskHighlight(typeof(HighlightTaskPointToPredecessor))]
 [TaskHighlight(typeof(HighlightTaskFindObstacleForPieceType))]
 [TaskHighlight(typeof(HighlightTaskFindMineForPieceType))]
 [TaskHighlight(typeof(HighlightTaskFindChestForPieceType))]
-[TaskHighlight(typeof(HighlightTaskPointToPredecessor))]
-
 [TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskCreatePieceEntity : TaskCounterAboutPiece, IBoardEventListener, IHavePieceId
 {
