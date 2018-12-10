@@ -33,11 +33,8 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     private readonly Color completedBackColor = new Color(180 / 255f, 201 / 255f, 17  / 255f);
     
     private TaskEntity task;
-    public TaskEntity Task
-    {
-        get { return task; }
-    }
-    
+    public TaskEntity Task => task;
+
     private UIDailyQuestTaskElementEntity targetEntity;
 
     private List<CurrencyPair> reward;
@@ -99,8 +96,6 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         taskIcon.sprite = UiQuestButton.GetIcon(task);
 
         lblProgress.Text = UiQuestButton.GetTaskProgress(task, 32);
-        
-        // lblDescription.Text = $"<color=#D2D2D2><size=25>[{task.Group} - {task.Id.ToLower()}]</size></color> " + task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
 
         string key = task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
         lblDescription.Text = LocalizationService.Get(key, key) ;
@@ -194,8 +189,17 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         {
             return;
         }
+
+        bool isCurrentTaskClearAll = (task is TaskCompleteDailyTaskEntity);
+        bool isClaimClearAllAllowed = GameDataService.Current.QuestsManager.DailyQuest.IsAllTasksClaimed(true);
+
+        if (isCurrentTaskClearAll && !isClaimClearAllAllowed)
+        {
+            ((UIDailyQuestWindowView) targetEntity.WindowController.WindowView).ScrollToFirstNotCompletedOrNotClaimedTask();
+            return;
+        }
         
-        if (task.IsCompletedOrClaimed())
+        if (task.IsCompleted())
         {
             if (!ProvideReward())
             {
@@ -207,17 +211,11 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
                 return;
             }
             
-            if (task is TaskCompleteDailyTaskEntity || GameDataService.Current.QuestsManager.DailyQuest.GetCompletedButNotClaimedTasksCount() == 0)
+            if (isCurrentTaskClearAll || GameDataService.Current.QuestsManager.DailyQuest.GetCompletedButNotClaimedTasksCount() == 0)
             {
                 targetEntity.WindowController.CloseCurrentWindow();
             }
  
-            return;
-        }
-
-        if (task is TaskCompleteDailyTaskEntity)
-        {
-            ((UIDailyQuestWindowView) targetEntity.WindowController.WindowView).ScrollToFirstNotCompletedTask();
             return;
         }
         

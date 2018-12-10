@@ -479,19 +479,27 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     /// <param name="id"></param>
     public void FinishQuest(string id)
     {
-        //Debug.Log("!!! CompleteQuest: " + id);
-        
         for (var i = 0; i < ActiveQuests.Count; i++)
         {
             var quest = ActiveQuests[i];
             if (quest.Id == id)
             {
-                quest.SetClaimedState();
-                
+                bool isClaimedByPlayer = quest.IsClaimed();
+
+                if (!isClaimedByPlayer)
+                {
+                    quest.SetClaimedState();
+                }
+
                 ActiveQuests.RemoveAt(i);
                 
                 if (DailyQuest != null && DailyQuest.Id == id)
                 {
+                    if (isClaimedByPlayer)
+                    {
+                        DailyQuestRewardIndex++;
+                    }
+                    
                     StopDailyTimer();
                     DailyQuest = null;
                 }
@@ -522,10 +530,10 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     {
         OnQuestStateChanged?.Invoke(quest, task);
 
-        if (task is TaskCompleteDailyTaskEntity && task.IsClaimed())
-        {
-            DailyQuestRewardIndex++;
-        }
+        // if (task is TaskCompleteDailyTaskEntity && task.IsClaimed())
+        // {
+        //     DailyQuestRewardIndex++;
+        // }
     }
 
     public bool IsQuestDefined(string id)

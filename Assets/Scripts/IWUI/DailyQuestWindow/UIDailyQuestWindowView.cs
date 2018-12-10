@@ -302,23 +302,30 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         }
     }
 
-    public void ScrollToFirstNotCompletedTask()
+    public void ScrollToFirstNotCompletedOrNotClaimedTask()
     {
-        foreach (var item in taskList.Tabs)
+        // Allow to highlight completed but not claimed state on the second iteration
+        for (int i = 1; i <= 2; i++)
         {
-            var view = (UIDailyQuestTaskElementViewController) item;
-            var task = view.Task;
-            if (task.IsCompletedOrClaimed())
+            foreach (var item in taskList.Tabs)
             {
-                continue;
-            }
+                var view = (UIDailyQuestTaskElementViewController) item;
+                var task = view.Task;
 
-            RunScrollTween(view.transform, () =>
-            {
-                view.HighlightForHint();
-            });
-            
-            break;
+                if (task.IsClaimed())
+                {
+                    continue;
+                }
+                
+                if (i == 0 && task.IsCompleted())
+                {
+                    continue;
+                }
+
+                RunScrollTween(view.transform, () => { view.HighlightForHint(); });
+
+                return;
+            }
         }
     }
 }
