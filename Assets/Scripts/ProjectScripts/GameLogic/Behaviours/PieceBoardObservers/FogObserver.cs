@@ -102,7 +102,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         canBeReachedCached = null;
         
         var canPath = CanBeReached();
-        var levelAccess = storageItem.Amount >= level;
+        var levelAccess = RequiredLevelReached();
         
         if ((canPath ^ levelAccess) && lockView == null)
         {
@@ -161,10 +161,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
     public bool CanBeReached()
     {
-        if (canBeReachedCached.HasValue)
-        {
-            return canBeReachedCached.Value;
-        }
+        // todo: fix and enable cache. Now it initializing BEFORE all fogs are created and contains incorrect value
+        // if (canBeReachedCached.HasValue)
+        // {
+        //     return canBeReachedCached.Value;
+        // }
         
         canBeReachedCached = Context.Context.PathfindLocker.HasPath(Context);
         return canBeReachedCached.Value;
@@ -173,9 +174,14 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     public bool CanBeCleared()
     {
         var pathExists = CanBeReached();
-        var resourcesEnought = storageItem.Amount >= level;
+        var resourcesEnough = RequiredLevelReached();
 
-        return pathExists && resourcesEnought;
+        return pathExists && resourcesEnough;
+    }
+    
+    public bool RequiredLevelReached()
+    {
+        return storageItem.Amount >= level;
     }
 
     public bool IsActive
@@ -183,7 +189,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         get
         {
             var canPath = CanBeReached();
-            return canPath || storageItem.Amount >= level;
+            return canPath || RequiredLevelReached();
         }
     }
     

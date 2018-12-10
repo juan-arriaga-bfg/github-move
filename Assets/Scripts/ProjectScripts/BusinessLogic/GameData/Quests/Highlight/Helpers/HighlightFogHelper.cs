@@ -6,33 +6,14 @@ public static class HighlightFogHelper
     public static bool HighlightNextFog(float delay)
     {
         var fogManager = GameDataService.Current.FogsManager;
-        var fog = fogManager.GetRandomFogWithLeastPrice();
-        if (fog != null)
-        {
-            var fogObserver = fogManager.GetFogObserver(fog.GetCenter());
-            if (fogObserver == null)
-            {
-                Debug.LogError($"[HighlightTaskClearFog] => fog observer for fog with id {fog.Uid} not found!");
-                return false;
-            }
-
-            if (!fogObserver.CanBeCleared())
-            {
-                fog = null;
-            }
-        }
-
+        var fog = fogManager.GetNextRandomFog();
         if (fog == null)
         {
-            fog = fogManager.GetRandomFogWithLeastLevel();
-        }
-        
-        var fogUid = fog?.Uid;
-        if (string.IsNullOrEmpty(fogUid))
-        {
+            Debug.LogError($"[HighlightFogHelper] => HighlightNextFog: GetNextRandomFog returns null!");
             return false;
         }
 
+        var fogUid = fog.Uid;
         return HighlightByUid(fogUid, delay);
     }
     
@@ -42,7 +23,7 @@ public static class HighlightFogHelper
 
         if (fogPos == null)
         {
-            Debug.LogError($"[HighlightTaskClearFog] => fog with id {fogUid} not found!");
+            Debug.LogError($"[HighlightFogHelper] => fog with id {fogUid} not found!");
             return false;
         }
 
@@ -53,7 +34,7 @@ public static class HighlightFogHelper
 
         if (fogPiece == null)
         {
-            Debug.LogError($"[HighlightTaskClearFog] => fog with id {fogUid} not found at {pos}!");
+            Debug.LogError($"[HighlightFogHelper] => fog with id {fogUid} not found at {pos}!");
             return false;
         }
 
@@ -61,7 +42,7 @@ public static class HighlightFogHelper
         var views = viewDef.GetViews();
         if (views == null || views.Count == 0)
         {
-            Debug.LogError($"[HighlightTaskClearFog] => fog with id {fogUid} at {pos} have no views!");
+            Debug.LogError($"[HighlightFogHelper] => fog with id {fogUid} at {pos} have no views!");
             return false;
         }
 
@@ -96,7 +77,7 @@ public static class HighlightFogHelper
             return true;
         }
         
-        Debug.LogError($"[HighlightTaskClearFog] => fog with id {fogUid} at {pos} unknown view type: {view.GetType()}!");
+        Debug.LogError($"[HighlightFogHelper] => fog with id {fogUid} at {pos} unknown view type: {view.GetType()}!");
         return false;
     }
 }
