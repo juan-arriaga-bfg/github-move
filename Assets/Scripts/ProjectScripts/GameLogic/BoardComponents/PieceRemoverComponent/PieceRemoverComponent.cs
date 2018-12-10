@@ -166,23 +166,15 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
     {
         if (IsActive == false)
         {
-            var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
-            model.Image = "removerScene";
-            model.Title   = LocalizationService.Get("window.remove.hint.title",   "window.remove.hint.title");
-            model.Message = LocalizationService.Get("window.remove.hint.message", "window.remove.hint.message");
-            
-            model.VisibleComponents = UIMessageWindowModel.WindowComponents.Image 
-                                    | UIMessageWindowModel.WindowComponents.ImageAndMessageDelimiter 
-                                    | UIMessageWindowModel.WindowComponents.Message;
-            
-            UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+            UIMessageWindowController.CreatePrefabMessage(
+                LocalizationService.Get("window.remove.hint.title",   "window.remove.hint.title"),
+                UIMessageWindowModel.HintType.RemoverHint.ToString(),
+                LocalizationService.Get("window.remove.hint.message", "window.remove.hint.message"));
             
             return false;
         }
         
-        var isValid = IsValidPoint(boardPosition);
-
-        if (isValid)
+        if (IsValidPoint(boardPosition))
         {
             var pieceEntity = context.GetPieceAt(boardPosition);
             

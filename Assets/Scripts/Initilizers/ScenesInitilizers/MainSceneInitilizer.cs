@@ -34,8 +34,6 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.QuestStartWindow,
             UIWindowType.NextLevelWindow,
             UIWindowType.DailyQuestWindow,
-            UIWindowType.SuperMatchHintWindow,
-            UIWindowType.FireflyHintWindow,
             UIWindowType.ResourcePanelWindow,
         });
         

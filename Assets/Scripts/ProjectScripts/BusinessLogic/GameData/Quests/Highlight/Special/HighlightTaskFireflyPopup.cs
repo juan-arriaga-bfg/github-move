@@ -10,9 +10,10 @@ public class HighlightTaskFireflyPopup : ITaskHighlight
             Debug.LogError($"[HighlightTaskFireflyPopup] => Unsupported task type: {task.GetType()}");
             return false;
         }
-
-        var model = UIService.Get.GetCachedModel<UICodexWindowModel>(UIWindowType.FireflyHintWindow);
-        UIService.Get.ShowWindow(UIWindowType.FireflyHintWindow);
+        
+        UIMessageWindowController.CreatePrefabMessage(
+            LocalizationService.Get("highlight.task.firefly.window.title", "highlight.task.firefly.window.title"),
+            UIMessageWindowModel.HintType.FireflyHint.ToString());
 
         return true;
     }

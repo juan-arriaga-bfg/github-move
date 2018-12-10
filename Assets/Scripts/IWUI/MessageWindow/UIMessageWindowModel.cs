@@ -2,25 +2,18 @@ using System;
 
 public class UIMessageWindowModel : IWWindowModel
 {
-    [Flags]
-    public enum WindowComponents
-    {
-        Auto                       = 0,
-        Image                      = 2,
-        ImageAndMessageDelimiter   = 4,
-        Message                    = 8,
-        MessageAndButtonsDelimiter = 16,
-        Timer                      = 32,
-        ButtonAccept               = 64,
-        ButtonCancel               = 128,
-        ButtonBuy                  = 256
-    }
-    
     public enum ButtonColor
     {
         Red,
         Green,
         Blue
+    }
+    
+    public enum HintType
+    {
+        FireflyHint,
+        SuperMatchHint,
+        RemoverHint
     }
     
     public string Title { get; set; }
@@ -38,16 +31,35 @@ public class UIMessageWindowModel : IWWindowModel
     public ButtonColor CancelColor = ButtonColor.Red;
     
     public string Image { get; set; }
+    public string Prefab { get; set; }
+    
     public TimerComponent Timer { get; set; }
 
     public Action OnAccept { get; set; }
     public Action OnCancel { get; set; }
     public Action OnClose { get; set; }
-
-    public WindowComponents VisibleComponents;
-
-    public void ResetColor()
+    
+    public void Reset()
     {
+        Title = null;
+        Message = null;
+
+        AcceptLabel = null;
+        CancelLabel = null;
+        
+        Image = null;
+        Prefab = null;
+        
+        Timer = null;
+        
+        IsHardAccept = false;
+        IsBuy = false;
+        IsAcceptLeft = false;
+
+        OnAccept = null;
+        OnCancel = null;
+        OnClose = null;
+        
         AcceptColor = ButtonColor.Green;
         CancelColor = ButtonColor.Red;
     }
