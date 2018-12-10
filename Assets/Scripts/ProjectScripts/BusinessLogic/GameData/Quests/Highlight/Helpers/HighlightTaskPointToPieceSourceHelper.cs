@@ -4,17 +4,23 @@ using UnityEngine;
 
 public static class HighlightTaskPointToPieceSourceHelper
 {
-    public static bool PointToPieceSource(IHavePieceId pieceTask, PieceTypeFilter sourceFilter, PieceTypeFilter? excludeFilter = null)
-    {
+    // Match: A1, B1, C9, returns: A, B, C
+    private static readonly Regex pieceBranchRegexSimple  = new Regex(@"(^)[A-Z]*",      RegexOptions.IgnoreCase);
+    
+    // Match: PR_A1, CH2_B, returns: A, B
+    private static readonly Regex pieceBranchRegexComplex = new Regex(@"(?<=_)([A-Z])*", RegexOptions.IgnoreCase);
+    
+    public static bool PointToPieceSource(IHavePieceId pieceTask, PieceTypeFilter sourceFilter, PieceTypeFilter? excludeFilter = null, List<string> allowedSourceBranches = null)
+    {       
         // Branch of piece
         int pieceId = pieceTask.PieceId;
-        
-        Regex pieceBranchRegex = new Regex(@"([A-Z]*)?", RegexOptions.IgnoreCase);
         PieceTypeDef def = PieceType.GetDefById(pieceTask.PieceId);
         string pieceIdStr = def.Abbreviations[0];
-        string pieceBranch = pieceBranchRegex.Match(pieceIdStr).Value;
-        
-        Regex sourceBranchRegex = new Regex(@"(?<=_)[A-Z].*", RegexOptions.IgnoreCase);
+
+        Regex pieceRegex = pieceIdStr.Contains("_") ? pieceBranchRegexComplex : pieceBranchRegexSimple;
+        string pieceBranch = pieceRegex.Match(pieceIdStr).Value;
+
+        Regex sourceBranchRegex = pieceBranchRegexComplex;
         
         var board = BoardService.Current.FirstBoard;
         var boardLogic = board.BoardLogic;
@@ -36,14 +42,20 @@ public static class HighlightTaskPointToPieceSourceHelper
                 }
             }
             
+            string sourcePieceIdStr = sourceDef.Abbreviations[0];
+            string sourceBranch = sourceBranchRegex.Match(sourcePieceIdStr).Value;
+
+            if (allowedSourceBranches != null && !allowedSourceBranches.Contains(sourceBranch))
+            {
+                sourcePositions.RemoveAt(i);
+                continue;
+            }
+
             if (pieceId == PieceType.Empty.Id || pieceId == PieceType.None.Id)
             {
                 continue;
             }
-            
-            string sourcePieceIdStr = sourceDef.Abbreviations[0];
-            string sourceBranch = sourceBranchRegex.Match(sourcePieceIdStr).Value;
-            
+
             if (pieceBranch != sourceBranch)
             {
                 sourcePositions.RemoveAt(i);

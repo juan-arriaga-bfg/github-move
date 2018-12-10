@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [TaskHighlight(typeof(HighlightTaskMatch))]
-[TaskHighlight(typeof(HighlightTaskFindObstacleForPieceType))]
+[TaskHighlight(typeof(HighlightTaskPointToRandomBranchATree))]
 [TaskHighlight(typeof(HighlightTaskFirstMineOfAnyType))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskMatchEntity : TaskCounterAboutPiece, IBoardEventListener

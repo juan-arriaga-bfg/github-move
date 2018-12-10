@@ -2,7 +2,7 @@
 [TaskHighlight(typeof(HighlightTaskFindProductionFieldForPieceType))]
 [TaskHighlight(typeof(HighlightTaskPointToPredecessor))]
 [TaskHighlight(typeof(HighlightTaskPointToRandomChest))]
-[TaskHighlight(typeof(HighlightTaskFindObstacleForPieceType))]
+[TaskHighlight(typeof(HighlightTaskPointToRandomBranchATree))]
 [TaskHighlight(typeof(HighlightTaskFirstMineOfAnyType))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
 public class TaskCollectIngredientEntity : TaskCurrencyCollectEntity
