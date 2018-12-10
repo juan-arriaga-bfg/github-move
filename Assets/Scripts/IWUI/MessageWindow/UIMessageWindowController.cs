@@ -24,7 +24,6 @@ public class UIMessageWindowController : IWWindowController {
         model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
         
         model.OnAccept = () => {};
-        model.OnCancel = null;
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
@@ -38,7 +37,6 @@ public class UIMessageWindowController : IWWindowController {
         model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
         
         model.OnAccept = OnAccept ?? (() => {});
-        model.OnCancel = null;
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
@@ -50,7 +48,7 @@ public class UIMessageWindowController : IWWindowController {
         model.Title = title;
         model.Message = message;
         model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
-        model.isHardAccept = isHardAccept;
+        model.IsHardAccept = isHardAccept;
         
         model.OnAccept = OnAccept ?? (() => {});
         model.OnCancel = OnCancel;
@@ -58,32 +56,16 @@ public class UIMessageWindowController : IWWindowController {
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
 
-    public static void CreateImageMessage(string title, string image, Action onAccept)
+    public static void CreatePrefabMessage(string title, string prefab, string message = null)
     {
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
         model.Title = title;
-        model.Message = null;
-        model.Image = image;
-        model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
-        
-        model.OnAccept = onAccept;
-        model.OnCancel = null;
-        
-        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
-    }
-    
-    public static void CreateNeedCoinsMessage()
-    {
-        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
-        
-        model.Title = string.Format(LocalizationService.Get("common.message.need", "common.message.need {0}?"), Currency.Coins.Name.ToLower());
-        model.Message = null;
-        model.Image = "tutorial_TextBlock_1";
+        model.Message = message;
+        model.Prefab = prefab;
         model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
         
         model.OnAccept = () => {};
-        model.OnCancel = null;
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
@@ -97,7 +79,6 @@ public class UIMessageWindowController : IWWindowController {
         model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
         
         model.OnAccept = () => {};
-        model.OnCancel = null;
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
@@ -111,7 +92,7 @@ public class UIMessageWindowController : IWWindowController {
         model.Title = LocalizationService.Get("window.timerComplete.title", "window.timerComplete.title");
         model.Message = message;
         model.AcceptLabel = "";
-        model.isBuy = true;
+        model.IsBuy = true;
         
         model.OnAccept = timer.FastComplete;
         model.OnCancel = null;

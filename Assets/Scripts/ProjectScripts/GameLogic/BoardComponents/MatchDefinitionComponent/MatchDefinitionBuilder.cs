@@ -191,7 +191,8 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.PR_A1.Id, new PieceMatchDef {Next = PieceType.PR_A2.Id, Previous = PieceType.None.Id, Amount = 3});
         dict.Add(PieceType.PR_A2.Id, new PieceMatchDef {Next = PieceType.PR_A3.Id, Previous = PieceType.PR_A1.Id, Amount = 3});
         dict.Add(PieceType.PR_A3.Id, new PieceMatchDef {Next = PieceType.PR_A4.Id, Previous = PieceType.PR_A2.Id, Amount = 3});
-        dict.Add(PieceType.PR_A4.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.PR_A3.Id});
+        dict.Add(PieceType.PR_A4.Id, new PieceMatchDef {Next = PieceType.PR_A5.Id, Previous = PieceType.PR_A3.Id, Amount = -1});
+        dict.Add(PieceType.PR_A5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.PR_A4.Id});
         
         #endregion
         
@@ -200,7 +201,8 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.PR_B1.Id, new PieceMatchDef {Next = PieceType.PR_B2.Id, Previous = PieceType.None.Id, Amount = 3});
         dict.Add(PieceType.PR_B2.Id, new PieceMatchDef {Next = PieceType.PR_B3.Id, Previous = PieceType.PR_B1.Id, Amount = 3});
         dict.Add(PieceType.PR_B3.Id, new PieceMatchDef {Next = PieceType.PR_B4.Id, Previous = PieceType.PR_B2.Id, Amount = 3});
-        dict.Add(PieceType.PR_B4.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.PR_B3.Id});
+        dict.Add(PieceType.PR_B4.Id, new PieceMatchDef {Next = PieceType.PR_B5.Id, Previous = PieceType.PR_B3.Id, Amount = -1});
+        dict.Add(PieceType.PR_B5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.PR_B4.Id});
         
         #endregion
         
@@ -209,7 +211,8 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.PR_C1.Id, new PieceMatchDef {Next = PieceType.PR_C2.Id, Previous = PieceType.None.Id, Amount = 3});
         dict.Add(PieceType.PR_C2.Id, new PieceMatchDef {Next = PieceType.PR_C3.Id, Previous = PieceType.PR_C1.Id, Amount = 3});
         dict.Add(PieceType.PR_C3.Id, new PieceMatchDef {Next = PieceType.PR_C4.Id, Previous = PieceType.PR_C2.Id, Amount = 3});
-        dict.Add(PieceType.PR_C4.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.PR_C3.Id});
+        dict.Add(PieceType.PR_C4.Id, new PieceMatchDef {Next = PieceType.PR_C5.Id, Previous = PieceType.PR_C3.Id, Amount = -1});
+        dict.Add(PieceType.PR_C5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.PR_C4.Id});
         
         #endregion
         
@@ -218,7 +221,8 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.PR_D1.Id, new PieceMatchDef {Next = PieceType.PR_D2.Id, Previous = PieceType.None.Id, Amount = 3});
         dict.Add(PieceType.PR_D2.Id, new PieceMatchDef {Next = PieceType.PR_D3.Id, Previous = PieceType.PR_D1.Id, Amount = 3});
         dict.Add(PieceType.PR_D3.Id, new PieceMatchDef {Next = PieceType.PR_D4.Id, Previous = PieceType.PR_D2.Id, Amount = 3});
-        dict.Add(PieceType.PR_D4.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.PR_D3.Id});
+        dict.Add(PieceType.PR_D4.Id, new PieceMatchDef {Next = PieceType.PR_D5.Id, Previous = PieceType.PR_D3.Id, Amount = -1});
+        dict.Add(PieceType.PR_D5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.PR_D4.Id});
         
         #endregion
         
@@ -227,7 +231,8 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.PR_E1.Id, new PieceMatchDef {Next = PieceType.PR_E2.Id, Previous = PieceType.None.Id, Amount = 3});
         dict.Add(PieceType.PR_E2.Id, new PieceMatchDef {Next = PieceType.PR_E3.Id, Previous = PieceType.PR_E1.Id, Amount = 3});
         dict.Add(PieceType.PR_E3.Id, new PieceMatchDef {Next = PieceType.PR_E4.Id, Previous = PieceType.PR_E2.Id, Amount = 3});
-        dict.Add(PieceType.PR_E4.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.PR_E3.Id});
+        dict.Add(PieceType.PR_E4.Id, new PieceMatchDef {Next = PieceType.PR_E5.Id, Previous = PieceType.PR_E3.Id, Amount = -1});
+        dict.Add(PieceType.PR_E5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.PR_E4.Id});
         
         #endregion
         

@@ -11,17 +11,42 @@ public class UIMessageWindowView : UIGenericPopupWindowView
     [IWUIBinding("#TimerLabel")] protected NSText timerLabel;
     
     [IWUIBinding("#Image")] protected Image image;
+    [IWUIBinding("#Anchor")] protected Transform anchor;
     
     [IWUIBinding("#Buttons")] protected GameObject buttonsPanel;
-    [IWUIBinding("#ButtonAccept")] protected GameObject btnAccept;
-    [IWUIBinding("#ButtonBuy")] protected GameObject btnBuy;
-    [IWUIBinding("#ButtonCancel")] protected GameObject btnCancel;
-
+    
+    [IWUIBinding("#ButtonAccept")] protected UIButtonViewController btnAccept;
+    [IWUIBinding("#ButtonCancel")] protected UIButtonViewController btnCancel;
+    [IWUIBinding("#ButtonBuy")] protected UIButtonViewController btnBuy;
+    
+    [IWUIBinding("#ButtonAcceptBack")] protected Image btnAcceptBack;
+    [IWUIBinding("#ButtonCancelBack")] protected Image btnCancelBack;
+    
     [IWUIBinding("#DelimiterImageAndText")] protected GameObject delimiterImageAndText;
     [IWUIBinding("#DelimiterTextAndButtons")] protected GameObject delimiterTextAndButtons;
+    [IWUIBinding("#DelimiterTimerAndButtons")] protected GameObject delimiterTimerAndButtons;
     
     private bool isAccept;
     private bool isCancel;
+
+    private Transform hint;
+    
+    public override void InitView(IWWindowModel model, IWWindowController controller)
+    {
+        base.InitView(model, controller);
+
+        btnAccept.Init()
+            .ToState(GenericButtonState.Active)
+            .OnClick(OnClickAccept);
+        
+        btnCancel.Init()
+            .ToState(GenericButtonState.Active)
+            .OnClick(OnClickCancel);
+        
+        btnBuy.Init()
+            .ToState(GenericButtonState.Active)
+            .OnClick(OnClickAccept);
+    }
     
     public override void OnViewShow()
     {
@@ -30,11 +55,17 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIMessageWindowModel;
         
         image.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Image));
-        message.gameObject.SetActive(string.IsNullOrEmpty(windowModel.Image));
+        messageLabel.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Message));
         
         if (!string.IsNullOrEmpty(windowModel.Image))
         {
             image.sprite = IconService.Current.GetSpriteById(windowModel.Image);
+        }
+
+        if (!string.IsNullOrEmpty(windowModel.Prefab))
+        {
+            hint = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(windowModel.Prefab));
+            hint.SetParentAndReset(anchor);
         }
         
         isAccept = false;
@@ -43,17 +74,24 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
         
+        btnAcceptBack.sprite = IconService.Current.GetSpriteById($"button{windowModel.AcceptColor}");
+        btnCancelBack.sprite = IconService.Current.GetSpriteById($"button{windowModel.CancelColor}");
+        
         buttonAcceptLabel.Text = buttonBuyLabel.Text = windowModel.AcceptLabel;
         buttonCancelLabel.Text = windowModel.CancelLabel;
         
-        btnAccept.SetActive(windowModel.isBuy == false && windowModel.OnAccept != null);
-        btnBuy.SetActive(windowModel.isBuy && windowModel.OnAccept != null);
-        btnCancel.SetActive(windowModel.OnCancel != null);
-        timer.SetActive(windowModel.Timer != null);
-
-        buttonsPanel.SetActive(btnAccept.activeSelf || btnBuy.activeSelf || btnCancel.activeSelf);
+        btnCancel.CachedTransform.SetSiblingIndex(windowModel.IsAcceptLeft ? 2 : 0);
         
-        ToggleVisibleComponents(windowModel.VisibleComponents);
+        btnAccept.gameObject.SetActive(windowModel.IsBuy == false && windowModel.OnAccept != null);
+        btnBuy.gameObject.SetActive(windowModel.IsBuy && windowModel.OnAccept != null);
+        btnCancel.gameObject.SetActive(windowModel.OnCancel != null);
+        timer.SetActive(windowModel.Timer != null);
+        
+        delimiterImageAndText.SetActive(!string.IsNullOrEmpty(windowModel.Image) && !string.IsNullOrEmpty(windowModel.Message));
+        delimiterTextAndButtons.SetActive(true);
+        delimiterTimerAndButtons.SetActive(windowModel.Timer != null);
+
+        buttonsPanel.SetActive(btnAccept.gameObject.activeSelf || btnBuy.gameObject.activeSelf || btnCancel.gameObject.activeSelf);
         
         if (windowModel.Timer == null) return;
         
@@ -67,31 +105,38 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         
         var windowModel = Model as UIMessageWindowModel;
 
-        windowModel.Image = null;
+        if (hint != null)
+        {
+            UIService.Get.PoolContainer.Return(hint.gameObject);
+            hint = null;
+        }
         
         if(windowModel.Timer != null)
         {
             windowModel.Timer.OnExecute -= UpdateTimer;
             windowModel.Timer.OnComplete -= CompleteTimer;
-            windowModel.Timer = null;
         }
         
-        if (isAccept || windowModel.isHardAccept) windowModel.OnAccept?.Invoke();
+        if (isAccept || windowModel.IsHardAccept) windowModel.OnAccept?.Invoke();
         if (isCancel) windowModel.OnCancel?.Invoke();
-
-        windowModel.isHardAccept = false;
-        windowModel.isBuy = false;
-
-        windowModel.VisibleComponents = UIMessageWindowModel.WindowComponents.Auto;
+        
+        if (isAccept == false && isCancel == false && windowModel.IsHardAccept == false)
+        {
+            windowModel.OnClose?.Invoke();
+        }
+        
+        windowModel.Reset();
     }
 
-    public void OnClickAccept()
+    private void OnClickAccept()
     {
+        Controller.CloseCurrentWindow();
         isAccept = true;
     }
     
-    public void OnClickCancel()
+    private void OnClickCancel()
     {
+        Controller.CloseCurrentWindow();
         isCancel = true;
     }
 
@@ -107,26 +152,5 @@ public class UIMessageWindowView : UIGenericPopupWindowView
     private void CompleteTimer()
     {
         Controller.CloseCurrentWindow();
-    }
-
-    private void ToggleVisibleComponents(UIMessageWindowModel.WindowComponents visibleComponents)
-    {
-        if (visibleComponents == UIMessageWindowModel.WindowComponents.Auto)
-        {
-            return;
-        }
-        
-        image                   .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.Image));
-        message                 .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.Message));
-        btnAccept               .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.ButtonAccept));
-        btnBuy                  .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.ButtonBuy));
-        btnCancel               .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.ButtonCancel));
-        timer                   .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.Timer));
-        delimiterImageAndText   .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.ImageAndMessageDelimiter));
-        delimiterTextAndButtons .gameObject.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.MessageAndButtonsDelimiter));
-        
-        buttonsPanel.SetActive(visibleComponents.Has(UIMessageWindowModel.WindowComponents.ButtonAccept) 
-                            || visibleComponents.Has(UIMessageWindowModel.WindowComponents.ButtonBuy) 
-                            || visibleComponents.Has(UIMessageWindowModel.WindowComponents.ButtonCancel));
     }
 }

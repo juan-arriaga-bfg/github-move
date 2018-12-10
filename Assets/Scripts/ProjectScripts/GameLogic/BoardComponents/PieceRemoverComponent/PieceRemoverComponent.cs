@@ -179,39 +179,36 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
     {
         if (IsActive == false)
         {
-            var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
-            model.Image = "removerScene";
-            model.Title   = LocalizationService.Get("window.remove.hint.title",   "window.remove.hint.title");
-            model.Message = LocalizationService.Get("window.remove.hint.message", "window.remove.hint.message");
-            
-            model.VisibleComponents = UIMessageWindowModel.WindowComponents.Image 
-                                    | UIMessageWindowModel.WindowComponents.ImageAndMessageDelimiter 
-                                    | UIMessageWindowModel.WindowComponents.Message;
-            
-            UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+            UIMessageWindowController.CreatePrefabMessage(
+                LocalizationService.Get("window.remove.hint.title",   "window.remove.hint.title"),
+                UIMessageWindowModel.HintType.RemoverHint.ToString(),
+                LocalizationService.Get("window.remove.hint.message", "window.remove.hint.message"));
             
             return false;
         }
         
-        var isValid = IsValidPoint(boardPosition);
-
-        if (isValid)
+        if (IsValidPoint(boardPosition))
         {
             var pieceEntity = context.GetPieceAt(boardPosition);
-
-            var model = UIService.Get.GetCachedModel<UIConfirmRemoverMessageWindowModel>(UIWindowType.ConfirmRemoverMessageWindow);
+            
+            var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
 
             model.Image = PieceType.Parse(pieceEntity.PieceType);
             model.Title = LocalizationService.Get("window.remove.title", "window.remove.title");
             model.Message = LocalizationService.Get("window.remove.message", "window.remove.message");
-            model.CancelLabel = LocalizationService.Get("common.button.yes", "common.button.yes");
-            model.AcceptLabel = LocalizationService.Get("common.button.no", "common.button.no");
+            model.AcceptLabel = LocalizationService.Get("common.button.yes", "common.button.yes");
+            model.CancelLabel = LocalizationService.Get("common.button.no", "common.button.no");
+            
+            model.OnAccept = () => { Confirm(boardPosition); };
+            model.OnCancel = EndRemover;
+            model.OnClose = EndRemover;
 
-            model.OnAccept = EndRemover;
+            model.AcceptColor = UIMessageWindowModel.ButtonColor.Red;
+            model.CancelColor = UIMessageWindowModel.ButtonColor.Green;
 
-            model.OnCancel = () => { Confirm(boardPosition); };
-
-            UIService.Get.ShowWindow(UIWindowType.ConfirmRemoverMessageWindow);
+            model.IsAcceptLeft = true;
+            
+            UIService.Get.ShowWindow(UIWindowType.MessageWindow);
             return true;
         }
 
@@ -233,10 +230,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
             CollapsePieceAt(position);
         });
         sequence.AppendInterval(4f);
-        sequence.OnComplete(() =>
-        {
-            EndRemover();
-        });
+        sequence.OnComplete(EndRemover);
     }
 
     public bool IsExecuteable()

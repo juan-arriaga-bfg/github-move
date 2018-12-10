@@ -11,9 +11,10 @@ public class HighlightTaskSuperMatch : ITaskHighlight
             return false;
         }
 
-        var model = UIService.Get.GetCachedModel<UICodexWindowModel>(UIWindowType.SuperMatchHintWindow);
-        UIService.Get.ShowWindow(UIWindowType.SuperMatchHintWindow);
-
+        UIMessageWindowController.CreatePrefabMessage(
+            LocalizationService.Get("highlight.task.supermatch.window.title", "highlight.task.supermatch.window.title"),
+            UIMessageWindowModel.HintType.SuperMatchHint.ToString());
+        
         return true;
     }
 }
