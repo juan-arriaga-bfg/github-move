@@ -628,7 +628,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 7
-  m_Spacing: 100
+  m_Spacing: 120
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -751,6 +751,7 @@ MonoBehaviour:
   checkmark: {fileID: 0}
   rootCanvasGroup: {fileID: 0}
   arrow: {fileID: 0}
+  button: {fileID: 0}
 --- !u!114 &114286560233392308
 MonoBehaviour:
   m_ObjectHideFlags: 1

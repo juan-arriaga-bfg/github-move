@@ -9,7 +9,6 @@ public class UINextLevelWindowView : UIGenericWindowView
     [SerializeField] private NSText rewards;
     [SerializeField] private NSText header;
     
-    [SerializeField] private GameObject cardPrefab;
     [SerializeField] private GameObject headerObj;
     [SerializeField] private CanvasGroup headerCanvas;
     
@@ -17,7 +16,7 @@ public class UINextLevelWindowView : UIGenericWindowView
     
     private int tapAnimationId = Animator.StringToHash("Tap");
     
-    private readonly List<UIRecipeCard> cards = new List<UIRecipeCard>();
+    [IWUIBinding("#Content")] private UIContainerViewController content;
     
     private TapToContinueTextViewController tapToContinue;
     
@@ -36,12 +35,13 @@ public class UINextLevelWindowView : UIGenericWindowView
         header.Text = windowModel.Header;
         
         headerObj.SetActive(false);
-        cardPrefab.SetActive(false);
         
         tapCount = 0;
         headerCanvas.alpha = 0;
 
         isClick = true;
+        
+        Fill(null, content);
     }
     
     public override void AnimateShow()
@@ -110,19 +110,25 @@ public class UINextLevelWindowView : UIGenericWindowView
     {
         var windowModel = Model as UINextLevelWindowModel;
         var recipes = windowModel.Recipes;
-
+        var views = new List<IUIContainerElementEntity>(recipes.Count);
+        
         for (var i = 0; i < recipes.Count; i++)
         {
-            var recipe = recipes[i];
-            var card = UIService.Get.PoolContainer.Create<UIRecipeCard>(cardPrefab);
+            var def = recipes[i];
             
-            card.gameObject.SetActive(true);
-            card.transform.SetParent(cardPrefab.transform.parent, false);
-            card.CachedTransform.SetAsLastSibling();
-            card.Init(recipe.Uid, LocalizationService.Get($"order.name.{recipe.Uid}", $"order.name.{recipe.Uid}"));
-            card.AddAnimation(0.6f + 0.1f*i);
-            cards.Add(card);
+            var entity = new UINextLevelElementEntity
+            {
+                ContentId = def.Uid,
+                LabelText = LocalizationService.Get($"order.name.{def.Uid}", $"order.name.{def.Uid}"),
+                Delay = 0.6f + 0.1f*i,
+                OnSelectEvent = null,
+                OnDeselectEvent = null
+            };
+            
+            views.Add(entity);
         }
+        
+        Fill(views, content);
         
         DOTween.Sequence()
             .InsertCallback(0.6f, () => headerObj.SetActive(true))
@@ -157,14 +163,6 @@ public class UINextLevelWindowView : UIGenericWindowView
                 break;
             case 1:
                 Controller.CloseCurrentWindow();
-                
-                foreach (var card in cards)
-                {
-                    card.RemoveAnimation(0, () => UIService.Get.PoolContainer.Return(card.gameObject));
-                }
-        
-                cards.Clear();
-
                 headerCanvas.DOFade(0, 0.2f).OnComplete(() => headerObj.SetActive(false));
                 break;
             default:
