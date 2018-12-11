@@ -12,7 +12,6 @@ public class UIQuestWindowView : UIGenericPopupWindowView
     [SerializeField] private NSText buttonLabel;
     
     [SerializeField] private CodexChain chain;
-    [SerializeField] private GameObject codexItemPrefab;
     [SerializeField] private Transform anchor;
 
     private bool isComplete;
@@ -148,6 +147,6 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         chain.gameObject.SetActive(true); 
         
         CodexChainDef chainDef = new CodexChainDef {ItemDefs = itemDefs};
-        UICodexWindowView.CreateItems(chain, chainDef, codexItemPrefab, CHAIN_LENGTH);
+        UICodexWindowView.CreateItems(chain, chainDef, CHAIN_LENGTH);
     }
 }
