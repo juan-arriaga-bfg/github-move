@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class DailyQuestWindowTaskButton : IWUIWindowViewController
 {
-    [IWUIBinding("#TaskButton", true)] private Image image;
-    [IWUIBinding("#TaskButton", true)] private Button button;
+    [IWUIBinding] private Image image;
+    [IWUIBinding] private Button button;
     [IWUIBinding("#TaskButtonLabel")] private NSText label;
 
     public void Init(TaskEntity task)
