@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CodexItem : MonoBehaviour
+public class CodexItem : IWUIWindowViewController
 {
     [Header("Materials")] 
     [SerializeField] private Material unlokedMaterial;
@@ -11,26 +11,24 @@ public class CodexItem : MonoBehaviour
     [SerializeField] private Color unlockedColor;
     [SerializeField] private Color lockedColor;
     
-    [Header("References")]
-    [SerializeField] private Transform pieceHost;
-    [SerializeField] private TextMeshProUGUI caption;
-    [SerializeField] private GameObject questionMark;
-    [SerializeField] private GameObject arrow;
-    [SerializeField] private GameObject shine;
-    [SerializeField] private CodexItemDropPanel dropPanel;
-    [SerializeField] private GameObject exclamationMark;
-    
-    [Header("Image")]
-    [SerializeField] private Image pieceImage;
+    [Header("Image params")]
     [SerializeField] private Vector3 defaultScale;
     [SerializeField] private Vector3 rewardScale;
     [SerializeField] private Vector2 maxSize;
+
+    [IWUIBinding("#Caption")] private TextMeshProUGUI caption;
+    [IWUIBinding("#(?)")]     private GameObject questionMark;
+    [IWUIBinding("#Arrow")]   private GameObject arrow;
+    [IWUIBinding("#Shine")]   private GameObject shine;
+    [IWUIBinding("#Basket")]  private GameObject basket;
+    [IWUIBinding("#Hand")]    private GameObject hand;
+    [IWUIBinding("#Piece")]   private Image pieceImage;
     
     private CodexItemState state;
 
     private CodexItemDef def;
     
-    public void Init(CodexItemDef itemDef, bool forceHideArrow)
+    public void UpdateUI(CodexItemDef itemDef, bool forceHideArrow)
     {
         def = itemDef;
         state = itemDef.State;
@@ -64,10 +62,6 @@ public class CodexItem : MonoBehaviour
                 sprite = GetPieecSprite();
                 // captionText = GetCaption();
                 shine.SetActive(true);
-                exclamationMark.SetActive(true);
-                
-                dropPanel.gameObject.SetActive(true);
-                dropPanel.Init(itemDef);
 
                 pieceImage.transform.localScale = rewardScale;
                 
@@ -76,9 +70,7 @@ public class CodexItem : MonoBehaviour
             case CodexItemState.Unlocked:
                 sprite = GetPieecSprite();
                 // captionText = GetCaption();
-                
-                dropPanel.gameObject.SetActive(true);
-                dropPanel.Init(itemDef);
+
                 break;
             
             case CodexItemState.Highlighted:
@@ -109,13 +101,10 @@ public class CodexItem : MonoBehaviour
     {
         questionMark.SetActive(false);
         shine.SetActive(false);
-        exclamationMark.SetActive(false);
 
         pieceImage.gameObject.SetActive(true);
         pieceImage.material = unlokedMaterial;
         pieceImage.color = unlockedColor;
-        
-        dropPanel.gameObject.SetActive(false);
 
         pieceImage.transform.localScale = defaultScale;
     }
