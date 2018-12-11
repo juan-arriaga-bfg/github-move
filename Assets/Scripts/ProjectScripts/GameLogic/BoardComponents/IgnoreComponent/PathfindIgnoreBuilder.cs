@@ -12,7 +12,8 @@ public static class PathfindIgnoreBuilder
       var obstacles = PieceType.GetIdsByFilter(PieceTypeFilter.Obstacle);
       foreach (var obst in obstacles)
       {
-         hashSet.Add(obst);
+         if(PieceType.GetDefById(obst).Filter.HasFlag(PieceTypeFilter.ProductionField) == false)
+            hashSet.Add(obst);
       }
 
       var ignorable = GetReverseSet(hashSet);
