@@ -114,23 +114,9 @@ MonoBehaviour:
     fontSize: -1
     spriteAsset: {fileID: 0}
   - id: 16
-    nameId: titleAndButtonRedFinal
+    nameId: titleFinal
     fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: b10d6610a1443fc40ab3144b29b84135, type: 2}
-    mainColor: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: -1
-    spriteAsset: {fileID: 0}
-  - id: 17
-    nameId: buttonBlueFinal
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-    materialPreset: {fileID: 2100000, guid: 71e0885171413da41b706a5d0f02e97c, type: 2}
-    mainColor: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: -1
-    spriteAsset: {fileID: 0}
-  - id: 18
-    nameId: buttonGreenFinal
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-    materialPreset: {fileID: 2100000, guid: 72d5aeea421b27144989a9b9a1640a48, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
     spriteAsset: {fileID: 0}
@@ -145,6 +131,13 @@ MonoBehaviour:
     nameId: subtitleGreenFinal
     fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: f095ddeccef07d443b274cdcfde41372, type: 2}
+    mainColor: {r: 1, g: 1, b: 1, a: 1}
+    fontSize: -1
+    spriteAsset: {fileID: 0}
+  - id: 21
+    nameId: buttonFinal
+    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
+    materialPreset: {fileID: 2100000, guid: 949951b827e5510489fe1fd80528a77c, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
     spriteAsset: {fileID: 0}
