@@ -29,8 +29,8 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         SetTitle(model.Title);
 
         SetSequenceHeader(model);
-        
-        CreateTaskList(model);
+
+        Fill(CreateTaskList(model), taskList);
         
         model.Timer.OnExecute += OnTimerUpdate;
        
@@ -64,7 +64,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
     {
         UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
 
-        sequenceView.Init();
+        sequenceView.OnViewInit(this);
         
         TaskCompleteDailyTaskEntity clearAllTask = model.Quest.GetTask<TaskCompleteDailyTaskEntity>();
         
@@ -140,7 +140,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         }
     }
     
-    private void CreateTaskList(UIDailyQuestWindowModel model)
+    private List<IUIContainerElementEntity> CreateTaskList(UIDailyQuestWindowModel model)
     {
         var tasks = model.Tasks;
 
@@ -148,8 +148,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         
         if (tasks == null || tasks.Count <= 0)
         {
-            taskList.Clear();
-            return;
+            return null;
         }
 
         var tabViews = new List<IUIContainerElementEntity>(tasks.Count);
@@ -157,11 +156,6 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         {
             var task = tasks[i];
 
-            // if (task.IsClaimed())
-            // {
-            //     continue;
-            // }
-            
             var tabEntity = new UIDailyQuestTaskElementEntity
             {
                 Quest = model.Quest,
@@ -172,9 +166,8 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
             };
             tabViews.Add(tabEntity);
         }
-        
-        taskList.Create(tabViews);
-        taskList.Select(0);
+
+        return tabViews;
     }
 
     private void SortTasks(List<TaskEntity> tasks)

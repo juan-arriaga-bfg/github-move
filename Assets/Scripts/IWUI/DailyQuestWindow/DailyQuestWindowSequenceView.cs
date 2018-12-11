@@ -2,18 +2,20 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DailyQuestWindowSequenceView : IWBaseMonoBehaviour
+public class DailyQuestWindowSequenceView : IWUIWindowViewController
 {
     public const int ITEMS_COUNT = 5;
 
-    [SerializeField] private GameObject rewardItemPrefab;
-    [SerializeField] private GameObject lineItemPrefab;
+    [IWUIBinding("#RewardItem")] private GameObject rewardItemPrefab;
+    [IWUIBinding("#LineItem")] private GameObject lineItemPrefab;
 
     private List<DailyQuestWindowRewardItemView> rewardItems;
     private List<DailyQuestWindowLineItemView> lineItems;
 
-    public void Init()
+    public override void OnViewInit(IWUIWindowView context)
     {
+        base.OnViewInit(context);
+        
         if (rewardItems != null)
         {
             return;
@@ -40,7 +42,7 @@ public class DailyQuestWindowSequenceView : IWBaseMonoBehaviour
         rewardItemPrefab.SetActive(false);
         lineItemPrefab.SetActive(false); 
     }
-    
+
     public void SetValues(List<CurrencyPair> reward, int activeIndex)
     {
         if (reward.Count != ITEMS_COUNT)
@@ -69,9 +71,11 @@ public class DailyQuestWindowSequenceView : IWBaseMonoBehaviour
                 state = DailyQuestWindowLineItemView.State.Empty;
             }
             
-            rewardItems[i].Init(reward[i], state == DailyQuestWindowLineItemView.State.Empty || state == DailyQuestWindowLineItemView.State.Fill);
+            rewardItems[i].OnViewInit(context);
+            rewardItems[i].UpdateUi(reward[i], state == DailyQuestWindowLineItemView.State.Empty || state == DailyQuestWindowLineItemView.State.Fill);
             
-            lineItems[i].Init(state);
+            lineItems[i].OnViewInit(context);
+            lineItems[i].UpdateUi(state);
         }
     }
 }

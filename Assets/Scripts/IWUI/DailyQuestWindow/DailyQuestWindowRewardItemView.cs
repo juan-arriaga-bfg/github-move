@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DailyQuestWindowRewardItemView : IWBaseMonoBehaviour
+public class DailyQuestWindowRewardItemView : IWUIWindowViewController
 {
-    [SerializeField] private NSText lblCount;
-    [SerializeField] private Image image;
+    [IWUIBinding("#RewardCount")] private NSText lblCount;
+    [IWUIBinding("#RewardIco")] private Image image;
+    
     [SerializeField] private Material disabledMaterial;
 
-    public void Init(CurrencyPair reward, bool enabled)
+    public void UpdateUi(CurrencyPair reward, bool enabled)
     {
         lblCount.Text = reward.Amount > 1 && enabled ? "x" + reward.Amount : string.Empty;
         image.sprite = reward.GetIcon();

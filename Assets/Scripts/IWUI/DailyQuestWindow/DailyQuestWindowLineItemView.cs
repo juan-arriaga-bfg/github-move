@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DailyQuestWindowLineItemView : IWBaseMonoBehaviour
+public class DailyQuestWindowLineItemView : IWUIWindowViewController
 {
     public enum State
     {
@@ -10,12 +10,14 @@ public class DailyQuestWindowLineItemView : IWBaseMonoBehaviour
         Fill
     }
     
-    [SerializeField] private GameObject empty;
-    [SerializeField] private GameObject check;
-    [SerializeField] private GameObject fill;
-    
-    public void Init(State state)
+    [IWUIBinding("#LineItemEmpty")] private GameObject empty;
+    [IWUIBinding("#LineItemCheck")] private GameObject check;
+    [IWUIBinding("#LineItemFill")] private GameObject fill;
+
+    public void UpdateUi(State state)
     {
+        CacheResources();
+        
         empty.SetActive(state == State.Empty); 
         check.SetActive(state == State.Check); 
         fill.SetActive(state == State.Fill); 

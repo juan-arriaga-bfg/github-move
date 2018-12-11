@@ -2,21 +2,20 @@ using Quests;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DailyQuestWindowTaskButton : IWBaseMonoBehaviour
+public class DailyQuestWindowTaskButton : IWUIWindowViewController
 {
-    [SerializeField] private Image image;
-    [SerializeField] private Button button;
-    [SerializeField] private NSText label;
-    
-    [SerializeField] private Sprite find;
-    [SerializeField] private Sprite claim;
+    [IWUIBinding("#TaskButton", true)] private Image image;
+    [IWUIBinding("#TaskButton", true)] private Button button;
+    [IWUIBinding("#TaskButtonLabel")] private NSText label;
 
     public void Init(TaskEntity task)
     {
         button.interactable = !task.IsClaimed();
         label.Text = GetTextForButton(task);
-
-        image.sprite = task.IsCompleted() ? claim : find;
+                                                                                  
+        image.sprite = task.IsCompleted() 
+            ? IconService.Current.GetSpriteById("buttonGreen") // claim        
+            : IconService.Current.GetSpriteById("buttonGreen");// find
         
         gameObject.SetActive(task.State != TaskState.Claimed);
     }

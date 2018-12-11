@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 222874169774375936}
   - component: {fileID: 114763069400390586}
   m_Layer: 31
-  m_Name: Empty
+  m_Name: '#LineItemEmpty'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 222811746007143634}
   - component: {fileID: 114598944967114074}
   m_Layer: 31
-  m_Name: Check
+  m_Name: '#LineItemCheck'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 222128440339354616}
   - component: {fileID: 114680640471512364}
   m_Layer: 31
-  m_Name: Fill
+  m_Name: '#LineItemFill'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -870,7 +870,7 @@ GameObject:
   - component: {fileID: 222249817046719318}
   - component: {fileID: 114222189857415772}
   m_Layer: 31
-  m_Name: Ico
+  m_Name: '#RewardIco'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -904,7 +904,7 @@ GameObject:
   - component: {fileID: 224444752651637342}
   - component: {fileID: 114150979814672500}
   m_Layer: 31
-  m_Name: RewardItem
+  m_Name: '#RewardItem'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1004,7 +1004,7 @@ GameObject:
   - component: {fileID: 224510967676915392}
   - component: {fileID: 114538272645254780}
   m_Layer: 31
-  m_Name: LineItem
+  m_Name: '#LineItem'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1230,7 +1230,7 @@ GameObject:
   - component: {fileID: 114435740275533898}
   - component: {fileID: 114309080403920940}
   m_Layer: 31
-  m_Name: LblCount
+  m_Name: '#RewardCount'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1436,11 +1436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0d3092ee03642018b97d36a9e7fe3dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 114446346372564646}
-  button: {fileID: 114452478709614872}
-  label: {fileID: 114682407321984952}
-  find: {fileID: 21300000, guid: 13f8dd100a4a8c64cb358df58fa70003, type: 3}
-  claim: {fileID: 21300000, guid: 13f8dd100a4a8c64cb358df58fa70003, type: 3}
 --- !u!114 &114035831504914358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1850,8 +1845,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ddb709700f4b42bf75abb4e6a22312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lblCount: {fileID: 114435740275533898}
-  image: {fileID: 114222189857415772}
   disabledMaterial: {fileID: 2100000, guid: 663a56ae543401d419dcc60b1ed229ec, type: 2}
 --- !u!114 &114154816314679854
 MonoBehaviour:
@@ -2110,7 +2103,7 @@ MonoBehaviour:
   m_text: Claim
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 72d5aeea421b27144989a9b9a1640a48, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 3e59aa505c1fd16488e087d3149c642d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2288,8 +2281,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f3118e553d4f1f80397ed4de787f18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewardItemPrefab: {fileID: 1692587846800932}
-  lineItemPrefab: {fileID: 1729366010708006}
 --- !u!114 &114325423598958448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3330,9 +3321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7120852456e4448a824140f71a1bc603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  empty: {fileID: 1027942170562294}
-  check: {fileID: 1103817085338386}
-  fill: {fileID: 1220636718008508}
 --- !u!114 &114551579241686834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3924,7 +3912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowSwitching: 1
-  styleId: 18
+  styleId: 5
 --- !u!114 &114704798151077112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5429,10 +5417,10 @@ RectTransform:
   m_Father: {fileID: 224539760312195672}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 498.00998, y: -82.35}
-  m_SizeDelta: {x: 996.01996, y: 160.7}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 160.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224354106453050016
 RectTransform:
