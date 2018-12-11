@@ -359,7 +359,7 @@ public static class CurrencyHellper
         if (currency == Currency.Crystals.Name)
         {
             var product = new CurrencyPair{Currency = currency, Amount = 5};
-            var message = string.Format(LocalizationService.Get("common.message.cheatCurrency", "common.message.cheatCurrency {0}?"), product.ToStringIcon(false));
+            var message = string.Format(LocalizationService.Get("common.message.cheatCurrency", "common.message.cheatCurrency {0}?"), product.ToStringIcon());
         
             UIMessageWindowController.CreateDefaultMessage(message, () =>
             {
@@ -452,7 +452,7 @@ public static class CurrencyHellper
         
         foreach (var pair in currencys)
         {
-            rewards.Add(pair.ToStringIcon(false));
+            rewards.Add(pair.ToStringIcon());
         }
             
         foreach (var reward in pieces)
@@ -461,7 +461,7 @@ public static class CurrencyHellper
 
             if (def?.SpawnResources == null)
             {
-                rewards.Add(new CurrencyPair{Currency = PieceType.Parse(reward.Key), Amount = reward.Value}.ToStringIcon(false, noAmount));
+                rewards.Add(new CurrencyPair{Currency = PieceType.Parse(reward.Key), Amount = reward.Value}.ToStringIcon(noAmount));
                 continue;
             }
                 
@@ -474,7 +474,7 @@ public static class CurrencyHellper
             if (pair.Amount == 0) pair.Amount = reward.Value;
                 
             types.Add(currency);
-            rewards.Add(pair.ToStringIcon(false));
+            rewards.Add(pair.ToStringIcon());
         }
         
         return string.Join(separator, rewards);

@@ -95,7 +95,7 @@ public class UIOrdersSelectItem : UISimpleScrollItem
     private void UpdateTimer()
     {
         timer.Text = customer.Timer.CompleteTime.GetTimeLeftText();
-        btnBuyLabel.Text = customer.Timer.GetPrise().ToStringIcon(false);
+        btnBuyLabel.Text = customer.Timer.GetPrise().ToStringIcon();
     }
     
     private void UpdateState()

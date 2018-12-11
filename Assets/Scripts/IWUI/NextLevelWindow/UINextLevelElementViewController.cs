@@ -5,7 +5,7 @@ public class UINextLevelElementViewController : UISimpleScrollElementViewControl
 {
     [IWUIBinding] private CanvasGroup canvas;
     
-    private const float ANIMATION_TIME = 2.5f;
+    private const float ANIMATION_TIME = 0.5f;
 
     public override void Init()
     {

@@ -13,7 +13,7 @@ public class AddResourceView : BoardElementView
 	private void Show(CurrencyPair resource)
 	{
 		var color = resource.Amount < 0 ? "EE4444" : "FFFFFF";
-		var value = $"{(resource.Amount < 0 ? "" : "+")}{resource.ToStringIcon(false)}";
+		var value = $"{(resource.Amount < 0 ? "" : "+")}{resource.ToStringIcon()}";
 		
 		amountLabel.Text = $"<color=#{color}>{value}</color>";
 		
