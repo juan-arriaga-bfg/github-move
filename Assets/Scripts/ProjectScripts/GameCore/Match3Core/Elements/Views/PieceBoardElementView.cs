@@ -85,14 +85,10 @@ public class PieceBoardElementView : BoardElementView
         {
             SyncRendererLayers(piece.CachedPosition);
         }
-        
-        if (cachedRenderers == null || cachedRenderers.size == 0)
-            CacheLayers();
-        foreach (var rend in cachedRenderers)
-        {
-            rend.CacheDefaultMaterial();
-        }
 
+        ResetDefaultMaterial();
+        CacheDefaultMaterials();
+        
         CheckLock();
     }
 
@@ -277,6 +273,22 @@ public class PieceBoardElementView : BoardElementView
         isLockVisual = enabled;
     }
 
+    private void CacheDefaultMaterials()
+    {
+        if (cachedRenderers == null || cachedRenderers.size == 0)
+        {
+            CacheLayers();   
+        }
+
+        if (cachedRenderers != null)
+        {
+            foreach (var rend in cachedRenderers)
+            {
+                rend.CacheDefaultMaterial();
+            }    
+        }
+    }
+    
     public override void ResetViewOnDestroy()
     {
         if (lockedSubtrate != null)
