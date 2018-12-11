@@ -1,14 +1,22 @@
-using UnityEngine;
 using System.Collections.Generic;
 
 public class UIExchangeWindowView : UIGenericPopupWindowView
 {
-    [SerializeField] private NSText buttonBuyLabel;
-    [SerializeField] private GameObject pattern;
+    [IWUIBinding("#BuyButtonLabel")] private NSText buttonBuyLabel;
     
-    private List<UIExchangeWindowItem> items = new List<UIExchangeWindowItem>();
-
+    [IWUIBinding("#Content")] private UIContainerViewController content;
+    [IWUIBinding("#BuyButton")] private UIButtonViewController btnBuy;
+    
     private bool isClick;
+    
+    public override void InitView(IWWindowModel model, IWWindowController controller)
+    {
+        base.InitView(model, controller);
+
+        btnBuy.Init()
+            .ToState(GenericButtonState.Active)
+            .OnClick(OnBuyClick);
+    }
     
     public override void OnViewShow()
     {
@@ -23,41 +31,34 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
 
         isClick = false;
         
-        var products = windowModel.Products;
+        Fill(UpdateEntities(windowModel.Products), content);
+    }
+    
+    private List<IUIContainerElementEntity> UpdateEntities(List<CurrencyPair> entities)
+    {
+        var views = new List<IUIContainerElementEntity>(entities.Count);
         
-        foreach (var product in products)
+        for (var i = 0; i < entities.Count; i++)
         {
-            var item = Instantiate(pattern, pattern.transform.parent).GetComponent<UIExchangeWindowItem>();
+            var def = entities[i];
             
-            RegisterWindowViewController(item);
+            var entity = new UISimpleScrollElementEntity
+            {
+                ContentId = def.Currency,
+                LabelText = def.Amount.ToString(),
+                OnSelectEvent = null,
+                OnDeselectEvent = null
+            };
             
-            item.Init(product);
-            items.Add(item);
+            views.Add(entity);
         }
         
-        pattern.SetActive(false);
-    }
-
-    public override void OnViewClose()
-    {
-        base.OnViewClose();
-        
-        UIExchangeWindowModel windowModel = Model as UIExchangeWindowModel;
+        return views;
     }
     
     public override void OnViewCloseCompleted()
     {
         base.OnViewCloseCompleted();
-        
-        pattern.SetActive(true);
-
-        foreach (var item in items)
-        {
-            UnRegisterWindowViewController(item);
-            Destroy(item.gameObject);
-        }
-        
-        items = new List<UIExchangeWindowItem>();
         
         if(isClick == false) return;
         
@@ -71,7 +72,7 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
         });
     }
 
-    public void OnClick()
+    private void OnBuyClick()
     {
         if(isClick) return;
         
