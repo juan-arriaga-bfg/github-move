@@ -207,7 +207,7 @@ public class PieceBoardElementView : BoardElementView
 
         foreach (var pos in piecePositions)
         {
-            var particle = ParticleView.Show(R.LockParticles, pos); 
+            var particle = ParticleView.Show(R.LockParticles, pos.SetZ(BoardLayer.FX.Layer)); 
             lockParticles.Add(particle);
             particle.ParticleRenderer.sortingOrder = order;
         }
