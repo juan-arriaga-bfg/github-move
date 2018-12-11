@@ -5,17 +5,9 @@ using TMPro;
 
 public class UICodexWindowView : UIGenericPopupWindowView
 {
-    [SerializeField] private TabGroup tabGroup;
+    [IWUIBinding("#PanelTabs")] private TabGroup tabGroup;
+    [IWUIBinding("#Tab")] private GameObject tabPrefab; 
 
-    [SerializeField] private GameObject tabPrefab; 
-    [SerializeField] private GameObject chainPrefab; 
-    [SerializeField] private GameObject itemPrefab;
-    
-    [Header("Buttons")]
-    [SerializeField] private GameObject btnClose;
-    [SerializeField] private GameObject btnReward;
-    [SerializeField] private TextMeshProUGUI btnRewardText;
-    
     // If you change this, also change Grid Layout component settings in Chain prefab
     private const int ITEMS_IN_ROW_COUNT = 6;
 
@@ -24,7 +16,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
     private List<CodexTab> codexTabs = new List<CodexTab>();
 
     private bool isReward;
-    
+
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -107,8 +99,6 @@ public class UICodexWindowView : UIGenericPopupWindowView
         // todo: refresh instead of recreate
 
         tabPrefab.SetActive(false);
-        chainPrefab.SetActive(false);
-        itemPrefab.SetActive(false);
 
         for (var i = 0; i < codexTabs.Count; i++)
         {
@@ -119,19 +109,6 @@ public class UICodexWindowView : UIGenericPopupWindowView
         tabGroup.RemoveAllTabs();
 
         CreateTabs(model.CodexContent.TabDefs);       
-        
-        ToggleButtons(model);
-    }
-
-    private void ToggleButtons(UICodexWindowModel model)
-    {
-        var reward = new CurrencyPair {Currency = Currency.Coins.Name, Amount = model.CodexContent.PendingRewardAmount};
-        bool isRewardAvailable = reward.Amount > 0;
-        
-        btnClose.SetActive(!isRewardAvailable);
-        btnReward.SetActive(isRewardAvailable);
-
-        btnRewardText.text = string.Format(LocalizationService.Get("common.button.claimReward", "common.button.claimReward {0}"), reward.ToStringIcon());
     }
 
     private void CreateTabs(List<CodexTabDef> tabDefs)
@@ -150,7 +127,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
             
             tabGroup.AddTab(tab, i);
 
-            CreateChains(tab, codexTabDef, chainPrefab, itemPrefab);
+            CreateChains(tab, codexTabDef);
 
             codexTabs.Add(tab);
         }
@@ -204,27 +181,24 @@ public class UICodexWindowView : UIGenericPopupWindowView
         tabGroup.ActivateTab(0);
     }
 
-    private static void CreateChains(CodexTab tab, CodexTabDef tabDef, GameObject chainPrefab, GameObject itemPrefab)
+    private static void CreateChains(CodexTab tab, CodexTabDef tabDef)
     {
         var chainDefs = tabDef.ChainDefs;
         
         for (var i = 0; i < chainDefs.Count; i++)
         {
             var codexChainDef = chainDefs[i];
-            
-            var chainGo = Instantiate(chainPrefab);
-            chainGo.SetActive(true);
-            
-            CodexChain chain = chainGo.GetComponent<CodexChain>();
+
+            CodexChain chain = UIService.Get.PoolContainer.Create<CodexChain>((GameObject) ContentService.Current.GetObjectByName("CodexChain"));
             chain.Init(codexChainDef);
             
             tab.AddChain(chain);
 
-            CreateItems(chain, codexChainDef, itemPrefab, ITEMS_IN_ROW_COUNT);
+            CreateItems(chain, codexChainDef, ITEMS_IN_ROW_COUNT);
         }
     }
 
-    public static void CreateItems(CodexChain chain, CodexChainDef chainDef, GameObject itemPrefab, int rowLength)
+    public static void CreateItems(CodexChain chain, CodexChainDef chainDef, int rowLength)
     {
         var itemDefs = chainDef.ItemDefs;
         
@@ -232,13 +206,11 @@ public class UICodexWindowView : UIGenericPopupWindowView
         {
             var codexItemDef = itemDefs[i];
             
-            var itemGo = Instantiate(itemPrefab);
-            itemGo.SetActive(true);
-            
-            CodexItem item = itemGo.GetComponent<CodexItem>();
+            CodexItem item = UIService.Get.PoolContainer.Create<CodexItem>((GameObject) ContentService.Current.GetObjectByName("CodexItem"));
 
             bool forceHideArrow = (i + 1) % rowLength == 0;
-            item.Init(codexItemDef, forceHideArrow);
+            item.OnViewInit(null);
+            item.UpdateUI(codexItemDef, forceHideArrow);
             
             chain.AddItem(item);
         }
