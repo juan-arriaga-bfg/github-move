@@ -23,24 +23,29 @@ public class DailyQuestWindowTaskButton : IWBaseMonoBehaviour
     
     private string GetTextForButton(TaskEntity task)
     {
-        string key;
+        if (task is TaskCompleteDailyTaskEntity && !GameDataService.Current.QuestsManager.DailyQuest.IsAllTasksClaimed(true))
+        {
+             return LocalizationService.Get("window.daily.quest.task.button.help", "window.daily.quest.task.button.help");
+        }
+        
+        string text;
         
         switch (task.State)
         {
             case TaskState.Completed:
-                key = LocalizationService.Get("window.daily.quest.task.button.claim", "window.daily.quest.task.button.claim");
+                text = LocalizationService.Get("window.daily.quest.task.button.claim", "window.daily.quest.task.button.claim");
                 break;
             
             case TaskState.Claimed:
-                key = LocalizationService.Get("window.daily.quest.task.button.done", "window.daily.quest.task.button.done");
+                text = LocalizationService.Get("window.daily.quest.task.button.done", "window.daily.quest.task.button.done");
                 break;
             
             default:
-                key = LocalizationService.Get("window.daily.quest.task.button.help", "window.daily.quest.task.button.help");
+                text = LocalizationService.Get("window.daily.quest.task.button.help", "window.daily.quest.task.button.help");
                 break;
         }
 
-        return key;
+        return text;
     }
 
     public void Disable()

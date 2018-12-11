@@ -154,14 +154,21 @@ public class DailyQuestEntity : QuestEntity
         }
     }
 
-    public bool IsAllTasksClaimed()
+    public bool IsAllTasksClaimed(bool exceptClearAll)
     {
         foreach (var task in ActiveTasks)
         {
-            if (!task.IsClaimed())
+            if (task.IsClaimed())
             {
-                return false;
+                continue;
             }
+            
+            if (exceptClearAll && task is TaskCompleteDailyTaskEntity)
+            {
+                continue;
+            }
+                
+            return false;
         }
 
         return true;

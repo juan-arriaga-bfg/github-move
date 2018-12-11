@@ -33,11 +33,8 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     private readonly Color completedBackColor = new Color(180 / 255f, 201 / 255f, 17  / 255f);
     
     private TaskEntity task;
-    public TaskEntity Task
-    {
-        get { return task; }
-    }
-    
+    public TaskEntity Task => task;
+
     private UIDailyQuestTaskElementEntity targetEntity;
 
     private List<CurrencyPair> reward;
@@ -50,16 +47,16 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         task = targetEntity.Task;
         
-        targetEntity.Task.OnChanged += OnTaskChanged;
+        targetEntity.Quest.OnChanged += OnQuestChanged;
 
         reward = GetRewardFromComponent();
         
         UpdateUi();
     }
 
-    private void OnTaskChanged(TaskEntity task)
+    private void OnQuestChanged(QuestEntity quest, TaskEntity changedTask)
     {
-        if (task.State != TaskState.Claimed)
+        if (task == changedTask || (task is TaskCompleteDailyTaskEntity && changedTask != null))
         {
             UpdateUi();
         }
@@ -69,7 +66,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     {
         if (targetEntity != null)
         {
-            targetEntity.Task.OnChanged -= OnTaskChanged;
+            targetEntity.Quest.OnChanged -= OnQuestChanged;
         }
 
         base.OnViewClose(context);
@@ -99,8 +96,6 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         taskIcon.sprite = UiQuestButton.GetIcon(task);
 
         lblProgress.Text = UiQuestButton.GetTaskProgress(task, 32);
-        
-        // lblDescription.Text = $"<color=#D2D2D2><size=25>[{task.Group} - {task.Id.ToLower()}]</size></color> " + task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
 
         string key = task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
         lblDescription.Text = LocalizationService.Get(key, key) ;
@@ -194,8 +189,17 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         {
             return;
         }
+
+        bool isCurrentTaskClearAll = (task is TaskCompleteDailyTaskEntity);
+        bool isClaimClearAllAllowed = GameDataService.Current.QuestsManager.DailyQuest.IsAllTasksClaimed(true);
+
+        if (isCurrentTaskClearAll && !isClaimClearAllAllowed)
+        {
+            ((UIDailyQuestWindowView) targetEntity.WindowController.WindowView).ScrollToFirstNotCompletedOrNotClaimedTask();
+            return;
+        }
         
-        if (task.IsCompletedOrClaimed())
+        if (task.IsCompleted())
         {
             if (!ProvideReward())
             {
@@ -207,17 +211,11 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
                 return;
             }
             
-            if (task is TaskCompleteDailyTaskEntity || GameDataService.Current.QuestsManager.DailyQuest.GetCompletedButNotClaimedTasksCount() == 0)
+            if (isCurrentTaskClearAll || GameDataService.Current.QuestsManager.DailyQuest.GetCompletedButNotClaimedTasksCount() == 0)
             {
                 targetEntity.WindowController.CloseCurrentWindow();
             }
  
-            return;
-        }
-
-        if (task is TaskCompleteDailyTaskEntity)
-        {
-            ((UIDailyQuestWindowView) targetEntity.WindowController.WindowView).ScrollToFirstNotCompletedTask();
             return;
         }
         
@@ -310,16 +308,29 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         {
             canvasGroup.alpha = alpha;
             taskIconCanvasGroup.alpha = alpha;
+            if (!enabled)
+            {
+                back.color = normalBackColor;
+            }
             return;
         }
 
-        canvasGroup.DOFade(alpha, 0.3f);
-        taskIconCanvasGroup.DOFade(alpha, 0.3f);
+        DOTween.Kill(back, true);
+        
+        float TIME = 0.3f;
+        
+        canvasGroup.DOFade(alpha, TIME);
+        taskIconCanvasGroup.DOFade(alpha, TIME);
+
+        if (!enabled)
+        {
+            back.DOColor(normalBackColor, TIME);
+        }
     }
 
     public void HighlightForHint()
     {       
-        if (task.IsCompletedOrClaimed())
+        if (task.IsClaimed())
         {
             return;
         }
@@ -331,7 +342,9 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         DOTween.Kill(back, true);
 
-        back.color = normalBackColor;
+        var currentColor = task.IsCompleted() ? completedBackColor : normalBackColor;
+
+        back.color = currentColor;
 
         float TIME = 0.3f;
         back.DOColor(activeBackColor, TIME)
@@ -340,7 +353,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
                   .SetEase(Ease.OutSine)
                   .OnComplete(() =>
                    {
-                       back.color = normalBackColor;
+                       back.color = currentColor;
                    });
     }
 }

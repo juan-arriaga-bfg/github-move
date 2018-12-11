@@ -123,19 +123,36 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
 
     public FogDef GetNextRandomFog()
     {
-        List<FogObserver> fogsToSearch = VisibleFogPositions.Values.Select(e => GetFogObserver(e.GetCenter())).ToList();
-        if (fogsToSearch.Count == 0)
+        List<FogObserver> visibleFogs = VisibleFogPositions.Values.Select(e => GetFogObserver(e.GetCenter())).ToList();
+        if (visibleFogs.Count == 0)
         {
             Debug.LogError("[FogsDataManager] => GetNextRandomFog: No visible fog found!");
             return null;
         }
 
-        // Sort fogs;
-        List<FogObserver> sortedFogs = fogsToSearch.OrderByDescending(e => e.CanBeReached())
-                                                   .ThenByDescending(e => e.RequiredLevelReached())
-                                                   .ThenBy(e => e.Def.Condition.Amount)
-                                                   .ThenBy(e => e.Def.Level)
-                                                   .ToList();
+        List<FogObserver> sortedFogs;
+        bool ignorePrice = false;
+        bool ignoreLevel = false;
+        
+        List<FogObserver> fogsWithBubbles = visibleFogs.Where(e => e.CanBeReached() && e.RequiredLevelReached()).ToList();
+
+        if (fogsWithBubbles.Count > 0)
+        {
+            ignoreLevel = true;
+            
+            sortedFogs = fogsWithBubbles.OrderBy(e => e.Def.Condition.Amount).ToList();
+        }
+        else
+        {
+            ignorePrice = true;
+            
+            sortedFogs = visibleFogs//.OrderBy(e => e.Def.Level)
+                                    .OrderByDescending(e => e.CanBeReached())
+                                    // .ThenByDescending(e => e.RequiredLevelReached())
+                                    // .ThenBy(e => e.Def.Condition.Amount)
+                                    .ThenBy(e => e.Def.Level)
+                                    .ToList();
+        }
 
         var firstFog = sortedFogs[0];
 
@@ -147,10 +164,10 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         for (var i = 1; i < sortedFogs.Count; i++)
         {
             var fog = sortedFogs[i];
-            if (fog.CanBeReached() == firstFog.CanBeReached()
-             && fog.RequiredLevelReached() == firstFog.RequiredLevelReached()
-             && fog.Def.Condition.Amount == firstFog.Def.Condition.Amount
-             && fog.Def.Level == firstFog.Def.Level)
+            if ((fog.CanBeReached() == firstFog.CanBeReached())
+             && (fog.RequiredLevelReached() == firstFog.RequiredLevelReached())
+             && (fog.Def.Condition.Amount == firstFog.Def.Condition.Amount || ignorePrice)
+             && (fog.Def.Level == firstFog.Def.Level || ignoreLevel))
             {
                 selectedFogs.Add(fog);
             }
@@ -182,118 +199,6 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         
         return ret.Def;
     }
-//
-//     private int CalculateFogWeightForSorting(FogDef fog)
-//     {
-//         const int WEIGHT_PATH   = 100000;
-//         const int WEIGHT_BUBBLE = 10000;
-//         const int WEIGHT_LEVEL  = 1000;
-//
-//         var observer = FogObservers[fog.GetCenter()];
-//
-//         int w = 0;
-//         if (observer.CanBeReached()) { w += WEIGHT_PATH;}
-//         if (observer.RequiredLevelReached()) { w += WEIGHT_LEVEL;}
-//
-//     }
-//
-// /// <summary>
-//     /// Find fog with minimal level. Active fogs have top priority even when their level are higher
-//     /// </summary>
-//     /// <returns></returns>
-//     public FogDef GetRandomFogWithLeastLevel()
-//     {
-//         List<FogDef> fogsToSearch = ActiveFogs.Count > 0 ? ActiveFogs : VisibleFogPositions.Values.ToList();
-//
-//         if (fogsToSearch == null || fogsToSearch.Count == 0)
-//         {
-//             Debug.LogError("[FogsDataManager] => GetRandomFogWithLeastLevel: No visible fog found!");
-//             return null;
-//         }
-//
-//         List<FogDef> fogsWithMinLevel = new List<FogDef>();
-//
-//         foreach (var fog in ActiveFogs)
-//         {
-//             if (fogsWithMinLevel.Count == 0)
-//             {
-//                 fogsWithMinLevel.Add(fog);
-//                 continue;
-//             }
-//
-//             var firstSavedFogLevel = fogsWithMinLevel[0].Level;
-//             var currentFogLevel = fog.Condition.Amount;
-//             
-//             if (firstSavedFogLevel > currentFogLevel)
-//             {
-//                 fogsWithMinLevel.Clear();
-//                 fogsWithMinLevel.Add(fog);
-//             }
-//             else if (firstSavedFogLevel == currentFogLevel)
-//             {
-//                 fogsWithMinLevel.Add(fog);
-//             }
-//         }
-//
-//         if (fogsWithMinLevel.Count == 0)
-//         {
-//             Debug.LogError("[FogsDataManager] => GetRandomFogWithLeastLevel: No defs with min level found!");
-//             return null;
-//         }
-//         
-//         int index = Random.Range(0, fogsWithMinLevel.Count);
-//
-//         return fogsWithMinLevel[index];
-//     }
-//     
-//     /// <summary>
-//     /// Find fog with minimal price. Active fogs have top priority even when their prices are higher
-//     /// </summary>
-//     /// <returns></returns>
-//     public FogDef GetRandomFogWithLeastPrice()
-//     {
-//         List<FogDef> fogsToSearch = ActiveFogs.Count > 0 ? ActiveFogs : VisibleFogPositions.Values.ToList();
-//
-//         if (fogsToSearch == null || fogsToSearch.Count == 0)
-//         {
-//             Debug.LogError("[FogsDataManager] => GetRandomActiveFogWithLeastPrice: No visible fog found!");
-//             return null;
-//         }
-//
-//         List<FogDef> fogsWithMinPrice = new List<FogDef>();
-//
-//         foreach (var fog in ActiveFogs)
-//         {
-//             if (fogsWithMinPrice.Count == 0)
-//             {
-//                 fogsWithMinPrice.Add(fog);
-//                 continue;
-//             }
-//
-//             var firstSavedFogPrice = fogsWithMinPrice[0].Condition.Amount;
-//             var currentFogPrice = fog.Condition.Amount;
-//             
-//             if (firstSavedFogPrice > currentFogPrice)
-//             {
-//                 fogsWithMinPrice.Clear();
-//                 fogsWithMinPrice.Add(fog);
-//             }
-//             else if (firstSavedFogPrice == currentFogPrice)
-//             {
-//                 fogsWithMinPrice.Add(fog);
-//             }
-//         }
-//
-//         if (fogsWithMinPrice.Count == 0)
-//         {
-//             Debug.LogError("[FogsDataManager] => GetRandomActiveFogWithLeastPrice: No defs with least price found!");
-//             return null;
-//         }
-//         
-//         int index = Random.Range(0, fogsWithMinPrice.Count);
-//
-//         return fogsWithMinPrice[index];
-//     }
 
     public List<GridMeshArea> GetFoggedAreas()
     {
