@@ -1,8 +1,6 @@
 using UnityEngine;
 
 [TaskHighlight(typeof(HighlightTaskOpenChest))]
-[TaskHighlight(typeof(HighlightTaskPointToRandomBranchATree))]
-[TaskHighlight(typeof(HighlightTaskFirstMineOfAnyType))]
 [TaskHighlight(typeof(HighlightTaskPointToShopButton))]
 public class TaskOpenChestEntity : TaskCounterAboutPiece, IBoardEventListener, IHavePieceId
 {
