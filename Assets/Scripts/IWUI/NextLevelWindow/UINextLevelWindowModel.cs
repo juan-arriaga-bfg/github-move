@@ -17,7 +17,7 @@ public class UINextLevelWindowModel : IWWindowModel
             foreach (var pair in data)
             {
                 rewards.Append(" ");
-                rewards.Append(pair.ToStringIcon(false));
+                rewards.Append(pair.ToStringIcon());
             }
             
             return string.Format(LocalizationService.Get("common.message.reward", "common.message.reward:{0}"), rewards);
