@@ -49,16 +49,4 @@ public class UIGenericPopupWindowView : UIGenericWindowView
         if(message != null) message.Text = text;
         if(messageLabel != null) messageLabel.Text = text;
     }
-
-    protected void Fill(List<IUIContainerElementEntity> entities, UIContainerViewController container)
-    {
-        if (entities == null || entities.Count <= 0)
-        {
-            container.Clear();
-            return;
-        }
-        
-        container.Create(entities);
-        container.Select(0);
-    }
 }

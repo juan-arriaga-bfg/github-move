@@ -27,7 +27,7 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         RegisterComponent(cooldown);
         
         var child = GameDataService.Current.PiecesManager.GetPieceDef(PieceType.Parse(def.Reproduction.Currency));
-        childName = child?.Name;
+        childName = $"<sprite name={child.Uid}>";
     }
     
     protected override Dictionary<int, int> GetRewards()

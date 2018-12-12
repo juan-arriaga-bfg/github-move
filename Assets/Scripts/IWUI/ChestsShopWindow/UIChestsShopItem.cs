@@ -40,7 +40,7 @@ public class UIChestsShopItem : IWUIWindowViewController
 		label.Text = LocalizationService.Get($"piece.name.{chest.Uid}", $"piece.name.{chest.Uid}");
 		labelBtn.Text = isFree
 			? LocalizationService.Get("common.button.claim", "common.button.claim")
-			: string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), chest.Price.ToStringIcon(false));
+			: string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), chest.Price.ToStringIcon());
 		
 		icon.sprite = IconService.Current.GetSpriteById(chest.Uid);
 	}

@@ -1,12 +1,13 @@
 fileFormatVersion: 2
-guid: 5f6374c3a0148a34cab5858053c92a67
+guid: 89626386264d70143bad74b82e1bdb93
 TextureImporter:
   fileIDToRecycleName:
     21300000: border_back_light_0
     21300002: border_back_light_1
-    21300004: border_back_light_2
+    21300004: border_back_dark 1_2
+    21300006: border_back_light_2
   externalObjects: {}
-  serializedVersion: 6
+  serializedVersion: 7
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -103,8 +104,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 101
-        height: 171
+        width: 117
+        height: 160
       alignment: 9
       pivot: {x: 1, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,7 +113,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32e72ccede6ad4e4d90b2628cd73e8bf
+      spriteID: aedd47c680c018a44be571a4aa4a632c
       vertices: []
       indices: 
       edges: []
@@ -121,10 +122,10 @@ TextureImporter:
       name: border_back_light_1
       rect:
         serializedVersion: 2
-        x: 101
+        x: 117
         y: 0
-        width: 104
-        height: 171
+        width: 119
+        height: 160
       alignment: 9
       pivot: {x: 0, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,7 +133,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7528b2eb284cc44489cf05df63bc40c5
+      spriteID: b325b1359a0095247a770393b52fb98d
       vertices: []
       indices: 
       edges: []
@@ -143,8 +144,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 205
-        height: 171
+        width: 236
+        height: 160
       alignment: 9
       pivot: {x: 0.5, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,7 +153,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9c345b868801bc468c8c90e0416644d
+      spriteID: 50c312d71d763fc4395c93d8cd33f494
       vertices: []
       indices: 
       edges: []
@@ -160,12 +161,14 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 67ac7c5994e4ae04bb9929f24d667b0b
+    spriteID: b5ba31f572498ea469b31573b5897301
     vertices: []
     indices: 
     edges: []
     weights: []
   spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

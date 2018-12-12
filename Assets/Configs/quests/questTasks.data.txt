@@ -60,34 +60,10 @@
     }
   },
   {
-    "$type": "TaskClearFogEntity, GameAssembly",
-    "Id": "6_ClearFog",
-    "TargetValue": 2,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Ico": "Fog1",
-        "Title": "Clear a fog",
-        "Message": "Clear a fog"
-      }
-    }
-  },
-  {
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "7_CreatePiece_PR_A5",
     "PieceUid": "PR_A5",
     "TargetValue": 5,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Title": "Collect ingredients",
-        "Message": "Collect ingredients"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "8_CreatePiece_PR_B5",
-    "PieceUid": "PR_B5",
-    "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "Collect ingredients",
@@ -145,18 +121,6 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "13_CreatePiece_A6",
-    "PieceUid": "A6",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Title": "Create a Piece",
-        "Message": "Create a Piece"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "14_CreatePiece_B3",
     "PieceUid": "B3",
     "TargetValue": 3,
@@ -193,18 +157,6 @@
     }
   },
   {
-    "$type": "TaskKillFieldEntity, GameAssembly",
-    "Id": "17_KillField",
-    "TargetValue": 3,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Ico": "OB_PR_B",
-        "Title": "Clear dead fields",
-        "Message": "Clear dead fields"
-      }
-    }
-  },
-  {
     "$type": "TaskClearFogEntity, GameAssembly",
     "Id": "18_ClearFog",
     "TargetValue": 2,
@@ -237,6 +189,19 @@
         "Ico": "OB3_A",
         "Title": "Cut down a tree",
         "Message": "Cut down a tree"
+      }
+    }
+  },
+  {
+    "$type": "TaskOpenChestEntity, GameAssembly",
+    "Id": "21_OpenChest",
+    "PieceUid": "CH_Free",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "CH_Free",
+        "Title": "Open free chest",
+        "Message": "Open free chest"
       }
     }
   },
@@ -298,8 +263,8 @@
       },
       "QuestDescriptionComponent": {
         "Ico": "matchDailyQuestIcon",
-        "Title": "Create a Piece",
-        "Message": "Make merges"
+        "Title": "Make merges",
+        "Message": "Make any merges"
       }
     }
   },
@@ -319,8 +284,8 @@
       },
       "QuestDescriptionComponent": {
         "Ico": "matchDailyQuestIcon",
-        "Title": "Create a Piece",
-        "Message": "Make merges"
+        "Title": "Make merges",
+        "Message": "Make any merges"
       }
     }
   },
@@ -341,7 +306,6 @@
       },
       "QuestDescriptionComponent": {
         "Ico": "quest_icon_super_match",
-        "Title": "Merge 5 or more objects in one turn",
         "Message": "Merge 5 or more objects in one turn"
       }
     }
@@ -363,7 +327,6 @@
       },
       "QuestDescriptionComponent": {
         "Ico": "quest_icon_super_match",
-        "Title": "Merge 8 or more objects in one turn",
         "Message": "Merge 8 or more objects in one turn"
       }
     }
@@ -443,7 +406,7 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Ico": "OB_PR_B",
+        "Ico": "killFieldDailyQuestIcon",
         "Message": "Remove dead fields"
       }
     }
@@ -463,8 +426,8 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Ico": "CH_Free",
-        "Message": "Open any chests"
+        "Ico": "quest_icon_open_chest",
+        "Message": "Open chests"
       }
     }
   },
@@ -583,7 +546,7 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Ico": "OB_PR_B",
+        "Ico": "killFieldDailyQuestIcon",
         "Message": "Remove dead fields"
       }
     }
@@ -603,8 +566,8 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Ico": "CH_Free",
-        "Message": "Open any chests"
+        "Ico": "quest_icon_open_chest",
+        "Message": "Open chests"
       }
     }
   },
@@ -664,7 +627,7 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Message": "Spend rybies"
+        "Message": "Spend rubies"
       }
     }
   },
@@ -724,7 +687,7 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Message": "Spend rybies"
+        "Message": "Spend rubies"
       }
     }
   },
@@ -743,7 +706,7 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Ico": "OB_PR_B",
+        "Ico": "killFieldDailyQuestIcon",
         "Message": "Remove dead fields"
       }
     }
@@ -783,8 +746,8 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Ico": "CH_Free",
-        "Message": "Open any chests"
+        "Ico": "quest_icon_open_chest",
+        "Message": "Open chests"
       }
     }
   }

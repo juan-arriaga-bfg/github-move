@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class UISimpleScrollElementViewController : UIContainerElementViewController
 {
-    [IWUIBinding("#Icon")] protected Image icon;
-    [IWUIBinding("#Anchor")] protected Transform anchor;
-    [IWUIBinding("#Label")] protected NSText label;
+    [IWUIBindingNullable("#Icon")] protected Image icon;
+    [IWUIBindingNullable("#Anchor")] protected Transform anchor;
+    [IWUIBindingNullable("#Label")] protected NSText label;
     
     private Transform content;
 

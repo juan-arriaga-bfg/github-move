@@ -156,37 +156,6 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "6_ClearFog",
-    "TaskDefs": [
-      {
-        "TaskId": "6_ClearFog"
-      }
-    ],
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 25
-          },
-          {
-            "Currency": "Mana",
-            "Amount": 50
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 50
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Title": "Quest",
-        "Message": "Clear a fog"
-      }
-    }
-  },
-  {
-    "$type": "StoryQuestEntity, GameAssembly",
     "Id": "7_CreatePiece_PR_A5",
     "TaskDefs": [
       {
@@ -202,7 +171,7 @@
           },
           {
             "Currency": "Mana",
-            "Amount": 50
+            "Amount": 65
           },
           {
             "Currency": "Experience",
@@ -213,37 +182,6 @@
       "QuestDescriptionComponent": {
         "Title": "Quest",
         "Message": "Collect wheat"
-      }
-    }
-  },
-  {
-    "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "8_CreatePiece_PR_B5",
-    "TaskDefs": [
-      {
-        "TaskId": "8_CreatePiece_PR_B5"
-      }
-    ],
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 20
-          },
-          {
-            "Currency": "Mana",
-            "Amount": 50
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 50
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Title": "Quest",
-        "Message": "Collect apples"
       }
     }
   },
@@ -497,37 +435,6 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "17_KillField",
-    "TaskDefs": [
-      {
-        "TaskId": "17_KillField"
-      }
-    ],
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 25
-          },
-          {
-            "Currency": "Mana",
-            "Amount": 50
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 50
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Title": "Quest",
-        "Message": "Let's remove old fields."
-      }
-    }
-  },
-  {
-    "$type": "StoryQuestEntity, GameAssembly",
     "Id": "18_ClearFog",
     "TaskDefs": [
       {
@@ -616,6 +523,37 @@
       "QuestDescriptionComponent": {
         "Title": "Quets",
         "Message": "Remove obstacles"
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "21_OpenChest",
+    "TaskDefs": [
+      {
+        "TaskId": "21_OpenChest"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Mana",
+            "Amount": 25
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      },
+      "QuestDescriptionComponent": {
+        "Title": "Quets",
+        "Message": "Open Free Chest"
       }
     }
   },
