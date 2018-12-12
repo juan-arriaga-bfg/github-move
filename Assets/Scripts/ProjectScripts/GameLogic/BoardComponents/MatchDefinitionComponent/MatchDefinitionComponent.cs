@@ -76,27 +76,36 @@ public class MatchDefinitionComponent : ECSEntity
         return chain.IndexOf(pieceId) + 1;
     }
 
-    public List<int> GetChain(int pieceId)
+    public List<int> GetChain(int pieceId, bool checkIgnore = true)
     {
         var chain = new List<int>();
 
         if (pieceId == PieceType.None.Id) return chain;
         
-        var unit = pieceId;
-        
-        do
+        int unit;
+
+        if (!checkIgnore) // GetPrevious will skip Fake pieces, let's just start from the beginning!
         {
-            chain.Insert(0, unit);
-            unit = GetPrevious(unit);
+            unit = GetFirst(pieceId);
+            chain.Add(unit);
         }
-        while (unit != PieceType.None.Id);
-        
-        unit = GetNext(pieceId);
+        else
+        {
+            unit = pieceId;
+
+            do
+            {
+                chain.Insert(0, unit);
+                unit = GetPrevious(unit);
+            } while (unit != PieceType.None.Id);
+        }
+
+        unit = GetNext(checkIgnore ? pieceId : unit, checkIgnore);
         
         while (unit != PieceType.None.Id)
         {
             chain.Add(unit);
-            unit = GetNext(unit);
+            unit = GetNext(unit, checkIgnore);
         }
         
         return chain;

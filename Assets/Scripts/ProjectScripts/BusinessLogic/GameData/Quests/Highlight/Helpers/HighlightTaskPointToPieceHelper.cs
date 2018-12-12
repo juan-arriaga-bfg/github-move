@@ -30,8 +30,8 @@ public static class HighlightTaskPointToPieceHelper
         var boardLogic = BoardService.Current.FirstBoard.BoardLogic;
         var board = BoardService.Current.FirstBoard;
         var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
-        var chain = matchDef.GetChain(pieceId);
-        
+        var chain = matchDef.GetChain(pieceId, false);   
+
         // Get all pieces from the beginning of chain to target piece
         var croppedChain = new List<int>();
         foreach (var id in chain)
