@@ -69,6 +69,40 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         }
     }
     
+    public virtual void ClearCurrentMaterialAsDefault()
+    {
+        if (cachedRenderers == null || cachedRenderers.size <= 0)
+        {
+            CacheLayers();
+        }
+
+        foreach (var rend in cachedRenderers)
+        {
+            if (rend == null) continue;
+            if (rend.CachedRenderer == null) continue;
+            if (rend.CachedRenderer.sharedMaterial == null) continue;
+
+            rend.SetLastDefaultMaterial(null);
+        }
+    }
+
+    public virtual void SaveCurrentMaterialAsDefault()
+    {
+        if (cachedRenderers == null || cachedRenderers.size <= 0)
+        {
+            CacheLayers();
+        }
+
+        foreach (var rend in cachedRenderers)
+        {
+            if (rend == null) continue;
+            if (rend.CachedRenderer == null) continue;
+            if (rend.CachedRenderer.sharedMaterial == null) continue;
+
+            rend.SetLastDefaultMaterial(rend.CachedRenderer.sharedMaterial);
+        }
+    }
+    
     public virtual void SetFade(float alpha)
     {
         if (cachedRenderers == null || cachedRenderers.size <= 0)
@@ -82,8 +116,14 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             if (rend.CachedRenderer == null) continue;
             if (rend.CachedRenderer.sharedMaterial == null) continue;
 
-            var material = rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial(BoardElementMaterialType.PiecesFadeMaterial));
+            var material = rend.MaterialCopy;//rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial(BoardElementMaterialType.PiecesFadeMaterial));
+            if (material.HasProperty("_AlphaCoef") == false)
+            {
+                material = rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial(BoardElementMaterialType.PiecesDefaultMaterial));
+            }
+            
             material.SetFloat("_AlphaCoef", alpha);
+            
             if (alpha >= 1f)
             {
                 rend.ResetDefaultMaterial();
@@ -177,7 +217,7 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         return customMaterial;
     }
     
-    public virtual void SetHighlight(bool state)
+    public virtual void SetHighlight(bool state, List<GameObject> ignoredObjects = null)
     {
         if (cachedRenderers == null || cachedRenderers.size <= 0)
         {
@@ -189,6 +229,7 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             if (rend == null) continue;
             if (rend.CachedRenderer == null) continue;
             if (rend.CachedRenderer.sharedMaterial == null) continue;
+            if (ignoredObjects != null && ignoredObjects.Contains(rend.gameObject)) continue;
 
             if (state)
             {
@@ -576,10 +617,13 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
 public class RendererLayer : MonoBehaviour
 {
     [SerializeField] private int sortingOrderOffset;
+    
 
     private Renderer cachedRenderer;
 
     private Material cachedDefaultMaterial;
+    
+    private Material cachedLastDefaultMaterial;
 
     public void CacheDefaultMaterial()
     {
@@ -591,10 +635,25 @@ public class RendererLayer : MonoBehaviour
 
     public void ResetDefaultMaterial()
     {
+        if (cachedLastDefaultMaterial != null)
+        {
+            CachedRenderer.material = cachedLastDefaultMaterial;
+            return;
+        }
+        
         if (cachedDefaultMaterial != null)
         {
             CachedRenderer.material = cachedDefaultMaterial;
         }
+    }
+    public void SetDefaultMaterial(Material defaultMaterial)
+    {
+        this.cachedDefaultMaterial = defaultMaterial;
+    }
+
+    public void SetLastDefaultMaterial(Material lastDefaultMaterial)
+    {
+        this.cachedLastDefaultMaterial = lastDefaultMaterial;
     }
     
     public Material SetCustomMaterial(Material customMaterial)

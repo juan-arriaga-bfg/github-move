@@ -67,7 +67,6 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         if (state)
         {
             var points = context.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Default);
-            var filteredIds = PieceType.GetIdsByFilter(Filter);
 
             for (int i = 0; i < points.Count; i++)
             {
@@ -78,7 +77,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
                 
                 var pieceView = context.Context.RendererContext.GetElementAt(point) as PieceBoardElementView;
                 
-                if (filteredIds.Contains(pieceEntity.PieceType) == false)
+                if (IsValidPoint(point) == false)
                 {
                     if (pieceView != null) pieceView.SetFade(0.5f);
                 }
@@ -92,16 +91,13 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         else
         {
             var points = context.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Default);
-            var filteredIds = PieceType.GetIdsByFilter(Filter);
-
+            
             for (int i = 0; i < points.Count; i++)
             {
                 var point = points[i];
                 var pieceEntity = context.GetPieceAt(point);
                 if (pieceEntity == null) continue;
                 if (pieceEntity.PieceType == PieceType.Fog.Id) continue;
-                
-                // if (filteredIds.Contains(pieceEntity.PieceType)) continue; 
                 
                 var pieceView = context.Context.RendererContext.GetElementAt(point) as PieceBoardElementView;
                 
@@ -229,7 +225,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         {
             CollapsePieceAt(position);
         });
-        sequence.AppendInterval(4f);
+        sequence.AppendInterval(1.6f);
         sequence.OnComplete(EndRemover);
     }
 
@@ -243,6 +239,18 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         var pieceEntity = context.GetPieceAt(boardPosition);
 
         if (pieceEntity == null) return false;
+
+        var lockersComponents = pieceEntity.GetComponentsBy<ILockerComponent>();
+        bool isLocked = true;
+        foreach (var lockerComponent in lockersComponents)
+        {
+            if (lockerComponent.Locker != null && lockerComponent.Locker.IsLocked == false)
+            {
+                isLocked = false;
+            }
+        }
+
+        if (isLocked) return false;
 
         var ids = PieceType.GetIdsByFilter(Filter);
         

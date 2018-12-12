@@ -225,9 +225,11 @@ public class PieceBoardElementView : BoardElementView
         if (enabled)
         {
             SetGrayscale();
+            SaveCurrentMaterialAsDefault();
         }
         else
         {
+            ClearCurrentMaterialAsDefault();
             ResetDefaultMaterial();
         }
 
@@ -321,7 +323,7 @@ public class PieceBoardElementView : BoardElementView
         }
         else
         {
-            SetHighlight(true);
+            SetHighlight(true, new List<GameObject>{SelectionSprite == null ? null : SelectionSprite.gameObject});
             IsHighlighted = true;
         }
     }
