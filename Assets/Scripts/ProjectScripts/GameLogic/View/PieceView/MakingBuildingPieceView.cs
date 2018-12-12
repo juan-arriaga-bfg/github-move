@@ -17,13 +17,11 @@ public class MakingBuildingPieceView : BuildingPieceView
         timer.OnStart += UpdateLockSate;
         timer.OnComplete += UpdateLockSate;
 
-        if (bodySprites != null) unlockedMaterial = bodySprites.First().material;
         UpdateLockSate();
     }
     
     public override void ResetViewOnDestroy()
     {
-        bodySprites.ForEach(sprite => sprite.material = unlockedMaterial);
         base.ResetViewOnDestroy();
         
         if(timer == null) return;
@@ -35,7 +33,7 @@ public class MakingBuildingPieceView : BuildingPieceView
     private void UpdateLockSate()
     {
         if(timer == null || bodySprites == null) return;
-        
-        bodySprites.ForEach(sprite => sprite.material = timer.IsStarted ? lockedMaterial : unlockedMaterial);
+
+        ToggleLockedState(timer.IsStarted);
     }
 }

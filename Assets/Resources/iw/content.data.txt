@@ -700,11 +700,6 @@
     "IsGenerateAutoName": false
   },
   {
-    "Uid": "pieces.grayscale",
-    "ResourcePath": "Materials/pieces.grayscale",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "LockedEmpty",
     "ResourcePath": "Prefabs\\Pieces\\Lock/LockedEmpty",
     "IsGenerateAutoName": true
@@ -1063,5 +1058,10 @@
     "Uid": "NotHaveMana",
     "ResourcePath": "Prefabs\\UI\\Message/NotHaveMana",
     "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "PiecesLockedMaterial",
+    "ResourcePath": "Materials/PiecesLockedMaterial",
+    "IsGenerateAutoName": true
   }
 ]

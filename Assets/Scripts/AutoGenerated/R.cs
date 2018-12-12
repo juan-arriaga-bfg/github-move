@@ -138,7 +138,6 @@ public class R
      public const string NPC_7Piece = "NPC_7Piece";
      public const string NPC_8Piece = "NPC_8Piece";
      public const string NPC_9Piece = "NPC_9Piece";
-     public const string pieces_grayscale = "pieces.grayscale";
      public const string LockedEmpty = "LockedEmpty";
      public const string UICharacterConversationView = "UICharacterConversationView";
      public const string UICharacterBubbleMessageView = "UICharacterBubbleMessageView";
@@ -190,4 +189,5 @@ public class R
      public const string BoardProgressView = "BoardProgressView";
      public const string PieceRemover = "PieceRemover";
      public const string UIBoardViewContainer = "UIBoardViewContainer";
+     public const string PiecesLockedMaterial = "PiecesLockedMaterial";
 }
