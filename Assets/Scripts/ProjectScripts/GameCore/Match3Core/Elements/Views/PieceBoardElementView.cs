@@ -238,7 +238,7 @@ public class PieceBoardElementView : BoardElementView
             var pieceDef = PieceType.GetDefById(Piece.PieceType);
             var defaultSubtrate = Piece.PieceType == PieceType.LockedEmpty.Id
                                || Piece.PieceType == PieceType.Fog.Id
-                               || pieceDef.Filter.HasFlag(PieceTypeFilter.Obstacle)
+                               || pieceDef.Filter.HasFlag(PieceTypeFilter.Tree)
                                || pieceDef.Filter.HasFlag(PieceTypeFilter.Mine);
             if (defaultSubtrate == false)
             {

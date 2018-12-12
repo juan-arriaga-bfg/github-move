@@ -15,7 +15,9 @@
 		    .RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}
 			    .RegisterDefinition(new TouchReactionDefinitionOpenBubble {ViewId = ViewType.ObstacleBubble})
 			    .RegisterDefinition(new TouchReactionDefinitionSpawnRewards()))
-		    .RegisterComponent(new TouchReactionConditionWorkplace()));
+		    .RegisterComponent(new TouchReactionConditionWorkplace()))
+	        .RegisterComponent(new PiecePathfindBoardCondition(context, piece)
+	            .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
 
 		AddPathfindLockObserver(piece, true);
 		
