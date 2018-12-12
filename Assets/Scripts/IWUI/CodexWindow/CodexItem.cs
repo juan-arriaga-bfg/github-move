@@ -33,6 +33,8 @@ public class CodexItem : IWUIWindowViewController
 
     private bool forceHideArrow;
 
+    public Image PieceImage => pieceImage;
+
     public void ReloadWithState(CodexItemState state)
     {
         def.State = state;

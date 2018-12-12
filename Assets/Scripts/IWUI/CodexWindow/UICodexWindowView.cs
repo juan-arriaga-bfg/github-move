@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 
 public class UICodexWindowView : UIGenericPopupWindowView
 {
@@ -214,6 +213,8 @@ public class UICodexWindowView : UIGenericPopupWindowView
     {
         var itemDefs = chainDef.ItemDefs;
         
+        List<CodexItem> itemsToAdd = new List<CodexItem>();
+        
         for (var i = 0; i < itemDefs.Count; i++)
         {
             var codexItemDef = itemDefs[i];
@@ -224,8 +225,10 @@ public class UICodexWindowView : UIGenericPopupWindowView
             item.OnViewInit(null);
             item.Setup(codexItemDef, forceHideArrow);
             
-            chain.AddItem(item);
+            itemsToAdd.Add(item);
         }
+        
+        chain.AddItems(itemsToAdd);
     }
 
     // DEBUG ONLY!
@@ -237,6 +240,12 @@ public class UICodexWindowView : UIGenericPopupWindowView
             foreach (var item in items)
             {
                 item.ReloadWithState(CodexItemState.Unlocked);
+            }
+
+            CodexChain[] chains = GetComponentsInChildren<CodexChain>(tab.gameObject);
+            foreach (var chain in chains)
+            {
+                chain.FixItemsSize();
             }
         }
     }
