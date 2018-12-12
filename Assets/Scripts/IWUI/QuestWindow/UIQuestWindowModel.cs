@@ -13,44 +13,19 @@ public class UIQuestWindowModel : IWWindowModel
         set
         {
             quest = value;
-            questDescription = quest?.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid);
             tasks = quest?.Tasks;
         }
     }
-
-    private QuestDescriptionComponent questDescription;
 
     private List<TaskEntity> tasks;
 
     private TaskEntity FirstTask => tasks[0];
     
-    public string Title
-    {
-        get
-        {
-            string key = questDescription?.Title;
-            return LocalizationService.Get(key, key);
-        }
-    }
+    public string Title => quest.GetLocalizedTitle();
 
-    public string Message
-    {
-        get
-        {
-            string key = questDescription?.Message;
-            return LocalizationService.Get(key, key);
-        }
-    }
+    public string Message => quest.GetLocalizedMessage();
 
-    public string Description
-    {
-        get
-        {
-            
-            string key = FirstTask.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
-            return LocalizationService.Get(key, key);
-        }
-    }
+    public string Description => FirstTask.GetLocalizedMessage();
 
     public Dictionary<int, int> PiecesReward;
     public List<CurrencyPair> CurrencysReward;

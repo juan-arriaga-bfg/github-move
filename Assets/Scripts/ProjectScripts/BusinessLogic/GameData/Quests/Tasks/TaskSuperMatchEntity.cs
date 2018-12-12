@@ -8,9 +8,9 @@ public class TaskSuperMatchEntity : TaskCounterAboutPiece, IBoardEventListener
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
-    [JsonProperty] public int CountToMatch { get; protected set; } // [JsonProperty] is for a backward compatibility
+    public int CountToMatch { get; protected set; }
     
-    [JsonProperty] public int Value1 { get; protected set; }
+    [JsonProperty] protected int Value1 { get; private set; }
     
 #region Serialization
 
@@ -73,5 +73,13 @@ public class TaskSuperMatchEntity : TaskCounterAboutPiece, IBoardEventListener
         {
             CurrentValue += (int)(matchDescr.MatchedPiecesCount / CountToMatch);
         }
+    }
+
+    public override string GetLocalizedMessage()
+    {
+        var ret = base.GetLocalizedMessage();
+        ret = ret.Replace("{0}", CountToMatch.ToString());
+
+        return ret;
     }
 }

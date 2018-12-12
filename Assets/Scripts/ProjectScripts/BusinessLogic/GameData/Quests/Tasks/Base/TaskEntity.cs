@@ -170,4 +170,21 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
             }
         }
     }
+
+    public virtual string GetLocalizedMessage()
+    {
+        string key = GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
+        return LocalizationService.Get(key, key) ;
+    }
+    
+    public virtual string GetLocalizedTitle()
+    {
+        string key = GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Title;
+        return LocalizationService.Get(key, key) ;
+    }
+    
+    public virtual string GetIco()
+    {
+        return  GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Ico;
+    }
 }

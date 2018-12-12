@@ -141,11 +141,11 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     
     public static Sprite GetIcon(TaskEntity task)
     {
-        QuestDescriptionComponent cmp = task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid);
+        var ico = task.GetIco();
 
-        if (cmp?.Ico != null)
+        if (ico != null)
         {
-            return IconService.Current.GetSpriteById(cmp.Ico);
+            return IconService.Current.GetSpriteById(ico);
         }
         
         TaskCurrencyEntity taskAboutCurrency = task as TaskCurrencyEntity;
