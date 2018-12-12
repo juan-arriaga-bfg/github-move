@@ -7,6 +7,9 @@ public class UICodexWindowView : UIGenericPopupWindowView
 {
     [IWUIBinding("#PanelTabs")] private TabGroup tabGroup;
     [IWUIBinding("#Tab")] private GameObject tabPrefab; 
+    
+    // Debug
+    [IWUIBinding("#ButtonUnlockAll")] private UIButtonViewController btnUnlockAll; 
 
     // If you change this, also change Grid Layout component settings in Chain prefab
     private const int ITEMS_IN_ROW_COUNT = 6;
@@ -20,6 +23,15 @@ public class UICodexWindowView : UIGenericPopupWindowView
     public override void OnViewShow()
     {
         base.OnViewShow();
+        
+#if DEBUG && UNITY_EDITOR
+        btnUnlockAll.gameObject.SetActive(true);
+        btnUnlockAll.Init()
+              .ToState(GenericButtonState.Active)
+              .OnClick(OnUnlockAllClick);
+#else
+        btnUnlockAll.gameObject.SetActive(false);
+#endif
         
         UICodexWindowModel model = Model as UICodexWindowModel;
 
@@ -210,9 +222,22 @@ public class UICodexWindowView : UIGenericPopupWindowView
 
             bool forceHideArrow = (i + 1) % rowLength == 0;
             item.OnViewInit(null);
-            item.UpdateUI(codexItemDef, forceHideArrow);
+            item.Setup(codexItemDef, forceHideArrow);
             
             chain.AddItem(item);
+        }
+    }
+
+    // DEBUG ONLY!
+    public void OnUnlockAllClick()
+    {
+        foreach (var tab in codexTabs)
+        {
+            CodexItem[] items = GetComponentsInChildren<CodexItem>(tab.gameObject);
+            foreach (var item in items)
+            {
+                item.ReloadWithState(CodexItemState.Unlocked);
+            }
         }
     }
 }
