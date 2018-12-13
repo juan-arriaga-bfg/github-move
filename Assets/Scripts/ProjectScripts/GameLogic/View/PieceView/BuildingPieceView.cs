@@ -23,7 +23,6 @@ public class BuildingPieceView : PieceBoardElementView
 		
 		if (warning == null) warning = CreateUi(ViewType.Warning);
 	    
-	    		
 	    SyncRendererLayers(piece.CachedPosition);
 		
 		UpdateSate();
@@ -46,10 +45,14 @@ public class BuildingPieceView : PieceBoardElementView
 	public override void ResetViewOnDestroy()
 	{
 		base.ResetViewOnDestroy();
+	    
+	    DestroyUi(warning);
+	    warning = null;
 		
 		if(state == null) return;
         
 		state.OnChangeState -= UpdateSate;
+	    
 	}
     
 	private void UpdateSate()
@@ -58,6 +61,15 @@ public class BuildingPieceView : PieceBoardElementView
 		
 		warning.SetActive(state.State == BuildingState.Warning);
 	}
+
+    private void DestroyUi(GameObject view)
+    {
+        if (view == null) return;
+        
+        Context.DestroyElement(view);
+        
+        RemoveFromLayerCache(view);
+    }
 
 	private GameObject CreateUi(ViewType view)
 	{

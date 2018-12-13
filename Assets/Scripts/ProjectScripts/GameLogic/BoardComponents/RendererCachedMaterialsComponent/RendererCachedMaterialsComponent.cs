@@ -29,6 +29,8 @@ public partial class BoardElementMaterialType
     public const string PiecesUnderFogMaterial = R.PiecesUnderFogMaterial;
 
     public const string PiecesLockedMaterial = R.PiecesLockedMaterial;
+
+    public const string PiecesFogHighlightMaterial = R.PiecesFogHighlightMaterial;
 }
 
 public class RendererCachedMaterialsComponent : ECSEntity 

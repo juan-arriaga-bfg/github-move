@@ -20,7 +20,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
     
     private List<PieceBoardElementView> fakePieces = new List<PieceBoardElementView>();
 
-    private readonly object HIGHLIGHT_ANIMATION_ID = new ViewAnimationUid();
+    // private readonly object HIGHLIGHT_ANIMATION_ID = new ViewAnimationUid();
 
     public List<PieceBoardElementView> FakePieces => fakePieces;
     
@@ -207,7 +207,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
         }
 
         IsHighlighted = enabled;
-	    DOTween.Kill(HIGHLIGHT_ANIMATION_ID);
+	    // DOTween.Kill(HIGHLIGHT_ANIMATION_ID);
 	    
         var fogMaterial = SetCustomMaterial(BoardElementMaterialType.FogDefaultMaterial, enabled, this);
 	    
@@ -232,6 +232,11 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
         }
     }
 
+    public override void SetGrayscale()
+    {
+        
+    }
+
     public override void ToggleHighlight(bool enabled)
     {
         if (enabled == IsHighlighted)
@@ -241,14 +246,23 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 
         IsHighlighted = enabled;
 
-        DOTween.Kill(HIGHLIGHT_ANIMATION_ID);
-       
-        const float TIME = 0.35f;
-        
-        foreach (var spr in fogSprites)
+        if (IsHighlighted)
         {
-           spr.DOColor(enabled ? highlightColor : initialColor, TIME).SetId(HIGHLIGHT_ANIMATION_ID);
+            SetCustomMaterial(BoardElementMaterialType.PiecesFogHighlightMaterial, true);
         }
+        else
+        {
+            ResetDefaultMaterial();
+        }
+
+        // DOTween.Kill(HIGHLIGHT_ANIMATION_ID);
+       
+        // const float TIME = 0.35f;
+        
+        // foreach (var spr in fogSprites)
+        // {
+           // spr.DOColor(enabled ? highlightColor : initialColor, TIME).SetId(HIGHLIGHT_ANIMATION_ID);
+        // }
     }
 
     public override void OnTap(BoardPosition boardPos, Vector2 worldPos)

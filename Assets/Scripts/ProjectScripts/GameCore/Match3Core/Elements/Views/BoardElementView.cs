@@ -551,6 +551,7 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         this.isProcessMove = false;
         this.targetPosition = CachedTransform.localPosition;
 
+        ClearCurrentMaterialAsDefault();
         ResetDefaultMaterial();
         
         DOTween.Kill(animationUid);

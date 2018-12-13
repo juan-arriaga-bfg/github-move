@@ -190,4 +190,5 @@ public class R
      public const string BorderRight = "BorderRight";
      public const string BorderTop = "BorderTop";
      public const string PiecesLockedMaterial = "PiecesLockedMaterial";
+     public const string PiecesFogHighlightMaterial = "PiecesFogHighlightMaterial";
 }
