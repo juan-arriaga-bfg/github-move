@@ -162,6 +162,11 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         {
             return true;
         }
+        
+        if (id == PieceType.LockedEmpty.Id)
+        {
+            return true;
+        }
 
         return false;
     }
