@@ -225,9 +225,11 @@ public class PieceBoardElementView : BoardElementView
         if (enabled)
         {
             SetGrayscale();
+            SaveCurrentMaterialAsDefault();
         }
         else
         {
+            ClearCurrentMaterialAsDefault();
             ResetDefaultMaterial();
         }
 
@@ -236,7 +238,7 @@ public class PieceBoardElementView : BoardElementView
             var pieceDef = PieceType.GetDefById(Piece.PieceType);
             var defaultSubtrate = Piece.PieceType == PieceType.LockedEmpty.Id
                                || Piece.PieceType == PieceType.Fog.Id
-                               || pieceDef.Filter.HasFlag(PieceTypeFilter.Obstacle)
+                               || pieceDef.Filter.HasFlag(PieceTypeFilter.Tree)
                                || pieceDef.Filter.HasFlag(PieceTypeFilter.Mine);
             if (defaultSubtrate == false)
             {
@@ -321,7 +323,7 @@ public class PieceBoardElementView : BoardElementView
         }
         else
         {
-            SetHighlight(true);
+            SetHighlight(true, new List<GameObject>{SelectionSprite == null ? null : SelectionSprite.gameObject});
             IsHighlighted = true;
         }
     }

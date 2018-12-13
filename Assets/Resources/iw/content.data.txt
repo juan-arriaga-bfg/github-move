@@ -5,36 +5,6 @@
     "IsGenerateAutoName": true
   },
   {
-    "Uid": "BorderDark",
-    "ResourcePath": "Prefabs/Border/BorderDark",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "BorderDarkLeft",
-    "ResourcePath": "Prefabs/Border/BorderDarkLeft",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "BorderDarkRight",
-    "ResourcePath": "Prefabs/Border/BorderDarkRight",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "BorderLight",
-    "ResourcePath": "Prefabs/Border/BorderLight",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "BorderLightLeft",
-    "ResourcePath": "Prefabs/Border/BorderLightLeft",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "BorderLightRight",
-    "ResourcePath": "Prefabs/Border/BorderLightRight",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "ResourceCarrier",
     "ResourcePath": "Prefabs/UI/ResourceCarrier",
     "IsGenerateAutoName": true
@@ -700,6 +670,11 @@
     "IsGenerateAutoName": false
   },
   {
+    "Uid": "ObstacleHPiece",
+    "ResourcePath": "Prefabs\\Pieces\\Obstacles/ObstacleHPiece",
+    "IsGenerateAutoName": true
+  },
+  {
     "Uid": "pieces.grayscale",
     "ResourcePath": "Materials/pieces.grayscale",
     "IsGenerateAutoName": true
@@ -1065,13 +1040,28 @@
     "IsGenerateAutoName": false
   },
   {
-    "Uid": "CodexItem",
-    "ResourcePath": "Prefabs\\UI\\Codex/CodexItem",
-    "IsGenerateAutoName": false
+    "Uid": "BorderBottom",
+    "ResourcePath": "Prefabs\\Border/BorderBottom",
+    "IsGenerateAutoName": true
   },
   {
-    "Uid": "CodexChain",
-    "ResourcePath": "Prefabs\\UI\\Codex/CodexChain",
-    "IsGenerateAutoName": false
+    "Uid": "BorderLeft",
+    "ResourcePath": "Prefabs\\Border/BorderLeft",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderRight",
+    "ResourcePath": "Prefabs\\Border/BorderRight",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "BorderTop",
+    "ResourcePath": "Prefabs\\Border/BorderTop",
+    "IsGenerateAutoName": true
+  },
+  {
+    "Uid": "PiecesLockedMaterial",
+    "ResourcePath": "Materials/PiecesLockedMaterial",
+    "IsGenerateAutoName": true
   }
 ]

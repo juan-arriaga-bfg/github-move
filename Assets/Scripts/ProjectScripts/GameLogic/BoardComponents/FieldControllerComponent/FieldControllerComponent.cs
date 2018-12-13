@@ -201,7 +201,6 @@ public class FieldControllerComponent : IECSComponent
 
     private void GenerateBorder()
     {
-        //TODO fix resource problem
         
         var width = context.BoardDef.Width;
         var height = context.BoardDef.Height;
@@ -210,20 +209,26 @@ public class FieldControllerComponent : IECSComponent
         var minEdge = Math.Min(width, height);
         var cutSize = maxEdge / 2;
         
-        var typeBottom = cutSize % 2 == 0 ? R.BorderDark : R.BorderLight;
-        var typeLeft = cutSize % 2 == 0 ? R.BorderLightLeft : R.BorderDarkLeft;
-        var typeRight = cutSize % 2 == 0 ? R.BorderLightRight : R.BorderDarkRight;
+        var typeBottom = R.BorderBottom;
+        var typeTop = R.BorderTop;
+        var typeLeft = R.BorderLeft;
+        var typeRight = R.BorderRight;
 
         var oddShift = (maxEdge) & 1;
         
-        for (var i = 0; i < cutSize; i++)
+        for (var currentPos = 0; currentPos < cutSize; currentPos++)
         {
-            var j = cutSize - i;
+            var cutDifference = cutSize - currentPos;
             
-            var bottomPos = new BoardPosition(width - 1 - i, j, BoardLayer.Default.Layer);
-            var leftPos = new BoardPosition(i, j, BoardLayer.Default.Layer);
-            var rightPos = new BoardPosition(width - 1 - i, height - 1 - j, BoardLayer.Default.Layer);
+            var topPos = new BoardPosition(currentPos, height - 1 - cutDifference, BoardLayer.Default.Layer);
+            var bottomPos = new BoardPosition(width - 1 - currentPos, cutDifference, BoardLayer.Default.Layer);
+            var leftPos = new BoardPosition(currentPos, cutDifference, BoardLayer.Default.Layer);
+            var rightPos = new BoardPosition(width - 1 - currentPos, height - 1 - cutDifference, BoardLayer.Default.Layer);
             
+            
+            
+            if(topPos.X < minEdge / 2 && bottomPos.X < width - 1)
+                context.RendererContext.CreateBoardElementAt<BoardElementView>(typeTop, topPos);
             if(bottomPos.X > minEdge / 2 - 1 && bottomPos.X < width - 1)
                 context.RendererContext.CreateBoardElementAt<BoardElementView>(typeBottom, bottomPos);
             if(leftPos.X < minEdge / 2 && leftPos.X > oddShift)

@@ -3,10 +3,6 @@ using UnityEngine;
 
 public class BuildingPieceView : PieceBoardElementView
 {
-	[SerializeField] protected Material lockedMaterial;
-    
-	protected Material unlockedMaterial;
-    
 	private PieceStateComponent state;
 	
 	private GameObject warning;
@@ -17,28 +13,39 @@ public class BuildingPieceView : PieceBoardElementView
 
 		state = Piece.GetComponent<PieceStateComponent>(PieceStateComponent.ComponentGuid);
 
-		if (bodySprites != null && bodySprites.Count > 0)
-		{
-			unlockedMaterial = bodySprites.First().material;
-			bodySprites.ForEach(sprite => sprite.material = state == null ? unlockedMaterial : lockedMaterial);
-		}
+	    ToggleLockedState(state != null);
+	    
+	    SyncRendererLayers(piece.CachedPosition);
 		
 		if(state == null) return;
         
 		state.OnChangeState += UpdateSate;
 		
 		if (warning == null) warning = CreateUi(ViewType.Warning);
-		
-		SyncRendererLayers(piece.CachedPosition);
+	    
+	    		
+	    SyncRendererLayers(piece.CachedPosition);
 		
 		UpdateSate();
 	}
 
+    public virtual void ToggleLockedState(bool isLocked)
+    {
+        if (isLocked)
+        {
+            SetCustomMaterial(BoardElementMaterialType.PiecesLockedMaterial, true);
+            SaveCurrentMaterialAsDefault();
+        }
+        else
+        {
+            ClearCurrentMaterialAsDefault();
+            ResetDefaultMaterial();
+        }
+    }
+
 	public override void ResetViewOnDestroy()
 	{
 		base.ResetViewOnDestroy();
-		
-		bodySprites.ForEach(sprite => sprite.material = unlockedMaterial);
 		
 		if(state == null) return;
         

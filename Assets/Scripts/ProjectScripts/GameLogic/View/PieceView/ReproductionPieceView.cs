@@ -22,6 +22,8 @@ public class ReproductionPieceView : PieceBoardElementView
         
         timer.OnStart += OnStart;
         timer.OnComplete += OnComplete;
+
+        ToggleEffectsByState(timer.IsStarted);
         
         UpdateSate();
     }
@@ -85,15 +87,33 @@ public class ReproductionPieceView : PieceBoardElementView
 
     private void OnStart()
     {
-        ClearParticle(ref readyParticle);
-        
-        processParticle = ParticleView.Show(R.ProductionProcessParticle, Piece.CachedPosition);
-        processParticle.transform.SetParent(transform);
-        processParticle.transform.localPosition = Vector3.zero;
-        
-        PlayAndSyncParticle(processParticle);
+        ToggleEffectsByState(true);
         
         UpdateSate();
+    }
+
+    protected virtual void ToggleEffectsByState(bool isProcessing)
+    {
+        if (isProcessing)
+        {
+            ClearParticle(ref readyParticle);
+        
+            processParticle = ParticleView.Show(R.ProductionProcessParticle, Piece.CachedPosition);
+            processParticle.transform.SetParent(transform);
+            processParticle.transform.localPosition = Vector3.zero;
+        
+            PlayAndSyncParticle(processParticle);
+        }
+        else
+        {
+            ClearParticle(ref processParticle);
+        
+            readyParticle = ParticleView.Show(R.ProductionReadyParticle, Piece.CachedPosition);
+            readyParticle.transform.SetParent(transform);
+            readyParticle.transform.localPosition = Vector3.zero;
+        
+            PlayAndSyncParticle(readyParticle);   
+        }
     }
 
     private void ClearParticle(ref ParticleView particle)
@@ -109,20 +129,13 @@ public class ReproductionPieceView : PieceBoardElementView
     {
         ParticleView.Show(R.ProductionEndParticle, Piece.CachedPosition.SetZ(Piece.CachedPosition.Z + 1));
 
-        ClearParticle(ref processParticle);
-        
-        readyParticle = ParticleView.Show(R.ProductionReadyParticle, Piece.CachedPosition);
-        readyParticle.transform.SetParent(transform);
-        readyParticle.transform.localPosition = Vector3.zero;
-        
-        PlayAndSyncParticle(readyParticle);         
+        ToggleEffectsByState(false);
         
         UpdateSate();
     }
     
     private void UpdateSate()
     {
-        
         if(timer == null || bodySprites == null) return;
                 
         bodySprites.First().sprite = IconService.Current.GetSpriteById( $"{PieceType.Parse(Piece.PieceType)}{(timer.IsStarted ? "_lock" : "")}");

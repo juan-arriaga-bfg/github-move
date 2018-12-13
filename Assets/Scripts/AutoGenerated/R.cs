@@ -1,12 +1,6 @@
 public class R
 {
      public const string GenericPiece = "GenericPiece";
-     public const string BorderDark = "BorderDark";
-     public const string BorderDarkLeft = "BorderDarkLeft";
-     public const string BorderDarkRight = "BorderDarkRight";
-     public const string BorderLight = "BorderLight";
-     public const string BorderLightLeft = "BorderLightLeft";
-     public const string BorderLightRight = "BorderLightRight";
      public const string ResourceCarrier = "ResourceCarrier";
      public const string MergeParticleSystem = "MergeParticleSystem";
      public const string OutFrontMergeParticleSystem = "OutFrontMergeParticleSystem";
@@ -138,6 +132,7 @@ public class R
      public const string NPC_7Piece = "NPC_7Piece";
      public const string NPC_8Piece = "NPC_8Piece";
      public const string NPC_9Piece = "NPC_9Piece";
+     public const string ObstacleHPiece = "ObstacleHPiece";
      public const string pieces_grayscale = "pieces.grayscale";
      public const string LockedEmpty = "LockedEmpty";
      public const string UICharacterConversationView = "UICharacterConversationView";
@@ -190,4 +185,9 @@ public class R
      public const string BoardProgressView = "BoardProgressView";
      public const string PieceRemover = "PieceRemover";
      public const string UIBoardViewContainer = "UIBoardViewContainer";
+     public const string BorderBottom = "BorderBottom";
+     public const string BorderLeft = "BorderLeft";
+     public const string BorderRight = "BorderRight";
+     public const string BorderTop = "BorderTop";
+     public const string PiecesLockedMaterial = "PiecesLockedMaterial";
 }

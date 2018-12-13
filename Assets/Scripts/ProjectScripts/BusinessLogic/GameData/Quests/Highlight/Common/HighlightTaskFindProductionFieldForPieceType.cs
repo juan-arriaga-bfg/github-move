@@ -14,6 +14,12 @@ public class HighlightTaskFindProductionFieldForPieceType : TaskHighlightUsingAr
             return false;
         }
 
+        PieceTypeDef def = PieceType.GetDefById(pieceTask.PieceId);
+        if (!def.Filter.Has(PieceTypeFilter.Ingredient))
+        {
+            return false;
+        }
+        
         var sourceFilter = PieceTypeFilter.ProductionField;
         var excludeFilter = PieceTypeFilter.Obstacle;
         return HighlightTaskPointToPieceSourceHelper.PointToPieceSource(pieceTask, sourceFilter, excludeFilter);

@@ -97,8 +97,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         lblProgress.Text = UiQuestButton.GetTaskProgress(task, 32);
 
-        string key = task.GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
-        lblDescription.Text = LocalizationService.Get(key, key) ;
+        lblDescription.Text = task.GetLocalizedMessage();
 
         lblReward.Text = GetRewardAsText();
         
