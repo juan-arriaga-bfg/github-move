@@ -3,6 +3,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class CodexItem : IWUIWindowViewController
 {
@@ -144,7 +145,6 @@ public class CodexItem : IWUIWindowViewController
     {
         if (giftAnimator.isActiveAndEnabled && giftAnimator.runtimeAnimatorController != null)
         {
-            giftAnimator.ResetTrigger("Idle");
             giftAnimator.ResetTrigger("Open");
         }
 
@@ -164,7 +164,7 @@ public class CodexItem : IWUIWindowViewController
     private void PlayGiftIdleAnimation()
     {
         gift.SetActive(true);
-        giftAnimator.SetTrigger("Idle");
+        giftAnimator.Play("CodexGiftIdle", -1, Random.Range(0f,1f));
     }
 
     private void PlayGiftOpenAnimation(Action onComplete)
