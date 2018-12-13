@@ -86,6 +86,22 @@ public partial class CodexDataManager
                             matchDef.GetChain(PieceType.PR_E1.Id)
                         })
                     },
+                    new CodexChainDef
+                    {
+                        Name = LocalizationService.Get("window.codex.branch.PR_F", "window.codex.branch.PR_F"),
+                        ItemDefs = GetCodexItemsForChain(new List<List<int>>
+                        {
+                            matchDef.GetChain(PieceType.PR_F1.Id)
+                        })
+                    },
+                    new CodexChainDef
+                    {
+                        Name = LocalizationService.Get("window.codex.branch.PR_G", "window.codex.branch.PR_G"),
+                        ItemDefs = GetCodexItemsForChain(new List<List<int>>
+                        {
+                            matchDef.GetChain(PieceType.PR_G1.Id)
+                        })
+                    },
                 }
             },
             new CodexTabDef

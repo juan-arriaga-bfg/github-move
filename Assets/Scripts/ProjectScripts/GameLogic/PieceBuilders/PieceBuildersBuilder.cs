@@ -51,6 +51,8 @@ public class PieceBuildersBuilder
         dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.PR_C1.Id, PieceType.PR_C5.Id);
         dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.PR_D1.Id, PieceType.PR_D5.Id);
         dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.PR_E1.Id, PieceType.PR_E5.Id);
+        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.PR_F1.Id, PieceType.PR_F5.Id);
+        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.PR_G1.Id, PieceType.PR_G5.Id);
         
         return dict;
     }
@@ -59,7 +61,7 @@ public class PieceBuildersBuilder
     {
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OB1_TT.Id, PieceType.OB2_TT.Id, dict);
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OB1_A.Id, PieceType.OB9_A.Id, dict);
-        dict = AddSimplePiece<MovedObstaclePieceBuilder>(PieceType.OB_PR_A.Id, PieceType.OB_PR_E.Id, dict);
+        dict = AddSimplePiece<MovedObstaclePieceBuilder>(PieceType.OB_PR_A.Id, PieceType.OB_PR_G.Id, dict);
         
         dict.Add(PieceType.Fog.Id, new FogPieceBuilder());
         

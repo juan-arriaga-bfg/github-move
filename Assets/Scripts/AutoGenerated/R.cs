@@ -191,4 +191,16 @@ public class R
      public const string BorderTop = "BorderTop";
      public const string PiecesLockedMaterial = "PiecesLockedMaterial";
      public const string PiecesFogHighlightMaterial = "PiecesFogHighlightMaterial";
+     public const string OB_PR_FPiece = "OB_PR_FPiece";
+     public const string OB_PR_GPiece = "OB_PR_GPiece";
+     public const string PR_F1Piece = "PR_F1Piece";
+     public const string PR_F2Piece = "PR_F2Piece";
+     public const string PR_F3Piece = "PR_F3Piece";
+     public const string PR_F4Piece = "PR_F4Piece";
+     public const string PR_F5Piece = "PR_F5Piece";
+     public const string PR_G1Piece = "PR_G1Piece";
+     public const string PR_G2Piece = "PR_G2Piece";
+     public const string PR_G3Piece = "PR_G3Piece";
+     public const string PR_G4Piece = "PR_G4Piece";
+     public const string PR_G5Piece = "PR_G5Piece";
 }
