@@ -16,7 +16,6 @@ public class CodexButton : MonoBehaviour
         var codexManager = GameDataService.Current.CodexManager;
         switch (codexManager.CodexState)
         {
-            case CodexState.NewPiece:
             case CodexState.PendingReward:
                 ToggleShine(true);
                 ToggleExclamationMark(true);

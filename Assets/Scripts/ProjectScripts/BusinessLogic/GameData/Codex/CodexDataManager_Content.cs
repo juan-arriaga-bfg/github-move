@@ -161,21 +161,18 @@ public partial class CodexDataManager
             }
         };
 
-        // todo: optimize
+        ret.ChainDefs = new List<CodexChainDef>();
+        
         foreach (var tabDef in ret.TabDefs)
         {
             foreach (var chainDef in tabDef.ChainDefs)
             {
+                ret.ChainDefs.Add(chainDef);
                 ret.ItemDefs.AddRange(chainDef.ItemDefs);
-                foreach (var itemDef in chainDef.ItemDefs)
+                for (var i = 0; i < chainDef.ItemDefs.Count; i++)
                 {
+                    var itemDef = chainDef.ItemDefs[i];
                     int amount = itemDef.PendingReward?[0].Amount ?? 0;
-                    if (amount > 0)
-                    {
-                        ret.PendingRewardAmount += amount;
-                        tabDef.PendingReward = true;
-                    }
-
                     if (amount <= 0 && itemDef.State == CodexItemState.PendingReward)
                     {
                         itemDef.State = CodexItemState.Unlocked;

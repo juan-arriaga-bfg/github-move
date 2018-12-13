@@ -218,18 +218,13 @@ public class UIMainWindowView : UIBaseWindowView
         
         var codexManager = GameDataService.Current.CodexManager;
         var content = codexManager.GetCodexContent();
-        
-        if (codexManager.CodexState == CodexState.NewPiece)
-        {
-            codexManager.CodexState = content.PendingRewardAmount > 0 ? CodexState.PendingReward : CodexState.Normal;
-        }
-        
+
         codexButton.UpdateState();
         
         var model = UIService.Get.GetCachedModel<UICodexWindowModel>(UIWindowType.CodexWindow);
         model.ActiveTabIndex = -1;
         model.CodexContent = content;
-        model.OnClaim = UpdateCodexButton;
+        model.OnClose = UpdateCodexButton;
         
         UIService.Get.ShowWindow(UIWindowType.CodexWindow);
     }

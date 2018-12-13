@@ -30,7 +30,7 @@ public class CodexItem : IWUIWindowViewController
     [IWUIBinding("#Gift")]    private GameObject gift;
     [IWUIBinding("#Gift")]    private Animator giftAnimator;
 
-    private CodexItemState state;
+    // private CodexItemState state;
 
     private CodexItemDef def;
 
@@ -53,7 +53,6 @@ public class CodexItem : IWUIWindowViewController
         this.forceHideArrow = forceHideArrow;
         
         def = itemDef;
-        state = itemDef.State;
 
         Reset();
 
@@ -63,7 +62,7 @@ public class CodexItem : IWUIWindowViewController
         Sprite sprite = null;
         string captionText = GetCaption();
 
-        switch (state)
+        switch (def.State)
         {
             case CodexItemState.FullLock:
                 questionMark.SetActive(true);
@@ -147,8 +146,12 @@ public class CodexItem : IWUIWindowViewController
 
     private void StopGiftAnimation()
     {
-        giftAnimator.ResetTrigger("Idle");
-        giftAnimator.ResetTrigger("Open");
+        if (giftAnimator.isActiveAndEnabled && giftAnimator.runtimeAnimatorController != null)
+        {
+            giftAnimator.ResetTrigger("Idle");
+            giftAnimator.ResetTrigger("Open");
+        }
+
         gift.SetActive(false);
     }
 
@@ -179,9 +182,10 @@ public class CodexItem : IWUIWindowViewController
 
         float animLen = giftAnimator.GetCurrentAnimatorClipInfo(0).Length;
         float blendTime = 0.2f;
+        float tweenTime = Mathf.Max(animLen - blendTime);
         
         DOTween.Sequence()
-               .InsertCallback(animLen - blendTime, ()=>
+               .InsertCallback(tweenTime, ()=>
                 {
                     onComplete();
                     ToggleViewFromPendingRewardToUnlockedState(true);
@@ -192,7 +196,7 @@ public class CodexItem : IWUIWindowViewController
 
     public void OnClick()
     {
-        switch (state)
+        switch (def.State)
         {
             case CodexItemState.FullLock:
                 break;
@@ -214,17 +218,17 @@ public class CodexItem : IWUIWindowViewController
     
     private void ClaimReward()
     {
-        if (state != CodexItemState.PendingReward)
+        if (def.State != CodexItemState.PendingReward)
         {
             return;
         }
 
-        GameDataService.Current.CodexManager.ClaimRewardForPiece(def.PieceTypeDef.Id);
-        
         var reward = def.PendingReward;
 
         def.PendingReward = null;
         def.State = CodexItemState.Unlocked;
+        
+        GameDataService.Current.CodexManager.ClaimRewardForPiece(def.PieceTypeDef.Id);
 
         PlayGiftOpenAnimation(() =>
         {
@@ -256,5 +260,15 @@ public class CodexItem : IWUIWindowViewController
         Vector2 pixelPivot = pieceImage.sprite.pivot;
         Vector2 percentPivot = new Vector2(pixelPivot.x / size.x, pixelPivot.y / size.y);
         rectTransform.pivot = percentPivot;
+    }
+
+    private void OnEnable()
+    {
+        if (def == null)
+        {
+            return;
+        }
+        
+        ReloadWithState(def.State);
     }
 }

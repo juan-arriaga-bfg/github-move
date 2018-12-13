@@ -1,36 +1,58 @@
 using System;
 using System.Collections.Generic;
-
-public class CodexItemDef
-{
-    public PieceTypeDef PieceTypeDef;
-    public List<CurrencyPair> PendingReward;
-    public bool ShowArrow;
-    public CodexItemState State;
-    public PieceDef PieceDef;
-}
-
-public class CodexTabDef
-{
-    public string Name;
-    public List<CodexChainDef> ChainDefs;
-    public bool PendingReward;
-}
-
-public class CodexChainDef
-{
-    public string Name;
-    public List<CodexItemDef> ItemDefs;
-}
+using System.Linq;
 
 public class CodexContent
 {
     private static int LastInstanceId;
     
-    public List<CodexItemDef> ItemDefs;
     public List<CodexTabDef> TabDefs; 
-    public int PendingRewardAmount;
+    public List<CodexChainDef> ChainDefs;
+    public List<CodexItemDef> ItemDefs;
+    
     public int InstanceId { get; }
+
+    public bool PendingReward
+    {
+        get
+        {
+            if (TabDefs == null)
+            {
+                return false;
+            }
+            
+            for (var i = 0; i < TabDefs.Count; i++)
+            {
+                if (TabDefs[i].PendingReward)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+    public CodexChainDef GetChainDefByFirstItemId(int id)
+    {
+        if (TabDefs == null)
+        {
+            return null;
+        }
+        
+        for (var i = 0; i < ChainDefs.Count; i++)
+        {
+            CodexChainDef chainDef = ChainDefs[i];
+            CodexItemDef itemDef = chainDef.ItemDefs[0];
+            
+            if (itemDef.PieceDef.Id == id)
+            {
+                return chainDef;
+            }
+        }
+
+        return null;
+    }
     
     public CodexContent()
     {
@@ -47,5 +69,5 @@ public class UICodexWindowModel : IWWindowModel
 
     public CodexContent CodexContent;
 
-    public Action OnClaim;
+    public Action OnClose;
 }

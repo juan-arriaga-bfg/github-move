@@ -18,9 +18,9 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
     
     public Action OnNewItemUnlocked;
     
-    public Action<int> OnItemRewardClaimed;
+    public Action<int> OnPieceRewardClaimed;
     
-    public CodexState CodexState = CodexState.Normal;
+    public CodexState CodexState { get; private set; }= CodexState.Normal;
     
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -127,7 +127,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
             if (state.Unlocked.Add(id))
             {
                 state.PendingReward.Add(id);
-                CodexState = CodexState.NewPiece;
+                CodexState = CodexState.PendingReward;
             }
         }
         else
@@ -139,7 +139,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
                     PendingReward = new HashSet<int> {id}
                 }
             );
-            CodexState = CodexState.NewPiece;
+            CodexState = CodexState.PendingReward;
         }
     }
 
@@ -400,7 +400,38 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         {
             Debug.LogError($"[CodexDataManager] => RemovePendingRewardForItem({pieceId}): Can't find CodexChainState for chainId: {chainId}");
         }
+
+        ValidateCodexState();
         
-        OnItemRewardClaimed?.Invoke(pieceId);
+        OnPieceRewardClaimed?.Invoke(pieceId);
+    }
+
+    public void ValidateCodexState()
+    {
+        if (CodexState == CodexState.PendingReward)
+        {
+            bool isAnyRewardRemaining = false;
+            foreach (var item in Items)
+            {
+                // Skip chains hidden from player
+                if (GetCodexContent().GetChainDefByFirstItemId(item.Key) == null)
+                {
+                    continue;
+                }
+                
+                if (item.Value.PendingReward.Count > 0)
+                {
+                    isAnyRewardRemaining = true;
+                    Debug.Log($"[CodexDataManager] => ClaimRewardForPiece: Not all reward claimed, stay in CodexState.PendingReward");
+                    break;
+                }
+            }
+
+            if (!isAnyRewardRemaining)
+            {
+                CodexState = CodexState.Normal;
+                Debug.Log($"[CodexDataManager] => ClaimRewardForPiece: All reward claimed, set CodexState.Normal");
+            }
+        }
     }
 }

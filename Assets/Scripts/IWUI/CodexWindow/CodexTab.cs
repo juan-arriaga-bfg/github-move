@@ -16,29 +16,34 @@ public class CodexTab : Tab
     
     private readonly List<CodexChain> codexChains = new List<CodexChain>();
 
+    private CodexTabDef def;
+    
     public void Init(CodexTabDef def)
     {
+        this.def = def;
+        
         captionActive.text = def.Name;
         captionDisabled.text = def.Name;
 
-        if (exclamationMarkActive != null)
-        {
-            exclamationMarkActive.SetActive(def.PendingReward);
-        }
-        
-        exclamationMarkDisabled.SetActive(def.PendingReward);
+        ToggleExclamationMark();
 
         ScrollToTop();
     }
     
+    private void ToggleExclamationMark()
+    {
+        bool enabled = def?.PendingReward ?? false;
+        
+        if (exclamationMarkActive != null)
+        {
+            exclamationMarkActive.SetActive(enabled);
+        }
+        
+        exclamationMarkDisabled.SetActive(enabled); 
+    }
+    
     public void AddChain(CodexChain codexChain)
     {
-        // if (codexChains.Count == 0)
-        // {
-        //     var tempItem = chainsHost.GetChild(0);
-        //     Destroy(tempItem.gameObject);
-        // }
-        
         codexChains.Add(codexChain);
         codexChain.transform.SetParent(chainsHost, false);
     }
@@ -95,12 +100,12 @@ public class CodexTab : Tab
         float chainH   = chainRect.sizeDelta.y;
         float chainTop = chainY + chainH / 2 + PADDING;
 
-        float contentH = scroll.content.sizeDelta.y;
+        // float contentH = scroll.content.sizeDelta.y;
 
-        float scrollToY           = -chainTop;
-        float scrollToYNormalized = 1 - scrollToY / contentH;
+        float scrollToY = -chainTop;
+        // float scrollToYNormalized = 1 - scrollToY / contentH;
 
-        scrollToYNormalized = Mathf.Clamp(scrollToYNormalized, 0, 1);
+        // scrollToYNormalized = Mathf.Clamp(scrollToYNormalized, 0, 1);
 
         // Vector2 targetValue = new Vector2(0.5f, scrollToYNormalized);
 
@@ -115,5 +120,20 @@ public class CodexTab : Tab
               .SetEase(Ease.InOutBack)
               .SetId(scroll.content)
               .OnComplete(() => { scroll.enabled = true; });
+    }
+
+    private void OnEnable()
+    {
+        GameDataService.Current.CodexManager.OnPieceRewardClaimed += OnPieceRewardClaimed;
+    }
+
+    private void OnDisable()
+    {
+        GameDataService.Current.CodexManager.OnPieceRewardClaimed -= OnPieceRewardClaimed;
+    }
+    
+    private void OnPieceRewardClaimed(int id)
+    {
+        ToggleExclamationMark();
     }
 }
