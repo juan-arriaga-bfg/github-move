@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -178,14 +179,16 @@ public class CodexItem : IWUIWindowViewController
 
         pieceImage.gameObject.SetActive(true);
         pieceImage.color = COLOR_TRANSPARENT;
+        pieceImage.transform.localScale = Vector3.zero;
         
         float animLen = giftAnimator.GetCurrentAnimatorClipInfo(0).Length;
-        float blendTime = 0.2f;
+        float blendTime = 0.35f;
         float tweenStartTime = Mathf.Max(0, animLen - blendTime);
         float tweenTime = Mathf.Max(0, animLen - tweenStartTime);
         
         DOTween.Sequence()
                .Insert(tweenStartTime, pieceImage.DOColor(unlockedColor, tweenTime).SetId(pieceImage))
+               .Insert(tweenStartTime, pieceImage.transform.DOScale(defaultScale, tweenTime).SetEase(Ease.InOutBack) .SetId(pieceImage))
                .InsertCallback(tweenStartTime, ()=>
                 {
                     onComplete();
@@ -226,7 +229,7 @@ public class CodexItem : IWUIWindowViewController
             return;
         }
 
-        var reward = def.PendingReward;
+        var reward = new List<CurrencyPair> {new CurrencyPair {Amount = 15, Currency = "Coins"}};//def.PendingReward;
 
         def.PendingReward = null;
         def.State = CodexItemState.Unlocked;
