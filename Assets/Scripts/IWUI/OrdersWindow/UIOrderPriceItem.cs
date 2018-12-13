@@ -30,10 +30,8 @@ public class UIOrderPriceItem : IWUIWindowViewController
         Init(null, parent);
     }
     
-    public void Init(OrderDef recipe, Transform target)
+    public void Init(List<CurrencyPair> prices, Transform target)
     {
-        var time = 0.1f * canvasGroup.alpha;
-
         DOTween.Kill(canvasGroup);
 
         var sequence = DOTween.Sequence().SetId(canvasGroup);
@@ -45,18 +43,18 @@ public class UIOrderPriceItem : IWUIWindowViewController
             transform.localPosition = new Vector3(0, -75);
             transform.SetParent(parent, true);
             
-            if(recipe == null) return;
+            if(prices == null) return;
 
             for (var i = 0; i < priceItems.Count; i++)
             {
-                var isExcess = i >= recipe.Prices.Count;
+                var isExcess = i >= prices.Count;
                 var item = priceItems[i];
             
                 item.gameObject.SetActive(!isExcess);
             
                 if(isExcess) continue;
             
-                var price = recipe.Prices[i];
+                var price = prices[i];
                 var current = ProfileService.Current.GetStorageItem(price.Currency).Amount;
                 var color = current == price.Amount ? "FFFFFF" : (current > price.Amount ? "28EC6D" : "EC5928"); 
             
@@ -64,6 +62,6 @@ public class UIOrderPriceItem : IWUIWindowViewController
             }
         });
 
-        if (recipe != null) sequence.Insert(0.03f * canvasGroup.alpha, canvasGroup.DOFade(1, 0.07f));
+        if (prices != null) sequence.Insert(0.03f * canvasGroup.alpha, canvasGroup.DOFade(1, 0.07f));
     } 
 }
