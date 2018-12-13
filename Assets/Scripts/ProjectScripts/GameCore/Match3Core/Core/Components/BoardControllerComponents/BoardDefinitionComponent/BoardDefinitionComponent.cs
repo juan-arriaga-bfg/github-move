@@ -61,11 +61,6 @@ public class BoardDefinitionComponent : IECSComponent
         return layer;
     }
     
-    public virtual int GetLayerIndexBy(BoardPosition boardPosition)
-    {
-        return boardPosition.X  + Width * Width - Width * boardPosition.Y + Width * Width * boardPosition.Z;
-    }
-
     public virtual Vector3 GetScreenPosition(int x, int y, int z = 0)
     {
         //Vector3 worldPosition = GetWorldPosition(x, y);

@@ -65,7 +65,7 @@ public class FogSectorsView// : BoardElementView
         meshRenderer.material = mat;
         meshRenderer.material.mainTexture = lineSprite.texture;
 
-        meshRenderer.sortingOrder = Context.Context.BoardDef.GetLayerIndexBy(new BoardPosition(0, 0, BoardLayer.PieceUP1.Layer));
+        meshRenderer.sortingOrder =  BoardLayer.GetDefaultLayerIndexBy(new BoardPosition(0, 0, BoardLayer.PieceUP1.Layer), Context.Context.BoardDef.Width, Context.Context.BoardDef.Height);
         meshRenderer.sortingLayerName = "Default";
 
         if (oldFogSectors != null)
