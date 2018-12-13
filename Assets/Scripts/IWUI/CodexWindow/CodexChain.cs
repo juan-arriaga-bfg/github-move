@@ -6,10 +6,7 @@ public class CodexChain : MonoBehaviour
 {
     [SerializeField] private Transform itemsHost;
     [SerializeField] private TextMeshProUGUI caption;
-
-    private const float minItemImageSize = 80;
-    private const float maxItemImageSize = 155;
-    
+   
     private readonly List<CodexItem> codexItems = new List<CodexItem>();
 
     public int ChainId { get; private set; }
@@ -48,12 +45,24 @@ public class CodexChain : MonoBehaviour
         for (int i = 0; i < codexItems.Count; i++)
         {
             var item = codexItems[i];
-            var image = item.PieceImage;
 
-            float w = Mathf.Lerp(minItemImageSize, maxItemImageSize, i / itemsCount);
-            float h = Mathf.Lerp(minItemImageSize, maxItemImageSize, i / itemsCount);
+            var index = i;
             
-            image.GetComponent<RectTransform>().sizeDelta = new Vector2(w,h);
+            // Force min size for Ingredients
+            if (item.Def.PieceTypeDef.Filter.Has(PieceTypeFilter.Ingredient))
+            {
+                index = 0;
+            } 
+            // Fors max size for multicell
+            else if (item.Def.PieceTypeDef.Filter.Has(PieceTypeFilter.Multicellular))
+            {
+                index = (int)itemsCount;
+            }
+            
+            float w = Mathf.Lerp(CodexItem.MIN_ITEM_IMAGE_SIZE, CodexItem.MAX_ITEM_IMAGE_SIZE, index / itemsCount);
+            float h = Mathf.Lerp(CodexItem.MIN_ITEM_IMAGE_SIZE, CodexItem.MAX_ITEM_IMAGE_SIZE, index / itemsCount);
+
+            item.PieceImageRectTransform.sizeDelta = new Vector2(w,h);
         }
     }
 }

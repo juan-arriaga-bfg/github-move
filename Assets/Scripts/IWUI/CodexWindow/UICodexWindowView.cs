@@ -234,12 +234,14 @@ public class UICodexWindowView : UIGenericPopupWindowView
     // DEBUG ONLY!
     public void OnUnlockAllClick()
     {
+        var state = Input.GetKey(KeyCode.LeftShift) ? CodexItemState.PendingReward : CodexItemState.Unlocked;
+        
         foreach (var tab in codexTabs)
         {
             CodexItem[] items = GetComponentsInChildren<CodexItem>(tab.gameObject);
             foreach (var item in items)
             {
-                item.ReloadWithState(CodexItemState.Unlocked);
+                item.ReloadWithState(state);
             }
 
             CodexChain[] chains = GetComponentsInChildren<CodexChain>(tab.gameObject);

@@ -15,7 +15,9 @@ public class CodexItem : IWUIWindowViewController
     [Header("Image params")]
     [SerializeField] private Vector3 defaultScale;
     [SerializeField] private Vector3 rewardScale;
-    [SerializeField] private Vector2 maxSize;
+    
+    public const float MIN_ITEM_IMAGE_SIZE = 80;
+    public const float MAX_ITEM_IMAGE_SIZE = 155;
 
     [IWUIBinding("#Caption")] private TextMeshProUGUI caption;
     [IWUIBinding("#(?)")]     private GameObject questionMark;
@@ -24,6 +26,7 @@ public class CodexItem : IWUIWindowViewController
     [IWUIBinding("#Basket")]  private GameObject basket;
     [IWUIBinding("#Hand")]    private GameObject hand;
     [IWUIBinding("#Piece")]   private Image pieceImage;
+    [IWUIBinding("#Piece")]   private RectTransform pieceImageRectTransform;
     [IWUIBinding("#Gift")]    private GameObject gift;
     [IWUIBinding("#Gift")]    private Animator giftAnimator;
 
@@ -34,6 +37,10 @@ public class CodexItem : IWUIWindowViewController
     private bool forceHideArrow;
 
     public Image PieceImage => pieceImage;
+
+    public RectTransform PieceImageRectTransform => pieceImageRectTransform;
+
+    public CodexItemDef Def => def;
 
     public void ReloadWithState(CodexItemState state)
     {
@@ -107,8 +114,8 @@ public class CodexItem : IWUIWindowViewController
         SyncPivotAndSizeOfPieceImage();
 
         Vector2 size = pieceImage.rectTransform.sizeDelta;
-        size.x = Mathf.Min(maxSize.x, size.x);
-        size.y = Mathf.Min(maxSize.y, size.y);
+        size.x = Mathf.Min(MIN_ITEM_IMAGE_SIZE, size.x);
+        size.y = Mathf.Min(MIN_ITEM_IMAGE_SIZE, size.y);
         pieceImage.rectTransform.sizeDelta = size;
         
         // Debug.Log($"[CodexItem] => Init {itemDef.PieceTypeDef.Abbreviations[0]} as {state}");
