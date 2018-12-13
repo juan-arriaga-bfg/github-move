@@ -4,15 +4,13 @@ using UnityEngine.UI;
 
 public class UIQuestWindowView : UIGenericPopupWindowView
 {
-    [SerializeField] private Image targetIcon;
-    
-    [SerializeField] private NSText descriptionLabel;
-    [SerializeField] private NSText rewardLabel;
-    [SerializeField] private NSText amountLabel;
-    [SerializeField] private NSText buttonLabel;
-    
-    [SerializeField] private CodexChain chain;
-    [SerializeField] private Transform anchor;
+    [IWUIBinding("#TaskIcon")] private Image targetIcon;
+    [IWUIBinding("#MessageLabel")] private NSText descriptionLabel;
+    [IWUIBinding("#RewardLabel")] private NSText rewardLabel;
+    [IWUIBinding("#TaskProgress")] private NSText amountLabel;
+    [IWUIBinding("#FindButtomLabel")] private NSText buttonLabel;
+    [IWUIBinding("#HintLabel")] private NSText hintLabel;
+    [IWUIBinding("#Chain")] private CodexChain chain;
 
     private bool isComplete;
 
@@ -37,11 +35,11 @@ public class UIQuestWindowView : UIGenericPopupWindowView
 
         targetIcon.sprite = model.Icon;
 
-        ShowChainIfPossible(model);
-        
-        icon = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(PieceType.NPC_SleepingBeauty.Abbreviations[0]));
-        icon.SetParentAndReset(anchor);
-        
+        if (!ShowChain(model))
+        {
+            hintLabel.gameObject.SetActive(false);
+        }
+
         model.Quest.OnChanged += OnQuestChanged;
     }
     
@@ -117,7 +115,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         quest.Tasks[0].Highlight();
     }
 
-    private void ShowChainIfPossible(UIQuestWindowModel model)
+    private bool ShowChain(UIQuestWindowModel model)
     {
         foreach (Transform child in chain.ItemsHost) 
         {
@@ -129,24 +127,28 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         var taskAboutPiece = model.Quest.Tasks[0] as IHavePieceId;
         if (taskAboutPiece == null)
         {
-            return;
+            return false;
         }
         
         var targetId = taskAboutPiece.PieceId;
         if (targetId == PieceType.None.Id)
         {
-            return;
+            return false;
         }
         
         var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId, CHAIN_LENGTH);
         if (itemDefs == null)
         {
-            return;
+            return false;
         }
        
         chain.gameObject.SetActive(true); 
         
         CodexChainDef chainDef = new CodexChainDef {ItemDefs = itemDefs};
         UICodexWindowView.CreateItems(chain, chainDef, CHAIN_LENGTH);
+
+        hintLabel.gameObject.SetActive(false);
+        
+        return true;
     }
 }
