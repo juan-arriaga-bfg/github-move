@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: iconsText
   m_EditorClassIdentifier: 
   hashCode: 128033944
-  material: {fileID: 21040058445402958}
+  material: {fileID: 21608676813535184}
   materialHashCode: 0
   spriteSheet: {fileID: 2800000, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
   spriteInfoList:
@@ -157,9 +157,9 @@ MonoBehaviour:
     pivot: {x: -33, y: 37}
     sprite: {fileID: 21300010, guid: b8d27160e32cec64db951dd84011c3a2, type: 3}
   fallbackSpriteAssets:
-  - {fileID: 11400000, guid: fbfdcf55752dd460eacfa84a0184d481, type: 2}
-  - {fileID: 11400000, guid: 8152886b7d50947ad9d2f725ea468ac7, type: 2}
---- !u!21 &21040058445402958
+  - {fileID: 11400000, guid: 276143c0f82234b45b900e1173103ddb, type: 2}
+  - {fileID: 11400000, guid: 8fb2b6df92df849429a6d98e46933aa6, type: 2}
+--- !u!21 &21608676813535184
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 1
