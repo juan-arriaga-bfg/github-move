@@ -25,6 +25,8 @@ public class CodexChain : MonoBehaviour
     
     public void AddItems(List<CodexItem> items)
     {
+        codexItems.Clear();
+        
         foreach (var item in items)
         {
             codexItems.Add(item);
