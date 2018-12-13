@@ -179,16 +179,16 @@ public class CodexItem : IWUIWindowViewController
 
         pieceImage.gameObject.SetActive(true);
         pieceImage.color = COLOR_TRANSPARENT;
-        pieceImage.transform.localScale = Vector3.zero;
+        pieceImage.transform.localScale = Vector3.one * 0.15f;
         
         float animLen = giftAnimator.GetCurrentAnimatorClipInfo(0).Length;
-        float blendTime = 0.35f;
+        float blendTime = 0.6f;
         float tweenStartTime = Mathf.Max(0, animLen - blendTime);
         float tweenTime = Mathf.Max(0, animLen - tweenStartTime);
         
         DOTween.Sequence()
                .Insert(tweenStartTime, pieceImage.DOColor(unlockedColor, tweenTime).SetId(pieceImage))
-               .Insert(tweenStartTime, pieceImage.transform.DOScale(defaultScale, tweenTime).SetEase(Ease.InOutBack) .SetId(pieceImage))
+               .Insert(tweenStartTime, pieceImage.transform.DOScale(defaultScale, tweenTime - 0.15f).SetEase(Ease.InOutBack) .SetId(pieceImage))
                .InsertCallback(tweenStartTime, ()=>
                 {
                     onComplete();
