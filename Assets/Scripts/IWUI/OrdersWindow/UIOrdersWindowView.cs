@@ -4,7 +4,25 @@ using UnityEngine.UI;
 
 public class UIOrdersWindowView : UIGenericPopupWindowView
 {
-    [SerializeField] private NSText ingredientsMessage;
+    [IWUIBinding("#MessageIngredients")] private NSText messageIngredients;
+    [IWUIBinding("#MessageOrders")] private NSText messageOders;
+    
+    [IWUIBinding("#TabOrders")] private GameObject tabOders;
+    [IWUIBinding("#TabRecipes")] private GameObject tabRecipes;
+    [IWUIBinding("#TabIngredients")] private GameObject tabIngredients;
+    
+    [IWUIBinding("#BackSecond")] private GameObject back;
+    
+    [IWUIBinding("#TabOrders")] private UIContainerViewController contentSelect;
+    
+    [IWUIBinding("#ContentOrders")] private UIContainerViewController contentOders;
+    [IWUIBinding("#ContentRecipes")] private UIContainerViewController contentRecipes;
+    [IWUIBinding("#ContentIngredients")] private UIContainerViewController contentIngredients;
+    
+    [IWUIBinding("#Prices")] private UIOrderPriceItem prices;
+    
+    
+    
     
     [SerializeField] private NSText ordersLabelOn;
     [SerializeField] private NSText ordersLabelOff;
@@ -17,38 +35,16 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
     
     [SerializeField] private Toggle ordersToggle;
     
-    [SerializeField] private ScrollRect ordersScroll;
-    [SerializeField] private ScrollRect recipesScroll;
-    [SerializeField] private ScrollRect ingredientsScroll;
-    
-    [SerializeField] private GameObject ingredientsBack;
-    
-    [SerializeField] private GameObject selectItem;
-    [SerializeField] private GameObject patternOrder;
-    [SerializeField] private GameObject patternRecipe;
-    [SerializeField] private GameObject patternIngredient;
-
-    private List<UIRecipeItem> recipes = new List<UIRecipeItem>();
-    private List<UIOrderItem> orders = new List<UIOrderItem>();
-    private List<UISimpleScrollItem> ingredients = new List<UISimpleScrollItem>();
-
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
         base.InitView(model, controller);
         
         var windowModel = Model as UIOrdersWindowModel;
-        
-        var dataRecipes = windowModel.Recipes;
-        
-        foreach (var recipe in dataRecipes)
-        {
-            var item = Instantiate(patternRecipe, patternRecipe.transform.parent).GetComponent<UIRecipeItem>();
-            
-            item.Init(recipe);
-            recipes.Add(item);
-        }
-        
-        patternRecipe.SetActive(false);
+
+        Fill(UpdateEntitiesSelect(null), contentSelect);
+        Fill(UpdateEntitiesOders(windowModel.Orders), contentOders);
+        Fill(UpdateEntitiesRecipes(windowModel.Recipes), contentRecipes);
+        Fill(UpdateEntitiesIngredients(windowModel.Ingredients), contentIngredients);
     }
 
     public override void OnViewShow()
@@ -58,9 +54,10 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIOrdersWindowModel;
         
         SetTitle(windowModel.Title);
-        SetMessage(windowModel.OrdersMessage);
 
-        ingredientsMessage.Text = windowModel.IngredientsMessage;
+        messageOders.Text = windowModel.OrdersMessage;
+        messageIngredients.Text = windowModel.IngredientsMessage;
+        
         ordersLabelOn.Text = ordersLabelOff.Text = windowModel.OrdersText;
         recipesLabelOn.Text = recipesLabelOff.Text = windowModel.RecipesText;
         ingredientsLabelOn.Text = ingredientsLabelOff.Text = windowModel.IngredientsText;
@@ -68,112 +65,146 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         ordersToggle.isOn = true;
         
         var dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
-        
-        foreach (var order in dataOrders)
-        {
-            var item = Instantiate(patternOrder, patternOrder.transform.parent).GetComponent<UIOrderItem>();
-            
-            item.Init(order);
-            orders.Add(item);
-        }
-        
-        var dataIngredients = windowModel.Ingredients;
-        
-        foreach (var ingredient in dataIngredients)
-        {
-            var item = Instantiate(patternIngredient, patternIngredient.transform.parent).GetComponent<UISimpleScrollItem>();
-            
-            item.Init(ingredient.Currency, ingredient.Amount.ToString());
-            ingredients.Add(item);
-        }
 
+        UpdateOrders();
+        
         windowModel.Select = null;
         
-        patternOrder.SetActive(false);
-        patternIngredient.SetActive(false);
-        
-        message.gameObject.SetActive(dataOrders.Count == 0);
-        ingredientsMessage.gameObject.SetActive(dataIngredients.Count == 0);
-        ingredientsBack.SetActive(dataIngredients.Count != 0);
-        selectItem.SetActive(dataOrders.Count > 0);
+        messageOders.gameObject.SetActive(dataOrders.Count == 0);
+        messageIngredients.gameObject.SetActive(windowModel.Ingredients.Count == 0);
         
         UpdateLists();
     }
 
-    public override void OnViewClose()
-    {
-        base.OnViewClose();
-        
-        var windowModel = Model as UIOrdersWindowModel;
-    }
-
-    public override void OnViewCloseCompleted()
-    {
-        base.OnViewCloseCompleted();
-        
-        foreach (var item in orders)
-        {
-            Destroy(item.gameObject);
-        }
-        
-        foreach (var item in ingredients)
-        {
-            Destroy(item.gameObject);
-        }
-        
-        orders = new List<UIOrderItem>();
-        ingredients = new List<UISimpleScrollItem>();
-        
-        patternOrder.SetActive(true);
-        patternIngredient.SetActive(true);
-    }
-
     public void UpdateOrders()
     {
-        foreach (var order in orders)
-        {
-            order.UpdateIndicator();
-        }
+        var windowModel = Model as UIOrdersWindowModel;
+        var dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
+        var index = Mathf.Max(0, dataOrders.FindIndex(order => order == windowModel.Select));
+        
+        Fill(UpdateEntitiesOders(dataOrders), contentOders);
+        contentOders.Select(index);
     }
 
     private void UpdateLists()
     {
         var windowModel = Model as UIOrdersWindowModel;
         
-        var data = windowModel.Recipes;
-
-        for (var i = 0; i < data.Count; i++)
-        {
-            recipes[i].Init(data[i]);
-        }
+        Fill(UpdateEntitiesRecipes(windowModel.Recipes), contentRecipes);
         
-        ordersScroll.verticalNormalizedPosition = 1;
-        recipesScroll.verticalNormalizedPosition = 1;
-        ingredientsScroll.verticalNormalizedPosition = 1;
+        UpdateScrollRect(contentOders);
+        UpdateScrollRect(contentRecipes);
+        UpdateScrollRect(contentIngredients);
     }
     
     public void UpdateIngredients()
     {
         var windowModel = Model as UIOrdersWindowModel;
         
-        foreach (var item in ingredients)
+        Fill(UpdateEntitiesIngredients(windowModel.Ingredients), contentIngredients);
+    }
+
+    private void UpdateScrollRect(UIContainerViewController content)
+    {
+        var scrollRect = content.GetScrollRect();
+        
+        if (scrollRect != null) scrollRect.verticalNormalizedPosition = 1f;
+    }
+    
+    private List<IUIContainerElementEntity> UpdateEntitiesSelect(Order entities)
+    {
+        var views = new List<IUIContainerElementEntity>();
+        
+        if (entities == null) return views;
+        
+        var entity = new UIOrderElementEntity
         {
-            Destroy(item.gameObject);
-        }
+            LabelText = string.Format(LocalizationService.Get("common.message.reward", "common.message.reward:{0}"), $"{Order.Separator}{entities.Reward}"),
+            Data = entities,
+            OnSelectEvent = null,
+            OnDeselectEvent = null
+        };
         
-        ingredients = new List<UISimpleScrollItem>();
-        patternIngredient.SetActive(true);
+        views.Add(entity);
         
-        var data = windowModel.Ingredients;
+        return views;
+    }
+    
+    private List<IUIContainerElementEntity> UpdateEntitiesOders(List<Order> entities)
+    {
+        var views = new List<IUIContainerElementEntity>(entities.Count);
         
-        foreach (var ingredient in data)
+        for (var i = 0; i < entities.Count; i++)
         {
-            var item = Instantiate(patternIngredient, patternIngredient.transform.parent).GetComponent<UISimpleScrollItem>();
+            var def = entities[i];
             
-            item.Init(ingredient.Currency, ingredient.Amount.ToString());
-            ingredients.Add(item);
+            var entity = new UIOrderElementEntity
+            {
+                ContentId = def.Def.Uid,
+                LabelText = def.Reward.Replace(Order.Separator, "\n"),
+                Data = def,
+                OnSelectEvent = (view) =>
+                {
+                    var orderEntity = view.Entity as UIOrderElementEntity;
+                    
+                    Fill(UpdateEntitiesSelect(orderEntity?.Data), contentSelect);
+                },
+                OnDeselectEvent = null
+            };
+            
+            views.Add(entity);
         }
         
-        patternIngredient.SetActive(false);
+        return views;
+    }
+    
+    private List<IUIContainerElementEntity> UpdateEntitiesRecipes(List<OrderDef> entities)
+    {
+        var views = new List<IUIContainerElementEntity>(entities.Count);
+        
+        for (var i = 0; i < entities.Count; i++)
+        {
+            var def = entities[i];
+            
+            var entity = new UIRecipeElementEntity
+            {
+                ContentId = def.Uid,
+                LabelText = string.Format(LocalizationService.Get("common.message.level", "common.message.level {0}"), def.Level),
+                IsLock = def.Level > GameDataService.Current.LevelsManager.Level,
+                Prices = def.Prices,
+                OnSelectEvent = (view) =>
+                {
+                    var recipeEntity = view.Entity as UIRecipeElementEntity;
+                    prices.Init(recipeEntity.Prices, transform);
+                },
+                OnDeselectEvent = null
+            };
+            
+            views.Add(entity);
+        }
+        
+        return views;
+    }
+    
+    private List<IUIContainerElementEntity> UpdateEntitiesIngredients(List<CurrencyPair> entities)
+    {
+        var views = new List<IUIContainerElementEntity>(entities.Count);
+        
+        for (var i = 0; i < entities.Count; i++)
+        {
+            var def = entities[i];
+            
+            var entity = new UISimpleScrollElementEntity
+            {
+                ContentId = def.Currency,
+                LabelText = def.Amount.ToString(),
+                OnSelectEvent = null,
+                OnDeselectEvent = null
+            };
+            
+            views.Add(entity);
+        }
+        
+        return views;
     }
 }

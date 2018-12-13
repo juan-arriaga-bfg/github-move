@@ -8,4 +8,5 @@ public class UISimpleScrollElementEntity : IUIContainerElementEntity
 
     public string ContentId;
     public virtual string LabelText { get; set; }
+    public float Alpha = 1;
 }
