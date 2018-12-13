@@ -31,7 +31,7 @@ public class PieceBoardElementView : BoardElementView
 
     private MulticellularPieceBoardObserver multicellularPieceBoardObserver;
 
-    private bool isLockVisual = false;
+    protected bool isLockVisual = false;
 
     private List<ParticleView> lockParticles = new List<ParticleView>();
 

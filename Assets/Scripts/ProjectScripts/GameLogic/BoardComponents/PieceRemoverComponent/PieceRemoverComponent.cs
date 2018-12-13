@@ -250,7 +250,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
             }
         }
 
-        if (isLocked) return false;
+        if (isLocked && Filter != PieceTypeFilter.Default) return false;
 
         var ids = PieceType.GetIdsByFilter(Filter);
         

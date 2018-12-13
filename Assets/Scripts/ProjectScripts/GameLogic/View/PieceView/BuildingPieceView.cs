@@ -30,6 +30,8 @@ public class BuildingPieceView : PieceBoardElementView
 
     public virtual void ToggleLockedState(bool isLocked)
     {
+        if (isLockVisual) return;
+        
         if (isLocked)
         {
             SetCustomMaterial(BoardElementMaterialType.PiecesLockedMaterial, true);
@@ -42,7 +44,17 @@ public class BuildingPieceView : PieceBoardElementView
         }
     }
 
-	public override void ResetViewOnDestroy()
+    public override void ToggleLockView(bool enabled)
+    {
+        base.ToggleLockView(enabled);
+
+        if (enabled == false)
+        {
+            ToggleLockedState(state != null);
+        }
+    }
+
+    public override void ResetViewOnDestroy()
 	{
 		base.ResetViewOnDestroy();
 	    
