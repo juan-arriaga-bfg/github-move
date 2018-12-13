@@ -32,6 +32,8 @@ public class CodexItem : IWUIWindowViewController
 
     // private CodexItemState state;
 
+    private readonly Color COLOR_TRANSPARENT = new Color(1, 1, 1, 0);
+    
     private CodexItemDef def;
 
     private bool forceHideArrow;
@@ -120,13 +122,6 @@ public class CodexItem : IWUIWindowViewController
         // Debug.Log($"[CodexItem] => Init {itemDef.PieceTypeDef.Abbreviations[0]} as {state}");
     }
 
-    private void ToggleViewFromPendingRewardToUnlockedState(bool animated)
-    {
-        pieceImage.gameObject.SetActive(true);
-        shine.SetActive(false);
-        hand.SetActive(def.PieceTypeDef.Filter.Has(PieceTypeFilter.Ingredient));
-    }
-
     private void Reset()
     {
         StopGiftAnimation();
@@ -134,6 +129,7 @@ public class CodexItem : IWUIWindowViewController
         questionMark.SetActive(false);
         shine.SetActive(false);
 
+        DOTween.Kill(pieceImage);
         pieceImage.gameObject.SetActive(true);
         pieceImage.material = unlokedMaterial;
         pieceImage.color = unlockedColor;
@@ -180,15 +176,22 @@ public class CodexItem : IWUIWindowViewController
             return;
         }
 
+        pieceImage.gameObject.SetActive(true);
+        pieceImage.color = COLOR_TRANSPARENT;
+        
         float animLen = giftAnimator.GetCurrentAnimatorClipInfo(0).Length;
         float blendTime = 0.2f;
-        float tweenTime = Mathf.Max(animLen - blendTime);
+        float tweenStartTime = Mathf.Max(0, animLen - blendTime);
+        float tweenTime = Mathf.Max(0, animLen - tweenStartTime);
         
         DOTween.Sequence()
-               .InsertCallback(tweenTime, ()=>
+               .Insert(tweenStartTime, pieceImage.DOColor(unlockedColor, tweenTime).SetId(pieceImage))
+               .InsertCallback(tweenStartTime, ()=>
                 {
                     onComplete();
-                    ToggleViewFromPendingRewardToUnlockedState(true);
+                    
+                    shine.SetActive(false);
+                    hand.SetActive(def.PieceTypeDef.Filter.Has(PieceTypeFilter.Ingredient));
                     
                     StopGiftAnimation();
                 });
