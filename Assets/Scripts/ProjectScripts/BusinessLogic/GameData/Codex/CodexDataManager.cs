@@ -207,7 +207,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         return Items.TryGetValue(firstId, out state);
     }
 
-    public List<CodexItemDef> GetCodexItemsForChainAndFocus(int targetId, int length)
+    public List<CodexItemDef> GetCodexItemsForChainAndFocus(int targetId, int length, bool hideCaptions)
     {
         var board    = BoardService.Current.GetBoardById(0);
         var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
@@ -238,6 +238,8 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
                     def.State = CodexItemState.Highlighted;
                 highlightedIndex = i;
             }
+
+            def.HideCaption = hideCaptions;
         }
 
         // Put HL to almost end of the displayed part of a chain

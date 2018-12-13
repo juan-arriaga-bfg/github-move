@@ -112,7 +112,7 @@ public class CodexItem : IWUIWindowViewController
         }
         
         pieceImage.sprite = sprite;
-        caption.text = captionText;
+        caption.text = def.HideCaption ? "" : captionText;
 
         SyncPivotAndSizeOfPieceImage();
 
