@@ -318,6 +318,11 @@ public class PathfindLockerComponent : ECSEntity
         
         regions.RemoveAll(elem => regionsForRemove.Contains(elem));
     }
+
+    public void DebugFullRecalculate()
+    {
+        OnAddComplete(BoardPosition.GetRect(BoardPosition.Zero(), context.BoardDef.Width, context.BoardDef.Height));
+    }
     
     public void OnAddComplete(List<BoardPosition> spawnArea)
     {
