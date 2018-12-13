@@ -54,7 +54,6 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
                 }
                 
                 Recipes.Sort((a, b) => a.Level.CompareTo(b.Level));
-                
                 if(save?.Orders == null) return;
 
                 foreach (var order in save.Orders)
