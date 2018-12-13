@@ -1598,7 +1598,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-  m_spriteAsset: {fileID: 11400000, guid: cee3366b5f6997148af4153df8f0d51a, type: 2}
+  m_spriteAsset: {fileID: 0}
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 21828550339951598, guid: cee3366b5f6997148af4153df8f0d51a,
     type: 2}
@@ -2197,7 +2197,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-  m_spriteAsset: {fileID: 11400000, guid: cee3366b5f6997148af4153df8f0d51a, type: 2}
+  m_spriteAsset: {fileID: 0}
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 21828550339951598, guid: cee3366b5f6997148af4153df8f0d51a,
     type: 2}
@@ -2231,8 +2231,6 @@ MonoBehaviour:
   amountLabel: {fileID: 114212577060161798}
   buttonLabel: {fileID: 114072316017184122}
   chain: {fileID: 114531073467444964}
-  codexItemPrefab: {fileID: 1815276886000352, guid: f68c6d6a2f1d251479cfa0addd3acbcf,
-    type: 2}
   anchor: {fileID: 224941197145650514}
 --- !u!114 &114729411385438914
 MonoBehaviour:

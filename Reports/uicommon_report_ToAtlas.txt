@@ -1,12 +1,657 @@
 ﻿[
   {
-    "AssetName": "Image",
-    "TextureName": "icon_RemoverButton",
+    "AssetName": "Icon",
+    "TextureName": "icon_Coins3",
     "ShaderName": "UI/Default"
   },
   {
-    "AssetName": "iconRemover",
-    "TextureName": "icon_Remover",
-    "ShaderName": "Sprites/Default"
+    "AssetName": "Icon",
+    "TextureName": "icon_Energy3",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Icon",
+    "TextureName": "icon_Coins2",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "ribbonNextLevel",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Icon",
+    "TextureName": "icon_Energy2",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Icon",
+    "TextureName": "icon_Energy1",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Icon",
+    "TextureName": "icon_Coins1",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "ViewAnchor",
+    "TextureName": "sheetOrders",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#Hero",
+    "TextureName": "circleCharacter",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Front",
+    "TextureName": "ribbonHeadline",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Front",
+    "TextureName": "ribbonHeadline",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Front",
+    "TextureName": "ribbonHeadline",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Front",
+    "TextureName": "ribbonHeadline",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Front",
+    "TextureName": "ribbonHeadline",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Front",
+    "TextureName": "ribbonHeadline",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Front",
+    "TextureName": "ribbonHeadline",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Front",
+    "TextureName": "ribbonHeadline",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Front",
+    "TextureName": "ribbonHeadline",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "back_circle",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Body",
+    "TextureName": "back_circle",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#Icon",
+    "TextureName": "Order2",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "backWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "backWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "backWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "backWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "backWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "BackMain",
+    "TextureName": "backWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "backWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "backWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "backWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "backWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Box",
+    "TextureName": "gift_collection",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "bookmarkPassive",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "bookmarkSelect",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Border",
+    "TextureName": "lineFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Border",
+    "TextureName": "lineFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Border",
+    "TextureName": "lineFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Border",
+    "TextureName": "lineFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Border",
+    "TextureName": "lineFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Border",
+    "TextureName": "lineFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Border",
+    "TextureName": "lineFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Border",
+    "TextureName": "lineFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Border",
+    "TextureName": "lineFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "FlipFlop",
+    "TextureName": "cornerXFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "FlipFlop",
+    "TextureName": "cornerXFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "FlipFlop",
+    "TextureName": "cornerXFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "FlipFlop",
+    "TextureName": "cornerXFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "FlipFlop",
+    "TextureName": "cornerXFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "FlipFlop",
+    "TextureName": "cornerXFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "FlipFlop",
+    "TextureName": "cornerXFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Left",
+    "TextureName": "patternBrownReward",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "PatternLeft",
+    "TextureName": "patternBrownReward",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "PatternRight",
+    "TextureName": "patternBrownReward",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Left",
+    "TextureName": "patternBrownReward",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Right",
+    "TextureName": "patternBrownReward",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#ContainerElement",
+    "TextureName": "backGoldenFrameSlot",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "backGoldenFrameSlot",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#ContainerElement",
+    "TextureName": "backGoldenFrameSlot",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "backGoldenFrameSlot",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "ChestBorder",
+    "TextureName": "backGoldenFrameSlot",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "BottomCenter",
+    "TextureName": "traceryBottomFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "BottomCenter",
+    "TextureName": "traceryBottomFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "BottomCenter",
+    "TextureName": "traceryBottomFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "BottomCenter",
+    "TextureName": "traceryBottomFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "BottomCenter",
+    "TextureName": "traceryBottomFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "BottomCenter",
+    "TextureName": "traceryBottomFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "BottomCenter",
+    "TextureName": "traceryBottomFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "TopLeft",
+    "TextureName": "cornerFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "TopRight",
+    "TextureName": "cornerFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "TopLeft",
+    "TextureName": "cornerFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "TopRight",
+    "TextureName": "cornerFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "TopLeft",
+    "TextureName": "cornerFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "TopRight",
+    "TextureName": "cornerFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "TopLeft",
+    "TextureName": "cornerFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "TopRight",
+    "TextureName": "cornerFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "TopLeft",
+    "TextureName": "cornerFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "TopRight",
+    "TextureName": "cornerFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "TopLeft",
+    "TextureName": "cornerFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "TopRight",
+    "TextureName": "cornerFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "TopLeft",
+    "TextureName": "cornerFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "TopRight",
+    "TextureName": "cornerFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Line",
+    "TextureName": "bigProgressBarBlue",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "LineLight",
+    "TextureName": "bigProgressbarDarkBlue",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "ProgressBack",
+    "TextureName": "back_plashkaCircle",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Image",
+    "TextureName": "back_plashkaCircle",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#ButtonCancelBack",
+    "TextureName": "buttonRed",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#ButtonAcceptBack",
+    "TextureName": "buttonGreen",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "ButtonAccept",
+    "TextureName": "buttonGreen",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "buttonGreen",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "ButtonAccept",
+    "TextureName": "buttonGreen",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "buttonGreen",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "buttonBlue",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "buttonBlue",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "buttonBlue",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "buttonBlue",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "buttonBlue",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#Back",
+    "TextureName": "backWhite",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Button",
+    "TextureName": "buttonXFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Button",
+    "TextureName": "buttonXFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Button",
+    "TextureName": "buttonXFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Button",
+    "TextureName": "buttonXFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Button",
+    "TextureName": "buttonXFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Button",
+    "TextureName": "buttonXFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Button",
+    "TextureName": "buttonXFrameWindow",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "backLight",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#BackSecond",
+    "TextureName": "backNormal",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#Hand",
+    "TextureName": "handIconCodex",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#Basket",
+    "TextureName": "basketIconCodex",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "TopGradient",
+    "TextureName": "scroll_gradient_up_codex",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "BottomGradient",
+    "TextureName": "scroll_gradient_up_codex",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "ButtonInfo",
+    "TextureName": "buttonInfo",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "cellOrders",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back (1)",
+    "TextureName": "cellOrders",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back (2)",
+    "TextureName": "cellOrders",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "ViewAnchor",
+    "TextureName": "cellOrders",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Background",
+    "TextureName": "cellOrders",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Back",
+    "TextureName": "cellOrders",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#Gift",
+    "TextureName": "cellOrders",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#ContainerElement",
+    "TextureName": "cellOrders",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Result",
+    "TextureName": "cellSelectOrders",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#Checkmark",
+    "TextureName": "cellSelectOrders",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#ContainerElement",
+    "TextureName": "cellSelectOrders",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#LineItemEmpty",
+    "TextureName": "pointEmptyProgressLine",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#LineItemCheck",
+    "TextureName": "pointEmptyProgressLine",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Border",
+    "TextureName": "bigProgressBarDark",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "#Arrow",
+    "TextureName": "arrowBranchIcon",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Line",
+    "TextureName": "lineProgressLine",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Image",
+    "TextureName": "stickProgressBar",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Delimiter",
+    "TextureName": "ribbonBrownReward",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Panel",
+    "TextureName": "ribbonBrownReward",
+    "ShaderName": "UI/Default"
+  },
+  {
+    "AssetName": "Delimiter",
+    "TextureName": "ribbonBrownReward",
+    "ShaderName": "UI/Default"
   }
 ]

@@ -255,13 +255,13 @@ MonoBehaviour:
   FadeValue: 0
   selectionView: {fileID: 4502627343303910}
   bodySprites: []
+  particles: []
   errorSelectionMaterial: {fileID: 2100000, guid: 1faf170e9acf1d64f86eefcd318ff557,
     type: 2}
   defaultSelectionMaterial: {fileID: 2100000, guid: cbc475da5f4748047a7b2d276ac8a4ff,
     type: 2}
   highlightPieceMaterial: {fileID: 2100000, guid: 8df69b780d2d9354c8ffb9b8293c73ad,
     type: 2}
-  lockedMaterial: {fileID: 2100000, guid: c7f931e90f2ff8a428774823d5cbce3c, type: 2}
 --- !u!114 &114732073168195222
 MonoBehaviour:
   m_ObjectHideFlags: 1
