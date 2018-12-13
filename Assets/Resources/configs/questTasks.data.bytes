@@ -269,30 +269,9 @@
     }
   },
   {
-    "$type": "TaskMatchEntity, GameAssembly",
+    "$type": "TaskSuperMatchEntity, GameAssembly",
     "Id": "Daily_Quest_2",
     "Group": "Permanent",
-    "TargetValue": 20,
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 30
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Ico": "matchDailyQuestIcon",
-        "Title": "Make merges",
-        "Message": "Make any merges"
-      }
-    }
-  },
-  {
-    "$type": "TaskSuperMatchEntity, GameAssembly",
-    "Id": "Daily_Quest_3",
-    "Group": "Easy",
     "TargetValue": 3,
     "Value1": 5,
     "ComponentsCache": {
@@ -300,28 +279,7 @@
         "Value": [
           {
             "Currency": "Coins",
-            "Amount": 25
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Ico": "quest_icon_super_match",
-        "Message": "Merge {0} or more objects in one turn"
-      }
-    }
-  },
-  {
-    "$type": "TaskSuperMatchEntity, GameAssembly",
-    "Id": "Daily_Quest_4",
-    "Group": "Easy",
-    "TargetValue": 1,
-    "Value1": 8,
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 25
+            "Amount": 20
           }
         ]
       },
@@ -333,7 +291,7 @@
   },
   {
     "$type": "TaskCurrencyCollectEntity, GameAssembly",
-    "Id": "Daily_Quest_5",
+    "Id": "Daily_Quest_3",
     "Group": "Easy",
     "PieceUid": "Coins",
     "TargetValue": 150,
@@ -353,7 +311,7 @@
   },
   {
     "$type": "TaskCollectIngredientEntity, GameAssembly",
-    "Id": "Daily_Quest_6",
+    "Id": "Daily_Quest_4",
     "Group": "Easy",
     "TargetValue": 3,
     "ComponentsCache": {
@@ -373,7 +331,7 @@
   },
   {
     "$type": "TaskUseWorkerEntity, GameAssembly",
-    "Id": "Daily_Quest_7",
+    "Id": "Daily_Quest_5",
     "Group": "Easy",
     "TargetValue": 9,
     "ComponentsCache": {
@@ -393,9 +351,9 @@
   },
   {
     "$type": "TaskKillFieldEntity, GameAssembly",
-    "Id": "Daily_Quest_8",
+    "Id": "Daily_Quest_6",
     "Group": "Easy",
-    "TargetValue": 2,
+    "TargetValue": 1,
     "ComponentsCache": {
       "QuestRewardComponent": {
         "Value": [
@@ -413,7 +371,7 @@
   },
   {
     "$type": "TaskOpenChestEntity, GameAssembly",
-    "Id": "Daily_Quest_9",
+    "Id": "Daily_Quest_7",
     "Group": "Easy",
     "TargetValue": 2,
     "ComponentsCache": {
@@ -433,7 +391,7 @@
   },
   {
     "$type": "TaskCompleteOrderEntity, GameAssembly",
-    "Id": "Daily_Quest_10",
+    "Id": "Daily_Quest_8",
     "Group": "Easy",
     "TargetValue": 2,
     "ComponentsCache": {
@@ -453,7 +411,7 @@
   },
   {
     "$type": "TaskCurrencySpendEntity, GameAssembly",
-    "Id": "Daily_Quest_11",
+    "Id": "Daily_Quest_9",
     "Group": "Easy",
     "PieceUid": "Coins",
     "TargetValue": 200,
@@ -473,7 +431,7 @@
   },
   {
     "$type": "TaskCurrencyCollectEntity, GameAssembly",
-    "Id": "Daily_Quest_12",
+    "Id": "Daily_Quest_10",
     "Group": "Normal",
     "PieceUid": "Coins",
     "TargetValue": 550,
@@ -493,7 +451,7 @@
   },
   {
     "$type": "TaskCollectIngredientEntity, GameAssembly",
-    "Id": "Daily_Quest_13",
+    "Id": "Daily_Quest_11",
     "Group": "Normal",
     "TargetValue": 10,
     "ComponentsCache": {
@@ -513,7 +471,7 @@
   },
   {
     "$type": "TaskUseWorkerEntity, GameAssembly",
-    "Id": "Daily_Quest_14",
+    "Id": "Daily_Quest_12",
     "Group": "Normal",
     "TargetValue": 20,
     "ComponentsCache": {
@@ -533,9 +491,9 @@
   },
   {
     "$type": "TaskKillFieldEntity, GameAssembly",
-    "Id": "Daily_Quest_15",
+    "Id": "Daily_Quest_13",
     "Group": "Normal",
-    "TargetValue": 5,
+    "TargetValue": 2,
     "ComponentsCache": {
       "QuestRewardComponent": {
         "Value": [
@@ -553,7 +511,7 @@
   },
   {
     "$type": "TaskOpenChestEntity, GameAssembly",
-    "Id": "Daily_Quest_16",
+    "Id": "Daily_Quest_14",
     "Group": "Normal",
     "TargetValue": 3,
     "ComponentsCache": {
@@ -573,7 +531,7 @@
   },
   {
     "$type": "TaskCompleteOrderEntity, GameAssembly",
-    "Id": "Daily_Quest_17",
+    "Id": "Daily_Quest_15",
     "Group": "Normal",
     "TargetValue": 5,
     "ComponentsCache": {
@@ -593,7 +551,7 @@
   },
   {
     "$type": "TaskCurrencySpendEntity, GameAssembly",
-    "Id": "Daily_Quest_18",
+    "Id": "Daily_Quest_16",
     "Group": "Normal",
     "PieceUid": "Coins",
     "TargetValue": 800,
@@ -613,7 +571,7 @@
   },
   {
     "$type": "TaskCurrencySpendEntity, GameAssembly",
-    "Id": "Daily_Quest_19",
+    "Id": "Daily_Quest_17",
     "Group": "Normal",
     "PieceUid": "Crystals",
     "TargetValue": 10,
@@ -633,7 +591,7 @@
   },
   {
     "$type": "TaskCurrencyCollectEntity, GameAssembly",
-    "Id": "Daily_Quest_20",
+    "Id": "Daily_Quest_18",
     "Group": "Hard",
     "PieceUid": "Crystals",
     "TargetValue": 5,
@@ -653,7 +611,7 @@
   },
   {
     "$type": "TaskCurrencySpendEntity, GameAssembly",
-    "Id": "Daily_Quest_21",
+    "Id": "Daily_Quest_19",
     "Group": "Hard",
     "PieceUid": "Coins",
     "TargetValue": 1200,
@@ -673,7 +631,7 @@
   },
   {
     "$type": "TaskCurrencySpendEntity, GameAssembly",
-    "Id": "Daily_Quest_22",
+    "Id": "Daily_Quest_20",
     "Group": "Hard",
     "PieceUid": "Crystals",
     "TargetValue": 20,
@@ -693,9 +651,9 @@
   },
   {
     "$type": "TaskKillFieldEntity, GameAssembly",
-    "Id": "Daily_Quest_23",
+    "Id": "Daily_Quest_21",
     "Group": "Hard",
-    "TargetValue": 9,
+    "TargetValue": 4,
     "ComponentsCache": {
       "QuestRewardComponent": {
         "Value": [
@@ -713,7 +671,7 @@
   },
   {
     "$type": "TaskUseWorkerEntity, GameAssembly",
-    "Id": "Daily_Quest_24",
+    "Id": "Daily_Quest_22",
     "Group": "Hard",
     "TargetValue": 30,
     "ComponentsCache": {
@@ -733,7 +691,7 @@
   },
   {
     "$type": "TaskOpenChestEntity, GameAssembly",
-    "Id": "Daily_Quest_25",
+    "Id": "Daily_Quest_23",
     "Group": "Hard",
     "TargetValue": 5,
     "ComponentsCache": {
