@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -138,12 +139,62 @@ public class DevTools : UIContainerElementViewController
         BoardService.Current.FirstBoard.BoardLogic.FireflyLogic.Execute();
     }
 
+    private void ShowQuestWindow(List<QuestEntity> quests, int index)
+    {
+        if (quests[index].Id.ToLower().Contains("daily"))
+        {
+            return;
+        }
+        
+        var model = UIService.Get.GetCachedModel<UIQuestWindowModel>(UIWindowType.QuestWindow);
+        model.Quest = quests[index];
+        model.Quest.Start(null);
+        
+        var nextIndex = index + 1;
+        
+        if (index < quests.Count)
+        {
+            model.OnClosed = () =>
+            {
+                ShowQuestWindow(quests, nextIndex);
+            };
+        }
+    
+        UIService.Get.ShowWindow(UIWindowType.QuestWindow);
+    }
+
+    private void ShowAllStoryQuestsWindows()
+    {
+        var manager = GameDataService.Current.QuestsManager;
+        
+        Dictionary<string, JToken> configs = manager.Cache[typeof(QuestEntity)];
+
+        var quests = new List<QuestEntity>();
+            
+        foreach (var config in configs)
+        {
+            QuestEntity obj = manager.InstantiateFromJson<QuestEntity>(config.Value);
+            var id = obj.Id;
+            if (id == "13_CreatePiece_A6")
+            {
+                continue;
+            }
+            
+            quests.Add(manager.InstantiateQuest(id));
+        }
+
+        ShowQuestWindow(quests, 0);
+    }
+    
     public void OnDebug1Click()
     {
         Debug.Log("OnDebug1Click");
 
-        CurrencyHellper.Purchase(Currency.Experience.Name, 2000);
+        ShowAllStoryQuestsWindows();
         return;
+        
+        // CurrencyHellper.Purchase(Currency.Experience.Name, 2000);
+        // return;
         // GameDataService.Current.QuestsManager.StartNewDailyQuest();
         //var quest = GameDataService.Current.QuestsManager.StartQuestById("Daily", null);
 

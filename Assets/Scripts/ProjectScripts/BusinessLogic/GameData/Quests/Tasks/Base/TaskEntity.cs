@@ -204,6 +204,11 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     public virtual string GetLocalizedHint()
     {
         string key = cachedQuestDescription?.Hint;
+        if (string.IsNullOrEmpty(key))
+        {
+            return string.Empty;
+        }
+        
         return LocalizationService.Get(key, key);
     }
 }

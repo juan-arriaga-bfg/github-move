@@ -24,6 +24,8 @@ public class UIQuestWindowView : UIGenericPopupWindowView
 
         var model = Model as UIQuestWindowModel;
 
+        Debug.Log($"[UIQuestWindowView] => OnViewShow: Quest: {model.Quest.Id}");
+        
         firstTask = model.Quest.Tasks[0];
 
         SetTitle(LocalizationService.Get("window.quest.title", "window.quest.title"));
@@ -82,6 +84,10 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIQuestWindowModel;
 
         windowModel.Quest = null;
+
+        var action = windowModel.OnClosed;
+        windowModel.OnClosed = null;
+        action?.Invoke();
     }
 
     public void OnClick()
@@ -106,8 +112,6 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             Destroy(child.gameObject);
         }
 
-        // chain.gameObject.SetActive(false);
-
         var taskAboutPiece = model.Quest.Tasks[0] as IHavePieceId;
         if (taskAboutPiece == null)
         {
@@ -126,8 +130,13 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             return false;
         }
 
-        // chain.gameObject.SetActive(true);
-
+        var hintText = GetHintText();
+        if (!string.IsNullOrEmpty(hintText))
+        {
+            Debug.Log($"[UIQuestWindowView] => ShowChain: has piece id but cancelled by hint: {hintText}");
+            return false;
+        }
+        
         CodexChainDef chainDef = new CodexChainDef {ItemDefs = itemDefs};
         
         UICodexWindowView.CreateItems(chain, chainDef, CHAIN_LENGTH);
