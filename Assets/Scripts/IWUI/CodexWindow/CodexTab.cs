@@ -5,13 +5,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CodexTab : Tab
+public class CodexTab : IWBaseMonoBehaviour
 {
     [SerializeField] private Transform chainsHost;
-    [SerializeField] private TextMeshProUGUI captionActive;
-    [SerializeField] private TextMeshProUGUI captionDisabled;    
-    [SerializeField] private GameObject exclamationMarkActive;
-    [SerializeField] private GameObject exclamationMarkDisabled;
+    // [SerializeField] private TextMeshProUGUI captionActive;
+    // [SerializeField] private TextMeshProUGUI captionDisabled;    
+    // [SerializeField] private GameObject exclamationMarkActive;
+    // [SerializeField] private GameObject exclamationMarkDisabled;
     [SerializeField] private ScrollRect scroll;
     
     private readonly List<CodexChain> codexChains = new List<CodexChain>();
@@ -22,25 +22,25 @@ public class CodexTab : Tab
     {
         this.def = def;
         
-        captionActive.text = def.Name;
-        captionDisabled.text = def.Name;
-
-        ToggleExclamationMark();
+        // captionActive.text = def.Name;
+        // captionDisabled.text = def.Name;
+        //
+        // ToggleExclamationMark();
 
         ScrollToTop();
     }
     
-    private void ToggleExclamationMark()
-    {
-        bool enabled = def?.PendingReward ?? false;
-        
-        if (exclamationMarkActive != null)
-        {
-            exclamationMarkActive.SetActive(enabled);
-        }
-        
-        exclamationMarkDisabled.SetActive(enabled); 
-    }
+    // private void ToggleExclamationMark()
+    // {
+    //     bool enabled = def?.PendingReward ?? false;
+    //     
+    //     if (exclamationMarkActive != null)
+    //     {
+    //         exclamationMarkActive.SetActive(enabled);
+    //     }
+    //     
+    //     exclamationMarkDisabled.SetActive(enabled); 
+    // }
     
     public void AddChain(CodexChain codexChain)
     {
@@ -134,6 +134,6 @@ public class CodexTab : Tab
     
     private void OnPieceRewardClaimed(int id)
     {
-        ToggleExclamationMark();
+        //ToggleExclamationMark();
     }
 }

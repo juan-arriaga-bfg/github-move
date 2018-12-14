@@ -161,6 +161,11 @@ public class CodexItem : IWUIWindowViewController
     {
         return def?.PieceDef?.Name;
     }
+    
+    public void SetCaption(string text)
+    {
+        caption.text = text;
+    }
 
     private void PlayGiftIdleAnimation()
     {

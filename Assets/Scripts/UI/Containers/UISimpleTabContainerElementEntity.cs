@@ -8,4 +8,5 @@ public class UISimpleTabContainerElementEntity : IUIContainerElementEntity
 
     public string LabelText;
     public string CheckmarkText;
+    public bool ExclamationMark = false;
 }

@@ -33,6 +33,8 @@ public class CodexContent
         }
     }
 
+    public List<string> TabHeaders => TabDefs.Select(t => t.Name).ToList();
+
     public CodexChainDef GetChainDefByFirstItemId(int id)
     {
         if (TabDefs == null)
