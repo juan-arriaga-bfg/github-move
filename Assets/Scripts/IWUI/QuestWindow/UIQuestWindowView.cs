@@ -107,10 +107,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
 
     private bool ShowChain(UIQuestWindowModel model)
     {
-        foreach (Transform child in chain.ItemsHost)
-        {
-            Destroy(child.gameObject);
-        }
+        chain.ReturnContentToPool();
 
         var taskAboutPiece = model.Quest.Tasks[0] as IHavePieceId;
         if (taskAboutPiece == null)
@@ -124,16 +121,16 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             return false;
         }
 
-        var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId, CHAIN_LENGTH, true);
-        if (itemDefs == null)
-        {
-            return false;
-        }
-
         var hintText = GetHintText();
         if (!string.IsNullOrEmpty(hintText))
         {
             Debug.Log($"[UIQuestWindowView] => ShowChain: has piece id but cancelled by hint: {hintText}");
+            return false;
+        }
+        
+        var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId, CHAIN_LENGTH, true);
+        if (itemDefs == null)
+        {
             return false;
         }
         

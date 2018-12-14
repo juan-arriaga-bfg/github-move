@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public class UICodexWindowView : UIGenericPopupWindowView
 {
-    [IWUIBinding("#PanelTabs")] private TabGroup tabGroup;
-    [IWUIBinding("#Tab")] private GameObject tabPrefab; 
+    // [IWUIBinding("#PanelTabs")] private TabGroup tabGroup;
+    [IWUIBinding("#TabPrefab")] private GameObject tabPrefab; 
+    [IWUIBinding("#Toggles")] private UIContainerViewController contentToggles;
     
     // Debug
     [IWUIBinding("#ButtonUnlockAll")] private UIButtonViewController btnUnlockAll; 
@@ -17,6 +18,23 @@ public class UICodexWindowView : UIGenericPopupWindowView
 
     private List<CodexTab> codexTabs = new List<CodexTab>();
 
+    public override void InitView(IWWindowModel model, IWWindowController controller)
+    {
+        base.InitView(model, controller);
+        
+        var windowModel = Model as UICodexWindowModel;
+
+        CodexContent codexContent = GameDataService.Current.CodexManager.GetCodexContent();
+        
+        CreateTabs(codexContent.TabDefs);    
+        
+        Fill(UpdateEntitiesToggles(codexContent.TabHeaders), contentToggles);
+        
+        contentToggles.transform.SetAsLastSibling();
+
+        lastCodexContentId = codexContent.InstanceId;
+    }
+    
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -52,38 +70,62 @@ public class UICodexWindowView : UIGenericPopupWindowView
         
         UICodexWindowModel model = Model as UICodexWindowModel;   
         
-        var codexManager = GameDataService.Current.CodexManager;
-        codexManager.ClearCodexContentCache();
+        // var codexManager = GameDataService.Current.CodexManager;
+        // codexManager.ClearCodexContentCache();
         
         model.OnClose?.Invoke();
     }
     
     private void Init(UICodexWindowModel model)
     {
+        // Toggle (!)
+        for (var i = 0; i < model.CodexContent.TabDefs.Count; i++)
+        {
+            var tabDef = model.CodexContent.TabDefs[i];
+            ((UISimpleTabContainerElementViewController)contentToggles.Tabs[i]).ToggleExclamationMark(tabDef.PendingReward);
+        }
+
         if (model.CodexContent.InstanceId == lastCodexContentId)
         {
             return;
         }
 
-        lastCodexContentId = model.CodexContent.InstanceId;
-        
-        SetTitle(model.Title);
-        
-        // todo: refresh instead of recreate
-
-        tabPrefab.SetActive(false);
-
+        foreach (var tab in codexTabs)
+        {
+            tab.ReturnContentToPool();
+        }
+       
         for (var i = 0; i < codexTabs.Count; i++)
         {
-            var tabGo = codexTabs[i].gameObject;
-            Destroy(tabGo);
+            var tab = codexTabs[i];
+            CreateChains(tab, model.CodexContent.TabDefs[i]);
         }
         
-        tabGroup.RemoveAllTabs();
+        int activeTabIndex = CalculateActiveTabIndexFromDefs(model);
+        
+        //CreateChains(codexTabs[activeTabIndex], model.CodexContent.TabDefs[activeTabIndex]);
 
-        CreateTabs(model.CodexContent.TabDefs);       
+        //StartCoroutine(CreateChainsCoroutine(activeTabIndex, model));
+        
+        lastCodexContentId = model.CodexContent.InstanceId;
     }
 
+    // private IEnumerator CreateChainsCoroutine(int ignoreIndex, UICodexWindowModel model)
+    // {
+    //     for (var i = 0; i < codexTabs.Count; i++)
+    //     {
+    //         if (i == ignoreIndex)
+    //         {
+    //             continue;
+    //         }
+    //         
+    //         var tab = codexTabs[i];
+    //         CreateChains(tab, model.CodexContent.TabDefs[i]);
+    //
+    //         yield return new WaitForEndOfFrame();
+    //     }
+    // }
+    
     private void CreateTabs(List<CodexTabDef> tabDefs)
     {
         codexTabs = new List<CodexTab>();
@@ -92,18 +134,20 @@ public class UICodexWindowView : UIGenericPopupWindowView
         {
             var codexTabDef = tabDefs[i];
             
-            var tabGo  = Instantiate(tabPrefab);
+            var tabGo = Instantiate(tabPrefab);
+            tabGo.transform.SetParent(tabPrefab.transform.parent, false);
+            tabGo.name = $"TabContent_{i}";
             tabGo.SetActive(true);
             
             CodexTab tab = tabGo.GetComponent<CodexTab>();
             tab.Init(codexTabDef);
-            
-            tabGroup.AddTab(tab, i);
 
             CreateChains(tab, codexTabDef);
 
             codexTabs.Add(tab);
         }
+        
+        tabPrefab.SetActive(false);
     }
     
     private void UpdateTabs(UICodexWindowModel model)
@@ -118,25 +162,43 @@ public class UICodexWindowView : UIGenericPopupWindowView
         // some tab forced
         if (model.ActiveTabIndex != -1)
         {
-            tabGroup.ActivateTab(model.ActiveTabIndex);
+            contentToggles.Select(model.ActiveTabIndex);
             return;
         }
 
         // Scan all tabs to find (!) to focus
-        for (var i = 0; i < model.CodexContent.TabDefs.Count; i++)
+        for (var tabIndex = 0; tabIndex < model.CodexContent.TabDefs.Count; tabIndex++)
         {
-            var tabDef = model.CodexContent.TabDefs[i];
-            foreach (var chainDef in tabDef.ChainDefs)
+            var tabDef = model.CodexContent.TabDefs[tabIndex];
+            for (var chainIndex = 0; chainIndex < tabDef.ChainDefs.Count; chainIndex++)
             {
-                foreach (var itemDef in chainDef.ItemDefs)
+                var chainDef = tabDef.ChainDefs[chainIndex];
+                for (var itemIndex = 0; itemIndex < chainDef.ItemDefs.Count; itemIndex++)
                 {
+                    var itemDef = chainDef.ItemDefs[itemIndex];
                     if (itemDef.PendingReward != null)
                     {
-                        tabGroup.ActivateTab(i);
+                        contentToggles.Select(tabIndex);
 
                         // Scroll
                         var target = chainDef.ItemDefs[0].PieceTypeDef.Id;
-                        codexTabs[i].ScrollTo(target);
+
+                        if (tabDef.ChainDefs.Count == 2)
+                        {
+                            if (chainIndex == 1)
+                            {
+                                codexTabs[tabIndex].ScrollToBottom();
+                            }
+                            else
+                            {
+                                codexTabs[tabIndex].ScrollToTop();
+                            }
+                        }
+                        else
+                        {
+                            codexTabs[tabIndex].ScrollTo(target);
+                        }
+
                         return;
                     }
                 }
@@ -144,7 +206,55 @@ public class UICodexWindowView : UIGenericPopupWindowView
         }
         
         // fallback
-        tabGroup.ActivateTab(0);
+        contentToggles.Select(0);
+    }
+
+    private int CalculateActiveTabIndexFromDefs(UICodexWindowModel model)
+    {
+        for (var i = 0; i < model.CodexContent.TabDefs.Count; i++)
+        {
+            var tabDef = model.CodexContent.TabDefs[i];
+            if (tabDef.PendingReward)
+            {
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+    private List<IUIContainerElementEntity> UpdateEntitiesToggles(List<string> entities)
+    {
+        var views = new List<IUIContainerElementEntity>(entities.Count);
+        
+        for (var i = 0; i < entities.Count; i++)
+        {
+            var def = entities[i];
+            
+            var entity = new UISimpleTabContainerElementEntity
+            {
+                LabelText = def,
+                CheckmarkText = def,
+                OnSelectEvent = view =>
+                {
+                    OnSelectToggle(view.Index);
+                },
+                OnDeselectEvent = null
+            };
+            
+            views.Add(entity);
+        }
+        
+        return views;
+    }
+
+    private void OnSelectToggle(int index)
+    {
+        for (var i = 0; i < codexTabs.Count; i++)
+        {
+            var tab = codexTabs[i];
+            tab.gameObject.SetActive(i == index);
+        }
     }
 
     private static void CreateChains(CodexTab tab, CodexTabDef tabDef)

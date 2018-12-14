@@ -18,7 +18,7 @@ public class CodexItem : IWUIWindowViewController
     [SerializeField] private Vector3 defaultScale;
     [SerializeField] private Vector3 rewardScale;
     
-    public const float MIN_ITEM_IMAGE_SIZE = 80;
+    public const float MIN_ITEM_IMAGE_SIZE = 90;
     public const float MAX_ITEM_IMAGE_SIZE = 155;
 
     [IWUIBinding("#Caption")] private TextMeshProUGUI caption;
@@ -114,14 +114,14 @@ public class CodexItem : IWUIWindowViewController
         pieceImage.sprite = sprite;
         caption.text = def.HideCaption ? "" : captionText;
 
-        SyncPivotAndSizeOfPieceImage();
-
-        Vector2 size = pieceImage.rectTransform.sizeDelta;
-        size.x = Mathf.Min(MIN_ITEM_IMAGE_SIZE, size.x);
-        size.y = Mathf.Min(MIN_ITEM_IMAGE_SIZE, size.y);
-        pieceImage.rectTransform.sizeDelta = size;
+        // SyncPivotAndSizeOfPieceImage();
+        //
+        // Vector2 size = pieceImage.rectTransform.sizeDelta;
+        // size.x = Mathf.Min(MIN_ITEM_IMAGE_SIZE, size.x);
+        // size.y = Mathf.Min(MIN_ITEM_IMAGE_SIZE, size.y);
+        // pieceImage.rectTransform.sizeDelta = size;
         
-        // Debug.Log($"[CodexItem] => Init {itemDef.PieceTypeDef.Abbreviations[0]} as {state}");
+        // Debug.Log($"[CodexItem] => Init {itemDef.PieceTypeDef.Abbreviations[0]} as {def.State}, arrow: {def.ShowArrow}");
     }
 
     private void Reset()
@@ -160,6 +160,11 @@ public class CodexItem : IWUIWindowViewController
     private string GetCaption()
     {
         return def?.PieceDef?.Name;
+    }
+    
+    public void SetCaption(string text)
+    {
+        caption.text = text;
     }
 
     private void PlayGiftIdleAnimation()
@@ -269,13 +274,13 @@ public class CodexItem : IWUIWindowViewController
         rectTransform.pivot = percentPivot;
     }
 
-    private void OnEnable()
-    {
-        if (def == null)
-        {
-            return;
-        }
-        
-        ReloadWithState(def.State);
-    }
+    // private void OnEnable()
+    // {
+    //     if (def == null)
+    //     {
+    //         return;
+    //     }
+    //     
+    //     ReloadWithState(def.State);
+    // }
 }

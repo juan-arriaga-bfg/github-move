@@ -410,10 +410,12 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
         ValidateCodexState();
         
+        ClearCodexContentCache();
+        
         OnPieceRewardClaimed?.Invoke(pieceId);
     }
 
-    public void ValidateCodexState()
+    private void ValidateCodexState()
     {
         if (CodexState == CodexState.PendingReward)
         {
