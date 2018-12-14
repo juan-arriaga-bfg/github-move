@@ -422,73 +422,73 @@
       }
     ]
   },
-    {
-      "Uid": "OB_PR_F",
-      "Delay": 120,
-      "Price": {
-        "Currency": "Energy",
-        "Amount": 10
-      },
-      "StepRewards": [
-        {
-          "Currency": "Experience",
-          "Amount": 5
-        }
-      ],
-      "ProductionAmount": {
-        "Min": 0,
-        "Max": 0
-      },
-      "PieceAmount": 5,
-      "PieceWeights": [
-        {
-          "Uid": "PR_F1",
-          "Weight": 2
-        },
-        {
-          "Uid": "PR_F2",
-          "Weight": 2
-        },
-        {
-          "Uid": "Soft1",
-          "Weight": 1
-        }
-      ]
+  {
+    "Uid": "OB_PR_F",
+    "Delay": 120,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 10
     },
-    {
-      "Uid": "OB_PR_G",
-      "Delay": 120,
-      "Price": {
-        "Currency": "Energy",
-        "Amount": 10
-      },
-      "StepRewards": [
-        {
-          "Currency": "Experience",
-          "Amount": 5
-        }
-      ],
-      "ProductionAmount": {
-        "Min": 0,
-        "Max": 0
-      },
-      "PieceAmount": 5,
-      "PieceWeights": [
-        {
-          "Uid": "PR_G1",
-          "Weight": 2
-        },
-        {
-          "Uid": "PR_G2",
-          "Weight": 2
-        },
-        {
-          "Uid": "Soft1",
-          "Weight": 1
-        }
-      ]
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 0,
+      "Max": 0
     },
-    {
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "PR_F1",
+        "Weight": 2
+      },
+      {
+        "Uid": "PR_F2",
+        "Weight": 2
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
+      }
+    ]
+  },
+  {
+    "Uid": "OB_PR_G",
+    "Delay": 120,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 10
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "PR_G1",
+        "Weight": 2
+      },
+      {
+        "Uid": "PR_G2",
+        "Weight": 2
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
+      }
+    ]
+  },
+  {
     "Uid": "OB1_TT",
     "Delay": 2,
     "Price": {
