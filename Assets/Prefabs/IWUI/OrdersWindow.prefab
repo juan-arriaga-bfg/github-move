@@ -3653,7 +3653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 21121607270568730, guid: 97fd100988018084e8f576a9c098e720,
+  m_Material: {fileID: 21608676813535184, guid: 2315669cf8015457ea21413be14a8444,
     type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -3663,9 +3663,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: 2315669cf8015457ea21413be14a8444, type: 2}
   m_material: {fileID: 0}
-  m_sharedMaterial: {fileID: 21121607270568730, guid: 97fd100988018084e8f576a9c098e720,
+  m_sharedMaterial: {fileID: 21608676813535184, guid: 2315669cf8015457ea21413be14a8444,
     type: 2}
   m_isDefaultMaterial: 1
   m_padding: 0
@@ -4413,7 +4413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 21121607270568730, guid: 97fd100988018084e8f576a9c098e720,
+  m_Material: {fileID: 21608676813535184, guid: 2315669cf8015457ea21413be14a8444,
     type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -4423,9 +4423,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: 2315669cf8015457ea21413be14a8444, type: 2}
   m_material: {fileID: 0}
-  m_sharedMaterial: {fileID: 21121607270568730, guid: 97fd100988018084e8f576a9c098e720,
+  m_sharedMaterial: {fileID: 21608676813535184, guid: 2315669cf8015457ea21413be14a8444,
     type: 2}
   m_isDefaultMaterial: 1
   m_padding: 0
@@ -6446,10 +6446,10 @@ RectTransform:
   m_Father: {fileID: 224926047291128522}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 128, y: -109}
+  m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224138012834200976
 RectTransform:

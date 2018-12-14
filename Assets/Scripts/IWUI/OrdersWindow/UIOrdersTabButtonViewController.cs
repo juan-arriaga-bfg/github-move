@@ -4,8 +4,7 @@ using UnityEngine.UI;
 
 public class UIOrdersTabButtonViewController : UIBaseButtonViewController
 {
-    [IWUIBinding] private Transform body;
-    [IWUIBinding] private CanvasGroup group;
+    [IWUIBindingNullable] private CanvasGroup group;
     [IWUIBindingNullable("#Checkmark")] private Image checkmark;
     
     private float scale = 1.1f;
@@ -18,8 +17,8 @@ public class UIOrdersTabButtonViewController : UIBaseButtonViewController
     
     public bool Interactable
     {
-        get { return group.interactable; }
-        set { group.interactable = value; }
+        get { return group == null || group.interactable; }
+        set { if (group != null) group.interactable = value; }
     }
     
     public override void UpdateView()
@@ -27,10 +26,10 @@ public class UIOrdersTabButtonViewController : UIBaseButtonViewController
         base.UpdateView();
         
         var value = state == GenericButtonState.Active ? scale : 1f;
-        var time = 0.1f * body.localScale.x / value;
+        var time = 0.1f * CachedRectTransform.localScale.x / value;
         
-        DOTween.Kill(body);
-        body.DOScale(value, time).SetId(body);
+        DOTween.Kill(CachedRectTransform);
+        CachedRectTransform.DOScale(value, time).SetId(CachedRectTransform);
         
         if(checkmark == null) return;
         
