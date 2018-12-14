@@ -32,7 +32,8 @@
       "QuestDescriptionComponent": {
         "Ico": "OB1_A",
         "Title": "Cut down a tree",
-        "Message": "Remove obstacles"
+        "Message": "Remove obstacles",
+        "Hint": "task.kill.tree.hint"
       }
     }
   },
@@ -95,7 +96,7 @@
         "Ico": "CH1_A",
         "Title": "Open a chest",
         "Message": "Open a chest",
-        "Hint": "task.open.chest.hint"
+        "Hint": "task.open.chest.tutor.hint"
       }
     }
   },
