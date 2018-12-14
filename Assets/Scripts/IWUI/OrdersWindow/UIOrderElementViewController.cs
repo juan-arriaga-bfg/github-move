@@ -13,8 +13,6 @@ public class UIOrderElementViewController : UISimpleScrollElementViewController
         
 		var contentEntity = entity as UIOrderElementEntity;
 		
-//		toggle.isOn = UIService.Get.GetCachedModel<UIOrdersWindowModel>(UIWindowType.OrdersWindow).Select == order;
-		
 		button
 			.SetActiveScale(1.2f)
 			.Init()
