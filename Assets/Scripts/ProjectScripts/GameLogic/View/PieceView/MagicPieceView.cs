@@ -107,6 +107,8 @@ public class MagicPieceView : PieceBoardElementView
 
             options.Add(new KeyValuePair<int, List<BoardPosition>>(score, positions));
         }
+        
+        if(options.Count == 0) return currentBestPieces;
 
         options = options.FindAll(pair => pair.Key == bestScore);
         
