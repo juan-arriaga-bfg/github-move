@@ -385,7 +385,7 @@ public class PieceBoardElementView : BoardElementView
     {
         if (arrow != null) return;
         
-        arrow = HintArrowView.Show(Piece.CachedPosition, 0, 0, false, true);
+        arrow = HintArrowView.Show(Piece.CachedPosition, 0, -0.5f, false, true);
     }
 
     public void RemoveArrow(float delay = 0)

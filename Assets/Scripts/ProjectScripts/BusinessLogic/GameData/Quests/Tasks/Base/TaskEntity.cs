@@ -46,6 +46,8 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     }
     
 #endregion
+
+    private QuestDescriptionComponent cachedQuestDescription;
     
     /// <summary>
     /// Return true when Task actually waiting for specified changes in the game
@@ -171,20 +173,42 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
         }
     }
 
+    protected override ECSEntity RegisterComponentDeserializedInternal(IECSComponent component)
+    {
+        QuestDescriptionComponent descriptionComponent = component as QuestDescriptionComponent;
+        if (descriptionComponent != null)
+        {
+            cachedQuestDescription = descriptionComponent;
+        }
+        
+        return base.RegisterComponentDeserializedInternal(component);
+    }
+
     public virtual string GetLocalizedMessage()
     {
-        string key = GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Message;
+        string key = cachedQuestDescription?.Message;
         return LocalizationService.Get(key, key) ;
     }
     
     public virtual string GetLocalizedTitle()
     {
-        string key = GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Title;
+        string key = cachedQuestDescription?.Title;
         return LocalizationService.Get(key, key) ;
     }
     
     public virtual string GetIco()
     {
-        return  GetComponent<QuestDescriptionComponent>(QuestDescriptionComponent.ComponentGuid)?.Ico;
+        return  cachedQuestDescription?.Ico;
+    }
+    
+    public virtual string GetLocalizedHint()
+    {
+        string key = cachedQuestDescription?.Hint;
+        if (string.IsNullOrEmpty(key))
+        {
+            return string.Empty;
+        }
+        
+        return LocalizationService.Get(key, key);
     }
 }

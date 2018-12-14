@@ -5,12 +5,20 @@ using UnityEngine.UI;
 
 public class UIOrderPriceItem : IWUIWindowViewController
 {
-    [SerializeField] private List<UISimpleScrollItem> priceItems;
-    [SerializeField] private Transform parent;
-    [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private ToggleGroup toggleGroup;
-
+    [IWUIBinding("/canvas/#Body/Back/Contents/Tabs/#TabRecipes/Viewport/#ContentRecipes", true)] private UIContainerViewController contentRecipes;
+    [IWUIBinding] private UIContainerViewController container;
+    [IWUIBinding] private CanvasGroup canvasGroup;
+    
+    private Transform parent;
+    private Transform target;
     private bool isScroll;
+
+    public override void OnViewInit(IWUIWindowView context)
+    {
+        base.OnViewInit(context);
+
+        parent = CachedTransform.parent;
+    }
 
     public void Hide(ScrollRect scroll)
     {
@@ -22,46 +30,61 @@ public class UIOrderPriceItem : IWUIWindowViewController
         
         if(isScroll == false) return;
         
-        toggleGroup.SetAllTogglesOff();
+        contentRecipes.Deselect(contentRecipes.GetSelectedTab());
+        Select(null, parent);
     }
     
     public void HideHard()
     {
-        Init(null, parent);
+        Select(null, parent);
     }
     
-    public void Init(List<CurrencyPair> prices, Transform target)
+    public void Select(List<CurrencyPair> entities, Transform target)
     {
+        if(this.target == target) return;
+        
         DOTween.Kill(canvasGroup);
+        CachedTransform.localScale = Vector3.one;
 
         var sequence = DOTween.Sequence().SetId(canvasGroup);
 
         sequence.Insert(0, canvasGroup.DOFade(0, 0.03f * canvasGroup.alpha));
         sequence.InsertCallback(0.03f * canvasGroup.alpha, () =>
         {
-            transform.SetParent(target, false);
-            transform.localPosition = new Vector3(0, -75);
-            transform.SetParent(parent, true);
+            this.target = target;
+            CachedTransform.SetParent(target, false);
+            CachedTransform.localPosition = new Vector3(0, -75);
+            CachedTransform.SetParent(parent, true);
+            CachedTransform.localScale = Vector3.one;
             
-            if(prices == null) return;
-
-            for (var i = 0; i < priceItems.Count; i++)
+            if (entities == null || entities.Count <= 0)
             {
-                var isExcess = i >= prices.Count;
-                var item = priceItems[i];
-            
-                item.gameObject.SetActive(!isExcess);
-            
-                if(isExcess) continue;
-            
-                var price = prices[i];
-                var current = ProfileService.Current.GetStorageItem(price.Currency).Amount;
-                var color = current == price.Amount ? "FFFFFF" : (current > price.Amount ? "28EC6D" : "EC5928"); 
-            
-                item.Init(price.Currency, $"<color=#{color}>{current}</color><size=35>/{price.Amount}</size>");
+                container.Clear();
+                return;
             }
+            
+            var views = new List<IUIContainerElementEntity>(entities.Count);
+        
+            for (var i = 0; i < entities.Count; i++)
+            {
+                var def = entities[i];
+                var current = ProfileService.Current.GetStorageItem(def.Currency).Amount;
+                var color = current == def.Amount ? "FFFFFF" : (current > def.Amount ? "28EC6D" : "EC5928"); 
+            
+                var entity = new UISimpleScrollElementEntity
+                {
+                    ContentId = def.Currency,
+                    LabelText = $"<color=#{color}>{current}</color><size=35>/{def.Amount}</size>",
+                    OnSelectEvent = null,
+                    OnDeselectEvent = null
+                };
+            
+                views.Add(entity);
+            }
+            
+            container.Create(views);
         });
 
-        if (prices != null) sequence.Insert(0.03f * canvasGroup.alpha, canvasGroup.DOFade(1, 0.07f));
+        if (entities != null) sequence.Insert(0.03f * canvasGroup.alpha, canvasGroup.DOFade(1, 0.07f));
     } 
 }

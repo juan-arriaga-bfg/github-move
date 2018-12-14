@@ -26,7 +26,7 @@ public class CurrencyPair
 
     public string ToStringIcon(bool noAmount = false)
     {
-        return noAmount ? $"<sprite name={Currency}>" : $"<sprite name={Currency}> {Amount}";
+        return noAmount ? $"<sprite name={Currency}>" : $"<sprite name={Currency}>{Amount}";
     }
 
     public static CurrencyPair Parse(string value)

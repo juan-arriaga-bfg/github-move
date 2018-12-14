@@ -15,32 +15,28 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
     
     [IWUIBinding("#TabOrders")] private UIContainerViewController contentSelect;
     
+    [IWUIBinding("#Toggles")] private UIContainerViewController contentToggles;
+    
     [IWUIBinding("#ContentOrders")] private UIContainerViewController contentOders;
     [IWUIBinding("#ContentRecipes")] private UIContainerViewController contentRecipes;
     [IWUIBinding("#ContentIngredients")] private UIContainerViewController contentIngredients;
     
     [IWUIBinding("#Prices")] private UIOrderPriceItem prices;
     
-    
-    
-    
-    [SerializeField] private NSText ordersLabelOn;
-    [SerializeField] private NSText ordersLabelOff;
-    
-    [SerializeField] private NSText recipesLabelOn;
-    [SerializeField] private NSText recipesLabelOff;
-    
-    [SerializeField] private NSText ingredientsLabelOn;
-    [SerializeField] private NSText ingredientsLabelOff;
-    
-    [SerializeField] private Toggle ordersToggle;
-    
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
         base.InitView(model, controller);
         
         var windowModel = Model as UIOrdersWindowModel;
-
+        
+        var toggles = new List<string>
+        {
+            windowModel.OrdersText,
+            windowModel.RecipesText,
+            windowModel.IngredientsText
+        };
+        
+        Fill(UpdateEntitiesToggles(toggles), contentToggles);
         Fill(UpdateEntitiesSelect(null), contentSelect);
         Fill(UpdateEntitiesOders(windowModel.Orders), contentOders);
         Fill(UpdateEntitiesRecipes(windowModel.Recipes), contentRecipes);
@@ -58,50 +54,43 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         messageOders.Text = windowModel.OrdersMessage;
         messageIngredients.Text = windowModel.IngredientsMessage;
         
-        ordersLabelOn.Text = ordersLabelOff.Text = windowModel.OrdersText;
-        recipesLabelOn.Text = recipesLabelOff.Text = windowModel.RecipesText;
-        ingredientsLabelOn.Text = ingredientsLabelOff.Text = windowModel.IngredientsText;
-
-        ordersToggle.isOn = true;
-        
-        var dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
-
-        UpdateOrders();
-        
-        windowModel.Select = null;
-        
-        messageOders.gameObject.SetActive(dataOrders.Count == 0);
-        messageIngredients.gameObject.SetActive(windowModel.Ingredients.Count == 0);
-        
-        UpdateLists();
-    }
-
-    public void UpdateOrders()
-    {
-        var windowModel = Model as UIOrdersWindowModel;
-        var dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
-        var index = Mathf.Max(0, dataOrders.FindIndex(order => order == windowModel.Select));
-        
-        Fill(UpdateEntitiesOders(dataOrders), contentOders);
-        contentOders.Select(index);
-    }
-
-    private void UpdateLists()
-    {
-        var windowModel = Model as UIOrdersWindowModel;
-        
-        Fill(UpdateEntitiesRecipes(windowModel.Recipes), contentRecipes);
-        
-        UpdateScrollRect(contentOders);
-        UpdateScrollRect(contentRecipes);
-        UpdateScrollRect(contentIngredients);
+        contentToggles.Select(0);
     }
     
-    public void UpdateIngredients()
+    private void OnSelectToggle(int index)
     {
         var windowModel = Model as UIOrdersWindowModel;
         
-        Fill(UpdateEntitiesIngredients(windowModel.Ingredients), contentIngredients);
+        tabOders.SetActive(index == 0);
+        tabRecipes.SetActive(index == 1);
+        tabIngredients.SetActive(index == 2);
+        
+        back.SetActive(index != 0);
+        
+        switch (index)
+        {
+            case 0:
+                var dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
+                var select = Mathf.Max(0, dataOrders.FindIndex(order => order == windowModel.Select));
+                
+                messageOders.gameObject.SetActive(dataOrders.Count == 0);
+                Fill(UpdateEntitiesOders(dataOrders), contentOders);
+                contentOders.Select(select);
+                prices.HideHard();
+                
+                windowModel.Select = null;
+                break;
+            case 1:
+                Fill(UpdateEntitiesRecipes(windowModel.Recipes), contentRecipes);
+                UpdateScrollRect(contentRecipes);
+                break;
+            case 2:
+                messageIngredients.gameObject.SetActive(windowModel.Ingredients.Count == 0);
+                Fill(UpdateEntitiesIngredients(windowModel.Ingredients), contentIngredients);
+                UpdateScrollRect(contentIngredients);
+                prices.HideHard();
+                break;
+        }
     }
 
     private void UpdateScrollRect(UIContainerViewController content)
@@ -109,6 +98,31 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         var scrollRect = content.GetScrollRect();
         
         if (scrollRect != null) scrollRect.verticalNormalizedPosition = 1f;
+    }
+    
+    private List<IUIContainerElementEntity> UpdateEntitiesToggles(List<string> entities)
+    {
+        var views = new List<IUIContainerElementEntity>(entities.Count);
+        
+        for (var i = 0; i < entities.Count; i++)
+        {
+            var def = entities[i];
+            
+            var entity = new UISimpleTabContainerElementEntity
+            {
+                LabelText = def,
+                CheckmarkText = def,
+                OnSelectEvent = view =>
+                {
+                    OnSelectToggle(view.Index);
+                },
+                OnDeselectEvent = null
+            };
+            
+            views.Add(entity);
+        }
+        
+        return views;
     }
     
     private List<IUIContainerElementEntity> UpdateEntitiesSelect(Order entities)
@@ -174,7 +188,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
                 OnSelectEvent = (view) =>
                 {
                     var recipeEntity = view.Entity as UIRecipeElementEntity;
-                    prices.Init(recipeEntity.Prices, transform);
+                    prices.Select(recipeEntity.Prices, view.CachedTransform);
                 },
                 OnDeselectEvent = null
             };

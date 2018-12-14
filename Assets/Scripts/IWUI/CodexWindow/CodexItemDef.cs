@@ -7,4 +7,5 @@ public class CodexItemDef
     public bool ShowArrow;
     public CodexItemState State;
     public PieceDef PieceDef;
+    public bool HideCaption;
 }

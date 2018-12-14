@@ -11,6 +11,8 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         // load configs
         LoadConfigsAndManagers();
 
+        Caching.ClearCache();
+        
         IWAssetBundleService.Instance.Manager.CacheLocalBundles( (_) => 
         {
             base.Init(onComplete);

@@ -12,6 +12,7 @@ public class QuestDescriptionComponent : IECSComponent, IECSSerializeable
     [JsonProperty] public string Title { get; protected set; }
     [JsonProperty] public string Message { get; protected set; }
     [JsonProperty] public string Ico { get; protected set; }
+    [JsonProperty] public string Hint { get; protected set; }
     
     public void OnRegisterEntity(ECSEntity entity)
     {

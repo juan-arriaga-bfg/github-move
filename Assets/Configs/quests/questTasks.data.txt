@@ -7,7 +7,7 @@
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "Create a Piece",
-        "Message": "Create a Piece"
+        "Message": "Grow a Candy Tree"
       }
     }
   },
@@ -17,9 +17,10 @@
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "Fog1",
+        "Ico": "quest_icon_fog",
         "Title": "Clear a fog",
-        "Message": "Clear a fog"
+        "Message": "Let's remove this annoying fog",
+        "Hint": "task.clear.fog.hint"
       }
     }
   },
@@ -31,7 +32,8 @@
       "QuestDescriptionComponent": {
         "Ico": "OB1_A",
         "Title": "Cut down a tree",
-        "Message": "Cut down a tree"
+        "Message": "Remove obstacles",
+        "Hint": "task.kill.tree.hint"
       }
     }
   },
@@ -43,7 +45,7 @@
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "Create a Piece",
-        "Message": "Create a Piece"
+        "Message": "Create wood packs"
       }
     }
   },
@@ -55,7 +57,7 @@
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "Create a Piece",
-        "Message": "Create a Piece"
+        "Message": "Build a new House"
       }
     }
   },
@@ -67,7 +69,8 @@
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "Collect ingredients",
-        "Message": "Collect ingredients"
+        "Message": "Collect wheat",
+        "Hint": "task.collect.ingredient.hint"
       }
     }
   },
@@ -79,7 +82,8 @@
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "Collect ingredients",
-        "Message": "Collect ingredients"
+        "Message": "Collect candies",
+        "Hint": "task.collect.ingredient.hint"
       }
     }
   },
@@ -91,7 +95,8 @@
       "QuestDescriptionComponent": {
         "Ico": "CH1_A",
         "Title": "Open a chest",
-        "Message": "Open a chest"
+        "Message": "Open a chest",
+        "Hint": "task.open.chest.tutor.hint"
       }
     }
   },
@@ -103,7 +108,8 @@
       "QuestDescriptionComponent": {
         "Ico": "NPC_Gnome",
         "Title": "Use workers",
-        "Message": "Use workers"
+        "Message": "Continue setting in order. Use gnomes.",
+        "Hint": "task.use.worker.hint"
       }
     }
   },
@@ -115,7 +121,8 @@
       "QuestDescriptionComponent": {
         "Ico": "MN_B",
         "Title": "Use a Mine",
-        "Message": "Use a Mine"
+        "Message": "We should examine the mine",
+        "Hint": "task.use.mine.stone.hint"
       }
     }
   },
@@ -127,7 +134,7 @@
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "Create a Piece",
-        "Message": "Create a Piece"
+        "Message": "Let's make this house even better."
       }
     }
   },
@@ -152,7 +159,8 @@
       "QuestDescriptionComponent": {
         "Ico": "NPC_SleepingBeauty",
         "Title": "Complete Orders",
-        "Message": "Complete Orders"
+        "Message": "We need to make some treats.",
+        "Hint": "task.complete.orders.hint"
       }
     }
   },
@@ -162,9 +170,10 @@
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "Fog1",
+        "Ico": "quest_icon_fog",
         "Title": "Clear a fog",
-        "Message": "Clear a fog"
+        "Message": "Clear a Fog",
+        "Hint": "task.clear.fog.hint"
       }
     }
   },
@@ -188,7 +197,8 @@
       "QuestDescriptionComponent": {
         "Ico": "OB3_A",
         "Title": "Cut down a tree",
-        "Message": "Cut down a tree"
+        "Message": "Cut down a tree",
+        "Hint": "task.kill.tree.hint"
       }
     }
   },
@@ -201,7 +211,8 @@
       "QuestDescriptionComponent": {
         "Ico": "CH_Free",
         "Title": "Open free chest",
-        "Message": "Open free chest"
+        "Message": "Open free chest",
+        "Hint": "task.open.chest.hint"
       }
     }
   },
@@ -263,7 +274,6 @@
       },
       "QuestDescriptionComponent": {
         "Ico": "matchDailyQuestIcon",
-        "Title": "Make merges",
         "Message": "Make any merges"
       }
     }

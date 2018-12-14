@@ -1858,95 +1858,186 @@
       "Amount": 1
     }
   },
-     {
-       "Uid": "PR_F1",
-       "UnlockBonus": [
-         {
-           "Currency": "Coins",
-           "Amount": 3
-         }
-       ]
-     },
-     {
-       "Uid": "PR_F2",
-       "CreateRewards": [
-         {
-           "Currency": "Coins",
-           "Amount": 1
-         },
-         {
-           "Currency": "Experience",
-           "Amount": 1
-         },
-         {
-           "Currency": "Mana",
-           "Amount": 1
-         }
-       ],
-       "UnlockBonus": [
-         {
-           "Currency": "Coins",
-           "Amount": 3
-         }
-       ]
-     },
-     {
-       "Uid": "PR_F3",
-       "CreateRewards": [
-         {
-           "Currency": "Coins",
-           "Amount": 2
-         },
-         {
-           "Currency": "Experience",
-           "Amount": 2
-         },
-         {
-           "Currency": "Mana",
-           "Amount": 2
-         }
-       ],
-       "UnlockBonus": [
-         {
-           "Currency": "Coins",
-           "Amount": 5
-         }
-       ]
-     },
-     {
-       "Uid": "PR_F4",
-       "CreateRewards": [
-         {
-           "Currency": "Coins",
-           "Amount": 3
-         },
-         {
-           "Currency": "Experience",
-           "Amount": 3
-         },
-         {
-           "Currency": "Mana",
-           "Amount": 3
-         }
-       ],
-       "UnlockBonus": [
-         {
-           "Currency": "Coins",
-           "Amount": 8
-         }
-       ]
-     },
-     {
-       "Uid": "PR_F5",
-       "UnlockBonus": [
-         {
-           "Currency": "Coins",
-           "Amount": 10
-         }
-       ],
-       "ExchangePrice": {
-         "Currency": "Crystals",
-         "Amount": 1
-       }
-     }
+  {
+    "Uid": "PR_F1",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "PR_F2",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 1
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "PR_F3",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 2
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 2
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "PR_F4",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
+    ]
+  },
+  {
+    "Uid": "PR_F5",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      }
+    ],
+    "ExchangePrice": {
+      "Currency": "Crystals",
+      "Amount": 1
+    }
+  },
+  {
+    "Uid": "PR_G1",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "PR_G2",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 1
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 1
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 1
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "PR_G3",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 2
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 2
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 2
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "PR_G4",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 3
+      },
+      {
+        "Currency": "Mana",
+        "Amount": 3
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 8
+      }
+    ]
+  },
+  {
+    "Uid": "PR_G5",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      }
+    ],
+    "ExchangePrice": {
+      "Currency": "Crystals",
+      "Amount": 1
+    }
+  }
 ]

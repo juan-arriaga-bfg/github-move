@@ -1626,26 +1626,26 @@
   {
     "Uid": "buttonRed",
     "SpriteName": "buttonRed",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/UnprocessedContent/Sprites/UI/UI",
-    "SpriteSheetName": "buttonRed",
-    "SpriteSheetPath": "Assets/Content/UnprocessedContent/Sprites/UI/UI"
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
     "Uid": "buttonGreen",
     "SpriteName": "buttonGreen",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/UnprocessedContent/Sprites/UI/UI",
-    "SpriteSheetName": "buttonGreen",
-    "SpriteSheetPath": "Assets/Content/UnprocessedContent/Sprites/UI/UI"
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
     "Uid": "buttonBlue",
     "SpriteName": "buttonBlue",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/UnprocessedContent/Sprites/UI/UI",
-    "SpriteSheetName": "buttonBlue",
-    "SpriteSheetPath": "Assets/Content/UnprocessedContent/Sprites/UI/UI"
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/ProcessedContent",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
     "Uid": "Order3",
@@ -1734,5 +1734,117 @@
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
     "SpriteSheetName": "Order17",
     "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+  },
+  {
+    "Uid": "PR_F4",
+    "SpriteName": "PR_F4",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F",
+    "SpriteSheetName": "PR_F4",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F"
+  },
+  {
+    "Uid": "PR_F4_lock",
+    "SpriteName": "PR_F4_lock",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F",
+    "SpriteSheetName": "PR_F4_lock",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F"
+  },
+  {
+    "Uid": "PR_G4",
+    "SpriteName": "PR_G4",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G",
+    "SpriteSheetName": "PR_G4",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G"
+  },
+  {
+    "Uid": "PR_G4_lock",
+    "SpriteName": "PR_G4_lock",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G",
+    "SpriteSheetName": "PR_G4_lock",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G"
+  },
+  {
+    "Uid": "PR_F5",
+    "SpriteName": "PR_F5",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F",
+    "SpriteSheetName": "PR_F5",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F"
+  },
+  {
+    "Uid": "PR_G5",
+    "SpriteName": "PR_G5",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G",
+    "SpriteSheetName": "PR_G5",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G"
+  },
+  {
+    "Uid": "PR_G3",
+    "SpriteName": "PR_G3",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G",
+    "SpriteSheetName": "PR_G3",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G"
+  },
+  {
+    "Uid": "PR_G2",
+    "SpriteName": "PR_G2",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G",
+    "SpriteSheetName": "PR_G2",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G"
+  },
+  {
+    "Uid": "PR_G1",
+    "SpriteName": "PR_G1",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G",
+    "SpriteSheetName": "PR_G1",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G"
+  },
+  {
+    "Uid": "OB_PR_G",
+    "SpriteName": "OB_PR_G",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G",
+    "SpriteSheetName": "OB_PR_G",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G"
+  },
+  {
+    "Uid": "PR_F3",
+    "SpriteName": "PR_F3",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F",
+    "SpriteSheetName": "PR_F3",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F"
+  },
+  {
+    "Uid": "PR_F2",
+    "SpriteName": "PR_F2",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F",
+    "SpriteSheetName": "PR_F2",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F"
+  },
+  {
+    "Uid": "PR_F1",
+    "SpriteName": "PR_F1",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F",
+    "SpriteSheetName": "PR_F1",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F"
+  },
+  {
+    "Uid": "OB_PR_F",
+    "SpriteName": "OB_PR_F",
+    "BundleName": null,
+    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F",
+    "SpriteSheetName": "OB_PR_F",
+    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F"
   }
 ]

@@ -67,7 +67,7 @@ MonoBehaviour:
   - Key: quests
     Link: 1Y6MtoZhcHKgmmL96-rYsTV7Lp4LPYNm21jYc_xNPHXc
     Route: parse
-    Pattern: '[{"$type":"","Id":"","TaskDefs":[{"TaskId":0}],"ComponentsCache":{"QuestRewardComponent":{"Value":[{"Currency":"","Amount":0}]},"QuestDescriptionComponent":{"Ico":"","Title":"","Message":""}}},{"$type":"","Id":"","TaskDefs":[{"TaskId":0}],"ComponentsCache":{"QuestRewardComponent":{"Value":[{"Currency":"","Amount":0}]},"QuestDescriptionComponent":{"Ico":"","Title":"","Message":""}}}]'
+    Pattern: '[{"$type":"","Id":"","TaskDefs":[{"TaskId":0}],"ComponentsCache":{"QuestRewardComponent":{"Value":[{"Currency":"","Amount":0}]},"QuestDescriptionComponent":{"Ico":"","Title":"","Message":"","Hint":""}}},{"$type":"","Id":"","TaskDefs":[{"TaskId":0}],"ComponentsCache":{"QuestRewardComponent":{"Value":[{"Currency":"","Amount":0}]},"QuestDescriptionComponent":{"Ico":"","Title":"","Message":"","Hint":""}}}]'
   - Key: questStarters
     Link: 1npF9IT2A2bAW-Lslya3BYlIK7RCdDzceDIOxFCJbu80
     Route: parse
@@ -75,8 +75,9 @@ MonoBehaviour:
   - Key: questTasks
     Link: 1dvyzQoKk6OMhIC59EApw2vjebAdn4LxrbM7raQJAlXY
     Route: parse
-    Pattern: '[{"$type":"","Id":"","":"","PieceUid":"","TargetValue":0,"Value1":0,"ComponentsCache":{"QuestDescriptionComponent":{"Ico":"","Title":"","Message":""}}},{"$type":"","Id":"","Group":"","":"","PieceUid":"","TargetValue":0,"Value1":0,"ComponentsCache":{"QuestRewardComponent":{"Value":[{"Currency":"","Amount":0}]},"QuestDescriptionComponent":{"Ico":"","Title":"","Message":""}}}]'
+    Pattern: '[{"$type":"","Id":"","":"","PieceUid":"","TargetValue":0,"Value1":0,"ComponentsCache":{"QuestDescriptionComponent":{"Ico":"","Title":"","Message":"","Hint":""}}},{"$type":"","Id":"","Group":"","":"","PieceUid":"","TargetValue":0,"Value1":0,"ComponentsCache":{"QuestRewardComponent":{"Value":[{"Currency":"","Amount":0}]},"QuestDescriptionComponent":{"Ico":"","Title":"","Message":"","Hint":""}}}]'
   - Key: conversations
     Link: 1oXEl5zGo7GJCRoXn9iktjma5pfNAYh83KU_pWhzGls0
     Route: parse
-    Pattern: '[{"Id":"","ConversationCharacters" : {}, "Bubbles":[{"CharacterId":"","Emotion":"","Message":""}]},{"Id":"","ConversationCharacters" : {}, "Bubbles":[{"CharacterId":"","Emotion":"","Message":""}]}]'
+    Pattern: '[{"Id":"","ConversationCharacters" : {}, "Bubbles":[{"CharacterId":"","Emotion":"","Message":""}]},{"Id":"","ConversationCharacters"
+      : {}, "Bubbles":[{"CharacterId":"","Emotion":"","Message":""}]}]'
