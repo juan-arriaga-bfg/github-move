@@ -163,7 +163,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
 
     private string GetHintText()
     {
-        return "Some hint!";
+        return firstTask.GetLocalizedHint();
     }
 
     private string GetButtonText()
