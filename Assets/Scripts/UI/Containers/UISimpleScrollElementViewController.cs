@@ -8,9 +8,17 @@ public class UISimpleScrollElementViewController : UIContainerElementViewControl
     [IWUIBindingNullable("#Label")] protected NSText label;
     
     private Transform content;
-    
     private CanvasGroup group;
-    public CanvasGroup Group => group ?? (group = GetComponentInChildren<CanvasGroup>());
+
+    public CanvasGroup Group
+    {
+        get
+        {
+            if (group == null) group = GetComponentInChildren<CanvasGroup>(true);
+
+            return group;
+        }
+    }
 
     public override void Init()
     {

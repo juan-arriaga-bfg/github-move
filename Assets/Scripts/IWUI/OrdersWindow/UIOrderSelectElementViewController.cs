@@ -68,7 +68,8 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         }
         
         var views = new List<IUIContainerElementEntity>(entities.Count);
-        
+        var alpha = (order.State == OrderState.InProgress || order.State == OrderState.Complete) ? 0.7f : 1f;
+            
         for (var i = 0; i < entities.Count; i++)
         {
             var def = entities[i];
@@ -76,18 +77,11 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             var current = ProfileService.Current.GetStorageItem(def.Currency).Amount;
             var color = current == def.Amount ? "FFFFFF" : (current > def.Amount ? "28EC6D" : "EC5928");
             var message = current >= def.Amount ? $"<sprite name={OrderState.Complete}>" :  $"<color=#{color}>{current}</color><size=45>/{def.Amount}</size>";
-            var alpha = 1f;
-            
-            if (order.State == OrderState.InProgress || order.State == OrderState.Complete)
-            {
-                message = "";
-                alpha = 0.7f;
-            }
             
             var entity = new UISimpleScrollElementEntity
             {
                 ContentId = def.Currency,
-                LabelText = message,
+                LabelText = (order.State == OrderState.InProgress || order.State == OrderState.Complete) ? "" : message,
                 Alpha = alpha,
                 OnSelectEvent = null,
                 OnDeselectEvent = null
