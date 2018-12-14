@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -176,6 +177,7 @@ public class CodexItem : IWUIWindowViewController
     private void PlayGiftOpenAnimation(Action onComplete)
     {
         giftAnimator.SetTrigger("Open");
+        // giftAnimator.Update(0);
 
         if (onComplete == null)
         {
@@ -185,22 +187,33 @@ public class CodexItem : IWUIWindowViewController
         pieceImage.gameObject.SetActive(true);
         pieceImage.color = COLOR_TRANSPARENT;
         pieceImage.transform.localScale = Vector3.one * 0.15f;
-        
-        float animLen = giftAnimator.GetCurrentAnimatorClipInfo(0).Length;
-        float blendTime = 0.6f;
+
+        var clips = giftAnimator.runtimeAnimatorController.animationClips.ToList();
+        var clip = clips.FirstOrDefault(e => e.name == "CodexGiftOpen");
+
+        float animLen = clip != null ? clip.averageDuration : 1;
+        float blendTime = 1.2f;
         float tweenStartTime = Mathf.Max(0, animLen - blendTime);
-        float tweenTime = Mathf.Max(0, animLen - tweenStartTime);
+        float tweenTime = 0.4f;
+
+        Vector3 shineScale = shine.transform.localScale;
         
         DOTween.Sequence()
+               .Insert(tweenStartTime, shine.transform.DOScale(Vector3.zero, tweenTime).SetEase(Ease.InOutBack).SetId(pieceImage))
                .Insert(tweenStartTime, pieceImage.DOColor(unlockedColor, tweenTime).SetId(pieceImage))
-               .Insert(tweenStartTime, pieceImage.transform.DOScale(defaultScale, tweenTime - 0.15f).SetEase(Ease.InOutBack) .SetId(pieceImage))
-               .InsertCallback(tweenStartTime, ()=>
+               .Insert(tweenStartTime, pieceImage.transform.DOScale(defaultScale, tweenTime).SetEase(Ease.InOutBack) .SetId(pieceImage))
+               .InsertCallback(tweenTime, ()=>
                 {
-                    onComplete();
-                    
+                    shine.transform.localScale = shineScale;
                     shine.SetActive(false);
                     hand.SetActive(def.PieceTypeDef.Filter.Has(PieceTypeFilter.Ingredient));
-                    
+                })
+               .InsertCallback(tweenTime /*+ 0.2f*/, ()=>// Coins flight
+                {
+                    onComplete();
+                })
+                .InsertCallback(animLen, ()=>
+                {
                     StopGiftAnimation();
                 });
     }
@@ -274,13 +287,16 @@ public class CodexItem : IWUIWindowViewController
         rectTransform.pivot = percentPivot;
     }
 
-    // private void OnEnable()
-    // {
-    //     if (def == null)
-    //     {
-    //         return;
-    //     }
-    //     
-    //     ReloadWithState(def.State);
-    // }
+    private void OnEnable()
+    {
+        if (def == null)
+        {
+            return;
+        }
+
+        if (Def.State == CodexItemState.PendingReward)
+        {
+            PlayGiftIdleAnimation();
+        }
+    }
 }
