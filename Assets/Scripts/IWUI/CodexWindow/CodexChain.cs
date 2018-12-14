@@ -31,6 +31,7 @@ public class CodexChain : MonoBehaviour
         {
             codexItems.Add(item);
             item.transform.SetParent(itemsHost, false);
+            item.transform.SetAsLastSibling();
         }
 
         FixItemsSize();
@@ -80,7 +81,7 @@ public class CodexChain : MonoBehaviour
             float h = Mathf.Lerp(CodexItem.MIN_ITEM_IMAGE_SIZE, CodexItem.MAX_ITEM_IMAGE_SIZE, index / itemsCount);
 
             item.PieceImageRectTransform.sizeDelta = new Vector2(w,h);
-            item.SetCaption($"{(int)w}x{(int)h}");
+            // item.SetCaption($"{(int)w}x{(int)h}");
         }
     }
 }
