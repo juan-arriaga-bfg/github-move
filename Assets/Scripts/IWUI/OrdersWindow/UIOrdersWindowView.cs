@@ -74,6 +74,9 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
                 var select = Mathf.Max(0, dataOrders.FindIndex(order => order == windowModel.Select));
                 
                 messageOders.gameObject.SetActive(dataOrders.Count == 0);
+
+                if (dataOrders.Count == 0) Fill(UpdateEntitiesSelect(null), contentSelect);
+                
                 Fill(UpdateEntitiesOders(dataOrders), contentOders);
                 contentOders.Select(select);
                 prices.HideHard();
