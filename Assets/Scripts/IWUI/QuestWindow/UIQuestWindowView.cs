@@ -95,6 +95,8 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         }
 
         quest.Tasks[0].Highlight();
+        
+        Controller.CloseCurrentWindow();
     }
 
     private bool ShowChain(UIQuestWindowModel model)
