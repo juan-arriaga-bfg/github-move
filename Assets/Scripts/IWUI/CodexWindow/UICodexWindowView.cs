@@ -78,12 +78,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
     
     private void Init(UICodexWindowModel model)
     {
-        // Toggle (!)
-        for (var i = 0; i < model.CodexContent.TabDefs.Count; i++)
-        {
-            var tabDef = model.CodexContent.TabDefs[i];
-            ((UISimpleTabContainerElementViewController)contentToggles.Tabs[i]).ToggleExclamationMark(tabDef.PendingReward);
-        }
+        UpdateExclamationMarks();
 
         if (model.CodexContent.InstanceId == lastCodexContentId)
         {
@@ -101,13 +96,29 @@ public class UICodexWindowView : UIGenericPopupWindowView
             CreateChains(tab, model.CodexContent.TabDefs[i]);
         }
         
-        int activeTabIndex = CalculateActiveTabIndexFromDefs(model);
+        //int activeTabIndex = CalculateActiveTabIndexFromDefs(model);
         
         //CreateChains(codexTabs[activeTabIndex], model.CodexContent.TabDefs[activeTabIndex]);
 
         //StartCoroutine(CreateChainsCoroutine(activeTabIndex, model));
         
         lastCodexContentId = model.CodexContent.InstanceId;
+    }
+
+    private void UpdateExclamationMarks()
+    {
+        UICodexWindowModel model = Model as UICodexWindowModel;
+        
+        if (model?.CodexContent?.TabDefs == null)
+        {
+            return;
+        }
+        
+        for (var i = 0; i < model.CodexContent.TabDefs.Count; i++)
+        {
+            var tabDef = model.CodexContent.TabDefs[i];
+            ((UISimpleTabContainerElementViewController) contentToggles.Tabs[i]).ToggleExclamationMark(tabDef.PendingReward);
+        }
     }
 
     // private IEnumerator CreateChainsCoroutine(int ignoreIndex, UICodexWindowModel model)
@@ -294,6 +305,21 @@ public class UICodexWindowView : UIGenericPopupWindowView
         }
         
         chain.AddItems(itemsToAdd);
+    }
+    
+    private void OnEnable()
+    {
+        GameDataService.Current.CodexManager.OnPieceRewardClaimed += OnPieceRewardClaimed;
+    }
+
+    private void OnDisable()
+    {
+        GameDataService.Current.CodexManager.OnPieceRewardClaimed -= OnPieceRewardClaimed;
+    }
+    
+    private void OnPieceRewardClaimed(int id)
+    {
+        UpdateExclamationMarks();
     }
 
     // DEBUG ONLY!

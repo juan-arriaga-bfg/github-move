@@ -153,19 +153,4 @@ public class CodexTab : IWBaseMonoBehaviour
               .SetId(scroll.content)
               .OnComplete(() => { scroll.enabled = true; });
     }
-
-    private void OnEnable()
-    {
-        GameDataService.Current.CodexManager.OnPieceRewardClaimed += OnPieceRewardClaimed;
-    }
-
-    private void OnDisable()
-    {
-        GameDataService.Current.CodexManager.OnPieceRewardClaimed -= OnPieceRewardClaimed;
-    }
-    
-    private void OnPieceRewardClaimed(int id)
-    {
-        //ToggleExclamationMark();
-    }
 }
