@@ -1,16 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
-using UnityEngine.UI;
 
 public class UIChestsShopWindowView : UIGenericPopupWindowView 
 {
-    [SerializeField] private GameObject itemPattern;
-    [SerializeField] private NSText buttonShow;
-    [SerializeField] private ScrollRect scroll;
-    [SerializeField] private RectTransform content;
-    
-    private List<UIChestsShopItem> items = new List<UIChestsShopItem>();
+    [IWUIBinding("#Content")] private UIContainerViewController content;
     
     public override void OnViewShow()
     {
@@ -19,35 +13,18 @@ public class UIChestsShopWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIChestsShopWindowModel;
         
         SetTitle(windowModel.Title);
-        SetMessage(windowModel.Message);
-
-        buttonShow.Text = windowModel.Button;
         
-        var chests = windowModel.Chests;
+        Fill(UpdateEntities(windowModel.Chests), content);
         
-        foreach (var chest in chests)
-        {
-            var item = Instantiate(itemPattern, itemPattern.transform.parent).GetComponent<UIChestsShopItem>();
-            
-            RegisterWindowViewController(item);
-            
-            item.Init(chest);
-            items.Add(item);
-        }
-        
-        itemPattern.SetActive(false);
-        
-        content.anchoredPosition = new Vector2(-375, 0);
-        scroll.enabled = false;
+        content.CachedRectTransform.anchoredPosition = new Vector2(-375, 0);
+        content.GetScrollRect().enabled = false;
         
         DOTween.Kill(content);
-        content.DOAnchorPosX(0, 1.5f)
+        
+        content.CachedRectTransform.DOAnchorPosX(0, 1.5f)
             .SetEase(Ease.InOutBack)
             .SetId(content)
-            .OnComplete(() =>
-            {
-                scroll.enabled = true;
-            });
+            .OnComplete(() => { content.GetScrollRect().enabled = true; });
     }
 
     public override void OnViewClose()
@@ -56,26 +33,29 @@ public class UIChestsShopWindowView : UIGenericPopupWindowView
         
         var windowModel = Model as UIChestsShopWindowModel;
         
-        DOTween.Kill(scroll);
+        DOTween.Kill(content);
     }
     
-    public override void OnViewCloseCompleted()
+    private List<IUIContainerElementEntity> UpdateEntities(List<ChestDef> entities)
     {
-        base.OnViewCloseCompleted();
+        var views = new List<IUIContainerElementEntity>(entities.Count);
         
-        itemPattern.SetActive(true);
-
-        foreach (var item in items)
+        for (var i = 0; i < entities.Count; i++)
         {
-            UnRegisterWindowViewController(item);
-            Destroy(item.gameObject);
+            var def = entities[i];
+            
+            var entity = new UIChestsShopElementEntity
+            {
+                ContentId = def.Uid,
+                LabelText = LocalizationService.Get($"piece.name.{def.Uid}", $"piece.name.{def.Uid}"),
+                Chest = def,
+                OnSelectEvent = null,
+                OnDeselectEvent = null
+            };
+            
+            views.Add(entity);
         }
         
-        items = new List<UIChestsShopItem>();
-    }
-    
-    public void OnClick()
-    {
-        Controller.CloseCurrentWindow();
+        return views;
     }
 }
