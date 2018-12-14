@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class TouchReactionDefinitionSpawnRewards : TouchReactionDefinitionComponent
+﻿public class TouchReactionDefinitionSpawnRewards : TouchReactionDefinitionComponent
 {
     private RewardsStoreComponent storage;
     

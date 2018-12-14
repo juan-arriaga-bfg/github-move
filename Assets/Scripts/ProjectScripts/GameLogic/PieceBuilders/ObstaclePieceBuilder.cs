@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class ObstaclePieceBuilder : GenericPieceBuilder
 {
 	public override Piece Build(int pieceType, BoardController context)

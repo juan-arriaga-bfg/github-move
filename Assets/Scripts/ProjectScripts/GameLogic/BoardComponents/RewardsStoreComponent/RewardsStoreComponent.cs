@@ -18,6 +18,7 @@ public class RewardsStoreComponent : IECSComponent
     
     public bool IsTargetReplace;
     public bool IsComplete;
+    public bool IsScatter;
     
     private Piece context;
     
@@ -109,6 +110,8 @@ public class RewardsStoreComponent : IECSComponent
     
     public bool CheckOutOfCells()
     {
+        if (IsScatter) return true;
+        
         var current = rewards.Sum(pair => pair.Value);
         
         if (IsTargetReplace) current = Mathf.Max(0, current - (context.Multicellular?.Mask.Count ?? 1));
@@ -138,6 +141,7 @@ public class RewardsStoreComponent : IECSComponent
         }
         else
         {
+            IsScatter = true;
             view.OnHide = Scatter;
             context.Context.HintCooldown.RemoweView(view);
         }
@@ -153,7 +157,11 @@ public class RewardsStoreComponent : IECSComponent
             IsTargetReplace = IsTargetReplace,
             From = context.CachedPosition,
             Pieces = rewards,
-            OnComplete = OnComplete
+            OnComplete = value =>
+            {
+                IsScatter = false;
+                OnComplete(value);
+            }
         });
     }
 }

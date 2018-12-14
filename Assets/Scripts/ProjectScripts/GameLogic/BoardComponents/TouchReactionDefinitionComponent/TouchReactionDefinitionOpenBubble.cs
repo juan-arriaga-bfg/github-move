@@ -12,8 +12,6 @@ public class TouchReactionDefinitionOpenBubble : TouchReactionDefinitionComponen
     
 	public override bool Make(BoardPosition position, Piece piece)
 	{
-		piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, position);
-        
 		if (piece.ViewDefinition == null) return false;
         
 		var view = piece.ViewDefinition.AddView(ViewId);
