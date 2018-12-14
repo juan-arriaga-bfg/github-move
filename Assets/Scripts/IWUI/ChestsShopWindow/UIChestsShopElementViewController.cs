@@ -1,56 +1,57 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
-public class UIChestsShopItem : IWUIWindowViewController
+public class UIChestsShopElementViewController : UISimpleScrollElementViewController
 {
-	[SerializeField] private Image icon;
+	[IWUIBinding("#ButtonLabel")] private NSText btnLabel;
+	[IWUIBinding("#BuyButton")] private UIButtonViewController button;
 	
-	[SerializeField] private NSText label;
-	[SerializeField] private NSText labelBtn;
-	[SerializeField] private NSText labelTimer;
-	
-	[SerializeField] private GameObject timer;
-	[SerializeField] private GameObject button;
-	
-	private UIChestsShopWindowModel model;
-	
-	private ChestDef chest;
+	[IWUIBinding("#TimerLabel")] private NSText labelTimer;
+	[IWUIBinding("#Timer")] private GameObject timer;
 	
 	private bool isFree;
 	private bool isClick;
 	private bool isReward;
-	
-	public void Init(ChestDef def)
+
+	private FreeChestLogicComponent freeChestLogic;
+	private FreeChestLogicComponent FreeChestLogic => freeChestLogic ?? (freeChestLogic = BoardService.Current.GetBoardById(0).FreeChestLogic);
+
+	public override void Init()
 	{
-		model = context.Model as UIChestsShopWindowModel;
-		chest = def;
+		base.Init();
+		
+		var contentEntity = entity as UIChestsShopElementEntity;
 		
 		isClick = false;
 		isReward = false;
-		isFree = PieceType.CH_Free.Id == chest.Piece;
+		isFree = PieceType.CH_Free.Id == contentEntity.Chest.Piece;
 		
 		if (isFree)
 		{
-			model.FreeChestLogic.Timer.OnExecute += UpdateLabel;
-			model.FreeChestLogic.Timer.OnComplete += ChengeButtons;
+			FreeChestLogic.Timer.OnExecute += UpdateLabel;
+			FreeChestLogic.Timer.OnComplete += ChengeButtons;
 		}
 
 		ChengeButtons();
-
-		label.Text = LocalizationService.Get($"piece.name.{chest.Uid}", $"piece.name.{chest.Uid}");
-		labelBtn.Text = isFree
-			? LocalizationService.Get("common.button.claim", "common.button.claim")
-			: string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), chest.Price.ToStringIcon());
 		
-		icon.sprite = IconService.Current.GetSpriteById(chest.Uid);
+		btnLabel.Text = isFree
+			? LocalizationService.Get("common.button.claim", "common.button.claim")
+			: string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), contentEntity.Chest.Price.ToStringIcon());
+		
+		button.Init()
+			.ToState(GenericButtonState.Active)
+			.OnClick(OnClick);
 	}
 	
 	public override void OnViewCloseCompleted()
 	{
+		var contentEntity = entity as UIChestsShopElementEntity;
+		
+		if(contentEntity == null) return;
+		
 		if (isFree)
 		{
-			model.FreeChestLogic.Timer.OnExecute -= UpdateLabel;
-			model.FreeChestLogic.Timer.OnComplete -= ChengeButtons;
+			FreeChestLogic.Timer.OnExecute -= UpdateLabel;
+			FreeChestLogic.Timer.OnComplete -= ChengeButtons;
 		}
 		
 		if (isClick == false || isReward == false) return;
@@ -64,27 +65,27 @@ public class UIChestsShopItem : IWUIWindowViewController
         
 		if(spawn == null) return;
 
-		spawn.Reward = chest.Piece;
+		spawn.Reward = contentEntity.Chest.Piece;
 		
-		if(isFree) model.FreeChestLogic.Timer.Start();
+		if(isFree) FreeChestLogic.Timer.Start();
 		
 		spawn.Make(piece.CachedPosition, piece);
 	}
 
 	private void UpdateLabel()
 	{
-		labelTimer.Text = model.FreeChestLogic.Timer.CompleteTime.GetTimeLeftText();
+		labelTimer.Text = FreeChestLogic.Timer.CompleteTime.GetTimeLeftText();
 	}
 
 	private void ChengeButtons()
 	{
-		var isActive = isFree && model.FreeChestLogic.Timer.IsExecuteable();
+		var isActive = isFree && FreeChestLogic.Timer.IsExecuteable();
 		
 		timer.SetActive(isActive);
-		button.SetActive(!isActive);
+		button.gameObject.SetActive(!isActive);
 	}
 
-	public void OnClick()
+	private void OnClick()
 	{
 		if(isClick) return;
 		
@@ -111,7 +112,7 @@ public class UIChestsShopItem : IWUIWindowViewController
 	
 	private void OnClickFree()
 	{
-		if (model.FreeChestLogic.Timer.IsExecuteable())
+		if (FreeChestLogic.Timer.IsExecuteable())
 		{
 			UIErrorWindowController.AddError(LocalizationService.Get("message.error.notComplete", "message.error.notComplete"));
 			return;
@@ -123,7 +124,9 @@ public class UIChestsShopItem : IWUIWindowViewController
 
 	private void OnClickPaid()
 	{
-		CurrencyHellper.Purchase(Currency.Chest.Name, 1, chest.Price, success =>
+		var contentEntity = entity as UIChestsShopElementEntity;
+		
+		CurrencyHellper.Purchase(Currency.Chest.Name, 1, contentEntity.Chest.Price, success =>
 		{
 			if (success == false)
 			{

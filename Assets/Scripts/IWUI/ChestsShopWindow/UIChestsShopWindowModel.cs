@@ -3,10 +3,6 @@ using System.Collections.Generic;
 public class UIChestsShopWindowModel : IWWindowModel 
 {
     public string Title => LocalizationService.Get("window.shop.chest.title", "window.shop.chest.title");
-    public string Message => LocalizationService.Get("window.shop.chest.message", "window.shop.chest.message");
-    public string Button => LocalizationService.Get("window.shop.chest.button", "window.shop.chest.button");
-    
-    public FreeChestLogicComponent FreeChestLogic => BoardService.Current.GetBoardById(0).FreeChestLogic;
     
     public List<ChestDef> Chests
     {
@@ -21,7 +17,11 @@ public class UIChestsShopWindowModel : IWWindowModel
                 var next = definition.GetNext(chest);
                 var index = definition.GetIndexInChain(chest);
                 
-                return index != 1 && next == PieceType.None.Id && chest != PieceType.CH_Free.Id;
+                return index != 1
+                       && next == PieceType.None.Id
+                       && chest != PieceType.CH_Free.Id
+                       && chest != PieceType.CH3_C.Id
+                       && chest != PieceType.CH3_D.Id;
             });
             
             last.Add(GameDataService.Current.ChestsManager.Chests.Find(def => PieceType.Parse(def.Uid) == PieceType.CH_Free.Id));
