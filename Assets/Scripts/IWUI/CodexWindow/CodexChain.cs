@@ -25,7 +25,7 @@ public class CodexChain : MonoBehaviour
     
     public void AddItems(List<CodexItem> items)
     {
-        codexItems.Clear();
+        ReturnContentToPool();
         
         foreach (var item in items)
         {
@@ -36,6 +36,21 @@ public class CodexChain : MonoBehaviour
         FixItemsSize();
     }
 
+    public void ReturnContentToPool()
+    {
+        if (codexItems == null)
+        {
+            return;
+        }
+
+        foreach (var item in codexItems)
+        {
+            UIService.Get.PoolContainer.Return(item.gameObject);
+        }
+        
+        codexItems.Clear();
+    }
+    
     public void FixItemsSize()
     {
         if (codexItems == null)

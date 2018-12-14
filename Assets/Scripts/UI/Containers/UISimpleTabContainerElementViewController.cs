@@ -7,7 +7,8 @@ public class UISimpleTabContainerElementViewController : UIContainerElementViewC
     
     [IWUIBindingNullable("#Label")] protected NSText label;
     [IWUIBindingNullable("#CheckmarkLabel")] protected NSText checkmarkLabel;
-    [IWUIBindingNullable("#(!)")] protected GameObject exclamationMark;
+    [IWUIBindingNullable("#ExclamationMark")] protected GameObject exclamationMark;
+    [IWUIBindingNullable("#ExclamationMarkCheckmark")] protected GameObject exclamationMarkCheckmark;
     
     public override void Init()
     {
@@ -49,6 +50,11 @@ public class UISimpleTabContainerElementViewController : UIContainerElementViewC
         if (exclamationMark != null)
         {
             exclamationMark.SetActive(enabled);
+        }
+        
+        if (exclamationMarkCheckmark != null)
+        {
+            exclamationMarkCheckmark.SetActive(enabled);
         }
     }
 }

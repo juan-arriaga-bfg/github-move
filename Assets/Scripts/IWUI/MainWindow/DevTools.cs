@@ -190,6 +190,10 @@ public class DevTools : UIContainerElementViewController
     {
         Debug.Log("OnDebug1Click");
 
+        var codexManager = GameDataService.Current.CodexManager;
+        codexManager.ClearCodexContentCache();
+        return;
+        
         ShowAllStoryQuestsWindows();
         return;
         

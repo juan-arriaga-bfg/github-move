@@ -47,10 +47,31 @@ public class CodexTab : IWBaseMonoBehaviour
         codexChains.Add(codexChain);
         codexChain.transform.SetParent(chainsHost, false);
     }
+    
+    public void ReturnContentToPool()
+    {
+        if (codexChains == null)
+        {
+            return;
+        }
+
+        foreach (var chain in codexChains)
+        {
+            chain.ReturnContentToPool();
+            UIService.Get.PoolContainer.Return(chain.gameObject);
+        }
+        
+        codexChains.Clear();
+    }
 
     public void ScrollToTop()
     {
         scroll.normalizedPosition = new Vector2(0.5f, 1);
+    }
+    
+    public void ScrollToBottom()
+    {
+        scroll.normalizedPosition = new Vector2(0.5f, 0);
     }
 
     public void ScrollTo(int chainId)
@@ -90,10 +111,10 @@ public class CodexTab : IWBaseMonoBehaviour
 
     private IEnumerator WaitForLayoutAndScroll(CodexChain target)
     {       
-        yield return new WaitForEndOfFrame();
+       // yield return new WaitForEndOfFrame();
         
         // Respect space between top size of the viewport and chain
-        const float PADDING = 7f;
+        const float PADDING = 15f;
 
         RectTransform chainRect = target.GetComponent<RectTransform>();
         float chainY   = chainRect.localPosition.y;
@@ -115,6 +136,17 @@ public class CodexTab : IWBaseMonoBehaviour
         // Debug.LogWarning($"[CodexTab] => ScrollTo\nchainY: {chainY}\nchainH: {chainH}\nchainTop: {chainTop}\ncontentH: {contentH}\nscrollToY:{scrollToY}\nscrollToYNormalized:{scrollToYNormalized}\n");
 
         DOTween.Kill(scroll.content);
+
+        // Do not overscroll for last element
+        
+        if (scrollToY + chainH + PADDING >= scroll.content.rect.height)
+        {
+            yield break;
+            // scrollToY = PADDING + 2;
+            // scroll.content.anchoredPosition = new Vector2(scroll.content.anchoredPosition.x, scrollToY);
+        }
+        // var ease = scroll.content.rect.height - scrollToY > chainH / 2 ? Ease.InOutBack : Ease.Linear;
+        // ease = Ease.Linear;
         
         scroll.content.DOAnchorPosY(scrollToY, 1.0f)
               .SetEase(Ease.InOutBack)
