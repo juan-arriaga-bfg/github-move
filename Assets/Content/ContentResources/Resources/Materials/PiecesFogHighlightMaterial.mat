@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: PiecesHighlightMaterial
+  m_Name: PiecesFogHighlightMaterial
   m_Shader: {fileID: 4800000, guid: 691763b5f2cfaeb4c9178becb776d1ab, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA USEHIGHLIGHT_ON
   m_LightmapFlags: 4
@@ -62,10 +62,12 @@ Material:
     - ONECOLOR: 0
     - PixelSnap: 0
     - USEBLICK: 0
+    - USEGRAYSCALE: 0
     - USEHIGHLIGHT: 1
     - USEVERTEXCOLOR: 0
     - _AlphaCoef: 1
     - _BlendMaskRotation: 0
+    - _BrightnessCoef: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -73,8 +75,10 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _GrayscaleIntensity: 1
     - _HighlightCoef: 0.6
     - _HighlightSpeed: 0.6
+    - _ManualAlphaCoef: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
