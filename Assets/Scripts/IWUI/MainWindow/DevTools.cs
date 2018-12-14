@@ -248,6 +248,12 @@ public class DevTools : UIContainerElementViewController
         // string i = "";
     }
 
+    public void OnAddExpClick()
+    {
+        int exp = Input.GetKey(KeyCode.LeftShift) ? 100 : 1000;
+        CurrencyHellper.Purchase(Currency.Experience.Name, exp);
+    }
+
     /// <summary>
     /// Start quest without conversations. DEBUG use only!
     /// </summary>
