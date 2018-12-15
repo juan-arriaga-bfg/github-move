@@ -37,7 +37,6 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         delimiter.Text = windowModel.DelimiterText;
         
         chest.sprite = IconService.Current.GetSpriteById(windowModel.ChestComponent.Def.Uid);
-        chest.SetNativeSize();
         
         Fill(UpdateEntities(windowModel.Icons()), content);
         
