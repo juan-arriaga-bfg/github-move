@@ -10,10 +10,16 @@ public class AddTutorialAnimation : BaseTutorialAnimation
 		if (isStart) return;
         
 		base.Start();
-		
-		if(Hard(Target)) return;
 
-		Find();
+		context.Context.Context.ActionExecutor.AddAction(new CallbackAction
+		{
+			Callback = controller =>
+			{
+				if(Hard(Target)) return;
+
+				Find();
+			}
+		});
 	}
 
 	private void Find()
@@ -29,8 +35,8 @@ public class AddTutorialAnimation : BaseTutorialAnimation
 	{
 		var board = context.Context.Context;
 		
-		if(board.BoardLogic.IsEmpty(target) == false) return false;
-			
+		if(board.BoardLogic.IsEmpty(target) == false || board.BoardLogic.IsLockedCell(target)) return false;
+		
 		board.ActionExecutor.AddAction(new SpawnPieceAtAction{At = target, PieceTypeId = PieceId});
 		return true;
 	}
