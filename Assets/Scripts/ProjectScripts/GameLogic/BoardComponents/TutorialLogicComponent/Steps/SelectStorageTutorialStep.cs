@@ -80,7 +80,7 @@ public class SelectStorageTutorialStep : DelayTutorialStep
         
         var sequence = DOTween.Sequence().SetId(this).SetLoops(int.MaxValue);
         
-        sequence.InsertCallback(3f, () =>
+        sequence.InsertCallback(1f, () =>
         {
             if (bubble != null)
             {
