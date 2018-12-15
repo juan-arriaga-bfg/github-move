@@ -133,7 +133,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         
         Fill(order.Def.Prices);
         
-//        (context as UIOrdersWindowView).UpdateOrders();
+        (context as UIOrdersWindowView).UpdateOrders();
     }
 
     private void OnClickBuy()

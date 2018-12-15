@@ -56,6 +56,12 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         
         contentToggles.Select(0);
     }
+
+    public void UpdateOrders()
+    {
+        var windowModel = Model as UIOrdersWindowModel;
+        Fill(UpdateEntitiesOders(windowModel.Orders), contentOders);
+    }
     
     private void OnSelectToggle(int index)
     {
