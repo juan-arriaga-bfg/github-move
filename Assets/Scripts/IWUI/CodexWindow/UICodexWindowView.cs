@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class UICodexWindowView : UIGenericPopupWindowView
 {
@@ -32,6 +33,9 @@ public class UICodexWindowView : UIGenericPopupWindowView
         
         contentToggles.transform.SetAsLastSibling();
 
+        // Ensure that all layouts is up to date before going to background
+        LayoutRebuilder.ForceRebuildLayoutImmediate(GetCanvas().GetComponent<RectTransform>());
+        
         lastCodexContentId = codexContent.InstanceId;
     }
     
@@ -50,7 +54,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
         
         UICodexWindowModel model = Model as UICodexWindowModel;
 
-        Init(model);
+        ReInit(model);
         
         // Call update after one frame to make sure that layouts are up to date
         StartCoroutine(UpdateLayout());
@@ -76,7 +80,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
         model.OnClose?.Invoke();
     }
     
-    private void Init(UICodexWindowModel model)
+    private void ReInit(UICodexWindowModel model)
     {
         UpdateExclamationMarks();
 
