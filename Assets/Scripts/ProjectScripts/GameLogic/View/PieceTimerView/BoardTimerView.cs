@@ -118,7 +118,16 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         
         SetState(TimerViewSate.Normal, context is BoardPosition && ((BoardPosition) context).Equals(Context.CachedPosition) ? 0 : 0.2f);
     }
-    
+
+    public override void OnSwap(bool isEnd)
+    {
+        base.OnSwap(isEnd);
+        
+        if (timer == null) return;
+        
+        timer.IsPaused = !isEnd;
+    }
+
     public override void OnDrag(bool isEnd)
     {
         base.OnDrag(isEnd);

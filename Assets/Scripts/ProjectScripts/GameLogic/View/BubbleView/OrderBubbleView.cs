@@ -43,6 +43,16 @@ public class OrderBubbleView : UIBoardView
 		icon.sprite = IconService.Current.GetSpriteById(customer.Order.Def.Uid);
 	}
 
+	public override void OnSwap(bool isEnd)
+	{
+		base.OnSwap(isEnd);
+		
+		if (customer == null) return;
+
+		customer.Timer.IsPaused = !isEnd;
+		customer.Cooldown.IsPaused = !isEnd;
+	}
+
 	public override void OnDrag(bool isEnd)
 	{
 		base.OnDrag(isEnd);

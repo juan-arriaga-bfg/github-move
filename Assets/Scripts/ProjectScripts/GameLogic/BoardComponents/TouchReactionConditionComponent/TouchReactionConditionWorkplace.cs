@@ -11,6 +11,8 @@
 		var life = piece.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
 
 		if (life == null || IsDone) return true;
+
+		if (life.Timer.IsPaused) return false;
         
 		IsDone = !life.Timer.IsExecuteable() || life.IsUseCooldown;
 
