@@ -110,13 +110,13 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	private void UpdateFirefly(IPurchaseableItem purchaseableItem, IShopItem shopItem)
 	{
 		if (shopItem.ItemUid != Currency.Firefly.Name || isTuttorialActive) return;
-        
-		ShopService.Current.OnPurchasedEvent -= UpdateFirefly;
 
 		foreach (var view in views)
 		{
 			view.RemoveArrow();
 		}
+		
+		ShopService.Current.OnPurchasedEvent -= UpdateFirefly;
 	}
 	
 	public void Execute()
@@ -138,10 +138,10 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 			var firefly = context.Context.RendererContext.CreateBoardElement<FireflyView>((int) ViewType.Firefly);
 			firefly.Init(context.Context.RendererContext, start, finish);
 			
-			if(isTuttorialActive) firefly.AddArrow();
-			
 			views.Add(firefly);
 		}
+		
+		if(isTuttorialActive) views[0].AddArrow();
 	}
 	
 	public bool IsExecuteable()
@@ -215,6 +215,8 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	{
 		views.Remove(view);
 		startTime = DateTime.UtcNow;
+		
+		if(isTuttorialActive && views.Count != 0) views[0].AddArrow();
 	}
 	
 	public Vector2 Cross(Vector2 a, Vector2 b) //точки a и b концы первого отрезка
