@@ -5,6 +5,7 @@ using UnityEngine;
 public static class TutorialBuilder
 {
     public const int LockPRStepIndex = 12;
+    public const int FirstOrderStepIndex = 19;
     
     public static BaseTutorialStep BuildTutorial(int index, BoardController context)
     {
@@ -231,7 +232,19 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 19: // add SleepingBeauty
+            case 19: // Orders window tutorial
+            {
+                if (FirstOrderStepIndex != index) Debug.LogError("Tutorial Error: FirstOrderStepIndex != index");
+                
+                step = new BaseTutorialStep();
+                
+                step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "16_CompleteOrder", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "16_CompleteOrder", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Hard}, true);
+                
+                break;
+            }
+            case 20: // add SleepingBeauty
             {
                 step = new BaseTutorialStep {IsIgnoreDev = false, IsIgnoreUi = true};
                 
@@ -244,7 +257,7 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 20: // unlock Firefly
+            case 21: // unlock Firefly
             {
                 step = new FireflyLockTutorialStep {IsIgnoreDev = false};
                 

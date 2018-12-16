@@ -14,6 +14,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     public override void OnRegisterEntity(ECSEntity entity)
     {
         Context = entity as BoardController;
+        Save = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid)?.Complete ?? new List<int>();
     }
     
     public override void OnUnRegisterEntity(ECSEntity entity)
@@ -26,8 +27,6 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
 
     public void Run()
     {
-        Save = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid)?.Complete ?? new List<int>();
-        
         for (var i = 0;; i++)
         {
             if(Save.Contains(i)) continue;
@@ -184,5 +183,15 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
                 Context.BoardLogic.UnlockCell(new BoardPosition(i, j, BoardLayer.Piece.Layer), this);
             }
         }
+    }
+
+    public bool CheckLockPR()
+    {
+        return Save.Contains(TutorialBuilder.LockPRStepIndex);
+    }
+
+    public bool CheckFirstOrder()
+    {
+        return Save.Contains(TutorialBuilder.FirstOrderStepIndex);
     }
 }
