@@ -21,6 +21,7 @@ public class CodexTab : IWUIWindowViewController
     {
         codexChains.Add(codexChain);
         codexChain.transform.SetParent(chainsHost, false);
+        codexChain.transform.SetAsLastSibling();
     }
     
     public void ReturnContentToPool()
