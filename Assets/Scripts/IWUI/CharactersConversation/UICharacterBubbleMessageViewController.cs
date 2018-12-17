@@ -111,12 +111,12 @@ public class UICharacterBubbleMessageViewController : UICharacterBubbleView, ITe
     {
         var pool = UIService.Get.PoolContainer;
 
-        float fadeTime = 1f;
+        float fadeTime = 0.3f;
         
-        canvasGroup.DOFade(0, 1);
+        canvasGroup.DOFade(0, fadeTime);
         
         DOTween.Sequence()
-               .InsertCallback(0.5f, () =>
+               .InsertCallback(0.2f, () =>
                 {
                     StopTeleTypeEffect();
                     onComplete?.Invoke();
