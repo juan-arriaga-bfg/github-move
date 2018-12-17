@@ -155,6 +155,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
             tabGo.SetActive(true);
             
             CodexTab tab = tabGo.GetComponent<CodexTab>();
+            tab.OnViewInit(null);
             tab.Init(codexTabDef);
 
             CreateChains(tab, codexTabDef);

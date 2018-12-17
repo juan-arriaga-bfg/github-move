@@ -5,15 +5,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CodexTab : IWBaseMonoBehaviour
+public class CodexTab : IWUIWindowViewController
 {
-    [SerializeField] private Transform chainsHost;
-    // [SerializeField] private TextMeshProUGUI captionActive;
-    // [SerializeField] private TextMeshProUGUI captionDisabled;    
-    // [SerializeField] private GameObject exclamationMarkActive;
-    // [SerializeField] private GameObject exclamationMarkDisabled;
-    [SerializeField] private ScrollRect scroll;
-    
+    [IWUIBinding("#Chains")] private ContentSizeFitter contentSizeFitter;
+    [IWUIBinding("#Chains")] private Transform chainsHost;
+    [IWUIBinding("#ScrollView")] private ScrollRect scroll;
+
     private readonly List<CodexChain> codexChains = new List<CodexChain>();
 
     private CodexTabDef def;
@@ -153,4 +150,16 @@ public class CodexTab : IWBaseMonoBehaviour
               .SetId(scroll.content)
               .OnComplete(() => { scroll.enabled = true; });
     }
-}
+
+    private void OnEnable()
+    {
+        // Hack to fix Layout problems
+        if (contentSizeFitter == null)
+        {
+            return;
+        }
+        
+        contentSizeFitter.enabled = false;
+        contentSizeFitter.enabled = true;
+    }
+}                            

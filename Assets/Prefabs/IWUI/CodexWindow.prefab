@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 224598920718767898}
   - component: {fileID: 114345118596561894}
   m_Layer: 31
-  m_Name: ScrollView
+  m_Name: '#ScrollView'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -717,7 +717,7 @@ GameObject:
   - component: {fileID: 114384014681862378}
   - component: {fileID: 114147154295988754}
   m_Layer: 31
-  m_Name: Chains
+  m_Name: '#Chains'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1919,8 +1919,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ec916d4ee054058bcc21d48d9681a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chainsHost: {fileID: 224029784503427204}
-  scroll: {fileID: 114345118596561894}
 --- !u!114 &114707092503142264
 MonoBehaviour:
   m_ObjectHideFlags: 1
