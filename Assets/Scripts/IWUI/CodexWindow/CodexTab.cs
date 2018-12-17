@@ -8,6 +8,7 @@ public class CodexTab : IWUIWindowViewController
 {
     [IWUIBinding("#Chains")] private VerticalLayoutGroup verticalLayout;
     [IWUIBinding("#Chains")] private Transform chainsHost;
+    [IWUIBinding("#Chains")] private ContentSizeFitter contentSizeFitter;
     [IWUIBinding("#ScrollView")] private ScrollRect scroll;
 
     private readonly List<CodexChain> codexChains = new List<CodexChain>();
@@ -138,7 +139,12 @@ public class CodexTab : IWUIWindowViewController
             return;
         }
         
+        Canvas.ForceUpdateCanvases();
+
         verticalLayout.enabled = false;
         verticalLayout.enabled = true;
+
+        // contentSizeFitter.enabled = false;
+        // contentSizeFitter.enabled = true;
     }
 }                            
