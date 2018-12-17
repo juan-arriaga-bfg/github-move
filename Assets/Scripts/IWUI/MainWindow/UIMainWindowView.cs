@@ -39,7 +39,7 @@ public class UIMainWindowView : UIBaseWindowView
 
     private int maxCountOfVisibleQuestButtonsCached = -1;
     
-    public UIHintArrowComponent CachedHintArrowComponent { get; private set; }
+    
 
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
@@ -59,12 +59,7 @@ public class UIMainWindowView : UIBaseWindowView
         base.OnViewShow();
         
         var windowModel = Model as UIMainWindowModel;
-
-        CachedHintArrowComponent = new UIHintArrowComponent();
-        CachedHintArrowComponent.SetContextView(this, GetCanvas().transform);
         
-        Components.RegisterComponent(CachedHintArrowComponent);
-
         GameDataService.Current.QuestsManager.OnActiveQuestsListChanged += OnActiveQuestsListChanged;
         GameDataService.Current.CodexManager.OnNewItemUnlocked += OnNewPieceBuilded;
         

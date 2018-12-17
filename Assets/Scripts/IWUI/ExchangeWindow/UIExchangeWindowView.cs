@@ -104,7 +104,7 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
 
         foreach (var pair in windowModel.Products)
         {
-            if(HighlightTaskPointToPieceSourceHelper.PointToPieceSource(new TaskCreatePieceEntity{PieceUid = pair.Currency}, PieceTypeFilter.ProductionField, PieceTypeFilter.Obstacle) == false) continue;
+            if(HighlightTaskPointToPieceSourceHelper.PointToPieceSource(PieceType.Parse(pair.Currency), PieceTypeFilter.ProductionField, PieceTypeFilter.Obstacle) == false) continue;
             
             Controller.CloseCurrentWindow();
             UIService.Get.CloseWindow(UIWindowType.OrdersWindow, true);

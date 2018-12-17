@@ -34,6 +34,8 @@ public class UIHintArrowViewController : IWUIWindowViewController
         this.label.Text = "";
         this.isShowing = false;
         this.offset = Vector3.zero;
+        viewAnchor.alpha = 0f;
+        DOTween.Kill(this);
         return this;
     }
 

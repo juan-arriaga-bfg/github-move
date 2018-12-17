@@ -239,8 +239,8 @@ public static class TutorialBuilder
                 step = new BaseTutorialStep();
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "16_CompleteOrder", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "16_CompleteOrder", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Hard}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "16_CompleteOrder", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "16_CompleteOrder", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
