@@ -102,6 +102,23 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
     {
         UIExchangeWindowModel windowModel = Model as UIExchangeWindowModel;
 
+        if (BoardService.Current.FirstBoard.BoardLogic.PositionsCache.GetCountByType(PieceType.PR_A4.Id) == 0)
+        {
+            HighlightFogHelper.HighlightNextFog(0);
+            Controller.CloseCurrentWindow();
+            UIService.Get.CloseWindow(UIWindowType.OrdersWindow, true);
+            return;
+        }
+        
+        foreach (var pair in windowModel.Products)
+        {
+            if(HighlightTaskPointToPieceHelper.FindAndPointToRandomPiece(PieceType.Parse(pair.Currency)) == false) continue;
+            
+            Controller.CloseCurrentWindow();
+            UIService.Get.CloseWindow(UIWindowType.OrdersWindow, true);
+            return;
+        }
+        
         foreach (var pair in windowModel.Products)
         {
             if(HighlightTaskPointToPieceSourceHelper.PointToPieceSource(PieceType.Parse(pair.Currency), PieceTypeFilter.ProductionField, PieceTypeFilter.Obstacle) == false) continue;
@@ -110,5 +127,9 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
             UIService.Get.CloseWindow(UIWindowType.OrdersWindow, true);
             return;
         }
+
+        HighlightFogHelper.HighlightNextFog(0);
+        Controller.CloseCurrentWindow();
+        UIService.Get.CloseWindow(UIWindowType.OrdersWindow, true);
     }
 }
