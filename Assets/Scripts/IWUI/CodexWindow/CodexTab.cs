@@ -1,44 +1,22 @@
 ﻿using System.Collections;
 using Boo.Lang;
 using DG.Tweening;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CodexTab : IWUIWindowViewController
 {
-    [IWUIBinding("#Chains")] private ContentSizeFitter contentSizeFitter;
+    [IWUIBinding("#Chains")] private VerticalLayoutGroup verticalLayout;
     [IWUIBinding("#Chains")] private Transform chainsHost;
     [IWUIBinding("#ScrollView")] private ScrollRect scroll;
 
     private readonly List<CodexChain> codexChains = new List<CodexChain>();
 
-    private CodexTabDef def;
-    
     public void Init(CodexTabDef def)
     {
-        this.def = def;
-        
-        // captionActive.text = def.Name;
-        // captionDisabled.text = def.Name;
-        //
-        // ToggleExclamationMark();
-
         ScrollToTop();
     }
-    
-    // private void ToggleExclamationMark()
-    // {
-    //     bool enabled = def?.PendingReward ?? false;
-    //     
-    //     if (exclamationMarkActive != null)
-    //     {
-    //         exclamationMarkActive.SetActive(enabled);
-    //     }
-    //     
-    //     exclamationMarkDisabled.SetActive(enabled); 
-    // }
-    
+
     public void AddChain(CodexChain codexChain)
     {
         codexChains.Add(codexChain);
@@ -154,12 +132,12 @@ public class CodexTab : IWUIWindowViewController
     private void OnEnable()
     {
         // Hack to fix Layout problems
-        if (contentSizeFitter == null)
+        if (verticalLayout == null)
         {
             return;
         }
         
-        contentSizeFitter.enabled = false;
-        contentSizeFitter.enabled = true;
+        verticalLayout.enabled = false;
+        verticalLayout.enabled = true;
     }
 }                            
