@@ -72,6 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224602593029231886}
   - component: {fileID: 114663082123967288}
+  - component: {fileID: 223450451126234114}
   m_Layer: 31
   m_Name: '#TabPrefab'
   m_TagString: Untagged
@@ -2610,6 +2611,26 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1130136950767060}
   m_CullTransparentMesh: 0
+--- !u!223 &223450451126234114
+Canvas:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1067556718569174}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!223 &223791107890162406
 Canvas:
   m_ObjectHideFlags: 1
