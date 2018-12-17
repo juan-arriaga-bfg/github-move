@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 224602593029231886}
   - component: {fileID: 114663082123967288}
   - component: {fileID: 223450451126234114}
+  - component: {fileID: 114350550235259110}
   m_Layer: 31
   m_Name: '#TabPrefab'
   m_TagString: Untagged
@@ -1312,6 +1313,22 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &114350550235259110
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1067556718569174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &114350653641920874
 MonoBehaviour:
   m_ObjectHideFlags: 1
