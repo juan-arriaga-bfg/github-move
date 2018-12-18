@@ -626,11 +626,18 @@ public class RendererLayer : MonoBehaviour
     
     private Material cachedLastDefaultMaterial;
 
+    private ParticleSystem cachedParticleSystem;
+
     public void CacheDefaultMaterial()
     {
         if (cachedDefaultMaterial == null)
         {
             cachedDefaultMaterial = CachedRenderer.sharedMaterial;
+
+            if (cachedParticleSystem == null)
+            {
+                cachedParticleSystem = GetComponent<ParticleSystem>();
+            }
         }
     }
 
@@ -644,6 +651,12 @@ public class RendererLayer : MonoBehaviour
         
         if (cachedDefaultMaterial != null)
         {
+            if (cachedParticleSystem != null)
+            {
+                var emission = cachedParticleSystem.emission;
+                emission.enabled = true;
+            }
+            
             CachedRenderer.material = cachedDefaultMaterial;
         }
     }
@@ -660,6 +673,15 @@ public class RendererLayer : MonoBehaviour
     public Material SetCustomMaterial(Material customMaterial)
     {
         CacheDefaultMaterial();
+
+        if (cachedParticleSystem != null)
+        {
+            var emission = cachedParticleSystem.emission;
+            emission.enabled = false;
+
+            return customMaterial;
+        }
+        
         CachedRenderer.material = customMaterial;
 
         return customMaterial;
