@@ -19,6 +19,8 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
     private Piece currentPiece;
     
     private List<PieceBoardElementView> fakePieces = new List<PieceBoardElementView>();
+    
+    public bool IsReadyToClear { get; protected set; }
 
     // private readonly object HIGHLIGHT_ANIMATION_ID = new ViewAnimationUid();
 
@@ -201,12 +203,13 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
     
     public virtual void ToggleReadyToClear(bool enabled, bool isAnimate = false)
     {
-        if (enabled == IsHighlighted)
+        if (enabled == IsHighlighted && IsReadyToClear == enabled)
         {
             return;
         }
 
         IsHighlighted = enabled;
+        IsReadyToClear = enabled;
 	    // DOTween.Kill(HIGHLIGHT_ANIMATION_ID);
 	    
         var fogMaterial = SetCustomMaterial(BoardElementMaterialType.FogDefaultMaterial, enabled, this);
