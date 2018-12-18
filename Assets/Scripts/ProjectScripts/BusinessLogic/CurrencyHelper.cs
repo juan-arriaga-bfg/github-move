@@ -233,7 +233,7 @@ public static class CurrencyHellper
         return transaction;
     }
     
-    private static void CurrencyFly(Vector3 screenPosition, CurrencyPair resource, Action<bool> onSuccess = null, float delay = 0)
+    public static void CurrencyFly(Vector3 screenPosition, CurrencyPair resource, Action<bool> onSuccess = null, float delay = 0)
     {
         var fly = ResourcesViewManager.Instance.GetFirstViewById(resource.Currency);
         
