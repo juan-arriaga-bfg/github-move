@@ -16,7 +16,16 @@ public class MineLifeComponent : WorkplaceLifeComponent
         
         MinePieceType = Context.PieceType;
     }
-    
+
+    protected override LifeSaveItem InitInSave(BoardPosition position)
+    {
+        var item = base.InitInSave(position);
+        
+        if (item != null && item.IsStartTimer == false) Locker.Unlock(this);
+        
+        return item;
+    }
+
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
         var key = new BoardPosition(position.X, position.Y);
