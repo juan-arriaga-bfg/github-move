@@ -5,7 +5,9 @@ using UnityEngine;
 public static class TutorialBuilder
 {
     public const int LockPRStepIndex = 12;
+    public const int LockOrderStepIndex = 18;
     public const int FirstOrderStepIndex = 19;
+    public const int LockFireflytepIndex = 21;
     
     public static BaseTutorialStep BuildTutorial(int index, BoardController context)
     {
@@ -224,6 +226,8 @@ public static class TutorialBuilder
             }
             case 18: // lock Orders
             {
+                if (LockOrderStepIndex != index) Debug.LogError("Tutorial Error: LockOrderStepIndex != index");
+                
                 step = new OrdersLockTutorialStep {IsIgnoreDev = false};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
@@ -259,6 +263,8 @@ public static class TutorialBuilder
             }
             case 21: // unlock Firefly
             {
+                if (LockFireflytepIndex != index) Debug.LogError("Tutorial Error: LockFireflytepIndex != index");
+                
                 step = new FireflyLockTutorialStep {IsIgnoreDev = false};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
