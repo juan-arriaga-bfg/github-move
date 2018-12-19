@@ -53,8 +53,8 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         order.OnStateChange += ShowTestArrow;
         UpdateState();
         
-        btnBuy.Init().OnClick(OnClickBuy);
-        btnComplete.Init().OnClick(OnClick);
+        btnBuy.OnClick(OnClickBuy);
+        btnComplete.OnClick(OnClick);
         
         CreateIcon(iconHero, PieceType.Parse(piece.PieceType));
         

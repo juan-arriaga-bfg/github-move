@@ -37,7 +37,7 @@ public class UIChestsShopElementViewController : UISimpleScrollElementViewContro
 			? LocalizationService.Get("common.button.claim", "common.button.claim")
 			: string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), contentEntity.Chest.Price.ToStringIcon());
 		
-		button.Init()
+		button
 			.ToState(GenericButtonState.Active)
 			.OnClick(OnClick);
 	}

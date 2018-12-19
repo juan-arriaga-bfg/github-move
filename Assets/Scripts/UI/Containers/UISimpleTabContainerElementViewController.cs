@@ -22,7 +22,6 @@ public class UISimpleTabContainerElementViewController : UIContainerElementViewC
         ToggleExclamationMark(contentEntity.ExclamationMark);
         
         button
-            .Init()
             .ToState(GenericButtonState.UnActive)
             .OnClick(Select);
     }

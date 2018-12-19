@@ -19,7 +19,7 @@ public class UISoftShopElementViewController : UISimpleScrollElementViewControll
 
         btnLabel.Text = contentEntity.ButtonLabel;
         
-        btnBuy.Init()
+        btnBuy
             .ToState(GenericButtonState.Active)
             .OnClick(OnBuyClick);
     }

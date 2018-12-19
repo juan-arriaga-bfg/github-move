@@ -32,28 +32,23 @@ public class UIMessageWindowView : UIGenericPopupWindowView
 
     private Transform hint;
     
-    public override void InitView(IWWindowModel model, IWWindowController controller)
-    {
-        base.InitView(model, controller);
-
-        btnAccept.Init()
-            .ToState(GenericButtonState.Active)
-            .OnClick(OnClickAccept);
-        
-        btnCancel.Init()
-            .ToState(GenericButtonState.Active)
-            .OnClick(OnClickCancel);
-        
-        btnBuy.Init()
-            .ToState(GenericButtonState.Active)
-            .OnClick(OnClickAccept);
-    }
-    
     public override void OnViewShow()
     {
         base.OnViewShow();
         
         var windowModel = Model as UIMessageWindowModel;
+        
+        btnAccept
+            .ToState(GenericButtonState.Active)
+            .OnClick(OnClickAccept);
+        
+        btnCancel
+            .ToState(GenericButtonState.Active)
+            .OnClick(OnClickCancel);
+        
+        btnBuy
+            .ToState(GenericButtonState.Active)
+            .OnClick(OnClickAccept);
         
         if (!string.IsNullOrEmpty(windowModel.Image))
         {
