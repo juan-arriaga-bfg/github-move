@@ -270,8 +270,8 @@ public class UIMainWindowView : UIBaseWindowView
         dailyQuestButton.gameObject.SetActive(questManager.DailyQuest != null);
     }
 
-    public void OnClickSettings()
+    public void OnClickOptions()
     {
-        UIMessageWindowController.CreateNotImplementedMessage();
+        UIService.Get.ShowWindow(UIWindowType.OptionsWindow);
     }
 }

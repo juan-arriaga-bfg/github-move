@@ -37,6 +37,8 @@ public class UIWindowType
     public const string DailyQuestWindow = "DailyQuestWindow";
     
     public const string ResourcePanelWindow = "ResourcePanelWindow";
+    
+    public const string OptionsWindow = "OptionsWindow";
 
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {
