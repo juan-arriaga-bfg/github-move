@@ -29,7 +29,6 @@ public class UIRemoverButtonViewController : IWUIWindowViewController
         base.OnViewShow(context);
         
         rootButton
-           .Init()
            .ToState(GenericButtonState.Active)
            .SetDragDirection(new Vector2(0f, 1f))
            .SetDragThreshold(30f)

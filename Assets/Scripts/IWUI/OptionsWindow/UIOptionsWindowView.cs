@@ -25,8 +25,9 @@ public class UIOptionsWindowView : UIGenericPopupWindowView
     [IWUIBinding("#CreditsButton")] private UIButtonViewController btnCredits;
     [IWUIBinding("#SupportButton")] private UIButtonViewController btnSupport;
     [IWUIBinding("#LanguageButton")] private UIButtonViewController btnLanguage;
-    [IWUIBinding("#SoundButton")] private UIButtonViewController btnSound;
-    [IWUIBinding("#MusicButton")] private UIButtonViewController btnMusic;
+    
+    [IWUIBinding("#SoundButton")] private UIToggleViewController btnSound;
+    [IWUIBinding("#MusicButton")] private UIToggleViewController btnMusic;
     
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
@@ -39,14 +40,14 @@ public class UIOptionsWindowView : UIGenericPopupWindowView
         InitBtn(btnCredits, OnCreditsClick);
         InitBtn(btnSupport, OnSupportClick);
         InitBtn(btnLanguage, OnLanguageClick);
-        InitBtn(btnSound, OnSoundClick);
-        InitBtn(btnMusic, OnMusicClick);
+
+        btnSound.OnChange(OnSoundClick);
+        btnMusic.OnChange(OnMusicClick);
     }
 
     private void InitBtn(UIButtonViewController btn, Action onClick)
     {
-        btn.Init()
-            .ToState(GenericButtonState.Active)
+        btn.ToState(GenericButtonState.Active)
             .OnClick(onClick);
     }
     
@@ -55,7 +56,9 @@ public class UIOptionsWindowView : UIGenericPopupWindowView
         base.OnViewShow();
         
         UIOptionsWindowModel windowModel = Model as UIOptionsWindowModel;
-        
+
+        btnSound.ToState(ProfileService.Current.Settings.GetVolume("Sound") > 0.1f ? GenericButtonState.Active : GenericButtonState.UnActive);
+        btnMusic.ToState(ProfileService.Current.Settings.GetVolume("Music") > 0.1f ? GenericButtonState.Active : GenericButtonState.UnActive);
     }
 
     public override void OnViewClose()
@@ -101,13 +104,15 @@ public class UIOptionsWindowView : UIGenericPopupWindowView
         Debug.LogWarning("OnLanguageClick");
     }
     
-    private void OnSoundClick()
+    private void OnSoundClick(bool isOn)
     {
-        Debug.LogWarning("OnSoundClick");
+        var currentVolume = ProfileService.Current.Settings.GetVolume("Sound");
+        ProfileService.Current.Settings.SetVolume("Sound", isOn ? 1f : 0f);
     }
     
-    private void OnMusicClick()
+    private void OnMusicClick(bool isOn)
     {
-        Debug.LogWarning("OnMusicClick");
+        var currentVolume = ProfileService.Current.Settings.GetVolume("Music");
+        ProfileService.Current.Settings.SetVolume("Music", isOn ? 1f : 0f);
     }
 }

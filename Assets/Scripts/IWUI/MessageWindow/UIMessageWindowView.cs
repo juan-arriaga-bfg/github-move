@@ -36,15 +36,15 @@ public class UIMessageWindowView : UIGenericPopupWindowView
     {
         base.InitView(model, controller);
 
-        btnAccept.Init()
+        btnAccept
             .ToState(GenericButtonState.Active)
             .OnClick(OnClickAccept);
         
-        btnCancel.Init()
+        btnCancel
             .ToState(GenericButtonState.Active)
             .OnClick(OnClickCancel);
         
-        btnBuy.Init()
+        btnBuy
             .ToState(GenericButtonState.Active)
             .OnClick(OnClickAccept);
     }

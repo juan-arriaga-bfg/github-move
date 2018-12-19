@@ -45,7 +45,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
         
 #if DEBUG && UNITY_EDITOR
         btnUnlockAll.gameObject.SetActive(true);
-        btnUnlockAll.Init()
+        btnUnlockAll
               .ToState(GenericButtonState.Active)
               .OnClick(OnUnlockAllClick);
 #else

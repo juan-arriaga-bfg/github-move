@@ -16,11 +16,11 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
     {
         base.InitView(model, controller);
 
-        btnBuy.Init()
+        btnBuy
             .ToState(GenericButtonState.Active)
             .OnClick(OnBuyClick);
         
-        btnFind.Init()
+        btnFind
             .ToState(GenericButtonState.Active)
             .OnClick(OnFindClick);
     }
