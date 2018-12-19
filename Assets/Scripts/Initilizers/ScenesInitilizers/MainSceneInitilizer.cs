@@ -35,7 +35,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.NextLevelWindow,
             UIWindowType.DailyQuestWindow,
             UIWindowType.ResourcePanelWindow,
-            UIWindowType.OptionsWindow,
+            UIWindowType.SettingsWindow,
         });
         
         // on cache complete

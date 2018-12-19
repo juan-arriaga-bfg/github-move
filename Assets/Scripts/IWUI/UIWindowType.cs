@@ -38,7 +38,7 @@ public class UIWindowType
     
     public const string ResourcePanelWindow = "ResourcePanelWindow";
     
-    public const string OptionsWindow = "OptionsWindow";
+    public const string SettingsWindow = "SettingsWindow";
 
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {

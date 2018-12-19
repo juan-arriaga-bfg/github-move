@@ -12,10 +12,12 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
     
     private bool isClick;
     
-    public override void InitView(IWWindowModel model, IWWindowController controller)
+    public override void OnViewShow()
     {
-        base.InitView(model, controller);
-
+        base.OnViewShow();
+        
+        UIExchangeWindowModel windowModel = Model as UIExchangeWindowModel;
+        
         btnBuy
             .ToState(GenericButtonState.Active)
             .OnClick(OnBuyClick);
@@ -23,13 +25,6 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
         btnFind
             .ToState(GenericButtonState.Active)
             .OnClick(OnFindClick);
-    }
-    
-    public override void OnViewShow()
-    {
-        base.OnViewShow();
-        
-        UIExchangeWindowModel windowModel = Model as UIExchangeWindowModel;
 
         var isBuy = BoardService.Current.FirstBoard.TutorialLogic.CheckFirstOrder();
         

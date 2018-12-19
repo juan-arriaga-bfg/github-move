@@ -272,6 +272,6 @@ public class UIMainWindowView : UIBaseWindowView
 
     public void OnClickOptions()
     {
-        UIService.Get.ShowWindow(UIWindowType.OptionsWindow);
+        UIService.Get.ShowWindow(UIWindowType.SettingsWindow);
     }
 }

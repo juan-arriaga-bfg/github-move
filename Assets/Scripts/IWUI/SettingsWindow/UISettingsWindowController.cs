@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class UIOptionsWindowController : IWWindowController {
+public class UISettingsWindowController : IWWindowController {
 
     public override IWWindowModel CreateModel()
     {
-        UIOptionsWindowModel windowModel = new UIOptionsWindowModel();
+        UISettingsWindowModel windowModel = new UISettingsWindowModel();
 
 
 

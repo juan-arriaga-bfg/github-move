@@ -12,21 +12,16 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
     [IWUIBinding("#OpenButton")] private UIButtonViewController btnOpen;
     
     private bool isOpen;
-
-    public override void InitView(IWWindowModel model, IWWindowController controller)
-    {
-        base.InitView(model, controller);
-
-        btnOpen
-            .ToState(GenericButtonState.Active)
-            .OnClick(OnOpenClick);
-    }
-
+    
     public override void OnViewShow()
     {
         base.OnViewShow();
         
         var windowModel = Model as UIChestMessageWindowModel;
+        
+        btnOpen
+            .ToState(GenericButtonState.Active)
+            .OnClick(OnOpenClick);
 
         isOpen = false;
         
