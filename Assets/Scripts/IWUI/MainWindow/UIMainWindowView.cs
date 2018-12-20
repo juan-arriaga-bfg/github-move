@@ -226,7 +226,7 @@ public class UIMainWindowView : UIBaseWindowView
     
     public void OnClickShop()
     {
-        UIService.Get.ShowWindow(UIWindowType.ChestsShopWindow);
+        UIService.Get.ShowWindow(UIWindowType.MarketWindow);
     }
     
     public void OnClickOrders()

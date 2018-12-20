@@ -1,6 +1,8 @@
+using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
-public class UIChestsShopWindowModel : IWWindowModel 
+public class UIMarketWindowModel : IWWindowModel 
 {
     public string Title => LocalizationService.Get("window.shop.chest.title", "window.shop.chest.title");
     

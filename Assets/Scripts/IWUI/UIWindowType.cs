@@ -14,8 +14,6 @@ public class UIWindowType
     
     public const string ErrorWindow = "ErrorWindow";
     
-    public const string ChestsShopWindow = "ChestsShopWindow";
-    
     public const string SoftShopWindow = "SoftShopWindow";
     
     public const string CodexWindow = "CodexWindow";
@@ -37,6 +35,8 @@ public class UIWindowType
     public const string ResourcePanelWindow = "ResourcePanelWindow";
     
     public const string SettingsWindow = "SettingsWindow";
+    
+    public const string MarketWindow = "MarketWindow";
 
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {

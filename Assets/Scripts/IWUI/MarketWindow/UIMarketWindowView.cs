@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
 
-public class UIChestsShopWindowView : UIGenericPopupWindowView 
+public class UIMarketWindowView : UIGenericPopupWindowView 
 {
     [IWUIBinding("#Content")] private UIContainerViewController content;
     
@@ -10,7 +10,7 @@ public class UIChestsShopWindowView : UIGenericPopupWindowView
     {
         base.OnViewShow();
         
-        var windowModel = Model as UIChestsShopWindowModel;
+        var windowModel = Model as UIMarketWindowModel;
         
         SetTitle(windowModel.Title);
         
@@ -31,7 +31,7 @@ public class UIChestsShopWindowView : UIGenericPopupWindowView
     {
         base.OnViewClose();
         
-        var windowModel = Model as UIChestsShopWindowModel;
+        var windowModel = Model as UIMarketWindowModel;
         
         DOTween.Kill(content);
     }

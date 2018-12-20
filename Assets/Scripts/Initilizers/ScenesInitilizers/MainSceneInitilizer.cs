@@ -23,7 +23,6 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.ChestMessage,
             UIWindowType.QuestWindow,
             UIWindowType.ErrorWindow,
-            UIWindowType.ChestsShopWindow,
             UIWindowType.SoftShopWindow,
             UIWindowType.CodexWindow,
             UIWindowType.CurrencyCheatSheetWindow,
@@ -35,6 +34,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.DailyQuestWindow,
             UIWindowType.ResourcePanelWindow,
             UIWindowType.SettingsWindow,
+            UIWindowType.MarketWindow,
         });
         
         // on cache complete
