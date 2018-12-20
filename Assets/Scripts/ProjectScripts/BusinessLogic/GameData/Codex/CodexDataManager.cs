@@ -22,6 +22,20 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
     
     public CodexState CodexState { get; private set; }= CodexState.Normal;
     
+    public readonly List<PieceTypeFilter> hidedPieceFilters = new List<PieceTypeFilter>
+    {
+        PieceTypeFilter.Fake,
+        PieceTypeFilter.Obstacle,
+        PieceTypeFilter.Mine
+    }; 
+        
+    public readonly HashSet<int> hidedPieceIds = new HashSet<int>
+    {
+        PieceType.LockedEmpty.Id,
+        PieceType.Boost_WR.Id,
+        PieceType.CH_Free.Id
+    }; 
+    
     public void OnRegisterEntity(ECSEntity entity)
     {
         Reload();
@@ -145,27 +159,20 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
     public bool IsHidedFromCodex(int id)
     {
-        // Ignore obstacles
+        if (hidedPieceIds.Contains(id))
+        {
+            return true;
+        }
+        
         var def = PieceType.GetDefById(id);
-        
-        if (def.Filter.Has(PieceTypeFilter.Fake))
+
+        for (var i = 0; i < hidedPieceFilters.Count; i++)
         {
-            return true;
-        }
-        
-        if (def.Filter.Has(PieceTypeFilter.Obstacle))
-        {
-            return true;
-        }
-        
-        if (def.Filter.Has(PieceTypeFilter.Mine))
-        {
-            return true;
-        }
-        
-        if (id == PieceType.LockedEmpty.Id)
-        {
-            return true;
+            var filter = hidedPieceFilters[i];
+            if (def.Filter.Has(filter))
+            {
+                return true;
+            }
         }
 
         return false;
@@ -410,10 +417,12 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
         ValidateCodexState();
         
+        ClearCodexContentCache();
+        
         OnPieceRewardClaimed?.Invoke(pieceId);
     }
 
-    public void ValidateCodexState()
+    private void ValidateCodexState()
     {
         if (CodexState == CodexState.PendingReward)
         {

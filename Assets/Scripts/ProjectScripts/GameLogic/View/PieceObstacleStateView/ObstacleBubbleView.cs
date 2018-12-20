@@ -50,15 +50,6 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
         base.ResetViewOnDestroy();
     }
     
-    public override void OnDrag(bool isEnd)
-    {
-        base.OnDrag(isEnd);
-        
-        if (life == null) return;
-
-        life.Timer.IsPaused = !isEnd;
-    }
-    
     public override void UpdateVisibility(bool isVisible)
     {
         if (isVisible)
@@ -99,7 +90,7 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
     
     public void Clear()
     {
-        if(IsShow == false) return;
+        if(IsShow == false || life.Rewards.IsScatter) return;
         
         Context.Context.TutorialLogic.Pause(true);
         life.Damage();

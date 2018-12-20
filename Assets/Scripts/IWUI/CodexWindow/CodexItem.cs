@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -18,7 +19,7 @@ public class CodexItem : IWUIWindowViewController
     [SerializeField] private Vector3 defaultScale;
     [SerializeField] private Vector3 rewardScale;
     
-    public const float MIN_ITEM_IMAGE_SIZE = 80;
+    public const float MIN_ITEM_IMAGE_SIZE = 90;
     public const float MAX_ITEM_IMAGE_SIZE = 155;
 
     [IWUIBinding("#Caption")] private TextMeshProUGUI caption;
@@ -114,14 +115,14 @@ public class CodexItem : IWUIWindowViewController
         pieceImage.sprite = sprite;
         caption.text = def.HideCaption ? "" : captionText;
 
-        SyncPivotAndSizeOfPieceImage();
-
-        Vector2 size = pieceImage.rectTransform.sizeDelta;
-        size.x = Mathf.Min(MIN_ITEM_IMAGE_SIZE, size.x);
-        size.y = Mathf.Min(MIN_ITEM_IMAGE_SIZE, size.y);
-        pieceImage.rectTransform.sizeDelta = size;
+        // SyncPivotAndSizeOfPieceImage();
+        //
+        // Vector2 size = pieceImage.rectTransform.sizeDelta;
+        // size.x = Mathf.Min(MIN_ITEM_IMAGE_SIZE, size.x);
+        // size.y = Mathf.Min(MIN_ITEM_IMAGE_SIZE, size.y);
+        // pieceImage.rectTransform.sizeDelta = size;
         
-        // Debug.Log($"[CodexItem] => Init {itemDef.PieceTypeDef.Abbreviations[0]} as {state}");
+        // Debug.Log($"[CodexItem] => Init {itemDef.PieceTypeDef.Abbreviations[0]} as {def.State}, arrow: {def.ShowArrow}");
     }
 
     private void Reset()
@@ -161,6 +162,11 @@ public class CodexItem : IWUIWindowViewController
     {
         return def?.PieceDef?.Name;
     }
+    
+    public void SetCaption(string text)
+    {
+        caption.text = text;
+    }
 
     private void PlayGiftIdleAnimation()
     {
@@ -171,6 +177,7 @@ public class CodexItem : IWUIWindowViewController
     private void PlayGiftOpenAnimation(Action onComplete)
     {
         giftAnimator.SetTrigger("Open");
+        // giftAnimator.Update(0);
 
         if (onComplete == null)
         {
@@ -180,22 +187,33 @@ public class CodexItem : IWUIWindowViewController
         pieceImage.gameObject.SetActive(true);
         pieceImage.color = COLOR_TRANSPARENT;
         pieceImage.transform.localScale = Vector3.one * 0.15f;
-        
-        float animLen = giftAnimator.GetCurrentAnimatorClipInfo(0).Length;
-        float blendTime = 0.6f;
+
+        var clips = giftAnimator.runtimeAnimatorController.animationClips.ToList();
+        var clip = clips.FirstOrDefault(e => e.name == "CodexGiftOpen");
+
+        float animLen = clip != null ? clip.averageDuration : 1;
+        float blendTime = 1.2f;
         float tweenStartTime = Mathf.Max(0, animLen - blendTime);
-        float tweenTime = Mathf.Max(0, animLen - tweenStartTime);
+        float tweenTime = 0.4f;
+
+        Vector3 shineScale = shine.transform.localScale;
         
         DOTween.Sequence()
+               .Insert(tweenStartTime, shine.transform.DOScale(Vector3.zero, tweenTime).SetEase(Ease.InOutBack).SetId(pieceImage))
                .Insert(tweenStartTime, pieceImage.DOColor(unlockedColor, tweenTime).SetId(pieceImage))
-               .Insert(tweenStartTime, pieceImage.transform.DOScale(defaultScale, tweenTime - 0.15f).SetEase(Ease.InOutBack) .SetId(pieceImage))
-               .InsertCallback(tweenStartTime, ()=>
+               .Insert(tweenStartTime, pieceImage.transform.DOScale(defaultScale, tweenTime).SetEase(Ease.InOutBack) .SetId(pieceImage))
+               .InsertCallback(tweenTime, ()=>
                 {
-                    onComplete();
-                    
+                    shine.transform.localScale = shineScale;
                     shine.SetActive(false);
                     hand.SetActive(def.PieceTypeDef.Filter.Has(PieceTypeFilter.Ingredient));
-                    
+                })
+               .InsertCallback(tweenTime /*+ 0.2f*/, ()=>// Coins flight
+                {
+                    onComplete();
+                })
+                .InsertCallback(animLen, ()=>
+                {
                     StopGiftAnimation();
                 });
     }
@@ -275,7 +293,10 @@ public class CodexItem : IWUIWindowViewController
         {
             return;
         }
-        
-        ReloadWithState(def.State);
+
+        if (Def.State == CodexItemState.PendingReward)
+        {
+            PlayGiftIdleAnimation();
+        }
     }
 }

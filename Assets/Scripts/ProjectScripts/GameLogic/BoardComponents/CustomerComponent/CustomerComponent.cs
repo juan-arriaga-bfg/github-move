@@ -180,9 +180,7 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         }
         
         var model = UIService.Get.GetCachedModel<UIExchangeWindowModel>(UIWindowType.ExchangeWindow);
-            
-        model.Title = LocalizationService.Get("window.exchange.ingredients.title", "window.exchange.ingredients.title");
-        model.Message = LocalizationService.Get("window.exchange.ingredients.message", "window.exchange.ingredients.message");
+        
         model.Products = diff;
         model.Price = price;
         model.OnClick = Buy;

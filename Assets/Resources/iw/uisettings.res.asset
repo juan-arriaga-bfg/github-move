@@ -14,7 +14,6 @@ MonoBehaviour:
   windowPrefabPath: Prefabs/IWUI/
   windowScriptsPath: Scripts/IWUI/
   windowNames:
-  - SampleWindow
   - MainWindow
   - LauncherWindow
   - MessageWindow
@@ -24,7 +23,6 @@ MonoBehaviour:
   - CodexWindow
   - CurrencyCheatSheetWindow
   - PiecesCheatSheetWindow
-  - ChestsShopWindow
   - ExchangeWindow
   - OrdersWindow
   - QuestStartWindow
@@ -32,6 +30,8 @@ MonoBehaviour:
   - DailyQuestWindow
   - ResourcePanelWindow
   - SoftShopWindow
+  - SettingsWindow
+  - MarketWindow
   uiSystemType: 2
   nativeScreenWidth: 1920
   nativeScreenHeight: 1080

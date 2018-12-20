@@ -66,6 +66,13 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             (shopItems) => { });
         
         ShopService.Instance.SetManager(shopManager);
+        
+        // init audiomanager
+        NSAudioManager audioManager = new DefaultAudioManager();
+        NSAudioService.Instance.SetManager(audioManager);
+        audioManager.LoadData(new ResourceConfigDataMapper<List<NSAudioData>>("iw/audio.data", false));
+        AudioListener audioListener = new GameObject("AudioListener").AddComponent<AudioListener>();
+        DontDestroyOnLoad(audioListener);
 
         // load local base profile
         ProfileService.Instance.Manager.LoadBaseProfile((baseProfile) =>

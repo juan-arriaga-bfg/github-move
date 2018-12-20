@@ -1,56 +1,54 @@
 ﻿using System.Collections;
 using Boo.Lang;
 using DG.Tweening;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CodexTab : Tab
+public class CodexTab : IWUIWindowViewController
 {
-    [SerializeField] private Transform chainsHost;
-    [SerializeField] private TextMeshProUGUI captionActive;
-    [SerializeField] private TextMeshProUGUI captionDisabled;    
-    [SerializeField] private GameObject exclamationMarkActive;
-    [SerializeField] private GameObject exclamationMarkDisabled;
-    [SerializeField] private ScrollRect scroll;
-    
+    [IWUIBinding("#Chains")] private VerticalLayoutGroup verticalLayout;
+    [IWUIBinding("#Chains")] private Transform chainsHost;
+    [IWUIBinding("#Chains")] private ContentSizeFitter contentSizeFitter;
+    [IWUIBinding("#ScrollView")] private ScrollRect scroll;
+
     private readonly List<CodexChain> codexChains = new List<CodexChain>();
 
-    private CodexTabDef def;
-    
     public void Init(CodexTabDef def)
     {
-        this.def = def;
-        
-        captionActive.text = def.Name;
-        captionDisabled.text = def.Name;
-
-        ToggleExclamationMark();
-
         ScrollToTop();
     }
-    
-    private void ToggleExclamationMark()
-    {
-        bool enabled = def?.PendingReward ?? false;
-        
-        if (exclamationMarkActive != null)
-        {
-            exclamationMarkActive.SetActive(enabled);
-        }
-        
-        exclamationMarkDisabled.SetActive(enabled); 
-    }
-    
+
     public void AddChain(CodexChain codexChain)
     {
         codexChains.Add(codexChain);
         codexChain.transform.SetParent(chainsHost, false);
+        codexChain.transform.SetAsLastSibling();
+    }
+    
+    public void ReturnContentToPool()
+    {
+        if (codexChains == null)
+        {
+            return;
+        }
+
+        foreach (var chain in codexChains)
+        {
+            chain.ReturnContentToPool();
+            UIService.Get.PoolContainer.Return(chain.gameObject);
+        }
+        
+        codexChains.Clear();
     }
 
     public void ScrollToTop()
     {
         scroll.normalizedPosition = new Vector2(0.5f, 1);
+    }
+    
+    public void ScrollToBottom()
+    {
+        scroll.normalizedPosition = new Vector2(0.5f, 0);
     }
 
     public void ScrollTo(int chainId)
@@ -90,10 +88,10 @@ public class CodexTab : Tab
 
     private IEnumerator WaitForLayoutAndScroll(CodexChain target)
     {       
-        yield return new WaitForEndOfFrame();
+       // yield return new WaitForEndOfFrame();
         
         // Respect space between top size of the viewport and chain
-        const float PADDING = 7f;
+        const float PADDING = 15f;
 
         RectTransform chainRect = target.GetComponent<RectTransform>();
         float chainY   = chainRect.localPosition.y;
@@ -115,6 +113,17 @@ public class CodexTab : Tab
         // Debug.LogWarning($"[CodexTab] => ScrollTo\nchainY: {chainY}\nchainH: {chainH}\nchainTop: {chainTop}\ncontentH: {contentH}\nscrollToY:{scrollToY}\nscrollToYNormalized:{scrollToYNormalized}\n");
 
         DOTween.Kill(scroll.content);
+
+        // Do not overscroll for last element
+        
+        if (scrollToY + chainH + PADDING >= scroll.content.rect.height)
+        {
+            yield break;
+            // scrollToY = PADDING + 2;
+            // scroll.content.anchoredPosition = new Vector2(scroll.content.anchoredPosition.x, scrollToY);
+        }
+        // var ease = scroll.content.rect.height - scrollToY > chainH / 2 ? Ease.InOutBack : Ease.Linear;
+        // ease = Ease.Linear;
         
         scroll.content.DOAnchorPosY(scrollToY, 1.0f)
               .SetEase(Ease.InOutBack)
@@ -124,16 +133,18 @@ public class CodexTab : Tab
 
     private void OnEnable()
     {
-        GameDataService.Current.CodexManager.OnPieceRewardClaimed += OnPieceRewardClaimed;
-    }
+        // Hack to fix Layout problems
+        if (verticalLayout == null)
+        {
+            return;
+        }
+        
+        Canvas.ForceUpdateCanvases();
 
-    private void OnDisable()
-    {
-        GameDataService.Current.CodexManager.OnPieceRewardClaimed -= OnPieceRewardClaimed;
+        verticalLayout.enabled = false;
+        verticalLayout.enabled = true;
+
+        // contentSizeFitter.enabled = false;
+        // contentSizeFitter.enabled = true;
     }
-    
-    private void OnPieceRewardClaimed(int id)
-    {
-        ToggleExclamationMark();
-    }
-}
+}                            

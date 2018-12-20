@@ -94,6 +94,8 @@ public class ReproductionPieceView : PieceBoardElementView
 
     protected virtual void ToggleEffectsByState(bool isProcessing)
     {
+        if(BoardService.Current.FirstBoard.TutorialLogic.CheckLockPR() == false) return;
+        
         if (isProcessing)
         {
             ClearParticle(ref readyParticle);

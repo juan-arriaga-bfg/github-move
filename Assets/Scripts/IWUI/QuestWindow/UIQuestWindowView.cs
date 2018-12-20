@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class UIQuestWindowView : UIGenericPopupWindowView
 {
     [IWUIBinding("#TaskIcon")] private Image targetIcon;
-    [IWUIBinding("#MessageLabel")] private NSText questMessageLabel;
     [IWUIBinding("#RewardLabel")] private NSText rewardLabel;
     [IWUIBinding("#TaskProgress")] private NSText progressLabel;
     [IWUIBinding("#FindButtonLabel")] private NSText buttonLabel;
@@ -38,10 +37,8 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         {
             hintLabel.gameObject.SetActive(true);
         }
-
-        findButton.Init()
-                  .ToState(GenericButtonState.Active)
-                  .OnClick(OnClick);
+        
+        InitBtnBase(findButton, OnClick);
 
         model.Quest.OnChanged += OnQuestChanged;
     }
@@ -70,7 +67,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
     {
         var model = Model as UIQuestWindowModel;
 
-        questMessageLabel.Text = GetMessageText();
+        message.Text = GetMessageText();
         hintLabel.Text    = GetHintText();
         rewardLabel.Text  = GetRewardText();
         progressLabel.Text  = GetProgressText();
@@ -107,10 +104,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
 
     private bool ShowChain(UIQuestWindowModel model)
     {
-        foreach (Transform child in chain.ItemsHost)
-        {
-            Destroy(child.gameObject);
-        }
+        chain.ReturnContentToPool();
 
         var taskAboutPiece = model.Quest.Tasks[0] as IHavePieceId;
         if (taskAboutPiece == null)
@@ -124,16 +118,16 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             return false;
         }
 
-        var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId, CHAIN_LENGTH, true);
-        if (itemDefs == null)
-        {
-            return false;
-        }
-
         var hintText = GetHintText();
         if (!string.IsNullOrEmpty(hintText))
         {
             Debug.Log($"[UIQuestWindowView] => ShowChain: has piece id but cancelled by hint: {hintText}");
+            return false;
+        }
+        
+        var itemDefs = GameDataService.Current.CodexManager.GetCodexItemsForChainAndFocus(targetId, CHAIN_LENGTH, true);
+        if (itemDefs == null)
+        {
             return false;
         }
         

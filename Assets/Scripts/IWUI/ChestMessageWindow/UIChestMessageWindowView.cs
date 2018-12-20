@@ -12,22 +12,15 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
     [IWUIBinding("#OpenButton")] private UIButtonViewController btnOpen;
     
     private bool isOpen;
-
-    public override void InitView(IWWindowModel model, IWWindowController controller)
-    {
-        base.InitView(model, controller);
-
-        btnOpen.Init()
-            .ToState(GenericButtonState.Active)
-            .OnClick(OnOpenClick);
-    }
-
+    
     public override void OnViewShow()
     {
         base.OnViewShow();
         
         var windowModel = Model as UIChestMessageWindowModel;
 
+        InitBtnBase(btnOpen, OnOpenClick);
+        
         isOpen = false;
         
         SetTitle(windowModel.Title);
@@ -37,7 +30,6 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         delimiter.Text = windowModel.DelimiterText;
         
         chest.sprite = IconService.Current.GetSpriteById(windowModel.ChestComponent.Def.Uid);
-        chest.SetNativeSize();
         
         Fill(UpdateEntities(windowModel.Icons()), content);
         

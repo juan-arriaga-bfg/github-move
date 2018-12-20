@@ -16,9 +16,7 @@ public class UITabContainerElementViewController : UIContainerElementViewControl
 
         tabLabel.Text = targetEntity.TabLabel;
 
-        tabButton
-            .Init()
-            .OnClick(Select);
+        tabButton.OnClick(Select);
     }
 
     public override void OnSelect()

@@ -21,7 +21,6 @@ public class UIRecipeElementViewController : UISimpleScrollElementViewController
         
         button
             .SetActiveScale(1.1f)
-            .Init()
             .SetDragDirection(new Vector2(0f, 1f))
             .SetDragThreshold(100f)
             .ToState(GenericButtonState.UnActive).OnClick(Select);

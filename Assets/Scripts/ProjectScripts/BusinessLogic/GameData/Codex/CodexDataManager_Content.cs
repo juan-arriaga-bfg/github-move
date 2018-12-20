@@ -29,16 +29,16 @@ public partial class CodexDataManager
                         Name = LocalizationService.Get("window.codex.branch.B", "window.codex.branch.B"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.B1.Id))
                     },
-                    new CodexChainDef
-                    {
-                        Name = LocalizationService.Get("window.codex.branch.C", "window.codex.branch.C"),
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.C1.Id))
-                    },
-                    new CodexChainDef
-                    {
-                        Name = LocalizationService.Get("window.codex.branch.D", "window.codex.branch.D"),
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.D1.Id))
-                    },
+                    // new CodexChainDef
+                    // {
+                    //     Name = LocalizationService.Get("window.codex.branch.C", "window.codex.branch.C"),
+                    //     ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.C1.Id))
+                    // },
+                    // new CodexChainDef
+                    // {
+                    //     Name = LocalizationService.Get("window.codex.branch.D", "window.codex.branch.D"),
+                    //     ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.D1.Id))
+                    // },
                 }
             },
             new CodexTabDef

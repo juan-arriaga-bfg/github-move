@@ -19,12 +19,10 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         IWUIManager.Instance.Init(new[]
         {
             UIWindowType.MainWindow,
-            UIWindowType.SampleWindow,
             UIWindowType.MessageWindow,
             UIWindowType.ChestMessage,
             UIWindowType.QuestWindow,
             UIWindowType.ErrorWindow,
-            UIWindowType.ChestsShopWindow,
             UIWindowType.SoftShopWindow,
             UIWindowType.CodexWindow,
             UIWindowType.CurrencyCheatSheetWindow,
@@ -35,6 +33,8 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.NextLevelWindow,
             UIWindowType.DailyQuestWindow,
             UIWindowType.ResourcePanelWindow,
+            UIWindowType.SettingsWindow,
+            UIWindowType.MarketWindow,
         });
         
         // on cache complete
@@ -53,6 +53,10 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             
             ProfileService.Current.QueueComponent.Run();
             BoardService.Current.FirstBoard.TutorialLogic.Run();
+            
+            NSAudioService.Current.Play(SoundId.Ambient1Music, true)
+              .SetVolume(0f)
+              .SetVolume(1f, 2f);
         };
     }
 

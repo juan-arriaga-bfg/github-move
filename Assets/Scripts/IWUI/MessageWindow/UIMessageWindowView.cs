@@ -32,28 +32,15 @@ public class UIMessageWindowView : UIGenericPopupWindowView
 
     private Transform hint;
     
-    public override void InitView(IWWindowModel model, IWWindowController controller)
-    {
-        base.InitView(model, controller);
-
-        btnAccept.Init()
-            .ToState(GenericButtonState.Active)
-            .OnClick(OnClickAccept);
-        
-        btnCancel.Init()
-            .ToState(GenericButtonState.Active)
-            .OnClick(OnClickCancel);
-        
-        btnBuy.Init()
-            .ToState(GenericButtonState.Active)
-            .OnClick(OnClickAccept);
-    }
-    
     public override void OnViewShow()
     {
         base.OnViewShow();
         
         var windowModel = Model as UIMessageWindowModel;
+        
+        InitBtnBase(btnAccept, OnClickAccept);
+        InitBtnBase(btnCancel, OnClickCancel);
+        InitBtnBase(btnBuy, OnClickAccept);
         
         if (!string.IsNullOrEmpty(windowModel.Image))
         {
@@ -81,7 +68,7 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         btnCancel.CachedTransform.SetSiblingIndex(windowModel.IsAcceptLeft ? 2 : 0);
         
         image.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Image));
-        messageLabel.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Message));
+        message.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Message));
         anchor.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Prefab));
         
         btnAccept.gameObject.SetActive(windowModel.IsBuy == false && windowModel.OnAccept != null);

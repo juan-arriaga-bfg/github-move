@@ -7,6 +7,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
 {
     [IWUIBinding("#ResultIcon")] private Image iconResult;
     [IWUIBinding("#Hero")] private Transform iconHero;
+    [IWUIBinding("#TutorAnchor")] private Transform tutorAnchor;
     
     [IWUIBinding("#TimerLabel")] private NSText timerLabel;
     
@@ -49,10 +50,11 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         }
 
         order.OnStateChange += UpdateState;
+        order.OnStateChange += ShowTestArrow;
         UpdateState();
         
-        btnBuy.Init().OnClick(OnClickBuy);
-        btnComplete.Init().OnClick(OnClick);
+        btnBuy.OnClick(OnClickBuy);
+        btnComplete.OnClick(OnClick);
         
         CreateIcon(iconHero, PieceType.Parse(piece.PieceType));
         
@@ -93,6 +95,22 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         content.Create(views);
     }
 
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+
+        ShowTestArrow();
+    }
+
+    private void ShowTestArrow()
+    {
+        var contentEntity = entity as UIOrderElementEntity;
+
+        if (contentEntity == null || order.State != OrderState.Complete || BoardService.Current.FirstBoard.TutorialLogic.CheckFirstOrder()) return;
+        
+        (context as UIBaseWindowView).CachedHintArrowComponent.ShowArrow(tutorAnchor, 5f);
+    }
+
     public override void OnViewCloseCompleted()
     {
         RemoveListeners();
@@ -110,8 +128,12 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             customer.Timer.OnExecute -= UpdateTimer;
             customer.Timer.OnComplete -= UpdateState;
         }
-        
-        if(order != null) order.OnStateChange -= UpdateState;
+
+        if (order != null)
+        {
+            order.OnStateChange -= UpdateState;
+            order.OnStateChange -= ShowTestArrow;
+        }
     }
 
     private void UpdateTimer()
@@ -133,7 +155,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         
         Fill(order.Def.Prices);
         
-//        (context as UIOrdersWindowView).UpdateOrders();
+        (context as UIOrdersWindowView).UpdateOrders();
     }
 
     private void OnClickBuy()

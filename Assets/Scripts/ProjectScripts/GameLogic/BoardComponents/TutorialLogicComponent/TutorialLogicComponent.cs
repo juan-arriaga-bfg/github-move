@@ -14,6 +14,10 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     public override void OnRegisterEntity(ECSEntity entity)
     {
         Context = entity as BoardController;
+        Save = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid)?.Complete ?? new List<int>();
+        
+        UnlockFirefly(false);
+        UnlockOrders(false);
     }
     
     public override void OnUnRegisterEntity(ECSEntity entity)
@@ -26,8 +30,6 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
 
     public void Run()
     {
-        Save = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid)?.Complete ?? new List<int>();
-        
         for (var i = 0;; i++)
         {
             if(Save.Contains(i)) continue;
@@ -48,12 +50,9 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             
             RegisterComponent(tutorial, true);
         }
-        
-        var firefly = Context.BoardLogic.FireflyLogic;
-        firefly.Locker.Unlock(firefly);
-        
-        var orders = GameDataService.Current.OrdersManager;
-        orders.Locker.Unlock(orders);
+
+        UnlockFirefly(true);
+        UnlockOrders(true);
         
         UIService.Get.OnShowWindowEvent += OnShowWindow;
         UIService.Get.OnCloseWindowEvent += OnCloseWindow;
@@ -184,5 +183,31 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
                 Context.BoardLogic.UnlockCell(new BoardPosition(i, j, BoardLayer.Piece.Layer), this);
             }
         }
+    }
+    
+    private void UnlockFirefly(bool isRun)
+    {
+        if(isRun == false && Save.Contains(TutorialBuilder.LockFireflytepIndex) == false) return;
+        
+        var firefly = Context.BoardLogic.FireflyLogic;
+        firefly.Locker.Unlock(firefly);
+    }
+    
+    private void UnlockOrders(bool isRun)
+    {
+        if(isRun == false && Save.Contains(TutorialBuilder.LockOrderStepIndex) == false) return;
+        
+        var orders = GameDataService.Current.OrdersManager;
+        orders.Locker.Unlock(orders);
+    }
+    
+    public bool CheckLockPR()
+    {
+        return Save.Contains(TutorialBuilder.LockPRStepIndex);
+    }
+
+    public bool CheckFirstOrder()
+    {
+        return Save.Contains(TutorialBuilder.FirstOrderStepIndex);
     }
 }

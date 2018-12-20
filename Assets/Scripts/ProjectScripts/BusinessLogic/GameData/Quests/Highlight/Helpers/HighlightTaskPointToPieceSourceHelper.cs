@@ -9,12 +9,17 @@ public static class HighlightTaskPointToPieceSourceHelper
     
     // Match: PR_A1, CH2_B, returns: A, B
     private static readonly Regex pieceBranchRegexComplex = new Regex(@"(?<=_)([A-Z])*", RegexOptions.IgnoreCase);
-    
+
     public static bool PointToPieceSource(IHavePieceId pieceTask, PieceTypeFilter sourceFilter, PieceTypeFilter? excludeFilter = null, List<string> allowedSourceBranches = null)
+    {        
+        int pieceId = pieceTask.PieceId;
+        return PointToPieceSource(pieceId, sourceFilter, excludeFilter, allowedSourceBranches);
+    }
+
+    public static bool PointToPieceSource(int pieceId, PieceTypeFilter sourceFilter, PieceTypeFilter? excludeFilter = null, List<string> allowedSourceBranches = null)
     {       
         // Branch of piece
-        int pieceId = pieceTask.PieceId;
-        PieceTypeDef def = PieceType.GetDefById(pieceTask.PieceId);
+        PieceTypeDef def = PieceType.GetDefById(pieceId);
         string pieceIdStr = def.Abbreviations[0];
 
         Regex pieceRegex = pieceIdStr.Contains("_") ? pieceBranchRegexComplex : pieceBranchRegexSimple;

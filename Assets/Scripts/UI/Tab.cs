@@ -9,6 +9,7 @@ public class Tab : MonoBehaviour
     [SerializeField] private GameObject headDisabled;
 
     public TabGroup TabGroup;
+    
     public int Index;
 
     private void Start()

@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView 
 {
@@ -8,7 +6,6 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
     
     [IWUIBinding("#TabsContainer")] private UIContainerViewController tabsPanel;
     
-
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -17,7 +14,7 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
 
         SetTitle(model.Title);
         
-        CreateItems(model);
+        CreateItems();
         
         ToggleVisabilityShowedWindows(false);
         
@@ -49,10 +46,17 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
         ToggleVisabilityWindow(true, this);
     }
     
-    private void CreateItems(UIPiecesCheatSheetWindowModel model)
+    private void CreateItems()
     {
-        var filters = Enum.GetValues(typeof(PieceTypeFilter)).Cast<PieceTypeFilter>().Select(x => Enum.GetName(typeof(PieceTypeFilter), x)).ToList();
+        var filters = new List<string>
+        {
+            "Simple A", "Simple B", "Simple C", "Simple D",
+            "Ingredient A", "Ingredient B", "Ingredient C", "Ingredient D", "Ingredient E",
+            "Chests", "Currencies", "Obstacles", "Boosters", "Characters",
+        };
+        
         FillTabs(filters, tabsPanel);
+        
         var tabsScrollRect = tabsPanel.GetScrollRect();
         if (tabsScrollRect != null)
         {
@@ -81,7 +85,13 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
                 OnSelectEvent = (view) =>
                 {
                     UIPiecesCheatSheetWindowModel model = Model as UIPiecesCheatSheetWindowModel;
-                    Fill(model.GetPieceIdsBy((PieceTypeFilter)Enum.Parse(typeof(PieceTypeFilter), view.Entity.Uid)), itemsPanel);
+                    Fill(model.GetPieceIds(view.Entity.Uid), itemsPanel);
+                    
+                    var tabsScrollRect = itemsPanel.GetScrollRect();
+                    if (tabsScrollRect != null)
+                    {
+                        tabsScrollRect.horizontalNormalizedPosition = 0f;
+                    }
                 },
                 OnDeselectEvent = null
             };

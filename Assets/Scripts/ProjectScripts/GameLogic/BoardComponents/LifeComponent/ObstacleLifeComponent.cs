@@ -29,8 +29,12 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current - 1);
         
         if (item.IsStartTimer) Timer.Start(item.StartTimeTimer);
-        else OnTimerStart();
-
+        else
+        {
+            OnTimerStart();
+            Locker.Unlock(this);
+        }
+        
         return item;
     }
 

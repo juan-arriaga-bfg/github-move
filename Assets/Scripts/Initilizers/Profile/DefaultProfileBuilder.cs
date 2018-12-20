@@ -14,6 +14,7 @@
     {
         profile.RegisterComponent(new UserPurchasesComponent());
         profile.RegisterComponent(new UserSettingsComponent());
+        profile.RegisterComponent(new ProfileAudioBinder());
         profile.RegisterComponent(new FieldDefComponent());
         profile.RegisterComponent(new QuestSaveComponent());
         profile.RegisterComponent(new CurrencySaveComponent());

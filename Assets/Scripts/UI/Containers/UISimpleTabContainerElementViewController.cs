@@ -1,9 +1,14 @@
-﻿public class UISimpleTabContainerElementViewController : UIContainerElementViewController
+﻿using UnityEngine;
+using UnityEngine.UI;
+
+public class UISimpleTabContainerElementViewController : UIContainerElementViewController
 {
     [IWUIBinding] protected UISimpleTabButtonViewController button;
     
     [IWUIBindingNullable("#Label")] protected NSText label;
     [IWUIBindingNullable("#CheckmarkLabel")] protected NSText checkmarkLabel;
+    [IWUIBindingNullable("#ExclamationMark")] protected GameObject exclamationMark;
+    [IWUIBindingNullable("#ExclamationMarkCheckmark")] protected GameObject exclamationMarkCheckmark;
     
     public override void Init()
     {
@@ -14,8 +19,9 @@
         if (label != null) label.Text = contentEntity.LabelText;
         if (checkmarkLabel != null) checkmarkLabel.Text = contentEntity.CheckmarkText ?? contentEntity.LabelText;
         
+        ToggleExclamationMark(contentEntity.ExclamationMark);
+        
         button
-            .Init()
             .ToState(GenericButtonState.UnActive)
             .OnClick(Select);
     }
@@ -36,5 +42,18 @@
         button.ToState(GenericButtonState.UnActive);
         
         CachedTransform.SetSiblingIndex(Index);
+    }
+
+    public void ToggleExclamationMark(bool enabled)
+    {
+        if (exclamationMark != null)
+        {
+            exclamationMark.SetActive(enabled);
+        }
+        
+        if (exclamationMarkCheckmark != null)
+        {
+            exclamationMarkCheckmark.SetActive(enabled);
+        }
     }
 }

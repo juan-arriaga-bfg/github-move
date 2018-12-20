@@ -5,6 +5,9 @@ using UnityEngine;
 public static class TutorialBuilder
 {
     public const int LockPRStepIndex = 12;
+    public const int LockOrderStepIndex = 18;
+    public const int FirstOrderStepIndex = 19;
+    public const int LockFireflytepIndex = 21;
     
     public static BaseTutorialStep BuildTutorial(int index, BoardController context)
     {
@@ -69,7 +72,7 @@ public static class TutorialBuilder
             }*/
             case 2: // tutorial 2 step 1
             {
-                step = new HighlightPiecesTutorialStep {Delay = 3, Targets = new List<int>{PieceType.PR_C1.Id}};
+                step = new HighlightPiecesTutorialStep {Delay = 2, Targets = new List<int>{PieceType.PR_C1.Id}};
                 
                 step.RegisterComponent(new CheckStepTutorialCondition {Target = 1, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckCounterTutorialCondition {Target = 1, ConditionType = TutorialConditionType.Complete}, true);
@@ -79,7 +82,7 @@ public static class TutorialBuilder
             }
             case 3: // tutorial 2 step 2
             {
-                step = new HighlightPiecesTutorialStep {Delay = 5, Targets = new List<int>{PieceType.PR_C1.Id, PieceType.PR_C2.Id, PieceType.PR_C3.Id}};
+                step = new HighlightPiecesTutorialStep {Delay = 2, Targets = new List<int>{PieceType.PR_C1.Id, PieceType.PR_C2.Id, PieceType.PR_C3.Id}};
                 
                 step.RegisterComponent(new CheckStepTutorialCondition {Target = 2, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
@@ -99,7 +102,7 @@ public static class TutorialBuilder
             }
             case 5: // tutorial 4 - remove tree
             {
-                step = new SelectStorageTutorialStep {Delay = 5, Targets = new List<int>{PieceType.OB1_TT.Id, PieceType.OB2_TT.Id}};
+                step = new SelectStorageTutorialStep {Delay = 2, Targets = new List<int>{PieceType.OB1_TT.Id, PieceType.OB2_TT.Id}};
                 
                 step.RegisterComponent(new CheckStepTutorialCondition {Target = 4, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckCurrencyTutorialCondition {Target = -1, Currency = new List<string> {Currency.Worker.Name}, ConditionType = TutorialConditionType.Complete}, true);
@@ -119,10 +122,7 @@ public static class TutorialBuilder
             }
             case 7: // tutorial 6 - create ingredient
             {
-                step = new SelectStorageTutorialStep {Delay = 5, IsFastStart = true, Targets = new List<int>
-                {
-                    PieceType.PR_A4.Id, PieceType.PR_B4.Id, PieceType.PR_C4.Id, PieceType.PR_D4.Id, PieceType.PR_E4.Id, PieceType.PR_F4.Id, PieceType.PR_G4.Id
-                }};
+                step = new SelectStorageTutorialStep {Delay = 2, IsFastStart = true, Targets = new List<int>{PieceType.PR_A4.Id, PieceType.PR_B4.Id, PieceType.PR_C4.Id, PieceType.PR_D4.Id, PieceType.PR_E4.Id, PieceType.PR_F4.Id, PieceType.PR_G4.Id}};
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "7_CreatePiece_PR_A5", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Complete}, true);
@@ -142,7 +142,7 @@ public static class TutorialBuilder
             }
             case 9: // tutorial 8 - crystal
             {
-                step = new СrystalTutorialStep {Delay = 3, IsAnyCompleteCondition = true};
+                step = new СrystalTutorialStep {Delay = 2, IsAnyCompleteCondition = true};
                 break;
             }
             case 10: // tutorial 9 - worker
@@ -226,6 +226,8 @@ public static class TutorialBuilder
             }
             case 18: // lock Orders
             {
+                if (LockOrderStepIndex != index) Debug.LogError("Tutorial Error: LockOrderStepIndex != index");
+                
                 step = new OrdersLockTutorialStep {IsIgnoreDev = false};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
@@ -234,7 +236,19 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 19: // add SleepingBeauty
+            case 19: // Orders window tutorial
+            {
+                if (FirstOrderStepIndex != index) Debug.LogError("Tutorial Error: FirstOrderStepIndex != index");
+                
+                step = new BaseTutorialStep();
+                
+                step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "16_CompleteOrder", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "16_CompleteOrder", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Hard}, true);
+                
+                break;
+            }
+            case 20: // add SleepingBeauty
             {
                 step = new BaseTutorialStep {IsIgnoreDev = false, IsIgnoreUi = true};
                 
@@ -247,8 +261,10 @@ public static class TutorialBuilder
                 
                 break;
             }
-            case 20: // unlock Firefly
+            case 21: // unlock Firefly
             {
+                if (LockFireflytepIndex != index) Debug.LogError("Tutorial Error: LockFireflytepIndex != index");
+                
                 step = new FireflyLockTutorialStep {IsIgnoreDev = false};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);

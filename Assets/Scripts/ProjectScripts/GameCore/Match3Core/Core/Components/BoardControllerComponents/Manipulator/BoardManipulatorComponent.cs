@@ -284,10 +284,9 @@ public class BoardManipulatorComponent : ECSEntity,
                     var distance = Vector2.Distance(currentPos, targetPos);
                     var duration = dragDuration * (distance < 1 ? distance : 1);
                     
-                    var cachedViewForDragPiece = cachedViewForDrag as PieceBoardElementView;
-                    if (cachedViewForDragPiece != null && cachedViewForDragPiece.Piece != null)
+                    if (pieceView.Piece != null)
                     {
-                        if (cachedViewForDragPiece != null) cachedViewForDragPiece.SyncRendererLayers(cachedViewForDragPiece.Piece.CachedPosition);
+                        pieceView.SyncRendererLayers(pieceView.Piece.CachedPosition);
                     }
                     else
                     {
@@ -296,7 +295,7 @@ public class BoardManipulatorComponent : ECSEntity,
                     
                     cachedViewForDrag.CachedTransform.DOLocalMove(targetPos, duration).OnComplete(() =>
                         {
-
+                            pieceView.Piece?.ViewDefinition?.OnDrag(true);
                             cachedViewForDrag = null;
                             cameraManipulator.CameraMove.UnLock(this);
                         })

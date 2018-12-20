@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBuilder
@@ -42,6 +43,44 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         };
             
         BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.Match, matchDescription);
+        
+        // collect and purchase rewards before action
+        var rewardTransactions = new Dictionary<int, List<ShopItemTransaction>>();
+        for (var i = 0; i < nextPieces.Count; i++)
+        {
+            var targetPieceType = nextPieces[i];
+            
+            if (targetPieceType == pieceType) continue;
+            
+            var def = GameDataService.Current.PiecesManager.GetPieceDef(targetPieceType);
+        
+            if(def?.CreateRewards == null) continue;
+            
+            for (var j = 0; j < def.CreateRewards.Count; j++)
+            {
+                var reward = def.CreateRewards[j];
+        
+                if (reward.Currency == Currency.Coins.Name
+                 || reward.Currency == Currency.Crystals.Name
+                 || reward.Currency == Currency.Energy.Name
+                 || reward.Currency == Currency.Mana.Name
+                 || reward.Currency == Currency.Worker.Name
+                 || reward.Currency == Currency.Experience.Name)
+                {
+                    var transaction = CurrencyHellper.PurchaseAsync
+                    (
+                        reward
+                    );
+        
+                    if (rewardTransactions.ContainsKey(i) == false)
+                    {
+                        rewardTransactions.Add(i, new List<ShopItemTransaction>());
+                    }
+        
+                    rewardTransactions[i].Add(transaction);
+                }
+            }
+        } 
 
         return new ModificationPiecesAction
         {
@@ -53,8 +92,30 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
                 for (var i = 0; i < list.Count; i++)
                 {
                     if (nextPieces[i] == pieceType) continue;
+
+                    if (rewardTransactions.ContainsKey(i))
+                    {
+                        var targetTransactions = rewardTransactions[i];
+                        var flyPosition = list[i];
                     
-                    SpawnReward(list[i], nextPieces[i]);
+                        var sequence = DOTween.Sequence();
+                        for (int j = 0; j < targetTransactions.Count; j++)
+                        {
+                            var targetTransaction = targetTransactions[j];                            
+                            var from = BoardService.Current.FirstBoard.BoardDef.GetPiecePosition(flyPosition.X, flyPosition.Y);
+                    
+                            sequence.InsertCallback(0.5f * j, () =>
+                            {
+                                CurrencyHellper.CurrencyFly
+                                (
+                                    BoardService.Current.FirstBoard.BoardDef.ViewCamera.WorldToScreenPoint(from), 
+                                    new CurrencyPair{ Currency = targetTransaction.ShopItem.ItemUid, Amount = targetTransaction.ShopItem.Amount }
+                                );
+                            });
+                        }
+                    }
+
+                    // SpawnReward(list[i], nextPieces[i]);
                 }
             }
         };

@@ -17,7 +17,7 @@ public class PieceBoardElementView : BoardElementView
     [SerializeField] private Material defaultSelectionMaterial;
     [SerializeField] private Material highlightPieceMaterial;
 
-    private BoardElementView lockedSubtrate;
+    private List<BoardElementView> lockedSubtrates = new List<BoardElementView>();
 
     private Animation cachedSelectionAnimation;
 
@@ -209,6 +209,43 @@ public class PieceBoardElementView : BoardElementView
         }
     }
 
+    /// <summary>
+    /// if piece is multicellular
+    /// </summary>
+    public virtual bool IsMulticellularPiece
+    {
+        get
+        {
+            return multicellularPieceBoardObserver != null;
+        }
+    }
+    
+    /// <summary>
+    /// Get CachedPosition or Mask positions (if piece is multicellular)
+    /// </summary>
+    public virtual List<BoardPosition> GetPieceLocatedPositions()
+    {
+        var points = new List<BoardPosition>();
+
+        if (multicellularPieceBoardObserver != null)
+        {
+            for (int i = 0; i < multicellularPieceBoardObserver.Mask.Count; i++)
+            {
+                var point = multicellularPieceBoardObserver.GetPointInMask(Piece.CachedPosition, multicellularPieceBoardObserver.Mask[i]);
+                points.Add(point);
+            }
+        }
+        else
+        {
+            if (Piece != null)
+            {
+                points.Add(Piece.CachedPosition);
+            }
+        }
+
+        return points;
+    }
+
     private void RemoveLockParticles()
     {
         foreach (var lockParticle in lockParticles)
@@ -242,9 +279,14 @@ public class PieceBoardElementView : BoardElementView
                                || pieceDef.Filter.HasFlag(PieceTypeFilter.Mine);
             if (defaultSubtrate == false)
             {
-                var substratePosition =
-                    new BoardPosition(Piece.CachedPosition.X, Piece.CachedPosition.Y, Piece.CachedPosition.Z - 1);
-                lockedSubtrate = Context.CreateBoardElementAt<BoardElementView>(R.LockedSubstrate, substratePosition);    
+                var substratePositions = GetPieceLocatedPositions();
+                for (int i = 0; i < substratePositions.Count; i++)
+                {
+                    var substratePosition = substratePositions[i];
+                    substratePosition = new BoardPosition(substratePosition.X, substratePosition.Y, substratePosition.Z - 1);
+                    var lockedSubtrate = Context.CreateBoardElementAt<BoardElementView>(R.LockedSubstrate, substratePosition);
+                    lockedSubtrates.Add(lockedSubtrate);
+                }
             }
 
             if (Piece.PieceType != PieceType.Fog.Id)
@@ -260,12 +302,16 @@ public class PieceBoardElementView : BoardElementView
             {
                 RemoveLockParticles();    
             }
-            
-            if (lockedSubtrate != null)
+
+            for (int i = 0; i < lockedSubtrates.Count; i++)
             {
-                Context.DestroyElement(lockedSubtrate);
-                lockedSubtrate = null;
-            }    
+                var lockedSubtrate = lockedSubtrates[i];
+                if (lockedSubtrate != null)
+                {
+                    Context.DestroyElement(lockedSubtrate);
+                }
+            }
+            lockedSubtrates.Clear();
         }
         
         
@@ -293,11 +339,15 @@ public class PieceBoardElementView : BoardElementView
     
     public override void ResetViewOnDestroy()
     {
-        if (lockedSubtrate != null)
+        for (int i = 0; i < lockedSubtrates.Count; i++)
         {
-            Context.DestroyElement(lockedSubtrate);
-            lockedSubtrate = null;
+            var lockedSubtrate = lockedSubtrates[i];
+            if (lockedSubtrate != null)
+            {
+                Context.DestroyElement(lockedSubtrate);
+            }
         }
+        lockedSubtrates.Clear();
         
         DestroyDropEffect();
         

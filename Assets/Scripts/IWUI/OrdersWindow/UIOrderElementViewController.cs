@@ -4,8 +4,7 @@ using UnityEngine.UI;
 public class UIOrderElementViewController : UISimpleScrollElementViewController
 {
 	[IWUIBinding] private UIOrdersTabButtonViewController button;
-	
-	[SerializeField] private Image indicator;
+	[IWUIBinding("#Mark")] private Image mark;
 	
 	public override void Init()
 	{
@@ -15,17 +14,11 @@ public class UIOrderElementViewController : UISimpleScrollElementViewController
 		
 		button
 			.SetActiveScale(1.2f)
-			.Init()
 			.SetDragDirection(new Vector2(0f, 1f))
 			.SetDragThreshold(100f)
 			.ToState(GenericButtonState.UnActive).OnClick(Select);
 		
-		UpdateIndicator();
-	}
-	
-	public void UpdateIndicator()
-	{
-//		order.SetMark(indicator);
+		contentEntity.Data.SetMark(mark);
 	}
 	
 	public override void OnSelect()

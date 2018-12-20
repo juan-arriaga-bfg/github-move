@@ -1409,7 +1409,7 @@ GameObject:
   - component: {fileID: 225513730606985444}
   - component: {fileID: 222269531013315744}
   m_Layer: 31
-  m_Name: ButtonSettings
+  m_Name: ButtonOptions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2640,7 +2640,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114833382851173996}
-        m_MethodName: OnClickSettings
+        m_MethodName: OnClickOptions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4865,12 +4865,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 20
+  m_fontSize: 23.2
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 20
+  m_fontSizeMax: 30
   m_fontStyle: 0
   m_textAlignment: 513
   m_isAlignmentEnumConverted: 1
@@ -6281,7 +6281,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -55, y: -50}
+  m_AnchoredPosition: {x: -55, y: -61}
   m_SizeDelta: {x: 77.380005, y: 76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224344154175397596
@@ -6925,7 +6925,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 188, y: 15}
+  m_AnchoredPosition: {x: 188, y: 20}
   m_SizeDelta: {x: 186, y: 36}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224764013125175110

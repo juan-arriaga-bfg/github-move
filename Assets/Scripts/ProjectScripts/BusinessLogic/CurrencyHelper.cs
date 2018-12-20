@@ -161,6 +161,8 @@ public static class CurrencyHellper
     
     private static ShopItemTransaction PurchaseItem(ShopItem shopItem, CurrencyPair product, bool isShoowHint, Action<bool> onSuccess = null, Vector3? flyPosition = null, float delay = 0)
     {
+        Debug.Log($"[CurrencyHelper] => PurchaseItem: shopItem: {shopItem.ItemUid}: {shopItem.Amount}, product: {product}");
+        
         var isSuccess = false;
         
         var transaction = ShopService.Current.PurchaseItem
@@ -231,7 +233,7 @@ public static class CurrencyHellper
         return transaction;
     }
     
-    private static void CurrencyFly(Vector3 screenPosition, CurrencyPair resource, Action<bool> onSuccess = null, float delay = 0)
+    public static void CurrencyFly(Vector3 screenPosition, CurrencyPair resource, Action<bool> onSuccess = null, float delay = 0)
     {
         var fly = ResourcesViewManager.Instance.GetFirstViewById(resource.Currency);
         
@@ -304,6 +306,8 @@ public static class CurrencyHellper
 
         if (isMessageShow)
         {
+            Debug.Log($"[CurrencyHelper] => Show 'Not enough' message for: {price}: {amount}");
+            
             if (price == Currency.Crystals.Name)
             {
                 UIMessageWindowController.CreateNeedCurrencyMessage(price, diff.ToString());

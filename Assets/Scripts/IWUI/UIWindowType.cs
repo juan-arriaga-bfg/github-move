@@ -4,8 +4,6 @@ public class UIWindowType
 {
     public const string LauncherWindow = "LauncherWindow";
     
-    public const string SampleWindow = "SampleWindow";
-    
     public const string MainWindow = "MainWindow";
     
     public const string MessageWindow = "MessageWindow";
@@ -15,8 +13,6 @@ public class UIWindowType
     public const string QuestWindow = "QuestWindow";
     
     public const string ErrorWindow = "ErrorWindow";
-    
-    public const string ChestsShopWindow = "ChestsShopWindow";
     
     public const string SoftShopWindow = "SoftShopWindow";
     
@@ -37,6 +33,10 @@ public class UIWindowType
     public const string DailyQuestWindow = "DailyQuestWindow";
     
     public const string ResourcePanelWindow = "ResourcePanelWindow";
+    
+    public const string SettingsWindow = "SettingsWindow";
+    
+    public const string MarketWindow = "MarketWindow";
 
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {

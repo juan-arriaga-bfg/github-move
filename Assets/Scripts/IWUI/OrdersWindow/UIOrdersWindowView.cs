@@ -56,6 +56,12 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         
         contentToggles.Select(0);
     }
+
+    public void UpdateOrders()
+    {
+        var windowModel = Model as UIOrdersWindowModel;
+        Fill(UpdateEntitiesOders(windowModel.Orders), contentOders);
+    }
     
     private void OnSelectToggle(int index)
     {
@@ -74,6 +80,9 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
                 var select = Mathf.Max(0, dataOrders.FindIndex(order => order == windowModel.Select));
                 
                 messageOders.gameObject.SetActive(dataOrders.Count == 0);
+
+                if (dataOrders.Count == 0) Fill(UpdateEntitiesSelect(null), contentSelect);
+                
                 Fill(UpdateEntitiesOders(dataOrders), contentOders);
                 contentOders.Select(select);
                 prices.HideHard();
