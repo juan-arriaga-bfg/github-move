@@ -38,17 +38,9 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         
         var windowModel = Model as UIMessageWindowModel;
         
-        btnAccept
-            .ToState(GenericButtonState.Active)
-            .OnClick(OnClickAccept);
-        
-        btnCancel
-            .ToState(GenericButtonState.Active)
-            .OnClick(OnClickCancel);
-        
-        btnBuy
-            .ToState(GenericButtonState.Active)
-            .OnClick(OnClickAccept);
+        InitBtnBase(btnAccept, OnClickAccept);
+        InitBtnBase(btnCancel, OnClickCancel);
+        InitBtnBase(btnBuy, OnClickAccept);
         
         if (!string.IsNullOrEmpty(windowModel.Image))
         {

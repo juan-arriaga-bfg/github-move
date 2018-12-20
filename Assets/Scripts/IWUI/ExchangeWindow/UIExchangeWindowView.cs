@@ -17,14 +17,9 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
         base.OnViewShow();
         
         UIExchangeWindowModel windowModel = Model as UIExchangeWindowModel;
-        
-        btnBuy
-            .ToState(GenericButtonState.Active)
-            .OnClick(OnBuyClick);
-        
-        btnFind
-            .ToState(GenericButtonState.Active)
-            .OnClick(OnFindClick);
+
+        InitBtnBase(btnBuy, OnBuyClick);
+        InitBtnBase(btnFind, OnFindClick);
 
         var isBuy = BoardService.Current.FirstBoard.TutorialLogic.CheckFirstOrder();
         

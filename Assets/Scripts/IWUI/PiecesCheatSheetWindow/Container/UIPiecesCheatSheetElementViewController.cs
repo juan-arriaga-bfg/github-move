@@ -13,8 +13,6 @@ public class UIPiecesCheatSheetElementViewController : UIContainerElementViewCon
     
     [IWUIBinding("#Icon")] private Image ico;
     
-    [IWUIBinding("#RootCanvas", true)] private CanvasGroup mainCanvasGroup;
-    
     [IWUIBinding] private UIButtonViewController rootButton;
 
     private int pieceId;
@@ -78,8 +76,10 @@ public class UIPiecesCheatSheetElementViewController : UIContainerElementViewCon
         BoardService.Current.GetBoardById(0).BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(pos, availablePoints, 1, 100);
         if (availablePoints.Count > 0)
         {
+            var window = context as UIBaseWindowView;
+            
             DOTween.Sequence()
-                   .Append(mainCanvasGroup.DOFade(0f, 0.1f))
+                   .Append(window.GetCanvasGroup().DOFade(0f, 0.1f))
                    .AppendInterval(0.3f)
                    .AppendCallback(() =>
                     {
@@ -90,8 +90,7 @@ public class UIPiecesCheatSheetElementViewController : UIContainerElementViewCon
                         });
                     })
                    .AppendInterval(0.6f)
-                   .Append(mainCanvasGroup.DOFade(1f, 0.1f));
-
+                   .Append(window.GetCanvasGroup().DOFade(1f, 0.1f));
         }
     }
 

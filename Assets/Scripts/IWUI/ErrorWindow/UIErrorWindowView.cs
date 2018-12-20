@@ -4,13 +4,20 @@ using TMPro;
 
 public class UIErrorWindowView : IWUIWindowView
 {
-    [SerializeField] private GameObject pattern;
+    [IWUIBinding("#Pattern")] private GameObject pattern;
 
     private float duration = 2f;
     private int index;
 
     public override float DefaultDelayOnShow => 0f;
     public override float DefaultDelayOnClose => 0f;
+
+    public override void InitView(IWWindowModel model, IWWindowController controller)
+    {
+        base.InitView(model, controller);
+        
+        pattern.SetActive(false);
+    }
 
     public override void OnViewShow()
     {

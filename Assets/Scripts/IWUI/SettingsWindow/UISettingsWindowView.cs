@@ -42,16 +42,16 @@ public class UISettingsWindowView : UIGenericPopupWindowView
         
         var windowModel = Model as UISettingsWindowModel;
         
-        InitBtn(btnLanguage, OnLanguageClick);
+        InitBtnBase(btnLanguage, OnLanguageClick);
         
-        InitBtn(btnLogin, OnLoginClick);
+        InitBtnBase(btnLogin, OnLoginClick);
         
-        InitBtn(btnCredits, OnCreditsClick);
-        InitBtn(btnSupport, OnSupportClick);
-        InitBtn(btnRestore, OnRestoreClick);
+        InitBtnBase(btnCredits, OnCreditsClick);
+        InitBtnBase(btnSupport, OnSupportClick);
+        InitBtnBase(btnRestore, OnRestoreClick);
         
-        InitBtn(btnTermsOfUse, OnTermsOfUseClick);
-        InitBtn(btnPolicy, OnPolicyClick);
+        InitBtnBase(btnTermsOfUse, OnTermsOfUseClick);
+        InitBtnBase(btnPolicy, OnPolicyClick);
         
         btnSound.OnChange(OnSoundClick);
         btnMusic.OnChange(OnMusicClick);
@@ -91,12 +91,6 @@ public class UISettingsWindowView : UIGenericPopupWindowView
         
         var windowModel = Model as UISettingsWindowModel;
         
-    }
-    
-    private void InitBtn(UIButtonViewController btn, Action onClick)
-    {
-        btn.ToState(GenericButtonState.Active)
-            .OnClick(onClick);
     }
     
     private void OnLoginClick()

@@ -37,10 +37,8 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         {
             hintLabel.gameObject.SetActive(true);
         }
-
-        findButton
-                  .ToState(GenericButtonState.Active)
-                  .OnClick(OnClick);
+        
+        InitBtnBase(findButton, OnClick);
 
         model.Quest.OnChanged += OnQuestChanged;
     }

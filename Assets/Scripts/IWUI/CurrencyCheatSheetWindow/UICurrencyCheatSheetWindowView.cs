@@ -1,13 +1,16 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Text;
-using UnityEngine.SceneManagement;
 
 public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
 {
     [SerializeField] private UICurrencyCheatSheetWindowItem itemPrefab;
-    [SerializeField] private NSText labelAdd;
-    [SerializeField] private NSText labelRemove;
+    
+    [IWUIBinding("#ButtonAdd")] private UIButtonViewController btnAdd;
+    [IWUIBinding("#ButtonRemove")] private UIButtonViewController btnRemove;
+    
+    [IWUIBinding("#ButtonAddLabel")] protected NSText buttonAddLabel;
+    [IWUIBinding("#ButtonRemoveLabel")] protected NSText buttonRemoveLabel;
 
     private List<UICurrencyCheatSheetWindowItem> items;
     
@@ -16,6 +19,7 @@ public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
         Currency.Coins,
         Currency.Crystals,
         Currency.Mana,
+        Currency.Energy,
     };
     
     public override void OnViewShow()
@@ -26,9 +30,12 @@ public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
 
         SetTitle(model.Title);
         CreateItems(model);
+        
+        InitBtnBase(btnAdd, () => OnSet(999999));
+        InitBtnBase(btnRemove, () => OnSet(0));
 
-        labelAdd.Text = $"{GetBtnLabel()}99999";
-        labelRemove.Text = $"{GetBtnLabel()}0";
+        buttonAddLabel.Text = $"{GetBtnLabel()}99999";
+        buttonRemoveLabel.Text = $"{GetBtnLabel()}0";
     }
 
     private string GetBtnLabel()
@@ -78,7 +85,7 @@ public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
         ProfileService.Instance.Manager.SaveLocalProfile();
     }
 
-    public void OnSet(int value)
+    private void OnSet(int value)
     {
         foreach (var item in items)
         {
@@ -86,10 +93,5 @@ public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
             
             item.SetValue(value);
         }
-    }
-
-    public override void InitView(IWWindowModel model, IWWindowController controller)
-    {
-        base.InitView(model, controller);
     }
 }

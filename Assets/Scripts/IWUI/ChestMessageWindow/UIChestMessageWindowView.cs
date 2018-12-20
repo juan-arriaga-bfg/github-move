@@ -18,11 +18,9 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         base.OnViewShow();
         
         var windowModel = Model as UIChestMessageWindowModel;
-        
-        btnOpen
-            .ToState(GenericButtonState.Active)
-            .OnClick(OnOpenClick);
 
+        InitBtnBase(btnOpen, OnOpenClick);
+        
         isOpen = false;
         
         SetTitle(windowModel.Title);

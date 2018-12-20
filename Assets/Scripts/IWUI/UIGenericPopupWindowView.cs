@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
 
@@ -36,5 +37,11 @@ public class UIGenericPopupWindowView : UIGenericWindowView
     protected void SetMessage(string text)
     {
         if(message != null) message.Text = text;
+    }
+    
+    protected void InitBtnBase(UIButtonViewController btn, Action onClick)
+    {
+        btn.ToState(GenericButtonState.Active)
+            .OnClick(onClick);
     }
 }
