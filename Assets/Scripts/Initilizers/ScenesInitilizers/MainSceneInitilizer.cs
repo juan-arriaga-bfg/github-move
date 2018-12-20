@@ -19,7 +19,6 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         IWUIManager.Instance.Init(new[]
         {
             UIWindowType.MainWindow,
-            UIWindowType.SampleWindow,
             UIWindowType.MessageWindow,
             UIWindowType.ChestMessage,
             UIWindowType.QuestWindow,
