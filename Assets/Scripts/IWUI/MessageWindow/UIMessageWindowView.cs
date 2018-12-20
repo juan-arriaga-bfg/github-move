@@ -76,7 +76,7 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         btnCancel.CachedTransform.SetSiblingIndex(windowModel.IsAcceptLeft ? 2 : 0);
         
         image.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Image));
-        messageLabel.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Message));
+        message.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Message));
         anchor.gameObject.SetActive(!string.IsNullOrEmpty(windowModel.Prefab));
         
         btnAccept.gameObject.SetActive(windowModel.IsBuy == false && windowModel.OnAccept != null);

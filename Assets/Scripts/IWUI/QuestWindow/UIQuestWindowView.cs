@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class UIQuestWindowView : UIGenericPopupWindowView
 {
     [IWUIBinding("#TaskIcon")] private Image targetIcon;
-    [IWUIBinding("#MessageLabel")] private NSText questMessageLabel;
     [IWUIBinding("#RewardLabel")] private NSText rewardLabel;
     [IWUIBinding("#TaskProgress")] private NSText progressLabel;
     [IWUIBinding("#FindButtonLabel")] private NSText buttonLabel;
@@ -70,7 +69,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
     {
         var model = Model as UIQuestWindowModel;
 
-        questMessageLabel.Text = GetMessageText();
+        message.Text = GetMessageText();
         hintLabel.Text    = GetHintText();
         rewardLabel.Text  = GetRewardText();
         progressLabel.Text  = GetProgressText();

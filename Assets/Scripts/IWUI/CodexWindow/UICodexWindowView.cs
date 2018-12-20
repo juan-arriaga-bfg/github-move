@@ -52,9 +52,10 @@ public class UICodexWindowView : UIGenericPopupWindowView
         btnUnlockAll.gameObject.SetActive(false);
 #endif
         
-        UICodexWindowModel model = Model as UICodexWindowModel;
+        var model = Model as UICodexWindowModel;
 
         ReInit(model);
+        SetTitle(model.Title);
         
         // Call update after one frame to make sure that layouts are up to date
         StartCoroutine(UpdateLayout());
