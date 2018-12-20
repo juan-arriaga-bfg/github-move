@@ -44,8 +44,6 @@ public class FieldControllerComponent : IECSComponent
                 });
             }
             
-            AddPieces(new BoardPosition(19, 11), PieceType.PR_F1.Id, PieceType.PR_F3.Id);
-            
             AddLastAction();
             
             return;

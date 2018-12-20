@@ -40,6 +40,8 @@ public static partial class Currency
     [IncludeToCheatSheet] public static readonly CurrencyDef PR_C5       = new CurrencyDef { Id = 1003, Name = "PR_C5",      IsConsumable = true, Icon = "PR_C5" };
     [IncludeToCheatSheet] public static readonly CurrencyDef PR_D5       = new CurrencyDef { Id = 1004, Name = "PR_D5",      IsConsumable = true, Icon = "PR_D5" };
     [IncludeToCheatSheet] public static readonly CurrencyDef PR_E5       = new CurrencyDef { Id = 1005, Name = "PR_E5",      IsConsumable = true, Icon = "PR_E5" };
+    [IncludeToCheatSheet] public static readonly CurrencyDef PR_F5       = new CurrencyDef { Id = 1006, Name = "PR_F5",      IsConsumable = true, Icon = "PR_F5" };
+    [IncludeToCheatSheet] public static readonly CurrencyDef PR_G5       = new CurrencyDef { Id = 1007, Name = "PR_G5",      IsConsumable = true, Icon = "PR_G5" };
     
                           public static readonly CurrencyDef Hard1       = new CurrencyDef { Id = 2000, Name = "Hard1",      IsConsumable = true, Icon = "Hard1" };
                           public static readonly CurrencyDef Hard2       = new CurrencyDef { Id = 2001, Name = "Hard2",      IsConsumable = true, Icon = "Hard2" };
