@@ -17,6 +17,8 @@ public class IngredientTutorialStep : BaseTutorialStep
                     Currency.PR_C5.Name,
                     Currency.PR_D5.Name,
                     Currency.PR_E5.Name,
+                    Currency.PR_F5.Name,
+                    Currency.PR_G5.Name,
                 },
                 ConditionType = TutorialConditionType.Complete
             }, true);
