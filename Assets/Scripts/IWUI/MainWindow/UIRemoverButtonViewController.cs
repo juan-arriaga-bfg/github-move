@@ -28,18 +28,23 @@ public class UIRemoverButtonViewController : IWUIWindowViewController
     {
         base.OnViewShow(context);
         
-        rootButton
-           .ToState(GenericButtonState.Active)
-           .SetDragDirection(new Vector2(0f, 1f))
-           .SetDragThreshold(30f)
-           .OnBeginDrag(OnBeginDragEventHandler)
-           .OnClick(OnClickEventHandler);
-
         var removerComponent = BoardService.Current.FirstBoard.BoardLogic.Remover;
         removerComponent.OnBeginRemoverEvent += OnBeginRemoverEvent;
         removerComponent.OnEndRemoverEvent += OnEndRemoverEvent;
     }
-    
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
+        rootButton
+            .ToState(GenericButtonState.Active)
+            .SetDragDirection(new Vector2(0f, 1f))
+            .SetDragThreshold(30f)
+            .OnBeginDrag(OnBeginDragEventHandler)
+            .OnClick(OnClickEventHandler);
+    }
+
     public override void OnViewClose(IWUIWindowView context)
     {
         base.OnViewClose(context);
