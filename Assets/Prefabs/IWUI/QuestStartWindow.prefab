@@ -124,7 +124,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224557790478726696}
-  - component: {fileID: 225770205861889946}
   m_Layer: 31
   m_Name: Body
   m_TagString: Untagged
@@ -394,7 +393,6 @@ GameObject:
   - component: {fileID: 222577252681071758}
   - component: {fileID: 114076840366865414}
   - component: {fileID: 114261348550517112}
-  - component: {fileID: 225438681978441382}
   m_Layer: 31
   m_Name: '#BackLayer'
   m_TagString: Untagged
@@ -805,10 +803,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd48b0e2caa0394aa79d9f1addd6fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rootCanvas: {fileID: 0}
+  btnBackLayer: {fileID: 0}
   questCardPrefab: {fileID: 1366435372129510}
   characterConversationAnchor: {fileID: 224436617996335464}
-  questCardsCanvasGroup: {fileID: 225979289074672204}
-  rootCanvasGroup: {fileID: 225227454811340648}
   uiLayer: {fileID: 114286650053371802}
   questCardsLayoutHelper: {fileID: 114927965467763532}
 --- !u!114 &114286650053371802
@@ -2060,17 +2058,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!225 &225438681978441382
-CanvasGroup:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1965081542965256}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!225 &225686229603652224
 CanvasGroup:
   m_ObjectHideFlags: 1
@@ -2080,17 +2067,6 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
---- !u!225 &225770205861889946
-CanvasGroup:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1217360159033870}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!225 &225979289074672204
