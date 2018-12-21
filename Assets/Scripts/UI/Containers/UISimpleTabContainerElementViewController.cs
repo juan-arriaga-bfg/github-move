@@ -20,12 +20,15 @@ public class UISimpleTabContainerElementViewController : UIContainerElementViewC
         if (checkmarkLabel != null) checkmarkLabel.Text = contentEntity.CheckmarkText ?? contentEntity.LabelText;
         
         ToggleExclamationMark(contentEntity.ExclamationMark);
-        
-        button
-            .ToState(GenericButtonState.UnActive)
-            .OnClick(Select);
     }
-    
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
+        button.OnClick(Select);
+    }
+
     public override void OnSelect()
     {
         base.OnSelect();

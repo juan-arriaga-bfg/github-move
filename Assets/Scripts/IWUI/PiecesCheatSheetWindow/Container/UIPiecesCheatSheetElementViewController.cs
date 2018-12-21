@@ -48,12 +48,17 @@ public class UIPiecesCheatSheetElementViewController : UIContainerElementViewCon
         {
             ico.sprite = spr;
         }
+    }
 
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
         rootButton
-           .ToState(GenericButtonState.Active)
-           .SetDragDirection(new Vector2(0f, 1f))
-           .SetDragThreshold(100f)
-           .OnBeginDrag(OnBeginDragEventHandler);
+            .ToState(GenericButtonState.Active)
+            .SetDragDirection(new Vector2(0f, 1f))
+            .SetDragThreshold(100f)
+            .OnBeginDrag(OnBeginDragEventHandler);
     }
 
     private void OnBeginDragEventHandler(UIButtonViewController obj, int pointerId)

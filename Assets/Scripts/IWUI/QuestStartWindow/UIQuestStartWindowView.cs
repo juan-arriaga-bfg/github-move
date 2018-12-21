@@ -45,6 +45,11 @@ public class UIQuestStartWindowView : IWUIWindowView
         UIQuestStartWindowModel model = Model as UIQuestStartWindowModel;
 
         step = model.CompletedQuest != null ? Step.QuestComplete : Step.QuestStart;
+    }
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
         
         if(btnBackLayer != null) btnBackLayer.ToState(GenericButtonState.Active).OnClick(OnClick);
     }

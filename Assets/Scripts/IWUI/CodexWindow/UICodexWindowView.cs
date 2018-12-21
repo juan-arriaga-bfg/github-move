@@ -45,7 +45,6 @@ public class UICodexWindowView : UIGenericPopupWindowView
         
 #if DEBUG && UNITY_EDITOR
         btnUnlockAll.gameObject.SetActive(true);
-        InitBtnBase(btnUnlockAll, OnUnlockAllClick);
 #else
         btnUnlockAll.gameObject.SetActive(false);
 #endif
@@ -57,6 +56,16 @@ public class UICodexWindowView : UIGenericPopupWindowView
         
         // Call update after one frame to make sure that layouts are up to date
         StartCoroutine(UpdateLayout());
+    }
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
+#if DEBUG && UNITY_EDITOR
+        InitButtonBase(btnUnlockAll, OnUnlockAllClick);
+#endif
+        
     }
 
     private IEnumerator UpdateLayout()

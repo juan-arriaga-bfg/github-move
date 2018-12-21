@@ -38,10 +38,6 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         
         var windowModel = Model as UIMessageWindowModel;
         
-        InitBtnBase(btnAccept, OnClickAccept);
-        InitBtnBase(btnCancel, OnClickCancel);
-        InitBtnBase(btnBuy, OnClickAccept);
-        
         if (!string.IsNullOrEmpty(windowModel.Image))
         {
             image.sprite = IconService.Current.GetSpriteById(windowModel.Image);
@@ -89,7 +85,16 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         windowModel.Timer.OnExecute += UpdateTimer;
         windowModel.Timer.OnComplete += CompleteTimer;
     }
-    
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
+        InitButtonBase(btnAccept, OnClickAccept);
+        InitButtonBase(btnCancel, OnClickCancel);
+        InitButtonBase(btnBuy, OnClickAccept);
+    }
+
     private IEnumerator UpdateLayoutCoroutine()
     {
         yield return new WaitForEndOfFrame();

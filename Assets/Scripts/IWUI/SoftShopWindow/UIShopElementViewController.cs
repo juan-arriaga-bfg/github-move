@@ -21,12 +21,17 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         btnLabel.Text = contentEntity.ButtonLabel;
 
         if (nameLabel != null) nameLabel.Text = contentEntity.NameLabel;
+    }
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
         
         btnBuy
             .ToState(GenericButtonState.Active)
             .OnClick(OnBuyClick);
     }
-    
+
     public override void OnViewCloseCompleted()
     {
         var contentEntity = entity as UIShopElementEntity;

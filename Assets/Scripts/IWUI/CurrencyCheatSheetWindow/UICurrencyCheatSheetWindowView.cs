@@ -27,13 +27,18 @@ public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
 
         SetTitle(model.Title);
         
-        InitBtnBase(btnAdd, () => OnSet(999999));
-        InitBtnBase(btnRemove, () => OnSet(0));
-
         buttonAddLabel.Text = $"{GetBtnLabel()}99999";
         buttonRemoveLabel.Text = $"{GetBtnLabel()}0";
         
         Fill(UpdateEntities(model.CurrenciesList()), content);
+    }
+    
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
+        InitButtonBase(btnAdd, () => OnSet(999999));
+        InitButtonBase(btnRemove, () => OnSet(0));
     }
 
     private string GetBtnLabel()

@@ -42,17 +42,6 @@ public class UISettingsWindowView : UIGenericPopupWindowView
         
         var windowModel = Model as UISettingsWindowModel;
         
-        InitBtnBase(btnLanguage, OnLanguageClick);
-        
-        InitBtnBase(btnLogin, OnLoginClick);
-        
-        InitBtnBase(btnCredits, OnCreditsClick);
-        InitBtnBase(btnSupport, OnSupportClick);
-        InitBtnBase(btnRestore, OnRestoreClick);
-        
-        InitBtnBase(btnTermsOfUse, OnTermsOfUseClick);
-        InitBtnBase(btnPolicy, OnPolicyClick);
-        
         btnSound.OnChange(OnSoundClick);
         btnMusic.OnChange(OnMusicClick);
         
@@ -80,9 +69,25 @@ public class UISettingsWindowView : UIGenericPopupWindowView
 #else
         versionLabel.Text = $"ver.:{IWProjectVersionSettings.Instance.ProductionVersion}";
 #endif
-
+        
         btnSound.ToState(ProfileService.Current.Settings.GetVolume("Sound") > 0.1f ? GenericButtonState.Active : GenericButtonState.UnActive);
         btnMusic.ToState(ProfileService.Current.Settings.GetVolume("Music") > 0.1f ? GenericButtonState.Active : GenericButtonState.UnActive);
+    }
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
+        InitButtonBase(btnLanguage, OnLanguageClick);
+        
+        InitButtonBase(btnLogin, OnLoginClick);
+        
+        InitButtonBase(btnCredits, OnCreditsClick);
+        InitButtonBase(btnSupport, OnSupportClick);
+        InitButtonBase(btnRestore, OnRestoreClick);
+        
+        InitButtonBase(btnTermsOfUse, OnTermsOfUseClick);
+        InitButtonBase(btnPolicy, OnPolicyClick);
     }
 
     public override void OnViewClose()

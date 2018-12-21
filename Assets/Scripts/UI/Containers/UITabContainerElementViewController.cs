@@ -15,7 +15,12 @@ public class UITabContainerElementViewController : UIContainerElementViewControl
         var targetEntity = entity as UITabContainerElementEntity;
 
         tabLabel.Text = targetEntity.TabLabel;
+    }
 
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
         tabButton.OnClick(Select);
     }
 

@@ -17,10 +17,7 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
         base.OnViewShow();
         
         UIExchangeWindowModel windowModel = Model as UIExchangeWindowModel;
-
-        InitBtnBase(btnBuy, OnBuyClick);
-        InitBtnBase(btnFind, OnFindClick);
-
+        
         var isBuy = BoardService.Current.FirstBoard.TutorialLogic.CheckFirstOrder();
         
         btnBuy.gameObject.SetActive(isBuy);
@@ -36,7 +33,15 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
         
         Fill(UpdateEntities(windowModel.Products), content);
     }
-    
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
+        InitButtonBase(btnBuy, OnBuyClick);
+        InitButtonBase(btnFind, OnFindClick);
+    }
+
     private List<IUIContainerElementEntity> UpdateEntities(List<CurrencyPair> entities)
     {
         var views = new List<IUIContainerElementEntity>(entities.Count);

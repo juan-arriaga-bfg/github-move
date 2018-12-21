@@ -19,15 +19,20 @@ public class UIRecipeElementViewController : UISimpleScrollElementViewController
         icon.material = contentEntity.IsLock ? lockMaterial : unlockMaterial;
         label.gameObject.SetActive(contentEntity.IsLock);
         
+        button.Interactable = !contentEntity.IsLock;
+    }
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
         button
             .SetActiveScale(1.1f)
             .SetDragDirection(new Vector2(0f, 1f))
             .SetDragThreshold(100f)
             .ToState(GenericButtonState.UnActive).OnClick(Select);
-        
-        button.Interactable = !contentEntity.IsLock;
     }
-    
+
     public override void OnSelect()
     {
         base.OnSelect();

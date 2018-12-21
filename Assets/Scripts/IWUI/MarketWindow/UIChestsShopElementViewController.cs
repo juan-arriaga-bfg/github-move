@@ -36,12 +36,17 @@ public class UIChestsShopElementViewController : UISimpleScrollElementViewContro
 		btnLabel.Text = isFree
 			? LocalizationService.Get("common.button.claim", "common.button.claim")
 			: string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), contentEntity.Chest.Price.ToStringIcon());
+	}
+
+	public override void OnViewShowCompleted()
+	{
+		base.OnViewShowCompleted();
 		
 		button
 			.ToState(GenericButtonState.Active)
 			.OnClick(OnClick);
 	}
-	
+
 	public override void OnViewCloseCompleted()
 	{
 		var contentEntity = entity as UIChestsShopElementEntity;

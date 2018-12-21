@@ -12,15 +12,20 @@ public class UIOrderElementViewController : UISimpleScrollElementViewController
         
 		var contentEntity = entity as UIOrderElementEntity;
 		
+		contentEntity.Data.SetMark(mark);
+	}
+
+	public override void OnViewShowCompleted()
+	{
+		base.OnViewShowCompleted();
+		
 		button
 			.SetActiveScale(1.2f)
 			.SetDragDirection(new Vector2(0f, 1f))
 			.SetDragThreshold(100f)
 			.ToState(GenericButtonState.UnActive).OnClick(Select);
-		
-		contentEntity.Data.SetMark(mark);
 	}
-	
+
 	public override void OnSelect()
 	{
 		base.OnSelect();

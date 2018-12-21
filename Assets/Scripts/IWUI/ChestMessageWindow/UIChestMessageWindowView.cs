@@ -18,8 +18,6 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         base.OnViewShow();
         
         var windowModel = Model as UIChestMessageWindowModel;
-
-        InitBtnBase(btnOpen, OnOpenClick);
         
         isOpen = false;
         
@@ -36,6 +34,13 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         var scrollRect = content.GetScrollRect();
         
         if (scrollRect != null) scrollRect.horizontalNormalizedPosition = 0f;
+    }
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
+        InitButtonBase(btnOpen, OnOpenClick);
     }
 
     public override void OnViewClose()

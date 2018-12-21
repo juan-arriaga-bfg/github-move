@@ -38,9 +38,14 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             hintLabel.gameObject.SetActive(true);
         }
         
-        InitBtnBase(findButton, OnClick);
-
         model.Quest.OnChanged += OnQuestChanged;
+    }
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
+        InitButtonBase(findButton, OnClick);
     }
 
     public override void OnViewClose()

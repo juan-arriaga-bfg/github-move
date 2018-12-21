@@ -39,7 +39,7 @@ public class UIGenericPopupWindowView : UIGenericWindowView
         if(message != null) message.Text = text;
     }
     
-    protected void InitBtnBase(UIButtonViewController btn, Action onClick)
+    protected void InitButtonBase(UIButtonViewController btn, Action onClick)
     {
         btn.ToState(GenericButtonState.Active)
             .OnClick(onClick);
