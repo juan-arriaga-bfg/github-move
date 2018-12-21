@@ -23,18 +23,6 @@ public class FieldControllerComponent : IECSComponent
 //        TestFieldOleg(); return;
 //        TestFieldAlex(); return;
 //        TestFieldQA(); return;
-        AddPieces(new BoardPosition(27, 16), PieceType.PR_E1.Id, PieceType.PR_E5.Id);
-        AddPieces(new BoardPosition(28, 16), PieceType.PR_E1.Id, PieceType.PR_E5.Id);
-        AddPieces(new BoardPosition(29, 16), PieceType.PR_E1.Id, PieceType.PR_E5.Id);
-        AddPieces(new BoardPosition(30, 16), PieceType.PR_F1.Id, PieceType.PR_F5.Id);
-        AddPieces(new BoardPosition(31, 16), PieceType.PR_F1.Id, PieceType.PR_F5.Id);
-        AddPieces(new BoardPosition(32, 16), PieceType.PR_F1.Id, PieceType.PR_F5.Id);
-        AddPieces(new BoardPosition(33, 16), PieceType.PR_F1.Id, PieceType.PR_F5.Id);
-        AddPieces(new BoardPosition(34, 16), PieceType.PR_G1.Id, PieceType.PR_G5.Id);
-        AddPieces(new BoardPosition(35, 16), PieceType.PR_G1.Id, PieceType.PR_G5.Id);
-        AddPieces(new BoardPosition(36, 16), PieceType.PR_G1.Id, PieceType.PR_G5.Id);
-        AddPieces(new BoardPosition(37, 16), PieceType.PR_G1.Id, PieceType.PR_G5.Id);
-        return;
 #endif
         
         context.BoardLogic.PieceFlyer.Locker.Lock(context);
