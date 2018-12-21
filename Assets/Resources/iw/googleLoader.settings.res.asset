@@ -59,7 +59,7 @@ MonoBehaviour:
   - Key: shop
     Link: 15hj4e6i2F9UkK_p-lSEvp8d1MJW0KNj3PmEL_1rQU_4
     Route: parse
-    Pattern: '[{"Uid":"","Product":{"Currency":"","Amount":0},"Price":{"Currency":"","Amount":0},"Icon":""}]'
+    Pattern: '[{"Uid":"","Products":[{"Currency":"","Amount":0}],"Price":{"Currency":"","Amount":0},"Icon":"","Name":""}]'
   - Key: orders
     Link: 1MakAUEhU8pxDDasINjyEBIXVEZ3oPr3PMrisNbH650I
     Route: parse

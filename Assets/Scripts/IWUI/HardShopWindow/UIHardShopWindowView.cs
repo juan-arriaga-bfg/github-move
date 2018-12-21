@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public class UISoftShopWindowView : UIGenericPopupWindowView 
+public class UIHardShopWindowView : UIGenericPopupWindowView 
 {
     [IWUIBinding("#Content")] private UIContainerViewController content;
     
@@ -8,12 +8,18 @@ public class UISoftShopWindowView : UIGenericPopupWindowView
     {
         base.OnViewShow();
         
-        var windowModel = Model as UISoftShopWindowModel;
+        var windowModel = Model as UIHardShopWindowModel;
         
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
         
         Fill(UpdateEntities(windowModel.Products), content);
+        
+        var tabsScrollRect = content.GetScrollRect();
+        if (tabsScrollRect != null)
+        {
+            tabsScrollRect.verticalNormalizedPosition = 1f;
+        }
     }
     
     private List<IUIContainerElementEntity> UpdateEntities(List<ShopDef> entities)
@@ -27,6 +33,7 @@ public class UISoftShopWindowView : UIGenericPopupWindowView
             var entity = new UIShopElementEntity
             {
                 ContentId = def.Icon,
+                NameLabel = LocalizationService.Get(def.Name, def.Name),
                 Products = def.Products,
                 Price = def.Price,
                 OnSelectEvent = null,

@@ -1,7 +1,10 @@
-﻿public class ShopDef
+﻿using System.Collections.Generic;
+
+public class ShopDef
 {
     public string Uid;
     public string Icon;
-    public CurrencyPair Product;
+    public string Name;
+    public List<CurrencyPair> Products;
     public CurrencyPair Price;
 }

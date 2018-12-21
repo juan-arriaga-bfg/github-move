@@ -1,10 +1,12 @@
 ﻿[
   {
     "Uid": "Energy",
-    "Product": {
-      "Currency": "Energy",
-      "Amount": 20
-    },
+    "Products": [
+      {
+        "Currency": "Energy",
+        "Amount": 20
+      }
+    ],
     "Price": {
       "Currency": "Coins",
       "Amount": 200
@@ -13,10 +15,12 @@
   },
   {
     "Uid": "Energy",
-    "Product": {
-      "Currency": "Energy",
-      "Amount": 50
-    },
+    "Products": [
+      {
+        "Currency": "Energy",
+        "Amount": 50
+      }
+    ],
     "Price": {
       "Currency": "Coins",
       "Amount": 350
@@ -25,10 +29,12 @@
   },
   {
     "Uid": "Energy",
-    "Product": {
-      "Currency": "Energy",
-      "Amount": 80
-    },
+    "Products": [
+      {
+        "Currency": "Energy",
+        "Amount": 80
+      }
+    ],
     "Price": {
       "Currency": "Coins",
       "Amount": 500
@@ -37,10 +43,12 @@
   },
   {
     "Uid": "Coins",
-    "Product": {
-      "Currency": "Coins",
-      "Amount": 150
-    },
+    "Products": [
+      {
+        "Currency": "Coins",
+        "Amount": 150
+      }
+    ],
     "Price": {
       "Currency": "Crystals",
       "Amount": 15
@@ -49,10 +57,12 @@
   },
   {
     "Uid": "Coins",
-    "Product": {
-      "Currency": "Coins",
-      "Amount": 600
-    },
+    "Products": [
+      {
+        "Currency": "Coins",
+        "Amount": 600
+      }
+    ],
     "Price": {
       "Currency": "Crystals",
       "Amount": 45
@@ -61,14 +71,137 @@
   },
   {
     "Uid": "Coins",
-    "Product": {
-      "Currency": "Coins",
-      "Amount": 1200
-    },
+    "Products": [
+      {
+        "Currency": "Coins",
+        "Amount": 1200
+      }
+    ],
     "Price": {
       "Currency": "Crystals",
       "Amount": 75
     },
     "Icon": "CoinsShopIcon3"
+  },
+  {
+    "Uid": "Crystals",
+    "Products": [
+      {
+        "Currency": "Coins",
+        "Amount": 500
+      },
+      {
+        "Currency": "Crystals",
+        "Amount": 500
+      },
+      {
+        "Currency": "Energy",
+        "Amount": 50
+      }
+    ],
+    "Price": {
+      "Currency": "Cash",
+      "Amount": 10
+    },
+    "Icon": "HardShopIcon1",
+    "Name": "window.shop.crystals.item1"
+  },
+  {
+    "Uid": "Crystals",
+    "Products": [
+      {
+        "Currency": "Coins",
+        "Amount": 1000
+      },
+      {
+        "Currency": "Crystals",
+        "Amount": 1000
+      },
+      {
+        "Currency": "Energy",
+        "Amount": 100
+      }
+    ],
+    "Price": {
+      "Currency": "Cash",
+      "Amount": 20
+    },
+    "Icon": "HardShopIcon2",
+    "Name": "window.shop.crystals.item2"
+  },
+  {
+    "Uid": "Crystals",
+    "Products": [
+      {
+        "Currency": "Crystals",
+        "Amount": 50
+      }
+    ],
+    "Price": {
+      "Currency": "Cash",
+      "Amount": 3
+    },
+    "Icon": "HardShopIcon3",
+    "Name": "window.shop.crystals.item3"
+  },
+  {
+    "Uid": "Crystals",
+    "Products": [
+      {
+        "Currency": "Crystals",
+        "Amount": 100
+      }
+    ],
+    "Price": {
+      "Currency": "Cash",
+      "Amount": 5
+    },
+    "Icon": "HardShopIcon4",
+    "Name": "window.shop.crystals.item4"
+  },
+  {
+    "Uid": "Crystals",
+    "Products": [
+      {
+        "Currency": "Crystals",
+        "Amount": 150
+      }
+    ],
+    "Price": {
+      "Currency": "Cash",
+      "Amount": 9
+    },
+    "Icon": "HardShopIcon5",
+    "Name": "window.shop.crystals.item5"
+  },
+  {
+    "Uid": "Crystals",
+    "Products": [
+      {
+        "Currency": "Crystals",
+        "Amount": 200
+      }
+    ],
+    "Price": {
+      "Currency": "Cash",
+      "Amount": 15
+    },
+    "Icon": "HardShopIcon6",
+    "Name": "window.shop.crystals.item6"
+  },
+  {
+    "Uid": "Crystals",
+    "Products": [
+      {
+        "Currency": "Crystals",
+        "Amount": 250
+      }
+    ],
+    "Price": {
+      "Currency": "Cash",
+      "Amount": 20
+    },
+    "Icon": "HardShopIcon7",
+    "Name": "window.shop.crystals.item7"
   }
 ]

@@ -23,7 +23,6 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.ChestMessage,
             UIWindowType.QuestWindow,
             UIWindowType.ErrorWindow,
-            UIWindowType.SoftShopWindow,
             UIWindowType.CodexWindow,
             UIWindowType.CurrencyCheatSheetWindow,
             UIWindowType.PiecesCheatSheetWindow,
@@ -34,6 +33,8 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.DailyQuestWindow,
             UIWindowType.ResourcePanelWindow,
             UIWindowType.SettingsWindow,
+            UIWindowType.SoftShopWindow,
+            UIWindowType.HardShopWindow,
             UIWindowType.MarketWindow,
         });
         

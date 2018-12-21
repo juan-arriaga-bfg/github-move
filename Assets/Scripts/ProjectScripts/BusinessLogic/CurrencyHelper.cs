@@ -308,14 +308,7 @@ public static class CurrencyHellper
         {
             Debug.Log($"[CurrencyHelper] => Show 'Not enough' message for: {price}: {amount}");
             
-            if (price == Currency.Crystals.Name)
-            {
-                UIMessageWindowController.CreateNeedCurrencyMessage(price, diff.ToString());
-            }
-            else
-            {
-                OpenShopWindow(price, diff.ToString());
-            }
+            OpenShopWindow(price, diff.ToString());
         }
         
         return false;
@@ -362,13 +355,7 @@ public static class CurrencyHellper
         
         if (currency == Currency.Crystals.Name)
         {
-            var product = new CurrencyPair{Currency = currency, Amount = 5};
-            var message = string.Format(LocalizationService.Get("common.message.cheatCurrency", "common.message.cheatCurrency {0}?"), product.ToStringIcon());
-        
-            UIMessageWindowController.CreateDefaultMessage(message, () =>
-            {
-                Purchase(product, null, new Vector2(Screen.width/2, Screen.height/2));
-            });
+            UIService.Get.ShowWindow(UIWindowType.HardShopWindow);
             return;
         }
         

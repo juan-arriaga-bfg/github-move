@@ -14,8 +14,6 @@ public class UIWindowType
     
     public const string ErrorWindow = "ErrorWindow";
     
-    public const string SoftShopWindow = "SoftShopWindow";
-    
     public const string CodexWindow = "CodexWindow";
     
     public const string CurrencyCheatSheetWindow = "CurrencyCheatSheetWindow";
@@ -35,6 +33,10 @@ public class UIWindowType
     public const string ResourcePanelWindow = "ResourcePanelWindow";
     
     public const string SettingsWindow = "SettingsWindow";
+    
+    public const string SoftShopWindow = "SoftShopWindow";
+    
+    public const string HardShopWindow = "HardShopWindow";
     
     public const string MarketWindow = "MarketWindow";
 

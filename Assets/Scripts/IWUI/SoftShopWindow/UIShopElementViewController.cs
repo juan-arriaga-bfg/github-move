@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 
-public class UISoftShopElementViewController : UISimpleScrollElementViewController
+public class UIShopElementViewController : UISimpleScrollElementViewController
 {
-    [IWUIBinding("#ButtonLabel")] private NSText btnLabel;
-    [IWUIBinding("#BuyButton")] private UIButtonViewController btnBuy;
+    [IWUIBindingNullable("#NameLabel")] protected NSText nameLabel;
+    [IWUIBinding("#ButtonLabel")] protected NSText btnLabel;
+    [IWUIBinding("#BuyButton")] protected UIButtonViewController btnBuy;
     
     private bool isClick;
     private bool isCanPurchase;
@@ -15,9 +16,11 @@ public class UISoftShopElementViewController : UISimpleScrollElementViewControll
         isClick = false;
         isCanPurchase = true;
         
-        var contentEntity = entity as UISoftShopElementEntity;
+        var contentEntity = entity as UIShopElementEntity;
 
         btnLabel.Text = contentEntity.ButtonLabel;
+
+        if (nameLabel != null) nameLabel.Text = contentEntity.NameLabel;
         
         btnBuy
             .ToState(GenericButtonState.Active)
@@ -26,7 +29,7 @@ public class UISoftShopElementViewController : UISimpleScrollElementViewControll
     
     public override void OnViewCloseCompleted()
     {
-        var contentEntity = entity as UISoftShopElementEntity;
+        var contentEntity = entity as UIShopElementEntity;
         
         if(entity == null) return;
         
@@ -40,7 +43,7 @@ public class UISoftShopElementViewController : UISimpleScrollElementViewControll
             return;
         }
         
-        CurrencyHellper.Purchase(contentEntity.Product, contentEntity.Price, null, new Vector2(Screen.width/2, Screen.height/2));
+        CurrencyHellper.Purchase(contentEntity.Products, contentEntity.Price, null, new Vector2(Screen.width/2, Screen.height/2));
     }
     
     private void OnBuyClick()
@@ -49,7 +52,7 @@ public class UISoftShopElementViewController : UISimpleScrollElementViewControll
 		
         isClick = true;
         
-        var contentEntity = entity as UISoftShopElementEntity;
+        var contentEntity = entity as UIShopElementEntity;
         
         if (CurrencyHellper.IsCanPurchase(contentEntity.Price) == false)
         {
