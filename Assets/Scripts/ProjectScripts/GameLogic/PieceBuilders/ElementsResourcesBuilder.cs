@@ -143,6 +143,8 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.OB_PR_C.Id, R.OB_PR_CPiece);
         dict.Add(PieceType.OB_PR_D.Id, R.OB_PR_DPiece);
         dict.Add(PieceType.OB_PR_E.Id, R.OB_PR_EPiece);
+        dict.Add(PieceType.OB_PR_F.Id, R.OB_PR_FPiece);
+        dict.Add(PieceType.OB_PR_G.Id, R.OB_PR_GPiece);
         
 #endregion
         
@@ -287,6 +289,26 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.PR_E3.Id, R.PR_E3Piece);
         dict.Add(PieceType.PR_E4.Id, R.PR_E4Piece);
         dict.Add(PieceType.PR_E5.Id, R.PR_E5Piece);
+        
+        #endregion
+            
+        #region PR_F
+        
+        dict.Add(PieceType.PR_F1.Id, R.PR_F1Piece);
+        dict.Add(PieceType.PR_F2.Id, R.PR_F2Piece);
+        dict.Add(PieceType.PR_F3.Id, R.PR_F3Piece);
+        dict.Add(PieceType.PR_F4.Id, R.PR_F4Piece);
+        dict.Add(PieceType.PR_F5.Id, R.PR_F5Piece);
+        
+        #endregion
+            
+        #region PR_G
+        
+        dict.Add(PieceType.PR_G1.Id, R.PR_G1Piece);
+        dict.Add(PieceType.PR_G2.Id, R.PR_G2Piece);
+        dict.Add(PieceType.PR_G3.Id, R.PR_G3Piece);
+        dict.Add(PieceType.PR_G4.Id, R.PR_G4Piece);
+        dict.Add(PieceType.PR_G5.Id, R.PR_G5Piece);
         
         #endregion
         

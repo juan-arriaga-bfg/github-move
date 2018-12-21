@@ -85,6 +85,12 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
             case "Ingredient E":
                 ids.AddRange(GetPieceIds(PieceType.PR_E1.Id, PieceType.PR_E5.Id));
                 break;
+            case "Ingredient F":
+                ids.AddRange(GetPieceIds(PieceType.PR_F1.Id, PieceType.PR_F5.Id));
+                break;
+            case "Ingredient G":
+                ids.AddRange(GetPieceIds(PieceType.PR_G1.Id, PieceType.PR_G5.Id));
+                break;
         }
         
         return ids;

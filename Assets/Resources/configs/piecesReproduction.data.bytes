@@ -68,5 +68,33 @@
       "Amount": 1
     },
     "Obstacle": "OB_PR_E"
+  },
+  {
+    "Uid": "PR_F4",
+    "Delay": 60,
+    "Limit": 3,
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 10
+    },
+    "Reproduction": {
+      "Currency": "PR_F5",
+      "Amount": 1
+    },
+    "Obstacle": "OB_PR_F"
+  },
+  {
+    "Uid": "PR_G4",
+    "Delay": 60,
+    "Limit": 3,
+    "StepReward": {
+      "Currency": "Experience",
+      "Amount": 10
+    },
+    "Reproduction": {
+      "Currency": "PR_G5",
+      "Amount": 1
+    },
+    "Obstacle": "OB_PR_G"
   }
 ]

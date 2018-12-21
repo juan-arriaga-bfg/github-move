@@ -216,6 +216,8 @@ public static partial class PieceType
     public static readonly PieceTypeDef OB_PR_C = new PieceTypeDef{Id = 20202, Abbreviations = new List<string>{ "OB_PR_C" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.Workplace | PieceTypeFilter.ProductionField};
     public static readonly PieceTypeDef OB_PR_D = new PieceTypeDef{Id = 20203, Abbreviations = new List<string>{ "OB_PR_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.Workplace | PieceTypeFilter.ProductionField};
     public static readonly PieceTypeDef OB_PR_E = new PieceTypeDef{Id = 20204, Abbreviations = new List<string>{ "OB_PR_E" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.Workplace | PieceTypeFilter.ProductionField};
+    public static readonly PieceTypeDef OB_PR_F = new PieceTypeDef{Id = 20205, Abbreviations = new List<string>{ "OB_PR_F" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.Workplace | PieceTypeFilter.ProductionField};
+    public static readonly PieceTypeDef OB_PR_G = new PieceTypeDef{Id = 20206, Abbreviations = new List<string>{ "OB_PR_G" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.Workplace | PieceTypeFilter.ProductionField};
     
 #endregion
     
@@ -360,6 +362,26 @@ public static partial class PieceType
     public static readonly PieceTypeDef PR_E3 = new PieceTypeDef{Id = 200402, Abbreviations = new List<string>{ "PR_E3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
     public static readonly PieceTypeDef PR_E4 = new PieceTypeDef{Id = 200403, Abbreviations = new List<string>{ "PR_E4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Removable | PieceTypeFilter.ProductionField};
     public static readonly PieceTypeDef PR_E5 = new PieceTypeDef{Id = 200404, Abbreviations = new List<string>{ "PR_E5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource | PieceTypeFilter.Ingredient};
+    
+    #endregion
+    
+    #region PR_F
+    
+    public static readonly PieceTypeDef PR_F1 = new PieceTypeDef{Id = 200500, Abbreviations = new List<string>{ "PR_F1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
+    public static readonly PieceTypeDef PR_F2 = new PieceTypeDef{Id = 200501, Abbreviations = new List<string>{ "PR_F2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
+    public static readonly PieceTypeDef PR_F3 = new PieceTypeDef{Id = 200502, Abbreviations = new List<string>{ "PR_F3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
+    public static readonly PieceTypeDef PR_F4 = new PieceTypeDef{Id = 200503, Abbreviations = new List<string>{ "PR_F4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Removable | PieceTypeFilter.ProductionField};
+    public static readonly PieceTypeDef PR_F5 = new PieceTypeDef{Id = 200504, Abbreviations = new List<string>{ "PR_F5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource | PieceTypeFilter.Ingredient};
+    
+    #endregion
+    
+    #region PR_G
+    
+    public static readonly PieceTypeDef PR_G1 = new PieceTypeDef{Id = 200600, Abbreviations = new List<string>{ "PR_G1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
+    public static readonly PieceTypeDef PR_G2 = new PieceTypeDef{Id = 200601, Abbreviations = new List<string>{ "PR_G2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
+    public static readonly PieceTypeDef PR_G3 = new PieceTypeDef{Id = 200602, Abbreviations = new List<string>{ "PR_G3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
+    public static readonly PieceTypeDef PR_G4 = new PieceTypeDef{Id = 200603, Abbreviations = new List<string>{ "PR_G4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Removable | PieceTypeFilter.ProductionField};
+    public static readonly PieceTypeDef PR_G5 = new PieceTypeDef{Id = 200604, Abbreviations = new List<string>{ "PR_G5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource | PieceTypeFilter.Ingredient};
     
     #endregion
     

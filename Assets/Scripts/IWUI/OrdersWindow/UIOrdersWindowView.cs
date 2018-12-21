@@ -160,7 +160,7 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         for (var i = 0; i < entities.Count; i++)
         {
             var def = entities[i];
-            
+
             var entity = new UIOrderElementEntity
             {
                 ContentId = def.Def.Uid,
@@ -184,11 +184,10 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
     private List<IUIContainerElementEntity> UpdateEntitiesRecipes(List<OrderDef> entities)
     {
         var views = new List<IUIContainerElementEntity>(entities.Count);
-        
         for (var i = 0; i < entities.Count; i++)
         {
             var def = entities[i];
-            
+
             var entity = new UIRecipeElementEntity
             {
                 ContentId = def.Uid,

@@ -236,6 +236,26 @@ public class MatchDefinitionBuilder
         
         #endregion
         
+        #region PR_F
+        
+        dict.Add(PieceType.PR_F1.Id, new PieceMatchDef {Next = PieceType.PR_F2.Id, Previous = PieceType.None.Id, Amount = 3});
+        dict.Add(PieceType.PR_F2.Id, new PieceMatchDef {Next = PieceType.PR_F3.Id, Previous = PieceType.PR_F1.Id, Amount = 3});
+        dict.Add(PieceType.PR_F3.Id, new PieceMatchDef {Next = PieceType.PR_F4.Id, Previous = PieceType.PR_F2.Id, Amount = 3});
+        dict.Add(PieceType.PR_F4.Id, new PieceMatchDef {Next = PieceType.PR_F5.Id, Previous = PieceType.PR_F3.Id, Amount = -1});
+        dict.Add(PieceType.PR_F5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.PR_F4.Id});
+        
+        #endregion
+        
+        #region PR_G
+        
+        dict.Add(PieceType.PR_G1.Id, new PieceMatchDef {Next = PieceType.PR_G2.Id, Previous = PieceType.None.Id, Amount = 3});
+        dict.Add(PieceType.PR_G2.Id, new PieceMatchDef {Next = PieceType.PR_G3.Id, Previous = PieceType.PR_G1.Id, Amount = 3});
+        dict.Add(PieceType.PR_G3.Id, new PieceMatchDef {Next = PieceType.PR_G4.Id, Previous = PieceType.PR_G2.Id, Amount = 3});
+        dict.Add(PieceType.PR_G4.Id, new PieceMatchDef {Next = PieceType.PR_G5.Id, Previous = PieceType.PR_G3.Id, Amount = -1});
+        dict.Add(PieceType.PR_G5.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.PR_G4.Id});
+        
+        #endregion
+        
 #endregion
         
         return dict;
