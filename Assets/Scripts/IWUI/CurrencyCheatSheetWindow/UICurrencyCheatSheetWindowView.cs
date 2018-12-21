@@ -1,18 +1,15 @@
-using UnityEngine;
 using System.Collections.Generic;
 using System.Text;
 
 public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
 {
-    [SerializeField] private UICurrencyCheatSheetWindowItem itemPrefab;
+    [IWUIBinding("#Content")] private UIContainerViewController content;
     
     [IWUIBinding("#ButtonAdd")] private UIButtonViewController btnAdd;
     [IWUIBinding("#ButtonRemove")] private UIButtonViewController btnRemove;
     
     [IWUIBinding("#ButtonAddLabel")] protected NSText buttonAddLabel;
     [IWUIBinding("#ButtonRemoveLabel")] protected NSText buttonRemoveLabel;
-
-    private List<UICurrencyCheatSheetWindowItem> items;
     
     private List<CurrencyDef> mainCurrency = new List<CurrencyDef>
     {
@@ -29,13 +26,14 @@ public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
         UICurrencyCheatSheetWindowModel model = Model as UICurrencyCheatSheetWindowModel;
 
         SetTitle(model.Title);
-        CreateItems(model);
         
         InitBtnBase(btnAdd, () => OnSet(999999));
         InitBtnBase(btnRemove, () => OnSet(0));
 
         buttonAddLabel.Text = $"{GetBtnLabel()}99999";
         buttonRemoveLabel.Text = $"{GetBtnLabel()}0";
+        
+        Fill(UpdateEntities(model.CurrenciesList()), content);
     }
 
     private string GetBtnLabel()
@@ -50,46 +48,43 @@ public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
 
         return str.ToString();
     }
-
-    private void CreateItems(UICurrencyCheatSheetWindowModel model)
+    
+    private List<IUIContainerElementEntity> UpdateEntities(List<CurrencyDef> entities)
     {
-        itemPrefab.gameObject.SetActive(true);
+        var views = new List<IUIContainerElementEntity>(entities.Count);
         
-        items = new List<UICurrencyCheatSheetWindowItem>();
-        var currencies = model.CurrenciesList();
-
-        foreach (var currencyDef in currencies)
+        for (var i = 0; i < entities.Count; i++)
         {
-            var item = Instantiate(itemPrefab);
-            item.transform.SetParent(itemPrefab.transform.parent, false);
-            item.Init(currencyDef); 
+            var def = entities[i];
             
-            items.Add(item);
+            var entity = new UIChestsShopElementEntity
+            {
+                ContentId = def.Icon,
+                LabelText = def.Name,
+                OnSelectEvent = null,
+                OnDeselectEvent = null
+            };
+            
+            views.Add(entity);
         }
-
-        itemPrefab.gameObject.SetActive(false);
+        
+        return views;
     }
 
     public override void OnViewCloseCompleted()
     {
         base.OnViewCloseCompleted();
         
-        UICurrencyCheatSheetWindowModel windowModel = Model as UICurrencyCheatSheetWindowModel;
-
-        foreach (var item in items)
-        {
-            item.Apply();
-            Destroy(item.gameObject);
-        }
-        
         ProfileService.Instance.Manager.SaveLocalProfile();
     }
 
     private void OnSet(int value)
     {
-        foreach (var item in items)
+        foreach (UICurrencyCheatSheetElementViewController item in content.Tabs)
         {
-            if (mainCurrency.Contains(item.Def) == false) continue;
+            var currency = (item.Entity as UISimpleScrollElementEntity).LabelText;
+            
+            if (mainCurrency.Find(def => def.Name == currency) == null) continue;
             
             item.SetValue(value);
         }

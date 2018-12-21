@@ -13,10 +13,11 @@ public class UIQuestStartWindowView : IWUIWindowView
         QuestStart
     }
     
+    [SerializeField] [IWUIBinding("/canvas")] protected CanvasGroup rootCanvas;
+    [SerializeField] [IWUIBinding("#BackLayer")] protected UIButtonViewController btnBackLayer;
+    
     [SerializeField] private GameObject questCardPrefab;
     [SerializeField] private Transform characterConversationAnchor;
-    [SerializeField] private CanvasGroup questCardsCanvasGroup;
-    [SerializeField] private CanvasGroup rootCanvasGroup;
     [SerializeField] private IWUILayer uiLayer;
     [SerializeField] private QuestCardsLayoutHelper questCardsLayoutHelper;
     
@@ -44,6 +45,8 @@ public class UIQuestStartWindowView : IWUIWindowView
         UIQuestStartWindowModel model = Model as UIQuestStartWindowModel;
 
         step = model.CompletedQuest != null ? Step.QuestComplete : Step.QuestStart;
+        
+        if(btnBackLayer != null) btnBackLayer.ToState(GenericButtonState.Active).OnClick(OnClick);
     }
 
     private void CleanUp()
@@ -67,7 +70,6 @@ public class UIQuestStartWindowView : IWUIWindowView
         base.OnViewClose();
         
         UIQuestStartWindowModel windowModel = Model as UIQuestStartWindowModel;
-        
     }
 
     public override void AnimateShow()
@@ -76,7 +78,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         
         base.AnimateShow();
         
-        rootCanvasGroup.alpha = 0;
+        rootCanvas.alpha = 0;
 
         var delay = model.QuestCompletedScenario != null ? 1f : 0f;
         
@@ -88,7 +90,7 @@ public class UIQuestStartWindowView : IWUIWindowView
                     FindObjectOfType<UIMainWindowView>().FadeAuxButtons(false);
                     
                     PlayNextScenario();
-                    rootCanvasGroup.DOFade(1f, 0.1f);
+                    rootCanvas.DOFade(1f, 0.1f);
                 })
             ;
     }
@@ -100,7 +102,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         //todo: remove hack
         FindObjectOfType<UIMainWindowView>().FadeAuxButtons(true);
         
-        rootCanvasGroup.DOFade(0f, 0.5f);
+        rootCanvas.DOFade(0f, 0.5f);
     }
 
     private void CreateQuestCards(UIQuestStartWindowModel model, ConversationActionPayloadShowQuestComponent payload, Action onComplete)
@@ -194,7 +196,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         questCardPrefab.SetActive(false);
     }
 
-    public void OnClick()
+    private void OnClick()
     {
         if (!isClickAllowed)
         {
