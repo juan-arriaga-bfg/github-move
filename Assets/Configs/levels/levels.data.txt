@@ -55,6 +55,16 @@
         "Amount": 5
       }
     ],
+    "OrdersWeights": [
+      {
+        "Uid": "Order1",
+        "Weight": 1
+      },
+      {
+        "Uid": "Order5",
+        "Weight": 1
+      }
+    ],
     "PieceWeights": [
       {
         "Uid": "PR_A1",
@@ -85,16 +95,6 @@
       {
         "Currency": "Crystals",
         "Amount": 10
-      }
-    ],
-    "OrdersWeights": [
-      {
-        "Uid": "Order1",
-        "Weight": 1
-      },
-      {
-        "Uid": "Order5",
-        "Weight": 1
       }
     ],
     "ResourcesWeights": [
