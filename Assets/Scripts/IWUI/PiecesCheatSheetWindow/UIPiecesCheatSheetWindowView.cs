@@ -3,7 +3,6 @@ using System.Collections.Generic;
 public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView 
 {
     [IWUIBinding("#Container")] private UIContainerViewController itemsPanel;
-    
     [IWUIBinding("#TabsContainer")] private UIContainerViewController tabsPanel;
     
     public override void OnViewShow()
@@ -55,7 +54,9 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
             "Chests", "Currencies", "Obstacles", "Boosters", "Characters",
         };
         
-        FillTabs(filters, tabsPanel);
+        Fill(UpdateTabsEntities(filters), tabsPanel);
+        
+        tabsPanel.Select(0);
         
         var tabsScrollRect = tabsPanel.GetScrollRect();
         if (tabsScrollRect != null)
@@ -64,28 +65,24 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
         }
     }
     
-    public void FillTabs(List<string> entities, UIContainerViewController container)
+    private List<IUIContainerElementEntity> UpdateTabsEntities(List<string> entities)
     {
-        if (entities == null || entities.Count <= 0)
-        {
-            container.Clear();
-            return;
-        }
-
-        // update items
         var views = new List<IUIContainerElementEntity>(entities.Count);
+        
         for (int i = 0; i < entities.Count; i++)
         {
             var def = entities[i];
 
-            var entity = new UITabContainerElementEntity
+            var entity = new UISimpleTabContainerElementEntity
             {
-                Uid = def,
-                TabLabel = def,
+                LabelText = def,
+                CheckmarkText = def,
                 OnSelectEvent = (view) =>
                 {
-                    UIPiecesCheatSheetWindowModel model = Model as UIPiecesCheatSheetWindowModel;
-                    Fill(model.GetPieceIds(view.Entity.Uid), itemsPanel);
+                    var model = Model as UIPiecesCheatSheetWindowModel;
+                    var uid = (view.Entity as UISimpleTabContainerElementEntity).LabelText;
+                    
+                    Fill(UpdateItemsEntities(model.GetPieceIds(uid)), itemsPanel);
                     
                     var tabsScrollRect = itemsPanel.GetScrollRect();
                     if (tabsScrollRect != null)
@@ -97,19 +94,12 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
             };
             views.Add(entity);
         }
-        container.Create(views);
-        container.Select(0);
+        
+        return views;
     }
-    
-    public void Fill(List<int> entities, UIContainerViewController container)
-    {
-        if (entities == null || entities.Count <= 0)
-        {
-            container.Clear();
-            return;
-        }
 
-        // update items
+    private List<IUIContainerElementEntity> UpdateItemsEntities(List<int> entities)
+    {
         var views = new List<IUIContainerElementEntity>(entities.Count);
         for (int i = 0; i < entities.Count; i++)
         {
@@ -123,7 +113,7 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
             };
             views.Add(entity);
         }
-        container.Create(views);
-        container.Select(0);
+        
+        return views;
     }
 }
