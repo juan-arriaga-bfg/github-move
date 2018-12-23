@@ -1,29 +1,57 @@
 ﻿[
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "tile_grass_1",
     "SpriteName": "tile_grass_1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Tiles",
-    "SpriteSheetName": "tile_grass_1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Tiles"
+    "SpriteSheetName": "tiles",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "tile_grass_2",
     "SpriteName": "tile_grass_2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Tiles",
-    "SpriteSheetName": "tile_grass_2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Tiles"
+    "SpriteSheetName": "tiles",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "arrow",
     "SpriteName": "arrow",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "arrow",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "tutorial_TextBlock_1",
     "SpriteName": "tutorial_TextBlock_1",
     "BundleName": "graphicscommon",
@@ -32,6 +60,13 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "apple_UI",
     "SpriteName": "apple_UI",
     "BundleName": "graphicscommon",
@@ -40,6 +75,13 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "hay_UI",
     "SpriteName": "hay_UI",
     "BundleName": "graphicscommon",
@@ -48,6 +90,13 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Chest_UI",
     "SpriteName": "Chest_UI",
     "BundleName": "graphicscommon",
@@ -56,142 +105,268 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "arrow_light",
     "SpriteName": "arrow_light",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "arrow_light",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "ramka_item_active",
     "SpriteName": "ramka_item_active",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Windows",
-    "SpriteSheetName": "ramka_item_active",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Windows"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "ramka_item_not_active",
     "SpriteName": "ramka_item_not_active_back_not_active",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Windows",
-    "SpriteSheetName": "ramka_item_not_active_back_not_active",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Windows"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "back_not_active",
     "SpriteName": "back_not_active",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Windows",
-    "SpriteSheetName": "back_not_active",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Windows"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "back_active",
     "SpriteName": "back_active",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Windows",
-    "SpriteSheetName": "back_active",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Windows"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "ramka_item",
     "SpriteName": "ramka_item_active_back_not_active",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Windows",
-    "SpriteSheetName": "ramka_item_active_back_not_active",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Windows"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Resource1",
     "SpriteName": "Resource1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Resource1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Resource2",
     "SpriteName": "Resource2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Resource2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Resource3",
     "SpriteName": "Resource3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Resource3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Resource4",
     "SpriteName": "Resource4",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Resource4",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Resource5",
     "SpriteName": "Resource5",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Resource5",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Resource6",
     "SpriteName": "Resource6",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Resource6",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Resource7",
     "SpriteName": "Resource7",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Resource7",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Resource8",
     "SpriteName": "Resource8",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Resource8",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Resource9",
     "SpriteName": "Resource9",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Resource9",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "icon_Energy",
     "SpriteName": "Icon_Energy",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Icon_Energy",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "background_tile",
     "SpriteName": "background_tile",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Tiles",
-    "SpriteSheetName": "background_tile",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Tiles"
+    "SpriteSheetName": "tiles",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "wood_UI",
     "SpriteName": "Wood_UI",
     "BundleName": "graphicscommon",
@@ -200,6 +375,13 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "stone_UI",
     "SpriteName": "Stone_UI",
     "BundleName": "graphicscommon",
@@ -208,6 +390,13 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "sheeps_UI",
     "SpriteName": "Sheeps_UI",
     "BundleName": "graphicscommon",
@@ -216,6 +405,13 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "collect_pieces",
     "SpriteName": "collect_pieces",
     "BundleName": "graphicscommon",
@@ -224,1230 +420,2308 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "icon_Mana",
     "SpriteName": "icon_Mana",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "icon_Mana",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "icon_Worker",
     "SpriteName": "icon_Worker",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "icon_Worker",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "icon_Experience",
     "SpriteName": "icon_Experience",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "icon_Experience",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "icon_Crystals",
     "SpriteName": "icon_Crystals",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "icon_Crystals",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "icon_Coins",
     "SpriteName": "icon_Coins",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "icon_Coins",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Enemy1",
     "SpriteName": "Enemy1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Enemies",
-    "SpriteSheetName": "Enemy1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Enemies"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "codexQuestion",
     "SpriteName": "codexQuestion",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Windows/Codex",
-    "SpriteSheetName": "codexQuestion",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Windows/Codex"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order1",
     "SpriteName": "Order1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order2",
     "SpriteName": "Order2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order4",
     "SpriteName": "Order4",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order4",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order5",
     "SpriteName": "Order5",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order5",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order7",
     "SpriteName": "Order7",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order7",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order9",
     "SpriteName": "Order9",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order9",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "icon_Warning",
     "SpriteName": "icon_Warning",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "icon_Warning",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "icon_Complete",
     "SpriteName": "icon_Complete",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "icon_Complete",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "A1",
     "SpriteName": "A1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/A",
-    "SpriteSheetName": "A1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/A"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "A2",
     "SpriteName": "A2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/A",
-    "SpriteSheetName": "A2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/A"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "A3",
     "SpriteName": "A3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/A",
-    "SpriteSheetName": "A3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/A"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "A4",
     "SpriteName": "A4",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/A",
-    "SpriteSheetName": "A4",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/A"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "A5",
     "SpriteName": "A5",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/A",
-    "SpriteSheetName": "A5",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/A"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "A6",
     "SpriteName": "A6",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/A",
-    "SpriteSheetName": "A6",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/A"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "A7",
     "SpriteName": "A7",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/A",
-    "SpriteSheetName": "A7",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/A"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "A8",
     "SpriteName": "A8",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/A",
-    "SpriteSheetName": "A8",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/A"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "A9",
     "SpriteName": "A9",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/A",
-    "SpriteSheetName": "A9",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/A"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "B1",
     "SpriteName": "B1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/B",
-    "SpriteSheetName": "B1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "B2",
     "SpriteName": "B2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/B",
-    "SpriteSheetName": "B2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "B3",
     "SpriteName": "B3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/B",
-    "SpriteSheetName": "B3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "B4",
     "SpriteName": "B4",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/B",
-    "SpriteSheetName": "B4",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "B5",
     "SpriteName": "B5",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/B",
-    "SpriteSheetName": "B5",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "B6",
     "SpriteName": "B6",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/B",
-    "SpriteSheetName": "B6",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "B7",
     "SpriteName": "B7",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/B",
-    "SpriteSheetName": "B7",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "B8",
     "SpriteName": "B8",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/B",
-    "SpriteSheetName": "B8",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "B9",
     "SpriteName": "B9",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/B",
-    "SpriteSheetName": "B9",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "B10",
     "SpriteName": "B10",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/B",
-    "SpriteSheetName": "B10",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "B11",
     "SpriteName": "B11",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/B",
-    "SpriteSheetName": "B11",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "C1",
     "SpriteName": "C1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/C",
-    "SpriteSheetName": "C1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/C"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "C2",
     "SpriteName": "C2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/C",
-    "SpriteSheetName": "C2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/C"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "C3",
     "SpriteName": "C3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/C",
-    "SpriteSheetName": "C3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/C"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "C4",
     "SpriteName": "C4",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/C",
-    "SpriteSheetName": "C4",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/C"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "C5",
     "SpriteName": "C5",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/C",
-    "SpriteSheetName": "C5",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/C"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "C6",
     "SpriteName": "C6",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/C",
-    "SpriteSheetName": "C6",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/C"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "C7",
     "SpriteName": "C7",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/C",
-    "SpriteSheetName": "C7",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/C"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "C8",
     "SpriteName": "C8",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/C",
-    "SpriteSheetName": "C8",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/C"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "C9",
     "SpriteName": "C9",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/C",
-    "SpriteSheetName": "C9",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/C"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "D1",
     "SpriteName": "D1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/D",
-    "SpriteSheetName": "D1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/D"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "D2",
     "SpriteName": "D2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/D",
-    "SpriteSheetName": "D2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/D"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "D3",
     "SpriteName": "D3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/D",
-    "SpriteSheetName": "D3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/D"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "D4",
     "SpriteName": "D4",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/D",
-    "SpriteSheetName": "D4",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/D"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "D5",
     "SpriteName": "D5",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/D",
-    "SpriteSheetName": "D5",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/D"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "D6",
     "SpriteName": "D6",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/D",
-    "SpriteSheetName": "D6",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/D"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "D7",
     "SpriteName": "D7",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/D",
-    "SpriteSheetName": "D7",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/D"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "D8",
     "SpriteName": "D8",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/D",
-    "SpriteSheetName": "D8",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/D"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "D9",
     "SpriteName": "D9",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/D",
-    "SpriteSheetName": "D9",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/D"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_A1",
     "SpriteName": "PR_A1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_A",
-    "SpriteSheetName": "PR_A1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_A"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_A2",
     "SpriteName": "PR_A2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_A",
-    "SpriteSheetName": "PR_A2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_A"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_A3",
     "SpriteName": "PR_A3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_A",
-    "SpriteSheetName": "PR_A3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_A"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_A4",
     "SpriteName": "PR_A4",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_A",
-    "SpriteSheetName": "PR_A4",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_A"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_A4_lock",
     "SpriteName": "PR_A4_lock",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_A",
-    "SpriteSheetName": "PR_A4_lock",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_A"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_A5",
     "SpriteName": "PR_A5",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_A",
-    "SpriteSheetName": "PR_A5",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_A"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_B1",
     "SpriteName": "PR_B1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_B",
-    "SpriteSheetName": "PR_B1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_B2",
     "SpriteName": "PR_B2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_B",
-    "SpriteSheetName": "PR_B2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_B3",
     "SpriteName": "PR_B3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_B",
-    "SpriteSheetName": "PR_B3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_B4",
     "SpriteName": "PR_B4",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_B",
-    "SpriteSheetName": "PR_B4",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_B4_lock",
     "SpriteName": "PR_B4_lock",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_B",
-    "SpriteSheetName": "PR_B4_lock",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_B5",
     "SpriteName": "PR_B5",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_B",
-    "SpriteSheetName": "PR_B5",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_B"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_C1",
     "SpriteName": "PR_C1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_C",
-    "SpriteSheetName": "PR_C1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_C"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_C2",
     "SpriteName": "PR_C2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_C",
-    "SpriteSheetName": "PR_C2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_C"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_C3",
     "SpriteName": "PR_C3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_C",
-    "SpriteSheetName": "PR_C3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_C"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_C4",
     "SpriteName": "PR_C4",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_C",
-    "SpriteSheetName": "PR_C4",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_C"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_C4_lock",
     "SpriteName": "PR_C4_lock",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_C",
-    "SpriteSheetName": "PR_C4_lock",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_C"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_C5",
     "SpriteName": "PR_C5",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_C",
-    "SpriteSheetName": "PR_C5",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_C"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_D1",
     "SpriteName": "PR_D1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_D",
-    "SpriteSheetName": "PR_D1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_D"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_D2",
     "SpriteName": "PR_D2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_D",
-    "SpriteSheetName": "PR_D2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_D"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_D3",
     "SpriteName": "PR_D3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_D",
-    "SpriteSheetName": "PR_D3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_D"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_D4",
     "SpriteName": "PR_D4",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_D",
-    "SpriteSheetName": "PR_D4",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_D"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_D4_lock",
     "SpriteName": "PR_D4_lock",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_D",
-    "SpriteSheetName": "PR_D4_lock",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_D"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_D5",
     "SpriteName": "PR_D5",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_D",
-    "SpriteSheetName": "PR_D5",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_D"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_E1",
     "SpriteName": "PR_E1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_E",
-    "SpriteSheetName": "PR_E1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_E"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_E2",
     "SpriteName": "PR_E2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_E",
-    "SpriteSheetName": "PR_E2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_E"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_E3",
     "SpriteName": "PR_E3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_E",
-    "SpriteSheetName": "PR_E3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_E"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_E4",
     "SpriteName": "PR_E4",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_E",
-    "SpriteSheetName": "PR_E4",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_E"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_E4_lock",
     "SpriteName": "PR_E4_lock",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_E",
-    "SpriteSheetName": "PR_E4_lock",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_E"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_E5",
     "SpriteName": "PR_E5",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_E",
-    "SpriteSheetName": "PR_E5",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_E"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Boost_WR",
     "SpriteName": "Boost_WR",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Boosters",
-    "SpriteSheetName": "Boost_WR",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Boosters"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Boost_CR",
     "SpriteName": "Boost_CR",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Boosters",
-    "SpriteSheetName": "Boost_CR",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Boosters"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Boost_CR1",
     "SpriteName": "Boost_CR1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Boosters",
-    "SpriteSheetName": "Boost_CR1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Boosters"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Boost_CR2",
     "SpriteName": "Boost_CR2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Boosters",
-    "SpriteSheetName": "Boost_CR2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Boosters"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Boost_CR3",
     "SpriteName": "Boost_CR3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Boosters",
-    "SpriteSheetName": "Boost_CR3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Boosters"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Hard1",
     "SpriteName": "Hard1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies",
-    "SpriteSheetName": "Hard1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Hard2",
     "SpriteName": "Hard2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies",
-    "SpriteSheetName": "Hard2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Hard3",
     "SpriteName": "Hard3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies",
-    "SpriteSheetName": "Hard3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Hard4",
     "SpriteName": "Hard4",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies",
-    "SpriteSheetName": "Hard4",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Hard5",
     "SpriteName": "Hard5",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies",
-    "SpriteSheetName": "Hard5",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Hard6",
     "SpriteName": "Hard6",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies",
-    "SpriteSheetName": "Hard6",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Soft1",
     "SpriteName": "Soft1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies",
-    "SpriteSheetName": "Soft1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Soft2",
     "SpriteName": "Soft2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies",
-    "SpriteSheetName": "Soft2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Soft3",
     "SpriteName": "Soft3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies",
-    "SpriteSheetName": "Soft3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Soft4",
     "SpriteName": "Soft4",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies",
-    "SpriteSheetName": "Soft4",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Soft5",
     "SpriteName": "Soft5",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies",
-    "SpriteSheetName": "Soft5",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Soft6",
     "SpriteName": "Soft6",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies",
-    "SpriteSheetName": "Soft6",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Currencies"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB1_A",
     "SpriteName": "OB1_A",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB1_A",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB2_A",
     "SpriteName": "OB2_A",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB2_A",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB3_A",
     "SpriteName": "OB3_A",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB3_A",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB4_A",
     "SpriteName": "OB4_A",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB4_A",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB5_A",
     "SpriteName": "OB5_A",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB5_A",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB6_A",
     "SpriteName": "OB6_A",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB6_A",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB7_A",
     "SpriteName": "OB7_A",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB7_A",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB8_A",
     "SpriteName": "OB8_A",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB8_A",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB9_A",
     "SpriteName": "OB9_A",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB9_A",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB_PR_A",
     "SpriteName": "OB_PR_A",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB_PR_A",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB_PR_B",
     "SpriteName": "OB_PR_B",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB_PR_B",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB_PR_C",
     "SpriteName": "OB_PR_C",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB_PR_C",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB_PR_D",
     "SpriteName": "OB_PR_D",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB_PR_D",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB_PR_E",
     "SpriteName": "OB_PR_E",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB_PR_E",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "MN_B",
     "SpriteName": "MN_B",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Mine",
-    "SpriteSheetName": "MN_B",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Mine"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "MN_C",
     "SpriteName": "MN_C",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Mine",
-    "SpriteSheetName": "MN_C",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Mine"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "MN_D",
     "SpriteName": "MN_D",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Mine",
-    "SpriteSheetName": "MN_D",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Mine"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CH1_A",
     "SpriteName": "CH1_A",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests",
-    "SpriteSheetName": "CH1_A",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CH2_A",
     "SpriteName": "CH2_A",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests",
-    "SpriteSheetName": "CH2_A",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CH3_A",
     "SpriteName": "CH3_A",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests",
-    "SpriteSheetName": "CH3_A",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CH1_B",
     "SpriteName": "CH1_B",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests",
-    "SpriteSheetName": "CH1_B",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CH2_B",
     "SpriteName": "CH2_B",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests",
-    "SpriteSheetName": "CH2_B",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CH3_B",
     "SpriteName": "CH3_B",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests",
-    "SpriteSheetName": "CH3_B",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CH1_C",
     "SpriteName": "CH1_C",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests",
-    "SpriteSheetName": "CH1_C",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CH2_C",
     "SpriteName": "CH2_C",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests",
-    "SpriteSheetName": "CH2_C",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CH3_C",
     "SpriteName": "CH3_C",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests",
-    "SpriteSheetName": "CH3_C",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CH1_D",
     "SpriteName": "CH1_D",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests",
-    "SpriteSheetName": "CH1_D",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CH2_D",
     "SpriteName": "CH2_D",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests",
-    "SpriteSheetName": "CH2_D",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CH3_D",
     "SpriteName": "CH3_D",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests",
-    "SpriteSheetName": "CH3_D",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CH_Free",
     "SpriteName": "CH_Free",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests",
-    "SpriteSheetName": "CH_Free",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "NPC_SleepingBeauty",
     "SpriteName": "NPC_SleepingBeauty",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character",
-    "SpriteSheetName": "NPC_SleepingBeauty",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "NPC_Rapunzel",
     "SpriteName": "NPC_Rapunzel",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character",
-    "SpriteSheetName": "NPC_Rapunzel",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "NPC_PussInBoots",
     "SpriteName": "NPC_PussInBoots",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character",
-    "SpriteSheetName": "NPC_PussInBoots",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "NPC_5",
     "SpriteName": "NPC_5",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character",
-    "SpriteSheetName": "NPC_5",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "NPC_6",
     "SpriteName": "NPC_6",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character",
-    "SpriteSheetName": "NPC_6",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "NPC_7",
     "SpriteName": "NPC_7",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character",
-    "SpriteSheetName": "NPC_7",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "NPC_8",
     "SpriteName": "NPC_8",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character",
-    "SpriteSheetName": "NPC_8",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "NPC_9",
     "SpriteName": "NPC_9",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character",
-    "SpriteSheetName": "NPC_9",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "LINE",
     "SpriteName": "LINE",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/MeshTest",
-    "SpriteSheetName": "LINE",
-    "SpriteSheetPath": "Assets/Content/SourceContent/MeshTest"
+    "SpriteSheetName": "meshTest",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CORNER_0_1",
     "SpriteName": "CORNER_0_1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/MeshTest",
-    "SpriteSheetName": "CORNER_0_1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/MeshTest"
+    "SpriteSheetName": "meshTest",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CORNER_0_1_2_3",
     "SpriteName": "CORNER_0_1_2_3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/MeshTest",
-    "SpriteSheetName": "CORNER_0_1_2_3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/MeshTest"
+    "SpriteSheetName": "meshTest",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CORNER_0_1_2",
     "SpriteName": "CORNER_0_1_2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/MeshTest",
-    "SpriteSheetName": "CORNER_0_1_2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/MeshTest"
+    "SpriteSheetName": "meshTest",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Fog1",
     "SpriteName": "Fog1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog",
-    "SpriteSheetName": "Fog1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Fog1_border",
     "SpriteName": "Fog1_border",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog",
-    "SpriteSheetName": "Fog1_border",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Fog2",
     "SpriteName": "Fog2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog",
-    "SpriteSheetName": "Fog2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Fog2_border",
     "SpriteName": "Fog2_border",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog",
-    "SpriteSheetName": "Fog2_border",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Fog3",
     "SpriteName": "Fog3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog",
-    "SpriteSheetName": "Fog3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Fog3_border",
     "SpriteName": "Fog3_border",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog",
-    "SpriteSheetName": "Fog3_border",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB1_TT",
     "SpriteName": "OB1_TT",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB1_TT",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB2_TT",
     "SpriteName": "OB2_TT",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles",
-    "SpriteSheetName": "OB2_TT",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/Obstacles"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "NPC_Gnome",
     "SpriteName": "NPC_Gnome",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character",
-    "SpriteSheetName": "NPC_Gnome",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "NPC_SleepingBeautyPlaid",
     "SpriteName": "NPC_SleepingBeautyPlaid",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character",
-    "SpriteSheetName": "NPC_SleepingBeautyPlaid",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "icon_RemoveMark",
     "SpriteName": "icon_RemoveMark",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "icon_RemoveMark",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "removerScene",
     "SpriteName": "removerScene",
     "BundleName": "graphicscommon",
@@ -1456,395 +2730,738 @@
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "fog_opacity_1",
     "SpriteName": "fog_opacity_1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog",
-    "SpriteSheetName": "fog_opacity_1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Fog"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "SK1_PR",
     "SpriteName": "SK1_PR",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests",
-    "SpriteSheetName": "SK1_PR",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "SK2_PR",
     "SpriteName": "SK2_PR",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests",
-    "SpriteSheetName": "SK2_PR",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "SK3_PR",
     "SpriteName": "SK3_PR",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests",
-    "SpriteSheetName": "SK3_PR",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces2/Chests"
+    "SpriteSheetName": "gamefield2",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "quest_icon_hit_tree",
     "SpriteName": "quest_icon_hit_tree",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "quest_icon_hit_tree",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "quest_icon_kill_tree",
     "SpriteName": "quest_icon_kill_tree",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "quest_icon_kill_tree",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "quest_icon_mn_b",
     "SpriteName": "quest_icon_mn_b",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "quest_icon_mn_b",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "quest_icon_mn_c",
     "SpriteName": "quest_icon_mn_c",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "quest_icon_mn_c",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "quest_icon_fog",
     "SpriteName": "quest_icon_fog",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "quest_icon_fog",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "quest_icon_mn_d",
     "SpriteName": "quest_icon_mn_d",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "quest_icon_mn_d",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "quest_icon_npc_cat",
     "SpriteName": "quest_icon_npc_cat",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "quest_icon_npc_cat",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "quest_icon_npc_gnome",
     "SpriteName": "quest_icon_npc_gnome",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "quest_icon_npc_gnome",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "quest_icon_npc_rapunzel",
     "SpriteName": "quest_icon_npc_rapunzel",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "quest_icon_npc_rapunzel",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "quest_icon_npc_sleeping",
     "SpriteName": "quest_icon_npc_sleeping",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "quest_icon_npc_sleeping",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "quest_icon_open_chest",
     "SpriteName": "quest_icon_open_chest",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "quest_icon_open_chest",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "quest_icon_super_match",
     "SpriteName": "quest_icon_super_match",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "quest_icon_super_match",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "collectIngredientDailyQuestIcon",
     "SpriteName": "collectIngredientDailyQuestIcon",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "collectIngredientDailyQuestIcon",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "CompleateOrderDailyQuestIcon",
     "SpriteName": "CompleateOrderDailyQuestIcon",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "CompleateOrderDailyQuestIcon",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "killFieldDailyQuestIcon",
     "SpriteName": "killFieldDailyQuestIcon",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "killFieldDailyQuestIcon",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "matchDailyQuestIcon",
     "SpriteName": "matchDailyQuestIcon",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "matchDailyQuestIcon",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "icon_daily_objectives",
     "SpriteName": "icon_daily_objectives",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Windows/Main",
-    "SpriteSheetName": "icon_daily_objectives",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Windows/Main"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "buttonRed",
     "SpriteName": "buttonRed",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/UI",
-    "SpriteSheetName": "buttonRed",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/UI"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "buttonGreen",
     "SpriteName": "buttonGreen",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/UI",
-    "SpriteSheetName": "buttonGreen",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/UI"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "buttonBlue",
     "SpriteName": "buttonBlue",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/UI",
-    "SpriteSheetName": "buttonBlue",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/UI"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order3",
     "SpriteName": "Order3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order6",
     "SpriteName": "Order6",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order6",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order8",
     "SpriteName": "Order8",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order8",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order10",
     "SpriteName": "Order10",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order10",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order11",
     "SpriteName": "Order11",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order11",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order12",
     "SpriteName": "Order12",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order12",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order13",
     "SpriteName": "Order13",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order13",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order14",
     "SpriteName": "Order14",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order14",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order15",
     "SpriteName": "Order15",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order15",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order16",
     "SpriteName": "Order16",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order16",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "Order17",
     "SpriteName": "Order17",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "Order17",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_F4",
     "SpriteName": "PR_F4",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F",
-    "SpriteSheetName": "PR_F4",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_F4_lock",
     "SpriteName": "PR_F4_lock",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F",
-    "SpriteSheetName": "PR_F4_lock",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_G4",
     "SpriteName": "PR_G4",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G",
-    "SpriteSheetName": "PR_G4",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_G4_lock",
     "SpriteName": "PR_G4_lock",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G",
-    "SpriteSheetName": "PR_G4_lock",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_F5",
     "SpriteName": "PR_F5",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F",
-    "SpriteSheetName": "PR_F5",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_G5",
     "SpriteName": "PR_G5",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G",
-    "SpriteSheetName": "PR_G5",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_G3",
     "SpriteName": "PR_G3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G",
-    "SpriteSheetName": "PR_G3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_G2",
     "SpriteName": "PR_G2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G",
-    "SpriteSheetName": "PR_G2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_G1",
     "SpriteName": "PR_G1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G",
-    "SpriteSheetName": "PR_G1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB_PR_G",
     "SpriteName": "OB_PR_G",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G",
-    "SpriteSheetName": "OB_PR_G",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_G"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_F3",
     "SpriteName": "PR_F3",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F",
-    "SpriteSheetName": "PR_F3",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_F2",
     "SpriteName": "PR_F2",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F",
-    "SpriteSheetName": "PR_F2",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "PR_F1",
     "SpriteName": "PR_F1",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F",
-    "SpriteSheetName": "PR_F1",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
     "Uid": "OB_PR_F",
     "SpriteName": "OB_PR_F",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F",
-    "SpriteSheetName": "OB_PR_F",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/PR_F"
+    "SpriteSheetName": "gamefield",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   }
 ]

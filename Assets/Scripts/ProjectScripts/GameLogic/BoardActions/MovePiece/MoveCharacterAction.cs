@@ -9,7 +9,7 @@
 	{
 		var logic = gameBoardController.BoardLogic;
 		var positions = From.NeighborsFor(gameBoardController.BoardDef.Width, gameBoardController.BoardDef.Height);
-		BoardPosition? to;
+		BoardPosition? to = null;
 		
 		positions.Shuffle();
 

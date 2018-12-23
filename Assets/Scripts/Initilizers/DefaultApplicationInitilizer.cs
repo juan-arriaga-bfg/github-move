@@ -15,6 +15,9 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         
         IWAssetBundleService.Instance.Manager.CacheLocalBundles( (_) => 
         {
+            var iconResourceManager = IconService.Current as IconResourceManager;
+            iconResourceManager.GenerateTextSpriteAssets();
+            
             base.Init(onComplete);
         });
     }

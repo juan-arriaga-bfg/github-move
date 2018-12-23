@@ -670,16 +670,6 @@
     "IsGenerateAutoName": false
   },
   {
-    "Uid": "ObstacleHPiece",
-    "ResourcePath": "Prefabs\\Pieces\\Obstacles/ObstacleHPiece",
-    "IsGenerateAutoName": true
-  },
-  {
-    "Uid": "pieces.grayscale",
-    "ResourcePath": "Materials/pieces.grayscale",
-    "IsGenerateAutoName": true
-  },
-  {
     "Uid": "LockedEmpty",
     "ResourcePath": "Prefabs\\Pieces\\Lock/LockedEmpty",
     "IsGenerateAutoName": true
@@ -1172,6 +1162,11 @@
   {
     "Uid": "HardShopIcon7",
     "ResourcePath": "Prefabs\\UI\\Shop/HardShopIcon7",
+    "IsGenerateAutoName": false
+  },
+  {
+    "Uid": "SACommon",
+    "ResourcePath": "Settings/SpriteAssets/SACommon",
     "IsGenerateAutoName": false
   }
 ]

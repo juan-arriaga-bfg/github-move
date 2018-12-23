@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: meshTest
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 21300000, guid: 0ebcf680c5594804a9a27e5a9ba80743, type: 3}
+    - {fileID: 21300000, guid: 30640d979a923864b8bc8bb19f109bdb, type: 3}
+    - {fileID: 21300000, guid: d863c3fc765be534b984e9ac87ec98fb, type: 3}
+    - {fileID: 21300000, guid: 372c62bf34e686c4983400dd10dc72cf, type: 3}
+    totalSpriteSurfaceArea: 10816
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 0ebcf680c5594804a9a27e5a9ba80743, type: 3}
+  - {fileID: 21300000, guid: 30640d979a923864b8bc8bb19f109bdb, type: 3}
+  - {fileID: 21300000, guid: d863c3fc765be534b984e9ac87ec98fb, type: 3}
+  - {fileID: 21300000, guid: 372c62bf34e686c4983400dd10dc72cf, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - CORNER_0_1
+  - CORNER_0_1_2
+  - CORNER_0_1_2_3
+  - LINE
+  m_Tag: meshTest
+  m_IsVariant: 0
