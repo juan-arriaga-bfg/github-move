@@ -14,7 +14,7 @@ namespace UT
         public void UTUniqueTextureNameSimplePasses()
         {
             // Use the Assert class to test conditions.
-            var dublicatedFiles = AssetsUsageFinderUtils.GetDublicatedFileNames(pathToCheck, ignoredFileNames, searchFilter);
+            var dublicatedFiles = AssetsInfo.AssetsUsageFinderUtils.GetDublicatedFileNames(pathToCheck, ignoredFileNames, searchFilter);
 
             if (dublicatedFiles.Count > 0)
             {

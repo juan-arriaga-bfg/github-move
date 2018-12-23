@@ -18,7 +18,7 @@ namespace UT
         [Test]
         public void UTUniqueResourceNameSimplePasses()
         {
-            var dublicatedFiles = AssetsUsageFinderUtils.GetDublicatedFileNames(pathToCheck, ignoredFileNames, "");
+            var dublicatedFiles = AssetsInfo.AssetsUsageFinderUtils.GetDublicatedFileNames(pathToCheck, ignoredFileNames, "");
 
             if (dublicatedFiles.Count > 0)
             {
