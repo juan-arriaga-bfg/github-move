@@ -50,6 +50,19 @@ public class PieceBoardElementView : BoardElementView
             return selectionSprite;
         }
     }
+
+    public List<SpriteRenderer> GetCachedSpriteRenderers()
+    {
+        var spriteRenderers = new List<SpriteRenderer>();
+        foreach (var cachedRenderer in cachedRenderers)
+        {
+            var spriteRenderer = cachedRenderer.CachedRenderer as SpriteRenderer;
+            if(spriteRenderer != null)
+                spriteRenderers.Add(spriteRenderer);
+        }
+
+        return spriteRenderers;
+    }
     
     private HintArrowView arrow;
     
