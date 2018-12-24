@@ -6,12 +6,22 @@ public class CurrencyPair
     public string Currency;
     public int Amount;
     
-    public Sprite GetIcon()
+    public Sprite GetIconSprite()
     {
-        var def = global::Currency.GetCurrencyDef(Currency);
-        return IconService.Current.GetSpriteById(def == null ? Currency : def.Icon);
+        return IconService.Current.GetSpriteById(GetIcon());
     }
+    
+    public string GetIcon()
+    {
+        var piece = PieceType.Parse(Currency);
 
+        if (piece != PieceType.None.Id) return Currency;
+        
+        var def = global::Currency.GetCurrencyDef(Currency);
+        
+        return def.Icon;
+    }
+    
     public override string ToString()
     {
         return $"{Currency}: {Amount}";
@@ -24,9 +34,12 @@ public class CurrencyPair
         return def == null ? null : $"{def.Id},{Amount}";
     }
 
-    public string ToStringIcon(bool noAmount = false)
+    public string ToStringIcon(bool noAmount = false, int iconSize = -1, int amountSize = -1)
     {
-        return noAmount ? $"<sprite name={Currency}>" : $"<sprite name={Currency}>{Amount}";
+        var iconText = iconSize == -1 ? $"<sprite name={GetIcon()}>" : $"<size={iconSize}><sprite name={GetIcon()}></size>";
+        var amountText = noAmount ? "" : $"{(amountSize == -1 ? Amount.ToString() : $"<size={amountSize}>{Amount}</size>")}";
+
+        return $"{iconText}{amountText}";
     }
 
     public static CurrencyPair Parse(string value)

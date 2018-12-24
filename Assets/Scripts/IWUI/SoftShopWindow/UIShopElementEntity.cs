@@ -11,7 +11,7 @@ public class UIShopElementEntity : UISimpleScrollElementEntity
             
             foreach (var pair in Products)
             {
-                str.Append($"<size=35><sprite name={pair.Currency}></size>{pair.Amount}\n");
+                str.Append($"{pair.ToStringIcon(false, 35)}\n");
             }
             
             return str.ToString().TrimEnd();

@@ -201,4 +201,5 @@ public class R
      public const string PR_G3Piece = "PR_G3Piece";
      public const string PR_G4Piece = "PR_G4Piece";
      public const string PR_G5Piece = "PR_G5Piece";
+     public const string DestroyWorkerAnimation = "DestroyWorkerAnimation";
 }

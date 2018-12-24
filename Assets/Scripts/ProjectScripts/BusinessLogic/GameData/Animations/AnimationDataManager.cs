@@ -56,6 +56,11 @@ public class AnimationDataManager
             OnObstacleFinalSpawn = R.SpawnChestAnimation,
             OnDestroyFromBoard = R.DestroyChestAnimation
         });
+
+        AddPiece(defs, PieceType.NPC_Gnome.Id, new AnimationDef
+        {
+            OnDestroyFromBoard = R.DestroyWorkerAnimation
+        });
         
         return defs;
     }

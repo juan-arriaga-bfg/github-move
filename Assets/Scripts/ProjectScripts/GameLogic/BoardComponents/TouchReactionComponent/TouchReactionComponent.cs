@@ -1,4 +1,7 @@
-﻿public class TouchReactionComponent : ECSEntity,
+﻿using System;
+using UnityEngine;
+
+public class TouchReactionComponent : ECSEntity,
     ITouchReactionDefinitionComponent, ITouchReactionConditionComponent, ILockerComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();

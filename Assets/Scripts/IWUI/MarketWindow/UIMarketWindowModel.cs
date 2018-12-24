@@ -2,7 +2,12 @@ using System.Collections.Generic;
 
 public class UIMarketWindowModel : IWWindowModel 
 {
-    public string Title => LocalizationService.Get("window.shop.chest.title", "window.shop.chest.title");
+    public string Title => LocalizationService.Get("window.market.title", "window.market.title");
+    public string Message => LocalizationService.Get("window.market.message", "window.market.message");
+
+    public string ButtonReset =>
+        string.Format(LocalizationService.Get("window.market.button.reset", "window.market.button.reset {0}"),
+            new CurrencyPair {Currency = Currency.Crystals.Name, Amount = 50}.ToStringIcon());
     
     public List<ChestDef> Chests
     {

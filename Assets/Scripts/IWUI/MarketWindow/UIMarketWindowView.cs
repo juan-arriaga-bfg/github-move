@@ -6,6 +6,9 @@ public class UIMarketWindowView : UIGenericPopupWindowView
 {
     [IWUIBinding("#Content")] private UIContainerViewController content;
     
+    [IWUIBinding("#ResetButtonLabel")] private NSText btnResetLabel;
+    [IWUIBinding("#ResetButton")] private UIButtonViewController btnReset;
+    
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -13,6 +16,9 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIMarketWindowModel;
         
         SetTitle(windowModel.Title);
+        SetMessage(windowModel.Message);
+
+        btnResetLabel.Text = windowModel.ButtonReset;
         
         Fill(UpdateEntities(windowModel.Chests), content);
         
@@ -25,6 +31,13 @@ public class UIMarketWindowView : UIGenericPopupWindowView
             .SetEase(Ease.InOutBack)
             .SetId(content)
             .OnComplete(() => { content.GetScrollRect().enabled = true; });
+    }
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
+        InitButtonBase(btnReset, OnClickReset);
     }
 
     public override void OnViewClose()
@@ -57,5 +70,10 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         }
         
         return views;
+    }
+
+    private void OnClickReset()
+    {
+        
     }
 }

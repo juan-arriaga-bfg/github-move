@@ -76,8 +76,12 @@ public class UIMessageWindowController : IWWindowController {
 
         model.Prefab = currency == Currency.Mana.Name ? "NotHaveMana" : null;
         model.Title = LocalizationService.Get($"window.notHave.title.{currency.ToLower()}", $"window.notHave.title.{currency.ToLower()}?");
+
+        model.Message = string.Format(
+            LocalizationService.Get($"window.notHave.message.{currency.ToLower()}",
+                $"window.notHave.message.{currency.ToLower()}" + "{0}!"),
+            $"<sprite name={(currency == Currency.Mana.Name ? Currency.Mana.Icon : currency)}>{diff}");
         
-        model.Message = string.Format(LocalizationService.Get($"window.notHave.message.{currency.ToLower()}", $"window.notHave.message.{currency.ToLower()}" + "{0}!"), $"<sprite name={currency}>{diff}");
         model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
             
         model.OnAccept = () => {};

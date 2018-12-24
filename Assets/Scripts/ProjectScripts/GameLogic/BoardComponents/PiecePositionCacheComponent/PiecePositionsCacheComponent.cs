@@ -48,6 +48,21 @@ public class PiecePositionsCacheComponent : IECSComponent
 		return cache.TryGetValue(pieceType, out list) == false ? new List<BoardPosition>() : new List<BoardPosition>(list);
 	}
 
+	public List<BoardPosition> GetUnlockedPiecePositionsByType(int pieceType)
+	{
+		var piecePositions = GetPiecePositionsByType(pieceType);
+		int i = 0;
+		while (i < piecePositions.Count)
+		{
+			if (context.Context.PathfindLocker.HasPath(context.GetPieceAt(piecePositions[i])))
+				i++;
+			else
+				piecePositions.RemoveAt(i);
+		}
+
+		return piecePositions;
+	}
+	
 	public List<BoardPosition> GetPiecePositionsByFilter(PieceTypeFilter filter)
 	{
 		var ids = PieceType.GetIdsByFilter(filter);

@@ -41,6 +41,6 @@ public class RemoveTutorialAnimation : BaseTutorialAnimation
         
         DOTween.Sequence()
             .AppendInterval(0.5f)
-            .AppendCallback(() => board.ActionExecutor.AddAction(new CollapsePieceToAction{To = target, Positions = new List<BoardPosition>{target}}));
+            .AppendCallback(() => board.ActionExecutor.AddAction(new CollapsePieceToAction{To = target, Positions = new List<BoardPosition>{target}, AnimationResourceSearch = piece => AnimationDataManager.FindAnimation(piece, def => def.OnDestroyFromBoard)}));
     }
 }

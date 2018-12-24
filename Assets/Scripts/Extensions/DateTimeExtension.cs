@@ -63,9 +63,9 @@ public static class DateTimeExtension
         return TimeFormat(new TimeSpan(0, 0, delay - 1), icon, format);
     }
 
-    public static string GetTimeLeftText(this DateTime datetime, bool useUTC, bool icon, string format)
+    public static string GetTimeLeftText(this DateTime datetime, bool useUTC, bool icon, string format, float mspace = 3f)
     {
-        return TimeFormat(datetime.GetTimeLeft(useUTC), icon, format);
+        return TimeFormat(datetime.GetTimeLeft(useUTC), icon, format, mspace);
     }
     
     public static string GetTimeLeftText(this DateTime datetime, bool useUTC = true)
@@ -86,7 +86,7 @@ public static class DateTimeExtension
         
         if (string.IsNullOrEmpty(format))
         {
-            var str = icon ? $"<sprite name={Currency.Timer.Name}> " : "";
+            var str = icon ? $"<sprite name={Currency.Timer.Icon}> " : "";
             
             return (int) temp.TotalHours > 0
                 ? $"{str}<mspace={mspaceStr}em>{temp.Hours:00}:{temp.Minutes:00}:{temp.Seconds:00}</mspace>"

@@ -102,6 +102,12 @@ public class BoardManipulatorComponent : ECSEntity,
             var pieceView = selectedView as PieceBoardElementView;
             pieceView.OnTap(pieceView.Piece.CachedPosition, pos);
             
+            if (pieceView.AvailiableLockTouchMessage() && !context.PathfindLocker.HasPath(pieceView.Piece))
+            {
+                
+                UIErrorWindowController.AddError(LocalizationService.Get("message.error.pieceLock"));  
+            }
+            
             if (pieceView.Piece.TouchReaction != null) return pieceView.Piece.TouchReaction.Touch(pieceView.Piece.CachedPosition);
         }
         

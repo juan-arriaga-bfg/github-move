@@ -275,4 +275,9 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
         base.OnTap(boardPos, worldPos);
         Piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.FogTap, Piece);
     }
+
+    public override bool AvailiableLockTouchMessage()
+    {
+	    return false;
+    }
 }
