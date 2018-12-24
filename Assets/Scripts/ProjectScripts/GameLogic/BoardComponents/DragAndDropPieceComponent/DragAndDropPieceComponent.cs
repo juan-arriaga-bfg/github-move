@@ -172,7 +172,7 @@ public class DragAndDropPieceComponent :  ECSEntity, IECSSystem
     {
         if (IsValidPoint(boardPosition))
         {
-            BoardService.Current.GetBoardById(0).ActionExecutor.AddAction(new CreatePieceAtAction
+            BoardService.Current.FirstBoard.ActionExecutor.AddAction(new CreatePieceAtAction
             {
                 At = boardPosition,
                 PieceTypeId = targetPieceId

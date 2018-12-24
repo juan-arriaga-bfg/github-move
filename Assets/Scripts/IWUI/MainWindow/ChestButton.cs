@@ -11,7 +11,7 @@ public class ChestButton : UIGenericResourcePanelViewController
     {
         base.OnViewShow(context);
 
-        timer = BoardService.Current.GetBoardById(0).FreeChestLogic.Timer;
+        timer = BoardService.Current.FirstBoard.FreeChestLogic.Timer;
         
         timer.OnStart += UpdateTimerState;
         timer.OnComplete += UpdateTimerState;

@@ -18,7 +18,7 @@ public class CurrencySaveComponent : ECSEntity, IECSSerializeable
     {
         if(BoardService.Current == null) return;
 		
-        var board = BoardService.Current.GetBoardById(0);
+        var board = BoardService.Current.FirstBoard;
         var energyLogic = board.GetComponent<EnergyCurrencyLogicComponent>(EnergyCurrencyLogicComponent.ComponentGuid);
         var workerLogic = board.GetComponent<WorkerCurrencyLogicComponent>(WorkerCurrencyLogicComponent.ComponentGuid);
 

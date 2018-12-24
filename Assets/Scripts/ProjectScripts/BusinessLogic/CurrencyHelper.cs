@@ -331,7 +331,7 @@ public static class CurrencyHellper
 
     public static void OpenShopWindow(string currency, string diff = "")
     {
-        BoardService.Current.GetBoardById(0)?.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, null);
+        BoardService.Current.FirstBoard?.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, null);
         
         if (currency == Currency.Coins.Name)
         {

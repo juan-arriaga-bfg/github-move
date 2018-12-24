@@ -78,7 +78,7 @@ public class UIPiecesCheatSheetElementViewController : UIContainerElementViewCon
         BoardPosition pos = new BoardPosition(23, 10, BoardLayer.Piece.Layer);
         var availablePoints = new List<BoardPosition>();
 
-        BoardService.Current.GetBoardById(0).BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(pos, availablePoints, 1, 100);
+        BoardService.Current.FirstBoard.BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(pos, availablePoints, 1, 100);
         if (availablePoints.Count > 0)
         {
             var window = context as UIBaseWindowView;
@@ -88,7 +88,7 @@ public class UIPiecesCheatSheetElementViewController : UIContainerElementViewCon
                    .AppendInterval(0.3f)
                    .AppendCallback(() =>
                     {
-                        BoardService.Current.GetBoardById(0).ActionExecutor.AddAction(new CreatePieceAtAction
+                        BoardService.Current.FirstBoard.ActionExecutor.AddAction(new CreatePieceAtAction
                         {
                             At = availablePoints[0],
                             PieceTypeId = pieceId

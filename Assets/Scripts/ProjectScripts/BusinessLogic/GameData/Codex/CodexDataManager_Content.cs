@@ -9,7 +9,7 @@ public partial class CodexDataManager
 
         ret.ItemDefs = new List<CodexItemDef>();
 
-        var board = BoardService.Current.GetBoardById(0);
+        var board = BoardService.Current.FirstBoard;
         var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
 
         ret.TabDefs = new List<CodexTabDef>

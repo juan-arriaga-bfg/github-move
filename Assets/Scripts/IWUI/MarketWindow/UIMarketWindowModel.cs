@@ -13,7 +13,7 @@ public class UIMarketWindowModel : IWWindowModel
     {
         get
         {
-            var board = BoardService.Current.GetBoardById(0);
+            var board = BoardService.Current.FirstBoard;
             var definition = board.BoardLogic.MatchDefinition;
             
             var last = GameDataService.Current.ChestsManager.Chests.FindAll(def =>

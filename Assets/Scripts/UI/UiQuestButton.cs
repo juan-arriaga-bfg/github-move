@@ -274,7 +274,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
         UIService.Get.ShowWindow(UIWindowType.QuestWindow);
         
-        var board = BoardService.Current.GetBoardById(0);
+        var board = BoardService.Current.FirstBoard;
         
         // Focus to Char (working code - uncomment if needed)
         // var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.Char1.Id, 1)[0];

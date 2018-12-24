@@ -13,7 +13,7 @@ public class UIChestsShopElementViewController : UISimpleScrollElementViewContro
 	private bool isReward;
 
 	private FreeChestLogicComponent freeChestLogic;
-	private FreeChestLogicComponent FreeChestLogic => freeChestLogic ?? (freeChestLogic = BoardService.Current.GetBoardById(0).FreeChestLogic);
+	private FreeChestLogicComponent FreeChestLogic => freeChestLogic ?? (freeChestLogic = BoardService.Current.FirstBoard.FreeChestLogic);
 
 	public override void Init()
 	{
@@ -61,7 +61,7 @@ public class UIChestsShopElementViewController : UISimpleScrollElementViewContro
 		
 		if (isClick == false || isReward == false) return;
 		
-		var board = BoardService.Current.GetBoardById(0);
+		var board = BoardService.Current.FirstBoard;
 		var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
 		var piece = board.BoardLogic.GetPieceAt(position);
         
@@ -96,7 +96,7 @@ public class UIChestsShopElementViewController : UISimpleScrollElementViewContro
 		
 		isClick = true;
 		
-		var board = BoardService.Current.GetBoardById(0);
+		var board = BoardService.Current.FirstBoard;
 		var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
 		
 		if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, 1))

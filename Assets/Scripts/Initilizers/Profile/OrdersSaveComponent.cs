@@ -22,7 +22,7 @@ public class OrdersSaveComponent : ECSEntity, IECSSerializeable
 	{
 		if(BoardService.Current == null) return;
 		
-		var logic = BoardService.Current.GetBoardById(0).BoardLogic;
+		var logic = BoardService.Current.FirstBoard.BoardLogic;
 		var positions = logic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Character);
 		
 		orders = new List<OrderSaveItem>();

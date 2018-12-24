@@ -37,7 +37,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         
         iconResult.sprite = IconService.Current.GetSpriteById(order.Def.Uid);
         
-        var board = BoardService.Current.GetBoardById(0);
+        var board = BoardService.Current.FirstBoard;
         var position = board.BoardLogic.PositionsCache.GetRandomPositions(order.Customer, 1)[0];
         var piece = board.BoardLogic.GetPieceAt(position);
         
@@ -187,7 +187,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
 
         if (order.State == OrderState.Complete)
         {
-            var board = BoardService.Current.GetBoardById(0);
+            var board = BoardService.Current.FirstBoard;
             var position = board.BoardLogic.PositionsCache.GetRandomPositions(order.Customer, 1)[0];
             
             if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, order.PiecesReward.Sum(e => e.Value)))

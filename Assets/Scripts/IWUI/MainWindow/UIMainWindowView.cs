@@ -209,7 +209,7 @@ public class UIMainWindowView : UIBaseWindowView
     
     public void OnClickCodex()
     {
-        BoardService.Current.GetBoardById(0)?.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
+        BoardService.Current.FirstBoard?.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
         
         var codexManager = GameDataService.Current.CodexManager;
         var content = codexManager.GetCodexContent();

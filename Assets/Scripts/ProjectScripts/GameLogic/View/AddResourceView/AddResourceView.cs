@@ -46,7 +46,7 @@ public class AddResourceView : BoardElementView
 
 	public static void Show(Vector3 position, CurrencyPair resource, float delay = 0f)
 	{
-		var board = BoardService.Current.GetBoardById(0);
+		var board = BoardService.Current.FirstBoard;
 		var from = board.BoardDef.GetSectorPosition(position);
 		
 		Show(from, resource, delay);
@@ -67,7 +67,7 @@ public class AddResourceView : BoardElementView
 	{
 		if (resource == null) return;
 		
-		var board = BoardService.Current.GetBoardById(0);
+		var board = BoardService.Current.FirstBoard;
 		
 		if (resource.Currency == Currency.Coins.Name
 		    || resource.Currency == Currency.Crystals.Name

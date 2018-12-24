@@ -17,10 +17,8 @@
 
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
-        var board = BoardService.Current.GetBoardById(0);
-        var piece = board.BoardLogic.GetPieceAt(position);
+        var board = BoardService.Current.FirstBoard;
         board.AreaAccessController?.LocalRecalculate(context.CachedPosition);
-        
     }
 
     public void OnRegisterEntity(ECSEntity entity)

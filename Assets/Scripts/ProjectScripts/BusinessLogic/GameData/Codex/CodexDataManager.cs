@@ -102,7 +102,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
             return cachedMatchDef;
         }
         
-        cachedMatchDef = BoardService.Current?.GetBoardById(0)?.BoardLogic?.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid) ?? new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
+        cachedMatchDef = BoardService.Current?.FirstBoard?.BoardLogic?.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid) ?? new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
 
         return cachedMatchDef;
     }
@@ -216,7 +216,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
     public List<CodexItemDef> GetCodexItemsForChainAndFocus(int targetId, int length, bool hideCaptions)
     {
-        var board    = BoardService.Current.GetBoardById(0);
+        var board    = BoardService.Current.FirstBoard;
         var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
 
         var chain = matchDef.GetChain(targetId);

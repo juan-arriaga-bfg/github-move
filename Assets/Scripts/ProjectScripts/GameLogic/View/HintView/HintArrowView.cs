@@ -62,7 +62,7 @@ public class HintArrowView : BoardElementView
     
     public static HintArrowView Show(BoardPosition position, float offsetX = 0, float offsetY = 0, bool focus = true, bool loop = false, float delayBeforeShow = 0)
     {
-        var board = BoardService.Current.GetBoardById(0);
+        var board = BoardService.Current.FirstBoard;
         var target = board.BoardLogic.GetPieceAt(position);
 
         var multi = target?.Multicellular;

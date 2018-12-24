@@ -95,7 +95,7 @@ public class DevTools : UIContainerElementViewController
     
     public void OnToggleCells(bool isChecked)
     {
-        var board = BoardService.Current.GetBoardById(0);
+        var board = BoardService.Current.FirstBoard;
 
         if (isChecked)
         {

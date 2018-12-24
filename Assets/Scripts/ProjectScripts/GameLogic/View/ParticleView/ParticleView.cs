@@ -26,7 +26,7 @@ public class ParticleView : BoardElementView
 
     public static ParticleView Show(string particleResourceName, BoardPosition position)
     {
-        var board = BoardService.Current.GetBoardById(0);
+        var board = BoardService.Current.FirstBoard;
         var particleView = board.RendererContext.CreateBoardElementAt<ParticleView>(particleResourceName, position);
 
         if (particleView.Particles == null)

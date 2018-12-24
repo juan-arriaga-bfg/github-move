@@ -14,7 +14,7 @@ public class UILimitTimerViewController : IWUIWindowViewController
     {
         base.OnViewInit(context);
 
-        var board = BoardService.Current.GetBoardById(0);
+        var board = BoardService.Current.FirstBoard;
         
         energyLogic = board.GetComponent<EnergyCurrencyLogicComponent>(EnergyCurrencyLogicComponent.ComponentGuid);
         energyLogic.OnExecute += UpdateView;

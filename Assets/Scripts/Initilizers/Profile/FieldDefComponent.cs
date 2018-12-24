@@ -92,7 +92,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	{
 		if(BoardService.Current == null) return;
 		
-		var board = BoardService.Current.GetBoardById(0);
+		var board = BoardService.Current.FirstBoard;
 		var cash = board.BoardLogic.PositionsCache.Cache;
 		
 		FreeChestStartTime = board.FreeChestLogic.Timer.StartTimeLong.ToString();
@@ -131,7 +131,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		
 		remowedMines = str.ToString();
 
-		AreaAccess = BoardService.Current.GetBoardById(0).AreaAccessController.GetSaveItem();
+		AreaAccess = board.AreaAccessController.GetSaveItem();
 	}
 
 	[OnDeserialized]
