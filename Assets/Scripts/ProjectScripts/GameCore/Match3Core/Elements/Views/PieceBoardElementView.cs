@@ -482,4 +482,9 @@ public class PieceBoardElementView : BoardElementView
         
         dropEffectView.Hide(true);
     }
+
+    public virtual bool AvailiableLockTouchMessage()
+    {
+        return true;
+    }
 }
