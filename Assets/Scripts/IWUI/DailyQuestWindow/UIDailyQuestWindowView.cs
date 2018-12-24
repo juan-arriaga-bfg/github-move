@@ -217,18 +217,17 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
     {
         UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
         
-
-        string time = model.Timer.CompleteTime.GetTimeLeftText(model.Timer.UseUTC, 2.5f);
+        string time = model.Timer.CompleteTime.GetTimeLeftText(model.Timer.UseUTC, true, null, 2.5f);
         
         if (comeBackPanel.activeSelf)
         {
             string description = model.AllClearedText;
-            comeBackLabel.Text = $"{description} <sprite name=Timer> {time}";
+            comeBackLabel.Text = $"{description} {time}";
         }
         else
         {
             string description = model.TimerHeader;
-            mainTimerLabel.Text = $"<color=#FFFFFF><font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SubtitleFinal\">{description} </font></color><sprite name=Timer> <mspace=2.5em>{time}</mspace>";
+            mainTimerLabel.Text = $"<color=#FFFFFF><font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SubtitleFinal\">{description} </font></color>{time}";
         }
     }
 

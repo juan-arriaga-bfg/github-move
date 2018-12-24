@@ -48,7 +48,7 @@ public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
         for (var i = 0; i < mainCurrency.Count; i++)
         {
             var def = mainCurrency[i];
-            str.Append($"<sprite name=\"{def.Name}\">{(i == mainCurrency.Count - 1 ? " = " : ", ")}");
+            str.Append($"<sprite name=\"{def.Icon}\">{(i == mainCurrency.Count - 1 ? " = " : ", ")}");
         }
 
         return str.ToString();

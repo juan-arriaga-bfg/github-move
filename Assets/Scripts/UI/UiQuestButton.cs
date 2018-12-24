@@ -152,7 +152,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         if (taskAboutCurrency != null && !string.IsNullOrEmpty(taskAboutCurrency.CurrencyName))
         {
             var pair = new CurrencyPair {Currency = taskAboutCurrency.CurrencyName};
-            var icon = pair.GetIcon();
+            var icon = pair.GetIconSprite();
             if (icon != null)
             {
                 return icon;
