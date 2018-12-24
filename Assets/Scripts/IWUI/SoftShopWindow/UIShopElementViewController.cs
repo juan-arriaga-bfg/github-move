@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class UIShopElementViewController : UISimpleScrollElementViewController
 {
@@ -48,7 +49,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
             return;
         }
         
-        CurrencyHellper.Purchase(contentEntity.Products, contentEntity.Price, null, new Vector2(Screen.width/2, Screen.height/2));
+        CurrencyHellper.Purchase(contentEntity.Products, contentEntity.Price, success => GetReward());
     }
     
     private void OnBuyClick()
@@ -66,5 +67,33 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         }
         
         context.Controller.CloseCurrentWindow();
+    }
+
+    private void GetReward()
+    {
+        var board = BoardService.Current.FirstBoard;
+        var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
+        
+        if(positions.Count == 0) return;
+
+        var position = positions[0];
+        var contentEntity = entity as UIShopElementEntity;
+        
+        List<CurrencyPair> currencysReward;
+        var piecesReward = CurrencyHellper.FiltrationRewards(contentEntity.Products, out currencysReward);
+        
+        board.ActionExecutor.AddAction(new EjectionPieceAction
+        {
+            GetFrom = () => position,
+            Pieces = piecesReward,
+            OnComplete = () =>
+            {
+                var view = board.RendererContext.GetElementAt(position) as CharacterPieceView;
+                
+                if(view != null) view.StartRewardAnimation();
+                    
+                AddResourceView.Show(position, currencysReward);
+            }
+        });
     }
 }

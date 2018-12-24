@@ -51,7 +51,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         }
 
         order.OnStateChange += UpdateState;
-        order.OnStateChange += ShowTestArrow;
+        order.OnStateChange += ShowTutorArrow;
         order.OnStateChange += UpdateOrders;
         
         UpdateState();
@@ -102,10 +102,10 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
     {
         base.OnViewShowCompleted();
 
-        ShowTestArrow();
+        ShowTutorArrow();
     }
 
-    private void ShowTestArrow()
+    private void ShowTutorArrow()
     {
         var contentEntity = entity as UIOrderElementEntity;
 
@@ -136,7 +136,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         if (order != null)
         {
             order.OnStateChange -= UpdateState;
-            order.OnStateChange -= ShowTestArrow;
+            order.OnStateChange -= ShowTutorArrow;
             order.OnStateChange -= UpdateOrders;
         }
     }
