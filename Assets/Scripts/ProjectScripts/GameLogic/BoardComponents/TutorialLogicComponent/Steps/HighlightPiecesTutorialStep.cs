@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DG.Tweening;
+using UnityEngine;
 
 public class HighlightPiecesTutorialStep : DelayTutorialStep
 {
@@ -33,7 +34,7 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
         
         foreach (var target in Targets)
         {
-            var cache = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(target);
+            var cache = Context.Context.BoardLogic.PositionsCache.GetUnlockedPiecePositionsByType(target);
             var amount = Context.Context.BoardLogic.MatchDefinition.GetPieceCountForMatch(target);
             
             if(cache.Count < amount) continue;
