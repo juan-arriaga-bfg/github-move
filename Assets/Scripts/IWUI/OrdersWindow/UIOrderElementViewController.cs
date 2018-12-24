@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 
 public class UIOrderElementViewController : UISimpleScrollElementViewController
 {
@@ -10,6 +9,15 @@ public class UIOrderElementViewController : UISimpleScrollElementViewController
 	{
 		base.Init();
         
+		button
+			.SetActiveScale(1.2f)
+			.ToState(GenericButtonState.UnActive);
+
+		UpdateMark();
+	}
+
+	public void UpdateMark()
+	{
 		var contentEntity = entity as UIOrderElementEntity;
 		
 		contentEntity.Data.SetMark(mark);
@@ -19,13 +27,9 @@ public class UIOrderElementViewController : UISimpleScrollElementViewController
 	{
 		base.OnViewShowCompleted();
 		
-		button
-			.SetActiveScale(1.2f)
-			.SetDragDirection(new Vector2(0f, 1f))
-			.SetDragThreshold(100f)
-			.ToState(GenericButtonState.UnActive).OnClick(Select);
+		button.OnClick(Select);
 	}
-
+	
 	public override void OnSelect()
 	{
 		base.OnSelect();

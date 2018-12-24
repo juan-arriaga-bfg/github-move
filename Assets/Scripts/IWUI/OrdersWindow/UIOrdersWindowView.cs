@@ -55,12 +55,30 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         messageIngredients.Text = windowModel.IngredientsMessage;
         
         contentToggles.Select(0);
+        SelectOrders();
     }
-
+    
     public void UpdateOrders()
     {
+        foreach (UIOrderElementViewController oder in contentOders.Tabs)
+        {
+            oder.UpdateMark();
+        }
+    }
+
+    private void SelectOrders()
+    {
         var windowModel = Model as UIOrdersWindowModel;
-        Fill(UpdateEntitiesOders(windowModel.Orders), contentOders);
+        var select = 0;
+        
+        if (windowModel.Select != null)
+        {
+            var dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
+            select = Mathf.Max(0, dataOrders.FindIndex(order => order == windowModel.Select));
+            windowModel.Select = null;
+        }
+        
+        contentOders.Select(select);
     }
     
     private void OnSelectToggle(int index)
@@ -77,17 +95,14 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         {
             case 0:
                 var dataOrders = windowModel.Orders.FindAll(order => order.State != OrderState.Init);
-                var select = Mathf.Max(0, dataOrders.FindIndex(order => order == windowModel.Select));
                 
                 messageOders.gameObject.SetActive(dataOrders.Count == 0);
 
                 if (dataOrders.Count == 0) Fill(UpdateEntitiesSelect(null), contentSelect);
                 
                 Fill(UpdateEntitiesOders(dataOrders), contentOders);
-                contentOders.Select(select);
+                contentOders.Select(0);
                 prices.HideHard();
-                
-                windowModel.Select = null;
                 break;
             case 1:
                 Fill(UpdateEntitiesRecipes(windowModel.Recipes), contentRecipes);
