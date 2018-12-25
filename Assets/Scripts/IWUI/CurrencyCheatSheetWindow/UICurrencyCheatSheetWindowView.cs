@@ -62,7 +62,7 @@ public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
         {
             var def = entities[i];
             
-            var entity = new UIChestsShopElementEntity
+            var entity = new UISimpleScrollElementEntity
             {
                 ContentId = def.Icon,
                 LabelText = def.Name,

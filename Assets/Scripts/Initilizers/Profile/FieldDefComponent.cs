@@ -21,7 +21,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	private string movedMines;
 	private string remowedMines;
 	
-	[JsonProperty] public string FreeChestStartTime;
+	[JsonProperty] public string ResetMarketStartTime;
 	
 	[JsonProperty]
 	public List<PieceSaveItem> Pieces
@@ -95,7 +95,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		var board = BoardService.Current.FirstBoard;
 		var cash = board.BoardLogic.PositionsCache.Cache;
 		
-		FreeChestStartTime = board.FreeChestLogic.Timer.StartTimeLong.ToString();
+		ResetMarketStartTime = board.MarketLogic.Timer.StartTimeLong.ToString();
 		
 		if(cash.Count == 0) return;
 		

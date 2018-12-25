@@ -62,7 +62,7 @@ public class SandboxGameController : MonoBehaviour
         boardController.RegisterComponent(new AreaAccessControllerComponent());
         boardController.RegisterComponent(new PathfindLockerComponent());
         boardController.RegisterComponent(new BoardRandomComponent()); // random
-        boardController.RegisterComponent(new FreeChestLogicComponent());
+        boardController.RegisterComponent(new MarketLogicComponent());
         boardController.RegisterComponent(new HintCooldownComponent()
             .RegisterComponent(new LockerComponent()));
         boardController.RegisterComponent(new PartPiecesLogicComponent());

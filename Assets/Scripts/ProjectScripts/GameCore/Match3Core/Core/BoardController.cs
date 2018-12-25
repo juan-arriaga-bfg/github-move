@@ -55,8 +55,8 @@ public partial class BoardController : ECSEntity,
     protected PathfindLockerComponent pathfindLockerComponent;
     public PathfindLockerComponent PathfindLocker => pathfindLockerComponent ?? (pathfindLockerComponent = GetComponent<PathfindLockerComponent>(PathfindLockerComponent.ComponentGuid));
     
-    protected FreeChestLogicComponent freeChestLogic;
-    public FreeChestLogicComponent FreeChestLogic => freeChestLogic ?? (freeChestLogic = GetComponent<FreeChestLogicComponent>(FreeChestLogicComponent.ComponentGuid));
+    protected MarketLogicComponent marketLogic;
+    public MarketLogicComponent MarketLogic => marketLogic ?? (marketLogic = GetComponent<MarketLogicComponent>(MarketLogicComponent.ComponentGuid));
     
     protected TutorialLogicComponent tutorialLogic;
     public TutorialLogicComponent TutorialLogic => tutorialLogic ?? (tutorialLogic = GetComponent<TutorialLogicComponent>(TutorialLogicComponent.ComponentGuid));

@@ -1,4 +1,4 @@
-﻿public class FreeChestLogicComponent : ECSEntity
+﻿public class MarketLogicComponent : ECSEntity
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
@@ -13,9 +13,9 @@
 		
 		var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
 
-		if (save != null && string.IsNullOrEmpty(save.FreeChestStartTime) == false)
+		if (save != null && string.IsNullOrEmpty(save.ResetMarketStartTime) == false)
 		{
-			Timer.Start(long.Parse(save.FreeChestStartTime));
+			Timer.Start(long.Parse(save.ResetMarketStartTime));
 			return;
 		}
 		

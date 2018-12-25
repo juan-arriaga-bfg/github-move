@@ -1,19 +1,18 @@
-﻿using UnityEngine;
+﻿using UnityEngine.UI;
 
 public class UIChestsShopElementViewController : UISimpleScrollElementViewController
 {
+	[IWUIBinding("#NameLabel")] private NSText nameLabel;
 	[IWUIBinding("#ButtonLabel")] private NSText btnLabel;
-	[IWUIBinding("#BuyButton")] private UIButtonViewController button;
 	
-	[IWUIBinding("#TimerLabel")] private NSText labelTimer;
-	[IWUIBinding("#Timer")] private GameObject timer;
+	[IWUIBinding("#BuyButton")] private UIButtonViewController btnBuy;
+	[IWUIBinding("#ButtonInfo")] private UIButtonViewController btnInfo;
+	
+	[IWUIBinding("#ButtonBack")] private Image btnBack;
 	
 	private bool isFree;
 	private bool isClick;
 	private bool isReward;
-
-	private FreeChestLogicComponent freeChestLogic;
-	private FreeChestLogicComponent FreeChestLogic => freeChestLogic ?? (freeChestLogic = BoardService.Current.FirstBoard.FreeChestLogic);
 
 	public override void Init()
 	{
@@ -24,13 +23,9 @@ public class UIChestsShopElementViewController : UISimpleScrollElementViewContro
 		isClick = false;
 		isReward = false;
 		isFree = PieceType.CH_Free.Id == contentEntity.Chest.Piece;
-		
-		if (isFree)
-		{
-			FreeChestLogic.Timer.OnExecute += UpdateLabel;
-			FreeChestLogic.Timer.OnComplete += ChengeButtons;
-		}
 
+		nameLabel.Text = contentEntity.Name;
+		
 		ChengeButtons();
 		
 		btnLabel.Text = isFree
@@ -42,9 +37,13 @@ public class UIChestsShopElementViewController : UISimpleScrollElementViewContro
 	{
 		base.OnViewShowCompleted();
 		
-		button
+		btnBuy
 			.ToState(GenericButtonState.Active)
 			.OnClick(OnClick);
+		
+		btnInfo
+			.ToState(GenericButtonState.Active)
+			.OnClick(OnClickInfo);
 	}
 
 	public override void OnViewCloseCompleted()
@@ -52,12 +51,6 @@ public class UIChestsShopElementViewController : UISimpleScrollElementViewContro
 		var contentEntity = entity as UIChestsShopElementEntity;
 		
 		if(contentEntity == null) return;
-		
-		if (isFree)
-		{
-			FreeChestLogic.Timer.OnExecute -= UpdateLabel;
-			FreeChestLogic.Timer.OnComplete -= ChengeButtons;
-		}
 		
 		if (isClick == false || isReward == false) return;
 		
@@ -71,23 +64,17 @@ public class UIChestsShopElementViewController : UISimpleScrollElementViewContro
 		if(spawn == null) return;
 
 		spawn.Reward = contentEntity.Chest.Piece;
-		
-		if(isFree) FreeChestLogic.Timer.Start();
-		
 		spawn.Make(piece.CachedPosition, piece);
 	}
-
-	private void UpdateLabel()
-	{
-		labelTimer.Text = FreeChestLogic.Timer.CompleteTime.GetTimeLeftText();
-	}
-
+	
 	private void ChengeButtons()
 	{
-		var isActive = isFree && FreeChestLogic.Timer.IsExecuteable();
-		
-		timer.SetActive(isActive);
-		button.gameObject.SetActive(!isActive);
+		btnBack.sprite = IconService.Current.GetSpriteById($"button{(isFree ? "Green" : "Blue")}");
+	}
+
+	private void OnClickInfo()
+	{
+		UIMessageWindowController.CreateNotImplementedMessage();
 	}
 
 	private void OnClick()
@@ -117,12 +104,6 @@ public class UIChestsShopElementViewController : UISimpleScrollElementViewContro
 	
 	private void OnClickFree()
 	{
-		if (FreeChestLogic.Timer.IsExecuteable())
-		{
-			UIErrorWindowController.AddError(LocalizationService.Get("message.error.notComplete", "message.error.notComplete"));
-			return;
-		}
-		
 		isReward = true;
 		context.Controller.CloseCurrentWindow();
 	}

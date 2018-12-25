@@ -1,4 +1,4 @@
 ﻿public interface IFreeChestLogicComponent
 {
-    FreeChestLogicComponent FreeChestLogic{ get; }
+    MarketLogicComponent MarketLogic{ get; }
 }

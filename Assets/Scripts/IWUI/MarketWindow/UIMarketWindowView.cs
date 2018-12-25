@@ -6,6 +6,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
 {
     [IWUIBinding("#Content")] private UIContainerViewController content;
     
+    [IWUIBinding("#TimerLabel")] private NSText timerLabel;
     [IWUIBinding("#ResetButtonLabel")] private NSText btnResetLabel;
     [IWUIBinding("#ResetButton")] private UIButtonViewController btnReset;
     
@@ -17,8 +18,6 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
-
-        btnResetLabel.Text = windowModel.ButtonReset;
         
         Fill(UpdateEntities(windowModel.Chests), content);
         
@@ -31,6 +30,9 @@ public class UIMarketWindowView : UIGenericPopupWindowView
             .SetEase(Ease.InOutBack)
             .SetId(content)
             .OnComplete(() => { content.GetScrollRect().enabled = true; });
+        
+        BoardService.Current.FirstBoard.MarketLogic.Timer.OnExecute += UpdateLabel;
+        BoardService.Current.FirstBoard.MarketLogic.Timer.OnComplete += Reset;
     }
 
     public override void OnViewShowCompleted()
@@ -44,9 +46,18 @@ public class UIMarketWindowView : UIGenericPopupWindowView
     {
         base.OnViewClose();
         
+        DOTween.Kill(content);
+        
+        BoardService.Current.FirstBoard.MarketLogic.Timer.OnExecute -= UpdateLabel;
+        BoardService.Current.FirstBoard.MarketLogic.Timer.OnComplete -= Reset;
+    }
+    
+    private void UpdateLabel()
+    {
         var windowModel = Model as UIMarketWindowModel;
         
-        DOTween.Kill(content);
+        timerLabel.Text =  BoardService.Current.FirstBoard.MarketLogic.Timer.CompleteTime.GetTimeLeftText();
+        btnResetLabel.Text = windowModel.ButtonReset;
     }
     
     private List<IUIContainerElementEntity> UpdateEntities(List<ChestDef> entities)
@@ -60,7 +71,8 @@ public class UIMarketWindowView : UIGenericPopupWindowView
             var entity = new UIChestsShopElementEntity
             {
                 ContentId = def.Uid,
-                LabelText = LocalizationService.Get($"piece.name.{def.Uid}", $"piece.name.{def.Uid}"),
+                LabelText = "x1",
+                Name = LocalizationService.Get($"piece.name.{def.Uid}", $"piece.name.{def.Uid}"),
                 Chest = def,
                 OnSelectEvent = null,
                 OnDeselectEvent = null
@@ -74,6 +86,27 @@ public class UIMarketWindowView : UIGenericPopupWindowView
 
     private void OnClickReset()
     {
+        BoardService.Current.FirstBoard.MarketLogic.Timer.FastComplete();
+    }
+
+    private void Reset()
+    {
+        BoardService.Current.FirstBoard.MarketLogic.Timer.Start();
+        content.GetScrollRect().enabled = false;
         
+        DOTween.Kill(content);
+
+        var sequence = DOTween.Sequence().SetId(content);
+
+        sequence.Append(content.CachedRectTransform.DOAnchorPosX(1200, 1f).SetEase(Ease.InBack));
+        sequence.AppendCallback(() =>
+        {
+            var windowModel = Model as UIMarketWindowModel;
+
+            Fill(UpdateEntities(windowModel.Chests), content);
+        });
+        
+        sequence.Append(content.CachedRectTransform.DOAnchorPosX(0, 1f).SetEase(Ease.OutBack));
+        sequence.AppendCallback(() => {content.GetScrollRect().enabled = true; });
     }
 }
