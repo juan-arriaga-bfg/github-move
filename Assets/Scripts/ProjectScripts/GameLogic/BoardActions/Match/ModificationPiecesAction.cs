@@ -64,15 +64,6 @@ public class ModificationPiecesAction : IBoardAction
 			gameBoardController.BoardLogic.UnlockCells(free, this);
 			
 			OnComplete?.Invoke();
-
-			var result = new List<BoardPosition>();
-
-			foreach (var piece in pieces)
-			{
-				result.Add(piece.Multicellular?.GetTopPosition ?? piece.CachedPosition);
-			}
-			
-			OnSuccess?.Invoke(result);
 		};
 		
 		var animationMatch = new MatchPieceToAnimation
@@ -87,6 +78,15 @@ public class ModificationPiecesAction : IBoardAction
 			{
 				Animation = animationSpawn
 			});
+			
+			var result = new List<BoardPosition>();
+
+			foreach (var piece in pieces)
+			{
+				result.Add(piece.Multicellular?.GetTopPosition ?? piece.CachedPosition);
+			}
+			
+			OnSuccess?.Invoke(result);
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animationMatch);

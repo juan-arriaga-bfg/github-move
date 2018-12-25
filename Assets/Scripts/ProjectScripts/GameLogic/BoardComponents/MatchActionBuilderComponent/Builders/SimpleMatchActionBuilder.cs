@@ -115,7 +115,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
                         }
                     }
 
-                    // SpawnReward(list[i], nextPieces[i]);
+                    SpawnReward(list[i], nextPieces[i]);
                 }
             }
         };
