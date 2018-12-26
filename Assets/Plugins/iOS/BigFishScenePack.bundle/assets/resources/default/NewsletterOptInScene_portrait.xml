@@ -1,0 +1,41 @@
+<scene>
+    <view size="fullscreen" layout="center" id="portrait_view">
+        <view size="{100%,100%}">
+            <view size="{100%,100%}">
+                <imageview frame="{{0,0},{100%,100%}}" id="background-image-newsletter-opt-in-portrait" />
+                
+                <!-- Dismiss button -->
+                <view frame="{{0,30},{100%,8.5%}}">
+                    <button frame="{{@-40,0},{26,25}}" image="Images/Buttons/universal-nav-close-white" />
+                    <button frame="{{@-55,-10},{55,54}}" onTap="optOutTapped" id="nav-dismiss-button" hidden="false"/>
+                </view>
+                
+                <!-- Text -->
+                <view frame="{{0,43%},{100%,33%}}">
+                    <view frame="{{5%,0},{90%,44}}"/>
+                    <view frame="{{5%,44},{90%,@-44}}">
+                        <label class="body-text" lineBreakMode="word-wrap"
+                        numberOfLines="4" frame="{{0,0},{100%,100%}}"
+                        text="BFNewsletterOptInMessage" textAlignment="center" id="body-label"/>
+                    </view>
+                </view>
+
+
+                <view frame="{{5%,75%}{91%,132}}">
+                    <!-- Yes buton -->
+                    <view frame="{{0,0},{100%,60}}">
+                        <button id="opt-in-button" size="{100%,100%}" class="newsletter-opt-in-button" onTap="optInTapped"/>
+                        <label frame="{{0,-3},{100%,100%}}" text="BFNewsletterOptInButtonText" textAlignment="center" class="newsletter-opt-in-button-text"/>
+                    </view>
+                
+                    <!-- No button -->
+                    <view frame="{{0,66},{100%,60}}">
+                        <button id="opt-out-button" size="{100%,100%}" class="newsletter-opt-out-button" onTap="optOutTapped"/>
+                        <label frame ="{{0,-3},{100%,100%}}" text="BFNewsletterOptOutButtonText" textAlignment="center" class="newsletter-opt-out-button-text"/>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</scene>
+

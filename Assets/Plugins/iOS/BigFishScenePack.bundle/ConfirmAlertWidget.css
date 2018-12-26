@@ -1,0 +1,46 @@
+
+
+#background-view
+{
+    background-color: clear;
+}
+
+#cell
+{
+    background-color: clear;
+}
+
+#tableview
+{
+    background-color: clear;
+}
+
+#label
+{
+    font-family: Arial;
+    font-size: 12px;
+    color: black;
+}
+
+#ok-button
+{
+    font-family: Arial;
+    font-size: 16px;
+    font-style: bold;
+    color: #037aff;
+}
+
+#ok-button:active
+{
+}
+
+#cancel-button
+{
+    font-family: Arial;
+    font-size: 16px;
+    color: #037aff;
+}
+
+#cancel-button:active
+{
+}

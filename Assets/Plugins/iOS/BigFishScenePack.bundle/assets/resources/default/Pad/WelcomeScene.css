@@ -1,0 +1,58 @@
+.caption-text
+{
+    font-family: "Montserrat-Medium";
+    font-size: 17px;
+    color: #696969;
+}
+
+#user-id-label
+{
+    font-family: "Montserrat-Medium";
+    font-size: 19px;
+    color: #FFFFFF;
+}
+
+#welcome-dialogue
+{
+    font-family: "Montserrat-Medium";
+    font-size: 18px;
+    color: #696969;
+}
+
+#connect-to-facebook-button
+{
+    background-image: url(Images/Buttons/portrait-button-facebook.png);
+    background-repeat: no-repeat;
+}
+
+#connect-to-facebook-done
+{
+    background-image: url(Images/Buttons/portrait-button-green-big.png);
+    background-repeat: no-repeat;
+}
+
+.primary-button
+{
+    font-family: "Montserrat-Bold";
+    font-size: 19px;
+    color: #FFFFFF;
+}
+
+#not-now-button
+{
+    background-image: url(Images/Buttons/universal-button-grey-compact.png);
+    background-repeat: no-repeat;
+}
+
+#not-now-label
+{
+    font-family: "Montserrat-SemiBold";
+    font-size: 19px;
+    color: #696969;
+}
+
+#nav-back-button
+{
+    background-image: url(Images/Buttons/portrait-button-blue-big@2x.png);
+    background-repeat: no-repeat;
+}

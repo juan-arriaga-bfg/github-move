@@ -1,0 +1,91 @@
+<scene>
+    <view layout="center" size="fullscreen">
+        <!--Parent View -->
+        <view size="{667,375}">
+            <view backgroundColor="#F9F9F5" hidden="true" id="sign-up-coppa-failure" size="{100%,100%}">
+                <view frame="{{14,14},{@-28,@-28}}" layout="center vertical">
+                    <!-- Spacer -->
+                    <view size="{100%,10%}" />
+                    
+                    <view layout="center vertical" size="{100%,80%}">
+                        <htmllabel class="caption-text" lineBreakMode="word-wrap" numberOfLines="7"
+                            size="{340,75%}" text="BFCoppaEligibilityError"
+                            textAlignment="center" id="coppa-error-label"></htmllabel>
+                        <view layout="center" size="{100%,25%}">
+                            <view size="{340,66.5}">
+                                <button onTap="closeTapped" size="{100%,100%}" id="nav-back-button" />
+                                <label class="primary-button" size="{100%,90%}" text="BFClose"
+                                textAlignment="center" />
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view hidden="false" id="sign-up-successful" size="{100%,100%}">
+                <imageview id="background-image-welcome-landscape" size="{100%,100%}"></imageview>
+                <view layout="center horizontal" size="{100%,100%}">
+                    <view layout="center vertical" size="{42%,100%}">
+                        <!-- Spacer -->
+                        <view size="{100%,35%}" />
+                        <view layout="center" size="{110,110}" id="profileContainer">
+                            <imageview image="Images/universal-avatar-default" size="{100%,100%}" id="primary-profile-picture-view"></imageview>
+                        </view>
+                        
+                        <view layout="center vertical" size="{90%,35%}">
+                            <label id="user-id-label" lineBreakMode="word-wrap" numberOfLines="2"
+                                size="{90%,50}" textAlignment="center"></label>
+                        </view>
+                    </view>
+                    
+                    <view layout="center vertical" size="{58%,100%}">
+                        <!-- Spacer -->
+                        <view size="{100%,25%}" />
+                        <label id="welcome-dialogue" lineBreakMode="word-wrap" numberOfLines="3"
+                            size="{90%,25%}" text="BFWelcomeDialogue"
+                            textAlignment="center"></label>
+                        
+                        <view size="{100%,50%}">
+                            <view frame="{{5%,5%},{90%,90%}}" layout="center vertical" hidden="false" id="connect-to-facebook-options">
+                                <!-- Spacer -->
+                                <view size="{100%,25%}" />
+                                <view layout="center" size="{100%,40%}">
+                                    <rave-connect-friends-widget id="facebook-connect-widget" pluginKeyName="Facebook">
+                                        <view size="{100%,69}">
+                                            <button id="connect-to-facebook-button"
+                                            onTap="connectToFacebook" size="{100%,100%}" />
+                                            <label id="fb-label" class="primary-button" frame="{{8%,0},{92%,90%}}"
+                                            text="BFConnectToFacebook" textAlignment="center"/>
+                                        </view>
+                                    </rave-connect-friends-widget>
+                                </view>
+                                <view size="{100%,10}" />
+                                <view layout="center" size="{100%,30%}">
+                                    <view size="{70%,48}">
+                                        <button id="not-now-button" onTap="notnowTapped"
+                                        size="{100%,100%}" />
+                                        <label id="not-now-label" frame="{{0,-3},{100%,100%}}" text="BFNotNow" textAlignment="center" />
+                                    </view>
+                                </view>
+                            </view>
+                            <view frame="{{5%,5%},{90%,90%}}" layout="center vertical" hidden="false" id="sign-up-done">
+                                <!-- Spacer -->
+                                <view size="{100%,50%}" />
+                                <view layout="center" size="{100%,50%}">
+                                    <view size="{100%,69}">
+                                        <button id="connect-to-facebook-done" onTap="doneTapped"
+                                        size="{100%,100%}" />
+                                        <label class="primary-button" frame="{{0,-3},{100%,100%}}" text="BFDone" textAlignment="center" />
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view frame="{{0,15},{100%,25}}">
+                <button frame="{{@-40,0},{26,25}}" image="Images/Buttons/universal-nav-close" />
+                <button frame="{{@-55,-12},{55,54}}" onTap="dismissTapped" id="nav-dismiss-button" />
+            </view>
+        </view>
+    </view>
+</scene>

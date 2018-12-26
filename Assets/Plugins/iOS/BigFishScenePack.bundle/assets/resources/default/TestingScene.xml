@@ -1,0 +1,29 @@
+<scene>
+    <view frame="{{0,0},{320, 100%}}" id="root-view" layout="center vertical 0">
+        <!-- Navigation Header -->
+        <view size="{100%,40}" id="header-view">
+            <label frame="{{10,0},{50%,100%}}" text="Customize Settings" id="header-text"/>
+            <button frame="{{@-41,1},{40,40}}" onTap="handleBack" backgroundImage="Images/Buttons/close_button" id="close-button"/>
+        </view>
+        
+        <tableview id="tableview" size="{100%, 92%}"
+            autoresizingMask="height width">
+            <tableviewcell text="Server URL" accessoryType="disclosure-indicator" id="RaveServerURL"/>
+            <tableviewcell text="Log Level" accessoryType="disclosure-indicator" id="RaveSettings_General_LogLevel"/>
+            <tableviewcell text="BigFish Newsletter Name" accessoryType="disclosure-indicator" id="BigFishSettings_General_NewsletterName"/>
+            <tableviewcell text="Scene Server Host" accessoryType="disclosure-indicator" id="RaveSceneServerHost"/>
+            <tableviewcell text="Facebook.ReadPermissions" accessoryType="disclosure-indicator" id="RaveSettings_Facebook_ReadPermissions"/>
+            <tableviewcell text="Toggle Merge Policy" accessoryType="disclosure-indicator" id="toggleMergePolicy"/>
+            <tableviewcell text="Manage Test Facebook Token" accessoryType="disclosure-indicator" id="fbToken"/>
+            <tableviewcell text="Expire Facebook Token" accessoryType="disclosure-indicator" id="expireFBAccessToken"/>
+            <tableviewcell text="Sanity check" accessoryType="disclosure-indicator" id="sanityCheck"/>
+            <tableviewcell text="Expire FB Access Token" id="expireFBAccessToken"/>
+            <tableviewcell text="Delete App Data" id="deleteAppData"/>
+            <tableviewcell text="Delete CAL and App Data" id="deleteCALData"/>
+            <tableviewcell text="Disable CAL" id="disableCAL"/>
+            <tableviewcell text="Disable Rave" id="disableRave"/>
+            <tableviewcell text="Restore Defaults" id="restoreDefaultSettings"/>
+            <tableviewcell text="Restart / Apply Changes" id="restartApply"/>
+        </tableview>
+    </view>
+</scene>

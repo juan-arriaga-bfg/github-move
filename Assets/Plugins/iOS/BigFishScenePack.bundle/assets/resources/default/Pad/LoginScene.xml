@@ -1,0 +1,110 @@
+<scene>
+    
+    <!-- Parent View -->
+    <view size="fullscreen" layout="center" id="hittest-listener">
+        <view size="{667,375}" layout="center vertical" backgroundColor="#F9F9F5">
+            
+            <!-- View container for Scene title, Back and Dismiss buttons -->
+            <view size="{100%,54}">
+                <label frame="{{0,16},{100%,26}}" text="BFBFGSignIN" textAlignment="center" id="header-text"/>
+                <button frame="{{20,15},{33,21}}" image="Images/Buttons/universal-nav-back"/>
+                <button frame="{{0,0},{75,100%}}" onTap="backTapped" id="universal-nav-back"/>
+                <button frame="{{@-40,15},{26,25}}" backgroundImage="Images/Buttons/universal-nav-close" />
+                <button frame="{{@-75,0},{75,100%}}" onTap="dismissTapped" id="universal-nav-close"/>
+            </view>
+
+            <!-- Scroll view -->
+            <scrollview id="scroll-content" size="{100%,100%}" layout="center vertical">
+                <view size="{100%,6}"/> <!-- Spacer -->
+                
+                <!-- View container for Enter Email and Enter Password -->
+                <view size="{100%,124}">
+                    <!-- View container for Enter Email label and Email text field -->
+                    <view frame="{{0,0},{100%,72}}">
+                        
+                        <!-- Enter Email label -->
+                        <label frame="{{0,0},{184,52}}" text="BFEnterEmail" class="subheader-text" id="login-email-label" textAlignment="right" numberOfLines="0"/>
+                        
+                        <!-- View container for email text field -->
+                        <view frame="{{184,0},{276,52}}">
+                            <imageview frame="{{10,0},{276,52}" image="Images/landscape-input-error" id="login-email-bg-error" hidden="true"/>
+                            <imageview frame="{{10,0},{276,52}}" image="Images/landscape-input-focus" id="login-email-bg-focus" hidden="true"/>
+                            <imageview frame="{{10,0},{276,52}}" image="Images/landscape-input-empty" id="login-email-bg"/>
+                            <textfield frame="{{25,14},{220,25}}" borderStyle='none' class="signup-textfield" id="login-email-field" autoresizingMask="width" keyboardType="email-address" autocapitalizationType="none"/>
+                            <button frame="{{@-25,16},{20,20}}" id="email-clear-text-button" onTap="clearText"/>
+                        </view>
+
+                    </view>
+
+                    <!-- View container for Enter Password label, Forgot button, and Password text field -->
+                    <view frame="{{0,68},{100%,62}}">
+                        <label frame="{{5,0},{179,52}}" text="BFEnterPassword" class="subheader-text" id="login-password-label" textAlignment="right" numberOfLines="0"/>
+                        
+                        <!-- View container for password text field -->
+                        <view frame="{{184,0},{276,52}}">
+                            <imageview frame="{{10,0},{276,52}" image="Images/landscape-input-error" id="login-password-bg-error" hidden="true"/>
+                            <imageview frame="{{10,0},{276,52}}" image="Images/landscape-input-focus" id="login-password-bg-focus" hidden ="true"/>
+                            <imageview frame="{{10,0},{276,52}}" image="Images/landscape-input-empty" id="login-password-bg"/>
+                            <textfield frame="{{25,14},{220,25}}" borderStyle='none' class="signup-textfield" id="login-password-field" autoresizingMask="width" autocapitalizationType="none" secureTextEntry="true"/>
+                            <button frame="{{@-25,16},{20,20}}" id="password-clear-text-button" onTap="clearText"/>
+                        </view>
+                        
+                        <htmllabel frame="{{480,0},{160,46}}" numberOfLines="0" text="BFForgot" class="small-link-text" textAlignment="left" id="forgot-password-label"/>
+                    </view>
+                
+                    <!-- View container for the invalid-email error pop-up -->
+                    <view frame="{{202,38},{260,40}}" hidden="true" id="invalid-email-error" layout="center">
+                        <imageview size="{100%,100%}" image="Images/universal-auth-errormsg-1line"></imageview>
+                        <label class="invalid-error-label" size="{95%,100%}" numberOfLines="2" text="BFEnterValidEmail"></label>
+                    </view>
+                    
+                    <!-- View container for the account-does-not-exist error pop-up -->
+                    <view frame="{{202,38},{260,60}}" hidden="true" id="account-does-not-exist-email-error" layout="center">
+                        <imageview size="{100%,100%}" image="Images/universal-auth-errormsg-2line"></imageview>
+                        <htmllabel id="account-does-not-exist-error-label" size="{95%,100%}" numberOfLines="2" text="BFNoAccountExistsError" lineBreakMode="word-wrap"></htmllabel>
+                    </view>
+                    
+                    <!-- View container for the invalid-password error pop-up -->
+                    <view frame="{{202,100},{260,40}}" hidden="true" id="invalid-password-error" layout="center">
+                        <imageview size="{100%,100%}" image="Images/universal-auth-errormsg-1line"></imageview>
+                        <label class="invalid-error-label" size="{95%,100%}" numberOfLines="2" text="BFEnterValidPassword"></label>
+                    </view>
+                </view>
+                
+                <view size="{100%,10}"/> <!-- Spacer -->
+
+                <!-- Sign In button -->
+                <button size="{280,52}" title="BFSignIn" onTap="loginWithEmail" id="signup-button" layout="center vertical"/>
+                
+                <!-- Create account button -->
+                <htmllabel size="{58%,28}" numberOfLines="2" text="BFRegisterHere" lineBreakMode="word-wrap" class="link-text" textAlignment="center" id="create-account-label" />
+                
+                <!-- View container for divider and Facebook button -->
+                <view size="{@-240,67}" layout="center vertical">
+                    
+                    <!-- View container for divider -->
+                    <view size="{100%,32}" layout="center horizontal">
+                        <imageview size="{42%,1}" image="Images/divider_line"/>
+                        <label size="{16%,20}" text="BFOr" id="divider-text" textAlignment="center"/>
+                        <imageview size="{42%,1}" image="Images/divider_line"/>
+                    </view>
+                    
+                    <!-- View container for Facebook button -->
+                    <view size="{280,52}" layout="center vertical">
+                        <sign-in-with-facebook-widget id="sign-in-with-facebook-widget">
+                            <view size="{100%,52}">
+                                <button id="facebook-button" class="portrait-button-facebook" size="{100%,100%}" onTap="signInWithFacebook"/>
+                                <label frame="{{18%,-2},{82%,100%}}" text="BFFBSignIn" textAlignment="left" class="provider-button-text"/>
+                            </view>
+                        </sign-in-with-facebook-widget>
+                    </view>
+                </view>
+            </scrollview>
+
+        </view>
+        
+        <!-- Welcome scene enable or disable. 1=Enabled 0=Disabled. If below label is missing then welcome scene is enabled by default -->
+        <label hidden="true" id="welcome_scene_enabled" text="1" />
+    </view>
+    
+</scene>

@@ -1,0 +1,23 @@
+
+#status-label
+{
+    font-family: Arial;
+    font-size: 12px;
+    font-style: bold;
+    color: #0a338f;
+    background-color: clear;
+}
+
+#cancel-button
+{
+	background-image: url(Images/Buttons/ok_button);
+	background-repeat: no-repeat;
+    font-size: 0.9em;
+    font-style: bold;
+}
+
+#cancel-button:active
+{
+	background-image: url(Images/Buttons/ok_button_pressed);
+	background-repeat: no-repeat;
+}

@@ -1,0 +1,54 @@
+<scene>
+    <view size="fullscreen">
+	<view frame="{{15,15},{@-30,@-30}}" class="find-friends-scene" autoresizingMask="width height" layout="center vertical" backgroundColor="white">
+
+    <view size="{100%,43}">
+        <imageview frame="{{0,0},{100%,100%}}" image="Images/blue_title"/>
+        <label frame="{{11,11},{@-42,22}}" text="Find Friends" textColor="white" font="Ed-Gothic 18" textAlignment="left"/>
+        <button frame="{{@-41,1},{40,40}}" onTap="dismiss" backgroundImage="Images/Buttons/close_button" id="close-button"/>
+    </view>
+
+    <view size="{@-30,@-43}" layout="center vertical 10">
+
+        <view size="{100%,30}" layout="linear vertical">
+            <label size="{100%,25}" text="Log in to find friends to play with" class="subheader-text"/>
+        </view>
+
+        <view size="{100%,36}" layout="linear horizontal">
+            <view size="{50%,100%}" id="slot1" layout="center vertical">
+                <rave-connect-friends-widget id="facebook-connect-widget" connectedMessage="Thank you for connecting to Facebook. We are searching for friends who play our games and will add them to your gaming contact list" pluginKeyName="Facebook">
+                    <view size="{240,36}">
+                        <view size="{100%,36}" id="connect-view-Facebook">
+                            <button class="facebook-white-button" size="{100%,36}" onTap="toggle"/>
+                            <label frame="{{46,0},{@-46,100%}}" text="Sign in with Facebook" textAlignment="left" class="provider-button-text"/>
+                        </view>
+                        <view size="{100%,36}" id="disconnect-view-Facebook">
+                            <button class="facebook-white-button-enabled" size="{100%,36}" onTap="toggle"/>
+                            <label frame="{{46,0},{@-46,100%}}" text="Sign out of Facebook" textAlignment="left" class="provider-button-text-enabled"/>
+                        </view>
+                    </view>
+                </rave-connect-friends-widget>
+            </view>
+
+            <view size="{50%,100%}" id="slot2" layout="center vertical">
+                
+            <rave-connect-friends-widget id="phone-book-connect-widget"
+                connectedMessage="We will add friends who play our games to your social contact list" pluginKeyName="Phonebook">
+                <view size="{240,100%}">
+                    <view size="{100%,100%}" id="connect-view-Phonebook">
+                        <button id="phone-book-connect-button" class="phone-book-connect-button" size="{100%,100%}" onTap="togglePhonebook"/>
+                        <label frame="{{46,0},{@-46,100%}}" text="Get Contacts" textAlignment="left" class="provider-button-text"/>
+                    </view>
+                    <view size="{100%,100%}" id="disconnect-view-Phonebook">
+                        <button id="phone-book-connect-button" class="phone-book-connect-button-enabled" size="{100%,100%}" onTap="togglePhonebook"/>
+                        <label frame="{{46,0},{@-46,100%}}" text="Disconnect Contacts" textAlignment="left" class="provider-button-text-enabled"/>
+                    </view>                    
+                </view>
+            </rave-connect-friends-widget>
+            </view>
+        </view>
+    </view>
+
+    </view>
+    </view>
+</scene>

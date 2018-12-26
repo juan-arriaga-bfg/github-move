@@ -1,0 +1,122 @@
+.account-scene
+{
+    background-color: #FFFFFF;
+}
+
+#header-view
+{
+    background-image: url(Images/blue_title.png);
+    background-repeat: no-repeat;
+}
+
+#header-text
+{
+    font-family: "Ed-Gothic";
+    font-style: bold;
+    color: #FFFFFF;
+    font-size: 18px;
+}
+
+#edit-button
+{
+    background-image: url(Images/Buttons/edit_button.png);
+    background-repeat: no-repeat;
+}
+
+#edit-button-text
+{
+    color: #0F3484;
+    font-size: 10px;
+}
+
+.white-button
+{
+    color: #0F3484;
+    font-size: 10px;
+    background-image: url(Images/Buttons/white_button.png);
+    background-repeat: no-repeat;
+}
+
+#close-button
+{
+    background-image: url(Images/Buttons/close_button.png);
+    background-repeat: no-repeat;
+}
+
+#subheader-view
+{
+    background-color: #495C7D;
+}
+
+#subheader-text
+{
+    color: #FFFFFF;
+    font-size: 15px;
+}
+
+#warning-text
+{
+    font-style: bold;
+    color: #FFFFFF;
+    font-size: 15px;
+}
+
+.field-header
+{
+    color: #000000;
+    font-size: 15px;
+}
+
+.field
+{
+    color: #000000;
+    font-size: 15px;
+}
+
+.provider-name
+{
+    color: #000000;
+    font-size: 17px;
+}
+
+.help-text
+{
+    color: #C8C7CC;
+    font-size: 11px;
+}
+
+.header-text
+{
+    color: #0000FF;
+    font-size: 14px;
+}
+
+#merge-button
+{
+    font-family: "Ed-Gothic";
+    color: #FFFFFF;
+    background-image: url(Images/Buttons/sign_in_button.png);
+    background-repeat: no-repeat;
+    font-size: 18px;
+}
+
+#cancel-button
+{
+    font-family: "Ed-Gothic";
+    color: #0F3484;
+    background-image: url(Images/Buttons/cancel_white_button.png);
+    background-repeat: no-repeat;
+    font-size: 18px;
+}
+
+.display-name-text
+{
+    color: #000000;
+    font-size: 14px;
+}
+
+.email-text
+{
+    color: #000000;
+    font-size: 12px;
+}

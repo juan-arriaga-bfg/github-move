@@ -1,0 +1,28 @@
+#root-view
+{
+    background-color: white;
+}
+
+.table-view-cell
+{
+    background-color: clear;
+}
+
+#header-view
+{
+    background-image: url(Images/blue_title.png);
+    background-repeat: no-repeat;
+}
+
+#header-text
+{
+    color: #FFFFFF;
+    font-style: bold;
+    font-size: 15px;
+}
+
+#close-button
+{
+    background-image: url(Images/Buttons/close_button.png);
+    background-repeat: no-repeat;
+}

@@ -1,0 +1,12 @@
+<view size="fullscreen" layout="center horizontal"> <!-- Center within modal window widget -->
+	<view size="{100%,290}" layout="center vertical">
+		<view size="{290,290}">
+			<imageview image="Images/background" size="{100%,100%}"/>
+			<view frame="{{0,70},{100%,150}}" layout="center vertical 10">
+				<spinner-view size="{42,42}" image="Images/Spinner/progress" animationDuration="5.0"/>
+				<label id="status-label" size="{100%,30}" text="" textAlignment="center"/>
+				<button id="cancel-button" size="{70,30}" title="Cancel" onTap="cancel"/>
+			</view>
+		</view>
+	</view>
+</view>

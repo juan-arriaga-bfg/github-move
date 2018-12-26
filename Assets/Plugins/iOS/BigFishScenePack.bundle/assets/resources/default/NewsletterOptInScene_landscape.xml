@@ -1,0 +1,38 @@
+<scene>
+    <view size="fullscreen" layout="center" id="hittest-listener">
+        <view size="{100%,100%}">
+            <view size="{100%,100%}">
+                <imageview frame="{{0,0},{100%,100%}}" id="background-image-newsletter-opt-in-landscape" />
+                
+                <!-- Dismiss button -->
+                <view frame="{{0,15},{100%,25}}">
+                    <button frame="{{@-60,0},{26,25}}" image="Images/Buttons/universal-nav-close" />
+                    <button frame="{{@-75,-12},{55,54}}" onTap="optOutTapped" id="nav-dismiss-button" />
+                </view>
+                
+                <!-- Text -->
+                <view frame="{{46%,23%},{50%,29%}}" layout="center vertical">
+                    <label class="body-text" lineBreakMode="word-wrap"
+                    numberOfLines="4" size="{100%,100%}"
+                    text="BFNewsletterOptInMessage" textAlignment="center" id="body-label"/>
+                </view>
+                
+                
+                <view frame="{{46%,56%}{51%,132}}">
+                    <!-- Yes buton -->
+                    <view frame="{{0,0},{100%,60}}">
+                        <button id="opt-in-button" size="{100%,100%}" class="newsletter-opt-in-button" onTap="optInTapped"/>
+                        <label frame="{{0,-3},{100%,100%}}" text="BFNewsletterOptInButtonText" textAlignment="center" class="newsletter-opt-in-button-text"/>
+                    </view>
+                    
+                    <!-- No button -->
+                    <view frame="{{0,66},{100%,60}}">
+                        <button id="opt-out-button" size="{100%,100%}" class="newsletter-opt-out-button" onTap="optOutTapped"/>
+                        <label frame ="{{0,-3},{100%,100%}}" text="BFNewsletterOptOutButtonText" textAlignment="center" class="newsletter-opt-out-button-text"/>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</scene>
+

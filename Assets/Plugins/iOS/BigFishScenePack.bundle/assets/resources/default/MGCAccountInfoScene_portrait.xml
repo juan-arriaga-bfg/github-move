@@ -1,0 +1,87 @@
+<scene>
+    <!-- Parent View -->
+    <view size="fullscreen" layout="center vertical" backgroundColor="#F9F9F5">
+        
+        <!-- View container for Dismiss buttons -->
+        <view size="{100%,9%}">
+            <button frame="{{@-46,30},{26,26}}" backgroundImage="Images/Buttons/universal-nav-close"/>
+            <button frame="{{@-65,30},{60,150%}}" onTap="dismissTapped" id="nav-dismiss-button"/>
+        </view>
+        
+        <!-- View container for Scene Title -->
+        <view size="{100%,7%}" id="subheader-view">
+            <label frame="{{10,0},{@-20,100%}}" numberOfLines="3" lineBreakMode="word-wrap" text="BFMyProfile" id="subheader-text" textAlignment="center"/>
+        </view>
+    
+        <!-- Container for subscriber and non-subscriber -->
+        <view size="{100%,60%}">
+            <!-- View container for subscriber view (unlocks and manage account) -->
+            <view size="{100%,100%}" layout="center vertical" id="subscriber_view" hidden="false">
+                <!-- spacer -->
+                <view size="{100%,15%}"/>
+                
+                <!-- View container for Email Address -->
+                <view size="{100%,11%}" layout="center">
+                    <label size="{100%,100%}" text="EMAIL ADDRESS" id="email-address-label" class="black_text" textAlignment="center" numberOfLines="1"/>
+                </view>
+                
+                <!-- spacer -->
+                <view size="{100%,8%}" />
+                
+                <view size="{85%,94}">
+                    <!-- View container for unlocks -->
+                    <view size="{100%,100%}" layout="center" >
+                        <!-- View for my big fish premium and unlock text -->
+                        <view size="{100%,53%}">
+                            <view frame="{{24%,0},{78%,100%}}" id="unlock_view" backgroundColor="black">
+                                <view frame="{{15%,0},{85%,100%}}" layout="center vertical">
+                                    <label size="{100%,55%}" id="premium_title" textAlignment="left" numberOfLines="1" text="BFMGCMyPremium"></label>
+                                    <label size="{100%,34%}" id="unlock_text" textAlignment="left" numberOfLines="1" text="BFMGCUnlockCount"></label>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <!-- Imageview for felix icon -->
+                    <imageview frame="{{0,0},{94,94}}" image="Images/felix" id="felix_icon" />
+                </view>
+                
+                <view size="{100%,2%}" />
+                
+                <!-- View container for links -->
+                <view size="{80%,22%}" layout="center vertical" >
+                    <htmllabel size="{100%,50%}" id="manage_account_link" textAlignment="center" class="links" text="BFMGCManageAccount" numberOfLines="1"></htmllabel>
+                    <htmllabel size="{100%,50%}" textAlignment="center" id="need_help_link" class="links" text="BFMGCNeedHelp" numberOfLines="1"/>
+                </view>
+            </view>
+            
+            <!-- View container for non-subscriber view (need help link) -->
+            <view size="{100%,80%}" layout="center vertical" id="nonsubscriber_view" hidden="true" >
+                <!-- spacer -->
+                <view size="{100%,50%}"/>
+                
+                <!-- View container for Email Address -->
+                <view size="{100%,14%}" layout="center">
+                    <label size="{100%,100%}" text="EMAIL ADDRESS" id="email-address-label-nonsub" class="black_text" textAlignment="center" numberOfLines="1"/>
+                </view>
+                
+                <!-- spacer -->
+                <view size="{100%,8%}" />
+                
+                <htmllabel size="{100%,20%}" textAlignment="center" id="need_help_link" class="links" text="BFMGCNeedHelp" numberOfLines="1"/>
+            </view>
+        </view>
+        
+        <!-- spacer -->
+        <view size="{100%,4%}" />
+        
+        <!-- View container for Sign out button -->
+        <view size="{100%,18%}" layout="center" >
+            <view size="{70%,48}">
+                <button size="{100%,100%}" onTap="handleSignOut" id="sign-out-button" />
+                <label frame="{{0,-2},{100%,100%}}" text="BFSignOut" id="sign-out-label" textAlignment="center" numberOfLines="1" />
+            </view>
+        </view>
+        
+    </view>
+</scene>
+

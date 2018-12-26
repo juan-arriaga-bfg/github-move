@@ -1,0 +1,70 @@
+<scene>
+    <view size="fullscreen" layout="center">
+        <view size="{667,375}">
+            <!-- Background image -->
+            <imageview frame="{{0,0},{100%,100%}}" id="background-image-home-landscape"/>
+            
+            <!-- Dismiss button -->
+            <view frame="{{0,15},{100%,25}}">
+                <button frame="{{@-40,0},{26,25}}" image="Images/Buttons/universal-nav-close" />
+                <button frame="{{@-55,-12},{55,54}}" onTap="dismissTapped" id="nav-dismiss-button" />
+            </view>
+            
+            <!-- Container for buttons -->
+            <view frame="{{42%,60},{58%,@-65}}" layout="center vertical">
+                
+                <!-- View container for FB Button -->
+                <view size="{@-9.2%,19%}" layout="center vertical" hidden="false">
+                    <sign-in-with-facebook-widget id="sign-in-with-facebook-widget">
+                        <view size="{100%,100%}">
+                            <button id="facebook-button" class="facebook-blue-button-long" frame="{{0,0},{100%,100%}}" onTap="signInWithFacebook"/>
+                            <label frame="{{20%,-3},{100%,100%}}" text="BFFBSignIn" textAlignment="left" class="provider-button-text-fb" id="fbSignLabel"/>
+                        </view>
+                    </sign-in-with-facebook-widget>
+                </view>
+                
+                <!-- Spacer -->
+                <view size="{100%,5%}" />
+                
+                <!-- View container for divider -->
+                <view size="{@-3.1%,6.2%}" layout="center horizontal">
+                    <imageview size="{40%,1}" image="Images/divider_line"/>
+                    <label size="{20%,100%}" text="BFOr" id="divider-text" textAlignment="center"/>
+                    <imageview size="{40%,1}" image="Images/divider_line"/>
+                </view>
+                
+                <!-- Spacer -->
+                <view size="{100%,5%}" />
+                
+                <!-- View container for Signup Button -->
+                <view size="{@-9.2%,19%}" layout="center">
+                    <view size="{100%,100%}">
+                        <button id="register-button" class="register-green-button-long" frame="{{0,0},{100%,100%}}"/>
+                        <label frame="{{21%,-3},{100%,100%}}" text="BFRegisterWithEmail" textAlignment="left" class="provider-button-text-bfg" id="bfgRegisterLabel"/>
+                    </view>
+                </view>
+                
+                <!-- Spacer -->
+                <view size="{100%,4.5%}" />
+                
+                <!-- View container for Login Button -->
+                <view size="{@-9.2%,17%}" layout="center">
+                    <view size="{100%,100%}">
+                        <button id="existing-account-button" class="existing-account-gray-button-long" frame="{{0,0},{100%,100%}}"/>
+                        <label frame="{{0,-3},{100%,100%}}" text="BFAlreadyHaveAccount" textAlignment="center" class="provider-button-text-green" id="bfgSignLabel"/>
+                    </view>
+                </view>
+                
+                <!-- Spacer -->
+                <view size="{100%,3%}" />
+                
+                <!-- View container for Terms and policy -->
+                <view size="{@-9.2%,23%}" layout="center">
+                    <htmllabel size="{95%,100%}" numberOfLines="6" textAlignment="center" lineBreakMode="word-wrap" text="BFTermsAndPrivacy" class="caption-text-privacy" id="privacy-statement" />
+                </view>
+            </view>
+        </view>
+        <!-- Welcome scene enable or disable. 1=Enabled 0=Disabled. If below label is missing then welcome scene is enabled by default -->
+        <label hidden="true" id="welcome_scene_enabled" text="1" />
+    </view>
+</scene>

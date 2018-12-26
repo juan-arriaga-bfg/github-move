@@ -1,0 +1,16 @@
+<welcome-back-toast-widget presentationDuration="2.0" animationDuration="1.0">
+    <!-- Empty view to disable Rave's toast -->
+    <view hidden="true" id="disabled_toast_view"></view>
+    
+    <!-- To Enable Rave's toast: Uncomment below view and comment/remove above view -->
+    
+    <!-- <view size="{260, 50}" id="enabled_toast_view">
+        <border-view borderImage="Images/whiteFrame" edgeInsets="{8,8,8,8}" frame="{{0,0},{@,@}}"/>
+        <view frame="{{6,6},{@-12,@-12}}" id="background-view" layout="center horizontal 5">
+            <imageview size="{31,31}" image="Images/logo"/>
+            <label size="{@-50,100%}" text="Welcome back, %@" id="toast-label" numberOfLines="0" textAlignment="center"
+                autoresizingMask="margin-left margin-right margin-top margin-bottom"/>
+        </view>
+    </view> -->
+    
+</welcome-back-toast-widget>

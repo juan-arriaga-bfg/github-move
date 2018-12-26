@@ -1,0 +1,36 @@
+#account-scene
+{
+    background-color: #F9F9F5;
+}
+
+#header-text
+{
+    font-family: "Montserrat-SemiBold";
+    font-size: 21px;
+    color: #4A4A4A;
+}
+
+#sub-header-text
+{
+    font-family: "Montserrat-Regular";
+    font-size: 16px;
+    color: #4A4A4A;
+}
+
+#sign-out-button
+{
+    font-family: "Montserrat-SemiBold";
+    color: #FFFFFF;
+    background-image: url(Images/Buttons/universal-button-green.png);
+    background-repeat: no-repeat;
+    font-size: 18px;
+}
+
+#dont-sign-out-button
+{
+    font-family: "Montserrat-SemiBold";
+    color: #4A4A4A;
+    background-image: url(Images/Buttons/universal-button-grey-compact.png);
+    background-repeat: no-repeat;
+    font-size: 18px;
+}

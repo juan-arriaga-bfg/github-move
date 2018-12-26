@@ -1,0 +1,145 @@
+#header-text
+{
+    font-family: "Montserrat-SemiBold";
+    font-size: 21px;
+    color: #4A4A4A;
+}
+
+.subheader-text
+{
+    font-family: "Montserrat-Medium";
+    font-size: 15px;
+    color: #696969;
+}
+
+#email-clear-text-button
+{
+    background-image: url(Images/Buttons/universal-form-clear-input.png);
+    background-repeat: no-repeat;
+}
+
+#password-clear-text-button
+{
+    background-image: url(Images/Buttons/universal-form-clear-input.png);
+    background-repeat: no-repeat;
+}
+
+.link-text
+{
+    font-family: "Montserrat-Medium";
+    font-size: 14px;
+    color: #549d00;
+}
+
+.small-link-text
+{
+    font-family: "Montserrat-Medium";
+    font-size: 14px;
+    color: #4A90E2;
+}
+
+.invalid-error-label
+{
+    font-family: "Montserrat-Medium";
+    font-size: 12.75px;
+    color: #FFFFFF;
+}
+
+#account-does-not-exist-error-label
+{
+    font-family: "Montserrat-Medium";
+    font-size: 13px;
+    color: #FFFFFF;
+}
+
+#divider-text
+{
+    font-family: "MontserratAlternates-MediumItalic";
+    font-size: 16px;
+    color: #9B9B9B;
+}
+
+.signup-textfield
+{
+    font-family: "Montserrat-Regular";
+    font-size: 16px;
+    color: #696969;
+}
+
+#signup-button
+{
+    background-image: url(Images/Buttons/portrait-button-green-big.png);
+    font-family: "Montserrat-SemiBold";
+    font-size: 18px;
+    font-style: bold;
+    color: #FFFFFF;
+    background-repeat: no-repeat;
+}
+
+.provider-button-text
+{
+    font-family: "Montserrat-SemiBold";
+    font-size: 18px;
+    font-style: bold;
+    color: #FFFFFF;
+}
+
+.facebook-white-button
+{
+    background-image: url(Images/Buttons/facebook_white_button.png);
+    background-repeat: no-repeat;
+}
+
+.facebook-white-button:active
+{
+    background-image: url(Images/Buttons/facebook_white_button.png);
+    background-repeat: no-repeat;
+}
+
+.portrait-button-facebook
+{
+    background-image: url(Images/Buttons/portrait-button-facebook.png);
+    background-repeat: no-repeat;
+}
+
+.portrait-button-facebook:active
+{
+    background-image: url(Images/Buttons/portrait-button-facebook.png);
+    background-repeat: no-repeat;
+}
+
+.google-white-button
+{
+    background-image: url(Images/Buttons/google_white_button.png);
+    background-repeat: no-repeat;
+}
+
+.google-white-button:active
+{
+    background-image: url(Images/Buttons/google_white_button.png);
+    background-repeat: no-repeat;
+}
+
+.google-white-button-long
+{
+    background-image: url(Images/Buttons/google_white_button_long.png);
+    background-repeat: no-repeat;
+}
+
+.google-white-button-long:active
+{
+    background-image: url(Images/Buttons/google_white_button_long.png);
+    background-repeat: no-repeat;
+}
+
+.checkbox-button-on
+{
+    background-image: url(Images/Buttons/checked.png);
+    background-repeat: no-repeat;
+}
+
+.checkbox-button-off
+{
+    background-image: url(Images/Buttons/unchecked.png);
+    background-repeat: no-repeat;
+}

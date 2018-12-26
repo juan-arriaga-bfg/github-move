@@ -1,0 +1,32 @@
+<scene>
+    <view size="{576,384}" layout="center horizontal">
+    <view size="{576,384}" layout="center vertical">
+
+    <view size="{348,456}" class="backdrop">
+        <imageview frame="{{0,0},{348,456}}" image="Images/popupBg"/>    
+        <scrollview frame="{{0,43},{348,413}}" id="root-view" layout="center vertical 0"> 
+            <view size="{100%,413}" id="scroll-page">
+                <label frame="{{13,8},{124,25}}" text="Display Name:" id="display-name-title-label" class="title-label"/>
+                <label frame="{{144,8},{124,25}}" text="" id="display-name" class="title-label"/>
+                <label frame="{{13,44},{124,25}}" text="Username:" id="user-name-title-label" class="title-label"/>
+                <label frame="{{144,44},{124,25}}" text="" id="user-name" class="title-label"/>
+                <label frame="{{13,80},{124,25}}" text="Real Name:" id="real-name-title-label" class="title-label"/>
+                <label frame="{{144,80},{124,25}}" text="" id="real-name" class="title-label"/>
+                <label frame="{{13,116},{124,25}}" text="Is Guest:" id="guest-title-label" class="title-label"/>
+                <label frame="{{144,116},{124,25}}" text="" id="is-guest" class="title-label"/>
+                <label frame="{{13,152},{124,25}}" text="Rave Id:" id="rave-id-label" class="title-label"/>
+                <label frame="{{13,188},{360,25}}" text="" id="rave-id" class="title-label"/>
+            </view>
+        </scrollview>
+        
+        <view frame="{{16,12},{98,36}}" layout="center horizontal">
+            <imageview size="{23,100%}" image="Images/Buttons/back_button"/>
+            <label size="{76,100%}" text="RETURN" class="header-text" autoresizingMask="width"/>
+        </view>                
+        <button onTap="handleBack" frame="{{16,12},{98,36}}"/>              
+
+    </view>
+
+    </view>
+    </view>
+</scene>

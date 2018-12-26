@@ -1,0 +1,4 @@
+<view size="{58, 58}">
+    <imageview size="{58, 58}" image="icon_profile_newplayer" id="primary-profile-picture-view"></imageview>
+    <button size="{58,58}" onTap="changePicture"/>
+</view>

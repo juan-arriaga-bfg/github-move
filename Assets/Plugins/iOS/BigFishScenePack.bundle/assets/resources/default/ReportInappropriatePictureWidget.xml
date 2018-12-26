@@ -1,0 +1,6 @@
+<report-inappropriate-picutre-widget email="support@bigfishgames.net"
+    message="Hello, I'd like to report the user @username for having an inappropriate profile picture"
+    id="report-inappropriate-picutre-widget">
+    <button size="{60,20}" onTap="report" title="Report" id="report-inappropriate-picutre-button"
+    autoresizingMask="margin-left margin-right"/>
+</report-inappropriate-picutre-widget>

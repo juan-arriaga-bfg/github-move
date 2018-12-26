@@ -1,0 +1,86 @@
+#root-view
+{
+    background-color: clear;
+}
+
+#scroll-page
+{
+    background-color: clear;
+}
+
+#rave-id-label
+{
+    font-family: Arial;
+    font-size: 14px;
+    font-style: bold;
+    color: #FF0000;
+    background-color: clear;
+}
+
+.header-text
+{
+    font-family: "Neo Sans Pro";
+    color: #4A4A4A;
+    font-size: 17px;
+}
+
+.title-label
+{
+    font-family: "Neo Sans Pro";
+    background-color: clear;
+    font-size: 14px;
+    color: #4A4A4A;
+}
+
+#user-name-label
+{
+    background-color: clear;
+    font-size: 1.5em;
+    font-style: bold;
+    color: #000000;   
+}
+
+#user-email-label
+{
+    background-color: clear;
+    font-size: 1.2em;
+    font-style: bold;
+    color: #000000;   
+}
+
+#user-email-title-label
+{
+    background-color: clear;
+    font-size: 1.2em;
+    font-style: bold;
+    color: #000000;   
+}
+
+.user-email-button
+{
+    font-size: 1.0em;
+    font-style: bold;
+    color: #000000;   
+}
+
+.connect-button
+{
+    font-size: 1.0em;
+    font-style: bold;
+    color: #FFFFFF;   
+    background-image: url(button_smallwide);
+}
+
+.add-contacts-button
+{
+    font-size: 1.0em;
+    font-style: bold;
+    color: #FFFFFF;   
+    background-repeat: no-repeat;
+    background-image: url(button_smallwide);
+}
+
+.backdrop
+{
+    background-color: clear;
+}

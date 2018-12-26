@@ -1,0 +1,62 @@
+<scene>
+    <view size="fullscreen">
+    <view frame="{{15,15},{@-30,@-30}}" layout="linear vertical" class="merge-decision-scene">
+        
+        <!-- Navigation Header -->
+        <view size="{100%,42}" id="header-view">
+            <label frame="{{10,0},{@-48,100%}}" text="Account conflict" id="header-text"/>
+        </view>
+        
+        <!-- Scrollable Contents - Height padding taken care of by layout. Width padding using frame. -->
+        <view size="{100%,@-42}">
+            <scrollview frame="{{0,0},{100%,100%}}" backgroundColor="white" id="scroll-content">
+                
+                <!-- Subheader -->
+                <view frame="{{0,0},{100%,80}}" id="subheader-view">
+                    <label frame="{{10,5},{@-20, 100%}}" numberOfLines="4" lineBreakMode="word-wrap" text="RSMergePrompt" id="subheader-text" />
+                </view>
+                
+                <!-- Current profile picture -->
+                <view frame="{{5,90},{@-15,86}}">
+                    <user-profile-picture-widget id="current-user-profile">
+                        <imageview frame="{{15,15},{44,44}}" image="Images/profile_icon" id="primary-profile-picture-view"/>
+                    </user-profile-picture-widget>
+                    <label frame="{{69,17},{@-44,20}}" text="RSCurrentUser" id="current-user-displayname" class="display-name-text" />
+                    <label frame="{{69,38},{@-44,20}}" text="RSCurrentEmail" id="current-user-email" class="email-text" />
+                </view>
+
+                <!-- Merge icon -->
+                <user-profile-picture-widget id="merge-user-profile">
+                    <imageview frame="{{@-69,166},{44,44}}" image="Images/profile_icon" id="primary-profile-picture-view"/>
+                </user-profile-picture-widget>
+                
+                <!-- Arrow -->
+                <imageview frame="{{@-156,170},{56,40}}" image="Images/merge-icon-right" />
+                
+                <!-- Other profile picture -->
+                <view frame="{{5,210},{@-15,86}}">
+                    <user-profile-picture-widget id="other-user-profile">
+                        <imageview frame="{{15,15},{44,44}}" image="Images/profile_icon" id="primary-profile-picture-view"/>
+                    </user-profile-picture-widget>
+                    <label frame="{{69,17},{@-44,20}}" text="RSOtherUser" id="other-user-displayname" class="display-name-text" />
+                    <label frame="{{69,38},{@-44,20}}" text="RSOtherEmail" id="other-user-email" class="email-text" />
+                </view>
+                
+                <!-- Merge button -->
+                <view frame="{{0,305},{100%,32}}">
+                    <view size="{100%,100%}" layout="center vertical">
+                        <button size="{235,100%}" onTap="handleMerge" title="Merge" id="merge-button"/>
+                    </view>
+                </view>
+                <!-- Cancel button -->
+                <view frame="{{0,355},{100%,32}}">
+                    <view size="{100%,100%}" layout="center vertical">
+                        <button size="{235,100%}" onTap="handleCancel" title="Cancel" id="cancel-button"/>
+                    </view>
+                </view>
+            </scrollview>
+        </view>
+        
+    </view>
+</view>
+</scene>

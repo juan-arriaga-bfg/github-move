@@ -1,0 +1,68 @@
+<!-- Parent View -->
+<view size="fullscreen" id="hittest-listener">
+    <view size="{100%,100%}" layout="center vertical" class="account-scene">
+
+        <!-- View container for Scene Title and Dismiss buttons -->
+        <view size="{100%,14%}">
+            <label frame="{{0,0},{100%,100%}" numberOfLines="3" lineBreakMode="word-wrap" text="BFMyProfile" id="subheader-text" textAlignment="center"/>
+            <button frame="{{@-60,15},{26,25}}" backgroundImage="Images/Buttons/universal-nav-close"/>
+            <button frame="{{@-75,0},{60,100%}}" onTap="dismissTapped" id="nav-dismiss-button"/>
+        </view>
+
+        <!-- Scroll view -->
+        <scrollview size="{100%,100%}" id="scroll-content" layout="center vertical">
+            <!-- View container for Profile Picture -->
+            <view size="{100%,26%}" layout="center vertical">
+                <edit-profile-picture-widget id="profile-picture-widget" autoSave="NO">
+                    <view size="{82,82}" id="profile-picture-view">
+                        <imageview frame="{{-1.5,-1.5},{103%,104%}}" image="Images/universal-avatar-default-editable" id="add-picture-image"/>
+                        <imageview size="{100%,100%}" id="primary-profile-picture-view"/>
+                        <view frame="{{0,70%},{100%,100%}}" backgroundColor="#000000" id="upload-label-background-view"/>
+                        <view frame="{{0,67%},{100%,100%}}" id="upload-label-view">
+                            <label size="{100%,21%}" text="BFUpload" id="upload-label" textAlignment="center"/>
+                        </view>
+                        <button size="{100%,100%}" onTap="changePicture" id="add-picture-button"/>
+                    </view>
+                </edit-profile-picture-widget>
+            </view>
+            
+            <!-- View container for Email Address -->
+            <view size="{100%,8%}" layout="center">
+                <label size="{90%,100%}" text="" id="email-address-label" textAlignment="center"/>
+            </view>
+            
+            <!-- View container for Display Name and Display Name text field -->
+            <view size="{100%,35%}">
+                <label frame="{{35,0},{19%,47}}" text="Display name" id="field-header" textAlignment="right" lineBreakMode="word-wrap" numberOfLines="2"/>
+                <!-- View container for Display Name text field -->
+                <view frame="{{26%,0},{48%,47}}">
+                    <imageview size="{100%,100%}" image="Images/portrait-input-error" id="display-name-bg-error" hidden ="true"/>
+                    <imageview size="{100%,100%}" image="Images/portrait-input-focus" id="display-name-bg-focus" hidden ="true"/>
+                    <imageview size="{100%,100%}" image="Images/portrait-input-empty" id="display-name-bg-empty"/>
+                    <textfield frame="{{15,15},{@-60,25}}" id="display-name-field" autoresizingMask="width" autocapitalizationType="none"/>
+                    <button frame="{{@-35,18},{20,20}}" id="display-name-clear-text-button" onTap="clearText"/>
+                </view>
+                
+                <label frame="{{26%,47},{50%,23%}}" text="How your name will appear in-game" id="help-text"/>
+                
+                <!-- View container for Save button and Sign out button -->
+                <view frame="{{0,62%},{100%,74%}}" layout="center vertical">
+                    <view size="{100%,43}" layout="center vertical"  >
+                        <button size="{48%,43}" onTap="handleSave" title="BFSaveAndClose" id="save-button"/>
+                    </view>
+                    <view size="{100%,34}" layout="center vertical">
+                        <button size="{36%,34}" onTap="handleSignOut" title="BFSignOut" id="sign-out-button"/>
+                    </view>
+                </view>
+
+                <!-- View container for Invalid Display Name Error -->
+                <view frame="{{27%,38},{260,50}}" hidden="true" id="invalid-display-name-error">
+                    <imageview frame="{{0,0},{100%,100%}}" image="Images/universal-auth-errormsg-2line"></imageview>
+                    <label class="invalid-error-label" frame="{{9,3},{90%,90%}}" numberOfLines="0" text="RSScreenNameLengthErrorStr"></label>
+                </view>
+            </view>
+        </scrollview>
+
+    </view>
+    
+</view>

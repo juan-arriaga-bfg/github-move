@@ -1,0 +1,32 @@
+<scene>
+    
+    <!-- Parent View -->
+    <view frame="{{0,0},{100%,100%}}" layout="center">
+        <view size="{667,375}" layout="center vertical" backgroundColor="#F9F9F5">
+            
+            <!-- View container for Scene Title and Dismiss buttons -->
+            <view size="{100%,17%}">
+                <label size="{100%,100%}" text="BFSignOut?" id="header-text" textAlignment="center"></label>
+                <button frame="{{@-46,15},{26,25}}" backgroundImage="Images/Buttons/universal-nav-close" onTap="dismissTapped"/>
+                <button frame="{{@-75,0},{75,100%}}" onTap="dismissTapped" id="nav-dismiss-button"/>
+            </view>
+            
+            <!-- View container for Description -->
+            <view size="{52%,40%}">
+                <label size="{100%,100%}" text="BFProgressIsSaved" id="sub-header-text" textAlignment="center" numberOfLines="4"/>
+            </view>
+            
+            <!-- View container for Sign Out and Don't Sign Out button -->
+            <view size="{60%,43%}">
+                <view frame="{{0,@-120},{100%,52}}" layout="center vertical">
+                    <button size="{100%,52}" onTap="handleSignOut" title="BFSignOut" id="sign-out-button"/>
+                </view>
+                <view frame="{{0,@-60},{100%,52}}" layout="center vertical">
+                    <button size="{100%,52}" onTap="handleDontSignOut" title="BFDontSignOut" id="dont-sign-out-button"/>
+                </view>
+            </view>
+            
+        </view>
+    </view>
+    
+</scene>

@@ -1,0 +1,11 @@
+
+<view size="fullscreen" layout="center">
+        <view size="{348,348}">
+            <imageview image="Images/background" size="{100%,100%}"/>
+            <view frame="{{0,84},{100%,180}}" layout="center vertical 10">
+                <spinner-view size="{50,50}" image="Images/Spinner/progress" animationDuration="5.0"/>
+                <label id="status-label" size="{100%,36}" text="" textAlignment="center"/>
+                <button id="cancel-button" size="{84,36}" title="Cancel" onTap="cancel"/>
+            </view>
+        </view>
+</view>

@@ -1,0 +1,228 @@
+<scene>
+    <view layout="center" size="fullscreen" id="hittest-listener">
+        <!--Parent View -->
+        <view size="{667,375}">
+            <view backgroundColor="#F9F9F5" layout="center vertical" size="{100%,100%}">
+                
+                <!-- View Holder for Scene Title, Back Navigation and Dismiss Buttons -->
+                <view size="{100%,53}">
+                    <label font="Montserrat-SemiBold 24" size="{100%,100%}" text="BFJoinBFG" textAlignment="center" textColor="#4A4A4A" id="header-text"></label>
+                    <button frame="{{20,15},{33,21}}" backgroundImage="Images/Buttons/universal-nav-back"/>
+                    <button frame="{{0,0},{75,100%}}" onTap="backTapped" id="nav-back-button"/>
+                    <button frame="{{@-40,15},{26,25}}" backgroundImage="Images/Buttons/universal-nav-close"/>
+                    <button frame="{{@-75,0},{75,100%}}" onTap="dismissTapped" id="universal-nav-close"/>
+                </view>
+                
+                <!-- View Holder for Email Entry Field -->
+                <view size="{100%,52}">
+                    <label class="sub-header-text" size="{26%,100%}" text="BFEnterEmail"
+                    textAlignment="right" numberOfLines="0"/>
+                    
+                    <view layout="center" size="{100%,52}">
+                        <!-- View container for email text field -->
+                        <view size="{295,52}">
+                            <imageview frame="{{0,0},{100%,100%}" id="email-input-error"
+                                image="Images/portrait-input-error"></imageview>
+                            <imageview frame="{{0,0},{100%,100%}" id="email-input-focused"
+                                image="Images/portrait-input-focus"></imageview>
+                            <imageview frame="{{0,0},{100%,100%}" id="email-input-inactive"
+                                image="Images/portrait-input-empty"></imageview>
+                            <textfield autocapitalizationType="none" autoresizingMask="width"
+                                borderStyle='none' class="sub-header-text"
+                                frame="{{15,13},{@-60,26}}" id="login-email-field"
+                                keyboardType="email-address"></textfield>
+                            <button frame="{{@-35,15},{22,22}}" id="clear-email-button"
+                            onTap="clearEmailText" hidden="true" class="clear-text-button"/>
+                        </view>
+                    </view>
+                </view>
+                
+                <!-- Spacer -->
+                <view size="{100%,16}" />
+                
+                <!-- View Holder for Choose Password Entry Field -->
+                <view size="{100%,52}">
+                    <label class="sub-header-text" size="{26%,100%}" text="BFChoosePassword"
+                    textAlignment="right" numberOfLines="0"/>
+                    
+                    <view layout="center" size="{100%,52}">
+                        <!-- View container for password text field -->
+                        <view size="{295,52}">
+                            <imageview frame="{{0,0},{100%,100%}" id="password-input-error"
+                                image="Images/portrait-input-error"></imageview>
+                            <imageview frame="{{0,0},{100%,100%}" id="password-input-focused"
+                                image="Images/portrait-input-focus"></imageview>
+                            <imageview frame="{{0,0},{100%,100%}" id="password-input-inactive"
+                                image="Images/portrait-input-empty"></imageview>
+                            <textfield autocapitalizationType="none" autoresizingMask="width"
+                                borderStyle='none' class="sub-header-text"
+                                frame="{{15,13},{@-60,26}}" id="login-password-field"
+                                placeholder="BFPasswordPlaceholder"
+                                secureTextEntry="true"></textfield>
+                            <button frame="{{@-35,15},{22,22}}" id="clear-password-button"
+                            onTap="clearPasswordText" hidden="true" class="clear-text-button"/>
+                        </view>
+                    </view>
+                </view>
+                
+                <!-- View Holder for COPPA & CASL layouts, Register Button and HTML Links -->
+                <view size="{100%,100%}">
+                    
+                    <!-- View Holder for Normal Appearance-->
+                    <view hidden="false" id="normal-appearance" layout="center vertical" size="{100%,54%}">
+                        
+                        <!-- Spacer -->
+                        <view size="{100%,10}"/>
+                        
+                        <view size="{300,59}">
+                            <button id="signup-button" onTap="continueSignUp" size="{100%,100%}" />
+                            <label frame="{{0,-3},{100%,100%}}" text="BFRegister" textAlignment="center" class="signup-button"/>
+                        </view>
+                        
+                        <!-- Spacer -->
+                        <view size="{100%,0}"/>
+                        
+                        <htmllabel id="signin-button" lineBreakMode="word-wrap" numberOfLines="0"
+                        size="{50%,28}" text="BFAlreadyHaveAccountSignIn"
+                        textAlignment="center"/>
+                        
+                        <!-- Spacer -->
+                        <view size="{100%,20}" />
+                        
+                        <htmllabel class="caption-text" id="privacy-statement"
+                        lineBreakMode="word-wrap" numberOfLines="2" size="{60%,37}"
+                        text="BFTermsAndPrivacy" textAlignment="center" />
+                    </view>
+                    
+                    <!-- View Holder for COPPA Compliance (US Locale Only)-->
+                    <view hidden="true" id="coppa-appearance" layout="center vertical" size="{100%,54%}">
+                        
+                        <!-- Spacer -->
+                        <view size="{100%,16}" />
+                        
+                        <view layout="horizontal" size="{100%,52}">
+                            <label class="sub-header-text" size="{26%,100%}"
+                            text="BFPickBirthYear" textAlignment="right" numberOfLines="0"/>
+                            
+                            <view layout="center" size="{100%,52}">
+                                <!-- View container for YOB field -->
+                                <view size="{295,52}">
+                                    <imageview frame="{{0,0},{100%,100%}" id="year-input-focused"
+                                        image="Images/landscape-input-focus"></imageview>
+                                    <imageview frame="{{0,0},{100%,100%}" id="year-input-inactive"
+                                        image="Images/landscape-input-empty"></imageview>
+                                    <label class="sub-header-text" frame="{{15,13},{@-60,26}}"
+                                        id="signup-birthday-label"></label>
+                                    <button frame="{{@-35,17},{22,18}}" id="drop-down-button"
+                                    onTap="selectBirthYear" />
+                                    <button frame="{{0,0},{100%,100%}}" onTap="selectBirthYear"/>
+                                </view>
+                            </view>
+                        </view>
+                        
+                        <!-- Spacer -->
+                        <view size="{100%,10}"/>
+                        
+                        <view size="{300,59}">
+                            <button id="signup-button" onTap="continueSignUp" size="{100%,100%}" />
+                            <label frame="{{0,-3},{100%,100%}}" text="BFRegister" textAlignment="center" class="signup-button"/>
+                        </view>
+                        
+                        <!-- Spacer -->
+                        <view size="{100%,0}" />
+                        
+                        <htmllabel id="signin-button" lineBreakMode="word-wrap" numberOfLines="2"
+                        size="{50%,28}" text="BFAlreadyHaveAccountSignIn"
+                        textAlignment="center" />
+                        
+                        <!-- Spacer -->
+                        <view size="{100%,0}" />
+                        
+                        <htmllabel class="caption-text" id="privacy-statement"
+                        lineBreakMode="word-wrap" numberOfLines="2" size="{60%,37}"
+                        text="BFTermsAndPrivacy" textAlignment="center"/>
+                    </view>
+                    
+                    <!-- View Holder for CASL Rules (Canada Locale Only) -->
+                    <view hidden="true" id="newsletter-appearance" layout="center vertical"
+                        size="{100%,54%}">
+                        
+                        <!-- Spacer -->
+                        <view size="{100%,16}"/>
+                        
+                        <view size="{100%,52}">
+                            <view size="{100%,100%}">
+
+                                <!-- View container for Newsletter Sign Up Dialogue -->
+                                <view layout="center" size="{100%,100%}">
+                                    <label class="sub-header-text" id="signup-newsletter-label"
+                                        lineBreakMode="word-wrap" numberOfLines="3" size="{36%,100%}"
+                                        text="RSNewsletterOffer" textAlignment="center"></label>
+                                </view>
+                                
+                                <view layout="center" frame="{{28%,0},{24,100%}}">
+                                    <imageview id="newsletter-checkbox-off"
+                                    image="Images/universal-checkbox-empty@2x.png"
+                                    size="{24, 24}" />
+                                    <imageview hidden="true" id="newsletter-checkbox-on"
+                                    image="Images/universal-checkbox-checked@2x.png"
+                                    size="{24, 24}" />
+                                </view>
+                            </view>
+                        </view>
+                        
+                        <!-- Spacer -->
+                        <view size="{100%,10}" />
+                        
+                        <view size="{300,59}">
+                            <button id="signup-button" onTap="continueSignUp" size="{100%,100%}" />
+                            <label frame="{{0,-3},{100%,100%}}" text="BFRegister" textAlignment="center" class="signup-button"/>
+                        </view>
+                        
+                        <!-- Spacer -->
+                        <view size="{100%,0}" />
+                        
+                        <htmllabel id="signin-button" lineBreakMode="word-wrap" numberOfLines="2"
+                        size="{50%,28}" text="BFAlreadyHaveAccountSignIn"
+                        textAlignment="center" />
+                        
+                        <!-- Spacer -->
+                        <view size="{100%,0}" />
+                        
+                        <htmllabel class="caption-text" id="privacy-statement"
+                        lineBreakMode="word-wrap" numberOfLines="2" size="{60%,37}"
+                        text="BFTermsAndPrivacy" textAlignment="center"/>
+                    </view>
+                </view>
+            </view>
+            
+            <!-- View container for the invalid-email error pop-up -->
+            <view layout="center" frame="{{0,22.8%},{100%,50}}" hidden="true" id="primary-email-error">
+                <view layout="center" size="{275,100%}">
+                    <imageview image="Images/universal-auth-errormsg-1line" size="{100%,100%}"></imageview>
+                    <label class="invalid-email-error-label" size="{255,90%}" numberOfLines="2" text="BFEnterValidEmail"></label>
+                </view>
+            </view>
+            
+            <!-- View container for the account-already-exist error pop-up -->
+            <view layout="center" frame="{{0,22.8%},{100%,60}}" hidden="true" id="secondary-email-error">
+                <view layout="center" size="{275,100%}">
+                    <imageview image="Images/universal-auth-errormsg-2line" size="{100%,100%}"></imageview>
+                    <htmllabel class="invalid-email-error-label" size="{255,90%}" id="account_exists-error-label" numberOfLines="2" text="BFAccountAlreadyAssociated" lineBreakMode="word-wrap"></htmllabel>
+                </view>
+            </view>
+            
+            <!-- View container for the invalid-password error pop-up -->
+            <view layout="center" frame="{{0,40%},{100%,50}}" hidden="true" id="primary-password-error">
+                <!-- View container for the invalid-password error pop-up -->
+                <view layout="center" size="{275,100%}">
+                    <imageview size="{100%,100%}" image="Images/universal-auth-errormsg-1line"></imageview>
+                    <label class="invalid-email-error-label" size="{255,90%}" numberOfLines="2" text="BFEnterValidPassword"></label>
+                </view>
+            </view>
+        </view>
+        
+        <!-- Welcome scene enable or disable. 1=Enabled 0=Disabled. If below label is missing then welcome scene is enabled by default -->
+        <label hidden="true" id="welcome_scene_enabled" text="1" />
+    </view>
+</scene>

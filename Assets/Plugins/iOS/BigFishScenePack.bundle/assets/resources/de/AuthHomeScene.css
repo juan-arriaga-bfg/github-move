@@ -1,0 +1,67 @@
+.facebook-blue-button-portrait
+{
+    background-image: url(Images/Buttons/portrait-button-facebook.png);
+    background-repeat: no-repeat;
+}
+
+.register-green-button-portrait
+{
+    background-image: url(Images/Buttons/portrait-button-register.png);
+    background-repeat: no-repeat;
+}
+
+.facebook-blue-button-landscape
+{
+    background-image: url(Images/Buttons/landscape-button-facebook.png);
+    background-repeat: no-repeat;
+}
+
+.register-green-button-landscape
+{
+    background-image: url(Images/Buttons/landscape-button-register.png);
+    background-repeat: no-repeat;
+}
+
+.existing-account-gray-button-long
+{
+    background-image: url(Images/Buttons/universal-button-grey-green.png);
+    background-repeat: no-repeat;
+}
+
+.provider-button-text-fb
+{
+    font-family: "Montserrat-SemiBold";
+    font-size: 16px;
+    font-style: bold;
+    color: #FFFFFF;
+}
+
+.provider-button-text-bfg
+{
+    font-family: "Montserrat-SemiBold";
+    font-size: 12.5px;
+    font-style: bold;
+    color: #FFFFFF;
+}
+
+.provider-button-text-green
+{
+    font-family: "Montserrat-Medium";
+    font-size: 13px;
+    font-style: bold;
+    color: #549d00;
+}
+
+.caption-text-privacy
+{
+    font-family: "Montserrat-Regular";
+    font-size: 11px;
+    color: #4a4a4a;
+}
+
+#divider-text
+{
+    font-family: "MontserratAlternates-MediumItalic";
+    font-size: 16px;
+    color: #999999;
+}

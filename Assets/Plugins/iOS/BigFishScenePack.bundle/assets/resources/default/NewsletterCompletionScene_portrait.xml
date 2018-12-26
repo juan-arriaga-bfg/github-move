@@ -1,0 +1,49 @@
+<scene>
+    <view size="fullscreen" layout="center">
+        <view size="{100%,310}" id="success-screen" hidden="true">
+            <view size="{100%,100%}" layout="center">
+                <view size="{290,268}">
+                    <imageview frame="{{0,0},{100%,100%}}" id="background-image-newsletter-complete"/>
+                    <!-- Message container -->
+                    <view frame="{{0,49%},{100%,47%}}" layout="center">
+                        <view size="{@-20,100%}" layout="center vertical">
+                            <label size="{100%,50%}" text="BFNewsletterSubscribed" textAlignment="center" class="newsletter-subscribed-label"
+                                lineBreakMode="word-wrap" numberOfLines="3"></label>
+                            <!-- spacer -->
+                            <view size="{100%,3}"></view>
+                            <view size="{97%,40%}">
+                                <button size="{100%,55}" class="done-button" onTap="doneTapped"></button>
+                                <label frame="{{0,-3},{100%,55}}" text="BFDone" textAlignment="center" class="done-label"
+                                    lineBreakMode="word-wrap" numberOfLines="1"></label>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- Dismiss button -->
+            <button frame="{{@-38,4},{40,40}}" onTap="dismissTapped" id="dismiss-button" image="Images/Buttons/universal-nav-close-newsletter" hidden="false"/>
+        </view>
+        <view size="{100%,280}" id="coppa-error-screen" hidden="true">
+            <view size="{100%,100%}" layout="center">
+                <view size="{290,240}" id="coppa-error-view" backgroundColor="#FFFFFF">
+                    <!-- Message container -->
+                    <view size="{100%,100%}" layout="center">
+                        <view size="{@-15,90%}" layout="center vertical">
+                            <htmllabel size="{100%,70%}" text="BFCoppaEligibilityError" textAlignment="center" class="newsletter-coppa-error-label"
+                                lineBreakMode="word-wrap" numberOfLines="7"></htmllabel>
+                            <!-- spacer -->
+                            <view size="{100%,8}"></view>
+                            <view size="{100%,30%}">
+                                <button size="{100%,55}" class="done-button" onTap="closeTapped"></button>
+                                <label frame="{{0,-3},{100%,55}}" text="BFClose" textAlignment="center" class="done-label"
+                                    lineBreakMode="word-wrap" numberOfLines="1"></label>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- Dismiss button -->
+            <button frame="{{@-38,4},{40,40}}" onTap="dismissTapped" id="dismiss-button" image="Images/Buttons/universal-nav-close-newsletter" hidden="false"/>
+        </view>
+    </view>
+</scene>
