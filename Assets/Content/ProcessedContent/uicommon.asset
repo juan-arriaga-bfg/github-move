@@ -256,7 +256,9 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 45a67a70ff6a03c4ab8794b99682d8ac, type: 3}
     - {fileID: 21300000, guid: d88c51d99c1b28d4091573621c235a3a, type: 3}
     - {fileID: 21300000, guid: 4dbe30d396e6e354b8eb80842bbfc1dc, type: 3}
-    totalSpriteSurfaceArea: 2841489
+    - {fileID: 21300000, guid: b0b2832aba06de84c87d89ae0d3fee3e, type: 3}
+    - {fileID: 21300000, guid: b0b2832aba06de84c87d89ae0d3fee3e, type: 3}
+    totalSpriteSurfaceArea: 2843697
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -412,6 +414,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d88c51d99c1b28d4091573621c235a3a, type: 3}
   - {fileID: 21300000, guid: 93870ed9911c23f4381d90a5487af17c, type: 3}
   - {fileID: 21300000, guid: 6032e11ae1c1da84aa0e07d5e0ec550b, type: 3}
+  - {fileID: 21300000, guid: b0b2832aba06de84c87d89ae0d3fee3e, type: 3}
   - {fileID: 21300000, guid: 6054b32a3dbbf0c4385083bfb7d21703, type: 3}
   - {fileID: 21300000, guid: b168c73aa71678041975ec0fca5ad256, type: 3}
   - {fileID: 21300000, guid: f928484ad9deae047a008e35f19f9b3b, type: 3}
@@ -639,6 +642,7 @@ SpriteAtlas:
   - scroll_gradient_up_codex
   - icon_castle_round_items
   - icon_Warning
+  - pointLightProgressLine
   - attack_back_arrow
   - icon_Codex
   - red_button_push
