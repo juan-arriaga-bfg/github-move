@@ -56,10 +56,13 @@ android {
 	buildTypes {
 		debug {
 			jniDebuggable true
+			minifyEnabled false
+			manifestPlaceholders = ["bfglibEnviron":"test"]
 		}
 		release {
 			minifyEnabled false
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-unity.txt'
+			manifestPlaceholders = ["bfglibEnviron":"prod"]
 			**SIGNCONFIG**
 		}
 	}

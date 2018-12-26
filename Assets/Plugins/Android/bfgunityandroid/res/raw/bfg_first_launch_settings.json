@@ -1,0 +1,28 @@
+{
+  "bfg_override_app_name": "Merge Tales",
+  "bfg_toast_enabled": true,
+  "dashboard_timeout": "2",
+  "dashboard_active": 0,
+  "dashboard_show_after_this_many_runs": 1,
+  "review_url": "market://details?id=com.bigfishgames.mergetalesgoog",
+  "ratings_prompt": "0",
+  "iap_default_product_id": "com.bigfishgames.bfgsdkgoogle.seunlock",
+  "app_store": "google",
+  "message_env": "prod",
+  "game_service_identifier": "mergetalesgoog",
+  "zendesk_url": "https://bigfishgames.zendesk.com",
+  "zendesk_app_identifier": "",
+  "cornerCrossSell" : {
+    "isEnabled" : true,
+    "useSampleButton" : false
+  },
+  "rave": {
+    "RaveSettings.General.ApplicationID": "53b61f609fa0460298d3d1a31e4db0ae",
+    "RaveSettings.Facebook.ApplicationId": "1036986499814716",
+    "BigFishSettings.Android.GoogleLoginEnabled": false,
+    "RaveSettings.Android.SkipPermissionChecks": true,
+  },
+  "gdpr": {
+    "useSamplePolicies": false
+  }
+}

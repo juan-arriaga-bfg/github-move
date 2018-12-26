@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bigfishgames.mergetalesgoog"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="19" 
+		android:targetSdkVersion="26"/>
+
+	<application>
+		<permission android:name="com.bigfishgames.mergetalesgoog.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
+		<uses-permission android:name="com.bigfishgames.mergetalesgoog.permission.C2D_MESSAGE"/>
+	
+        <meta-data android:name="com.bigfishgames.BFGEnviron" android:value="${bfglibEnviron}"/>
+	</application>
+
+		
+</manifest>
