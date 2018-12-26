@@ -38,13 +38,14 @@ android {
 	dexOptions {
 	    javaMaxHeapSize "4g"
 	}
-	compileSdkVersion 26
-	buildToolsVersion '26.0.2'
+	compileSdkVersion **APIVERSION**
+
+	buildToolsVersion '**BUILDTOOLS**'
 
 	defaultConfig {
 		applicationId '**APPLICATIONID**'
 		multiDexEnabled true
-		targetSdkVersion 26
+		targetSdkVersion **TARGETSDKVERSION**
 	}
 
 	lintOptions {
