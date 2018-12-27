@@ -30,19 +30,28 @@ dependencies {
 	compile 'com.google.android.gms:play-services-auth-base:11.6.2'
 	compile 'com.google.android.gms:play-services-identity:11.6.2'
 	compile 'com.google.android.gms:play-services-plus:11.6.2'
-	**DEPS**
+	compile(name: 'bfgLib-release', ext:'aar')
+    compile(name: 'RaveFacebookPlugin', ext:'aar')
+    compile(name: 'RaveGplusPlugin', ext:'aar')
+    compile(name: 'RaveSocial', ext:'aar')
+    compile(name: 'RaveUtils', ext:'aar')
+    compile(name: 'UnityAds', ext:'aar')
+    compile(name: 'XMLScene', ext:'aar')
+    compile project(':bfgunityandroid')
 }
 
 android {
 	dexOptions {
 	    javaMaxHeapSize "4g"
 	}
-	compileSdkVersion **APIVERSION**
+	compileSdkVersion 26
+	buildToolsVersion '26.0.2'
 
 	defaultConfig {
 		applicationId '**APPLICATIONID**'
 		multiDexEnabled true
-		targetSdkVersion **TARGETSDKVERSION**
+		targetSdkVersion 16
+		minSdkVersion 19
 	}
 
 	lintOptions {
