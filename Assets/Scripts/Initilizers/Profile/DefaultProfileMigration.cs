@@ -4,7 +4,7 @@
     {
         if (profile.SystemVersion < clientVersion)
         {
-            UnityEngine.Debug.Log(string.Format("[Profile]: migrate {0} => {1}", profile.SystemVersion, clientVersion));
+            //UnityEngine.Debug.Log(string.Format("[Profile]: migrate {0} => {1}", profile.SystemVersion, clientVersion));
             
             profile.SystemVersion++;
             Migrate(clientVersion, profile);
