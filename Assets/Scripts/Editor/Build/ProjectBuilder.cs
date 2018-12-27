@@ -28,6 +28,14 @@ public class ProjectBuilder
         Release
     }
     
+    public enum BuildPlatform
+    {
+        Unknown,
+        Android,
+        Amazon,
+        Ios
+    }
+    
     private static ProjectBuilder actionsContext;
 
     private static List<IProjectBuildAction> buildActions = new List<IProjectBuildAction>();
@@ -35,7 +43,7 @@ public class ProjectBuilder
 
     public BuildPurpose CurrentBuildPurpose { get; private set; } = BuildPurpose.Unknown;
     public BuildType CurrentBuildType { get; private set; } = BuildType.Unknown;
-    public BuildTarget CurrentBuildTarget { get; private set; } = BuildTarget.NoTarget;
+    public BuildPlatform CurrentBuildPlatform { get; private set; } = BuildPlatform.Unknown;
     
     public static ProjectBuilder Create()
     {
@@ -80,18 +88,19 @@ public class ProjectBuilder
         return this;
     }
  
-    public ProjectBuilder SetBuildTargetPlatform(BuildTarget target)
+    public ProjectBuilder SetBuildTargetPlatform(BuildPlatform platform)
     {
-        CurrentBuildTarget = target;
+        CurrentBuildPlatform = platform;
         return this;
     }
 
     private static void ExecuteActions(List<IProjectBuildAction> actions)
     {
-        foreach (var action in actions)
+        for (var i = 0; i < actions.Count; i++)
         {
+            var action = actions[i];
             Debug.Log($"[ProjectBuilder] => EXECUTE ACTION '{action.GetType()}'...");
-            
+
             try
             {
                 action.Execute(actionsContext);
@@ -103,8 +112,8 @@ public class ProjectBuilder
                 Cleanup();
                 throw;
             }
-            
-            Debug.Log($"[ProjectBuilder] => action '{action.GetType()}' executed");
+
+            //Debug.Log($"[ProjectBuilder] => action '{action.GetType()}' executed");
         }
     }
 
@@ -119,7 +128,7 @@ public class ProjectBuilder
             throw new Exception("[ProjectBuilder] => Execute: BuildPurpose is not specified");
         }
         
-        if (CurrentBuildTarget == BuildTarget.NoTarget)
+        if (CurrentBuildPlatform == BuildPlatform.Unknown)
         {
             throw new Exception("[ProjectBuilder] => Execute: BuildTarget is not specified");
         }
@@ -150,7 +159,7 @@ public class ProjectBuilder
     }
     
     [PostProcessBuild(10000)]
-    public static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
+    public static void OnPostprocessBuild(UnityEditor.BuildTarget target, string pathToBuiltProject)
     {
         Debug.Log($"[ProjectBuilder] => OnPostprocessBuild");
         

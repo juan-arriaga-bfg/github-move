@@ -32,12 +32,14 @@ public class BuildActionGradleExport : IProjectBuildAction
 
         var scenes = EditorBuildSettings.scenes.ToList();
         string[] scenePaths = scenes.Select(e => e.path).ToArray();
+
+        var buildTarget = context.CurrentBuildPlatform == ProjectBuilder.BuildPlatform.Amazon || context.CurrentBuildPlatform == ProjectBuilder.BuildPlatform.Android ? BuildTarget.Android : BuildTarget.iOS;
         
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions
         {
             locationPathName = path,
             scenes = scenePaths,
-            target = context.CurrentBuildTarget,
+            target = buildTarget,
             targetGroup = BuildTargetGroup.Android,
             options = buildOptions
         };
