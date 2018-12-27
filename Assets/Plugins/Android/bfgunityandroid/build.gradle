@@ -63,6 +63,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.1.0'
 }
 
-apply plugin: 'io.fabric'
+// todo: ENABLE PLUGINS! //keht
+// apply plugin: 'io.fabric'
 
-apply plugin: 'com.google.gms.google-services'
+// apply plugin: 'com.google.gms.google-services'
