@@ -8,7 +8,7 @@
   "ratings_prompt": "0",
   "iap_default_product_id": "com.bigfishgames.bfgsdkgoogle.seunlock",
   "app_store": "google",
-  "message_env": "prod",
+  "purchaseDebugMode": true,
   "game_service_identifier": "mergetalesgoog",
   "zendesk_url": "https://bigfishgames.zendesk.com",
   "zendesk_app_identifier": "",
@@ -21,6 +21,9 @@
     "RaveSettings.Facebook.ApplicationId": "1036986499814716",
     "BigFishSettings.Android.GoogleLoginEnabled": false,
     "RaveSettings.Android.SkipPermissionChecks": true,
+        "RaveSettings.General.ServerURL": "https://client.rave-api.com",
+        "RaveSettings.Facebook.ReadPermissions": "public_profile,email,user_friends",
+        "RaveSettings.General.AutoGuestLogin": true
   },
   "gdpr": {
     "useSamplePolicies": false
