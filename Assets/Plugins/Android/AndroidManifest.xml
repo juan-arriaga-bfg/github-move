@@ -1,19 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bigfishgames.mergetalesgoog"
-    android:versionCode="1"
-    android:versionName="1.0" >
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.bigfishgames.mergetalesgoog" 
+          android:versionName="1.0" 
+          android:versionCode="1"
+          android:installLocation="preferExternal">
 
-    <uses-sdk
-        android:minSdkVersion="19" 
-		android:targetSdkVersion="26"/>
+<supports-screens android:smallScreens="true" android:normalScreens="true" android:largeScreens="true"
+                  android:xlargeScreens="true" android:anyDensity="true"/>
 
-	<application>
-		<permission android:name="com.bigfishgames.mergetalesgoog.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
-		<uses-permission android:name="com.bigfishgames.mergetalesgoog.permission.C2D_MESSAGE"/>
-	
-        <meta-data android:name="com.bigfishgames.BFGEnviron" android:value="${bfglibEnviron}"/>
-	</application>
+<uses-feature android:glEsVersion="0x00020000"/>
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+<uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+<uses-feature android:name="android.hardware.touchscreen.multitouch" android:required="false"/>
+<uses-feature android:name="android.hardware.touchscreen.multitouch.distinct" android:required="false"/>
 
-		
+<!--  Rave Social and other SDK Permissions-->
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+<!-- Sticky Broadcast permission Required for Rave v3.6.1 -->
+<uses-permission android:name="android.permission.BROADCAST_STICKY"/>
+
+<uses-feature android:name="android.hardware.camera" android:required="false"/>
+
+<permission android:name="com.bigfishgames.mergetalesgoog.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
+<uses-permission android:name="com.bigfishgames.mergetalesgoog.permission.C2D_MESSAGE"/>
+
+<application android:theme="@android:style/Theme.NoTitleBar.Fullscreen" tools:replace="theme"
+             android:icon="@drawable/app_icon" android:label="@string/app_name" android:isGame="true"
+             android:banner="@drawable/app_banner">
+    
+    <activity android:name="com.bigfishgames.bfgunityandroid.BFGUnityPlayerNativeActivity"
+              android:label="@string/app_name" android:screenOrientation="fullSensor" android:launchMode="singleTask"
+              android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale|layoutDirection|density"
+              android:hardwareAccelerated="false">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
+            <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+        </intent-filter>
+        <meta-data android:name="unityplayer.UnityActivity" android:value="true"/>
+        <meta-data android:name="unityplayer.ForwardNativeEventsToDalvik" android:value="false"/>
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.DEFAULT"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+            <data android:scheme="https" android:host="xh9-x.tlnk.io"/>
+        </intent-filter>
+    </activity>
+    
+    <!--    Rave Social manifest details-->
+    <service android:name="co.ravesocial.sdk.service.RaveSkinUnzippingService"/>
+    <activity android:name="co.ravesocial.sdk.RaveUniversalActivity" android:configChanges="orientation|screenSize"
+              android:screenOrientation="user" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+    </activity>
+    
+    <activity android:name="com.facebook.FacebookActivity" tools:replace="android:theme"
+              android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+              android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/app_name"/>
+    
+    <meta-data android:name="com.bigfishgames.BFGEnviron" android:value="${bfglibEnviron}"/>
+    
+    <meta-data android:name="unity.splash-mode" android:value="0"/>
+    <meta-data android:name="unity.splash-enable" android:value="True"/>
+</application>
+
 </manifest>
