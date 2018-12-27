@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 
 public static class ProjectBuilderAndroid
@@ -17,9 +19,11 @@ public static class ProjectBuilderAndroid
                       .AddBuildAction(new BuildActionIncrementVersion())
                       .AddBuildAction(new BuildActionBuildAssetBundles())
                       .AddBuildAction(new BuildActionDisableScenes())
-                       
+
                       .AddBuildAction(buildPlayerAction)
-                       
+
+                      .AddPostBuildAction(new BuildActionFixExportedGradleProjectHierarhy())
+                      .AddPostBuildAction(new BuildActionInstallGradleWrapper())
                       .AddPostBuildAction(new BuildActionReset())
                        
                       .Execute(); 
@@ -47,3 +51,5 @@ public static class ProjectBuilderAndroid
         Run(buildPlayerAction, BuildTarget.Android, ProjectBuilder.BuildPurpose.Prod, ProjectBuilder.BuildType.Release);
     }
 }
+
+#endif

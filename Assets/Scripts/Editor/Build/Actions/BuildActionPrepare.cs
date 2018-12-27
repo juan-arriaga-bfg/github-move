@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using IWEditor;
 
 public class BuildActionPrepare : IProjectBuildAction
@@ -7,3 +9,5 @@ public class BuildActionPrepare : IProjectBuildAction
         IWAssetBundleManagerEditorUtils.RenameBundlePathesWithResources(IWAssetBundleManagerEditorUtils.MaskFolderName, IWAssetBundleManagerEditorUtils.TargetMaskFolderName);
     }
 }
+
+#endif

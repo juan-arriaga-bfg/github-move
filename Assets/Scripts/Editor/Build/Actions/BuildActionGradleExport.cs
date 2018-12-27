@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using System.IO;
 using System.Linq;
 using UnityEditor;
@@ -23,6 +25,7 @@ public class BuildActionGradleExport : IProjectBuildAction
         if (context.CurrentBuildType == ProjectBuilder.BuildType.Development)
         {
             buildOptions = buildOptions | BuildOptions.Development;
+            buildOptions = buildOptions | BuildOptions.AllowDebugging;
         }
 
         buildOptions = buildOptions | BuildOptions.AcceptExternalModificationsToPlayer;
@@ -42,3 +45,5 @@ public class BuildActionGradleExport : IProjectBuildAction
         BuildPipeline.BuildPlayer (buildPlayerOptions);
     }
 }
+
+#endif

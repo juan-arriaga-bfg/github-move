@@ -110,6 +110,10 @@ public class ProjectBuilder
 
     public ProjectBuilder Execute()
     {
+        ClearConsole();
+        
+        Debug.Log($"[ProjectBuilder] => Start!");
+        
         if (CurrentBuildPurpose == BuildPurpose.Unknown)
         {
             throw new Exception("[ProjectBuilder] => Execute: BuildPurpose is not specified");
@@ -129,11 +133,28 @@ public class ProjectBuilder
         return this;
     }
 
+    private static void ClearConsole()
+    {
+        try
+        {
+            var logEntries = System.Type.GetType("UnityEditor.LogEntries, UnityEditor.dll");
+ 
+            var clearMethod = logEntries.GetMethod("Clear", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
+ 
+            clearMethod.Invoke(null, null);
+        }
+        catch (Exception e)
+        {
+            //
+        }
+    }
+    
     [PostProcessBuild(10000)]
     public static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
     {
+        Debug.Log($"[ProjectBuilder] => OnPostprocessBuild");
+        
         ExecuteActions(postBuildActions);
-        Cleanup();
     }
 }
 

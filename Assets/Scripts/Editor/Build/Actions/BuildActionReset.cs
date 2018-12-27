@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using IWEditor;
 
 public class BuildActionReset : IProjectBuildAction
@@ -8,3 +10,5 @@ public class BuildActionReset : IProjectBuildAction
         new BuildActionEnableScenes().Execute(null);
     }
 }
+
+#endif

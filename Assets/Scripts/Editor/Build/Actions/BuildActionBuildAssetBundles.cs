@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using IWEditor;
 
 public class BuildActionBuildAssetBundles : IProjectBuildAction
@@ -7,3 +9,5 @@ public class BuildActionBuildAssetBundles : IProjectBuildAction
         IWAssetBundleManagerEditorUtils.GenerateCurrentBundlesToStreaming();
     }
 }
+
+#endif

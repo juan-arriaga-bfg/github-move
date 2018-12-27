@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 
 public class BuildActionIncrementVersion : IProjectBuildAction
@@ -10,3 +12,5 @@ public class BuildActionIncrementVersion : IProjectBuildAction
         AssetDatabase.SaveAssets();
     }
 }
+
+#endif

@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 
 public class BuildActionDisableScenes : IProjectBuildAction
@@ -12,3 +14,5 @@ public class BuildActionDisableScenes : IProjectBuildAction
         EditorBuildSettings.scenes = scenes;
     }
 }
+
+#endif

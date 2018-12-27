@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -28,3 +30,5 @@ public class BuildActionCreateApk : IProjectBuildAction
         BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, path + "/" + buildName, EditorUserBuildSettings.activeBuildTarget, options);
     }
 }
+
+#endif

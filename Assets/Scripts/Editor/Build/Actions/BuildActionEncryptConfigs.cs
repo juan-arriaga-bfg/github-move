@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 public class BuildActionEncryptConfigs : IProjectBuildAction
 {
     public void Execute(ProjectBuilder context)
@@ -5,3 +7,5 @@ public class BuildActionEncryptConfigs : IProjectBuildAction
         NSConfigEncription.EncryptConfigs();
     }
 }
+
+#endif
