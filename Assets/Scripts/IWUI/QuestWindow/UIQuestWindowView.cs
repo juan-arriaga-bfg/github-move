@@ -31,7 +31,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
 
         UpdateUi();
 
-        targetIcon.sprite = GetIcon();
+        targetIcon.sprite = UiQuestButton.GetIcon(firstTask);
 
         if (!ShowChain(model))
         {
@@ -179,10 +179,5 @@ public class UIQuestWindowView : UIGenericPopupWindowView
     private string GetButtonText()
     {
         return LocalizationService.Get("common.button.find", "common.button.find");
-    }
-
-    private Sprite GetIcon()
-    {
-        return UiQuestButton.GetIcon(firstTask);
     }
 }
