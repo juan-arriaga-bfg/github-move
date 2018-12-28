@@ -49,11 +49,14 @@ public class UINextLevelWindowView : UIGenericWindowView
         base.AnimateShow();
         InitTapToContinue(1f);
     }
-
+    
     public override void OnViewShowCompleted()
     {
         base.OnViewShowCompleted();
+        
         isClick = false;
+        
+        if(btnBackLayer != null) btnBackLayer.ToState(GenericButtonState.Active).OnClick(OnClick);
     }
 
     public override void OnViewClose()
@@ -136,7 +139,7 @@ public class UINextLevelWindowView : UIGenericWindowView
             .InsertCallback(0.6f + 0.1f*recipes.Count, () => isClick = false);
     }
     
-    public void OnClick()
+    private void OnClick()
     {
         if(isClick) return;
 
