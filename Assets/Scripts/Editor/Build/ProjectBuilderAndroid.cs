@@ -4,7 +4,7 @@ using UnityEditor;
 
 public static class ProjectBuilderAndroid
 {
-    public static void Run(IProjectBuildAction buildPlayerAction, 
+    private static void LocalBuild(IProjectBuildAction buildPlayerAction, 
                            ProjectBuilder.BuildPlatform platform,
                            ProjectBuilder.BuildPurpose purpose,
                            ProjectBuilder.BuildType buildType)
@@ -26,8 +26,15 @@ public static class ProjectBuilderAndroid
                       .AddPostBuildAction(new BuildActionFixExportedGradleProjectHierarhy())
                       .AddPostBuildAction(new BuildActionCopyBfgSettingsJson())
                       .AddPostBuildAction(new BuildActionCopyGoogleServicesJson())
+                      
+                       // GDPR DEBUG// Uncomment to show sample gdpr policy
+                      .AddPostBuildAction(new BuildActionCopySampleGdprPolicyJson())
+                      .AddPostBuildAction(new BuildActionReplaceBfgLibWithDebugVersion())
+                       // END GDPR DEBUG
+                       
                       .AddPostBuildAction(new BuildActionInstallGradleWrapper())
                       .AddPostBuildAction(new BuildActionReset())
+                       
                       .AddPostBuildAction(new BuildActionPrintToConsole().SetMessage("BUILD COMPLETE!"))
                        
                       .Execute(); 
@@ -37,14 +44,14 @@ public static class ProjectBuilderAndroid
     public static void RunExportGradleQa()
     {
         var buildPlayerAction = new BuildActionGradleExport();
-        Run(buildPlayerAction, ProjectBuilder.BuildPlatform.Android, ProjectBuilder.BuildPurpose.Qa, ProjectBuilder.BuildType.Development);
+        LocalBuild(buildPlayerAction, ProjectBuilder.BuildPlatform.Android, ProjectBuilder.BuildPurpose.Qa, ProjectBuilder.BuildType.Development);
     }
     
     [MenuItem("Build/Android/Stage")]
     public static void RunExportGradleStage()
     {
         var buildPlayerAction = new BuildActionGradleExport();
-        Run(buildPlayerAction, ProjectBuilder.BuildPlatform.Android, ProjectBuilder.BuildPurpose.Stage, ProjectBuilder.BuildType.Release);
+        LocalBuild(buildPlayerAction, ProjectBuilder.BuildPlatform.Android, ProjectBuilder.BuildPurpose.Stage, ProjectBuilder.BuildType.Release);
     }
     
         
@@ -52,7 +59,7 @@ public static class ProjectBuilderAndroid
     public static void RunExportGradleProd()
     {
         var buildPlayerAction = new BuildActionGradleExport();
-        Run(buildPlayerAction, ProjectBuilder.BuildPlatform.Android, ProjectBuilder.BuildPurpose.Prod, ProjectBuilder.BuildType.Release);
+        LocalBuild(buildPlayerAction, ProjectBuilder.BuildPlatform.Android, ProjectBuilder.BuildPurpose.Prod, ProjectBuilder.BuildType.Release);
     }
 }
 
