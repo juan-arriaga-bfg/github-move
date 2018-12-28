@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIOrderSelectElementViewController : UISimpleScrollElementViewController
 {
-    [IWUIBinding("#ResultIcon")] private Image iconResult;
+    [IWUIBinding("#ResultAnchor")] private Transform resultAnchor;
     [IWUIBinding("#Hero")] private Transform iconHero;
     [IWUIBinding("#TutorAnchor")] private Transform tutorAnchor;
     
@@ -22,6 +22,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
     
     [IWUIBinding("#Content")] private UIContainerViewController content;
     
+    private Transform result;
     private Order order;
     private CustomerComponent customer;
     private bool isComplete;
@@ -34,8 +35,8 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         
         order = contentEntity.Data;
         isComplete = false;
-        
-        iconResult.sprite = IconService.Current.GetSpriteById(order.Def.Uid);
+
+        CreateResultIcon(resultAnchor, order.Def.Uid);
         
         var board = BoardService.Current.FirstBoard;
         var position = board.BoardLogic.PositionsCache.GetRandomPositions(order.Customer, 1)[0];
@@ -62,6 +63,17 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         CreateIcon(iconHero, PieceType.Parse(piece.PieceType));
         
         base.Init();
+    }
+    
+    private void CreateResultIcon(Transform parent, string id)
+    {
+        if (result != null)
+        {
+            UIService.Get.PoolContainer.Return(result.gameObject);
+        }
+        
+        result = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
+        result.SetParentAndReset(parent);
     }
     
     private void Fill(List<CurrencyPair> entities)
