@@ -77,6 +77,11 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         AudioListener audioListener = new GameObject("AudioListener").AddComponent<AudioListener>();
         DontDestroyOnLoad(audioListener);
 
+        // init bfg stuff
+        BfgSdkManager bfgSdkManager = new BfgSdkManager();
+        BfgSdkService.Instance.SetManager(bfgSdkManager);
+        bfgSdkManager.Init();
+        
         // load local base profile
         ProfileService.Instance.Manager.LoadBaseProfile((baseProfile) =>
         {
