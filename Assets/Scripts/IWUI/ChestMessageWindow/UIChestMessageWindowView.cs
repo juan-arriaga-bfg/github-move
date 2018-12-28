@@ -7,9 +7,11 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
     [IWUIBinding("#Delimiter")] private NSText delimiter;
     [IWUIBinding("#OpenButtonLabel")] private NSText btnOpenLabel;
     
-    [IWUIBinding("#Chest")] private Image chest;
+    [IWUIBinding("#ChestAnchor")] private Transform chestAnchor;
     [IWUIBinding("#Content")] private UIContainerViewController content;
     [IWUIBinding("#OpenButton")] private UIButtonViewController btnOpen;
+    
+    private Transform chest;
     
     private bool isOpen;
     
@@ -26,14 +28,24 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
         
         btnOpenLabel.Text = windowModel.ButtonText;
         delimiter.Text = windowModel.DelimiterText;
-        
-        chest.sprite = IconService.Current.GetSpriteById(windowModel.ChestComponent.Def.Uid);
-        
+
+        CreateIcon(chestAnchor, windowModel.ChestComponent.Def.Uid);
         Fill(UpdateEntities(windowModel.Icons()), content);
         
         var scrollRect = content.GetScrollRect();
         
         if (scrollRect != null) scrollRect.horizontalNormalizedPosition = 0f;
+    }
+    
+    private void CreateIcon(Transform parent, string id)
+    {
+        if (chest != null)
+        {
+            UIService.Get.PoolContainer.Return(chest.gameObject);
+        }
+        
+        chest = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
+        chest.SetParentAndReset(parent);
     }
 
     public override void OnViewShowCompleted()
