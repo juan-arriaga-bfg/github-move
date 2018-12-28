@@ -3339,10 +3339,10 @@
     "TextIconScale": 1.0,
     "Uid": "icon_Timer",
     "SpriteName": "icon_Timer",
-    "BundleName": null,
+    "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
-    "SpriteSheetName": "icon_Timer",
-    "SpriteSheetPath": "Assets/Content/SourceContent/UI/Icons"
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
   },
   {
     "IsUseCustomTextAssetSettings": true,
@@ -3354,8 +3354,8 @@
     "TextIconScale": 1.15,
     "Uid": "pointLightProgressLine",
     "SpriteName": "pointLightProgressLine",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/SourceContent/UI/TextIcons",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/SourceContent/UI/Icons",
     "SpriteSheetName": "uicommon",
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   }
