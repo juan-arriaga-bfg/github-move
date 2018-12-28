@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6523570535778009722}
-  - component: {fileID: 6865804335639088680}
+  - component: {fileID: 6556270611160596799}
   m_Layer: 0
   m_Name: DestroyWorkerAnimation
   m_TagString: Untagged
@@ -63,7 +63,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6865804335639088680
+--- !u!114 &6556270611160596799
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4242762501701015124}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 129119cafcec45409c1bbee816bbe26e, type: 3}
+  m_Script: {fileID: 11500000, guid: c5ba9c1362284c6a9c3bf8574db30784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lastBoardPosition:
@@ -82,10 +82,12 @@ MonoBehaviour:
   cachedSortingGroup: {fileID: 0}
   IsFading: 0
   FadeValue: 0
-  lifeTime: 3
-  to: 0
-  duration: 0.7
-  timeoutDuration: 0.75
+  lifeTime: 2
+  toFade: 0
+  toScale: {x: 0, y: 0, z: 0}
+  scaleDuration: 0.4
+  fadeDuration: 0.4
+  timeoutDuration: 0.45
   easeType: 1
 --- !u!1 &8800876066844322362
 GameObject:
