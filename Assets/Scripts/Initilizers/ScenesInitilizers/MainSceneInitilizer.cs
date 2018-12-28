@@ -42,7 +42,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         // on cache complete
         IWUIManager.Instance.OnUIInited += () =>
         {
-            ShowGameScene(onComplete);
+            StartCoroutine(ShowGameScene(onComplete));
         };
     }
     
