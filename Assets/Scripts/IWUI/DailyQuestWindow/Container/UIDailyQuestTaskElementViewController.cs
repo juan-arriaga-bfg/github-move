@@ -204,8 +204,8 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
             {
                 // No free space
                 UIMessageWindowController.CreateMessage(
-                    LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"),
-                    LocalizationService.Get("common.title.error",      "common.title.error"));
+                    LocalizationService.Get("window.daily.error.title", "window.daily.error.title"),
+                    LocalizationService.Get("window.daily.error.free.space", "window.daily.error.free.space"));
                 
                 return;
             }

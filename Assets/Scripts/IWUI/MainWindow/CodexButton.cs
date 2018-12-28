@@ -7,9 +7,12 @@ public class CodexButton : MonoBehaviour
 {
     [SerializeField] private GameObject shine;
     [SerializeField] private GameObject exclamationMark;
-
+    [SerializeField] private NSText label;
+    
     public void UpdateState()
     {
+        label.Text = LocalizationService.Get("window.main.collection", "window.main.collection");
+        
         ToggleShine(false);
         ToggleExclamationMark(false);
         
