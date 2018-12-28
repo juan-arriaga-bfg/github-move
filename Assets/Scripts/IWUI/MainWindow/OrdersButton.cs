@@ -6,11 +6,13 @@ public class OrdersButton : UIFakePanelViewController
 	[SerializeField] private Image markIcon;
 	[SerializeField] private GameObject shine;
 	[SerializeField] private GameObject exclamationMark;
+	[SerializeField] private NSText label;
 
 	public override void OnViewShow(IWUIWindowView context)
 	{
 		base.OnViewShow(context);
-
+		
+		label.Text = LocalizationService.Get("window.main.orders", "window.main.orders");
 		UpdateState();
 	}
 
