@@ -80,7 +80,10 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         // init bfg stuff
         BfgSdkManager bfgSdkManager = new BfgSdkManager();
         BfgSdkService.Instance.SetManager(bfgSdkManager);
-        bfgSdkManager.Init();
+        bfgSdkManager
+           .RegisterComponent(new BfgSdkUnityMessageHandlerInitComponent())
+           .RegisterComponent(new BfgSdkGdprInitComponent())
+           .RegisterComponent(new BfgSdkBrandingInitComponent());
         
         // load local base profile
         ProfileService.Instance.Manager.LoadBaseProfile((baseProfile) =>

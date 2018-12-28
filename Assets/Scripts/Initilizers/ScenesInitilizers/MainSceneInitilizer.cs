@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,24 +42,37 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         // on cache complete
         IWUIManager.Instance.OnUIInited += () =>
         {
-            // close launcher
-            UIService.Get.CloseWindow(UIWindowType.LauncherWindow);
-            
-            //show resource panel 
-            UIService.Get.ShowWindow(UIWindowType.ResourcePanelWindow);
-            
-            // get model for window
-            UIService.Get.ShowWindow(UIWindowType.MainWindow);
-
-            onComplete?.Invoke();
-            
-            ProfileService.Current.QueueComponent.Run();
-            BoardService.Current.FirstBoard.TutorialLogic.Run();
-            
-            NSAudioService.Current.Play(SoundId.Ambient1Music, true)
-              .SetVolume(0f)
-              .SetVolume(1f, 2f);
+            ShowGameScene(onComplete);
         };
+    }
+    
+    
+
+    private IEnumerator ShowGameScene(Action onComplete)
+    {
+        var bfgSdkService = BfgSdkService.Current;
+        while (!bfgSdkService.IsAllComponentsInited())
+        {
+             yield return new WaitForSeconds(0.2f);
+        }
+        
+        // close launcher
+        UIService.Get.CloseWindow(UIWindowType.LauncherWindow);
+
+        //show resource panel 
+        UIService.Get.ShowWindow(UIWindowType.ResourcePanelWindow);
+
+        // get model for window
+        UIService.Get.ShowWindow(UIWindowType.MainWindow);
+
+        onComplete?.Invoke();
+
+        ProfileService.Current.QueueComponent.Run();
+        BoardService.Current.FirstBoard.TutorialLogic.Run();
+
+        NSAudioService.Current.Play(SoundId.Ambient1Music, true)
+                      .SetVolume(0f)
+                      .SetVolume(1f, 2f);
     }
 
     private void InitGameField()
