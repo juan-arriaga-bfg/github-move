@@ -1,0 +1,33 @@
+[
+  {
+    "id": "5cbac95c-7c53-42ed-8701-802449a93e40",
+    "title": "Terms of Service",
+    "policyText": "Some text 1",
+    "instructionText": "Scroll to bottom and accept.",
+    "acceptButtonText": "Accept",
+    "declineButtonText": "Decline",
+    "controls": ["THIRDPARTYTARGETEDADVERTISING"],
+    "optInText": ["I Accept One", "I Accept Two"],
+    "config": {
+      "placementEvent": "startup",
+      "userGroup": "new",
+      "ageVerification": false,
+      "optional": true
+    }
+  },
+  {
+    "id": "470556f8-34ff-4e2f-8e77-49931e0247a8",
+    "title": "Terms of Service 2",
+    "policyText": "Some text 2",
+    "instructionText": "Scroll to bottom and accept.",
+    "acceptButtonText": "Accept",
+    "optInText": ["I Accept"],
+    "controls": [],
+    "config": {
+      "placementEvent": "startup",
+      "userGroup": "new",
+      "ageVerification": false,
+      "optional": false
+    }
+  }
+]
