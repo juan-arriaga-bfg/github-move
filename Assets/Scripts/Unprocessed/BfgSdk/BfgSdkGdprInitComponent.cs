@@ -8,6 +8,11 @@ public class BfgSdkGdprInitComponent : ThirdPartyInitComponent
 
     public override void OnRegisterEntity(ECSEntity entity)
     {
+#if UNITY_EDITOR
+        isCompleted = true;
+        return;
+#endif
+        
         bfgManager.addPolicyListener(
             willShowPolicies: (policiesToShow) =>
             {

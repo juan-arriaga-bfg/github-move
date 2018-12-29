@@ -81,9 +81,9 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         BfgSdkManager bfgSdkManager = new BfgSdkManager();
         BfgSdkService.Instance.SetManager(bfgSdkManager);
         bfgSdkManager
-           .RegisterComponent(new BfgSdkUnityMessageHandlerInitComponent(), true)
-           .RegisterComponent(new BfgSdkGdprInitComponent(), true)
-           .RegisterComponent(new BfgSdkBrandingInitComponent(), true);
+            .RegisterComponent(new BfgSdkUnityMessageHandlerInitComponent(), true)
+            .RegisterComponent(new BfgSdkGdprInitComponent(), true);
+           //.RegisterComponent(new BfgSdkBrandingInitComponent(), true);
         
         // load local base profile
         ProfileService.Instance.Manager.LoadBaseProfile((baseProfile) =>

@@ -11,6 +11,11 @@
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
+#if UNITY_EDITOR
+        isCompleted = true;
+        return;
+#endif
+        
         NotificationCenter.Instance.AddObserver (OnBrandingCompleteNotification, bfgCommon.BFGBRANDING_NOTIFICATION_COMPLETED);
         bfgManager.startBranding();
     }
