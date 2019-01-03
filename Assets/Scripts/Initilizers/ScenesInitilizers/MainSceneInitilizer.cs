@@ -5,19 +5,8 @@ using UnityEngine;
 
 public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer>
 {
-    protected override void InitScene(ApplicationInitializer applicationInitializer, Action onComplete)
-    {
-        base.InitScene(applicationInitializer, onComplete);
-
-        Application.targetFrameRate = 60;
-
-        // set resource deliverer for UI
-        IWUISettings.Instance.SetResourceManager(new DefaultUIResourceManager());
-        
-        InitGameField();
-
-        // cache windows
-        IWUIManager.Instance.Init(new[]
+    public static string[] WindowNames =>
+        new[]
         {
             UIWindowType.MainWindow,
             UIWindowType.MessageWindow,
@@ -37,7 +26,21 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.SoftShopWindow,
             UIWindowType.HardShopWindow,
             UIWindowType.MarketWindow,
-        });
+        };
+    
+    protected override void InitScene(ApplicationInitializer applicationInitializer, Action onComplete)
+    {
+        base.InitScene(applicationInitializer, onComplete);
+
+        Application.targetFrameRate = 60;
+
+        // set resource deliverer for UI
+        IWUISettings.Instance.SetResourceManager(new DefaultUIResourceManager());
+        
+        InitGameField();
+
+        // cache windows
+        IWUIManager.Instance.Init(WindowNames);
         
         // on cache complete
         IWUIManager.Instance.OnUIInited += () =>
@@ -45,13 +48,11 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             StartCoroutine(ShowGameScene(onComplete));
         };
     }
-    
-    
 
     private IEnumerator ShowGameScene(Action onComplete)
     {
-        var bfgSdkService = BfgSdkService.Current;
-        while (!bfgSdkService.IsAllComponentsInited())
+        var asyncInit = AsyncInitService.Current;
+        while (!asyncInit.IsAllComponentsInited())
         {
              yield return new WaitForSeconds(0.2f);
         }

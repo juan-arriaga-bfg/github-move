@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BfgSdkGdprInitComponent : ThirdPartyInitComponent
+public class BfgSdkGdprInitComponent : AsyncInitComponent
 {
     private bool isCompleted;
     

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BfgSdkUnityMessageHandlerInitComponent : ThirdPartyInitComponent
+public class BfgSdkUnityMessageHandlerInitComponent : AsyncInitComponent
 {
     public override bool IsCompleted => true;
 

@@ -76,14 +76,6 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         audioManager.LoadData(new ResourceConfigDataMapper<List<NSAudioData>>("iw/audio.data", false));
         AudioListener audioListener = new GameObject("AudioListener").AddComponent<AudioListener>();
         DontDestroyOnLoad(audioListener);
-
-        // init bfg stuff
-        BfgSdkManager bfgSdkManager = new BfgSdkManager();
-        BfgSdkService.Instance.SetManager(bfgSdkManager);
-        bfgSdkManager
-            .RegisterComponent(new BfgSdkUnityMessageHandlerInitComponent(), true)
-            .RegisterComponent(new BfgSdkGdprInitComponent(), true);
-           //.RegisterComponent(new BfgSdkBrandingInitComponent(), true);
         
         // load local base profile
         ProfileService.Instance.Manager.LoadBaseProfile((baseProfile) =>

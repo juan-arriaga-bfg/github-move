@@ -1,4 +1,4 @@
-﻿public class BfgSdkBrandingInitComponent : ThirdPartyInitComponent
+﻿public class BfgSdkBrandingInitComponent : AsyncInitComponent
 {
     private bool isCompleted;
     
