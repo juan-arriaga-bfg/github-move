@@ -71,4 +71,13 @@ public static class EnumExtentions
         }
         return sb.ToString();
     }
+
+    /// <summary>
+    /// Use to iterate over values (e.g. foreach)
+    /// </summary>
+    public static Array AsArray(this System.Enum type)
+    {
+        Array ret = Enum.GetValues(type.GetType());
+        return ret;
+    }
 }
