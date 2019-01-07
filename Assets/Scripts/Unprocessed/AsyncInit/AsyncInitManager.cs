@@ -7,14 +7,14 @@ using Debug = UnityEngine.Debug;
 public class AsyncInitManager :  IAsyncInitManager
 {
 #if DEBUG
-    private readonly Dictionary<AsyncInitItemBase, Stopwatch> stopwatches = new Dictionary<AsyncInitItemBase, Stopwatch>();
+    private readonly Dictionary<AsyncInitComponentBase, Stopwatch> stopwatches = new Dictionary<AsyncInitComponentBase, Stopwatch>();
 #endif
     
-    private readonly List<AsyncInitItemBase> components = new List<AsyncInitItemBase>();
-    private readonly List<AsyncInitItemBase> componentsInProgress = new List<AsyncInitItemBase>();
-    private readonly List<AsyncInitItemBase> initedComponents = new List<AsyncInitItemBase>();
+    private readonly List<AsyncInitComponentBase> components = new List<AsyncInitComponentBase>();
+    private readonly List<AsyncInitComponentBase> componentsInProgress = new List<AsyncInitComponentBase>();
+    private readonly List<AsyncInitComponentBase> initedComponents = new List<AsyncInitComponentBase>();
 
-    public AsyncInitManager AddItem(AsyncInitItemBase component)
+    public AsyncInitManager AddItem(AsyncInitComponentBase component)
     {
         components.Add(component);
         return this;
@@ -32,7 +32,7 @@ public class AsyncInitManager :  IAsyncInitManager
             return;
         }
 
-        List<AsyncInitItemBase> componentsToExecute = new List<AsyncInitItemBase>();
+        List<AsyncInitComponentBase> componentsToExecute = new List<AsyncInitComponentBase>();
         
         foreach (var cmp in components)
         {
@@ -73,7 +73,7 @@ public class AsyncInitManager :  IAsyncInitManager
         }
     }
 
-    private bool IsDependenciesExecuted(AsyncInitItemBase cmp)
+    private bool IsDependenciesExecuted(AsyncInitComponentBase cmp)
     {
         foreach (var dependency in cmp.Dependencies)
         {
@@ -86,7 +86,7 @@ public class AsyncInitManager :  IAsyncInitManager
         return true;
     }
 
-    private void OnComponentComplete(AsyncInitItemBase cmp)
+    private void OnComponentComplete(AsyncInitComponentBase cmp)
     {
 #if DEBUG
         var sw = stopwatches[cmp];
@@ -109,7 +109,7 @@ public class AsyncInitManager :  IAsyncInitManager
     {
         float total = 0;
         float progress = 0;
-        foreach (AsyncInitItemBase item in components)
+        foreach (AsyncInitComponentBase item in components)
         {
             total += item.WeightForProgressbar;
             progress += (item.Progress * item.WeightForProgressbar);

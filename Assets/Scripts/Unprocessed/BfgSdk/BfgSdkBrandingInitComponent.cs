@@ -1,4 +1,4 @@
-﻿public class BfgSdkBrandingInitComponent : AsyncInitItemBase
+﻿public class BfgSdkBrandingInitComponent : AsyncInitComponentBase
 {
     private void OnBrandingCompleteNotification (string notification)
     {

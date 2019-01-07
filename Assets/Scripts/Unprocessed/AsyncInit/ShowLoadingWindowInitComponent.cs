@@ -1,4 +1,4 @@
-public class ShowLoadingWindowInitComponent : AsyncInitItemBase
+public class ShowLoadingWindowInitComponent : AsyncInitComponentBase
 {
     public override void Execute()
     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using IW.Content.ContentModule;
 using UnityEditor;
@@ -11,6 +12,8 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
     public override void Init(Action onComplete)
     {
         Application.targetFrameRate = 60;
+
+        DOTween.SetTweensCapacity(200, 125);
 
         StartCoroutine(InitCoroutine(onComplete));
     }
@@ -24,15 +27,23 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         AsyncInitService.Instance.SetManager(asyncInitManager);
         asyncInitManager
            .AddItem(new BfgSdkUnityMessageHandlerInitComponent())
+           .AddItem(new SecuredTimeServiceInitComponent())
            .AddItem(new BfgSdkGdprInitComponent())
            .AddItem(new ConfigsAndManagersInitComponent())
            .AddItem(new UIInitProgressListenerComponent())
             
-           .AddItem(new LocalBundlesInitComponent().SetDependency(typeof(ConfigsAndManagersInitComponent)))
+           .AddItem(new LocalBundlesInitComponent()
+               .SetDependency(typeof(ConfigsAndManagersInitComponent)))
             
-           .AddItem(new ShowLoadingWindowInitComponent().SetDependency(typeof(LocalBundlesInitComponent)))
+           .AddItem(new ShowLoadingWindowInitComponent()
+               .SetDependency(typeof(LocalBundlesInitComponent)))
 
-           .AddItem(new MainSceneLoaderComponent().SetDependency(typeof(LocalBundlesInitComponent)))
+           .AddItem(new MainSceneLoaderComponent()
+               .SetDependencies(new List<Type>
+                    {
+                        typeof(LocalBundlesInitComponent), 
+                        typeof(SecuredTimeServiceInitComponent)
+                    }))
             
            .Run();
             

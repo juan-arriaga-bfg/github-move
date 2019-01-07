@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BfgSdkGdprInitComponent : AsyncInitItemBase
+public class BfgSdkGdprInitComponent : AsyncInitComponentBase
 {
     public override void Execute()
     {

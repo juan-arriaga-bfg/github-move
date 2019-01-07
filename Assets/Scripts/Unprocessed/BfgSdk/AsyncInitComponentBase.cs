@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public abstract class AsyncInitItemBase
+public abstract class AsyncInitComponentBase
 {
     public List<Type> Dependencies { get; private set; } = new List<Type>();
 
@@ -13,21 +13,21 @@ public abstract class AsyncInitItemBase
 
     public virtual bool IsCompleted => isCompleted;
     
-    public Action<AsyncInitItemBase> OnComplete { get; set; }
+    public Action<AsyncInitComponentBase> OnComplete { get; set; }
 
-    public AsyncInitItemBase SetDependencies(List<Type> dependencies)
+    public AsyncInitComponentBase SetDependencies(List<Type> dependencies)
     {
         Dependencies.AddRange(dependencies);
         return this;
     }
     
-    public AsyncInitItemBase SetDependency(Type dependency)
+    public AsyncInitComponentBase SetDependency(Type dependency)
     {
         Dependencies.Add(dependency);
         return this;
     }
     
-    public AsyncInitItemBase SetWeightForProgressbar(int weightForProgressbar)
+    public AsyncInitComponentBase SetWeightForProgressbar(int weightForProgressbar)
     {
         WeightForProgressbar = weightForProgressbar;
         return this;

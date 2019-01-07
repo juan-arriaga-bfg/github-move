@@ -32,8 +32,6 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
     {
         base.InitScene(applicationInitializer, onComplete);
 
-        Application.targetFrameRate = 60;
-
         // set resource deliverer for UI
         IWUISettings.Instance.SetResourceManager(new DefaultUIResourceManager());
         

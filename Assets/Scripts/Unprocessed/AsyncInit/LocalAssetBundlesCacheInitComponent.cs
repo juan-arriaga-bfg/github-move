@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
-public class LocalAssetBundlesCacheInitComponent : AsyncInitItemBase
+public class LocalAssetBundlesCacheInitComponent : AsyncInitComponentBase
 {
     public override void Execute()
     {

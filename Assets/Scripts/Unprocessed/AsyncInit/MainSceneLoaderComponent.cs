@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
-public class MainSceneLoaderComponent : AsyncInitItemBase
+public class MainSceneLoaderComponent : AsyncInitComponentBase
 {
     private AsyncOperation loadingOperation;
 

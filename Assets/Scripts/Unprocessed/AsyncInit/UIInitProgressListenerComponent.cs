@@ -3,7 +3,7 @@ using DG.Tweening;
 /// <summary>
 /// Just listener, no actual init logic here
 /// </summary>
-public class UIInitProgressListenerComponent : AsyncInitItemBase
+public class UIInitProgressListenerComponent : AsyncInitComponentBase
 {
     private IWUIManager uiManager;
 

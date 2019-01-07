@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using IW.Content.ContentModule;
 using UnityEngine;
 
-public class ConfigsAndManagersInitComponent : AsyncInitItemBase
+public class ConfigsAndManagersInitComponent : AsyncInitComponentBase
 {
     public override void Execute()
     {

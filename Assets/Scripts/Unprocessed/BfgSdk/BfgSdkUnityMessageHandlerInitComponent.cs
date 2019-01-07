@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class BfgSdkUnityMessageHandlerInitComponent : AsyncInitItemBase
+public class BfgSdkUnityMessageHandlerInitComponent : AsyncInitComponentBase
 {
     public override void Execute()
     {
