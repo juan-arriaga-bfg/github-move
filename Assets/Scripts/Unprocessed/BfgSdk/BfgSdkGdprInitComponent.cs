@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
 
-public class BfgSdkGdprInitComponent : AsyncInitComponent
+public class BfgSdkGdprInitComponent : AsyncInitItemBase
 {
-    private bool isCompleted;
-    
-    public override bool IsCompleted => isCompleted;
-
-    public override void OnRegisterEntity(ECSEntity entity)
+    public override void Execute()
     {
 #if UNITY_EDITOR
         isCompleted = true;
+        OnComplete(this);
         return;
 #endif
         
@@ -35,6 +32,8 @@ public class BfgSdkGdprInitComponent : AsyncInitComponent
                 // GameAnalyticsToggler.UpdateState();
 
                 isCompleted = true;
+                OnComplete(this);
+                return;
             });
     }
 }

@@ -1,18 +1,16 @@
-﻿public class BfgSdkBrandingInitComponent : AsyncInitComponent
+﻿public class BfgSdkBrandingInitComponent : AsyncInitItemBase
 {
-    private bool isCompleted;
-    
-    public override bool IsCompleted => isCompleted;
-
     private void OnBrandingCompleteNotification (string notification)
     {
         isCompleted = true;
+        OnComplete(this);
     }
     
-    public override void OnRegisterEntity(ECSEntity entity)
+    public override void Execute()
     {
 #if UNITY_EDITOR
         isCompleted = true;
+        OnComplete(this);
         return;
 #endif
         

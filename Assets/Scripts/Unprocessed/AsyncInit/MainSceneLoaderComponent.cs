@@ -4,11 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
-public class MainSceneLoaderComponent : AsyncInitComponent
+public class MainSceneLoaderComponent : AsyncInitItemBase
 {
     private AsyncOperation loadingOperation;
-    
-    public override bool IsCompleted => loadingOperation != null && loadingOperation.isDone;
 
     public override float Progress
     {
@@ -28,14 +26,19 @@ public class MainSceneLoaderComponent : AsyncInitComponent
         }
     }
 
-    public override void OnRegisterEntity(ECSEntity entity)
+    public override void Execute()
     {
         // Proxy GO to run coroutine from non-monobehaviour
         var go = new GameObject();
         var mb = go.AddComponent<IWBaseMonoBehaviour>();
         Object.DontDestroyOnLoad(go);
         
-        mb. StartCoroutine(LoadSceneCoroutine(() => Object.Destroy(go)));
+        mb. StartCoroutine(LoadSceneCoroutine(() =>
+        {
+            Object.Destroy(go);
+            isCompleted = true;
+            OnComplete(this);
+        }));
     }
     
     IEnumerator LoadSceneCoroutine(Action onComplete)
