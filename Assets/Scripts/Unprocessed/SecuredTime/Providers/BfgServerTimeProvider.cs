@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using BestHTTP;
+using DG.Tweening;
 using SimpleJSON;
 using UnityEngine;
 
@@ -19,6 +20,12 @@ public class BfgServerTimeProvider : IServerTimeProvider
     public void GetServerTime(Action<bool, long> onComplete)
     {
         Debug.Log($"[BfgServerTimeProvider] => GetServerTime...");
+
+        // Uncomment to debug FAIL case
+        // DOTween.Sequence()
+        //        .AppendInterval(2)
+        //        .AppendCallback(() => { onComplete(false, 0); });
+        // return;
         
         HTTPRequest r = new HTTPRequest(new Uri(Url), (request, response) =>
         {

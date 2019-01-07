@@ -39,6 +39,8 @@ public class UIWindowType
     public const string HardShopWindow = "HardShopWindow";
     
     public const string MarketWindow = "MarketWindow";
+    
+    public const string TimeSyncWindow = "TimeSyncWindow";
 
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {

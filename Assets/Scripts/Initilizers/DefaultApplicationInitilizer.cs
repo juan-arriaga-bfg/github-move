@@ -26,24 +26,21 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         AsyncInitManager asyncInitManager = new AsyncInitManager();
         AsyncInitService.Instance.SetManager(asyncInitManager);
         asyncInitManager
-           .AddItem(new BfgSdkUnityMessageHandlerInitComponent())
-           .AddItem(new SecuredTimeServiceInitComponent())
-           .AddItem(new BfgSdkGdprInitComponent())
-           .AddItem(new ConfigsAndManagersInitComponent())
-           .AddItem(new UIInitProgressListenerComponent())
+           .AddComponent(new BfgSdkUnityMessageHandlerInitComponent())
+           .AddComponent(new SecuredTimeServiceInitComponent())
+           .AddComponent(new BfgSdkGdprInitComponent())
+           .AddComponent(new ConfigsAndManagersInitComponent())
+           .AddComponent(new UIInitProgressListenerComponent())
             
-           .AddItem(new LocalBundlesInitComponent()
+           .AddComponent(new LocalBundlesInitComponent()
                .SetDependency(typeof(ConfigsAndManagersInitComponent)))
             
-           .AddItem(new ShowLoadingWindowInitComponent()
+           .AddComponent(new ShowLoadingWindowInitComponent()
                .SetDependency(typeof(LocalBundlesInitComponent)))
 
-           .AddItem(new MainSceneLoaderComponent()
-               .SetDependencies(new List<Type>
-                    {
-                        typeof(LocalBundlesInitComponent), 
-                        typeof(SecuredTimeServiceInitComponent)
-                    }))
+           .AddComponent(new MainSceneLoaderComponent()
+               .SetDependency(typeof(LocalBundlesInitComponent))
+               .SetDependency(typeof(SecuredTimeServiceInitComponent)))
             
            .Run();
             

@@ -9,6 +9,8 @@ public class UILauncherWindowView : IWUIWindowView
     private bool isGameLoaded;
     
     private AsyncInitManager asyncInitManager;
+
+    private float progressBarStartValue = -1;
     
     public override void OnViewShow()
     {
@@ -32,22 +34,38 @@ public class UILauncherWindowView : IWUIWindowView
         {
             return;
         }
-        
-        if (asyncInitManager == null)
+
+        float progress = GetCurrentProgress();
+
+        progress = Mathf.Clamp(progress, 0f, 1f);
+
+        if (progressBarStartValue < 0)
         {
-            return;
+            progressBarStartValue = progress;
         }
-
-        var progress = asyncInitManager.GetTotalProgress();
-
-        progress = Mathf.Clamp(progress, 0.05f, 1f);
-        progressBar.UpdateProgress(progress, false);
-        progressText.Text = $"{(int)(progress * 100)}%";
-
-        if ((int) progress == 1)
+        
+        float virtualLen = 1 - progressBarStartValue;
+        float virtualProgress = progress - progressBarStartValue;
+        float value = virtualProgress / virtualLen;
+        
+        progressBar.UpdateProgress(value, false);
+        progressText.Text = $"{(int)(value * 100)}%";
+        
+        if ((int) progress >= 1)
         {
             isGameLoaded = true;
             // Controller.CloseCurrentWindow();
         }
+    }
+
+    private float GetCurrentProgress()
+    {
+        if (asyncInitManager == null)
+        {
+            return 0;
+        }
+
+        var progress = asyncInitManager.GetTotalProgress();
+        return progress;
     }
 }

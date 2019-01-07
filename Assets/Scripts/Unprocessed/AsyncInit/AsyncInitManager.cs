@@ -14,7 +14,7 @@ public class AsyncInitManager :  IAsyncInitManager
     private readonly List<AsyncInitComponentBase> componentsInProgress = new List<AsyncInitComponentBase>();
     private readonly List<AsyncInitComponentBase> initedComponents = new List<AsyncInitComponentBase>();
 
-    public AsyncInitManager AddItem(AsyncInitComponentBase component)
+    public AsyncInitManager AddComponent(AsyncInitComponentBase component)
     {
         components.Add(component);
         return this;
@@ -114,15 +114,29 @@ public class AsyncInitManager :  IAsyncInitManager
             total += item.WeightForProgressbar;
             progress += (item.Progress * item.WeightForProgressbar);
 
+#if DEBUG
             if ((int) (item.Progress) < 1)
             {
-                Debug.Log($"[Loading] => Component progress: [{item.GetType()}]: {(int)(item.Progress * 100)}%");
+                if (!IsDependenciesExecuted(item))
+                {
+                    string deps = string.Join(",", item.Dependencies
+                                                       .Where(e => !IsCompleted(e))
+                                                       .Select(e => e.ToString())
+                                                       .ToList());
+                    
+                    Debug.Log($"[Loading] => Component: [{item.GetType()}]: Wait for dependencies: {deps}");
+                }
+                else
+                {
+                    Debug.Log($"[Loading] => Component progress: [{item.GetType()}]: {(int)(item.Progress * 100)}%");
+                }
             }
+#endif
         }
 
         float totalProgress = progress / total;
 
-        Debug.Log($"[Loading] => Total progress: {(int)(totalProgress * 100)}%");
+        Debug.Log($"[Loading] => Total progress: {initedComponents.Count}/{components.Count} - {(int)(totalProgress * 100)}%");
         
         return totalProgress;
     }
@@ -130,5 +144,23 @@ public class AsyncInitManager :  IAsyncInitManager
     public bool IsAllComponentsInited()
     {
         return components.Count == initedComponents.Count;
+    }
+
+    public T GetComponent<T>() where T : AsyncInitComponentBase
+    {
+        var cmp = components.FirstOrDefault(e => e.GetType() == typeof(T));
+        return cmp as T;
+    }
+    
+    public bool IsCompleted<T>() where T : AsyncInitComponentBase
+    {
+        var cmp = initedComponents.FirstOrDefault(e => e.GetType() == typeof(T));
+        return cmp != null;
+    }
+    
+    public bool IsCompleted(Type t)
+    {
+        var cmp = initedComponents.FirstOrDefault(e => e.GetType() == t);
+        return cmp != null;
     }
 }
