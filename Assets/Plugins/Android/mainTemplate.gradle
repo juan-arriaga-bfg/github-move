@@ -1,62 +1,60 @@
 buildscript {
-	repositories {
-		jcenter()
-		maven { url 'https://maven.fabric.io/public' }
-	}
+    repositories {
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+        google()
+    }
 
-	dependencies {
-		classpath 'com.android.tools.build:gradle:2.3.3'
-		classpath 'io.fabric.tools:gradle:1.+'
-	}
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'com.google.gms:google-services:4.0.1'
+        classpath 'com.google.firebase:firebase-plugins:1.1.1'
+    }
 }
 
 allprojects {
-   repositories {
-      flatDir {
-        dirs 'libs'
-      }
-			jcenter()
-			maven { url 'https://maven.fabric.io/public' }
-	 		maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
-			maven { url "https://maven.google.com" }
-   }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+        maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
+        maven { url "https://maven.google.com" }
+    }
 }
 
 apply plugin: 'com.android.application'
 
 dependencies {
-	compile fileTree(dir: 'libs', include: ['*.jar'], exclude: 'unity-classes.jar')
-	compile 'com.google.android.gms:play-services-auth:11.6.2'
-	compile 'com.google.android.gms:play-services-auth-base:11.6.2'
-	compile 'com.google.android.gms:play-services-identity:11.6.2'
-	compile 'com.google.android.gms:play-services-plus:11.6.2'
-	compile(name: 'bfgLib-release', ext:'aar')
-    compile(name: 'RaveFacebookPlugin', ext:'aar')
-    compile(name: 'RaveGplusPlugin', ext:'aar')
-    compile(name: 'RaveSocial', ext:'aar')
-    compile(name: 'RaveUtils', ext:'aar')
-    compile(name: 'UnityAds', ext:'aar')
-    compile(name: 'XMLScene', ext:'aar')
-    compile project(':bfgunityandroid')
+    implementation fileTree(dir: 'libs', include: ['*.jar'], exclude: 'unity-classes.jar')
+    implementation 'com.google.android.gms:play-services-auth-base:15.0.1'
+    implementation 'com.google.android.gms:play-services-identity:15.0.1'
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation 'com.google.firebase:firebase-perf:15.0.0'
+    implementation 'com.google.firebase:firebase-messaging:15.0.2'
+    implementation (name: 'UnityAds', ext: 'aar')
+    implementation project(':bfgunityandroid')
 }
 
 android {
-	dexOptions {
-	    javaMaxHeapSize "4g"
-	}
-	compileSdkVersion 26
-	buildToolsVersion '26.0.2'
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    compileSdkVersion 26
+    buildToolsVersion '28.0.3'
 
-	defaultConfig {
-		applicationId '**APPLICATIONID**'
-		multiDexEnabled true
-		targetSdkVersion 16
-		minSdkVersion 19
-	}
+    defaultConfig {
+        applicationId '**APPLICATIONID**'
+        multiDexEnabled true
+        targetSdkVersion 26
+        minSdkVersion 19
+    }
 
-	lintOptions {
-		abortOnError false
-	}
+    lintOptions {
+        abortOnError false
+    }
 
     signingConfigs {
         release {
@@ -79,21 +77,26 @@ android {
         }
     }
 
-	buildTypes {
-		debug {
-			jniDebuggable true
-			minifyEnabled false
-			manifestPlaceholders = ["bfglibEnviron":"test"]
-		}
-		release {
-			minifyEnabled false
-			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-unity.txt'
-			manifestPlaceholders = ["bfglibEnviron":"prod"]
-			**SIGNCONFIG**
-		}
-	}
+    buildTypes {
+        debug {
+            jniDebuggable true
+            minifyEnabled false
+            manifestPlaceholders = ["bfglibEnviron": "test"]
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-unity.txt'
+            manifestPlaceholders = ["bfglibEnviron": "prod"]
 
-	packagingOptions {
-		exclude 'META-INF/rxjava.properties'
-	}
+            signingConfig signingConfigs.release
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 }
+
+apply plugin: 'io.fabric'
+apply plugin: 'com.google.firebase.firebase-perf'
+apply plugin: 'com.google.gms.google-services'

@@ -5,19 +5,19 @@ buildscript {
         jcenter()
     }
     dependencies {
-            classpath 'com.google.gms:google-services:3.1.1'
+        classpath 'com.google.gms:google-services:4.0.1'
     }
 }
 
 repositories {
-    flatDir{
+    flatDir {
         dirs 'libs'
     }
 }
 
 android {
-compileSdkVersion 26
-buildToolsVersion '26.0.2'
+    compileSdkVersion 26
+    buildToolsVersion '28.0.3'
 
     sourceSets {
         main {
@@ -33,37 +33,31 @@ buildToolsVersion '26.0.2'
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    api fileTree(include: ['*.jar'], dir: 'libs')
 
-    compile 'com.google.android.gms:play-services-gcm:11.6.2'
-    compile 'com.google.android.gms:play-services-plus:11.6.2'
-    compile 'com.google.firebase:firebase-messaging:11.6.2'
-    compile 'com.android.installreferrer:installreferrer:1.0'
-    compile group: 'com.squareup.okhttp', name: 'okhttp', version: '2.7.5'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    api 'com.google.android.gms:play-services-gcm:15.0.1'
+    api 'com.google.android.gms:play-services-plus:15.0.1'
+    api 'com.android.installreferrer:installreferrer:1.0'
+    api group: 'com.squareup.okhttp', name: 'okhttp', version: '2.7.5'
+    api 'com.android.support.constraint:constraint-layout:1.0.2'
 
-    compile(name:'bfgLib-release', ext:'aar')
-    compile(name:'RaveSocial', ext:'aar')
-    compile(name:'RaveFacebookPlugin', ext:'aar')
-    compile(name:'RaveGplusPlugin', ext:'aar')
-    compile(name:'RaveUtils', ext:'aar')
-    compile(name:'XMLScene', ext:'aar')
+    api(name: 'bfgLib-release', ext: 'aar')
+    api(name: 'RaveSocial', ext: 'aar')
+    api(name: 'RaveFacebookPlugin', ext: 'aar')
+    api(name: 'RaveGplusPlugin', ext: 'aar')
+    api(name: 'RaveUtils', ext: 'aar')
+    api(name: 'XMLScene', ext: 'aar')
 
-    compile files('../libs/unity-classes.jar')
+    api files('../libs/unity-classes.jar')
 
-    compile('io.fabric.sdk.android:fabric:1.3.17@aar') {
+    api('io.fabric.sdk.android:fabric:1.3.17@aar') {
         transitive = true
     }
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+    api('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true
     }
-    compile('com.zendesk:sdk:1.10.1.1@aar') {
+    api('com.zendesk:sdk:1.10.1.1@aar') {
         transitive = true
     }
-    compile 'com.android.support:appcompat-v7:26.1.0'
+    api 'com.android.support:appcompat-v7:26.1.0'
 }
-
-// todo: ENABLE PLUGINS! //keht
-// apply plugin: 'io.fabric'
-
-// apply plugin: 'com.google.gms.google-services'
