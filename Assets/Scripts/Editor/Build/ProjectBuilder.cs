@@ -45,6 +45,8 @@ public class ProjectBuilder
     public BuildType CurrentBuildType { get; private set; } = BuildType.Unknown;
     public BuildPlatform CurrentBuildPlatform { get; private set; } = BuildPlatform.Unknown;
     
+    public Dictionary<string, string> CustomOptions { get; private set; } = new Dictionary<string, string>();
+    
     public string BuildPath { get; private set; } = "BuildPath";
     
     public string BuildName { get; private set; } = "BuildName";
@@ -107,6 +109,12 @@ public class ProjectBuilder
     public ProjectBuilder SetBuildName(string name)
     {
         BuildName = name;
+        return this;
+    }
+    
+    public ProjectBuilder SetCustomOptions(Dictionary<string, string> options)
+    {
+        CustomOptions = options ?? CustomOptions;
         return this;
     }
 
