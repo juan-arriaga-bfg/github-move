@@ -74,15 +74,7 @@ public class MatchHoverAnimation : BoardAnimation
             view.DOMove(startPos, 0.2f).SetEase(Ease.Linear);
         }
 
-        sequence.OnComplete(() => Debug.LogError("Complete"));
         sequence.SetLoops(-1, LoopType.Restart);
-    }
-
-    public override void CompleteAnimation(BoardRenderer context)
-    {
-        Debug.LogError("CompleteExecute");
-        base.CompleteAnimation(context);
-        DOTween.Complete(animationUid);
     }
 
     private void HighlightMatchable(PieceBoardElementView view, bool state)
