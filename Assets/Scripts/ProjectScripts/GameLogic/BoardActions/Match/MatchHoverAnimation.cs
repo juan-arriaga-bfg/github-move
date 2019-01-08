@@ -28,7 +28,7 @@ public class MatchHoverAnimation : BoardAnimation
             var pieceView = context.GetElementAt(pos) as PieceBoardElementView;
 
             var startPos = context.Context.BoardDef.GetPiecePosition(pieceView.Piece.CachedPosition.X, pieceView.Piece.CachedPosition.Y);
-            
+            var alreadyHighlight = pieceView.IsHighlighted;
             if (pos.Equals(From))
             {
                 pieceView.ToggleHighlight(true);
@@ -41,6 +41,8 @@ public class MatchHoverAnimation : BoardAnimation
             
             if (pos.Equals(HoverPosition))
             {
+                if(alreadyHighlight)
+                    continue;
                 HighlightMatchable(pieceView,true);
                 sequence.onKill += () =>
                 {
@@ -53,8 +55,10 @@ public class MatchHoverAnimation : BoardAnimation
             var maxDistance = Mathf.Max(Math.Abs(pos.X - HoverPosition.X),Math.Abs(pos.Y - HoverPosition.Y));
             var distanceFactor = maxDistance <= 2 ? 1 : (maxDistance - 1);
             var targetPos = Vector3.MoveTowards(startPos, targetVector, 0.35f / distanceFactor);
+
             
-            HighlightMatchable(pieceView, true);
+            if( !alreadyHighlight )
+                HighlightMatchable(pieceView, true);
 
             var view = pieceView.transform.Find("View");
             sequence.Insert(0, view.DOMove(targetPos, 0.4f).SetEase(Ease.InBack).OnKill(() =>
@@ -63,7 +67,8 @@ public class MatchHoverAnimation : BoardAnimation
                     view.DOMove(startPos, 0.2f);
                 else
                     view.transform.position = startPos;
-                HighlightMatchable(pieceView, false);
+                if(!alreadyHighlight)
+                    HighlightMatchable(pieceView, false);
             }));
             sequence.Insert(0.4f, view.DOMove(startPos, 0.2f).SetEase(Ease.Linear));
             view.DOMove(startPos, 0.2f).SetEase(Ease.Linear);
