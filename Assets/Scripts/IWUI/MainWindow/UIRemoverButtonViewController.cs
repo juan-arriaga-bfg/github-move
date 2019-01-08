@@ -28,6 +28,8 @@ public class UIRemoverButtonViewController : IWUIWindowViewController
     {
         base.OnViewShow(context);
         
+        label.Text = LocalizationService.Get("window.main.remove", "window.main.remove");
+        
         var removerComponent = BoardService.Current.FirstBoard.BoardLogic.Remover;
         removerComponent.OnBeginRemoverEvent += OnBeginRemoverEvent;
         removerComponent.OnEndRemoverEvent += OnEndRemoverEvent;

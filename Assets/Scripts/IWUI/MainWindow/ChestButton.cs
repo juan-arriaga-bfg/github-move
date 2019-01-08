@@ -4,12 +4,15 @@ public class ChestButton : UIGenericResourcePanelViewController
 {
     [SerializeField] private GameObject shine;
     [SerializeField] private GameObject exclamationMark;
+    [SerializeField] private NSText label;
 
     private TimerComponent timer;
 
     public override void OnViewShow(IWUIWindowView context)
     {
         base.OnViewShow(context);
+        
+        label.Text = LocalizationService.Get("window.main.market", "window.main.market");
 
         timer = BoardService.Current.FirstBoard.MarketLogic.Timer;
         
