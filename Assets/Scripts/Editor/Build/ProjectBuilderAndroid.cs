@@ -2,10 +2,11 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
 
-public static class ProjectBuilderAndroid
+public class ProjectBuilderAndroid
 {
     private static readonly string LOCAL_BUILD_PATH = Application.dataPath.Replace("/Assets", "/GradleProject");
     
@@ -52,7 +53,8 @@ public static class ProjectBuilderAndroid
             .Execute(); 
     }
     
-    public static void TCBuild()
+    [UsedImplicitly]
+    public static void AutoBuild()
     {
         var customOptions = new Dictionary<string, string>();
         
