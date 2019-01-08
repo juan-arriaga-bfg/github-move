@@ -31,6 +31,8 @@ public class PieceBoardElementView : BoardElementView
 
     private MulticellularPieceBoardObserver multicellularPieceBoardObserver;
 
+    private MatchHoverAnimation dragMatchAnimation;
+    
     protected bool isLockVisual = false;
 
     private List<ParticleView> lockParticles = new List<ParticleView>();
@@ -151,8 +153,44 @@ public class PieceBoardElementView : BoardElementView
         if (!lastBoardPosition.Equals(boardPos))
         {
             lastBoardPosition = boardPos;
-            ToggleSelection(true, Piece.Draggable.IsValidDrag(boardPos));
+            var isValidDrag = Piece.Draggable.IsValidDrag(boardPos);
+            ToggleSelection(true, isValidDrag);
+            
+            List<BoardPosition> matchField = new List<BoardPosition>();
+            
+            var isMatchHover = CheckMatchHover(Piece.CachedPosition, boardPos, out matchField);
+            if (isMatchHover && isValidDrag)
+            {
+                dragMatchAnimation?.StopAnimation(Piece.Context.RendererContext);
+                dragMatchAnimation = new MatchHoverAnimation
+                {
+                    HoverPosition = boardPos,
+                    From = Piece.CachedPosition,
+                    PiecePositions = matchField
+                };
+                Piece.Context.RendererContext.AddAnimationToQueue(dragMatchAnimation);
+            }
+            else if (dragMatchAnimation != null)
+            {
+                dragMatchAnimation.RevertAnimation(Piece.Context.RendererContext);
+                dragMatchAnimation = null;
+            }
         }
+    }
+    
+    private bool CheckMatchHover(BoardPosition start, BoardPosition current, out List<BoardPosition> matchField)
+    {
+        var fromPiece = Piece.Context.BoardLogic.GetPieceAt(start);
+        var toPiece = Piece.Context.BoardLogic.GetPieceAt(current);
+        var currentId = 0;
+        int tmp;
+        matchField = new List<BoardPosition> {start};        
+        if (fromPiece == null || toPiece == null)
+            return false;
+        if (fromPiece.PieceType != PieceType.Boost_CR.Id && fromPiece.PieceType != toPiece.PieceType)
+            return false;
+        return Piece.Context.BoardLogic.FieldFinder.Find(current, matchField, out currentId) &&
+               Piece.Context.BoardLogic.MatchActionBuilder.CheckMatch(matchField, currentId, current, out tmp);
     }
     
     public virtual void OnDragStart(BoardPosition boardPos, Vector2 worldPos)
@@ -171,6 +209,24 @@ public class PieceBoardElementView : BoardElementView
         Piece.Context.HintCooldown.Resume(this);
         
         if (selectionView == null) return;
+        
+        List<BoardPosition> matchField = new List<BoardPosition>();
+        var isMatchHover = CheckMatchHover(Piece.CachedPosition, boardPos, out matchField);
+        
+        if (isMatchHover)
+        {
+            dragMatchAnimation.CompleteAnimation(Piece.Context.RendererContext);
+            dragMatchAnimation = null;
+        }
+
+        if (dragMatchAnimation != null)
+        {
+            dragMatchAnimation.StopAnimation(Piece.Context.RendererContext);
+            dragMatchAnimation = null;
+        }
+            
+        
+        
         
         ToggleSelection(false);
     }
