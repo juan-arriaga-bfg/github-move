@@ -31,7 +31,7 @@ public class PieceBoardElementView : BoardElementView
 
     private MulticellularPieceBoardObserver multicellularPieceBoardObserver;
 
-    private BoardAnimation dragMatchAnimation;
+    private MatchHoverAnimation dragMatchAnimation;
     
     protected bool isLockVisual = false;
 
@@ -153,12 +153,13 @@ public class PieceBoardElementView : BoardElementView
         if (!lastBoardPosition.Equals(boardPos))
         {
             lastBoardPosition = boardPos;
-            ToggleSelection(true, Piece.Draggable.IsValidDrag(boardPos));
+            var isValidDrag = Piece.Draggable.IsValidDrag(boardPos);
+            ToggleSelection(true, isValidDrag);
             
             List<BoardPosition> matchField = new List<BoardPosition>();
             
             var isMatchHover = CheckMatchHover(Piece.CachedPosition, boardPos, out matchField);
-            if (isMatchHover)
+            if (isMatchHover && isValidDrag)
             {
                 dragMatchAnimation?.StopAnimation(Piece.Context.RendererContext);
                 dragMatchAnimation = new MatchHoverAnimation
@@ -171,7 +172,7 @@ public class PieceBoardElementView : BoardElementView
             }
             else if (dragMatchAnimation != null)
             {
-                dragMatchAnimation.StopAnimation(Piece.Context.RendererContext);
+                dragMatchAnimation.RevertAnimation(Piece.Context.RendererContext);
                 dragMatchAnimation = null;
             }
         }
@@ -182,13 +183,14 @@ public class PieceBoardElementView : BoardElementView
         var fromPiece = Piece.Context.BoardLogic.GetPieceAt(start);
         var toPiece = Piece.Context.BoardLogic.GetPieceAt(current);
         var currentId = 0;
+        int tmp;
         matchField = new List<BoardPosition> {start};        
         if (fromPiece == null || toPiece == null)
             return false;
         if (fromPiece.PieceType != PieceType.Boost_CR.Id && fromPiece.PieceType != toPiece.PieceType)
             return false;
         return Piece.Context.BoardLogic.FieldFinder.Find(current, matchField, out currentId) &&
-               Piece.Context.BoardLogic.MatchActionBuilder.GetMatchAction(matchField, currentId, current) != null;
+               Piece.Context.BoardLogic.MatchActionBuilder.CheckMatch(matchField, currentId, current, out tmp);
     }
     
     public virtual void OnDragStart(BoardPosition boardPos, Vector2 worldPos)

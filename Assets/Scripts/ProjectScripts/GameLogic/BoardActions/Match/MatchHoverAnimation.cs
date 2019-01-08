@@ -9,46 +9,68 @@ public class MatchHoverAnimation : BoardAnimation
     public List<BoardPosition> PiecePositions;
     public BoardPosition HoverPosition;
     public BoardPosition From;
+
+    private bool isRevert;
     public override void Animate(BoardRenderer context)
     {
         HoverPosition = HoverPosition.SetZ(BoardLayer.Piece.Layer);
         From = From.SetZ(BoardLayer.Piece.Layer);
         
-        Debug.LogError($"MatchAnimation | HoverPosition:");
         DOTween.Kill(animationUid);
         var sequence = DOTween.Sequence();
         sequence.SetId(animationUid);
         var targetVector =
-            context.Context.BoardDef.GetWorldPosition(HoverPosition.X, HoverPosition.Y);
-        //targetVector += new Vector3(0, 0.5f);
+            context.Context.BoardDef.GetPiecePosition(HoverPosition.X, HoverPosition.Y);
+        
         foreach (var piecePos in PiecePositions)
         {
             var pos = piecePos.SetZ(BoardLayer.Piece.Layer);
             var pieceView = context.GetElementAt(pos) as PieceBoardElementView;
-            if(pos.Equals(HoverPosition))
-                continue;
+
+            var startPos = context.Context.BoardDef.GetPiecePosition(pieceView.Piece.CachedPosition.X, pieceView.Piece.CachedPosition.Y);
+            
             if (pos.Equals(From))
             {
-                HighlightMatchable(pieceView, true);
-                sequence.onKill += () => HighlightMatchable(pieceView, false);
+                pieceView.ToggleHighlight(true);
+                sequence.onKill += () =>
+                {
+                    pieceView.ToggleHighlight(false);
+                };
                 continue;
             }
             
-            var startPos = context.Context.BoardDef.GetWorldPosition(pieceView.Piece.CachedPosition.X, pieceView.Piece.CachedPosition.Y);
-            var targetPos = Vector3.MoveTowards(startPos, targetVector, 0.35f);
+            if (pos.Equals(HoverPosition))
+            {
+                HighlightMatchable(pieceView,true);
+                sequence.onKill += () =>
+                {
+                    HighlightMatchable(pieceView,false);
+                };
+                continue;
+            }
+            
+            
+            var maxDistance = Mathf.Max(Math.Abs(pos.X - HoverPosition.X),Math.Abs(pos.Y - HoverPosition.Y));
+            var distanceFactor = maxDistance <= 2 ? 1 : (maxDistance - 1);
+            var targetPos = Vector3.MoveTowards(startPos, targetVector, 0.35f / distanceFactor);
             
             HighlightMatchable(pieceView, true);
-            sequence.Insert(0, pieceView.transform.Find("View").DOMove(targetPos, 0.6f).OnKill(() =>
+
+            var view = pieceView.transform.Find("View");
+            sequence.Insert(0, view.DOMove(targetPos, 0.4f).SetEase(Ease.InBack).OnKill(() =>
             {
-                //pieceView.transform.Find("View").DOMove(startPos, 0.2f);
-                pieceView.transform.Find("View").position = startPos;
+                if (isRevert)
+                    view.DOMove(startPos, 0.2f);
+                else
+                    view.transform.position = startPos;
                 HighlightMatchable(pieceView, false);
             }));
+            sequence.Insert(0.4f, view.DOMove(startPos, 0.2f).SetEase(Ease.Linear));
+            view.DOMove(startPos, 0.2f).SetEase(Ease.Linear);
         }
 
         sequence.OnComplete(() => Debug.LogError("Complete"));
-
-        sequence.SetLoops(-1, LoopType.Yoyo);
+        sequence.SetLoops(-1, LoopType.Restart);
     }
 
     public override void CompleteAnimation(BoardRenderer context)
@@ -64,6 +86,12 @@ public class MatchHoverAnimation : BoardAnimation
         view.ToggleSelection(state);
     }
 
+    public void RevertAnimation(BoardRenderer context)
+    {
+        isRevert = true;
+        StopAnimation(context);
+    }
+    
     public override void StopAnimation(BoardRenderer context)
     {
         DOTween.Kill(animationUid);
