@@ -1,23 +1,27 @@
 #if UNITY_EDITOR
 
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
 public static class ProjectBuilderAndroid
 {
-    private static void LocalBuild(IProjectBuildAction buildPlayerAction, 
+    private static readonly string LOCAL_BUILD_PATH = Application.dataPath.Replace("/Assets", "/GradleProject");
+    
+    private static void Build( 
                            ProjectBuilder.BuildPlatform platform,
                            ProjectBuilder.BuildPurpose purpose,
-                           ProjectBuilder.BuildType buildType, Dictionary<string, string> customOptions = null)
+                           ProjectBuilder.BuildType buildType, 
+                           string exportPath,
+                           bool useIL2CPP = false,
+                           Dictionary<string, string> customOptions = null)
     {
-        string path = Application.dataPath.Replace("/Assets", "/GradleProject");
-
         ProjectBuilder.Create()
             .SetBuildType(buildType)
             .SetBuildTargetPlatform(platform)
             .SetBuildPurpose(purpose)
-            .SetBuildPath(path)
+            .SetBuildPath(exportPath)
             .SetCustomOptions(customOptions)
              
             .AddBuildAction(new BuildActionCleanupPreviousGradleExport())
@@ -26,9 +30,11 @@ public static class ProjectBuilderAndroid
             .AddBuildAction(new BuildActionIncrementVersion())
             .AddBuildAction(new BuildActionBuildAssetBundles())
             .AddBuildAction(new BuildActionDisableScenes())
-            .AddBuildAction(new BuildActionSetScriptingBackendMono2x())
+            .AddBuildAction(new BuildActionSetScriptingBackend()
+                //.SetType(useIL2CPP ? ScriptingImplementation.IL2CPP : ScriptingImplementation.Mono2x)
+                )
              
-            .AddBuildAction(buildPlayerAction)
+            .AddBuildAction(new BuildActionGradleExport())
              
             .AddPostBuildAction(new BuildActionFixExportedGradleProjectHierarhy())
             .AddPostBuildAction(new BuildActionCopyBfgSettingsJson())
@@ -40,31 +46,48 @@ public static class ProjectBuilderAndroid
             .AddPostBuildAction(new BuildActionInstallGradleWrapper())
             .AddPostBuildAction(new BuildActionReset())
              
-            .AddPostBuildAction(new BuildActionPrintToConsole().SetMessage("BUILD COMPLETE!"))
+            .AddPostBuildAction(new BuildActionPrintToConsole()
+                .SetMessage("BUILD COMPLETE!"))
              
             .Execute(); 
     }
     
+    public static void TCBuild()
+    {
+        var customOptions = new Dictionary<string, string>();
+        
+        List<string> parameters = AutoBuildsTool.GetParameters();
+
+        string path = parameters.First(e => e.StartsWith("exportpath")).Split(';')[1];
+        ProjectBuilder.BuildType buildType = parameters.Contains("dev") ? ProjectBuilder.BuildType.Development : ProjectBuilder.BuildType.Release;
+        ProjectBuilder.BuildPlatform platform = ProjectBuilder.BuildPlatform.Android;
+        ProjectBuilder.BuildPurpose purpose = ProjectBuilder.BuildPurpose.Qa;
+
+        bool useIL2CPP = parameters.Contains("cpp");
+        
+        Build(platform, purpose, buildType, path, useIL2CPP, customOptions);
+
+    }
+    
+#region Unity Menu -> Android build
+    
     [MenuItem("Build/Android/Qa", false, 1000)]
     public static void RunExportGradleQa()
     {
-        var buildPlayerAction = new BuildActionGradleExport();
-        LocalBuild(buildPlayerAction, ProjectBuilder.BuildPlatform.Android, ProjectBuilder.BuildPurpose.Qa, ProjectBuilder.BuildType.Development);
+        Build(ProjectBuilder.BuildPlatform.Android, ProjectBuilder.BuildPurpose.Qa, ProjectBuilder.BuildType.Development, LOCAL_BUILD_PATH);
     }
     
     [MenuItem("Build/Android/Stage", false, 1000)]
     public static void RunExportGradleStage()
     {
-        var buildPlayerAction = new BuildActionGradleExport();
-        LocalBuild(buildPlayerAction, ProjectBuilder.BuildPlatform.Android, ProjectBuilder.BuildPurpose.Stage, ProjectBuilder.BuildType.Release);
+        Build(ProjectBuilder.BuildPlatform.Android, ProjectBuilder.BuildPurpose.Stage, ProjectBuilder.BuildType.Release, LOCAL_BUILD_PATH);
     }
     
         
     [MenuItem("Build/Android/Prod", false, 1000)]
     public static void RunExportGradleProd()
     {
-        var buildPlayerAction = new BuildActionGradleExport();
-        LocalBuild(buildPlayerAction, ProjectBuilder.BuildPlatform.Android, ProjectBuilder.BuildPurpose.Prod, ProjectBuilder.BuildType.Release);
+        Build(ProjectBuilder.BuildPlatform.Android, ProjectBuilder.BuildPurpose.Prod, ProjectBuilder.BuildType.Release, LOCAL_BUILD_PATH);
     }
 
     // ReSharper disable once InconsistentNaming
@@ -77,9 +100,11 @@ public static class ProjectBuilderAndroid
             {BuildActionReplaceBfgLibWithDebugVersion.OPTION_ENABLE, null},
         };
         
-        var buildPlayerAction = new BuildActionGradleExport();
-        LocalBuild(buildPlayerAction, ProjectBuilder.BuildPlatform.Android, ProjectBuilder.BuildPurpose.Qa, ProjectBuilder.BuildType.Development, customOptions);
+        Build(ProjectBuilder.BuildPlatform.Android, ProjectBuilder.BuildPurpose.Qa, ProjectBuilder.BuildType.Development, LOCAL_BUILD_PATH, false, customOptions);
     }
+    
+#endregion
+    
 }
 
 #endif
