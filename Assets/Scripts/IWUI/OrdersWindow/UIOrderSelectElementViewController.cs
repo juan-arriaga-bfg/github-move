@@ -60,7 +60,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         btnBuy.OnClick(OnClickBuy);
         btnComplete.OnClick(OnClick);
         
-        CreateIcon(iconHero, PieceType.Parse(piece.PieceType));
+        CreateIcon(iconHero, $"{PieceType.Parse(piece.PieceType)}_icon");
         
         base.Init();
     }
