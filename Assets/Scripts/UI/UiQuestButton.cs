@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Quests;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,10 +10,13 @@ public class UiQuestButton : UIGenericResourcePanelViewController
     [SerializeField] private CanvasGroup rootCanvasGroup;
     [SerializeField] private UiQuestButtonArrow arrow;
     [SerializeField] private Button button;
+    [SerializeField] private Transform iconAnchor;
     
     public QuestEntity Quest { get; private set; }
     private bool isUp;
     private bool interactive;
+    
+    private Transform content;
     
     public override int CurrentValueAnimated
     {
@@ -133,10 +134,45 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
         SetLabelValue(currentValue);
     }
-
-    private static Sprite GetIconForFirstTask(QuestEntity quest)
+    
+    public static Transform GetIcon(TaskEntity task, Transform anchor, Image icon = null)
     {
-        return GetIcon(quest.Tasks[0]);
+        var id = task.GetIco();
+
+        if (string.IsNullOrEmpty(id))
+        {
+            var taskAboutCurrency = task as TaskCurrencyEntity;
+            if (taskAboutCurrency != null && !string.IsNullOrEmpty(taskAboutCurrency.CurrencyName))
+            {
+                var pair = new CurrencyPair {Currency = taskAboutCurrency.CurrencyName};
+                id = pair.GetIcon();
+            }
+        }
+
+        if (string.IsNullOrEmpty(id))
+        {
+            var taskAboutPiece = task as IHavePieceId;
+            if (taskAboutPiece != null && taskAboutPiece.PieceId != PieceType.None.Id && taskAboutPiece.PieceId != PieceType.Empty.Id)
+            {
+                id = PieceType.Parse(taskAboutPiece.PieceId);
+            }
+        }
+
+        if (string.IsNullOrEmpty(id))
+        {
+            id = "codexQuestion";
+        }
+
+        if (ContentService.Current.IsObjectRegistered(id) == false)
+        {
+            if (icon != null) icon.sprite = IconService.Current.GetSpriteById(id);
+            return null;
+        }
+        
+        var obj = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
+        obj.SetParentAndReset(anchor);
+        
+        return obj;
     }
     
     public static Sprite GetIcon(TaskEntity task)
@@ -190,7 +226,14 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
         // Debug.Log($"AAAAA UPDATE: {quest.Id}");
         
-        icon.sprite = GetIconForFirstTask(Quest);
+        if (content != null)
+        {
+            UIService.Get.PoolContainer.Return(content.gameObject);
+            content = null;
+        }
+        
+        content = GetIcon(Quest.Tasks[0], iconAnchor, icon);
+        icon.gameObject.SetActive(content == null);
 
         var isComplete = Quest.IsCompletedOrClaimed();
 

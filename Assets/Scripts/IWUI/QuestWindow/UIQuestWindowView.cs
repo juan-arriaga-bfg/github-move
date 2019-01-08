@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIQuestWindowView : UIGenericPopupWindowView
 {
     [IWUIBinding("#TaskIcon")] private Image targetIcon;
+    [IWUIBinding("#TaskIconAnchor")] private Transform targetIconAnchor;
     [IWUIBinding("#RewardLabel")] private NSText rewardLabel;
     [IWUIBinding("#TaskProgress")] private NSText progressLabel;
     [IWUIBinding("#FindButtonLabel")] private NSText buttonLabel;
@@ -16,6 +17,8 @@ public class UIQuestWindowView : UIGenericPopupWindowView
     private const int CHAIN_LENGTH = 5;
 
     private TaskEntity firstTask;
+    
+    private Transform content;
 
     public override void OnViewShow()
     {
@@ -31,8 +34,15 @@ public class UIQuestWindowView : UIGenericPopupWindowView
 
         UpdateUi();
 
-        targetIcon.sprite = UiQuestButton.GetIcon(firstTask);
-
+        if (content != null)
+        {
+            UIService.Get.PoolContainer.Return(content.gameObject);
+            content = null;
+        }
+        
+        content = UiQuestButton.GetIcon(firstTask, targetIconAnchor, targetIcon);
+        targetIcon.gameObject.SetActive(content == null);
+        
         if (!ShowChain(model))
         {
             hintLabel.gameObject.SetActive(true);

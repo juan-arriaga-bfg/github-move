@@ -13,7 +13,8 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     [IWUIBinding("#TaskProgress")] private NSText lblProgress;
     [IWUIBinding("#TaskReward")] private NSText lblReward;
     [IWUIBinding("#TaskIcon")] private Image taskIcon;
-    [IWUIBinding("#TaskIcon")] private CanvasGroup taskIconCanvasGroup;
+    [IWUIBinding("#TaskIconAnchor")] private Transform taskIconAnchor;
+    [IWUIBinding("#TaskIconBox")] private CanvasGroup taskIconCanvasGroup;
     [IWUIBinding("#TaskButton")] private DailyQuestWindowTaskButton taskButton;
     [IWUIBinding("#View")] private CanvasGroup canvasGroup;
     [IWUIBinding("#Mark")] private GameObject mark;
@@ -38,7 +39,9 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     private UIDailyQuestTaskElementEntity targetEntity;
 
     private List<CurrencyPair> reward;
-
+    
+    private Transform content;
+    
     public override void Init()
     {
         base.Init();
@@ -92,8 +95,15 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     public void UpdateUi()
     {
         taskButton.Init(task);
-
-        taskIcon.sprite = UiQuestButton.GetIcon(task);
+        
+        if (content != null)
+        {
+            UIService.Get.PoolContainer.Return(content.gameObject);
+            content = null;
+        }
+        
+        content = UiQuestButton.GetIcon(task, taskIconAnchor, taskIcon);
+        taskIcon.gameObject.SetActive(content == null);
 
         lblProgress.Text = UiQuestButton.GetTaskProgress(task, 32);
 
@@ -283,7 +293,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
                     onComplete?.Invoke();
                 }
             },
-            targetEntity.WindowController.Window.Layers[0].ViewCamera.WorldToScreenPoint(taskIcon.transform.position));
+            targetEntity.WindowController.Window.Layers[0].ViewCamera.WorldToScreenPoint(taskIconCanvasGroup.transform.position));
         }
         else
         {

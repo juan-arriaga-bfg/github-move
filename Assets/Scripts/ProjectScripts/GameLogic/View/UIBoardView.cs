@@ -7,11 +7,15 @@ public class UIBoardView : BoardElementView
     [SerializeField] protected Transform viewTransform;
     [SerializeField] protected CanvasGroup group;
     [SerializeField] protected Canvas canvas;
+    
+    [SerializeField] protected Transform anchor;
 
     protected ViewAnimationUid attentionUid = new ViewAnimationUid();
     protected ViewDefinitionComponent controller;
     protected Piece Context;
-
+    
+    private Transform content;
+    
     public Canvas GetCanvas()
     {
         return canvas;
@@ -241,5 +245,14 @@ public class UIBoardView : BoardElementView
         if(Id == ViewType.None) return;
         
         controller.RemoveView(Id);
+    }
+    
+    protected void CreateIcon(string id)
+    {
+        if (anchor == null) return;
+        if (content != null) UIService.Get.PoolContainer.Return(content.gameObject);
+        
+        content = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
+        content.SetParentAndReset(anchor);
     }
 }
