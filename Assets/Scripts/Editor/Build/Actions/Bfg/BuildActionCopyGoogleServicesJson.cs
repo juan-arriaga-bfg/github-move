@@ -6,7 +6,7 @@ using UnityEngine;
 public class BuildActionCopyGoogleServicesJson : BuildActionCopyFilesBase
 {
     protected override string SrcDir => Application.dataPath.Replace("/Assets", $"/Misc/BFG/{context.CurrentBuildPlatform.ToString()}/GoogleServicesJson/");
-    protected override string DstDir => Application.dataPath.Replace("/Assets", "/GradleProject/bfgunityandroid/");
+    protected override string DstDir => context.BuildPath + "/bfgunityandroid/";
 
     protected override List<string> Files => new List<string>
     {

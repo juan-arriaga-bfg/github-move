@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 
 using UnityEditor;
+using UnityEngine;
 
 public static class ProjectBuilderAndroid
 {
@@ -9,10 +10,13 @@ public static class ProjectBuilderAndroid
                            ProjectBuilder.BuildPurpose purpose,
                            ProjectBuilder.BuildType buildType)
     {
+        string path = Application.dataPath.Replace("/Assets", "/GradleProject");
+        
         ProjectBuilder.Create()
                       .SetBuildType(buildType)
                       .SetBuildTargetPlatform(platform)
                       .SetBuildPurpose(purpose)
+                      .SetBuildPath(path)
                        
                       .AddBuildAction(new BuildActionCleanupPreviousGradleExport())
                       .AddBuildAction(new BuildActionPrepare())
@@ -20,6 +24,7 @@ public static class ProjectBuilderAndroid
                       .AddBuildAction(new BuildActionIncrementVersion())
                       .AddBuildAction(new BuildActionBuildAssetBundles())
                       .AddBuildAction(new BuildActionDisableScenes())
+                      .AddBuildAction(new BuildActionSetScriptingBackendMono2x())
 
                       .AddBuildAction(buildPlayerAction)
 

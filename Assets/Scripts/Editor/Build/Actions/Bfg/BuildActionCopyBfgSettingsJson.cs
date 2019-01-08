@@ -6,7 +6,7 @@ using UnityEngine;
 public class BuildActionCopyBfgSettingsJson : BuildActionCopyFilesBase
 {
     protected override string SrcDir => Application.dataPath.Replace("/Assets", $"/Misc/BFG/{context.CurrentBuildPlatform.ToString()}/SettingsJson/{context.CurrentBuildType.ToString()}/");
-    protected override string DstDir => Application.dataPath.Replace("/Assets", "/GradleProject/bfgunityandroid/res/raw/");
+    protected override string DstDir => context.BuildPath + "/bfgunityandroid/res/raw/";
 
     protected override List<string> Files => new List<string>
     {

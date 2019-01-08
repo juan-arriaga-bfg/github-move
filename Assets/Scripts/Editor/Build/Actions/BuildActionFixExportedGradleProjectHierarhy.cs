@@ -8,7 +8,7 @@ public class BuildActionFixExportedGradleProjectHierarhy : IProjectBuildAction
 {
     public void Execute(ProjectBuilder context)
     {
-        string dst = Application.dataPath.Replace("/Assets", "/GradleProject");
+        string dst = context.BuildPath;
         string src = Path.Combine(dst, Application.productName);
         string tmp = Application.dataPath.Replace("/Assets", "/TEMP_DIR");
         

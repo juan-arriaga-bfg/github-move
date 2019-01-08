@@ -9,7 +9,7 @@ public class BuildActionCleanupPreviousGradleExport : IProjectBuildAction
 {
     public void Execute(ProjectBuilder context)
     {
-        string dir1 = Application.dataPath.Replace("/Assets", "/GradleProject");
+        string dir1 = context.BuildPath;
         string dir2 = Application.dataPath.Replace("/Assets", "/TEMP_DIR");
 
         List<string> dirs = new List<string>

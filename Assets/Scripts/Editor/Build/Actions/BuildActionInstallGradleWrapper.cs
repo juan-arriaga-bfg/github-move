@@ -8,7 +8,7 @@ public class BuildActionInstallGradleWrapper : IProjectBuildAction
 {
     public void Execute(ProjectBuilder context)
     {
-        string dst = Application.dataPath.Replace("/Assets", "/GradleProject");
+        string dst = context.BuildPath;
         
 #if UNITY_EDITOR_WIN
         string src = Application.dataPath.Replace("/Assets", "/Misc/GradleWrapper/Win");

@@ -12,9 +12,8 @@ public class BuildActionReplaceBfgLibWithDebugVersion : IProjectBuildAction
 
         List<string> targets = new List<string>
         {
-            Application.dataPath.Replace("/Assets", "/GradleProject/bfgunityandroid/libs/bfgLib-release.aar"),
-            Application.dataPath.Replace("/Assets", "/GradleProject/libs/bfgLib-release.aar")
-            
+            context.BuildPath + "/bfgunityandroid/libs/bfgLib-release.aar",
+            context.BuildPath + "/libs/bfgLib-release.aar"
         };
         
         foreach (var target in targets)

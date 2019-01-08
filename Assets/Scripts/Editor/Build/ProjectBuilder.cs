@@ -45,6 +45,10 @@ public class ProjectBuilder
     public BuildType CurrentBuildType { get; private set; } = BuildType.Unknown;
     public BuildPlatform CurrentBuildPlatform { get; private set; } = BuildPlatform.Unknown;
     
+    public string BuildPath { get; private set; } = "BuildPath";
+    
+    public string BuildName { get; private set; } = "BuildName";
+    
     public static ProjectBuilder Create()
     {
         return new ProjectBuilder();
@@ -91,6 +95,18 @@ public class ProjectBuilder
     public ProjectBuilder SetBuildTargetPlatform(BuildPlatform platform)
     {
         CurrentBuildPlatform = platform;
+        return this;
+    }
+    
+    public ProjectBuilder SetBuildPath(string path)
+    {
+        BuildPath = path;
+        return this;
+    }
+    
+    public ProjectBuilder SetBuildName(string name)
+    {
+        BuildName = name;
         return this;
     }
 

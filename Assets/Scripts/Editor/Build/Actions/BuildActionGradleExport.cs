@@ -9,7 +9,7 @@ public class BuildActionGradleExport : IProjectBuildAction
 {
     public void Execute(ProjectBuilder context)
     {
-        string path = Application.dataPath.Replace("/Assets", "/GradleProject");
+        string path = context.BuildPath;
 
         if (Directory.Exists(path))
         {
