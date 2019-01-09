@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class OrderBubbleView : UIBoardView
 {
-	[SerializeField] private Image icon;
 	[SerializeField] private Image mark;
 	[SerializeField] private GameObject question;
 
@@ -36,11 +35,14 @@ public class OrderBubbleView : UIBoardView
 		if (customer == null) return;
 		
 		customer.Order.SetMark(mark);
+
+		if (anchor != null) anchor.gameObject.SetActive(customer.Order.State != OrderState.Init);
 		
-		icon.gameObject.SetActive(customer.Order.State != OrderState.Init);
 		question.SetActive(customer.Order.State == OrderState.Init);
 		
-		icon.sprite = IconService.Current.GetSpriteById(customer.Order.Def.Uid);
+		if (string.IsNullOrEmpty(customer.Order.Def.Uid) || customer.Order.Def.Uid == PieceType.Parse(PieceType.Empty.Id)) return;
+		
+		CreateIcon(customer.Order.Def.Uid);
 	}
 
 	public override void OnSwap(bool isEnd)

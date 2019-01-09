@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class RewardsBubbleView : UIBoardView
 {
-	[SerializeField] private Image icon;
 	[SerializeField] private List<Image> borders;
 
 	protected override ViewType Id => ViewType.RewardsBubble;
@@ -31,9 +30,9 @@ public class RewardsBubbleView : UIBoardView
         
 		storage = piece.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid);
         
-		if (storage == null) return;
-        
-		icon.sprite = IconService.Current.GetSpriteById(storage.Icon);
+		if (storage == null || string.IsNullOrEmpty(storage.Icon) || storage.Icon == PieceType.Parse(PieceType.Empty.Id)) return;
+		
+		CreateIcon(storage.Icon);
 	}
 
 	protected override void UpdateView()

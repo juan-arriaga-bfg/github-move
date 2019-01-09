@@ -11,45 +11,28 @@ public class UIPiecesCheatSheetElementViewController : UIContainerElementViewCon
     
     [IWUIBinding("#IdLabel")] private NSText lblId;
     
-    [IWUIBinding("#Icon")] private Image ico;
+    [IWUIBinding("#Anchor")] private Transform anchor;
     
     [IWUIBinding] private UIButtonViewController rootButton;
 
     private int pieceId;
+    private Transform content;
     
     public override void Init()
     {
         base.Init();
         
         var targetEntity = entity as UIPiecesCheatSheetElementEntity;
-
-        Init(targetEntity.PieceId);
-    }
-    
-    public void Init(int pieceId)
-    {
-        this.pieceId = pieceId;
-
-        if (pieceId <= 0)
-        {
-            lblName.gameObject.SetActive(false);
-            ico.gameObject.SetActive(false);
-            return;
-        }
         
-        // var pieceManager = GameDataService.Current.PiecesManager;
+        pieceId = targetEntity.PieceId;
+        
         PieceTypeDef pieceTypeDef = PieceType.GetDefById(pieceId);
 
         lblName.Text = pieceTypeDef.Abbreviations[0];
-        lblId.Text = "id " + pieceId.ToString();
-
-        var spr = GetPieecSprite();
-        if (spr != null)
-        {
-            ico.sprite = spr;
-        }
+        lblId.Text = $"id {pieceId}";
+        CreateIcon(PieceType.Parse(pieceId));
     }
-
+    
     public override void OnViewShowCompleted()
     {
         base.OnViewShowCompleted();
@@ -98,9 +81,13 @@ public class UIPiecesCheatSheetElementViewController : UIContainerElementViewCon
                    .Append(window.GetCanvasGroup().DOFade(1f, 0.1f));
         }
     }
-
-    private Sprite GetPieecSprite()
+    
+    protected void CreateIcon(string id)
     {
-        return IconService.Current.GetSpriteById(PieceType.Parse(pieceId));
+        if (anchor == null) return;
+        if (content != null) UIService.Get.PoolContainer.Return(content.gameObject);
+        
+        content = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
+        content.SetParentAndReset(anchor);
     }
 }

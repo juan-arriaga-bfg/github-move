@@ -26,7 +26,6 @@ public class AnimationDataManager
         var piecesId = PieceType.GetIdsByFilter(filter);
         foreach (var id in piecesId)
         {
-            // Debug.LogWarning($"{PieceType.GetDefById(id).Abbreviations[0]}");
             AddPiece(defDict, id, definition);
         }
     }
@@ -78,7 +77,6 @@ public class AnimationDataManager
         var animationResource = "";
         if (animationDefinition != null)
             animationResource = onDefExist(animationDefinition);
-
         return animationResource;
     }
 }

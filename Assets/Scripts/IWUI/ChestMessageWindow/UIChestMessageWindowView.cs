@@ -39,10 +39,7 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
     
     private void CreateIcon(Transform parent, string id)
     {
-        if (chest != null)
-        {
-            UIService.Get.PoolContainer.Return(chest.gameObject);
-        }
+        if (chest != null) UIService.Get.PoolContainer.Return(chest.gameObject);
         
         chest = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
         chest.SetParentAndReset(parent);
