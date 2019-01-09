@@ -12,6 +12,8 @@ public class BuildActionFixExportedGradleProjectHierarhy : IProjectBuildAction
         string src = Path.Combine(dst, Application.productName);
         string tmp = Application.dataPath.Replace("/Assets", "/TEMP_DIR");
         
+        Debug.Log($"[BuildActionFixExportedGradleProjectHierarhy] => Final dir: {dst}, exported to (context.BuildPath): {src}, temp folder: {tmp}");
+        
         if (!Directory.Exists(src))
         {
             throw new Exception($"[BuildActionFixExportedGradleProjectHierarhy] => Execute: Directory NOT exist: '{src}'. Skip step!");

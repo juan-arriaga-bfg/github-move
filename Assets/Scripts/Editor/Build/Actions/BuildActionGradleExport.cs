@@ -11,6 +11,8 @@ public class BuildActionGradleExport : IProjectBuildAction
     {
         string path = context.BuildPath;
 
+        Debug.Log($"[BuildActionGradleExport] => Export to (context.BuildPath): {path}");
+        
         if (Directory.Exists(path))
         {
             ProjectBuildFileUtils.DeleteDirectory(path);
@@ -24,6 +26,8 @@ public class BuildActionGradleExport : IProjectBuildAction
 
         if (context.CurrentBuildType == ProjectBuilder.BuildType.Development)
         {
+            Debug.Log($"[BuildActionGradleExport] => Development flag set");
+            
             buildOptions = buildOptions | BuildOptions.Development;
             buildOptions = buildOptions | BuildOptions.AllowDebugging;
         }
