@@ -266,13 +266,11 @@ public class SecuredTimeManager : ISecuredTimeManager
             {
                 long currentTicks = GetMonotonicTime();
                 long elapsedTicks = currentTicks - securedMonotonicTime;
-                long elapsedSeconds = elapsedTicks / 1000;
 
                 DateTime securedDateTime = UnixTimeHelper.UnixTimestampToDateTime(securedServerTime);
 
-                DateTime utcNow = securedDateTime.AddSeconds(elapsedSeconds);
+                DateTime utcNow = securedDateTime.AddMilliseconds(elapsedTicks);
                 return utcNow;
-
             }
         }
     }
