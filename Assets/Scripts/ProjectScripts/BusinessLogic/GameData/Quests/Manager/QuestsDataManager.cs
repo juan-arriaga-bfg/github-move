@@ -609,7 +609,9 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
 
     private DateTime CalculateDailyTimerStartTime()
     {
-        var now = DateTime.Now;
+        // var now = DateTime.Now;
+        var secureTime = SecuredTimeService.Current;
+        var now = secureTime.Now;
         var todayDayStart = now.TruncDateTimeToDays();
         var todayQuestStart = todayDayStart.AddSeconds(DAILY_TIMER_START_OFFSET);
 

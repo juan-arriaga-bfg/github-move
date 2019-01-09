@@ -5,7 +5,10 @@ public static class DateTimeExtension
 {
     private static DateTime GetCurrentTime(bool utc)
     {
-        return utc ? DateTime.UtcNow : DateTime.Now;
+        // return utc ? DateTime.UtcNow : DateTime.Now;
+
+        var secureTime = SecuredTimeService.Current;
+        return utc ? secureTime.UtcNow : secureTime.Now;
     }
     
     public static long ConvertToUnixTime(this DateTime datetime, bool useUTC = true)
@@ -50,12 +53,16 @@ public static class DateTimeExtension
     
     public static TimeSpan GetTime(this DateTime datetime, bool useUTC = true)
     {
-        return (useUTC ? DateTime.UtcNow : DateTime.Now) - datetime;
+        //return (useUTC ? DateTime.UtcNow : DateTime.Now) - datetime;
+        var secureTime = SecuredTimeService.Current;
+        return (useUTC ? secureTime.UtcNow : secureTime.Now) - datetime;
     }
 
     public static TimeSpan GetTimeLeft(this DateTime datetime, bool useUTC = true)
     {
-        return datetime - (useUTC ? DateTime.UtcNow : DateTime.Now);
+        // return datetime - (useUTC ? DateTime.UtcNow : DateTime.Now);
+        var secureTime = SecuredTimeService.Current;
+        return datetime - (useUTC ? secureTime.UtcNow : secureTime.Now);
     }
     
     public static string GetDelayText(int delay, bool icon = false, string format = null)

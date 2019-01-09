@@ -39,7 +39,9 @@ public class TimerComponent : IECSComponent, IECSSystem
     
     public void Start()
     {
-        Start(UseUTC ? DateTime.UtcNow : DateTime.Now);
+        // Start(UseUTC ? DateTime.UtcNow : DateTime.Now);
+        var secureTime = SecuredTimeService.Current;
+        Start(UseUTC ? secureTime.UtcNow : secureTime.Now);
     }
 
     public void Start(long start)

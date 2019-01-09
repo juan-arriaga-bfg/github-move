@@ -22,7 +22,10 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         
         Timer.Delay = Delay;
         Timer.OnComplete += StepComplete;
-        Timer.StartTime = DateTime.Now;
+        
+        // Timer.StartTime = DateTime.Now;
+        var secureTime = SecuredTimeService.Current;
+        Timer.StartTime = secureTime.Now;
         Timer.OnExecute += TimerStopCheck;
         
         base.OnRegisterEntity(entity);
