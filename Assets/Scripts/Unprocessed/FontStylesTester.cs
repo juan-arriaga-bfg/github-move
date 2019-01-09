@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using IW.Content.ContentModule;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +11,16 @@ public class FontStylesTester : MonoBehaviour
 
     private void Start()
     {
+        IWAssetBundleManager assetBundleManager = new IWAssetBundleManager();
+        IDataMapper<List<IWAssetBundleData>> assetBundleManagerDataMapper = new ResourceConfigDataMapper<List<IWAssetBundleData>>("iw/assetbundles.data", false);
+        assetBundleManager.LoadData(assetBundleManagerDataMapper);
+        IWAssetBundleService.Instance.SetManager(assetBundleManager);
+        
+        ContentManager contentManager = new DefaultContentManager();
+        IDataMapper<List<ContentData>> contentManagerDataMapper = new ResourceConfigDataMapper<List<ContentData>>("iw/content.data", false);
+        contentManager.LoadData(contentManagerDataMapper);
+        ContentService.Instance.SetManager(contentManager);
+        
         Refresh();
     }
     
