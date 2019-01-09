@@ -32,8 +32,7 @@ public class ProjectBuilderAndroid
             .AddBuildAction(new BuildActionBuildAssetBundles())
             .AddBuildAction(new BuildActionDisableScenes())
             .AddBuildAction(new BuildActionSetScriptingBackend()
-                //.SetType(useIL2CPP ? ScriptingImplementation.IL2CPP : ScriptingImplementation.Mono2x)
-                )
+                .SetType(useIL2CPP ? ScriptingImplementation.IL2CPP : ScriptingImplementation.Mono2x))
              
             .AddBuildAction(new BuildActionGradleExport())
              
