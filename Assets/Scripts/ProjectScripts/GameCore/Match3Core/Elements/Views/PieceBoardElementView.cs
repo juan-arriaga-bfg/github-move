@@ -209,15 +209,6 @@ public class PieceBoardElementView : BoardElementView
         Piece.Context.HintCooldown.Resume(this);
         
         if (selectionView == null) return;
-        
-        List<BoardPosition> matchField = new List<BoardPosition>();
-        var isMatchHover = CheckMatchHover(Piece.CachedPosition, boardPos, out matchField);
-        
-        if (isMatchHover)
-        {
-            dragMatchAnimation.CompleteAnimation(Piece.Context.RendererContext);
-            dragMatchAnimation = null;
-        }
 
         if (dragMatchAnimation != null)
         {
@@ -225,9 +216,6 @@ public class PieceBoardElementView : BoardElementView
             dragMatchAnimation = null;
         }
             
-        
-        
-        
         ToggleSelection(false);
     }
 

@@ -17,6 +17,7 @@ public class MatchHoverAnimation : BoardAnimation
         From = From.SetZ(BoardLayer.Piece.Layer);
         
         DOTween.Kill(animationUid);
+        
         var sequence = DOTween.Sequence();
         sequence.SetId(animationUid);
         var targetVector =
@@ -64,14 +65,14 @@ public class MatchHoverAnimation : BoardAnimation
             sequence.Insert(0, view.DOMove(targetPos, 0.4f).SetEase(Ease.InBack).OnKill(() =>
             {
                 if (isRevert)
-                    view.DOMove(startPos, 0.2f);
+                    view.DOLocalMove(Vector3.zero, 0.2f).SetId(animationUid).OnKill(() => view.transform.localPosition = Vector3.zero);
                 else
-                    view.transform.position = startPos;
+                    view.transform.localPosition = Vector3.zero;
+
                 if(!alreadyHighlight)
                     HighlightMatchable(pieceView, false);
             }));
-            sequence.Insert(0.4f, view.DOMove(startPos, 0.2f).SetEase(Ease.Linear));
-            view.DOMove(startPos, 0.2f).SetEase(Ease.Linear);
+            sequence.Insert(0.4f, view.DOLocalMove(Vector3.zero, 0.2f).SetEase(Ease.Linear));
         }
 
         sequence.SetLoops(-1, LoopType.Restart);
@@ -86,7 +87,8 @@ public class MatchHoverAnimation : BoardAnimation
     public void RevertAnimation(BoardRenderer context)
     {
         isRevert = true;
-        StopAnimation(context);
+        DOTween.Kill(animationUid);
+        isRevert = false;
     }
     
     public override void StopAnimation(BoardRenderer context)
