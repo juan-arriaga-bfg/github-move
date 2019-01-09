@@ -19,7 +19,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
         
-        Fill(UpdateEntities(windowModel.Chests), content);
+        Fill(UpdateEntities(windowModel.Slots), content);
         
         content.CachedRectTransform.anchoredPosition = new Vector2(-375, 0);
         content.GetScrollRect().enabled = false;
@@ -60,7 +60,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         btnResetLabel.Text = windowModel.ButtonReset;
     }
     
-    private List<IUIContainerElementEntity> UpdateEntities(List<ChestDef> entities)
+    private List<IUIContainerElementEntity> UpdateEntities(List<MarketDef> entities)
     {
         var views = new List<IUIContainerElementEntity>(entities.Count);
         
@@ -68,12 +68,12 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         {
             var def = entities[i];
             
-            var entity = new UIChestsShopElementEntity
+            var entity = new UIMarketElementEntity
             {
-                ContentId = def.Uid,
-                LabelText = "x1",
-                Name = LocalizationService.Get($"piece.name.{def.Uid}", $"piece.name.{def.Uid}"),
-                Chest = def,
+                ContentId = def.Weight.Uid,
+                LabelText = $"x{def.Amount}",
+                Name = LocalizationService.Get($"piece.name.{def.Weight.Uid}", $"piece.name.{def.Weight.Uid}"),
+                Def = def,
                 OnSelectEvent = null,
                 OnDeselectEvent = null
             };
@@ -103,7 +103,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         {
             var windowModel = Model as UIMarketWindowModel;
 
-            Fill(UpdateEntities(windowModel.Chests), content);
+            Fill(UpdateEntities(windowModel.Slots), content);
         });
         
         sequence.Append(content.CachedRectTransform.DOAnchorPosX(0, 1f).SetEase(Ease.OutBack));

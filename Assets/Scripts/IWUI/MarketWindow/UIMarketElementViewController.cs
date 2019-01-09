@@ -1,6 +1,7 @@
-﻿using UnityEngine.UI;
+﻿using System.Collections.Generic;
+using UnityEngine.UI;
 
-public class UIChestsShopElementViewController : UISimpleScrollElementViewController
+public class UIMarketElementViewController : UISimpleScrollElementViewController
 {
 	[IWUIBinding("#NameLabel")] private NSText nameLabel;
 	[IWUIBinding("#ButtonLabel")] private NSText btnLabel;
@@ -18,11 +19,11 @@ public class UIChestsShopElementViewController : UISimpleScrollElementViewContro
 	{
 		base.Init();
 		
-		var contentEntity = entity as UIChestsShopElementEntity;
+		var contentEntity = entity as UIMarketElementEntity;
 		
 		isClick = false;
 		isReward = false;
-		isFree = PieceType.CH_Free.Id == contentEntity.Chest.Piece;
+		isFree = contentEntity.Def.Price == null;
 
 		nameLabel.Text = contentEntity.Name;
 		
@@ -30,7 +31,7 @@ public class UIChestsShopElementViewController : UISimpleScrollElementViewContro
 		
 		btnLabel.Text = isFree
 			? LocalizationService.Get("common.button.claim", "common.button.claim")
-			: string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), contentEntity.Chest.Price.ToStringIcon());
+			: string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), contentEntity.Def.Price.ToStringIcon());
 	}
 
 	public override void OnViewShowCompleted()
@@ -48,7 +49,7 @@ public class UIChestsShopElementViewController : UISimpleScrollElementViewContro
 
 	public override void OnViewCloseCompleted()
 	{
-		var contentEntity = entity as UIChestsShopElementEntity;
+		var contentEntity = entity as UIMarketElementEntity;
 		
 		if(contentEntity == null) return;
 		
@@ -56,15 +57,24 @@ public class UIChestsShopElementViewController : UISimpleScrollElementViewContro
 		
 		var board = BoardService.Current.FirstBoard;
 		var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
-		var piece = board.BoardLogic.GetPieceAt(position);
-        
-		var menu = piece.TouchReaction?.GetComponent<TouchReactionDefinitionMenu>(TouchReactionDefinitionMenu.ComponentGuid);
-		var spawn = menu?.GetDefinition<TouchReactionDefinitionSpawnShop>();
-        
-		if(spawn == null) return;
-
-		spawn.Reward = contentEntity.Chest.Piece;
-		spawn.Make(piece.CachedPosition, piece);
+		var reward = new CurrencyPair {Currency = contentEntity.Def.Weight.Uid, Amount = contentEntity.Def.Amount};
+		
+		List<CurrencyPair> currencysReward;
+		var piecesReward = CurrencyHellper.FiltrationRewards(new List<CurrencyPair>{reward}, out currencysReward);
+		
+		board.ActionExecutor.AddAction(new EjectionPieceAction
+		{
+			GetFrom = () => position,
+			Pieces = piecesReward,
+			OnComplete = () =>
+			{
+				var view = board.RendererContext.GetElementAt(position) as CharacterPieceView;
+                
+				if(view != null) view.StartRewardAnimation();
+                    
+				AddResourceView.Show(position, currencysReward);
+			}
+		});
 	}
 	
 	private void ChengeButtons()
@@ -110,9 +120,9 @@ public class UIChestsShopElementViewController : UISimpleScrollElementViewContro
 
 	private void OnClickPaid()
 	{
-		var contentEntity = entity as UIChestsShopElementEntity;
+		var contentEntity = entity as UIMarketElementEntity;
 		
-		CurrencyHellper.Purchase(Currency.Chest.Name, 1, contentEntity.Chest.Price, success =>
+		CurrencyHellper.Purchase(Currency.Chest.Name, 1, contentEntity.Def.Price, success =>
 		{
 			if (success == false)
 			{
