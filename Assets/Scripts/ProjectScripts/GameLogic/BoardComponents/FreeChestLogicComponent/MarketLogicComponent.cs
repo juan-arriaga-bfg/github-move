@@ -9,7 +9,7 @@
 	{
 		RegisterComponent(Timer);
 		
-		Timer.Delay = GameDataService.Current.ConstantsManager.FreeChestDelay;
+		Timer.Delay = GameDataService.Current.ConstantsManager.MarketUpdateDelay;
 		
 		var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
 

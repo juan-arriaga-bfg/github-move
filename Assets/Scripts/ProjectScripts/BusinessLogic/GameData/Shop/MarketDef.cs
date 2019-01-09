@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public enum MarketRandomType
 {
     Base,
-    BasePieces,
+    BasePiecesEasy,
+    BasePiecesHard,
     Ingredients,
     BaseСhests,
 }
@@ -42,8 +45,11 @@ public class MarketDefParrent
     {
         switch (def.RandomType)
         {
-            case MarketRandomType.BasePieces:
-                def.Weight.Uid = GetRandomPiece();
+            case MarketRandomType.BasePiecesEasy:
+                def.Weight.Uid = GetRandomPiece(2, 3);
+                break;
+            case MarketRandomType.BasePiecesHard:
+                def.Weight.Uid = GetRandomPiece(3, 5);
                 break;
             case MarketRandomType.Ingredients:
                 def.Weight.Uid = GetRandomIngredient();
@@ -55,19 +61,54 @@ public class MarketDefParrent
         
         return def;
     }
-
-    private string GetRandomPiece()
+    
+    private string GetRandomPiece(int min, int max)
     {
-        return PieceType.A3.Abbreviations[0];
-    }
+        var board = BoardService.Current.FirstBoard;
+        var definition = board.BoardLogic.MatchDefinition;
+        
+        var pieces = PieceType.GetIdsByFilter(PieceTypeFilter.Normal, PieceTypeFilter.Fake);
+        
+        pieces = pieces.FindAll(id =>
+        {
+            var index = definition.GetIndexInChain(id);
+            
+            return index > min && GameDataService.Current.CodexManager.IsPieceUnlocked(id);
+        });
 
+        if (pieces.Count == 0) return null;
+
+        var chains = new Dictionary<int, int>();
+        
+        foreach (var id in pieces)
+        {
+            var key = definition.GetFirst(id);
+            int value;
+
+            if (chains.TryGetValue(key, out value) == false)
+            {
+                chains.Add(key, id);
+                continue;
+            }
+
+            if (value < id) chains[key] = id;
+        }
+        
+        var ids = chains.Values.ToList();
+        var maxId = ids[Random.Range(0, ids.Count)];
+        var chain = definition.GetChain(maxId);
+        var find = Mathf.Min(max, chain.IndexOf(maxId) - 1);
+
+        return PieceType.Parse(chain[find]);
+    }
+    
     private string GetRandomIngredient()
     {
         var item = ItemWeight.GetRandomItem(GameDataService.Current.LevelsManager.ResourcesWeights);
         
         return item?.Uid;
     }
-
+    
     private string GetRandomChest()
     {
         var chests = PieceType.GetIdsByFilter(PieceTypeFilter.Chest, PieceTypeFilter.Bag);
