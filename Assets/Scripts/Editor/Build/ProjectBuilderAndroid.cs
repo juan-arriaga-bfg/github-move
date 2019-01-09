@@ -68,7 +68,7 @@ public class ProjectBuilderAndroid
         
         string buildMode = parameters.First(e => e.StartsWith("buildmode")).Split(';')[1];
         
-        ProjectBuilder.BuildPurpose purpose = ProjectBuilder.BuildPurpose.Qa;
+        ProjectBuilder.BuildPurpose purpose;
         switch (buildMode)
         {
                 case "qa" : purpose = ProjectBuilder.BuildPurpose.Qa; break;
