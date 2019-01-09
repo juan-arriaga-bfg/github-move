@@ -4,7 +4,7 @@ using UnityEditor;
 
 public class BuildActionSetScriptingBackendIL2CPP : BuildActionSetScriptingBackendBase
 {
-    public override ScriptingImplementation ScriptingImplementation => ScriptingImplementation.IL2CPP;
+    protected override ScriptingImplementation ScriptingImplementation => ScriptingImplementation.IL2CPP;
 }
 
 #endif

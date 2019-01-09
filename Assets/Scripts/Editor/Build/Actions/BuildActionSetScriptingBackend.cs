@@ -6,7 +6,7 @@ public class BuildActionSetScriptingBackend : BuildActionSetScriptingBackendBase
 {
     private ScriptingImplementation scriptingImplementation;
 
-    public override ScriptingImplementation ScriptingImplementation => scriptingImplementation;
+    protected override ScriptingImplementation ScriptingImplementation => scriptingImplementation;
 
     public IProjectBuildAction SetType(ScriptingImplementation scriptingImplementation)
     {

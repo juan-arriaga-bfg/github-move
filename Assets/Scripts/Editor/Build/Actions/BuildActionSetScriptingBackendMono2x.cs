@@ -4,7 +4,7 @@ using UnityEditor;
 
 public class BuildActionSetScriptingBackendMono2x : BuildActionSetScriptingBackendBase
 {
-    public override ScriptingImplementation ScriptingImplementation => ScriptingImplementation.Mono2x;
+    protected override ScriptingImplementation ScriptingImplementation => ScriptingImplementation.Mono2x;
 }
 
 #endif
