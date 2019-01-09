@@ -2,16 +2,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
-
-public interface IProjectBuildAction
-{
-    void Execute(ProjectBuilder context);
-}
 
 public class ProjectBuilder
 {
@@ -230,6 +226,28 @@ public class ProjectBuilder
         }
 
         return parameters;
+    }
+    
+    [UsedImplicitly]
+    public static void GenerateBuildLog()
+    {
+        IWProjectVerisonsEditor.GetCurrentVersion();
+
+        string resultLog = "version:" + string.Format("{0}_{1}_{2}_{3}_{4}",
+                               IWProjectVersionSettings.Instance.MajorVersion, 
+                               IWProjectVersionSettings.Instance.MinorVersion, 
+                               IWProjectVersionSettings.Instance.BuildVersion, 
+                               IWProjectVersionSettings.Instance.BuildNumber,
+                               IWProjectVersionSettings.Instance.RevisionId.Remove(7));
+
+        string path = Application.dataPath.Replace("/Assets", "/Builds");
+
+        if (Directory.Exists(path) == false)
+        {
+            Directory.CreateDirectory(path);
+        }
+
+        File.WriteAllText(path + "/buildlog.txt", resultLog);
     }
 }
 
