@@ -57,8 +57,8 @@ public class ProjectBuilderAndroid
     public static void AutoBuild()
     {
         var customOptions = new Dictionary<string, string>();
-        
-        List<string> parameters = AutoBuildsTool.GetParameters();
+
+        List<string> parameters = ProjectBuilder.GetCommandLineParameters();
 
         string path = parameters.First(e => e.StartsWith("exportpath")).Split(';')[1];
         ProjectBuilder.BuildType buildType = parameters.Contains("dev") ? ProjectBuilder.BuildType.Development : ProjectBuilder.BuildType.Release;

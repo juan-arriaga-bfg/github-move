@@ -2,6 +2,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using JetBrains.Annotations;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -188,6 +190,46 @@ public class ProjectBuilder
         Debug.Log($"[ProjectBuilder] => OnPostprocessBuild");
         
         ExecuteActions(postBuildActions);
+    }
+    
+    [UsedImplicitly]
+    public static void SwitchPlatform()
+    {
+        List<string> parameters = GetCommandLineParameters();
+
+        if (parameters.Count > 0)
+        {
+            if (parameters.Contains("target;ios"))
+            {
+                EditorUserBuildSettings.SwitchActiveBuildTarget(BuildPipeline.GetBuildTargetGroup(BuildTarget.iOS), BuildTarget.iOS);
+            }
+
+            if (parameters.Contains("target;android"))
+            {
+                EditorUserBuildSettings.SwitchActiveBuildTarget(BuildPipeline.GetBuildTargetGroup(BuildTarget.Android), BuildTarget.Android);
+            }
+        }
+    }
+    
+    public static List<string> GetCommandLineParameters()
+    {
+        List<string> parameters = new List<string>();
+		
+        var args = System.Environment.GetCommandLineArgs();
+
+        string paramsString = args.FirstOrDefault(x => x.Contains("-params"));
+
+        string[] paramsList = paramsString.Split(':');
+
+        foreach (string par in paramsList)
+        {
+            if (par.Equals("-params") == false)
+            {
+                parameters.Add(par);
+            }
+        }
+
+        return parameters;
     }
 }
 
