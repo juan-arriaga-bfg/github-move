@@ -526,7 +526,7 @@ MonoBehaviour:
   progressLabel: {fileID: 7030218166754220320}
   mainRect: {fileID: 7611766376682446262}
   filledRect: {fileID: 4209206171970423474}
-  finalPadding: 10
+  finalPadding: 22
 --- !u!1 &4315976470356723406
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,8 +653,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 11, y: 3.7}
-  m_SizeDelta: {x: 783, y: 38}
+  m_AnchoredPosition: {x: 11, y: 4.006}
+  m_SizeDelta: {x: 783, y: 38.611}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &7360358030621561497
 CanvasRenderer:
@@ -762,8 +762,7 @@ MonoBehaviour:
   m_text: 100%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
-  m_sharedMaterial: {fileID: 21898692518253514, guid: 63ef471c6f037d14f953762c601d0d5c,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 949951b827e5510489fe1fd80528a77c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -868,7 +867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowSwitching: 1
-  styleId: 15
+  styleId: 21
 --- !u!1 &8601176772864232033
 GameObject:
   m_ObjectHideFlags: 0
