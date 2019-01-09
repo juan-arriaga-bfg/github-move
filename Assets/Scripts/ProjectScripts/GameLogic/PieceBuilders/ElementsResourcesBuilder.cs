@@ -49,6 +49,16 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.NPC_7.Id, R.NPC_7Piece);
         dict.Add(PieceType.NPC_8.Id, R.NPC_8Piece);
         dict.Add(PieceType.NPC_9.Id, R.NPC_9Piece);
+        dict.Add(PieceType.NPC_10.Id, R.NPC_10Piece);
+        dict.Add(PieceType.NPC_11.Id, R.NPC_11Piece);
+        dict.Add(PieceType.NPC_12.Id, R.NPC_12Piece);
+        dict.Add(PieceType.NPC_13.Id, R.NPC_13Piece);
+        dict.Add(PieceType.NPC_14.Id, R.NPC_14Piece);
+        dict.Add(PieceType.NPC_15.Id, R.NPC_15Piece);
+        dict.Add(PieceType.NPC_16.Id, R.NPC_16Piece);
+        dict.Add(PieceType.NPC_17.Id, R.NPC_17Piece);
+        dict.Add(PieceType.NPC_18.Id, R.NPC_18Piece);
+        dict.Add(PieceType.NPC_19.Id, R.NPC_19Piece);
         
 #endregion
         

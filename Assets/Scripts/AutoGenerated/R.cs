@@ -202,4 +202,14 @@ public class R
      public const string PR_G4Piece = "PR_G4Piece";
      public const string PR_G5Piece = "PR_G5Piece";
      public const string DestroyWorkerAnimation = "DestroyWorkerAnimation";
+     public const string NPC_10Piece = "NPC_10Piece";
+     public const string NPC_11Piece = "NPC_11Piece";
+     public const string NPC_12Piece = "NPC_12Piece";
+     public const string NPC_13Piece = "NPC_13Piece";
+     public const string NPC_14Piece = "NPC_14Piece";
+     public const string NPC_15Piece = "NPC_15Piece";
+     public const string NPC_16Piece = "NPC_16Piece";
+     public const string NPC_17Piece = "NPC_17Piece";
+     public const string NPC_18Piece = "NPC_18Piece";
+     public const string NPC_19Piece = "NPC_19Piece";
 }

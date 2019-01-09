@@ -122,6 +122,17 @@ public static partial class PieceType
     public static readonly PieceTypeDef NPC_7 = new PieceTypeDef{Id = 17, Abbreviations = new List<string>{ "NPC_7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     public static readonly PieceTypeDef NPC_8 = new PieceTypeDef{Id = 18, Abbreviations = new List<string>{ "NPC_8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     public static readonly PieceTypeDef NPC_9 = new PieceTypeDef{Id = 19, Abbreviations = new List<string>{ "NPC_9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_10 = new PieceTypeDef{Id = 20, Abbreviations = new List<string>{ "NPC_10" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_11 = new PieceTypeDef{Id = 21, Abbreviations = new List<string>{ "NPC_11" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_12 = new PieceTypeDef{Id = 22, Abbreviations = new List<string>{ "NPC_12" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_13 = new PieceTypeDef{Id = 23, Abbreviations = new List<string>{ "NPC_13" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_14 = new PieceTypeDef{Id = 24, Abbreviations = new List<string>{ "NPC_14" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_15 = new PieceTypeDef{Id = 25, Abbreviations = new List<string>{ "NPC_15" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_16 = new PieceTypeDef{Id = 26, Abbreviations = new List<string>{ "NPC_16" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_17 = new PieceTypeDef{Id = 27, Abbreviations = new List<string>{ "NPC_17" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_18 = new PieceTypeDef{Id = 28, Abbreviations = new List<string>{ "NPC_18" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_19 = new PieceTypeDef{Id = 29, Abbreviations = new List<string>{ "NPC_19" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    
     
 #endregion
     

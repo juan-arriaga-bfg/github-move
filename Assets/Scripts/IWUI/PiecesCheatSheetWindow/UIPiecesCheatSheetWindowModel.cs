@@ -32,7 +32,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
         switch (tab)
         {
             case "Characters":
-                ids.AddRange(GetPieceIds(PieceType.NPC_SleepingBeauty.Id, PieceType.NPC_9.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC_SleepingBeauty.Id, PieceType.NPC_19.Id));
                 break;
             case "Boosters":
                 ids.AddRange(GetPieceIds(PieceType.Boost_CR1.Id, PieceType.Boost_CR.Id));

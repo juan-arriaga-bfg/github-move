@@ -21,7 +21,7 @@ public class PieceBuildersBuilder
     {
         dict.Add(PieceType.Boost_WR.Id, new SimplePieceBuilder());
         
-        dict = AddSimplePiece<CharacterPieceBuilder>(PieceType.NPC_SleepingBeauty.Id, PieceType.NPC_9.Id, dict);
+        dict = AddSimplePiece<CharacterPieceBuilder>(PieceType.NPC_SleepingBeauty.Id, PieceType.NPC_19.Id, dict);
         
         dict = AddBuildingBranchPiece(dict, PieceType.A1.Id, PieceType.A9.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.B1.Id, PieceType.B11.Id);
