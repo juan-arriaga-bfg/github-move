@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
@@ -60,9 +61,21 @@ public class ProjectBuilderAndroid
         List<string> parameters = ProjectBuilder.GetCommandLineParameters();
 
         string path = parameters.First(e => e.StartsWith("exportpath")).Split(';')[1];
+        
         ProjectBuilder.BuildType buildType = parameters.Contains("dev") ? ProjectBuilder.BuildType.Development : ProjectBuilder.BuildType.Release;
+        
         ProjectBuilder.BuildPlatform platform = ProjectBuilder.BuildPlatform.Android;
+        
+        string buildMode = parameters.First(e => e.StartsWith("buildmode")).Split(';')[1];
+        
         ProjectBuilder.BuildPurpose purpose = ProjectBuilder.BuildPurpose.Qa;
+        switch (buildMode)
+        {
+                case "qa" : purpose = ProjectBuilder.BuildPurpose.Qa; break;
+                case "prod" : purpose = ProjectBuilder.BuildPurpose.Prod; break;
+                case "stage" : purpose = ProjectBuilder.BuildPurpose.Stage; break;
+                default: throw new Exception($"'buildmode' param is requred with value 'qa', 'prod', or 'stage'. Check your command line!");
+        }
 
         bool useIL2CPP = parameters.Contains("cpp");
         
