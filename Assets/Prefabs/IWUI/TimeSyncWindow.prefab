@@ -180,7 +180,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 10
-  m_Depth: 31
+  m_Depth: 100
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 32
@@ -728,7 +728,7 @@ MonoBehaviour:
   currentLayer: 31
   viewCamera: {fileID: 270817237507416522}
   isAutoLayer: 1
-  isAutoDepth: 1
+  isAutoDepth: 0
 --- !u!1 &5377145629157284448
 GameObject:
   m_ObjectHideFlags: 0
