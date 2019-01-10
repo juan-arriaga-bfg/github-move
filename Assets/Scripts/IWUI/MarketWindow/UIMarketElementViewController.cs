@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,24 +33,24 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		isReward = false;
 
 		var isLock = contentEntity.Def.State == MarketItemState.Lock || contentEntity.Def.State == MarketItemState.Claimed;
-
-		if (isLock)
-		{
-			CreateIcon(lockAnchor, contentEntity.ContentId);
-			Sepia = true;
-		}
 		
 		back.color = new Color(1, 1, 1, isLock ? 0.5f : 1);
 		
 		unlockObj.SetActive(!isLock);
 		lockObj.SetActive(isLock);
+		
+		if (isLock)
+		{
+			CreateIcon(lockAnchor, contentEntity.ContentId);
+			Sepia = true;
+		}
 
 		nameLabel.Text = contentEntity.Def.State != MarketItemState.Lock
 			? contentEntity.Name
 			: string.Format(LocalizationService.Get("window.market.item.locked.message", "window.market.item.locked.message {0}"), contentEntity.Def.Level);
 		
 		lockAmountLabel.Text = contentEntity.Def.State == MarketItemState.Lock ? "" : contentEntity.LabelText;
-
+		
 		switch (contentEntity.Def.State)
 		{
 			case MarketItemState.Lock:

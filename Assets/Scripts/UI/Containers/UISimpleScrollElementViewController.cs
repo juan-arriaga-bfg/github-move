@@ -31,6 +31,8 @@ public class UISimpleScrollElementViewController : UIContainerElementViewControl
     {
         set
         {
+            if(IconSprites == null) return;
+            
             if (lockMaterial == null) lockMaterial = (Material) ContentService.Current.GetObjectByName("UiSepia");
             if (unlockMaterial == null) unlockMaterial = IconSprites.Count > 0 ? IconSprites[0].material : lockMaterial;
 
@@ -81,6 +83,8 @@ public class UISimpleScrollElementViewController : UIContainerElementViewControl
         Sepia = false;
         
         if (content != null) UIService.Get.PoolContainer.Return(content.gameObject);
+
+        content = null;
         
         base.OnViewCloseCompleted();
     }
