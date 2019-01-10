@@ -110,17 +110,22 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		
 		isClick = true;
 		
+		var contentEntity = entity as UIMarketElementEntity;
+		
 		var board = BoardService.Current.FirstBoard;
 		var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
 		
-		if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, 1))
+		if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, contentEntity.Def.Reward.Amount))
 		{
 			isClick = false;
-			UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
+			
+			// No free space
+			UIMessageWindowController.CreateMessage(
+				LocalizationService.Get("window.daily.error.title", "window.daily.error.title"),
+				LocalizationService.Get("window.daily.error.free.space", "window.daily.error.free.space"));
+			
 			return;
 		}
-		
-		var contentEntity = entity as UIMarketElementEntity;
 		
 		if (contentEntity.Def.State == MarketItemState.Purchased)
 		{
@@ -140,6 +145,33 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	private void OnClickPaid()
 	{
 		var contentEntity = entity as UIMarketElementEntity;
+		var price = contentEntity.Def.Current.Price;
+
+		if (CurrencyHellper.IsCanPurchase(price, true) == false)
+		{
+			isClick = false;
+			return;
+		}
+		
+		if (price.Currency != Currency.Crystals.Name)
+		{
+			Paid();
+			return;
+		}
+
+		UIMessageWindowController.CreateMessage(
+			LocalizationService.Get("window.confirmation.market.title", "window.confirmation.market.title"),
+			string.Format(LocalizationService.Get("window.confirmation.market.message", "window.confirmation.market.message {0}"), price.ToStringIcon()),
+			contentEntity.Def.Reward.Currency,
+			Paid,
+			null,
+			() => { isClick = false; }
+		);
+	}
+	
+	private void Paid()
+	{
+		var contentEntity = entity as UIMarketElementEntity;
 		
 		CurrencyHellper.Purchase(Currency.Chest.Name, 1, contentEntity.Def.Current.Price, success =>
 		{
@@ -148,7 +180,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 				isClick = false;
 				return;
 			}
-			
+
 			isReward = true;
 			contentEntity.Def.State = MarketItemState.Purchased;
 			context.Controller.CloseCurrentWindow();
