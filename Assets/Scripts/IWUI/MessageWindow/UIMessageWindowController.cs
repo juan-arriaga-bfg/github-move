@@ -28,7 +28,7 @@ public class UIMessageWindowController : IWWindowController {
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
     
-    public static void CreateDefaultMessage(string message, Action OnAccept = null)
+    public static void CreateDefaultMessage(string message, Action onAccept = null)
     {
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
@@ -36,22 +36,25 @@ public class UIMessageWindowController : IWWindowController {
         model.Message = message;
         model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
         
-        model.OnAccept = OnAccept ?? (() => {});
+        model.OnAccept = onAccept ?? (() => {});
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
 
-    public static void CreateMessage(string title, string message, Action OnAccept = null, Action OnCancel = null, bool isHardAccept = false)
+    public static void CreateMessage(string title, string message, string prefab = null, Action onAccept = null, Action onCancel = null, Action onClose = null, bool isHardAccept = false)
     {
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
         model.Title = title;
         model.Message = message;
+        model.Prefab = prefab;
         model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
+        model.CancelLabel = LocalizationService.Get("common.button.no", "common.button.no");
         model.IsHardAccept = isHardAccept;
         
-        model.OnAccept = OnAccept ?? (() => {});
-        model.OnCancel = OnCancel;
+        model.OnAccept = onAccept ?? (() => {});
+        model.OnCancel = onCancel;
+        model.OnClose = onClose;
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }

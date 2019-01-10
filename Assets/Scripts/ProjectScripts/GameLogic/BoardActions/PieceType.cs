@@ -24,6 +24,7 @@ public enum PieceTypeFilter
     ProductionField = 32768, // Грядка (bed)
     Removable = 65536,
     Bag = 131072,
+    Normal = 262144,
 }
 
 public partial class PieceTypeDef
@@ -236,89 +237,89 @@ public static partial class PieceType
     
     #region A
     
-    public static readonly PieceTypeDef A1 = new PieceTypeDef{Id = 100000, Abbreviations = new List<string>{ "A1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
-    public static readonly PieceTypeDef A2 = new PieceTypeDef{Id = 100001, Abbreviations = new List<string>{ "A2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
-    public static readonly PieceTypeDef A3Fake = new PieceTypeDef{Id = 100002, Abbreviations = new List<string>{ "A3Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef A3 = new PieceTypeDef{Id = 100003, Abbreviations = new List<string>{ "A3" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef A4Fake = new PieceTypeDef{Id = 100004, Abbreviations = new List<string>{ "A4Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef A4 = new PieceTypeDef{Id = 100005, Abbreviations = new List<string>{ "A4" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef A5Fake = new PieceTypeDef{Id = 100006, Abbreviations = new List<string>{ "A5Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef A5 = new PieceTypeDef{Id = 100007, Abbreviations = new List<string>{ "A5" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef A6Fake = new PieceTypeDef{Id = 100008, Abbreviations = new List<string>{ "A6Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef A6 = new PieceTypeDef{Id = 100009, Abbreviations = new List<string>{ "A6" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef A7Fake = new PieceTypeDef{Id = 100010, Abbreviations = new List<string>{ "A7Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef A7 = new PieceTypeDef{Id = 100011, Abbreviations = new List<string>{ "A7" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef A8Fake = new PieceTypeDef{Id = 100012, Abbreviations = new List<string>{ "A8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef A8 = new PieceTypeDef{Id = 100013, Abbreviations = new List<string>{ "A8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef A9Fake = new PieceTypeDef{Id = 100014, Abbreviations = new List<string>{ "A9Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef A9 = new PieceTypeDef{Id = 100015, Abbreviations = new List<string>{ "A9" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Workplace};
+    public static readonly PieceTypeDef A1 = new PieceTypeDef{Id = 100000, Abbreviations = new List<string>{ "A1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef A2 = new PieceTypeDef{Id = 100001, Abbreviations = new List<string>{ "A2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef A3Fake = new PieceTypeDef{Id = 100002, Abbreviations = new List<string>{ "A3Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef A3 = new PieceTypeDef{Id = 100003, Abbreviations = new List<string>{ "A3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef A4Fake = new PieceTypeDef{Id = 100004, Abbreviations = new List<string>{ "A4Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef A4 = new PieceTypeDef{Id = 100005, Abbreviations = new List<string>{ "A4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef A5Fake = new PieceTypeDef{Id = 100006, Abbreviations = new List<string>{ "A5Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef A5 = new PieceTypeDef{Id = 100007, Abbreviations = new List<string>{ "A5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef A6Fake = new PieceTypeDef{Id = 100008, Abbreviations = new List<string>{ "A6Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef A6 = new PieceTypeDef{Id = 100009, Abbreviations = new List<string>{ "A6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef A7Fake = new PieceTypeDef{Id = 100010, Abbreviations = new List<string>{ "A7Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef A7 = new PieceTypeDef{Id = 100011, Abbreviations = new List<string>{ "A7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef A8Fake = new PieceTypeDef{Id = 100012, Abbreviations = new List<string>{ "A8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef A8 = new PieceTypeDef{Id = 100013, Abbreviations = new List<string>{ "A8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef A9Fake = new PieceTypeDef{Id = 100014, Abbreviations = new List<string>{ "A9Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef A9 = new PieceTypeDef{Id = 100015, Abbreviations = new List<string>{ "A9" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
     
     #endregion
     
     #region B
     
-    public static readonly PieceTypeDef B1 = new PieceTypeDef{Id = 100100, Abbreviations = new List<string>{ "B1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
-    public static readonly PieceTypeDef B2 = new PieceTypeDef{Id = 100101, Abbreviations = new List<string>{ "B2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
-    public static readonly PieceTypeDef B3Fake = new PieceTypeDef{Id = 100102, Abbreviations = new List<string>{ "B3Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef B3 = new PieceTypeDef{Id = 100103, Abbreviations = new List<string>{ "B3" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef B4Fake = new PieceTypeDef{Id = 100104, Abbreviations = new List<string>{ "B4Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef B4 = new PieceTypeDef{Id = 100105, Abbreviations = new List<string>{ "B4" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef B5Fake = new PieceTypeDef{Id = 100106, Abbreviations = new List<string>{ "B5Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef B5 = new PieceTypeDef{Id = 100107, Abbreviations = new List<string>{ "B5" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef B6Fake = new PieceTypeDef{Id = 100108, Abbreviations = new List<string>{ "B6Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef B6 = new PieceTypeDef{Id = 100109, Abbreviations = new List<string>{ "B6" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef B7Fake = new PieceTypeDef{Id = 100110, Abbreviations = new List<string>{ "B7Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef B7 = new PieceTypeDef{Id = 100111, Abbreviations = new List<string>{ "B7" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef B8Fake = new PieceTypeDef{Id = 100112, Abbreviations = new List<string>{ "B8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef B8 = new PieceTypeDef{Id = 100113, Abbreviations = new List<string>{ "B8" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef B9Fake = new PieceTypeDef{Id = 100114, Abbreviations = new List<string>{ "B9Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef B9 = new PieceTypeDef{Id = 100115, Abbreviations = new List<string>{ "B9" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef B10Fake = new PieceTypeDef{Id = 100116, Abbreviations = new List<string>{ "B10Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef B10 = new PieceTypeDef{Id = 100117, Abbreviations = new List<string>{ "B10" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef B11Fake = new PieceTypeDef{Id = 100118, Abbreviations = new List<string>{ "B11Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef B11 = new PieceTypeDef{Id = 100119, Abbreviations = new List<string>{ "B11" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Workplace};
+    public static readonly PieceTypeDef B1 = new PieceTypeDef{Id = 100100, Abbreviations = new List<string>{ "B1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B2 = new PieceTypeDef{Id = 100101, Abbreviations = new List<string>{ "B2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B3Fake = new PieceTypeDef{Id = 100102, Abbreviations = new List<string>{ "B3Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B3 = new PieceTypeDef{Id = 100103, Abbreviations = new List<string>{ "B3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B4Fake = new PieceTypeDef{Id = 100104, Abbreviations = new List<string>{ "B4Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B4 = new PieceTypeDef{Id = 100105, Abbreviations = new List<string>{ "B4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B5Fake = new PieceTypeDef{Id = 100106, Abbreviations = new List<string>{ "B5Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B5 = new PieceTypeDef{Id = 100107, Abbreviations = new List<string>{ "B5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B6Fake = new PieceTypeDef{Id = 100108, Abbreviations = new List<string>{ "B6Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B6 = new PieceTypeDef{Id = 100109, Abbreviations = new List<string>{ "B6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B7Fake = new PieceTypeDef{Id = 100110, Abbreviations = new List<string>{ "B7Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B7 = new PieceTypeDef{Id = 100111, Abbreviations = new List<string>{ "B7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B8Fake = new PieceTypeDef{Id = 100112, Abbreviations = new List<string>{ "B8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B8 = new PieceTypeDef{Id = 100113, Abbreviations = new List<string>{ "B8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B9Fake = new PieceTypeDef{Id = 100114, Abbreviations = new List<string>{ "B9Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B9 = new PieceTypeDef{Id = 100115, Abbreviations = new List<string>{ "B9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B10Fake = new PieceTypeDef{Id = 100116, Abbreviations = new List<string>{ "B10Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B10 = new PieceTypeDef{Id = 100117, Abbreviations = new List<string>{ "B10" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B11Fake = new PieceTypeDef{Id = 100118, Abbreviations = new List<string>{ "B11Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef B11 = new PieceTypeDef{Id = 100119, Abbreviations = new List<string>{ "B11" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
     
     #endregion
     
     #region C
     
-    public static readonly PieceTypeDef C1 = new PieceTypeDef{Id = 100200, Abbreviations = new List<string>{ "C1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
-    public static readonly PieceTypeDef C2 = new PieceTypeDef{Id = 100201, Abbreviations = new List<string>{ "C2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
-    public static readonly PieceTypeDef C3Fake = new PieceTypeDef{Id = 100202, Abbreviations = new List<string>{ "C3Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef C3 = new PieceTypeDef{Id = 100203, Abbreviations = new List<string>{ "C3" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef C4Fake = new PieceTypeDef{Id = 100204, Abbreviations = new List<string>{ "C4Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef C4 = new PieceTypeDef{Id = 100205, Abbreviations = new List<string>{ "C4" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef C5Fake = new PieceTypeDef{Id = 100206, Abbreviations = new List<string>{ "C5Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef C5 = new PieceTypeDef{Id = 100207, Abbreviations = new List<string>{ "C5" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef C6Fake = new PieceTypeDef{Id = 100208, Abbreviations = new List<string>{ "C6Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef C6 = new PieceTypeDef{Id = 100209, Abbreviations = new List<string>{ "C6" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef C7Fake = new PieceTypeDef{Id = 100210, Abbreviations = new List<string>{ "C7Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef C7 = new PieceTypeDef{Id = 100211, Abbreviations = new List<string>{ "C7" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef C8Fake = new PieceTypeDef{Id = 100212, Abbreviations = new List<string>{ "C8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef C8 = new PieceTypeDef{Id = 100213, Abbreviations = new List<string>{ "C8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef C9Fake = new PieceTypeDef{Id = 100214, Abbreviations = new List<string>{ "C9Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef C9 = new PieceTypeDef{Id = 100215, Abbreviations = new List<string>{ "C9" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Workplace};
+    public static readonly PieceTypeDef C1 = new PieceTypeDef{Id = 100200, Abbreviations = new List<string>{ "C1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef C2 = new PieceTypeDef{Id = 100201, Abbreviations = new List<string>{ "C2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef C3Fake = new PieceTypeDef{Id = 100202, Abbreviations = new List<string>{ "C3Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef C3 = new PieceTypeDef{Id = 100203, Abbreviations = new List<string>{ "C3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef C4Fake = new PieceTypeDef{Id = 100204, Abbreviations = new List<string>{ "C4Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef C4 = new PieceTypeDef{Id = 100205, Abbreviations = new List<string>{ "C4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef C5Fake = new PieceTypeDef{Id = 100206, Abbreviations = new List<string>{ "C5Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef C5 = new PieceTypeDef{Id = 100207, Abbreviations = new List<string>{ "C5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef C6Fake = new PieceTypeDef{Id = 100208, Abbreviations = new List<string>{ "C6Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef C6 = new PieceTypeDef{Id = 100209, Abbreviations = new List<string>{ "C6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef C7Fake = new PieceTypeDef{Id = 100210, Abbreviations = new List<string>{ "C7Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef C7 = new PieceTypeDef{Id = 100211, Abbreviations = new List<string>{ "C7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef C8Fake = new PieceTypeDef{Id = 100212, Abbreviations = new List<string>{ "C8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef C8 = new PieceTypeDef{Id = 100213, Abbreviations = new List<string>{ "C8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef C9Fake = new PieceTypeDef{Id = 100214, Abbreviations = new List<string>{ "C9Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef C9 = new PieceTypeDef{Id = 100215, Abbreviations = new List<string>{ "C9" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
     
     #endregion
     
     #region D
     
-    public static readonly PieceTypeDef D1 = new PieceTypeDef{Id = 100300, Abbreviations = new List<string>{ "D1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
-    public static readonly PieceTypeDef D2 = new PieceTypeDef{Id = 100301, Abbreviations = new List<string>{ "D2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable};
-    public static readonly PieceTypeDef D3Fake = new PieceTypeDef{Id = 100302, Abbreviations = new List<string>{ "D3Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef D3 = new PieceTypeDef{Id = 100303, Abbreviations = new List<string>{ "D3" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef D4Fake = new PieceTypeDef{Id = 100304, Abbreviations = new List<string>{ "D4Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef D4 = new PieceTypeDef{Id = 100305, Abbreviations = new List<string>{ "D4" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef D5Fake = new PieceTypeDef{Id = 100306, Abbreviations = new List<string>{ "D5Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef D5 = new PieceTypeDef{Id = 100307, Abbreviations = new List<string>{ "D5" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef D6Fake = new PieceTypeDef{Id = 100308, Abbreviations = new List<string>{ "D6Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef D6 = new PieceTypeDef{Id = 100309, Abbreviations = new List<string>{ "D6" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef D7Fake = new PieceTypeDef{Id = 100310, Abbreviations = new List<string>{ "D7Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef D7 = new PieceTypeDef{Id = 100311, Abbreviations = new List<string>{ "D7" }, Filter = PieceTypeFilter.Simple};
-    public static readonly PieceTypeDef D8Fake = new PieceTypeDef{Id = 100312, Abbreviations = new List<string>{ "D8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef D8 = new PieceTypeDef{Id = 100313, Abbreviations = new List<string>{ "D8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef D9Fake = new PieceTypeDef{Id = 100314, Abbreviations = new List<string>{ "D9Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.Workplace};
-    public static readonly PieceTypeDef D9 = new PieceTypeDef{Id = 100315, Abbreviations = new List<string>{ "D9" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Workplace};
+    public static readonly PieceTypeDef D1 = new PieceTypeDef{Id = 100300, Abbreviations = new List<string>{ "D1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef D2 = new PieceTypeDef{Id = 100301, Abbreviations = new List<string>{ "D2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Removable | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef D3Fake = new PieceTypeDef{Id = 100302, Abbreviations = new List<string>{ "D3Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef D3 = new PieceTypeDef{Id = 100303, Abbreviations = new List<string>{ "D3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef D4Fake = new PieceTypeDef{Id = 100304, Abbreviations = new List<string>{ "D4Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef D4 = new PieceTypeDef{Id = 100305, Abbreviations = new List<string>{ "D4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef D5Fake = new PieceTypeDef{Id = 100306, Abbreviations = new List<string>{ "D5Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef D5 = new PieceTypeDef{Id = 100307, Abbreviations = new List<string>{ "D5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef D6Fake = new PieceTypeDef{Id = 100308, Abbreviations = new List<string>{ "D6Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef D6 = new PieceTypeDef{Id = 100309, Abbreviations = new List<string>{ "D6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef D7Fake = new PieceTypeDef{Id = 100310, Abbreviations = new List<string>{ "D7Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef D7 = new PieceTypeDef{Id = 100311, Abbreviations = new List<string>{ "D7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef D8Fake = new PieceTypeDef{Id = 100312, Abbreviations = new List<string>{ "D8Fake" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef D8 = new PieceTypeDef{Id = 100313, Abbreviations = new List<string>{ "D8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef D9Fake = new PieceTypeDef{Id = 100314, Abbreviations = new List<string>{ "D9Fake" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Fake | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef D9 = new PieceTypeDef{Id = 100315, Abbreviations = new List<string>{ "D9" }, Filter = PieceTypeFilter.Multicellular | PieceTypeFilter.Workplace | PieceTypeFilter.Normal};
     
     #endregion
     

@@ -7,7 +7,8 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
     
-    public int FreeChestDelay;
+    public int MarketUpdateDelay;
+    public int MarketUpdatePrice;
     
     public int MinDelayHintArrow;
     public int MaxDelayHintArrow;
@@ -70,6 +71,4 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
             }
         });
     }
-
-    
 }

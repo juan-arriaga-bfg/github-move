@@ -72,7 +72,7 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         btnCancel.gameObject.SetActive(windowModel.OnCancel != null);
         timer.SetActive(windowModel.Timer != null);
         
-        delimiterImageAndText.SetActive(!string.IsNullOrEmpty(windowModel.Image) && !string.IsNullOrEmpty(windowModel.Message));
+        delimiterImageAndText.SetActive((!string.IsNullOrEmpty(windowModel.Image) || !string.IsNullOrEmpty(windowModel.Prefab)) && !string.IsNullOrEmpty(windowModel.Message));
         delimiterTextAndButtons.SetActive(true);
         delimiterTimerAndButtons.SetActive(windowModel.Timer != null);
 

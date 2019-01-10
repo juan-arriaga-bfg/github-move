@@ -9,9 +9,15 @@
 	{
 		RegisterComponent(Timer);
 		
-		Timer.Delay = GameDataService.Current.ConstantsManager.FreeChestDelay;
+		Timer.Delay = GameDataService.Current.ConstantsManager.MarketUpdateDelay;
 		
-		var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+		Timer.OnComplete += () =>
+		{
+			GameDataService.Current.MarketManager.UpdateSlots();
+			Timer.Start();
+		};
+		
+		var save = ProfileService.Current.GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid);
 
 		if (save != null && string.IsNullOrEmpty(save.ResetMarketStartTime) == false)
 		{
