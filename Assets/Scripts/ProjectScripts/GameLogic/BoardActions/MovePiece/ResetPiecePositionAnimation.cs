@@ -7,7 +7,7 @@ public class ResetPiecePositionAnimation : BoardAnimation
 
 	public override void Animate(BoardRenderer context)
 	{
-		var pieceFromView = context.GetElementAt(At);
+		var pieceFromView = context.GetElementAt(At) as PieceBoardElementView;
 		
 		if (pieceFromView == null)
 		{
@@ -23,9 +23,22 @@ public class ResetPiecePositionAnimation : BoardAnimation
 	    pieceFromView.SyncRendererLayers(At);
 		
 		var sequence = DOTween.Sequence().SetId(pieceFromView.AnimationUid);
-		sequence.Append(pieceFromView.CachedTransform.DOLocalMove(pos, 0.4f).SetEase(Ease.InOutSine));
+		var soundPlay = NSAudioService.Current.IsPlaying(SoundId.object_release);
+		sequence.Append(pieceFromView.CachedTransform.DOLocalMove(pos, 0.4f).SetEase(Ease.InOutSine).OnUpdate(() =>
+		{
+			var currentPosition = pieceFromView.CachedTransform.localPosition;
+			var target = context.Context.BoardDef.GetLocalPosition(pieceFromView.Piece.CachedPosition.X,
+				pieceFromView.Piece.CachedPosition.Y);
+				
+			if (Vector2.Distance(currentPosition, target) < 0.6f && !soundPlay)
+			{
+				soundPlay = true;
+				NSAudioService.Current.Play(SoundId.object_release);
+			}
+		}));
 		sequence.OnComplete(() =>
 		{
+			
 			context.ResetBoardElement(pieceFromView, At);
 			CompleteAnimation(context);
 		});

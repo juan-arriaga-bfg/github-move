@@ -67,7 +67,7 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
     {
         isOpen = true;
         Controller.CloseCurrentWindow();
-        NSAudioService.Current.Play(SoundId.merge_chest);
+        
     }
 
     private List<IUIContainerElementEntity> UpdateEntities(List<string> entities)

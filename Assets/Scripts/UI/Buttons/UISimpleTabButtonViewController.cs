@@ -27,5 +27,6 @@ public class UISimpleTabButtonViewController : UIBaseButtonViewController
     
     protected override void AnimateOnPointerClick()
     {
+        NSAudioService.Current.Play(SoundId.popup_tabs);
     }
 }

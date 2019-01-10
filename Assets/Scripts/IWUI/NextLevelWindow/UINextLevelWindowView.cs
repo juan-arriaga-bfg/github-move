@@ -23,17 +23,13 @@ public class UINextLevelWindowView : UIGenericWindowView
     private int tapCount;
     private bool isClick;
 
-    protected override void PlaySoundOnOpen()
-    {
-        NSAudioService.Current.Play(SoundId.popup_new_level);
-    }
 
     public override void OnViewShow()
     {
         base.OnViewShow();
         
         var windowModel = Model as UINextLevelWindowModel;
-        
+        NSAudioService.Current.Play(SoundId.popup_new_level);
         title.Text = windowModel.Title;
         message.Text = windowModel.Mesage;
         rewards.Text = windowModel.Rewards;
