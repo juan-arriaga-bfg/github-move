@@ -23,11 +23,13 @@ public partial class BoardElementMaterialType
     public const string PiecesGrayscaleMaterial = R.PiecesGrayscaleMaterial;
 
     public const string PiecesHighlightMaterial = R.PiecesHighlightMaterial;
+    
+    public const string PiecesLowHighlightMaterial = R.PiecesLowHighlightMaterial;
 
     public const string FogDefaultMaterial = R.FogDefaultMaterial;
     
     public const string PiecesUnderFogMaterial = R.PiecesUnderFogMaterial;
-
+    
     public const string PiecesLockedMaterial = R.PiecesLockedMaterial;
 
     public const string PiecesFogHighlightMaterial = R.PiecesFogHighlightMaterial;

@@ -35,9 +35,12 @@ public class IngredientPieceView : PieceBoardElementView
     private void StartAnimation()
     {
         var sequence = DOTween.Sequence().SetId(body);
+        SetCustomMaterial(BoardElementMaterialType.PiecesLowHighlightMaterial, true);
 
-        sequence.SetLoops(int.MaxValue);
+        sequence.SetLoops(-1);
+        
         sequence.AppendInterval(5f);
+        
         sequence.Append(body.DOScale(Vector3.one * 1.2f, 0.25f));
         sequence.Append(body.DOScale(Vector3.one * 0.9f, 0.15f));
         sequence.Append(body.DOScale(Vector3.one * 1.2f, 0.25f));
