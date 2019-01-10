@@ -23,7 +23,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         
         Fill(UpdateEntities(), content);
         
-        content.CachedRectTransform.anchoredPosition = new Vector2(-375, 0);
+        content.GetScrollRect().horizontalNormalizedPosition = 1;
         content.GetScrollRect().enabled = false;
         
         DOTween.Kill(content);
