@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 public class UIMarketWindowModel : IWWindowModel 
 {
     public string Title => LocalizationService.Get("window.market.title", "window.market.title");
@@ -14,6 +12,4 @@ public class UIMarketWindowModel : IWWindowModel
             return string.Format(LocalizationService.Get("window.market.button.reset", "window.market.button.reset {0}"), price.ToStringIcon());
         }
     }
-
-    public List<MarketDef> Slots => GameDataService.Current.MarketManager.GetSlotsData();
 }

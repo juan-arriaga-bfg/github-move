@@ -6,7 +6,7 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
 
-    private List<MarketDefParrent> defs;
+    public List<MarketItem> Defs;
 
     public void OnRegisterEntity(ECSEntity entity)
     {
@@ -19,7 +19,7 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
 	
     public void Reload()
     {
-        defs = new List<MarketDefParrent>();
+        Defs = new List<MarketItem>();
         LoadData(new ResourceConfigDataMapper<List<MarketDef>>("configs/market.data", NSConfigsSettings.Instance.IsUseEncryption));
     }
 
@@ -31,15 +31,27 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
             {
                 foreach (var def in data)
                 {
-                    var parrent = defs.Find(p => p.Uid == def.Uid);
+                    var item = Defs.Find(p => p.Uid == def.Uid);
 
-                    if (parrent == null)
+                    if (item == null)
                     {
-                        parrent = new MarketDefParrent {Uid = def.Uid};
-                        defs.Add(parrent);
+                        item = new MarketItem {Uid = def.Uid};
+                        Defs.Add(item);
                     }
 					
-                    parrent.AddDef(def);
+                    item.AddDef(def);
+                }
+                
+                var save = ProfileService.Current.GetComponent<MarketSaveComponent>(MarketSaveComponent.ComponentGuid);
+                
+                if(save?.Slots == null || save.Slots.Count == 0) return;
+                
+                for (var i = 0; i < Defs.Count; i++)
+                {
+                    var item = Defs[i];
+                    var slot = save.Slots.Find(saveItem => saveItem.Index == i);
+
+                    item.Init(slot.ItemIndex, slot.Piece, slot.Amount, slot.IsPurchased);
                 }
             }
             else
@@ -49,15 +61,11 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
         });
     }
 
-    public List<MarketDef> GetSlotsData()
+    public void UpdateSlots()
     {
-        var result = new List<MarketDef>();
-
-        foreach (var parrent in defs)
+        foreach (var def in Defs)
         {
-            result.Add(parrent.GetDef());
+            def.Update();
         }
-        
-        return result;
     }
 }

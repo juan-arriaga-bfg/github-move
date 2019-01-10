@@ -31,9 +31,9 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		
 		isClick = false;
 		isReward = false;
-		isFree = contentEntity.Def.Price == null;
+		isFree = contentEntity.Def.IsPurchased;
 
-		var isLock = contentEntity.Def.Weight.Uid == PieceType.Parse(PieceType.Empty.Id);
+		var isLock = contentEntity.Def.IsLock;
 		
 		unlockObj.SetActive(!isLock);
 		lockObj.SetActive(isLock);
@@ -45,9 +45,9 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		
 		ChengeButtons();
 		
-		btnLabel.Text = isFree
+		btnLabel.Text = isFree || isLock
 			? LocalizationService.Get("common.button.claim", "common.button.claim")
-			: string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), contentEntity.Def.Price.ToStringIcon());
+			: string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), contentEntity.Def.Current.Price.ToStringIcon());
 	}
 
 	public override void OnViewShowCompleted()
@@ -73,10 +73,11 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		
 		var board = BoardService.Current.FirstBoard;
 		var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
-		var reward = new CurrencyPair {Currency = contentEntity.Def.Weight.Uid, Amount = contentEntity.Def.Amount};
 		
 		List<CurrencyPair> currencysReward;
-		var piecesReward = CurrencyHellper.FiltrationRewards(new List<CurrencyPair>{reward}, out currencysReward);
+		var piecesReward = CurrencyHellper.FiltrationRewards(new List<CurrencyPair>{contentEntity.Def.Reward}, out currencysReward);
+
+		contentEntity.Def.IsClaimed = true;
 		
 		board.ActionExecutor.AddAction(new EjectionPieceAction
 		{
@@ -138,7 +139,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	{
 		var contentEntity = entity as UIMarketElementEntity;
 		
-		CurrencyHellper.Purchase(Currency.Chest.Name, 1, contentEntity.Def.Price, success =>
+		CurrencyHellper.Purchase(Currency.Chest.Name, 1, contentEntity.Def.Current.Price, success =>
 		{
 			if (success == false)
 			{

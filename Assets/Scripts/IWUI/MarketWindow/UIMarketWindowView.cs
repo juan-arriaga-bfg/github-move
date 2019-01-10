@@ -19,7 +19,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
         
-        Fill(UpdateEntities(windowModel.Slots), content);
+        Fill(UpdateEntities(), content);
         
         content.CachedRectTransform.anchoredPosition = new Vector2(-375, 0);
         content.GetScrollRect().enabled = false;
@@ -32,7 +32,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
             .OnComplete(() => { content.GetScrollRect().enabled = true; });
         
         BoardService.Current.FirstBoard.MarketLogic.Timer.OnExecute += UpdateLabel;
-        BoardService.Current.FirstBoard.MarketLogic.Timer.OnComplete += Reset;
+        BoardService.Current.FirstBoard.MarketLogic.Timer.OnComplete += UpdateSlots;
     }
 
     public override void OnViewShowCompleted()
@@ -49,7 +49,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         DOTween.Kill(content);
         
         BoardService.Current.FirstBoard.MarketLogic.Timer.OnExecute -= UpdateLabel;
-        BoardService.Current.FirstBoard.MarketLogic.Timer.OnComplete -= Reset;
+        BoardService.Current.FirstBoard.MarketLogic.Timer.OnComplete -= UpdateSlots;
     }
     
     private void UpdateLabel()
@@ -60,21 +60,22 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         btnResetLabel.Text = windowModel.ButtonReset;
     }
     
-    private List<IUIContainerElementEntity> UpdateEntities(List<MarketDef> entities)
+    private List<IUIContainerElementEntity> UpdateEntities()
     {
-        var views = new List<IUIContainerElementEntity>(entities.Count);
+        var defs = GameDataService.Current.MarketManager.Defs;
+        var views = new List<IUIContainerElementEntity>(defs.Count);
         
-        for (var i = 0; i < entities.Count; i++)
+        for (var i = 0; i < defs.Count; i++)
         {
-            var def = entities[i];
+            var def = defs[i];
 
-            if (def == null) continue;
+            if (def.Current == null && def.IsLock == false) continue;
             
             var entity = new UIMarketElementEntity
             {
-                ContentId = def.Weight.Uid,
-                LabelText = $"x{def.Amount}",
-                Name = LocalizationService.Get($"piece.name.{def.Weight.Uid}", $"piece.name.{def.Weight.Uid}"),
+                ContentId = def.Reward.Currency,
+                LabelText = $"x{def.Reward.Amount}",
+                Name = LocalizationService.Get($"piece.name.{def.Reward.Currency}", $"piece.name.{def.Reward.Currency}"),
                 Def = def,
                 OnSelectEvent = null,
                 OnDeselectEvent = null
@@ -91,9 +92,8 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         BoardService.Current.FirstBoard.MarketLogic.Timer.FastComplete();
     }
 
-    private void Reset()
+    private void UpdateSlots()
     {
-        BoardService.Current.FirstBoard.MarketLogic.Timer.Start();
         content.GetScrollRect().enabled = false;
         
         DOTween.Kill(content);
@@ -101,13 +101,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         var sequence = DOTween.Sequence().SetId(content);
 
         sequence.Append(content.CachedRectTransform.DOAnchorPosX(1200, 1f).SetEase(Ease.InBack));
-        sequence.AppendCallback(() =>
-        {
-            var windowModel = Model as UIMarketWindowModel;
-
-            Fill(UpdateEntities(windowModel.Slots), content);
-        });
-        
+        sequence.AppendCallback(() => { Fill(UpdateEntities(), content); });
         sequence.Append(content.CachedRectTransform.DOAnchorPosX(0, 1f).SetEase(Ease.OutBack));
         sequence.AppendCallback(() => {content.GetScrollRect().enabled = true; });
     }
