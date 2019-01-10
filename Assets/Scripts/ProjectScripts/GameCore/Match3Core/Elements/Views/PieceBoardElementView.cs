@@ -199,8 +199,7 @@ public class PieceBoardElementView : BoardElementView
 
         HideDropEffect();
 
-        //TODO insert sound
-        Debug.LogError("Not implemented sound #object_tap");
+        NSAudioService.Current.Play(SoundId.object_tap);
         
         OnDrag(Piece.CachedPosition, worldPos);
         Piece.Context.HintCooldown.Pause(this);

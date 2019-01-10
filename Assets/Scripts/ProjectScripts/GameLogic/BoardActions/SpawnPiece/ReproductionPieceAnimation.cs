@@ -25,8 +25,7 @@ public class ReproductionPieceAnimation : BoardAnimation
             sequence.Append(boardElement.CachedTransform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack));    
         }
         
-        //TODO insert sound
-        Debug.LogError("Not implemented sound #drop_object");
+        NSAudioService.Current.Play(SoundId.drop_object);
 
         var index = 0;
 

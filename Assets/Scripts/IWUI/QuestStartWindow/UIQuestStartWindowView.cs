@@ -43,7 +43,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         CleanUp();
         
         UIQuestStartWindowModel model = Model as UIQuestStartWindowModel;
-
+        
         step = model.CompletedQuest != null ? Step.QuestComplete : Step.QuestStart;
     }
 
@@ -224,12 +224,19 @@ public class UIQuestStartWindowView : IWUIWindowView
             conversation.transform.SetParent(characterConversationAnchor, false);
         }
 
+        if (step == Step.QuestComplete)
+        {
+            NSAudioService.Current.Play(SoundId.quest_completed);
+        }
+        
         var scenario = step == Step.QuestComplete ? model.QuestCompletedScenario : model.QuestStartScenario;
         conversation.PlayScenario(scenario, OnActionStarted, OnActionEnded, OnScenarioComplete);
     }
 
     private void OnActionStarted(ConversationActionEntity act)
     {
+        
+        
         isClickAllowed = false;
     }
     
@@ -238,6 +245,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         var payload1 = act.GetComponent<ConversationActionPayloadShowQuestComponent>(ConversationActionPayloadComponent.ComponentGuid);
         if (payload1 != null)
         {
+            NSAudioService.Current.Play(SoundId.quest_new);
             CreateQuestCards(Model as UIQuestStartWindowModel, payload1, () => { isClickAllowed = true; });
             return;
         }

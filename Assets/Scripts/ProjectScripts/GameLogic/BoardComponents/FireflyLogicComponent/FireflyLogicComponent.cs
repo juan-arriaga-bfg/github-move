@@ -84,7 +84,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 			
 			foreach (var view in views)
 			{
-				view.OnDragStart();
+				view.StopFly();
 			}
 		}
 		
@@ -101,7 +101,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		
 		foreach (var view in views)
 		{
-			view.OnDragEnd();
+			view.StartFly();
 		}
 		
 		startTime = startTime.AddSeconds((DateTime.UtcNow - pauseTime).TotalSeconds);

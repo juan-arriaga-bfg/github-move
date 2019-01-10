@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,5 +10,12 @@ public class UIBaseButtonViewController : UIButtonViewController
     {
         base.UpdateView();
         
+    }
+
+    public override void ClickEvent(int pointerId)
+    {
+        NSAudioService.Current.Play(SoundId.button_click);
+        
+        base.ClickEvent(pointerId);
     }
 }

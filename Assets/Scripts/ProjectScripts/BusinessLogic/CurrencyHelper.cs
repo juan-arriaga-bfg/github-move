@@ -253,9 +253,27 @@ public static class CurrencyHellper
         
         carriers[carriers.Count - 1].Callback = () =>
         {
+            
             ResourcePanelUtils.ToggleFadePanel(resource.Currency, false);
             onSuccess?.Invoke(true);
         };
+        
+        foreach (var resourceCarrier in carriers)
+        {
+            resourceCarrier.Callback += () =>
+            {
+                if(resource.Currency == Currency.Experience.Name)
+                    NSAudioService.Current.Play(SoundId.get_xp);
+                if(resource.Currency == Currency.Mana.Name)
+                    NSAudioService.Current.Play(SoundId.get_magic);
+                if(resource.Currency == Currency.Energy.Name)
+                    NSAudioService.Current.Play(SoundId.get_energy);
+                if(resource.Currency == Currency.Coins.Name)
+                    NSAudioService.Current.Play(SoundId.get_soft_curr);
+                if(resource.Currency == Currency.Crystals.Name)
+                    NSAudioService.Current.Play(SoundId.get_hard_curr);
+            };
+        }
     }
 
     public static bool IsCanPurchase(List<CurrencyPair> prices, out List<CurrencyPair> diffs)

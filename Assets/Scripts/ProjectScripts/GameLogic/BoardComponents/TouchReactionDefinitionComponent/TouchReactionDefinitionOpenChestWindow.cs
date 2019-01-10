@@ -11,9 +11,6 @@ public class TouchReactionDefinitionOpenChestWindow : TouchReactionDefinitionCom
 		if (chestComponent?.Def == null || chestComponent.Rewards.IsHightlight) return false;
 
 		var model = UIService.Get.GetCachedModel<UIChestMessageWindowModel>(UIWindowType.ChestMessage);
-
-		//TODO insert sound
-		Debug.LogError("Not implemented sound #chest_open");
 		
 		model.ChestComponent = chestComponent;
 				

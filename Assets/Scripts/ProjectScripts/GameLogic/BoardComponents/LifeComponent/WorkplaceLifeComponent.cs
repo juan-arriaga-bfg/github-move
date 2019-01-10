@@ -47,30 +47,16 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		Context.RegisterComponent(timer);
 	}
 
-	private void PlaySound()
+	private void PlaySoundOnStart()
 	{
-		var typeDef = PieceType.GetDefById(Context.PieceType);
 		
-		if (typeDef.Filter.HasFlag(PieceTypeFilter.ProductionField))
-		{
-			//TODO insert sound
-			Debug.LogError("Not implemented sound #worker_harvest");
-			return;
-		}
 		
-		if (typeDef.Filter.HasFlag(PieceTypeFilter.Mine))
-		{
-			//TODO insert sound
-			Debug.LogError("Not implemented sound #worker_mine");
-			return;
-		}
 		
-		if (typeDef.Filter.HasFlag(PieceTypeFilter.Obstacle))
-		{
-			//TODO insert sound
-			Debug.LogError("Not implemented sound #worker_chop");
-			return;
-		}
+	}
+
+	private void PlaySoundOnEnd()
+	{
+		NSAudioService.Current.Play(SoundId.worker_finish);
 	}
 	
 	public virtual void OnAddToBoard(BoardPosition position, Piece context = null)
@@ -145,7 +131,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		if (IsDead == false) OnStep();
 		else OnComplete();
         
-		PlaySound();
+		PlaySoundOnStart();
 		
 		Locker.Lock(this, false);
 
@@ -155,6 +141,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	protected virtual void OnTimerComplete()
 	{
 		Context.Context.WorkerLogic.Return(Context.CachedPosition);
+		PlaySoundOnEnd();
 		UpdateView(false);
 		Rewards.ShowBubble();
 	}

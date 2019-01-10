@@ -79,7 +79,6 @@ public class ScatterPiecesAnimation : BoardAnimation
 
     private void PlaysSound()
     {
-        //TODO insert sound
-        Debug.LogError("Not implemented sound #drop_object");
+        NSAudioService.Current.Play(SoundId.drop_object);
     }
 }

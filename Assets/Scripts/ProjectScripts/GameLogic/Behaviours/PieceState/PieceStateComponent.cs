@@ -167,23 +167,38 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     {
         var view = thisContext.ViewDefinition.AddView(ViewType.BoardTimer) as BoardTimerView;
         
-        PlaySound();
+        PlaySoundOnStart();
         
         view.SetTimer(Timer);
         view.Change(true);
         view.SetHourglass(true);
     }
 
-    private void PlaySound()
+    private void PlaySoundOnStart()
     {
-        //TODO insert sound
-        Debug.LogError("Not implemented sound #worker_build");
+        NSAudioService.Current.Play(SoundId.worker_build);
+    }
+
+    private void PlaySoundOnEnd()
+    {
+        var typeDef = PieceType.GetDefById(thisContext.PieceType);
+
+        if (typeDef.Filter.HasFlag(PieceTypeFilter.Fake))
+        {
+            NSAudioService.Current.Play(SoundId.build_main);
+        }
+        else
+        {
+            NSAudioService.Current.Play(SoundId.build_castle);
+        }
     }
     
     private void OnComplete()
     {
         thisContext.ViewDefinition.AddView(ViewType.BoardTimer).Change(false);
         State = BuildingState.Complete;
+        
+        PlaySoundOnEnd();
         
         if (thisContext.Multicellular == null)
         {

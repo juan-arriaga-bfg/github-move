@@ -88,6 +88,8 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         
         if(isShow && view.IsShow) return;
 
+        
+        
         view.Priority = isShow ? -1 : 1;
         view.Change(isShow);
         
@@ -104,6 +106,8 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
     
     private void CreateOrder()
     {
+        NSAudioService.Current.Play(SoundId.order_appear);
+        
         Order = GameDataService.Current.OrdersManager.GetOrder(pieceContext.PieceType);
         
         if(Order == null) return;
@@ -119,6 +123,8 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
             var order = Order;
             
             Order = null;
+            
+            
             
             pieceContext.Context.ActionExecutor.AddAction(new EjectionPieceAction
             {

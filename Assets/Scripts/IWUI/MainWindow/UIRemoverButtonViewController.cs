@@ -74,8 +74,7 @@ public class UIRemoverButtonViewController : IWUIWindowViewController
     {
         if (BoardService.Current.FirstBoard.BoardLogic.Remover.IsActive) return;
         
-        //TODO insert sound
-        Debug.LogError("Not implemented sound #remover_take");
+        NSAudioService.Current.Play(SoundId.remover_take);
         
         if (Input.touchSupported == false)
         {

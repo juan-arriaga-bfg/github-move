@@ -26,8 +26,7 @@ public class MagicPieceView : PieceBoardElementView
     {
         base.OnDragStart(boardPos, worldPos);
 
-        //TODO insert sound
-        Debug.LogError("Not implemented sound #crystal_drag");
+        NSAudioService.Current.Play(SoundId.crystal_drag, true);
         
         var board = Context.Context;        
         bestMatchPieces = FindBestMatches(board);
@@ -164,6 +163,8 @@ public class MagicPieceView : PieceBoardElementView
     {
         base.OnDragEnd(boardPos, worldPos);
 
+        NSAudioService.Current.Stop(SoundId.crystal_drag);
+        
         foreach (var piece in bestMatchPieces)
         {
             if(piece.PieceType == PieceType.Boost_CR.Id)

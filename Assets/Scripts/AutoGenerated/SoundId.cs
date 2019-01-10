@@ -1,4 +1,45 @@
 public class SoundId
 {
      public const string Ambient1Music = "Ambient1Music";
+     public const string merge_chest = "merge_chest";
+     public const string build_castle = "build_castle";
+     public const string crystal_use = "crystal_use";
+     public const string drop_object = "drop_object";
+     public const string crystal_drag = "crystal_drag";
+     public const string buy_energy = "buy_energy";
+     public const string firefly_fall = "firefly_fall";
+     public const string firefly_tap = "firefly_tap";
+     public const string merge_crystal_done = "merge_crystal_done";
+     public const string merge_crystal_parts = "merge_crystal_parts";
+     public const string merge_main = "merge_main";
+     public const string merge_hard_curr = "merge_hard_curr";
+     public const string fog_open = "fog_open";
+     public const string buy_soft_curr = "buy_soft_curr";
+     public const string worker_harvest = "worker_harvest";
+     public const string merge_soft_curr = "merge_soft_curr";
+     public const string chest_open = "chest_open";
+     public const string object_release = "object_release";
+     public const string object_tap = "object_tap";
+     public const string get_energy = "get_energy";
+     public const string order_appear = "order_appear";
+     public const string popup_close = "popup_close";
+     public const string order_complete = "order_complete";
+     public const string popup_new_level = "popup_new_level";
+     public const string get_hard_curr = "get_hard_curr";
+     public const string worker_chop = "worker_chop";
+     public const string popup_new_recipe = "popup_new_recipe";
+     public const string popup_open = "popup_open";
+     public const string popup_tabs = "popup_tabs";
+     public const string get_magic = "get_magic";
+     public const string quest_new = "quest_new";
+     public const string quest_completed = "quest_completed";
+     public const string remover_take = "remover_take";
+     public const string worker_build = "worker_build";
+     public const string button_click = "button_click";
+     public const string get_soft_curr = "get_soft_curr";
+     public const string worker_finish = "worker_finish";
+     public const string get_xp = "get_xp";
+     public const string worker_mine = "worker_mine";
+     public const string remover_use = "remover_use";
+     public const string build_main = "build_main";
 }

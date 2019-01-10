@@ -61,48 +61,46 @@ public class MatchPieceToAnimation : BoardAnimation
 	{
 		if (pieceTypeDef.Id == PieceType.Boost_CR.Id)
 		{
-			//TODO insert sound
-			Debug.LogError("Not implemented sound #crystal_use");
+			NSAudioService.Current.Play(SoundId.crystal_use);
 			return;
 		}
 		
 		if (pieceTypeDef.Id >= PieceType.Soft1.Id && pieceTypeDef.Id <= PieceType.Soft6.Id)
 		{
-			//TODO insert sound
-			Debug.LogError("Not implemented sound #merge_soft_curr");
+			NSAudioService.Current.Play(SoundId.merge_soft_curr);
 			return;
 		}
 		
 		if (pieceTypeDef.Id >= PieceType.Hard1.Id && pieceTypeDef.Id <= PieceType.Hard6.Id)
 		{
-			//TODO insert sound
-			Debug.LogError("Not implemented sound #merge_hard_curr");
+			NSAudioService.Current.Play(SoundId.merge_hard_curr);
 			return;
 		}
 		
 		if (pieceTypeDef.Filter.HasFlag(PieceTypeFilter.Chest))
 		{
-			//TODO insert sound
-			Debug.LogError("Not implemented sound #merge_chest");
+			NSAudioService.Current.Play(SoundId.merge_chest);
 			return;
 		}
 		
 		if (pieceTypeDef.Id >= PieceType.Boost_CR1.Id && pieceTypeDef.Id <= PieceType.Boost_CR2.Id)
 		{
-			//TODO insert sound
-			Debug.LogError("Not implemented sound #merge_crystal_parts");
+			NSAudioService.Current.Play(SoundId.merge_crystal_parts);
 			return;
 		}
 		
 		if (pieceTypeDef.Id == PieceType.Boost_CR3.Id)
 		{
-			//TODO insert sound
-			Debug.LogError("Not implemented sound #merge_crystal_done");
+			NSAudioService.Current.Play(SoundId.merge_crystal_done);
 			return;
 		}
 		
-		//TODO insert sound
-		Debug.LogError("Not implemented sound #merge_main");
+		if (pieceTypeDef.Filter.HasFlag(PieceTypeFilter.Fake))
+		{
+			return;
+		}
+		
+		NSAudioService.Current.Play(SoundId.merge_main);
 	}
 
 	private PieceTypeDef GetMergeTypeDef(BoardRenderer context)

@@ -112,6 +112,7 @@ public class UIQuestWindowView : UIGenericPopupWindowView
             return;
         }
 
+        //TODO insert sound
         quest.Tasks[0].Highlight();
         
         Controller.CloseCurrentWindow();

@@ -98,7 +98,24 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
         
         
         Context.Context.TutorialLogic.Pause(true);
-        life.Damage();
+        if (life.Damage())
+        {
+            var typeDef = PieceType.GetDefById(Context.PieceType);
+		
+            if (typeDef.Filter.HasFlag(PieceTypeFilter.Mine))
+            {
+                NSAudioService.Current.Play(SoundId.worker_mine);
+            }
+            else if(typeDef.Filter.HasFlag(PieceTypeFilter.ProductionField))
+            {
+                NSAudioService.Current.Play(SoundId.worker_harvest);
+            }
+            else
+            {
+                NSAudioService.Current.Play(SoundId.worker_chop);
+            }
+        }
+            
         Change(false);
     }
     
