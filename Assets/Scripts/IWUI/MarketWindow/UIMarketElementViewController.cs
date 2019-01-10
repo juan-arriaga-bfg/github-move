@@ -1,15 +1,23 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UIMarketElementViewController : UISimpleScrollElementViewController
 {
 	[IWUIBinding("#NameLabel")] private NSText nameLabel;
 	[IWUIBinding("#ButtonLabel")] private NSText btnLabel;
+	[IWUIBinding("#LockLabel")] private NSText lockAmountLabel;
+	[IWUIBinding("#LockMessage")] private NSText lockMessage;
 	
 	[IWUIBinding("#BuyButton")] private UIButtonViewController btnBuy;
 	[IWUIBinding("#ButtonInfo")] private UIButtonViewController btnInfo;
 	
 	[IWUIBinding("#ButtonBack")] private Image btnBack;
+	
+	[IWUIBinding("#LockAnchor")] private Transform lockAnchor;
+	
+	[IWUIBinding("#Unlock")] private GameObject unlockObj;
+	[IWUIBinding("#Lock")] private GameObject lockObj;
 	
 	private bool isFree;
 	private bool isClick;
@@ -25,7 +33,15 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		isReward = false;
 		isFree = contentEntity.Def.Price == null;
 
+		var isLock = contentEntity.Def.Weight.Uid == PieceType.Parse(PieceType.Empty.Id);
+		
+		unlockObj.SetActive(!isLock);
+		lockObj.SetActive(isLock);
+
 		nameLabel.Text = contentEntity.Name;
+		lockAmountLabel.Text = contentEntity.LabelText;
+		
+		if (isLock) CreateIcon(lockAnchor, contentEntity.ContentId);
 		
 		ChengeButtons();
 		

@@ -15,6 +15,7 @@ public enum MarketRandomType
 public class MarketDef
 {
     public string Uid;
+    public int UnlockLevel;
     public int Amount;
     public MarketRandomType RandomType;
     public CurrencyPair Price;
@@ -24,23 +25,33 @@ public class MarketDef
 public class MarketDefParrent
 {
     public string Uid;
+    public int Level = int.MaxValue;
     
     private List<MarketDef> defs = new List<MarketDef>();
-    private List<ItemWeight> weights = new List<ItemWeight>();
-
+    
     public void AddDef(MarketDef def)
     {
         defs.Add(def);
-        weights.Add(def.Weight);
+        
+        if(Level > def.UnlockLevel) Level = def.UnlockLevel;
     }
     
     public MarketDef GetDef()
     {
+        var weights = new List<ItemWeight>();
+
+        foreach (var def in defs)
+        {
+            if(def.UnlockLevel > GameDataService.Current.LevelsManager.Level) continue;
+            
+            weights.Add(def.Weight);
+        }
+        
         var index = ItemWeight.GetRandomItemIndex(weights);
 
         return index == -1 ? null : SetPiece(defs[index]);
     }
-
+    
     private MarketDef SetPiece(MarketDef def)
     {
         switch (def.RandomType)
@@ -58,6 +69,8 @@ public class MarketDefParrent
                 def.Weight.Uid = GetRandomChest();
                 break;
         }
+
+        if (string.IsNullOrEmpty(def.Weight.Uid)) def.Weight.Uid = PieceType.Parse(PieceType.Empty.Id);
         
         return def;
     }

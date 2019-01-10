@@ -67,6 +67,8 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         for (var i = 0; i < entities.Count; i++)
         {
             var def = entities[i];
+
+            if (def == null) continue;
             
             var entity = new UIMarketElementEntity
             {
