@@ -19,7 +19,6 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	[IWUIBinding("#Unlock")] private GameObject unlockObj;
 	[IWUIBinding("#Lock")] private GameObject lockObj;
 	
-	private bool isFree;
 	private bool isClick;
 	private bool isReward;
 
@@ -31,9 +30,8 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		
 		isClick = false;
 		isReward = false;
-		isFree = contentEntity.Def.IsPurchased;
 
-		var isLock = contentEntity.Def.IsLock;
+		var isLock = contentEntity.Def.State == MarketItemState.Lock || contentEntity.Def.State == MarketItemState.Claimed;
 		
 		unlockObj.SetActive(!isLock);
 		lockObj.SetActive(isLock);
@@ -45,7 +43,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		
 		ChengeButtons();
 		
-		btnLabel.Text = isFree || isLock
+		btnLabel.Text = contentEntity.Def.State == MarketItemState.Purchased || isLock
 			? LocalizationService.Get("common.button.claim", "common.button.claim")
 			: string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), contentEntity.Def.Current.Price.ToStringIcon());
 	}
@@ -77,7 +75,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		List<CurrencyPair> currencysReward;
 		var piecesReward = CurrencyHellper.FiltrationRewards(new List<CurrencyPair>{contentEntity.Def.Reward}, out currencysReward);
 
-		contentEntity.Def.IsClaimed = true;
+		contentEntity.Def.State = MarketItemState.Claimed;
 		
 		board.ActionExecutor.AddAction(new EjectionPieceAction
 		{
@@ -96,7 +94,9 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	
 	private void ChengeButtons()
 	{
-		btnBack.sprite = IconService.Current.GetSpriteById($"button{(isFree ? "Green" : "Blue")}");
+		var contentEntity = entity as UIMarketElementEntity;
+		
+		btnBack.sprite = IconService.Current.GetSpriteById($"button{(contentEntity.Def.State == MarketItemState.Purchased ? "Green" : "Blue")}");
 	}
 
 	private void OnClickInfo()
@@ -120,7 +120,9 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 			return;
 		}
 		
-		if (isFree)
+		var contentEntity = entity as UIMarketElementEntity;
+		
+		if (contentEntity.Def.State == MarketItemState.Purchased)
 		{
 			OnClickFree();
 			return;
@@ -148,6 +150,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 			}
 			
 			isReward = true;
+			contentEntity.Def.State = MarketItemState.Purchased;
 			context.Controller.CloseCurrentWindow();
 		});
 	}

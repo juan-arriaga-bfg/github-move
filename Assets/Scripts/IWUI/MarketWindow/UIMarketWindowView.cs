@@ -19,6 +19,8 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
         
+        btnResetLabel.Text = windowModel.ButtonReset;
+        
         Fill(UpdateEntities(), content);
         
         content.CachedRectTransform.anchoredPosition = new Vector2(-375, 0);
@@ -57,7 +59,6 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         var windowModel = Model as UIMarketWindowModel;
         
         timerLabel.Text =  BoardService.Current.FirstBoard.MarketLogic.Timer.CompleteTime.GetTimeLeftText();
-        btnResetLabel.Text = windowModel.ButtonReset;
     }
     
     private List<IUIContainerElementEntity> UpdateEntities()
@@ -69,7 +70,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         {
             var def = defs[i];
 
-            if (def.Current == null && def.IsLock == false) continue;
+            if (def.Current == null && def.State != MarketItemState.Lock) continue;
             
             var entity = new UIMarketElementEntity
             {
@@ -89,7 +90,14 @@ public class UIMarketWindowView : UIGenericPopupWindowView
 
     private void OnClickReset()
     {
-        BoardService.Current.FirstBoard.MarketLogic.Timer.FastComplete();
+        var windowModel = Model as UIMarketWindowModel;
+        
+        CurrencyHellper.Purchase(Currency.Timer.Name, 1, windowModel.Price, success =>
+        {
+            if(success == false) return;
+            
+            BoardService.Current.FirstBoard.MarketLogic.Timer.Complete();
+        });
     }
 
     private void UpdateSlots()

@@ -37,7 +37,7 @@ public class MarketSaveComponent : ECSEntity, IECSSerializeable
             {
                 Index = i,
                 ItemIndex = def.Index,
-                IsPurchased = def.IsPurchased,
+                State = def.State,
                 Piece = PieceType.Parse(def.Reward.Currency),
                 Amount = def.Reward.Amount
             });

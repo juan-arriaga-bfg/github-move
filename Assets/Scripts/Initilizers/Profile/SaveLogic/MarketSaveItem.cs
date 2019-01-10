@@ -13,7 +13,7 @@ public class MarketSaveItemJsonConverter : JsonConverter
         var targetValue = (MarketSaveItem) value;
         
         serializer.TypeNameHandling = TypeNameHandling.None;
-        serializer.Serialize(writer, $"{targetValue.Index},{targetValue.ItemIndex},{(targetValue.IsPurchased ? 1 : 0)},{targetValue.Piece},{targetValue.Amount}");
+        serializer.Serialize(writer, $"{targetValue.Index},{targetValue.ItemIndex},{(int)targetValue.State},{targetValue.Piece},{targetValue.Amount}");
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -25,7 +25,7 @@ public class MarketSaveItemJsonConverter : JsonConverter
         {
             Index = int.Parse(dataArray[0]),
             ItemIndex = int.Parse(dataArray[1]),
-            IsPurchased = int.Parse(dataArray[2]) == 1,
+            State = (MarketItemState)int.Parse(dataArray[2]),
             Piece = int.Parse(dataArray[3]),
             Amount = int.Parse(dataArray[4])
         };
@@ -37,9 +37,39 @@ public class MarketSaveItemJsonConverter : JsonConverter
 [JsonConverter(typeof(MarketSaveItemJsonConverter))]
 public class MarketSaveItem
 {
-    public int Index;
-    public int ItemIndex;
-    public bool IsPurchased;
-    public int Piece;
-    public int Amount;
+    private int index;
+    private int itemIndex;
+    private MarketItemState state;
+    private int piece;
+    private int amount;
+
+    public int Index
+    {
+        get { return index; }
+        set { index = value; }
+    }
+
+    public int ItemIndex
+    {
+        get { return itemIndex; }
+        set { itemIndex = value; }
+    }
+
+    public MarketItemState State
+    {
+        get { return state; }
+        set { state = value; }
+    }
+
+    public int Piece
+    {
+        get { return piece; }
+        set { piece = value; }
+    }
+
+    public int Amount
+    {
+        get { return amount; }
+        set { amount = value; }
+    }
 }

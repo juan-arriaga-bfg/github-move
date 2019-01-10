@@ -8,6 +8,7 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     public override int Guid => ComponentGuid;
     
     public int MarketUpdateDelay;
+    public int MarketUpdatePrice;
     
     public int MinDelayHintArrow;
     public int MaxDelayHintArrow;
@@ -70,6 +71,4 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
             }
         });
     }
-
-    
 }

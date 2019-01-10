@@ -2,16 +2,22 @@
 using System.Linq;
 using UnityEngine;
 
+public enum MarketItemState
+{
+    Lock,
+    Normal,
+    Purchased,
+    Claimed
+}
+
 public class MarketItem
 {
     public string Uid;
     public int Index;
     public int Level = int.MaxValue;
-    
-    public bool IsPurchased;
-    public bool IsClaimed = true;
-    public bool IsLock => Level > GameDataService.Current.LevelsManager.Level;
 
+    public MarketItemState State;
+    
     public CurrencyPair Reward;
     
     private readonly List<MarketDef> defs = new List<MarketDef>();
@@ -22,19 +28,19 @@ public class MarketItem
         get
         {
             if(current == null) Update();
+
+            if (Level > GameDataService.Current.LevelsManager.Level) State = MarketItemState.Lock;
             
             return current;
         }
     }
 
-    public void Init(int index, int piece, int amount, bool isPurchased)
+    public void Init(int index, int piece, int amount, MarketItemState state)
     {
-        IsPurchased = isPurchased;
+        State = state;
         Index = index;
         
         if(Index == -1) return;
-
-        IsClaimed = piece != PieceType.None.Id;
         
         current = defs[Index];
         Reward = new CurrencyPair{Currency = PieceType.Parse(piece), Amount = amount};
@@ -49,7 +55,7 @@ public class MarketItem
 
     public void Update()
     {
-        if(IsClaimed == false) return;
+        if(State == MarketItemState.Purchased) return;
         
         var weights = new List<ItemWeight>();
         
@@ -65,8 +71,7 @@ public class MarketItem
         
         if(Index == -1) Reward = new CurrencyPair{Currency = PieceType.Parse(PieceType.Empty.Id), Amount = defs[0].Amount};
         
-        IsPurchased = current != null && current.Price == null;
-        IsClaimed = Index == -1;
+        State = current != null && current.Price == null ? MarketItemState.Purchased : MarketItemState.Normal;
     }
     
     private MarketDef SetPiece(MarketDef def)
