@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	[IWUIBinding("#BuyButton")] private UIButtonViewController btnBuy;
 	[IWUIBinding("#ButtonInfo")] private UIButtonViewController btnInfo;
 	
+	[IWUIBinding] private Image back;
 	[IWUIBinding("#ButtonBack")] private Image btnBack;
 	
 	[IWUIBinding("#LockAnchor")] private Transform lockAnchor;
@@ -32,14 +34,36 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		isReward = false;
 
 		var isLock = contentEntity.Def.State == MarketItemState.Lock || contentEntity.Def.State == MarketItemState.Claimed;
+
+		if (isLock)
+		{
+			CreateIcon(lockAnchor, contentEntity.ContentId);
+			Sepia = true;
+		}
+		
+		back.color = new Color(1, 1, 1, isLock ? 0.5f : 1);
 		
 		unlockObj.SetActive(!isLock);
 		lockObj.SetActive(isLock);
 
-		nameLabel.Text = contentEntity.Name;
-		lockAmountLabel.Text = contentEntity.LabelText;
+		nameLabel.Text = contentEntity.Def.State != MarketItemState.Lock
+			? contentEntity.Name
+			: string.Format(LocalizationService.Get("window.market.item.locked.message", "window.market.item.locked.message {0}"), contentEntity.Def.Level);
 		
-		if (isLock) CreateIcon(lockAnchor, contentEntity.ContentId);
+		lockAmountLabel.Text = contentEntity.Def.State == MarketItemState.Lock ? "" : contentEntity.LabelText;
+
+		switch (contentEntity.Def.State)
+		{
+			case MarketItemState.Lock:
+				lockMessage.Text = LocalizationService.Get("window.market.item.locked", "window.market.item.locked");
+				break;
+			case MarketItemState.Claimed:
+				lockMessage.Text = LocalizationService.Get("window.market.item.claimed", "window.market.item.claimed");
+				break;
+			default:
+				lockMessage.Text = "";
+				break;
+		}
 		
 		ChengeButtons();
 	}
@@ -59,6 +83,8 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 
 	public override void OnViewCloseCompleted()
 	{
+		base.OnViewCloseCompleted();
+		
 		var contentEntity = entity as UIMarketElementEntity;
 		
 		if(contentEntity == null) return;
@@ -94,9 +120,9 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		
 		btnBack.sprite = IconService.Current.GetSpriteById($"button{(contentEntity.Def.State == MarketItemState.Purchased ? "Green" : "Blue")}");
 		
-		btnLabel.Text = contentEntity.Def.State == MarketItemState.Purchased || contentEntity.Def.Current == null
-			? LocalizationService.Get("common.button.claim", "common.button.claim")
-			: string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), contentEntity.Def.Current.Price.ToStringIcon());
+		btnLabel.Text = contentEntity.Def.State == MarketItemState.Normal
+			? string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), contentEntity.Def.Current.Price.ToStringIcon())
+			: LocalizationService.Get("common.button.claim", "common.button.claim");
 	}
 
 	private void OnClickInfo()
@@ -139,8 +165,8 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		}
 
 		UIMessageWindowController.CreateMessage(
-			LocalizationService.Get("window.confirmation.market.title", "window.confirmation.market.title"),
-			string.Format(LocalizationService.Get("window.confirmation.market.message", "window.confirmation.market.message {0}"), price.ToStringIcon()),
+			LocalizationService.Get("window.market.confirmation.title", "window.market.confirmation.title"),
+			string.Format(LocalizationService.Get("window.market.confirmation.message", "window.market.confirmation.message {0}"), price.ToStringIcon()),
 			contentEntity.Def.Reward.Currency,
 			Paid,
 			null,

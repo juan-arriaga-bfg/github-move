@@ -35,6 +35,8 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
     public override void OnViewCloseCompleted()
     {
+        base.OnViewCloseCompleted();
+        
         var contentEntity = entity as UIShopElementEntity;
         
         if(entity == null) return;
