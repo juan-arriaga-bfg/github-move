@@ -1,9 +1,10 @@
-﻿using System;
+﻿// #define DEBUG_USE_STANDARD_DATETIME // Uncomment to replace return values for Now and UTCNow with standard DateTime.Now and DateTime.UTCNow calls
+
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using CodeStage.AntiCheat.ObscuredTypes;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class SecuredTimeManager : ISecuredTimeManager
 {
@@ -254,16 +255,16 @@ public class SecuredTimeManager : ISecuredTimeManager
     }
     #endif 
 #endif
-    
 
-    
-
-    
     public DateTime UtcNow
     {
         get
         {
             {
+#if DEBUG_USE_STANDARD_DATETIME
+                return DateTime.UtcNow;
+#endif
+                
                 long currentTicks = GetMonotonicTime();
                 long elapsedTicks = currentTicks - securedMonotonicTime;
 
@@ -280,6 +281,9 @@ public class SecuredTimeManager : ISecuredTimeManager
         get
         {
             {
+#if DEBUG_USE_STANDARD_DATETIME
+                return DateTime.Now;
+#endif
                 var utcNow = UtcNow;
                 var localNow = utcNow.ToLocalTime();
                 return localNow;
