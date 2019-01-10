@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILockerComponent
@@ -39,10 +40,37 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		
 		timer = new TimerComponent();
 		
+		
 		timer.OnStart += OnTimerStart;
 		timer.OnComplete += OnTimerComplete;
 		
 		Context.RegisterComponent(timer);
+	}
+
+	private void PlaySound()
+	{
+		var typeDef = PieceType.GetDefById(Context.PieceType);
+		
+		if (typeDef.Filter.HasFlag(PieceTypeFilter.ProductionField))
+		{
+			//TODO insert sound
+			Debug.LogError("Not implemented sound #worker_harvest");
+			return;
+		}
+		
+		if (typeDef.Filter.HasFlag(PieceTypeFilter.Mine))
+		{
+			//TODO insert sound
+			Debug.LogError("Not implemented sound #worker_mine");
+			return;
+		}
+		
+		if (typeDef.Filter.HasFlag(PieceTypeFilter.Obstacle))
+		{
+			//TODO insert sound
+			Debug.LogError("Not implemented sound #worker_chop");
+			return;
+		}
 	}
 	
 	public virtual void OnAddToBoard(BoardPosition position, Piece context = null)
@@ -117,6 +145,8 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		if (IsDead == false) OnStep();
 		else OnComplete();
         
+		PlaySound();
+		
 		Locker.Lock(this, false);
 
 		if (timer.IsExecuteable()) UpdateView(true);

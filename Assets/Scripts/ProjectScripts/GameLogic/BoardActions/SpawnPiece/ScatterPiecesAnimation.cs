@@ -17,6 +17,8 @@ public class ScatterPiecesAnimation : BoardAnimation
         
         if (Pieces.Count > 0)
         {
+            PlaysSound();
+            
             sequence.Append(target.CachedTransform.DOScale(new Vector3(1.2f, 0.7f, 1f), 0.1f));
             sequence.Append(target.CachedTransform.DOScale(new Vector3(0.7f, 1.2f, 1f), 0.1f));
             sequence.Append(target.CachedTransform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack));
@@ -73,5 +75,11 @@ public class ScatterPiecesAnimation : BoardAnimation
             if (Replace != null) context.DestroyElement(target);
             CompleteAnimation(context);
         });
+    }
+
+    private void PlaysSound()
+    {
+        //TODO insert sound
+        Debug.LogError("Not implemented sound #drop_object");
     }
 }

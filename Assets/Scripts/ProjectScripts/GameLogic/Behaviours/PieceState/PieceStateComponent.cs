@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public enum BuildingState
 {
@@ -166,9 +167,17 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     {
         var view = thisContext.ViewDefinition.AddView(ViewType.BoardTimer) as BoardTimerView;
         
+        PlaySound();
+        
         view.SetTimer(Timer);
         view.Change(true);
         view.SetHourglass(true);
+    }
+
+    private void PlaySound()
+    {
+        //TODO insert sound
+        Debug.LogError("Not implemented sound #worker_build");
     }
     
     private void OnComplete()

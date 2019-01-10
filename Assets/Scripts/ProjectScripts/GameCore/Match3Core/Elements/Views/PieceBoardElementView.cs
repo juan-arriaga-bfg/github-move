@@ -199,6 +199,9 @@ public class PieceBoardElementView : BoardElementView
 
         HideDropEffect();
 
+        //TODO insert sound
+        Debug.LogError("Not implemented sound #object_tap");
+        
         OnDrag(Piece.CachedPosition, worldPos);
         Piece.Context.HintCooldown.Pause(this);
         Piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
@@ -209,7 +212,11 @@ public class PieceBoardElementView : BoardElementView
         Piece.Context.HintCooldown.Resume(this);
         
         if (selectionView == null) return;
-
+        
+        List<BoardPosition> matchField = new List<BoardPosition>();
+            
+        
+        
         if (dragMatchAnimation != null)
         {
             dragMatchAnimation.StopAnimation(Piece.Context.RendererContext);

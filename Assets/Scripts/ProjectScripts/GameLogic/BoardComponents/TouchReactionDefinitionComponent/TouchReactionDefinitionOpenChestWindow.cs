@@ -1,4 +1,6 @@
-﻿public class TouchReactionDefinitionOpenChestWindow : TouchReactionDefinitionComponent
+﻿using UnityEngine;
+
+public class TouchReactionDefinitionOpenChestWindow : TouchReactionDefinitionComponent
 {
 	private ChestPieceComponent chestComponent;
 	
@@ -10,6 +12,9 @@
 
 		var model = UIService.Get.GetCachedModel<UIChestMessageWindowModel>(UIWindowType.ChestMessage);
 
+		//TODO insert sound
+		Debug.LogError("Not implemented sound #chest_open");
+		
 		model.ChestComponent = chestComponent;
 				
 		UIService.Get.ShowWindow(UIWindowType.ChestMessage);

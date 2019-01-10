@@ -24,6 +24,9 @@ public class ReproductionPieceAnimation : BoardAnimation
             sequence.Append(boardElement.CachedTransform.DOScale(new Vector3(0.7f, 1.2f, 1f), 0.1f));
             sequence.Append(boardElement.CachedTransform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack));    
         }
+        
+        //TODO insert sound
+        Debug.LogError("Not implemented sound #drop_object");
 
         var index = 0;
 

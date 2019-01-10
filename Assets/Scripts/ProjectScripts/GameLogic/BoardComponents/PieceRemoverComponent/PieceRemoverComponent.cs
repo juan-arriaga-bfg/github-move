@@ -221,6 +221,10 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
 
         DOTween.Kill(this);
         var sequence = DOTween.Sequence().SetId(this);
+        
+        //TODO insert sound
+        Debug.LogError("Not implemented sound #remover_use");
+        
         sequence.InsertCallback(1f, () =>
         {
             CollapsePieceAt(position);

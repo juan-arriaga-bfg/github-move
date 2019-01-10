@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class ObstacleBubbleView : UIBoardView, IBoardEventListener
 {
@@ -25,6 +26,8 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
         base.Init(piece);
 
         life = piece.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
+
+        
         
         if(life == null) return;
         
@@ -36,7 +39,7 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
         life.Timer.OnExecute += UpdateButtonText;
         life.Timer.OnComplete += UpdateButtonText;
     }
-    
+
     public override void ResetViewOnDestroy()
     {
         bar.Clear();
@@ -91,6 +94,8 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
     public void Clear()
     {
         if(IsShow == false || life.Rewards.IsScatter) return;
+        
+        
         
         Context.Context.TutorialLogic.Pause(true);
         life.Damage();

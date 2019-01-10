@@ -26,6 +26,9 @@ public class MagicPieceView : PieceBoardElementView
     {
         base.OnDragStart(boardPos, worldPos);
 
+        //TODO insert sound
+        Debug.LogError("Not implemented sound #crystal_drag");
+        
         var board = Context.Context;        
         bestMatchPieces = FindBestMatches(board);
         foreach (var piece in bestMatchPieces)

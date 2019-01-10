@@ -77,6 +77,9 @@ public class FireflyView : BoardElementView
     {
         DOTween.Kill(CachedTransform);
         current = CachedTransform.position;
+        
+        //TODO insert sound
+        Debug.LogError("Not implemented sound #firefly_tap");
     }
 
     public void OnDragEnd()
