@@ -42,10 +42,6 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		if (isLock) CreateIcon(lockAnchor, contentEntity.ContentId);
 		
 		ChengeButtons();
-		
-		btnLabel.Text = contentEntity.Def.State == MarketItemState.Purchased || isLock
-			? LocalizationService.Get("common.button.claim", "common.button.claim")
-			: string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), contentEntity.Def.Current.Price.ToStringIcon());
 	}
 
 	public override void OnViewShowCompleted()
@@ -97,6 +93,10 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		var contentEntity = entity as UIMarketElementEntity;
 		
 		btnBack.sprite = IconService.Current.GetSpriteById($"button{(contentEntity.Def.State == MarketItemState.Purchased ? "Green" : "Blue")}");
+		
+		btnLabel.Text = contentEntity.Def.State == MarketItemState.Purchased || contentEntity.Def.Current == null
+			? LocalizationService.Get("common.button.claim", "common.button.claim")
+			: string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), contentEntity.Def.Current.Price.ToStringIcon());
 	}
 
 	private void OnClickInfo()
@@ -112,36 +112,15 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		
 		var contentEntity = entity as UIMarketElementEntity;
 		
-		var board = BoardService.Current.FirstBoard;
-		var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
-		
-		if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, contentEntity.Def.Reward.Amount))
-		{
-			isClick = false;
-			
-			// No free space
-			UIMessageWindowController.CreateMessage(
-				LocalizationService.Get("window.daily.error.title", "window.daily.error.title"),
-				LocalizationService.Get("window.daily.error.free.space", "window.daily.error.free.space"));
-			
-			return;
-		}
-		
 		if (contentEntity.Def.State == MarketItemState.Purchased)
 		{
-			OnClickFree();
+			AddReward();
 			return;
 		}
-
+		
 		OnClickPaid();
 	}
 	
-	private void OnClickFree()
-	{
-		isReward = true;
-		context.Controller.CloseCurrentWindow();
-	}
-
 	private void OnClickPaid()
 	{
 		var contentEntity = entity as UIMarketElementEntity;
@@ -180,10 +159,34 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 				isClick = false;
 				return;
 			}
-
-			isReward = true;
+			
 			contentEntity.Def.State = MarketItemState.Purchased;
-			context.Controller.CloseCurrentWindow();
+			AddReward();
 		});
+	}
+
+	private void AddReward()
+	{
+		var contentEntity = entity as UIMarketElementEntity;
+		
+		var board = BoardService.Current.FirstBoard;
+		var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
+		
+		if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, contentEntity.Def.Reward.Amount))
+		{
+			isClick = false;
+
+			ChengeButtons();
+			
+			// No free space
+			UIMessageWindowController.CreateMessage(
+				LocalizationService.Get("window.daily.error.title", "window.daily.error.title"),
+				LocalizationService.Get("window.daily.error.free.space", "window.daily.error.free.space"));
+			
+			return;
+		}
+		
+		isReward = true;
+		context.Controller.CloseCurrentWindow();
 	}
 }
