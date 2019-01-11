@@ -260,6 +260,15 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
+        time: 2.1833334
+        value: {x: 0, y: 0, z: -0.40800002}
+        inSlope: {x: 0, y: 0, z: 5.2366667}
+        outSlope: {x: 0, y: 0, z: 5.2366667}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
         time: 2.7333333
         value: {x: 0, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
@@ -398,7 +407,7 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.76666665
+        time: 0.78333336
         value: {x: 0, y: 0, z: 62.804005}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
@@ -468,7 +477,7 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.76666665
+        time: 0.78333336
         value: {x: 0, y: 0, z: -39.897003}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
@@ -487,7 +496,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 1.2833333
-        value: {x: 0, y: 0, z: -39.897003}
+        value: {x: 0, y: 0, z: -54.083004}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -1493,6 +1502,15 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
+        time: 2.1833334
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 2.7333333
         value: 0
         inSlope: 0
@@ -1540,6 +1558,15 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.5333333
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 2.1833334
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1598,6 +1625,15 @@ AnimationClip:
         value: -6.2840004
         inSlope: 0
         outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 2.1833334
+        value: -0.40800002
+        inSlope: 5.2366667
+        outSlope: 5.2366667
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -1970,7 +2006,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.76666665
+        time: 0.78333336
         value: 0
         inSlope: 0
         outSlope: 0
@@ -2043,7 +2079,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.76666665
+        time: 0.78333336
         value: 0
         inSlope: 0
         outSlope: 0
@@ -2116,7 +2152,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.76666665
+        time: 0.78333336
         value: 62.804005
         inSlope: 0
         outSlope: 0
@@ -2189,7 +2225,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.76666665
+        time: 0.78333336
         value: 0
         inSlope: 0
         outSlope: 0
@@ -2262,7 +2298,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.76666665
+        time: 0.78333336
         value: 0
         inSlope: 0
         outSlope: 0
@@ -2335,7 +2371,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.76666665
+        time: 0.78333336
         value: -39.897003
         inSlope: 0
         outSlope: 0
@@ -2354,7 +2390,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.2833333
-        value: -39.897003
+        value: -54.083004
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -2454,7 +2490,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: scelet/bodyRapunzel/r_hand1Rpunzel/r_hand2Rapunzel1/r_hand3Rapunzel
+    path: scelet/bodyRapunzel/r_hand1Rpunzel
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2464,7 +2500,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: scelet/bodyRapunzel/r_hand1Rpunzel/r_hand2Rapunzel1/r_hand3Rapunzel
+    path: scelet/bodyRapunzel/r_hand1Rpunzel
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2474,97 +2510,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: scelet/bodyRapunzel/r_hand1Rpunzel/r_hand2Rapunzel1/r_hand3Rapunzel
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: scelet/hadRapunzel
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: scelet/hadRapunzel
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: scelet/hadRapunzel
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: scelet/bodyRapunzel/l_hand1Rapunzel/l_hand2Rapunzel/l_hand3Rapunzel
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: scelet/bodyRapunzel/l_hand1Rapunzel/l_hand2Rapunzel/l_hand3Rapunzel
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: scelet/bodyRapunzel/l_hand1Rapunzel/l_hand2Rapunzel/l_hand3Rapunzel
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: scelet/bodyRapunzel/l_hand1Rapunzel
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: scelet/bodyRapunzel/l_hand1Rapunzel
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: scelet/bodyRapunzel/l_hand1Rapunzel
+    path: scelet/bodyRapunzel/r_hand1Rpunzel
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2604,7 +2550,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: scelet/bodyRapunzel/r_hand1Rpunzel
+    path: scelet/hadRapunzel
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2614,7 +2560,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: scelet/bodyRapunzel/r_hand1Rpunzel
+    path: scelet/hadRapunzel
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2624,7 +2570,97 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: scelet/bodyRapunzel/r_hand1Rpunzel
+    path: scelet/hadRapunzel
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: scelet/bodyRapunzel/l_hand1Rapunzel
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: scelet/bodyRapunzel/l_hand1Rapunzel
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: scelet/bodyRapunzel/l_hand1Rapunzel
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: scelet/bodyRapunzel/l_hand1Rapunzel/l_hand2Rapunzel/l_hand3Rapunzel
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: scelet/bodyRapunzel/l_hand1Rapunzel/l_hand2Rapunzel/l_hand3Rapunzel
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: scelet/bodyRapunzel/l_hand1Rapunzel/l_hand2Rapunzel/l_hand3Rapunzel
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: scelet/hair3Rapunzel
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: scelet/hair3Rapunzel
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: scelet/hair3Rapunzel
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2664,7 +2700,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: scelet/hair3Rapunzel
+    path: scelet/bodyRapunzel/r_hand1Rpunzel/r_hand2Rapunzel1/r_hand3Rapunzel
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2674,7 +2710,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: scelet/hair3Rapunzel
+    path: scelet/bodyRapunzel/r_hand1Rpunzel/r_hand2Rapunzel1/r_hand3Rapunzel
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2684,7 +2720,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: scelet/hair3Rapunzel
+    path: scelet/bodyRapunzel/r_hand1Rpunzel/r_hand2Rapunzel1/r_hand3Rapunzel
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0
