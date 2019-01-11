@@ -51,6 +51,8 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
                     var item = Defs[i];
                     var slot = save.Slots.Find(saveItem => saveItem.Index == i);
 
+                    if (slot == null) continue;
+
                     item.Init(slot.ItemIndex, slot.Piece, slot.Amount, slot.State);
                 }
             }
