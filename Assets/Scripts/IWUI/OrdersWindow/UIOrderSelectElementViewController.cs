@@ -135,6 +135,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
 
     public override void OnViewCloseCompleted()
     {
+        base.OnViewCloseCompleted();
         RemoveListeners();
 
         if (isComplete) customer.GetReward();

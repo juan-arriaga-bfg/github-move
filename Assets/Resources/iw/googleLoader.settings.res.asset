@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -60,6 +61,10 @@ MonoBehaviour:
     Link: 15hj4e6i2F9UkK_p-lSEvp8d1MJW0KNj3PmEL_1rQU_4
     Route: parse
     Pattern: '[{"Uid":"","Products":[{"Currency":"","Amount":0}],"Price":{"Currency":"","Amount":0},"Icon":"","Name":""}]'
+  - Key: market
+    Link: 1sQoVUyJQqGwJDGcmg4NDllPEgWygwrh8Qgeih1TwYaE
+    Route: parse
+    Pattern: '[{"Uid":"","UnlockLevel":0,"Amount":0,"Weight":{"Uid":"","Weight":0},"Price":{"Currency":"","Amount":0},"RandomType":""}]'
   - Key: orders
     Link: 1MakAUEhU8pxDDasINjyEBIXVEZ3oPr3PMrisNbH650I
     Route: parse
