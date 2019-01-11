@@ -89,7 +89,8 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
                 var pos = thisContext.Multicellular.GetPointInMask(position, point);
             
                 if(thisContext.Context.WorkerLogic.Init(pos, Timer) == false) continue;
-            
+
+                thisContext.Context.WorkerLogic.Replace(pos, position);
                 return;
             }
             
