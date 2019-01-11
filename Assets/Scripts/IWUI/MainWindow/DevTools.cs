@@ -62,21 +62,13 @@ public class DevTools : UIContainerElementViewController
     
     public void OnResetProgressClick()
     {
-        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
-        
-        model.Title = "Reset the progress";
-        model.Message = "Do you want to reset the progress and start playing from the beginning?";
-        model.AcceptLabel = "<size=30>Reset progress!</size>";
-        model.CancelLabel = "No!";
-        
-        model.OnAccept = () =>
-        {
-            ReloadScene(true);
-        };
-        
-        model.OnCancel = () => {};
-        
-        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+        UIMessageWindowController.CreateMessageWithTwoButtons(
+            "Reset the progress",
+            "Do you want to reset the progress and start playing from the beginning?",
+            "<size=30>Reset progress!</size>",
+            "No!",
+            () => { ReloadScene(true); },
+            () => {});
     }
 
     public void OnCurrencyCheatSheetClick()

@@ -189,7 +189,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
             
             var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
 
-            model.Image = PieceType.Parse(pieceEntity.PieceType);
+            model.Prefab = PieceType.Parse(pieceEntity.PieceType);
             model.Title = LocalizationService.Get("window.remove.title", "window.remove.title");
             model.Message = LocalizationService.Get("window.remove.message", "window.remove.message");
             model.AcceptLabel = LocalizationService.Get("common.button.yes", "common.button.yes");

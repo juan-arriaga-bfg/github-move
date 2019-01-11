@@ -59,6 +59,22 @@ public class UIMessageWindowController : IWWindowController {
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
 
+    public static void CreateMessageWithTwoButtons(string title, string message, string acceptText = null, string cancelText = null, Action onAccept = null, Action onCancel = null, Action onClose = null)
+    {
+        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+        model.Title = title;
+        model.Message = message;
+        model.AcceptLabel = string.IsNullOrEmpty(acceptText) ? LocalizationService.Get("common.button.ok", "common.button.ok") : acceptText;
+        model.CancelLabel = string.IsNullOrEmpty(cancelText) ? LocalizationService.Get("common.button.no", "common.button.no") : cancelText;
+        
+        model.OnAccept = onAccept ?? (() => {});
+        model.OnCancel = onCancel;
+        model.OnClose = onClose;
+        
+        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+    }
+
     public static void CreatePrefabMessage(string title, string prefab, string message = null)
     {
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
