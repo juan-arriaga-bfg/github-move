@@ -22,6 +22,8 @@ public class MarketSaveComponent : ECSEntity, IECSSerializeable
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
     {
+        if (BoardService.Current == null) return;
+        
         var board = BoardService.Current.FirstBoard;
         var defs = GameDataService.Current.MarketManager.Defs;
         
