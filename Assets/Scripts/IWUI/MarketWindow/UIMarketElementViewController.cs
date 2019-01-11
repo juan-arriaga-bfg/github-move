@@ -162,15 +162,19 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 			Paid();
 			return;
 		}
-
-		UIMessageWindowController.CreateMessage(
-			LocalizationService.Get("window.market.confirmation.title", "window.market.confirmation.title"),
-			string.Format(LocalizationService.Get("window.market.confirmation.message", "window.market.confirmation.message {0}"), price.ToStringIcon()),
-			contentEntity.Def.Reward.Currency,
-			Paid,
-			null,
-			() => { isClick = false; }
-		);
+		
+		var model = UIService.Get.GetCachedModel<UIConfirmationWindowModel>(UIWindowType.ConfirmationWindow);
+		
+		model.IsMarket = true;
+		model.Icon = contentEntity.Def.Reward.Currency;
+		
+		model.Price = price;
+		model.Product = contentEntity.Def.Reward;
+        
+		model.OnAccept = Paid;
+		model.OnCancel = () => { isClick = false; };
+        
+		UIService.Get.ShowWindow(UIWindowType.ConfirmationWindow);
 	}
 	
 	private void Paid()

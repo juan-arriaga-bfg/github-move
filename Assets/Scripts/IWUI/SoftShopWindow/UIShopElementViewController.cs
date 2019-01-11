@@ -71,8 +71,25 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
             isCanPurchase = false;
             isClick = false;
         }
+
+        if (isCanPurchase == false || contentEntity.Price.Currency != Currency.Crystals.Name)
+        {
+            context.Controller.CloseCurrentWindow();
+            return;
+        }
         
-        context.Controller.CloseCurrentWindow();
+        var model = UIService.Get.GetCachedModel<UIConfirmationWindowModel>(UIWindowType.ConfirmationWindow);
+
+        model.IsMarket = false;
+        model.Icon = contentEntity.ContentId;
+        
+        model.Price = contentEntity.Price;
+        model.Product = contentEntity.Products[0];
+        
+        model.OnAccept = context.Controller.CloseCurrentWindow;
+        model.OnCancel = () => { isClick = false; };
+        
+        UIService.Get.ShowWindow(UIWindowType.ConfirmationWindow);
     }
 
     private void GetReward()

@@ -41,6 +41,8 @@ public class UIWindowType
     public const string MarketWindow = "MarketWindow";
     
     public const string TimeSyncWindow = "TimeSyncWindow";
+    
+    public const string ConfirmationWindow = "ConfirmationWindow";
 
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {
