@@ -55,7 +55,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         return str.ToString();
     }
     
-    public void Init(BoardPosition id, TimerComponent timer)
+    public bool Init(BoardPosition id, TimerComponent timer)
     {
         foreach (var pair in completeTimesList)
         {
@@ -64,8 +64,10 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             completeTimesList.Remove(pair);
             completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(id, timer));
             
-            return;
+            return true;
         }
+        
+        return false;
     }
     
     public bool Get(BoardPosition id, TimerComponent timer)
@@ -92,7 +94,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         
         var isSuccess = false;
         
-        CurrencyHellper.Purchase(Currency.Mine.Name, 1, targetItem.Currency, 1, success =>
+        CurrencyHellper.Purchase(Currency.Workplace.Name, 1, targetItem.Currency, 1, success =>
         {
             isSuccess = success;
 
