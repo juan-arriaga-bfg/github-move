@@ -162,6 +162,20 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         
         if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target)) return false;
         
+		
+        if (def.Filter.HasFlag(PieceTypeFilter.Mine))
+        {
+            NSAudioService.Current.Play(SoundId.worker_mine);
+        }
+        else if(def.Filter.HasFlag(PieceTypeFilter.ProductionField))
+        {
+            NSAudioService.Current.Play(SoundId.worker_harvest);
+        }
+        else
+        {
+            NSAudioService.Current.Play(SoundId.worker_chop);
+        }
+        
         context.ActionExecutor.AddAction(new CollapsePieceToAction
         {
             To = targetPosition,

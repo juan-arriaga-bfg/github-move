@@ -73,6 +73,7 @@ public class ObstaclePieceView : PieceBoardElementView
         
         if(life.Timer.IsExecuteable() == false) return;
         
+        
         worker = Context.CreateElement((int)(isExtra ? ViewType.ExtraWorker : ViewType.DefaultWorker)).gameObject;
         worker.transform.SetParent(anchorWorker, false);
 

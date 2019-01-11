@@ -69,7 +69,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         ProfileService.Current.QueueComponent.Run();
         BoardService.Current.FirstBoard.TutorialLogic.Run();
 
-        NSAudioService.Current.Play(SoundId.Ambient1Music, true)
+        NSAudioService.Current.Play(SoundId.Ambient1Music, true, 1)
                       .SetVolume(0f)
                       .SetVolume(1f, 2f);
     }

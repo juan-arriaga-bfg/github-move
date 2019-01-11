@@ -67,6 +67,7 @@ public class UIChestMessageWindowView : UIGenericPopupWindowView
     {
         isOpen = true;
         Controller.CloseCurrentWindow();
+        
     }
 
     private List<IUIContainerElementEntity> UpdateEntities(List<string> entities)

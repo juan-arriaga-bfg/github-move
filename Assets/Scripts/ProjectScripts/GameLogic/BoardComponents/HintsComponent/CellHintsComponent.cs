@@ -131,6 +131,8 @@ public class CellHintsComponent : IECSComponent
     {
         if(selectCells == null) return;
         
+        
+        
         foreach (var cell in selectCells)
         {
             cell.ToggleSelection(false);

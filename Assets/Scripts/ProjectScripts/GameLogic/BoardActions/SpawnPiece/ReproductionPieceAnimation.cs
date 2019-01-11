@@ -24,6 +24,8 @@ public class ReproductionPieceAnimation : BoardAnimation
             sequence.Append(boardElement.CachedTransform.DOScale(new Vector3(0.7f, 1.2f, 1f), 0.1f));
             sequence.Append(boardElement.CachedTransform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack));    
         }
+        
+        NSAudioService.Current.Play(SoundId.drop_object);
 
         var index = 0;
 

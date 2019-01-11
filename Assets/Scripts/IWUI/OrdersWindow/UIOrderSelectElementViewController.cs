@@ -48,7 +48,9 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         {
             customer.Timer.OnExecute += UpdateTimer;
             customer.Timer.OnComplete += UpdateState;
+            customer.Timer.OnComplete += PlaySound;
             customer.Timer.OnComplete += UpdateOrders;
+            
         }
 
         order.OnStateChange += UpdateState;
@@ -63,6 +65,11 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         CreateIcon(iconHero, $"{PieceType.Parse(piece.PieceType)}Icon");
         
         base.Init();
+    }
+
+    private void PlaySound()
+    {
+        NSAudioService.Current.Play(SoundId.order_complete, false, 1);
     }
     
     private void CreateResultIcon(Transform parent, string id)
@@ -143,6 +150,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         {
             customer.Timer.OnExecute -= UpdateTimer;
             customer.Timer.OnComplete -= UpdateState;
+            customer.Timer.OnComplete += PlaySound;
             customer.Timer.OnComplete -= UpdateOrders;
         }
 

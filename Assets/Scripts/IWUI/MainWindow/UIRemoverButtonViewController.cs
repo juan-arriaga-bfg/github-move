@@ -74,6 +74,8 @@ public class UIRemoverButtonViewController : IWUIWindowViewController
     {
         if (BoardService.Current.FirstBoard.BoardLogic.Remover.IsActive) return;
         
+        NSAudioService.Current.Play(SoundId.remover_take);
+        
         if (Input.touchSupported == false)
         {
             pointerId = 0;
@@ -90,12 +92,12 @@ public class UIRemoverButtonViewController : IWUIWindowViewController
     }
 
     private void OnBeginRemoverEvent()
-    {
+    {   
         AnimateHide();
     }
 
     protected virtual void AnimateShow()
-    {
+    {   
         if (CachedCanvasGroup == null) return;
 
         DOTween.Kill(this);
@@ -106,7 +108,7 @@ public class UIRemoverButtonViewController : IWUIWindowViewController
     protected virtual void AnimateHide()
     {
         if (CachedCanvasGroup == null) return;
-
+        
         DOTween.Kill(this);
         var sequence = DOTween.Sequence().SetId(this);
         sequence.Append(CachedCanvasGroup.DOFade(0f, 0.35f));

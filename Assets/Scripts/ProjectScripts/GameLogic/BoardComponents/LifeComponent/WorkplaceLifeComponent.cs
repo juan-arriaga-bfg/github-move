@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILockerComponent
@@ -39,10 +40,23 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		
 		timer = new TimerComponent();
 		
+		
 		timer.OnStart += OnTimerStart;
 		timer.OnComplete += OnTimerComplete;
 		
 		Context.RegisterComponent(timer);
+	}
+
+	private void PlaySoundOnStart()
+	{
+		
+		
+		
+	}
+
+	private void PlaySoundOnEnd()
+	{
+		NSAudioService.Current.Play(SoundId.worker_finish);
 	}
 	
 	public virtual void OnAddToBoard(BoardPosition position, Piece context = null)
@@ -117,6 +131,8 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		if (IsDead == false) OnStep();
 		else OnComplete();
         
+		PlaySoundOnStart();
+		
 		Locker.Lock(this, false);
 
 		if (timer.IsExecuteable()) UpdateView(true);
@@ -125,6 +141,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	protected virtual void OnTimerComplete()
 	{
 		Context.Context.WorkerLogic.Return(Context.CachedPosition);
+		PlaySoundOnEnd();
 		UpdateView(false);
 		Rewards.ShowBubble();
 	}

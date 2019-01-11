@@ -1,4 +1,6 @@
-﻿public class TouchReactionDefinitionOpenChestWindow : TouchReactionDefinitionComponent
+﻿using UnityEngine;
+
+public class TouchReactionDefinitionOpenChestWindow : TouchReactionDefinitionComponent
 {
 	private ChestPieceComponent chestComponent;
 	
@@ -9,7 +11,7 @@
 		if (chestComponent?.Def == null || chestComponent.Rewards.IsHightlight) return false;
 
 		var model = UIService.Get.GetCachedModel<UIChestMessageWindowModel>(UIWindowType.ChestMessage);
-
+		
 		model.ChestComponent = chestComponent;
 				
 		UIService.Get.ShowWindow(UIWindowType.ChestMessage);

@@ -199,6 +199,8 @@ public class PieceBoardElementView : BoardElementView
 
         HideDropEffect();
 
+        NSAudioService.Current.Play(SoundId.object_tap);
+        
         OnDrag(Piece.CachedPosition, worldPos);
         Piece.Context.HintCooldown.Pause(this);
         Piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
@@ -206,10 +208,16 @@ public class PieceBoardElementView : BoardElementView
 
     public virtual void OnDragEnd(BoardPosition boardPos, Vector2 worldPos)
     {
+        
         Piece.Context.HintCooldown.Resume(this);
         
         if (selectionView == null) return;
-
+        
+        if(Piece.Draggable.IsValidDrag(boardPos) && !lastBoardPosition.Equals(boardPos))
+            NSAudioService.Current.Play(SoundId.object_release);
+        
+        List<BoardPosition> matchField = new List<BoardPosition>();
+            
         if (dragMatchAnimation != null)
         {
             dragMatchAnimation.StopAnimation(Piece.Context.RendererContext);
@@ -223,6 +231,7 @@ public class PieceBoardElementView : BoardElementView
     {
         RemoveArrow();
         DOTween.Kill(selectedAnimationId);
+        NSAudioService.Current.Stop(SoundId.object_release);
         var sequence = DOTween.Sequence().SetId(selectedAnimationId);
         sequence.Append(CachedTransform.DOScale(new Vector3(1.1f, 0.9f, 1f), 0.1f));
         sequence.Append(CachedTransform.DOScale(new Vector3(0.9f, 1.1f, 1f), 0.1f));

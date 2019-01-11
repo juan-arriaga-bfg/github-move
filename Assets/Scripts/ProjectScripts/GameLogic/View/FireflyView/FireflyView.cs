@@ -75,16 +75,28 @@ public class FireflyView : BoardElementView
 
     public void OnDragStart()
     {
+        StopFly();
+        
+        NSAudioService.Current.Play(SoundId.firefly_tap);
+    }
+
+    public void StopFly()
+    {
         DOTween.Kill(CachedTransform);
         current = CachedTransform.position;
     }
 
-    public void OnDragEnd()
+    public void StartFly()
     {
         var diff = (Vector2)CachedTransform.position - current;
         
         to = Context.Context.BoardLogic.FireflyLogic.Cross(CachedTransform.position, to + diff);
         Move();
+    }
+
+    public void OnDragEnd()
+    {
+        StartFly();
     }
 
     public void OnClick()

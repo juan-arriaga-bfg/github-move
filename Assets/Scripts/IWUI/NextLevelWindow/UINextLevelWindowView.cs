@@ -22,13 +22,14 @@ public class UINextLevelWindowView : UIGenericWindowView
     
     private int tapCount;
     private bool isClick;
-    
+
+
     public override void OnViewShow()
     {
         base.OnViewShow();
         
         var windowModel = Model as UINextLevelWindowModel;
-        
+        NSAudioService.Current.Play(SoundId.popup_new_level);
         title.Text = windowModel.Title;
         message.Text = windowModel.Mesage;
         rewards.Text = windowModel.Rewards;
@@ -148,6 +149,8 @@ public class UINextLevelWindowView : UIGenericWindowView
         switch (tapCount)
         {
             case 0:
+                
+                
                 for (var i = 0; i < viewAnimators.Count; i++)
                 {
                     viewAnimators[i].SetTrigger(tapAnimationId);
@@ -162,6 +165,7 @@ public class UINextLevelWindowView : UIGenericWindowView
                     return;
                 }
                 
+                NSAudioService.Current.Play(SoundId.popup_new_recipe);
                 CreateCards();
                 break;
             case 1:

@@ -12,6 +12,9 @@ public class MatchPieceToAnimation : BoardAnimation
 		var points = Positions;
 		var to = context.Context.BoardDef.GetPiecePosition(To.X, To.Y);
 		
+		
+		
+		
 		var sequence = DOTween.Sequence().SetId(animationUid);
 		const float elementOffset = 0.00f;
 		
@@ -20,10 +23,13 @@ public class MatchPieceToAnimation : BoardAnimation
 		sequence.timeScale = 1.2f;
 		sequence.InsertCallback(0.0f, () => ParticleView.Show(R.SmolderingParticles, particlePosition));
 		sequence.InsertCallback(0.0f, () => ParticleView.Show(R.MergeParticleSystem, particlePosition).SyncRendererLayers(new BoardPosition(To.X, To.Y, 4)));
+
+		var mergeElementTypeDef = GetMergeTypeDef(context);
+		PlaySoundByMergeType( mergeElementTypeDef );
 		
 		for (var i = 0; i < points.Count; i++)
 		{
-			var boardElement = context.GetElementAt(points[i]);
+			var boardElement = context.GetElementAt(points[i]);			
 			
 			if (points[i].Equals(To))
 			{
@@ -50,6 +56,59 @@ public class MatchPieceToAnimation : BoardAnimation
 			CompleteAnimation(context);
 		});
 	}
+
+	private void PlaySoundByMergeType( PieceTypeDef pieceTypeDef )
+	{
+		if (pieceTypeDef.Id == PieceType.Boost_CR.Id)
+		{
+			NSAudioService.Current.Play(SoundId.crystal_use);
+			return;
+		}
+		
+		if (pieceTypeDef.Id >= PieceType.Soft1.Id && pieceTypeDef.Id <= PieceType.Soft6.Id)
+		{
+			NSAudioService.Current.Play(SoundId.merge_soft_curr);
+			return;
+		}
+		
+		if (pieceTypeDef.Id >= PieceType.Hard1.Id && pieceTypeDef.Id <= PieceType.Hard6.Id)
+		{
+			NSAudioService.Current.Play(SoundId.merge_hard_curr);
+			return;
+		}
+		
+		if (pieceTypeDef.Filter.HasFlag(PieceTypeFilter.Chest))
+		{
+			NSAudioService.Current.Play(SoundId.merge_chest);
+			return;
+		}
+		
+		if (pieceTypeDef.Id >= PieceType.Boost_CR1.Id && pieceTypeDef.Id <= PieceType.Boost_CR2.Id)
+		{
+			NSAudioService.Current.Play(SoundId.merge_crystal_parts);
+			return;
+		}
+		
+		if (pieceTypeDef.Id == PieceType.Boost_CR3.Id)
+		{
+			NSAudioService.Current.Play(SoundId.merge_crystal_done);
+			return;
+		}
+		
+		if (pieceTypeDef.Filter.HasFlag(PieceTypeFilter.Fake))
+		{
+			return;
+		}
+		
+		NSAudioService.Current.Play(SoundId.merge_main);
+	}
+
+	private PieceTypeDef GetMergeTypeDef(BoardRenderer context)
+	{
+		var mergeElementType = (context.GetElementAt(Positions[0]) as PieceBoardElementView).Piece.PieceType;
+		var mergeElementTypeDef = PieceType.GetDefById(mergeElementType);
+		return mergeElementTypeDef;
+	} 
 	
 	private void SetTrailToPiece(BoardElementView pieceView, BoardPosition piecePosition)
 	{
