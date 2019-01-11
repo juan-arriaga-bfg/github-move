@@ -10,7 +10,7 @@ public class MakingBuildingPieceView : BuildingPieceView
 
         var life = Piece.GetComponent<MakingLifeComponent>(MakingLifeComponent.ComponentGuid);
 
-        timer = life?.Timer;
+        timer = life?.TimerMain;
         
         if(timer == null) return;
         

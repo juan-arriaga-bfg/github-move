@@ -211,7 +211,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             return false;
         }
 
-        if (life.IsUseCooldown && life.Timer.IsExecuteable())
+        if (life.IsUseCooldown && life.TimerMain.IsExecuteable())
         {
             UIErrorWindowController.AddError(LocalizationService.Get("message.error.notReady", "message.error.notReady"));
             return false;

@@ -3,16 +3,13 @@
 public class MakingLifeComponent : WorkplaceLifeComponent
 {
     private PiecesMakingDef def;
-    private TimerComponent cooldown;
     
     public override CurrencyPair Energy => def.Price;
     public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.castle.make", "gameboard.bubble.message.castle.make {0}"), Energy.ToStringIcon());
-    public override string Price => Timer.IsExecuteable() ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), Timer.CompleteTime.GetTimeLeftText()) : base.Price;
+    public override string Price => TimerMain.IsExecuteable() ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), TimerMain.CompleteTime.GetTimeLeftText()) : base.Price;
 
-    public override TimerComponent Timer => cooldown;
-
-    public override bool IsUseCooldown => true;
-
+    public override TimerComponent TimerMain => TimerCooldown;
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
@@ -20,10 +17,10 @@ public class MakingLifeComponent : WorkplaceLifeComponent
         def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).MakingDef;
         
         HP = -1;
-        timer.Delay = 2;
+        TimerWork.Delay = 2;
         
-        cooldown = new TimerComponent{Delay = def.Delay};
-        RegisterComponent(cooldown);
+        TimerCooldown = new TimerComponent{Delay = def.Delay};
+        RegisterComponent(TimerCooldown);
     }
 
     protected override Dictionary<int, int> GetRewards()
@@ -37,7 +34,7 @@ public class MakingLifeComponent : WorkplaceLifeComponent
         
         if (item == null) return null;
         
-        if (item.IsStartCooldown) cooldown.Start(item.StartTimeCooldown);
+        if (item.IsStartCooldown) TimerCooldown.Start(item.StartTimeCooldown);
         else Locker.Unlock(this);
         
         return item;
@@ -49,20 +46,20 @@ public class MakingLifeComponent : WorkplaceLifeComponent
         {
             Step = current,
             Position = Context.CachedPosition,
-            IsStartTimer = timer.IsExecuteable(),
-            StartTimeTimer = timer.StartTimeLong,
-            IsStartCooldown = cooldown.IsExecuteable(),
-            StartTimeCooldown = cooldown.StartTimeLong
+            IsStartTimer = TimerWork.IsExecuteable(),
+            StartTimeTimer = TimerWork.StartTimeLong,
+            IsStartCooldown = TimerCooldown.IsExecuteable(),
+            StartTimeCooldown = TimerCooldown.StartTimeLong
         };
     }
     
     public override bool Damage(bool isExtra = false)
     {
-        if (cooldown.IsExecuteable() == false) return base.Damage(isExtra);
+        if (TimerCooldown.IsExecuteable() == false) return base.Damage(isExtra);
         
         UIMessageWindowController.CreateTimerCompleteMessage(
             LocalizationService.Get("window.timerComplete.message.castle", "window.timerComplete.message.castle"),
-            cooldown);
+            TimerCooldown);
 
         return false;
     }
@@ -72,7 +69,7 @@ public class MakingLifeComponent : WorkplaceLifeComponent
         if (isComplete)
         {
             AddResourceView.Show(StartPosition(), def.StepRewards);
-            cooldown.Start();
+            TimerCooldown.Start();
         }
         
         base.OnSpawnCurrencyRewards(isComplete);

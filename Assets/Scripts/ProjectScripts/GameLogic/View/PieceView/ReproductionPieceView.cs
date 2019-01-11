@@ -16,7 +16,7 @@ public class ReproductionPieceView : PieceBoardElementView
 
         var life = Piece.GetComponent<ReproductionLifeComponent>(ReproductionLifeComponent.ComponentGuid);
 
-        timer = life?.Timer;
+        timer = life?.TimerMain;
         
         if(timer == null) return;
         

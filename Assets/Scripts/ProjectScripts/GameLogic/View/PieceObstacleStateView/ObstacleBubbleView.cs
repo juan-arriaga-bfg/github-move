@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ObstacleBubbleView : UIBoardView, IBoardEventListener
 {
@@ -26,8 +25,6 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
         base.Init(piece);
 
         life = piece.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
-
-        
         
         if(life == null) return;
         
@@ -36,8 +33,8 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
 
         if (life.IsUseCooldown == false) return;
         
-        life.Timer.OnExecute += UpdateButtonText;
-        life.Timer.OnComplete += UpdateButtonText;
+        life.TimerMain.OnExecute += UpdateButtonText;
+        life.TimerMain.OnComplete += UpdateButtonText;
     }
 
     public override void ResetViewOnDestroy()
@@ -46,8 +43,8 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
         
         if (life.IsUseCooldown)
         {
-            life.Timer.OnExecute -= UpdateButtonText;
-            life.Timer.OnComplete -= UpdateButtonText;
+            life.TimerMain.OnExecute -= UpdateButtonText;
+            life.TimerMain.OnComplete -= UpdateButtonText;
         }
         
         base.ResetViewOnDestroy();

@@ -3,17 +3,14 @@
 public class ReproductionLifeComponent : WorkplaceLifeComponent
 {
     private PiecesReproductionDef def;
-    private TimerComponent cooldown;
     
     private string childName;
     
     public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.production", "gameboard.bubble.message.production {0}"), childName);
-    public override string Price => Timer.IsExecuteable() ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), Timer.CompleteTime.GetTimeLeftText()) : base.Price;
+    public override string Price => TimerMain.IsExecuteable() ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), TimerMain.CompleteTime.GetTimeLeftText()) : base.Price;
 
-    public override TimerComponent Timer => cooldown;
-
-    public override bool IsUseCooldown => true;
-
+    public override TimerComponent TimerMain => TimerCooldown;
+    
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
@@ -21,10 +18,10 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).ReproductionDef;
         
         HP = def.Limit;
-        timer.Delay = 2;
+        TimerWork.Delay = 2;
         
-        cooldown = new TimerComponent{Delay = def.Delay};
-        RegisterComponent(cooldown);
+        TimerCooldown = new TimerComponent{Delay = def.Delay};
+        RegisterComponent(TimerCooldown);
         
         var child = GameDataService.Current.PiecesManager.GetPieceDef(PieceType.Parse(def.Reproduction.Currency));
         childName = $"<sprite name={child.Uid}>";
@@ -47,7 +44,7 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         
         if (item == null) return null;
         
-        if (item.IsStartCooldown) cooldown.Start(item.StartTimeCooldown);
+        if (item.IsStartCooldown) TimerCooldown.Start(item.StartTimeCooldown);
         else Locker.Unlock(this);
         
         return item;
@@ -59,19 +56,19 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         
         if (save == null) return null;
         
-        save.IsStartCooldown = cooldown.IsExecuteable();
-        save.StartTimeCooldown = cooldown.StartTimeLong;
+        save.IsStartCooldown = TimerCooldown.IsExecuteable();
+        save.StartTimeCooldown = TimerCooldown.StartTimeLong;
         
         return save;
     }
 
     public override bool Damage(bool isExtra = false)
     {
-        if (cooldown.IsExecuteable() == false) return base.Damage(isExtra);
+        if (TimerCooldown.IsExecuteable() == false) return base.Damage(isExtra);
         
         UIMessageWindowController.CreateTimerCompleteMessage(
             LocalizationService.Get("window.timerComplete.message.production", "window.timerComplete.message.production"),
-            cooldown);
+            TimerCooldown);
         
         return false;
     }
@@ -81,7 +78,7 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         if (isComplete)
         {
             AddResourceView.Show(StartPosition(), def.StepReward);
-            if (IsDead == false) cooldown.Start();
+            if (IsDead == false) TimerCooldown.Start();
         }
         
         base.OnSpawnCurrencyRewards(isComplete);

@@ -39,7 +39,7 @@
         
             var life = target.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
 
-            if (life != null && !life.Locker.IsLocked && (!life.IsUseCooldown || !life.Timer.IsExecuteable()))
+            if (life != null && !life.Locker.IsLocked && (!life.IsUseCooldown || !life.TimerMain.IsExecuteable()))
             {
                 to = position;
                 base.Execute();

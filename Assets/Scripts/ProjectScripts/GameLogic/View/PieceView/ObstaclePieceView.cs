@@ -20,8 +20,8 @@ public class ObstaclePieceView : PieceBoardElementView
         
         if(life == null) return;
 
-        life.Timer.OnStart += UpdateAnimation;
-        life.Timer.OnComplete += UpdateAnimation;
+        life.TimerMain.OnStart += UpdateAnimation;
+        life.TimerMain.OnComplete += UpdateAnimation;
         
         UpdateAnimation();
         
@@ -30,19 +30,19 @@ public class ObstaclePieceView : PieceBoardElementView
         if(skin == null) return;
         
         skin.Init(life.Value);
-        life.Timer.OnComplete += skin.UpdateView;
+        life.TimerMain.OnComplete += skin.UpdateView;
     }
 
     public override void ResetViewOnDestroy()
     {
         base.ResetViewOnDestroy();
         
-        if(life?.Timer == null) return;
+        if(life?.TimerMain == null) return;
         
-        life.Timer.OnStart -= UpdateAnimation;
-        life.Timer.OnComplete -= UpdateAnimation;
+        life.TimerMain.OnStart -= UpdateAnimation;
+        life.TimerMain.OnComplete -= UpdateAnimation;
         
-        if(skin != null) life.Timer.OnComplete -= skin.UpdateView;
+        if(skin != null) life.TimerMain.OnComplete -= skin.UpdateView;
     }
     
     private void UpdateAnimation()
@@ -71,7 +71,7 @@ public class ObstaclePieceView : PieceBoardElementView
             worker = null;
         }
         
-        if(life.Timer.IsExecuteable() == false) return;
+        if(life.TimerMain.IsExecuteable() == false) return;
         
         
         worker = Context.CreateElement((int)(isExtra ? ViewType.ExtraWorker : ViewType.DefaultWorker)).gameObject;

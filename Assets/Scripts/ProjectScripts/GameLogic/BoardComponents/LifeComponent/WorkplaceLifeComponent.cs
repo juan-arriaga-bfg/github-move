@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILockerComponent
@@ -13,12 +12,14 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	public virtual string Message => "";
 	public virtual string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.send", "gameboard.bubble.button.send {0}"), $"<sprite name={Currency.Worker.Icon}>");
 
-	protected TimerComponent timer;
-	public virtual TimerComponent Timer => timer;
+	public TimerComponent TimerWork;
+	public TimerComponent TimerCooldown;
+	
+	public virtual TimerComponent TimerMain => TimerWork;
 	
 	public RewardsStoreComponent Rewards;
 	
-	public virtual bool IsUseCooldown => false;
+	public bool IsUseCooldown => TimerCooldown != null;
 	
 	protected virtual Vector2 timerOffset => new Vector2(0f, 0.5f);
 	
@@ -38,20 +39,16 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		
 		Context.RegisterComponent(Rewards);
 		
-		timer = new TimerComponent();
+		TimerWork = new TimerComponent();
 		
+		TimerWork.OnStart += OnTimerStart;
+		TimerWork.OnComplete += OnTimerComplete;
 		
-		timer.OnStart += OnTimerStart;
-		timer.OnComplete += OnTimerComplete;
-		
-		Context.RegisterComponent(timer);
+		Context.RegisterComponent(TimerWork);
 	}
 
 	private void PlaySoundOnStart()
 	{
-		
-		
-		
 	}
 
 	private void PlaySoundOnEnd()
@@ -75,8 +72,8 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	
 	public virtual void OnRemoveFromBoard(BoardPosition position, Piece context = null)
 	{
-		timer.OnStart -= OnTimerStart;
-		timer.OnComplete -= OnTimerComplete;
+		TimerWork.OnStart -= OnTimerStart;
+		TimerWork.OnComplete -= OnTimerComplete;
 	}
 
 	protected virtual LifeSaveItem InitInSave(BoardPosition position)
@@ -89,9 +86,9 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		if(item == null) return null;
 		
 		current = item.Step;
-		Context.Context.WorkerLogic.Init(Context.CachedPosition, timer);
+		Context.Context.WorkerLogic.Init(Context.CachedPosition, TimerWork);
 
-		if (item.IsStartTimer) timer.Start(item.StartTimeTimer);
+		if (item.IsStartTimer) TimerWork.Start(item.StartTimeTimer);
 		else OnTimerStart();
 
 		return item;
@@ -103,8 +100,8 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		{
 			Step = current,
 			Position = Context.CachedPosition,
-			IsStartTimer = timer.IsExecuteable(),
-			StartTimeTimer = timer.StartTimeLong
+			IsStartTimer = TimerWork.IsExecuteable(),
+			StartTimeTimer = TimerWork.StartTimeLong
 		};
 	}
     
@@ -112,13 +109,13 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	{
 		if (IsDead
 		    || CurrencyHellper.IsCanPurchase(Energy, true) == false
-		    || isExtra == false && Context.Context.WorkerLogic.Get(Context.CachedPosition, timer) == false) return false;
+		    || isExtra == false && Context.Context.WorkerLogic.Get(Context.CachedPosition, TimerWork) == false) return false;
         
 		CurrencyHellper.Purchase(Currency.Damage.Name, 1, Energy, success =>
 		{
 			Success();
 			Damage(Worker?.Amount ?? 1);
-			timer.Start();
+			TimerWork.Start();
             
 			BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.StorageDamage, this);
 		});
@@ -135,7 +132,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		
 		Locker.Lock(this, false);
 
-		if (timer.IsExecuteable()) UpdateView(true);
+		if (TimerWork.IsExecuteable()) UpdateView(true);
 	}
 	
 	protected virtual void OnTimerComplete()

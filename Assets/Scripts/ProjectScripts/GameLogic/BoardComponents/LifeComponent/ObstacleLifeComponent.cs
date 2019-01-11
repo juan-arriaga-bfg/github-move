@@ -24,11 +24,11 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         if(item == null) return null;
 		
         current = item.Step;
-        Context.Context.WorkerLogic.Init(Context.CachedPosition, Timer);
+        Context.Context.WorkerLogic.Init(Context.CachedPosition, TimerMain);
         
-        Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current - 1);
+        TimerMain.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current - 1);
         
-        if (item.IsStartTimer) Timer.Start(item.StartTimeTimer);
+        if (item.IsStartTimer) TimerMain.Start(item.StartTimeTimer);
         else
         {
             OnTimerStart();
@@ -47,7 +47,7 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
     
     protected override void Success()
     {
-        Timer.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current);
+        TimerMain.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current);
     }
     
     protected override void OnSpawnCurrencyRewards(bool isComplete)

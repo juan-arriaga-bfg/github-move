@@ -33,7 +33,7 @@ public class MineLifeComponent : WorkplaceLifeComponent
         if (def == null) def = GameDataService.Current.MinesManager.GetInitialDef(key);
         else GameDataService.Current.MinesManager.Move(def.Id, key);
         
-        Timer.Delay = def.Delay;
+        TimerMain.Delay = def.Delay;
         HP = def.Size;
         
         base.OnAddToBoard(position, context);

@@ -23,7 +23,7 @@
 
         if (life != null)
         {
-            return !life.Locker.IsLocked && (!life.IsUseCooldown || !life.Timer.IsExecuteable()) && CurrencyHellper.IsCanPurchase(life.Energy);
+            return !life.Locker.IsLocked && (!life.IsUseCooldown || !life.TimerMain.IsExecuteable()) && CurrencyHellper.IsCanPurchase(life.Energy);
         }
         
         var state = target.GetComponent<PieceStateComponent>(PieceStateComponent.ComponentGuid);

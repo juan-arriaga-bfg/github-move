@@ -12,23 +12,23 @@
 
 		if (life == null || IsDone) return true;
 
-		if (life.Timer.IsPaused) return false;
-        
-		IsDone = !life.Timer.IsExecuteable() || life.IsUseCooldown;
+		if (life.TimerWork.IsPaused || life.IsUseCooldown && life.TimerCooldown.IsPaused ) return false;
 
+		IsDone = life.TimerWork.IsExecuteable() == false;
+        
 		if (IsDone) return true;
-		
-		if (life.Timer.IsFree())
+
+		if (life.TimerWork.IsFree())
 		{
-			life.Timer.FastComplete();
+			life.TimerWork.FastComplete();
 			return false;
 		}
-
-		if (life.Timer.GetPrise() == null) return false;
+			
+		if (life.TimerWork.GetPrise() == null) return false;
 		
 		UIMessageWindowController.CreateTimerCompleteMessage(
 			LocalizationService.Get("window.timerComplete.message.default", "window.timerComplete.message.default"),
-			life.Timer);
+			life.TimerWork);
 		
 		return false;
 	}
