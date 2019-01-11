@@ -33,6 +33,8 @@ public class MarketSaveComponent : ECSEntity, IECSSerializeable
         {
             var def = defs[i];
             
+            if(def.Reward == null) continue;
+            
             slots.Add(new MarketSaveItem
             {
                 Index = i,
