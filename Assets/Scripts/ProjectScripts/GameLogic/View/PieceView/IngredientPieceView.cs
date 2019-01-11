@@ -36,16 +36,11 @@ public class IngredientPieceView : PieceBoardElementView
     {
         var sequence = DOTween.Sequence().SetId(body);
         SetCustomMaterial(BoardElementMaterialType.PiecesLowHighlightMaterial, true);
-
         sequence.SetLoops(-1);
         
-        sequence.AppendInterval(5f);
+        sequence.Append(body.DOScale(Vector3.one * 1.1f, 0.55f).SetEase(Ease.OutSine));
+        sequence.Append(body.DOScale(Vector3.one, 0.40f).SetEase(Ease.OutSine));
         
-        sequence.Append(body.DOScale(Vector3.one * 1.2f, 0.25f));
-        sequence.Append(body.DOScale(Vector3.one * 0.9f, 0.15f));
-        sequence.Append(body.DOScale(Vector3.one * 1.2f, 0.25f));
-        sequence.Append(body.DOScale(Vector3.one, 0.15f));
-        
-        sequence.Goto(Random.Range(0, 5), true);
+        //sequence.Goto(Random.Range(0, 8), true);
     }
 }
