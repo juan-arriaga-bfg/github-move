@@ -226,7 +226,7 @@ public class UIQuestStartWindowView : IWUIWindowView
 
         if (step == Step.QuestComplete)
         {
-            NSAudioService.Current.Play(SoundId.quest_completed);
+            NSAudioService.Current.Play(SoundId.QuestCompleted);
         }
         
         var scenario = step == Step.QuestComplete ? model.QuestCompletedScenario : model.QuestStartScenario;
@@ -245,7 +245,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         var payload1 = act.GetComponent<ConversationActionPayloadShowQuestComponent>(ConversationActionPayloadComponent.ComponentGuid);
         if (payload1 != null)
         {
-            NSAudioService.Current.Play(SoundId.quest_new);
+            NSAudioService.Current.Play(SoundId.QuestNew);
             CreateQuestCards(Model as UIQuestStartWindowModel, payload1, () => { isClickAllowed = true; });
             return;
         }

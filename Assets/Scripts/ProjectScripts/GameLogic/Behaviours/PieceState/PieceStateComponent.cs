@@ -176,7 +176,7 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
 
     private void PlaySoundOnStart()
     {
-        NSAudioService.Current.Play(SoundId.worker_build);
+        NSAudioService.Current.Play(SoundId.WorkerBuild);
     }
 
     private void PlaySoundOnEnd()
@@ -185,11 +185,11 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
 
         if (typeDef.Filter.HasFlag(PieceTypeFilter.Fake))
         {
-            NSAudioService.Current.Play(SoundId.build_main);
+            NSAudioService.Current.Play(SoundId.BuildMain);
         }
         else
         {
-            NSAudioService.Current.Play(SoundId.build_castle);
+            NSAudioService.Current.Play(SoundId.BuildCastle);
         }
     }
     

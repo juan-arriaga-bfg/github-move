@@ -108,9 +108,9 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         foreach (var currency in currencysReward)
         {
             if(currency.Currency == Currency.Energy.Name)
-                NSAudioService.Current.Play(SoundId.buy_energy, false, 1);
+                NSAudioService.Current.Play(SoundId.BuyEnergy, false, 1);
             if(currency.Currency == Currency.Coins.Name)
-                NSAudioService.Current.Play(SoundId.buy_soft_curr, false, 1);
+                NSAudioService.Current.Play(SoundId.BuySoftCurr, false, 1);
         }
         
         board.ActionExecutor.AddAction(new EjectionPieceAction

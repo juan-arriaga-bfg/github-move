@@ -29,7 +29,7 @@ public class UINextLevelWindowView : UIGenericWindowView
         base.OnViewShow();
         
         var windowModel = Model as UINextLevelWindowModel;
-        NSAudioService.Current.Play(SoundId.popup_new_level);
+        NSAudioService.Current.Play(SoundId.PopupNewLevel);
         title.Text = windowModel.Title;
         message.Text = windowModel.Mesage;
         rewards.Text = windowModel.Rewards;
@@ -165,7 +165,7 @@ public class UINextLevelWindowView : UIGenericWindowView
                     return;
                 }
                 
-                NSAudioService.Current.Play(SoundId.popup_new_recipe);
+                NSAudioService.Current.Play(SoundId.PopupNewRecipe);
                 CreateCards();
                 break;
             case 1:

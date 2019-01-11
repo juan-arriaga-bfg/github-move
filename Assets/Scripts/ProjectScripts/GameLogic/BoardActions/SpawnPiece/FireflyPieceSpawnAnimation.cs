@@ -24,7 +24,7 @@ public class FireflyPieceSpawnAnimation : BoardAnimation
 		
 		sequence.InsertCallback(0.3f, () =>
 		{
-			NSAudioService.Current.Play(SoundId.firefly_fall);
+			NSAudioService.Current.Play(SoundId.FireflyFall);
 		});
 		
 		sequence.InsertCallback(0.25f, () => ParticleView.Show(R.FireflyExplosion, particlePosition));

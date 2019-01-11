@@ -106,7 +106,7 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
     
     private void CreateOrder()
     {
-        NSAudioService.Current.Play(SoundId.order_appear);
+        NSAudioService.Current.Play(SoundId.OrderAppear);
         
         Order = GameDataService.Current.OrdersManager.GetOrder(pieceContext.PieceType);
         

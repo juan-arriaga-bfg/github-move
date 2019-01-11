@@ -23,7 +23,7 @@ public class ResetPiecePositionAnimation : BoardAnimation
 	    pieceFromView.SyncRendererLayers(At);
 		
 		var sequence = DOTween.Sequence().SetId(pieceFromView.AnimationUid);
-		var soundPlay = NSAudioService.Current.IsPlaying(SoundId.object_release);
+		var soundPlay = NSAudioService.Current.IsPlaying(SoundId.ObjectRelease);
 		sequence.Append(pieceFromView.CachedTransform.DOLocalMove(pos, 0.4f).SetEase(Ease.InOutSine).OnUpdate(() =>
 		{
 			var currentPosition = pieceFromView.CachedTransform.localPosition;
@@ -33,7 +33,7 @@ public class ResetPiecePositionAnimation : BoardAnimation
 			if (Vector2.Distance(currentPosition, target) < 0.6f && !soundPlay)
 			{
 				soundPlay = true;
-				NSAudioService.Current.Play(SoundId.object_release);
+				NSAudioService.Current.Play(SoundId.ObjectRelease);
 			}
 		}));
 		sequence.OnComplete(() =>

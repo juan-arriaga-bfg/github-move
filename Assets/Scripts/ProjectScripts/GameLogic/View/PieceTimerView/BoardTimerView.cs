@@ -140,7 +140,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
 
     private void OffChopSound()
     {
-        NSAudioService.Current.Stop(SoundId.worker_chop);
+        NSAudioService.Current.Stop(SoundId.WorkerChop);
     }
     
     public void OnClick()

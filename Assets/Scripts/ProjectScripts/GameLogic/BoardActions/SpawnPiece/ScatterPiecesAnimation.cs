@@ -79,6 +79,6 @@ public class ScatterPiecesAnimation : BoardAnimation
 
     private void PlaysSound()
     {
-        NSAudioService.Current.Play(SoundId.drop_object);
+        NSAudioService.Current.Play(SoundId.DropObject);
     }
 }

@@ -222,7 +222,7 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         DOTween.Kill(this);
         var sequence = DOTween.Sequence().SetId(this);
         
-        NSAudioService.Current.Play(SoundId.remover_use);
+        NSAudioService.Current.Play(SoundId.RemoverUse);
         
         sequence.InsertCallback(1f, () =>
         {

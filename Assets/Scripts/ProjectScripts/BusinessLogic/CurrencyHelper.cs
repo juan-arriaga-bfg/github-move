@@ -265,15 +265,15 @@ public static class CurrencyHellper
             resourceCarrier.Callback += () =>
             {
                 if(resource.Currency == Currency.Experience.Name)
-                    NSAudioService.Current.Play(SoundId.get_xp);
+                    NSAudioService.Current.Play(SoundId.GetXp);
                 if(resource.Currency == Currency.Mana.Name)
-                    NSAudioService.Current.Play(SoundId.get_magic);
+                    NSAudioService.Current.Play(SoundId.GetMagic);
                 if(resource.Currency == Currency.Energy.Name)
-                    NSAudioService.Current.Play(SoundId.get_energy);
+                    NSAudioService.Current.Play(SoundId.GetEnergy);
                 if(resource.Currency == Currency.Coins.Name)
-                    NSAudioService.Current.Play(SoundId.get_soft_curr);
+                    NSAudioService.Current.Play(SoundId.GetSoftCurr);
                 if(resource.Currency == Currency.Crystals.Name)
-                    NSAudioService.Current.Play(SoundId.get_hard_curr);
+                    NSAudioService.Current.Play(SoundId.GetHardCurr);
             };
         }
     }

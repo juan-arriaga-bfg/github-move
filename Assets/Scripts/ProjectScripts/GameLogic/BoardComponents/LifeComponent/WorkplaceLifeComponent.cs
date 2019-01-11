@@ -56,7 +56,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 
 	private void PlaySoundOnEnd()
 	{
-		NSAudioService.Current.Play(SoundId.worker_finish);
+		NSAudioService.Current.Play(SoundId.WorkerFinish);
 	}
 	
 	public virtual void OnAddToBoard(BoardPosition position, Piece context = null)

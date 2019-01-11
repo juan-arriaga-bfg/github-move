@@ -104,15 +104,15 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
 		
             if (typeDef.Filter.HasFlag(PieceTypeFilter.Mine))
             {
-                NSAudioService.Current.Play(SoundId.worker_mine);
+                NSAudioService.Current.Play(SoundId.WorkerMine);
             }
             else if(typeDef.Filter.HasFlag(PieceTypeFilter.ProductionField))
             {
-                NSAudioService.Current.Play(SoundId.worker_harvest);
+                NSAudioService.Current.Play(SoundId.WorkerHarvest);
             }
             else
             {
-                NSAudioService.Current.Play(SoundId.worker_chop);
+                NSAudioService.Current.Play(SoundId.WorkerChop);
             }
         }
             

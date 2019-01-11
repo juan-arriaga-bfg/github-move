@@ -77,7 +77,7 @@ public class FireflyView : BoardElementView
     {
         StopFly();
         
-        NSAudioService.Current.Play(SoundId.firefly_tap);
+        NSAudioService.Current.Play(SoundId.FireflyTap);
     }
 
     public void StopFly()

@@ -12,7 +12,7 @@ public class UIGenericPopupWindowView : UIGenericWindowView
     public override void AnimateShow()
     {
         base.AnimateShow();
-        NSAudioService.Current.Play(SoundId.popup_open);
+        NSAudioService.Current.Play(SoundId.PopupOpen);
         
         body.anchoredPosition = new Vector2(0f, -Screen.height);
         
@@ -24,7 +24,7 @@ public class UIGenericPopupWindowView : UIGenericWindowView
     public override void AnimateClose()
     {
         base.AnimateClose();
-        NSAudioService.Current.Play(SoundId.popup_close);
+        NSAudioService.Current.Play(SoundId.PopupClose);
         
         DOTween.Kill(body);
         var sequence = DOTween.Sequence().SetId(body);

@@ -69,7 +69,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
 
     private void PlaySound()
     {
-        NSAudioService.Current.Play(SoundId.order_complete, false, 1);
+        NSAudioService.Current.Play(SoundId.OrderComplete, false, 1);
     }
     
     private void CreateResultIcon(Transform parent, string id)

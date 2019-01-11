@@ -61,37 +61,37 @@ public class MatchPieceToAnimation : BoardAnimation
 	{
 		if (pieceTypeDef.Id == PieceType.Boost_CR.Id)
 		{
-			NSAudioService.Current.Play(SoundId.crystal_use);
+			NSAudioService.Current.Play(SoundId.CrystalUse);
 			return;
 		}
 		
 		if (pieceTypeDef.Id >= PieceType.Soft1.Id && pieceTypeDef.Id <= PieceType.Soft6.Id)
 		{
-			NSAudioService.Current.Play(SoundId.merge_soft_curr);
+			NSAudioService.Current.Play(SoundId.MergeSoftCurr);
 			return;
 		}
 		
 		if (pieceTypeDef.Id >= PieceType.Hard1.Id && pieceTypeDef.Id <= PieceType.Hard6.Id)
 		{
-			NSAudioService.Current.Play(SoundId.merge_hard_curr);
+			NSAudioService.Current.Play(SoundId.MergeHardCurr);
 			return;
 		}
 		
 		if (pieceTypeDef.Filter.HasFlag(PieceTypeFilter.Chest))
 		{
-			NSAudioService.Current.Play(SoundId.merge_chest);
+			NSAudioService.Current.Play(SoundId.MergeChest);
 			return;
 		}
 		
 		if (pieceTypeDef.Id >= PieceType.Boost_CR1.Id && pieceTypeDef.Id <= PieceType.Boost_CR2.Id)
 		{
-			NSAudioService.Current.Play(SoundId.merge_crystal_parts);
+			NSAudioService.Current.Play(SoundId.MergeCrystalParts);
 			return;
 		}
 		
 		if (pieceTypeDef.Id == PieceType.Boost_CR3.Id)
 		{
-			NSAudioService.Current.Play(SoundId.merge_crystal_done);
+			NSAudioService.Current.Play(SoundId.MergeCrystalDone);
 			return;
 		}
 		
@@ -100,7 +100,7 @@ public class MatchPieceToAnimation : BoardAnimation
 			return;
 		}
 		
-		NSAudioService.Current.Play(SoundId.merge_main);
+		NSAudioService.Current.Play(SoundId.MergeMain);
 	}
 
 	private PieceTypeDef GetMergeTypeDef(BoardRenderer context)

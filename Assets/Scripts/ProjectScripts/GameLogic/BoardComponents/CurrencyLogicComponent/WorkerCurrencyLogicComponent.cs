@@ -165,15 +165,15 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
 		
         if (def.Filter.HasFlag(PieceTypeFilter.Mine))
         {
-            NSAudioService.Current.Play(SoundId.worker_mine);
+            NSAudioService.Current.Play(SoundId.WorkerMine);
         }
         else if(def.Filter.HasFlag(PieceTypeFilter.ProductionField))
         {
-            NSAudioService.Current.Play(SoundId.worker_harvest);
+            NSAudioService.Current.Play(SoundId.WorkerHarvest);
         }
         else
         {
-            NSAudioService.Current.Play(SoundId.worker_chop);
+            NSAudioService.Current.Play(SoundId.WorkerChop);
         }
         
         context.ActionExecutor.AddAction(new CollapsePieceToAction

@@ -74,7 +74,7 @@ public class UIRemoverButtonViewController : IWUIWindowViewController
     {
         if (BoardService.Current.FirstBoard.BoardLogic.Remover.IsActive) return;
         
-        NSAudioService.Current.Play(SoundId.remover_take);
+        NSAudioService.Current.Play(SoundId.RemoverTake);
         
         if (Input.touchSupported == false)
         {

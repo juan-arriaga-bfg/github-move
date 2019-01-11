@@ -29,7 +29,7 @@ public class CollapseFogToAnimation : BoardAnimation
         var points = Action.Positions;
         var to = context.Context.BoardDef.GetPiecePosition(Action.To.X, Action.To.Y);
 		
-        NSAudioService.Current.Play(SoundId.fog_open);
+        NSAudioService.Current.Play(SoundId.FogOpen);
         
         var sequence = DOTween.Sequence().SetId(animationUid);
 

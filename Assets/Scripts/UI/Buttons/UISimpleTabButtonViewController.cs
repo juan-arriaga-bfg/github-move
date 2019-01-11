@@ -31,6 +31,6 @@ public class UISimpleTabButtonViewController : UIBaseButtonViewController
 
     public override void PlaySound()
     {
-        NSAudioService.Current.Play(SoundId.popup_tabs);
+        NSAudioService.Current.Play(SoundId.PopupTabs);
     }
 }
