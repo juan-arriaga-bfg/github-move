@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -136,9 +137,15 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         
         timer.IsPaused = !isEnd;
     }
+
+    private void OffChopSound()
+    {
+        NSAudioService.Current.Stop(SoundId.worker_chop);
+    }
     
     public void OnClick()
     {
+        OffChopSound();
         timer?.FastComplete();
     }
 }

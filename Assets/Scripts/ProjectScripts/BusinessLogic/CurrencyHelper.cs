@@ -173,10 +173,7 @@ public static class CurrencyHellper
                 // on purchase success
                 isSuccess = true;
                 
-                if(product.Currency == Currency.Energy.Name)
-                    NSAudioService.Current.Play(SoundId.buy_energy);
-                if(product.Currency == Currency.Coins.Name)
-                    NSAudioService.Current.Play(SoundId.buy_soft_curr);
+                
                 
                 if (flyPosition != null)
                 {

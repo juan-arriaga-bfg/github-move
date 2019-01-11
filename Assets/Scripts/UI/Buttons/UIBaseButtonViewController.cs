@@ -12,9 +12,14 @@ public class UIBaseButtonViewController : UIButtonViewController
         
     }
 
+    public virtual void PlaySound()
+    {
+        NSAudioService.Current.Play(SoundId.button_click);
+    }
+
     public override void ClickEvent(int pointerId)
     {  
         base.ClickEvent(pointerId);
-        NSAudioService.Current.Play(SoundId.button_click);
+        PlaySound();
     }
 }

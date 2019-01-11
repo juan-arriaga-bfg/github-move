@@ -49,7 +49,11 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
             return;
         }
         
-        CurrencyHellper.Purchase(contentEntity.Products, contentEntity.Price, success => GetReward());
+        CurrencyHellper.Purchase(contentEntity.Products, contentEntity.Price, success =>
+        {
+            
+            GetReward();
+        });
     }
     
     private void OnBuyClick()
@@ -81,6 +85,14 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         
         List<CurrencyPair> currencysReward;
         var piecesReward = CurrencyHellper.FiltrationRewards(contentEntity.Products, out currencysReward);
+
+        foreach (var currency in currencysReward)
+        {
+            if(currency.Currency == Currency.Energy.Name)
+                NSAudioService.Current.Play(SoundId.buy_energy, false, 1);
+            if(currency.Currency == Currency.Coins.Name)
+                NSAudioService.Current.Play(SoundId.buy_soft_curr, false, 1);
+        }
         
         board.ActionExecutor.AddAction(new EjectionPieceAction
         {
