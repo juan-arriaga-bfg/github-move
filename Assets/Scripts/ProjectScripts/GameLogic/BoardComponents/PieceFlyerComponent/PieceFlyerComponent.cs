@@ -70,13 +70,13 @@
 
         var from = context.Context.BoardDef.GetPiecePosition(x, y);
         
-        var carriers = ResourcesViewManager.DeliverResource<ResourceCarrier>
+        var carriers = ResourcesViewManager.DeliverResource<ResourceCarrierWithObject>
         (
             target,
             1,
             flay.GetAnchorRect(),
             context.Context.BoardDef.ViewCamera.WorldToScreenPoint(from),
-            R.ResourceCarrier
+            R.ResourceCarrierWithObject
         );
         
         if (carriers.Count != 0) carriers[0].RefreshIcon(currency);
