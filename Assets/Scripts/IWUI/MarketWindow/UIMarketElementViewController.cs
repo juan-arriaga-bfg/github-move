@@ -22,6 +22,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	
 	private bool isClick;
 	private bool isReward;
+	private BoardPosition? rewardPosition;
 
 	public override void Init()
 	{
@@ -31,6 +32,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		
 		isClick = false;
 		isReward = false;
+		rewardPosition = null;
 
 		var isLock = contentEntity.Def.State == MarketItemState.Lock || contentEntity.Def.State == MarketItemState.Claimed;
 		
@@ -85,13 +87,12 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		base.OnViewCloseCompleted();
 		
 		var contentEntity = entity as UIMarketElementEntity;
+
+		if (contentEntity == null) return;
 		
-		if(contentEntity == null) return;
-		
-		if (isClick == false || isReward == false) return;
+		if (isClick == false || isReward == false || rewardPosition == null) return;
 		
 		var board = BoardService.Current.FirstBoard;
-		var position = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
 		
 		List<CurrencyPair> currencysReward;
 		var piecesReward = CurrencyHellper.FiltrationRewards(new List<CurrencyPair>{contentEntity.Def.Reward}, out currencysReward);
@@ -100,15 +101,15 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		
 		board.ActionExecutor.AddAction(new EjectionPieceAction
 		{
-			GetFrom = () => position,
+			GetFrom = () => rewardPosition.Value,
 			Pieces = piecesReward,
 			OnComplete = () =>
 			{
-				var view = board.RendererContext.GetElementAt(position) as CharacterPieceView;
+				var view = board.RendererContext.GetElementAt(rewardPosition.Value) as CharacterPieceView;
                 
 				if(view != null) view.StartRewardAnimation();
                     
-				AddResourceView.Show(position, currencysReward);
+				AddResourceView.Show(rewardPosition.Value, currencysReward);
 			}
 		});
 	}
@@ -199,9 +200,13 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		var contentEntity = entity as UIMarketElementEntity;
 		
 		var board = BoardService.Current.FirstBoard;
-		var pos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
+		var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
+
+		if (positions.Count == 0) return;
 		
-		if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(pos, contentEntity.Def.Reward.Amount))
+		rewardPosition = positions[0];
+		
+		if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(rewardPosition.Value, contentEntity.Def.Reward.Amount))
 		{
 			isClick = false;
 

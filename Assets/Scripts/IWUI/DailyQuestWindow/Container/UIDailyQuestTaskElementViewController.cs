@@ -241,7 +241,11 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         ToggleActive(false, true);
         
         var board = BoardService.Current.FirstBoard;
-        BoardPosition npcPos = board.BoardLogic.PositionsCache.GetRandomPositions(PieceType.NPC_SleepingBeauty.Id, 1)[0];
+        var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
+
+        if (positions.Count == 0) return false;
+
+        var position = positions[0];
         
         // Reward to drop to field
         List<CurrencyPair> currencies;
@@ -249,7 +253,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         var amount = pieces.Sum(pair => pair.Value);
         
-        if (!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(npcPos, amount))
+        if (!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, amount))
         {
             UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
             return false;
@@ -262,15 +266,15 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
                     {
                         board.ActionExecutor.AddAction(new EjectionPieceAction
                         {
-                            From = npcPos,
+                            From = position,
                             Pieces = pieces,
                             OnComplete = () =>
                             {
-                                var view = board.RendererContext.GetElementAt(npcPos) as CharacterPieceView;
+                                var view = board.RendererContext.GetElementAt(position) as CharacterPieceView;
 
                                 if (view != null) view.StartRewardAnimation();
 
-                                AddResourceView.Show(npcPos, currencies);
+                                AddResourceView.Show(position, currencies);
 
                                 onComplete?.Invoke();
                             },

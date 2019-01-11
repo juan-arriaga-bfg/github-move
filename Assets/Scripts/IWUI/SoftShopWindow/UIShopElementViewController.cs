@@ -53,7 +53,6 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         
         CurrencyHellper.Purchase(contentEntity.Products, contentEntity.Price, success =>
         {
-            
             GetReward();
         });
     }
@@ -96,8 +95,8 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
     {
         var board = BoardService.Current.FirstBoard;
         var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
-        
-        if(positions.Count == 0) return;
+
+        if (positions.Count == 0) return;
 
         var position = positions[0];
         var contentEntity = entity as UIShopElementEntity;
