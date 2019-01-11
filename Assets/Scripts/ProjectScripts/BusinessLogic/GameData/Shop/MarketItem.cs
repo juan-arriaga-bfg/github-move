@@ -7,6 +7,7 @@ public enum MarketItemState
     Lock,
     Normal,
     Purchased,
+    Saved,
     Claimed
 }
 
@@ -15,8 +16,18 @@ public class MarketItem
     public string Uid;
     public int Index;
     public int Level = int.MaxValue;
+    
+    private MarketItemState state;
 
-    public MarketItemState State;
+    public MarketItemState State
+    {
+        get { return state; }
+        set
+        {
+            state = value;
+            GameDataService.Current.MarketManager.UpdateState?.Invoke();
+        }
+    }
     
     public CurrencyPair Reward;
     
@@ -55,7 +66,7 @@ public class MarketItem
 
     public void Update()
     {
-        if(State == MarketItemState.Purchased) return;
+        if(State == MarketItemState.Purchased || State == MarketItemState.Saved) return;
         
         var weights = new List<ItemWeight>();
         
@@ -71,7 +82,7 @@ public class MarketItem
         
         if(Index == -1) Reward = new CurrencyPair{Currency = PieceType.Parse(PieceType.Empty.Id), Amount = defs[0].Amount};
         
-        State = current != null && current.Price == null ? MarketItemState.Purchased : MarketItemState.Normal;
+        State = current != null && current.Price == null ? MarketItemState.Saved : MarketItemState.Normal;
     }
     
     private MarketDef SetPiece(MarketDef def)

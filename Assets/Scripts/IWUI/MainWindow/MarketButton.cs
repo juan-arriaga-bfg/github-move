@@ -1,42 +1,35 @@
 ﻿using UnityEngine;
 
-public class ChestButton : UIGenericResourcePanelViewController
+public class MarketButton : UIGenericResourcePanelViewController
 {
     [SerializeField] private GameObject shine;
     [SerializeField] private GameObject exclamationMark;
     [SerializeField] private NSText label;
-
-    private TimerComponent timer;
-
+    
     public override void OnViewShow(IWUIWindowView context)
     {
         base.OnViewShow(context);
         
         label.Text = LocalizationService.Get("window.main.market", "window.main.market");
 
-        timer = BoardService.Current.FirstBoard.MarketLogic.Timer;
-        
-        timer.OnStart += UpdateTimerState;
-        timer.OnComplete += UpdateTimerState;
-
-        UpdateTimerState();
+        GameDataService.Current.MarketManager.UpdateState += UpdateButtonState;
+//        UpdateButtonState();
     }
     
     private void OnDestroy()
     {
-        timer.OnStart -= UpdateTimerState;
-        timer.OnComplete -= UpdateTimerState;
+        GameDataService.Current.MarketManager.UpdateState -= UpdateButtonState;
     }
 
     public override void UpdateResource(int offset)
     {
         base.UpdateResource(offset);
-        UpdateTimerState();
+        UpdateButtonState();
     }
-
-    private void UpdateTimerState()
+    
+    private void UpdateButtonState()
     {
-        var isActive = !timer?.IsExecuteable() ?? false;
+        var isActive = GameDataService.Current.MarketManager.Defs.Find(item => item.State == MarketItemState.Saved) != null;
         
         shine.SetActive(isActive);
         exclamationMark.SetActive(isActive);

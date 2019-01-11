@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<MarketDef>>
@@ -7,6 +8,8 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
     public int Guid => ComponentGuid;
 
     public List<MarketItem> Defs;
+
+    public Action UpdateState;
 
     public void OnRegisterEntity(ECSEntity entity)
     {

@@ -118,7 +118,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	{
 		var contentEntity = entity as UIMarketElementEntity;
 		
-		btnBack.sprite = IconService.Current.GetSpriteById($"button{(contentEntity.Def.State == MarketItemState.Purchased ? "Green" : "Blue")}");
+		btnBack.sprite = IconService.Current.GetSpriteById($"button{(contentEntity.Def.State == MarketItemState.Saved ? "Green" : "Blue")}");
 		
 		btnLabel.Text = contentEntity.Def.State == MarketItemState.Normal
 			? string.Format(LocalizationService.Get("common.button.buyFor", "common.button.buyFor {0}"), contentEntity.Def.Current.Price.ToStringIcon())
@@ -138,7 +138,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		
 		var contentEntity = entity as UIMarketElementEntity;
 		
-		if (contentEntity.Def.State == MarketItemState.Purchased)
+		if (contentEntity.Def.State == MarketItemState.Saved)
 		{
 			AddReward();
 			return;
@@ -209,6 +209,8 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(rewardPosition.Value, contentEntity.Def.Reward.Amount))
 		{
 			isClick = false;
+			
+			contentEntity.Def.State = MarketItemState.Saved;
 
 			ChengeButtons();
 			
