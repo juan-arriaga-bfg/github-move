@@ -10,6 +10,8 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
     private bool isClick;
     private bool isCanPurchase;
     
+    public bool IsNeedReopen => isClick == false && isCanPurchase == false;
+
     public override void Init()
     {
         base.Init();
@@ -39,17 +41,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         
         var contentEntity = entity as UIShopElementEntity;
         
-        if(entity == null) return;
-        
-        if (isClick == false)
-        {
-            if (isCanPurchase == false)
-            {
-                CurrencyHellper.OpenShopWindow(contentEntity.Price.Currency);
-            }
-            
-            return;
-        }
+        if(entity == null || isClick == false) return;
         
         CurrencyHellper.Purchase(contentEntity.Products, contentEntity.Price, success =>
         {
