@@ -44,7 +44,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		if (isLock)
 		{
 			CreateIcon(lockAnchor, contentEntity.ContentId);
-			Sepia = true;
+			Sepia = contentEntity.Def.State == MarketItemState.Claimed;
 		}
 
 		nameLabel.Text = contentEntity.Def.State != MarketItemState.Lock

@@ -25,7 +25,7 @@ RectTransform:
   m_GameObject: {fileID: 79559895308559816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7827300444498739572}
   m_Father: {fileID: 6852754931205698186}
@@ -46,7 +46,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6852754931205698186}
   m_Layer: 31
-  m_Name: None
+  m_Name: Empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,7 +107,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 44, y: 64}
+  m_SizeDelta: {x: 98, y: 142}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6781736983668946421
 CanvasRenderer:
@@ -137,7 +137,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: ba3ea0c016d51a84496bb59be5f5c217, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 81c43937d44ff9a4285dc3ceea38cfdf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
