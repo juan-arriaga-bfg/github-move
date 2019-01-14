@@ -64,9 +64,16 @@ public class MarketItem
         if(Level > def.UnlockLevel) Level = def.UnlockLevel;
     }
 
-    public void Update()
+    public void Update(bool isTimer = false)
     {
-        if(State == MarketItemState.Purchased || State == MarketItemState.Saved) return;
+        if (isTimer)
+        {
+            if(State == MarketItemState.Purchased || State == MarketItemState.Saved) return;
+        }
+        else
+        {
+            if(State != MarketItemState.Lock) return;
+        }
         
         var weights = new List<ItemWeight>();
         
@@ -92,30 +99,27 @@ public class MarketItem
         switch (def.RandomType)
         {
             case MarketRandomType.BasePiecesEasy:
-                piece = GetRandomPiece(2, 3);
+                piece = GetRandomPiece(3, 4);
                 break;
             case MarketRandomType.BasePiecesHard:
-                piece = GetRandomPiece(3, 5);
+                piece = GetRandomPiece(4, 6);
                 break;
             case MarketRandomType.Ingredients:
                 piece = GetRandomIngredient();
                 break;
             case MarketRandomType.BaseСhests:
                 piece = GetRandomChest();
-                
-                if (string.IsNullOrEmpty(piece))
-                {
-                    Index = -1;
-                    return null;
-                }
-                
                 break;
             default :
                 piece = def.Weight.Uid;
                 break;
         }
-
-        if (string.IsNullOrEmpty(piece)) piece = PieceType.Parse(PieceType.Empty.Id);
+        
+        if (string.IsNullOrEmpty(piece))
+        {
+            Index = -1;
+            return null;
+        }
         
         Reward = new CurrencyPair{Currency = piece, Amount = def.Amount};
         

@@ -13,7 +13,7 @@
 		
 		Timer.OnComplete += () =>
 		{
-			GameDataService.Current.MarketManager.UpdateSlots();
+			GameDataService.Current.MarketManager.UpdateSlots(true);
 			Timer.Start();
 		};
 		

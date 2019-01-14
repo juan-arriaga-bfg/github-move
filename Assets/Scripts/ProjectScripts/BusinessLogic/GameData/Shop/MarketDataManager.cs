@@ -66,13 +66,13 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
         });
     }
 
-    public void UpdateSlots()
+    public void UpdateSlots(bool isTimer = false)
     {
         if (BoardService.Current?.FirstBoard == null) return;
         
         foreach (var def in Defs)
         {
-            def.Update();
+            def.Update(isTimer);
         }
     }
 }

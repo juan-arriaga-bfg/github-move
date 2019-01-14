@@ -127,7 +127,10 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 
 	private void OnClickInfo()
 	{
-		UIMessageWindowController.CreateNotImplementedMessage();
+		var contentEntity = entity as UIMarketElementEntity;
+		var index = GameDataService.Current.MarketManager.Defs.IndexOf(contentEntity.Def);
+		
+		UIMessageWindowController.CreateDefaultMessage($"Slot {index + 1}");
 	}
 
 	private void OnClick()

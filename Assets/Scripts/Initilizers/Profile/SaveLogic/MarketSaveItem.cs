@@ -58,7 +58,12 @@ public class MarketSaveItem
     public MarketItemState State
     {
         get { return state; }
-        set { state = value; }
+        set
+        {
+            if (value == MarketItemState.Purchased) value = MarketItemState.Saved;
+            
+            state = value;
+        }
     }
 
     public int Piece
