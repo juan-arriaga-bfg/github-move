@@ -13,9 +13,16 @@ public class MarketButton : UIGenericResourcePanelViewController
         label.Text = LocalizationService.Get("window.main.market", "window.main.market");
 
         GameDataService.Current.MarketManager.UpdateState += UpdateButtonState;
-//        UpdateButtonState();
+        UpdateButtonState();
     }
-    
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        GameDataService.Current.MarketManager.UpdateSlots();
+        UpdateButtonState();
+    }
+
     private void OnDestroy()
     {
         GameDataService.Current.MarketManager.UpdateState -= UpdateButtonState;

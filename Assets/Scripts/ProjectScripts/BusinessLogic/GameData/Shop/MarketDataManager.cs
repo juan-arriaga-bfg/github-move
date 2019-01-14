@@ -68,6 +68,8 @@ public class MarketDataManager : IECSComponent, IDataManager, IDataLoader<List<M
 
     public void UpdateSlots()
     {
+        if (BoardService.Current?.FirstBoard == null) return;
+        
         foreach (var def in Defs)
         {
             def.Update();
