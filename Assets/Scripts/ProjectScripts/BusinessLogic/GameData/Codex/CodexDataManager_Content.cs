@@ -109,11 +109,6 @@ public partial class CodexDataManager
                 Name = LocalizationService.Get("window.codex.toggle.chests", "window.codex.toggle.chests"),
                 ChainDefs = new List<CodexChainDef>
                 {
-                    // new CodexChainDef
-                    // {
-                    //     Name = LocalizationService.Get("window.codex.branch.SK_PR", "window.codex.branch.SK_PR"),
-                    //     ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.SK1_PR.Id)),
-                    // },
                     new CodexChainDef
                     {
                         Name = LocalizationService.Get("window.codex.branch.CH_A", "window.codex.branch.CH_A"),
@@ -138,7 +133,7 @@ public partial class CodexDataManager
             },
             new CodexTabDef
             {
-                Name = LocalizationService.Get("window.codex.toggle.currency", "window.codex.toggle.currency"),
+                Name = LocalizationService.Get("window.codex.toggle.other", "window.codex.toggle.other"),
                 ChainDefs = new List<CodexChainDef>
                 {
                     new CodexChainDef
@@ -151,18 +146,6 @@ public partial class CodexDataManager
                         Name = LocalizationService.Get("window.codex.branch.Hard", "window.codex.branch.Hard"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Hard1.Id)),
                     },
-                }
-            },
-            new CodexTabDef
-            {
-                Name = LocalizationService.Get("window.codex.toggle.boosters", "window.codex.toggle.boosters"),
-                ChainDefs = new List<CodexChainDef>
-                {
-                    // new CodexChainDef
-                    // {
-                    //     Name = LocalizationService.Get("window.codex.branch.Boost_WR", "window.codex.branch.Boost_WR"),
-                    //     ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Boost_WR.Id)),
-                    // },
                     new CodexChainDef
                     {
                         Name = LocalizationService.Get("window.codex.branch.Boost_CR", "window.codex.branch.Boost_CR"),
