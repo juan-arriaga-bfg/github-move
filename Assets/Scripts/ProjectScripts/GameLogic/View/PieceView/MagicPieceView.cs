@@ -156,7 +156,42 @@ public class MagicPieceView : PieceBoardElementView
         int currentId;
         int nextId;
         
-        return logic.FieldFinder.Find(to, positions, out currentId) && logic.MatchActionBuilder.CheckMatch(positions, currentId, to, out nextId);
+        return FindPositions(to, positions, out currentId) && logic.MatchActionBuilder.CheckMatch(positions, currentId, to, out nextId);
+    }
+
+    private bool FindPositions(BoardPosition point, List<BoardPosition> field, out int current)
+    {
+        if (!Context.Context.BoardLogic.FieldFinder.Find(point, field, out current, true))
+            return false;
+
+        int i = 0;
+        while (i < field.Count)
+        {
+            if (!IsValidPosition(field[i]))
+            {
+                field.RemoveAt(i);
+                continue;
+            }
+
+            i++;
+        }
+
+        return true;
+    }
+
+    private bool IsValidPosition(BoardPosition position)
+    {
+        var logic = Context.Context.BoardLogic;
+        if (logic.IsLockedCell(position) == false)
+            return true;
+        var boardCell = logic.BoardCells[position.X, position.Y, position.Z];
+        foreach (var locker in boardCell.Lockers)
+        {
+            if (locker is DragAndCheckMatchAction == false)
+                return false;
+        }
+
+        return true;
     }
 
     public override void OnDragEnd(BoardPosition boardPos, Vector2 worldPos)
@@ -175,5 +210,7 @@ public class MagicPieceView : PieceBoardElementView
                 continue;
             OffHighlightMatchable(view);
         }
+
+        bestMatchPieces = null;
     }
 }

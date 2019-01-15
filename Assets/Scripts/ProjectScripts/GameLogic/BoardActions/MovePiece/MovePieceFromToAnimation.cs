@@ -20,8 +20,8 @@ public class MovePieceFromToAnimation : BoardAnimation
         
         pieceFromView.SyncRendererLayers(To);        
 
-        var sequence = DOTween.Sequence().SetId(pieceFromView.AnimationUid);
-        sequence.Append(pieceFromView.CachedTransform.DOLocalMove(pos, 0.4f).SetEase(Ease.InOutSine));
+        var sequence = DOTween.Sequence().SetId(animationUid);
+        sequence.Append(pieceFromView.CachedTransform.DOLocalMove(pos, 2f).SetEase(Ease.InOutSine));
         sequence.OnComplete(() =>
         {
             context.ResetBoardElement(pieceFromView, To);

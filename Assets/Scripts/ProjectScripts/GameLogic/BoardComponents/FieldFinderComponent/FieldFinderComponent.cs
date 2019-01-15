@@ -18,11 +18,11 @@ public class FieldFinderComponent : IECSComponent
 	{
 	}
 	
-	public bool Find(BoardPosition point, List<BoardPosition> field, out int current)
+	public bool Find(BoardPosition point, List<BoardPosition> field, out int current, bool ignoreLock = false)
 	{
 		current = PieceType.None.Id;
 		
-		if (context.IsLockedCell(point)) return false;
+		if (context.IsLockedCell(point) && !ignoreLock) return false;
 		
 		var piece = context.GetPieceAt(point);
 
@@ -30,12 +30,12 @@ public class FieldFinderComponent : IECSComponent
 		
 		current = piece.PieceType;
 		
-		field = FindField(piece.PieceType, point, field);
+		field = FindField(piece.PieceType, point, field, ignoreLock);
 		
 		return true;
 	}
 
-	public List<BoardPosition> FindWhere(Func<BoardPosition, BoardLogicComponent, bool> predicate)
+	public List<BoardPosition> FindWhere(Func<BoardPosition, BoardLogicComponent, bool> predicate, bool checkLock = true)
 	{
 		var field = new List<BoardPosition>();
 		
@@ -45,7 +45,7 @@ public class FieldFinderComponent : IECSComponent
 			for (int j = 0; j < def.Height; j++)
 			{
 				var pos = new BoardPosition(i, j, BoardLayer.Piece.Layer);
-				if(context.IsLockedCell(pos) || context.IsLockedCell(pos) || predicate(pos, context) == false)
+				if((checkLock && context.IsLockedCell(pos)) || predicate(pos, context) == false)
 					continue;
 				field.Add(pos);
 			}
@@ -54,9 +54,9 @@ public class FieldFinderComponent : IECSComponent
 		return field;
 	}
 
-	private List<BoardPosition> FindField(int type, BoardPosition point, List<BoardPosition> field)
+	private List<BoardPosition> FindField(int type, BoardPosition point, List<BoardPosition> field, bool ignoreLock = false)
 	{
-		if(field.Contains(point) || context.IsLockedCell(point)) return field;
+		if(field.Contains(point) || (context.IsLockedCell(point) && !ignoreLock)) return field;
 		
 		field.Add(point);
 		
