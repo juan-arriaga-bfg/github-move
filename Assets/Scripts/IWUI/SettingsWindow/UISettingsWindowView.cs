@@ -97,6 +97,16 @@ public class UISettingsWindowView : UIGenericPopupWindowView
         var windowModel = Model as UISettingsWindowModel;
         
     }
+
+    private bool EditorPlaceholderForBfgServices()
+    {
+#if UNITY_EDITOR
+        UIMessageWindowController.CreateNotImplementedMessage();
+        return true;
+#endif
+        
+        return false;
+    }
     
     private void OnLoginClick()
     {
@@ -106,14 +116,22 @@ public class UISettingsWindowView : UIGenericPopupWindowView
     
     private void OnTermsOfUseClick()
     {
-        UIMessageWindowController.CreateNotImplementedMessage();
-        Debug.LogWarning("OnTermsOfUseClick");
+        Debug.Log("OnTermsOfUseClick");
+
+        if (NetworkUtils.CheckInternetConnection(true) && !EditorPlaceholderForBfgServices())
+        {
+            bfgManager.showTerms();
+        }
     }
     
     private void OnPolicyClick()
     {
-        UIMessageWindowController.CreateNotImplementedMessage();
-        Debug.LogWarning("OnPolicyClick");
+        Debug.Log("OnPolicyClick");
+
+        if (NetworkUtils.CheckInternetConnection(true) && !EditorPlaceholderForBfgServices())
+        {
+            bfgManager.showPrivacy();
+        }
     }
     
     private void OnRestoreClick()
@@ -130,8 +148,12 @@ public class UISettingsWindowView : UIGenericPopupWindowView
     
     private void OnSupportClick()
     {
-        UIMessageWindowController.CreateNotImplementedMessage();
-        Debug.LogWarning("OnSupportClick");
+        Debug.Log("OnSupportClick");
+        
+        if (NetworkUtils.CheckInternetConnection(true) && !EditorPlaceholderForBfgServices())
+        {
+            bfgManager.showSupport();
+        }
     }
     
     private void OnLanguageClick()

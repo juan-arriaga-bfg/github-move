@@ -20,11 +20,24 @@ public class UIMessageWindowController : IWWindowController {
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
         
         model.Title = LocalizationService.Get("common.message.message", "common.message.message");
-        model.Message = LocalizationService.Get("common.message.notImplemented", "common.message.notImplementedd");
+        model.Message = LocalizationService.Get("common.message.notImplemented", "common.message.notImplemented");
         model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
         
         model.OnAccept = () => {};
         
+        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+    }
+
+    public static void CreateNoInternetMessage()
+    {
+        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+
+        model.Title = LocalizationService.Get("common.message.no.internet.title",     "common.message.no.internet.title");
+        model.Message = LocalizationService.Get("common.message.no.internet.message", "common.message.no.internet.message");
+        model.AcceptLabel = LocalizationService.Get("common.button.ok",               "common.button.ok");
+
+        model.OnAccept = () => { };
+
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
     
