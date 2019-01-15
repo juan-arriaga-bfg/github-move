@@ -104,7 +104,7 @@
       "Amount": 10
     },
     "Icon": "HardShopIcon1",
-    "Name": "window.shop.crystals.item1"
+    "Name": "com.bigfishgames.mergetalesgoog.offer1"
   },
   {
     "Uid": "Crystals",
@@ -127,37 +127,7 @@
       "Amount": 20
     },
     "Icon": "HardShopIcon2",
-    "Name": "window.shop.crystals.item2"
-  },
-  {
-    "Uid": "Crystals",
-    "Products": [
-      {
-        "Currency": "Crystals",
-        "Amount": 50
-      }
-    ],
-    "Price": {
-      "Currency": "Cash",
-      "Amount": 3
-    },
-    "Icon": "HardShopIcon3",
-    "Name": "window.shop.crystals.item3"
-  },
-  {
-    "Uid": "Crystals",
-    "Products": [
-      {
-        "Currency": "Crystals",
-        "Amount": 100
-      }
-    ],
-    "Price": {
-      "Currency": "Cash",
-      "Amount": 5
-    },
-    "Icon": "HardShopIcon4",
-    "Name": "window.shop.crystals.item4"
+    "Name": "com.bigfishgames.mergetalesgoog.offer2"
   },
   {
     "Uid": "Crystals",
@@ -169,39 +139,84 @@
     ],
     "Price": {
       "Currency": "Cash",
-      "Amount": 9
+      "Amount": 3
     },
-    "Icon": "HardShopIcon5",
-    "Name": "window.shop.crystals.item5"
+    "Icon": "HardShopIcon3",
+    "Name": "com.bigfishgames.mergetalesgoog.tier2"
   },
   {
     "Uid": "Crystals",
     "Products": [
       {
         "Currency": "Crystals",
-        "Amount": 200
+        "Amount": 400
       }
     ],
     "Price": {
       "Currency": "Cash",
-      "Amount": 15
+      "Amount": 5
     },
-    "Icon": "HardShopIcon6",
-    "Name": "window.shop.crystals.item6"
+    "Icon": "HardShopIcon4",
+    "Name": "com.bigfishgames.mergetalesgoog.tier5"
   },
   {
     "Uid": "Crystals",
     "Products": [
       {
         "Currency": "Crystals",
-        "Amount": 250
+        "Amount": 850
+      }
+    ],
+    "Price": {
+      "Currency": "Cash",
+      "Amount": 10
+    },
+    "Icon": "HardShopIcon5",
+    "Name": "com.bigfishgames.mergetalesgoog.tier10"
+  },
+  {
+    "Uid": "Crystals",
+    "Products": [
+      {
+        "Currency": "Crystals",
+        "Amount": 1800
       }
     ],
     "Price": {
       "Currency": "Cash",
       "Amount": 20
     },
+    "Icon": "HardShopIcon6",
+    "Name": "com.bigfishgames.mergetalesgoog.tier20"
+  },
+  {
+    "Uid": "Crystals",
+    "Products": [
+      {
+        "Currency": "Crystals",
+        "Amount": 4800
+      }
+    ],
+    "Price": {
+      "Currency": "Cash",
+      "Amount": 50
+    },
     "Icon": "HardShopIcon7",
-    "Name": "window.shop.crystals.item7"
+    "Name": "com.bigfishgames.mergetalesgoog.tier50"
+  },
+  {
+    "Uid": "Crystals",
+    "Products": [
+      {
+        "Currency": "Crystals",
+        "Amount": 10000
+      }
+    ],
+    "Price": {
+      "Currency": "Cash",
+      "Amount": 100
+    },
+    "Icon": "HardShopIcon7",
+    "Name": "com.bigfishgames.mergetalesgoog.tier60"
   }
 ]

@@ -38,8 +38,7 @@ public class MarketItem
     {
         get
         {
-            if(current == null) Update();
-
+            if (current == null) Update(Reward == null);
             if (Level > GameDataService.Current.LevelsManager.Level) State = MarketItemState.Lock;
             
             return current;
@@ -72,7 +71,7 @@ public class MarketItem
         }
         else
         {
-            if(State != MarketItemState.Lock) return;
+            if(State != MarketItemState.Lock && Index != -1) return;
         }
         
         var weights = new List<ItemWeight>();
