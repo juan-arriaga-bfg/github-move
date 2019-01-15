@@ -247,7 +247,8 @@ public class CodexItem : IWUIWindowViewController
             return;
         }
 
-        // var reward = new List<CurrencyPair> {new CurrencyPair {Amount = 15, Currency = "Coins"}};
+        NSAudioService.Current.Play(SoundId.GiftOpen);
+
         var reward = def.PendingReward;
 
         def.PendingReward = null;

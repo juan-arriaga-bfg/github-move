@@ -105,6 +105,8 @@ public class TimerComponent : IECSComponent, IECSSystem
     {
         if (IsFree())
         {
+            
+            NSAudioService.Current.Play(SoundId.TimeBoost);
             Complete();
             return;
         }
@@ -113,6 +115,7 @@ public class TimerComponent : IECSComponent, IECSSystem
         {
             if(success == false) return;
             
+            NSAudioService.Current.Play(SoundId.TimeBoost);
             Complete();
         });
     }

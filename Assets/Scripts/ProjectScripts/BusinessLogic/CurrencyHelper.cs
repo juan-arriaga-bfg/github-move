@@ -259,6 +259,14 @@ public static class CurrencyHellper
             ResourcePanelUtils.ToggleFadePanel(resource.Currency, false);
             onSuccess?.Invoke(true);
         };
+
+        carriers[0].Callback += () =>
+        {
+            if(resource.Currency == Currency.Coins.Name)
+                NSAudioService.Current.Play(SoundId.GetSoftCurr, false, 1);
+            if (resource.Currency == Currency.Energy.Name)
+                NSAudioService.Current.Play(SoundId.GetEnergy, false, 1);
+        };
         
         foreach (var resourceCarrier in carriers)
         {
@@ -268,10 +276,6 @@ public static class CurrencyHellper
                     NSAudioService.Current.Play(SoundId.GetXp);
                 if(resource.Currency == Currency.Mana.Name)
                     NSAudioService.Current.Play(SoundId.GetMagic);
-                if(resource.Currency == Currency.Energy.Name)
-                    NSAudioService.Current.Play(SoundId.GetEnergy);
-                if(resource.Currency == Currency.Coins.Name)
-                    NSAudioService.Current.Play(SoundId.GetSoftCurr);
                 if(resource.Currency == Currency.Crystals.Name)
                     NSAudioService.Current.Play(SoundId.GetHardCurr);
             };

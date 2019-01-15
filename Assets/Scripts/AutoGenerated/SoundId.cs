@@ -42,4 +42,7 @@ public class SoundId
      public const string WorkerMine = "WorkerMine";
      public const string RemoverUse = "RemoverUse";
      public const string BuildMain = "BuildMain";
+     public const string QuestHint = "QuestHint";
+     public const string TimeBoost = "TimeBoost";
+     public const string GiftOpen = "GiftOpen";
 }

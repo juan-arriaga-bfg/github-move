@@ -119,7 +119,7 @@ public class UIMessageWindowController : IWWindowController {
         model.AcceptLabel = "";
         model.IsBuy = true;
         
-        model.OnAccept = timer.FastComplete;
+        model.OnAccept =  timer.FastComplete;
         model.OnCancel = null;
 
         model.Timer = timer;
