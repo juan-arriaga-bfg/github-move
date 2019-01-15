@@ -1,87 +1,41 @@
 [
   {
-    "Uid": "Worker",
-    "UnlockLevel": 8,
-    "Amount": 1,
-    "Weight": {
-      "Uid": "Boost_WR",
-      "Weight": 20
-    },
-    "Price": {
-      "Currency": "Crystals",
-      "Amount": 15
-    },
-    "RandomType": "Base"
-  },
-  {
-    "Uid": "Worker",
-    "UnlockLevel": 8,
+    "Uid": "Base easy",
+    "UnlockLevel": 1,
     "Amount": 2,
-    "Weight": {
-      "Uid": "Boost_WR",
-      "Weight": 10
-    },
-    "Price": {
-      "Currency": "Crystals",
-      "Amount": 25
-    },
-    "RandomType": "Base"
-  },
-  {
-    "Uid": "Worker",
-    "UnlockLevel": 9,
-    "Amount": 3,
-    "Weight": {
-      "Uid": "Boost_WR",
-      "Weight": 10
-    },
-    "Price": {
-      "Currency": "Crystals",
-      "Amount": 35
-    },
-    "RandomType": "Base"
-  },
-  {
-    "Uid": "Ingredients easy",
-    "UnlockLevel": 5,
-    "Amount": 3,
-    "Weight": {
-      "Uid": "Empty",
-      "Weight": 10
-    },
-    "Price": {
-      "Currency": "Crystals",
-      "Amount": 3
-    },
-    "RandomType": "Ingredients"
-  },
-  {
-    "Uid": "Ingredients easy",
-    "UnlockLevel": 5,
-    "Amount": 5,
-    "Weight": {
-      "Uid": "Empty",
-      "Weight": 10
-    },
-    "Price": {
-      "Currency": "Crystals",
-      "Amount": 5
-    },
-    "RandomType": "Ingredients"
-  },
-  {
-    "Uid": "Ingredients hard",
-    "UnlockLevel": 7,
-    "Amount": 10,
     "Weight": {
       "Uid": "Empty",
       "Weight": 1
     },
     "Price": {
       "Currency": "Crystals",
-      "Amount": 10
+      "Amount": 55
     },
-    "RandomType": "Ingredients"
+    "RandomType": "BasePiecesEasy"
+  },
+  {
+    "Uid": "Base Сhests",
+    "UnlockLevel": 1,
+    "Amount": 1,
+    "Weight": {
+      "Uid": "Empty",
+      "Weight": 1
+    },
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 25
+    },
+    "RandomType": "BaseСhests"
+  },
+  {
+    "Uid": "Free Сhests",
+    "UnlockLevel": 1,
+    "Amount": 1,
+    "Weight": {
+      "Uid": "CH_Free",
+      "Weight": 1
+    },
+    "RandomType": "Base"
   },
   {
     "Uid": "Boosts",
@@ -154,18 +108,88 @@
     "RandomType": "Base"
   },
   {
-    "Uid": "Base easy",
-    "UnlockLevel": 1,
-    "Amount": 2,
+    "Uid": "Ingredients easy",
+    "UnlockLevel": 5,
+    "Amount": 3,
+    "Weight": {
+      "Uid": "Empty",
+      "Weight": 10
+    },
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 3
+    },
+    "RandomType": "Ingredients"
+  },
+  {
+    "Uid": "Ingredients easy",
+    "UnlockLevel": 5,
+    "Amount": 5,
+    "Weight": {
+      "Uid": "Empty",
+      "Weight": 10
+    },
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 5
+    },
+    "RandomType": "Ingredients"
+  },
+  {
+    "Uid": "Ingredients hard",
+    "UnlockLevel": 7,
+    "Amount": 10,
     "Weight": {
       "Uid": "Empty",
       "Weight": 1
     },
     "Price": {
       "Currency": "Crystals",
-      "Amount": 55
+      "Amount": 10
     },
-    "RandomType": "BasePiecesEasy"
+    "RandomType": "Ingredients"
+  },
+  {
+    "Uid": "Worker",
+    "UnlockLevel": 8,
+    "Amount": 1,
+    "Weight": {
+      "Uid": "Boost_WR",
+      "Weight": 20
+    },
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 15
+    },
+    "RandomType": "Base"
+  },
+  {
+    "Uid": "Worker",
+    "UnlockLevel": 8,
+    "Amount": 2,
+    "Weight": {
+      "Uid": "Boost_WR",
+      "Weight": 10
+    },
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 25
+    },
+    "RandomType": "Base"
+  },
+  {
+    "Uid": "Worker",
+    "UnlockLevel": 9,
+    "Amount": 3,
+    "Weight": {
+      "Uid": "Boost_WR",
+      "Weight": 10
+    },
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 35
+    },
+    "RandomType": "Base"
   },
   {
     "Uid": "Base hard",
@@ -180,29 +204,5 @@
       "Amount": 99
     },
     "RandomType": "BasePiecesHard"
-  },
-  {
-    "Uid": "Base Сhests",
-    "UnlockLevel": 1,
-    "Amount": 1,
-    "Weight": {
-      "Uid": "Empty",
-      "Weight": 1
-    },
-    "Price": {
-      "Currency": "Crystals",
-      "Amount": 25
-    },
-    "RandomType": "BaseСhests"
-  },
-  {
-    "Uid": "Free Сhests",
-    "UnlockLevel": 1,
-    "Amount": 1,
-    "Weight": {
-      "Uid": "CH_Free",
-      "Weight": 1
-    },
-    "RandomType": "Base"
   }
 ]
