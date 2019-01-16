@@ -78,7 +78,7 @@ public class CodexItem : IWUIWindowViewController
             
             case CodexItemState.PartLock:
                 questionMark.SetActive(true);
-                CreateIcon(Context.Context.IsHero == false);
+                CreateIcon(Context.Context == null || Context.Context.IsHero == false);
                 
                 foreach (var sprite in IconSprites)
                 {
@@ -161,11 +161,12 @@ public class CodexItem : IWUIWindowViewController
             
             UIService.Get.PoolContainer.Return(icon.gameObject);
             IconSprites = new List<Image>();
+            icon = null;
         }
         
         if (isShow == false) return;
 
-        var id = $"{PieceType.Parse(def.PieceTypeDef.Id)}{(Context.Context.IsHero ? "Icon" : "")}";
+        var id = $"{PieceType.Parse(def.PieceTypeDef.Id)}{(Context.Context != null && Context.Context.IsHero ? "Icon" : "")}";
         
         icon = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
         icon.SetParentAndReset(pieceImageRectTransform);

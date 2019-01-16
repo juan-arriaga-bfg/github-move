@@ -105,7 +105,10 @@ public class UICodexWindowView : UIGenericPopupWindowView
         for (var i = 0; i < codexTabs.Count; i++)
         {
             var tab = codexTabs[i];
-            CreateChains(tab, model.CodexContent.TabDefs[i]);
+            var tabDef = model.CodexContent.TabDefs[i];
+            
+            tab.Init(tabDef);
+            CreateChains(tab, tabDef);
         }
         
         //int activeTabIndex = CalculateActiveTabIndexFromDefs(model);
