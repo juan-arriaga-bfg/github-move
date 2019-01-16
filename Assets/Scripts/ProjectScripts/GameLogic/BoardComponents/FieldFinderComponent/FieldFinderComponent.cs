@@ -30,7 +30,7 @@ public class FieldFinderComponent : IECSComponent
 		
 		current = piece.PieceType;
 		
-		field = FindField(piece.PieceType, point, field, ignoreLock);
+		FindField(piece.PieceType, point, field, ignoreLock);
 		
 		return true;
 	}
@@ -62,22 +62,22 @@ public class FieldFinderComponent : IECSComponent
 		
 		if (PieceIsCorrect(type, point.Left))
 		{
-			FindField(type, point.Left, field);
+			FindField(type, point.Left, field, ignoreLock);
 		}
 		
 		if (PieceIsCorrect(type, point.Right))
 		{
-			FindField(type, point.Right, field);
+			FindField(type, point.Right, field, ignoreLock);
 		}
 		
 		if (PieceIsCorrect(type, point.Up))
 		{
-			FindField(type, point.Up, field);
+			FindField(type, point.Up, field, ignoreLock);
 		}
 		
 		if (PieceIsCorrect(type, point.Down))
 		{
-			FindField(type, point.Down, field);
+			FindField(type, point.Down, field, ignoreLock);
 		}
 		
 		return field;

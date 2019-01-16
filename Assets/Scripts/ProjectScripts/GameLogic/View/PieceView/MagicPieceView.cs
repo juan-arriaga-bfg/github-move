@@ -106,9 +106,11 @@ public class MagicPieceView : PieceBoardElementView
             var score = CalcScore(piece, positions);
             
             if (bestScore < score) bestScore = score;
+            
 
             options.Add(new KeyValuePair<int, List<BoardPosition>>(score, positions));
         }
+        
         
         if(options.Count == 0) return currentBestPieces;
 
@@ -155,8 +157,9 @@ public class MagicPieceView : PieceBoardElementView
 		
         int currentId;
         int nextId;
-        
-        return FindPositions(to, positions, out currentId) && logic.MatchActionBuilder.CheckMatch(positions, currentId, to, out nextId);
+        var positionsFounded = FindPositions(to, positions, out currentId);
+        var validMatch = logic.MatchActionBuilder.CheckMatch(positions, currentId, to, out nextId);
+        return positionsFounded && validMatch;
     }
 
     private bool FindPositions(BoardPosition point, List<BoardPosition> field, out int current)
@@ -175,7 +178,7 @@ public class MagicPieceView : PieceBoardElementView
 
             i++;
         }
-
+        
         return true;
     }
 
@@ -187,8 +190,12 @@ public class MagicPieceView : PieceBoardElementView
         var boardCell = logic.BoardCells[position.X, position.Y, position.Z];
         foreach (var locker in boardCell.Lockers)
         {
+            
             if (locker is DragAndCheckMatchAction == false)
+            {
                 return false;
+            }
+                
         }
 
         return true;
