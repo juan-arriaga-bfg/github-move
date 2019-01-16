@@ -247,23 +247,24 @@ public class CodexItem : IWUIWindowViewController
         switch (def.State)
         {
             case CodexItemState.FullLock:
-                if(Context.Context.SelectItem != null) Context.Context.SelectItem.SetItem(null);
+                if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(null);
                 break;
             
             case CodexItemState.PartLock:
-                if(Context.Context.SelectItem != null) Context.Context.SelectItem.SetItem(null);
+                if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(null);
                 break;
             
             case CodexItemState.PendingReward:
+                if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(def.PieceDef);
                 ClaimReward();
                 break;
             
             case CodexItemState.Unlocked:
-                if(Context.Context.SelectItem != null) Context.Context.SelectItem.SetItem(def.PieceDef);
+                if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(def.PieceDef);
                 break;
             
             case CodexItemState.Highlighted:
-                if(Context.Context.SelectItem != null) Context.Context.SelectItem.SetItem(def.PieceDef);
+                if(Context.Context.IsHero) Context.Context.SelectItem.SetItem(def.PieceDef);
                 break;
         }
     }

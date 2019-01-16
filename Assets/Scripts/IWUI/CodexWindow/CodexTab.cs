@@ -59,9 +59,11 @@ public class CodexTab : IWUIWindowViewController
     {
         scroll.normalizedPosition = new Vector2(0.5f, 1);
         
-        if(IsHero == false) return;
+        if(IsHero == false || SelectItem == null) return;
+
+        var def = defData.ChainDefs[0].ItemDefs[0];
         
-        if(SelectItem != null) SelectItem.SetItem(defData.ChainDefs[0].ItemDefs[0].PieceDef);
+        SelectItem.SetItem(def.State > CodexItemState.PendingReward ? def.PieceDef : null);
     }
     
     public void ScrollToBottom()
@@ -92,7 +94,7 @@ public class CodexTab : IWUIWindowViewController
 
     private void RunScrollTween(CodexChain target)
     {
-        scroll.enabled = false;
+        scroll.enabled = IsHero;
         
         DOTween.Sequence()
                .SetId(this)
