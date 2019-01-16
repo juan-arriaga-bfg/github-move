@@ -288,8 +288,10 @@ public class UICodexWindowView : UIGenericPopupWindowView
         for (var i = 0; i < chainDefs.Count; i++)
         {
             var codexChainDef = chainDefs[i];
+            var prefabName = codexChainDef.ItemDefs[0].PieceTypeDef.Id == PieceType.NPC_SleepingBeauty.Id ? "CodexChainCharacter" : "CodexChain";
 
-            CodexChain chain = UIService.Get.PoolContainer.Create<CodexChain>((GameObject) ContentService.Current.GetObjectByName("CodexChain"));
+            CodexChain chain = UIService.Get.PoolContainer.Create<CodexChain>((GameObject) ContentService.Current.GetObjectByName(prefabName));
+            chain.Context = tab;
             chain.Init(codexChainDef);
             
             tab.AddChain(chain);
@@ -301,6 +303,7 @@ public class UICodexWindowView : UIGenericPopupWindowView
     public static void CreateItems(CodexChain chain, CodexChainDef chainDef, int rowLength)
     {
         var itemDefs = chainDef.ItemDefs;
+        var prefabName = chain.ChainId == PieceType.NPC_SleepingBeauty.Id ? "CodexItemCharacter" : "CodexItem";
         
         List<CodexItem> itemsToAdd = new List<CodexItem>();
         
@@ -308,9 +311,10 @@ public class UICodexWindowView : UIGenericPopupWindowView
         {
             var codexItemDef = itemDefs[i];
             
-            CodexItem item = UIService.Get.PoolContainer.Create<CodexItem>((GameObject) ContentService.Current.GetObjectByName("CodexItem"));
+            CodexItem item = UIService.Get.PoolContainer.Create<CodexItem>((GameObject) ContentService.Current.GetObjectByName(prefabName));
 
             bool forceHideArrow = (i + 1) % rowLength == 0;
+            item.Context = chain;
             item.OnViewInit(null);
             item.Setup(codexItemDef, forceHideArrow);
             

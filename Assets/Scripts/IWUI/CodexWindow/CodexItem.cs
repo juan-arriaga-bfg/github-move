@@ -22,30 +22,32 @@ public class CodexItem : IWUIWindowViewController
     public const float MIN_ITEM_IMAGE_SIZE = 90;
     public const float MAX_ITEM_IMAGE_SIZE = 155;
 
-    [IWUIBinding("#Caption")] private TextMeshProUGUI caption;
+    [IWUIBindingNullable("#Caption")] private TextMeshProUGUI caption;
     [IWUIBinding("#(?)")]     private GameObject questionMark;
-    [IWUIBinding("#Arrow")]   private GameObject arrow;
+    [IWUIBindingNullable("#Arrow")]   private GameObject arrow;
     [IWUIBinding("#Shine")]   private GameObject shine;
-    [IWUIBinding("#Basket")]  private GameObject basket;
-    [IWUIBinding("#Hand")]    private GameObject hand;
-    [IWUIBinding("#Piece")]   private Image pieceImage;
+    [IWUIBindingNullable("#Basket")]  private GameObject basket;
+    [IWUIBindingNullable("#Hand")]    private GameObject hand;
     [IWUIBinding("#Piece")]   private RectTransform pieceImageRectTransform;
     [IWUIBinding("#Gift")]    private GameObject gift;
     [IWUIBinding("#Gift")]    private Animator giftAnimator;
 
+    public CodexChain Context;
+    
     // private CodexItemState state;
 
     private readonly Color COLOR_TRANSPARENT = new Color(1, 1, 1, 0);
     
     private CodexItemDef def;
-
+    
     private bool forceHideArrow;
-
-    public Image PieceImage => pieceImage;
-
+    
     public RectTransform PieceImageRectTransform => pieceImageRectTransform;
 
     public CodexItemDef Def => def;
+
+    private Transform icon;
+    private List<Image> IconSprites = new List<Image>();
 
     public void ReloadWithState(CodexItemState state)
     {
@@ -61,50 +63,50 @@ public class CodexItem : IWUIWindowViewController
 
         Reset();
 
-        arrow .SetActive(def.ShowArrow && !this.forceHideArrow && !def.PieceTypeDef.Filter.Has(PieceTypeFilter.ProductionField));
-        basket.SetActive(def.ShowArrow && !this.forceHideArrow &&  def.PieceTypeDef.Filter.Has(PieceTypeFilter.ProductionField));
+        if(arrow != null) arrow.SetActive(def.ShowArrow && !this.forceHideArrow && !def.PieceTypeDef.Filter.Has(PieceTypeFilter.ProductionField));
+        if(basket != null) basket.SetActive(def.ShowArrow && !this.forceHideArrow &&  def.PieceTypeDef.Filter.Has(PieceTypeFilter.ProductionField));
         
-        Sprite sprite = null;
         string captionText = GetCaption();
 
         switch (def.State)
         {
             case CodexItemState.FullLock:
                 questionMark.SetActive(true);
-                pieceImage.gameObject.SetActive(false);
+                CreateIcon(false);
                                
                 break;
             
             case CodexItemState.PartLock:
                 questionMark.SetActive(true);
-                sprite = GetPieceSprite();
+                CreateIcon(Context.Context.IsHero == false);
                 
-                pieceImage.material = lockedMaterial;
-                pieceImage.color = lockedColor;
+                foreach (var sprite in IconSprites)
+                {
+                    sprite.material = lockedMaterial;
+                    sprite.color = lockedColor;
+                }
                 
                 break;
             
             case CodexItemState.PendingReward:
-                sprite = GetPieceSprite();
+                CreateIcon(false);
                 shine.SetActive(true);
-                pieceImage.gameObject.SetActive(false);
                 PlayGiftIdleAnimation();
                 
                 break;
             
             case CodexItemState.Unlocked:
-                sprite = GetPieceSprite();
-                pieceImage.gameObject.SetActive(true);
+                CreateIcon(true);
                 shine.SetActive(false);
-                hand.SetActive(def.PieceTypeDef.Filter.Has(PieceTypeFilter.Ingredient));
+                if (hand != null) hand.SetActive(def.PieceTypeDef.Filter.Has(PieceTypeFilter.Ingredient));
 
                 break;
             
             case CodexItemState.Highlighted:
-                sprite = GetPieceSprite();
+                CreateIcon(true);
                 shine.SetActive(true);
 
-                pieceImage.transform.localScale = rewardScale;
+                icon.transform.localScale = rewardScale;
                 
                 break;
             
@@ -112,8 +114,7 @@ public class CodexItem : IWUIWindowViewController
                 throw new ArgumentOutOfRangeException();
         }
         
-        pieceImage.sprite = sprite;
-        caption.text = def.HideCaption ? "" : captionText;
+        if (caption != null) caption.text = def.HideCaption ? "" : captionText;
 
         // SyncPivotAndSizeOfPieceImage();
         //
@@ -121,7 +122,7 @@ public class CodexItem : IWUIWindowViewController
         // size.x = Mathf.Min(MIN_ITEM_IMAGE_SIZE, size.x);
         // size.y = Mathf.Min(MIN_ITEM_IMAGE_SIZE, size.y);
         // pieceImage.rectTransform.sizeDelta = size;
-        
+
         // Debug.Log($"[CodexItem] => Init {itemDef.PieceTypeDef.Abbreviations[0]} as {def.State}, arrow: {def.ShowArrow}");
     }
 
@@ -132,15 +133,10 @@ public class CodexItem : IWUIWindowViewController
         questionMark.SetActive(false);
         shine.SetActive(false);
 
-        DOTween.Kill(pieceImage);
-        pieceImage.gameObject.SetActive(true);
-        pieceImage.material = unlokedMaterial;
-        pieceImage.color = unlockedColor;
-
-        pieceImage.transform.localScale = defaultScale;
+        DOTween.Kill(icon);
         
-        hand.SetActive(false);
-        basket.SetActive(false);
+        if (hand != null) hand.SetActive(false);
+        if (basket != null) basket.SetActive(false);
     }
 
     private void StopGiftAnimation()
@@ -153,9 +149,29 @@ public class CodexItem : IWUIWindowViewController
         gift.SetActive(false);
     }
 
-    private Sprite GetPieceSprite()
+    private void CreateIcon(bool isShow)
     {
-        return IconService.Current.GetSpriteById(PieceType.Parse(def.PieceTypeDef.Id));
+        if (icon != null)
+        {
+            foreach (var sprite in IconSprites)
+            {
+                sprite.material = unlokedMaterial;
+                sprite.color = unlockedColor;
+            }
+            
+            UIService.Get.PoolContainer.Return(icon.gameObject);
+            IconSprites = new List<Image>();
+        }
+        
+        if (isShow == false) return;
+
+        var id = $"{PieceType.Parse(def.PieceTypeDef.Id)}{(Context.Context.IsHero ? "Icon" : "")}";
+        
+        icon = UIService.Get.PoolContainer.Create<Transform>((GameObject) ContentService.Current.GetObjectByName(id));
+        icon.SetParentAndReset(pieceImageRectTransform);
+        icon.transform.localScale = defaultScale;
+        
+        IconSprites = icon.GetComponentsInChildren<Image>().ToList();
     }
     
     private string GetCaption()
@@ -165,7 +181,7 @@ public class CodexItem : IWUIWindowViewController
     
     public void SetCaption(string text)
     {
-        caption.text = text;
+        if (caption != null) caption.text = text;
     }
 
     private void PlayGiftIdleAnimation()
@@ -184,9 +200,14 @@ public class CodexItem : IWUIWindowViewController
             return;
         }
 
-        pieceImage.gameObject.SetActive(true);
-        pieceImage.color = COLOR_TRANSPARENT;
-        pieceImage.transform.localScale = Vector3.one * 0.15f;
+        CreateIcon(true);
+        
+        foreach (var sprite in IconSprites)
+        {
+            sprite.color = COLOR_TRANSPARENT;
+        }
+        
+        icon.transform.localScale = Vector3.one * 0.15f;
 
         var clips = giftAnimator.runtimeAnimatorController.animationClips.ToList();
         var clip = clips.FirstOrDefault(e => e.name == "CodexGiftOpen");
@@ -197,25 +218,28 @@ public class CodexItem : IWUIWindowViewController
         float tweenTime = 0.4f;
 
         Vector3 shineScale = shine.transform.localScale;
-        
+
         DOTween.Sequence()
-               .Insert(tweenStartTime, shine.transform.DOScale(Vector3.zero, tweenTime).SetEase(Ease.InOutBack).SetId(pieceImage))
-               .Insert(tweenStartTime, pieceImage.DOColor(unlockedColor, tweenTime).SetId(pieceImage))
-               .Insert(tweenStartTime, pieceImage.transform.DOScale(defaultScale, tweenTime).SetEase(Ease.InOutBack) .SetId(pieceImage))
-               .InsertCallback(tweenTime, ()=>
+            .Insert(tweenStartTime, shine.transform.DOScale(Vector3.zero, tweenTime).SetEase(Ease.InOutBack).SetId(icon))
+            .InsertCallback(tweenStartTime, () =>
+            {
+                foreach (var sprite in IconSprites)
                 {
-                    shine.transform.localScale = shineScale;
-                    shine.SetActive(false);
-                    hand.SetActive(def.PieceTypeDef.Filter.Has(PieceTypeFilter.Ingredient));
-                })
-               .InsertCallback(tweenTime /*+ 0.2f*/, ()=>// Coins flight
-                {
-                    onComplete();
-                })
-                .InsertCallback(animLen, ()=>
-                {
-                    StopGiftAnimation();
-                });
+                    sprite.DOColor(unlockedColor, tweenTime).SetId(icon);
+                }
+            })
+            .Insert(tweenStartTime, icon.transform.DOScale(defaultScale, tweenTime).SetEase(Ease.InOutBack).SetId(icon))
+            .InsertCallback(tweenTime, () =>
+            {
+                shine.transform.localScale = shineScale;
+                shine.SetActive(false);
+                if (hand != null) hand.SetActive(def.PieceTypeDef.Filter.Has(PieceTypeFilter.Ingredient));
+            })
+            .InsertCallback(tweenTime /*+ 0.2f*/, () => // Coins flight
+            {
+                onComplete();
+            })
+            .InsertCallback(animLen, StopGiftAnimation);
     }
 
     public void OnClick()
@@ -223,9 +247,11 @@ public class CodexItem : IWUIWindowViewController
         switch (def.State)
         {
             case CodexItemState.FullLock:
+                if(Context.Context.SelectItem != null) Context.Context.SelectItem.SetItem(null);
                 break;
             
             case CodexItemState.PartLock:
+                if(Context.Context.SelectItem != null) Context.Context.SelectItem.SetItem(null);
                 break;
             
             case CodexItemState.PendingReward:
@@ -233,9 +259,11 @@ public class CodexItem : IWUIWindowViewController
                 break;
             
             case CodexItemState.Unlocked:
+                if(Context.Context.SelectItem != null) Context.Context.SelectItem.SetItem(def.PieceDef);
                 break;
             
             case CodexItemState.Highlighted:
+                if(Context.Context.SelectItem != null) Context.Context.SelectItem.SetItem(def.PieceDef);
                 break;
         }
     }
@@ -265,27 +293,9 @@ public class CodexItem : IWUIWindowViewController
             }
 
             // todo: use something like: targetEntity.WindowController.Window.Layers[0].ViewCamera.WorldToScreenPoint(taskIcon.transform.position)
-            var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(pieceImage.transform.position);
+            var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(pieceImageRectTransform.position);
             CurrencyHellper.Purchase(reward, null, flyPosition);
         });
-    }
-    
-    private void SyncPivotAndSizeOfPieceImage()
-    {
-        if (pieceImage.sprite == null)
-        {
-            return;
-        }
-        
-        pieceImage.SetNativeSize();
-        
-        // Sync sprite and rect transform pivots
-        RectTransform rectTransform = pieceImage.GetComponent<RectTransform>();
-        Vector2 size = rectTransform.sizeDelta;
-        size *= pieceImage.pixelsPerUnit;
-        Vector2 pixelPivot = pieceImage.sprite.pivot;
-        Vector2 percentPivot = new Vector2(pixelPivot.x / size.x, pixelPivot.y / size.y);
-        rectTransform.pivot = percentPivot;
     }
 
     private void OnEnable()

@@ -6,16 +6,30 @@ using UnityEngine.UI;
 
 public class CodexTab : IWUIWindowViewController
 {
+    [IWUIBinding("#SelectHero")] private GameObject selectHero;
+    [IWUIBinding("#SelectHero")] public CodexSelectItem SelectItem;
+    
     [IWUIBinding("#Chains")] private VerticalLayoutGroup verticalLayout;
     [IWUIBinding("#Chains")] private Transform chainsHost;
     [IWUIBinding("#Chains")] private ContentSizeFitter contentSizeFitter;
     [IWUIBinding("#ScrollView")] private ScrollRect scroll;
+    
+    [IWUIBinding("#Viewport")] private RectTransform viewport;
 
     private readonly List<CodexChain> codexChains = new List<CodexChain>();
 
+    public bool IsHero;
+    private CodexTabDef defData;
+
     public void Init(CodexTabDef def)
     {
+        defData = def;
+        IsHero = defData.ChainDefs[0].ItemDefs[0].PieceTypeDef.Id == PieceType.NPC_SleepingBeauty.Id;
+        
         ScrollToTop();
+        
+        selectHero.SetActive(IsHero);
+        viewport.offsetMax = -new Vector2(0, IsHero ? 200 : 5);
     }
 
     public void AddChain(CodexChain codexChain)
@@ -44,6 +58,10 @@ public class CodexTab : IWUIWindowViewController
     public void ScrollToTop()
     {
         scroll.normalizedPosition = new Vector2(0.5f, 1);
+        
+        if(IsHero == false) return;
+        
+        if(SelectItem != null) SelectItem.SetItem(defData.ChainDefs[0].ItemDefs[0].PieceDef);
     }
     
     public void ScrollToBottom()

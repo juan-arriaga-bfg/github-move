@@ -16,6 +16,18 @@ public partial class CodexDataManager
         {
             new CodexTabDef
             {
+                Name = LocalizationService.Get("window.codex.toggle.characters", "window.codex.toggle.characters"),
+                ChainDefs = new List<CodexChainDef>
+                {
+                    new CodexChainDef
+                    {
+                        Name = LocalizationService.Get("window.codex.toggle.characters", "window.codex.toggle.characters"),
+                        ItemDefs = GetCodexItemsForChain(PieceType.GetIdsByFilter(PieceTypeFilter.Character).FindAll(id => hidedPieceIds.Contains(id) == false)),
+                    },
+                }
+            },
+            new CodexTabDef
+            {
                 Name = LocalizationService.Get("window.codex.toggle.main", "window.codex.toggle.main"),
                 ChainDefs = new List<CodexChainDef>
                 {

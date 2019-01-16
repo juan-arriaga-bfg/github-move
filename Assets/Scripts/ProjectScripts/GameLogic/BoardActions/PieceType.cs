@@ -134,7 +134,6 @@ public static partial class PieceType
     public static readonly PieceTypeDef NPC_18 = new PieceTypeDef{Id = 28, Abbreviations = new List<string>{ "NPC_18" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     public static readonly PieceTypeDef NPC_19 = new PieceTypeDef{Id = 29, Abbreviations = new List<string>{ "NPC_19" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     
-    
 #endregion
     
 #region Enemies
