@@ -27,6 +27,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.HardShopWindow,
             UIWindowType.MarketWindow,
             UIWindowType.ConfirmationWindow,
+            UIWindowType.WaitWindow,
         };
     
     protected override void InitScene(ApplicationInitializer applicationInitializer, Action onComplete)

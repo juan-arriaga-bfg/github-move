@@ -43,6 +43,8 @@ public class UIWindowType
     public const string TimeSyncWindow = "TimeSyncWindow";
     
     public const string ConfirmationWindow = "ConfirmationWindow";
+    
+    public const string WaitWindow = "WaitWindow";
 
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {
