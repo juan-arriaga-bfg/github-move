@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,12 +26,24 @@ public class UICreditsWindowView : UIGenericPopupWindowView
         LayoutRebuilder.ForceRebuildLayoutImmediate(parrent);
         
         scroll.verticalNormalizedPosition = 1;
+        scroll.enabled = false;
+    }
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
+        parrent.DOAnchorPosY(parrent.sizeDelta.y, 80f)
+            .SetId(parrent)
+            .SetEase(Ease.Linear)
+            .SetLoops(int.MaxValue)
+            .OnComplete(() => { scroll.verticalNormalizedPosition = 1; });
     }
 
     public override void OnViewClose()
     {
         base.OnViewClose();
-        
-        var windowModel = Model as UICreditsWindowModel;
+
+        DOTween.Kill(parrent);
     }
 }

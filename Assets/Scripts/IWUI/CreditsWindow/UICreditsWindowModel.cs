@@ -8,8 +8,10 @@ public class UICreditsWindowModel : IWWindowModel
 
     private string Replace(string value)
     {
-        //{size=50}Big Fish Games{/size}
-        return value.Replace("{", "<").Replace("}", ">");
-        return value.Replace("{size", "<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SubtitleFinal\"><size").Replace("{/size}", "</size></font>").Replace("}", ">");
+        return value
+            .Replace("{style}", "<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR Default\"><color=#983A07>")
+            .Replace("{/style}", "</color></font>")
+            .Replace("{", "<")
+            .Replace("}", ">");
     }
 }
