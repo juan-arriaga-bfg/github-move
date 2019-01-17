@@ -137,6 +137,11 @@
       },
       {
         "Uid": "PR_B1",
+        "Weight": 2,
+        "Override": true
+      },
+      {
+        "Uid": "PR_A1",
         "Weight": 1,
         "Override": true
       }
@@ -172,6 +177,13 @@
       {
         "Uid": "Order4",
         "Weight": 2
+      }
+    ],
+    "PieceWeights": [
+      {
+        "Uid": "PR_B1",
+        "Weight": 1,
+        "Override": true
       }
     ]
   },

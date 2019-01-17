@@ -16,6 +16,18 @@ public partial class CodexDataManager
         {
             new CodexTabDef
             {
+                Name = LocalizationService.Get("window.codex.toggle.characters", "window.codex.toggle.characters"),
+                ChainDefs = new List<CodexChainDef>
+                {
+                    new CodexChainDef
+                    {
+                        Name = LocalizationService.Get("window.codex.toggle.characters", "window.codex.toggle.characters"),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.NPC_SleepingBeauty.Id)),
+                    },
+                }
+            },
+            new CodexTabDef
+            {
                 Name = LocalizationService.Get("window.codex.toggle.main", "window.codex.toggle.main"),
                 ChainDefs = new List<CodexChainDef>
                 {

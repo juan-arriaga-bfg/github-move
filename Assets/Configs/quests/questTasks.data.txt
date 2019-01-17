@@ -65,7 +65,7 @@
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "7_CreatePiece_PR_A5",
     "PieceUid": "PR_A5",
-    "TargetValue": 5,
+    "TargetValue": 9,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "Collect ingredients",
@@ -190,8 +190,8 @@
     }
   },
   {
-    "$type": "TaskKillTreeEntity, GameAssembly",
-    "Id": "20_KillTree",
+    "$type": "TaskHitTreeEntity, GameAssembly",
+    "Id": "20_HitTree",
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {

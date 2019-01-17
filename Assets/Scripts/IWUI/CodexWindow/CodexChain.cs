@@ -10,6 +10,8 @@ public class CodexChain : MonoBehaviour
     private readonly List<CodexItem> codexItems = new List<CodexItem>();
 
     public int ChainId { get; private set; }
+
+    public CodexTab Context;
     
     public Transform ItemsHost => itemsHost;
 
@@ -17,10 +19,7 @@ public class CodexChain : MonoBehaviour
     {
         ChainId = def.ItemDefs[0].PieceTypeDef.Id;
         
-        if (caption != null)
-        {
-            caption.text = def.Name;
-        }
+        if (caption != null) caption.text = def.Name;
     }
     
     public void AddItems(List<CodexItem> items)
