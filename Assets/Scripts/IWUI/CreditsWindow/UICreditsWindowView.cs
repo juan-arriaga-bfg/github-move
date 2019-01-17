@@ -2,7 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UICreditsWindowView : UIGenericPopupWindowView 
+public class UICreditsWindowView : UIGenericPopupWindowView
 {
     [IWUIBinding("#Team")] private NSText team;
     [IWUIBinding("#BigFish")] private NSText bigFish;
@@ -10,6 +10,9 @@ public class UICreditsWindowView : UIGenericPopupWindowView
     [IWUIBinding("#Scroll View")] private ScrollRect scroll;
     
     [IWUIBinding("#Content")] private RectTransform parrent;
+    [IWUIBinding("#PauseButton")] private UIButtonViewController pauseButton;
+
+    private const float delay = 80;
     
     public override void OnViewShow()
     {
@@ -32,18 +35,54 @@ public class UICreditsWindowView : UIGenericPopupWindowView
     public override void OnViewShowCompleted()
     {
         base.OnViewShowCompleted();
+
+        StartAnimation();
         
-        parrent.DOAnchorPosY(parrent.sizeDelta.y, 80f)
-            .SetId(parrent)
-            .SetEase(Ease.Linear)
-            .SetLoops(int.MaxValue)
-            .OnComplete(() => { scroll.verticalNormalizedPosition = 1; });
+        pauseButton.ToState(GenericButtonState.Active)
+            .OnDown(OnDown)
+            .OnUp(OnUp);
     }
 
+    private void StartAnimation()
+    {
+        DOTween.Kill(parrent);
+        
+        parrent.DOAnchorPosY(parrent.sizeDelta.y, delay)
+            .SetId(parrent)
+            .SetEase(Ease.Linear)
+            .OnComplete(() =>
+            {
+                scroll.verticalNormalizedPosition = 1;
+                StartAnimation();
+            });
+    }
+    
     public override void OnViewClose()
     {
         base.OnViewClose();
 
         DOTween.Kill(parrent);
+    }
+    
+    private void OnDown()
+    {
+        DOTween.Kill(parrent);
+        scroll.enabled = true;
+    }
+    
+    private void OnUp()
+    {
+        scroll.enabled = false;
+
+        var time = delay * (1 - parrent.anchoredPosition.y / parrent.sizeDelta.y);
+        
+        parrent.DOAnchorPosY(parrent.sizeDelta.y, time)
+            .SetId(parrent)
+            .SetEase(Ease.Linear)
+            .OnComplete(() =>
+            {
+                scroll.verticalNormalizedPosition = 1;
+                StartAnimation();
+            });
     }
 }
