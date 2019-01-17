@@ -174,36 +174,6 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         
         return obj;
     }
-    
-    public static Sprite GetIcon(TaskEntity task)
-    {
-        var ico = task.GetIco();
-
-        if (ico != null)
-        {
-            return IconService.Current.GetSpriteById(ico);
-        }
-        
-        TaskCurrencyEntity taskAboutCurrency = task as TaskCurrencyEntity;
-        if (taskAboutCurrency != null && !string.IsNullOrEmpty(taskAboutCurrency.CurrencyName))
-        {
-            var pair = new CurrencyPair {Currency = taskAboutCurrency.CurrencyName};
-            var icon = pair.GetIconSprite();
-            if (icon != null)
-            {
-                return icon;
-            }
-        }
-        
-        IHavePieceId taskAboutPiece = task as IHavePieceId;
-        if (taskAboutPiece != null && taskAboutPiece.PieceId != PieceType.None.Id && taskAboutPiece.PieceId != PieceType.Empty.Id)
-        {
-            var pieceTypeDef = PieceType.GetDefById(taskAboutPiece.PieceId);
-            return IconService.Current.GetSpriteById(pieceTypeDef.Abbreviations[0]);
-        }
-
-        return IconService.Current.GetSpriteById("codexQuestion");
-    }
 
     public static string GetTaskProgress(TaskEntity task, int currentValueFontSize = 55, string currentValueColor = "FE4704")
     {
