@@ -142,8 +142,8 @@ public class UISettingsWindowView : UIGenericPopupWindowView
     
     private void OnCreditsClick()
     {
-        UIMessageWindowController.CreateNotImplementedMessage();
-        Debug.LogWarning("OnCreditsClick");
+        UIService.Get.ShowWindow(UIWindowType.CreditsWindow);
+        Controller.CloseCurrentWindow();
     }
     
     private void OnSupportClick()
