@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class BuildActionUpdateAndroidVersionCode : IProjectBuildAction
 {
-    private readonly Regex regex = new Regex("(?<=versionCode(\\ )*)[0-9]*");
+    private readonly Regex regex = new Regex(@"(?<=versionCode )[0-9]*", RegexOptions.Singleline | RegexOptions.Compiled);
     
     public void Execute(ProjectBuilder context)
     {
