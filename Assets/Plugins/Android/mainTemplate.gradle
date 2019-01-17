@@ -50,6 +50,7 @@ android {
         multiDexEnabled true
         targetSdkVersion 26
         minSdkVersion 19
+		versionCode 1
     }
 
     lintOptions {
