@@ -110,7 +110,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
             SetState(TimerViewSate.Free);
         }
         
-        if(smallButton.activeSelf) price.Text = timerState == TimerViewSate.Free ? LocalizationService.Get("common.button.free", "common.button.free") : timer.GetPrise().ToStringIcon();
+        if(smallButton.activeSelf) price.Text = timerState == TimerViewSate.Free ? LocalizationService.Get("common.button.free", "common.button.free") : timer.GetPrice().ToStringIcon();
     }
     
     public void OnBoardEvent(int code, object context)

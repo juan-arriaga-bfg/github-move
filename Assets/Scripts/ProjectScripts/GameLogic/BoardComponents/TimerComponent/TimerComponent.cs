@@ -105,13 +105,12 @@ public class TimerComponent : IECSComponent, IECSSystem
     {
         if (IsFree())
         {
-            
             NSAudioService.Current.Play(SoundId.TimeBoost);
             Complete();
             return;
         }
         
-        CurrencyHellper.Purchase(Currency.Timer.Name, 1, GetPrise(), success =>
+        CurrencyHellper.Purchase(Currency.Timer.Name, 1, GetPrice(), success =>
         {
             if(success == false) return;
             
@@ -120,11 +119,26 @@ public class TimerComponent : IECSComponent, IECSSystem
         });
     }
     
-    public CurrencyPair GetPrise()
+    public CurrencyPair GetPrice()
     {
-        price.Amount = Mathf.Max(1, Mathf.CeilToInt(GameDataService.Current.ConstantsManager.PricePerSecond * (float) CompleteTime.GetTimeLeft(UseUTC).TotalSeconds));
+        var timeLeft = Mathf.CeilToInt((float)CompleteTime.GetTimeLeft(UseUTC).TotalSeconds / 60f);
+        price.Amount = Mathf.Max(1, CalcPriceByLeftTime((float)timeLeft));
+        return price;
+    }
+
+    private int CalcPriceByLeftTime(float leftTime)
+    {
+        var coefficient = CalcCoefficient(leftTime);
+        var price = Mathf.CeilToInt(Mathf.Pow(leftTime, coefficient));
 
         return price;
+    }
+    
+    private float CalcCoefficient(float leftTime)
+    {
+        if(leftTime <= 60)
+            return Mathf.Log(GameDataService.Current.ConstantsManager.HourBasePrice, 60);
+        return Mathf.Log(GameDataService.Current.ConstantsManager.DayBasePrice, 24 * 60);
     }
     
     public bool IsFree()

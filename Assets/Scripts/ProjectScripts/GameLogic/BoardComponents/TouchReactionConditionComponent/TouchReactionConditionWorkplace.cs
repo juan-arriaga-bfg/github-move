@@ -24,7 +24,7 @@
 			return false;
 		}
 			
-		if (life.TimerWork.GetPrise() == null) return false;
+		if (life.TimerWork.GetPrice() == null) return false;
 		
 		UIMessageWindowController.CreateTimerCompleteMessage(
 			LocalizationService.Get("window.timerComplete.message.default", "window.timerComplete.message.default"),

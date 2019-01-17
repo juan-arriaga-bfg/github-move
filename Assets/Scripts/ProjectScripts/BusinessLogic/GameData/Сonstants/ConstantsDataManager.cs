@@ -37,6 +37,9 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     
     public int StartLevelFirefly;
 
+    public float HourBasePrice;
+    public float DayBasePrice;
+
     public override void OnRegisterEntity(ECSEntity entity)
     {
         Reload();

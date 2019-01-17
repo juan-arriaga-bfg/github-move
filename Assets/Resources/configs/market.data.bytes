@@ -28,16 +28,6 @@
     "RandomType": "BaseСhests"
   },
   {
-    "Uid": "Free Сhests",
-    "UnlockLevel": 1,
-    "Amount": 1,
-    "Weight": {
-      "Uid": "CH_Free",
-      "Weight": 1
-    },
-    "RandomType": "Base"
-  },
-  {
     "Uid": "Boosts",
     "UnlockLevel": 3,
     "Amount": 2,
@@ -204,5 +194,15 @@
       "Amount": 99
     },
     "RandomType": "BasePiecesHard"
+  },
+  {
+    "Uid": "Free Сhests",
+    "UnlockLevel": 1,
+    "Amount": 1,
+    "Weight": {
+      "Uid": "CH_Free",
+      "Weight": 1
+    },
+    "RandomType": "Base"
   }
 ]

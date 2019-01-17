@@ -164,7 +164,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
     private void UpdateTimer()
     {
         timerLabel.Text = customer.Timer.CompleteTime.GetTimeLeftText();
-        btnBuyLabel.Text = customer.Timer.GetPrise().ToStringIcon();
+        btnBuyLabel.Text = customer.Timer.GetPrice().ToStringIcon();
     }
     
     private void UpdateState()
