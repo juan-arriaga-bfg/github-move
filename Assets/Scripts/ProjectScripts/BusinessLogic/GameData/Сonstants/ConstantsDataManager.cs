@@ -19,11 +19,7 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     public int MaxOrders;
     public int NextOrderDelay;
 
-    public int PricePerMinute;
     public int FreeTimeLimit;
-
-    private float pricePerSecond = -1f;
-    public float PricePerSecond => pricePerSecond < 0 ? (pricePerSecond = PricePerMinute / 60f) : pricePerSecond;
 
     public int MinDelaySpawnFirefly;
     public int MaxDelaySpawnFirefly;
