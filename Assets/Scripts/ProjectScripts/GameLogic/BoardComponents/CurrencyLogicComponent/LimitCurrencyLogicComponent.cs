@@ -21,7 +21,7 @@ public class LimitCurrencyLogicComponent : ECSEntity
         limitItem = null;
     }
 
-    protected virtual void InitInSave()
+    public virtual void InitInSave()
     {
     }
     

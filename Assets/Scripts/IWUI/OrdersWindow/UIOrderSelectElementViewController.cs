@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UIOrderSelectElementViewController : UISimpleScrollElementViewController
 {
@@ -20,7 +19,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
     [IWUIBinding("#Timer")] private GameObject timer;
     [IWUIBinding("#Shine")] private GameObject shine;
     
-    [IWUIBinding("#Content")] private UIContainerViewController content;
+    [IWUIBinding("#Content")] private UIContainerViewController container;
     
     private Transform result;
     private Order order;
@@ -87,7 +86,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
     {
         if (entities == null || entities.Count <= 0)
         {
-            content.Clear();
+            container.Clear();
             return;
         }
         
@@ -114,7 +113,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             views.Add(entity);
         }
         
-        content.Create(views);
+        container.Create(views);
     }
 
     public override void OnViewShowCompleted()

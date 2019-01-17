@@ -22,7 +22,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         base.OnRegisterEntity(entity);
     }
 
-    protected override void InitInSave()
+    public override void InitInSave()
     {
         var save = ProfileService.Current.GetComponent<CurrencySaveComponent>(CurrencySaveComponent.ComponentGuid);
         

@@ -48,6 +48,8 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
 
     void OnApplicationPause(bool pauseStatus)
     {
+        var energyLogic = BoardService.Current?.FirstBoard?.GetComponent<EnergyCurrencyLogicComponent>(EnergyCurrencyLogicComponent.ComponentGuid);
+        
         if (pauseStatus)
         {
             ProfileService.Instance.Manager.UploadCurrentProfile();
@@ -55,6 +57,11 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
 #if UNITY_EDITOR
             ProfileService.Instance.Manager.SaveLocalProfile();
 #endif
+            energyLogic?.Timer.Stop();
+        }
+        else
+        {
+            energyLogic?.InitInSave();
         }
     }
 
@@ -67,5 +74,4 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         AssetDatabase.Refresh();
 #endif
     }
-
 }

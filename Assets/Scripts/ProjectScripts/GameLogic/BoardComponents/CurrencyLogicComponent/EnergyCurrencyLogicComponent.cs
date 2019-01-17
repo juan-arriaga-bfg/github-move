@@ -36,7 +36,7 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         if(!CheckIsNeed() && Timer.IsExecuteable()) Timer.Stop();
     }
     
-    protected override void InitInSave()
+    public override void InitInSave()
     {
         if(CheckIsNeed() == false) return;
         
@@ -46,7 +46,7 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         
         var refil = DateTimeExtension.CountOfStepsPassedWhenAppWasInBackground(save.EnergyLastUpdate, Delay, out Timer.StartTime);
         
-        targetItem.Amount += Mathf.Min(refil, limitItem.Amount - targetItem.Amount);
+        Add(Mathf.Min(refil, limitItem.Amount - targetItem.Amount));
         
         if(CheckIsNeed()) Timer.Start(Timer.StartTime);
     }
