@@ -106,9 +106,11 @@ public class MagicPieceView : PieceBoardElementView
             var score = CalcScore(piece, positions);
             
             if (bestScore < score) bestScore = score;
+            
 
             options.Add(new KeyValuePair<int, List<BoardPosition>>(score, positions));
         }
+        
         
         if(options.Count == 0) return currentBestPieces;
 
@@ -155,8 +157,48 @@ public class MagicPieceView : PieceBoardElementView
 		
         int currentId;
         int nextId;
+        var positionsFounded = FindPositions(to, positions, out currentId);
+        var validMatch = logic.MatchActionBuilder.CheckMatch(positions, currentId, to, out nextId);
+        return positionsFounded && validMatch;
+    }
+
+    private bool FindPositions(BoardPosition point, List<BoardPosition> field, out int current)
+    {
+        if (!Context.Context.BoardLogic.FieldFinder.Find(point, field, out current, true))
+            return false;
+
+        int i = 0;
+        while (i < field.Count)
+        {
+            if (!IsValidPosition(field[i]))
+            {
+                field.RemoveAt(i);
+                continue;
+            }
+
+            i++;
+        }
         
-        return logic.FieldFinder.Find(to, positions, out currentId) && logic.MatchActionBuilder.CheckMatch(positions, currentId, to, out nextId);
+        return true;
+    }
+
+    private bool IsValidPosition(BoardPosition position)
+    {
+        var logic = Context.Context.BoardLogic;
+        if (logic.IsLockedCell(position) == false)
+            return true;
+        var boardCell = logic.BoardCells[position.X, position.Y, position.Z];
+        foreach (var locker in boardCell.Lockers)
+        {
+            
+            if (locker is DragAndCheckMatchAction == false)
+            {
+                return false;
+            }
+                
+        }
+
+        return true;
     }
 
     public override void OnDragEnd(BoardPosition boardPos, Vector2 worldPos)
@@ -175,5 +217,7 @@ public class MagicPieceView : PieceBoardElementView
                 continue;
             OffHighlightMatchable(view);
         }
+
+        bestMatchPieces = null;
     }
 }

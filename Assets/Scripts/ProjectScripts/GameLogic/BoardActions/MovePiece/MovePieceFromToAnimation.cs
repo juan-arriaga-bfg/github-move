@@ -20,7 +20,7 @@ public class MovePieceFromToAnimation : BoardAnimation
         
         pieceFromView.SyncRendererLayers(To);        
 
-        var sequence = DOTween.Sequence().SetId(pieceFromView.AnimationUid);
+        var sequence = DOTween.Sequence().SetId(animationUid);
         sequence.Append(pieceFromView.CachedTransform.DOLocalMove(pos, 0.4f).SetEase(Ease.InOutSine));
         sequence.OnComplete(() =>
         {
