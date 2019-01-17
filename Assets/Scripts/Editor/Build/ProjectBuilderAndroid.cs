@@ -34,7 +34,9 @@ public class ProjectBuilderAndroid
             .AddBuildAction(new BuildActionDisableScenes())
             .AddBuildAction(new BuildActionSetScriptingBackend()
                 .SetType(useIL2CPP ? ScriptingImplementation.IL2CPP : ScriptingImplementation.Mono2x))
-             
+                      
+            .AddBuildAction(new BuildActionUpdateAndroidVersionCode())
+                       
             .AddBuildAction(new BuildActionGradleExport())
              
             .AddPostBuildAction(new BuildActionFixExportedGradleProjectHierarhy())
@@ -43,8 +45,6 @@ public class ProjectBuilderAndroid
 
             .AddPostBuildAction(new BuildActionCopySampleGdprPolicyJson())      // optional
             .AddPostBuildAction(new BuildActionReplaceBfgLibWithDebugVersion()) // optional
-                      
-            .AddPostBuildAction(new BuildActionUpdateAndroidVersionCode())
                        
             .AddPostBuildAction(new BuildActionInstallGradleWrapper())
             .AddPostBuildAction(new BuildActionReset())
