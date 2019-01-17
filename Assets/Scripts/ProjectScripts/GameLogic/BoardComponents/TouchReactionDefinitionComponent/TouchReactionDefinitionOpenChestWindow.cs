@@ -8,7 +8,7 @@ public class TouchReactionDefinitionOpenChestWindow : TouchReactionDefinitionCom
 	{
 		if (chestComponent == null) chestComponent = piece.GetComponent<ChestPieceComponent>(ChestPieceComponent.ComponentGuid);
 		
-		if (chestComponent?.Def == null || chestComponent.Rewards.IsHightlight) return false;
+		if (chestComponent?.Def == null || chestComponent.Rewards.IsHighlight) return false;
 
 		var model = UIService.Get.GetCachedModel<UIChestMessageWindowModel>(UIWindowType.ChestMessage);
 		

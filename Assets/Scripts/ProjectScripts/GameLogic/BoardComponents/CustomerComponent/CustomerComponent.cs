@@ -124,8 +124,6 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
             
             Order = null;
             
-            
-            
             pieceContext.Context.ActionExecutor.AddAction(new EjectionPieceAction
             {
                 GetFrom = () => pieceContext.CachedPosition,

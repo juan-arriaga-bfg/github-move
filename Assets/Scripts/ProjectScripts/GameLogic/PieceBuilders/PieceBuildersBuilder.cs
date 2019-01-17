@@ -6,7 +6,7 @@ public class PieceBuildersBuilder
         var dict = new Dictionary<int, IPieceBuilder>();
 
         dict = AddSimplePiece(dict);
-        dict = AddEnergyBranchPiece(dict);
+        dict = AddIngredientsBranchPiece(dict);
         dict = AddObstaclePiece(dict);
         dict = AddOtherPiece(dict);
         
@@ -44,7 +44,7 @@ public class PieceBuildersBuilder
         return dict;
     }
 
-    private Dictionary<int, IPieceBuilder> AddEnergyBranchPiece(Dictionary<int, IPieceBuilder> dict)
+    private Dictionary<int, IPieceBuilder> AddIngredientsBranchPiece(Dictionary<int, IPieceBuilder> dict)
     {
         dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.PR_A1.Id, PieceType.PR_A5.Id);
         dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.PR_B1.Id, PieceType.PR_B5.Id);

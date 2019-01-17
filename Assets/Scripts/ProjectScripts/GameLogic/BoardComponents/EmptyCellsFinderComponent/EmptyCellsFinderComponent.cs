@@ -160,15 +160,15 @@ public class EmptyCellsFinderComponent : IECSComponent
 		return resultCollection;
 	}
 
-	public bool CheckFreeSpaceNearPosition(BoardPosition position, int count)
+	public bool CheckFreeSpaceNearPosition(BoardPosition position, int amount)
 	{
-		if (count == 0) return true;
+		if (amount == 0) return true;
 		
 		var free = new List<BoardPosition>();
-		if (!FindRandomNearWithPointInCenter(position, free, count))
+		if (!FindRandomNearWithPointInCenter(position, free, amount))
 			return false;
 		
-		return free.Count >= count;
+		return free.Count >= amount;
 	}
 	
 	public bool FindAllWithPointInCenter(BoardPosition point, int width, int height, List<BoardPosition> field, int targetLayer)

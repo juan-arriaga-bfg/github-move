@@ -41,7 +41,7 @@ public class RewardsBubbleView : UIBoardView
 		
 		foreach (var border in borders)
 		{
-			border.color = storage.IsHightlight ? Color.red : Color.white;
+			border.color = storage.IsHighlight ? Color.red : Color.white;
 		}
 	}
 

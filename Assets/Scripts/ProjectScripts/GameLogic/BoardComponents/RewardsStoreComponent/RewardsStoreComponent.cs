@@ -14,7 +14,7 @@ public class RewardsStoreComponent : IECSComponent
     public Vector2 BubbleOffset = new Vector3(0, 1.5f);
     
     public string Icon => PieceType.Parse(next);
-    public bool IsHightlight => rewards != null && rewards.Sum(pair => pair.Value) < defaulAmaunt;
+    public bool IsHighlight => rewards != null && rewards.Sum(pair => pair.Value) < defaultAmount;
     
     public bool IsTargetReplace;
     public bool IsComplete;
@@ -23,7 +23,7 @@ public class RewardsStoreComponent : IECSComponent
     private Piece context;
     
     private int next;
-    private int defaulAmaunt;
+    private int defaultAmount;
     private Dictionary<int, int> rewards;
     
     public void OnRegisterEntity(ECSEntity entity)
@@ -43,7 +43,7 @@ public class RewardsStoreComponent : IECSComponent
         if (item == null) return;
         
         rewards = item.Reward;
-        defaulAmaunt = item.RewardAmount;
+        defaultAmount = item.RewardAmount;
         
         if (item.IsComplete) ShowBubble();
     }
@@ -56,7 +56,7 @@ public class RewardsStoreComponent : IECSComponent
             {
                 Position = context.CachedPosition,
                 Reward = rewards,
-                RewardAmount = defaulAmaunt,
+                RewardAmount = defaultAmount,
                 IsComplete = IsComplete
             };
     }
@@ -70,7 +70,7 @@ public class RewardsStoreComponent : IECSComponent
             if (rewards == null)
             {
                 rewards = GetRewards?.Invoke();
-                defaulAmaunt = rewards.Sum(pair => pair.Value);
+                defaultAmount = rewards.Sum(pair => pair.Value);
             } 
         }
         
