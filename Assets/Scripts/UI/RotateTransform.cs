@@ -13,6 +13,8 @@ public class RotateTransform : MonoBehaviour
     [SerializeField] private int m_loopsCount = -1;
     
     [SerializeField] private float m_delay = -1;
+    
+    [SerializeField] private Ease m_ease = Ease.Linear;
 
     private Quaternion defaultRotation;
 
@@ -31,7 +33,7 @@ public class RotateTransform : MonoBehaviour
 
         if (m_delay > 0) sequence.AppendInterval(m_delay);
 
-        sequence.Append(transform.DORotate(m_angle, m_time, m_mode).SetEase(Ease.Linear));
+        sequence.Append(transform.DORotate(m_angle, m_time, m_mode).SetEase(m_ease));
     }
 
     private void OnDisable()
