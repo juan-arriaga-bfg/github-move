@@ -1,24 +1,34 @@
 using UnityEngine;
-using System.Collections;
 using DG.Tweening;
-using UnityEngine.UI;
 
 public class UITimeSyncWindowView : UIGenericPopupWindowView 
 {
-    [IWUIBinding("#ImageSpinner")] protected Image imageSpinner;
-    [IWUIBinding("#ImageError")] protected GameObject imageError;
-    [IWUIBinding("#ImageSuccess")] protected GameObject imageSuccess;
-
+    private enum WindowState
+    {
+        Default,
+        Error,
+        Connecting,
+        Success
+    }
+    
+    [IWUIBinding("#ImageError")] private Transform imageError;
+    [IWUIBinding("#ImageSuccess")] private Transform imageSuccess;
+    
     private SecuredTimeServiceInitComponent timeServiceInitComponent;
+
+    private WindowState state;
     
     public override void OnViewShow()
     {
         base.OnViewShow();
         
         UITimeSyncWindowModel windowModel = Model as UITimeSyncWindowModel;
-        
-        SetTitle(windowModel.Title);
 
+        state = WindowState.Default;
+        
+        imageError.localScale = Vector3.zero;
+        imageSuccess.localScale = Vector3.zero;
+        
         // Can't store in the model because windows cache may not exists at this time
         timeServiceInitComponent = AsyncInitService.Current.GetComponent<SecuredTimeServiceInitComponent>();
         
@@ -38,12 +48,18 @@ public class UITimeSyncWindowView : UIGenericPopupWindowView
         timeServiceInitComponent.OnSuccess -= OnSuccess;
         
         DOTween.Kill(this);
+        DOTween.Kill(imageError);
     }
 
     private void OnSuccess()
     {
         SetModeSuccess();
-        Controller.CloseCurrentWindow();
+        
+        DOTween.Kill(this);
+        
+        DOTween.Sequence().SetId(this)
+            .AppendInterval(1)
+            .AppendCallback(() => { Controller.CloseCurrentWindow(); });
     }
 
     private void OnRetry()
@@ -53,16 +69,13 @@ public class UITimeSyncWindowView : UIGenericPopupWindowView
 
     private void OnRetryScheduled(float delay)
     {
-        int delayAsInt = (int) delay;
+        int delayAsInt = (int) delay - 1;
         
-       SetModeError(delayAsInt);
-
        DOTween.Kill(this);
        
-       var seq = DOTween.Sequence()
-                        .SetId(this);
+       var seq = DOTween.Sequence().SetId(this);
        
-       for (int i = 1; i < delayAsInt; i++)
+       for (int i = 0; i < delayAsInt; i++)
        {
            var index = i;
            
@@ -78,29 +91,62 @@ public class UITimeSyncWindowView : UIGenericPopupWindowView
     {
         UITimeSyncWindowModel windowModel = Model as UITimeSyncWindowModel;
         
-        imageSpinner.gameObject.SetActive(false);
-        imageSuccess.gameObject.SetActive(false);
-        imageError.gameObject.SetActive(true);
-        message.Text = string.Format(windowModel.ErrorText, remainingTime);
+        SetTitle(string.Format(windowModel.TitleError, remainingTime));
+        SetMessage(windowModel.MessageError);
+        
+        if(state == WindowState.Error) return;
+
+        state = WindowState.Error;
+        
+        DOTween.Kill(imageError, true);
+        
+        imageSuccess.DOScale(0, 0.1f).SetId(imageError);
+        
+        imageError.localScale = Vector3.zero;
+            
+        imageError.DOScale(1, 0.25f)
+            .SetEase(Ease.OutBack)
+            .OnComplete(() => imageError.transform.localScale = Vector3.one)
+            .SetId(imageError);
     }
     
     private void SetModeConnecting()
     {
         UITimeSyncWindowModel windowModel = Model as UITimeSyncWindowModel;
         
-        imageSpinner.gameObject.SetActive(true);
-        imageError.gameObject.SetActive(false);
-        imageSuccess.gameObject.SetActive(false);
-        message.Text = windowModel.ConnectingText;
+        SetTitle(windowModel.TitleConnecting);
+        SetMessage(windowModel.MessageConnecting);
+        
+        if(state == WindowState.Connecting) return;
+
+        state = WindowState.Connecting;
+        
+        DOTween.Kill(imageError, true);
+        
+        imageError.DOScale(0, 0.1f).SetId(imageError);
+        imageSuccess.DOScale(0, 0.1f).SetId(imageError);
     }
     
     private void SetModeSuccess()
     {
         UITimeSyncWindowModel windowModel = Model as UITimeSyncWindowModel;
         
-        imageSpinner.gameObject.SetActive(false);
-        imageSuccess.gameObject.SetActive(true);
-        imageError.gameObject.SetActive(false);
-        message.Text = windowModel.SuccessText;
+        SetTitle(windowModel.TitleSuccess);
+        SetMessage(windowModel.MessageSuccess);
+        
+        if(state == WindowState.Success) return;
+
+        state = WindowState.Success;
+        
+        DOTween.Kill(imageError, true);
+        
+        imageError.DOScale(0, 0.1f).SetId(imageError);
+        
+        imageSuccess.localScale = Vector3.zero;
+            
+        imageSuccess.DOScale(1, 0.25f)
+            .SetEase(Ease.OutBack)
+            .OnComplete(() => imageSuccess.transform.localScale = Vector3.one)
+            .SetId(imageError);
     }
 }
