@@ -1,6 +1,7 @@
 #if BFG_PURCHASES
 
 using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class BfgIapProvider : IapProvider
@@ -28,6 +29,13 @@ public class BfgIapProvider : IapProvider
                 PurchaseControllerProductIds.nonConsumableAmazonProductIds.Add(item.AmazonAppStoreId);
             }
         }
+        
+#if UNITY_EDITOR
+        DOTween.Sequence()
+               .InsertCallback(UnityEngine.Random.Range(0f, 3f),
+                    () => { onInitComplete(IapErrorCode.NoError); });
+        return;
+#endif
         
         PurchaseController.StartService();
             
@@ -106,7 +114,21 @@ public class BfgIapProvider : IapProvider
     
     protected override void StartPurchase(string productId)
     {
-        PurchaseController.Instance.Purchase(IdToStoreId(productId));
+#if UNITY_EDITOR
+        DOTween.Sequence()
+               .InsertCallback(UnityEngine.Random.Range(0f, 2f), () =>
+                {
+                    OnPurchaseOK?.Invoke(productId, null);
+                });
+        
+        return;
+#endif
+        
+        bool canPurchase = PurchaseController.Instance.Purchase(IdToStoreId(productId));
+        if (!canPurchase)
+        {
+            OnPurchaseFail?.Invoke(productId, IapErrorCode.PurchaseFailReasonUnknown);
+        }
     }
 
     public override void RestorePurchases()

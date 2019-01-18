@@ -46,7 +46,7 @@ public class IapCollection
         int index = storeIds.IndexOf(storeId);
         if (index == -1)
         {
-            throw new Exception($"[IapsCollection] => GetIdByStoreId({storeId}): Not found!");
+            throw new Exception($"[IapsCollection] => GetIdByStoreId({storeId}): Not found! Available ids: {string.Join(" | ", storeIds)}");
         }
 
         return InapIds[index];
@@ -59,7 +59,7 @@ public class IapCollection
         int index = InapIds.IndexOf(id);
         if (index == -1)
         {
-            throw new Exception($"[IapsCollection] => GetStoreId({id}): Not found!");
+            throw new Exception($"[IapsCollection] => GetStoreId({id}): Not found! Available ids: {string.Join(" | ", InapIds)}");;
         }
 
         return storeIds[index];
