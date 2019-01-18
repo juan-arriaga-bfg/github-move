@@ -10,25 +10,34 @@ public class InternetMonitor : IInternetMonitor
 
     private const float CHECK_INTERVAL = 1f;
 
+    private bool isInitialized;
+
     public Action<InternetConnectionState> OnStateChange { get; set; }
-    
+
     public IInternetMonitor SetNetworkCheckMethod(Func<bool> checkMethod)
     {
         DOTween.Kill(this);
-        
+
         this.checkMethod = checkMethod;
+
+        isInitialized = checkMethod != null;
 
         DOTween.Sequence()
                .SetId(this)
                .AppendCallback(Check)
                .AppendInterval(CHECK_INTERVAL)
                .SetLoops(int.MaxValue);
-        
+
         return this;
     }
 
     private void Check()
     {
+        if (!isInitialized)
+        {
+            return;
+        }
+
         bool isAvailable = checkMethod();
 
         switch (state)
@@ -36,7 +45,7 @@ public class InternetMonitor : IInternetMonitor
             case InternetConnectionState.Unknown:
                 state = isAvailable ? InternetConnectionState.Available : InternetConnectionState.NotAvailable;
                 break;
-            
+
             case InternetConnectionState.Available:
                 if (!isAvailable)
                 {
@@ -47,7 +56,7 @@ public class InternetMonitor : IInternetMonitor
                 }
 
                 break;
-            
+
             case InternetConnectionState.NotAvailable:
                 if (isAvailable)
                 {
@@ -64,5 +73,18 @@ public class InternetMonitor : IInternetMonitor
     private void SendEvent()
     {
         OnStateChange?.Invoke(state);
+    }
+
+    public bool IsInternetAvailable
+    {
+        get
+        {
+            if (!isInitialized)
+            {
+                throw new Exception("[InternetMonitor] => NetworkCheckMethod is not specified");
+            }
+
+            return checkMethod();
+        }
     }
 }

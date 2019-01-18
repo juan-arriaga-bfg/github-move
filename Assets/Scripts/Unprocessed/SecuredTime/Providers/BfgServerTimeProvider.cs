@@ -26,6 +26,13 @@ public class BfgServerTimeProvider : IServerTimeProvider
         //        .AppendInterval(2)
         //        .AppendCallback(() => { onComplete(false, 0); });
         // return;
+
+        if (!InternetMonitorService.Current.IsInternetAvailable)
+        {
+            Debug.LogWarning("[BfgServerTimeProvider] => GetServerTime: No internet connection");
+            onComplete(false, 0);
+            return;
+        }
         
         HTTPRequest r = new HTTPRequest(new Uri(Url), (request, response) =>
         {
