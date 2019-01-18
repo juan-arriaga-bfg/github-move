@@ -26,6 +26,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         AsyncInitManager asyncInitManager = new AsyncInitManager();
         AsyncInitService.Instance.SetManager(asyncInitManager);
         asyncInitManager
+           .AddComponent(new InternetMonitorInitComponent())
            .AddComponent(new BfgSdkUnityMessageHandlerInitComponent())
            .AddComponent(new SecuredTimeServiceInitComponent())
            .AddComponent(new BfgSdkGdprInitComponent())
