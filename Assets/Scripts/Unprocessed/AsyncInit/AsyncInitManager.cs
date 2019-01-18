@@ -136,7 +136,9 @@ public class AsyncInitManager :  IAsyncInitManager
 
         float totalProgress = progress / total;
 
+#if DEBUG
         Debug.Log($"[Loading] => Total progress: {initedComponents.Count}/{components.Count} - {(int)(totalProgress * 100)}%");
+#endif
         
         return totalProgress;
     }
