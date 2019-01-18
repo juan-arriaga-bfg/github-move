@@ -1,3 +1,5 @@
+#if UNITY_PURCHASES
+
 using System;
 using UnityEngine;
 using UnityEngine.Purchasing;
@@ -222,3 +224,5 @@ public class UnityIapProvider : IapProvider, IStoreListener
         }
     }
 }
+
+#endif
