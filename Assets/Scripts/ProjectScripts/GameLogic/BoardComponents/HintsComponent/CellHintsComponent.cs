@@ -76,7 +76,11 @@ public class CellHintsComponent : IECSComponent
 
             if (max < CurrentWeight * 2)
             {
-                hintCells = AddCells(hintCells, hints[0].Cells);
+                var cells = hints[0].Cells;
+                
+                hintCells = AddCells(hintCells, cells);
+                hintBigCells = AddBigCells(hintBigCells, cells);
+                
                 continue;
             }
             
@@ -116,22 +120,8 @@ public class CellHintsComponent : IECSComponent
 
             var cells = hints[0].Cells;
             
-            cells.Sort((a, b) => a.X.CompareTo(b.X));
-            
-            var cell = cells[0];
-
-            foreach (var item in cells)
-            {
-                if(item.X != cell.X) break;
-                
-                if(item.Y >= cell.Y) continue;
-                
-                cell = item;
-            }
-            
             hintCells = AddCells(hintCells, cells);
-            
-            if(hintBigCells.Contains(cell) == false) hintBigCells.Add(cell);
+            hintBigCells = AddBigCells(hintBigCells, cells);
         }
         
         // show
@@ -157,6 +147,25 @@ public class CellHintsComponent : IECSComponent
         }
         
         selectCells = null;
+    }
+
+    private List<BoardPosition> AddBigCells(List<BoardPosition> cells, List<BoardPosition> hint)
+    {
+        hint.Sort((a, b) => a.X.CompareTo(b.X));
+        
+        var cell = hint[0];
+        
+        foreach (var item in hint)
+        {
+            if(item.X != cell.X) break;
+            if(item.Y >= cell.Y) continue;
+            
+            cell = item;
+        }
+        
+        if(cells.Contains(cell) == false) cells.Add(cell);
+        
+        return cells;
     }
     
     private List<BoardPosition> GetHintList(List<List<int>> pattern, BoardLogicComponent logic, BoardPosition start, out int weight)
