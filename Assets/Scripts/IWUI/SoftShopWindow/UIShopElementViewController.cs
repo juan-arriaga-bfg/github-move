@@ -104,7 +104,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
                 NSAudioService.Current.Play(SoundId.BuySoftCurr, false, 1);
         }
         
-        board.ActionExecutor.AddAction(new EjectionPieceAction
+        board.ActionExecutor.AddAction(new SpawnRewardPiecesAction()
         {
             GetFrom = () => position,
             Pieces = piecesReward,
@@ -115,7 +115,8 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
                 if(view != null) view.StartRewardAnimation();
                     
                 AddResourceView.Show(position, currencysReward);
-            }
+            },
+            EnabledBottomHighlight = true
         });
     }
 }

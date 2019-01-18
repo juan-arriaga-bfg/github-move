@@ -99,7 +99,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 
 		contentEntity.Def.State = MarketItemState.Claimed;
 		
-		board.ActionExecutor.AddAction(new EjectionPieceAction
+		board.ActionExecutor.AddAction(new SpawnRewardPiecesAction()
 		{
 			GetFrom = () => rewardPosition.Value,
 			Pieces = piecesReward,
@@ -110,7 +110,8 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 				if(view != null) view.StartRewardAnimation();
                     
 				AddResourceView.Show(rewardPosition.Value, currencysReward);
-			}
+			},
+			EnabledBottomHighlight = true
 		});
 	}
 	
