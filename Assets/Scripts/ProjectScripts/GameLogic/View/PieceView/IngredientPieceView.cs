@@ -41,6 +41,6 @@ public class IngredientPieceView : PieceBoardElementView
         sequence.Append(body.DOScale(Vector3.one * 1.1f, 0.55f).SetEase(Ease.OutSine));
         sequence.Append(body.DOScale(Vector3.one, 0.40f).SetEase(Ease.OutSine));
         
-        //sequence.Goto(Random.Range(0, 8), true);
+        sequence.Goto(Random.Range(0, 0.95f), true);
     }
 }

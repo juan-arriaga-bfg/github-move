@@ -10,14 +10,13 @@
     Progress = -1006,
     Warning = -1007,
     Lock = -1008,
-    Cell = -1009,
-    OrderBubble = -1010,
-    Firefly = -1011,
-    DefaultWorker = -1012,
-    ExtraWorker = -1013,
-    TutorialMergeFinger = -1014,
-    PieceRemover = -1015,
-    RewardsBubble = -1016,
-    GodRay = -1017,
-    UIContainer = -1018
+    OrderBubble = -1009,
+    Firefly = -1010,
+    DefaultWorker = -1011,
+    ExtraWorker = -1012,
+    TutorialMergeFinger = -1013,
+    PieceRemover = -1014,
+    RewardsBubble = -1015,
+    GodRay = -1016,
+    UIContainer = -1017
 }
