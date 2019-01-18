@@ -37,6 +37,20 @@ public class UITimeSyncWindowView : UIGenericPopupWindowView
         timeServiceInitComponent.OnSuccess += OnSuccess;
     }
 
+    protected override void PlayShowSound()
+    {
+    }
+    
+    protected override void PlayCloseSound()
+    {
+    }
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        if(btnBackLayer != null) btnBackLayer.OnClick(() => { });
+    }
+
     public override void OnViewClose()
     {
         base.OnViewClose();
