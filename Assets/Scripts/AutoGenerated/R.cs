@@ -214,4 +214,5 @@ public class R
      public const string NPC_19Piece = "NPC_19Piece";
      public const string ResourceCarrierWithObject = "ResourceCarrierWithObject";
      public const string PiecesLowHighlightMaterial = "PiecesLowHighlightMaterial";
+     public const string BigCell = "BigCell";
 }

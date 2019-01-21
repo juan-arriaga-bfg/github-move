@@ -245,6 +245,8 @@ public class CodexItem : IWUIWindowViewController
 
     public void OnClick()
     {
+        if(Context == null || Context.Context == null) return;
+        
         switch (def.State)
         {
             case CodexItemState.FullLock:

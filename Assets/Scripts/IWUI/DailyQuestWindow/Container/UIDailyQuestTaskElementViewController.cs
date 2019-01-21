@@ -264,7 +264,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
             DOTween.Sequence()// Delay to hide window
                    .InsertCallback(0.5f, () =>
                     {
-                        board.ActionExecutor.AddAction(new EjectionPieceAction
+                        board.ActionExecutor.AddAction(new SpawnRewardPiecesAction()
                         {
                             From = position,
                             Pieces = pieces,
@@ -278,7 +278,8 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
                                 onComplete?.Invoke();
                             },
-                            OnSuccess = (droppedPiecesPositions) => { HighlightDroppedPieces(droppedPiecesPositions); }
+                            EnabledTopHighlight = true,
+                            EnabledBottomHighlight = true
                         });
                     });
         };

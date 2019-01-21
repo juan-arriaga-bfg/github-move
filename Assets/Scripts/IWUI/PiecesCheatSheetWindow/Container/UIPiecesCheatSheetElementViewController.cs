@@ -31,6 +31,12 @@ public class UIPiecesCheatSheetElementViewController : UIContainerElementViewCon
         lblName.Text = pieceTypeDef.Abbreviations[0];
         lblId.Text = $"id {pieceId}";
         CreateIcon(PieceType.Parse(pieceId));
+        
+        rootButton
+            .ToState(GenericButtonState.Active)
+            .SetDragDirection(new Vector2(0f, 1f))
+            .SetDragThreshold(100f)
+            .OnBeginDrag(OnBeginDragEventHandler);
     }
     
     public override void OnViewShowCompleted()
@@ -48,41 +54,12 @@ public class UIPiecesCheatSheetElementViewController : UIContainerElementViewCon
     {
         if (BoardService.Current.FirstBoard.BoardLogic.DragAndDrop.IsActive) return;
   
-        if (Input.touchSupported == false)
-        {
-            pointerId = 0;
-        }
+        if (Input.touchSupported == false) pointerId = 0;
         
         BoardService.Current.FirstBoard.BoardLogic.DragAndDrop.Begin(pointerId, pieceId);
     }
 
-    private void OnClickEventHandler(UIButtonViewController obj)
-    {
-        BoardPosition pos = new BoardPosition(23, 10, BoardLayer.Piece.Layer);
-        var availablePoints = new List<BoardPosition>();
-
-        BoardService.Current.FirstBoard.BoardLogic.EmptyCellsFinder.FindNearWithPointInCenter(pos, availablePoints, 1, 100);
-        if (availablePoints.Count > 0)
-        {
-            var window = context as UIBaseWindowView;
-            
-            DOTween.Sequence()
-                   .Append(window.GetCanvasGroup().DOFade(0f, 0.1f))
-                   .AppendInterval(0.3f)
-                   .AppendCallback(() =>
-                    {
-                        BoardService.Current.FirstBoard.ActionExecutor.AddAction(new CreatePieceAtAction
-                        {
-                            At = availablePoints[0],
-                            PieceTypeId = pieceId
-                        });
-                    })
-                   .AppendInterval(0.6f)
-                   .Append(window.GetCanvasGroup().DOFade(1f, 0.1f));
-        }
-    }
-    
-    protected void CreateIcon(string id)
+    private void CreateIcon(string id)
     {
         if (anchor == null) return;
         if (content != null) UIService.Get.PoolContainer.Return(content.gameObject);

@@ -7,7 +7,7 @@ public class GodRayView : BoardElementView
     [SerializeField] private ParticleSystem particleTop;
     [SerializeField] private ParticleSystem particleBottom;
 
-    const float SMOOTH_STOP_TIME = 0.5f;
+    const float SMOOTH_STOP_TIME = 0.9f;
 
     private float lifetime;
 
@@ -78,8 +78,10 @@ public class GodRayView : BoardElementView
         CleanUp();
     }
 
-    public static GodRayView Show(BoardPosition position, float lifetime, Action onHided, float offsetX = 0, float offsetY = 0, bool focus = false)
+    public static GodRayView Show(BoardPosition position, float lifetime, Action onHided, float offsetX = 0, float offsetY = 0, bool focus = false, bool enableTopHighlight = true, bool enableBottomHighlight = true)
     {
+      
+        
         var board = BoardService.Current.FirstBoard;
         var target = board.BoardLogic.GetPieceAt(position);
 
@@ -95,6 +97,9 @@ public class GodRayView : BoardElementView
         
         view.CachedTransform.localPosition = view.CachedTransform.localPosition + (Vector3.up * 2) + new Vector3(offsetX, offsetY);
         view.Show(onHided);
+        
+        view.particleTop.gameObject.SetActive(enableTopHighlight);
+        view.particleBottom.gameObject.SetActive(enableBottomHighlight);
 
         if (focus == false)
         {
@@ -122,6 +127,7 @@ public class GodRayView : BoardElementView
         
         var particles = new ParticleSystem.Particle[particleSystem.particleCount];
         int count = particleSystem.GetParticles(particles);
+        
         for (int i = 0; i < count; i++)
         {
             particles[i].remainingLifetime = Mathf.Min(particles[i].remainingLifetime, stopTime);

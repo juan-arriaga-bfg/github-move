@@ -514,16 +514,16 @@ public class PieceBoardElementView : BoardElementView
     }
 
 
-    public void ShowDropEffect(bool focus)
+    public void ShowDropEffect(bool focus, bool enableTopHighlight = true, bool enableBottomHighlight = true)
     {
         if (dropEffectView != null)
         {
             return;
         }
         
-        dropEffectView = GodRayView.Show(Piece.CachedPosition, 5, DestroyDropEffect, 0, 0, focus);
+        dropEffectView = GodRayView.Show(Piece.CachedPosition, 5, DestroyDropEffect, 0, 0, focus, enableTopHighlight, enableBottomHighlight);
         
-        dropEffectView.transform.SetParent(transform);
+        dropEffectView.transform.SetParent(transform, false);
         dropEffectView.transform.localPosition = Vector3.zero;
     }
 

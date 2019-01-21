@@ -20,7 +20,7 @@ public class CellHintsComponent : IECSComponent
 
     private int findId;
     private BoardPosition target;
-    private List<PartCellView> selectCells;
+    private List<BoardElementView> selectCells;
 
 	public void OnRegisterEntity(ECSEntity entity)
 	{
@@ -42,8 +42,9 @@ public class CellHintsComponent : IECSComponent
         
         var variants = new List<PartHint>();
         var hintCells = new List<BoardPosition>();
+        var hintBigCells = new List<BoardPosition>();
         
-        selectCells = new List<PartCellView>();
+        selectCells = new List<BoardElementView>();
         
         // search all variants
         foreach (var position in positions)
@@ -58,8 +59,7 @@ public class CellHintsComponent : IECSComponent
 
                 for (var j = 0; j < line.Count; j++)
                 {
-                    var weight = 0;
-                    var list = GetHintList(pattern, context, new BoardPosition(position.X - i, position.Y - j, position.Z), out weight);
+                    var list = GetHintList(pattern, context, new BoardPosition(position.X - i, position.Y - j, position.Z), out var weight);
 
                     if (list == null) continue;
 
@@ -76,7 +76,11 @@ public class CellHintsComponent : IECSComponent
 
             if (max < CurrentWeight * 2)
             {
-                hintCells = AddCells(hintCells, hints[0].Cells);
+                var cells = hints[0].Cells;
+                
+                hintCells = AddCells(hintCells, cells);
+                hintBigCells = AddBigCells(hintBigCells, cells);
+                
                 continue;
             }
             
@@ -113,17 +117,22 @@ public class CellHintsComponent : IECSComponent
             hints.Sort((a, b) => -a.Weight.CompareTo(b.Weight));
             
             if(hints[0].Weight == CurrentWeight * 4 && hints[0].Cells.Contains(target) == false) continue;
+
+            var cells = hints[0].Cells;
             
-            hintCells = AddCells(hintCells, hints[0].Cells);
+            hintCells = AddCells(hintCells, cells);
+            hintBigCells = AddBigCells(hintBigCells, cells);
         }
         
         // show
         foreach (var point in hintCells)
         {
-            var cell = context.Context.RendererContext.CreateBoardElementAt<PartCellView>(R.Cell, new BoardPosition(point.X, point.Y, 21));
-
-            cell.ToggleSelection(true);
-            selectCells.Add(cell);
+            InitCell(R.Cell, new BoardPosition(point.X, point.Y, BoardLayer.Default.Layer));
+        }
+        
+        foreach (var point in hintBigCells)
+        {
+            InitCell(R.BigCell, new BoardPosition(point.X, point.Y, BoardLayer.MAX.Layer));
         }
     }
     
@@ -131,15 +140,32 @@ public class CellHintsComponent : IECSComponent
     {
         if(selectCells == null) return;
         
-        
-        
         foreach (var cell in selectCells)
         {
-            cell.ToggleSelection(false);
+            cell.SetCustomMaterial(BoardElementMaterialType.PiecesLowHighlightMaterial, false);
             context.Context.RendererContext.DestroyElement(cell);
         }
         
         selectCells = null;
+    }
+
+    private List<BoardPosition> AddBigCells(List<BoardPosition> cells, List<BoardPosition> hint)
+    {
+        hint.Sort((a, b) => a.X.CompareTo(b.X));
+        
+        var cell = hint[0];
+        
+        foreach (var item in hint)
+        {
+            if(item.X != cell.X) break;
+            if(item.Y >= cell.Y) continue;
+            
+            cell = item;
+        }
+        
+        if(cells.Contains(cell) == false) cells.Add(cell);
+        
+        return cells;
     }
     
     private List<BoardPosition> GetHintList(List<List<int>> pattern, BoardLogicComponent logic, BoardPosition start, out int weight)
@@ -199,5 +225,13 @@ public class CellHintsComponent : IECSComponent
         }
 
         return cells;
+    }
+
+    private void InitCell(string id, BoardPosition point)
+    {
+        var cell = context.Context.RendererContext.CreateBoardElementAt<BoardElementView>(id, point);
+        
+        cell.SetCustomMaterial(BoardElementMaterialType.PiecesLowHighlightMaterial, true);
+        selectCells.Add(cell);
     }
 }

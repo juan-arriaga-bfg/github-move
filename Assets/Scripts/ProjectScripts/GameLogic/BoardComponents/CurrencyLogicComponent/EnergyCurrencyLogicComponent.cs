@@ -9,7 +9,7 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
     private TimerComponent timer;
     public TimerComponent Timer => timer ?? (timer = GetComponent<TimerComponent>(TimerComponent.ComponentGuid));
 
-    public int Delay { get; set; }
+    private int delay => GameDataService.Current.ConstantsManager.EnergyRefillDelay; 
     
     public Action OnExecute;
     
@@ -17,10 +17,12 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
 
     public override void OnRegisterEntity(ECSEntity entity)
     {
+        RegisterComponent(new TimerComponent());
+        
         targetItem = ProfileService.Current.Purchases.GetStorageItem(Currency.Energy.Name);
         limitItem = ProfileService.Current.Purchases.GetStorageItem(Currency.EnergyLimit.Name);
         
-        Timer.Delay = Delay;
+        Timer.Delay = delay;
         Timer.OnComplete += StepComplete;
         
         // Timer.StartTime = DateTime.Now;
@@ -44,7 +46,7 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         
         if(save == null) return;
         
-        var refil = DateTimeExtension.CountOfStepsPassedWhenAppWasInBackground(save.EnergyLastUpdate, Delay, out Timer.StartTime);
+        var refil = DateTimeExtension.CountOfStepsPassedWhenAppWasInBackground(save.EnergyLastUpdate, delay, out Timer.StartTime);
         
         Add(Mathf.Min(refil, limitItem.Amount - targetItem.Amount));
         

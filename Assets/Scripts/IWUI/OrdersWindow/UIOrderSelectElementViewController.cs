@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -125,11 +126,18 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
 
     private void ShowTutorArrow()
     {
-        var contentEntity = entity as UIOrderElementEntity;
+        if(entity is UIOrderElementEntity == false || BoardService.Current.FirstBoard.TutorialLogic.CheckFirstOrder()) return;
 
-        if (contentEntity == null || order.State != OrderState.Complete || BoardService.Current.FirstBoard.TutorialLogic.CheckFirstOrder()) return;
-        
-        (context as UIBaseWindowView).CachedHintArrowComponent.ShowArrow(tutorAnchor, 5f);
+        switch (order.State)
+        {
+            case OrderState.InProgress:
+                (context as UIBaseWindowView).CachedHintArrowComponent.HideArrow(tutorAnchor);
+                break;
+            case OrderState.Enough:
+            case OrderState.Complete:
+                (context as UIBaseWindowView).CachedHintArrowComponent.ShowArrow(tutorAnchor, 5f);
+                break;
+        }
     }
 
     public override void OnViewCloseCompleted()
