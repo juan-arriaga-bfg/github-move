@@ -273,6 +273,16 @@ public static class TutorialBuilder
                 
                 break;
             }
+            case 22: // use Mine
+            {
+                step = new SelectStorageTutorialStep {Delay = 2, IsFastStart = true, Targets = new List<int>{PieceType.MN_B.Id}};
+                
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "12_UseMine", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckCurrencyTutorialCondition {Target = -1, Currency = new List<string> {Currency.Worker.Name}, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "12_UseMine", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Hard}, true);
+                
+                break;
+            }
             default:
                 return null;
         }
