@@ -35,6 +35,8 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
 
     public float HourBasePrice;
     public float DayBasePrice;
+    
+    public int EnergyRefillDelay;
 
     public override void OnRegisterEntity(ECSEntity entity)
     {
