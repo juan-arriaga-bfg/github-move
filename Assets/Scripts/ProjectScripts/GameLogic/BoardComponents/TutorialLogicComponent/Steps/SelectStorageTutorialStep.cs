@@ -36,7 +36,6 @@ public class SelectStorageTutorialStep : DelayTutorialStep
             
         if (bubble != null)
         {
-            bubble.Attention();
             CheckBubble();
             return;
         }
@@ -79,25 +78,30 @@ public class SelectStorageTutorialStep : DelayTutorialStep
         KillBubble();
         
         var sequence = DOTween.Sequence().SetId(this).SetLoops(int.MaxValue);
-        
-        sequence.InsertCallback(1f, () =>
+
+        sequence.AppendCallback(Bounce);
+        sequence.AppendInterval(1f);
+        sequence.AppendCallback(Bounce);
+        sequence.AppendInterval(2f);
+    }
+
+    private void Bounce()
+    {
+        if (bubble != null)
         {
-            if (bubble != null)
-            {
-                bubble.Attention();
-                return;
-            }
+            bubble.Attention();
+            return;
+        }
 
-            Find();
+        Find();
             
-            if (bubble != null)
-            {
-                bubble.Attention();
-                return;
-            }
+        if (bubble != null)
+        {
+            bubble.Attention();
+            return;
+        }
 
-            if (IsExecuteable()) DOTween.Kill(this);
-        });
+        if (IsExecuteable()) DOTween.Kill(this);
     }
     
     private void Find()
