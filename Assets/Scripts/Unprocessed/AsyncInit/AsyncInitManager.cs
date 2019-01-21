@@ -14,14 +14,17 @@ public class AsyncInitManager :  IAsyncInitManager
     private readonly List<AsyncInitComponentBase> componentsInProgress = new List<AsyncInitComponentBase>();
     private readonly List<AsyncInitComponentBase> initedComponents = new List<AsyncInitComponentBase>();
 
+    private Action onComplete;
+    
     public AsyncInitManager AddComponent(AsyncInitComponentBase component)
     {
         components.Add(component);
         return this;
     }
 
-    public void Run()
+    public void Run(Action onComplete)
     {
+        this.onComplete = onComplete;
         ExecuteNext();
     }
 
@@ -29,6 +32,7 @@ public class AsyncInitManager :  IAsyncInitManager
     {
         if (components.Count == 0)
         {
+            onComplete?.Invoke();
             return;
         }
 

@@ -35,25 +35,24 @@ public class HardCurrencyHelper
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
 
-    private void OnPurchaseOk(string productid, string receipt)
+    private void OnPurchaseOk(string productId, string receipt)
     {
         UIWaitWindowView.Hide();
-        onComplete?.Invoke(true, productid);
+        
+        ProvideReward(productId);
+        
+        onComplete?.Invoke(true, productId);
         onComplete = null;
-
-        ProvideReward(productid);
     }
 
-    private void ProvideReward(string productId)
+    public static void ProvideReward(string productId)
     {
         List<ShopDef> defs = GameDataService.Current.ShopManager.Defs[Currency.Crystals.Name];
-        var def = defs.FirstOrDefault(e => e.PurchaseKay == productId);
+        var def = defs.FirstOrDefault(e => e.PurchaseKey == productId);
 
         if (def == null)
         {
             Debug.LogError($"ProvideReward: No product with purchase key '{productId}' is defined in GameDataService.Current.ShopManager.Defs[Currency.Crystals.Name]");
-            OnPurchaseFail(productId, IapErrorCode.PurchaseFailNoProductWithIdDefined);
-
             return;
         }
         
@@ -61,6 +60,8 @@ public class HardCurrencyHelper
         var price = def.Price;
         
         CurrencyHellper.PurchaseAndProvide(products, price);
+        
+        IapService.Current.IapProvidedToPlayer(productId);
     }
 
     public void Purchase(string productId, Action<bool, string> onComplete)

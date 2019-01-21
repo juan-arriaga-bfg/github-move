@@ -30,7 +30,11 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
            .AddComponent(new BfgSdkUnityMessageHandlerInitComponent())
             
            .AddComponent(new IapInitComponent()
-                .SetDependency(typeof(BfgSdkUnityMessageHandlerInitComponent)))
+                .SetDependency(typeof(BfgSdkUnityMessageHandlerInitComponent))
+                .SetDependency(typeof(ConfigsAndManagersInitComponent)))
+            
+           .AddComponent(new IapRestoreInitComponent()
+               .SetDependency(typeof(IapInitComponent)))
             
            .AddComponent(new SecuredTimeServiceInitComponent())
            .AddComponent(new BfgSdkGdprInitComponent())
@@ -47,8 +51,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
                .SetDependency(typeof(LocalBundlesInitComponent))
                .SetDependency(typeof(SecuredTimeServiceInitComponent)))
             
-           .Run();
-            
+           .Run(onComplete);
     }
 
     void OnApplicationPause(bool pauseStatus)

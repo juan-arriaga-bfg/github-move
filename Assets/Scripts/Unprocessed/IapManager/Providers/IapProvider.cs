@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public abstract class IapProvider
 {
@@ -28,6 +29,13 @@ public abstract class IapProvider
     
     public void Purchase(string id)
     {
+        if (string.IsNullOrEmpty(id) || !IapCollection.InapIds.Contains(id))
+        {
+            Debug.LogError($"[IapProvider] => Purchase id: '{id ?? "null"}' not defined in IapCollection");
+            OnPurchaseFail?.Invoke(id, IapErrorCode.PurchaseFailNoProductWithIdDefined);
+            return;
+        }
+        
         StartPurchase(id);
     }
 

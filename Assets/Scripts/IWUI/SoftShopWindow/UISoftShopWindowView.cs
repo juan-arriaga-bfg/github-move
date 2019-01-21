@@ -46,9 +46,9 @@ public class UISoftShopWindowView : UIGenericPopupWindowView
             var entity = new UIShopElementEntity
             {
                 ContentId = def.Icon,
+                PurchaseKey = def.PurchaseKey,
                 Products = def.Products,
                 Price = def.Price,
-                PurchaseKey = def.PurchaseKay,
                 OnSelectEvent = null,
                 OnDeselectEvent = null
             };

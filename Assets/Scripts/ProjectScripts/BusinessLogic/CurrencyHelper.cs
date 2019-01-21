@@ -504,12 +504,13 @@ public static class CurrencyHellper
     public static void PurchaseAndProvide(List<CurrencyPair> products, CurrencyPair price)
     {
         Purchase(products, price, success =>
-        {
-            if (success)
             {
-                SpawnReward(products);
-            }
-        });
+                if (success)
+                {
+                    SpawnReward(products);
+                }
+            },
+            new Vector2(Screen.width / 2f, Screen.height / 2f));
     }
     
     private static void SpawnReward(List<CurrencyPair> reward)

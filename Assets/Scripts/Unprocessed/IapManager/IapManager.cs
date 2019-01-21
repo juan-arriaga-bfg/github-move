@@ -91,6 +91,8 @@ public class IapManager : ECSEntity, IIapManager
 
     private void OnPurchaseOkCallback(string productId, string receipt)
     {
+        Debug.Log($"[IapManager] => OnPurchaseOkCallback: productId: '{productId}' with receipt:\n{receipt}");
+        
         string storeId = iapProvider.IapCollection.GetStoreId(productId);
 
         Validate(storeId, receipt, (result) =>
@@ -230,7 +232,9 @@ public class IapManager : ECSEntity, IIapManager
             var priceStr = iapProvider.GetLocalizedPriceStr(item.Id);
             if (string.IsNullOrEmpty(priceStr))
             {
+#if !UNITY_EDITOR
                 Debug.LogError($"[IapManager] => InitPriceCache: price is null for {item.Id}");
+#endif
                 continue;
             }
 
@@ -534,7 +538,7 @@ public class IapManager : ECSEntity, IIapManager
 
     private void Validate(string productId, string receipt, Action<IapValidationResult> onComplete)
     {
-        Debug.Log($"[IapManager] => Validate: productId: '{productId}' with receipt:\n{receipt}");
+        Debug.Log($"[IapManager] => Validate: productId: '{productId}'");
         
         if (validators == null || validators.Count == 0)
         {

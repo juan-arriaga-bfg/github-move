@@ -4,9 +4,8 @@ public class IapInitComponent : AsyncInitComponentBase
 {
     public override void Execute()
     {
-        // InitIapService();
-        // InitRestoredPurchasesProvider();
-        
+        InitIapService();
+
         isCompleted = true;
         OnComplete(this);
     }
@@ -33,42 +32,42 @@ public class IapInitComponent : AsyncInitComponentBase
 #region IAPS
                                 .Add(new IapDefinition
                                  {
-                                     Id = "coins1",
+                                     Id = "iap1",
                                      GooglePlayId     = "com.bigfishgames.mergetalesgoog.tier2",
                                      AppleAppStoreId  = "vi.tier2.com.bigfishgames.mergetalesios",
                                      Consumable = true
                                  })
                                 .Add(new IapDefinition
                                  {
-                                     Id = "coins2",
+                                     Id = "iap2",
                                      GooglePlayId     = "com.bigfishgames.mergetalesgoog.5",
                                      AppleAppStoreId  = "vi.tier5.com.bigfishgames.mergetalesios",
                                      Consumable = true
                                  })
                                 .Add(new IapDefinition
                                  {
-                                     Id = "coins3",
+                                     Id = "iap3",
                                      GooglePlayId     = "com.bigfishgames.mergetalesgoog.tier10",
                                      AppleAppStoreId  = "vi.tier10.com.bigfishgames.mergetalesios",
                                      Consumable = true
                                  })
                                 .Add(new IapDefinition
                                  {
-                                     Id = "coins4",
+                                     Id = "iap4",
                                      GooglePlayId     = "com.bigfishgames.mergetalesgoog.tier20",
                                      AppleAppStoreId  = "vi.tier20.com.bigfishgames.mergetalesios",
                                      Consumable = true
                                  })
                                 .Add(new IapDefinition
                                  {
-                                     Id = "coins5",
+                                     Id = "iap5",
                                      GooglePlayId     = "com.bigfishgames.mergetalesgoog.tier50",
                                      AppleAppStoreId  = "vi.tier50.com.bigfishgames.mergetalesios",
                                      Consumable = true
                                  })
                                 .Add(new IapDefinition
                                  {
-                                     Id = "coins6",
+                                     Id = "iap6",
                                      GooglePlayId     = "com.bigfishgames.mergetalesgoog.tier60",
                                      AppleAppStoreId  = "vi.tier60.com.bigfishgames.mergetalesios",
                                      Consumable = true
@@ -77,22 +76,4 @@ public class IapInitComponent : AsyncInitComponentBase
 #endregion
            .Init();
     }
-}
-
-public class RestoredPurchasesProvider : MonoBehaviour
-{
-    private void Start()
-    {
-        // IapService.Current.
-    }
-
-    private void OnApplicationPause(bool isPaused)
-    {
-        if (isPaused)
-        {
-            return;
-        }
-    }
-    
-    // private void Schedule
 }

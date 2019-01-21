@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class IapCollection
 {
@@ -46,7 +47,8 @@ public class IapCollection
         int index = storeIds.IndexOf(storeId);
         if (index == -1)
         {
-            throw new Exception($"[IapsCollection] => GetIdByStoreId({storeId}): Not found! Available ids: {string.Join(" | ", storeIds)}");
+            Debug.LogError($"[IapsCollection] => GetIdByStoreId({storeId}): Not found! Available ids: {string.Join(" | ", storeIds)}");
+            return null;
         }
 
         return InapIds[index];
@@ -59,7 +61,8 @@ public class IapCollection
         int index = InapIds.IndexOf(id);
         if (index == -1)
         {
-            throw new Exception($"[IapsCollection] => GetStoreId({id}): Not found! Available ids: {string.Join(" | ", InapIds)}");;
+            Debug.LogError($"[IapsCollection] => GetStoreId({id}): Not found! Available ids: {string.Join(" | ", InapIds)}");
+            return null;
         }
 
         return storeIds[index];

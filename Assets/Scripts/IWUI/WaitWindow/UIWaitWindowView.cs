@@ -85,7 +85,7 @@ public class UIWaitWindowView : IWUIWindowView
         window = UIService.Get.ShowWindow(UIWindowType.WaitWindow);
         
         UIWaitWindowView windowView = (UIWaitWindowView) window.CurrentView;
-        windowView.SetText("Please wait....");
+        windowView.SetText(LocalizationService.Get("window.wait.message", "window.wait.message"));
         windowView.timeout = 0;
         
         return windowView;
@@ -97,9 +97,12 @@ public class UIWaitWindowView : IWUIWindowView
         
         if (window != null)
         {
-            if (!window.WindowController.IsClosing)
+            var controller = window.WindowController;
+            
+            if (!controller.IsClosing)
             {
-                window.WindowController.CloseCurrentWindow();
+                controller.ForceStopShowing();
+                controller.CloseCurrentWindow();
             }
         }
     }

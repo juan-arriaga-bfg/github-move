@@ -79,9 +79,10 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         {
             if (isOk)
             {
-                isClick = true;
                 context.Controller.CloseCurrentWindow();
             }
+
+            isClick = false;
         });
     }
     

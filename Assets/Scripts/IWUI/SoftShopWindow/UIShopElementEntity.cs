@@ -18,8 +18,31 @@ public class UIShopElementEntity : UISimpleScrollElementEntity
         }
     }
 
-    public string ButtonLabel => Price.Currency == Currency.Cash.Name ? $"${Price.Amount}" : string.Format(LocalizationService.Get("common.button.buy", "common.button.buy {0}"), Price.ToStringIcon());
-    
+    public string ButtonLabel
+    {
+        get
+        {
+            string ret;
+            
+            if (Price.Currency == Currency.Cash.Name)
+            {
+                ret = IapService.Current.GetLocalizedPriceStr(PurchaseKey);
+                
+                if (string.IsNullOrEmpty(ret))
+                {
+                    ret = $"${Price.Amount}";
+                }
+            }
+            else
+            {
+                ret = string.Format(LocalizationService.Get("common.button.buy", "common.button.buy {0}"), Price.ToStringIcon());
+            }
+
+
+            return ret;
+        }
+    }
+
     public string PurchaseKey;
 
     public string NameLabel;

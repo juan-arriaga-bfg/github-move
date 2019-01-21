@@ -8,6 +8,18 @@ public static class DefaultSafeQueueBuilder
     /// </summary>
     public static QueueActionComponent BuildAndRun(string id, bool replaceIfExists, Action action)
     {
+        var ret = Build(id, replaceIfExists, action);
+
+        ProfileService.Current.QueueComponent.AddAction(ret, replaceIfExists);
+
+        return ret;
+    }
+    
+    /// <summary>
+    /// Compose action, but you should run it by yourself!
+    /// </summary>
+    public static QueueActionComponent Build(string id, bool replaceIfExists, Action action)
+    {
         var ret = new QueueActionComponent {Id = id}
                  .AddCondition(new OpenedWindowsQueueConditionComponent
                   {
@@ -23,9 +35,6 @@ public static class DefaultSafeQueueBuilder
                   })
                   
                  .SetAction(action);
-
-        ProfileService.Current.QueueComponent.AddAction(ret, replaceIfExists);
-
         return ret;
     }
     

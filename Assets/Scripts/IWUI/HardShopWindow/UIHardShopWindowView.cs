@@ -33,6 +33,7 @@ public class UIHardShopWindowView : UIGenericPopupWindowView
             var entity = new UIShopElementEntity
             {
                 ContentId = def.Icon,
+                PurchaseKey = def.PurchaseKey,
                 NameLabel = LocalizationService.Get(def.Name, def.Name),
                 Products = def.Products,
                 Price = def.Price,
