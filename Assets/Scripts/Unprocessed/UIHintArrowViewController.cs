@@ -2,7 +2,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class UIHintArrowViewController : IWUIWindowViewController
+public class UIHintArrowViewController : IWUIWindowViewController, IHintArrow
 {
     [SerializeField] private CanvasGroup viewAnchor;
     
@@ -105,7 +105,7 @@ public class UIHintArrowViewController : IWUIWindowViewController
     public virtual void Hide(bool isReturn)
     {
         if (gameObject.activeSelf == false) return;
-
+        HintArrowData.ClearCurrentArrow(this);
         if (isReturn)
         {
             DOTween.Kill(this);
@@ -115,6 +115,7 @@ public class UIHintArrowViewController : IWUIWindowViewController
         DOTween.Kill(this);
         var sequence = DOTween.Sequence().SetId(this);
         sequence.Append(viewAnchor.DOFade(0f, 0.35f));
+
         sequence.OnComplete(Return);
     }
 
@@ -122,6 +123,8 @@ public class UIHintArrowViewController : IWUIWindowViewController
     {
         gameObject.SetActive(true);
 
+        HintArrowData.SetNewArrow(this);
+        
         DOTween.Kill(this);
 
         if (!isShowing)
@@ -143,5 +146,9 @@ public class UIHintArrowViewController : IWUIWindowViewController
 
         return this;
     }
-    
+
+    public void Remove(float delay)
+    {
+        Hide();
+    }
 }

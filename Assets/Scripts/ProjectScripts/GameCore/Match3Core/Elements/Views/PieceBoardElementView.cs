@@ -17,6 +17,10 @@ public class PieceBoardElementView : BoardElementView
     [SerializeField] private Material defaultSelectionMaterial;
     [SerializeField] private Material highlightPieceMaterial;
 
+    public Action OnDragStartCallback;
+    public Action OnDragEndCallback;
+    public Action OnTapCallback;
+    
     private List<BoardElementView> lockedSubtrates = new List<BoardElementView>();
 
     private Animation cachedSelectionAnimation;
@@ -198,6 +202,8 @@ public class PieceBoardElementView : BoardElementView
         RemoveArrow();
 
         HideDropEffect();
+        
+        OnDragStartCallback?.Invoke();
 
         NSAudioService.Current.Play(SoundId.ObjectTap);
         
@@ -210,6 +216,7 @@ public class PieceBoardElementView : BoardElementView
     {
         
         Piece.Context.HintCooldown.Resume(this);
+        OnDragEndCallback?.Invoke();
         
         if (selectionView == null) return;
         
@@ -225,10 +232,14 @@ public class PieceBoardElementView : BoardElementView
         }
             
         ToggleSelection(false);
+        
+        
     }
 
     public virtual void OnTap(BoardPosition boardPos, Vector2 worldPos)
     {
+        OnTapCallback?.Invoke();
+        
         RemoveArrow();
         DOTween.Kill(selectedAnimationId);
         NSAudioService.Current.Stop(SoundId.ObjectRelease);

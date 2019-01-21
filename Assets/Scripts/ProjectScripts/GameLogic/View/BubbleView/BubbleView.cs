@@ -84,6 +84,7 @@ public class BubbleView : UIBoardView, IBoardEventListener
     {
         Context.Context.TutorialLogic.Pause(true);
         onClick?.Invoke(Context);
+        Context.ActorView?.OnTapCallback?.Invoke();
     }
     
     public override void SyncRendererLayers(BoardPosition boardPosition)
