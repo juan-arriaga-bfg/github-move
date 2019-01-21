@@ -38,7 +38,20 @@ public class RestoredPurchasesProvider : MonoBehaviour
 
             var action = DefaultSafeQueueBuilder.Build(id, true, () =>
             {
-                HardCurrencyHelper.ProvideReward(id);
+                var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+
+                model.Title = LocalizationService.Get("window.restore.purchase.title",       "window.restore.purchase.title");
+                model.Message = LocalizationService.Get("window.restore.purchase.message",   "window.restore.purchase.message");
+                model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
+
+                model.OnClose = () =>
+                {
+                    HardCurrencyHelper.ProvideReward(id);
+                };
+
+                // model.OnCancel = model.OnAccept;
+
+                UIService.Get.ShowWindow(UIWindowType.MessageWindow);
             });
             
             //todo: add more conditions to sequence many pendingIap

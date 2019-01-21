@@ -23,8 +23,9 @@
         profile.RegisterComponent(new SequenceSaveComponent());
         profile.RegisterComponent(new TutorialSaveComponent());
 //        profile.RegisterComponent(new CharacterSaveComponent());
-        profile.RegisterComponent(new QueueComponent());// todo: ensure that it is a good place to store QueueComponent
+        profile.RegisterComponent(new QueueComponent());
         profile.RegisterComponent(new MarketSaveComponent());
+        profile.RegisterComponent(new PendingIapSaveComponent());
     }
     
     public void SetDefaultSettings(UserProfile profile)
