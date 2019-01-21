@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class HardCurrencyHelper
 {
@@ -41,11 +44,23 @@ public class HardCurrencyHelper
         ProvideReward(productid);
     }
 
-    private void ProvideReward(string productid)
+    private void ProvideReward(string productId)
     {
-        var reward = 
+        List<ShopDef> defs = GameDataService.Current.ShopManager.Defs[Currency.Crystals.Name];
+        var def = defs.FirstOrDefault(e => e.PurchaseKay == productId);
+
+        if (def == null)
+        {
+            Debug.LogError($"ProvideReward: No product with purchase key '{productId}' is defined in GameDataService.Current.ShopManager.Defs[Currency.Crystals.Name]");
+            OnPurchaseFail(productId, IapErrorCode.PurchaseFailNoProductWithIdDefined);
+
+            return;
+        }
         
+        var products = def.Products;
+        var price = def.Price;
         
+        CurrencyHellper.PurchaseAndProvide(products, price);
     }
 
     public void Purchase(string productId, Action<bool, string> onComplete)

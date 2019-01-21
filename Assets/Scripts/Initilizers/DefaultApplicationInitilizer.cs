@@ -28,6 +28,10 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         asyncInitManager
            .AddComponent(new InternetMonitorInitComponent())
            .AddComponent(new BfgSdkUnityMessageHandlerInitComponent())
+            
+           .AddComponent(new IapInitComponent()
+                .SetDependency(typeof(BfgSdkUnityMessageHandlerInitComponent)))
+            
            .AddComponent(new SecuredTimeServiceInitComponent())
            .AddComponent(new BfgSdkGdprInitComponent())
            .AddComponent(new ConfigsAndManagersInitComponent())

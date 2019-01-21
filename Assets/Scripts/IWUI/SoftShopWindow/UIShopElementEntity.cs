@@ -19,6 +19,8 @@ public class UIShopElementEntity : UISimpleScrollElementEntity
     }
 
     public string ButtonLabel => Price.Currency == Currency.Cash.Name ? $"${Price.Amount}" : string.Format(LocalizationService.Get("common.button.buy", "common.button.buy {0}"), Price.ToStringIcon());
+    
+    public string PurchaseKey;
 
     public string NameLabel;
     

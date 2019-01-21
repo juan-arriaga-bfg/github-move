@@ -48,11 +48,11 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         var contentEntity = entity as UIShopElementEntity;
         
         if(entity == null || isClick == false) return;
-        
-        CurrencyHellper.Purchase(contentEntity.Products, contentEntity.Price, success =>
+
+        if (!IsBuyUsingCash())
         {
-            GetReward();
-        });
+            CurrencyHellper.PurchaseAndProvide(contentEntity.Products, contentEntity.Price);
+        }
     }
     
     private void OnBuyClick()
@@ -75,12 +75,11 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
     private void OnBuyUsingCash(UIShopElementEntity contentEntity)
     {
-        var model = UIService.Get.GetCachedModel<UIConfirmationWindowModel>(UIWindowType.ConfirmationWindow);
-
-        new HardCurrencyHelper().Purchase(contentEntity.ContentId, (isOk, productId) =>
+        new HardCurrencyHelper().Purchase(contentEntity.PurchaseKey, (isOk, productId) =>
         {
             if (isOk)
             {
+                isClick = true;
                 context.Controller.CloseCurrentWindow();
             }
         });
@@ -99,55 +98,18 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
             context.Controller.CloseCurrentWindow();
             return;
         }
-        
+
         var model = UIService.Get.GetCachedModel<UIConfirmationWindowModel>(UIWindowType.ConfirmationWindow);
 
         model.IsMarket = false;
         model.Icon = contentEntity.ContentId;
-        
+
         model.Price = contentEntity.Price;
         model.Product = contentEntity.Products[0];
-        
+
         model.OnAccept = context.Controller.CloseCurrentWindow;
         model.OnCancel = () => { isClick = false; };
-        
+
         UIService.Get.ShowWindow(UIWindowType.ConfirmationWindow);
-    }
-
-    private void GetReward()
-    {
-        var board = BoardService.Current.FirstBoard;
-        var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
-
-        if (positions.Count == 0) return;
-
-        var position = positions[0];
-        var contentEntity = entity as UIShopElementEntity;
-        
-        List<CurrencyPair> currencysReward;
-        var piecesReward = CurrencyHellper.FiltrationRewards(contentEntity.Products, out currencysReward);
-
-        foreach (var currency in currencysReward)
-        {
-            if(currency.Currency == Currency.Energy.Name)
-                NSAudioService.Current.Play(SoundId.BuyEnergy, false, 1);
-            if(currency.Currency == Currency.Coins.Name)
-                NSAudioService.Current.Play(SoundId.BuySoftCurr, false, 1);
-        }
-        
-        board.ActionExecutor.AddAction(new SpawnRewardPiecesAction()
-        {
-            GetFrom = () => position,
-            Pieces = piecesReward,
-            OnComplete = () =>
-            {
-                var view = board.RendererContext.GetElementAt(position) as CharacterPieceView;
-                
-                if(view != null) view.StartRewardAnimation();
-                    
-                AddResourceView.Show(position, currencysReward);
-            },
-            EnabledBottomHighlight = true
-        });
     }
 }

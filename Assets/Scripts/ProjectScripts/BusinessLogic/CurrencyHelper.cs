@@ -495,4 +495,55 @@ public static class CurrencyHellper
         
         return string.Join(separator, rewards);
     }
+
+    /// <summary>
+    /// Purchase some stuff and provide to account and spawn on field if any pieces in products
+    /// </summary>
+    /// <param name="products"></param>
+    /// <param name="price"></param>
+    public static void PurchaseAndProvide(List<CurrencyPair> products, CurrencyPair price)
+    {
+        Purchase(products, price, success =>
+        {
+            if (success)
+            {
+                SpawnReward(products);
+            }
+        });
+    }
+    
+    private static void SpawnReward(List<CurrencyPair> reward)
+    {
+        var board = BoardService.Current.FirstBoard;
+        var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
+
+        if (positions.Count == 0) return;
+
+        var position = positions[0];
+
+        List<CurrencyPair> currencysReward;
+        var piecesReward = CurrencyHellper.FiltrationRewards(reward, out currencysReward);
+
+        foreach (var currency in currencysReward)
+        {
+            if(currency.Currency == Currency.Energy.Name)
+                NSAudioService.Current.Play(SoundId.BuyEnergy, false, 1);
+            if(currency.Currency == Currency.Coins.Name)
+                NSAudioService.Current.Play(SoundId.BuySoftCurr, false, 1);
+        }
+        
+        board.ActionExecutor.AddAction(new EjectionPieceAction
+        {
+            GetFrom = () => position,
+            Pieces = piecesReward,
+            OnComplete = () =>
+            {
+                var view = board.RendererContext.GetElementAt(position) as CharacterPieceView;
+                
+                if(view != null) view.StartRewardAnimation();
+                    
+                AddResourceView.Show(position, currencysReward);
+            }
+        });
+    }
 }
