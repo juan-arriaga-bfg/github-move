@@ -92,6 +92,7 @@ public class UIHintArrowViewController : IWUIWindowViewController
 
     protected virtual void Return()
     {
+        UIService.Get.ReturnCachedObject(gameObject);
         gameObject.SetActive(false);
     }
     

@@ -29,11 +29,10 @@ public class UIHintArrowComponent : ECSEntity
         {
             var cachedArrowViewController = cachedArrowViewControllerPair.Value;
 
-            if (cachedArrowViewController != null)
-            {
-                contextView.UnRegisterWindowViewController(cachedArrowViewController);
-                UIService.Get.ReturnCachedObject(cachedArrowViewController.gameObject);
-            }
+            if (cachedArrowViewController == null) continue;
+            
+            contextView.UnRegisterWindowViewController(cachedArrowViewController);
+            cachedArrowViewController.Hide();
         }
         
         cachedArrowViewControllers.Clear();
@@ -41,12 +40,10 @@ public class UIHintArrowComponent : ECSEntity
 
     public void HideArrow(Transform anchor)
     {
-        UIHintArrowViewController cachedArrowViewController;
-        if (cachedArrowViewControllers.TryGetValue(anchor, out cachedArrowViewController))
-        {
-            contextView.UnRegisterWindowViewController(cachedArrowViewController);
-            UIService.Get.ReturnCachedObject(cachedArrowViewController.gameObject);
-        }
+        if (cachedArrowViewControllers.TryGetValue(anchor, out var cachedArrowViewController) == false) return;
+        
+        contextView.UnRegisterWindowViewController(cachedArrowViewController);
+        cachedArrowViewController.Hide(false);
     }
 
     public UIHintArrowViewController ShowArrow(Transform anchor, float lifetime = 2.5f, Vector3 offset = default(Vector3))
