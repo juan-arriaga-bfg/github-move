@@ -50,7 +50,6 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             customer.Timer.OnComplete += UpdateState;
             customer.Timer.OnComplete += PlaySound;
             customer.Timer.OnComplete += UpdateOrders;
-            
         }
 
         order.OnStateChange += UpdateState;
@@ -58,6 +57,8 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         order.OnStateChange += UpdateOrders;
         
         UpdateState();
+        
+        if((context as UIOrdersWindowView).IsShowComplete) ShowTutorArrow();
         
         btnBuy.OnClick(OnClickBuy);
         btnComplete.OnClick(OnClick);
@@ -116,11 +117,11 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         
         container.Create(views);
     }
-
+    
     public override void OnViewShowCompleted()
     {
         base.OnViewShowCompleted();
-
+        
         ShowTutorArrow();
     }
 
@@ -143,8 +144,9 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
     public override void OnViewCloseCompleted()
     {
         base.OnViewCloseCompleted();
+        
         RemoveListeners();
-
+        
         if (isComplete) customer.GetReward();
 
         isComplete = false;

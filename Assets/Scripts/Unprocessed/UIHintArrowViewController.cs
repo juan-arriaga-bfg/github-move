@@ -99,7 +99,7 @@ public class UIHintArrowViewController : IWUIWindowViewController
     public virtual void Hide()
     {
         isShowing = false;
-        Hide(false);
+        Hide(true);
     }
 
     public virtual void Hide(bool isReturn)
@@ -139,7 +139,7 @@ public class UIHintArrowViewController : IWUIWindowViewController
         
         var sequence = DOTween.Sequence().SetId(this);
         sequence.AppendInterval(lifeTime);
-        sequence.OnComplete(Hide);
+        sequence.OnComplete(() => Hide(false));
 
         return this;
     }
