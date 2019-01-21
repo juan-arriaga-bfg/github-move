@@ -9,6 +9,9 @@ public class UIWaitWindowView : IWUIWindowView
     [IWUIBinding("#Back")] private CanvasGroup canvasGroup;
     
     private readonly object ANIMATION_ID = new object();
+    private readonly object TIMEOUT_ID = new object();
+
+    private float timeout;
     
     public override void AnimateShow()
     {
@@ -50,11 +53,24 @@ public class UIWaitWindowView : IWUIWindowView
         
         UIWaitWindowModel windowModel = Model as UIWaitWindowModel;
         
+        DOTween.Kill(TIMEOUT_ID);
     }
 
     public void SetText(string text)
     {
         label.text = text ?? string.Empty;
+    }
+    
+    public void SetTimeout(float seconds)
+    {
+        DOTween.Kill(TIMEOUT_ID);
+        
+        DOTween.Sequence()
+               .SetId(TIMEOUT_ID)
+               .InsertCallback(seconds, () =>
+                {
+                    Controller.CloseCurrentWindow();
+                });
     }
 
     public static UIWaitWindowView Show()
@@ -70,6 +86,7 @@ public class UIWaitWindowView : IWUIWindowView
         
         UIWaitWindowView windowView = (UIWaitWindowView) window.CurrentView;
         windowView.SetText("Please wait....");
+        windowView.timeout = 0;
         
         return windowView;
     }

@@ -12,6 +12,12 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
     
     public bool IsNeedReopen => isClick == false && isCanPurchase == false;
 
+    private bool IsBuyUsingCash()
+    {
+        var contentEntity = entity as UIShopElementEntity;
+        return contentEntity.Price.Currency == Currency.Cash.Name;
+    }
+    
     public override void Init()
     {
         base.Init();
@@ -56,7 +62,32 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         isClick = true;
         
         var contentEntity = entity as UIShopElementEntity;
-        
+
+        if (IsBuyUsingCash())
+        {
+            OnBuyUsingCash(contentEntity);
+        }
+        else
+        {
+            OnBuyUsingNoCash(contentEntity);
+        }
+    }
+
+    private void OnBuyUsingCash(UIShopElementEntity contentEntity)
+    {
+        var model = UIService.Get.GetCachedModel<UIConfirmationWindowModel>(UIWindowType.ConfirmationWindow);
+
+        new HardCurrencyHelper().Purchase(contentEntity.ContentId, (isOk, productId) =>
+        {
+            if (isOk)
+            {
+                context.Controller.CloseCurrentWindow();
+            }
+        });
+    }
+    
+    private void OnBuyUsingNoCash(UIShopElementEntity contentEntity)
+    {
         if (CurrencyHellper.IsCanPurchase(contentEntity.Price) == false)
         {
             isCanPurchase = false;

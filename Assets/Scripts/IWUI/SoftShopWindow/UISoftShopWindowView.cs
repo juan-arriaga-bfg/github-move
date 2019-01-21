@@ -48,6 +48,7 @@ public class UISoftShopWindowView : UIGenericPopupWindowView
                 ContentId = def.Icon,
                 Products = def.Products,
                 Price = def.Price,
+                PurchaseKey = def.Ke
                 OnSelectEvent = null,
                 OnDeselectEvent = null
             };
