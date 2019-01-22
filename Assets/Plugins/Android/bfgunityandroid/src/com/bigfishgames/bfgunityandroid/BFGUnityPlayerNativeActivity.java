@@ -41,6 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.bigfishgames.bfgunityandroid.custom.SplashDialog;
+
 public class BFGUnityPlayerNativeActivity extends bfgActivity implements bfgDeferredDeepLinkListener {
 
     protected UnityPlayer mUnityPlayer = null;
@@ -84,6 +86,8 @@ public class BFGUnityPlayerNativeActivity extends bfgActivity implements bfgDefe
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
 
+		SplashDialog.CreateAndShow(this);
+		
         OnCreate_UnityPlayer();
 
         bfgPolicyListenerInstance = new BfgPolicyDelegate();
