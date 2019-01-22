@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -74,6 +75,18 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
             UIService.Get.ShowWindow(UIWindowType.NextLevelWindow);
             UIService.Get.OnCloseWindowEvent += OnCloseNextLevelWindow;
         });
+    }
+    
+    public override void UpdateLabel(int value)
+    {
+        if (amountLabel == null) return;
+        
+        DOTween.Kill(amountLabel);
+        
+        var sequence = DOTween.Sequence().SetId(amountLabel);
+        sequence.Insert(0f, DOTween.To(() => CurrentValueAnimated, (v) => { CurrentValueAnimated = v; }, value, 0.5f ));
+        sequence.Insert(0f, icon.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.3f)).SetEase(Ease.InSine);
+        sequence.Insert(0.3f, icon.transform.DOScale(new Vector3(1f, 1f, 1f), 0.3f)).SetEase(Ease.OutSine);
     }
 
     private void OnCloseNextLevelWindow(IWUIWindow window)
