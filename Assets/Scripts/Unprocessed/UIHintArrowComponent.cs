@@ -80,6 +80,7 @@ public class UIHintArrowComponent : ECSEntity
 
         arrow.SetLabel("");
         arrow.SetLifeTime(lifetime);
+        
         if (animated)
         {
             arrow.Show();

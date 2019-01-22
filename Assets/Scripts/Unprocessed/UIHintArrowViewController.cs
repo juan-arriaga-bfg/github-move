@@ -41,8 +41,10 @@ public class UIHintArrowViewController : IWUIWindowViewController, IHintArrow
 
     public virtual UIHintArrowViewController SetLifeTime(float lifeTime)
     {
+        if (isShowing && this.lifeTime < 0) return this;
+        
         this.lifeTime = lifeTime;
-
+        
         return this;
     }
 
@@ -98,21 +100,24 @@ public class UIHintArrowViewController : IWUIWindowViewController, IHintArrow
     
     public virtual void Hide()
     {
-        isShowing = false;
         Hide(true);
     }
 
     public virtual void Hide(bool isReturn)
     {
         if (gameObject.activeSelf == false) return;
-        HintArrowData.ClearCurrentArrow(this);
+        
+        isShowing = false;
+        
         if (isReturn)
         {
             DOTween.Kill(this);
             Return();
             return;
         }
+        
         DOTween.Kill(this);
+        
         var sequence = DOTween.Sequence().SetId(this);
         sequence.Append(viewAnchor.DOFade(0f, 0.35f));
 
@@ -122,8 +127,6 @@ public class UIHintArrowViewController : IWUIWindowViewController, IHintArrow
     public virtual UIHintArrowViewController Show()
     {
         gameObject.SetActive(true);
-
-        HintArrowData.SetNewArrow(this);
         
         DOTween.Kill(this);
 
@@ -149,6 +152,6 @@ public class UIHintArrowViewController : IWUIWindowViewController, IHintArrow
 
     public void Remove(float delay)
     {
-        Hide();
+        Hide(false);
     }
 }

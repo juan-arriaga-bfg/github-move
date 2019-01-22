@@ -13,11 +13,8 @@ public class HintArrowView : BoardElementView, IHintArrow
 
     private Action onRemove;
     
-    private void Show(bool isLoop, float delayBeforeShow = 0, bool singleArrowOnly = true)
+    private void Show(bool isLoop, float delayBeforeShow = 0)
     {
-        if (singleArrowOnly)
-            HintArrowData.SetNewArrow(this);
-        
         gameObject.SetActive(true);
         icon.color = new Color(1, 1, 1, 0);
         animation.Stop();
@@ -48,8 +45,6 @@ public class HintArrowView : BoardElementView, IHintArrow
     
     public void Remove(float delay = 3.5f)
     {
-        HintArrowData.ClearCurrentArrow(this);
-        
         delay = Mathf.Max(0, delay);
         
         DOTween.Kill(animationUid);
@@ -67,7 +62,7 @@ public class HintArrowView : BoardElementView, IHintArrow
         DestroyOnBoard(delay + FADE_DURATION * 1.1f);
     }
     
-    public static HintArrowView Show(BoardPosition position, float offsetX = 0, float offsetY = 0, bool focus = true, bool loop = false, float delayBeforeShow = 0, bool singleArrowOnly = true)
+    public static HintArrowView Show(BoardPosition position, float offsetX = 0, float offsetY = 0, bool focus = true, bool loop = false, float delayBeforeShow = 0)
     {  
         var board = BoardService.Current.FirstBoard;
         var target = board.BoardLogic.GetPieceAt(position);
@@ -83,7 +78,7 @@ public class HintArrowView : BoardElementView, IHintArrow
         var arrowView = board.RendererContext.CreateBoardElementAt<HintArrowView>(R.HintArrow, new BoardPosition(position.X, position.Y, BoardLayer.UIUP1.Layer));
 
         arrowView.CachedTransform.localPosition = arrowView.CachedTransform.localPosition + (Vector3.up * 2) + new Vector3(offsetX, offsetY);
-        arrowView.Show(loop, delayBeforeShow, singleArrowOnly);
+        arrowView.Show(loop, delayBeforeShow);
         
         var targetPiece = boardLogic.GetPieceAt(position);
         if (targetPiece?.ActorView != null)
@@ -109,13 +104,13 @@ public class HintArrowView : BoardElementView, IHintArrow
         return arrowView;
     }
     
-    public static HintArrowView Show(Transform hintTarget, float offsetX = 0f, float offsetY = 0f, bool focus = true, bool loop = false, float delayBeforeShow = 0, bool singleArrowOnly = true)
+    public static HintArrowView Show(Transform hintTarget, float offsetX = 0f, float offsetY = 0f, bool focus = true, bool loop = false, float delayBeforeShow = 0)
     {
         BoardController board = BoardService.Current.FirstBoard;
         var arrowView = board.RendererContext.CreateBoardElementAt<HintArrowView>(R.HintArrow, new BoardPosition(0,0, BoardLayer.UIUP1.Layer));
 
         arrowView.CachedTransform.position = hintTarget.position + new Vector3(offsetX, offsetY);
-        arrowView.Show(loop, delayBeforeShow, singleArrowOnly);
+        arrowView.Show(loop, delayBeforeShow);
         
         if (focus == false) return arrowView;
         

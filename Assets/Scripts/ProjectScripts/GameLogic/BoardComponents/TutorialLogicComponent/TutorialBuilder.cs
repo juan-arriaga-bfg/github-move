@@ -199,8 +199,8 @@ public static class TutorialBuilder
                 step = new UiLockTutorialStep {Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Shop}};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "21_OpenChest", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "21_OpenChest", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
@@ -280,6 +280,16 @@ public static class TutorialBuilder
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "12_UseMine", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckCurrencyTutorialCondition {Target = -1, Currency = new List<string> {Currency.Worker.Name}, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "12_UseMine", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Hard}, true);
+                
+                break;
+            }
+            case 23: // free chest tutorial
+            {
+                step = new MarketTutorialStep();
+                
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "21_OpenChest", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.CH_Free.Id, Amount = 1, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "21_OpenChest", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }

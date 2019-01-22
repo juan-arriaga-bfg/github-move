@@ -6,4 +6,6 @@ public class UIMarketWindowModel : IWWindowModel
     public CurrencyPair Price = new CurrencyPair{Currency = Currency.Crystals.Name, Amount = GameDataService.Current.ConstantsManager.MarketUpdatePrice};
     
     public string ButtonReset => string.Format(LocalizationService.Get("window.market.button.reset", "window.market.button.reset {0}"), Price.ToStringIcon());
+
+    public bool IsTutorial;
 }
