@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class SplashScreen: MonoBehaviour
 
     private bool isNativeSplashHidden;
 
-    private void Update()
+    private void OnPostRender()
     {
         if (isNativeSplashHidden)
         {
@@ -37,42 +38,56 @@ public class SplashScreen: MonoBehaviour
 
     private void Start()
     {
-        var seq = DOTween.Sequence();
+        StartCoroutine(CheckLoadingState());
+        
+        var seq = DOTween.Sequence()
+                         .SetId(this);
 
         for (var i = 0; i < splashes.Count; i++)
         {
             seq.AppendInterval(timeBeforeChange);
 
-            if (i == splashes.Count - 1)
-            {
-                ScheduleEnd(seq);
-            }
-            else
+            if (i != splashes.Count - 1)
             {
                 var prevSplash = splashes[i];
                 var nextSplash = splashes[i + 1];
-                
+
                 seq.AppendCallback(() =>
                 {
                     nextSplash.gameObject.SetActive(true);
-                    nextSplash.color = new Color(1,1,1,0);
+                    nextSplash.color = new Color(1, 1, 1, 0);
                     nextSplash.DOFade(1, 0.3f);
-                    
+
                     prevSplash.DOFade(0, 0.3f);
                 });
             }
         }
     }
 
-    private void ScheduleEnd(Sequence seq)
+    private IEnumerator CheckLoadingState()
     {
-        seq.AppendCallback(() =>
+        yield return new WaitForSeconds(0.1f);
+        var asyncInit = AsyncInitService.Current;
+        if (asyncInit == null)
         {
-            canvasGroup.DOFade(0, 0.3f)
-                       .OnComplete(() =>
-                        {
-                            Destroy(gameObject);
-                        });
-        });
+            StartCoroutine(CheckLoadingState());
+        }
+        else
+        {
+            if (asyncInit.IsCompleted<ShowLoadingWindowInitComponent>())
+            {
+                EndAnimation();
+            }
+        }
+    }
+
+    private void EndAnimation()
+    {
+        DOTween.Kill(this);
+        canvasGroup.DOFade(0, 0.15f)
+                   .OnComplete(() =>
+                    {
+                        Destroy(gameObject);
+                    });
     }
 }
