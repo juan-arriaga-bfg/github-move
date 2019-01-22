@@ -81,12 +81,9 @@ public class SplashScreen: MonoBehaviour
         
         var asyncInit = AsyncInitService.Current;
         
-        if (asyncInit != null)
+        if (asyncInit != null && asyncInit.IsCompleted<ShowLoadingWindowInitComponent>())
         {
-            if (asyncInit.IsCompleted<ShowLoadingWindowInitComponent>())
-            {
-                HideAnimated();
-            }
+            HideAnimated();
         }
         else
         {
