@@ -78,17 +78,19 @@ public class SplashScreen: MonoBehaviour
     private IEnumerator CheckLoadingState()
     {
         yield return new WaitForSeconds(0.1f);
+        
         var asyncInit = AsyncInitService.Current;
-        if (asyncInit == null)
-        {
-            StartCoroutine(CheckLoadingState());
-        }
-        else
+        
+        if (asyncInit != null)
         {
             if (asyncInit.IsCompleted<ShowLoadingWindowInitComponent>())
             {
                 HideAnimated();
             }
+        }
+        else
+        {
+            StartCoroutine(CheckLoadingState());
         }
     }
 
