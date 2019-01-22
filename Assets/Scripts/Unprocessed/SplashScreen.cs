@@ -11,6 +11,25 @@ public class SplashScreen: MonoBehaviour
 
     private int currentSplashIndex;
 
+    private bool isNativeSplashHidden;
+
+    private void Update()
+    {
+        if (isNativeSplashHidden)
+        {
+            return;
+        }
+
+        isNativeSplashHidden = true;
+        
+#if UNITY_ANDROID && !UNITY_EDITOR
+        using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.custom.SplashDialog"))
+        {
+            ajc.CallStatic("Kill");
+        } 
+#endif
+    }
+
     private void Awake()
     {
         DontDestroyOnLoad(this);
@@ -52,7 +71,7 @@ public class SplashScreen: MonoBehaviour
             canvasGroup.DOFade(0, 0.3f)
                        .OnComplete(() =>
                         {
-                            Destroy(this);
+                            Destroy(gameObject);
                         });
         });
     }
