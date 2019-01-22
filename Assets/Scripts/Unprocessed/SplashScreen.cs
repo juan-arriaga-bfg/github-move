@@ -13,8 +13,8 @@ public class SplashScreen: MonoBehaviour
     private int currentSplashIndex;
 
     private bool isNativeSplashHidden;
-
-    private void OnPostRender()
+ 
+    private void LateUpdate()
     {
         if (isNativeSplashHidden)
         {
@@ -22,6 +22,15 @@ public class SplashScreen: MonoBehaviour
         }
 
         isNativeSplashHidden = true;
+        
+        StartCoroutine(HideNativeSplash());
+    }
+    
+    private IEnumerator HideNativeSplash()
+    {
+        yield return new WaitForEndOfFrame();
+        
+        Debug.Log("[SplashScreen] => HideNativeSplash");
         
 #if UNITY_ANDROID && !UNITY_EDITOR
         using (AndroidJavaClass ajc = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.custom.SplashDialog"))
@@ -38,6 +47,8 @@ public class SplashScreen: MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("[SplashScreen] => Start");
+        
         StartCoroutine(CheckLoadingState());
         
         var seq = DOTween.Sequence()
@@ -76,13 +87,15 @@ public class SplashScreen: MonoBehaviour
         {
             if (asyncInit.IsCompleted<ShowLoadingWindowInitComponent>())
             {
-                EndAnimation();
+                HideAnimated();
             }
         }
     }
 
-    private void EndAnimation()
+    private void HideAnimated()
     {
+        Debug.Log("[SplashScreen] => HideAnimated");
+        
         DOTween.Kill(this);
         canvasGroup.DOFade(0, 0.15f)
                    .OnComplete(() =>
