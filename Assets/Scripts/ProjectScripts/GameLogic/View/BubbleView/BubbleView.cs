@@ -75,7 +75,7 @@ public class BubbleView : UIBoardView, IBoardEventListener
     
     public void OnBoardEvent(int code, object context)
     {
-        if (code != GameEventsCodes.ClosePieceUI || context is BoardPosition && ((BoardPosition) context).Equals(Context.CachedPosition)) return;
+        if (code != GameEventsCodes.ClosePieceUI || context is BoardPosition position && position.Equals(Context.CachedPosition)) return;
 		
         Change(false);
     }
@@ -83,8 +83,10 @@ public class BubbleView : UIBoardView, IBoardEventListener
     public void OnClick()
     {
         Context.Context.TutorialLogic.Pause(true);
+        
         onClick?.Invoke(Context);
-        Context.ActorView?.OnTapCallback?.Invoke();
+        
+        if(Context.ActorView != null) Context.ActorView.OnTapCallback?.Invoke();
     }
     
     public override void SyncRendererLayers(BoardPosition boardPosition)

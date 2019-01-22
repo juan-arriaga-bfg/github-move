@@ -53,6 +53,8 @@ public class SelectStorageTutorialStep : DelayTutorialStep
 
     public override bool IsExecuteable()
     {
+        if (bubble != null && bubble.IsShow == false) bubble = null;
+        
         return arrow == null && bubble == null && base.IsExecuteable();
     }
 
