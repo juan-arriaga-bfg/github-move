@@ -58,6 +58,10 @@ public class ProjectBuilderAndroid
     [UsedImplicitly]
     public static void AutoBuild()
     {
+#if !UNITYCLOUD
+        // todo: use server even without define or just change define name
+        throw new Exception("Without UNITYCLOUD define, version will not be synced with the server and got wrong version code. See UpdateVersionCode method in IWProjectVerisonsEditor");
+#endif
         var customOptions = new Dictionary<string, string>();
 
         List<string> parameters = ProjectBuilder.GetCommandLineParameters();

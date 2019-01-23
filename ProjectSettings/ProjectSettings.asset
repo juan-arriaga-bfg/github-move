@@ -591,9 +591,9 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   scriptingDefineSymbols:
-    1: BFG_PURCHASES
-    4: BFG_PURCHASES
-    7: BFG_PURCHASES
+    1: UNITYCLOUD;BFG_PURCHASES
+    4: UNITYCLOUD;BFG_PURCHASES
+    7: UNITYCLOUD;BFG_PURCHASES
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}
