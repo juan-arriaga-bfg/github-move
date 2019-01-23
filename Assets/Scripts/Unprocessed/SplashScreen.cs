@@ -96,10 +96,14 @@ public class SplashScreen: MonoBehaviour
         Debug.Log("[SplashScreen] => HideAnimated");
         
         DOTween.Kill(this);
-        canvasGroup.DOFade(0, 0.15f)
-                   .OnComplete(() =>
-                    {
-                        Destroy(gameObject);
-                    });
+        Destroy(gameObject);
+        
+        // NO ANIMATION here! It may be friezed on half-transparent state because of loading
+        
+        // canvasGroup.DOFade(0, 0.15f)
+        //            .OnComplete(() =>
+        //             {
+        //                 Destroy(gameObject);
+        //             });
     }
 }
