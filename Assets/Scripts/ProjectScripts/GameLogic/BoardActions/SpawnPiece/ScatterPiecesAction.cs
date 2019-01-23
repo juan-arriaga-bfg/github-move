@@ -79,6 +79,10 @@ public class ScatterPiecesAction : IBoardAction
 			
 			CreatePiece(gameBoardController, id, cell, pieces);
 		}
+
+		var rewardsStore = target.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid);
+		
+		if (rewardsStore != null && Pieces.Count != 0) rewardsStore.IsComplete = true;
 		
 		animation.Pieces = pieces;
 		animation.OnCompleteEvent += (_) =>
@@ -102,8 +106,8 @@ public class ScatterPiecesAction : IBoardAction
 				if (IsTargetReplace && PieceType.GetDefById(target.PieceType).Filter.HasFlag(PieceTypeFilter.Obstacle)) target.PathfindLockObserver.RemoveRecalculate(From);
 				return;
 			}
-
-			target.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid)?.ShowBubble();
+			
+			rewardsStore?.ShowBubble();
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);

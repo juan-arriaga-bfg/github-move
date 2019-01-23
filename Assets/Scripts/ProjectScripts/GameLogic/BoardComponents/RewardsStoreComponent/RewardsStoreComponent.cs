@@ -105,8 +105,8 @@ public class RewardsStoreComponent : IECSComponent
         
         if(CheckOutOfCells()) return;
         
-        if(PieceType.GetDefById(context.PieceType).Filter.HasFlag(PieceTypeFilter.Chest))
-            NSAudioService.Current.Play(SoundId.ChestOpen);
+        if(PieceType.GetDefById(context.PieceType).Filter.HasFlag(PieceTypeFilter.Chest)) NSAudioService.Current.Play(SoundId.ChestOpen);
+        
         Scatter();
     }
     
