@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 public class UIShopElementViewController : UISimpleScrollElementViewController
@@ -75,7 +77,28 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
     private void OnBuyUsingCash(UIShopElementEntity contentEntity)
     {
-        new HardCurrencyHelper().Purchase(contentEntity.PurchaseKey, (isOk, productId) =>
+        // HACK to handle the case when we have a purchase but BFG still not add them to the Store
+        if (IapService.Current.IapCollection.Defs.All(e => e.Id != contentEntity.PurchaseKey))
+        {
+            context.Controller.CloseCurrentWindow();
+            
+            var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+
+            model.Title = "[DEBUG]";
+            model.Message = $"Product with id '{contentEntity.PurchaseKey}' not registered. Purchase will be processed using debug flow without real store.";
+            model.AcceptLabel = LocalizationService.Get("common.button.ok",            "common.button.ok");
+
+            model.OnAccept = () =>
+            {
+                CurrencyHellper.PurchaseAndProvide(contentEntity.Products, contentEntity.Price);
+            };
+
+            UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+            return;
+        }
+        // END
+
+        SellForCashService.Current.Purchase(contentEntity.PurchaseKey, (isOk, productId) =>
         {
             if (isOk)
             {

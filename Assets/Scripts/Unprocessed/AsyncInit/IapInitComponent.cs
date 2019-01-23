@@ -5,15 +5,18 @@ public class IapInitComponent : AsyncInitComponentBase
     public override void Execute()
     {
         InitIapService();
+        InitCashService();
 
         isCompleted = true;
         OnComplete(this);
     }
 
-    private void InitRestoredPurchasesProvider()
+    private void InitCashService()
     {
-        RestoredPurchasesProvider go = new GameObject("[RestoredPurchasesProvider]").AddComponent<RestoredPurchasesProvider>();
-        Object.DontDestroyOnLoad(go);
+        SellForCashManager manager = new SellForCashManager();
+        SellForCashService.Instance.SetManager(manager);
+        
+        manager.Init();
     }
 
     private static void InitIapService()

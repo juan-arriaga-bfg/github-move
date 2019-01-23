@@ -33,11 +33,17 @@ public class RestoredPurchasesProvider : MonoBehaviour
         }
         
         foreach (var pendingIap in iapService.PendingIaps)
-        {
+        {           
             var id = pendingIap.Key;
 
             var action = DefaultSafeQueueBuilder.Build(id, true, () =>
             {
+                if (SellForCashService.Current == null)
+                {
+                    Debug.LogError($"[RestoredPurchasesProvider] => Action: SellForCashService.Current == null");
+                    return;
+                }
+                
                 var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
 
                 model.Title = LocalizationService.Get("window.restore.purchase.title",       "window.restore.purchase.title");
@@ -46,7 +52,7 @@ public class RestoredPurchasesProvider : MonoBehaviour
 
                 model.OnClose = () =>
                 {
-                    HardCurrencyHelper.ProvideReward(id);
+                    SellForCashService.Current.ProvideReward(id);
                 };
 
                 // model.OnCancel = model.OnAccept;
@@ -54,7 +60,7 @@ public class RestoredPurchasesProvider : MonoBehaviour
                 UIService.Get.ShowWindow(UIWindowType.MessageWindow);
             });
             
-            //todo: add more conditions to sequence many pendingIap
+            //todo: add more conditions to sequence many pendingIaps?
             
             ProfileService.Current.QueueComponent.AddAction(action, true);
         }

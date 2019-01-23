@@ -3,14 +3,55 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class HardCurrencyHelper
+public class SellForCashManager: ECSEntity
 {
-    private Action<bool, string> onComplete;
+    public static readonly int ComponentGuid = ECSManager.GetNextGuid();
+
+    public override int Guid => ComponentGuid;
     
-    public HardCurrencyHelper()
+    private Action<bool, string> onComplete;
+
+    private bool inited;
+
+    public void Init()
+    {
+        if (inited)
+        {
+            return;
+        }
+
+        inited = true;
+        Subscribe();
+    }
+    
+    public override void OnRegisterEntity(ECSEntity entity)
+    {
+        base.OnRegisterEntity(entity);
+        Init();
+    }
+
+    private void Subscribe()
     {
         IapService.Current.OnPurchaseOK += OnPurchaseOk;
         IapService.Current.OnPurchaseFail += OnPurchaseFail;
+    }
+    
+    private void Unsubscribe()
+    {
+        IapService.Current.OnPurchaseOK -= OnPurchaseOk;
+        IapService.Current.OnPurchaseFail -= OnPurchaseFail;
+    }
+
+    public override void OnUnRegisterEntity(ECSEntity entity)
+    {
+        base.OnUnRegisterEntity(entity);
+        Cleanup();
+    }
+
+    public void Cleanup()
+    {
+        Unsubscribe();
+        inited = false;
     }
 
     private void OnPurchaseFail(string productId, IapErrorCode error)
@@ -45,7 +86,7 @@ public class HardCurrencyHelper
         onComplete = null;
     }
 
-    public static void ProvideReward(string productId)
+    public void ProvideReward(string productId)
     {
         List<ShopDef> defs = GameDataService.Current.ShopManager.Defs[Currency.Crystals.Name];
         var def = defs.FirstOrDefault(e => e.PurchaseKey == productId);
