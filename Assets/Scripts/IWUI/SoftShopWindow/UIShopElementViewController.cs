@@ -77,7 +77,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
     private void OnBuyUsingCash(UIShopElementEntity contentEntity)
     {
-        // HACK to handle the case when we have a purchase but BFG still not add them to the Store
+        // HACK to handle the case when we have a purchase but BFG still not add it to the Store
         if (IapService.Current.IapCollection.Defs.All(e => e.Id != contentEntity.PurchaseKey))
         {
             context.Controller.CloseCurrentWindow();
