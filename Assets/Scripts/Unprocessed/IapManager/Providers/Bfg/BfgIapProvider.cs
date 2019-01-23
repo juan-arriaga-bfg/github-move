@@ -44,11 +44,11 @@ public class BfgIapProvider : IapProvider
         PurchaseController.Instance.RestoreSucceededEvent += OnRestoreSucceededCallback;
         PurchaseController.Instance.RestoreFailedEvent += OnRestoreFailedCallback;
 
+#if UNITY_ANDROID
         if (!NotificationCenter.Instance.HandlerSetHasObserver (purchase_succeeded_with_receipt, bfgPurchaseAndroid.NOTIFICATION_PURCHASE_SUCCEEDED_WITH_RECEIPT)) {
             NotificationCenter.Instance.AddObserver (purchase_succeeded_with_receipt, bfgPurchaseAndroid.NOTIFICATION_PURCHASE_SUCCEEDED_WITH_RECEIPT);
         }
  
-#if UNITY_ANDROID
         if (!NotificationCenter.Instance.HandlerSetHasObserver (billing_init_succeeded, bfgPurchaseAndroid.NOTIFICATION_BILLING_INITIALIZE_SUCCEEDED)) {
             NotificationCenter.Instance.AddObserver (billing_init_succeeded, bfgPurchaseAndroid.NOTIFICATION_BILLING_INITIALIZE_SUCCEEDED);
         }
@@ -169,9 +169,8 @@ public class BfgIapProvider : IapProvider
 
         if (NotificationCenter.Instance != null)
         {
-            NotificationCenter.Instance.RemoveObserver(purchase_succeeded_with_receipt, bfgPurchaseAndroid.NOTIFICATION_PURCHASE_SUCCEEDED_WITH_RECEIPT);
-
 #if UNITY_ANDROID
+            NotificationCenter.Instance.RemoveObserver(purchase_succeeded_with_receipt, bfgPurchaseAndroid.NOTIFICATION_PURCHASE_SUCCEEDED_WITH_RECEIPT);
             NotificationCenter.Instance.RemoveObserver(billing_init_succeeded, bfgPurchaseAndroid.NOTIFICATION_BILLING_INITIALIZE_SUCCEEDED);
             NotificationCenter.Instance.RemoveObserver(billing_init_failed,    bfgPurchaseAndroid.NOTIFICATION_BILLING_INITIALIZE_FAILED);
 #endif
