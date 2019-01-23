@@ -271,33 +271,6 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "13_CreatePiece_A6",
-    "TaskDefs": [
-      {
-        "TaskId": "13_CreatePiece_A6"
-      }
-    ],
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 35
-          },
-          {
-            "Currency": "Mana",
-            "Amount": 100
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 100
-          }
-        ]
-      }
-    }
-  },
-  {
-    "$type": "StoryQuestEntity, GameAssembly",
     "Id": "14_CreatePiece_B3",
     "TaskDefs": [
       {
