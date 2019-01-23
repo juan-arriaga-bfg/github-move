@@ -147,6 +147,13 @@ public class BfgIapProvider : IapProvider
         
         string storeId = IapCollection.GetStoreId(productId);
         var product = PurchaseController.Instance.GetProductInfo(storeId);
+        
+        // Bfg sdk may return hardcoded english text when have no price
+        if (product?.price == "Price Unavailable")
+        {
+            return null;
+        }
+        
         return product?.price;
     }
 
