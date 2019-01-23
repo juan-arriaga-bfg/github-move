@@ -72,7 +72,7 @@ public static class TutorialBuilder
             }*/
             case 2: // tutorial 2 step 1
             {
-                step = new HighlightPiecesTutorialStep {Delay = 2, Targets = new List<int>{PieceType.PR_C1.Id}};
+                step = new HighlightPiecesTutorialStep {Targets = new List<int>{PieceType.PR_C1.Id}};
                 
                 step.RegisterComponent(new CheckStepTutorialCondition {Target = 1, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckCounterTutorialCondition {Target = 1, ConditionType = TutorialConditionType.Complete}, true);
@@ -82,7 +82,7 @@ public static class TutorialBuilder
             }
             case 3: // tutorial 2 step 2
             {
-                step = new HighlightPiecesTutorialStep {Delay = 2, Targets = new List<int>{PieceType.PR_C1.Id, PieceType.PR_C2.Id, PieceType.PR_C3.Id}};
+                step = new HighlightPiecesTutorialStep {Targets = new List<int>{PieceType.PR_C1.Id, PieceType.PR_C2.Id, PieceType.PR_C3.Id}};
                 
                 step.RegisterComponent(new CheckStepTutorialCondition {Target = 2, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
@@ -112,7 +112,7 @@ public static class TutorialBuilder
             }
             case 6: // tutorial 5 step 1
             {
-                step = new HighlightPiecesTutorialStep {Delay = 5, Targets = new List<int>{PieceType.A1.Id}};
+                step = new HighlightPiecesTutorialStep {Targets = new List<int>{PieceType.A1.Id}};
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "4_CreatePiece_A2", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
