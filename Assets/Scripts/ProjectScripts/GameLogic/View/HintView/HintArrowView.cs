@@ -2,8 +2,10 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class HintArrowView : BoardElementView
+public class HintArrowView : BoardElementView, IHintArrow
 {
+    private static HintArrowView currentHintArrow;
+    
     [SerializeField] private SpriteRenderer icon;
     [SerializeField] private Animation animation;
     
@@ -61,10 +63,11 @@ public class HintArrowView : BoardElementView
     }
     
     public static HintArrowView Show(BoardPosition position, float offsetX = 0, float offsetY = 0, bool focus = true, bool loop = false, float delayBeforeShow = 0)
-    {
+    {  
         var board = BoardService.Current.FirstBoard;
         var target = board.BoardLogic.GetPieceAt(position);
-
+        var boardLogic = board.BoardLogic;
+        
         var multi = target?.Multicellular;
 
         if (multi != null)
@@ -76,6 +79,22 @@ public class HintArrowView : BoardElementView
 
         arrowView.CachedTransform.localPosition = arrowView.CachedTransform.localPosition + (Vector3.up * 2) + new Vector3(offsetX, offsetY);
         arrowView.Show(loop, delayBeforeShow);
+        
+        var targetPiece = boardLogic.GetPieceAt(position);
+        if (targetPiece?.ActorView != null)
+        {
+            Action disableHint = () =>
+            {
+                arrowView.Remove(0.1f);
+            };
+            targetPiece.ActorView.OnTapCallback += disableHint;
+            targetPiece.ActorView.OnDragStartCallback += disableHint;
+            arrowView.SetOnRemoveAction(() =>
+            {
+                targetPiece.ActorView.OnTapCallback -= disableHint;
+                targetPiece.ActorView.OnDragStartCallback -= disableHint;
+            });    
+        }
         
         if (focus == false) return arrowView;
 

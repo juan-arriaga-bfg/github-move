@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -51,8 +52,9 @@ public abstract class HighlightTaskUsingPieceFilter : TaskHighlightUsingArrow
         int  index = Random.Range(0, positions.Count);
         BoardPosition selectedPosition = positions[index];
 
-        HintArrowView.Show(selectedPosition);
+        var hint = HintArrowView.Show(selectedPosition);
         
         return true;
     }
+
 }

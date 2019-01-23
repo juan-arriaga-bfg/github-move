@@ -107,6 +107,8 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 			{
 				var view = board.RendererContext.GetElementAt(rewardPosition.Value) as CharacterPieceView;
                 
+				board.TutorialLogic.Update();
+				
 				if(view != null) view.StartRewardAnimation();
                     
 				AddResourceView.Show(rewardPosition.Value, currencysReward);

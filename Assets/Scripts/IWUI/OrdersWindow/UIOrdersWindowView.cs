@@ -22,6 +22,8 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
     [IWUIBinding("#ContentIngredients")] private UIContainerViewController contentIngredients;
     
     [IWUIBinding("#Prices")] private UIOrderPriceItem prices;
+
+    public bool IsShowComplete;
     
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
@@ -45,6 +47,8 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
 
     public override void OnViewShow()
     {
+        IsShowComplete = false;
+        
         base.OnViewShow();
         
         var windowModel = Model as UIOrdersWindowModel;
@@ -57,7 +61,14 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
         contentToggles.Select(0);
         SelectOrders();
     }
-    
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+
+        IsShowComplete = true;
+    }
+
     public void UpdateOrders()
     {
         foreach (UIOrderElementViewController oder in contentOders.Tabs)
@@ -105,11 +116,13 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
                 prices.HideHard();
                 break;
             case 1:
+                CachedHintArrowComponent.ClearArrows();
                 Fill(UpdateEntitiesRecipes(windowModel.Recipes), contentRecipes);
                 UpdateScrollRect(contentRecipes);
                 break;
             case 2:
                 messageIngredients.gameObject.SetActive(windowModel.Ingredients.Count == 0);
+                CachedHintArrowComponent.ClearArrows();
                 Fill(UpdateEntitiesIngredients(windowModel.Ingredients), contentIngredients);
                 UpdateScrollRect(contentIngredients);
                 prices.HideHard();

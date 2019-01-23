@@ -1,4 +1,3 @@
-using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
 
@@ -23,12 +22,12 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         
         Fill(UpdateEntities(), content);
         
-        content.GetScrollRect().horizontalNormalizedPosition = 1;
+        content.GetScrollRect().horizontalNormalizedPosition = windowModel.IsTutorial ? 0 : 1;
         content.GetScrollRect().enabled = false;
         
         DOTween.Kill(content);
         
-        content.CachedRectTransform.DOAnchorPosX(0, 1.5f)
+        content.CachedRectTransform.DOAnchorPosX(windowModel.IsTutorial ? -content.CachedRectTransform.sizeDelta.x : 0, 1.5f)
             .SetEase(Ease.InOutBack)
             .SetId(content)
             .OnComplete(() => { content.GetScrollRect().enabled = true; });

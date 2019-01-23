@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBuilder
 {
+    private const int amountBonus = 5;
+    
     public List<int> GetKeys()
     {
         return new List<int>();
@@ -26,14 +28,9 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
 
         if (nextType == PieceType.None.Id) return null;
 
-        var countForMatch = matchField.Count;
-        var countForMatchDefault = definition.GetPieceCountForMatch(pieceType);
-        
-        if (countForMatchDefault == -1 || countForMatch < countForMatchDefault) return null;
-        
-        var nextPieces = Add(Mathf.RoundToInt(countForMatch / (float)countForMatchDefault), nextType, new List<int>());
-        
-        if(countForMatch % countForMatchDefault == 1) nextPieces = Add(1, pieceType, nextPieces);
+        var nextPieces = Calculation(pieceType, nextType, definition.GetPieceCountForMatch(pieceType), matchField.Count);
+
+        if (nextPieces.Count == 0) return null;
         
         var matchDescription = new MatchDescription
         {
@@ -46,6 +43,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         
         // collect and purchase rewards before action
         var rewardTransactions = new Dictionary<int, List<ShopItemTransaction>>();
+        
         for (var i = 0; i < nextPieces.Count; i++)
         {
             var targetPieceType = nextPieces[i];
@@ -119,6 +117,42 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
                 }
             }
         };
+    }
+
+    private List<int> Calculation(int currentType, int nextType, int amountDefault, int amountCurrent)
+    {
+        var nextPieces = new List<int>();
+        
+        if (amountDefault == -1 || amountCurrent < amountDefault) return nextPieces;
+        
+        if (amountCurrent < amountBonus)
+        {
+            nextPieces = Add(1, nextType, nextPieces);
+            if (amountCurrent == amountBonus - 1) nextPieces = Add(1, currentType, nextPieces);
+            
+            return nextPieces;
+        }
+
+        var amount = amountCurrent / amountBonus * 2;
+        var remainder = amountCurrent % amountBonus;
+
+        switch (remainder)
+        {
+            case 0:
+            case 1:
+                nextPieces = Add(amount, nextType, nextPieces);
+                break;
+            case 2:
+                nextPieces = Add(amount, nextType, nextPieces);
+                nextPieces = Add(1, currentType, nextPieces);
+                break;
+            case 3:
+            case 4:
+                nextPieces = Add(amount + 1, nextType, nextPieces);
+                break;
+        }
+        
+        return nextPieces;
     }
     
     private List<int> Add(int count, int piece, List<int> pieces)
