@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class UIExchangeWindowView : UIGenericPopupWindowView
 {
@@ -9,6 +10,7 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
     
     [IWUIBinding("#BuyButton")] private UIButtonViewController btnBuy;
     [IWUIBinding("#FindButton")] private UIButtonViewController btnFind;
+    [IWUIBinding("#TutorAnchor")] private Transform tutorAnchor;
     
     private bool isClick;
     
@@ -40,6 +42,8 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
         
         InitButtonBase(btnBuy, OnBuyClick);
         InitButtonBase(btnFind, OnFindClick);
+        
+        if (BoardService.Current.FirstBoard.TutorialLogic.CheckFirstOrder() == false) CachedHintArrowComponent.ShowArrow(tutorAnchor, 5f);
     }
 
     private List<IUIContainerElementEntity> UpdateEntities(List<CurrencyPair> entities)
