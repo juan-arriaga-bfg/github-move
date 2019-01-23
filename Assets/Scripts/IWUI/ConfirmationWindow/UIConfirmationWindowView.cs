@@ -75,10 +75,20 @@ public class UIConfirmationWindowView : UIGenericPopupWindowView
 
         windowModel.OnAccept = null;
         windowModel.OnCancel = null;
+        windowModel.OnAcceptTap = null;
         
         action?.Invoke();
     }
-    
+
+    public override void OnViewClose()
+    {
+        base.OnViewClose();
+        
+        var windowModel = Model as UIConfirmationWindowModel;
+        if (isClick)
+            windowModel.OnAcceptTap?.Invoke();
+    }
+
     private void OnClick()
     {
         if(isClick) return;

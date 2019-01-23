@@ -154,6 +154,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         model.Price = contentEntity.Price;
         model.Product = contentEntity.Products[0];
 
+        model.OnAcceptTap = () => PlaySoundOnPurchase(contentEntity.Products);
         model.OnAccept = context.Controller.CloseCurrentWindow;
         model.OnCancel = () => { isClick = false; };
 

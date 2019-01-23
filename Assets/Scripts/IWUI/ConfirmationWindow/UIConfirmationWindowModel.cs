@@ -13,6 +13,8 @@ public class UIConfirmationWindowModel : IWWindowModel
     
     public CurrencyPair Product;
     public CurrencyPair Price;
+
+    public Action OnAcceptTap;
     
     public Action OnAccept;
     public Action OnCancel;
