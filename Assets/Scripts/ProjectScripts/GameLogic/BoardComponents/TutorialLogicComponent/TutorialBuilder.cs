@@ -105,7 +105,7 @@ public static class TutorialBuilder
                 step = new SelectStorageTutorialStep {Delay = 2, Targets = new List<int>{PieceType.OB1_TT.Id, PieceType.OB2_TT.Id}};
                 
                 step.RegisterComponent(new CheckStepTutorialCondition {Target = 4, ConditionType = TutorialConditionType.Start}, true);
-                step.RegisterComponent(new CheckCurrencyTutorialCondition {Target = -1, Currency = new List<string> {Currency.Worker.Name}, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckWorkerTutorialCondition {ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "3_KillTree", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
@@ -278,7 +278,7 @@ public static class TutorialBuilder
                 step = new SelectStorageTutorialStep {Delay = 2, IsFastStart = true, Targets = new List<int>{PieceType.MN_B.Id}};
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "12_UseMine", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
-                step.RegisterComponent(new CheckCurrencyTutorialCondition {Target = -1, Currency = new List<string> {Currency.Worker.Name}, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckWorkerTutorialCondition {ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "12_UseMine", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;

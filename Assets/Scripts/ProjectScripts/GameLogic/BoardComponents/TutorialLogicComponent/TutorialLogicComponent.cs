@@ -93,12 +93,12 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
 
         for (var i = components.Count - 1; i >= 0; i--)
         {
-            var condition = (BaseTutorialStep) components[i];
+            var step = (BaseTutorialStep) components[i];
             
-            if(condition.IsPerform == false) continue;
+            if(step.IsPerform == false) continue;
             
-            if (isOn) condition.PauseOn();
-            else condition.PauseOff();
+            if (isOn) step.PauseOn();
+            else step.PauseOff();
         }
     }
 

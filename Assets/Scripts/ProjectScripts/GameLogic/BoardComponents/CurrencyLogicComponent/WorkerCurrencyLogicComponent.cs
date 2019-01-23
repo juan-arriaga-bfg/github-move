@@ -8,6 +8,8 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
+    public BoardPosition? Last;
+    
     private List<KeyValuePair<BoardPosition, TimerComponent>> completeTimesList = new List<KeyValuePair<BoardPosition, TimerComponent>>();
     
     private BoardController context;
@@ -99,7 +101,8 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             isSuccess = success;
 
             if (isSuccess == false) return;
-            
+
+            Last = id;
             completeTimesList.Add(new KeyValuePair<BoardPosition, TimerComponent>(id, timer));
         });
         
@@ -164,7 +167,6 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         
         if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target)) return false;
         
-		
         if (def.Filter.HasFlag(PieceTypeFilter.Mine))
         {
             NSAudioService.Current.Play(SoundId.WorkerMine);
