@@ -6715,7 +6715,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -132, y: 0.000022188127}
+  m_AnchoredPosition: {x: -132, y: 0}
   m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &114887490970624690
@@ -7146,6 +7146,7 @@ MonoBehaviour:
   layers:
   - {fileID: 114138460340360344}
   windowName: MainWindow
+  ignoreBackButton: 1
   resourceDepenedencyDef: []
   resourceDepenedencyDefGroup: []
 --- !u!1 &1941725615381266

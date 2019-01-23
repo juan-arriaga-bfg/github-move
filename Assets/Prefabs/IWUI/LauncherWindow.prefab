@@ -158,6 +158,7 @@ MonoBehaviour:
   layers:
   - {fileID: 114403844070397052}
   windowName: LauncherWindow
+  ignoreBackButton: 1
   resourceDepenedencyDef: []
   resourceDepenedencyDefGroup: []
 --- !u!1 &1438899180884998
@@ -619,6 +620,7 @@ MonoBehaviour:
   m_mode: 3
   m_loopsCount: -1
   m_delay: -1
+  m_ease: 1
 --- !u!1 &5308795218370397681
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,6 +34,8 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         
         BoardService.Current.FirstBoard.MarketLogic.Timer.OnExecute += UpdateLabel;
         BoardService.Current.FirstBoard.MarketLogic.Timer.OnComplete += UpdateSlots;
+        
+        
     }
 
     public override void OnViewShowCompleted()

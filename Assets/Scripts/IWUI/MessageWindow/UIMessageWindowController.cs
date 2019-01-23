@@ -139,4 +139,28 @@ public class UIMessageWindowController : IWWindowController {
         
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
+    
+    public static void CreateQuitMessage()
+    {
+        var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
+        
+        model.Title = LocalizationService.Get("window.quit.title", "window.quit.title");
+        model.Message = LocalizationService.Get("window.quit.message", "window.quit.message");
+        model.AcceptLabel = LocalizationService.Get("window.quit.accept", "window.quit.accept");
+        model.CancelLabel = LocalizationService.Get("window.quit.cancel", "window.quit.cancel");
+        
+        model.IsBuy = false;
+        
+        model.OnAccept = () =>
+        {
+            #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+            #else
+            Application.Quit();
+            #endif
+        };
+        model.OnCancel = () => {};
+        
+        UIService.Get.ShowWindow(UIWindowType.MessageWindow);
+    }
 }

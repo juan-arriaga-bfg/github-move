@@ -66,6 +66,8 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
 
         // get model for window
         UIService.Get.ShowWindow(UIWindowType.MainWindow);
+        
+        IWUIManager.Instance.OnCloseQuery = UIMessageWindowController.CreateQuitMessage;
 
         onComplete?.Invoke();
 
