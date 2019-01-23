@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 public class AsyncInitManager :  IAsyncInitManager
@@ -15,6 +17,8 @@ public class AsyncInitManager :  IAsyncInitManager
     private readonly List<AsyncInitComponentBase> initedComponents = new List<AsyncInitComponentBase>();
 
     private Action onComplete;
+
+    private MonoBehaviour coroutinesExecutor;
     
     public AsyncInitManager AddComponent(AsyncInitComponentBase component)
     {
@@ -25,17 +29,30 @@ public class AsyncInitManager :  IAsyncInitManager
     public void Run(Action onComplete)
     {
         this.onComplete = onComplete;
-        ExecuteNext();
+        
+        // Proxy GO to run coroutine from non-monobehaviour
+        var go = new GameObject();
+        coroutinesExecutor = go.AddComponent<IWBaseMonoBehaviour>();
+        GameObject.DontDestroyOnLoad(go);
+
+        coroutinesExecutor.StartCoroutine(ExecuteNext());
+        //
+        // ExecuteNext();
     }
 
-    private void ExecuteNext()
+    private IEnumerator ExecuteNext()
     {
         if (components.Count == 0)
         {
+            GameObject.Destroy(coroutinesExecutor.gameObject);
+            
             onComplete?.Invoke();
-            return;
+            
+            yield break;
         }
 
+        yield return new WaitForEndOfFrame();
+        
         List<AsyncInitComponentBase> componentsToExecute = new List<AsyncInitComponentBase>();
         
         foreach (var cmp in components)
@@ -106,7 +123,9 @@ public class AsyncInitManager :  IAsyncInitManager
         cmp.OnComplete -= OnComponentComplete;
         componentsInProgress.Remove(cmp);
 
-        ExecuteNext();
+        coroutinesExecutor.StartCoroutine(ExecuteNext());
+
+        // ExecuteNext();
     }
 
     public float GetTotalProgress()
