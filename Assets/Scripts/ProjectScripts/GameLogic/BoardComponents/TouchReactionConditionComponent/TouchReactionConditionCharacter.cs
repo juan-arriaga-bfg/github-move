@@ -17,6 +17,8 @@ public class TouchReactionConditionCharacter : TouchReactionConditionComponent
 			UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
 			return false;
 		}
+		
+		NSAudioService.Current.Play(SoundId.OrderClaim, false, 1);
 			
 		customer.GetReward();
 		

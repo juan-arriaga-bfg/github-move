@@ -225,6 +225,8 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
                 UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
                 return;
             }
+
+            NSAudioService.Current.Play(SoundId.OrderClaim, false, 1);
             
             isComplete = true;
             context.Controller.CloseCurrentWindow();

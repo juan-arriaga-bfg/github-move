@@ -524,14 +524,6 @@ public static class CurrencyHellper
 
         List<CurrencyPair> currencysReward;
         var piecesReward = CurrencyHellper.FiltrationRewards(reward, out currencysReward);
-
-        foreach (var currency in currencysReward)
-        {
-            if(currency.Currency == Currency.Energy.Name)
-                NSAudioService.Current.Play(SoundId.BuyEnergy, false, 1);
-            if(currency.Currency == Currency.Coins.Name)
-                NSAudioService.Current.Play(SoundId.BuySoftCurr, false, 1);
-        }
         
         board.ActionExecutor.AddAction(new EjectionPieceAction
         {

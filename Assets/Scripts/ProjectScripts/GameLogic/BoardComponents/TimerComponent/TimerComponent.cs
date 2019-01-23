@@ -98,7 +98,7 @@ public class TimerComponent : IECSComponent, IECSSystem
     public void Complete()
     {
         Stop();
-        OnComplete();
+        OnComplete?.Invoke();
     }
     
     public void FastComplete()

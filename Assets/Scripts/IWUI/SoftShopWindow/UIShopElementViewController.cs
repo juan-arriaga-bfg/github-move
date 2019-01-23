@@ -56,7 +56,19 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
             CurrencyHellper.PurchaseAndProvide(contentEntity.Products, contentEntity.Price);
         }
     }
-    
+
+    public override void OnViewClose(IWUIWindowView context)
+    {
+        base.OnViewClose(context);
+        
+        var contentEntity = entity as UIShopElementEntity;
+        
+        if(entity == null || isClick == false) return;
+        
+        if(isCanPurchase)
+            PlaySoundOnPurchase(contentEntity.Products);
+    }
+
     private void OnBuyClick()
     {
         if(isClick) return;
@@ -72,6 +84,17 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         else
         {
             OnBuyUsingNoCash(contentEntity);
+        }
+    }
+    
+    private void PlaySoundOnPurchase(List<CurrencyPair> products)
+    {
+        foreach (var product in products)
+        {
+            if(product.Currency == Currency.Energy.Name)
+                NSAudioService.Current.Play(SoundId.BuyEnergy, false, 1);
+            if(product.Currency == Currency.Coins.Name)
+                NSAudioService.Current.Play(SoundId.BuySoftCurr, false, 1);    
         }
     }
 

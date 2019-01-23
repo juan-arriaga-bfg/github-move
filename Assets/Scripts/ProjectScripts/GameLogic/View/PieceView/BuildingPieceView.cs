@@ -19,13 +19,13 @@ public class BuildingPieceView : PieceBoardElementView
 		
 		if(state == null) return;
         
-		state.OnChangeState += UpdateSate;
+		state.OnChangeState += UpdateState;
 		
 		if (warning == null) warning = CreateUi(ViewType.Warning);
 	    
 	    SyncRendererLayers(piece.CachedPosition);
 		
-		UpdateSate();
+		UpdateState();
 	}
 
     public virtual void ToggleLockedState(bool isLocked)
@@ -63,14 +63,14 @@ public class BuildingPieceView : PieceBoardElementView
 		
 		if(state == null) return;
         
-		state.OnChangeState -= UpdateSate;
+		state.OnChangeState -= UpdateState;
 	    
 	}
     
-	private void UpdateSate()
+	private void UpdateState()
 	{
 		if(state == null) return;
-		
+			
 		warning.SetActive(state.State == BuildingState.Warning);
 	}
 

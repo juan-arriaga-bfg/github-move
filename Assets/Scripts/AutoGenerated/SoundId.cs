@@ -45,4 +45,7 @@ public class SoundId
      public const string QuestHint = "QuestHint";
      public const string TimeBoost = "TimeBoost";
      public const string GiftOpen = "GiftOpen";
+     public const string BuyMarket = "BuyMarket";
+     public const string OrderClaim = "OrderClaim";
+     public const string CastleMagic = "CastleMagic";
 }

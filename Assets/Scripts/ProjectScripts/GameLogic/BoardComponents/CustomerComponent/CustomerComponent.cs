@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CustomerComponent : ECSEntity, IPieceBoardObserver
 {
@@ -157,6 +158,7 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
     
     public void Buy()
     {
+        
         CurrencyHellper.Purchase(new CurrencyPair{Currency = Currency.Order.Name, Amount = 1}, Order.Def.Prices,
             success =>
             {
@@ -168,11 +170,12 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
     
     public void Exchange()
     {
+        
         CurrencyPair price = null;
         List<CurrencyPair> diff;
         
         CurrencyHellper.IsCanPurchase(Order.Def.Prices, out diff);
-
+        
         foreach (var pair in diff)
         {
             var def = GameDataService.Current.PiecesManager.GetPieceDef(PieceType.Parse(pair.Currency));
@@ -187,7 +190,11 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         
         model.Products = diff;
         model.Price = price;
-        model.OnClick = Buy;
+        model.OnClick = () =>
+        {
+            NSAudioService.Current.Play(SoundId.TimeBoost);
+            Buy();
+        };
         
         UIService.Get.ShowWindow(UIWindowType.ExchangeWindow);
     }

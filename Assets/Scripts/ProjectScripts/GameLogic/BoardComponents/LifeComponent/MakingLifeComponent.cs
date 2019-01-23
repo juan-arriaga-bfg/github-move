@@ -23,6 +23,23 @@ public class MakingLifeComponent : WorkplaceLifeComponent
         RegisterComponent(TimerCooldown);
     }
 
+    private void OnComplete()
+    {
+        NSAudioService.Current.Play(SoundId.CastleMagic);
+    }
+    
+    public override void OnAddToBoard(BoardPosition position, Piece context = null)
+    {
+        base.OnAddToBoard(position, context);
+        TimerMain.OnComplete += OnComplete;
+    }
+
+    public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
+    {
+        base.OnRemoveFromBoard(position, context);
+        TimerMain.OnComplete -= OnComplete;
+    }
+
     protected override Dictionary<int, int> GetRewards()
     {
         return GameDataService.Current.PiecesManager.GetSequence(def.Uid).GetNextDict(def.PieceAmount);

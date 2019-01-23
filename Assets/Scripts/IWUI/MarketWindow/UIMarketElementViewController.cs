@@ -197,6 +197,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 			}
 			
 			contentEntity.Def.State = MarketItemState.Purchased;
+			NSAudioService.Current.Play(SoundId.BuyMarket);
 			AddReward();
 		});
 	}
