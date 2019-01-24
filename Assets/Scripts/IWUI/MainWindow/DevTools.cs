@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -339,5 +341,29 @@ public class DevTools : UIContainerElementViewController
         return !isTutorialDisabled;
 #endif
         
+    }
+
+    [UsedImplicitly]
+    public void OnReloadSceneClick()
+    {
+        UIService.Get.CloseWindow(UIWindowType.LauncherWindow);
+        
+        // Undo dont destroy on load
+        SceneManager.MoveGameObjectToScene(UIService.Get.GetShowedWindowByName(UIWindowType.LauncherWindow).gameObject, SceneManager.GetActiveScene());
+        
+        IEnumerator LoadSceneCoroutine(Action onComplete)
+        {
+            var loadingOperation = SceneManager.LoadSceneAsync("Reload", LoadSceneMode.Single);
+
+            // Wait until the asynchronous scene fully loads
+            while (!loadingOperation.isDone)
+            {
+                yield return null;
+            }
+
+            onComplete?.Invoke();
+        }
+
+        StartCoroutine(LoadSceneCoroutine(null));
     }
 }
