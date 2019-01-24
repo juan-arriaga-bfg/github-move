@@ -154,12 +154,12 @@ public static class CurrencyHellper
             Amount = amount,
             CurrentPrices = currentPrices
         };
-        
-        return PurchaseItem(shopItem, new CurrencyPair{Currency = product, Amount = amount}, false,onSuccess, flyPosition);
+
+        return PurchaseItem(shopItem, new CurrencyPair {Currency = product, Amount = amount}, false, onSuccess, flyPosition);
     }
 
     
-    private static ShopItemTransaction PurchaseItem(ShopItem shopItem, CurrencyPair product, bool isShoowHint, Action<bool> onSuccess = null, Vector3? flyPosition = null, float delay = 0)
+    private static ShopItemTransaction PurchaseItem(ShopItem shopItem, CurrencyPair product, bool isShowHint, Action<bool> onSuccess = null, Vector3? flyPosition = null, float delay = 0)
     {
         Debug.Log($"[CurrencyHelper] => PurchaseItem: shopItem: {shopItem.ItemUid}: {shopItem.Amount}, product: {product}");
         
@@ -173,8 +173,6 @@ public static class CurrencyHellper
                 // on purchase success
                 isSuccess = true;
                 
-                
-                
                 if (flyPosition != null)
                 {
                     CurrencyFly(flyPosition.Value, product, onSuccess, delay);
@@ -188,7 +186,7 @@ public static class CurrencyHellper
                 // on purchase failed (not enough cash)
                 onSuccess?.Invoke(false);
                 
-                if (!isShoowHint) return;
+                if (!isShowHint) return;
                 
                 var prices = shopItem.CurrentPrices[0];
                 IsCanPurchase(prices.Currency, prices.DefaultPriceAmount, true);
@@ -199,7 +197,7 @@ public static class CurrencyHellper
         return transaction;
     }
     
-    private static ShopItemTransaction PurchaseItemAsync(ShopItem shopItem, CurrencyPair product, bool isShoowHint, Action<bool> onSuccess = null, Vector3? flyPosition = null, float delay = 0)
+    private static ShopItemTransaction PurchaseItemAsync(ShopItem shopItem, CurrencyPair product, bool isShowHint, Action<bool> onSuccess = null, Vector3? flyPosition = null, float delay = 0)
     {
         var isSuccess = false;
         
@@ -224,7 +222,7 @@ public static class CurrencyHellper
                 // on purchase failed (not enough cash)
                 onSuccess?.Invoke(false);
                 
-                if (!isShoowHint) return;
+                if (!isShowHint) return;
                 
                 var prices = shopItem.CurrentPrices[0];
                 IsCanPurchase(prices.Currency, prices.DefaultPriceAmount, true);
@@ -276,9 +274,7 @@ public static class CurrencyHellper
         {
             resourceCarrier.Callback += () =>
             {
-                if(resource.Currency == Currency.Experience.Name)
-                    NSAudioService.Current.Play(SoundId.GetXp);
-                
+                if(resource.Currency == Currency.Experience.Name) NSAudioService.Current.Play(SoundId.GetXp);
             };
         }
     }
@@ -387,7 +383,7 @@ public static class CurrencyHellper
         UIMessageWindowController.CreateNeedCurrencyMessage(currency, diff);
     }
     
-    public static CurrencyPair ResourcePieceToCurrence(Dictionary<int, int> dict, string currency)
+    public static CurrencyPair ResourcePieceToCurrency(Dictionary<int, int> dict, string currency)
     {
         var amount = 0;
         
@@ -485,7 +481,7 @@ public static class CurrencyHellper
                 
             if(types.Contains(currency)) continue;
                 
-            var pair = ResourcePieceToCurrence(pieces, currency);
+            var pair = ResourcePieceToCurrency(pieces, currency);
             
             if (pair.Amount == 0) pair.Amount = reward.Value;
                 
@@ -503,27 +499,35 @@ public static class CurrencyHellper
     /// <param name="price"></param>
     public static void PurchaseAndProvide(List<CurrencyPair> products, CurrencyPair price)
     {
-        Purchase(products, price, success =>
-            {
-                if (success)
-                {
-                    SpawnReward(products);
-                }
-            },
-            new Vector2(Screen.width / 2f, Screen.height / 2f));
-    }
-    
-    private static void SpawnReward(List<CurrencyPair> reward)
-    {
         var board = BoardService.Current.FirstBoard;
         var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
 
         if (positions.Count == 0) return;
-
+        
         var position = positions[0];
+        var piecesReward = FiltrationRewards(products, out var currenciesReward);
+        var transactions = new List<ShopItemTransaction>();
+        
+        var from = board.BoardDef.GetPiecePosition(position.X, position.Y);
+        var flayPoint = board.BoardDef.ViewCamera.WorldToScreenPoint(from);
+        
+        for (var i = 0; i < currenciesReward.Count; i++)
+        {
+            var product = products[i];
 
-        List<CurrencyPair> currencysReward;
-        var piecesReward = CurrencyHellper.FiltrationRewards(reward, out currencysReward);
+            if (i != 0) price = new CurrencyPair {Currency = Currency.Cash.Name, Amount = 0};
+            
+            var transaction = PurchaseAsync(product, price, null, flayPoint);
+
+            if (transaction == null)
+            {
+                if(i == 0) return;
+                
+                continue;
+            }
+            
+            transactions.Add(transaction);
+        }
         
         board.ActionExecutor.AddAction(new EjectionPieceAction
         {
@@ -534,8 +538,13 @@ public static class CurrencyHellper
                 var view = board.RendererContext.GetElementAt(position) as CharacterPieceView;
                 
                 if(view != null) view.StartRewardAnimation();
+
+                for (var i = 0; i < transactions.Count; i++)
+                {
+                    var transaction = transactions[i];
                     
-                AddResourceView.Show(position, currencysReward);
+                    AddResourceView.Show(position, transaction, 1.5f * i);
+                }
             }
         });
     }

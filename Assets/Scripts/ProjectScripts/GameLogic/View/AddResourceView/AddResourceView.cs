@@ -52,6 +52,29 @@ public class AddResourceView : BoardElementView
 		Show(from, resource, delay);
 	}
 
+	public static void Show(BoardPosition position, ShopItemTransaction transaction, float delay = 0f)
+	{
+		var board = BoardService.Current.FirstBoard;
+		var resource = new CurrencyPair{Currency = transaction.ShopItem.ItemUid, Amount = transaction.ShopItem.Amount};
+		
+		if (resource.Currency == Currency.Coins.Name
+		    || resource.Currency == Currency.Crystals.Name
+		    || resource.Currency == Currency.Energy.Name
+		    || resource.Currency == Currency.Mana.Name
+		    || resource.Currency == Currency.Experience.Name)
+		{
+			DOTween.Sequence().InsertCallback(0.5f + delay, () =>
+			{
+				transaction.Complete();
+				ShowCounter(board, position, resource);
+			});
+			
+			return;
+		}
+
+		ShowCounter(board, position, resource, true);
+	}
+
 	public static void Show(BoardPosition position, List<CurrencyPair> resource)
 	{
 		var sequence = DOTween.Sequence();
