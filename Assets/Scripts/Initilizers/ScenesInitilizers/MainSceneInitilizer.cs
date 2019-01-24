@@ -40,6 +40,13 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         
         InitGameField();
 
+        // Hot reload?
+        if (IWUIManager.Instance.IsComplete)
+        {
+            Run(onComplete);
+            return;
+        }
+               
         // cache windows
         IWUIManager.Instance.Init(WindowNames);
         
@@ -58,6 +65,15 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
              yield return new WaitForSeconds(0.2f);
         }
         
+        Run(onComplete);
+
+        NSAudioService.Current.Play(SoundId.Ambient1Music, true, 1)
+                      .SetVolume(0f)
+                      .SetVolume(1f, 2f);
+    }
+
+    private static void Run(Action onComplete)
+    {
         // close launcher
         UIService.Get.CloseWindow(UIWindowType.LauncherWindow);
 
@@ -73,10 +89,6 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
 
         ProfileService.Current.QueueComponent.Run();
         BoardService.Current.FirstBoard.TutorialLogic.Run();
-
-        NSAudioService.Current.Play(SoundId.Ambient1Music, true, 1)
-                      .SetVolume(0f)
-                      .SetVolume(1f, 2f);
     }
 
     private void InitGameField()

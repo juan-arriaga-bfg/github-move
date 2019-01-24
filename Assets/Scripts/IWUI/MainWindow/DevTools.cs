@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -36,7 +37,7 @@ public class DevTools : UIContainerElementViewController
     {
         panel.SetActive(!isChecked);
     }
-
+    
     public static void ReloadScene(bool resetProgress)
     {
         var manager = GameDataService.Current.QuestsManager;
@@ -51,15 +52,15 @@ public class DevTools : UIContainerElementViewController
         }
 
         GameDataService.Current.Reload();
-        
-        SceneManager.LoadScene("Main", LoadSceneMode.Single);
-            
+                   
         var ecsSystems = new List<IECSSystem>(ECSService.Current.SystemProcessor.RegisteredSystems);
             
         foreach (var system in ecsSystems)
         {
             ECSService.Current.SystemProcessor.UnRegisterSystem(system);
         }
+        
+        SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
     
     public void OnResetProgressClick()
@@ -342,28 +343,88 @@ public class DevTools : UIContainerElementViewController
 #endif
         
     }
+    
+    public static void CleanupSceneBeforeReload()
+    {
+        var manager = GameDataService.Current.QuestsManager;
+        manager.DisconnectFromBoard();
+            
+        BoardService.Instance.SetManager(null);
+
+        GameDataService.Instance.SetManager(null);
+         
+        ProfileService.Current.QueueComponent.StopAndClear();
+        
+        ProfileService.Instance.SetManager(null);
+        
+        var ecsSystems = new List<IECSSystem>(ECSService.Current.SystemProcessor.RegisteredSystems);
+            
+        foreach (var system in ecsSystems)
+        {
+            ECSService.Current.SystemProcessor.UnRegisterSystem(system);
+        }
+    }
 
     [UsedImplicitly]
     public void OnReloadSceneClick()
     {
-        UIService.Get.CloseWindow(UIWindowType.LauncherWindow);
+        // var mainWindowGo = UIService.Get.Get(UIWindowType.LauncherWindow).gameObject;
         
+        UIService.Get.CloseWindow(UIWindowType.MainWindow);
+        UIService.Get.CloseWindow(UIWindowType.ResourcePanelWindow);
+
+        // UIWaitWindowView.Show();
+
+        CleanupSceneBeforeReload();
+
+        // var findGo = GameObject.Find("UIContainer");
+        // var refGo = IWUIManager.Instance.gameObject;
+        // DontDestroyOnLoad(IWUIManager.Instance.transform.parent);
+        //
+        // if (!ReferenceEquals(findGo, refGo))
+        // {
+        //     Debug.LogError("SUKA!!!!!!!");
+        // }
+        // else
+        // {
+        //     Debug.LogError("OK!!!!!!!");
+        // }
+
+        AsyncInitService.Current
+                        .AddComponent(new ShowLoadingWindowInitComponent())
+
+                        .AddComponent(new ReloadSceneLoaderComponent()
+                            .SetDependency(typeof(ShowLoadingWindowInitComponent)))
+
+                        .AddComponent(new ProfileInitComponent())
+
+                        .AddComponent(new GameDataInitComponent()
+                            .SetDependency(typeof(ProfileInitComponent)))
+
+                        .AddComponent(new MainSceneLoaderComponent()
+                            .SetDependency(typeof(GameDataInitComponent)))
+
+                        .Run(null);
+
         // Undo dont destroy on load
-        SceneManager.MoveGameObjectToScene(UIService.Get.GetShowedWindowByName(UIWindowType.LauncherWindow).gameObject, SceneManager.GetActiveScene());
-        
-        IEnumerator LoadSceneCoroutine(Action onComplete)
-        {
-            var loadingOperation = SceneManager.LoadSceneAsync("Reload", LoadSceneMode.Single);
+        // SceneManager.MoveGameObjectToScene(mainWindowGo, SceneManager.GetActiveScene());
 
-            // Wait until the asynchronous scene fully loads
-            while (!loadingOperation.isDone)
-            {
-                yield return null;
-            }
+        // SceneManager.LoadScene("Reload", LoadSceneMode.Single);
+        // return;
 
-            onComplete?.Invoke();
-        }
-
-        StartCoroutine(LoadSceneCoroutine(null));
+        // IEnumerator LoadSceneCoroutine(Action onComplete)
+        // {
+        //     var loadingOperation = SceneManager.LoadSceneAsync("Reload", LoadSceneMode.Single);
+        //
+        //     // Wait until the asynchronous scene fully loads
+        //     while (!loadingOperation.isDone)
+        //     {
+        //         yield return null;
+        //     }
+        //
+        //     onComplete?.Invoke();
+        // }
+        //
+        // StartCoroutine(LoadSceneCoroutine(null));
     }
 }

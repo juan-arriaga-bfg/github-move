@@ -19,6 +19,9 @@ public class UILauncherWindowView : IWUIWindowView
         UILauncherWindowModel windowModel = Model as UILauncherWindowModel;
 
         asyncInitManager = AsyncInitService.Current;
+
+        isGameLoaded = false;
+        progressBarStartValue = -1;
     }
 
     public override void OnViewClose()

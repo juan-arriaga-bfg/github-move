@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
-public class MainSceneLoaderComponent : AsyncInitComponentBase
+public abstract class SceneLoaderComponentBase : AsyncInitComponentBase
 {
     private AsyncOperation loadingOperation;
-
+    protected abstract string SceneName { get;}
+    
     public override float Progress
     {
         get
@@ -30,6 +31,7 @@ public class MainSceneLoaderComponent : AsyncInitComponentBase
     {
         // Proxy GO to run coroutine from non-monobehaviour
         var go = new GameObject();
+        go.name = "[SceneLoaderComponentCoroutineExecutor]"; 
         var mb = go.AddComponent<IWBaseMonoBehaviour>();
         Object.DontDestroyOnLoad(go);
         
@@ -43,7 +45,7 @@ public class MainSceneLoaderComponent : AsyncInitComponentBase
     
     IEnumerator LoadSceneCoroutine(Action onComplete)
     {
-        loadingOperation = SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
+        loadingOperation = SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Single);
 
         // Wait until the asynchronous scene fully loads
         while (!loadingOperation.isDone)

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class ShowLoadingWindowInitComponent : AsyncInitComponentBase
 {
     public override void Execute()
