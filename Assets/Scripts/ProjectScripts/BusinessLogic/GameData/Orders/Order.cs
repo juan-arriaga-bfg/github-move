@@ -36,7 +36,7 @@ public class Order
     }
     
     private List<CurrencyPair> currencysReward;
-    public List<CurrencyPair> CurrencysReward
+    public List<CurrencyPair> CurrenciesReward
     {
         get
         {
@@ -61,7 +61,7 @@ public class Order
         {
             if (string.IsNullOrEmpty(reward) == false) return reward;
             
-            reward = CurrencyHellper.RewardsToString(Separator, PiecesReward, CurrencysReward);
+            reward = CurrencyHellper.RewardsToString(Separator, PiecesReward, CurrenciesReward);
             return reward;
         }
     }

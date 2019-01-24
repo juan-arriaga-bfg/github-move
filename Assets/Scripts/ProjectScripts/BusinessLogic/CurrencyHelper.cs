@@ -157,7 +157,6 @@ public static class CurrencyHellper
 
         return PurchaseItem(shopItem, new CurrencyPair {Currency = product, Amount = amount}, false, onSuccess, flyPosition);
     }
-
     
     private static ShopItemTransaction PurchaseItem(ShopItem shopItem, CurrencyPair product, bool isShowHint, Action<bool> onSuccess = null, Vector3? flyPosition = null, float delay = 0)
     {
@@ -457,12 +456,12 @@ public static class CurrencyHellper
         return dict;
     }
 
-    public static string RewardsToString(string separator, Dictionary<int, int> pieces, List<CurrencyPair> currencys, bool noAmount = false)
+    public static string RewardsToString(string separator, Dictionary<int, int> pieces, List<CurrencyPair> currencies, bool noAmount = false)
     {
         var types = new List<string>();
         var rewards = new List<string>();
         
-        foreach (var pair in currencys)
+        foreach (var pair in currencies)
         {
             rewards.Add(pair.ToStringIcon());
         }
@@ -491,31 +490,42 @@ public static class CurrencyHellper
         
         return string.Join(separator, rewards);
     }
-
-    /// <summary>
-    /// Purchase some stuff and provide to account and spawn on field if any pieces in products
-    /// </summary>
-    /// <param name="products"></param>
-    /// <param name="price"></param>
-    public static void PurchaseAndProvide(List<CurrencyPair> products, CurrencyPair price)
+    
+    public static void PurchaseAndProvide(List<CurrencyPair> products, CurrencyPair price = null, BoardPosition? position = null, Action onComplete = null)
+    {
+        var piecesReward = FiltrationRewards(products, out var currenciesReward);
+        
+        PurchaseAndProvide(piecesReward, currenciesReward, price, position, onComplete);
+    }
+    
+    public static void PurchaseAndProvide(Dictionary<int, int> piecesReward, List<CurrencyPair> currenciesReward, CurrencyPair price = null, BoardPosition? position = null, Action onComplete = null)
     {
         var board = BoardService.Current.FirstBoard;
-        var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
+        BoardPosition point;
 
-        if (positions.Count == 0) return;
+        if (position == null)
+        {
+            var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
+            
+            if (positions.Count == 0) return;
+            
+            point = positions[0];
+        }
+        else
+        {
+            point = position.Value;
+        }
         
-        var position = positions[0];
-        var piecesReward = FiltrationRewards(products, out var currenciesReward);
         var transactions = new List<ShopItemTransaction>();
         
-        var from = board.BoardDef.GetPiecePosition(position.X, position.Y);
+        var from = board.BoardDef.GetPiecePosition(point.X, point.Y);
         var flayPoint = board.BoardDef.ViewCamera.WorldToScreenPoint(from);
         
         for (var i = 0; i < currenciesReward.Count; i++)
         {
-            var product = products[i];
+            var product = currenciesReward[i];
 
-            if (i != 0) price = new CurrencyPair {Currency = Currency.Cash.Name, Amount = 0};
+            if (i != 0 || price == null) price = new CurrencyPair {Currency = Currency.Cash.Name, Amount = 0};
             
             var transaction = PurchaseAsync(product, price, null, flayPoint);
 
@@ -531,11 +541,11 @@ public static class CurrencyHellper
         
         board.ActionExecutor.AddAction(new EjectionPieceAction
         {
-            GetFrom = () => position,
+            From = point,
             Pieces = piecesReward,
             OnComplete = () =>
             {
-                var view = board.RendererContext.GetElementAt(position) as CharacterPieceView;
+                var view = board.RendererContext.GetElementAt(point) as CharacterPieceView;
                 
                 if(view != null) view.StartRewardAnimation();
 
@@ -543,8 +553,10 @@ public static class CurrencyHellper
                 {
                     var transaction = transactions[i];
                     
-                    AddResourceView.Show(position, transaction, 1.5f * i);
+                    AddResourceView.Show(point, transaction, 1.5f * i);
                 }
+                
+                onComplete?.Invoke();
             }
         });
     }
