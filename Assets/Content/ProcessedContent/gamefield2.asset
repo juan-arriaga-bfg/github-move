@@ -73,9 +73,6 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 1b37cc7c5d053294c923497559b39743, type: 3}
     - {fileID: 21300000, guid: 8eefe0b7727d9784e86cf6442fcab57a, type: 3}
     - {fileID: 21300000, guid: 278ff1f5035737842a079694954732ef, type: 3}
-    - {fileID: 21300000, guid: 2ef67c458a601794993abfd07b5d6598, type: 3}
-    - {fileID: 21300000, guid: d3917eac53bed514ea7209c492a04702, type: 3}
-    - {fileID: 21300000, guid: 6c0ca5d99cf17294c919421fd01620e4, type: 3}
     - {fileID: 21300000, guid: 3440d6c3b13783244bf5a0db7be8d77a, type: 3}
     - {fileID: 21300000, guid: a66a0ea3eb6591e46bdcbc6027e8b1b3, type: 3}
     - {fileID: 21300000, guid: 403caefd5f5b2e642b7c61b3fd613ebf, type: 3}
@@ -111,7 +108,7 @@ SpriteAtlas:
     - {fileID: 21300000, guid: d61b8bdfb3f432746ac2bc605fc2d389, type: 3}
     - {fileID: 21300000, guid: 86c2e5fa261955341940422c1bd756f9, type: 3}
     - {fileID: 21300000, guid: f7b6013d43481ba48aa2e5e84908e089, type: 3}
-    totalSpriteSurfaceArea: 1314065
+    totalSpriteSurfaceArea: 1275257
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -140,7 +137,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1f6f3be43a9eb47c4a803d780346eb6d, type: 3}
   - {fileID: 21300000, guid: c111d41563341194caaa4b531b88bd22, type: 3}
   - {fileID: 21300000, guid: 16f32a156f235034392d0154d81d2e5e, type: 3}
-  - {fileID: 21300000, guid: 2ef67c458a601794993abfd07b5d6598, type: 3}
   - {fileID: 21300000, guid: c4912f6551e7b514d99cace2c5dbdd0e, type: 3}
   - {fileID: 21300000, guid: ce623575c844a5f4d8d6d1c7bd05379b, type: 3}
   - {fileID: 21300000, guid: 3e45fa956279dc545a901fa474bd1c9a, type: 3}
@@ -165,7 +161,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: cd9af749a289e9040ac294b9bae49d93, type: 3}
   - {fileID: 21300000, guid: 7f901a690141c9e4c8179df44684aeb5, type: 3}
   - {fileID: 21300000, guid: 01455fc97f1abba43bdf8fea43c9d5bd, type: 3}
-  - {fileID: 21300000, guid: 6c0ca5d99cf17294c919421fd01620e4, type: 3}
   - {fileID: 21300000, guid: d6f0573a9a7006a49b5a467d50b0bf05, type: 3}
   - {fileID: 21300000, guid: c749ba8ac3faccf47b5a19cd6747ef9b, type: 3}
   - {fileID: 21300000, guid: ea6c19ba67774a74a810ab7fa8185faf, type: 3}
@@ -181,7 +176,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1b37cc7c5d053294c923497559b39743, type: 3}
   - {fileID: 21300000, guid: a0d63e8cfdf39f94eacb24a7475c3c38, type: 3}
   - {fileID: 21300000, guid: f22c53acd1b2785468a89f3ae3568173, type: 3}
-  - {fileID: 21300000, guid: d3917eac53bed514ea7209c492a04702, type: 3}
   - {fileID: 21300000, guid: 37cbffec2ac98c84c97dbf456e58c3d9, type: 3}
   - {fileID: 21300000, guid: eb909b0d76a5e9f46ae387848ed2b164, type: 3}
   - {fileID: 21300000, guid: 19a7232db336496438280f9d680ce6e1, type: 3}
@@ -222,7 +216,6 @@ SpriteAtlas:
   - fog_opacity_1
   - bodySleepingBeauty
   - shadow
-  - NPC_5
   - r_hand4
   - l_hand2
   - hand3RightSleepingBeauty
@@ -247,7 +240,6 @@ SpriteAtlas:
   - CH3_B
   - eyesSleepingBeauty
   - Fog1_border
-  - NPC_7
   - Fog3_border
   - SK1_PR
   - NPC_SleepingBeautyPlaid
@@ -263,7 +255,6 @@ SpriteAtlas:
   - pink_r_hand2
   - shadowSleepingBeauty
   - pink_l_leg
-  - NPC_6
   - r_hand3
   - hearSleepingBeauty
   - r_legExtra
