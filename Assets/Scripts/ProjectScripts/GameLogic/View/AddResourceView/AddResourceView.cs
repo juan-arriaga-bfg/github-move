@@ -29,7 +29,7 @@ public class AddResourceView : BoardElementView
 		sequence.Insert(duration * 0.5f, CachedTransform.DOMoveY(position + 0.7f, duration * 0.3f).SetEase(Ease.Linear));
 		sequence.Insert(duration * 0.8f, CachedTransform.DOMoveY(position + 1, duration * 0.2f).SetEase(Ease.InQuart));
 		
-		if(isPurchase) sequence.InsertCallback(duration * 0.5f, () => { CurrencyHellper.Purchase(resource); });
+		if(isPurchase) sequence.InsertCallback(duration * 0.5f, () => { CurrencyHelper.Purchase(resource); });
 		
 		DestroyOnBoard(duration);
 	}
@@ -43,7 +43,7 @@ public class AddResourceView : BoardElementView
 		var tColor = amountLabel.TextLabel.color;
 		amountLabel.TextLabel.color = new Color(tColor.r, tColor.g, tColor.b, 0);
 	}
-
+	
 	public static void Show(Vector3 position, CurrencyPair resource, float delay = 0f)
 	{
 		var board = BoardService.Current.FirstBoard;
@@ -51,7 +51,29 @@ public class AddResourceView : BoardElementView
 		
 		Show(from, resource, delay);
 	}
+	
+	public static void Show(BoardPosition position, List<CurrencyPair> resource)
+	{
+		var sequence = DOTween.Sequence();
+        
+		for (var i = 0; i < resource.Count; i++)
+		{
+			var reward = resource[i];
+			sequence.InsertCallback(duration * 0.5f * i, () => Show(position, reward));
+		}
+	}
 
+	public static void Show(BoardPosition position, CurrencyPair resource, float delay = 0f)
+	{
+		if (resource == null) return;
+		
+		var board = BoardService.Current.FirstBoard;
+		var from = board.BoardDef.GetPiecePosition(position.X, position.Y);
+		var transaction = CurrencyHelper.PurchaseAsync(resource,null, board.BoardDef.ViewCamera.WorldToScreenPoint(from));
+
+		Show(position, transaction, delay);
+	}
+	
 	public static void Show(BoardPosition position, ShopItemTransaction transaction, float delay = 0f)
 	{
 		var board = BoardService.Current.FirstBoard;
@@ -74,50 +96,7 @@ public class AddResourceView : BoardElementView
 
 		ShowCounter(board, position, resource, true);
 	}
-
-	public static void Show(BoardPosition position, List<CurrencyPair> resource)
-	{
-		var sequence = DOTween.Sequence();
-        
-		for (var i = 0; i < resource.Count; i++)
-		{
-			var reward = resource[i];
-			sequence.InsertCallback(duration * 0.5f * i, () => Show(position, reward));
-		}
-	}
-
-	public static void Show(BoardPosition position, CurrencyPair resource, float delay = 0f)
-	{
-		if (resource == null) return;
-		
-		var board = BoardService.Current.FirstBoard;
-		
-		if (resource.Currency == Currency.Coins.Name
-		    || resource.Currency == Currency.Crystals.Name
-		    || resource.Currency == Currency.Energy.Name
-		    || resource.Currency == Currency.Mana.Name
-		    || resource.Currency == Currency.Worker.Name
-		    || resource.Currency == Currency.Experience.Name)
-		{
-			var from = board.BoardDef.GetPiecePosition(position.X, position.Y);
-
-			var transaction = CurrencyHellper.PurchaseAsync(
-				resource,
-				null,
-				board.BoardDef.ViewCamera.WorldToScreenPoint(from));
-			
-			DOTween.Sequence().InsertCallback(0.5f + delay, () =>
-			{
-			    transaction.Complete();
-			    ShowCounter(board, position, resource);
-			});
-			
-			return;
-		}
-
-		ShowCounter(board, position, resource, true);
-	}
-
+	
 	private static void ShowCounter(BoardController board, BoardPosition position, CurrencyPair resource, bool isPurchase = false)
 	{
 		var view = board.RendererContext.CreateBoardElementAt<AddResourceView>(R.AddResourceView, position);
@@ -125,5 +104,5 @@ public class AddResourceView : BoardElementView
 		view.CachedTransform.localPosition = view.CachedTransform.localPosition + Vector3.up;
 		view.isPurchase = isPurchase;
 		view.Show(resource);
-	} 
+	}
 }

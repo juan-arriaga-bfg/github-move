@@ -74,7 +74,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
     
     public bool Get(BoardPosition id, TimerComponent timer)
     {
-        if (CurrencyHellper.IsCanPurchase(targetItem.Currency, 1) == false)
+        if (CurrencyHelper.IsCanPurchase(targetItem.Currency, 1) == false)
         {
             completeTimesList.Sort((a, b) => a.Value.CompleteTime.CompareTo(b.Value.CompleteTime));
             
@@ -96,7 +96,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         
         var isSuccess = false;
         
-        CurrencyHellper.Purchase(Currency.Workplace.Name, 1, targetItem.Currency, 1, success =>
+        CurrencyHelper.Purchase(Currency.Workplace.Name, 1, targetItem.Currency, 1, success =>
         {
             isSuccess = success;
 

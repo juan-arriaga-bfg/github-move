@@ -117,7 +117,7 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
 
     public void GetReward()
     {
-        CurrencyHellper.PurchaseAndProvide(Order.PiecesReward, Order.CurrenciesReward, null, pieceContext.CachedPosition, () => { Order = null; });
+        CurrencyHelper.PurchaseAndProvideEjection(Order.PiecesReward, Order.CurrenciesReward, null, pieceContext.CachedPosition, () => { Order = null; });
         GameDataService.Current.OrdersManager.RemoveOrder(Order, pieceContext.Context.BoardLogic);
         
         Order.State = OrderState.Reward;
@@ -128,14 +128,14 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
     {
         if(Order == null) return;
         
-        if(Order.State == OrderState.Init && state == OrderState.Waiting) Order.State = CurrencyHellper.IsCanPurchase(Order.Def.Prices) ? OrderState.Enough : OrderState.Waiting;
+        if(Order.State == OrderState.Init && state == OrderState.Waiting) Order.State = CurrencyHelper.IsCanPurchase(Order.Def.Prices) ? OrderState.Enough : OrderState.Waiting;
         if(Order.State == OrderState.InProgress && state == OrderState.Complete) Order.State = state;
     }
     
     public void Buy()
     {
         
-        CurrencyHellper.Purchase(new CurrencyPair{Currency = Currency.Order.Name, Amount = 1}, Order.Def.Prices,
+        CurrencyHelper.Purchase(new CurrencyPair{Currency = Currency.Order.Name, Amount = 1}, Order.Def.Prices,
             success =>
             {
                 GameDataService.Current.OrdersManager.UpdateOrders();
@@ -150,7 +150,7 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         CurrencyPair price = null;
         List<CurrencyPair> diff;
         
-        CurrencyHellper.IsCanPurchase(Order.Def.Prices, out diff);
+        CurrencyHelper.IsCanPurchase(Order.Def.Prices, out diff);
         
         foreach (var pair in diff)
         {

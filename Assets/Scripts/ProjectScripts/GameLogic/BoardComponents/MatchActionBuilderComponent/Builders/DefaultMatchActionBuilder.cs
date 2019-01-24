@@ -1,6 +1,4 @@
-﻿using DG.Tweening;
-
-public class DefaultMatchActionBuilder
+﻿public class DefaultMatchActionBuilder
 {
     protected void SpawnReward(BoardPosition position, int pieceType)
     {
@@ -8,12 +6,6 @@ public class DefaultMatchActionBuilder
         
         if(def?.CreateRewards == null) return;
 
-        var sequence = DOTween.Sequence();
-        
-        for (var i = 0; i < def.CreateRewards.Count; i++)
-        {
-            var reward = def.CreateRewards[i];
-            sequence.InsertCallback(0.5f*i, () => AddResourceView.Show(position, reward));
-        }
+        AddResourceView.Show(position, def.CreateRewards);
     }
 }

@@ -64,11 +64,11 @@ public class UICharacterBubbleQuestCompletedViewController : UICharacterBubbleMe
         }
 
         List<CurrencyPair> currencyRewards;
-        var priceRewards = CurrencyHellper.FiltrationRewards(reward, out currencyRewards);
+        var priceRewards = CurrencyHelper.FiltrationRewards(reward, out currencyRewards);
         
         var str = new StringBuilder("<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00></color></font>");
             
-        str.Append(CurrencyHellper.RewardsToString("  ", priceRewards, currencyRewards));
+        str.Append(CurrencyHelper.RewardsToString("  ", priceRewards, currencyRewards));
         str.Append("</size>");
             
         return str.ToString();

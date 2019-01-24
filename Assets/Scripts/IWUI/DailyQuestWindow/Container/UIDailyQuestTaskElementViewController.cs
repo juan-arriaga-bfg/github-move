@@ -152,7 +152,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         }
         
         List<CurrencyPair> currencies;
-        var pieces = CurrencyHellper.FiltrationRewards(reward, out currencies);
+        var pieces = CurrencyHelper.FiltrationRewards(reward, out currencies);
         
         if (task is TaskCompleteDailyTaskEntity)
         {
@@ -165,7 +165,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         
         //var stringBuilder = new StringBuilder($"<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>{str}</color></font> <size=50>");
         var stringBuilder = new StringBuilder($"{str} ");    
-        stringBuilder.Append(CurrencyHellper.RewardsToString("  ", pieces, currencies, task is TaskCompleteDailyTaskEntity));
+        stringBuilder.Append(CurrencyHelper.RewardsToString("  ", pieces, currencies, task is TaskCompleteDailyTaskEntity));
         stringBuilder.Append("</size>");
             
         return stringBuilder.ToString();
@@ -249,7 +249,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         
         // Reward to drop to field
         List<CurrencyPair> currencies;
-        Dictionary<int, int> pieces = CurrencyHellper.FiltrationRewards(reward, out currencies);
+        Dictionary<int, int> pieces = CurrencyHelper.FiltrationRewards(reward, out currencies);
 
         var amount = pieces.Sum(pair => pair.Value);
         
@@ -287,7 +287,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         // Provide all reward
         if (currencies.Count > 0)
         {
-            CurrencyHellper.Purchase(currencies, success =>
+            CurrencyHelper.Purchase(currencies, success =>
             {
                 if (pieces.Count > 0)
                 {

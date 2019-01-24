@@ -71,15 +71,15 @@ public class UINextLevelWindowView : UIGenericWindowView
     {
         var manager = GameDataService.Current.LevelsManager;
         
-        CurrencyHellper.Purchase(manager.Rewards, null, new Vector2(Screen.width/2, Screen.height/2));
-        CurrencyHellper.Purchase(Currency.Level.Name, 1, Currency.Experience.Name, manager.Price);
-        CurrencyHellper.Purchase(Currency.EnergyLimit.Name, 1);
+        CurrencyHelper.Purchase(manager.Rewards, null, new Vector2(Screen.width/2, Screen.height/2));
+        CurrencyHelper.Purchase(Currency.Level.Name, 1, Currency.Experience.Name, manager.Price);
+        CurrencyHelper.Purchase(Currency.EnergyLimit.Name, 1);
         
         var currentValue = ProfileService.Current.GetStorageItem(Currency.Energy.Name).Amount;
         var limitValue = ProfileService.Current.GetStorageItem(Currency.EnergyLimit.Name).Amount;
         var diff = limitValue - currentValue;
         
-        if (diff > 0) CurrencyHellper.Purchase(Currency.Energy.Name, diff);
+        if (diff > 0) CurrencyHelper.Purchase(Currency.Energy.Name, diff);
             
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
         GameDataService.Current.LevelsManager.UpdateSequence();

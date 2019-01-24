@@ -108,6 +108,6 @@ public class UILimitPanelViewController : UIGenericResourcePanelViewController
     
     public void OpenShop()
     {
-        CurrencyHellper.OpenShopWindow(itemUid);
+        CurrencyHelper.OpenShopWindow(itemUid);
     }
 }

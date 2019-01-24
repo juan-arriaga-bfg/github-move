@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
-public static class CurrencyHellper
+public static partial class CurrencyHelper
 {
     public static ShopItemTransaction Purchase(string product, int amount, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
@@ -489,75 +487,5 @@ public static class CurrencyHellper
         }
         
         return string.Join(separator, rewards);
-    }
-    
-    public static void PurchaseAndProvide(List<CurrencyPair> products, CurrencyPair price = null, BoardPosition? position = null, Action onComplete = null)
-    {
-        var piecesReward = FiltrationRewards(products, out var currenciesReward);
-        
-        PurchaseAndProvide(piecesReward, currenciesReward, price, position, onComplete);
-    }
-    
-    public static void PurchaseAndProvide(Dictionary<int, int> piecesReward, List<CurrencyPair> currenciesReward, CurrencyPair price = null, BoardPosition? position = null, Action onComplete = null)
-    {
-        var board = BoardService.Current.FirstBoard;
-        BoardPosition point;
-
-        if (position == null)
-        {
-            var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
-            
-            if (positions.Count == 0) return;
-            
-            point = positions[0];
-        }
-        else
-        {
-            point = position.Value;
-        }
-        
-        var transactions = new List<ShopItemTransaction>();
-        
-        var from = board.BoardDef.GetPiecePosition(point.X, point.Y);
-        var flayPoint = board.BoardDef.ViewCamera.WorldToScreenPoint(from);
-        
-        for (var i = 0; i < currenciesReward.Count; i++)
-        {
-            var product = currenciesReward[i];
-
-            if (i != 0 || price == null) price = new CurrencyPair {Currency = Currency.Cash.Name, Amount = 0};
-            
-            var transaction = PurchaseAsync(product, price, null, flayPoint);
-
-            if (transaction == null)
-            {
-                if(i == 0) return;
-                
-                continue;
-            }
-            
-            transactions.Add(transaction);
-        }
-        
-        board.ActionExecutor.AddAction(new EjectionPieceAction
-        {
-            From = point,
-            Pieces = piecesReward,
-            OnComplete = () =>
-            {
-                var view = board.RendererContext.GetElementAt(point) as CharacterPieceView;
-                
-                if(view != null) view.StartRewardAnimation();
-
-                for (var i = 0; i < transactions.Count; i++)
-                {
-                    var transaction = transactions[i];
-                    
-                    AddResourceView.Show(point, transaction, 1.5f * i);
-                }
-                
-                onComplete?.Invoke();
-            }
-        });
     }
 }

@@ -66,7 +66,7 @@ public class UIExperiencePanelViewController : UIGenericResourcePanelViewControl
 
         SetText((int) Mathf.Max(0, value), manager.Price);
         
-        if(isLevelUp || CurrencyHellper.IsCanPurchase(itemUid, manager.Price) == false) return;
+        if(isLevelUp || CurrencyHelper.IsCanPurchase(itemUid, manager.Price) == false) return;
 
         isLevelUp = true;
 

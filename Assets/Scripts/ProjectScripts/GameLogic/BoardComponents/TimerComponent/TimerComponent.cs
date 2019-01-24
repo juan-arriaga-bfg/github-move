@@ -110,7 +110,7 @@ public class TimerComponent : IECSComponent, IECSSystem
             return;
         }
         
-        CurrencyHellper.Purchase(Currency.Timer.Name, 1, GetPrice(), success =>
+        CurrencyHelper.Purchase(Currency.Timer.Name, 1, GetPrice(), success =>
         {
             if(success == false) return;
             
