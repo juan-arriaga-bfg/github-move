@@ -21,6 +21,12 @@ public class OpenSceneMenu : Editor
     {
         OpenIf("Assets/Scenes/TextStyles.unity");
     }
+    
+    [MenuItem("Open Scene/Reload", false, 20)]
+    private static void Reload()
+    {
+        OpenIf("Assets/Scenes/Reload.unity");
+    }
 
     private static void OpenIf(string level)
     {
