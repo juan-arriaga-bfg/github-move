@@ -176,9 +176,21 @@ public class EmptyCellsFinderComponent : IECSComponent
 		var board = BoardService.Current.FirstBoard;
 		var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
 		
-		target = positions[0];
-		
-		if (amount == 0 || positions.Count != 0 && CheckFreeSpaceNearPosition(target, amount)) return true;
+		target = BoardPosition.Default();
+
+		if (amount == 0 && positions.Count != 0)
+		{
+			target = positions[0];
+			return true;
+		}
+
+		foreach (var position in positions)
+		{
+			if(CheckFreeSpaceNearPosition(position, amount) == false) continue;
+			
+			target = position;
+			return true;
+		}
 
 		if (isMessageShow == false) return false;
 		

@@ -94,13 +94,7 @@ public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMat
         matchField.Clear();
         matchField.AddRange(positions);
         
-        return new ModificationPiecesAction
-        {
-            NextPieces = new List<int>{nextType},
-            To = at,
-            Positions = positions,
-            OnSuccess = list => SpawnReward(list[0], nextType)
-        };
+        return CreateAction(new List<int>{nextType}, positions, at, pieceType);
     }
 
     private List<BoardPosition> CheckMatch(List<List<int>> pattern, BoardLogicComponent logic, BoardPosition start)

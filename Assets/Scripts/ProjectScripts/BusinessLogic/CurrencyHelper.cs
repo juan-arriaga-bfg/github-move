@@ -250,7 +250,6 @@ public static partial class CurrencyHelper
         
         carriers[carriers.Count - 1].Callback = () =>
         {
-            
             ResourcePanelUtils.ToggleFadePanel(resource.Currency, false);
             onSuccess?.Invoke(true);
         };
