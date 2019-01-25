@@ -26,6 +26,22 @@ public class AsyncInitManager :  IAsyncInitManager
     
     public AsyncInitManager AddComponent(AsyncInitComponentBase component)
     {
+        Type t = component.GetType();
+        var existingComponent = GetComponent(t);
+        if (existingComponent != null)
+        {
+            if (IsCompleted(t))
+            {
+                components.Remove(existingComponent);
+                initedComponents.Remove(existingComponent);
+            }
+            else
+            {
+                Debug.LogError($"[AsyncInitManager] => Can't AddComponent({t}) - already in progress!");
+                return this;
+            }
+        }
+
         components.Add(component);
         return this;
     }
@@ -51,17 +67,19 @@ public class AsyncInitManager :  IAsyncInitManager
     private void ExecuteNext()
 #endif
     {
-        if (components.Count == 0)
+        if (components.Count == initedComponents.Count)
         {
             onComplete?.Invoke();
-            
+            onComplete = null;
+
 #if USE_COROUTINE
             GameObject.Destroy(coroutinesExecutor.gameObject);
             yield break;  
         }
 
         yield return new WaitForEndOfFrame();
-#else 
+#else
+            return;
         }
 #endif         
         List<AsyncInitComponentBase> componentsToExecute = new List<AsyncInitComponentBase>();
@@ -185,6 +203,12 @@ public class AsyncInitManager :  IAsyncInitManager
         return components.Count == initedComponents.Count;
     }
 
+    public AsyncInitComponentBase GetComponent(Type t)
+    {
+        var cmp = components.FirstOrDefault(e => e.GetType() == t);
+        return cmp;
+    }
+    
     public T GetComponent<T>() where T : AsyncInitComponentBase
     {
         var cmp = components.FirstOrDefault(e => e.GetType() == typeof(T));
