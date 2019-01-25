@@ -9,6 +9,8 @@
 	{
 		RegisterComponent(Timer);
 		
+		LocalNotificationsService.Current.RegisterNotifier(new Notifier(Timer, NotifyType.MarketRefresh));
+		
 		Timer.Delay = GameDataService.Current.ConstantsManager.MarketUpdateDelay;
 		
 		Timer.OnComplete += () =>

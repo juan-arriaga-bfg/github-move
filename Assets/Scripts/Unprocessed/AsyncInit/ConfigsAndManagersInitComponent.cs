@@ -56,6 +56,11 @@ public class ConfigsAndManagersInitComponent : AsyncInitComponentBase
         
         ShopService.Instance.SetManager(shopManager);
         
+        //init notificationmanager
+        LocalNotificationsManager notifyManager = new LocalNotificationsManager();
+        notifyManager.ClearNotifications();
+        LocalNotificationsService.Instance.SetManager(notifyManager);
+        
         // init audiomanager
         NSAudioManager audioManager = new DefaultAudioManager();
         NSAudioService.Instance.SetManager(audioManager);

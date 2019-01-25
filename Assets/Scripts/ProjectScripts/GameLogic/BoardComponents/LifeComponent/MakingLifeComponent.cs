@@ -32,12 +32,22 @@ public class MakingLifeComponent : WorkplaceLifeComponent
     {
         base.OnAddToBoard(position, context);
         TimerMain.OnComplete += OnComplete;
+
+        if (Context.Multicellular != null)
+        {
+            LocalNotificationsService.Current.RegisterNotifier(new Notifier(TimerMain, NotifyType.MonumentRefresh));   
+        }
     }
 
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
     {
         base.OnRemoveFromBoard(position, context);
         TimerMain.OnComplete -= OnComplete;
+        
+        if (Context.Multicellular != null)
+        {
+            LocalNotificationsService.Current.UnRegisterNotifier(TimerMain);
+        }
     }
 
     protected override Dictionary<int, int> GetRewards()

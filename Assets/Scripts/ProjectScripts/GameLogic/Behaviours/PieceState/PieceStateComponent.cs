@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Contexts;
 using UnityEngine;
 
 public enum BuildingState
@@ -74,6 +75,11 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     {
         Timer.OnComplete += OnComplete;
         Timer.OnStart += OnStart;
+
+        if (Timer != null && thisContext.Multicellular != null)
+        {
+            LocalNotificationsService.Current.RegisterNotifier(new Notifier(Timer, NotifyType.MonumentBuild));
+        }
         
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
         var item = save?.GetBuildingSave(position);
@@ -130,8 +136,13 @@ public class PieceStateComponent : ECSEntity, IPieceBoardObserver
     }
 
     public void OnRemoveFromBoard(BoardPosition position, Piece context = null)
-    {
+    { 
         if(Timer == null) return;
+        
+        if (thisContext.Multicellular != null)
+        {
+            LocalNotificationsService.Current.UnRegisterNotifier(Timer);
+        }
         
         Timer.OnComplete -= OnComplete;
         Timer.OnStart -= OnStart;
