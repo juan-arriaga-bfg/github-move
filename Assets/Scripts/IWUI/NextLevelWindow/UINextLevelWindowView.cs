@@ -140,7 +140,7 @@ public class UINextLevelWindowView : UIGenericWindowView
             .InsertCallback(0.6f + 0.1f*recipes.Count, () => isClick = false);
     }
     
-    private void OnClick()
+    public void OnClick()
     {
         if(isClick) return;
 

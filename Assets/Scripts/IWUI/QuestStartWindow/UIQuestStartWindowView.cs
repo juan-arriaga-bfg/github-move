@@ -201,7 +201,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         questCardPrefab.SetActive(false);
     }
 
-    private void OnClick()
+    public void OnClick()
     {
         if (!isClickAllowed)
         {

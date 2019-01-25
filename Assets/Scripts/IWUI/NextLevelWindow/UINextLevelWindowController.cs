@@ -7,13 +7,17 @@ public class UINextLevelWindowController : IWWindowController {
     {
         UINextLevelWindowModel windowModel = new UINextLevelWindowModel();
 
-
-
         return windowModel;
     }
 
     public override void UpdateWindow(IWUIWindow window)
     {
         base.UpdateWindow(window);
+    }
+
+    public override void OnBackButtonPress()
+    {
+        var view = WindowView as UINextLevelWindowView;
+        view.OnClick();
     }
 }
