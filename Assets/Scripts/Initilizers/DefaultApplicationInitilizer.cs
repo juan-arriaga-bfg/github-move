@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine;
 using IW.Content.ContentModule;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class DefaultApplicationInitilizer : ApplicationInitializer 
@@ -28,7 +29,6 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         asyncInitManager
            .AddComponent(new InternetMonitorInitComponent())                        // Monitors current state of internet connection
            .AddComponent(new BfgSdkUnityMessageHandlerInitComponent())              // Used by BFG SDK to make calls to make calls to native code 
-           .AddComponent(new UIInitProgressListenerComponent())
            .AddComponent(new SecuredTimeServiceInitComponent())                     // Anti-cheat protection for timers
            .AddComponent(new BfgSdkGdprInitComponent())                             // Listener for BFG SDK's GDPR popup events
            .AddComponent(new ConfigsAndManagersInitComponent()) 
@@ -54,14 +54,19 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             
            .AddComponent(new ShowLoadingWindowInitComponent()
                .SetDependency(typeof(LocalBundlesInitComponent))
-               .SetDependency(typeof(LocalizationInitComponent)))
+               .SetDependency(typeof(LocalizationInitComponent)));
 
-           .AddComponent(new MainSceneLoaderComponent()
-               .SetDependency(typeof(LocalBundlesInitComponent))
-               .SetDependency(typeof(LocalizationInitComponent))
-               .SetDependency(typeof(SecuredTimeServiceInitComponent)))
+        if (SceneManager.GetActiveScene().name != "Main") // Handle case when we start the game from the Main scene in the Editor.  
+        {
+            asyncInitManager.AddComponent(new UIInitProgressListenerComponent());
             
-           .Run(onComplete);
+            asyncInitManager.AddComponent(new MainSceneLoaderComponent()
+                .SetDependency(typeof(LocalBundlesInitComponent))
+                .SetDependency(typeof(LocalizationInitComponent))
+                .SetDependency(typeof(SecuredTimeServiceInitComponent)));
+        }
+
+        asyncInitManager.Run(onComplete);
     }
 
     void OnApplicationPause(bool pauseStatus)

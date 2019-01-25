@@ -15,6 +15,7 @@ public class ConfigsAndManagersInitComponent : AsyncInitComponentBase
         // init all project components and managers
         
         GameObject.DontDestroyOnLoad(UIService.Get);
+        UIService.Get.DontDestroyPoolOnSceneChange = true;
         
         // create and register ECS manager
         ECSSystemProcessor ecsSystemProcessor = new GameObject("_ECSProcessor").AddComponent<ECSSystemProcessor>();
@@ -55,6 +56,7 @@ public class ConfigsAndManagersInitComponent : AsyncInitComponentBase
         audioManager.LoadData(new ResourceConfigDataMapper<List<NSAudioData>>("iw/audio.data", false));
         AudioListener audioListener = new GameObject("AudioListener").AddComponent<AudioListener>();
         GameObject.DontDestroyOnLoad(audioListener);
+        audioManager.DontDestroyPoolOnSceneChange = true;
         
         isCompleted = true;
         OnComplete(this);

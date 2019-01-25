@@ -4,6 +4,8 @@ public class CleanupForReloadInitComponent : AsyncInitComponentBase
 {
     public override void Execute()
     {
+        ProfileService.Instance.Manager.SaveLocalProfile();
+        
         var manager = GameDataService.Current.QuestsManager;
         manager.DisconnectFromBoard();
             
