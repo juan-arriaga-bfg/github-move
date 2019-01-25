@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DG.Tweening;
-using Quests;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,14 +35,20 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     public TaskEntity Task => task;
 
     private UIDailyQuestTaskElementEntity targetEntity;
+    
+    private int piecesAmount;
+    private Dictionary<int, int> piecesReward;
+    private List<CurrencyPair> currenciesReward;
 
-    private List<CurrencyPair> reward;
+    private bool isWaiting;
     
     private Transform content;
     
     public override void Init()
     {
         base.Init();
+
+        isWaiting = false;
         
         targetEntity = entity as UIDailyQuestTaskElementEntity;
 
@@ -52,8 +56,8 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         
         targetEntity.Quest.OnChanged += OnQuestChanged;
 
-        reward = GetRewardFromComponent();
-        
+        GetRewardFromComponent(out piecesReward, out currenciesReward);
+        piecesAmount = piecesReward.Sum(pair => pair.Value);
         UpdateUi();
     }
 
@@ -73,6 +77,15 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         }
 
         base.OnViewClose(context);
+    }
+
+    public override void OnViewCloseCompleted()
+    {
+        base.OnViewCloseCompleted();
+        
+        if(isWaiting == false) return;
+        
+        ProvideReward();
     }
 
     private void HighlightDroppedPieces(List<BoardPosition> listOfPiecesToHighlight)
@@ -146,50 +159,49 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
     private string GetRewardAsText()
     {
-        if (reward == null || reward.Count == 0)
+        if ((piecesReward == null || piecesReward.Count == 0) && (currenciesReward == null || currenciesReward.Count == 0))
         {
             return "";
         }
         
-        List<CurrencyPair> currencies;
-        var pieces = CurrencyHelper.FiltrationRewards(reward, out currencies);
-        
         if (task is TaskCompleteDailyTaskEntity)
         {
-            var text = LocalizationService.Get("window.daily.quest.todays.reward.text", "window.daily.quest.todays.reward.text");
-            text += " <sprite name=pointLightProgressLine>";
-            return text;
+            return $"{LocalizationService.Get("window.daily.quest.todays.reward.text", "window.daily.quest.todays.reward.text")} <sprite name=pointLightProgressLine>";
         }
         
         var str = string.Format(LocalizationService.Get("common.message.reward", "common.message.reward:{0}"), "");
         
         //var stringBuilder = new StringBuilder($"<font=\"POETSENONE-REGULAR SDF\" material=\"POETSENONE-REGULAR SDF\"><color=#933E00>{str}</color></font> <size=50>");
-        var stringBuilder = new StringBuilder($"{str} ");    
-        stringBuilder.Append(CurrencyHelper.RewardsToString("  ", pieces, currencies, task is TaskCompleteDailyTaskEntity));
+        var stringBuilder = new StringBuilder($"{str} ");
+        
+        stringBuilder.Append(CurrencyHelper.RewardsToString("  ", piecesReward, currenciesReward, task is TaskCompleteDailyTaskEntity));
         stringBuilder.Append("</size>");
             
         return stringBuilder.ToString();
     }
 
-    private List<CurrencyPair> GetRewardFromComponent()
+    private void GetRewardFromComponent(out Dictionary<int, int> piecesReward, out List<CurrencyPair> currenciesReward)
     {
         var reward = task.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value ?? new List<CurrencyPair>();
-        int count = reward.Count;
+        var count = reward.Count;
+        
+        piecesReward = new Dictionary<int, int>();
+        currenciesReward = new List<CurrencyPair>();
         
         if (count == 0)
         {
             Debug.LogError("[UIDailyQuestTaskElementViewController] => GetReward: No reward specified for 'Clear all' task!");
-            return reward;
+            return;
         }
         
         if (task is TaskCompleteDailyTaskEntity)
         {
-            int globalIndex = GameDataService.Current.QuestsManager.DailyQuestRewardIndex;
-            int index = globalIndex % count;
+            var globalIndex = GameDataService.Current.QuestsManager.DailyQuestRewardIndex;
+            var index = globalIndex % count;
             reward = new List<CurrencyPair> {reward[index]};
         }
         
-        return reward;
+        piecesReward = CurrencyHelper.FiltrationRewards(reward, out currenciesReward);
     }
 
     public void OnClick()
@@ -199,113 +211,55 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
             return;
         }
 
-        bool isCurrentTaskClearAll = (task is TaskCompleteDailyTaskEntity);
-        bool isClaimClearAllAllowed = GameDataService.Current.QuestsManager.DailyQuest.IsAllTasksClaimed(true);
+        var isCurrentTaskClearAll = (task is TaskCompleteDailyTaskEntity);
+        var isClaimClearAllAllowed = GameDataService.Current.QuestsManager.DailyQuest.IsAllTasksClaimed(true);
 
         if (isCurrentTaskClearAll && !isClaimClearAllAllowed)
         {
             ((UIDailyQuestWindowView) targetEntity.WindowController.WindowView).ScrollToFirstNotCompletedOrNotClaimedTask();
             return;
         }
-        
-        if (task.IsCompleted())
+
+        if (task.IsCompleted() == false)
         {
-            if (!ProvideReward())
-            {
-                // No free space
-                UIMessageWindowController.CreateMessage(
-                    LocalizationService.Get("window.daily.error.title", "window.daily.error.title"),
-                    LocalizationService.Get("window.daily.error.free.space", "window.daily.error.free.space"));
-                
-                return;
-            }
-            
-            if (isCurrentTaskClearAll || GameDataService.Current.QuestsManager.DailyQuest.GetCompletedButNotClaimedTasksCount() == 0)
-            {
-                targetEntity.WindowController.CloseCurrentWindow();
-            }
- 
+            targetEntity.WindowController.CloseCurrentWindow();
+            task.Highlight();
+        }
+        
+        var board = BoardService.Current.FirstBoard;
+        
+        if (board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceReward(piecesAmount, true, out var position) == false)
+        {
             return;
         }
         
-        targetEntity.WindowController.CloseCurrentWindow();
-        task.Highlight();
-    }
-
-    private bool ProvideReward(Action onComplete = null)
-    {
-        taskButton.Disable();
+        rewardPosition = position;
         
+        taskButton.Disable();
         task.SetClaimedState();
-
         ToggleActive(false, true);
         
-        var board = BoardService.Current.FirstBoard;
-        var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
-
-        if (positions.Count == 0) return false;
-
-        var position = positions[0];
-        
-        // Reward to drop to field
-        List<CurrencyPair> currencies;
-        Dictionary<int, int> pieces = CurrencyHelper.FiltrationRewards(reward, out currencies);
-
-        var amount = pieces.Sum(pair => pair.Value);
-        
-        if (!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(position, amount))
+        if (isCurrentTaskClearAll || GameDataService.Current.QuestsManager.DailyQuest.GetCompletedButNotClaimedTasksCount() == 0)
         {
-            UIErrorWindowController.AddError(LocalizationService.Get("message.error.freeSpace", "message.error.freeSpace"));
-            return false;
+            isWaiting = true;
+            targetEntity.WindowController.CloseCurrentWindow();
+            return;
         }
         
-        Action dropReward = () =>
-        {
-            DOTween.Sequence()// Delay to hide window
-                   .InsertCallback(0.5f, () =>
-                    {
-                        board.ActionExecutor.AddAction(new SpawnRewardPiecesAction()
-                        {
-                            From = position,
-                            Pieces = pieces,
-                            OnComplete = () =>
-                            {
-                                var view = board.RendererContext.GetElementAt(position) as CharacterPieceView;
+        ProvideReward();
+    }
+    
+    private BoardPosition? rewardPosition;
 
-                                if (view != null) view.StartRewardAnimation();
-
-                                AddResourceView.Show(position, currencies);
-
-                                onComplete?.Invoke();
-                            },
-                            EnabledTopHighlight = true,
-                            EnabledBottomHighlight = true
-                        });
-                    });
-        };
-
-        // Provide all reward
-        if (currencies.Count > 0)
-        {
-            CurrencyHelper.Purchase(currencies, success =>
+    private void ProvideReward()
+    {
+        CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, null, rewardPosition,
+            () =>
             {
-                if (pieces.Count > 0)
-                {
-                    dropReward();
-                }
-                else
-                {
-                    onComplete?.Invoke();
-                }
+                if (currenciesReward.Count == 0) return; 
+                targetEntity.WindowController.Window.Layers[0].ViewCamera .WorldToScreenPoint(taskIconCanvasGroup.transform.position);
             },
-            targetEntity.WindowController.Window.Layers[0].ViewCamera.WorldToScreenPoint(taskIconCanvasGroup.transform.position));
-        }
-        else
-        {
-            dropReward(); 
-        }
-
-        return true;
+            true, true);
     }
 
     private void ToggleActive(bool enabled, bool animated)
@@ -360,14 +314,11 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         back.color = currentColor;
 
-        float TIME = 0.3f;
+        var TIME = 0.3f;
         back.DOColor(activeBackColor, TIME)
-                  .SetId(back)
-                  .SetLoops(4, LoopType.Yoyo)
-                  .SetEase(Ease.OutSine)
-                  .OnComplete(() =>
-                   {
-                       back.color = currentColor;
-                   });
+            .SetId(back)
+            .SetLoops(4, LoopType.Yoyo)
+            .SetEase(Ease.OutSine)
+            .OnComplete(() => { back.color = currentColor; });
     }
 }

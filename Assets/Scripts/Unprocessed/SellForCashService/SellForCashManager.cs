@@ -88,7 +88,7 @@ public class SellForCashManager: ECSEntity
 
     public void ProvideReward(string productId)
     {
-        List<ShopDef> defs = GameDataService.Current.ShopManager.Defs[Currency.Crystals.Name];
+        var defs = GameDataService.Current.ShopManager.Defs[Currency.Crystals.Name];
         var def = defs.FirstOrDefault(e => e.PurchaseKey == productId);
 
         if (def == null)
@@ -100,8 +100,7 @@ public class SellForCashManager: ECSEntity
         var products = def.Products;
         var price = def.Price;
         
-        CurrencyHelper.PurchaseAndProvideEjection(products, price);
-        
+        CurrencyHelper.PurchaseAndProvideSpawn(products, price, null, null, false, true);
         IapService.Current.IapProvidedToPlayer(productId);
     }
 

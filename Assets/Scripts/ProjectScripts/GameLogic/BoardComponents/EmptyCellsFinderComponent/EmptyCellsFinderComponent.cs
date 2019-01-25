@@ -19,11 +19,11 @@ public class EmptyCellsFinderComponent : IECSComponent
 	{
 	}
 	
-	public bool FindRandomNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int amount, float extraSpacePrecent = 0)
+	public bool FindRandomNearWithPointInCenter(BoardPosition point, List<BoardPosition> field, int amount, float extraSpacePercent = 0)
 	{
 		var index = 0;
-		extraSpacePrecent = Mathf.Clamp(extraSpacePrecent, 0, float.MaxValue);
-		var extra = 1 + extraSpacePrecent;
+		extraSpacePercent = Mathf.Clamp(extraSpacePercent, 0, float.MaxValue);
+		var extra = 1 + extraSpacePercent;
 
 		while (field.Count < amount * extra && index < 10)
 		{
@@ -83,7 +83,7 @@ public class EmptyCellsFinderComponent : IECSComponent
 		return field.Count != 0;
 	}
 	
-	public bool FindRingWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, int radius, bool chechCount = false)
+	public bool FindRingWithPointInCenter(BoardPosition point, List<BoardPosition> field, int count, int radius, bool checkCount = false)
 	{
 		// TODO: нет проверки на валидность координаты, в результате идет проход даже по ячекам, которые не существуют
 		
@@ -92,7 +92,7 @@ public class EmptyCellsFinderComponent : IECSComponent
 		var isStartAdded = AddIsEmpty(point, field, count);
 		
 		if (radius == 0) return isStartAdded;
-		if (isStartAdded && chechCount) return true;
+		if (isStartAdded && checkCount) return true;
 		
 		var bottomLeft = point.BottomLeftAtDistance(radius);
 		var topLeft = point.TopLeftAtDistance(radius);
@@ -103,19 +103,19 @@ public class EmptyCellsFinderComponent : IECSComponent
 		{
 			bottomLeft = bottomLeft.Up;
 				
-			if (AddIsEmpty(bottomLeft, field, count) && chechCount) return true;
+			if (AddIsEmpty(bottomLeft, field, count) && checkCount) return true;
 				
 			topLeft = topLeft.Right;
 				
-			if (AddIsEmpty(topLeft, field, count) && chechCount) return true;
+			if (AddIsEmpty(topLeft, field, count) && checkCount) return true;
 				
 			topRight = topRight.Down;
 				
-			if (AddIsEmpty(topRight, field, count) && chechCount) return true;
+			if (AddIsEmpty(topRight, field, count) && checkCount) return true;
 				
 			bottomRight = bottomRight.Left;
 				
-			if (AddIsEmpty(bottomRight, field, count) && chechCount) return true;
+			if (AddIsEmpty(bottomRight, field, count) && checkCount) return true;
 		}
 
 		return field.Count != 0;
@@ -169,6 +169,24 @@ public class EmptyCellsFinderComponent : IECSComponent
 			return false;
 		
 		return free.Count >= amount;
+	}
+
+	public bool CheckFreeSpaceReward(int amount, bool isMessageShow, out BoardPosition target)
+	{
+		var board = BoardService.Current.FirstBoard;
+		var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
+		
+		target = positions[0];
+		
+		if (amount == 0 || positions.Count != 0 && CheckFreeSpaceNearPosition(target, amount)) return true;
+
+		if (isMessageShow == false) return false;
+		
+		UIMessageWindowController.CreateMessage(
+			LocalizationService.Get("window.daily.error.title", "window.daily.error.title"),
+			LocalizationService.Get("window.daily.error.free.space", "window.daily.error.free.space"));
+			
+		return false;
 	}
 	
 	public bool FindAllWithPointInCenter(BoardPosition point, int width, int height, List<BoardPosition> field, int targetLayer)

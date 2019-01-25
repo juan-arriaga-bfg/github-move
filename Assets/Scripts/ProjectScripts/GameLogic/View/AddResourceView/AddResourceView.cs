@@ -59,7 +59,7 @@ public class AddResourceView : BoardElementView
 		for (var i = 0; i < resource.Count; i++)
 		{
 			var reward = resource[i];
-			sequence.InsertCallback(duration * 0.5f * i, () => Show(position, reward));
+			sequence.InsertCallback(1.5f * i, () => Show(position, reward));
 		}
 	}
 

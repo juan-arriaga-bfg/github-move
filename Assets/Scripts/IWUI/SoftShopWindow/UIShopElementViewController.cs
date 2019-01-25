@@ -8,14 +8,17 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
     [IWUIBinding("#BuyButton")] protected UIButtonViewController btnBuy;
     
     private bool isClick;
-    private bool isCanPurchase;
+    private BoardPosition? rewardPosition;
+
+    private int piecesAmount;
+    private Dictionary<int, int> piecesReward;
+    private List<CurrencyPair> currenciesReward;
     
-    public bool IsNeedReopen => isClick == false && isCanPurchase == false;
+    public bool IsNeedReopen;
 
     private bool IsBuyUsingCash()
     {
-        var contentEntity = entity as UIShopElementEntity;
-        return contentEntity.Price.Currency == Currency.Cash.Name;
+        return entity is UIShopElementEntity contentEntity && contentEntity.Price.Currency == Currency.Cash.Name;
     }
     
     public override void Init()
@@ -23,11 +26,18 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         base.Init();
         
         isClick = false;
-        isCanPurchase = true;
-        
-        var contentEntity = entity as UIShopElementEntity;
+        IsNeedReopen = false;
+        rewardPosition = null;
+        piecesReward = null;
+        currenciesReward = null;
+        piecesAmount = 0;
 
+        if(!(entity is UIShopElementEntity contentEntity)) return;
+        
+        piecesReward = CurrencyHelper.FiltrationRewards(contentEntity.Products, out currenciesReward);
         btnLabel.Text = contentEntity.ButtonLabel;
+
+        piecesAmount = piecesReward.Sum(pair => pair.Value);
 
         if (nameLabel != null) nameLabel.Text = contentEntity.NameLabel;
     }
@@ -49,7 +59,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
         if (!IsBuyUsingCash())
         {
-            CurrencyHelper.PurchaseAndProvideSpawn(contentEntity.Products, contentEntity.Price);
+            CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, contentEntity.Price, rewardPosition, null, false, true);
         }
     }
 
@@ -59,25 +69,27 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         
         if(!(entity is UIShopElementEntity contentEntity) || entity == null || isClick == false) return;
         
-        if(isCanPurchase) PlaySoundOnPurchase(contentEntity.Products);
+        PlaySoundOnPurchase(contentEntity.Products);
     }
 
     private void OnBuyClick()
     {
         if(isClick) return;
 		
+        var board = BoardService.Current.FirstBoard;
+        
+        if (board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceReward(piecesAmount, true, out var position) == false)
+        {
+            return;
+        }
+        
+        rewardPosition = position;
         isClick = true;
         
         var contentEntity = entity as UIShopElementEntity;
-
-        if (IsBuyUsingCash())
-        {
-            OnBuyUsingCash(contentEntity);
-        }
-        else
-        {
-            OnBuyUsingNoCash(contentEntity);
-        }
+        
+        if (IsBuyUsingCash()) OnBuyUsingCash(contentEntity);
+        else OnBuyUsingNoCash(contentEntity);
     }
     
     private void PlaySoundOnPurchase(List<CurrencyPair> products)
@@ -96,18 +108,12 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         // HACK to handle the case when we have a purchase but BFG still not add it to the Store
         if (IapService.Current.IapCollection.Defs.All(e => e.Id != contentEntity.PurchaseKey))
         {
-            context.Controller.CloseCurrentWindow();
-            
             var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
 
             model.Title = "[DEBUG]";
             model.Message = $"Product with id '{contentEntity.PurchaseKey}' not registered. Purchase will be processed using debug flow without real store.";
-            model.AcceptLabel = LocalizationService.Get("common.button.ok",            "common.button.ok");
-
-            model.OnAccept = () =>
-            {
-                CurrencyHelper.PurchaseAndProvideSpawn(contentEntity.Products, contentEntity.Price);
-            };
+            model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
+            model.OnAccept = () => { context.Controller.CloseCurrentWindow(); };
 
             UIService.Get.ShowWindow(UIWindowType.MessageWindow);
             return;
@@ -116,12 +122,9 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
         SellForCashService.Current.Purchase(contentEntity.PurchaseKey, (isOk, productId) =>
         {
-            if (isOk)
-            {
-                context.Controller.CloseCurrentWindow();
-            }
+            if (isOk == false) isClick = false;
 
-            isClick = false;
+            context.Controller.CloseCurrentWindow();
         });
     }
     
@@ -129,11 +132,11 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
     {
         if (CurrencyHelper.IsCanPurchase(contentEntity.Price) == false)
         {
-            isCanPurchase = false;
             isClick = false;
+            IsNeedReopen = true;
         }
 
-        if (isCanPurchase == false || contentEntity.Price.Currency != Currency.Crystals.Name)
+        if (isClick == false || contentEntity.Price.Currency != Currency.Crystals.Name)
         {
             context.Controller.CloseCurrentWindow();
             return;

@@ -92,8 +92,10 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 
 		CurrencyHelper.PurchaseAndProvideSpawn(new List<CurrencyPair> {contentEntity.Def.Reward},
 			null,
-			null,
-			() => { BoardService.Current.FirstBoard.TutorialLogic.Update(); });
+			rewardPosition,
+			() => { BoardService.Current.FirstBoard.TutorialLogic.Update(); },
+			false,
+			true);
 	}
 	
 	private void ChangeButtons()
@@ -184,30 +186,17 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	private void AddReward()
 	{
 		var contentEntity = entity as UIMarketElementEntity;
-		
 		var board = BoardService.Current.FirstBoard;
-		var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
 
-		if (positions.Count == 0) return;
-		
-		rewardPosition = positions[0];
-		
-		if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(rewardPosition.Value, contentEntity.Def.Reward.Amount))
+		if (board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceReward(contentEntity.Def.Reward.Amount, true, out var position) == false)
 		{
 			isClick = false;
-			
 			contentEntity.Def.State = MarketItemState.Saved;
-
 			ChangeButtons();
-			
-			// No free space
-			UIMessageWindowController.CreateMessage(
-				LocalizationService.Get("window.daily.error.title", "window.daily.error.title"),
-				LocalizationService.Get("window.daily.error.free.space", "window.daily.error.free.space"));
-			
 			return;
 		}
-		
+
+		rewardPosition = position;
 		isReward = true;
 		context.Controller.CloseCurrentWindow();
 	}

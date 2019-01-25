@@ -24,13 +24,14 @@ public static partial class CurrencyHelper
         });
     }
 
-    public static void PurchaseAndProvideSpawn(List<CurrencyPair> products, CurrencyPair price = null, BoardPosition? position = null, Action onComplete = null)
+    public static void PurchaseAndProvideSpawn(List<CurrencyPair> products, CurrencyPair price = null, BoardPosition? position = null, Action onComplete = null, bool topHighlight = false, bool bottomHighlight = false)
     {
         var piecesReward = FiltrationRewards(products, out var currenciesReward);
-        PurchaseAndProvideSpawn(piecesReward, currenciesReward, price, position, onComplete);
+        PurchaseAndProvideSpawn(piecesReward, currenciesReward, price, position, onComplete, topHighlight, bottomHighlight);
     }
 
-    public static void PurchaseAndProvideSpawn(Dictionary<int, int> piecesReward, List<CurrencyPair> currenciesReward, CurrencyPair price = null, BoardPosition? position = null, Action onComplete = null)
+    public static void PurchaseAndProvideSpawn(Dictionary<int, int> piecesReward, List<CurrencyPair> currenciesReward,
+        CurrencyPair price = null, BoardPosition? position = null, Action onComplete = null, bool topHighlight = false, bool bottomHighlight = false)
     {
         if (GetAllData(currenciesReward, price, position, out var point, out var transactions) == false) return;
         
@@ -40,7 +41,8 @@ public static partial class CurrencyHelper
         {
             From = point,
             Pieces = piecesReward,
-            EnabledBottomHighlight = true,
+            EnabledTopHighlight = topHighlight,
+            EnabledBottomHighlight = bottomHighlight,
             OnComplete = () => { OnCompleteAction(point, transactions, onComplete); }
         });
     }
