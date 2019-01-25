@@ -13,6 +13,11 @@ public abstract class SceneLoaderComponentBase : AsyncInitComponentBase
     {
         get
         {
+            if (isCompleted)
+            {
+                return 1;
+            }
+            
             if (loadingOperation == null)
             {
                 return 0;
@@ -38,6 +43,9 @@ public abstract class SceneLoaderComponentBase : AsyncInitComponentBase
         mb. StartCoroutine(LoadSceneCoroutine(() =>
         {
             Object.Destroy(go);
+            
+            loadingOperation = null;
+            
             isCompleted = true;
             OnComplete(this);
         }));

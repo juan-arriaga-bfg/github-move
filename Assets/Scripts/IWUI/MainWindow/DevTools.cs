@@ -343,27 +343,6 @@ public class DevTools : UIContainerElementViewController
 #endif
         
     }
-    
-    public static void CleanupSceneBeforeReload()
-    {
-        var manager = GameDataService.Current.QuestsManager;
-        manager.DisconnectFromBoard();
-            
-        BoardService.Instance.SetManager(null);
-
-        GameDataService.Instance.SetManager(null);
-         
-        ProfileService.Current.QueueComponent.StopAndClear();
-        
-        ProfileService.Instance.SetManager(null);
-        
-        var ecsSystems = new List<IECSSystem>(ECSService.Current.SystemProcessor.RegisteredSystems);
-            
-        foreach (var system in ecsSystems)
-        {
-            ECSService.Current.SystemProcessor.UnRegisterSystem(system);
-        }
-    }
 
     [UsedImplicitly]
     public void OnReloadSceneClick()
@@ -372,10 +351,6 @@ public class DevTools : UIContainerElementViewController
         
         UIService.Get.CloseWindow(UIWindowType.MainWindow);
         UIService.Get.CloseWindow(UIWindowType.ResourcePanelWindow);
-
-        // UIWaitWindowView.Show();
-
-        CleanupSceneBeforeReload();
 
         // var findGo = GameObject.Find("UIContainer");
         // var refGo = IWUIManager.Instance.gameObject;
@@ -391,20 +366,24 @@ public class DevTools : UIContainerElementViewController
         // }
 
         AsyncInitService.Current
-                        .AddComponent(new ShowLoadingWindowInitComponent())
+            .AddComponent(new ShowLoadingWindowInitComponent())
 
-                        .AddComponent(new ReloadSceneLoaderComponent()
-                            .SetDependency(typeof(ShowLoadingWindowInitComponent)))
+            .AddComponent(new ReloadSceneLoaderComponent()
+                .SetDependency(typeof(ShowLoadingWindowInitComponent)))
 
-                        .AddComponent(new ProfileInitComponent())
+            .AddComponent(new CleanupForReloadInitComponent()
+                .SetDependency(typeof(ReloadSceneLoaderComponent)))            
+                        
+            .AddComponent(new ProfileInitComponent()
+                .SetDependency(typeof(CleanupForReloadInitComponent)))
 
-                        .AddComponent(new GameDataInitComponent()
-                            .SetDependency(typeof(ProfileInitComponent)))
+            .AddComponent(new GameDataInitComponent()
+                .SetDependency(typeof(ProfileInitComponent)))
 
-                        .AddComponent(new MainSceneLoaderComponent()
-                            .SetDependency(typeof(GameDataInitComponent)))
+            .AddComponent(new MainSceneLoaderComponent()
+                .SetDependency(typeof(GameDataInitComponent)))
 
-                        .Run(null);
+            .Run(null);
 
         // Undo dont destroy on load
         // SceneManager.MoveGameObjectToScene(mainWindowGo, SceneManager.GetActiveScene());

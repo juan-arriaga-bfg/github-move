@@ -67,7 +67,7 @@ public class AsyncInitManager :  IAsyncInitManager
     private void ExecuteNext()
 #endif
     {
-        if (components.Count == 0)
+        if (components.Count == initedComponents.Count)
         {
             onComplete?.Invoke();
             onComplete = null;
@@ -79,6 +79,7 @@ public class AsyncInitManager :  IAsyncInitManager
 
         yield return new WaitForEndOfFrame();
 #else
+            return;
         }
 #endif         
         List<AsyncInitComponentBase> componentsToExecute = new List<AsyncInitComponentBase>();

@@ -6,7 +6,7 @@ public class KillThemAll : MonoBehaviour
 {
     private void Start()
     {
-        if (KillAllGos()) return;
+        //if (KillAllGos()) return;
 
         Resources.UnloadUnusedAssets();
         GC.Collect();

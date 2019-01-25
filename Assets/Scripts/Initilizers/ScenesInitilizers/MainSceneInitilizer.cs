@@ -43,7 +43,7 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         // Hot reload?
         if (IWUIManager.Instance.IsComplete)
         {
-            Run(onComplete);
+            StartCoroutine(ShowGameScene(onComplete, true));
             return;
         }
                
@@ -53,27 +53,21 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         // on cache complete
         IWUIManager.Instance.OnUIInited += () =>
         {
-            StartCoroutine(ShowGameScene(onComplete));
+            StartCoroutine(ShowGameScene(onComplete, false));
         };
     }
 
-    private IEnumerator ShowGameScene(Action onComplete)
+    private IEnumerator ShowGameScene(Action onComplete, bool hotReload)
     {
         var asyncInit = AsyncInitService.Current;
         while (!asyncInit.IsAllComponentsInited())
         {
-             yield return new WaitForSeconds(0.2f);
+             yield return new WaitForSeconds(0.1f);
         }
         
-        Run(onComplete);
-
-        NSAudioService.Current.Play(SoundId.Ambient1Music, true, 1)
-                      .SetVolume(0f)
-                      .SetVolume(1f, 2f);
-    }
-
-    private static void Run(Action onComplete)
-    {
+        // Just to refresh progressbar
+        yield return new WaitForEndOfFrame();
+        
         // close launcher
         UIService.Get.CloseWindow(UIWindowType.LauncherWindow);
 
@@ -89,6 +83,13 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
 
         ProfileService.Current.QueueComponent.Run();
         BoardService.Current.FirstBoard.TutorialLogic.Run();
+
+        if (!hotReload)
+        {
+            NSAudioService.Current.Play(SoundId.Ambient1Music, true, 1)
+                          .SetVolume(0f)
+                          .SetVolume(1f, 2f);
+        }
     }
 
     private void InitGameField()
