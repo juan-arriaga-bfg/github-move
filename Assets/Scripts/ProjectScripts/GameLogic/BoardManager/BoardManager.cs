@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BoardManager : ECSEntity
@@ -35,6 +36,8 @@ public class BoardManager : ECSEntity
         {
             cachedBoardControllers.Remove(targetTags[i]);
         }
+        
+        CleanupRecursive(boardController);
     }
 
     public virtual BoardController GetBoardById(int id)
@@ -49,4 +52,50 @@ public class BoardManager : ECSEntity
     }
     
     public virtual BoardController FirstBoard => GetBoardById(0);
+
+    private void CleanupRecursive(IECSComponent itemToCleanup, ECSEntity context = null)
+    {
+        Debug.Log("======== CleanupRecursive: " + itemToCleanup.GetType());
+        
+        switch (itemToCleanup)
+        {
+            case ECSEntity entity:
+                var ecsComponents = entity.ComponentsCache.Values.ToList();
+                for (var i = ecsComponents.Count - 1; i >= 0; i--)
+                {
+                    var item = ecsComponents.ToList()[i];
+                    CleanupRecursive(item, entity);
+                }
+
+                break;
+            
+            case ECSComponentCollection collection:
+                foreach (var item in collection.Components)
+                {
+                    CleanupRecursive(item);
+                }
+                break;
+        }
+        
+        // Debug.Log($"== Unregister: {itemToCleanup.GetType()} with context: {context?.GetType()}");
+        if (context != null)
+        {
+            context.UnRegisterComponent(itemToCleanup);
+        }
+        else
+        {
+            UnRegisterComponent(itemToCleanup);
+        }
+    }
+    
+    public void Cleanup()
+    {
+        var boardControllers = cachedBoardControllers.Values.ToList();
+
+        for (var i = boardControllers.Count - 1; i >= 0; i--)
+        {
+            var boardController = boardControllers[i];
+            UnRegisterBoard(boardController);
+        }
+    }
 }

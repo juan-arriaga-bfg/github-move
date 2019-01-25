@@ -9,6 +9,8 @@ public class CleanupForReloadInitComponent : AsyncInitComponentBase
         var manager = GameDataService.Current.QuestsManager;
         manager.DisconnectFromBoard();
             
+        BoardService.Current.Cleanup();
+        
         BoardService.Instance.SetManager(null);
 
         GameDataService.Instance.SetManager(null);
