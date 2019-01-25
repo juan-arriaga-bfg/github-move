@@ -198,17 +198,17 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         if(CurrencyHelper.IsCanPurchase(Def.Condition, true, () => OnClick(piece)) == false) return;
 
         bubble.CleanOnClick();
-        
-        CurrencyHelper.Purchase(Currency.Fog.Name, 1, Def.Condition, success =>
-        {
-            if (success == false) return;
-			  
-            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, Def);
-            
-            Context.Context.HintCooldown.RemoweView(bubble);
+        Context.Context.HintCooldown.RemoweView(bubble);
 
-            bubble.OnHide = () =>
+        bubble.OnHide = () =>
+        {
+            CurrencyHelper.Purchase(Currency.Fog.Name, 1, Def.Condition, success =>
             {
+                if (success == false) return;
+                
+                piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, Def);
+                AddResourceView.Show(Def.GetCenter(piece.Context), Def.Reward);
+                
                 IsRemoved = true;
                 piece.Context.ActionExecutor.AddAction(new CollapseFogToAction
                 {
@@ -217,10 +217,12 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
                     FogObserver = this,
                     OnComplete = DevTools.UpdateFogSectorsDebug
                 });
-            };
+            });
+        };
             
-            bubble.Priority = 1;
-            bubble.Change(false);
-        });
+        bubble.Priority = 1;
+        bubble.Change(false);
+        
+        
     }
 }

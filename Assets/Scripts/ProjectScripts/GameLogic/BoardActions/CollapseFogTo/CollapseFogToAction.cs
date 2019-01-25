@@ -57,8 +57,6 @@ public class CollapseFogToAction : IBoardAction
 
         if (IsIgnoreSpawn) return true;
         
-        AddResourceView.Show(FogObserver.Def.GetCenter(gameBoardController), FogObserver.Def.Reward, 0.5f);
-
         var addedPieces = new Dictionary<BoardPosition, int>();
         
         if(FogObserver.Def.Pieces != null)

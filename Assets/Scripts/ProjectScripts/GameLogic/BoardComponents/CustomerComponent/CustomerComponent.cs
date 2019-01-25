@@ -12,8 +12,6 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
     public TimerComponent Timer { get; private set; }
     public TimerComponent Cooldown { get; private set; }
     
-    private Action OnHideBubble;
-    
     private Piece pieceContext;
     
     public override void OnRegisterEntity(ECSEntity entity)
@@ -99,7 +97,6 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
             return;
         }
         
-        view.OnHide = OnHideBubble;
         pieceContext.Context.HintCooldown.RemoweView(view);
     }
     
@@ -134,7 +131,6 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
     
     public void Buy()
     {
-        
         CurrencyHelper.Purchase(new CurrencyPair{Currency = Currency.Order.Name, Amount = 1}, Order.Def.Prices,
             success =>
             {
