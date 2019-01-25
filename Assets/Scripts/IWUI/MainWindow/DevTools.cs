@@ -250,7 +250,7 @@ public class DevTools : UIContainerElementViewController
     public void OnAddExpClick()
     {
         int exp = Input.GetKey(KeyCode.LeftShift) ? 100 : 1000;
-        CurrencyHellper.Purchase(Currency.Experience.Name, exp);
+        CurrencyHelper.Purchase(Currency.Experience.Name, exp);
     }
 
     /// <summary>
@@ -273,7 +273,7 @@ public class DevTools : UIContainerElementViewController
         questManager.FinishQuest(questToFinish.Id);
 
         List<CurrencyPair> reward = questToFinish.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
-        CurrencyHellper.Purchase(reward, success =>
+        CurrencyHelper.Purchase(reward, success =>
             {
                 string starterId;
                 List<string> questsToStart = questManager.CheckConditions(out starterId);

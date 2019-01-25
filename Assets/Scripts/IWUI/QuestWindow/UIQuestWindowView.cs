@@ -163,11 +163,11 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         var reward = windowModel.Quest.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
 
         List<CurrencyPair> currencysReward;
-        var piecesReward = CurrencyHellper.FiltrationRewards(reward, out currencysReward);
+        var piecesReward = CurrencyHelper.FiltrationRewards(reward, out currencysReward);
 
         var str = string.Format(LocalizationService.Get("common.message.reward", "common.message.reward:{0}"), "");
         var strBuilder = new StringBuilder($"{str}");
-        strBuilder.Append(CurrencyHellper.RewardsToString("  ", piecesReward, currencysReward));
+        strBuilder.Append(CurrencyHelper.RewardsToString("  ", piecesReward, currencysReward));
 
         return strBuilder.ToString();
     }

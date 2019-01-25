@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
-public static class CurrencyHellper
+public static partial class CurrencyHelper
 {
     public static ShopItemTransaction Purchase(string product, int amount, Action<bool> onSuccess = null, Vector3? flyPosition = null)
     {
@@ -154,12 +152,11 @@ public static class CurrencyHellper
             Amount = amount,
             CurrentPrices = currentPrices
         };
-        
-        return PurchaseItem(shopItem, new CurrencyPair{Currency = product, Amount = amount}, false,onSuccess, flyPosition);
-    }
 
+        return PurchaseItem(shopItem, new CurrencyPair {Currency = product, Amount = amount}, false, onSuccess, flyPosition);
+    }
     
-    private static ShopItemTransaction PurchaseItem(ShopItem shopItem, CurrencyPair product, bool isShoowHint, Action<bool> onSuccess = null, Vector3? flyPosition = null, float delay = 0)
+    private static ShopItemTransaction PurchaseItem(ShopItem shopItem, CurrencyPair product, bool isShowHint, Action<bool> onSuccess = null, Vector3? flyPosition = null, float delay = 0)
     {
         Debug.Log($"[CurrencyHelper] => PurchaseItem: shopItem: {shopItem.ItemUid}: {shopItem.Amount}, product: {product}");
         
@@ -173,8 +170,6 @@ public static class CurrencyHellper
                 // on purchase success
                 isSuccess = true;
                 
-                
-                
                 if (flyPosition != null)
                 {
                     CurrencyFly(flyPosition.Value, product, onSuccess, delay);
@@ -188,7 +183,7 @@ public static class CurrencyHellper
                 // on purchase failed (not enough cash)
                 onSuccess?.Invoke(false);
                 
-                if (!isShoowHint) return;
+                if (!isShowHint) return;
                 
                 var prices = shopItem.CurrentPrices[0];
                 IsCanPurchase(prices.Currency, prices.DefaultPriceAmount, true);
@@ -199,7 +194,7 @@ public static class CurrencyHellper
         return transaction;
     }
     
-    private static ShopItemTransaction PurchaseItemAsync(ShopItem shopItem, CurrencyPair product, bool isShoowHint, Action<bool> onSuccess = null, Vector3? flyPosition = null, float delay = 0)
+    private static ShopItemTransaction PurchaseItemAsync(ShopItem shopItem, CurrencyPair product, bool isShowHint, Action<bool> onSuccess = null, Vector3? flyPosition = null, float delay = 0)
     {
         var isSuccess = false;
         
@@ -224,7 +219,7 @@ public static class CurrencyHellper
                 // on purchase failed (not enough cash)
                 onSuccess?.Invoke(false);
                 
-                if (!isShoowHint) return;
+                if (!isShowHint) return;
                 
                 var prices = shopItem.CurrentPrices[0];
                 IsCanPurchase(prices.Currency, prices.DefaultPriceAmount, true);
@@ -276,9 +271,7 @@ public static class CurrencyHellper
         {
             resourceCarrier.Callback += () =>
             {
-                if(resource.Currency == Currency.Experience.Name)
-                    NSAudioService.Current.Play(SoundId.GetXp);
-                
+                if(resource.Currency == Currency.Experience.Name) NSAudioService.Current.Play(SoundId.GetXp);
             };
         }
     }
@@ -387,7 +380,7 @@ public static class CurrencyHellper
         UIMessageWindowController.CreateNeedCurrencyMessage(currency, diff);
     }
     
-    public static CurrencyPair ResourcePieceToCurrence(Dictionary<int, int> dict, string currency)
+    public static CurrencyPair ResourcePieceToCurrency(Dictionary<int, int> dict, string currency)
     {
         var amount = 0;
         
@@ -461,12 +454,12 @@ public static class CurrencyHellper
         return dict;
     }
 
-    public static string RewardsToString(string separator, Dictionary<int, int> pieces, List<CurrencyPair> currencys, bool noAmount = false)
+    public static string RewardsToString(string separator, Dictionary<int, int> pieces, List<CurrencyPair> currencies, bool noAmount = false)
     {
         var types = new List<string>();
         var rewards = new List<string>();
         
-        foreach (var pair in currencys)
+        foreach (var pair in currencies)
         {
             rewards.Add(pair.ToStringIcon());
         }
@@ -485,7 +478,7 @@ public static class CurrencyHellper
                 
             if(types.Contains(currency)) continue;
                 
-            var pair = ResourcePieceToCurrence(pieces, currency);
+            var pair = ResourcePieceToCurrency(pieces, currency);
             
             if (pair.Amount == 0) pair.Amount = reward.Value;
                 
@@ -494,49 +487,5 @@ public static class CurrencyHellper
         }
         
         return string.Join(separator, rewards);
-    }
-
-    /// <summary>
-    /// Purchase some stuff and provide to account and spawn on field if any pieces in products
-    /// </summary>
-    /// <param name="products"></param>
-    /// <param name="price"></param>
-    public static void PurchaseAndProvide(List<CurrencyPair> products, CurrencyPair price)
-    {
-        Purchase(products, price, success =>
-            {
-                if (success)
-                {
-                    SpawnReward(products);
-                }
-            },
-            new Vector2(Screen.width / 2f, Screen.height / 2f));
-    }
-    
-    private static void SpawnReward(List<CurrencyPair> reward)
-    {
-        var board = BoardService.Current.FirstBoard;
-        var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
-
-        if (positions.Count == 0) return;
-
-        var position = positions[0];
-
-        List<CurrencyPair> currencysReward;
-        var piecesReward = CurrencyHellper.FiltrationRewards(reward, out currencysReward);
-        
-        board.ActionExecutor.AddAction(new EjectionPieceAction
-        {
-            GetFrom = () => position,
-            Pieces = piecesReward,
-            OnComplete = () =>
-            {
-                var view = board.RendererContext.GetElementAt(position) as CharacterPieceView;
-                
-                if(view != null) view.StartRewardAnimation();
-                    
-                AddResourceView.Show(position, currencysReward);
-            }
-        });
     }
 }

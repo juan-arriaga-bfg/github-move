@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DG.Tweening;
-using UnityEngine;
 
 public class UIShopElementViewController : UISimpleScrollElementViewController
 {
@@ -47,13 +45,11 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
     {
         base.OnViewCloseCompleted();
         
-        var contentEntity = entity as UIShopElementEntity;
-        
-        if(entity == null || isClick == false) return;
+        if(!(entity is UIShopElementEntity contentEntity) || entity == null || isClick == false) return;
 
         if (!IsBuyUsingCash())
         {
-            CurrencyHellper.PurchaseAndProvide(contentEntity.Products, contentEntity.Price);
+            CurrencyHelper.PurchaseAndProvideSpawn(contentEntity.Products, contentEntity.Price);
         }
     }
 
@@ -61,12 +57,9 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
     {
         base.OnViewClose(context);
         
-        var contentEntity = entity as UIShopElementEntity;
+        if(!(entity is UIShopElementEntity contentEntity) || entity == null || isClick == false) return;
         
-        if(entity == null || isClick == false) return;
-        
-        if(isCanPurchase)
-            PlaySoundOnPurchase(contentEntity.Products);
+        if(isCanPurchase) PlaySoundOnPurchase(contentEntity.Products);
     }
 
     private void OnBuyClick()
@@ -113,7 +106,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
             model.OnAccept = () =>
             {
-                CurrencyHellper.PurchaseAndProvide(contentEntity.Products, contentEntity.Price);
+                CurrencyHelper.PurchaseAndProvideSpawn(contentEntity.Products, contentEntity.Price);
             };
 
             UIService.Get.ShowWindow(UIWindowType.MessageWindow);
@@ -134,7 +127,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
     
     private void OnBuyUsingNoCash(UIShopElementEntity contentEntity)
     {
-        if (CurrencyHellper.IsCanPurchase(contentEntity.Price) == false)
+        if (CurrencyHelper.IsCanPurchase(contentEntity.Price) == false)
         {
             isCanPurchase = false;
             isClick = false;

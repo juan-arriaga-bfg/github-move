@@ -100,7 +100,7 @@ public class SellForCashManager: ECSEntity
         var products = def.Products;
         var price = def.Price;
         
-        CurrencyHellper.PurchaseAndProvide(products, price);
+        CurrencyHelper.PurchaseAndProvideEjection(products, price);
         
         IapService.Current.IapProvidedToPlayer(productId);
     }

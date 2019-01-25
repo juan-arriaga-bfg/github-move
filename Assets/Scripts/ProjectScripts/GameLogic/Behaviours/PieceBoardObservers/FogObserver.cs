@@ -195,11 +195,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     private void OnClick(Piece piece)
     {
-        if(CurrencyHellper.IsCanPurchase(Def.Condition, true, () => OnClick(piece)) == false) return;
+        if(CurrencyHelper.IsCanPurchase(Def.Condition, true, () => OnClick(piece)) == false) return;
 
         bubble.CleanOnClick();
         
-        CurrencyHellper.Purchase(Currency.Fog.Name, 1, Def.Condition, success =>
+        CurrencyHelper.Purchase(Currency.Fog.Name, 1, Def.Condition, success =>
         {
             if (success == false) return;
 			  

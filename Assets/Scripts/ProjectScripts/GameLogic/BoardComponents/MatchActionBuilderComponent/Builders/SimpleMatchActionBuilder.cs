@@ -65,7 +65,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
                  || reward.Currency == Currency.Worker.Name
                  || reward.Currency == Currency.Experience.Name)
                 {
-                    var transaction = CurrencyHellper.PurchaseAsync
+                    var transaction = CurrencyHelper.PurchaseAsync
                     (
                         reward
                     );
@@ -104,7 +104,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
                     
                             sequence.InsertCallback(0.5f * j, () =>
                             {
-                                CurrencyHellper.CurrencyFly
+                                CurrencyHelper.CurrencyFly
                                 (
                                     BoardService.Current.FirstBoard.BoardDef.ViewCamera.WorldToScreenPoint(from), 
                                     new CurrencyPair{ Currency = targetTransaction.ShopItem.ItemUid, Amount = targetTransaction.ShopItem.Amount }

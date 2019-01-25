@@ -298,7 +298,7 @@ public class CodexItem : IWUIWindowViewController
 
             // todo: use something like: targetEntity.WindowController.Window.Layers[0].ViewCamera.WorldToScreenPoint(taskIcon.transform.position)
             var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(pieceImageRectTransform.position);
-            CurrencyHellper.Purchase(reward, null, flyPosition);
+            CurrencyHelper.Purchase(reward, null, flyPosition);
         });
     }
 
