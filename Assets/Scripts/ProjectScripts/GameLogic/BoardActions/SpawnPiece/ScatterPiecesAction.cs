@@ -82,7 +82,7 @@ public class ScatterPiecesAction : IBoardAction
 
 		var rewardsStore = target.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid);
 		
-		if (rewardsStore != null && Pieces.Count != 0) rewardsStore.IsComplete = true;
+		if (rewardsStore != null) rewardsStore.IsComplete = Pieces.Count != 0;
 		
 		animation.Pieces = pieces;
 		animation.OnCompleteEvent += (_) =>
