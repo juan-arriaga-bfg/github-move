@@ -256,8 +256,8 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, null, rewardPosition,
             () =>
             {
-                if (currenciesReward.Count == 0) return; 
-                targetEntity.WindowController.Window.Layers[0].ViewCamera .WorldToScreenPoint(taskIconCanvasGroup.transform.position);
+                if (currenciesReward.Count == 0) return;
+                targetEntity.WindowController.Window.Layers[0].ViewCamera.WorldToScreenPoint(taskIconCanvasGroup.transform.position);
             },
             true, true);
     }
