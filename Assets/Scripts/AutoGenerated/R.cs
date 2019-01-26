@@ -215,4 +215,10 @@ public class R
      public const string ResourceCarrierWithObject = "ResourceCarrierWithObject";
      public const string PiecesLowHighlightMaterial = "PiecesLowHighlightMaterial";
      public const string BigCell = "BigCell";
+     public const string Mana1Piece = "Mana1Piece";
+     public const string Mana2Piece = "Mana2Piece";
+     public const string Mana3Piece = "Mana3Piece";
+     public const string Mana4Piece = "Mana4Piece";
+     public const string Mana5Piece = "Mana5Piece";
+     public const string Mana6Piece = "Mana6Piece";
 }
