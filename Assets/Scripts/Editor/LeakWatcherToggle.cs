@@ -46,7 +46,7 @@ public class LeakWatcherToggle : MonoBehaviour
 
             if (!file.Contains("UICodexWindowModel.cs"))
             {
-                skipThisFile;
+                skipThisFile = true;
             }
             
             if (skipThisFile)
