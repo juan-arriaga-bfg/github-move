@@ -214,12 +214,12 @@ public class LeakWatcherToggle : MonoBehaviour
     
     private static string GetFullLeakCtorCall(string className)
     {
-        return $"\npublic {className}() {{\n    LeakWatcher.Instance.Ctor(this);\n}}\n";
+        return $"\n    public {className}() {{\n        LeakWatcher.Instance.Ctor(this);\n}}\n";
     }
     
     private static string GetFullLeakDtorCall(string className)
     {
-        return $"\n~{className}() {{\n    LeakWatcher.Instance.Dtor(this);\n}}\n";
+        return $"\n    ~{className}() {{\n        LeakWatcher.Instance.Dtor(this);\n}}\n";
     }
     
     private static int getCountOfParentheses(string line)
