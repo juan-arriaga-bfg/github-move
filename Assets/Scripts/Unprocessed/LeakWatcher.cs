@@ -8,6 +8,8 @@ class LeakWatcherEntry
 {
     public int Ctors;
     public int Dtors;
+
+    public int Delta => Ctors - Dtors;
 }
 
 public class LeakWatcher
@@ -19,6 +21,8 @@ public class LeakWatcher
 
     private static LeakWatcher s_instance;
 
+    private Dictionary<Type, int> m_snapshot;
+    
     public static LeakWatcher Instance
     {
         get { return s_instance ?? (s_instance = new LeakWatcher()); }
@@ -71,7 +75,7 @@ public class LeakWatcher
         m_globalDtors++;
     }
 
-    public string DataAsString(bool skipZeroDelta)
+    public string DataAsString(bool onlyWarnings)
     {
         var lines = new List<string>();
 
@@ -82,21 +86,21 @@ public class LeakWatcher
 
         foreach (var entry in m_data)
         {
-            int delta = entry.Value.Ctors - entry.Value.Dtors;
-            var line = String.Format("{0} ({1}/{2})", delta, entry.Value.Ctors, entry.Value.Dtors).PadRight(15);
+            int delta = entry.Value.Delta;
+            var line = $"{delta} ({entry.Value.Ctors}/{entry.Value.Dtors})".PadRight(15);
             line += (entry.Key.ToString());
-            if (delta > 0)
+            if (delta > 0 && !onlyWarnings)
             {
                 line = line.PadRight(60) + " [ WARNING ]\n";
-                lines.Add(line);
             }
             else
             {
-                if (!skipZeroDelta)
-                {
-                    line += "\n";
-                    lines.Add(line);
-                }
+                line += "\n";
+            }
+
+            if (!onlyWarnings || delta > 1)
+            {
+                lines.Add(line);
             }
         }
 
@@ -109,6 +113,66 @@ public class LeakWatcher
 
         ret.Append("----------------------------------------\n");
         ret.Append(String.Format("CTORS: {0}, DTORS: {1}, DELTA: {2}\n", m_globalCtors, m_globalDtors, m_globalCtors - m_globalDtors));
+        return ret.ToString();
+    }
+
+    private Dictionary<Type, int> TakeSnapshot()
+    {
+        Dictionary<Type, int> ret = new Dictionary<Type, int>();
+        foreach (var item in m_data)
+        {
+            ret.Add(item.Key, item.Value.Delta);
+        }
+
+        return ret;
+    }
+
+    public void Snapshot()
+    {
+        m_snapshot = TakeSnapshot();
+    }
+
+    public string CompareSnapshots()
+    {
+        var newSnapshot = TakeSnapshot();
+
+        StringBuilder ret = new StringBuilder();
+        ret.Append("----------------------------------------\n");
+        ret.Append("                    DIFF                \n");
+        ret.Append("----------------------------------------\n");
+
+        bool anyChanges = false;
+        
+        foreach (KeyValuePair<Type, int> pair in newSnapshot)
+        {
+            Type type = pair.Key;
+            int newDelta = pair.Value;
+
+            m_snapshot.TryGetValue(type, out int oldDelta);
+
+            int diff = newDelta - oldDelta;
+            if (diff == 0)
+            {
+                continue;
+            }
+
+            anyChanges = true;
+            
+            var line = $"{diff} ({oldDelta} => {newDelta})".PadRight(15);
+            line = line + type.ToString();
+            ret.AppendLine(line);
+        }
+        
+        ret.Append("----------------------------------------\n");
+        
+        m_snapshot = newSnapshot;
+
+        if (!anyChanges)
+        {
+            ret.Clear();
+            ret.Append("No changes!");
+        }
+        
         return ret.ToString();
     }
 }

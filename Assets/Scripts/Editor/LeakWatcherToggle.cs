@@ -24,7 +24,38 @@ public class LeakWatcherToggle : MonoBehaviour
     [MenuItem("Tools/Print Leak Watcher")]
     public static void Print()
     {
-        LeakWatcher.Instance.DataAsString(Input.GetKey(KeyCode.LeftShift));
+        string text = LeakWatcher.Instance.DataAsString(true);
+        PrintStringLineByLine(text);
+    }
+
+    private static void PrintStringLineByLine(string text)
+    {
+        using (StringReader reader = new StringReader(text))
+        {
+            string line = string.Empty;
+            do
+            {
+                line = reader.ReadLine();
+                if (!string.IsNullOrEmpty(line))
+                {
+                    Debug.Log(line);
+                }
+            } while (line != null);
+        }
+    }
+
+    [MenuItem("Tools/TakeSnapshot Leak Watcher")]
+    public static void TakeSnapshot()
+    {
+        LeakWatcher.Instance.Snapshot();
+        Debug.Log($"Snapshot created!"); 
+    }
+    
+    [MenuItem("Tools/Compare snapshot Leak Watcher")]
+    public static void CompareSnapshot()
+    {
+        var diff = LeakWatcher.Instance.CompareSnapshots();
+        PrintStringLineByLine(diff);
     }
     
     [MenuItem("Tools/Enable Leak Watcher")]
