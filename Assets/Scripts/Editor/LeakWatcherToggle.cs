@@ -232,6 +232,8 @@ public class LeakWatcherToggle : MonoBehaviour
                         isDtorWritten = false;
                         isCtorWritten = false;
 
+                        firstParenthesesInClassFound = false;
+
                         if (deltaParentheses != 0)
                         {
                             Debug.LogError($"deltaParentheses == {deltaParentheses} at the end of class");
