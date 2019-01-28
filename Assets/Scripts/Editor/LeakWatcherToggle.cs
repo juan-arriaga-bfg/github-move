@@ -183,26 +183,40 @@ public class LeakWatcherToggle : MonoBehaviour
                          && (line.Contains("public") || line.Contains("protected ") || line.Contains("private ")) 
                          && line.Contains("("))
                         {
-                            Debug.Log($"CTOR found at {lineNumber}: {line}");
+                            bool check = true;
 
-                            // ctor like this: private JSONNull() { }
-                            if (getDeltaOfParentheses(line) == 0 && line.Contains("{") && line.Contains("}"))
+                            string fixedLine = line.Replace("  ", " ");
+                            int posOfToken = fixedLine.IndexOf(className);
+                            int endOfToken = posOfToken + className.Length;
+                            if (fixedLine[endOfToken + 1] != '(' && fixedLine.Substring(endOfToken + 1, 2) != " (")
                             {
-                                int pos = line.LastIndexOf("}");
-                                line = line.Insert(pos - 1, GetFullLeakCtorCall(line));
-                                
-                                pos = line.LastIndexOf("}");
-                                line = line.Insert(pos - 1, GetFullLeakDtorCall(line));
-                                
-                                isFileModified = true;
-                                isCtorWritten = true;
-                                isDtorWritten = true;
+                                check = false;
                             }
-                            else
+
+                            if (check)
                             {
-                                needWriteCtorToNextLine = true;
+                                Debug.Log($"CTOR found at {lineNumber}: {line}");
+
+                                // ctor like this: private JSONNull() { }
+                                if (getDeltaOfParentheses(line) == 0 && line.Contains("{") && line.Contains("}"))
+                                {
+                                    int pos = line.LastIndexOf("}");
+                                    line = line.Insert(pos - 1, GetFullLeakCtorCall(line));
+
+                                    pos = line.LastIndexOf("}");
+                                    line = line.Insert(pos - 1, GetFullLeakDtorCall(line));
+
+                                    isFileModified = true;
+                                    isCtorWritten = true;
+                                    isDtorWritten = true;
+                                }
+                                else
+                                {
+                                    needWriteCtorToNextLine = true;
+                                }
+
+                                goto WRITE;
                             }
-                            goto WRITE;
                         }
                     }
 
@@ -216,7 +230,9 @@ public class LeakWatcherToggle : MonoBehaviour
                         if (!isDtorWritten)
                         {
                             Debug.Log($"No DTOR in {className}, write new");
-                            line = line.Insert(0, GetFullLeakDtorCall(className));
+
+                            int pos = line.LastIndexOf("}");
+                            line = line.Insert(Mathf.Max(0, pos), GetFullLeakDtorCall(className));
                             isFileModified = true;
                             
                         }
@@ -224,7 +240,9 @@ public class LeakWatcherToggle : MonoBehaviour
                         if (!isCtorWritten)
                         {
                             Debug.Log($"No CTOR in {className}, write new");
-                            line = line.Insert(0, GetFullLeakCtorCall(className));
+                            
+                            int pos = line.LastIndexOf("}");
+                            line = line.Insert(Mathf.Max(0, pos), GetFullLeakCtorCall(className));
                             isFileModified = true;
                             
                         }
