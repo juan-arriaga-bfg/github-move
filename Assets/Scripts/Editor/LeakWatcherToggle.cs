@@ -31,7 +31,7 @@ public class LeakWatcherToggle : MonoBehaviour
                 return;
             }
             
-            string file = files[i];
+            string file = files[i].Replace("\\", "/");
             
             foreach (var ignoreDir in ignoreDirs)
             {
@@ -151,7 +151,7 @@ public class LeakWatcherToggle : MonoBehaviour
                     }
 
                     WRITE:
-                        output.Append(line);
+                        output.AppendLine(line);
                 }
             } while (line != null);
             
