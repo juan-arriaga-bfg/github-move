@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public class СrystalTutorialStep : LoopFingerTutorialStep
+public class CrystalTutorialStep : LoopFingerTutorialStep
 {
     private int crystal = PieceType.Boost_CR.Id;
     private int target = PieceType.A5.Id;
