@@ -44,7 +44,12 @@ public class LeakWatcherToggle : MonoBehaviour
                 }
             }
 
-            // if (!file.Contains("UICodexWindowModel.cs"))
+            if (file.Contains("LeakWatcher.cs") || file.Contains("LeakWatcherToggle"))
+            {
+                skipThisFile = true;
+            }
+            
+            // if (!file.Contains("APurchaseController.cs"))
             // {
             //     skipThisFile = true;
             // }
@@ -174,7 +179,8 @@ public class LeakWatcherToggle : MonoBehaviour
                         
                         if ((line.Contains(" " + className + " ") || line.Contains(" " + className + "(") )
                          && (!line.Contains(" new "))
-                         && (line.Contains("public") || line.Contains("protected") || line.Contains("private")) 
+                         && (!line.Contains(" static "))
+                         && (line.Contains("public") || line.Contains("protected ") || line.Contains("private ")) 
                          && line.Contains("("))
                         {
                             Debug.Log($"CTOR found at {lineNumber}: {line}");
