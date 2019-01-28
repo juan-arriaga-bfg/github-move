@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 class LeakWatcherEntry
 {
@@ -104,7 +105,18 @@ public class LeakWatcher
             }
         }
 
-        lines.Sort();
+        Regex getNum = new Regex(@"^[0-9]+", RegexOptions.Compiled);
+
+        lines.Sort((s1, s2) =>
+        {
+            string ns1 = getNum.Match(s1).Value;
+            string ns2 = getNum.Match(s2).Value;
+
+            int n1 = int.Parse(ns1);
+            int n2 = int.Parse(ns2);
+
+            return n2 - n1;
+        });
 
         foreach (var line in lines)
         {
@@ -118,6 +130,8 @@ public class LeakWatcher
 
     private Dictionary<Type, int> TakeSnapshot()
     {
+        GC.Collect();
+        
         Dictionary<Type, int> ret = new Dictionary<Type, int>();
         foreach (var item in m_data)
         {

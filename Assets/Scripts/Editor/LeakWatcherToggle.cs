@@ -100,6 +100,8 @@ public class LeakWatcherToggle : MonoBehaviour
                 return;
             }
         }
+        
+        AssetDatabase.Refresh();
     }
 
     private static bool ProcessFile(string file)
