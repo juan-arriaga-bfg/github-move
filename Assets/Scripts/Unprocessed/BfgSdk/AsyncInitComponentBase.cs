@@ -34,4 +34,9 @@ public abstract class AsyncInitComponentBase
     }
 
     public abstract void Execute();
+
+    public override string ToString()
+    {
+        return $"{GetType()}, Progress: {Progress}, IsCompleted: {IsCompleted}";
+    }
 }

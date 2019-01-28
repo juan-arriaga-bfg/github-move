@@ -127,7 +127,7 @@ public class FireflyView : BoardElementView
             return;
         }
 
-        CurrencyHellper.Purchase(Currency.Firefly.Name, 1);
+        CurrencyHelper.Purchase(Currency.Firefly.Name, 1);
         RemoveArrowImmediate();
         
         Plume.gameObject.SetActive(true);

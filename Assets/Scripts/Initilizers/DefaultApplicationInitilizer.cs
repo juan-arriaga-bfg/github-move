@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine;
 using IW.Content.ContentModule;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class DefaultApplicationInitilizer : ApplicationInitializer 
@@ -26,32 +27,46 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         AsyncInitManager asyncInitManager = new AsyncInitManager();
         AsyncInitService.Instance.SetManager(asyncInitManager);
         asyncInitManager
-           .AddComponent(new InternetMonitorInitComponent())
-           .AddComponent(new BfgSdkUnityMessageHandlerInitComponent())
-            
-           .AddComponent(new IapInitComponent()
-                .SetDependency(typeof(BfgSdkUnityMessageHandlerInitComponent))
-                .SetDependency(typeof(ConfigsAndManagersInitComponent)))
-            
-           .AddComponent(new IapRestoreInitComponent()
-               .SetDependency(typeof(IapInitComponent)))
-            
-           .AddComponent(new SecuredTimeServiceInitComponent())
-           .AddComponent(new BfgSdkGdprInitComponent())
-           .AddComponent(new ConfigsAndManagersInitComponent())
-           .AddComponent(new UIInitProgressListenerComponent())
-            
+           .AddComponent(new InternetMonitorInitComponent())                        // Monitors current state of internet connection
+           .AddComponent(new BfgSdkUnityMessageHandlerInitComponent())              // Used by BFG SDK to make calls to make calls to native code 
+           .AddComponent(new SecuredTimeServiceInitComponent())                     // Anti-cheat protection for timers
+           .AddComponent(new BfgSdkGdprInitComponent())                             // Listener for BFG SDK's GDPR popup events
+           .AddComponent(new ConfigsAndManagersInitComponent()) 
+
            .AddComponent(new LocalBundlesInitComponent()
                .SetDependency(typeof(ConfigsAndManagersInitComponent)))
             
-           .AddComponent(new ShowLoadingWindowInitComponent()
-               .SetDependency(typeof(LocalBundlesInitComponent)))
-
-           .AddComponent(new MainSceneLoaderComponent()
-               .SetDependency(typeof(LocalBundlesInitComponent))
-               .SetDependency(typeof(SecuredTimeServiceInitComponent)))
+           .AddComponent(new ProfileInitComponent()  
+                .SetDependency(typeof(ConfigsAndManagersInitComponent)))
             
-           .Run(onComplete);
+           .AddComponent(new GameDataInitComponent()  
+               .SetDependency(typeof(ProfileInitComponent)))
+            
+           .AddComponent(new LocalizationInitComponent()
+               .SetDependency(typeof(GameDataInitComponent)))
+            
+           .AddComponent(new IapInitComponent()                                     // In-app purchases implementation
+                .SetDependency(typeof(BfgSdkUnityMessageHandlerInitComponent))
+                .SetDependency(typeof(LocalizationInitComponent)))
+            
+           .AddComponent(new IapRestoreInitComponent()                              // Handler for restored In-app purchases 
+               .SetDependency(typeof(IapInitComponent)))
+            
+           .AddComponent(new ShowLoadingWindowInitComponent()
+               .SetDependency(typeof(LocalBundlesInitComponent))
+               .SetDependency(typeof(LocalizationInitComponent)));
+
+        if (SceneManager.GetActiveScene().name != "Main") // Handle case when we start the game from the Main scene in the Editor.  
+        {
+            asyncInitManager.AddComponent(new UIInitProgressListenerComponent());
+            
+            asyncInitManager.AddComponent(new MainSceneLoaderComponent()
+                .SetDependency(typeof(LocalBundlesInitComponent))
+                .SetDependency(typeof(LocalizationInitComponent))
+                .SetDependency(typeof(SecuredTimeServiceInitComponent)));
+        }
+
+        asyncInitManager.Run(onComplete);
     }
 
     void OnApplicationPause(bool pauseStatus)
@@ -60,11 +75,15 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         
         if (pauseStatus)
         {
-            ProfileService.Instance.Manager.UploadCurrentProfile();
-            
+            if (ProfileService.Instance != null)
+            {
+                ProfileService.Instance.Manager.UploadCurrentProfile();
+
 #if UNITY_EDITOR
-            ProfileService.Instance.Manager.SaveLocalProfile();
+                ProfileService.Instance.Manager.SaveLocalProfile();
 #endif
+            }
+
             energyLogic?.Timer.Stop();
         }
         else

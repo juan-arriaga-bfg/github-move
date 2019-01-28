@@ -21,16 +21,8 @@ public class MulticellularPieceMatchActionBuilder : DefaultMatchActionBuilder, I
 
     public IBoardAction Build(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position)
     {
-        int nextType;
-        
-        if(Check(definition, matchField, pieceType, position, out nextType) == false) return null;
-        
-        return new ModificationPiecesAction
-        {
-            NextPieces = new List<int>{nextType},
-            To = position,
-            Positions = new List<BoardPosition>{position},
-            OnSuccess = list => SpawnReward(list[0], nextType)
-        };
+        return Check(definition, matchField, pieceType, position, out var nextType) == false
+            ? null
+            : CreateAction(new List<int> {nextType}, new List<BoardPosition> {position}, position, pieceType);
     }
 }

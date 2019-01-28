@@ -59,7 +59,7 @@ public class ScatterPiecesAction : IBoardAction
 			
 			foreach (var cell in mask)
 			{
-				var id = GetPieceId();
+				var id = GetPieceId(true);
 				
 				if (id == PieceType.None.Id) break;
 			
@@ -73,7 +73,7 @@ public class ScatterPiecesAction : IBoardAction
 
 		foreach (var cell in cells)
 		{
-			var id = GetPieceId();
+			var id = GetPieceId(false);
 			
 			if (id == PieceType.None.Id) break;
 			
@@ -82,7 +82,7 @@ public class ScatterPiecesAction : IBoardAction
 
 		var rewardsStore = target.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid);
 		
-		if (rewardsStore != null && Pieces.Count != 0) rewardsStore.IsComplete = true;
+		if (rewardsStore != null) rewardsStore.IsComplete = Pieces.Count != 0;
 		
 		animation.Pieces = pieces;
 		animation.OnCompleteEvent += (_) =>
@@ -115,7 +115,7 @@ public class ScatterPiecesAction : IBoardAction
 		return true;
 	}
 
-	private int GetPieceId()
+	private int GetPieceId(bool isReplace)
 	{
 		var id = PieceType.None.Id;
 
@@ -123,6 +123,8 @@ public class ScatterPiecesAction : IBoardAction
 		
 		foreach (var key in Pieces.Keys)
 		{
+			if(isReplace == false && PieceType.GetDefById(key).Filter.HasFlag(PieceTypeFilter.Obstacle)) continue;
+			
 			id = key;
 			break;
 		}

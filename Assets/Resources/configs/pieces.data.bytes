@@ -111,7 +111,7 @@
     ]
   },
   {
-    "Uid": "NPC_5",
+    "Uid": "NPC_PeterPen",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -120,7 +120,7 @@
     ]
   },
   {
-    "Uid": "NPC_6",
+    "Uid": "NPC_RedHood",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -129,7 +129,7 @@
     ]
   },
   {
-    "Uid": "NPC_7",
+    "Uid": "NPC_Mermaid",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -452,6 +452,114 @@
     ],
     "SpawnResources": {
       "Currency": "Coins",
+      "Amount": 3500
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
+  },
+  {
+    "Uid": "Mana1",
+    "SpawnResources": {
+      "Currency": "Mana",
+      "Amount": 5
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 3
+      }
+    ]
+  },
+  {
+    "Uid": "Mana2",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Mana",
+      "Amount": 20
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 4
+      }
+    ]
+  },
+  {
+    "Uid": "Mana3",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 10
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Mana",
+      "Amount": 75
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "Mana4",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Mana",
+      "Amount": 250
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 7
+      }
+    ]
+  },
+  {
+    "Uid": "Mana5",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Mana",
+      "Amount": 1000
+    },
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      }
+    ]
+  },
+  {
+    "Uid": "Mana6",
+    "CreateRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 110
+      }
+    ],
+    "SpawnResources": {
+      "Currency": "Mana",
       "Amount": 3500
     },
     "UnlockBonus": [

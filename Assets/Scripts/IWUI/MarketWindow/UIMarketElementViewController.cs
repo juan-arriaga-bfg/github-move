@@ -66,7 +66,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 				break;
 		}
 		
-		ChengeButtons();
+		ChangeButtons();
 	}
 
 	public override void OnViewShowCompleted()
@@ -85,39 +85,20 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	public override void OnViewCloseCompleted()
 	{
 		base.OnViewCloseCompleted();
-		
-		var contentEntity = entity as UIMarketElementEntity;
 
-		if (contentEntity == null) return;
+		if (!(entity is UIMarketElementEntity contentEntity) || isClick == false || isReward == false || rewardPosition == null) return;
 		
-		if (isClick == false || isReward == false || rewardPosition == null) return;
-		
-		var board = BoardService.Current.FirstBoard;
-		
-		List<CurrencyPair> currencysReward;
-		var piecesReward = CurrencyHellper.FiltrationRewards(new List<CurrencyPair>{contentEntity.Def.Reward}, out currencysReward);
-
 		contentEntity.Def.State = MarketItemState.Claimed;
-		
-		board.ActionExecutor.AddAction(new SpawnRewardPiecesAction()
-		{
-			GetFrom = () => rewardPosition.Value,
-			Pieces = piecesReward,
-			OnComplete = () =>
-			{
-				var view = board.RendererContext.GetElementAt(rewardPosition.Value) as CharacterPieceView;
-                
-				board.TutorialLogic.Update();
-				
-				if(view != null) view.StartRewardAnimation();
-                    
-				AddResourceView.Show(rewardPosition.Value, currencysReward);
-			},
-			EnabledBottomHighlight = true
-		});
+
+		CurrencyHelper.PurchaseAndProvideSpawn(new List<CurrencyPair> {contentEntity.Def.Reward},
+			null,
+			rewardPosition,
+			() => { BoardService.Current.FirstBoard.TutorialLogic.Update(); },
+			false,
+			true);
 	}
 	
-	private void ChengeButtons()
+	private void ChangeButtons()
 	{
 		var contentEntity = entity as UIMarketElementEntity;
 		
@@ -158,7 +139,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 		var contentEntity = entity as UIMarketElementEntity;
 		var price = contentEntity.Def.Current.Price;
 
-		if (CurrencyHellper.IsCanPurchase(price, true) == false)
+		if (CurrencyHelper.IsCanPurchase(price, true) == false)
 		{
 			isClick = false;
 			return;
@@ -188,7 +169,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	{
 		var contentEntity = entity as UIMarketElementEntity;
 		
-		CurrencyHellper.Purchase(Currency.Chest.Name, 1, contentEntity.Def.Current.Price, success =>
+		CurrencyHelper.Purchase(Currency.Chest.Name, 1, contentEntity.Def.Current.Price, success =>
 		{
 			if (success == false)
 			{
@@ -205,30 +186,17 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	private void AddReward()
 	{
 		var contentEntity = entity as UIMarketElementEntity;
-		
 		var board = BoardService.Current.FirstBoard;
-		var positions = board.BoardLogic.PositionsCache.GetRandomPositions(PieceTypeFilter.Character, 1);
 
-		if (positions.Count == 0) return;
-		
-		rewardPosition = positions[0];
-		
-		if(!board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceNearPosition(rewardPosition.Value, contentEntity.Def.Reward.Amount))
+		if (board.BoardLogic.EmptyCellsFinder.CheckFreeSpaceReward(contentEntity.Def.Reward.Amount, true, out var position) == false)
 		{
 			isClick = false;
-			
 			contentEntity.Def.State = MarketItemState.Saved;
-
-			ChengeButtons();
-			
-			// No free space
-			UIMessageWindowController.CreateMessage(
-				LocalizationService.Get("window.daily.error.title", "window.daily.error.title"),
-				LocalizationService.Get("window.daily.error.free.space", "window.daily.error.free.space"));
-			
+			ChangeButtons();
 			return;
 		}
-		
+
+		rewardPosition = position;
 		isReward = true;
 		context.Controller.CloseCurrentWindow();
 	}

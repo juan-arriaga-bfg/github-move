@@ -155,6 +155,13 @@ public static partial class PieceType
     
 #region Currencies
     
+    public static readonly PieceTypeDef Mana1 = new PieceTypeDef{Id = 3000, Abbreviations = new List<string>{ "Mana1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Mana2 = new PieceTypeDef{Id = 3001, Abbreviations = new List<string>{ "Mana2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Mana3 = new PieceTypeDef{Id = 3002, Abbreviations = new List<string>{ "Mana3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource}; 
+    public static readonly PieceTypeDef Mana4 = new PieceTypeDef{Id = 3003, Abbreviations = new List<string>{ "Mana4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Mana5 = new PieceTypeDef{Id = 3004, Abbreviations = new List<string>{ "Mana5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    public static readonly PieceTypeDef Mana6 = new PieceTypeDef{Id = 3005, Abbreviations = new List<string>{ "Mana6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
+    
     public static readonly PieceTypeDef Soft1 = new PieceTypeDef{Id = 3100, Abbreviations = new List<string>{ "Soft1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     public static readonly PieceTypeDef Soft2 = new PieceTypeDef{Id = 3101, Abbreviations = new List<string>{ "Soft2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource};
     public static readonly PieceTypeDef Soft3 = new PieceTypeDef{Id = 3102, Abbreviations = new List<string>{ "Soft3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Resource}; 

@@ -201,7 +201,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         questCardPrefab.SetActive(false);
     }
 
-    private void OnClick()
+    public void OnClick()
     {
         if (!isClickAllowed)
         {
@@ -325,7 +325,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         point.x -= 350;
         point.x += 70;
         
-        CurrencyHellper.Purchase(reward, success =>
+        CurrencyHelper.Purchase(reward, success =>
         {
             uiLayer.CurrentLayer = curLayer;
             onComplete();

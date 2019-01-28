@@ -80,6 +80,13 @@ public class ElementsResourcesBuilder
         
 #region Currencies
         
+        dict.Add(PieceType.Mana1.Id, R.Mana1Piece);
+        dict.Add(PieceType.Mana2.Id, R.Mana2Piece);
+        dict.Add(PieceType.Mana3.Id, R.Mana3Piece);
+        dict.Add(PieceType.Mana4.Id, R.Mana4Piece);
+        dict.Add(PieceType.Mana5.Id, R.Mana5Piece);
+        dict.Add(PieceType.Mana6.Id, R.Mana6Piece);
+        
         dict.Add(PieceType.Soft1.Id, R.Soft1Piece);
         dict.Add(PieceType.Soft2.Id, R.Soft2Piece);
         dict.Add(PieceType.Soft3.Id, R.Soft3Piece);

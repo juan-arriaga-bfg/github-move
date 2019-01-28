@@ -108,10 +108,10 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	public virtual bool Damage(bool isExtra = false)
 	{
 		if (IsDead
-		    || CurrencyHellper.IsCanPurchase(Energy, true) == false
+		    || CurrencyHelper.IsCanPurchase(Energy, true) == false
 		    || isExtra == false && Context.Context.WorkerLogic.Get(Context.CachedPosition, TimerWork) == false) return false;
         
-		CurrencyHellper.Purchase(Currency.Damage.Name, 1, Energy, success =>
+		CurrencyHelper.Purchase(Currency.Damage.Name, 1, Energy, success =>
 		{
 			Success();
 			Damage(Worker?.Amount ?? 1);

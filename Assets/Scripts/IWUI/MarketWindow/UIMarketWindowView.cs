@@ -93,7 +93,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
     {
         var windowModel = Model as UIMarketWindowModel;
         
-        CurrencyHellper.Purchase(Currency.Timer.Name, 1, windowModel.Price, success =>
+        CurrencyHelper.Purchase(Currency.Timer.Name, 1, windowModel.Price, success =>
         {
             if(success == false) return;
             
