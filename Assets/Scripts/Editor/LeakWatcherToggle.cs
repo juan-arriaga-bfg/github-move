@@ -150,7 +150,7 @@ public class LeakWatcherToggle : MonoBehaviour
                     INC_PARENTHESES:
                     if (isClassFound)
                     {
-                        int inc = getCountOfParentheses(line);
+                        int inc = getDeltaOfParentheses(line);
                         deltaParentheses += inc;
                         
                         //Debug.Log($"Parentheses at {lineNumber}: {deltaParentheses}, delta: {deltaParentheses}  //{line}");
@@ -168,18 +168,24 @@ public class LeakWatcherToggle : MonoBehaviour
                         }
                         
                         if ((line.Contains(" " + className + " ") || line.Contains(" " + className + "(") )
+                         && (!line.Contains(" new "))
                          && (line.Contains("public") || line.Contains("protected") || line.Contains("private")) 
                          && line.Contains("("))
                         {
                             Debug.Log($"CTOR found at {lineNumber}: {line}");
 
                             // ctor like this: private JSONNull() { }
-                            if (line.Contains("{") && line.Contains("}"))
+                            if (getDeltaOfParentheses(line) == 0 && line.Contains("{") && line.Contains("}"))
                             {
-                                line = GetFullLeakCtorCall(line);
-                                line = GetFullLeakDtorCall(line);
+                                int pos = line.LastIndexOf("}");
+                                line = line.Insert(pos - 1, GetFullLeakCtorCall(line));
+                                
+                                pos = line.LastIndexOf("}");
+                                line = line.Insert(pos - 1, GetFullLeakDtorCall(line));
+                                
                                 isFileModified = true;
                                 isCtorWritten = true;
+                                isDtorWritten = true;
                             }
                             else
                             {
@@ -267,7 +273,7 @@ public class LeakWatcherToggle : MonoBehaviour
         return $"\n    ~{className}() {{\n        LeakWatcher.Instance.Dtor(this);\n    }}\n";
     }
     
-    private static int getCountOfParentheses(string line)
+    private static int getDeltaOfParentheses(string line)
     {
         int open = line.Count(f => f == '{');
         int close = line.Count(f => f == '}');
