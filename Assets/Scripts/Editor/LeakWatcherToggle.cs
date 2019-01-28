@@ -203,22 +203,22 @@ public class LeakWatcherToggle : MonoBehaviour
 
     private static string GetLeakCtorCall()
     {
-        return "LeakWatcher.Instance.Ctor(this);\n";
+        return "    LeakWatcher.Instance.Ctor(this);\n";
     }
     
     private static string GetLeakDtorCall()
     {
-        return "LeakWatcher.Instance.Dtor(this);\n";
+        return "    LeakWatcher.Instance.Dtor(this);\n";
     }
     
     private static string GetFullLeakCtorCall(string className)
     {
-        return $"\npublic {className} {{\nLeakWatcher.Instance.Ctor(this);\n}}";
+        return $"\npublic {className}() {{\n    LeakWatcher.Instance.Ctor(this);\n}}\n";
     }
     
     private static string GetFullLeakDtorCall(string className)
     {
-        return $"~{className} {{\nLeakWatcher.Instance.Dtor(this);\n}}";
+        return $"\n~{className}() {{\n    LeakWatcher.Instance.Dtor(this);\n}}\n";
     }
     
     private static int getCountOfParentheses(string line)
