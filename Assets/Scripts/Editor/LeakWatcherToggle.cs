@@ -23,14 +23,9 @@ public class LeakWatcherToggle : MonoBehaviour
     {
         var files = Directory.GetFiles(Application.dataPath + "/Scripts", "*.cs", SearchOption.AllDirectories);
 
-        int limit = 10;
+        int limit = 5;
         for (var i = 0; i < files.Length; i++)
-        {
-            if (--limit <= 0)
-            {
-                return;
-            }
-            
+        {           
             string file = files[i].Replace("\\", "/");
 
             bool skipThisFile = false;
@@ -49,12 +44,24 @@ public class LeakWatcherToggle : MonoBehaviour
             }
             
             Debug.Log($"=== Process file: [{i}/{files.Length}] {file} ===");
-            
-            ProcessFile(file);
+
+            if (ProcessFile(file))
+            {
+                limit--;
+            }
+            else
+            {
+                Debug.Log($"No changes are made!"); 
+            }
+
+            if (limit <= 0)
+            {
+                return;
+            }
         }
     }
 
-    private static void ProcessFile(string file)
+    private static bool ProcessFile(string file)
     {
         string text = File.ReadAllText(file);
         text = RemoveComments(text);
@@ -72,6 +79,8 @@ public class LeakWatcherToggle : MonoBehaviour
             bool isCtorWritten = false;
             bool firstLineInClass = false;
 
+            bool isFileModified;
+
             int deltaParentheses = 0;
             
             string line = string.Empty;
@@ -86,6 +95,8 @@ public class LeakWatcherToggle : MonoBehaviour
                         pos = Mathf.Max(0, pos);
                         
                         line = line.Insert(pos, "@@@@DTOR@@@@");
+                        isFileModified = true;
+                        
                         needWriteDtorToNextLine = false;
                         isDtorWritten = true;
                         goto WRITE;
@@ -97,6 +108,8 @@ public class LeakWatcherToggle : MonoBehaviour
                         pos = Mathf.Max(0, pos);
                         
                         line = line.Insert(pos, "@@@@CTOR@@@@");
+                        isFileModified = true;
+                        
                         needWriteCtorToNextLine = false;
                         isCtorWritten = true;
                         goto WRITE;
@@ -145,12 +158,16 @@ public class LeakWatcherToggle : MonoBehaviour
                         {
                             Debug.Log($"No DTOR in {className}, write new");
                             line = line.Insert(0, "@@@@FULL_DTOR@@@@");
+                            isFileModified = true;
+                            
                         }
                         
                         if (!isCtorWritten)
                         {
                             Debug.Log($"No CTOR in {className}, write new");
                             line = line.Insert(0, "@@@@FULL_CTOR@@@@");
+                            isFileModified = true;
+                            
                         }
 
                         isDtorWritten = false;
@@ -167,8 +184,14 @@ public class LeakWatcherToggle : MonoBehaviour
                         output.AppendLine(line);
                 }
             } while (line != null);
-            
-            File.WriteAllText(file, output.ToString(), new UTF8Encoding(false));
+
+            if (isFileModified)
+            {
+                File.WriteAllText(file, output.ToString(), new UTF8Encoding(false));
+                return true;
+            }
+
+            return false;
         }
     }
     
