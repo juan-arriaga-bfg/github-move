@@ -174,8 +174,8 @@ public class LeakWatcherToggle : MonoBehaviour
     
     private static int getCountOfParentheses(string line)
     {
-        int open = line.Count(f => f == '(');
-        int close = line.Count(f => f == ')');
+        int open = line.Count(f => f == '{');
+        int close = line.Count(f => f == '}');
 
         int total = open - close;
 
