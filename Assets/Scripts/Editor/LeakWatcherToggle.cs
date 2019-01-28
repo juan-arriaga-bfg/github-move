@@ -88,7 +88,7 @@ public class LeakWatcherToggle : MonoBehaviour
             bool needWriteCtorToNextLine = false;
             bool isDtorWritten = false;
             bool isCtorWritten = false;
-            bool firstLineInClass = false;
+            bool firstParenthesesInClassFound = false;
 
             bool isFileModified = false;
 
@@ -126,11 +126,22 @@ public class LeakWatcherToggle : MonoBehaviour
                         isCtorWritten = true;
                         goto INC_PARENTHESES;
                     }
+
+                    if (isClassFound && !firstParenthesesInClassFound)
+                    {
+                        if (line.Contains("{"))
+                        {
+                            firstParenthesesInClassFound = true;
+                        }
+                    }
                     
                     if (!isClassFound && line.Contains(" class ") && !line.Contains("static") && !line.Contains("abstract"))
                     {
                         isClassFound = true;
-                        firstLineInClass = true;
+                        if (line.Contains("{"))
+                        {
+                            firstParenthesesInClassFound = true;
+                        }
                         className = getClassNamaRegex.Match(line).Value;
                         
                         Debug.Log($"Class found at {lineNumber}: {className}");
@@ -146,7 +157,7 @@ public class LeakWatcherToggle : MonoBehaviour
                     }
 
                     // search for ctor/dtor
-                    if (isClassFound && !firstLineInClass)
+                    if (isClassFound && firstParenthesesInClassFound)
                     {
                         if (line.Contains("~") && line.Contains(className))
                         {
@@ -165,7 +176,8 @@ public class LeakWatcherToggle : MonoBehaviour
                             // ctor like this: private JSONNull() { }
                             if (line.Contains("{") && line.Contains("}"))
                             {
-                                line = WriteCtorToLine(line);
+                                line = GetFullLeakCtorCall(line);
+                                line = GetFullLeakDtorCall(line);
                                 isFileModified = true;
                                 isCtorWritten = true;
                             }
@@ -178,7 +190,7 @@ public class LeakWatcherToggle : MonoBehaviour
                     }
 
                     // Finalize class
-                    if (isClassFound && !firstLineInClass && deltaParentheses <= 0)
+                    if (isClassFound && firstParenthesesInClassFound && deltaParentheses <= 0)
                     {
                         Debug.Log($"Class end at {lineNumber}: {className}");
                         
@@ -212,10 +224,6 @@ public class LeakWatcherToggle : MonoBehaviour
                     }
 
                     WRITE:
-                        if (firstLineInClass)
-                        {
-                            firstLineInClass = false;
-                        }
                         output.AppendLine(line);
                 }
             } while (line != null);
