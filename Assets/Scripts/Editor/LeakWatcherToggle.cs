@@ -188,7 +188,7 @@ public class LeakWatcherToggle : MonoBehaviour
                             string fixedLine = line.Replace("  ", " ");
                             int posOfToken = fixedLine.IndexOf(className);
                             int endOfToken = posOfToken + className.Length;
-                            if (fixedLine[endOfToken + 1] != '(' && fixedLine.Substring(endOfToken + 1, 2) != " (")
+                            if (fixedLine[endOfToken] != '(' && fixedLine.Substring(endOfToken, 2) != " (")
                             {
                                 check = false;
                             }
