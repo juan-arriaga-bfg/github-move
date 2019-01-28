@@ -128,7 +128,7 @@ public class LeakWatcherToggle : MonoBehaviour
                     }
 
                     // Finalize class
-                    if (deltaParentheses <= 0)
+                    if (isClassFound && deltaParentheses <= 0)
                     {
                         isClassFound = false;
 
