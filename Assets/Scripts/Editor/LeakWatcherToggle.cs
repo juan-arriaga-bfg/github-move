@@ -44,6 +44,11 @@ public class LeakWatcherToggle : MonoBehaviour
                 }
             }
 
+            if (!file.Contains("UICodexWindowModel.cs"))
+            {
+                skipThisFile;
+            }
+            
             if (skipThisFile)
             {
                 continue;
@@ -88,11 +93,15 @@ public class LeakWatcherToggle : MonoBehaviour
             bool isFileModified = false;
 
             int deltaParentheses = 0;
+
+            int lineNumber = 0;
             
             string line = string.Empty;
             do
             {
                 line = reader.ReadLine();
+                lineNumber++;
+                
                 if (line != null)
                 {
                     if (needWriteDtorToNextLine)
@@ -127,7 +136,7 @@ public class LeakWatcherToggle : MonoBehaviour
                         firstLineInClass = true;
                         className = getClassNamaRegex.Match(line).Value;
                         
-                        Debug.Log($"Class found: {className}");
+                        Debug.Log($"Class found at {lineNumber}: {className}");
                     }
 
                     if (isClassFound)
@@ -159,6 +168,8 @@ public class LeakWatcherToggle : MonoBehaviour
                     // Finalize class
                     if (isClassFound && !firstLineInClass && deltaParentheses <= 0)
                     {
+                        Debug.Log($"Class end at {lineNumber}: {className}");
+                        
                         isClassFound = false;
 
                         if (!isDtorWritten)
@@ -204,12 +215,12 @@ public class LeakWatcherToggle : MonoBehaviour
 
     private static string GetLeakCtorCall()
     {
-        return "\n    LeakWatcher.Instance.Ctor(this);\n\n";
+        return "\n        LeakWatcher.Instance.Ctor(this);\n\n";
     }
     
     private static string GetLeakDtorCall()
     {
-        return "\n    LeakWatcher.Instance.Dtor(this);\n\n";
+        return "\n        LeakWatcher.Instance.Dtor(this);\n\n";
     }
     
     private static string GetFullLeakCtorCall(string className)
