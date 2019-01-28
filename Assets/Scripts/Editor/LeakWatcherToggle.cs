@@ -100,7 +100,7 @@ public class LeakWatcherToggle : MonoBehaviour
                         int pos = line.IndexOf("{");
                         pos = Mathf.Max(0, pos);
                         
-                        line = line.Insert(pos, GetLeakDtorCall());
+                        line = line.Insert(pos + 1, GetLeakDtorCall());
                         isFileModified = true;
                         
                         needWriteDtorToNextLine = false;
@@ -113,7 +113,7 @@ public class LeakWatcherToggle : MonoBehaviour
                         int pos = line.IndexOf("{");
                         pos = Mathf.Max(0, pos);
                         
-                        line = line.Insert(pos, GetLeakCtorCall());
+                        line = line.Insert(pos + 1, GetLeakCtorCall());
                         isFileModified = true;
                         
                         needWriteCtorToNextLine = false;
@@ -204,12 +204,12 @@ public class LeakWatcherToggle : MonoBehaviour
 
     private static string GetLeakCtorCall()
     {
-        return "    LeakWatcher.Instance.Ctor(this);\n";
+        return "\n    LeakWatcher.Instance.Ctor(this);\n\n";
     }
     
     private static string GetLeakDtorCall()
     {
-        return "    LeakWatcher.Instance.Dtor(this);\n";
+        return "\n    LeakWatcher.Instance.Dtor(this);\n\n";
     }
     
     private static string GetFullLeakCtorCall(string className)
