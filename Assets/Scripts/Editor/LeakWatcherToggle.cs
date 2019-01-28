@@ -143,6 +143,11 @@ public class LeakWatcherToggle : MonoBehaviour
                             firstParenthesesInClassFound = true;
                         }
                         className = getClassNamaRegex.Match(line).Value;
+
+                        if (string.IsNullOrEmpty(className))
+                        {
+                            Debug.LogError($"Empty class name for file {file} at line [{lineNumber}]: {line}");
+                        }
                         
                         Debug.Log($"Class found at {lineNumber}: {className}");
                     }
