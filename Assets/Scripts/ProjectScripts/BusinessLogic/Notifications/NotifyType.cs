@@ -12,11 +12,11 @@ public class NotifyType
     public Func<DateTime, DateTime> TimeCorrector;
     public Func<List<Notifier>, List<Notifier>> NotifySelector;
     
-    public static NotifyType MonumentRefresh = new NotifyType
+    public static readonly NotifyType MonumentRefresh = new NotifyType
     {
         Id = 0, 
-        TitleKey = "notifications.monument.refresh.title", 
-        MessageKey = "notifications.monument.refresh.message", 
+        TitleKey = "notifications.monument.restore.title", 
+        MessageKey = "notifications.monument.restore.message", 
         NotifySelector = (notifiers) =>
         {
             if (notifiers.Count == 0)
@@ -27,8 +27,8 @@ public class NotifyType
         },
         TimeCorrector = null
     };
-    
-    public static NotifyType MonumentBuild = new NotifyType
+
+    public static readonly NotifyType MonumentBuild = new NotifyType
     {
         Id = 1, 
         TitleKey = "notifications.monument.build.title", 
@@ -37,7 +37,7 @@ public class NotifyType
         TimeCorrector = null
     };
     
-    public static NotifyType DailyTimeout = new NotifyType
+    public static readonly NotifyType DailyTimeout = new NotifyType
     {
         Id = 2, 
         TitleKey = "notifications.daily.timeout.title", 
@@ -45,9 +45,15 @@ public class NotifyType
         NotifySelector = notifiers =>
         {
             var resultNotifiers = new List<Notifier>();
+            
+            var dailyQuestEntity = GameDataService.Current.QuestsManager.DailyQuest;
+            if (dailyQuestEntity.IsAllTasksClaimed(true) ||
+                dailyQuestEntity.ActiveTasks.All(task => task.IsCompletedOrClaimed() == false))
+                return resultNotifiers;
+            
             foreach (var notifier in notifiers)
             {
-                if(LocalNotificationsService.Current.CorrectTime(DailyTimeout.TimeCorrector(notifier.Timer.CompleteTime)).Day == DateTime.Now.Day)
+                if(LocalNotificationsService.Current.CorrectTime(DailyTimeout.TimeCorrector(notifier.Timer.CompleteTime)).Day == DateTime.UtcNow.Day)
                     resultNotifiers.Add(notifier);
             }
 
@@ -56,20 +62,20 @@ public class NotifyType
         TimeCorrector = notifyDate => notifyDate.Subtract(new TimeSpan(3, 30, 0))
     };
 
-    public static NotifyType MarketRefresh = new NotifyType
+    public static readonly NotifyType MarketRefresh = new NotifyType
     {
         Id = 3,
-        TitleKey = "notifications.market.refresh.title",
-        MessageKey = "notifications.market.refresh.message",
+        TitleKey = "notifications.market.restore.title",
+        MessageKey = "notifications.market.restore.message",
         NotifySelector = null,
         TimeCorrector = null
     };
     
-    public static NotifyType EnergyRefresh = new NotifyType
+    public static readonly NotifyType EnergyRefresh = new NotifyType
     {
         Id = 4,
-        TitleKey = "notifications.energy.refresh.title",
-        MessageKey = "notifications.energy.refresh.message",
+        TitleKey = "notifications.energy.restore.title",
+        MessageKey = "notifications.energy.restore.message",
         NotifySelector = null,
         TimeCorrector = notifyDate =>
         {

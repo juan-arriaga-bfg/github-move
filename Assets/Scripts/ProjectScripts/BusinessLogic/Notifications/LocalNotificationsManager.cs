@@ -14,24 +14,23 @@ public class LocalNotificationsManager
     
     public void RegisterNotifier(Notifier notifier)
     {
-        Debug.LogError($"NotifyService.Register({notifier.NotifyType.Id})");
+        Debug.Log($"LocalNotificationService >> Register(NotifyType.Id:{notifier.NotifyType.Id})");
         notifiers.Add(notifier);
     }
 
     public void UnRegisterNotifier(Notifier notifier)
     {
-        Debug.LogError($"NotifyService.UnRegister({notifier.NotifyType.Id})");
+        Debug.Log($"LocalNotificationService >> UnRegister(NotifyType.Id:{notifier.NotifyType.Id})");
         notifiers.Remove(notifier);
     }
 
     public void UnRegisterNotifier(TimerComponent timer)
     {
-        
         foreach (var notifier in notifiers)
         {
             if (notifier.Timer == timer)
             {
-                Debug.LogError($"NotifyService.UnRegister({notifier.NotifyType.Id})");
+                Debug.Log($"LocalNotificationService >> UnRegister(NotifyType.Id:{notifier.NotifyType.Id})");
                 notifiers.Remove(notifier);
                 return;
             }
@@ -46,15 +45,15 @@ public class LocalNotificationsManager
     public void ClearNotifications()
     {
         notifyItems.Clear();
-        Debug.LogError("> Clear notifications");
+        Debug.Log("LocalNotificationService >> Clear notifications");
     }
 
     public void SaveNotifications()
     {
-        Debug.LogError($"> Save notifications (CurrentTime {DateTime.Now})");
+        Debug.Log($"LocalNotificationService >> Save notifications (CurrentTime: {DateTime.Now})");
         foreach (var item in notifyItems)
         {
-            Debug.LogError($"> Title: {item.Title}, Message: {item.Message}, NotifyTime: {item.NotifyTime}");
+            Debug.Log($"LocalNotificationService >> Notification(Title: {item.Title}, Message: {item.Message}, NotifyTime: {item.NotifyTime})");
         }
     }
 
@@ -74,7 +73,7 @@ public class LocalNotificationsManager
             
             foreach (var notifier in notifiers)
             {
-                if(notifier.Timer.IsStarted)
+                if(notifier.Timer.IsExecuteable())
                     notifications.Add(GenerateNotify(notifier));
             }
         }
@@ -114,6 +113,8 @@ public class LocalNotificationsManager
         {
             notifyDate = new DateTime(notifyDate.Year, notifyDate.Month, notifyDate.Day, NightEndTime.Hours, NightEndTime.Minutes, NightEndTime.Seconds);
         }
+
+        notifyDate = notifyDate.ToUniversalTime();
 
         return notifyDate;
     }
