@@ -79,7 +79,7 @@ public class LeakWatcherToggle : MonoBehaviour
             bool isCtorWritten = false;
             bool firstLineInClass = false;
 
-            bool isFileModified;
+            bool isFileModified = false;
 
             int deltaParentheses = 0;
             
