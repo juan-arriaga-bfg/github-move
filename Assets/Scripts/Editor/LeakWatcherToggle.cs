@@ -141,7 +141,10 @@ public class LeakWatcherToggle : MonoBehaviour
 
                     if (isClassFound)
                     {
-                        deltaParentheses += getCountOfParentheses(line);
+                        int inc = getCountOfParentheses(line);
+                        deltaParentheses += inc;
+                        
+                        Debug.Log($"Parentheses at {lineNumber}: {deltaParentheses}, delta: {deltaParentheses}  //{line}");
                     }
 
                     // search for ctor/dtor
@@ -190,6 +193,11 @@ public class LeakWatcherToggle : MonoBehaviour
 
                         isDtorWritten = false;
                         isCtorWritten = false;
+
+                        if (deltaParentheses != 0)
+                        {
+                            Debug.LogError($"deltaParentheses == {deltaParentheses} at the end of class");
+                        }
                         
                         Debug.Log($"Class processed: {className}");
                     }
