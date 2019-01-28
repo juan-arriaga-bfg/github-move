@@ -146,7 +146,8 @@ public class LeakWatcherToggle : MonoBehaviour
                             goto WRITE;
                         }
                         
-                        if (line.Contains(className) && (line.Contains("public") || line.Contains("protected") || line.Contains("private")))
+                        if ((line.Contains(" " + className + " ") || line.Contains(" " + className + "(") )
+                         && (line.Contains("public") || line.Contains("protected") || line.Contains("private")))
                         {
                             Debug.Log($"CTOR found: {line}");
                             
