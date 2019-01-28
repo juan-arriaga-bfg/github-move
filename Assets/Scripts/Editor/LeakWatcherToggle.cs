@@ -21,46 +21,42 @@ public class LeakWatcherToggle : MonoBehaviour
         "LeakWatcherToggle.cs",        
     };
 
-    [MenuItem("Tools/Print Leak Watcher")]
+    [MenuItem("Tools/Memory Leaks Test/Print stats (only suspicious)")]
     public static void Print()
     {
         string text = LeakWatcher.Instance.DataAsString(true);
         PrintStringLineByLine(text);
     }
-
-    private static void PrintStringLineByLine(string text)
+    
+    [MenuItem("Tools/Memory Leaks Test/Print stats")]
+    public static void PrintAll()
     {
-        using (StringReader reader = new StringReader(text))
-        {
-            string line = string.Empty;
-            do
-            {
-                line = reader.ReadLine();
-                if (!string.IsNullOrEmpty(line))
-                {
-                    Debug.Log(line);
-                }
-            } while (line != null);
-        }
+        string text = LeakWatcher.Instance.DataAsString(false);
+        PrintStringLineByLine(text);
     }
 
-    [MenuItem("Tools/TakeSnapshot Leak Watcher")]
+    [MenuItem("Tools/Memory Leaks Test/Take snapshot")]
     public static void TakeSnapshot()
     {
         LeakWatcher.Instance.Snapshot();
         Debug.Log($"Snapshot created!"); 
     }
     
-    [MenuItem("Tools/Compare snapshot Leak Watcher")]
+    [MenuItem("Tools/Memory Leaks Test/Take Snapshot and compare")]
     public static void CompareSnapshot()
     {
         var diff = LeakWatcher.Instance.CompareSnapshots();
         PrintStringLineByLine(diff);
     }
     
-    [MenuItem("Tools/Enable Leak Watcher")]
+    [MenuItem("Tools/Memory Leaks Test/Enable")]
     public static void Process()
     {
+        if (Application.isPlaying)
+        {
+            throw new Exception("Not allowed in Play mode!");
+        }
+        
         var files = Directory.GetFiles(Application.dataPath + "/Scripts", "*.cs", SearchOption.AllDirectories);
 
         int limit = int.MaxValue;
@@ -363,5 +359,21 @@ public class LeakWatcherToggle : MonoBehaviour
             RegexOptions.Singleline);
 
         return noComments;
+    }
+    
+    private static void PrintStringLineByLine(string text)
+    {
+        using (StringReader reader = new StringReader(text))
+        {
+            string line = string.Empty;
+            do
+            {
+                line = reader.ReadLine();
+                if (!string.IsNullOrEmpty(line))
+                {
+                    Debug.Log(line);
+                }
+            } while (line != null);
+        }
     }
 }
