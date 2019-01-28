@@ -127,9 +127,9 @@ public class R
      public const string NPC_SleepingBeautyPiece = "NPC_SleepingBeautyPiece";
      public const string NPC_RapunzelPiece = "NPC_RapunzelPiece";
      public const string NPC_PussInBootsPiece = "NPC_PussInBootsPiece";
-     public const string NPC_5Piece = "NPC_5Piece";
-     public const string NPC_6Piece = "NPC_6Piece";
-     public const string NPC_7Piece = "NPC_7Piece";
+     public const string NPC_PeterPenPiece = "NPC_PeterPenPiece";
+     public const string NPC_RedHoodPiece = "NPC_RedHoodPiece";
+     public const string NPC_MermaidPiece = "NPC_MermaidPiece";
      public const string NPC_8Piece = "NPC_8Piece";
      public const string NPC_9Piece = "NPC_9Piece";
      public const string LockedEmpty = "LockedEmpty";
