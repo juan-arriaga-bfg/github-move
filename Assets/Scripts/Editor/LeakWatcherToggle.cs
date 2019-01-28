@@ -116,8 +116,8 @@ public class LeakWatcherToggle : MonoBehaviour
                         deltaParentheses += getCountOfParentheses(line);
                     }
 
-                    // search for ~
-                    if (isClassFound)
+                    // search for ctor/dtor
+                    if (isClassFound && !firstLineInClass)
                     {
                         if (line.Contains("~") && line.Contains(className))
                         {
