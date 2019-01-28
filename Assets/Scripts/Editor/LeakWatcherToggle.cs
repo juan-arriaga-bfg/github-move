@@ -29,7 +29,7 @@ public class LeakWatcherToggle : MonoBehaviour
     {
         var files = Directory.GetFiles(Application.dataPath + "/Scripts", "*.cs", SearchOption.AllDirectories);
 
-        int limit = 100;
+        int limit = int.MaxValue;
         for (var i = 0; i < files.Length; i++)
         {           
             string file = files[i].Replace("\\", "/");
@@ -145,7 +145,7 @@ public class LeakWatcherToggle : MonoBehaviour
                         int inc = getCountOfParentheses(line);
                         deltaParentheses += inc;
                         
-                        Debug.Log($"Parentheses at {lineNumber}: {deltaParentheses}, delta: {deltaParentheses}  //{line}");
+                        //Debug.Log($"Parentheses at {lineNumber}: {deltaParentheses}, delta: {deltaParentheses}  //{line}");
                     }
 
                     // search for ctor/dtor
