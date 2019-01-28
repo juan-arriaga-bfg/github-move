@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class СompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBuilder
+public class CompositePieceMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionBuilder
 {
     public List<int> GetKeys()
     {
