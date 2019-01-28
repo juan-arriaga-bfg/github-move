@@ -119,10 +119,7 @@ public class LeakWatcherToggle : MonoBehaviour
                     
                     if (needWriteCtorToNextLine)
                     {
-                        int pos = line.IndexOf("{");
-                        pos = Mathf.Max(0, pos);
-                        
-                        line = line.Insert(pos + 1, GetLeakCtorCall());
+                        line = WriteCtorToLine(line);
                         isFileModified = true;
                         
                         needWriteCtorToNextLine = false;
@@ -164,8 +161,18 @@ public class LeakWatcherToggle : MonoBehaviour
                          && line.Contains("("))
                         {
                             Debug.Log($"CTOR found at {lineNumber}: {line}");
-                            
-                            needWriteCtorToNextLine = true;
+
+                            // ctor like this: private JSONNull() { }
+                            if (line.Contains("{") && line.Contains("}"))
+                            {
+                                line = WriteCtorToLine(line);
+                                isFileModified = true;
+                                isCtorWritten = true;
+                            }
+                            else
+                            {
+                                needWriteCtorToNextLine = true;
+                            }
                             goto WRITE;
                         }
                     }
@@ -221,6 +228,15 @@ public class LeakWatcherToggle : MonoBehaviour
 
             return false;
         }
+    }
+
+    private static string WriteCtorToLine(string line)
+    {
+        int pos = line.IndexOf("{");
+        pos = Mathf.Max(0, pos);
+
+        line = line.Insert(pos + 1, GetLeakCtorCall());
+        return line;
     }
 
     private static string GetLeakCtorCall()
