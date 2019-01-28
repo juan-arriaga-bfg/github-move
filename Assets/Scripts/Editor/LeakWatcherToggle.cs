@@ -42,7 +42,7 @@ public class LeakWatcherToggle : MonoBehaviour
         Debug.Log($"Snapshot created!"); 
     }
     
-    [MenuItem("Tools/Memory Leaks Test/Take Snapshot and compare")]
+    [MenuItem("Tools/Memory Leaks Test/Take snapshot and compare")]
     public static void CompareSnapshot()
     {
         var diff = LeakWatcher.Instance.CompareSnapshots();
