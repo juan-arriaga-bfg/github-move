@@ -114,7 +114,7 @@ public class LeakWatcherToggle : MonoBehaviour
                         
                         needWriteDtorToNextLine = false;
                         isDtorWritten = true;
-                        goto WRITE;
+                        goto INC_PARENTHESES;
                     }
                     
                     if (needWriteCtorToNextLine)
@@ -127,7 +127,7 @@ public class LeakWatcherToggle : MonoBehaviour
                         
                         needWriteCtorToNextLine = false;
                         isCtorWritten = true;
-                        goto WRITE;
+                        goto INC_PARENTHESES;
                     }
                     
                     if (!isClassFound && line.Contains(" class ") && !line.Contains("static") && !line.Contains("abstract"))
@@ -139,6 +139,7 @@ public class LeakWatcherToggle : MonoBehaviour
                         Debug.Log($"Class found at {lineNumber}: {className}");
                     }
 
+                    INC_PARENTHESES:
                     if (isClassFound)
                     {
                         int inc = getCountOfParentheses(line);
