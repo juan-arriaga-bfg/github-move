@@ -99,6 +99,8 @@ public class AddResourceView : BoardElementView
 	
 	private static void ShowCounter(BoardController board, BoardPosition position, CurrencyPair resource, bool isPurchase = false)
 	{
+		position.Z = BoardLayer.MAX.Layer;
+		
 		var view = board.RendererContext.CreateBoardElementAt<AddResourceView>(R.AddResourceView, position);
 		
 		view.CachedTransform.localPosition = view.CachedTransform.localPosition + Vector3.up;

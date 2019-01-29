@@ -222,7 +222,5 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             
         bubble.Priority = 1;
         bubble.Change(false);
-        
-        
     }
 }
