@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class LocalNotificationsManager
+public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
 {
     private List<Notifier> notifiers = new List<Notifier>();
-    private List<Notification> notifyItems = new List<Notification>();
+    protected List<Notification> notifyItems = new List<Notification>();
 
     public readonly TimeSpan NightBeginTime = new TimeSpan(22, 0, 0);
-    public readonly TimeSpan NightEndTime = new TimeSpan(10, 0, 0);
-    public readonly TimeSpan MinimalTimeout = new TimeSpan(0, 30, 0);
+    public readonly TimeSpan NightEndTime   = new TimeSpan(10, 0, 0);
+    public readonly TimeSpan MinimalTimeout = new TimeSpan(0,  30,0);
     
     public void RegisterNotifier(Notifier notifier)
     {
@@ -42,19 +42,21 @@ public class LocalNotificationsManager
         notifyItems.Add(notification);
     }
 
-    public void ClearNotifications()
+    public virtual void CancelNotifications()
     {
         notifyItems.Clear();
-        Debug.Log("[LocalNotificationService] => Clear notifications");
+        Debug.Log("[LocalNotificationService] => CancelNotifications");
+
+        CancelAllOnDevice();
     }
 
-    public void SaveNotifications()
+    public void ScheduleNotifications()
     {
-        Debug.Log($"[LocalNotificationService] => Save notifications (CurrentTime: {DateTime.Now})");
-        foreach (var item in notifyItems)
-        {
-            Debug.Log($"[LocalNotificationService] => Notification(Title: {item.Title}, Message: {item.Message}, NotifyTime: {item.NotifyTime})");
-        }
+        Debug.Log($"[LocalNotificationService] => ScheduleNotifications (CurrentTime: {DateTime.Now})");
+        
+        GenerateNotifications();
+
+        ScheduleAllOnDevice();
     }
 
     public void GenerateNotifications()
@@ -119,9 +121,15 @@ public class LocalNotificationsManager
         return notifyDate;
     }
 
-    public void RefreshNotifications()
+    public void Print()
     {
-        GenerateNotifications();
-        SaveNotifications();
+        foreach (var item in notifyItems)
+        {
+            Debug.Log($"[LocalNotificationService] => Notification(Title: {item.Title}, Message: {item.Message}, NotifyTime: {item.NotifyTime})");
+        } 
     }
+
+    protected abstract void CancelAllOnDevice();
+
+    protected abstract void ScheduleAllOnDevice();
 }

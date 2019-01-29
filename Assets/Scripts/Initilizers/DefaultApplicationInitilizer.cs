@@ -80,7 +80,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
 
 #if UNITY_EDITOR
             ProfileService.Instance.Manager.SaveLocalProfile();
-            LocalNotificationsService.Current.RefreshNotifications();
+            LocalNotificationsService.Current.ScheduleNotifications();
 #endif
             }
 
@@ -90,7 +90,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         {
             energyLogic?.InitInSave();
             
-            LocalNotificationsService.Current.ClearNotifications();
+            LocalNotificationsService.Current.CancelNotifications();
         }
     }
 
@@ -99,7 +99,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         ProfileService.Instance.Manager.UploadCurrentProfile();
 
 #if UNITY_EDITOR
-        LocalNotificationsService.Current.RefreshNotifications();
+        LocalNotificationsService.Current.ScheduleNotifications();
         
         ProfileService.Instance.Manager.SaveLocalProfile();
         AssetDatabase.Refresh();
