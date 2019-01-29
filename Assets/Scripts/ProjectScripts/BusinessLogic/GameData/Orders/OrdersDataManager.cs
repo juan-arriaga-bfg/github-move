@@ -91,22 +91,23 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
 
     public void RemoveOrder(Order order, BoardLogicComponent logic)
     {
+        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.OrderCompleted, order);
+        
         Orders.Remove(order);
 
         var customers = new List<CustomerComponent>();
-        
         var positions = logic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Character);
-
+        
         foreach (var position in positions)
         {
             var customer = logic.GetPieceAt(position)?.GetComponent<CustomerComponent>(CustomerComponent.ComponentGuid);
             
-            if(customer == null || customer.Order != null || customer.Cooldown.IsExecuteable()) continue;
+            if(customer == null || customer.Cooldown.IsExecuteable() || (positions.Count != 1 && customer.Order != null)) continue;
             
             customers.Add(customer);
         }
-        
-        if(customers.Count == 0) return;
+
+        if (customers.Count == 0) return;
         
         var amount = Mathf.Min(customers.Count, GameDataService.Current.ConstantsManager.MaxOrders - Orders.Count);
         
@@ -117,8 +118,6 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
             customers.Remove(customer);
             customer.Cooldown.Start();
         }
-        
-        BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.OrderCompleted, order);
     }
 
     public void UpdateOrders()
