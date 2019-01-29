@@ -575,6 +575,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
             Delay = DAILY_TIMER_DELAY,
             Tag = "daily"
         };
+        LocalNotificationsService.Current.RegisterNotifier(new Notifier(DailyTimer, NotifyType.DailyTimeout));
         DailyTimer.OnComplete += OnCompleteDailyTimer;
                                                                                                                 
         RegisterComponent(DailyTimer);
@@ -594,7 +595,8 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         
         DailyTimer.OnComplete -= OnCompleteDailyTimer;
         DailyTimer.Stop();
-        DailyTimer = null;
+        LocalNotificationsService.Current.UnRegisterNotifier(DailyTimer);
+        DailyTimer = null;        
     }
 
     private void OnCompleteDailyTimer()
