@@ -67,7 +67,8 @@ public class SherwoodLocalNotificationsManagerBase : LocalNotificationsManagerBa
         foreach (var item in notifyItems)
         {
             long unixTimestamp = UnixTimeHelper.DateTimeToUnixTimestamp(item.NotifyTime);
-            bfgLocalNotificationManager.scheduleNotification(item.Title, item.Message, iconId, item.Id, unixTimestamp, true);
+            long unixTimestampMilliseconds = unixTimestamp * 1000;
+            bfgLocalNotificationManager.scheduleNotification(item.Title, item.Message, iconId, item.Id, unixTimestampMilliseconds, true);
         }
     }
     
