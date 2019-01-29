@@ -79,9 +79,9 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
                 ProfileService.Instance.Manager.UploadCurrentProfile();
 
 #if UNITY_EDITOR
-            ProfileService.Instance.Manager.SaveLocalProfile();
-            LocalNotificationsService.Current.ScheduleNotifications();
+                ProfileService.Instance.Manager.SaveLocalProfile();
 #endif
+                LocalNotificationsService.Current.ScheduleNotifications();
             }
 
             energyLogic?.Timer.Stop();
