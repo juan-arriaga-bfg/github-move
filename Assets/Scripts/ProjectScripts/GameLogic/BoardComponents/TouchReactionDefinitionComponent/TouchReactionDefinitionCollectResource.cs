@@ -16,7 +16,7 @@ public class TouchReactionDefinitionCollectResource : TouchReactionDefinitionCom
         }
         else
         {
-            AddResourceView.Show(position, resources);
+            AddResourceView.Show(position, resources, -0.3f);
         }
         
         piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction

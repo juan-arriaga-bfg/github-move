@@ -85,7 +85,7 @@ public class AddResourceView : BoardElementView
 		    || resource.Currency == Currency.Mana.Name
 		    || resource.Currency == Currency.Experience.Name)
 		{
-			DOTween.Sequence().InsertCallback(0.2f + delay, () =>
+			DOTween.Sequence().InsertCallback(0.5f + delay, () =>
 			{
 				transaction.Complete();
 				ShowCounter(board, position, resource);
