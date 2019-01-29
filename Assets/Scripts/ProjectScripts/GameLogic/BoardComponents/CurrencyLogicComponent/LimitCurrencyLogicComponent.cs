@@ -33,6 +33,6 @@ public class LimitCurrencyLogicComponent : ECSEntity
 
         var possible = Mathf.Min(amount, limitItem.Amount - targetItem.Amount);
 
-        CurrencyHellper.Purchase(targetItem.Currency, possible);
+        CurrencyHelper.Purchase(targetItem.Currency, possible);
     }
 }

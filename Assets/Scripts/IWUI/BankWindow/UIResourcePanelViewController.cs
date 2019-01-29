@@ -36,7 +36,7 @@ public class UIResourcePanelViewController : UIGenericResourcePanelViewControlle
 
     public void OpenShop()
     {
-        CurrencyHellper.OpenShopWindow(itemUid);
+        CurrencyHelper.OpenShopWindow(itemUid);
     }
 
     private void SetLabelText(int value)

@@ -1,7 +1,6 @@
 // Author: Daniele Giardini - http://www.demigiant.com
 // Created: 2018/07/13
 
-using System;
 using UnityEngine;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Core.PathCore;
@@ -35,7 +34,28 @@ namespace DG.Tweening
 
             _initialized = true;
             DOTweenExternalCommand.SetOrientationOnPath += Physics.SetOrientationOnPath;
+
+#if UNITY_EDITOR
+#if UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_5
+            UnityEditor.EditorApplication.playmodeStateChanged += PlaymodeStateChanged;
+#else
+            UnityEditor.EditorApplication.playModeStateChanged += PlaymodeStateChanged;
+#endif
+#endif
         }
+
+#if UNITY_EDITOR
+        // Fires OnApplicationPause in DOTweenComponent even when Editor is paused (otherwise it's only fired at runtime)
+#if UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_5
+        static void PlaymodeStateChanged()
+        #else
+        static void PlaymodeStateChanged(UnityEditor.PlayModeStateChange state)
+#endif
+        {
+            if (DOTween.instance == null) return;
+            DOTween.instance.OnApplicationPause(UnityEditor.EditorApplication.isPaused);
+        }
+#endif
 
         // █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
         // ███ INTERNAL CLASSES ████████████████████████████████████████████████████████████████████████████████████████████████
@@ -46,7 +66,7 @@ namespace DG.Tweening
             // Called via DOTweenExternalCommand callback
             public static void SetOrientationOnPath(PathOptions options, Tween t, Quaternion newRot, Transform trans)
             {
-#if true // PHYSICS_MARKER
+#if false // PHYSICS_MARKER
                 if (options.isRigidbody) ((Rigidbody)t.target).rotation = newRot;
                 else trans.rotation = newRot;
 #else
@@ -57,7 +77,7 @@ namespace DG.Tweening
             // Returns FALSE if the DOTween's Physics2D Module is disabled, or if there's no Rigidbody2D attached
             public static bool HasRigidbody2D(Component target)
             {
-#if true // PHYSICS2D_MARKER
+#if false // PHYSICS2D_MARKER
                 return target.GetComponent<Rigidbody2D>() != null;
 #else
                 return false;
@@ -71,7 +91,7 @@ namespace DG.Tweening
             // Returns FALSE if the DOTween's Physics Module is disabled, or if there's no rigidbody attached
             public static bool HasRigidbody(Component target)
             {
-#if true // PHYSICS_MARKER
+#if false // PHYSICS_MARKER
                 return target.GetComponent<Rigidbody>() != null;
 #else
                 return false;
@@ -83,7 +103,7 @@ namespace DG.Tweening
                 MonoBehaviour target, bool tweenRigidbody, bool isLocal, Path path, float duration, PathMode pathMode
             ){
                 TweenerCore<Vector3, Path, PathOptions> t;
-#if true // PHYSICS_MARKER
+#if false // PHYSICS_MARKER
                 Rigidbody rBody = tweenRigidbody ? target.GetComponent<Rigidbody>() : null;
                 if (tweenRigidbody && rBody != null) {
                     t = isLocal

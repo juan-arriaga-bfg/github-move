@@ -144,7 +144,7 @@ public class RewardsStoreComponent : IECSComponent
         else
         {
             IsScatter = true;
-            view.OnHide = Scatter;
+            Scatter();
             context.Context.HintCooldown.RemoweView(view);
         }
         

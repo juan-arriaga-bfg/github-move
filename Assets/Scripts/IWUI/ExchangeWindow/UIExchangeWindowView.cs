@@ -76,7 +76,7 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
         
         UIExchangeWindowModel windowModel = Model as UIExchangeWindowModel;
         
-        CurrencyHellper.Purchase(windowModel.Products, windowModel.Price, success =>
+        CurrencyHelper.Purchase(windowModel.Products, windowModel.Price, success =>
         {
             if(success == false) return;
             
@@ -90,7 +90,7 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
         
         UIExchangeWindowModel windowModel = Model as UIExchangeWindowModel;
         
-        if(CurrencyHellper.IsCanPurchase(windowModel.Price, true) == false) return;
+        if(CurrencyHelper.IsCanPurchase(windowModel.Price, true) == false) return;
 
         isClick = true;
         

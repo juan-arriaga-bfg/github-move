@@ -7,13 +7,17 @@ public class UIQuestStartWindowController : IWWindowController {
     {
         UIQuestStartWindowModel windowModel = new UIQuestStartWindowModel();
 
-
-
         return windowModel;
     }
 
     public override void UpdateWindow(IWUIWindow window)
     {
         base.UpdateWindow(window);
+    }
+    
+    public override void OnBackButtonPress()
+    {
+        var view = WindowView as UIQuestStartWindowView;
+        view.OnClick();
     }
 }

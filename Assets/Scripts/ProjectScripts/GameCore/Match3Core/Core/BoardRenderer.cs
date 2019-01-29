@@ -27,7 +27,7 @@ public partial class BoardRenderer : ECSEntity
 
     }
 
-    private NSPoolContainer pool = new NSPoolContainer();
+    private NSPoolContainer pool = new NSPoolContainer(false);
 
     private BoardResourcesDef gameBoardResourcesDef;
 

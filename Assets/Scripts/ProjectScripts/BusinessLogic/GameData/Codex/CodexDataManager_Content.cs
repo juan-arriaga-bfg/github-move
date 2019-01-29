@@ -150,6 +150,11 @@ public partial class CodexDataManager
                 {
                     new CodexChainDef
                     {
+                        Name = LocalizationService.Get("window.codex.branch.Mana", "window.codex.branch.Mana"),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Mana1.Id)),
+                    },
+                    new CodexChainDef
+                    {
                         Name = LocalizationService.Get("window.codex.branch.Soft", "window.codex.branch.Soft"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.Soft1.Id)),
                     },

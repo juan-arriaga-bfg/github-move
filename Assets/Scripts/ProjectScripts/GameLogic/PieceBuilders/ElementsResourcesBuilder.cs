@@ -43,9 +43,9 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.NPC_Rapunzel.Id, R.NPC_RapunzelPiece);
         dict.Add(PieceType.NPC_PussInBoots.Id, R.NPC_PussInBootsPiece);
         dict.Add(PieceType.NPC_Gnome.Id, R.NPC_GnomePiece);
-        dict.Add(PieceType.NPC_5.Id, R.NPC_5Piece);
-        dict.Add(PieceType.NPC_6.Id, R.NPC_6Piece);
-        dict.Add(PieceType.NPC_7.Id, R.NPC_7Piece);
+        dict.Add(PieceType.NPC_PeterPen.Id, R.NPC_PeterPenPiece);
+        dict.Add(PieceType.NPC_RedHood.Id, R.NPC_RedHoodPiece);
+        dict.Add(PieceType.NPC_Mermaid.Id, R.NPC_MermaidPiece);
         dict.Add(PieceType.NPC_8.Id, R.NPC_8Piece);
         dict.Add(PieceType.NPC_9.Id, R.NPC_9Piece);
         dict.Add(PieceType.NPC_10.Id, R.NPC_10Piece);
@@ -79,6 +79,13 @@ public class ElementsResourcesBuilder
 #endregion
         
 #region Currencies
+        
+        dict.Add(PieceType.Mana1.Id, R.Mana1Piece);
+        dict.Add(PieceType.Mana2.Id, R.Mana2Piece);
+        dict.Add(PieceType.Mana3.Id, R.Mana3Piece);
+        dict.Add(PieceType.Mana4.Id, R.Mana4Piece);
+        dict.Add(PieceType.Mana5.Id, R.Mana5Piece);
+        dict.Add(PieceType.Mana6.Id, R.Mana6Piece);
         
         dict.Add(PieceType.Soft1.Id, R.Soft1Piece);
         dict.Add(PieceType.Soft2.Id, R.Soft2Piece);

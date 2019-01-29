@@ -35342,7 +35342,7 @@ MonoBehaviour:
   layers:
   - {fileID: 114586607479226846}
   windowName: NextLevelWindow
-  ignoreBackButton: 1
+  ignoreBackButton: 0
   resourceDepenedencyDef: []
   resourceDepenedencyDefGroup: []
 --- !u!1 &1836113525173340
@@ -41263,11 +41263,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 224621335393833958}
     m_Modifications:
-    - target: {fileID: 557776040532021858, guid: 474ad589c41831b4a95d01947b52125b,
-        type: 3}
-      propertyPath: m_Name
-      value: '#BackLayer'
-      objectReference: {fileID: 0}
     - target: {fileID: 334688565903309148, guid: 474ad589c41831b4a95d01947b52125b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -41372,6 +41367,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 557776040532021858, guid: 474ad589c41831b4a95d01947b52125b,
+        type: 3}
+      propertyPath: m_Name
+      value: '#BackLayer'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 474ad589c41831b4a95d01947b52125b, type: 3}

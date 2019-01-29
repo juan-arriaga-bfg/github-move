@@ -20,11 +20,11 @@ public class MatchDefinitionBuilder
         
         dict.Add(PieceType.NPC_SleepingBeauty.Id, new PieceMatchDef {Next = PieceType.NPC_Rapunzel.Id, Previous = PieceType.None.Id, Amount = -1});
         dict.Add(PieceType.NPC_Rapunzel.Id, new PieceMatchDef {Next = PieceType.NPC_PussInBoots.Id, Previous = PieceType.NPC_SleepingBeauty.Id, Amount = -1});
-        dict.Add(PieceType.NPC_PussInBoots.Id, new PieceMatchDef {Next = PieceType.NPC_5.Id, Previous = PieceType.NPC_Rapunzel.Id, Amount = -1});
-        dict.Add(PieceType.NPC_5.Id, new PieceMatchDef {Next = PieceType.NPC_6.Id, Previous = PieceType.NPC_PussInBoots.Id, Amount = -1});
-        dict.Add(PieceType.NPC_6.Id, new PieceMatchDef {Next = PieceType.NPC_7.Id, Previous = PieceType.NPC_5.Id, Amount = -1});
-        dict.Add(PieceType.NPC_7.Id, new PieceMatchDef {Next = PieceType.NPC_8.Id, Previous = PieceType.NPC_6.Id, Amount = -1});
-        dict.Add(PieceType.NPC_8.Id, new PieceMatchDef {Next = PieceType.NPC_9.Id, Previous = PieceType.NPC_7.Id, Amount = -1});
+        dict.Add(PieceType.NPC_PussInBoots.Id, new PieceMatchDef {Next = PieceType.NPC_PeterPen.Id, Previous = PieceType.NPC_Rapunzel.Id, Amount = -1});
+        dict.Add(PieceType.NPC_PeterPen.Id, new PieceMatchDef {Next = PieceType.NPC_RedHood.Id, Previous = PieceType.NPC_PussInBoots.Id, Amount = -1});
+        dict.Add(PieceType.NPC_RedHood.Id, new PieceMatchDef {Next = PieceType.NPC_Mermaid.Id, Previous = PieceType.NPC_PeterPen.Id, Amount = -1});
+        dict.Add(PieceType.NPC_Mermaid.Id, new PieceMatchDef {Next = PieceType.NPC_8.Id, Previous = PieceType.NPC_RedHood.Id, Amount = -1});
+        dict.Add(PieceType.NPC_8.Id, new PieceMatchDef {Next = PieceType.NPC_9.Id, Previous = PieceType.NPC_Mermaid.Id, Amount = -1});
         dict.Add(PieceType.NPC_9.Id, new PieceMatchDef {Next = PieceType.NPC_10.Id, Previous = PieceType.NPC_8.Id, Amount = -1});
         dict.Add(PieceType.NPC_10.Id, new PieceMatchDef {Next = PieceType.NPC_11.Id, Previous = PieceType.NPC_9.Id, Amount = -1});
         dict.Add(PieceType.NPC_11.Id, new PieceMatchDef {Next = PieceType.NPC_12.Id, Previous = PieceType.NPC_10.Id, Amount = -1});
@@ -49,6 +49,13 @@ public class MatchDefinitionBuilder
 #endregion
         
 #region Currencies
+        
+        dict.Add(PieceType.Mana1.Id, new PieceMatchDef {Next = PieceType.Mana2.Id, Previous = PieceType.None.Id, Amount = 3});
+        dict.Add(PieceType.Mana2.Id, new PieceMatchDef {Next = PieceType.Mana3.Id, Previous = PieceType.Mana1.Id, Amount = 3});
+        dict.Add(PieceType.Mana3.Id, new PieceMatchDef {Next = PieceType.Mana4.Id, Previous = PieceType.Mana2.Id, Amount = 3});
+        dict.Add(PieceType.Mana4.Id, new PieceMatchDef {Next = PieceType.Mana5.Id, Previous = PieceType.Mana3.Id, Amount = 3});
+        dict.Add(PieceType.Mana5.Id, new PieceMatchDef {Next = PieceType.Mana6.Id, Previous = PieceType.Mana4.Id, Amount = 3});
+        dict.Add(PieceType.Mana6.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.Mana5.Id});
         
         dict.Add(PieceType.Soft1.Id, new PieceMatchDef {Next = PieceType.Soft2.Id, Previous = PieceType.None.Id, Amount = 3});
         dict.Add(PieceType.Soft2.Id, new PieceMatchDef {Next = PieceType.Soft3.Id, Previous = PieceType.Soft1.Id, Amount = 3});

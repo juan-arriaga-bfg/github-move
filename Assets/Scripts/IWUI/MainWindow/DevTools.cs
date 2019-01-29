@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -34,7 +37,7 @@ public class DevTools : UIContainerElementViewController
     {
         panel.SetActive(!isChecked);
     }
-
+    
     public static void ReloadScene(bool resetProgress)
     {
         var manager = GameDataService.Current.QuestsManager;
@@ -49,15 +52,15 @@ public class DevTools : UIContainerElementViewController
         }
 
         GameDataService.Current.Reload();
-        
-        SceneManager.LoadScene("Main", LoadSceneMode.Single);
-            
+                   
         var ecsSystems = new List<IECSSystem>(ECSService.Current.SystemProcessor.RegisteredSystems);
             
         foreach (var system in ecsSystems)
         {
             ECSService.Current.SystemProcessor.UnRegisterSystem(system);
         }
+        
+        SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
     
     public void OnResetProgressClick()
@@ -247,7 +250,7 @@ public class DevTools : UIContainerElementViewController
     public void OnAddExpClick()
     {
         int exp = Input.GetKey(KeyCode.LeftShift) ? 100 : 1000;
-        CurrencyHellper.Purchase(Currency.Experience.Name, exp);
+        CurrencyHelper.Purchase(Currency.Experience.Name, exp);
     }
 
     /// <summary>
@@ -270,7 +273,7 @@ public class DevTools : UIContainerElementViewController
         questManager.FinishQuest(questToFinish.Id);
 
         List<CurrencyPair> reward = questToFinish.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
-        CurrencyHellper.Purchase(reward, success =>
+        CurrencyHelper.Purchase(reward, success =>
             {
                 string starterId;
                 List<string> questsToStart = questManager.CheckConditions(out starterId);
@@ -339,5 +342,68 @@ public class DevTools : UIContainerElementViewController
         return !isTutorialDisabled;
 #endif
         
+    }
+
+    [UsedImplicitly]
+    public void OnReloadSceneClick()
+    {
+        // var mainWindowGo = UIService.Get.Get(UIWindowType.LauncherWindow).gameObject;
+        
+        UIService.Get.CloseWindow(UIWindowType.MainWindow);
+        UIService.Get.CloseWindow(UIWindowType.ResourcePanelWindow);
+
+        // var findGo = GameObject.Find("UIContainer");
+        // var refGo = IWUIManager.Instance.gameObject;
+        // DontDestroyOnLoad(IWUIManager.Instance.transform.parent);
+        //
+        // if (!ReferenceEquals(findGo, refGo))
+        // {
+        //     Debug.LogError("SUKA!!!!!!!");
+        // }
+        // else
+        // {
+        //     Debug.LogError("OK!!!!!!!");
+        // }
+
+        AsyncInitService.Current
+            .AddComponent(new ShowLoadingWindowInitComponent())
+
+            .AddComponent(new ReloadSceneLoaderComponent()
+                .SetDependency(typeof(ShowLoadingWindowInitComponent)))
+
+            .AddComponent(new CleanupForReloadInitComponent()
+                .SetDependency(typeof(ReloadSceneLoaderComponent)))            
+                        
+            .AddComponent(new ProfileInitComponent()
+                .SetDependency(typeof(CleanupForReloadInitComponent)))
+
+            .AddComponent(new GameDataInitComponent()
+                .SetDependency(typeof(ProfileInitComponent)))
+
+            .AddComponent(new MainSceneLoaderComponent()
+                .SetDependency(typeof(GameDataInitComponent)))
+
+            .Run(null);
+
+        // Undo dont destroy on load
+        // SceneManager.MoveGameObjectToScene(mainWindowGo, SceneManager.GetActiveScene());
+
+        // SceneManager.LoadScene("Reload", LoadSceneMode.Single);
+        // return;
+
+        // IEnumerator LoadSceneCoroutine(Action onComplete)
+        // {
+        //     var loadingOperation = SceneManager.LoadSceneAsync("Reload", LoadSceneMode.Single);
+        //
+        //     // Wait until the asynchronous scene fully loads
+        //     while (!loadingOperation.isDone)
+        //     {
+        //         yield return null;
+        //     }
+        //
+        //     onComplete?.Invoke();
+        // }
+        //
+        // StartCoroutine(LoadSceneCoroutine(null));
     }
 }

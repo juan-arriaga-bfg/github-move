@@ -32,7 +32,7 @@ public class UISoftShopWindowView : UIGenericPopupWindowView
         
         if(entity == null) return;
         
-        CurrencyHellper.OpenShopWindow(entity.Price.Currency);
+        CurrencyHelper.OpenShopWindow(entity.Price.Currency);
     }
 
     private List<IUIContainerElementEntity> UpdateEntities(List<ShopDef> entities)

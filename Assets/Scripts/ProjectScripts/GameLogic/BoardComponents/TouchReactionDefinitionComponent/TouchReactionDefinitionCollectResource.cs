@@ -10,11 +10,14 @@ public class TouchReactionDefinitionCollectResource : TouchReactionDefinitionCom
 
         if (isPiece)
         {
-            CurrencyHellper.Purchase(resources);
+            CurrencyHelper.Purchase(resources);
             piece.Context.BoardLogic.PieceFlyer.FlyToTarget(piece, position, Currency.Order.Name);
             GameDataService.Current.OrdersManager.UpdateOrders();
         }
-        else AddResourceView.Show(position, resources);
+        else
+        {
+            AddResourceView.Show(position, resources, -0.3f);
+        }
         
         piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
         {

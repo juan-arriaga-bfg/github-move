@@ -40,23 +40,33 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         
         InitGameField();
 
+        // Hot reload?
+        if (IWUIManager.Instance.IsComplete)
+        {
+            StartCoroutine(ShowGameScene(onComplete, true));
+            return;
+        }
+               
         // cache windows
         IWUIManager.Instance.Init(WindowNames);
         
         // on cache complete
         IWUIManager.Instance.OnUIInited += () =>
         {
-            StartCoroutine(ShowGameScene(onComplete));
+            StartCoroutine(ShowGameScene(onComplete, false));
         };
     }
 
-    private IEnumerator ShowGameScene(Action onComplete)
+    private IEnumerator ShowGameScene(Action onComplete, bool hotReload)
     {
         var asyncInit = AsyncInitService.Current;
         while (!asyncInit.IsAllComponentsInited())
         {
-             yield return new WaitForSeconds(0.2f);
+             yield return new WaitForSeconds(0.1f);
         }
+        
+        // Just to refresh progressbar
+        yield return new WaitForEndOfFrame();
         
         // close launcher
         UIService.Get.CloseWindow(UIWindowType.LauncherWindow);
@@ -74,9 +84,12 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
         ProfileService.Current.QueueComponent.Run();
         BoardService.Current.FirstBoard.TutorialLogic.Run();
 
-        NSAudioService.Current.Play(SoundId.Ambient1Music, true, 1)
-                      .SetVolume(0f)
-                      .SetVolume(1f, 2f);
+        if (!hotReload)
+        {
+            NSAudioService.Current.Play(SoundId.Ambient1Music, true, 1)
+                          .SetVolume(0f)
+                          .SetVolume(1f, 2f);
+        }
     }
 
     private void InitGameField()

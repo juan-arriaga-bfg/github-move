@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DG.Tweening;
 
 public class TouchReactionDefinitionOpenEnemyBubble : TouchReactionDefinitionComponent
 {
@@ -38,7 +37,7 @@ public class TouchReactionDefinitionOpenEnemyBubble : TouchReactionDefinitionCom
     {
         view.OnHide = () =>
         {
-            CurrencyHellper.Purchase(Currency.Damage.Name, 1, enemyDef.Price, success =>
+            CurrencyHelper.Purchase(Currency.Damage.Name, 1, enemyDef.Price, success =>
             {
                 if (success == false)
                 {
@@ -60,11 +59,6 @@ public class TouchReactionDefinitionOpenEnemyBubble : TouchReactionDefinitionCom
 
     private void ProvideReward(Piece piece)
     {
-        DOTween.Sequence()
-               .AppendInterval(0.7f)
-               .AppendCallback(() =>
-                {
-                    AddResourceView.Show(piece.CachedPosition, enemyDef.Reward);
-                });
+        AddResourceView.Show(piece.CachedPosition, enemyDef.Reward, 0.7f);
     }
 }

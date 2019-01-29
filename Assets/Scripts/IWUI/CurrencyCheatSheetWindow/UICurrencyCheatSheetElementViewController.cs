@@ -35,11 +35,11 @@ public class UICurrencyCheatSheetElementViewController : UISimpleScrollElementVi
         
         if (deffValue > 0)
         {
-            CurrencyHellper.Purchase(contentEntity.LabelText, deffValue);
+            CurrencyHelper.Purchase(contentEntity.LabelText, deffValue);
             
-            if(contentEntity.LabelText == Currency.Level.Name) CurrencyHellper.Purchase(Currency.Experience.Name, 1, Currency.Experience.Name, 1);
+            if(contentEntity.LabelText == Currency.Level.Name) CurrencyHelper.Purchase(Currency.Experience.Name, 1, Currency.Experience.Name, 1);
         }
-        else CurrencyHellper.Purchase(contentEntity.LabelText, 0, contentEntity.LabelText, -deffValue);
+        else CurrencyHelper.Purchase(contentEntity.LabelText, 0, contentEntity.LabelText, -deffValue);
         
         Debug.Log($"[UICurrencyCheatSheetWindowItem] => OnEndEdit: {contentEntity.LabelText}: {oldValue} -> {newValue}");
     }

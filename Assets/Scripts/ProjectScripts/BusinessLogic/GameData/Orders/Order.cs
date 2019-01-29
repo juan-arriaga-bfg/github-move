@@ -36,7 +36,7 @@ public class Order
     }
     
     private List<CurrencyPair> currencysReward;
-    public List<CurrencyPair> CurrencysReward
+    public List<CurrencyPair> CurrenciesReward
     {
         get
         {
@@ -51,7 +51,7 @@ public class Order
 
     private void InitReward()
     {
-        piecesReward = CurrencyHellper.FiltrationRewards(Def.Rewards, out currencysReward);
+        piecesReward = CurrencyHelper.FiltrationRewards(Def.Rewards, out currencysReward);
     }
     
     private string reward;
@@ -61,7 +61,7 @@ public class Order
         {
             if (string.IsNullOrEmpty(reward) == false) return reward;
             
-            reward = CurrencyHellper.RewardsToString(Separator, PiecesReward, CurrencysReward);
+            reward = CurrencyHelper.RewardsToString(Separator, PiecesReward, CurrenciesReward);
             return reward;
         }
     }
@@ -101,6 +101,6 @@ public class Order
     {
         if (state != OrderState.Waiting && state != OrderState.Enough) return;
         
-        State = CurrencyHellper.IsCanPurchase(Def.Prices) ? OrderState.Enough : OrderState.Waiting;
+        State = CurrencyHelper.IsCanPurchase(Def.Prices) ? OrderState.Enough : OrderState.Waiting;
     }
 }

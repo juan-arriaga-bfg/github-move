@@ -14,13 +14,13 @@ public class LocalNotificationsManager
     
     public void RegisterNotifier(Notifier notifier)
     {
-        Debug.Log($"LocalNotificationService >> Register(NotifyType.Id:{notifier.NotifyType.Id})");
+        Debug.Log($"[LocalNotificationService] => Register(NotifyType.Id:{notifier.NotifyType.Id})");
         notifiers.Add(notifier);
     }
 
     public void UnRegisterNotifier(Notifier notifier)
     {
-        Debug.Log($"LocalNotificationService >> UnRegister(NotifyType.Id:{notifier.NotifyType.Id})");
+        Debug.Log($"[LocalNotificationService] => UnRegister(NotifyType.Id:{notifier.NotifyType.Id})");
         notifiers.Remove(notifier);
     }
 
@@ -30,7 +30,7 @@ public class LocalNotificationsManager
         {
             if (notifier.Timer == timer)
             {
-                Debug.Log($"LocalNotificationService >> UnRegister(NotifyType.Id:{notifier.NotifyType.Id})");
+                Debug.Log($"[LocalNotificationService] => UnRegister(NotifyType.Id:{notifier.NotifyType.Id})");
                 notifiers.Remove(notifier);
                 return;
             }
@@ -45,15 +45,15 @@ public class LocalNotificationsManager
     public void ClearNotifications()
     {
         notifyItems.Clear();
-        Debug.Log("LocalNotificationService >> Clear notifications");
+        Debug.Log("[LocalNotificationService] => Clear notifications");
     }
 
     public void SaveNotifications()
     {
-        Debug.Log($"LocalNotificationService >> Save notifications (CurrentTime: {DateTime.Now})");
+        Debug.Log($"[LocalNotificationService] => Save notifications (CurrentTime: {DateTime.Now})");
         foreach (var item in notifyItems)
         {
-            Debug.Log($"LocalNotificationService >> Notification(Title: {item.Title}, Message: {item.Message}, NotifyTime: {item.NotifyTime})");
+            Debug.Log($"[LocalNotificationService] => Notification(Title: {item.Title}, Message: {item.Message}, NotifyTime: {item.NotifyTime})");
         }
     }
 

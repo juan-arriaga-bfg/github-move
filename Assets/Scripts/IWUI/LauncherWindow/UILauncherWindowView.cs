@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,9 @@ public class UILauncherWindowView : IWUIWindowView
         UILauncherWindowModel windowModel = Model as UILauncherWindowModel;
 
         asyncInitManager = AsyncInitService.Current;
+
+        isGameLoaded = false;
+        progressBarStartValue = -1;
     }
 
     public override void OnViewClose()
@@ -43,11 +47,23 @@ public class UILauncherWindowView : IWUIWindowView
         {
             progressBarStartValue = progress;
         }
+
+        float value;
         
         float virtualLen = 1 - progressBarStartValue;
-        float virtualProgress = progress - progressBarStartValue;
-        float value = virtualProgress / virtualLen;
-        
+
+        if (virtualLen < 0 || Math.Abs(virtualLen) > Mathf.Epsilon) // handle div by zero and/or case when we try to show bar after loading already completed
+        {
+            float virtualProgress = progress - progressBarStartValue;
+            value = virtualProgress / virtualLen;
+
+            value = Mathf.Clamp(value, 0f, 1f);
+        }
+        else
+        {
+            value = 1;
+        }
+
         progressBar.UpdateProgress(value, false);
         progressText.Text = $"{(int)(value * 100)}%";
         

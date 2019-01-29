@@ -63,7 +63,13 @@
     <meta-data android:name="com.bigfishgames.BFGEnviron" android:value="${bfglibEnviron}"/>
     
     <meta-data android:name="unity.splash-mode" android:value="0"/>
-    <meta-data android:name="unity.splash-enable" android:value="True"/>
+    <meta-data android:name="unity.splash-enable" android:value="false"/>
+	
+	<meta-data
+    android:name="io.fabric.ApiKey"
+    android:value="dee0ee259672b079f84d729aee2a320bd7b450d3"
+    tools:replace="android:value"/>
+
 </application>
 
 </manifest>

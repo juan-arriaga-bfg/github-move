@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 
@@ -9,7 +10,8 @@ public class SpawnRewardPiecesAnimation : BoardAnimation
 
     public bool EnabledTopHighlight = false;
     public bool EnabledBottomHighlight = false;
-
+    public bool Focus = true;
+    
     public Func<int, string> AnimationResourceSearch;
     
     public override void Animate(BoardRenderer context)
@@ -17,6 +19,15 @@ public class SpawnRewardPiecesAnimation : BoardAnimation
         var sequence = DOTween.Sequence().SetId(animationUid);
 
         int index = 0;
+
+        if (Focus && Pieces.Count == 1)
+        {
+            var focusPos = Pieces.First().Key;
+            var board = BoardService.Current.FirstBoard;
+            var worldPos = board.BoardDef.GetSectorCenterWorldPosition(focusPos.X, focusPos.Y, focusPos.Z) + new Vector3(0, board.BoardDef.CellHeight, 0);
+            board.Manipulator.CameraManipulator.MoveTo(worldPos);    
+        }
+        
         foreach (var pair in Pieces)
         {
             
