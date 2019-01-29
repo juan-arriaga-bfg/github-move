@@ -24,7 +24,7 @@ public class ResourcesHelper
         try
         {
             Resources res = context.getResources();
-            ret = res.getIdentifier("ic_stat_notify", "drawable", context.getPackageName());
+            ret = res.getIdentifier("ic_notification_small", "drawable", context.getPackageName());
         }
         catch (Exception e)
         {
