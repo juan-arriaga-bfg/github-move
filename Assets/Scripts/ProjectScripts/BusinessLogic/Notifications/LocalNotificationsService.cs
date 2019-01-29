@@ -1,7 +1,4 @@
-public class LocalNotificationsService : IWService<LocalNotificationsService, LocalNotificationsManager> 
+public class LocalNotificationsService : IWService<LocalNotificationsService, ILocalNotificationsManager> 
 {
-    public static LocalNotificationsManager Current
-    {
-        get { return Instance.Manager as LocalNotificationsManager; }
-    }
+    public static ILocalNotificationsManager Current => Instance.Manager;
 }

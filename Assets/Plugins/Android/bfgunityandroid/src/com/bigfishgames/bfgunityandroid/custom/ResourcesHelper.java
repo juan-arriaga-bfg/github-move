@@ -1,22 +1,25 @@
-package neskinsoft.core.common;
+package com.bigfishgames.bfgunityandroid.custom;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 
 /**
  * Created by keht on 06.05.2016.
  */
 public class ResourcesHelper
 {
-    private static Activity sActivity;
+    static final String TAG = "ResourcesHelper";
 
-    public static void SetAcivity(Activity activity)
+    private static Context sContext;
+
+    public static void SetContext(Activity activity)
     {
-        sActivity = activity;
+        sContext = activity;
     }
 
-    public static int GetNotificationIcon(Context context) {
+    public static int GetNotificationIconId(Context context) {
         int ret = -1;
         try
         {
@@ -25,14 +28,14 @@ public class ResourcesHelper
         }
         catch (Exception e)
         {
-            Logger.e(e);
+            Log.e(TAG, e.getMessage());
         }
         return ret;
     }
 
-    public static int GetNotificationIcon()
+    public static int GetNotificationIconId()
     {
-        return GetNotificationIcon(sActivity);
+        return GetNotificationIconId(sContext);
     }
 
     public static String GetString(String key)
@@ -40,13 +43,13 @@ public class ResourcesHelper
         String ret = "";
         try
         {
-            Resources res = sActivity.getResources();
-            int id = res.getIdentifier(key, "string", sActivity.getPackageName());
-            ret = res.getString(id, sActivity.getPackageName());
+            Resources res = sContext.getResources();
+            int id = res.getIdentifier(key, "string", sContext.getPackageName());
+            ret = res.getString(id, sContext.getPackageName());
         }
         catch (Exception e)
         {
-            Logger.e(e);
+            Log.e(TAG, e.getMessage());
         }
         return ret;
     }

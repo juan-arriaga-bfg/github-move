@@ -11,11 +11,11 @@ public class BuildActionInstallGradleWrapper : IProjectBuildAction
         string dst = context.BuildPath;
         
 #if UNITY_EDITOR_WIN
-        string src = Application.dataPath.Replace("/Assets", "/Misc/GradleWrapper/Win");
+        string src = Application.dataPath.Replace("/Assets", "/Misc/BFG/Android/GradleWrapper/Win");
 #endif
         
 #if UNITY_EDITOR_OSX
-        string src = Application.dataPath.Replace("/Assets", "/Misc/GradleWrapper/OSX");
+        string src = Application.dataPath.Replace("/Assets", "/Misc/BFG/Android/GradleWrapper/OSX");
 #endif
 
         if (!Directory.Exists(src))

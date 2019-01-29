@@ -7,17 +7,18 @@ public class Notification
     public string Message;
     public DateTime NotifyTime;
 
-    public Notification(string title, string message, DateTime notifyTime)
+    public Notification(int id, string title, string message, DateTime notifyTime)
     {
-        Id = GetId();
+        // Id = GetId();
+        Id = id;
         Title = title;
         Message = message;
         NotifyTime = notifyTime;
     }
-
-    private static int nextId = 0;
-    private static int GetId()
-    {
-        return nextId++;
-    }
+    //
+    // private static int nextId = 0;
+    // private static int GetId()
+    // {
+    //     return nextId++;
+    // }
 }

@@ -46,6 +46,8 @@ public class ProjectBuilderAndroid
             .AddPostBuildAction(new BuildActionCopySampleGdprPolicyJson())      // optional
             .AddPostBuildAction(new BuildActionReplaceBfgLibWithDebugVersion()) // optional
                        
+            .AddPostBuildAction(new BuildActionCopyNotificationIcons()) // optional
+                       
             .AddPostBuildAction(new BuildActionInstallGradleWrapper())
             .AddPostBuildAction(new BuildActionReset())
              

@@ -41,7 +41,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+// Neskinsoft
 import com.bigfishgames.bfgunityandroid.custom.SplashDialog;
+import com.bigfishgames.bfgunityandroid.custom.ResourcesHelper;
+// End
 
 public class BFGUnityPlayerNativeActivity extends bfgActivity implements bfgDeferredDeepLinkListener {
 
@@ -86,7 +89,10 @@ public class BFGUnityPlayerNativeActivity extends bfgActivity implements bfgDefe
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
 
+        // Neskinsoft
 		SplashDialog.CreateAndShow(this);
+        ResourcesHelper.SetContext(this);
+		// End
 		
         OnCreate_UnityPlayer();
 
