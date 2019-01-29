@@ -14,7 +14,7 @@ public class SherwoodLocalNotificationsManagerBase : LocalNotificationsManagerBa
 
     protected override void ScheduleAllOnDevice()
     {
-        //Nothing todo here 
+        Print();
     }
     
 #elif UNITY_ANDROID

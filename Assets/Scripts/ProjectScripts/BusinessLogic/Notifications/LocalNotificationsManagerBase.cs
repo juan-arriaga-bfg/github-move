@@ -85,6 +85,8 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
 
     Notification GenerateNotify(Notifier notifier)
     {
+        int id = notifier.NotifyType.Id;
+        
         var titleKey = notifier.NotifyType.TitleKey;
         var messageKey = notifier.NotifyType.MessageKey;
 
@@ -95,7 +97,7 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
         if (notifier.NotifyType.TimeCorrector != null)
             notifyDate = notifier.NotifyType.TimeCorrector(notifyDate);
         notifyDate = CorrectTime(notifyDate);
-        return new Notification(title, message, notifyDate);
+        return new Notification(id, title, message, notifyDate);
     }
 
     public DateTime CorrectTime(DateTime notifyDate)
@@ -125,7 +127,7 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
     {
         foreach (var item in notifyItems)
         {
-            Debug.Log($"[LocalNotificationService] => Notification(Title: {item.Title}, Message: {item.Message}, NotifyTime: {item.NotifyTime})");
+            Debug.Log($"[LocalNotificationService] => Notification(Title: {item.Title}, Message: {item.Message}, NotifyTime: UTC {item.NotifyTime})");
         } 
     }
 

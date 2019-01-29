@@ -185,8 +185,10 @@ public class DevTools : UIContainerElementViewController
     {
         Debug.Log("OnDebug1Click");
 
-        var codexManager = GameDataService.Current.CodexManager;
-        codexManager.ClearCodexContentCache();
+        
+        LocalNotificationsService.Current.PushNotify(new Notification(100, "Test title", "Test Message", DateTime.UtcNow.AddSeconds(30)));
+        // var codexManager = GameDataService.Current.CodexManager;
+        // codexManager.ClearCodexContentCache();
         return;
         
         ShowAllStoryQuestsWindows();
