@@ -16,7 +16,7 @@ public class BuildActionCopyNotificationIcons : IProjectBuildAction
             throw new Exception($"Can't found notiications  at {src}");
         }
         
-        ProjectBuildFileUtils.CopyDirectory(src, dst, false);
+        ProjectBuildFileUtils.CopyDirectory(src, dst, false, "\\.meta$");
     }
 }
 
