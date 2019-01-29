@@ -36,8 +36,8 @@ public class CollapseFogToAction : IBoardAction
         {
             // gameBoardController.BoardLogic.UnlockCells(Positions, this);
             if (OnCompleteAction != null) gameBoardController.ActionExecutor.AddAction(OnCompleteAction);
-            OnComplete?.Invoke();
             
+            OnComplete?.Invoke();
             
             gameBoardController.ActionExecutor.AddAction(new CallbackAction
             {
@@ -48,10 +48,7 @@ public class CollapseFogToAction : IBoardAction
         gameBoardController.RendererContext.AddAnimationToQueue(animation);
         
         // spawn pieces
-        if (FogObserver == null || FogObserver.Def == null)
-        {
-            return true;
-        }
+        if (FogObserver?.Def == null) return true;
 
         GameDataService.Current.FogsManager.RemoveFog(FogObserver.Key);
 
@@ -87,14 +84,16 @@ public class CollapseFogToAction : IBoardAction
         foreach (var point in FogObserver.Mask)
         {
             var piece = ItemWeight.GetRandomItem(weights).Piece;
-            if (piece == PieceType.Empty.Id)
-                piece = PieceType.LockedEmpty.Id;
+            
+            if (piece == PieceType.Empty.Id) piece = PieceType.LockedEmpty.Id;
+            
             var position = new BoardPosition(point.X, point.Y, FogObserver.Context.Layer.Index);
+            
             if(addedPieces.ContainsKey(position) == false)
                 addedPieces.Add(position, piece);
         }
         
-        gameBoardController.ActionExecutor.AddAction(new CreateGroupPieces()
+        gameBoardController.ActionExecutor.PerformAction(new CreateGroupPieces()
         {
             Pieces = addedPieces,
             LogicCallback = (pieces) =>
@@ -120,14 +119,13 @@ public class CollapseFogToAction : IBoardAction
                     }
                     else if(hasPath)
                     {
-                        board.ActionExecutor.AddAction(new CollapsePieceToAction()
+                        board.ActionExecutor.PerformAction(new CollapsePieceToAction()
                         {
                             IsMatch = false,
                             Positions = new List<BoardPosition>() {emptyCell.CachedPosition},
                             To = emptyCell.CachedPosition
                         });
                     }
-                    
                 }
             },
             OnSuccessEvent = () =>
