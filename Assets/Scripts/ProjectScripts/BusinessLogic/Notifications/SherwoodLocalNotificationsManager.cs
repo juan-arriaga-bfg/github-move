@@ -23,7 +23,7 @@ public class SherwoodLocalNotificationsManagerBase : LocalNotificationsManagerBa
     {
         try
         {
-            using (var rsClass = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.custom"))
+            using (var rsClass = new AndroidJavaClass("com.bigfishgames.bfgunityandroid.custom.ResourcesHelper"))
             {
                 int result = rsClass.CallStatic<int>("GetNotificationIconId");
                 return result;
