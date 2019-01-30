@@ -18,7 +18,13 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
     private bool IsBuyUsingCash()
     {
-        return entity is UIShopElementEntity contentEntity && contentEntity.Price.Currency == Currency.Cash.Name;
+        var contentEntity = entity as UIShopElementEntity;
+        if (contentEntity == null)
+        {
+            return false;
+        }
+        
+        return contentEntity.Price?.Currency == Currency.Cash.Name;
     }
     
     public override void Init()
