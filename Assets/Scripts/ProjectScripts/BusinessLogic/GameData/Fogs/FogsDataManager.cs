@@ -25,6 +25,13 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     
     private Dictionary<BoardPosition, FogObserver> FogObservers;
     private List<FogDef> ActiveFogs;
+
+    private FogDef lastOpenFog;
+    public FogDef LastOpenFog
+    {
+        get { return lastOpenFog; }
+        set { lastOpenFog = value; }
+    }
     
     public void Reload()
     {
@@ -53,6 +60,8 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
 
                 List<BoardPosition> completeFogPositions = save?.CompleteFogPositions ?? new List<BoardPosition>();
 
+                
+                
                 foreach (var def in data.Fogs)
                 {
                     var pos = def.GetCenter();
@@ -65,6 +74,9 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
                         VisibleFogPositions.Add(pos, def);
                     }
                 }
+                
+                if (completeFogPositions.Count > 0)
+                    LastOpenFog = data.Fogs.Find(fog => fog.GetCenter().Equals(completeFogPositions[completeFogPositions.Count - 1]));
             }
             else
             {
@@ -84,7 +96,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         Debug.Log($"[FogsDataManager] => RemoveFog({key}");
         
         if(VisibleFogPositions.ContainsKey(key) == false) return;
-        
+        LastOpenFog = GetDef(key);
         ClearedFogPositions.Add(key, GetDef(key));
         VisibleFogPositions.Remove(key);
 

@@ -16,4 +16,9 @@ public class UIWaitWindowController : IWWindowController {
     {
         base.UpdateWindow(window);
     }
+
+    public override void OnBackButtonPress()
+    {
+        //Block back button
+    }
 }
