@@ -39,16 +39,12 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
     private int piecesAmount;
     private Dictionary<int, int> piecesReward;
     private List<CurrencyPair> currenciesReward;
-
-    private bool isWaiting;
     
     private Transform content;
     
     public override void Init()
     {
         base.Init();
-
-        isWaiting = false;
         
         targetEntity = entity as UIDailyQuestTaskElementEntity;
 
@@ -78,16 +74,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
 
         base.OnViewClose(context);
     }
-
-    public override void OnViewCloseCompleted()
-    {
-        base.OnViewCloseCompleted();
-        
-        if(isWaiting == false) return;
-        
-        ProvideReward();
-    }
-
+    
     private void HighlightDroppedPieces(List<BoardPosition> listOfPiecesToHighlight)
     {
         if (listOfPiecesToHighlight == null)
@@ -233,35 +220,15 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
             return;
         }
         
-        rewardPosition = position;
-        
         taskButton.Disable();
         task.SetClaimedState();
         ToggleActive(false, true);
         
-        if (isCurrentTaskClearAll || GameDataService.Current.QuestsManager.DailyQuest.GetCompletedButNotClaimedTasksCount() == 0)
-        {
-            isWaiting = true;
-            targetEntity.WindowController.CloseCurrentWindow();
-            return;
-        }
-        
-        ProvideReward();
+        CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, null, position, null, true, true);
+
+        if (isCurrentTaskClearAll) targetEntity.WindowController.CloseCurrentWindow();
     }
     
-    private BoardPosition? rewardPosition;
-
-    private void ProvideReward()
-    {
-        CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, null, rewardPosition,
-            () =>
-            {
-                if (currenciesReward.Count == 0) return;
-                targetEntity.WindowController.Window.Layers[0].ViewCamera.WorldToScreenPoint(taskIconCanvasGroup.transform.position);
-            },
-            true, true);
-    }
-
     private void ToggleActive(bool enabled, bool animated)
     {
         ToggleBack();

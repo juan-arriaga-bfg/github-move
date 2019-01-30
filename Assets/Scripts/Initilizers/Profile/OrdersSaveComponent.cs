@@ -34,7 +34,7 @@ public class OrdersSaveComponent : ECSEntity, IECSSerializeable
 			var piece = logic.GetPieceAt(position);
 			var component = piece?.GetComponent<CustomerComponent>(CustomerComponent.ComponentGuid);
 			
-			if(component?.Order == null) continue;
+			if(component?.Order == null || component.Order.State == OrderState.Reward) continue;
 			
 			var item = new OrderSaveItem
 			{

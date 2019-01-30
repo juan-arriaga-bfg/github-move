@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using BfgAnalytics;
 using DG.Tweening;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SimpleJSON;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -183,23 +180,15 @@ public class DevTools : UIContainerElementViewController
 
         ShowQuestWindow(quests, 0);
     }
-
-    private void DebugCollector(IJsonDataCollector collector)
-    {
-        Debug.LogError($"{collector.Name}: {collector.CollectData().ToString()}");
-    }
     
     public void OnDebug1Click()
     {
-        //Debug.LogError($"{string.Join(",", ProfileService.Current.Purchases.Items.Select(elem => $"{elem.Currency}:{elem.Amount}"))}");
-        DebugCollector(new JsonDataCollectorBalance());
-        DebugCollector(new JsonDataCollectorFlags());
-        DebugCollector(new JsonDataCollectorStandart());
-        DebugCollector(new JsonDataCollectorStory());
-        DebugCollector(new JsonDataCollectorUserStats());
+        Debug.Log("OnDebug1Click");
+
         
-//        var codexManager = GameDataService.Current.CodexManager;
-//        codexManager.ClearCodexContentCache();
+        LocalNotificationsService.Current.PushNotify(new Notification(100, "Test title", "Test Message", DateTime.UtcNow.AddSeconds(30)));
+        // var codexManager = GameDataService.Current.CodexManager;
+        // codexManager.ClearCodexContentCache();
         return;
         
         ShowAllStoryQuestsWindows();

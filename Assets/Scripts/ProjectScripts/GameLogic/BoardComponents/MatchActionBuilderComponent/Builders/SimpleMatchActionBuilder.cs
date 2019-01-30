@@ -10,7 +10,7 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
     {
         return new List<int>();
     }
-
+    
     public bool Check(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position, out int next)
     {
         next = definition.GetNext(pieceType, false);
@@ -31,6 +31,8 @@ public class SimpleMatchActionBuilder : DefaultMatchActionBuilder, IMatchActionB
         var nextPieces = Calculation(pieceType, nextType, definition.GetPieceCountForMatch(pieceType), matchField.Count);
 
         if (nextPieces.Count == 0) return null;
+        
+        nextPieces.Sort();
         
         var matchDescription = new MatchDescription
         {

@@ -274,10 +274,7 @@ public class CodexItem : IWUIWindowViewController
     
     private void ClaimReward()
     {
-        if (def.State != CodexItemState.PendingReward)
-        {
-            return;
-        }
+        if (def.State != CodexItemState.PendingReward) return;
 
         NSAudioService.Current.Play(SoundId.GiftOpen);
 
@@ -287,18 +284,20 @@ public class CodexItem : IWUIWindowViewController
         def.State = CodexItemState.Unlocked;
         
         GameDataService.Current.CodexManager.ClaimRewardForPiece(def.PieceTypeDef.Id);
-
+        
+        // todo: use something like: targetEntity.WindowController.Window.Layers[0].ViewCamera.WorldToScreenPoint(taskIcon.transform.position)
+        var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(pieceImageRectTransform.position);
+        var transactions = CurrencyHelper.PurchaseAsync(reward, null, flyPosition);
+        
         PlayGiftOpenAnimation(() =>
         {
-            if (reward == null || reward.Count == 0)
+            foreach (var transaction in transactions)
             {
-                Debug.LogError($"[CodexItem] => ClaimReward: No unlock bonus specified for [{def.PieceDef.Id}] {def.PieceTypeDef.Abbreviations[0]}");
-                return;
+                transaction.Complete();
             }
-
-            // todo: use something like: targetEntity.WindowController.Window.Layers[0].ViewCamera.WorldToScreenPoint(taskIcon.transform.position)
-            var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(pieceImageRectTransform.position);
-            CurrencyHelper.Purchase(reward, null, flyPosition);
+            
+            if (reward != null && reward.Count != 0) return;
+            Debug.LogError($"[CodexItem] => ClaimReward: No unlock bonus specified for [{def.PieceDef.Id}] {def.PieceTypeDef.Abbreviations[0]}");
         });
     }
 
