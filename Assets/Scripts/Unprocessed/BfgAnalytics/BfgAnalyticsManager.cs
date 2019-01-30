@@ -27,7 +27,11 @@ namespace BfgAnalytics
         public BfgAnalyticsManager()
         {
             jsonDataGenerator = new JsonDataGenerator()
-               .RegisterCollector(new JsonDataCollectorUserNode(), JsonDataGroup.Userstats);
+               .RegisterCollector(new JsonDataCollectorUserStats(), JsonDataGroup.Userstats)
+               .RegisterCollector(new JsonDataCollectorStory(), JsonDataGroup.Story)
+               .RegisterCollector(new JsonDataCollectorFlags(), JsonDataGroup.Flags)
+               .RegisterCollector(new JsonDataCollectorBalance(), JsonDataGroup.Balance)
+               .RegisterCollector(new JsonDataCollectorStandart(), JsonDataGroup.Standart);
         }
 
         public void Event(string details1,
