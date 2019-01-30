@@ -64,6 +64,8 @@ public class IapManager : ECSEntity, IIapManager
     public delegate void OnRestoreCompletedDelegate(bool isOK);
 
     public OnRestoreCompletedDelegate OnRestoreCompleted;
+
+    private bool providerInitInProgress;
     
     /// <summary>
     /// Use this to add your analytics send method.
@@ -206,8 +208,12 @@ public class IapManager : ECSEntity, IIapManager
 
         Debug.Log($"[IapManager] => InitProvider...");
 
+        providerInitInProgress = true;
+        
         iapProvider.Init((error) =>
         {
+            providerInitInProgress = false;
+            
             LastInitError = error;
             
             if (error != IapErrorCode.NoError)
@@ -289,9 +295,16 @@ public class IapManager : ECSEntity, IIapManager
     {
         Debug.Log($"[IapManager] => Purchase: '{productId}'...");
         
-        if (!IsInitialized || isDestroyed)
+        if (isDestroyed)
         {
-            Debug.Log($"[IapManager] => Purchase: Can't start: IsInitialized: {IsInitialized}, isDestroyed: {isDestroyed}");
+            Debug.Log($"[IapManager] => Purchase: Can't start: isDestroyed: {isDestroyed}");
+            OnPurchaseFail?.Invoke(productId, IapErrorCode.PurchaseFailIapPrviderNotInitialized);
+            return;
+        }
+        
+        if (providerInitInProgress)
+        {
+            Debug.Log($"[IapManager] => Purchase: Can't start: providerInitInProgress: {providerInitInProgress}");
             OnPurchaseFail?.Invoke(productId, IapErrorCode.PurchaseFailIapPrviderNotInitialized);
             return;
         }
