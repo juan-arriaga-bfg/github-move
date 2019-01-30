@@ -107,7 +107,7 @@ public class SellForCashManager: ECSEntity
     public void Purchase(string productId, Action<bool, string> onComplete)
     {
         this.onComplete = onComplete;
-        
+        ProfileService.Current.GetComponent<BaseInformationSaveComponent>(BaseInformationSaveComponent.ComponentGuid).IsPayer = true;
         if (!NetworkUtils.CheckInternetConnection(true))
         {
             this.onComplete?.Invoke(false, productId);
