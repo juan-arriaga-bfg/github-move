@@ -19,6 +19,7 @@ namespace BfgAnalytics
 
         private int CheckEndOfContent()
         {
+            return 0;
             var fogManager = GameDataService.Current.FogsManager;
             foreach (var fog in fogManager.Fogs)
             {

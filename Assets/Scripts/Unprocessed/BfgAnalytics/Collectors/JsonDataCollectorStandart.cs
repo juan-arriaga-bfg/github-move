@@ -11,7 +11,11 @@ namespace BfgAnalytics
         {
             JSONNode node = new JSONObject();
             node["server"] = 0;
-            node["env"] = Regex.Match(IWProjectVersionSettings.Instance.CurrentVersion,@".*\.([a-zA-Z]+)$").Groups[1].Value;
+#if DEBUG
+            node["env"] = "qa";
+#else
+            node["env"] = "prod";
+#endif
             node["tv"] = 1;
 
             return node;

@@ -11,8 +11,8 @@ namespace BfgAnalytics
         public JSONNode CollectData()
         {
             JSONNode node = new JSONObject();
-            
-            node["completed_count"] = GameDataService.Current.QuestsManager.FinishedQuests.Count(elem => !(elem is DailyQuestEntity));
+
+            node["completed_count"] = GameDataService.Current.QuestsManager.FinishedQuests.Count;
             node["active"] = GetActiveQuests();
 
             return node;
