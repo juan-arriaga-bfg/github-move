@@ -34,13 +34,26 @@ public class IngredientPieceView : PieceBoardElementView
 
     private void StartAnimation()
     {
+        body.localScale = Vector3.one;
+
+        if (isLockVisual)
+            return;
+        
         var sequence = DOTween.Sequence().SetId(body);
         SetCustomMaterial(BoardElementMaterialType.PiecesLowHighlightMaterial, true);
+        
         sequence.SetLoops(-1);
         
         sequence.Append(body.DOScale(Vector3.one * 1.1f, 0.55f).SetEase(Ease.OutSine));
         sequence.Append(body.DOScale(Vector3.one, 0.40f).SetEase(Ease.OutSine));
         
         sequence.Goto(Random.Range(0, 0.95f), true);
+    }
+
+    public override void ToggleLockView(bool enabled)
+    {
+        base.ToggleLockView(enabled);
+        
+        StartAnimation();
     }
 }
