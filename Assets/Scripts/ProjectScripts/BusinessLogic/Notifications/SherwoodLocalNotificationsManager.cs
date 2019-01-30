@@ -16,11 +16,11 @@ public class SherwoodLocalNotificationsManagerBase : LocalNotificationsManagerBa
         CancelAllOnDevice();
         GenerateNotifications();
 
-        TimeSpan timeShift = new TimeSpan(0, 0, 2);
+        TimeSpan timeShift = new TimeSpan(0, 0, 5);
         foreach (var notify in notifyItems)
         {
             notify.NotifyTime = DateTime.UtcNow + timeShift;
-            timeShift = timeShift.Add(new TimeSpan(0, 0, 2));
+            timeShift = timeShift.Add(new TimeSpan(0, 0, 5));
         }
         
         ScheduleAllOnDevice();
