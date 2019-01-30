@@ -309,7 +309,14 @@ public class IapManager : ECSEntity, IIapManager
             return;
         }
         
-        InitProvider((error) =>
+        if (!IsInitialized)
+        {
+            Debug.Log($"[IapManager] => Purchase: Can't start: IsInitialized: {IsInitialized}");
+            OnPurchaseFail?.Invoke(productId, IapErrorCode.PurchaseFailIapPrviderNotInitialized);
+            return;
+        }
+
+        InitProvider((error) =>// todo: no sense to call this until we check IsInitialized above
         {
             if (error == IapErrorCode.NoError)
             {
