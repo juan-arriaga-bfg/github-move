@@ -34,12 +34,19 @@ public class SellForCashManager: ECSEntity
     {
         IapService.Current.OnPurchaseOK += OnPurchaseOk;
         IapService.Current.OnPurchaseFail += OnPurchaseFail;
+        IapService.Current.OnInitialized += OnInitialized;
     }
     
     private void Unsubscribe()
     {
         IapService.Current.OnPurchaseOK -= OnPurchaseOk;
         IapService.Current.OnPurchaseFail -= OnPurchaseFail;
+        IapService.Current.OnInitialized -= OnInitialized;
+    }
+
+    private void OnInitialized()
+    {
+        
     }
 
     public override void OnUnRegisterEntity(ECSEntity entity)
@@ -65,12 +72,33 @@ public class SellForCashManager: ECSEntity
 
     private void ShowError(IapErrorCode error)
     {
+        Debug.LogWarning($"[SellForCashManager] => ShowError for {error}");
+        
         var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
 
-        model.Title = LocalizationService.Get("iap.failed.title",       "iap.failed.title");
-        model.Message = LocalizationService.Get("iap.failed.message",   "iap.failed.message");
-        model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
-
+        switch (error)
+        {
+            case IapErrorCode.NoError:
+                Debug.LogError($"[SellForCashManager] => ShowError called but error param == NoError");
+                return;
+            
+            case IapErrorCode.InitFailReasonPurchasingUnavailable:
+            case IapErrorCode.InitFailReasonNoProductsAvailable:
+            case IapErrorCode.InitFailReasonUnknown:
+            case IapErrorCode.PurchaseFailReasonPurchasingUnavailable:  
+            case IapErrorCode.PurchaseFailIapPrviderNotInitialized:  
+                model.Title = LocalizationService.Get("iap.init.failed.title",    "iap.init.failed.title");
+                model.Message = LocalizationService.Get("iap.init.failed.message","iap.init.failed.message");
+                model.AcceptLabel = LocalizationService.Get("common.button.ok",   "common.button.ok");
+                break; 
+            
+            default:
+                model.Title = LocalizationService.Get("iap.failed.title",       "iap.failed.title");
+                model.Message = LocalizationService.Get("iap.failed.message",   "iap.failed.message");
+                model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
+                break;
+        }
+        
         model.OnAccept = () => { };
 
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
@@ -93,7 +121,7 @@ public class SellForCashManager: ECSEntity
 
         if (def == null)
         {
-            Debug.LogError($"ProvideReward: No product with purchase key '{productId}' is defined in GameDataService.Current.ShopManager.Defs[Currency.Crystals.Name]");
+            Debug.LogError($"[SellForCashManager] => provideReward: No product with purchase key '{productId}' is defined in GameDataService.Current.ShopManager.Defs[Currency.Crystals.Name]");
             return;
         }
         

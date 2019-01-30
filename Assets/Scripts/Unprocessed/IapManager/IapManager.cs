@@ -50,6 +50,8 @@ public class IapManager : ECSEntity, IIapManager
     public IapCollection IapCollection => iapProvider?.IapCollection; 
     
     public bool IsInitialized { get; private set; }
+    
+    public IapErrorCode LastInitError { get; private set; }
 
     public delegate void OnPurchaseOkDelegate(string productId, string receipt);
 
@@ -159,6 +161,7 @@ public class IapManager : ECSEntity, IIapManager
     }
     private void OnPurchaseFailCallback(string productId, IapErrorCode error)
     {
+        Debug.Log($"[IapManager] => OnPurchaseFailCallback: productId: '{productId}' with error: {error}");
         OnPurchaseFail?.Invoke(productId, error);
     }
     
@@ -189,6 +192,8 @@ public class IapManager : ECSEntity, IIapManager
     {
         var save = ProfileService.Current.GetComponent<PendingIapSaveComponent>(PendingIapSaveComponent.ComponentGuid);
         pendingIaps = save?.PendingIaps ?? new Dictionary<string, PendingIap>();
+        
+        Debug.Log($"[IapManager] => LoadPendingIaps: {(pendingIaps.Count > 0 ? string.Join(" | ", pendingIaps.Keys.ToList()) : "No pending iaps")}");
     }
 
     private void InitProvider(Action<IapErrorCode> onComplete = null)
@@ -203,6 +208,8 @@ public class IapManager : ECSEntity, IIapManager
 
         iapProvider.Init((error) =>
         {
+            LastInitError = error;
+            
             if (error != IapErrorCode.NoError)
             {
                 Debug.LogError($"[IapManager] => InitProvider failed with error: {error.ToString()}");
@@ -216,6 +223,8 @@ public class IapManager : ECSEntity, IIapManager
             Debug.Log($"[IapManager] => Inited!");
             
             IsInitialized = true;
+
+            LastInitError = IapErrorCode.NoError;
             
             OnInitialized?.Invoke();
 
@@ -278,8 +287,11 @@ public class IapManager : ECSEntity, IIapManager
 
     public void Purchase(string productId)
     {
+        Debug.Log($"[IapManager] => Purchase: '{productId}'...");
+        
         if (!IsInitialized || isDestroyed)
         {
+            Debug.Log($"[IapManager] => Purchase: Can't start: IsInitialized: {IsInitialized}, isDestroyed: {isDestroyed}");
             OnPurchaseFail?.Invoke(productId, IapErrorCode.PurchaseFailIapPrviderNotInitialized);
             return;
         }
@@ -291,15 +303,18 @@ public class IapManager : ECSEntity, IIapManager
                 // This product already purchased
                 if (pendingIaps.ContainsKey(productId))
                 {
+                    Debug.Log($"[IapManager] => Purchase: '{productId}' is in pendingIaps list");
                     ProcessPendingIapInsteadOfPurchase(productId);
                 }
                 else
                 {
+                    Debug.Log($"[IapManager] => Purchase: Call iapProvider");
                     iapProvider.Purchase(productId);
                 }
             }
             else
             {
+                Debug.Log($"[IapManager] => Purchase: OnPurchaseFail: {productId} with {error}");
                 OnPurchaseFail?.Invoke(productId, error);
             }
         });
@@ -307,8 +322,11 @@ public class IapManager : ECSEntity, IIapManager
 
     public void RestorePurchases()
     {
+        Debug.Log($"[IapManager] => RestorePurchases...");
+        
         if (!IsInitialized || isDestroyed)
         {
+            Debug.Log($"[IapManager] => RestorePurchases failed: !IsInitialized || isDestroyed");
             OnRestoreCompleted?.Invoke(false);
             return;
         }
@@ -318,6 +336,8 @@ public class IapManager : ECSEntity, IIapManager
 
     private void ProcessPendingIapInsteadOfPurchase(string productId)
     {
+        Debug.Log($"[IapManager] => ProcessPendingIapInsteadOfPurchase: {productId}");
+        
         var pendingIap = pendingIaps[productId];
         if (pendingIap.Validated)
         {
@@ -392,11 +412,6 @@ public class IapManager : ECSEntity, IIapManager
     public void IapProvidedToPlayer(string id)
     {
         pendingIaps.Remove(id);
-    }
-
-    private void  Test(Action onComplete)
-    {
-        onComplete.Invoke();
     }
 
     /// <summary>
