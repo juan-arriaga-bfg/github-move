@@ -4,6 +4,32 @@ using UnityEngine;
 
 public class SherwoodLocalNotificationsManagerBase : LocalNotificationsManagerBase
 {
+#if DEBUG
+    public void DebugSchedule()
+    {
+    #if UNITY_EDITOR
+        notifyItems.Clear();
+        base.ScheduleNotifications();
+        notifyItems.Clear();
+    #else
+        notifyItems.Clear();
+        CancelAllOnDevice();
+        GenerateNotifications();
+
+        TimeSpan timeShift = new TimeSpan(0, 0, 5);
+        foreach (var notify in notifyItems)
+        {
+            notify.NotifyTime = DateTime.UtcNow + timeShift;
+            timeShift = timeShift.Add(new TimeSpan(0, 0, 5));
+        }
+        
+        ScheduleAllOnDevice();
+        notifyItems.Clear();
+    #endif
+    }
+#endif
+    
+
     
 #if UNITY_EDITOR
     

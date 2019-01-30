@@ -180,6 +180,14 @@ public class DevTools : UIContainerElementViewController
 
         ShowQuestWindow(quests, 0);
     }
+
+    public void ShowNotifications()
+    {
+#if DEBUG
+        var notificationManager = LocalNotificationsService.Current as SherwoodLocalNotificationsManagerBase;
+        notificationManager?.DebugSchedule();        
+#endif
+    }
     
     public void OnDebug1Click()
     {
