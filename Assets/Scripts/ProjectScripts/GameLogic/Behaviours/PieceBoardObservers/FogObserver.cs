@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
@@ -6,9 +7,12 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 {
     private int level;
     public FogDef Def { get; private set; }
+    public CurrencyPair Credit { get; private set; }
+    
     private StorageItem storageItem;
     private ViewDefinitionComponent viewDef;
     private LockView lockView;
+    private FogProgressView bar;
     private BubbleView bubble;
     public BoardPosition Key { get; private set; }
 
@@ -37,6 +41,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         Def = GameDataService.Current.FogsManager.GetDef(Key);
         
         if(Def == null) return;
+        
+        Credit = new CurrencyPair{Currency = Def.Condition.Currency, Amount = 0};
         
         Mask = Def.Positions;
         viewDef = Context.ViewDefinition;
@@ -84,11 +90,6 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         return new BoardPosition(mask.X, mask.Y, position.Z);
     }
     
-    public void Clear()
-    {
-        
-    }
-    
     public void RegisterCarrier(IResourceCarrier carrier)
     {
     }
@@ -114,10 +115,9 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         lockView?.SetGrayscale(!canPath);
         
         var fog = Context.ActorView as FogPieceView;
-        
-        if(fog != null) fog.UpdateBorder();
-        
-        if(canPath == false || storageItem.Amount < level) return;
+
+        if (fog != null) fog.UpdateBorder();
+        if (canPath == false || storageItem.Amount < level) return;
 
         if (lockView != null)
         {
@@ -132,17 +132,14 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             ParticleView.Show(R.FogExplosionParticleSystem, pos);
         }
         
-        bubble = viewDef.AddView(ViewType.Bubble) as BubbleView;
+        bar = viewDef.AddView(ViewType.FogProgress) as FogProgressView;
         
-        if(bubble.IsShow) return;
-
-        bubble.SetData(LocalizationService.Get("gameboard.bubble.message.fog", "gameboard.bubble.message.fog"), Def.Condition.ToStringIcon(), OnClick);
-        bubble.SetOfset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
-        bubble.Priority = -1;
-        bubble.Change(true);
+        if(bar.IsShow) return;
         
-        Context.Context.HintCooldown.AddView(bubble);
-
+        bar.SetOfset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
+        bar.Priority = -1;
+        bar.Change(true);
+        
         PrepareFogToClear();
     }
     
@@ -192,31 +189,53 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             return canPath || RequiredLevelReached();
         }
     }
+
+    public void Filling(int value)
+    {
+        Action onComplete = null;
+        
+        Credit.Amount += Mathf.Clamp(value, 0, Def.Condition.Amount - Credit.Amount);
+
+        if (Credit.Amount == Def.Condition.Amount)
+        {
+            onComplete = () =>
+            {
+                bar.Priority = 1;
+                bar.Change(false);
+
+                bubble = viewDef.AddView(ViewType.Bubble) as BubbleView;
+                bubble.SetOfset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
+                
+                bubble.SetData(LocalizationService.Get("gameboard.bubble.message.fog", "gameboard.bubble.message.fog"),
+                    LocalizationService.Get("gameboard.bubble.button.fog", "gameboard.bubble.button.fog"), OnClick);
+                
+                bubble.Priority = -2;
+                bubble.Change(true);
+            };
+        }
+        
+        bar.UpdateProgress(onComplete);
+    }
+    
+    public void FillingFake(int value)
+    {
+        bar.UpdateFakeProgress(value);
+    }
     
     private void OnClick(Piece piece)
     {
-        if(CurrencyHelper.IsCanPurchase(Def.Condition, true, () => OnClick(piece)) == false) return;
-
-        bubble.CleanOnClick();
-        Context.Context.HintCooldown.RemoweView(bubble);
-
         bubble.OnHide = () =>
         {
-            CurrencyHelper.Purchase(Currency.Fog.Name, 1, Def.Condition, success =>
+            piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, Def);
+            AddResourceView.Show(Def.GetCenter(piece.Context), Def.Reward);
+                
+            IsRemoved = true;
+            piece.Context.ActionExecutor.AddAction(new CollapseFogToAction
             {
-                if (success == false) return;
-                
-                piece.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClearFog, Def);
-                AddResourceView.Show(Def.GetCenter(piece.Context), Def.Reward);
-                
-                IsRemoved = true;
-                piece.Context.ActionExecutor.AddAction(new CollapseFogToAction
-                {
-                    To = piece.CachedPosition,
-                    Positions = new List<BoardPosition> {piece.CachedPosition},
-                    FogObserver = this,
-                    OnComplete = DevTools.UpdateFogSectorsDebug
-                });
+                To = piece.CachedPosition,
+                Positions = new List<BoardPosition> {piece.CachedPosition},
+                FogObserver = this,
+                OnComplete = DevTools.UpdateFogSectorsDebug
             });
         };
             

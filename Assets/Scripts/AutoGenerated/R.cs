@@ -221,4 +221,5 @@ public class R
      public const string Mana4Piece = "Mana4Piece";
      public const string Mana5Piece = "Mana5Piece";
      public const string Mana6Piece = "Mana6Piece";
+     public const string FogProgressView = "FogProgressView";
 }

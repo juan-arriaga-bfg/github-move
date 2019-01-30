@@ -8,7 +8,7 @@ public class BubbleView : UIBoardView, IBoardEventListener
     
     protected override ViewType Id => ViewType.Bubble;
 
-    public override Vector3 Ofset => new Vector3(0, 2f);
+    public override Vector3 Offset => new Vector3(0, 2f);
 
     private Action<Piece> onClick;
     

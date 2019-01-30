@@ -23,7 +23,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     public Dictionary<BoardPosition, FogDef> VisibleFogPositions;
     public Dictionary<BoardPosition, FogDef> ClearedFogPositions;
     
-    private Dictionary<BoardPosition, FogObserver> FogObservers;
+    public Dictionary<BoardPosition, FogObserver> FogObservers;
     private List<FogDef> ActiveFogs;
 
     private FogDef lastOpenFog;
@@ -87,8 +87,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
 
     public FogDef GetDef(BoardPosition key)
     {
-        FogDef def;
-        return VisibleFogPositions.TryGetValue(key, out def) == false ? null : def;
+        return VisibleFogPositions.TryGetValue(key, out var def) == false ? null : def;
     }
 
     public void RemoveFog(BoardPosition key)
@@ -118,13 +117,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
 
     public FogObserver GetFogObserver(BoardPosition pos)
     {
-        FogObserver ret;
-        if (FogObservers.TryGetValue(pos, out ret))
-        {
-            return ret;
-        }
-
-        return null;
+        return FogObservers.TryGetValue(pos, out var ret) ? ret : null;
     }
     
     public bool IsFogCleared(string uid)
@@ -317,5 +310,21 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     {
         FogObservers.Remove(observer.Key);
         ActiveFogs.Remove(observer.Def);
+    }
+
+    public bool SetMana(Piece piece, BoardPosition targetPosition)
+    {
+        var def = GameDataService.Current.PiecesManager.GetPieceDef(piece.PieceType);
+        var target = piece.Context.BoardLogic.GetPieceAt(targetPosition);
+        
+        if (def.SpawnResources.Currency != Currency.Mana.Name || target.PieceType != PieceType.Fog.Id) return false;
+        
+        var observer = target.GetComponent<FogObserver>(FogObserver.ComponentGuid);
+
+        if (observer == null || observer.IsRemoved || observer.RequiredLevelReached() == false || observer.CanBeReached() == false) return false;
+        
+        observer.Filling(def.SpawnResources.Amount);
+        
+        return true;
     }
 }

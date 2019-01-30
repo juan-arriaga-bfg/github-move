@@ -136,7 +136,7 @@ public class RewardsStoreComponent : IECSComponent
         
         if (isShow)
         {
-            view.Ofset = BubbleOffset;
+            view.Offset = BubbleOffset;
             view.SetOfset();
             view.OnClickAction = GetInBubble;
             context.Context.HintCooldown.AddView(view);

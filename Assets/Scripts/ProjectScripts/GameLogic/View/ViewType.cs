@@ -18,5 +18,6 @@
     PieceRemover = -1014,
     RewardsBubble = -1015,
     GodRay = -1016,
-    UIContainer = -1017
+    UIContainer = -1017,
+    FogProgress = -1018
 }

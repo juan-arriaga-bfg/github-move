@@ -12,12 +12,12 @@ public class OrderBubbleView : UIBoardView
     
 	public override void SetOfset()
 	{
-		CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Ofset;
+		CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Offset;
 	}
 
 	public override void Init(Piece piece)
 	{
-		Ofset = new Vector3(0, 2.0f);
+		Offset = new Vector3(0, 2.0f);
 		
 		base.Init(piece);
         

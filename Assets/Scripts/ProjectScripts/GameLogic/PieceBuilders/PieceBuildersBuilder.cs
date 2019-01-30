@@ -19,7 +19,7 @@ public class PieceBuildersBuilder
     
     private Dictionary<int, IPieceBuilder> AddSimplePiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict.Add(PieceType.Boost_WR.Id, new SimplePieceBuilder());
+        dict.Add(PieceType.Boost_WR.Id, new WorkerPieceBuilder());
         
         dict = AddSimplePiece<CharacterPieceBuilder>(PieceType.NPC_SleepingBeauty.Id, PieceType.NPC_19.Id, dict);
         
@@ -28,9 +28,9 @@ public class PieceBuildersBuilder
         dict = AddBuildingBranchPiece(dict, PieceType.C1.Id, PieceType.C9.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.D1.Id, PieceType.D9.Id);
         
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Mana1.Id, PieceType.Mana6.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Soft1.Id, PieceType.Soft6.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Hard1.Id, PieceType.Hard6.Id, dict);
+        dict = AddSimplePiece<ManaPieceBuilder>(PieceType.Mana1.Id, PieceType.Mana6.Id, dict);
+        dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Soft1.Id, PieceType.Soft6.Id, dict);
+        dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Hard1.Id, PieceType.Hard6.Id, dict);
         
         dict.Add(PieceType.CH_Free.Id, new ChestPieceBuilder());
         
@@ -47,13 +47,13 @@ public class PieceBuildersBuilder
 
     private Dictionary<int, IPieceBuilder> AddIngredientsBranchPiece(Dictionary<int, IPieceBuilder> dict)
     {
-        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.PR_A1.Id, PieceType.PR_A5.Id);
-        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.PR_B1.Id, PieceType.PR_B5.Id);
-        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.PR_C1.Id, PieceType.PR_C5.Id);
-        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.PR_D1.Id, PieceType.PR_D5.Id);
-        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.PR_E1.Id, PieceType.PR_E5.Id);
-        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.PR_F1.Id, PieceType.PR_F5.Id);
-        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder>(dict, PieceType.PR_G1.Id, PieceType.PR_G5.Id);
+        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder, ResourcePieceBuilder>(dict, PieceType.PR_A1.Id, PieceType.PR_A5.Id);
+        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder, ResourcePieceBuilder>(dict, PieceType.PR_B1.Id, PieceType.PR_B5.Id);
+        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder, ResourcePieceBuilder>(dict, PieceType.PR_C1.Id, PieceType.PR_C5.Id);
+        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder, ResourcePieceBuilder>(dict, PieceType.PR_D1.Id, PieceType.PR_D5.Id);
+        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder, ResourcePieceBuilder>(dict, PieceType.PR_E1.Id, PieceType.PR_E5.Id);
+        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder, ResourcePieceBuilder>(dict, PieceType.PR_F1.Id, PieceType.PR_F5.Id);
+        dict = AddReproductionBranchPiece<SimplePieceBuilder, ReproductionPieceBuilder, ResourcePieceBuilder>(dict, PieceType.PR_G1.Id, PieceType.PR_G5.Id);
         
         return dict;
     }
@@ -114,14 +114,15 @@ public class PieceBuildersBuilder
         return dict;
     }
     
-    private Dictionary<int, IPieceBuilder> AddReproductionBranchPiece<TA, TB>(Dictionary<int, IPieceBuilder> dict, int idMin, int idMax)
-        where TA : IPieceBuilder, new()
-        where TB : IPieceBuilder, new()
+    private Dictionary<int, IPieceBuilder> AddReproductionBranchPiece<Ta, Tb, Tc>(Dictionary<int, IPieceBuilder> dict, int idMin, int idMax)
+        where Ta : IPieceBuilder, new()
+        where Tb : IPieceBuilder, new()
+        where Tc : IPieceBuilder, new()
     {
-        dict = AddSimplePiece<TA>(idMin, idMax - 2, dict);
+        dict = AddSimplePiece<Ta>(idMin, idMax - 2, dict);
         
-        dict.Add(idMax - 1, new TB());
-        dict.Add(idMax, new TA());
+        dict.Add(idMax - 1, new Tb());
+        dict.Add(idMax, new Tc());
         
         return dict;
     }

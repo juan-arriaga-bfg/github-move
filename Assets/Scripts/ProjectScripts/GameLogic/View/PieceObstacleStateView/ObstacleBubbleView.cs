@@ -9,7 +9,7 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
     
     private WorkplaceLifeComponent life;
     
-    public override Vector3 Ofset => new Vector3(0, 1.5f);
+    public override Vector3 Offset => new Vector3(0, 1.5f);
     
     protected override ViewType Id => ViewType.ObstacleBubble;
 
@@ -17,7 +17,7 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
 
     public override void SetOfset()
     {
-        CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Ofset;
+        CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Offset;
     }
 
     public override void Init(Piece piece)

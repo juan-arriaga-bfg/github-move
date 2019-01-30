@@ -37,7 +37,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         
         Priority = defaultPriority = 10;
         
-        Ofset = multiSize == 1 ? Ofset : new Vector3(0, 1.3f);
+        Offset = multiSize == 1 ? Offset : new Vector3(0, 1.3f);
         
         SetOfset();
         SetTimer(Context.GetComponent<TimerComponent>(TimerComponent.ComponentGuid));
