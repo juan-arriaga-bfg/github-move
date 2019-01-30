@@ -177,6 +177,14 @@ public class CodexItem : IWUIWindowViewController
     
     private string GetCaption()
     {
+        if (def == null)
+            return "";
+
+        if (def.PieceDef.SpawnResources != null)
+        {
+            var resource = def.PieceDef.SpawnResources;
+            return $"<size=24><sprite name=icon_{resource.Currency}></size>{resource.Amount}";
+        }
         return def?.PieceDef?.Name;
     }
     
