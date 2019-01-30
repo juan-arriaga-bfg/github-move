@@ -119,7 +119,15 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
             model.Title = "[DEBUG]";
             model.Message = $"Product with id '{contentEntity.PurchaseKey}' not registered. Purchase will be processed using debug flow without real store.";
             model.AcceptLabel = LocalizationService.Get("common.button.ok", "common.button.ok");
-            model.OnAccept = () => { context.Controller.CloseCurrentWindow(); };
+            model.OnAccept = () =>
+            {
+                context.Controller.CloseCurrentWindow();
+                CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, contentEntity.Price, rewardPosition, null, false, true);
+            };
+            model.OnClose = () =>
+            {
+                isClick = false;
+            };
 
             UIService.Get.ShowWindow(UIWindowType.MessageWindow);
             return;
@@ -128,9 +136,14 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
         SellForCashService.Current.Purchase(contentEntity.PurchaseKey, (isOk, productId) =>
         {
-            if (isOk == false) isClick = false;
-
-            context.Controller.CloseCurrentWindow();
+            if (isOk == false)
+            {
+                isClick = false;
+            }
+            else
+            {
+                context.Controller.CloseCurrentWindow();
+            }
         });
     }
     
