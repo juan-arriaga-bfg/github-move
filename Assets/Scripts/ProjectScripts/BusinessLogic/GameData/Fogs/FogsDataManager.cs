@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BfgAnalytics;
 using UnityEngine;
 
 public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsDataManager>
@@ -94,11 +95,15 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     public void RemoveFog(BoardPosition key)
     {
         Debug.Log($"[FogsDataManager] => RemoveFog({key}");
+
+        var def = GetDef(key);
         
         if(VisibleFogPositions.ContainsKey(key) == false) return;
-        LastOpenFog = GetDef(key);
-        ClearedFogPositions.Add(key, GetDef(key));
+        LastOpenFog = def;
+        ClearedFogPositions.Add(key, def);
         VisibleFogPositions.Remove(key);
+        
+        Analytics.SendFogClearedEvent(def.Uid);
 
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
     }

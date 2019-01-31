@@ -3,7 +3,7 @@ using IW.SimpleJSON;
 
 namespace BfgAnalytics
 {
-    public class JsonDataCollectorBalance : IJsonDataCollector
+    public class JsonDataCollectorBalances : IJsonDataCollector
     {
         public string Name => "balances";
 

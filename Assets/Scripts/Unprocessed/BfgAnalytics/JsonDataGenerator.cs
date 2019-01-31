@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using IW.SimpleJSON;
+using UnityEngine;
 
 namespace BfgAnalytics
 {
@@ -20,26 +22,45 @@ namespace BfgAnalytics
             {
                 return null;
             }
-            
-            JSONNode node = new JSONObject();
-            
-            foreach (JsonDataGroup item in groups.AsArray())
+
+            try
             {
-                if (groups.Has(item))
+                JSONNode node = new JSONObject();
+            
+                foreach (JsonDataGroup item in groups.AsArray())
                 {
-                    var collector = collectors[item];
-                    string name = collector.Name;
-                    JSONNode data = collector.CollectData();
-                    node.Add(name, data);
+                    if (item == JsonDataGroup.None)
+                    {
+                        continue;
+                    }
+                    
+                    if (groups.Has(item))
+                    {
+                        if (collectors.TryGetValue(item, out IJsonDataCollector collector))
+                        {
+                            string name = collector.Name;
+                            JSONNode data = collector.CollectData();
+                            node.Add(name, data);
+                        }
+                        else
+                        {
+                            throw new Exception($"No collector for group {item.ToString()} is registered!");
+                        }
+                    }
                 }
-            }
 
-            if (customData != null)
+                if (customData != null)
+                {
+                    node.Add(customData);
+                }
+
+                return node.ToString();
+            }
+            catch (Exception e)
             {
-                node.Add(customData);
+                Debug.LogError($"[JsonDataGenerator] => CollectData: Exception: {e.Message}\n{e.StackTrace}");
+                return null;
             }
-
-            return node.ToString();
         }
     }
 }
