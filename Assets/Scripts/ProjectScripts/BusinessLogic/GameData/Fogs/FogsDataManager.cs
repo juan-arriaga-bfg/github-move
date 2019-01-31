@@ -17,7 +17,6 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     {
     }
     
-    public List<ItemWeight> DefaultPieceWeights { get; set; }
     public List<FogDef> Fogs { get; set; }
     
     public Dictionary<BoardPosition, FogDef> VisibleFogPositions;
@@ -35,7 +34,6 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     
     public void Reload()
     {
-        DefaultPieceWeights = null;
         Fogs = null;
         VisibleFogPositions = null;
         ClearedFogPositions = null;
@@ -53,7 +51,6 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
             
             if (string.IsNullOrEmpty(error))
             {
-                DefaultPieceWeights = data.DefaultPieceWeights;
                 Fogs = data.Fogs;
 
                 var save = ProfileService.Current.GetComponent<FogSaveComponent>(FogSaveComponent.ComponentGuid);
