@@ -156,6 +156,8 @@ public class ConfigsGoogleLoader
             return;
         }
         
+        DevTools.IsSequenceReset = true;
+        
         var gLink = update[index].Value;
 
         string text = string.Format("[{1}/{2}] Downloading: '{0}'", gLink.Key, update.Count - index, update.Count);
@@ -205,12 +207,12 @@ public class ConfigsGoogleLoader
     
     private static string GetUrl(string id, string route, string json)
     {
-        return string.Format("https://script.google.com/macros/s/AKfycbz82MTaf-dECcAPhCIveDy9R0OPApWfWUx6aLScGaWQKsIK6D4/exec?route={0}&spreadsheetId={1}&pattern={2}", route, id, json);
+        return $"https://script.google.com/macros/s/AKfycbz82MTaf-dECcAPhCIveDy9R0OPApWfWUx6aLScGaWQKsIK6D4/exec?route={route}&spreadsheetId={id}&pattern={json}";
     }
     
     private static string GetUrl(string route, string prms)
     {
-        return string.Format("https://script.google.com/macros/s/AKfycbz82MTaf-dECcAPhCIveDy9R0OPApWfWUx6aLScGaWQKsIK6D4/exec?route={0}&{1}", route, prms);
+        return $"https://script.google.com/macros/s/AKfycbz82MTaf-dECcAPhCIveDy9R0OPApWfWUx6aLScGaWQKsIK6D4/exec?route={route}&{prms}";
     }
 }
 #endif

@@ -354,6 +354,24 @@ public class DevTools : UIContainerElementViewController
         
     }
 
+    public static bool IsSequenceReset
+    {
+        get
+        {
+#if UNITY_EDITOR
+            return EditorPrefs.GetBool("DEBUG_SEQUENCE_RESET", false);
+#else
+        return false;
+#endif
+        }
+        set
+        {
+#if UNITY_EDITOR
+            EditorPrefs.SetBool("DEBUG_SEQUENCE_RESET", value);
+#endif
+        }
+    }
+
     [UsedImplicitly]
     public void OnReloadSceneClick()
     {

@@ -26,9 +26,7 @@ public class SequenceSaveComponent : ECSEntity, IECSSerializeable
 
         foreach (var component in cache.Values)
         {
-            var seq = component as SequenceData;
-            
-            if(seq == null) continue;
+            if(!(component is SequenceData seq)) continue;
             
             sequences.AddRange(seq.GetSaveSequences());
         }
@@ -39,6 +37,12 @@ public class SequenceSaveComponent : ECSEntity, IECSSerializeable
     {
         data = new Dictionary<string, SequenceSaveItem>();
 
+        if (DevTools.IsSequenceReset)
+        {
+            DevTools.IsSequenceReset = false;
+            return;
+        }
+
         foreach (var sequence in sequences)
         {
             data.Add(sequence.Uid, sequence);
@@ -47,9 +51,7 @@ public class SequenceSaveComponent : ECSEntity, IECSSerializeable
 
     public SequenceSaveItem GetSave(string uid)
     {
-        SequenceSaveItem save;
-
-        if (data == null || data.TryGetValue(uid, out save) == false) return null;
+        if (data == null || data.TryGetValue(uid, out var save) == false) return null;
 
         data.Remove(uid);
         
