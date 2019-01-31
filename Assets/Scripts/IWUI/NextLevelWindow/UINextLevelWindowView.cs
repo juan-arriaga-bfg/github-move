@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BfgAnalytics;
 using DG.Tweening;
 using UnityEngine;
 
@@ -83,15 +84,19 @@ public class UINextLevelWindowView : UIGenericWindowView
             
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
         GameDataService.Current.LevelsManager.UpdateSequence();
+
+        int newLevel = GameDataService.Current.LevelsManager.Level;
         
         // todo: temp code, remove it
-        if (GameDataService.Current.LevelsManager.Level == 6)
+        if (newLevel == 6)
         {
             if (GameDataService.Current.QuestsManager.DailyQuest == null)
             {
                 GameDataService.Current.QuestsManager.StartNewDailyQuest();
             }
         }
+        
+        Analytics.SendLevelReachedEvent(newLevel);
         
         base.OnViewCloseCompleted();
     }

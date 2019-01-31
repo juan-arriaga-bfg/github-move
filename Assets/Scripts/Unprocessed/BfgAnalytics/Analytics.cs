@@ -27,7 +27,7 @@ namespace BfgAnalytics
         
         public static void SendQuestCompletedEvent(string id)
         {
-            AnalyticsService.Current?.Event("progress", "quest", id, "start", AllJsonDataExceptTransaction());
+            AnalyticsService.Current?.Event("progress", "quest", id, "start", AllJsonData());
         }
         
         public static void SendPieceUnlockedEvent(string id)
@@ -42,12 +42,12 @@ namespace BfgAnalytics
         
         public static void SendFogClearedEvent(string id)
         {
-            AnalyticsService.Current?.Event("progress", "fog", id, "unlock", AllJsonDataExceptTransaction());
+            AnalyticsService.Current?.Event("progress", "fog", id, "unlock", AllJsonData());
         }
         
         public static void SendLevelReachedEvent(int level)
         {
-            AnalyticsService.Current?.Event("progress", "level", level.ToString(), null, AllJsonDataExceptTransaction());
+            AnalyticsService.Current?.Event("progress", "level", level.ToString(), null, AllJsonData());
         }
     }
 }
