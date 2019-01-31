@@ -51,7 +51,7 @@ public class ConfigsAndManagersInitComponent : AsyncInitComponentBase
         ShopService.Instance.SetManager(shopManager);
         
         //init notificationmanager
-        SherwoodLocalNotificationsManagerBase notifyManager = new SherwoodLocalNotificationsManagerBase();
+        BfgLocalNotificationsManagerBase notifyManager = new BfgLocalNotificationsManagerBase();
         notifyManager.CancelNotifications();
         LocalNotificationsService.Instance.SetManager(notifyManager);
         

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SherwoodLocalNotificationsManagerBase : LocalNotificationsManagerBase
+public class BfgLocalNotificationsManagerBase : LocalNotificationsManagerBase
 {
 #if DEBUG
     public void DebugSchedule()
@@ -82,7 +82,7 @@ public class SherwoodLocalNotificationsManagerBase : LocalNotificationsManagerBa
     protected override void ScheduleAllOnDevice()
     {
         int iconId = GetNotificationIconId();
-        if (iconId <= 0)
+        if (iconId < 0)
         {
             Debug.LogError("[SherwoodLocalNotificationsManager] => ScheduleAllOnDevice: Can't get icon. Notifications will not be scheduled");
             return;

@@ -184,7 +184,7 @@ public class DevTools : UIContainerElementViewController
     public void ShowNotifications()
     {
 #if DEBUG
-        var notificationManager = LocalNotificationsService.Current as SherwoodLocalNotificationsManagerBase;
+        var notificationManager = LocalNotificationsService.Current as BfgLocalNotificationsManagerBase;
         notificationManager?.DebugSchedule();        
 #endif
     }
