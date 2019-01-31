@@ -56,11 +56,8 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
                 DefaultPieceWeights = data.DefaultPieceWeights;
                 Fogs = data.Fogs;
 
-                var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
-
-                List<BoardPosition> completeFogPositions = save?.CompleteFogPositions ?? new List<BoardPosition>();
-
-                
+                var save = ProfileService.Current.GetComponent<FogSaveComponent>(FogSaveComponent.ComponentGuid);
+                var completeFogPositions = save?.CompleteFogPositions ?? new List<BoardPosition>();
                 
                 foreach (var def in data.Fogs)
                 {

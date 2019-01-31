@@ -27,6 +27,7 @@
         profile.RegisterComponent(new MarketSaveComponent());
         profile.RegisterComponent(new PendingIapSaveComponent());
         profile.RegisterComponent(new BaseInformationSaveComponent());
+        profile.RegisterComponent(new FogSaveComponent());
     }
     
     public void SetDefaultSettings(UserProfile profile)
