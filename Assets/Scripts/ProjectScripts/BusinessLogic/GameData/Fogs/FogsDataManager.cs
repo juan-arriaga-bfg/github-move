@@ -62,6 +62,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
                 foreach (var def in data.Fogs)
                 {
                     var pos = def.GetCenter();
+                    
                     if (completeFogPositions.Contains(pos))
                     {
                         ClearedFogPositions.Add(pos, def);
@@ -313,8 +314,8 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     {
         var def = GameDataService.Current.PiecesManager.GetPieceDef(piece.PieceType);
         var target = piece.Context.BoardLogic.GetPieceAt(targetPosition);
-        
-        if (def.SpawnResources.Currency != Currency.Mana.Name || target.PieceType != PieceType.Fog.Id) return false;
+
+        if (def?.SpawnResources == null || def.SpawnResources.Currency != Currency.Mana.Name || target.PieceType != PieceType.Fog.Id) return false;
         
         var observer = target.GetComponent<FogObserver>(FogObserver.ComponentGuid);
 

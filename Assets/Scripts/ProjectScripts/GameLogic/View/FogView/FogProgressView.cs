@@ -28,8 +28,8 @@ public class FogProgressView : UIBoardView
 
         light = lineFake.GetComponent<Image>();
 
-        SetText(fog.Credit.Amount);
-        line.sizeDelta = lineFake.sizeDelta = new Vector2(Progress(line, fog.Def.Condition.Amount, fog.Credit.Amount, out var time), line.sizeDelta.y);
+        SetText(fog.AlreadyPaid.Amount);
+        line.sizeDelta = lineFake.sizeDelta = new Vector2(Progress(line, fog.Def.Condition.Amount, fog.AlreadyPaid.Amount, out var time), line.sizeDelta.y);
         
         DOTween.Kill(light);
 
@@ -52,13 +52,13 @@ public class FogProgressView : UIBoardView
         DOTween.Kill(line);
         
         line
-            .DOSizeDelta(new Vector2(Progress(line, fog.Def.Condition.Amount, fog.Credit.Amount, out var time), line.sizeDelta.y), time)
+            .DOSizeDelta(new Vector2(Progress(line, fog.Def.Condition.Amount, fog.AlreadyPaid.Amount, out var time), line.sizeDelta.y), time)
             .SetId(line)
             .SetEase(Ease.Linear)
             .OnUpdate(() => SetText((int)(fog.Def.Condition.Amount * (line.sizeDelta.x / barWidth))))
             .OnComplete(() =>
             {
-                SetText(fog.Credit.Amount);
+                SetText(fog.AlreadyPaid.Amount);
                 onComplete?.Invoke();
             });
     }
@@ -67,7 +67,7 @@ public class FogProgressView : UIBoardView
     {
         DOTween.Kill(lineFake);
         
-        value = Mathf.Clamp(fog.Credit.Amount + value, fog.Credit.Amount, fog.Def.Condition.Amount);
+        value = Mathf.Clamp(fog.AlreadyPaid.Amount + value, fog.AlreadyPaid.Amount, fog.Def.Condition.Amount);
         
         lineFake
             .DOSizeDelta(new Vector2(Progress(lineFake, fog.Def.Condition.Amount, value, out var time), lineFake.sizeDelta.y), time * 0.5f)

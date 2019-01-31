@@ -7,7 +7,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 {
     private int level;
     public FogDef Def { get; private set; }
-    public CurrencyPair Credit { get; private set; }
+    public CurrencyPair AlreadyPaid { get; private set; }
     
     private StorageItem storageItem;
     private ViewDefinitionComponent viewDef;
@@ -37,16 +37,17 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     public override void OnAddToBoard(BoardPosition position, Piece context = null)
     {
         Key = new BoardPosition(position.X, position.Y);
-        
         Def = GameDataService.Current.FogsManager.GetDef(Key);
+
+        if (Def == null) return;
         
-        if(Def == null) return;
-        
-        Credit = new CurrencyPair{Currency = Def.Condition.Currency, Amount = 0};
+        var save = ProfileService.Current.GetComponent<FogSaveComponent>(FogSaveComponent.ComponentGuid)?.GetRewardsSave(Key);
+
+        AlreadyPaid = new CurrencyPair {Currency = Def.Condition.Currency, Amount = save?.AlreadyPaid ?? 0};
         
         Mask = Def.Positions;
         viewDef = Context.ViewDefinition;
-
+        
         if (viewDef != null)
         {
             viewDef.OnAddToBoard(position, context);
@@ -100,6 +101,14 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void UpdateResource(int offset)
     {
+        if (bubble != null && bubble.IsShow) return;
+
+        if (AlreadyPaid.Amount == Def.Condition.Amount)
+        {
+            OpenBubble();
+            return;
+        }
+        
         canBeReachedCached = null;
         
         var canPath = CanBeReached();
@@ -194,23 +203,15 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     {
         Action onComplete = null;
         
-        Credit.Amount += Mathf.Clamp(value, 0, Def.Condition.Amount - Credit.Amount);
+        AlreadyPaid.Amount += Mathf.Clamp(value, 0, Def.Condition.Amount - AlreadyPaid.Amount);
 
-        if (Credit.Amount == Def.Condition.Amount)
+        if (AlreadyPaid.Amount == Def.Condition.Amount)
         {
             onComplete = () =>
             {
                 bar.Priority = 1;
                 bar.Change(false);
-
-                bubble = viewDef.AddView(ViewType.Bubble) as BubbleView;
-                bubble.SetOfset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
-                
-                bubble.SetData(LocalizationService.Get("gameboard.bubble.message.fog", "gameboard.bubble.message.fog"),
-                    LocalizationService.Get("gameboard.bubble.button.fog", "gameboard.bubble.button.fog"), OnClick);
-                
-                bubble.Priority = -2;
-                bubble.Change(true);
+                OpenBubble();
             };
         }
         
@@ -241,5 +242,17 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
             
         bubble.Priority = 1;
         bubble.Change(false);
+    }
+
+    private void OpenBubble()
+    {
+        bubble = viewDef.AddView(ViewType.Bubble) as BubbleView;
+        bubble.SetOfset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
+                
+        bubble.SetData(LocalizationService.Get("gameboard.bubble.message.fog", "gameboard.bubble.message.fog"),
+            LocalizationService.Get("gameboard.bubble.button.fog", "gameboard.bubble.button.fog"), OnClick);
+                
+        bubble.Priority = -2;
+        bubble.Change(true);
     }
 }
