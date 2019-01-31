@@ -47,7 +47,7 @@ public class NotifyType
             var resultNotifiers = new List<Notifier>();
             
             var dailyQuestEntity = GameDataService.Current.QuestsManager.DailyQuest;
-            if (dailyQuestEntity.IsAllTasksClaimed(true) ||
+            if (dailyQuestEntity.IsAllTasksClaimed(false) ||
                 dailyQuestEntity.ActiveTasks.All(task => task.IsCompletedOrClaimed() == false))
                 return resultNotifiers;
             
