@@ -193,6 +193,41 @@ public class DevTools : UIContainerElementViewController
     {
         Debug.Log("OnDebug1Click");
 
+#if UNITY_EDITOR
+        
+        void CreatePiece()
+        {
+            BoardService.Current.FirstBoard.ActionExecutor.AddAction(new CreatePieceAtAction
+            {
+                At = new BoardPosition(19, 13),
+                PieceTypeId = PieceType.A1.Id
+            });
+        }
+
+        void RemovePiee()
+        {
+            var pos = new BoardPosition(19, 13, 1);
+        
+            BoardService.Current.FirstBoard.ActionExecutor.AddAction(new CollapsePieceToAction
+            {
+                Positions = new List<BoardPosition> {pos},
+                To = pos,
+                OnCompleteAction = null
+            });
+        }
+        
+
+        DOTween.Sequence()
+               .InsertCallback(0, CreatePiece)
+               .InsertCallback(1, RemovePiee)
+               .InsertCallback(2, LeakWatcherToggle.TakeSnapshot)
+               .InsertCallback(3, CreatePiece)
+               .InsertCallback(4, RemovePiee)
+               .InsertCallback(5, LeakWatcherToggle.CompareSnapshot);
+                
+        
+        return;
+#endif        
         
         LocalNotificationsService.Current.PushNotify(new Notification(100, "Test title", "Test Message", DateTime.UtcNow.AddSeconds(30)));
         // var codexManager = GameDataService.Current.CodexManager;
