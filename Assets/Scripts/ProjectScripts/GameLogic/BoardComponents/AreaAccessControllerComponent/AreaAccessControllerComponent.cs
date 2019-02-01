@@ -23,7 +23,7 @@ public class AreaAccessControllerComponent:ECSEntity
 
     public AreaAccessSaveItem GetSaveItem()
     {
-        return new AreaAccessSaveItem() {BasePoints = basePoints.ToList()};
+        return new AreaAccessSaveItem {BasePoints = basePoints != null ? basePoints.ToList() : new List<BoardPosition>()};
     }
     
     private static List<BoardPosition> FindConnections(BoardPosition at, List<BoardPosition> positions)
