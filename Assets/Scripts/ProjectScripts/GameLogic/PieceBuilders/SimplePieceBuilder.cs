@@ -4,7 +4,7 @@
     {
         var piece = base.Build(pieceType, context);
 
-        piece.RegisterComponent(pieceType == PieceType.Boost_WR.Id ? new WorkerDraggablePieceComponent() : new DraggablePieceComponent());
+        piece.RegisterComponent(new DraggablePieceComponent());
 
         var def = GameDataService.Current.PiecesManager.GetPieceDef(pieceType);
         
@@ -15,20 +15,9 @@
             AddObserver(piece, new ReproductionPieceComponent {Child = def.ReproductionDef.Reproduction});
         }
 
-        piece.RegisterComponent(
-            new PiecePathfindBoardCondition(piece.Context, piece)
-                .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)
-        ));
+        piece.RegisterComponent(new PiecePathfindBoardCondition(piece.Context, piece)
+                .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
         
-        if (def.SpawnResources != null || PieceType.GetDefById(pieceType).Filter.Has(PieceTypeFilter.Resource))
-        {
-            piece.RegisterComponent(new ResourceStorageComponent {Resources = def.SpawnResources});
-
-            piece.RegisterComponent(new TouchReactionComponent()
-                .RegisterComponent(new TouchReactionDefinitionCollectResource())
-                .RegisterComponent(new TouchReactionConditionComponent()));
-        }
-
         AddPathfindLockObserver(piece, true);
         
         return piece;

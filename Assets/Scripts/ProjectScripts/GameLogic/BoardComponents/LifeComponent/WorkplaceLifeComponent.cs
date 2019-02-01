@@ -176,7 +176,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		if (isShow)
 		{
 			view.Priority = -1;
-			view.Ofset = timerOffset;
+			view.Offset = timerOffset;
 			view.SetOfset();
 		}
 		else

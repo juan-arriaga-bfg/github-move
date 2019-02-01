@@ -7,25 +7,26 @@ public class ElementsResourcesBuilder
         var dict = new Dictionary<int, string>();
         
 #region View
-        
-        dict.Add((int)ViewType.AddResource, R.AddResourceView);
-        dict.Add((int)ViewType.HintArrow, R.HintArrow);
-        dict.Add((int)ViewType.BoardTimer, R.BoardTimerView);
-        dict.Add((int)ViewType.ObstacleBubble, R.ObstacleBubbleView);
-        dict.Add((int)ViewType.Bubble, R.BubbleView);
-        dict.Add((int)ViewType.MergeParticle, R.MergeParticleSystem);
-        dict.Add((int)ViewType.Progress, R.BoardProgressView);
-        dict.Add((int)ViewType.Warning, R.Warning);
-        dict.Add((int)ViewType.Lock, R.LockView);
-        dict.Add((int)ViewType.OrderBubble, R.OrderBubbleView);
-        dict.Add((int)ViewType.Firefly, R.Firefly);
-        dict.Add((int)ViewType.DefaultWorker, R.DefaultWorker);
-        dict.Add((int)ViewType.ExtraWorker, R.ExtraWorker);
-        dict.Add((int)ViewType.TutorialMergeFinger, R.TutorialMergeFinger);
-        dict.Add((int)ViewType.PieceRemover, R.PieceRemover);
-        dict.Add((int)ViewType.RewardsBubble, R.RewardsBubbleView);
-        dict.Add((int)ViewType.GodRay, R.GodRayView);
-        dict.Add((int)ViewType.UIContainer, R.UIBoardViewContainer);
+
+        dict.Add((int) ViewType.AddResource, R.AddResourceView);
+        dict.Add((int) ViewType.HintArrow, R.HintArrow);
+        dict.Add((int) ViewType.BoardTimer, R.BoardTimerView);
+        dict.Add((int) ViewType.ObstacleBubble, R.ObstacleBubbleView);
+        dict.Add((int) ViewType.Bubble, R.BubbleView);
+        dict.Add((int) ViewType.MergeParticle, R.MergeParticleSystem);
+        dict.Add((int) ViewType.Progress, R.BoardProgressView);
+        dict.Add((int) ViewType.Warning, R.Warning);
+        dict.Add((int) ViewType.Lock, R.LockView);
+        dict.Add((int) ViewType.OrderBubble, R.OrderBubbleView);
+        dict.Add((int) ViewType.Firefly, R.Firefly);
+        dict.Add((int) ViewType.DefaultWorker, R.DefaultWorker);
+        dict.Add((int) ViewType.ExtraWorker, R.ExtraWorker);
+        dict.Add((int) ViewType.TutorialMergeFinger, R.TutorialMergeFinger);
+        dict.Add((int) ViewType.PieceRemover, R.PieceRemover);
+        dict.Add((int) ViewType.RewardsBubble, R.RewardsBubbleView);
+        dict.Add((int) ViewType.GodRay, R.GodRayView);
+        dict.Add((int) ViewType.UIContainer, R.UIBoardViewContainer);
+        dict.Add((int) ViewType.FogProgress, R.FogProgressView);
         
 #endregion
         

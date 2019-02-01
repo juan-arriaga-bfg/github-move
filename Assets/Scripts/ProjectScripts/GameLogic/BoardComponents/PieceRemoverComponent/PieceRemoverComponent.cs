@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using IW.Content.ContentModule;
 using Lean.Touch;
 using UnityEngine;
 
@@ -185,11 +186,22 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
         
         if (IsValidPoint(boardPosition))
         {
+            if (Filter == PieceTypeFilter.Default)
+            {
+                EndRemover();
+                ToggleFilterPieces(false);
+                CollapsePieceAt(boardPosition);
+                return true;
+            }
+            
             var pieceEntity = context.GetPieceAt(boardPosition);
+            var id = PieceType.Parse(pieceEntity.PieceType);
+
+            if (ContentService.Current.IsObjectRegistered(id) == false) id = PieceType.None.Abbreviations[0];
             
             var model = UIService.Get.GetCachedModel<UIMessageWindowModel>(UIWindowType.MessageWindow);
 
-            model.Prefab = PieceType.Parse(pieceEntity.PieceType);
+            model.Prefab = id ;
             model.Title = LocalizationService.Get("window.remove.title", "window.remove.title");
             model.Message = LocalizationService.Get("window.remove.message", "window.remove.message");
             model.AcceptLabel = LocalizationService.Get("common.button.yes", "common.button.yes");
@@ -213,9 +225,11 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
 
     protected virtual void Confirm(BoardPosition position)
     {
-        if (cachedRemoverView != null) cachedRemoverView.Animator.SetTrigger(cachedApplyAnimationId);
-        
-        if (cachedRemoverView != null) cachedRemoverView.ToggleSelection(false);
+        if (cachedRemoverView != null)
+        {
+            cachedRemoverView.Animator.SetTrigger(cachedApplyAnimationId);
+            cachedRemoverView.ToggleSelection(false);
+        }
         
         ToggleFilterPieces(false);
 

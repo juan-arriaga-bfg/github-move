@@ -77,20 +77,13 @@ public class CollapseFogToAction : IBoardAction
             }
         }
         
-        var weights = FogObserver.Def.PieceWeights == null || FogObserver.Def.PieceWeights.Count == 0
-            ? GameDataService.Current.FogsManager.DefaultPieceWeights
-            : FogObserver.Def.PieceWeights;
-        
         foreach (var point in FogObserver.Mask)
         {
-            var piece = ItemWeight.GetRandomItem(weights).Piece;
+            var position = new BoardPosition(point.X, point.Y, BoardLayer.Piece.Layer);
+
+            if (addedPieces.ContainsKey(position)) continue;
             
-            if (piece == PieceType.Empty.Id) piece = PieceType.LockedEmpty.Id;
-            
-            var position = new BoardPosition(point.X, point.Y, FogObserver.Context.Layer.Index);
-            
-            if(addedPieces.ContainsKey(position) == false)
-                addedPieces.Add(position, piece);
+            addedPieces.Add(position, PieceType.LockedEmpty.Id);
         }
         
         gameBoardController.ActionExecutor.PerformAction(new CreateGroupPieces()

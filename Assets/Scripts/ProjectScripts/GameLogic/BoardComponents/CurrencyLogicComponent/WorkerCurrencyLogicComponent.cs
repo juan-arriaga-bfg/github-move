@@ -156,35 +156,19 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         return false;
     }
 
-    public bool SetExtra(Piece worker, BoardPosition targetPosition)
+    public bool SetExtra(Piece piece, BoardPosition targetPosition)
     {
-        if (worker.PieceType != PieceType.Boost_WR.Id || context.BoardLogic.IsEmpty(targetPosition)) return false;
+        if (piece.PieceType != PieceType.Boost_WR.Id) return false;
 
         var target = context.BoardLogic.GetPieceAt(targetPosition);
         var def = PieceType.GetDefById(target.PieceType);
 
         if (def.Filter.Has(PieceTypeFilter.Workplace) == false || !CheckLock(target)) return false;
-        
         if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target)) return false;
         
-        if (def.Filter.HasFlag(PieceTypeFilter.Mine))
-        {
-            NSAudioService.Current.Play(SoundId.WorkerMine);
-        }
-        else if(def.Filter.HasFlag(PieceTypeFilter.ProductionField))
-        {
-            NSAudioService.Current.Play(SoundId.WorkerHarvest);
-        }
-        else
-        {
-            NSAudioService.Current.Play(SoundId.WorkerChop);
-        }
-        
-        context.ActionExecutor.AddAction(new CollapsePieceToAction
-        {
-            To = targetPosition,
-            Positions = new List<BoardPosition> {worker.CachedPosition},
-        });
+        if (def.Filter.HasFlag(PieceTypeFilter.Mine)) NSAudioService.Current.Play(SoundId.WorkerMine);
+        else if(def.Filter.HasFlag(PieceTypeFilter.ProductionField)) NSAudioService.Current.Play(SoundId.WorkerHarvest);
+        else NSAudioService.Current.Play(SoundId.WorkerChop);
         
         return true;
     }

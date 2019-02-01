@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using Newtonsoft.Json;
 
 [JsonObject(MemberSerialization.OptIn)]
-public class FieldDefComponent : ECSEntity, IECSSerializeable
+public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
 
 	private List<PieceSaveItem> pieces;
 	private List<RewardsSaveItem> rewards;
-	private List<LifeSaveItem> lifes;
+	private List<LifeSaveItem> lives;
 	private List<BuildingSaveItem> buildings;
 	private AreaAccessSaveItem areaAccess;
 	
-	private string completeFogs;
 	private string movedMines;
-	private string remowedMines;
+	private string removedMines;
 	
 	[JsonProperty]
 	public List<PieceSaveItem> Pieces
@@ -36,17 +34,10 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	}
 	
 	[JsonProperty]
-	public List<LifeSaveItem> Lifes
+	public List<LifeSaveItem> Lives
 	{
-		get { return lifes; }
-		set { lifes = value; }
-	}
-	
-	[JsonProperty]
-	public string CompleteFogs
-	{
-		get { return completeFogs; }
-		set { completeFogs = value; }
+		get { return lives; }
+		set { lives = value; }
 	}
 	
 	[JsonProperty]
@@ -57,10 +48,10 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 	}
 	
 	[JsonProperty]
-	public string RemowedMines
+	public string RemovedMines
 	{
-		get { return remowedMines; }
-		set { remowedMines = value; }
+		get { return removedMines; }
+		set { removedMines = value; }
 	}
 	
 	[JsonProperty]
@@ -76,8 +67,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		get { return areaAccess; }
 		set { areaAccess = value; }
 	}
-
-	public List<BoardPosition> CompleteFogPositions;
+	
 	public List<BoardPosition> MovedMinePositions;
 	public List<int> RemovedMinePositions;
 	
@@ -97,7 +87,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		
 		pieces = new List<PieceSaveItem>();
 		rewards = new List<RewardsSaveItem>();
-		lifes = new List<LifeSaveItem>();
+		lives = new List<LifeSaveItem>();
 		buildings = new List<BuildingSaveItem>();
 		
 		foreach (var item in cash)
@@ -106,13 +96,12 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			
 			pieces.Add(GetPieceSave(item.Key, item.Value));
 			rewards.AddRange(GetRewardsSave(board.BoardLogic, item.Value));
-			lifes.AddRange(GetLifeSave(board.BoardLogic, item.Value));
+			lives.AddRange(GetLifeSave(board.BoardLogic, item.Value));
 			buildings.AddRange(GetBuildingSave(board.BoardLogic, item.Value));
 		}
 		
 		pieces.Sort((a, b) => -a.Id.CompareTo(b.Id));
-
-		completeFogs = PositionsToString(GameDataService.Current.FogsManager.ClearedFogPositions.Keys.ToList());
+		
 		movedMines = PositionsToString(GameDataService.Current.MinesManager.Moved);
 
 		if (GameDataService.Current == null) return;
@@ -125,7 +114,7 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			str.Append(",");
 		}
 		
-		remowedMines = str.ToString();
+		removedMines = str.ToString();
 
 		AreaAccess = board.AreaAccessController.GetSaveItem();
 	}
@@ -137,7 +126,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		lifeSave = new Dictionary<BoardPosition, LifeSaveItem>();
 		buildingSave = new Dictionary<BoardPosition, BuildingSaveItem>();
 		
-		CompleteFogPositions = StringToPositions(completeFogs);
 		MovedMinePositions = StringToPositions(movedMines);
 		RemovedMinePositions = new List<int>();
 		
@@ -149,9 +137,9 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			}
 		}
 		
-		if (lifes != null)
+		if (lives != null)
 		{
-			foreach (var life in lifes)
+			foreach (var life in lives)
 			{
 				lifeSave.Add(life.Position, life);
 			}
@@ -165,9 +153,9 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 			}
 		}
 		
-		if (string.IsNullOrEmpty(remowedMines) == false)
+		if (string.IsNullOrEmpty(removedMines) == false)
 		{
-			var data = remowedMines.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
+			var data = removedMines.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
 
 			foreach (var str in data)
 			{
@@ -271,37 +259,6 @@ public class FieldDefComponent : ECSEntity, IECSSerializeable
 		}
 		
 		return items;
-	}
-
-	private string PositionsToString(List<BoardPosition> positions)
-	{
-		if (GameDataService.Current == null) return null;
-		
-		var str = new StringBuilder();
-
-		foreach (var position in positions)
-		{
-			str.Append(position.ToSaveString());
-			str.Append(";");
-		}
-		
-		return str.ToString();
-	}
-
-	private List<BoardPosition> StringToPositions(string value)
-	{
-		var positions = new List<BoardPosition>();
-		
-		if (string.IsNullOrEmpty(value)) return positions;
-		
-		var data = value.Split(new[] {";"}, StringSplitOptions.RemoveEmptyEntries);
-
-		foreach (var str in data)
-		{
-			positions.Add(BoardPosition.Parse(str));
-		}
-		
-		return positions;
 	}
 	
 	private List<BuildingSaveItem> GetBuildingSave(BoardLogicComponent logic, List<BoardPosition> positions)

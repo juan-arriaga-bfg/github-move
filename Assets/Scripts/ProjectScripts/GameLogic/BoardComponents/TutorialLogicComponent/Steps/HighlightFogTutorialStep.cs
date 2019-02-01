@@ -13,7 +13,7 @@
     {
         base.Execute();
         
-        HighlightFogHelper.HighlightNextFog(0);
+//        HighlightFogHelper.HighlightNextFog(0);
     }
     
     protected override void Complete()

@@ -48,7 +48,7 @@ public class UIBoardView : BoardElementView
 
     protected virtual ViewType Id { get; set; }
     
-    public virtual Vector3 Ofset
+    public virtual Vector3 Offset
     {
         get { return offset; }
         set { offset = value; }
@@ -85,7 +85,7 @@ public class UIBoardView : BoardElementView
 
     public virtual void SetOfset()
     {
-        CachedTransform.localPosition = controller.GetViewPositionBottom(multiSize) + Ofset;
+        CachedTransform.localPosition = controller.GetViewPositionBottom(multiSize) + Offset;
     }
     
     public void SetOfset(Vector3 ofset)

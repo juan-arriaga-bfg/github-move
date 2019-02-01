@@ -2,8 +2,11 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime;
 using System.Text;
 using System.Text.RegularExpressions;
+using Debug = UnityEngine.Debug;
 
 class LeakWatcherEntry
 {
@@ -130,7 +133,8 @@ public class LeakWatcher
 
     private Dictionary<Type, int> TakeSnapshot()
     {
-        GC.Collect();
+        // GC.Collect();
+        CallGC();
         
         Dictionary<Type, int> ret = new Dictionary<Type, int>();
         foreach (var item in m_data)
@@ -188,5 +192,36 @@ public class LeakWatcher
         }
         
         return ret.ToString();
+    }
+
+    private void CallGC()
+    {
+        RunGC();
+        RunCompactingGC();
+    }
+
+    public static void RunGC()
+    {
+        var sw = Stopwatch.StartNew();
+        long memBefore = GC.GetTotalMemory(false);
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect(); // may need to collect dead objects created by the finalizers
+        var elapsed = sw.ElapsedMilliseconds;
+        long memAfter = GC.GetTotalMemory(true);
+        // Debug.LogWarning($"GC starts with {memBefore} bytes, ends with {memAfter} bytes, GC time {elapsed} (ms)");
+    }
+
+    // https://msdn.microsoft.com/en-us/library/system.runtime.gcsettings.largeobjectheapcompactionmode.aspx
+    public static void RunCompactingGC()
+    {
+        var sw = Stopwatch.StartNew();
+        long memBefore = GC.GetTotalMemory(false);
+
+        GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
+        GC.Collect();
+        var elapsed = sw.ElapsedMilliseconds;
+        long memAfter = GC.GetTotalMemory(true);
+        // Debug.LogWarning($"Compacting GC starts with {memBefore} bytes, ends with {memAfter} bytes, GC time {elapsed} (ms)");
     }
 }

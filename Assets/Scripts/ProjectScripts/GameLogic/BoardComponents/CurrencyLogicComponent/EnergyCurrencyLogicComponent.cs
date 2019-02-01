@@ -48,11 +48,17 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         
         if(save == null) return;
         
-        var refil = DateTimeExtension.CountOfStepsPassedWhenAppWasInBackground(save.EnergyLastUpdate, delay, out Timer.StartTime);
+        var refill = DateTimeExtension.CountOfStepsPassedWhenAppWasInBackground(save.EnergyLastUpdate, delay, out Timer.StartTime);
         
-        Add(Mathf.Min(refil, limitItem.Amount - targetItem.Amount));
+        Add(Mathf.Min(refill, limitItem.Amount - targetItem.Amount));
+
+        if (CheckIsNeed())
+        {
+            Timer.Start(Timer.StartTime);
+            return;
+        }
         
-        if(CheckIsNeed()) Timer.Start(Timer.StartTime);
+        OnExecute?.Invoke();
     }
 
     public bool CheckIsNeed()

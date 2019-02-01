@@ -15,14 +15,14 @@ public class RewardsBubbleView : UIBoardView
 
 	public override void SetOfset()
 	{
-		CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Ofset;
+		CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Offset;
 	}
 
 	public override void Init(Piece piece)
 	{
 		base.Init(piece);
         
-		Ofset = new Vector3(0, 1.5f);
+		Offset = new Vector3(0, 1.5f);
         
 		SetOfset();
         

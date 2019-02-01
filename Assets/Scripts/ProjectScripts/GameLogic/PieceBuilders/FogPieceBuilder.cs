@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-public class FogPieceBuilder : MulticellularPieceBuilder
+﻿public class FogPieceBuilder : MulticellularPieceBuilder
 {
     public override Piece Build(int pieceType, BoardController context)
     {

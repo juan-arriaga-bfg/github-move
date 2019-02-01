@@ -3,6 +3,7 @@ package com.bigfishgames.bfgunityandroid.custom;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Build;
 import android.util.Log;
 
 /**
@@ -23,8 +24,13 @@ public class ResourcesHelper
         int ret = -1;
         try
         {
+            // No LARGE notification icon for 4.x
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                return 0;
+            }
+
             Resources res = context.getResources();
-            ret = res.getIdentifier("ic_notification_big", "drawable", context.getPackageName());
+            ret = res.getIdentifier("ic_notification_large", "drawable", context.getPackageName());
         }
         catch (Exception e)
         {

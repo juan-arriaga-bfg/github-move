@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BfgAnalytics;
 using UnityEngine;
 
 public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsDataManager>
@@ -17,13 +18,12 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     {
     }
     
-    public List<ItemWeight> DefaultPieceWeights { get; set; }
     public List<FogDef> Fogs { get; set; }
     
     public Dictionary<BoardPosition, FogDef> VisibleFogPositions;
     public Dictionary<BoardPosition, FogDef> ClearedFogPositions;
     
-    private Dictionary<BoardPosition, FogObserver> FogObservers;
+    public Dictionary<BoardPosition, FogObserver> FogObservers;
     private List<FogDef> ActiveFogs;
 
     private FogDef lastOpenFog;
@@ -35,7 +35,6 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     
     public void Reload()
     {
-        DefaultPieceWeights = null;
         Fogs = null;
         VisibleFogPositions = null;
         ClearedFogPositions = null;
@@ -53,18 +52,15 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
             
             if (string.IsNullOrEmpty(error))
             {
-                DefaultPieceWeights = data.DefaultPieceWeights;
                 Fogs = data.Fogs;
 
-                var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
-
-                List<BoardPosition> completeFogPositions = save?.CompleteFogPositions ?? new List<BoardPosition>();
-
-                
+                var save = ProfileService.Current.GetComponent<FogSaveComponent>(FogSaveComponent.ComponentGuid);
+                var completeFogPositions = save?.CompleteFogPositions ?? new List<BoardPosition>();
                 
                 foreach (var def in data.Fogs)
                 {
                     var pos = def.GetCenter();
+                    
                     if (completeFogPositions.Contains(pos))
                     {
                         ClearedFogPositions.Add(pos, def);
@@ -87,18 +83,21 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
 
     public FogDef GetDef(BoardPosition key)
     {
-        FogDef def;
-        return VisibleFogPositions.TryGetValue(key, out def) == false ? null : def;
+        return VisibleFogPositions.TryGetValue(key, out var def) == false ? null : def;
     }
 
     public void RemoveFog(BoardPosition key)
     {
         Debug.Log($"[FogsDataManager] => RemoveFog({key}");
+
+        var def = GetDef(key);
         
         if(VisibleFogPositions.ContainsKey(key) == false) return;
-        LastOpenFog = GetDef(key);
-        ClearedFogPositions.Add(key, GetDef(key));
+        LastOpenFog = def;
+        ClearedFogPositions.Add(key, def);
         VisibleFogPositions.Remove(key);
+        
+        Analytics.SendFogClearedEvent(def.Uid);
 
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
     }
@@ -118,13 +117,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
 
     public FogObserver GetFogObserver(BoardPosition pos)
     {
-        FogObserver ret;
-        if (FogObservers.TryGetValue(pos, out ret))
-        {
-            return ret;
-        }
-
-        return null;
+        return FogObservers.TryGetValue(pos, out var ret) ? ret : null;
     }
     
     public bool IsFogCleared(string uid)
@@ -317,5 +310,21 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     {
         FogObservers.Remove(observer.Key);
         ActiveFogs.Remove(observer.Def);
+    }
+
+    public bool SetMana(Piece piece, BoardPosition targetPosition)
+    {
+        var def = GameDataService.Current.PiecesManager.GetPieceDef(piece.PieceType);
+        var target = piece.Context.BoardLogic.GetPieceAt(targetPosition);
+
+        if (def?.SpawnResources == null || def.SpawnResources.Currency != Currency.Mana.Name || target.PieceType != PieceType.Fog.Id) return false;
+        
+        var observer = target.GetComponent<FogObserver>(FogObserver.ComponentGuid);
+        
+        if (observer == null || observer.IsRemoved || observer.CanBeCleared() == false) return false;
+        
+        observer.Filling(def.SpawnResources.Amount);
+        
+        return true;
     }
 }

@@ -46,11 +46,11 @@ public class UIResourcePanelWindowView : UIBaseWindowView
     
     [IWUIBinding("#HintAnchorEnergyPlusButton")] public Transform HintAnchorEnergyPlusButton;
 
-    private Dictionary<string, Transform> cachedResourcePanels = new Dictionary<string, Transform>();
+    private readonly Dictionary<string, Transform> cachedResourcePanels = new Dictionary<string, Transform>();
     
-    private Dictionary<string, CanvasGroup> cachedResourcePanelContainerUp = new Dictionary<string, CanvasGroup>();
+    private readonly Dictionary<string, CanvasGroup> cachedResourcePanelContainerUp = new Dictionary<string, CanvasGroup>();
     
-    private Dictionary<string, CanvasGroup> cachedResourcePanelContainerDown = new Dictionary<string, CanvasGroup>();
+    private readonly Dictionary<string, CanvasGroup> cachedResourcePanelContainerDown = new Dictionary<string, CanvasGroup>();
     
     public UIHintArrowComponent CachedHintArrowComponent { get; private set; }
     
@@ -104,42 +104,43 @@ public class UIResourcePanelWindowView : UIBaseWindowView
 
     public virtual void TogglePanel(string currency, bool state, bool isAnimate = false)
     {
-        Transform targetPanel;
-        CanvasGroup targetContainerUp;
-        CanvasGroup targetContainerDown;
-        if (cachedResourcePanelContainerDown.TryGetValue(currency, out targetContainerDown) 
-            && cachedResourcePanelContainerUp.TryGetValue(currency, out targetContainerUp)
-            && cachedResourcePanels.TryGetValue(currency, out targetPanel))
+        var alpha = state ? 1f : 0f;
+
+        if (!cachedResourcePanelContainerDown.TryGetValue(currency, out var targetContainerDown) ||
+            !cachedResourcePanelContainerUp.TryGetValue(currency, out var targetContainerUp) ||
+            !cachedResourcePanels.TryGetValue(currency, out var targetPanel))
         {
-            float alpha = state ? 1f : 0f;
-            if (isAnimate)
+            return;
+        }
+        
+        if (isAnimate)
+        {
+            DOTween.Kill(targetContainerUp);
+            targetContainerUp.DOFade(alpha, 0.35f).SetId(targetContainerUp);
+
+            DOTween.Kill(targetContainerDown);
+            targetContainerDown.DOFade(alpha, 0.35f).SetId(targetContainerDown);
+
+            DOTween.Kill(targetPanel);
+            
+            if (state == false)
             {
-                DOTween.Kill(targetContainerUp);
-                targetContainerUp.DOFade(alpha, 0.35f).SetId(targetContainerUp);
-
-                DOTween.Kill(targetContainerDown);
-                targetContainerDown.DOFade(alpha, 0.35f).SetId(targetContainerDown);
-
-                DOTween.Kill(targetPanel);
-                if (state == false)
-                {
-                    DOTween.Sequence().SetId(targetPanel).AppendInterval(0.35f).OnComplete(() => { targetPanel.gameObject.SetActive(state); });
-                }
-                else
-                {
-                    targetPanel.gameObject.SetActive(state);
-                }
+                DOTween.Sequence().SetId(targetPanel).AppendInterval(0.35f).OnComplete(() => { targetPanel.gameObject.SetActive(false); });
             }
             else
             {
-                DOTween.Kill(targetContainerUp);
-                DOTween.Kill(targetContainerDown);
-                DOTween.Kill(targetPanel);
-                
-                targetContainerUp.alpha = alpha;
-                targetContainerDown.alpha = alpha;
-                targetPanel.gameObject.SetActive(state);
+                targetPanel.gameObject.SetActive(true);
             }
+        }
+        else
+        {
+            DOTween.Kill(targetContainerUp);
+            DOTween.Kill(targetContainerDown);
+            DOTween.Kill(targetPanel);
+                
+            targetContainerUp.alpha = alpha;
+            targetContainerDown.alpha = alpha;
+            targetPanel.gameObject.SetActive(state);
         }
     }
 

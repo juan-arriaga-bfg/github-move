@@ -86,7 +86,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             return;
         }
 
-        button.interactable = interactive && !IsClickDisabledByTutorial();
+        button.interactable = interactive;
     }
 
     private void OnQuestChanged(QuestEntity quest, TaskEntity task)
@@ -250,10 +250,13 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         {
             return;
         }
-
-
+        
         if (IsClickDisabledByTutorial())
         {
+            UIMessageWindowController.CreateMessage(
+                LocalizationService.Get("common.title.forbidden", "common.title.forbidden"),
+                LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
+            
             return;
         }
         

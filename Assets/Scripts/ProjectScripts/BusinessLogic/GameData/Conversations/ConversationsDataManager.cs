@@ -126,7 +126,7 @@ public class ConversationsDataManager : IECSComponent, IDataManager
         if (purpose == ConversationPurpose.QuestFinish)
         {
             ConversationActionExternalActionEntity extAction = new ConversationActionExternalActionEntity();
-            extAction.RegisterComponent(new ConversationActionPayloadProvideRewardComponent());
+            extAction.RegisterComponent(new ConversationActionPayloadProvideRewardComponent {QuestId = id});
             scenario.RegisterComponent(extAction);
         }
         

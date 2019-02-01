@@ -204,13 +204,10 @@ public class PathfindLockerComponent : ECSEntity
         return canPath;
     }
 
-    private List<Piece> pieceAddCache = new List<Piece>();
     public virtual void RecalcCacheOnPieceAdded(HashSet<BoardPosition> target, BoardPosition changedPosition, Piece piece)
     {
         if (piece.PieceType == PieceType.Fog.Id)
-            RecalcFor(piece, target);
-        if (piece.PathfindLockObserver.AutoLock)
-            pieceAddCache.Add(piece);     
+            RecalcFor(piece, target);   
     }
     
     private List<BoardPosition> FindConnections(BoardPosition at, List<BoardPosition> positions)

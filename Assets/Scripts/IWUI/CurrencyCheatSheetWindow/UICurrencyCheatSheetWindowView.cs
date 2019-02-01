@@ -15,7 +15,6 @@ public class UICurrencyCheatSheetWindowView : UIGenericPopupWindowView
     {
         Currency.Coins,
         Currency.Crystals,
-        Currency.Mana,
         Currency.Energy,
     };
     
