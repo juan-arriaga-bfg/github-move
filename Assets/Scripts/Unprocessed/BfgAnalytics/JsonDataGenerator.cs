@@ -51,7 +51,10 @@ namespace BfgAnalytics
 
                 if (customData != null)
                 {
-                    node.Add(customData);
+                    foreach (KeyValuePair<string, JSONNode> item in customData)
+                    {
+                        node.Add(item.Key, item.Value);
+                    }
                 }
 
                 return node.ToString();

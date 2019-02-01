@@ -15,9 +15,16 @@ namespace BfgAnalytics
                    string type,
                    string name,
                    string action,
-                   JsonDataGroup jsonDataGroups = JsonDataGroup.None,
+                   JsonDataGroup jsonDataGroups,
                    long placeholder = 1,
                    long value = 0,
                    JSONNode customJsonData = null);
+        
+        void Event(string category,
+                   string type,
+                   string name,
+                   string action,
+                   JsonDataGroup jsonDataGroups,
+                   JSONNode customJsonData);
     }
 }

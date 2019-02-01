@@ -1,4 +1,4 @@
-// #define DEBUG_PRINT_SETS
+#define DEBUG_PRINT_SETS
 
 using System;
 using IW.SimpleJSON;
@@ -98,7 +98,7 @@ namespace BfgAnalytics
                     //     break;
                     // }
 
-                    if (action.Length > 31)
+                    if (action != null && action.Length > 31)
                     {
                         Debug.LogErrorFormat("[BfgAnalyticsManager] => 'action' field too long: '{0}'", action);
                         break;
@@ -156,5 +156,9 @@ namespace BfgAnalytics
             }
         }
 
+        public void Event(string category, string type, string name, string action, JsonDataGroup jsonDataGroups, JSONNode customJsonData)
+        {
+            Event(category, type, name, action, jsonDataGroups, 1, 0, customJsonData);
+        }
     }
 }

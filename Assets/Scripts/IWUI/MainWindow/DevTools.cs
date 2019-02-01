@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using BfgAnalytics;
 using DG.Tweening;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
@@ -258,6 +259,9 @@ public class DevTools : UIContainerElementViewController
     {
         Debug.Log("OnDebug2Click");
 
+        Analytics.SendPurchase();
+        return;
+        
         GameDataService.Current.QuestsManager.StartNewDailyQuest();
         return;
         
