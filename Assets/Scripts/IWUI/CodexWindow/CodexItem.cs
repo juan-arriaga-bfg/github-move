@@ -183,9 +183,9 @@ public class CodexItem : IWUIWindowViewController
         if (def.PieceDef.SpawnResources != null)
         {
             var resource = def.PieceDef.SpawnResources;
-            return $"<size=24><sprite name=icon_{resource.Currency}></size>{resource.Amount}";
+            return def.PieceDef.SpawnResources.ToStringIcon(false, 24);
         }
-        return def?.PieceDef?.Name;
+        return def.PieceDef?.Name;
     }
     
     public void SetCaption(string text)
