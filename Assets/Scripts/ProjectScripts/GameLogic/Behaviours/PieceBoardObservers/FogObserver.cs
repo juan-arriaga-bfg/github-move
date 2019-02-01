@@ -114,19 +114,19 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         var canPath = CanBeReached();
         var levelAccess = RequiredLevelReached();
         
-        if ((canPath ^ levelAccess) && lockView == null)
+        if (((canPath ^ levelAccess) || Def.IsActive == false) && lockView == null)
         {
             lockView = viewDef.AddView(ViewType.Lock) as LockView;
-            lockView.Value = level.ToString();
+            lockView.Value = Def.IsActive ? level.ToString() : "?";
             lockView.transform.position = Def.GetCenter(Context.Context);
         }
 
-        lockView?.SetGrayscale(!canPath);
+        lockView?.SetGrayscale(canPath == false || Def.IsActive == false);
         
         var fog = Context.ActorView as FogPieceView;
 
         if (fog != null) fog.UpdateBorder();
-        if (canPath == false || storageItem.Amount < level) return;
+        if (CanBeCleared() == false) return;
 
         if (lockView != null)
         {
@@ -182,7 +182,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         var pathExists = CanBeReached();
         var resourcesEnough = RequiredLevelReached();
 
-        return pathExists && resourcesEnough;
+        return pathExists && resourcesEnough && Def.IsActive;
     }
     
     public bool RequiredLevelReached()

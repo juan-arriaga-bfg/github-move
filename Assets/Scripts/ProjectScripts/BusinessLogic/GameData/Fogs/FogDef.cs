@@ -5,6 +5,9 @@ public class FogDef
 {
     public string Uid { get; set; }
     public int Level { get; set; }
+
+    public bool IsActive { get; set; }
+
     public List<BoardPosition> Positions { get; set; }
     public CurrencyPair Condition { get; set; }
     public CurrencyPair Reward { get; set; }

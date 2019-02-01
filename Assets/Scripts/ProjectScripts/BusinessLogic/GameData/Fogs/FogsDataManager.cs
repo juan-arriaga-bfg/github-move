@@ -315,8 +315,8 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         if (def?.SpawnResources == null || def.SpawnResources.Currency != Currency.Mana.Name || target.PieceType != PieceType.Fog.Id) return false;
         
         var observer = target.GetComponent<FogObserver>(FogObserver.ComponentGuid);
-
-        if (observer == null || observer.IsRemoved || observer.RequiredLevelReached() == false || observer.CanBeReached() == false) return false;
+        
+        if (observer == null || observer.IsRemoved || observer.CanBeCleared() == false) return false;
         
         observer.Filling(def.SpawnResources.Amount);
         
