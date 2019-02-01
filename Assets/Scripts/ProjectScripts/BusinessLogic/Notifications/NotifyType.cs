@@ -67,7 +67,16 @@ public class NotifyType
         Id = 3,
         TitleKey = "notifications.market.restore.title",
         MessageKey = "notifications.market.restore.message",
-        NotifySelector = null,
+        NotifySelector = notifiers =>
+        {
+            var resultNotifiers = new List<Notifier>();
+      
+            var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
+            if (tutorialLogic.CheckMarket() == false)
+                return resultNotifiers;
+
+            return notifiers;
+        },
         TimeCorrector = null
     };
     
@@ -84,5 +93,14 @@ public class NotifyType
             var enrgyRefillDelay = GameDataService.Current.ConstantsManager.EnergyRefillDelay;
             return notifyDate.AddSeconds(enrgyRefillDelay * (maxEnergy - currentEnergy - 1));
         }
+    };
+    
+    public static readonly NotifyType ComeBackToGame = new NotifyType
+    {
+        Id = 5, 
+        TitleKey = "notifications.come.back.title", 
+        MessageKey = "notifications.come.back.message",  
+        NotifySelector = null,
+        TimeCorrector = notifyDate => notifyDate.Add(new TimeSpan(5, 0, 0, 0))
     };
 }

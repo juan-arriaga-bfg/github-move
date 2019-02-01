@@ -5,9 +5,11 @@ using UnityEngine;
 public static class TutorialBuilder
 {
     public const int LockPRStepIndex = 12;
+    public const int LockMarketStepIndex = 15;
     public const int LockOrderStepIndex = 18;
     public const int FirstOrderStepIndex = 19;
     public const int LockFireflytepIndex = 21;
+    
     
     public static BaseTutorialStep BuildTutorial(int index, BoardController context)
     {
@@ -290,7 +292,6 @@ public static class TutorialBuilder
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "21_OpenChest", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.CH_Free.Id, Amount = 1, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "21_OpenChest", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Hard}, true);
-                
                 break;
             }
             default:

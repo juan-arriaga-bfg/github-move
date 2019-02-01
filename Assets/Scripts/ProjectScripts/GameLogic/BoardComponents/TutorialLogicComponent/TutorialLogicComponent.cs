@@ -210,4 +210,9 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     {
         return Save.Contains(TutorialBuilder.FirstOrderStepIndex);
     }
+
+    public bool CheckMarket()
+    {
+        return Save.Contains(TutorialBuilder.LockMarketStepIndex);
+    }
 }

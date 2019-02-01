@@ -47,8 +47,10 @@ public class EnergyCurrencyLogicComponent : LimitCurrencyLogicComponent, IECSSys
         var save = ProfileService.Current.GetComponent<CurrencySaveComponent>(CurrencySaveComponent.ComponentGuid);
         
         if(save == null) return;
-        
-        var refill = DateTimeExtension.CountOfStepsPassedWhenAppWasInBackground(save.EnergyLastUpdate, delay, out Timer.StartTime);
+
+        DateTime startTime;
+        var refill = DateTimeExtension.CountOfStepsPassedWhenAppWasInBackground(save.EnergyLastUpdate, delay, out startTime);
+        Timer.StartTime = startTime;
         
         Add(Mathf.Min(refill, limitItem.Amount - targetItem.Amount));
 

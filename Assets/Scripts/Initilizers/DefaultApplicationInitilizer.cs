@@ -98,8 +98,9 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
     {
         ProfileService.Instance.Manager.UploadCurrentProfile();
 
-#if UNITY_EDITOR
         LocalNotificationsService.Current.ScheduleNotifications();
+#if UNITY_EDITOR
+        
         
         ProfileService.Instance.Manager.SaveLocalProfile();
         AssetDatabase.Refresh();
