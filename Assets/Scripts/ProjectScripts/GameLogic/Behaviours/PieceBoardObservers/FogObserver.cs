@@ -114,7 +114,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         var canPath = CanBeReached();
         var levelAccess = RequiredLevelReached();
         
-        if (((canPath ^ levelAccess) || Def.IsActive == false) && lockView == null)
+        if(lockView == null && (Def.IsActive && canPath ^ levelAccess) || Def.IsActive == false && canPath)
         {
             lockView = viewDef.AddView(ViewType.Lock) as LockView;
             lockView.Value = Def.IsActive ? level.ToString() : "?";
@@ -190,14 +190,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         return storageItem.Amount >= level;
     }
 
-    public bool IsActive
-    {
-        get
-        {
-            var canPath = CanBeReached();
-            return canPath || RequiredLevelReached();
-        }
-    }
+    public bool IsActive => CanBeReached() || (RequiredLevelReached() && Def.IsActive);
 
     public void Filling(int value)
     {
