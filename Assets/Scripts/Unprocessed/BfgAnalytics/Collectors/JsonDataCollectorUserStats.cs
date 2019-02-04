@@ -49,38 +49,35 @@ namespace BfgAnalytics
         private JSONNode GetTopPiecesInformation()
         {
             JSONNode node = new JSONObject();
+            var codex = GameDataService.Current.CodexManager;
+            var firstInChain = PieceType.GetIdsByFilter(PieceTypeFilter.Normal).Select(id => matchDefinition.GetFirst(id)).Distinct();
 
-            var pieces = BoardService.Current.FirstBoard.BoardLogic.BoardEntities.Values;
-            var validTypes = PieceType.GetIdsByFilter(PieceTypeFilter.Normal);
-            Dictionary<int, int> maxPieceTypes = new Dictionary<int, int>();
-            foreach (var piece in pieces)
+            foreach (var item in firstInChain)
             {
-                if (validTypes.Contains(piece.PieceType) == false)
-                    continue;
+                CodexChainState chainState; 
+                if(codex.GetChainState(item, out chainState) == false) continue;
 
-
-                var branchStart = matchDefinition.GetFirst(piece.PieceType);
-                var current = matchDefinition.GetIndexInChain(piece.PieceType) - 1;
-                if (PieceType.GetDefById(piece.PieceType).Filter.Has(PieceTypeFilter.Fake))
-                    current--;
-
-                if (maxPieceTypes.ContainsKey(branchStart) && maxPieceTypes[branchStart] >= current)
-                    continue;
-
-                maxPieceTypes[branchStart] = current;
-            }
-
-            foreach (var typeChainIndex in maxPieceTypes)
-            {
-                var beginTypeId = typeChainIndex.Key;
-                var maxInChainIndex = typeChainIndex.Value;
-                var maxInChainId = matchDefinition.GetChain(beginTypeId)[maxInChainIndex];
-                var maxInChain = PieceType.GetDefById(maxInChainId);
-                var pieceName = maxInChain.Abbreviations[0];
+                var chain = matchDefinition.GetChain(item);
+                var maxUnlockedResult = -1;
+                for (var i = chain.Count - 1; i >= 0; i--)
+                {
+                    var currentMaxElement = chain[i];
+                    if (chainState.Unlocked.Contains(currentMaxElement) ||
+                        chainState.PendingReward.Contains(currentMaxElement))
+                    {
+                        maxUnlockedResult = currentMaxElement;
+                        break;
+                    }
+                }
+                
+                if (maxUnlockedResult == -1) continue;
+                
+                var itemDef = PieceType.GetDefById(maxUnlockedResult);
+                var pieceName = itemDef.Abbreviations[0];
                 var chainName = Regex.Match(pieceName, @"^([A-Z]+)\d+").Groups[1].Value;
                 node[chainName] = pieceName;
             }
-            
+
             return node;
         }
     }

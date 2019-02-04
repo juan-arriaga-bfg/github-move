@@ -112,7 +112,8 @@ public class SellForCashManager: ECSEntity
         {
             ProvideReward(productId);
         }
-        
+
+        ProfileService.Current.GetComponent<BaseInformationSaveComponent>(BaseInformationSaveComponent.ComponentGuid).IsPayer = true;
         onComplete?.Invoke(true, productId);
         onComplete = null;
     }
@@ -138,7 +139,7 @@ public class SellForCashManager: ECSEntity
     public void Purchase(string productId, Action<bool, string> onComplete)
     {
         this.onComplete = onComplete;
-        ProfileService.Current.GetComponent<BaseInformationSaveComponent>(BaseInformationSaveComponent.ComponentGuid).IsPayer = true;
+        
         if (!NetworkUtils.CheckInternetConnection(true))
         {
             this.onComplete?.Invoke(false, productId);
