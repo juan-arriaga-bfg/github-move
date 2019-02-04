@@ -109,7 +109,7 @@ public class BfgIapProvider : IapProvider
         
         Debug.Log($"BfgIapProvider: OnRestoreSucceededCallback: for '{productId}'");
         
-        OnPurchaseOK?.Invoke(StoreIdToId(productId), null, true);
+        //OnPurchaseOK?.Invoke(StoreIdToId(productId), null, true);
 
         if (remainingToRestore <= 0)
         {

@@ -88,7 +88,7 @@ public class IapManager : ECSEntity, IIapManager
 
         iapProvider.OnPurchaseFail += OnPurchaseFailCallback;
         iapProvider.OnPurchaseOK += OnPurchaseOkCallback;
-        iapProvider.OnRestoreCompleted += OnOnRestoreCompletedCallback;
+        iapProvider.OnRestoreCompleted += OnRestoreCompletedCallback;
 
         return this;
     }
@@ -168,7 +168,7 @@ public class IapManager : ECSEntity, IIapManager
         OnPurchaseFail?.Invoke(productId, error);
     }
     
-    private void OnOnRestoreCompletedCallback(bool isOk)
+    private void OnRestoreCompletedCallback(bool isOk)
     {
         OnRestoreCompleted?.Invoke(isOk);
     }
@@ -596,7 +596,7 @@ public class IapManager : ECSEntity, IIapManager
         {
             iapProvider.OnPurchaseFail -= OnPurchaseFailCallback;
             iapProvider.OnPurchaseOK -= OnPurchaseOkCallback;
-            iapProvider.OnRestoreCompleted -= OnOnRestoreCompletedCallback;
+            iapProvider.OnRestoreCompleted -= OnRestoreCompletedCallback;
             iapProvider.CleanUp();
         }
     }
