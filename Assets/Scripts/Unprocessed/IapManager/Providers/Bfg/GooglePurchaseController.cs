@@ -39,6 +39,8 @@ public class GooglePurchaseController : APurchaseController
 		googleProductIds.AddRange (consumableGoogleProductIds);
 		googleProductIds.AddRange (nonConsumableGoogleProductIds);
 
+		bfgPurchaseAndroid.defineConsumableSKUs(nonConsumableGoogleProductIds);
+		
 		// Only add each notification observer once...in case the dev calls StartService multiple times.
 		// Shared notifications between all platforms
 		if (!NotificationCenter.Instance.HandlerSetHasObserver (purchase_succeeded, bfgCommon.NOTIFICATION_PURCHASE_SUCCEEDED)) {
@@ -131,7 +133,7 @@ public class GooglePurchaseController : APurchaseController
         
 		// consume the purchase if it is marked as a consumable product id
 		if (consumableGoogleProductIds.Contains (productId)) {
-			bfgPurchaseAndroid.consumePurchase (productId);
+			bfgPurchaseAndroid.finishPurchase(productId);
 		}
 		ProductInfo pi = GetProductInfo (productId);
 		OnPurchaseSucceeded (productId, pi);
@@ -140,21 +142,18 @@ public class GooglePurchaseController : APurchaseController
 	void purchase_failed (string productId)
 	{
         Debug.Log($"GooglePurchaseController: purchase_failed: {productId}");
-        
 		OnPurchaseFailed (productId);
 	}
 
 	void restore_succeeded (string productId)
 	{
         Debug.Log($"GooglePurchaseController: restore_succeeded: {productId}");
-        
-		Debug.Log ("Restore success for product: " + productId);
 		OnRestoreSucceeded (productId);
 	}
 
 	void restore_failed (string productId)
 	{
-		Debug.Log ("Restore failed for product: " + productId);
+		Debug.Log ("GooglePurchaseController: restore_failed for product: {productId}");
 		OnRestoreFailed (productId);
 	}
 
