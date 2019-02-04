@@ -92,14 +92,24 @@ public class ReproductionPieceView : PieceBoardElementView
         UpdateSate();
     }
 
+    public override void ToggleLockView(bool enabled)
+    {
+        base.ToggleLockView(enabled);
+        if (isLockVisual == false)
+        {
+            ToggleEffectsByState(false);
+        }
+    }
+
     protected virtual void ToggleEffectsByState(bool isProcessing)
     {
-        if(BoardService.Current.FirstBoard.TutorialLogic.CheckLockPR() == false) return;
+        if(BoardService.Current.FirstBoard.TutorialLogic.CheckLockPR() == false || isLockVisual) return;
+        
+        ClearParticle(ref processParticle);
+        ClearParticle(ref readyParticle);
         
         if (isProcessing)
-        {
-            ClearParticle(ref readyParticle);
-        
+        {    
             processParticle = ParticleView.Show(R.ProductionProcessParticle, Piece.CachedPosition);
             processParticle.transform.SetParent(transform);
             processParticle.transform.localPosition = Vector3.zero;
@@ -108,13 +118,11 @@ public class ReproductionPieceView : PieceBoardElementView
         }
         else
         {
-            ClearParticle(ref processParticle);
-        
             readyParticle = ParticleView.Show(R.ProductionReadyParticle, Piece.CachedPosition);
             readyParticle.transform.SetParent(transform);
             readyParticle.transform.localPosition = Vector3.zero;
         
-            PlayAndSyncParticle(readyParticle);   
+            PlayAndSyncParticle(readyParticle);
         }
     }
 
