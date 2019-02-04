@@ -6,15 +6,36 @@ public class RestoredPurchasesProvider : MonoBehaviour
     private void Start()
     {
         ScheduleProvide();
+
+        var service = IapService.Current;
         
-        IapService.Current.OnRestoreCompleted += OnRestoreCompleted;
+        service.OnRestoreCompleted += OnRestoreCompleted;
+
+        if (service.IsInitialized)
+        {
+            IapService.Current.RestorePurchases();
+        }
+        else
+        {
+            service.OnInitialized += OnServiceInitialized;
+        }
+    }
+
+    private void OnServiceInitialized()
+    {
+        var service = IapService.Current;
         
-        IapService.Current.RestorePurchases();
+        service.OnInitialized -= OnServiceInitialized;
+        
+        service.RestorePurchases();
     }
 
     private void OnDestroy()
     {
-        IapService.Current.OnRestoreCompleted -= OnRestoreCompleted; 
+        var service = IapService.Current;
+        
+        service.OnRestoreCompleted -= OnRestoreCompleted; 
+        service.OnInitialized -= OnServiceInitialized;
     }
 
     private void OnApplicationPause(bool isPaused)
@@ -73,6 +94,7 @@ public class RestoredPurchasesProvider : MonoBehaviour
                 model.OnClose = () =>
                 {
                     SellForCashService.Current.ProvideReward(id);
+                    ProfileService.Current.QueueComponent.RemoveAction(id); // For case if we have scheduled the action once again while Restore window is in progress
                 };
 
                 // model.OnCancel = model.OnAccept;
