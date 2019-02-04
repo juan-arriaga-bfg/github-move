@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class IapCollection
@@ -66,5 +67,10 @@ public class IapCollection
         }
 
         return storeIds[index];
+    }
+
+    public int GetConsumableCount()
+    {
+        return Defs.Count(e => e.Consumable);
     }
 }

@@ -6,6 +6,15 @@ public class RestoredPurchasesProvider : MonoBehaviour
     private void Start()
     {
         ScheduleProvide();
+        
+        IapService.Current.OnRestoreCompleted += OnRestoreCompleted;
+        
+        IapService.Current.RestorePurchases();
+    }
+
+    private void OnDestroy()
+    {
+        IapService.Current.OnRestoreCompleted -= OnRestoreCompleted; 
     }
 
     private void OnApplicationPause(bool isPaused)
@@ -18,10 +27,21 @@ public class RestoredPurchasesProvider : MonoBehaviour
         ScheduleProvide();
     }
 
+    private void OnRestoreCompleted(bool isOk)
+    {
+        ScheduleProvide();
+    }
+    
     private void ScheduleProvide()
     {
         var iapService = IapService.Current;
 
+        if (iapService == null)
+        {
+            Debug.LogWarning($"[RestoredPurchasesProvider] => ScheduleProvide: IapService.Current == null");
+            return;
+        }
+        
         if (iapService.PendingIaps.Count > 0)
         {
             Debug.Log($"[RestoredPurchasesProvider] => ScheduleProvide: {string.Join(" | ", iapService.PendingIaps.Keys.ToList())}");

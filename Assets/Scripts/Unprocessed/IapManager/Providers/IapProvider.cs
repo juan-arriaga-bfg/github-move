@@ -11,7 +11,7 @@ public abstract class IapProvider
         return this;
     }
     
-    public delegate void OnPurchaseOkDelegate(string productId, string receipt);
+    public delegate void OnPurchaseOkDelegate(string productId, string receipt, bool restore);
     public OnPurchaseOkDelegate OnPurchaseOK;
 
     public delegate void OnPurchaseFailDelegate(string productId, IapErrorCode errorCode);

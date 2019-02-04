@@ -104,11 +104,14 @@ public class SellForCashManager: ECSEntity
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
 
-    private void OnPurchaseOk(string productId, string receipt)
+    private void OnPurchaseOk(string productId, string receipt, bool restore)
     {
         UIWaitWindowView.Hide();
-        
-        ProvideReward(productId);
+
+        if (!restore) // Restore will be handled in RestoredPurchasesProvider
+        {
+            ProvideReward(productId);
+        }
         
         onComplete?.Invoke(true, productId);
         onComplete = null;
