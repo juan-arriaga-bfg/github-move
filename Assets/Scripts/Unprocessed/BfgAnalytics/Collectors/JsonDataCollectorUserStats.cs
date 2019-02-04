@@ -9,8 +9,23 @@ namespace BfgAnalytics
 {
     public class JsonDataCollectorUserStats : IJsonDataCollector
     {
-        private static MatchDefinitionComponent matchDefinition = new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
+        private MatchDefinitionComponent matchDefinition;
+        private List<int> firstInChains;
+        private Dictionary<int, string> chainNames;
+        private Regex chainNameRegex;
+        private int lastInstanceId = -1;
+        private JSONNode cachedNode;
         public string Name => "userstats";
+
+        public JsonDataCollectorUserStats()
+        {
+            matchDefinition = new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
+            firstInChains = PieceType.GetIdsByFilter(PieceTypeFilter.Normal)
+                                     .Select(id => matchDefinition.GetFirst(id)).Distinct().ToList();
+            
+            chainNames = new Dictionary<int, string>();
+            chainNameRegex = new Regex(@"^([A-Z]+)\d+");
+        }
 
         public JSONNode CollectData()
         {
@@ -48,11 +63,15 @@ namespace BfgAnalytics
 
         private JSONNode GetTopPiecesInformation()
         {
-            JSONNode node = new JSONObject();
             var codex = GameDataService.Current.CodexManager;
-            var firstInChain = PieceType.GetIdsByFilter(PieceTypeFilter.Normal).Select(id => matchDefinition.GetFirst(id)).Distinct();
-
-            foreach (var item in firstInChain)
+            var codexContent = codex.GetCodexContent();
+            if (lastInstanceId == codexContent.InstanceId)
+                return cachedNode;
+            
+            JSONNode node = new JSONObject();
+            lastInstanceId = codexContent.InstanceId;
+            
+            foreach (var item in firstInChains)
             {
                 CodexChainState chainState; 
                 if(codex.GetChainState(item, out chainState) == false) continue;
@@ -62,8 +81,7 @@ namespace BfgAnalytics
                 for (var i = chain.Count - 1; i >= 0; i--)
                 {
                     var currentMaxElement = chain[i];
-                    if (chainState.Unlocked.Contains(currentMaxElement) ||
-                        chainState.PendingReward.Contains(currentMaxElement))
+                    if (chainState.Unlocked.Contains(currentMaxElement))
                     {
                         maxUnlockedResult = currentMaxElement;
                         break;
@@ -74,11 +92,24 @@ namespace BfgAnalytics
                 
                 var itemDef = PieceType.GetDefById(maxUnlockedResult);
                 var pieceName = itemDef.Abbreviations[0];
-                var chainName = Regex.Match(pieceName, @"^([A-Z]+)\d+").Groups[1].Value;
+                var chainName = GetChainName(itemDef);
                 node[chainName] = pieceName;
             }
 
+            cachedNode = node;
             return node;
+        }
+
+        private string GetChainName(PieceTypeDef pieceDef)
+        {
+            if (chainNames.ContainsKey(pieceDef.Id))
+                return chainNames[pieceDef.Id];
+
+            var pieceName = pieceDef.Abbreviations[0];
+            var chainName = chainNameRegex.Match(pieceName).Groups[1].Value;
+            
+            chainNames[pieceDef.Id] = chainName;
+            return chainName;
         }
     }
 }
