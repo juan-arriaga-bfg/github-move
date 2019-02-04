@@ -128,21 +128,20 @@ namespace BfgAnalytics
                 {
 #if DEBUG
                     Debug.Log($"[BfgAnalyticsManager] => Event: category: {st1}, type:{st2}, name:{st3}, action: {action}, placeholder: {placeholder}, value: {value}, data: {jsonDataGroups.PrettyPrint()}");
-#if DEBUG_PRINT_SETS
+    #if DEBUG_PRINT_SETS
                     Debug.Log($"[BfgAnalyticsManager] => Data:\n{IdentJson(jsonData)}");
-#endif
+    #endif
 #endif
 
 #if !UNITY_EDITOR
-{
-                // Fields naming
-                // st1 - details1 - category
-                // st2 - details2 - type
-                // st3 - details3 - name
-                // n   - name     - action
-                // l   - placeholder    - placeholder
-                // v   - value    - value
-                bfgGameReporting.logCustomEventSerialized(action,value,placeholder,st1, st2, st3, jsonData);
+                    // Fields naming
+                    // st1 - details1 - category
+                    // st2 - details2 - type
+                    // st3 - details3 - name
+                    // n   - name     - action
+                    // l   - placeholder    - placeholder
+                    // v   - value    - value
+                    bfgGameReporting.logCustomEventSerialized(action,value,placeholder,st1, st2, st3, jsonData);
 #endif
                 }
             }
