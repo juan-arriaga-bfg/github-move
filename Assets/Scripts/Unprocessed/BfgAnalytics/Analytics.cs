@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using IW.SimpleJSON;
+using UnityEngine;
 
 namespace BfgAnalytics
 {
@@ -18,6 +19,11 @@ namespace BfgAnalytics
         public static JsonDataGroup DefaultJsonData()
         {
             return JsonDataGroup.Standart | JsonDataGroup.Userstats | JsonDataGroup.Balances | JsonDataGroup.Flags | JsonDataGroup.Story;
+        }
+
+        public static JsonDataGroup TutorialJsonData()
+        {
+            return JsonDataGroup.Standart;
         }
         
         /// <summary>
@@ -92,7 +98,19 @@ namespace BfgAnalytics
         {
             JSONNode transaction = new JSONObject();
             AnalyticsService.Current?.Event("progress", "level", level.ToString(), null, DefaultJsonData(), transaction);
-        }        
+        }
+
+        public static void SendTutorialStartStepEvent(string name)
+        {
+            Debug.LogError($"send TutorialStartStepEvent @{name}");
+            //AnalyticsService.Current?.Event("ftue", null, name, "start", TutorialJsonData());
+        }
+
+        public static void SendTutorialEndStepEvent(string name)
+        {
+            Debug.LogError($"send TutorialEndStepEvent @{name}");
+            //AnalyticsService.Current?.Event("ftue", null, name, "end", TutorialJsonData());
+        }
         
         public static void SendPurchase()
         {
