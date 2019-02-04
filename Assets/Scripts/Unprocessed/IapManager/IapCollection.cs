@@ -73,4 +73,9 @@ public class IapCollection
     {
         return Defs.Count(e => e.Consumable);
     }
+    
+    public int GetNonConsumableCount()
+    {
+        return Defs.Count(e => !e.Consumable);
+    }
 }

@@ -151,19 +151,26 @@ public class BfgIapProvider : IapProvider
     
     public override void RestorePurchases()
     {
-#if UNITY_IOS
-        throw new NotImplementedException();
-#endif
-        
         if (remainingToRestore > 0)
         {
             Debug.LogWarning($"BfgIapProvider: RestorePurchases: Already in progress for {remainingToRestore} products");
             return;
         }
-
-        remainingToRestore = IapCollection.GetConsumableCount();
         
-        bfgPurchaseAndroid.restorePurchase();
+#if UNITY_EDITOR
+        DOTween.Sequence()
+               .InsertCallback(UnityEngine.Random.Range(0f, 2f), () =>
+                {
+                    OnRestoreCompleted?.Invoke(true);
+                });   
+#elif UNITY_IOS
+        throw new NotImplementedException();
+#elif UNITY_ANDROID
+        remainingToRestore = PurchaseControllerProductIds.nonConsumableGoogleProductIds.Count;
+
+        //PurchaseController.Instance.RestorePurchase(); // Can't resolve symbol, lets use 'bfgPurchaseAndroid.restorePurchase' directly:  
+        bfgPurchaseAndroid.restorePurchase (PurchaseControllerProductIds.nonConsumableGoogleProductIds);
+#endif
     }
 
     public override string GetLocalizedPriceStr(string productId)
