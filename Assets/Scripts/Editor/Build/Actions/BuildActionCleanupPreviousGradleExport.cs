@@ -10,7 +10,12 @@ public class BuildActionCleanupPreviousGradleExport : IProjectBuildAction
     public void Execute(ProjectBuilder context)
     {
         string dir1 = context.BuildPath;
+        
+#if UNITY_EDITOR_WIN
+        string dir2 = Path.Combine(Path.GetTempPath(), "UnityBuildTemp");
+#else
         string dir2 = Application.dataPath.Replace("/Assets", "/TEMP_DIR");
+#endif
 
         List<string> dirs = new List<string>
         {

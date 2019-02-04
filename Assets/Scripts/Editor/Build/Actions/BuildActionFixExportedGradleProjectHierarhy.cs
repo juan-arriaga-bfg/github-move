@@ -10,7 +10,12 @@ public class BuildActionFixExportedGradleProjectHierarhy : IProjectBuildAction
     {
         string dst = context.BuildPath;
         string src = Path.Combine(dst, Application.productName);
+        
+#if UNITY_EDITOR_WIN
+        string tmp = Path.Combine(Path.GetTempPath(), "UnityBuildTemp");
+#else
         string tmp = Application.dataPath.Replace("/Assets", "/TEMP_DIR");
+#endif
         
         Debug.Log($"[BuildActionFixExportedGradleProjectHierarhy] => Final dir: {dst}, exported to (context.BuildPath): {src}, temp folder: {tmp}");
         
