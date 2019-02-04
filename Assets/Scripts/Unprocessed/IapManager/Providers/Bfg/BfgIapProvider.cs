@@ -109,6 +109,7 @@ public class BfgIapProvider : IapProvider
         
         Debug.Log($"BfgIapProvider: OnRestoreSucceededCallback: for '{productId}'");
         
+        // todo: handle non-consumable here?
         //OnPurchaseOK?.Invoke(StoreIdToId(productId), null, true);
 
         if (remainingToRestore <= 0)
@@ -162,7 +163,7 @@ public class BfgIapProvider : IapProvider
 
         remainingToRestore = IapCollection.GetConsumableCount();
         
-        bfgPurchase.restorePurchases();
+        bfgPurchaseAndroid.restorePurchase();
     }
 
     public override string GetLocalizedPriceStr(string productId)
