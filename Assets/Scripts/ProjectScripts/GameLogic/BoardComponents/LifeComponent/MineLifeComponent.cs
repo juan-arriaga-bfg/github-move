@@ -15,16 +15,50 @@ public class MineLifeComponent : WorkplaceLifeComponent
         def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).MineDef;
         
         TimerMain.Delay = def.Delay;
-        HP = def.Size;
+        HP = 2;//def.Size;
+        
+        TimerCooldown = new TimerComponent{Delay = def.Cooldown};
+        RegisterComponent(TimerCooldown);
     }
 
     protected override LifeSaveItem InitInSave(BoardPosition position)
     {
         var item = base.InitInSave(position);
+
+        if (item == null) return null;
+
+        if (item.IsStartCooldown)
+        {
+            TimerCooldown.Start(item.StartTimeCooldown);
+            return item;
+        }
         
-        if (item != null && item.IsStartTimer == false) Locker.Unlock(this);
+        if (item.IsStartTimer == false) Locker.Unlock(this);
         
         return item;
+    }
+    
+    public override LifeSaveItem Save()
+    {
+        var save = base.Save();
+        
+        if (save == null) return null;
+        
+        save.IsStartCooldown = TimerCooldown.IsExecuteable();
+        save.StartTimeCooldown = TimerCooldown.StartTimeLong;
+        
+        return save;
+    }
+    
+    public override bool Damage(bool isExtra = false)
+    {
+        if (TimerCooldown.IsExecuteable() == false) return base.Damage(isExtra);
+        
+        UIMessageWindowController.CreateTimerCompleteMessage(
+            LocalizationService.Get("window.timerComplete.message.production", "window.timerComplete.message.production"),
+            TimerCooldown);
+        
+        return false;
     }
     
     protected override Dictionary<int, int> GetRewards()
@@ -46,13 +80,12 @@ public class MineLifeComponent : WorkplaceLifeComponent
         if (isComplete)
         {
             AddResourceView.Show(StartPosition(), def.StepRewards);
-            
-            //if (IsDead) GameDataService.Current.MinesManager.Remove(def.Id);
+            if (IsDead) TimerCooldown.Start();
         }
         
         base.OnSpawnCurrencyRewards(isComplete);
     }
-
+    
     protected override void OnTimerComplete()
     {
         base.OnTimerComplete();

@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-public class MakingBuildingPieceView : BuildingPieceView
+﻿public class MakingBuildingPieceView : BuildingPieceView
 {
     private TimerComponent timer;
     
