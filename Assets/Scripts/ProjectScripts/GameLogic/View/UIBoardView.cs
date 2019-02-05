@@ -61,7 +61,7 @@ public class UIBoardView : BoardElementView
         UpdateVisibility(false);
         controller = Context.ViewDefinition;
         multiSize = GetMultiSize();
-        SetOfset();
+        SetOffset();
     }
 
     public override void ResetViewOnDestroy()
@@ -83,14 +83,14 @@ public class UIBoardView : BoardElementView
         group.alpha = 0;
     }
 
-    public virtual void SetOfset()
+    public virtual void SetOffset()
     {
         CachedTransform.localPosition = controller.GetViewPositionBottom(multiSize) + Offset;
     }
     
-    public void SetOfset(Vector3 ofset)
+    public void SetOffset(Vector3 value)
     {
-        CachedTransform.localPosition = ofset;
+        CachedTransform.localPosition = value;
     }
 
     public void Change(bool isShow)

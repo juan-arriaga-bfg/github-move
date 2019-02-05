@@ -93,7 +93,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         {
             if(view.IsShow == false) continue;
             
-            view.SetOfset();
+            view.SetOffset();
         }
 
         thisContext.Context.ActionExecutor.AddAction(new CallbackAction{Callback = controller =>
@@ -165,7 +165,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         element.Init(thisContext);
         element.Init(thisContext.Context.RendererContext);
         element.CachedTransform.SetParentAndReset(container.CachedTransform);
-        element.SetOfset();
+        element.SetOffset();
         element.SyncRendererLayers(pos);
         
         // var thisContextView = thisContext.Context.RendererContext.GetElementAt(thisContext.CachedPosition);

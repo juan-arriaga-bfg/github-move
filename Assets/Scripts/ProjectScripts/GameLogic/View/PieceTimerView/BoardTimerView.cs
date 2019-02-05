@@ -39,7 +39,7 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
         
         Offset = multiSize == 1 ? Offset : new Vector3(0, 1.3f);
         
-        SetOfset();
+        SetOffset();
         SetTimer(Context.GetComponent<TimerComponent>(TimerComponent.ComponentGuid));
         SetHourglass(false);
         

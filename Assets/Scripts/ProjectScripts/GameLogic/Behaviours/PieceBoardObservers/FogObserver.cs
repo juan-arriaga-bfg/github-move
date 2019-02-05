@@ -145,7 +145,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         
         if(bar.IsShow) return;
         
-        bar.SetOfset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
+        bar.SetOffset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
         bar.Priority = -1;
         bar.Change(true);
         
@@ -240,7 +240,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     private void OpenBubble()
     {
         bubble = viewDef.AddView(ViewType.Bubble) as BubbleView;
-        bubble.SetOfset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
+        bubble.SetOffset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
                 
         bubble.SetData(LocalizationService.Get("gameboard.bubble.message.fog", "gameboard.bubble.message.fog"),
             LocalizationService.Get("gameboard.bubble.button.fog", "gameboard.bubble.button.fog"), OnClick);
