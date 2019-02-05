@@ -2,19 +2,20 @@
 
 public class MineLifeComponent : WorkplaceLifeComponent
 {
-    private MineDef def;
+    private PieceMineDef def;
     
     public override CurrencyPair Energy => def.Price;
     public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.mine", "gameboard.bubble.message.mine\n{0}?"), DateTimeExtension.GetDelayText(def.Delay));
     public override string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.clear", "gameboard.bubble.button.clear {0}"), Energy.ToStringIcon());
     
-    public int MinePieceType { get; private set; }
-    
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
         
-        MinePieceType = Context.PieceType;
+        def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).MineDef;
+        
+        TimerMain.Delay = def.Delay;
+        HP = def.Size;
     }
 
     protected override LifeSaveItem InitInSave(BoardPosition position)
@@ -24,27 +25,6 @@ public class MineLifeComponent : WorkplaceLifeComponent
         if (item != null && item.IsStartTimer == false) Locker.Unlock(this);
         
         return item;
-    }
-
-    public override void OnAddToBoard(BoardPosition position, Piece context = null)
-    {
-        var key = new BoardPosition(position.X, position.Y);
-
-        if (def == null) def = GameDataService.Current.MinesManager.GetInitialDef(key);
-        else GameDataService.Current.MinesManager.Move(def.Id, key);
-        
-        TimerMain.Delay = def.Delay;
-        HP = def.Size;
-        
-        base.OnAddToBoard(position, context);
-    }
-
-    public override void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
-    {
-        base.OnMovedFromToFinish(@from, to, context);
-        
-        var key = new BoardPosition(to.X, to.Y);
-        GameDataService.Current.MinesManager.Move(def.Id, key);
     }
     
     protected override Dictionary<int, int> GetRewards()
@@ -67,7 +47,7 @@ public class MineLifeComponent : WorkplaceLifeComponent
         {
             AddResourceView.Show(StartPosition(), def.StepRewards);
             
-            if (IsDead) GameDataService.Current.MinesManager.Remove(def.Id);
+            //if (IsDead) GameDataService.Current.MinesManager.Remove(def.Id);
         }
         
         base.OnSpawnCurrencyRewards(isComplete);

@@ -51,7 +51,7 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
         {
             "Simple A", "Simple B", "Simple C", "Simple D",
             "Ingredient A", "Ingredient B", "Ingredient C", "Ingredient D", "Ingredient E", "Ingredient F", "Ingredient G",
-            "Chests", "Currencies", "Obstacles", "Boosters", "Characters",
+            "Chests", "Currencies", "Obstacles", "Mines", "Boosters", "Characters",
         };
         
         Fill(UpdateTabsEntities(filters), tabsPanel);

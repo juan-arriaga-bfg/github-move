@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PiecesReproductionDataManager : IECSComponent, IDataManager, IDataLoader<List<PieceReproductionDef>>
+public class PiecesMineDataManager : IECSComponent, IDataManager, IDataLoader<List<PieceMineDef>>
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
 	public int Guid => ComponentGuid;
@@ -20,10 +20,10 @@ public class PiecesReproductionDataManager : IECSComponent, IDataManager, IDataL
 	
 	public void Reload()
 	{
-		LoadData(new ResourceConfigDataMapper<List<PieceReproductionDef>>("configs/piecesReproduction.data", NSConfigsSettings.Instance.IsUseEncryption));
+		LoadData(new ResourceConfigDataMapper<List<PieceMineDef>>("configs/piecesMine.data", NSConfigsSettings.Instance.IsUseEncryption));
 	}
-
-	public void LoadData(IDataMapper<List<PieceReproductionDef>> dataMapper)
+	
+	public void LoadData(IDataMapper<List<PieceMineDef>> dataMapper)
 	{
 		dataMapper.LoadData((data, error)=> 
 		{
@@ -35,10 +35,7 @@ public class PiecesReproductionDataManager : IECSComponent, IDataManager, IDataL
                     
 					if(baseDef == null) continue;
 
-					baseDef.ReproductionDef = def;
-					
-					var typeDef = PieceType.GetDefById(def.Id);
-					typeDef.Filter = typeDef.Filter.Add(PieceTypeFilter.Reproduction);
+					baseDef.MineDef = def;
 				}
 			}
 			else

@@ -62,15 +62,9 @@ public class CollapseFogToAction : IBoardAction
             {
                 foreach (var pos in piece.Value)
                 {
-                    var pieceId = GameDataService.Current.MinesManager.GetMineTypeById(piece.Key);
+                    var pieceId = PieceType.Parse(piece.Key);
 
-                    if (pieceId == PieceType.None.Id)
-                    {
-                        pieceId = PieceType.Parse(piece.Key);
-                    }
-
-                    if (pieceId == PieceType.Empty.Id || pieceId == PieceType.None.Id)
-                        pieceId = PieceType.LockedEmpty.Id;
+                    if (pieceId == PieceType.Empty.Id || pieceId == PieceType.None.Id) pieceId = PieceType.LockedEmpty.Id;
                     
                     addedPieces.Add(new BoardPosition(pos.X, pos.Y, FogObserver.Context.Layer.Index), pieceId);
                 }

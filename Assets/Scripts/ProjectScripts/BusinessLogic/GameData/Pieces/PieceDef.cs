@@ -2,8 +2,9 @@
 
 public class PieceDef : SimplePieceDef
 {
-    public PiecesReproductionDef ReproductionDef;
-    public PiecesMakingDef MakingDef;
+    public PieceReproductionDef ReproductionDef;
+    public PieceMakingDef MakingDef;
+    public PieceMineDef MineDef;
     
     public string Name => LocalizationService.Get($"piece.name.{Uid}", $"piece.name.{Uid}");
     

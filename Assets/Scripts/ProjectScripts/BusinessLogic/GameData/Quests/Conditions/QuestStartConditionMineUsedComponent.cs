@@ -12,30 +12,24 @@ public sealed class QuestStartConditionMineUsedComponent : QuestStartConditionCo
     public override int Guid => ComponentGuid;
     
     [JsonProperty] public string MineUid { get; protected set; }
+
+    private int pieceId;
     
     [OnDeserialized]
     internal void OnDeserialized(StreamingContext context)
     {
         MineUid = Value;
+        pieceId = PieceType.Parse(MineUid);
     }
 
     public override bool Check()
     {
-        BoardPosition pos;
-        bool isOk = GameDataService.Current.MinesManager.GetMinePositionByUid(MineUid, out pos);
-        if (!isOk)
-        {
-            // Assume that mine was removed
-            
-            // Debug.Log($"[QuestStartConditionMineUsedComponent] => Check: {MineUid} removed, return true");
-            return true;
-        }
-        
         var board = BoardService.Current.FirstBoard;
-        
-        pos.Z = BoardLayer.Piece.Layer;
+        var positions = board.BoardLogic.PositionsCache.GetPiecePositionsByType(pieceId);
 
-        var piece = board.BoardLogic.GetPieceAt(pos);
+        if (positions.Count == 0) return false;
+        
+        var piece = board.BoardLogic.GetPieceAt(positions[0]);
         if (piece == null)
         {
             // Debug.LogError($"[QuestStartConditionMineUsedComponent] => Check: Piece instance not found for MineUid {MineUid} at {pos}");
@@ -49,7 +43,7 @@ public sealed class QuestStartConditionMineUsedComponent : QuestStartConditionCo
             return false;
         }
 
-        bool isDamaged = life.Current > 0;
+        var isDamaged = life.Current > 0;
         // Debug.Log($"[QuestStartConditionMineUsedComponent] => Check: {MineUid} health: {life.HP - life.Current}/{life.HP}, return {isDamaged}");
         
         return isDamaged;

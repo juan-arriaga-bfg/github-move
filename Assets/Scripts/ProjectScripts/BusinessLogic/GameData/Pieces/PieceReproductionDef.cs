@@ -1,4 +1,4 @@
-﻿public class PiecesReproductionDef : SimplePieceDef
+﻿public class PieceReproductionDef : SimplePieceDef
 {
     public int Limit;
     public string Obstacle;

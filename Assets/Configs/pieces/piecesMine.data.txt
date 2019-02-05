@@ -1,7 +1,6 @@
 ﻿[
   {
-    "Uid": "Mine 1",
-    "Skin": "MN_B",
+    "Uid": "MN_B",
     "Cooldown": 100,
     "Delay": 45,
     "Size": 20,
@@ -28,49 +27,13 @@
         "Currency": "Hard1",
         "Amount": 1
       }
-    ],
-    "Position": {
-      "X": 14,
-      "Y": 6
-    }
-  },
-  {
-    "Uid": "Mine 2",
-    "Skin": "MN_B",
-    "Cooldown": 200,
-    "Delay": 55,
-    "Size": 15,
-    "Price": {
-      "Currency": "Energy",
-      "Amount": 10
-    },
-    "Reward": {
-      "Currency": "CH1_B",
-      "Amount": 1
-    },
-    "StepRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 25
-      }
-    ],
-    "LastRewards": [
-      {
-        "Currency": "Soft1",
-        "Amount": 4
-      },
-      {
-        "Currency": "Hard1",
-        "Amount": 1
-      }
     ]
   },
   {
-    "Uid": "Mine 3",
-    "Skin": "MN_C",
+    "Uid": "MN_C",
     "Cooldown": 300,
     "Delay": 90,
-    "Size": 17,
+    "Size": 20,
     "Price": {
       "Currency": "Energy",
       "Amount": 15
@@ -97,42 +60,10 @@
     ]
   },
   {
-    "Uid": "Mine 4",
-    "Skin": "MN_B",
-    "Cooldown": 400,
-    "Delay": 120,
-    "Size": 15,
-    "Price": {
-      "Currency": "Energy",
-      "Amount": 15
-    },
-    "Reward": {
-      "Currency": "CH1_B",
-      "Amount": 1
-    },
-    "StepRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 20
-      }
-    ],
-    "LastRewards": [
-      {
-        "Currency": "Soft1",
-        "Amount": 5
-      },
-      {
-        "Currency": "Hard1",
-        "Amount": 1
-      }
-    ]
-  },
-  {
-    "Uid": "Mine 5",
-    "Skin": "MN_D",
+    "Uid": "MN_D",
     "Cooldown": 500,
     "Delay": 120,
-    "Size": 15,
+    "Size": 20,
     "Price": {
       "Currency": "Energy",
       "Amount": 100

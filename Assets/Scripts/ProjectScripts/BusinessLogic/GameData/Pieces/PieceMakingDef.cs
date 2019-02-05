@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public class PiecesMakingDef : SimplePieceDef
+public class PieceMakingDef : SimplePieceDef
 {
 	public int PieceAmount;
 	public CurrencyPair Price;
