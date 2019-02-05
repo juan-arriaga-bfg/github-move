@@ -1,4 +1,8 @@
-﻿public class BaseTutorialStep : ECSEntity
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BaseTutorialStep : ECSEntity
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
@@ -16,10 +20,18 @@
 
 	public bool IsAnyStartCondition;
 	public bool IsAnyCompleteCondition;
+
+	public Action OnStart;
+	public Action OnComplete;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
 		Context = entity as TutorialLogicComponent;
+	}
+
+	public override void OnUnRegisterEntity(ECSEntity entity)
+	{
+		base.OnUnRegisterEntity(entity);
 	}
 
 	public bool IsStart()
@@ -27,10 +39,15 @@
 		if (isStart) return true;
 
 		isStart = Check(TutorialConditionType.Start);
+
+		if (isStart)
+		{
+			OnStart?.Invoke();
+		}
 		
 		return isStart;
 	}
-
+	
 	public virtual void PauseOn()
 	{
 	}
@@ -50,6 +67,7 @@
 
 	protected virtual void Complete()
 	{
+		OnComplete?.Invoke();
 		StartAnimation(TutorialAnimationType.Complete);
 	}
 	

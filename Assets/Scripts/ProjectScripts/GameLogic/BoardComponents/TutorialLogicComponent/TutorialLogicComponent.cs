@@ -136,8 +136,6 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
 
             if (!condition.IsComplete()) continue;
             
-            OnStepEnd(condition);
-            
             UnRegisterComponent(condition);
             components.Remove(condition);
             Save.Add(condition.Id);
@@ -148,43 +146,9 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             var condition = (BaseTutorialStep) components[i];
             
             if(condition.IsStart() == false) continue;
-
+            
             condition.Perform();
         }
-    }
-
-    private Dictionary<int, string> tutorNames = new Dictionary<int, string>()
-    {
-        [0] = "merge_1",
-        [1] = "merge_2",
-        [2]= "createprc4_1",
-        [3]= "createprc4_2",
-        [4]= "openfog",
-        [5]= "choptree",
-        [6]= "create3a2",
-        [7]= "harvest",
-        [8]= "ingredients",
-        [9]= "boostcr",
-        [10]= "instantworker",
-    };
-    private string GetTutorNameByStepId(int stepId)
-    {
-        if (tutorNames.ContainsKey(stepId))
-            return tutorNames[stepId];
-        return null;
-    }
-    private void OnStepStart(BaseTutorialStep step)
-    {
-        var name = GetTutorNameByStepId(step.Id);
-        Debug.LogError($"step with id: {step.Id} and name '{name}' started");
-    }
-
-    private void OnStepEnd(BaseTutorialStep step)
-    {
-        var name = GetTutorNameByStepId(step.Id);
-        if (string.IsNullOrEmpty(name))
-            return;
-        Debug.LogError($"step with id: {step.Id} and name '{name}' completed");
     }
     
     public void LockAll()
