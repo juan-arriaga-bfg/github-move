@@ -188,11 +188,13 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
 
     public bool IsActive => CanBeReached() || (RequiredLevelReached() && Def.IsActive);
 
-    public void Filling(int value)
+    public void Filling(int value, out int change)
     {
         Action onComplete = null;
+        var target = Def.Condition.Amount - AlreadyPaid.Amount;
         
-        AlreadyPaid.Amount += Mathf.Clamp(value, 0, Def.Condition.Amount - AlreadyPaid.Amount);
+        change = value - target;
+        AlreadyPaid.Amount += Mathf.Clamp(value, 0, target);
 
         if (CanBeFilled() == false)
         {

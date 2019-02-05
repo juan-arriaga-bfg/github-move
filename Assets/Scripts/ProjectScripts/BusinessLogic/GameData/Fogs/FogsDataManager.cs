@@ -322,7 +322,35 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         
         if (observer == null || observer.IsRemoved || observer.CanBeFilled() == false || observer.CanBeCleared() == false) return false;
         
-        observer.Filling(def.SpawnResources.Amount);
+        observer.Filling(def.SpawnResources.Amount, out var balance);
+
+        if (balance <= 0) return true;
+
+        var pieces = CurrencyHelper.CurrencyToResourcePieces(balance, Currency.Mana.Name);
+
+        if (pieces.Count == 0) return true;
+
+        const int max = 2;
+        var current = 0;
+        var result = new Dictionary<int, int>();
+
+        foreach (var pair in pieces)
+        {
+            if(current == max) break;
+            
+            var value = Mathf.Clamp(pair.Value, 0, max - current);
+            
+            current += value;
+            result.Add(pair.Key, value);
+        }
+        
+        piece.Context.ActionExecutor.AddAction(new SpawnRewardPiecesAction
+        {
+            From = targetPosition,
+            Pieces = result,
+            EnabledTopHighlight = true,
+            EnabledBottomHighlight = true
+        });
         
         return true;
     }
