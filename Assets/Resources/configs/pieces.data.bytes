@@ -246,6 +246,33 @@
     ]
   },
   {
+    "Uid": "MN_B",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_C",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "MN_D",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
+      }
+    ]
+  },
+  {
     "Uid": "Hard1",
     "SpawnResources": {
       "Currency": "Crystals",
@@ -513,63 +540,6 @@
     ]
   },
   {
-    "Uid": "Mana4",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 25
-      }
-    ],
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 250
-    },
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 7
-      }
-    ]
-  },
-  {
-    "Uid": "Mana5",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 50
-      }
-    ],
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 1000
-    },
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 10
-      }
-    ]
-  },
-  {
-    "Uid": "Mana6",
-    "CreateRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 110
-      }
-    ],
-    "SpawnResources": {
-      "Currency": "Mana",
-      "Amount": 3500
-    },
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 15
-      }
-    ]
-  },
-  {
     "Uid": "CH_Free",
     "UnlockBonus": [
       {
@@ -593,10 +563,6 @@
       {
         "Currency": "Experience",
         "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
       }
     ],
     "UnlockBonus": [
@@ -611,10 +577,6 @@
     "CreateRewards": [
       {
         "Currency": "Experience",
-        "Amount": 3
-      },
-      {
-        "Currency": "Mana",
         "Amount": 3
       }
     ],
@@ -640,10 +602,6 @@
       {
         "Currency": "Experience",
         "Amount": 5
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
       }
     ],
     "UnlockBonus": [
@@ -658,10 +616,6 @@
     "CreateRewards": [
       {
         "Currency": "Experience",
-        "Amount": 15
-      },
-      {
-        "Currency": "Mana",
         "Amount": 15
       }
     ],
@@ -687,10 +641,6 @@
       {
         "Currency": "Experience",
         "Amount": 5
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
       }
     ],
     "UnlockBonus": [
@@ -705,10 +655,6 @@
     "CreateRewards": [
       {
         "Currency": "Experience",
-        "Amount": 15
-      },
-      {
-        "Currency": "Mana",
         "Amount": 15
       }
     ],
@@ -734,10 +680,6 @@
       {
         "Currency": "Experience",
         "Amount": 10
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 10
       }
     ],
     "UnlockBonus": [
@@ -752,10 +694,6 @@
     "CreateRewards": [
       {
         "Currency": "Experience",
-        "Amount": 25
-      },
-      {
-        "Currency": "Mana",
         "Amount": 25
       }
     ],
@@ -781,10 +719,6 @@
       {
         "Currency": "Experience",
         "Amount": 10
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 10
       }
     ],
     "UnlockBonus": [
@@ -799,10 +733,6 @@
     "CreateRewards": [
       {
         "Currency": "Experience",
-        "Amount": 25
-      },
-      {
-        "Currency": "Mana",
         "Amount": 25
       }
     ],
@@ -832,10 +762,6 @@
       {
         "Currency": "Experience",
         "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
       }
     ],
     "UnlockBonus": [
@@ -855,10 +781,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana",
         "Amount": 2
       }
     ],
@@ -880,10 +802,6 @@
       {
         "Currency": "Experience",
         "Amount": 3
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 3
       }
     ],
     "UnlockBonus": [
@@ -903,10 +821,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 5
-      },
-      {
-        "Currency": "Mana",
         "Amount": 5
       }
     ],
@@ -928,10 +842,6 @@
       {
         "Currency": "Experience",
         "Amount": 10
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 10
       }
     ],
     "UnlockBonus": [
@@ -951,10 +861,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 15
-      },
-      {
-        "Currency": "Mana",
         "Amount": 15
       }
     ],
@@ -976,10 +882,6 @@
       {
         "Currency": "Experience",
         "Amount": 25
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 25
       }
     ],
     "UnlockBonus": [
@@ -999,10 +901,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 50
-      },
-      {
-        "Currency": "Mana",
         "Amount": 50
       }
     ],
@@ -1032,10 +930,6 @@
       {
         "Currency": "Experience",
         "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
       }
     ],
     "UnlockBonus": [
@@ -1055,10 +949,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana",
         "Amount": 2
       }
     ],
@@ -1080,10 +970,6 @@
       {
         "Currency": "Experience",
         "Amount": 3
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
       }
     ],
     "UnlockBonus": [
@@ -1103,10 +989,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 5
-      },
-      {
-        "Currency": "Mana",
         "Amount": 5
       }
     ],
@@ -1128,10 +1010,6 @@
       {
         "Currency": "Experience",
         "Amount": 10
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 10
       }
     ],
     "UnlockBonus": [
@@ -1151,10 +1029,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 25
-      },
-      {
-        "Currency": "Mana",
         "Amount": 25
       }
     ],
@@ -1176,10 +1050,6 @@
       {
         "Currency": "Experience",
         "Amount": 50
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 50
       }
     ],
     "UnlockBonus": [
@@ -1199,10 +1069,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 75
-      },
-      {
-        "Currency": "Mana",
         "Amount": 75
       }
     ],
@@ -1224,10 +1090,6 @@
       {
         "Currency": "Experience",
         "Amount": 100
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 100
       }
     ],
     "UnlockBonus": [
@@ -1247,10 +1109,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 125
-      },
-      {
-        "Currency": "Mana",
         "Amount": 125
       }
     ],
@@ -1280,10 +1138,6 @@
       {
         "Currency": "Experience",
         "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
       }
     ],
     "UnlockBonus": [
@@ -1303,10 +1157,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana",
         "Amount": 2
       }
     ],
@@ -1328,10 +1178,6 @@
       {
         "Currency": "Experience",
         "Amount": 5
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
       }
     ],
     "UnlockBonus": [
@@ -1351,10 +1197,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 15
-      },
-      {
-        "Currency": "Mana",
         "Amount": 15
       }
     ],
@@ -1376,10 +1218,6 @@
       {
         "Currency": "Experience",
         "Amount": 25
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 25
       }
     ],
     "UnlockBonus": [
@@ -1399,10 +1237,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 50
-      },
-      {
-        "Currency": "Mana",
         "Amount": 50
       }
     ],
@@ -1424,10 +1258,6 @@
       {
         "Currency": "Experience",
         "Amount": 75
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 75
       }
     ],
     "UnlockBonus": [
@@ -1447,10 +1277,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 100
-      },
-      {
-        "Currency": "Mana",
         "Amount": 100
       }
     ],
@@ -1480,10 +1306,6 @@
       {
         "Currency": "Experience",
         "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
       }
     ],
     "UnlockBonus": [
@@ -1503,10 +1325,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 2
-      },
-      {
-        "Currency": "Mana",
         "Amount": 2
       }
     ],
@@ -1528,10 +1346,6 @@
       {
         "Currency": "Experience",
         "Amount": 5
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 5
       }
     ],
     "UnlockBonus": [
@@ -1551,10 +1365,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 15
-      },
-      {
-        "Currency": "Mana",
         "Amount": 15
       }
     ],
@@ -1576,10 +1386,6 @@
       {
         "Currency": "Experience",
         "Amount": 25
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 25
       }
     ],
     "UnlockBonus": [
@@ -1599,10 +1405,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 50
-      },
-      {
-        "Currency": "Mana",
         "Amount": 50
       }
     ],
@@ -1624,10 +1426,6 @@
       {
         "Currency": "Experience",
         "Amount": 75
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 75
       }
     ],
     "UnlockBonus": [
@@ -1647,10 +1445,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 100
-      },
-      {
-        "Currency": "Mana",
         "Amount": 100
       }
     ],
@@ -1680,10 +1474,6 @@
       {
         "Currency": "Experience",
         "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
       }
     ],
     "UnlockBonus": [
@@ -1703,10 +1493,6 @@
       {
         "Currency": "Experience",
         "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 2
       }
     ],
     "UnlockBonus": [
@@ -1725,10 +1511,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 3
-      },
-      {
-        "Currency": "Mana",
         "Amount": 3
       }
     ],
@@ -1771,10 +1553,6 @@
       {
         "Currency": "Experience",
         "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
       }
     ],
     "UnlockBonus": [
@@ -1794,10 +1572,6 @@
       {
         "Currency": "Experience",
         "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 2
       }
     ],
     "UnlockBonus": [
@@ -1816,10 +1590,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 3
-      },
-      {
-        "Currency": "Mana",
         "Amount": 3
       }
     ],
@@ -1862,10 +1632,6 @@
       {
         "Currency": "Experience",
         "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
       }
     ],
     "UnlockBonus": [
@@ -1885,10 +1651,6 @@
       {
         "Currency": "Experience",
         "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 2
       }
     ],
     "UnlockBonus": [
@@ -1907,10 +1669,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 3
-      },
-      {
-        "Currency": "Mana",
         "Amount": 3
       }
     ],
@@ -1953,10 +1711,6 @@
       {
         "Currency": "Experience",
         "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
       }
     ],
     "UnlockBonus": [
@@ -1976,10 +1730,6 @@
       {
         "Currency": "Experience",
         "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 2
       }
     ],
     "UnlockBonus": [
@@ -1998,10 +1748,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 3
-      },
-      {
-        "Currency": "Mana",
         "Amount": 3
       }
     ],
@@ -2044,10 +1790,6 @@
       {
         "Currency": "Experience",
         "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
       }
     ],
     "UnlockBonus": [
@@ -2067,10 +1809,6 @@
       {
         "Currency": "Experience",
         "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 2
       }
     ],
     "UnlockBonus": [
@@ -2089,10 +1827,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 3
-      },
-      {
-        "Currency": "Mana",
         "Amount": 3
       }
     ],
@@ -2135,10 +1869,6 @@
       {
         "Currency": "Experience",
         "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
       }
     ],
     "UnlockBonus": [
@@ -2158,10 +1888,6 @@
       {
         "Currency": "Experience",
         "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 2
       }
     ],
     "UnlockBonus": [
@@ -2180,10 +1906,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 3
-      },
-      {
-        "Currency": "Mana",
         "Amount": 3
       }
     ],
@@ -2226,10 +1948,6 @@
       {
         "Currency": "Experience",
         "Amount": 1
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 1
       }
     ],
     "UnlockBonus": [
@@ -2249,10 +1967,6 @@
       {
         "Currency": "Experience",
         "Amount": 2
-      },
-      {
-        "Currency": "Mana",
-        "Amount": 2
       }
     ],
     "UnlockBonus": [
@@ -2271,10 +1985,6 @@
       },
       {
         "Currency": "Experience",
-        "Amount": 3
-      },
-      {
-        "Currency": "Mana",
         "Amount": 3
       }
     ],
