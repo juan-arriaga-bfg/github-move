@@ -160,6 +160,26 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
                     continue;
                 }
 
+                if (attr.ConditionTypes != null)
+                {
+                    bool conditionFailed = false;
+                    foreach (Type conditionType in attr.ConditionTypes)
+                    {
+                        object condInstance = Activator.CreateInstance(conditionType);
+                        ITaskHighlightCondition cond = condInstance as ITaskHighlightCondition;
+                        if (cond == null || !cond.Check(this))
+                        {
+                            conditionFailed = true;
+                            break;
+                        }
+                    }
+
+                    if (conditionFailed)
+                    {
+                        continue;
+                    }
+                }
+
                 var hlType = attr.HighlightType;
                 object hlInstance = Activator.CreateInstance(hlType);
                 ITaskHighlight hl = hlInstance as ITaskHighlight;
