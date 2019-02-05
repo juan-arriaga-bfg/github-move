@@ -97,7 +97,11 @@ public class AreaAccessControllerComponent:ECSEntity
     {
         if (basePoints == null || basePoints.Count == 0)
         {
-            basePoints = InitAvailiable(board) ?? DetectBasePoints(board);
+            basePoints = InitAvailiable(board);
+            if (basePoints == null || basePoints.Count == 0)
+            {
+                basePoints = DetectBasePoints(board);
+            }
         }
           
         
