@@ -336,7 +336,11 @@ public static class TutorialBuilder
             }
             case 23: // free chest tutorial
             {
-                step = new MarketTutorialStep();
+                step = new MarketTutorialStep
+                {
+                    OnStart = () => Analytics.SendTutorialStartStepEvent("market"),
+                    OnComplete = () => Analytics.SendTutorialEndStepEvent("market"),
+                };
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "21_OpenChest", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckPieceTutorialCondition {Target = PieceType.CH_Free.Id, Amount = 1, ConditionType = TutorialConditionType.Complete}, true);
