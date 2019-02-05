@@ -2,6 +2,7 @@
   {
     "Uid": "Mine 1",
     "Skin": "MN_B",
+    "Cooldown": 100,
     "Delay": 45,
     "Size": 20,
     "Price": {
@@ -21,11 +22,11 @@
     "LastRewards": [
       {
         "Currency": "Soft1",
-        "Amount": 10
+        "Amount": 3
       },
       {
         "Currency": "Hard1",
-        "Amount": 5
+        "Amount": 1
       }
     ],
     "Position": {
@@ -36,6 +37,7 @@
   {
     "Uid": "Mine 2",
     "Skin": "MN_B",
+    "Cooldown": 200,
     "Delay": 55,
     "Size": 15,
     "Price": {
@@ -55,17 +57,18 @@
     "LastRewards": [
       {
         "Currency": "Soft1",
-        "Amount": 10
+        "Amount": 4
       },
       {
         "Currency": "Hard1",
-        "Amount": 5
+        "Amount": 1
       }
     ]
   },
   {
     "Uid": "Mine 3",
     "Skin": "MN_C",
+    "Cooldown": 300,
     "Delay": 90,
     "Size": 17,
     "Price": {
@@ -85,17 +88,18 @@
     "LastRewards": [
       {
         "Currency": "Soft1",
-        "Amount": 10
+        "Amount": 5
       },
       {
         "Currency": "Hard1",
-        "Amount": 5
+        "Amount": 1
       }
     ]
   },
   {
     "Uid": "Mine 4",
     "Skin": "MN_B",
+    "Cooldown": 400,
     "Delay": 120,
     "Size": 15,
     "Price": {
@@ -103,7 +107,7 @@
       "Amount": 15
     },
     "Reward": {
-      "Currency": "CH1_D",
+      "Currency": "CH1_B",
       "Amount": 1
     },
     "StepRewards": [
@@ -115,11 +119,42 @@
     "LastRewards": [
       {
         "Currency": "Soft1",
-        "Amount": 10
+        "Amount": 5
       },
       {
         "Currency": "Hard1",
+        "Amount": 1
+      }
+    ]
+  },
+  {
+    "Uid": "Mine 5",
+    "Skin": "MN_D",
+    "Cooldown": 500,
+    "Delay": 120,
+    "Size": 15,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 100
+    },
+    "Reward": {
+      "Currency": "CH3_D",
+      "Amount": 1
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 120
+      }
+    ],
+    "LastRewards": [
+      {
+        "Currency": "Soft1",
         "Amount": 5
+      },
+      {
+        "Currency": "Hard1",
+        "Amount": 1
       }
     ]
   }

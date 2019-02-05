@@ -9,6 +9,8 @@ public class MineDef
     public string Uid { get; set; }
     public string Skin { get; set; }
     public int Delay { get; set; }
+    
+    public int Cooldown { get; set; }
     public int Size { get; set; }
     
     public CurrencyPair Price { get; set; }
