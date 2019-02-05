@@ -9,6 +9,8 @@
  * Attribution is not required, but it is always welcomed!
  * -------------------------------------*/
 
+#if UNITY_EDITOR
+
 using System;
 using UnityEngine;
 using System.Collections.Generic;
@@ -656,3 +658,5 @@ namespace Tayx.Graphy
         #endregion
     }
 }
+
+#endif
