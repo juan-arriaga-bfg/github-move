@@ -6,7 +6,9 @@ public class MineLifeComponent : WorkplaceLifeComponent
     
     public override CurrencyPair Energy => def.Price;
     public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.mine", "gameboard.bubble.message.mine\n{0}?"), DateTimeExtension.GetDelayText(def.Delay));
-    public override string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.clear", "gameboard.bubble.button.clear {0}"), Energy.ToStringIcon());
+    public override string Price => TimerCooldown.IsExecuteable()
+        ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), TimerMain.CompleteTime.GetTimeLeftText())
+        : string.Format(LocalizationService.Get("gameboard.bubble.button.clear", "gameboard.bubble.button.clear {0}"), Energy.ToStringIcon());
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -60,7 +62,11 @@ public class MineLifeComponent : WorkplaceLifeComponent
         
         return false;
     }
-    
+
+    protected override void OnComplete()
+    {
+    }
+
     protected override Dictionary<int, int> GetRewards()
     {
         var pieces = new Dictionary<int, int> {{PieceType.Parse(def.Reward.Currency), def.Reward.Amount}};
@@ -80,7 +86,12 @@ public class MineLifeComponent : WorkplaceLifeComponent
         if (isComplete)
         {
             AddResourceView.Show(StartPosition(), def.StepRewards);
-            if (IsDead) TimerCooldown.Start();
+            
+            if (IsDead)
+            {
+                TimerCooldown.Start();
+                current = 0;
+            }
         }
         
         base.OnSpawnCurrencyRewards(isComplete);
