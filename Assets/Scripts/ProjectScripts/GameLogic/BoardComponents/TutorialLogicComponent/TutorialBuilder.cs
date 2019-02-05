@@ -236,7 +236,9 @@ public static class TutorialBuilder
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Hard}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "3_KillTree", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "3_KillTree", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
