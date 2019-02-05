@@ -214,8 +214,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         {
             var fogDef = pair.Value;
 
-            FogObserver observer;
-            if (FogObservers.TryGetValue(pair.Key, out observer))
+            if (FogObservers.TryGetValue(pair.Key, out var observer))
             {
                 if (!observer.IsActive)
                 {
@@ -321,7 +320,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         
         var observer = target.GetComponent<FogObserver>(FogObserver.ComponentGuid);
         
-        if (observer == null || observer.IsRemoved || observer.CanBeCleared() == false) return false;
+        if (observer == null || observer.IsRemoved || observer.CanBeFilled() == false || observer.CanBeCleared() == false) return false;
         
         observer.Filling(def.SpawnResources.Amount);
         

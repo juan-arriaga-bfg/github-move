@@ -14,7 +14,7 @@ public class ManaPieceView : PieceBoardElementView
 
         foreach (var observer in observers.Values)
         {
-            if (observer.IsRemoved || observer.CanBeCleared() == false) continue;
+            if (observer.IsRemoved || observer.CanBeFilled() == false || observer.CanBeCleared() == false) continue;
             
             observer.FillingFake(def.SpawnResources.Amount);
             fogs.Add(observer);

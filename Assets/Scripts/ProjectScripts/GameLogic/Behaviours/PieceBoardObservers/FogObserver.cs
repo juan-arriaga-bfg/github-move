@@ -59,13 +59,6 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         base.OnAddToBoard(position, context);
         
         GameDataService.Current.FogsManager.RegisterFogObserver(this);
-
-        PrepareFogToClear();
-    }
-
-    public virtual void PrepareFogToClear()
-    {
-        if (!CanBeCleared()) return;
     }
 
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
@@ -148,8 +141,6 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         bar.SetOffset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
         bar.Priority = -1;
         bar.Change(true);
-        
-        PrepareFogToClear();
     }
     
     public string GetResourceId()
@@ -185,6 +176,11 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         return pathExists && resourcesEnough && Def.IsActive;
     }
     
+    public bool CanBeFilled()
+    {
+        return AlreadyPaid.Amount < Def.Condition.Amount;
+    }
+    
     public bool RequiredLevelReached()
     {
         return storageItem.Amount >= level;
@@ -198,7 +194,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         
         AlreadyPaid.Amount += Mathf.Clamp(value, 0, Def.Condition.Amount - AlreadyPaid.Amount);
 
-        if (AlreadyPaid.Amount == Def.Condition.Amount)
+        if (CanBeFilled() == false)
         {
             onComplete = () =>
             {
@@ -213,7 +209,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void FillingFake(int value)
     {
-        bar.UpdateFakeProgress(value);
+        if (bar != null) bar.UpdateFakeProgress(value);
     }
     
     private void OnClick(Piece piece)
