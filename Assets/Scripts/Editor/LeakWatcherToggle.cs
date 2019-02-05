@@ -22,6 +22,7 @@ public class LeakWatcherToggle : MonoBehaviour
         "LeakWatcher.cs",
         "LeakWatcherToggle.cs", 
         "BfgAnalyticsManager", // defines
+        "Demigiant",// dotween
     };
 
     [MenuItem("Tools/Memory Leaks Test/Print stats (only suspicious)")]
