@@ -211,6 +211,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         {
             targetEntity.WindowController.CloseCurrentWindow();
             task.Highlight();
+            return;
         }
         
         var board = BoardService.Current.FirstBoard;
