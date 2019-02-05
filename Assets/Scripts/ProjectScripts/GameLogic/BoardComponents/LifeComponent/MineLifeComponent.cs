@@ -17,7 +17,7 @@ public class MineLifeComponent : WorkplaceLifeComponent
         def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).MineDef;
         
         TimerMain.Delay = def.Delay;
-        HP = 2;//def.Size;
+        HP = def.Size;
         
         TimerCooldown = new TimerComponent{Delay = def.Cooldown};
         RegisterComponent(TimerCooldown);
