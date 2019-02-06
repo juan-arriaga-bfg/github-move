@@ -7,7 +7,7 @@ public static class TutorialBuilder
     public const int LockPRStepIndex = 12;
     public const int LockOrderStepIndex = 18;
     public const int FirstOrderStepIndex = 19;
-    public const int LockFireflytepIndex = 21;
+    public const int LockFireflyStepIndex = 21;
     
     public static BaseTutorialStep BuildTutorial(int index, BoardController context)
     {
@@ -249,7 +249,7 @@ public static class TutorialBuilder
             }
             case 21: // unlock Firefly
             {
-                if (LockFireflytepIndex != index) Debug.LogError("Tutorial Error: LockFireflytepIndex != index");
+                if (LockFireflyStepIndex != index) Debug.LogError("Tutorial Error: LockFireflytepIndex != index");
                 
                 step = new FireflyLockTutorialStep {IsIgnoreDev = false};
                 

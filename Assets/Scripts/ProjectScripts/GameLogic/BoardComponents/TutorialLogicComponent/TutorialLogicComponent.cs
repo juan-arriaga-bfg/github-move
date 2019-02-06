@@ -205,7 +205,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     
     private void UnlockFirefly(bool isRun)
     {
-        if(isRun == false && Save.Contains(TutorialBuilder.LockFireflytepIndex) == false) return;
+        if (isRun == false && Save.Contains(TutorialBuilder.LockFireflyStepIndex) == false) return;
         
         var firefly = Context.BoardLogic.FireflyLogic;
         firefly.Locker.Unlock(firefly);
@@ -213,7 +213,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     
     private void UnlockOrders(bool isRun)
     {
-        if(isRun == false && Save.Contains(TutorialBuilder.LockOrderStepIndex) == false) return;
+        if (isRun == false && CheckLockOrders() == false) return;
         
         var orders = GameDataService.Current.OrdersManager;
         orders.Locker.Unlock(orders);
@@ -223,7 +223,12 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     {
         return Save.Contains(TutorialBuilder.LockPRStepIndex);
     }
-
+    
+    public bool CheckLockOrders()
+    {
+        return Save.Contains(TutorialBuilder.LockOrderStepIndex);
+    }
+    
     public bool CheckFirstOrder()
     {
         return Save.Contains(TutorialBuilder.FirstOrderStepIndex);
