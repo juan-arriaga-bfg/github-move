@@ -56,20 +56,6 @@ public static class TutorialBuilder
                 
                 break;
             }
-            /*case 2: // tutorial 1 step 3
-            {
-                step = new SwapHardTutorialStep
-                {
-                    FromType = PieceType.PR_C1.Id,
-                    ToType = PieceType.PR_C1.Id,
-                    FromPosition = new BoardPosition(18, 13, context.BoardDef.PieceLayer),
-                    ToPosition = new BoardPosition(18, 14, context.BoardDef.PieceLayer)
-                };
-                
-                step.RegisterComponent(new CheckStepTutorialCondition{Target = 1, ConditionType = TutorialConditionType.Start}, true);
-                
-                break;
-            }*/
             case 2: // tutorial 2 step 1
             {
                 step = new HighlightPiecesTutorialStep {Targets = new List<int>{PieceType.PR_C1.Id}};
@@ -142,7 +128,7 @@ public static class TutorialBuilder
             }
             case 9: // tutorial 8 - crystal
             {
-                step = new CrystalTutorialStep {Delay = 2, IsAnyCompleteCondition = true};
+                step = new CrystalTutorialStep {Delay = 0};
                 break;
             }
             case 10: // tutorial 9 - worker
