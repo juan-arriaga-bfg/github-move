@@ -72,8 +72,14 @@
     "PieceAmount": 4,
     "PieceWeights": [
       {
+        "Uid": "A1",
+        "Weight": 4,
+        "Override": true
+      },
+      {
         "Uid": "A2",
-        "Weight": 3
+        "Weight": 3,
+        "Override": true
       }
     ]
   },
@@ -94,6 +100,11 @@
     "PieceAmount": 10,
     "PieceWeights": [
       {
+        "Uid": "A1",
+        "Weight": 2,
+        "Override": true
+      },
+      {
         "Uid": "A2",
         "Weight": 5,
         "Override": true
@@ -101,11 +112,6 @@
       {
         "Uid": "Soft1",
         "Weight": 1
-      },
-      {
-        "Uid": "A1",
-        "Weight": 2,
-        "Override": true
       }
     ]
   },
@@ -213,13 +219,11 @@
     "PieceWeights": [
       {
         "Uid": "C1",
-        "Weight": 4,
-        "Override": true
+        "Weight": 4
       },
       {
         "Uid": "C2",
-        "Weight": 2,
-        "Override": true
+        "Weight": 2
       }
     ]
   },
@@ -240,18 +244,18 @@
     "PieceAmount": 6,
     "PieceWeights": [
       {
+        "Uid": "C1",
+        "Weight": 1,
+        "Override": true
+      },
+      {
         "Uid": "C2",
         "Weight": 4,
         "Override": true
       },
       {
         "Uid": "C3",
-        "Weight": 2,
-        "Override": true
-      },
-      {
-        "Uid": "C1",
-        "Weight": 1
+        "Weight": 2
       }
     ]
   },
@@ -272,17 +276,17 @@
     "PieceAmount": 8,
     "PieceWeights": [
       {
-        "Uid": "C4",
-        "Weight": 5,
-        "Override": true
-      },
-      {
         "Uid": "C2",
-        "Weight": 3
+        "Weight": 3,
+        "Override": true
       },
       {
         "Uid": "C3",
         "Weight": 2
+      },
+      {
+        "Uid": "C4",
+        "Weight": 5
       }
     ]
   },
@@ -304,13 +308,11 @@
     "PieceWeights": [
       {
         "Uid": "D1",
-        "Weight": 4,
-        "Override": true
+        "Weight": 4
       },
       {
         "Uid": "D2",
-        "Weight": 2,
-        "Override": true
+        "Weight": 2
       }
     ]
   },
@@ -331,18 +333,18 @@
     "PieceAmount": 6,
     "PieceWeights": [
       {
+        "Uid": "D1",
+        "Weight": 1,
+        "Override": true
+      },
+      {
         "Uid": "D2",
         "Weight": 4,
         "Override": true
       },
       {
         "Uid": "D3",
-        "Weight": 2,
-        "Override": true
-      },
-      {
-        "Uid": "D1",
-        "Weight": 1
+        "Weight": 2
       }
     ]
   },
@@ -363,7 +365,7 @@
     "PieceAmount": 8,
     "PieceWeights": [
       {
-        "Uid": "D4",
+        "Uid": "D1",
         "Weight": 5,
         "Override": true
       },
