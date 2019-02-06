@@ -103,13 +103,15 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
         }
     }
     
-    public virtual void SetFade(float alpha)
+    public virtual void SetFade(float alpha, float duration = 0)
     {
         if (cachedRenderers == null || cachedRenderers.size <= 0)
         {
             CacheLayers();
         }
 
+        const string propName = "_ManualAlphaCoef";
+        
         foreach (var rend in cachedRenderers)
         {
             if (rend == null) continue;
@@ -117,16 +119,27 @@ public class BoardElementView : IWBaseMonoBehaviour, IFastPoolItem
             if (rend.CachedRenderer.sharedMaterial == null) continue;
 
             var material = rend.MaterialCopy;//rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial(BoardElementMaterialType.PiecesFadeMaterial));
-            if (material.HasProperty("_AlphaCoef") == false)
+            if (material.HasProperty(propName) == false)
             {
                 material = rend.SetCustomMaterial(Context.MaterialsCache.GetMaterial(BoardElementMaterialType.PiecesDefaultMaterial));
             }
+
+            DOTween.Kill(rend);
             
-            material.SetFloat("_AlphaCoef", alpha);
-            
-            if (alpha >= 1f)
+            if (duration <= 0)
             {
-                rend.ResetDefaultMaterial();
+                material.SetFloat(propName, alpha);
+                if (alpha >= 1f) rend.ResetDefaultMaterial();
+            }
+            else
+            {
+                material
+                    .DOFloat(alpha, propName, duration)
+                    .SetId(rend)
+                    .OnComplete(() =>
+                    {
+                        if (alpha >= 1f) rend.ResetDefaultMaterial();
+                    });
             }
         }
     }

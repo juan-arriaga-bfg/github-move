@@ -1,4 +1,6 @@
-﻿public class CrystalTutorialStep : LoopFingerTutorialStep
+﻿using System.Collections.Generic;
+
+public class CrystalTutorialStep : LoopFingerTutorialStep
 {
     private readonly int crystal = PieceType.Boost_CR.Id;
     private readonly int target = PieceType.A5.Id;
@@ -32,6 +34,14 @@
         base.Perform();
         
         Context.LockAll();
+        
+        var unlock = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(target);
+        
+        unlock.Add(ignorePosition);
+        unlock.AddRange(Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(crystal));
+        
+        Context.FadeAll(0.5f, unlock);
+        
         startTime = startTime.AddSeconds(-(Delay-0.5f));
     }
 
@@ -42,7 +52,7 @@
         
         base.Execute();
     }
-
+    
     private void FirstStep()
     {
         var positions = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(target);
@@ -62,6 +72,7 @@
         
         Context.UnlockAll();
         Context.LockAll();
+        
         Context.UnlockCell(targetPosition);
         Context.UnlockCell(ignorePosition);
         Context.UnlockCells(positions);
@@ -72,7 +83,9 @@
 
     protected override void Complete()
     {
+        Context.FadeAll(1f, null);
         Context.UnlockAll();
+        
         base.Complete();
     }
 }

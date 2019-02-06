@@ -184,6 +184,24 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             }
         }
     }
+
+    public void FadeAll(float alpha, List<BoardPosition> exclude)
+    {
+        var points = Context.BoardLogic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Default);
+
+        foreach (var point in points)
+        {
+            if (exclude != null && exclude.Contains(point)) continue;
+            
+            var pieceEntity = Context.BoardLogic.GetPieceAt(point);
+            
+            if (pieceEntity == null || pieceEntity.PieceType == PieceType.Fog.Id) continue;
+                
+            var pieceView = Context.RendererContext.GetElementAt(point) as PieceBoardElementView;
+                
+            if (pieceView != null) pieceView.SetFade(alpha, 1f);
+        }
+    }
     
     private void UnlockFirefly(bool isRun)
     {
