@@ -37,7 +37,7 @@ public class BoardManager : ECSEntity
             cachedBoardControllers.Remove(targetTags[i]);
         }
         
-        CleanupRecursive(boardController);
+        CleanupRecursive(boardController, boardController);
     }
 
     public virtual BoardController GetBoardById(int id)
@@ -53,7 +53,7 @@ public class BoardManager : ECSEntity
     
     public virtual BoardController FirstBoard => GetBoardById(0);
 
-    private void CleanupRecursive(IECSComponent itemToCleanup, ECSEntity context = null)
+    public static void CleanupRecursive(IECSComponent itemToCleanup, ECSEntity context = null)
     {
         Debug.Log("======== CleanupRecursive: " + itemToCleanup.GetType());
         
@@ -75,17 +75,14 @@ public class BoardManager : ECSEntity
                     CleanupRecursive(item);
                 }
                 break;
+            
+            case IECSSystem system:
+                ECSService.Current.SystemProcessor.UnRegisterSystem(system);
+                break;
         }
         
         // Debug.Log($"== Unregister: {itemToCleanup.GetType()} with context: {context?.GetType()}");
-        if (context != null)
-        {
-            context.UnRegisterComponent(itemToCleanup);
-        }
-        else
-        {
-            UnRegisterComponent(itemToCleanup);
-        }
+        context?.UnRegisterComponent(itemToCleanup);
     }
     
     public void Cleanup()
