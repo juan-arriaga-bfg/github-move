@@ -102,14 +102,22 @@ namespace BfgAnalytics
 
         public static void SendTutorialStartStepEvent(string name)
         {
-            Debug.LogError($"send TutorialStartStepEvent @{name}");
-            //AnalyticsService.Current?.Event("ftue", null, name, "start", TutorialJsonData());
+            JSONNode customJsonData = new JSONObject();
+            
+            customJsonData["name"] = name;
+            customJsonData["action"] = "start";
+            
+            AnalyticsService.Current?.Event("ftue", null, null, null, TutorialJsonData(), customJsonData);
         }
 
         public static void SendTutorialEndStepEvent(string name)
         {
-            Debug.LogError($"send TutorialEndStepEvent @{name}");
-            //AnalyticsService.Current?.Event("ftue", null, name, "end", TutorialJsonData());
+            JSONNode customJsonData = new JSONObject();
+            
+            customJsonData["name"] = name;
+            customJsonData["action"] = "end";
+            
+            AnalyticsService.Current?.Event("ftue", null, null, null, TutorialJsonData(), customJsonData);
         }
         
         public static void SendPurchase()
