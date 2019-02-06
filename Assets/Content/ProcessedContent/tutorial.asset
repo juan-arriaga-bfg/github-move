@@ -30,16 +30,18 @@ SpriteAtlas:
       enableTightPacking: 0
     variantMultiplier: 1
     packables:
+    - {fileID: 21300000, guid: 2870a69c324576e4194fb045ae5a9fb1, type: 3}
+    - {fileID: 21300000, guid: a1fc74b4dd00ca2499a844f0de49bc98, type: 3}
+    - {fileID: 21300000, guid: eb7df77cb5893dc4fb584c4b7e0dd071, type: 3}
     - {fileID: 21300000, guid: 47394ea5ca41d58459f687fb64b66bfe, type: 3}
     - {fileID: 21300000, guid: edcc5eb2c76b43d41a15e9395bc1be7c, type: 3}
-    - {fileID: 21300000, guid: ddd42981ca9413a41a8751559e615073, type: 3}
-    - {fileID: 21300000, guid: d50572ec016c5ec42a43830a01ec6f08, type: 3}
-    - {fileID: 21300000, guid: 495ef32025b1d0c4faa9d6d45650f571, type: 3}
-    - {fileID: 21300000, guid: eb7df77cb5893dc4fb584c4b7e0dd071, type: 3}
     - {fileID: 21300000, guid: d4ca16e648735b5439daf6b6e7eeaea2, type: 3}
     - {fileID: 21300000, guid: 1e2a5adf5a7bbcc4b9390bdca5c618b3, type: 3}
     - {fileID: 21300000, guid: c143310495b89d4489bd689973e9abf8, type: 3}
     - {fileID: 21300000, guid: 34d86cbb2f2e1b04d8617902022f4f4b, type: 3}
+    - {fileID: 21300000, guid: ddd42981ca9413a41a8751559e615073, type: 3}
+    - {fileID: 21300000, guid: d50572ec016c5ec42a43830a01ec6f08, type: 3}
+    - {fileID: 21300000, guid: 495ef32025b1d0c4faa9d6d45650f571, type: 3}
     - {fileID: 21300000, guid: f1b37266473ab664fbfc5a0e088b37b2, type: 3}
     - {fileID: 21300000, guid: aee7b6ad0a8121e498fcc969959666e7, type: 3}
     - {fileID: 21300000, guid: dd321a654946f96449338ebd928eba2a, type: 3}
@@ -51,12 +53,14 @@ SpriteAtlas:
   - {fileID: 21300000, guid: ddd42981ca9413a41a8751559e615073, type: 3}
   - {fileID: 21300000, guid: edcc5eb2c76b43d41a15e9395bc1be7c, type: 3}
   - {fileID: 21300000, guid: c143310495b89d4489bd689973e9abf8, type: 3}
+  - {fileID: 21300000, guid: a1fc74b4dd00ca2499a844f0de49bc98, type: 3}
   - {fileID: 21300000, guid: dd321a654946f96449338ebd928eba2a, type: 3}
   - {fileID: 21300000, guid: 47394ea5ca41d58459f687fb64b66bfe, type: 3}
   - {fileID: 21300000, guid: f1b37266473ab664fbfc5a0e088b37b2, type: 3}
   - {fileID: 21300000, guid: d4ca16e648735b5439daf6b6e7eeaea2, type: 3}
   - {fileID: 21300000, guid: 34d86cbb2f2e1b04d8617902022f4f4b, type: 3}
   - {fileID: 21300000, guid: eb7df77cb5893dc4fb584c4b7e0dd071, type: 3}
+  - {fileID: 21300000, guid: 2870a69c324576e4194fb045ae5a9fb1, type: 3}
   - {fileID: 21300000, guid: d50572ec016c5ec42a43830a01ec6f08, type: 3}
   - {fileID: 21300000, guid: aee7b6ad0a8121e498fcc969959666e7, type: 3}
   - {fileID: 21300000, guid: 1e2a5adf5a7bbcc4b9390bdca5c618b3, type: 3}
@@ -65,12 +69,14 @@ SpriteAtlas:
   - PR_C1_tutor
   - Boost_WR_tutor
   - fireFly
+  - A6_tutor
   - tutorShineFinger
   - Boost_CR_tutor
   - trackTutorSuperMerge
   - candyBigTutorSuperMerge
   - plume_fireFly
   - arrowRemoverDialog
+  - A5_tutor
   - PR_C2_tutor
   - tutorFinger
   - candySmallTutorSuperMerge
