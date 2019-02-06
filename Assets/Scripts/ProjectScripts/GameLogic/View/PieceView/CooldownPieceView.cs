@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CooldownPieceView : PieceBoardElementView
 {
@@ -14,6 +13,9 @@ public class CooldownPieceView : PieceBoardElementView
     protected virtual string readyParticleName => string.Empty;
     protected virtual string coolDownLeaveParticle => R.ProductionEndParticle;
     protected virtual string coolDownEnterParticle => string.Empty;
+
+    [SerializeField] private GameObject lockSkin;
+    [SerializeField] private GameObject normalSkin;
     
     public override void Init(BoardRenderer context, Piece piece)
     {
@@ -141,6 +143,7 @@ public class CooldownPieceView : PieceBoardElementView
     {
         if (timer == null || bodySprites == null) return;
 
-        bodySprites.First().sprite = IconService.Current.GetSpriteById($"{PieceType.Parse(Piece.PieceType)}{(timer.IsStarted ? "_lock" : "")}");
+        if (lockSkin != null) lockSkin.SetActive(timer.IsStarted);
+        if (normalSkin != null) normalSkin.SetActive(!timer.IsStarted);
     }
 }
