@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BfgAnalytics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -29,7 +30,11 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	
 	private bool isClick;
 	private bool isFirst = true;
-	private bool isTuttorialActive => ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount < 3;
+
+	private const int TUTORIAL_FIREFLY_COUNT = 3;
+	private bool isTuttorialActive => ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount < TUTORIAL_FIREFLY_COUNT;
+	
+	private bool isTutorialStart = true;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
@@ -140,8 +145,16 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 			
 			views.Add(firefly);
 		}
-		
-		if(isTuttorialActive) views[0].AddArrow();
+
+		if (isTuttorialActive)
+		{
+			if (isTutorialStart)
+			{
+				isTutorialStart = false;
+				Analytics.SendTutorialStartStepEvent("firefly");
+			}
+			views[0].AddArrow();
+		}
 	}
 	
 	public bool IsExecuteable()
@@ -199,7 +212,13 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		
 		if (firefly == null) return false;
 
+		var amountFireflyBefore = ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount;
 		firefly.OnClick();
+		var amountFireflyAfter = ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount;
+		
+		if(amountFireflyAfter != amountFireflyBefore && amountFireflyAfter == TUTORIAL_FIREFLY_COUNT)
+			Analytics.SendTutorialEndStepEvent("firefly");
+		
 		return true;
 	}
 
