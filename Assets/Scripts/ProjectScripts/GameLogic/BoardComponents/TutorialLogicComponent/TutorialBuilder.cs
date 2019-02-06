@@ -7,7 +7,7 @@ public static class TutorialBuilder
     public const int LockPRStepIndex = 12;
     public const int LockOrderStepIndex = 18;
     public const int FirstOrderStepIndex = 19;
-    public const int LockFireflytepIndex = 21;
+    public const int LockFireflyStepIndex = 21;
     
     public static BaseTutorialStep BuildTutorial(int index, BoardController context)
     {
@@ -56,20 +56,6 @@ public static class TutorialBuilder
                 
                 break;
             }
-            /*case 2: // tutorial 1 step 3
-            {
-                step = new SwapHardTutorialStep
-                {
-                    FromType = PieceType.PR_C1.Id,
-                    ToType = PieceType.PR_C1.Id,
-                    FromPosition = new BoardPosition(18, 13, context.BoardDef.PieceLayer),
-                    ToPosition = new BoardPosition(18, 14, context.BoardDef.PieceLayer)
-                };
-                
-                step.RegisterComponent(new CheckStepTutorialCondition{Target = 1, ConditionType = TutorialConditionType.Start}, true);
-                
-                break;
-            }*/
             case 2: // tutorial 2 step 1
             {
                 step = new HighlightPiecesTutorialStep {Targets = new List<int>{PieceType.PR_C1.Id}};
@@ -92,7 +78,7 @@ public static class TutorialBuilder
             }
             case 4: // tutorial 3 - clear fog
             {
-                step = new HighlightFogTutorialStep {Delay = 5};
+                step = new HighlightFogTutorialStep {Delay = 0};
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "2_ClearFog", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "2_ClearFog", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Complete}, true);
@@ -142,7 +128,7 @@ public static class TutorialBuilder
             }
             case 9: // tutorial 8 - crystal
             {
-                step = new CrystalTutorialStep {Delay = 2, IsAnyCompleteCondition = true};
+                step = new CrystalTutorialStep {Delay = 0};
                 break;
             }
             case 10: // tutorial 9 - worker
@@ -166,13 +152,11 @@ public static class TutorialBuilder
             {
                 if (LockPRStepIndex != index) Debug.LogError("Tutorial Error: LockPRStepIndex != index");
                 
-                step = new BaseTutorialStep() {IsAnyCompleteCondition = true};
+                step = new BaseTutorialStep();
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Hard}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "3_KillTree", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "3_KillTree", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
@@ -208,13 +192,11 @@ public static class TutorialBuilder
             }
             case 16: // lock buttons Orders
             {
-                step = new UiLockTutorialStep {Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Orders}, IsAnyCompleteCondition = true};
+                step = new UiLockTutorialStep {Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Orders}};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Hard}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "3_KillTree", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "3_KillTree", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
@@ -232,13 +214,11 @@ public static class TutorialBuilder
             {
                 if (LockOrderStepIndex != index) Debug.LogError("Tutorial Error: LockOrderStepIndex != index");
                 
-                step = new OrdersLockTutorialStep {IsIgnoreDev = false, IsAnyCompleteCondition = true};
+                step = new OrdersLockTutorialStep {IsIgnoreDev = false};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Hard}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "3_KillTree", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "3_KillTree", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
@@ -269,7 +249,7 @@ public static class TutorialBuilder
             }
             case 21: // unlock Firefly
             {
-                if (LockFireflytepIndex != index) Debug.LogError("Tutorial Error: LockFireflytepIndex != index");
+                if (LockFireflyStepIndex != index) Debug.LogError("Tutorial Error: LockFireflytepIndex != index");
                 
                 step = new FireflyLockTutorialStep {IsIgnoreDev = false};
                 
