@@ -174,14 +174,9 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
     {
         timerLabel.Text = customer.Timer.CompleteTime.GetTimeLeftText();
 
-        if (customer.Timer.CompleteTime.GetTimeLeft().TotalSeconds <= GameDataService.Current.ConstantsManager.FreeTimeLimit)
-        {
-            btnBuyLabel.Text = LocalizationService.Get("common.button.free", "common.button.free");
-        }
-        else
-        {
-            btnBuyLabel.Text = customer.Timer.GetPrice().ToStringIcon();
-        }
+        btnBuyLabel.Text = customer.Timer.IsFree() 
+            ? LocalizationService.Get("common.button.free", "common.button.free") 
+            : customer.Timer.GetPrice().ToStringIcon();
     }
     
     private void UpdateState()
