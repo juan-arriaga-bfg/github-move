@@ -173,7 +173,10 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
     private void UpdateTimer()
     {
         timerLabel.Text = customer.Timer.CompleteTime.GetTimeLeftText();
-        btnBuyLabel.Text = customer.Timer.GetPrice().ToStringIcon();
+
+        btnBuyLabel.Text = customer.Timer.IsFree() 
+            ? LocalizationService.Get("common.button.free", "common.button.free") 
+            : customer.Timer.GetPrice().ToStringIcon();
     }
     
     private void UpdateState()

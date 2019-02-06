@@ -54,7 +54,7 @@ public static class HighlightFogHelper
             return true;
         }
 
-        if (view is BubbleView)
+        if (view is FogProgressView)
         {
             var board = BoardService.Current.FirstBoard;
 

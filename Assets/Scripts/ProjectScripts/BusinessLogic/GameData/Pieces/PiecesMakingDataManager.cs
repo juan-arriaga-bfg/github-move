@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PiecesMakingDataManager : IECSComponent, IDataManager, IDataLoader<List<PiecesMakingDef>>
+public class PiecesMakingDataManager : IECSComponent, IDataManager, IDataLoader<List<PieceMakingDef>>
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
 	public int Guid => ComponentGuid;
@@ -20,10 +20,10 @@ public class PiecesMakingDataManager : IECSComponent, IDataManager, IDataLoader<
 	
 	public void Reload()
 	{
-		LoadData(new ResourceConfigDataMapper<List<PiecesMakingDef>>("configs/piecesMaking.data", NSConfigsSettings.Instance.IsUseEncryption));
+		LoadData(new ResourceConfigDataMapper<List<PieceMakingDef>>("configs/piecesMaking.data", NSConfigsSettings.Instance.IsUseEncryption));
 	}
 
-	public void LoadData(IDataMapper<List<PiecesMakingDef>> dataMapper)
+	public void LoadData(IDataMapper<List<PieceMakingDef>> dataMapper)
 	{
 		dataMapper.LoadData((data, error)=> 
 		{

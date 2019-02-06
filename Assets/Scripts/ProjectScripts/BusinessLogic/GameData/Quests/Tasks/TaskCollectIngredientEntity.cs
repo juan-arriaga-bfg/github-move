@@ -1,10 +1,14 @@
 [TaskHighlight(typeof(HighlightTaskPointToPiece))]
+[TaskHighlight(typeof(HighlightTaskPointToRandomIngredient),          new[] {typeof(HighlightConditionPieceIdNotSpecified)})]
+[TaskHighlight(typeof(HighlightTaskPointToRandomLiveProductionField), new[] {typeof(HighlightConditionPieceIdNotSpecified)})]
+[TaskHighlight(typeof(HighlightTaskPointToRandomDeadProductionField), new[] {typeof(HighlightConditionPieceIdNotSpecified)})]
 [TaskHighlight(typeof(HighlightTaskFindProductionFieldForPieceType))]
 [TaskHighlight(typeof(HighlightTaskPointToPredecessor))]
 [TaskHighlight(typeof(HighlightTaskPointToRandomChest))]
 [TaskHighlight(typeof(HighlightTaskPointToRandomBranchATree))]
 [TaskHighlight(typeof(HighlightTaskFirstMineOfAnyType))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
+
 public class TaskCollectIngredientEntity : TaskCurrencyCollectEntity
 {
     public new static readonly int ComponentGuid = ECSManager.GetNextGuid();

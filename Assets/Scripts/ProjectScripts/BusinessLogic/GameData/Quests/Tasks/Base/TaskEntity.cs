@@ -144,10 +144,12 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
     /// </summary>
     public virtual void Highlight()
     {
+        Debug.Log($"[TaskEntity] => TaskHighlight: [{GetType()}]");
+        
         var attributes = GetType().GetCustomAttributes(typeof(TaskHighlight), inherit: false);
         if (attributes.Length == 0)
         {
-            Debug.LogError($"[TaskEntity] => TaskHighlight attribute not found for {GetType()} class.");
+            Debug.LogError($"[TaskEntity] => TaskHighlight: attribute not found for {GetType()} class.");
         }
         else
         {
@@ -161,15 +163,42 @@ public abstract class TaskEntity : ECSEntity, IECSSerializeable
                 }
 
                 var hlType = attr.HighlightType;
+                
+                if (attr.ConditionTypes != null)
+                {
+                    bool conditionFailed = false;
+                    foreach (Type conditionType in attr.ConditionTypes)
+                    {
+                        object condInstance = Activator.CreateInstance(conditionType);
+                        ITaskHighlightCondition cond = condInstance as ITaskHighlightCondition;
+                        if (cond == null || !cond.Check(this))
+                        {
+                            Debug.Log($"[TaskEntity] => TaskHighlight: {hlType} skipped by failed condition: {conditionType}");
+                            conditionFailed = true;
+                            break;
+                        }
+                    }
+
+                    if (conditionFailed)
+                    {
+                        continue;
+                    }
+                }
+
                 object hlInstance = Activator.CreateInstance(hlType);
                 ITaskHighlight hl = hlInstance as ITaskHighlight;
 
                 // ReSharper disable once PossibleNullReferenceException
                 if (hl.Highlight(this))
                 {
+                    Debug.Log($"[TaskEntity] => TaskHighlight: Highlighted using {hlType}");
                     return;
                 }
+
+                Debug.Log($"[TaskEntity] => TaskHighlight: Can't highlight using {hlType}");
             }
+            
+            Debug.LogError($"[TaskEntity] => TaskHighlight: All highlights are skipped!");
         }
     }
 

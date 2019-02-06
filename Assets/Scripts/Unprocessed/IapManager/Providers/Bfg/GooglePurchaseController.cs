@@ -39,7 +39,7 @@ public class GooglePurchaseController : APurchaseController
 		googleProductIds.AddRange (consumableGoogleProductIds);
 		googleProductIds.AddRange (nonConsumableGoogleProductIds);
 
-		bfgPurchaseAndroid.defineConsumableSKUs(nonConsumableGoogleProductIds);
+		bfgPurchaseAndroid.defineConsumableSKUs(consumableGoogleProductIds);
 		
 		// Only add each notification observer once...in case the dev calls StartService multiple times.
 		// Shared notifications between all platforms
@@ -153,7 +153,7 @@ public class GooglePurchaseController : APurchaseController
 
 	void restore_failed (string productId)
 	{
-		Debug.Log ("GooglePurchaseController: restore_failed for product: {productId}");
+		Debug.Log ($"GooglePurchaseController: restore_failed for product: {productId}");
 		OnRestoreFailed (productId);
 	}
 

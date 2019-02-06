@@ -2,10 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using BfgAnalytics;
+using CodeStage.AntiCheat.ObscuredTypes;
 using DG.Tweening;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Tayx.Graphy;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -32,6 +34,8 @@ public class DevTools : UIContainerElementViewController
         
         questDialogsToggle.isOn = IsQuestDialogsEnabled();
         tutorialToggle.isOn = IsTutorialEnabled();
+        
+        UpdateFpsMeter();
     }
     
     public void OnToggleValueChanged(bool isChecked)
@@ -182,7 +186,7 @@ public class DevTools : UIContainerElementViewController
         ShowQuestWindow(quests, 0);
     }
 
-    public void ShowNotifications()
+    public void OnScheduleNotificationsClick()
     {
 #if DEBUG
         var notificationManager = LocalNotificationsService.Current as BfgLocalNotificationsManagerBase;
@@ -472,5 +476,55 @@ public class DevTools : UIContainerElementViewController
         // }
         //
         // StartCoroutine(LoadSceneCoroutine(null));
+    }
+    
+    private void UpdateFpsMeter()
+    {
+        int index = ObscuredPrefs.GetInt("FPS_METER_MODE", 1);
+        
+        var fps = FindObjectOfType<GraphyManager>();
+        if (fps == null)
+        {
+            return;
+        }
+        
+        switch (index)
+        {
+            case 0:
+                fps.FpsModuleState = GraphyManager.ModuleState.OFF;    
+                fps.RamModuleState = GraphyManager.ModuleState.OFF;
+                break;
+            
+            case 1:
+                fps.FpsModuleState = GraphyManager.ModuleState.BASIC;    
+                fps.RamModuleState = GraphyManager.ModuleState.OFF;
+                break;
+            
+            case 2:
+                fps.FpsModuleState = GraphyManager.ModuleState.FULL;    
+                fps.RamModuleState = GraphyManager.ModuleState.OFF;
+                break;
+            
+            case 3:
+                fps.FpsModuleState = GraphyManager.ModuleState.FULL;    
+                fps.RamModuleState = GraphyManager.ModuleState.BASIC;
+                break;
+        } 
+    }
+    
+    public void OnFpsClick()
+    {   
+        int index = ObscuredPrefs.GetInt("FPS_METER_MODE", 1);
+        
+        index++;
+        
+        if (index > 3)
+        {
+            index = 0;
+        }
+        
+        ObscuredPrefs.SetInt("FPS_METER_MODE", index);
+        
+        UpdateFpsMeter();
     }
 }

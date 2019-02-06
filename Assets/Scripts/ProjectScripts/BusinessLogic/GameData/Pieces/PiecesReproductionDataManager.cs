@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PiecesReproductionDataManager : IECSComponent, IDataManager, IDataLoader<List<PiecesReproductionDef>>
+public class PiecesReproductionDataManager : IECSComponent, IDataManager, IDataLoader<List<PieceReproductionDef>>
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
 	public int Guid => ComponentGuid;
@@ -20,10 +20,10 @@ public class PiecesReproductionDataManager : IECSComponent, IDataManager, IDataL
 	
 	public void Reload()
 	{
-		LoadData(new ResourceConfigDataMapper<List<PiecesReproductionDef>>("configs/piecesReproduction.data", NSConfigsSettings.Instance.IsUseEncryption));
+		LoadData(new ResourceConfigDataMapper<List<PieceReproductionDef>>("configs/piecesReproduction.data", NSConfigsSettings.Instance.IsUseEncryption));
 	}
 
-	public void LoadData(IDataMapper<List<PiecesReproductionDef>> dataMapper)
+	public void LoadData(IDataMapper<List<PieceReproductionDef>> dataMapper)
 	{
 		dataMapper.LoadData((data, error)=> 
 		{

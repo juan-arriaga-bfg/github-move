@@ -59,13 +59,6 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         base.OnAddToBoard(position, context);
         
         GameDataService.Current.FogsManager.RegisterFogObserver(this);
-
-        PrepareFogToClear();
-    }
-
-    public virtual void PrepareFogToClear()
-    {
-        if (!CanBeCleared()) return;
     }
 
     public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
@@ -114,7 +107,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         var canPath = CanBeReached();
         var levelAccess = RequiredLevelReached();
         
-        if (((canPath ^ levelAccess) || Def.IsActive == false) && lockView == null)
+        if(lockView == null && (Def.IsActive && canPath ^ levelAccess) || Def.IsActive == false && canPath)
         {
             lockView = viewDef.AddView(ViewType.Lock) as LockView;
             lockView.Value = Def.IsActive ? level.ToString() : "?";
@@ -145,11 +138,9 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         
         if(bar.IsShow) return;
         
-        bar.SetOfset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
+        bar.SetOffset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
         bar.Priority = -1;
         bar.Change(true);
-        
-        PrepareFogToClear();
     }
     
     public string GetResourceId()
@@ -185,27 +176,27 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         return pathExists && resourcesEnough && Def.IsActive;
     }
     
+    public bool CanBeFilled()
+    {
+        return AlreadyPaid.Amount < Def.Condition.Amount;
+    }
+    
     public bool RequiredLevelReached()
     {
         return storageItem.Amount >= level;
     }
 
-    public bool IsActive
-    {
-        get
-        {
-            var canPath = CanBeReached();
-            return canPath || RequiredLevelReached();
-        }
-    }
+    public bool IsActive => CanBeReached() || (RequiredLevelReached() && Def.IsActive);
 
-    public void Filling(int value)
+    public void Filling(int value, out int change)
     {
         Action onComplete = null;
+        var target = Def.Condition.Amount - AlreadyPaid.Amount;
         
-        AlreadyPaid.Amount += Mathf.Clamp(value, 0, Def.Condition.Amount - AlreadyPaid.Amount);
+        change = value - target;
+        AlreadyPaid.Amount += Mathf.Clamp(value, 0, target);
 
-        if (AlreadyPaid.Amount == Def.Condition.Amount)
+        if (CanBeFilled() == false)
         {
             onComplete = () =>
             {
@@ -220,7 +211,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     public void FillingFake(int value)
     {
-        bar.UpdateFakeProgress(value);
+        if (bar != null) bar.UpdateFakeProgress(value);
     }
     
     private void OnClick(Piece piece)
@@ -247,7 +238,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     private void OpenBubble()
     {
         bubble = viewDef.AddView(ViewType.Bubble) as BubbleView;
-        bubble.SetOfset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
+        bubble.SetOffset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
                 
         bubble.SetData(LocalizationService.Get("gameboard.bubble.message.fog", "gameboard.bubble.message.fog"),
             LocalizationService.Get("gameboard.bubble.button.fog", "gameboard.bubble.button.fog"), OnClick);

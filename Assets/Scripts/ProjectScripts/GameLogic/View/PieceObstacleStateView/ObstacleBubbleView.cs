@@ -15,7 +15,7 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
 
     private bool isAddListener;
 
-    public override void SetOfset()
+    public override void SetOffset()
     {
         CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Offset;
     }
@@ -33,8 +33,8 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
 
         if (life.IsUseCooldown == false) return;
         
-        life.TimerMain.OnExecute += UpdateButtonText;
-        life.TimerMain.OnComplete += UpdateButtonText;
+        life.TimerCooldown.OnExecute += UpdateButtonText;
+        life.TimerCooldown.OnComplete += UpdateButtonText;
     }
 
     public override void ResetViewOnDestroy()
@@ -43,8 +43,8 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
         
         if (life.IsUseCooldown)
         {
-            life.TimerMain.OnExecute -= UpdateButtonText;
-            life.TimerMain.OnComplete -= UpdateButtonText;
+            life.TimerCooldown.OnExecute -= UpdateButtonText;
+            life.TimerCooldown.OnComplete -= UpdateButtonText;
         }
         
         base.ResetViewOnDestroy();
@@ -92,9 +92,8 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
     {
         if(IsShow == false || life.Rewards.IsScatter) return;
         
-        
-        
         Context.Context.TutorialLogic.Pause(true);
+        
         if (life.Damage())
         {
             var typeDef = PieceType.GetDefById(Context.PieceType);
@@ -103,13 +102,13 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
             {
                 NSAudioService.Current.Play(SoundId.WorkerMine);
             }
-            else if(typeDef.Filter.HasFlag(PieceTypeFilter.ProductionField))
-            {
-                NSAudioService.Current.Play(SoundId.WorkerHarvest);
-            }
             else if(typeDef.Filter.HasFlag(PieceTypeFilter.Obstacle))
             {
                 NSAudioService.Current.Play(SoundId.WorkerChop);
+            }
+            else if(typeDef.Filter.HasFlag(PieceTypeFilter.ProductionField))
+            {
+                NSAudioService.Current.Play(SoundId.WorkerHarvest);
             }
         }
             
@@ -118,7 +117,7 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
     
     public void OnBoardEvent(int code, object context)
     {
-        if (code != GameEventsCodes.ClosePieceUI || context is BoardPosition && ((BoardPosition) context).Equals(Context.CachedPosition)) return;
+        if (code != GameEventsCodes.ClosePieceUI || context is BoardPosition position && position.Equals(Context.CachedPosition)) return;
 		
         Change(false);
     }

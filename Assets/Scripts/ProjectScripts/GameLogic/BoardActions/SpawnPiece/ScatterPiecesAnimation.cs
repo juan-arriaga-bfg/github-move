@@ -10,7 +10,7 @@ public class ScatterPiecesAnimation : BoardAnimation
     
     public override void Animate(BoardRenderer context)
     {
-        var target = Replace == null ? context.GetElementAt(From) : context.RemoveElementAt(From, false);
+        var target = context.GetElementAt(From);
         var startPosition = context.Context.BoardDef.GetPiecePosition(From.X, From.Y);
         
         var sequence = DOTween.Sequence().SetId(animationUid);
@@ -58,10 +58,12 @@ public class ScatterPiecesAnimation : BoardAnimation
             
             sequence.AppendCallback(() =>
             {
+                context.RemoveElementAt(From);
+                
                 foreach (var pair in Replace)
                 {
                     var next = context.CreatePieceAt(pair.Value, pair.Key);
-                
+                    
                     next.CachedTransform.localScale = Vector3.zero;
                     next.CachedTransform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack);
                 }
@@ -72,7 +74,21 @@ public class ScatterPiecesAnimation : BoardAnimation
         
         sequence.OnComplete(() =>
         {
-            if (Replace != null) context.DestroyElement(target);
+            foreach (var pair in Pieces)
+            {
+                context.Context.BoardLogic.AddPieceToBoard(pair.Key.X, pair.Key.Y, pair.Value);
+            }
+
+            if (Replace != null)
+            {
+                context.Context.BoardLogic.RemovePieceAt(From);
+
+                foreach (var pair in Replace)
+                {
+                    context.Context.BoardLogic.AddPieceToBoard(pair.Key.X, pair.Key.Y, pair.Value);
+                }
+            }
+            
             CompleteAnimation(context);
         });
     }

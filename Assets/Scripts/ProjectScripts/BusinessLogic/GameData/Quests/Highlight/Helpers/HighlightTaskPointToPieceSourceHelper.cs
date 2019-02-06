@@ -5,10 +5,10 @@ using UnityEngine;
 public static class HighlightTaskPointToPieceSourceHelper
 {
     // Match: A1, B1, C9, returns: A, B, C
-    private static readonly Regex pieceBranchRegexSimple  = new Regex(@"(^)[A-Z]*",      RegexOptions.IgnoreCase);
+    private static readonly Regex pieceBranchRegexSimple  = new Regex(@"(^)[A-Z]*", RegexOptions.IgnoreCase | RegexOptions.Compiled);
     
-    // Match: PR_A1, CH2_B, returns: A, B
-    private static readonly Regex pieceBranchRegexComplex = new Regex(@"(?<=_)([A-Z])*", RegexOptions.IgnoreCase);
+    // Match: PR_A1, CH2_B, OB_PR_C, returns: A, B, C
+    private static readonly Regex pieceBranchRegexComplex = new Regex(@"(?<=_)([A-Z]*)($|(?=[0-9]+))", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
     public static bool PointToPieceSource(IHavePieceId pieceTask, PieceTypeFilter sourceFilter, PieceTypeFilter? excludeFilter = null, List<string> allowedSourceBranches = null)
     {        

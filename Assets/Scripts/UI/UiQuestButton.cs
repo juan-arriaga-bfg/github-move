@@ -104,7 +104,8 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
             if (rootCanvasGroup != null)
             {
-                rootCanvasGroup.DOFade(0, 1);
+                rootCanvasGroup.DOFade(0, 1)
+                               .SetId(this);
             }
         }
     }
@@ -115,9 +116,10 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     private void OnDestroy()
     {
+        DOTween.Kill(this);
+        
         if (Quest != null)
         {
-            // Debug.Log($"AAAAA UNSUBSCRIBE: {quest.Id}");
             Quest.OnChanged -= OnQuestChanged;
         }
         ResourcesViewManager.Instance.UnRegisterView(this);

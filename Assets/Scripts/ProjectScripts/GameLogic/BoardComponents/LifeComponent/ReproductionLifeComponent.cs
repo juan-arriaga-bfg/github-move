@@ -2,7 +2,7 @@
 
 public class ReproductionLifeComponent : WorkplaceLifeComponent
 {
-    private PiecesReproductionDef def;
+    private PieceReproductionDef def;
     
     private string childName;
     

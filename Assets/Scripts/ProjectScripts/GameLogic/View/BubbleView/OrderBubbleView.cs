@@ -10,7 +10,7 @@ public class OrderBubbleView : UIBoardView
 	
 	private CustomerComponent customer;
     
-	public override void SetOfset()
+	public override void SetOffset()
 	{
 		CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Offset;
 	}
