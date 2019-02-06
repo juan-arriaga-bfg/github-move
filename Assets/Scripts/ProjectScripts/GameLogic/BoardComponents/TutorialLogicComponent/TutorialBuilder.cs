@@ -78,7 +78,7 @@ public static class TutorialBuilder
             }
             case 4: // tutorial 3 - clear fog
             {
-                step = new HighlightFogTutorialStep {Delay = 5};
+                step = new HighlightFogTutorialStep {Delay = 0};
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "2_ClearFog", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "2_ClearFog", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Complete}, true);

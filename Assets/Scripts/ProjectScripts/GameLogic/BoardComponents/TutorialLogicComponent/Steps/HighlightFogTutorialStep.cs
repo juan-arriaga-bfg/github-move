@@ -1,5 +1,7 @@
-﻿public class HighlightFogTutorialStep : DelayTutorialStep
+﻿public class HighlightFogTutorialStep : LoopFingerTutorialStep
 {
+    private BoardPosition Target = new BoardPosition(20, 10, BoardLayer.Piece.Layer);
+    
     public override void Perform()
     {
         if (IsPerform) return;
@@ -11,14 +13,11 @@
     
     public override void Execute()
     {
-        base.Execute();
+        var positions = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(PieceType.Mana1.Id);
         
-//        HighlightFogHelper.HighlightNextFog(0);
-    }
-    
-    protected override void Complete()
-    {
-        base.Complete();
-        Context.Context.HintCooldown.Resume(this);
+        from = positions[0];
+        to = Target;
+        
+        base.Execute();
     }
 }
