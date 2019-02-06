@@ -80,7 +80,7 @@ public static class TutorialBuilder
             {
                 step = new HighlightFogTutorialStep {Delay = 0};
                 
-                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "2_ClearFog", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition {Target = 2, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "2_ClearFog", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "2_ClearFog", TargetState = TaskState.InProgress, ConditionType = TutorialConditionType.Hard}, true);
                 
