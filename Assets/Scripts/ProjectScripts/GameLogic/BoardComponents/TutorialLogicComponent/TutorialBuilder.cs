@@ -175,7 +175,7 @@ public static class TutorialBuilder
                     OnComplete = () => Analytics.SendTutorialEndStepEvent("ingredients"),
                 };
 
-                step.RegisterComponent(new CheckStepTutorialCondition {Target = 1, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckStepTutorialCondition {Target = LockPRStepIndex, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "16_CompleteOrder", TargetState = TaskState.Completed, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
