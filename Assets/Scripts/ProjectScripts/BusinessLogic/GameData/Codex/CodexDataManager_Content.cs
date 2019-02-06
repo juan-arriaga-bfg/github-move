@@ -131,11 +131,11 @@ public partial class CodexDataManager
                         Name = LocalizationService.Get("window.codex.branch.CH_B", "window.codex.branch.CH_B"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.CH1_B.Id)),
                     },
-                    // new CodexChainDef
-                    // {
-                    //     Name = LocalizationService.Get("window.codex.branch.CH_C", "window.codex.branch.CH_C"),
-                    //     ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.CH1_C.Id)),
-                    // },
+                    new CodexChainDef
+                    {
+                        Name = LocalizationService.Get("window.codex.branch.CH_C", "window.codex.branch.CH_C"),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.CH1_C.Id)),
+                    },
                     // new CodexChainDef
                     // {
                     //     Name = LocalizationService.Get("window.codex.branch.CH_D", "window.codex.branch.CH_D"),
