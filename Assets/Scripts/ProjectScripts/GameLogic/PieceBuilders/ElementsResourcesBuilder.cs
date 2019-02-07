@@ -255,6 +255,27 @@ public class ElementsResourcesBuilder
             
         #endregion
         
+        #region E
+        
+        dict.Add(PieceType.E1.Id, R.E1Piece);
+        dict.Add(PieceType.E2.Id, R.E2Piece);
+        dict.Add(PieceType.E3Fake.Id, R.E3Piece);
+        dict.Add(PieceType.E3.Id, R.E3Piece);
+        dict.Add(PieceType.E4Fake.Id, R.E4Piece);
+        dict.Add(PieceType.E4.Id, R.E4Piece);
+        dict.Add(PieceType.E5Fake.Id, R.E5Piece);
+        dict.Add(PieceType.E5.Id, R.E5Piece);
+        dict.Add(PieceType.E6Fake.Id, R.E6Piece);
+        dict.Add(PieceType.E6.Id, R.E6Piece);
+        dict.Add(PieceType.E7Fake.Id, R.E7Piece);
+        dict.Add(PieceType.E7.Id, R.E7Piece);
+        dict.Add(PieceType.E8Fake.Id, R.E8Piece);
+        dict.Add(PieceType.E8.Id, R.E8Piece);
+        dict.Add(PieceType.E9Fake.Id, R.E9Piece);
+        dict.Add(PieceType.E9.Id, R.E9Piece);
+            
+        #endregion
+        
 #endregion
         
 #region Reproduction Pieces
