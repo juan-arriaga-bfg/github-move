@@ -343,13 +343,14 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
             current += value;
             result.Add(pair.Key, value);
         }
+
+        var position = observer.Def.GetCenter();
+        position.Z = BoardLayer.Piece.Layer;
         
-        piece.Context.ActionExecutor.AddAction(new SpawnRewardPiecesAction
+        piece.Context.ActionExecutor.AddAction(new EjectionPieceAction
         {
-            From = targetPosition,
+            From = position,
             Pieces = result,
-            EnabledTopHighlight = true,
-            EnabledBottomHighlight = true
         });
         
         return true;
