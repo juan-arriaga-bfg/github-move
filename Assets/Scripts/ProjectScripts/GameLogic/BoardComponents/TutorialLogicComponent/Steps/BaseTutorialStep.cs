@@ -12,7 +12,7 @@
 	
 	public bool IsPerform;
 	public bool IsIgnoreUi;
-	public bool IsIgnoreDev = true;
+	public bool IsIgnoreDebug = true;
 
 	public bool IsAnyStartCondition;
 	public bool IsAnyCompleteCondition;
@@ -68,7 +68,7 @@
 		isComplete = Check(TutorialConditionType.Complete);
 		
 #if DEBUG
-		if (isComplete == false && IsIgnoreDev) isComplete = !DevTools.IsTutorialEnabled();
+		if (isComplete == false && IsIgnoreDebug) isComplete = !DevTools.IsTutorialEnabled();
 #endif
 		
 		if (isComplete) Complete();
