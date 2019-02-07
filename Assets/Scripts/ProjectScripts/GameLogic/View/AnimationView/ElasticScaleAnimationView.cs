@@ -11,11 +11,9 @@ public class ElasticScaleAnimationView : AnimationView
     public override void Play(PieceBoardElementView pieceView)
     {
         base.Play(pieceView);
-        
 
         var sequence = DOTween.Sequence();
         sequence.SetId(animationUid);
-        
 
         sequence.Insert(0.0f, pieceView.CachedTransform.DOScale(new Vector3(1f, 0.8f, 1f), 0.1f));
         sequence.Insert(0.1f, pieceView.CachedTransform.DOScale(new Vector3(0.9f, 1.1f, 1f), 0.1f));
@@ -24,11 +22,5 @@ public class ElasticScaleAnimationView : AnimationView
         sequence.InsertCallback(timeoutDuration, () => OnComplete?.Invoke());
 
         this.pieceView = pieceView;
-    }
-
-    public override void Stop()
-    {
-        if (this.pieceView != null)
-            DOTween.Kill(animationUid);
     }
 }
