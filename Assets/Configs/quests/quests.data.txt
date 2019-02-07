@@ -920,6 +920,29 @@
     }
   },
   {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "45_CreatePiece_PR_B5",
+    "TaskDefs": [
+      {
+        "TaskId": "45_CreatePiece_PR_B5"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 10
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 25
+          }
+        ]
+      }
+    }
+  },
+  {
     "$type": "DailyQuestEntity, GameAssembly",
     "Id": "Daily",
     "TaskDefs": [

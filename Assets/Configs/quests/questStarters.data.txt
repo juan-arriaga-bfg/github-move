@@ -491,5 +491,19 @@
         "Value": "42_UseMine"
       }
     ]
+  },
+  {
+    "Id": 41,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "45_CreatePiece_PR_B5"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "21_OpenChest"
+      }
+    ]
   }
 ]
