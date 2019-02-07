@@ -89,7 +89,6 @@
     "Id": 9,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "22_CreatePiece_A6",
       "20_HitTree"
     ],
     "Conditions": [
@@ -160,14 +159,14 @@
     "Id": 14,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "19_CreatePiece_A7",
+      "30_CreatePiece_A8",
       "21_OpenChest"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
         "Id": "PieceUnlocked",
-        "Value": "A6"
+        "Value": "A7"
       }
     ]
   },
@@ -308,20 +307,6 @@
         "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
         "Id": "QuestCompleted",
         "Value": "28_CreatePiece_C4"
-      }
-    ]
-  },
-  {
-    "Id": 27,
-    "$type": "QuestStarterEntity, GameAssembly",
-    "QuestToStartIds": [
-      "30_CreatePiece_A8"
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
-        "Id": "QuestCompleted",
-        "Value": "19_CreatePiece_A7"
       }
     ]
   },
