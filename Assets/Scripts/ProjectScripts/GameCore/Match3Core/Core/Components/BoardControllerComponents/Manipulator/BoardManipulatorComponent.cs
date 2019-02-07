@@ -272,15 +272,16 @@ public class BoardManipulatorComponent : ECSEntity,
                     var targetPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
                     var toPosition = new BoardPosition(targetPosition.X, targetPosition.Y, fromPosition.Z);
                     
-                    if (context.BoardLogic.IsEmpty(toPosition) == false 
-                        && (context.WorkerLogic.SetExtra(pieceView.Piece, toPosition)
-                        || GameDataService.Current.FogsManager.SetMana(pieceView.Piece, toPosition)))
+                    if (context.BoardLogic.IsEmpty(toPosition) == false && context.WorkerLogic.SetExtra(pieceView.Piece, toPosition))
                     {
                         context.ActionExecutor.AddAction(new CollapsePieceToAction
                         {
                             To = targetPosition,
                             Positions = new List<BoardPosition> {pieceView.Piece.CachedPosition}
                         });
+                    }
+                    else if(context.BoardLogic.IsEmpty(toPosition) == false && GameDataService.Current.FogsManager.SetMana(pieceView.Piece, toPosition))
+                    {
                     }
                     else
                     {

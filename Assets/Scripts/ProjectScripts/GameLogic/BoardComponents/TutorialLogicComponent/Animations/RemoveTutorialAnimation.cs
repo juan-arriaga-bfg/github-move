@@ -38,9 +38,14 @@ public class RemoveTutorialAnimation : BaseTutorialAnimation
         if(board.BoardLogic.IsEmpty(target)) return;
         
         board.BoardLogic.RemovePieceAt(target);
-        
+
         DOTween.Sequence()
             .AppendInterval(0.5f)
-            .AppendCallback(() => board.ActionExecutor.AddAction(new CollapsePieceToAction{To = target, Positions = new List<BoardPosition>{target}, AnimationResourceSearch = piece => AnimationOverrideDataService.Current.FindAnimation(piece, def => def.OnDestroyFromBoard)}));
+            .AppendCallback(() => board.ActionExecutor.AddAction(new CollapsePieceToAction
+            {
+                To = target,
+                Positions = new List<BoardPosition> {target},
+                AnimationResourceSearch = piece => AnimationOverrideDataService.Current.FindAnimation(piece, def => def.OnDestroyFromBoard)
+            }));
     }
 }
