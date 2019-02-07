@@ -213,6 +213,29 @@ public class MatchDefinitionBuilder
         
         #endregion
         
+        #region E
+        
+        dict.Add(PieceType.E1.Id, new PieceMatchDef {Next = PieceType.E2.Id, Previous = PieceType.None.Id, Amount = 3});
+        dict.Add(PieceType.E2.Id, new PieceMatchDef {Next = PieceType.E3Fake.Id, Previous = PieceType.E1.Id, Amount = 3});
+        dict.Add(PieceType.E3Fake.Id, new PieceMatchDef {Next = PieceType.E3.Id, Previous = PieceType.E2.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.E3.Id, new PieceMatchDef {Next = PieceType.E4Fake.Id, Previous = PieceType.E2.Id, Amount = 3});
+        dict.Add(PieceType.E4Fake.Id, new PieceMatchDef {Next = PieceType.E4.Id, Previous = PieceType.E3.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.E4.Id, new PieceMatchDef {Next = PieceType.E5Fake.Id, Previous = PieceType.E3.Id, Amount = 3});
+        dict.Add(PieceType.E5Fake.Id, new PieceMatchDef {Next = PieceType.E5.Id, Previous = PieceType.E4.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.E5.Id, new PieceMatchDef {Next = PieceType.E6Fake.Id, Previous = PieceType.E4.Id, Amount = 3});
+        dict.Add(PieceType.E6Fake.Id, new PieceMatchDef {Next = PieceType.E6.Id, Previous = PieceType.E5.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.E6.Id, new PieceMatchDef {Next = PieceType.E7Fake.Id, Previous = PieceType.E5.Id, Amount = 3});
+        dict.Add(PieceType.E7Fake.Id, new PieceMatchDef {Next = PieceType.E7.Id, Previous = PieceType.E6.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.E7.Id, new PieceMatchDef {Next = PieceType.E8Fake.Id, Previous = PieceType.E6.Id, Amount = 3});
+        dict.Add(PieceType.E8Fake.Id, new PieceMatchDef {Next = PieceType.E8.Id, Previous = PieceType.E7.Id, Amount = 1, IsIgnore = true});
+        dict.Add(PieceType.E8.Id, new PieceMatchDef {Next = PieceType.E9Fake.Id, Previous = PieceType.E7.Id, Amount = 3});
+        
+        dict = AddFakeMulticellularPiece(dict, PieceType.E9Fake.Id, PieceType.E9.Id, PieceType.E8.Id);
+        
+        dict.Add(PieceType.E9.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.E8.Id});
+        
+        #endregion
+        
 #endregion
         
 #region Reproduction Pieces

@@ -147,8 +147,10 @@ public class SellForCashManager: ECSEntity
             this.onComplete = null;
             return;
         }
+
+        UIWaitWindowView.Show()
+                        .HideOnFocus();
         
-        UIWaitWindowView.Show();
         IapService.Current.Purchase(productId);
     }
 }

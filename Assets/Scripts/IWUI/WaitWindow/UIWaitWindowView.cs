@@ -12,6 +12,8 @@ public class UIWaitWindowView : IWUIWindowView
     private readonly object TIMEOUT_ID = new object();
 
     private float timeout;
+
+    private bool hideOnFocus;
     
     public override void AnimateShow()
     {
@@ -61,7 +63,7 @@ public class UIWaitWindowView : IWUIWindowView
         label.text = text ?? string.Empty;
     }
     
-    public void SetTimeout(float seconds)
+    public UIWaitWindowView SetTimeout(float seconds)
     {
         DOTween.Kill(TIMEOUT_ID);
         
@@ -71,6 +73,14 @@ public class UIWaitWindowView : IWUIWindowView
                 {
                     Controller.CloseCurrentWindow();
                 });
+
+        return this;
+    }
+    
+    public UIWaitWindowView HideOnFocus()
+    {
+        hideOnFocus = true;
+        return this;
     }
 
     public static UIWaitWindowView Show()
@@ -87,6 +97,7 @@ public class UIWaitWindowView : IWUIWindowView
         UIWaitWindowView windowView = (UIWaitWindowView) window.CurrentView;
         windowView.SetText(LocalizationService.Get("window.wait.message", "window.wait.message"));
         windowView.timeout = 0;
+        windowView.hideOnFocus = false;
         
         return windowView;
     }
@@ -104,6 +115,24 @@ public class UIWaitWindowView : IWUIWindowView
                 controller.ForceStopShowing();
                 controller.CloseCurrentWindow();
             }
+        }
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (hideOnFocus && hasFocus)
+        {
+            hideOnFocus = false;
+            Controller.CloseCurrentWindow();
+        }
+    }
+
+    private void OnApplicationPause(bool paused)
+    {
+        if (hideOnFocus && !paused)
+        {
+            hideOnFocus = false;
+            Controller.CloseCurrentWindow();
         }
     }
 }

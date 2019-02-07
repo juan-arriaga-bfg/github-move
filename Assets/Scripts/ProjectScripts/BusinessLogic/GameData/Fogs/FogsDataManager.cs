@@ -324,12 +324,19 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         
         observer.Filling(def.SpawnResources.Amount, out var balance);
 
-        if (balance <= 0) return true;
+        if (balance <= 0)
+        {
+            piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+            {
+                To = targetPosition,
+                Positions = new List<BoardPosition> {piece.CachedPosition}
+            });
+            
+            return true;
+        }
 
         var pieces = CurrencyHelper.CurrencyToResourcePieces(balance, Currency.Mana.Name);
-
-        if (pieces.Count == 0) return true;
-
+        
         const int max = 2;
         var current = 0;
         var result = new Dictionary<int, int>();
@@ -343,13 +350,16 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
             current += value;
             result.Add(pair.Key, value);
         }
+
+        var position = observer.Def.GetCenter();
+        position.Z = BoardLayer.Piece.Layer;
         
-        piece.Context.ActionExecutor.AddAction(new SpawnRewardPiecesAction
+        piece.Context.ActionExecutor.AddAction(new ManaCangeAction
         {
-            From = targetPosition,
+            Target = targetPosition,
+            Old = piece.CachedPosition,
+            From = position,
             Pieces = result,
-            EnabledTopHighlight = true,
-            EnabledBottomHighlight = true
         });
         
         return true;
