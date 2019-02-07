@@ -13,7 +13,7 @@ public class RewardsBubbleView : UIBoardView
 	
 	public Action OnClickAction;
 
-	public override void SetOfset()
+	public override void SetOffset()
 	{
 		CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Offset;
 	}
@@ -24,7 +24,7 @@ public class RewardsBubbleView : UIBoardView
         
 		Offset = new Vector3(0, 1.5f);
         
-		SetOfset();
+		SetOffset();
         
 		Priority = defaultPriority = 11;
         

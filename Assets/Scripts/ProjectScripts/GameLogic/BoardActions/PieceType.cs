@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEngine;
 
 [Flags]
 public enum PieceTypeFilter
@@ -77,17 +78,39 @@ public static partial class PieceType
         return result;
     }
     
+    /// <summary>
+    /// Return List of ids for pieces that has specified *filter* and not has ANY of *exclude*
+    /// </summary>
+    /// <param name="filter">Select pieces that has specified flag. Multiply flags are not supported, provide only one:
+    /// GetIdsByFilter(PieceTypeFilter.Obstacle | PieceTypeFilter.Bag, [exclude]) - incorrect
+    /// GetIdsByFilter(PieceTypeFilter.Obstacle, [exclude]) - Correct
+    /// </param>
+    /// <param name="exclude">Pieces that has ANY of flag from this param will be excluded</param>
+    /// Let Piece X1 has PieceTypeFilters: Simple, Obstacle, Tree 
+    /// Let Piece X2 has PieceTypeFilters: Simple, Tree 
+    /// Let Piece X3 has PieceTypeFilters: Simple 
+    /// GetIdsByFilter(Simple, Obstacle | Tree) => X3
+    /// GetIdsByFilter(Simple, Obstacle) => X2, X3
+    /// GetIdsByFilter(Simple, Tree) => X3
     public static List<int> GetIdsByFilter(PieceTypeFilter filter, PieceTypeFilter exclude)
     {
+#if DEBUG
+        int count = BitsHelper.CountOfSetBits((int) filter);
+        if (count > 1)
+        {
+            Debug.LogError($"[PieceType] => GetIdsByFilter: filter param contains more then one flag set ({filter.PrettyPrint()}. It will not work correctly!)");
+        }
+#endif
+        
         var result = new List<int>();
 
         foreach (var def in defs.Values)
         {
-            if(def.Filter.Has(filter) == false) continue;
-            if (def.Filter.Has(exclude)) continue;
-            
             // ignore empty piece
             if (def.Id == PieceType.Empty.Id) continue;
+            
+            if(def.Filter.Has(filter) == false) continue;
+            if ((int)(def.Filter & exclude) != 0) continue;// Exclude pieces with ANY of flags from 'exclude' param
             
             result.Add(def.Id);
         }

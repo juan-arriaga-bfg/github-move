@@ -104,12 +104,17 @@ public class SellForCashManager: ECSEntity
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
 
-    private void OnPurchaseOk(string productId, string receipt)
+    private void OnPurchaseOk(string productId, string receipt, bool restore)
     {
         UIWaitWindowView.Hide();
-        
-        ProvideReward(productId);
-        
+
+        if (!restore) // Restore will be handled in RestoredPurchasesProvider
+        {
+            ProvideReward(productId);
+            
+            ProfileService.Current.GetComponent<BaseInformationSaveComponent>(BaseInformationSaveComponent.ComponentGuid).IsPayer = true;
+        }
+
         onComplete?.Invoke(true, productId);
         onComplete = null;
     }
@@ -135,7 +140,7 @@ public class SellForCashManager: ECSEntity
     public void Purchase(string productId, Action<bool, string> onComplete)
     {
         this.onComplete = onComplete;
-        ProfileService.Current.GetComponent<BaseInformationSaveComponent>(BaseInformationSaveComponent.ComponentGuid).IsPayer = true;
+        
         if (!NetworkUtils.CheckInternetConnection(true))
         {
             this.onComplete?.Invoke(false, productId);

@@ -16,9 +16,6 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 	private List<BuildingSaveItem> buildings;
 	private AreaAccessSaveItem areaAccess;
 	
-	private string movedMines;
-	private string removedMines;
-	
 	[JsonProperty]
 	public List<PieceSaveItem> Pieces
 	{
@@ -41,20 +38,6 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 	}
 	
 	[JsonProperty]
-	public string MovedMines
-	{
-		get { return movedMines; }
-		set { movedMines = value; }
-	}
-	
-	[JsonProperty]
-	public string RemovedMines
-	{
-		get { return removedMines; }
-		set { removedMines = value; }
-	}
-	
-	[JsonProperty]
 	public List<BuildingSaveItem> Buildings
 	{
 		get { return buildings; }
@@ -67,9 +50,6 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 		get { return areaAccess; }
 		set { areaAccess = value; }
 	}
-	
-	public List<BoardPosition> MovedMinePositions;
-	public List<int> RemovedMinePositions;
 	
 	private Dictionary<BoardPosition, RewardsSaveItem> rewardsSave;
 	private Dictionary<BoardPosition, LifeSaveItem> lifeSave;
@@ -101,21 +81,6 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 		}
 		
 		pieces.Sort((a, b) => -a.Id.CompareTo(b.Id));
-		
-		movedMines = PositionsToString(GameDataService.Current.MinesManager.Moved);
-
-		if (GameDataService.Current == null) return;
-		
-		var str = new StringBuilder();
-
-		foreach (var id in GameDataService.Current.MinesManager.Removed)
-		{
-			str.Append(id);
-			str.Append(",");
-		}
-		
-		removedMines = str.ToString();
-
 		AreaAccess = board.AreaAccessController.GetSaveItem();
 	}
 
@@ -125,9 +90,6 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 		rewardsSave = new Dictionary<BoardPosition, RewardsSaveItem>();
 		lifeSave = new Dictionary<BoardPosition, LifeSaveItem>();
 		buildingSave = new Dictionary<BoardPosition, BuildingSaveItem>();
-		
-		MovedMinePositions = StringToPositions(movedMines);
-		RemovedMinePositions = new List<int>();
 		
 		if (rewards != null)
 		{
@@ -152,17 +114,6 @@ public class FieldDefComponent : BaseSaveComponent, IECSSerializeable
 				buildingSave.Add(building.Position, building);
 			}
 		}
-		
-		if (string.IsNullOrEmpty(removedMines) == false)
-		{
-			var data = removedMines.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
-
-			foreach (var str in data)
-			{
-				RemovedMinePositions.Add(int.Parse(str));
-			}
-		}
-		
 	}
 	
 	public RewardsSaveItem GetRewardsSave(BoardPosition position)

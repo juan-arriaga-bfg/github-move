@@ -2,7 +2,7 @@
 
 public class MakingLifeComponent : WorkplaceLifeComponent
 {
-    private PiecesMakingDef def;
+    private PieceMakingDef def;
     
     public override CurrencyPair Energy => def.Price;
     public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.castle.make", "gameboard.bubble.message.castle.make {0}"), Energy.ToStringIcon());

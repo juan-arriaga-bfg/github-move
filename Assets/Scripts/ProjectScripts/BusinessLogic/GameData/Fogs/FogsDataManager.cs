@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BfgAnalytics;
 using UnityEngine;
 
 public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsDataManager>
@@ -88,11 +89,15 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
     public void RemoveFog(BoardPosition key)
     {
         Debug.Log($"[FogsDataManager] => RemoveFog({key}");
+
+        var def = GetDef(key);
         
         if(VisibleFogPositions.ContainsKey(key) == false) return;
-        LastOpenFog = GetDef(key);
-        ClearedFogPositions.Add(key, GetDef(key));
+        LastOpenFog = def;
+        ClearedFogPositions.Add(key, def);
         VisibleFogPositions.Remove(key);
+        
+        Analytics.SendFogClearedEvent(def.Uid);
 
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
     }
@@ -209,8 +214,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         {
             var fogDef = pair.Value;
 
-            FogObserver observer;
-            if (FogObservers.TryGetValue(pair.Key, out observer))
+            if (FogObservers.TryGetValue(pair.Key, out var observer))
             {
                 if (!observer.IsActive)
                 {
@@ -315,10 +319,38 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         if (def?.SpawnResources == null || def.SpawnResources.Currency != Currency.Mana.Name || target.PieceType != PieceType.Fog.Id) return false;
         
         var observer = target.GetComponent<FogObserver>(FogObserver.ComponentGuid);
-
-        if (observer == null || observer.IsRemoved || observer.RequiredLevelReached() == false || observer.CanBeReached() == false) return false;
         
-        observer.Filling(def.SpawnResources.Amount);
+        if (observer == null || observer.IsRemoved || observer.CanBeFilled() == false || observer.CanBeCleared() == false) return false;
+        
+        observer.Filling(def.SpawnResources.Amount, out var balance);
+
+        if (balance <= 0) return true;
+
+        var pieces = CurrencyHelper.CurrencyToResourcePieces(balance, Currency.Mana.Name);
+
+        if (pieces.Count == 0) return true;
+
+        const int max = 2;
+        var current = 0;
+        var result = new Dictionary<int, int>();
+
+        foreach (var pair in pieces)
+        {
+            if(current == max) break;
+            
+            var value = Mathf.Clamp(pair.Value, 0, max - current);
+            
+            current += value;
+            result.Add(pair.Key, value);
+        }
+        
+        piece.Context.ActionExecutor.AddAction(new SpawnRewardPiecesAction
+        {
+            From = targetPosition,
+            Pieces = result,
+            EnabledTopHighlight = true,
+            EnabledBottomHighlight = true
+        });
         
         return true;
     }

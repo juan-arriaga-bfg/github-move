@@ -53,7 +53,7 @@ public class IapManager : ECSEntity, IIapManager
     
     public IapErrorCode LastInitError { get; private set; }
 
-    public delegate void OnPurchaseOkDelegate(string productId, string receipt);
+    public delegate void OnPurchaseOkDelegate(string productId, string receipt, bool restore);
 
     public OnPurchaseOkDelegate OnPurchaseOK;
 
@@ -88,12 +88,12 @@ public class IapManager : ECSEntity, IIapManager
 
         iapProvider.OnPurchaseFail += OnPurchaseFailCallback;
         iapProvider.OnPurchaseOK += OnPurchaseOkCallback;
-        iapProvider.OnRestoreCompleted += OnOnRestoreCompletedCallback;
+        iapProvider.OnRestoreCompleted += OnRestoreCompletedCallback;
 
         return this;
     }
 
-    private void OnPurchaseOkCallback(string productId, string receipt)
+    private void OnPurchaseOkCallback(string productId, string receipt, bool restore)
     {
         Debug.Log($"[IapManager] => OnPurchaseOkCallback: productId: '{productId}' with receipt:\n{receipt}");
         
@@ -138,7 +138,8 @@ public class IapManager : ECSEntity, IIapManager
             {
                 pendingIap.Validated = true;
                 pendingIaps.Add(productId, pendingIap);
-                OnPurchaseOK.Invoke(productId, receipt);
+
+                OnPurchaseOK.Invoke(productId, receipt, restore);
                 return;
             }
 
@@ -167,7 +168,7 @@ public class IapManager : ECSEntity, IIapManager
         OnPurchaseFail?.Invoke(productId, error);
     }
     
-    private void OnOnRestoreCompletedCallback(bool isOk)
+    private void OnRestoreCompletedCallback(bool isOk)
     {
         OnRestoreCompleted?.Invoke(isOk);
     }
@@ -361,7 +362,7 @@ public class IapManager : ECSEntity, IIapManager
         var pendingIap = pendingIaps[productId];
         if (pendingIap.Validated)
         {
-            OnPurchaseOK?.Invoke(productId, pendingIap.Receipt);
+            OnPurchaseOK?.Invoke(productId, pendingIap.Receipt, false);
             return;
         }
 
@@ -379,7 +380,7 @@ public class IapManager : ECSEntity, IIapManager
             {
                 if (validatedPendingIap.Validated)
                 {
-                    OnPurchaseOK?.Invoke(productId, validatedPendingIap.Receipt);
+                    OnPurchaseOK?.Invoke(productId, validatedPendingIap.Receipt, false);
                 }
                 else
                 {
@@ -595,7 +596,7 @@ public class IapManager : ECSEntity, IIapManager
         {
             iapProvider.OnPurchaseFail -= OnPurchaseFailCallback;
             iapProvider.OnPurchaseOK -= OnPurchaseOkCallback;
-            iapProvider.OnRestoreCompleted -= OnOnRestoreCompletedCallback;
+            iapProvider.OnRestoreCompleted -= OnRestoreCompletedCallback;
             iapProvider.CleanUp();
         }
     }

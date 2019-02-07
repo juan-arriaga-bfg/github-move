@@ -34,8 +34,9 @@ public class FogProgressView : UIBoardView
         DOTween.Kill(light);
 
         DOTween.Sequence().SetId(light).SetLoops(int.MaxValue)
+            .SetEase(Ease.InOutSine)
             .Append(light.DOFade(0.5f, 0.3f))
-            .Append(light.DOFade(1f, 0.3f));
+            .Append(light.DOFade(1f, 0.4f));
     }
     
     public override void ResetViewOnDestroy()

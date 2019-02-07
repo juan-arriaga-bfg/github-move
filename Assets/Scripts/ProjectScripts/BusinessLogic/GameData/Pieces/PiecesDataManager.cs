@@ -13,6 +13,7 @@ public class PiecesDataManager : SequenceData, IDataLoader<List<PieceDef>>
         base.OnRegisterEntity(entity);
         RegisterComponent(new PiecesReproductionDataManager());
         RegisterComponent(new PiecesMakingDataManager());
+        RegisterComponent(new PiecesMineDataManager());
     }
     
     public override void Reload()

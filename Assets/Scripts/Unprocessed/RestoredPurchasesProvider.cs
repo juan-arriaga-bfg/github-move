@@ -6,6 +6,36 @@ public class RestoredPurchasesProvider : MonoBehaviour
     private void Start()
     {
         ScheduleProvide();
+
+        var service = IapService.Current;
+        
+        service.OnRestoreCompleted += OnRestoreCompleted;
+
+        if (service.IsInitialized)
+        {
+            IapService.Current.RestorePurchases();
+        }
+        else
+        {
+            service.OnInitialized += OnServiceInitialized;
+        }
+    }
+
+    private void OnServiceInitialized()
+    {
+        var service = IapService.Current;
+        
+        service.OnInitialized -= OnServiceInitialized;
+        
+        service.RestorePurchases();
+    }
+
+    private void OnDestroy()
+    {
+        var service = IapService.Current;
+        
+        service.OnRestoreCompleted -= OnRestoreCompleted; 
+        service.OnInitialized -= OnServiceInitialized;
     }
 
     private void OnApplicationPause(bool isPaused)
@@ -18,10 +48,21 @@ public class RestoredPurchasesProvider : MonoBehaviour
         ScheduleProvide();
     }
 
+    private void OnRestoreCompleted(bool isOk)
+    {
+        ScheduleProvide();
+    }
+    
     private void ScheduleProvide()
     {
         var iapService = IapService.Current;
 
+        if (iapService == null)
+        {
+            Debug.LogWarning($"[RestoredPurchasesProvider] => ScheduleProvide: IapService.Current == null");
+            return;
+        }
+        
         if (iapService.PendingIaps.Count > 0)
         {
             Debug.Log($"[RestoredPurchasesProvider] => ScheduleProvide: {string.Join(" | ", iapService.PendingIaps.Keys.ToList())}");
@@ -53,6 +94,7 @@ public class RestoredPurchasesProvider : MonoBehaviour
                 model.OnClose = () =>
                 {
                     SellForCashService.Current.ProvideReward(id);
+                    ProfileService.Current.QueueComponent.RemoveAction(id); // For case if we have scheduled the action once again while Restore window is in progress
                 };
 
                 // model.OnCancel = model.OnAccept;

@@ -51,7 +51,7 @@ public class TaskUseMineEntity : TaskEventCounterEntity
             return;
         }
 
-        if (PieceId <= 0 || (context as MineLifeComponent)?.MinePieceType == PieceId)
+        if (PieceId <= 0 || (context as MineLifeComponent)?.Context.PieceType == PieceId)
         {
             CurrentValue += 1;
         }

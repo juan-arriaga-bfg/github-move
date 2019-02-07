@@ -194,7 +194,7 @@ public static partial class CurrencyHelper
             if(count == 0) continue;
             
             amount -= count * def.SpawnResources.Amount;
-            dict.Add(PieceType.Parse(def.SpawnResources.Currency), count);
+            dict.Add(def.Id, count);
         }
         
         return dict;

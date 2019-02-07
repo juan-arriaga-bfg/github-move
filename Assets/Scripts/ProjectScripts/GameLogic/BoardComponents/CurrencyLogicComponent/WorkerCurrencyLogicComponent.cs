@@ -167,8 +167,8 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         if (!CheckLife(target) && !CheckPieceState(target) && !context.PartPiecesLogic.Work(target)) return false;
         
         if (def.Filter.HasFlag(PieceTypeFilter.Mine)) NSAudioService.Current.Play(SoundId.WorkerMine);
+        else if(def.Filter.HasFlag(PieceTypeFilter.Obstacle)) NSAudioService.Current.Play(SoundId.WorkerChop);
         else if(def.Filter.HasFlag(PieceTypeFilter.ProductionField)) NSAudioService.Current.Play(SoundId.WorkerHarvest);
-        else NSAudioService.Current.Play(SoundId.WorkerChop);
         
         return true;
     }

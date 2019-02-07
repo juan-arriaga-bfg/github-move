@@ -129,14 +129,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
             {
                 foreach (var pos in pieceDefs.Value)
                 {
-                    var pieceUid = pieceDefs.Key;
-                    var pieceId = GameDataService.Current.MinesManager.GetMineTypeById(pieceUid);
-
-                    if (pieceId == PieceType.None.Id)
-                    {
-                        pieceId = PieceType.Parse(pieceUid);
-                    }
-
+                    var pieceId = PieceType.Parse(pieceDefs.Key);
                     var fakePos = new BoardPosition(pos.X, pos.Y, 0);
                     var fakePiece = Context.Context.BoardLogic.DragAndDrop.CreateFakePieceAt(pieceId, fakePos);
 	                

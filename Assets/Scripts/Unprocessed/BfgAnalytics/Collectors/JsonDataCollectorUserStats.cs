@@ -9,8 +9,23 @@ namespace BfgAnalytics
 {
     public class JsonDataCollectorUserStats : IJsonDataCollector
     {
-        private static MatchDefinitionComponent matchDefinition = new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
+        private MatchDefinitionComponent matchDefinition;
+        private List<int> firstInChains;
+        private Dictionary<int, string> chainNames;
+        private Regex chainNameRegex;
+        private int lastInstanceId = -1;
+        private JSONNode cachedNode;
         public string Name => "userstats";
+
+        public JsonDataCollectorUserStats()
+        {
+            matchDefinition = new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
+            firstInChains = PieceType.GetIdsByFilter(PieceTypeFilter.Normal)
+                                     .Select(id => matchDefinition.GetFirst(id)).Distinct().ToList();
+            
+            chainNames = new Dictionary<int, string>();
+            chainNameRegex = new Regex(@"^([A-Z]+)\d+");
+        }
 
         public JSONNode CollectData()
         {
@@ -48,40 +63,53 @@ namespace BfgAnalytics
 
         private JSONNode GetTopPiecesInformation()
         {
+            var codex = GameDataService.Current.CodexManager;
+            var codexContent = codex.GetCodexContent();
+            if (lastInstanceId == codexContent.InstanceId)
+                return cachedNode;
+            
             JSONNode node = new JSONObject();
-
-            var pieces = BoardService.Current.FirstBoard.BoardLogic.BoardEntities.Values;
-            var validTypes = PieceType.GetIdsByFilter(PieceTypeFilter.Normal);
-            Dictionary<int, int> maxPieceTypes = new Dictionary<int, int>();
-            foreach (var piece in pieces)
+            lastInstanceId = codexContent.InstanceId;
+            
+            foreach (var item in firstInChains)
             {
-                if (validTypes.Contains(piece.PieceType) == false)
-                    continue;
+                CodexChainState chainState; 
+                if(codex.GetChainState(item, out chainState) == false) continue;
 
-
-                var branchStart = matchDefinition.GetFirst(piece.PieceType);
-                var current = matchDefinition.GetIndexInChain(piece.PieceType) - 1;
-                if (PieceType.GetDefById(piece.PieceType).Filter.Has(PieceTypeFilter.Fake))
-                    current--;
-
-                if (maxPieceTypes.ContainsKey(branchStart) && maxPieceTypes[branchStart] >= current)
-                    continue;
-
-                maxPieceTypes[branchStart] = current;
-            }
-
-            foreach (var typeChainIndex in maxPieceTypes)
-            {
-                var beginTypeId = typeChainIndex.Key;
-                var maxInChainIndex = typeChainIndex.Value;
-                var maxInChainId = matchDefinition.GetChain(beginTypeId)[maxInChainIndex];
-                var maxInChain = PieceType.GetDefById(maxInChainId);
-                var pieceName = maxInChain.Abbreviations[0];
-                var chainName = Regex.Match(pieceName, @"^([A-Z]+)\d+").Groups[1].Value;
+                var chain = matchDefinition.GetChain(item);
+                var maxUnlockedResult = -1;
+                for (var i = chain.Count - 1; i >= 0; i--)
+                {
+                    var currentMaxElement = chain[i];
+                    if (chainState.Unlocked.Contains(currentMaxElement))
+                    {
+                        maxUnlockedResult = currentMaxElement;
+                        break;
+                    }
+                }
+                
+                if (maxUnlockedResult == -1) continue;
+                
+                var itemDef = PieceType.GetDefById(maxUnlockedResult);
+                var pieceName = itemDef.Abbreviations[0];
+                var chainName = GetChainName(itemDef);
                 node[chainName] = pieceName;
             }
-            
+
+            cachedNode = node;
             return node;
+        }
+
+        private string GetChainName(PieceTypeDef pieceDef)
+        {
+            if (chainNames.ContainsKey(pieceDef.Id))
+                return chainNames[pieceDef.Id];
+
+            var pieceName = pieceDef.Abbreviations[0];
+            var chainName = chainNameRegex.Match(pieceName).Groups[1].Value;
+            
+            chainNames[pieceDef.Id] = chainName;
+            return chainName;
         }
     }
 }

@@ -5,12 +5,13 @@
       "Level": "2",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 15
+        "Amount": 5
       },
       "Reward": {
         "Currency": "Experience",
         "Amount": 10
       },
+      "IsActive": true,
       "Positions": [
         {
           "X": 18,
@@ -83,12 +84,13 @@
       "Level": "3",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 30
+        "Amount": 5
       },
       "Reward": {
         "Currency": "Experience",
         "Amount": 10
       },
+      "IsActive": true,
       "Positions": [
         {
           "X": 21,
@@ -120,24 +122,16 @@
         }
       ],
       "Pieces": {
-        "A3": [
+        "OB1_A": [
           {
             "X": 21,
             "Y": 8
-          },
-          {
-            "X": 23,
-            "Y": 9
           }
         ],
-        "OB5_A": [
+        "OB3_A": [
           {
             "X": 22,
             "Y": 8
-          },
-          {
-            "X": 24,
-            "Y": 9
           }
         ],
         "A4": [
@@ -146,16 +140,28 @@
             "Y": 9
           }
         ],
-        "OB3_A": [
+        "OB2_A": [
           {
             "X": 23,
             "Y": 8
+          }
+        ],
+        "A3": [
+          {
+            "X": 23,
+            "Y": 9
           }
         ],
         "Soft1": [
           {
             "X": 24,
             "Y": 8
+          }
+        ],
+        "Soft2": [
+          {
+            "X": 24,
+            "Y": 9
           }
         ]
       }
@@ -165,12 +171,13 @@
       "Level": "4",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 145
+        "Amount": 10
       },
       "Reward": {
         "Currency": "Experience",
         "Amount": 20
       },
+      "IsActive": true,
       "Positions": [
         {
           "X": 16,
@@ -208,23 +215,31 @@
             "Y": 7
           }
         ],
-        "OB4_A": [
+        "OB6_A": [
           {
             "X": 16,
             "Y": 8
           }
         ],
-        "Soft1": [
+        "A3": [
           {
             "X": 17,
             "Y": 7
+          }
+        ],
+        "PR_C4": [
+          {
+            "X": 17,
+            "Y": 8
           }
         ],
         "OB2_A": [
           {
             "X": 17,
             "Y": 9
-          },
+          }
+        ],
+        "A2": [
           {
             "X": 18,
             "Y": 8
@@ -243,12 +258,13 @@
       "Level": "5",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 100
+        "Amount": 40
       },
       "Reward": {
         "Currency": "Experience",
         "Amount": 50
       },
+      "IsActive": true,
       "Positions": [
         {
           "X": 18,
@@ -290,10 +306,14 @@
             "Y": 7
           }
         ],
-        "OB3_A": [
+        "OB7_A": [
           {
             "X": 19,
             "Y": 6
+          },
+          {
+            "X": 21,
+            "Y": 7
           }
         ],
         "Boost_CR": [
@@ -306,27 +326,17 @@
           {
             "X": 19,
             "Y": 8
-          },
-          {
-            "X": 20,
-            "Y": 8
           }
         ],
-        "Soft1": [
+        "OB6_A": [
           {
             "X": 20,
             "Y": 6
           }
         ],
-        "Boost_CR1": [
+        "Boost_CR3": [
           {
             "X": 20,
-            "Y": 7
-          }
-        ],
-        "OB2_A": [
-          {
-            "X": 21,
             "Y": 7
           }
         ]
@@ -337,12 +347,13 @@
       "Level": "6",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 130
+        "Amount": 50
       },
       "Reward": {
         "Currency": "Experience",
         "Amount": 50
       },
+      "IsActive": true,
       "Positions": [
         {
           "X": 13,
@@ -386,35 +397,37 @@
         }
       ],
       "Pieces": {
-        "NPC_PussInBoots": [
+        "PR_B3": [
           {
             "X": 13,
             "Y": 7
           }
         ],
-        "Mine 1": [
+        "MN_B": [
           {
             "X": 14,
             "Y": 6
           }
         ],
-        "OB5_A": [
+        "OB8_A": [
           {
             "X": 15,
             "Y": 5
-          },
+          }
+        ],
+        "OB5_A": [
           {
             "X": 16,
             "Y": 4
           }
         ],
-        "Soft2": [
+        "OB9_A": [
           {
             "X": 16,
             "Y": 5
           }
         ],
-        "Boost_CR1": [
+        "Boost_CR3": [
           {
             "X": 16,
             "Y": 6
@@ -437,11 +450,8 @@
         "Currency": "Experience",
         "Amount": 50
       },
+      "IsActive": true,
       "Positions": [
-        {
-          "X": 17,
-          "Y": 4
-        },
         {
           "X": 17,
           "Y": 5
@@ -472,61 +482,45 @@
         },
         {
           "X": 20,
-          "Y": 3
-        },
-        {
-          "X": 20,
           "Y": 4
         },
         {
           "X": 20,
           "Y": 5
-        },
-        {
-          "X": 21,
-          "Y": 4
         }
       ],
       "Pieces": {
-        "OB5_A": [
+        "OB9_A": [
           {
             "X": 17,
+            "Y": 5
+          },
+          {
+            "X": 18,
             "Y": 4
           },
           {
             "X": 20,
-            "Y": 3
+            "Y": 5
           }
         ],
-        "OB2_A": [
-          {
-            "X": 18,
-            "Y": 4
-          }
-        ],
-        "PR_B2": [
+        "NPC_PussInBoots": [
           {
             "X": 18,
             "Y": 5
           }
         ],
-        "Soft1": [
+        "PR_B5": [
           {
             "X": 18,
             "Y": 6
-          },
-          {
-            "X": 21,
-            "Y": 4
           }
         ],
-        "PR_D2": [
+        "Boost_CR1": [
           {
             "X": 19,
             "Y": 3
-          }
-        ],
-        "Boost_CR2": [
+          },
           {
             "X": 19,
             "Y": 4
@@ -538,35 +532,34 @@
             "Y": 5
           }
         ],
-        "PR_A3": [
+        "PR_D3": [
           {
             "X": 20,
             "Y": 4
-          }
-        ],
-        "OB3_A": [
-          {
-            "X": 20,
-            "Y": 5
           }
         ]
       }
     },
     {
       "Uid": "Fog 7",
-      "Level": "7",
+      "Level": "8",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 1000
+        "Amount": 350
       },
       "Reward": {
         "Currency": "Experience",
         "Amount": 50
       },
+      "IsActive": true,
       "Positions": [
         {
           "X": 17,
           "Y": 3
+        },
+        {
+          "X": 17,
+          "Y": 4
         },
         {
           "X": 18,
@@ -582,6 +575,14 @@
         },
         {
           "X": 19,
+          "Y": 2
+        },
+        {
+          "X": 20,
+          "Y": 1
+        },
+        {
+          "X": 20,
           "Y": 2
         }
       ],
@@ -592,51 +593,46 @@
             "Y": 3
           }
         ],
-        "A4": [
+        "PR_D4": [
+          {
+            "X": 17,
+            "Y": 4
+          }
+        ],
+        "OB9_A": [
           {
             "X": 18,
             "Y": 2
-          }
-        ],
-        "OB5_A": [
+          },
           {
             "X": 18,
             "Y": 3
           }
         ],
-        "OB9_A": [
+        "MN_C": [
           {
             "X": 19,
             "Y": 1
-          }
-        ],
-        "OB6_A": [
-          {
-            "X": 19,
-            "Y": 2
           }
         ]
       }
     },
     {
       "Uid": "Fog 8",
-      "Level": "8",
+      "Level": "9",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 100000
+        "Amount": 450
       },
       "Reward": {
         "Currency": "Experience",
         "Amount": 50
       },
+      "IsActive": true,
       "Positions": [
         {
           "X": 20,
-          "Y": 1
-        },
-        {
-          "X": 20,
-          "Y": 2
+          "Y": 3
         },
         {
           "X": 21,
@@ -645,6 +641,10 @@
         {
           "X": 21,
           "Y": 3
+        },
+        {
+          "X": 21,
+          "Y": 4
         },
         {
           "X": 22,
@@ -652,47 +652,46 @@
         }
       ],
       "Pieces": {
-        "OB7_A": [
+        "OB9_A": [
           {
             "X": 20,
-            "Y": 1
+            "Y": 3
           },
           {
             "X": 21,
             "Y": 3
-          }
-        ],
-        "OB4_A": [
+          },
           {
-            "X": 20,
-            "Y": 2
+            "X": 22,
+            "Y": 3
           }
         ],
-        "A4": [
+        "A7": [
           {
             "X": 21,
             "Y": 2
           }
         ],
-        "PR_A3": [
+        "Boost_CR2": [
           {
-            "X": 22,
-            "Y": 3
+            "X": 21,
+            "Y": 4
           }
         ]
       }
     },
     {
       "Uid": "Fog 9",
-      "Level": "9",
+      "Level": "10",
       "Condition": {
         "Currency": "Mana",
-        "Amount": 100000
+        "Amount": 550
       },
       "Reward": {
         "Currency": "Experience",
         "Amount": 50
       },
+      "IsActive": true,
       "Positions": [
         {
           "X": 21,
@@ -720,33 +719,33 @@
         }
       ],
       "Pieces": {
-        "OB2_A": [
+        "OB9_A": [
           {
             "X": 21,
             "Y": 5
-          }
-        ],
-        "OB6_A": [
+          },
           {
             "X": 22,
             "Y": 4
-          }
-        ],
-        "Soft1": [
+          },
           {
-            "X": 22,
+            "X": 23,
+            "Y": 4
+          },
+          {
+            "X": 24,
             "Y": 5
           }
         ],
-        "OB3_A": [
+        "Boost_WR": [
           {
-            "X": 23,
+            "X": 22,
             "Y": 5
           }
         ],
         "Boost_CR1": [
           {
-            "X": 24,
+            "X": 23,
             "Y": 5
           }
         ]
@@ -754,7 +753,7 @@
     },
     {
       "Uid": "Fog 10",
-      "Level": "10",
+      "Level": "11",
       "Condition": {
         "Currency": "Mana",
         "Amount": 100000
@@ -782,26 +781,6 @@
         },
         {
           "X": 23,
-          "Y": 7
-        },
-        {
-          "X": 24,
-          "Y": 6
-        },
-        {
-          "X": 24,
-          "Y": 7
-        },
-        {
-          "X": 25,
-          "Y": 6
-        },
-        {
-          "X": 25,
-          "Y": 7
-        },
-        {
-          "X": 26,
           "Y": 7
         }
       ],
@@ -833,7 +812,43 @@
             "X": 23,
             "Y": 7
           }
-        ],
+        ]
+      }
+    },
+    {
+      "Uid": "Fog 11",
+      "Level": "11",
+      "Condition": {
+        "Currency": "Mana",
+        "Amount": 100000
+      },
+      "Reward": {
+        "Currency": "Experience",
+        "Amount": 50
+      },
+      "Positions": [
+        {
+          "X": 24,
+          "Y": 6
+        },
+        {
+          "X": 24,
+          "Y": 7
+        },
+        {
+          "X": 25,
+          "Y": 6
+        },
+        {
+          "X": 25,
+          "Y": 7
+        },
+        {
+          "X": 26,
+          "Y": 7
+        }
+      ],
+      "Pieces": {
         "OB8_A": [
           {
             "X": 24,

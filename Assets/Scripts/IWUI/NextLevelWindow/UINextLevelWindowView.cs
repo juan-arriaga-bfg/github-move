@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BfgAnalytics;
 using DG.Tweening;
 using UnityEngine;
 
@@ -70,9 +71,12 @@ public class UINextLevelWindowView : UIGenericWindowView
     public override void OnViewCloseCompleted()
     {
         var manager = GameDataService.Current.LevelsManager;
-        
+
         CurrencyHelper.Purchase(manager.Rewards, null, new Vector2(Screen.width/2, Screen.height/2));
         CurrencyHelper.Purchase(Currency.Level.Name, 1, Currency.Experience.Name, manager.Price);
+        
+        int newLevel = GameDataService.Current.LevelsManager.Level;
+        
         CurrencyHelper.Purchase(Currency.EnergyLimit.Name, 1);
         
         var currentValue = ProfileService.Current.GetStorageItem(Currency.Energy.Name).Amount;
@@ -83,15 +87,16 @@ public class UINextLevelWindowView : UIGenericWindowView
             
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
         GameDataService.Current.LevelsManager.UpdateSequence();
-        
-        // todo: temp code, remove it
-        if (GameDataService.Current.LevelsManager.Level == 6)
+
+        if (newLevel == 6)
         {
             if (GameDataService.Current.QuestsManager.DailyQuest == null)
             {
                 GameDataService.Current.QuestsManager.StartNewDailyQuest();
             }
         }
+        
+        Analytics.SendLevelReachedEvent(newLevel);
         
         base.OnViewCloseCompleted();
     }

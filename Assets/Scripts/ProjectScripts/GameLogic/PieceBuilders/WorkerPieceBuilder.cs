@@ -5,7 +5,6 @@
         var piece = base.Build(pieceType, context);
 
         piece.RegisterComponent(new WorkerDraggablePieceComponent());
-        
         piece.RegisterComponent(new PiecePathfindBoardCondition(piece.Context, piece)
                 .RegisterComponent(PathfindIgnoreBuilder.Build(piece.PieceType)));
         

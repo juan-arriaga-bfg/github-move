@@ -20,6 +20,6 @@
         
         var fog = target.GetComponent<FogObserver>(FogObserver.ComponentGuid);
             
-        return fog != null && fog.CanBeReached() && fog.RequiredLevelReached();
+        return fog != null && fog.CanBeFilled() && fog.CanBeCleared();
     }
 }

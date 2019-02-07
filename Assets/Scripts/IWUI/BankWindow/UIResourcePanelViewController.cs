@@ -36,7 +36,14 @@ public class UIResourcePanelViewController : UIGenericResourcePanelViewControlle
 
     public void OpenShop()
     {
-        if(GameDataService.Current.QuestsManager.GetActiveQuestById("1_CreatePiece_PR_C4") != null) return;
+        if (GameDataService.Current.QuestsManager.GetActiveQuestById("1_CreatePiece_PR_C4") != null)
+        {
+            UIMessageWindowController.CreateMessage(
+                LocalizationService.Get("common.title.forbidden", "common.title.forbidden"),
+                LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
+            
+            return;
+        }
         
         CurrencyHelper.OpenShopWindow(itemUid);
     }

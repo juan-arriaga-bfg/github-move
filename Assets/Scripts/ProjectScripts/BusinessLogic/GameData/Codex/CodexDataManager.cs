@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using BfgAnalytics;
 using UnityEngine;
 
 public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader<Dictionary<int, CodexChainState>>
@@ -119,8 +120,10 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         {
             return false;
         }
-        
+
         UnlockPiece(id);
+
+        SendAnalyticsEvent(id);
 
         ClearCodexContentCache();
 
@@ -129,6 +132,22 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
 
         return true;
+    }
+
+    private static void SendAnalyticsEvent(int id)
+    {
+        string idStr = PieceType.Parse(id);
+
+        var pieceTypeDef = PieceType.GetDefById(id);
+
+        if (pieceTypeDef.Filter.Has(PieceTypeFilter.Character))
+        {
+            Analytics.SendCharUnlockedEvent(idStr);
+        }
+        else
+        {
+            Analytics.SendPieceUnlockedEvent(idStr);
+        }
     }
 
     private void UnlockPiece(int id)

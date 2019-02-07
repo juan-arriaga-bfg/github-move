@@ -13,43 +13,43 @@ public class ScatterPiecesAction : IBoardAction
 	public bool IsTargetReplace;
 
 	public Dictionary<int, int> Pieces;
+	private Dictionary<int, int> fakePieces;
 
 	public Action<bool> OnComplete;
-	
+
 	public bool PerformAction(BoardController gameBoardController)
 	{
+		fakePieces = new Dictionary<int, int>(Pieces);
+		
 		var target = gameBoardController.BoardLogic.GetPieceAt(From);
+		var rewardsStore = target.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid);
 		
 		var next = new Dictionary<BoardPosition, Piece>();
 		var pieces = new Dictionary<BoardPosition, Piece>();
 		
-		var mask = new List<BoardPosition>();
 		var cells = new List<BoardPosition>();
 		
-		var amount = Pieces.Sum(pair => pair.Value);
-		var replaceAmount = target.Multicellular?.Mask.Count ?? 1;
+		var amount = fakePieces.Sum(pair => pair.Value);
 
-		if (IsTargetReplace) amount = Mathf.Max(0, amount - replaceAmount);
+		if (IsTargetReplace) amount = Mathf.Max(0, amount - (target.Multicellular?.Mask.Count ?? 1));
 
 		if (amount > 0 && gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From, cells, amount, 0.1f) == false)
 		{
-			target.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid)?.ShowBubble();
+			rewardsStore?.ShowBubble();
 			return false;
 		}
 
 		var animation = new ScatterPiecesAnimation {From = From};
 		
-		if (IsTargetReplace && cells.Count == amount)
+		if (IsTargetReplace && cells.Count >= amount)
 		{
-			gameBoardController.BoardLogic.RemovePieceAt(From);
+			var mask = new List<BoardPosition>();
 			
 			if (target.Multicellular != null)
 			{
 				foreach (var cell in target.Multicellular.Mask)
 				{
-					var point = target.Multicellular.GetPointInMask(target.CachedPosition, cell);
-					
-					mask.Add(point);
+					mask.Add(target.Multicellular.GetPointInMask(target.CachedPosition, cell));
 				}
 			}
 			else
@@ -79,14 +79,25 @@ public class ScatterPiecesAction : IBoardAction
 			
 			CreatePiece(gameBoardController, id, cell, pieces);
 		}
-
-		var rewardsStore = target.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid);
 		
-		if (rewardsStore != null) rewardsStore.IsComplete = Pieces.Count != 0;
+		rewardsStore.IsComplete = true;
 		
 		animation.Pieces = pieces;
 		animation.OnCompleteEvent += (_) =>
 		{
+			var legacy = new Dictionary<int, int>(Pieces);
+			
+			foreach (var pair in legacy)
+			{
+				if (fakePieces.TryGetValue(pair.Key, out var value) == false)
+				{
+					Pieces.Remove(pair.Key);
+					continue;
+				}
+
+				Pieces[pair.Key] = value;
+			}
+			
 			gameBoardController.BoardLogic.UnlockCell(From, this);
 			
 			foreach (var pair in next)
@@ -104,6 +115,8 @@ public class ScatterPiecesAction : IBoardAction
 			if (Pieces.Count == 0)
 			{
 				if (IsTargetReplace && PieceType.GetDefById(target.PieceType).Filter.HasFlag(PieceTypeFilter.Obstacle)) target.PathfindLockObserver.RemoveRecalculate(From);
+				
+				rewardsStore.IsComplete = false;
 				return;
 			}
 			
@@ -111,17 +124,17 @@ public class ScatterPiecesAction : IBoardAction
 		};
 		
 		gameBoardController.RendererContext.AddAnimationToQueue(animation);
-
+		
 		return true;
 	}
-
+	
 	private int GetPieceId(bool isReplace)
 	{
 		var id = PieceType.None.Id;
 
-		if (Pieces.Count == 0) return id;
+		if (fakePieces.Count == 0) return id;
 		
-		foreach (var key in Pieces.Keys)
+		foreach (var key in fakePieces.Keys)
 		{
 			if(isReplace == false && PieceType.GetDefById(key).Filter.HasFlag(PieceTypeFilter.Obstacle)) continue;
 			
@@ -129,10 +142,10 @@ public class ScatterPiecesAction : IBoardAction
 			break;
 		}
 
-		var value = Pieces[id] - 1;
+		var value = fakePieces[id] - 1;
 		
-		if (value == 0) Pieces.Remove(id);
-		else Pieces[id] = value;
+		if (value == 0) fakePieces.Remove(id);
+		else fakePieces[id] = value;
 
 		return id;
 	}
@@ -140,8 +153,6 @@ public class ScatterPiecesAction : IBoardAction
 	private void CreatePiece(BoardController board, int id, BoardPosition position, Dictionary<BoardPosition, Piece> pieces)
 	{
 		var piece = board.CreatePieceFromType(id);
-				
-		if (board.BoardLogic.AddPieceToBoard(position.X, position.Y, piece) == false) return;
 		
 		pieces.Add(position, piece);
 		board.BoardLogic.LockCell(position, this);

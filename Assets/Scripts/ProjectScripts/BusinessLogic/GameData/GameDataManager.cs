@@ -1,5 +1,5 @@
 ﻿public class GameDataManager : ECSEntity,
-    IChestsDataManager, IPiecesDataManager, IFogsDataManager, IMinesDataManager, IObstaclesDataManager, ILevelsDataManager,
+    IChestsDataManager, IPiecesDataManager, IFogsDataManager, IObstaclesDataManager, ILevelsDataManager,
     IFieldDataManager, ICodexDataManager, IEnemiesDataManager, IConstantsDataManager, IQuestsDataManager, IShopDataManager,
     IOrdersDataManager, IConversationsDataManager, IMarketDataManager
 {
@@ -23,9 +23,6 @@
     
     private ObstaclesDataManager obstaclesManager;
     public ObstaclesDataManager ObstaclesManager => obstaclesManager ?? (obstaclesManager = GetComponent<ObstaclesDataManager>(ObstaclesDataManager.ComponentGuid));
-    
-    private MinesDataManager minesManager;
-    public MinesDataManager MinesManager => minesManager ?? (minesManager = GetComponent<MinesDataManager>(MinesDataManager.ComponentGuid));
     
     private FieldDataManager fieldManager;
     public FieldDataManager FieldManager => fieldManager ?? (fieldManager = GetComponent<FieldDataManager>(FieldDataManager.ComponentGuid));
@@ -61,7 +58,6 @@
         RegisterComponent(new QuestsDataManager());
         RegisterComponent(new FogsDataManager());
         RegisterComponent(new LevelsDataManager());
-        RegisterComponent(new MinesDataManager());
         RegisterComponent(new FieldDataManager());
         RegisterComponent(new CodexDataManager()); // should be the last one
         RegisterComponent(new ConstantsDataManager());

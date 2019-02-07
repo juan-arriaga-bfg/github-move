@@ -1,12 +1,20 @@
-using Newtonsoft.Json;
-using Quests;
+// Product branch
+[TaskHighlight(typeof(HighlightTaskPointToPiece),                             new[] {typeof(HighlightConditionPieceFromProductBranch)})]
+[TaskHighlight(typeof(HighlightTaskPointToPredecessor),                       new[] {typeof(HighlightConditionPieceFromProductBranch)})]
+[TaskHighlight(typeof(HighlightTaskPointToRandomChest),                       new[] {typeof(HighlightConditionPieceFromProductBranch)})]
+[TaskHighlight(typeof(HighlightTaskFindDeadProductionFieldForPieceType),      new[] {typeof(HighlightConditionPieceFromProductBranch)})]
+[TaskHighlight(typeof(HighlightTaskFindObstacleOfAnyTypeExcludingProduction), new[] {typeof(HighlightConditionPieceFromProductBranch)})]
+[TaskHighlight(typeof(HighlightTaskFirstMineOfAnyType),                       new[] {typeof(HighlightConditionPieceFromProductBranch)})]
+[TaskHighlight(typeof(HighlightTaskNextFog),                                  new[] {typeof(HighlightConditionPieceFromProductBranch)})]
 
-[TaskHighlight(typeof(HighlightTaskFindProductionFieldForPieceType))]
+// Other
 [TaskHighlight(typeof(HighlightTaskPointToPredecessor))]
 [TaskHighlight(typeof(HighlightTaskFindObstacleForPieceType))]
 [TaskHighlight(typeof(HighlightTaskFindMineForPieceType))]
 [TaskHighlight(typeof(HighlightTaskFindChestForPieceType))]
 [TaskHighlight(typeof(HighlightTaskNextFog))]
+
+// ReSharper disable once RedundantExtendsListEntry
 public class TaskCreatePieceEntity : TaskCounterAboutPiece, IBoardEventListener, IHavePieceId
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();

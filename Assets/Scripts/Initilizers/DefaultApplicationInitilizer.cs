@@ -32,6 +32,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
            .AddComponent(new SecuredTimeServiceInitComponent())                     // Anti-cheat protection for timers
            .AddComponent(new BfgSdkGdprInitComponent())                             // Listener for BFG SDK's GDPR popup events
            .AddComponent(new ConfigsAndManagersInitComponent()) 
+           .AddComponent(new BfgSdkAnalyticsInitComponent()) 
 
            .AddComponent(new LocalBundlesInitComponent()
                .SetDependency(typeof(ConfigsAndManagersInitComponent)))

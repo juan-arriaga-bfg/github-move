@@ -8,6 +8,8 @@ public class BfgIapProvider : IapProvider
 {
     private Action<IapErrorCode> onInitComplete;
     
+    private int remainingToRestore;
+    
     public override void Init(Action<IapErrorCode> onComplete)
     {
         onInitComplete = onComplete;
@@ -30,21 +32,15 @@ public class BfgIapProvider : IapProvider
             }
         }
         
-#if UNITY_EDITOR
-        DOTween.Sequence()
-               .InsertCallback(UnityEngine.Random.Range(0f, 3f),
-                    () => { onInitComplete(IapErrorCode.NoError); });
-        return;
-#endif
-        
+#if !UNITY_EDITOR
         PurchaseController.StartService();
             
         PurchaseController.Instance.PurchaseSucceededEvent += OnPurchaseSuccessCallback;
-        PurchaseController.Instance.PurchaseFailedEvent += OnPurchaseFailedCallback;
-        PurchaseController.Instance.RestoreSucceededEvent += OnRestoreSucceededCallback;
-        PurchaseController.Instance.RestoreFailedEvent += OnRestoreFailedCallback;
+        PurchaseController.Instance.PurchaseFailedEvent    += OnPurchaseFailedCallback;
+        PurchaseController.Instance.RestoreSucceededEvent  += OnRestoreSucceededCallback;
+        PurchaseController.Instance.RestoreFailedEvent     += OnRestoreFailedCallback;
 
-#if UNITY_ANDROID
+    #if UNITY_ANDROID
         if (!NotificationCenter.Instance.HandlerSetHasObserver (purchase_succeeded_with_receipt, bfgPurchaseAndroid.NOTIFICATION_PURCHASE_SUCCEEDED_WITH_RECEIPT)) {
             NotificationCenter.Instance.AddObserver (purchase_succeeded_with_receipt, bfgPurchaseAndroid.NOTIFICATION_PURCHASE_SUCCEEDED_WITH_RECEIPT);
         }
@@ -56,6 +52,11 @@ public class BfgIapProvider : IapProvider
         if (!NotificationCenter.Instance.HandlerSetHasObserver (billing_init_failed, bfgPurchaseAndroid.NOTIFICATION_BILLING_INITIALIZE_FAILED)) {
             NotificationCenter.Instance.AddObserver (billing_init_failed, bfgPurchaseAndroid.NOTIFICATION_BILLING_INITIALIZE_FAILED);
         }
+    #endif
+#else
+        DOTween.Sequence()
+               .InsertCallback(UnityEngine.Random.Range(0f, 3f),
+                    () => { onInitComplete(IapErrorCode.NoError); });
 #endif
     }
 
@@ -90,53 +91,85 @@ public class BfgIapProvider : IapProvider
     
 #region BFG methods
 
-    private void OnRestoreFailedCallback(string productid)
+    private void OnRestoreFailedCallback(string productId)
     {
-        OnRestoreCompleted?.Invoke(false);
+        remainingToRestore--;
+
+        Debug.Log($"BfgIapProvider: OnRestoreFailedCallback: for '{productId}'");
+        
+        if (remainingToRestore <= 0)
+        {
+            OnRestoreCompleted?.Invoke(true);
+        } 
     }
 
-    private void OnRestoreSucceededCallback(string productid)
+    private void OnRestoreSucceededCallback(string productId)
     {
-        OnRestoreCompleted?.Invoke(true); 
+        remainingToRestore--;
+        
+        Debug.Log($"BfgIapProvider: OnRestoreSucceededCallback: for '{productId}'");
+        
+        OnPurchaseOK?.Invoke(StoreIdToId(productId), null, true);
+
+        if (remainingToRestore <= 0)
+        {
+            OnRestoreCompleted?.Invoke(true);
+        } 
     }
 
-    private void OnPurchaseFailedCallback(string productid)
+    private void OnPurchaseFailedCallback(string productId)
     {
-        OnPurchaseFail?.Invoke(StoreIdToId(productid), IapErrorCode.PurchaseFailReasonUnknown);
+        OnPurchaseFail?.Invoke(StoreIdToId(productId), IapErrorCode.PurchaseFailReasonUnknown);
     }
 
-    private void OnPurchaseSuccessCallback(string productid, ProductInfo productinfo)
+    private void OnPurchaseSuccessCallback(string productId, ProductInfo productinfo)
     {
-        OnPurchaseOK?.Invoke(StoreIdToId(productid), null);
+        OnPurchaseOK?.Invoke(StoreIdToId(productId), null, false);
     }
 
 #endregion    
     
     protected override void StartPurchase(string productId)
     {
-#if UNITY_EDITOR
-        DOTween.Sequence()
-               .InsertCallback(UnityEngine.Random.Range(0f, 2f), () =>
-                {
-                    OnPurchaseOK?.Invoke(productId, null);
-                });
-        
-        return;
-#endif
-        
+#if !UNITY_EDITOR
         bool canPurchase = PurchaseController.Instance.Purchase(IdToStoreId(productId));
         if (!canPurchase)
         {
             OnPurchaseFail?.Invoke(productId, IapErrorCode.PurchaseFailReasonUnknown);
         }
+#else
+        DOTween.Sequence()
+               .InsertCallback(UnityEngine.Random.Range(0f, 2f), () =>
+                {
+                    OnPurchaseOK?.Invoke(productId, null, false);
+                });
+        
+        return;
+#endif
     }
-
+    
     public override void RestorePurchases()
     {
-#if !UNITY_IOS
+        if (remainingToRestore > 0)
+        {
+            Debug.LogWarning($"BfgIapProvider: RestorePurchases: Already in progress for {remainingToRestore} products");
+            return;
+        }
+        
+#if UNITY_EDITOR
+        DOTween.Sequence()
+               .InsertCallback(UnityEngine.Random.Range(0f, 2f), () =>
+                {
+                    OnRestoreCompleted?.Invoke(true);
+                });   
+#elif UNITY_IOS
         throw new NotImplementedException();
+#elif UNITY_ANDROID
+        remainingToRestore = PurchaseControllerProductIds.nonConsumableGoogleProductIds.Count;
+
+        //PurchaseController.Instance.RestorePurchase(); // Can't resolve symbol, lets use 'bfgPurchaseAndroid.restorePurchase' directly:  
+        bfgPurchaseAndroid.restorePurchase (PurchaseControllerProductIds.nonConsumableGoogleProductIds);
 #endif
-        bfgPurchase.restorePurchases();
     }
 
     public override string GetLocalizedPriceStr(string productId)

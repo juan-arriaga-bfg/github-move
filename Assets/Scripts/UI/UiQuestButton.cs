@@ -86,7 +86,7 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             return;
         }
 
-        button.interactable = interactive && !IsClickDisabledByTutorial();
+        button.interactable = interactive;
     }
 
     private void OnQuestChanged(QuestEntity quest, TaskEntity task)
@@ -104,7 +104,8 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
             if (rootCanvasGroup != null)
             {
-                rootCanvasGroup.DOFade(0, 1);
+                rootCanvasGroup.DOFade(0, 1)
+                               .SetId(this);
             }
         }
     }
@@ -115,9 +116,10 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     private void OnDestroy()
     {
+        DOTween.Kill(this);
+        
         if (Quest != null)
         {
-            // Debug.Log($"AAAAA UNSUBSCRIBE: {quest.Id}");
             Quest.OnChanged -= OnQuestChanged;
         }
         ResourcesViewManager.Instance.UnRegisterView(this);
@@ -250,10 +252,13 @@ public class UiQuestButton : UIGenericResourcePanelViewController
         {
             return;
         }
-
-
+        
         if (IsClickDisabledByTutorial())
         {
+            UIMessageWindowController.CreateMessage(
+                LocalizationService.Get("common.title.forbidden", "common.title.forbidden"),
+                LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
+            
             return;
         }
         

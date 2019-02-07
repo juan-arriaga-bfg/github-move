@@ -25,10 +25,6 @@ MonoBehaviour:
     Link: 16Q9fxlFX40VRx6u1kwfMvWm1GuvK8MaGs117g5Pkd2g
     Route: parse
     Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"ProductionAmount":{"Min":0,"Max":0},"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestId":""}]'
-  - Key: mines
-    Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
-    Route: parseMines
-    Pattern: '{"Uid":"","Skin":"","Delay":0,"Size":0,"Price":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"LastRewards":[{"Currency":"","Amount":0}]}'
   - Key: field
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseField
@@ -36,7 +32,7 @@ MonoBehaviour:
   - Key: fogs
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseFogs
-    Pattern: '{"Uid":"","Level":0,"Condition":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0}}'
+    Pattern: '{"Uid":"","Level":0,"Condition":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"IsActive":false}'
   - Key: pieces
     Link: 15C96r0vcgzzhJ6Fo_OQXBcCoIkSogZnTZg8Jc6MKDH8
     Route: parse
@@ -49,6 +45,10 @@ MonoBehaviour:
     Link: 1XjQudoqqkn2yyjonWc_R1fAyQNprQRJuw4zphfjE2rY
     Route: parse
     Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}]}]'
+  - Key: piecesMine
+    Link: 17Ye0azQ3ZWoojGheuGxcDdg2FqO-5i5ie4s2j8HU294
+    Route: parse
+    Pattern: '[{"Uid":"","Cooldown":0,"Delay":0,"Size":0,"Price":{"Currency":"","Amount":0},"Reward":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"LastRewards":[{"Currency":"","Amount":0}]}]'
   - Key: enemies
     Link: 1ggZRqwYTC5dMe-X53tOAMfxCmgJh-RjGQHv5u2iPYZ0
     Route: parse

@@ -101,7 +101,7 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
     {
         UIExchangeWindowModel windowModel = Model as UIExchangeWindowModel;
 
-        if (BoardService.Current.FirstBoard.BoardLogic.PositionsCache.GetCountByType(PieceType.PR_A4.Id) == 0)
+        if (BoardService.Current.FirstBoard.BoardLogic.PositionsCache.GetCountByType(PieceType.PR_C4.Id) == 0)
         {
             HighlightFogHelper.HighlightNextFog(0);
             Controller.CloseCurrentWindow();

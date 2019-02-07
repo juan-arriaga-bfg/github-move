@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BfgAnalytics;
 using IW.Content.ContentModule;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ public class ConfigsAndManagersInitComponent : AsyncInitComponentBase
     {
         //Time.timeScale = 0.25f;
         // init all project components and managers
-        
+                
         GameObject.DontDestroyOnLoad(UIService.Get);
         UIService.Get.DontDestroyPoolOnSceneChange = true;
         

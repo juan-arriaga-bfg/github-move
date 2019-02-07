@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using BfgAnalytics;
 using DG.Tweening;
 
 public class UIQuestStartWindowView : IWUIWindowView
@@ -186,6 +187,11 @@ public class UIQuestStartWindowView : IWUIWindowView
         
         List<string> ids = model.QuestsToStart.Select(e => e.Id).ToList();
         GameDataService.Current.QuestsManager.StartQuests(ids);
+
+        foreach (var id in ids)
+        {
+            Analytics.SendQuestStartEvent(id);
+        }
     }
 
     private void WarmUpPool()
@@ -253,6 +259,8 @@ public class UIQuestStartWindowView : IWUIWindowView
         var payload2 = act.GetComponent<ConversationActionPayloadProvideRewardComponent>(ConversationActionPayloadComponent.ComponentGuid);
         if (payload2 != null)
         {
+            Analytics.SendQuestCompletedEvent(payload2.QuestId);
+            
             ProvideReward(() =>
             {
                 isClickAllowed = true;

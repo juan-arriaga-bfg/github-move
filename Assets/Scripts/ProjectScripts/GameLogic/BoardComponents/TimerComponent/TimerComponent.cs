@@ -21,9 +21,10 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
     public bool UseUTC { get; set; } = true;
     
     public long StartTimeLong => StartTime.ConvertToUnixTime(UseUTC);
+
+    public bool IsStarted;
     
-    public bool IsStarted { get; set; }
-    public bool IsPaused { get; set; }
+    public bool IsPaused;
     
     private CurrencyPair price = new CurrencyPair{Currency = Currency.Crystals.Name};
 
