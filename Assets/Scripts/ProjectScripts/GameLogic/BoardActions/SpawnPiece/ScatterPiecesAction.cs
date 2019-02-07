@@ -39,7 +39,7 @@ public class ScatterPiecesAction : IBoardAction
 			return false;
 		}
 
-		var animation = new ScatterPiecesAnimation {From = From};
+		var animation = new ScatterPiecesAnimation {From = From, AnimationResourceSearchOnRemove = piece => AnimationOverrideDataService.Current.FindAnimation(piece, def => def.OnDestroyFromBoard)};
 		
 		if (IsTargetReplace && cells.Count >= amount)
 		{

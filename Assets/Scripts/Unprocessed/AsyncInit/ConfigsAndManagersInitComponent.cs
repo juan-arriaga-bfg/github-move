@@ -64,6 +64,10 @@ public class ConfigsAndManagersInitComponent : AsyncInitComponentBase
         GameObject.DontDestroyOnLoad(audioListener);
         audioManager.DontDestroyPoolOnSceneChange = true;
         
+        // init animationdatamanager
+        AnimationOverrideDataManager animationOverrideManager = new AnimationOverrideDataManager();
+        AnimationOverrideDataService.Instance.SetManager(animationOverrideManager);
+        
         isCompleted = true;
         OnComplete(this);
     }
