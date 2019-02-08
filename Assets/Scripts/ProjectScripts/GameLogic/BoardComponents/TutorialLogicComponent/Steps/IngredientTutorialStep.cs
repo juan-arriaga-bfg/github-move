@@ -1,29 +1,5 @@
-﻿using System.Collections.Generic;
-
-public class IngredientTutorialStep : BaseTutorialStep
+﻿public class IngredientTutorialStep : BaseTutorialStep
 {
-    public override void OnRegisterEntity(ECSEntity entity)
-    {
-        base.OnRegisterEntity(entity);
-        
-        RegisterComponent(
-            new CheckCurrencyTutorialCondition
-            {
-                Target = 3,
-                Currency = new List<string>
-                {
-                    Currency.PR_A5.Name,
-                    Currency.PR_B5.Name,
-                    Currency.PR_C5.Name,
-                    Currency.PR_D5.Name,
-                    Currency.PR_E5.Name,
-                    Currency.PR_F5.Name,
-                    Currency.PR_G5.Name,
-                },
-                ConditionType = TutorialConditionType.Complete
-            }, true);
-    }
-
     public override void Perform()
     {
         if (IsPerform == false) base.Perform();

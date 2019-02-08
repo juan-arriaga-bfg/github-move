@@ -489,7 +489,25 @@
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "44_CreatePiece_PR_D5",
     "PieceUid": "PR_D5",
-    "TargetValue": 6
+    "TargetValue": 6,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "45_CreatePiece_PR_B5",
+    "PieceUid": "PR_B5",
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
   },
   {
     "$type": "TaskCompleteDailyTaskEntity, GameAssembly",

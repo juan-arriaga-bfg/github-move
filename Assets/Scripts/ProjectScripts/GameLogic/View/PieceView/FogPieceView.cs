@@ -233,6 +233,25 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
         
     }
 
+    public void ToggleHighlightWhenReadyToClear(bool enabled)
+    {
+        if (!IsReadyToClear)
+        {
+            Debug.LogError($"[FogPieceView] => ToggleHighlightWhenReadyToClear({enabled}) called when IsReadyToClear == false");
+            return;
+        }
+        
+        IsHighlighted = false;
+        if (enabled)
+        {
+            ToggleHighlight(true);
+        }
+        else
+        {
+            ToggleReadyToClear(true);
+        }
+    }
+    
     public override void ToggleHighlight(bool enabled)
     {
         if (enabled == IsHighlighted)

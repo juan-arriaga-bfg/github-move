@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class CollapsePieceToAction : IBoardAction
 {
@@ -26,6 +25,7 @@ public class CollapsePieceToAction : IBoardAction
 		{
 			var piecePos = pos.SetZ(BoardLayer.Piece.Layer);
 			var piece = board.BoardLogic.GetPieceAt(piecePos);
+			
 			if (piece?.Multicellular != null)
 			{
 				foreach (var maskPosition in piece.Multicellular.Mask)
@@ -39,40 +39,31 @@ public class CollapsePieceToAction : IBoardAction
 			}
 		}
 		
-		
 		return resultPositions;
 	}
 	
 	public bool PerformAction(BoardController gameBoardController)
 	{
-		
 		if (Positions == null || Positions.Count == 0) return false;
 		
-		var targetPiece = gameBoardController.BoardLogic.GetPieceAt(To);
-			
-		var positonsForLock = GetPositionsIncludeMask(gameBoardController);
+		var positionsForLock = GetPositionsIncludeMask(gameBoardController);
 		
-
-		var obstaclesPieces = new List<Piece>();
-		
-		
-		
-		gameBoardController.BoardLogic.LockCells(positonsForLock, this);
+		gameBoardController.BoardLogic.LockCells(positionsForLock, this);
 		gameBoardController.BoardLogic.RemovePiecesAt(Positions);
 
 		var animation = new CollapsePieceToAnimation
 		{
-			Action = this
+			To = To,
+			Positions = Positions,
+			AnimationResourceSearch = AnimationResourceSearch
 		};
 		
 		animation.OnCompleteEvent += (_) =>
 		{
-			gameBoardController.BoardLogic.UnlockCells(positonsForLock, this);
-			foreach (var obstaclePiece in obstaclesPieces)
-			{
-				obstaclePiece.PathfindLockObserver.RemoveRecalculate(obstaclePiece.CachedPosition);
-			}
+			gameBoardController.BoardLogic.UnlockCells(positionsForLock, this);
+			
 			if (OnCompleteAction != null) gameBoardController.ActionExecutor.AddAction(OnCompleteAction);
+			
 			OnComplete?.Invoke();
 		};
 		

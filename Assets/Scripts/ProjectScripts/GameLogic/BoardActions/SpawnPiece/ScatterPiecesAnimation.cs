@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class ScatterPiecesAnimation : BoardAnimation
     public BoardPosition From;
     public Dictionary<BoardPosition, Piece> Replace;
     public Dictionary<BoardPosition, Piece> Pieces;
+    
+    public Func<int, string> AnimationResourceSearchOnRemove;
     
     public override void Animate(BoardRenderer context)
     {
@@ -54,7 +57,7 @@ public class ScatterPiecesAnimation : BoardAnimation
         
         if (Replace != null)
         {
-            sequence.Append(target.CachedTransform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack));
+            CollapseSourcePiece(sequence, target, context);
             
             sequence.AppendCallback(() =>
             {
@@ -93,6 +96,27 @@ public class ScatterPiecesAnimation : BoardAnimation
         });
     }
 
+    private void CollapseSourcePiece(Sequence sequence, BoardElementView target, BoardRenderer context)
+    {
+        var targetPiece = target as PieceBoardElementView;
+        if (targetPiece != null)
+        {
+            var animationResource = AnimationResourceSearchOnRemove?.Invoke(targetPiece.Piece.PieceType);
+            if (string.IsNullOrEmpty(animationResource) == false)
+            {
+                sequence.AppendCallback(() =>
+                {
+                    var animView = context.CreateBoardElementAt<AnimationView>(animationResource, From);
+                    animView.Play(targetPiece);
+                });
+                sequence.AppendInterval(0.3f);
+                return;
+            }    
+        }
+        
+        sequence.Append(target.CachedTransform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack));
+    }
+    
     private void PlaysSound()
     {
         NSAudioService.Current.Play(SoundId.DropObject);

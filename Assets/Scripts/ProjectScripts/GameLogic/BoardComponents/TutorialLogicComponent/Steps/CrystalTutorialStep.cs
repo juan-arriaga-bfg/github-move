@@ -1,7 +1,7 @@
 ﻿public class CrystalTutorialStep : LoopFingerTutorialStep
 {
     private readonly int crystal = PieceType.Boost_CR.Id;
-    private readonly int target = PieceType.A5.Id;
+    private readonly int target = PieceType.A6.Id;
 
     private readonly BoardPosition targetPosition = new BoardPosition(20, 8, BoardLayer.Piece.Layer);
     private readonly BoardPosition ignorePosition = new BoardPosition(19, 8, BoardLayer.Piece.Layer);

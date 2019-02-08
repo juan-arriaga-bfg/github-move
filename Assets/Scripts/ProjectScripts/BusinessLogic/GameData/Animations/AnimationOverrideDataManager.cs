@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationDataManager
+public class AnimationOverrideDataManager
 {
-    private static Dictionary<int, AnimationDef> animDefs = Build();
+    private Dictionary<int, AnimationDef> animDefs;
 
-    private static void AddPieceChain(Dictionary<int, AnimationDef> defDict, int start, int end,
+    public AnimationOverrideDataManager()
+    {
+        animDefs = Build();
+    }
+
+    private void AddPieceChain(Dictionary<int, AnimationDef> defDict, int start, int end,
         AnimationDef definition)
     {
         for (int i = start; i <= end; i++)
@@ -15,12 +20,12 @@ public class AnimationDataManager
         }
     }
 
-    private static void AddPiece(Dictionary<int, AnimationDef> defDict, int piece,  AnimationDef definition)
+    private void AddPiece(Dictionary<int, AnimationDef> defDict, int piece,  AnimationDef definition)
     {
         defDict[piece] = definition;
     }
 
-    private static void AddByFilter(Dictionary<int, AnimationDef> defDict, PieceTypeFilter filter,
+    private void AddByFilter(Dictionary<int, AnimationDef> defDict, PieceTypeFilter filter,
         AnimationDef definition)
     {
         var piecesId = PieceType.GetIdsByFilter(filter);
@@ -30,7 +35,7 @@ public class AnimationDataManager
         }
     }
     
-    private static Dictionary<int, AnimationDef> Build()
+    private Dictionary<int, AnimationDef> Build()
     {
         var defs = new Dictionary<int, AnimationDef>();
 
@@ -44,15 +49,8 @@ public class AnimationDataManager
             OnDestroyFromBoard = R.DestroyProductionAnimation
         });
         
-        AddByFilter(defs, PieceTypeFilter.Mine, new AnimationDef
-        {
-            OnDestroyFromBoard = R.DestroyScaleMineAnimation
-        });
-        
         AddByFilter(defs, PieceTypeFilter.Chest, new AnimationDef
         {
-            OnPurchaseSpawn = R.MultiSpawnChestAnimation,
-            OnObstacleFinalSpawn = R.SpawnChestAnimation,
             OnDestroyFromBoard = R.DestroyChestAnimation
         });
 
@@ -64,14 +62,14 @@ public class AnimationDataManager
         return defs;
     }
     
-    public static AnimationDef GetDefinition(int pieceType)
+    public AnimationDef GetDefinition(int pieceType)
     {
         if (animDefs.ContainsKey(pieceType))
             return animDefs[pieceType];
         return null;
     }
 
-    public static string FindAnimation(int pieceType, Func<AnimationDef, string> onDefExist)
+    public string FindAnimation(int pieceType, Func<AnimationDef, string> onDefExist)
     {
         var animationDefinition = GetDefinition(pieceType);
         var animationResource = "";
