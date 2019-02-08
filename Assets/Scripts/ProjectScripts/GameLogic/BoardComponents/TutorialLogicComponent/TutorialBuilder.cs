@@ -169,7 +169,7 @@ public static class TutorialBuilder
             {
                 if (LockPRStepIndex != index) Debug.LogError("Tutorial Error: LockPRStepIndex != index");
                 
-                step = new BaseTutorialStep();
+                step = new PrLockTutorialStep();
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Complete}, true);

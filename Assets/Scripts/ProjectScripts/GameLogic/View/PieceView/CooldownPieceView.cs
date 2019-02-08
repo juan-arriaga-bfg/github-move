@@ -4,10 +4,10 @@ public class CooldownPieceView : PieceBoardElementView
 {
     private TimerComponent timer;
     
-    private ParticleView processParticle;
-    private ParticleView readyParticle;
+    protected ParticleView processParticle;
+    protected ParticleView readyParticle;
 
-    private WorkplaceLifeComponent life;
+    protected WorkplaceLifeComponent life;
 
     protected virtual string coolDownParticle => string.Empty;
     protected virtual string readyParticleName => string.Empty;
@@ -97,7 +97,7 @@ public class CooldownPieceView : PieceBoardElementView
         ToggleEffectsByState(false);
     }
 
-    protected virtual void ToggleEffectsByState(bool isProcessing)
+    public virtual void ToggleEffectsByState(bool isProcessing)
     {
         if (isLockVisual) return;
         
@@ -108,7 +108,7 @@ public class CooldownPieceView : PieceBoardElementView
         else AddParticle(ref readyParticle, readyParticleName);
     }
 
-    private void ClearParticle(ref ParticleView particle)
+    protected void ClearParticle(ref ParticleView particle)
     {
         if (particle == null) return;
         
