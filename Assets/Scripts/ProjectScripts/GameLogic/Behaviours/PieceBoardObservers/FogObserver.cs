@@ -142,6 +142,8 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         bar.Priority = -1;
         bar.Change(true);
         
+        if(Context.Context.Manipulator.CameraManipulator.CameraMove.IsLocked) return;
+        
         Context.Context.Manipulator.CameraManipulator.MoveTo(Def.GetCenter(Context.Context));
     }
     
