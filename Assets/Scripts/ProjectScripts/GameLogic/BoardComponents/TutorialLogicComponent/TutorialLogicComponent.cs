@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 
 public class TutorialLogicComponent : ECSEntity, ILockerComponent
 {
@@ -77,9 +78,14 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
         Locker.Unlock(this);
 		
         if(Locker.IsLocked) return;
-		
-        Pause(false);
-        Update();
+
+        DOTween.Sequence()
+            .AppendInterval(0.25f)
+            .AppendCallback(() =>
+            {
+                Pause(false);
+                Update();
+            });
     }
     
     public void Pause(bool isOn)
