@@ -76,13 +76,6 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
             view.ToggleSelection(true);
             selectPieces.Add(view);
         }
-        
-        var center = BoardPosition.GetCenter(best);
-        var centerPos = Context.Context.BoardDef.GetPiecePosition(center.X, center.Y);
-
-        if (Context.Context.Manipulator.CameraManipulator.CameraMove.IsLocked || Context.CheckLockOrders() && Context.CheckFirstOrder() == false) return;
-        
-        Context.Context.Manipulator.CameraManipulator.MoveTo(centerPos);
     }
     
     public override bool IsExecuteable()
