@@ -121,9 +121,9 @@ public static class TutorialBuilder
             }
             case 8: // tutorial 10 - collecting ingredients
             {
-                step = new IngredientTutorialStep();
+                step = new IngredientTutorialStep{Delay = 0};
 
-                step.RegisterComponent(new CheckStepTutorialCondition {Target = 1, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckCurrencyTutorialCondition
                 {
                     Target = 3,

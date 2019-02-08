@@ -1,27 +1,19 @@
-﻿public class IngredientTutorialStep : BaseTutorialStep
-{
-    public override void Perform()
+﻿public class IngredientTutorialStep : DelayTutorialStep
+{   
+    public override void Execute()
     {
-        if (IsPerform == false) base.Perform();
-        if (IsPerform == false) return;
-        
-        Context.Context.ActionExecutor.AddAction(new CallbackAction
+        base.Execute();
+
+        var positions = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Ingredient);
+            
+        foreach (var position in positions)
         {
-            Delay = 0.2f,
-            Callback = controller =>
-            {
-                var positions = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Ingredient);
-
-                foreach (var position in positions)
-                {
-                    var element = Context.Context.BoardLogic.GetPieceAt(position).ActorView;
+            var element = Context.Context.BoardLogic.GetPieceAt(position).ActorView;
                         
-                    element.AddArrow();
-                }
-            }
-        });
+            element.AddArrow();
+        }
     }
-
+    
     protected override void Complete()
     {
         base.Complete();
