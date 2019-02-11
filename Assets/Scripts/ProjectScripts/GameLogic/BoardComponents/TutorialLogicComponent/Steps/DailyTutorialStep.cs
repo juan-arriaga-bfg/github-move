@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class DailyTutorialStep : UIArrowTutorialStep
+﻿public class DailyTutorialStep : UIArrowTutorialStep
 {
     private enum Step
     {
@@ -78,5 +76,9 @@ public class DailyTutorialStep : UIArrowTutorialStep
     {
         if (quest.GetCompletedTasksCount() > 0 && currentStep < Step.Quest) currentStep = Step.Quest;
         if (isPauseOn == false && currentStep == Step.Quest) CreateArrow();
+        if (quest.GetClaimedTasksCount() <= 0) return;
+        
+        currentStep = Step.Complete;
+        isAutoComplete = true;
     }
 }

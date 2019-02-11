@@ -64,8 +64,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     
     private void OnShowWindow(IWUIWindow window)
     {
-        if(UIWindowType.IsIgnore(window.WindowName)) return;
-
+        if (UIWindowType.IsIgnore(window.WindowName)) return;
         if (Locker.IsLocked == false) Pause(true);
 		
         Locker.Lock(this);
@@ -73,11 +72,11 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
 	
     private void OnCloseWindow(IWUIWindow window)
     {
-        if(UIWindowType.IsIgnore(window.WindowName)) return;
+        if (UIWindowType.IsIgnore(window.WindowName)) return;
 		
         Locker.Unlock(this);
-		
-        if(Locker.IsLocked) return;
+
+        if (Locker.IsLocked) return;
 
         DOTween.Sequence()
             .AppendInterval(0.25f)
@@ -94,14 +93,14 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
         
         var collection = GetComponent<ECSComponentCollection>(BaseTutorialStep.ComponentGuid);
         var components = collection?.Components;
-        
-        if(components == null) return;
+
+        if (components == null) return;
 
         for (var i = components.Count - 1; i >= 0; i--)
         {
             var step = (BaseTutorialStep) components[i];
-            
-            if(step.IsPerform == false) continue;
+
+            if (step.IsPerform == false) continue;
             
             if (isOn) step.PauseOn();
             else step.PauseOff();

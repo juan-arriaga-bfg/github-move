@@ -18,6 +18,7 @@
 	public bool IsAnyCompleteCondition;
 
 	protected bool isPauseOn;
+	protected bool isAutoComplete;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
@@ -83,6 +84,8 @@
 	
 	private bool IsHardComplete()
 	{
+		if (isAutoComplete) return true;
+		
 		var collection = GetComponent<ECSComponentCollection>(BaseTutorialCondition.ComponentGuid);
 		var conditions = collection?.Components.FindAll(component => (component as BaseTutorialCondition).ConditionType == TutorialConditionType.Hard);
 		

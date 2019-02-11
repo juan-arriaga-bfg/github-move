@@ -91,67 +91,67 @@ public class UIHintArrowViewController : IWUIWindowViewController, IHintArrow
         CachedTransform.localRotation = targetRotation;
         return this;
     }
-
-    protected virtual void Return()
-    {
-        UIService.Get.ReturnCachedObject(gameObject);
-        gameObject.SetActive(false);
-    }
     
     public virtual void Hide()
     {
-        Hide(true);
-    }
-
-    public virtual void Hide(bool isReturn)
-    {
-        if (gameObject.activeSelf == false) return;
+        if (isShowing == false) return;
         
         isShowing = false;
-        
-        if (isReturn)
-        {
-            DOTween.Kill(this);
-            Return();
-            return;
-        }
         
         DOTween.Kill(this);
         
         var sequence = DOTween.Sequence().SetId(this);
-        sequence.Append(viewAnchor.DOFade(0f, 0.35f));
-
-        sequence.OnComplete(Return);
+        
+        sequence.Append(viewAnchor.DOFade(0f, 0.35f * viewAnchor.alpha));
+        sequence.OnComplete(() => gameObject.SetActive(false));
     }
 
     public virtual UIHintArrowViewController Show()
     {
+        if (isShowing) return this;
+        
         gameObject.SetActive(true);
         
-        DOTween.Kill(this);
-
-        if (!isShowing)
-        {
-            viewAnchor.alpha = 0f;
-            viewAnchor.DOFade(1f, 0.35f).SetId(this);
-        }
-
         isShowing = true;
         
-        if (lifeTime < 0f)
-        {
-            return this;
-        }
+        DOTween.Kill(this);
         
         var sequence = DOTween.Sequence().SetId(this);
+
+        sequence.Append(viewAnchor.DOFade(1f, 0.35f * (1 - viewAnchor.alpha)));
+        
+        if (lifeTime < 0f) return this;
+        
         sequence.AppendInterval(lifeTime);
-        sequence.OnComplete(() => Hide(false));
+        sequence.OnComplete(Hide);
 
         return this;
     }
 
     public void Remove(float delay)
     {
-        Hide(false);
+        DOTween.Kill(this);
+        
+        if (isShowing == false)
+        {
+            Return();
+            return;
+        }
+
+        isShowing = false;
+        
+        var sequence = DOTween.Sequence();
+        
+        sequence.AppendInterval(delay);
+        sequence.Append(viewAnchor.DOFade(0f, 0.35f));
+        sequence.OnComplete(Return);
+    }
+
+    private void Return()
+    {
+        if (gameObject == null) return;
+        
+        UIService.Get.ReturnCachedObject(gameObject);
+        gameObject.SetActive(false);
     }
 }

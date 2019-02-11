@@ -362,6 +362,19 @@ public class QuestEntity : ECSEntity, IECSSerializeable
         return count;
     }
     
+    public int GetClaimedTasksCount()
+    {
+        int count = 0;
+        for (var i = 0; i < ActiveTasks.Count; i++)
+        {
+            if (ActiveTasks[i].IsClaimed())
+            {
+                count += 1;
+            }
+        }
+        return count;
+    }
+    
     public int GetCompletedButNotClaimedTasksCount()
     {
         int count = 0;
