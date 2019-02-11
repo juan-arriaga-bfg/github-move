@@ -30,7 +30,7 @@ public class ProfileInitComponent : AsyncInitComponentBase
                     PrintProfileText(dataMapper);
 #endif
                     
-                    Debug.LogWarning($"[Reset progress] reset progress by: baseProfile == null:{baseProfile == null}");
+                    Debug.LogWarning($"[Reset progress] reset progress by: baseProfile == null");
                 }
                 else
                 {
@@ -77,8 +77,11 @@ public class ProfileInitComponent : AsyncInitComponentBase
         var profileText = dataMapper.GetJsonDataAsString();
         if (!string.IsNullOrEmpty(profileText))
         {
-            Debug.LogError("[ProfileInitComponent] => Execute: Can't parse profile json.");
             LogLongString(profileText);
+        }
+        else
+        {
+            Debug.LogWarning("[ProfileInitComponent] => PrintProfileText: profile text is null or empty");
         }
     }
 #endif
