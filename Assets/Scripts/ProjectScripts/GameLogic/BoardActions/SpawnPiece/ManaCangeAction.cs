@@ -23,14 +23,16 @@ public class ManaCangeAction : IBoardAction
 		
 		foreach (var pair in Pieces)
 		{
-			foreach (var pos in field)
+			for (var i = 0; i < pair.Value; i++)
 			{
+				if (field.Count == 0) break; 
+				
+				var pos = field[0];
 				var piece = gameBoardController.CreatePieceFromType(pair.Key);
-
-				if (gameBoardController.BoardLogic.AddPieceToBoard(pos.X, pos.Y, piece) == false)
-				{
-					continue;
-				}
+				
+				field.Remove(pos);
+				
+				if (gameBoardController.BoardLogic.AddPieceToBoard(pos.X, pos.Y, piece) == false) continue;
 			
 				pieces.Add(pos, piece);
 				gameBoardController.BoardLogic.LockCell(pos, this);
