@@ -8,6 +8,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	[IWUIBinding("#ButtonLabel")] private NSText btnLabel;
 	[IWUIBinding("#LockLabel")] private NSText lockAmountLabel;
 	[IWUIBinding("#LockMessage")] private NSText lockMessage;
+	[IWUIBinding("#LockLevelMessage")] private NSText lockLevelMessage;
 	
 	[IWUIBinding("#BuyButton")] private UIButtonViewController btnBuy;
 	[IWUIBinding("#ButtonInfo")] private UIButtonViewController btnInfo;
@@ -47,20 +48,26 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 			Sepia = contentEntity.Def.State == MarketItemState.Claimed;
 		}
 
-		nameLabel.Text = contentEntity.Def.State != MarketItemState.Lock
-			? contentEntity.Name
-			: string.Format(LocalizationService.Get("window.market.item.locked.message", "window.market.item.locked.message {0}"), contentEntity.Def.Level);
-		
 		lockAmountLabel.Text = contentEntity.Def.State == MarketItemState.Lock ? "" : contentEntity.LabelText;
-		
+        
+        nameLabel.Text = contentEntity.Name;
+        
 		switch (contentEntity.Def.State)
 		{
 			case MarketItemState.Lock:
 				lockMessage.Text = LocalizationService.Get("window.market.item.locked", "window.market.item.locked");
+                lockLevelMessage.gameObject.SetActive(true);
+                lockLevelMessage.Text = string.Format(LocalizationService.Get("window.market.item.locked.message", "window.market.item.locked.message {0}"), contentEntity.Def.Level);
+                nameLabel.Text = "";
+                lockAnchor.localScale = Vector3.one;
 				break;
+            
 			case MarketItemState.Claimed:
 				lockMessage.Text = LocalizationService.Get("window.market.item.claimed", "window.market.item.claimed");
+                lockLevelMessage.gameObject.SetActive(false);
+                lockAnchor.localScale = Vector3.one * 1.5f;
 				break;
+            
 			default:
 				lockMessage.Text = "";
 				break;
