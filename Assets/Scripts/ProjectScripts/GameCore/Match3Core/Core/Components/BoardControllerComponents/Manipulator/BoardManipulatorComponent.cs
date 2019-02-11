@@ -99,7 +99,7 @@ public class BoardManipulatorComponent : ECSEntity,
         if (context.BoardLogic.FireflyLogic.OnClick(selectedView)) return true;
 
         var pieceView = selectedView as PieceBoardElementView;
-        if (pieceView != null && pieceView.Piece.CachedPosition.Equals(BoardPosition.Zero()) == false)
+        if (pieceView != null && context.BoardLogic.IsLockedCell(pieceView.Piece.CachedPosition) == false && pieceView.Piece.CachedPosition.Equals(BoardPosition.Zero()) == false)
         {
             pieceView.OnTap(pieceView.Piece.CachedPosition, pos);
             
