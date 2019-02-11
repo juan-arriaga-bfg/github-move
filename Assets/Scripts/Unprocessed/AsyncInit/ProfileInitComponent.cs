@@ -54,7 +54,7 @@ public class ProfileInitComponent : AsyncInitComponentBase
                         PrintProfileText(dataMapper);
 #endif
                         
-                        Debug.LogWarning($"[Reset progress] reset progress by: profile == null:{profile == null}");
+                        Debug.LogWarning($"[Reset progress] reset progress by: profile == null");
 
                         var profileBuilder = new DefaultProfileBuilder();
                         ProfileService.Instance.Manager.ReplaceProfile(profileBuilder.Create());
@@ -72,9 +72,9 @@ public class ProfileInitComponent : AsyncInitComponentBase
     }
 
 #if DEBUG
-    private void PrintProfileText(ResourceConfigDataMapper<UserProfile> dataMapper)
+    private void PrintProfileText(IJsonDataMapper<UserProfile> dataMapper)
     {
-        var profileText = dataMapper.GetDataAsJson();
+        var profileText = dataMapper.GetJsonDataAsString();
         if (!string.IsNullOrEmpty(profileText))
         {
             Debug.LogError("[ProfileInitComponent] => Execute: Can't parse profile json.");
