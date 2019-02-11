@@ -40,6 +40,8 @@ public class UIArrowTutorialStep : BaseTutorialStep
 
     private void HideArrow()
     {
+        if (anchor == null) return;
+        
         var view = UIService.Get.GetShowedView<UIMainWindowView>(UIWindowType.MainWindow);
         
         view.CachedHintArrowComponent.HideArrow(anchor);
@@ -47,6 +49,8 @@ public class UIArrowTutorialStep : BaseTutorialStep
     
     protected virtual void CreateArrow()
     {
+        if (anchor == null) return;
+        
         var view = UIService.Get.GetShowedView<UIMainWindowView>(UIWindowType.MainWindow);
         
         view.CachedHintArrowComponent.ShowArrow(anchor, -1);
