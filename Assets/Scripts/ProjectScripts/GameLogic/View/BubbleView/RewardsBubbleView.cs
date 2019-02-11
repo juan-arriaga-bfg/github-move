@@ -28,7 +28,7 @@ public class RewardsBubbleView : UIBoardView
         
 		Priority = defaultPriority = 11;
         
-		storage = piece.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid);
+		storage = Context.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid);
         
 		if (storage == null || string.IsNullOrEmpty(storage.Icon) || storage.Icon == PieceType.Parse(PieceType.Empty.Id)) return;
 		
@@ -49,7 +49,7 @@ public class RewardsBubbleView : UIBoardView
 	{
 		Context.Context.TutorialLogic.Pause(true);
 		
-		if (storage != null && storage.CheckOutOfCells()) return;
+		if (Context.Context.BoardLogic.IsLockedCell(Context.CachedPosition) || storage != null && storage.CheckOutOfCells()) return;
 		
 		OnClickAction?.Invoke();
 		OnClickAction = null;

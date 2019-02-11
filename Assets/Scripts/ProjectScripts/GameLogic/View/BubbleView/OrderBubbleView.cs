@@ -68,6 +68,9 @@ public class OrderBubbleView : UIBoardView
 	public void OnClick()
 	{
 		Context.Context.TutorialLogic.Pause(true);
+		
+		if (Context.Context.BoardLogic.IsLockedCell(Context.CachedPosition)) return;
+		
 		Context.TouchReaction?.Touch(Context.CachedPosition);
 	}
 }
