@@ -12,7 +12,7 @@
 			.RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}
 				.RegisterDefinition(new TouchReactionDefinitionOpenBubble {ViewId = ViewType.ObstacleBubble})
 				.RegisterDefinition(new TouchReactionDefinitionSpawnRewards()))
-			.RegisterComponent(new TouchReactionConditionWorkplace()));
+			.RegisterComponent(new TouchReactionConditionPR()));
 		
 		return piece;
 	}

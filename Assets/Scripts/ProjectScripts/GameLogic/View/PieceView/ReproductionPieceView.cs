@@ -5,9 +5,8 @@
 
     public override void ToggleEffectsByState(bool isProcessing)
     {
-        if (life == null)
-            life = Piece.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
-        if (life?.Locker.IsLocked == true)
+        var isTutorialEnd = Context.Context.TutorialLogic.CheckLockPR();
+        if (isTutorialEnd == false)
         {
             ClearParticle(ref processParticle);
             ClearParticle(ref readyParticle);
@@ -15,5 +14,10 @@
         }
         
         base.ToggleEffectsByState(isProcessing);
+    }
+
+    public void OnTutorialEnd()
+    {
+        base.ToggleEffectsByState(false);
     }
 }
