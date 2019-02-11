@@ -98,9 +98,9 @@ public class BoardManipulatorComponent : ECSEntity,
 
         if (context.BoardLogic.FireflyLogic.OnClick(selectedView)) return true;
 
-        if (selectedView is PieceBoardElementView)
+        var pieceView = selectedView as PieceBoardElementView;
+        if (pieceView != null && pieceView.Piece.CachedPosition.Equals(BoardPosition.Zero()) == false)
         {
-            var pieceView = selectedView as PieceBoardElementView;
             pieceView.OnTap(pieceView.Piece.CachedPosition, pos);
             
             if (pieceView.AvailiableLockTouchMessage() && !context.PathfindLocker.HasPath(pieceView.Piece))
@@ -140,7 +140,7 @@ public class BoardManipulatorComponent : ECSEntity,
             
             if (context.BoardLogic.FireflyLogic.OnDragStart(selectedView) == false && pieceView != null)
             {
-                if (pieceView.Piece.Draggable == null || pieceView.Piece.Draggable.IsDraggable(pieceView.Piece.CachedPosition) == false)
+                if (pieceView.Piece.CachedPosition.Equals(BoardPosition.Zero()) || pieceView.Piece.Draggable == null || pieceView.Piece.Draggable.IsDraggable(pieceView.Piece.CachedPosition) == false)
                 {
                     return;
                 }

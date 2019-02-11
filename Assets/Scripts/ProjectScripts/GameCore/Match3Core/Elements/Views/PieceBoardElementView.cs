@@ -427,6 +427,7 @@ public class PieceBoardElementView : BoardElementView
         lockedSubtrates.Clear();
         
         DestroyDropEffect();
+        RemoveArrow();
         
         base.ResetViewOnDestroy();
     }

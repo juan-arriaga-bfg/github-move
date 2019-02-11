@@ -16,6 +16,9 @@
 
 	public bool IsAnyStartCondition;
 	public bool IsAnyCompleteCondition;
+
+	protected bool isPauseOn;
+	protected bool isAutoComplete;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
@@ -33,6 +36,7 @@
 
 	public virtual void PauseOn()
 	{
+		isPauseOn = true;
 	}
 	
 	public virtual void Perform()
@@ -43,6 +47,8 @@
 	
 	public virtual void PauseOff()
 	{
+		isPauseOn = false;
+		
 		if(Repeat == 0) return;
 		
 		Repeat--;
@@ -78,6 +84,8 @@
 	
 	private bool IsHardComplete()
 	{
+		if (isAutoComplete) return true;
+		
 		var collection = GetComponent<ECSComponentCollection>(BaseTutorialCondition.ComponentGuid);
 		var conditions = collection?.Components.FindAll(component => (component as BaseTutorialCondition).ConditionType == TutorialConditionType.Hard);
 		

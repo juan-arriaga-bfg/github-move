@@ -141,6 +141,10 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         bar.SetOffset(Def.GetCenter(Context.Context) + new Vector3(0, 0.1f));
         bar.Priority = -1;
         bar.Change(true);
+        
+        if(Context.Context.Manipulator.CameraManipulator.CameraMove.IsLocked) return;
+        
+        Context.Context.Manipulator.CameraManipulator.MoveTo(Def.GetCenter(Context.Context));
     }
     
     public string GetResourceId()

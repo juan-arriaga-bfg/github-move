@@ -32,7 +32,7 @@ public class UIHintArrowComponent : ECSEntity
             if (cachedArrowViewController == null) continue;
             
             contextView.UnRegisterWindowViewController(cachedArrowViewController);
-            cachedArrowViewController.Hide();
+            cachedArrowViewController.Remove(0f);
         }
         
         cachedArrowViewControllers.Clear();
@@ -43,7 +43,7 @@ public class UIHintArrowComponent : ECSEntity
         if (cachedArrowViewControllers.TryGetValue(anchor, out var cachedArrowViewController) == false) return;
         
         contextView.UnRegisterWindowViewController(cachedArrowViewController);
-        cachedArrowViewController.Hide(false);
+        cachedArrowViewController.Hide();
     }
 
     public UIHintArrowViewController ShowArrow(Transform anchor, float lifetime = 2.5f, Vector3 offset = default(Vector3))

@@ -72,6 +72,8 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
 
     void OnApplicationPause(bool pauseStatus)
     {
+        Debug.Log($"OnApplicationPause: {(pauseStatus ? "PAUSE" : "UNPAUSE")}");
+        
         var energyLogic = BoardService.Current?.FirstBoard?.GetComponent<EnergyCurrencyLogicComponent>(EnergyCurrencyLogicComponent.ComponentGuid);
         if (pauseStatus)
         {
@@ -97,6 +99,8 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
 
     void OnApplicationQuit()
     {
+        Debug.Log($"OnApplicationQuit");
+        
         ProfileService.Instance.Manager.UploadCurrentProfile();
 
         LocalNotificationsService.Current.ScheduleNotifications();

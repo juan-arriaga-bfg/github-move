@@ -18,6 +18,6 @@ public class UIDailyQuestWindowModel : IWWindowModel
     public List<TaskEntity> Tasks => Quest.ActiveTasks;
 
     public TimerComponent Timer => GameDataService.Current.QuestsManager.DailyTimer;
-    
 
+    public bool IsTutorial;
 }

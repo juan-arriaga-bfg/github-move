@@ -15,9 +15,11 @@ public class HighlightFogTutorialStep : LoopFingerTutorialStep
         base.Perform();
         Context.Context.HintCooldown.Pause(this);
         
+        to = GameDataService.Current.FogsManager.GetNextRandomFog().GetCenter();
+        var observer = GameDataService.Current.FogsManager.GetFogObserver(to);
         var positions = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(mana);
         
-        if (positions.Count != 0)
+        if (positions.Count != 0 || observer.CanBeFilled() == false)
         {
             isSpawn = true;
             return;
@@ -46,7 +48,7 @@ public class HighlightFogTutorialStep : LoopFingerTutorialStep
         }
         
         from = positions[0];
-        to = GameDataService.Current.FogsManager.GetNextRandomFog().GetCenter();
+        
         
         base.Execute();
     }

@@ -351,7 +351,7 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
 
         foreach (var pair in pieces)
         {
-            if(current == max) break;
+            if (current == max) break;
             
             var value = Mathf.Clamp(pair.Value, 0, max - current);
             
