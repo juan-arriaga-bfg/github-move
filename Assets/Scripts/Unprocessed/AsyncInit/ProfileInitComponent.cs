@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 
 public class ProfileInitComponent : AsyncInitComponentBase
@@ -6,11 +7,15 @@ public class ProfileInitComponent : AsyncInitComponentBase
     {
         //init profile 
         var profileManager = new ProfileManager<UserProfile> { SystemVersion = IWVersion.Get.BuildNumber };
+        
 #if UNITY_EDITOR
-        profileManager.Init(new ResourceConfigDataMapper<UserProfile>("configs/profile.data", false), new DefaultProfileBuilder(), new DefaultProfileMigration());
+        var dataMapper = new ResourceConfigDataMapper<UserProfile>("configs/profile.data", false);
 #else
-        profileManager.Init(new StoragePlayerPrefsDataMapper<UserProfile>("user.profile"), new DefaultProfileBuilder(), new DefaultProfileMigration());
+        var dataMapper = new StoragePlayerPrefsDataMapper<UserProfile>("user.profile");
 #endif
+
+        profileManager.Init(dataMapper, new DefaultProfileBuilder(), new DefaultProfileMigration());
+
         ProfileService.Instance.SetManager(profileManager);
         
         // load local base profile
@@ -21,6 +26,10 @@ public class ProfileInitComponent : AsyncInitComponentBase
             {
                 if (baseProfile == null)
                 {
+#if DEBUG
+                    PrintProfileText(dataMapper);
+#endif
+                    
                     Debug.LogWarning($"[Reset progress] reset progress by: baseProfile == null:{baseProfile == null}");
                 }
                 else
@@ -41,6 +50,10 @@ public class ProfileInitComponent : AsyncInitComponentBase
                 {
                     if (profile == null)
                     {
+#if DEBUG
+                        PrintProfileText(dataMapper);
+#endif
+                        
                         Debug.LogWarning($"[Reset progress] reset progress by: profile == null:{profile == null}");
 
                         var profileBuilder = new DefaultProfileBuilder();
@@ -58,9 +71,38 @@ public class ProfileInitComponent : AsyncInitComponentBase
         });
     }
 
+#if DEBUG
+    private void PrintProfileText(ResourceConfigDataMapper<UserProfile> dataMapper)
+    {
+        var profileText = dataMapper.GetDataAsJson();
+        if (!string.IsNullOrEmpty(profileText))
+        {
+            Debug.LogError("[ProfileInitComponent] => Execute: Can't parse profile json.");
+            LogLongString(profileText);
+        }
+    }
+#endif
+    
     private void ProfileLoaded()
     {
         isCompleted = true;
         OnComplete(this);
+    }
+    
+    private void LogLongString(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+        {
+            return;
+        }
+
+        using (StringReader reader = new StringReader(text))
+        {
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                Debug.Log(line);
+            }
+        }
     }
 }
