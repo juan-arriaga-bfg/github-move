@@ -51,8 +51,12 @@ public class UIQuestStartWindowView : IWUIWindowView
     public override void OnViewShowCompleted()
     {
         base.OnViewShowCompleted();
-        
-        if(btnBackLayer != null) btnBackLayer.ToState(GenericButtonState.Active).OnClick(OnClick);
+
+        if (btnBackLayer != null)
+        {
+            btnBackLayer.ToState(GenericButtonState.Active)
+                        .OnDown(OnClick);
+        }
     }
 
     private void CleanUp()
