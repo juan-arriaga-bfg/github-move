@@ -24,6 +24,7 @@ public class UINextLevelWindowView : UIGenericWindowView
     private int tapCount;
     private bool isClick;
 
+    public override float DefaultDelayOnClose => 0.65f;
 
     public override void OnViewShow()
     {
