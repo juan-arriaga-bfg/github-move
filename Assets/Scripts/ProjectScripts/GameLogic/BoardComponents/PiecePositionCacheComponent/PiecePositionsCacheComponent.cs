@@ -138,9 +138,7 @@ public class PiecePositionsCacheComponent : IECSComponent
 
 	public void AddPosition(int pieceType, BoardPosition position)
 	{
-		List<BoardPosition> list;
-
-		if (cache.TryGetValue(pieceType, out list) == false)
+		if (cache.TryGetValue(pieceType, out var list) == false)
 		{
 			list = new List<BoardPosition>();
 			cache.Add(pieceType, list);
@@ -150,19 +148,9 @@ public class PiecePositionsCacheComponent : IECSComponent
 		context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ChangePiecePosition, pieceType);
 	}
 	
-	public bool RemovePosition(int pieceType, BoardPosition position)
+	public void RemovePosition(int pieceType, BoardPosition position)
 	{
-		List<BoardPosition> list;
-
-		if (cache.TryGetValue(pieceType, out list) == false) return false;
-
-		var isHappened = list.Remove(position);
-
-		if (isHappened)
-		{
-			context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ChangePiecePosition, pieceType);
-		}
-		
-		return isHappened;
+		if (cache.TryGetValue(pieceType, out var list) == false) return;
+		if (list.Remove(position)) context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ChangePiecePosition, pieceType);
 	}
 }
