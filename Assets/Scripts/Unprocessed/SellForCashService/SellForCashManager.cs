@@ -111,9 +111,9 @@ public class SellForCashManager: ECSEntity
         if (!restore) // Restore will be handled in RestoredPurchasesProvider
         {
             ProvideReward(productId);
-            
-            ProfileService.Current.GetComponent<BaseInformationSaveComponent>(BaseInformationSaveComponent.ComponentGuid).IsPayer = true;
         }
+        
+        ProfileService.Current.GetComponent<BaseInformationSaveComponent>(BaseInformationSaveComponent.ComponentGuid).IsPayer = true;
 
         onComplete?.Invoke(true, productId);
         onComplete = null;
