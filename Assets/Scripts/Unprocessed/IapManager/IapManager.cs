@@ -95,7 +95,7 @@ public class IapManager : ECSEntity, IIapManager
 
     private void OnPurchaseOkCallback(string productId, string receipt, bool restore)
     {
-        Debug.Log($"[IapManager] => OnPurchaseOkCallback: productId: '{productId}' with receipt:\n{receipt}");
+        Debug.Log($"[IapManager] => OnPurchaseOkCallback: productId: '{productId}', restore: {restore}, with receipt:\n{receipt}");
         
         string storeId = iapProvider.IapCollection.GetStoreId(productId);
 

@@ -121,6 +121,12 @@ public class SellForCashManager: ECSEntity
 
     public void ProvideReward(string productId)
     {
+        if (!AsyncInitService.Current.IsAllComponentsInited())
+        {
+            Debug.LogError($"[SellForCashManager] => provideReward: Skip by AsyncInitService.IsAllComponentsInited() == false");
+            return;
+        }
+        
         var defs = GameDataService.Current.ShopManager.Defs[Currency.Crystals.Name];
         var def = defs.FirstOrDefault(e => e.PurchaseKey == productId);
 
