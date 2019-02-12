@@ -170,7 +170,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         }
 
         DOTween.Sequence()
-               .AppendInterval(cardsAdded ? ANIMATION_TIME : 0)
+               // .AppendInterval(cardsAdded ? ANIMATION_TIME : 0)
                .OnComplete(() =>
                 {
                     onComplete?.Invoke();

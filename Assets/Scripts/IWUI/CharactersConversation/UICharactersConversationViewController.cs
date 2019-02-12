@@ -502,6 +502,8 @@ public partial class UICharactersConversationViewController : IWUIWindowView
 
     public void OnClick()
     {
+        Debug.Log("[UICharactersConversationViewController] => OnClick");
+        
         var teletype = bubbleView as ITeleTypedText;
         if (teletype != null && teletype.IsPlayingTeleTypeEffect())
         {
