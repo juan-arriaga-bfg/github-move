@@ -52,7 +52,7 @@ public class UIArrowTutorialStep : BaseTutorialStep
         if (anchor == null) return;
         
         var view = UIService.Get.GetShowedView<UIMainWindowView>(UIWindowType.MainWindow);
-        
-        view.CachedHintArrowComponent.ShowArrow(anchor, -1);
+
+        view.CachedHintArrowComponent.ShowArrow(anchor, -1, Vector3.zero, Vector3.one * 1.5f);
     }
 }
