@@ -24,7 +24,7 @@ public class BaseTutorialStep : ECSEntity
 	protected bool isPauseOn;
 	protected bool isAutoComplete;
 	
-	public Action OnStart;
+	public Action OnFirstStart;
 	public Action OnComplete;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
@@ -42,11 +42,6 @@ public class BaseTutorialStep : ECSEntity
 		if (isStart) return true;
 
 		isStart = Check(TutorialConditionType.Start);
-
-		if (isStart)
-		{
-			OnStart?.Invoke();
-		}
 		
 		return isStart;
 	}
@@ -58,6 +53,16 @@ public class BaseTutorialStep : ECSEntity
 	
 	public virtual void Perform()
 	{
+		if (IsPerform == false)
+		{
+			var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
+			var started = tutorialLogic.SaveStarted;
+			if (started.Contains(Id) == false)
+			{
+				started.Add(Id);
+				OnFirstStart?.Invoke();
+			}
+		}
 		IsPerform = true;
 		StartAnimation(TutorialAnimationType.Perform);
 	}
