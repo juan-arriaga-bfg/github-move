@@ -13,8 +13,18 @@ public class HighlightPiecesTutorialStep : BaseTutorialStep, IBoardEventListener
         SelectionOff();
     }
 
+    public override void PauseOff()
+    {
+        base.PauseOff();
+        
+        SelectionOff();
+        Execute();
+    }
+
     public override void Perform()
     {
+        if(IsPerform) return;
+        
         base.Perform();
         
         Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ChangePiecePosition);
