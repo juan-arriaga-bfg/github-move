@@ -742,6 +742,19 @@
     }
   },
   {
+    "$type": "TaskCompleteOrderEntity, GameAssembly",
+    "Id": "65_CompleteOrder",
+    "PieceUid": "NPC_SleepingBeauty",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "NPC_SleepingBeauty",
+        "Title": "quest.complete.orders.title",
+        "Message": "quest.complete.orders.message"
+      }
+    }
+  },
+  {
     "$type": "TaskCompleteDailyTaskEntity, GameAssembly",
     "Id": "Daily_ClearAll",
     "ComponentsCache": {

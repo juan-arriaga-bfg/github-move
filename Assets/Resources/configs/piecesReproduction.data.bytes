@@ -1,11 +1,11 @@
 [
   {
     "Uid": "PR_A4",
-    "Delay": 120,
+    "Delay": 90,
     "Limit": 10,
     "StepReward": {
       "Currency": "Experience",
-      "Amount": 5
+      "Amount": 3
     },
     "Reproduction": {
       "Currency": "PR_A5",
@@ -15,11 +15,11 @@
   },
   {
     "Uid": "PR_B4",
-    "Delay": 180,
+    "Delay": 90,
     "Limit": 10,
     "StepReward": {
       "Currency": "Experience",
-      "Amount": 5
+      "Amount": 3
     },
     "Reproduction": {
       "Currency": "PR_B5",
@@ -29,15 +29,15 @@
   },
   {
     "Uid": "PR_C4",
-    "Delay": 90,
-    "Limit": 3,
+    "Delay": 60,
+    "Limit": 6,
     "StepReward": {
       "Currency": "Experience",
-      "Amount": 5
+      "Amount": 3
     },
     "Reproduction": {
       "Currency": "PR_C5",
-      "Amount": 2
+      "Amount": 1
     },
     "Obstacle": "OB_PR_C"
   },
@@ -47,7 +47,7 @@
     "Limit": 7,
     "StepReward": {
       "Currency": "Experience",
-      "Amount": 5
+      "Amount": 3
     },
     "Reproduction": {
       "Currency": "PR_D5",
@@ -57,11 +57,11 @@
   },
   {
     "Uid": "PR_E4",
-    "Delay": 60,
+    "Delay": 90,
     "Limit": 10,
     "StepReward": {
       "Currency": "Experience",
-      "Amount": 5
+      "Amount": 3
     },
     "Reproduction": {
       "Currency": "PR_E5",
@@ -71,11 +71,11 @@
   },
   {
     "Uid": "PR_F4",
-    "Delay": 60,
+    "Delay": 90,
     "Limit": 10,
     "StepReward": {
       "Currency": "Experience",
-      "Amount": 5
+      "Amount": 3
     },
     "Reproduction": {
       "Currency": "PR_F5",
@@ -89,7 +89,7 @@
     "Limit": 7,
     "StepReward": {
       "Currency": "Experience",
-      "Amount": 5
+      "Amount": 3
     },
     "Reproduction": {
       "Currency": "PR_G5",
