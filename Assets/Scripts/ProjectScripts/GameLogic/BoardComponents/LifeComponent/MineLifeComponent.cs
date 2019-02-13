@@ -5,6 +5,7 @@ public class MineLifeComponent : WorkplaceLifeComponent
     private PieceMineDef def;
     
     public override CurrencyPair Energy => def.Price;
+    public override string AnalyticsLocation => $"skip_mine{(TimerCooldown.IsExecuteable() ? "_cooldown" : "")}";
     public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.mine", "gameboard.bubble.message.mine\n{0}?"), DateTimeExtension.GetDelayText(def.Delay));
     public override string Price => TimerCooldown.IsExecuteable()
         ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), TimerCooldown.CompleteTime.GetTimeLeftText())
@@ -61,6 +62,7 @@ public class MineLifeComponent : WorkplaceLifeComponent
         
         UIMessageWindowController.CreateTimerCompleteMessage(
             LocalizationService.Get("window.timerComplete.message.production", "window.timerComplete.message.production"),
+            AnalyticsLocation,
             TimerCooldown);
         
         return false;

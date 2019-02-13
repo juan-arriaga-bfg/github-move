@@ -3,7 +3,7 @@
 public class ObstacleLifeComponent : WorkplaceLifeComponent
 {
     public override CurrencyPair Energy => GameDataService.Current.ObstaclesManager.GetPriceByStep(Context.PieceType, current);
-
+    public override string AnalyticsLocation => "skip_obstacle";
     public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.obstacle", "gameboard.bubble.message.obstacle\n{0}?"), DateTimeExtension.GetDelayText(GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current)));
     public override string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.chop", "gameboard.bubble.button.chop {0}"), Energy.ToStringIcon());
     

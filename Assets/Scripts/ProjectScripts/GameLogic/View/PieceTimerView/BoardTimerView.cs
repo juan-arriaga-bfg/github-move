@@ -146,6 +146,18 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     public void OnClick()
     {
         OffChopSound();
-        timer?.FastComplete();
+
+        var analyticsLocation = string.Empty;
+        var life = Context.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
+
+        if (life != null) analyticsLocation = life.AnalyticsLocation;
+        else
+        {
+            var building = Context.GetComponent<PieceStateComponent>(PieceStateComponent.ComponentGuid);
+            
+            if (building != null) analyticsLocation = "skip_build";
+        }
+        
+        timer.FastComplete(analyticsLocation);
     }
 }

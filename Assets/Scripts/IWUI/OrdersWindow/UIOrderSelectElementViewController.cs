@@ -223,7 +223,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
 
     private void OnClickBuy()
     {
-        customer.Timer.FastComplete();
+        customer.Timer.FastComplete("skip_order");
     }
 
     private void OnClick()
