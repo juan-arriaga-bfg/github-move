@@ -87,6 +87,7 @@ public class UINextLevelWindowView : UIGenericWindowView
         GameDataService.Current.LevelsManager.UpdateSequence();
         
         Analytics.SendLevelReachedEvent(GameDataService.Current.LevelsManager.Level);
+        Analytics.SendPurchase("screen_levelup", "item1", null, new List<CurrencyPair>(manager.Rewards), false, false);
         
         base.OnViewCloseCompleted();
     }

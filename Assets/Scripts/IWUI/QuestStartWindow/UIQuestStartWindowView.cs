@@ -327,13 +327,14 @@ public class UIQuestStartWindowView : IWUIWindowView
         quest.SetClaimedState();
         GameDataService.Current.QuestsManager.FinishQuest(quest.Id);
 
-        List<CurrencyPair> reward = quest.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
-
-        int curLayer = uiLayer.CurrentLayer;
+        var reward = quest.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
+        var curLayer = uiLayer.CurrentLayer;
+        
         uiLayer.CurrentLayer = 10;
 
-        Vector3 pos = conversation.GetLeftBubbleAnchor().position;
+        var pos = conversation.GetLeftBubbleAnchor().position;
         var point = uiLayer.ViewCamera.WorldToScreenPoint(pos);
+        
         point.x -= 350;
         point.x += 70;
         
@@ -341,6 +342,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         {
             uiLayer.CurrentLayer = curLayer;
             onComplete();
+            Analytics.SendPurchase("screen_quest", "item1", null, new List<CurrencyPair>(reward), false, false);
         },
         point);
     }

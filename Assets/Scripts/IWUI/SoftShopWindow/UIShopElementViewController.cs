@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using BfgAnalytics;
 
 public class UIShopElementViewController : UISimpleScrollElementViewController
 {
@@ -18,11 +19,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
 
     private bool IsBuyUsingCash()
     {
-        var contentEntity = entity as UIShopElementEntity;
-        if (contentEntity == null)
-        {
-            return false;
-        }
+        if (!(entity is UIShopElementEntity contentEntity)) return false;
         
         return contentEntity.Price?.Currency == Currency.Cash.Name;
     }
@@ -66,6 +63,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         if (!IsBuyUsingCash())
         {
             CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, contentEntity.Price, rewardPosition, null, false, true);
+            Analytics.SendPurchase(GetAnalyticLocation(), GetAnalyticReason(), new List<CurrencyPair>{contentEntity.Price}, new List<CurrencyPair>(currenciesReward), false, false);
         }
     }
 
@@ -123,6 +121,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
             {
                 context.Controller.CloseCurrentWindow();
                 CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, contentEntity.Price, rewardPosition, null, false, true);
+                Analytics.SendPurchase(GetAnalyticLocation(), GetAnalyticReason(), new List<CurrencyPair>{contentEntity.Price}, new List<CurrencyPair>(currenciesReward), false, false);
             };
             model.OnClose = () =>
             {
@@ -174,5 +173,20 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
         model.OnCancel = () => { isClick = false; };
 
         UIService.Get.ShowWindow(UIWindowType.ConfirmationWindow);
+    }
+
+    protected virtual string GetAnalyticLocation()
+    {
+        var model = context.Model as UISoftShopWindowModel;
+        
+        if (model.ShopType.Id == Currency.Energy.Id) return "screen_energy";
+        if (model.ShopType.Id == Currency.Coins.Id) return "screen_soft";
+
+        return string.Empty;
+    }
+
+    private string GetAnalyticReason()
+    {
+        return $"item{CachedTransform.GetSiblingIndex()}";
     }
 }
