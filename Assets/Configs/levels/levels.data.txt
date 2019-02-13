@@ -56,7 +56,7 @@
     "Index": 3,
     "Price": {
       "Currency": "Experience",
-      "Amount": 150
+      "Amount": 200
     },
     "Rewards": [
       {
@@ -486,6 +486,28 @@
         "Override": true
       }
     ],
+    "PieceWeights": [
+      {
+        "Uid": "PR_A1",
+        "Weight": 1
+      },
+      {
+        "Uid": "PR_B1",
+        "Weight": 1
+      },
+      {
+        "Uid": "PR_C1",
+        "Weight": 1
+      },
+      {
+        "Uid": "PR_D1",
+        "Weight": 1
+      },
+      {
+        "Uid": "PR_E1",
+        "Weight": 1
+      }
+    ],
     "ResourcesWeights": [
       {
         "Uid": "PR_E5",
@@ -497,7 +519,7 @@
     "Index": 12,
     "Price": {
       "Currency": "Experience",
-      "Amount": 10000
+      "Amount": 5500
     },
     "Rewards": [
       {
@@ -508,13 +530,47 @@
         "Currency": "Crystals",
         "Amount": 5
       }
+    ],
+    "OrdersWeights": [
+      {
+        "Uid": "Order15",
+        "Weight": 2,
+        "Override": true
+      },
+      {
+        "Uid": "Order6",
+        "Weight": 3,
+        "Override": true
+      }
+    ],
+    "PieceWeights": [
+      {
+        "Uid": "PR_A1",
+        "Weight": 1
+      },
+      {
+        "Uid": "PR_B1",
+        "Weight": 1
+      },
+      {
+        "Uid": "PR_C1",
+        "Weight": 1
+      },
+      {
+        "Uid": "PR_D1",
+        "Weight": 1
+      },
+      {
+        "Uid": "PR_E1",
+        "Weight": 1
+      }
     ]
   },
   {
     "Index": 13,
     "Price": {
       "Currency": "Experience",
-      "Amount": 9000
+      "Amount": 6000
     },
     "Rewards": [
       {
