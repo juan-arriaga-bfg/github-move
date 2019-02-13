@@ -18,13 +18,16 @@
         
         var view = piece.ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
 
-        view.SetData(
-            LocalizationService.Get("common.message.forbidden", "common.message.forbidden"),
-            LocalizationService.Get("common.button.ok", "common.button.ok"),
-            (p) => { view.Change(false); },
-            true,
-            false
-        );
+        if (view.IsShow == false)
+        {
+            view.SetData(
+                LocalizationService.Get("common.message.forbidden", "common.message.forbidden"),
+                LocalizationService.Get("common.button.ok", "common.button.ok"),
+                (p) => { view.Change(false); },
+                true,
+                false
+            );
+        }
         
         view.Change(!view.IsShow);
 		
