@@ -21,9 +21,9 @@ public class DevTools : UIContainerElementViewController
     [IWUIBinding("#RemoverToggle")] private Toggle removerToggle;
 
 #if !UNITY_EDITOR
-    private static bool isQuestDialogsDisabled;
-    private static bool isTutorialDisabled;
-    private static bool isRemoverDebugDisabled;
+    private static bool isQuestDialogsDisabled = true;
+    private static bool isTutorialDisabled = true;
+    private static bool isRemoverDebugDisabled = true;
 #endif
     
     public override void OnViewInit(IWUIWindowView context)
@@ -197,6 +197,11 @@ public class DevTools : UIContainerElementViewController
     
     public void OnDebug1Click()
     {
+        EditorPrefs.DeleteAll();
+        questDialogsToggle.isOn = IsQuestDialogsEnabled();
+        tutorialToggle.isOn = IsTutorialEnabled();
+        removerToggle.isOn = IsRemoverDebugEnabled();
+        return;
         Debug.Log("OnDebug1Click");
 
 #if UNITY_EDITOR
@@ -358,9 +363,9 @@ public class DevTools : UIContainerElementViewController
     {
         
 #if UNITY_EDITOR
-        EditorPrefs.SetBool("DEBUG_QUEST_DIALOGS_DISABLED", !isChecked);
+        EditorPrefs.SetBool("DEBUG_QUEST_DIALOGS_DISABLED", isChecked);
 #else
-        isQuestDialogsDisabled = !isChecked;
+        isQuestDialogsDisabled = isChecked;
 #endif
         
     }
@@ -369,9 +374,9 @@ public class DevTools : UIContainerElementViewController
     {
         
 #if UNITY_EDITOR
-        return !EditorPrefs.GetBool("DEBUG_QUEST_DIALOGS_DISABLED", false);
+        return EditorPrefs.GetBool("DEBUG_QUEST_DIALOGS_DISABLED", true);
 #else
-        return !isQuestDialogsDisabled;
+        return isQuestDialogsDisabled;
 #endif
         
     }
@@ -380,9 +385,9 @@ public class DevTools : UIContainerElementViewController
     {
         
 #if UNITY_EDITOR
-        EditorPrefs.SetBool("DEBUG_TUTORIAL_DISABLED", !isChecked);
+        EditorPrefs.SetBool("DEBUG_TUTORIAL_DISABLED", isChecked);
 #else
-        isTutorialDisabled = !isChecked;
+        isTutorialDisabled = isChecked;
 #endif
         
     }
@@ -391,9 +396,9 @@ public class DevTools : UIContainerElementViewController
     {
         
 #if UNITY_EDITOR
-        return !EditorPrefs.GetBool("DEBUG_TUTORIAL_DISABLED", false);
+        return EditorPrefs.GetBool("DEBUG_TUTORIAL_DISABLED", true);
 #else
-        return !isTutorialDisabled;
+        return isTutorialDisabled;
 #endif
         
     }
@@ -401,19 +406,18 @@ public class DevTools : UIContainerElementViewController
     public void OnRemoverDebugValueChanged(bool isChecked)
     {
 #if UNITY_EDITOR
-        EditorPrefs.SetBool("DEBUG_REMOVER_DISABLED", !isChecked);
+        EditorPrefs.SetBool("DEBUG_REMOVER_DISABLED", isChecked);
 #else
-        isRemoverDebugDisabled = !isChecked;
+        isRemoverDebugDisabled = isChecked;
 #endif
-        Debug.LogError($"Now IsRemoverDebugEnabled == {IsRemoverDebugEnabled()}");
     }
     
     public static bool IsRemoverDebugEnabled()
     {
 #if UNITY_EDITOR
-        return !EditorPrefs.GetBool("DEBUG_REMOVER_DISABLED", false);
+        return EditorPrefs.GetBool("DEBUG_REMOVER_DISABLED", true);
 #else
-        return !isRemoverDebugDisabled;
+        return isRemoverDebugDisabled;
 #endif
         
     }
