@@ -108,6 +108,11 @@ public class UILimitPanelViewController : UIGenericResourcePanelViewController
     
     public void OpenShop()
     {
+        if (UIService.Get.GetShowedWindowsCount(UIWindowType.IgnoredWindows) > 0)
+        {
+            return;
+        }
+        
         CurrencyHelper.OpenShopWindow(itemUid);
     }
 }
