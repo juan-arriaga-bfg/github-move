@@ -1,9 +1,9 @@
 public class Notifier
 {
-    public TimerComponent Timer;
+    public ITimerComponent Timer;
     public NotifyType NotifyType;
 
-    public Notifier(TimerComponent timer, NotifyType notifyType)
+    public Notifier(ITimerComponent timer, NotifyType notifyType)
     {
         Timer = timer;
         NotifyType = notifyType;

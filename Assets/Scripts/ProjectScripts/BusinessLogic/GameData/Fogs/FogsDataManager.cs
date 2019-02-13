@@ -57,6 +57,12 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
                 var save = ProfileService.Current.GetComponent<FogSaveComponent>(FogSaveComponent.ComponentGuid);
                 var completeFogPositions = save?.CompleteFogPositions ?? new List<BoardPosition>();
                 
+                BoardPosition lastCompleteFogPosition = BoardPosition.Default();
+                if (completeFogPositions.Count > 0)
+                {
+                    lastCompleteFogPosition = completeFogPositions[completeFogPositions.Count - 1];
+                }
+                
                 foreach (var def in data.Fogs)
                 {
                     var pos = def.GetCenter();
@@ -69,10 +75,12 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
                     {
                         VisibleFogPositions.Add(pos, def);
                     }
+
+                    if (pos.Equals(lastCompleteFogPosition))
+                    {
+                        LastOpenFog = def;
+                    }
                 }
-                
-                if (completeFogPositions.Count > 0)
-                    LastOpenFog = data.Fogs.Find(fog => fog.GetCenter().Equals(completeFogPositions[completeFogPositions.Count - 1]));
             }
             else
             {
@@ -324,32 +332,42 @@ public class FogsDataManager : IECSComponent, IDataManager, IDataLoader<FogsData
         
         observer.Filling(def.SpawnResources.Amount, out var balance);
 
-        if (balance <= 0) return true;
+        if (balance <= 0)
+        {
+            piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction
+            {
+                To = targetPosition,
+                Positions = new List<BoardPosition> {piece.CachedPosition}
+            });
+            
+            return true;
+        }
 
         var pieces = CurrencyHelper.CurrencyToResourcePieces(balance, Currency.Mana.Name);
-
-        if (pieces.Count == 0) return true;
-
+        
         const int max = 2;
         var current = 0;
         var result = new Dictionary<int, int>();
 
         foreach (var pair in pieces)
         {
-            if(current == max) break;
+            if (current == max) break;
             
             var value = Mathf.Clamp(pair.Value, 0, max - current);
             
             current += value;
             result.Add(pair.Key, value);
         }
+
+        var position = observer.Def.GetCenter();
+        position.Z = BoardLayer.Piece.Layer;
         
-        piece.Context.ActionExecutor.AddAction(new SpawnRewardPiecesAction
+        piece.Context.ActionExecutor.AddAction(new ManaCangeAction
         {
-            From = targetPosition,
+            Target = targetPosition,
+            Old = piece.CachedPosition,
+            From = position,
             Pieces = result,
-            EnabledTopHighlight = true,
-            EnabledBottomHighlight = true
         });
         
         return true;

@@ -12,6 +12,8 @@ public class UIWaitWindowView : IWUIWindowView
     private readonly object TIMEOUT_ID = new object();
 
     private float timeout;
+
+    private bool hideOnFocus;
     
     public override void AnimateShow()
     {
@@ -61,7 +63,7 @@ public class UIWaitWindowView : IWUIWindowView
         label.text = text ?? string.Empty;
     }
     
-    public void SetTimeout(float seconds)
+    public UIWaitWindowView SetTimeout(float seconds)
     {
         DOTween.Kill(TIMEOUT_ID);
         
@@ -69,12 +71,23 @@ public class UIWaitWindowView : IWUIWindowView
                .SetId(TIMEOUT_ID)
                .InsertCallback(seconds, () =>
                 {
+                    Debug.Log($"[UIWaitWindow] => Close by timeout {seconds}s!");
                     Controller.CloseCurrentWindow();
                 });
+
+        return this;
+    }
+    
+    public UIWaitWindowView HideOnFocus()
+    {
+        hideOnFocus = true;
+        return this;
     }
 
     public static UIWaitWindowView Show()
     {
+        Debug.Log($"[UIWaitWindow] => static Show");
+        
         IWUIWindow window = UIService.Get.GetShowedWindowByName(UIWindowType.WaitWindow);
         
         if (window != null)
@@ -87,12 +100,15 @@ public class UIWaitWindowView : IWUIWindowView
         UIWaitWindowView windowView = (UIWaitWindowView) window.CurrentView;
         windowView.SetText(LocalizationService.Get("window.wait.message", "window.wait.message"));
         windowView.timeout = 0;
+        windowView.hideOnFocus = false;
         
         return windowView;
     }
 
     public static void Hide()
     {
+        Debug.Log($"[UIWaitWindow] => static Hide");
+        
         var window = UIService.Get.GetShowedWindowByName(UIWindowType.WaitWindow);
         
         if (window != null)
@@ -104,6 +120,38 @@ public class UIWaitWindowView : IWUIWindowView
                 controller.ForceStopShowing();
                 controller.CloseCurrentWindow();
             }
+        }
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        Debug.Log($"[UIWaitWindow] => ");
+        
+        if (hideOnFocus && hasFocus)
+        {
+            Debug.Log($"[UIWaitWindow] => OnApplicationFocus: Close!");
+            
+            hideOnFocus = false;
+            Controller.CloseCurrentWindow();
+        }
+        else
+        {
+            Debug.Log($"[UIWaitWindow] => OnApplicationFocus: skip by hideOnFocus: {hideOnFocus} && hasFocus: {hasFocus}");
+        }
+    }
+
+    private void OnApplicationPause(bool paused)
+    {
+        if (hideOnFocus && !paused)
+        {
+            Debug.Log($"[UIWaitWindow] => OnApplicationPause: Close!");
+                
+            hideOnFocus = false;
+            Controller.CloseCurrentWindow();
+        }
+        else
+        {
+            Debug.Log($"[UIWaitWindow] => OnApplicationPause: skip by hideOnFocus: {hideOnFocus} && !paused: {!paused}");
         }
     }
 }

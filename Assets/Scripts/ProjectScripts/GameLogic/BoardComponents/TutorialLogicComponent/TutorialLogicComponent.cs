@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class TutorialLogicComponent : ECSEntity, ILockerComponent
@@ -64,8 +65,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     
     private void OnShowWindow(IWUIWindow window)
     {
-        if(UIWindowType.IsIgnore(window.WindowName)) return;
-
+        if (UIWindowType.IsIgnore(window.WindowName)) return;
         if (Locker.IsLocked == false) Pause(true);
 		
         Locker.Lock(this);
@@ -73,14 +73,19 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
 	
     private void OnCloseWindow(IWUIWindow window)
     {
-        if(UIWindowType.IsIgnore(window.WindowName)) return;
+        if (UIWindowType.IsIgnore(window.WindowName)) return;
 		
         Locker.Unlock(this);
-		
-        if(Locker.IsLocked) return;
-		
-        Pause(false);
-        Update();
+
+        if (Locker.IsLocked) return;
+
+        DOTween.Sequence()
+            .AppendInterval(0.25f)
+            .AppendCallback(() =>
+            {
+                Pause(false);
+                Update();
+            });
     }
     
     public void Pause(bool isOn)
@@ -89,14 +94,14 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
         
         var collection = GetComponent<ECSComponentCollection>(BaseTutorialStep.ComponentGuid);
         var components = collection?.Components;
-        
-        if(components == null) return;
+
+        if (components == null) return;
 
         for (var i = components.Count - 1; i >= 0; i--)
         {
             var step = (BaseTutorialStep) components[i];
-            
-            if(step.IsPerform == false) continue;
+
+            if (step.IsPerform == false) continue;
             
             if (isOn) step.PauseOn();
             else step.PauseOff();
@@ -185,10 +190,28 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             }
         }
     }
+
+    public void FadeAll(float alpha, List<BoardPosition> exclude)
+    {
+        var points = Context.BoardLogic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Default);
+
+        foreach (var point in points)
+        {
+            if (exclude != null && exclude.Contains(point)) continue;
+            
+            var pieceEntity = Context.BoardLogic.GetPieceAt(point);
+            
+            if (pieceEntity == null || pieceEntity.PieceType == PieceType.Fog.Id) continue;
+                
+            var pieceView = Context.RendererContext.GetElementAt(point) as PieceBoardElementView;
+                
+            if (pieceView != null) pieceView.SetFade(alpha, 1f);
+        }
+    }
     
     private void UnlockFirefly(bool isRun)
     {
-        if(isRun == false && Save.Contains(TutorialBuilder.LockFireflytepIndex) == false) return;
+        if (isRun == false && Save.Contains(TutorialBuilder.LockFireflyStepIndex) == false) return;
         
         var firefly = Context.BoardLogic.FireflyLogic;
         firefly.Locker.Unlock(firefly);
@@ -196,7 +219,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     
     private void UnlockOrders(bool isRun)
     {
-        if(isRun == false && Save.Contains(TutorialBuilder.LockOrderStepIndex) == false) return;
+        if (isRun == false && CheckLockOrders() == false) return;
         
         var orders = GameDataService.Current.OrdersManager;
         orders.Locker.Unlock(orders);
@@ -206,9 +229,19 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     {
         return Save.Contains(TutorialBuilder.LockPRStepIndex);
     }
-
+    
+    public bool CheckLockOrders()
+    {
+        return Save.Contains(TutorialBuilder.LockOrderStepIndex);
+    }
+    
     public bool CheckFirstOrder()
     {
         return Save.Contains(TutorialBuilder.FirstOrderStepIndex);
+    }
+
+    public bool CheckMarket()
+    {
+        return Save.Contains(TutorialBuilder.LockMarketStepIndex);
     }
 }

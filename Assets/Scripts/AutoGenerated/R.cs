@@ -222,4 +222,23 @@ public class R
      public const string Mana5Piece = "Mana5Piece";
      public const string Mana6Piece = "Mana6Piece";
      public const string FogProgressView = "FogProgressView";
+     public const string MineProcessParticle = "MineProcessParticle";
+     public const string MineEndParticle = "MineEndParticle";
+     public const string E1Piece = "E1Piece";
+     public const string E2Piece = "E2Piece";
+     public const string E3Piece = "E3Piece";
+     public const string E4Piece = "E4Piece";
+     public const string E5Piece = "E5Piece";
+     public const string E6Piece = "E6Piece";
+     public const string E7Piece = "E7Piece";
+     public const string E8Piece = "E8Piece";
+     public const string E9Piece = "E9Piece";
+     public const string OB1_EPiece = "OB1_EPiece";
+     public const string OB2_EPiece = "OB2_EPiece";
+     public const string OB3_EPiece = "OB3_EPiece";
+     public const string OB4_EPiece = "OB4_EPiece";
+     public const string OB5_EPiece = "OB5_EPiece";
+     public const string CH1_EPiece = "CH1_EPiece";
+     public const string CH2_EPiece = "CH2_EPiece";
+     public const string CH3_EPiece = "CH3_EPiece";
 }

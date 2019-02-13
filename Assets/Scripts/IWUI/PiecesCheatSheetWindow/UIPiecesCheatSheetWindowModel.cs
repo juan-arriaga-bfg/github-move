@@ -53,10 +53,12 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 ids.AddRange(GetPieceIds(PieceType.CH1_B.Id, PieceType.CH3_B.Id));
                 ids.AddRange(GetPieceIds(PieceType.CH1_C.Id, PieceType.CH3_C.Id));
                 ids.AddRange(GetPieceIds(PieceType.CH1_D.Id, PieceType.CH3_D.Id));
+                ids.AddRange(GetPieceIds(PieceType.CH1_E.Id, PieceType.CH3_E.Id));
                 break;
             case "Obstacles":
                 ids.AddRange(GetPieceIds(PieceType.OB1_TT.Id, PieceType.OB2_TT.Id));
                 ids.AddRange(GetPieceIds(PieceType.OB1_A.Id, PieceType.OB9_A.Id));
+                ids.AddRange(GetPieceIds(PieceType.OB1_E.Id, PieceType.OB5_E.Id));
                 ids.AddRange(GetPieceIds(PieceType.OB_PR_A.Id, PieceType.OB_PR_G.Id));
                 break;
             case "Simple A":
@@ -70,6 +72,9 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 break;
             case "Simple D":
                 ids.AddRange(GetPieceIds(PieceType.D1.Id, PieceType.D9.Id));
+                break;
+            case "Simple E":
+                ids.AddRange(GetPieceIds(PieceType.E1.Id, PieceType.E9.Id));
                 break;
             case "Ingredient A":
                 ids.AddRange(GetPieceIds(PieceType.PR_A1.Id, PieceType.PR_A5.Id));

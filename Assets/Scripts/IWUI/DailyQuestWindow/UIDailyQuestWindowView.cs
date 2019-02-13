@@ -18,6 +18,8 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
     [IWUIBinding("#MainTimerPlaceholder")] private GameObject mainTimerPlaceholder;
     [IWUIBinding("#SequenceView")] private DailyQuestWindowSequenceView sequenceView;
     
+    [IWUIBinding("#TutorialAnchor")] private Transform tutorialAnchor;
+    
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -49,6 +51,15 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         SetupSequence();
 
         ScrollToTop();
+    }
+
+    public override void OnViewShowCompleted()
+    {
+        var model = Model as UIDailyQuestWindowModel;
+        
+        if(model.IsTutorial) CachedHintArrowComponent.ShowArrow(tutorialAnchor);
+        
+        base.OnViewShowCompleted();
     }
 
     private void SetSequenceHeader(UIDailyQuestWindowModel model)

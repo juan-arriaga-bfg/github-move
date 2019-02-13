@@ -134,7 +134,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     private void LoadData<T>(string path)
     {
         var dataMapper = new ResourceConfigDataMapper<T>(path, NSConfigsSettings.Instance.IsUseEncryption);
-        var json = dataMapper.GetDataAsJson();
+        var json = dataMapper.GetJsonDataAsString();
         if (string.IsNullOrEmpty(json))
         {
             Debug.LogErrorFormat("Config '{0}' not loaded", path);

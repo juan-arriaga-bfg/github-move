@@ -32,7 +32,7 @@ public class UIHintArrowComponent : ECSEntity
             if (cachedArrowViewController == null) continue;
             
             contextView.UnRegisterWindowViewController(cachedArrowViewController);
-            cachedArrowViewController.Hide();
+            cachedArrowViewController.Remove(0f);
         }
         
         cachedArrowViewControllers.Clear();
@@ -43,12 +43,12 @@ public class UIHintArrowComponent : ECSEntity
         if (cachedArrowViewControllers.TryGetValue(anchor, out var cachedArrowViewController) == false) return;
         
         contextView.UnRegisterWindowViewController(cachedArrowViewController);
-        cachedArrowViewController.Hide(false);
+        cachedArrowViewController.Hide();
     }
-
-    public UIHintArrowViewController ShowArrow(Transform anchor, float lifetime = 2.5f, Vector3 offset = default(Vector3))
+    
+    public UIHintArrowViewController ShowArrow(Transform anchor, float lifetime = 2.5f, Vector3 offset = default(Vector3), Vector3? scale = null)
     {
-        return ShowArrow(anchor, offset, anchor.eulerAngles, Vector3.one, lifetime, true);
+        return ShowArrow(anchor, offset, anchor.eulerAngles, scale ?? Vector3.one, lifetime, true);
     }
     
     public UIHintArrowViewController ShowArrow(Transform anchor, Vector3 offset, Vector3 rotation, Vector3 scale, float lifetime = -1, bool animated = true)

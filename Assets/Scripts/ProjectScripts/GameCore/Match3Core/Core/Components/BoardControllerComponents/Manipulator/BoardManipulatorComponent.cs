@@ -98,9 +98,9 @@ public class BoardManipulatorComponent : ECSEntity,
 
         if (context.BoardLogic.FireflyLogic.OnClick(selectedView)) return true;
 
-        if (selectedView is PieceBoardElementView)
+        var pieceView = selectedView as PieceBoardElementView;
+        if (pieceView != null && context.BoardLogic.IsLockedCell(pieceView.Piece.CachedPosition) == false && pieceView.Piece.CachedPosition.Equals(BoardPosition.Zero()) == false)
         {
-            var pieceView = selectedView as PieceBoardElementView;
             pieceView.OnTap(pieceView.Piece.CachedPosition, pos);
             
             if (pieceView.AvailiableLockTouchMessage() && !context.PathfindLocker.HasPath(pieceView.Piece))
@@ -140,7 +140,7 @@ public class BoardManipulatorComponent : ECSEntity,
             
             if (context.BoardLogic.FireflyLogic.OnDragStart(selectedView) == false && pieceView != null)
             {
-                if (pieceView.Piece.Draggable == null || pieceView.Piece.Draggable.IsDraggable(pieceView.Piece.CachedPosition) == false)
+                if (pieceView.Piece.CachedPosition.Equals(BoardPosition.Zero()) || pieceView.Piece.Draggable == null || pieceView.Piece.Draggable.IsDraggable(pieceView.Piece.CachedPosition) == false)
                 {
                     return;
                 }
@@ -272,15 +272,16 @@ public class BoardManipulatorComponent : ECSEntity,
                     var targetPosition = context.BoardDef.GetSectorPosition(new Vector3(pos.x, pos.y, 0));
                     var toPosition = new BoardPosition(targetPosition.X, targetPosition.Y, fromPosition.Z);
                     
-                    if (context.BoardLogic.IsEmpty(toPosition) == false 
-                        && (context.WorkerLogic.SetExtra(pieceView.Piece, toPosition)
-                        || GameDataService.Current.FogsManager.SetMana(pieceView.Piece, toPosition)))
+                    if (context.BoardLogic.IsEmpty(toPosition) == false && context.WorkerLogic.SetExtra(pieceView.Piece, toPosition))
                     {
                         context.ActionExecutor.AddAction(new CollapsePieceToAction
                         {
                             To = targetPosition,
                             Positions = new List<BoardPosition> {pieceView.Piece.CachedPosition}
                         });
+                    }
+                    else if(context.BoardLogic.IsEmpty(toPosition) == false && GameDataService.Current.FogsManager.SetMana(pieceView.Piece, toPosition))
+                    {
                     }
                     else
                     {

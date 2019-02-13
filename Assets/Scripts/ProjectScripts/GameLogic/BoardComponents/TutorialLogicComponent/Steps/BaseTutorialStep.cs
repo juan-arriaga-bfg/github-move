@@ -16,11 +16,14 @@ public class BaseTutorialStep : ECSEntity
 	
 	public bool IsPerform;
 	public bool IsIgnoreUi;
-	public bool IsIgnoreDev = true;
+	public bool IsIgnoreDebug = true;
 
 	public bool IsAnyStartCondition;
 	public bool IsAnyCompleteCondition;
 
+	protected bool isPauseOn;
+	protected bool isAutoComplete;
+	
 	public Action OnStart;
 	public Action OnComplete;
 	
@@ -50,6 +53,7 @@ public class BaseTutorialStep : ECSEntity
 	
 	public virtual void PauseOn()
 	{
+		isPauseOn = true;
 	}
 	
 	public virtual void Perform()
@@ -60,6 +64,8 @@ public class BaseTutorialStep : ECSEntity
 	
 	public virtual void PauseOff()
 	{
+		isPauseOn = false;
+		
 		if(Repeat == 0) return;
 		
 		Repeat--;
@@ -86,7 +92,7 @@ public class BaseTutorialStep : ECSEntity
 		isComplete = Check(TutorialConditionType.Complete);
 		
 #if DEBUG
-		if (isComplete == false && IsIgnoreDev) isComplete = !DevTools.IsTutorialEnabled();
+		if (isComplete == false && IsIgnoreDebug) isComplete = !DevTools.IsTutorialEnabled();
 #endif
 		
 		if (isComplete) Complete();
@@ -96,6 +102,8 @@ public class BaseTutorialStep : ECSEntity
 	
 	private bool IsHardComplete()
 	{
+		if (isAutoComplete) return true;
+		
 		var collection = GetComponent<ECSComponentCollection>(BaseTutorialCondition.ComponentGuid);
 		var conditions = collection?.Components.FindAll(component => (component as BaseTutorialCondition).ConditionType == TutorialConditionType.Hard);
 		

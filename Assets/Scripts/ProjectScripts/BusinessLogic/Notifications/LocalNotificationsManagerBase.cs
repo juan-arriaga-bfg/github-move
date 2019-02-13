@@ -50,7 +50,7 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
         CancelAllOnDevice();
     }
 
-    public void ScheduleNotifications()
+    public virtual void ScheduleNotifications()
     {
         Debug.Log($"[LocalNotificationService] => ScheduleNotifications (CurrentTime: {DateTime.Now})");
         
@@ -59,7 +59,7 @@ public abstract class LocalNotificationsManagerBase : ILocalNotificationsManager
         ScheduleAllOnDevice();
     }
 
-    public void GenerateNotifications()
+    public virtual void GenerateNotifications()
     {
         var notifierTypes = notifiers.Select(notif => notif.NotifyType).Distinct();
         var notifications = new List<Notification>();

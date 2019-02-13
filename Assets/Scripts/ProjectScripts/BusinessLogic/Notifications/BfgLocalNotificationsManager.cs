@@ -5,13 +5,26 @@ using UnityEngine;
 public class BfgLocalNotificationsManagerBase : LocalNotificationsManagerBase
 {
 #if DEBUG
+    private bool isDebugSchedule = false;
+    
+    public override void ScheduleNotifications()
+    {
+        if(isDebugSchedule == false)
+            base.ScheduleNotifications();
+    }
+    public override void CancelNotifications()
+    {
+        base.CancelNotifications();
+        isDebugSchedule = false;
+    }
+
     public void DebugSchedule()
     {
     #if UNITY_EDITOR
         notifyItems.Clear();
         base.ScheduleNotifications();
         notifyItems.Clear();
-    #else
+        #else
         notifyItems.Clear();
         CancelAllOnDevice();
         GenerateNotifications();
@@ -25,10 +38,16 @@ public class BfgLocalNotificationsManagerBase : LocalNotificationsManagerBase
         
         ScheduleAllOnDevice();
         notifyItems.Clear();
-    #endif
+        #endif
+        isDebugSchedule = true;
     }
 #endif
-    
+
+
+    public BfgLocalNotificationsManagerBase()
+    {
+        RegisterNotifier(new Notifier(new NowTimer(), NotifyType.ComeBackToGame));
+    }
 
     
 #if UNITY_EDITOR
@@ -71,6 +90,7 @@ public class BfgLocalNotificationsManagerBase : LocalNotificationsManagerBase
             NotifyType.MarketRefresh.Id,
             NotifyType.MonumentBuild.Id,
             NotifyType.MonumentRefresh.Id,
+            NotifyType.ComeBackToGame.Id,
         };
         
         foreach (var id in ids)

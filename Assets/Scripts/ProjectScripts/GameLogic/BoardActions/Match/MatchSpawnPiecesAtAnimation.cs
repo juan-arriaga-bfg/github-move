@@ -21,7 +21,7 @@ public class MatchSpawnPiecesAtAnimation : BoardAnimation
 			boardElement.CachedTransform.localScale = Vector3.zero;
 			boardElement.SyncRendererLayers(new BoardPosition(position.X, position.Y, BoardLayer.PieceUP1.Layer));
 			
-			var animationResource = AnimationDataManager.FindAnimation(piece.PieceType, def => def.OnMergeSpawn);
+			var animationResource = AnimationOverrideDataService.Current.FindAnimation(piece.PieceType, def => def.OnMergeSpawn);
 			if (string.IsNullOrEmpty(animationResource) == false)
 			{
 				var At = piece.CachedPosition;

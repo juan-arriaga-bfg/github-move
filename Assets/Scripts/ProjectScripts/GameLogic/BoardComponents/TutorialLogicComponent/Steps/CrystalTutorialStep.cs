@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-
-public class CrystalTutorialStep : LoopFingerTutorialStep
+﻿public class CrystalTutorialStep : LoopFingerTutorialStep
 {
-    private int crystal = PieceType.Boost_CR.Id;
-    private int target = PieceType.A5.Id;
+    private readonly int crystal = PieceType.Boost_CR.Id;
+    private readonly int target = PieceType.A6.Id;
+
+    private readonly BoardPosition targetPosition = new BoardPosition(20, 8, BoardLayer.Piece.Layer);
+    private readonly BoardPosition ignorePosition = new BoardPosition(19, 8, BoardLayer.Piece.Layer);
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
@@ -14,18 +15,6 @@ public class CrystalTutorialStep : LoopFingerTutorialStep
             ConditionType = TutorialConditionType.Start,
             Target = crystal,
             Amount = 1
-        }, true);
-        
-        RegisterComponent(new CheckPieceInPositionTutorialCondition
-        {
-            ConditionType = TutorialConditionType.Complete,
-            Target = target,
-            CheckAbsence = true,
-            Positions = new List<BoardPosition>
-            {
-                new BoardPosition(20, 8, BoardLayer.Piece.Layer),
-                new BoardPosition(19, 8, BoardLayer.Piece.Layer)
-            }
         }, true);
         
         RegisterComponent(new CheckPieceTutorialCondition
@@ -42,53 +31,59 @@ public class CrystalTutorialStep : LoopFingerTutorialStep
         
         base.Perform();
         
+        Context.LockAll();
+        
+        var unlock = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(target);
+        
+        unlock.Add(ignorePosition);
+        unlock.AddRange(Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(crystal));
+        
+        Context.FadeAll(0.5f, unlock);
+        
         startTime = startTime.AddSeconds(-(Delay-0.5f));
     }
-    
+
     public override void Execute()
+    {
+        if (Context.Context.BoardLogic.IsEmpty(targetPosition)) FirstStep();
+        else SecondStep();
+        
+        base.Execute();
+    }
+    
+    private void FirstStep()
     {
         var positions = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(target);
         
-        if (positions == null)
-        {
-            PauseOff();
-            return;
-        }
+        positions.Remove(ignorePosition);
         
-        from = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(crystal)[0];
+        Context.UnlockCell(targetPosition);
+        Context.UnlockCells(positions);
         
-        var options = new List<List<BoardPosition>>();
-        
-        foreach (var position in positions)
-        {
-            int amount;
-            var field = new List<BoardPosition>();
-            
-            if(Context.Context.BoardLogic.FieldFinder.Find(position, field, out amount) == false) continue;
-            
-            options.Add(field);
-        }
-        
-        if(options.Count == 0)
-        {
-            PauseOff();
-            return;
-        }
-        
-        options.Sort((a, b) => -a.Count.CompareTo(b.Count));
+        from = positions[0];
+        to = targetPosition;
+    }
 
-        var max = options[0].Count;
-        var immediate = new List<BoardPosition>();
-
-        options = options.FindAll(list => list.Count == max);
-
-        foreach (var option in options)
-        {
-            immediate.AddRange(from.GetImmediate(option));
-        }
+    private void SecondStep()
+    {
+        var positions = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(crystal);
         
-        to = from.GetImmediate(immediate)[0];
+        Context.UnlockAll();
+        Context.LockAll();
         
-        base.Execute();
+        Context.UnlockCell(targetPosition);
+        Context.UnlockCell(ignorePosition);
+        Context.UnlockCells(positions);
+        
+        from = positions[0];
+        to = ignorePosition;
+    }
+
+    protected override void Complete()
+    {
+        Context.FadeAll(1f, null);
+        Context.UnlockAll();
+        
+        base.Complete();
     }
 }

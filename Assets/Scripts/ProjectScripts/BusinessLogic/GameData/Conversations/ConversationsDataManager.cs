@@ -39,7 +39,7 @@ public class ConversationsDataManager : IECSComponent, IDataManager
     private void LoadData(string path)
     {
         var dataMapper = new ResourceConfigDataMapper<object>(path, NSConfigsSettings.Instance.IsUseEncryption);
-        var json = dataMapper.GetDataAsJson();
+        var json = dataMapper.GetJsonDataAsString();
         
         cache = Parse(json);
     }

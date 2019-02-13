@@ -99,14 +99,37 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             var def = entities[i];
             
             var current = ProfileService.Current.GetStorageItem(def.Currency).Amount;
-            var color = current == def.Amount ? "FFFFFF" : (current > def.Amount ? "28EC6D" : "EC5928");
-            var message = current >= def.Amount ? "<sprite name=icon_Complete>" :  $"<color=#{color}>{current}</color><size=45>/{def.Amount}</size>";
-            
-            var entity = new UISimpleScrollElementEntity
+
+            string message;
+            string color;
+            bool mark;
+
+            if (order.State == OrderState.InProgress || order.State == OrderState.Complete)
+            {
+                mark = false;
+                message = string.Empty;
+            }
+            else
+            {
+                if (current >= def.Amount)
+                {
+                    mark = true;
+                    message = string.Empty;
+                }
+                else
+                {
+                    mark = false;
+                    color = "EC5928";
+                    message = $"<color=#{color}>{current}</color><size=45>/{def.Amount}</size>";
+                } 
+            }
+
+            var entity = new UIOrderIngredientElementEntity
             {
                 ContentId = def.Currency,
-                LabelText = (order.State == OrderState.InProgress || order.State == OrderState.Complete) ? "" : message,
+                LabelText = message,
                 Alpha = alpha,
+                Mark = mark,
                 OnSelectEvent = null,
                 OnDeselectEvent = null
             };

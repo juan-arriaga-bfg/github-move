@@ -1,18 +1,21 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CooldownPieceView : PieceBoardElementView
 {
     private TimerComponent timer;
     
-    private ParticleView processParticle;
-    private ParticleView readyParticle;
+    protected ParticleView processParticle;
+    protected ParticleView readyParticle;
 
-    private WorkplaceLifeComponent life;
+    protected WorkplaceLifeComponent life;
 
-    protected virtual string processParticleName => string.Empty;
+    protected virtual string coolDownParticle => string.Empty;
     protected virtual string readyParticleName => string.Empty;
-    protected virtual string EndParticleName => R.ProductionEndParticle;
+    protected virtual string coolDownLeaveParticle => R.ProductionEndParticle;
+    protected virtual string coolDownEnterParticle => string.Empty;
+
+    [SerializeField] private GameObject lockSkin;
+    [SerializeField] private GameObject normalSkin;
     
     public override void Init(BoardRenderer context, Piece piece)
     {
@@ -69,16 +72,17 @@ public class CooldownPieceView : PieceBoardElementView
         PlayAndSyncParticle(readyParticle);
     }
 
-    private void OnStart()
+    protected virtual void OnStart()
     {
+        if(string.IsNullOrEmpty(coolDownEnterParticle) == false)
+            ParticleView.Show(coolDownEnterParticle, Piece.CachedPosition.SetZ(Piece.CachedPosition.Z + 1));
         ToggleEffectsByState(true);
         UpdateSate();
     }
     
-    private void OnComplete()
+    protected virtual void OnComplete()
     {
-        ParticleView.Show(EndParticleName, Piece.CachedPosition.SetZ(Piece.CachedPosition.Z + 1));
-
+        ParticleView.Show(coolDownLeaveParticle, Piece.CachedPosition.SetZ(Piece.CachedPosition.Z + 1));
         ToggleEffectsByState(false);
         
         UpdateSate();
@@ -93,18 +97,18 @@ public class CooldownPieceView : PieceBoardElementView
         ToggleEffectsByState(false);
     }
 
-    protected virtual void ToggleEffectsByState(bool isProcessing)
+    public virtual void ToggleEffectsByState(bool isProcessing)
     {
         if (isLockVisual) return;
         
         ClearParticle(ref processParticle);
         ClearParticle(ref readyParticle);
 
-        if (isProcessing) AddParticle(ref processParticle, processParticleName);
+        if (isProcessing) AddParticle(ref processParticle, coolDownParticle);
         else AddParticle(ref readyParticle, readyParticleName);
     }
 
-    private void ClearParticle(ref ParticleView particle)
+    protected void ClearParticle(ref ParticleView particle)
     {
         if (particle == null) return;
         
@@ -135,10 +139,11 @@ public class CooldownPieceView : PieceBoardElementView
         particle.Particles.Play();
     }
     
-    private void UpdateSate()
+    protected void UpdateSate()
     {
         if (timer == null || bodySprites == null) return;
 
-        bodySprites.First().sprite = IconService.Current.GetSpriteById($"{PieceType.Parse(Piece.PieceType)}{(timer.IsStarted ? "_lock" : "")}");
+        if (lockSkin != null) lockSkin.SetActive(timer.IsStarted);
+        if (normalSkin != null) normalSkin.SetActive(!timer.IsStarted);
     }
 }

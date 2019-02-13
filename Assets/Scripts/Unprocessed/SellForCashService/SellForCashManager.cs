@@ -111,9 +111,9 @@ public class SellForCashManager: ECSEntity
         if (!restore) // Restore will be handled in RestoredPurchasesProvider
         {
             ProvideReward(productId);
-            
-            ProfileService.Current.GetComponent<BaseInformationSaveComponent>(BaseInformationSaveComponent.ComponentGuid).IsPayer = true;
         }
+        
+        ProfileService.Current.GetComponent<BaseInformationSaveComponent>(BaseInformationSaveComponent.ComponentGuid).IsPayer = true;
 
         onComplete?.Invoke(true, productId);
         onComplete = null;
@@ -121,6 +121,12 @@ public class SellForCashManager: ECSEntity
 
     public void ProvideReward(string productId)
     {
+        if (!AsyncInitService.Current.IsAllComponentsInited())
+        {
+            Debug.LogError($"[SellForCashManager] => provideReward: Skip by AsyncInitService.IsAllComponentsInited() == false");
+            return;
+        }
+        
         var defs = GameDataService.Current.ShopManager.Defs[Currency.Crystals.Name];
         var def = defs.FirstOrDefault(e => e.PurchaseKey == productId);
 
@@ -147,8 +153,10 @@ public class SellForCashManager: ECSEntity
             this.onComplete = null;
             return;
         }
+
+        UIWaitWindowView.Show()
+                        .HideOnFocus();
         
-        UIWaitWindowView.Show();
         IapService.Current.Purchase(productId);
     }
 }

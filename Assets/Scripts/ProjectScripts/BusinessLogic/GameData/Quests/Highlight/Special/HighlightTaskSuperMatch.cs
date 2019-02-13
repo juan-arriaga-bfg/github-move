@@ -12,7 +12,7 @@ public class HighlightTaskSuperMatch : ITaskHighlight
         }
 
         UIMessageWindowController.CreatePrefabMessage(
-            LocalizationService.Get("highlight.task.supermatch.window.title", "highlight.task.supermatch.window.title"),
+            LocalizationService.Get("quest.supermatch.title", "quest.supermatch.title"),
             UIMessageWindowModel.HintType.SuperMatchHint.ToString());
         
         return true;

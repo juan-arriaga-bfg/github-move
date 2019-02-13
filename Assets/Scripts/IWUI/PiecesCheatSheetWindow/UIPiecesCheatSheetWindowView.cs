@@ -49,7 +49,7 @@ public class UIPiecesCheatSheetWindowView : UIGenericPopupWindowView
     {
         var filters = new List<string>
         {
-            "Simple A", "Simple B", "Simple C", "Simple D",
+            "Simple A", "Simple B", "Simple C", "Simple D", "Simple E",
             "Ingredient A", "Ingredient B", "Ingredient C", "Ingredient D", "Ingredient E", "Ingredient F", "Ingredient G",
             "Chests", "Currencies", "Obstacles", "Mines", "Boosters", "Characters",
         };

@@ -136,6 +136,10 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.CH2_D.Id, R.CH2_DPiece);
         dict.Add(PieceType.CH3_D.Id, R.CH3_DPiece);
         
+        dict.Add(PieceType.CH1_E.Id, R.CH1_EPiece);
+        dict.Add(PieceType.CH2_E.Id, R.CH2_EPiece);
+        dict.Add(PieceType.CH3_E.Id, R.CH3_EPiece);
+        
 #endregion
         
 #region Obstacles
@@ -162,6 +166,12 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.OB_PR_E.Id, R.OB_PR_EPiece);
         dict.Add(PieceType.OB_PR_F.Id, R.OB_PR_FPiece);
         dict.Add(PieceType.OB_PR_G.Id, R.OB_PR_GPiece);
+        
+        dict.Add(PieceType.OB1_E.Id, R.OB1_EPiece);
+        dict.Add(PieceType.OB2_E.Id, R.OB2_EPiece);
+        dict.Add(PieceType.OB3_E.Id, R.OB3_EPiece);
+        dict.Add(PieceType.OB4_E.Id, R.OB4_EPiece);
+        dict.Add(PieceType.OB5_E.Id, R.OB5_EPiece);
         
 #endregion
         
@@ -252,6 +262,27 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.D8.Id, R.D8Piece);
         dict.Add(PieceType.D9Fake.Id, R.D9Piece);
         dict.Add(PieceType.D9.Id, R.D9Piece);
+            
+        #endregion
+        
+        #region E
+        
+        dict.Add(PieceType.E1.Id, R.E1Piece);
+        dict.Add(PieceType.E2.Id, R.E2Piece);
+        dict.Add(PieceType.E3Fake.Id, R.E3Piece);
+        dict.Add(PieceType.E3.Id, R.E3Piece);
+        dict.Add(PieceType.E4Fake.Id, R.E4Piece);
+        dict.Add(PieceType.E4.Id, R.E4Piece);
+        dict.Add(PieceType.E5Fake.Id, R.E5Piece);
+        dict.Add(PieceType.E5.Id, R.E5Piece);
+        dict.Add(PieceType.E6Fake.Id, R.E6Piece);
+        dict.Add(PieceType.E6.Id, R.E6Piece);
+        dict.Add(PieceType.E7Fake.Id, R.E7Piece);
+        dict.Add(PieceType.E7.Id, R.E7Piece);
+        dict.Add(PieceType.E8Fake.Id, R.E8Piece);
+        dict.Add(PieceType.E8.Id, R.E8Piece);
+        dict.Add(PieceType.E9Fake.Id, R.E9Piece);
+        dict.Add(PieceType.E9.Id, R.E9Piece);
             
         #endregion
         

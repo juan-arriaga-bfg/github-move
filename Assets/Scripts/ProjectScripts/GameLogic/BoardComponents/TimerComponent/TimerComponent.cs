@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class TimerComponent : IECSComponent, IECSSystem
+public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
@@ -13,17 +13,18 @@ public class TimerComponent : IECSComponent, IECSSystem
     public Action OnComplete;
     public Action OnStop;
     
-    public DateTime StartTime;
-    public DateTime CompleteTime;
-
+    public DateTime StartTime { get; set; }
+    public DateTime CompleteTime { get; set; }
+    
     public BoardTimerView View;
 
-    public bool UseUTC = true;
+    public bool UseUTC { get; set; } = true;
     
     public long StartTimeLong => StartTime.ConvertToUnixTime(UseUTC);
+
+    public bool IsStarted;
     
-    public bool IsStarted { get; set; }
-    public bool IsPaused { get; set; }
+    public bool IsPaused;
     
     private CurrencyPair price = new CurrencyPair{Currency = Currency.Crystals.Name};
 

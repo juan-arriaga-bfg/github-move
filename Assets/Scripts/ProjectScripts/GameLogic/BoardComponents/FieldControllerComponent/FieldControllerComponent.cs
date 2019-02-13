@@ -26,6 +26,7 @@ public class FieldControllerComponent : IECSComponent
 #endif
         
         context.BoardLogic.PieceFlyer.Locker.Lock(context);
+        context.Manipulator.CameraManipulator.CameraMove.Lock(context);
         
         if (fieldDef.Pieces == null)
         {
@@ -81,16 +82,19 @@ public class FieldControllerComponent : IECSComponent
                 
                 var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
 
-                
-                if (views == null) return;
+                if (views == null)
+                {
+                    context.Manipulator.CameraManipulator.CameraMove.UnLock(context);
+                    return;
+                }
                 
                 foreach (var view in views)
                 {
                     view.UpdateResource(0);
                 }
                 
-                
                 DevTools.UpdateFogSectorsDebug();
+                context.Manipulator.CameraManipulator.CameraMove.UnLock(context);
             }
         });
     }
