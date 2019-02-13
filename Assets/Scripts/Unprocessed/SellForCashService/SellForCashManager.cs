@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BfgAnalytics;
 using UnityEngine;
 
 public class SellForCashManager: ECSEntity
@@ -137,9 +138,8 @@ public class SellForCashManager: ECSEntity
         }
         
         var products = def.Products;
-        var price = def.Price;
         
-        CurrencyHelper.PurchaseAndProvideSpawn(products, price, null, null, false, true);
+        CurrencyHelper.PurchaseAndProvideSpawn(products, null, null, null, false, true);
         IapService.Current.IapProvidedToPlayer(productId);
     }
 

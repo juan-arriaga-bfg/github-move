@@ -121,7 +121,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
             {
                 context.Controller.CloseCurrentWindow();
                 CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, contentEntity.Price, rewardPosition, null, false, true);
-                Analytics.SendPurchase(GetAnalyticLocation(), GetAnalyticReason(), new List<CurrencyPair>{contentEntity.Price}, new List<CurrencyPair>(currenciesReward), false, false);
+                Analytics.SendPurchase(GetAnalyticLocation(), GetAnalyticReason(), new List<CurrencyPair>{contentEntity.Price}, new List<CurrencyPair>(currenciesReward), true, false);
             };
             model.OnClose = () =>
             {
@@ -141,6 +141,7 @@ public class UIShopElementViewController : UISimpleScrollElementViewController
             }
             else
             {
+                Analytics.SendPurchase(GetAnalyticLocation(), GetAnalyticReason(), null, new List<CurrencyPair>(currenciesReward), true, false);
                 context.Controller.CloseCurrentWindow();
             }
         });
