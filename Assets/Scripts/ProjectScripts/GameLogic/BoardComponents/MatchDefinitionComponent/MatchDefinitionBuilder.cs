@@ -93,7 +93,7 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.OB2_E.Id, new PieceMatchDef {Next = PieceType.OB3_E.Id, Previous = PieceType.OB1_E.Id, Amount = -1});
         dict.Add(PieceType.OB3_E.Id, new PieceMatchDef {Next = PieceType.OB4_E.Id, Previous = PieceType.OB2_E.Id, Amount = -1});
         dict.Add(PieceType.OB4_E.Id, new PieceMatchDef {Next = PieceType.OB5_E.Id, Previous = PieceType.OB3_E.Id, Amount = -1});
-        dict.Add(PieceType.OB5_E.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.OB4_A.Id, Amount = -1});
+        dict.Add(PieceType.OB5_E.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.OB4_E.Id, Amount = -1});
         
 #endregion
         
