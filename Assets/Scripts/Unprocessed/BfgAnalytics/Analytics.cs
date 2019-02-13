@@ -61,8 +61,6 @@ namespace BfgAnalytics
 
         private static JSONNode CreateTransaction(string location, string reason, List<CurrencyPair> spend, List<CurrencyPair> collect, bool isIap, bool isFree)
         {
-            Debug.LogError($"{location} : {reason}");
-            
             JSONNode customJsonData = new JSONObject();
             JSONNode transactionNode = new JSONObject();
             
