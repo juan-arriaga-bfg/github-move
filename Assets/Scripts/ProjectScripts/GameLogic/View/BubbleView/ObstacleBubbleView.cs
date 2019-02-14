@@ -92,14 +92,14 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
     
     public void Clear()
     {
-        if(IsShow == false || life.Rewards.IsScatter) return;
+        if (Context.Context.BoardLogic.IsLockedCell(Context.CachedPosition) || IsShow == false || life.Rewards.IsScatter) return;
         
         Context.Context.TutorialLogic.Pause(true);
         
         if (life.Damage())
         {
             var typeDef = PieceType.GetDefById(Context.PieceType);
-		
+            
             if (typeDef.Filter.HasFlag(PieceTypeFilter.Mine))
             {
                 NSAudioService.Current.Play(SoundId.WorkerMine);

@@ -82,6 +82,8 @@ public class BubbleView : UIBoardView, IBoardEventListener
 
     public void OnClick()
     {
+        if (Context.Context.BoardLogic.IsLockedCell(Context.CachedPosition)) return;
+        
         Context.Context.TutorialLogic.Pause(true);
         
         onClick?.Invoke(Context);
