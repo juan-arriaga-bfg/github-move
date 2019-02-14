@@ -290,6 +290,19 @@
     ]
   },
   {
+    "Id": 59,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.16.message1"
+      }
+    ]
+  },
+  {
     "Id": "1_CreatePiece_PR_C4",
     "Bubbles": [
       {
@@ -486,6 +499,16 @@
         "CharacterId": "SleepingBeauty",
         "Emotion": "Happy",
         "Message": "conversation.quest.complete22"
+      }
+    ]
+  },
+  {
+    "Id": "65_CompleteOrder",
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.quest.complete23"
       }
     ]
   }
