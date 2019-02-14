@@ -71,17 +71,17 @@
 
     private void SecondStep()
     {
-        var positions = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(crystal);
+        var posCrystals = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(crystal);
+        var posTargets = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(target);
         
         Context.UnlockAll();
         Context.LockAll();
         
-        Context.UnlockCell(targetPosition);
-        Context.UnlockCell(ignorePosition);
-        Context.UnlockCells(positions);
+        Context.UnlockCells(posCrystals);
+        Context.UnlockCells(posTargets);
         
-        from = positions[0];
-        to = ignorePosition;
+        from = posCrystals[0];
+        to = posTargets[0];
     }
 
     protected override void Complete()
