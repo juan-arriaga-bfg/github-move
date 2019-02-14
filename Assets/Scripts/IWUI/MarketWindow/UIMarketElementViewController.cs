@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BfgAnalytics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -176,7 +177,8 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	{
 		var contentEntity = entity as UIMarketElementEntity;
 		
-		CurrencyHelper.Purchase(Currency.Chest.Name, 1, contentEntity.Def.Current.Price, success =>
+		Analytics.SendPurchase($"market{CachedTransform.GetSiblingIndex()}", $"item{contentEntity.Def.Index}", new List<CurrencyPair>{contentEntity.Def.Current.Price}, null, false, false);
+		CurrencyHelper.Purchase(Currency.Market.Name, 1, contentEntity.Def.Current.Price, success =>
 		{
 			if (success == false)
 			{

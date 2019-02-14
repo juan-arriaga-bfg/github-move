@@ -1,4 +1,6 @@
-﻿public class DailyTutorialStep : UIArrowTutorialStep
+﻿using DG.Tweening;
+
+public class DailyTutorialStep : UIArrowTutorialStep
 {
     private enum Step
     {
@@ -62,7 +64,11 @@
             case Step.Start:
             case Step.FirstOpen:
                 currentStep = Step.FirstOpen;
-                view.ScrollToFirstNotCompletedOrNotClaimedTask();
+
+                var sequence = DOTween.Sequence();
+
+                sequence.AppendInterval(0.5f);
+                sequence.AppendCallback(() => view.ScrollToFirstNotCompletedOrNotClaimedTask());
                 break;
             case Step.Quest:
             case Step.SecondOpen:

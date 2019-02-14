@@ -108,6 +108,17 @@ public class UILimitPanelViewController : UIGenericResourcePanelViewController
     
     public void OpenShop()
     {
+        if (UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow).IsTutorial)
+        {
+            UIErrorWindowController.AddError(LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
+            return;
+        }
+        
+        if (UIService.Get.GetShowedWindowsCount(UIWindowType.IgnoredWindows) > 0)
+        {
+            return;
+        }
+        
         CurrencyHelper.OpenShopWindow(itemUid);
     }
 }

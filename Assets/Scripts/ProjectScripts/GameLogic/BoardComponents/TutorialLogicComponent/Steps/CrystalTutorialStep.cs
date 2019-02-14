@@ -41,6 +41,11 @@
         Context.FadeAll(0.5f, unlock);
         
         startTime = startTime.AddSeconds(-(Delay-0.5f));
+        
+        BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.Locker.Lock(this);
+        BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.DestroyAll();
+
+        UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow).IsTutorial = true;
     }
 
     public override void Execute()
@@ -83,6 +88,9 @@
     {
         Context.FadeAll(1f, null);
         Context.UnlockAll();
+        
+        UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow).IsTutorial = false;
+        BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.Locker.Unlock(this);
         
         base.Complete();
     }

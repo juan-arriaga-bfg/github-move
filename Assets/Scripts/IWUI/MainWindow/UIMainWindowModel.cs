@@ -1,3 +1,4 @@
-public class UIMainWindowModel : IWWindowModel 
+public class UIMainWindowModel : IWWindowModel
 {
+    public bool IsTutorial;
 }

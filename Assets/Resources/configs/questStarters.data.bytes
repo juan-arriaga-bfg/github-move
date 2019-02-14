@@ -444,9 +444,9 @@
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
-        "Id": "QuestCompleted",
-        "Value": "34_CreatePiece_PR_B5"
+        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
+        "Id": "PieceUnlocked",
+        "Value": "C4"
       }
     ]
   },
@@ -744,6 +744,20 @@
         "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
         "Id": "QuestCompleted",
         "Value": "63_CreatePiece_D6"
+      }
+    ]
+  },
+  {
+    "Id": 59,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "65_CompleteOrder"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "3_KillTree"
       }
     ]
   }

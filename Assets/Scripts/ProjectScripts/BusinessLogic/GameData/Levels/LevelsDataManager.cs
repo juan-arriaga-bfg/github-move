@@ -67,4 +67,6 @@ public class LevelsDataManager : SequenceData, IDataLoader<List<LevelsDef>>
 	public List<CurrencyPair> Rewards => Levels[Level - 1].Rewards;
 	public List<ItemWeight> PieceWeights => Levels[Level - 1].PieceWeights;
 	public List<ItemWeight> ResourcesWeights => Levels[Level - 1].ResourcesWeights;
+	
+    public int OrdersDelay => Levels[Level - 1].OrdersDelay;
 }

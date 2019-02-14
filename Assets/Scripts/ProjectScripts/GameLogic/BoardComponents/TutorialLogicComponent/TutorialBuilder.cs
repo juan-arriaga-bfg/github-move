@@ -157,14 +157,14 @@ public static class TutorialBuilder
             }
             case 8: // tutorial 10 - collecting ingredients
             {
-                step = new IngredientTutorialStep
+                step = new BoardArrowTutorialStep
                 {
-                    Delay = 0,
+                    Targets = PieceType.GetIdsByFilter(PieceTypeFilter.Ingredient),
                     OnFirstStartCallback = () => Analytics.SendTutorialStartStepEvent("ingredients"),
                     OnCompleteCallback = () => Analytics.SendTutorialEndStepEvent("ingredients")
                 };
 
-                step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Start}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "65_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckCurrencyTutorialCondition
                 {
                     Target = 3,
@@ -223,8 +223,8 @@ public static class TutorialBuilder
                 step = new PrLockTutorialStep();
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
-                step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Hard}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "65_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "65_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
@@ -265,8 +265,8 @@ public static class TutorialBuilder
                 step = new UiLockTutorialStep {Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Orders}};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
-                step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Hard}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "65_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "65_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }
@@ -287,8 +287,8 @@ public static class TutorialBuilder
                 step = new OrdersLockTutorialStep {IsIgnoreDebug = false};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
-                step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Complete}, true);
-                step.RegisterComponent(new CheckLevelTutorialCondition {Target = 3, ConditionType = TutorialConditionType.Hard}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "65_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Complete}, true);
+                step.RegisterComponent(new CheckQuestTutorialCondition {Target = "65_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
                 
                 break;
             }

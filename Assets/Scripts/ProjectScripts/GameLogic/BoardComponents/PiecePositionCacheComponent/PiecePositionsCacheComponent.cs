@@ -43,9 +43,7 @@ public class PiecePositionsCacheComponent : IECSComponent
 	
 	public List<BoardPosition> GetPiecePositionsByType(int pieceType)
 	{
-		List<BoardPosition> list;
-
-		return cache.TryGetValue(pieceType, out list) == false ? new List<BoardPosition>() : new List<BoardPosition>(list);
+		return cache.TryGetValue(pieceType, out var list) == false ? new List<BoardPosition>() : new List<BoardPosition>(list);
 	}
 
 	public List<BoardPosition> GetUnlockedPiecePositionsByType(int pieceType)

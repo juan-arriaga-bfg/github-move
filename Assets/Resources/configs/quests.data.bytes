@@ -1380,6 +1380,29 @@
     }
   },
   {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "65_CompleteOrder",
+    "TaskDefs": [
+      {
+        "TaskId": "65_CompleteOrder"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 15
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      }
+    }
+  },
+  {
     "$type": "DailyQuestEntity, GameAssembly",
     "Id": "Daily",
     "TaskDefs": [

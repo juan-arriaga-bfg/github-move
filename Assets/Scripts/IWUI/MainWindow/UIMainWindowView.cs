@@ -209,6 +209,12 @@ public class UIMainWindowView : UIBaseWindowView
     
     public void OnClickCodex()
     {
+        if ((Model as UIMainWindowModel).IsTutorial)
+        {
+            UIErrorWindowController.AddError(LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
+            return;
+        }
+        
         BoardService.Current.FirstBoard?.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
         
         var codexManager = GameDataService.Current.CodexManager;
@@ -226,11 +232,23 @@ public class UIMainWindowView : UIBaseWindowView
     
     public void OnClickShop()
     {
+        if ((Model as UIMainWindowModel).IsTutorial)
+        {
+            UIErrorWindowController.AddError(LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
+            return;
+        }
+        
         UIService.Get.ShowWindow(UIWindowType.MarketWindow);
     }
     
     public void OnClickOrders()
     {
+        if ((Model as UIMainWindowModel).IsTutorial)
+        {
+            UIErrorWindowController.AddError(LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
+            return;
+        }
+        
         var model = UIService.Get.GetCachedModel<UIOrdersWindowModel>(UIWindowType.OrdersWindow);
         if(model.Orders != null && model.Orders.Count > 0) model.Select = model.Orders[0];
         
@@ -239,11 +257,28 @@ public class UIMainWindowView : UIBaseWindowView
     
     public void OnClickDailyQuest()
     {
+        if ((Model as UIMainWindowModel).IsTutorial)
+        {
+            UIErrorWindowController.AddError(LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
+            return;
+        }
+        
         UIService.Get.ShowWindow(UIWindowType.DailyQuestWindow);
     }
     
     public void OnClickOptions()
     {
+        if ((Model as UIMainWindowModel).IsTutorial)
+        {
+            UIErrorWindowController.AddError(LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
+            return;
+        }
+        
+        if (UIService.Get.GetShowedWindowsCount(UIWindowType.IgnoredWindows) > 0)
+        {
+            return;
+        }
+        
         UIService.Get.ShowWindow(UIWindowType.SettingsWindow);
     }
     

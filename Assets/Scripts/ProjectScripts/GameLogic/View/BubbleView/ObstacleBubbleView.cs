@@ -23,7 +23,9 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
     public override void Init(Piece piece)
     {
         base.Init(piece);
-
+        
+        Priority = defaultPriority = 1;
+        
         life = piece.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
         
         if(life == null) return;

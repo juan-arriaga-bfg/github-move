@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using BfgAnalytics;
 using UnityEngine;
 
 public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
@@ -102,7 +104,7 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
         OnComplete?.Invoke();
     }
     
-    public void FastComplete()
+    public void FastComplete(string analyticsLocation)
     {
         if (IsFree())
         {
@@ -110,12 +112,16 @@ public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
             Complete();
             return;
         }
+
+        var currentPrice = GetPrice();
         
-        CurrencyHelper.Purchase(Currency.Timer.Name, 1, GetPrice(), success =>
+        CurrencyHelper.Purchase(Currency.Timer.Name, 1, currentPrice, success =>
         {
             if(success == false) return;
             
             NSAudioService.Current.Play(SoundId.TimeBoost);
+            Analytics.SendPurchase(analyticsLocation, "item1", new List<CurrencyPair>{currentPrice}, null, false, false);
+            
             Complete();
         });
     }

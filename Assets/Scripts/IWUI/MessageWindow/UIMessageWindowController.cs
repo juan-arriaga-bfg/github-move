@@ -121,7 +121,7 @@ public class UIMessageWindowController : IWWindowController {
         UIService.Get.ShowWindow(UIWindowType.MessageWindow);
     }
 
-    public static void CreateTimerCompleteMessage(string message, TimerComponent timer)
+    public static void CreateTimerCompleteMessage(string message, string analyticsLocation, TimerComponent timer)
     {
         if(timer.Delay - timer.StartTime.GetTime().TotalSeconds < 1) return;
 
@@ -131,8 +131,8 @@ public class UIMessageWindowController : IWWindowController {
         model.Message = message;
         model.AcceptLabel = "";
         model.IsBuy = true;
-        
-        model.OnAccept =  timer.FastComplete;
+
+        model.OnAccept = () => { timer.FastComplete(analyticsLocation); };
         model.OnCancel = null;
 
         model.Timer = timer;

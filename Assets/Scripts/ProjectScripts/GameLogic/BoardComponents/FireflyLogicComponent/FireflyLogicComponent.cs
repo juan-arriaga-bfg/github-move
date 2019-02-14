@@ -232,6 +232,16 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		
 		if(isTuttorialActive && views.Count != 0) views[0].AddArrow();
 	}
+
+	public void DestroyAll()
+	{
+		for (var i = views.Count - 1; i >= 0; i--)
+		{
+			var view = views[i];
+			views.Remove(view);
+			context.Context.RendererContext.DestroyElement(view.gameObject);
+		}
+	}
 	
 	public Vector2 Cross(Vector2 a, Vector2 b) //точки a и b концы первого отрезка
 	{
