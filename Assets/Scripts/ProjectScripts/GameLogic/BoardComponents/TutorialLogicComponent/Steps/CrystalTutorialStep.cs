@@ -41,6 +41,9 @@
         Context.FadeAll(0.5f, unlock);
         
         startTime = startTime.AddSeconds(-(Delay-0.5f));
+        
+        BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.Locker.Lock(this);
+        BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.DestroyAll();
     }
 
     public override void Execute()
@@ -84,6 +87,7 @@
         Context.FadeAll(1f, null);
         Context.UnlockAll();
         
+        BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.Locker.Unlock(this);
         base.Complete();
     }
 }

@@ -34,6 +34,8 @@ public class FireflyView : BoardElementView
     
     public override void OnFastDestroy()
     {
+        DOTween.Kill(CachedTransform);
+        
         Context.Context.BoardLogic.FireflyLogic.Remove(this);
         CachedTransform.localScale = Vector3.one;
         
