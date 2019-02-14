@@ -2,6 +2,7 @@
     where T : UIBoardView
 {
     public bool IsFastStart;
+    public bool IsFocusLock;
     
     private HintArrowView arrow;
     
@@ -33,7 +34,7 @@
             
             if(positions.Count == 0) continue;
             
-            arrow = HintArrowView.Show(positions[0], 0, 0, !Context.Context.Manipulator.CameraManipulator.CameraMove.IsLocked, true);
+            arrow = HintArrowView.Show(positions[0], 0, 0, !IsFocusLock, true);
             break;
         }
     }

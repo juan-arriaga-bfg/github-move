@@ -280,7 +280,7 @@ public static class TutorialBuilder
             }
             case 22: // use Mine
             {
-                step = new SelectStorageTutorialStep<ObstacleBubbleView> {Delay = 2, IsFastStart = true, Targets = new List<int>{PieceType.MN_B.Id}};
+                step = new SelectStorageTutorialStep<ObstacleBubbleView> {Delay = 2, IsFocusLock = true, IsFastStart = true, Targets = new List<int>{PieceType.MN_B.Id}};
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "12_UseMine", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckWorkerTutorialCondition {ConditionType = TutorialConditionType.Complete}, true);

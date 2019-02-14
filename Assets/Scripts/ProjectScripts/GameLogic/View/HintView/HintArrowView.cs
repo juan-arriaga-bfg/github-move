@@ -103,8 +103,8 @@ public class HintArrowView : BoardElementView, IHintArrow
                 targetPiece.ActorView.OnDragStartCallback -= DisableHint;
             });    
         }
-        
-        if (focus == false) return arrowView;
+
+        if (focus == false || board.Manipulator.CameraManipulator.CameraMove.IsLocked) return arrowView;
 
         var worldPos = board.BoardDef.GetSectorCenterWorldPosition(position.X, position.Up.Y, position.Z);
         board.Manipulator.CameraManipulator.MoveTo(worldPos);
