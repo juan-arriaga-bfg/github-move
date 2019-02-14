@@ -22,12 +22,16 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         Timer.OnComplete += UpdateView;
         Timer.OnComplete += () => UpdateState(OrderState.Complete);
         
-        Cooldown = new TimerComponent {Delay = GameDataService.Current.ConstantsManager.NextOrderDelay};
+        int delay = GameDataService.Current.LevelsManager.OrdersDelay;
+        
+        Cooldown = new TimerComponent {Delay = delay};
         Cooldown.OnComplete += CreateOrder;
 
+        Debug.Log($"[CustomerComponent] => OnRegisterEntity: Start cooldown: delay: {delay}");
+        
         RegisterComponent(Cooldown);
     }
-    
+
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
         InitInSave();
@@ -169,5 +173,14 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         };
         
         UIService.Get.ShowWindow(UIWindowType.ExchangeWindow);
+    }
+
+    public void RestartCooldown()
+    {
+        int delay = GameDataService.Current.LevelsManager.OrdersDelay;
+        Cooldown.Delay = delay;
+        Cooldown.Start();
+        
+        Debug.Log($"[CustomerComponent] => RestartCooldown: delay: {delay}");
     }
 }

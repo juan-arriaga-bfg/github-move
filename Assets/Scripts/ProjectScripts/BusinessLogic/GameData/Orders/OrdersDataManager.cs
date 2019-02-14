@@ -116,7 +116,7 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
             var customer = customers[Random.Range(0, customers.Count)];
 
             customers.Remove(customer);
-            customer.Cooldown.Start();
+            customer.RestartCooldown();
         }
     }
 
