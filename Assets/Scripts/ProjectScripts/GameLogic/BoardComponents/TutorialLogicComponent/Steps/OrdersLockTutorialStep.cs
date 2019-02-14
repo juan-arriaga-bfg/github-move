@@ -14,11 +14,10 @@
         var positions = logic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Character);
         var position = positions[0];
         var customer = logic.GetPieceAt(position)?.GetComponent<CustomerComponent>(CustomerComponent.ComponentGuid);
+        var centerPos = Context.Context.BoardDef.GetPiecePosition(position.X, position.Y);
         
         customer?.Cooldown.Complete();
-        
-        var centerPos = Context.Context.BoardDef.GetPiecePosition(position.X, position.Y);
-        if (Context.Context.Manipulator.CameraManipulator.CameraMove.IsLocked == false) Context.Context.Manipulator.CameraManipulator.MoveTo(centerPos);
+        Context.Context.Manipulator.CameraManipulator.MoveTo(centerPos);
         
         base.Complete();
     }

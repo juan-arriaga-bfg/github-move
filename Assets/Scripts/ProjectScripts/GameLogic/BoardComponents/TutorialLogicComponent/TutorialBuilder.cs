@@ -121,7 +121,7 @@ public static class TutorialBuilder
             }
             case 8: // tutorial 10 - collecting ingredients
             {
-                step = new IngredientTutorialStep{Delay = 0};
+                step = new BoardArrowTutorialStep {Targets = PieceType.GetIdsByFilter(PieceTypeFilter.Ingredient)};
 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "65_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckCurrencyTutorialCondition
