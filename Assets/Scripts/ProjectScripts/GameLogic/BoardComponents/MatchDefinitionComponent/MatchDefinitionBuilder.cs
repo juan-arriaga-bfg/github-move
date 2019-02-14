@@ -89,6 +89,12 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.OB8_A.Id, new PieceMatchDef {Next = PieceType.OB9_A.Id, Previous = PieceType.OB7_A.Id, Amount = -1});
         dict.Add(PieceType.OB9_A.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.OB8_A.Id, Amount = -1});
         
+        dict.Add(PieceType.OB1_E.Id, new PieceMatchDef {Next = PieceType.OB2_E.Id, Previous = PieceType.None.Id, Amount = -1});
+        dict.Add(PieceType.OB2_E.Id, new PieceMatchDef {Next = PieceType.OB3_E.Id, Previous = PieceType.OB1_E.Id, Amount = -1});
+        dict.Add(PieceType.OB3_E.Id, new PieceMatchDef {Next = PieceType.OB4_E.Id, Previous = PieceType.OB2_E.Id, Amount = -1});
+        dict.Add(PieceType.OB4_E.Id, new PieceMatchDef {Next = PieceType.OB5_E.Id, Previous = PieceType.OB3_E.Id, Amount = -1});
+        dict.Add(PieceType.OB5_E.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.OB4_E.Id, Amount = -1});
+        
 #endregion
         
 #region Chests
@@ -112,6 +118,10 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.CH1_D.Id, new PieceMatchDef {Next = PieceType.CH2_D.Id, Previous = PieceType.None.Id, Amount = 3});
         dict.Add(PieceType.CH2_D.Id, new PieceMatchDef {Next = PieceType.CH3_D.Id, Previous = PieceType.CH1_D.Id, Amount = 3});
         dict.Add(PieceType.CH3_D.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.CH2_D.Id});
+        
+        dict.Add(PieceType.CH1_E.Id, new PieceMatchDef {Next = PieceType.CH2_E.Id, Previous = PieceType.None.Id, Amount = 3});
+        dict.Add(PieceType.CH2_E.Id, new PieceMatchDef {Next = PieceType.CH3_E.Id, Previous = PieceType.CH1_E.Id, Amount = 3});
+        dict.Add(PieceType.CH3_E.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.CH2_E.Id});
         
 #endregion
         

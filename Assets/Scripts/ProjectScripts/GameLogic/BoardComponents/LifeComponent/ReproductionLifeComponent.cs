@@ -5,7 +5,7 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
     private PieceReproductionDef def;
     
     private string childName;
-    
+    public override string AnalyticsLocation => $"skip_product{(TimerCooldown.IsExecuteable() ? "_cooldown" : "")}";
     public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.production", "gameboard.bubble.message.production {0}"), childName);
     public override string Price => TimerMain.IsExecuteable() ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), TimerMain.CompleteTime.GetTimeLeftText()) : base.Price;
 
@@ -68,6 +68,7 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         
         UIMessageWindowController.CreateTimerCompleteMessage(
             LocalizationService.Get("window.timerComplete.message.production", "window.timerComplete.message.production"),
+            AnalyticsLocation,
             TimerCooldown);
         
         return false;

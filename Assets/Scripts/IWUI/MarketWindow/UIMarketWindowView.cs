@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BfgAnalytics;
 using DG.Tweening;
 
 public class UIMarketWindowView : UIGenericPopupWindowView 
@@ -34,8 +35,6 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         
         BoardService.Current.FirstBoard.MarketLogic.Timer.OnExecute += UpdateLabel;
         BoardService.Current.FirstBoard.MarketLogic.Timer.OnComplete += UpdateSlots;
-        
-        
     }
 
     public override void OnViewShowCompleted()
@@ -98,6 +97,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
             if(success == false) return;
             
             BoardService.Current.FirstBoard.MarketLogic.Timer.Complete();
+            Analytics.SendPurchase("skip_market", "item1", new List<CurrencyPair>{windowModel.Price}, null, false, false);
         });
     }
 

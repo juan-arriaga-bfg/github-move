@@ -537,5 +537,143 @@
         "Weight": 1
       }
     ]
+  },
+  {
+    "Uid": "OB1_E",
+    "Delay": 45,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 5
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 0,
+      "Max": 1
+    },
+    "PieceAmount": 2,
+    "PieceWeights": [
+      {
+        "Uid": "E1",
+        "Weight": 1
+      }
+    ]
+  },
+  {
+    "Uid": "OB2_E",
+    "Delay": 90,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 15
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "PieceAmount": 4,
+    "PieceWeights": [
+      {
+        "Uid": "E1",
+        "Weight": 3
+      },
+      {
+        "Uid": "E2",
+        "Weight": 1
+      }
+    ],
+    "ChestId": "CH1_E"
+  },
+  {
+    "Uid": "OB3_E",
+    "Delay": 180,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 25
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 2,
+      "Max": 4
+    },
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "E1",
+        "Weight": 1
+      },
+      {
+        "Uid": "E2",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
+      }
+    ],
+    "ChestId": "CH2_E"
+  },
+  {
+    "Uid": "OB4_E",
+    "Delay": 360,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 35
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 35
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 3,
+      "Max": 4
+    },
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "E1",
+        "Weight": 1
+      },
+      {
+        "Uid": "E2",
+        "Weight": 2
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
+      }
+    ],
+    "ChestId": "CH2_E"
+  },
+  {
+    "Uid": "OB5_E",
+    "Delay": 540,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 45
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 45
+      }
+    ],
+    "ChestId": "CH3_E"
   }
 ]

@@ -52,6 +52,8 @@ public class UIResourcePanelWindowView : UIBaseWindowView
     
     private readonly Dictionary<string, CanvasGroup> cachedResourcePanelContainerDown = new Dictionary<string, CanvasGroup>();
     
+    private readonly Dictionary<object, LockerComponent> lockers = new Dictionary<object, LockerComponent>();
+    
     public UIHintArrowComponent CachedHintArrowComponent { get; private set; }
     
     public override void InitView(IWWindowModel model, IWWindowController controller)
@@ -82,27 +84,31 @@ public class UIResourcePanelWindowView : UIBaseWindowView
         }
     }
     
-    public virtual void ToggleFadePanel(string currency, bool state)
+    public void ToggleFadePanel(string currency, bool state)
     {
         Transform targetPanel;
         CanvasGroup targetContainer;
-        if (state)
+
+        if (Toggle(currency, state))
         {
-            if (cachedResourcePanels.TryGetValue(currency, out targetPanel) && cachedResourcePanelContainerUp.TryGetValue(currency, out targetContainer))
+            if (state)
             {
-                targetPanel.SetParent(targetContainer.transform);
+                if (cachedResourcePanels.TryGetValue(currency, out targetPanel) && cachedResourcePanelContainerUp.TryGetValue(currency, out targetContainer))
+                {
+                    targetPanel.SetParent(targetContainer.transform);
+                }
             }
-        }
-        else
-        {
-            if (cachedResourcePanels.TryGetValue(currency, out targetPanel) && cachedResourcePanelContainerDown.TryGetValue(currency, out targetContainer))
+            else
             {
-                targetPanel.SetParent(targetContainer.transform);
+                if (cachedResourcePanels.TryGetValue(currency, out targetPanel) && cachedResourcePanelContainerDown.TryGetValue(currency, out targetContainer))
+                {
+                    targetPanel.SetParent(targetContainer.transform);
+                }
             }
         }
     }
 
-    public virtual void TogglePanel(string currency, bool state, bool isAnimate = false)
+    public void TogglePanel(string currency, bool state, bool isAnimate = false)
     {
         var alpha = state ? 1f : 0f;
 
@@ -112,36 +118,66 @@ public class UIResourcePanelWindowView : UIBaseWindowView
         {
             return;
         }
-        
-        if (isAnimate)
+
+        if (Toggle(currency, state))
         {
-            DOTween.Kill(targetContainerUp);
-            targetContainerUp.DOFade(alpha, 0.35f).SetId(targetContainerUp);
-
-            DOTween.Kill(targetContainerDown);
-            targetContainerDown.DOFade(alpha, 0.35f).SetId(targetContainerDown);
-
-            DOTween.Kill(targetPanel);
-            
-            if (state == false)
+            if (isAnimate)
             {
-                DOTween.Sequence().SetId(targetPanel).AppendInterval(0.35f).OnComplete(() => { targetPanel.gameObject.SetActive(false); });
+                DOTween.Kill(targetContainerUp);
+                targetContainerUp.DOFade(alpha, 0.35f).SetId(targetContainerUp);
+
+                DOTween.Kill(targetContainerDown);
+                targetContainerDown.DOFade(alpha, 0.35f).SetId(targetContainerDown);
+
+                DOTween.Kill(targetPanel);
+
+                if (state == false)
+                {
+                    DOTween.Sequence().SetId(targetPanel).AppendInterval(0.35f).OnComplete(() => { targetPanel.gameObject.SetActive(false); });
+                }
+                else
+                {
+                    targetPanel.gameObject.SetActive(true);
+                }
             }
             else
             {
-                targetPanel.gameObject.SetActive(true);
+                DOTween.Kill(targetContainerUp);
+                DOTween.Kill(targetContainerDown);
+                DOTween.Kill(targetPanel);
+
+                targetContainerUp.alpha = alpha;
+                targetContainerDown.alpha = alpha;
+                targetPanel.gameObject.SetActive(state);
             }
+        }
+    }
+
+    private bool Toggle(object item, bool state)
+    {
+        bool isNewLocker = false;
+        
+        if (!lockers.TryGetValue(item, out LockerComponent locker))
+        {
+            locker = new LockerComponent();
+            lockers.Add(item, locker);
+            isNewLocker = true;
+        }
+
+        bool isLockedBefore = locker.IsLocked;
+        
+        if (state)
+        {
+            locker.Lock(item, true);
         }
         else
         {
-            DOTween.Kill(targetContainerUp);
-            DOTween.Kill(targetContainerDown);
-            DOTween.Kill(targetPanel);
-                
-            targetContainerUp.alpha = alpha;
-            targetContainerDown.alpha = alpha;
-            targetPanel.gameObject.SetActive(state);
+            locker.Unlock(item);
         }
+
+        var ret = isNewLocker || isLockedBefore != locker.IsLocked;
+        
+        return ret;
     }
 
     public virtual void TogglePanels(bool state, bool isAnimate = false, List<string> ignorePanels = null)

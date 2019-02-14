@@ -147,7 +147,7 @@
       },
       {
         "CharacterId": "SleepingBeauty",
-        "Emotion": "Normal",
+        "Emotion": "Thinking",
         "Message": "conversation.6.message2"
       }
     ]
@@ -155,12 +155,12 @@
   {
     "Id": 14,
     "ConversationCharacters": {
-      "LeftInner": "GnomeWorker"
+      "LeftInner": "SleepingBeauty"
     },
     "Bubbles": [
       {
-        "CharacterId": "GnomeWorker",
-        "Emotion": "Normal",
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Thinking",
         "Message": "conversation.7.message1"
       }
     ]
@@ -178,7 +178,7 @@
       },
       {
         "CharacterId": "SleepingBeauty",
-        "Emotion": "Shocked",
+        "Emotion": "Happy",
         "Message": "conversation.8.message2"
       }
     ]
@@ -268,6 +268,37 @@
         "CharacterId": "SleepingBeauty",
         "Emotion": "Normal",
         "Message": "conversation.14.message1"
+      }
+    ]
+  },
+  {
+    "Id": 20,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Shocked",
+        "Message": "conversation.15.message1"
+      },
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.15.message2"
+      }
+    ]
+  },
+  {
+    "Id": 59,
+    "ConversationCharacters": {
+      "LeftInner": "SleepingBeauty"
+    },
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.16.message1"
       }
     ]
   },
@@ -428,6 +459,56 @@
         "CharacterId": "GnomeWorker",
         "Emotion": "Normal",
         "Message": "conversation.quest.complete18"
+      }
+    ]
+  },
+  {
+    "Id": "21_OpenChest",
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.quest.complete19"
+      }
+    ]
+  },
+  {
+    "Id": "22_CreatePiece_A6",
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.quest.complete20"
+      }
+    ]
+  },
+  {
+    "Id": "23_CreatePiece_B5",
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.quest.complete21"
+      }
+    ]
+  },
+  {
+    "Id": "24_CreatePiece_PR_D5",
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Happy",
+        "Message": "conversation.quest.complete22"
+      }
+    ]
+  },
+  {
+    "Id": "65_CompleteOrder",
+    "Bubbles": [
+      {
+        "CharacterId": "SleepingBeauty",
+        "Emotion": "Normal",
+        "Message": "conversation.quest.complete23"
       }
     ]
   }

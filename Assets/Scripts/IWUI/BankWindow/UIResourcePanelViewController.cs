@@ -36,6 +36,11 @@ public class UIResourcePanelViewController : UIGenericResourcePanelViewControlle
 
     public void OpenShop()
     {
+        if (UIService.Get.GetShowedWindowsCount(UIWindowType.IgnoredWindows) > 0)
+        {
+            return;
+        }
+        
         if (GameDataService.Current.QuestsManager.GetActiveQuestById("1_CreatePiece_PR_C4") != null)
         {
             UIMessageWindowController.CreateMessage(

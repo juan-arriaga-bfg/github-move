@@ -5,8 +5,9 @@ public class MakingLifeComponent : WorkplaceLifeComponent
     private PieceMakingDef def;
     
     public override CurrencyPair Energy => def.Price;
+    public override string AnalyticsLocation => $"skip_monument{(TimerCooldown.IsExecuteable() ? "_cooldown" : "")}";
     public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.castle.make", "gameboard.bubble.message.castle.make {0}"), Energy.ToStringIcon());
-    public override string Price => TimerMain.IsExecuteable() ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), TimerMain.CompleteTime.GetTimeLeftText()) : base.Price;
+    public override string Price => TimerCooldown.IsExecuteable() ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), TimerMain.CompleteTime.GetTimeLeftText()) : base.Price;
 
     public override TimerComponent TimerMain => TimerCooldown;
     
@@ -86,6 +87,7 @@ public class MakingLifeComponent : WorkplaceLifeComponent
         
         UIMessageWindowController.CreateTimerCompleteMessage(
             LocalizationService.Get("window.timerComplete.message.castle", "window.timerComplete.message.castle"),
+            AnalyticsLocation,
             TimerCooldown);
 
         return false;

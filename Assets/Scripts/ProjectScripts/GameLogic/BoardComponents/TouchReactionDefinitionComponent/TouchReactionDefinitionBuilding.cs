@@ -8,6 +8,7 @@
 		{
 			UIMessageWindowController.CreateTimerCompleteMessage(
 				LocalizationService.Get("window.timerComplete.message.piece", "window.timerComplete.message.piece"),
+				"skip_build",
 				piece.PieceState.Timer);
 			
 			return false;

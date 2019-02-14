@@ -10,9 +10,9 @@
 		
 		piece.RegisterComponent(new TouchReactionComponent()
 			.RegisterComponent(new TouchReactionDefinitionMenu {MainReactionIndex = 0}
-				.RegisterDefinition(new TouchReactionDefinitionOpenBubble {ViewId = ViewType.ObstacleBubble})
+				.RegisterDefinition(new TouchReactionDefinitionOpenTutorialBubble {ViewId = ViewType.ObstacleBubble})
 				.RegisterDefinition(new TouchReactionDefinitionSpawnRewards()))
-			.RegisterComponent(new TouchReactionConditionPR()));
+			.RegisterComponent(new TouchReactionConditionWorkplace()));
 		
 		return piece;
 	}

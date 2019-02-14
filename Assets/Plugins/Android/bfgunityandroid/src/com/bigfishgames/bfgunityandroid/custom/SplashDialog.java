@@ -35,7 +35,10 @@ public class SplashDialog extends Dialog
                 FrameLayout.LayoutParams.MATCH_PARENT));
 
         ImageView imageView = new ImageView(dlg.getContext());
-        imageView.setImageResource(com.bigfishgames.bfgunityandroid.R.drawable.bfg_logo);
+
+        int id = context.getResources().getIdentifier("bfg_logo", "drawable", context.getPackageName());
+        imageView.setImageResource(id);
+
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
         imageLayout.addView(imageView);
