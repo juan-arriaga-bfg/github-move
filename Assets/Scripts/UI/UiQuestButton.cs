@@ -253,6 +253,12 @@ public class UiQuestButton : UIGenericResourcePanelViewController
             return;
         }
         
+        if (UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow).IsTutorial)
+        {
+            UIErrorWindowController.AddError(LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
+            return;
+        }
+        
         if (IsClickDisabledByTutorial())
         {
             UIMessageWindowController.CreateMessage(

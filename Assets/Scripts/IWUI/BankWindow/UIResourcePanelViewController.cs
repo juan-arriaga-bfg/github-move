@@ -41,6 +41,12 @@ public class UIResourcePanelViewController : UIGenericResourcePanelViewControlle
             return;
         }
         
+        if (UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow).IsTutorial)
+        {
+            UIErrorWindowController.AddError(LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
+            return;
+        }
+        
         if (GameDataService.Current.QuestsManager.GetActiveQuestById("1_CreatePiece_PR_C4") != null)
         {
             UIMessageWindowController.CreateMessage(
