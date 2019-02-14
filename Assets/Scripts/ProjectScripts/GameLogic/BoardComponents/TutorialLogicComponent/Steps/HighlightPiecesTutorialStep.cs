@@ -6,6 +6,11 @@ public class HighlightPiecesTutorialStep : BaseTutorialStep, IBoardEventListener
     
     private List<PieceBoardElementView> selectPieces;
     
+    protected override void OnFirstStart()
+    {
+        //nothing to do
+    }
+    
     public override void PauseOn()
     {
         base.PauseOn();
@@ -89,6 +94,14 @@ public class HighlightPiecesTutorialStep : BaseTutorialStep, IBoardEventListener
             
             view.ToggleSelection(true);
             selectPieces.Add(view);
+        }
+        
+        if (best.Count >= amountMatch && IsFirstStartEvent())
+        {
+            var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
+            var started = tutorialLogic.SaveStarted;
+            started.Add(Id);
+            OnFirstStartCallback?.Invoke();
         }
     }
 

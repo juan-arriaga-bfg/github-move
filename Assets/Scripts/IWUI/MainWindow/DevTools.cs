@@ -196,6 +196,8 @@ public class DevTools : UIContainerElementViewController
     
     public void OnDebug1Click()
     {
+        CurrencyHelper.Purchase(Currency.Experience.Name, 200);
+        return;
         Debug.Log("OnDebug1Click");
 
 #if UNITY_EDITOR

@@ -2,28 +2,23 @@
 
 public class IngredientTutorialStep : DelayTutorialStep
 {
-    /*protected override void OnFirstStart()
+    protected override void OnFirstStart()
     {
         //nothing to do
-    }*/
-
-    private bool isFirstStartEvent;
-    private bool IsFirstStartEvent()
-    {
-        return isFirstStartEvent;
     }
     
     public override void Execute()
     {
         base.Execute();
-
-        
         
         var positions = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.Ingredient);
 
-        if (positions.Count > 0)
+        if (positions.Count > 0 && IsFirstStartEvent())
         {
-            Debug.LogError("Ingredients founded");
+            var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
+            var started = tutorialLogic.SaveStarted;
+            started.Add(Id);
+            OnFirstStartCallback?.Invoke();
         }
         
         foreach (var position in positions)

@@ -59,13 +59,19 @@ public class BaseTutorialStep : ECSEntity
 		OnFirstStartCallback?.Invoke();
 	}
 	
+	protected bool IsFirstStartEvent()
+	{
+		var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
+		var started = tutorialLogic.SaveStarted;
+		var isFirst = started.Contains(Id) == false;
+		return isFirst;
+	}
+	
 	public virtual void Perform()
 	{
 		if (IsPerform == false)
 		{
-			var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
-			var started = tutorialLogic.SaveStarted;
-			if (started.Contains(Id) == false)
+			if (IsFirstStartEvent())
 			{
 				OnFirstStart();
 			}
