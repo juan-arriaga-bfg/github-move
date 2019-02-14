@@ -21,7 +21,7 @@
         "Weight": 1
       }
     ],
-    "OrdersDelay": 60
+    "OrdersDelay": 180
   },
   {
     "Index": 2,
@@ -52,7 +52,7 @@
         "Override": true
       }
     ],
-    "OrdersDelay": 60
+    "OrdersDelay": 180
   },
   {
     "Index": 3,
@@ -85,7 +85,7 @@
         "Weight": 1
       }
     ],
-    "OrdersDelay": 60
+    "OrdersDelay": 120
   },
   {
     "Index": 4,
@@ -145,7 +145,7 @@
         "Weight": 2
       }
     ],
-    "OrdersDelay": 60
+    "OrdersDelay": 120
   },
   {
     "Index": 5,
@@ -186,7 +186,7 @@
         "Weight": 1
       }
     ],
-    "OrdersDelay": 60
+    "OrdersDelay": 180
   },
   {
     "Index": 6,
@@ -236,7 +236,7 @@
         "Override": true
       }
     ],
-    "OrdersDelay": 60
+    "OrdersDelay": 180
   },
   {
     "Index": 7,
@@ -298,7 +298,7 @@
         "Override": true
       }
     ],
-    "OrdersDelay": 60
+    "OrdersDelay": 180
   },
   {
     "Index": 8,
@@ -355,7 +355,7 @@
         "Weight": 2
       }
     ],
-    "OrdersDelay": 60
+    "OrdersDelay": 180
   },
   {
     "Index": 9,
@@ -411,7 +411,7 @@
         "Override": true
       }
     ],
-    "OrdersDelay": 60
+    "OrdersDelay": 240
   },
   {
     "Index": 10,
@@ -472,7 +472,7 @@
         "Override": true
       }
     ],
-    "OrdersDelay": 60
+    "OrdersDelay": 240
   },
   {
     "Index": 11,
@@ -581,7 +581,7 @@
         "Weight": 1
       }
     ],
-    "OrdersDelay": 60
+    "OrdersDelay": 240
   },
   {
     "Index": 13,
@@ -599,13 +599,35 @@
         "Amount": 5
       }
     ],
-    "OrdersDelay": 60
+    "PieceWeights": [
+      {
+        "Uid": "PR_A1",
+        "Weight": 1
+      },
+      {
+        "Uid": "PR_B1",
+        "Weight": 1
+      },
+      {
+        "Uid": "PR_C1",
+        "Weight": 1
+      },
+      {
+        "Uid": "PR_D1",
+        "Weight": 1
+      },
+      {
+        "Uid": "PR_E1",
+        "Weight": 1
+      }
+    ],
+    "OrdersDelay": 240
   },
   {
     "Index": 14,
     "Price": {
       "Currency": "Experience",
-      "Amount": 10000
+      "Amount": 8000
     },
     "Rewards": [
       {
@@ -617,30 +639,12 @@
         "Amount": 5
       }
     ],
-    "OrdersDelay": 60
+    "OrdersDelay": 240
   },
   {
     "Index": 15,
     "Price": {
       "Currency": "Experience",
-      "Amount": 9000
-    },
-    "Rewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 250
-      },
-      {
-        "Currency": "Crystals",
-        "Amount": 5
-      }
-    ],
-    "OrdersDelay": 60
-  },
-  {
-    "Index": 16,
-    "Price": {
-      "Currency": "Experience",
       "Amount": 10000
     },
     "Rewards": [
@@ -653,13 +657,13 @@
         "Amount": 5
       }
     ],
-    "OrdersDelay": 60
+    "OrdersDelay": 240
   },
   {
-    "Index": 17,
+    "Index": 16,
     "Price": {
       "Currency": "Experience",
-      "Amount": 9000
+      "Amount": 15000
     },
     "Rewards": [
       {
@@ -671,6 +675,24 @@
         "Amount": 5
       }
     ],
-    "OrdersDelay": 60
+    "OrdersDelay": 240
+  },
+  {
+    "Index": 17,
+    "Price": {
+      "Currency": "Experience",
+      "Amount": 17000
+    },
+    "Rewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 250
+      },
+      {
+        "Currency": "Crystals",
+        "Amount": 5
+      }
+    ],
+    "OrdersDelay": 240
   }
 ]
