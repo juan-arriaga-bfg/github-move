@@ -12,6 +12,10 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
 {
     public override void Init(Action onComplete)
     {
+#if DEBUG
+        Debug.unityLogger.logEnabled = false;
+#endif
+        
         Application.targetFrameRate = 60;
 
         DOTween.SetTweensCapacity(200, 125);
