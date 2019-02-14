@@ -244,6 +244,11 @@ public class UIMainWindowView : UIBaseWindowView
     
     public void OnClickOptions()
     {
+        if (UIService.Get.GetShowedWindowsCount(UIWindowType.IgnoredWindows) > 0)
+        {
+            return;
+        }
+        
         UIService.Get.ShowWindow(UIWindowType.SettingsWindow);
     }
     
