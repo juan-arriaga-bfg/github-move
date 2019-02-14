@@ -34,8 +34,6 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	private const int TUTORIAL_FIREFLY_COUNT = 3;
 	private bool isTuttorialActive => ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount < TUTORIAL_FIREFLY_COUNT;
 	
-	private bool isTutorialStart = true;
-	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
 		context = entity as BoardLogicComponent;
@@ -148,11 +146,6 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 
 		if (isTuttorialActive)
 		{
-			if (isTutorialStart)
-			{
-				isTutorialStart = false;
-				Analytics.SendTutorialStartStepEvent("firefly");
-			}
 			views[0].AddArrow();
 		}
 	}
@@ -215,9 +208,11 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		var amountFireflyBefore = ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount;
 		firefly.OnClick();
 		var amountFireflyAfter = ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount;
-		
-		if(amountFireflyAfter != amountFireflyBefore && amountFireflyAfter == TUTORIAL_FIREFLY_COUNT)
+
+		if (amountFireflyAfter != amountFireflyBefore && amountFireflyAfter == TUTORIAL_FIREFLY_COUNT)
+		{
 			Analytics.SendTutorialEndStepEvent("firefly");
+		}
 		
 		return true;
 	}

@@ -24,8 +24,8 @@ public class BaseTutorialStep : ECSEntity
 	protected bool isPauseOn;
 	protected bool isAutoComplete;
 	
-	public Action OnFirstStart;
-	public Action OnComplete;
+	public Action OnFirstStartCallback;
+	public Action OnCompleteCallback;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
@@ -50,6 +50,14 @@ public class BaseTutorialStep : ECSEntity
 	{
 		isPauseOn = true;
 	}
+
+	protected virtual void OnFirstStart()
+	{
+		var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
+		var started = tutorialLogic.SaveStarted;
+		started.Add(Id);
+		OnFirstStartCallback?.Invoke();
+	}
 	
 	public virtual void Perform()
 	{
@@ -59,8 +67,7 @@ public class BaseTutorialStep : ECSEntity
 			var started = tutorialLogic.SaveStarted;
 			if (started.Contains(Id) == false)
 			{
-				started.Add(Id);
-				OnFirstStart?.Invoke();
+				OnFirstStart();
 			}
 		}
 		IsPerform = true;
@@ -78,7 +85,7 @@ public class BaseTutorialStep : ECSEntity
 
 	protected virtual void Complete()
 	{
-		OnComplete?.Invoke();
+		OnCompleteCallback?.Invoke();
 		StartAnimation(TutorialAnimationType.Complete);
 	}
 	
