@@ -12,7 +12,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
 {
     public override void Init(Action onComplete)
     {
-#if DEBUG
+#if !DEBUG
         Debug.unityLogger.logEnabled = false;
 #endif
         
