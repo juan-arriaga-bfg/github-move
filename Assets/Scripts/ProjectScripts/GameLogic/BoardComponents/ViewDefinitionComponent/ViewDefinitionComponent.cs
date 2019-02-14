@@ -141,9 +141,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     
     public UIBoardView AddView(ViewType id)
     {
-        UIBoardView view;
-
-        if (views.TryGetValue(id, out view))
+        if (views.TryGetValue(id, out var view))
         {
             return view;
         }
