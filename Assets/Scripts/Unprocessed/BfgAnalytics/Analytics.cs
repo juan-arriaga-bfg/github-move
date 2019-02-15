@@ -58,7 +58,6 @@ namespace BfgAnalytics
 
 		public static void SendTutorialStartStepEvent(string name)
         {
-            Debug.LogError($"Tutorial Start: {name}");
             JSONNode customJsonData = new JSONObject();
             
             customJsonData["name"] = name;
@@ -69,7 +68,6 @@ namespace BfgAnalytics
 
         public static void SendTutorialEndStepEvent(string name)
         {
-            Debug.LogError($"Tutorial End: {name}");
             JSONNode customJsonData = new JSONObject();
             
             customJsonData["name"] = name;
