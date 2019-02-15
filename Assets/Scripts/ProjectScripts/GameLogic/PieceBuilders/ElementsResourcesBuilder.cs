@@ -286,6 +286,113 @@ public class ElementsResourcesBuilder
             
         #endregion
         
+        #region F
+        
+        dict.Add(PieceType.F1.Id, R.F1Piece);
+        dict.Add(PieceType.F2.Id, R.F2Piece);
+        dict.Add(PieceType.F3Fake.Id, R.F3Piece);
+        dict.Add(PieceType.F3.Id, R.F3Piece);
+        dict.Add(PieceType.F4Fake.Id, R.F4Piece);
+        dict.Add(PieceType.F4.Id, R.F4Piece);
+        dict.Add(PieceType.F5Fake.Id, R.F5Piece);
+        dict.Add(PieceType.F5.Id, R.F5Piece);
+        dict.Add(PieceType.F6Fake.Id, R.F6Piece);
+        dict.Add(PieceType.F6.Id, R.F6Piece);
+        dict.Add(PieceType.F7Fake.Id, R.F7Piece);
+        dict.Add(PieceType.F7.Id, R.F7Piece);
+        dict.Add(PieceType.F8Fake.Id, R.F8Piece);
+        dict.Add(PieceType.F8.Id, R.F8Piece);
+        dict.Add(PieceType.F9Fake.Id, R.F9Piece);
+        dict.Add(PieceType.F9.Id, R.F9Piece);
+            
+        #endregion
+        
+        #region G
+        
+        dict.Add(PieceType.G1.Id, R.G1Piece);
+        dict.Add(PieceType.G2.Id, R.G2Piece);
+        dict.Add(PieceType.G3Fake.Id, R.G3Piece);
+        dict.Add(PieceType.G3.Id, R.G3Piece);
+        dict.Add(PieceType.G4Fake.Id, R.G4Piece);
+        dict.Add(PieceType.G4.Id, R.G4Piece);
+        dict.Add(PieceType.G5Fake.Id, R.G5Piece);
+        dict.Add(PieceType.G5.Id, R.G5Piece);
+        dict.Add(PieceType.G6Fake.Id, R.G6Piece);
+        dict.Add(PieceType.G6.Id, R.G6Piece);
+        dict.Add(PieceType.G7Fake.Id, R.G7Piece);
+        dict.Add(PieceType.G7.Id, R.G7Piece);
+        dict.Add(PieceType.G8Fake.Id, R.G8Piece);
+        dict.Add(PieceType.G8.Id, R.G8Piece);
+        dict.Add(PieceType.G9Fake.Id, R.G9Piece);
+        dict.Add(PieceType.G9.Id, R.G9Piece);
+            
+        #endregion
+        
+        #region H
+        
+        dict.Add(PieceType.H1.Id, R.H1Piece);
+        dict.Add(PieceType.H2.Id, R.H2Piece);
+        dict.Add(PieceType.H3Fake.Id, R.H3Piece);
+        dict.Add(PieceType.H3.Id, R.H3Piece);
+        dict.Add(PieceType.H4Fake.Id, R.H4Piece);
+        dict.Add(PieceType.H4.Id, R.H4Piece);
+        dict.Add(PieceType.H5Fake.Id, R.H5Piece);
+        dict.Add(PieceType.H5.Id, R.H5Piece);
+        dict.Add(PieceType.H6Fake.Id, R.H6Piece);
+        dict.Add(PieceType.H6.Id, R.H6Piece);
+        dict.Add(PieceType.H7Fake.Id, R.H7Piece);
+        dict.Add(PieceType.H7.Id, R.H7Piece);
+        dict.Add(PieceType.H8Fake.Id, R.H8Piece);
+        dict.Add(PieceType.H8.Id, R.H8Piece);
+        dict.Add(PieceType.H9Fake.Id, R.H9Piece);
+        dict.Add(PieceType.H9.Id, R.H9Piece);
+            
+        #endregion
+        
+        #region I
+        
+        dict.Add(PieceType.I1.Id, R.I1Piece);
+        dict.Add(PieceType.I2.Id, R.I2Piece);
+        dict.Add(PieceType.I3Fake.Id, R.I3Piece);
+        dict.Add(PieceType.I3.Id, R.I3Piece);
+        dict.Add(PieceType.I4Fake.Id, R.I4Piece);
+        dict.Add(PieceType.I4.Id, R.I4Piece);
+        dict.Add(PieceType.I5Fake.Id, R.I5Piece);
+        dict.Add(PieceType.I5.Id, R.I5Piece);
+        dict.Add(PieceType.I6Fake.Id, R.I6Piece);
+        dict.Add(PieceType.I6.Id, R.I6Piece);
+        dict.Add(PieceType.I7Fake.Id, R.I7Piece);
+        dict.Add(PieceType.I7.Id, R.I7Piece);
+        dict.Add(PieceType.I8Fake.Id, R.I8Piece);
+        dict.Add(PieceType.I8.Id, R.I8Piece);
+        dict.Add(PieceType.I9Fake.Id, R.I9Piece);
+        dict.Add(PieceType.I9.Id, R.I9Piece);
+            
+        #endregion
+        
+        #region J
+        
+        dict.Add(PieceType.J1.Id, R.J1Piece);
+        dict.Add(PieceType.J2.Id, R.J2Piece);
+        dict.Add(PieceType.J3Fake.Id, R.J3Piece);
+        dict.Add(PieceType.J3.Id, R.J3Piece);
+        dict.Add(PieceType.J4Fake.Id, R.J4Piece);
+        dict.Add(PieceType.J4.Id, R.J4Piece);
+        dict.Add(PieceType.J5Fake.Id, R.J5Piece);
+        dict.Add(PieceType.J5.Id, R.J5Piece);
+        dict.Add(PieceType.J6Fake.Id, R.J6Piece);
+        dict.Add(PieceType.J6.Id, R.J6Piece);
+        dict.Add(PieceType.J7Fake.Id, R.J7Piece);
+        dict.Add(PieceType.J7.Id, R.J7Piece);
+        dict.Add(PieceType.J8Fake.Id, R.J8Piece);
+        dict.Add(PieceType.J8.Id, R.J8Piece);
+        dict.Add(PieceType.J9Fake.Id, R.J9Piece);
+        dict.Add(PieceType.J9.Id, R.J9Piece);
+            
+        #endregion
+        
+        
+        
 #endregion
         
 #region Reproduction Pieces
