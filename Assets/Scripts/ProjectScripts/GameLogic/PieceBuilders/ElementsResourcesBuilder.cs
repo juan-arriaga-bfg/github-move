@@ -61,7 +61,76 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.NPC_19.Id, R.NPC_19Piece);
         
 #endregion
+   
+#region Character Pieces
+
+        #region NPC_B
+
+        dict.Add(PieceType.NPC1_B.Id, R.NPC1_BPiece);
+        dict.Add(PieceType.NPC2_B.Id, R.NPC2_BPiece);
+        dict.Add(PieceType.NPC3_B.Id, R.NPC3_BPiece);
+        dict.Add(PieceType.NPC4_B.Id, R.NPC4_BPiece);
+        dict.Add(PieceType.NPC5_B.Id, R.NPC5_BPiece);
+        dict.Add(PieceType.NPC6_B.Id, R.NPC6_BPiece);
+        dict.Add(PieceType.NPC7_B.Id, R.NPC7_BPiece);
+        dict.Add(PieceType.NPC8_B.Id, R.NPC8_BPiece);
+
+        #endregion
         
+        #region NPC_C
+
+        dict.Add(PieceType.NPC1_C.Id, R.NPC1_CPiece);
+        dict.Add(PieceType.NPC2_C.Id, R.NPC2_CPiece);
+        dict.Add(PieceType.NPC3_C.Id, R.NPC3_CPiece);
+        dict.Add(PieceType.NPC4_C.Id, R.NPC4_CPiece);
+        dict.Add(PieceType.NPC5_C.Id, R.NPC5_CPiece);
+        dict.Add(PieceType.NPC6_C.Id, R.NPC6_CPiece);
+        dict.Add(PieceType.NPC7_C.Id, R.NPC7_CPiece);
+        dict.Add(PieceType.NPC8_C.Id, R.NPC8_CPiece);
+
+        #endregion
+        
+        #region NPC_D
+
+        dict.Add(PieceType.NPC1_D.Id, R.NPC1_DPiece);
+        dict.Add(PieceType.NPC2_D.Id, R.NPC2_DPiece);
+        dict.Add(PieceType.NPC3_D.Id, R.NPC3_DPiece);
+        dict.Add(PieceType.NPC4_D.Id, R.NPC4_DPiece);
+        dict.Add(PieceType.NPC5_D.Id, R.NPC5_DPiece);
+        dict.Add(PieceType.NPC6_D.Id, R.NPC6_DPiece);
+        dict.Add(PieceType.NPC7_D.Id, R.NPC7_DPiece);
+        dict.Add(PieceType.NPC8_D.Id, R.NPC8_DPiece);
+
+        #endregion
+        
+        #region NPC_E
+
+        dict.Add(PieceType.NPC1_E.Id, R.NPC1_EPiece);
+        dict.Add(PieceType.NPC2_E.Id, R.NPC2_EPiece);
+        dict.Add(PieceType.NPC3_E.Id, R.NPC3_EPiece);
+        dict.Add(PieceType.NPC4_E.Id, R.NPC4_EPiece);
+        dict.Add(PieceType.NPC5_E.Id, R.NPC5_EPiece);
+        dict.Add(PieceType.NPC6_E.Id, R.NPC6_EPiece);
+        dict.Add(PieceType.NPC7_E.Id, R.NPC7_EPiece);
+        dict.Add(PieceType.NPC8_E.Id, R.NPC8_EPiece);
+
+        #endregion
+        
+        #region NPC_F
+
+        dict.Add(PieceType.NPC1_F.Id, R.NPC1_FPiece);
+        dict.Add(PieceType.NPC2_F.Id, R.NPC2_FPiece);
+        dict.Add(PieceType.NPC3_F.Id, R.NPC3_FPiece);
+        dict.Add(PieceType.NPC4_F.Id, R.NPC4_FPiece);
+        dict.Add(PieceType.NPC5_F.Id, R.NPC5_FPiece);
+        dict.Add(PieceType.NPC6_F.Id, R.NPC6_FPiece);
+        dict.Add(PieceType.NPC7_F.Id, R.NPC7_FPiece);
+        dict.Add(PieceType.NPC8_F.Id, R.NPC8_FPiece);
+
+        #endregion
+        
+#endregion
+
 #region Enemies
         
         dict.Add(PieceType.Enemy1.Id, R.Enemy1Piece);

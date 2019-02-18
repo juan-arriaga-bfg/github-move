@@ -38,6 +38,12 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Soft1.Id, PieceType.Soft6.Id, dict);
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Hard1.Id, PieceType.Hard6.Id, dict);
         
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC1_B.Id, PieceType.NPC8_B.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC1_C.Id, PieceType.NPC8_C.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC1_D.Id, PieceType.NPC8_D.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC1_E.Id, PieceType.NPC8_E.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC1_F.Id, PieceType.NPC8_F.Id, dict);
+        
         dict.Add(PieceType.CH_Free.Id, new ChestPieceBuilder());
         
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.SK1_PR.Id, PieceType.SK3_PR.Id, dict);

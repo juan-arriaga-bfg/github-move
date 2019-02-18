@@ -113,6 +113,13 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
             case "Ingredient G":
                 ids.AddRange(GetPieceIds(PieceType.PR_G1.Id, PieceType.PR_G5.Id));
                 break;
+            case "Character Pieces":
+                ids.AddRange(GetPieceIds(PieceType.NPC1_B.Id, PieceType.NPC8_B.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC1_C.Id, PieceType.NPC8_C.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC1_D.Id, PieceType.NPC8_D.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC1_E.Id, PieceType.NPC8_E.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC1_F.Id, PieceType.NPC8_F.Id));
+                break;
         }
         
         return ids;
