@@ -119,10 +119,12 @@ public class SandboxGameController : MonoBehaviour
             boardController.BoardDef.UnitSize,
             new List<string>
             {
+                null,
+                "tile_water",
                 "tile_grass_1",
                 "tile_grass_2"
             },
-            ignorablePositions:GenereateIgnorable(boardController)
+            null//ignorablePositions:GenereateIgnorable(boardController)
         );
         
         var widthShift = boardController.BoardDef.Width / 4;
@@ -152,15 +154,15 @@ public class SandboxGameController : MonoBehaviour
 
         var shift = 12;
         var vectorShift = boardController.BoardDef.GetSectorWorldPosition(-shift / 2, -shift / 2, 0);
-        boardController.RendererContext.GenerateBackground
-        (
-            vectorShift,
-            boardController.BoardDef.Width + shift,
-            boardController.BoardDef.Height + shift,
-            boardController.BoardDef.UnitSize,
-            "background_tile",
-            GetAllBoardPositions(boardController, pos => pos.RightAtDistance(shift/2).UpAtDistance(shift/2))
-        );
+        // boardController.RendererContext.GenerateBackground
+        // (
+        //     vectorShift,
+        //     boardController.BoardDef.Width + shift,
+        //     boardController.BoardDef.Height + shift,
+        //     boardController.BoardDef.UnitSize,
+        //     "background_tile",
+        //     GetAllBoardPositions(boardController, pos => pos.RightAtDistance(shift/2).UpAtDistance(shift/2))
+        // );
         
         boardController.ActionExecutor.PerformAction(new CreateBoardAction());
 

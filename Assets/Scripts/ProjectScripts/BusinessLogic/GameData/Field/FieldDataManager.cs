@@ -1,13 +1,24 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class FieldDataManager : IECSComponent, IDataManager, IDataLoader<Dictionary<string, List<BoardPosition>>>
+public class FiledLayoutDef
+{
+    public int Width;
+    public int Height;
+    public string Data;
+}
+
+public class FieldDataManager : IECSComponent, IDataManager
 {
 	public static int ComponentGuid = ECSManager.GetNextGuid();
 	public int Guid => ComponentGuid;
 
 	public Dictionary<int, List<BoardPosition>> Pieces = new Dictionary<int, List<BoardPosition>>();
 
+    public int LayoutW;
+    public int LayoutH;
+    public byte[] LayoutData;
+	
 	public void OnRegisterEntity(ECSEntity entity)
 	{
 		Reload();
@@ -20,10 +31,11 @@ public class FieldDataManager : IECSComponent, IDataManager, IDataLoader<Diction
 	public void Reload()
 	{
 		Pieces = new Dictionary<int, List<BoardPosition>>();
-		LoadData(new ResourceConfigDataMapper<Dictionary<string, List<BoardPosition>>>("configs/field.data", NSConfigsSettings.Instance.IsUseEncryption));
+		LoadContentData(new ResourceConfigDataMapper<Dictionary<string, List<BoardPosition>>>("configs/field.data", NSConfigsSettings.Instance.IsUseEncryption));
+		LoadLayoutData(new ResourceConfigDataMapper<FiledLayoutDef>("configs/layout.data", NSConfigsSettings.Instance.IsUseEncryption));
 	}
 	
-	public void LoadData(IDataMapper<Dictionary<string, List<BoardPosition>>> dataMapper)
+	public void LoadContentData(IDataMapper<Dictionary<string, List<BoardPosition>>> dataMapper)
 	{
 		dataMapper.LoadData((data, error)=> 
 		{
@@ -40,4 +52,36 @@ public class FieldDataManager : IECSComponent, IDataManager, IDataLoader<Diction
 			}
 		});
 	}
+	
+    public void LoadLayoutData(IDataMapper<FiledLayoutDef> dataMapper)
+    {
+        dataMapper.LoadData((data, error)=> 
+        {
+            if (string.IsNullOrEmpty(error))
+            {
+                LayoutW = data.Width;
+                LayoutH = data.Height;
+
+                int size = LayoutW * LayoutH;
+                if (size != data.Data.Length)
+                {
+                    Debug.LogError("[FieldDataManager] => LoadLayoutData: LayoutW * LayoutH != Data.Length"); 
+                    return;
+                }
+                
+                LayoutData = new byte[size];
+
+                int index = 0;
+                foreach (char c in data.Data)
+                {
+                    byte value = (byte) (c - '0');
+                    LayoutData[index++] = value;
+                }
+            }
+            else
+            {
+                Debug.LogError("[FieldDataManager] => LoadLayoutData: config not loaded");
+            }
+        });
+    }
 }

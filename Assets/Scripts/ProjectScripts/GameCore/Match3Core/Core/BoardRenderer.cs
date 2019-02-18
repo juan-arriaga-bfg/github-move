@@ -1063,8 +1063,10 @@ public partial class BoardRenderer : ECSEntity
          SectorsContainer.localPosition = new Vector3(0f, 0f, 0f);
          SectorsContainer.localRotation = Quaternion.Euler(54.5f, 0f, -45f);
          SectorsContainer.localScale = Vector3.one;
+
+         var layout = GameDataService.Current.FieldManager.LayoutData;
          
-         var sectorsMesh = GenerateMesh(width, height, size, tiles, backgroundTile, ignorablePositions);
+         var sectorsMesh = GenerateMesh(width, height, size, tiles, backgroundTile, ignorablePositions, layout);
          
          var meshGO = new GameObject("_cells");
          var meshTransform = meshGO.transform;
@@ -1085,7 +1087,7 @@ public partial class BoardRenderer : ECSEntity
          material.renderQueue = 2000;
          
          // load texture
-         var tileSprite = IconService.Current.GetSpriteById(tiles[0]);
+         var tileSprite = IconService.Current.GetSpriteById(tiles[1]);
          var tileTexture = tileSprite == null ? null : tileSprite.texture;
          material.mainTexture = tileTexture;
          
@@ -1094,7 +1096,7 @@ public partial class BoardRenderer : ECSEntity
          return SectorsContainer.transform;
      }
 
-    private Mesh GenerateMesh(int width, int height, float size, List<string> tiles, string ignorableTileName = null, IList<BoardPosition> ignorablePositions = null)
+    private Mesh GenerateMesh(int width, int height, float size, List<string> tiles, string ignorableTileName = null, IList<BoardPosition> ignorablePositions = null, byte[] layout = null)
     {
         ignorablePositions = ignorablePositions ?? new List<BoardPosition>();
         Mesh sectorsMesh = new Mesh();
@@ -1107,6 +1109,7 @@ public partial class BoardRenderer : ECSEntity
 
         var defaultColor = new Color(1f, 1f, 1f, 1f);
 
+        int layoutIndex = 0;
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -1121,10 +1124,14 @@ public partial class BoardRenderer : ECSEntity
                 {
                     if(isIgnorable)
                         continue;
-                    if ((x + y) % 2 == 0)
-                        fullTile = IconService.Current.GetSpriteById(tiles[1]);
-                    else
-                        fullTile = IconService.Current.GetSpriteById(tiles[0]);
+
+                    var id = layout == null ? (x + y) % 2 == 0 
+                                                ? tiles[1] 
+                                                : tiles[0]
+                            
+                                            : tiles[layout[layoutIndex]];
+
+                    fullTile = IconService.Current.GetSpriteById(id);
                 }
                 
 
@@ -1150,6 +1157,7 @@ public partial class BoardRenderer : ECSEntity
                 }
 
                 cellIndex = cellIndex + 4;
+                layoutIndex++;
             }
         }
         
