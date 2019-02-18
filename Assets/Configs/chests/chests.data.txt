@@ -13,6 +13,10 @@
       "Min": 1,
       "Max": 3
     },
+    "CharactersAmount": {
+      "Min": 1,
+      "Max": 3
+    },
     "PieceAmount": 5,
     "PieceWeights": [
       {
@@ -47,6 +51,10 @@
       "Min": 0,
       "Max": 0
     },
+    "CharactersAmount": {
+      "Min": 0,
+      "Max": 0
+    },
     "PieceAmount": 3,
     "PieceWeights": [
       {
@@ -66,6 +74,10 @@
       "Max": 3
     },
     "ResourcesAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "CharactersAmount": {
       "Min": 0,
       "Max": 0
     },
@@ -94,6 +106,10 @@
       "Max": 2
     },
     "ResourcesAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "CharactersAmount": {
       "Min": 1,
       "Max": 2
     },
@@ -129,6 +145,10 @@
       "Min": 0,
       "Max": 0
     },
+    "CharactersAmount": {
+      "Min": 0,
+      "Max": 0
+    },
     "PieceAmount": 5,
     "PieceWeights": [
       {
@@ -152,6 +172,10 @@
       "Max": 4
     },
     "ResourcesAmount": {
+      "Min": 0,
+      "Max": 1
+    },
+    "CharactersAmount": {
       "Min": 0,
       "Max": 1
     },
@@ -179,6 +203,10 @@
       "Max": 5
     },
     "ResourcesAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "CharactersAmount": {
       "Min": 1,
       "Max": 2
     },
@@ -215,6 +243,10 @@
       "Min": 0,
       "Max": 0
     },
+    "CharactersAmount": {
+      "Min": 0,
+      "Max": 0
+    },
     "PieceAmount": 4,
     "PieceWeights": [
       {
@@ -238,6 +270,10 @@
       "Max": 3
     },
     "ResourcesAmount": {
+      "Min": 0,
+      "Max": 1
+    },
+    "CharactersAmount": {
       "Min": 0,
       "Max": 1
     },
@@ -273,6 +309,10 @@
       "Min": 1,
       "Max": 2
     },
+    "CharactersAmount": {
+      "Min": 1,
+      "Max": 2
+    },
     "PieceAmount": 8,
     "PieceWeights": [
       {
@@ -304,6 +344,10 @@
       "Min": 1,
       "Max": 2
     },
+    "CharactersAmount": {
+      "Min": 1,
+      "Max": 2
+    },
     "PieceAmount": 4,
     "PieceWeights": [
       {
@@ -327,6 +371,10 @@
       "Max": 3
     },
     "ResourcesAmount": {
+      "Min": 1,
+      "Max": 3
+    },
+    "CharactersAmount": {
       "Min": 1,
       "Max": 3
     },
@@ -362,6 +410,10 @@
       "Min": 2,
       "Max": 4
     },
+    "CharactersAmount": {
+      "Min": 2,
+      "Max": 4
+    },
     "PieceAmount": 8,
     "PieceWeights": [
       {
@@ -393,6 +445,10 @@
       "Min": 0,
       "Max": 0
     },
+    "CharactersAmount": {
+      "Min": 0,
+      "Max": 0
+    },
     "PieceAmount": 0
   },
   {
@@ -406,6 +462,10 @@
       "Max": 8
     },
     "ResourcesAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "CharactersAmount": {
       "Min": 1,
       "Max": 2
     },
@@ -425,6 +485,10 @@
       "Min": 3,
       "Max": 4
     },
+    "CharactersAmount": {
+      "Min": 3,
+      "Max": 4
+    },
     "PieceAmount": 0
   },
   {
@@ -438,6 +502,10 @@
       "Max": 2
     },
     "ResourcesAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "CharactersAmount": {
       "Min": 0,
       "Max": 0
     },
@@ -460,6 +528,10 @@
       "Max": 3
     },
     "ResourcesAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "CharactersAmount": {
       "Min": 0,
       "Max": 0
     },
@@ -491,6 +563,10 @@
       "Min": 1,
       "Max": 2
     },
+    "CharactersAmount": {
+      "Min": 1,
+      "Max": 2
+    },
     "PieceAmount": 10,
     "PieceWeights": [
       {
@@ -500,6 +576,100 @@
       },
       {
         "Uid": "E2",
+        "Weight": 5,
+        "Override": true
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
+      }
+    ]
+  },
+  {
+    "Uid": "CH1_F",
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 10
+    },
+    "ProductionAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "ResourcesAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "CharactersAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 3,
+    "PieceWeights": [
+      {
+        "Uid": "F1",
+        "Weight": 1
+      }
+    ]
+  },
+  {
+    "Uid": "CH2_F",
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 25
+    },
+    "ProductionAmount": {
+      "Min": 1,
+      "Max": 3
+    },
+    "ResourcesAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "CharactersAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "PieceAmount": 4,
+    "PieceWeights": [
+      {
+        "Uid": "F1",
+        "Weight": 4,
+        "Override": true
+      },
+      {
+        "Uid": "F2",
+        "Weight": 3,
+        "Override": true
+      }
+    ]
+  },
+  {
+    "Uid": "CH3_F",
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 50
+    },
+    "ProductionAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "ResourcesAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "CharactersAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "PieceAmount": 10,
+    "PieceWeights": [
+      {
+        "Uid": "F1",
+        "Weight": 2,
+        "Override": true
+      },
+      {
+        "Uid": "F2",
         "Weight": 5,
         "Override": true
       },

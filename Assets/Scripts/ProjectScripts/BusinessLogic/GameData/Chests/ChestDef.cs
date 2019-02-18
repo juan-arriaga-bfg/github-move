@@ -13,6 +13,7 @@ public class ChestDef
     
     public AmountRange ProductionAmount;
     public AmountRange ResourcesAmount;
+    public AmountRange CharactersAmount;
     
     private int pieceType = -1;
     public int Piece => pieceType == -1 ? (pieceType = PieceType.Parse(Uid)) : pieceType;
