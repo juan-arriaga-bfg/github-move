@@ -88,5 +88,35 @@
         "Amount": 1
       }
     ]
+  },
+  {
+    "Uid": "MN_F",
+    "Cooldown": 540,
+    "Delay": 180,
+    "Size": 20,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 20
+    },
+    "Reward": {
+      "Currency": "CH1_A",
+      "Amount": 1
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "LastRewards": [
+      {
+        "Currency": "Soft1",
+        "Amount": 5
+      },
+      {
+        "Currency": "Hard1",
+        "Amount": 1
+      }
+    ]
   }
 ]

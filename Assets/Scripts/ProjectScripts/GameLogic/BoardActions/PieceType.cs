@@ -138,11 +138,17 @@ public static partial class PieceType
     
     public static readonly PieceTypeDef NPC_SleepingBeauty      = new PieceTypeDef{Id = 100, Abbreviations = new List<string>{ "NPC_SleepingBeauty" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     public static readonly PieceTypeDef NPC_SleepingBeautyPlaid = new PieceTypeDef{Id = 101, Abbreviations = new List<string>{ "NPC_SleepingBeautyPlaid" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    
     public static readonly PieceTypeDef NPC_Rapunzel            = new PieceTypeDef{Id = 102, Abbreviations = new List<string>{ "NPC_Rapunzel" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    
     public static readonly PieceTypeDef NPC_PussInBoots         = new PieceTypeDef{Id = 103, Abbreviations = new List<string>{ "NPC_PussInBoots" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    
     public static readonly PieceTypeDef NPC_Gnome               = new PieceTypeDef{Id = 104, Abbreviations = new List<string>{ "NPC_Gnome" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    
     public static readonly PieceTypeDef NPC_PeterPen            = new PieceTypeDef{Id = 105, Abbreviations = new List<string>{ "NPC_PeterPen" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    
     public static readonly PieceTypeDef NPC_RedHood             = new PieceTypeDef{Id = 106, Abbreviations = new List<string>{ "NPC_RedHood" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    
     public static readonly PieceTypeDef NPC_Mermaid             = new PieceTypeDef{Id = 107, Abbreviations = new List<string>{ "NPC_Mermaid" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     public static readonly PieceTypeDef NPC_8                   = new PieceTypeDef{Id = 108, Abbreviations = new List<string>{ "NPC_8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     public static readonly PieceTypeDef NPC_9                   = new PieceTypeDef{Id = 109, Abbreviations = new List<string>{ "NPC_9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
