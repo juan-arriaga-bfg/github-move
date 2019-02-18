@@ -15,6 +15,7 @@ public class UIChestMessageWindowModel : IWWindowModel
         
         icons = AddIcons(icons, GameDataService.Current.LevelsManager.PieceWeights);
         icons = AddIcons(icons, GameDataService.Current.LevelsManager.ResourcesWeights);
+        icons = AddIcons(icons, GameDataService.Current.LevelsManager.CharactersWeights);
         
         return icons;
     }

@@ -37,7 +37,7 @@ public static partial class CurrencyHelper
         
         var board = BoardService.Current.FirstBoard;
         
-        board.ActionExecutor.AddAction(new SpawnRewardPiecesAction
+        board.ActionExecutor.PerformAction(new SpawnRewardPiecesAction
         {
             From = point,
             Pieces = piecesReward,

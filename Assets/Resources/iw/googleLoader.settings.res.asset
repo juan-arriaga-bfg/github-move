@@ -16,15 +16,15 @@ MonoBehaviour:
   - Key: chests
     Link: 1SnYRNQBmFgpeb5BJmQ5rwUWKHYBwPFNrFHzeW4OxWXs
     Route: parse
-    Pattern: '[{"Uid":"","Price":{"Currency":"","Amount":0},"ProductionAmount":{"Min":0,"Max":0},"ResourcesAmount":{"Min":0,"Max":0},"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0,"":"","Override":true}]}]'
+    Pattern: '[{"Uid":"","ProductionAmount":{"Min":0,"Max":0},"ResourcesAmount":{"Min":0,"Max":0},"CharactersAmount":{"Min":0,"Max":0},"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0,"":"","Override":true}]}]'
   - Key: levels
     Link: 1q0Pxo7d7saZDkpj2IXPB94nnAqKviZ0lZK4QvVfG0vE
     Route: parse
-    Pattern: '[{"Index":0,"Price":{"Currency": "","Amount":0},"Rewards":[{"Currency":"","Amount":0}],"OrdersWeights":[{"Uid":"","Weight":0,"":"","Override":true}],"PieceWeights":[{"Uid":"","Weight":0,"":"","Override":true}],"ResourcesWeights":[{"Uid":"","Weight":0,"":"","Override":true}],"OrdersDelay":0}]'
+    Pattern: '[{"Index":0,"Price":{"Currency": "","Amount":0},"Rewards":[{"Currency":"","Amount":0}],"OrdersWeights":[{"Uid":"","Weight":0,"":"","Override":true}],"PieceWeights":[{"Uid":"","Weight":0,"":"","Override":true}],"ResourcesWeights":[{"Uid":"","Weight":0,"":"","Override":true}],"CharactersWeights":[{"Uid":"","Weight":0,"":"","Override":true}],"OrdersDelay":0}]'
   - Key: obstacles
     Link: 16Q9fxlFX40VRx6u1kwfMvWm1GuvK8MaGs117g5Pkd2g
     Route: parse
-    Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"ProductionAmount":{"Min":0,"Max":0},"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestId":""}]'
+    Pattern: '[{"Uid":"","Delay":0,"Price":{"Currency":"","Amount":0},"StepRewards":[{"Currency":"","Amount":0}],"ProductionAmount":{"Min":0,"Max":0},"CharactersAmount":{"Min":0,"Max":0},"PieceAmount":0,"PieceWeights":[{"Uid":"","Weight":0}],"ChestId":""}]'
   - Key: field
     Link: 1DxXiEIGyQKe5wvkvazAS3avIatA5AiqAbAJP-c3ApqY
     Route: parseField

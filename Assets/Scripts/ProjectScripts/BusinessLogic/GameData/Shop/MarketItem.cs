@@ -146,9 +146,8 @@ public class MarketItem
         foreach (var id in pieces)
         {
             var key = definition.GetFirst(id);
-            int value;
 
-            if (chains.TryGetValue(key, out value) == false)
+            if (chains.TryGetValue(key, out var value) == false)
             {
                 chains.Add(key, id);
                 continue;

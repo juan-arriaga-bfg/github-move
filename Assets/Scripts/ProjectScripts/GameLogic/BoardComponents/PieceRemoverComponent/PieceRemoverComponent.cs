@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using IW.Content.ContentModule;
 using Lean.Touch;
 using UnityEngine;
 
@@ -43,15 +41,19 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
 
     public bool IsActive => isActive;
 
+#if DEBUG
+    private bool IsDebugRemove => Input.GetKey(KeyCode.LeftShift) || !DevTools.IsRemoverDebugEnabled();
+#endif
+    
     private PieceTypeFilter Filter
     {
         get
         {
             // Debug hack: press LSHIFT to allow to remove any piece
-#if UNITY_EDITOR
-            return Input.GetKey(KeyCode.LeftShift) ? PieceTypeFilter.Default : PieceTypeFilter.Removable;
+#if DEBUG
+            return IsDebugRemove ? PieceTypeFilter.Default : PieceTypeFilter.Removable;
 #else
-             return PieceTypeFilter.Removable;
+            return PieceTypeFilter.Removable;
 #endif
         }
     }
@@ -269,9 +271,9 @@ public class PieceRemoverComponent : ECSEntity, IECSSystem
 
         if (isLocked && Filter != PieceTypeFilter.Default) return false;
 
-        var ids = PieceType.GetIdsByFilter(Filter);
-        
-        return ids.Contains(pieceEntity.PieceType);
+        if (pieceEntity.PieceType == PieceType.Empty.Id) return false;
+        var def = PieceType.GetDefById(pieceEntity.PieceType);
+        return def.Filter.Has(Filter);
     }
 
     public void Execute()

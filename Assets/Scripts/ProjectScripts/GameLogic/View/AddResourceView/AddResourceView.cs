@@ -54,12 +54,9 @@ public class AddResourceView : BoardElementView
 	
 	public static void Show(BoardPosition position, List<CurrencyPair> resource)
 	{
-		var sequence = DOTween.Sequence();
-        
 		for (var i = 0; i < resource.Count; i++)
 		{
-			var reward = resource[i];
-			sequence.InsertCallback(0.5f * i, () => Show(position, reward));
+			Show(position, resource[i], 0.5f * i);
 		}
 	}
 
