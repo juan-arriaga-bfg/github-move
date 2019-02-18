@@ -21,7 +21,7 @@
         "Weight": 1
       }
     ],
-    "OrdersDelay": 180
+    "OrdersDelay": 15
   },
   {
     "Index": 2,
@@ -52,7 +52,7 @@
         "Override": true
       }
     ],
-    "OrdersDelay": 180
+    "OrdersDelay": 15
   },
   {
     "Index": 3,
@@ -73,19 +73,19 @@
     "PieceWeights": [
       {
         "Uid": "PR_A1",
-        "Weight": 2
+        "Weight": 3
       },
       {
         "Uid": "PR_C1",
-        "Weight": 2,
+        "Weight": 1,
         "Override": true
       },
       {
         "Uid": "PR_B1",
-        "Weight": 1
+        "Weight": 2
       }
     ],
-    "OrdersDelay": 120
+    "OrdersDelay": 15
   },
   {
     "Index": 4,
@@ -121,17 +121,17 @@
     "PieceWeights": [
       {
         "Uid": "PR_A1",
-        "Weight": 2,
+        "Weight": 3,
         "Override": true
       },
       {
         "Uid": "PR_C1",
-        "Weight": 2,
+        "Weight": 1,
         "Override": true
       },
       {
         "Uid": "PR_B1",
-        "Weight": 1,
+        "Weight": 2,
         "Override": true
       }
     ],
@@ -142,10 +142,10 @@
       },
       {
         "Uid": "PR_C5",
-        "Weight": 2
+        "Weight": 1
       }
     ],
-    "OrdersDelay": 120
+    "OrdersDelay": 15
   },
   {
     "Index": 5,
@@ -166,17 +166,17 @@
     "PieceWeights": [
       {
         "Uid": "PR_C1",
-        "Weight": 2,
+        "Weight": 1,
         "Override": true
       },
       {
         "Uid": "PR_B1",
-        "Weight": 2,
+        "Weight": 1,
         "Override": true
       },
       {
         "Uid": "PR_A1",
-        "Weight": 1,
+        "Weight": 2,
         "Override": true
       }
     ],
@@ -186,7 +186,7 @@
         "Weight": 1
       }
     ],
-    "OrdersDelay": 180
+    "OrdersDelay": 15
   },
   {
     "Index": 6,
@@ -222,7 +222,7 @@
     "PieceWeights": [
       {
         "Uid": "PR_A1",
-        "Weight": 1,
+        "Weight": 2,
         "Override": true
       },
       {
@@ -232,11 +232,11 @@
       },
       {
         "Uid": "PR_C1",
-        "Weight": 2,
+        "Weight": 1,
         "Override": true
       }
     ],
-    "OrdersDelay": 180
+    "OrdersDelay": 15
   },
   {
     "Index": 7,
@@ -263,7 +263,7 @@
     "PieceWeights": [
       {
         "Uid": "PR_A1",
-        "Weight": 1,
+        "Weight": 2,
         "Override": true
       },
       {
@@ -273,7 +273,7 @@
       },
       {
         "Uid": "PR_C1",
-        "Weight": 2,
+        "Weight": 1,
         "Override": true
       },
       {
@@ -285,11 +285,12 @@
     "ResourcesWeights": [
       {
         "Uid": "PR_B5",
-        "Weight": 2
+        "Weight": 2,
+        "Override": true
       },
       {
         "Uid": "PR_A5",
-        "Weight": 1,
+        "Weight": 3,
         "Override": true
       },
       {
@@ -298,7 +299,7 @@
         "Override": true
       }
     ],
-    "OrdersDelay": 180
+    "OrdersDelay": 30
   },
   {
     "Index": 8,
@@ -345,7 +346,7 @@
       },
       {
         "Uid": "PR_D1",
-        "Weight": 1,
+        "Weight": 2,
         "Override": true
       }
     ],
@@ -355,7 +356,7 @@
         "Weight": 2
       }
     ],
-    "OrdersDelay": 180
+    "OrdersDelay": 30
   },
   {
     "Index": 9,
@@ -411,7 +412,7 @@
         "Override": true
       }
     ],
-    "OrdersDelay": 240
+    "OrdersDelay": 30
   },
   {
     "Index": 10,
@@ -472,7 +473,7 @@
         "Override": true
       }
     ],
-    "OrdersDelay": 240
+    "OrdersDelay": 30
   },
   {
     "Index": 11,
@@ -529,7 +530,7 @@
         "Weight": 2
       }
     ],
-    "OrdersDelay": 60
+    "OrdersDelay": 30
   },
   {
     "Index": 12,
@@ -581,7 +582,7 @@
         "Weight": 1
       }
     ],
-    "OrdersDelay": 240
+    "OrdersDelay": 30
   },
   {
     "Index": 13,
@@ -621,7 +622,7 @@
         "Weight": 1
       }
     ],
-    "OrdersDelay": 240
+    "OrdersDelay": 30
   },
   {
     "Index": 14,
@@ -639,7 +640,7 @@
         "Amount": 5
       }
     ],
-    "OrdersDelay": 240
+    "OrdersDelay": 30
   },
   {
     "Index": 15,
@@ -657,7 +658,7 @@
         "Amount": 5
       }
     ],
-    "OrdersDelay": 240
+    "OrdersDelay": 30
   },
   {
     "Index": 16,
@@ -675,7 +676,7 @@
         "Amount": 5
       }
     ],
-    "OrdersDelay": 240
+    "OrdersDelay": 30
   },
   {
     "Index": 17,
@@ -693,6 +694,6 @@
         "Amount": 5
       }
     ],
-    "OrdersDelay": 240
+    "OrdersDelay": 30
   }
 ]
