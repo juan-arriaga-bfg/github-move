@@ -6,6 +6,7 @@ using UnityEngine;
 public static class TutorialBuilder
 {
     public const int LockPRStepIndex = 12;
+    public const int LockEnergyStep = 14;
     public const int LockMarketStepIndex = 15;
     public const int LockOrderStepIndex = 18;
     public const int FirstOrderStepIndex = 19;
@@ -240,6 +241,8 @@ public static class TutorialBuilder
             }
             case 14: // lock buttons Worker, Energy, Codex
             {
+                if(LockEnergyStep != index) Debug.LogError("Tutorial Error: LockEnergyStep != index");
+                
                 step = new UiLockTutorialStep {Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Worker, UiLockTutorialItem.Energy, UiLockTutorialItem.Codex}};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
