@@ -35,6 +35,8 @@ public class CharacterMatchActionBuilder : DefaultMatchActionBuilder, IMatchActi
 
         if (countForMatchDefault == -1 || matchField.Count < countForMatchDefault) return null;
         
+        GameDataService.Current.LevelsManager.UnlockNewCharacter(nextType);
+        
         // collect and purchase rewards before action
         return CreateAction(new List<int>{nextType}, definition.Context.PositionsCache.GetPiecePositionsByType(pieceType), position, pieceType);
     }
