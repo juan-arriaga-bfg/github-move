@@ -109,6 +109,7 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.MN_B.Id, R.MN_BPiece);
         dict.Add(PieceType.MN_C.Id, R.MN_CPiece);
         dict.Add(PieceType.MN_D.Id, R.MN_DPiece);
+        dict.Add(PieceType.MN_F.Id, R.MN_FPiece);
         
 #endregion
         
@@ -139,6 +140,10 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.CH1_E.Id, R.CH1_EPiece);
         dict.Add(PieceType.CH2_E.Id, R.CH2_EPiece);
         dict.Add(PieceType.CH3_E.Id, R.CH3_EPiece);
+        
+        dict.Add(PieceType.CH1_F.Id, R.CH1_FPiece);
+        dict.Add(PieceType.CH2_F.Id, R.CH2_FPiece);
+        dict.Add(PieceType.CH3_F.Id, R.CH3_FPiece);
         
 #endregion
         
