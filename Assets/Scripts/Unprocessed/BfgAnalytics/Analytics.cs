@@ -20,6 +20,11 @@ namespace BfgAnalytics
         {
             return JsonDataGroup.Standart | JsonDataGroup.Userstats | JsonDataGroup.Balances | JsonDataGroup.Flags | JsonDataGroup.Story;
         }
+
+        public static JsonDataGroup TutorialJsonData()
+        {
+            return JsonDataGroup.Standart;
+        }
         
         public static void SendQuestStartEvent(string questId)
         {
@@ -49,7 +54,27 @@ namespace BfgAnalytics
         public static void SendLevelReachedEvent(int level)
         {
             AnalyticsService.Current?.Event("progress", "level", level.ToString(), null, DefaultJsonData());
-        }        
+        }
+
+		public static void SendTutorialStartStepEvent(string name)
+        {
+            JSONNode customJsonData = new JSONObject();
+            
+            customJsonData["name"] = name;
+            customJsonData["action"] = "start";
+            
+            AnalyticsService.Current?.Event("ftue", null, null, null, TutorialJsonData(), customJsonData);
+        }
+
+        public static void SendTutorialEndStepEvent(string name)
+        {
+            JSONNode customJsonData = new JSONObject();
+            
+            customJsonData["name"] = name;
+            customJsonData["action"] = "end";
+            
+            AnalyticsService.Current?.Event("ftue", null, null, null, TutorialJsonData(), customJsonData);
+        }
         
         public static void SendPurchase(string location, string reason, List<CurrencyPair> spend, List<CurrencyPair> collect, bool isIap, bool isFree)
         {

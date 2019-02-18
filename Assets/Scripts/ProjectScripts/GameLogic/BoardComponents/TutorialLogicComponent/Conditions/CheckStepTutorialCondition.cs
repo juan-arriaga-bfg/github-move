@@ -4,6 +4,6 @@
     
     public override bool Check()
     {
-        return context.Context.Save.Contains(Target);
+        return context.Context.SaveCompleted.Contains(Target);
     }
 }
