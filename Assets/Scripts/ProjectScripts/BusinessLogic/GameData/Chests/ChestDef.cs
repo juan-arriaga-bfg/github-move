@@ -5,10 +5,9 @@ using UnityEngine;
 public class ChestDef
 {
     public string Uid;
-    public int Time;
-    public CurrencyPair Price;
     
     public int PieceAmount;
+    
     public List<ItemWeight> PieceWeights;
     
     public AmountRange ProductionAmount;
