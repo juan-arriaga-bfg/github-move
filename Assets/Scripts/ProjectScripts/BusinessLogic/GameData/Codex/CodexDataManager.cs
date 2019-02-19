@@ -353,7 +353,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
                 PieceDef = pieceDef,
                 PieceTypeDef = pieceTypeDef,
                 ShowArrow = i != chain.Count - 1,
-                PendingReward = isPendingReward ? pieceDef.UnlockBonus : null,
+                PendingReward = isPendingReward ? pieceDef?.UnlockBonus : null,
             };
             
             if (isUnlocked)

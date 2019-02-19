@@ -178,7 +178,7 @@ public class CodexItem : IWUIWindowViewController
     
     private string GetCaption()
     {
-        if (def == null)
+        if (def?.PieceDef == null)
             return "";
 
         if (def.PieceDef.SpawnResources != null)
