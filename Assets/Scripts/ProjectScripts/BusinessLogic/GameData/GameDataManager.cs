@@ -57,9 +57,9 @@
         RegisterComponent(new ConversationsDataManager());
         RegisterComponent(new QuestsDataManager());
         RegisterComponent(new FogsDataManager());
-        RegisterComponent(new LevelsDataManager());
         RegisterComponent(new FieldDataManager());
-        RegisterComponent(new CodexDataManager()); // should be the last one
+        RegisterComponent(new CodexDataManager());
+        RegisterComponent(new LevelsDataManager());
         RegisterComponent(new ConstantsDataManager());
         RegisterComponent(new ShopDataManager());
         RegisterComponent(new OrdersDataManager());

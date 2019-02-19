@@ -7,7 +7,19 @@ public class LevelsDataManager : SequenceData, IDataLoader<List<LevelsDef>>
 	public override int Guid => ComponentGuid;
 	
 	public List<LevelsDef> Levels;
-	
+
+	private MatchDefinitionComponent cachedMatchDef;
+	private MatchDefinitionComponent CachedMatchDef
+	{
+		get
+		{
+			if (cachedMatchDef != null) return cachedMatchDef;
+			
+			return (cachedMatchDef = BoardService.Current?.FirstBoard?.BoardLogic?.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid))
+			       ?? new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
+		}
+	}
+
 	public override void Reload()
 	{
 		base.Reload();
@@ -44,6 +56,15 @@ public class LevelsDataManager : SequenceData, IDataLoader<List<LevelsDef>>
 					
 					Levels.Add(next);
 				}
+
+				var ids = PieceType.GetIdsByFilter(PieceTypeFilter.Character);
+
+				foreach (var id in ids)
+				{
+					if (GameDataService.Current.CodexManager.IsPieceUnlocked(id) == false) continue;
+					
+					FiltrationCharactersWeights(id);
+				}
 				
 				AddSequence(Currency.Level.Name, Levels[Level - 1].PieceWeights);
 				AddSequence(Currency.Resources.Name, Levels[Level - 1].ResourcesWeights);
@@ -74,4 +95,27 @@ public class LevelsDataManager : SequenceData, IDataLoader<List<LevelsDef>>
 	public List<ItemWeight> CharactersWeights => Levels[Level - 1].CharactersWeights;
 	
     public int OrdersDelay => Levels[Level - 1].OrdersDelay;
+
+    public void UnlockNewCharacter(int id)
+    {
+	    FiltrationCharactersWeights(id);
+	    GetSequence(Currency.Character.Name).Reinit(Levels[Level - 1].CharactersWeights);
+    }
+    
+    private void FiltrationCharactersWeights(int id)
+    {
+	    var chain = CachedMatchDef.GetChain(id);
+	    
+	    foreach (var def in Levels)
+	    {
+		    for (var i = def.CharactersWeights.Count - 1; i >= 0; i--)
+		    {
+			    var weights = def.CharactersWeights[i];
+			    
+			    if(chain.Contains(weights.Piece) == false) continue;
+
+			    def.CharactersWeights.RemoveAt(i);
+		    }
+	    }
+    }
 }
