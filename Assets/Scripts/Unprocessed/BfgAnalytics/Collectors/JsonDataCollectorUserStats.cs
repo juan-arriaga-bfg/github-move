@@ -24,7 +24,7 @@ namespace BfgAnalytics
                                      .Select(id => matchDefinition.GetFirst(id)).Distinct().ToList();
             
             chainNames = new Dictionary<int, string>();
-            chainNameRegex = new Regex(@"^([A-Z]+)\d+");
+            chainNameRegex = new Regex(@"^([A-Za-z_]+)\d+");
         }
 
         public JSONNode CollectData()
