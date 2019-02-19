@@ -1,19 +1,22 @@
-using System;
-using System.IO;
-
-public class LoggerTransportDefaultFile : LoggerTransportCustomFile
+namespace IW
 {
-    public LoggerTransportDefaultFile() 
+    using System;
+    using System.IO;
+
+    public class LoggerTransportDefaultFile : LoggerTransportCustomFile
     {
-        string personalDir = Environment.SpecialFolder.MyDocuments.ToString();
-        string pathToLog = Path.Combine(personalDir, "GameLogs");
-        string fullPath  = Path.Combine(pathToLog, "Unity.log");
-
-        if (!Directory.Exists(pathToLog))
+        public LoggerTransportDefaultFile()
         {
-            Directory.CreateDirectory(pathToLog);
-        }
+            string personalDir = Environment.SpecialFolder.MyDocuments.ToString();
+            string pathToLog = Path.Combine(personalDir, "GameLogs");
+            string fullPath = Path.Combine(pathToLog,    "Unity.log");
 
-        Init(fullPath, false);
+            if (!Directory.Exists(pathToLog))
+            {
+                Directory.CreateDirectory(pathToLog);
+            }
+
+            Init(fullPath, false);
+        }
     }
 }

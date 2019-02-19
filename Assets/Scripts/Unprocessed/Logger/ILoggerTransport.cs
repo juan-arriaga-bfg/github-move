@@ -1,6 +1,10 @@
-﻿public interface ILoggerTransport
+﻿namespace IW
 {
-    void Log(object message);
-    void LogError(object message);
-	void LogWarning(object message);
+    public interface ILoggerTransport
+    {
+        void Log(object message);
+        void LogError(object message);
+        void LogWarning(object message);
+    }
 }
+

@@ -1,26 +1,29 @@
-using System.Text;
-
-public class LoggerTransportStringBuilder : ILoggerTransport
+namespace IW
 {
-    private StringBuilder m_sb = new StringBuilder();
+    using System.Text;
 
-    public string GetLog()
+    public class LoggerTransportStringBuilder : ILoggerTransport
     {
-        return m_sb.ToString();
-    }
+        private StringBuilder m_sb = new StringBuilder();
 
-    public void Log(object message)
-    {
-        m_sb.AppendLine(message.ToString());
-    }
+        public string GetLog()
+        {
+            return m_sb.ToString();
+        }
 
-    public void LogError(object message)
-    {
-        m_sb.AppendLine("[Error] " + message);
-    }
+        public void Log(object message)
+        {
+            m_sb.AppendLine(message.ToString());
+        }
 
-    public void LogWarning(object message)
-    {
-        m_sb.AppendLine("[Warning] " + message);
+        public void LogError(object message)
+        {
+            m_sb.AppendLine("[Error] " + message);
+        }
+
+        public void LogWarning(object message)
+        {
+            m_sb.AppendLine("[Warning] " + message);
+        }
     }
 }

@@ -1,77 +1,89 @@
 ﻿using System.IO;
 
-public class LoggerTransportCustomFile : ILoggerTransport
+namespace IW
 {
-    private StreamWriter m_sw;
-    private string m_filePath;
-
-    public string FilePath
+    public class LoggerTransportCustomFile : ILoggerTransport
     {
-        get { return m_filePath; }
-    }
+        private StreamWriter m_sw;
+        private string m_filePath;
 
-    protected LoggerTransportCustomFile()
-    {
-        
-    }
-
-    public LoggerTransportCustomFile(string fullPath, bool append = false)
-    {
-        Init(fullPath, append);
-    }
-
-    protected void Init(string fullPath, bool append)
-    {
-        m_filePath = fullPath;
-        var dir = Path.GetDirectoryName(m_filePath);
-        if (!Directory.Exists(dir))
+        public string FilePath
         {
-            Directory.CreateDirectory(dir);
+            get { return m_filePath; }
         }
 
-        m_sw = append ? File.AppendText(m_filePath) : File.CreateText(m_filePath);
-    }
-
-    private bool CheckInit()
-    {
-        return m_sw != null;
-    }
-
-    private void KillStreamWriter(StreamWriter sw)
-    {
-        if (sw != null)
+        protected LoggerTransportCustomFile()
         {
-            sw.Flush();
-            sw.Close();
+
         }
-    }
 
-    ~LoggerTransportCustomFile()
-    {
-        KillStreamWriter(m_sw);
-    }
+        public LoggerTransportCustomFile(string fullPath, bool append = false)
+        {
+            Init(fullPath, append);
+        }
 
-    public void Log(object message)
-    {
-        if (!CheckInit()) {return;}
+        protected void Init(string fullPath, bool append)
+        {
+            m_filePath = fullPath;
+            var dir = Path.GetDirectoryName(m_filePath);
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
 
-        m_sw.WriteLine(message);
-        m_sw.Flush();
-    }
+            m_sw = append ? File.AppendText(m_filePath) : File.CreateText(m_filePath);
+        }
 
-    public void LogError(object message)
-    {
-        if (!CheckInit()) { return; }
+        private bool CheckInit()
+        {
+            return m_sw != null;
+        }
 
-        m_sw.WriteLine("[Error] " + message);
-        m_sw.Flush();
-    }
+        private void KillStreamWriter(StreamWriter sw)
+        {
+            if (sw != null)
+            {
+                sw.Flush();
+                sw.Close();
+            }
+        }
 
-    public void LogWarning(object message)
-    {
-        if (!CheckInit()) { return; }
+        ~LoggerTransportCustomFile()
+        {
+            KillStreamWriter(m_sw);
+        }
 
-        m_sw.WriteLine("[Warning] " + message);
-        m_sw.Flush();
+        public void Log(object message)
+        {
+            if (!CheckInit())
+            {
+                return;
+            }
+
+            m_sw.WriteLine(message);
+            m_sw.Flush();
+        }
+
+        public void LogError(object message)
+        {
+            if (!CheckInit())
+            {
+                return;
+            }
+
+            m_sw.WriteLine("[Error] " + message);
+            m_sw.Flush();
+        }
+
+        public void LogWarning(object message)
+        {
+            if (!CheckInit())
+            {
+                return;
+            }
+
+            m_sw.WriteLine("[Warning] " + message);
+            m_sw.Flush();
+        }
     }
 }

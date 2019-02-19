@@ -1,5 +1,6 @@
 ﻿#if UNITY_IOS
-
+namespace IW
+{
     using System.Runtime.InteropServices;
 
     public class LoggerTransportNSLog : ILoggerTransport
@@ -22,5 +23,5 @@
             __LogMessageUsingNSLog("[Warning] " + message);
         }
     }
-
+}
 #endif

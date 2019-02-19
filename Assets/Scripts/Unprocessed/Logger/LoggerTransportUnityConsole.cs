@@ -1,17 +1,20 @@
-﻿public class LoggerTransportUnityConsole : ILoggerTransport
+﻿namespace IW
 {
-    public void Log(object message)
+    public class LoggerTransportUnityConsole : ILoggerTransport
     {
-        UnityEngine.Debug.Log(message);
-    }
+        public void Log(object message)
+        {
+            UnityEngine.Debug.Log(message);
+        }
 
-    public void LogError(object message)
-    {
-        UnityEngine.Debug.LogError(message);
-    }
+        public void LogError(object message)
+        {
+            UnityEngine.Debug.LogError(message);
+        }
 
-    public void LogWarning(object message)
-    {
-        UnityEngine.Debug.LogWarning(message.ToString());
+        public void LogWarning(object message)
+        {
+            UnityEngine.Debug.LogWarning(message.ToString());
+        }
     }
 }
