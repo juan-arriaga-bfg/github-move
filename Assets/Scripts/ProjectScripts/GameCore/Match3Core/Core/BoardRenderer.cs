@@ -1133,30 +1133,33 @@ public partial class BoardRenderer : ECSEntity
 
                     fullTile = IconService.Current.GetSpriteById(id);
                 }
-                
 
-                vertices.Add(new Vector3(x * borderWidth, (y + 1) * borderWidth, 0));
-                vertices.Add(new Vector3((x + 1) * borderWidth, (y + 1) * borderWidth, 0));
-                vertices.Add(new Vector3(x * borderWidth, y * borderWidth, 0));
-                vertices.Add(new Vector3((x + 1) * borderWidth, y * borderWidth, 0));
-
-
-                tris.Add(cellIndex);
-                tris.Add(cellIndex + 1);
-                tris.Add(cellIndex + 2);
-
-                tris.Add(cellIndex + 2);
-                tris.Add(cellIndex + 1);
-                tris.Add(cellIndex + 3);
-                
-                for (int i = 0; i < fullTile.uv.Length; i++)
+                if (fullTile != null && layout[layoutIndex] != 1)
                 {
-                    var uvPos = fullTile.uv[i];
-                    uv.Add(uvPos);
-                    colors.Add(defaultColor);
+                    vertices.Add(new Vector3(x * borderWidth,       (y + 1) * borderWidth, 0));
+                    vertices.Add(new Vector3((x + 1) * borderWidth, (y + 1) * borderWidth, 0));
+                    vertices.Add(new Vector3(x * borderWidth,       y * borderWidth,       0));
+                    vertices.Add(new Vector3((x + 1) * borderWidth, y * borderWidth,       0));
+
+
+                    tris.Add(cellIndex);
+                    tris.Add(cellIndex + 1);
+                    tris.Add(cellIndex + 2);
+
+                    tris.Add(cellIndex + 2);
+                    tris.Add(cellIndex + 1);
+                    tris.Add(cellIndex + 3);
+
+                    for (int i = 0; i < fullTile.uv.Length; i++)
+                    {
+                        var uvPos = fullTile.uv[i];
+                        uv.Add(uvPos);
+                        colors.Add(defaultColor);
+                    }
+                    
+                    cellIndex = cellIndex + 4;
                 }
 
-                cellIndex = cellIndex + 4;
                 layoutIndex++;
             }
         }
@@ -1206,5 +1209,12 @@ public partial class BoardRenderer : ECSEntity
         material.mainTexture = tileTexture;
 
         meshRenderer.material = material;
+    }
+
+    public void CreateBackgroundWater()
+    {
+        var waterPrefab = ContentService.Current.GetObjectByName(R.BackgroundWater);
+        GameObject water = (GameObject) GameObject.Instantiate(waterPrefab);
+        water.transform.localPosition = Vector3.zero;
     }
 }

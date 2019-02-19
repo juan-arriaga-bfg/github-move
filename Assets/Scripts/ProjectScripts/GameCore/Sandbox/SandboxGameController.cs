@@ -112,6 +112,8 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.Init(new PieceBuildersBuilder().Build());
 
+        boardController.RendererContext.CreateBackgroundWater();
+        
         boardController.BoardDef.SectorsGridView = boardController.RendererContext.GenerateField
         (
             boardController.BoardDef.Width,

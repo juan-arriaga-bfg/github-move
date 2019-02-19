@@ -330,4 +330,5 @@ public class R
      public const string NPC6_FPiece = "NPC6_FPiece";
      public const string NPC7_FPiece = "NPC7_FPiece";
      public const string NPC8_FPiece = "NPC8_FPiece";
+     public const string BackgroundWater = "BackgroundWater";
 }
