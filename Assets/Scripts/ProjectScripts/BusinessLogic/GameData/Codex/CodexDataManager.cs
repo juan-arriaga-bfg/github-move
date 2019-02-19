@@ -48,9 +48,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
     }
 
     public void Reload()
-    {
-        cachedMatchDef = null;
-               
+    {  
         Items = null;
         ClearCodexContentCache();
 
@@ -138,12 +136,11 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
     private void UnlockPiece(int id)
     {
-        int firstInChain = CachedMatchDef().GetFirst(id);
+        int firstInChain = GameDataService.Current.MatchDefinition.GetFirst(id);
 
         // Debug.Log($"UnlockPiece: first in chain for {id} is {firstInChain}");
-        
-        CodexChainState state;
-        if (Items.TryGetValue(firstInChain, out state))
+
+        if (Items.TryGetValue(firstInChain, out var state))
         {
             if (state.Unlocked.Add(id))
             {
@@ -198,15 +195,9 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
             return true;
         }
 
-        int firstInChain = CachedMatchDef().GetFirst(id);
-
-        CodexChainState state;
-        if (Items.TryGetValue(firstInChain, out state))
-        {
-            return state.Unlocked.Contains(id);
-        }
-
-        return false;
+        var firstInChain = GameDataService.Current.MatchDefinition.GetFirst(id);
+        
+        return Items.TryGetValue(firstInChain, out var state) && state.Unlocked.Contains(id);
     }
 
     public bool GetChainState(int firstId, out CodexChainState state)
@@ -407,10 +398,9 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
     
     public void ClaimRewardForPiece(int pieceId)
     {
-        var chainId = CachedMatchDef().GetFirst(pieceId);
-        
-        CodexChainState chainState;
-        if (Items.TryGetValue(chainId, out chainState))
+        var chainId = GameDataService.Current.MatchDefinition.GetFirst(pieceId);
+
+        if (Items.TryGetValue(chainId, out var chainState))
         {
             chainState.PendingReward.Remove(pieceId);
         }
