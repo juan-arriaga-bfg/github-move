@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 44, y: 64}
+  m_AnchoredPosition: {x: 4.2, y: 26.9}
+  m_SizeDelta: {x: 95.83, y: 139.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222377245764305432
 CanvasRenderer:
@@ -65,7 +65,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 0fe73a1314808d74aa9f1910d8387aef, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36938820236f30342b884da59eea7576, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -84,7 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224866718609007234}
   m_Layer: 31
-  m_Name: NPC_7Icon
+  m_Name: NPC_DIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
