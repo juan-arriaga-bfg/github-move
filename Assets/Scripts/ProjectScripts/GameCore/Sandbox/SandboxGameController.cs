@@ -129,6 +129,8 @@ public class SandboxGameController : MonoBehaviour
             null//ignorablePositions:GenereateIgnorable(boardController)
         );
         
+        boardController.RendererContext.CreateBorders();
+        
         var widthShift = boardController.BoardDef.Width / 4;
         var heightShift = boardController.BoardDef.Height / 4;
         

@@ -17,7 +17,7 @@ public class FieldDataManager : IECSComponent, IDataManager
 
     public int LayoutW;
     public int LayoutH;
-    public byte[] LayoutData;
+    public int[] LayoutData;
 	
 	public void OnRegisterEntity(ECSEntity entity)
 	{
@@ -69,12 +69,13 @@ public class FieldDataManager : IECSComponent, IDataManager
                     return;
                 }
                 
-                LayoutData = new byte[size];
+                LayoutData = new int[size];
 
                 int index = 0;
-                foreach (char c in data.Data)
+                for (var i = 0; i < data.Data.Length; i++)
                 {
-                    byte value = (byte) (c - '0');
+                    char c = data.Data[i];
+                    int value = c - '0';
                     LayoutData[index++] = value;
                 }
             }
@@ -83,5 +84,10 @@ public class FieldDataManager : IECSComponent, IDataManager
                 Debug.LogError("[FieldDataManager] => LoadLayoutData: config not loaded");
             }
         });
+    }
+
+    public int GetCellType(int x, int y)
+    {
+        return LayoutData[x * LayoutW + (LayoutH - y - 1)];
     }
 }

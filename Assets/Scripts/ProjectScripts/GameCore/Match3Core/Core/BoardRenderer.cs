@@ -1096,7 +1096,7 @@ public partial class BoardRenderer : ECSEntity
          return SectorsContainer.transform;
      }
 
-    private Mesh GenerateMesh(int width, int height, float size, List<string> tiles, string ignorableTileName = null, IList<BoardPosition> ignorablePositions = null, byte[] layout = null)
+    private Mesh GenerateMesh(int width, int height, float size, List<string> tiles, string ignorableTileName = null, IList<BoardPosition> ignorablePositions = null, int[] layout = null)
     {
         ignorablePositions = ignorablePositions ?? new List<BoardPosition>();
         Mesh sectorsMesh = new Mesh();
@@ -1215,5 +1215,68 @@ public partial class BoardRenderer : ECSEntity
     {
         var waterPrefab = ContentService.Current.GetObjectByName(R.BackgroundWater);
         GameObject water = (GameObject) GameObject.Instantiate(waterPrefab);
+    }
+
+    public void CreateBorders()
+    {
+        var boardDef = context.BoardDef;
+        
+        var fieldManager = GameDataService.Current.FieldManager;
+
+        var w = fieldManager.LayoutW;
+        var h = fieldManager.LayoutH;
+
+        GameObject root = new GameObject();
+        
+        bool IsCellExists(int x, int y)
+        {
+            return x >= 0 && y >= 0 && x < w && y < h;
+        }
+
+        void Create(int x, int y, string item)
+        {
+            var prefab = ContentService.Current.GetObjectByName(item);
+            GameObject go = (GameObject) GameObject.Instantiate(prefab);
+            go.transform.position = boardDef.GetPiecePosition(x, y);
+            go.transform.SetParent(root.transform);
+        }
+
+        for (int x = 0; x < w; x++)
+        {
+            for (int y = 0; y < h; y++)
+            {
+                int cellVal = fieldManager.GetCellType(x, y);
+                if (cellVal == 1)
+                {
+                    continue;
+                }
+
+                bool neighborT = IsCellExists(x + 0, y + 1) && fieldManager.GetCellType(x + 0, y + 1) > 1;
+                bool neighborB = IsCellExists(x + 0, y - 1) && fieldManager.GetCellType(x + 0, y - 1) > 1;                
+                bool neighborL = IsCellExists(x - 1, y + 0) && fieldManager.GetCellType(x - 1, y + 0) > 1;
+                bool neighborR = IsCellExists(x + 1, y + 0) && fieldManager.GetCellType(x + 1, y + 0) > 1;
+
+                // Top border
+                if (!neighborT)
+                {
+                    Create(x, y, R.BorderTop);
+                }
+                
+                if (!neighborB)
+                {
+                    Create(x, y, R.BorderBottom);
+                }
+                
+                if (!neighborL)
+                {
+                    Create(x, y, R.BorderLeft);
+                }
+                
+                if (!neighborR)
+                {
+                    Create(x, y, R.BorderRight);
+                }
+            }
+        }
     }
 }
