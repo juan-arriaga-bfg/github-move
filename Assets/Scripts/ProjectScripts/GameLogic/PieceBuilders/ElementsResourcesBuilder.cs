@@ -47,18 +47,18 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.NPC_E.Id, R.NPC_EPiece);
         dict.Add(PieceType.NPC_F.Id, R.NPC_FPiece);
         dict.Add(PieceType.NPC_D.Id, R.NPC_DPiece);
-        dict.Add(PieceType.NPC_8.Id, R.NPC_8Piece);
-        dict.Add(PieceType.NPC_9.Id, R.NPC_9Piece);
-        dict.Add(PieceType.NPC_10.Id, R.NPC_10Piece);
-        dict.Add(PieceType.NPC_11.Id, R.NPC_11Piece);
-        dict.Add(PieceType.NPC_12.Id, R.NPC_12Piece);
-        dict.Add(PieceType.NPC_13.Id, R.NPC_13Piece);
-        dict.Add(PieceType.NPC_14.Id, R.NPC_14Piece);
-        dict.Add(PieceType.NPC_15.Id, R.NPC_15Piece);
-        dict.Add(PieceType.NPC_16.Id, R.NPC_16Piece);
-        dict.Add(PieceType.NPC_17.Id, R.NPC_17Piece);
-        dict.Add(PieceType.NPC_18.Id, R.NPC_18Piece);
-        dict.Add(PieceType.NPC_19.Id, R.NPC_19Piece);
+        dict.Add(PieceType.NPC_G.Id, R.NPC_GPiece);
+        dict.Add(PieceType.NPC_H.Id, R.NPC_HPiece);
+        dict.Add(PieceType.NPC_I.Id, R.NPC_IPiece);
+        dict.Add(PieceType.NPC_J.Id, R.NPC_JPiece);
+        dict.Add(PieceType.NPC_K.Id, R.NPC_KPiece);
+        dict.Add(PieceType.NPC_L.Id, R.NPC_LPiece);
+        dict.Add(PieceType.NPC_M.Id, R.NPC_MPiece);
+        dict.Add(PieceType.NPC_N.Id, R.NPC_NPiece);
+        dict.Add(PieceType.NPC_O.Id, R.NPC_OPiece);
+        dict.Add(PieceType.NPC_P.Id, R.NPC_PPiece);
+        dict.Add(PieceType.NPC_Q.Id, R.NPC_QPiece);
+        dict.Add(PieceType.NPC_R.Id, R.NPC_RPiece);
         
 #endregion
    

@@ -102,7 +102,7 @@ public class FieldControllerComponent : IECSComponent
     private void TestFieldOleg()
     {
         AddPieces(new BoardPosition(24, 12), PieceType.OB1_TT.Id, PieceType.OB2_TT.Id);
-        AddPieces(new BoardPosition(29, 16), PieceType.NPC_A.Id, PieceType.NPC_9.Id);
+        AddPieces(new BoardPosition(29, 16), PieceType.NPC_A.Id, PieceType.NPC_H.Id);
     }
     
     private void TestFieldAlex()
@@ -110,7 +110,7 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(17, 16), PieceType.A1.Id, PieceType.A1.Id);
         AddPieces(new BoardPosition(19, 16), PieceType.B1.Id, PieceType.B11.Id);
         AddPieces(new BoardPosition(20, 16), PieceType.PR_A1.Id, PieceType.PR_A5.Id);
-        AddPieces(new BoardPosition(21, 16), PieceType.NPC_A.Id, PieceType.NPC_9.Id);
+        AddPieces(new BoardPosition(21, 16), PieceType.NPC_A.Id, PieceType.NPC_H.Id);
         AddPieces(new BoardPosition(23, 16), PieceType.Boost_CR1.Id, PieceType.Boost_CR.Id);
         AddPieces(new BoardPosition(24, 16), PieceType.Boost_CR1.Id, PieceType.Boost_CR.Id);
         AddPieces(new BoardPosition(25, 16), PieceType.Boost_CR.Id, PieceType.Boost_CR.Id);
