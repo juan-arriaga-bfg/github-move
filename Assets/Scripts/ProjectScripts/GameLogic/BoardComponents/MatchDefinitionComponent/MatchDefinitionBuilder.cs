@@ -184,6 +184,10 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.CH2_F.Id, new PieceMatchDef {Next = PieceType.CH3_F.Id, Previous = PieceType.CH1_F.Id, Amount = 3});
         dict.Add(PieceType.CH3_F.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.CH2_F.Id});
         
+        dict.Add(PieceType.CH1_G.Id, new PieceMatchDef {Next = PieceType.CH2_G.Id, Previous = PieceType.None.Id, Amount = 3});
+        dict.Add(PieceType.CH2_G.Id, new PieceMatchDef {Next = PieceType.CH3_G.Id, Previous = PieceType.CH1_G.Id, Amount = 3});
+        dict.Add(PieceType.CH3_G.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.CH2_G.Id});
+        
 #endregion
         
 #region Simple Pieces

@@ -330,4 +330,7 @@ public class R
      public const string NPC_F6Piece = "NPC_F6Piece";
      public const string NPC_F7Piece = "NPC_F7Piece";
      public const string NPC_F8Piece = "NPC_F8Piece";
+     public const string CH1_GPiece = "CH1_GPiece";
+     public const string CH2_GPiece = "CH2_GPiece";
+     public const string CH3_GPiece = "CH3_GPiece";
 }

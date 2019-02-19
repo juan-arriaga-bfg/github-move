@@ -55,6 +55,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 ids.AddRange(GetPieceIds(PieceType.CH1_D.Id, PieceType.CH3_D.Id));
                 ids.AddRange(GetPieceIds(PieceType.CH1_E.Id, PieceType.CH3_E.Id));
                 ids.AddRange(GetPieceIds(PieceType.CH1_F.Id, PieceType.CH3_F.Id));
+                ids.AddRange(GetPieceIds(PieceType.CH1_G.Id, PieceType.CH3_G.Id));
                 break;
             case "Obstacles":
                 ids.AddRange(GetPieceIds(PieceType.OB1_TT.Id, PieceType.OB2_TT.Id));

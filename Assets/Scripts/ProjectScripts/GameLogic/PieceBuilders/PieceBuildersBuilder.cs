@@ -53,6 +53,7 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_D.Id, PieceType.CH3_D.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_E.Id, PieceType.CH3_E.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_F.Id, PieceType.CH3_F.Id, dict);
+        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_G.Id, PieceType.CH3_G.Id, dict);
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Boost_CR1.Id, PieceType.Boost_CR.Id, dict);
         

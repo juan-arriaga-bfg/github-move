@@ -293,6 +293,10 @@ public static partial class PieceType
     public static readonly PieceTypeDef CH2_F = new PieceTypeDef{Id = 10602, Abbreviations = new List<string>{ "CH2_F" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     public static readonly PieceTypeDef CH3_F = new PieceTypeDef{Id = 10603, Abbreviations = new List<string>{ "CH3_F" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     
+    public static readonly PieceTypeDef CH1_G = new PieceTypeDef{Id = 10701, Abbreviations = new List<string>{ "CH1_G" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    public static readonly PieceTypeDef CH2_G = new PieceTypeDef{Id = 10702, Abbreviations = new List<string>{ "CH2_G" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    public static readonly PieceTypeDef CH3_G = new PieceTypeDef{Id = 10703, Abbreviations = new List<string>{ "CH3_G" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    
 #endregion
     
 #region Obstacles
