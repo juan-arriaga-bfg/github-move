@@ -1215,6 +1215,5 @@ public partial class BoardRenderer : ECSEntity
     {
         var waterPrefab = ContentService.Current.GetObjectByName(R.BackgroundWater);
         GameObject water = (GameObject) GameObject.Instantiate(waterPrefab);
-        water.transform.localPosition = Vector3.zero;
     }
 }
