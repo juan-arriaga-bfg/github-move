@@ -32,7 +32,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
         switch (tab)
         {
             case "Characters":
-                ids.AddRange(GetPieceIds(PieceType.NPC_SleepingBeauty.Id, PieceType.NPC_19.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC_A.Id, PieceType.NPC_19.Id));
                 break;
             case "Boosters":
                 ids.AddRange(GetPieceIds(PieceType.Boost_CR1.Id, PieceType.Boost_CR.Id));
@@ -114,11 +114,11 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 ids.AddRange(GetPieceIds(PieceType.PR_G1.Id, PieceType.PR_G5.Id));
                 break;
             case "Character Pieces":
-                ids.AddRange(GetPieceIds(PieceType.NPC1_B.Id, PieceType.NPC8_B.Id));
-                ids.AddRange(GetPieceIds(PieceType.NPC1_C.Id, PieceType.NPC8_C.Id));
-                ids.AddRange(GetPieceIds(PieceType.NPC1_D.Id, PieceType.NPC8_D.Id));
-                ids.AddRange(GetPieceIds(PieceType.NPC1_E.Id, PieceType.NPC8_E.Id));
-                ids.AddRange(GetPieceIds(PieceType.NPC1_F.Id, PieceType.NPC8_F.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC_B1.Id, PieceType.NPC_B8.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC_C1.Id, PieceType.NPC_C8.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC_D1.Id, PieceType.NPC_D8.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC_E1.Id, PieceType.NPC_E8.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC_F1.Id, PieceType.NPC_F8.Id));
                 break;
         }
         

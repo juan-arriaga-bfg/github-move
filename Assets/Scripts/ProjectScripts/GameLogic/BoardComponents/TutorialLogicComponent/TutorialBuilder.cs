@@ -321,7 +321,7 @@ public static class TutorialBuilder
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "1_CreatePiece_PR_C4", TargetState = TaskState.Claimed, ConditionType = TutorialConditionType.Hard}, true);
                  
                 step.RegisterComponent(new RemoveTutorialAnimation {PieceId = PieceType.NPC_SleepingBeautyPlaid.Id, AnimationType = TutorialAnimationType.Perform}, true);
-                step.RegisterComponent(new AddTutorialAnimation {PieceId = PieceType.NPC_SleepingBeauty.Id, Target = new BoardPosition(20, 13, BoardLayer.Piece.Layer), AnimationType = TutorialAnimationType.Complete}, true);
+                step.RegisterComponent(new AddTutorialAnimation {PieceId = PieceType.NPC_A.Id, Target = new BoardPosition(20, 13, BoardLayer.Piece.Layer), AnimationType = TutorialAnimationType.Complete}, true);
                 
                 break;
             }

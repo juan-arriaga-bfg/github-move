@@ -22,7 +22,7 @@ public partial class CodexDataManager
                     new CodexChainDef
                     {
                         Name = LocalizationService.Get("window.codex.toggle.characters", "window.codex.toggle.characters"),
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.NPC_SleepingBeauty.Id)),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.NPC_A.Id)),
                     },
                 }
             },

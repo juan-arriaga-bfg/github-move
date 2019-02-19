@@ -136,75 +136,75 @@ public static partial class PieceType
     
 #region Characters
     
-    public static readonly PieceTypeDef NPC_SleepingBeauty      = new PieceTypeDef{Id = 100, Abbreviations = new List<string>{ "NPC_SleepingBeauty" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_A = new PieceTypeDef{Id = 100, Abbreviations = new List<string>{ "NPC_A" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     public static readonly PieceTypeDef NPC_SleepingBeautyPlaid = new PieceTypeDef{Id = 101, Abbreviations = new List<string>{ "NPC_SleepingBeautyPlaid" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_Rapunzel            = new PieceTypeDef{Id = 102, Abbreviations = new List<string>{ "NPC_Rapunzel" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_PussInBoots         = new PieceTypeDef{Id = 103, Abbreviations = new List<string>{ "NPC_PussInBoots" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};   
-    public static readonly PieceTypeDef NPC_Gnome               = new PieceTypeDef{Id = 104, Abbreviations = new List<string>{ "NPC_Gnome" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_PeterPen            = new PieceTypeDef{Id = 105, Abbreviations = new List<string>{ "NPC_PeterPen" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_RedHood             = new PieceTypeDef{Id = 106, Abbreviations = new List<string>{ "NPC_RedHood" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_Mermaid             = new PieceTypeDef{Id = 107, Abbreviations = new List<string>{ "NPC_Mermaid" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_8                   = new PieceTypeDef{Id = 108, Abbreviations = new List<string>{ "NPC_8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_9                   = new PieceTypeDef{Id = 109, Abbreviations = new List<string>{ "NPC_9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_10                  = new PieceTypeDef{Id = 110, Abbreviations = new List<string>{ "NPC_10" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_11                  = new PieceTypeDef{Id = 111, Abbreviations = new List<string>{ "NPC_11" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_12                  = new PieceTypeDef{Id = 112, Abbreviations = new List<string>{ "NPC_12" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_13                  = new PieceTypeDef{Id = 113, Abbreviations = new List<string>{ "NPC_13" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_14                  = new PieceTypeDef{Id = 114, Abbreviations = new List<string>{ "NPC_14" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_15                  = new PieceTypeDef{Id = 115, Abbreviations = new List<string>{ "NPC_15" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_16                  = new PieceTypeDef{Id = 116, Abbreviations = new List<string>{ "NPC_16" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_17                  = new PieceTypeDef{Id = 117, Abbreviations = new List<string>{ "NPC_17" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_18                  = new PieceTypeDef{Id = 118, Abbreviations = new List<string>{ "NPC_18" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
-    public static readonly PieceTypeDef NPC_19                  = new PieceTypeDef{Id = 119, Abbreviations = new List<string>{ "NPC_19" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_B = new PieceTypeDef{Id = 102, Abbreviations = new List<string>{ "NPC_B" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_C = new PieceTypeDef{Id = 103, Abbreviations = new List<string>{ "NPC_C" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};   
+    public static readonly PieceTypeDef NPC_Gnome = new PieceTypeDef{Id = 104, Abbreviations = new List<string>{ "NPC_Gnome" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_E = new PieceTypeDef{Id = 105, Abbreviations = new List<string>{ "NPC_E" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_F = new PieceTypeDef{Id = 106, Abbreviations = new List<string>{ "NPC_F" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_D = new PieceTypeDef{Id = 107, Abbreviations = new List<string>{ "NPC_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_8 = new PieceTypeDef{Id = 108, Abbreviations = new List<string>{ "NPC_8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_9 = new PieceTypeDef{Id = 109, Abbreviations = new List<string>{ "NPC_9" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_10 = new PieceTypeDef{Id = 110, Abbreviations = new List<string>{ "NPC_10" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_11 = new PieceTypeDef{Id = 111, Abbreviations = new List<string>{ "NPC_11" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_12 = new PieceTypeDef{Id = 112, Abbreviations = new List<string>{ "NPC_12" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_13 = new PieceTypeDef{Id = 113, Abbreviations = new List<string>{ "NPC_13" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_14 = new PieceTypeDef{Id = 114, Abbreviations = new List<string>{ "NPC_14" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_15 = new PieceTypeDef{Id = 115, Abbreviations = new List<string>{ "NPC_15" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_16 = new PieceTypeDef{Id = 116, Abbreviations = new List<string>{ "NPC_16" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_17 = new PieceTypeDef{Id = 117, Abbreviations = new List<string>{ "NPC_17" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_18 = new PieceTypeDef{Id = 118, Abbreviations = new List<string>{ "NPC_18" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
+    public static readonly PieceTypeDef NPC_19 = new PieceTypeDef{Id = 119, Abbreviations = new List<string>{ "NPC_19" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     
 #endregion
     
 #region Character pieces
 
-    public static readonly PieceTypeDef NPC1_B = new PieceTypeDef{Id = 300000, Abbreviations = new List<string>{ "NPC1_B" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC2_B = new PieceTypeDef{Id = 300001, Abbreviations = new List<string>{ "NPC2_B" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC3_B = new PieceTypeDef{Id = 300002, Abbreviations = new List<string>{ "NPC3_B" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC4_B = new PieceTypeDef{Id = 300003, Abbreviations = new List<string>{ "NPC4_B" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC5_B = new PieceTypeDef{Id = 300004, Abbreviations = new List<string>{ "NPC5_B" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC6_B = new PieceTypeDef{Id = 300005, Abbreviations = new List<string>{ "NPC6_B" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC7_B = new PieceTypeDef{Id = 300006, Abbreviations = new List<string>{ "NPC7_B" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC8_B = new PieceTypeDef{Id = 300007, Abbreviations = new List<string>{ "NPC8_B" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef NPC_B1 = new PieceTypeDef{Id = 300000, Abbreviations = new List<string>{ "NPC_B1" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_B2 = new PieceTypeDef{Id = 300001, Abbreviations = new List<string>{ "NPC_B2" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_B3 = new PieceTypeDef{Id = 300002, Abbreviations = new List<string>{ "NPC_B3" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_B4 = new PieceTypeDef{Id = 300003, Abbreviations = new List<string>{ "NPC_B4" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_B5 = new PieceTypeDef{Id = 300004, Abbreviations = new List<string>{ "NPC_B5" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_B6 = new PieceTypeDef{Id = 300005, Abbreviations = new List<string>{ "NPC_B6" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_B7 = new PieceTypeDef{Id = 300006, Abbreviations = new List<string>{ "NPC_B7" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_B8 = new PieceTypeDef{Id = 300007, Abbreviations = new List<string>{ "NPC_B8" }, Filter = PieceTypeFilter.Simple};
     
-    public static readonly PieceTypeDef NPC1_C = new PieceTypeDef{Id = 300100, Abbreviations = new List<string>{ "NPC1_C" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC2_C = new PieceTypeDef{Id = 300101, Abbreviations = new List<string>{ "NPC2_C" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC3_C = new PieceTypeDef{Id = 300102, Abbreviations = new List<string>{ "NPC3_C" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC4_C = new PieceTypeDef{Id = 300103, Abbreviations = new List<string>{ "NPC4_C" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC5_C = new PieceTypeDef{Id = 300104, Abbreviations = new List<string>{ "NPC5_C" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC6_C = new PieceTypeDef{Id = 300105, Abbreviations = new List<string>{ "NPC6_C" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC7_C = new PieceTypeDef{Id = 300106, Abbreviations = new List<string>{ "NPC7_C" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC8_C = new PieceTypeDef{Id = 300107, Abbreviations = new List<string>{ "NPC8_C" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef NPC_C1 = new PieceTypeDef{Id = 300100, Abbreviations = new List<string>{ "NPC_C1" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_C2 = new PieceTypeDef{Id = 300101, Abbreviations = new List<string>{ "NPC_C2" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_C3 = new PieceTypeDef{Id = 300102, Abbreviations = new List<string>{ "NPC_C3" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_C4 = new PieceTypeDef{Id = 300103, Abbreviations = new List<string>{ "NPC_C4" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_C5 = new PieceTypeDef{Id = 300104, Abbreviations = new List<string>{ "NPC_C5" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_C6 = new PieceTypeDef{Id = 300105, Abbreviations = new List<string>{ "NPC_C6" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_C7 = new PieceTypeDef{Id = 300106, Abbreviations = new List<string>{ "NPC_C7" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_C8 = new PieceTypeDef{Id = 300107, Abbreviations = new List<string>{ "NPC_C8" }, Filter = PieceTypeFilter.Simple};
      
-    public static readonly PieceTypeDef NPC1_D = new PieceTypeDef{Id = 300200, Abbreviations = new List<string>{ "NPC1_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC2_D = new PieceTypeDef{Id = 300201, Abbreviations = new List<string>{ "NPC2_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC3_D = new PieceTypeDef{Id = 300202, Abbreviations = new List<string>{ "NPC3_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC4_D = new PieceTypeDef{Id = 300203, Abbreviations = new List<string>{ "NPC4_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC5_D = new PieceTypeDef{Id = 300204, Abbreviations = new List<string>{ "NPC5_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC6_D = new PieceTypeDef{Id = 300205, Abbreviations = new List<string>{ "NPC6_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC7_D = new PieceTypeDef{Id = 300206, Abbreviations = new List<string>{ "NPC7_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC8_D = new PieceTypeDef{Id = 300207, Abbreviations = new List<string>{ "NPC8_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef NPC_D1 = new PieceTypeDef{Id = 300200, Abbreviations = new List<string>{ "NPC_D1" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_D2 = new PieceTypeDef{Id = 300201, Abbreviations = new List<string>{ "NPC_D2" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_D3 = new PieceTypeDef{Id = 300202, Abbreviations = new List<string>{ "NPC_D3" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_D4 = new PieceTypeDef{Id = 300203, Abbreviations = new List<string>{ "NPC_D4" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_D5 = new PieceTypeDef{Id = 300204, Abbreviations = new List<string>{ "NPC_D5" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_D6 = new PieceTypeDef{Id = 300205, Abbreviations = new List<string>{ "NPC_D6" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_D7 = new PieceTypeDef{Id = 300206, Abbreviations = new List<string>{ "NPC_D7" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_D8 = new PieceTypeDef{Id = 300207, Abbreviations = new List<string>{ "NPC_D8" }, Filter = PieceTypeFilter.Simple};
     
-    public static readonly PieceTypeDef NPC1_E = new PieceTypeDef{Id = 300300, Abbreviations = new List<string>{ "NPC1_E" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC2_E = new PieceTypeDef{Id = 300301, Abbreviations = new List<string>{ "NPC2_E" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC3_E = new PieceTypeDef{Id = 300302, Abbreviations = new List<string>{ "NPC3_E" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC4_E = new PieceTypeDef{Id = 300303, Abbreviations = new List<string>{ "NPC4_E" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC5_E = new PieceTypeDef{Id = 300304, Abbreviations = new List<string>{ "NPC5_E" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC6_E = new PieceTypeDef{Id = 300305, Abbreviations = new List<string>{ "NPC6_E" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC7_E = new PieceTypeDef{Id = 300306, Abbreviations = new List<string>{ "NPC7_E" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC8_E = new PieceTypeDef{Id = 300307, Abbreviations = new List<string>{ "NPC8_E" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef NPC_E1 = new PieceTypeDef{Id = 300300, Abbreviations = new List<string>{ "NPC_E1" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_E2 = new PieceTypeDef{Id = 300301, Abbreviations = new List<string>{ "NPC_E2" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_E3 = new PieceTypeDef{Id = 300302, Abbreviations = new List<string>{ "NPC_E3" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_E4 = new PieceTypeDef{Id = 300303, Abbreviations = new List<string>{ "NPC_E4" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_E5 = new PieceTypeDef{Id = 300304, Abbreviations = new List<string>{ "NPC_E5" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_E6 = new PieceTypeDef{Id = 300305, Abbreviations = new List<string>{ "NPC_E6" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_E7 = new PieceTypeDef{Id = 300306, Abbreviations = new List<string>{ "NPC_E7" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_E8 = new PieceTypeDef{Id = 300307, Abbreviations = new List<string>{ "NPC_E8" }, Filter = PieceTypeFilter.Simple};
 
-    public static readonly PieceTypeDef NPC1_F = new PieceTypeDef{Id = 300400, Abbreviations = new List<string>{ "NPC1_F" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC2_F = new PieceTypeDef{Id = 300401, Abbreviations = new List<string>{ "NPC2_F" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC3_F = new PieceTypeDef{Id = 300402, Abbreviations = new List<string>{ "NPC3_F" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC4_F = new PieceTypeDef{Id = 300403, Abbreviations = new List<string>{ "NPC4_F" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC5_F = new PieceTypeDef{Id = 300404, Abbreviations = new List<string>{ "NPC5_F" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC6_F = new PieceTypeDef{Id = 300405, Abbreviations = new List<string>{ "NPC6_F" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC7_F = new PieceTypeDef{Id = 300406, Abbreviations = new List<string>{ "NPC7_F" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
-    public static readonly PieceTypeDef NPC8_F = new PieceTypeDef{Id = 300407, Abbreviations = new List<string>{ "NPC8_F" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Normal};
+    public static readonly PieceTypeDef NPC_F1 = new PieceTypeDef{Id = 300400, Abbreviations = new List<string>{ "NPC_F1" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_F2 = new PieceTypeDef{Id = 300401, Abbreviations = new List<string>{ "NPC_F2" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_F3 = new PieceTypeDef{Id = 300402, Abbreviations = new List<string>{ "NPC_F3" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_F4 = new PieceTypeDef{Id = 300403, Abbreviations = new List<string>{ "NPC_F4" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_F5 = new PieceTypeDef{Id = 300404, Abbreviations = new List<string>{ "NPC_F5" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_F6 = new PieceTypeDef{Id = 300405, Abbreviations = new List<string>{ "NPC_F6" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_F7 = new PieceTypeDef{Id = 300406, Abbreviations = new List<string>{ "NPC_F7" }, Filter = PieceTypeFilter.Simple};
+    public static readonly PieceTypeDef NPC_F8 = new PieceTypeDef{Id = 300407, Abbreviations = new List<string>{ "NPC_F8" }, Filter = PieceTypeFilter.Simple};
 
     
 #endregion
