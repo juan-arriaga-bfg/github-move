@@ -19,13 +19,20 @@ public class ProjectBuilderAndroid
                            bool useIL2CPP = false,
                            Dictionary<string, string> customOptions = null)
     {
-        ProjectBuilder.Create()
+        var builder = ProjectBuilder.Create()
             .SetBuildType(buildType)
             .SetBuildTargetPlatform(platform)
             .SetBuildPurpose(purpose)
             .SetBuildPath(exportPath)
-            .SetCustomOptions(customOptions)
-             
+            .SetCustomOptions(customOptions);
+
+        // No logs for PROD & ST
+        if (purpose != ProjectBuilder.BuildPurpose.Qa)
+        {
+            builder.AddBuildAction(new BuildActionDisableLogger());
+        }
+        
+        builder
             .AddBuildAction(new BuildActionCleanupPreviousGradleExport())
             .AddBuildAction(new BuildActionPrepare())
             .AddBuildAction(new BuildActionEncryptConfigs())
