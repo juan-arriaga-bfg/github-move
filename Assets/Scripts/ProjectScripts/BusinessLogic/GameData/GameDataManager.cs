@@ -1,10 +1,13 @@
 ﻿public class GameDataManager : ECSEntity,
     IChestsDataManager, IPiecesDataManager, IFogsDataManager, IObstaclesDataManager, ILevelsDataManager,
     IFieldDataManager, ICodexDataManager, IEnemiesDataManager, IConstantsDataManager, IQuestsDataManager, IShopDataManager,
-    IOrdersDataManager, IConversationsDataManager, IMarketDataManager
+    IOrdersDataManager, IConversationsDataManager, IMarketDataManager, ICharactersDataManager
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
+    
+    private MatchDefinitionComponent matchDefinition;
+    public MatchDefinitionComponent MatchDefinition => matchDefinition ?? (matchDefinition = GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid));
     
     private ChestsDataManager chestsManager;
     public ChestsDataManager ChestsManager => chestsManager ?? (chestsManager = GetComponent<ChestsDataManager>(ChestsDataManager.ComponentGuid));
@@ -48,8 +51,13 @@
     private MarketDataManager marketManager;
     public MarketDataManager MarketManager => marketManager ?? (marketManager = GetComponent<MarketDataManager>(MarketDataManager.ComponentGuid));
     
+    private CharactersDataManager charactersManager;
+    public CharactersDataManager CharactersManager => charactersManager ?? (charactersManager = GetComponent<CharactersDataManager>(CharactersDataManager.ComponentGuid));
+    
     public void SetupComponents()
     {
+        RegisterComponent(new MatchDefinitionComponent(new MatchDefinitionBuilder().Build()));
+        
         RegisterComponent(new ChestsDataManager());
         RegisterComponent(new PiecesDataManager());
         RegisterComponent(new ObstaclesDataManager());
@@ -64,6 +72,7 @@
         RegisterComponent(new ShopDataManager());
         RegisterComponent(new OrdersDataManager());
         RegisterComponent(new MarketDataManager());
+        RegisterComponent(new CharactersDataManager());
     }
 
     public void Reload()

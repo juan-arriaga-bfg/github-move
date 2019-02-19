@@ -5,12 +5,8 @@ public partial class CodexDataManager
 {
     private CodexContent BuildContent()
     {
-        CodexContent ret = new CodexContent();
-
-        ret.ItemDefs = new List<CodexItemDef>();
-
-        var board = BoardService.Current.FirstBoard;
-        var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
+        var ret = new CodexContent {ItemDefs = new List<CodexItemDef>()};
+        var matchDef = GameDataService.Current.MatchDefinition;
 
         ret.TabDefs = new List<CodexTabDef>
         {

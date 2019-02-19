@@ -13,8 +13,6 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
     public Dictionary<int, CodexChainState> Items = new Dictionary<int, CodexChainState>();
 
-    private MatchDefinitionComponent cachedMatchDef;
-
     private CodexContent codexContentCache = null;
     
     public Action OnNewItemUnlocked;
@@ -98,19 +96,6 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
             }
         });
     }
-
-    private MatchDefinitionComponent CachedMatchDef()
-    {
-        if (cachedMatchDef != null)
-        {
-            return cachedMatchDef;
-        }
-        
-        cachedMatchDef = BoardService.Current?.FirstBoard?.BoardLogic?.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid) ?? new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
-
-        return cachedMatchDef;
-    }
-    
     
     /// <summary>
     /// Returns true if new piece unlocked
@@ -238,10 +223,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
     public List<CodexItemDef> GetCodexItemsForChainAndFocus(int targetId, int length, bool hideCaptions)
     {
-        var board    = BoardService.Current.FirstBoard;
-        var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
-
-        var chain = matchDef.GetChain(targetId);
+        var chain = GameDataService.Current.MatchDefinition.GetChain(targetId);
 
         // Current piece is not a part of any chain
         if (chain.Count == 0)
