@@ -35,6 +35,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         PieceType.LockedEmpty.Id,
         PieceType.Boost_WR.Id,
         PieceType.CH_Free.Id,
+        PieceType.CH_NPC.Id,
         PieceType.NPC_SleepingBeautyPlaid.Id,
         PieceType.NPC_Gnome.Id,
     }; 

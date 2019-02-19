@@ -264,6 +264,7 @@ public static partial class PieceType
 #region Chests
     
     public static readonly PieceTypeDef CH_Free = new PieceTypeDef{Id = 10001, Abbreviations = new List<string>{ "CH_Free" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
+    public static readonly PieceTypeDef CH_NPC = new PieceTypeDef{Id = 10002, Abbreviations = new List<string>{ "CH_NPC" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest};
     
     public static readonly PieceTypeDef SK1_PR = new PieceTypeDef{Id = 10011, Abbreviations = new List<string>{ "SK1_PR" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest | PieceTypeFilter.Bag};
     public static readonly PieceTypeDef SK2_PR = new PieceTypeDef{Id = 10012, Abbreviations = new List<string>{ "SK2_PR" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Chest | PieceTypeFilter.Bag};

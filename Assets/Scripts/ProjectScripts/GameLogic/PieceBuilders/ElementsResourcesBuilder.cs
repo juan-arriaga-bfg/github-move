@@ -185,6 +185,7 @@ public class ElementsResourcesBuilder
 #region Chests
         
         dict.Add(PieceType.CH_Free.Id, R.CH_FreePiece);
+        dict.Add(PieceType.CH_NPC.Id, R.CH_NPCPiece);
         
         dict.Add(PieceType.SK1_PR.Id, R.SK1_PRPiece);
         dict.Add(PieceType.SK2_PR.Id, R.SK2_PRPiece);

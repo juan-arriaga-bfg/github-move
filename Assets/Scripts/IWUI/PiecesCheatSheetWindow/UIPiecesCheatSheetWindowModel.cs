@@ -48,6 +48,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 break;
             case "Chests":
                 ids.Add(PieceType.CH_Free.Id);
+                ids.Add(PieceType.CH_NPC.Id);
                 ids.AddRange(GetPieceIds(PieceType.SK1_PR.Id, PieceType.SK3_PR.Id));
                 ids.AddRange(GetPieceIds(PieceType.CH1_A.Id, PieceType.CH3_A.Id));
                 ids.AddRange(GetPieceIds(PieceType.CH1_B.Id, PieceType.CH3_B.Id));

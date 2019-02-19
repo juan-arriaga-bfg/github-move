@@ -176,6 +176,8 @@ public class MarketItem
         var chests = PieceType.GetIdsByFilter(PieceTypeFilter.Chest, PieceTypeFilter.Bag);
 
         chests.Remove(PieceType.CH_Free.Id);
+        chests.Remove(PieceType.CH_NPC.Id);
+        
         chests = chests.FindAll(id => GameDataService.Current.CodexManager.IsPieceUnlocked(id));
 
         if (chests.Count == 0) return null;

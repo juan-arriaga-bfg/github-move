@@ -333,4 +333,5 @@ public class R
      public const string CH1_GPiece = "CH1_GPiece";
      public const string CH2_GPiece = "CH2_GPiece";
      public const string CH3_GPiece = "CH3_GPiece";
+     public const string CH_NPCPiece = "CH_NPCPiece";
 }
