@@ -4,6 +4,19 @@ public class BoardArrowTutorialStep : BaseTutorialStep, IBoardEventListener
 {
     public List<int> Targets;
     
+    protected override void OnFirstStart()
+    {
+        //nothing to do
+    }
+
+    private void EmitFirstStartEvent()
+    {
+        var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
+        var started = tutorialLogic.SaveStarted;
+        started.Add(Id);
+        OnFirstStartCallback?.Invoke();
+    }
+    
     public override void PauseOff()
     {
         base.PauseOff();
@@ -52,6 +65,11 @@ public class BoardArrowTutorialStep : BaseTutorialStep, IBoardEventListener
     private void UpdateArrow(List<int> targets)
     {
         var positions = GetPositions(targets);
+
+        if (positions.Count > 0 && IsFirstStartEvent())
+        {
+            EmitFirstStartEvent();
+        }
         
         foreach (var position in positions)
         {

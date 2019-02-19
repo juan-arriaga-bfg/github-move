@@ -30,6 +30,10 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	{
 		base.Init();
 		
+#if !DEBUG
+		btnInfo.gameObject.SetActive(false);
+#endif
+		
 		var contentEntity = entity as UIMarketElementEntity;
 		
 		isClick = false;

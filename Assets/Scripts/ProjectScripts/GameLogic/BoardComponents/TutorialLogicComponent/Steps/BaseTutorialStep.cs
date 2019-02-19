@@ -1,4 +1,8 @@
-﻿public class BaseTutorialStep : ECSEntity
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BaseTutorialStep : ECSEntity
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
@@ -20,9 +24,17 @@
 	protected bool isPauseOn;
 	protected bool isAutoComplete;
 	
+	public Action OnFirstStartCallback;
+	public Action OnCompleteCallback;
+	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
 		Context = entity as TutorialLogicComponent;
+	}
+
+	public override void OnUnRegisterEntity(ECSEntity entity)
+	{
+		base.OnUnRegisterEntity(entity);
 	}
 
 	public bool IsStart()
@@ -33,14 +45,37 @@
 		
 		return isStart;
 	}
-
+	
 	public virtual void PauseOn()
 	{
 		isPauseOn = true;
 	}
+
+	protected virtual void OnFirstStart()
+	{
+		var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
+		var started = tutorialLogic.SaveStarted;
+		started.Add(Id);
+		OnFirstStartCallback?.Invoke();
+	}
+	
+	protected bool IsFirstStartEvent()
+	{
+		var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
+		var started = tutorialLogic.SaveStarted;
+		var isFirst = started.Contains(Id) == false;
+		return isFirst;
+	}
 	
 	public virtual void Perform()
 	{
+		if (IsPerform == false)
+		{
+			if (IsFirstStartEvent())
+			{
+				OnFirstStart();
+			}
+		}
 		IsPerform = true;
 		StartAnimation(TutorialAnimationType.Perform);
 	}
@@ -56,6 +91,7 @@
 
 	protected virtual void Complete()
 	{
+		OnCompleteCallback?.Invoke();
 		StartAnimation(TutorialAnimationType.Complete);
 	}
 	

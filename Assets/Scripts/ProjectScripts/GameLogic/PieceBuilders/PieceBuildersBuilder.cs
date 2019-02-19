@@ -28,10 +28,21 @@ public class PieceBuildersBuilder
         dict = AddBuildingBranchPiece(dict, PieceType.C1.Id, PieceType.C9.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.D1.Id, PieceType.D9.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.E1.Id, PieceType.E9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.F1.Id, PieceType.F9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.G1.Id, PieceType.G9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.H1.Id, PieceType.H9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.I1.Id, PieceType.I9.Id);
+        dict = AddBuildingBranchPiece(dict, PieceType.J1.Id, PieceType.J9.Id);
         
         dict = AddSimplePiece<ManaPieceBuilder>(PieceType.Mana1.Id, PieceType.Mana6.Id, dict);
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Soft1.Id, PieceType.Soft6.Id, dict);
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Hard1.Id, PieceType.Hard6.Id, dict);
+        
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC1_B.Id, PieceType.NPC8_B.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC1_C.Id, PieceType.NPC8_C.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC1_D.Id, PieceType.NPC8_D.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC1_E.Id, PieceType.NPC8_E.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC1_F.Id, PieceType.NPC8_F.Id, dict);
         
         dict.Add(PieceType.CH_Free.Id, new ChestPieceBuilder());
         
@@ -41,6 +52,7 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_C.Id, PieceType.CH3_C.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_D.Id, PieceType.CH3_D.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_E.Id, PieceType.CH3_E.Id, dict);
+        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_F.Id, PieceType.CH3_F.Id, dict);
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Boost_CR1.Id, PieceType.Boost_CR.Id, dict);
         
@@ -92,7 +104,7 @@ public class PieceBuildersBuilder
     {
         var mask = BoardPosition.GetRect(BoardPosition.Zero(), 2, 2);
         
-        dict = AddMulticellularPiece<MinePieceBuilder>(PieceType.MN_B.Id, PieceType.MN_D.Id, mask, dict);
+        dict = AddMulticellularPiece<MinePieceBuilder>(PieceType.MN_B.Id, PieceType.MN_F.Id, mask, dict);
         
         return dict;
     }

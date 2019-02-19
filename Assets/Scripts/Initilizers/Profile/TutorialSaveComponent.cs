@@ -17,12 +17,22 @@ public class TutorialSaveComponent : ECSEntity, IECSSerializeable
 		set { complete = value; }
 	}
 	
+	private List<int> started;
+	
+	[JsonProperty]
+	public List<int> Started
+	{
+		get { return started; }
+		set { started = value; }
+	}
+	
 	[OnSerializing]
 	internal void OnSerialization(StreamingContext context)
 	{
 		if(BoardService.Current == null || complete != null) return;
 
-		complete = BoardService.Current.FirstBoard.TutorialLogic.Save;
+		complete = BoardService.Current.FirstBoard.TutorialLogic.SaveCompleted;
+		started = BoardService.Current.FirstBoard.TutorialLogic.SaveStarted;
 	}
     
 	[OnDeserialized]

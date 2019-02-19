@@ -197,12 +197,8 @@ public class DevTools : UIContainerElementViewController
     
     public void OnDebug1Click()
     {
-        EditorPrefs.DeleteAll();
-        questDialogsToggle.isOn = IsQuestDialogsEnabled();
-        tutorialToggle.isOn = IsTutorialEnabled();
-        removerToggle.isOn = IsRemoverDebugEnabled();
-        return;
         Debug.Log("OnDebug1Click");
+        return;
 
 #if UNITY_EDITOR
         
