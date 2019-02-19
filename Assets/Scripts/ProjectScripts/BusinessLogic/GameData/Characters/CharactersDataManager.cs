@@ -22,7 +22,9 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
         {
             if (string.IsNullOrEmpty(error))
             {
-                characters = PieceType.GetIdsByFilter(PieceTypeFilter.Character);
+                characters = PieceType.GetIdsByFilter(PieceTypeFilter.Character, PieceTypeFilter.Fake);
+                characters.Remove(PieceType.NPC_SleepingBeauty.Id);
+                
                 defs = data;
                 
                 for (var i = characters.Count - 1; i >= 0; i--)

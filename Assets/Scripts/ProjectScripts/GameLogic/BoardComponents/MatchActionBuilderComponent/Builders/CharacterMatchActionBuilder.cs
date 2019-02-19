@@ -35,9 +35,17 @@ public class CharacterMatchActionBuilder : DefaultMatchActionBuilder, IMatchActi
 
         if (countForMatchDefault == -1 || matchField.Count < countForMatchDefault) return null;
         
+        matchField = new List<BoardPosition>();
+        var chain = definition.GetChain(nextType);
+
+        foreach (var id in chain)
+        {
+            matchField.AddRange(definition.Context.PositionsCache.GetPiecePositionsByType(id));
+        }
+        
         GameDataService.Current.CharactersManager.UnlockNewCharacter(nextType);
         
         // collect and purchase rewards before action
-        return CreateAction(new List<int>{nextType}, definition.Context.PositionsCache.GetPiecePositionsByType(pieceType), position, pieceType);
+        return CreateAction(new List<int>{nextType}, matchField, position, pieceType);
     }
 }

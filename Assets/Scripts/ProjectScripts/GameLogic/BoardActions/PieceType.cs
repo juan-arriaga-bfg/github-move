@@ -138,10 +138,10 @@ public static partial class PieceType
 #region Characters
     
     public static readonly PieceTypeDef NPC_A = new PieceTypeDef{Id = 100, Abbreviations = new List<string>{ "NPC_A" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef NPC_SleepingBeautyPlaid = new PieceTypeDef{Id = 101, Abbreviations = new List<string>{ "NPC_SleepingBeautyPlaid" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef NPC_SleepingBeautyPlaid = new PieceTypeDef{Id = 101, Abbreviations = new List<string>{ "NPC_SleepingBeautyPlaid" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Fake};
     public static readonly PieceTypeDef NPC_B = new PieceTypeDef{Id = 102, Abbreviations = new List<string>{ "NPC_B" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef NPC_C = new PieceTypeDef{Id = 103, Abbreviations = new List<string>{ "NPC_C" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};   
-    public static readonly PieceTypeDef NPC_Gnome = new PieceTypeDef{Id = 104, Abbreviations = new List<string>{ "NPC_Gnome" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef NPC_Gnome = new PieceTypeDef{Id = 104, Abbreviations = new List<string>{ "NPC_Gnome" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Fake};
     public static readonly PieceTypeDef NPC_D = new PieceTypeDef{Id = 105, Abbreviations = new List<string>{ "NPC_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef NPC_E = new PieceTypeDef{Id = 106, Abbreviations = new List<string>{ "NPC_E" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef NPC_F = new PieceTypeDef{Id = 107, Abbreviations = new List<string>{ "NPC_F" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
