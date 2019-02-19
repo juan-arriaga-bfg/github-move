@@ -556,7 +556,16 @@
     "UnlockBonus": [
       {
         "Currency": "Coins",
-        "Amount": 1
+        "Amount": 0
+      }
+    ]
+  },
+  {
+    "Uid": "CH_NPC",
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 0
       }
     ]
   },
@@ -2554,7 +2563,7 @@
     ]
   },
   {
-    "Uid": "NPC_B1",
+    "Uid": "NPC1_B",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -2563,7 +2572,7 @@
     ]
   },
   {
-    "Uid": "NPC_B2",
+    "Uid": "NPC2_B",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2582,7 +2591,7 @@
     ]
   },
   {
-    "Uid": "NPC_B3",
+    "Uid": "NPC3_B",
     "Delay": 15,
     "CreateRewards": [
       {
@@ -2602,7 +2611,7 @@
     ]
   },
   {
-    "Uid": "NPC_B4",
+    "Uid": "NPC4_B",
     "Delay": 60,
     "CreateRewards": [
       {
@@ -2622,7 +2631,7 @@
     ]
   },
   {
-    "Uid": "NPC_B5",
+    "Uid": "NPC5_B",
     "Delay": 180,
     "CreateRewards": [
       {
@@ -2642,7 +2651,7 @@
     ]
   },
   {
-    "Uid": "NPC_B6",
+    "Uid": "NPC6_B",
     "Delay": 300,
     "CreateRewards": [
       {
@@ -2662,7 +2671,7 @@
     ]
   },
   {
-    "Uid": "NPC_B7",
+    "Uid": "NPC7_B",
     "Delay": 900,
     "CreateRewards": [
       {
@@ -2682,7 +2691,7 @@
     ]
   },
   {
-    "Uid": "NPC_B8",
+    "Uid": "NPC8_B",
     "Delay": 1800,
     "CreateRewards": [
       {
@@ -2702,7 +2711,7 @@
     ]
   },
   {
-    "Uid": "NPC_C1",
+    "Uid": "NPC1_C",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -2711,7 +2720,7 @@
     ]
   },
   {
-    "Uid": "NPC_C2",
+    "Uid": "NPC2_C",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2730,7 +2739,7 @@
     ]
   },
   {
-    "Uid": "NPC_C3",
+    "Uid": "NPC3_C",
     "Delay": 15,
     "CreateRewards": [
       {
@@ -2750,7 +2759,7 @@
     ]
   },
   {
-    "Uid": "NPC_C4",
+    "Uid": "NPC4_C",
     "Delay": 60,
     "CreateRewards": [
       {
@@ -2770,7 +2779,7 @@
     ]
   },
   {
-    "Uid": "NPC_C5",
+    "Uid": "NPC5_C",
     "Delay": 180,
     "CreateRewards": [
       {
@@ -2790,7 +2799,7 @@
     ]
   },
   {
-    "Uid": "NPC_C6",
+    "Uid": "NPC6_C",
     "Delay": 300,
     "CreateRewards": [
       {
@@ -2810,7 +2819,7 @@
     ]
   },
   {
-    "Uid": "NPC_C7",
+    "Uid": "NPC7_C",
     "Delay": 900,
     "CreateRewards": [
       {
@@ -2830,7 +2839,7 @@
     ]
   },
   {
-    "Uid": "NPC_C8",
+    "Uid": "NPC8_C",
     "Delay": 1800,
     "CreateRewards": [
       {
@@ -2850,7 +2859,7 @@
     ]
   },
   {
-    "Uid": "NPC_D1",
+    "Uid": "NPC1_D",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -2859,7 +2868,7 @@
     ]
   },
   {
-    "Uid": "NPC_D2",
+    "Uid": "NPC2_D",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -2878,7 +2887,7 @@
     ]
   },
   {
-    "Uid": "NPC_D3",
+    "Uid": "NPC3_D",
     "Delay": 15,
     "CreateRewards": [
       {
@@ -2898,7 +2907,7 @@
     ]
   },
   {
-    "Uid": "NPC_D4",
+    "Uid": "NPC4_D",
     "Delay": 60,
     "CreateRewards": [
       {
@@ -2918,7 +2927,7 @@
     ]
   },
   {
-    "Uid": "NPC_D5",
+    "Uid": "NPC5_D",
     "Delay": 180,
     "CreateRewards": [
       {
@@ -2938,7 +2947,7 @@
     ]
   },
   {
-    "Uid": "NPC_D6",
+    "Uid": "NPC6_D",
     "Delay": 300,
     "CreateRewards": [
       {
@@ -2958,7 +2967,7 @@
     ]
   },
   {
-    "Uid": "NPC_D7",
+    "Uid": "NPC7_D",
     "Delay": 900,
     "CreateRewards": [
       {
@@ -2978,7 +2987,7 @@
     ]
   },
   {
-    "Uid": "NPC_D8",
+    "Uid": "NPC8_D",
     "Delay": 1800,
     "CreateRewards": [
       {
@@ -2998,7 +3007,7 @@
     ]
   },
   {
-    "Uid": "NPC_E1",
+    "Uid": "NPC1_E",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -3007,7 +3016,7 @@
     ]
   },
   {
-    "Uid": "NPC_E2",
+    "Uid": "NPC2_E",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -3026,7 +3035,7 @@
     ]
   },
   {
-    "Uid": "NPC_E3",
+    "Uid": "NPC3_E",
     "Delay": 15,
     "CreateRewards": [
       {
@@ -3046,7 +3055,7 @@
     ]
   },
   {
-    "Uid": "NPC_E4",
+    "Uid": "NPC4_E",
     "Delay": 60,
     "CreateRewards": [
       {
@@ -3066,7 +3075,7 @@
     ]
   },
   {
-    "Uid": "NPC_E5",
+    "Uid": "NPC5_E",
     "Delay": 180,
     "CreateRewards": [
       {
@@ -3086,7 +3095,7 @@
     ]
   },
   {
-    "Uid": "NPC_E6",
+    "Uid": "NPC6_E",
     "Delay": 300,
     "CreateRewards": [
       {
@@ -3106,7 +3115,7 @@
     ]
   },
   {
-    "Uid": "NPC_E7",
+    "Uid": "NPC7_E",
     "Delay": 900,
     "CreateRewards": [
       {
@@ -3126,7 +3135,7 @@
     ]
   },
   {
-    "Uid": "NPC_E8",
+    "Uid": "NPC8_E",
     "Delay": 1800,
     "CreateRewards": [
       {
@@ -3146,7 +3155,7 @@
     ]
   },
   {
-    "Uid": "NPC_F1",
+    "Uid": "NPC1_F",
     "UnlockBonus": [
       {
         "Currency": "Coins",
@@ -3155,7 +3164,7 @@
     ]
   },
   {
-    "Uid": "NPC_F2",
+    "Uid": "NPC2_F",
     "CreateRewards": [
       {
         "Currency": "Coins",
@@ -3174,7 +3183,7 @@
     ]
   },
   {
-    "Uid": "NPC_F3",
+    "Uid": "NPC3_F",
     "Delay": 15,
     "CreateRewards": [
       {
@@ -3194,7 +3203,7 @@
     ]
   },
   {
-    "Uid": "NPC_F4",
+    "Uid": "NPC4_F",
     "Delay": 60,
     "CreateRewards": [
       {
@@ -3214,7 +3223,7 @@
     ]
   },
   {
-    "Uid": "NPC_F5",
+    "Uid": "NPC5_F",
     "Delay": 180,
     "CreateRewards": [
       {
@@ -3234,7 +3243,7 @@
     ]
   },
   {
-    "Uid": "NPC_F6",
+    "Uid": "NPC6_F",
     "Delay": 300,
     "CreateRewards": [
       {
@@ -3254,7 +3263,7 @@
     ]
   },
   {
-    "Uid": "NPC_F7",
+    "Uid": "NPC7_F",
     "Delay": 900,
     "CreateRewards": [
       {
@@ -3274,7 +3283,7 @@
     ]
   },
   {
-    "Uid": "NPC_F8",
+    "Uid": "NPC8_F",
     "Delay": 1800,
     "CreateRewards": [
       {
