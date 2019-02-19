@@ -59,11 +59,9 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
 
     private ObstacleDef GetStep(int piece, int step)
     {
-        var key = matchDefinition.GetFirst(piece);
-        
-        List<ObstacleDef> list;
+        var key = GameDataService.Current.MatchDefinition.GetFirst(piece);
 
-        if (branches.TryGetValue(key, out list) == false) return null;
+        if (branches.TryGetValue(key, out var list) == false) return null;
         
         step = Mathf.Clamp(step, 0, list.Count - 1);
         
