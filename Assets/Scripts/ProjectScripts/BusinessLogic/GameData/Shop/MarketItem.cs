@@ -106,8 +106,11 @@ public class MarketItem
             case MarketRandomType.Ingredients:
                 piece = GetRandomIngredient();
                 break;
-            case MarketRandomType.BaseСhests:
+            case MarketRandomType.BaseChests:
                 piece = GetRandomChest();
+                break;
+            case MarketRandomType.NPCChests:
+                piece = GameDataService.Current.CharactersManager.Characters.Count == 0 ? null : def.Weight.Uid;
                 break;
             default :
                 piece = def.Weight.Uid;
@@ -176,6 +179,8 @@ public class MarketItem
         var chests = PieceType.GetIdsByFilter(PieceTypeFilter.Chest, PieceTypeFilter.Bag);
 
         chests.Remove(PieceType.CH_Free.Id);
+        chests.Remove(PieceType.CH_NPC.Id);
+        
         chests = chests.FindAll(id => GameDataService.Current.CodexManager.IsPieceUnlocked(id));
 
         if (chests.Count == 0) return null;

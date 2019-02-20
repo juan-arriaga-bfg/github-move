@@ -51,7 +51,7 @@ public class ChestPieceComponent : IECSComponent, IPieceBoardObserver
     {
         var hard = GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name);
         var resources = GameDataService.Current.LevelsManager.GetSequence(Currency.Resources.Name);
-        var character = GameDataService.Current.LevelsManager.GetSequence(Currency.Character.Name);
+        var character = GameDataService.Current.CharactersManager.GetSequence(Currency.Character.Name);
         var sequence = GameDataService.Current.ChestsManager.GetSequence(Def.Uid);
 
         var productionAmount = Def.ProductionAmount.Range();

@@ -5,12 +5,8 @@ public partial class CodexDataManager
 {
     private CodexContent BuildContent()
     {
-        CodexContent ret = new CodexContent();
-
-        ret.ItemDefs = new List<CodexItemDef>();
-
-        var board = BoardService.Current.FirstBoard;
-        var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
+        var ret = new CodexContent {ItemDefs = new List<CodexItemDef>()};
+        var matchDef = GameDataService.Current.MatchDefinition;
 
         ret.TabDefs = new List<CodexTabDef>
         {
@@ -22,7 +18,7 @@ public partial class CodexDataManager
                     new CodexChainDef
                     {
                         Name = LocalizationService.Get("window.codex.toggle.characters", "window.codex.toggle.characters"),
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.NPC_SleepingBeauty.Id)),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.NPC_A.Id)),
                     },
                 }
             },

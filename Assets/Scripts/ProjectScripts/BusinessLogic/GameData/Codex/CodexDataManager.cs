@@ -13,8 +13,6 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
     public Dictionary<int, CodexChainState> Items = new Dictionary<int, CodexChainState>();
 
-    private MatchDefinitionComponent cachedMatchDef;
-
     private CodexContent codexContentCache = null;
     
     public Action OnNewItemUnlocked;
@@ -35,6 +33,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
         PieceType.LockedEmpty.Id,
         PieceType.Boost_WR.Id,
         PieceType.CH_Free.Id,
+        PieceType.CH_NPC.Id,
         PieceType.NPC_SleepingBeautyPlaid.Id,
         PieceType.NPC_Gnome.Id,
     }; 
@@ -49,9 +48,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
     }
 
     public void Reload()
-    {
-        cachedMatchDef = null;
-               
+    {  
         Items = null;
         ClearCodexContentCache();
 
@@ -97,19 +94,6 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
             }
         });
     }
-
-    private MatchDefinitionComponent CachedMatchDef()
-    {
-        if (cachedMatchDef != null)
-        {
-            return cachedMatchDef;
-        }
-        
-        cachedMatchDef = BoardService.Current?.FirstBoard?.BoardLogic?.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid) ?? new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
-
-        return cachedMatchDef;
-    }
-    
     
     /// <summary>
     /// Returns true if new piece unlocked
@@ -152,12 +136,11 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
     private void UnlockPiece(int id)
     {
-        int firstInChain = CachedMatchDef().GetFirst(id);
+        int firstInChain = GameDataService.Current.MatchDefinition.GetFirst(id);
 
         // Debug.Log($"UnlockPiece: first in chain for {id} is {firstInChain}");
-        
-        CodexChainState state;
-        if (Items.TryGetValue(firstInChain, out state))
+
+        if (Items.TryGetValue(firstInChain, out var state))
         {
             if (state.Unlocked.Add(id))
             {
@@ -212,15 +195,9 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
             return true;
         }
 
-        int firstInChain = CachedMatchDef().GetFirst(id);
-
-        CodexChainState state;
-        if (Items.TryGetValue(firstInChain, out state))
-        {
-            return state.Unlocked.Contains(id);
-        }
-
-        return false;
+        var firstInChain = GameDataService.Current.MatchDefinition.GetFirst(id);
+        
+        return Items.TryGetValue(firstInChain, out var state) && state.Unlocked.Contains(id);
     }
 
     public bool GetChainState(int firstId, out CodexChainState state)
@@ -237,10 +214,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
 
     public List<CodexItemDef> GetCodexItemsForChainAndFocus(int targetId, int length, bool hideCaptions)
     {
-        var board    = BoardService.Current.FirstBoard;
-        var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
-
-        var chain = matchDef.GetChain(targetId);
+        var chain = GameDataService.Current.MatchDefinition.GetChain(targetId);
 
         // Current piece is not a part of any chain
         if (chain.Count == 0)
@@ -353,7 +327,7 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
                 PieceDef = pieceDef,
                 PieceTypeDef = pieceTypeDef,
                 ShowArrow = i != chain.Count - 1,
-                PendingReward = isPendingReward ? pieceDef.UnlockBonus : null,
+                PendingReward = isPendingReward ? pieceDef?.UnlockBonus : null,
             };
             
             if (isUnlocked)
@@ -424,10 +398,9 @@ public partial class CodexDataManager : IECSComponent, IDataManager, IDataLoader
     
     public void ClaimRewardForPiece(int pieceId)
     {
-        var chainId = CachedMatchDef().GetFirst(pieceId);
-        
-        CodexChainState chainState;
-        if (Items.TryGetValue(chainId, out chainState))
+        var chainId = GameDataService.Current.MatchDefinition.GetFirst(pieceId);
+
+        if (Items.TryGetValue(chainId, out var chainState))
         {
             chainState.PendingReward.Remove(pieceId);
         }

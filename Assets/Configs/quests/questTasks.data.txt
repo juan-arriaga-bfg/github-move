@@ -154,7 +154,7 @@
   {
     "$type": "TaskCompleteOrderEntity, GameAssembly",
     "Id": "16_CompleteOrder",
-    "PieceUid": "NPC_SleepingBeauty",
+    "PieceUid": "NPC_A",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -598,11 +598,11 @@
   {
     "$type": "TaskCompleteOrderEntity, GameAssembly",
     "Id": "53_CompleteOrder",
-    "PieceUid": "NPC_PeterPen",
+    "PieceUid": "NPC_E",
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "NPC_PeterPen",
+        "Ico": "NPC_E",
         "Title": "quest.complete.orders.title",
         "Message": "quest.complete.orders.message",
         "Hint": "task.complete.orders.hint"
@@ -745,11 +745,11 @@
   {
     "$type": "TaskCompleteOrderEntity, GameAssembly",
     "Id": "65_CompleteOrder",
-    "PieceUid": "NPC_SleepingBeauty",
+    "PieceUid": "NPC_A",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "NPC_SleepingBeauty",
+        "Ico": "NPC_A",
         "Title": "quest.complete.orders.title",
         "Message": "quest.complete.orders.message",
         "Hint": "task.complete.orders.hint"

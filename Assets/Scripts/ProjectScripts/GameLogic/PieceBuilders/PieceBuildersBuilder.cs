@@ -21,7 +21,7 @@ public class PieceBuildersBuilder
     {
         dict.Add(PieceType.Boost_WR.Id, new WorkerPieceBuilder());
         
-        dict = AddSimplePiece<CharacterPieceBuilder>(PieceType.NPC_SleepingBeauty.Id, PieceType.NPC_19.Id, dict);
+        dict = AddSimplePiece<CharacterPieceBuilder>(PieceType.NPC_A.Id, PieceType.NPC_R.Id, dict);
         
         dict = AddBuildingBranchPiece(dict, PieceType.A1.Id, PieceType.A9.Id);
         dict = AddBuildingBranchPiece(dict, PieceType.B1.Id, PieceType.B11.Id);
@@ -38,13 +38,14 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Soft1.Id, PieceType.Soft6.Id, dict);
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Hard1.Id, PieceType.Hard6.Id, dict);
         
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC1_B.Id, PieceType.NPC8_B.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC1_C.Id, PieceType.NPC8_C.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC1_D.Id, PieceType.NPC8_D.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC1_E.Id, PieceType.NPC8_E.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC1_F.Id, PieceType.NPC8_F.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_B1.Id, PieceType.NPC_B8.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_C1.Id, PieceType.NPC_C8.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_D1.Id, PieceType.NPC_D8.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_E1.Id, PieceType.NPC_E8.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_F1.Id, PieceType.NPC_F8.Id, dict);
         
         dict.Add(PieceType.CH_Free.Id, new ChestPieceBuilder());
+        dict.Add(PieceType.CH_NPC.Id, new ChestPieceBuilder());
         
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.SK1_PR.Id, PieceType.SK3_PR.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_A.Id, PieceType.CH3_A.Id, dict);
@@ -53,6 +54,7 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_D.Id, PieceType.CH3_D.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_E.Id, PieceType.CH3_E.Id, dict);
         dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_F.Id, PieceType.CH3_F.Id, dict);
+        dict = AddSimplePiece<ChestPieceBuilder>(PieceType.CH1_G.Id, PieceType.CH3_G.Id, dict);
         
         dict = AddSimplePiece<SimplePieceBuilder>(PieceType.Boost_CR1.Id, PieceType.Boost_CR.Id, dict);
         

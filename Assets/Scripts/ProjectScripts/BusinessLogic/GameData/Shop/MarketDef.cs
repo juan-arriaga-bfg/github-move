@@ -4,7 +4,8 @@
     BasePiecesEasy,
     BasePiecesHard,
     Ingredients,
-    BaseСhests,
+    BaseChests,
+    NPCChests,
 }
 
 public class MarketDef

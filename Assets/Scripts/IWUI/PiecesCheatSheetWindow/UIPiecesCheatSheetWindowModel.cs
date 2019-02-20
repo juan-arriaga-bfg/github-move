@@ -32,7 +32,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
         switch (tab)
         {
             case "Characters":
-                ids.AddRange(GetPieceIds(PieceType.NPC_SleepingBeauty.Id, PieceType.NPC_19.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC_A.Id, PieceType.NPC_R.Id));
                 break;
             case "Boosters":
                 ids.AddRange(GetPieceIds(PieceType.Boost_CR1.Id, PieceType.Boost_CR.Id));
@@ -48,6 +48,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 break;
             case "Chests":
                 ids.Add(PieceType.CH_Free.Id);
+                ids.Add(PieceType.CH_NPC.Id);
                 ids.AddRange(GetPieceIds(PieceType.SK1_PR.Id, PieceType.SK3_PR.Id));
                 ids.AddRange(GetPieceIds(PieceType.CH1_A.Id, PieceType.CH3_A.Id));
                 ids.AddRange(GetPieceIds(PieceType.CH1_B.Id, PieceType.CH3_B.Id));
@@ -55,6 +56,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 ids.AddRange(GetPieceIds(PieceType.CH1_D.Id, PieceType.CH3_D.Id));
                 ids.AddRange(GetPieceIds(PieceType.CH1_E.Id, PieceType.CH3_E.Id));
                 ids.AddRange(GetPieceIds(PieceType.CH1_F.Id, PieceType.CH3_F.Id));
+                ids.AddRange(GetPieceIds(PieceType.CH1_G.Id, PieceType.CH3_G.Id));
                 break;
             case "Obstacles":
                 ids.AddRange(GetPieceIds(PieceType.OB1_TT.Id, PieceType.OB2_TT.Id));
@@ -114,11 +116,11 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 ids.AddRange(GetPieceIds(PieceType.PR_G1.Id, PieceType.PR_G5.Id));
                 break;
             case "Character Pieces":
-                ids.AddRange(GetPieceIds(PieceType.NPC1_B.Id, PieceType.NPC8_B.Id));
-                ids.AddRange(GetPieceIds(PieceType.NPC1_C.Id, PieceType.NPC8_C.Id));
-                ids.AddRange(GetPieceIds(PieceType.NPC1_D.Id, PieceType.NPC8_D.Id));
-                ids.AddRange(GetPieceIds(PieceType.NPC1_E.Id, PieceType.NPC8_E.Id));
-                ids.AddRange(GetPieceIds(PieceType.NPC1_F.Id, PieceType.NPC8_F.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC_B1.Id, PieceType.NPC_B8.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC_C1.Id, PieceType.NPC_C8.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC_D1.Id, PieceType.NPC_D8.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC_E1.Id, PieceType.NPC_E8.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC_F1.Id, PieceType.NPC_F8.Id));
                 break;
         }
         

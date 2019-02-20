@@ -34,6 +34,40 @@
     ]
   },
   {
+    "Uid": "CH_NPC",
+    "ProductionAmount": {
+      "Min": 2,
+      "Max": 4
+    },
+    "ResourcesAmount": {
+      "Min": 2,
+      "Max": 4
+    },
+    "CharactersAmount": {
+      "Min": 2,
+      "Max": 4
+    },
+    "PieceAmount": 6,
+    "PieceWeights": [
+      {
+        "Uid": "Soft1",
+        "Weight": 2
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 2
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 2
+      },
+      {
+        "Uid": "Soft2",
+        "Weight": 1
+      }
+    ]
+  },
+  {
     "Uid": "CH1_A",
     "ProductionAmount": {
       "Min": 1,
