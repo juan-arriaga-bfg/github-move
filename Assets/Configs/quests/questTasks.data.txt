@@ -757,6 +757,79 @@
     }
   },
   {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "66_CreatePiece_NPC_B3",
+    "PieceUid": "NPC_B3",
+    "TargetValue": 4,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "67_CreatePiece_NPC_B4",
+    "PieceUid": "NPC_B4",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "68_CreatePiece_NPC_B5",
+    "PieceUid": "NPC_B5",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "69_CreatePiece_NPC_B6",
+    "PieceUid": "NPC_B6",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "70_CreatePiece_NPC_B7",
+    "PieceUid": "NPC_B7",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "71_CreatePiece_NPC_B",
+    "PieceUid": "NPC_B",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "NPC_B",
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
     "$type": "TaskCompleteDailyTaskEntity, GameAssembly",
     "Id": "Daily_ClearAll",
     "ComponentsCache": {
@@ -843,7 +916,7 @@
     "$type": "TaskCollectIngredientEntity, GameAssembly",
     "Id": "Daily_Quest_3",
     "Group": "Easy",
-    "TargetValue": 3,
+    "TargetValue": 9,
     "ComponentsCache": {
       "QuestRewardComponent": {
         "Value": [
@@ -900,28 +973,8 @@
     }
   },
   {
-    "$type": "TaskCompleteOrderEntity, GameAssembly",
-    "Id": "Daily_Quest_6",
-    "Group": "Easy",
-    "TargetValue": 2,
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 25
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Ico": "CompleateOrderDailyQuestIcon",
-        "Message": "Complete orders"
-      }
-    }
-  },
-  {
     "$type": "TaskCurrencyCollectEntity, GameAssembly",
-    "Id": "Daily_Quest_7",
+    "Id": "Daily_Quest_6",
     "Group": "Normal",
     "PieceUid": "Coins",
     "TargetValue": 550,
@@ -941,9 +994,9 @@
   },
   {
     "$type": "TaskCollectIngredientEntity, GameAssembly",
-    "Id": "Daily_Quest_8",
+    "Id": "Daily_Quest_7",
     "Group": "Normal",
-    "TargetValue": 10,
+    "TargetValue": 25,
     "ComponentsCache": {
       "QuestRewardComponent": {
         "Value": [
@@ -961,7 +1014,7 @@
   },
   {
     "$type": "TaskUseWorkerEntity, GameAssembly",
-    "Id": "Daily_Quest_9",
+    "Id": "Daily_Quest_8",
     "Group": "Normal",
     "TargetValue": 20,
     "ComponentsCache": {
@@ -980,30 +1033,10 @@
     }
   },
   {
-    "$type": "TaskOpenChestEntity, GameAssembly",
-    "Id": "Daily_Quest_10",
-    "Group": "Normal",
-    "TargetValue": 3,
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 45
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Ico": "quest_icon_open_chest",
-        "Message": "Open chests"
-      }
-    }
-  },
-  {
     "$type": "TaskCompleteOrderEntity, GameAssembly",
-    "Id": "Daily_Quest_11",
+    "Id": "Daily_Quest_9",
     "Group": "Normal",
-    "TargetValue": 5,
+    "TargetValue": 7,
     "ComponentsCache": {
       "QuestRewardComponent": {
         "Value": [
@@ -1021,7 +1054,7 @@
   },
   {
     "$type": "TaskCurrencySpendEntity, GameAssembly",
-    "Id": "Daily_Quest_12",
+    "Id": "Daily_Quest_10",
     "Group": "Hard",
     "PieceUid": "Coins",
     "TargetValue": 1200,
@@ -1041,7 +1074,7 @@
   },
   {
     "$type": "TaskCurrencySpendEntity, GameAssembly",
-    "Id": "Daily_Quest_13",
+    "Id": "Daily_Quest_11",
     "Group": "Hard",
     "PieceUid": "Crystals",
     "TargetValue": 20,
@@ -1061,7 +1094,7 @@
   },
   {
     "$type": "TaskKillFieldEntity, GameAssembly",
-    "Id": "Daily_Quest_14",
+    "Id": "Daily_Quest_12",
     "Group": "Hard",
     "TargetValue": 7,
     "ComponentsCache": {
@@ -1080,28 +1113,8 @@
     }
   },
   {
-    "$type": "TaskUseWorkerEntity, GameAssembly",
-    "Id": "Daily_Quest_15",
-    "Group": "Hard",
-    "TargetValue": 30,
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Crystals",
-            "Amount": 15
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Ico": "NPC_Gnome",
-        "Message": "Use workers"
-      }
-    }
-  },
-  {
     "$type": "TaskOpenChestEntity, GameAssembly",
-    "Id": "Daily_Quest_16",
+    "Id": "Daily_Quest_13",
     "Group": "Hard",
     "TargetValue": 10,
     "ComponentsCache": {

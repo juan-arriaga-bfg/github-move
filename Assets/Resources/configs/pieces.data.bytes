@@ -2687,63 +2687,6 @@
     ]
   },
   {
-    "Uid": "NPC_B6",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 10
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 25
-      }
-    ],
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 10
-      }
-    ]
-  },
-  {
-    "Uid": "NPC_B7",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 15
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 50
-      }
-    ],
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 15
-      }
-    ]
-  },
-  {
-    "Uid": "NPC_B8",
-    "CreateRewards": [
-      {
-        "Currency": "Coins",
-        "Amount": 25
-      },
-      {
-        "Currency": "Experience",
-        "Amount": 75
-      }
-    ],
-    "UnlockBonus": [
-      {
-        "Currency": "Coins",
-        "Amount": 20
-      }
-    ]
-  },
-  {
     "Uid": "NPC_C1",
     "UnlockBonus": [
       {
@@ -2825,6 +2768,63 @@
       {
         "Currency": "Coins",
         "Amount": 5
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_C6",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 10
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_C7",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 50
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 15
+      }
+    ]
+  },
+  {
+    "Uid": "NPC_C8",
+    "CreateRewards": [
+      {
+        "Currency": "Coins",
+        "Amount": 25
+      },
+      {
+        "Currency": "Experience",
+        "Amount": 75
+      }
+    ],
+    "UnlockBonus": [
+      {
+        "Currency": "Coins",
+        "Amount": 20
       }
     ]
   },

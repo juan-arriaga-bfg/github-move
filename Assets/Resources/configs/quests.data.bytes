@@ -1403,6 +1403,98 @@
     }
   },
   {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "66_CreatePiece_NPC_B3",
+    "TaskDefs": [
+      {
+        "TaskId": "66_CreatePiece_NPC_B3"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 20
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "67_CreatePiece_NPC_B4",
+    "TaskDefs": [
+      {
+        "TaskId": "67_CreatePiece_NPC_B4"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "68_CreatePiece_NPC_B5",
+    "TaskDefs": [
+      {
+        "TaskId": "68_CreatePiece_NPC_B5"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 100
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "71_CreatePiece_NPC_B",
+    "TaskDefs": [
+      {
+        "TaskId": "71_CreatePiece_NPC_B"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 100
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 300
+          }
+        ]
+      }
+    }
+  },
+  {
     "$type": "DailyQuestEntity, GameAssembly",
     "Id": "Daily",
     "TaskDefs": [
@@ -1447,15 +1539,6 @@
       },
       {
         "TaskId": "Daily_Quest_13"
-      },
-      {
-        "TaskId": "Daily_Quest_14"
-      },
-      {
-        "TaskId": "Daily_Quest_15"
-      },
-      {
-        "TaskId": "Daily_Quest_16"
       }
     ]
   }

@@ -760,5 +760,61 @@
         "Value": "3_KillTree"
       }
     ]
+  },
+  {
+    "Id": 60,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "66_CreatePiece_NPC_B3"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
+        "Id": "PieceUnlocked",
+        "Value": "NPC_B2"
+      }
+    ]
+  },
+  {
+    "Id": 61,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "67_CreatePiece_NPC_B4"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
+        "Id": "PieceUnlocked",
+        "Value": "NPC_B3"
+      }
+    ]
+  },
+  {
+    "Id": 62,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "68_CreatePiece_NPC_B5"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "67_CreatePiece_NPC_B4"
+      }
+    ]
+  },
+  {
+    "Id": 63,
+    "$type": "QuestStarterEntity, GameAssembly",
+    "QuestToStartIds": [
+      "71_CreatePiece_NPC_B"
+    ],
+    "Conditions": [
+      {
+        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
+        "Id": "QuestCompleted",
+        "Value": "68_CreatePiece_NPC_B5"
+      }
+    ]
   }
 ]
