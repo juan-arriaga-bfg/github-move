@@ -52,6 +52,7 @@
         if (Locker.IsLocked || GameDataService.Current.CodexManager.OnPieceBuilded(piece.PieceType) == false) return;
 
         FlyToTarget(piece, x, y, target);
+        GameDataService.Current.CharactersManager.UnlockNewCharacter(piece.PieceType);
     }
 
     public void FlyToTarget(Piece piece, BoardPosition position, string target)

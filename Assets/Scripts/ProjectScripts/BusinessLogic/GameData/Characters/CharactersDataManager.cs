@@ -48,6 +48,8 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
     
     public void UnlockNewCharacter(int id)
     {
+        if (Characters.Contains(id) == false) return;
+        
         Characters.Remove(id);
         UpdateSequence();
         GetSequence(Currency.Character.Name).Reinit(CharactersWeights);
