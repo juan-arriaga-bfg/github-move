@@ -6,7 +6,7 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
 
-    private List<int> characters;
+    public List<int> Characters;
     private List<CharacterDef> defs;
     public List<ItemWeight> CharactersWeights;
     
@@ -22,18 +22,18 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
         {
             if (string.IsNullOrEmpty(error))
             {
-                characters = PieceType.GetIdsByFilter(PieceTypeFilter.Character, PieceTypeFilter.Fake);
-                characters.Remove(PieceType.NPC_A.Id);
+                Characters = PieceType.GetIdsByFilter(PieceTypeFilter.Character, PieceTypeFilter.Fake);
+                Characters.Remove(PieceType.NPC_A.Id);
                 
                 defs = data;
                 
-                for (var i = characters.Count - 1; i >= 0; i--)
+                for (var i = Characters.Count - 1; i >= 0; i--)
                 {
-                    var id = characters[i];
+                    var id = Characters[i];
                     
                     if (GameDataService.Current.CodexManager.IsPieceUnlocked(id) == false) continue;
 
-                    characters.RemoveAt(i);
+                    Characters.RemoveAt(i);
                 }
                 
                 UpdateSequence();
@@ -48,14 +48,14 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
     
     public void UnlockNewCharacter(int id)
     {
-        characters.Remove(id);
+        Characters.Remove(id);
         UpdateSequence();
         GetSequence(Currency.Character.Name).Reinit(CharactersWeights);
     }
 
     private void UpdateSequence()
     {
-        var amount = Mathf.Min(3, characters.Count);
+        var amount = Mathf.Min(3, Characters.Count);
         
         CharactersWeights = new List<ItemWeight>();
         
@@ -65,16 +65,14 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
             return;
         }
         
-        if (amount < defs.Count) defs.RemoveRange(amount - 1, defs.Count - amount);
-        
         for (var i = 0; i < defs.Count; i++)
         {
             var def = defs[i];
-            var chain = GameDataService.Current.MatchDefinition.GetChain(characters[i]);
+            var chain = i < amount ? GameDataService.Current.MatchDefinition.GetChain(Characters[i]) : new List<int>();
 
             foreach (var item in def.PieceWeights)
             {
-                var uid = PieceType.Parse(chain[int.Parse(item.Uid) - 1]);
+                var uid = i < amount ? PieceType.Parse(chain[int.Parse(item.Uid) - 1]) : PieceType.Hard1.Abbreviations[0];
                 CharactersWeights.Add(new ItemWeight{Uid = uid, Weight = item.Weight});
             }
         }

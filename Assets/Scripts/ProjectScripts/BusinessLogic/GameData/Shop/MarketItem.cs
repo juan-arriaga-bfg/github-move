@@ -106,8 +106,11 @@ public class MarketItem
             case MarketRandomType.Ingredients:
                 piece = GetRandomIngredient();
                 break;
-            case MarketRandomType.BaseСhests:
+            case MarketRandomType.BaseChests:
                 piece = GetRandomChest();
+                break;
+            case MarketRandomType.NPCChests:
+                piece = GameDataService.Current.CharactersManager.Characters.Count == 0 ? null : def.Weight.Uid;
                 break;
             default :
                 piece = def.Weight.Uid;

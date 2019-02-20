@@ -145,18 +145,18 @@ public static partial class PieceType
     public static readonly PieceTypeDef NPC_D = new PieceTypeDef{Id = 105, Abbreviations = new List<string>{ "NPC_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef NPC_E = new PieceTypeDef{Id = 106, Abbreviations = new List<string>{ "NPC_E" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef NPC_F = new PieceTypeDef{Id = 107, Abbreviations = new List<string>{ "NPC_F" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef NPC_G = new PieceTypeDef{Id = 108, Abbreviations = new List<string>{ "NPC_G" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef NPC_H = new PieceTypeDef{Id = 109, Abbreviations = new List<string>{ "NPC_H" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef NPC_I = new PieceTypeDef{Id = 110, Abbreviations = new List<string>{ "NPC_I" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef NPC_J = new PieceTypeDef{Id = 111, Abbreviations = new List<string>{ "NPC_J" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef NPC_K = new PieceTypeDef{Id = 112, Abbreviations = new List<string>{ "NPC_K" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef NPC_L = new PieceTypeDef{Id = 113, Abbreviations = new List<string>{ "NPC_L" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef NPC_M = new PieceTypeDef{Id = 114, Abbreviations = new List<string>{ "NPC_M" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef NPC_N = new PieceTypeDef{Id = 115, Abbreviations = new List<string>{ "NPC_N" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef NPC_O = new PieceTypeDef{Id = 116, Abbreviations = new List<string>{ "NPC_O" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef NPC_P = new PieceTypeDef{Id = 117, Abbreviations = new List<string>{ "NPC_P" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef NPC_Q = new PieceTypeDef{Id = 118, Abbreviations = new List<string>{ "NPC_Q" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef NPC_R = new PieceTypeDef{Id = 119, Abbreviations = new List<string>{ "NPC_R" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef NPC_G = new PieceTypeDef{Id = 108, Abbreviations = new List<string>{ "NPC_G" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress | PieceTypeFilter.Fake};
+    public static readonly PieceTypeDef NPC_H = new PieceTypeDef{Id = 109, Abbreviations = new List<string>{ "NPC_H" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress | PieceTypeFilter.Fake};
+    public static readonly PieceTypeDef NPC_I = new PieceTypeDef{Id = 110, Abbreviations = new List<string>{ "NPC_I" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress | PieceTypeFilter.Fake};
+    public static readonly PieceTypeDef NPC_J = new PieceTypeDef{Id = 111, Abbreviations = new List<string>{ "NPC_J" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress | PieceTypeFilter.Fake};
+    public static readonly PieceTypeDef NPC_K = new PieceTypeDef{Id = 112, Abbreviations = new List<string>{ "NPC_K" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress | PieceTypeFilter.Fake};
+    public static readonly PieceTypeDef NPC_L = new PieceTypeDef{Id = 113, Abbreviations = new List<string>{ "NPC_L" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress | PieceTypeFilter.Fake};
+    public static readonly PieceTypeDef NPC_M = new PieceTypeDef{Id = 114, Abbreviations = new List<string>{ "NPC_M" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress | PieceTypeFilter.Fake};
+    public static readonly PieceTypeDef NPC_N = new PieceTypeDef{Id = 115, Abbreviations = new List<string>{ "NPC_N" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress | PieceTypeFilter.Fake};
+    public static readonly PieceTypeDef NPC_O = new PieceTypeDef{Id = 116, Abbreviations = new List<string>{ "NPC_O" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress | PieceTypeFilter.Fake};
+    public static readonly PieceTypeDef NPC_P = new PieceTypeDef{Id = 117, Abbreviations = new List<string>{ "NPC_P" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress | PieceTypeFilter.Fake};
+    public static readonly PieceTypeDef NPC_Q = new PieceTypeDef{Id = 118, Abbreviations = new List<string>{ "NPC_Q" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress | PieceTypeFilter.Fake};
+    public static readonly PieceTypeDef NPC_R = new PieceTypeDef{Id = 119, Abbreviations = new List<string>{ "NPC_R" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress | PieceTypeFilter.Fake};
     
 #endregion
     
