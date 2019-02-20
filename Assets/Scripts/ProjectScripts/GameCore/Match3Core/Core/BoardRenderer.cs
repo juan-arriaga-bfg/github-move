@@ -1239,6 +1239,7 @@ public partial class BoardRenderer : ECSEntity
         var h = fieldManager.LayoutH;
 
         GameObject root = new GameObject();
+        root.name = "FieldBorders";
         
         bool IsCellExists(int x, int y)
         {
