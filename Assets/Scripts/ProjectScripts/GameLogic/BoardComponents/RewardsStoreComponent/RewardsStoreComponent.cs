@@ -19,6 +19,7 @@ public class RewardsStoreComponent : IECSComponent
     public bool IsTargetReplace;
     public bool IsComplete;
     public bool IsScatter;
+    public bool IsSingle;
     
     private Piece context;
     
@@ -155,6 +156,7 @@ public class RewardsStoreComponent : IECSComponent
         var current = rewards.Sum(pair => pair.Value);
         
         if (IsTargetReplace) current = Mathf.Max(0, current - (context.Multicellular?.Mask.Count ?? 1));
+        if (IsSingle && current > 0) current = 1;
         
         var cells = new List<BoardPosition>();
         
@@ -195,6 +197,7 @@ public class RewardsStoreComponent : IECSComponent
     {
         context.Context.ActionExecutor.AddAction(new ScatterPiecesAction
         {
+            IsSingle = IsSingle,
             IsTargetReplace = IsTargetReplace,
             From = context.CachedPosition,
             Pieces = rewards,

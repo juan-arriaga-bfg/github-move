@@ -48,11 +48,11 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		Context.RegisterComponent(TimerWork);
 	}
 
-	private void PlaySoundOnStart()
+	protected void PlaySoundOnStart()
 	{
 	}
 
-	private void PlaySoundOnEnd()
+	protected void PlaySoundOnEnd()
 	{
 		NSAudioService.Current.Play(SoundId.WorkerFinish);
 	}
@@ -83,8 +83,8 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		
 		var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
 		var item = save?.GetLifeSave(position);
-		
-		if(item == null) return null;
+
+		if (item == null) return null;
 		
 		current = item.Step;
 		Context.Context.WorkerLogic.Init(Context.CachedPosition, TimerWork);
@@ -124,7 +124,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		return true;
 	}
 	
-	protected void OnTimerStart()
+	protected virtual void OnTimerStart()
 	{
 		if (IsDead == false) OnStep();
 		else OnComplete();
