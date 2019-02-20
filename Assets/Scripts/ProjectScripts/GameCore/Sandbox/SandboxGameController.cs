@@ -131,24 +131,24 @@ public class SandboxGameController : MonoBehaviour
         
         boardController.RendererContext.CreateBorders();
         
-        var widthShift = boardController.BoardDef.Width / 4;
-        var heightShift = boardController.BoardDef.Height / 4;
-        
-        var leftPoint = boardController.BoardDef.GetSectorCenterWorldPosition(widthShift, heightShift - 1, 0);
-        var rightPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - widthShift - 1, boardController.BoardDef.Height - widthShift, 0);
-        var topPoint = boardController.BoardDef.GetSectorCenterWorldPosition(heightShift - 1, boardController.BoardDef.Height - heightShift - 1, 0);
-        var bottomPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - heightShift - 1, heightShift - 1, 0);
-        
+        // var widthShift = boardController.BoardDef.Width / 4;
+        // var heightShift = boardController.BoardDef.Height / 4;
+        //
+        // var leftPoint = boardController.BoardDef.GetSectorCenterWorldPosition(widthShift, heightShift - 1, 0);
+        // var rightPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - widthShift - 1, boardController.BoardDef.Height - widthShift, 0);
+        // var topPoint = boardController.BoardDef.GetSectorCenterWorldPosition(heightShift - 1, boardController.BoardDef.Height - heightShift - 1, 0);
+        // var bottomPoint = boardController.BoardDef.GetSectorCenterWorldPosition(boardController.BoardDef.Width - heightShift - 1, heightShift - 1, 0);
+        //
+        //
+        // boardController.Manipulator.CameraManipulator.CurrentCameraSettings.CameraClampRegion = new Rect
+        // (
+        //     leftPoint.x, 
+        //     bottomPoint.y,
+        //     Mathf.Abs((leftPoint - rightPoint).x),
+        //     Mathf.Abs((topPoint - bottomPoint).y)
+        // );
+
         var centerPosition = boardController.BoardDef.GetSectorCenterWorldPosition(19, 13, BoardLayer.Piece.Layer);
-        
-        boardController.Manipulator.CameraManipulator.CurrentCameraSettings.CameraClampRegion = new Rect
-        (
-            leftPoint.x, 
-            bottomPoint.y,
-            Mathf.Abs((leftPoint - rightPoint).x),
-            Mathf.Abs((topPoint - bottomPoint).y)
-        );
-       
         boardController.Manipulator.CameraManipulator.CachedCameraTransform.localPosition = new Vector3
         (
             centerPosition.x,
@@ -156,8 +156,8 @@ public class SandboxGameController : MonoBehaviour
             boardController.Manipulator.CameraManipulator.CachedCameraTransform.localPosition.z
         );
 
-        var shift = 12;
-        var vectorShift = boardController.BoardDef.GetSectorWorldPosition(-shift / 2, -shift / 2, 0);
+        //var shift = 12;
+        //var vectorShift = boardController.BoardDef.GetSectorWorldPosition(-shift / 2, -shift / 2, 0);
         // boardController.RendererContext.GenerateBackground
         // (
         //     vectorShift,
