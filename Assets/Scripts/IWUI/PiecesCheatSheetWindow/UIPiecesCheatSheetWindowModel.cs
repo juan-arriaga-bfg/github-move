@@ -117,7 +117,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 break;
             case "Character Pieces":
                 ids.AddRange(GetPieceIds(PieceType.NPC_B1.Id, PieceType.NPC_B8.Id));
-                ids.AddRange(GetPieceIds(PieceType.NPC_C1.Id, PieceType.NPC_C8.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC_C1.Id, PieceType.NPC_C5.Id));
                 ids.AddRange(GetPieceIds(PieceType.NPC_D1.Id, PieceType.NPC_D8.Id));
                 ids.AddRange(GetPieceIds(PieceType.NPC_E1.Id, PieceType.NPC_E8.Id));
                 ids.AddRange(GetPieceIds(PieceType.NPC_F1.Id, PieceType.NPC_F8.Id));

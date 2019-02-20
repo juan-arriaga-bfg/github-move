@@ -303,9 +303,6 @@ public class R
      public const string NPC_C3Piece = "NPC_C3Piece";
      public const string NPC_C4Piece = "NPC_C4Piece";
      public const string NPC_C5Piece = "NPC_C5Piece";
-     public const string NPC_C6Piece = "NPC_C6Piece";
-     public const string NPC_C7Piece = "NPC_C7Piece";
-     public const string NPC_C8Piece = "NPC_C8Piece";
      public const string NPC_D1Piece = "NPC_D1Piece";
      public const string NPC_D2Piece = "NPC_D2Piece";
      public const string NPC_D3Piece = "NPC_D3Piece";

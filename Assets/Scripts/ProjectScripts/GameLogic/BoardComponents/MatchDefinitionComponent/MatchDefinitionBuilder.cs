@@ -44,11 +44,8 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.NPC_C2.Id, new PieceMatchDef {Next = PieceType.NPC_C3.Id, Previous = PieceType.NPC_C1.Id, Amount = 3});
         dict.Add(PieceType.NPC_C3.Id, new PieceMatchDef {Next = PieceType.NPC_C4.Id, Previous = PieceType.NPC_C2.Id, Amount = 3});
         dict.Add(PieceType.NPC_C4.Id, new PieceMatchDef {Next = PieceType.NPC_C5.Id, Previous = PieceType.NPC_C3.Id, Amount = 3});
-        dict.Add(PieceType.NPC_C5.Id, new PieceMatchDef {Next = PieceType.NPC_C6.Id, Previous = PieceType.NPC_C4.Id, Amount = 3});
-        dict.Add(PieceType.NPC_C6.Id, new PieceMatchDef {Next = PieceType.NPC_C7.Id, Previous = PieceType.NPC_C5.Id, Amount = 3});
-        dict.Add(PieceType.NPC_C7.Id, new PieceMatchDef {Next = PieceType.NPC_C8.Id, Previous = PieceType.NPC_C6.Id, Amount = 3});
-        dict.Add(PieceType.NPC_C8.Id, new PieceMatchDef {Next = PieceType.NPC_C.Id, Previous = PieceType.NPC_C7.Id, Amount = 3});
-        dict.Add(PieceType.NPC_C.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.NPC_C8.Id, Amount = -1});
+        dict.Add(PieceType.NPC_C5.Id, new PieceMatchDef {Next = PieceType.NPC_C.Id, Previous = PieceType.NPC_C4.Id, Amount = 3});
+        dict.Add(PieceType.NPC_C.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.NPC_C5.Id, Amount = -1});
         
         #endregion
         

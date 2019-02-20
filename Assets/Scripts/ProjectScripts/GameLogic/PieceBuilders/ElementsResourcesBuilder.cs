@@ -84,9 +84,6 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.NPC_C3.Id, R.NPC_C3Piece);
         dict.Add(PieceType.NPC_C4.Id, R.NPC_C4Piece);
         dict.Add(PieceType.NPC_C5.Id, R.NPC_C5Piece);
-        dict.Add(PieceType.NPC_C6.Id, R.NPC_C6Piece);
-        dict.Add(PieceType.NPC_C7.Id, R.NPC_C7Piece);
-        dict.Add(PieceType.NPC_C8.Id, R.NPC_C8Piece);
 
         #endregion
         
