@@ -108,8 +108,6 @@ namespace BfgAnalytics
             var pieceName = pieceDef.Abbreviations[0];
             var chainName = chainNameRegex.Match(pieceName).Groups[1].Value;
             
-            Debug.LogError($"PieceName = {pieceName}, chainName = {chainName}");
-            
             chainNames[pieceDef.Id] = chainName;
             return chainName;
         }
