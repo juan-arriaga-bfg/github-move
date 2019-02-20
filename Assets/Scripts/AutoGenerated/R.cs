@@ -335,4 +335,6 @@ public class R
      public const string CH3_GPiece = "CH3_GPiece";
      public const string CH_NPCPiece = "CH_NPCPiece";
      public const string BackgroundWater = "BackgroundWater";
+     public const string BorderLeftHole = "BorderLeftHole";
+     public const string BorderBottomHole = "BorderBottomHole";
 }

@@ -1248,9 +1248,8 @@ public partial class BoardRenderer : ECSEntity
         void Create(int x, int y, string item)
         {
             var prefab = ContentService.Current.GetObjectByName(item);
-            GameObject go = (GameObject) GameObject.Instantiate(prefab);
+            GameObject go = (GameObject) Object.Instantiate(prefab, root.transform, true);
             go.transform.position = boardDef.GetPiecePosition(x, y);
-            go.transform.SetParent(root.transform);
         }
 
         for (int x = 0; x < w; x++)
@@ -1263,10 +1262,11 @@ public partial class BoardRenderer : ECSEntity
                     continue;
                 }
 
-                bool neighborR = IsCellExists(x + 0, y + 1) && fieldManager.GetCellType(x + 0, y + 1) > 1;
-                bool neighborL = IsCellExists(x + 0, y - 1) && fieldManager.GetCellType(x + 0, y - 1) > 1;              
-                bool neighborT = IsCellExists(x - 1, y + 0) && fieldManager.GetCellType(x - 1, y + 0) > 1;
-                bool neighborB = IsCellExists(x + 1, y + 0) && fieldManager.GetCellType(x + 1, y + 0) > 1;
+                bool neighborR  = IsCellExists(x + 0, y + 1) && fieldManager.GetCellType(x + 0, y + 1) > 1;
+                bool neighborL  = IsCellExists(x + 0, y - 1) && fieldManager.GetCellType(x + 0, y - 1) > 1;              
+                bool neighborT  = IsCellExists(x - 1, y + 0) && fieldManager.GetCellType(x - 1, y + 0) > 1;
+                bool neighborB  = IsCellExists(x + 1, y + 0) && fieldManager.GetCellType(x + 1, y + 0) > 1;
+                bool neighborBL = IsCellExists(x + 1, y - 1) && fieldManager.GetCellType(x + 1, y - 1) > 1;
                 
                 if (!neighborT)
                 {
@@ -1275,12 +1275,12 @@ public partial class BoardRenderer : ECSEntity
                 
                 if (!neighborB)
                 {
-                    Create(x, y, R.BorderBottom);
+                    Create(x, y, neighborBL ? R.BorderBottomHole : R.BorderBottom);
                 }
                 
                 if (!neighborL)
                 {
-                    Create(x, y, R.BorderLeft);
+                    Create(x, y, neighborBL ? R.BorderLeftHole : R.BorderLeft);
                 }
                 
                 if (!neighborR)
