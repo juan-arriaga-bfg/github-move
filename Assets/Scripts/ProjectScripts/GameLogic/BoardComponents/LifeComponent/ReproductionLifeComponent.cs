@@ -7,8 +7,8 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
     private string childName;
     public override string AnalyticsLocation => $"skip_product{(TimerCooldown.IsExecuteable() ? "_cooldown" : "")}";
     public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.production", "gameboard.bubble.message.production {0}"), childName);
-    public override string Price => TimerMain.IsExecuteable()
-        ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), TimerMain.CompleteTime.GetTimeLeftText())
+    public override string Price => TimerCooldown.IsExecuteable()
+        ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), TimerCooldown.CompleteTime.GetTimeLeftText())
         : string.Format(LocalizationService.Get("gameboard.bubble.button.send", "gameboard.bubble.button.send {0}"), string.Empty);
     
     public override CurrencyPair Worker => null;
@@ -22,7 +22,7 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).ReproductionDef;
         
         HP = def.Limit;
-        TimerWork.Delay = 2;
+        TimerWork.Delay = 0;
         
         TimerCooldown = new TimerComponent{Delay = def.Delay};
         RegisterComponent(TimerCooldown);
