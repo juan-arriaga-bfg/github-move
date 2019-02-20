@@ -33,15 +33,18 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 1f740044f2c2cd644be15609bca027e9, type: 3}
     - {fileID: 21300000, guid: 44bfd5ce668e64a06965ec90aeda04c3, type: 3}
     - {fileID: 21300000, guid: 93d79fbcd42484b5cbc51aba4c15f6c0, type: 3}
-    totalSpriteSurfaceArea: 65124
+    - {fileID: 21300000, guid: 7241819afe16a0f4e9203487896ec796, type: 3}
+    totalSpriteSurfaceArea: 82548
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 1f740044f2c2cd644be15609bca027e9, type: 3}
+  - {fileID: 21300000, guid: 7241819afe16a0f4e9203487896ec796, type: 3}
   - {fileID: 21300000, guid: 93d79fbcd42484b5cbc51aba4c15f6c0, type: 3}
   - {fileID: 21300000, guid: 44bfd5ce668e64a06965ec90aeda04c3, type: 3}
   m_PackedSpriteNamesToIndex:
   - background_tile
+  - tile_water
   - tile_grass_2
   - tile_grass_1
   m_Tag: tiles

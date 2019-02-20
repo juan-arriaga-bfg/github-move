@@ -15,9 +15,12 @@ public class FieldControllerComponent : IECSComponent
         
         var fieldDef = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
         
-        GenerateBorder();
-        var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
-        CutTriangles(maxEdge / 2, Directions.All);
+        //GenerateBorder();
+
+        LockWater();
+        
+        // var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
+        // CutTriangles(maxEdge / 2, Directions.All);
         
 #if UNITY_EDITOR
 //        TestFieldOleg(); return;
@@ -62,7 +65,7 @@ public class FieldControllerComponent : IECSComponent
 
         AddLastAction();
     }
-    
+
     public void OnUnRegisterEntity(ECSEntity entity)
     {
     }
@@ -165,6 +168,27 @@ public class FieldControllerComponent : IECSComponent
         var view = context.RendererContext.CreateBoardElementAt<BoardElementView>(pattern, position);
 
         view.CachedTransform.localPosition += offset;
+    }
+    
+    private void LockWater()
+    {
+        var width = context.BoardDef.Width;
+        var height = context.BoardDef.Height;
+        var layout = GameDataService.Current.FieldManager.LayoutData;
+        
+        int layoutIndex = 0;
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                var cell = layout[layoutIndex++];
+                if (cell == 1)
+                {
+                    var point = new BoardPosition(x, y, BoardLayer.Piece.Layer);
+                    context.BoardLogic.AddPieceToBoard(point.X, point.Y, context.CreateEmptyPiece());
+                }
+            }
+        }
     }
     
     private void CutTriangles(int count, Directions directions)

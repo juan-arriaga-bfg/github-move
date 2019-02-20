@@ -1063,8 +1063,10 @@ public partial class BoardRenderer : ECSEntity
          SectorsContainer.localPosition = new Vector3(0f, 0f, 0f);
          SectorsContainer.localRotation = Quaternion.Euler(54.5f, 0f, -45f);
          SectorsContainer.localScale = Vector3.one;
+
+         var layout = GameDataService.Current.FieldManager.LayoutData;
          
-         var sectorsMesh = GenerateMesh(width, height, size, tiles, backgroundTile, ignorablePositions);
+         var sectorsMesh = GenerateMesh(width, height, size, tiles, backgroundTile, ignorablePositions, layout);
          
          var meshGO = new GameObject("_cells");
          var meshTransform = meshGO.transform;
@@ -1085,7 +1087,19 @@ public partial class BoardRenderer : ECSEntity
          material.renderQueue = 2000;
          
          // load texture
-         var tileSprite = IconService.Current.GetSpriteById(tiles[0]);
+         Sprite tileSprite = null;
+         int index = 0;
+         do
+         {
+             string id = tiles[index];
+             if (!string.IsNullOrEmpty(id))
+             {
+                 tileSprite = IconService.Current.GetSpriteById(id);
+             }
+             index++;
+         } 
+         while (tileSprite == null && index < tiles.Count);
+         
          var tileTexture = tileSprite == null ? null : tileSprite.texture;
          material.mainTexture = tileTexture;
          
@@ -1094,7 +1108,7 @@ public partial class BoardRenderer : ECSEntity
          return SectorsContainer.transform;
      }
 
-    private Mesh GenerateMesh(int width, int height, float size, List<string> tiles, string ignorableTileName = null, IList<BoardPosition> ignorablePositions = null)
+    private Mesh GenerateMesh(int width, int height, float size, List<string> tiles, string ignorableTileName = null, IList<BoardPosition> ignorablePositions = null, int[] layout = null)
     {
         ignorablePositions = ignorablePositions ?? new List<BoardPosition>();
         Mesh sectorsMesh = new Mesh();
@@ -1107,6 +1121,7 @@ public partial class BoardRenderer : ECSEntity
 
         var defaultColor = new Color(1f, 1f, 1f, 1f);
 
+        int layoutIndex = 0;
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -1121,35 +1136,43 @@ public partial class BoardRenderer : ECSEntity
                 {
                     if(isIgnorable)
                         continue;
-                    if ((x + y) % 2 == 0)
-                        fullTile = IconService.Current.GetSpriteById(tiles[1]);
-                    else
-                        fullTile = IconService.Current.GetSpriteById(tiles[0]);
+
+                    var id = layout == null ? (x + y) % 2 == 0 
+                                                ? tiles[1] 
+                                                : tiles[0]
+                            
+                                            : tiles[layout[layoutIndex]];
+
+                    fullTile = IconService.Current.GetSpriteById(id);
                 }
-                
 
-                vertices.Add(new Vector3(x * borderWidth, (y + 1) * borderWidth, 0));
-                vertices.Add(new Vector3((x + 1) * borderWidth, (y + 1) * borderWidth, 0));
-                vertices.Add(new Vector3(x * borderWidth, y * borderWidth, 0));
-                vertices.Add(new Vector3((x + 1) * borderWidth, y * borderWidth, 0));
-
-
-                tris.Add(cellIndex);
-                tris.Add(cellIndex + 1);
-                tris.Add(cellIndex + 2);
-
-                tris.Add(cellIndex + 2);
-                tris.Add(cellIndex + 1);
-                tris.Add(cellIndex + 3);
-                
-                for (int i = 0; i < fullTile.uv.Length; i++)
+                if (fullTile != null && layout[layoutIndex] != 1)
                 {
-                    var uvPos = fullTile.uv[i];
-                    uv.Add(uvPos);
-                    colors.Add(defaultColor);
+                    vertices.Add(new Vector3(x * borderWidth,       (y + 1) * borderWidth, 0));
+                    vertices.Add(new Vector3((x + 1) * borderWidth, (y + 1) * borderWidth, 0));
+                    vertices.Add(new Vector3(x * borderWidth,       y * borderWidth,       0));
+                    vertices.Add(new Vector3((x + 1) * borderWidth, y * borderWidth,       0));
+
+
+                    tris.Add(cellIndex);
+                    tris.Add(cellIndex + 1);
+                    tris.Add(cellIndex + 2);
+
+                    tris.Add(cellIndex + 2);
+                    tris.Add(cellIndex + 1);
+                    tris.Add(cellIndex + 3);
+
+                    for (int i = 0; i < fullTile.uv.Length; i++)
+                    {
+                        var uvPos = fullTile.uv[i];
+                        uv.Add(uvPos);
+                        colors.Add(defaultColor);
+                    }
+                    
+                    cellIndex = cellIndex + 4;
                 }
 
-                cellIndex = cellIndex + 4;
+                layoutIndex++;
             }
         }
         
@@ -1198,5 +1221,74 @@ public partial class BoardRenderer : ECSEntity
         material.mainTexture = tileTexture;
 
         meshRenderer.material = material;
+    }
+
+    public void CreateBackgroundWater()
+    {
+        var waterPrefab = ContentService.Current.GetObjectByName(R.BackgroundWater);
+        GameObject water = (GameObject) GameObject.Instantiate(waterPrefab);
+    }
+
+    public void CreateBorders()
+    {
+        var boardDef = context.BoardDef;
+        
+        var fieldManager = GameDataService.Current.FieldManager;
+
+        var w = fieldManager.LayoutW;
+        var h = fieldManager.LayoutH;
+
+        GameObject root = new GameObject();
+        root.name = "FieldBorders";
+        
+        bool IsCellExists(int x, int y)
+        {
+            return x >= 0 && y >= 0 && x < w && y < h;
+        }
+
+        void Create(int x, int y, string item)
+        {
+            var prefab = ContentService.Current.GetObjectByName(item);
+            GameObject go = (GameObject) Object.Instantiate(prefab, root.transform, true);
+            go.transform.position = boardDef.GetPiecePosition(x, y);
+        }
+
+        for (int x = 0; x < w; x++)
+        {
+            for (int y = 0; y < h; y++)
+            {
+                int cellVal = fieldManager.GetCellType(x, y);
+                if (cellVal == 1)
+                {
+                    continue;
+                }
+
+                bool neighborR  = IsCellExists(x + 0, y + 1) && fieldManager.GetCellType(x + 0, y + 1) > 1;
+                bool neighborL  = IsCellExists(x + 0, y - 1) && fieldManager.GetCellType(x + 0, y - 1) > 1;              
+                bool neighborT  = IsCellExists(x - 1, y + 0) && fieldManager.GetCellType(x - 1, y + 0) > 1;
+                bool neighborB  = IsCellExists(x + 1, y + 0) && fieldManager.GetCellType(x + 1, y + 0) > 1;
+                bool neighborBL = IsCellExists(x + 1, y - 1) && fieldManager.GetCellType(x + 1, y - 1) > 1;
+                
+                if (!neighborT)
+                {
+                    Create(x, y, R.BorderTop);
+                }
+                
+                if (!neighborB)
+                {
+                    Create(x, y, neighborBL ? R.BorderBottomHole : R.BorderBottom);
+                }
+                
+                if (!neighborL)
+                {
+                    Create(x, y, neighborBL ? R.BorderLeftHole : R.BorderLeft);
+                }
+                
+                if (!neighborR)
+                {
+                    Create(x, y, R.BorderRight);
+                }
+            }
+        }
     }
 }
