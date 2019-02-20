@@ -23,6 +23,7 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         
         HP = def.Limit;
         TimerWork.Delay = 0;
+        Rewards.IsSingle = true;
         
         TimerCooldown = new TimerComponent{Delay = def.Delay};
         TimerCooldown.OnComplete += TimerWork.Start;
