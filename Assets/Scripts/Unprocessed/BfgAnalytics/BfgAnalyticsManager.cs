@@ -68,11 +68,11 @@ namespace BfgAnalytics
                         break;
                     }
 
-                    if (string.IsNullOrEmpty(st2) && !string.IsNullOrEmpty(st3))
-                    {
-                        Debug.LogError("[BfgAnalyticsManager] => 'type' is not set but 'name' has a value");
-                        break;
-                    }
+                    // if (string.IsNullOrEmpty(st2) && !string.IsNullOrEmpty(st3))
+                    // {
+                    //     Debug.LogError("[BfgAnalyticsManager] => 'type' is not set but 'name' has a value");
+                    //     break;
+                    // }
 
                     if (st1.Length > 31)
                     {

@@ -57,23 +57,13 @@ namespace BfgAnalytics
         }
 
 		public static void SendTutorialStartStepEvent(string name)
-        {
-            JSONNode customJsonData = new JSONObject();
-            
-            customJsonData["name"] = name;
-            customJsonData["action"] = "start";
-            
-            AnalyticsService.Current?.Event("ftue", null, null, null, TutorialJsonData(), customJsonData);
+        {           
+            AnalyticsService.Current?.Event("ftue", null, name, "start", TutorialJsonData());
         }
 
         public static void SendTutorialEndStepEvent(string name)
         {
-            JSONNode customJsonData = new JSONObject();
-            
-            customJsonData["name"] = name;
-            customJsonData["action"] = "end";
-            
-            AnalyticsService.Current?.Event("ftue", null, null, null, TutorialJsonData(), customJsonData);
+            AnalyticsService.Current?.Event("ftue", null, name, "end", TutorialJsonData());
         }
         
         public static void SendPurchase(string location, string reason, List<CurrencyPair> spend, List<CurrencyPair> collect, bool isIap, bool isFree)
