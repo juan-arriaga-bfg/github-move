@@ -20,11 +20,11 @@ namespace BfgAnalytics
         public JsonDataCollectorUserStats()
         {
             matchDefinition = new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
-            firstInChains = PieceType.GetIdsByFilter(PieceTypeFilter.Normal)
+            firstInChains = PieceType.GetIdsByFilter(PieceTypeFilter.Progress)
                                      .Select(id => matchDefinition.GetFirst(id)).Distinct().ToList();
             
             chainNames = new Dictionary<int, string>();
-            chainNameRegex = new Regex(@"^([A-Za-z_]+)\d+");
+            chainNameRegex = new Regex(@"^([A-Za-z_]+)\d*");
         }
 
         public JSONNode CollectData()
@@ -35,7 +35,7 @@ namespace BfgAnalytics
                 (currency) => ProfileService.Current.GetStorageItem(currency.Name).Amount;
 
             var creationDate = ProfileService.Current.GetComponent<BaseInformationSaveComponent>(BaseInformationSaveComponent.ComponentGuid).CreationDateTime;
-            node["profile_creation_date"] = $"{creationDate.Month}/{creationDate.Day}/{creationDate.Year}";
+            node["profile_creation_date"] = $"{creationDate.Month}-{creationDate.Day}-{creationDate.Year}";
             node["last_fog"] = GameDataService.Current.FogsManager.LastOpenFog?.Uid ?? "";
             node["level"] = getValueByCurrency(Currency.Level);
             node["level_progress"] = GetLevelProgress();
@@ -107,6 +107,8 @@ namespace BfgAnalytics
 
             var pieceName = pieceDef.Abbreviations[0];
             var chainName = chainNameRegex.Match(pieceName).Groups[1].Value;
+            
+            Debug.LogError($"PieceName = {pieceName}, chainName = {chainName}");
             
             chainNames[pieceDef.Id] = chainName;
             return chainName;
