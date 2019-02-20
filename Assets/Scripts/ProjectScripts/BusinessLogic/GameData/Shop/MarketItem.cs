@@ -67,11 +67,11 @@ public class MarketItem
     {
         if (isTimer)
         {
-            if(State == MarketItemState.Purchased || State == MarketItemState.Saved) return;
+            if (State == MarketItemState.Purchased || State == MarketItemState.Saved) return;
         }
         else
         {
-            if(State != MarketItemState.Lock && Index != -1) return;
+            if (State != MarketItemState.Lock && Index != -1) return;
         }
         
         var weights = new List<ItemWeight>();

@@ -64,6 +64,7 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
         if (amount == 0)
         {
             CharactersWeights.Add(new ItemWeight{Uid = PieceType.Hard1.Abbreviations[0], Weight = 10});
+            GameDataService.Current.MarketManager.Defs.Find(item => item.Current?.RandomType == MarketRandomType.NPCChests)?.Update(true);
             return;
         }
         
