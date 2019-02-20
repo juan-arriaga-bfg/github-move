@@ -1087,7 +1087,19 @@ public partial class BoardRenderer : ECSEntity
          material.renderQueue = 2000;
          
          // load texture
-         var tileSprite = IconService.Current.GetSpriteById(tiles[1]);
+         Sprite tileSprite = null;
+         int index = 0;
+         do
+         {
+             string id = tiles[index];
+             if (!string.IsNullOrEmpty(id))
+             {
+                 tileSprite = IconService.Current.GetSpriteById(id);
+             }
+             index++;
+         } 
+         while (tileSprite == null && index < tiles.Count);
+         
          var tileTexture = tileSprite == null ? null : tileSprite.texture;
          material.mainTexture = tileTexture;
          
@@ -1251,12 +1263,11 @@ public partial class BoardRenderer : ECSEntity
                     continue;
                 }
 
-                bool neighborT = IsCellExists(x + 0, y + 1) && fieldManager.GetCellType(x + 0, y + 1) > 1;
-                bool neighborB = IsCellExists(x + 0, y - 1) && fieldManager.GetCellType(x + 0, y - 1) > 1;                
-                bool neighborL = IsCellExists(x - 1, y + 0) && fieldManager.GetCellType(x - 1, y + 0) > 1;
-                bool neighborR = IsCellExists(x + 1, y + 0) && fieldManager.GetCellType(x + 1, y + 0) > 1;
-
-                // Top border
+                bool neighborR = IsCellExists(x + 0, y + 1) && fieldManager.GetCellType(x + 0, y + 1) > 1;
+                bool neighborL = IsCellExists(x + 0, y - 1) && fieldManager.GetCellType(x + 0, y - 1) > 1;              
+                bool neighborT = IsCellExists(x - 1, y + 0) && fieldManager.GetCellType(x - 1, y + 0) > 1;
+                bool neighborB = IsCellExists(x + 1, y + 0) && fieldManager.GetCellType(x + 1, y + 0) > 1;
+                
                 if (!neighborT)
                 {
                     Create(x, y, R.BorderTop);

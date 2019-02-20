@@ -88,6 +88,6 @@ public class FieldDataManager : IECSComponent, IDataManager
 
     public int GetCellType(int x, int y)
     {
-        return LayoutData[x * LayoutW + (LayoutH - y - 1)];
+        return LayoutData[x * LayoutW + y];
     }
 }

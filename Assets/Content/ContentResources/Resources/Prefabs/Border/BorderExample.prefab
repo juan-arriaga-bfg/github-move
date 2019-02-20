@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4023092637272936}
   - component: {fileID: 114955801041818516}
   m_Layer: 0
-  m_Name: BorderLeft
+  m_Name: BorderExample
   m_TagString: Untagged
   m_Icon: {fileID: 4660412927644837186, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5188680173792760337
 Transform:
   m_ObjectHideFlags: 0
@@ -150,7 +150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2333573268915702423
 Transform:
   m_ObjectHideFlags: 0
@@ -308,7 +308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8910358877237117883
 Transform:
   m_ObjectHideFlags: 0
@@ -382,12 +382,12 @@ GameObject:
   - component: {fileID: 4352732895098608761}
   - component: {fileID: 2298466028788670071}
   m_Layer: 0
-  m_Name: left_border
+  m_Name: top_border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4352732895098608761
 Transform:
   m_ObjectHideFlags: 0
