@@ -43,6 +43,7 @@ namespace BfgAnalytics
             node["workers"] = getValueByCurrency(Currency.WorkerLimit);
             node["workers_available"] = getValueByCurrency(Currency.Worker);
             node["top_pieces"] = GetTopPiecesInformation();
+            node["orders_count"] = getValueByCurrency(Currency.Order);
             
             return node;
         }
