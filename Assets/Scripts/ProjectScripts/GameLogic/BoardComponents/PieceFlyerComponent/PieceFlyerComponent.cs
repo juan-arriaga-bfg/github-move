@@ -45,9 +45,8 @@
         // var flay = ResourcesViewManager.Instance.GetFirstViewById(PieceType.Parse(piece.PieceType));
         // flay?.UpdateResource(1);
     }
-
     
-    public void FlyTo(Piece piece, int x, int y, string target)
+    public void FlyToCodex(Piece piece, int x, int y, string target)
     {
         if (Locker.IsLocked || GameDataService.Current.CodexManager.OnPieceBuilded(piece.PieceType) == false) return;
 

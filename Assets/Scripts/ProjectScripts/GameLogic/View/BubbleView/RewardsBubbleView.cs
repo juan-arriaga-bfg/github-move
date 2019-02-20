@@ -29,7 +29,12 @@ public class RewardsBubbleView : UIBoardView
 		Priority = defaultPriority = 11;
         
 		storage = Context.GetComponent<RewardsStoreComponent>(RewardsStoreComponent.ComponentGuid);
-        
+
+		UpdateIcon();
+	}
+
+	public void UpdateIcon()
+	{
 		if (storage == null || string.IsNullOrEmpty(storage.Icon) || storage.Icon == PieceType.Parse(PieceType.Empty.Id)) return;
 		
 		CreateIcon(storage.Icon);

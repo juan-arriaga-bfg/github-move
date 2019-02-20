@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef>>
@@ -9,6 +10,8 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
     public List<int> Characters;
     private List<CharacterDef> defs;
     public List<ItemWeight> CharactersWeights;
+
+    public Action OnUpdateSequence;
     
     public override void Reload()
     {
@@ -53,6 +56,7 @@ public class CharactersDataManager : SequenceData, IDataLoader<List<CharacterDef
         Characters.Remove(id);
         UpdateSequence();
         GetSequence(Currency.Character.Name).Reinit(CharactersWeights);
+        OnUpdateSequence?.Invoke();
     }
 
     private void UpdateSequence()
