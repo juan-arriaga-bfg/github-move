@@ -331,4 +331,7 @@ public class R
      public const string NPC_C6Piece = "NPC_C6Piece";
      public const string NPC_C7Piece = "NPC_C7Piece";
      public const string NPC_C8Piece = "NPC_C8Piece";
+     public const string BackgroundWater = "BackgroundWater";
+     public const string BorderLeftHole = "BorderLeftHole";
+     public const string BorderBottomHole = "BorderBottomHole";
 }
