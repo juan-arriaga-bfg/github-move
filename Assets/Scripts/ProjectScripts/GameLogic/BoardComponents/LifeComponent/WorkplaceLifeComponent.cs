@@ -110,7 +110,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	{
 		if (IsDead
 		    || CurrencyHelper.IsCanPurchase(Energy, true) == false
-		    || isExtra == false && Context.Context.WorkerLogic.Get(Context.CachedPosition, TimerWork) == false) return false;
+		    || isExtra == false && Worker != null && Context.Context.WorkerLogic.Get(Context.CachedPosition, TimerWork) == false) return false;
         
 		CurrencyHelper.Purchase(Currency.Damage.Name, 1, Energy, success =>
 		{
