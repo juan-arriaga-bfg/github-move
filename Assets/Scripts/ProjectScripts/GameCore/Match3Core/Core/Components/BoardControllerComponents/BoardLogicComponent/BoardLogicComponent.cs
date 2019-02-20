@@ -304,11 +304,11 @@ public partial class BoardLogicComponent : ECSEntity,
         var observer = piece.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
 
         observer?.OnAddToBoard(position, piece);
-
-        Context.BoardEvents.RaiseEvent(GameEventsCodes.AddPieceToBoard, piece.PieceType);
         
         PieceFlyer.FlyToQuest(piece);
-        PieceFlyer.FlyTo(piece, x, y, Currency.Codex.Name);
+        PieceFlyer.FlyToCodex(piece, x, y, Currency.Codex.Name);
+        
+        Context.BoardEvents.RaiseEvent(GameEventsCodes.AddPieceToBoard, piece.PieceType);
         
         return true;
     }
