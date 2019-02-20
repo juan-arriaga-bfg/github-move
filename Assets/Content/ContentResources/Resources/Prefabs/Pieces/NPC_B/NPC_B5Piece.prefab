@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1559396244818626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_Children: []
   m_Father: {fileID: 4837408307622380}
   m_RootOrder: 0
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 114243331302908096}
   - component: {fileID: 114101510669842026}
   m_Layer: 0
-  m_Name: NPC5_BPiece
+  m_Name: NPC_B5Piece
   m_TagString: Untagged
   m_Icon: {fileID: 4660412927644837186, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
