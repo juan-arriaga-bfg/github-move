@@ -767,7 +767,7 @@
             "Amount": 1
           },
           {
-            "Currency": "Soft3",
+            "Currency": "Boost_CR1",
             "Amount": 2
           },
           {
@@ -779,8 +779,8 @@
             "Amount": 1
           },
           {
-            "Currency": "Hard2",
-            "Amount": 3
+            "Currency": "Boost_CR2",
+            "Amount": 2
           },
           {
             "Currency": "Hard3",
@@ -840,28 +840,8 @@
     }
   },
   {
-    "$type": "TaskCurrencyCollectEntity, GameAssembly",
-    "Id": "Daily_Quest_3",
-    "Group": "Easy",
-    "PieceUid": "Coins",
-    "TargetValue": 150,
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 25
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Message": "Collect coins"
-      }
-    }
-  },
-  {
     "$type": "TaskCollectIngredientEntity, GameAssembly",
-    "Id": "Daily_Quest_4",
+    "Id": "Daily_Quest_3",
     "Group": "Easy",
     "TargetValue": 3,
     "ComponentsCache": {
@@ -881,7 +861,7 @@
   },
   {
     "$type": "TaskUseWorkerEntity, GameAssembly",
-    "Id": "Daily_Quest_5",
+    "Id": "Daily_Quest_4",
     "Group": "Easy",
     "TargetValue": 9,
     "ComponentsCache": {
@@ -900,28 +880,8 @@
     }
   },
   {
-    "$type": "TaskKillFieldEntity, GameAssembly",
-    "Id": "Daily_Quest_6",
-    "Group": "Easy",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 25
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Ico": "killFieldDailyQuestIcon",
-        "Message": "Remove dead fields"
-      }
-    }
-  },
-  {
     "$type": "TaskOpenChestEntity, GameAssembly",
-    "Id": "Daily_Quest_7",
+    "Id": "Daily_Quest_5",
     "Group": "Easy",
     "TargetValue": 2,
     "ComponentsCache": {
@@ -941,7 +901,7 @@
   },
   {
     "$type": "TaskCompleteOrderEntity, GameAssembly",
-    "Id": "Daily_Quest_8",
+    "Id": "Daily_Quest_6",
     "Group": "Easy",
     "TargetValue": 2,
     "ComponentsCache": {
@@ -960,28 +920,8 @@
     }
   },
   {
-    "$type": "TaskCurrencySpendEntity, GameAssembly",
-    "Id": "Daily_Quest_9",
-    "Group": "Easy",
-    "PieceUid": "Coins",
-    "TargetValue": 200,
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 25
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Message": "Spend coins"
-      }
-    }
-  },
-  {
     "$type": "TaskCurrencyCollectEntity, GameAssembly",
-    "Id": "Daily_Quest_10",
+    "Id": "Daily_Quest_7",
     "Group": "Normal",
     "PieceUid": "Coins",
     "TargetValue": 550,
@@ -1001,7 +941,7 @@
   },
   {
     "$type": "TaskCollectIngredientEntity, GameAssembly",
-    "Id": "Daily_Quest_11",
+    "Id": "Daily_Quest_8",
     "Group": "Normal",
     "TargetValue": 10,
     "ComponentsCache": {
@@ -1021,7 +961,7 @@
   },
   {
     "$type": "TaskUseWorkerEntity, GameAssembly",
-    "Id": "Daily_Quest_12",
+    "Id": "Daily_Quest_9",
     "Group": "Normal",
     "TargetValue": 20,
     "ComponentsCache": {
@@ -1040,28 +980,8 @@
     }
   },
   {
-    "$type": "TaskKillFieldEntity, GameAssembly",
-    "Id": "Daily_Quest_13",
-    "Group": "Normal",
-    "TargetValue": 2,
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 45
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Ico": "killFieldDailyQuestIcon",
-        "Message": "Remove dead fields"
-      }
-    }
-  },
-  {
     "$type": "TaskOpenChestEntity, GameAssembly",
-    "Id": "Daily_Quest_14",
+    "Id": "Daily_Quest_10",
     "Group": "Normal",
     "TargetValue": 3,
     "ComponentsCache": {
@@ -1081,7 +1001,7 @@
   },
   {
     "$type": "TaskCompleteOrderEntity, GameAssembly",
-    "Id": "Daily_Quest_15",
+    "Id": "Daily_Quest_11",
     "Group": "Normal",
     "TargetValue": 5,
     "ComponentsCache": {
@@ -1101,67 +1021,7 @@
   },
   {
     "$type": "TaskCurrencySpendEntity, GameAssembly",
-    "Id": "Daily_Quest_16",
-    "Group": "Normal",
-    "PieceUid": "Coins",
-    "TargetValue": 800,
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 45
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Message": "Spend coins"
-      }
-    }
-  },
-  {
-    "$type": "TaskCurrencySpendEntity, GameAssembly",
-    "Id": "Daily_Quest_17",
-    "Group": "Normal",
-    "PieceUid": "Crystals",
-    "TargetValue": 10,
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 45
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Message": "Spend rubies"
-      }
-    }
-  },
-  {
-    "$type": "TaskCurrencyCollectEntity, GameAssembly",
-    "Id": "Daily_Quest_18",
-    "Group": "Hard",
-    "PieceUid": "Crystals",
-    "TargetValue": 5,
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Crystals",
-            "Amount": 15
-          }
-        ]
-      },
-      "QuestDescriptionComponent": {
-        "Message": "Collect rubies"
-      }
-    }
-  },
-  {
-    "$type": "TaskCurrencySpendEntity, GameAssembly",
-    "Id": "Daily_Quest_19",
+    "Id": "Daily_Quest_12",
     "Group": "Hard",
     "PieceUid": "Coins",
     "TargetValue": 1200,
@@ -1181,7 +1041,7 @@
   },
   {
     "$type": "TaskCurrencySpendEntity, GameAssembly",
-    "Id": "Daily_Quest_20",
+    "Id": "Daily_Quest_13",
     "Group": "Hard",
     "PieceUid": "Crystals",
     "TargetValue": 20,
@@ -1201,7 +1061,7 @@
   },
   {
     "$type": "TaskKillFieldEntity, GameAssembly",
-    "Id": "Daily_Quest_21",
+    "Id": "Daily_Quest_14",
     "Group": "Hard",
     "TargetValue": 7,
     "ComponentsCache": {
@@ -1221,7 +1081,7 @@
   },
   {
     "$type": "TaskUseWorkerEntity, GameAssembly",
-    "Id": "Daily_Quest_22",
+    "Id": "Daily_Quest_15",
     "Group": "Hard",
     "TargetValue": 30,
     "ComponentsCache": {
@@ -1241,7 +1101,7 @@
   },
   {
     "$type": "TaskOpenChestEntity, GameAssembly",
-    "Id": "Daily_Quest_23",
+    "Id": "Daily_Quest_16",
     "Group": "Hard",
     "TargetValue": 10,
     "ComponentsCache": {

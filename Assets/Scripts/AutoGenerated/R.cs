@@ -295,17 +295,6 @@ public class R
      public const string NPC_B3Piece = "NPC_B3Piece";
      public const string NPC_B4Piece = "NPC_B4Piece";
      public const string NPC_B5Piece = "NPC_B5Piece";
-     public const string NPC_B6Piece = "NPC_B6Piece";
-     public const string NPC_B7Piece = "NPC_B7Piece";
-     public const string NPC_B8Piece = "NPC_B8Piece";
-     public const string NPC_C1Piece = "NPC_C1Piece";
-     public const string NPC_C2Piece = "NPC_C2Piece";
-     public const string NPC_C3Piece = "NPC_C3Piece";
-     public const string NPC_C4Piece = "NPC_C4Piece";
-     public const string NPC_C5Piece = "NPC_C5Piece";
-     public const string NPC_C6Piece = "NPC_C6Piece";
-     public const string NPC_C7Piece = "NPC_C7Piece";
-     public const string NPC_C8Piece = "NPC_C8Piece";
      public const string NPC_D1Piece = "NPC_D1Piece";
      public const string NPC_D2Piece = "NPC_D2Piece";
      public const string NPC_D3Piece = "NPC_D3Piece";
@@ -334,4 +323,15 @@ public class R
      public const string CH2_GPiece = "CH2_GPiece";
      public const string CH3_GPiece = "CH3_GPiece";
      public const string CH_NPCPiece = "CH_NPCPiece";
+     public const string NPC_C1Piece = "NPC_C1Piece";
+     public const string NPC_C2Piece = "NPC_C2Piece";
+     public const string NPC_C3Piece = "NPC_C3Piece";
+     public const string NPC_C4Piece = "NPC_C4Piece";
+     public const string NPC_C5Piece = "NPC_C5Piece";
+     public const string NPC_C6Piece = "NPC_C6Piece";
+     public const string NPC_C7Piece = "NPC_C7Piece";
+     public const string NPC_C8Piece = "NPC_C8Piece";
+     public const string BackgroundWater = "BackgroundWater";
+     public const string BorderLeftHole = "BorderLeftHole";
+     public const string BorderBottomHole = "BorderBottomHole";
 }
