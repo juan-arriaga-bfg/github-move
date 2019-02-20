@@ -137,7 +137,7 @@ public static partial class PieceType
     
 #region Characters
     
-    public static readonly PieceTypeDef NPC_A = new PieceTypeDef{Id = 100, Abbreviations = new List<string>{ "NPC_A" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef NPC_A = new PieceTypeDef{Id = 100, Abbreviations = new List<string>{ "NPC_A" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character};
     public static readonly PieceTypeDef NPC_SleepingBeautyPlaid = new PieceTypeDef{Id = 101, Abbreviations = new List<string>{ "NPC_SleepingBeautyPlaid" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Fake};
     public static readonly PieceTypeDef NPC_B = new PieceTypeDef{Id = 102, Abbreviations = new List<string>{ "NPC_B" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef NPC_C = new PieceTypeDef{Id = 103, Abbreviations = new List<string>{ "NPC_C" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Character | PieceTypeFilter.Progress};   

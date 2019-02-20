@@ -43,8 +43,6 @@ public class CharacterMatchActionBuilder : DefaultMatchActionBuilder, IMatchActi
             matchField.AddRange(definition.Context.PositionsCache.GetPiecePositionsByType(id));
         }
         
-        GameDataService.Current.CharactersManager.UnlockNewCharacter(nextType);
-        
         // collect and purchase rewards before action
         return CreateAction(new List<int>{nextType}, matchField, position, pieceType);
     }
