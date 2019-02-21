@@ -33,7 +33,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
             .SetId(content)
             .OnComplete(() => { content.GetScrollRect().enabled = true; });
         
-        BoardService.Current.FirstBoard.MarketLogic.Timer.OnExecute += UpdateLabel;
+        BoardService.Current.FirstBoard.MarketLogic.Timer.OnTimeChanged += UpdateLabel;
         BoardService.Current.FirstBoard.MarketLogic.Timer.OnComplete += UpdateSlots;
     }
 
@@ -50,7 +50,7 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         
         DOTween.Kill(content);
         
-        BoardService.Current.FirstBoard.MarketLogic.Timer.OnExecute -= UpdateLabel;
+        BoardService.Current.FirstBoard.MarketLogic.Timer.OnTimeChanged -= UpdateLabel;
         BoardService.Current.FirstBoard.MarketLogic.Timer.OnComplete -= UpdateSlots;
     }
     

@@ -45,7 +45,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         
         if (customer.Timer != null)
         {
-            customer.Timer.OnExecute += UpdateTimer;
+            customer.Timer.OnTimeChanged += UpdateTimer;
             customer.Timer.OnComplete += UpdateState;
             customer.Timer.OnComplete += PlaySound;
             customer.Timer.OnComplete += UpdateOrders;
@@ -179,9 +179,9 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
     {
         if (customer?.Timer != null)
         {
-            customer.Timer.OnExecute -= UpdateTimer;
+            customer.Timer.OnTimeChanged -= UpdateTimer;
             customer.Timer.OnComplete -= UpdateState;
-            customer.Timer.OnComplete += PlaySound;
+            customer.Timer.OnComplete -= PlaySound;
             customer.Timer.OnComplete -= UpdateOrders;
         }
 

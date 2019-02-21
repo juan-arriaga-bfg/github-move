@@ -29,4 +29,11 @@
 		
 		Timer.Start();
 	}
+
+    public override void OnUnRegisterEntity(ECSEntity entity)
+    {
+        Timer.OnComplete = null;
+        
+        base.OnUnRegisterEntity(entity);
+    }
 }

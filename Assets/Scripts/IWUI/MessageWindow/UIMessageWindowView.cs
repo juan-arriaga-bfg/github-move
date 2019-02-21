@@ -82,7 +82,7 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         
         if (windowModel.Timer == null) return;
         
-        windowModel.Timer.OnExecute += UpdateTimer;
+        windowModel.Timer.OnTimeChanged += UpdateTimer;
         windowModel.Timer.OnComplete += CompleteTimer;
     }
 
@@ -113,7 +113,7 @@ public class UIMessageWindowView : UIGenericPopupWindowView
         
         if(windowModel.Timer != null)
         {
-            windowModel.Timer.OnExecute -= UpdateTimer;
+            windowModel.Timer.OnTimeChanged -= UpdateTimer;
             windowModel.Timer.OnComplete -= CompleteTimer;
         }
         

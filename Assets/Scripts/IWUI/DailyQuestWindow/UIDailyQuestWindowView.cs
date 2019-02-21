@@ -34,7 +34,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
 
         Fill(CreateTaskList(model), taskList);
         
-        model.Timer.OnExecute += OnTimerUpdate;
+        model.Timer.OnTimeChanged += OnTimeChanged;
        
         model.Quest.OnChanged += OnQuestChanged;
 
@@ -139,7 +139,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         
         UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
         
-        model.Timer.OnExecute -= OnTimerUpdate;
+        model.Timer.OnTimeChanged -= OnTimeChanged;
         
         model.Quest.OnChanged -= OnQuestChanged;
         
@@ -224,7 +224,7 @@ public class UIDailyQuestWindowView : UIGenericPopupWindowView
         });
     }
     
-    private void OnTimerUpdate()
+    private void OnTimeChanged()
     {
         UIDailyQuestWindowModel model = Model as UIDailyQuestWindowModel;
         

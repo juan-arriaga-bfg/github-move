@@ -35,7 +35,7 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
 
         if (life.IsUseCooldown == false) return;
         
-        life.TimerCooldown.OnExecute += UpdateButtonText;
+        life.TimerCooldown.OnTimeChanged += UpdateButtonText;
         life.TimerCooldown.OnComplete += UpdateButtonText;
     }
 
@@ -45,7 +45,7 @@ public class ObstacleBubbleView : UIBoardView, IBoardEventListener
         
         if (life.IsUseCooldown)
         {
-            life.TimerCooldown.OnExecute -= UpdateButtonText;
+            life.TimerCooldown.OnTimeChanged -= UpdateButtonText;
             life.TimerCooldown.OnComplete -= UpdateButtonText;
         }
         
