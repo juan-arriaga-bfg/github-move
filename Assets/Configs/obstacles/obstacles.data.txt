@@ -143,7 +143,7 @@
       "Min": 2,
       "Max": 4
     },
-    "PieceAmount": 4,
+    "PieceAmount": 5,
     "PieceWeights": [
       {
         "Uid": "A1",
@@ -192,6 +192,10 @@
         "Weight": 3
       },
       {
+        "Uid": "Boost_CR1",
+        "Weight": 2
+      },
+      {
         "Uid": "Soft1",
         "Weight": 1
       }
@@ -230,6 +234,14 @@
         "Weight": 5
       },
       {
+        "Uid": "Boost_CR1",
+        "Weight": 1
+      },
+      {
+        "Uid": "Boost_CR2",
+        "Weight": 1
+      },
+      {
         "Uid": "Soft1",
         "Weight": 3
       }
@@ -257,7 +269,7 @@
       "Min": 3,
       "Max": 5
     },
-    "PieceAmount": 5,
+    "PieceAmount": 6,
     "PieceWeights": [
       {
         "Uid": "A1",
@@ -266,6 +278,14 @@
       {
         "Uid": "A2",
         "Weight": 6
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 1
+      },
+      {
+        "Uid": "Boost_CR2",
+        "Weight": 1
       },
       {
         "Uid": "Soft1",
