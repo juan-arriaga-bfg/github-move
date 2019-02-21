@@ -28,14 +28,14 @@ public class CharacterMatchActionBuilder : DefaultMatchActionBuilder, IMatchActi
     public IBoardAction Build(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position)
     {
         var nextType = definition.GetNext(pieceType, false);
-
+        
         if (nextType == PieceType.None.Id) return null;
         
         var countForMatchDefault = definition.GetPieceCountForMatch(pieceType);
 
         if (countForMatchDefault == -1 || matchField.Count < countForMatchDefault) return null;
         
-        matchField = new List<BoardPosition>();
+        matchField = matchField.FindAll(boardPosition => definition.Context.GetPieceAt(boardPosition)?.PieceType == PieceType.Boost_CR.Id);
         var chain = definition.GetChain(nextType);
 
         foreach (var id in chain)
