@@ -12,7 +12,6 @@ public static class TutorialBuilder
     public const int FirstOrderStepIndex = 19;
     public const int LockFireflyStepIndex = 21;
     
-    
     public static BaseTutorialStep BuildTutorial(int index, BoardController context)
     {
         BaseTutorialStep step;
@@ -160,11 +159,13 @@ public static class TutorialBuilder
             {
                 step = new BoardArrowTutorialStep
                 {
+                    IsAnyStartCondition = true,
                     Targets = PieceType.GetIdsByFilter(PieceTypeFilter.Ingredient),
                     OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("ingredients"),
                     OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("ingredients", currentStep.StartTime)
                 };
-
+                
+                step.RegisterComponent(new CheckStepTutorialCondition {Target = 18, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "65_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckCurrencyTutorialCondition
                 {
@@ -301,10 +302,12 @@ public static class TutorialBuilder
                 
                 step = new BaseTutorialStep
                 {
+                    IsAnyStartCondition = true,
                     OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("order"),
                     OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("order", currentStep.StartTime)
                 };
                 
+                step.RegisterComponent(new CheckStepTutorialCondition {Target = 18, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "65_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckCurrencyTutorialCondition {Target = 2, Currency = new List<string>{Currency.Order.Name}, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "16_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);

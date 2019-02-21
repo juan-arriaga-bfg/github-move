@@ -97,7 +97,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
         {
             energyLogic?.InitInSave();
             
-            BoardService.Current.FirstBoard?.TutorialLogic?.ResetStartTime();
+            BoardService.Current?.FirstBoard?.TutorialLogic?.ResetStartTime();
             LocalNotificationsService.Current.CancelNotifications();
         }
     }
