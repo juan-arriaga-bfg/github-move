@@ -70,7 +70,6 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.NPC_B2.Id, R.NPC_B2Piece);
         dict.Add(PieceType.NPC_B3.Id, R.NPC_B3Piece);
         dict.Add(PieceType.NPC_B4.Id, R.NPC_B4Piece);
-        dict.Add(PieceType.NPC_B5.Id, R.NPC_B5Piece);
 
         #endregion
         

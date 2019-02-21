@@ -29,9 +29,8 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.NPC_B1.Id, new PieceMatchDef {Next = PieceType.NPC_B2.Id, Previous = PieceType.None.Id, Amount = 3});
         dict.Add(PieceType.NPC_B2.Id, new PieceMatchDef {Next = PieceType.NPC_B3.Id, Previous = PieceType.NPC_B1.Id, Amount = 3});
         dict.Add(PieceType.NPC_B3.Id, new PieceMatchDef {Next = PieceType.NPC_B4.Id, Previous = PieceType.NPC_B2.Id, Amount = 3});
-        dict.Add(PieceType.NPC_B4.Id, new PieceMatchDef {Next = PieceType.NPC_B5.Id, Previous = PieceType.NPC_B3.Id, Amount = 3});
-        dict.Add(PieceType.NPC_B5.Id, new PieceMatchDef {Next = PieceType.NPC_B.Id, Previous = PieceType.NPC_B4.Id, Amount = 3});
-        dict.Add(PieceType.NPC_B.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.NPC_B5.Id, Amount = -1});
+        dict.Add(PieceType.NPC_B4.Id, new PieceMatchDef {Next = PieceType.NPC_B.Id, Previous = PieceType.NPC_B3.Id, Amount = 3});
+        dict.Add(PieceType.NPC_B.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.NPC_B4.Id, Amount = -1});
         
         #endregion
         

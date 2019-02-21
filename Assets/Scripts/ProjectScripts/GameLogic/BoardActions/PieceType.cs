@@ -166,7 +166,6 @@ public static partial class PieceType
     public static readonly PieceTypeDef NPC_B2 = new PieceTypeDef{Id = 300001, Abbreviations = new List<string>{ "NPC_B2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef NPC_B3 = new PieceTypeDef{Id = 300002, Abbreviations = new List<string>{ "NPC_B3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef NPC_B4 = new PieceTypeDef{Id = 300003, Abbreviations = new List<string>{ "NPC_B4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Progress};
-    public static readonly PieceTypeDef NPC_B5 = new PieceTypeDef{Id = 300004, Abbreviations = new List<string>{ "NPC_B5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Progress};
     
     public static readonly PieceTypeDef NPC_C1 = new PieceTypeDef{Id = 300100, Abbreviations = new List<string>{ "NPC_C1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef NPC_C2 = new PieceTypeDef{Id = 300101, Abbreviations = new List<string>{ "NPC_C2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Progress};
