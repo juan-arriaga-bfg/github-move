@@ -41,7 +41,7 @@ namespace BfgAnalytics
             node["workers_available"] = GetValueByCurrency(Currency.Worker);
             node["top_pieces"] = GetTopPiecesInformation();
             node["orders_count"] = GetValueByCurrency(Currency.Order);
-            node["daily_obj_count"] = 0;
+            node["daily_obj_count"] = GameDataService.Current.QuestsManager?.DailyTaskCompletedCount ?? 0;
             
             return node;
         }
