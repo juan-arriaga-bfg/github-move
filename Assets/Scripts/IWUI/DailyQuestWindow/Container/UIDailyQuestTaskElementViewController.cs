@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BfgAnalytics;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -226,6 +227,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
         ToggleActive(false, true);
         
         CurrencyHelper.PurchaseAndProvideSpawn(piecesReward, currenciesReward, null, position, null, true, true);
+        Analytics.SendPurchase("screen_daily", "item1", null, new List<CurrencyPair>(currenciesReward), false, false);
 
         if (isCurrentTaskClearAll) targetEntity.WindowController.CloseCurrentWindow();
     }

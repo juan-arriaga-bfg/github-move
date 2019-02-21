@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using BfgAnalytics;
 using UnityEngine;
 
-public class TimerComponent : IECSComponent, IECSSystem
+public class TimerComponent : IECSComponent, IECSSystem, ITimerComponent
 {
     public static readonly int ComponentGuid = ECSManager.GetNextGuid();
     public int Guid => ComponentGuid;
@@ -13,12 +15,12 @@ public class TimerComponent : IECSComponent, IECSSystem
     public Action OnComplete;
     public Action OnStop;
     
-    public DateTime StartTime;
-    public DateTime CompleteTime;
-
+    public DateTime StartTime { get; set; }
+    public DateTime CompleteTime { get; set; }
+    
     public BoardTimerView View;
 
-    public bool UseUTC = true;
+    public bool UseUTC { get; set; } = true;
     
     public long StartTimeLong => StartTime.ConvertToUnixTime(UseUTC);
 
@@ -102,7 +104,7 @@ public class TimerComponent : IECSComponent, IECSSystem
         OnComplete?.Invoke();
     }
     
-    public void FastComplete()
+    public void FastComplete(string analyticsLocation)
     {
         if (IsFree())
         {
@@ -110,12 +112,16 @@ public class TimerComponent : IECSComponent, IECSSystem
             Complete();
             return;
         }
+
+        var currentPrice = GetPrice();
         
-        CurrencyHelper.Purchase(Currency.Timer.Name, 1, GetPrice(), success =>
+        CurrencyHelper.Purchase(Currency.Timer.Name, 1, currentPrice, success =>
         {
             if(success == false) return;
             
             NSAudioService.Current.Play(SoundId.TimeBoost);
+            Analytics.SendPurchase(analyticsLocation, "item1", new List<CurrencyPair>{currentPrice}, null, false, false);
+            
             Complete();
         });
     }

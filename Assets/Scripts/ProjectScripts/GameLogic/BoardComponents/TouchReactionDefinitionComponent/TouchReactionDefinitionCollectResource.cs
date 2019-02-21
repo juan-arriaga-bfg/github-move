@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BfgAnalytics;
 
 public class TouchReactionDefinitionCollectResource : TouchReactionDefinitionComponent
 {
@@ -17,6 +18,7 @@ public class TouchReactionDefinitionCollectResource : TouchReactionDefinitionCom
         else
         {
             AddResourceView.Show(position, resources, -0.3f);
+            Analytics.SendPurchase("board_main", $"item{piece.IndexInChain}", null, new List<CurrencyPair>{resources}, false, false);
         }
         
         piece.Context.ActionExecutor.AddAction(new CollapsePieceToAction

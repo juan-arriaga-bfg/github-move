@@ -14,7 +14,7 @@
     "RandomType": "BasePiecesEasy"
   },
   {
-    "Uid": "Base Сhests",
+    "Uid": "Base Chests",
     "UnlockLevel": 1,
     "Amount": 1,
     "Weight": {
@@ -25,7 +25,7 @@
       "Currency": "Crystals",
       "Amount": 25
     },
-    "RandomType": "BaseСhests"
+    "RandomType": "BaseChests"
   },
   {
     "Uid": "Boosts",
@@ -196,7 +196,21 @@
     "RandomType": "BasePiecesHard"
   },
   {
-    "Uid": "Free Сhests",
+    "Uid": " NPC Chests",
+    "UnlockLevel": 1,
+    "Amount": 1,
+    "Weight": {
+      "Uid": "CH_NPC",
+      "Weight": 1
+    },
+    "Price": {
+      "Currency": "Crystals",
+      "Amount": 20
+    },
+    "RandomType": "NPCChests"
+  },
+  {
+    "Uid": "Free Chests",
     "UnlockLevel": 1,
     "Amount": 1,
     "Weight": {

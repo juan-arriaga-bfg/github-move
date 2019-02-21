@@ -21,38 +21,28 @@ public class MatchDefinitionComponent : ECSEntity
 
     public int GetPieceCountForMatch(int pieceId)
     {
-        PieceMatchDef def;
-        
-        return definition.TryGetValue(pieceId, out def) ? def.Amount : -1;
+        return definition.TryGetValue(pieceId, out var def) ? def.Amount : -1;
     }
 
     public List<List<int>> GetPattern(int pieceId)
     {
-        PieceMatchDef def;
-        
-        return definition.TryGetValue(pieceId, out def) ? def.Pattern : new List<List<int>>();
+        return definition.TryGetValue(pieceId, out var def) ? def.Pattern : new List<List<int>>();
     }
     
     public int GetNext(int pieceId, bool checkIgnore = true)
     {
-        PieceMatchDef def;
-        
-        if(definition.TryGetValue(pieceId, out def) == false) return PieceType.None.Id;
+        if(definition.TryGetValue(pieceId, out var def) == false) return PieceType.None.Id;
 
         if (checkIgnore == false) return def.Next;
-        
-        PieceMatchDef next;
-            
-        if (definition.TryGetValue(def.Next, out next) == false && def.IsIgnore) return PieceType.None.Id;
+
+        if (definition.TryGetValue(def.Next, out var next) == false && def.IsIgnore) return PieceType.None.Id;
 
         return next.IsIgnore ? GetNext(def.Next) : def.Next;
     }
 
     public int GetPrevious(int pieceId)
     {
-        PieceMatchDef def;
-        
-        return definition.TryGetValue(pieceId, out def) ? def.Previous : PieceType.None.Id;
+        return definition.TryGetValue(pieceId, out var def) ? def.Previous : PieceType.None.Id;
     }
 
     public int GetFirst(int pieceId)

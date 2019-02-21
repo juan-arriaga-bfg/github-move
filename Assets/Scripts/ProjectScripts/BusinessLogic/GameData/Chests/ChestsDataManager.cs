@@ -23,14 +23,13 @@ public class ChestsDataManager : SequenceData, IDataLoader<List<ChestDef>>
         {
             if (string.IsNullOrEmpty(error))
             {
-                var matchDefinition = new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
                 data.Sort((a, b) => a.Piece.CompareTo(b.Piece));
 
                 Chests = new List<ChestDef>();
                 
                 foreach (var next in data)
                 {
-                    var previousType = matchDefinition.GetPrevious(next.Piece);
+                    var previousType = GameDataService.Current.MatchDefinition.GetPrevious(next.Piece);
                     
                     if (previousType != PieceType.None.Id)
                     {

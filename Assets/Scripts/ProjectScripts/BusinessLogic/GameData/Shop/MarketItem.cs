@@ -67,11 +67,11 @@ public class MarketItem
     {
         if (isTimer)
         {
-            if(State == MarketItemState.Purchased || State == MarketItemState.Saved) return;
+            if (State == MarketItemState.Purchased || State == MarketItemState.Saved) return;
         }
         else
         {
-            if(State != MarketItemState.Lock && Index != -1) return;
+            if (State != MarketItemState.Lock && Index != -1) return;
         }
         
         var weights = new List<ItemWeight>();
@@ -106,8 +106,11 @@ public class MarketItem
             case MarketRandomType.Ingredients:
                 piece = GetRandomIngredient();
                 break;
-            case MarketRandomType.BaseСhests:
+            case MarketRandomType.BaseChests:
                 piece = GetRandomChest();
+                break;
+            case MarketRandomType.NPCChests:
+                piece = GameDataService.Current.CharactersManager.Characters.Count == 0 ? null : def.Weight.Uid;
                 break;
             default :
                 piece = def.Weight.Uid;
@@ -146,9 +149,8 @@ public class MarketItem
         foreach (var id in pieces)
         {
             var key = definition.GetFirst(id);
-            int value;
 
-            if (chains.TryGetValue(key, out value) == false)
+            if (chains.TryGetValue(key, out var value) == false)
             {
                 chains.Add(key, id);
                 continue;
@@ -177,6 +179,8 @@ public class MarketItem
         var chests = PieceType.GetIdsByFilter(PieceTypeFilter.Chest, PieceTypeFilter.Bag);
 
         chests.Remove(PieceType.CH_Free.Id);
+        chests.Remove(PieceType.CH_NPC.Id);
+        
         chests = chests.FindAll(id => GameDataService.Current.CodexManager.IsPieceUnlocked(id));
 
         if (chests.Count == 0) return null;

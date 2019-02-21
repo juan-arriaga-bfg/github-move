@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-
-public class CrystalTutorialStep : LoopFingerTutorialStep
+﻿public class CrystalTutorialStep : LoopFingerTutorialStep
 {
     private readonly int crystal = PieceType.Boost_CR.Id;
-    private readonly int target = PieceType.A5.Id;
+    private readonly int target = PieceType.A6.Id;
 
     private readonly BoardPosition targetPosition = new BoardPosition(20, 8, BoardLayer.Piece.Layer);
     private readonly BoardPosition ignorePosition = new BoardPosition(19, 8, BoardLayer.Piece.Layer);
@@ -43,6 +41,11 @@ public class CrystalTutorialStep : LoopFingerTutorialStep
         Context.FadeAll(0.5f, unlock);
         
         startTime = startTime.AddSeconds(-(Delay-0.5f));
+        
+        BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.Locker.Lock(this);
+        BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.DestroyAll();
+
+        UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow).IsTutorial = true;
     }
 
     public override void Execute()
@@ -68,23 +71,26 @@ public class CrystalTutorialStep : LoopFingerTutorialStep
 
     private void SecondStep()
     {
-        var positions = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(crystal);
+        var posCrystals = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(crystal);
+        var posTargets = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(target);
         
         Context.UnlockAll();
         Context.LockAll();
         
-        Context.UnlockCell(targetPosition);
-        Context.UnlockCell(ignorePosition);
-        Context.UnlockCells(positions);
+        Context.UnlockCells(posCrystals);
+        Context.UnlockCells(posTargets);
         
-        from = positions[0];
-        to = ignorePosition;
+        from = posCrystals[0];
+        to = posTargets[0];
     }
 
     protected override void Complete()
     {
         Context.FadeAll(1f, null);
         Context.UnlockAll();
+        
+        UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow).IsTutorial = false;
+        BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.Locker.Unlock(this);
         
         base.Complete();
     }

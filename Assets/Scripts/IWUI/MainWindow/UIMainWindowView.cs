@@ -18,9 +18,8 @@ public class UIMainWindowView : UIBaseWindowView
     [SerializeField] private CanvasGroup shopCanvasGroup;
     [SerializeField] private CanvasGroup ordersCanvasGroup;
     [SerializeField] private CanvasGroup removeCanvasGroup;
+    [SerializeField] private CanvasGroup dailyCanvasGroup;
     
-    [IWUIBinding("#ButtonDailyQuest")] private DailyQuestButton dailyQuestButton;
-
     [IWUIBinding("#QuestsList")] private ScrollRect questListScroll;
     [IWUIBinding("#QuestListViewport")] private RectTransform questListViewport;
     [IWUIBinding("#QuestListContent")] private RectTransform questListContent;
@@ -35,12 +34,13 @@ public class UIMainWindowView : UIBaseWindowView
     [SerializeField] private Transform hintAnchorShopButton;
     public Transform HintAnchorShopButton => hintAnchorShopButton;
     
+    [SerializeField] private Transform hintAnchorDailyButton;
+    public Transform HintAnchorDailyButton => hintAnchorDailyButton;
+    
     private readonly List<UiQuestButton> questButtons = new List<UiQuestButton>();
 
     private int maxCountOfVisibleQuestButtonsCached = -1;
     
-    
-
     public override void InitView(IWWindowModel model, IWWindowController controller)
     {
         base.InitView(model, controller);
@@ -65,7 +65,6 @@ public class UIMainWindowView : UIBaseWindowView
         
         OnActiveQuestsListChanged();
         UpdateCodexButton();
-        UpdateDailyQuestButton();
     }
 
     private void OnDestroy()
@@ -99,6 +98,9 @@ public class UIMainWindowView : UIBaseWindowView
                 break;
             case UiLockTutorialItem.Remove:
                 target = removeCanvasGroup;
+                break;
+            case UiLockTutorialItem.Daily:
+                target = dailyCanvasGroup;
                 break;
             default:
                 return;
@@ -134,8 +136,6 @@ public class UIMainWindowView : UIBaseWindowView
         CheckQuestButtons(activeQuests);
 
         InitWindowViewControllers();
-        
-        UpdateDailyQuestButton();
     }
 
     private void CheckQuestButtons(List<QuestEntity> active)
@@ -209,6 +209,12 @@ public class UIMainWindowView : UIBaseWindowView
     
     public void OnClickCodex()
     {
+        if ((Model as UIMainWindowModel).IsTutorial)
+        {
+            UIErrorWindowController.AddError(LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
+            return;
+        }
+        
         BoardService.Current.FirstBoard?.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
         
         var codexManager = GameDataService.Current.CodexManager;
@@ -226,11 +232,23 @@ public class UIMainWindowView : UIBaseWindowView
     
     public void OnClickShop()
     {
+        if ((Model as UIMainWindowModel).IsTutorial)
+        {
+            UIErrorWindowController.AddError(LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
+            return;
+        }
+        
         UIService.Get.ShowWindow(UIWindowType.MarketWindow);
     }
     
     public void OnClickOrders()
     {
+        if ((Model as UIMainWindowModel).IsTutorial)
+        {
+            UIErrorWindowController.AddError(LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
+            return;
+        }
+        
         var model = UIService.Get.GetCachedModel<UIOrdersWindowModel>(UIWindowType.OrdersWindow);
         if(model.Orders != null && model.Orders.Count > 0) model.Select = model.Orders[0];
         
@@ -239,8 +257,29 @@ public class UIMainWindowView : UIBaseWindowView
     
     public void OnClickDailyQuest()
     {
-        var model = UIService.Get.GetCachedModel<UIDailyQuestWindowModel>(UIWindowType.DailyQuestWindow);
+        if ((Model as UIMainWindowModel).IsTutorial)
+        {
+            UIErrorWindowController.AddError(LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
+            return;
+        }
+        
         UIService.Get.ShowWindow(UIWindowType.DailyQuestWindow);
+    }
+    
+    public void OnClickOptions()
+    {
+        if ((Model as UIMainWindowModel).IsTutorial)
+        {
+            UIErrorWindowController.AddError(LocalizationService.Get("common.message.forbidden", "common.message.forbidden"));
+            return;
+        }
+        
+        if (UIService.Get.GetShowedWindowsCount(UIWindowType.IgnoredWindows) > 0)
+        {
+            return;
+        }
+        
+        UIService.Get.ShowWindow(UIWindowType.SettingsWindow);
     }
     
     private void OnNewPieceBuilded()
@@ -261,17 +300,5 @@ public class UIMainWindowView : UIBaseWindowView
         {
             image.DOFade(visible ? 1 : 0, time);
         }
-    }
-    
-    private void UpdateDailyQuestButton()
-    {
-        var questManager = GameDataService.Current.QuestsManager;
-        
-        dailyQuestButton.gameObject.SetActive(questManager.DailyQuest != null);
-    }
-
-    public void OnClickOptions()
-    {
-        UIService.Get.ShowWindow(UIWindowType.SettingsWindow);
     }
 }

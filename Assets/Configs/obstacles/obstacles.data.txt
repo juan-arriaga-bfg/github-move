@@ -16,6 +16,10 @@
       "Min": 0,
       "Max": 0
     },
+    "CharactersAmount": {
+      "Min": 0,
+      "Max": 0
+    },
     "PieceAmount": 2,
     "PieceWeights": [
       {
@@ -26,7 +30,7 @@
   },
   {
     "Uid": "OB2_A",
-    "Delay": 5,
+    "Delay": 3,
     "Price": {
       "Currency": "Energy",
       "Amount": 10
@@ -41,6 +45,10 @@
       "Min": 1,
       "Max": 2
     },
+    "CharactersAmount": {
+      "Min": 1,
+      "Max": 2
+    },
     "PieceAmount": 2,
     "PieceWeights": [
       {
@@ -52,7 +60,7 @@
   },
   {
     "Uid": "OB3_A",
-    "Delay": 15,
+    "Delay": 5,
     "Price": {
       "Currency": "Energy",
       "Amount": 15
@@ -67,6 +75,10 @@
       "Min": 1,
       "Max": 2
     },
+    "CharactersAmount": {
+      "Min": 1,
+      "Max": 2
+    },
     "PieceAmount": 3,
     "PieceWeights": [
       {
@@ -78,10 +90,10 @@
   },
   {
     "Uid": "OB4_A",
-    "Delay": 60,
+    "Delay": 10,
     "Price": {
       "Currency": "Energy",
-      "Amount": 20
+      "Amount": 15
     },
     "StepRewards": [
       {
@@ -90,6 +102,10 @@
       }
     ],
     "ProductionAmount": {
+      "Min": 2,
+      "Max": 3
+    },
+    "CharactersAmount": {
       "Min": 2,
       "Max": 3
     },
@@ -108,10 +124,10 @@
   },
   {
     "Uid": "OB5_A",
-    "Delay": 120,
+    "Delay": 15,
     "Price": {
       "Currency": "Energy",
-      "Amount": 25
+      "Amount": 20
     },
     "StepRewards": [
       {
@@ -120,6 +136,10 @@
       }
     ],
     "ProductionAmount": {
+      "Min": 2,
+      "Max": 4
+    },
+    "CharactersAmount": {
       "Min": 2,
       "Max": 4
     },
@@ -142,10 +162,10 @@
   },
   {
     "Uid": "OB6_A",
-    "Delay": 180,
+    "Delay": 30,
     "Price": {
       "Currency": "Energy",
-      "Amount": 30
+      "Amount": 20
     },
     "StepRewards": [
       {
@@ -154,6 +174,10 @@
       }
     ],
     "ProductionAmount": {
+      "Min": 3,
+      "Max": 4
+    },
+    "CharactersAmount": {
       "Min": 3,
       "Max": 4
     },
@@ -176,10 +200,10 @@
   },
   {
     "Uid": "OB7_A",
-    "Delay": 240,
+    "Delay": 180,
     "Price": {
       "Currency": "Energy",
-      "Amount": 35
+      "Amount": 30
     },
     "StepRewards": [
       {
@@ -188,6 +212,10 @@
       }
     ],
     "ProductionAmount": {
+      "Min": 3,
+      "Max": 4
+    },
+    "CharactersAmount": {
       "Min": 3,
       "Max": 4
     },
@@ -213,7 +241,7 @@
     "Delay": 300,
     "Price": {
       "Currency": "Energy",
-      "Amount": 40
+      "Amount": 30
     },
     "StepRewards": [
       {
@@ -222,6 +250,10 @@
       }
     ],
     "ProductionAmount": {
+      "Min": 3,
+      "Max": 5
+    },
+    "CharactersAmount": {
       "Min": 3,
       "Max": 5
     },
@@ -244,10 +276,10 @@
   },
   {
     "Uid": "OB9_A",
-    "Delay": 360,
+    "Delay": 1800,
     "Price": {
       "Currency": "Energy",
-      "Amount": 45
+      "Amount": 35
     },
     "StepRewards": [
       {
@@ -259,7 +291,7 @@
   },
   {
     "Uid": "OB_PR_A",
-    "Delay": 120,
+    "Delay": 30,
     "Price": {
       "Currency": "Energy",
       "Amount": 5
@@ -271,6 +303,10 @@
       }
     ],
     "ProductionAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "CharactersAmount": {
       "Min": 0,
       "Max": 0
     },
@@ -292,7 +328,7 @@
   },
   {
     "Uid": "OB_PR_B",
-    "Delay": 120,
+    "Delay": 30,
     "Price": {
       "Currency": "Energy",
       "Amount": 5
@@ -304,6 +340,10 @@
       }
     ],
     "ProductionAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "CharactersAmount": {
       "Min": 0,
       "Max": 0
     },
@@ -325,7 +365,7 @@
   },
   {
     "Uid": "OB_PR_C",
-    "Delay": 120,
+    "Delay": 30,
     "Price": {
       "Currency": "Energy",
       "Amount": 5
@@ -337,6 +377,10 @@
       }
     ],
     "ProductionAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "CharactersAmount": {
       "Min": 0,
       "Max": 0
     },
@@ -358,7 +402,7 @@
   },
   {
     "Uid": "OB_PR_D",
-    "Delay": 120,
+    "Delay": 30,
     "Price": {
       "Currency": "Energy",
       "Amount": 5
@@ -370,6 +414,10 @@
       }
     ],
     "ProductionAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "CharactersAmount": {
       "Min": 0,
       "Max": 0
     },
@@ -391,7 +439,7 @@
   },
   {
     "Uid": "OB_PR_E",
-    "Delay": 120,
+    "Delay": 30,
     "Price": {
       "Currency": "Energy",
       "Amount": 5
@@ -403,6 +451,10 @@
       }
     ],
     "ProductionAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "CharactersAmount": {
       "Min": 0,
       "Max": 0
     },
@@ -424,7 +476,7 @@
   },
   {
     "Uid": "OB_PR_F",
-    "Delay": 120,
+    "Delay": 30,
     "Price": {
       "Currency": "Energy",
       "Amount": 5
@@ -436,6 +488,10 @@
       }
     ],
     "ProductionAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "CharactersAmount": {
       "Min": 0,
       "Max": 0
     },
@@ -457,7 +513,7 @@
   },
   {
     "Uid": "OB_PR_G",
-    "Delay": 120,
+    "Delay": 30,
     "Price": {
       "Currency": "Energy",
       "Amount": 5
@@ -469,6 +525,10 @@
       }
     ],
     "ProductionAmount": {
+      "Min": 0,
+      "Max": 0
+    },
+    "CharactersAmount": {
       "Min": 0,
       "Max": 0
     },
@@ -505,6 +565,10 @@
       "Min": 0,
       "Max": 0
     },
+    "CharactersAmount": {
+      "Min": 0,
+      "Max": 0
+    },
     "PieceAmount": 2,
     "PieceWeights": [
       {
@@ -530,6 +594,10 @@
       "Min": 0,
       "Max": 1
     },
+    "CharactersAmount": {
+      "Min": 0,
+      "Max": 0
+    },
     "PieceAmount": 2,
     "PieceWeights": [
       {
@@ -537,5 +605,159 @@
         "Weight": 1
       }
     ]
+  },
+  {
+    "Uid": "OB1_E",
+    "Delay": 45,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 5
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 5
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 0,
+      "Max": 1
+    },
+    "CharactersAmount": {
+      "Min": 0,
+      "Max": 1
+    },
+    "PieceAmount": 2,
+    "PieceWeights": [
+      {
+        "Uid": "E1",
+        "Weight": 1
+      }
+    ]
+  },
+  {
+    "Uid": "OB2_E",
+    "Delay": 90,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 15
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 15
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "CharactersAmount": {
+      "Min": 1,
+      "Max": 2
+    },
+    "PieceAmount": 4,
+    "PieceWeights": [
+      {
+        "Uid": "E1",
+        "Weight": 3
+      },
+      {
+        "Uid": "E2",
+        "Weight": 1
+      }
+    ],
+    "ChestId": "CH1_E"
+  },
+  {
+    "Uid": "OB3_E",
+    "Delay": 180,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 25
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 2,
+      "Max": 4
+    },
+    "CharactersAmount": {
+      "Min": 2,
+      "Max": 4
+    },
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "E1",
+        "Weight": 1
+      },
+      {
+        "Uid": "E2",
+        "Weight": 1
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
+      }
+    ],
+    "ChestId": "CH2_E"
+  },
+  {
+    "Uid": "OB4_E",
+    "Delay": 360,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 35
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 35
+      }
+    ],
+    "ProductionAmount": {
+      "Min": 3,
+      "Max": 4
+    },
+    "CharactersAmount": {
+      "Min": 3,
+      "Max": 4
+    },
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "E1",
+        "Weight": 1
+      },
+      {
+        "Uid": "E2",
+        "Weight": 2
+      },
+      {
+        "Uid": "Soft1",
+        "Weight": 1
+      }
+    ],
+    "ChestId": "CH2_E"
+  },
+  {
+    "Uid": "OB5_E",
+    "Delay": 540,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 45
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 45
+      }
+    ],
+    "ChestId": "CH3_E"
   }
 ]

@@ -12,6 +12,7 @@ public class HintArrowView : BoardElementView, IHintArrow
     public const float FADE_DURATION = 0.5f;
 
     private Action onRemove;
+    public BoardPosition CachedPosition;
     
     private void Show(bool isLoop, float delayBeforeShow = 0)
     {
@@ -41,6 +42,11 @@ public class HintArrowView : BoardElementView, IHintArrow
             onRemove?.Invoke();
             onRemove = null;
         });
+    }
+
+    public void UpdatePosition(BoardPosition position)
+    {
+        
     }
     
     public void Remove(float delay = 3.5f)
@@ -75,28 +81,30 @@ public class HintArrowView : BoardElementView, IHintArrow
             position = multi.GetTopPosition;
         }
 
-        var arrowView = board.RendererContext.CreateBoardElementAt<HintArrowView>(R.HintArrow, new BoardPosition(position.X, position.Y, BoardLayer.UIUP1.Layer));
+        var cachedPosition = new BoardPosition(position.X, position.Y, BoardLayer.UIUP1.Layer);
+        var arrowView = board.RendererContext.CreateBoardElementAt<HintArrowView>(R.HintArrow, cachedPosition);
 
         arrowView.CachedTransform.localPosition = arrowView.CachedTransform.localPosition + (Vector3.up * 2) + new Vector3(offsetX, offsetY);
         arrowView.Show(loop, delayBeforeShow);
+        arrowView.CachedPosition = cachedPosition;
         
         var targetPiece = boardLogic.GetPieceAt(position);
+        
         if (targetPiece?.ActorView != null)
         {
-            Action disableHint = () =>
-            {
-                arrowView.Remove(0.1f);
-            };
-            targetPiece.ActorView.OnTapCallback += disableHint;
-            targetPiece.ActorView.OnDragStartCallback += disableHint;
+            void DisableHint(){targetPiece.ActorView.RemoveArrow(0f);}
+
+            targetPiece.ActorView.OnTapCallback += DisableHint;
+            targetPiece.ActorView.OnDragStartCallback += DisableHint;
+            
             arrowView.SetOnRemoveAction(() =>
             {
-                targetPiece.ActorView.OnTapCallback -= disableHint;
-                targetPiece.ActorView.OnDragStartCallback -= disableHint;
+                targetPiece.ActorView.OnTapCallback -= DisableHint;
+                targetPiece.ActorView.OnDragStartCallback -= DisableHint;
             });    
         }
-        
-        if (focus == false) return arrowView;
+
+        if (focus == false || board.Manipulator.CameraManipulator.CameraMove.IsLocked) return arrowView;
 
         var worldPos = board.BoardDef.GetSectorCenterWorldPosition(position.X, position.Up.Y, position.Z);
         board.Manipulator.CameraManipulator.MoveTo(worldPos);

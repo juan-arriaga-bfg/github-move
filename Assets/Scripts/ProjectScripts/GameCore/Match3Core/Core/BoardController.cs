@@ -11,6 +11,8 @@ public partial class BoardController : ECSEntity,
 
     public IECSSystemProcessor SystemProcessor => ECSService.Current.SystemProcessor;
 
+    private EmptyPieceBuilder emptyPieceBuilder;
+    
     // components
 
     protected ActionExecuteComponent actionExecutor;
@@ -100,6 +102,11 @@ public partial class BoardController : ECSEntity,
 
     public Piece CreatePieceFromType(int pieceType)
     {
+        if (pieceType == PieceType.Empty.Id)
+        {
+            return CreateEmptyPiece();
+        }
+        
         IPieceBuilder pieceBuilder;
 
         if (pieceBuilderDef.TryGetValue(pieceType, out pieceBuilder))
@@ -109,5 +116,17 @@ public partial class BoardController : ECSEntity,
         }
 
         return null;
+    }
+
+    public Piece CreateEmptyPiece()
+    {
+        var id = PieceType.Empty.Id;
+        
+        if (emptyPieceBuilder == null)
+        {
+            emptyPieceBuilder = (EmptyPieceBuilder) pieceBuilderDef[id];
+        }
+
+        return emptyPieceBuilder.Build(id, this);
     }
 }

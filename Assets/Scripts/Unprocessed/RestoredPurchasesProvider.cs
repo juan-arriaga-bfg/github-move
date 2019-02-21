@@ -5,14 +5,14 @@ public class RestoredPurchasesProvider : MonoBehaviour
 {
     private void Start()
     {
-        ScheduleProvide();
-
         var service = IapService.Current;
         
         service.OnRestoreCompleted += OnRestoreCompleted;
+        service.OnPurchaseOK += OnPurchaseOk;
 
         if (service.IsInitialized)
         {
+            ScheduleProvide();
             IapService.Current.RestorePurchases();
         }
         else
@@ -21,6 +21,11 @@ public class RestoredPurchasesProvider : MonoBehaviour
         }
     }
 
+    private string GetActionId(string productId)
+    {
+        return "RESTORE_" + productId;
+    }
+    
     private void OnServiceInitialized()
     {
         var service = IapService.Current;
@@ -29,6 +34,11 @@ public class RestoredPurchasesProvider : MonoBehaviour
         
         service.RestorePurchases();
     }
+    
+    private void OnPurchaseOk(string productId, string receipt, bool restore)
+    {
+        ProfileService.Current.QueueComponent.RemoveAction(GetActionId(productId));// Avoid double provide
+    }
 
     private void OnDestroy()
     {
@@ -36,6 +46,7 @@ public class RestoredPurchasesProvider : MonoBehaviour
         
         service.OnRestoreCompleted -= OnRestoreCompleted; 
         service.OnInitialized -= OnServiceInitialized;
+        service.OnPurchaseOK -= OnPurchaseOk;
     }
 
     private void OnApplicationPause(bool isPaused)
@@ -74,10 +85,11 @@ public class RestoredPurchasesProvider : MonoBehaviour
         }
         
         foreach (var pendingIap in iapService.PendingIaps)
-        {           
-            var id = pendingIap.Key;
+        {
+            var productId = pendingIap.Key;
+            var actionId = GetActionId(productId);
 
-            var action = DefaultSafeQueueBuilder.Build(id, true, () =>
+            var action = DefaultSafeQueueBuilder.Build(actionId, true, () =>
             {
                 if (SellForCashService.Current == null)
                 {
@@ -93,8 +105,8 @@ public class RestoredPurchasesProvider : MonoBehaviour
 
                 model.OnClose = () =>
                 {
-                    SellForCashService.Current.ProvideReward(id);
-                    ProfileService.Current.QueueComponent.RemoveAction(id); // For case if we have scheduled the action once again while Restore window is in progress
+                    SellForCashService.Current.ProvideReward(productId);
+                    ProfileService.Current.QueueComponent.RemoveAction(actionId); // For case if we have scheduled the action once again while Restore window is in progress
                 };
 
                 // model.OnCancel = model.OnAccept;

@@ -17,7 +17,6 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
     public int MaxDelayBounceBubble;
     
     public int MaxOrders;
-    public int NextOrderDelay;
 
     public int FreeTimeLimit;
 

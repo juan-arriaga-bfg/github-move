@@ -128,7 +128,7 @@ public class UIQuestStartWindowModel : IWWindowModel
         QuestCompletedScenario.RegisterComponent(actBubble);
 
         ConversationActionExternalActionEntity extAction = new ConversationActionExternalActionEntity();
-        extAction.RegisterComponent(new ConversationActionPayloadProvideRewardComponent());
+        extAction.RegisterComponent(new ConversationActionPayloadProvideRewardComponent {QuestId = CompletedQuest.Id});
         QuestCompletedScenario.RegisterComponent(extAction);
     }
 

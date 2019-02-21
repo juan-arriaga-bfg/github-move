@@ -49,7 +49,7 @@ public class EjectionPieceAction : IBoardAction
 		
 		gameBoardController.BoardLogic.LockCell(From.Value, this);
 		if (AnimationResourceSearch == null)
-			AnimationResourceSearch = piece => AnimationDataManager.FindAnimation(piece, def => def.OnMultiSpawn);
+			AnimationResourceSearch = piece => AnimationOverrideDataService.Current.FindAnimation(piece, def => def.OnMultiSpawn);
 		var animation = new ReproductionPieceAnimation
 		{
 			From = From.Value,

@@ -162,12 +162,11 @@ public class UIQuestWindowView : UIGenericPopupWindowView
 
         var reward = windowModel.Quest.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
 
-        List<CurrencyPair> currencysReward;
-        var piecesReward = CurrencyHelper.FiltrationRewards(reward, out currencysReward);
+        var piecesReward = CurrencyHelper.FiltrationRewards(reward, out var currenciesReward);
 
         var str = string.Format(LocalizationService.Get("common.message.reward", "common.message.reward:{0}"), "");
         var strBuilder = new StringBuilder($"{str}");
-        strBuilder.Append(CurrencyHelper.RewardsToString("  ", piecesReward, currencysReward));
+        strBuilder.Append(CurrencyHelper.RewardsToString("  ", piecesReward, currenciesReward));
 
         return strBuilder.ToString();
     }

@@ -20,31 +20,35 @@ namespace BfgAnalytics
         public JsonDataCollectorUserStats()
         {
             matchDefinition = new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
-            firstInChains = PieceType.GetIdsByFilter(PieceTypeFilter.Normal)
+            firstInChains = PieceType.GetIdsByFilter(PieceTypeFilter.Progress)
                                      .Select(id => matchDefinition.GetFirst(id)).Distinct().ToList();
             
             chainNames = new Dictionary<int, string>();
-            chainNameRegex = new Regex(@"^([A-Z]+)\d+");
+            chainNameRegex = new Regex(@"^([A-Za-z_]+)\d*");
         }
 
         public JSONNode CollectData()
         {
             JSONNode node = new JSONObject();
 
-            Func<CurrencyDef, int> getValueByCurrency =
-                (currency) => ProfileService.Current.GetStorageItem(currency.Name).Amount;
-
             var creationDate = ProfileService.Current.GetComponent<BaseInformationSaveComponent>(BaseInformationSaveComponent.ComponentGuid).CreationDateTime;
-            node["profile_creation_date"] = $"{creationDate.Month}/{creationDate.Day}/{creationDate.Year}";
+            node["profile_creation_date"] = $"{creationDate.Month}-{creationDate.Day}-{creationDate.Year}";
             node["last_fog"] = GameDataService.Current.FogsManager.LastOpenFog?.Uid ?? "";
-            node["level"] = getValueByCurrency(Currency.Level);
+            node["level"] = GetValueByCurrency(Currency.Level);
             node["level_progress"] = GetLevelProgress();
-            node["energy_cap"] = getValueByCurrency(Currency.EnergyLimit);
-            node["workers"] = getValueByCurrency(Currency.WorkerLimit);
-            node["workers_available"] = getValueByCurrency(Currency.Worker);
+            node["energy_cap"] = GetValueByCurrency(Currency.EnergyLimit);
+            node["workers"] = GetValueByCurrency(Currency.WorkerLimit);
+            node["workers_available"] = GetValueByCurrency(Currency.Worker);
             node["top_pieces"] = GetTopPiecesInformation();
+            node["orders_count"] = GetValueByCurrency(Currency.Order);
+            node["daily_obj_count"] = 0;
             
             return node;
+        }
+
+        private int GetValueByCurrency(CurrencyDef currency)
+        {
+            return ProfileService.Current.GetStorageItem(currency.Name).Amount;
         }
 
         public static double GetLevelProgress()

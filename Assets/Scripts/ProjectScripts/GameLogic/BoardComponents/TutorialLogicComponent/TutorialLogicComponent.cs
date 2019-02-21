@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
+using UnityEngine;
 
 public class TutorialLogicComponent : ECSEntity, ILockerComponent
 {
@@ -9,12 +11,14 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     public virtual LockerComponent Locker => locker ?? (locker = GetComponent<LockerComponent>(LockerComponent.ComponentGuid));
     
     public BoardController Context;
-    public List<int> Save;
+    public List<int> SaveCompleted;
+    public List<int> SaveStarted;
     
     public override void OnRegisterEntity(ECSEntity entity)
     {
         Context = entity as BoardController;
-        Save = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid)?.Complete ?? new List<int>();
+        SaveCompleted = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid)?.Complete ?? new List<int>();
+        SaveStarted = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid)?.Started ?? new List<int>();
         
         UnlockFirefly(false);
         UnlockOrders(false);
@@ -32,7 +36,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     {
         for (var i = 0;; i++)
         {
-            if(Save.Contains(i)) continue;
+            if(SaveCompleted.Contains(i)) continue;
 
             var tutorial = TutorialBuilder.BuildTutorial(i, Context);
 
@@ -63,8 +67,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     
     private void OnShowWindow(IWUIWindow window)
     {
-        if(UIWindowType.IsIgnore(window.WindowName)) return;
-
+        if (UIWindowType.IsIgnore(window.WindowName)) return;
         if (Locker.IsLocked == false) Pause(true);
 		
         Locker.Lock(this);
@@ -72,14 +75,19 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
 	
     private void OnCloseWindow(IWUIWindow window)
     {
-        if(UIWindowType.IsIgnore(window.WindowName)) return;
+        if (UIWindowType.IsIgnore(window.WindowName)) return;
 		
         Locker.Unlock(this);
-		
-        if(Locker.IsLocked) return;
-		
-        Pause(false);
-        Update();
+
+        if (Locker.IsLocked) return;
+
+        DOTween.Sequence()
+            .AppendInterval(0.25f)
+            .AppendCallback(() =>
+            {
+                Pause(false);
+                Update();
+            });
     }
     
     public void Pause(bool isOn)
@@ -88,14 +96,14 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
         
         var collection = GetComponent<ECSComponentCollection>(BaseTutorialStep.ComponentGuid);
         var components = collection?.Components;
-        
-        if(components == null) return;
+
+        if (components == null) return;
 
         for (var i = components.Count - 1; i >= 0; i--)
         {
             var step = (BaseTutorialStep) components[i];
-            
-            if(step.IsPerform == false) continue;
+
+            if (step.IsPerform == false) continue;
             
             if (isOn) step.PauseOn();
             else step.PauseOff();
@@ -137,7 +145,7 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             
             UnRegisterComponent(condition);
             components.Remove(condition);
-            Save.Add(condition.Id);
+            SaveCompleted.Add(condition.Id);
         }
         
         for (var i = components.Count - 1; i >= 0; i--)
@@ -198,14 +206,16 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             if (pieceEntity == null || pieceEntity.PieceType == PieceType.Fog.Id) continue;
                 
             var pieceView = Context.RendererContext.GetElementAt(point) as PieceBoardElementView;
-                
+            
+            pieceEntity.ViewDefinition?.OnDrag(alpha >= 1);
+            
             if (pieceView != null) pieceView.SetFade(alpha, 1f);
         }
     }
     
     private void UnlockFirefly(bool isRun)
     {
-        if (isRun == false && Save.Contains(TutorialBuilder.LockFireflyStepIndex) == false) return;
+        if (isRun == false && SaveCompleted.Contains(TutorialBuilder.LockFireflyStepIndex) == false) return;
         
         var firefly = Context.BoardLogic.FireflyLogic;
         firefly.Locker.Unlock(firefly);
@@ -221,16 +231,26 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     
     public bool CheckLockPR()
     {
-        return Save.Contains(TutorialBuilder.LockPRStepIndex);
+        return SaveCompleted.Contains(TutorialBuilder.LockPRStepIndex);
+    }
+    
+    public bool CheckLockEnergy()
+    {
+        return SaveCompleted.Contains(TutorialBuilder.LockEnergyStep);
     }
     
     public bool CheckLockOrders()
     {
-        return Save.Contains(TutorialBuilder.LockOrderStepIndex);
+        return SaveCompleted.Contains(TutorialBuilder.LockOrderStepIndex);
     }
     
     public bool CheckFirstOrder()
     {
-        return Save.Contains(TutorialBuilder.FirstOrderStepIndex);
+        return SaveCompleted.Contains(TutorialBuilder.FirstOrderStepIndex);
+    }
+
+    public bool CheckMarket()
+    {
+        return SaveCompleted.Contains(TutorialBuilder.LockMarketStepIndex);
     }
 }

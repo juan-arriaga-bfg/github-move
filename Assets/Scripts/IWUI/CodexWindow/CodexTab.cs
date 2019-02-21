@@ -24,7 +24,7 @@ public class CodexTab : IWUIWindowViewController
     public void Init(CodexTabDef def)
     {
         defData = def;
-        IsHero = defData.ChainDefs[0].ItemDefs[0].PieceTypeDef.Id == PieceType.NPC_SleepingBeauty.Id;
+        IsHero = defData.ChainDefs[0].ItemDefs[0].PieceTypeDef.Id == PieceType.NPC_A.Id;
         
         ScrollToTop();
         

@@ -5,9 +5,13 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
     private PieceReproductionDef def;
     
     private string childName;
-    
+    public override string AnalyticsLocation => $"skip_product{(TimerCooldown.IsExecuteable() ? "_cooldown" : "")}";
     public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.production", "gameboard.bubble.message.production {0}"), childName);
-    public override string Price => TimerMain.IsExecuteable() ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), TimerMain.CompleteTime.GetTimeLeftText()) : base.Price;
+    public override string Price => TimerCooldown.IsExecuteable()
+        ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), TimerCooldown.CompleteTime.GetTimeLeftText())
+        : string.Format(LocalizationService.Get("gameboard.bubble.button.send", "gameboard.bubble.button.send {0}"), string.Empty);
+    
+    public override CurrencyPair Worker => null;
 
     public override TimerComponent TimerMain => TimerCooldown;
     
@@ -18,13 +22,109 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).ReproductionDef;
         
         HP = def.Limit;
-        TimerWork.Delay = 2;
+        TimerWork.Delay = 0;
+        Rewards.IsSingle = true;
         
         TimerCooldown = new TimerComponent{Delay = def.Delay};
+        TimerCooldown.OnComplete += TimerWork.Start;
         RegisterComponent(TimerCooldown);
         
         var child = GameDataService.Current.PiecesManager.GetPieceDef(PieceType.Parse(def.Reproduction.Currency));
         childName = $"<sprite name={child.Uid}>";
+    }
+
+    public override void OnMovedFromToFinish(BoardPosition @from, BoardPosition to, Piece context = null)
+    {
+    }
+
+    public override void OnRemoveFromBoard(BoardPosition position, Piece context = null)
+    {
+        TimerWork.OnComplete -= TimerWork.Start;
+        base.OnRemoveFromBoard(position, context);
+    }
+    
+    protected override LifeSaveItem InitInSave(BoardPosition position)
+    {
+        Rewards.InitInSave(position);
+		
+        var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
+        var item = save?.GetLifeSave(position);
+
+        if (item == null)
+        {
+            OnTimerStart();
+            Rewards.ShowBubble();
+            return null;
+        }
+		
+        current = item.Step;
+        
+        if (item.IsStartCooldown) TimerCooldown.Start(item.StartTimeCooldown);
+        else
+        {
+            SetStepReward();
+            Rewards.ShowBubble();
+        }
+
+        return item;
+    }
+    
+    public override LifeSaveItem Save()
+    {
+        return current == 0 ? null : new LifeSaveItem
+        {
+            Step = current,
+            Position = Context.CachedPosition,
+            IsStartCooldown = TimerCooldown.IsExecuteable(),
+            StartTimeCooldown = TimerCooldown.StartTimeLong
+        };
+    }
+    
+    public override bool Damage(bool isExtra = false)
+    {
+        if (TimerCooldown.IsExecuteable())
+        {
+            UIMessageWindowController.CreateTimerCompleteMessage(
+                LocalizationService.Get("window.timerComplete.message.production", "window.timerComplete.message.production"),
+                AnalyticsLocation,
+                TimerCooldown);
+            
+            return false;
+        }
+        
+        if (IsDead || CurrencyHelper.IsCanPurchase(Energy, true) == false) return false;
+        
+        CurrencyHelper.Purchase(Currency.Damage.Name, 1, Energy, success =>
+        {
+            Success();
+            Damage(1);
+            
+            BoardService.Current.FirstBoard.BoardEvents.RaiseEvent(GameEventsCodes.StorageDamage, this);
+        });
+        
+        return true;
+    }
+
+    protected override void OnTimerStart()
+    {
+        Damage();
+        SetStepReward();
+    }
+
+    private void SetStepReward()
+    {
+        if (IsDead == false) OnStep();
+        else OnComplete();
+        
+        PlaySoundOnStart();
+		
+        Locker.Lock(this, false);
+    }
+
+    protected override void OnTimerComplete()
+    {
+        PlaySoundOnEnd();
+        Rewards.ShowBubble();
     }
     
     protected override Dictionary<int, int> GetRewards()
@@ -36,41 +136,6 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         pieces.Add(PieceType.Parse(def.Reproduction.Currency), def.Reproduction.Amount);
         
         return pieces;
-    }
-    
-    protected override LifeSaveItem InitInSave(BoardPosition position)
-    {
-        var item = base.InitInSave(position);
-        
-        if (item == null) return null;
-        
-        if (item.IsStartCooldown) TimerCooldown.Start(item.StartTimeCooldown);
-        else Locker.Unlock(this);
-        
-        return item;
-    }
-    
-    public override LifeSaveItem Save()
-    {
-        var save = base.Save();
-        
-        if (save == null) return null;
-        
-        save.IsStartCooldown = TimerCooldown.IsExecuteable();
-        save.StartTimeCooldown = TimerCooldown.StartTimeLong;
-        
-        return save;
-    }
-
-    public override bool Damage(bool isExtra = false)
-    {
-        if (TimerCooldown.IsExecuteable() == false) return base.Damage(isExtra);
-        
-        UIMessageWindowController.CreateTimerCompleteMessage(
-            LocalizationService.Get("window.timerComplete.message.production", "window.timerComplete.message.production"),
-            TimerCooldown);
-        
-        return false;
     }
 
     protected override void OnSpawnCurrencyRewards(bool isComplete)

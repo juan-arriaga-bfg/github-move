@@ -35,7 +35,7 @@ public class CheckWorkerTutorialCondition : BaseTutorialCondition
         
         if(isCheck || board.WorkerLogic.Last == null) return;
         
-        var ids = (context as SelectStorageTutorialStep).Targets;
+        var ids = (context as BubbleBounceTutorialStep<ObstacleBubbleView>).Targets;
         var targets = new List<BoardPosition>();
         
         foreach (var id in ids)

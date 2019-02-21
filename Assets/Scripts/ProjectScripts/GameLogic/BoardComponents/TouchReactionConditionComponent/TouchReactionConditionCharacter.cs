@@ -4,6 +4,25 @@ public class TouchReactionConditionCharacter : TouchReactionConditionComponent
 {
 	public override bool Check(BoardPosition position, Piece piece)
 	{
+		if (piece.Context.TutorialLogic.CheckLockOrders() == false)
+		{
+			var view = piece.ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
+
+			if (view.IsShow == false)
+			{
+				view.SetData(
+					LocalizationService.Get("common.message.unavailable.orders", "common.message.unavailable.orders"),
+					LocalizationService.Get("common.button.ok", "common.button.ok"),
+					(p) => { view.Change(false); },
+					true,
+					false
+				);
+			}
+			
+			view.Change(!view.IsShow);
+			return false;
+		}
+		
 		var customer = piece.GetComponent<CustomerComponent>(CustomerComponent.ComponentGuid);
 
 		if (customer?.Order == null) return false;

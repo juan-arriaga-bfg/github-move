@@ -26,23 +26,41 @@ SpriteAtlas:
       padding: 4
       blockOffset: 1
       allowAlphaSplitting: 0
-      enableRotation: 0
+      enableRotation: 1
       enableTightPacking: 0
     variantMultiplier: 1
     packables:
     - {fileID: 21300000, guid: 1f740044f2c2cd644be15609bca027e9, type: 3}
+    - {fileID: 21300000, guid: 9fd95432270e96f4eb2dd119e98fae98, type: 3}
+    - {fileID: 21300000, guid: 112090c1e38cc23439ee30550a8e9ed5, type: 3}
+    - {fileID: 21300000, guid: 8f901b1e71230ec46b04624ff8ebb80d, type: 3}
+    - {fileID: 21300000, guid: 1d816f45a87f4f6479c05c9c60c86518, type: 3}
+    - {fileID: 21300000, guid: 4cf8f5b46cf4d5540bd17557b1338bc8, type: 3}
     - {fileID: 21300000, guid: 44bfd5ce668e64a06965ec90aeda04c3, type: 3}
     - {fileID: 21300000, guid: 93d79fbcd42484b5cbc51aba4c15f6c0, type: 3}
-    totalSpriteSurfaceArea: 65124
+    - {fileID: 21300000, guid: 7241819afe16a0f4e9203487896ec796, type: 3}
+    totalSpriteSurfaceArea: 131780
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 112090c1e38cc23439ee30550a8e9ed5, type: 3}
+  - {fileID: 21300000, guid: 9fd95432270e96f4eb2dd119e98fae98, type: 3}
   - {fileID: 21300000, guid: 1f740044f2c2cd644be15609bca027e9, type: 3}
+  - {fileID: 21300000, guid: 4cf8f5b46cf4d5540bd17557b1338bc8, type: 3}
+  - {fileID: 21300000, guid: 1d816f45a87f4f6479c05c9c60c86518, type: 3}
+  - {fileID: 21300000, guid: 7241819afe16a0f4e9203487896ec796, type: 3}
   - {fileID: 21300000, guid: 93d79fbcd42484b5cbc51aba4c15f6c0, type: 3}
+  - {fileID: 21300000, guid: 8f901b1e71230ec46b04624ff8ebb80d, type: 3}
   - {fileID: 21300000, guid: 44bfd5ce668e64a06965ec90aeda04c3, type: 3}
   m_PackedSpriteNamesToIndex:
+  - bottom_border_alpha
+  - border_edge
   - background_tile
+  - left_border_alpha_hole
+  - left_border_alpha
+  - tile_water
   - tile_grass_2
+  - bottom_border_alpha_hole
   - tile_grass_1
   m_Tag: tiles
   m_IsVariant: 0

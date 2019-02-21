@@ -12,7 +12,7 @@
 
 		if (life == null || IsDone) return true;
 
-		if (life.TimerWork.IsPaused || life.IsUseCooldown && life.TimerCooldown.IsPaused ) return false;
+		if (life.TimerWork.IsPaused || life.IsUseCooldown && life.TimerCooldown.IsPaused) return false;
 
 		IsDone = life.TimerWork.IsExecuteable() == false;
         
@@ -20,7 +20,7 @@
 
 		if (life.TimerWork.IsFree())
 		{
-			life.TimerWork.FastComplete();
+			life.TimerWork.FastComplete(string.Empty);
 			return false;
 		}
 			
@@ -28,6 +28,7 @@
 		
 		UIMessageWindowController.CreateTimerCompleteMessage(
 			LocalizationService.Get("window.timerComplete.message.default", "window.timerComplete.message.default"),
+			life.AnalyticsLocation,
 			life.TimerWork);
 		
 		return false;

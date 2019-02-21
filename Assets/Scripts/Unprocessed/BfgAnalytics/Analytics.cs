@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using IW.SimpleJSON;
+using UnityEngine;
 
 namespace BfgAnalytics
 {
@@ -19,48 +20,12 @@ namespace BfgAnalytics
         {
             return JsonDataGroup.Standart | JsonDataGroup.Userstats | JsonDataGroup.Balances | JsonDataGroup.Flags | JsonDataGroup.Story;
         }
-        
-        /// <summary>
-        /// Create json like this: {"premium": {"crystals": 10}, "soft": {"energy": 50, "coins": 500}}
-        /// </summary>
-        /// <param name="premium"></param>
-        /// <param name="soft"></param>
-        /// <returns></returns>
-        public static JSONNode CreateCurrenciesJson(List<CurrencyPair> premium, List<CurrencyPair> soft)
+
+        public static JsonDataGroup TutorialJsonData()
         {
-            JSONNode CreateCurrencyNode(CurrencyPair pair)
-            {
-                JSONNode node = new JSONObject();
-                node[pair.Currency] = new JSONNumber(pair.Amount);
-                return node;
-            }
-            
-            JSONObject ret = new JSONObject();
-
-            if (premium != null && premium.Count > 0)
-            {
-                var premiumNode = new JSONArray();
-                foreach (var currencyPair in premium)
-                {
-                    premiumNode.Add(CreateCurrencyNode(currencyPair)); 
-                }
-
-                ret.Add("premium", premiumNode);
-            }
-
-            if (soft != null && soft.Count > 0)
-            {
-                var softNode = new JSONArray();
-                foreach (var currencyPair in soft)
-                {
-                    softNode.Add(CreateCurrencyNode(currencyPair));
-                }
-                ret.Add("soft", softNode);
-            }
-
-            return ret;
+            return JsonDataGroup.Standart;
         }
-
+        
         public static void SendQuestStartEvent(string questId)
         {
             AnalyticsService.Current?.Event("progress", "quest", questId, "start", DefaultJsonData());
@@ -68,8 +33,7 @@ namespace BfgAnalytics
         
         public static void SendQuestCompletedEvent(string id)
         {
-            JSONNode transaction = new JSONObject();
-            AnalyticsService.Current?.Event("progress", "quest", id, "end", DefaultJsonData(), transaction);
+            AnalyticsService.Current?.Event("progress", "quest", id, "end", DefaultJsonData());
         }
         
         public static void SendPieceUnlockedEvent(string id)
@@ -84,50 +48,96 @@ namespace BfgAnalytics
         
         public static void SendFogClearedEvent(string id)
         {
-            JSONNode transaction = new JSONObject();
-            AnalyticsService.Current?.Event("progress", "fog", id, "unlock", DefaultJsonData(), transaction);
+            AnalyticsService.Current?.Event("progress", "fog", id, "unlock", DefaultJsonData());
         }
         
         public static void SendLevelReachedEvent(int level)
         {
-            JSONNode transaction = new JSONObject();
-            AnalyticsService.Current?.Event("progress", "level", level.ToString(), null, DefaultJsonData(), transaction);
-        }        
-        
-        public static void SendPurchase()
+            AnalyticsService.Current?.Event("progress", "level", level.ToString(), null, DefaultJsonData());
+        }
+
+		public static void SendTutorialStartStepEvent(string name)
+        {           
+            AnalyticsService.Current?.Event("ftue", null, name, "start", TutorialJsonData());
+        }
+
+        public static void SendTutorialEndStepEvent(string name)
         {
-            JSONNode customJsonData = new JSONObject();
-
-            JSONNode transactionNode = new JSONObject();
-            transactionNode["location"] = "shop";
-            transactionNode["reason"] = "item1";
-            transactionNode["isiap"] = false;
-            transactionNode["isfree"] = false;
-
-            transactionNode["spend"] = CreateCurrenciesJson(
-                new List<CurrencyPair>
-                {
-                    new CurrencyPair {Currency = Currency.Cash.Name, Amount = 1},
-                },
-                null
-            );
-            
-            transactionNode["collect"] = CreateCurrenciesJson(
-                new List<CurrencyPair>
-                {
-                    new CurrencyPair {Currency = Currency.Crystals.Name, Amount = 1},
-                },
-                new List<CurrencyPair>
-                {
-                    new CurrencyPair {Currency = Currency.Energy.Name, Amount = 2},
-                    new CurrencyPair {Currency = Currency.Coins.Name, Amount = 3},
-                }
-            );
-            
-            customJsonData.Add("transaction", transactionNode);
+            AnalyticsService.Current?.Event("ftue", null, name, "end", TutorialJsonData());
+        }
+        
+        public static void SendPurchase(string location, string reason, List<CurrencyPair> spend, List<CurrencyPair> collect, bool isIap, bool isFree)
+        {
+            JSONNode customJsonData = CreateTransaction(location, reason, spend, collect, isIap, isFree);
 
             // todo: Договориться насчет type, name, action
             AnalyticsService.Current?.Event("economy", null, null, null, DefaultJsonData(), customJsonData);
+        }
+
+        private static JSONNode CreateTransaction(string location, string reason, List<CurrencyPair> spend, List<CurrencyPair> collect, bool isIap, bool isFree)
+        {
+            JSONNode customJsonData = new JSONObject();
+            JSONNode transactionNode = new JSONObject();
+            
+            transactionNode["location"] = location;
+            transactionNode["reason"] = reason;
+            transactionNode["isiap"] = isIap ? 1 : 0;
+            transactionNode["isfree"] = isFree ? 1 : 0;
+
+            if (spend != null)
+            {
+                var node = CreateCurrenciesJson(spend);
+                if (node.Count != 0) transactionNode["spend"] = node;
+            }
+            
+            if (collect != null)
+            {
+                var node = CreateCurrenciesJson(collect);
+                if (node.Count != 0) transactionNode["collect"] = node;
+            }
+            
+            customJsonData.Add("transaction", transactionNode);
+            
+            return customJsonData;
+        }
+        
+        /// <summary>
+        /// Create json like this: {"premium": {"crystals": 10}, "soft": {"coins": 500}}
+        /// </summary>
+        /// <param name="currencies"></param>
+        /// <returns></returns>
+        private static JSONNode CreateCurrenciesJson(List<CurrencyPair> currencies)
+        {
+            JSONNode CreateCurrencyNode(CurrencyPair pair)
+            {
+                JSONNode node = new JSONObject();
+                node[pair.Currency] = new JSONNumber(pair.Amount);
+                return node;
+            }
+            
+            var ret = new JSONObject();
+            var premium = new JSONArray();
+            var soft = new JSONArray();
+
+            foreach (var pair in currencies)
+            {
+                if (pair.Currency == Currency.Crystals.Name)
+                {
+                    premium.Add(CreateCurrencyNode(pair));
+                    continue;
+                }
+
+                if (pair.Currency == Currency.Coins.Name)
+                {
+                    soft.Add(CreateCurrencyNode(pair));
+                    continue;
+                }
+            }
+
+            if (premium.Count > 0) ret.Add("premium", premium);
+            if (soft.Count > 0) ret.Add("soft", soft);
+
+            return ret;
         }
     }
 }

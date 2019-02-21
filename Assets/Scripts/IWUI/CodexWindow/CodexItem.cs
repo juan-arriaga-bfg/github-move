@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BfgAnalytics;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -77,7 +78,7 @@ public class CodexItem : IWUIWindowViewController
                 break;
             
             case CodexItemState.PartLock:
-                questionMark.SetActive(false);
+                questionMark.SetActive(true);
                 CreateIcon(Context.Context == null || Context.Context.IsHero == false);
                 
                 foreach (var sprite in IconSprites)
@@ -177,7 +178,7 @@ public class CodexItem : IWUIWindowViewController
     
     private string GetCaption()
     {
-        if (def == null)
+        if (def?.PieceDef == null)
             return "";
 
         if (def.PieceDef.SpawnResources != null)
@@ -296,6 +297,8 @@ public class CodexItem : IWUIWindowViewController
         // todo: use something like: targetEntity.WindowController.Window.Layers[0].ViewCamera.WorldToScreenPoint(taskIcon.transform.position)
         var flyPosition = GetComponentInParent<Canvas>().worldCamera.WorldToScreenPoint(pieceImageRectTransform.position);
         var transactions = CurrencyHelper.PurchaseAsync(reward, null, flyPosition);
+        
+        Analytics.SendPurchase("screen_collection", "item1", null, new List<CurrencyPair>(reward), false, false);
         
         PlayGiftOpenAnimation(() =>
         {

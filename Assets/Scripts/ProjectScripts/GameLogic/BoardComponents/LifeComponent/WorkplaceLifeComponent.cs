@@ -10,6 +10,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	public virtual CurrencyPair Worker => new CurrencyPair {Currency = Currency.Worker.Name, Amount = 1};
     
 	public virtual string Message => "";
+	public virtual string AnalyticsLocation => "";
 	public virtual string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.send", "gameboard.bubble.button.send {0}"), $"<sprite name={Currency.Worker.Icon}>");
 
 	public TimerComponent TimerWork;
@@ -47,11 +48,11 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		Context.RegisterComponent(TimerWork);
 	}
 
-	private void PlaySoundOnStart()
+	protected void PlaySoundOnStart()
 	{
 	}
 
-	private void PlaySoundOnEnd()
+	protected void PlaySoundOnEnd()
 	{
 		NSAudioService.Current.Play(SoundId.WorkerFinish);
 	}
@@ -82,8 +83,8 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		
 		var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
 		var item = save?.GetLifeSave(position);
-		
-		if(item == null) return null;
+
+		if (item == null) return null;
 		
 		current = item.Step;
 		Context.Context.WorkerLogic.Init(Context.CachedPosition, TimerWork);
@@ -109,7 +110,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	{
 		if (IsDead
 		    || CurrencyHelper.IsCanPurchase(Energy, true) == false
-		    || isExtra == false && Context.Context.WorkerLogic.Get(Context.CachedPosition, TimerWork) == false) return false;
+		    || isExtra == false && Worker != null && Context.Context.WorkerLogic.Get(Context.CachedPosition, TimerWork) == false) return false;
         
 		CurrencyHelper.Purchase(Currency.Damage.Name, 1, Energy, success =>
 		{
@@ -123,7 +124,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		return true;
 	}
 	
-	protected void OnTimerStart()
+	protected virtual void OnTimerStart()
 	{
 		if (IsDead == false) OnStep();
 		else OnComplete();

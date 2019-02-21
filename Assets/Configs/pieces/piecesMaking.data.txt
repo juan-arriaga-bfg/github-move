@@ -1,10 +1,10 @@
 ﻿[
   {
     "Uid": "A9",
-    "Delay": 1800,
+    "Delay": 86400,
     "Price": {
       "Currency": "Energy",
-      "Amount": 15
+      "Amount": 20
     },
     "StepRewards": [
       {
@@ -19,7 +19,23 @@
         "Weight": 10
       },
       {
+        "Uid": "Soft2",
+        "Weight": 5
+      },
+      {
         "Uid": "Boost_CR1",
+        "Weight": 5
+      },
+      {
+        "Uid": "Mana1",
+        "Weight": 5
+      },
+      {
+        "Uid": "SK1_PR",
+        "Weight": 10
+      },
+      {
+        "Uid": "SK2_PR",
         "Weight": 5
       },
       {
@@ -30,55 +46,10 @@
   },
   {
     "Uid": "B11",
-    "Delay": 1800,
+    "Delay": 86400,
     "Price": {
       "Currency": "Energy",
       "Amount": 20
-    },
-    "StepRewards": [
-      {
-        "Currency": "Experience",
-        "Amount": 25
-      }
-    ],
-    "PieceAmount": 6,
-    "PieceWeights": [
-      {
-        "Uid": "B1",
-        "Weight": 50
-      },
-      {
-        "Uid": "B2",
-        "Weight": 50
-      },
-      {
-        "Uid": "PR_B1",
-        "Weight": 10
-      },
-      {
-        "Uid": "PR_C1",
-        "Weight": 10
-      },
-      {
-        "Uid": "Soft1",
-        "Weight": 10
-      },
-      {
-        "Uid": "Boost_CR1",
-        "Weight": 5
-      },
-      {
-        "Uid": "Hard1",
-        "Weight": 5
-      }
-    ]
-  },
-  {
-    "Uid": "C9",
-    "Delay": 1800,
-    "Price": {
-      "Currency": "Energy",
-      "Amount": 15
     },
     "StepRewards": [
       {
@@ -89,23 +60,27 @@
     "PieceAmount": 5,
     "PieceWeights": [
       {
-        "Uid": "C1",
-        "Weight": 50
-      },
-      {
-        "Uid": "C2",
-        "Weight": 50
-      },
-      {
-        "Uid": "PR_B1",
-        "Weight": 10
-      },
-      {
         "Uid": "Soft1",
         "Weight": 10
       },
       {
+        "Uid": "Soft2",
+        "Weight": 5
+      },
+      {
         "Uid": "Boost_CR1",
+        "Weight": 5
+      },
+      {
+        "Uid": "Mana1",
+        "Weight": 5
+      },
+      {
+        "Uid": "SK1_PR",
+        "Weight": 10
+      },
+      {
+        "Uid": "SK2_PR",
         "Weight": 5
       },
       {
@@ -115,8 +90,8 @@
     ]
   },
   {
-    "Uid": "D9",
-    "Delay": 1800,
+    "Uid": "C9",
+    "Delay": 86400,
     "Price": {
       "Currency": "Energy",
       "Amount": 20
@@ -127,30 +102,345 @@
         "Amount": 25
       }
     ],
-    "PieceAmount": 6,
+    "PieceAmount": 5,
     "PieceWeights": [
-      {
-        "Uid": "D1",
-        "Weight": 50
-      },
-      {
-        "Uid": "D2",
-        "Weight": 50
-      },
-      {
-        "Uid": "PR_E1",
-        "Weight": 10
-      },
-      {
-        "Uid": "PR_A1",
-        "Weight": 10
-      },
       {
         "Uid": "Soft1",
         "Weight": 10
       },
       {
+        "Uid": "Soft2",
+        "Weight": 5
+      },
+      {
         "Uid": "Boost_CR1",
+        "Weight": 5
+      },
+      {
+        "Uid": "Mana1",
+        "Weight": 5
+      },
+      {
+        "Uid": "SK1_PR",
+        "Weight": 10
+      },
+      {
+        "Uid": "SK2_PR",
+        "Weight": 5
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 5
+      }
+    ]
+  },
+  {
+    "Uid": "D9",
+    "Delay": 86400,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 20
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "Soft1",
+        "Weight": 10
+      },
+      {
+        "Uid": "Soft2",
+        "Weight": 5
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 5
+      },
+      {
+        "Uid": "Mana1",
+        "Weight": 5
+      },
+      {
+        "Uid": "SK1_PR",
+        "Weight": 10
+      },
+      {
+        "Uid": "SK2_PR",
+        "Weight": 5
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 5
+      }
+    ]
+  },
+  {
+    "Uid": "E9",
+    "Delay": 86400,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 20
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "Soft1",
+        "Weight": 10
+      },
+      {
+        "Uid": "Soft2",
+        "Weight": 5
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 5
+      },
+      {
+        "Uid": "Mana1",
+        "Weight": 5
+      },
+      {
+        "Uid": "SK1_PR",
+        "Weight": 10
+      },
+      {
+        "Uid": "SK2_PR",
+        "Weight": 5
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 5
+      }
+    ]
+  },
+  {
+    "Uid": "F9",
+    "Delay": 86400,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 20
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "Soft1",
+        "Weight": 10
+      },
+      {
+        "Uid": "Soft2",
+        "Weight": 5
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 5
+      },
+      {
+        "Uid": "Mana1",
+        "Weight": 5
+      },
+      {
+        "Uid": "SK1_PR",
+        "Weight": 10
+      },
+      {
+        "Uid": "SK2_PR",
+        "Weight": 5
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 5
+      }
+    ]
+  },
+  {
+    "Uid": "G9",
+    "Delay": 86400,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 20
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "Soft1",
+        "Weight": 10
+      },
+      {
+        "Uid": "Soft2",
+        "Weight": 5
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 5
+      },
+      {
+        "Uid": "Mana1",
+        "Weight": 5
+      },
+      {
+        "Uid": "SK1_PR",
+        "Weight": 10
+      },
+      {
+        "Uid": "SK2_PR",
+        "Weight": 5
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 5
+      }
+    ]
+  },
+  {
+    "Uid": "H9",
+    "Delay": 86400,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 20
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "Soft1",
+        "Weight": 10
+      },
+      {
+        "Uid": "Soft2",
+        "Weight": 5
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 5
+      },
+      {
+        "Uid": "Mana1",
+        "Weight": 5
+      },
+      {
+        "Uid": "SK1_PR",
+        "Weight": 10
+      },
+      {
+        "Uid": "SK2_PR",
+        "Weight": 5
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 5
+      }
+    ]
+  },
+  {
+    "Uid": "I9",
+    "Delay": 86400,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 20
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "Soft1",
+        "Weight": 10
+      },
+      {
+        "Uid": "Soft2",
+        "Weight": 5
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 5
+      },
+      {
+        "Uid": "Mana1",
+        "Weight": 5
+      },
+      {
+        "Uid": "SK1_PR",
+        "Weight": 10
+      },
+      {
+        "Uid": "SK2_PR",
+        "Weight": 5
+      },
+      {
+        "Uid": "Hard1",
+        "Weight": 5
+      }
+    ]
+  },
+  {
+    "Uid": "J9",
+    "Delay": 86400,
+    "Price": {
+      "Currency": "Energy",
+      "Amount": 20
+    },
+    "StepRewards": [
+      {
+        "Currency": "Experience",
+        "Amount": 25
+      }
+    ],
+    "PieceAmount": 5,
+    "PieceWeights": [
+      {
+        "Uid": "Soft1",
+        "Weight": 10
+      },
+      {
+        "Uid": "Soft2",
+        "Weight": 5
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 5
+      },
+      {
+        "Uid": "Mana1",
+        "Weight": 5
+      },
+      {
+        "Uid": "SK1_PR",
+        "Weight": 10
+      },
+      {
+        "Uid": "SK2_PR",
         "Weight": 5
       },
       {

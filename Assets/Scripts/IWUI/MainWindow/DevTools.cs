@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using BfgAnalytics;
 using CodeStage.AntiCheat.ObscuredTypes;
 using DG.Tweening;
 using JetBrains.Annotations;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Tayx.Graphy;
 using UnityEngine;
@@ -20,10 +18,12 @@ public class DevTools : UIContainerElementViewController
     [IWUIBinding("#ButtonsPanel")] private GameObject panel;
     [IWUIBinding("#QuestDialogsToggle")] private Toggle questDialogsToggle;
     [IWUIBinding("#TutorialToggle")] private Toggle tutorialToggle;
+    [IWUIBinding("#RemoverToggle")] private Toggle removerToggle;
 
 #if !UNITY_EDITOR
-    private static bool isQuestDialogsDisabled;
-    private static bool isTutorialDisabled;
+    private static bool isQuestDialogsDisabled = true;
+    private static bool isTutorialDisabled = true;
+    private static bool isRemoverDebugDisabled = true;
 #endif
     
     public override void OnViewInit(IWUIWindowView context)
@@ -34,6 +34,7 @@ public class DevTools : UIContainerElementViewController
         
         questDialogsToggle.isOn = IsQuestDialogsEnabled();
         tutorialToggle.isOn = IsTutorialEnabled();
+        removerToggle.isOn = IsRemoverDebugEnabled();
         
         UpdateFpsMeter();
     }
@@ -197,6 +198,7 @@ public class DevTools : UIContainerElementViewController
     public void OnDebug1Click()
     {
         Debug.Log("OnDebug1Click");
+        return;
 
 #if UNITY_EDITOR
         
@@ -262,8 +264,6 @@ public class DevTools : UIContainerElementViewController
     public void OnDebug2Click()
     {
         Debug.Log("OnDebug2Click");
-
-        Analytics.SendPurchase();
         return;
         
         GameDataService.Current.QuestsManager.StartNewDailyQuest();
@@ -357,9 +357,9 @@ public class DevTools : UIContainerElementViewController
     {
         
 #if UNITY_EDITOR
-        EditorPrefs.SetBool("DEBUG_QUEST_DIALOGS_DISABLED", !isChecked);
+        EditorPrefs.SetBool("DEBUG_QUEST_DIALOGS_DISABLED", isChecked);
 #else
-        isQuestDialogsDisabled = !isChecked;
+        isQuestDialogsDisabled = isChecked;
 #endif
         
     }
@@ -368,9 +368,9 @@ public class DevTools : UIContainerElementViewController
     {
         
 #if UNITY_EDITOR
-        return !EditorPrefs.GetBool("DEBUG_QUEST_DIALOGS_DISABLED", false);
+        return EditorPrefs.GetBool("DEBUG_QUEST_DIALOGS_DISABLED", true);
 #else
-        return !isQuestDialogsDisabled;
+        return isQuestDialogsDisabled;
 #endif
         
     }
@@ -379,9 +379,9 @@ public class DevTools : UIContainerElementViewController
     {
         
 #if UNITY_EDITOR
-        EditorPrefs.SetBool("DEBUG_TUTORIAL_DISABLED", !isChecked);
+        EditorPrefs.SetBool("DEBUG_TUTORIAL_DISABLED", isChecked);
 #else
-        isTutorialDisabled = !isChecked;
+        isTutorialDisabled = isChecked;
 #endif
         
     }
@@ -390,9 +390,28 @@ public class DevTools : UIContainerElementViewController
     {
         
 #if UNITY_EDITOR
-        return !EditorPrefs.GetBool("DEBUG_TUTORIAL_DISABLED", false);
+        return EditorPrefs.GetBool("DEBUG_TUTORIAL_DISABLED", true);
 #else
-        return !isTutorialDisabled;
+        return isTutorialDisabled;
+#endif
+        
+    }
+    
+    public void OnRemoverDebugValueChanged(bool isChecked)
+    {
+#if UNITY_EDITOR
+        EditorPrefs.SetBool("DEBUG_REMOVER_DISABLED", isChecked);
+#else
+        isRemoverDebugDisabled = isChecked;
+#endif
+    }
+    
+    public static bool IsRemoverDebugEnabled()
+    {
+#if UNITY_EDITOR
+        return EditorPrefs.GetBool("DEBUG_REMOVER_DISABLED", true);
+#else
+        return isRemoverDebugDisabled;
 #endif
         
     }

@@ -6,7 +6,7 @@ public class PiecePositionsCacheComponent : IECSComponent
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public int Guid => ComponentGuid;
 	
-	private Dictionary<int, List<BoardPosition>> cache = new Dictionary<int, List<BoardPosition>>();
+	private readonly Dictionary<int, List<BoardPosition>> cache = new Dictionary<int, List<BoardPosition>>();
 	public Dictionary<int, List<BoardPosition>> Cache => cache;
 
 	private BoardLogicComponent context;
@@ -22,9 +22,7 @@ public class PiecePositionsCacheComponent : IECSComponent
 
 	public int GetCountByType(int pieceType)
 	{
-		List<BoardPosition> list;
-
-		return cache.TryGetValue(pieceType, out list) == false ? 0 : list.Count;
+		return cache.TryGetValue(pieceType, out var list) == false ? 0 : list.Count;
 	}
 
 	public List<BoardPosition> GetNearestByType(int pieceType, BoardPosition from, int amount = 1)
@@ -43,15 +41,13 @@ public class PiecePositionsCacheComponent : IECSComponent
 	
 	public List<BoardPosition> GetPiecePositionsByType(int pieceType)
 	{
-		List<BoardPosition> list;
-
-		return cache.TryGetValue(pieceType, out list) == false ? new List<BoardPosition>() : new List<BoardPosition>(list);
+		return cache.TryGetValue(pieceType, out var list) == false ? new List<BoardPosition>() : new List<BoardPosition>(list);
 	}
 
 	public List<BoardPosition> GetUnlockedPiecePositionsByType(int pieceType)
 	{
 		var piecePositions = GetPiecePositionsByType(pieceType);
-		int i = 0;
+		var i = 0;
 		while (i < piecePositions.Count)
 		{
 			if (context.Context.PathfindLocker.HasPath(context.GetPieceAt(piecePositions[i])))
@@ -116,10 +112,9 @@ public class PiecePositionsCacheComponent : IECSComponent
 
 	public List<BoardPosition> GetRandomPositions(int pieceType, int count)
 	{
-		List<BoardPosition> list;
 		var result = new List<BoardPosition>();
 
-		if (cache.TryGetValue(pieceType, out list) == false)
+		if (cache.TryGetValue(pieceType, out var list) == false)
 		{
 			list = new List<BoardPosition>();
 		}
@@ -138,9 +133,7 @@ public class PiecePositionsCacheComponent : IECSComponent
 
 	public void AddPosition(int pieceType, BoardPosition position)
 	{
-		List<BoardPosition> list;
-
-		if (cache.TryGetValue(pieceType, out list) == false)
+		if (cache.TryGetValue(pieceType, out var list) == false)
 		{
 			list = new List<BoardPosition>();
 			cache.Add(pieceType, list);
@@ -150,19 +143,9 @@ public class PiecePositionsCacheComponent : IECSComponent
 		context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ChangePiecePosition, pieceType);
 	}
 	
-	public bool RemovePosition(int pieceType, BoardPosition position)
+	public void RemovePosition(int pieceType, BoardPosition position)
 	{
-		List<BoardPosition> list;
-
-		if (cache.TryGetValue(pieceType, out list) == false) return false;
-
-		var isHappened = list.Remove(position);
-
-		if (isHappened)
-		{
-			context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ChangePiecePosition, pieceType);
-		}
-		
-		return isHappened;
+		if (cache.TryGetValue(pieceType, out var list) == false) return;
+		if (list.Remove(position)) context.Context.BoardEvents.RaiseEvent(GameEventsCodes.ChangePiecePosition, pieceType);
 	}
 }

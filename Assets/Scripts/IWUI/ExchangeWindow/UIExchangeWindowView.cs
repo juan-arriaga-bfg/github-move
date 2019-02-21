@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BfgAnalytics;
 using UnityEngine;
 
 public class UIExchangeWindowView : UIGenericPopupWindowView
@@ -80,6 +81,7 @@ public class UIExchangeWindowView : UIGenericPopupWindowView
         {
             if(success == false) return;
             
+            Analytics.SendPurchase("buy_ingredients", "item1", new List<CurrencyPair>{windowModel.Price}, null, false, false);
             windowModel.OnClick?.Invoke();
         });
     }

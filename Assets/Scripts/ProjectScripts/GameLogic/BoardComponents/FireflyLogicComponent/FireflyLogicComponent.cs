@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BfgAnalytics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -29,7 +30,9 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	
 	private bool isClick;
 	private bool isFirst = true;
-	private bool isTuttorialActive => ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount < 3;
+
+	private const int TUTORIAL_FIREFLY_COUNT = 3;
+	private bool isTuttorialActive => ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount < TUTORIAL_FIREFLY_COUNT;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
@@ -140,8 +143,11 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 			
 			views.Add(firefly);
 		}
-		
-		if(isTuttorialActive) views[0].AddArrow();
+
+		if (isTuttorialActive)
+		{
+			views[0].AddArrow();
+		}
 	}
 	
 	public bool IsExecuteable()
@@ -199,7 +205,15 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		
 		if (firefly == null) return false;
 
+		var amountFireflyBefore = ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount;
 		firefly.OnClick();
+		var amountFireflyAfter = ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount;
+
+		if (amountFireflyAfter != amountFireflyBefore && amountFireflyAfter == TUTORIAL_FIREFLY_COUNT)
+		{
+			Analytics.SendTutorialEndStepEvent("firefly");
+		}
+		
 		return true;
 	}
 
@@ -217,6 +231,16 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		startTime = DateTime.UtcNow;
 		
 		if(isTuttorialActive && views.Count != 0) views[0].AddArrow();
+	}
+
+	public void DestroyAll()
+	{
+		for (var i = views.Count - 1; i >= 0; i--)
+		{
+			var view = views[i];
+			views.Remove(view);
+			context.Context.RendererContext.DestroyElement(view.gameObject);
+		}
 	}
 	
 	public Vector2 Cross(Vector2 a, Vector2 b) //точки a и b концы первого отрезка

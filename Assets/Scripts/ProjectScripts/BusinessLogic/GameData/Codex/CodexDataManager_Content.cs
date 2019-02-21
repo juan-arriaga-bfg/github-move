@@ -5,12 +5,8 @@ public partial class CodexDataManager
 {
     private CodexContent BuildContent()
     {
-        CodexContent ret = new CodexContent();
-
-        ret.ItemDefs = new List<CodexItemDef>();
-
-        var board = BoardService.Current.FirstBoard;
-        var matchDef = board.BoardLogic.GetComponent<MatchDefinitionComponent>(MatchDefinitionComponent.ComponentGuid);
+        var ret = new CodexContent {ItemDefs = new List<CodexItemDef>()};
+        var matchDef = GameDataService.Current.MatchDefinition;
 
         ret.TabDefs = new List<CodexTabDef>
         {
@@ -22,7 +18,7 @@ public partial class CodexDataManager
                     new CodexChainDef
                     {
                         Name = LocalizationService.Get("window.codex.toggle.characters", "window.codex.toggle.characters"),
-                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.NPC_SleepingBeauty.Id)),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.NPC_A.Id)),
                     },
                 }
             },
@@ -46,11 +42,16 @@ public partial class CodexDataManager
                         Name = LocalizationService.Get("window.codex.branch.C", "window.codex.branch.C"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.C1.Id))
                     },
-                    // new CodexChainDef
-                    // {
-                    //     Name = LocalizationService.Get("window.codex.branch.D", "window.codex.branch.D"),
-                    //     ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.D1.Id))
-                    // },
+                    new CodexChainDef
+                    {
+                        Name = LocalizationService.Get("window.codex.branch.D", "window.codex.branch.D"),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.D1.Id))
+                    },    
+                    new CodexChainDef
+                    {
+                        Name = LocalizationService.Get("window.codex.branch.E", "window.codex.branch.E"),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.E1.Id))
+                    },
                 }
             },
             new CodexTabDef
@@ -98,22 +99,6 @@ public partial class CodexDataManager
                             matchDef.GetChain(PieceType.PR_E1.Id)
                         })
                     },
-                    new CodexChainDef
-                    {
-                        Name = LocalizationService.Get("window.codex.branch.PR_F", "window.codex.branch.PR_F"),
-                        ItemDefs = GetCodexItemsForChain(new List<List<int>>
-                        {
-                            matchDef.GetChain(PieceType.PR_F1.Id)
-                        })
-                    },
-                    new CodexChainDef
-                    {
-                        Name = LocalizationService.Get("window.codex.branch.PR_G", "window.codex.branch.PR_G"),
-                        ItemDefs = GetCodexItemsForChain(new List<List<int>>
-                        {
-                            matchDef.GetChain(PieceType.PR_G1.Id)
-                        })
-                    },
                 }
             },
             new CodexTabDef
@@ -136,11 +121,16 @@ public partial class CodexDataManager
                         Name = LocalizationService.Get("window.codex.branch.CH_C", "window.codex.branch.CH_C"),
                         ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.CH1_C.Id)),
                     },
-                    // new CodexChainDef
-                    // {
-                    //     Name = LocalizationService.Get("window.codex.branch.CH_D", "window.codex.branch.CH_D"),
-                    //     ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.CH1_D.Id)),
-                    // },
+                    new CodexChainDef
+                    {
+                        Name = LocalizationService.Get("window.codex.branch.CH_D", "window.codex.branch.CH_D"),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.CH1_D.Id)),
+                    },   
+                    new CodexChainDef
+                    {
+                        Name = LocalizationService.Get("window.codex.branch.CH_E", "window.codex.branch.CH_E"),
+                        ItemDefs = GetCodexItemsForChain(matchDef.GetChain(PieceType.CH1_E.Id)),
+                    },
                 }
             },
             new CodexTabDef

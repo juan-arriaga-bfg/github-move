@@ -32,9 +32,7 @@ public class PieceBoardElementView : BoardElementView
     private readonly Color baseColor = new Color(0.6f, 0.4f, 0.2f);
     private readonly Color dragErrorColor = new Color(0.7f, 0.1f, 0.1f);
     private readonly Color dragSpriteErrorColor = new Color(1f, 0.44f, 0.44f, 0.9f);
-
-    private MulticellularPieceBoardObserver multicellularPieceBoardObserver;
-
+    
     private MatchHoverAnimation dragMatchAnimation;
     
     protected bool isLockVisual = false;
@@ -97,13 +95,8 @@ public class PieceBoardElementView : BoardElementView
         }
 
         lastBoardPosition = piece.CachedPosition;
-
-		multicellularPieceBoardObserver = Piece.GetComponent<MulticellularPieceBoardObserver>(MulticellularPieceBoardObserver.ComponentGuid);
-
-        if (multicellularPieceBoardObserver != null)
-        {
-            SyncRendererLayers(piece.CachedPosition);
-        }
+        
+        if (Piece.Multicellular != null) SyncRendererLayers(piece.CachedPosition);
 
         ResetDefaultMaterial();
         CacheDefaultMaterials();
@@ -114,11 +107,10 @@ public class PieceBoardElementView : BoardElementView
     protected List<LockerComponent> GetPieceLockers()
     {
         var lockers = new List<LockerComponent>();
+        
         foreach (var component in Piece.ComponentsCache.Values)
         {
-            var ilocker = component as ILockerComponent;
-            if (ilocker != null)
-                lockers.Add(ilocker.Locker);
+            if (component is ILockerComponent iLocker) lockers.Add(iLocker.Locker);
         }
 
         return lockers;
@@ -199,8 +191,6 @@ public class PieceBoardElementView : BoardElementView
     
     public virtual void OnDragStart(BoardPosition boardPos, Vector2 worldPos)
     {
-        RemoveArrow();
-
         HideDropEffect();
         
         OnDragStartCallback?.Invoke();
@@ -214,7 +204,6 @@ public class PieceBoardElementView : BoardElementView
 
     public virtual void OnDragEnd(BoardPosition boardPos, Vector2 worldPos)
     {
-        
         Piece.Context.HintCooldown.Resume(this);
         OnDragEndCallback?.Invoke();
         
@@ -232,15 +221,12 @@ public class PieceBoardElementView : BoardElementView
         }
             
         ToggleSelection(false);
-        
-        
     }
 
     public virtual void OnTap(BoardPosition boardPos, Vector2 worldPos)
     {
         OnTapCallback?.Invoke();
         
-        RemoveArrow();
         DOTween.Kill(selectedAnimationId);
         NSAudioService.Current.Stop(SoundId.ObjectRelease);
         var sequence = DOTween.Sequence().SetId(selectedAnimationId);
@@ -251,7 +237,6 @@ public class PieceBoardElementView : BoardElementView
 
     public virtual void UpdateView()
     {
-        
     }
 
     private void SpawnLockParticles()
@@ -289,14 +274,8 @@ public class PieceBoardElementView : BoardElementView
     /// <summary>
     /// if piece is multicellular
     /// </summary>
-    public virtual bool IsMulticellularPiece
-    {
-        get
-        {
-            return multicellularPieceBoardObserver != null;
-        }
-    }
-    
+    public virtual bool IsMulticellularPiece => Piece.Multicellular != null;
+
     /// <summary>
     /// Get CachedPosition or Mask positions (if piece is multicellular)
     /// </summary>
@@ -304,11 +283,11 @@ public class PieceBoardElementView : BoardElementView
     {
         var points = new List<BoardPosition>();
 
-        if (multicellularPieceBoardObserver != null)
+        if (Piece.Multicellular != null)
         {
-            for (int i = 0; i < multicellularPieceBoardObserver.Mask.Count; i++)
+            for (var i = 0; i < Piece.Multicellular.Mask.Count; i++)
             {
-                var point = multicellularPieceBoardObserver.GetPointInMask(Piece.CachedPosition, multicellularPieceBoardObserver.Mask[i]);
+                var point = Piece.Multicellular.GetPointInMask(Piece.CachedPosition, Piece.Multicellular.Mask[i]);
                 points.Add(point);
             }
         }
@@ -427,6 +406,7 @@ public class PieceBoardElementView : BoardElementView
         lockedSubtrates.Clear();
         
         DestroyDropEffect();
+        RemoveArrow();
         
         base.ResetViewOnDestroy();
     }
@@ -499,11 +479,9 @@ public class PieceBoardElementView : BoardElementView
     {
         base.SyncRendererLayers(boardPosition);
 
-        if (Piece == null) return;
+        if (Piece?.Multicellular == null) return;
         
-        if (multicellularPieceBoardObserver == null) return;
-        
-        var targetPosition = multicellularPieceBoardObserver.GetUpPosition;
+        var targetPosition = Piece.Multicellular.GetUpPosition;
         
         base.SyncRendererLayers(new BoardPosition(targetPosition.X, targetPosition.Y, boardPosition.Z));
     }
@@ -515,16 +493,23 @@ public class PieceBoardElementView : BoardElementView
         arrow = HintArrowView.Show(Piece.CachedPosition, 0, -0.5f, false, true);
     }
 
+    public void UpdateArrow()
+    {
+        if (arrow == null || (arrow.CachedPosition.X == Piece.CachedPosition.X && arrow.CachedPosition.Y == Piece.CachedPosition.Y)) return;
+
+        RemoveArrow();
+        AddArrow();
+    }
+
     public void RemoveArrow(float delay = 0)
     {
         if (arrow == null) return;
-
+        
         arrow.CachedTransform.SetParent(null);
         arrow.Remove(delay);
         arrow = null;
     }
-
-
+    
     public void ShowDropEffect(bool focus, bool enableTopHighlight = true, bool enableBottomHighlight = true)
     {
         if (dropEffectView != null)

@@ -466,6 +466,10 @@ PrefabInstance:
       propertyPath: m_ramModuleState
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 11496292, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
+      propertyPath: m_enableHotkeys
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 22431670, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -163.72021
@@ -769,10 +773,10 @@ MonoBehaviour:
   cameraSettings:
     cameraClampRegion:
       serializedVersion: 2
-      x: -1
-      y: -13
-      width: 44
-      height: 27
+      x: 23.41
+      y: -16.8
+      width: 55.2
+      height: 33.9
     smoothTime: 0.05
     moveThreshold: 0.001
     sensitive: 1

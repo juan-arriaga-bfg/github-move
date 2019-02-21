@@ -19,6 +19,7 @@ public class RewardsStoreComponent : IECSComponent
     public bool IsTargetReplace;
     public bool IsComplete;
     public bool IsScatter;
+    public bool IsSingle;
     
     private Piece context;
     
@@ -29,10 +30,12 @@ public class RewardsStoreComponent : IECSComponent
     public void OnRegisterEntity(ECSEntity entity)
     {
         context = entity as Piece;
+        GameDataService.Current.CharactersManager.OnUpdateSequence += UpdateSequence;
     }
 
     public void OnUnRegisterEntity(ECSEntity entity)
     {
+        GameDataService.Current.CharactersManager.OnUpdateSequence -= UpdateSequence;
     }
 
     public void InitInSave(BoardPosition position)
@@ -48,6 +51,42 @@ public class RewardsStoreComponent : IECSComponent
         if (item.IsComplete) ShowBubble();
     }
 
+    private void UpdateSequence()
+    {
+        if(rewards == null || rewards.Count == 0) return;
+        
+        var definition = context.Context.BoardLogic.MatchDefinition;
+        var replace = new List<int>();
+
+        foreach (var key in rewards.Keys)
+        {
+            var last = definition.GetLast(key);
+            var def = PieceType.GetDefById(last);
+
+            if (def.Filter.Has(PieceTypeFilter.Character) == false
+                || GameDataService.Current.CharactersManager.Characters.Contains(last)) continue;
+            
+            replace.Add(key);
+        }
+
+        foreach (var key in replace)
+        {
+            if (rewards.ContainsKey(PieceType.Hard1.Id) == false)
+            {
+                rewards.Add(PieceType.Hard1.Id, 0);
+            }
+
+            rewards[PieceType.Hard1.Id] += rewards[key];
+            rewards.Remove(key);
+        }
+
+        InitRewards();
+        
+        var view = UpdateView(IsComplete);
+
+        if (view != null) view.UpdateIcon();
+    }
+    
     public RewardsSaveItem Save()
     {
         return rewards == null
@@ -117,6 +156,7 @@ public class RewardsStoreComponent : IECSComponent
         var current = rewards.Sum(pair => pair.Value);
         
         if (IsTargetReplace) current = Mathf.Max(0, current - (context.Multicellular?.Mask.Count ?? 1));
+        if (IsSingle && current > 0) current = 1;
         
         var cells = new List<BoardPosition>();
         
@@ -126,13 +166,13 @@ public class RewardsStoreComponent : IECSComponent
         return true;
     }
     
-    private void UpdateView(bool isShow)
+    private RewardsBubbleView UpdateView(bool isShow)
     {
-        if(context.ViewDefinition == null) return;
+        if (context.ViewDefinition == null) return null;
         
         var view = context.ViewDefinition.AddView(ViewType.RewardsBubble) as RewardsBubbleView;
 
-        if (view == null || view.IsShow == isShow) return;
+        if (view == null || view.IsShow == isShow) return view;
         
         if (isShow)
         {
@@ -150,12 +190,14 @@ public class RewardsStoreComponent : IECSComponent
         
         IsComplete = isShow;
         view.Change(isShow);
+        return view;
     }
 
     private void Scatter()
     {
         context.Context.ActionExecutor.AddAction(new ScatterPiecesAction
         {
+            IsSingle = IsSingle,
             IsTargetReplace = IsTargetReplace,
             From = context.CachedPosition,
             Pieces = rewards,

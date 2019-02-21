@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
-using DG.Tweening;
-using UnityEngine;
 
-public class HighlightPiecesTutorialStep : DelayTutorialStep
+public class HighlightPiecesTutorialStep : BaseTutorialStep, IBoardEventListener
 {
     public List<int> Targets;
     
     private List<PieceBoardElementView> selectPieces;
+    
+    protected override void OnFirstStart()
+    {
+        //nothing to do
+    }
     
     public override void PauseOn()
     {
@@ -14,18 +17,44 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
 
         SelectionOff();
     }
-    
+
+    public override void PauseOff()
+    {
+        base.PauseOff();
+        
+        SelectionOff();
+        Execute();
+    }
+
+    public override void Perform()
+    {
+        if(IsPerform) return;
+        
+        base.Perform();
+        
+        Context.Context.BoardEvents.AddListener(this, GameEventsCodes.ChangePiecePosition);
+        Execute();
+    }
+
     protected override void Complete()
     {
-        base.Complete();
+        Context.Context.BoardEvents.RemoveListener(this, GameEventsCodes.ChangePiecePosition);
         SelectionOff();
+        
+        base.Complete();
     }
     
-    public override void Execute()
+    public void OnBoardEvent(int code, object context)
     {
-        base.Execute();
+        if (isPauseOn || Targets.Contains((int) context) == false) return;
         
-        if(selectPieces != null) return;
+        SelectionOff();
+        Execute();
+    }
+    
+    private void Execute()
+    {
+        if (selectPieces != null) return;
         
         selectPieces = new List<PieceBoardElementView>();
 
@@ -44,7 +73,7 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
             break;
         }
         
-        if(positions == null) return;
+        if (positions == null) return;
         
         var options = new List<List<BoardPosition>>();
 
@@ -53,7 +82,7 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
             int amount;
             var field = new List<BoardPosition>();
             
-            if(Context.Context.BoardLogic.FieldFinder.Find(position, field, out amount) == false) continue;
+            if(Context.Context.BoardLogic.FieldFinder.Find(position, field, out amount, true) == false) continue;
             
             options.Add(field);
         }
@@ -70,31 +99,25 @@ public class HighlightPiecesTutorialStep : DelayTutorialStep
         foreach (var position in best)
         {
             var view = Context.Context.RendererContext.GetElementAt(position) as PieceBoardElementView;
-            
-            if(view == null) continue;
+
+            if (view == null) continue;
             
             view.ToggleSelection(true);
             selectPieces.Add(view);
         }
         
-        var center = BoardPosition.GetCenter(best);
-        var centerPos = Context.Context.BoardDef.GetPiecePosition(center.X, center.Y);
-
-        if (Context.Context.Manipulator.CameraManipulator.CameraMove.IsLocked || Context.CheckLockOrders() && Context.CheckFirstOrder() == false) return;
-        
-        Context.Context.Manipulator.CameraManipulator.MoveTo(centerPos);
-    }
-    
-    public override bool IsExecuteable()
-    {
-        return selectPieces == null && base.IsExecuteable();
+        if (best.Count >= amountMatch && IsFirstStartEvent())
+        {
+            var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
+            var started = tutorialLogic.SaveStarted;
+            started.Add(Id);
+            OnFirstStartCallback?.Invoke();
+        }
     }
 
     private void SelectionOff()
     {
-        DOTween.Kill(this);
-        
-        if(selectPieces == null) return;
+        if (selectPieces == null) return;
         
         foreach (var view in selectPieces)
         {

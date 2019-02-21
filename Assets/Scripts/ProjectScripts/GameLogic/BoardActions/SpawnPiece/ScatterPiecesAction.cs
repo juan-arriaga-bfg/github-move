@@ -11,6 +11,7 @@ public class ScatterPiecesAction : IBoardAction
 	public BoardPosition From;
 
 	public bool IsTargetReplace;
+	public bool IsSingle;
 
 	public Dictionary<int, int> Pieces;
 	private Dictionary<int, int> fakePieces;
@@ -33,13 +34,15 @@ public class ScatterPiecesAction : IBoardAction
 
 		if (IsTargetReplace) amount = Mathf.Max(0, amount - (target.Multicellular?.Mask.Count ?? 1));
 
-		if (amount > 0 && gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From, cells, amount, 0.1f) == false)
+		var fakeAmount = IsSingle && amount > 0 ? 1 : amount;
+		
+		if (fakeAmount > 0 && gameBoardController.BoardLogic.EmptyCellsFinder.FindRandomNearWithPointInCenter(From, cells, fakeAmount, 0.1f) == false)
 		{
 			rewardsStore?.ShowBubble();
 			return false;
 		}
 
-		var animation = new ScatterPiecesAnimation {From = From};
+		var animation = new ScatterPiecesAnimation {From = From, AnimationResourceSearchOnRemove = piece => AnimationOverrideDataService.Current.FindAnimation(piece, def => def.OnDestroyFromBoard)};
 		
 		if (IsTargetReplace && cells.Count >= amount)
 		{

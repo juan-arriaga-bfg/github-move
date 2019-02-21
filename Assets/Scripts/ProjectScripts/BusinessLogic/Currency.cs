@@ -25,7 +25,7 @@ public static partial class Currency
                           public static readonly CurrencyDef Codex       = new CurrencyDef { Id = 70,  Name = "Codex",       IsConsumable = false };
                           public static readonly CurrencyDef Order       = new CurrencyDef { Id = 71,  Name = "Order",       IsConsumable = false };
     
-                          public static readonly CurrencyDef Chest       = new CurrencyDef { Id = 80,  Name = "Chest",       IsConsumable = true };
+                          public static readonly CurrencyDef Market      = new CurrencyDef { Id = 80,  Name = "Market",      IsConsumable = true };
                           public static readonly CurrencyDef Workplace   = new CurrencyDef { Id = 90,  Name = "Workplace",   IsConsumable = true };
                           public static readonly CurrencyDef Fog         = new CurrencyDef { Id = 100, Name = "Fog",         IsConsumable = true };
                                                                                                                             
@@ -33,6 +33,7 @@ public static partial class Currency
                           public static readonly CurrencyDef Damage      = new CurrencyDef { Id = 120, Name = "Damage",      IsConsumable = true };
                           public static readonly CurrencyDef Timer       = new CurrencyDef { Id = 130, Name = "Timer",       IsConsumable = true };
                           public static readonly CurrencyDef Firefly     = new CurrencyDef { Id = 140, Name = "Firefly",     IsConsumable = true };
+                          public static readonly CurrencyDef Character   = new CurrencyDef { Id = 150, Name = "Character",   IsConsumable = true };
     
                           public static readonly CurrencyDef Resources   = new CurrencyDef { Id = 1000, Name = "Resources",  IsConsumable = true };
     [IncludeToCheatSheet] public static readonly CurrencyDef PR_A5       = new CurrencyDef { Id = 1001, Name = "PR_A5",      IsConsumable = true, Icon = "PR_A5" };

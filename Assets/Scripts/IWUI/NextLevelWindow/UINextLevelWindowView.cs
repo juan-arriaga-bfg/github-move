@@ -24,6 +24,7 @@ public class UINextLevelWindowView : UIGenericWindowView
     private int tapCount;
     private bool isClick;
 
+    public override float DefaultDelayOnClose => 0.65f;
 
     public override void OnViewShow()
     {
@@ -74,29 +75,18 @@ public class UINextLevelWindowView : UIGenericWindowView
 
         CurrencyHelper.Purchase(manager.Rewards, null, new Vector2(Screen.width/2, Screen.height/2));
         CurrencyHelper.Purchase(Currency.Level.Name, 1, Currency.Experience.Name, manager.Price);
-        
-        int newLevel = GameDataService.Current.LevelsManager.Level;
-        
         CurrencyHelper.Purchase(Currency.EnergyLimit.Name, 1);
         
-        var currentValue = ProfileService.Current.GetStorageItem(Currency.Energy.Name).Amount;
         var limitValue = ProfileService.Current.GetStorageItem(Currency.EnergyLimit.Name).Amount;
-        var diff = limitValue - currentValue;
+
+        var tutorial = BoardService.Current.FirstBoard.TutorialLogic;
+        if (tutorial.CheckLockEnergy()) CurrencyHelper.Purchase(Currency.Energy.Name, limitValue);
         
-        if (diff > 0) CurrencyHelper.Purchase(Currency.Energy.Name, diff);
-            
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
         GameDataService.Current.LevelsManager.UpdateSequence();
-
-        if (newLevel == 6)
-        {
-            if (GameDataService.Current.QuestsManager.DailyQuest == null)
-            {
-                GameDataService.Current.QuestsManager.StartNewDailyQuest();
-            }
-        }
         
-        Analytics.SendLevelReachedEvent(newLevel);
+        Analytics.SendLevelReachedEvent(GameDataService.Current.LevelsManager.Level);
+        Analytics.SendPurchase("screen_levelup", "item1", null, new List<CurrencyPair>(manager.Rewards), false, false);
         
         base.OnViewCloseCompleted();
     }

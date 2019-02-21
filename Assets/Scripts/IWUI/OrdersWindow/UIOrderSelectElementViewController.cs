@@ -99,22 +99,29 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             var def = entities[i];
             
             var current = ProfileService.Current.GetStorageItem(def.Currency).Amount;
-            var color = current == def.Amount ? "FFFFFF" : (current > def.Amount ? "28EC6D" : "EC5928");
 
             string message;
+            string color;
             bool mark;
-            
-            if (current >= def.Amount)
+
+            if (order.State == OrderState.InProgress || order.State == OrderState.Complete)
             {
-                mark = true;
+                mark = false;
                 message = string.Empty;
             }
             else
             {
-                mark = false;
-                message = order.State == OrderState.InProgress || order.State == OrderState.Complete 
-                    ? string.Empty 
-                    : $"<color=#{color}>{current}</color><size=45>/{def.Amount}</size>";
+                if (current >= def.Amount)
+                {
+                    mark = true;
+                    message = string.Empty;
+                }
+                else
+                {
+                    mark = false;
+                    color = "EC5928";
+                    message = $"<color=#{color}>{current}</color><size=45>/{def.Amount}</size>";
+                } 
             }
 
             var entity = new UIOrderIngredientElementEntity
@@ -216,7 +223,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
 
     private void OnClickBuy()
     {
-        customer.Timer.FastComplete();
+        customer.Timer.FastComplete("skip_order");
     }
 
     private void OnClick()

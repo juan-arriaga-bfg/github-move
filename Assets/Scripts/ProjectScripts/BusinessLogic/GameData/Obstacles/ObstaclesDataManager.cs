@@ -10,7 +10,6 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
     
     private Dictionary<int, List<ObstacleDef>> branches;
     
-    private MatchDefinitionComponent matchDefinition;
     
     public override void Reload()
     {
@@ -26,8 +25,6 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
             Obstacles = new Dictionary<int, ObstacleDef>();
             branches = new Dictionary<int, List<ObstacleDef>>();
             
-            matchDefinition = new MatchDefinitionComponent(new MatchDefinitionBuilder().Build());
-            
             if (string.IsNullOrEmpty(error))
             {
                 data.Sort((a, b) => a.Piece.CompareTo(b.Piece));
@@ -35,7 +32,7 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
                 foreach (var def in data)
                 {
                     Obstacles.Add(def.Piece, def);
-                    AddToBranch(matchDefinition.GetFirst(def.Piece), def);
+                    AddToBranch(GameDataService.Current.MatchDefinition.GetFirst(def.Piece), def);
                     AddSequence(def.Uid, def.PieceWeights);
                 }
             }
@@ -62,11 +59,9 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
 
     private ObstacleDef GetStep(int piece, int step)
     {
-        var key = matchDefinition.GetFirst(piece);
-        
-        List<ObstacleDef> list;
+        var key = GameDataService.Current.MatchDefinition.GetFirst(piece);
 
-        if (branches.TryGetValue(key, out list) == false) return null;
+        if (branches.TryGetValue(key, out var list) == false) return null;
         
         step = Mathf.Clamp(step, 0, list.Count - 1);
         
@@ -92,9 +87,12 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
         var def = GetStep(piece, step);
         
         var hard = GameDataService.Current.LevelsManager.GetSequence(Currency.Level.Name);
+        var character = GameDataService.Current.CharactersManager.GetSequence(Currency.Character.Name);
         var sequence = GetSequence(def.Uid);
         
         var reward = hard.GetNextDict(def.ProductionAmount.Range());
+        
+        reward = character.GetNextDict(def.CharactersAmount.Range(), reward);
         reward = sequence.GetNextDict(def.PieceAmount, reward);
         
         return reward;
@@ -102,9 +100,7 @@ public class ObstaclesDataManager : SequenceData, IDataLoader<List<ObstacleDef>>
     
     public Dictionary<int, int> GetPiecesByLastStep(int piece, int step)
     {
-        ObstacleDef def;
-        
-        return Obstacles.TryGetValue(piece, out def) && def.Chest != PieceType.None.Id ? new Dictionary<int, int> {{def.Chest, 1}} : GetPiecesByStep(piece, step);
+        return Obstacles.TryGetValue(piece, out var def) && def.Chest != PieceType.None.Id ? new Dictionary<int, int> {{def.Chest, 1}} : GetPiecesByStep(piece, step);
     }
 
     public CurrencyPair GetPriceByStep(int piece, int step)

@@ -15,9 +15,12 @@ public class FieldControllerComponent : IECSComponent
         
         var fieldDef = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
         
-        GenerateBorder();
-        var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
-        CutTriangles(maxEdge / 2, Directions.All);
+        //GenerateBorder();
+
+        LockWater();
+        
+        // var maxEdge = Math.Max(context.BoardDef.Width, context.BoardDef.Height);
+        // CutTriangles(maxEdge / 2, Directions.All);
         
 #if UNITY_EDITOR
 //        TestFieldOleg(); return;
@@ -26,6 +29,7 @@ public class FieldControllerComponent : IECSComponent
 #endif
         
         context.BoardLogic.PieceFlyer.Locker.Lock(context);
+        context.Manipulator.CameraManipulator.CameraMove.Lock(context);
         
         if (fieldDef.Pieces == null)
         {
@@ -61,7 +65,7 @@ public class FieldControllerComponent : IECSComponent
 
         AddLastAction();
     }
-    
+
     public void OnUnRegisterEntity(ECSEntity entity)
     {
     }
@@ -81,16 +85,19 @@ public class FieldControllerComponent : IECSComponent
                 
                 var views = ResourcesViewManager.Instance.GetViewsById(Currency.Level.Name);
 
-                
-                if (views == null) return;
+                if (views == null)
+                {
+                    context.Manipulator.CameraManipulator.CameraMove.UnLock(context);
+                    return;
+                }
                 
                 foreach (var view in views)
                 {
                     view.UpdateResource(0);
                 }
                 
-                
                 DevTools.UpdateFogSectorsDebug();
+                context.Manipulator.CameraManipulator.CameraMove.UnLock(context);
             }
         });
     }
@@ -98,7 +105,7 @@ public class FieldControllerComponent : IECSComponent
     private void TestFieldOleg()
     {
         AddPieces(new BoardPosition(24, 12), PieceType.OB1_TT.Id, PieceType.OB2_TT.Id);
-        AddPieces(new BoardPosition(29, 16), PieceType.NPC_SleepingBeauty.Id, PieceType.NPC_9.Id);
+        AddPieces(new BoardPosition(29, 16), PieceType.NPC_A.Id, PieceType.NPC_H.Id);
     }
     
     private void TestFieldAlex()
@@ -106,7 +113,7 @@ public class FieldControllerComponent : IECSComponent
         AddPieces(new BoardPosition(17, 16), PieceType.A1.Id, PieceType.A1.Id);
         AddPieces(new BoardPosition(19, 16), PieceType.B1.Id, PieceType.B11.Id);
         AddPieces(new BoardPosition(20, 16), PieceType.PR_A1.Id, PieceType.PR_A5.Id);
-        AddPieces(new BoardPosition(21, 16), PieceType.NPC_SleepingBeauty.Id, PieceType.NPC_9.Id);
+        AddPieces(new BoardPosition(21, 16), PieceType.NPC_A.Id, PieceType.NPC_H.Id);
         AddPieces(new BoardPosition(23, 16), PieceType.Boost_CR1.Id, PieceType.Boost_CR.Id);
         AddPieces(new BoardPosition(24, 16), PieceType.Boost_CR1.Id, PieceType.Boost_CR.Id);
         AddPieces(new BoardPosition(25, 16), PieceType.Boost_CR.Id, PieceType.Boost_CR.Id);
@@ -161,6 +168,27 @@ public class FieldControllerComponent : IECSComponent
         var view = context.RendererContext.CreateBoardElementAt<BoardElementView>(pattern, position);
 
         view.CachedTransform.localPosition += offset;
+    }
+    
+    private void LockWater()
+    {
+        var width = context.BoardDef.Width;
+        var height = context.BoardDef.Height;
+        var layout = GameDataService.Current.FieldManager.LayoutData;
+        
+        int layoutIndex = 0;
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                var cell = layout[layoutIndex++];
+                if (cell == 1)
+                {
+                    var point = new BoardPosition(x, y, BoardLayer.Piece.Layer);
+                    context.BoardLogic.AddPieceToBoard(point.X, point.Y, context.CreateEmptyPiece());
+                }
+            }
+        }
     }
     
     private void CutTriangles(int count, Directions directions)

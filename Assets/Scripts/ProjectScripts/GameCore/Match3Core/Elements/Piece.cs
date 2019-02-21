@@ -54,6 +54,8 @@ public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchab
     
     public int PieceType { get; set; }
 
+    public int IndexInChain => Context.BoardLogic.MatchDefinition.GetIndexInChain(PieceType);
+
     [JsonIgnore]
     public BoardController Context { get; set; }
 

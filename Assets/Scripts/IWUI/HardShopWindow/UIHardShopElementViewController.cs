@@ -18,4 +18,9 @@ public class UIHardShopElementViewController : UIShopElementViewController
         backPurple.SetActive(isPack);
         backBrown.SetActive(!isPack);
     }
+
+    protected override string GetAnalyticLocation()
+    {
+        return "shop_premium";
+    }
 }

@@ -1,4 +1,8 @@
-﻿public class BaseTutorialStep : ECSEntity
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BaseTutorialStep : ECSEntity
 {
 	public static readonly int ComponentGuid = ECSManager.GetNextGuid();
 	public override int Guid => ComponentGuid;
@@ -12,14 +16,25 @@
 	
 	public bool IsPerform;
 	public bool IsIgnoreUi;
-	public bool IsIgnoreDev = true;
+	public bool IsIgnoreDebug = true;
 
 	public bool IsAnyStartCondition;
 	public bool IsAnyCompleteCondition;
+
+	protected bool isPauseOn;
+	protected bool isAutoComplete;
+	
+	public Action OnFirstStartCallback;
+	public Action OnCompleteCallback;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
 		Context = entity as TutorialLogicComponent;
+	}
+
+	public override void OnUnRegisterEntity(ECSEntity entity)
+	{
+		base.OnUnRegisterEntity(entity);
 	}
 
 	public bool IsStart()
@@ -30,19 +45,45 @@
 		
 		return isStart;
 	}
-
+	
 	public virtual void PauseOn()
 	{
+		isPauseOn = true;
+	}
+
+	protected virtual void OnFirstStart()
+	{
+		var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
+		var started = tutorialLogic.SaveStarted;
+		started.Add(Id);
+		OnFirstStartCallback?.Invoke();
+	}
+	
+	protected bool IsFirstStartEvent()
+	{
+		var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
+		var started = tutorialLogic.SaveStarted;
+		var isFirst = started.Contains(Id) == false;
+		return isFirst;
 	}
 	
 	public virtual void Perform()
 	{
+		if (IsPerform == false)
+		{
+			if (IsFirstStartEvent())
+			{
+				OnFirstStart();
+			}
+		}
 		IsPerform = true;
 		StartAnimation(TutorialAnimationType.Perform);
 	}
 	
 	public virtual void PauseOff()
 	{
+		isPauseOn = false;
+		
 		if(Repeat == 0) return;
 		
 		Repeat--;
@@ -50,6 +91,7 @@
 
 	protected virtual void Complete()
 	{
+		OnCompleteCallback?.Invoke();
 		StartAnimation(TutorialAnimationType.Complete);
 	}
 	
@@ -68,7 +110,7 @@
 		isComplete = Check(TutorialConditionType.Complete);
 		
 #if DEBUG
-		if (isComplete == false && IsIgnoreDev) isComplete = !DevTools.IsTutorialEnabled();
+		if (isComplete == false && IsIgnoreDebug) isComplete = !DevTools.IsTutorialEnabled();
 #endif
 		
 		if (isComplete) Complete();
@@ -78,6 +120,8 @@
 	
 	private bool IsHardComplete()
 	{
+		if (isAutoComplete) return true;
+		
 		var collection = GetComponent<ECSComponentCollection>(BaseTutorialCondition.ComponentGuid);
 		var conditions = collection?.Components.FindAll(component => (component as BaseTutorialCondition).ConditionType == TutorialConditionType.Hard);
 		

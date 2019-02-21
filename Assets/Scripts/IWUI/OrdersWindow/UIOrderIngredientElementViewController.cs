@@ -2,18 +2,24 @@ using UnityEngine;
 
 public class UIOrderIngredientElementViewController : UISimpleScrollElementViewController
 {
-    [IWUIBinding("#Mark1")] private GameObject mark;
+    [IWUIBinding("#Mark")] private GameObject mark;
 
-    public override void OnViewShow(IWUIWindowView context)
+    public override void Init()
     {
-        base.OnViewShow(context);
+        base.Init();
 
+        UpdateMark();
+    }
+
+    private void UpdateMark()
+    {
         if (entity == null)
         {
             return;
         }
         
-        var contentEntity = entity as UIOrderIngredientElementEntity;
-        mark.SetActive(contentEntity.Mark); 
+        var contentEntity = entity as UIOrderIngredientElementEntity;       
+
+        mark.SetActive(contentEntity.Mark);
     }
 }
