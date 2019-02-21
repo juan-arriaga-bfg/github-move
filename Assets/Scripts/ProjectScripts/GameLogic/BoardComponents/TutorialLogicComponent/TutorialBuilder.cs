@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using BfgAnalytics;
 using Quests;
 using UnityEngine;
@@ -300,9 +299,8 @@ public static class TutorialBuilder
             {
                 if (FirstOrderStepIndex != index) Debug.LogError("Tutorial Error: FirstOrderStepIndex != index");
                 
-                step = new BubbleBounceTutorialStep<ObstacleBubbleView>
+                step = new BaseTutorialStep
                 {
-                    Delay = 2, Targets = new List<int>{PieceType.PR_C4.Id},
                     OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("order"),
                     OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("order", currentStep.StartTime)
                 };

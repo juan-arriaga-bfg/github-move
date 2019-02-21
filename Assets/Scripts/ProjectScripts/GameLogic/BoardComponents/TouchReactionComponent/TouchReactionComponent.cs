@@ -31,7 +31,10 @@ public class TouchReactionComponent : ECSEntity,
         if (ReactionCondition.Check(position, context) == false) return false;
         
         ReactionCondition.Recharge();
+
+        if (context.TutorialLocker == null) return ReactionDefinition.Make(position, context);
         
-        return ReactionDefinition.Make(position, context);
+        context.TutorialLocker.Touch();
+        return true;
     }
 }

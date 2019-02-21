@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 
 public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchablePiece, IDraggablePiece, IMulticellularPiece, IBoardConditionComponent,
-    IPieceStateComponent, IViewDefinitionComponent, ITouchReactionComponent
+    IPieceStateComponent, IViewDefinitionComponent, ITouchReactionComponent, ITutorialLocker
 {
     public static int ComponentGuid = ECSManager.GetNextGuid();
     public override int Guid => ComponentGuid;
@@ -45,6 +45,13 @@ public class Piece : ECSEntity, IBoardStatesComponent, IPieceActorView, IMatchab
 
     private PathfindLockObserver pathfindLockObserver;
     public PathfindLockObserver PathfindLockObserver => pathfindLockObserver ?? (pathfindLockObserver = GetComponent<PathfindLockObserver>(PathfindLockObserver.ComponentGuid));
+
+    private TutorialLockerComponent tutorialLocker;
+    public TutorialLockerComponent TutorialLocker
+    {
+        get => tutorialLocker ?? (tutorialLocker = GetComponent<TutorialLockerComponent>(TutorialLockerComponent.ComponentGuid));
+        set => tutorialLocker = value;
+    }
 
     public PieceBoardElementView ActorView
     {

@@ -20,10 +20,34 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         base.OnRegisterEntity(entity);
         
         def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).ReproductionDef;
+
+        Context.TutorialLocker?.SetTouchAction(() =>
+        {
+            var view = Context.ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
+
+            if (view.IsShow == false)
+            {
+                view.SetData(
+                    LocalizationService.Get("common.message.forbidden", "common.message.forbidden"),
+                    LocalizationService.Get("common.button.ok", "common.button.ok"),
+                    (p) => { view.Change(false); },
+                    true,
+                    false
+                );
+            }
+        
+            view.Change(!view.IsShow);
+        });
+        
+        Context.TutorialLocker?.SetCompleteAction(() =>
+        {
+            var view = Context.ActorView as ReproductionPieceView;
+            if(view != null) view.ToggleEffectsByState(false);
+            Rewards.ShowBubble();
+        });
         
         HP = def.Limit;
         TimerWork.Delay = 0;
-        Rewards.IsSingle = true;
         
         TimerCooldown = new TimerComponent{Delay = def.Delay};
         TimerCooldown.OnComplete += TimerWork.Start;
@@ -53,7 +77,7 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         if (item == null)
         {
             OnTimerStart();
-            Rewards.ShowBubble();
+            if (Context.TutorialLocker == null) Rewards.ShowBubble();
             return null;
         }
 		
@@ -63,7 +87,7 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         else
         {
             SetStepReward();
-            Rewards.ShowBubble();
+            if (Context.TutorialLocker == null) Rewards.ShowBubble();
         }
 
         return item;

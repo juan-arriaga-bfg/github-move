@@ -373,7 +373,6 @@ public class PieceBoardElementView : BoardElementView
         
         particles.ForEach(particle => particle.gameObject.SetActive(!enabled));
         
-        
         isLockVisual = enabled;
     }
 
@@ -397,10 +396,10 @@ public class PieceBoardElementView : BoardElementView
     {
         for (int i = 0; i < lockedSubtrates.Count; i++)
         {
-            var lockedSubtrate = lockedSubtrates[i];
-            if (lockedSubtrate != null)
+            var lockedSubstrate = lockedSubtrates[i];
+            if (lockedSubstrate != null)
             {
-                Context.DestroyElement(lockedSubtrate);
+                Context.DestroyElement(lockedSubstrate);
             }
         }
         lockedSubtrates.Clear();

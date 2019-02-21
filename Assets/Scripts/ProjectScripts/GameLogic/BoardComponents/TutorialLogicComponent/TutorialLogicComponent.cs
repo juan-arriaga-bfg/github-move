@@ -249,11 +249,6 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
         orders.Locker.Unlock(orders);
     }
     
-    public bool CheckLockPR()
-    {
-        return SaveCompleted.Contains(TutorialBuilder.LockPRStepIndex);
-    }
-    
     public bool CheckLockEnergy()
     {
         return SaveCompleted.Contains(TutorialBuilder.LockEnergyStep);

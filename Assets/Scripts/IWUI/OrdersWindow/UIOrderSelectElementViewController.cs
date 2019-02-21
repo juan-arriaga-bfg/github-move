@@ -156,6 +156,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
             case OrderState.InProgress:
                 (context as UIBaseWindowView).CachedHintArrowComponent.HideArrow(tutorAnchor);
                 break;
+            case OrderState.Waiting:
             case OrderState.Enough:
             case OrderState.Complete:
                 (context as UIBaseWindowView).CachedHintArrowComponent.ShowArrow(tutorAnchor, 5f);
