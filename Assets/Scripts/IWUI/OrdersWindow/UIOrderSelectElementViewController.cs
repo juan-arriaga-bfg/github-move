@@ -181,7 +181,7 @@ public class UIOrderSelectElementViewController : UISimpleScrollElementViewContr
         {
             customer.Timer.OnExecute -= UpdateTimer;
             customer.Timer.OnComplete -= UpdateState;
-            customer.Timer.OnComplete += PlaySound;
+            customer.Timer.OnComplete -= PlaySound;
             customer.Timer.OnComplete -= UpdateOrders;
         }
 
