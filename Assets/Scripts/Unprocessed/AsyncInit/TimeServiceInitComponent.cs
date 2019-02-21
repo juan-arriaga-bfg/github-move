@@ -72,7 +72,7 @@ public class SecuredTimeServiceInitComponent : AsyncInitComponentBase
         }
 
         // Still can't show windows
-        if (!AsyncInitService.Current.IsCompleted<LocalBundlesInitComponent>())
+        if (!AsyncInitService.Current.IsCompleted<LocalAssetBundlesCacheInitComponent>())
         {
             return;
         }
