@@ -1,54 +1,40 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Rendering;
 
-public class LockView : UIBoardView
+public class LockView : BoardElementView
 {
     [SerializeField] private NSText label;
-    [SerializeField] private Image Image;
-    [SerializeField] private Material GrayscaleMaterial;
-    [SerializeField] private Transform HintArrowTarget;
+    [SerializeField] private SpriteRenderer image;
+    [SerializeField] private Material grayscaleMaterial;
+    [SerializeField] private Transform hintArrowTarget;
     
-    protected override ViewType Id => ViewType.Lock;
-
-    private string value;
-    public string Value
-    {
-        get { return value;}
-        set
-        {
-            this.value = value;
-            label.Text = value;
-        }
-    }
+    private Material defaultMaterial;
+    
+    public string Value {set => label.Text = value;}
 
     public Transform GetHintTarget()
     {
-        return HintArrowTarget;
+        return hintArrowTarget;
+    }
+
+    public override void Init(BoardRenderer context)
+    {
+        base.Init(context);
+        defaultMaterial = image.material;
+        Value = "";
     }
     
-    public override void Init(Piece piece)
-    {
-        base.Init(piece);
-
-        Priority = defaultPriority = 0;
-
-        Value = "";
-        
-        Change(true);
-    }
-
     public void SetGrayscale(bool enabled)
     {
-        Image.material = enabled ? GrayscaleMaterial : null;
+        image.material = enabled ? grayscaleMaterial : defaultMaterial;
     }
-    
-    public override void SyncRendererLayers(BoardPosition boardPosition)
+
+    public void SetSortingOrder(BoardPosition position)
     {
-        base.SyncRendererLayers(boardPosition);
+        var cachedSpriteSortingGroup = GetComponent<SortingGroup>();
         
-        if(canvas == null) return;
+        if (cachedSpriteSortingGroup == null) cachedSpriteSortingGroup = gameObject.AddComponent<SortingGroup>();
         
-        canvas.overrideSorting = true;
-        canvas.sortingOrder = GetLayerIndexBy(new BoardPosition(boardPosition.X, boardPosition.Y, BoardLayer.Piece.Layer));
+        cachedSpriteSortingGroup.sortingOrder = GetLayerIndexBy(new BoardPosition(position.X, position.Y - 1, BoardLayer.Piece.Layer));
     }
 }

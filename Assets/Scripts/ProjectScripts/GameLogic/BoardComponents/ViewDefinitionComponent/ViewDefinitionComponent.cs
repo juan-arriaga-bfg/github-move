@@ -166,14 +166,6 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         element.SetOffset();
         element.SyncRendererLayers(pos);
         
-        // var thisContextView = thisContext.Context.RendererContext.GetElementAt(thisContext.CachedPosition);
-
-        
-        // element.CachedTransform.SetParent(thisContextView.CachedTransform);
-
-        // currentPos.Z += Layer + element.Layer;
-        
-        
         thisContext.Context.RendererContext.MoveElement(pos, currentPos);
         
         views.Add(id, element);
