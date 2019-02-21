@@ -19,7 +19,7 @@ public class ElasticScaleAnimationView : AnimationView
         sequence.Insert(0.1f, pieceView.CachedTransform.DOScale(new Vector3(0.9f, 1.1f, 1f), 0.1f));
         sequence.Insert(0.2f, pieceView.CachedTransform.DOScale(Vector3.one, 0.1f).SetEase(easeType));
         
-        sequence.InsertCallback(timeoutDuration, () => OnComplete?.Invoke());
+        sequence.InsertCallback(timeoutDuration, CompleteAnimation);
 
         this.pieceView = pieceView;
     }

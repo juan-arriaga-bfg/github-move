@@ -27,7 +27,7 @@ public class ScaleAndFadeAnimationView : AnimationView
 
         sequence.Insert(0, pieceView.transform.DOScale(toScale, scaleDuration).SetEase(easeType));
        
-        sequence.InsertCallback(timeoutDuration, () => OnComplete?.Invoke());
+        sequence.InsertCallback(timeoutDuration, CompleteAnimation);
         
     }
 }

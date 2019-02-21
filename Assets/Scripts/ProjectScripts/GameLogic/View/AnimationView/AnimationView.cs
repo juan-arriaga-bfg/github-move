@@ -6,6 +6,10 @@ public class AnimationView: BoardElementView
 {
     [SerializeField] protected int lifeTime = 5;
     
+    public Action OnComplete;
+    public Action<PieceBoardElementView> OnPlay;
+    public Action OnLifetimeEnd;
+    
     protected PieceBoardElementView context;
     
     public virtual void Play(PieceBoardElementView pieceView)
@@ -23,11 +27,16 @@ public class AnimationView: BoardElementView
     {
         base.ResetViewOnDestroy();
         OnLifetimeEnd?.Invoke();
+        
+        OnLifetimeEnd = null;
+        OnComplete = null;
+        OnPlay = null;
     }
-    
-    public Action OnComplete;
-    public Action<PieceBoardElementView> OnPlay;
-    public Action OnLifetimeEnd;
+
+    protected void CompleteAnimation()
+    {
+        OnComplete?.Invoke();
+    }
 
     public override void SyncRendererLayers(BoardPosition boardPosition)
     {

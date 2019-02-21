@@ -31,7 +31,7 @@ public class ScalePieceAnimationView : AnimationView
             sequence.Insert(0, pieceView.transform.DOScale(to, duration)).SetEase(easeType);    
         }
 
-        sequence.InsertCallback(timeoutDuration, () => OnComplete?.Invoke());
+        sequence.InsertCallback(timeoutDuration, CompleteAnimation);
 
     }
 }

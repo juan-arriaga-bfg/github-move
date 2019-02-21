@@ -23,7 +23,7 @@ public class FadeAnimationView : AnimationView
             sequence.Insert(0, spriteRenderer.DOFade(to, duration).SetEase(easeType));
         }   
        
-        sequence.InsertCallback(timeoutDuration, () => OnComplete?.Invoke());
+        sequence.InsertCallback(timeoutDuration, CompleteAnimation);
         
     }
 }
