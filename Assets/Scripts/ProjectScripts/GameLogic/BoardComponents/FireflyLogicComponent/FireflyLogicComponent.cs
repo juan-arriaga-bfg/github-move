@@ -211,7 +211,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 
 		if (amountFireflyAfter != amountFireflyBefore && amountFireflyAfter == TUTORIAL_FIREFLY_COUNT)
 		{
-			Analytics.SendTutorialEndStepEvent("firefly");
+			Analytics.SendTutorialEndStepEvent("firefly", DateTime.UtcNow);
 		}
 		
 		return true;

@@ -14,7 +14,7 @@ public class BoardArrowTutorialStep : BaseTutorialStep, IBoardEventListener
         var tutorialLogic = BoardService.Current.FirstBoard.TutorialLogic;
         var started = tutorialLogic.SaveStarted;
         started.Add(Id);
-        OnFirstStartCallback?.Invoke();
+        OnFirstStartCallback?.Invoke(this);
     }
     
     public override void PauseOff()

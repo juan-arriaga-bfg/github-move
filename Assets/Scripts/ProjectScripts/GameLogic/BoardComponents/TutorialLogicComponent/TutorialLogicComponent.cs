@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
@@ -17,8 +18,10 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     public override void OnRegisterEntity(ECSEntity entity)
     {
         Context = entity as BoardController;
-        SaveCompleted = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid)?.Complete ?? new List<int>();
-        SaveStarted = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid)?.Started ?? new List<int>();
+        
+        var tutorialSave = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid);
+        SaveCompleted = tutorialSave?.Complete ?? new List<int>();
+        SaveStarted = tutorialSave?.Started ?? new List<int>();
         
         UnlockFirefly(false);
         UnlockOrders(false);
@@ -210,6 +213,23 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             pieceEntity.ViewDefinition?.OnDrag(alpha >= 1);
             
             if (pieceView != null) pieceView.SetFade(alpha, 1f);
+        }
+    }
+
+    public void ResetStartTime()
+    {
+        var collection = GetComponent<ECSComponentCollection>(BaseTutorialStep.ComponentGuid);
+        var components = collection?.Components;
+
+        if (components == null) return;
+
+        for (var i = 0; i < components.Count; i++)
+        {
+            var step = (BaseTutorialStep) components[i];
+
+            if (step.IsPerform == false) continue;
+            
+            step.StartTime = DateTime.UtcNow;
         }
     }
     
