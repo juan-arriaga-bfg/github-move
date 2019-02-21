@@ -16,6 +16,7 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
     [JsonProperty] public List<string> FinishedQuests;
     [JsonProperty] public List<QuestSaveData> ActiveQuests;
     [JsonProperty] public int DailyQuestRewardIndex;
+    [JsonProperty] public int DailyTaskCompletedCount;
 
     [OnSerializing]
     internal void OnSerialization(StreamingContext context)
@@ -33,6 +34,7 @@ public class QuestSaveComponent : ECSEntity, IECSSerializeable
         FinishedQuests  = manager.FinishedQuests;
         DailyTimerStart = manager.DailyTimer?.StartTimeLong ?? 0;
         DailyQuestRewardIndex = manager.DailyQuestRewardIndex;
+        DailyTaskCompletedCount = manager.DailyTaskCompletedCount;
     }
 }
 
