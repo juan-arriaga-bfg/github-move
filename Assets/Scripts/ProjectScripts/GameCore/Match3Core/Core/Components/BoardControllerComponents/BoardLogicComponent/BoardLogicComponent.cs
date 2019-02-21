@@ -434,17 +434,23 @@ public partial class BoardLogicComponent : ECSEntity,
 
     public virtual bool RemovePieceFromBoardSilent(BoardPosition pos)
     {
-        if (!pos.IsValid || !boardEntities.Remove(pos)) return false;
+        if (pos.IsValid && boardEntities.TryGetValue(pos, out var piece))
+        {
+            if (boardEntities.Remove(pos))
+            {
+                logicMatrix[pos.X, pos.Y, pos.Z] = -1;
+                piece?.UnregisterRecursive();
+                
+                return true;
+            }
+        }
         
-        logicMatrix[pos.X, pos.Y, pos.Z] = -1;
-
-        return true;
+        return false;
     }
 
     protected virtual Piece RemoveAndGetPieceFromBoard(BoardPosition pos)
     {
-        Piece piece;
-        if (pos.IsValid && boardEntities.TryGetValue(pos, out piece))
+        if (pos.IsValid && boardEntities.TryGetValue(pos, out var piece))
         {
             if (boardEntities.Remove(pos))
             {
@@ -452,6 +458,9 @@ public partial class BoardLogicComponent : ECSEntity,
                 
                 var observer = piece?.GetComponent<PieceBoardObserversComponent>(PieceBoardObserversComponent.ComponentGuid);
                 observer?.OnRemoveFromBoard(pos, piece);
+                
+                piece?.UnregisterRecursive();
+                
                 return piece;
             }
         }
