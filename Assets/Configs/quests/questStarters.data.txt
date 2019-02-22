@@ -360,9 +360,9 @@
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
-        "Id": "QuestCompleted",
-        "Value": "33_UseWorker"
+        "$type": "QuestStartConditionPieceUnlockedComponent, GameAssembly",
+        "Id": "PieceUnlocked",
+        "Value": "PR_B4"
       }
     ]
   },
@@ -779,27 +779,13 @@
     "Id": 61,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [
-      "67_CreatePiece_NPC_B4"
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
-        "Id": "QuestCompleted",
-        "Value": "66_CreatePiece_NPC_B3"
-      }
-    ]
-  },
-  {
-    "Id": 63,
-    "$type": "QuestStarterEntity, GameAssembly",
-    "QuestToStartIds": [
       "71_CreatePiece_NPC_B"
     ],
     "Conditions": [
       {
         "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
         "Id": "QuestCompleted",
-        "Value": "67_CreatePiece_NPC_B4"
+        "Value": "66_CreatePiece_NPC_B3"
       }
     ]
   }

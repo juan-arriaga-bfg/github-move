@@ -770,18 +770,6 @@
   },
   {
     "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "67_CreatePiece_NPC_B4",
-    "PieceUid": "NPC_B4",
-    "TargetValue": 2,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Title": "quest.create.piece.title",
-        "Message": "quest.create.piece.message"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "71_CreatePiece_NPC_B",
     "PieceUid": "NPC_B",
     "TargetValue": 1,
