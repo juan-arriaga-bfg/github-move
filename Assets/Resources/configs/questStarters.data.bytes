@@ -500,8 +500,8 @@
     ],
     "Conditions": [
       {
-        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
-        "Id": "QuestCompleted",
+        "$type": "QuestStartConditionFogClearedComponent, GameAssembly",
+        "Id": "FogCleared",
         "Value": "21_OpenChest"
       }
     ]
