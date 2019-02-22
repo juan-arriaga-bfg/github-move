@@ -22,8 +22,6 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	
 	public bool IsUseCooldown => TimerCooldown != null;
 	
-	protected virtual Vector2 timerOffset => new Vector2(0f, 0.5f);
-	
 	public float GetProgressNext => 1 - (current+1)/(float)HP;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
@@ -173,18 +171,8 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 		if(Context.ViewDefinition == null) return;
         
 		var view = Context.ViewDefinition.AddView(ViewType.BoardTimer);
-
-		if (isShow)
-		{
-			view.Priority = -1;
-			view.Offset = timerOffset;
-			view.SetOffset();
-		}
-		else
-		{
-			view.Priority = 10;
-		}
 		
+		view.Priority = isShow ? -1 : 10;
 		view.Change(isShow);
 	}
 }

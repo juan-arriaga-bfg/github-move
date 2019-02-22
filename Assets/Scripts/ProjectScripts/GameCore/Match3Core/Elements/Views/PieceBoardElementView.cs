@@ -111,6 +111,15 @@ public class PieceBoardElementView : BoardElementView
         CheckLock();
     }
 
+    public Vector2 GetUIPosition(ViewType key)
+    {
+        var anchor = anchors.Find(link => link.Key == key);
+        
+        if (anchor == null) return Vector2.zero;
+
+        return anchor.Anchor.localPosition;
+    }
+
     protected List<LockerComponent> GetPieceLockers()
     {
         var lockers = new List<LockerComponent>();

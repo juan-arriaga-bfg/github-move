@@ -2,9 +2,9 @@
 
 public class BoardProgressView : UIBoardView
 {
-    [SerializeField] private BoardProgressbar bar; 
-    
-    public override Vector3 Offset => new Vector3(0, 0.3f);
+    [SerializeField] private BoardProgressbar bar;
+
+    protected override Vector3 offset => new Vector3(0, 0.3f);
 
     protected override ViewType Id => ViewType.Progress;
     
