@@ -6,9 +6,9 @@ public class CharacterMatchActionBuilder : DefaultMatchActionBuilder, IMatchActi
     {
         return new List<int>
         {
-            PieceType.NPC_B4.Id,
-            PieceType.NPC_C8.Id,
-            PieceType.NPC_D8.Id,
+            PieceType.NPC_B3.Id,
+            PieceType.NPC_C4.Id,
+            PieceType.NPC_D4.Id,
             PieceType.NPC_E8.Id,
             PieceType.NPC_F8.Id
         };
