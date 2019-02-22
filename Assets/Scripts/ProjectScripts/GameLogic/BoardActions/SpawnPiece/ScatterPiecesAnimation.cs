@@ -11,6 +11,9 @@ public class ScatterPiecesAnimation : BoardAnimation
     
     public Func<int, string> AnimationResourceSearchOnRemove;
     
+    public bool RewardTopEffect = false;
+    public bool RewardBottomEffect = false;
+    
     public override void Animate(BoardRenderer context)
     {
         var target = context.GetElementAt(From);
@@ -43,6 +46,8 @@ public class ScatterPiecesAnimation : BoardAnimation
             
                 sequence.Insert(delay, element.CachedTransform.DOJump(new Vector3(to.x, to.y, element.CachedTransform.position.z), 1, 1, 0.4f).SetEase(Ease.InOutSine));
                 sequence.InsertCallback(0.4f, () => context.ResetBoardElement(element, position));
+                
+                if (RewardTopEffect || RewardBottomEffect) sequence.InsertCallback(0.4f, () => element.ShowDropEffect(false, RewardTopEffect, RewardBottomEffect));    
             
                 sequence.Insert(delay, element.CachedTransform.DOScale(Vector3.one * 1.3f, 0.2f));
                 sequence.Insert(delay + 0.2f, element.CachedTransform.DOScale(Vector3.one, 0.2f));
@@ -66,7 +71,7 @@ public class ScatterPiecesAnimation : BoardAnimation
                 foreach (var pair in Replace)
                 {
                     var next = context.CreatePieceAt(pair.Value, pair.Key);
-                    
+                    next.ShowDropEffect(false, false);
                     next.CachedTransform.localScale = Vector3.zero;
                     next.CachedTransform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack);
                 }

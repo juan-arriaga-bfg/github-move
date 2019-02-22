@@ -18,6 +18,9 @@ public class ScatterPiecesAction : IBoardAction
 
 	public Action<bool> OnComplete;
 
+	public bool RewardTopEffect = false;
+	public bool RewardBottomEffect = false;
+
 	public bool PerformAction(BoardController gameBoardController)
 	{
 		fakePieces = new Dictionary<int, int>(Pieces);
@@ -42,7 +45,13 @@ public class ScatterPiecesAction : IBoardAction
 			return false;
 		}
 
-		var animation = new ScatterPiecesAnimation {From = From, AnimationResourceSearchOnRemove = piece => AnimationOverrideDataService.Current.FindAnimation(piece, def => def.OnDestroyFromBoard)};
+		var animation = new ScatterPiecesAnimation
+		{
+			From = From, 
+			AnimationResourceSearchOnRemove = piece => AnimationOverrideDataService.Current.FindAnimation(piece, def => def.OnDestroyFromBoard),
+			RewardTopEffect = RewardTopEffect,
+			RewardBottomEffect = RewardBottomEffect,
+		};
 		
 		if (IsTargetReplace && cells.Count >= amount)
 		{
