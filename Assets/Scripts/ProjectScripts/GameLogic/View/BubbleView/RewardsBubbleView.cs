@@ -41,7 +41,8 @@ public class RewardsBubbleView : UIBoardView
 		
 		foreach (var border in borders)
 		{
-			border.color = storage.IsHighlight ? Color.red : Color.white;
+			var id = border.sprite.name.Split('_')[0];
+			border.sprite = IconService.Current.GetSpriteById($"{id}{(storage.IsHighlight ? "_danger" : "_normal")}");
 		}
 	}
 
