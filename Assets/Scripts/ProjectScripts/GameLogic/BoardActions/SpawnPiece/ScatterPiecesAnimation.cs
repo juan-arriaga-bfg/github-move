@@ -71,7 +71,7 @@ public class ScatterPiecesAnimation : BoardAnimation
                 foreach (var pair in Replace)
                 {
                     var next = context.CreatePieceAt(pair.Value, pair.Key);
-                    next.ShowDropEffect(false, false);
+                    if (RewardTopEffect || RewardBottomEffect) next.ShowDropEffect(false, RewardBottomEffect, RewardBottomEffect);
                     next.CachedTransform.localScale = Vector3.zero;
                     next.CachedTransform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack);
                 }
