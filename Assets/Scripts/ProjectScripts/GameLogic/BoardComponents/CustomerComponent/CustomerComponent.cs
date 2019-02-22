@@ -93,15 +93,9 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         
         view.Priority = isShow ? -1 : 1;
         view.Change(isShow);
-        
-        if (isShow)
-        {
-            pieceContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
-            pieceContext.Context.HintCooldown.AddView(view);
-            return;
-        }
-        
-        pieceContext.Context.HintCooldown.RemoweView(view);
+
+        if (!isShow) return;
+        pieceContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
     }
     
     private void CreateOrder()
