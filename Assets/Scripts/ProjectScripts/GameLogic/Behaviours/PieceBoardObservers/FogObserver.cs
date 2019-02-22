@@ -11,7 +11,7 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
     
     private StorageItem storageItem;
     private ViewDefinitionComponent viewDef;
-    private LockView lockView;
+    public LockView LockView;
     private FogProgressView bar;
     private BubbleView bubble;
     public BoardPosition Key { get; private set; }
@@ -107,25 +107,26 @@ public class FogObserver : MulticellularPieceBoardObserver, IResourceCarrierView
         var canPath = CanBeReached();
         var levelAccess = RequiredLevelReached();
         
-        if(lockView == null && (Def.IsActive && canPath ^ levelAccess) || Def.IsActive == false && canPath)
+        if(LockView == null && (Def.IsActive && canPath ^ levelAccess) || Def.IsActive == false && canPath)
         {
-            lockView = viewDef.AddView(ViewType.Lock) as LockView;
-            lockView.Value = Def.IsActive ? level.ToString() : "?";
-            lockView.transform.position = Def.GetCenter(Context.Context);
+            LockView =  Context.Context.RendererContext.CreateBoardElement<LockView>((int)ViewType.Lock);
+            LockView.Init(Context.Context.RendererContext);
+            LockView.SetSortingOrder(Def.GetCenter());
+            LockView.Value = Def.IsActive ? level.ToString() : "?";
+            LockView.transform.position = Def.GetCenter(Context.Context);
         }
 
-        lockView?.SetGrayscale(canPath == false || Def.IsActive == false);
+        if(LockView != null) LockView.SetGrayscale(canPath == false || Def.IsActive == false);
         
         var fog = Context.ActorView as FogPieceView;
 
         if (fog != null) fog.UpdateBorder();
         if (CanBeCleared() == false) return;
 
-        if (lockView != null)
+        if (LockView != null)
         {
-            lockView.Change(false);
-            viewDef.RemoveView(ViewType.Lock);
-            lockView = null;
+            Context.Context.RendererContext.DestroyElement(LockView);
+            LockView = null;
 
             var pos = Def.GetCenter();
 

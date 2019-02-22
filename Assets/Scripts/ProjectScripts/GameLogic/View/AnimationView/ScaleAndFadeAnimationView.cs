@@ -12,7 +12,6 @@ public class ScaleAndFadeAnimationView : AnimationView
     [SerializeField] private Ease easeType = Ease.Linear;
     
     private List<SpriteRenderer> spriteRenderers = new List<SpriteRenderer>();
-    protected PieceBoardElementView pieceView = null;
     public override void Play(PieceBoardElementView pieceView)
     {
         base.Play(pieceView);
@@ -28,14 +27,7 @@ public class ScaleAndFadeAnimationView : AnimationView
 
         sequence.Insert(0, pieceView.transform.DOScale(toScale, scaleDuration).SetEase(easeType));
        
-        sequence.InsertCallback(timeoutDuration, () => OnComplete?.Invoke());
+        sequence.InsertCallback(timeoutDuration, CompleteAnimation);
         
-        this.pieceView = pieceView;
-    }
-
-    public override void Stop()
-    {
-        if (this.pieceView != null)
-            DOTween.Kill(animationUid);
     }
 }

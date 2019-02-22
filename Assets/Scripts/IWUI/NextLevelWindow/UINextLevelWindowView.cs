@@ -77,11 +77,6 @@ public class UINextLevelWindowView : UIGenericWindowView
         CurrencyHelper.Purchase(Currency.Level.Name, 1, Currency.Experience.Name, manager.Price);
         CurrencyHelper.Purchase(Currency.EnergyLimit.Name, 1);
         
-        var limitValue = ProfileService.Current.GetStorageItem(Currency.EnergyLimit.Name).Amount;
-
-        var tutorial = BoardService.Current.FirstBoard.TutorialLogic;
-        if (tutorial.CheckLockEnergy()) CurrencyHelper.Purchase(Currency.Energy.Name, limitValue);
-        
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
         GameDataService.Current.LevelsManager.UpdateSequence();
         
