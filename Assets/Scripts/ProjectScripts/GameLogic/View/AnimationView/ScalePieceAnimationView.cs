@@ -11,8 +11,6 @@ public class ScalePieceAnimationView : AnimationView
     [SerializeField] private float duration = 0.2f;
     [SerializeField] private float timeoutDuration = 0.5f;
     [SerializeField] private Ease easeType = Ease.Linear;
-
-    protected PieceBoardElementView pieceView = null;
     
     public override void Play(PieceBoardElementView pieceView)
     {
@@ -33,14 +31,7 @@ public class ScalePieceAnimationView : AnimationView
             sequence.Insert(0, pieceView.transform.DOScale(to, duration)).SetEase(easeType);    
         }
 
-        sequence.InsertCallback(timeoutDuration, () => OnComplete?.Invoke());
+        sequence.InsertCallback(timeoutDuration, CompleteAnimation);
 
-        this.pieceView = pieceView;
-    }
-
-    public override void Stop()
-    {
-        if (this.pieceView != null)
-            DOTween.Kill(animationUid);
     }
 }
