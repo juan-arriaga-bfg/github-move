@@ -218,6 +218,8 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
 
     public void ResetStartTime()
     {
+        BoardService.Current.FirstBoard.BoardLogic.FireflyLogic.ResetTutorialStartTime();
+        
         var collection = GetComponent<ECSComponentCollection>(BaseTutorialStep.ComponentGuid);
         var components = collection?.Components;
 
@@ -225,9 +227,9 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
 
         for (var i = 0; i < components.Count; i++)
         {
-            var step = (BaseTutorialStep) components[i];
+            var step = components[i] as BaseTutorialStep;
 
-            if (step.IsPerform == false) continue;
+            if (step?.IsPerform != true) continue;
             
             step.StartTime = DateTime.UtcNow;
         }

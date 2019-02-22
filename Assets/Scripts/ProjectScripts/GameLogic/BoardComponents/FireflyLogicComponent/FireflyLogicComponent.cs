@@ -21,6 +21,8 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	
 	private int index = 1;
 	private int delay = 1;
+
+	private DateTime tutorialStartTime = DateTime.UtcNow;
 	
 	private DateTime startTime = DateTime.UtcNow;
 	private DateTime pauseTime = DateTime.UtcNow;
@@ -68,6 +70,11 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		}
 		
 		OnMatch();
+	}
+
+	public void ResetTutorialStartTime()
+	{
+		tutorialStartTime = DateTime.UtcNow;
 	}
 
 	public override void OnUnRegisterEntity(ECSEntity entity)
@@ -147,6 +154,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		if (isTuttorialActive)
 		{
 			views[0].AddArrow();
+			ResetTutorialStartTime();
 		}
 	}
 	
@@ -211,7 +219,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 
 		if (amountFireflyAfter != amountFireflyBefore && amountFireflyAfter == TUTORIAL_FIREFLY_COUNT)
 		{
-			Analytics.SendTutorialEndStepEvent("firefly", DateTime.UtcNow);
+			Analytics.SendTutorialEndStepEvent("firefly", tutorialStartTime);
 		}
 		
 		return true;
