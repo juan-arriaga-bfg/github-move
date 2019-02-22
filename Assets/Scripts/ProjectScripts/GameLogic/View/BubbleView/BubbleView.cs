@@ -10,7 +10,7 @@ public class BubbleView : UIBoardView, IBoardEventListener
     
     public override bool IsTop => true;
 
-    protected override Vector3 offset => new Vector3(0, 1.5f);
+    protected override Vector3 offset => new Vector3(0, Context.Multicellular is FogObserver ? 0.1f : 1.5f);
 
     private Action<Piece> onClick;
     
