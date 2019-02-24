@@ -198,6 +198,8 @@ public class DevTools : UIContainerElementViewController
     public void OnDebug1Click()
     {
         Debug.Log("OnDebug1Click");
+        var model = UIService.Get.GetCachedModel<UICodexWindowModel>(UIWindowType.QuestCheatSheetWindow);
+        UIService.Get.ShowWindow(UIWindowType.QuestCheatSheetWindow);
         return;
 
 #if UNITY_EDITOR

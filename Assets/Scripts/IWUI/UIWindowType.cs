@@ -47,6 +47,8 @@ public class UIWindowType
     public const string WaitWindow = "WaitWindow";
 
     public const string CreditsWindow = "CreditsWindow";
+    
+    public const string QuestCheatSheetWindow = "QuestCheatSheetWindow";
 
     public static readonly HashSet<string> IgnoredWindows = new HashSet<string>
     {

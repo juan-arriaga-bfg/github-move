@@ -14,8 +14,6 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.QuestWindow,
             UIWindowType.ErrorWindow,
             UIWindowType.CodexWindow,
-            UIWindowType.CurrencyCheatSheetWindow,
-            UIWindowType.PiecesCheatSheetWindow,
             UIWindowType.ExchangeWindow,
             UIWindowType.OrdersWindow,
             UIWindowType.QuestStartWindow,
@@ -29,6 +27,11 @@ public class MainSceneInitilizer : SceneInitializer<DefaultApplicationInitilizer
             UIWindowType.ConfirmationWindow,
             UIWindowType.WaitWindow,
             UIWindowType.CreditsWindow,
+#if DEBUG
+            UIWindowType.CurrencyCheatSheetWindow,
+            UIWindowType.PiecesCheatSheetWindow,
+            UIWindowType.QuestCheatSheetWindow,
+#endif
         };
     
     protected override void InitScene(ApplicationInitializer applicationInitializer, Action onComplete)
