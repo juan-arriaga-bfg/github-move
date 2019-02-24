@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class UIQuestCheatSheetWindowModel : IWWindowModel
 {
@@ -65,5 +66,15 @@ public class UIQuestCheatSheetWindowModel : IWWindowModel
 
             return tasks;
         }
+    }
+
+    public QuestEntity GetQuestById(string id)
+    {
+        return Quests.FirstOrDefault(e => e.Id == id);
+    }
+
+    public void Refresh()
+    {
+        RefreshQuestsList();
     }
 }

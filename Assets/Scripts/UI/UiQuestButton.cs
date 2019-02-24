@@ -273,7 +273,8 @@ public class UiQuestButton : UIGenericResourcePanelViewController
 
     private void AddQuestWindowToQueue()
     {
-        DefaultSafeQueueBuilder.BuildAndRun(ShowQuestCompletedWindow);
+        string id = "ShowQuestCompletedWindow_" + Quest.Id;
+        DefaultSafeQueueBuilder.BuildAndRun(id, true, ShowQuestCompletedWindow);
     }
 
     private void ShowQuestCompletedWindow()

@@ -8,20 +8,25 @@ using UnityEngine.UI;
 public class UIQuestCheatSheetElementViewController : UIContainerElementViewController
 {
     [IWUIBinding("#QuestData")] private NSText lblData;
-    [IWUIBinding("#TaskId")] private NSText lblTaskId;
-    [IWUIBinding("#QuestId")] private NSText lblQuestId;
-    [IWUIBinding("#TaskTitle")] private NSText lblTitle;
-    [IWUIBinding("#TaskMessage")] private NSText lblMessage;
+    [IWUIBinding("#TaskTexts")] private NSText lblTexts;
     [IWUIBinding("#TaskProgress")] private NSText lblProgress;
     [IWUIBinding("#TaskIcon")] private Image taskIcon;
     [IWUIBinding("#TaskIconAnchor")] private Transform taskIconAnchor;
     [IWUIBinding("#TaskIconBox")] private CanvasGroup taskIconCanvasGroup;
-    [IWUIBinding("#TaskButton")] private DailyQuestWindowTaskButton taskButton;
-    [IWUIBinding("#View")] private CanvasGroup canvasGroup;
+    // [IWUIBinding("#View")] private CanvasGroup canvasGroup;
     [IWUIBinding("#Mark")] private GameObject mark;
     
     [IWUIBinding("#Back")] private Image back;
+    
+    [IWUIBinding("#StateController")] private UIQuestCheatSheetStateController stateController;
 
+    [IWUIBinding("#BtnDlgStart")] private UIButtonViewController btnDlgStart;
+    [IWUIBinding("#BtnDlgEnd")]   private UIButtonViewController btnDlgEnd;
+    [IWUIBinding("#BtnDescr")]    private UIButtonViewController btnDescr;
+    [IWUIBinding("#BtnHint")]     private UIButtonViewController btnHint;
+    
+    private UIQuestCheatSheetWindowModel model;
+    
     private TaskEntity targetTask;
     private QuestEntity targetQuest;
 
@@ -39,32 +44,111 @@ public class UIQuestCheatSheetElementViewController : UIContainerElementViewCont
         
         targetEntity = entity as UIQuestCheatSheetElementEntity;
 
-        targetTask = targetEntity.Task;
-        targetQuest = targetEntity.Quest;
-        
-        targetEntity.Quest.OnChanged += OnQuestChanged;
+        SetQuest();
+
+        GameDataService.Current.QuestsManager.OnQuestStateChanged += OnQuestChanged;
 
         GetRewardFromComponent(out piecesReward, out currenciesReward);
         piecesAmount = piecesReward.Sum(pair => pair.Value);
+        
+        stateController.Init(targetQuest.Id);
+        stateController.OnApplyChanges += OnApplyChanges;
+
+        InitButtons();
+        
         UpdateUi();
+    }
+
+    private void InitButtons()
+    {
+        btnDescr.OnClick(() =>
+        {
+            var model = UIService.Get.GetCachedModel<UIQuestWindowModel>(UIWindowType.QuestWindow);
+            model.Quest = targetQuest;
+            UIService.Get.ShowWindow(UIWindowType.QuestWindow);
+        });
+        
+        btnHint.OnClick(() =>
+        {
+            targetQuest.Tasks[0].Highlight();
+            targetEntity.WindowController.CloseCurrentWindow();
+        });
+        
+        btnDlgStart.OnClick(() =>
+        {
+            stateController.SetInactive();
+            
+            var starter = GetStarterForQuest(targetQuest.Id);
+            var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
+            model.Init(null, starter.QuestToStartIds, starter.Id);
+
+            UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
+        });
+
+        btnDlgEnd.OnClick(() =>
+        {
+            stateController.SetStarted();
+            targetQuest.ForceComplete();
+
+            var model = UIService.Get.GetCachedModel<UIQuestStartWindowModel>(UIWindowType.QuestStartWindow);
+            model.Init(targetQuest, null, null);
+            model.TestMode = true;
+
+            UIService.Get.ShowWindow(UIWindowType.QuestStartWindow);
+
+            var queueItem = new QueueActionComponent()
+                           .AddCondition(new WindowClosedQueueConditionComponent
+                            {
+                                Windows = new HashSet<string> {UIWindowType.QuestStartWindow}
+                            })
+                           .SetAction(() => { stateController.SetDone(); });
+            ProfileService.Current.QueueComponent.AddAction(queueItem, false);
+        });
+    }
+
+    private QuestStarterEntity GetStarterForQuest(string questId)
+    {
+        return GameDataService.Current.QuestsManager.QuestStarters.FirstOrDefault(e => e.QuestToStartIds.Contains(questId));
+    }
+    
+    private void SetQuest()
+    {
+        targetQuest = targetEntity.Quest;
+        targetTask = targetQuest.Tasks[0];
     }
 
     private void OnQuestChanged(QuestEntity quest, TaskEntity changedTask)
     {
-        if (targetTask == changedTask || (targetTask is TaskCompleteDailyTaskEntity && changedTask != null))
+        if (quest.Id == targetQuest.Id)
         {
-            UpdateUi();
+            Debug.Log($"[UIQuestCheatSheetElementViewController] => Handle quest change {quest.Id}, new state: {quest.State}");
+
+            ReInit();
         }
+    }
+
+    private void ReInit()
+    {
+        SetQuest();
+        UpdateUi();
+        stateController.UpdateUI();
     }
 
     public override void OnViewClose(IWUIWindowView context)
     {
         if (targetEntity != null)
         {
-            targetEntity.Quest.OnChanged -= OnQuestChanged;
+            GameDataService.Current.QuestsManager.OnQuestStateChanged -= OnQuestChanged;
         }
 
+        stateController.OnApplyChanges -= OnApplyChanges;
+        
         base.OnViewClose(context);
+    }
+
+    private void OnApplyChanges()
+    {
+        ReInit();
     }
 
     public void UpdateUi()
@@ -97,10 +181,10 @@ public class UIQuestCheatSheetElementViewController : UIContainerElementViewCont
 
         // type
         string typeStr = targetTask.GetType().ToString().Replace("Task", "").Replace("Entity", "");
-        dataStr.Append($" type {Colorize(typeStr, COLOR_TYPE)}");
+        dataStr.Append($"  type {Colorize(typeStr, COLOR_TYPE)}");
         
         // target
-        dataStr.Append(" target ");
+        dataStr.Append("  target ");
         if (!string.IsNullOrEmpty(data.PieceId))
         {
             dataStr.Append($"{Colorize(data.PieceId, COLOR_TARGET)}");
@@ -114,12 +198,11 @@ public class UIQuestCheatSheetElementViewController : UIContainerElementViewCont
         // Reward
         if (!string.IsNullOrEmpty(data.QuestReward))
         {
-            dataStr.Append($" reward {Colorize(data.QuestReward, COLOR_REWARD)}");
+            dataStr.Append($"  Reward {Colorize(data.QuestReward, COLOR_REWARD)}");
         }
 
         lblData.Text = dataStr.ToString();
-        lblTitle.Text = $"Title: {Colorize(data.TaskTitle, COLOR_TEXT)} Message: {Colorize(data.TaskMessage, COLOR_TEXT)}";
-        // lblMessage.Text = data.TaskMessage;
+        lblTexts.Text = $"T: {Colorize(data.TaskTitle, COLOR_TEXT)} M: {Colorize(data.TaskMessage, COLOR_TEXT)}";
         lblProgress.Text = data.TaskProgress;
         
         mark.SetActive(targetTask.IsCompleted());

@@ -198,7 +198,8 @@ public class DevTools : UIContainerElementViewController
     public void OnDebug1Click()
     {
         Debug.Log("OnDebug1Click");
-        var model = UIService.Get.GetCachedModel<UICodexWindowModel>(UIWindowType.QuestCheatSheetWindow);
+        var model = UIService.Get.GetCachedModel<UIQuestCheatSheetWindowModel>(UIWindowType.QuestCheatSheetWindow);
+        model.Refresh();
         UIService.Get.ShowWindow(UIWindowType.QuestCheatSheetWindow);
         return;
 

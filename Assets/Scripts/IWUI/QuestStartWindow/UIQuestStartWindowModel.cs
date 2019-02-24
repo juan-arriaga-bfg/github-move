@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,10 +13,13 @@ public class UIQuestStartWindowModel : IWWindowModel
     public QuestEntity CompletedQuest { get;  private set; }
     public string StarterId { get; private set; }
 
+    public bool TestMode;
+    
     public void Init(QuestEntity completedQuest, List<string> questsToStart, string starterId)
     {
         CompletedQuest = completedQuest;
         StarterId = starterId;
+        TestMode = false;
         
         var questManager = GameDataService.Current.QuestsManager;
 

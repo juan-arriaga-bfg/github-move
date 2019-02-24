@@ -7,7 +7,6 @@ public class UIQuestCheatSheetWindowView : UIGenericPopupWindowView
 {
     [IWUIBinding("#TaskList")] private UIContainerViewController questList;
     [IWUIBinding("#ScrollView")] private ScrollRect scroll;
-    [IWUIBinding("#StateController")] private UIQuestCheatSheetStateController stateController;
     
     public override void OnViewShow()
     {
@@ -56,12 +55,11 @@ public class UIQuestCheatSheetWindowView : UIGenericPopupWindowView
         for (int i = 0; i < tasks.Count; i++)
         {
             var quest = quests[i];
-            var task = tasks[i];
 
             var tabEntity = new UIQuestCheatSheetElementEntity
             {
-                Quest = quest,
-                Task = task,
+                MainModel = model,
+                QuestId = quest.Id,
                 WindowController = Controller,
                 OnSelectEvent = null,
                 OnDeselectEvent = null
