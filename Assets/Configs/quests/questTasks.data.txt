@@ -782,6 +782,37 @@
     }
   },
   {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "72_CreatePiece_CR",
+    "PieceUid": "Boost_CR",
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCompleteOrderEntity, GameAssembly",
+    "Id": "73_CompleteOrder",
+    "PieceUid": "NPC_C",
+    "TargetValue": 5,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "NPC_C",
+        "Title": "quest.complete.orders.title",
+        "Message": "quest.complete.orders.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "74_CreatePiece_PR_D4",
+    "PieceUid": "PR_D4",
+    "TargetValue": 1
+  },
+  {
     "$type": "TaskCompleteDailyTaskEntity, GameAssembly",
     "Id": "Daily_ClearAll",
     "ComponentsCache": {
