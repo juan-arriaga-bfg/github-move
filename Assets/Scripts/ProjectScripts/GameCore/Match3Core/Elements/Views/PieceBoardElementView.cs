@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using DG.Tweening;
+
+[Serializable]
+public class ViewAnchorLink
+{
+    public ViewType Key;
+    public Transform Anchor;
+}
 
 public class PieceBoardElementView : BoardElementView
 {
@@ -10,6 +16,7 @@ public class PieceBoardElementView : BoardElementView
 
     [SerializeField] private Transform selectionView;
     
+    [SerializeField] protected List<ViewAnchorLink> anchors;
     [SerializeField] protected List<SpriteRenderer> bodySprites;
     [SerializeField] protected List<ParticleSystem> particles;
     
@@ -102,6 +109,15 @@ public class PieceBoardElementView : BoardElementView
         CacheDefaultMaterials();
         
         CheckLock();
+    }
+
+    public Vector2 GetUIPosition(ViewType key)
+    {
+        var anchor = anchors.Find(link => link.Key == key);
+        
+        if (anchor == null) return Vector2.zero;
+
+        return anchor.Anchor.localPosition;
     }
 
     protected List<LockerComponent> GetPieceLockers()

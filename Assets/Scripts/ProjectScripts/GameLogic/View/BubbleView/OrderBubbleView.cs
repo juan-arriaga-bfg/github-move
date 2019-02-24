@@ -7,18 +7,12 @@ public class OrderBubbleView : UIBoardView
 	[SerializeField] private GameObject question;
 
 	protected override ViewType Id => ViewType.OrderBubble;
-	
+	public override bool IsTop => true;
+
 	private CustomerComponent customer;
     
-	public override void SetOffset()
-	{
-		CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Offset;
-	}
-
 	public override void Init(Piece piece)
 	{
-		Offset = new Vector3(0, 2.0f);
-		
 		base.Init(piece);
         
 		Priority = defaultPriority = -1;
@@ -29,7 +23,7 @@ public class OrderBubbleView : UIBoardView
 		customer.Order.OnStateChange += UpdateIcon;
 		UpdateIcon();
 	}
-
+	
 	public void UpdateIcon()
 	{
 		if (customer == null) return;

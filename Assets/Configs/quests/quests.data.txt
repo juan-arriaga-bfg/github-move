@@ -1427,29 +1427,6 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "67_CreatePiece_NPC_B4",
-    "TaskDefs": [
-      {
-        "TaskId": "67_CreatePiece_NPC_B4"
-      }
-    ],
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 25
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 50
-          }
-        ]
-      }
-    }
-  },
-  {
-    "$type": "StoryQuestEntity, GameAssembly",
     "Id": "71_CreatePiece_NPC_B",
     "TaskDefs": [
       {

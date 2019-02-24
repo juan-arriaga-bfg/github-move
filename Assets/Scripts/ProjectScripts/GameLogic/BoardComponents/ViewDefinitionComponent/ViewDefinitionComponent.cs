@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
@@ -59,9 +61,25 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
 
     public void OnAddToBoard(BoardPosition position, Piece context = null)
     {
+        DOTween.Sequence()
+            .SetId(this)
+            .SetLoops(10)
+            .AppendCallback(() =>
+            {
+                if (thisContext?.ActorView == null) return;
+                
+                DOTween.Kill(this);
+                
+                foreach (var pair in views)
+                {
+                    pair.Value.SetOffset(GetViewPosition(pair.Value.IsTop) + thisContext.ActorView.GetUIPosition(pair.Key));
+                }
+            })
+            .AppendInterval(0.1f);
+        
         if (thisContext == null) return;
 
-        Position = position;
+        Position = thisContext.Multicellular is FogObserver observer ? observer.Def.GetCenter() : position;
 
         if (ViewIds == null) return;
 
@@ -83,19 +101,11 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         
         if (container != null)
         {
-            f.Z = t.Z = BoardLayer.UI.Layer; // += Layer + view.Layer;
+            f.Z = t.Z = BoardLayer.UI.Layer;
             thisContext.Context.RendererContext.MoveElement(f, t);
-            container.CachedTransform.localPosition = new Vector3(0f, 0f, 0f);
-            // container.SetOfset();
+            container.CachedTransform.localPosition = thisContext.Context.BoardDef.GetPiecePosition(Position.X, Position.Y);
         }
         
-        foreach (var view in views.Values)
-        {
-            if(view.IsShow == false) continue;
-            
-            view.SetOffset();
-        }
-
         thisContext.Context.ActionExecutor.AddAction(new CallbackAction{Callback = controller =>
         {
             OnDrag(true);
@@ -147,26 +157,22 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
         }
         
         var pos = Position;
-        var currentPos = Position;
 
         pos.Z = BoardLayer.UI.Layer;
-        currentPos.Z = BoardLayer.UI.Layer;
 
         if (container == null)
         {
             container = thisContext.Context.RendererContext.CreateElementAt((int) ViewType.UIContainer, pos) as UIBoardView;
             container.GetCanvasGroup().alpha = 1f;
-            container.CachedTransform.localPosition = new Vector3(0f, 0f, 0f);
         }
 
         var element = thisContext.Context.RendererContext.CreateBoardElement<UIBoardView>((int)id);
+        
         element.Init(thisContext);
         element.Init(thisContext.Context.RendererContext);
         element.CachedTransform.SetParentAndReset(container.CachedTransform);
-        element.SetOffset();
         element.SyncRendererLayers(pos);
-        
-        thisContext.Context.RendererContext.MoveElement(pos, currentPos);
+        element.SetOffset(thisContext?.ActorView != null ? GetViewPosition(element.IsTop) + thisContext.ActorView.GetUIPosition(id) : Vector2.zero);
         
         views.Add(id, element);
         
@@ -180,9 +186,7 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
     
     public void RemoveView(ViewType id)
     {
-        UIBoardView view;
-        
-        if (views.TryGetValue(id, out view) == false) return;
+        if (views.TryGetValue(id, out var view) == false) return;
 
         if (view.IsShow == false)
         {
@@ -205,14 +209,19 @@ public class ViewDefinitionComponent : IECSComponent, IPieceBoardObserver
             element.UpdateVisibility(true);
         }
     }
-    
-    public Vector3 GetViewPositionBottom(int size)
+
+    private Vector2 GetViewPosition(bool isTop)
     {
-        return thisContext.Context.BoardDef.GetSectorCenterWorldPosition(Position.X + (size - 1), Position.Y, Position.Z);
-    }
-    
-    public Vector3 GetViewPositionTop(int size)
-    {
-        return thisContext.Context.BoardDef.GetSectorCenterWorldPosition(Position.X, Position.Y + (size - 1), Position.Z);
+        var position = BoardPosition.Zero();
+
+        if (thisContext.Multicellular == null || thisContext.Multicellular is FogObserver)
+            return thisContext.Context.BoardDef.GetSectorWorldPosition(position.X, position.Y, position.Z);
+        
+        var size = (int) Mathf.Sqrt(thisContext.Multicellular.Mask.Count + 1) - 1;
+        
+        if (isTop) position.Y += size;
+        else position.X += size;
+        
+        return thisContext.Context.BoardDef.GetSectorWorldPosition(position.X, position.Y, position.Z);
     }
 }

@@ -78,15 +78,11 @@ public class GameBoardDebugComponent : ECSEntity, IECSSystem
         var bubbleView = targetPiece.ViewDefinition.AddView(ViewType.Bubble) as BubbleView;
         
         bubbleView.SetData(LocalizationService.Get("gameboard.bubble.message.fog", "gameboard.bubble.message.fog"), "Ok", piece => { });
-        bubbleView.SetOffset();
         bubbleView.Priority = -1;
         bubbleView.Change(true);
-
-
-        // targetPiece.ViewDefinition.AddView(ViewType.Warning);
-
+        
         var boardTimerView = targetPiece.ViewDefinition.AddView(ViewType.BoardTimer) as BoardTimerView;
-        boardTimerView.SetOffset();
+        
         boardTimerView.Priority = -1;
         boardTimerView.Change(true);
         

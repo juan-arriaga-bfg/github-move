@@ -8,7 +8,7 @@ public class CharacterPieceView : PieceBoardElementView
     
     public void StartRewardAnimation()
     {
-        if(charAnimator == null) return;
+        if (charAnimator == null) return;
         if (controller == null) controller = charAnimator.GetBehaviour<CharacterControllerAnimation>();
         if (controller == null) return;
         
