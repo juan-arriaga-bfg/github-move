@@ -102,7 +102,7 @@ public class OrdersDataManager : ECSEntity, IDataManager, IDataLoader<List<Order
         {
             var customer = logic.GetPieceAt(position)?.GetComponent<CustomerComponent>(CustomerComponent.ComponentGuid);
             
-            if(customer == null || customer.Cooldown.IsExecuteable() || (positions.Count != 1 && customer.Order != null)) continue;
+            if(customer == null || customer.Cooldown.IsExecuteable()) continue;
             
             customers.Add(customer);
         }
