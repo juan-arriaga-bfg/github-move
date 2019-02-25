@@ -113,9 +113,11 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
     public void GetReward()
     {
         CurrencyHelper.PurchaseAndProvideEjection(Order.PiecesReward, Order.CurrenciesReward, null, pieceContext.CachedPosition, () => { Order = null; });
-        GameDataService.Current.OrdersManager.RemoveOrder(Order, pieceContext.Context.BoardLogic);
         
         Order.State = OrderState.Reward;
+        
+        GameDataService.Current.OrdersManager.RemoveOrder(Order, pieceContext.Context.BoardLogic);
+        
         UpdateView();
     }
 
