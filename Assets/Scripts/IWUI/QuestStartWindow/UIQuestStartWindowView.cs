@@ -282,7 +282,7 @@ public class UIQuestStartWindowView : IWUIWindowView
         
         isClickAllowed = false;
 
-        if (step == Step.QuestComplete)
+        if (step == Step.QuestComplete && !model.TestMode)
         {
             if (model.QuestsToStart != null && model.QuestsToStart.Count > 0)
             {
@@ -324,8 +324,11 @@ public class UIQuestStartWindowView : IWUIWindowView
 
         var quest = model.CompletedQuest;
 
-        quest.SetClaimedState();
-        GameDataService.Current.QuestsManager.FinishQuest(quest.Id);
+        if (!model.TestMode)
+        {
+            quest.SetClaimedState();
+            GameDataService.Current.QuestsManager.FinishQuest(quest.Id);
+        }
 
         var reward = quest.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
         var curLayer = uiLayer.CurrentLayer;
