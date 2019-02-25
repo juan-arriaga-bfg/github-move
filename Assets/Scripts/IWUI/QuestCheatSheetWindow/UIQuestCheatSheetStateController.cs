@@ -108,7 +108,7 @@ public class UIQuestCheatSheetStateController : IWUIWindowViewController
             questManager.FinishedQuests.Remove(questId);
         }
 
-        DevTools.FastStartQuest(new List<string> {questId});
+        DevTools.FastStartQuest(new HashSet<string> {questId});
 
         ApplyChanges();
     }
@@ -127,7 +127,7 @@ public class UIQuestCheatSheetStateController : IWUIWindowViewController
 
         if (IsQuestNotStarted())
         {
-            DevTools.FastStartQuest(new List<string> {questId});
+            DevTools.FastStartQuest(new HashSet<string> {questId});
         }
 
         var quest = questManager.GetActiveQuestById(questId);

@@ -7,7 +7,7 @@ using System.Linq;
 
 public class UIQuestStartWindowModel : IWWindowModel
 {
-    public List<QuestEntity> QuestsToStart { get; private set; }
+    public HashSet<QuestEntity> QuestsToStart { get; private set; }
     public ConversationScenarioEntity QuestCompletedScenario { get;  private set; }
     public ConversationScenarioEntity QuestStartScenario { get;  private set; }
     public QuestEntity CompletedQuest { get;  private set; }
@@ -15,7 +15,7 @@ public class UIQuestStartWindowModel : IWWindowModel
 
     public bool TestMode;
     
-    public void Init(QuestEntity completedQuest, List<string> questsToStart, string starterId)
+    public void Init(QuestEntity completedQuest, HashSet<string> questsToStart, string starterId)
     {
         CompletedQuest = completedQuest;
         StarterId = starterId;
@@ -39,7 +39,7 @@ public class UIQuestStartWindowModel : IWWindowModel
         }
         else
         {
-            QuestsToStart = new List<QuestEntity>();
+            QuestsToStart = new HashSet<QuestEntity>();
             foreach (var id in questsToStart)
             {
                 var quest = questManager.InstantiateQuest(id);
@@ -80,7 +80,7 @@ public class UIQuestStartWindowModel : IWWindowModel
         message = LocalizationService.Get("conversation.error.quest.complete", "conversation.error.quest.complete");
     }
     
-    private ConversationActionBubbleEntity CreateStartBubble(string charId, string message, CharacterEmotion emotion = CharacterEmotion.Normal, List<string> questIds = null)
+    private ConversationActionBubbleEntity CreateStartBubble(string charId, string message, CharacterEmotion emotion = CharacterEmotion.Normal, HashSet<string> questIds = null)
     {
         ConversationActionBubbleEntity actBubble = new ConversationActionBubbleEntity()
         {
@@ -154,7 +154,7 @@ public class UIQuestStartWindowModel : IWWindowModel
             UiCharacterData.CharSleepingBeauty, 
             LocalizationService.Get("conversation.error.message1", "conversation.error.message1"),
             CharacterEmotion.Normal,
-            QuestsToStart.Select(e => e.Id).ToList()
+            new HashSet<string>(QuestsToStart.Select(e => e.Id))
         ));
     }
     

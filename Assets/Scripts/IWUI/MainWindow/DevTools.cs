@@ -321,7 +321,7 @@ public class DevTools : UIContainerElementViewController
     /// <summary>
     /// Start quest without conversations. DEBUG use only!
     /// </summary>
-    public static void FastStartQuest(List<string> questsToStart)
+    public static void FastStartQuest(HashSet<string> questsToStart)
     {
         var questManager = GameDataService.Current.QuestsManager;
         questManager.StartQuests(questsToStart);
@@ -340,8 +340,7 @@ public class DevTools : UIContainerElementViewController
         List<CurrencyPair> reward = questToFinish.GetComponent<QuestRewardComponent>(QuestRewardComponent.ComponentGuid)?.Value;
         CurrencyHelper.Purchase(reward, success =>
             {
-                string starterId;
-                List<string> questsToStart = questManager.CheckConditions(out starterId);
+                HashSet<string> questsToStart = questManager.CheckConditions(out _);
                 questManager.StartQuests(questsToStart);
             },
             new Vector2(Screen.width / 2, Screen.height / 2)

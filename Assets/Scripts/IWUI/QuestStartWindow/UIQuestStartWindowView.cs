@@ -189,7 +189,7 @@ public class UIQuestStartWindowView : IWUIWindowView
             return;
         }
         
-        List<string> ids = model.QuestsToStart.Select(e => e.Id).ToList();
+        HashSet<string> ids = new HashSet<string>(model.QuestsToStart.Select(e => e.Id));
         GameDataService.Current.QuestsManager.StartQuests(ids);
 
         foreach (var id in ids)
@@ -291,9 +291,8 @@ public class UIQuestStartWindowView : IWUIWindowView
             else
             {
                 var questManager = GameDataService.Current.QuestsManager;
-            
-                string starterId;
-                List<string> questsToStart = questManager.CheckConditions(out starterId);
+
+                HashSet<string> questsToStart = questManager.CheckConditions(out string starterId);
                 if (questsToStart.Count > 0)
                 {
                     model.Init(null, questsToStart, starterId);
