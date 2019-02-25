@@ -202,10 +202,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
 
     private void PointToManaPieceOnBoard()
     {
-        var definition = Context.Context.BoardLogic.MatchDefinition;
-        var last = definition.GetLast(PieceType.Mana1.Id);
-
-        bool isManaOnField = HighlightTaskPointToPieceHelper.FindAndPointToRandomPredecessorPiece(last, true);
+        bool isManaOnField = HighlightTaskPointToPieceHelper.FindAndPointToLastPieceInChain(PieceType.Mana1.Id);
         if (!isManaOnField)
         {
             new HighlightTaskPointToOrdersButton().Highlight(null);

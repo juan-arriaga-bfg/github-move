@@ -99,4 +99,47 @@ public static class HighlightTaskPointToPieceHelper
 
         HintArrowView.Show(selectedPosition, 0f, -0.5f);
     }
+    
+    /// <summary>
+    /// If we set pieceId = A5 and we have A1, A2, A7 on board, A7 will be highlighted
+    /// No random here! First available (or first locked if no avaulable) piece will be used
+    /// </summary>
+    public static bool FindAndPointToLastPieceInChain(int pieceId)
+    {
+        var boardLogic = BoardService.Current.FirstBoard.BoardLogic;
+        var definition = boardLogic.MatchDefinition;
+        var idToCheck = definition.GetLast(pieceId);
+
+        BoardPosition? backup = null; 
+        
+        while (idToCheck != PieceType.None.Id)
+        {
+            var piecesPositions = boardLogic.PositionsCache.GetPiecePositionsByType(idToCheck);
+
+            if (piecesPositions.Count > 0)
+            {
+                var accessiblePoints = HighlightTaskPathHelper.GetAccessiblePositions(piecesPositions);
+                if (accessiblePoints.Count > 0)
+                {
+                    HintArrowView.Show(accessiblePoints[0], 0f, -0.5f);
+                    return true;
+                }
+
+                if (!backup.HasValue)
+                {
+                    backup = piecesPositions[0];
+                }
+            }
+
+            idToCheck = definition.GetPrevious(idToCheck);
+        }
+
+        if (backup.HasValue)
+        {
+            HintArrowView.Show(backup.Value, 0f, -0.5f);
+            return true;
+        }
+
+        return false;
+    }
 }
