@@ -508,6 +508,27 @@ public class PieceBoardElementView : BoardElementView
         arrow = HintArrowView.Show(Piece.CachedPosition, 0, -0.5f, false, true);
     }
 
+    public void SetArrow(HintArrowView arrow)
+    {
+        if (arrow != null)
+        {
+            this.arrow = arrow;
+            this.arrow.AddOnRemoveAction(() =>
+            {
+                this.arrow = null;
+            });
+        }
+        else
+        {
+            Debug.LogError("[PieceBoardElementView] => SetArrow: Already exists!");
+        }
+    }
+
+    public HintArrowView GetArrow()
+    {
+        return arrow;
+    }
+    
     public void UpdateArrow()
     {
         if (arrow == null || (arrow.CachedPosition.X == Piece.CachedPosition.X && arrow.CachedPosition.Y == Piece.CachedPosition.Y)) return;

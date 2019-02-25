@@ -85,23 +85,41 @@ public class HintArrowView : BoardElementView, IHintArrow
         var arrowView = board.RendererContext.CreateBoardElementAt<HintArrowView>(R.HintArrow, cachedPosition);
 
         arrowView.CachedTransform.localPosition = arrowView.CachedTransform.localPosition + (Vector3.up * 2) + new Vector3(offsetX, offsetY);
-        arrowView.Show(loop, delayBeforeShow);
         arrowView.CachedPosition = cachedPosition;
         
         var targetPiece = boardLogic.GetPieceAt(position);
-        
-        if (targetPiece?.ActorView != null)
-        {
-            void DisableHint(){targetPiece.ActorView.RemoveArrow(0f);}
 
-            targetPiece.ActorView.OnTapCallback += DisableHint;
-            targetPiece.ActorView.OnDragStartCallback += DisableHint;
-            
-            arrowView.SetOnRemoveAction(() =>
+        PieceBoardElementView actorView = targetPiece?.ActorView;
+        
+        if (actorView != null)
+        {
+            if (actorView.GetArrow() != null)
             {
-                targetPiece.ActorView.OnTapCallback -= DisableHint;
-                targetPiece.ActorView.OnDragStartCallback -= DisableHint;
-            });    
+                actorView.UpdateArrow(); 
+            }
+            else
+            {
+                arrowView.Show(loop, delayBeforeShow);
+                actorView.SetArrow(arrowView);
+            }
+            
+            void DisableHint()
+            {
+                actorView.RemoveArrow(0f);
+            }
+
+            actorView.OnTapCallback += DisableHint;
+            actorView.OnDragStartCallback += DisableHint;
+            
+            arrowView.AddOnRemoveAction(() =>
+            {
+                actorView.OnTapCallback -= DisableHint;
+                actorView.OnDragStartCallback -= DisableHint;
+            });  
+        }
+        else
+        {
+            arrowView.Show(loop, delayBeforeShow);
         }
 
         if (focus == false || board.Manipulator.CameraManipulator.CameraMove.IsLocked) return arrowView;
@@ -133,8 +151,8 @@ public class HintArrowView : BoardElementView, IHintArrow
         base.SyncRendererLayers(targetPosition);
     }
 
-    public void SetOnRemoveAction(Action onRemove)
+    public void AddOnRemoveAction(Action action)
     {
-        this.onRemove = onRemove;
+        onRemove += action;
     }
 }
