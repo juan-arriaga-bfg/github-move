@@ -637,20 +637,6 @@
     ]
   },
   {
-    "Id": 51,
-    "$type": "QuestStarterEntity, GameAssembly",
-    "QuestToStartIds": [
-      "56_CollectIngredient"
-    ],
-    "Conditions": [
-      {
-        "$type": "QuestStartConditionQuestCompletedComponent, GameAssembly",
-        "Id": "QuestCompleted",
-        "Value": "55_CreatePiece_E3"
-      }
-    ]
-  },
-  {
     "Id": 52,
     "$type": "QuestStarterEntity, GameAssembly",
     "QuestToStartIds": [

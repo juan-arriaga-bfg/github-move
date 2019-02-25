@@ -1174,29 +1174,6 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "56_CollectIngredient",
-    "TaskDefs": [
-      {
-        "TaskId": "56_CollectIngredient"
-      }
-    ],
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 20
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 50
-          }
-        ]
-      }
-    }
-  },
-  {
-    "$type": "StoryQuestEntity, GameAssembly",
     "Id": "57_UseMine",
     "TaskDefs": [
       {
