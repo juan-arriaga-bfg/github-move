@@ -350,7 +350,7 @@ public class PathfindLockerComponent : ECSEntity
         if(removedPiece.PieceType == PieceType.Fog.Id)
             OnFogRemove(removedPiece);
         
-        RecalcBlocked(target, removedPiece.CachedPosition);
+        RecalculateRegions(removedPiece);
         if (PieceType.GetDefById(removedPiece.PieceType).Filter.HasFlag(PieceTypeFilter.Obstacle))
         {
             var emptyCells = CollectUnlockedEmptyCells();
