@@ -333,4 +333,5 @@ public class R
      public const string BackgroundWater = "BackgroundWater";
      public const string BorderLeftHole = "BorderLeftHole";
      public const string BorderBottomHole = "BorderBottomHole";
+     public const string RewardDropParticles = "RewardDropParticles";
 }

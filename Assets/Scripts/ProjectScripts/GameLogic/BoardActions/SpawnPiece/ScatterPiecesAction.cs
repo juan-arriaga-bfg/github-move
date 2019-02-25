@@ -18,8 +18,7 @@ public class ScatterPiecesAction : IBoardAction
 
 	public Action<bool> OnComplete;
 
-	public bool RewardTopEffect = false;
-	public bool RewardBottomEffect = false;
+	public bool RewardEffect = false;
 
 	public bool PerformAction(BoardController gameBoardController)
 	{
@@ -49,8 +48,7 @@ public class ScatterPiecesAction : IBoardAction
 		{
 			From = From, 
 			AnimationResourceSearchOnRemove = piece => AnimationOverrideDataService.Current.FindAnimation(piece, def => def.OnDestroyFromBoard),
-			RewardTopEffect = RewardTopEffect,
-			RewardBottomEffect = RewardBottomEffect,
+			RewardEffect = RewardEffect
 		};
 		
 		if (IsTargetReplace && cells.Count >= amount)

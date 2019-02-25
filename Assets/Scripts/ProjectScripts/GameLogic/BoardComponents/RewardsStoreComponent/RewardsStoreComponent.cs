@@ -202,7 +202,7 @@ public class RewardsStoreComponent : IECSComponent
                 IsScatter = false;
                 OnComplete(value);
             },
-            RewardBottomEffect = PieceType.GetDefById(context.PieceType).Filter.Has(PieceTypeFilter.Chest)
+            RewardEffect = PieceType.GetDefById(context.PieceType).Filter.Has(PieceTypeFilter.Chest)
         });
     }
 }
