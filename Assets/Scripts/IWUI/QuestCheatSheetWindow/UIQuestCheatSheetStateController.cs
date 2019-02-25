@@ -49,11 +49,11 @@ public class UIQuestCheatSheetStateController : IWUIWindowViewController
         markStarted.SetActive(IsQuestInProgress());
         markDone.SetActive(IsQuestCompleted());
 
-        const float FADE = 0.2f;
+        const float FADE = 0.3f;
         ColorUtility.TryParseHtmlString("#D9D9D9", out Color colorInactive);
         ColorUtility.TryParseHtmlString("#FFFA1F", out Color colorStarted);
         ColorUtility.TryParseHtmlString("#4CE717", out Color colorDone);
-        ColorUtility.TryParseHtmlString("#FFFFFF08", out Color colorWhite);
+        var colorWhite = new Color(1, 1, 1, FADE);
 
         colorInactive = IsQuestNotStarted() ? colorInactive : colorWhite; 
         colorStarted = IsQuestInProgress() ? colorStarted : colorWhite;
