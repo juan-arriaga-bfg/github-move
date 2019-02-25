@@ -22,6 +22,9 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
     [IWUIBinding("#ContentIngredients")] private UIContainerViewController contentIngredients;
     
     [IWUIBinding("#Prices")] private UIOrderPriceItem prices;
+    
+    [IWUIBinding("#CloseMaskTop")] private UIButtonViewController btnMaskTop;
+    [IWUIBinding("#CloseMaskBottom")] private UIButtonViewController btnMaskBottom;
 
     public bool IsShowComplete;
     
@@ -66,6 +69,9 @@ public class UIOrdersWindowView : UIGenericPopupWindowView
     {
         base.OnViewShowCompleted();
 
+        InitButtonBase(btnMaskTop, Controller.CloseCurrentWindow);
+        InitButtonBase(btnMaskBottom, Controller.CloseCurrentWindow);
+        
         IsShowComplete = true;
     }
 

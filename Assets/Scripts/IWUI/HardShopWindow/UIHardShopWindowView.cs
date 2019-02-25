@@ -4,6 +4,9 @@ public class UIHardShopWindowView : UIGenericPopupWindowView
 {
     [IWUIBinding("#Content")] private UIContainerViewController content;
     
+    [IWUIBinding("#CloseMaskTop")] private UIButtonViewController btnMaskTop;
+    [IWUIBinding("#CloseMaskBottom")] private UIButtonViewController btnMaskBottom;
+    
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -21,7 +24,15 @@ public class UIHardShopWindowView : UIGenericPopupWindowView
             tabsScrollRect.verticalNormalizedPosition = 1f;
         }
     }
-    
+
+    public override void OnViewShowCompleted()
+    {
+        base.OnViewShowCompleted();
+        
+        InitButtonBase(btnMaskTop, Controller.CloseCurrentWindow);
+        InitButtonBase(btnMaskBottom, Controller.CloseCurrentWindow);
+    }
+
     private List<IUIContainerElementEntity> UpdateEntities(List<ShopDef> entities)
     {
         var views = new List<IUIContainerElementEntity>(entities.Count);
