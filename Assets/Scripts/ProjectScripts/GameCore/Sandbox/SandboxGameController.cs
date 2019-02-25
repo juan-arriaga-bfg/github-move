@@ -121,12 +121,11 @@ public class SandboxGameController : MonoBehaviour
             boardController.BoardDef.UnitSize,
             new List<string>
             {
-                null,
-                "tile_water",
-                "tile_grass_1",
-                "tile_grass_2"
-            },
-            null//ignorablePositions:GenereateIgnorable(boardController)
+                null,            // 0
+                null,            // 1
+                "tile_grass_1",  // 2
+                "tile_grass_2"   // 3
+            }
         );
         
         boardController.RendererContext.CreateBorders();
