@@ -119,6 +119,7 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 424c2977f15d8884e94294314f0608a4, type: 3}
     - {fileID: 21300000, guid: 6b0b02d321233aa4d80f72ff56a2c66f, type: 3}
     - {fileID: 21300000, guid: c559c37168cc5234bb33f5f37a971a60, type: 3}
+    - {fileID: 21300000, guid: 5f2b857235ff3cc488d78ebc91aed600, type: 3}
     - {fileID: 21300000, guid: 5ed9b73e6d552754aa559a774e929589, type: 3}
     - {fileID: 21300000, guid: b15aa4e28bf268241960f0147797524e, type: 3}
     - {fileID: 21300000, guid: 764ad32caa0c3a74f847bbbe4b1c6255, type: 3}
@@ -142,12 +143,12 @@ SpriteAtlas:
     - {fileID: 21300000, guid: c8c1fb64978e3234793cb8449174bd3a, type: 3}
     - {fileID: 21300000, guid: 3bc05feedf1ec60448914986fa0d1ef8, type: 3}
     - {fileID: 21300000, guid: be92c70cc402232468ba8a8b696448ce, type: 3}
+    - {fileID: 21300000, guid: 61ac320cf9a980549856005a9fd21e0f, type: 3}
     - {fileID: 21300000, guid: d64641d9bf528bf428adb2ff27abfcab, type: 3}
     - {fileID: 21300000, guid: b83672f664b74264fb3c7af0c3bfb18b, type: 3}
     - {fileID: 21300000, guid: 90afbfd17616a804ba57f0ad66907fa6, type: 3}
-    - {fileID: 21300000, guid: 065a7fd8fbe02ce4989b9e890011ed6b, type: 3}
-    - {fileID: 21300000, guid: 61ac320cf9a980549856005a9fd21e0f, type: 3}
     - {fileID: 21300000, guid: 20fa18d0e7549ed4583e03ab2de16af9, type: 3}
+    - {fileID: 21300000, guid: 065a7fd8fbe02ce4989b9e890011ed6b, type: 3}
     - {fileID: 21300000, guid: bb386b51137a401479b58760428398dc, type: 3}
     - {fileID: 21300000, guid: ec67d25fec7db5e4b965f1cb1cad876c, type: 3}
     - {fileID: 21300000, guid: bf8a5b61b831c394b98c55569c2204ce, type: 3}
@@ -284,7 +285,7 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 45a67a70ff6a03c4ab8794b99682d8ac, type: 3}
     - {fileID: 21300000, guid: d88c51d99c1b28d4091573621c235a3a, type: 3}
     - {fileID: 21300000, guid: 4dbe30d396e6e354b8eb80842bbfc1dc, type: 3}
-    totalSpriteSurfaceArea: 3776148
+    totalSpriteSurfaceArea: 3781724
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -338,6 +339,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 793cb7224b1c60741893571ead139bca, type: 3}
   - {fileID: 21300000, guid: 80f5013239e857a418e0ad70dfcd02f6, type: 3}
   - {fileID: 21300000, guid: ed386b320a746e1409499f0de258b4f7, type: 3}
+  - {fileID: 21300000, guid: 5f2b857235ff3cc488d78ebc91aed600, type: 3}
   - {fileID: 21300000, guid: 1b544972b41ef7443b00d0e754d50a07, type: 3}
   - {fileID: 21300000, guid: b36020827652def46aedb550f20b49d4, type: 3}
   - {fileID: 21300000, guid: e9e4d092fe38ec84684b0b97df36fdba, type: 3}
@@ -582,6 +584,7 @@ SpriteAtlas:
   - list_active
   - logo
   - Fog_InsideProgressBar_MagickStick
+  - shadow_hourglass
   - Order2
   - hard_currency_4
   - icon_daily_objectives
