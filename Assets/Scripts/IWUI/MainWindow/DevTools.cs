@@ -92,6 +92,15 @@ public class DevTools : UIContainerElementViewController
         UIService.Get.ShowWindow(UIWindowType.PiecesCheatSheetWindow);
     }
     
+    public void OnQuestsCheatSheetClick()
+    {
+        UIWaitWindowView.Show();
+        
+        var model = UIService.Get.GetCachedModel<UIQuestCheatSheetWindowModel>(UIWindowType.QuestCheatSheetWindow);
+        model.Refresh();
+        UIService.Get.ShowWindow(UIWindowType.QuestCheatSheetWindow);
+    }
+    
     private List<DebugCellView> cells = new List<DebugCellView>();
     
     public void OnToggleCells(bool isChecked)

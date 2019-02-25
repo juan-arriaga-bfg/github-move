@@ -16,6 +16,8 @@ public class UIQuestCheatSheetWindowView : UIGenericPopupWindowView
         SetTitle(model.Title);
 
         Fill(CreateList(model), questList);
+        
+        UIWaitWindowView.Hide();
     }
 
     public override void OnViewClose()
