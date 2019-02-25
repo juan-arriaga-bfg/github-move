@@ -25,7 +25,10 @@ public static class HighlightTaskPointToPieceHelper
         return true;
     }
     
-    public static bool FindAndPointToRandomPredecessorPiece(int pieceId)
+    /// <summary>
+    /// Find A1, A2, A3 when pieceId == A4. If includeTarget is set, A4 will also be included
+    /// </summary>
+    public static bool FindAndPointToRandomPredecessorPiece(int pieceId, bool includeTarget)
     {
         var boardLogic = BoardService.Current.FirstBoard.BoardLogic;
         var board = BoardService.Current.FirstBoard;
@@ -38,6 +41,10 @@ public static class HighlightTaskPointToPieceHelper
         {
             if (pieceId == id)
             {
+                if (includeTarget)
+                {
+                    croppedChain.Add(id);
+                }
                 break;
             }
             
