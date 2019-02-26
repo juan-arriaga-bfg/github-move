@@ -59,12 +59,16 @@ public class MakingLifeComponent : WorkplaceLifeComponent
     protected override LifeSaveItem InitInSave(BoardPosition position)
     {
         var item = base.InitInSave(position);
-        
+
         if (item == null) return null;
-        
-        if (item.IsStartCooldown) TimerCooldown.Start(item.StartTimeCooldown);
-        else Locker.Unlock(this);
-        
+
+        if (item.IsStartCooldown)
+        {
+            TimerCooldown.Start(item.StartTimeCooldown);
+            Locker.Unlock(this);
+        }
+        else if (item.IsStartTimer == false && Rewards.IsComplete == false) Locker.Unlock(this);
+
         return item;
     }
     

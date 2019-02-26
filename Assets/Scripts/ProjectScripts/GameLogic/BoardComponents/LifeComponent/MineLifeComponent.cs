@@ -10,14 +10,14 @@ public class MineLifeComponent : WorkplaceLifeComponent
     public override string Price => TimerCooldown.IsExecuteable()
         ? string.Format(LocalizationService.Get("gameboard.bubble.button.wait", "gameboard.bubble.button.wait\n{0}"), TimerCooldown.CompleteTime.GetTimeLeftText())
         : string.Format(LocalizationService.Get("gameboard.bubble.button.clear", "gameboard.bubble.button.clear {0}"), Energy.ToStringIcon());
-    
+
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
         
         def = GameDataService.Current.PiecesManager.GetPieceDef(Context.PieceType).MineDef;
         
-        TimerMain.Delay = def.Delay;
+        TimerWork.Delay = def.Delay;
         HP = def.Size;
         
         TimerCooldown = new TimerComponent{Delay = def.Cooldown};
@@ -33,11 +33,10 @@ public class MineLifeComponent : WorkplaceLifeComponent
         if (item.IsStartCooldown)
         {
             TimerCooldown.Start(item.StartTimeCooldown);
-            return item;
+            Locker.Unlock(this);
         }
-        
-        if (item.IsStartTimer == false) Locker.Unlock(this);
-        
+        else if (item.IsStartTimer == false && Rewards.IsComplete == false) Locker.Unlock(this);
+
         return item;
     }
     
