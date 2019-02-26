@@ -9,9 +9,11 @@ public class FogProgressView : UIBoardView
     [SerializeField] private RectTransform line;
     [SerializeField] private RectTransform lineFake;
     [SerializeField] private float barWidth;
-
+    [SerializeField] private Transform hintAnchor;
+    
     private Image light;
     private const float delay = 0.5f;
+    private HintArrowView arrow;
     
     protected override ViewType Id => ViewType.FogProgress;
 
@@ -44,6 +46,11 @@ public class FogProgressView : UIBoardView
         DOTween.Kill(line);
         DOTween.Kill(lineFake);
         DOTween.Kill(light);
+
+        if (arrow != null)
+        {
+            arrow.Remove(0);
+        }
         
         base.ResetViewOnDestroy();
     }
@@ -67,15 +74,30 @@ public class FogProgressView : UIBoardView
     public void UpdateFakeProgress(int value)
     {
         DOTween.Kill(lineFake);
-        
-        value = Mathf.Clamp(fog.AlreadyPaid.Amount + value, fog.AlreadyPaid.Amount, fog.Def.Condition.Amount);
+
+        var progressValue = value;
+        progressValue = Mathf.Clamp(fog.AlreadyPaid.Amount + progressValue, fog.AlreadyPaid.Amount, fog.Def.Condition.Amount);
         
         lineFake
-            .DOSizeDelta(new Vector2(Progress(lineFake, fog.Def.Condition.Amount, value, out var time), lineFake.sizeDelta.y), time * 0.5f)
+            .DOSizeDelta(new Vector2(Progress(lineFake, fog.Def.Condition.Amount, progressValue, out var time), lineFake.sizeDelta.y), time * 0.5f)
             .SetId(lineFake)
             .SetEase(Ease.Linear);
+
+        if (value > 0)
+        {
+            AddArrow();
+        }
     }
-    
+
+    private void AddArrow()
+    {
+        if (arrow == null)
+        {
+            arrow = HintArrowView.Show(hintAnchor, 0, 0, false, false, 0);
+            arrow.AddOnRemoveAction(() => { arrow = null; });
+        }
+    }
+
     private float Progress(RectTransform target, float required, float current, out float time)
     {
         var progress = barWidth*(current/required);
