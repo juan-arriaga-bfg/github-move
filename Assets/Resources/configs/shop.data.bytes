@@ -9,7 +9,7 @@
     ],
     "Price": {
       "Currency": "Coins",
-      "Amount": 200
+      "Amount": 0
     },
     "Icon": "EnergyShopIcon1"
   },
@@ -18,12 +18,12 @@
     "Products": [
       {
         "Currency": "Energy",
-        "Amount": 50
+        "Amount": 1
       }
     ],
     "Price": {
       "Currency": "Coins",
-      "Amount": 350
+      "Amount": 7
     },
     "Icon": "EnergyShopIcon2"
   },
@@ -40,6 +40,24 @@
       "Amount": 500
     },
     "Icon": "EnergyShopIcon3"
+  },
+  {
+    "Uid": "Energy",
+    "Products": [
+      {
+        "Currency": "Energy",
+        "Amount": 30
+      }
+    ]
+  },
+  {
+    "Uid": "Energy",
+    "Products": [
+      {
+        "Currency": "Energy",
+        "Amount": 99
+      }
+    ]
   },
   {
     "Uid": "Coins",
