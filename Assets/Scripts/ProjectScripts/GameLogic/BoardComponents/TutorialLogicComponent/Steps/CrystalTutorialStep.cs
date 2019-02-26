@@ -3,20 +3,20 @@
     private readonly int crystal = PieceType.Boost_CR.Id;
     private readonly int target = PieceType.A6.Id;
 
-    private readonly BoardPosition targetPosition = new BoardPosition(20, 8, BoardLayer.Piece.Layer);
-    private readonly BoardPosition ignorePosition = new BoardPosition(19, 8, BoardLayer.Piece.Layer);
-    
+    private readonly BoardPosition targetPosition = new BoardPosition(20, 10, BoardLayer.Piece.Layer);
+    private readonly BoardPosition ignorePosition = new BoardPosition(19, 10, BoardLayer.Piece.Layer);
+
     public override void OnRegisterEntity(ECSEntity entity)
     {
         base.OnRegisterEntity(entity);
-        
+
         RegisterComponent(new CheckPieceTutorialCondition
         {
             ConditionType = TutorialConditionType.Start,
             Target = crystal,
             Amount = 1
         }, true);
-        
+
         RegisterComponent(new CheckPieceTutorialCondition
         {
             ConditionType = TutorialConditionType.Complete,
@@ -24,24 +24,24 @@
             Amount = 0
         }, true);
     }
-    
+
     public override void Perform()
     {
         if (IsPerform) return;
-        
+
         base.Perform();
-        
+
         Context.LockAll();
-        
+
         var unlock = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(target);
-        
+
         unlock.Add(ignorePosition);
         unlock.AddRange(Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(crystal));
-        
+
         Context.FadeAll(0.5f, unlock);
-        
+
         startTime = startTime.AddSeconds(-(Delay-0.5f));
-        
+
         BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.Locker.Lock(this);
         BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.DestroyAll();
 
@@ -52,19 +52,19 @@
     {
         if (Context.Context.BoardLogic.IsEmpty(targetPosition)) FirstStep();
         else SecondStep();
-        
+
         base.Execute();
     }
-    
+
     private void FirstStep()
     {
         var positions = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(target);
-        
+
         positions.Remove(ignorePosition);
-        
+
         Context.UnlockCell(targetPosition);
         Context.UnlockCells(positions);
-        
+
         from = positions[0];
         to = targetPosition;
     }
@@ -73,13 +73,13 @@
     {
         var posCrystals = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(crystal);
         var posTargets = Context.Context.BoardLogic.PositionsCache.GetPiecePositionsByType(target);
-        
+
         Context.UnlockAll();
         Context.LockAll();
-        
+
         Context.UnlockCells(posCrystals);
         Context.UnlockCells(posTargets);
-        
+
         from = posCrystals[0];
         to = posTargets[0];
     }
@@ -88,10 +88,10 @@
     {
         Context.FadeAll(1f, null);
         Context.UnlockAll();
-        
+
         UIService.Get.GetCachedModel<UIMainWindowModel>(UIWindowType.MainWindow).IsTutorial = false;
         BoardService.Current?.FirstBoard?.BoardLogic.FireflyLogic.Locker.Unlock(this);
-        
+
         base.Complete();
     }
 }
