@@ -186,14 +186,29 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
                 break;
             
             case GameEventsCodes.FogTap:
-                if (context == currentPiece != IsHighlighted && !observer.CanBeCleared())
+                var canBeCleared = observer.CanBeCleared();
+                if (context == currentPiece != IsHighlighted && !canBeCleared)
                 {
                     ToggleHighlight(context == currentPiece);
+                }
+
+                if (context == currentPiece && observer.CanBeFilled())
+                {
+                    PointToManaPieceOnBoard();
                 }
                 break;
         }
     }
-    
+
+    private void PointToManaPieceOnBoard()
+    {
+        bool isManaOnField = HighlightTaskPointToPieceHelper.FindAndPointToLastPieceInChain(PieceType.Mana1.Id);
+        if (!isManaOnField)
+        {
+            new HighlightTaskPointToOrdersButton().Highlight(null);
+        }
+    }
+
     public virtual void ToggleReadyToClear(bool enabled, bool isAnimate = false)
     {
         if (enabled == IsHighlighted && IsReadyToClear == enabled)

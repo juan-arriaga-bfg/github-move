@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using DG.Tweening;
+
+[Serializable]
+public class ViewAnchorLink
+{
+    public ViewType Key;
+    public Transform Anchor;
+}
 
 public class PieceBoardElementView : BoardElementView
 {
@@ -10,6 +16,7 @@ public class PieceBoardElementView : BoardElementView
 
     [SerializeField] private Transform selectionView;
     
+    [SerializeField] protected List<ViewAnchorLink> anchors;
     [SerializeField] protected List<SpriteRenderer> bodySprites;
     [SerializeField] protected List<ParticleSystem> particles;
     
@@ -102,6 +109,15 @@ public class PieceBoardElementView : BoardElementView
         CacheDefaultMaterials();
         
         CheckLock();
+    }
+
+    public Vector2 GetUIPosition(ViewType key)
+    {
+        var anchor = anchors.Find(link => link.Key == key);
+        
+        if (anchor == null) return Vector2.zero;
+
+        return anchor.Anchor.localPosition;
     }
 
     protected List<LockerComponent> GetPieceLockers()
@@ -373,7 +389,6 @@ public class PieceBoardElementView : BoardElementView
         
         particles.ForEach(particle => particle.gameObject.SetActive(!enabled));
         
-        
         isLockVisual = enabled;
     }
 
@@ -397,10 +412,10 @@ public class PieceBoardElementView : BoardElementView
     {
         for (int i = 0; i < lockedSubtrates.Count; i++)
         {
-            var lockedSubtrate = lockedSubtrates[i];
-            if (lockedSubtrate != null)
+            var lockedSubstrate = lockedSubtrates[i];
+            if (lockedSubstrate != null)
             {
-                Context.DestroyElement(lockedSubtrate);
+                Context.DestroyElement(lockedSubstrate);
             }
         }
         lockedSubtrates.Clear();
@@ -493,6 +508,27 @@ public class PieceBoardElementView : BoardElementView
         arrow = HintArrowView.Show(Piece.CachedPosition, 0, -0.5f, false, true);
     }
 
+    public void SetArrow(HintArrowView arrow)
+    {
+        if (arrow != null)
+        {
+            this.arrow = arrow;
+            this.arrow.AddOnRemoveAction(() =>
+            {
+                this.arrow = null;
+            });
+        }
+        else
+        {
+            Debug.LogError("[PieceBoardElementView] => SetArrow: Already exists!");
+        }
+    }
+
+    public HintArrowView GetArrow()
+    {
+        return arrow;
+    }
+    
     public void UpdateArrow()
     {
         if (arrow == null || (arrow.CachedPosition.X == Piece.CachedPosition.X && arrow.CachedPosition.Y == Piece.CachedPosition.Y)) return;

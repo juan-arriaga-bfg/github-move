@@ -37,9 +37,16 @@ public static class HighlightFogHelper
             Debug.LogError($"[HighlightFogHelper] => fog with id {fogUid} not found at {pos}!");
             return false;
         }
+        
+        var fogObserver = fogPiece.GetComponent<FogObserver>(FogObserver.ComponentGuid);
 
-        ViewDefinitionComponent viewDef = fogPiece.GetComponent<ViewDefinitionComponent>(ViewDefinitionComponent.ComponentGuid);
-        var views = viewDef.GetViews();
+        if (fogObserver?.LockView != null)
+        {
+            HintArrowView.Show(fogObserver.LockView.GetHintTarget());
+            return true;
+        }
+        
+        var views = fogPiece.ViewDefinition.GetViews();
         if (views == null || views.Count == 0)
         {
             Debug.LogError($"[HighlightFogHelper] => fog with id {fogUid} at {pos} have no views!");
@@ -47,14 +54,8 @@ public static class HighlightFogHelper
         }
 
         var view = views[0];
-        if (view is LockView)
-        {
-            Transform hintTarget = (view as LockView).GetHintTarget();
-            HintArrowView.Show(hintTarget);
-            return true;
-        }
 
-        if (view is FogProgressView)
+        if (view is FogProgressView || view is BubbleView)
         {
             var board = BoardService.Current.FirstBoard;
 

@@ -10,7 +10,6 @@ public class FadeAnimationView : AnimationView
     [SerializeField] private Ease easeType = Ease.Linear;
     
     private List<SpriteRenderer> spriteRenderers = new List<SpriteRenderer>();
-    protected PieceBoardElementView pieceView = null;
     public override void Play(PieceBoardElementView pieceView)
     {
         base.Play(pieceView);
@@ -24,14 +23,7 @@ public class FadeAnimationView : AnimationView
             sequence.Insert(0, spriteRenderer.DOFade(to, duration).SetEase(easeType));
         }   
        
-        sequence.InsertCallback(timeoutDuration, () => OnComplete?.Invoke());
+        sequence.InsertCallback(timeoutDuration, CompleteAnimation);
         
-        this.pieceView = pieceView;
-    }
-
-    public override void Stop()
-    {
-        if (this.pieceView != null)
-            DOTween.Kill(animationUid);
     }
 }

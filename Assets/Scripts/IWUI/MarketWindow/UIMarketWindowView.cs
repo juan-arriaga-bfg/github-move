@@ -10,6 +10,9 @@ public class UIMarketWindowView : UIGenericPopupWindowView
     [IWUIBinding("#ResetButtonLabel")] private NSText btnResetLabel;
     [IWUIBinding("#ResetButton")] private UIButtonViewController btnReset;
     
+    [IWUIBinding("#CloseMaskLeft")] private UIButtonViewController btnMaskLeft;
+    [IWUIBinding("#CloseMaskRight")] private UIButtonViewController btnMaskRight;
+    
     public override void OnViewShow()
     {
         base.OnViewShow();
@@ -42,6 +45,9 @@ public class UIMarketWindowView : UIGenericPopupWindowView
         base.OnViewShowCompleted();
         
         InitButtonBase(btnReset, OnClickReset);
+        
+        InitButtonBase(btnMaskLeft, Controller.CloseCurrentWindow);
+        InitButtonBase(btnMaskRight, Controller.CloseCurrentWindow);
     }
 
     public override void OnViewClose()

@@ -72,21 +72,17 @@ public class UINextLevelWindowView : UIGenericWindowView
     public override void OnViewCloseCompleted()
     {
         var manager = GameDataService.Current.LevelsManager;
-
+        
+        Analytics.SendPurchase("screen_levelup", "item1", null, new List<CurrencyPair>(manager.Rewards), false, false);
+        
         CurrencyHelper.Purchase(manager.Rewards, null, new Vector2(Screen.width/2, Screen.height/2));
         CurrencyHelper.Purchase(Currency.Level.Name, 1, Currency.Experience.Name, manager.Price);
         CurrencyHelper.Purchase(Currency.EnergyLimit.Name, 1);
-        
-        var limitValue = ProfileService.Current.GetStorageItem(Currency.EnergyLimit.Name).Amount;
-
-        var tutorial = BoardService.Current.FirstBoard.TutorialLogic;
-        if (tutorial.CheckLockEnergy()) CurrencyHelper.Purchase(Currency.Energy.Name, limitValue);
         
         GameDataService.Current.QuestsManager.StartNewQuestsIfAny();
         GameDataService.Current.LevelsManager.UpdateSequence();
         
         Analytics.SendLevelReachedEvent(GameDataService.Current.LevelsManager.Level);
-        Analytics.SendPurchase("screen_levelup", "item1", null, new List<CurrencyPair>(manager.Rewards), false, false);
         
         base.OnViewCloseCompleted();
     }

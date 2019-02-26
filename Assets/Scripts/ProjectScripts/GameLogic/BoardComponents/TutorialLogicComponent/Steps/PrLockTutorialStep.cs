@@ -1,4 +1,4 @@
-public class PrLockTutorialStep : DelayTutorialStep
+public class PrLockTutorialStep : BaseTutorialStep
 {
     protected override void Complete()
     {
@@ -6,15 +6,10 @@ public class PrLockTutorialStep : DelayTutorialStep
         
         var logic = BoardService.Current.FirstBoard.BoardLogic;
         var positions = logic.PositionsCache.GetPiecePositionsByFilter(PieceTypeFilter.ProductionField, PieceTypeFilter.Obstacle);
+        
         foreach (var pos in positions)
         {
-            var piece = logic.GetPieceAt(pos);
-            
-            //disable PR particles
-            if(piece.ActorView == null) continue;
-            var view = piece.ActorView as ReproductionPieceView;
-            if(view == null) continue;
-            view.OnTutorialEnd();
+            logic.GetPieceAt(pos)?.TutorialLocker?.Complete();
         }
     }
 }

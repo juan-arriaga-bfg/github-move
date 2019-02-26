@@ -78,7 +78,7 @@
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "9_CreatePiece_PR_C5",
     "PieceUid": "PR_C5",
-    "TargetValue": 3,
+    "TargetValue": 6,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "quest.create.piece.title",
@@ -245,7 +245,7 @@
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "24_CreatePiece_PR_D5",
     "PieceUid": "PR_D5",
-    "TargetValue": 4,
+    "TargetValue": 6,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "quest.create.piece.title",
@@ -504,7 +504,7 @@
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "45_CreatePiece_PR_B5",
     "PieceUid": "PR_B5",
-    "TargetValue": 3,
+    "TargetValue": 10,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "quest.create.piece.title",
@@ -516,7 +516,7 @@
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "46_CreatePiece_PR_E5",
     "PieceUid": "PR_E5",
-    "TargetValue": 5,
+    "TargetValue": 10,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "quest.create.piece.title",
@@ -630,17 +630,6 @@
       "QuestDescriptionComponent": {
         "Title": "quest.create.piece.title",
         "Message": "quest.create.piece.message"
-      }
-    }
-  },
-  {
-    "$type": "TaskCollectIngredientEntity, GameAssembly",
-    "Id": "56_CollectIngredient",
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Ico": "NPC_Gnome",
-        "Title": "quest.collect.ingredient.title",
-        "Message": "quest.collect.ingredient.message"
       }
     }
   },
@@ -760,55 +749,7 @@
     "$type": "TaskCreatePieceEntity, GameAssembly",
     "Id": "66_CreatePiece_NPC_B3",
     "PieceUid": "NPC_B3",
-    "TargetValue": 4,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Title": "quest.create.piece.title",
-        "Message": "quest.create.piece.message"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "67_CreatePiece_NPC_B4",
-    "PieceUid": "NPC_B4",
     "TargetValue": 2,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Title": "quest.create.piece.title",
-        "Message": "quest.create.piece.message"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "68_CreatePiece_NPC_B5",
-    "PieceUid": "NPC_B5",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Title": "quest.create.piece.title",
-        "Message": "quest.create.piece.message"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "69_CreatePiece_NPC_B6",
-    "PieceUid": "NPC_B6",
-    "TargetValue": 1,
-    "ComponentsCache": {
-      "QuestDescriptionComponent": {
-        "Title": "quest.create.piece.title",
-        "Message": "quest.create.piece.message"
-      }
-    }
-  },
-  {
-    "$type": "TaskCreatePieceEntity, GameAssembly",
-    "Id": "70_CreatePiece_NPC_B7",
-    "PieceUid": "NPC_B7",
-    "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
         "Title": "quest.create.piece.title",
@@ -828,6 +769,37 @@
         "Message": "quest.create.piece.message"
       }
     }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "72_CreatePiece_CR",
+    "PieceUid": "Boost_CR",
+    "TargetValue": 3,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCompleteOrderEntity, GameAssembly",
+    "Id": "73_CompleteOrder",
+    "PieceUid": "NPC_C",
+    "TargetValue": 5,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "NPC_C",
+        "Title": "quest.complete.orders.title",
+        "Message": "quest.complete.orders.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "74_CreatePiece_PR_D4",
+    "PieceUid": "PR_D4",
+    "TargetValue": 1
   },
   {
     "$type": "TaskCompleteDailyTaskEntity, GameAssembly",
@@ -887,7 +859,7 @@
       },
       "QuestDescriptionComponent": {
         "Ico": "matchDailyQuestIcon",
-        "Message": "Make any merges"
+        "Message": "quest.match.message"
       }
     }
   },
@@ -908,7 +880,7 @@
       },
       "QuestDescriptionComponent": {
         "Ico": "quest_icon_super_match",
-        "Message": "Merge {0} or more objects in one turn"
+        "Message": "quest.supermatch.message"
       }
     }
   },
@@ -928,7 +900,7 @@
       },
       "QuestDescriptionComponent": {
         "Ico": "collectIngredientDailyQuestIcon",
-        "Message": "Collect ingredients"
+        "Message": "quest.collect.ingredient.message"
       }
     }
   },
@@ -948,7 +920,7 @@
       },
       "QuestDescriptionComponent": {
         "Ico": "NPC_Gnome",
-        "Message": "Use workers"
+        "Message": "quest.use.worker.message"
       }
     }
   },
@@ -968,7 +940,7 @@
       },
       "QuestDescriptionComponent": {
         "Ico": "quest_icon_open_chest",
-        "Message": "Open chests"
+        "Message": "quest.open.chest.message"
       }
     }
   },
@@ -988,7 +960,7 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Message": "Collect coins"
+        "Message": "quest.сurrency.сollect.soft.message"
       }
     }
   },
@@ -1008,7 +980,7 @@
       },
       "QuestDescriptionComponent": {
         "Ico": "collectIngredientDailyQuestIcon",
-        "Message": "Collect ingredients"
+        "Message": "quest.collect.ingredient.message"
       }
     }
   },
@@ -1028,7 +1000,7 @@
       },
       "QuestDescriptionComponent": {
         "Ico": "NPC_Gnome",
-        "Message": "Use workers"
+        "Message": "quest.use.worker.message"
       }
     }
   },
@@ -1048,7 +1020,7 @@
       },
       "QuestDescriptionComponent": {
         "Ico": "CompleateOrderDailyQuestIcon",
-        "Message": "Complete orders"
+        "Message": "quest.complete.orders.message"
       }
     }
   },
@@ -1068,7 +1040,7 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Message": "Spend coins"
+        "Message": "quest.spend.currency.soft.message"
       }
     }
   },
@@ -1088,7 +1060,7 @@
         ]
       },
       "QuestDescriptionComponent": {
-        "Message": "Spend rubies"
+        "Message": "quest.spend.currency.hard.message"
       }
     }
   },
@@ -1108,7 +1080,7 @@
       },
       "QuestDescriptionComponent": {
         "Ico": "killFieldDailyQuestIcon",
-        "Message": "Remove dead fields"
+        "Message": "quest.kill.field.message"
       }
     }
   },
@@ -1128,7 +1100,7 @@
       },
       "QuestDescriptionComponent": {
         "Ico": "quest_icon_open_chest",
-        "Message": "Open chests"
+        "Message": "quest.open.chest.message"
       }
     }
   }

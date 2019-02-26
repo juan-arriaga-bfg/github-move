@@ -88,7 +88,14 @@ public class UIQuestWindowView : UIGenericPopupWindowView
         progressLabel.Text  = GetProgressText();
         buttonLabel.Text  = GetButtonText();
         
-        buttonLabel.gameObject.SetActive(model.Quest.IsInProgress());
+        findButton.gameObject.SetActive(model.Quest.IsInProgress()); 
+        
+#if DEBUG // Hack to get the button enabled when opened from Quest Cheats window
+        if (UIService.Get.GetShowedWindowByName(UIWindowType.QuestCheatSheetWindow))
+        {
+            findButton.gameObject.SetActive(true);
+        }
+#endif        
     }
 
     public override void OnViewCloseCompleted()

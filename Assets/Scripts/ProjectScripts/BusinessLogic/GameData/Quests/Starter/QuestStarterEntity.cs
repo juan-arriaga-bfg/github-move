@@ -26,7 +26,7 @@ public class QuestStarterEntity : ECSEntity, IECSSerializeable
     
     [JsonProperty] public QuestStarterMode Mode { get; protected set; }
     
-    [JsonProperty] public List<string> QuestToStartIds { get; protected set; }
+    [JsonProperty] public HashSet<string> QuestToStartIds { get; protected set; }
     
     [JsonProperty] public List<QuestStartConditionComponent> Conditions = new List<QuestStartConditionComponent>();
     

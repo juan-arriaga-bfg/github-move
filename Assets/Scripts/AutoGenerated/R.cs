@@ -294,7 +294,6 @@ public class R
      public const string NPC_B2Piece = "NPC_B2Piece";
      public const string NPC_B3Piece = "NPC_B3Piece";
      public const string NPC_B4Piece = "NPC_B4Piece";
-     public const string NPC_B5Piece = "NPC_B5Piece";
      public const string NPC_D1Piece = "NPC_D1Piece";
      public const string NPC_D2Piece = "NPC_D2Piece";
      public const string NPC_D3Piece = "NPC_D3Piece";
@@ -334,4 +333,5 @@ public class R
      public const string BackgroundWater = "BackgroundWater";
      public const string BorderLeftHole = "BorderLeftHole";
      public const string BorderBottomHole = "BorderBottomHole";
+     public const string RewardDropParticles = "RewardDropParticles";
 }

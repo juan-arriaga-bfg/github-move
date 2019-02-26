@@ -11,8 +11,6 @@ public class RewardsStoreComponent : IECSComponent
     public Func<Dictionary<int, int>> GetRewards;
     public Action<bool> OnComplete;
     
-    public Vector2 BubbleOffset = new Vector3(0, 1.5f);
-    
     public string Icon => PieceType.Parse(next);
     public bool IsHighlight => rewards != null && rewards.Sum(pair => pair.Value) < defaultAmount;
     
@@ -176,8 +174,6 @@ public class RewardsStoreComponent : IECSComponent
         
         if (isShow)
         {
-            view.Offset = BubbleOffset;
-            view.SetOffset();
             view.OnClickAction = GetInBubble;
             context.Context.HintCooldown.AddView(view);
         }
@@ -195,6 +191,7 @@ public class RewardsStoreComponent : IECSComponent
 
     private void Scatter()
     {
+        var filter = PieceType.GetDefById(context.PieceType).Filter;
         context.Context.ActionExecutor.AddAction(new ScatterPiecesAction
         {
             IsSingle = IsSingle,
@@ -205,7 +202,8 @@ public class RewardsStoreComponent : IECSComponent
             {
                 IsScatter = false;
                 OnComplete(value);
-            }
+            },
+            RewardEffect = filter.Has(PieceTypeFilter.Chest) || filter.Has(PieceTypeFilter.Obstacle)
         });
     }
 }

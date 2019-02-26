@@ -99,7 +99,7 @@ public class CooldownPieceView : PieceBoardElementView
 
     public virtual void ToggleEffectsByState(bool isProcessing)
     {
-        if (isLockVisual) return;
+        if (isLockVisual || Piece.TutorialLocker != null) return;
         
         ClearParticle(ref processParticle);
         ClearParticle(ref readyParticle);

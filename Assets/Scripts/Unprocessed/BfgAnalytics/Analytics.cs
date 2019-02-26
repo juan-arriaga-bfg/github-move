@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using IW.SimpleJSON;
 using UnityEngine;
@@ -57,13 +58,28 @@ namespace BfgAnalytics
         }
 
 		public static void SendTutorialStartStepEvent(string name)
-        {           
-            AnalyticsService.Current?.Event("ftue", null, name, "start", TutorialJsonData());
+        {   
+            JSONNode customJsonData = new JSONObject();
+            JSONNode ctrNode = new JSONObject();
+
+            customJsonData["ctr"] = ctrNode;
+
+            ctrNode["seconds"] = 0;
+            
+            AnalyticsService.Current?.Event("ftue", null, name, "start", TutorialJsonData(), customJsonData);
         }
 
-        public static void SendTutorialEndStepEvent(string name)
+        public static void SendTutorialEndStepEvent(string name, DateTime startTime)
         {
-            AnalyticsService.Current?.Event("ftue", null, name, "end", TutorialJsonData());
+            JSONNode customJsonData = new JSONObject();
+            JSONNode ctrNode = new JSONObject();
+
+            customJsonData["ctr"] = ctrNode;
+
+            var seconds = (DateTime.UtcNow - startTime).TotalSeconds;
+            ctrNode["seconds"] = (int)Math.Round(seconds);
+            
+            AnalyticsService.Current?.Event("ftue", null, name, "end", TutorialJsonData(), customJsonData);
         }
         
         public static void SendPurchase(string location, string reason, List<CurrencyPair> spend, List<CurrencyPair> collect, bool isIap, bool isFree)

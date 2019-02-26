@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,16 +29,15 @@ public class BoardTimerView : UIBoardView, IBoardEventListener
     private TimerViewSate timerState;
     
     protected override ViewType Id => ViewType.BoardTimer;
-    
+
+    protected override Vector3 offset => new Vector3(0, -0.2f);
+
     public override void Init(Piece piece)
     {
         base.Init(piece);
         
         Priority = defaultPriority = 10;
         
-        Offset = multiSize == 1 ? Offset : new Vector3(0, 1.3f);
-        
-        SetOffset();
         SetTimer(Context.GetComponent<TimerComponent>(TimerComponent.ComponentGuid));
         SetHourglass(false);
         

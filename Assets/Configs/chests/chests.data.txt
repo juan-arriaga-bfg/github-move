@@ -36,18 +36,18 @@
   {
     "Uid": "CH_NPC",
     "ProductionAmount": {
-      "Min": 2,
-      "Max": 4
+      "Min": 0,
+      "Max": 0
     },
     "ResourcesAmount": {
-      "Min": 2,
-      "Max": 4
+      "Min": 0,
+      "Max": 0
     },
     "CharactersAmount": {
-      "Min": 2,
-      "Max": 4
+      "Min": 4,
+      "Max": 5
     },
-    "PieceAmount": 6,
+    "PieceAmount": 3,
     "PieceWeights": [
       {
         "Uid": "Soft1",
@@ -70,38 +70,42 @@
   {
     "Uid": "CH1_A",
     "ProductionAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 1
     },
     "ResourcesAmount": {
       "Min": 0,
       "Max": 0
     },
     "CharactersAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 1
     },
     "PieceAmount": 3,
     "PieceWeights": [
       {
         "Uid": "A1",
         "Weight": 5
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 1
       }
     ]
   },
   {
     "Uid": "CH2_A",
     "ProductionAmount": {
-      "Min": 1,
-      "Max": 3
+      "Min": 0,
+      "Max": 1
     },
     "ResourcesAmount": {
       "Min": 0,
-      "Max": 0
+      "Max": 1
     },
     "CharactersAmount": {
       "Min": 1,
-      "Max": 3
+      "Max": 2
     },
     "PieceAmount": 5,
     "PieceWeights": [
@@ -167,18 +171,18 @@
   {
     "Uid": "CH1_B",
     "ProductionAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 1
     },
     "ResourcesAmount": {
       "Min": 0,
       "Max": 0
     },
     "CharactersAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 0,
+      "Max": 1
     },
-    "PieceAmount": 5,
+    "PieceAmount": 4,
     "PieceWeights": [
       {
         "Uid": "B1",
@@ -187,14 +191,18 @@
       {
         "Uid": "B2",
         "Weight": 1
+      },
+      {
+        "Uid": "Boost_CR1",
+        "Weight": 1
       }
     ]
   },
   {
     "Uid": "CH2_B",
     "ProductionAmount": {
-      "Min": 2,
-      "Max": 4
+      "Min": 0,
+      "Max": 1
     },
     "ResourcesAmount": {
       "Min": 0,
@@ -202,9 +210,9 @@
     },
     "CharactersAmount": {
       "Min": 1,
-      "Max": 3
+      "Max": 2
     },
-    "PieceAmount": 8,
+    "PieceAmount": 6,
     "PieceWeights": [
       {
         "Uid": "B2",
@@ -217,6 +225,11 @@
       },
       {
         "Uid": "Boost_CR1",
+        "Weight": 2,
+        "Override": true
+      },
+      {
+        "Uid": "Boost_CR2",
         "Weight": 1
       }
     ]
@@ -224,8 +237,8 @@
   {
     "Uid": "CH3_B",
     "ProductionAmount": {
-      "Min": 2,
-      "Max": 5
+      "Min": 1,
+      "Max": 2
     },
     "ResourcesAmount": {
       "Min": 1,
@@ -235,7 +248,7 @@
       "Min": 2,
       "Max": 3
     },
-    "PieceAmount": 11,
+    "PieceAmount": 8,
     "PieceWeights": [
       {
         "Uid": "B1",
@@ -256,6 +269,11 @@
         "Uid": "Boost_CR1",
         "Weight": 2,
         "Override": true
+      },
+      {
+        "Uid": "Boost_CR2",
+        "Weight": 3,
+        "Override": true
       }
     ]
   },
@@ -270,8 +288,8 @@
       "Max": 0
     },
     "CharactersAmount": {
-      "Min": 0,
-      "Max": 0
+      "Min": 1,
+      "Max": 2
     },
     "PieceAmount": 4,
     "PieceWeights": [
@@ -296,8 +314,8 @@
       "Max": 1
     },
     "CharactersAmount": {
-      "Min": 0,
-      "Max": 1
+      "Min": 1,
+      "Max": 3
     },
     "PieceAmount": 6,
     "PieceWeights": [
@@ -328,8 +346,8 @@
       "Max": 2
     },
     "CharactersAmount": {
-      "Min": 1,
-      "Max": 2
+      "Min": 2,
+      "Max": 3
     },
     "PieceAmount": 8,
     "PieceWeights": [

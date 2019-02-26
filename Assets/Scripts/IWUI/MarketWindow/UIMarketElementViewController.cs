@@ -181,7 +181,7 @@ public class UIMarketElementViewController : UISimpleScrollElementViewController
 	{
 		var contentEntity = entity as UIMarketElementEntity;
 		
-		Analytics.SendPurchase($"market{CachedTransform.GetSiblingIndex()}", $"item{contentEntity.Def.Index}", new List<CurrencyPair>{contentEntity.Def.Current.Price}, null, false, false);
+		Analytics.SendPurchase($"market{CachedTransform.GetSiblingIndex() + 1}", $"item{contentEntity.Def.Index + 1}", new List<CurrencyPair>{contentEntity.Def.Current.Price}, null, false, false);
 		CurrencyHelper.Purchase(Currency.Market.Name, 1, contentEntity.Def.Current.Price, success =>
 		{
 			if (success == false)

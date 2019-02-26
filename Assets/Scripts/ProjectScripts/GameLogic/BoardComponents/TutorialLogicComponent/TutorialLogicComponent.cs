@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
@@ -17,8 +18,10 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
     public override void OnRegisterEntity(ECSEntity entity)
     {
         Context = entity as BoardController;
-        SaveCompleted = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid)?.Complete ?? new List<int>();
-        SaveStarted = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid)?.Started ?? new List<int>();
+        
+        var tutorialSave = ProfileService.Current.GetComponent<TutorialSaveComponent>(TutorialSaveComponent.ComponentGuid);
+        SaveCompleted = tutorialSave?.Complete ?? new List<int>();
+        SaveStarted = tutorialSave?.Started ?? new List<int>();
         
         UnlockFirefly(false);
         UnlockOrders(false);
@@ -212,6 +215,25 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
             if (pieceView != null) pieceView.SetFade(alpha, 1f);
         }
     }
+
+    public void ResetStartTime()
+    {
+        BoardService.Current.FirstBoard.BoardLogic.FireflyLogic.ResetTutorialStartTime();
+        
+        var collection = GetComponent<ECSComponentCollection>(BaseTutorialStep.ComponentGuid);
+        var components = collection?.Components;
+
+        if (components == null) return;
+
+        for (var i = 0; i < components.Count; i++)
+        {
+            var step = components[i] as BaseTutorialStep;
+
+            if (step?.IsPerform != true) continue;
+            
+            step.StartTime = DateTime.UtcNow;
+        }
+    }
     
     private void UnlockFirefly(bool isRun)
     {
@@ -227,16 +249,6 @@ public class TutorialLogicComponent : ECSEntity, ILockerComponent
         
         var orders = GameDataService.Current.OrdersManager;
         orders.Locker.Unlock(orders);
-    }
-    
-    public bool CheckLockPR()
-    {
-        return SaveCompleted.Contains(TutorialBuilder.LockPRStepIndex);
-    }
-    
-    public bool CheckLockEnergy()
-    {
-        return SaveCompleted.Contains(TutorialBuilder.LockEnergyStep);
     }
     
     public bool CheckLockOrders()

@@ -2002,51 +2002,6 @@
       "y": 66.0
     },
     "TextIconScale": 1.0,
-    "Uid": "NPC_5",
-    "SpriteName": "NPC_5",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character",
-    "SpriteSheetName": "gamefield2",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "IsUseCustomTextAssetSettings": true,
-    "TextIconScaleXAdvance": 98.0,
-    "TextIconOffset": {
-      "x": -49.0,
-      "y": 66.0
-    },
-    "TextIconScale": 1.0,
-    "Uid": "NPC_6",
-    "SpriteName": "NPC_6",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character",
-    "SpriteSheetName": "gamefield2",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "IsUseCustomTextAssetSettings": true,
-    "TextIconScaleXAdvance": 98.0,
-    "TextIconOffset": {
-      "x": -49.0,
-      "y": 66.0
-    },
-    "TextIconScale": 1.0,
-    "Uid": "NPC_7",
-    "SpriteName": "NPC_7",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces2/Character",
-    "SpriteSheetName": "gamefield2",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "IsUseCustomTextAssetSettings": true,
-    "TextIconScaleXAdvance": 98.0,
-    "TextIconOffset": {
-      "x": -49.0,
-      "y": 66.0
-    },
-    "TextIconScale": 1.0,
     "Uid": "NPC_G",
     "SpriteName": "NPC_G",
     "BundleName": "graphicscommon",
@@ -4027,66 +3982,6 @@
       "y": 0.0
     },
     "TextIconScale": 1.0,
-    "Uid": "NPC_B5",
-    "SpriteName": "NPC_B5",
-    "BundleName": "graphicscommon",
-    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/NPC_B",
-    "SpriteSheetName": "gamefield",
-    "SpriteSheetPath": "Assets/Content/ProcessedContent"
-  },
-  {
-    "IsUseCustomTextAssetSettings": false,
-    "TextIconScaleXAdvance": 0.0,
-    "TextIconOffset": {
-      "x": 0.0,
-      "y": 0.0
-    },
-    "TextIconScale": 1.0,
-    "Uid": "NPC_B6",
-    "SpriteName": "NPC_B6",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/NPC_B",
-    "SpriteSheetName": "NPC_B6",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/NPC_B"
-  },
-  {
-    "IsUseCustomTextAssetSettings": false,
-    "TextIconScaleXAdvance": 0.0,
-    "TextIconOffset": {
-      "x": 0.0,
-      "y": 0.0
-    },
-    "TextIconScale": 1.0,
-    "Uid": "NPC_B7",
-    "SpriteName": "NPC_B7",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/NPC_B",
-    "SpriteSheetName": "NPC_B7",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/NPC_B"
-  },
-  {
-    "IsUseCustomTextAssetSettings": false,
-    "TextIconScaleXAdvance": 0.0,
-    "TextIconOffset": {
-      "x": 0.0,
-      "y": 0.0
-    },
-    "TextIconScale": 1.0,
-    "Uid": "NPC_B8",
-    "SpriteName": "NPC_B8",
-    "BundleName": null,
-    "AssetPath": "Assets/Content/SourceContent/Textures/Pieces/NPC_B",
-    "SpriteSheetName": "NPC_B8",
-    "SpriteSheetPath": "Assets/Content/SourceContent/Textures/Pieces/NPC_B"
-  },
-  {
-    "IsUseCustomTextAssetSettings": false,
-    "TextIconScaleXAdvance": 0.0,
-    "TextIconOffset": {
-      "x": 0.0,
-      "y": 0.0
-    },
-    "TextIconScale": 1.0,
     "Uid": "NPC_C1",
     "SpriteName": "NPC_C1",
     "BundleName": "graphicscommon",
@@ -4661,6 +4556,66 @@
     "SpriteName": "Collection_F_Icon",
     "BundleName": "graphicscommon",
     "AssetPath": "Assets/Content/SourceContent/UI/Icons",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
+    "Uid": "arrowBubbleBody_danger",
+    "SpriteName": "arrowBubbleBody_danger",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/SourceContent/UI/Windows/Orders",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
+    "Uid": "bubbleBody_danger",
+    "SpriteName": "bubbleBody_danger",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/SourceContent/UI/Windows/Orders",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
+    "Uid": "bubbleBody_normal",
+    "SpriteName": "bubbleBody_normal",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/SourceContent/UI/Windows/Orders",
+    "SpriteSheetName": "uicommon",
+    "SpriteSheetPath": "Assets/Content/ProcessedContent"
+  },
+  {
+    "IsUseCustomTextAssetSettings": false,
+    "TextIconScaleXAdvance": 0.0,
+    "TextIconOffset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "TextIconScale": 1.0,
+    "Uid": "arrowBubbleBody_normal",
+    "SpriteName": "arrowBubbleBody_normal",
+    "BundleName": "graphicscommon",
+    "AssetPath": "Assets/Content/SourceContent/UI/Windows/Orders",
     "SpriteSheetName": "uicommon",
     "SpriteSheetPath": "Assets/Content/ProcessedContent"
   }

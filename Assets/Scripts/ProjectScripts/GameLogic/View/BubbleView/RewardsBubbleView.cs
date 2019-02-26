@@ -6,25 +6,20 @@ using UnityEngine.UI;
 public class RewardsBubbleView : UIBoardView
 {
 	[SerializeField] private List<Image> borders;
+	
+	public override bool IsTop => true;
 
+	protected override Vector3 offset => new Vector3(0, 1.3f);
+	
 	protected override ViewType Id => ViewType.RewardsBubble;
 
 	private RewardsStoreComponent storage;
 	
 	public Action OnClickAction;
-
-	public override void SetOffset()
-	{
-		CachedTransform.localPosition = controller.GetViewPositionTop(multiSize) + Offset;
-	}
-
+	
 	public override void Init(Piece piece)
 	{
 		base.Init(piece);
-        
-		Offset = new Vector3(0, 1.5f);
-        
-		SetOffset();
         
 		Priority = defaultPriority = 11;
         
@@ -46,7 +41,8 @@ public class RewardsBubbleView : UIBoardView
 		
 		foreach (var border in borders)
 		{
-			border.color = storage.IsHighlight ? Color.red : Color.white;
+			var id = border.sprite.name.Split('_')[0];
+			border.sprite = IconService.Current.GetSpriteById($"{id}{(storage.IsHighlight ? "_danger" : "_normal")}");
 		}
 	}
 

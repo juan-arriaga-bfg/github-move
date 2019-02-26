@@ -25,7 +25,10 @@ public static class HighlightTaskPointToPieceHelper
         return true;
     }
     
-    public static bool FindAndPointToRandomPredecessorPiece(int pieceId)
+    /// <summary>
+    /// Find A1, A2, A3 when pieceId == A4. If includeTarget is set, A4 will also be included
+    /// </summary>
+    public static bool FindAndPointToRandomPredecessorPiece(int pieceId, bool includeTarget)
     {
         var boardLogic = BoardService.Current.FirstBoard.BoardLogic;
         var board = BoardService.Current.FirstBoard;
@@ -38,6 +41,10 @@ public static class HighlightTaskPointToPieceHelper
         {
             if (pieceId == id)
             {
+                if (includeTarget)
+                {
+                    croppedChain.Add(id);
+                }
                 break;
             }
             
@@ -91,5 +98,48 @@ public static class HighlightTaskPointToPieceHelper
         BoardPosition selectedPosition = positions[index];
 
         HintArrowView.Show(selectedPosition, 0f, -0.5f);
+    }
+    
+    /// <summary>
+    /// If we set pieceId = A5 and we have A1, A2, A7 on board, A7 will be highlighted
+    /// No random here! First available (or first locked if no avaulable) piece will be used
+    /// </summary>
+    public static bool FindAndPointToLastPieceInChain(int pieceId)
+    {
+        var boardLogic = BoardService.Current.FirstBoard.BoardLogic;
+        var definition = boardLogic.MatchDefinition;
+        var idToCheck = definition.GetLast(pieceId);
+
+        BoardPosition? backup = null; 
+        
+        while (idToCheck != PieceType.None.Id)
+        {
+            var piecesPositions = boardLogic.PositionsCache.GetPiecePositionsByType(idToCheck);
+
+            if (piecesPositions.Count > 0)
+            {
+                var accessiblePoints = HighlightTaskPathHelper.GetAccessiblePositions(piecesPositions);
+                if (accessiblePoints.Count > 0)
+                {
+                    HintArrowView.Show(accessiblePoints[0], 0f, -0.5f);
+                    return true;
+                }
+
+                if (!backup.HasValue)
+                {
+                    backup = piecesPositions[0];
+                }
+            }
+
+            idToCheck = definition.GetPrevious(idToCheck);
+        }
+
+        if (backup.HasValue)
+        {
+            HintArrowView.Show(backup.Value, 0f, -0.5f);
+            return true;
+        }
+
+        return false;
     }
 }

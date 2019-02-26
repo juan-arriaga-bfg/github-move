@@ -239,6 +239,8 @@ public class UIMainWindowView : UIBaseWindowView
         }
         
         UIService.Get.ShowWindow(UIWindowType.MarketWindow);
+        
+        CachedHintArrowComponent.HideArrow(HintAnchorShopButton);
     }
     
     public void OnClickOrders()
@@ -253,6 +255,8 @@ public class UIMainWindowView : UIBaseWindowView
         if(model.Orders != null && model.Orders.Count > 0) model.Select = model.Orders[0];
         
         UIService.Get.ShowWindow(UIWindowType.OrdersWindow);
+        
+        CachedHintArrowComponent.HideArrow(HintAnchorOrdersButton);
     }
     
     public void OnClickDailyQuest()
@@ -264,6 +268,8 @@ public class UIMainWindowView : UIBaseWindowView
         }
         
         UIService.Get.ShowWindow(UIWindowType.DailyQuestWindow);
+        
+        CachedHintArrowComponent.HideArrow(HintAnchorDailyButton);
     }
     
     public void OnClickOptions()

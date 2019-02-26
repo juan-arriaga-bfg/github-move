@@ -10,11 +10,13 @@ public class UIBoardView : BoardElementView
     
     [SerializeField] protected Transform anchor;
 
-    protected ViewAnimationUid attentionUid = new ViewAnimationUid();
+    protected readonly ViewAnimationUid attentionUid = new ViewAnimationUid();
     protected ViewDefinitionComponent controller;
     protected Piece Context;
     
     private Transform content;
+
+    public virtual bool IsTop { get; set; }
     
     public Canvas GetCanvas()
     {
@@ -29,13 +31,9 @@ public class UIBoardView : BoardElementView
     public Action OnShow;
     public Action OnHide;
     
-    protected int multiSize;
-    
     public bool IsShow { get; set; }
     
     private int priority = 0;
-    private Vector3 offset = new Vector3(0, 0.5f);
-    
     protected int defaultPriority;
     
     public int Priority
@@ -47,12 +45,8 @@ public class UIBoardView : BoardElementView
     public int Layer => defaultPriority;
 
     protected virtual ViewType Id { get; set; }
-    
-    public virtual Vector3 Offset
-    {
-        get { return offset; }
-        set { offset = value; }
-    }
+
+    protected virtual Vector3 offset => new Vector3(0, 0);
     
     public virtual void Init(Piece piece)
     {
@@ -60,15 +54,12 @@ public class UIBoardView : BoardElementView
         ResetAnimation();
         UpdateVisibility(false);
         controller = Context.ViewDefinition;
-        multiSize = GetMultiSize();
-        SetOffset();
     }
 
     public override void ResetViewOnDestroy()
     {
         IsShow = false;
         ResetAnimation();
-        offset = new Vector3(0, 0.5f);
         
         base.ResetViewOnDestroy();
     }
@@ -82,15 +73,10 @@ public class UIBoardView : BoardElementView
         viewTransform.localPosition = Vector3.zero;
         group.alpha = 0;
     }
-
-    public virtual void SetOffset()
-    {
-        CachedTransform.localPosition = controller.GetViewPositionBottom(multiSize) + Offset;
-    }
     
     public void SetOffset(Vector3 value)
     {
-        CachedTransform.localPosition = value;
+        CachedTransform.localPosition = offset + value;
     }
 
     public void Change(bool isShow)
@@ -235,11 +221,6 @@ public class UIBoardView : BoardElementView
         return sequence;
     }
     
-    private int GetMultiSize()
-    {
-        return Context.Multicellular == null ? 1 : (int)Mathf.Sqrt(Context.Multicellular.Mask.Count + 1);
-    }
-
     private void Cash()
     {
         if(Id == ViewType.None) return;

@@ -21,6 +21,8 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	
 	private int index = 1;
 	private int delay = 1;
+
+	private DateTime tutorialStartTime = DateTime.UtcNow;
 	
 	private DateTime startTime = DateTime.UtcNow;
 	private DateTime pauseTime = DateTime.UtcNow;
@@ -32,7 +34,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 	private bool isFirst = true;
 
 	private const int TUTORIAL_FIREFLY_COUNT = 3;
-	private bool isTuttorialActive => ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount < TUTORIAL_FIREFLY_COUNT;
+	private bool isTutorialActive => ProfileService.Current.GetStorageItem(Currency.Firefly.Name).Amount < TUTORIAL_FIREFLY_COUNT;
 	
 	public override void OnRegisterEntity(ECSEntity entity)
 	{
@@ -46,7 +48,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		UIService.Get.OnShowWindowEvent += OnShowWindow;
 		UIService.Get.OnCloseWindowEvent += OnCloseWindow;
 
-		if (isTuttorialActive) ShopService.Current.OnPurchasedEvent += UpdateFirefly;
+		if (isTutorialActive) ShopService.Current.OnPurchasedEvent += UpdateFirefly;
 		
 		const int step = 100;
 		
@@ -67,7 +69,13 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 			}
 		}
 		
-		OnMatch();
+		delay = Random.Range(GameDataService.Current.ConstantsManager.MinDelayFirstSpawnFirefly, GameDataService.Current.ConstantsManager.MaxDelayFirstSpawnFirefly + 1);
+		startTime = DateTime.UtcNow;
+	}
+
+	public void ResetTutorialStartTime()
+	{
+		tutorialStartTime = DateTime.UtcNow;
 	}
 
 	public override void OnUnRegisterEntity(ECSEntity entity)
@@ -112,7 +120,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 
 	private void UpdateFirefly(IPurchaseableItem purchaseableItem, IShopItem shopItem)
 	{
-		if (shopItem.ItemUid != Currency.Firefly.Name || isTuttorialActive) return;
+		if (shopItem.ItemUid != Currency.Firefly.Name || isTutorialActive) return;
 
 		foreach (var view in views)
 		{
@@ -144,9 +152,10 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 			views.Add(firefly);
 		}
 
-		if (isTuttorialActive)
+		if (isTutorialActive)
 		{
 			views[0].AddArrow();
+			ResetTutorialStartTime();
 		}
 	}
 	
@@ -211,7 +220,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 
 		if (amountFireflyAfter != amountFireflyBefore && amountFireflyAfter == TUTORIAL_FIREFLY_COUNT)
 		{
-			Analytics.SendTutorialEndStepEvent("firefly");
+			Analytics.SendTutorialEndStepEvent("firefly", tutorialStartTime);
 		}
 		
 		return true;
@@ -230,7 +239,7 @@ public class FireflyLogicComponent : ECSEntity, IECSSystem, ILockerComponent
 		views.Remove(view);
 		startTime = DateTime.UtcNow;
 		
-		if(isTuttorialActive && views.Count != 0) views[0].AddArrow();
+		if(isTutorialActive && views.Count != 0) views[0].AddArrow();
 	}
 
 	public void DestroyAll()

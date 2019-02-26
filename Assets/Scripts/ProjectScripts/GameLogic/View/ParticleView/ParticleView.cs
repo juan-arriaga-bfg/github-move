@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class ParticleView : BoardElementView
 {
@@ -19,7 +20,7 @@ public class ParticleView : BoardElementView
     
     private void Show()
     {
-        if (duration == 0)
+        if (Math.Abs(duration) < 0.001)
             return;
         DestroyOnBoard(duration);
     }

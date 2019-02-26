@@ -6,12 +6,10 @@ using UnityEngine;
 public static class TutorialBuilder
 {
     public const int LockPRStepIndex = 12;
-    public const int LockEnergyStep = 14;
     public const int LockMarketStepIndex = 15;
     public const int LockOrderStepIndex = 18;
     public const int FirstOrderStepIndex = 19;
     public const int LockFireflyStepIndex = 21;
-    
     
     public static BaseTutorialStep BuildTutorial(int index, BoardController context)
     {
@@ -32,8 +30,8 @@ public static class TutorialBuilder
                         new BoardPosition(21, 12, BoardLayer.Piece.Layer),
                         new BoardPosition(20, 11, BoardLayer.Piece.Layer)
                     },
-                    OnFirstStartCallback = () => Analytics.SendTutorialStartStepEvent("merge_1"),
-                    OnCompleteCallback = () => Analytics.SendTutorialEndStepEvent("merge_1"),
+                    OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("merge_1"),
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("merge_1", currentStep.StartTime),
                 };
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "1_CreatePiece_PR_C4", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
@@ -56,8 +54,8 @@ public static class TutorialBuilder
                         new BoardPosition(22, 13, BoardLayer.Piece.Layer),
                         new BoardPosition(22, 14, BoardLayer.Piece.Layer)
                     },
-                    OnFirstStartCallback = () => Analytics.SendTutorialStartStepEvent("merge_2"),
-                    OnCompleteCallback = () => Analytics.SendTutorialEndStepEvent("merge_2")
+                    OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("merge_2"),
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("merge_2", currentStep.StartTime)
                 };
                 
                 step.RegisterComponent(new CheckStepTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
@@ -69,7 +67,7 @@ public static class TutorialBuilder
                 step = new HighlightPiecesTutorialStep
                 {
                     Targets = new List<int>{PieceType.PR_C1.Id},
-                    OnFirstStartCallback = () => Analytics.SendTutorialStartStepEvent("createprc4")
+                    OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("createprc4")
                 };
                 
                 step.RegisterComponent(new CheckStepTutorialCondition {Target = 1, ConditionType = TutorialConditionType.Start}, true);
@@ -83,7 +81,7 @@ public static class TutorialBuilder
                 step = new HighlightPiecesTutorialStep
                 {
                     Targets = new List<int>{PieceType.PR_C1.Id, PieceType.PR_C2.Id, PieceType.PR_C3.Id},
-                    OnCompleteCallback = () => Analytics.SendTutorialEndStepEvent("createprc4")
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("createprc4", currentStep.StartTime)
                 };
                 
                 step.RegisterComponent(new CheckStepTutorialCondition {Target = 2, ConditionType = TutorialConditionType.Start}, true);
@@ -97,8 +95,8 @@ public static class TutorialBuilder
                 step = new HighlightFogTutorialStep
                 {
                     Delay = 0,
-                    OnFirstStartCallback = () => Analytics.SendTutorialStartStepEvent("openfog"),
-                    OnCompleteCallback = () => Analytics.SendTutorialEndStepEvent("openfog")
+                    OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("openfog"),
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("openfog", currentStep.StartTime)
                 };
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 2, ConditionType = TutorialConditionType.Start}, true);
@@ -113,8 +111,8 @@ public static class TutorialBuilder
                 {
                     Delay = 2, 
                     Targets = new List<int>{PieceType.OB1_TT.Id, PieceType.OB2_TT.Id},
-                    OnFirstStartCallback = () => Analytics.SendTutorialStartStepEvent("choptree"),
-                    OnCompleteCallback = () => Analytics.SendTutorialEndStepEvent("choptree")
+                    OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("choptree"),
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("choptree", currentStep.StartTime)
                 };
                 
                 step.RegisterComponent(new CheckStepTutorialCondition {Target = 4, ConditionType = TutorialConditionType.Start}, true);
@@ -128,8 +126,8 @@ public static class TutorialBuilder
                 step = new HighlightPiecesTutorialStep
                 {
                     Targets = new List<int>{PieceType.A1.Id},
-                    OnFirstStartCallback = () => Analytics.SendTutorialStartStepEvent("create3a2"),
-                    OnCompleteCallback = () => Analytics.SendTutorialEndStepEvent("create3a2")
+                    OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("create3a2"),
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("create3a2", currentStep.StartTime)
                 };
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "4_CreatePiece_A2", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
@@ -145,8 +143,8 @@ public static class TutorialBuilder
                     Delay = 2, 
                     IsFastStart = true, 
                     Targets = new List<int>{PieceType.PR_A4.Id, PieceType.PR_B4.Id, PieceType.PR_C4.Id, PieceType.PR_D4.Id, PieceType.PR_E4.Id, PieceType.PR_F4.Id, PieceType.PR_G4.Id},
-                    OnFirstStartCallback = () => Analytics.SendTutorialStartStepEvent("harvest"),
-                    OnCompleteCallback = () => Analytics.SendTutorialEndStepEvent("harvest")
+                    OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("harvest"),
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("harvest", currentStep.StartTime)
                 };
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "7_CreatePiece_PR_A5", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
@@ -160,11 +158,13 @@ public static class TutorialBuilder
             {
                 step = new BoardArrowTutorialStep
                 {
+                    IsAnyStartCondition = true,
                     Targets = PieceType.GetIdsByFilter(PieceTypeFilter.Ingredient),
-                    OnFirstStartCallback = () => Analytics.SendTutorialStartStepEvent("ingredients"),
-                    OnCompleteCallback = () => Analytics.SendTutorialEndStepEvent("ingredients")
+                    OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("ingredients"),
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("ingredients", currentStep.StartTime)
                 };
-
+                
+                step.RegisterComponent(new CheckStepTutorialCondition {Target = 18, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "65_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckCurrencyTutorialCondition
                 {
@@ -190,8 +190,8 @@ public static class TutorialBuilder
                 step = new CrystalTutorialStep
                 {
                     Delay = 0,
-                    OnFirstStartCallback = () => Analytics.SendTutorialStartStepEvent("boostcr"),
-                    OnCompleteCallback = () => Analytics.SendTutorialEndStepEvent("boostcr")
+                    OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("boostcr"),
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("boostcr", currentStep.StartTime)
                 };
                 break;
             }
@@ -200,8 +200,8 @@ public static class TutorialBuilder
                 step = new WorkerTutorialStep
                 {
                     Delay = 5,
-                    OnFirstStartCallback = () => Analytics.SendTutorialStartStepEvent("instantworker"),
-                    OnCompleteCallback = () => Analytics.SendTutorialEndStepEvent("instantworker")
+                    OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("instantworker"),
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("instantworker", currentStep.StartTime)
                 };
                 break;
             }
@@ -241,8 +241,6 @@ public static class TutorialBuilder
             }
             case 14: // lock buttons Worker, Energy, Codex
             {
-                if(LockEnergyStep != index) Debug.LogError("Tutorial Error: LockEnergyStep != index");
-                
                 step = new UiLockTutorialStep {Targets = new List<UiLockTutorialItem>{UiLockTutorialItem.Worker, UiLockTutorialItem.Energy, UiLockTutorialItem.Codex}};
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
@@ -299,13 +297,14 @@ public static class TutorialBuilder
             {
                 if (FirstOrderStepIndex != index) Debug.LogError("Tutorial Error: FirstOrderStepIndex != index");
                 
-                step = new BubbleBounceTutorialStep<ObstacleBubbleView>
+                step = new BaseTutorialStep
                 {
-                    Delay = 2, Targets = new List<int>{PieceType.PR_C4.Id},
-                    OnFirstStartCallback = () => Analytics.SendTutorialStartStepEvent("order"),
-                    OnCompleteCallback = () => Analytics.SendTutorialEndStepEvent("order")
+                    IsAnyStartCondition = true,
+                    OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("order"),
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("order", currentStep.StartTime)
                 };
                 
+                step.RegisterComponent(new CheckStepTutorialCondition {Target = 18, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "65_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
                 step.RegisterComponent(new CheckCurrencyTutorialCondition {Target = 2, Currency = new List<string>{Currency.Order.Name}, ConditionType = TutorialConditionType.Complete}, true);
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "16_CompleteOrder", TargetState = TaskState.New, ConditionType = TutorialConditionType.Hard}, true);
@@ -332,7 +331,7 @@ public static class TutorialBuilder
                 step = new FireflyLockTutorialStep
                 {
                     IsIgnoreDebug = false,
-                    OnCompleteCallback = () => Analytics.SendTutorialStartStepEvent("firefly"),
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("firefly"),
                 };
                 
                 step.RegisterComponent(new CheckLevelTutorialCondition {Target = 0, ConditionType = TutorialConditionType.Start}, true);
@@ -346,8 +345,8 @@ public static class TutorialBuilder
                 step = new SelectStorageTutorialStep<ObstacleBubbleView>
                 {
                     Delay = 2, IsFocusLock = true, IsFastStart = true, Targets = new List<int>{PieceType.MN_B.Id},
-                    OnFirstStartCallback = () => Analytics.SendTutorialStartStepEvent("mine"),
-                    OnCompleteCallback = () => Analytics.SendTutorialEndStepEvent("mine")
+                    OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("mine"),
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("mine", currentStep.StartTime)
                 };
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "12_UseMine", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
@@ -360,8 +359,8 @@ public static class TutorialBuilder
             {
                 step = new MarketTutorialStep
                 {
-                    OnFirstStartCallback = () => Analytics.SendTutorialStartStepEvent("market"),
-                    OnCompleteCallback = () => Analytics.SendTutorialEndStepEvent("market")
+                    OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("market"),
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("market", currentStep.StartTime)
                 };
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "21_OpenChest", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);
@@ -373,8 +372,8 @@ public static class TutorialBuilder
             {
                 step = new DailyTutorialStep
                 {
-                    OnFirstStartCallback = () => Analytics.SendTutorialStartStepEvent("daily"),
-                    OnCompleteCallback = () => Analytics.SendTutorialEndStepEvent("daily")
+                    OnFirstStartCallback = (currentStep) => Analytics.SendTutorialStartStepEvent("daily"),
+                    OnCompleteCallback = (currentStep) => Analytics.SendTutorialEndStepEvent("daily", currentStep.StartTime)
                 };
                 
                 step.RegisterComponent(new CheckQuestTutorialCondition {Target = "14_CreatePiece_B3", TargetState = TaskState.New, ConditionType = TutorialConditionType.Start}, true);

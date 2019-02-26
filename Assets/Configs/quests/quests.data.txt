@@ -1174,29 +1174,6 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "56_CollectIngredient",
-    "TaskDefs": [
-      {
-        "TaskId": "56_CollectIngredient"
-      }
-    ],
-    "ComponentsCache": {
-      "QuestRewardComponent": {
-        "Value": [
-          {
-            "Currency": "Coins",
-            "Amount": 20
-          },
-          {
-            "Currency": "Experience",
-            "Amount": 50
-          }
-        ]
-      }
-    }
-  },
-  {
-    "$type": "StoryQuestEntity, GameAssembly",
     "Id": "57_UseMine",
     "TaskDefs": [
       {
@@ -1427,10 +1404,10 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "67_CreatePiece_NPC_B4",
+    "Id": "71_CreatePiece_NPC_B",
     "TaskDefs": [
       {
-        "TaskId": "67_CreatePiece_NPC_B4"
+        "TaskId": "71_CreatePiece_NPC_B"
       }
     ],
     "ComponentsCache": {
@@ -1450,10 +1427,33 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "68_CreatePiece_NPC_B5",
+    "Id": "72_CreatePiece_CR",
     "TaskDefs": [
       {
-        "TaskId": "68_CreatePiece_NPC_B5"
+        "TaskId": "72_CreatePiece_CR"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 50
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 75
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "73_CompleteOrder",
+    "TaskDefs": [
+      {
+        "TaskId": "73_CompleteOrder"
       }
     ],
     "ComponentsCache": {
@@ -1465,7 +1465,7 @@
           },
           {
             "Currency": "Experience",
-            "Amount": 100
+            "Amount": 50
           }
         ]
       }
@@ -1473,10 +1473,10 @@
   },
   {
     "$type": "StoryQuestEntity, GameAssembly",
-    "Id": "71_CreatePiece_NPC_B",
+    "Id": "74_CreatePiece_PR_D4",
     "TaskDefs": [
       {
-        "TaskId": "71_CreatePiece_NPC_B"
+        "TaskId": "74_CreatePiece_PR_D4"
       }
     ],
     "ComponentsCache": {
@@ -1484,11 +1484,11 @@
         "Value": [
           {
             "Currency": "Coins",
-            "Amount": 100
+            "Amount": 15
           },
           {
             "Currency": "Experience",
-            "Amount": 300
+            "Amount": 50
           }
         ]
       }

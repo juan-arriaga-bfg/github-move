@@ -53,7 +53,7 @@ public class FireflyView : BoardElementView
         
         arrow = HintArrowView.Show(CachedTransform, 0, 1f, false, isLoop, showDelay);
         arrow.CachedTransform.SetParent(CachedTransform, true);
-        arrow.SetOnRemoveAction(() =>
+        arrow.AddOnRemoveAction(() =>
         {
             arrow = null;
         });

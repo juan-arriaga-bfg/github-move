@@ -32,6 +32,14 @@
     "Value": 30
   },
   {
+    "Key": "MinDelayFirstSpawnFirefly",
+    "Value": 10
+  },
+  {
+    "Key": "MaxDelayFirstSpawnFirefly",
+    "Value": 60
+  },
+  {
     "Key": "MinDelaySpawnFirefly",
     "Value": 10
   },
@@ -45,11 +53,11 @@
   },
   {
     "Key": "MinAmountFirefly",
-    "Value": 3
+    "Value": 2
   },
   {
     "Key": "MaxAmountFirefly",
-    "Value": 6
+    "Value": 5
   },
   {
     "Key": "SpeedFirefly",
@@ -70,5 +78,9 @@
   {
     "Key": "EnergyRefillDelay",
     "Value": 60
+  },
+  {
+    "Key": "FreeEnergyDelay",
+    "Value": 300
   }
 ]

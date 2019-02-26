@@ -39,7 +39,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     public DailyQuestEntity DailyQuest;
 
     public int DailyQuestRewardIndex { get; private set; }
-    public int DailyTaskCompletedCount;
+    public int DailyQuestCompletedCount;
     
     /// <summary>
     /// List of ids of completed quests
@@ -108,7 +108,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         FinishedQuests = questSave.FinishedQuests ?? new List<string>();
 
         DailyQuestRewardIndex = questSave.DailyQuestRewardIndex;
-        DailyTaskCompletedCount = questSave.DailyTaskCompletedCount;
+        DailyQuestCompletedCount = questSave.DailyQuestCompletedCount;
         
         ActiveStoryQuests = new List<QuestEntity>();
         ActiveQuests = new List<QuestEntity>();
@@ -323,8 +323,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
 
         DefaultSafeQueueBuilder.BuildAndRun(ACTION_ID, true, () =>
         {
-            string starterId = null;
-            var questsToStart = CheckConditions(out starterId);
+            var questsToStart = CheckConditions(out string starterId);
             if (questsToStart.Count == 0)
             {
                 Debug.Log($"[QuestsDataManager] => CheckConditions == 0, return");
@@ -348,7 +347,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
         return true;
     }
 
-    public void StartQuests(List<string> questIds)
+    public void StartQuests(HashSet<string> questIds)
     {
         var dataManager = GameDataService.Current.QuestsManager;
         
@@ -373,7 +372,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     /// Call this to foreach through Starters and Start new quests if Conditions are met.
     /// Highly expensive! 
     /// </summary>
-    public List<string> CheckConditions(out string starterId)
+    public HashSet<string> CheckConditions(out string starterId)
     {
         starterId = null;
         
@@ -383,7 +382,7 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
             return null;
         }
 
-        List<string> ret = new List<string>();
+        HashSet<string> ret = new HashSet<string>();
         
 #if DEBUG
         var sw = new System.Diagnostics.Stopwatch();
@@ -395,8 +394,11 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
             var starter = QuestStarters[i];
             if (starter.Check())
             {
-                starterId = starter.Id;
-                ret.AddRange(starter.QuestToStartIds);
+                starterId = starterId ?? starter.Id;
+                foreach (var id in starter.QuestToStartIds)
+                {
+                    ret.Add(id);
+                }
             }
         }
         
@@ -532,9 +534,9 @@ public sealed class QuestsDataManager : ECSEntity, IDataManager
     {
         OnQuestStateChanged?.Invoke(quest, task);
 
-        if (quest == DailyQuest && task?.IsClaimed() == true)
+        if (task is TaskCompleteDailyTaskEntity && task.IsClaimed())
         {
-            DailyTaskCompletedCount++;
+            DailyQuestCompletedCount++;
         }
     }
 

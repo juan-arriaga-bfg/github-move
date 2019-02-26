@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 
 public partial class BoardRenderer : ECSEntity
@@ -1066,7 +1068,7 @@ public partial class BoardRenderer : ECSEntity
 
          var layout = GameDataService.Current.FieldManager.LayoutData;
          
-         var sectorsMesh = GenerateMesh(width, height, size, tiles, backgroundTile, ignorablePositions, layout);
+         var sectorsMesh = GenerateMesh(width, height, size, layout, tiles);
          
          var meshGO = new GameObject("_cells");
          var meshTransform = meshGO.transform;
@@ -1077,9 +1079,7 @@ public partial class BoardRenderer : ECSEntity
          
          var meshRenderer = meshGO.AddComponent<MeshRenderer>();
          var meshFilter = meshGO.AddComponent<MeshFilter>();
-         
-         
-         
+
          meshFilter.mesh = sectorsMesh;
          
          // apply material 
@@ -1108,51 +1108,48 @@ public partial class BoardRenderer : ECSEntity
          return SectorsContainer.transform;
      }
 
-    private Mesh GenerateMesh(int width, int height, float size, List<string> tiles, string ignorableTileName = null, IList<BoardPosition> ignorablePositions = null, int[] layout = null)
+    private Mesh GenerateMesh(int width, int height, float size, int[] layout, List<string> tiles)
     {
-        ignorablePositions = ignorablePositions ?? new List<BoardPosition>();
-        Mesh sectorsMesh = new Mesh();
+#if DEBUG
+        var sw = new Stopwatch();
+        sw.Start();
+#endif        
+        Mesh mesh = new Mesh();
         var vertices = new List<Vector3>();
         var tris = new List<int>();
         var uv = new List<Vector2>();
         var colors = new List<Color>();
         int cellIndex = 0;
         float borderWidth = size;
-
         var defaultColor = new Color(1f, 1f, 1f, 1f);
+        
+        // Cache sprites
+        Sprite[] tilesSprites = new Sprite[tiles.Count];
+        for (var i = 0; i < tiles.Count; i++)
+        {
+            var tile = tiles[i];
+            if (string.IsNullOrEmpty(tile))
+            {
+                continue;
+            }
+            
+            Sprite sprite = IconService.Current.GetSpriteById(tile);
+            tilesSprites[i] = sprite;
+        }
 
+        // Build layout
         int layoutIndex = 0;
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                Sprite fullTile;
-                var isIgnorable = ignorablePositions.Contains(new BoardPosition(x, y));
-                if (!string.IsNullOrEmpty(ignorableTileName) && isIgnorable)
-                {
-                    fullTile = IconService.Current.GetSpriteById(ignorableTileName);
-                }
-                else
-                {
-                    if(isIgnorable)
-                        continue;
-
-                    var id = layout == null ? (x + y) % 2 == 0 
-                                                ? tiles[1] 
-                                                : tiles[0]
-                            
-                                            : tiles[layout[layoutIndex]];
-
-                    fullTile = IconService.Current.GetSpriteById(id);
-                }
-
-                if (fullTile != null && layout[layoutIndex] != 1)
+                Sprite sprite = tilesSprites[layout[layoutIndex]];
+                if (sprite != null)
                 {
                     vertices.Add(new Vector3(x * borderWidth,       (y + 1) * borderWidth, 0));
                     vertices.Add(new Vector3((x + 1) * borderWidth, (y + 1) * borderWidth, 0));
                     vertices.Add(new Vector3(x * borderWidth,       y * borderWidth,       0));
                     vertices.Add(new Vector3((x + 1) * borderWidth, y * borderWidth,       0));
-
 
                     tris.Add(cellIndex);
                     tris.Add(cellIndex + 1);
@@ -1162,9 +1159,9 @@ public partial class BoardRenderer : ECSEntity
                     tris.Add(cellIndex + 1);
                     tris.Add(cellIndex + 3);
 
-                    for (int i = 0; i < fullTile.uv.Length; i++)
+                    for (int i = 0; i < sprite.uv.Length; i++)
                     {
-                        var uvPos = fullTile.uv[i];
+                        var uvPos = sprite.uv[i];
                         uv.Add(uvPos);
                         colors.Add(defaultColor);
                     }
@@ -1176,51 +1173,19 @@ public partial class BoardRenderer : ECSEntity
             }
         }
         
-        sectorsMesh.vertices = vertices.ToArray();
-        sectorsMesh.triangles = tris.ToArray();
-        sectorsMesh.uv = uv.ToArray();
-        sectorsMesh.colors = colors.ToArray();
+        mesh.vertices = vertices.ToArray();
+        mesh.triangles = tris.ToArray();
+        mesh.uv = uv.ToArray();
+        mesh.colors = colors.ToArray();
 
-        sectorsMesh.RecalculateBounds();
+        mesh.RecalculateBounds();
 
-        return sectorsMesh;
-    }
-
-    public void GenerateBackground(Vector3 position, int width, int height, float size, string backImage, IList<BoardPosition> ignorablePositions = null)
-    {
-        var sectorsContainer = new GameObject("Background").transform;
-        sectorsContainer.localPosition = position;
-        sectorsContainer.localRotation = Quaternion.Euler(54.5f, 0f, -45f);
-        sectorsContainer.localScale = Vector3.one;
-
-        var fullTile = IconService.Current.GetSpriteById(backImage);
-
-        var mesh = GenerateMesh(width, height, size, new List<string> {backImage, backImage}, ignorablePositions:ignorablePositions);
+#if DEBUG
+        sw.Stop();
+        Debug.Log($"[BoardRenderer] => GenerateMesh: Done in {sw.ElapsedMilliseconds}ms");
+#endif
         
-        var meshGO = new GameObject("_background");
-        var meshTransform = meshGO.transform;
-        meshTransform.SetParent(sectorsContainer);
-        meshTransform.localPosition = Vector3.zero;
-        meshTransform.localScale = new Vector3(1f, 1f, 1f);
-        meshTransform.localRotation = Quaternion.identity;
-
-        var meshRenderer = meshGO.AddComponent<MeshRenderer>();
-        var meshFilter = meshGO.AddComponent<MeshFilter>();
-
-        
-
-        meshFilter.mesh = mesh;
-
-        // apply material 
-        var material = new Material(Shader.Find("Sprites/Default"));
-        material.renderQueue = 2000;
-
-        // load texture
-        var tileSprite = fullTile;
-        var tileTexture = tileSprite == null ? null : tileSprite.texture;
-        material.mainTexture = tileTexture;
-
-        meshRenderer.material = material;
+        return mesh;
     }
 
     public void CreateBackgroundWater()

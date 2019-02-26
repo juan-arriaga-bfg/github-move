@@ -20,6 +20,9 @@ public class ConstantsDataManager : ECSEntity, IDataManager, IDataLoader<List<Co
 
     public int FreeTimeLimit;
 
+    public int MinDelayFirstSpawnFirefly;
+    public int MaxDelayFirstSpawnFirefly;
+    
     public int MinDelaySpawnFirefly;
     public int MaxDelaySpawnFirefly;
     

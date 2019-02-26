@@ -6,9 +6,9 @@ public class CharacterMatchActionBuilder : DefaultMatchActionBuilder, IMatchActi
     {
         return new List<int>
         {
-            PieceType.NPC_B5.Id,
-            PieceType.NPC_C8.Id,
-            PieceType.NPC_D8.Id,
+            PieceType.NPC_B3.Id,
+            PieceType.NPC_C4.Id,
+            PieceType.NPC_D4.Id,
             PieceType.NPC_E8.Id,
             PieceType.NPC_F8.Id
         };
@@ -28,14 +28,14 @@ public class CharacterMatchActionBuilder : DefaultMatchActionBuilder, IMatchActi
     public IBoardAction Build(MatchDefinitionComponent definition, List<BoardPosition> matchField, int pieceType, BoardPosition position)
     {
         var nextType = definition.GetNext(pieceType, false);
-
+        
         if (nextType == PieceType.None.Id) return null;
         
         var countForMatchDefault = definition.GetPieceCountForMatch(pieceType);
 
         if (countForMatchDefault == -1 || matchField.Count < countForMatchDefault) return null;
         
-        matchField = new List<BoardPosition>();
+        matchField = matchField.FindAll(boardPosition => definition.Context.GetPieceAt(boardPosition)?.PieceType == PieceType.Boost_CR.Id);
         var chain = definition.GetChain(nextType);
 
         foreach (var id in chain)

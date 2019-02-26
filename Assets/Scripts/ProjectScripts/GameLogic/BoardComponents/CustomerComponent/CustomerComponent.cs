@@ -99,15 +99,9 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
         
         view.Priority = isShow ? -1 : 1;
         view.Change(isShow);
-        
-        if (isShow)
-        {
-            pieceContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
-            pieceContext.Context.HintCooldown.AddView(view);
-            return;
-        }
-        
-        pieceContext.Context.HintCooldown.RemoweView(view);
+
+        if (!isShow) return;
+        pieceContext.Context.BoardEvents.RaiseEvent(GameEventsCodes.ClosePieceUI, this);
     }
     
     private void CreateOrder()
@@ -125,9 +119,11 @@ public class CustomerComponent : ECSEntity, IPieceBoardObserver
     public void GetReward()
     {
         CurrencyHelper.PurchaseAndProvideEjection(Order.PiecesReward, Order.CurrenciesReward, null, pieceContext.CachedPosition, () => { Order = null; });
-        GameDataService.Current.OrdersManager.RemoveOrder(Order, pieceContext.Context.BoardLogic);
         
         Order.State = OrderState.Reward;
+        
+        GameDataService.Current.OrdersManager.RemoveOrder(Order, pieceContext.Context.BoardLogic);
+        
         UpdateView();
     }
 

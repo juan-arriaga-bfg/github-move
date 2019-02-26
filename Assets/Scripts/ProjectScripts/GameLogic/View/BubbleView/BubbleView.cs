@@ -7,8 +7,10 @@ public class BubbleView : UIBoardView, IBoardEventListener
     [SerializeField] private NSText button;
     
     protected override ViewType Id => ViewType.Bubble;
+    
+    public override bool IsTop => true;
 
-    public override Vector3 Offset => new Vector3(0, 2f);
+    protected override Vector3 offset => new Vector3(0, Context.Multicellular is FogObserver ? 0.1f : 1.5f);
 
     private Action<Piece> onClick;
     

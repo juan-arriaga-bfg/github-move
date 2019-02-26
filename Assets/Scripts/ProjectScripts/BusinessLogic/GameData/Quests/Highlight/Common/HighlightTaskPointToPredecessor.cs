@@ -14,6 +14,6 @@ public class HighlightTaskPointToPredecessor : TaskHighlightUsingArrow
         }
         
         int pieceId = taskPiece.PieceId;
-        return HighlightTaskPointToPieceHelper.FindAndPointToRandomPredecessorPiece(pieceId);
+        return HighlightTaskPointToPieceHelper.FindAndPointToRandomPredecessorPiece(pieceId, false);
     }
 }
