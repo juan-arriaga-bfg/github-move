@@ -125,7 +125,11 @@
       },
       {
         "Uid": "Boost_CR1",
-        "Weight": 1,
+        "Weight": 3
+      },
+      {
+        "Uid": "Boost_CR2",
+        "Weight": 2,
         "Override": true
       }
     ]
@@ -167,11 +171,15 @@
       },
       {
         "Uid": "Hard1",
-        "Weight": 1,
+        "Weight": 2,
         "Override": true
       },
       {
         "Uid": "Soft1",
+        "Weight": 2
+      },
+      {
+        "Uid": "Soft2",
         "Weight": 1
       }
     ]
