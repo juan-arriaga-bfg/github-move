@@ -31,12 +31,23 @@ public class DailyTutorialStep : UIArrowTutorialStep
         base.Perform();
     }
 
+    public override void OnUnRegisterEntity(ECSEntity entity)
+    {
+        base.OnUnRegisterEntity(entity);
+        UnSubscribe();
+    }
+
+    private void UnSubscribe()
+    {
+        UIService.Get.OnShowWindowEvent -= OnShowWindow;
+        GameDataService.Current.QuestsManager.DailyQuest.OnChanged -= QuestChanged;
+    }
+
     protected override void Complete()
     {
         currentStep = Step.Complete;
-        
-        UIService.Get.OnShowWindowEvent -= OnShowWindow;
-        GameDataService.Current.QuestsManager.DailyQuest.OnChanged -= QuestChanged;
+
+        UnSubscribe();
         
         var model = UIService.Get.GetCachedModel<UIDailyQuestWindowModel>(UIWindowType.DailyQuestWindow);
         
