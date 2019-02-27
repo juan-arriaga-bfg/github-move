@@ -1081,11 +1081,7 @@ public partial class BoardRenderer : ECSEntity
          var meshFilter = meshGO.AddComponent<MeshFilter>();
 
          meshFilter.mesh = sectorsMesh;
-         
-         // apply material 
-         var material = new Material(Shader.Find("Sprites/Default"));
-         material.renderQueue = 2000;
-         
+                 
          // load texture
          Sprite tileSprite = null;
          int index = 0;
@@ -1101,9 +1097,15 @@ public partial class BoardRenderer : ECSEntity
          while (tileSprite == null && index < tiles.Count);
          
          var tileTexture = tileSprite == null ? null : tileSprite.texture;
+         
+         // apply material 
+         var material = new Material(Shader.Find("Sprites/Default"));
          material.mainTexture = tileTexture;
          
          meshRenderer.material = material;
+         meshRenderer.sortingOrder = 0;
+         meshRenderer.sortingLayerName = "Default";
+         meshRenderer.material.renderQueue = 2000;
 
          return SectorsContainer.transform;
      }
