@@ -103,7 +103,7 @@ public class UIDailyQuestTaskElementViewController : UIContainerElementViewContr
             content = null;
         }
         
-        content = UiQuestButton.GetIcon(task, taskIconAnchor, taskIcon);
+        content = UiQuestButton.GetIcon(task, taskIconAnchor, null, taskIcon);
         taskIcon.gameObject.SetActive(content == null);
 
         lblProgress.Text = UiQuestButton.GetTaskProgress(task, 32);
