@@ -61,7 +61,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
             case "Obstacles":
                 ids.AddRange(GetPieceIds(PieceType.OB1_TT.Id, PieceType.OB2_TT.Id));
                 ids.AddRange(GetPieceIds(PieceType.OB1_A.Id, PieceType.OB9_A.Id));
-                ids.AddRange(GetPieceIds(PieceType.OB1_E.Id, PieceType.OB5_E.Id));
+                ids.AddRange(GetPieceIds(PieceType.OB1_G.Id, PieceType.OB5_G.Id));
                 ids.AddRange(GetPieceIds(PieceType.OB_PR_A.Id, PieceType.OB_PR_G.Id));
                 break;
             case "Simple A":
@@ -122,6 +122,7 @@ public class UIPiecesCheatSheetWindowModel : IWWindowModel
                 ids.AddRange(GetPieceIds(PieceType.NPC_E1.Id, PieceType.NPC_E6.Id));
                 ids.AddRange(GetPieceIds(PieceType.NPC_F1.Id, PieceType.NPC_F6.Id));
                 ids.AddRange(GetPieceIds(PieceType.NPC_G1.Id, PieceType.NPC_G6.Id));
+                ids.AddRange(GetPieceIds(PieceType.NPC_H1.Id, PieceType.NPC_H6.Id));
                 break;
         }
         

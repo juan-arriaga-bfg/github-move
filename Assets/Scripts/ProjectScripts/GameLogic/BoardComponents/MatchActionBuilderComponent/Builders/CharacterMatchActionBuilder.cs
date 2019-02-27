@@ -12,6 +12,17 @@ public class CharacterMatchActionBuilder : DefaultMatchActionBuilder, IMatchActi
             PieceType.NPC_E6.Id,
             PieceType.NPC_F6.Id,
             PieceType.NPC_G6.Id,
+            PieceType.NPC_H6.Id,
+            PieceType.NPC_I6.Id,
+            PieceType.NPC_J6.Id,
+            PieceType.NPC_K6.Id,
+            PieceType.NPC_L6.Id,
+            PieceType.NPC_M6.Id,
+            PieceType.NPC_N6.Id,
+            PieceType.NPC_O6.Id,
+            PieceType.NPC_P6.Id,
+            PieceType.NPC_Q6.Id,
+            PieceType.NPC_R6.Id,
         };
     }
 
