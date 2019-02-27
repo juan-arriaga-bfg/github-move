@@ -48,6 +48,7 @@ public class UIHardShopWindowView : UIGenericPopupWindowView
                 NameLabel = LocalizationService.Get(def.Name, def.Name),
                 Products = def.Products,
                 Price = def.Price,
+                MessageIconSize = 35,
                 OnSelectEvent = null,
                 OnDeselectEvent = null
             };
