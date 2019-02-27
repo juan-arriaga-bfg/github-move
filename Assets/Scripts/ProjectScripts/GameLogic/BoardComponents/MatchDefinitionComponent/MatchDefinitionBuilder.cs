@@ -29,7 +29,6 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.NPC_B1.Id, new PieceMatchDef {Next = PieceType.NPC_B2.Id, Previous = PieceType.None.Id, Amount = 3});
         dict.Add(PieceType.NPC_B2.Id, new PieceMatchDef {Next = PieceType.NPC_B3.Id, Previous = PieceType.NPC_B1.Id, Amount = 3});
         dict.Add(PieceType.NPC_B3.Id, new PieceMatchDef {Next = PieceType.NPC_B.Id, Previous = PieceType.NPC_B2.Id, Amount = 3});
-//        dict.Add(PieceType.NPC_B4.Id, new PieceMatchDef {Next = PieceType.NPC_B.Id, Previous = PieceType.NPC_B3.Id, Amount = 3});
         dict.Add(PieceType.NPC_B.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.NPC_B3.Id, Amount = -1});
         
         #endregion
@@ -90,6 +89,18 @@ public class MatchDefinitionBuilder
         
         #endregion
 
+        #region NPC_G
+        
+        dict.Add(PieceType.NPC_G1.Id, new PieceMatchDef {Next = PieceType.NPC_G2.Id, Previous = PieceType.None.Id, Amount = 3});
+        dict.Add(PieceType.NPC_G2.Id, new PieceMatchDef {Next = PieceType.NPC_G3.Id, Previous = PieceType.NPC_G1.Id, Amount = 3});
+        dict.Add(PieceType.NPC_G3.Id, new PieceMatchDef {Next = PieceType.NPC_G4.Id, Previous = PieceType.NPC_G2.Id, Amount = 3});
+        dict.Add(PieceType.NPC_G4.Id, new PieceMatchDef {Next = PieceType.NPC_G5.Id, Previous = PieceType.NPC_G3.Id, Amount = 3});
+        dict.Add(PieceType.NPC_G5.Id, new PieceMatchDef {Next = PieceType.NPC_G6.Id, Previous = PieceType.NPC_G4.Id, Amount = 3});
+        dict.Add(PieceType.NPC_G6.Id, new PieceMatchDef {Next = PieceType.NPC_G.Id, Previous = PieceType.NPC_G5.Id, Amount = 3});
+        dict.Add(PieceType.NPC_G.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.NPC_G6.Id, Amount = -1});
+        
+        #endregion
+        
 #endregion
 
 #region Boosters

@@ -10,7 +10,8 @@ public class CharacterMatchActionBuilder : DefaultMatchActionBuilder, IMatchActi
             PieceType.NPC_C4.Id,
             PieceType.NPC_D4.Id,
             PieceType.NPC_E8.Id,
-            PieceType.NPC_F8.Id
+            PieceType.NPC_F8.Id,
+            PieceType.NPC_G6.Id,
         };
     }
 

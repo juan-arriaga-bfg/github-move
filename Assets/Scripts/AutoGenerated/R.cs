@@ -334,4 +334,10 @@ public class R
      public const string BorderLeftHole = "BorderLeftHole";
      public const string BorderBottomHole = "BorderBottomHole";
      public const string RewardDropParticles = "RewardDropParticles";
+     public const string NPC_G1Piece = "NPC_G1Piece";
+     public const string NPC_G2Piece = "NPC_G2Piece";
+     public const string NPC_G3Piece = "NPC_G3Piece";
+     public const string NPC_G4Piece = "NPC_G4Piece";
+     public const string NPC_G5Piece = "NPC_G5Piece";
+     public const string NPC_G6Piece = "NPC_G6Piece";
 }
