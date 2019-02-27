@@ -9,11 +9,11 @@ public class UIEnergyShopElementViewController : UISimpleScrollElementViewContro
     [IWUIBinding("#BuyButtonLabel")] private NSText btnBuyLabel;
     [IWUIBinding("#LockButtonLabel")] private NSText btnLockLabel;
     
-    [IWUIBinding("#LockLabel")] private NSText lockLabel;
     [IWUIBinding("#LockMessage")] private NSText lockMessage;
     [IWUIBinding("#LockName")] private NSText lockName;
     
     [IWUIBinding("#FreeLabel")] private NSText freeLabel;
+    [IWUIBinding("#TimerLabel")] private NSText timerLabel;
 	
     [IWUIBinding("#BuyButton")] private UIButtonViewController btnBuy;
 	
@@ -29,6 +29,8 @@ public class UIEnergyShopElementViewController : UISimpleScrollElementViewContro
     
     private bool isClick;
     private bool isClaimed;
+    private bool isFree;
+    private bool isLock;
     
     public override void Init()
     {
@@ -37,17 +39,23 @@ public class UIEnergyShopElementViewController : UISimpleScrollElementViewContro
 	    var contentEntity = entity as UIShopElementEntity;
 		
 	    isClick = false;
-	    isClaimed = false;
+	    isLock = contentEntity.Price == null;
+	    isFree = isLock == false && contentEntity.Price.Amount == 0;
+	    isClaimed = isFree && BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.IsExecuteable();
 	    
-	    if (contentEntity.Price != null) ChangeButtons();
+	    if (isLock == false) ChangeButtons();
 
 	    nameLabel.Text = lockName.Text = contentEntity.NameLabel;
-	    lockLabel.Text = label.Text;
 	    lockMessage.Text = LocalizationService.Get("common.message.comingSoon", "common.message.comingSoon");
 	    freeLabel.Text = LocalizationService.Get("common.button.free", "common.button.free");
 	    
 	    ChangeView();
-	    freeObj.SetActive(contentEntity.Price != null && contentEntity.Price.Amount == 0);
+	    freeObj.SetActive(isFree);
+	    
+	    if(isFree == false) return;
+	    
+	    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnExecute += UpdateLabel;
+	    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnComplete += CompleteTimer;
     }
     
     public override void OnViewShowCompleted()
@@ -58,22 +66,33 @@ public class UIEnergyShopElementViewController : UISimpleScrollElementViewContro
 		    .ToState(GenericButtonState.Active)
 		    .OnClick(OnClick);
     }
+    
+    public override void OnViewClose(IWUIWindowView context)
+    {
+	    if (isFree)
+	    {
+		    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnExecute -= UpdateLabel;
+		    BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.OnComplete -= CompleteTimer;
+	    }
+	    
+	    base.OnViewClose(context);
+    }
 
     private void ChangeView()
     {
 	    var contentEntity = entity as UIShopElementEntity;
-	    var isLock = contentEntity.Price == null;
 	    var key = $"window.shop.energy.item.{(isClaimed ? "claimed" : "locked")}";
 	    
 	    unlockObj.SetActive(!isLock && !isClaimed);
 	    lockObj.SetActive(isLock || isClaimed);
 	    
-	    lockLabel.gameObject.SetActive(isClaimed);
+	    timerLabel.gameObject.SetActive(isFree && isClaimed);
 	    lockMessage.gameObject.SetActive(!isClaimed);
 	    lockName.gameObject.SetActive(isClaimed);
+	    
 	    btnLockLabel.Text = LocalizationService.Get(key, key);
-
-	    if (isLock || isClaimed) CreateIcon(lockAnchor, isLock ? PieceType.Empty.Abbreviations[0] : contentEntity.ContentId);
+	    
+	    CreateIcon(isLock || isClaimed ? lockAnchor : anchor, isLock ? PieceType.Empty.Abbreviations[0] : contentEntity.ContentId);
 	    if (isClaimed) Sepia = true;
 
 	    freeCanvas.alpha = isClaimed ? 0.5f : 1;
@@ -90,6 +109,17 @@ public class UIEnergyShopElementViewController : UISimpleScrollElementViewContro
 	    btnBuyLabel.Text = isFree
 		    ? LocalizationService.Get("common.button.claim", "common.button.claim")
 		    : string.Format(LocalizationService.Get("common.button.buy", "common.button.buy {0}"), contentEntity.Price.ToStringIcon());
+    }
+
+    private void UpdateLabel()
+    {
+	    timerLabel.Text = BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.CompleteTime.GetTimeLeftText(true, true, null);
+    }
+
+    private void CompleteTimer()
+    {
+	    isClaimed = false;
+	    ChangeView();
     }
     
     private void OnClick()
@@ -121,7 +151,9 @@ public class UIEnergyShopElementViewController : UISimpleScrollElementViewContro
 		    isClaimed = true;
 		    ChangeView();
 	    }
+
+	    if (isFree) BoardService.Current.FirstBoard.MarketLogic.ResetEnergyTimer.Start();
 	    
-	    Analytics.SendPurchase("screen_energy", $"item{CachedTransform.GetSiblingIndex()}", new List<CurrencyPair>{contentEntity.Price}, new List<CurrencyPair>(contentEntity.Products), false, contentEntity.Price.Amount == 0);
+	    Analytics.SendPurchase("screen_energy", $"item{CachedTransform.GetSiblingIndex()}", new List<CurrencyPair>{contentEntity.Price}, new List<CurrencyPair>(contentEntity.Products), false, isFree);
     }
 }
