@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -17,127 +18,115 @@ MonoBehaviour:
   styles:
   - id: 0
     nameId: defaul
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: c89a26b8f9bca2a4db04463316012bc1, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 1
     nameId: level
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 40af28b5e35bf9e4d95ed2641a26f305, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 7
     nameId: messageHard
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: c89a26b8f9bca2a4db04463316012bc1, type: 2}
     mainColor: {r: 0.5764706, g: 0.24313726, b: 0, a: 1}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 3
     nameId: error
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: fae4c013b7c9fd246a636db668c8c6fd, type: 2}
     mainColor: {r: 0.90588236, g: 0.02745098, b: 0.02745098, a: 0}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 4
     nameId: message
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 971c9320aef681a47afb074c8dc1b434, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 5
     nameId: titleAndButton
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 3e59aa505c1fd16488e087d3149c642d, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 6
     nameId: messageLock
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 2dfda0c8933f63b4e88da583b6fa0fe3, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 10
     nameId: Number
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 892318b211b69834e92a7156f87083b9, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 11
     nameId: debug
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: c89a26b8f9bca2a4db04463316012bc1, type: 2}
     mainColor: {r: 1, g: 0, b: 0, a: 0.2509804}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 8
     nameId: numberBrown
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 3afc755935059c74e8624990c47d498e, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 12
     nameId: cheers
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 942d9c6c91941bb4bbed011dd717136b, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 13
     nameId: cheersComplex
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 68f49f42502684a8384102299c5374bf, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 14
     nameId: messageFinal
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: c89a26b8f9bca2a4db04463316012bc1, type: 2}
     mainColor: {r: 0.59607846, g: 0.22745098, b: 0.02745098, a: 1}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 15
     nameId: subtitleFinal
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 451744cf7a37dc842a7e19a1acb06520, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 16
     nameId: titleFinal
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: b10d6610a1443fc40ab3144b29b84135, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 19
     nameId: messageGreenFinal
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: c89a26b8f9bca2a4db04463316012bc1, type: 2}
     mainColor: {r: 0.3372549, g: 0.43529412, b: 0, a: 1}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 20
     nameId: subtitleGreenFinal
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: f095ddeccef07d443b274cdcfde41372, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
   - id: 21
     nameId: buttonFinal
-    fontAsset: {fileID: 11400000, guid: 63ef471c6f037d14f953762c601d0d5c, type: 2}
     materialPreset: {fileID: 2100000, guid: 949951b827e5510489fe1fd80528a77c, type: 2}
     mainColor: {r: 1, g: 1, b: 1, a: 1}
     fontSize: -1
-    spriteAsset: {fileID: 0}
+    fontAssetName: FontMain
+  - id: 22
+    nameId: buttonLockFinal
+    materialPreset: {fileID: 2100000, guid: 8385bbe80ff694e4590ab75d149fdefb, type: 2}
+    mainColor: {r: 0.63529414, g: 0.41960785, b: 0.13725491, a: 1}
+    fontSize: -1
+    fontAssetName: FontMain

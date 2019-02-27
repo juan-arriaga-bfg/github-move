@@ -1,40 +1,32 @@
 using System.Collections.Generic;
 
-public class UISoftShopWindowView : UIGenericPopupWindowView 
+public class UIEnergyShopWindowView : UIGenericPopupWindowView 
 {
     [IWUIBinding("#Content")] private UIContainerViewController content;
+    
+    [IWUIBinding("#CloseMaskLeft")] private UIButtonViewController btnMaskLeft;
+    [IWUIBinding("#CloseMaskRight")] private UIButtonViewController btnMaskRight;
     
     public override void OnViewShow()
     {
         base.OnViewShow();
         
-        var windowModel = Model as UISoftShopWindowModel;
+        var windowModel = Model as UIEnergyShopWindowModel;
         
         SetTitle(windowModel.Title);
         SetMessage(windowModel.Message);
         
         Fill(UpdateEntities(windowModel.Products), content);
     }
-
-    public override void OnViewCloseCompleted()
+    
+    public override void OnViewShowCompleted()
     {
-        UIShopElementEntity entity = null;
-
-        foreach (UIShopElementViewController tab in content.Tabs)
-        {
-            if(tab.IsNeedReopen == false) continue;
-
-            entity = tab.Entity as UIShopElementEntity;
-            break;
-        }
+        base.OnViewShowCompleted();
         
-        base.OnViewCloseCompleted();
-        
-        if(entity == null) return;
-        
-        CurrencyHelper.OpenShopWindow(entity.Price.Currency);
+        InitButtonBase(btnMaskLeft, Controller.CloseCurrentWindow);
+        InitButtonBase(btnMaskRight, Controller.CloseCurrentWindow);
     }
-
+    
     private List<IUIContainerElementEntity> UpdateEntities(List<ShopDef> entities)
     {
         var views = new List<IUIContainerElementEntity>(entities.Count);
@@ -49,7 +41,8 @@ public class UISoftShopWindowView : UIGenericPopupWindowView
                 PurchaseKey = def.PurchaseKey,
                 Products = def.Products,
                 Price = def.Price,
-                MessageIconSize = 35,
+                NameLabel = LocalizationService.Get(def.Name),
+                IsPermanent = i == 2,
                 OnSelectEvent = null,
                 OnDeselectEvent = null
             };
