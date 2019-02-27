@@ -31,7 +31,7 @@ public class OrderBubbleView : UIBoardView
 		
 		customer.Order.SetMark(mark, clock);
 
-		if (anchor != null) anchor.gameObject.SetActive(customer.Order.State != OrderState.Init);
+		if (anchor != null) anchor.gameObject.SetActive(customer.Order.State != OrderState.Init && customer.Order.State != OrderState.InProgress);
 		
 		question.SetActive(customer.Order.State == OrderState.Init);
 		
