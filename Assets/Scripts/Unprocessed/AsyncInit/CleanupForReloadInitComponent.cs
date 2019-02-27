@@ -10,8 +10,10 @@ public class CleanupForReloadInitComponent : AsyncInitComponentBase
         manager.DisconnectFromBoard();
             
         BoardService.Current.Cleanup();
-        
         BoardService.Instance.SetManager(null);
+
+        ShopService.Current.Cleanup();
+        ShopService.Instance.SetManager(null);
 
         GameDataService.Instance.SetManager(null);
          
