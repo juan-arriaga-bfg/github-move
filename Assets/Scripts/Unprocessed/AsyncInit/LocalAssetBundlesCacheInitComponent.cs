@@ -49,6 +49,8 @@ public class LocalAssetBundlesCacheInitComponent : AsyncInitComponentBase
             Caching.ClearCache();
         }
 
+        Caching.ClearCache(); // FORCE CACHE CLEAN DUE to magic bugs
+        
         IWAssetBundleService.Instance.Manager.CacheLocalBundles( (isOk) => 
         {
             var iconResourceManager = IconService.Current as IconResourceManager;
