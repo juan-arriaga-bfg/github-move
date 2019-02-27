@@ -189,7 +189,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
         var life = target.GetComponent<WorkplaceLifeComponent>(WorkplaceLifeComponent.ComponentGuid);
         
         if (life == null) return false;
-
+        
         if (life.Locker.IsLocked)
         {
             UIErrorWindowController.AddError(life.Rewards.IsComplete
@@ -199,7 +199,7 @@ public class WorkerCurrencyLogicComponent : LimitCurrencyLogicComponent
             return false;
         }
 
-        if (life.IsUseCooldown && life.TimerMain.IsExecuteable())
+        if (life.IsUseCooldown && life.TimerCooldown.IsExecuteable())
         {
             UIErrorWindowController.AddError(LocalizationService.Get("message.error.notReady", "message.error.notReady"));
             return false;

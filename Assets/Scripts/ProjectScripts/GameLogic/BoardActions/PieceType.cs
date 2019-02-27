@@ -203,6 +203,12 @@ public static partial class PieceType
     public static readonly PieceTypeDef NPC_F7 = new PieceTypeDef{Id = 300406, Abbreviations = new List<string>{ "NPC_F7" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Progress};
     public static readonly PieceTypeDef NPC_F8 = new PieceTypeDef{Id = 300407, Abbreviations = new List<string>{ "NPC_F8" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Progress};
 
+    public static readonly PieceTypeDef NPC_G1 = new PieceTypeDef{Id = 300500, Abbreviations = new List<string>{ "NPC_G1" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef NPC_G2 = new PieceTypeDef{Id = 300501, Abbreviations = new List<string>{ "NPC_G2" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef NPC_G3 = new PieceTypeDef{Id = 300502, Abbreviations = new List<string>{ "NPC_G3" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef NPC_G4 = new PieceTypeDef{Id = 300503, Abbreviations = new List<string>{ "NPC_G4" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef NPC_G5 = new PieceTypeDef{Id = 300504, Abbreviations = new List<string>{ "NPC_G5" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Progress};
+    public static readonly PieceTypeDef NPC_G6 = new PieceTypeDef{Id = 300505, Abbreviations = new List<string>{ "NPC_G6" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Progress};
     
 #endregion
 

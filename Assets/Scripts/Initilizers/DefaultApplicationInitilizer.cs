@@ -35,11 +35,14 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
            .AddComponent(new BfgSdkUnityMessageHandlerInitComponent())              // Used by BFG SDK to make calls to make calls to native code 
            .AddComponent(new SecuredTimeServiceInitComponent())                     // Anti-cheat protection for timers
            .AddComponent(new BfgSdkGdprInitComponent())                             // Listener for BFG SDK's GDPR popup events
-           .AddComponent(new ConfigsAndManagersInitComponent()) 
            .AddComponent(new BfgSdkAnalyticsInitComponent()) 
+           .AddComponent(new ContentAndIconManagersInitComponent()) 
+            
+           .AddComponent(new LocalAssetBundlesCacheInitComponent()
+               .SetDependency(typeof(ContentAndIconManagersInitComponent)))
 
-           .AddComponent(new LocalBundlesInitComponent()
-               .SetDependency(typeof(ConfigsAndManagersInitComponent)))
+           .AddComponent(new ConfigsAndManagersInitComponent()
+               .SetDependency(typeof(LocalAssetBundlesCacheInitComponent)))
             
            .AddComponent(new ProfileInitComponent()  
                 .SetDependency(typeof(ConfigsAndManagersInitComponent)))
@@ -58,7 +61,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
                .SetDependency(typeof(IapInitComponent)))
             
            .AddComponent(new ShowLoadingWindowInitComponent()
-               .SetDependency(typeof(LocalBundlesInitComponent))
+               .SetDependency(typeof(LocalAssetBundlesCacheInitComponent))
                .SetDependency(typeof(LocalizationInitComponent)));
 
         if (SceneManager.GetActiveScene().name != "Main") // Handle case when we start the game from the Main scene in the Editor.  
@@ -66,7 +69,7 @@ public class DefaultApplicationInitilizer : ApplicationInitializer
             asyncInitManager.AddComponent(new UIInitProgressListenerComponent());
             
             asyncInitManager.AddComponent(new MainSceneLoaderComponent()
-                .SetDependency(typeof(LocalBundlesInitComponent))
+                .SetDependency(typeof(LocalAssetBundlesCacheInitComponent))
                 .SetDependency(typeof(LocalizationInitComponent))
                 .SetDependency(typeof(SecuredTimeServiceInitComponent)));
         }

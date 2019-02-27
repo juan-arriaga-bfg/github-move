@@ -58,37 +58,9 @@
   {
     "Uid": "Boosts",
     "UnlockLevel": 3,
-    "Amount": 5,
-    "Weight": {
-      "Uid": "Boost_CR1",
-      "Weight": 10
-    },
-    "Price": {
-      "Currency": "Crystals",
-      "Amount": 75
-    },
-    "RandomType": "Base"
-  },
-  {
-    "Uid": "Boosts",
-    "UnlockLevel": 3,
-    "Amount": 2,
-    "Weight": {
-      "Uid": "Boost_CR2",
-      "Weight": 10
-    },
-    "Price": {
-      "Currency": "Crystals",
-      "Amount": 75
-    },
-    "RandomType": "Base"
-  },
-  {
-    "Uid": "Boosts",
-    "UnlockLevel": 3,
     "Amount": 1,
     "Weight": {
-      "Uid": "Boost_CR3",
+      "Uid": "Boost_CR",
       "Weight": 10
     },
     "Price": {
@@ -205,7 +177,7 @@
     },
     "Price": {
       "Currency": "Crystals",
-      "Amount": 20
+      "Amount": 25
     },
     "RandomType": "NPCChests"
   },

@@ -95,7 +95,7 @@
     "Index": 4,
     "Price": {
       "Currency": "Experience",
-      "Amount": 450
+      "Amount": 500
     },
     "Rewards": [
       {
@@ -154,7 +154,7 @@
     "Index": 5,
     "Price": {
       "Currency": "Experience",
-      "Amount": 550
+      "Amount": 650
     },
     "Rewards": [
       {
@@ -172,7 +172,7 @@
     ],
     "OrdersWeights": [
       {
-        "Uid": "Order4",
+        "Uid": "Order10",
         "Weight": 2
       }
     ],
@@ -228,7 +228,7 @@
     "Index": 7,
     "Price": {
       "Currency": "Experience",
-      "Amount": 2000
+      "Amount": 1500
     },
     "Rewards": [
       {
@@ -252,7 +252,7 @@
       },
       {
         "Uid": "PR_B1",
-        "Weight": 2,
+        "Weight": 1,
         "Override": true
       },
       {
@@ -264,7 +264,7 @@
     "ResourcesWeights": [
       {
         "Uid": "PR_A5",
-        "Weight": 3,
+        "Weight": 2,
         "Override": true
       },
       {
@@ -293,16 +293,20 @@
       {
         "Currency": "Crystals",
         "Amount": 5
+      },
+      {
+        "Currency": "Energy",
+        "Amount": 100
       }
     ],
     "OrdersWeights": [
       {
         "Uid": "Order2",
-        "Weight": 1
+        "Weight": 3
       },
       {
         "Uid": "Order7",
-        "Weight": 1
+        "Weight": 3
       }
     ],
     "PieceWeights": [
@@ -334,7 +338,7 @@
     "Index": 9,
     "Price": {
       "Currency": "Experience",
-      "Amount": 3500
+      "Amount": 4500
     },
     "Rewards": [
       {
@@ -344,17 +348,16 @@
       {
         "Currency": "Crystals",
         "Amount": 5
+      },
+      {
+        "Currency": "Energy",
+        "Amount": 120
       }
     ],
     "OrdersWeights": [
       {
-        "Uid": "Order16",
+        "Uid": "Order4",
         "Weight": 3
-      },
-      {
-        "Uid": "Order17",
-        "Weight": 3,
-        "Override": true
       }
     ],
     "PieceWeights": [
@@ -391,7 +394,7 @@
     "Index": 10,
     "Price": {
       "Currency": "Experience",
-      "Amount": 4000
+      "Amount": 5500
     },
     "Rewards": [
       {
@@ -401,21 +404,26 @@
       {
         "Currency": "Crystals",
         "Amount": 5
+      },
+      {
+        "Currency": "Energy",
+        "Amount": 150
       }
     ],
     "OrdersWeights": [
       {
-        "Uid": "Order10",
-        "Weight": 2
-      },
-      {
-        "Uid": "Order16",
+        "Uid": "Order4",
         "Weight": 2,
         "Override": true
       },
       {
+        "Uid": "Order16",
+        "Weight": 3,
+        "Override": true
+      },
+      {
         "Uid": "Order7",
-        "Weight": 2,
+        "Weight": 3,
         "Override": true
       }
     ],
@@ -452,7 +460,7 @@
     "Index": 11,
     "Price": {
       "Currency": "Experience",
-      "Amount": 5000
+      "Amount": 7000
     },
     "Rewards": [
       {
@@ -503,7 +511,7 @@
     "Index": 12,
     "Price": {
       "Currency": "Experience",
-      "Amount": 5500
+      "Amount": 8000
     },
     "Rewards": [
       {
@@ -555,7 +563,7 @@
     "Index": 13,
     "Price": {
       "Currency": "Experience",
-      "Amount": 6000
+      "Amount": 9000
     },
     "Rewards": [
       {
@@ -595,7 +603,7 @@
     "Index": 14,
     "Price": {
       "Currency": "Experience",
-      "Amount": 8000
+      "Amount": 10000
     },
     "Rewards": [
       {

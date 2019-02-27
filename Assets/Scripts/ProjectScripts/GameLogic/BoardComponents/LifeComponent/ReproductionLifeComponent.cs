@@ -12,6 +12,7 @@ public class ReproductionLifeComponent : WorkplaceLifeComponent
         : string.Format(LocalizationService.Get("gameboard.bubble.button.send", "gameboard.bubble.button.send {0}"), string.Empty);
     
     public override CurrencyPair Worker => null;
+    public override bool IsCanUseExtraWorker => false;
 
     public override TimerComponent TimerMain => TimerCooldown;
     

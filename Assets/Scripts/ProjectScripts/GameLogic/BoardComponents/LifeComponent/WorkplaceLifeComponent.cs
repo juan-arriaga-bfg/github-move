@@ -22,6 +22,8 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	
 	public bool IsUseCooldown => TimerCooldown != null;
 	
+	public virtual bool IsCanUseExtraWorker => Locker.IsLocked == false && (IsUseCooldown == false || TimerCooldown.IsExecuteable() == false) && CurrencyHelper.IsCanPurchase(Energy);
+	
 	public float GetProgressNext => 1 - (current+1)/(float)HP;
 	
 	public override void OnRegisterEntity(ECSEntity entity)

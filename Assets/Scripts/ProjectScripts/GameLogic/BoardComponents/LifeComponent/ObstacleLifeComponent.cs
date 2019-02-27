@@ -32,7 +32,7 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         else
         {
             OnTimerStart();
-            Locker.Unlock(this);
+            if (Rewards.IsComplete == false) Locker.Unlock(this);
         }
         
         return item;

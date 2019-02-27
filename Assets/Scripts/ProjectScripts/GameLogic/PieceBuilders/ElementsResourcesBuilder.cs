@@ -125,6 +125,17 @@ public class ElementsResourcesBuilder
 
         #endregion
         
+        #region NPC_G
+
+        dict.Add(PieceType.NPC_G1.Id, R.NPC_G1Piece);
+        dict.Add(PieceType.NPC_G2.Id, R.NPC_G2Piece);
+        dict.Add(PieceType.NPC_G3.Id, R.NPC_G3Piece);
+        dict.Add(PieceType.NPC_G4.Id, R.NPC_G4Piece);
+        dict.Add(PieceType.NPC_G5.Id, R.NPC_G5Piece);
+        dict.Add(PieceType.NPC_G6.Id, R.NPC_G6Piece);
+
+        #endregion
+        
 #endregion
 
 #region Enemies

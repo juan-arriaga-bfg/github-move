@@ -24,23 +24,6 @@ public class ConfigsAndManagersInitComponent : AsyncInitComponentBase
         ECSManager ecsManager = new ECSManager();
         ECSService.Instance.SetManager(ecsManager);
         ecsManager.AddSystemProcessor(ecsSystemProcessor);
-               
-        //init assetbundle
-        IWAssetBundleManager assetBundleManager = new IWAssetBundleManager();
-        IDataMapper<List<IWAssetBundleData>> assetBundleManagerDataMapper = new ResourceConfigDataMapper<List<IWAssetBundleData>>("iw/assetbundles.data", false);
-        assetBundleManager.LoadData(assetBundleManagerDataMapper);
-        IWAssetBundleService.Instance.SetManager(assetBundleManager);
-        
-        //init content manager
-        ContentManager contentManager = new DefaultContentManager();
-        IDataMapper<List<ContentData>> contentManagerDataMapper = new ResourceConfigDataMapper<List<ContentData>>("iw/content.data", false);
-        contentManager.LoadData(contentManagerDataMapper);
-        ContentService.Instance.SetManager(contentManager);
-        
-        //init iconservice
-        IconResourceManager iconManager = new DefaultSpriteManager();
-        IconService.Instance.SetManager(iconManager);
-        iconManager.LoadData(new ResourceConfigDataMapper<List<IconData>>("iw/icons.data", false));
         
         //init shopmanager
         ShopManager shopManager = new ShopManager();

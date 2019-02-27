@@ -109,6 +109,10 @@
           {
             "Currency": "Experience",
             "Amount": 200
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 1
           }
         ]
       }
@@ -196,7 +200,7 @@
         "Value": [
           {
             "Currency": "Coins",
-            "Amount": 30
+            "Amount": 25
           },
           {
             "Currency": "Experience",
@@ -224,6 +228,10 @@
           {
             "Currency": "Experience",
             "Amount": 30
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 2
           }
         ]
       }
@@ -339,6 +347,10 @@
           {
             "Currency": "Experience",
             "Amount": 200
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 5
           }
         ]
       }
@@ -408,6 +420,10 @@
           {
             "Currency": "Experience",
             "Amount": 150
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 3
           }
         ]
       }
@@ -431,6 +447,10 @@
           {
             "Currency": "Experience",
             "Amount": 100
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 1
           }
         ]
       }
@@ -477,6 +497,10 @@
           {
             "Currency": "Experience",
             "Amount": 150
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 3
           }
         ]
       }
@@ -523,6 +547,10 @@
           {
             "Currency": "Experience",
             "Amount": 200
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 5
           }
         ]
       }
@@ -569,6 +597,10 @@
           {
             "Currency": "Experience",
             "Amount": 100
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 1
           }
         ]
       }
@@ -592,6 +624,10 @@
           {
             "Currency": "Experience",
             "Amount": 400
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 10
           }
         ]
       }
@@ -707,6 +743,10 @@
           {
             "Currency": "Experience",
             "Amount": 150
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 3
           }
         ]
       }
@@ -730,6 +770,10 @@
           {
             "Currency": "Experience",
             "Amount": 50
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 1
           }
         ]
       }
@@ -753,6 +797,10 @@
           {
             "Currency": "Experience",
             "Amount": 200
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 5
           }
         ]
       }
@@ -799,6 +847,10 @@
           {
             "Currency": "Experience",
             "Amount": 400
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 10
           }
         ]
       }
@@ -822,6 +874,10 @@
           {
             "Currency": "Experience",
             "Amount": 50
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 1
           }
         ]
       }
@@ -891,6 +947,10 @@
           {
             "Currency": "Experience",
             "Amount": 1000
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 20
           }
         ]
       }
@@ -1052,6 +1112,10 @@
           {
             "Currency": "Experience",
             "Amount": 100
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 1
           }
         ]
       }
@@ -1075,6 +1139,10 @@
           {
             "Currency": "Experience",
             "Amount": 150
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 3
           }
         ]
       }
@@ -1098,6 +1166,10 @@
           {
             "Currency": "Experience",
             "Amount": 50
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 1
           }
         ]
       }
@@ -1213,6 +1285,10 @@
           {
             "Currency": "Experience",
             "Amount": 200
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 5
           }
         ]
       }
@@ -1305,6 +1381,10 @@
           {
             "Currency": "Experience",
             "Amount": 100
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 1
           }
         ]
       }
@@ -1328,6 +1408,10 @@
           {
             "Currency": "Experience",
             "Amount": 150
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 3
           }
         ]
       }
@@ -1351,6 +1435,10 @@
           {
             "Currency": "Experience",
             "Amount": 200
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 5
           }
         ]
       }
@@ -1485,6 +1573,240 @@
           {
             "Currency": "Coins",
             "Amount": 15
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "75_CreatePiece_NPC_C3",
+    "TaskDefs": [
+      {
+        "TaskId": "75_CreatePiece_NPC_C3"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 20
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "76_CreatePiece_NPC_C",
+    "TaskDefs": [
+      {
+        "TaskId": "76_CreatePiece_NPC_C"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "77_CreatePiece_A4",
+    "TaskDefs": [
+      {
+        "TaskId": "77_CreatePiece_A4"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 15
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          },
+          {
+            "Currency": "Crystals",
+            "Amount": 1
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "78_CreatePiece_A3",
+    "TaskDefs": [
+      {
+        "TaskId": "78_CreatePiece_A3"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "79_CreatePiece_NPC_D3",
+    "TaskDefs": [
+      {
+        "TaskId": "79_CreatePiece_NPC_D3"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 15
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "80_CreatePiece_NPC_D4",
+    "TaskDefs": [
+      {
+        "TaskId": "80_CreatePiece_NPC_D4"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 75
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "81_CreatePiece_NPC_D",
+    "TaskDefs": [
+      {
+        "TaskId": "81_CreatePiece_NPC_D"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "82_CreatePiece_NPC_E3",
+    "TaskDefs": [
+      {
+        "TaskId": "82_CreatePiece_NPC_E3"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 15
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "83_CreatePiece_NPC_E4",
+    "TaskDefs": [
+      {
+        "TaskId": "83_CreatePiece_NPC_E4"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 75
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "84_CreatePiece_NPC_E",
+    "TaskDefs": [
+      {
+        "TaskId": "84_CreatePiece_NPC_E"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
           },
           {
             "Currency": "Experience",

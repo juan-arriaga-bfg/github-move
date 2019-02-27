@@ -192,7 +192,7 @@ public class FogPieceView : PieceBoardElementView, IBoardEventListener
                     ToggleHighlight(context == currentPiece);
                 }
 
-                if (context == currentPiece && observer.CanBeFilled())
+                if (context == currentPiece && observer.RequiredLevelReached() && observer.CanBeReached() && observer.CanBeFilled())
                 {
                     PointToManaPieceOnBoard();
                 }
