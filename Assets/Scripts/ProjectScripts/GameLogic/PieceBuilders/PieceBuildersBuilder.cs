@@ -38,11 +38,12 @@ public class PieceBuildersBuilder
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Soft1.Id, PieceType.Soft6.Id, dict);
         dict = AddSimplePiece<ResourcePieceBuilder>(PieceType.Hard1.Id, PieceType.Hard6.Id, dict);
         
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_B1.Id, PieceType.NPC_B4.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_C1.Id, PieceType.NPC_C8.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_D1.Id, PieceType.NPC_D8.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_E1.Id, PieceType.NPC_E8.Id, dict);
-        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_F1.Id, PieceType.NPC_F8.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_B1.Id, PieceType.NPC_B3.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_C1.Id, PieceType.NPC_C5.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_D1.Id, PieceType.NPC_D6.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_E1.Id, PieceType.NPC_E6.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_F1.Id, PieceType.NPC_F6.Id, dict);
+        dict = AddSimplePiece<SimplePieceBuilder>(PieceType.NPC_G1.Id, PieceType.NPC_G6.Id, dict);
         
         dict.Add(PieceType.CH_Free.Id, new ChestPieceBuilder());
         dict.Add(PieceType.CH_NPC.Id, new ChestPieceBuilder());

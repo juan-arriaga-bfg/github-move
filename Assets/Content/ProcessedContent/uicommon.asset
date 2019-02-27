@@ -267,6 +267,7 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 02ecc198df0771e4c99eba7f44ebacfd, type: 3}
     - {fileID: 21300000, guid: 13f8dd100a4a8c64cb358df58fa70003, type: 3}
     - {fileID: 21300000, guid: 4bf47d352826ac645a428f296d75e6cd, type: 3}
+    - {fileID: 21300000, guid: 08875c1d15930ce4ca78b91c110a2e08, type: 3}
     - {fileID: 21300000, guid: a8404ad872b047f4d8555582eebc631e, type: 3}
     - {fileID: 21300000, guid: 815c8dadff5a90d46b45ee1196b02756, type: 3}
     - {fileID: 21300000, guid: 19c81fea658b252488ca2c4d6e7a30d2, type: 3}
@@ -282,10 +283,11 @@ SpriteAtlas:
     - {fileID: 21300000, guid: dfd26cab26e323d44af848a79a7ee37b, type: 3}
     - {fileID: 21300000, guid: 128ca30853c032145b929a84acba7707, type: 3}
     - {fileID: 21300000, guid: 9e10954b1cc16494597bef5d9647a936, type: 3}
+    - {fileID: 21300000, guid: 792e257e4fb387144b7d293d0995fbdc, type: 3}
     - {fileID: 21300000, guid: 45a67a70ff6a03c4ab8794b99682d8ac, type: 3}
     - {fileID: 21300000, guid: d88c51d99c1b28d4091573621c235a3a, type: 3}
     - {fileID: 21300000, guid: 4dbe30d396e6e354b8eb80842bbfc1dc, type: 3}
-    totalSpriteSurfaceArea: 3737780
+    totalSpriteSurfaceArea: 3744410
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -502,6 +504,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 7d5a9dec4b89dfd4ca94bc80a38d3ff3, type: 3}
   - {fileID: 21300000, guid: 41ee55fc1fd04d54583b49c6bd68f94e, type: 3}
   - {fileID: 21300000, guid: a7085b1d5e01bea4e9fb3d68692e9af4, type: 3}
+  - {fileID: 21300000, guid: 08875c1d15930ce4ca78b91c110a2e08, type: 3}
   - {fileID: 21300000, guid: 9d5dde4d5b9ac4b29b965a1e45f6becb, type: 3}
   - {fileID: 21300000, guid: 220ee55d41d63174588f684d5e56847c, type: 3}
   - {fileID: 21300000, guid: 06a2688d3d9df8e41a86926c8720ff0c, type: 3}
@@ -517,6 +520,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5ed9b73e6d552754aa559a774e929589, type: 3}
   - {fileID: 21300000, guid: db88756e1f1ebd74cb076f5ccc273e81, type: 3}
   - {fileID: 21300000, guid: 583a2f6e1be0dbd4ea11fdba8170ba6b, type: 3}
+  - {fileID: 21300000, guid: 792e257e4fb387144b7d293d0995fbdc, type: 3}
   - {fileID: 21300000, guid: 5115a49e660dcb64d9929951a1f46be4, type: 3}
   - {fileID: 21300000, guid: 8e15a79ef6563aa43b0a253e67aff33c, type: 3}
   - {fileID: 21300000, guid: 8ae855ae42b47744795694f4ce4c0483, type: 3}
@@ -747,6 +751,7 @@ SpriteAtlas:
   - Char1
   - newTaskBubble
   - sheetOrders
+  - buttonSepia
   - icon_heart
   - icon_Complete
   - Order17
@@ -762,6 +767,7 @@ SpriteAtlas:
   - codexChainBack
   - red_button
   - quest_icon_hit_tree
+  - ribbonBrownRewardRound
   - ramka_item_not_active_back_not_active
   - ramka_item_active
   - icon_round

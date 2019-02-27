@@ -1748,6 +1748,75 @@
     }
   },
   {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "82_CreatePiece_NPC_E3",
+    "TaskDefs": [
+      {
+        "TaskId": "82_CreatePiece_NPC_E3"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 15
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "83_CreatePiece_NPC_E4",
+    "TaskDefs": [
+      {
+        "TaskId": "83_CreatePiece_NPC_E4"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 75
+          }
+        ]
+      }
+    }
+  },
+  {
+    "$type": "StoryQuestEntity, GameAssembly",
+    "Id": "84_CreatePiece_NPC_E",
+    "TaskDefs": [
+      {
+        "TaskId": "84_CreatePiece_NPC_E"
+      }
+    ],
+    "ComponentsCache": {
+      "QuestRewardComponent": {
+        "Value": [
+          {
+            "Currency": "Coins",
+            "Amount": 25
+          },
+          {
+            "Currency": "Experience",
+            "Amount": 50
+          }
+        ]
+      }
+    }
+  },
+  {
     "$type": "DailyQuestEntity, GameAssembly",
     "Id": "Daily",
     "TaskDefs": [

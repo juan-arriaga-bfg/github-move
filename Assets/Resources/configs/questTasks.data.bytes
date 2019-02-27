@@ -106,7 +106,7 @@
     "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "NPC_Gnome",
+        "Ico": "quest_icon_npc_gnome",
         "Title": "quest.use.worker.title",
         "Message": "quest.use.worker.message",
         "Hint": "task.use.worker.hint"
@@ -154,7 +154,6 @@
   {
     "$type": "TaskCompleteOrderEntity, GameAssembly",
     "Id": "16_CompleteOrder",
-    "PieceUid": "NPC_A",
     "TargetValue": 2,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
@@ -358,7 +357,7 @@
     "TargetValue": 10,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "NPC_Gnome",
+        "Ico": "quest_icon_npc_gnome",
         "Title": "quest.use.worker.title",
         "Message": "quest.use.worker.message",
         "Hint": "task.use.worker.hint"
@@ -456,7 +455,7 @@
     "TargetValue": 20,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "NPC_Gnome",
+        "Ico": "quest_icon_npc_gnome",
         "Title": "quest.use.worker.title",
         "Message": "quest.use.worker.message",
         "Hint": "task.use.worker.hint"
@@ -598,11 +597,10 @@
   {
     "$type": "TaskCompleteOrderEntity, GameAssembly",
     "Id": "53_CompleteOrder",
-    "PieceUid": "NPC_E",
     "TargetValue": 3,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "NPC_E",
+        "Ico": "Collection_C_Icon",
         "Title": "quest.complete.orders.title",
         "Message": "quest.complete.orders.message",
         "Hint": "task.complete.orders.hint"
@@ -734,11 +732,10 @@
   {
     "$type": "TaskCompleteOrderEntity, GameAssembly",
     "Id": "65_CompleteOrder",
-    "PieceUid": "NPC_A",
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "NPC_A",
+        "Ico": "Collection_A_Icon",
         "Title": "quest.complete.orders.title",
         "Message": "quest.complete.orders.message",
         "Hint": "task.complete.orders.hint"
@@ -764,7 +761,7 @@
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "NPC_B",
+        "Ico": "Collection_B_Icon",
         "Title": "quest.create.piece.title",
         "Message": "quest.create.piece.message"
       }
@@ -785,11 +782,10 @@
   {
     "$type": "TaskCompleteOrderEntity, GameAssembly",
     "Id": "73_CompleteOrder",
-    "PieceUid": "NPC_C",
     "TargetValue": 5,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "NPC_C",
+        "Ico": "Collection_B_Icon",
         "Title": "quest.complete.orders.title",
         "Message": "quest.complete.orders.message"
       }
@@ -826,7 +822,7 @@
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "NPC_C",
+        "Ico": "Collection_C_Icon",
         "Title": "quest.create.piece.title",
         "Message": "quest.create.piece.message"
       }
@@ -887,7 +883,44 @@
     "TargetValue": 1,
     "ComponentsCache": {
       "QuestDescriptionComponent": {
-        "Ico": "NPC_D",
+        "Ico": "Collection_D_Icon",
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "82_CreatePiece_NPC_E3",
+    "PieceUid": "NPC_E3",
+    "TargetValue": 5,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "83_CreatePiece_NPC_E4",
+    "PieceUid": "NPC_E4",
+    "TargetValue": 2,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Title": "quest.create.piece.title",
+        "Message": "quest.create.piece.message"
+      }
+    }
+  },
+  {
+    "$type": "TaskCreatePieceEntity, GameAssembly",
+    "Id": "84_CreatePiece_NPC_E",
+    "PieceUid": "NPC_E",
+    "TargetValue": 1,
+    "ComponentsCache": {
+      "QuestDescriptionComponent": {
+        "Ico": "Collection_E_Icon",
         "Title": "quest.create.piece.title",
         "Message": "quest.create.piece.message"
       }
