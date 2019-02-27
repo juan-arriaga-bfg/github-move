@@ -431,6 +431,16 @@ public static partial class PieceType
     public static readonly PieceTypeDef OB4_G = new PieceTypeDef{Id = 20303, Abbreviations = new List<string>{ "OB4_G" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.Workplace | PieceTypeFilter.Tree};
     public static readonly PieceTypeDef OB5_G = new PieceTypeDef{Id = 20304, Abbreviations = new List<string>{ "OB5_G" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.Workplace | PieceTypeFilter.Tree};
     
+    public static readonly PieceTypeDef OB1_D = new PieceTypeDef{Id = 20400, Abbreviations = new List<string>{ "OB1_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.Workplace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef OB2_D = new PieceTypeDef{Id = 20401, Abbreviations = new List<string>{ "OB2_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.Workplace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef OB3_D = new PieceTypeDef{Id = 20402, Abbreviations = new List<string>{ "OB3_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.Workplace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef OB4_D = new PieceTypeDef{Id = 20403, Abbreviations = new List<string>{ "OB4_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.Workplace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef OB5_D = new PieceTypeDef{Id = 20404, Abbreviations = new List<string>{ "OB5_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.Workplace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef OB6_D = new PieceTypeDef{Id = 20405, Abbreviations = new List<string>{ "OB6_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.Workplace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef OB7_D = new PieceTypeDef{Id = 20406, Abbreviations = new List<string>{ "OB7_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.Workplace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef OB8_D = new PieceTypeDef{Id = 20407, Abbreviations = new List<string>{ "OB8_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.Workplace | PieceTypeFilter.Tree};
+    public static readonly PieceTypeDef OB9_D = new PieceTypeDef{Id = 20408, Abbreviations = new List<string>{ "OB9_D" }, Filter = PieceTypeFilter.Simple | PieceTypeFilter.Obstacle | PieceTypeFilter.Workplace | PieceTypeFilter.Tree};
+    
 #endregion
     
 #region Simple Pieces

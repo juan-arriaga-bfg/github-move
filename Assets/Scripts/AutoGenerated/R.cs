@@ -426,4 +426,13 @@ public class R
      public const string NPC_R6Piece = "NPC_R6Piece";
      public const string NPC_R7Piece = "NPC_R7Piece";
      public const string NPC_R8Piece = "NPC_R8Piece";
+     public const string OB1_DPiece = "OB1_DPiece";
+     public const string OB2_DPiece = "OB2_DPiece";
+     public const string OB3_DPiece = "OB3_DPiece";
+     public const string OB4_DPiece = "OB4_DPiece";
+     public const string OB5_DPiece = "OB5_DPiece";
+     public const string OB6_DPiece = "OB6_DPiece";
+     public const string OB7_DPiece = "OB7_DPiece";
+     public const string OB8_DPiece = "OB8_DPiece";
+     public const string OB9_DPiece = "OB9_DPiece";
 }

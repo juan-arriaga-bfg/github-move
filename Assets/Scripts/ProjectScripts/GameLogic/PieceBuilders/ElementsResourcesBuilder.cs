@@ -386,6 +386,16 @@ public class ElementsResourcesBuilder
         dict.Add(PieceType.OB8_A.Id, R.OB8_APiece);
         dict.Add(PieceType.OB9_A.Id, R.OB9_APiece);
         
+        dict.Add(PieceType.OB1_D.Id, R.OB1_DPiece);
+        dict.Add(PieceType.OB2_D.Id, R.OB2_DPiece);
+        dict.Add(PieceType.OB3_D.Id, R.OB3_DPiece);
+        dict.Add(PieceType.OB4_D.Id, R.OB4_DPiece);
+        dict.Add(PieceType.OB5_D.Id, R.OB5_DPiece);
+        dict.Add(PieceType.OB6_D.Id, R.OB6_DPiece);
+        dict.Add(PieceType.OB7_D.Id, R.OB7_DPiece);
+        dict.Add(PieceType.OB8_D.Id, R.OB8_DPiece);
+        dict.Add(PieceType.OB9_D.Id, R.OB9_DPiece);
+        
         dict.Add(PieceType.OB_PR_A.Id, R.OB_PR_APiece);
         dict.Add(PieceType.OB_PR_B.Id, R.OB_PR_BPiece);
         dict.Add(PieceType.OB_PR_C.Id, R.OB_PR_CPiece);

@@ -90,6 +90,7 @@ public class PieceBuildersBuilder
     {
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OB1_TT.Id, PieceType.OB2_TT.Id, dict);
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OB1_A.Id, PieceType.OB9_A.Id, dict);
+        dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OB1_D.Id, PieceType.OB9_D.Id, dict);
         dict = AddSimplePiece<ObstaclePieceBuilder>(PieceType.OB1_G.Id, PieceType.OB5_G.Id, dict);
         dict = AddSimplePiece<MovedObstaclePieceBuilder>(PieceType.OB_PR_A.Id, PieceType.OB_PR_G.Id, dict);
         

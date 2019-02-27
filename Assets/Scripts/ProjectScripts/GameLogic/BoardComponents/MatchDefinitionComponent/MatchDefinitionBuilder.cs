@@ -284,6 +284,16 @@ public class MatchDefinitionBuilder
         dict.Add(PieceType.OB8_A.Id, new PieceMatchDef {Next = PieceType.OB9_A.Id, Previous = PieceType.OB7_A.Id, Amount = -1});
         dict.Add(PieceType.OB9_A.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.OB8_A.Id, Amount = -1});
         
+        dict.Add(PieceType.OB1_D.Id, new PieceMatchDef {Next = PieceType.OB2_D.Id, Previous = PieceType.None.Id, Amount = -1});
+        dict.Add(PieceType.OB2_D.Id, new PieceMatchDef {Next = PieceType.OB3_D.Id, Previous = PieceType.OB1_D.Id, Amount = -1});
+        dict.Add(PieceType.OB3_D.Id, new PieceMatchDef {Next = PieceType.OB4_D.Id, Previous = PieceType.OB2_D.Id, Amount = -1});
+        dict.Add(PieceType.OB4_D.Id, new PieceMatchDef {Next = PieceType.OB5_D.Id, Previous = PieceType.OB3_D.Id, Amount = -1});
+        dict.Add(PieceType.OB5_D.Id, new PieceMatchDef {Next = PieceType.OB6_D.Id, Previous = PieceType.OB4_D.Id, Amount = -1});
+        dict.Add(PieceType.OB6_D.Id, new PieceMatchDef {Next = PieceType.OB7_D.Id, Previous = PieceType.OB5_D.Id, Amount = -1});
+        dict.Add(PieceType.OB7_D.Id, new PieceMatchDef {Next = PieceType.OB8_D.Id, Previous = PieceType.OB6_D.Id, Amount = -1});
+        dict.Add(PieceType.OB8_D.Id, new PieceMatchDef {Next = PieceType.OB9_D.Id, Previous = PieceType.OB7_D.Id, Amount = -1});
+        dict.Add(PieceType.OB9_D.Id, new PieceMatchDef {Next = PieceType.None.Id, Previous = PieceType.OB8_D.Id, Amount = -1});
+        
         dict.Add(PieceType.OB1_G.Id, new PieceMatchDef {Next = PieceType.OB2_G.Id, Previous = PieceType.None.Id, Amount = -1});
         dict.Add(PieceType.OB2_G.Id, new PieceMatchDef {Next = PieceType.OB3_G.Id, Previous = PieceType.OB1_G.Id, Amount = -1});
         dict.Add(PieceType.OB3_G.Id, new PieceMatchDef {Next = PieceType.OB4_G.Id, Previous = PieceType.OB2_G.Id, Amount = -1});
