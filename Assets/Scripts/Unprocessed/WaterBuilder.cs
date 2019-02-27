@@ -9,6 +9,8 @@ public class WaterBuilder : MonoBehaviour
     private void Start()
     {
         var meshFilter = GetComponent<MeshFilter>();
+        var render = GetComponent<MeshRenderer>();
+        
         var boardController = BoardService.Current.FirstBoard;
 
         meshFilter.mesh = GenerateWaterMesh(
@@ -25,7 +27,11 @@ public class WaterBuilder : MonoBehaviour
         transform.SetParent(boardController.RendererContext.SectorsContainer.transform, false);
         transform.localScale = Vector3.one;
         transform.localPosition = Vector3.zero;
-        
+
+        render.sortingOrder = 0;
+        render.sortingLayerName = "Default";
+        render.material.renderQueue = 2000;
+
         //MeshUtility.Optimize(meshFilter.mesh);
     }
 
