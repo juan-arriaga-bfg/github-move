@@ -55,19 +55,26 @@ public class DailyQuestButton : IWUIWindowViewController
         {
             return;
         }
+
+        var questManager = GameDataService.Current.QuestsManager;
         
         if (enabled)
         {
-            dailyQuest.OnChanged += QuestChanged;
+            questManager.OnQuestStateChanged += QuestChanged;
         }
         else
         {
-            dailyQuest.OnChanged -= QuestChanged;
+            questManager.OnQuestStateChanged -= QuestChanged;
         }
     }
 
     private void QuestChanged(QuestEntity quest, TaskEntity task)
     {
+        if (quest != dailyQuest)
+        {
+            return;
+        }
+        
         UpdateState();
     }
 
