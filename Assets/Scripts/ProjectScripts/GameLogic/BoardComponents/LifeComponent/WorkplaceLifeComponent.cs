@@ -21,6 +21,8 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	public RewardsStoreComponent Rewards;
 	
 	public bool IsUseCooldown => TimerCooldown != null;
+
+	public bool IsHideTimer => TimerWork != null && TimerWork.Delay == WorkerCurrencyLogicComponent.MinDelay;
 	
 	public virtual bool IsCanUseExtraWorker => Locker.IsLocked == false && (IsUseCooldown == false || TimerCooldown.IsExecuteable() == false) && CurrencyHelper.IsCanPurchase(Energy);
 	
@@ -170,7 +172,7 @@ public class WorkplaceLifeComponent : LifeComponent, IPieceBoardObserver, ILocke
 	
 	private void UpdateView(bool isShow)
 	{
-		if(Context.ViewDefinition == null) return;
+		if(Context.ViewDefinition == null || IsHideTimer) return;
         
 		var view = Context.ViewDefinition.AddView(ViewType.BoardTimer);
 		

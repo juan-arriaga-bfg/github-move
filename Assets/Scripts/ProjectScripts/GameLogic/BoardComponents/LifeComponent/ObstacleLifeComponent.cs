@@ -4,7 +4,20 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
 {
     public override CurrencyPair Energy => GameDataService.Current.ObstaclesManager.GetPriceByStep(Context.PieceType, current);
     public override string AnalyticsLocation => "skip_obstacle";
-    public override string Message => string.Format(LocalizationService.Get("gameboard.bubble.message.obstacle", "gameboard.bubble.message.obstacle\n{0}?"), DateTimeExtension.GetDelayText(GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current)));
+
+    public override string Message
+    {
+        get
+        {
+            var isLast = HP != 1 && HP == current + 1;
+            var message = LocalizationService.Get("gameboard.bubble.message.obstacle", "gameboard.bubble.message.obstacle\n{0}?");
+
+            return isLast
+                ? string.Format(message, DateTimeExtension.GetDelayText(GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current)))
+                : message.Replace("\n{0}", "");
+        }
+    }
+
     public override string Price => string.Format(LocalizationService.Get("gameboard.bubble.button.chop", "gameboard.bubble.button.chop {0}"), Energy.ToStringIcon());
     
     public override void OnRegisterEntity(ECSEntity entity)
@@ -20,13 +33,13 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
 		
         var save = ProfileService.Current.GetComponent<FieldDefComponent>(FieldDefComponent.ComponentGuid);
         var item = save?.GetLifeSave(position);
-		
-        if(item == null) return null;
+
+        if (item == null) return null;
 		
         current = item.Step;
         Context.Context.WorkerLogic.Init(Context.CachedPosition, TimerMain);
         
-        TimerMain.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current - 1);
+        TimerMain.Delay =  GetDelay(current - 1);
         
         if (item.IsStartTimer) TimerMain.Start(item.StartTimeTimer);
         else
@@ -47,7 +60,7 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
     
     protected override void Success()
     {
-        TimerMain.Delay = GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, current);
+        TimerMain.Delay = GetDelay(current);
     }
     
     protected override void OnSpawnCurrencyRewards(bool isComplete)
@@ -63,5 +76,10 @@ public class ObstacleLifeComponent : WorkplaceLifeComponent
         }
         
         base.OnSpawnCurrencyRewards(isComplete);
+    }
+
+    private int GetDelay(int step)
+    {
+        return HP == step + 1 ? GameDataService.Current.ObstaclesManager.GetDelayByStep(Context.PieceType, step) : WorkerCurrencyLogicComponent.MinDelay;
     }
 }
