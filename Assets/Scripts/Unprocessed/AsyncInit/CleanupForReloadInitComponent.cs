@@ -13,7 +13,7 @@ public class CleanupForReloadInitComponent : AsyncInitComponentBase
         BoardService.Instance.SetManager(null);
 
         ShopService.Current.Cleanup();
-        ShopService.Instance.SetManager(null);
+        // ShopService.Instance.SetManager(null);// Do not kill shop!
 
         GameDataService.Instance.SetManager(null);
          

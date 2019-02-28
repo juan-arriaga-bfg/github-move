@@ -474,14 +474,14 @@ public class DevTools : UIContainerElementViewController
             .AddComponent(new CleanupForReloadInitComponent()
                 .SetDependency(typeof(ReloadSceneLoaderComponent)))            
                         
-            // .AddComponent(new ProfileInitComponent()
-            //     .SetDependency(typeof(CleanupForReloadInitComponent)))
-            //
-            // .AddComponent(new GameDataInitComponent()
-            //     .SetDependency(typeof(ProfileInitComponent)))
-            //
-            // .AddComponent(new MainSceneLoaderComponent()
-            //     .SetDependency(typeof(GameDataInitComponent)))
+            .AddComponent(new ProfileInitComponent()
+                .SetDependency(typeof(CleanupForReloadInitComponent)))
+            
+            .AddComponent(new GameDataInitComponent()
+                .SetDependency(typeof(ProfileInitComponent)))
+            
+            .AddComponent(new MainSceneLoaderComponent()
+                .SetDependency(typeof(GameDataInitComponent)))
 
             .Run(null);
 
