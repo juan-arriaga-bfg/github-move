@@ -20,9 +20,8 @@ public class CleanupForReloadInitComponent : AsyncInitComponentBase
         ShopService.Instance.SetManager(null);
 
         GameDataService.Instance.SetManager(null);
-         
+
         ProfileService.Current.QueueComponent.StopAndClear();
-        
         ProfileService.Instance.SetManager(null);
         
         LocalNotificationsService.Instance.SetManager(null);
