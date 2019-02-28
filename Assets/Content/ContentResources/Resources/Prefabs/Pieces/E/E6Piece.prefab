@@ -135,7 +135,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503019295826732}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.022, y: 0.421, z: 0}
+  m_LocalPosition: {x: 0.05, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4988687844705880}
@@ -178,7 +178,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 4f4dc54f04e05bf4590b6d70665362e6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 52b9f164f33cbec4087056c51f2471b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 114266921296245860}
   - component: {fileID: 114122468620591434}
   m_Layer: 0
-  m_Name: E6Piece
+  m_Name: F6Piece
   m_TagString: Untagged
   m_Icon: {fileID: 4660412927644837186, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -279,7 +279,6 @@ MonoBehaviour:
   IsFading: 0
   FadeValue: 0
   selectionView: {fileID: 4048830620199960}
-  anchors: []
   bodySprites: []
   particles: []
   errorSelectionMaterial: {fileID: 2100000, guid: 1faf170e9acf1d64f86eefcd318ff557,
