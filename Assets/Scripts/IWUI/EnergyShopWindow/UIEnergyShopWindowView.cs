@@ -17,6 +17,7 @@ public class UIEnergyShopWindowView : UIGenericPopupWindowView
         SetMessage(windowModel.Message);
         
         Fill(UpdateEntities(windowModel.Products), content);
+        content.GetScrollRect().horizontalNormalizedPosition = 0f;
     }
     
     public override void OnViewShowCompleted()
